@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-final class ManagingTaxonImagesContext implements Context
+final readonly class ManagingTaxonImagesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,

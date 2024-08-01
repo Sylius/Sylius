@@ -22,7 +22,7 @@
     ],
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/taxon\/CATEGORY\/translations\/en_US",
             "@type": "TaxonTranslation",
             "id": "@integer@",
             "name": "Categories",

@@ -17,17 +17,8 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\Taxon">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
+            <!-- Admin operations -->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/taxons">
                 <normalizationContext>
                     <values>
@@ -60,12 +51,12 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/taxons">
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:taxon:index</value>
+                                <value>sylius:admin:taxon:show</value>
                             </values>
                         </value>
                     </values>
@@ -111,14 +102,56 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}">
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/taxons/{code}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
                                 <value>sylius:admin:taxon:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/taxons/{code}" />
+
+            <!-- Shop operations -->
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/taxons">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:taxon:index</value>
                             </values>
                         </value>
                     </values>
@@ -145,35 +178,12 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/taxons/{code}">
-                <denormalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:taxon:update</value>
-                            </values>
-                        </value>
-                    </values>
-                </denormalizationContext>
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:taxon:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/taxons/{code}" />
-
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/taxons/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:taxons:show</value>
+                                <value>sylius:shop:taxon:show</value>
                             </values>
                         </value>
                     </values>

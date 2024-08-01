@@ -65,8 +65,8 @@ imports:
 #    - api/taxation/applying_taxes.yml TODO: Enable after making checkout resource available in API
     - api/taxation/managing_tax_categories.yml
     - api/taxation/managing_tax_rates.yml
-#    - api/taxon/managing_taxons.yml
-#    - api/taxon/managing_taxons_ajax.yml
+    - api/taxon/managing_taxons.yml
+    - api/taxon/managing_taxons_ajax.yml
     - api/user/managing_administrators.yml
     - api/user/managing_customer_groups.yml
     - api/user/managing_customers.yml

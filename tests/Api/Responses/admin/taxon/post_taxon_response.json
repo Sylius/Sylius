@@ -10,7 +10,7 @@
     "position": "@integer@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/taxon\/WATCHES\/translations\/en_US",
             "@type": "TaxonTranslation",
             "id": "@integer@",
             "name": "Watches",
