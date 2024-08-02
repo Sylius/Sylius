@@ -2,14 +2,16 @@
     "@context": "\/api\/v2\/contexts\/ProductAttribute",
     "@id": "\/api\/v2\/admin\/product-attributes",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 9,
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/dishwasher_safe",
+            "@id": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe",
             "@type": "ProductAttribute",
             "code": "dishwasher_safe",
+            "type": "checkbox",
             "configuration": [],
-            "position": 0,
             "storageType": "boolean",
+            "position": 0,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -22,16 +24,16 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "mozna myc w zmywarce"
                 }
-            },
-            "type": "checkbox"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/manufactured",
+            "@id": "\/api\/v2\/admin\/product-attributes\/manufactured",
             "@type": "ProductAttribute",
             "code": "manufactured",
+            "type": "date",
             "configuration": [],
-            "position": 1,
             "storageType": "date",
+            "position": 1,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -39,16 +41,16 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "manufactured"
                 }
-            },
-            "type": "date"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/available_until",
+            "@id": "\/api\/v2\/admin\/product-attributes\/available_until",
             "@type": "ProductAttribute",
             "code": "available_until",
+            "type": "datetime",
             "configuration": [],
-            "position": 2,
             "storageType": "datetime",
+            "position": 2,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -56,16 +58,16 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "available until"
                 }
-            },
-            "type": "datetime"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/capacity",
+            "@id": "\/api\/v2\/admin\/product-attributes\/capacity",
             "@type": "ProductAttribute",
             "code": "capacity",
+            "type": "integer",
             "configuration": [],
-            "position": 3,
             "storageType": "integer",
+            "position": 3,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -73,16 +75,16 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "capacity"
                 }
-            },
-            "type": "integer"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/yixing_clay",
+            "@id": "\/api\/v2\/admin\/product-attributes\/yixing_clay",
             "@type": "ProductAttribute",
             "code": "yixing_clay",
+            "type": "percent",
             "configuration": [],
-            "position": 4,
             "storageType": "float",
+            "position": 4,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -90,13 +92,13 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "yixing clay"
                 }
-            },
-            "type": "percent"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/extra_info",
+            "@id": "\/api\/v2\/admin\/product-attributes\/extra_info",
             "@type": "ProductAttribute",
             "code": "extra_info",
+            "type": "select",
             "configuration": {
                 "choices": {
                     "0afb212e-cd08-11ec-871e-0242ac120005": {
@@ -110,8 +112,8 @@
                     }
                 }
             },
-            "position": 5,
             "storageType": "json",
+            "position": 5,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -119,16 +121,16 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "extra info"
                 }
-            },
-            "type": "select"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/note",
+            "@id": "\/api\/v2\/admin\/product-attributes\/note",
             "@type": "ProductAttribute",
             "code": "note",
+            "type": "textarea",
             "configuration": [],
-            "position": 6,
             "storageType": "text",
+            "position": 6,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -136,16 +138,16 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "note"
                 }
-            },
-            "type": "textarea"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/origin",
+            "@id": "\/api\/v2\/admin\/product-attributes\/origin",
             "@type": "ProductAttribute",
             "code": "origin",
+            "type": "text",
             "configuration": [],
-            "position": 7,
             "storageType": "text",
+            "position": 7,
             "translatable": true,
             "translations": {
                 "en_US": {
@@ -153,16 +155,16 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "origin"
                 }
-            },
-            "type": "text"
+            }
         },
         {
-            "@id": "\/api\/v2\/admin\/product-attributes/text_delete",
+            "@id": "\/api\/v2\/admin\/product-attributes\/text_delete",
             "@type": "ProductAttribute",
             "code": "text_delete",
+            "type": "text",
             "configuration": [],
-            "position": 8,
             "storageType": "text",
+            "position": 8,
             "translatable": false,
             "translations": {
                 "en_US": {
@@ -170,20 +172,48 @@
                     "@type": "ProductAttributeTranslation",
                     "name": "text delete"
                 }
-            },
-            "type": "text"
+            }
         }
     ],
-    "hydra:totalItems": 9,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/product-attributes{?order[position]}",
+        "hydra:template": "\/api\/v2\/admin\/product-attributes{?translatable,order[position],code,type,type[],translations.name}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
                 "@type": "IriTemplateMapping",
+                "variable": "translatable",
+                "property": "translatable",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
                 "variable": "order[position]",
                 "property": "position",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "type",
+                "property": "type",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "type[]",
+                "property": "type",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
                 "required": false
             }
         ]
