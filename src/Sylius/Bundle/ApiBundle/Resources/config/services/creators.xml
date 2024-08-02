@@ -30,7 +30,7 @@
             <argument type="service" id="api_platform.symfony.iri_converter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator">
+        <service id="sylius_api.creator.taxon_image" class="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator">
             <argument type="service" id="sylius.factory.taxon_image" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.image_uploader" />

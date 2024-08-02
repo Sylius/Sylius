@@ -4,7 +4,7 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+            "@id": "\/api\/v2\/admin\/taxons\/@string@\/images\/@integer@",
             "@type": "TaxonImage",
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/taxons\/CATEGORY",
@@ -12,7 +12,7 @@
             "path": "@string@.contains('sylius_small').endsWith('thumbnail.jpg')"
         },
         {
-            "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+            "@id": "\/api\/v2\/admin\/taxons\/@string@\/images\/@integer@",
             "@type": "TaxonImage",
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/taxons\/CATEGORY",

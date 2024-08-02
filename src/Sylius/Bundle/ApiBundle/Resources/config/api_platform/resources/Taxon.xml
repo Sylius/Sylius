@@ -213,12 +213,21 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Taxon" uriTemplate="/admin/taxons/{code}/images">
+    <resource class="Sylius\Component\Core\Model\TaxonImage" uriTemplate="/admin/taxons/{code}/images">
         <uriVariables>
             <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
         </uriVariables>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
                 <openapiContext>
                     <values>
                         <value name="parameters">
