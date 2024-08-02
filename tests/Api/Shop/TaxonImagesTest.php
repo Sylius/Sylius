@@ -15,6 +15,7 @@ namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
 use Sylius\Component\Core\Model\TaxonImageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,9 +29,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $taxonImage->getOwner();
+
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/shop/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/shop/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             server: self::CONTENT_TYPE_HEADER,
         );
 
@@ -49,9 +53,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $taxonImage->getOwner();
+
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/shop/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/shop/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
             server: self::CONTENT_TYPE_HEADER,
         );
@@ -71,9 +78,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $taxonImage->getOwner();
+
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/shop/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/shop/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
             server: self::CONTENT_TYPE_HEADER,
         );

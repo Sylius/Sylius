@@ -44,10 +44,6 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\ProductImageCreator" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction">
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.shop_user" />

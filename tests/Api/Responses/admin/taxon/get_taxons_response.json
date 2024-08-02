@@ -17,7 +17,7 @@
             ],
             "images": [
                 {
-                    "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxons\/@string@\/images\/@integer@",
                     "@type": "TaxonImage",
                     "id": "@integer@",
                     "type": "thumbnail",
@@ -106,7 +106,7 @@
             ],
             "images": [
                 {
-                    "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxons\/@string@\/images\/@integer@",
                     "@type": "TaxonImage",
                     "id": "@integer@",
                     "type": "thumbnail",
