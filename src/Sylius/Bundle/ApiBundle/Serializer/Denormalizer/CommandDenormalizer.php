@@ -11,17 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CommandDenormalizer implements ContextAwareDenormalizerInterface
+final class CommandDenormalizer implements DenormalizerInterface
 {
     public function __construct(
         private DenormalizerInterface $itemNormalizer,

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Serializer;
+namespace spec\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
@@ -20,7 +20,6 @@ use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class CommandDenormalizerSpec extends ObjectBehavior
@@ -32,7 +31,7 @@ final class CommandDenormalizerSpec extends ObjectBehavior
 
     function it_implements_context_aware_denormalizer_interface(): void
     {
-        $this->shouldImplement(ContextAwareDenormalizerInterface::class);
+        $this->shouldImplement(DenormalizerInterface::class);
     }
 
     function it_supports_denormalization_for_specified_input_class(): void

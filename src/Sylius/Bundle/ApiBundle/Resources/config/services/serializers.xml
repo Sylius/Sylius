@@ -25,16 +25,15 @@
 <!--            <tag name="serializer.normalizer" priority="64" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandArgumentsDenormalizer">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer" />-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" />-->
-<!--            <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />-->
-<!--            <tag name="serializer.normalizer" priority="128" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandArgumentsDenormalizer">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandDenormalizer" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" />
+            <tag name="serializer.normalizer" priority="128" />
+        </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandDenormalizer">
             <argument type="service" id="api_platform.serializer.normalizer.item" />
-            <argument type="service" id="api_platform.name_converter" />
+            <argument type="service" id="serializer.name_converter.metadata_aware" />
             <tag name="serializer.normalizer" />
         </service>
 
@@ -72,7 +71,7 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandNormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\Normalizer\CommandNormalizer">
             <argument type="service" id="serializer.normalizer.object" />
             <tag name="serializer.normalizer" priority="64" />
         </service>

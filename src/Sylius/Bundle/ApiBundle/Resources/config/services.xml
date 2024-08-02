@@ -104,10 +104,11 @@
 <!--            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">-->
-<!--            <argument type="service" id="api_platform.router" />-->
-<!--            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
+            <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
+            <argument type="service" id="api_platform.uri_variables.converter" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />-->
 
