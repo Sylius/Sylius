@@ -17,255 +17,151 @@
 >
     <class name="Sylius\Component\Core\Model\Channel">
         <attribute name="code">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>shop:channel:index</group>
             <group>sylius:shop:channel:index</group>
-            <group>shop:channel:show</group>
             <group>sylius:shop:channel:show</group>
         </attribute>
         <attribute name="name">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
-            <group>shop:channel:index</group>
             <group>sylius:shop:channel:index</group>
-            <group>shop:channel:show</group>
             <group>sylius:shop:channel:show</group>
         </attribute>
         <attribute name="enabled">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="description">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="hostname">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="color">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="baseCurrency">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>shop:channel:index</group>
             <group>sylius:shop:channel:index</group>
-            <group>shop:channel:show</group>
             <group>sylius:shop:channel:show</group>
         </attribute>
         <attribute name="defaultLocale">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
-            <group>shop:channel:index</group>
             <group>sylius:shop:channel:index</group>
-            <group>shop:channel:show</group>
             <group>sylius:shop:channel:show</group>
         </attribute>
         <attribute name="defaultTaxZone">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="taxCalculationStrategy">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="currencies">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
-            <group>shop:channel:index</group>
             <group>sylius:shop:channel:index</group>
-            <group>shop:channel:show</group>
             <group>sylius:shop:channel:show</group>
         </attribute>
         <attribute name="locales">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
-            <group>shop:channel:index</group>
             <group>sylius:shop:channel:index</group>
-            <group>shop:channel:show</group>
             <group>sylius:shop:channel:show</group>
         </attribute>
         <attribute name="countries">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="themeName">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="contactEmail">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="contactPhoneNumber">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="skippingShippingStepAllowed">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="skippingPaymentStepAllowed">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="accountVerificationRequired">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="shippingAddressInCheckoutRequired">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="shopBillingData">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
-            <group>admin:shop_billing_data:show</group>
-            <group>sylius:admin:shop_billing_data:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="menuTaxon">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
         <attribute name="channelPriceHistoryConfig">
-            <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
-            <group>admin:channel:show</group>
             <group>sylius:admin:channel:show</group>
-            <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>
-            <group>admin:channel:update</group>
             <group>sylius:admin:channel:update</group>
         </attribute>
     </class>
