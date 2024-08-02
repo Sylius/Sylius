@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Payment",
-    "@id": "\/api\/v2\/admin\/payments\/@integer@\/complete",
+    "@id": "\/api\/v2\/admin\/payments\/@integer@",
     "@type": "Payment",
     "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
     "id": "@integer@",

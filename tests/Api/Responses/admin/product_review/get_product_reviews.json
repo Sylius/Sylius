@@ -72,9 +72,15 @@
     "hydra:totalItems": 5,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/product-reviews{?order[title],order[rating],order[status],order[createdAt],status,status[],title,reviewSubject,reviewSubject[]}",
+        "hydra:template": "\/api\/v2\/admin\/product-reviews{?order[createdAt],order[title],order[rating],order[status],reviewSubject,reviewSubject[],status,status[],title}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
+            },
             {
                 "@type": "IriTemplateMapping",
                 "variable": "order[title]",
@@ -95,8 +101,14 @@
             },
             {
                 "@type": "IriTemplateMapping",
-                "variable": "order[createdAt]",
-                "property": "createdAt",
+                "variable": "reviewSubject",
+                "property": "reviewSubject",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "reviewSubject[]",
+                "property": "reviewSubject",
                 "required": false
             },
             {
@@ -115,18 +127,6 @@
                 "@type": "IriTemplateMapping",
                 "variable": "title",
                 "property": "title",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "reviewSubject",
-                "property": "reviewSubject",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "reviewSubject[]",
-                "property": "reviewSubject",
                 "required": false
             }
         ]

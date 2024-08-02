@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Promotion",
-    "@id": "\/api\/v2\/admin\/promotions\/back_to_school\/restore",
+    "@id": "\/api\/v2\/admin\/promotions\/back_to_school",
     "@type": "Promotion",
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB",

@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Promotion",
-    "@id": "\/api\/v2\/admin\/promotions\/50_off/archive",
+    "@id": "\/api\/v2\/admin\/promotions\/50_off",
     "@type": "Promotion",
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
