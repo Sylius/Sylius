@@ -22,45 +22,38 @@ final class ChannelsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpAdminContext();
+    }
+
     /** @test */
     public function it_gets_a_channel(): void
     {
+        $this->setUpDefaultGetHeaders();
+
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ChannelInterface $channel */
         $channel = $fixtures['channel_web'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
-            server: $header,
-        );
+        $this->requestGet('/api/v2/admin/channels/' . $channel->getCode());
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/channel/get_channel_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/channel/get_channel_response');
     }
 
     /** @test */
     public function it_gets_channels(): void
     {
+        $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/channels',
-            server: $header,
-        );
+        $this->requestGet('/api/v2/admin/channels');
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/channel/get_channels_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/channel/get_channels_response');
     }
 
     /** @test */
@@ -182,30 +175,14 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_deletes_a_channel(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/channels/MOBILE',
-            server: $header,
-        );
-
+        $this->requestGet('/api/v2/admin/channels/MOBILE');
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
 
-        $this->client->request(
-            method: 'DELETE',
-            uri: '/api/v2/admin/channels/MOBILE',
-            server: $header,
-        );
-
+        $this->requestDelete('/api/v2/admin/channels/MOBILE');
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/channels/MOBILE',
-            server: $header,
-        );
-
+        $this->requestGet('/api/v2/admin/channels/MOBILE');
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
