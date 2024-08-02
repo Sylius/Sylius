@@ -30,21 +30,21 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
+        <service id="sylius_admin.console.command.create_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_locale.locale%</argument>
             <argument type="service" id="sylius.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
+        <service id="sylius_admin.console.command.change_admin_user_password" class="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.security.password_updater" />
             <argument type="service" id="sylius.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler">
+        <service id="sylius_admin.command_handler.create_admin_user" class="Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.canonicalizer" />
