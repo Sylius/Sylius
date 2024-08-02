@@ -12,9 +12,8 @@
     "translatable": false,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-attributes\/published_at\/translations\/en_US",
             "@type": "ProductAttributeTranslation",
-            "id": "@integer@",
             "name": "Published at"
         }
     }

@@ -10,9 +10,8 @@
     "translatable": false,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-attributes\/display_size\/translations\/en_US",
             "@type": "ProductAttributeTranslation",
-            "id": "@integer@",
             "name": "Display size"
         }
     }

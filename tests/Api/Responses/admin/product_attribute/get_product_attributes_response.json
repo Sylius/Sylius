@@ -13,15 +13,13 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "dishwasher safe"
                 },
                 "pl_PL": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe\/translations\/pl_PL",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "mozna myc w zmywarce"
                 }
             },
@@ -37,9 +35,8 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/manufactured\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "manufactured"
                 }
             },
@@ -55,9 +52,8 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/available_until\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "available until"
                 }
             },
@@ -73,9 +69,8 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/capacity\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "capacity"
                 }
             },
@@ -91,9 +86,8 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/yixing_clay\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "yixing clay"
                 }
             },
@@ -121,9 +115,8 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/extra_info\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "extra info"
                 }
             },
@@ -139,9 +132,8 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/note\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "note"
                 }
             },
@@ -157,9 +149,8 @@
             "translatable": true,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/origin\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "origin"
                 }
             },
@@ -175,9 +166,8 @@
             "translatable": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-attributes\/text_delete\/translations\/en_US",
                     "@type": "ProductAttributeTranslation",
-                    "id": "@integer@",
                     "name": "text delete"
                 }
             },

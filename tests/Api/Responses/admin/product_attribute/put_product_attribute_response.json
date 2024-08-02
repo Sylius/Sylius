@@ -28,15 +28,13 @@
     "translatable": true,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-attributes\/extra_info\/translations\/en_US",
             "@type": "ProductAttributeTranslation",
-            "id": "@integer@",
             "name": "Additional information"
         },
         "pl_PL": {
-            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-attributes\/extra_info\/translations\/pl_PL",
             "@type": "ProductAttributeTranslation",
-            "id": "@integer@",
             "name": "Dodatkowe informacje"
         }
     }
