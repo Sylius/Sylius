@@ -78,7 +78,7 @@
     <property resource="Sylius\Component\Core\Model\Channel" name="skippingPaymentStepAllowed" writable="true" readable="true" />
     <property resource="Sylius\Component\Core\Model\Channel" name="accountVerificationRequired" writable="true" readable="true" />
     <property resource="Sylius\Component\Core\Model\Channel" name="shippingAddressInCheckoutRequired" writable="true" readable="true" />
-    <property resource="Sylius\Component\Core\Model\Channel" name="shopBillingData" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\Channel" name="shopBillingData" writable="true" genId="false"/>
     <property resource="Sylius\Component\Core\Model\Channel" name="menuTaxon" writable="true" readable="true" />
     <property resource="Sylius\Component\Core\Model\Channel" name="channelPriceHistoryConfig" readable="true" />
 </properties>
