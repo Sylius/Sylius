@@ -6,8 +6,8 @@
 <td class="text-black-50 text-end">
     {% if original_price_to_display is not null %}
         <span {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}>
-                <span>{{ money.convertAndFormat(original_price_to_display) }}</span>
-            </span>
+            {{ money.convertAndFormat(original_price_to_display) }}
+        </span>
     {% endif %}
     <span {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
 </td>

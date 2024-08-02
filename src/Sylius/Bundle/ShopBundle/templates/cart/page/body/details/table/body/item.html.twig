@@ -2,5 +2,5 @@
 {% set product_variant = item.variant %}
 
 <td {{ sylius_test_html_attribute('cart-item', loop_index|default(null) ) }}>
-    {% include '@SyliusShop/Product/info.html.twig' with {'variant': product_variant} %}
+    {% include '@SyliusShop/shared/product/info.html.twig' with {'variant': product_variant} %}
 </td>

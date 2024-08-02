@@ -3,17 +3,6 @@
 
 <div class="table-responsive">
     <table class="table align-middle" {{ sylius_test_html_attribute('cart-items') }}>
-        <thead>
-            <tr>
-                {% hook 'table_head' %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for key, item in cart.items %}
-                <tr {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
-                    {% hook 'table_body' with { item: item, item_form: form.items[key], main_form_id: form.vars.id, loop_index: loop.index } %}
-                </tr>
-            {% endfor %}
-        </tbody>
+        {% hook 'table' with { cart, form } %}
     </table>
 </div>

@@ -1,11 +1,10 @@
 {% set form = hookable_metadata.context.form %}
 
-{{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-{{ form_errors(form) }}
-<input type="hidden" name="_method" value="PATCH"/>
-{{ form_row(form._token) }}
-{{ form_end(form, {'render_rest': false}) }}
-
 <div class="col-12 col-xl-8 mb-4">
+    {{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {{ form_errors(form) }}
+    <input type="hidden" name="_method" value="PATCH"/>
+    {{ form_row(form._token) }}
     {% hook 'details' %}
+    {{ form_end(form, {'render_rest': false}) }}
 </div>

@@ -22,29 +22,35 @@ twig_hooks:
             update:
                 template: '@SyliusShop/cart/page/body/details/update.html.twig'
                 
-        'sylius_shop.cart.page.body.details.table_head':
-            remove:
-                template: '@SyliusShop/cart/page/body/details/table_head/remove.html.twig'
-            item:
-                template: '@SyliusShop/cart/page/body/details/table_head/item.html.twig'
-            unit_price:
-                template: '@SyliusShop/cart/page/body/details/table_head/unit_price.html.twig'
-            quantity:
-                template: '@SyliusShop/cart/page/body/details/table_head/quantity.html.twig'
-            total:
-                template: '@SyliusShop/cart/page/body/details/table_head/total.html.twig'
+        'sylius_shop.cart.page.body.details.table':
+            head:
+                template: '@SyliusShop/cart/page/body/details/table/head.html.twig'
+            body:
+                template: '@SyliusShop/cart/page/body/details/table/body.html.twig'
             
-        'sylius_shop.cart.page.body.details.table_body':
+        'sylius_shop.cart.page.body.details.table.head':
             remove:
-                template: '@SyliusShop/cart/page/body/details/table_body/remove.html.twig'
+                template: '@SyliusShop/cart/page/body/details/table/head/remove.html.twig'
             item:
-                template: '@SyliusShop/cart/page/body/details/table_body/item.html.twig'
+                template: '@SyliusShop/cart/page/body/details/table/head/item.html.twig'
             unit_price:
-                template: '@SyliusShop/cart/page/body/details/table_body/unit_price.html.twig'
+                template: '@SyliusShop/cart/page/body/details/table/head/unit_price.html.twig'
             quantity:
-                template: '@SyliusShop/cart/page/body/details/table_body/quantity.html.twig'
+                template: '@SyliusShop/cart/page/body/details/table/head/quantity.html.twig'
             total:
-                template: '@SyliusShop/cart/page/body/details/table_body/total.html.twig'
+                template: '@SyliusShop/cart/page/body/details/table/head/total.html.twig'
+            
+        'sylius_shop.cart.page.body.details.table.body':
+            remove:
+                template: '@SyliusShop/cart/page/body/details/table/body/remove.html.twig'
+            item:
+                template: '@SyliusShop/cart/page/body/details/table/body/item.html.twig'
+            unit_price:
+                template: '@SyliusShop/cart/page/body/details/table/body/unit_price.html.twig'
+            quantity:
+                template: '@SyliusShop/cart/page/body/details/table/body/quantity.html.twig'
+            total:
+                template: '@SyliusShop/cart/page/body/details/table/body/total.html.twig'
                 
         'sylius_shop.cart.page.body.sidebar':
             summary:
