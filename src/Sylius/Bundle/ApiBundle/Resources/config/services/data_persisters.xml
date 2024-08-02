@@ -39,11 +39,6 @@
             <tag name="api_platform.data_persister" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataPersister\ProductAttributeDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataPersister\ProductTaxonDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <argument type="service" id="sylius.event_bus" />
