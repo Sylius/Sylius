@@ -1,0 +1,7 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.account.register_thank_you':
+            title:
+                template: '@SyliusShop/account/register/thank_you/title.html.twig'
+            subtitle:
+                template: '@SyliusShop/account/register/thank_you/subtitle.html.twig'
