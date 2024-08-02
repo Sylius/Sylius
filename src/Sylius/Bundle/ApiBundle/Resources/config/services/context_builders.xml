@@ -24,6 +24,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware</argument>
+            <argument>channelCode</argument>
             <argument type="service" id="sylius.context.channel" />
         </service>
 
@@ -33,6 +35,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailIfNotSetAware</argument>
+            <argument>email</argument>
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
         </service>
 
@@ -51,6 +55,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware</argument>
+            <argument>localeCode</argument>
             <argument type="service" id="sylius.context.locale" />
         </service>
 
@@ -77,6 +83,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware</argument>
+            <argument>shopUserId</argument>
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
         </service>
 
@@ -86,6 +94,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\ShipmentAware</argument>
+            <argument>shipment</argument>
         </service>
 
         <service
@@ -94,6 +104,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware</argument>
+            <argument>orderTokenValue</argument>
         </service>
     </services>
 </container>

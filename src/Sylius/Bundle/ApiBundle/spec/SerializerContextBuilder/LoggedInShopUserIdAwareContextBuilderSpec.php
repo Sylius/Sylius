@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -27,7 +28,12 @@ final class LoggedInShopUserIdAwareContextBuilderSpec extends ObjectBehavior
         SerializerContextBuilderInterface $decoratedContextBuilder,
         UserContextInterface $userContext,
     ): void {
-        $this->beConstructedWith($decoratedContextBuilder, $userContext);
+        $this->beConstructedWith(
+            $decoratedContextBuilder,
+            ShopUserIdAware::class,
+            'shopUserId',
+            $userContext,
+        );
     }
 
     function it_sets_shop_user_id_as_a_constructor_argument(

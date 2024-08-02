@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +27,12 @@ final class LocaleCodeAwareContextBuilderSpec extends ObjectBehavior
         SerializerContextBuilderInterface $decoratedContextBuilder,
         LocaleContextInterface $localeContext,
     ): void {
-        $this->beConstructedWith($decoratedContextBuilder, $localeContext);
+        $this->beConstructedWith(
+            $decoratedContextBuilder,
+            LocaleCodeAware::class,
+            'localeCode',
+            $localeContext
+        );
     }
 
     function it_sets_locale_code_as_a_constructor_argument(

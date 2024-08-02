@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailIfNotSetAware;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -29,7 +30,12 @@ final class LoggedInCustomerEmailIfNotSetAwareContextBuilderSpec extends ObjectB
         SerializerContextBuilderInterface $decoratedContextBuilder,
         UserContextInterface $userContext,
     ): void {
-        $this->beConstructedWith($decoratedContextBuilder, $userContext);
+        $this->beConstructedWith(
+            $decoratedContextBuilder,
+            LoggedInCustomerEmailIfNotSetAware::class,
+            'email',
+            $userContext,
+        );
     }
 
     function it_does_not_add_email_to_contact_aware_command_if_provided(

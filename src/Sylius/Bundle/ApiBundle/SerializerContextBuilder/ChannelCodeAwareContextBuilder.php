@@ -14,71 +14,33 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
-use Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
-/** @experimental */
-final readonly class ChannelCodeAwareContextBuilder implements SerializerContextBuilderInterface
+final class ChannelCodeAwareContextBuilder extends AbstractInputContextBuilder
 {
-    public function __construct(
-        private SerializerContextBuilderInterface $decoratedContextBuilder,
-        private ChannelContextInterface $channelContext,
-    ) {
+   public function __construct(
+       SerializerContextBuilderInterface $decoratedContextBuilder,
+       string $attributeClass,
+       string $defaultConstructorArgumentName,
+       private readonly ChannelContextInterface $channelContext,
+   ) {
+       parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
+   }
+
+    protected function supportsClass(string $class): bool
+    {
+        return is_a($class, ChannelCodeAwareInterface::class, true);
     }
 
-    /**
-     * @param array<string>|null $extractedAttributes
-     *
-     * @return array<string, mixed>
-     */
-    public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
+    protected function supports(Request $request, array $context, ?array $extractedAttributes): bool
     {
-        $context = $this->decoratedContextBuilder->createFromRequest($request, $normalization, $extractedAttributes);
-        $inputClass = $this->getInputClassFromContext($context);
-
-        if ($inputClass === null || !$this->isChannelCodeAware($inputClass)) {
-            return $context;
-        }
-
-        $constructorArgumentName = $this->getConstructorArgumentName($inputClass) ?? 'channelCode';
-
-        if (isset($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass]) && is_array($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass])) {
-            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $this->channelContext->getChannel()->getCode()]);
-        } else {
-            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [$constructorArgumentName => $this->channelContext->getChannel()->getCode()];
-        }
-
-        return $context;
+        return true;
     }
 
-    /**
-     * @param array<string, mixed> $context
-     */
-    private function getInputClassFromContext(array $context): ?string
+    protected function resolveValue(array $context, ?array $extractedAttributes): mixed
     {
-        return $context['input']['class'] ?? null;
-    }
-
-    private function isChannelCodeAware(string $inputClass): bool
-    {
-        return is_a($inputClass, ChannelCodeAwareInterface::class, true);
-    }
-
-    private function getConstructorArgumentName(string $class): ?string
-    {
-        $classReflection = new \ReflectionClass($class);
-        $attributes = $classReflection->getAttributes(ChannelCodeAware::class);
-
-        if (count($attributes) === 0) {
-            return null;
-        }
-
-        /** @var ChannelCodeAware $channelCodeAwareAttribute */
-        $channelCodeAwareAttribute = $attributes[0]->newInstance();
-
-        return $channelCodeAwareAttribute->constructorArgumentName;
+        return $this->channelContext->getChannel()->getCode();
     }
 }

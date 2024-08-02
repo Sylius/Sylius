@@ -14,71 +14,33 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
-use Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
-/** @experimental */
-final readonly class LocaleCodeAwareContextBuilder implements SerializerContextBuilderInterface
+final class LocaleCodeAwareContextBuilder extends AbstractInputContextBuilder
 {
     public function __construct(
-        private SerializerContextBuilderInterface $decoratedContextBuilder,
-        private LocaleContextInterface $localeContext,
+        SerializerContextBuilderInterface $decoratedContextBuilder,
+        string $attributeClass,
+        string $defaultConstructorArgumentName,
+        private readonly LocaleContextInterface $localeContext,
     ) {
+        parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
     }
 
-    /**
-     * @param array<string>|null $extractedAttributes
-     *
-     * @return array<string, mixed>
-     */
-    public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
+    protected function supportsClass(string $class): bool
     {
-        $context = $this->decoratedContextBuilder->createFromRequest($request, $normalization, $extractedAttributes);
-        $inputClass = $this->getInputClassFromContext($context);
-
-        if ($inputClass === null || !$this->isLocalelCodeAware($inputClass)) {
-            return $context;
-        }
-
-        $constructorArgumentName = $this->getConstructorArgumentName($inputClass) ?? 'localeCode';
-
-        if (isset($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass]) && is_array($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass])) {
-            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $this->localeContext->getLocaleCode()]);
-        } else {
-            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [$constructorArgumentName => $this->localeContext->getLocaleCode()];
-        }
-
-        return $context;
+        return is_a($class, LocaleCodeAwareInterface::class, true);
     }
 
-    /**
-     * @param array<string, mixed> $context
-     */
-    private function getInputClassFromContext(array $context): ?string
+    protected function supports(Request $request, array $context, ?array $extractedAttributes): bool
     {
-        return $context['input']['class'] ?? null;
+        return true;
     }
 
-    private function isLocalelCodeAware(string $inputClass): bool
+    protected function resolveValue(array $context, ?array $extractedAttributes): mixed
     {
-        return is_a($inputClass, LocaleCodeAwareInterface::class, true);
-    }
-
-    private function getConstructorArgumentName(string $class): ?string
-    {
-        $classReflection = new \ReflectionClass($class);
-        $attributes = $classReflection->getAttributes(LocaleCodeAware::class);
-
-        if (count($attributes) === 0) {
-            return null;
-        }
-
-        /** @var LocaleCodeAware $localeCodeAwareAttribute */
-        $localeCodeAwareAttribute = $attributes[0]->newInstance();
-
-        return $localeCodeAwareAttribute->constructorArgumentName;
+        return $this->localeContext->getLocaleCode();
     }
 }
