@@ -18,6 +18,41 @@
 >
     <resource class="Sylius\Component\Core\Model\TaxonImage">
         <operations>
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}/images/{id}">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
+                    <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\TaxonImage"/>
+                </uriVariables>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="parameters">
+                            <values>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}/images/{id}">
                 <uriVariables>
