@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
@@ -34,7 +35,7 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
         ;
     }
 
-    public function findOneByOrderId($paymentId, $orderId): ?PaymentInterface
+    public function findOneByOrderId(string|int $paymentId, string|int $orderId): ?PaymentInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :paymentId')
@@ -46,7 +47,22 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
         ;
     }
 
-    public function findOneByOrderToken(string $paymentId, string $orderToken): ?PaymentInterface
+    public function findOneByOrderTokenAndChannel(string|int $paymentId, string $tokenValue, ChannelInterface $channel): ?PaymentInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'orders')
+            ->andWhere('o.id = :paymentId')
+            ->andWhere('orders.tokenValue = :tokenValue')
+            ->andWhere('orders.channel = :channel')
+            ->setParameter('paymentId', $paymentId)
+            ->setParameter('tokenValue', $tokenValue)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByOrderToken(string|int $paymentId, string $orderToken): ?PaymentInterface
     {
         return $this->createQueryBuilder('p')
             ->innerJoin('p.order', 'o')
@@ -59,7 +75,7 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
         ;
     }
 
-    public function findOneByCustomer($id, CustomerInterface $customer): ?PaymentInterface
+    public function findOneByCustomer(string|int $id, CustomerInterface $customer): ?PaymentInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'ord')
