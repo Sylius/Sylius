@@ -21,7 +21,15 @@
     "skippingPaymentStepAllowed": false,
     "accountVerificationRequired": false,
     "shippingAddressInCheckoutRequired": true,
-    "shopBillingData": "\/api\/v2\/admin\/shop-billing-datas\/@integer@",
+    "shopBillingData": {
+        "@type": "ShopBillingData",
+        "company": "Web Channel Company: Updated",
+        "taxId": "Web Channel Tax ID: Updated",
+        "countryCode": "PL",
+        "street": "Web Channel Street: Updated",
+        "city": "Web Channel City: Updated",
+        "postcode": "Web Channel Postcode: Updated"
+    },
     "menuTaxon": null,
     "description": "different description",
     "hostname": "updated-hostname.com",
