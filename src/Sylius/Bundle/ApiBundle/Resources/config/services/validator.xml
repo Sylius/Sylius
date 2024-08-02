@@ -206,5 +206,14 @@
             <argument>%sylius.shipping.shipping_method_calculator.validation_groups%</argument>
             <tag name="api_platform.validation_groups_generator" />
         </service>
+
+        <service
+            id="sylius_api.payment_method_configuration_groups_generator"
+            class="Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator"
+            decorates="Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator"
+        >
+            <argument>%sylius.payum.gateway_config.validation_groups%</argument>
+            <tag name="api_platform.validation_groups_generator" />
+        </service>
     </services>
 </container>
