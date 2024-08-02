@@ -33,7 +33,6 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_gets_a_channel(): void
     {
         $this->setUpDefaultGetHeaders();
-
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
 
         /** @var ChannelInterface $channel */
@@ -48,7 +47,6 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_gets_channels(): void
     {
         $this->setUpDefaultGetHeaders();
-
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
 
         $this->requestGet('/api/v2/admin/channels');
@@ -59,49 +57,40 @@ final class ChannelsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_channel(): void
     {
+        $this->setUpDefaultPostHeaders();
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml', 'locale.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/channels',
-            server: $header,
-            content: json_encode([
-                'name' => 'Web Store',
-                'code' => 'WEB',
-                'description' => 'Lorem ipsum',
-                'hostname' => 'test.com',
-                'color' => 'blue',
-                'enabled' => true,
-                'baseCurrency' => '/api/v2/admin/currencies/USD',
-                'defaultLocale' => '/api/v2/admin/locales/en_US',
-                'taxCalculationStrategy' => 'order_items_based',
-                'currencies' => [],
-                'locales' => ['/api/v2/admin/locales/en_US'],
-                'themeName' => 'garish',
-                'contactEmail' => 'contact@test.com',
-                'contactPhoneNumber' => '1-800-00-00-00',
-                'skippingShippingStepAllowed' => false,
-                'skippingPaymentStepAllowed' => true,
-                'accountVerificationRequired' => true,
-                'shippingAddressInCheckoutRequired' => false,
-                'shopBillingData' => [
-                    'company' => 'Company: Created',
-                    'taxId' => 'Tax ID: Created',
-                    'countryCode' => 'US',
-                    'street' => 'Street: Created',
-                    'city' => 'City: Created',
-                    'postcode' => 'Postcode: Created',
-                ],
-                'menuTaxon' => null,
-            ], \JSON_THROW_ON_ERROR),
-        );
+        $this->requestPost('/api/v2/admin/channels', [
+            'name' => 'Web Store',
+            'code' => 'WEB',
+            'description' => 'Lorem ipsum',
+            'hostname' => 'test.com',
+            'color' => 'blue',
+            'enabled' => true,
+            'baseCurrency' => '/api/v2/admin/currencies/USD',
+            'defaultLocale' => '/api/v2/admin/locales/en_US',
+            'taxCalculationStrategy' => 'order_items_based',
+            'currencies' => [],
+            'locales' => ['/api/v2/admin/locales/en_US'],
+            'themeName' => 'garish',
+            'contactEmail' => 'contact@test.com',
+            'contactPhoneNumber' => '1-800-00-00-00',
+            'skippingShippingStepAllowed' => false,
+            'skippingPaymentStepAllowed' => true,
+            'accountVerificationRequired' => true,
+            'shippingAddressInCheckoutRequired' => false,
+            'shopBillingData' => [
+                'company' => 'Company: Created',
+                'taxId' => 'Tax ID: Created',
+                'countryCode' => 'US',
+                'street' => 'Street: Created',
+                'city' => 'City: Created',
+                'postcode' => 'Postcode: Created',
+            ],
+            'menuTaxon' => null,
+        ]);
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/channel/post_channel_response',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('admin/channel/post_channel_response');
     }
 
     /**
@@ -115,15 +104,10 @@ final class ChannelsTest extends JsonApiTestCase
      */
     public function it_prevents_creating_a_channel_with_invalid_data(array $inputData, array $validation): void
     {
+        $this->setUpDefaultPostHeaders();
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml', 'locale.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/channels',
-            server: $header,
-            content: json_encode($inputData, \JSON_THROW_ON_ERROR),
-        );
+        $this->requestPost('/api/v2/admin/channels', $inputData);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertJsonResponseViolations($this->client->getResponse(), [$validation], false);
@@ -174,6 +158,7 @@ final class ChannelsTest extends JsonApiTestCase
     /** @test */
     public function it_deletes_a_channel(): void
     {
+        $this->setUpDefaultDeleteHeaders();
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
 
         $this->requestGet('/api/v2/admin/channels/MOBILE');
