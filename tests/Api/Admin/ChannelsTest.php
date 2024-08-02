@@ -92,6 +92,14 @@ final class ChannelsTest extends JsonApiTestCase
                 'skippingPaymentStepAllowed' => true,
                 'accountVerificationRequired' => true,
                 'shippingAddressInCheckoutRequired' => false,
+                'shopBillingData' => [
+                    'company' => 'Company: Created',
+                    'taxId' => 'Tax ID: Created',
+                    'countryCode' => 'US',
+                    'street' => 'Street: Created',
+                    'city' => 'City: Created',
+                    'postcode' => 'Postcode: Created',
+                ],
                 'menuTaxon' => null,
             ], \JSON_THROW_ON_ERROR),
         );
@@ -108,6 +116,9 @@ final class ChannelsTest extends JsonApiTestCase
      *
      * @dataProvider getBlankFieldsData
      * @dataProvider getTooLongFieldsData
+     *
+     * @param array<string, string> $inputData
+     * @param array<string, string> $validation
      */
     public function it_prevents_creating_a_channel_with_invalid_data(array $inputData, array $validation): void
     {
@@ -143,6 +154,14 @@ final class ChannelsTest extends JsonApiTestCase
                 'defaultLocale' => '/api/v2/admin/locales/en_US',
                 'locales' => ['/api/v2/admin/locales/en_US'],
                 'shippingAddressInCheckoutRequired' => true,
+                'shopBillingData' => [
+                    'company' => 'Web Channel Company: Updated',
+                    'taxId' => 'Web Channel Tax ID: Updated',
+                    'countryCode' => 'PL',
+                    'street' => 'Web Channel Street: Updated',
+                    'city' => 'Web Channel City: Updated',
+                    'postcode' => 'Web Channel Postcode: Updated',
+                ],
                 'taxCalculationStrategy' => 'order_items_based',
                 'accountVerificationRequired' => false,
                 'name' => 'Web Store',
@@ -158,52 +177,6 @@ final class ChannelsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
-
-    // todo: needs ShopBillingData resource to be fully implemented
-
-//    /** @test */
-//    public function it_updates_a_shop_billing_data(): void
-//    {
-//        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-//        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-//
-//        /** @var ChannelInterface $channel */
-//        $channel = $fixtures['channel_web'];
-//
-//        $this->client->request(
-//            method: 'PUT',
-//            uri: sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
-//            server: $header,
-//            content: json_encode([
-//                'shopBillingData' => [
-//                    '@id' => sprintf('/api/v2/admin/shop-billing-datas/%s', $channel->getShopBillingData()->getId()),
-//                    'company' => 'DifferentCompany',
-//                    'taxId' => '123',
-//                    'countryCode' => 'DE',
-//                    'street' => 'Different Street',
-//                    'city' => 'different City',
-//                    'postcode' => '12-124',
-//                ],
-//            ], \JSON_THROW_ON_ERROR),
-//        );
-//
-//        $this->assertResponseCode(
-//            $this->client->getResponse(),
-//            Response::HTTP_OK,
-//        );
-//
-//        $this->client->request(
-//            method: 'GET',
-//            uri: sprintf('/api/v2/admin/channels/%s/shop-billing-data', $channel->getCode()),
-//            server: $header,
-//        );
-//
-//        $this->assertResponse(
-//            $this->client->getResponse(),
-//            'admin/shop_billing_data/put_shop_billing_data_response',
-//            Response::HTTP_OK,
-//        );
-//    }
 
     /** @test */
     public function it_deletes_a_channel(): void
@@ -262,6 +235,9 @@ final class ChannelsTest extends JsonApiTestCase
 //        );
 //    }
 
+    /**
+     * @return \Generator<array{0: array<string, string>, 1: array<string, string>}>
+     */
     public function getBlankFieldsData(): iterable
     {
         $blankFields = [
@@ -281,6 +257,9 @@ final class ChannelsTest extends JsonApiTestCase
         }
     }
 
+    /**
+     * @return \Generator<array{0: array<string, string>, 1: array<string, string>}>
+     */
     public function getTooLongFieldsData(): iterable
     {
         $valueOverStringMax = str_repeat('a@', 128);
