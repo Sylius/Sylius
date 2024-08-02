@@ -36,9 +36,7 @@
                 </normalizationContext>
                 <filters>
                     <filter>sylius_api.order_filter.admin.product_review</filter>
-                    <filter>sylius_api.order_filter.common.product_review</filter>
                     <filter>sylius_api.search_filter.admin.product_review</filter>
-                    <filter>sylius_api.search_filter.common.product_review</filter>
                 </filters>
             </operation>
 
@@ -85,10 +83,10 @@
             </operation>
 
             <operation
-                    class="ApiPlatform\Metadata\Patch"
-                    uriTemplate="/admin/product-reviews/{id}/accept"
-                    input="false"
-                    controller="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::accept"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/product-reviews/{id}/accept"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::accept"
             >
                 <normalizationContext>
                     <values>
@@ -152,8 +150,8 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.order_filter.common.product_review</filter>
-                    <filter>sylius_api.search_filter.common.product_review</filter>
+                    <filter>sylius_api.order_filter.shop.product_review</filter>
+                    <filter>sylius_api.search_filter.shop.product_review</filter>
                 </filters>
             </operation>
 
@@ -170,10 +168,12 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Post"
-                uriTemplate="/shop/product-reviews"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview">
+                    class="ApiPlatform\Metadata\Post"
+                    uriTemplate="/shop/product-reviews"
+                    itemUriTemplate="/shop/product-reviews/{id}"
+                    messenger="input"
+                    input="Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">

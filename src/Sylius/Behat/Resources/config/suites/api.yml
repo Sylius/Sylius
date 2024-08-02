@@ -34,7 +34,7 @@ imports:
 #    - api/order/order_history.yaml
 #    - api/payment/managing_payment_methods.yaml
     - api/payment/managing_payments.yml
-#    - api/product/adding_product_review.yml
+    - api/product/adding_product_review.yml
     - api/product/managing_product_association_types.yml
     - api/product/managing_product_attributes.yml
     - api/product/managing_product_options.yml
@@ -45,7 +45,7 @@ imports:
 #    - api/product/viewing_price_history.yml
 #    - api/product/viewing_price_history_after_catalog_promotions.yml
     - api/product/viewing_product_in_admin_panel.yaml
-#    - api/product/viewing_product_reviews.yml
+    - api/product/viewing_product_reviews.yml
 #    - api/product/viewing_product_variants.yml
     - api/product/viewing_products.yml
 #    - api/promotion/applying_catalog_promotions.yml TODO: Enable after making product and product variant resources available in API

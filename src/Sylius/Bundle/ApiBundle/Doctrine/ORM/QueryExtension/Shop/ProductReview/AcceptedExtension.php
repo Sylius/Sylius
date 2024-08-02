@@ -17,12 +17,16 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Component\Core\Model\ProductReviewInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 final readonly class AcceptedExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private string $productReviewClass)
-    {
+    public function __construct(
+        private SectionProviderInterface $sectionProvider,
+    ) {
     }
 
     /**
@@ -35,11 +39,11 @@ final readonly class AcceptedExtension implements QueryCollectionExtensionInterf
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if ($this->productReviewClass !== $resourceClass || null === $operation) {
+        if (!is_a($resourceClass, ProductReviewInterface::class, true)) {
             return;
         }
 
-        if ($operation->getName() !== 'shop_get') {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 

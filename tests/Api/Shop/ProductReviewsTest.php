@@ -91,9 +91,6 @@ final class ProductReviewsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
-            'tax_category.yaml',
-            'shipping_category.yaml',
-            'product/product_variant.yaml',
         ]);
 
         $this->client->request(
