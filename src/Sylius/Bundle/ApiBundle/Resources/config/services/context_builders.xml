@@ -25,7 +25,7 @@
         >
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware</argument>
-            <argument>channelCode</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius.context.channel" />
         </service>
 
@@ -36,7 +36,7 @@
         >
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailIfNotSetAware</argument>
-            <argument>email</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailIfNotSetAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
         </service>
 
@@ -56,7 +56,7 @@
         >
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware</argument>
-            <argument>localeCode</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius.context.locale" />
         </service>
 
@@ -84,7 +84,7 @@
         >
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware</argument>
-            <argument>shopUserId</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
         </service>
 
@@ -94,8 +94,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
-            <argument>Sylius\Bundle\ApiBundle\Attribute\ShipmentAware</argument>
-            <argument>shipment</argument>
+            <argument>Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware::DEFAULT_ARGUMENT_NAME</argument>
         </service>
 
         <service
@@ -105,7 +105,7 @@
         >
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware</argument>
-            <argument>orderTokenValue</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware::DEFAULT_ARGUMENT_NAME</argument>
         </service>
     </services>
 </container>

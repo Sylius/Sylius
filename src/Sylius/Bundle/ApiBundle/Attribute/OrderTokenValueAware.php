@@ -16,7 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class OrderTokenValueAware
 {
-    public function __construct(public string $constructorArgumentName = 'orderTokenValue')
+    public const DEFAULT_ARGUMENT_NAME = 'orderTokenValue';
+
+    public function __construct(public string $constructorArgumentName = self::DEFAULT_ARGUMENT_NAME)
     {
     }
 }
