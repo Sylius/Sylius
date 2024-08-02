@@ -44,7 +44,7 @@ final class RemoveProcessorSpec extends ObjectBehavior
         $this->process($Promotion, $operation, [], [])->shouldReturn(null);
     }
 
-    public function it_throws_exception_when_foreign_key_constraint_violation_occurs(
+    public function it_throws_an_exception_when_foreign_key_constraint_violation_occurs(
         ProcessorInterface $removeProcessor,
         Operation $operation,
         PromotionInterface $Promotion,

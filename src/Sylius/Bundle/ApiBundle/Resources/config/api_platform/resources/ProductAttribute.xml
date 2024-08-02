@@ -254,7 +254,11 @@ Example configuration for a `select` type attribute:
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-attributes/{code}" />
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/product-attributes/{code}"
+                processor="sylius_api.state_processor.admin.product_attribute.remove"
+            />
         </operations>
     </resource>
 </resources>
