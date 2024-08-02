@@ -12,7 +12,7 @@ Sylius\Component\Core\Model\Channel:
         enabled: true
         taxCalculationStrategy: 'order_items_based'
         channelPriceHistoryConfig: '@web_price_history_config'
-        shopBillingData: '@another_billing_data'
+        shopBillingData: '@channel_web_billing_data'
     channel_mobile:
         code: 'MOBILE'
         name: 'Mobile Channel'
@@ -26,7 +26,7 @@ Sylius\Component\Core\Model\Channel:
         enabled: true
         taxCalculationStrategy: 'order_items_based'
         channelPriceHistoryConfig: '@mobile_price_history_config'
-        shopBillingData: '@billing_data'
+        shopBillingData: '@channel_mobile_billing_data'
         shippingAddressInCheckoutRequired: true
 
 Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
@@ -41,18 +41,20 @@ Sylius\Component\Currency\Model\Currency:
         code: 'USD'
         
 Sylius\Component\Core\Model\ShopBillingData:
-    billing_data:
-        company: 'Sylius'
-        taxId: 'PL1234567890'
-        street: 'Wall Street 1'
-        city: 'New York'
-        postcode: '00-000'
-    another_billing_data:
-        company: 'Another company'
-        taxId: 'PL123423190'
-        street: 'Wall Street 2'
-        city: 'New York'
-        postcode: '01-000'
+    channel_web_billing_data:
+        company: 'Web Channel Company'
+        taxId: 'Web Channel Tax ID'
+        country_code: 'EN'
+        street: 'Web Channel Street'
+        city: 'Web Channel City'
+        postcode: 'Web Channel Postcode'
+    channel_mobile_billing_data:
+        company: 'Mobile Channel Company'
+        taxId: 'Mobile Channel Tax ID'
+        country_code: 'PL'
+        street: 'Mobile Channel Street'
+        city: 'Mobile Channel City'
+        postcode: 'Mobile Channel Postcode'
 
 Sylius\Component\Locale\Model\Locale:
     locale_en:

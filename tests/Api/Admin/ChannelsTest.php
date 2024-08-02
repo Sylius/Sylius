@@ -15,92 +15,79 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ChannelsTest extends JsonApiTestCase
 {
-    use AdminUserLoginTrait;
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpAdminContext();
+    }
 
     /** @test */
     public function it_gets_a_channel(): void
     {
+        $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ChannelInterface $channel */
         $channel = $fixtures['channel_web'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
-            server: $header,
-        );
+        $this->requestGet('/api/v2/admin/channels/' . $channel->getCode());
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/channel/get_channel_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/channel/get_channel_response');
     }
 
     /** @test */
     public function it_gets_channels(): void
     {
+        $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/channels',
-            server: $header,
-        );
+        $this->requestGet('/api/v2/admin/channels');
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/channel/get_channels_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/channel/get_channels_response');
     }
 
     /** @test */
     public function it_creates_a_channel(): void
     {
+        $this->setUpDefaultPostHeaders();
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml', 'locale.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/channels',
-            server: $header,
-            content: json_encode([
-                'name' => 'Web Store',
-                'code' => 'WEB',
-                'description' => 'Lorem ipsum',
-                'hostname' => 'test.com',
-                'color' => 'blue',
-                'enabled' => true,
-                'baseCurrency' => '/api/v2/admin/currencies/USD',
-                'defaultLocale' => '/api/v2/admin/locales/en_US',
-                'taxCalculationStrategy' => 'order_items_based',
-                'currencies' => [],
-                'locales' => ['/api/v2/admin/locales/en_US'],
-                'themeName' => 'garish',
-                'contactEmail' => 'contact@test.com',
-                'contactPhoneNumber' => '1-800-00-00-00',
-                'skippingShippingStepAllowed' => false,
-                'skippingPaymentStepAllowed' => true,
-                'accountVerificationRequired' => true,
-                'shippingAddressInCheckoutRequired' => false,
-                'menuTaxon' => null,
-            ], \JSON_THROW_ON_ERROR),
-        );
+        $this->requestPost('/api/v2/admin/channels', [
+            'name' => 'Web Store',
+            'code' => 'WEB',
+            'description' => 'Lorem ipsum',
+            'hostname' => 'test.com',
+            'color' => 'blue',
+            'enabled' => true,
+            'baseCurrency' => '/api/v2/admin/currencies/USD',
+            'defaultLocale' => '/api/v2/admin/locales/en_US',
+            'taxCalculationStrategy' => 'order_items_based',
+            'currencies' => [],
+            'locales' => ['/api/v2/admin/locales/en_US'],
+            'themeName' => 'garish',
+            'contactEmail' => 'contact@test.com',
+            'contactPhoneNumber' => '1-800-00-00-00',
+            'skippingShippingStepAllowed' => false,
+            'skippingPaymentStepAllowed' => true,
+            'accountVerificationRequired' => true,
+            'shippingAddressInCheckoutRequired' => false,
+            'shopBillingData' => [
+                'company' => 'Company: Created',
+                'taxId' => 'Tax ID: Created',
+                'countryCode' => 'US',
+                'street' => 'Street: Created',
+                'city' => 'City: Created',
+                'postcode' => 'Postcode: Created',
+            ],
+            'menuTaxon' => null,
+        ]);
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/channel/post_channel_response',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('admin/channel/post_channel_response');
     }
 
     /**
@@ -108,18 +95,16 @@ final class ChannelsTest extends JsonApiTestCase
      *
      * @dataProvider getBlankFieldsData
      * @dataProvider getTooLongFieldsData
+     *
+     * @param array<string, string> $inputData
+     * @param array<string, string> $validation
      */
     public function it_prevents_creating_a_channel_with_invalid_data(array $inputData, array $validation): void
     {
+        $this->setUpDefaultPostHeaders();
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml', 'locale.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/channels',
-            server: $header,
-            content: json_encode($inputData, \JSON_THROW_ON_ERROR),
-        );
+        $this->requestPost('/api/v2/admin/channels', $inputData);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertJsonResponseViolations($this->client->getResponse(), [$validation], false);
@@ -143,6 +128,14 @@ final class ChannelsTest extends JsonApiTestCase
                 'defaultLocale' => '/api/v2/admin/locales/en_US',
                 'locales' => ['/api/v2/admin/locales/en_US'],
                 'shippingAddressInCheckoutRequired' => true,
+                'shopBillingData' => [
+                    'company' => 'Web Channel Company: Updated',
+                    'taxId' => 'Web Channel Tax ID: Updated',
+                    'countryCode' => 'PL',
+                    'street' => 'Web Channel Street: Updated',
+                    'city' => 'Web Channel City: Updated',
+                    'postcode' => 'Web Channel Postcode: Updated',
+                ],
                 'taxCalculationStrategy' => 'order_items_based',
                 'accountVerificationRequired' => false,
                 'name' => 'Web Store',
@@ -159,109 +152,37 @@ final class ChannelsTest extends JsonApiTestCase
         );
     }
 
-    // todo: needs ShopBillingData resource to be fully implemented
-
-//    /** @test */
-//    public function it_updates_a_shop_billing_data(): void
-//    {
-//        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-//        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-//
-//        /** @var ChannelInterface $channel */
-//        $channel = $fixtures['channel_web'];
-//
-//        $this->client->request(
-//            method: 'PUT',
-//            uri: sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
-//            server: $header,
-//            content: json_encode([
-//                'shopBillingData' => [
-//                    '@id' => sprintf('/api/v2/admin/shop-billing-datas/%s', $channel->getShopBillingData()->getId()),
-//                    'company' => 'DifferentCompany',
-//                    'taxId' => '123',
-//                    'countryCode' => 'DE',
-//                    'street' => 'Different Street',
-//                    'city' => 'different City',
-//                    'postcode' => '12-124',
-//                ],
-//            ], \JSON_THROW_ON_ERROR),
-//        );
-//
-//        $this->assertResponseCode(
-//            $this->client->getResponse(),
-//            Response::HTTP_OK,
-//        );
-//
-//        $this->client->request(
-//            method: 'GET',
-//            uri: sprintf('/api/v2/admin/channels/%s/shop-billing-data', $channel->getCode()),
-//            server: $header,
-//        );
-//
-//        $this->assertResponse(
-//            $this->client->getResponse(),
-//            'admin/shop_billing_data/put_shop_billing_data_response',
-//            Response::HTTP_OK,
-//        );
-//    }
-
     /** @test */
     public function it_deletes_a_channel(): void
     {
+        $this->setUpDefaultDeleteHeaders();
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/channels/MOBILE',
-            server: $header,
-        );
-
+        $this->requestGet('/api/v2/admin/channels/MOBILE');
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
 
-        $this->client->request(
-            method: 'DELETE',
-            uri: '/api/v2/admin/channels/MOBILE',
-            server: $header,
-        );
-
+        $this->requestDelete('/api/v2/admin/channels/MOBILE');
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/channels/MOBILE',
-            server: $header,
-        );
-
+        $this->requestGet('/api/v2/admin/channels/MOBILE');
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    // todo: Needs exception_to_status to be investigated
+    /** @test */
+    public function it_prevents_deleting_the_only_channel(): void
+    {
+        $this->setUpDefaultDeleteHeaders();
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
 
-//    /** @test */
-//    public function it_prevents_deleting_the_only_channel(): void
-//    {
-//        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-//        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-//
-//        $this->client->request(
-//            method: 'DELETE',
-//            uri: '/api/v2/admin/channels/MOBILE',
-//            server: $header,
-//        );
-//        $this->client->request(
-//            method: 'DELETE',
-//            uri: '/api/v2/admin/channels/WEB',
-//            server: $header,
-//        );
-//
-//        $this->assertResponse(
-//            $this->client->getResponse(),
-//            'admin/channel/delete_channel_that_cannot_be_deleted',
-//            Response::HTTP_UNPROCESSABLE_ENTITY,
-//        );
-//    }
+        $this->requestDelete('/api/v2/admin/channels/MOBILE');
+        $this->requestDelete('/api/v2/admin/channels/WEB');
 
+        $this->assertResponseUnprocessableEntity('admin/channel/delete_channel_that_cannot_be_deleted');
+    }
+
+    /**
+     * @return \Generator<array{0: array<string, string>, 1: array<string, string>}>
+     */
     public function getBlankFieldsData(): iterable
     {
         $blankFields = [
@@ -281,6 +202,9 @@ final class ChannelsTest extends JsonApiTestCase
         }
     }
 
+    /**
+     * @return \Generator<array{0: array<string, string>, 1: array<string, string>}>
+     */
     public function getTooLongFieldsData(): iterable
     {
         $valueOverStringMax = str_repeat('a@', 128);

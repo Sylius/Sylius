@@ -36,7 +36,13 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     private array $defaultGetHeaders = [];
 
     /** @var array <string, string> */
+    private array $defaultPostHeaders = [];
+
+    /** @var array <string, string> */
     private array $defaultPatchHeaders = [];
+
+    /** @var array <string, string> */
+    private array $defaultDeleteHeaders = [];
 
     /**
      * @param array<array-key, mixed> $data
@@ -62,11 +68,27 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         ];
     }
 
+    protected function setUpDefaultPostHeaders(): void
+    {
+        $this->defaultPostHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/ld+json',
+        ];
+    }
+
     protected function setUpDefaultPatchHeaders(): void
     {
         $this->defaultPatchHeaders = [
             'HTTP_ACCEPT' => 'application/ld+json',
             'CONTENT_TYPE' => 'application/merge-patch+json',
+        ];
+    }
+
+    protected function setUpDefaultDeleteHeaders(): void
+    {
+        $this->defaultDeleteHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/ld+json',
         ];
     }
 
@@ -110,6 +132,20 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     /**
      * @param array<string, array<string>|string> $queryParameters
      * @param array<string, string> $headers
+     * @param array<string, mixed> $body
+     */
+    protected function requestPost(string $uri, ?array $body = null, array $queryParameters = [], array $headers = []): Crawler
+    {
+        if (!empty($this->defaultPostHeaders)) {
+            $headers = array_merge($this->defaultPostHeaders, $headers);
+        }
+
+        return $this->request('POST', $uri, $queryParameters, $headers, $body);
+    }
+
+    /**
+     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, string> $headers
      */
     protected function requestPatch(string $uri, array $queryParameters = [], array $headers = []): Crawler
     {
@@ -126,8 +162,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      */
     protected function requestDelete(string $uri, array $queryParameters = [], array $headers = []): Crawler
     {
-        if (!empty($this->defaultGetHeaders)) {
-            $headers = array_merge($this->defaultGetHeaders, $headers);
+        if (!empty($this->defaultDeleteHeaders)) {
+            $headers = array_merge($this->defaultDeleteHeaders, $headers);
         }
 
         return $this->request('DELETE', $uri, $queryParameters, $headers);
@@ -140,6 +176,16 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $this->client->getResponse(),
             $filename,
             Response::HTTP_OK,
+        );
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseCreated(string $filename): void
+    {
+        $this->assertResponse(
+            $this->client->getResponse(),
+            $filename,
+            Response::HTTP_CREATED,
         );
     }
 
@@ -203,7 +249,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      * @param array<string, array<string>|string> $queryParameters
      * @param array<string, string> $headers
      */
-    protected function request(string $method, string $uri, array $queryParameters = [], array $headers = []): Crawler
+    protected function request(string $method, string $uri, array $queryParameters = [], array $headers = [], ?array $body = null): Crawler
     {
         if ($this->isAdminContext) {
             $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
@@ -217,6 +263,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             method: $method,
             uri: $uri,
             server: $headers,
+            content: is_array($body) ? json_encode($body, \JSON_THROW_ON_ERROR): null,
         );
     }
 }

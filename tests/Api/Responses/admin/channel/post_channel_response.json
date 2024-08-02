@@ -24,7 +24,15 @@
     "skippingPaymentStepAllowed": true,
     "accountVerificationRequired": true,
     "shippingAddressInCheckoutRequired": false,
-    "shopBillingData": "\/api\/v2\/admin\/shop-billing-datas\/@integer@",
+    "shopBillingData": {
+        "@type": "ShopBillingData",
+        "company": "Company: Created",
+        "taxId": "Tax ID: Created",
+        "countryCode": "US",
+        "street": "Street: Created",
+        "city": "City: Created",
+        "postcode": "Postcode: Created"
+    },
     "menuTaxon": null,
     "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
 }
