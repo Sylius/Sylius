@@ -3,16 +3,26 @@
     "@id": "\/api\/v2\/admin\/payment-methods\/test",
     "@type": "PaymentMethod",
     "channels": [],
-    "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+    "gatewayConfig": {
+        "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+        "@type": "GatewayConfig",
+        "factoryName": "paypal_express_checkout",
+        "gatewayName": "paypal_express_checkout",
+        "config": {
+            "sandbox": true,
+            "password": "test",
+            "username": "test",
+            "signature": "test"
+        }
+    },
     "id": "@integer@",
     "code": "test",
     "position": 0,
     "enabled": true,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/payment-method\/test\/translations\/en_US",
             "@type": "PaymentMethodTranslation",
-            "id": "@integer@",
             "name": "Test",
             "description": "Test",
             "instructions": "Testing instructions"
