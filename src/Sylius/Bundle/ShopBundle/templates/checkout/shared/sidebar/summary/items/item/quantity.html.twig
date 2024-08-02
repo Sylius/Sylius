@@ -1,6 +1,6 @@
 {% set item = hookable_metadata.context.item %}
 
-<td {{ sylius_test_html_attribute('item-subtotal-quantity', item.variant.product.name) }}>
+<td {{ sylius_test_html_attribute('item-subtotal-quantity', item.variant.product.code) }}>
     <div class="py-3 text-end text-body-tertiary">
         {{ item.quantity }}
     </div>

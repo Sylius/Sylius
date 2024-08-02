@@ -1,25 +1,25 @@
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 
 {% set order = hookable_metadata.context.order %}
-{% set taxIncluded = order.getTaxIncludedTotal() %}
-{% set taxExcluded = order.getTaxExcludedTotal() %}
+{% set tax_included = order.getTaxIncludedTotal() %}
+{% set tax_excluded = order.getTaxExcludedTotal() %}
 
-<tr {% if taxIncluded and not taxExcluded %}class="disabled" {% endif %}>
+<tr {% if tax_included and not tax_excluded %}class="disabled" {% endif %}>
     <td>
         {{ 'sylius.ui.taxes_total'|trans }}:
-        {% if taxIncluded %}
+        {% if tax_included %}
             <div class="text-body-tertiary"><small>({{ 'sylius.ui.included_in_price'|trans }})</small></div>
         {% endif %}
     </td>
     <td class="text-end">
-        {% if not taxIncluded and not taxExcluded %}
+        {% if not tax_included and not tax_excluded %}
             <div>{{ money.convertAndFormat(0) }}</div>
         {% endif %}
-        {% if taxExcluded %}
-            <div>{{ money.convertAndFormat(taxExcluded) }}</div>
+        {% if tax_excluded %}
+            <div>{{ money.convertAndFormat(tax_excluded) }}</div>
         {% endif %}
-        {% if taxIncluded %}
-            <div>{{ money.convertAndFormat(taxIncluded) }}</div>
+        {% if tax_included %}
+            <div>{{ money.convertAndFormat(tax_included) }}</div>
         {% endif %}
     </td>
 </tr>

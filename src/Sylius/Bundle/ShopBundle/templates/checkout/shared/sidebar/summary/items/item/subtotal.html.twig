@@ -2,7 +2,7 @@
 
 {% set item = hookable_metadata.context.item %}
 
-<td id="{{ item.variant.product.slug }}" {{ sylius_test_html_attribute('item-subtotal', item.variant.product.slug) }}>
+<td {{ sylius_test_html_attribute('item-subtotal', item.variant.product.code) }}>
     <div class="py-3 text-end">
         {{ money.convertAndFormat(item.subtotal) }}
     </div>
