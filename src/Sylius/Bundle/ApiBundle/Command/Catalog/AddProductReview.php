@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Catalog;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailIfNotSetAwareInterface;
 
-class AddProductReview implements IriToIdentifierConversionAwareInterface, LoggedInCustomerEmailIfNotSetAwareInterface
+readonly class AddProductReview implements IriToIdentifierConversionAwareInterface, LoggedInCustomerEmailIfNotSetAwareInterface
 {
     public function __construct(
         public string $title,

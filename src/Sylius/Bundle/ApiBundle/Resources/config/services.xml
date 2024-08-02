@@ -93,11 +93,12 @@
 <!--            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
+        <service id="sylius_api.converter.iri_to_identifier" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
             <argument type="service" id="api_platform.router" />
             <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
             <argument type="service" id="api_platform.uri_variables.converter" />
         </service>
+        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" alias="sylius_api.converter.iri_to_identifier" />
 
 <!--        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />-->
 
