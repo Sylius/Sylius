@@ -36,7 +36,9 @@
                 </normalizationContext>
 
                 <filters>
-                    <filter>sylius.api.order_filter.position</filter>
+                    <filter>sylius_api.boolean_filter.product_attribute</filter>
+                    <filter>sylius_api.order_filter.product_attribute</filter>
+                    <filter>sylius_api.search_filter.product_attribute</filter>
                 </filters>
             </operation>
 
