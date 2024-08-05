@@ -47,20 +47,20 @@ twig_hooks:
                 template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/move_down.html.twig'
 
         'sylius_admin.taxon.update.content.sections.form':
-            details:
-                template: '@SyliusAdmin/taxon/sections/form/details.html.twig'
+            general:
+                template: '@SyliusAdmin/taxon/sections/form/general.html.twig'
             translations:
                 template: '@SyliusAdmin/taxon/sections/form/translations.html.twig'
             images:
                 template: '@SyliusAdmin/taxon/sections/form/images.html.twig'
 
-        'sylius_admin.taxon.update.content.sections.form.details':
+        'sylius_admin.taxon.update.content.sections.form.general':
             code:
-                template: '@SyliusAdmin/taxon/sections/form/details/code.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/general/code.html.twig'
             parent:
-                template: '@SyliusAdmin/taxon/sections/form/details/parent.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/general/parent.html.twig'
             enabled:
-                template: '@SyliusAdmin/taxon/sections/form/details/enabled.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/general/enabled.html.twig'
 
         'sylius_admin.taxon.update.content.sections.form.translations':
             name:

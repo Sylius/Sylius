@@ -6,7 +6,7 @@
             {{ 'sylius.ui.associations'|trans }}
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body" {{ sylius_test_html_attribute('associations') }}>
         {% if product.associations is empty %}
             {{ 'sylius.ui.no_associations_to_display'|trans }}
         {% else %}

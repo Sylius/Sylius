@@ -48,5 +48,3 @@ final class CancelUnpaidOrdersCommand extends ContainerAwareCommand
         return 0;
     }
 }
-
-class_alias(CancelUnpaidOrdersCommand::class, '\Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand');

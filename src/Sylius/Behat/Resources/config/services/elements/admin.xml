@@ -144,5 +144,12 @@
             parent="sylius.behat.element.admin.crud.form"
         >
         </service>
+
+        <service
+            id="sylius.behat.element.admin.customer_group.form"
+            class="Sylius\Behat\Element\Admin\CustomerGroup\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+        </service>
     </services>
 </container>

@@ -1,5 +1,5 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as _button %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 
 {% set form = hookable_metadata.context.form %}
 
-{{ _button.primary({ text: 'sylius.ui.create'|trans, type: 'submit', form: form.vars.id }) }}
+{{ button.primary({ text: 'sylius.ui.create'|trans, type: 'submit', form: form.vars.id }) }}

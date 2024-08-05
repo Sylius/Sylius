@@ -1,6 +1,0 @@
-{% from '@SyliusAdmin/shared/helper/money.html.twig' import format as money %}
-
-{% set original_price = hookable_metadata.context.channel_pricing.originalPrice ?? 0 %}
-{% set currency_code = hookable_metadata.context.currency_code %}
-
-<td class="text-end">{{ money(original_price, currency_code) }}</td>

@@ -24,7 +24,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsField;
 
-    public function getValidationMessage(string $element): string
+    public function getValidationMessage(string $element, array $parameters = []): string
     {
         $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {

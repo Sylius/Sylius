@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/address.html.twig' as _address %}
+{% from '@SyliusAdmin/shared/helper/address.html.twig' import address %}
 
 {% set order = hookable_metadata.context.resource %}
 
@@ -7,6 +7,6 @@
         <strong>{{ 'sylius.ui.shipping_address'|trans }}</strong>
     </div>
     <div class="mb-3" {{ sylius_test_html_attribute('shipping-address') }}>
-        {{ _address.default(_context.order.shippingAddress) }}
+        {{ address(order.shippingAddress) }}
     </div>
 {% endif %}

@@ -22,10 +22,10 @@ twig_hooks:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/scopes_and_actions.html.twig'
 
         'sylius_admin.catalog_promotion.create.content.form.sections.general':
-            name:
-                template: '@SyliusAdmin/catalog_promotion/form/sections/general/name.html.twig'
             code:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/general/code.html.twig'
+            name:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/general/name.html.twig'
             channels:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/general/channels.html.twig'
             

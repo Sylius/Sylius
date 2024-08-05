@@ -1,4 +1,4 @@
-{%- extends '@Pagerfanta/default.html.twig' -%}
+{%- extends '@BabDevPagerfanta/default.html.twig' -%}
 
 {%- block pager_widget -%}
     <ul class="pagination m-0">
@@ -7,49 +7,49 @@
 {%- endblock pager_widget -%}
 
 {%- block page_link -%}
-    <li class="page-item"><a class="page-link" href="{{- path -}}">{{- page -}}</a></li>
+    <li class="page-item"><a class="page-link" href="{{- path -}}" {{ sylius_test_html_attribute('page', page)}}>{{- page -}}</a></li>
 {%- endblock page_link -%}
 
 {%- block current_page_link -%}
-    <li class="page-item active" aria-current="page"><span class="page-link">{{- page -}}</span></li>
+    <li class="page-item active" aria-current="page"><span {{ sylius_test_html_attribute('current-page')}} class="page-link">{{- page -}}</span></li>
 {%- endblock current_page_link -%}
 
 {%- block previous_page_link -%}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <li class="page-item">
         <a class="page-link" href="{{- path -}}" rel="prev">
-            {{ _icon({ icon: 'chevron-left' }) }} {{- block('previous_page_message') -}}
+            {{ icon({ icon: 'chevron_left' }) }} {{- block('previous_page_message') -}}
         </a>
     </li>
 {%- endblock previous_page_link -%}
 
 {%- block previous_page_link_disabled -%}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <li class="page-item disabled">
         <span class="page-link">
-            {{ _icon({ icon: 'chevron-left' }) }} {{- block('previous_page_message') -}}
+            {{ icon({ icon: 'chevron_left' }) }} {{- block('previous_page_message') -}}
         </span>
     </li>
 {%- endblock previous_page_link_disabled -%}
 
 {%- block next_page_link -%}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <li class="page-item">
         <a class="page-link" href="{{- path -}}" rel="next">
-            {{- block('next_page_message') -}} {{ _icon({ icon: 'chevron-right' }) }}
+            {{- block('next_page_message') -}} {{ icon({ icon: 'chevron-right' }) }}
         </a>
     </li>
 {%- endblock next_page_link -%}
 
 {%- block next_page_link_disabled -%}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <li class="page-item disabled">
         <span class="page-link">
-            {{- block('next_page_message') -}} {{ _icon({ icon: 'chevron-right' }) }}
+            {{- block('next_page_message') -}} {{ icon({ icon: 'chevron-right' }) }}
         </span>
     </li>
 {%- endblock next_page_link_disabled -%}

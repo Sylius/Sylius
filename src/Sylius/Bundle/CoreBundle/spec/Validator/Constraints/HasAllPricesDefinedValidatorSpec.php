@@ -101,7 +101,7 @@ final class HasAllPricesDefinedValidatorSpec extends ObjectBehavior
         $this->validate($productVariant, new HasAllPricesDefined());
     }
 
-    function it_adds_a_violation_if_product_variant_does_not_have_any_channel_pricing_price_defined(
+    function it_adds_a_violations_if_product_variant_does_not_have_any_channel_pricing_price_defined(
         ExecutionContextInterface $context,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
@@ -115,7 +115,7 @@ final class HasAllPricesDefinedValidatorSpec extends ObjectBehavior
         $productVariant->getChannelPricingForChannel($firstChannel)->willReturn($firstChannelPricing);
         $productVariant->getChannelPricingForChannel($secondChannel)->willReturn($secondChannelPricing);
 
-        $firstChannelPricing->getPrice()->willReturn(1000);
+        $firstChannelPricing->getPrice()->willReturn(null);
         $secondChannelPricing->getPrice()->willReturn(null);
 
         $product
@@ -123,7 +123,7 @@ final class HasAllPricesDefinedValidatorSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([$firstChannel->getWrappedObject(), $secondChannel->getWrappedObject()]))
         ;
 
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+        $constraintViolationBuilder->addViolation()->shouldBeCalledTimes(2);
         $constraintViolationBuilder->atPath(Argument::any())->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->setParameter(Argument::cetera())->willReturn($constraintViolationBuilder);
 

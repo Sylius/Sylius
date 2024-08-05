@@ -18,8 +18,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product/form/sections.html.twig'
 
         'sylius_admin.product.create.content.form.side_navigation':
-            details:
-                template: '@SyliusAdmin/product/form/side_navigation/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product/form/side_navigation/general.html.twig'
                 configuration:
                     active: true
             channel_pricing:
@@ -42,8 +42,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product/form/side_navigation/media.html.twig'
 
         'sylius_admin.product.create.content.form.sections':
-            details:
-                template: '@SyliusAdmin/product/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product/form/sections/general.html.twig'
                 configuration:
                     active: true
             channel_pricing:
@@ -65,21 +65,21 @@ twig_hooks:
             media:
                 template: '@SyliusAdmin/product/form/sections/media.html.twig'
 
-        'sylius_admin.product.create.content.form.sections.details':
+        'sylius_admin.product.create.content.form.sections.general':
             code:
-                template: '@SyliusAdmin/product/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/product/form/sections/general/code.html.twig'
             enabled:
-                template: '@SyliusAdmin/product/form/sections/details/enabled.html.twig'
+                template: '@SyliusAdmin/product/form/sections/general/enabled.html.twig'
             shipping_required:
-                template: '@SyliusAdmin/product/form/sections/details/shipping_required.html.twig'
+                template: '@SyliusAdmin/product/form/sections/general/shipping_required.html.twig'
             channels:
-                template: '@SyliusAdmin/product/form/sections/details/channels.html.twig'
+                template: '@SyliusAdmin/product/form/sections/general/channels.html.twig'
             translations:
-                template: '@SyliusAdmin/product/form/sections/details/translations.html.twig'
+                template: '@SyliusAdmin/product/form/sections/general/translations.html.twig'
             options:
-                template: '@SyliusAdmin/product/form/sections/details/options.html.twig'
+                template: '@SyliusAdmin/product/form/sections/general/options.html.twig'
             variant_selection_method:
-                template: '@SyliusAdmin/product/form/sections/details/variant_selection_method.html.twig'
+                template: '@SyliusAdmin/product/form/sections/general/variant_selection_method.html.twig'
 
         'sylius_admin.product.create.content.form.sections.translations':
             name:

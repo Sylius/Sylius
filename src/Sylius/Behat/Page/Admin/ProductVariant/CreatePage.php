@@ -24,17 +24,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyPrice(string $price, ChannelInterface $channel): void
     {
-        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+        $this->getElement('price', ['%channel_code%' => $channel->getCode()])->setValue($price);
     }
 
     public function specifyMinimumPrice(string $price, ChannelInterface $channel): void
     {
-        $this->getElement('minimum_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+        $this->getElement('minimum_price', ['%channel_code%' => $channel->getCode()])->setValue($price);
     }
 
     public function specifyOriginalPrice(string $originalPrice, ChannelInterface $channel): void
     {
-        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
+        $this->getElement('original_price', ['%channel_code%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function specifyCurrentStock(string $currentStock): void
@@ -107,15 +107,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'code' => '#sylius_admin_product_variant_code',
             'depth' => '#sylius_admin_product_variant_depth',
             'height' => '#sylius_admin_product_variant_height',
-            'minimum_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_minimumPrice',
+            'minimum_price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_minimumPrice',
             'on_hand' => '#sylius_admin_product_variant_onHand',
             'option_select' => '#sylius_admin_product_variant_optionValues_%option-name%',
+            'original_price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_originalPrice',
+            'price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_price',
             'price_calculator' => '#sylius_admin_product_variant_pricingCalculator',
+            'prices-body' => '[data-test-product-channel-pricings-accordion-body]',
             'shipping_category' => '#sylius_admin_product_variant_shippingCategory',
             'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
-            'original_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_originalPrice',
-            'price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_price',
-            'prices-body' => '[data-test-product-channel-pricings-accordion-body]',
             'weight' => '#sylius_admin_product_variant_weight',
             'width' => '#sylius_admin_product_variant_width',
         ]);

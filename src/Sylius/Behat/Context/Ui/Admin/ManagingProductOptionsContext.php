@@ -230,7 +230,7 @@ final readonly class ManagingProductOptionsContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->formElement->isCodeDisabled());
     }
 
     /**
@@ -258,7 +258,7 @@ final readonly class ManagingProductOptionsContext implements Context
     public function thisProductOptionShouldHaveTheOptionValue(
         ProductOptionInterface $productOption,
         string $optionValue,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->iWantToModifyAProductOption($productOption);
 
@@ -272,7 +272,7 @@ final readonly class ManagingProductOptionsContext implements Context
     public function thisProductOptionShouldNotHaveTheOptionValue(
         ProductOptionInterface $productOption,
         string $optionValue,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->iWantToModifyAProductOption($productOption);
 

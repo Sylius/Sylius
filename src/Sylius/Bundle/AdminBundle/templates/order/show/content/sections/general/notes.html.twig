@@ -1,0 +1,14 @@
+{% set order = hookable_metadata.context.resource %}
+
+<div>
+    <div>
+        <strong>{{ 'sylius.ui.notes'|trans }}:</strong>
+    </div>
+    <div class="mb-3" {{ sylius_test_html_attribute('notes') }}>
+        {% if order.notes is not null %}
+            {{ order.notes }}
+        {% else %}
+            -
+        {% endif %}
+    </div>
+</div>

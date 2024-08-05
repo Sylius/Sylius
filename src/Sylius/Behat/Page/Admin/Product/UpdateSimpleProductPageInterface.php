@@ -14,8 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Behat\Page\Admin\EditToShowPageSwitcherInterface;
+use Sylius\Behat\Page\Admin\ShowPageButtonCheckerInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
-interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
+interface UpdateSimpleProductPageInterface extends
+    BaseUpdatePageInterface,
+    EditToShowPageSwitcherInterface,
+    ShowPageButtonCheckerInterface
 {
     public function isCodeDisabled(): bool;
 
@@ -31,6 +37,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function goToVariantCreation(): void;
 
+    public function hasGenerateVariantsButton(): bool;
+
     public function goToVariantGeneration(): void;
 
     public function hasTab(string $name): bool;
@@ -39,7 +47,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function isShowInShopButtonDisabled(): bool;
 
-    public function showProductInChannel(string $channel): void;
+    public function showProductInChannel(ChannelInterface $channel): void;
 
     public function showProductInSingleChannel(): void;
 

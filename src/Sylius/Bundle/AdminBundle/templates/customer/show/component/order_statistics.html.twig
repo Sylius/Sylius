@@ -1,8 +1,9 @@
-{% from '@SyliusAdmin/shared/helper/accordion.html.twig' import default as _accordion %}
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
-{% from '@SyliusAdmin/shared/helper/money.html.twig' import format as _money %}
+{% from '@SyliusAdmin/shared/helper/accordion.html.twig' import accordion %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
 {% set items = [] %}
+
 <div class="mb-2">
     <div class="card">
         <div class="card-body">
@@ -24,7 +25,7 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <span class="bg-gray text-muted avatar">
-                                                {{ _icon({icon: 'shopping-bag'}) }}
+                                                {{ icon({icon: 'shopping_bag'}) }}
                                             </span>
                                         </div>
                                         <div class="col">
@@ -41,12 +42,12 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <span class="bg-gray text-muted avatar">
-                                                {{ _icon({icon: 'coins'}) }}
+                                                {{ icon({icon: 'coins'}) }}
                                             </span>
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.total_value_of_orders'|trans }}</div>
-                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-total') }}>{{ _money(channel_statistics.ordersValue, channel.baseCurrency.code) }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-total') }}>{{ money.format(channel_statistics.ordersValue, channel.baseCurrency.code) }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -58,12 +59,12 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <span class="bg-gray text-muted avatar">
-                                                {{ _icon({icon: 'slash'}) }}
+                                                {{ icon({icon: 'slash'}) }}
                                             </span>
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.average_order_value'|trans }}</div>
-                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-average') }}>{{ _money(channel_statistics.averageOrderValue, channel.baseCurrency.code) }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-average') }}>{{ money.format(channel_statistics.averageOrderValue, channel.baseCurrency.code) }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +78,7 @@
             {% endfor %}
 
             {% if items is not empty %}
-                {{ _accordion(items, false, null, true) }}
+                {{ accordion(items, false, null, true) }}
             {% else %}
                 <div class="h3 text-muted" {{ sylius_test_html_attribute('customer-statistics-no-orders') }}>{{ 'sylius.ui.there_are_no_orders_for_this_customer_to_display'|trans }}</div>
             {% endif %}

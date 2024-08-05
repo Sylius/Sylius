@@ -27,4 +27,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function savePositions(): void;
 
     public function countItemsWithNoName(): int;
+
+    public function hasGenerateVariantsButton(): bool;
+
+    public function goToVariantGeneration(): void;
 }

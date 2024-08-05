@@ -80,12 +80,8 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $table = $this->getElement('table');
         $row = $tableAccessor->getRowWithFields($table, ['name' => $productName]);
         $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
-        $field->clickLink('details');
-    }
 
-    public function goToPage(int $page): void
-    {
-        $this->getElement('pagination_button', ['%page%' => $page])->click();
+        $field->find('css', '[data-test-show-action="Details"]')->click();
     }
 
     public function checkFirstProductHasDataAttribute(string $attributeName): bool
@@ -98,11 +94,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         return $this->getElement('last_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
     }
 
-    public function getPageNumber(): int
-    {
-        return (int) $this->getElement('page_number')->getText();
-    }
-
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -111,9 +103,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
             'first_product' => '.table > tbody > tr:first-child',
             'last_product' => '.table > tbody > tr:last-child',
             'main_taxon_filter' => '#criteria_main_taxon',
-            'page_number' => '.sylius-grid-nav__pagination .active',
-            'pagination_button' => '.sylius-grid-nav__pagination a.item:contains("%page%")',
-            'pagination_buttons' => '.sylius-grid-nav__pagination',
             'taxon_filter' => '#criteria_taxon',
         ]);
     }

@@ -1,7 +1,14 @@
-{% import '@SyliusAdmin/shared/helper/translations.html.twig' as _translations %}
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
+
+{% set form = hookable_metadata.context.form %}
 
 <div class="tab-pane" id="product-variant-translations" role="tabpanel" tabindex="0">
-    <div class="bg-white mb-3">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 class="card-title">
+                {{ 'sylius.ui.translations'|trans }}
+            </h2>
+        </div>
         {% set body %}
             {% verbatim %}
                 <div class="row">
@@ -11,6 +18,6 @@
                 </div>
             {% endverbatim %}
         {% endset %}
-        {{ _translations.default(hookable_metadata.context.form.translations, body, { accordion_id: 'product-variant-translations'}) }}
+        {{ translations.default(form.translations, body, { accordion_id: 'product-variant-translations', accordion_flush: true }) }}
     </div>
 </div>

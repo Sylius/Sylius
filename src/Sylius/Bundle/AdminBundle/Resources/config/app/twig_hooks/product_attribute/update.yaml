@@ -11,22 +11,22 @@ twig_hooks:
                     method: 'PUT'
 
         'sylius_admin.product_attribute.update.content.form':
-            details:
-                template: '@SyliusAdmin/product_attribute/form/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product_attribute/form/general.html.twig'
             translations:
                 template: '@SyliusAdmin/product_attribute/form/translations.html.twig'
             configuration:
                 template: '@SyliusAdmin/product_attribute/form/configuration.html.twig'
 
-        'sylius_admin.product_attribute.update.content.form.details':
+        'sylius_admin.product_attribute.update.content.form.general':
             code:
-                template: '@SyliusAdmin/product_attribute/form/details/code.html.twig'
+                template: '@SyliusAdmin/product_attribute/form/general/code.html.twig'
             type:
-                template: '@SyliusAdmin/product_attribute/form/details/type.html.twig'
+                template: '@SyliusAdmin/product_attribute/form/general/type.html.twig'
             position:
-                template: '@SyliusAdmin/product_attribute/form/details/position.html.twig'
+                template: '@SyliusAdmin/product_attribute/form/general/position.html.twig'
             translatable:
-                template: '@SyliusAdmin/product_attribute/form/details/translatable.html.twig'
+                template: '@SyliusAdmin/product_attribute/form/general/translatable.html.twig'
 
         'sylius_admin.product_attribute.update.content.form.translations':
             name:

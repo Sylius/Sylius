@@ -2,7 +2,7 @@
 {% set payment = hookable_metadata.context.payment %}
 
 {% if sylius_sm_can(payment, constant('Sylius\\Component\\Payment\\PaymentTransitions::GRAPH'), constant('Sylius\\Component\\Payment\\PaymentTransitions::TRANSITION_COMPLETE')) %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id}) }}" method="POST" novalidate>
         <input type="hidden" name="_method" value="PUT">

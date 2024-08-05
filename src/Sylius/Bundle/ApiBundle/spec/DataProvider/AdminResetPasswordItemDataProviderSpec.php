@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Sylius\Component\Core\Model\AddressInterface;
 
 final class AdminResetPasswordItemDataProviderSpec extends ObjectBehavior

@@ -18,6 +18,7 @@ use ApiTestCase\JsonApiTestCase;
 final class AdminSectionNotFoundPageTest extends JsonApiTestCase
 {
     private const ADMIN_404_PAGE_HOOK = 'data-test-back-to-dashboard-link';
+
     private const SHOP_404_PAGE_HOOK = 'The page you are looking for does not exist.';
 
     /** @before */
@@ -29,6 +30,7 @@ final class AdminSectionNotFoundPageTest extends JsonApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider getSyliusResourcesUrlPart
      */
     public function it_shows_admin_not_found_page_for_a_logged_in_admin_when_accessing_nonexistent_resource_edit_page(
@@ -36,7 +38,7 @@ final class AdminSectionNotFoundPageTest extends JsonApiTestCase
     ): void {
         $this->loginAdminUser();
 
-        $this->client->request('GET', '/admin/'. $syliusResourceUrlPart . '/0/edit');
+        $this->client->request('GET', '/admin/' . $syliusResourceUrlPart . '/0/edit');
 
         $this->assertResponseStatusCodeSame(404);
 

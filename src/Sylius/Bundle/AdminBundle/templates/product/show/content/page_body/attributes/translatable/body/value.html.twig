@@ -1,0 +1,16 @@
+{% set attributes = hookable_metadata.context.attributes  %}
+
+<div class="col-12 col-md-8">
+    {% for attribute_value in attributes|filter(attribute_value => attribute_value.localeCode == hookable_metadata.context.locale_code) %}
+        <p {{ sylius_test_html_attribute('attribute-value') }}>
+            {% include [
+                '@SyliusAdmin/product/show/content/page_body/attributes/types/'~attribute_value.type~'.html.twig',
+                '@SyliusAttribute/Types/'~attribute_value.type~'.html.twig',
+                '@SyliusAdmin/product/show/content/page_body/attributes/types/default.html.twig'
+            ] with {
+                'attribute': attribute_value,
+                'locale': hookable_metadata.context.locale_code,
+            } %}
+        </p>
+    {% endfor %}
+</div>

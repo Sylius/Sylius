@@ -14,12 +14,12 @@ Feature: Not reapplying catalog promotions on variant once its prices changes
         And there is disabled catalog promotion "Surprise sale" between "2021-07-01" and "2022-05-04" available in "Web-US" channel that reduces price by "90%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Changing the price of the variant
         When I change the price of the "PHP T-Shirt" product variant to "$50.00" in "Web-US" channel
         Then the visitor should see "$50.00" as the price of the "T-Shirt" product in the "Web-US" channel
 
-    @api @todo @ui
+    @api @ui
     Scenario: Changing the original price of the variant
         When I change the original price of the "PHP T-Shirt" product variant to "$105.00" in "Web-US" channel
         Then the visitor should see "$100.00" as the price of the "T-Shirt" product in the "Web-US" channel

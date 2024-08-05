@@ -22,7 +22,7 @@
 {% endmacro %}
 
 {% macro row(grid, definition, row) %}
-    {% from '@SyliusAdmin/shared/helper/dropdown.html.twig' import default as dropdown %}
+    {% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
     {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <tr class="item" {{ sylius_test_html_attribute('row') }} {{ sylius_test_html_attribute('resource-id', row.id) }}>
@@ -53,7 +53,7 @@
                             </button>
                         {% endset %}
                         {% if subactions|trim|length > 0 %}
-                            {{ dropdown({ customTrigger: more_button, content: subactions, direction: 'down-end' }) }}
+                            {{ dropdown.default({ customTrigger: more_button, content: subactions, direction: 'down-end' }) }}
                         {% endif %}
                     {% endif %}
                 </div>

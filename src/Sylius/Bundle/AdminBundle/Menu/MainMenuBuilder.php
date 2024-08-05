@@ -62,7 +62,7 @@ final readonly class MainMenuBuilder
         $catalog = $menu
             ->addChild('catalog')
             ->setLabel('sylius.menu.admin.main.catalog.header')
-            ->setLabelAttribute('icon', 'list-details')
+            ->setLabelAttribute('icon', 'list_details')
         ;
 
         $catalog
@@ -196,7 +196,7 @@ final readonly class MainMenuBuilder
         $sales = $menu
             ->addChild('sales')
             ->setLabel('sylius.menu.admin.main.sales.header')
-            ->setLabelAttribute('icon', 'shopping-bag')
+            ->setLabelAttribute('icon', 'shopping_bag')
         ;
 
         $sales
@@ -346,7 +346,7 @@ final readonly class MainMenuBuilder
         $configuration = $menu
             ->addChild('official_support')
             ->setLabel('sylius.menu.admin.main.official_support.header')
-            ->setLabelAttribute('icon', 'info-circle')
+            ->setLabelAttribute('icon', 'info_circle')
         ;
 
         $configuration

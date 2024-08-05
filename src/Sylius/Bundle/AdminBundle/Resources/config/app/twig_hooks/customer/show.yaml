@@ -6,7 +6,9 @@ twig_hooks:
 
         'sylius_admin.customer.show.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/customer/show/content/header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field: email
 
         'sylius_admin.customer.show.content.header.title_block':
             title:
@@ -29,25 +31,25 @@ twig_hooks:
                 component: 'sylius_admin:customer:order_statistics'
                 props:
                     customerId: '@=_context.resource.getId()'
-            details:
-                template: '@SyliusAdmin/customer/show/content/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/customer/show/content/sections/general.html.twig'
 
-        'sylius_admin.customer.show.content.sections.details':
+        'sylius_admin.customer.show.content.sections.general':
             first_name:
-                template: '@SyliusAdmin/customer/show/content/sections/details/first_name.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/first_name.html.twig'
             last_name:
-                template: '@SyliusAdmin/customer/show/content/sections/details/last_name.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/last_name.html.twig'
             customer_since:
-                template: '@SyliusAdmin/customer/show/content/sections/details/customer_since.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/customer_since.html.twig'
             group_membership:
-                template: '@SyliusAdmin/customer/show/content/sections/details/group_membership.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/group_membership.html.twig'
             subscribed_to_newsletter:
-                template: '@SyliusAdmin/customer/show/content/sections/details/subscribed_to_newsletter.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/subscribed_to_newsletter.html.twig'
             email_verified:
-                template: '@SyliusAdmin/customer/show/content/sections/details/email_verified.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/email_verified.html.twig'
             email:
-                template: '@SyliusAdmin/customer/show/content/sections/details/email.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/email.html.twig'
             phone:
-                template: '@SyliusAdmin/customer/show/content/sections/details/phone.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/phone.html.twig'
             default_address:
-                template: '@SyliusAdmin/customer/show/content/sections/details/default_address.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/general/default_address.html.twig'

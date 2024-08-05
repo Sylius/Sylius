@@ -1,5 +1,5 @@
-{% import '@SyliusAdmin/shared/helper/table.html.twig' as _table %}
-{% import '@SyliusAdmin/shared/helper/pagination.html.twig' as _pagination %}
+{% import '@SyliusAdmin/shared/helper/table.html.twig' as table %}
+{% import '@SyliusAdmin/shared/helper/pagination.html.twig' as pagination %}
 
 {% set resources = hookable_metadata.context.resources %}
 {% set data = resources.data %}
@@ -17,7 +17,7 @@
                     </div>
                 {% endif %}
                 <div class="ms-auto">
-                    {{ _pagination.number_of_results_selector(data, definition.limits) }}
+                    {{ pagination.number_of_results_selector(data, definition.limits) }}
                 </div>
             </div>
         </div>
@@ -25,22 +25,22 @@
             <table class="table card-table table-vcenter text-nowrap datatable" {{ sylius_test_html_attribute('grid-table') }}>
                 <thead>
                 <tr>
-                    {{ _table.headers(resources, resources.definition, app.request.attributes) }}
+                    {{ table.headers(resources, resources.definition, app.request.attributes) }}
                 </tr>
                 </thead>
                 <tbody {{ sylius_test_html_attribute('grid-table-body') }}>
                 {% for row in resources.data %}
-                    {{ _table.row(resources, resources.definition, row) }}
+                    {{ table.row(resources, resources.definition, row) }}
                 {% endfor %}
                 </tbody>
             </table>
         </div>
         <div class="card-footer d-flex align-items-center">
             <div class="text-muted">
-                {{ _pagination.results_count(data) }}
+                {{ pagination.results_count(data) }}
             </div>
             <div class="ms-auto">
-                {{ _pagination.simple(data) }}
+                {{ pagination.simple(data) }}
             </div>
         </div>
     </div>

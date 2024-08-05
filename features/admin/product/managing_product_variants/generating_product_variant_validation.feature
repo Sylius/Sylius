@@ -15,7 +15,7 @@ Feature: Generating product variant generation
         When I want to generate new variants for this product
         And I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code
         And I try to generate it
-        Then I should be notified that prices in all channels must be defined for the 1st variant
+        Then I should be notified that price for the 1st variant in "United States" channel must be defined
         And I should not see any variants in the list
 
     @ui @no-api
@@ -33,7 +33,7 @@ Feature: Generating product variant generation
         And I specify that the 1st variant costs "$90.00" in "United States" channel
         And I try to generate it
         Then I should be notified that code is required for the 2nd variant
-        Then I should be notified that prices in all channels must be defined for the 2nd variant
+        And I should be notified that price for the 2nd variant in "United States" channel must be defined
         And I should not see any variants in the list
 
     @ui @no-api
@@ -54,9 +54,9 @@ Feature: Generating product variant generation
         And I do not specify any information about variants
         And I try to generate it
         Then I should be notified that code is required for the 1st variant
-        And I should be notified that prices in all channels must be defined for the 1st variant
+        And I should be notified that price for the 1st variant in "United States" channel must be defined
         And I should be notified that code is required for the 2nd variant
-        And I should be notified that prices in all channels must be defined for the 2nd variant
+        And I should be notified that price for the 2nd variant in "United States" channel must be defined
         And I should not see any variants in the list
 
     @ui @no-api

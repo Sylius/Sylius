@@ -1,8 +1,8 @@
-{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as breadcrumbs %}
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
 
 {% set taxon = entity %}
 
-{{ breadcrumbs.default([
+{{ breadcrumbs([
     { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: 'sylius.ui.taxons'|trans, url: path('sylius_admin_taxon_index'), active: false },
     { name: taxon.fullname|default(taxon.code), url: path('sylius_admin_taxon_update', {'id': taxon.id }), active: false },

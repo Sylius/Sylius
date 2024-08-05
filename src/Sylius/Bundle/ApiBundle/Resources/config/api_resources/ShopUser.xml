@@ -30,5 +30,11 @@
         <collectionOperations/>
 
         <property name="id" identifier="true" writable="false" />
+        <property name="verifiedAt" >
+            <attribute name="openapi_context">
+                <attribute name="type">boolean</attribute>
+                <attribute name="example">true</attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>

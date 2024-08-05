@@ -17,13 +17,13 @@ use Behat\Mink\Element\NodeElement;
 
 interface PricingElementInterface
 {
-    public function getPriceForChannel(string $channelName): string;
+    public function getPriceForChannel(string $channelCode): string;
 
-    public function getOriginalPriceForChannel(string $channelName): string;
+    public function getOriginalPriceForChannel(string $channelCode): string;
 
-    public function getCatalogPromotionsNamesForChannel(string $channelName): array;
+    public function getCatalogPromotionsNamesForChannel(string $channelCode): array;
 
-    public function getCatalogPromotionLinksForChannel(string $channelName): array;
+    public function getCatalogPromotionLinksForChannel(string $channelCode): array;
 
     public function getLowestPriceBeforeDiscountForChannel(string $channelCode): string;
 

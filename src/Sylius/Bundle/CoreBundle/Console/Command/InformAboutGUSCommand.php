@@ -31,23 +31,8 @@ final class InformAboutGUSCommand extends Command
     {
         $style = new SymfonyStyle($input, $output);
 
-        $style->note(
-            [
-                'For purely statistical purposes and in order to inform you about important updates and security patches, Sylius might send non-sensitive data to our servers. We send:',
-                '* Hostname',
-                '* User-agent',
-                '* Locale',
-                '* Environment (test, dev or prod)',
-                '* Currently used Sylius version',
-                '* Date of the last contact',
-                'If you do not consent please follow this cookbook article:',
-                'https://docs.sylius.com/en/latest/cookbook/configuration/disabling-admin-notifications.html',
-                'That being said, every time we get a notification about a new site deployed with Sylius, it brings a huge smile to our faces and motivates us to continue our Open Source work.',
-            ],
-        );
+        $style->info('To inform you about important updates and security patches, Sylius might send non-sensitive data(hostname, user-agent, locale, environment [prod/dev/test]), Sylius version, date of last contact) to our servers. An instruction on how to withdraw consent to this data collection is available in the Sylius documentation.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
-
-class_alias(InformAboutGUSCommand::class, '\Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand');
