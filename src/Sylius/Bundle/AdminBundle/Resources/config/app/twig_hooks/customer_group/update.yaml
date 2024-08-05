@@ -15,11 +15,11 @@ twig_hooks:
                 template: '@SyliusAdmin/customer_group/form/sections.html.twig'
 
         'sylius_admin.customer_group.update.content.form.sections':
-            details:
-                template: '@SyliusAdmin/customer_group/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/customer_group/form/sections/general.html.twig'
 
-        'sylius_admin.customer_group.update.content.form.sections.details':
+        'sylius_admin.customer_group.update.content.form.sections.general':
             code:
-                template: '@SyliusAdmin/customer_group/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/customer_group/form/sections/general/code.html.twig'
             name:
-                template: '@SyliusAdmin/customer_group/form/sections/details/name.html.twig'
+                template: '@SyliusAdmin/customer_group/form/sections/general/name.html.twig'

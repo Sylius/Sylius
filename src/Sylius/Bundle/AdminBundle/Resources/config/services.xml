@@ -21,7 +21,7 @@
         <parameter key="sylius.ajax.product.variant_autocomplete_limit">25</parameter>
         <parameter key="sylius.ajax.product.option_autocomplete_limit">10</parameter>
         <parameter key="sylius.ajax.customer_group.autocomplete_limit">25</parameter>
-        <parameter key="sylius.message.admin_user_create.validation_groups" type="collection">
+        <parameter key="sylius_admin.command_handler.create_admin_user.validation_groups" type="collection">
             <parameter>sylius</parameter>
             <parameter>sylius_user_create</parameter>
         </parameter>
@@ -30,26 +30,26 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
+        <service id="sylius_admin.console.command.create_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_locale.locale%</argument>
             <argument type="service" id="sylius.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
+        <service id="sylius_admin.console.command.change_admin_user_password" class="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.security.password_updater" />
             <argument type="service" id="sylius.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler">
+        <service id="sylius_admin.command_handler.create_admin_user" class="Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="validator" />
-            <argument>%sylius.message.admin_user_create.validation_groups%</argument>
+            <argument>%sylius_admin.command_handler.create_admin_user.validation_groups%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

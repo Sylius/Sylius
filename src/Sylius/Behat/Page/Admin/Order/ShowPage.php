@@ -27,7 +27,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor,
+        private readonly TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -314,9 +314,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasNote(string $note): bool
     {
-        $orderNotesElement = $this->getElement('order_notes');
+        $notes = $this->getElement('notes');
 
-        return $orderNotesElement->getText() === $note;
+        return $notes->getText() === $note;
     }
 
     public function hasShippingProvinceName(string $provinceName): bool
@@ -388,32 +388,35 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return  $this->getElement('shipment_shipped_at_date')->getText();
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '[data-test-billing-address]',
             'cancel_order' => '[data-test-cancel-order]',
-            'currency' => '#sylius-order-currency',
+            'currency' => '[data-test-currency]',
             'customer_email' => '[data-test-customer] [data-test-email]',
             'ip_address' => '#ipAddress',
             'item' => '[data-test-item="%name%"]',
             'items_total' => '[data-test-items-total]',
-            'order_notes' => '#sylius-order-notes',
+            'notes' => '[data-test-notes]',
             'order_payment_state' => '[data-test-order-payment-state]',
             'order_shipping_state' => '[data-test-order-shipping-state]',
             'order_state' => '[data-test-order-state]',
             'order_total' => '[data-test-order-total]',
-            'payments' => '[data-test-payments]',
             'payment_complete' => '[data-test-complete-payment="%paymentId%"]',
             'payment_refund' => '[data-test-refund-payment="%paymentId%"]',
+            'payments' => '[data-test-payments]',
             'promotion' => '[data-test-promotion="%name%"]',
             'promotion_total' => '[data-test-promotion-total]',
             'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
             'resend_shipment_confirmation_email' => '[data-test-resend-shipment-confirmation-email]',
-            'shipment_shipped_at_date' => '[data-test-shipments] [data-test-shipped-at-date]',
-            'shipments' => '[data-test-shipments]',
-            'shipment_tracking' => '[data-test-shipment-tracking]',
             'shipment_ship_button' => '[data-test-shipment-ship-button]',
+            'shipment_shipped_at_date' => '[data-test-shipments] [data-test-shipped-at-date]',
+            'shipment_tracking' => '[data-test-shipment-tracking]',
+            'shipments' => '[data-test-shipments]',
             'shipping' => '[data-test-shipping="%name%"]',
             'shipping_address' => '[data-test-shipping-address]',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
@@ -424,11 +427,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'tax_total' => '[data-test-tax-total]',
             'taxes' => '#taxes',
         ]);
-    }
-
-    protected function getTableAccessor(): TableAccessorInterface
-    {
-        return $this->tableAccessor;
     }
 
     protected function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool

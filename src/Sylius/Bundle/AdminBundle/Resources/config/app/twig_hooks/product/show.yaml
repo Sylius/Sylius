@@ -14,11 +14,13 @@ twig_hooks:
             edit:
                 template: '@SyliusAdmin/shared/crud/show/content/header/title_block/actions/edit.html.twig'
             view_in_store:
-                template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
+                component: 'sylius_admin:view_in_store'
+                props:
+                    product: '@=_context.resource'
 
         'sylius_admin.product.show.content.page_body':
-            details:
-                template: '@SyliusAdmin/product/show/content/page_body/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product/show/content/page_body/general.html.twig'
             translations:
                 template: '@SyliusAdmin/product/show/content/page_body/translations.html.twig'
             taxonomy:
@@ -76,171 +78,171 @@ twig_hooks:
             product_taxons:
                 template: '@SyliusAdmin/product/show/content/page_body/taxonomy/product_taxons.html.twig'
 
-        'sylius_admin.product.show.content.page_body.details':
+        'sylius_admin.product.show.content.page_body.general':
             simple_product:
-                template: '@SyliusAdmin/product/show/content/page_body/details/simple_product.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/simple_product.html.twig'
             configurable_product:
-                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/configurable_product.html.twig'
 
-        'sylius_admin.product.show.content.page_body.details.simple_product#head':
+        'sylius_admin.product.show.content.page_body.general.simple_product#head':
             product:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/product.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/product.html.twig'
             enabled:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/enabled.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/enabled.html.twig'
             tracked:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/tracked.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/tracked.html.twig'
             shipping_required:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/shipping_required.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/shipping_required.html.twig'
             tax_category:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/tax_category.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/tax_category.html.twig'
             current_stock:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/current_stock.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/current_stock.html.twig'
                 
-        'sylius_admin.product.show.content.page_body.details.simple_product#tab':
+        'sylius_admin.product.show.content.page_body.general.simple_product#tab':
             product:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/product.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/product.html.twig'
             enabled:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/enabled.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/enabled.html.twig'
             tracked:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/tracked.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/tracked.html.twig'
             shipping_required:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/shipping_required.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/shipping_required.html.twig'
             tax_category:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/tax_category.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/tax_category.html.twig'
             current_stock:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/current_stock.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/current_stock.html.twig'
 
 
-        'sylius_admin.product.show.content.page_body.details.simple_product#details':
+        'sylius_admin.product.show.content.page_body.general.simple_product#details':
             pricing:
-                template: '@SyliusAdmin/product/show/content/page_body/details/simple_product/details/pricing.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/simple_product/details/pricing.html.twig'
             shipping:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping.html.twig'
 
-        'sylius_admin.product.show.content.page_body.details.simple_product.shipping':
+        'sylius_admin.product.show.content.page_body.general.simple_product.shipping':
             shipping_category:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/shipping_category.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/shipping_category.html.twig'
             width:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/width.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/width.html.twig'
             height:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/height.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/height.html.twig'
             depth:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/depth.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/depth.html.twig'
             weight:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/weight.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/weight.html.twig'
         
-        'sylius_admin.product.show.content.page_body.details.simple_product.pricing#head':
+        'sylius_admin.product.show.content.page_body.general.simple_product.pricing#head':
             channel:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/channel.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/channel.html.twig'
             price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/price.html.twig'
             original_price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/original_price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/original_price.html.twig'
             lowest_price_before_the_discount:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/lowest_price_before_the_discount.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/lowest_price_before_the_discount.html.twig'
             discounted_by:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/discounted_by.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/discounted_by.html.twig'
             price_history:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/price_history.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/price_history.html.twig'
 
 
-        'sylius_admin.product.show.content.page_body.details.simple_product.pricing#body':
+        'sylius_admin.product.show.content.page_body.general.simple_product.pricing#body':
             channel:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/channel.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/channel.html.twig'
             price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/price.html.twig'
             original_price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/original_price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/original_price.html.twig'
             lowest_price_before_the_discount:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/lowest_price_before_the_discount.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/lowest_price_before_the_discount.html.twig'
             applied_promotions:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/applied_promotions.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/applied_promotions.html.twig'
             price_history:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/price_history.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/price_history.html.twig'
                 
-        'sylius_admin.product.show.content.page_body.details.configurable_product#head':
+        'sylius_admin.product.show.content.page_body.general.configurable_product#head':
             details_button:
-                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/head/details_button.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/configurable_product/head/details_button.html.twig'
             product:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/product.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/product.html.twig'
             enabled:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/enabled.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/enabled.html.twig'
             options:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/options.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/options.html.twig'
             tracked:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/tracked.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/tracked.html.twig'
             shipping_required:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/shipping_required.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/shipping_required.html.twig'
             tax_category:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/tax_category.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/tax_category.html.twig'
             current_stock:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/head/current_stock.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/head/current_stock.html.twig'
             edit_button:
-                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/head/edit_button.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/configurable_product/head/edit_button.html.twig'
 
 
-        'sylius_admin.product.show.content.page_body.details.configurable_product#tab':
+        'sylius_admin.product.show.content.page_body.general.configurable_product#tab':
             details_button:
-                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/tab/details_button.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/configurable_product/tab/details_button.html.twig'
             product:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/product.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/product.html.twig'
             enabled:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/enabled.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/enabled.html.twig'
             options:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/options.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/options.html.twig'
             tracked:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/tracked.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/tracked.html.twig'
             shipping_required:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/shipping_required.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/shipping_required.html.twig'
             tax_category:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/tax_category.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/tax_category.html.twig'
             current_stock:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/tab/current_stock.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/tab/current_stock.html.twig'
             edit_button:
-                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/tab/edit_button.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/configurable_product/tab/edit_button.html.twig'
 
-        'sylius_admin.product.show.content.page_body.details.configurable_product#details':
+        'sylius_admin.product.show.content.page_body.general.configurable_product#details':
             pricing:
-                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/details/pricing.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/configurable_product/details/pricing.html.twig'
             shipping:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping.html.twig'
 
-        'sylius_admin.product.show.content.page_body.details.configurable_product.pricing#head':
+        'sylius_admin.product.show.content.page_body.general.configurable_product.pricing#head':
             channel:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/channel.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/channel.html.twig'
             price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/price.html.twig'
             original_price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/original_price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/original_price.html.twig'
             lowest_price_before_the_discount:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/lowest_price_before_the_discount.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/lowest_price_before_the_discount.html.twig'
             discounted_by:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/discounted_by.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/discounted_by.html.twig'
             price_history:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/head/price_history.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/head/price_history.html.twig'
 
-        'sylius_admin.product.show.content.page_body.details.configurable_product.pricing#body':
+        'sylius_admin.product.show.content.page_body.general.configurable_product.pricing#body':
             channel:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/channel.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/channel.html.twig'
             price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/price.html.twig'
             original_price:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/original_price.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/original_price.html.twig'
             lowest_price_before_the_discount:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/lowest_price_before_the_discount.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/lowest_price_before_the_discount.html.twig'
             applied_promotions:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/applied_promotions.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/applied_promotions.html.twig'
             price_history:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/pricing/body/price_history.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/pricing/body/price_history.html.twig'
 
-        'sylius_admin.product.show.content.page_body.details.configurable_product.shipping':
+        'sylius_admin.product.show.content.page_body.general.configurable_product.shipping':
             shipping_category:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/shipping_category.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/shipping_category.html.twig'
             width:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/width.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/width.html.twig'
             height:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/height.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/height.html.twig'
             depth:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/depth.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/depth.html.twig'
             weight:
-                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping/weight.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/general/shared/shipping/weight.html.twig'

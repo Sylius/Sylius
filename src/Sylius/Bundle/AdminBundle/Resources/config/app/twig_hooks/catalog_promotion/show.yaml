@@ -15,8 +15,8 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/show/content/header/title_block/actions/edit.html.twig'
 
         'sylius_admin.catalog_promotion.show.content.sections#left':
-            details:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general.html.twig'
             translations:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/translations.html.twig'
 
@@ -26,25 +26,25 @@ twig_hooks:
             actions:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions.html.twig'
 
-        'sylius_admin.catalog_promotion.show.content.sections.details':
+        'sylius_admin.catalog_promotion.show.content.sections.general':
             code:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/code.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/code.html.twig'
             name:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/name.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/name.html.twig'
             enabled:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/enabled.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/enabled.html.twig'
             state:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/state.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/state.html.twig'
             exclusive:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/exclusive.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/exclusive.html.twig'
             start_date:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/start_date.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/start_date.html.twig'
             end_date:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/end_date.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/end_date.html.twig'
             priority:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/priority.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/priority.html.twig'
             channels:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/channels.html.twig'
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/general/channels.html.twig'
 
         'sylius_admin.catalog_promotion.show.content.sections.translations':
             label:

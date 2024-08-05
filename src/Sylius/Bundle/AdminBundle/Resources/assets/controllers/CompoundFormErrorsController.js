@@ -48,7 +48,7 @@ export default class extends Controller {
     }
 
     clearBadges() {
-        this.element.querySelectorAll(".tab-error").forEach(el => el.remove());
+        this.element.querySelectorAll("#side-nav .tab-error").forEach(el => el.remove());
         this.element.querySelectorAll(".accordion-error").forEach(el => el.remove());
     }
 

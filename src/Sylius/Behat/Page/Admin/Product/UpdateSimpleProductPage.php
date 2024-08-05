@@ -19,6 +19,7 @@ use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
@@ -93,9 +94,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $this->getElement('view_in_store')->hasClass('disabled');
     }
 
-    public function showProductInChannel(string $channel): void
+    public function showProductInChannel(ChannelInterface $channel): void
     {
-        $this->getElement('view_in_store')->clickLink($channel);
+        $this->getElement('view_in_store_in_channel', ['%channel_code%' => $channel->getCode()])->click();
     }
 
     public function showProductInSingleChannel(): void
@@ -168,6 +169,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             'tracked' => '[name="sylius_admin_product[variant][tracked]"]',
             'view_in_store' => '[data-test-view-in-store]',
+            'view_in_store_in_channel' => '[data-test-view-in-store] [data-test-channel-code="%channel_code%"]',
         ]);
     }
 }

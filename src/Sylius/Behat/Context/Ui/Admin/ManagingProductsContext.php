@@ -208,7 +208,7 @@ final readonly class ManagingProductsContext implements Context
     /**
      * @When I choose to show this product in the :channel channel
      */
-    public function iChooseToShowThisProductInTheChannel(string $channel): void
+    public function iChooseToShowThisProductInTheChannel(ChannelInterface $channel): void
     {
         $this->updateSimpleProductPage->showProductInChannel($channel);
     }

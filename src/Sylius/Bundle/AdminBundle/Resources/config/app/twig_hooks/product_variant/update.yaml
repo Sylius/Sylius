@@ -10,6 +10,14 @@ twig_hooks:
             breadcrumbs:
                 template: '@SyliusAdmin/product_variant/form/content/update/header/breadcrumbs.html.twig'
 
+        'sylius_admin.product_variant.update.content.header.title_block.actions':
+            price_history:
+                template: '@SyliusAdmin/product_variant/form/content/update/header/actions/price_history.html.twig'
+            view_in_store:
+                component: 'sylius_admin:view_in_store'
+                props:
+                    product: '@=_context.resource.getProduct()'
+
         'sylius_admin.product_variant.update.content.form':
             side_navigation:
                 template: '@SyliusAdmin/product_variant/form/side_navigation.html.twig'
@@ -17,8 +25,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product_variant/form/sections.html.twig'
 
         'sylius_admin.product_variant.update.content.form.side_navigation':
-            details:
-                template: '@SyliusAdmin/product_variant/form/side_navigation/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product_variant/form/side_navigation/general.html.twig'
                 configuration:
                     active: true
             channel_pricing:
@@ -31,8 +39,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product_variant/form/side_navigation/taxes.html.twig'
 
         'sylius_admin.product_variant.update.content.form.sections':
-            details:
-                template: '@SyliusAdmin/product_variant/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product_variant/form/sections/general.html.twig'
             channel_pricing:
                 template: '@SyliusAdmin/product_variant/form/sections/channel_pricing.html.twig'
             inventory:

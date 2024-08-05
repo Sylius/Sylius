@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
 {% set currencies = sylius_channels_currencies() %}
 
@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12 col-md-4 fw-bold">{{ channel_code }}</div>
         <div class="col-12 col-md-8" {{ sylius_test_html_attribute(channel_code ~ '-amount') }}>
-            {{ _money.format(channel_configuration['amount'], currencies[channel_code]) }}
+            {{ money.format(channel_configuration['amount'], currencies[channel_code]) }}
         </div>
     </div>
 {% endfor %}

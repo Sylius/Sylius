@@ -1,8 +1,0 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
-
-<div class="row">
-    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.email'|trans }}</div>
-    <div class="col-12 col-md-8" {{ sylius_test_html_attribute('customer-email') }}>
-        <a href="mailto:{{ hookable_metadata.context.customer.email }}">{{ hookable_metadata.context.customer.email }}</a>
-    </div>
-</div>
