@@ -260,7 +260,7 @@ final class TaxonImagesTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'DELETE',
-            uri: sprintf('/api/v2/admin/taxons/%s/images/%s',$taxon->getCode(), $taxonImage->getId()),
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             server: $header,
         );
 
