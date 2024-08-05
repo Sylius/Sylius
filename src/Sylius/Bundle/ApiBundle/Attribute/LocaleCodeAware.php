@@ -16,7 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class LocaleCodeAware
 {
-    public function __construct(public string $constructorArgumentName = 'localeCode')
+    public const DEFAULT_ARGUMENT_NAME = 'localeCode';
+
+    public function __construct(public string $constructorArgumentName = self::DEFAULT_ARGUMENT_NAME)
     {
     }
 }

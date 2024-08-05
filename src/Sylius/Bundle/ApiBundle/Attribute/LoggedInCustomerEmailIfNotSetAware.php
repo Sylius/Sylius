@@ -16,7 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class LoggedInCustomerEmailIfNotSetAware
 {
-    public function __construct(public string $constructorArgumentName = 'email')
+    public const DEFAULT_ARGUMENT_NAME = 'email';
+
+    public function __construct(public string $constructorArgumentName = self::DEFAULT_ARGUMENT_NAME)
     {
     }
 }

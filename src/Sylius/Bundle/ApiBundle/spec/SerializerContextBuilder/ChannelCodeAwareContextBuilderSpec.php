@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -27,7 +28,12 @@ final class ChannelCodeAwareContextBuilderSpec extends ObjectBehavior
         SerializerContextBuilderInterface $decoratedContextBuilder,
         ChannelContextInterface $channelContext,
     ): void {
-        $this->beConstructedWith($decoratedContextBuilder, $channelContext);
+        $this->beConstructedWith(
+            $decoratedContextBuilder,
+            ChannelCodeAware::class,
+            'channelCode',
+            $channelContext
+        );
     }
 
     function it_sets_channel_code_as_a_constructor_argument(

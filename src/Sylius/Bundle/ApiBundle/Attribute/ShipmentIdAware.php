@@ -16,7 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class ShipmentIdAware
 {
-    public function __construct(public string $constructorArgumentName = 'shipmentId')
+    public const DEFAULT_ARGUMENT_NAME = 'shipmentId';
+
+    public function __construct(public string $constructorArgumentName = self::DEFAULT_ARGUMENT_NAME)
     {
     }
 }
