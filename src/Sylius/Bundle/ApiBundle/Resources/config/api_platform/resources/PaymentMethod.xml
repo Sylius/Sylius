@@ -38,10 +38,10 @@
                 </normalizationContext>
 
                 <filters>
-                    <filter>sylius.api.order_filter.admin.payment_method</filter>
-                    <filter>sylius_api.translation_order_and_locale_filter.admin.payment_method</filter>
-                    <filter>sylius.api.search_filter.admin.payment_method</filter>
-                    <filter>sylius.api.boolean_filter.admin.payment_method</filter>
+                    <filter>sylius_api.order_filter.admin.payment_method</filter>
+                    <filter>sylius_api.filter.translation_order_and_locale</filter>
+                    <filter>sylius_api.search_filter.admin.payment_method</filter>
+                    <filter>sylius_api.boolean_filter.admin.payment_method</filter>
                 </filters>
             </operation>
 
