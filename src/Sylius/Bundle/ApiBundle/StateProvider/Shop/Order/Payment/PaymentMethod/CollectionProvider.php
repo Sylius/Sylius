@@ -21,8 +21,10 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Webmozart\Assert\Assert;
@@ -32,6 +34,7 @@ final readonly class CollectionProvider implements ProviderInterface
 {
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
+        private OrderRepositoryInterface $orderRepository,
         private SectionProviderInterface $sectionProvider,
         private PaymentMethodsResolverInterface $paymentMethodsResolver,
     ) {
@@ -49,12 +52,15 @@ final readonly class CollectionProvider implements ProviderInterface
         /** @var ChannelInterface $channel */
         $channel = $context[ContextKeys::CHANNEL];
 
-        /** @var PaymentInterface|null $shipment */
-        $payment = $this->paymentRepository->findOneByOrderTokenAndChannel(
-            $uriVariables['paymentId'],
-            $uriVariables['tokenValue'],
-            $channel,
-        );
+        /** @var OrderInterface $cart */
+        $cart = $this->orderRepository->findCartByTokenValueAndChannel($uriVariables['tokenValue'], $channel);
+
+        if ($cart === null) {
+            return [];
+        }
+
+        /** @var PaymentInterface|null $payment */
+        $payment = $this->paymentRepository->findOneByOrderToken($uriVariables['paymentId'], $cart->getTokenValue());
 
         if ($payment === null) {
             return [];
