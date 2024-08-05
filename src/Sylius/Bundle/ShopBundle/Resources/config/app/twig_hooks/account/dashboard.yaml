@@ -1,0 +1,31 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.account.dashboard':
+            account_details:
+                template: '@SyliusShop/account/dashboard/account_details.html.twig'
+
+        'sylius_shop.account.dashboard.account_details':
+            user_info:
+                template: '@SyliusShop/account/dashboard/account_details/user_info.html.twig'
+            buttons:
+                template: '@SyliusShop/account/dashboard/account_details/buttons.html.twig'
+
+        'sylius_shop.account.dashboard.account_details.user_info':
+            account_status:
+                template: '@SyliusShop/account/dashboard/account_details/user_info/status.html.twig'
+            user_details:
+                template: '@SyliusShop/account/dashboard/account_details/user_info/details.html.twig'
+
+        'sylius_shop.account.dashboard.account_details.user_info.details':
+            full_name:
+                template: '@SyliusShop/account/dashboard/account_details/user_info/details/full_name.html.twig'
+            email:
+                template: '@SyliusShop/account/dashboard/account_details/user_info/details/email.html.twig'
+
+        'sylius_shop.account.dashboard.account_details.buttons':
+            edit:
+                template: '@SyliusShop/account/dashboard/account_details/buttons/edit.html.twig'
+            change_password:
+                template: '@SyliusShop/account/dashboard/account_details/buttons/change_password.html.twig'
+            verify:
+                template: '@SyliusShop/account/dashboard/account_details/buttons/verify.html.twig'

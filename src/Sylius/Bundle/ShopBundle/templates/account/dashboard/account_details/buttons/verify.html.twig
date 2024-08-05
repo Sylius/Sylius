@@ -1,0 +1,9 @@
+{% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
+
+{% if not hookable_metadata.context.customer.user.verified %}
+    <form {{ sylius_test_html_attribute('verification-form') }} action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">
+        <button class="btn btn-sm btn-icon btn-outline-gray text-primary" type="submit" {{ sylius_test_html_attribute('verification-button') }}>
+            {{ icon('check', 'width: 16px; height: 16px;') }} {{ 'sylius.ui.verify'|trans }}
+        </button>
+    </form>
+{% endif %}

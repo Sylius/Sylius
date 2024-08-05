@@ -1,0 +1,7 @@
+<div class="col-12 col-sm-auto mb-2 order-sm-1">
+    {% if hookable_metadata.context.customer.user.verified %}
+        <span class="badge text-bg-primary text-white">{{ 'sylius.ui.verified'|trans }}</span>
+    {% else %}
+        <span class="badge text-bg-danger">{{ 'sylius.ui.not_verified'|trans }}</span>
+    {% endif %}
+</div>
