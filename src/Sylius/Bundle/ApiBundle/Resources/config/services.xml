@@ -77,17 +77,6 @@
 <!--            <argument type="service" id="sylius.context.channel" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">-->
-<!--            <argument>%sylius.security.new_api_admin_route%</argument>-->
-<!--            <tag name="sylius.uri_based_section_resolver" priority="30" />-->
-<!--        </service>-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">-->
-<!--            <argument>%sylius.security.new_api_shop_route%</argument>-->
-<!--            <argument>orders</argument>-->
-<!--            <tag name="sylius.uri_based_section_resolver" priority="40" />-->
-<!--        </service>-->
-
 <!--        <service id="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">-->
 <!--            <argument type="service" id="sylius.context.cart" />-->
 <!--            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />-->
@@ -104,10 +93,12 @@
 <!--            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">-->
-<!--            <argument type="service" id="api_platform.router" />-->
-<!--            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />-->
-<!--        </service>-->
+        <service id="sylius_api.converter.iri_to_identifier" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
+            <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
+            <argument type="service" id="api_platform.uri_variables.converter" />
+        </service>
+        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" alias="sylius_api.converter.iri_to_identifier" />
 
 <!--        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />-->
 

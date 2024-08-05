@@ -55,9 +55,15 @@
     "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/shop\/product-reviews{?reviewSubject,reviewSubject[],order[createdAt]}",
+        "hydra:template": "\/api\/v2\/shop\/product-reviews{?order[createdAt],reviewSubject,reviewSubject[]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
+            },
             {
                 "@type": "IriTemplateMapping",
                 "variable": "reviewSubject",
@@ -68,12 +74,6 @@
                 "@type": "IriTemplateMapping",
                 "variable": "reviewSubject[]",
                 "property": "reviewSubject",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "order[createdAt]",
-                "property": "createdAt",
                 "required": false
             }
         ]

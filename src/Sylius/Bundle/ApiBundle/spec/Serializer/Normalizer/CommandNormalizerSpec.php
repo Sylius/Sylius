@@ -11,12 +11,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Serializer;
+namespace spec\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class CommandNormalizerSpec extends ObjectBehavior
@@ -28,7 +27,7 @@ final class CommandNormalizerSpec extends ObjectBehavior
 
     function it_implements_context_aware_normalizer_interface(): void
     {
-        $this->shouldImplement(ContextAwareNormalizerInterface::class);
+        $this->shouldImplement(NormalizerInterface::class);
     }
 
     function it_supports_normalization_if_data_has_get_class_method_and_it_is_missing_constructor_arguments_exception(): void

@@ -8,7 +8,7 @@ Feature: Product review validation
         Given the store operates on a single channel in "United States"
         And the store has a product "Necronomicon"
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a product review without specifying a rate
         When I want to review product "Necronomicon"
         And I leave a comment "This book made me sad, but plot was fine.", titled "Not good, not bad" as "bartholomew@heaven.com"
@@ -16,7 +16,7 @@ Feature: Product review validation
         And I try to add it
         Then I should be notified that I must check review rating
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a product review without specifying a title
         When I want to review product "Necronomicon"
         And I leave a comment "This book made me sad, but plot was fine." as "bartholomew@heaven.com"
@@ -24,7 +24,7 @@ Feature: Product review validation
         And I try to add it
         Then I should be notified that title is required
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a product review with too short title
         When I want to review product "Necronomicon"
         And I leave a comment "This book made me sad, but plot was fine.", titled "X" as "bartholomew@heaven.com"
@@ -32,7 +32,7 @@ Feature: Product review validation
         And I try to add it
         Then I should be notified that title must have at least 2 characters
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a product review with too long title
         When I want to review product "Necronomicon"
         And I leave a comment "This book made me sad, but plot was fine." as "bartholomew@heaven.com"
@@ -41,7 +41,7 @@ Feature: Product review validation
         And I try to add it
         Then I should be notified that title must have at most 255 characters
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a product review without specifying a comment
         When I want to review product "Necronomicon"
         And I leave a review titled "Not good, not bad" as "bartholomew@heaven.com"
@@ -49,7 +49,7 @@ Feature: Product review validation
         And I try to add it
         Then I should be notified that comment is required
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a product review without specifying an author email
         When I want to review product "Necronomicon"
         And I leave a comment "Not good, not bad", titled "Not good, not bad"
@@ -57,7 +57,7 @@ Feature: Product review validation
         And I try to add it
         Then I should be notified that I must enter my email
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a product review with specifying already registered author email
         Given there is a customer account "sam@winchester.com" identified by "familybusiness"
         When I want to review product "Necronomicon"

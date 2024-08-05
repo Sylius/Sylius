@@ -11,20 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
-use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInterface
+final class CommandArgumentsDenormalizer implements DenormalizerInterface
 {
     public function __construct(
         private DenormalizerInterface $commandDenormalizer,
         private IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        private DataTransformerInterface $commandAwareInputDataTransformer,
     ) {
     }
 
@@ -49,13 +46,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
             $data = $this->convertIrisToIdentifiers($data);
         }
 
-        $denormalizedCommand = $this->commandDenormalizer->denormalize($data, $inputClassName, $format, $context);
-
-        if ($this->commandAwareInputDataTransformer->supportsTransformation($denormalizedCommand, $type, $context)) {
-            return $this->commandAwareInputDataTransformer->transform($denormalizedCommand, $type, $context);
-        }
-
-        return $denormalizedCommand;
+        return $this->commandDenormalizer->denormalize($data, $inputClassName, $format, $context);
     }
 
     private function getInputClassName(array $context): ?string

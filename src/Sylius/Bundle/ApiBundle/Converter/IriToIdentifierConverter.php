@@ -13,30 +13,38 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Converter;
 
-use ApiPlatform\Core\DataProvider\OperationDataProviderTrait;
-use ApiPlatform\Core\Exception\InvalidArgumentException;
-use ApiPlatform\Core\Exception\InvalidIdentifierException;
-use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
-use ApiPlatform\Core\Util\AttributesExtractor;
+use ApiPlatform\Api\UriVariablesConverterInterface;
+use ApiPlatform\Metadata\CollectionOperationInterface;
+use ApiPlatform\Metadata\Exception\InvalidArgumentException;
+use ApiPlatform\Metadata\Exception\InvalidIdentifierException;
+use ApiPlatform\Metadata\Exception\RuntimeException;
+use ApiPlatform\Metadata\HttpOperation;
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
+use ApiPlatform\State\UriVariablesResolverTrait;
 use Sylius\Bundle\ApiBundle\Exception\NoRouteMatchesException;
 use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingExceptionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Logic of this class is based on ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter, This class provide `id` from path but it doesn't fetch object from database
+ * Logic of this class is based on {@see \ApiPlatform\Symfony\Routing\IriConverter}
+ * This class provides the identifier from path without retrieving the database object
+ *
+ * @internal
  */
 final class IriToIdentifierConverter implements IriToIdentifierConverterInterface
 {
-    use OperationDataProviderTrait;
+    use UriVariablesResolverTrait;
 
     public function __construct(
-        private RouterInterface $router,
-        IdentifierConverterInterface $identifierConverter,
+        private readonly RouterInterface $router,
+        private readonly ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory,
+        UriVariablesConverterInterface $uriVariablesConverter,
     ) {
-        $this->identifierConverter = $identifierConverter;
+        $this->uriVariablesConverter = $uriVariablesConverter;
     }
 
-    public function getIdentifier(?string $iri): ?string
+    public function getIdentifier(?string $iri, ?Operation $operation = null): ?string
     {
         if ($iri === null || $iri === '') {
             return null;
@@ -45,19 +53,31 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
         try {
             $parameters = $this->router->match($iri);
         } catch (RoutingExceptionInterface $e) {
-            throw new NoRouteMatchesException(sprintf('No route matches "%s".', $iri), (int) $e->getCode(), $e);
+            throw new NoRouteMatchesException(sprintf('No route matches "%s".', $iri), $e->getCode(), $e);
         }
 
-        if (!isset($parameters['_api_resource_class'])) {
+        if (!isset($parameters['_api_resource_class'], $parameters['_api_operation_name'])) {
             throw new InvalidArgumentException(sprintf('No resource associated to "%s".', $iri));
         }
 
-        $attributes = AttributesExtractor::extractAttributes($parameters);
+        if ($operation && !is_a($parameters['_api_resource_class'], $operation->getClass(), true)) {
+            throw new InvalidArgumentException(sprintf('The iri "%s" does not reference the correct resource.', $iri));
+        }
+
+        $operation = $operation ?? $this->createOperation($parameters);
+
+        if ($operation instanceof CollectionOperationInterface) {
+            throw new InvalidArgumentException(sprintf('The iri "%s" references a collection not an item.', $iri));
+        }
+
+        if (!$operation instanceof HttpOperation) {
+            throw new RuntimeException(sprintf('The iri "%s" does not reference an HTTP operation.', $iri));
+        }
 
         try {
-            $identifiers = $this->extractIdentifiers($parameters, $attributes);
+            $identifiers = $this->getOperationUriVariables($operation, $parameters, $parameters['_api_resource_class']);
         } catch (InvalidIdentifierException $e) {
-            throw new InvalidArgumentException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         if (count($identifiers) > 1) {
@@ -80,5 +100,10 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
         }
 
         return isset($parameters['_api_resource_class']);
+    }
+
+    private function createOperation(array $parameters): Operation
+    {
+        return $this->resourceMetadataCollectionFactory->create($parameters['_api_resource_class'])->getOperation($parameters['_api_operation_name']);
     }
 }

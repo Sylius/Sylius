@@ -11,9 +11,8 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Serializer;
+namespace spec\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
-use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
@@ -26,12 +25,10 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
     function let(
         DenormalizerInterface $commandDenormalizer,
         IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $this->beConstructedWith(
             $commandDenormalizer,
             $iriToIdentifierConverter,
-            $commandAwareInputDataTransformer,
         );
     }
 
@@ -65,10 +62,9 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
         ;
     }
 
-    function it_denormalizes_add_product_review_and_transforms_product_field_from_iri_to_code(
+    function it_denormalizes_add_product_review_and_converts_product_field_from_iri_to_code(
         DenormalizerInterface $commandDenormalizer,
         IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $context = ['input' => ['class' => AddProductReview::class]];
 
@@ -97,15 +93,6 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
             ->willReturn($addProductReview)
         ;
 
-        $commandAwareInputDataTransformer
-            ->supportsTransformation($addProductReview, AddProductReview::class, $context)
-            ->willReturn(false)
-        ;
-        $commandAwareInputDataTransformer
-            ->transform($addProductReview, AddProductReview::class, $context)
-            ->shouldNotBeCalled()
-        ;
-
         $this
             ->denormalize(
                 [
@@ -126,7 +113,6 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
     function it_denormalizes_a_command_with_an_array_of_iris(
         DenormalizerInterface $commandDenormalizer,
         IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $command = new class() implements IriToIdentifierConversionAwareInterface {
             public string $iri = '/api/v2/iri';
@@ -170,15 +156,6 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
                 $context,
             )
             ->willReturn($command)
-        ;
-
-        $commandAwareInputDataTransformer
-            ->supportsTransformation($command, $command::class, $context)
-            ->willReturn(false)
-        ;
-        $commandAwareInputDataTransformer
-            ->transform($command, $command::class, $context)
-            ->shouldNotBeCalled()
         ;
 
         $this

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Catalog;
 
-use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailIfNotSetAwareInterface;
 
-class AddProductReview implements IriToIdentifierConversionAwareInterface, CustomerEmailAwareInterface
+readonly class AddProductReview implements IriToIdentifierConversionAwareInterface, LoggedInCustomerEmailIfNotSetAwareInterface
 {
     public function __construct(
         public string $title,
@@ -30,10 +30,5 @@ class AddProductReview implements IriToIdentifierConversionAwareInterface, Custo
     public function getEmail(): ?string
     {
         return $this->email;
-    }
-
-    public function setEmail(?string $email): void
-    {
-        $this->email = $email;
     }
 }

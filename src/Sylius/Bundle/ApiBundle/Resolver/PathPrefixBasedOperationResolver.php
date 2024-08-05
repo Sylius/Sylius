@@ -16,9 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Resolver;
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 
-/** @experimental */
+/** @internal */
 final readonly class PathPrefixBasedOperationResolver implements OperationResolverInterface
 {
     public function __construct(private ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory)
@@ -27,7 +29,12 @@ final readonly class PathPrefixBasedOperationResolver implements OperationResolv
 
     public function resolve(string $resourceClass, ?string $pathPrefix, ?Operation $operation): ?Operation
     {
-        if ($operation !== null && $operation->getName() !== '') {
+        if (
+            $operation !== null &&
+            $operation->getName() !== '' &&
+            !$operation instanceof Patch &&
+            !$operation instanceof Put
+        ) {
             return $operation;
         }
 

@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Tests\Converter;
 
-use ApiPlatform\Core\Exception\InvalidArgumentException;
-use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
+use ApiPlatform\Api\UriVariablesConverterInterface;
+use ApiPlatform\Metadata\Exception\InvalidArgumentException;
+use ApiPlatform\Metadata\HttpOperation;
+use ApiPlatform\Metadata\IriConverterInterface;
+use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -22,24 +26,33 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException as SymfonyRouteNotFoundException;
+use Sylius\Bundle\ApiBundle\Exception\NoRouteMatchesException as ApiRouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
 final class IriToIdentifierConverterTest extends TestCase
 {
     use ProphecyTrait;
 
-    private ObjectProphecy|RouterInterface $router;
+    private RouterInterface|ObjectProphecy $router;
 
-    private IdentifierConverterInterface|ObjectProphecy $identifierConverter;
+    private ResourceMetadataCollectionFactoryInterface|ObjectProphecy $metadataFactory;
+
+    private UriVariablesConverterInterface|ObjectProphecy $uriVariablesConverter;
 
     private IriToIdentifierConverterInterface $converter;
 
     protected function setUp(): void
     {
         $this->router = $this->prophesize(RouterInterface::class);
-        $this->identifierConverter = $this->prophesize(IdentifierConverterInterface::class);
-        $this->converter = new IriToIdentifierConverter($this->router->reveal(), $this->identifierConverter->reveal());
+        $this->metadataFactory = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
+        $this->uriVariablesConverter = $this->prophesize(UriVariablesConverterInterface::class);
+
+        $this->converter = new IriToIdentifierConverter(
+            $this->router->reveal(),
+            $this->metadataFactory->reveal(),
+            $this->uriVariablesConverter->reveal(),
+        );
     }
 
     /**
@@ -57,7 +70,7 @@ final class IriToIdentifierConverterTest extends TestCase
     /** @test */
     public function it_treats_not_matched_strings_as_not_identifiers(): void
     {
-        $this->router->match('test')->willThrow(new RouteNotFoundException());
+        $this->router->match('test')->willThrow(new SymfonyRouteNotFoundException());
 
         $this->assertFalse($this->converter->isIdentifier('test'));
     }
@@ -83,10 +96,10 @@ final class IriToIdentifierConverterTest extends TestCase
     /** @test */
     public function it_throws_invalid_argument_exception_if_no_route_matches(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ApiRouteNotFoundException::class);
         $this->expectExceptionMessage('No route matches "/users/3".');
 
-        $this->router->match('/users/3')->willThrow(new RouteNotFoundException())->shouldBeCalledTimes(1);
+        $this->router->match('/users/3')->willThrow(new SymfonyRouteNotFoundException())->shouldBeCalledTimes(1);
 
         $this->converter->getIdentifier('/users/3');
     }
@@ -97,7 +110,22 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('No resource associated to "/users/3".');
 
-        $this->router->match('/users/3')->willReturn([])->shouldBeCalledTimes(1);
+        $this->router->match('/users/3')->willReturn([
+            '_api_operation_name' => 'get',
+        ])->shouldBeCalledTimes(1);
+
+        $this->converter->getIdentifier('/users/3');
+    }
+
+    /** @test */
+    public function it_throws_invalid_argument_exception_if_parameter_api_operation_name_does_not_exist(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('No resource associated to "/users/3".');
+
+        $this->router->match('/users/3')->willReturn([
+            '_api_resource_class' => AddProductReview::class,
+        ])->shouldBeCalledTimes(1);
 
         $this->converter->getIdentifier('/users/3');
     }
@@ -108,32 +136,51 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('IriToIdentifierConverter does not support subresources');
 
+        $operation = $this->prophesize(HttpOperation::class);
+        $operation->getClass()->willReturn(AddProductReview::class);
+        $operation->getUriVariables()->willReturn([
+            'id' => new Link('id', identifiers: ['id'], compositeIdentifier: true),
+            'nextId' => new Link('nextId', identifiers: ['nextId'], compositeIdentifier: true),
+        ]);
+
         $this->router->match('/users/3/nexts/5')->willReturn([
             '_api_resource_class' => AddProductReview::class,
-            '_api_item_operation_name' => 'get',
-            '_api_identifiers' => ['id', 'nextId'],
+            '_api_operation_name' => 'get',
             'id' => 3,
             'nextId' => 5,
         ])->shouldBeCalledTimes(1);
 
-        $this->identifierConverter->convert(['id' => 3, 'nextId' => 5], AddProductReview::class)->willReturn(['3', '5']);
+        $this->uriVariablesConverter->convert(
+            ['id' => 3, 'nextId' => 5],
+            AddProductReview::class,
+            Argument::cetera(),
+        )->willReturn(['3', '5']);
 
-        $this->assertSame('3', $this->converter->getIdentifier('/users/3/nexts/5'));
+        $this->converter->getIdentifier('/users/3/nexts/5', $operation->reveal());
     }
 
     /** @test */
     public function it_gets_identifier(): void
     {
+        $operation = $this->prophesize(HttpOperation::class);
+        $operation->getClass()->willReturn(AddProductReview::class);
+        $operation->getUriVariables()->willReturn([
+            'id' => new Link('id', identifiers: ['id'], compositeIdentifier: true),
+        ]);
+
         $this->router->match('/users/3')->willReturn([
             '_api_resource_class' => AddProductReview::class,
-            '_api_item_operation_name' => 'get',
-            '_api_identifiers' => ['id'],
+            '_api_operation_name' => 'get',
             'id' => 3,
         ])->shouldBeCalledTimes(1);
 
-        $this->identifierConverter->convert(['id' => 3], AddProductReview::class)->willReturn(['3']);
+        $this->uriVariablesConverter->convert(
+            ['id' => 3],
+            AddProductReview::class,
+            Argument::cetera(),
+        )->willReturn(['3']);
 
-        $this->assertSame('3', $this->converter->getIdentifier('/users/3'));
+        $this->assertSame('3', $this->converter->getIdentifier('/users/3', $operation->reveal()));
     }
 
     public function invalidIdentifierValues(): iterable

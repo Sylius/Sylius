@@ -64,7 +64,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_accepts_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::PATCH_CONTENT_TYPE_HEADER);
 
         /** @var ProductReviewerInterface $review */
         $review = $fixtures['new_review'];
@@ -86,7 +86,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_rejects_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::PATCH_CONTENT_TYPE_HEADER);
 
         /** @var ProductReviewerInterface $review */
         $review = $fixtures['new_review'];

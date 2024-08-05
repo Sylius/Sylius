@@ -17,18 +17,14 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\ProductReview">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
+            <!-- Admin Section -->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-reviews">
+                <order>
+                    <values>
+                        <value name="createdAt">DESC</value>
+                    </values>
+                </order>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -39,49 +35,9 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.product_review_status_filter</filter>
+                    <filter>sylius_api.order_filter.admin.product_review</filter>
+                    <filter>sylius_api.search_filter.admin.product_review</filter>
                 </filters>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/product-reviews">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:product_review:index</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-                <filters>
-                    <filter>sylius.api.product_review_product_filter</filter>
-                    <filter>sylius.api.product_review_date_filter</filter>
-                </filters>
-            </operation>
-
-            <operation
-                class="ApiPlatform\Metadata\Post"
-                uriTemplate="/shop/product-reviews"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview">
-                <denormalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:product_review:create</value>
-                            </values>
-                        </value>
-                    </values>
-                </denormalizationContext>
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:product_review:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-reviews/{id}">
@@ -90,18 +46,6 @@
                         <value name="groups">
                             <values>
                                 <value>sylius:admin:product_review:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-reviews/{id}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:product_review:show</value>
                             </values>
                         </value>
                     </values>
@@ -127,6 +71,15 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
             <operation
@@ -152,10 +105,10 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Patch"
-                uriTemplate="/admin/product-reviews/{id}/reject"
-                input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::reject"
+                    class="ApiPlatform\Metadata\Patch"
+                    uriTemplate="/admin/product-reviews/{id}/reject"
+                    input="false"
+                    controller="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::reject"
             >
                 <normalizationContext>
                     <values>
@@ -185,7 +138,70 @@
                 </denormalizationContext>
             </operation>
 
+            <!-- Shop Section -->
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/product-reviews">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_review:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.order_filter.shop.product_review</filter>
+                    <filter>sylius_api.search_filter.shop.product_review</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-reviews/{id}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_review:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                    class="ApiPlatform\Metadata\Post"
+                    uriTemplate="/shop/product-reviews"
+                    itemUriTemplate="/shop/product-reviews/{id}"
+                    messenger="input"
+                    input="Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_review:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_review:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
         </operations>
     </resource>
-
 </resources>
