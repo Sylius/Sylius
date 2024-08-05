@@ -19,6 +19,7 @@ use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,17 +72,11 @@ final readonly class ManagingTaxonImagesContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get('taxon');
 
+        /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $taxon->getImagesByType($type)->first();
         Assert::notFalse($taxonImage);
 
-        $builder = RequestBuilder::create(
-            sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
-            Request::METHOD_DELETE,
-        );
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
-        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
-
-        $this->client->request($builder->build());
+        $this->removeTaxonImage($taxon, $taxonImage);
     }
 
     /**
@@ -92,17 +87,11 @@ final readonly class ManagingTaxonImagesContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get('taxon');
 
+        /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $taxon->getImages()->first();
         Assert::notFalse($taxonImage);
 
-        $builder = RequestBuilder::create(
-            sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
-            Request::METHOD_DELETE,
-        );
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
-        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
-
-        $this->client->request($builder->build());
+        $this->removeTaxonImage($taxon, $taxonImage);
     }
 
     /**
@@ -182,5 +171,17 @@ final readonly class ManagingTaxonImagesContext implements Context
     public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon): void
     {
         $this->thisTaxonShouldHaveImages($taxon, 0);
+    }
+
+    private function removeTaxonImage(TaxonInterface $taxon, TaxonImageInterface $taxonImage): void
+    {
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
+            Request::METHOD_DELETE,
+        );
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 }

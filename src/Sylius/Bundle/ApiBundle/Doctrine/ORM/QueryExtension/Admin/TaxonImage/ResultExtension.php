@@ -18,22 +18,33 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Core\Model\TaxonImage;
+use Sylius\Component\Core\Model\TaxonImageInterface;
 
-final class TaxonImageExtension implements QueryResultItemExtensionInterface
+final class ResultExtension implements QueryResultItemExtensionInterface
 {
-    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, ?Operation $operation = null, array $context = []): void
-    {
+    public function applyToItem(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        array $identifiers,
+        ?Operation $operation = null,
+        array $context = [],
+    ): void {
     }
 
     /** @param array<array-key, mixed> $context */
     public function supportsResult(string $resourceClass, ?Operation $operation = null, array $context = []): bool
     {
-        return $operation instanceof Post && $resourceClass === TaxonImage::class;
+        return $operation instanceof Post && is_a($resourceClass, TaxonImageInterface::class, true);
     }
 
     /** @param array<array-key, mixed> $context */
-    public function getResult(QueryBuilder $queryBuilder, ?string $resourceClass = null, ?Operation $operation = null, array $context = []): ?object
+    public function getResult(
+        QueryBuilder $queryBuilder,
+        ?string $resourceClass = null,
+        ?Operation $operation = null,
+        array $context = [],
+    ): ?object
     {
         return $queryBuilder->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
