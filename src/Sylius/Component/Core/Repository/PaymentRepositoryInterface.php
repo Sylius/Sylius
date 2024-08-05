@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -28,11 +27,9 @@ interface PaymentRepositoryInterface extends RepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;
 
-    public function findOneByOrderId(string|int $paymentId, string|int $orderId): ?PaymentInterface;
+    public function findOneByOrderId(mixed $paymentId, mixed $orderId): ?PaymentInterface;
 
-    public function findOneByOrderTokenAndChannel(string|int $paymentId, string $tokenValue, ChannelInterface $channel): ?PaymentInterface;
+    public function findOneByOrderToken(mixed $paymentId, string $orderToken): ?PaymentInterface;
 
-    public function findOneByOrderToken(string|int $paymentId, string $orderToken): ?PaymentInterface;
-
-    public function findOneByCustomer(string|int $id, CustomerInterface $customer): ?PaymentInterface;
+    public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?PaymentInterface;
 }
