@@ -47,7 +47,7 @@
                 <filters>
                     <filter>sylius.api.search_filter.product.code</filter>
                     <filter>sylius.api.search_filter.taxon.code</filter>
-                    <filter>sylius.api.order_filter.position</filter>
+                    <filter>sylius_api.order_filter.product_taxon</filter>
                 </filters>
             </operation>
 

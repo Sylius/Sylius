@@ -100,6 +100,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius_api.order_filter.product_taxon" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="position" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.taxon_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
