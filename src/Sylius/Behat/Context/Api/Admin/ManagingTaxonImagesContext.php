@@ -74,7 +74,14 @@ final readonly class ManagingTaxonImagesContext implements Context
         $taxonImage = $taxon->getImagesByType($type)->first();
         Assert::notFalse($taxonImage);
 
-        $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
+            Request::METHOD_DELETE,
+        );
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 
     /**
@@ -88,7 +95,14 @@ final readonly class ManagingTaxonImagesContext implements Context
         $taxonImage = $taxon->getImages()->first();
         Assert::notFalse($taxonImage);
 
-        $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
+            Request::METHOD_DELETE,
+        );
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 
     /**
@@ -102,9 +116,15 @@ final readonly class ManagingTaxonImagesContext implements Context
         $taxonImage = $taxon->getImages()->first();
         Assert::notFalse($taxonImage);
 
-        $this->client->buildUpdateRequest(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
-        $this->client->updateRequestData(['type' => $type]);
-        $this->client->update();
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
+            Request::METHOD_PUT,
+        );
+        $builder->withContent(['type' => $type]);
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 
     /**
