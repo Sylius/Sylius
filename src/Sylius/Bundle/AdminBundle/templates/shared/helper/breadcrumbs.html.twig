@@ -1,13 +1,19 @@
-{% macro default(breadcrumbs) %}
+{% macro breadcrumbs(items) %}
     <ol class="breadcrumb" aria-label="breadcrumbs">
-        {% for breadcrumb in breadcrumbs %}
-            <li class="breadcrumb-item {{ breadcrumb.active ? "active" }}">
-                {% if breadcrumb.url is defined %}
-                    <a href="{{ breadcrumb.url }}">{{ breadcrumb.name|trans }}</a>
-                {% else %}
-                    {{ breadcrumb.name|trans }}
-                {% endif %}
-            </li>
+        {% for item in items %}
+            {% if item is not empty %}
+                {{ block('item') }}
+            {% endif %}
         {% endfor %}
     </ol>
 {% endmacro %}
+
+{% block item %}
+    <li class="breadcrumb-item {{ item.active is defined and item.active ? "active" }}">
+        {% if item.url is defined %}
+            <a href="{{ item.url }}">{{ item.name|trans }}</a>
+        {% else %}
+            {{ item.name|trans }}
+        {% endif %}
+    </li>
+{% endblock item %}

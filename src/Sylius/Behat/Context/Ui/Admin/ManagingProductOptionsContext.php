@@ -230,7 +230,7 @@ final readonly class ManagingProductOptionsContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->formElement->isCodeDisabled());
     }
 
     /**

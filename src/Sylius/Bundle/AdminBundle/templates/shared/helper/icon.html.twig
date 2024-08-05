@@ -16,369 +16,374 @@
          stroke="{{ stroke_color }}"
          fill="{{ fill }}"
          stroke-linecap="round"
-         stroke-linejoin="round">
-        {% if icon == 'search' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-            <path d="M21 21l-6 -6"></path>
-        {% endif %}
-
-        {% if icon == 'bell' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
-            <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
-        {% endif %}
-
-        {% if icon == 'dashboard' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 13m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-            <path d="M13.45 11.55l2.05 -2.05"></path>
-            <path d="M6.4 20a9 9 0 1 1 11.2 0z"></path>
-        {% endif %}
-
-        {% if icon == 'list-details' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M13 5h8"></path>
-            <path d="M13 9h5"></path>
-            <path d="M13 15h8"></path>
-            <path d="M13 19h5"></path>
-            <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
-            <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
-        {% endif %}
-
-        {% if icon == 'shopping-bag' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"></path>
-            <path d="M9 11v-5a3 3 0 0 1 6 0v5"></path>
-        {% endif %}
-
-        {% if icon == 'user' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-        {% endif %}
-
-        {% if icon == 'users' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
-            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-        {% endif %}
-
-        {% if icon == 'percentage' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M17 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-            <path d="M7 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-            <path d="M6 18l12 -12"></path>
-        {% endif %}
-
-        {% if icon == 'payment' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z"></path>
-            <path d="M3 10l18 0"></path>
-            <path d="M7 15l.01 0"></path>
-            <path d="M11 15l2 0"></path>
-        {% endif %}
-
-        {% if icon == 'adjustments' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-            <path d="M6 4v4"></path>
-            <path d="M6 12v8"></path>
-            <path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-            <path d="M12 4v10"></path>
-            <path d="M12 18v2"></path>
-            <path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-            <path d="M18 4v1"></path>
-            <path d="M18 9v11"></path>
-        {% endif %}
-
-        {% if icon == 'plus' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 5l0 14"></path>
-            <path d="M5 12l14 0"></path>
-        {% endif %}
-
-        {% if icon == 'chevron-up' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M6 15l6 -6l6 6"></path>
-        {% endif %}
-
-        {% if icon == 'chevron-down' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M6 9l6 6l6 -6"></path>
-        {% endif %}
-
-        {% if icon == 'chevron-left' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M15 6l-6 6l6 6"></path>
-        {% endif %}
-
-        {% if icon == 'chevron-right' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M9 6l6 6l-6 6"></path>
-        {% endif %}
-
-        {% if icon == 'pencil' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
-            <path d="M13.5 6.5l4 4"></path>
-        {% endif %}
-
-        {% if icon == 'eye' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-            <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path>
-        {% endif %}
-
-        {% if icon == 'trash-x' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M4 7h16"></path>
-            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-            <path d="M10 12l4 4m0 -4l-4 4"></path>
-        {% endif %}
-
-        {% if icon == 'arrow-up-right' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M17 7l-10 10"></path>
-            <path d="M8 7l9 0l0 9"></path>
-        {% endif %}
-
-        {% if icon == 'circle-check' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-            <path d="M9 12l2 2l4 -4"></path>
-        {% endif %}
-
-        {% if icon == 'info-circle' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
-            <path d="M12 9h.01"></path>
-            <path d="M11 12h1v4h1"></path>
-        {% endif %}
-
-        {% if icon == 'exclamation-circle' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-            <path d="M12 9v4"></path>
-            <path d="M12 16v.01"></path>
-        {% endif %}
-
-        {% if icon == 'check' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M5 12l5 5l10 -10"></path>
-        {% endif %}
-
-        {% if icon == 'x' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M18 6l-12 12"></path>
-            <path d="M6 6l12 12"></path>
-        {% endif %}
-
-        {% if icon == 'history' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 8l0 4l2 2"></path>
-            <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
-        {% endif %}
-
-        {% if icon == 'send' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M10 14l11 -11"></path>
-            <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
-        {% endif %}
-
-        {% if icon == 'spy' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M3 11h18"></path>
-            <path d="M5 11v-4a3 3 0 0 1 3 -3h8a3 3 0 0 1 3 3v4"></path>
-            <path d="M7 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-            <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-            <path d="M10 17h4"></path>
-        {% endif %}
-
-        {% if icon == 'coins' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z"></path>
-            <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4"></path>
-            <path d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z"></path>
-            <path d="M3 6v10c0 .888 .772 1.45 2 2"></path>
-            <path d="M3 11c0 .888 .772 1.45 2 2"></path>
-        {% endif %}
-
-        {% if icon == 'slash' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M17 5l-10 14"></path>
-        {% endif %}
-
-        {% if icon == 'external-link' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
-            <path d="M11 13l9 -9"></path>
-            <path d="M15 4h5v5"></path>
-        {% endif %}
-
-        {% if icon == 'logout' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
-            <path d="M9 12h12l-3 -3"></path>
-            <path d="M18 15l3 -3"></path>
-        {% endif %}
-
-        {% if icon == 'selector' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M8 9l4 -4l4 4"></path>
-            <path d="M16 15l-4 4l-4 -4"></path>
-        {% endif %}
-
-        {% if icon == 'danger' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <circle cx="12" cy="12" r="9"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        {% endif %}
-
-        {% if icon == 'warning' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 9v2m0 4v.01"></path>
-            <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
-        {% endif %}
-
-        {% if icon == 'info' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <circle cx="12" cy="12" r="9"></circle>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            <polyline points="11 12 12 12 12 16 13 16"></polyline>
-        {% endif %}
-
-        {% if icon == 'success' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M5 12l5 5l10 -10"></path>
-        {% endif %}
-
-        {% if icon == 'world' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
-            <path d="M3.6 9h16.8"></path>
-            <path d="M3.6 15h16.8"></path>
-            <path d="M11.5 3a17 17 0 0 0 0 18"></path>
-            <path d="M12.5 3a17 17 0 0 1 0 18"></path>
-        {% endif %}
-
-        {% if icon == 'cube' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M21 16.008v-8.018a1.98 1.98 0 0 0 -1 -1.717l-7 -4.008a2.016 2.016 0 0 0 -2 0l-7 4.008c-.619 .355 -1 1.01 -1 1.718v8.018c0 .709 .381 1.363 1 1.717l7 4.008a2.016 2.016 0 0 0 2 0l7 -4.008c.619 -.355 1 -1.01 1 -1.718z"></path>
-            <path d="M12 22v-10"></path>
-            <path d="M12 12l8.73 -5.04"></path>
-            <path d="M3.27 6.96l8.73 5.04"></path>
-        {% endif %}
-
-        {% if icon == 'arrows-shuffle' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M18 4l3 3l-3 3"></path>
-            <path d="M18 20l3 -3l-3 -3"></path>
-            <path d="M3 7h3a5 5 0 0 1 5 5a5 5 0 0 0 5 5h5"></path>
-            <path d="M21 7h-5a4.978 4.978 0 0 0 -3 1m-4 8a4.984 4.984 0 0 1 -3 1h-3"></path>
-        {% endif %}
-
-        {% if icon == 'arrows-split' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M21 17h-8l-3.5 -5h-6.5"></path>
-            <path d="M21 7h-8l-3.495 5"></path>
-            <path d="M18 10l3 -3l-3 -3"></path>
-            <path d="M18 20l3 -3l-3 -3"></path>
-        {% endif %}
-
-        {% if icon == 'arrow-back-up' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M9 14l-4 -4l4 -4"></path>
-            <path d="M5 10h11a4 4 0 1 1 0 8h-1"></path>
-        {% endif %}
-
-        {% if icon == 'arrow-back-up-double' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M13 14l-4 -4l4 -4"></path>
-            <path d="M8 14l-4 -4l4 -4"></path>
-            <path d="M9 10h7a4 4 0 1 1 0 8h-1"></path>
-        {% endif %}
-
-        {% if icon == 'arrow-left' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M5 12l14 0"></path>
-            <path d="M5 12l4 4"></path>
-            <path d="M5 12l4 -4"></path>
-        {% endif %}
-
-        {% if icon == 'arrow-right' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M5 12l14 0"></path>
-            <path d="M15 16l4 -4"></path>
-            <path d="M15 8l4 4"></path>
-        {% endif %}
-
-        {% if icon == 'archive' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
-            <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"></path>
-            <path d="M10 12l4 0"></path>
-        {% endif %}
-
-        {% if icon == 'list-letters' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M11 6h9"></path>
-            <path d="M11 12h9"></path>
-            <path d="M11 18h9"></path>
-            <path d="M4 10v-4.5a1.5 1.5 0 0 1 3 0v4.5"></path>
-            <path d="M4 8h3"></path>
-            <path d="M4 20h1.5a1.5 1.5 0 0 0 0 -3h-1.5h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6z"></path>
-        {% endif %}
-
-        {% if icon == 'dots' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
-            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
-            <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
-        {% endif %}
-
-        {% if icon == 'mail' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
-            <path d="M3 7l9 6l9 -6"></path>
-        {% endif %}
-
-        {% if icon == 'phone' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
-        {% endif %}
-
-        {% if icon == 'star' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" stroke-width="0" fill="currentColor"></path>
-        {% endif %}
-
-        {% if icon == 'wand' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M6 21l15 -15l-3 -3l-15 15l3 3" />
-            <path d="M15 6l3 3" />
-            <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
-            <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
-        {% endif %}
-
-        {% if icon == 'truck' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-            <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
-        {% endif %}
-
-        {% if icon == 'duplicate' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path stroke="none" d="M0 0h24v24H0z"></path>
-            <path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path>
-            <path d="M4.012 16.737a2 2 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
-            <path d="M11 14h6"></path>
-            <path d="M14 11v6"></path>
-        {% endif %}
+         stroke-linejoin="round"
+    >
+        {%- if block(icon) is defined -%}
+            {{- block(icon) -}}
+        {%- endif -%}
     </svg>
 {% endmacro %}
+
+{% block search %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+    <path d="M21 21l-6 -6"></path>
+{% endblock %}
+
+{% block bell %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
+    <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+{% endblock %}
+
+{% block dashboard %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 13m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+    <path d="M13.45 11.55l2.05 -2.05"></path>
+    <path d="M6.4 20a9 9 0 1 1 11.2 0z"></path>
+{% endblock %}
+
+{% block list_details %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M13 5h8"></path>
+    <path d="M13 9h5"></path>
+    <path d="M13 15h8"></path>
+    <path d="M13 19h5"></path>
+    <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
+    <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
+{% endblock %}
+
+{% block shopping_bag %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"></path>
+    <path d="M9 11v-5a3 3 0 0 1 6 0v5"></path>
+{% endblock %}
+
+{% block user %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+{% endblock %}
+
+{% block users %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+{% endblock %}
+
+{% block percentage %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M17 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+    <path d="M7 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+    <path d="M6 18l12 -12"></path>
+{% endblock %}
+
+{% block payment %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z"></path>
+    <path d="M3 10l18 0"></path>
+    <path d="M7 15l.01 0"></path>
+    <path d="M11 15l2 0"></path>
+{% endblock %}
+
+{% block adjustments %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+    <path d="M6 4v4"></path>
+    <path d="M6 12v8"></path>
+    <path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+    <path d="M12 4v10"></path>
+    <path d="M12 18v2"></path>
+    <path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+    <path d="M18 4v1"></path>
+    <path d="M18 9v11"></path>
+{% endblock %}
+
+{% block plus %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 5l0 14"></path>
+    <path d="M5 12l14 0"></path>
+{% endblock %}
+
+{% block chevron_up %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M6 15l6 -6l6 6"></path>
+{% endblock %}
+
+{% block chevron_down %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M6 9l6 6l6 -6"></path>
+{% endblock %}
+
+{% block chevron_left %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M15 6l-6 6l6 6"></path>
+{% endblock %}
+
+{% block chevron_right %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M9 6l6 6l-6 6"></path>
+{% endblock %}
+
+{% block pencil %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+    <path d="M13.5 6.5l4 4"></path>
+{% endblock %}
+
+{% block eye %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+    <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path>
+{% endblock %}
+
+{% block trash_x %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M4 7h16"></path>
+    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+    <path d="M10 12l4 4m0 -4l-4 4"></path>
+{% endblock %}
+
+{% block arrow_up_right %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M17 7l-10 10"></path>
+    <path d="M8 7l9 0l0 9"></path>
+{% endblock %}
+
+{% block circle_check %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+{% endblock %}
+
+{% block info_circle %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+    <path d="M12 9h.01"></path>
+    <path d="M11 12h1v4h1"></path>
+{% endblock %}
+
+{% block exclamation_circle %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M12 9v4"></path>
+    <path d="M12 16v.01"></path>
+{% endblock %}
+
+{% block check %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 12l5 5l10 -10"></path>
+{% endblock %}
+
+{% block x %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M18 6l-12 12"></path>
+    <path d="M6 6l12 12"></path>
+{% endblock %}
+
+{% block history %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 8l0 4l2 2"></path>
+    <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
+{% endblock %}
+
+{% block send %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M10 14l11 -11"></path>
+    <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
+{% endblock %}
+
+{% block spy %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M3 11h18"></path>
+    <path d="M5 11v-4a3 3 0 0 1 3 -3h8a3 3 0 0 1 3 3v4"></path>
+    <path d="M7 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+    <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+    <path d="M10 17h4"></path>
+{% endblock %}
+
+{% block coins %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z"></path>
+    <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4"></path>
+    <path d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z"></path>
+    <path d="M3 6v10c0 .888 .772 1.45 2 2"></path>
+    <path d="M3 11c0 .888 .772 1.45 2 2"></path>
+{% endblock %}
+
+{% block slash %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M17 5l-10 14"></path>
+{% endblock %}
+
+{% block external_link %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
+    <path d="M11 13l9 -9"></path>
+    <path d="M15 4h5v5"></path>
+{% endblock %}
+
+{% block logout %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+    <path d="M9 12h12l-3 -3"></path>
+    <path d="M18 15l3 -3"></path>
+{% endblock %}
+
+{% block selector %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M8 9l4 -4l4 4"></path>
+    <path d="M16 15l-4 4l-4 -4"></path>
+{% endblock %}
+
+{% block danger %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <circle cx="12" cy="12" r="9"></circle>
+    <line x1="12" y1="8" x2="12" y2="12"></line>
+    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+{% endblock %}
+
+{% block warning %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 9v2m0 4v.01"></path>
+    <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+{% endblock %}
+
+{% block info %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <circle cx="12" cy="12" r="9"></circle>
+    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    <polyline points="11 12 12 12 12 16 13 16"></polyline>
+{% endblock %}
+
+{% block success %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 12l5 5l10 -10"></path>
+{% endblock %}
+
+{% block world %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+    <path d="M3.6 9h16.8"></path>
+    <path d="M3.6 15h16.8"></path>
+    <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+    <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+{% endblock %}
+
+{% block cube %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M21 16.008v-8.018a1.98 1.98 0 0 0 -1 -1.717l-7 -4.008a2.016 2.016 0 0 0 -2 0l-7 4.008c-.619 .355 -1 1.01 -1 1.718v8.018c0 .709 .381 1.363 1 1.717l7 4.008a2.016 2.016 0 0 0 2 0l7 -4.008c.619 -.355 1 -1.01 1 -1.718z"></path>
+    <path d="M12 22v-10"></path>
+    <path d="M12 12l8.73 -5.04"></path>
+    <path d="M3.27 6.96l8.73 5.04"></path>
+{% endblock %}
+
+{% block arrows_shuffle %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M18 4l3 3l-3 3"></path>
+    <path d="M18 20l3 -3l-3 -3"></path>
+    <path d="M3 7h3a5 5 0 0 1 5 5a5 5 0 0 0 5 5h5"></path>
+    <path d="M21 7h-5a4.978 4.978 0 0 0 -3 1m-4 8a4.984 4.984 0 0 1 -3 1h-3"></path>
+{% endblock %}
+
+{% block arrows_split %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M21 17h-8l-3.5 -5h-6.5"></path>
+    <path d="M21 7h-8l-3.495 5"></path>
+    <path d="M18 10l3 -3l-3 -3"></path>
+    <path d="M18 20l3 -3l-3 -3"></path>
+{% endblock %}
+
+{% block arrow_back_up %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M9 14l-4 -4l4 -4"></path>
+    <path d="M5 10h11a4 4 0 1 1 0 8h-1"></path>
+{% endblock %}
+
+{% block arrow_back_up_double %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M13 14l-4 -4l4 -4"></path>
+    <path d="M8 14l-4 -4l4 -4"></path>
+    <path d="M9 10h7a4 4 0 1 1 0 8h-1"></path>
+{% endblock %}
+
+{% block arrow_left %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 12l14 0"></path>
+    <path d="M5 12l4 4"></path>
+    <path d="M5 12l4 -4"></path>
+{% endblock %}
+
+{% block arrow_right %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 12l14 0"></path>
+    <path d="M15 16l4 -4"></path>
+    <path d="M15 8l4 4"></path>
+{% endblock %}
+
+{% block archive %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
+    <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"></path>
+    <path d="M10 12l4 0"></path>
+{% endblock %}
+
+{% block list_letters %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M11 6h9"></path>
+    <path d="M11 12h9"></path>
+    <path d="M11 18h9"></path>
+    <path d="M4 10v-4.5a1.5 1.5 0 0 1 3 0v4.5"></path>
+    <path d="M4 8h3"></path>
+    <path d="M4 20h1.5a1.5 1.5 0 0 0 0 -3h-1.5h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6z"></path>
+{% endblock %}
+
+{% block dots %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
+    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
+    <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
+{% endblock %}
+
+{% block mail %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+    <path d="M3 7l9 6l9 -6"></path>
+{% endblock %}
+
+{% block phone %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+{% endblock %}
+
+{% block star %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" stroke-width="0" fill="currentColor"></path>
+{% endblock %}
+
+{% block wand %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M6 21l15 -15l-3 -3l-15 15l3 3"></path>
+    <path d="M15 6l3 3"></path>
+    <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+    <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+{% endblock %}
+
+{% block truck %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+    <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+    <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"></path>
+{% endblock %}
+
+{% block duplicate %}
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path stroke="none" d="M0 0h24v24H0z"></path>
+    <path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path>
+    <path d="M4.012 16.737a2 2 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+    <path d="M11 14h6"></path>
+    <path d="M14 11v6"></path>
+{% endblock %}

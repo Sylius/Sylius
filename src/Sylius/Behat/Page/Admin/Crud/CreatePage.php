@@ -28,7 +28,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private string $routeName,
+        private readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -41,9 +41,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         $this->getDocument()->pressButton('Create');
     }
 
-    public function getValidationMessage(string $element): string
+    public function getValidationMessage(string $element, array $parameters = []): string
     {
-        $foundElement = $this->getFieldElement($element);
+        $foundElement = $this->getFieldElement($element, $parameters);
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
@@ -61,17 +61,25 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         return $this->routeName;
     }
 
+    public function cancelChanges(): void
+    {
+        $this->getElement('cancel_button')->click();
+    }
+
     public function getMessageInvalidForm(): string
     {
         return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function getDefinedElements(): array
     {
-        return array_merge(
-            parent::getDefinedElements(),
-            ['form' => 'form'],
-        );
+        return array_merge(parent::getDefinedElements(), [
+            'form' => 'form',
+            'cancel_button' => '[data-test-cancel-changes-button]',
+        ]);
     }
 
     protected function waitForFormUpdate(): void
@@ -104,9 +112,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?NodeElement
+    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }

@@ -7,7 +7,6 @@ Feature: Accessing the variants management from the product edit page
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Audi" configurable product
-        And this product has option "Model" with values "RS6" and "RS7"
         And I am logged in as an administrator
 
     @no-api @ui
@@ -24,6 +23,12 @@ Feature: Accessing the variants management from the product edit page
 
     @no-api @ui
     Scenario: Being able to access the variant generation page
+        Given this product has option "Model" with values "RS6" and "RS7"
         When I modify the "Audi" product
         And I go to the variant generation page
         Then I should be on the variant generation page for this product
+
+    @no-api @ui
+    Scenario: Being unable to go to the generate variants page for a product without options
+        When I want to modify the "Audi" product
+        Then I should not be able to go to the generate variants page

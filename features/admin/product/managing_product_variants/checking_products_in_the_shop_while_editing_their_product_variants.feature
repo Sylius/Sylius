@@ -10,22 +10,22 @@ In order to check a product in shop in all channels it is available in
         And the store has a product "Bugatti" available in "United States" channel
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Accessing product show page in shop from the product variant edit page where product is available in more than one channel
         Given this product is also available in the "Europe" channel
         And this product has "Red" variant priced at "$220,000.00" in "Europe" channel
         When I want to modify the "Bugatti" product variant
-        And I choose to show this product in the "Europe" channel
+        And I choose to show this product in the channel "Europe"
         Then I should see this product in the "Europe" channel in the shop
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Accessing product show page in shop from the product variant edit page where product is available in one channel
         Given this product has "Red" variant priced at "$220,000.00" in "United States" channel
         When I want to modify the "Bugatti" product variant
         And I choose to show this product in this channel
         Then I should see this product in the "United States" channel in the shop
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Being unable to access product show page in shop when the product is disabled
         Given this product has been disabled
         When I want to modify the "Bugatti" product variant

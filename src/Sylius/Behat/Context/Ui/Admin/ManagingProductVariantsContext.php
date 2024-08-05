@@ -277,11 +277,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I choose to show this product in the :channelName channel
+     * @When /^I choose to show this product in the (channel "([^"]+)")$/
      */
-    public function iChooseToShowThisProductInTheChannel(string $channelName): void
+    public function iChooseToShowThisProductInTheChannel(ChannelInterface $channel): void
     {
-        $this->updatePage->showProductInChannel($channelName);
+        $this->updatePage->showProductInChannel($channel);
     }
 
     /**
@@ -402,6 +402,30 @@ final class ManagingProductVariantsContext implements Context
     public function iChangeItsPriceToForChannel(int $price, ChannelInterface $channel): void
     {
         $this->updatePage->specifyPrice($price, $channel);
+    }
+
+    /**
+     * @When I want to see the list of variants of the :product product
+     */
+    public function iWantToSeeTheListOfVariantsOfTheProduct(ProductInterface $product): void
+    {
+        $this->indexPage->open(['productId' => $product->getId()]);
+    }
+
+    /**
+     * @When I go to generate variants page
+     */
+    public function iGoToGenerateVariantsPage(): void
+    {
+        $this->indexPage->goToVariantGeneration();
+    }
+
+    /**
+     * @Then I should be on the :product product generate variants page
+     */
+    public function iShouldBeOnTheProductGenerateVariantsPage(ProductInterface $product): void
+    {
+        $this->generatePage->verify(['productId' => $product->getId()]);
     }
 
     /**
@@ -557,19 +581,21 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
     {
         Assert::same(
-            $this->generatePage->getValidationMessage('code', $position - 1),
+            $this->generatePage->getValidationMessage('code', ['%position%' => $position - 1]),
             'Please enter the code.',
         );
     }
 
     /**
-     * @Then /^I should be notified that prices in all channels must be defined for the (\d)(?:st|nd|rd|th) variant$/
+     * @Then /^I should be notified that price for the (\d+)(?:|st|nd|rd|th) variant in ("([^"]+)" channel) must be defined$/
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position): void
-    {
+    public function iShouldBeNotifiedThatPriceForTheVariantInChannelMustBeDefined(
+        int $position,
+        ChannelInterface $channel,
+    ): void {
         Assert::same(
-            $this->generatePage->getValidationMessage('channel_pricings', $position - 1),
-            'You must define price for every enabled channel.',
+            $this->generatePage->getValidationMessage('price', ['%channel_code%' => $channel->getCode(), '%position%' => $position - 1]),
+            'You must define price.',
         );
     }
 
@@ -579,19 +605,19 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatVariantCodeMustBeUniqueWithinThisProductForYheVariant($position)
     {
         Assert::same(
-            $this->generatePage->getValidationMessage('code', $position - 1),
+            $this->generatePage->getValidationMessage('code', ['%position%' => $position - 1]),
             'This code must be unique within this product.',
         );
     }
 
     /**
-     * @Then I should be notified that prices in all channels must be defined
+     * @Then I should be notified that prices in :channel channel must be defined
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined()
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined(ChannelInterface $channel): void
     {
         Assert::contains(
-            $this->createPage->getPricesValidationMessage(),
-            'You must define price for every enabled channel.',
+            $this->createPage->getValidationMessage('price', ['%channel_code%' => $channel->getCode()]),
+            'You must define price',
         );
     }
 
@@ -765,6 +791,14 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeAbleToRemove(int $nthVariant): void
     {
         Assert::true($this->generatePage->isProductVariantRemovable($nthVariant - 1));
+    }
+
+    /**
+     * @Then I should not be able to go to the generate variants page
+     */
+    public function iShouldNotBeAbleToGoToTheGenerateVariantsPage(): void
+    {
+        Assert::false($this->indexPage->hasGenerateVariantsButton(), 'Generate variants button should not be visible');
     }
 
     /**

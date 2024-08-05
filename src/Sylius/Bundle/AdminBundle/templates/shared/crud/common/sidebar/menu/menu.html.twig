@@ -95,7 +95,7 @@
     {% set is_active = matcher.isCurrent(item) %}
 
     <a class="dropdown-item {{ is_active ? '' : 'text-muted' }} {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
-        {{ item.label|trans }}{% if target == '_blank' %}{{ icon({ icon: 'external-link', class: 'icon icon-tabler icon-sm ms-1 mb-2 opacity-75' }) }}{% endif %}
+        {{ item.label|trans }}{% if target == '_blank' %}{{ icon({ icon: 'external_link', class: 'icon icon-tabler icon-sm ms-1 mb-2 opacity-75' }) }}{% endif %}
     </a>
 {% endblock %}
 

@@ -1,6 +1,6 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as _button %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 
-{{ _button.primary(
+{{ button.primary(
     sylius_test_form_attribute('update-changes-button')|merge({
         text: 'sylius.ui.update'|trans,
         type: 'submit',

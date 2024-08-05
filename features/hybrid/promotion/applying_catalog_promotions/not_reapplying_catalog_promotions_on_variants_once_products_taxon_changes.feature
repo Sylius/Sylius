@@ -16,14 +16,14 @@ Feature: Not reapplying catalog promotions on variants once the product’s taxo
         And there is disabled catalog promotion "Surprise sale" between "2021-07-01" and "2022-05-04" available in "Web-US" channel that reduces price by "90%" and applies on "Dishes" taxon
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui @mink:chromedriver
     Scenario: Changing products taxon to taxon with scheduled catalog promotion
         When I change that the "T-Shirt" product does not belong to the "Clothes" taxon
         And I add "Shirts" taxon to the "T-Shirt" product
         Then the visitor should see that the "PHP T-Shirt" variant is not discounted
         And the visitor should still see "$100.00" as the price of the "T-Shirt" product in the "Web-US" channel
 
-    @api @todo @ui
+    @api @ui @mink:chromedriver
     Scenario: Changing products taxon to taxon with disabled catalog promotion
         When I change that the "T-Shirt" product does not belong to the "Clothes" taxon
         And I add "Dishes" taxon to the "T-Shirt" product

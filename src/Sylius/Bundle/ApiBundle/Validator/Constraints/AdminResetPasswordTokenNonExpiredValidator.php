@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;

@@ -5,10 +5,7 @@
     "baseCurrency": "\/api\/v2\/shop\/currencies\/USD",
     "defaultLocale": "\/api\/v2\/shop\/locales\/en_US",
     "currencies": [],
-    "locales": [
-        "\/api\/v2\/shop\/locales\/en_US",
-        "\/api\/v2\/shop\/locales\/pl_PL"
-    ],
+    "locales": "@array@.inArray(\"/api\/v2\/shop\/locales\/en_US\").inArray(\"\/api\/v2\/shop\/locales\/pl_PL\")",
     "code": "WEB",
     "name": "Web Channel"
 }

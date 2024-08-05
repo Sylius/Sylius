@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 {% set admin_user = hookable_metadata.context.resource %}
 
@@ -25,7 +25,7 @@
                 class="btn btn-danger"
                 {{ sylius_test_html_attribute('delete-avatar-button') }}
             >
-                {{ _icon({'icon': 'trash-x'}) }} {{ 'sylius.ui.delete_avatar'|trans }}
+                {{ icon({'icon': 'trash_x'}) }} {{ 'sylius.ui.delete_avatar'|trans }}
             </button>
         {% endif %}
     </div>

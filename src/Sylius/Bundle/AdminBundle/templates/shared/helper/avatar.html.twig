@@ -9,6 +9,5 @@
 {% endmacro %}
 
 {% macro small(img, class) %}
-    {% import _self as _ %}
-    {{ _.default(img,  'avatar-sm ' ~ class) }}
+    {{ _self.default(img,  'avatar-sm ' ~ class) }}
 {% endmacro %}

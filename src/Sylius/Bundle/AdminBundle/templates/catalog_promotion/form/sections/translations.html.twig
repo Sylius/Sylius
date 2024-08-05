@@ -1,5 +1,12 @@
-{% import '@SyliusAdmin/shared/helper/translations.html.twig' as _translations %}
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
 
-<div class="bg-white mb-3">
-    {{ _translations.default(hookable_metadata.context.form.translations, null, { accordion_id: 'catalog-promotion-translations'}) }}
+{% set form = hookable_metadata.context.form %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.translations'|trans }}
+        </div>
+    </div>
+    {{ translations.default(form.translations, null, { accordion_id: 'catalog-promotion-translations'}) }}
 </div>

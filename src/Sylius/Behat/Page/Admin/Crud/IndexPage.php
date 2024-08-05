@@ -27,8 +27,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor,
-        private string $routeName,
+        private readonly TableAccessorInterface $tableAccessor,
+        private readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -165,6 +165,16 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->routeName;
     }
 
+    public function goToPage(int $page): void
+    {
+        $this->getElement('page_button', ['%page%' => $page])->click();
+    }
+
+    public function getPageNumber(): int
+    {
+        return (int) $this->getElement('current_page')->getText();
+    }
+
     protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
@@ -200,10 +210,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
             'bulk_delete_confirm_button' => '[data-test-modal="bulk-delete"] [data-test-confirm-button]',
-            'enabled_filter' => '#criteria_enabled',
+            'current_page' => '[data-test-current-page]',
+            'enabled_filter' => '[data-test-criterion-enabled]',
             'filter' => '[data-test-filter]',
             'filters_form' => '[data-test-filters-form]',
             'filters_toggle' => '.accordion-button',
+            'page_button' => '[data-test-page="%page%"]',
             'table' => '.table',
         ]);
     }

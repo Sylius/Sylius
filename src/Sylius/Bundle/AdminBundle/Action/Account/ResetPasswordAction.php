@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Action\Account;
 
 use Sylius\Bundle\AdminBundle\Form\Model\PasswordReset;
 use Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType;
-use Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcherInterface;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ResetPasswordDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

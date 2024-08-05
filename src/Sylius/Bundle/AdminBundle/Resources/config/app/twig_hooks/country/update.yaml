@@ -14,13 +14,13 @@ twig_hooks:
                 template: '@SyliusAdmin/country/form/sections.html.twig'
         
         'sylius_admin.country.update.content.form.sections':
-            details:
-                template: '@SyliusAdmin/country/form/sections/details.html.twig'
-            provinces:
-                template: '@SyliusAdmin/country/form/sections/provinces.html.twig'
+            general:
+                template: '@SyliusAdmin/country/form/sections/general.html.twig'            
         
-        'sylius_admin.country.update.content.form.sections.details':
+        'sylius_admin.country.update.content.form.sections.general':
             code:
-                template: '@SyliusAdmin/country/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/country/form/sections/general/code.html.twig'
             enabled:
-                template: '@SyliusAdmin/country/form/sections/details/enabled.html.twig'
+                template: '@SyliusAdmin/country/form/sections/general/enabled.html.twig'
+            provinces:
+                template: '@SyliusAdmin/country/form/sections/general/provinces.html.twig'

@@ -31,7 +31,7 @@ Feature: Adding product with prices for multiple channels
         And I make it available in channel "Web-US"
         And I set its slug to "dice-brewing"
         And I add it
-        Then I should be notified that price must be defined for every channel
+        Then I should be notified that price must be defined for "Web-US" channel
 
     @no-api @ui
     Scenario: Require prices only for chosen channels
@@ -55,7 +55,7 @@ Feature: Adding product with prices for multiple channels
         And I set its price to "$10.00" for "Web-US" channel
         And I set its slug to "dice-brewing"
         And I add it
-        Then I should be notified that price must be defined for every channel
+        Then I should be notified that price must be defined for "Web-GB" channel
 
     @no-api @ui
     Scenario: Do not specify price while adding a new simple product

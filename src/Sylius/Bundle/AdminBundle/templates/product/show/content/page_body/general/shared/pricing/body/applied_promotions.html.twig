@@ -1,0 +1,18 @@
+{% set channel_pricing = hookable_metadata.context.channel_pricing %}
+
+<td class="text-end">
+    {% if channel_pricing.appliedPromotions|length > 0 %}
+        <div class="row">
+            {% for promotion in channel_pricing.appliedPromotions %}
+                <a class="mb-1 applied-promotion"
+                    {{ sylius_test_html_attribute('applied-promotion') }}
+                   href="{{ path('sylius_admin_catalog_promotion_show', {'id': promotion.id}) }}"
+                >
+                    {{ promotion.name }}
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        -
+    {% endif %}
+</td>

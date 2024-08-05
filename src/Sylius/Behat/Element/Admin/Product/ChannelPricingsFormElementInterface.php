@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-interface ChannelPricingsFormElementInterface
+interface ChannelPricingsFormElementInterface extends BaseFormElementInterface
 {
     public function specifyPrice(ChannelInterface $channel, string $price): void;
 
@@ -26,6 +27,4 @@ interface ChannelPricingsFormElementInterface
     public function getOriginalPriceForChannel(ChannelInterface $channel): string;
 
     public function hasNoPriceForChannel(string $channelName): bool;
-
-    public function getChannelPricingValidationMessage(): string;
 }

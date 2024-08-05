@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Action;
 
-use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ResendOrderConfirmationEmailDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;

@@ -149,7 +149,8 @@ sylius:
             min: Depth cannot be negative.
             invalid: Depth must be a number.
         channel_pricing:
-            all_defined: 'You must define price for every enabled channel.'
+            price:
+                not_defined: 'You must define price.'
             existing_code: Channel with code {{ channelCode }} does not exist.
     promotion_coupon:
         per_customer_usage_limit:

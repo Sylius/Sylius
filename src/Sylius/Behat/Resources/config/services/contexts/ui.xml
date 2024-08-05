@@ -108,8 +108,8 @@
         <service id="sylius.behat.context.ui.admin.managing_customer_groups" class="Sylius\Behat\Context\Ui\Admin\ManagingCustomerGroupsContext">
             <argument type="service" id="sylius.behat.page.admin.customer_group.create" />
             <argument type="service" id="sylius.behat.page.admin.customer_group.index" />
-            <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.page.admin.customer_group.update" />
+            <argument type="service" id="sylius.behat.element.admin.customer_group.form" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_exchange_rates" class="Sylius\Behat\Context\Ui\Admin\ManagingExchangeRatesContext">
@@ -239,6 +239,7 @@
         </service>
 
         <service id="Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext">
+            <argument type="service" id="sylius.behat.page.admin.product.update_simple" />
             <argument type="service" id="sylius.behat.element.admin.product.taxonomy_form" />
         </service>
 
@@ -591,11 +592,14 @@
         </service>
 
         <service
-            id="sylius.behat.context.ui.admin.move_to_edit_product_page"
-            class="Sylius\Behat\Context\Ui\Admin\AccessingEditPageFromProductShowPageContext"
+            id="sylius.behat.context.ui.admin.navigating_between_product_show_and_edit_pages_context"
+            class="Sylius\Behat\Context\Ui\Admin\NavigatingBetweenProductShowAndEditPagesContext"
         >
             <argument type="service" id="sylius.behat.page.admin.product.update_simple" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
+            <argument type="service" id="sylius.behat.page.admin.product.show_page" />
+            <argument type="service" id="sylius.behat.page.admin.product.create_simple" />
+            <argument type="service" id="sylius.behat.page.admin.product.create_configurable" />
         </service>
 
         <service id="Sylius\Behat\Context\Ui\Admin\ProductCreationContext">

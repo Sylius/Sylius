@@ -83,3 +83,7 @@ sylius_grid:
                             link:
                                 parameters:
                                     productId: $productId
+                subitem:
+                    price_history:
+                        type: price_history
+                        label: sylius.ui.price_history
