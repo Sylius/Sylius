@@ -43,6 +43,10 @@
 
         * `sylius.mongodb_odm.repository.class`
         * `sylius.phpcr_odm.repository.class`
+    
+    * The following parameters were renamed:
+
+        * `sylius.message.admin_user_create.validation_groups` to `sylius_admin.command_handler.create_admin_user.validation_groups`
 
     * The following configuration options were removed:
 
