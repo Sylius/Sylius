@@ -17,16 +17,6 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Product\Model\ProductAttribute">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <order>
             <values>
                 <value name="position">ASC</value>
@@ -44,12 +34,25 @@
                         </value>
                     </values>
                 </normalizationContext>
+
                 <filters>
-                    <filter>sylius.api.order_filter.position</filter>
+                    <filter>sylius_api.boolean_filter.product_attribute</filter>
+                    <filter>sylius_api.order_filter.product_attribute</filter>
+                    <filter>sylius_api.search_filter.product_attribute</filter>
                 </filters>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-attributes">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -59,6 +62,7 @@
                         </value>
                     </values>
                 </denormalizationContext>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -68,65 +72,66 @@
                         </value>
                     </values>
                 </normalizationContext>
+
                 <openapiContext>
                     <values>
                         <value name="description">
-                            Example configuration for a `text` type attribute:
+Example configuration for a `text` type attribute:
 
-                            ```
-                            {
-                                "type": "text",
-                                "configuration": {
-                                    "min": 5,
-                                    "max": 255
-                                }
-                            }
-                            ```
+```
+{
+    "type": "text",
+    "configuration": {
+        "min": 5,
+        "max": 255
+    }
+}
+```
 
-                            Example configuration for a `datetime` type attribute:
+Example configuration for a `datetime` type attribute:
 
-                            ```
-                            {
-                                "type": "datetime",
-                                "configuration": {
-                                    "format": "Y-m-d H:i:s"
-                                }
-                            }
-                            ```
+```
+{
+    "type": "datetime",
+    "configuration": {
+        "format": "Y-m-d H:i:s"
+    }
+}
+```
 
-                            Example configuration for a `date` type attribute:
+Example configuration for a `date` type attribute:
 
-                            ```
-                            {
-                                "type": "date",
-                                "configuration": {
-                                    "format": "Y-m-d"
-                                }
-                            }
-                            ```
+```
+{
+    "type": "date",
+    "configuration": {
+        "format": "Y-m-d"
+    }
+}
+```
 
-                            Example configuration for a `select` type attribute:
+Example configuration for a `select` type attribute:
 
-                            ```
-                            {
-                                "type": "select",
-                                "configuration": {
-                                    "choices": {
-                                        "0afb212e-cd08-11ec-871e-0242ac120005": {
-                                            "en_US": "Plastic",
-                                            "fr_FR": "Plastique"
-                                        },
-                                        "3bfb211f-cd08-11ec-871e-0242ac120005": {
-                                            "en_US": "Cotton",
-                                            "fr_FR": "Coton"
-                                        }
-                                    },
-                                    "multiple": true,
-                                    "min": 1,
-                                    "max": 3
-                                }
-                            }
-                            ```
+```
+{
+    "type": "select",
+    "configuration": {
+        "choices": {
+            "0afb212e-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Plastic",
+                "fr_FR": "Plastique"
+            },
+            "3bfb211f-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Cotton",
+                "fr_FR": "Coton"
+            }
+        },
+        "multiple": true,
+        "min": 1,
+        "max": 3
+    }
+}
+```
                         </value>
                     </values>
                 </openapiContext>
@@ -157,6 +162,16 @@
             </operation>
 
             <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-attributes/{code}">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -166,6 +181,7 @@
                         </value>
                     </values>
                 </denormalizationContext>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -175,73 +191,76 @@
                         </value>
                     </values>
                 </normalizationContext>
+
                 <openapiContext>
                     <values>
                         <value name="description">
-                            Example configuration for a `text` type attribute:
+Example configuration for a `text` type attribute:
 
-                            ```
-                            {
-                                "type": "text",
-                                "configuration": {
-                                    "min": 5,
-                                    "max": 255
-                                }
-                            }
-                            ```
+```
+{
+    "type": "text",
+    "configuration": {
+        "min": 5,
+        "max": 255
+    }
+}
+```
 
-                            Example configuration for a `datetime` type attribute:
+Example configuration for a `datetime` type attribute:
 
-                            ```
-                            {
-                                "type": "datetime",
-                                "configuration": {
-                                    "format": "Y-m-d H:i:s"
-                                }
-                            }
-                            ```
+```
+{
+    "type": "datetime",
+    "configuration": {
+        "format": "Y-m-d H:i:s"
+    }
+}
+```
 
-                            Example configuration for a `date` type attribute:
+Example configuration for a `date` type attribute:
 
-                            ```
-                            {
-                                "type": "date",
-                                "configuration": {
-                                    "format": "Y-m-d"
-                                }
-                            }
-                            ```
+```
+{
+    "type": "date",
+    "configuration": {
+        "format": "Y-m-d"
+    }
+}
+```
 
-                            Example configuration for a `select` type attribute:
+Example configuration for a `select` type attribute:
 
-                            ```
-                            {
-                                "type": "select",
-                                "configuration": {
-                                    "choices": {
-                                        "0afb212e-cd08-11ec-871e-0242ac120005": {
-                                            "en_US": "Plastic",
-                                            "fr_FR": "Plastique"
-                                        },
-                                        "3bfb211f-cd08-11ec-871e-0242ac120005": {
-                                            "en_US": "Cotton",
-                                            "fr_FR": "Coton"
-                                        }
-                                    },
-                                    "multiple": true,
-                                    "min": 1,
-                                    "max": 3
-                                }
-                            }
-                            ```
+```
+{
+    "type": "select",
+    "configuration": {
+        "choices": {
+            "0afb212e-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Plastic",
+                "fr_FR": "Plastique"
+            },
+            "3bfb211f-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Cotton",
+                "fr_FR": "Coton"
+            }
+        },
+        "multiple": true,
+        "min": 1,
+        "max": 3
+    }
+}
+```
                         </value>
                     </values>
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-attributes/{code}" />
-
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/product-attributes/{code}"
+                processor="sylius_api.state_processor.admin.product_attribute.remove"
+            />
         </operations>
     </resource>
-
 </resources>

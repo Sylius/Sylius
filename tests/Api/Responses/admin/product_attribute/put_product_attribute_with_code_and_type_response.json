@@ -9,9 +9,8 @@
     "translatable": true,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-attributes\/origin\/translations\/en_US",
             "@type": "ProductAttributeTranslation",
-            "id": "@integer@",
             "name": "origin"
         }
     },

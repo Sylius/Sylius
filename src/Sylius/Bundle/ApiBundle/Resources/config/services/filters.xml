@@ -31,7 +31,30 @@
             <tag name="api_platform.filter" />
         </service>
 
-<!--        <service id="sylius.api.search_payment_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+        <service id="sylius_api.search_filter.product_attribute" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="code">partial</argument>
+                <argument key="type">exact</argument>
+                <argument key="translations.name">partial</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.boolean_filter.product_attribute" parent="api_platform.doctrine.orm.boolean_filter" public="true">
+            <argument type="collection">
+                <argument key="translatable" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.order_filter.product_attribute" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="position" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <!--        <service id="sylius.api.search_payment_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
 <!--            <argument type="collection">-->
 <!--                <argument key="state">exact</argument>-->
 <!--                <argument key="order.channel.code">exact</argument>-->
@@ -77,6 +100,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius_api.order_filter.product_taxon" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="position" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.taxon_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
@@ -103,13 +133,6 @@
 <!--            </argument>-->
 <!--            <tag name="api_platform.filter" />-->
 <!--        </service>-->
-
-        <service id="sylius.api.order_filter.position" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="position" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
 
         <service id="sylius.api.product_variant_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">

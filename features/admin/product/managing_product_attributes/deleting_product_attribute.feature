@@ -8,13 +8,13 @@ Feature: Deleting a product attribute
         Given I am logged in as an administrator
         And the store has a product "44 Magnum"
 
-    @todo-api @ui
+    @api @ui
     Scenario: Trying to delete an attribute from the registry when a product uses it
         Given this product has a text attribute "Gun caliber" with value "11 mm"
         When I delete this product attribute
         Then I should be notified that it is in use
 
-    @ui @api
+    @api @ui
     Scenario: Deleting a text product attribute when it's not used
         Given the store has a text product attribute "Gun caliber"
         When I delete this product attribute

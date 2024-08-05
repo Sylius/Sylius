@@ -15,28 +15,6 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="id" identifier="false" writable="false"/>
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="code" identifier="true" required="true" />
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="name" />
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="type" />
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="configuration" />
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="storageType" />
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="translatable" />
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="position" />
-    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="translations" readable="true" writable="true">
-        <openapiContext>
-            <values>
-                <value name="type">object</value>
-                <value name="example">
-                    <values>
-                        <value name="en_US">
-                            <values>
-                                <value name="name">string</value>
-                            </values>
-                        </value>
-                    </values>
-                </value>
-            </values>
-        </openapiContext>
-    </property>
+    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="id" identifier="false" />
+    <property resource="Sylius\Component\Product\Model\ProductAttribute" name="code" identifier="true" />
 </properties>

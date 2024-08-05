@@ -624,10 +624,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'position' => 0,
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf(
-                            '/api/v2/admin/product-attribute-translations/%s',
-                            $productAttribute->getTranslation('en_US')->getId(),
-                        ),
+                        '@id' => '/api/v2/admin/product-attributes/extra_info/translations/en_US',
                         'name' => 'Additional information',
                     ],
                     'pl_PL' => [
@@ -701,24 +698,5 @@ final class ProductAttributesTest extends JsonApiTestCase
             'admin/product_attribute/put_product_attribute_with_duplicate_locale_translation',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
-    }
-
-    /** @test */
-    public function it_gets_a_product_attribute_translation(): void
-    {
-        $this->setUpAdminContext();
-        $this->setUpDefaultGetHeaders();
-
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'product/product_attribute.yaml',
-        ]);
-
-        /** @var ProductAttributeTranslationInterface $productAttributeTranslation */
-        $productAttributeTranslation = $fixtures['product_attribute_translation_checkbox'];
-
-        $this->requestGet(uri: '/api/v2/admin/product-attribute-translations/' . $productAttributeTranslation->getId());
-
-        $this->assertResponseSuccessful('admin/product_attribute/get_product_attribute_translation_response');
     }
 }

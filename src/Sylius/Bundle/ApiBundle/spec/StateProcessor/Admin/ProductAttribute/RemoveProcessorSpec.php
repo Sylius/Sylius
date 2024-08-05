@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Product;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductAttribute;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 final class RemoveProcessorSpec extends ObjectBehavior
 {
@@ -36,33 +36,33 @@ final class RemoveProcessorSpec extends ObjectBehavior
     public function it_processes_remove_operation(
         ProcessorInterface $removeProcessor,
         Operation $operation,
-        ProductInterface $product,
+        ProductAttributeInterface $productAttribute,
     ) {
         $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($product, $operation, [], [])->willReturn(null);
+        $removeProcessor->process($productAttribute, $operation, [], [])->willReturn(null);
 
-        $this->process($product, $operation, [], [])->shouldReturn(null);
+        $this->process($productAttribute, $operation, [], [])->shouldReturn(null);
     }
 
     public function it_throws_an_exception_when_foreign_key_constraint_violation_occurs(
         ProcessorInterface $removeProcessor,
         Operation $operation,
-        ProductInterface $product,
+        ProductAttributeInterface $productAttribute,
     ) {
         $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($product, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
+        $removeProcessor->process($productAttribute, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
 
-        $this->shouldThrow(ProductCannotBeRemoved::class)->during('process', [$product, $operation, [], []]);
+        $this->shouldThrow(ProductAttributeCannotBeRemoved::class)->during('process', [$productAttribute, $operation, [], []]);
     }
 
     public function it_throws_exception_if_operation_is_not_delete(
         Operation $operation,
-        ProductInterface $product,
+        ProductAttributeInterface $productAttribute,
     ) {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$product, $operation, [], []]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$productAttribute, $operation, [], []]);
     }
 
-    public function it_throws_exception_if_data_is_not_product_interface(
+    public function it_throws_exception_if_data_is_not_product_attribute_interface(
         Operation $operation,
         \stdClass $nonProduct,
     ) {

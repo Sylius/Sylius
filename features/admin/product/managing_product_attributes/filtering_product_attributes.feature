@@ -12,28 +12,28 @@ Feature: Filtering product attributes
         And I am logged in as an administrator
         And I am browsing product attributes
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering product attributes by code
         When I search by "xyz" code
         Then I should see 2 product attributes in the list
         And I should see the product attribute "T-Shirt with cotton" in the list
         And I should also see the product attribute "Book pages" in the list
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering product attributes by name
         When I search by "T-Shirt" name
         Then I should see 2 product attributes in the list
         And I should see the product attribute "T-Shirt brand" in the list
         And I should also see the product attribute "T-Shirt with cotton" in the list
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering product attributes by type
         When I choose "checkbox" in the type filter
         And I filter
         Then I should see a single product attribute in the list
         And I should see the product attribute "T-Shirt with cotton" in the list
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering product attributes by multiple types
         When I choose "text" and "integer" in the type filter
         And I filter
@@ -41,7 +41,7 @@ Feature: Filtering product attributes
         And I should see the product attribute "T-Shirt brand" in the list
         And I should also see the product attribute "Book pages" in the list
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering translatable product attributes
         When I choose "Yes" in the translatable filter
         And I filter
@@ -49,7 +49,7 @@ Feature: Filtering product attributes
         And I should see the product attribute "T-Shirt brand" in the list
         And I should see the product attribute "Book pages" in the list
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering non-translatable product attributes
         When I choose "No" in the translatable filter
         And I filter
