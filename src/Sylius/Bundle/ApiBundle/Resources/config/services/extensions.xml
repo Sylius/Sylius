@@ -152,9 +152,5 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
-
-        <service id="sylius_api.doctrine.orm.query_extension.admin.taxon_image" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\TaxonImage\ResultExtension">
-            <tag name="api_platform.doctrine.orm.query_extension.item" />
-        </service>
     </services>
 </container>
