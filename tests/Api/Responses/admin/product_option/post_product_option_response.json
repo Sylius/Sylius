@@ -6,15 +6,14 @@
     "code": "NEW_COLOR",
     "position": 9,
     "values": [
-        "\/api\/v2\/admin\/product-option-values\/NEW_COLOR_RED"
+        "\/api\/v2\/admin\/product-options\/NEW_COLOR\/values\/NEW_COLOR_RED"
     ],
     "createdAt": "@datetime@",
     "updatedAt": "@datetime@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-option-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-options\/NEW_COLOR\/translations\/en_US",
             "@type": "ProductOptionTranslation",
-            "id": "@integer@",
             "name": "New Color"
         }
     },
