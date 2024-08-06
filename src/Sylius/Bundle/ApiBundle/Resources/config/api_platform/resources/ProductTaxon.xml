@@ -16,25 +16,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
+    <!-- Admin Operations -->
+
     <resource class="Sylius\Component\Core\Model\ProductTaxon">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
-        <order>
-            <values>
-                <value name="position">ASC</value>
-            </values>
-        </order>
-
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-taxons">
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -44,14 +36,25 @@
                         </value>
                     </values>
                 </normalizationContext>
+
                 <filters>
-                    <filter>sylius.api.search_filter.product.code</filter>
-                    <filter>sylius.api.search_filter.taxon.code</filter>
-                    <filter>sylius_api.order_filter.product_taxon</filter>
+                    <filter>sylius_api.search_filter.admin.product_taxon.product_code</filter>
+                    <filter>sylius_api.search_filter.admin.product_taxon.taxon_code</filter>
+                    <filter>sylius_api.order_filter.admin.product_taxon</filter>
                 </filters>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-taxons">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -61,6 +64,7 @@
                         </value>
                     </values>
                 </denormalizationContext>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -85,6 +89,16 @@
             </operation>
 
             <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-taxons/{id}">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -94,6 +108,7 @@
                         </value>
                     </values>
                 </denormalizationContext>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -104,6 +119,10 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-taxons/{id}" />
+
+    <!-- Shop Operations -->
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-taxons/{id}">
                 <normalizationContext>
@@ -116,10 +135,6 @@
                     </values>
                 </normalizationContext>
             </operation>
-
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-taxons/{code}" />
-
         </operations>
     </resource>
-
 </resources>
