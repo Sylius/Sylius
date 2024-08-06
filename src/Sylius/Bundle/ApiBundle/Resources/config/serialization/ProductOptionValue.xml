@@ -17,43 +17,28 @@
 >
     <class name="Sylius\Component\Product\Model\ProductOptionValue">
         <attribute name="id">
-            <group>admin:product_option_value:show</group>
             <group>sylius:admin:product_option_value:show</group>
-            <group>shop:product_option_value:show</group>
             <group>sylius:shop:product_option_value:show</group>
         </attribute>
         <attribute name="value">
-            <group>admin:product_option_value:show</group>
             <group>sylius:admin:product_option_value:show</group>
-            <group>shop:product_option_value:show</group>
             <group>sylius:shop:product_option_value:show</group>
         </attribute>
         <attribute name="option">
-            <group>admin:product_option_value:show</group>
             <group>sylius:admin:product_option_value:show</group>
-            <group>shop:product_option_value:show</group>
             <group>sylius:shop:product_option_value:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:product_option:create</group>
             <group>sylius:admin:product_option:create</group>
-            <group>admin:product_option:update</group>
             <group>sylius:admin:product_option:update</group>
-            <group>admin:product_option_value:show</group>
             <group>sylius:admin:product_option_value:show</group>
-            <group>admin:product_option_value:write</group>
             <group>sylius:admin:product_option_value:write</group>
-            <group>shop:product_option_value:show</group>
             <group>sylius:shop:product_option_value:show</group>
         </attribute>
         <attribute name="translations">
-            <group>admin:product_option:create</group>
             <group>sylius:admin:product_option:create</group>
-            <group>admin:product_option:update</group>
             <group>sylius:admin:product_option:update</group>
-            <group>admin:product_option_value:show</group>
             <group>sylius:admin:product_option_value:show</group>
-            <group>admin:product_option_value:write</group>
             <group>sylius:admin:product_option_value:write</group>
         </attribute>
     </class>
