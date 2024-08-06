@@ -15,9 +15,8 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 
-class ChangePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface, IriToIdentifierConversionAwareInterface
+class ChangePaymentMethod implements OrderTokenValueAwareInterface, IriToIdentifierConversionAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;

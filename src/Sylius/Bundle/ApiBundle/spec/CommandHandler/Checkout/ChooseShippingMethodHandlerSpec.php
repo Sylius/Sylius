@@ -58,9 +58,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         WinzouStateMachineInterface $stateMachine,
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
-        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
-        $chooseShippingMethod->setSubresourceId('123');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD', 123, 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
@@ -101,9 +99,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
             $stateMachine,
         );
 
-        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
-        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
-        $chooseShippingMethod->setSubresourceId('123');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD', 123, 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
@@ -136,9 +132,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         WinzouStateMachineInterface $stateMachine,
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
-        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
-        $chooseShippingMethod->setSubresourceId('123');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD', 123, 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
@@ -168,8 +162,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ShipmentInterface $shipment,
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
-        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD', null, 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
@@ -189,8 +182,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         WinzouStateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
-        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD', null, 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn(null);
@@ -215,9 +207,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         WinzouStateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
-        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
-        $chooseShippingMethod->setSubresourceId('123');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD', 123, 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
@@ -244,9 +234,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         WinzouStateMachineInterface $stateMachine,
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
-        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
-        $chooseShippingMethod->setSubresourceId('123');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD', 123, 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 

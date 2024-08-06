@@ -21,7 +21,7 @@ use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class RemoveItemFromCartHandler implements MessageHandlerInterface
+final readonly class RemoveItemFromCartHandler implements MessageHandlerInterface
 {
     public function __construct(
         private OrderItemRepositoryInterface $orderItemRepository,

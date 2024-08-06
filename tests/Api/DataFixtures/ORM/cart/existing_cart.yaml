@@ -1,0 +1,18 @@
+Sylius\Component\Core\Model\Order:
+    existing_cart:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "cart"
+        paymentState: "cart"
+        shippingState: "cart"
+        checkoutState: "cart"
+        tokenValue: "existingCartToken"
+        __calls:
+            - setCustomerWithAuthorization: ["@customer_dave"]
+        
+
+Sylius\Component\Core\Model\OrderItem:
+    existing_cart_order_item:
+        variant: "@product_variant_mug_blue"
+        order: "@existing_cart"

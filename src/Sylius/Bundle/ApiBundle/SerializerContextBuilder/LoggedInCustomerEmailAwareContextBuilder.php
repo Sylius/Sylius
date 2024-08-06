@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
-use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailIfNotSetAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -22,7 +22,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-final class LoggedInCustomerEmailIfNotSetAwareContextBuilder extends AbstractInputContextBuilder
+final class LoggedInCustomerEmailAwareContextBuilder extends AbstractInputContextBuilder
 {
     public function __construct(
         SerializerContextBuilderInterface $decoratedContextBuilder,
@@ -35,12 +35,12 @@ final class LoggedInCustomerEmailIfNotSetAwareContextBuilder extends AbstractInp
 
     protected function supportsClass(string $class): bool
     {
-        return is_a($class, LoggedInCustomerEmailIfNotSetAwareInterface::class, true);
+        return is_a($class, LoggedInCustomerEmailAwareInterface::class, true);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool
     {
-        return !array_key_exists('email',  $request->toArray()) &&
+        return !isset($request->toArray()['email']) &&
             $this->getCustomer() !== null;
     }
 

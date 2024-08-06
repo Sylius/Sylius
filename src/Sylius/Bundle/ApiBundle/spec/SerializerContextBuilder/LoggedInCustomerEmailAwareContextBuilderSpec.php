@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailIfNotSetAware;
+use Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
-final class LoggedInCustomerEmailIfNotSetAwareContextBuilderSpec extends ObjectBehavior
+final class LoggedInCustomerEmailAwareContextBuilderSpec extends ObjectBehavior
 {
     function let(
         SerializerContextBuilderInterface $decoratedContextBuilder,
@@ -32,7 +32,7 @@ final class LoggedInCustomerEmailIfNotSetAwareContextBuilderSpec extends ObjectB
     ): void {
         $this->beConstructedWith(
             $decoratedContextBuilder,
-            LoggedInCustomerEmailIfNotSetAware::class,
+            LoggedInCustomerEmailAware::class,
             'email',
             $userContext,
         );

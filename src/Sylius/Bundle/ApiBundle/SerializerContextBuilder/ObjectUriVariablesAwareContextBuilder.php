@@ -14,28 +14,37 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
 use ApiPlatform\Metadata\HttpOperation;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class OrderTokenValueAwareContextBuilder extends AbstractInputContextBuilder
+final class ObjectUriVariablesAwareContextBuilder extends AbstractInputContextBuilder
 {
+    public function __construct(
+        SerializerContextBuilderInterface $decoratedContextBuilder,
+        string $attributeClass,
+        string $defaultConstructorArgumentName,
+        private readonly string $commandInterface,
+        private readonly string $objectInterface,
+    ) {
+        parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
+    }
+
     protected function supportsClass(string $class): bool
     {
-        return is_a($class, OrderTokenValueAwareInterface::class, true);
+        return is_a($class, $this->commandInterface, true);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool
     {
-        return null !== $this->resolveOrderTokenValueFromUriVariables($context, $extractedAttributes);
+        return null !== $this->resolveValueFromUriVariables($context, $extractedAttributes);
     }
 
     protected function resolveValue(array $context, ?array $extractedAttributes): mixed
     {
-        return $this->resolveOrderTokenValueFromUriVariables($context, $extractedAttributes);
+        return $this->resolveValueFromUriVariables($context, $extractedAttributes);
     }
 
-    private function resolveOrderTokenValueFromUriVariables(array $context, ?array $attributes): ?string
+    private function resolveValueFromUriVariables(array $context, ?array $attributes): ?string
     {
         if (
             null !== $attributes &&
@@ -44,11 +53,11 @@ final class OrderTokenValueAwareContextBuilder extends AbstractInputContextBuild
         ) {
             $operation = $attributes['operation'];
             foreach ($operation->getUriVariables() as $uriVariable) {
-                if (false === is_a($uriVariable->getFromClass(), OrderInterface::class, true)) {
+                if (false === is_a($uriVariable->getFromClass(), $this->objectInterface, true)) {
                     continue;
                 }
 
-                $identifier = $uriVariable->getFromProperty() ?? $uriVariable->getParameterName() ?? 'id';
+                $identifier = $uriVariable->getParameterName() ?? $this->defaultConstructorArgumentName;
 
                 return $context['uri_variables'][$identifier] ?? null;
             }

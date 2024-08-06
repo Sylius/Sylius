@@ -74,8 +74,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn(null);
 
-        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject());
-        $updateCart->setOrderTokenValue('TOKEN');
+        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject(), orderTokenValue: 'TOKEN');
 
         $this
             ->shouldThrow(ChannelNotFoundException::class)
@@ -91,8 +90,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($order);
         $order->getChannel()->willReturn(null);
 
-        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject());
-        $updateCart->setOrderTokenValue('TOKEN');
+        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject(), orderTokenValue: 'TOKEN');
 
         $this
             ->shouldThrow(ChannelNotFoundException::class)
@@ -111,8 +109,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->isShippingAddressInCheckoutRequired()->willReturn(true);
 
-        $updateCart = new UpdateCart(shippingAddress: $shippingAddress->getWrappedObject());
-        $updateCart->setOrderTokenValue('TOKEN');
+        $updateCart = new UpdateCart(shippingAddress: $shippingAddress->getWrappedObject(), orderTokenValue: 'TOKEN');
 
         $this->validate($updateCart, new OrderAddressRequirement());
 
@@ -130,8 +127,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->isShippingAddressInCheckoutRequired()->willReturn(false);
 
-        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject());
-        $updateCart->setOrderTokenValue('TOKEN');
+        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject(), orderTokenValue: 'TOKEN');
 
         $this->validate($updateCart, new OrderAddressRequirement());
 
@@ -149,8 +145,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->isShippingAddressInCheckoutRequired()->willReturn(true);
 
-        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject());
-        $updateCart->setOrderTokenValue('TOKEN');
+        $updateCart = new UpdateCart(billingAddress: $billingAddress->getWrappedObject(), orderTokenValue: 'TOKEN');
 
         $this->validate($updateCart, new OrderAddressRequirement());
 
@@ -168,8 +163,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->isShippingAddressInCheckoutRequired()->willReturn(false);
 
-        $updateCart = new UpdateCart(shippingAddress: $shippingAddress->getWrappedObject());
-        $updateCart->setOrderTokenValue('TOKEN');
+        $updateCart = new UpdateCart(shippingAddress: $shippingAddress->getWrappedObject(), orderTokenValue: 'TOKEN');
 
         $this->validate($updateCart, new OrderAddressRequirement());
 

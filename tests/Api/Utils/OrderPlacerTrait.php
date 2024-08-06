@@ -190,8 +190,10 @@ trait OrderPlacerTrait
 
     protected function pickUpCart(string $tokenValue = 'nAWw2jewpA', string $channelCode = 'WEB'): string
     {
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode($channelCode);
+        $pickupCartCommand = new PickupCart(
+            tokenValue: $tokenValue,
+            channelCode: $channelCode,
+        );
 
         $this->commandBus->dispatch($pickupCartCommand);
 
@@ -200,8 +202,11 @@ trait OrderPlacerTrait
 
     protected function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue): string
     {
-        $addItemToCartCommand = new AddItemToCart($productVariantCode, $quantity);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $addItemToCartCommand = new AddItemToCart(
+            productVariantCode: $productVariantCode,
+            quantity: $quantity,
+            orderTokenValue: $tokenValue,
+        );
 
         $this->commandBus->dispatch($addItemToCartCommand);
 

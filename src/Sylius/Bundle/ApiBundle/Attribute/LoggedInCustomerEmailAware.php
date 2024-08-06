@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Attribute;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class LoggedInCustomerEmailIfNotSetAware
+final class LoggedInCustomerEmailAware
 {
     public const DEFAULT_ARGUMENT_NAME = 'email';
 

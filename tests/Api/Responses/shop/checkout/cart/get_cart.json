@@ -2,6 +2,8 @@
     "@context": "\/api\/v2\/contexts\/Order",
     "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
     "@type": "Order",
+    "shippingAddress": null,
+    "billingAddress": null,
     "payments": [
         {
             "@id": "\/api\/v2\/shop\/payments\/@integer@",
@@ -25,6 +27,7 @@
     "shippingState": "cart",
     "tokenValue": "nAWw2jewpA",
     "id": "@integer@",
+    "number": null,
     "items": [
         {
             "@id": "\/api\/v2\/shop\/order-items\/@integer@",

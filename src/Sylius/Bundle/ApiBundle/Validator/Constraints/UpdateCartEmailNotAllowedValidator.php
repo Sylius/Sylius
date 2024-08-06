@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -33,7 +33,7 @@ final class UpdateCartEmailNotAllowedValidator extends ConstraintValidator
     public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
-        Assert::isInstanceOf($value, CustomerEmailAwareInterface::class);
+        Assert::isInstanceOf($value, LoggedInCustomerEmailAwareInterface::class);
 
         /** @var UpdateCartEmailNotAllowed $constraint */
         Assert::isInstanceOf($constraint, UpdateCartEmailNotAllowed::class);

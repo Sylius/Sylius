@@ -87,8 +87,7 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new UpdateCart('sylius@example.com');
-        $value->setOrderTokenValue('token');
+        $value = new UpdateCart(email: 'sylius@example.com', orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
         $userContext->getUser()->shouldBeCalled()->willReturn($user);
@@ -106,8 +105,7 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new UpdateCart('sylius@example.com');
-        $value->setOrderTokenValue('token');
+        $value = new UpdateCart(email: 'sylius@example.com', orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
         $userContext->getUser()->shouldBeCalled()->willReturn(null);

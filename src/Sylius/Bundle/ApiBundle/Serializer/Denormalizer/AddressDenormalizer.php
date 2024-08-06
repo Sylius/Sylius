@@ -11,12 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class AddressDenormalizer implements ContextAwareDenormalizerInterface
+final readonly class AddressDenormalizer implements DenormalizerInterface
 {
     public function __construct(
         private DenormalizerInterface $objectNormalizer,
