@@ -17,24 +17,14 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Product\Model\ProductOption">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
-        <order>
-            <values>
-                <value name="position">ASC</value>
-            </values>
-        </order>
-
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-options">
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -47,6 +37,16 @@
             </operation>
 
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-options">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -56,6 +56,7 @@
                         </value>
                     </values>
                 </denormalizationContext>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -92,6 +93,16 @@
             </operation>
 
             <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-options/{code}">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -101,6 +112,7 @@
                         </value>
                     </values>
                 </denormalizationContext>
+
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -112,9 +124,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-options/{code}" />
-
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-options/{code}"/>
         </operations>
     </resource>
-
 </resources>
