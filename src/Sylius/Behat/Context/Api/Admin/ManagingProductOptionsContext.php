@@ -231,7 +231,8 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
 
-        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
+        $res = $this->client->update();
+        Assert::false($this->responseChecker->hasValue($res, 'code', 'NEW_CODE'));
     }
 
     /**

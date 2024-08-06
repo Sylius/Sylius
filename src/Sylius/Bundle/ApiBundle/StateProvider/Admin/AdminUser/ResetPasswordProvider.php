@@ -17,7 +17,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\State\ProviderInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Webmozart\Assert\Assert;
 

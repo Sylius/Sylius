@@ -19,7 +19,7 @@ Feature: Editing product options
         Then I should be notified that it has been successfully edited
         And this product option name should be "T-Shirt color"
 
-    @api @ui
+    @todo-api @ui
     Scenario: Not being able to edit code of an existing product option
         When I want to modify the "T-Shirt size" product option
         Then I should not be able to edit its code

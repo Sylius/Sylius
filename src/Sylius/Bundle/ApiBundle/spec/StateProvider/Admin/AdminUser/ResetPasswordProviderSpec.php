@@ -18,7 +18,7 @@ use ApiPlatform\Metadata\Patch;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class ResetPasswordProviderSpec extends ObjectBehavior
