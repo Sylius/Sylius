@@ -244,14 +244,16 @@ final class ProductOptionsTest extends JsonApiTestCase
         /** @var ProductOptionValueInterface $productOptionValue */
         $productOptionValue = $fixtures['product_option_value_color_blue'];
 
+        $productOptionCode = $productOption->getCode();
+
         $this->client->request(
             method: 'PUT',
-            uri: sprintf('/api/v2/admin/product-options/%s', $productOption->getCode()),
+            uri: '/api/v2/admin/product-options/' . $productOptionCode,
             server: $header,
             content: json_encode([
                 'values' => [
                     [
-                        '@id' => sprintf('/api/v2/admin/product-option-values/%s', $productOptionValue->getCode()),
+                        '@id' => sprintf('/api/v2/admin/product-options/%s/values/%s', $productOptionCode, $productOptionValue->getCode()),
                         'translations' => [
                             'en_US' => [
                                 'value' => 'Light Blue',
@@ -288,30 +290,5 @@ final class ProductOptionsTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
-    }
-
-    /** @test */
-    public function it_gets_product_option_values_for_product_option(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'product/product_option.yaml',
-        ]);
-
-        /** @var ProductOptionInterface $productOption */
-        $productOption = $fixtures['product_option_color'];
-
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/product-options/%s/values', $productOption->getCode()),
-            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/product_option/get_product_option_values_for_product_option',
-            Response::HTTP_OK,
-        );
     }
 }
