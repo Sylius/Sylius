@@ -1,0 +1,31 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.account.profile_update':
+            full_name:
+                template: '@SyliusShop/account/profile_update/full_name.html.twig'
+            email:
+                template: '@SyliusShop/account/profile_update/email.html.twig'
+            additional_information:
+                template: '@SyliusShop/account/profile_update/additional_information.html.twig'
+            phone_number:
+                template: '@SyliusShop/account/profile_update/phone_number.html.twig'
+            newsletter:
+                template: '@SyliusShop/account/profile_update/newsletter.html.twig'
+            buttons:
+                template: '@SyliusShop/account/profile_update/buttons.html.twig'
+
+        'sylius_shop.account.profile_update.full_name':
+            name:
+                template: '@SyliusShop/account/profile_update/full_name/name.html.twig'
+            surname:
+                template: '@SyliusShop/account/profile_update/full_name/surname.html.twig'
+
+        'sylius_shop.account.profile_update.additional_information':
+            birthday:
+                template: '@SyliusShop/account/profile_update/additional_information/birthday.html.twig'
+            gender:
+                template: '@SyliusShop/account/profile_update/additional_information/gender.html.twig'
+
+        'sylius_shop.account.profile_update.buttons':
+            submit:
+                template: '@SyliusShop/account/profile_update/buttons/submit.html.twig'
