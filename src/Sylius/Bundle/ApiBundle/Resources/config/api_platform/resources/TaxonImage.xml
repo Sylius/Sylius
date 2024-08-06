@@ -90,90 +90,6 @@
                 </openapiContext>
             </operation>
 
-            <operation
-                class="ApiPlatform\Metadata\Post"
-                uriTemplate="/admin/taxons/{code}/images"
-                processor="sylius_api.state_processor.admin.taxon_image.persist"
-                deserialize="false"
-            >
-                <uriVariables>
-                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
-                </uriVariables>
-                <inputFormats>
-                    <format name="multipart">multipart/form-data</format>
-                </inputFormats>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="code">
-                                    <values>
-                                        <value name="name">code</value>
-                                        <value name="in">path</value>
-                                        <value name="required">true</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                        <value name="requestBody">
-                            <values>
-                                <value name="content">
-                                    <values>
-                                        <value name="multipart/form-data">
-                                            <values>
-                                                <value name="schema">
-                                                    <values>
-                                                        <value name="type">object</value>
-                                                        <value name="properties">
-                                                            <values>
-                                                                <value name="file">
-                                                                    <values>
-                                                                        <value name="type">string</value>
-                                                                        <value name="format">binary</value>
-                                                                    </values>
-                                                                </value>
-                                                                <value name="type">
-                                                                    <values>
-                                                                        <value name="type">string</value>
-                                                                    </values>
-                                                                </value>
-                                                            </values>
-                                                        </value>
-                                                    </values>
-                                                </value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                    </values>
-                </openapiContext>
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:taxon_image:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-            </operation>
-
             <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/taxons/{code}/images/{id}">
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
@@ -252,6 +168,91 @@
                 </openapiContext>
             </operation>
 
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Core\Model\Taxon">
+        <operations>
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/taxons/{code}/images"
+                processor="sylius_api.state_processor.admin.taxon_image.persist"
+                deserialize="false"
+            >
+                <inputFormats>
+                    <format name="multipart">multipart/form-data</format>
+                </inputFormats>
+                <openapiContext>
+                    <values>
+                        <value name="parameters">
+                            <values>
+                                <value name="code">
+                                    <values>
+                                        <value name="name">code</value>
+                                        <value name="in">path</value>
+                                        <value name="required">true</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                        <value name="requestBody">
+                            <values>
+                                <value name="content">
+                                    <values>
+                                        <value name="multipart/form-data">
+                                            <values>
+                                                <value name="schema">
+                                                    <values>
+                                                        <value name="type">object</value>
+                                                        <value name="properties">
+                                                            <values>
+                                                                <value name="file">
+                                                                    <values>
+                                                                        <value name="type">string</value>
+                                                                        <value name="format">binary</value>
+                                                                    </values>
+                                                                </value>
+                                                                <value name="type">
+                                                                    <values>
+                                                                        <value name="type">string</value>
+                                                                    </values>
+                                                                </value>
+                                                            </values>
+                                                        </value>
+                                                    </values>
+                                                </value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
         </operations>
     </resource>
 
