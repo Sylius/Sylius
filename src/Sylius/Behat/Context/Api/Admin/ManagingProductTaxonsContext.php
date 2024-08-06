@@ -70,7 +70,6 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
-     * @When I assign the :taxon taxon to the :product product
      * @When I (try to) add :taxon taxon to the :product product
      */
     public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void

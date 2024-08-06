@@ -6,7 +6,6 @@
         {
             "@id": "\/api\/v2\/admin\/product-taxons\/@integer@",
             "@type": "ProductTaxon",
-            "id": "@integer@",
             "product": "\/api\/v2\/admin\/products\/MUG",
             "taxon": "\/api\/v2\/admin\/taxons\/MUGS",
             "position": 1
@@ -14,7 +13,6 @@
         {
             "@id": "\/api\/v2\/admin\/product-taxons\/@integer@",
             "@type": "ProductTaxon",
-            "id": "@integer@",
             "product": "\/api\/v2\/admin\/products\/CAP",
             "taxon": "\/api\/v2\/admin\/taxons\/CAPS",
             "position": 2
