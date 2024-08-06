@@ -6,15 +6,14 @@
     "code": "COLOR",
     "position": 0,
     "values": [
-        "\/api\/v2\/admin\/product-option-values\/CHANGED_COLOR"
+        "\/api\/v2\/admin\/product-options\/COLOR\/values\/CHANGED_COLOR"
     ],
     "createdAt": "@datetime@",
     "updatedAt": "@datetime@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-option-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-options\/COLOR\/translations\/en_US",
             "@type": "ProductOptionTranslation",
-            "id": "@integer@",
             "name": "Color"
         }
     },

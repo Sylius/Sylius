@@ -10,16 +10,15 @@
             "code": "COLOR",
             "position": 0,
             "values": [
-                "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE",
-                "\/api\/v2\/admin\/product-option-values\/COLOR_RED"
+                "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_BLUE",
+                "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_RED"
             ],
             "createdAt": "@date@",
             "updatedAt": "@date@",
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-option-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/product-options\/COLOR\/translations\/en_US",
                     "@type": "ProductOptionTranslation",
-                    "id": "@integer@",
                     "name": "Color"
                 }
             },
