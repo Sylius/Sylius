@@ -601,21 +601,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\PaymentMethodDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/PaymentMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\PaymentMethodDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/PaymentMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\PaymentMethodDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/PaymentMethodDataPersister.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductDataPersister.php
@@ -814,41 +799,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentItemDataProvider\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentMethodsCollectionDataProvider\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentMethodsCollectionDataProvider\\:\\:__construct\\(\\) has parameter \\$paymentMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentMethodRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentMethodsCollectionDataProvider\\:\\:__construct\\(\\) has parameter \\$paymentRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentMethodsCollectionDataProvider\\:\\:getCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentMethodsCollectionDataProvider\\:\\:getCollection\\(\\) return type has no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentMethodsCollectionDataProvider\\:\\:isShopGetCollectionOperation\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentMethodsCollectionDataProvider\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ProductAttributesSubresourceDataProvider\\:\\:__construct\\(\\) has parameter \\$attributeValueRepository with generic interface Sylius\\\\Component\\\\Product\\\\Repository\\\\ProductAttributeValueRepositoryInterface but does not specify its types\\: T$#"
@@ -1194,11 +1144,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\TranslationOrderNameAndLocaleFilter\\:\\:getDescription\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/TranslationOrderNameAndLocaleFilter.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\PaymentMethodFilter\\:\\:getDescription\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Filter/PaymentMethodFilter.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\ShippingMethodFilter\\:\\:getDescription\\(\\) return type has no value type specified in iterable type array\\.$#"
