@@ -1,5 +1,3 @@
-{% set review = hookable_metadata.context.review %}
-
 <div class="mb-2">
-    {{ review.comment }}
+    {% hook 'content' %}
 </div>

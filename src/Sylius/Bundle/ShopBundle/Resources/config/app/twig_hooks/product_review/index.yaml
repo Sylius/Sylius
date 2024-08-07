@@ -17,7 +17,7 @@ twig_hooks:
                 template: "@SyliusShop/product_review/index/main/list.html.twig"
 
         'sylius.shop.product_review.index.main.header':
-            title:
+            details:
                 template: "@SyliusShop/product_review/index/main/header/details.html.twig"
             buttons:
                 template: "@SyliusShop/product_review/index/main/header/buttons.html.twig"
@@ -49,6 +49,10 @@ twig_hooks:
                 template: "@SyliusShop/product_review/index/main/list/review/header/title.html.twig"
             rating:
                 template: "@SyliusShop/product_review/index/main/list/review/header/rating.html.twig"
+
+        'sylius.shop.product_review.index.main.list.review.content':
+            comment:
+                template: "@SyliusShop/product_review/index/main/list/review/content/comment.html.twig"
 
         'sylius.shop.product_review.index.main.list.review.footer':
             author:
