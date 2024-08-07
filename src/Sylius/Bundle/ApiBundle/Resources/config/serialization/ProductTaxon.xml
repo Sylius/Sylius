@@ -16,6 +16,11 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Core\Model\ProductTaxon">
+        <attribute name="id">
+            <group>sylius:admin:product_taxon:index</group>
+            <group>sylius:admin:product_taxon:show</group>
+            <group>sylius:shop:product_taxon:show</group>
+        </attribute>
         <attribute name="taxon">
             <group>sylius:admin:product_taxon:index</group>
             <group>sylius:admin:product_taxon:show</group>
