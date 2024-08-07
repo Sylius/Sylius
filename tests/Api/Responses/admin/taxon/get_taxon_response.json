@@ -13,7 +13,7 @@
     ],
     "images": [
         {
-            "@id": "\/api\/v2\/admin\/taxons\/@string@\/images\/@integer@",
+            "@id": "\/api\/v2\/admin\/taxons\/CATEGORY\/images\/@integer@",
             "@type": "TaxonImage",
             "id": "@integer@",
             "type": "thumbnail",

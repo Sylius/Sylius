@@ -26,17 +26,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class PersistProcessorSpec extends ObjectBehavior
 {
-    function let(ProcessorInterface $processor, ImageCreatorInterface $taxonImageCreator)
+    function let(ProcessorInterface $processor, ImageCreatorInterface $taxonImageCreator): void
     {
         $this->beConstructedWith($processor, $taxonImageCreator);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(PersistProcessor::class);
     }
 
-    function it_implements_processor_interface()
+    function it_implements_processor_interface(): void
     {
         $this->shouldImplement(ProcessorInterface::class);
     }
@@ -72,13 +72,12 @@ final class PersistProcessorSpec extends ObjectBehavior
         $this->process(null, $operation, [], ['request' => $request->getWrappedObject()]);
     }
 
-    function it_throws_exception_for_delete_operation(
+    function it_throws_an_exception_for_delete_operation(
         DeleteOperationInterface $deleteOperation,
         TaxonImageInterface $taxonImage,
-    ) {
+    ): void {
         $deleteOperation->beADoubleOf(Operation::class);
 
-        $this->shouldThrow(\InvalidArgumentException::class)
-            ->during('process', [$taxonImage, $deleteOperation, [], []]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$taxonImage, $deleteOperation, [], []]);
     }
 }
