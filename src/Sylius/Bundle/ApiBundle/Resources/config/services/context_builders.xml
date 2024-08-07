@@ -78,7 +78,8 @@
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInShopUserIdAwareContextBuilder"
+            id="sylius_api.serializer_context_builder.logged_in_shop_user_id_aware"
+            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInShopUserIdAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
@@ -90,7 +91,7 @@
 
         <service
             id="sylius_api.serializer_context_builder.shipment_aware"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ObjectUriVariablesAwareContextBuilder"
+            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
@@ -103,7 +104,7 @@
 
         <service
             id="sylius_api.serializer_context_builder.order_token_value_aware"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ObjectUriVariablesAwareContextBuilder"
+            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
@@ -116,7 +117,7 @@
 
         <service
             id="sylius_api.serializer_context_builder.order_item_aware"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ObjectUriVariablesAwareContextBuilder"
+            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >

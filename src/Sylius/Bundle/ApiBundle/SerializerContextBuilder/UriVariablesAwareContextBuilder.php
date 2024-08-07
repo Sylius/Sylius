@@ -17,7 +17,7 @@ use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class ObjectUriVariablesAwareContextBuilder extends AbstractInputContextBuilder
+final class UriVariablesAwareContextBuilder extends AbstractInputContextBuilder
 {
     public function __construct(
         SerializerContextBuilderInterface $decoratedContextBuilder,

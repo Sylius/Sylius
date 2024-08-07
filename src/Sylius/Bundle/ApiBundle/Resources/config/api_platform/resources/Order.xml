@@ -313,7 +313,6 @@
                     <uriVariable parameterName="orderItemId" fromClass="Sylius\Component\Core\Model\OrderItem" fromProperty="order"/>
                 </uriVariables>
             </operation>
-
         </operations>
     </resource>
 </resources>

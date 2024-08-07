@@ -17,12 +17,18 @@ use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware;
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
+use Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class ObjectUriVariablesAwareContextBuilderSpec extends ObjectBehavior
+final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
 {
     function let(
         SerializerContextBuilderInterface $decoratedContextBuilder,
@@ -117,6 +123,70 @@ final class ObjectUriVariablesAwareContextBuilderSpec extends ObjectBehavior
                 'uri_variables' => ['shipmentId' => '123'],
                 'default_constructor_arguments' => [
                     ShipmentIdAwareInterface::class => ['shipmentId' => '123'],
+                ],
+            ])
+        ;
+    }
+
+    function it_set_order_token_value_as_a_constructor_argument(
+        SerializerContextBuilderInterface $decoratedContextBuilder,
+        Request $request,
+        HttpOperation $operation,
+    ): void {
+        $this->beConstructedWith(
+            $decoratedContextBuilder,
+            OrderTokenValueAware::class,
+            'orderTokenValue',
+            OrderTokenValueAwareInterface::class,
+            OrderInterface::class,
+        );
+
+        $decoratedContextBuilder
+            ->createFromRequest($request, true, ['operation' => $operation])
+            ->willReturn(['input' => ['class' => OrderTokenValueAwareInterface::class], 'uri_variables' => ['orderToken' => 'token123']])
+        ;
+        $uriVariable = new Link(fromClass: OrderInterface::class, parameterName: 'orderToken');
+        $operation->getUriVariables()->willReturn([$uriVariable]);
+
+        $this
+            ->createFromRequest($request, true, ['operation' => $operation])
+            ->shouldReturn([
+                'input' => ['class' => OrderTokenValueAwareInterface::class],
+                'uri_variables' => ['orderToken' => 'token123'],
+                'default_constructor_arguments' => [
+                    OrderTokenValueAwareInterface::class => ['orderTokenValue' => 'token123'],
+                ],
+            ])
+        ;
+    }
+
+    function it_set_order_item_id_as_a_constructor_argument(
+        SerializerContextBuilderInterface $decoratedContextBuilder,
+        Request $request,
+        HttpOperation $operation,
+    ): void {
+        $this->beConstructedWith(
+            $decoratedContextBuilder,
+            OrderItemIdAware::class,
+            'orderItemId',
+            OrderItemIdAwareInterface::class,
+            OrderItemInterface::class,
+        );
+
+        $decoratedContextBuilder
+            ->createFromRequest($request, true, ['operation' => $operation])
+            ->willReturn(['input' => ['class' => OrderItemIdAwareInterface::class], 'uri_variables' => ['orderItemId' => '23']])
+        ;
+        $uriVariable = new Link(fromClass: OrderItemInterface::class, parameterName: 'orderItemId');
+        $operation->getUriVariables()->willReturn([$uriVariable]);
+
+        $this
+            ->createFromRequest($request, true, ['operation' => $operation])
+            ->shouldReturn([
+                'input' => ['class' => OrderItemIdAwareInterface::class],
+                'uri_variables' => ['orderItemId' => '23'],
+                'default_constructor_arguments' => [
+                    OrderItemIdAwareInterface::class => ['orderItemId' => '23'],
                 ],
             ])
         ;
