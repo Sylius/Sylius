@@ -31,13 +31,14 @@ final class PaymentMethodsTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $pickupCartCommand->setLocaleCode('en_US');
+        $pickupCartCommand = new PickupCart(
+            tokenValue: $tokenValue,
+            channelCode: 'WEB',
+            localeCode: 'en_US',
+        );
         $commandBus->dispatch($pickupCartCommand);
 
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3, $tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: self::CONTENT_TYPE_HEADER);
