@@ -19,6 +19,12 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 /** @experimental */
 final class PaymentRequestHashAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
+    /**
+     * @param PaymentRequestHashAwareInterface $object
+     * @param array<string, mixed> $context
+     *
+     * @return PaymentRequestHashAwareInterface
+     */
     public function transform($object, string $to, array $context = [])
     {
         /** @var PaymentRequestInterface $paymentRequest */
@@ -34,6 +40,7 @@ final class PaymentRequestHashAwareInputCommandDataTransformer implements Comman
         return $object;
     }
 
+    /** @param mixed $object */
     public function supportsTransformation($object): bool
     {
         return $object instanceof PaymentRequestHashAwareInterface;

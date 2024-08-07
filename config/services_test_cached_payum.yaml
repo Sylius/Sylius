@@ -1,6 +1,5 @@
 imports:
     - { resource: "services_test_cached.yaml" }
-    - { resource: "../vendor/sylius/calendar/config/services_test.yaml" }
 
 services:
     'sylius.payment_request.command_provider.payum.offline':
