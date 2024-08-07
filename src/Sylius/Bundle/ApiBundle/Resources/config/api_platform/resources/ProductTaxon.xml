@@ -16,10 +16,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <!-- Admin Operations -->
-
     <resource class="Sylius\Component\Core\Model\ProductTaxon">
         <operations>
+            <!-- Admin Operations -->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-taxons">
                 <order>
                     <values>
@@ -120,10 +119,9 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-taxons/{id}" />
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-taxons/{id}"/>
 
-    <!-- Shop Operations -->
-
+            <!-- Shop Operations -->
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-taxons/{id}">
                 <normalizationContext>
                     <values>
