@@ -37,9 +37,8 @@
                 </normalizationContext>
 
                 <filters>
-                    <filter>sylius_api.search_filter.admin.product_taxon.product_code</filter>
-                    <filter>sylius_api.search_filter.admin.product_taxon.taxon_code</filter>
                     <filter>sylius_api.order_filter.admin.product_taxon</filter>
+                    <filter>sylius_api.search_filter.admin.product_taxon</filter>
                 </filters>
             </operation>
 
