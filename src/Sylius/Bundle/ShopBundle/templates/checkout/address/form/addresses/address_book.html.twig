@@ -4,17 +4,17 @@
         <div>
             {% for address in app.user.customer.addresses %}
                 <div {{ sylius_test_html_attribute('address-book-item') }}
-                     data-id="{{ address.id }}"
-                     data-first-name="{{ address.firstName }}"
-                     data-last-name="{{ address.lastName }}"
-                     data-company="{{ address.company }}"
-                     data-street="{{ address.street }}"
-                     data-country-code="{{ address.countryCode }}"
-                     data-province-code="{{ address.provinceCode }}"
-                     data-province-name="{{ address.provinceName }}"
-                     data-city="{{ address.city }}"
-                     data-postcode="{{ address.postcode }}"
-                     data-phone-number="{{ address.phoneNumber }}"
+                    data-id="{{ address.id }}"
+                    data-first-name="{{ address.firstName }}"
+                    data-last-name="{{ address.lastName }}"
+                    data-company="{{ address.company }}"
+                    data-street="{{ address.street }}"
+                    data-country-code="{{ address.countryCode }}"
+                    data-province-code="{{ address.provinceCode }}"
+                    data-province-name="{{ address.provinceName }}"
+                    data-city="{{ address.city }}"
+                    data-postcode="{{ address.postcode }}"
+                    data-phone-number="{{ address.phoneNumber }}"
                 >
                     <strong>{{ address.firstName }} {{ address.lastName }}</strong>,
                     {{ address.street }}, {{ address.city }} {{ address.postcode }},

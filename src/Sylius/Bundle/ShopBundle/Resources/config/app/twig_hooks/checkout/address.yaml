@@ -9,7 +9,17 @@ twig_hooks:
         'sylius_shop.checkout.address.form':
             header:
                 template: '@SyliusShop/checkout/address/form/header.html.twig'
+            user:
+                template: '@SyliusShop/checkout/address/form/user.html.twig'
             addresses:
                 template: '@SyliusShop/checkout/address/form/addresses.html.twig'
             navigation:
                 template: '@SyliusShop/checkout/address/form/navigation.html.twig'
+                
+        'sylius_shop.checkout.address.form.addresses':
+            address_book:
+                template: '@SyliusShop/checkout/address/form/addresses/address_book.html.twig'
+            header:
+                template: '@SyliusShop/checkout/address/form/addresses/header.html.twig'
+            form:
+                template: '@SyliusShop/checkout/address/form/addresses/form.html.twig'
