@@ -152,5 +152,17 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
+
+        <service id="sylius_api.doctrine.orm.query_extension.shop.payment_method.channel_based" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentMethod\ChannelBasedExtension">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
+        <service id="sylius_api.doctrine.orm.query_extension.shop.payment_method.enabled" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentMethod\EnabledExtension">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
     </services>
 </container>

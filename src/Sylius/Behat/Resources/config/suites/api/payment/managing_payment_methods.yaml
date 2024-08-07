@@ -29,7 +29,7 @@ default:
                     
                 - sylius.behat.context.api.admin.save
                 - sylius.behat.context.api.admin.response
-                - Sylius\Behat\Context\Api\Admin\ManagingPaymentMethodsContext
+                - sylius.behat.context.api.admin.managing_payment_methods
                 - sylius.behat.context.api.admin.translation
 
             filters:

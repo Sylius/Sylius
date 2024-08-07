@@ -32,7 +32,7 @@ imports:
 #    - api/order/managing_orders.yml
 #    - api/order/modifying_placed_order_address.yaml
 #    - api/order/order_history.yaml
-#    - api/payment/managing_payment_methods.yaml
+    - api/payment/managing_payment_methods.yaml
     - api/payment/managing_payments.yml
     - api/product/adding_product_review.yml
     - api/product/managing_product_association_types.yml

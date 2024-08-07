@@ -34,7 +34,7 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
         ;
     }
 
-    public function findOneByOrderId($paymentId, $orderId): ?PaymentInterface
+    public function findOneByOrderId(mixed $paymentId, mixed $orderId): ?PaymentInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :paymentId')
@@ -46,7 +46,7 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
         ;
     }
 
-    public function findOneByOrderToken(string $paymentId, string $orderToken): ?PaymentInterface
+    public function findOneByOrderToken(mixed $paymentId, string $orderToken): ?PaymentInterface
     {
         return $this->createQueryBuilder('p')
             ->innerJoin('p.order', 'o')
@@ -59,7 +59,7 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
         ;
     }
 
-    public function findOneByCustomer($id, CustomerInterface $customer): ?PaymentInterface
+    public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?PaymentInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'ord')

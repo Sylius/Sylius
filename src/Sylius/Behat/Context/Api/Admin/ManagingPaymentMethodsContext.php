@@ -18,13 +18,12 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverter;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingPaymentMethodsContext implements Context
@@ -36,9 +35,36 @@ final readonly class ManagingPaymentMethodsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SectionAwareIriConverter $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
+    }
+
+    /**
+     * @When /^I search by "([^"]+)" (code|name)$/
+     */
+    public function iSearchByName(string $phrase, string $field): void
+    {
+        $field = $field === 'name' ? 'translations.name' : $field;
+
+        $this->client->addFilter($field, $phrase);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I choose enabled filter
+     */
+    public function iChooseEnabledFilter(): void
+    {
+        $this->client->addFilter('enabled', true);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter();
     }
 
     /**
@@ -210,7 +236,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->replaceRequestData('channels', [$this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin')]);
+        $this->client->replaceRequestData('channels', [$this->iriConverter->getIriFromResourceInSection($channel, 'admin')]);
     }
 
     /**
@@ -606,12 +632,10 @@ final readonly class ManagingPaymentMethodsContext implements Context
      */
     public function theFactoryNameFieldShouldBeDisabled(): void
     {
-        $paymentMethodCode = $this->responseChecker->getValue($this->client->getLastResponse(), 'code');
-
         $this->client->addRequestData('gatewayConfig', ['factoryName' => 'NEWFACTORYNAME']);
         $this->client->update();
 
-        Assert::false($this->responseChecker->hasValue($this->client->customItemAction(Resources::PAYMENT_METHODS, $paymentMethodCode, HttpRequest::METHOD_GET, 'gateway-config'), 'factoryName', 'NEWFACTORYNAME'));
+        Assert::false($this->responseChecker->hasValue($this->client->getLastResponse(), 'gatewayConfig', 'NEWFACTORYNAME'));
     }
 
     /**
@@ -671,7 +695,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->client->show(Resources::PAYMENT_METHODS, $paymentMethod->getCode());
         $channelsArray = $this->responseChecker->getValue($this->client->getLastResponse(), 'channels');
 
-        Assert::true(in_array($this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'), $channelsArray));
+        Assert::true(in_array($this->iriConverter->getIriFromResourceInSection($channel, 'admin'), $channelsArray));
     }
 
     /**
@@ -741,14 +765,11 @@ final readonly class ManagingPaymentMethodsContext implements Context
      */
     public function itsGatewayConfigurationShouldBe(string $element, string $value): void
     {
-        if (!$this->sharedStorage->has('gateway_config_iri')) {
-            $this->sharedStorage->set('gateway_config_iri', $this->responseChecker->getValue($this->client->getLastResponse(), 'gatewayConfig'));
-        }
+        $gatewayConfig = $this->responseChecker->getValue($this->client->getLastResponse(), 'gatewayConfig');
 
-        $response = $this->client->showByIri($this->sharedStorage->get('gateway_config_iri'));
-
-        Assert::true(
-            $this->responseChecker->hasValueInSubresourceObject($response, 'config', StringInflector::nameToLowercaseCode($element), $value),
+        Assert::same(
+            $value,
+            $gatewayConfig['config'][StringInflector::nameToLowercaseCode($element)],
             sprintf('Gateway configuration should have %s "%s", but it does not', $element, $value),
         );
     }
@@ -758,10 +779,11 @@ final readonly class ManagingPaymentMethodsContext implements Context
      */
     public function thisPaymentMethodShouldBeInSandboxMode(): void
     {
-        $response = $this->client->showByIri($this->sharedStorage->get('gateway_config_iri'));
+        $gatewayConfig = $this->responseChecker->getValue($this->client->getLastResponse(), 'gatewayConfig');
 
-        Assert::true(
-            $this->responseChecker->hasValueInSubresourceObject($response, 'config', 'sandbox', true),
+        Assert::same(
+            $gatewayConfig['config']['sandbox'],
+            true,
             'Gateway configuration should be in sandbox mode, but it is not',
         );
     }
@@ -814,6 +836,28 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then I should see the payment method :paymentMethodName
+     */
+    public function iShouldSeeThePaymentMethod(string $paymentMethodName): void
+    {
+        Assert::true(
+            in_array($paymentMethodName, $this->getFilteredOutPaymentMethodNamesFromCollection()),
+            sprintf('Payment method with name %s does not exist', $paymentMethodName),
+        );
+    }
+
+    /**
+     * @Then I should not see the payment method :paymentMethodName
+     */
+    public function iShouldNotSeeThePaymentMethod(string $paymentMethodName): void
+    {
+        Assert::false(
+            in_array($paymentMethodName, $this->getFilteredOutPaymentMethodNamesFromCollection()),
+            sprintf('Payment method with name %s exist, but should not', $paymentMethodName),
+        );
+    }
+
+    /**
      * @Then /^(this payment method) should still be in the registry$/
      */
     public function thisPaymentMethodShouldStillBeInTheRegistry(PaymentMethodInterface $paymentMethod): void
@@ -855,6 +899,14 @@ final readonly class ManagingPaymentMethodsContext implements Context
         return array_map(fn (array $paymentMethod) => $paymentMethod['translations']['en_US']['name'], $paymentMethods);
     }
 
+    /** @return string[] */
+    private function getFilteredOutPaymentMethodNamesFromCollection(): array
+    {
+        $paymentMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        return array_map(fn (array $paymentMethod) => $paymentMethod['translations']['en_US']['name'], $paymentMethods);
+    }
+
     /**
      * @param array<string, string> $config
      */
@@ -862,7 +914,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->sharedStorage->get('payment_method');
-        $gatewayConfigurationIri = $this->sectionAwareIriConverter->getIriFromResourceInSection(
+        $gatewayConfigurationIri = $this->iriConverter->getIriFromResourceInSection(
             $paymentMethod->getGatewayConfig(),
             'admin',
         );

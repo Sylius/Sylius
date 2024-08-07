@@ -14,7 +14,7 @@
                 "@type": "PaymentMethod",
                 "translations": {
                     "en_US": {
-                        "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                        "@id": "\/api\/v2\/admin\/payment-method\/CASH_ON_DELIVERY\/translations\/en_US",
                         "@type": "PaymentMethodTranslation",
                         "name": "Cash on delivery"
                     }

@@ -17,23 +17,126 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\PaymentMethod">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
+        <!-- Admin operations-->
 
         <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/payment-methods">
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_method:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+
+                <filters>
+                    <filter>sylius_api.order_filter.admin.payment_method</filter>
+                    <filter>sylius_api.filter.translation_order_and_locale</filter>
+                    <filter>sylius_api.search_filter.admin.payment_method</filter>
+                    <filter>sylius_api.boolean_filter.admin.payment_method</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/payment-methods">
+                <validationContext>
+                    <values>
+                        <value name="groups">sylius_api.payment_method_configuration_groups_generator</value>
+                    </values>
+                </validationContext>
+
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_method:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/payment-methods/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:admin:payment-method:show</value>
+                                <value>sylius:admin:payment_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/payment-methods/{code}">
+                <validationContext>
+                    <values>
+                        <value name="groups">sylius_api.payment_method_configuration_groups_generator</value>
+                    </values>
+                </validationContext>
+
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_method:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/payment-methods/{code}"
+                processor="sylius_api.state_processor.admin.payment_method.remove"
+            />
+
+            <!-- Shop operations-->
+
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/payment-methods"
+                paginationEnabled="false"
+            >
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:payment_method:index</value>
                             </values>
                         </value>
                     </values>
@@ -45,7 +148,28 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:payment-method:show</value>
+                                <value>sylius:shop:payment_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Core\Model\PaymentMethod" uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}/methods">
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="payments" />
+            <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="method" />
+        </uriVariables>
+
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.order.payment.payment_method.collection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:payment_method:index</value>
                             </values>
                         </value>
                     </values>
