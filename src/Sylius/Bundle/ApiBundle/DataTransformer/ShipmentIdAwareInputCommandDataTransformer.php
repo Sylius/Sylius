@@ -18,6 +18,9 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class ShipmentIdAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
+    /**
+     * @param array<string, mixed> $context
+     */
     public function transform($object, string $to, array $context = [])
     {
         /** @var ShipmentInterface $shipment */

@@ -21,6 +21,10 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
 final class AfterTokenRequestProcessor implements AfterTokenRequestProcessorInterface
 {
+    /**
+     * @param PaymentRequestFactoryInterface<PaymentRequestInterface> $paymentRequestFactory
+     * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository
+     */
     public function __construct(
         private PaymentRequestFactoryInterface $paymentRequestFactory,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,

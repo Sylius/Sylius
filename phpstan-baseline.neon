@@ -3526,6 +3526,16 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Order/NumberGenerator/SequentialOrderNumberGenerator.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\CommandProvider\\\\ActionsCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle//CoreBundle/PaymentRequest/CommandProvider/ActionsCommandProvider.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\CommandProvider\\\\GatewayFactoryCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle//CoreBundle/PaymentRequest/CommandProvider/GatewayFactoryCommandProvider.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PriceHistory\\\\Command\\\\ApplyLowestPriceOnChannelPricings\\:\\:__construct\\(\\) has parameter \\$channelPricingIds with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/PriceHistory/Command/ApplyLowestPriceOnChannelPricings.php

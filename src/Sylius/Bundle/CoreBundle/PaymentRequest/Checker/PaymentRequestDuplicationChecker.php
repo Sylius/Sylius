@@ -18,6 +18,7 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
 final class PaymentRequestDuplicationChecker implements PaymentRequestDuplicationCheckerInterface
 {
+    /** @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository */
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
     ) {
