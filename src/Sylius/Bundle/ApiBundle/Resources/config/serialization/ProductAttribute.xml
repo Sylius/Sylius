@@ -53,8 +53,9 @@
         <attribute name="position">
             <group>sylius:admin:product_attribute:index</group>
             <group>sylius:admin:product_attribute:show</group>
-            <group>sylius:shop:product_attribute:show</group>
+            <group>sylius:admin:product_attribute:create</group>
             <group>sylius:admin:product_attribute:update</group>
+            <group>sylius:shop:product_attribute:show</group>
         </attribute>
         <attribute name="translations">
             <group>sylius:admin:product_attribute:index</group>
