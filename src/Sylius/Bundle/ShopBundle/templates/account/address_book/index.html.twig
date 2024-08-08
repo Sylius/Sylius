@@ -1,8 +1,5 @@
 {% extends '@SyliusShop/account/address_book/layout.html.twig' %}
 
-{% import '@SyliusShop/shared/messages.html.twig' as messages %}
-{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
-
 {% block title %}{{ 'sylius.ui.address_book'|trans }} | {{ parent() }}{% endblock %}
 
 {% block account_header %}
@@ -12,25 +9,5 @@
 {% endblock %}
 
 {% block account_content %}
-    <div class="text-end mb-4">
-        {{ buttons.primary(path('sylius_shop_account_address_book_create'), 'sylius.ui.add_address'|trans, null, null, 'btn-primary') }}
-    </div>
-
-    {% if addresses|length > 0 %}
-        {% set default_address = (sylius.customer.defaultAddress) %}
-
-        {% if default_address is not null %}
-            {% include '@SyliusShop/account/address_book/default_item.html.twig' with {'address': default_address} %}
-        {% endif %}
-
-        <div {{ sylius_test_html_attribute('addresses') }}>
-            {% for address in addresses|filter(address => default_address is null or address.id != default_address.id) %}
-                {% include '@SyliusShop/account/address_book/item.html.twig' %}
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="mb-4">
-            {{ messages.info('sylius.ui.you_have_no_addresses_defined') }}
-        </div>
-    {% endif %}
+    {% hook 'sylius_shop.account.address_book.index' with { addresses, default_address: sylius.customer.defaultAddress|default(null) } %}
 {% endblock %}
