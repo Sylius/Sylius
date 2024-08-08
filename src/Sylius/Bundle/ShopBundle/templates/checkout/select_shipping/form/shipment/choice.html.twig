@@ -1,0 +1,18 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="mb-5" {{ sylius_test_html_attribute('shipments') }}>
+    {{ form_errors(form.method) }}
+
+    {% for key, choice_form in form.method %}
+        {% set fee = form.method.vars.shipping_costs[choice_form.vars.value] %}
+        {% set method = form.method.vars.choices[key].data %}
+
+        <div class="card bg-body-tertiary border-0 mb-3" {{ sylius_test_html_attribute('shipping-item') }}>
+            <label class="d-flex gap-3 card-body">
+                {% hook 'choice' with { fee, 'form': choice_form, method } %}
+            </label>
+        </div>
+    {% else %}
+        {% include '@SyliusShop/checkout/select_shipping/unavailable.html.twig' %}
+    {% endfor %}
+</div>

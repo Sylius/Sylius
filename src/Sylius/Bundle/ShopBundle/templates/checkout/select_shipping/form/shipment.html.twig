@@ -1,0 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+{% set order = hookable_metadata.context.order %}
+
+{% for key, shipment in order.shipments %}
+    {% hook 'shipment' with { 'form': form.shipments[key], 'index': loop.index } %}
+{% else %}
+    {% include '@SyliusShop/checkout/select_shipping/unavailable.html.twig' %}
+{% endfor %}

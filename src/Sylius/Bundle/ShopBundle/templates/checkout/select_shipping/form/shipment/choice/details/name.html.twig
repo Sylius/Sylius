@@ -1,0 +1,7 @@
+{% set form = hookable_metadata.context.form %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+<div {{ sylius_test_html_attribute('shipping-method-checkbox') }}>
+    {{ form_widget(form, sylius_test_form_attribute('shipping-method-select')) }}
+</div>
