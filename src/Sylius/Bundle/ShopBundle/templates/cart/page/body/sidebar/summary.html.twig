@@ -1,0 +1,8 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set cart = hookable_metadata.context.cart %}
+
+<div class="p-4 bg-light mb-4 rounded-3">
+    <h3 class="mb-4">{{ 'sylius.ui.summary'|trans }}</h3>
+    {% hook 'summary' %}
+</div>

@@ -1,0 +1,8 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set cart = hookable_metadata.context.cart %}
+
+<div class="hstack gap-2 border-top pt-4 mt-4">
+    <div class="h5">{{ 'sylius.ui.order_total'|trans }}:</div>
+    <div class="ms-auto h5 text-end" {{ sylius_test_html_attribute('cart-grand-total') }}>{{ money.convertAndFormat(cart.total) }}</div>
+</div>

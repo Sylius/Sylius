@@ -1,0 +1,8 @@
+{% set item = hookable_metadata.context.item %}
+{% set item_form = hookable_metadata.context.item_form %}
+{% set main_form_id = hookable_metadata.context.main_form_id %}
+
+<td>
+    {{ form_widget(item_form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)|sylius_merge_recursive({'attr': {'form': main_form_id}})) }}
+    {{ form_errors(item_form.quantity) }}
+</td>

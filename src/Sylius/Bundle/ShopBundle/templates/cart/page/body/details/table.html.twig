@@ -1,0 +1,8 @@
+{% set cart = hookable_metadata.context.cart %}
+{% set form = hookable_metadata.context.form %}
+
+<div class="table-responsive">
+    <table class="table align-middle" {{ sylius_test_html_attribute('cart-items') }}>
+        {% hook 'table' with { cart, form } %}
+    </table>
+</div>

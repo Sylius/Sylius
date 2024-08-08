@@ -1,0 +1,10 @@
+{% set cart = hookable_metadata.context.cart %}
+{% set form = hookable_metadata.context.form %}
+
+<tbody>
+    {% for key, item in cart.items %}
+        <tr {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
+            {% hook 'body' with { item, item_form: form.items[key], main_form_id: form.vars.id, loop_index: loop.index } %}
+        </tr>
+    {% endfor %}
+</tbody>
