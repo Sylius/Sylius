@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Form\Extension;
 
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class ChannelTypeExtension extends AbstractTypeExtension
