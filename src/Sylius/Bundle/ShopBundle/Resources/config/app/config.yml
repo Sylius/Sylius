@@ -119,13 +119,6 @@ sylius_ui:
                     template: "@SyliusShop/Cart/summary/checkout.html.twig"
                     priority: 10
 
-        sylius.shop.account.profile.update.form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.profile.update.form
-
         sylius.shop.contact.request.form:
             blocks:
                 header:

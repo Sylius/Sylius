@@ -1,6 +1,5 @@
 {% extends '@SyliusShop/account/layout.html.twig' %}
 {% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
-{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
@@ -26,27 +25,7 @@
 
         <input type="hidden" name="_method" value="PUT" />
 
-        <div class="row">
-            <div class="col-12 col-md-6">{{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}</div>
-            <div class="col-12 col-md-6">{{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}</div>
-        </div>
-
-        <div>{{ form_row(form.email, sylius_test_form_attribute('email')) }}</div>
-
-        <div class="row">
-            <div class="col-12 col-md-6">{{ form_row(form.birthday) }}</div>
-            <div class="col-12 col-md-6">{{ form_row(form.gender) }}</div>
-        </div>
-
-        <div>{{ form_row(form.phoneNumber) }}</div>
-
-        <div class="mb-4">
-            {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribe-newsletter')) }}
-        </div>
-
-        {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
-
-        {{ buttons.submit('sylius.ui.save_changes'|trans, 'save-changes', null, 'btn-primary') }}
+        {% hook 'sylius_shop.account.profile_update' with { form } %}
 
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
