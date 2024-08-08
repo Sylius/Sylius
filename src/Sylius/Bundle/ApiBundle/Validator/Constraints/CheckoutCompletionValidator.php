@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\TransitionInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
@@ -27,24 +26,11 @@ use Webmozart\Assert\Assert;
 
 class CheckoutCompletionValidator extends ConstraintValidator
 {
-    /**
-     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
-     */
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
-        private OrderRepositoryInterface $orderRepository,
-        private FactoryInterface|StateMachineInterface $stateMachineFactory,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly StateMachineInterface $stateMachineFactory,
     ) {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            trigger_deprecation(
-                'sylius/api-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the second argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    FactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public function validate(mixed $value, Constraint $constraint): void

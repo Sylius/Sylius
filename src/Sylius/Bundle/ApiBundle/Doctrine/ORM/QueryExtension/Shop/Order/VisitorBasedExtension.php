@@ -13,23 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Order;
 
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 final readonly class VisitorBasedExtension implements QueryItemExtensionInterface
 {
-    /**
-     * @param array<array-key, mixed> $nonFilteredCartAllowedOperations
-     */
     public function __construct(
+        private SectionProviderInterface $sectionProvider,
         private UserContextInterface $userContext,
-        private array $nonFilteredCartAllowedOperations = [],
     ) {
     }
 
@@ -45,12 +43,15 @@ final readonly class VisitorBasedExtension implements QueryItemExtensionInterfac
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if (!is_a($resourceClass, OrderInterface::class, true) || null === $operation) {
+        if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user !== null) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
+            return;
+        }
+
+        if (null !== $this->userContext->getUser()) {
             return;
         }
 
@@ -67,24 +68,6 @@ final readonly class VisitorBasedExtension implements QueryItemExtensionInterfac
                     sprintf('%s.createdByGuest = :createdByGuest', $rootAlias),
                 ),
             ))->setParameter('createdByGuest', true)
-        ;
-
-        $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
-
-        if ($httpRequestMethodType === Request::METHOD_GET || in_array($operation->getName(), $this->nonFilteredCartAllowedOperations, true)) {
-            return;
-        }
-
-        $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
-    }
-
-    private function filterCart(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $rootAlias): void
-    {
-        $stateParameterName = $queryNameGenerator->generateParameterName('state');
-
-        $queryBuilder
-            ->andWhere(sprintf('%s.state = :%s', $rootAlias, $stateParameterName))
-            ->setParameter($stateParameterName, OrderInterface::STATE_CART)
         ;
     }
 }

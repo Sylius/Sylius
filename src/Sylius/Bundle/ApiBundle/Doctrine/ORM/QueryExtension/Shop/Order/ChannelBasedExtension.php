@@ -17,17 +17,15 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
-use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Webmozart\Assert\Assert;
 
 final readonly class ChannelBasedExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
+    public function __construct(private SectionProviderInterface $sectionProvider)
     {
     }
 
@@ -45,14 +43,8 @@ final readonly class ChannelBasedExtension implements QueryCollectionExtensionIn
             return;
         }
 
-        $user = $this->userContext->getUser();
-
-        if ($user instanceof AdminUserInterface) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
-        }
-
-        if (!$user instanceof ShopUserInterface) {
-            throw new AccessDeniedException();
         }
 
         Assert::keyExists($context, ContextKeys::CHANNEL);

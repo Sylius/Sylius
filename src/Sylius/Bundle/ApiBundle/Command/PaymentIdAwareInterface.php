@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-interface PaymentMethodCodeAwareInterface extends CommandAwareDataTransformerInterface
+interface PaymentIdAwareInterface extends CommandAwareDataTransformerInterface
 {
-    public function getPaymentMethodCode(): ?string;
+    public function getPaymentId(): ?int;
 }

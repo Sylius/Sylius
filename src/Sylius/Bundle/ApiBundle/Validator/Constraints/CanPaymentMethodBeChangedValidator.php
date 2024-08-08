@@ -22,10 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class CanPaymentMethodBeChangedValidator extends ConstraintValidator
 {
-    /**
-     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
-     */
-    public function __construct(private OrderRepositoryInterface $orderRepository)
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
+    public function __construct(private readonly OrderRepositoryInterface $orderRepository)
     {
     }
 

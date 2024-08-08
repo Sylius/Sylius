@@ -62,12 +62,12 @@
 <!--            <argument type="service" id="sylius.context.channel" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">-->
-<!--            <argument type="service" id="sylius.context.cart" />-->
-<!--            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />-->
-<!--            <argument type="service" id="sylius.command_bus" />-->
-<!--            <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent" method="onLoginSuccess" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.command_bus" />
+            <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent" method="onLoginSuccess" />
+        </service>
 
         <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
             <argument type="service" id="api_platform.symfony.iri_converter" />

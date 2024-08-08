@@ -30,41 +30,50 @@
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_not_empty" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_order_product_eligibility" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.order_product_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_order_product_eligibility" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <argument type="service" id="sylius.availability_checker" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_order_item_availability" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.order_item_availability"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.availability_checker" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_order_item_availability" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <argument type="service" id="sylius.shipping_method_eligibility_checker" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.order_shipping_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <argument type="service" id="sylius_abstraction.state_machine" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.checkout_completion"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <argument type="service" id="sm.factory" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />-->
-<!--        </service>-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibilityValidator">-->
-<!--            <argument type="service" id="sylius.repository.shipment" />-->
-<!--            <argument type="service" id="sylius.repository.shipping_method" />-->
-<!--            <argument type="service" id="sylius.shipping_methods_resolver" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_chosen_shipping_method_eligibility" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.chosen_shipping_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibilityValidator"
+        >
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_chosen_shipping_method_eligibility" />
+        </service>
 
         <service
             id="sylius_api.validator.adding_eligible_product_variant_to_cart"
@@ -94,22 +103,31 @@
             <tag name="validator.constraint_validator" alias="sylius_api_validator_correct_order_address" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_order_payment_method_eligibility" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.order_payment_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="validator.constraint_validator" alias="sylius_api_order_payment_method_eligibility" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator">-->
-<!--            <argument type="service" id="sylius.repository.payment" />-->
-<!--            <argument type="service" id="sylius.repository.payment_method" />-->
-<!--            <argument type="service" id="sylius.payment_methods_resolver" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_method_eligibility" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.chosen_payment_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator"
+        >
+            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.payment_methods_resolver" />
+            <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_method_eligibility" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChangedValidator">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_can_payment_method_be_changed" />-->
-<!--        </service>-->
+        <service
+            id="sylius_api.validator.can_payment_method_be_changed"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChangedValidator"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_can_payment_method_be_changed" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator">-->
 <!--            <tag name="validator.constraint_validator" alias="sylius_api_correct_change_shop_user_confirm_password" />-->

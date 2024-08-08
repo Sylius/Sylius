@@ -31,7 +31,7 @@ final readonly class PaymentMethodChanger implements PaymentMethodChangerInterfa
 
     public function changePaymentMethod(
         string $paymentMethodCode,
-        string $paymentId,
+        int $paymentId,
         OrderInterface $order,
     ): OrderInterface {
         /** @var PaymentMethodInterface|null $paymentMethod */

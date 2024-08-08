@@ -18,13 +18,17 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-final class ShopUserBasedExtension implements QueryCollectionExtensionInterface
+final readonly class ShopUserBasedExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
-    {
+    public function __construct(
+        private SectionProviderInterface $sectionProvider,
+        private UserContextInterface $userContext,
+    ) {
     }
 
     /**
@@ -41,21 +45,24 @@ final class ShopUserBasedExtension implements QueryCollectionExtensionInterface
             return;
         }
 
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
+            return;
+        }
+
         $user = $this->userContext->getUser();
-        if (!$user instanceof ShopUserInterface || null === $customer = $user->getCustomer()) {
+
+        if (!$user instanceof ShopUserInterface) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
-        $orderParameterName = $queryNameGenerator->generateParameterName('order');
-        $customerJoinParameterName = $queryNameGenerator->generateJoinAlias('customer_join');
+        $orderJoinParameterName = $queryNameGenerator->generateParameterName('order');
         $customerParameterName = $queryNameGenerator->generateParameterName('customer');
 
         $queryBuilder
-            ->leftJoin(sprintf('%s.order', $rootAlias), $orderParameterName)
-            ->leftJoin(sprintf('%s.customer', $orderParameterName), $customerJoinParameterName)
-            ->andWhere(sprintf('%s = :%s', $customerJoinParameterName, $customerParameterName))
-            ->setParameter($customerParameterName, $customer->getId())
+            ->leftJoin(sprintf('%s.order', $rootAlias), $orderJoinParameterName)
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.customer', $orderJoinParameterName), sprintf(':%s', $customerParameterName)))
+            ->setParameter($customerParameterName, $user->getCustomer())
             ->addOrderBy(sprintf('%s.id', $rootAlias), 'ASC')
         ;
     }

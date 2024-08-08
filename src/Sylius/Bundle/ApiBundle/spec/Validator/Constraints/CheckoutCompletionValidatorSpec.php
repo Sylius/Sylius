@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\Transition;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
@@ -31,9 +30,9 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory);
+        $this->beConstructedWith($orderRepository, $stateMachine);
     }
 
     function it_is_a_constraint_validator(): void

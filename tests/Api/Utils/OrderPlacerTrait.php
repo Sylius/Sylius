@@ -95,7 +95,7 @@ trait OrderPlacerTrait
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
             'CASH_ON_DELIVERY',
-            (string) $cart->getLastPayment()->getId(),
+            $cart->getLastPayment()->getId(),
         );
 
         $order = $this->dispatchCompleteOrderCommand($tokenValue);
@@ -120,11 +120,9 @@ trait OrderPlacerTrait
     private function dispatchPaymentMethodChooseCommand(
         string $tokenValue,
         string $paymentMethodCode = 'CASH_ON_DELIVERY',
-        ?string $subresourceId = null,
+        ?int $paymentId = null,
     ): OrderInterface {
-        $choosePaymentMethodCommand = new ChoosePaymentMethod($paymentMethodCode);
-        $choosePaymentMethodCommand->setOrderTokenValue($tokenValue);
-        $choosePaymentMethodCommand->setSubresourceId($subresourceId);
+        $choosePaymentMethodCommand = new ChoosePaymentMethod($paymentMethodCode, $paymentId, $tokenValue);
 
         $envelope = $this->commandBus->dispatch($choosePaymentMethodCommand);
 
@@ -134,8 +132,7 @@ trait OrderPlacerTrait
     protected function dispatchCompleteOrderCommand(
         string $tokenValue,
     ): OrderInterface {
-        $completeOrderCommand = new CompleteOrder();
-        $completeOrderCommand->setOrderTokenValue($tokenValue);
+        $completeOrderCommand = new CompleteOrder(orderTokenValue: $tokenValue);
         $envelope = $this->commandBus->dispatch($completeOrderCommand);
 
         return $envelope->last(HandledStamp::class)->getResult();
