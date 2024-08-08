@@ -1,0 +1,5 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+{% set default_address = hookable_metadata.context.default_address %}
+
+{{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': default_address.id}), null, true, default_address.id) }}

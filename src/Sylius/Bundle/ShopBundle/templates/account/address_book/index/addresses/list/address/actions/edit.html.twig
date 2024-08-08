@@ -1,0 +1,7 @@
+{% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
+
+<div {{ sylius_test_html_attribute('edit-button') }}>
+    <a class="btn btn-sm btn-icon btn-outline-gray" href="{{ path('sylius_shop_account_address_book_update', { 'id': hookable_metadata.context.address.id }) }}">
+        {{ icon('pencil', 'width: 16px; height: 16px;') }} {{ 'sylius.ui.edit'|trans }}
+    </a>
+</div>

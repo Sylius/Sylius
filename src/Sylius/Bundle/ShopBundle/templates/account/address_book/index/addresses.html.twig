@@ -1,0 +1,9 @@
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% if hookable_metadata.context.addresses|length > 0 %}
+    {% hook 'addresses' %}
+{% else %}
+    <div class="mb-4">
+        {{ messages.info('sylius.ui.you_have_no_addresses_defined') }}
+    </div>
+{% endif %}
