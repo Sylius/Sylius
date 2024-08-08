@@ -1,7 +1,10 @@
+{% set form = hookable_metadata.context.form %}
+
 <div>
-    {% for key, shipment in order.shipments %}
-        {% include '@SyliusShop/checkout/select_shipping/shipment.html.twig' with {'form': form.shipments[key]} %}
-    {% else %}
-        {% include '@SyliusShop/checkout/select_shipping/unavailable.html.twig' %}
-    {% endfor %}
+    {{ form_start(form, {'action': path('sylius_shop_checkout_select_shipping'), 'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+    <input type="hidden" name="_method" value="PUT" />
+    {% hook 'form' %}
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
 </div>
