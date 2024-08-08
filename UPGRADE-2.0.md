@@ -184,5 +184,5 @@
 
 ## Theming
 If you are running your shop in the headless mode the `sylius/theme-bundle` is no longer installed as it has been moved to the shop bundle.
-* The `themeName` form field has been removed from the Channel, if the shop bundle is not installed.
+* Channel's `themeName` form field existence is made optional and depends `ShopBundle` presence.
 * The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`
