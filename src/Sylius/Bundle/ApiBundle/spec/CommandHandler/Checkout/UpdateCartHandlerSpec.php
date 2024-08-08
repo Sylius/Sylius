@@ -62,8 +62,13 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
 
         $orderPromotionCodeAssigner->assign($order, 'coupon')->shouldNotBeCalled();
 
-        $updateCart = new UpdateCart('john.doe@email.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject(), 'coupon');
-        $updateCart->setOrderTokenValue('cart');
+        $updateCart = new UpdateCart(
+            email: 'john.doe@email.com',
+            billingAddress: $billingAddress->getWrappedObject(),
+            shippingAddress: $shippingAddress->getWrappedObject(),
+            couponCode: 'coupon',
+            orderTokenValue: 'cart',
+        );
 
         $this->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [$updateCart])
@@ -77,8 +82,10 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $billingAddress,
     ): void {
-        $updateCart = new UpdateCart(null, $billingAddress->getWrappedObject());
-        $updateCart->setOrderTokenValue('cart');
+        $updateCart = new UpdateCart(
+            billingAddress: $billingAddress->getWrappedObject(),
+            orderTokenValue: 'cart',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'cart'])->willReturn($order);
 
@@ -105,9 +112,10 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $shippingAddress,
     ): void {
-        $updateCart = new UpdateCart(null, null, $shippingAddress->getWrappedObject(), null);
-
-        $updateCart->setOrderTokenValue('cart');
+        $updateCart = new UpdateCart(
+            shippingAddress: $shippingAddress->getWrappedObject(),
+            orderTokenValue: 'cart',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'cart'])->willReturn($order->getWrappedObject());
 
@@ -137,8 +145,10 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         OrderPromotionCodeAssignerInterface $orderPromotionCodeAssigner,
         OrderInterface $order,
     ): void {
-        $updateCart = new UpdateCart(null, null, null, 'couponCode');
-        $updateCart->setOrderTokenValue('cart');
+        $updateCart = new UpdateCart(
+            couponCode: 'couponCode',
+            orderTokenValue: 'cart',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'cart'])->willReturn($order->getWrappedObject());
 
@@ -166,13 +176,12 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         CustomerResolverInterface $customerResolver,
     ): void {
         $updateCart = new UpdateCart(
-            'john.doe@email.com',
-            $billingAddress->getWrappedObject(),
-            $shippingAddress->getWrappedObject(),
-            'couponCode',
+            email: 'john.doe@email.com',
+            billingAddress: $billingAddress->getWrappedObject(),
+            shippingAddress: $shippingAddress->getWrappedObject(),
+            couponCode: 'couponCode',
+            orderTokenValue: 'cart',
         );
-
-        $updateCart->setOrderTokenValue('cart');
 
         $orderRepository->findOneBy(['tokenValue' => 'cart'])->willReturn($order->getWrappedObject());
 
@@ -208,13 +217,12 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
     ): void {
         $updateCart = new UpdateCart(
-            'john.doe@email.com',
-            $billingAddress->getWrappedObject(),
-            $shippingAddress->getWrappedObject(),
-            'couponCode',
+            email: 'john.doe@email.com',
+            billingAddress: $billingAddress->getWrappedObject(),
+            shippingAddress: $shippingAddress->getWrappedObject(),
+            couponCode: 'couponCode',
+            orderTokenValue: 'cart',
         );
-
-        $updateCart->setOrderTokenValue('cart');
 
         $orderRepository->findOneBy(['tokenValue' => 'cart'])->willReturn($order->getWrappedObject());
 

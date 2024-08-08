@@ -13,29 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
+use Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 
-class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface
+class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, OrderItemIdAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
-
-    /** @var string|null */
-    public $orderItemId;
-
-    public function __construct(public int $quantity)
-    {
-    }
-
-    public static function createFromData(string $tokenValue, string $orderItemId, int $quantity): self
-    {
-        $command = new self($quantity);
-
-        $command->orderTokenValue = $tokenValue;
-        $command->orderItemId = $orderItemId;
-
-        return $command;
+    public function __construct(
+        public int $quantity,
+        public ?int $orderItemId = null,
+        public ?string $orderTokenValue = null,
+    ) {
     }
 
     public function getOrderTokenValue(): ?string
@@ -43,23 +30,8 @@ class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, Subreso
         return $this->orderTokenValue;
     }
 
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
-    }
-
-    public function getSubresourceId(): ?string
+    public function getOrderItemId(): ?int
     {
         return $this->orderItemId;
-    }
-
-    public function setSubresourceId(?string $subresourceId): void
-    {
-        $this->orderItemId = $subresourceId;
-    }
-
-    public function getSubresourceIdAttributeKey(): string
-    {
-        return 'orderItemId';
     }
 }

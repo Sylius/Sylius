@@ -15,26 +15,15 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
 
-class ChooseShippingMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface, IriToIdentifierConversionAwareInterface
+class ChooseShippingMethod implements OrderTokenValueAwareInterface, ShipmentIdAwareInterface, IriToIdentifierConversionAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
-
-    /** @var string|null */
-    public $shipmentId;
-
-    /**
-     * @immutable
-     *
-     * @var string
-     */
-    public $shippingMethodCode;
-
-    public function __construct(string $shippingMethodCode)
-    {
-        $this->shippingMethodCode = $shippingMethodCode;
+    public function __construct(
+        public string $shippingMethodCode,
+        public ?int $shipmentId = null,
+        public ?string $orderTokenValue = null,
+    ) {
     }
 
     public function getOrderTokenValue(): ?string
@@ -42,23 +31,8 @@ class ChooseShippingMethod implements OrderTokenValueAwareInterface, Subresource
         return $this->orderTokenValue;
     }
 
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
-    }
-
-    public function getSubresourceId(): ?string
+    public function getShipmentId(): ?int
     {
         return $this->shipmentId;
-    }
-
-    public function setSubresourceId(?string $subresourceId): void
-    {
-        $this->shipmentId = $subresourceId;
-    }
-
-    public function getSubresourceIdAttributeKey(): string
-    {
-        return 'shipmentId';
     }
 }

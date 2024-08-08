@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Catalog;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailIfNotSetAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 
-readonly class AddProductReview implements IriToIdentifierConversionAwareInterface, LoggedInCustomerEmailIfNotSetAwareInterface
+readonly class AddProductReview implements IriToIdentifierConversionAwareInterface, LoggedInCustomerEmailAwareInterface
 {
     public function __construct(
         public string $title,

@@ -77,7 +77,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(OrderItemNotFoundException::class)
             ->during('validate', [
-                ChangeItemQuantityInCart::createFromData('token', '11', 2),
+                new ChangeItemQuantityInCart(2, 11, 'token'),
                 new ChangedItemQuantityInCart(),
             ])
         ;
@@ -100,7 +100,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(2, 11, 'token'),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -130,7 +130,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(2, 11, 'token'),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -162,7 +162,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(2, 11, 'token'),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -197,7 +197,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(2, 11, 'token'),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -242,7 +242,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(2, 11, 'token'),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -295,7 +295,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(2, 11, 'token'),
             new ChangedItemQuantityInCart(),
         );
     }

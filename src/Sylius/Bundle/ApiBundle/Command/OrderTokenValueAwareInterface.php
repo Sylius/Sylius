@@ -16,6 +16,4 @@ namespace Sylius\Bundle\ApiBundle\Command;
 interface OrderTokenValueAwareInterface extends CommandAwareDataTransformerInterface
 {
     public function getOrderTokenValue(): ?string;
-
-    public function setOrderTokenValue(?string $orderTokenValue): void;
 }

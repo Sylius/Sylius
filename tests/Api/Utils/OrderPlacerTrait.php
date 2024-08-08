@@ -60,7 +60,7 @@ trait OrderPlacerTrait
         $this->dispatchShippingMethodChooseCommand(
             $tokenValue,
             'UPS',
-            (string) $cart->getShipments()->first()->getId(),
+            $cart->getShipments()->first()->getId(),
         );
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
@@ -90,7 +90,7 @@ trait OrderPlacerTrait
         $this->dispatchShippingMethodChooseCommand(
             $tokenValue,
             'UPS',
-            (string) $cart->getShipments()->first()->getId(),
+            $cart->getShipments()->first()->getId(),
         );
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
@@ -108,11 +108,9 @@ trait OrderPlacerTrait
     private function dispatchShippingMethodChooseCommand(
         string $tokenValue,
         string $shippingMethodCode = 'UPS',
-        ?string $subresourceId = null,
+        ?int $shipmentId = null,
     ): OrderInterface {
-        $chooseShippingMethodCommand = new ChooseShippingMethod($shippingMethodCode);
-        $chooseShippingMethodCommand->setOrderTokenValue($tokenValue);
-        $chooseShippingMethodCommand->setSubresourceId($subresourceId);
+        $chooseShippingMethodCommand = new ChooseShippingMethod($shippingMethodCode, $shipmentId, $tokenValue);
 
         $envelope = $this->commandBus->dispatch($chooseShippingMethodCommand);
 
@@ -190,8 +188,10 @@ trait OrderPlacerTrait
 
     protected function pickUpCart(string $tokenValue = 'nAWw2jewpA', string $channelCode = 'WEB'): string
     {
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode($channelCode);
+        $pickupCartCommand = new PickupCart(
+            tokenValue: $tokenValue,
+            channelCode: $channelCode,
+        );
 
         $this->commandBus->dispatch($pickupCartCommand);
 
@@ -200,8 +200,11 @@ trait OrderPlacerTrait
 
     protected function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue): string
     {
-        $addItemToCartCommand = new AddItemToCart($productVariantCode, $quantity);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $addItemToCartCommand = new AddItemToCart(
+            productVariantCode: $productVariantCode,
+            quantity: $quantity,
+            orderTokenValue: $tokenValue,
+        );
 
         $this->commandBus->dispatch($addItemToCartCommand);
 
@@ -228,8 +231,7 @@ trait OrderPlacerTrait
         $address->setCountryCode('US');
         $address->setPostcode('90000');
 
-        $updateCartCommand = new UpdateCart(email: $email, billingAddress: $address, couponCode: $couponCode);
-        $updateCartCommand->setOrderTokenValue($tokenValue);
+        $updateCartCommand = new UpdateCart(email: $email, billingAddress: $address, couponCode: $couponCode, orderTokenValue: $tokenValue);
 
         $envelope = $this->commandBus->dispatch($updateCartCommand);
 

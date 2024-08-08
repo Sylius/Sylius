@@ -27,9 +27,9 @@ use Webmozart\Assert\Assert;
 final class AddingEligibleProductVariantToCartValidator extends ConstraintValidator
 {
     public function __construct(
-        private ProductVariantRepositoryInterface $productVariantRepository,
-        private OrderRepositoryInterface $orderRepository,
-        private AvailabilityCheckerInterface $availabilityChecker,
+        private readonly ProductVariantRepositoryInterface $productVariantRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly AvailabilityCheckerInterface $availabilityChecker,
     ) {
     }
 

@@ -31,7 +31,7 @@ final readonly class DeleteOrderItemAction
 
     public function __invoke(Request $request): Response
     {
-        $orderItemId = $request->attributes->get('itemId');
+        $orderItemId = $request->attributes->get('orderItemId');
         $tokenValue = $request->attributes->get('tokenValue');
         if (null === $orderItemId || null === $tokenValue) {
             throw new OrderItemNotFoundException();

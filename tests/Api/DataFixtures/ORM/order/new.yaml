@@ -28,9 +28,9 @@ Sylius\Component\Core\Model\Order:
         currencyCode: "USD"
         localeCode: "en_US"
         state: "cart"
-        paymentState: "paid"
-        shippingState: "ready"
-        checkoutState: "completed"
+        paymentState: "cart"
+        shippingState: "cart"
+        checkoutState: "cart"
         tokenValue: "cartToken"
         customer: "@customer_dave"
 

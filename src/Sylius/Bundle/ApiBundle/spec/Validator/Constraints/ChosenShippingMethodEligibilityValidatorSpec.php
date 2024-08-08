@@ -75,9 +75,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $shippingAddress,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
         $shippingMethod->getName()->willReturn('DHL');
@@ -108,9 +106,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $shippingAddress,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 
@@ -135,9 +131,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn(null);
 
@@ -164,9 +158,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $shippingAddress,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 
@@ -192,9 +184,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ShippingMethodInterface $shippingMethod,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 

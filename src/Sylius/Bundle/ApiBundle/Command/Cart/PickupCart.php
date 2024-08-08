@@ -14,22 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 
-class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterface, LocaleCodeAwareInterface
+class PickupCart implements ChannelCodeAwareInterface, LoggedInCustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
-    /** @var string|null */
-    public $localeCode;
-
-    /** @var string|null */
-    private $channelCode;
-
-    /** @var string|null */
-    public $email;
-
-    public function __construct(public ?string $tokenValue = null)
-    {
+    public function __construct(
+        public ?string $tokenValue = null,
+        public ?string $channelCode = null,
+        public ?string $email = null,
+        public ?string $localeCode = null,
+    ) {
     }
 
     public function getChannelCode(): ?string
@@ -37,28 +32,13 @@ class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterfa
         return $this->channelCode;
     }
 
-    public function setChannelCode(?string $channelCode): void
-    {
-        $this->channelCode = $channelCode;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email): void
-    {
-        $this->email = $email;
-    }
-
     public function getLocaleCode(): ?string
     {
         return $this->localeCode;
-    }
-
-    public function setLocaleCode(?string $localeCode): void
-    {
-        $this->localeCode = $localeCode;
     }
 }

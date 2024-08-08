@@ -19,7 +19,8 @@
         <defaults public="false" />
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelCodeAwareContextBuilder"
+            id="sylius_api.context_builder.channel_code_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\ChannelCodeAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
@@ -30,13 +31,14 @@
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInCustomerEmailIfNotSetAwareContextBuilder"
+            id="sylius_api.context_builder.logged_in_customer_email_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LoggedInCustomerEmailAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
-            <argument>Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailIfNotSetAware</argument>
-            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailIfNotSetAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
         </service>
 
@@ -50,7 +52,8 @@
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleCodeAwareContextBuilder"
+            id="sylius_api.context_builder.locale_code_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LocaleCodeAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
@@ -78,7 +81,8 @@
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInShopUserIdAwareContextBuilder"
+            id="sylius_api.context_builder.logged_in_shop_user_id_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LoggedInShopUserIdAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
@@ -89,23 +93,42 @@
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ShipmentAwareContextBuilder"
+            id="sylius_api.context_builder.shipment_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface</argument>
+            <argument>Sylius\Component\Core\Model\ShipmentInterface</argument>
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\OrderTokenValueAwareContextBuilder"
+            id="sylius_api.context_builder.order_token_value_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface</argument>
+            <argument>Sylius\Component\Core\Model\OrderInterface</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.order_item_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface</argument>
+            <argument>Sylius\Component\Core\Model\OrderItemInterface</argument>
         </service>
     </services>
 </container>

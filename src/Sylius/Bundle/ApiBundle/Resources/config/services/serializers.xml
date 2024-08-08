@@ -18,12 +18,12 @@
     <services>
         <defaults public="true" />
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">-->
-<!--            <argument type="service" id="serializer.normalizer.object" />-->
-<!--            <argument type="string">%sylius.model.address.class%</argument>-->
-<!--            <argument type="string">%sylius.model.address.interface%</argument>-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="sylius_api.denormalizer.address" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\AddressDenormalizer">
+            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="string">%sylius.model.address.class%</argument>
+            <argument type="string">%sylius.model.address.interface%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
         <service id="sylius_api.denormalizer.command_arguments" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandArgumentsDenormalizer">
             <argument type="service" id="sylius_api.denormalizer.command" />

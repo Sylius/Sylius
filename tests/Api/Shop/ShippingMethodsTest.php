@@ -171,12 +171,10 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
+        $pickupCartCommand = new PickupCart(tokenValue: $tokenValue, channelCode: 'WEB');
         $commandBus->dispatch($pickupCartCommand);
 
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3, $tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
         $address = new Address();
@@ -187,8 +185,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $address->setCountryCode('US');
         $address->setPostcode('90000');
 
-        $updateCartCommand = new UpdateCart($customerEmail, $address);
-        $updateCartCommand->setOrderTokenValue($tokenValue);
+        $updateCartCommand = new UpdateCart(email: $customerEmail, billingAddress: $address, orderTokenValue: $tokenValue);
         $commandBus->dispatch($updateCartCommand);
     }
 }

@@ -51,12 +51,12 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">-->
-<!--            <argument type="service" id="sylius.repository.order_item" />-->
-<!--            <argument type="service" id="sylius.order_modifier" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="service" id="sylius.order_modifier" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\InformAboutCartRecalculationHandler">-->
 <!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
@@ -118,13 +118,13 @@
 <!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler">-->
-<!--            <argument type="service" id="sylius.repository.order_item" />-->
-<!--            <argument type="service" id="sylius.order_item_quantity_modifier" />-->
-<!--            <argument type="service" id="sylius.order_processing.order_processor" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler">
             <argument type="service" id="sylius.factory.product_review" />

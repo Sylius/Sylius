@@ -40,9 +40,9 @@
         <import resource="services/validator.xml" />
     </imports>
 
-<!--    <parameters>-->
-<!--        <parameter key="sylius.model.address.interface">Sylius\Component\Addressing\Model\AddressInterface</parameter>-->
-<!--    </parameters>-->
+    <parameters>
+        <parameter key="sylius.model.address.interface">Sylius\Component\Addressing\Model\AddressInterface</parameter>
+    </parameters>
 
     <services>
         <!--    TODO: Remove after bumping to Api Platform 3.0    -->
@@ -51,21 +51,6 @@
         <service id="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
-
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailAwareCommandDataTransformer">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">-->
-<!--            <argument type="service" id="request_stack" />-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />

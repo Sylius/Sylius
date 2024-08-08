@@ -9,8 +9,10 @@
         "firstName": "Updated: Jane",
         "lastName": "Updated: Doe",
         "phoneNumber": "123456789",
+        "company": null,
         "countryCode": "US",
         "provinceCode": "US-MI",
+        "provinceName": null,
         "street": "Updated: Top secret",
         "city": "Updated: Nebraska",
         "postcode": "121212"
@@ -21,8 +23,10 @@
         "firstName": "Updated: Jane",
         "lastName": "Updated: Doe",
         "phoneNumber": "123456789",
+        "company": null,
         "countryCode": "US",
         "provinceCode": "US-MI",
+        "provinceName": null,
         "street": "Updated: Top secret",
         "city": "Updated: Nebraska",
         "postcode": "10001"
@@ -50,6 +54,7 @@
     "shippingState": "cart",
     "tokenValue": "nAWw2jewpA",
     "id": "@integer@",
+    "number": null,
     "items": [
         {
             "@id": "\/api\/v2\/shop\/order-items\/@integer@",

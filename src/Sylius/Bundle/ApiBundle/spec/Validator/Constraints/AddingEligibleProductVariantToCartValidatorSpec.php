@@ -149,8 +149,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart('productVariantCode', 1);
-        $command->setOrderTokenValue('TOKEN');
+        $command = new AddItemToCart('productVariantCode', 1, 'TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
         $productVariant->getCode()->willReturn('productVariantCode');
@@ -198,8 +197,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart('productVariantCode', 1);
-        $command->setOrderTokenValue('TOKEN');
+        $command = new AddItemToCart('productVariantCode', 1, 'TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
         $productVariant->getCode()->willReturn('productVariantCode');
@@ -248,8 +246,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart('productVariantCode', 1);
-        $command->setOrderTokenValue('TOKEN');
+        $command = new AddItemToCart('productVariantCode', 1, 'TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
         $productVariant->getCode()->willReturn('productVariantCode');
@@ -299,8 +296,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart('productVariantCode', 1);
-        $command->setOrderTokenValue('TOKEN');
+        $command = new AddItemToCart('productVariantCode', 1, 'TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
         $productVariant->getCode()->willReturn('productVariantCode');
