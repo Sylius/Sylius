@@ -1,0 +1,9 @@
+{% set form = hookable_metadata.context.form %}
+{% set order = hookable_metadata.context.order %}
+{% set type = hookable_metadata.context.type %}
+
+{% if type == 'shipping' %}
+    {% include '@SyliusShop/shared/form/address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}
+{% else %}
+    {% include '@SyliusShop/shared/form/address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}
+{% endif %}

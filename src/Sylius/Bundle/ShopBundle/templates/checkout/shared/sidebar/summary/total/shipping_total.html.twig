@@ -1,0 +1,15 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set order = hookable_metadata.context.order %}
+
+{% if order.shipments is not empty %}
+    <tr>
+        <td class="pb-4">{{ 'sylius.ui.shipping_estimated_cost'|trans }}:</td>
+        <td class="pb-4 text-end">
+            {% if order.getAdjustmentsTotal('shipping') > order.shippingTotal %}
+                <div>{{ money.convertAndFormat(order.getAdjustmentsTotal('shipping')) }}</div>
+            {% endif %}
+            <span>{{ money.convertAndFormat(order.shippingTotal) }}</span>
+        </td>
+    </tr>
+{% endif %}

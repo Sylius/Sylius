@@ -1,0 +1,24 @@
+{% set form = hookable_metadata.context.form %}
+{% set order = hookable_metadata.context.order %}
+
+{% if order.channel.shippingAddressInCheckoutRequired %}
+    <div class="mb-4" {{ sylius_test_html_attribute('shipping-address') }}>
+        {% hook 'addresses' with { form, order, type: 'shipping' } %}
+    </div>
+    <div class="mb-5">
+        {{ form_row(form.differentBillingAddress, sylius_test_form_attribute('different-shipping-address')|sylius_merge_recursive({'attr': {'data-bs-toggle': 'collapse', 'data-bs-target': '[data-js-sylius-checkout-billing-address]'}, 'label_attr': {'data-test-different-billing-address-label': ''}} )) }}
+    </div>
+    <div class="mb-5 collapse" data-js-sylius-checkout-billing-address {{ sylius_test_html_attribute('billing-address') }}>
+        {% hook 'addresses' with { form, order, type: 'billing' } %}
+    </div>
+{% else %}
+    <div class="mb-4" {{ sylius_test_html_attribute('billing-address') }}>
+        {% hook 'addresses' with { form, order, type: 'billing' } %}
+    </div>
+    <div class="mb-5">
+        {{ form_row(form.differentShippingAddress, sylius_test_form_attribute('different-shipping-address')|sylius_merge_recursive({'attr': {'data-bs-toggle': 'collapse', 'data-bs-target': '[data-js-sylius-checkout-shipping-address]'}, 'label_attr': {'data-test-different-shipping-address-label': ''}} )) }}
+    </div>
+    <div class="mb-5 collapse" data-js-sylius-checkout-shipping-address {{ sylius_test_html_attribute('shipping-address') }}>
+        {% hook 'addresses' with { form, order, type: 'shipping' } %}
+    </div>
+{% endif %}

@@ -1,0 +1,31 @@
+{% extends '@SyliusShop/checkout/shared/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% import '@SyliusShop/shared/macro/navigation_buttons.html.twig' as navigation %}
+
+{% block title %}{{ 'sylius.ui.complete'|trans }} | {{ parent() }}{% endblock %}
+{% block content_title %}{{ 'sylius.ui.summary_of_your_order'|trans }}{% endblock %}
+
+{% set active_step = 'complete' %}
+
+{% block content %}
+    <div>
+        {% include '@SyliusShop/checkout/complete/header.html.twig' %}
+        {% include '@SyliusShop/shared/flashes.html.twig' %}
+
+        {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_errors(form) }}
+        <input type="hidden" name="_method" value="PUT" />
+
+        {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
+
+        {% include '@SyliusShop/checkout/complete/form.html.twig' %}
+        {{ navigation.complete('sylius.ui.place_order'|trans) }}
+
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
