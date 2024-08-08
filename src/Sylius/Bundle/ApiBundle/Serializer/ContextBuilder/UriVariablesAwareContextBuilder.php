@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
+namespace Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;

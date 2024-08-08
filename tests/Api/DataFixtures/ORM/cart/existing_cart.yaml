@@ -10,7 +10,6 @@ Sylius\Component\Core\Model\Order:
         tokenValue: "existingCartToken"
         __calls:
             - setCustomerWithAuthorization: ["@customer_dave"]
-        
 
 Sylius\Component\Core\Model\OrderItem:
     existing_cart_order_item:
