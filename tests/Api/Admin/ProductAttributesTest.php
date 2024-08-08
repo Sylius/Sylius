@@ -30,7 +30,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAttributesTest extends JsonApiTestCase
 {
-    use AdminUserLoginTrait;
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpAdminContext();
+    }
 
     /** @test */
     public function it_gets_product_attributes(): void
@@ -122,6 +127,32 @@ final class ProductAttributesTest extends JsonApiTestCase
             'admin/product_attribute/post_text_product_attribute_response',
             Response::HTTP_CREATED,
         );
+    }
+
+    /** @test */
+    public function it_creates_another_product_attribute_on_specified_position(): void
+    {
+        $this->setUpDefaultPostHeaders();
+
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_attribute.yaml']);
+
+        $this->requestPost('api/v2/admin/product-attributes', [
+            'code' => 'material',
+            'position' => 3,
+            'configuration' => [
+                'min' => 5,
+                'max' => 255,
+            ],
+            'type' => TextAttributeType::TYPE,
+            'translatable' => true,
+            'translations' => [
+                'en_US' => [
+                    'name' => 'Material',
+                ],
+            ],
+        ]);
+
+        $this->assertResponseCreated('admin/product_attribute/post_product_attribute_on_specified_position');
     }
 
     /** @test */
