@@ -17,23 +17,19 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
-use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-final readonly class ShopUserBasedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+final readonly class StateBasedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
+    /** @param array<string> $nonFilteredCartAllowedOperations */
     public function __construct(
         private SectionProviderInterface $sectionProvider,
-        private UserContextInterface $userContext,
+        private array $nonFilteredCartAllowedOperations = [],
     ) {
     }
 
@@ -47,7 +43,21 @@ final readonly class ShopUserBasedExtension implements QueryCollectionExtensionI
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
+        if (!is_a($resourceClass, OrderInterface::class, true)) {
+            return;
+        }
+
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
+            return;
+        }
+
+        $stateParameter = $queryNameGenerator->generateParameterName('state');
+        $rootAlias = $queryBuilder->getRootAliases()[0];
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->neq(sprintf('%s.state', $rootAlias), sprintf(':%s', $stateParameter)))
+            ->setParameter($stateParameter, OrderInterface::STATE_CART)
+        ;
     }
 
     /**
@@ -62,14 +72,6 @@ final readonly class ShopUserBasedExtension implements QueryCollectionExtensionI
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
-    }
-
-    private function filterOutOrders(
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        string $resourceClass,
-    ): void {
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
         }
@@ -78,18 +80,16 @@ final readonly class ShopUserBasedExtension implements QueryCollectionExtensionI
             return;
         }
 
-        $user = $this->userContext->getUser();
-
-        if (!$user instanceof ShopUserInterface) {
+        if (in_array($operation->getName(), $this->nonFilteredCartAllowedOperations, true)) {
             return;
         }
 
-        $customerParameterName = $queryNameGenerator->generateParameterName('customer');
+        $stateParameter = $queryNameGenerator->generateParameterName('state');
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.customer', $rootAlias), sprintf(':%s', $customerParameterName)))
-            ->setParameter($customerParameterName, $user->getCustomer())
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.state', $rootAlias), sprintf(':%s', $stateParameter)))
+            ->setParameter($stateParameter, OrderInterface::STATE_CART)
         ;
     }
 }

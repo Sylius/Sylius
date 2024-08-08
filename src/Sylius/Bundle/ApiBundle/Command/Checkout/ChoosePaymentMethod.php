@@ -15,30 +15,16 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\PaymentIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 
-class ChoosePaymentMethod implements OrderTokenValueAwareInterface, PaymentMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class ChoosePaymentMethod implements OrderTokenValueAwareInterface, PaymentIdAwareInterface, PaymentMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
-
-    /**
-     * @immutable
-     *
-     * @var string|null
-     */
-    public $paymentId;
-
-    /**
-     * @immutable
-     *
-     * @var string|null
-     */
-    public $paymentMethodCode;
-
-    public function __construct(string $paymentMethodCode)
-    {
-        $this->paymentMethodCode = $paymentMethodCode;
+    public function __construct(
+        public string $paymentMethodCode,
+        public ?int $paymentId = null,
+        public ?string $orderTokenValue = null,
+    ) {
     }
 
     public function getOrderTokenValue(): ?string
@@ -46,33 +32,13 @@ class ChoosePaymentMethod implements OrderTokenValueAwareInterface, PaymentMetho
         return $this->orderTokenValue;
     }
 
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
-    }
-
-    public function getSubresourceId(): ?string
+    public function getPaymentId(): ?int
     {
         return $this->paymentId;
-    }
-
-    public function setSubresourceId(?string $subresourceId): void
-    {
-        $this->paymentId = $subresourceId;
-    }
-
-    public function getSubresourceIdAttributeKey(): string
-    {
-        return 'paymentId';
     }
 
     public function getPaymentMethodCode(): ?string
     {
         return $this->paymentMethodCode;
-    }
-
-    public function setPaymentMethodCode(?string $paymentMethodCode): void
-    {
-        $this->paymentMethodCode = $paymentMethodCode;
     }
 }

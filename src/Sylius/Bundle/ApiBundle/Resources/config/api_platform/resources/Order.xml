@@ -112,6 +112,22 @@
 
             <!-- Shop Section -->
 
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/orders"
+                security="is_granted('SYLIUS_SHOP_USER')"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/orders/{tokenValue}">
                 <normalizationContext>
                     <values>
@@ -122,6 +138,13 @@
                         </value>
                     </values>
                 </normalizationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}/configuration"
+                controller="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration"
+            >
             </operation>
 
             <operation
@@ -288,6 +311,182 @@
                 <openapiContext>
                     <values>
                         <value name="summary">Changes quantity of an item in the cart.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/shop/orders/{tokenValue}/shipments/{shipmentId}"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
+                    <uriVariable parameterName="shipmentId" fromClass="Sylius\Component\Core\Model\Shipment" fromProperty="order"/>
+                </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:cart:select_shipping_method</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order:show</value>
+                                <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Selects a shipping method for particular shipment.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
+                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
+                </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:cart:select_payment_method</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order:show</value>
+                                <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Selects a payment method for particular payment.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/shop/orders/{tokenValue}/complete"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_checkout_complete</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:cart:complete</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order:show</value>
+                                <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Completes checkout process.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/shop/account/orders/{tokenValue}/payments/{paymentId}"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
+                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
+                </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order:account:change_payment_method</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order:account:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Changes a payment method as logged shop user.</value>
                     </values>
                 </openapiContext>
             </operation>

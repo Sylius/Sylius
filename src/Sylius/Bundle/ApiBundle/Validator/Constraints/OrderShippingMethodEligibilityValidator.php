@@ -25,9 +25,10 @@ use Webmozart\Assert\Assert;
 
 final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 {
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
-        private OrderRepositoryInterface $orderRepository,
-        private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
     ) {
     }
 

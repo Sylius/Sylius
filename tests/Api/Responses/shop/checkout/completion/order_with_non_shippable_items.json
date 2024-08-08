@@ -8,7 +8,11 @@
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"
@@ -18,7 +22,11 @@
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"

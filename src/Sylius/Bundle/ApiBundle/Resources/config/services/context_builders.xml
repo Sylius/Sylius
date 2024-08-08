@@ -106,6 +106,19 @@
         </service>
 
         <service
+            id="sylius_api.context_builder.payment_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\PaymentIdAwareInterface</argument>
+            <argument>Sylius\Component\Core\Model\PaymentInterface</argument>
+        </service>
+
+        <service
             id="sylius_api.context_builder.order_token_value_aware"
             class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"

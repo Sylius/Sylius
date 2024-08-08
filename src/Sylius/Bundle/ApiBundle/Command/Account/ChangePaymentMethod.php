@@ -15,21 +15,15 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\PaymentIdAwareInterface;
 
-class ChangePaymentMethod implements OrderTokenValueAwareInterface, IriToIdentifierConversionAwareInterface
+class ChangePaymentMethod implements OrderTokenValueAwareInterface, PaymentIdAwareInterface, IriToIdentifierConversionAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
-
-    /**
-     * @immutable
-     *
-     * @var string|null
-     */
-    public $paymentId;
-
-    public function __construct(public string $paymentMethodCode)
-    {
+    public function __construct(
+        public string $paymentMethodCode,
+        public ?int $paymentId = null,
+        public ?string $orderTokenValue = null,
+    ) {
     }
 
     public function getOrderTokenValue(): ?string
@@ -37,23 +31,8 @@ class ChangePaymentMethod implements OrderTokenValueAwareInterface, IriToIdentif
         return $this->orderTokenValue;
     }
 
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
-    }
-
-    public function getSubresourceId(): ?string
+    public function getPaymentId(): ?int
     {
         return $this->paymentId;
-    }
-
-    public function setSubresourceId(?string $subresourceId): void
-    {
-        $this->paymentId = $subresourceId;
-    }
-
-    public function getSubresourceIdAttributeKey(): string
-    {
-        return 'paymentId';
     }
 }

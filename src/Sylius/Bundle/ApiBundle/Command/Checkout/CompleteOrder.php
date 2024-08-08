@@ -17,24 +17,14 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
 class CompleteOrder implements OrderTokenValueAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
-
-    /** @var string|null */
-    public $notes;
-
-    public function __construct(?string $notes = null)
-    {
-        $this->notes = $notes;
+    public function __construct(
+        public ?string $notes = null,
+        public ?string $orderTokenValue = null,
+    ) {
     }
 
     public function getOrderTokenValue(): ?string
     {
         return $this->orderTokenValue;
-    }
-
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
     }
 }
