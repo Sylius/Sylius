@@ -35,7 +35,7 @@ final class RegistrationThankYouController
         $channel = $this->channelContext->getChannel();
 
         if ($channel->isAccountVerificationRequired()) {
-            return new Response($this->twig->render('@SyliusShop/account/register/register_thank_you.html.twig'));
+            return new Response($this->twig->render('@SyliusShop/account/register_thank_you.html.twig'));
         }
 
         return new RedirectResponse($this->router->generate('sylius_shop_account_dashboard'));
