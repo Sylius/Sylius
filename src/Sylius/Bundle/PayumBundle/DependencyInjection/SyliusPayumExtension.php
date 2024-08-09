@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
 use Payum\Paypal\ExpressCheckout\Nvp\PaypalExpressCheckoutGatewayFactory;
 use Payum\Stripe\StripeCheckoutGatewayFactory;
-use Sylius\Bundle\PayumBundle\Attribute\AsGatewayConfigurationType;
+use Sylius\Bundle\PaymentBundle\Attribute\AsGatewayConfigurationType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;

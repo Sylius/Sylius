@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Attribute;
+namespace Sylius\Bundle\PaymentBundle\Attribute;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class AsGatewayConfigurationType

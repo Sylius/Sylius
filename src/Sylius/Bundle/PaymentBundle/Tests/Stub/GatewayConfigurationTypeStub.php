@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Tests\Stub;
+namespace Sylius\Bundle\PaymentBundle\Tests\Stub;
 
-use Sylius\Bundle\PayumBundle\Attribute\AsGatewayConfigurationType;
+use Sylius\Bundle\PaymentBundle\Attribute\AsGatewayConfigurationType;
 
 #[AsGatewayConfigurationType(type: 'test', label: 'Test', priority: 15)]
 final class GatewayConfigurationTypeStub
