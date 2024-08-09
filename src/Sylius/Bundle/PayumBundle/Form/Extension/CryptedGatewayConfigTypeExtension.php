@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\Form\Extension;
 
 use Payum\Core\Security\CryptedInterface;
-use Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType;
+use Sylius\Bundle\PaymentBundle\Form\Type\GatewayConfigType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

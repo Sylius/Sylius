@@ -30,6 +30,13 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.form.type.gateway_config" class="Sylius\Bundle\PaymentBundle\Form\Type\GatewayConfigType">
+            <argument>%sylius.model.gateway_config.class%</argument>
+            <argument>%sylius.form.type.gateway_config.validation_groups%</argument>
+            <argument type="service" id="sylius.form_registry.payment_gateway_config" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.payment" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentType">
             <argument>%sylius.model.payment.class%</argument>
             <argument>%sylius.form.type.payment.validation_groups%</argument>

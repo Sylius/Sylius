@@ -15,13 +15,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.form.type.gateway_config" class="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType">
-            <argument>%sylius.model.gateway_config.class%</argument>
-            <argument>%sylius.form.type.gateway_config.validation_groups%</argument>
-            <argument type="service" id="sylius.form_registry.payum_gateway_config" />
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius.form.extension.type.gateway_config.crypted" class="Sylius\Bundle\PayumBundle\Form\Extension\CryptedGatewayConfigTypeExtension">
             <argument type="service" id="payum.dynamic_gateways.cypher" on-invalid="null" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType" priority="100" />
