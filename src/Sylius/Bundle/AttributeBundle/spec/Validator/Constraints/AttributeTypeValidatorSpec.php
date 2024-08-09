@@ -47,11 +47,11 @@ final class AttributeTypeValidatorSpec extends ObjectBehavior
     function it_throws_exception_when_constraint_is_not_an_attribute_type(
         AttributeInterface $attribute,
         Constraint $constraint,
-    ): void {
+    ): void
+    {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$attribute, $constraint])
-        ;
+            ->during('validate', [$attribute, $constraint]);
     }
 
     function it_does_nothing_when_attribute_type_is_null(
@@ -91,12 +91,14 @@ final class AttributeTypeValidatorSpec extends ObjectBehavior
 
         $attribute->getType()->willReturn('foo');
         $attributeTypesRegistry->has('foo')->willReturn(false);
+        $attributeTypesRegistry->all()->willReturn(['foo_attribute_name' => 'foo_value', 'bar_attribute_name' => 'bar_value']);
 
         $context
-            ->buildViolation($constraint->unregisteredAttributeTypeMessage, ['%type%' => 'foo'])
+            ->buildViolation($constraint->unregisteredAttributeTypeMessage, [
+                '%type%' => 'foo', '%available_types%' => 'foo_attribute_name, bar_attribute_name',
+            ])
             ->shouldBeCalled()
-            ->willReturn($violationBuilder)
-        ;
+            ->willReturn($violationBuilder);
         $violationBuilder->atPath('type')->shouldBeCalled()->willReturn($violationBuilder);
         $violationBuilder->addViolation()->shouldBeCalled();
 
