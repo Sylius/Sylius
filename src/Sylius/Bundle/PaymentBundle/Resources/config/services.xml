@@ -42,5 +42,7 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="default" label="Default" />
         </service>
+
+        <service id="sylius.form_registry.payment_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>
 </container>

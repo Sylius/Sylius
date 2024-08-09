@@ -32,3 +32,5 @@ sylius:
             instructions: Instructions
             name: Name
             position: Position
+    gateway_factory:
+        offline: Offline
