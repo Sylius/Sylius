@@ -50,6 +50,7 @@
     "Payum\\Core\\Request\\Notify",
     "Payum\\Core\\Request\\RenderTemplate",
     "Payum\\Core\\Security\\CryptedInterface",
+    "Payum\\Core\\Security\\CypherInterface",
     "Payum\\Core\\Security\\GenericTokenFactoryInterface",
     "Payum\\Core\\Security\\HttpRequestVerifierInterface",
     "Payum\\Core\\Security\\TokenAggregateInterface",
