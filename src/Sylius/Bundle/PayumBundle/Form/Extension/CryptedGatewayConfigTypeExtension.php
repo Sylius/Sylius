@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\Form\Extension;
 
 use Payum\Core\Security\CryptedInterface;
+use Payum\Core\Security\CypherInterface;
 use Sylius\Bundle\PaymentBundle\Form\Type\GatewayConfigType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +23,7 @@ use Symfony\Component\Form\FormEvents;
 
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(private ?\Payum\Core\Security\CypherInterface $cypher = null)
+    public function __construct(private ?CypherInterface $cypher = null)
     {
     }
 

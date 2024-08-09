@@ -17,8 +17,7 @@ use Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGen
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -70,7 +69,7 @@ final class PaymentMethodType extends AbstractResourceType
                 $gatewayName = $gatewayConfig->getGatewayName();
 
                 if (null === $gatewayName && null !== $paymentMethod->getCode()) {
-                    $gatewayConfig->setGatewayName(StringInflector::nameToLowercaseCode($paymentMethod->getCode()));
+                    $gatewayConfig->setGatewayName(strtolower(str_replace([' ', '-', '\''], '_', $paymentMethod->getCode())));
                 }
             })
         ;
