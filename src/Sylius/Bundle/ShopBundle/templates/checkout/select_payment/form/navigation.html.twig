@@ -1,0 +1,9 @@
+{% import '@SyliusShop/shared/macro/navigation_buttons.html.twig' as navigation %}
+
+{% set order = hookable_metadata.context.order %}
+
+{% if sylius_is_shipping_required(order) %}
+    {{ navigation.default('sylius.ui.change_shipping_method'|trans, path('sylius_shop_checkout_select_shipping')) }}
+{% else %}
+    {{ navigation.default('sylius.ui.change_address'|trans, path('sylius_shop_checkout_address')) }}
+{% endif %}

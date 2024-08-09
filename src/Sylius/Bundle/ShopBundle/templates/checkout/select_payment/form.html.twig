@@ -1,7 +1,10 @@
+{% set form = hookable_metadata.context.form %}
+
 <div>
-    {% for payment_form in form.payments %}
-        {% include '@SyliusShop/checkout/select_payment/payment.html.twig' with {'form': payment_form} %}
-    {% else %}
-        {% include '@SyliusShop/checkout/select_payment/unavailable.html.twig' %}
-    {% endfor %}
+    {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+    <input type="hidden" name="_method" value="PUT" />
+    {% hook 'form' %}
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
 </div>

@@ -1,0 +1,7 @@
+{% set form = hookable_metadata.context.form %}
+
+{% for payment_form in form.payments %}
+    {% hook 'payment' with { 'form': payment_form, 'index': loop.index } %}
+{% else %}
+    {% include '@SyliusShop/checkout/select_payment/unavailable.html.twig' %}
+{% endfor %}
