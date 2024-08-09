@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Factory;
 
-use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**

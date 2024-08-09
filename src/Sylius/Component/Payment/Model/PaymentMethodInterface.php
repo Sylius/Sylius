@@ -47,6 +47,10 @@ interface PaymentMethodInterface extends
 
     public function setPosition(?int $position): void;
 
+    public function setGatewayConfig(?GatewayConfigInterface $gatewayConfig): void;
+
+    public function getGatewayConfig(): ?GatewayConfigInterface;
+
     /**
      * @return PaymentMethodTranslationInterface
      */

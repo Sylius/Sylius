@@ -38,6 +38,8 @@ class PaymentMethod implements PaymentMethodInterface, \Stringable
     /** @var int|null */
     protected $position;
 
+    protected ?GatewayConfigInterface $gatewayConfig = null;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -113,6 +115,16 @@ class PaymentMethod implements PaymentMethodInterface, \Stringable
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    public function setGatewayConfig(?GatewayConfigInterface $gatewayConfig): void
+    {
+        $this->gatewayConfig = $gatewayConfig;
+    }
+
+    public function getGatewayConfig(): ?GatewayConfigInterface
+    {
+        return $this->gatewayConfig;
     }
 
     /**

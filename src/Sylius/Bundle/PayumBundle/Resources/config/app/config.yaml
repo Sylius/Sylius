@@ -1,6 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+sylius_payment:
+    resources:
+        gateway_config:
+            classes:
+                model: Sylius\Bundle\PayumBundle\Model\GatewayConfig
+                interface: Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface
+
 sylius_payum:
     gateway_config:
         validation_groups:

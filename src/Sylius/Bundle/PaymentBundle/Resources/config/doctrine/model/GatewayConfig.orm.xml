@@ -16,5 +16,13 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
-    <mapped-superclass name="Sylius\Bundle\PayumBundle\Model\GatewayConfig" table="sylius_gateway_config" />
+    <mapped-superclass name="Sylius\Component\Payment\Model\GatewayConfig" table="sylius_gateway_config">
+        <id name="id" column="id" type="integer">
+            <generator />
+        </id>
+
+        <field name="gatewayName" column="gateway_name" />
+        <field name="factoryName" column="factory_name" />
+        <field name="config" column="config" type="json" />
+    </mapped-superclass>
 </doctrine-mapping>
