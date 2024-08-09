@@ -1,6 +1,23 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+payum:
+    storages:
+        "%sylius.model.order.class%": { doctrine: orm }
+        "%sylius.model.payment.class%": { doctrine: orm }
+
+    security:
+        token_storage:
+            Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken: { doctrine: orm }
+
+    dynamic_gateways:
+        config_storage:
+            Sylius\Bundle\PayumBundle\Model\GatewayConfig: { doctrine: orm }
+
+    gateways:
+        offline:
+            factory: offline
+
 sylius_payment:
     resources:
         gateway_config:
