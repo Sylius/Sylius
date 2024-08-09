@@ -24,13 +24,3 @@ sylius_payment:
             classes:
                 model: Sylius\Bundle\PayumBundle\Model\GatewayConfig
                 interface: Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface
-
-sylius_payum:
-    gateway_config:
-        validation_groups:
-            paypal_express_checkout:
-                - 'sylius'
-                - 'sylius_paypal_express_checkout'
-            stripe_checkout:
-                - 'sylius'
-                - 'sylius_stripe_checkout'

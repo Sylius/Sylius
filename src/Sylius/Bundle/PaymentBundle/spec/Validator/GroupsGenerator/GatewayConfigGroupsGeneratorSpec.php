@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\PayumBundle\Validator\GroupsGenerator;
+namespace spec\Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\GatewayConfigInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\Form\FormInterface;
 
 final class GatewayConfigGroupsGeneratorSpec extends ObjectBehavior

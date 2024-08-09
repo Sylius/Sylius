@@ -22,9 +22,5 @@
             <argument>%sylius.gateway_factories%</argument>
             <tag name="validator.constraint_validator" alias="sylius_gateway_factory_exists_validator" />
         </service>
-
-        <service id="Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator">
-            <argument>%sylius.payum.gateway_config.validation_groups%</argument>
-        </service>
     </services>
 </container>

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Validator\GroupsGenerator;
+namespace Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator;
 
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Form\FormInterface;

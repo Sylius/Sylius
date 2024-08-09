@@ -62,6 +62,23 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
             ['type' => 'test', 'label' => 'Test', 'priority' => 15],
         );
     }
+    /** @test */
+    public function it_loads_gateway_config_validation_groups_parameter_value_properly(): void
+    {
+        $this->load([
+            'gateway_config' => [
+                'validation_groups' => [
+                    'paypal_express_checkout' => ['sylius', 'paypal'],
+                    'offline' => ['sylius'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.gateway_config.validation_groups',
+            ['paypal_express_checkout' => ['sylius', 'paypal'], 'offline' => ['sylius']],
+        );
+    }
 
     protected function getContainerExtensions(): array
     {

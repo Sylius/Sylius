@@ -44,5 +44,9 @@
         </service>
 
         <service id="sylius.form_registry.payment_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
+
+        <service id="sylius.validator.gateway_config_groups_generator" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator">
+            <argument>%sylius.gateway_config.validation_groups%</argument>
+        </service>
     </services>
 </container>

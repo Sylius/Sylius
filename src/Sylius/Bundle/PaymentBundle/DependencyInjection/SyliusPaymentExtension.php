@@ -32,6 +32,7 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
+        $container->setParameter('sylius.gateway_config.validation_groups', $config['gateway_config']['validation_groups']);
 
         $this->registerAutoconfiguration($container);
     }
