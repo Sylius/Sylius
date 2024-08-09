@@ -27,7 +27,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductContext implements Context
+final readonly class ProductContext implements Context
 {
     public function __construct(
         private ShowPageInterface $showPage,

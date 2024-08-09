@@ -32,7 +32,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private SummaryPageInterface $summaryPage,
+        private readonly SummaryPageInterface $summaryPage,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -346,7 +346,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getDescription(): string
     {
-        return $this->getDocument()->findAll('css', '[data-tab="details"]')[1]->getText();
+        return $this->getElement('details')->getText();
     }
 
     protected function getDefinedElements(): array
@@ -360,7 +360,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'breadcrumb' => '.breadcrumb',
             'catalog_promotion' => '[data-test-promotion-label]',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
-            'details' => '[data-tab="details"]',
+            'details' => '[data-test-product-details]',
             'main_image' => '[data-test-main-image]',
             'name' => '[data-test-product-name]',
             'option_select' => '#sylius_add_to_cart_cartItem_variant_%optionCode%',
