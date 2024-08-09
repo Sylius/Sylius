@@ -38,7 +38,10 @@ final class AttributeTypeValidator extends ConstraintValidator
         }
 
         $this->context
-            ->buildViolation($constraint->unregisteredAttributeTypeMessage, ['%type%' => $type])
+            ->buildViolation($constraint->unregisteredAttributeTypeMessage, [
+                '%type%' => $type,
+                '%available_types%' => implode(', ', array_keys($this->attributeTypeRegistry->all())),
+            ])
             ->atPath('type')
             ->addViolation()
         ;
