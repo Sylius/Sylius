@@ -216,7 +216,7 @@ final class OrdersTest extends JsonApiTestCase
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
-            'payment_method.yaml'
+            'payment_method.yaml',
         ]);
 
         $tokenValue = 'nAWw2jewpA';
@@ -356,6 +356,6 @@ final class OrdersTest extends JsonApiTestCase
             ->withJsonLdAccept()
             ->withAdminUserAuthorization($adminEmail)
             ->build()
-            ;
+        ;
     }
 }

@@ -113,14 +113,14 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
 
         $this->load([
             'non_archived_classes' => [
-                "%sylius.model.shipping_method.class%",
-                "%sylius.model.promotion.class%",
+                '%sylius.model.shipping_method.class%',
+                '%sylius.model.promotion.class%',
             ],
         ]);
 
         $this->assertContainerBuilderHasParameter(
             'sylius_api.non_archived_classes',
-            ["%sylius.model.shipping_method.class%",  "%sylius.model.promotion.class%"],
+            ['%sylius.model.shipping_method.class%',  '%sylius.model.promotion.class%'],
         );
     }
 

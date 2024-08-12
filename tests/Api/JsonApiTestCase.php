@@ -263,7 +263,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             method: $method,
             uri: $uri,
             server: $headers,
-            content: is_array($body) ? json_encode($body, \JSON_THROW_ON_ERROR): null,
+            content: is_array($body) ? json_encode($body, \JSON_THROW_ON_ERROR) : null,
         );
     }
 }

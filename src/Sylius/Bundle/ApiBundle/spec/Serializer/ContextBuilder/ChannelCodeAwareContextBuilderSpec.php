@@ -32,7 +32,7 @@ final class ChannelCodeAwareContextBuilderSpec extends ObjectBehavior
             $decoratedContextBuilder,
             ChannelCodeAware::class,
             'channelCode',
-            $channelContext
+            $channelContext,
         );
     }
 

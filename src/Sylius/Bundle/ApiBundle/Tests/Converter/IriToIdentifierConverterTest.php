@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Tests\Converter;
 use ApiPlatform\Api\UriVariablesConverterInterface;
 use ApiPlatform\Metadata\Exception\InvalidArgumentException;
 use ApiPlatform\Metadata\HttpOperation;
-use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use PHPUnit\Framework\TestCase;
@@ -26,19 +25,19 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
-use Symfony\Component\Routing\Exception\RouteNotFoundException as SymfonyRouteNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\NoRouteMatchesException as ApiRouteNotFoundException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException as SymfonyRouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
 final class IriToIdentifierConverterTest extends TestCase
 {
     use ProphecyTrait;
 
-    private RouterInterface|ObjectProphecy $router;
+    private ObjectProphecy|RouterInterface $router;
 
-    private ResourceMetadataCollectionFactoryInterface|ObjectProphecy $metadataFactory;
+    private ObjectProphecy|ResourceMetadataCollectionFactoryInterface $metadataFactory;
 
-    private UriVariablesConverterInterface|ObjectProphecy $uriVariablesConverter;
+    private ObjectProphecy|UriVariablesConverterInterface $uriVariablesConverter;
 
     private IriToIdentifierConverterInterface $converter;
 

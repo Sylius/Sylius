@@ -220,7 +220,7 @@ final readonly class ManagingZonesContext implements Context
     ): void {
         $members = $this->responseChecker->getValue(
             $this->client->getLastResponse(),
-            'members'
+            'members',
         );
         Assert::inArray($country->getCode(), array_column($members, 'code'));
     }
@@ -262,7 +262,7 @@ final readonly class ManagingZonesContext implements Context
     ): void {
         $members = $this->responseChecker->getValue(
             $this->client->getLastResponse(),
-            'members'
+            'members',
         );
         Assert::inArray($province->getCode(), array_column($members, 'code'));
     }
@@ -276,7 +276,7 @@ final readonly class ManagingZonesContext implements Context
     ): void {
         $members = $this->responseChecker->getValue(
             $this->client->getLastResponse(),
-            'members'
+            'members',
         );
         Assert::inArray($otherZone->getCode(), array_column($members, 'code'));
     }
@@ -354,7 +354,7 @@ final readonly class ManagingZonesContext implements Context
     {
         $members = $this->responseChecker->getValue(
             $this->client->getLastResponse(),
-            'members'
+            'members',
         );
         Assert::inArray($zoneMember->getCode(), array_column($members, 'code'));
         Assert::count($members, 1);
@@ -503,6 +503,7 @@ final readonly class ManagingZonesContext implements Context
         foreach ($members as $key => $member) {
             if ($member['code'] === $objectToRemove->getCode()) {
                 unset($members[$key]);
+
                 break;
             }
         }
