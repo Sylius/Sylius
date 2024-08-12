@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -35,6 +36,7 @@ final class ResendOrderConfirmationEmailAction
         private OrderEmailManagerInterface|ResendOrderConfirmationEmailDispatcherInterface $orderEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack|SessionInterface $requestStackOrSession,
+        private ?RouterInterface $router = null,
     ) {
         if ($this->requestStackOrSession instanceof SessionInterface) {
             trigger_deprecation(
@@ -63,6 +65,16 @@ final class ResendOrderConfirmationEmailAction
                 'The argument name $orderEmailManager is deprecated and will be renamed to $resendOrderConfirmationEmailDispatcher in Sylius 2.0.',
             );
         }
+
+        if (null === $this->router) {
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.14',
+                'Passing null as constructor argument for $router in %s is deprecated and will be prohibited in Sylius 2.0. Pass an instance of %s instead.',
+                self::class,
+                RouterInterface::class,
+            );
+        }
     }
 
     public function __invoke(Request $request): Response
@@ -88,7 +100,7 @@ final class ResendOrderConfirmationEmailAction
             ->add('success', 'sylius.email.order_confirmation_resent')
         ;
 
-        return new RedirectResponse($request->headers->get('referer'));
+        return $this->redirect($request);
     }
 
     private function sendConfirmationEmailOrDispatchResendOrderConfirmation(OrderInterface $order): void
@@ -98,5 +110,16 @@ final class ResendOrderConfirmationEmailAction
         } else {
             $this->orderEmailManager->dispatch($order);
         }
+    }
+
+    private function redirect(Request $request): RedirectResponse
+    {
+        if (null === $this->router) {
+            return new RedirectResponse($request->headers->get('referer'));
+        }
+
+        $redirect = $request->attributes->get('_sylius', [])['redirect'] ?? 'referer';
+
+        return new RedirectResponse($this->router->generate($redirect));
     }
 }

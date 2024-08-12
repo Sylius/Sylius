@@ -38,7 +38,7 @@ sylius_admin_product_update:
         _sylius:
             section: admin
             permission: true
-            redirect: referer
+            redirect: sylius_admin_product_update
             repository:
                 method: findOneByIdHydrated
                 arguments: $id
