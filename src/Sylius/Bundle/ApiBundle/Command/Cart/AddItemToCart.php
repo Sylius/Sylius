@@ -21,7 +21,7 @@ class AddItemToCart implements OrderTokenValueAwareInterface, IriToIdentifierCon
     public function __construct(
         public string $productVariantCode,
         public int $quantity,
-        public ?string $orderTokenValue = null
+        public ?string $orderTokenValue = null,
     ) {
     }
 

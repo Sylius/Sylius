@@ -20,14 +20,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ChannelCodeAwareContextBuilder extends AbstractInputContextBuilder
 {
-   public function __construct(
-       SerializerContextBuilderInterface $decoratedContextBuilder,
-       string $attributeClass,
-       string $defaultConstructorArgumentName,
-       private readonly ChannelContextInterface $channelContext,
-   ) {
-       parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
-   }
+    public function __construct(
+        SerializerContextBuilderInterface $decoratedContextBuilder,
+        string $attributeClass,
+        string $defaultConstructorArgumentName,
+        private readonly ChannelContextInterface $channelContext,
+    ) {
+        parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
+    }
 
     protected function supportsClass(string $class): bool
     {

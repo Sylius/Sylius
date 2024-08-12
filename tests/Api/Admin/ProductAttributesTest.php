@@ -23,9 +23,7 @@ use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextareaAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAttributesTest extends JsonApiTestCase

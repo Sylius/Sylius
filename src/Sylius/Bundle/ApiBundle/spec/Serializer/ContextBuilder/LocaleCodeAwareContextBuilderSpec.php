@@ -31,7 +31,7 @@ final class LocaleCodeAwareContextBuilderSpec extends ObjectBehavior
             $decoratedContextBuilder,
             LocaleCodeAware::class,
             'localeCode',
-            $localeContext
+            $localeContext,
         );
     }
 

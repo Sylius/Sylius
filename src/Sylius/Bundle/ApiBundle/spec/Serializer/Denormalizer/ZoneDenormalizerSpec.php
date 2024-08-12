@@ -36,7 +36,7 @@ final class ZoneDenormalizerSpec extends ObjectBehavior
 
     public function it_supports_only_admin_section(
         SectionProviderInterface $sectionProvider,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
         $this
@@ -86,7 +86,7 @@ final class ZoneDenormalizerSpec extends ObjectBehavior
 
     public function it_supports_only_zone_interface(
         SectionProviderInterface $sectionProvider,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -119,11 +119,11 @@ final class ZoneDenormalizerSpec extends ObjectBehavior
 
         $objectToPopulate->getMembers()->willReturn(new ArrayCollection([
             $memberUS->getWrappedObject(),
-            $memberUK->getWrappedObject()
+            $memberUK->getWrappedObject(),
         ]));
         $zone->getMembers()->willReturn(new ArrayCollection([
             $memberPL->getWrappedObject(),
-            $memberDE->getWrappedObject()
+            $memberDE->getWrappedObject(),
         ]));
 
         $context = [
@@ -156,11 +156,11 @@ final class ZoneDenormalizerSpec extends ObjectBehavior
 
         $objectToPopulate->getMembers()->willReturn(new ArrayCollection([
             $memberUS->getWrappedObject(),
-            $memberUK->getWrappedObject()
+            $memberUK->getWrappedObject(),
         ]));
         $zone->getMembers()->willReturn(new ArrayCollection([
             $memberPL->getWrappedObject(),
-            $newMemberUS->getWrappedObject()
+            $newMemberUS->getWrappedObject(),
         ]));
 
         $context = [
