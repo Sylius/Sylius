@@ -37,7 +37,7 @@ final class SyliusCollector extends DataCollector
             'default_locale_code' => $defaultLocaleCode,
             'locale_code' => null,
             'extensions' => [
-                'SyliusAdminApiBundle' => ['name' => 'API', 'enabled' => false],
+                'SyliusApiBundle' => ['name' => 'API', 'enabled' => false],
                 'SyliusAdminBundle' => ['name' => 'Admin', 'enabled' => false],
                 'SyliusShopBundle' => ['name' => 'Shop', 'enabled' => false],
             ],

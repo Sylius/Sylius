@@ -21,6 +21,10 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
+        <service id="sylius_api.doctrine.orm.query_extension.common.translation_order_locale" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\TranslationOrderLocaleExtension">
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
         <service id="sylius_api.doctrine.orm.query_extension.shop.product_review.accepted" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductReview\AcceptedExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
