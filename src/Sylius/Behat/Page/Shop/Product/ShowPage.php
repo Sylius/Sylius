@@ -165,7 +165,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getCurrentVariantName(): string
     {
-        $currentVariantRow = $this->getElement('current_variant_input')->getParent()->getParent();
+        $currentVariantRow = $this->getElement('current_variant_input')->getParent()->getParent()->getParent();
 
         return $currentVariantRow->find('css', 'td:first-child')->getText();
     }
@@ -298,7 +298,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getDocument()->fillField($variantRadio->getAttribute('name'), $variantRadio->getAttribute('value'));
     }
 
-    public function visit($url): void
+    public function visit(string $url): void
     {
         $absoluteUrl = $this->makePathAbsolute($url);
         $this->getDriver()->visit($absoluteUrl);
@@ -312,7 +312,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             try {
                 parent::open($urlParameters);
                 $isOpen = true;
-            } catch (UnexpectedPageException) {
+            } catch (UnexpectedPageException $e) {
                 $isOpen = false;
                 sleep(1);
             }

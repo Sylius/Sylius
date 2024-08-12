@@ -12,7 +12,7 @@ Feature: Viewing product with all variants disabled
         And all variants of this product are disabled
         And this product belongs to "T-Shirts"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing product with all variants disabled
         When I check this product's details
         Then I should see the product name "Super Cool T-Shirt"
