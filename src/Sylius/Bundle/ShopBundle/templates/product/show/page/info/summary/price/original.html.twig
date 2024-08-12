@@ -7,7 +7,7 @@
     <div class="d-flex gap-3 align-items-center">
         <div class="fs-2" {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>{{ money.calculatePrice(variant) }}</div>
         <div{% if not has_discount %} class="d-none" data-test-product-original-price-hidden{% endif %} {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
-            {% if has_discount %}<del>{{ money.calculateOriginalPrice(variant) }}</del>{% endif %}
+            {% if has_discount %}<del>{{ component('sylius_shop:common:product_original_price', { productVariant: variant }) }}</del>{% endif %}
         </div>
     </div>
 </div>

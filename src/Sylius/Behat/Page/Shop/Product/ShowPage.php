@@ -368,7 +368,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'product_box' => '[data-test-product-box]',
             'product_name' => '[data-test-product-name]',
             'product_original_price' => '[data-test-product-price-content] [data-test-product-original-price]',
-            'product_price' => '[data-test-product-price-content] [data-test-product-price]',
+            'product_price' => '[data-test-product-price]',
             'product_price_content' => '[data-test-product-price-content]',
             'quantity' => '[data-test-quantity]',
             'reviews' => '[data-test-product-reviews]',
