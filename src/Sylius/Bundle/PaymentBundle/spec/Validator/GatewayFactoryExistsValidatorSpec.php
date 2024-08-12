@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\PayumBundle\Validator;
+namespace spec\Sylius\Bundle\PaymentBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
-use Sylius\Bundle\PayumBundle\Validator\Constraints\GatewayFactoryExists;
+use Sylius\Bundle\PaymentBundle\Validator\Constraints\GatewayFactoryExists;
+use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -27,9 +27,10 @@ final class GatewayFactoryExistsValidatorSpec extends ObjectBehavior
     function let(
         ExecutionContextInterface $executionContext,
     ): void {
-        $this->beConstructedWith(
-            ['paypal_express_checkout' => 'sylius.payum_gateway_factory.paypal_express_checkout', 'stripe_checkout' => 'sylius.payum_gateway_factory.stripe_checkout'],
-        );
+        $this->beConstructedWith([
+            'paypal_express_checkout' => 'sylius.payum_gateway_factory.paypal_express_checkout',
+            'stripe_checkout' => 'sylius.payum_gateway_factory.stripe_checkout',
+        ]);
 
         $this->initialize($executionContext);
     }
