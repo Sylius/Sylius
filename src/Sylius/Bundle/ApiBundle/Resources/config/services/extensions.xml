@@ -18,6 +18,10 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TranslationOrderLocaleExtension">
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension">
             <argument>%sylius.model.shipping_method.class%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
