@@ -17,12 +17,10 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
-use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 final readonly class StateBasedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
@@ -51,8 +49,8 @@ final readonly class StateBasedExtension implements QueryCollectionExtensionInte
             return;
         }
 
-        $stateParameter = $queryNameGenerator->generateParameterName('state');
         $rootAlias = $queryBuilder->getRootAliases()[0];
+        $stateParameter = $queryNameGenerator->generateParameterName('state');
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->neq(sprintf('%s.state', $rootAlias), sprintf(':%s', $stateParameter)))
@@ -84,8 +82,8 @@ final readonly class StateBasedExtension implements QueryCollectionExtensionInte
             return;
         }
 
-        $stateParameter = $queryNameGenerator->generateParameterName('state');
         $rootAlias = $queryBuilder->getRootAliases()[0];
+        $stateParameter = $queryNameGenerator->generateParameterName('state');
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq(sprintf('%s.state', $rootAlias), sprintf(':%s', $stateParameter)))

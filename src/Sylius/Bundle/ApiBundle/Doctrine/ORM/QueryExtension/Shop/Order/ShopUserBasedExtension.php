@@ -20,14 +20,9 @@ use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
-use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final readonly class ShopUserBasedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
@@ -84,8 +79,8 @@ final readonly class ShopUserBasedExtension implements QueryCollectionExtensionI
             return;
         }
 
-        $customerParameterName = $queryNameGenerator->generateParameterName('customer');
         $rootAlias = $queryBuilder->getRootAliases()[0];
+        $customerParameterName = $queryNameGenerator->generateParameterName('customer');
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq(sprintf('%s.customer', $rootAlias), sprintf(':%s', $customerParameterName)))

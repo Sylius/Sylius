@@ -84,19 +84,5 @@
             <argument type="service" id="sylius.payment_methods_resolver" />
             <tag name="api_platform.state_provider" />
         </service>
-
-        <service id="sylius_api.state_provider.shop.order_item.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\OrderItem\ItemProvider">
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <argument type="service" id="sylius.repository.order_item" />
-            <tag name="api_platform.state_provider" />
-        </service>
-
-        <service id="sylius_api.state_provider.shop.order_item_unit.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\OrderItemUnit\ItemProvider">
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <argument type="service" id="sylius.repository.order_item_unit" />
-            <tag name="api_platform.state_provider" />
-        </service>
     </services>
 </container>

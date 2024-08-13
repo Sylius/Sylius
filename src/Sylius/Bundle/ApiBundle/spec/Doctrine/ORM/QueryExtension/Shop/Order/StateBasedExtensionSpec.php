@@ -15,34 +15,37 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Order;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\Put;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-final class ShopUserBasedExtensionSpec extends ObjectBehavior
+final class StateBasedExtensionSpec extends ObjectBehavior
 {
-    function let(
-        SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-    ): void {
-        $this->beConstructedWith($sectionProvider, $userContext);
+    function let(SectionProviderInterface $sectionProvider): void
+    {
+        $this->beConstructedWith($sectionProvider, ['_api_/shop/orders/{tokenValue}_get', '_api_/shop/orders/{tokenValue}/payments/{paymentId}/configuration_get']);
     }
 
     function it_does_not_apply_conditions_to_collection_for_unsupported_resource(
-        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ResourceInterface::class, new Get());
@@ -50,42 +53,11 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
 
     function it_does_not_apply_conditions_to_collection_for_admin_api_section(
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         AdminApiSection $section,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->shouldNotBeCalled();
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
-
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
-    }
-
-    function it_does_not_apply_conditions_to_collection_if_user_is_null(
-        SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        ShopApiSection $section,
-    ): void {
-        $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->willReturn(null);
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
-
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
-    }
-
-    function it_does_not_apply_conditions_to_collection_if_user_is_not_shop_user(
-        SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        ShopApiSection $section,
-        AdminUserInterface $user,
-    ): void {
-        $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->willReturn($user);
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
@@ -93,36 +65,32 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
 
     function it_applies_conditions_to_collection(
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
         ShopUserInterface $user,
         CustomerInterface $customer,
         Expr $expr,
-        Expr\Func $exprEq,
+        Expr\Func $exprNeq,
     ): void {
         $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->willReturn($user);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
-        $queryNameGenerator->generateParameterName('customer')->willReturn('customer');
+        $queryNameGenerator->generateParameterName('state')->willReturn('state');
 
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('o.customer', ':customer')->willReturn($exprEq);
-        $queryBuilder->andWhere($exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
-        $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $expr->neq('o.state', ':state')->willReturn($exprNeq);
+        $queryBuilder->andWhere($exprNeq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
     }
 
     function it_does_not_apply_conditions_to_item_for_unsupported_resource(
-        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, ResourceInterface::class, [], new Get());
@@ -130,70 +98,51 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
 
     function it_does_not_apply_conditions_to_item_for_admin_api_section(
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         AdminApiSection $section,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());
     }
 
-    function it_does_not_apply_conditions_to_item_if_user_is_null(
+    function it_does_not_apply_conditions_to_item_if_operation_is_allowed(
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
+        Operation $operation,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->willReturn(null);
+        $operation->getName()->willReturn('_api_/shop/orders/{tokenValue}/payments/{paymentId}/configuration_get');
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());
-    }
-
-    function it_does_not_apply_conditions_to_item_if_user_is_not_shop_user(
-        SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        ShopApiSection $section,
-        AdminUserInterface $user,
-    ): void {
-        $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->willReturn($user);
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
-
-        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());
+        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], $operation);
     }
 
     function it_applies_conditions_to_item(
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
-        ShopUserInterface $user,
         CustomerInterface $customer,
+        Operation $operation,
         Expr $expr,
         Expr\Func $exprEq,
     ): void {
-        $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
-        $userContext->getUser()->willReturn($user);
+        $operation->getName()->willReturn('_api_/shop/orders/{tokenValue}/new_get');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
-        $queryNameGenerator->generateParameterName('customer')->willReturn('customer');
+        $queryNameGenerator->generateParameterName('state')->willReturn('state');
 
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('o.customer', ':customer')->willReturn($exprEq);
+        $expr->eq('o.state', ':state')->willReturn($exprEq);
         $queryBuilder->andWhere($exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
-        $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());
+        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], $operation);
     }
 }

@@ -5,9 +5,10 @@ parameters:
     env(SYLIUS_API_AUTHORIZATION_HEADER): Authorization
     sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
     sylius.api.doctrine.orm.query.extension.shop.order.filter_cart.allowed_operations:
-        - "todo_test_api_/shop/orders/{tokenValue}/payments/{paymentId}_patch"
+        - "_api_/shop/orders/{tokenValue}/payments/{paymentId}_patch"
         - "_api_/shop/account/orders/{tokenValue}/payments/{paymentId}_patch"
         - "_api_/shop/orders/{tokenValue}_get"
+        - "_api_/shop/orders/{tokenValue}/payments/{paymentId}/configuration_get"
     sylius.api.paths_to_hide:
         - "%sylius.security.new_api_route%/admin/address-log-entry/{id}"
         - "%sylius.security.new_api_route%/admin/catalog-promotion-actions/{id}"
