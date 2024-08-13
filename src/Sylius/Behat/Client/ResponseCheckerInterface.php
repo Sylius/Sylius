@@ -76,6 +76,11 @@ interface ResponseCheckerInterface
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool;
 
+    /**
+     * @param array<array-key, array> $items
+     */
+    public function hasItemWithTranslationInCollection(array $items, string $locale, string $key, string $translation): bool;
+
     public function hasKey(Response $response, string $key): bool;
 
     public function hasTranslation(Response $response, string $locale, string $key, string $translation): bool;

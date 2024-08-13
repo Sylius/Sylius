@@ -43,7 +43,7 @@ interface RequestInterface
 
     public function addSubResource(string $key, array $subResource): void;
 
-    public function removeSubResource(string $subResource, string $id): void;
+    public function removeSubResource(string $subResourceKey, string $value, string $key = '@id'): void;
 
     public function authorize(?string $token, string $authorizationHeader): void;
 }

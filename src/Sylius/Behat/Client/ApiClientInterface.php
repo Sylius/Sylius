@@ -73,7 +73,9 @@ interface ApiClientInterface
 
     public function addSubResourceData(string $key, array $data): void;
 
-    public function removeSubResource(string $subResource, string $id): void;
+    public function removeSubResourceIri(string $subResourceKey, string $iri): void;
+
+    public function removeSubResourceObject(string $subResourceKey, string $value, string $key = '@id'): void;
 
     public function updateRequestData(array $data): void;
 
