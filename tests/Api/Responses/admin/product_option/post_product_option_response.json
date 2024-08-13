@@ -2,11 +2,22 @@
     "@context": "\/api\/v2\/contexts\/ProductOption",
     "@id": "\/api\/v2\/admin\/product-options\/NEW_COLOR",
     "@type": "ProductOption",
-    "id": "@integer@",
     "code": "NEW_COLOR",
     "position": 9,
     "values": [
-        "\/api\/v2\/admin\/product-options\/NEW_COLOR\/values\/NEW_COLOR_RED"
+        {
+            "@id": "\/api\/v2\/admin\/product-options\/NEW_COLOR\/values\/NEW_COLOR_RED",
+            "@type": "ProductOptionValue",
+            "code": "NEW_COLOR_RED",
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-option-values\/NEW_COLOR_RED\/translations\/en_US",
+                    "@type": "ProductOptionValueTranslation",
+                    "value": "Red"
+                }
+            },
+            "value": "Red"
+        }
     ],
     "createdAt": "@datetime@",
     "updatedAt": "@datetime@",

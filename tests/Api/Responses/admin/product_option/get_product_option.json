@@ -2,12 +2,35 @@
     "@context": "\/api\/v2\/contexts\/ProductOption",
     "@id": "\/api\/v2\/admin\/product-options\/COLOR",
     "@type": "ProductOption",
-    "id": "@integer@",
     "code": "COLOR",
     "position": 0,
     "values": [
-        "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_BLUE",
-        "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_RED"
+        {
+            "@id": "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_BLUE",
+            "@type": "ProductOptionValue",
+            "code": "COLOR_BLUE",
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE\/translations\/en_US",
+                    "@type": "ProductOptionValueTranslation",
+                    "value": "Blue"
+                }
+            },
+            "value": "Blue"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_RED",
+            "@type": "ProductOptionValue",
+            "code": "COLOR_RED",
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-option-values\/COLOR_RED\/translations\/en_US",
+                    "@type": "ProductOptionValueTranslation",
+                    "value": "Red"
+                }
+            },
+            "value": "Red"
+        }
     ],
     "createdAt": "@datetime@",
     "updatedAt": "@datetime@",
