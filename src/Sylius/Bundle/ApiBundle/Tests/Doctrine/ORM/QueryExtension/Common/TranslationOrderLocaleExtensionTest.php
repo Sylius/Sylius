@@ -21,17 +21,21 @@ use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\TranslationOrderLocaleExtension;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class TranslationOrderLocaleExtensionTest extends TestCase
 {
-    private QueryNameGeneratorInterface&MockObject $queryNameGenerator;
+    private MockObject&QueryNameGeneratorInterface $queryNameGenerator;
 
-    private QueryBuilder&MockObject $queryBuilder;
+    private MockObject&QueryBuilder $queryBuilder;
 
     private EntityManagerInterface&MockObject $entityManager;
 
     private ClassMetadata&MockObject $classMetadata;
+
+    private MockObject&SectionProviderInterface $sectionProvider;
 
     protected function setUp(): void
     {
@@ -39,6 +43,7 @@ final class TranslationOrderLocaleExtensionTest extends TestCase
         $this->queryBuilder = $this->createMock(QueryBuilder::class);
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
         $this->classMetadata = $this->createMock(ClassMetadata::class);
+        $this->sectionProvider = $this->createMock(SectionProviderInterface::class);
     }
 
     /** @test */
@@ -101,7 +106,7 @@ final class TranslationOrderLocaleExtensionTest extends TestCase
     }
 
     /** @test */
-    public function it_does_nothing_when_no_locale_code_has_been_resolved_from_filters(): void
+    public function it_joins_all_translations_if_no_locale_code_has_been_resolved_from_filters(): void
     {
         $this->queryBuilder
             ->expects($this->once())
@@ -124,6 +129,70 @@ final class TranslationOrderLocaleExtensionTest extends TestCase
         ;
 
         $this->queryBuilder
+            ->expects($this->once())
+            ->method('getRootAliases')
+            ->willReturn(['alias'])
+        ;
+
+        $this->queryBuilder
+            ->expects($this->once())
+            ->method('addSelect')
+            ->with('translation')
+            ->willReturnSelf()
+        ;
+
+        $this->queryBuilder
+            ->expects($this->once())
+            ->method('leftJoin')
+            ->with('alias.translations', 'translation')
+            ->willReturnSelf()
+        ;
+
+        $this->doApplyToCollection(ProductInterface::class, [
+            'filters' => [
+                'order' => [
+                    'translation.name' => 'test',
+                ],
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_does_nothing_when_no_locale_code_has_been_resolved_from_filters_and_it_is_shop_section(): void
+    {
+        $this->queryBuilder
+            ->expects($this->once())
+            ->method('getEntityManager')
+            ->willReturn($this->entityManager)
+        ;
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('getClassMetadata')
+            ->with(ProductInterface::class)
+            ->willReturn($this->classMetadata)
+        ;
+
+        $this->classMetadata
+            ->expects($this->once())
+            ->method('hasAssociation')
+            ->with('translations')
+            ->willReturn(true)
+        ;
+
+        $this->queryBuilder
+            ->expects($this->once())
+            ->method('getRootAliases')
+            ->willReturn(['alias'])
+        ;
+
+        $this->sectionProvider
+            ->expects($this->once())
+            ->method('getSection')
+            ->willReturn(new ShopApiSection())
+        ;
+
+        $this->queryBuilder
             ->expects($this->never())
             ->method('leftJoin')
             ->withAnyParameters()
@@ -140,6 +209,7 @@ final class TranslationOrderLocaleExtensionTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider getLocaleCodeContexts
      */
     public function it_joins_on_a_specific_translation_when_locale_code_has_been_resolved_from_filters(
@@ -210,7 +280,7 @@ final class TranslationOrderLocaleExtensionTest extends TestCase
     /** @param array<string, mixed> $context */
     private function doApplyToCollection(string $resourceClass, array $context = []): void
     {
-        (new TranslationOrderLocaleExtension())->applyToCollection(
+        (new TranslationOrderLocaleExtension($this->sectionProvider))->applyToCollection(
             queryBuilder: $this->queryBuilder,
             queryNameGenerator: $this->queryNameGenerator,
             resourceClass: $resourceClass,
