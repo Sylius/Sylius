@@ -15,7 +15,7 @@ namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Tests\Api\JsonApiTestCase;
 
-final class ProductOptionTest extends JsonApiTestCase
+final class ProductOptionsTest extends JsonApiTestCase
 {
     /** @test */
     public function it_returns_product_option(): void
