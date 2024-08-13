@@ -46,8 +46,16 @@
         <service id="sylius.form_registry.payment_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
         <service id="sylius.validator.gateway_config_groups_generator" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator">
+            <argument>%sylius.form.type.gateway_config.validation_groups%</argument>
             <argument>%sylius.gateway_config.validation_groups%</argument>
         </service>
+        <service id="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGeneratorInterface" alias="sylius.validator.gateway_config_groups_generator" />
+
+        <service id="sylius.validator.payment_method_groups_generator" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGenerator">
+            <argument>%sylius.form.type.payment_method.validation_groups%</argument>
+            <argument type="service" id="sylius.validator.gateway_config_groups_generator" />
+        </service>
+        <service id="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGeneratorInterface" alias="sylius.validator.payment_method_groups_generator" />
 
         <service id="sylius.gateway_config_name_generator" class="Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGenerator" />
         <service id="Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGeneratorInterface" alias="sylius.gateway_config_name_generator" />

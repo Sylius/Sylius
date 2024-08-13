@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGeneratorInterface;
-use Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator;
+use Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentMethodType extends AbstractResourceType
@@ -31,7 +32,7 @@ final class PaymentMethodType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        private readonly GatewayConfigGroupsGenerator $gatewayConfigGroupsGenerator,
+        private readonly PaymentMethodGroupsGeneratorInterface $paymentMethodGroupsGenerator,
         private readonly GatewayConfigNameGeneratorInterface $gatewayConfigNameGenerator,
     ) {
         parent::__construct($dataClass, $validationGroups);
@@ -80,7 +81,11 @@ final class PaymentMethodType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'validation_groups' => $this->gatewayConfigGroupsGenerator,
+            'validation_groups' => function (FormInterface $form): array {
+                $data = $form->getData();
+
+                return $this->paymentMethodGroupsGenerator->__invoke($data);
+            },
         ]);
     }
 

@@ -15,54 +15,30 @@ namespace spec\Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Symfony\Component\Form\FormInterface;
 
 final class GatewayConfigGroupsGeneratorSpec extends ObjectBehavior
 {
     function let(): void
     {
-        $this->beConstructedWith([
+        $this->beConstructedWith(['sylius'], [
             'paypal_express_checkout' => ['paypal_express_checkout', 'sylius'],
             'stripe_checkout' => ['stripe_checkout', 'sylius'],
         ]);
     }
 
-    function it_throws_error_if_invalid_object_is_passed(): void
-    {
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [new \stdClass()])
-        ;
-    }
-
     function it_returns_gateway_config_validation_groups(
         GatewayConfigInterface $gatewayConfig,
-        PaymentMethodInterface $paymentMethod,
     ): void {
-        $paymentMethod->getGatewayConfig()->willReturn($gatewayConfig);
         $gatewayConfig->getFactoryName()->willReturn('paypal_express_checkout');
 
-        $this($paymentMethod)->shouldReturn(['paypal_express_checkout', 'sylius']);
+        $this($gatewayConfig)->shouldReturn(['paypal_express_checkout', 'sylius']);
     }
 
-    function it_returns_default_validation_groups_if_gateway_config_is_null(
-        PaymentMethodInterface $paymentMethod,
-    ): void {
-        $paymentMethod->getGatewayConfig()->willReturn(null);
-
-        $this($paymentMethod)->shouldReturn(['sylius']);
-    }
-
-    function it_returns_gateway_config_validation_groups_if_it_is_payment_method_form(
-        FormInterface $form,
+    function it_returns_default_validation_groups_if_factory_name_is_null(
         GatewayConfigInterface $gatewayConfig,
-        PaymentMethodInterface $paymentMethod,
     ): void {
-        $form->getData()->willReturn($paymentMethod);
-        $paymentMethod->getGatewayConfig()->willReturn($gatewayConfig);
-        $gatewayConfig->getFactoryName()->willReturn('paypal_express_checkout');
+        $gatewayConfig->getFactoryName()->willReturn(null);
 
-        $this($form)->shouldReturn(['paypal_express_checkout', 'sylius']);
+        $this($gatewayConfig)->shouldReturn(['sylius']);
     }
 }

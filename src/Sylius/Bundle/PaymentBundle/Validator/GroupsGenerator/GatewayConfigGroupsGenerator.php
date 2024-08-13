@@ -13,35 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator;
 
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Symfony\Component\Form\FormInterface;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Payment\Model\GatewayConfigInterface;
 
-/** @internal */
-class GatewayConfigGroupsGenerator
+final class GatewayConfigGroupsGenerator implements GatewayConfigGroupsGeneratorInterface
 {
-    /** @param array<string, array<string, string>> $validationGroups */
-    public function __construct(private array $validationGroups)
+    /**
+     * @param array<string> $defaultValidationGroups
+     * @param array<string, array<string, string>> $validationGroups
+     */
+    public function __construct(private array $defaultValidationGroups, private array $validationGroups)
     {
     }
 
-    /**
-     * @param FormInterface|PaymentMethodInterface $object
-     *
-     * @return array<string>
-     */
-    public function __invoke($object): array
+    public function __invoke(GatewayConfigInterface $gatewayConfig): array
     {
-        if ($object instanceof FormInterface) {
-            $object = $object->getData();
+        if ($gatewayConfig->getFactoryName() === null) {
+            return $this->defaultValidationGroups;
         }
 
-        Assert::isInstanceOf($object, PaymentMethodInterface::class);
-
-        if ($object->getGatewayConfig()?->getFactoryName() === null) {
-            return ['sylius'];
-        }
-
-        return $this->validationGroups[$object->getGatewayConfig()->getFactoryName()] ?? ['sylius'];
+        return $this->validationGroups[$gatewayConfig->getFactoryName()] ?? $this->defaultValidationGroups;
     }
 }

@@ -46,7 +46,7 @@
         <service id="sylius.form.type.payment_method" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType">
             <argument>%sylius.model.payment_method.class%</argument>
             <argument>%sylius.form.type.payment_method.validation_groups%</argument>
-            <argument type="service" id="sylius.validator.gateway_config_groups_generator" />
+            <argument type="service" id="sylius.validator.payment_method_groups_generator" />
             <argument type="service" id="sylius.gateway_config_name_generator" />
             <tag name="form.type" />
         </service>
