@@ -61,6 +61,17 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
+     * @When I filter them by :product product
+     */
+    public function iFilterThemByProduct(ProductInterface $product): void
+    {
+        $this->client->addFilter('product.code', $product->getCode());
+        $this->client->filter();
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
      * @When I set the position of :product to :position
      */
     public function iSetThePositionOfProductTo(ProductInterface $product, int|string $position): void
@@ -187,5 +198,59 @@ final class ManagingProductTaxonsContext implements Context
             (string) $this->responseChecker->getError($this->client->getLastResponse()),
             'The type of the "position" attribute must be "int", "string" given.',
         );
+    }
+
+    /**
+     * @Then I should see the :taxon taxon
+     */
+    public function iShouldSeeTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::true(
+            $this->isTaxonVisible($taxon),
+            sprintf('Taxon with code %s does not exist, but it should', $taxon->getCode()),
+        );
+    }
+
+    /**
+     * @Then I should see the :product product
+     */
+    public function iShouldSeeTheProduct(ProductInterface $product): void
+    {
+        Assert::true(
+            $this->isProductVisible($product),
+            sprintf('Product with code %s does not exist, but it should', $product->getCode()),
+        );
+    }
+
+    /**
+     * @Then I should not see the :taxon taxon
+     */
+    public function iShouldNotSeeTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::false(
+            $this->isTaxonVisible($taxon),
+            sprintf('Taxon with code %s exists, but it should not', $taxon->getCode()),
+        );
+    }
+
+    /**
+     * @Then I should not see the :product product
+     */
+    public function iShouldNotSeeTheProduct(ProductInterface $product): void
+    {
+        Assert::false(
+            $this->isProductVisible($product),
+            sprintf('Product with code %s does not exist, but it should not', $product->getCode()),
+        );
+    }
+
+    private function isTaxonVisible(TaxonInterface $taxon): bool
+    {
+        return in_array($this->iriConverter->getIriFromResource($taxon), array_column($this->responseChecker->getCollection($this->sharedStorage->get('response')), 'taxon'));
+    }
+
+    private function isProductVisible(ProductInterface $product): bool
+    {
+        return in_array($this->iriConverter->getIriFromResource($product), array_column($this->responseChecker->getCollection($this->sharedStorage->get('response')), 'product'));
     }
 }

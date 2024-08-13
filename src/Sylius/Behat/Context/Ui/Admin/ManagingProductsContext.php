@@ -295,6 +295,15 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I filter them by :productName product
+     */
+    public function iFilterThemByProduct(string $productName): void
+    {
+        $this->indexPerTaxonPage->filterByName($productName);
+        $this->indexPerTaxonPage->filter();
+    }
+
+    /**
      * @When I filter them by :taxonName main taxon
      */
     public function iFilterThemByMainTaxon(string $taxonName): void
@@ -1434,6 +1443,28 @@ final readonly class ManagingProductsContext implements Context
     public function iShouldNotBeAbleToGoToTheGenerateVariantsPage(): void
     {
         Assert::false($this->updateSimpleProductPage->hasGenerateVariantsButton(), 'Generate variants button should not be visible');
+    }
+
+    /**
+     * @Then I should see the :product product
+     */
+    public function iShouldSeeTheProduct(ProductInterface $product): void
+    {
+        Assert::true(
+            $this->indexPerTaxonPage->isSingleResourceOnPage(['name' => $product->getName()]),
+            sprintf('Product with code %s does not exist, but it should', $product->getCode()),
+        );
+    }
+
+    /**
+     * @Then I should not see the :product product
+     */
+    public function iShouldNotSeeTheProduct(ProductInterface $product): void
+    {
+        Assert::false(
+            $this->indexPerTaxonPage->isSingleResourceOnPage(['name' => $product->getName()]),
+            sprintf('Product with code %s does not exist, but it should', $product->getCode()),
+        );
     }
 
     private function assertValidationMessage(string $element, string $message): void
