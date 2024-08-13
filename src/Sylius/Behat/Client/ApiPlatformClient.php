@@ -231,9 +231,14 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->addSubResource($key, $data);
     }
 
-    public function removeSubResource(string $subResource, string $id): void
+    public function removeSubResourceIri(string $subResourceKey, string $iri): void
     {
-        $this->request->removeSubResource($subResource, $id);
+        $this->request->removeSubResource($subResourceKey, $iri);
+    }
+
+    public function removeSubResourceObject(string $subResourceKey, string $value, string $key = '@id'): void
+    {
+        $this->request->removeSubResource($subResourceKey, $value, $key);
     }
 
     public function getContent(): array
