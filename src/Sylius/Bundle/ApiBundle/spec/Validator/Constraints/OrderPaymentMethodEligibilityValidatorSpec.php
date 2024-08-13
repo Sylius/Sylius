@@ -73,8 +73,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $constraint = new OrderPaymentMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
@@ -95,8 +94,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderPaymentMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
@@ -130,8 +128,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderPaymentMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 

@@ -18,7 +18,10 @@ use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -29,39 +32,39 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class ChannelBasedExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($sectionProvider);
     }
 
     function it_does_nothing_if_current_resource_is_not_an_order(
-        UserContextInterface $userContext,
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
+        $sectionProvider->getSection()->shouldNotBeCalled();
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ResourceInterface::class, new Get());
     }
 
-    function it_does_nothing_when_user_is_an_admin(
-        UserContextInterface $userContext,
+    function it_does_nothing_when_section_is_not_shop_api(
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        AdminUserInterface $adminUser,
+        AdminApiSection $section,
     ): void {
-        $userContext->getUser()->willReturn($adminUser);
+        $sectionProvider->getSection()->willReturn($section);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
     }
 
     function it_throws_an_exception_if_context_has_no_channel_for_shop_user(
-        UserContextInterface $userContext,
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ShopUserInterface $shopUser,
+        ShopApiSection $section,
     ): void {
-        $userContext->getUser()->willReturn($shopUser);
+        $sectionProvider->getSection()->willReturn($section);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -70,13 +73,13 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
     }
 
     function it_filters_orders_for_current_channel(
-        UserContextInterface $userContext,
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ShopUserInterface $shopUser,
+        ShopApiSection $section,
         ChannelInterface $channel,
     ): void {
-        $userContext->getUser()->willReturn($shopUser);
+        $sectionProvider->getSection()->willReturn($section);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryNameGenerator->generateParameterName('channel')->willReturn('channel');
@@ -91,27 +94,5 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
             new Get(),
             [ContextKeys::CHANNEL => $channel],
         );
-    }
-
-    function it_throws_an_access_denied_exception_if_user_is_not_recognised(
-        UserContextInterface $userContext,
-        UserInterface $user,
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-    ): void {
-        $userContext->getUser()->willReturn($user);
-
-        $this
-            ->shouldThrow(AccessDeniedException::class)
-            ->during(
-                'applyToCollection',
-                [
-                    $queryBuilder,
-                    $queryNameGenerator,
-                    OrderInterface::class,
-                    new Get(),
-                ],
-            )
-        ;
     }
 }

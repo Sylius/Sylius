@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\TransitionInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -29,7 +28,7 @@ class CheckoutCompletionValidator extends ConstraintValidator
     /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private readonly OrderRepositoryInterface $orderRepository,
-        private readonly StateMachineInterface $stateMachineFactory,
+        private readonly StateMachineInterface $stateMachine,
     ) {
     }
 
@@ -45,9 +44,7 @@ class CheckoutCompletionValidator extends ConstraintValidator
 
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $stateMachine = $this->getStateMachine();
-
-        if ($stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE)) {
+        if ($this->stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE)) {
             return;
         }
 
@@ -57,18 +54,9 @@ class CheckoutCompletionValidator extends ConstraintValidator
                 ', ',
                 array_map(
                     fn (TransitionInterface $transition) => $transition->getName(),
-                    $stateMachine->getEnabledTransitions($order, OrderCheckoutTransitions::GRAPH),
+                    $this->stateMachine->getEnabledTransitions($order, OrderCheckoutTransitions::GRAPH),
                 ),
             ),
         ]);
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }
