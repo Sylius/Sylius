@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Validator\Constraints;
+namespace Sylius\Bundle\PaymentBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 

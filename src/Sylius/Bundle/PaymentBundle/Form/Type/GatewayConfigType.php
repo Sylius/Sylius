@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Form\Type;
+namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
-use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -63,6 +63,6 @@ final class GatewayConfigType extends AbstractResourceType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_payum_gateway_config';
+        return 'sylius_payment_gateway_config';
     }
 }

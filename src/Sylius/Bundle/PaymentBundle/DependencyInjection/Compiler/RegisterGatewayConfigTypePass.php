@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\DependencyInjection\Compiler;
+namespace Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -20,12 +20,12 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('sylius.form_registry.payum_gateway_config')) {
+        if (!$container->has('sylius.form_registry.payment_gateway_config')) {
             return;
         }
 
-        $formRegistry = $container->findDefinition('sylius.form_registry.payum_gateway_config');
-        $gatewayFactories = [['priority' => 0, 'label' => 'sylius.payum_gateway_factory.offline', 'type' => 'offline']];
+        $formRegistry = $container->findDefinition('sylius.form_registry.payment_gateway_config');
+        $gatewayFactories = [['priority' => 0, 'label' => 'sylius.gateway_factory.offline', 'type' => 'offline']];
 
         $gatewayConfigurationTypes = $container->findTaggedServiceIds('sylius.gateway_configuration_type');
 
