@@ -32,7 +32,7 @@ twig_hooks:
 
         'sylius_shop.product.show.page.info.summary.price':
             original_price:
-                component: 'sylius_shop:common:product_show_price'
+                component: 'sylius_shop:product:show_price'
                 props:
                     productVariant: '@=_context.variant'
             discount:

@@ -103,9 +103,29 @@
 
             <tag
                 name="sylius.live_component"
-                key="sylius_shop:common:product_show_price"
+                key="sylius_shop:product:show_price"
                 template="@SyliusShop/product/show/page/info/summary/price/original.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_shop.twig.component.product_add_to_cart_form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCart\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="sylius.factory.order_item" />
+            <argument type="service" id="sylius.factory.add_to_cart_command" />
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument>Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:product:add_to_cart_form"
+                template="@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart.html.twig"
+            />
+        </service>
+
     </services>
 </container>
