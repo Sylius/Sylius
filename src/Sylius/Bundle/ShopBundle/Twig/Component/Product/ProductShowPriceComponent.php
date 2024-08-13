@@ -11,6 +11,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
@@ -21,6 +22,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 final class ProductShowPriceComponent
 {
     use DefaultActionTrait;
+    use HookableLiveComponentTrait;
 
     public ProductVariantInterface $productVariant;
 
@@ -34,7 +36,7 @@ final class ProductShowPriceComponent
     ){
     }
 
-    #[LiveListener('sylius:product_variant:changed')]
+    #[LiveListener('variantChanged')]
     public function updateProductVariant(#[LiveArg] string $productVariantCode): void
     {
         $selectedProductVariant = $this->productVariantRepository->findOneBy(['code' => $productVariantCode]);

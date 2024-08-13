@@ -19,7 +19,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\Util\LiveFormUtility;
@@ -30,6 +32,7 @@ final class FormComponent
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
     use ComponentWithFormTrait;
+    use ComponentToolsTrait;
 
     #[LiveProp]
     public int $productId;
@@ -50,6 +53,13 @@ final class FormComponent
         private readonly OrderItemQuantityModifierInterface $quantityModifier,
         private readonly string $formClass,
     ) {
+    }
+
+    #[LiveAction]
+    public function variantChanged(): void
+    {
+        $selectedVariantCode = array_values($this->formValues['cartItem']['variant'])[0];
+        $this->emit('variantChanged', ['productVariantCode' => $selectedVariantCode], 'sylius_shop:product:show_price');
     }
 
     protected function instantiateForm(): FormInterface

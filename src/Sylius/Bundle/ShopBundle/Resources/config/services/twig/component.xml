@@ -120,6 +120,10 @@
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument>Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType</argument>
 
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
             <tag
                 name="sylius.live_component"
                 key="sylius_shop:product:add_to_cart_form"
