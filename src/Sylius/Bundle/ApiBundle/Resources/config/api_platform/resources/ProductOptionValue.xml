@@ -24,6 +24,13 @@
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Product\Model\ProductOptionValue" />
                 </uriVariables>
             </operation>
+
+            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/shop/product-options/{product_option_code}/values/{code}">
+                <uriVariables>
+                    <uriVariable parameterName="product_option_code" fromClass="Sylius\Component\Product\Model\ProductOption" fromProperty="values"/>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Product\Model\ProductOptionValue" />
+                </uriVariables>
+            </operation>
         </operations>
     </resource>
 </resources>
