@@ -13,14 +13,14 @@ Feature: Filtering product options
 
     @api @ui
     Scenario: Filtering product options by name
-        When I search for product options with "T-Shirt"
+        When I search for product options with "T-Shirt" name
         Then I should see 2 product options in the list
         And the product option "T-Shirt size" should be in the registry
         And the product option "T-Shirt color" should be in the registry
 
     @api @ui
     Scenario: Filtering product options by code
-        When I search for product options with "xyz"
+        When I search for product options with "xyz" code
         Then I should see 2 product options in the list
         And the product option "T-Shirt color" should be in the registry
         And the product option "Jeans size" should be in the registry

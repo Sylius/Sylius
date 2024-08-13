@@ -113,6 +113,14 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @When I delete the :value option value of this product option
+     */
+    public function iDeleteTheOptionValueOfThisProductOption(string $value): void
+    {
+        $this->client->removeSubResourceObject('values', $value, 'value');
+    }
+
+    /**
      * @When I do not add an option value
      */
     public function iDoNotAddAnOptionValue(): void
@@ -126,6 +134,15 @@ final class ManagingProductOptionsContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When /^I search for product options with "([^"]+)" (code|name)$/
+     */
+    public function iSearchForProductOptionsWith(string $phrase, string $field): void
+    {
+        $this->client->addFilter($field === 'name' ? 'translations.name' : 'code', $phrase);
+        $this->client->filter();
     }
 
     /**
@@ -146,8 +163,9 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->sharedStorage->set('product_option', $productOption);
 
+        $response = $this->client->index(Resources::PRODUCT_OPTIONS);
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_OPTIONS), 'name', $productOption->getName()),
+            $this->responseChecker->hasItemWithValue($response, 'name', $productOption->getName()),
             sprintf('Product option should have name "%s", but it does not.', $productOption->getName()),
         );
     }
@@ -216,8 +234,26 @@ final class ManagingProductOptionsContext implements Context
         ProductOptionInterface $productOption,
         string $optionValueName,
     ): void {
-        Assert::true($this->responseChecker->hasItemWithTranslation(
-            $this->client->subResourceIndex(Resources::PRODUCT_OPTIONS, 'values', $productOption->getCode()),
+        Assert::true($this->responseChecker->hasItemWithTranslationInCollection(
+            $this
+                ->responseChecker
+                ->getValue($this->client->show(Resources::PRODUCT_OPTIONS, $productOption->getCode()), 'values'),
+            'en_US',
+            'value',
+            $optionValueName,
+        ));
+    }
+
+    /**
+     * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     * @Then /^(this product option) should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
+     */
+    public function thisProductOptionShouldNotHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValueName,
+    ): void {
+        Assert::false($this->responseChecker->hasItemWithTranslationInCollection(
+            $this->responseChecker->getValue($this->client->show(Resources::PRODUCT_OPTIONS, $productOption->getCode()), 'values'),
             'en_US',
             'value',
             $optionValueName,
