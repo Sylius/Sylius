@@ -24,4 +24,6 @@ interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
     public function setPositionOfProduct(string $productName, string $position): void;
 
     public function savePositions(): void;
+
+    public function filterByName(string $name): void;
 }
