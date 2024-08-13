@@ -6,6 +6,6 @@
     {% set has_lowest_price = variant|sylius_has_lowest_price({'channel': sylius.channel}) %}
 
     <div class="mb-3 pb-1">
-        {% hook 'price' with { has_discount, has_lowest_price, days } %}
+        {% hook 'price' with { variant, has_discount, has_lowest_price, days } %}
     </div>
 {% endif %}
