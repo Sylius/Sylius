@@ -57,9 +57,7 @@ final class CanPaymentMethodBeChangedValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
     {
-        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $orderRepository->findOneByTokenValue('ORDER_TOKEN')->willReturn(null);
 
@@ -74,9 +72,7 @@ final class CanPaymentMethodBeChangedValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $orderRepository->findOneByTokenValue('ORDER_TOKEN')->willReturn($order);
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
@@ -94,9 +90,7 @@ final class CanPaymentMethodBeChangedValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE', 123, 'ORDER_TOKEN');
 
         $orderRepository->findOneByTokenValue('ORDER_TOKEN')->willReturn($order);
         $order->getState()->willReturn(OrderInterface::STATE_NEW);

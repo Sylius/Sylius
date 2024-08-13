@@ -64,8 +64,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         Collection $orderItems,
     ): void {
-        $command = new CompleteOrder();
-        $command->setOrderTokenValue('cartToken');
+        $command = new CompleteOrder(orderTokenValue: 'cartToken');
 
         $orderRepository->findOneBy(['tokenValue' => 'cartToken'])->willReturn($order);
 
@@ -96,8 +95,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         Collection $orderItems,
     ): void {
-        $command = new CompleteOrder();
-        $command->setOrderTokenValue('cartToken');
+        $command = new CompleteOrder(orderTokenValue: 'cartToken');
 
         $orderRepository->findOneBy(['tokenValue' => 'cartToken'])->willReturn($order);
 

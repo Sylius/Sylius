@@ -56,8 +56,7 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
     {
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
@@ -74,8 +73,7 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
@@ -93,8 +91,7 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 

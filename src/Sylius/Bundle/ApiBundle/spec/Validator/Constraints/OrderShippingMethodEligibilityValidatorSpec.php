@@ -78,8 +78,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
@@ -191,8 +190,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
@@ -234,8 +232,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
