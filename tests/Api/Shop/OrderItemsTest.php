@@ -31,7 +31,7 @@ final class OrderItemsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_an_order_item(): void
+    public function it_gets_order_items_created_by_a_user_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -41,20 +41,160 @@ final class OrderItemsTest extends JsonApiTestCase
             'shipping_method.yaml',
             'payment_method.yaml',
         ]);
+
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
-        $order = $this->placeOrder('token', $customer->getEmailCanonical());
+        $this->placeOrder('token', $customer->getEmailCanonical());
+
 
         $this->requestGet(
-            uri: '/api/v2/shop/order-items/' . $order->getItems()->first()->getId(),
+            uri: '/api/v2/shop/orders/token/items',
             headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
         );
 
-        $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item');
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_item/get_order_items_by_user',
+        );
     }
 
     /** @test */
-    public function it_does_not_return_an_order_item_of_another_user(): void
+    public function it_gets_order_items_created_by_a_user_authenticated_as_another_user(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        $this->placeOrder('token', $customer->getEmailCanonical());
+
+
+        $this->requestGet(
+            uri: '/api/v2/shop/orders/token/items',
+            headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_item/get_empty_order_items',
+        );
+    }
+
+    /** @test */
+    public function it_gets_order_items_created_by_a_user_authenticated_as_a_guest(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        $this->placeOrder('token', $customer->getEmailCanonical());
+
+
+        $this->requestGet(
+            uri: '/api/v2/shop/orders/token/items',
+            headers: $this->headerBuilder()->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_item/get_empty_order_items',
+        );
+    }
+
+    /** @test */
+    public function it_gets_order_items_created_by_a_guest_authenticated_as_a_guest(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        $this->placeOrder('token', 'guest@doe.com');
+
+
+        $this->requestGet(
+            uri: '/api/v2/shop/orders/token/items',
+            headers: $this->headerBuilder()->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_item/get_order_items_by_guest',
+        );
+    }
+
+    /** @test */
+    public function it_gets_order_items_created_by_a_guest_authenticated_as_a_user(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        $this->placeOrder('token', 'guest@doe.com');
+
+
+        $this->requestGet(
+            uri: '/api/v2/shop/orders/token/items',
+            headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_item/get_empty_order_items',
+        );
+    }
+
+    /** @test */
+    public function it_gets_an_order_item_created_by_a_user_authenticated_as_a_user(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        $order = $this->placeOrder('token', $customer->getEmailCanonical());
+
+        $this->requestGet(
+            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId(),
+            headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item_by_user');
+    }
+
+    /** @test */
+    public function it_does_not_return_an_order_item_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -70,7 +210,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $order = $this->placeOrder('token', $customer->getEmailCanonical());
 
         $this->requestGet(
-            uri: '/api/v2/shop/order-items/' . $order->getItems()->first()->getId(),
+            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId(),
             headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
         );
 
@@ -78,7 +218,7 @@ final class OrderItemsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_return_an_order_item_as_a_guest(): void
+    public function it_does_not_return_an_order_item_created_by_a_user_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -94,8 +234,52 @@ final class OrderItemsTest extends JsonApiTestCase
         $order = $this->placeOrder('token', $customer->getEmailCanonical());
 
         $this->requestGet(
-            uri: '/api/v2/shop/order-items/' . $order->getItems()->first()->getId(),
+            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId(),
             headers: $this->headerBuilder()->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /** @test */
+    public function it_gets_an_order_item_created_by_a_guest_authenticated_as_a_guest(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('token', 'guest@doe.com');
+
+        $this->requestGet(
+            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId(),
+            headers: $this->headerBuilder()->build(),
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item_by_guest');
+    }
+
+    /** @test */
+    public function it_does_not_return_an_order_item_created_by_a_guest_authenticated_as_a_user(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('token', 'guest@doe.com');
+
+        $this->requestGet(
+            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId(),
+            headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);

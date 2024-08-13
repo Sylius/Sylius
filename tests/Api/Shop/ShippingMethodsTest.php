@@ -68,7 +68,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
-        $this->getCartAndPutItemForCustomer($tokenValue, 'sylius@example.com');
+        $this->getCartAndPutItemForCustomer($tokenValue, 'guest@example.com');
 
         $this->requestGet(sprintf('/api/v2/shop/orders/%s', $tokenValue));
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
@@ -171,7 +171,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart(tokenValue: $tokenValue, channelCode: 'WEB');
+        $pickupCartCommand = new PickupCart(tokenValue: $tokenValue, channelCode: 'WEB', email: $customerEmail);
         $commandBus->dispatch($pickupCartCommand);
 
         $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3, $tokenValue);

@@ -33,7 +33,7 @@ final class ShippingMethodTest extends JsonApiTestCase
     public function it_selects_shipping_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -66,7 +66,7 @@ final class ShippingMethodTest extends JsonApiTestCase
     public function it_does_not_allow_to_select_shipping_method_to_non_existing_shipment(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -96,7 +96,7 @@ final class ShippingMethodTest extends JsonApiTestCase
     public function it_does_not_allow_to_select_shipping_method_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -125,7 +125,7 @@ final class ShippingMethodTest extends JsonApiTestCase
     public function it_does_not_allow_to_select_shipping_method_with_invalid_shipping_method(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

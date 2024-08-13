@@ -31,7 +31,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_an_order_item_unit(): void
+    public function it_does_not_return_an_order_item_unit(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -50,51 +50,6 @@ final class OrderItemUnitsTest extends JsonApiTestCase
             uri: '/api/v2/shop/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId(),
             headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
         );
-
-        $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item_unit');
-    }
-
-    /** @test */
-    public function it_does_not_return_an_order_item_unit_of_another_user(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/shop_user.yaml',
-            'channel/channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_oliver'];
-        $order = $this->placeOrder('token', $customer->getEmailCanonical());
-
-        $this->requestGet(
-            uri: '/api/v2/shop/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId(),
-            headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
-        );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
-    }
-
-    /** @test */
-    public function it_does_not_return_an_order_item_unit_being_a_guest(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/shop_user.yaml',
-            'channel/channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_oliver'];
-        $order = $this->placeOrder('token', $customer->getEmailCanonical());
-
-        $this->requestGet('/api/v2/shop/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId());
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
