@@ -13,7 +13,7 @@ Feature: Specifying province for a country manually
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Specifying province name manually for country without provinces defined
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
@@ -24,7 +24,7 @@ Feature: Specifying province for a country manually
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Being unable to specify province name manually for country with defined provinces
         Given the country "United States" has the "Utah" province with "UT" code
         And I added product "PHP T-Shirt" to the cart
