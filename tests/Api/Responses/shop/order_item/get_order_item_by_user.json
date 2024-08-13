@@ -1,0 +1,34 @@
+{
+    "@context": "\/api\/v2\/contexts\/OrderItem",
+    "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
+    "@type": "OrderItem",
+    "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+    "productName": "Mug",
+    "id": "@integer@",
+    "order": "\/api\/v2\/shop\/orders\/token",
+    "quantity": 3,
+    "unitPrice": 2000,
+    "originalUnitPrice": 2000,
+    "total": 6000,
+    "units": [
+        "\/api\/v2\/shop\/order-item-units\/@integer@",
+        "\/api\/v2\/shop\/order-item-units\/@integer@",
+        "\/api\/v2\/shop\/order-item-units\/@integer@"
+    ],
+    "adjustments": [],
+    "adjustmentsTotal": 0,
+    "product": {
+        "@id": "\/api\/v2\/shop\/products\/MUG",
+        "@type": "Product",
+        "variants": [
+            "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "\/api\/v2\/shop\/product-variants\/MUG_NFT",
+            "\/api\/v2\/shop\/product-variants\/MUG_NFT_FREE"
+        ],
+        "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+    },
+    "discountedUnitPrice": 2000,
+    "subtotal": 6000,
+    "adjustmentsRecursively": [],
+    "adjustmentsTotalRecursively": 0
+}

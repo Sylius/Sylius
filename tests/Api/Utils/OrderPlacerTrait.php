@@ -183,11 +183,12 @@ trait OrderPlacerTrait
         return $order;
     }
 
-    protected function pickUpCart(string $tokenValue = 'nAWw2jewpA', string $channelCode = 'WEB'): string
+    protected function pickUpCart(string $tokenValue = 'nAWw2jewpA', string $channelCode = 'WEB', ?string $email = null): string
     {
         $pickupCartCommand = new PickupCart(
             tokenValue: $tokenValue,
             channelCode: $channelCode,
+            email: $email,
         );
 
         $this->commandBus->dispatch($pickupCartCommand);

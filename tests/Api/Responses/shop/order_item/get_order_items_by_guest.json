@@ -1,10 +1,11 @@
 {
   "@context": "\/api\/v2\/contexts\/OrderItem",
-  "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/items",
+  "@id": "\/api\/v2\/shop\/orders\/token\/items",
   "@type": "hydra:Collection",
+  "hydra:totalItems": 1,
   "hydra:member": [
     {
-      "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+      "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
       "@type": "OrderItem",
       "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
       "productName": "Mug",
@@ -16,6 +17,5 @@
       "subtotal": 6000,
       "originalUnitPrice": 2000
     }
-  ],
-  "hydra:totalItems": 1
+  ]
 }

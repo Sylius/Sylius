@@ -43,7 +43,7 @@
     "number": "000000001",
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_NFT_FREE",
             "productName": "Mug",

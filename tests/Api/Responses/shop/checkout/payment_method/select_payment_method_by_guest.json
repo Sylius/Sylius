@@ -2,6 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Order",
     "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
     "@type": "Order",
+    "channel": "\/api\/v2\/shop\/channels\/WEB",
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
@@ -35,7 +36,7 @@
             "@id": "\/api\/v2\/shop\/payments\/@integer@",
             "@type": "Payment",
             "id": "@integer@",
-            "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY"
+            "method": "\/api\/v2\/shop\/payment-methods\/BANK_TRANSFER"
         }
     ],
     "shipments": [
@@ -43,20 +44,20 @@
             "@id": "\/api\/v2\/shop\/shipments\/@integer@",
             "@type": "Shipment",
             "id": "@integer@",
-            "method": "\/api\/v2\/shop\/shipping-methods\/UPS"
+            "method": "\/api\/v2\/shop\/shipping-methods\/DHL"
         }
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
-    "checkoutState": "completed",
-    "paymentState": "awaiting_payment",
-    "shippingState": "ready",
+    "checkoutState": "payment_selected",
+    "paymentState": "cart",
+    "shippingState": "cart",
     "tokenValue": "nAWw2jewpA",
     "id": "@integer@",
-    "number": "000000001",
+    "number": null,
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
@@ -70,13 +71,14 @@
         }
     ],
     "itemsTotal": 6000,
-    "total": 6500,
+    "total": 7000,
+    "state": "cart",
     "itemsSubtotal": 6000,
     "taxTotal": 0,
-    "shippingTaxTotal": 500,
+    "shippingTaxTotal": 1000,
     "taxExcludedTotal": 0,
     "taxIncludedTotal": 0,
-    "shippingTotal": 500,
+    "shippingTotal": 1000,
     "orderPromotionTotal": 0,
     "shippingPromotionTotal": 0
 }
