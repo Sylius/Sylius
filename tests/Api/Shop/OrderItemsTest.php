@@ -46,7 +46,6 @@ final class OrderItemsTest extends JsonApiTestCase
         $customer = $fixtures['customer_oliver'];
         $this->placeOrder('token', $customer->getEmailCanonical());
 
-
         $this->requestGet(
             uri: '/api/v2/shop/orders/token/items',
             headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
@@ -73,7 +72,6 @@ final class OrderItemsTest extends JsonApiTestCase
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
         $this->placeOrder('token', $customer->getEmailCanonical());
-
 
         $this->requestGet(
             uri: '/api/v2/shop/orders/token/items',
@@ -102,7 +100,6 @@ final class OrderItemsTest extends JsonApiTestCase
         $customer = $fixtures['customer_oliver'];
         $this->placeOrder('token', $customer->getEmailCanonical());
 
-
         $this->requestGet(
             uri: '/api/v2/shop/orders/token/items',
             headers: $this->headerBuilder()->build(),
@@ -130,7 +127,6 @@ final class OrderItemsTest extends JsonApiTestCase
         $customer = $fixtures['customer_oliver'];
         $this->placeOrder('token', 'guest@doe.com');
 
-
         $this->requestGet(
             uri: '/api/v2/shop/orders/token/items',
             headers: $this->headerBuilder()->build(),
@@ -157,7 +153,6 @@ final class OrderItemsTest extends JsonApiTestCase
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
         $this->placeOrder('token', 'guest@doe.com');
-
 
         $this->requestGet(
             uri: '/api/v2/shop/orders/token/items',

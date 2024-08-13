@@ -20,11 +20,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class ResendOrderConfirmationEmailHandler implements MessageHandlerInterface
+final readonly class ResendOrderConfirmationEmailHandler implements MessageHandlerInterface
 {
-    /**
-     * @param RepositoryInterface<OrderInterface> $orderRepository
-     */
+    /** @param RepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private OrderEmailManagerInterface $orderEmailManager,
         private RepositoryInterface $orderRepository,

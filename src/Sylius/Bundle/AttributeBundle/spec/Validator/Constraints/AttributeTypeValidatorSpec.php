@@ -47,8 +47,7 @@ final class AttributeTypeValidatorSpec extends ObjectBehavior
     function it_throws_exception_when_constraint_is_not_an_attribute_type(
         AttributeInterface $attribute,
         Constraint $constraint,
-    ): void
-    {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [$attribute, $constraint]);

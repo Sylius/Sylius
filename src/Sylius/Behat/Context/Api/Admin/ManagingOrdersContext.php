@@ -19,7 +19,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -40,7 +39,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
 
-final class ManagingOrdersContext implements Context
+final readonly class ManagingOrdersContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -49,7 +48,6 @@ final class ManagingOrdersContext implements Context
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -61,7 +59,7 @@ final class ManagingOrdersContext implements Context
     public function iSeeTheOrder(OrderInterface $order): void
     {
         $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
-        Assert::same($this->responseChecker->getValue($response, '@id'), $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'));
+        Assert::same($this->responseChecker->getValue($response, '@id'), $this->iriConverter->getIriFromResourceInSection($order, 'admin'));
 
         $this->sharedStorage->set('order', $order);
     }
@@ -147,7 +145,7 @@ final class ManagingOrdersContext implements Context
         $this->client->customItemAction(
             Resources::ORDERS,
             $this->sharedStorage->get('order')->getTokenValue(),
-            HttpRequest::METHOD_POST,
+            HttpRequest::METHOD_PATCH,
             'resend-confirmation-email',
         );
     }
@@ -162,6 +160,15 @@ final class ManagingOrdersContext implements Context
             $this->client->addFilter('items.productName[]', $productName);
         }
 
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter by customer :customer
+     */
+    public function iFilterByCustomer(CustomerInterface $customer): void
+    {
+        $this->client->addFilter('customer.id', $customer->getId());
         $this->client->filter();
     }
 
@@ -427,7 +434,11 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHavePaymentState(OrderInterface $order, string $paymentState): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show(Resources::ORDERS, $order->getTokenValue()), 'paymentState', strtolower($paymentState)),
+            $this->responseChecker->hasValue(
+                $this->client->show(Resources::ORDERS, $order->getTokenValue()),
+                'paymentState',
+                str_replace(' ', '_', strtolower($paymentState)),
+            ),
             sprintf('Order %s does not have %s payment state', $order->getTokenValue(), $paymentState),
         );
     }
@@ -753,7 +764,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveNoShippingAddressSet(): void
     {
-        Assert::false($this->responseChecker->hasKey($this->client->getLastResponse(), 'shippingAddress'));
+        Assert::null($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress'));
     }
 
     /**
@@ -1168,7 +1179,7 @@ final class ManagingOrdersContext implements Context
         $this->client->customItemAction(
             Resources::ORDERS,
             $this->sharedStorage->get('order')->getTokenValue(),
-            HttpRequest::METHOD_POST,
+            HttpRequest::METHOD_PATCH,
             'resend-confirmation-email',
         );
 

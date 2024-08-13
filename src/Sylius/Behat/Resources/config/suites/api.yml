@@ -16,8 +16,8 @@ imports:
 #    - api/cart/shopping_cart.yml
     - api/channel/channels.yml
     - api/channel/managing_channels.yml
-#    - api/checkout/checkout.yml
-#    - api/checkout/paying_for_order.yml
+    - api/checkout/checkout.yml
+    - api/checkout/paying_for_order.yml
     - api/contact/requesting_contact.yml
 #    - api/currency/currencies.yml
     - api/currency/managing_currencies.yml
@@ -29,9 +29,9 @@ imports:
 #    - api/inventory/managing_inventory.yaml
     - api/locale/locales.yaml
     - api/locale/managing_locales.yaml
-#    - api/order/managing_orders.yml
-#    - api/order/modifying_placed_order_address.yaml
-#    - api/order/order_history.yaml
+    - api/order/managing_orders.yml
+    - api/order/modifying_placed_order_address.yaml
+    - api/order/order_history.yaml
     - api/payment/managing_payment_methods.yaml
     - api/payment/managing_payments.yml
     - api/product/adding_product_review.yml
@@ -56,13 +56,13 @@ imports:
     - api/promotion/managing_promotions.yml
 #    - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
-#    - api/shipping/applying_shipping_method_rules.yml TODO: Enable after making checkout resource available in API
-#    - api/shipping/applying_shipping_fee.yaml TODO: Enable after making checkout resource available in API
-#    - api/shipping/viewing_shipping_methods.yml TODO: Enable after making checkout resource available in API
+    - api/shipping/applying_shipping_method_rules.yml
+    - api/shipping/applying_shipping_fee.yaml
+    - api/shipping/viewing_shipping_methods.yml
     - api/shipping/managing_shipments.yml
     - api/shipping/managing_shipping_categories.yml
     - api/shipping/managing_shipping_methods.yml
-#    - api/taxation/applying_taxes.yml TODO: Enable after making checkout resource available in API
+    - api/taxation/applying_taxes.yml
     - api/taxation/managing_tax_categories.yml
     - api/taxation/managing_tax_rates.yml
     - api/taxon/managing_taxons.yml

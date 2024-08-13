@@ -18,10 +18,12 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Webmozart\Assert\Assert;
 
-final class ResponseContext implements Context
+final readonly class ResponseContext implements Context
 {
-    public function __construct(private ResponseCheckerInterface $responseChecker, private ApiClientInterface $client)
-    {
+    public function __construct(
+        private ResponseCheckerInterface $responseChecker,
+        private ApiClientInterface $client,
+    ) {
     }
 
     /**

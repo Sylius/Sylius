@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -52,17 +52,17 @@ final class CheckoutContext implements Context
     private array $content = [];
 
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
-        private RepositoryInterface $shippingMethodRepository,
-        private OrderRepositoryInterface $orderRepository,
-        private RepositoryInterface $paymentMethodRepository,
-        private ProductVariantResolverInterface $productVariantResolver,
-        private IriConverterInterface $iriConverter,
-        private SharedStorageInterface $sharedStorage,
-        private RequestFactoryInterface $requestFactory,
-        private string $paymentMethodClass,
-        private string $shippingMethodClass,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
+        private readonly RepositoryInterface $shippingMethodRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly RepositoryInterface $paymentMethodRepository,
+        private readonly ProductVariantResolverInterface $productVariantResolver,
+        private readonly IriConverterInterface $iriConverter,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly RequestFactoryInterface $requestFactory,
+        private readonly string $paymentMethodClass,
+        private readonly string $shippingMethodClass,
     ) {
     }
 
@@ -398,7 +398,8 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
         );
-        $request->setContent(['shippingMethod' => $this->iriConverter->getItemIriFromResourceClass($this->shippingMethodClass, ['code' => $shippingMethodCode])]);
+        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromResource($this->shippingMethodClass)]);
+//        $request->setContent(['shippingMethod' => $this->iriConverter->getItemIriFromResourceClass($this->shippingMethodClass, ['code' => $shippingMethodCode])]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -415,7 +416,8 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             sprintf('payments/%s', $this->getCart()['payments'][0]['id']),
         );
-        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass($this->paymentMethodClass, ['code' => $paymentMethodCode])]);
+        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResource($this->paymentMethodClass)]);
+//        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass($this->paymentMethodClass, ['code' => $paymentMethodCode])]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -1163,9 +1165,14 @@ final class CheckoutContext implements Context
         /** @var ProductVariantInterface $variant */
         $variant = $product->getVariants()->first();
         $request->setContent([
-            'productVariant' => $this->iriConverter->getItemIriFromResourceClass($variant::class, ['code' => $code]),
+            'productVariant' => $this->iriConverter->getIriFromResource($variant::class),
             'quantity' => 1,
         ]);
+//
+//        $request->setContent([
+//            'productVariant' => $this->iriConverter->getItemIriFromResourceClass($variant::class, ['code' => $code]),
+//            'quantity' => 1,
+//        ]);
 
         $this->sharedStorage->set('response', $this->client->executeCustomRequest($request));
     }
