@@ -48,5 +48,24 @@
             "name": "Color"
         }
     ],
-    "hydra:totalItems": 1
+    "hydra:totalItems": 1,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-options{?code,translations.name}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
+                "required": false
+            }
+        ]
+    }
 }
