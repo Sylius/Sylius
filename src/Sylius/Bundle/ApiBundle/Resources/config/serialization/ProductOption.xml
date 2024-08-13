@@ -16,11 +16,6 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Product\Model\ProductOption">
-        <attribute name="id">
-            <group>sylius:admin:product_option:index</group>
-            <group>sylius:admin:product_option:show</group>
-            <group>sylius:shop:product_option:show</group>
-        </attribute>
         <attribute name="code">
             <group>sylius:admin:product_option:index</group>
             <group>sylius:admin:product_option:show</group>
