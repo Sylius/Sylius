@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
 
-final class CheckoutCompleteContext implements Context
+final readonly class CheckoutCompleteContext implements Context
 {
     public function __construct(
         private RequestFactoryInterface $requestFactory,

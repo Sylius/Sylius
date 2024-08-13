@@ -27,7 +27,7 @@ final readonly class VisitorBasedExtension implements QueryCollectionExtensionIn
 {
     public function __construct(
         private SectionProviderInterface $sectionProvider,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
     ) {
     }
 

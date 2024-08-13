@@ -16,24 +16,16 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Order;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\Metadata\Put;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
-use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class StateBasedExtensionSpec extends ObjectBehavior
 {

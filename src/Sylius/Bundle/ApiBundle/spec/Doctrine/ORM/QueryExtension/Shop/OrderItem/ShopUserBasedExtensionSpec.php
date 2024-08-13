@@ -18,7 +18,6 @@ use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;

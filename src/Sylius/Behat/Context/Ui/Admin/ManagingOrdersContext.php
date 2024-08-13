@@ -201,11 +201,11 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I filter by customer :customerName
+     * @When I filter by customer :customer
      */
-    public function iFilterByCustomer(string $customerName): void
+    public function iFilterByCustomer(CustomerInterface $customer): void
     {
-        $this->indexPage->specifyFilterCustomer($customerName);
+        $this->indexPage->specifyFilterCustomer($customer->getFullName());
         $this->iFilter();
     }
 
