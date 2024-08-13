@@ -1,13 +1,8 @@
-{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
-
-{% set variant = hookable_metadata.context.product|sylius_resolve_variant %}
-{% set has_discount = hookable_metadata.context.has_discount %}
-
 <div class="mb-2">
     <div class="d-flex gap-3 align-items-center">
-        <div class="fs-2" {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>{{ money.calculatePrice(variant) }}</div>
-        <div{% if not has_discount %} class="d-none" data-test-product-original-price-hidden{% endif %} {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
-            {% if has_discount %}<del>{{ component('sylius_shop:common:product_original_price', { productVariant: variant }) }}</del>{% endif %}
+        <div class="fs-2" {{ sylius_test_html_attribute('product-price', price) }}>{{ price }}</div>
+        <div{% if not has_discount %} class="d-none" data-test-product-original-price-hidden{% endif %} {{ sylius_test_html_attribute('product-original-price', original_price) }}>
+            {% if has_discount %}<del>{{ original_price }}</del>{% endif %}
         </div>
     </div>
 </div>
