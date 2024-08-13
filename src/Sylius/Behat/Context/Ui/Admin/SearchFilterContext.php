@@ -24,7 +24,7 @@ final readonly class SearchFilterContext implements Context
     }
 
     /**
-     * @When /^I search for [^"]+ with "([^"]+)"$/
+     * @When /^I search for [^"]+ with "([^"]+)"(?:| name| code)$/
      * @When /^I search for [^"]+ by "([^"]+)"$/
      * @When /^I search by "([^"]+)" [^"]+$/
      */

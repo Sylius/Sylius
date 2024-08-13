@@ -158,7 +158,7 @@ final class ManagingCountriesContext implements Context
         $provinces = $this->responseChecker->getValue($this->client->show(Resources::COUNTRIES, $country->getCode()), 'provinces');
         foreach ($provinces as $provinceIri) {
             if ($iri === $provinceIri) {
-                $this->client->removeSubResource('provinces', $provinceIri);
+                $this->client->removeSubResourceIri('provinces', $provinceIri);
             }
         }
     }
