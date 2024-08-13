@@ -64,6 +64,11 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
+        <service id="sylius_api.normalizer.product_option_value" class="Sylius\Bundle\ApiBundle\Serializer\ProductOptionValueNormalizer">
+            <argument type="service" id="Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface"/>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer">
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="request_stack" />
