@@ -22,232 +22,95 @@ use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class VisitorBasedExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
-    {
-        $this->beConstructedWith($userContext, ['shop_select_payment_method']);
+    function let(
+        SectionProviderInterface $sectionProvider,
+        UserContextInterface $userContext,
+    ): void {
+        $this->beConstructedWith($sectionProvider, $userContext);
     }
 
-    function it_filters_carts_for_visitors_to_not_authorized_for_methods_other_than_get(
+    function it_does_not_apply_conditions_to_item_for_unsupported_resource(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        Expr $expr,
     ): void {
-        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
-        $queryBuilder->getRootAliases()->willReturn(['o']);
+        $userContext->getUser()->shouldNotBeCalled();
+        $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $userContext->getUser()->willReturn(null);
-
-        $queryBuilder
-            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $queryBuilder
-            ->leftJoin('customer.user', 'user')
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $queryBuilder
-            ->expr()
-            ->shouldBeCalled()
-            ->willReturn($expr)
-        ;
-
-        $queryBuilder
-            ->setParameter('createdByGuest', true)
-            ->shouldBeCalled()
-            ->willReturn($expr)
-        ;
-
-        $expr
-            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-        ;
-
-        $expr
-            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
-        ;
-
-        $queryBuilder
-            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $queryBuilder
-            ->andWhere(sprintf('%s.state = :state', 'o'))
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $queryBuilder
-            ->setParameter('state', OrderInterface::STATE_CART)
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Delete(),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_POST],
-        );
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Delete(),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
-        );
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Delete(),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PUT],
-        );
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Delete(),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_DELETE],
-        );
+        $this->applyToItem($queryBuilder, $queryNameGenerator, ResourceInterface::class, [], new Get());
     }
 
-    function it_filters_orders_for_visitors_to_not_authorized_orders_for_get_operations_and_payment_selection(
+    function it_does_not_apply_conditions_to_item_for_admin_api_section(
+        SectionProviderInterface $sectionProvider,
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        Expr $expr,
+        AdminApiSection $section,
     ): void {
-        $queryBuilder->getRootAliases()->willReturn(['o']);
+        $sectionProvider->getSection()->willReturn($section);
+        $userContext->getUser()->shouldNotBeCalled();
+        $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $userContext->getUser()->willReturn(null);
-
-        $queryBuilder
-            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $queryBuilder
-            ->leftJoin('customer.user', 'user')
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $queryBuilder
-            ->expr()
-            ->shouldBeCalled()
-            ->willReturn($expr)
-        ;
-
-        $queryBuilder
-            ->setParameter('createdByGuest', true)
-            ->shouldBeCalled()
-            ->willReturn($expr)
-        ;
-
-        $expr
-            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-        ;
-
-        $expr
-            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
-        ;
-
-        $queryBuilder
-            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Get(),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
-        );
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Put(name: 'shop_select_payment_method'),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
-        );
+        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());
     }
 
-    function it_does_nothing_if_any_user_is_logged_in(
+    function it_does_not_apply_conditions_to_item_if_user_is_not_null(
+        SectionProviderInterface $sectionProvider,
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        UserInterface $user,
         QueryNameGeneratorInterface $queryNameGenerator,
+        ShopApiSection $section,
+        ShopUserInterface $user,
     ): void {
-        $queryBuilder->getRootAliases()->willReturn(['o']);
-
+        $sectionProvider->getSection()->willReturn($section);
         $userContext->getUser()->willReturn($user);
+        $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $queryBuilder->leftJoin(Argument::any())->shouldNotBeCalled();
-        $queryBuilder->expr()->shouldNotBeCalled();
-        $queryBuilder->setParameter(Argument::any())->shouldNotBeCalled();
-        $queryBuilder->andWhere(Argument::any())->shouldNotBeCalled();
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Put(),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PUT],
-        );
+        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());
     }
 
-    function it_does_nothing_if_object_passed_is_different_than_order(
+    function it_applies_conditions_to_item(
+        SectionProviderInterface $sectionProvider,
+        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
+        ShopApiSection $section,
+        CustomerInterface $customer,
+        Expr $expr,
+        Expr\Func $exprFunc,
     ): void {
-        $queryBuilder->leftJoin(Argument::any())->shouldNotBeCalled();
-        $queryBuilder->expr()->shouldNotBeCalled();
-        $queryBuilder->setParameter(Argument::any())->shouldNotBeCalled();
-        $queryBuilder->andWhere(Argument::any())->shouldNotBeCalled();
+        $sectionProvider->getSection()->willReturn($section);
+        $userContext->getUser()->willReturn(null);
 
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            \stdClass::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            new Put(),
-            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PUT],
-        );
+        $queryBuilder->getRootAliases()->willReturn(['o']);
+        $queryNameGenerator->generateJoinAlias('customer')->willReturn('customer');
+        $queryNameGenerator->generateJoinAlias('user')->willReturn('user');
+        $queryNameGenerator->generateParameterName('createdByGuest')->willReturn('createdByGuest');
+
+        $queryBuilder->leftJoin('o.customer', 'customer')->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->leftJoin('customer.user', 'user')->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->expr()->willReturn($expr);
+        $expr->isNull('user')->willReturn($exprFunc);
+        $expr->eq('o.createdByGuest', ':createdByGuest')->willReturn($exprFunc);
+        $expr->andX($exprFunc, $exprFunc)->willReturn($exprFunc);
+
+        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter('createdByGuest', true)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+
+        $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());
     }
 }

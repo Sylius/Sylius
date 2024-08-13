@@ -122,7 +122,11 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Adjustment" uriTemplate="/shop/orders/{tokenValue}/adjustments">
+    <resource
+        class="Sylius\Component\Core\Model\Adjustment"
+        uriTemplate="/shop/orders/{tokenValue}/adjustments"
+        security="is_granted('SYLIUS_ORDER_ADJUSTMENT', object)"
+    >
         <uriVariables>
             <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="adjustments" />
         </uriVariables>

@@ -145,6 +145,10 @@
                 uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}/configuration"
                 controller="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration"
             >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
+                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
+                </uriVariables>
             </operation>
 
             <operation

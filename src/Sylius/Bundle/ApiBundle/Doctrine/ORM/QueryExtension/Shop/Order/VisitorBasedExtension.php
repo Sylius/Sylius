@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Order;
 
-use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
@@ -56,18 +55,20 @@ final readonly class VisitorBasedExtension implements QueryItemExtensionInterfac
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
+        $customerJoinName = $queryNameGenerator->generateJoinAlias('customer');
+        $userJoinName = $queryNameGenerator->generateJoinAlias('user');
+        $createdByGuestParameterName = $queryNameGenerator->generateParameterName('createdByGuest');
 
         $queryBuilder
-            ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
-            ->leftJoin('customer.user', 'user')
-            ->andWhere($queryBuilder->expr()->orX(
-                'user IS NULL',
-                sprintf('%s.customer IS NULL', $rootAlias),
+            ->leftJoin(sprintf('%s.customer', $rootAlias), $customerJoinName)
+            ->leftJoin(sprintf('%s.user', $customerJoinName), $userJoinName)
+            ->andWhere(
                 $queryBuilder->expr()->andX(
-                    sprintf('%s.customer IS NOT NULL', $rootAlias),
-                    sprintf('%s.createdByGuest = :createdByGuest', $rootAlias),
+                    $queryBuilder->expr()->isNull($userJoinName),
+                    $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $rootAlias), sprintf(':%s', $createdByGuestParameterName)),
                 ),
-            ))->setParameter('createdByGuest', true)
+            )
+            ->setParameter($createdByGuestParameterName, true)
         ;
     }
 }

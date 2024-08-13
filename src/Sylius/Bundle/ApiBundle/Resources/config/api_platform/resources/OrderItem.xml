@@ -29,22 +29,6 @@
                     </values>
                 </normalizationContext>
             </operation>
-
-            <operation
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="/shop/order-items/{id}"
-                provider="sylius_api.state_provider.shop.order_item.item"
-            >
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:order_item:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
         </operations>
     </resource>
 
@@ -59,6 +43,26 @@
                         <value name="groups">
                             <values>
                                 <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Core\Model\OrderItem" uriTemplate="/shop/orders/{tokenValue}/items/{id}">
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="items" />
+            <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\OrderItem"/>
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order_item:show</value>
                             </values>
                         </value>
                     </values>

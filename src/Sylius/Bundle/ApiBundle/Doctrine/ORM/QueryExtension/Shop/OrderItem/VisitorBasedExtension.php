@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrderItem;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
@@ -22,7 +23,7 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 
-final readonly class VisitorBasedExtension implements QueryCollectionExtensionInterface
+final readonly class VisitorBasedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     public function __construct(
         private SectionProviderInterface $sectionProvider,
@@ -31,7 +32,7 @@ final readonly class VisitorBasedExtension implements QueryCollectionExtensionIn
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param array<array-key, mixed> $context
      */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
@@ -39,6 +40,29 @@ final readonly class VisitorBasedExtension implements QueryCollectionExtensionIn
         string $resourceClass,
         ?Operation $operation = null,
         array $context = [],
+    ): void {
+        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
+    }
+
+    /**
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
+     */
+    public function applyToItem(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        array $identifiers,
+        ?Operation $operation = null,
+        array $context = [],
+    ): void {
+        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
+    }
+
+    private function filterOutOrders(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
     ): void {
         if (!is_a($resourceClass, OrderItemInterface::class, true)) {
             return;
@@ -53,21 +77,22 @@ final readonly class VisitorBasedExtension implements QueryCollectionExtensionIn
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
-        $orderParameterName = $queryNameGenerator->generateJoinAlias('order');
-        $customerParameterName = $queryNameGenerator->generateJoinAlias('customer');
-        $userParameterName = $queryNameGenerator->generateJoinAlias('user');
+        $orderJoinName = $queryNameGenerator->generateJoinAlias('order');
+        $customerJoinName = $queryNameGenerator->generateJoinAlias('customer');
+        $userJoinName = $queryNameGenerator->generateJoinAlias('user');
+        $createdByGuestParameterName = $queryNameGenerator->generateParameterName('createdByGuest');
 
         $queryBuilder
-            ->leftJoin(sprintf('%s.order', $rootAlias), $orderParameterName)
-            ->leftJoin(sprintf('%s.customer', $orderParameterName), $customerParameterName)
-            ->leftJoin(sprintf('%s.user', $customerParameterName), $userParameterName)
+            ->leftJoin(sprintf('%s.order', $rootAlias), $orderJoinName)
+            ->leftJoin(sprintf('%s.customer', $orderJoinName), $customerJoinName)
+            ->leftJoin(sprintf('%s.user', $customerJoinName), $userJoinName)
             ->andWhere(
                 $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->isNull($userParameterName),
-                    $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $orderParameterName), ':createdByGuest'),
+                    $queryBuilder->expr()->isNull($userJoinName),
+                    $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $orderJoinName), sprintf(':%s', $createdByGuestParameterName)),
                 ),
             )
-            ->setParameter('createdByGuest', true)
+            ->setParameter($createdByGuestParameterName, true)
             ->addOrderBy(sprintf('%s.id', $rootAlias), 'ASC')
         ;
     }

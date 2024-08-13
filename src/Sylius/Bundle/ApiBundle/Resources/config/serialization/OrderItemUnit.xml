@@ -18,11 +18,9 @@
     <class name="Sylius\Component\Core\Model\OrderItemUnit">
         <attribute name="id">
             <group>sylius:admin:order_item_unit:show</group>
-            <group>sylius:shop:order_item_unit:show</group>
         </attribute>
         <attribute name="shippable">
             <group>sylius:admin:order_item_unit:show</group>
-            <group>sylius:shop:order_item_unit:show</group>
         </attribute>
     </class>
 </serializer>
