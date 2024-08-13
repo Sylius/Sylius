@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Resolver;
 
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\NotExposed;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
@@ -45,7 +46,7 @@ final readonly class PathPrefixBasedOperationResolver implements OperationResolv
                     continue;
                 }
 
-                if (!$resourceOperation instanceof Get) {
+                if ((!$resourceOperation instanceof Get) && (!$resourceOperation instanceof NotExposed)) {
                     continue;
                 }
 
