@@ -34,6 +34,10 @@
                         </value>
                     </values>
                 </normalizationContext>
+
+                <filters>
+                    <filter>sylius_api.search_filter.product_option</filter>
+                </filters>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-options">
