@@ -11,9 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PaymentBundle\Validator;
+namespace Sylius\Bundle\PaymentBundle\Validator\Constraints;
 
-use Sylius\Bundle\PaymentBundle\Validator\Constraints\GatewayFactoryExists;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;

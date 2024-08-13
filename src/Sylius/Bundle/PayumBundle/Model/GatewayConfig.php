@@ -43,7 +43,6 @@ class GatewayConfig extends BaseGatewayConfig implements GatewayConfigInterface
         $this->decryptedConfig = $config;
     }
 
-
     /** This method is based on Payum\Core\Model\GatewayConfig::decrypt */
     public function decrypt(CypherInterface $cypher): void
     {

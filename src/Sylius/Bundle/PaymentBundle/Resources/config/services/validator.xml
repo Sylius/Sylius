@@ -18,7 +18,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\PaymentBundle\Validator\GatewayFactoryExistsValidator">
+        <service id="Sylius\Bundle\PaymentBundle\Validator\Constraints\GatewayFactoryExistsValidator">
             <argument>%sylius.gateway_factories%</argument>
             <tag name="validator.constraint_validator" alias="sylius_gateway_factory_exists_validator" />
         </service>

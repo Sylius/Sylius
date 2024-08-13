@@ -46,7 +46,7 @@ class GatewayConfig implements GatewayConfigInterface
 
     public function getFactoryName(): ?string
     {
-        return $this->factoryName;
+        return $this->factoryName ?? $this->config['factory'] ?? null;
     }
 
     public function setFactoryName($factoryName): void

@@ -23,16 +23,22 @@ final class GatewayConfigSpec extends ObjectBehavior
         $this->shouldImplement(GatewayConfigInterface::class);
     }
 
-    function its_factory_name_is_mutable(): void
-    {
-        $this->setFactoryName('Offline');
-        $this->getFactoryName()->shouldReturn('Offline');
-    }
-
     function its_gateway_name_is_mutable(): void
     {
         $this->setGatewayName('Offline');
         $this->getGatewayName()->shouldReturn('Offline');
+    }
+
+    function it_gets_factory_name_from_config_if_the_variable_is_not_set(): void
+    {
+        $this->setConfig(['factory' => 'Offline']);
+        $this->getFactoryName()->shouldReturn('Offline');
+    }
+
+    function its_factory_name_is_mutable(): void
+    {
+        $this->setFactoryName('Offline');
+        $this->getFactoryName()->shouldReturn('Offline');
     }
 
     function its_config_s_mutable(): void
