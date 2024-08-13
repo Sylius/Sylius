@@ -69,7 +69,7 @@ class ProductTaxonController extends ResourceController
         $productTaxonsPositions = $request->request->all('productTaxons');
 
         if (!$this->shouldProductsPositionsBeUpdated($request, $productTaxonsPositions)) {
-            return $this->redirectHandler->redirectToIndex($configuration);
+            return $this->redirectHandler->redirectToReferer($configuration);
         }
 
         $maxPosition = $this->getMaxPosition($productTaxonsPositions);
@@ -81,10 +81,10 @@ class ProductTaxonController extends ResourceController
             $session = $request->getSession();
             $session->getFlashBag()->add('error', $exception->getMessage());
 
-            return $this->redirectHandler->redirectToIndex($configuration);
+            return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-        return $this->redirectHandler->redirectToIndex($configuration);
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 
     /** @param array<int, string> $productTaxonPositions */

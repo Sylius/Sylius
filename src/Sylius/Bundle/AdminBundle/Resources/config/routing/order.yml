@@ -132,7 +132,10 @@ sylius_admin_order_shipment_ship:
             state_machine:
                 graph: sylius_shipment
                 transition: ship
-            redirect: sylius_admin_order_show
+            redirect: 
+                route: sylius_admin_order_show
+                parameters:
+                    id: $orderId
             section: admin
             permission: true
             form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
