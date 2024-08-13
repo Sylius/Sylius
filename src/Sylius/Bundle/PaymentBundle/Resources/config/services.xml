@@ -48,5 +48,8 @@
         <service id="sylius.validator.gateway_config_groups_generator" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator">
             <argument>%sylius.gateway_config.validation_groups%</argument>
         </service>
+
+        <service id="sylius.gateway_config_name_generator" class="Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGenerator" />
+        <service id="Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGeneratorInterface" alias="sylius.gateway_config_name_generator" />
     </services>
 </container>
