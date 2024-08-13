@@ -23,7 +23,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
 {
     protected function filterProperty(
         string $property,
-               $value,
+        $value,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,

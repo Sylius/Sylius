@@ -18,10 +18,16 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
 final class TranslationOrderLocaleExtension implements QueryCollectionExtensionInterface
 {
+    public function __construct(private readonly SectionProviderInterface $sectionProvider)
+    {
+    }
+
     /** @param array<string, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
@@ -42,11 +48,24 @@ final class TranslationOrderLocaleExtension implements QueryCollectionExtensionI
         }
 
         $localeCode = $this->resolveContextLocaleCode($context);
+        $rootAlias = $queryBuilder->getRootAliases()[0];
+
         if (empty($localeCode)) {
+            if ($this->sectionProvider->getSection() instanceof ShopApiSection) {
+                return;
+            }
+
+            $queryBuilder
+                ->addSelect('translation')
+                ->leftJoin(
+                    sprintf('%s.translations', $rootAlias),
+                    'translation',
+                )
+            ;
+
             return;
         }
 
-        $rootAlias = $queryBuilder->getRootAliases()[0];
         $localeCodeParameterName = $queryNameGenerator->generateParameterName('localeCode');
 
         $queryBuilder
