@@ -426,5 +426,13 @@
             </argument>
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="sylius_api.search_filter.product_option" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="code">partial</argument>
+                <argument key="translations.name">partial</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>
