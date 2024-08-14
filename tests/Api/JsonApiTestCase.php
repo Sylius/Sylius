@@ -39,6 +39,9 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     private array $defaultPostHeaders = [];
 
     /** @var array <string, string> */
+    private array $defaultPutHeaders = [];
+
+    /** @var array <string, string> */
     private array $defaultPatchHeaders = [];
 
     /** @var array <string, string> */
@@ -71,6 +74,14 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function setUpDefaultPostHeaders(): void
     {
         $this->defaultPostHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/ld+json',
+        ];
+    }
+
+    protected function setUpDefaultPutHeaders(): void
+    {
+        $this->defaultPutHeaders = [
             'HTTP_ACCEPT' => 'application/ld+json',
             'CONTENT_TYPE' => 'application/ld+json',
         ];
@@ -141,6 +152,20 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         }
 
         return $this->request('POST', $uri, $queryParameters, $headers, $body);
+    }
+
+    /**
+     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, string> $headers
+     * @param array<string, mixed> $body
+     */
+    protected function requestPut(string $uri, ?array $body = null, array $queryParameters = [], array $headers = []): Crawler
+    {
+        if (!empty($this->defaultPutHeaders)) {
+            $headers = array_merge($this->defaultPutHeaders, $headers);
+        }
+
+        return $this->request('PUT', $uri, $queryParameters, $headers, $body);
     }
 
     /**
