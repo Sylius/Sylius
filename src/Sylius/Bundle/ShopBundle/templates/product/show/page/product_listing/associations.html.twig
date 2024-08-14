@@ -1,7 +1,7 @@
 {% set product = hookable_metadata.context.product %}
 
 {% for association in product.associations %}
-    {{ render(url('sylius_shop_partial_product_association_show', {'productId': product.id, 'id': association.id, 'template': '@SyliusShop/product/show/content/product_listing/association.html.twig'})) }}
+    {{ render(url('sylius_shop_partial_product_association_show', {'productId': product.id, 'id': association.id, 'template': '@SyliusShop/product/show/page/product_listing/association.html.twig'})) }}
 {% else %}
     <div>{{ 'sylius.ui.latest_products'|trans }}</div>
     {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/shared/product/horizontal_list.html.twig'})) }}
