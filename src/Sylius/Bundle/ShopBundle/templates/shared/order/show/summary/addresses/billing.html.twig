@@ -1,0 +1,4 @@
+<div class="col-12 col-md-6 mb-5" {{ sylius_test_html_attribute('billing-address') }}>
+    <div class="h5 pb-3 mb-3 border-bottom">{{ 'sylius.ui.billing_address'|trans }}</div>
+    {% include '@SyliusShop/shared/address.html.twig' with {'address': hookable_metadata.context.order.billingAddress} %}
+</div>
