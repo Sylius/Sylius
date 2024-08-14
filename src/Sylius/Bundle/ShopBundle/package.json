@@ -4,6 +4,9 @@
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@popperjs/core": "^2.11.8",
+    "@symfony/stimulus-bridge": "^3.2.2",
     "@symfony/webpack-encore": "^3.1.0",
     "bootstrap": "^5.3.0"
   },
