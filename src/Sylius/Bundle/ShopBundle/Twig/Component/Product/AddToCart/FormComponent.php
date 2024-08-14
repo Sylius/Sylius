@@ -6,6 +6,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCart;
 
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory;
+use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -35,11 +36,10 @@ final class FormComponent
     use ComponentToolsTrait;
 
     #[LiveProp]
-    public int $productId;
+    public Product $product;
 
-    public ?ProductInterface $product = null;
-
-    public OrderItemInterface $orderItem;
+    #[LiveProp]
+    public OrderItem $orderItem;
 
     public AddToCartCommandInterface $addToCartCommand;
 
@@ -59,15 +59,17 @@ final class FormComponent
     public function variantChanged(): void
     {
         $selectedVariantCode = array_values($this->formValues['cartItem']['variant'])[0];
-        $this->emit('variantChanged', ['productVariantCode' => $selectedVariantCode], 'sylius_shop:product:show_price');
+        $this->emit(
+            'variantChanged',
+            [
+                'productVariantCode' => $selectedVariantCode,
+                'productVariantSelectionMethod' => $this->product->getVariantSelectionMethod(),
+            ]
+        );
     }
 
     protected function instantiateForm(): FormInterface
     {
-        if ($this->product === null) {
-            $this->product = $this->productRepository->find($this->productId);
-        }
-
         $this->orderItem = $this->orderItemFactory->createNew();
         $cart = $this->cartContext->getCart();
 
