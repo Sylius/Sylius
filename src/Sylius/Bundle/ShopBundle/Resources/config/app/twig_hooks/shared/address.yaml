@@ -1,0 +1,17 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.shared.address':
+            company:
+                template: "@SyliusShop/shared/address/company.html.twig"
+            name:
+                template: "@SyliusShop/shared/address/name.html.twig"
+            phone_number:
+                template: "@SyliusShop/shared/address/phone_number.html.twig"
+            street:
+                template: "@SyliusShop/shared/address/street.html.twig"
+            city:
+                template: "@SyliusShop/shared/address/city.html.twig"
+            province:
+                template: "@SyliusShop/shared/address/province.html.twig"
+            country:
+                template: "@SyliusShop/shared/address/country.html.twig"
