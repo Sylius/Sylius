@@ -7,6 +7,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
@@ -15,6 +16,7 @@ use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
@@ -24,7 +26,8 @@ final class ProductShowPriceComponent
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    public ProductVariantInterface $productVariant;
+    #[LiveProp]
+    public ProductVariant $productVariant;
 
     public function __construct(
         private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
@@ -37,9 +40,15 @@ final class ProductShowPriceComponent
     }
 
     #[LiveListener('variantChanged')]
-    public function updateProductVariant(#[LiveArg] string $productVariantCode): void
-    {
+    public function updateProductVariant(
+        #[LiveArg] string $productVariantCode,
+        #[LiveArg] string $productVariantSelectionMethod,
+    ): void {
+
+        dd($productVariantCode, $productVariantSelectionMethod);
+
         $selectedProductVariant = $this->productVariantRepository->findOneBy(['code' => $productVariantCode]);
+
 
         if ($selectedProductVariant instanceof ProductVariantInterface) {
             $this->productVariant = $selectedProductVariant;
