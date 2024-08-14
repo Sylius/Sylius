@@ -72,7 +72,10 @@ final class CustomerShowMenuBuilder
             $menu
                 ->addChild('user_delete', [
                     'route' => 'sylius_admin_shop_user_delete',
-                    'routeParameters' => ['id' => $customer->getUser()->getId()],
+                    'routeParameters' => [
+                        'id' => $customer->getUser()->getId(),
+                        'customerId' => $customer->getId(),
+                    ],
                 ])
                 ->setAttribute('type', 'delete')
                 ->setAttribute('resource_id', $customer->getUser()->getId())

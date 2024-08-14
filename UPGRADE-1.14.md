@@ -35,3 +35,16 @@
     - The class `Sylius\Component\Core\Dashboard\Interval` has been deprecated and will be removed in Sylius 2.0.
     - The class `Sylius\Component\Core\Dashboard\SalesDataProvider` and interface `Sylius\Component\Core\Dashboard\SalesDataProviderInterface` have been deprecated and will be removed in Sylius 2.0.
     - The class `Sylius\Component\Core\Dashboard\SalesSummary` and interface `Sylius\Component\Core\Dashboard\SalesSummaryInterface` have been deprecated and will be removed in Sylius 2.0.
+
+1. The constructor signature of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` has been changed:
+    ```diff
+    use Symfony\Component\Routing\RouterInterface;
+
+        public function __construct(
+            private OrderRepositoryInterface $orderRepository,
+            private OrderEmailManagerInterface|ResendOrderConfirmationEmailDispatcherInterface $orderEmailManager,
+            private CsrfTokenManagerInterface $csrfTokenManager,
+            private RequestStack|SessionInterface $requestStackOrSession,
+    +       private ?RouterInterface $router = null,
+        )
+    ```

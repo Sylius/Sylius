@@ -6,6 +6,8 @@ sylius_shop_user_request_verification_token:
     methods: [POST]
     defaults:
         _controller: sylius.controller.shop_user::requestVerificationTokenAction
+        _sylius:
+            redirect: sylius_shop_account_dashboard
 
 sylius_shop_user_verification:
     path: /verify/{token}

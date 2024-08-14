@@ -23,5 +23,5 @@ sylius_admin_locale_delete:
         _controller: sylius.controller.locale::deleteAction
         _sylius:
             section: admin
-            redirect: referer
+            redirect: sylius_admin_locale_index
             permission: true

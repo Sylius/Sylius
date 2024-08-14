@@ -86,7 +86,9 @@ sylius_admin_promotion_coupon_bulk_delete:
         _controller: sylius.controller.promotion_coupon::bulkDeleteAction
         _sylius:
             section: admin
-            redirect: referer
+            redirect:
+                route: sylius_admin_promotion_coupon_index
+                parameters: { promotionId: $promotionId }
             permission: true
             paginate: false
             repository:
@@ -100,5 +102,7 @@ sylius_admin_promotion_coupon_delete:
         _controller: sylius.controller.promotion_coupon::deleteAction
         _sylius:
             section: admin
-            redirect: referer
+            redirect:
+                route: sylius_admin_promotion_coupon_index
+                parameters: { promotionId: $promotionId }
             permission: true

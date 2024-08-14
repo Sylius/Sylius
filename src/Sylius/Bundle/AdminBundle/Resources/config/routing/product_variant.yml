@@ -78,7 +78,9 @@ sylius_admin_product_variant_bulk_delete:
         _controller: sylius.controller.product_variant::bulkDeleteAction
         _sylius:
             section: admin
-            redirect: referer
+            redirect:
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
             permission: true
             repository:
                 method: findById
@@ -91,7 +93,9 @@ sylius_admin_product_variant_delete:
         _controller: sylius.controller.product_variant::deleteAction
         _sylius:
             section: admin
-            redirect: referer
+            redirect:
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
             permission: true
             repository:
                 method: findOneByIdAndProductId
