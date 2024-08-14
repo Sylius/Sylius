@@ -76,7 +76,7 @@ sylius_admin_order_cancel:
             state_machine:
                 graph: sylius_order
                 transition: cancel
-            redirect: referer
+            redirect: sylius_admin_order_show
 
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
@@ -94,7 +94,10 @@ sylius_admin_order_payment_complete:
             state_machine:
                 graph: sylius_payment
                 transition: complete
-            redirect: referer
+            redirect:
+                route: sylius_admin_order_show
+                parameters:
+                    id: $orderId
 
 sylius_admin_order_payment_refund:
     path: /orders/{orderId}/payments/{id}/refund
@@ -111,7 +114,10 @@ sylius_admin_order_payment_refund:
             state_machine:
                 graph: sylius_payment
                 transition: refund
-            redirect: referer
+            redirect:
+                route: sylius_admin_order_show
+                parameters:
+                    id: $orderId
             flash: sylius.payment.refunded
 
 sylius_admin_order_shipment_ship:
@@ -129,7 +135,10 @@ sylius_admin_order_shipment_ship:
             state_machine:
                 graph: sylius_shipment
                 transition: ship
-            redirect: referer
+            redirect: 
+                route: sylius_admin_order_show
+                parameters:
+                    id: $orderId
             section: admin
             permission: true
             form: Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType
@@ -144,3 +153,5 @@ sylius_admin_order_resend_confirmation_email:
     methods: [GET]
     defaults:
         _controller: Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction
+        _sylius:
+            redirect: sylius_admin_order_show
