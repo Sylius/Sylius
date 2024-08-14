@@ -14,6 +14,18 @@ twig_hooks:
             shipping:
                 template: "@SyliusShop/shared/order/show/summary/addresses/shipping.html.twig"
 
+        'sylius_shop.shared.order.show.summary.addresses.billing':
+            header:
+                template: "@SyliusShop/shared/order/show/summary/addresses/billing/header.html.twig"
+            address:
+                template: "@SyliusShop/shared/address.html.twig"
+
+        'sylius_shop.shared.order.show.summary.addresses.shipping':
+            header:
+                template: "@SyliusShop/shared/order/show/summary/addresses/shipping/header.html.twig"
+            address:
+                template: "@SyliusShop/shared/address.html.twig"
+
         'sylius_shop.shared.order.show.summary.table':
             header:
                 template: "@SyliusShop/shared/order/show/summary/table/header.html.twig"

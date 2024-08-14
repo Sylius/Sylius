@@ -1,0 +1,5 @@
+{% set address = hookable_metadata.context.address %}
+
+{% if address|sylius_province_name is not empty %}
+    {{ address|sylius_province_name }}<br/>
+{% endif %}
