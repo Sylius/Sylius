@@ -20,15 +20,12 @@ final class ProductOptionsTest extends JsonApiTestCase
     /** @test */
     public function it_returns_product_option(): void
     {
+        $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/product-options/COLOR',
-            server: self::CONTENT_TYPE_HEADER,
-        );
-        $response = $this->client->getResponse();
+        $this->requestGet('/api/v2/shop/product-options/COLOR');
 
-        $this->assertResponse($response, 'shop/product_option/get_product_option');
+        $this->assertResponseSuccessful( 'shop/product_option/get_product_option');
     }
 }
