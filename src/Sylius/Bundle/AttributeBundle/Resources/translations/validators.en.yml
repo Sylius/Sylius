@@ -13,6 +13,16 @@ sylius:
             max_length: Configuration max length must be greater or equal to the min length.
             min_entries: Configuration min entries value must be lower or equal to the number of added choices.
             multiple: Configuration multiple must be true if min or max entries values are specified.
+        date:
+            configuration:
+                format:
+                    not_blank: Please enter date format.
+                    invalid: Configuration format must be a valid date format.
+        datetime:
+            configuration:
+                format:
+                    not_blank: Please enter datetime format.
+                    invalid: Configuration format must be a valid datetime format.
         presentation:
             not_blank: Please enter attribute presentation.
             min_length: Attribute presentation must be at least 1 character long.|Attribute presentation must be at least {{ limit }} characters long.

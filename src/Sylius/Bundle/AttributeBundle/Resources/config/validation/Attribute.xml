@@ -24,6 +24,12 @@
         <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidSelectAttributeConfiguration">
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidDateAttributeConfiguration">
+            <option name="groups">sylius</option>
+        </constraint>
+        <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidDatetimeAttributeConfiguration">
+            <option name="groups">sylius</option>
+        </constraint>
         <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeType">
             <option name="groups">sylius</option>
         </constraint>
