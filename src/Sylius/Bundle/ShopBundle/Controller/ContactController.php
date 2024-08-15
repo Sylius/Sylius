@@ -101,7 +101,7 @@ final class ContactController
             return new RedirectResponse($this->router->generate($redirectRoute));
         }
 
-        $template = $this->getSyliusAttribute($request, 'template', '@SyliusShop/Contact/request.html.twig');
+        $template = $this->getSyliusAttribute($request, 'template', '@SyliusShop/contact/index.html.twig');
 
         return new Response($this->templatingEngine->render($template, ['form' => $form->createView()]));
     }
