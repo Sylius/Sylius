@@ -149,6 +149,11 @@
                     <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
                     <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
                 </uriVariables>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Retrieve payment method configuration.</value>
+                    </values>
+                </openapiContext>
             </operation>
 
             <operation

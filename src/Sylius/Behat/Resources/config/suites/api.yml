@@ -57,7 +57,7 @@ imports:
 #    - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
     - api/shipping/applying_shipping_method_rules.yml
-    - api/shipping/applying_shipping_fee.yml
+#    - api/shipping/applying_shipping_fee.yml TODO: Enable after making checkout resource available in API
     - api/shipping/viewing_shipping_methods.yml
     - api/shipping/managing_shipments.yml
     - api/shipping/managing_shipping_categories.yml
