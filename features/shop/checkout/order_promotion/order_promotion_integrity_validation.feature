@@ -47,7 +47,7 @@ Feature: Order promotions integrity
         When I confirm my order
         Then I should see the thank you page
 
-    @api
+    @api @ui
     Scenario: Receiving percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
