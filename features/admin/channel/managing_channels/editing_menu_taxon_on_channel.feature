@@ -11,7 +11,7 @@ Feature: Editing menu taxon on channel
         And channel "Web Store" has menu taxon "Clothes"
         And I am logged in as an administrator
 
-    @todo @api @ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Editing menu taxon on the channel
         When I want to modify a channel "Web Store"
         And I change its menu taxon to "Guns"

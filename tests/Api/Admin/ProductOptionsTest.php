@@ -34,7 +34,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product_option.yaml',
         ]);
 
@@ -53,7 +53,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product_option.yaml',
         ]);
 
@@ -69,7 +69,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
         ]);
 
         $this->requestPost(
@@ -105,7 +105,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
         ]);
 
         $this->requestPost(
@@ -147,7 +147,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product_option.yaml',
         ]);
 
@@ -181,7 +181,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product_option.yaml',
         ]);
 
@@ -211,7 +211,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product_option.yaml',
         ]);
 
@@ -248,7 +248,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product_option.yaml',
         ]);
 

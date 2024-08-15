@@ -21,7 +21,7 @@ final class ChannelsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_collection_with_single_default_channel(): void
     {
-        $this->loadFixturesFromFile('channel.yaml');
+        $this->loadFixturesFromFile('channel/channel.yaml');
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/channels', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
@@ -41,7 +41,7 @@ final class ChannelsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_channel_by_code(): void
     {
-        $this->loadFixturesFromFile('channel.yaml');
+        $this->loadFixturesFromFile('channel/channel.yaml');
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/channels/WEB', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();

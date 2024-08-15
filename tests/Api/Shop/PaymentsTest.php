@@ -34,7 +34,7 @@ final class PaymentsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

@@ -24,7 +24,7 @@ final class ProductAttributeValuesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_attribute_value(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_attribute.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product_attribute.yaml']);
         $attributeValue = $fixtures['product_attribute_value_checkbox'];
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 

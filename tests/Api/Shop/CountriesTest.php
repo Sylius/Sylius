@@ -21,7 +21,7 @@ final class CountriesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_countries(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'country.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'country.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/countries', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
@@ -32,7 +32,7 @@ final class CountriesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_only_countries_from_current_channel(): void
     {
-        $this->loadFixturesFromFiles(['channel_with_countries.yaml', 'country.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel_with_countries.yaml', 'country.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/countries', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();

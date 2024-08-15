@@ -31,6 +31,11 @@
         "city": "Web Channel City",
         "postcode": "Web Channel Postcode"
     },
-    "menuTaxon": null,
-    "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
+    "menuTaxon": "/api/v2/admin/taxons/CATEGORY",
+    "channelPriceHistoryConfig": {
+        "@type": "ChannelPriceHistoryConfig",
+        "lowestPriceForDiscountedProductsVisible": false,
+        "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+        "taxonsExcludedFromShowingLowestPrice": "@array@.count(2).inArray('/api/v2/admin/taxons/MUG').inArray('/api/v2/admin/taxons/HAT')"
+    }
 }

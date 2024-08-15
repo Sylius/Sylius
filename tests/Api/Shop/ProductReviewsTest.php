@@ -58,7 +58,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_creates_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -90,7 +90,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_prevents_from_creating_a_product_review_with_non_existing_product(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
         ]);
 
         $this->client->request(
@@ -113,7 +113,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_prevents_from_creating_a_product_review_without_email(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -148,7 +148,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_prevents_from_creating_a_product_review_if_required_fields_are_missing(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',

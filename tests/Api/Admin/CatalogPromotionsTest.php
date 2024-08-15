@@ -30,7 +30,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_catalog_promotions(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -70,7 +70,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -147,7 +147,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_catalog_promotion_with_taken_code(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -170,7 +170,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_catalog_promotion_with_end_date_earlier_than_start_date(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -197,7 +197,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -385,7 +385,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -641,7 +641,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',

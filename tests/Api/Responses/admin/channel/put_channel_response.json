@@ -30,9 +30,14 @@
         "city": "Web Channel City: Updated",
         "postcode": "Web Channel Postcode: Updated"
     },
-    "menuTaxon": null,
+    "menuTaxon": "\/api\/v2\/admin\/taxons\/CATEGORY",
     "description": "different description",
     "hostname": "updated-hostname.com",
     "color": "blue",
-    "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
+    "channelPriceHistoryConfig": {
+        "@type": "ChannelPriceHistoryConfig",
+        "lowestPriceForDiscountedProductsVisible": true,
+        "lowestPriceForDiscountedProductsCheckingPeriod": 60,
+        "taxonsExcludedFromShowingLowestPrice": "@array@.count(1).inArray('/api/v2/admin/taxons/MUG')"
+    }
 }

@@ -35,8 +35,13 @@
                 "city": "Web Channel City",
                 "postcode": "Web Channel Postcode"
             },
-            "menuTaxon": null,
-            "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
+            "menuTaxon": "\/api\/v2\/admin\/taxons\/MENU",
+            "channelPriceHistoryConfig": {
+                "@type": "ChannelPriceHistoryConfig",
+                "lowestPriceForDiscountedProductsVisible": false,
+                "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+                "taxonsExcludedFromShowingLowestPrice": []
+            }
         },
         {
             "@id": "\/api\/v2\/admin\/channels\/MOBILE",
@@ -71,7 +76,12 @@
                 "postcode": "Mobile Channel Postcode"
             },
             "menuTaxon": null,
-            "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
+            "channelPriceHistoryConfig": {
+                "@type": "ChannelPriceHistoryConfig",
+                "lowestPriceForDiscountedProductsVisible": true,
+                "lowestPriceForDiscountedProductsCheckingPeriod": 25,
+                "taxonsExcludedFromShowingLowestPrice": "@array@.count(1).inArray('/api/v2/admin/taxons/MENU')"
+            }
 
         }
     ],

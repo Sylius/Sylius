@@ -32,7 +32,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -47,7 +47,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -65,7 +65,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'zones.yaml',
         ]);
@@ -147,7 +147,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'zones.yaml',
         ]);
@@ -201,7 +201,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'zones.yaml',
         ]);
@@ -307,7 +307,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -370,7 +370,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -406,7 +406,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -459,7 +459,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -496,7 +496,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -584,7 +584,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -626,7 +626,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -646,7 +646,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);
@@ -665,7 +665,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);

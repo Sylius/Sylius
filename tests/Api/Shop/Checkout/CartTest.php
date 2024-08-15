@@ -31,7 +31,7 @@ final class CartTest extends JsonApiTestCase
     /** @test */
     public function it_creates_empty_cart(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
         $this->client->request(
             method: 'POST',
@@ -50,7 +50,7 @@ final class CartTest extends JsonApiTestCase
     /** @test */
     public function it_creates_empty_cart_with_provided_locale(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
         $this->client->request(
             method: 'POST',
@@ -71,7 +71,7 @@ final class CartTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'cart/existing_cart.yaml',
         ]);
@@ -94,7 +94,7 @@ final class CartTest extends JsonApiTestCase
     public function it_gets_empty_cart(): void
     {
         $this->setUpDefaultGetHeaders();
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
         $tokenValue = $this->pickUpCart();
 
@@ -108,7 +108,7 @@ final class CartTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -127,7 +127,7 @@ final class CartTest extends JsonApiTestCase
     public function it_adds_item_to_order(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -157,7 +157,7 @@ final class CartTest extends JsonApiTestCase
     public function it_does_not_allow_to_add_item_to_order_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -185,7 +185,7 @@ final class CartTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -208,7 +208,7 @@ final class CartTest extends JsonApiTestCase
     {
         $this->setUpDefaultDeleteHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -228,7 +228,7 @@ final class CartTest extends JsonApiTestCase
     {
         $this->setUpDefaultDeleteHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -247,7 +247,7 @@ final class CartTest extends JsonApiTestCase
     public function it_updates_item_quantity_in_cart(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -279,7 +279,7 @@ final class CartTest extends JsonApiTestCase
     public function it_does_not_allow_to_update_item_quantity_in_cart_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -310,7 +310,7 @@ final class CartTest extends JsonApiTestCase
     public function it_does_not_allow_to_update_item_quantity_if_invalid_id_item(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -333,7 +333,7 @@ final class CartTest extends JsonApiTestCase
     public function it_updates_cart(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -381,7 +381,7 @@ final class CartTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_allow_update_without_items(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
         $tokenValue = $this->pickUpCart();
 
@@ -406,7 +406,7 @@ final class CartTest extends JsonApiTestCase
     public function it_does_not_allow_update_without_required_billing_address(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
         ]);
@@ -445,7 +445,7 @@ final class CartTest extends JsonApiTestCase
     public function it_does_not_allow_update_without_required_shipping_address(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
         ]);
@@ -484,7 +484,7 @@ final class CartTest extends JsonApiTestCase
     public function it_does_not_allow_update_with_invalid_data(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
         ]);
@@ -532,7 +532,7 @@ final class CartTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

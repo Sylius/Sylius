@@ -122,7 +122,7 @@ final class ProductsTest extends JsonApiTestCase
     /** @test */
     public function it_returns_products_with_reviews(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -163,7 +163,7 @@ final class ProductsTest extends JsonApiTestCase
     public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(
         string $polishLocale,
     ): void {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -180,7 +180,7 @@ final class ProductsTest extends JsonApiTestCase
     /** @test */
     public function it_returns_paginated_attributes_collection(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
             method: 'GET',

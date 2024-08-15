@@ -32,7 +32,7 @@ final class AdjustmentsTest extends JsonApiTestCase
     public function it_returns_not_found_on_get_adjustment(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

@@ -34,7 +34,7 @@ final class ShipmentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_shipment(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
         $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);

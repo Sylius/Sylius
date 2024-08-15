@@ -66,7 +66,7 @@ final class CustomersTest extends JsonApiTestCase
     /** @test */
     public function it_registers_a_new_customer(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml']);
 
         $this->client->request(
             method: 'POST',
@@ -118,7 +118,7 @@ final class CustomersTest extends JsonApiTestCase
     /** @test */
     public function it_sends_reset_password_email(): void
     {
-        $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel.yaml']);
+        $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $loadedData['customer_oliver'];
 
@@ -141,7 +141,7 @@ final class CustomersTest extends JsonApiTestCase
     /** @test */
     public function it_validates_wrong_reset_password_request(): void
     {
-        $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
 
         $this->client->request(
             method: 'POST',
@@ -161,7 +161,7 @@ final class CustomersTest extends JsonApiTestCase
     /** @test */
     public function it_resets_account_password(): void
     {
-        $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel.yaml']);
+        $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
 
         /** @var ShopUserInterface $shopUser */
         $shopUser = $loadedData['shop_user_oliver'];
