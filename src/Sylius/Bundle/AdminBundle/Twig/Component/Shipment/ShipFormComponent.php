@@ -21,6 +21,7 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
 class ShipFormComponent
@@ -31,6 +32,9 @@ class ShipFormComponent
 
     #[LiveProp]
     public ?Shipment $shipment = null;
+
+    #[ExposeInTemplate('path_parameters')]
+    public array $pathParameters = [];
 
     /** @param class-string $formClass */
     public function __construct(
