@@ -1,5 +1,5 @@
 @checkout
-Feature: Preventing adding to cart inexistent product variant
+Feature: Preventing adding to cart nonexistent product variant
     In order to have correct products in cart when adding them
     As a Customer
     I want to have the added product variants validated
@@ -10,8 +10,8 @@ Feature: Preventing adding to cart inexistent product variant
         And this product has "Small", "Medium" and "Large" variants
         And I am a logged in customer
 
-    @api
-    Scenario: Preventing customer from adding inexistent variant
+    @api @no-ui
+    Scenario: Preventing customer from adding nonexistent variant
         Given the "Large" product variant is disabled
         When I pick up my cart
         And I try to add product "Super Cool T-Shirt" with variant code "Magic"

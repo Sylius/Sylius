@@ -13,7 +13,7 @@ Feature: Sorting payment method selection
         And the store allows paying with "Offline" at position 1
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Seeing payment methods sorted
         Given I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step

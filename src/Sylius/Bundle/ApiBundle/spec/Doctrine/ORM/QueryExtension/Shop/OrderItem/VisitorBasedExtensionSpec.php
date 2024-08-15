@@ -22,7 +22,6 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -83,7 +82,6 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
-        CustomerInterface $customer,
         Expr $expr,
         Expr\Func $exprFunc,
     ): void {
@@ -101,8 +99,11 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         $queryBuilder->leftJoin('customer.user', 'user')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->expr()->willReturn($expr);
         $expr->isNull('user')->willReturn($exprFunc);
+        $expr->isNull('order.customer')->willReturn($exprFunc);
+        $expr->isNotNull('user')->willReturn($exprFunc);
         $expr->eq('order.createdByGuest', ':createdByGuest')->willReturn($exprFunc);
         $expr->andX($exprFunc, $exprFunc)->willReturn($exprFunc);
+        $expr->orX($exprFunc, $exprFunc, $exprFunc)->willReturn($exprFunc);
 
         $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('createdByGuest', true)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
@@ -157,7 +158,6 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
-        CustomerInterface $customer,
         Expr $expr,
         Expr\Func $exprFunc,
     ): void {
@@ -175,8 +175,11 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         $queryBuilder->leftJoin('customer.user', 'user')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->expr()->willReturn($expr);
         $expr->isNull('user')->willReturn($exprFunc);
+        $expr->isNull('order.customer')->willReturn($exprFunc);
+        $expr->isNotNull('user')->willReturn($exprFunc);
         $expr->eq('order.createdByGuest', ':createdByGuest')->willReturn($exprFunc);
         $expr->andX($exprFunc, $exprFunc)->willReturn($exprFunc);
+        $expr->orX($exprFunc, $exprFunc, $exprFunc)->willReturn($exprFunc);
 
         $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('createdByGuest', true)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());

@@ -17,7 +17,7 @@ Feature: Seeing default shipping method selected based on shipping address
         And the store has "FedEx" shipping method with "$20.00" fee within the "UK" zone
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Seeing default shipping method selected based on country from billing address
         Given I have product "Star Trek Ship" in the cart
         And I am at the checkout addressing step
@@ -27,7 +27,7 @@ Feature: Seeing default shipping method selected based on shipping address
         And I should see selected "DHL" shipping method
         And I should not see "FedEx" shipping method
 
-    @ui @api
+    @api @ui
     Scenario: Seeing default shipping method selected based on country from billing address after readdressing
         Given I have product "Star Trek Ship" in the cart
         And I am at the checkout addressing step

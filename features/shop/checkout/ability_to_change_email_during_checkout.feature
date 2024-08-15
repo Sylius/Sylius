@@ -11,7 +11,7 @@ Feature: Changing email during checkout with registered email
         And the store allows paying Offline
         And there is a customer "John Doe" identified by an email "john@example.com" and a password "secret"
 
-    @ui
+    @api-todo @ui #TODO: Checkout
     Scenario: Being able to change the email when checking out as a guest
         Given I have product "Mantis blade" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
@@ -19,7 +19,7 @@ Feature: Changing email during checkout with registered email
         And I complete addressing step with email "new-email@example.com" and "United States" based billing address
         Then I should be checking out as "new-email@example.com"
 
-    @ui
+    @api-todo @ui
     Scenario: Being unable to change the email when checking out as a logged in user
         Given I am logged in as "john@example.com"
         And I have product "Mantis blade" in the cart

@@ -143,5 +143,16 @@
             <argument>Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface</argument>
             <argument>Sylius\Component\Core\Model\OrderItemInterface</argument>
         </service>
+
+        <service
+            id="sylius_api.context_builder.shop_guest_groups"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\ShopGuestGroupsContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+        </service>
     </services>
 </container>

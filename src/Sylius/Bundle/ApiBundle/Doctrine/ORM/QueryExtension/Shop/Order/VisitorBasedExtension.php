@@ -63,9 +63,13 @@ final readonly class VisitorBasedExtension implements QueryItemExtensionInterfac
             ->leftJoin(sprintf('%s.customer', $rootAlias), $customerJoinName)
             ->leftJoin(sprintf('%s.user', $customerJoinName), $userJoinName)
             ->andWhere(
-                $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->isNull($userJoinName),
-                    $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $rootAlias), sprintf(':%s', $createdByGuestParameterName)),
+                    $queryBuilder->expr()->isNull(sprintf('%s.customer', $rootAlias)),
+                    $queryBuilder->expr()->andX(
+                        $queryBuilder->expr()->isNotNull($userJoinName),
+                        $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $rootAlias), sprintf(':%s', $createdByGuestParameterName)),
+                    ),
                 ),
             )
             ->setParameter($createdByGuestParameterName, true)

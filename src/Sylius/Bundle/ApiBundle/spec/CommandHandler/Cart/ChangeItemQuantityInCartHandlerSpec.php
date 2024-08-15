@@ -45,7 +45,7 @@ final class ChangeItemQuantityInCartHandlerSpec extends ObjectBehavior
         OrderItemInterface $cartItem,
     ): void {
         $orderItemRepository->findOneByIdAndCartTokenValue(
-            'ORDER_ITEM_ID',
+            123,
             'TOKEN_VALUE',
         )->willReturn($cartItem);
 
@@ -56,6 +56,6 @@ final class ChangeItemQuantityInCartHandlerSpec extends ObjectBehavior
         $orderItemQuantityModifier->modify($cartItem, 5)->shouldBeCalled();
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this(ChangeItemQuantityInCart::createFromData('TOKEN_VALUE', 'ORDER_ITEM_ID', 5));
+        $this(new ChangeItemQuantityInCart(5, 123, 'TOKEN_VALUE'));
     }
 }

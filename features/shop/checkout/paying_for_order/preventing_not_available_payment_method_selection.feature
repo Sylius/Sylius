@@ -12,7 +12,7 @@ Feature: Preventing not available payment method selection
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Not being able to select disabled payment method
         Given the payment method "Paypal Express Checkout" is disabled
         And I have product "PHP T-Shirt" in the cart
@@ -23,7 +23,7 @@ Feature: Preventing not available payment method selection
         And I complete the shipping step
         Then I should not be able to select "Paypal Express Checkout" payment method
 
-    @ui @api
+    @api @ui
     Scenario: Not being able to select payment method not available for order channel
         Given the store has "Cash on delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
@@ -35,7 +35,7 @@ Feature: Preventing not available payment method selection
         Then I should not be able to select "Cash on delivery" payment method
         And I should be able to select "Paypal Express Checkout" payment method
 
-    @api
+    @api @no-ui
     Scenario: Preventing customer from selecting nonexistent payment method
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

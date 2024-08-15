@@ -12,7 +12,7 @@ Feature: Not seeing payment method instructions on thank you page if order total
         And the promotion gives "$10.00" discount to every order with quantity at least 1
         And I am a logged in customer
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Not being informed about payment instructions on thank you page
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "Free" shipping method
