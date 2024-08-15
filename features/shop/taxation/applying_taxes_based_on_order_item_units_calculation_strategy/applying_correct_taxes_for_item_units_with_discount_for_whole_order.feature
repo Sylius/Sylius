@@ -21,19 +21,19 @@ Feature: Applying correct taxes for item units with a discount applied for all i
         And there is a promotion "PHP promotion"
         And the promotion gives "$10.10" off if order contains a "PHP Mug" product
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for a single item unit with order discount
         When I add product "Symfony Mug" to the cart
         Then my cart total should be "$50.55"
         And my cart taxes should be "$4.60"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for a single item unit with order discount
         When I add product "PHP Mug" to the cart
         Then my cart total should be "$50.53"
         And my cart taxes should be "$4.59"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for multiple units of different products with order discount
         When I add 2 products "Symfony Mug" to the cart
         And I add product "PHP Mug" to the cart

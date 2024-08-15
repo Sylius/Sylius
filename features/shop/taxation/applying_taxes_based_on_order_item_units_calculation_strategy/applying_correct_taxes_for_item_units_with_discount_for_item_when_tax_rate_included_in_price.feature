@@ -21,26 +21,26 @@ Feature: Applying correct taxes for item units with a discount when tax rates ar
         And there is a promotion "PHP promotion"
         And the promotion gives "$10.00" off on a "PHP Mug" product
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for a single item unit with discount
         When I add product "Symfony Mug" to the cart
         Then my cart total should be "$46.95"
         And my included in price taxes should be "$4.27"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for a single item unit with discount
         When I add product "PHP Mug" to the cart
         Then my cart total should be "$46.90"
         And my included in price taxes should be "$4.26"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for multiple units of different products with discount and default calculator
         When I add 2 products "PHP T-Shirt" to the cart
         And I add 2 products "PHP Mug" to the cart
         Then my cart total should be "$113.80"
         And my included in price taxes should be "$12.26"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for multiple units of different products with discount and decimal calculator
         Given the "US VAT" tax rate has decimal calculator configured
         And the "Low VAT" tax rate has decimal calculator configured
