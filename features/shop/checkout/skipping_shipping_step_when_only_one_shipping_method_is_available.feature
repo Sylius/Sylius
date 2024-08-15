@@ -11,7 +11,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And the store allows paying with "Paypal Express Checkout"
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Seeing checkout payment page after addressing if only one shipping method is available
         Given the store has "DHL" shipping method with "$5.00" fee
         And I have product "Guards! Guards!" in the cart
@@ -23,7 +23,7 @@ Feature: Skipping shipping step when only one shipping method is available
         Then I should be on the checkout complete step
         And my order's shipping method should be "DHL"
 
-    @ui @api
+    @api @ui
     Scenario: Seeing checkout payment page after addressing if only one shipping method is available for current channel
         Given the store has "DHL" shipping method with "$5.00" fee
         And the store has "FedEx" shipping method with "$15.00" fee not assigned to any channel
@@ -36,7 +36,7 @@ Feature: Skipping shipping step when only one shipping method is available
         Then I should be on the checkout complete step
         And my order's shipping method should be "DHL"
 
-    @ui @api
+    @api @ui
     Scenario: Seeing checkout payment page after addressing if only one shipping method is enabled for current channel
         Given the store has "DHL" shipping method with "$5.00" fee
         And the store has disabled "FedEx" shipping method with "$15.00" fee

@@ -30,7 +30,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
-final class CheckoutContext implements Context
+final readonly class CheckoutContext implements Context
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
@@ -45,7 +45,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I have proceeded through checkout process in the :localeCode locale with email :email
      */
-    public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email)
+    public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
@@ -55,8 +55,7 @@ final class CheckoutContext implements Context
 
         $cart->setLocaleCode($localeCode);
 
-        $command = new UpdateCart($email, $this->getDefaultAddress());
-        $command->setOrderTokenValue($cartToken);
+        $command = new UpdateCart($email, $this->getDefaultAddress(), orderTokenValue: $cartToken);
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
@@ -73,8 +72,7 @@ final class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
-        $command = new UpdateCart(null, $this->getDefaultAddress());
-        $command->setOrderTokenValue($cartToken);
+        $command = new UpdateCart(null, $this->getDefaultAddress(), orderTokenValue: $cartToken);
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
@@ -87,8 +85,7 @@ final class CheckoutContext implements Context
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
-        $command = new UpdateCart(null, $this->getDefaultAddress());
-        $command->setOrderTokenValue($cartToken);
+        $command = new UpdateCart(null, $this->getDefaultAddress(), orderTokenValue: $cartToken);
         $this->commandBus->dispatch($command);
     }
 
@@ -130,23 +127,25 @@ final class CheckoutContext implements Context
     ): void {
         $shippingMethod = $shippingMethod ?: $this->shippingMethodRepository->findOneBy([]);
 
-        $command = new ChooseShippingMethod($shippingMethod->getCode());
-        $command->setOrderTokenValue($order->getTokenValue());
-
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
+        $command = new ChooseShippingMethod(
+            $shippingMethod->getCode(),
+            $shipment->getId(),
+            $order->getTokenValue(),
+        );
 
-        $command->setSubresourceId((string) $shipment->getId());
         $this->commandBus->dispatch($command);
 
         $paymentMethod = $paymentMethod ?: $this->paymentMethodRepository->findOneBy([]);
 
-        $command = new ChoosePaymentMethod($paymentMethod->getCode());
-        $command->setOrderTokenValue($order->getTokenValue());
-
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
-        $command->setSubresourceId((string) $payment->getId());
+        $command = new ChoosePaymentMethod(
+            $paymentMethod->getCode(),
+            $payment->getId(),
+            $order->getTokenValue(),
+        );
 
         $this->commandBus->dispatch($command);
     }

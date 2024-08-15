@@ -11,7 +11,7 @@ Feature: Returning from payment step to one of previous steps
         And the store allows paying with "Paypal Express Checkout"
         And I am a logged in customer
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Going back to shipping step with button
         Given I have product "Hulk Mug" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -20,7 +20,7 @@ Feature: Returning from payment step to one of previous steps
         Then I should be redirected to the shipping step
         And I should be able to go to the payment step again
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Going back to shipping step with steps panel
         Given I have product "Hulk Mug" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -29,7 +29,7 @@ Feature: Returning from payment step to one of previous steps
         Then I should be redirected to the shipping step
         And I should be able to go to the payment step again
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Going back to addressing step with steps panel
         Given I have product "Hulk Mug" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

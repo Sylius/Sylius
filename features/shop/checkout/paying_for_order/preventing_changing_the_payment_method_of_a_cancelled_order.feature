@@ -18,7 +18,7 @@ Feature: Preventing changing the payment method of a cancelled order
         And I am changing this order's payment method
         And this order was cancelled
 
-    @ui @api
+    @api @ui
     Scenario: Being prevented from changing the payment method of a cancelled order
         When I try to change my payment method to "Bank Transfer"
         Then I should be notified that I can no longer change payment method of this order

@@ -81,8 +81,6 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.request_factory" />
-            <argument>%sylius.model.payment_method.class%</argument>
-            <argument>%sylius.model.shipping_method.class%</argument>
         </service>
 
         <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">

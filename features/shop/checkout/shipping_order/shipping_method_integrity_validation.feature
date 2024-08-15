@@ -18,7 +18,7 @@ Feature: Order shipping method integrity
         And the store has a product "T-Shirt Breaking Bad" priced at "$12.54"
         And this product belongs to "Small stuff" shipping category
 
-    @ui @api
+    @api @ui
     Scenario: Validate shipping method after administrator changes shipping method requirements
         Given I added product "Westworld host" to the cart
         And I have completed addressing step with email "guest@example.com" and "United States" based billing address

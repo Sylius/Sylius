@@ -84,7 +84,7 @@ trait OrderPlacerTrait
     ): OrderInterface {
         $this->checkSetUpOrderPlacerCalled();
 
-        $this->pickUpCart($tokenValue);
+        $this->pickUpCart(tokenValue: $tokenValue, email: $email);
         $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
         $cart = $this->updateCartWithAddressAndCouponCode($tokenValue, $email, $couponCode);
         $this->dispatchShippingMethodChooseCommand(

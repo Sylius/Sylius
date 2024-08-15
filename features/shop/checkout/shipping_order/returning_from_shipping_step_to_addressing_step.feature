@@ -10,7 +10,7 @@ Feature: Returning from shipping step to addressing step
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Going back to addressing step with button
         Given I have product "Apollo 11 T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -18,7 +18,7 @@ Feature: Returning from shipping step to addressing step
         Then I should be redirected to the addressing step
         And I should be able to go to the shipping step again
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Going back to the addressing step with steps panel
         Given I have product "Apollo 11 T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
