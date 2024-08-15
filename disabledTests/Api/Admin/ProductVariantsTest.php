@@ -27,7 +27,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     public function it_denies_access_to_a_product_variants_list_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -44,7 +44,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -66,7 +66,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -91,7 +91,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -145,7 +145,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -179,7 +179,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -217,7 +217,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -255,7 +255,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -290,7 +290,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -327,7 +327,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -376,7 +376,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -443,7 +443,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -486,7 +486,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -521,7 +521,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -560,7 +560,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -601,7 +601,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -625,7 +625,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',

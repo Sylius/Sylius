@@ -348,28 +348,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When /^I (enable|disable) showing the lowest price of discounted products$/
-     */
-    public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
-    {
-        $this->client->addRequestData(
-            'channelPriceHistoryConfig',
-            ['lowestPriceForDiscountedProductsVisible' => $visible === 'enable'],
-        );
-    }
-
-    /**
-     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
-     */
-    public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
-    {
-        $this->client->addRequestData(
-            'channelPriceHistoryConfig',
-            ['lowestPriceForDiscountedProductsCheckingPeriod' => $days],
-        );
-    }
-
-    /**
      * @When /^I specify its ([^"]+) as a too long string$/
      */
     public function iSpecifyItsFieldAsATooLongString(string $field): void

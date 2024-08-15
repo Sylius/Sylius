@@ -86,7 +86,7 @@ final class LocalesTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_allow_creating_a_locale_with_invalid_code(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/api_administrator.yaml']);
         $header = $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withAdminUserAuthorization('api@example.com')->build();
 
         $this->client->request(

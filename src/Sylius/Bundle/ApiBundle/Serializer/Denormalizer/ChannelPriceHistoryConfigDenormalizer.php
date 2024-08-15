@@ -11,29 +11,26 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use ApiPlatform\Api\IriConverterInterface;
-use Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ChannelPriceHistoryConfigDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
     private const ALREADY_CALLED = 'sylius_channel_price_history_config_denormalizer_already_called';
 
     public function __construct(
-        private IriConverterInterface $iriConverter,
-        private FactoryInterface $channelPriceHistoryConfigFactory,
-        private ResourceInputDataPropertiesValidatorInterface $validator,
-        private array $validationGroups = [],
+        private readonly IriConverterInterface $iriConverter,
+        private readonly FactoryInterface $channelPriceHistoryConfigFactory,
     ) {
     }
 
@@ -51,8 +48,6 @@ final class ChannelPriceHistoryConfigDenormalizer implements ContextAwareDenorma
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
 
-        $this->validateData($data);
-
         $channelPriceHistoryConfig = $this->denormalizer->denormalize($data, $type, $format, $context);
         Assert::isInstanceOf($channelPriceHistoryConfig, ChannelPriceHistoryConfigInterface::class);
         $channelPriceHistoryConfig->clearTaxonsExcludedFromShowingLowestPrice();
@@ -65,16 +60,5 @@ final class ChannelPriceHistoryConfigDenormalizer implements ContextAwareDenorma
         }
 
         return $channelPriceHistoryConfig;
-    }
-
-    private function validateData(array $data): void
-    {
-        /** @var ChannelPriceHistoryConfigInterface $dummyConfig */
-        $dummyConfig = $this->channelPriceHistoryConfigFactory->createNew();
-        $this->validator->validate(
-            $dummyConfig,
-            $data,
-            $this->validationGroups,
-        );
     }
 }

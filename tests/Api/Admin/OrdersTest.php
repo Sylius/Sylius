@@ -40,7 +40,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/customer.yaml',
             'order/new.yaml',
         ]);
@@ -55,7 +55,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/customer.yaml',
             'order/new.yaml',
         ]);
@@ -76,7 +76,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/customer.yaml',
             'order/new.yaml',
             'order/new_in_different_currencies.yaml',
@@ -106,7 +106,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/customer.yaml',
             'order/fulfilled.yaml',
         ]);
@@ -136,7 +136,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'cart.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/customer.yaml',
             'payment_method.yaml',
             'shipping_method.yaml',
@@ -191,7 +191,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -212,7 +212,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -239,7 +239,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -267,7 +267,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -288,7 +288,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -309,7 +309,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -329,7 +329,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

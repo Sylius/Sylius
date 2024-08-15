@@ -33,6 +33,11 @@
         "city": "City: Created",
         "postcode": "Postcode: Created"
     },
-    "menuTaxon": null,
-    "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
+    "menuTaxon": "\/api\/v2\/admin\/taxons\/CATEGORY",
+    "channelPriceHistoryConfig": {
+        "@type": "ChannelPriceHistoryConfig",
+        "lowestPriceForDiscountedProductsVisible": true,
+        "lowestPriceForDiscountedProductsCheckingPeriod": 60,
+        "taxonsExcludedFromShowingLowestPrice": "@array@.count(2).inArray('/api/v2/admin/taxons/BRAND').inArray('/api/v2/admin/taxons/HAT')"
+    }
 }

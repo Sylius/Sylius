@@ -10,6 +10,7 @@ Sylius\Component\Core\Model\Channel:
         locales: ['@locale_en', '@locale_pl']
         color: 'black'
         enabled: true
+        menu_taxon: '@menu_taxon'
         taxCalculationStrategy: 'order_items_based'
         channelPriceHistoryConfig: '@web_price_history_config'
         shopBillingData: '@channel_web_billing_data'
@@ -35,11 +36,13 @@ Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
     mobile_price_history_config:
         lowestPriceForDiscountedProductsCheckingPeriod: 25
         lowestPriceForDiscountedProductsVisible: true
+        __calls:
+            - addTaxonExcludedFromShowingLowestPrice: ["@menu_taxon"]
 
 Sylius\Component\Currency\Model\Currency:
     currency_usd:
         code: 'USD'
-        
+
 Sylius\Component\Core\Model\ShopBillingData:
     channel_web_billing_data:
         company: 'Web Channel Company'
@@ -63,3 +66,7 @@ Sylius\Component\Locale\Model\Locale:
         code: 'pl_PL'
     locale_de:
         code: 'de_DE'
+
+Sylius\Component\Core\Model\Taxon:
+    menu_taxon:
+        code: "MENU"

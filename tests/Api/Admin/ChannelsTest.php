@@ -30,7 +30,10 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_gets_a_channel(): void
     {
         $this->setUpDefaultGetHeaders();
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel_with_taxons.yaml',
+        ]);
 
         /** @var ChannelInterface $channel */
         $channel = $fixtures['channel_web'];
@@ -44,7 +47,7 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_gets_channels(): void
     {
         $this->setUpDefaultGetHeaders();
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->requestGet('/api/v2/admin/channels');
 
@@ -55,7 +58,10 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_creates_a_channel(): void
     {
         $this->setUpDefaultPostHeaders();
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml', 'locale.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'taxonomy.yaml',
+        ]);
 
         $this->requestPost('/api/v2/admin/channels', [
             'name' => 'Web Store',
@@ -84,7 +90,15 @@ final class ChannelsTest extends JsonApiTestCase
                 'city' => 'City: Created',
                 'postcode' => 'Postcode: Created',
             ],
-            'menuTaxon' => null,
+            'menuTaxon' => '/api/v2/admin/taxons/CATEGORY',
+            'channelPriceHistoryConfig' => [
+                'lowestPriceForDiscountedProductsVisible' => true,
+                'lowestPriceForDiscountedProductsCheckingPeriod' => 60,
+                'taxonsExcludedFromShowingLowestPrice' => [
+                    '/api/v2/admin/taxons/BRAND',
+                    '/api/v2/admin/taxons/HAT',
+                ],
+            ],
         ]);
 
         $this->assertResponseCreated('admin/channel/post_channel_response');
@@ -113,7 +127,11 @@ final class ChannelsTest extends JsonApiTestCase
     /** @test */
     public function it_updates_an_existing_channel(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'taxon_image.yaml',
+        ]);
 
         /** @var ChannelInterface $channel */
         $channel = $fixtures['channel_web'];
@@ -142,6 +160,14 @@ final class ChannelsTest extends JsonApiTestCase
                 'description' => 'different description',
                 'hostname' => 'updated-hostname.com',
                 'color' => 'blue',
+                'menuTaxon' => '/api/v2/admin/taxons/CATEGORY',
+                'channelPriceHistoryConfig' => [
+                    'lowestPriceForDiscountedProductsVisible' => true,
+                    'lowestPriceForDiscountedProductsCheckingPeriod' => 60,
+                    'taxonsExcludedFromShowingLowestPrice' => [
+                        '/api/v2/admin/taxons/MUG',
+                    ],
+                ],
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -156,7 +182,7 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_deletes_a_channel(): void
     {
         $this->setUpDefaultDeleteHeaders();
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->requestGet('/api/v2/admin/channels/MOBILE');
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
@@ -172,7 +198,7 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_prevents_deleting_the_only_channel(): void
     {
         $this->setUpDefaultDeleteHeaders();
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->requestDelete('/api/v2/admin/channels/MOBILE');
         $this->requestDelete('/api/v2/admin/channels/WEB');

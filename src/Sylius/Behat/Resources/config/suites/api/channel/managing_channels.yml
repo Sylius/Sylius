@@ -30,7 +30,7 @@ default:
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
                 - Sylius\Behat\Context\Api\Admin\ManagingChannelsBillingDataContext
-#                - Sylius\Behat\Context\Api\Admin\ManagingChannelPriceHistoryConfigsContext - todo: to be uncommented after ChannelPriceHistoryConfig upgrade
+                - Sylius\Behat\Context\Api\Admin\ManagingChannelPriceHistoryConfigContext
 
             filters:
                 tags: "@managing_channels&&@api"

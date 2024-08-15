@@ -24,7 +24,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payment_methods_available_for_given_payment_and_order(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -57,7 +57,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_all_enabled_payment_methods(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'payment_method.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -72,7 +72,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payment_method_by_code(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'payment_method.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -87,7 +87,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_nothing_if_desired_payment_method_is_disabled(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'payment_method.yaml']);
 
         $this->client->request(
             method: 'GET',

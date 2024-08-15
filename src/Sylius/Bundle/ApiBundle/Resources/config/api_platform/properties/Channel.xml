@@ -80,5 +80,5 @@
     <property resource="Sylius\Component\Core\Model\Channel" name="shippingAddressInCheckoutRequired" writable="true" readable="true" />
     <property resource="Sylius\Component\Core\Model\Channel" name="shopBillingData" writable="true" genId="false"/>
     <property resource="Sylius\Component\Core\Model\Channel" name="menuTaxon" writable="true" readable="true" />
-    <property resource="Sylius\Component\Core\Model\Channel" name="channelPriceHistoryConfig" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="channelPriceHistoryConfig" writable="true" genId="false"/>
 </properties>

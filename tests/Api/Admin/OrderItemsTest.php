@@ -34,7 +34,7 @@ final class OrderItemsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -52,7 +52,7 @@ final class OrderItemsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/order_with_item.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -76,7 +76,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->setUpDatabase();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/order_with_item.yaml',
             'country.yaml',
             'shipping_method.yaml',

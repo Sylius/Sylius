@@ -21,7 +21,7 @@ final class ProductAttributeValuesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_attribute_value(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
         $attributeValue = $fixtures['product_attribute_value_checkbox'];
 
         $this->client->request(

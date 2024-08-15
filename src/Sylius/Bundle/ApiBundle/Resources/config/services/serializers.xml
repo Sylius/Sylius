@@ -127,13 +127,11 @@
             <tag name="serializer.normalizer"/>
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ChannelPriceHistoryConfigDenormalizer">-->
-<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
-<!--            <argument type="service" id="sylius.factory.channel_price_history_config" />-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" />-->
-<!--            <argument>%sylius.form.type.channel_price_history_config.validation_groups%</argument>-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="sylius_api.denormalizer.channel_price_history_config" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelPriceHistoryConfigDenormalizer">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="sylius.factory.channel_price_history_config" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ChannelDenormalizer">
             <argument type="service" id="sylius.factory.channel_price_history_config" />

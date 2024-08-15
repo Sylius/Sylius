@@ -35,7 +35,7 @@ final class OrderItemsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -58,7 +58,7 @@ final class OrderItemsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -82,7 +82,7 @@ final class OrderItemsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -105,7 +105,7 @@ final class OrderItemsTest extends JsonApiTestCase
     public function it_gets_order_item_adjustments(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -124,7 +124,7 @@ final class OrderItemsTest extends JsonApiTestCase
     public function it_gets_empty_order_item_adjustments_if_order_token_is_wrong(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -143,7 +143,7 @@ final class OrderItemsTest extends JsonApiTestCase
     public function it_returns_nothing_if_a_user_tries_to_get_the_order_item_adjustments_of_another_user(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'authentication/shop_user.yaml',
@@ -166,7 +166,7 @@ final class OrderItemsTest extends JsonApiTestCase
     public function it_prevents_visitors_from_getting_the_item_adjustments_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'authentication/shop_user.yaml',

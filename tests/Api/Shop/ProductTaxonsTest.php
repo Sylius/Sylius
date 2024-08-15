@@ -22,7 +22,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_a_product_taxon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_taxon.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_taxon.yaml']);
 
         /** @var ProductTaxonInterface $productTaxon */
         $productTaxon = $fixtures['product_mug_taxon_mugs'];

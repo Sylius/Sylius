@@ -25,7 +25,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_resends_account_verification_token(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
         $header = array_merge($this->logInShopUser('oliver@doe.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -45,7 +45,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_allow_to_resend_token_for_not_logged_in_users(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
 
         $this->client->request(
             method: 'POST',
@@ -62,7 +62,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_verifies_customer_account(): void
     {
-        $data = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
+        $data = $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
 
         /** @var ShopUserInterface $shopUser */
         $shopUser = $data['shop_user_oliver'];

@@ -11,14 +11,12 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Serializer;
+namespace spec\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use ApiPlatform\Api\IriConverterInterface;
-use ApiPlatform\Symfony\Validator\Exception\ValidationException;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -31,9 +29,8 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
     function let(
         IriConverterInterface $iriConverter,
         FactoryInterface $configFactory,
-        ResourceInputDataPropertiesValidatorInterface $validator,
     ): void {
-        $this->beConstructedWith($iriConverter, $configFactory, $validator, []);
+        $this->beConstructedWith($iriConverter, $configFactory);
     }
 
     function it_does_not_support_denormalization_when_the_denormalizer_has_already_been_called(): void
@@ -54,40 +51,21 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
     function it_throws_an_exception_when_denormalizing_an_object_that_is_not_a_channel_price_history_config(
         DenormalizerInterface $denormalizer,
         FactoryInterface $configFactory,
-        ResourceInputDataPropertiesValidatorInterface $validator,
         ChannelPriceHistoryConfigInterface $dummyConfig,
     ): void {
         $this->setDenormalizer($denormalizer);
 
         $configFactory->createNew()->willReturn($dummyConfig);
-        $validator->validate($dummyConfig, [], [])->shouldBeCalled();
 
         $denormalizer->denormalize([], 'string', null, [self::ALREADY_CALLED => true])->willReturn(new \stdClass());
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('denormalize', [[], 'string']);
     }
 
-    function it_validates_input_data_before(
-        DenormalizerInterface $denormalizer,
-        FactoryInterface $configFactory,
-        ResourceInputDataPropertiesValidatorInterface $validator,
-        ChannelPriceHistoryConfigInterface $dummyConfig,
-    ): void {
-        $this->setDenormalizer($denormalizer);
-
-        $configFactory->createNew()->willReturn($dummyConfig);
-        $validator->validate($dummyConfig, [], [])->willThrow(ValidationException::class);
-
-        $denormalizer->denormalize(Argument::cetera())->shouldNotBeCalled();
-
-        $this->shouldThrow(ValidationException::class)->during('denormalize', [[], 'string']);
-    }
-
     function it_adds_excluded_taxons_from_data(
         DenormalizerInterface $denormalizer,
         IriConverterInterface $iriConverter,
         FactoryInterface $configFactory,
-        ResourceInputDataPropertiesValidatorInterface $validator,
         TaxonInterface $firstTaxon,
         TaxonInterface $secondTaxon,
         ChannelPriceHistoryConfigInterface $config,
@@ -101,7 +79,6 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
         ]];
 
         $configFactory->createNew()->willReturn($dummyConfig);
-        $validator->validate($dummyConfig, $data, [])->shouldBeCalled();
 
         $denormalizer->denormalize($data, 'string', null, [self::ALREADY_CALLED => true])->willReturn($config);
 
@@ -120,7 +97,6 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
         DenormalizerInterface $denormalizer,
         IriConverterInterface $iriConverter,
         FactoryInterface $configFactory,
-        ResourceInputDataPropertiesValidatorInterface $validator,
         TaxonInterface $firstTaxon,
         TaxonInterface $secondTaxon,
         ChannelPriceHistoryConfigInterface $config,
@@ -131,7 +107,6 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
         $data = [];
 
         $configFactory->createNew()->willReturn($dummyConfig);
-        $validator->validate($dummyConfig, $data, [])->shouldBeCalled();
 
         $denormalizer
             ->denormalize($data, 'string', null, [self::ALREADY_CALLED => true])
@@ -156,7 +131,6 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
         DenormalizerInterface $denormalizer,
         IriConverterInterface $iriConverter,
         FactoryInterface $configFactory,
-        ResourceInputDataPropertiesValidatorInterface $validator,
         TaxonInterface $firstCurrentTaxon,
         TaxonInterface $secondCurrentTaxon,
         TaxonInterface $firstNewTaxon,
@@ -172,7 +146,6 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
         ]];
 
         $configFactory->createNew()->willReturn($dummyConfig);
-        $validator->validate($dummyConfig, $data, [])->shouldBeCalled();
 
         $denormalizer
             ->denormalize($data, 'string', null, [self::ALREADY_CALLED => true])

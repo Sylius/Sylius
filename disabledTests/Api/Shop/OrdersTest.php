@@ -38,7 +38,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -60,7 +60,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'customer.yaml',
@@ -83,7 +83,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'customer.yaml',
@@ -118,7 +118,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -141,7 +141,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'authentication/customer.yaml',
@@ -162,7 +162,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'customer.yaml',
@@ -202,7 +202,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'customer.yaml',
@@ -245,7 +245,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'customer.yaml',
@@ -266,7 +266,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'customer.yaml',
@@ -289,7 +289,7 @@ final class OrdersTest extends JsonApiTestCase
     public function it_prevents_visitors_from_getting_the_adjustments_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'authentication/customer.yaml',
@@ -310,7 +310,7 @@ final class OrdersTest extends JsonApiTestCase
     public function it_prevents_visitors_from_getting_the_item_adjustments_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'authentication/customer.yaml',
@@ -331,7 +331,7 @@ final class OrdersTest extends JsonApiTestCase
     public function it_returns_nothing_if_a_user_tries_to_get_the_order_item_adjustments_of_another_user(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'authentication/customer.yaml',
@@ -357,7 +357,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_order_item_adjustments(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $tokenValue = $this->pickUpCart();
 

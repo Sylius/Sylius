@@ -37,7 +37,7 @@ final class StatisticsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'statistics.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
@@ -123,7 +123,7 @@ final class StatisticsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_get_statistics_data_for_non_admin_user(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/statistics');
 
@@ -133,7 +133,7 @@ final class StatisticsTest extends JsonApiTestCase
     /** @test */
     public function it_returns_a_not_found_status_code_if_channel_does_not_exist(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -157,7 +157,7 @@ final class StatisticsTest extends JsonApiTestCase
      */
     public function it_returns_a_validation_error_if_period_is_invalid(array $parameters): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -188,7 +188,7 @@ final class StatisticsTest extends JsonApiTestCase
         array $queryParameters,
         array $expectedViolations,
     ): void {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(
             method: 'GET',

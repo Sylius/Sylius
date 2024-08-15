@@ -34,7 +34,7 @@ final class OrdersTest extends JsonApiTestCase
     public function it_gets_order_adjustments(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -58,7 +58,7 @@ final class OrdersTest extends JsonApiTestCase
     public function it_gets_order_adjustments_with_type_filter(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

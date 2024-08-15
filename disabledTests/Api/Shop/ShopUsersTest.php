@@ -25,7 +25,7 @@ final class ShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_sends_shop_user_password_reset_email(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/shop_user.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/shop_user.yaml']);
 
         $this->client->request(
             method: Request::METHOD_POST,
@@ -43,7 +43,7 @@ final class ShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_resets_shop_user_password_with_valid_token(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/shop_user_with_reset_password_token.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/shop_user_with_reset_password_token.yaml']);
 
         $validToken = 'valid_token';
 
@@ -65,7 +65,7 @@ final class ShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_prevents_shop_user_from_resetting_password_with_invalid_token(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/shop_user_with_reset_password_token.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/shop_user_with_reset_password_token.yaml']);
 
         $validToken = 'invalid_token';
 
@@ -87,7 +87,7 @@ final class ShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_prevents_shop_user_from_resetting_password_with_expired_token(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/shop_user_with_expired_reset_password_token.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/shop_user_with_expired_reset_password_token.yaml']);
 
         $validToken = 'valid_token';
 

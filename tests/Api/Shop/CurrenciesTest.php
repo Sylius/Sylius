@@ -22,7 +22,7 @@ final class CurrenciesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_a_currency(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'currency.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'currency.yaml']);
 
         /** @var CurrencyInterface $currency */
         $currency = $fixtures['currency_usd'];
@@ -43,7 +43,7 @@ final class CurrenciesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_currencies(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'currency.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'currency.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/currencies', server: self::CONTENT_TYPE_HEADER);
 

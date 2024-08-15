@@ -30,7 +30,7 @@ final class ShippingMethodTranslationsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'shipping_method.yaml',
         ]);

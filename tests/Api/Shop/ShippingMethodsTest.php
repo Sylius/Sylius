@@ -35,7 +35,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_all_available_shipping_methods_by_default_in_given_channel(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
         $this->requestGet('/api/v2/shop/shipping-methods');
 
@@ -45,7 +45,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_a_shipping_method(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
         $this->requestGet('/api/v2/shop/shipping-methods/UPS');
 
@@ -55,7 +55,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_get_a_shipping_method_not_available_in_given_channel(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
         $this->requestGet('/api/v2/shop/shipping-methods/FEDEX');
 
@@ -65,7 +65,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_shipping_methods_available_for_given_shipment_and_order(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
         $this->getCartAndPutItemForCustomer($tokenValue, 'sylius@example.com');
@@ -87,7 +87,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -111,7 +111,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -139,7 +139,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -155,7 +155,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
