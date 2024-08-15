@@ -150,5 +150,3 @@ sylius_admin_order_resend_confirmation_email:
     methods: [GET]
     defaults:
         _controller: Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction
-        _sylius:
-            redirect: sylius_admin_order_show
