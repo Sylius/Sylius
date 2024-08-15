@@ -146,17 +146,16 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
-<!--        <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">-->
-<!--            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="api_platform.iri_converter" />-->
-<!--            <argument type="service" id="sylius.behat.section_iri_converter" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+        </service>
 
-<!--        <service id="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsPricesContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
-<!--        </service>-->
+        <service id="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsPricesContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+        </service>
 
         <service id="sylius.behat.context.api.admin.managing_tax_categories" class="Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
@@ -280,11 +279,11 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
-<!--        <service id="Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--        </service>-->
+        <service id="Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
 
         <service id="sylius.behat.context.api.admin.managing_customers" class="Sylius\Behat\Context\Api\Admin\ManagingCustomersContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />

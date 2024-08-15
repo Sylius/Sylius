@@ -42,8 +42,8 @@ imports:
 #    - api/product/managing_product_variants.yml
 #    - api/product/managing_product_variants_ajax.yml
     - api/product/managing_products.yml
-#    - api/product/viewing_price_history.yml
-#    - api/product/viewing_price_history_after_catalog_promotions.yml
+    - api/product/viewing_price_history.yml
+    - api/product/viewing_price_history_after_catalog_promotions.yml
     - api/product/viewing_product_in_admin_panel.yaml
     - api/product/viewing_product_reviews.yml
 #    - api/product/viewing_product_variants.yml
