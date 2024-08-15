@@ -33,6 +33,7 @@ class ShipFormComponent
     #[LiveProp]
     public ?Shipment $shipment = null;
 
+    /** @var array<string, mixed> $pathParameters */
     #[ExposeInTemplate('path_parameters')]
     public array $pathParameters = [];
 
