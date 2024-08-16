@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Administrator\ImpersonateUserPageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -28,6 +30,7 @@ final class ImpersonatingCustomersContext implements Context
         private DashboardPageInterface $dashboardPage,
         private HomePageInterface $homePage,
         private ImpersonateUserPageInterface $impersonateUserPage,
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -123,6 +126,6 @@ final class ImpersonatingCustomersContext implements Context
      */
     public function iShouldSeeThatImpersonatingWasSuccessful($email)
     {
-        Assert::contains($this->customerShowPage->getSuccessFlashMessage(), $email);
+        $this->notificationChecker->checkNotification($email, NotificationType::success());
     }
 }

@@ -29,11 +29,13 @@ parameters:
 
         # Deprecated classes
         - 'src/Sylius/Bundle/CoreBundle/Application/Kernel.php'
-        - 'src/Sylius/Bundle/UserBundle/Security/UserPasswordEncoder.php'
 
         # To investigate, occurs after release of doctrine/orm 2.14, the processing of these classes ends with exit code 143
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
+
+        # Random errors related to Template Events (we're going to replace them with Twig Events anyway)
+        - 'src/Sylius/Bundle/UiBundle/Console/Command/DebugTemplateEventCommand.php'
     ignoreErrors:
         - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
@@ -45,3 +47,4 @@ parameters:
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
         - '/Method [a-zA-z\\]+Filter\:\:filterProperty\(\) has parameter \$value with no type specified./'
         - '/Method [a-zA-z\\]+Persister\:\:(persist|remove|supports)\(\) has parameter \$data with no type specified./'
+        - '/Method Sylius\\Bundle\\AdminBundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'

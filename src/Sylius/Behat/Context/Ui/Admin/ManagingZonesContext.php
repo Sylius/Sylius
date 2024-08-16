@@ -15,27 +15,22 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Element\Admin\Zone\FormElementInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Zone\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
-    use ValidationTrait;
-
     public function __construct(
-        private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
+        private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
+        private FormElementInterface $formElement,
         private NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -43,7 +38,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I want to create a new zone consisting of :memberType
      */
-    public function iWantToCreateANewZoneWithMembers($memberType)
+    public function iWantToCreateANewZoneWithMembers(string $memberType): void
     {
         $this->createPage->open(['type' => $memberType]);
     }
@@ -52,7 +47,7 @@ final class ManagingZonesContext implements Context
      * @When I browse zones
      * @When I want to see all zones in store
      */
-    public function iWantToSeeAllZonesInStore()
+    public function iWantToSeeAllZonesInStore(): void
     {
         $this->indexPage->open();
     }
@@ -60,108 +55,88 @@ final class ManagingZonesContext implements Context
     /**
      * @When /^I want to modify the (zone named "[^"]+")$/
      */
-    public function iWantToModifyAZoneNamed(ZoneInterface $zone)
+    public function iWantToModifyAZoneNamed(ZoneInterface $zone): void
     {
         $this->updatePage->open(['id' => $zone->getId()]);
     }
 
     /**
-     * @When /^I(?:| try to) delete the (zone named "([^"]*)")$/
+     * @When /^I(?:| try to) delete the (zone named "([^"]+)")$/
      */
-    public function iDeleteZoneNamed(ZoneInterface $zone)
+    public function iDeleteZoneNamed(ZoneInterface $zone): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['name' => $zone->getName(), 'code' => $zone->getCode()]);
     }
 
     /**
-     * @When /^I(?:| also) remove (the "([^"]*)" (?:country|province|zone) member)$/
+     * @When /^I(?:| also) remove the "([^"]+)" (?:country|province|zone) member$/
+     * @When /^I(?:| also) remove the "([^"]+)", "([^"]+)" and "([^"]+)" (?:country|province|zone) members$/
      */
-    public function iRemoveTheMember(ZoneMemberInterface $zoneMember)
+    public function iRemoveMembers(string ...$members): void
     {
-        $this->updatePage->removeMember($zoneMember);
-    }
-
-    /**
-     * @When /^I(?:| also) remove the ("([^"]+)", "([^"]+)" and "([^"]+)" (?:country|province|zone) members)$/
-     */
-    public function iRemoveMembers(array $countries): void
-    {
-        foreach ($countries as $country) {
-            $this->updatePage->removeMember($country);
+        foreach ($members as $member) {
+            $this->formElement->removeMember($member);
         }
     }
 
     /**
-     * @When I rename it to :name
-     */
-    public function iRenameItTo($name)
-    {
-        $this->updatePage->nameIt($name ?? '');
-    }
-
-    /**
      * @When I name it :name
+     * @When I rename it to :name
+     * @When I do not specify its name
      */
-    public function iNameIt($name)
+    public function iNameIt(string $name = ''): void
     {
-        $this->createPage->nameIt($name ?? '');
+        $this->formElement->nameIt($name);
     }
 
     /**
      * @When I specify its code as :code
-     */
-    public function iSpecifyItsCodeAs(?string $code = null): void
-    {
-        $this->createPage->specifyCode($code ?? '');
-    }
-
-    /**
      * @When I do not specify its code
      */
-    public function iDoNotSpecifyItsCode()
+    public function iSpecifyItsCodeAs(string $code = ''): void
     {
-        // Intentionally left blank to fulfill context expectation
+        $this->formElement->specifyCode($code);
     }
 
     /**
-     * @When I do not specify its name
+     * @When I specify a too long code
      */
-    public function iDoNotSpecifyItsName()
+    public function iSpecifyATooLong(): void
     {
-        // Intentionally left blank to fulfill context expectation
+        $this->formElement->specifyCode(str_repeat('a', 256));
     }
 
     /**
      * @When I do not add a country member
      */
-    public function iDoNotAddACountryMember()
+    public function iDoNotAddACountryMember(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
 
     /**
-     * @When /^I add a(?: country| province| zone) "([^"]+)"$/
+     * @When /^I add a (?:country|province|zone) "([^"]+)"$/
      */
-    public function iAddAZoneMember($name)
+    public function iAddAZoneMember(string $name): void
     {
-        $this->createPage->addMember();
-        $this->createPage->chooseMember($name);
+        $this->formElement->addMember();
+        $this->formElement->chooseMember($name);
     }
 
     /**
      * @When I select its scope as :scope
      */
-    public function iSelectItsScopeAs($scope)
+    public function iSelectItsScopeAs($scope): void
     {
-        $this->createPage->selectScope($scope);
+        $this->formElement->selectScope($scope);
     }
 
     /**
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -169,7 +144,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -191,37 +166,53 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then /^the (zone named "[^"]+") with (the "[^"]+" (?:country|province|zone) member) should appear in the registry$/
+     * @Then /^the (zone named "[^"]+") with the "([^"]+)" (?:country|province|zone) member should appear in the registry$/
      */
-    public function theZoneWithTheCountryShouldAppearInTheRegistry(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
-    {
-        $this->assertZoneAndItsMember($zone, $zoneMember);
+    public function theZoneWithTheCountryShouldAppearInTheRegistry(
+        ZoneInterface $zone,
+        string $member,
+    ): void {
+        $this->updatePage->open(['id' => $zone->getId()]);
+
+        Assert::same($this->formElement->getName(), $zone->getName());
+        Assert::true(
+            $this->formElement->hasMember($member),
+            sprintf('Zone %s has no member %s', $zone->getName(), $member),
+        );
     }
 
     /**
      * @Given its scope should be :scope
      */
-    public function itsScopeShouldBe($scope)
+    public function itsScopeShouldBe(string $scope): void
     {
-        Assert::same($this->updatePage->getScope(), $scope);
+        Assert::same($this->formElement->getScope(), $scope);
     }
 
     /**
-     * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
+     * @Then /^(this zone) should have only the "([^"]*)" (?:country|province|zone) member$/
      */
-    public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
-    {
-        $this->assertZoneAndItsMember($zone, $zoneMember);
+    public function thisZoneShouldHaveOnlyTheMember(
+        ZoneInterface $zone,
+        string $member,
+    ): void {
+        $this->updatePage->open(['id' => $zone->getId()]);
 
-        Assert::same($this->updatePage->countMembers(), 1);
+        Assert::same($this->formElement->countMembers(), 1);
+        Assert::true(
+            $this->formElement->hasMember($member),
+            sprintf('Zone %s has no member %s', $zone->getName(), $member),
+        );
     }
 
     /**
      * @Then /^(this zone) name should be "([^"]*)"/
      */
-    public function thisZoneNameShouldBe(ZoneInterface $zone, $name)
+    public function thisZoneNameShouldBe(ZoneInterface $zone, string $name): void
     {
-        Assert::true($this->updatePage->hasResourceValues(['code' => $zone->getCode(), 'name' => $name]));
+        $this->updatePage->open(['id' => $zone->getId()]);
+
+        Assert::same($this->formElement->getName(), $name);
     }
 
     /**
@@ -229,24 +220,21 @@ final class ManagingZonesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->formElement->isCodeDisabled());
     }
 
     /**
      * @Then /^I should be notified that zone with this code already exists$/
      */
-    public function iShouldBeNotifiedThatZoneWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatZoneWithThisCodeAlreadyExists(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage('code'), 'Zone code must be unique.');
+        Assert::same($this->formElement->getValidationMessage('code'), 'Zone code must be unique.');
     }
 
     /**
      * @Then /^there should still be only one zone with code "([^"]*)"$/
      */
-    public function thereShouldStillBeOnlyOneZoneWithCode($code)
+    public function thereShouldStillBeOnlyOneZoneWithCode(string $code): void
     {
         $this->indexPage->open();
 
@@ -256,18 +244,15 @@ final class ManagingZonesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter zone %s.', $element));
+        Assert::same($this->formElement->getValidationMessage($element), sprintf('Please enter zone %s.', $element));
     }
 
     /**
      * @Then zone with :element :value should not be added
      */
-    public function zoneWithNameShouldNotBeAdded($element, $value)
+    public function zoneWithNameShouldNotBeAdded(string $element, string $value): void
     {
         $this->indexPage->open();
 
@@ -277,9 +262,9 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^I should be notified that at least one zone member is required$/
      */
-    public function iShouldBeNotifiedThatAtLeastOneZoneMemberIsRequired()
+    public function iShouldBeNotifiedThatAtLeastOneZoneMemberIsRequired(): void
     {
-        Assert::true($this->createPage->checkValidationMessageForMembers('Please add at least 1 zone member.'));
+        Assert::same($this->formElement->getFormValidationMessage(), 'Please add at least 1 zone member.');
     }
 
     /**
@@ -287,21 +272,24 @@ final class ManagingZonesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsType(): void
     {
-        Assert::true($this->createPage->isTypeFieldDisabled());
+        Assert::true($this->formElement->isTypeFieldDisabled());
     }
 
     /**
      * @Then it should be of :type type
      */
-    public function itShouldBeOfType($type)
+    public function itShouldBeOfType(string $type): void
     {
-        Assert::true($this->createPage->hasType($type));
+        Assert::same(
+            strtolower($this->formElement->getType()),
+            strtolower($type),
+        );
     }
 
     /**
      * @Then the zone named :zoneName should no longer exist in the registry
      */
-    public function thisZoneShouldNoLongerExistInTheRegistry($zoneName)
+    public function thisZoneShouldNoLongerExistInTheRegistry(string $zoneName): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $zoneName]));
     }
@@ -318,13 +306,14 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^I should(?:| still) see the (zone named "([^"]+)") in the list$/
      */
-    public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
+    public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]));
     }
 
     /**
      * @Then I should be notified that the zone is in use and cannot be deleted
+     * @Then I should be notified that this zone cannot be deleted
      */
     public function iShouldBeNotifiedThatTheZoneIsInUseAndCannotBeDeleted(): void
     {
@@ -332,45 +321,29 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should be notified that this zone cannot be deleted
+     * @Then I should be notified that code is too long
      */
-    public function iShouldBeNotifiedThatThisZoneCannotBeDeleted(): void
+    public function iShouldBeNotifiedThatCodeIsTooLong(): void
     {
-        $this->notificationChecker->checkNotification('Error Cannot delete, the zone is in use.', NotificationType::failure());
-    }
-
-    /**
-     * @throws \InvalidArgumentException
-     */
-    private function assertZoneAndItsMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
-    {
-        Assert::true(
-            $this->updatePage->hasResourceValues([
-                'code' => $zone->getCode(),
-                'name' => $zone->getName(),
-            ]),
-            sprintf('Zone %s is not valid', $zone->getName()),
+        Assert::contains(
+            $this->formElement->getValidationMessage('code'),
+            'must not be longer than 255 characters.',
         );
-
-        Assert::true($this->updatePage->hasMember($zoneMember));
     }
 
     /**
-     * @Then /^I can not add a(?: country| province| zone) "([^"]+)"$/
+     * @Then /^I should not be able to add the "([^"]+)" (?:country|province|zone) as a member$/
      */
-    public function iCanNotAddAZoneMember($name)
+    public function iShouldNotBeAbleToAddTheMember(string $name): void
     {
-        $member = null;
+        $this->formElement->addMember();
 
         try {
-            $member = $this->createPage->chooseMember($name);
+            $this->formElement->chooseMember($name);
         } catch (ElementNotFoundException) {
+            return;
         }
-        Assert::isEmpty($member);
-    }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
-    {
-        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        throw new \InvalidArgumentException(sprintf('Member "%s" should not be selectable.', $name));
     }
 }

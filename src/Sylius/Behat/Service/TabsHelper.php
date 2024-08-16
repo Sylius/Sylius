@@ -27,15 +27,13 @@ abstract class TabsHelper
             return;
         }
 
-        $tab = $tabsContainer->find('css', sprintf('.item[data-tab*="%s"]', $dataTabHook));
+        $tab = $tabsContainer->find('css', sprintf('[data-test-tab*="%s"]', $dataTabHook));
         if ($tab->hasClass('active')) {
             return;
         }
 
         $tab->click();
 
-        $tabContent = $tabsContainer->find('css', sprintf('.tab[data-tab*="%s"]', $dataTabHook));
-
-        $session->getPage()->waitFor(5, fn () => $tabContent->isVisible());
+        $session->getPage()->waitFor(5, fn () => $tab->hasClass('active'));
     }
 }

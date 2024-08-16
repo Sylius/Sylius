@@ -2,16 +2,11 @@ sylius_admin_exchange_rate:
     resource: |
         alias: sylius.exchange_rate
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show']
         redirect: update
         grid: sylius_admin_exchange_rate
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ExchangeRateType
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_exchange_rates
-                templates:
-                    form: "@SyliusAdmin/ExchangeRate/_form.html.twig"
-            index:
-                icon: sliders
     type: sylius.resource

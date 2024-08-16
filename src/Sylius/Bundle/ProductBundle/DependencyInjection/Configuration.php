@@ -13,6 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationTypeRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationTypeTranslationRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionTranslationRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionValueRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionValueTranslationRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductTranslationRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantTranslationRepository;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeType;
@@ -93,7 +104,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Product::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ProductRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProductType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -110,7 +121,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('model')->defaultValue(ProductTranslation::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('interface')->defaultValue(ProductTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->defaultValue(ProductTranslationRepository::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                 ->scalarNode('form')->defaultValue(ProductTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
@@ -131,7 +142,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ProductVariant::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductVariantInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ProductVariantRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProductVariantType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -148,7 +159,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('model')->defaultValue(ProductVariantTranslation::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('interface')->defaultValue(ProductVariantTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->defaultValue(ProductVariantTranslationRepository::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                 ->scalarNode('form')->defaultValue(ProductVariantTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
@@ -169,7 +180,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ProductOption::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductOptionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ProductOptionRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProductOptionType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -186,7 +197,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('model')->defaultValue(ProductOptionTranslation::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('interface')->defaultValue(ProductOptionTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->defaultValue(ProductOptionTranslationRepository::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                 ->scalarNode('form')->defaultValue(ProductOptionTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
@@ -207,7 +218,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ProductOptionValue::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductOptionValueInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ProductOptionValueRepository::class)->cannotBeEmpty()->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ProductOptionValueType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -228,7 +239,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('model')->defaultValue(ProductOptionValueTranslation::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('interface')->defaultValue(ProductOptionValueTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->defaultValue(ProductOptionValueTranslationRepository::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('form')->defaultValue(ProductOptionValueTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
@@ -250,7 +261,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ProductAssociationInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ProductAssociationRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ProductAssociationType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
@@ -269,7 +280,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ProductAssociationTypeModelInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ProductAssociationTypeRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ProductAssociationTypeType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
@@ -285,7 +296,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('model')->defaultValue(ProductAssociationTypeTranslation::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('interface')->defaultValue(ProductAssociationTypeTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->defaultValue(ProductAssociationTypeTranslationRepository::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                 ->scalarNode('form')->defaultValue(ProductAssociationTypeTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()

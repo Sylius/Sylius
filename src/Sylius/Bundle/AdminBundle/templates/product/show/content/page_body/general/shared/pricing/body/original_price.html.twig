@@ -1,0 +1,9 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
+
+{% set original_price = hookable_metadata.context.channel_pricing.originalPrice ?? 0 %}
+
+{% if hookable_metadata.context.currency_code is defined %}
+    <td {{ sylius_test_html_attribute('original-price') }}class="text-end">{{ money.format(original_price, hookable_metadata.context.currency_code) }}</td>
+{% else %}
+    <td></td>
+{% endif %}

@@ -1,0 +1,87 @@
+{% extends 'bootstrap_5_layout.html.twig' %}
+
+{%- block form_start -%}
+    {%- do form.setMethodRendered() -%}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form{% if name != '' %} name="{{ name }}"{% endif %} method="{{ form_method|lower }}"{% if action != '' %} action="{{ action }}"{% endif %}{{ block('attributes') }}{% if multipart %} enctype="multipart/form-data"{% endif %} {{ stimulus_controller('compound-form-errors') }}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+{%- endblock form_start -%}
+
+{%- block form_row -%}
+    {% set row_attr = row_attr|default({})|merge({ class: (row_attr.class|default('mb-3') ~ ' field')|trim }) %}
+    {{ parent() }}
+{%- endblock form_row %}
+
+{% block sylius_resource_autocomplete_choice_row %}
+    <div class="{% if required %}required {% endif %}{% if disabled %}disabled {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        <select
+            class="form-control"
+            data-choices="true"
+            data-choice-label-field="{{ choice_name }}"
+            data-choice-value-field="{{ choice_value }}"
+            data-input-id="{{ form.vars.id }}"
+            data-init-url="{{ init_load_url|default(null) }}"
+            {% if search_url is defined %}data-search-url="{{ search_url }}"{% endif %}
+            data-no-choices-text="{{ no_choices_translation|default('sylius.ui.start_typing_to_search')|trans }}"
+            {% if form.vars.disabled %}disabled{% endif %}
+            {% if multiple %}multiple{% endif %}
+        ></select>
+        {{ form_widget(form) }}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock %}
+
+{% block sylius_channel_collection_row %}
+    <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                {% for channel_code, channel_configuration in form %}
+                    {% set channel_error_count = form.vars.channels_errors_count[channel_code] %}
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
+                            data-bs-toggle="tab"
+                            href="#{{ channel_code }}"
+                            role="tab"
+                            {{ sylius_test_html_attribute('tab', channel_code) }}
+                            {{ sylius_test_html_attribute('channel-tab', channel_code) }}
+                        >
+                            <span>{{- channel_configuration.vars.label -}}</span>
+                            {% if channel_error_count > 0 %}
+                                <span class="text-white badge rounded-pill bg-danger ms-1">{{ channel_error_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                {% for channel_code, channel_configuration in form %}
+                    <div
+                        class="tab-pane fade {% if loop.index0 == 0 %}show active{% endif %}"
+                        id="{{ channel_code }}"
+                        role="tabpanel"
+                        {{ sylius_test_html_attribute('channel-tab-content', channel_code) }}
+                    >
+                        {{ form_row(channel_configuration, sylius_test_form_attribute('tab-content')|merge({'label': false})) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {{ form_errors(form) }}
+{% endblock %}
+
+{%- block button_widget -%}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-outline-primary')|trim}) %}
+    {{ parent() }}
+{%- endblock -%}

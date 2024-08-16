@@ -69,5 +69,3 @@ final class ShowAvailablePluginsCommand extends Command
         $this->plugins->add(new PluginInfo('<info>CMS</info>', 'This plugin allows you to add dynamic blocks with images, text or HTML to your storefront as well as pages and FAQs section.', 'https://github.com/BitBagCommerce/SyliusCmsPlugin'));
     }
 }
-
-class_alias(ShowAvailablePluginsCommand::class, '\Sylius\Bundle\CoreBundle\Command\ShowAvailablePluginsCommand');

@@ -1,0 +1,5 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+<a href="{{ path('sylius_admin_taxon_update', {id: '__TAXON_ID__'}) }}" class="btn btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.edit'|trans }}">
+    {{ icon({ icon: 'pencil', class: 'icon' }) }}
+</a>

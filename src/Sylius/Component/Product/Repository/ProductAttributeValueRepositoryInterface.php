@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface as BaseAttributeValueRepositoryInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of ProductAttributeValueInterface
  *
- * @extends RepositoryInterface<T>
+ * @extends BaseAttributeValueRepositoryInterface<T>
  */
-interface ProductAttributeValueRepositoryInterface extends RepositoryInterface
+interface ProductAttributeValueRepositoryInterface extends BaseAttributeValueRepositoryInterface
 {
     /**
      * @return array|ProductAttributeValueInterface[]

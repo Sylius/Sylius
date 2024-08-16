@@ -1,0 +1,33 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.zone.create.content':
+            form:
+                component: 'sylius_admin:zone:form'
+                props:
+                    zone: '@=_context.resource'
+                    type: '@=_context.resource.getType()'
+                    form: '@=_context.form'
+
+        'sylius_admin.zone.create.content.form':
+            sections:
+                template: '@SyliusAdmin/zone/form/sections.html.twig'
+
+        'sylius_admin.zone.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/zone/form/sections/general.html.twig'
+            members:
+                template: '@SyliusAdmin/zone/form/sections/members.html.twig'
+
+        'sylius_admin.zone.create.content.form.sections.members':
+            member:
+                template: '@SyliusAdmin/zone/form/sections/members/member.html.twig'
+
+        'sylius_admin.zone.create.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/zone/form/sections/general/code.html.twig'
+            type:
+                template: '@SyliusAdmin/zone/form/sections/general/type.html.twig'
+            name:
+                template: '@SyliusAdmin/zone/form/sections/general/name.html.twig'
+            scope:
+                template: '@SyliusAdmin/zone/form/sections/general/scope.html.twig'

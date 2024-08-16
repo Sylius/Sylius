@@ -14,18 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Taxon\TreeElementInterface;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class RemovingTaxonContext implements Context
+final readonly class RemovingTaxonContext implements Context
 {
     public function __construct(
         private CreatePageInterface $createPage,
-        private SharedStorageInterface $sharedStorage,
+        private TreeElementInterface $treeElement,
         private NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -38,18 +38,17 @@ final class RemovingTaxonContext implements Context
     public function iRemoveTaxonNamed(TaxonInterface $taxon): void
     {
         $this->createPage->open();
-        $this->createPage->deleteTaxonOnPageByName($taxon->getName());
-        $this->sharedStorage->set('taxon', $taxon);
+        $this->treeElement->deleteTaxon($taxon->getName());
     }
 
     /**
-     * @Then /^(this taxon) should still exist$/
+     * @Then the :taxonName taxon should still exist
      */
-    public function theTaxonShouldStillExist(TaxonInterface $taxon): void
+    public function theTaxonShouldStillExist(string $taxonName): void
     {
         $this->createPage->open();
 
-        Assert::true($this->createPage->hasTaxonWithName($taxon->getName()));
+        Assert::true($this->treeElement->isTaxonOnTheList($taxonName));
     }
 
     /**

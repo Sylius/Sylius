@@ -1,0 +1,26 @@
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('archive')), options.link.parameters|default({'id': data.id}))) %}
+{% set label = data.archivedAt is null ? action.label|default('sylius.ui.archive')|trans : action.options.restore_label|default('sylius.ui.restore')|trans %}
+{% set modal_id = 'modal-archive-restore-' ~ data.id %}
+
+{% component 'sylius_admin:confirmation_modal' with {modal_id: modal_id, type: 'archive-restore'} %}
+    {% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+    {% block trigger %}
+        <div data-bs-toggle="tooltip" data-bs-title="{{ label }}" {{ sylius_test_html_attribute('trigger-button', label) }}>
+            {{ button.default({
+                icon: action.icon ?? 'archive',
+                icon_class: 'icon icon-tabler',
+                icon_only: true,
+                attr: ' data-bs-toggle=modal data-bs-target=#' ~ modal_id,
+            }) }}
+        </div>
+    {% endblock %}
+    {% block footer %}
+        <form action="{{ path }}" method="POST" name="sylius_archivable">
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="sylius_archivable[_token]" value="{{ csrf_token('sylius_archivable') }}" />
+
+            {{ button.default({ text: 'sylius.ui.cancel'|trans, attr: 'data-bs-dismiss=modal' }) }}
+            {{ button.default({ text: label, type: 'submit', class: 'btn-primary', attr: sylius_test_html_attribute('confirm-button') }) }}
+        </form>
+    {% endblock %}
+{% endcomponent %}

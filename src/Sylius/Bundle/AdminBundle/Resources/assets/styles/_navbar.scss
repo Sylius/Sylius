@@ -1,0 +1,28 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.sylius {
+    &.navbar-nav {
+        gap: 0.5rem;
+    }
+
+    &.navbar-brand-image {
+        height: 4rem;
+    }
+}
+
+.navbar-collapse a.nav-link,
+.navbar-collapse a.dropdown-item {
+    transition: all .1s;
+
+    &:hover {
+        color: var(--tblr-primary) !important;
+        background: transparent;
+    }
+}

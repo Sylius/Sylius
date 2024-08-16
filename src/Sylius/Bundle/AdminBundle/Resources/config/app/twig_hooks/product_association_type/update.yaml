@@ -1,0 +1,21 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_association_type.update.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.product_association_type.update.content.form':
+            general:
+                template: '@SyliusAdmin/product_association_type/form/general.html.twig'
+            translations:
+                template: '@SyliusAdmin/product_association_type/form/translations.html.twig'
+
+        'sylius_admin.product_association_type.update.content.form.general':
+            code:
+                template: '@SyliusAdmin/product_association_type/form/general/code.html.twig'
+
+        'sylius_admin.product_association_type.update.content.form.translations':
+            name:
+                template: '@SyliusAdmin/product_association_type/form/translations/name.html.twig'

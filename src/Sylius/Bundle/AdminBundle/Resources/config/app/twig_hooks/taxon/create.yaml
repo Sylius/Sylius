@@ -1,0 +1,81 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.taxon.create.content':
+            form:
+                enabled: false
+            sections:
+                template: '@SyliusAdmin/taxon/sections.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections#left':
+            tree:
+                component: 'sylius_admin:taxon:tree'
+
+        'sylius_admin.taxon.create.content.sections#right':
+            form:
+                component: 'sylius_admin:taxon:form'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.resource'
+
+        'sylius_admin.taxon.create.content.sections.tree':
+            actions:
+                template: '@SyliusAdmin/taxon/sections/tree/actions.html.twig'
+
+        'sylius_admin.taxon.create.content.sections.tree.actions':
+            edit:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/edit.html.twig'
+            dropdown:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown.html.twig'
+
+        'sylius_admin.taxon.create.content.sections.tree.actions.dropdown':
+            create_child:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/create_child.html.twig'
+            delete:
+                component: 'sylius_admin:taxon:delete'
+            products_positions:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/products_positions.html.twig'
+            move_up:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/move_up.html.twig'
+            move_down:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/move_down.html.twig'
+
+        'sylius_admin.taxon.create.content.sections.form':
+            general:
+                template: '@SyliusAdmin/taxon/sections/form/general.html.twig'
+            translations:
+                template: '@SyliusAdmin/taxon/sections/form/translations.html.twig'
+            images:
+                template: '@SyliusAdmin/taxon/sections/form/images.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.general':
+            code:
+                template: '@SyliusAdmin/taxon/sections/form/general/code.html.twig'
+            parent:
+                template: '@SyliusAdmin/taxon/sections/form/general/parent.html.twig'
+            enabled:
+                template: '@SyliusAdmin/taxon/sections/form/general/enabled.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.translations':
+            name:
+                template: '@SyliusAdmin/taxon/sections/form/translations/name.html.twig'
+            slug:
+                template: '@SyliusAdmin/taxon/sections/form/translations/slug.html.twig'
+            description:
+                template: '@SyliusAdmin/taxon/sections/form/translations/description.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.images':
+            image:
+                template: '@SyliusAdmin/taxon/sections/form/images/image.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.images.image#left':
+            picture:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/picture.html.twig'
+            button_delete:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/button_delete.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.images.image#right':
+            type:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/type.html.twig'
+            file:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/file.html.twig'
+

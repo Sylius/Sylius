@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\DependencyInjection;
 
 use Laminas\Stdlib\SplPriorityQueue;
+use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
+use Sylius\Bundle\UiBundle\Registry\ComponentBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusUiExtension extends Extension implements PrependExtensionInterface
+final class SyliusUiExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -37,6 +37,8 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
         }
 
         $this->loadEvents($config['events'], $container);
+
+        $container->setParameter('sylius_ui.twig_ux.anonymous_component_template_prefixes', $config['twig_ux']['anonymous_component_template_prefixes'] ?? []);
     }
 
     /**
@@ -44,7 +46,7 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
-        $templateBlockRegistryDefinition = $container->findDefinition(TemplateBlockRegistryInterface::class);
+        $templateBlockRegistryDefinition = $container->findDefinition(BlockRegistryInterface::class);
 
         $blocksForEvents = [];
         foreach ($eventsConfig as $eventName => $eventConfiguration) {
@@ -57,54 +59,53 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
                 $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
             }
 
+            /** @var array{name: string, eventName: string, template: string, component: array{name?: string, inputs?: array<string, mixed>}, context: array, priority: int, enabled: bool} $details */
             foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
-                $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
-                    $details['name'],
-                    $details['eventName'],
-                    $details['template'],
-                    $details['context'],
-                    $details['priority'],
-                    $details['enabled'],
-                ]);
+                $blockType = [] !== $details['component'] ? 'component' : 'template';
+                $blocksForEvents[$eventName][$details['name']] = match ($blockType) {
+                    'template' => $this->createTemplateBlockDefinition($details),
+                    'component' => $this->createComponentBlockDefinition($details),
+                };
             }
         }
 
         $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
     }
 
-    public function prepend(ContainerBuilder $container): void
+    /**
+     * @param array<string, mixed> $details
+     */
+    private function createTemplateBlockDefinition(array $details): Definition
     {
-        $useWebpack = $this->isWebpackEnabled($container);
-
-        $container->setParameter('sylius_ui.use_webpack', $useWebpack);
-
-        if (true === $useWebpack) {
-            $container->prependExtensionConfig('framework', [
-                'assets' => [
-                    'packages' => [
-                        'shop' => [
-                            'json_manifest_path' => '%kernel.project_dir%/public/build/shop/manifest.json',
-                        ],
-                        'admin' => [
-                            'json_manifest_path' => '%kernel.project_dir%/public/build/admin/manifest.json',
-                        ],
-                    ],
-                ],
-            ]);
-        }
+        return new Definition(
+            TemplateBlock::class,
+            [
+                $details['name'],
+                $details['eventName'],
+                $details['template'],
+                $details['context'],
+                $details['priority'],
+                $details['enabled'],
+            ],
+        );
     }
 
-    private function isWebpackEnabled(ContainerBuilder $container): bool
+    /**
+     * @param array<string, mixed> $details
+     */
+    private function createComponentBlockDefinition(array $details): Definition
     {
-        $configs = $container->getExtensionConfig($this->getAlias());
-
-        foreach (array_reverse($configs) as $config) {
-            if (isset($config['use_webpack'])) {
-                return (bool) $config['use_webpack'];
-            }
-        }
-
-        return true;
+        return new Definition(
+            ComponentBlock::class,
+            [
+                $details['name'],
+                $details['eventName'],
+                $details['component']['name'],
+                $details['component']['inputs'] ?? [],
+                $details['context'],
+                $details['priority'],
+                $details['enabled'],
+            ],
+        );
     }
 }

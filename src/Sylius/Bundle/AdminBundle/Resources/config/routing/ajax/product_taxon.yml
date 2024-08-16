@@ -2,7 +2,7 @@ sylius_admin_ajax_product_taxons_update_position:
     path: /update
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.product_taxon::updatePositionsAction
+        _controller: sylius.controller.product_taxon::updateProductTaxonsPositionsAction
         _format: json
         _sylius:
             permission: true

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
+use Psr\Clock\ClockInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 
 final class ArchivingPromotionApplicator implements ArchivingPromotionApplicatorInterface
 {
-    public function __construct(private DateTimeProviderInterface $calendar)
+    public function __construct(private ClockInterface $calendar)
     {
     }
 

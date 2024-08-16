@@ -1,0 +1,198 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.order.show.content':
+            sections:
+                template: '@SyliusAdmin/order/show/content/sections.html.twig'
+
+        'sylius_admin.order.show.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
+
+        'sylius_admin.order.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/order/show/content/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions.html.twig'
+
+        'sylius_admin.order.show.content.header.title_block.actions':
+            history:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/history.html.twig'
+            cancel:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/cancel.html.twig'
+            resend_confirmation_email:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/resend_confirmation_email.html.twig'
+
+        'sylius_admin.order.show.content.sections#left':
+            items:
+                template: '@SyliusAdmin/order/show/content/sections/items.html.twig'
+            summary:
+                template: '@SyliusAdmin/order/show/content/sections/summary.html.twig'
+            payments:
+                template: '@SyliusAdmin/order/show/content/sections/payments.html.twig'
+            shipments:
+                template: '@SyliusAdmin/order/show/content/sections/shipments.html.twig'
+
+        'sylius_admin.order.show.content.sections.items':
+            head:
+                template: '@SyliusAdmin/order/show/content/sections/items/head.html.twig'
+            body:
+                template: '@SyliusAdmin/order/show/content/sections/items/body.html.twig'
+            foot:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot.html.twig'
+
+        'sylius_admin.order.show.content.sections.items.head':
+            item:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/item.html.twig'
+            unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/unit_price.html.twig'
+            unit_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/unit_discount.html.twig'
+            distributed_order_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/distributed_order_discount.html.twig'
+            discounted_unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/discounted_unit_price.html.twig'
+            quantity:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/quantity.html.twig'
+            subtotal:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/subtotal.html.twig'
+            tax:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/tax.html.twig'
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/total.html.twig'
+
+        'sylius_admin.order.show.content.sections.items.body':
+            item:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/item.html.twig'
+            unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/unit_price.html.twig'
+            unit_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/unit_discount.html.twig'
+            distributed_order_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/distributed_order_discount.html.twig'
+            discounted_unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/discounted_unit_price.html.twig'
+            quantity:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/quantity.html.twig'
+            subtotal:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/subtotal.html.twig'
+            tax:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/tax.html.twig'
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/total.html.twig'
+
+        'sylius_admin.order.show.content.sections.items.foot':
+            label:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/label.html.twig'
+            tax_total:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/tax_total.html.twig'
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/total.html.twig'
+
+        'sylius_admin.order.show.content.sections.summary':
+            items_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/items_total.html.twig'
+            tax_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/tax_total.html.twig'
+            shipping_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/shipping_total.html.twig'
+            promotion_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/promotion_total.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments':
+            header:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header.html.twig'
+            items:
+                template: '@SyliusAdmin/order/show/content/sections/payments/items.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.header':
+            title:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header/title.html.twig'
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header/state.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.item':
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/state.html.twig'
+            name:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/name.html.twig'
+            amount:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/amount.html.twig'
+            actions:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.item.actions':
+            complete:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/complete.html.twig'
+            refund:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/refund.html.twig'
+
+        'sylius_admin.order.show.content.sections.shipments':
+            header:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/header.html.twig'
+            items:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/items.html.twig'
+
+        'sylius_admin.order.show.content.sections.shipments.header':
+            title:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/header/title.html.twig'
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/header/state.html.twig'
+
+        'sylius_admin.order.show.content.sections.shipments.item':
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/state.html.twig'
+            general:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/general.html.twig'
+            actions:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions.html.twig'
+
+        'sylius_admin.order.show.content.sections.shipments.item.actions':
+            ship:
+                component: 'sylius_admin:shipment:ship_form'
+                props:
+                    shipment: '@=_context.shipment'
+                    path: 'sylius_admin_order_shipment_ship'
+                    pathParameters: 
+                        id: '@=_context.shipment.getId()'
+                        orderId: '@=_context.resource.getId()'
+            resend_confirmation:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/resend_confirmation.html.twig'
+            show:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/show.html.twig'
+
+        'sylius_admin.order.show.content.sections#right':
+            general:
+                template: '@SyliusAdmin/order/show/content/sections/general.html.twig'
+            customer:
+                template: '@SyliusAdmin/order/show/content/sections/customer.html.twig'
+
+        'sylius_admin.order.show.content.sections.general':
+            order_date:
+                template: '@SyliusAdmin/order/show/content/sections/general/order_date.html.twig'
+            currency:
+                template: '@SyliusAdmin/order/show/content/sections/general/currency.html.twig'
+            language:
+                template: '@SyliusAdmin/order/show/content/sections/general/language.html.twig'
+            channel:
+                template: '@SyliusAdmin/order/show/content/sections/general/channel.html.twig'
+            notes:
+                template: '@SyliusAdmin/order/show/content/sections/general/notes.html.twig'
+
+        'sylius_admin.order.show.content.sections.customer':
+            full_name:
+                template: '@SyliusAdmin/order/show/content/sections/customer/full_name.html.twig'
+            customer_since:
+                template: '@SyliusAdmin/order/show/content/sections/customer/customer_since.html.twig'
+            email:
+                template: '@SyliusAdmin/order/show/content/sections/customer/email.html.twig'
+            phone:
+                template: '@SyliusAdmin/order/show/content/sections/customer/phone.html.twig'
+            billing_address:
+                template: '@SyliusAdmin/order/show/content/sections/customer/billing_address.html.twig'
+            shipping_address:
+                template: '@SyliusAdmin/order/show/content/sections/customer/shipping_address.html.twig'
+            edit_addresses:
+                template: '@SyliusAdmin/order/show/content/sections/customer/edit_addresses.html.twig'

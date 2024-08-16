@@ -14,10 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Shipment;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
+    }
+
     public function chooseStateToFilter(string $shipmentState): void
     {
         $this->getElement('filter_state')->selectOption($shipmentState);
@@ -25,22 +40,30 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     public function chooseChannelFilter(string $channelName): void
     {
-        $this->getElement('filter_channel')->selectOption($channelName);
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('filter_channel')->getXpath(),
+            $channelName,
+        );
+        $this->waitForFormUpdate();
     }
 
     public function chooseShippingMethodFilter(string $shippingMethodName): void
     {
-        $this->getElement('filter_shipping_method')->selectOption($shippingMethodName);
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('filter_shipping_method')->getXpath(),
+            $shippingMethodName,
+        );
+        $this->waitForFormUpdate();
     }
 
     public function isShipmentWithOrderNumberInPosition(string $orderNumber, int $position): bool
     {
-        $result = $this->getElement('shipment_in_given_position', [
-                '%position%' => $position,
-                '%orderNumber%' => $orderNumber,
-            ]);
+        $rows = $this->getTableAccessor()->getIndexedColumn($this->getElement('table'), 'order');
+        $orderFromRow = $rows[$position - 1] ?? null;
 
-        return $result !== null;
+        return $orderFromRow !== null && str_contains($orderFromRow, $orderNumber);
     }
 
     public function shipShipmentOfOrderWithNumber(string $orderNumber): void
@@ -63,7 +86,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         /** @var NodeElement $actions */
         $actions = $this->getField($orderNumber, 'actions');
 
-        $actions->fillField('sylius_shipment_ship_tracking', $trackingCode);
+        $actions->fillField('sylius_admin_shipment_ship_tracking', $trackingCode);
         $actions->pressButton('Ship');
     }
 
@@ -78,7 +101,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             'filter_channel' => '#criteria_channel',
             'filter_shipping_method' => '#criteria_method',
             'filter_state' => '#criteria_state',
-            'shipment_in_given_position' => 'table tbody tr:nth-child(%position%) td:contains("%orderNumber%")',
         ]);
     }
 
@@ -87,7 +109,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
-        $row = $tableAccessor->getRowWithFields($table, ['number' => $orderNumber]);
+        $row = $tableAccessor->getRowWithFields($table, ['order' => $orderNumber]);
 
         return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
     }

@@ -42,6 +42,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Given I am browsing product options
      * @When I browse product options
      */
     public function iBrowseProductOptions(): void
@@ -101,19 +102,9 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I add the :value option value identified by :code
-     */
-    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code): void
-    {
-        $this->client->addSubResourceData(
-            'values',
-            ['code' => $code, 'translations' => ['en_US' => ['value' => $value]]],
-        );
-    }
-
-    /**
      * @When I add the :value option value identified by :code in :localeCode
      */
-    public function iAddTheOptionValueWithCodeAndValueInLocale(string $value, string $code, string $localeCode): void
+    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code, string $localeCode = 'en_US'): void
     {
         $this->client->addSubResourceData(
             'values',

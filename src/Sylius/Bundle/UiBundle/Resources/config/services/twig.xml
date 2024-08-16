@@ -21,11 +21,13 @@
 
         <service id="sylius.twig.extension.form_test_attribute_array" class="Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension">
             <argument>%kernel.environment%</argument>
+            <argument>%kernel.debug%</argument>
             <tag name="twig.extension" />
         </service>
 
         <service id="sylius.twig.extension.form_test_attribute_name" class="Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension">
             <argument>%kernel.environment%</argument>
+            <argument>%kernel.debug%</argument>
             <tag name="twig.extension" />
         </service>
 
@@ -49,6 +51,11 @@
 
         <service id="Sylius\Bundle\UiBundle\Twig\RedirectPathExtension">
             <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
+            <argument type="service" id="router" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="Sylius\Bundle\UiBundle\Twig\RouteExistsExtension">
             <argument type="service" id="router" />
             <tag name="twig.extension" />
         </service>

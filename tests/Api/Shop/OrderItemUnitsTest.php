@@ -17,7 +17,6 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class OrderItemUnitsTest extends JsonApiTestCase
 {

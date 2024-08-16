@@ -1,0 +1,17 @@
+{% macro default(level, header, icon, subheader) %}
+    <h{{ level }} class="page-title">
+        {# TODO: Decide whether we want to have an image here #}
+        {#        {% if icon is not empty %}#}
+        {#            <i class="circular {{ icon }} icon"></i>#}
+        {#        {% endif %}#}
+        {{ header }}
+        {% if subheader is not empty %}
+            {# TODO: Fix subheader styling #}
+            {#            <small class="text-body-secondary">{{ subheader }}</small>#}
+        {% endif %}
+    </h{{ level }}>
+{% endmacro %}
+
+{% macro h1(header, icon, subheader) %}
+    {{ _self.default(1, header, icon, subheader) }}
+{% endmacro %}

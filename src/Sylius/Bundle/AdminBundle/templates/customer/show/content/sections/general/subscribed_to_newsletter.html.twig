@@ -1,0 +1,14 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.subscribed_to_newsletter'|trans }}</div>
+    <div class="col-12 col-md-8" {{ sylius_test_html_attribute('customer-subscribed-to-newsletter') }}>
+        <span>
+            {% if hookable_metadata.context.customer.subscribedToNewsletter %}
+                {{ icon({icon: 'check', class: 'icon text-green'}) }}
+            {% else %}
+                {{ icon({icon: 'x', class: 'icon icon-sm text-secondary'}) }}
+            {% endif %}
+        </span>
+    </div>
+</div>

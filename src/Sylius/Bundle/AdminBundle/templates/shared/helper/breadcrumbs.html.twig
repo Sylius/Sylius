@@ -1,0 +1,19 @@
+{% macro breadcrumbs(items) %}
+    <ol class="breadcrumb" aria-label="breadcrumbs">
+        {% for item in items %}
+            {% if item is not empty %}
+                {{ block('item') }}
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endmacro %}
+
+{% block item %}
+    <li class="breadcrumb-item {{ item.active is defined and item.active ? "active" }}">
+        {% if item.url is defined %}
+            <a href="{{ item.url }}">{{ item.name|trans }}</a>
+        {% else %}
+            {{ item.name|trans }}
+        {% endif %}
+    </li>
+{% endblock item %}

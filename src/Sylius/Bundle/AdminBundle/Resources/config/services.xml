@@ -13,12 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/controller.xml" />
-        <import resource="services/email.xml" />
-        <import resource="services/listener.xml" />
-        <import resource="services/menu.xml" />
-        <import resource="services/form.xml" />
-        <import resource="services/provider.xml" />
+        <import resource="services/**/*.xml" />
     </imports>
 
     <parameters>
@@ -26,7 +21,7 @@
         <parameter key="sylius.ajax.product.variant_autocomplete_limit">25</parameter>
         <parameter key="sylius.ajax.product.option_autocomplete_limit">10</parameter>
         <parameter key="sylius.ajax.customer_group.autocomplete_limit">25</parameter>
-        <parameter key="sylius.message.admin_user_create.validation_groups" type="collection">
+        <parameter key="sylius_admin.command_handler.create_admin_user.validation_groups" type="collection">
             <parameter>sylius</parameter>
             <parameter>sylius_user_create</parameter>
         </parameter>
@@ -35,26 +30,26 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
+        <service id="sylius_admin.console.command.create_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_locale.locale%</argument>
             <argument type="service" id="sylius.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
+        <service id="sylius_admin.console.command.change_admin_user_password" class="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.security.password_updater" />
             <argument type="service" id="sylius.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler">
+        <service id="sylius_admin.command_handler.create_admin_user" class="Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="validator" />
-            <argument>%sylius.message.admin_user_create.validation_groups%</argument>
+            <argument>%sylius_admin.command_handler.create_admin_user.validation_groups%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -78,14 +73,22 @@
             <argument>%sylius.admin.notification.frequency%</argument>
             <tag name="twig.extension" />
         </service>
+
+        <service id="sylius.twig.extension.attribute" class="Sylius\Bundle\AdminBundle\Twig\AttributeExtension">
+            <argument type="service" id="sylius.registry.attribute_type" />
+            <tag name="twig.extension" />
+        </service>
+
         <service id="sylius.twig.extension.shop" class="Sylius\Bundle\AdminBundle\Twig\ShopExtension">
             <argument>%sylius.admin.shop_enabled%</argument>
             <tag name="twig.extension" />
         </service>
+
         <service id="sylius.twig.extension.channels_currencies" class="Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="twig.extension"/>
         </service>
+
         <service id="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension">
             <tag name="twig.extension"/>
         </service>
@@ -95,9 +98,36 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
-        <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false">
-            <deprecated package="sylius/admin-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Psr\Http\Message\RequestFactoryInterface" instead.</deprecated>
+        <service id="Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension">
+            <argument>%sylius.gateway_factories%</argument>
+            <tag name="twig.extension" />
         </service>
+
+        <service id="sylius_admin.twig.extension.promotion_labels" class="Sylius\Bundle\AdminBundle\Twig\PromotionLabelsExtension">
+            <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
+
+        <service id="sylius.attribute_type.select" class="Sylius\Component\Attribute\AttributeType\SelectAttributeType">
+            <tag name="sylius.attribute.type" attribute-type="select" label="Select"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType"
+                 configuration-form-type="Sylius\Bundle\AdminBundle\Form\Type\AttributeType\Configuration\SelectAttributeConfigurationType" />
+        </service>
+
+        <service id="sylius_admin.generator.taxon_slug" class="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGenerator">
+            <argument type="service" id="sylius.generator.taxon_slug" />
+        </service>
+        <service id="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface" alias="sylius_admin.generator.taxon_slug" />
+
+        <service id="sylius_admin.logged_in_admin_user_provider" class="Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProvider">
+            <argument type="service" id="security.helper" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="sylius.repository.admin_user" />
+        </service>
+        <service id="Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface" alias="sylius_admin.logged_in_admin_user_provider" />
     </services>
 </container>

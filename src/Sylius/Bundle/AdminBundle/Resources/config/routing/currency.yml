@@ -2,16 +2,14 @@ sylius_admin_currency:
     resource: |
         alias: sylius.currency
         section: admin
-        templates: "@SyliusAdmin\\Crud"
-        except: ['show', 'delete']
-        redirect: update
+        templates: "@SyliusAdmin\\shared\\crud"
+        only: ['index', 'create']
+        redirect: index
         grid: sylius_admin_currency
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CurrencyType
         permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_currencies_available_in_the_store
-                templates:
-                    form: "@SyliusAdmin/Currency/_form.html.twig"
-            index:
-                icon: dollar
     type: sylius.resource

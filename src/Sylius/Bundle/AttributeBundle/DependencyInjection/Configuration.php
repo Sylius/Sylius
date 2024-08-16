@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
+use Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository;
+use Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeTranslationRepository;
+use Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeValueRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Attribute\Model\Attribute;
@@ -66,7 +69,7 @@ final class Configuration implements ConfigurationInterface
                                             ->scalarNode('model')->defaultValue(Attribute::class)->cannotBeEmpty()->end()
                                             ->scalarNode('interface')->defaultValue(AttributeInterface::class)->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->cannotBeEmpty()->end()
-                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->defaultValue(AttributeRepository::class)->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                             ->scalarNode('form')->cannotBeEmpty()->end()
                                         ->end()
@@ -83,7 +86,7 @@ final class Configuration implements ConfigurationInterface
                                                     ->scalarNode('model')->defaultValue(AttributeTranslation::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('interface')->defaultValue(AttributeTranslationInterface::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                    ->scalarNode('repository')->defaultValue(AttributeTranslationRepository::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                     ->scalarNode('form')->cannotBeEmpty()->end()
                                                 ->end()
@@ -105,7 +108,7 @@ final class Configuration implements ConfigurationInterface
                                             ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                             ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->defaultValue(AttributeValueRepository::class)->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                             ->scalarNode('form')->cannotBeEmpty()->end()
                                         ->end()

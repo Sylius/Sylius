@@ -2,16 +2,16 @@ sylius_admin_zone:
     resource: |
         alias: sylius.zone
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_zone
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
         permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_geographical_zones
-                templates:
-                    form: "@SyliusAdmin/Zone/_form.html.twig"
             index:
                 icon: world
     type: sylius.resource
@@ -27,13 +27,13 @@ sylius_admin_zone_create:
                 method: createTyped
                 arguments:
                     type: $type
-            template: "@SyliusAdmin/Crud/create.html.twig"
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_zone_update
             permission: true
             vars:
                 subheader: sylius.ui.manage_geographical_zones
-                templates:
-                    form: "@SyliusAdmin/Zone/_form.html.twig"
                 route:
                     parameters:
                         type: $type

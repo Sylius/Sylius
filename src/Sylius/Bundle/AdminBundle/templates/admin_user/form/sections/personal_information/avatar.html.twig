@@ -1,0 +1,32 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set admin_user = hookable_metadata.context.resource %}
+
+{{ form_label(hookable_metadata.context.form.avatar) }}
+
+<div class="row g-6">
+    <div class="col-auto m-0">
+        {% if admin_user.avatar is not null and admin_user.avatar.path is not empty %}
+            <div
+                class="avatar avatar-xl"
+                style="background: url('{{ admin_user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar') }}');"
+                {{ sylius_test_html_attribute('avatar-image', admin_user.avatar.path) }}
+            ></div>
+        {% else %}
+            <div class="avatar avatar-xl" {{ sylius_test_html_attribute('avatar-image', null) }}></div>
+        {% endif %}
+    </div>
+    <div class="col m-0">
+        {{ form_widget(hookable_metadata.context.form.avatar) }}
+        {% if admin_user.id is not null and admin_user.avatar is not null and admin_user.avatar.path is not empty %}
+            <button
+                formaction="{{ path('sylius_admin_admin_user_remove_avatar', {'id': admin_user.id, '_csrf_token': csrf_token(admin_user.id)}) }}"
+                type="submit"
+                class="btn btn-danger"
+                {{ sylius_test_html_attribute('delete-avatar-button') }}
+            >
+                {{ icon({'icon': 'trash_x'}) }} {{ 'sylius.ui.delete_avatar'|trans }}
+            </button>
+        {% endif %}
+    </div>
+</div>

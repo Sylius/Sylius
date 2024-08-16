@@ -2,10 +2,11 @@ sylius_admin_product:
     resource: |
         alias: sylius.product
         section: admin
-        templates: "@SyliusAdmin\\Crud"
-        except: ['index', 'update']
+        templates: "@SyliusAdmin\\shared\\crud"
         redirect: update
         grid: sylius_admin_product
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
         permission: true
         vars:
             all:
@@ -15,71 +16,6 @@ sylius_admin_product:
             index:
                 icon: cube
     type: sylius.resource
-
-sylius_admin_product_index:
-    path: /products/
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product::indexAction
-        _sylius:
-            section: admin
-            permission: true
-            grid: sylius_admin_product
-            template: "@SyliusAdmin/Product/index.html.twig"
-            vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                icon: cube
-
-sylius_admin_product_update:
-    path: /products/{id}/edit
-    methods: [GET, PUT, PATCH]
-    defaults:
-        _controller: sylius.controller.product::updateAction
-        _sylius:
-            section: admin
-            permission: true
-            redirect: sylius_admin_product_update
-            repository:
-                method: findOneByIdHydrated
-                arguments: $id
-            template: "@SyliusAdmin/Crud/update.html.twig"
-            vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                icon: cube
-                templates:
-                    form: "@SyliusAdmin/Product/_form.html.twig"
-                    toolbar: "@SyliusAdmin/Product/Update/_toolbar.html.twig"
-
-sylius_admin_product_per_taxon_index:
-    path: /products/taxon/{taxonId}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product::indexAction
-        _sylius:
-            section: admin
-            permission: true
-            grid: sylius_admin_product_from_taxon
-            template: "@SyliusAdmin/Product/index.html.twig"
-            vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                icon: cube
-
-sylius_admin_product_create:
-    path: /products/new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.product::createAction
-        _sylius:
-            section: admin
-            permission: true
-            template: "@SyliusAdmin/Crud/create.html.twig"
-            redirect: sylius_admin_product_update
-            vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                templates:
-                    form: "@SyliusAdmin/Product/_form.html.twig"
-                route:
-                    name: sylius_admin_product_create
 
 sylius_admin_product_create_simple:
     path: /products/new/simple
@@ -91,24 +27,33 @@ sylius_admin_product_create_simple:
             permission: true
             factory:
                 method: createWithVariant
-            template: "@SyliusAdmin/Crud/create.html.twig"
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_product_update
             vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                templates:
-                    form: "@SyliusAdmin/Product/_form.html.twig"
                 route:
                     name: sylius_admin_product_create_simple
 
-sylius_admin_product_show:
-    path: /products/{id}
-    methods: [GET]
+sylius_admin_product_variant_generate:
+    path: products/{productId}/variants/generate
+    methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.product::showAction
+        _controller: sylius.controller.product::updateAction
         _sylius:
+            template: "@SyliusAdmin/product/generate_variants.html.twig"
             section: admin
             permission: true
-            template: "@SyliusAdmin/Product/show.html.twig"
+            redirect:
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType
+            repository:
+                method: find
+                arguments: [$productId]
+            flash: sylius.product_variant.generate
+
 
 sylius_admin_channel_pricing_log_entry_index:
     path: products/{productId}/variants/{variantId}/channel-pricing/{channelPricingId}/channel-pricing-log-entries
@@ -118,12 +63,7 @@ sylius_admin_channel_pricing_log_entry_index:
         _sylius:
             section: admin
             permission: true
-            template: '@SyliusAdmin/Crud/index.html.twig'
+            template: "@SyliusAdmin/channel_pricing_log_entry/index.html.twig"
             grid: sylius_admin_channel_pricing_log_entry
             vars:
-                icon: book
-                templates:
-                    breadcrumb: "@SyliusAdmin/ChannelPricingLogEntry/Index/_breadcrumb.html.twig"
-                header: sylius.ui.channel_pricing_history
-                subheader: sylius.ui.show_history_for_channel_pricing
                 product_variant: "expr:service('sylius.repository.product_variant').find($variantId)"
