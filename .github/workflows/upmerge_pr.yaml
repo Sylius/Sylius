@@ -52,7 +52,21 @@ jobs:
                     git reset --hard ${{ matrix.base_branch }}
 
             -
+                name: Check for changes between branches
+                id: check_diff
+                run: |
+                    git fetch origin ${{ matrix.target_branch }}:${{ matrix.target_branch }}
+                    if git diff --quiet ${{ matrix.target_branch }}; then
+                        echo "No changes detected."
+                        echo "no_changes=true" >> $GITHUB_ENV
+                    else
+                        echo "Changes detected."
+                        echo "no_changes=false" >> $GITHUB_ENV
+                    fi
+
+            -
                 name: Create Pull Request
+                if: env.no_changes == 'false'
                 uses: peter-evans/create-pull-request@v4
                 with:
                     token: ${{ secrets.SYLIUS_BOT_PAT }}
@@ -76,3 +90,8 @@ jobs:
                     branch: "upmerge/${{ matrix.base_branch }}_${{ matrix.target_branch }}"
                     delete-branch: true
                     base: ${{ matrix.target_branch }}
+
+            -
+                name: No changes found
+                if: env.no_changes == 'true'
+                run: echo "No changes between ${{ matrix.base_branch }} and ${{ matrix.target_branch }}. Skipping PR creation."
