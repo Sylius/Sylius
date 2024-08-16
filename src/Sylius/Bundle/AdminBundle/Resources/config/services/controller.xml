@@ -47,6 +47,7 @@
             <argument type="service" id="sylius.command_dispatcher.resend_order_confirmation_email" />
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="request_stack" />
+            <argument type="service" id="router" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
