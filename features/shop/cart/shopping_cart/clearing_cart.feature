@@ -9,7 +9,7 @@ Feature: Clearing cart
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And I added this product to the cart
 
-    @todo @ui @api
+    @api @ui
     Scenario: Clearing cart
         Given I see the summary of my cart
         When I clear my cart
