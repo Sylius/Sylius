@@ -306,7 +306,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         } while (!$isOpen && microtime(true) < $end);
 
         if (!$isOpen) {
-            throw new UnexpectedPageException('Is not open: ' . $e->getMessage() . ' ' . json_encode($urlParameters));
+            $exceptionMessage = isset($e) ? $e->getMessage() : 'Waited 5 seconds for page to open';
+            throw new UnexpectedPageException('Is not open: ' . $exceptionMessage . ' ' . json_encode($urlParameters));
         }
     }
 
