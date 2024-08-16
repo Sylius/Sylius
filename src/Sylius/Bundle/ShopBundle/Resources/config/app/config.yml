@@ -119,18 +119,6 @@ sylius_ui:
                     template: "@SyliusShop/Cart/summary/checkout.html.twig"
                     priority: 10
 
-        sylius.shop.contact.request.form:
-            blocks:
-                header:
-                    template: "@SyliusShop/Contact/header.html.twig"
-                    priority: 30
-                form:
-                    template: "@SyliusShop/Contact/form.html.twig"
-                    priority: 20
-                submit:
-                    template: "@SyliusShop/Contact/submit.html.twig"
-                    priority: 10
-
         sylius.shop.account.layout.menu:
             blocks:
                 menu:
