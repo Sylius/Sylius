@@ -4,19 +4,10 @@
 
 {% block title %}{{ 'sylius.ui.write_your_own_review'|trans }} | {{ parent() }}{% endblock %}
 
-{% set product = product_review.reviewSubject %}
-
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-5 col-lg-4">
-                {{ sylius_template_event('sylius.shop.product_review.create.sidebar', _context) }}
-            </div>
-            <div class="col-12 col-md-7 col-lg-8">
-                <h1>{{ 'sylius.ui.add_your_review'|trans }}</h1>
-
-                {{ sylius_template_event('sylius.shop.product_review.create.main', _context) }}
-            </div>
+            {% hook 'sylius.shop.product_review.create' with { form, product_review } %}
         </div>
     </div>
 {% endblock %}

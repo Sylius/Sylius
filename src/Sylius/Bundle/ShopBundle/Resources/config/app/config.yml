@@ -147,18 +147,6 @@ sylius_ui:
                     context:
                         event: sylius.shop.account.order.show.after_content_header
 
-        sylius.shop.product_review.create.sidebar:
-            blocks:
-                card:
-                    template: "@SyliusShop/shared/product/card.html.twig"
-                    priority: 10
-
-        sylius.shop.product_review.create.main:
-            blocks:
-                form:
-                    template: "@SyliusShop/product_review/form.html.twig"
-                    priority: 10
-
         sylius.shop.product.index.header:
             blocks:
                 breadcrumbs:
