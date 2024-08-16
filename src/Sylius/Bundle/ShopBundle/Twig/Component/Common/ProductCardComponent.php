@@ -41,14 +41,13 @@ class ProductCardComponent
     #[ExposeInTemplate(name: 'variant')]
     public function getProductVariant(): ?ProductVariantInterface
     {
-        /** @var ProductVariantInterface|null $variant */
         $variant = $this->productVariantResolver->getVariant($this->product);
 
-        if (null === $variant) {
+        if (!$variant instanceof ProductVariantInterface) {
             $variant = $this->product->getVariants()->first();
         }
 
-        if (null === $variant) {
+        if (!$variant instanceof ProductVariantInterface) {
             throw new \InvalidArgumentException('Product has no variants');
         }
 
