@@ -45,7 +45,7 @@ class ProductCardComponent
         $variant = $this->productVariantResolver->getVariant($this->product);
 
         if (null === $variant) {
-           $variant = $this->product->getVariants()->first();
+            $variant = $this->product->getVariants()->first();
         }
 
         if (null === $variant) {
