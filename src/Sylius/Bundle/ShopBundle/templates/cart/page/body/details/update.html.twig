@@ -10,6 +10,6 @@
     <form method="post" action="{{ path('sylius_shop_cart_clear') }}" >
         <input type="hidden" name="_method" value="DELETE" />
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(cart.id) }}" />
-        {{ buttons.submit('sylius.ui.clear_cart'|trans, 'cart-clear-button', null, 'btn-light') }}
+        {{ buttons.submit('sylius.ui.clear_cart'|trans, null, 'btn-light', 'cart-clear-button') }}
     </form>
 </div>

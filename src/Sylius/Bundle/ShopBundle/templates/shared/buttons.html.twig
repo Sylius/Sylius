@@ -11,10 +11,14 @@
     </a>
 {% endmacro %}
 
-{% macro submit(message, id, icon, class) %}
+{% macro submit(message, icon, class, sylius_test_attribute_name, sylius_test_attribute_value) %}
     {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
-    <button type="submit" class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }}>
+    <button
+        type="submit"
+        class="btn {% if class is not empty %}{{ class }}{% endif %}"
+        {{ sylius_test_html_attribute(sylius_test_attribute_name|default('submit-button'), sylius_test_attribute_value|default('')) }}
+    >
         {% if icon is not empty %}
             {{ icon(icon) }}
         {% endif %}

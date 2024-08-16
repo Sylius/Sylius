@@ -19,7 +19,7 @@
             {% include '@SyliusShop/shared/form/address.html.twig' with {'form': form} %}
         </div>
         <div class="d-flex gap-2">
-            {{ buttons.submit('sylius.ui.add'|trans, 'add-address', null, 'btn-primary') }}
+            {{ buttons.submit('sylius.ui.add'|trans, null, 'btn-primary', 'add-address') }}
             {{ buttons.default(path('sylius_shop_account_address_book_index'), 'sylius.ui.cancel'|trans, null, null, 'btn-outline-gray') }}
         </div>
 
