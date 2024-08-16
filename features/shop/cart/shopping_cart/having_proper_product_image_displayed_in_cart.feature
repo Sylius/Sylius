@@ -12,13 +12,13 @@ Feature: Having proper product image displayed in the cart
         And this product has an image "lamborghini.jpg" with "main" type
         And this product has an image "ford.jpg" with "main" type for "Medium logo" variant
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Having a variant's image displayed in the cart
         When I add "Medium logo" variant of this product to the cart
         Then I should be on my cart summary page
         And 1st item in my cart should have "ford.jpg" image displayed
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Having a product's image displayed in the cart if variant does not have one
         When I add "Small logo" variant of this product to the cart
         Then I should be on my cart summary page
