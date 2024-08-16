@@ -21,7 +21,7 @@ Feature: Sorting listed products on multiple channels
         And this product's price in "Poland" channel is "$30.00"
         And this product's price in "Germany" channel is "$20.00"
 
-    @todo @api @ui
+    @api @ui
     Scenario: Sorting products by their prices with ascending order on channel Poland
         When I change my current channel to "Poland"
         And I browse products from taxon "Sylius merch"
@@ -29,7 +29,7 @@ Feature: Sorting listed products on multiple channels
         Then I should see 2 products in the list
         And the first product on the list should have name "Sylius Con shirt"
 
-    @todo @api @ui
+    @api @ui
     Scenario: Sorting products by their prices with descending order on channel Poland
         When I change my current channel to "Poland"
         And I browse products from taxon "Sylius merch"
@@ -37,7 +37,7 @@ Feature: Sorting listed products on multiple channels
         Then I should see 2 products in the list
         And the first product on the list should have name "Sylius Con stickers"
 
-    @todo @api @ui
+    @api @ui
     Scenario: Sorting products by their prices with ascending order on channel Germany
         When I change my current channel to "Germany"
         And I browse products from taxon "Sylius merch"
@@ -45,7 +45,7 @@ Feature: Sorting listed products on multiple channels
         Then I should see 2 products in the list
         And the first product on the list should have name "Sylius Con stickers"
 
-    @todo @api @ui
+    @api @ui
     Scenario: Sorting products by their prices with descending order on channel Germany
         When I change my current channel to "Germany"
         And I browse products from taxon "Sylius merch"

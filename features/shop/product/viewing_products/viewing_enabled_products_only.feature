@@ -2,17 +2,18 @@
 Feature: Viewing enabled products only
     In order to see only available products
     As a Customer
-    I want to see only enabled product variants
+    I want to see only enabled products
 
     Background:
         Given the store operates on a channel named "Web-US" in "USD" currency
-        And the store has a "Super Cool T-Shirt" product
-        And the store has a "PHP T-Shirt" product
-        And the store has a "Shiny T-Shirt" product
+        And the store classifies its products as "T-Shirts"
+        And the store has a product "Super Cool T-Shirt" priced at "$4.00" belonging to the "T-Shirts" taxon
+        And the store has a product "PHP T-Shirt" priced at "$13.00" belonging to the "T-Shirts" taxon
+        And the store has a product "Shiny T-Shirt" priced at "$2.00" belonging to the "T-Shirts" taxon
         And the "PHP T-Shirt" product is disabled
 
-    @todo @api
+    @api @ui
     Scenario: Seeing only enabled products
-        When I browse products
-        Then I should see only 2 products
-        And I should not see the product with name "PHP T-Shirt"
+        When I browse products from product taxon code "T-Shirts"
+        Then I should see 2 products in the list
+        And I should not see the product "PHP T-Shirt"

@@ -298,29 +298,29 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see :productName product discounted from :originalPrice to :price by :promotionLabel on the list
-     * @Then I should see :productName product discounted from :originalPrice to :price
+     * @Then I should see :product product discounted from :originalPrice to :price by :promotionLabel on the list
+     * @Then I should see :product product discounted from :originalPrice to :price
      */
     public function iShouldSeeProductDiscountedOnTheList(
-        string $productName,
+        ProductInterface $product,
         string $originalPrice,
         string $price,
         ?string $promotionLabel = null,
     ): void {
-        Assert::same($this->indexPage->getProductPrice($productName), $price);
-        Assert::same($this->indexPage->getProductOriginalPrice($productName), $originalPrice);
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $price);
+        Assert::same($this->indexPage->getProductOriginalPrice($product->getCode()), $originalPrice);
 
         if ($promotionLabel !== null) {
-            Assert::same($this->indexPage->getProductPromotionLabel($productName), $promotionLabel);
+            Assert::same($this->indexPage->getProductPromotionLabel($product->getName()), $promotionLabel);
         }
     }
 
     /**
-     * @Then I should see :productName product not discounted on the list
+     * @Then I should see :product product not discounted on the list
      */
-    public function iShouldSeeProductNotDiscountedOnTheList(string $productName): void
+    public function iShouldSeeProductNotDiscountedOnTheList(ProductInterface $product): void
     {
-        $originalPrice = $this->indexPage->getProductOriginalPrice($productName);
+        $originalPrice = $this->indexPage->getProductOriginalPrice($product->getCode());
 
         Assert::null($originalPrice);
     }
@@ -552,11 +552,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see the product :productName with price :productPrice
+     * @Then I should see the product :product with price :productPrice
      */
-    public function iShouldSeeTheProductWithPrice($productName, $productPrice): void
+    public function iShouldSeeTheProductWithPrice(ProductInterface $product, $productPrice): void
     {
-        Assert::same($this->indexPage->getProductPrice($productName), $productPrice);
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $productPrice);
     }
 
     /**
@@ -608,12 +608,12 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then the first product on the list should have name :name and price :price
+     * @Then the first product on the list should have name :product and price :price
      */
-    public function theFirstProductOnTheListShouldHaveNameAndPrice($name, $price): void
+    public function theFirstProductOnTheListShouldHaveNameAndPrice(ProductInterface $product, $price): void
     {
-        Assert::same($this->indexPage->getFirstProductNameFromList(), $name);
-        Assert::same($this->indexPage->getProductPrice($name), $price);
+        Assert::same($this->indexPage->getFirstProductNameFromList(), $product->getName());
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $price);
     }
 
     /**
@@ -625,12 +625,12 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then the last product on the list should have name :name and price :price
+     * @Then the last product on the list should have name :product and price :price
      */
-    public function theLastProductOnTheListShouldHaveNameAndPrice($name, $price): void
+    public function theLastProductOnTheListShouldHaveNameAndPrice(ProductInterface $product, $price): void
     {
-        Assert::same($this->indexPage->getLastProductNameFromList(), $name);
-        Assert::same($this->indexPage->getProductPrice($name), $price);
+        Assert::same($this->indexPage->getLastProductNameFromList(), $product->getName());
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $price);
     }
 
     /**
