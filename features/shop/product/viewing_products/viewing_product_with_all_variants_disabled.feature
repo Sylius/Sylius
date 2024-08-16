@@ -17,7 +17,7 @@ Feature: Viewing product with all variants disabled
         When I check this product's details
         Then I should see the product name "Super Cool T-Shirt"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing product with all variants disabled from taxon page
         When I browse products from taxon "T-Shirts"
         Then I should see the product "Super Cool T-Shirt"

@@ -1,4 +1,4 @@
-<div {{ sylius_test_html_attribute('product') }}>
+<div {{ sylius_test_html_attribute('product', '%s'|format(product.code)) }} >
     <a class="link-reset" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-content') }}>
         <div class="mb-4">
             <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">

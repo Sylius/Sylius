@@ -45,6 +45,10 @@ class ProductCardComponent
         $variant = $this->productVariantResolver->getVariant($this->product);
 
         if (null === $variant) {
+           $variant = $this->product->getVariants()->first();
+        }
+
+        if (null === $variant) {
             throw new \InvalidArgumentException('Product has no variants');
         }
 

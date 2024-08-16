@@ -36,7 +36,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getElement('products');
 
-        return $productsList->find('css', '[data-test-product]:first-child [data-test-product-content] [data-test-product-name]')->getText();
+        return $productsList->find('css', '[data-test-product]:first-child [data-test-product-name]')->getText();
     }
 
     public function getLastProductNameFromList(): string
@@ -78,16 +78,16 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return str_contains($this->getElement('validation_message')->getText(), 'There are no results to display');
     }
 
-    public function getProductPrice(string $productName): string
+    public function getProductPrice(string $productCode): string
     {
-        $element = $this->getElement('product_name', ['%productName%' => $productName]);
+        $element = $this->getElement('product', ['%productCode%' => $productCode]);
 
-        return $element->getParent()->find('css', '[data-test-product-price]')->getText();
+        return $element->find('css', '[data-test-product-price]')->getText();
     }
 
-    public function getProductOriginalPrice(string $productName): ?string
+    public function getProductOriginalPrice(string $productCode): ?string
     {
-        $element = $this->getElement('product_name', ['%productName%' => $productName]);
+        $element = $this->getElement('product', ['%productCode%' => $productCode]);
         $originalPriceElement = $element->getParent()->find('css', '[data-test-product-original-price]');
 
         return ($originalPriceElement !== null) ? $originalPriceElement->getText() : null;
@@ -125,6 +125,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'clear' => '[data-test-clear]',
             'product_name' => '[data-test-product-name="%productName%"]',
+            'product' => '[data-test-product=%productCode%]',
             'products' => '[data-test-products]',
             'search_button' => '[data-test-search]',
             'validation_message' => '[data-test-flash-message]',
