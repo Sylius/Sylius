@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -474,6 +475,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payment_configuration_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
+        $this->setCompositePaymentConfigurationProvider();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel/channel.yaml',
@@ -549,6 +551,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payment_configuration_of_order_created_by_a_guest_authenticated_as_a_guest(): void
     {
+        $this->setCompositePaymentConfigurationProvider();
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel/channel.yaml',
@@ -703,5 +706,17 @@ final class OrdersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_UNAUTHORIZED);
+    }
+
+    private function setCompositePaymentConfigurationProvider(): void
+    {
+        $configurationProvider = $this->createMock(CompositePaymentConfigurationProviderInterface::class);
+        $configurationProvider->method('provide')->willReturn([
+            'clientId' => 123,
+            'clientSecret' => 'secret',
+            'orderId' => 111,
+            'orderToken' => 'token',
+        ]);
+        self::getContainer()->set('Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider', $configurationProvider);
     }
 }

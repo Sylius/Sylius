@@ -1,1 +1,6 @@
-[]
+{
+    "clientId": 123,
+    "clientSecret": "secret",
+    "orderId": 111,
+    "orderToken": "token"
+}
