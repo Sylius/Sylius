@@ -1,0 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+{% set product_review = hookable_metadata.context.product_review %}
+{% set product = product_review.reviewSubject %}
+
+{{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'novalidate': 'novalidate'}}) }}
+{% hook 'form' %}
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
