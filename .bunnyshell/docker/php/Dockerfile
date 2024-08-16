@@ -100,7 +100,7 @@ COPY package.json package-*.json ./
 
 COPY --from=base /srv/sylius/src/Sylius/Bundle/UiBundle/Resources/private       src/Sylius/Bundle/UiBundle/Resources/private/
 COPY --from=base /srv/sylius/src/Sylius/Bundle/AdminBundle                      src/Sylius/Bundle/AdminBundle/
-COPY --from=base /srv/sylius/src/Sylius/Bundle/ShopBundle/Resources/private     src/Sylius/Bundle/ShopBundle/Resources/private/
+COPY --from=base /srv/sylius/src/Sylius/Bundle/ShopBundle                       src/Sylius/Bundle/ShopBundle/
 COPY --from=base /srv/sylius/vendor/symfony/ux-autocomplete/assets              vendor/symfony/ux-autocomplete/assets/
 COPY --from=base /srv/sylius/vendor/symfony/ux-live-component/assets            vendor/symfony/ux-live-component/assets/
 
