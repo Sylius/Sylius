@@ -636,7 +636,7 @@ final readonly class ManagingOrdersContext implements Context
     public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped(): void
     {
         $this->notificationChecker->checkNotification(
-            'Shipment has been successfully shipped.',
+            'Shipment has been successfully updated.',
             NotificationType::success(),
         );
     }

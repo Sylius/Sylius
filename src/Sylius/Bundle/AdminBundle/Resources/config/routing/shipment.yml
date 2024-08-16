@@ -25,7 +25,7 @@ sylius_admin_shipment_ship:
             state_machine:
                 graph: sylius_shipment
                 transition: ship
-            redirect: referer
+            redirect: sylius_admin_shipment_index
             flash: sylius.shipment.shipped
             form: Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType
 

@@ -28,7 +28,7 @@ sylius_admin_product_review_accept:
             state_machine:
                 graph: sylius_product_review
                 transition: accept
-            redirect: referer
+            redirect: sylius_admin_product_review_index
             flash: sylius.review.accept
 
 sylius_admin_product_review_reject:
@@ -41,5 +41,5 @@ sylius_admin_product_review_reject:
             state_machine:
                 graph: sylius_product_review
                 transition: reject
-            redirect: referer
+            redirect: sylius_admin_product_review_index
             flash: sylius.review.reject
