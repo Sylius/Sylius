@@ -25,9 +25,9 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 final class TranslationOrderLocaleExtensionTest extends TestCase
 {
-    private QueryNameGeneratorInterface&MockObject $queryNameGenerator;
+    private MockObject&QueryNameGeneratorInterface $queryNameGenerator;
 
-    private QueryBuilder&MockObject $queryBuilder;
+    private MockObject&QueryBuilder $queryBuilder;
 
     private EntityManagerInterface&MockObject $entityManager;
 
@@ -140,6 +140,7 @@ final class TranslationOrderLocaleExtensionTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider getLocaleCodeContexts
      */
     public function it_joins_on_a_specific_translation_when_locale_code_has_been_resolved_from_filters(
