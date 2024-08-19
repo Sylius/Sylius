@@ -1,5 +1,5 @@
-{% set default_address = hookable_metadata.context.default_address %}
+{% set address = hookable_metadata.context.address %}
 
-<div {{ sylius_test_html_attribute('address', "%s %s"|format(default_address.firstName, default_address.lastName)) }}>
+<div {{ sylius_test_html_attribute('address', "%s %s"|format(address.firstName, address.lastName)) }}>
     {% hook 'content' %}
 </div>

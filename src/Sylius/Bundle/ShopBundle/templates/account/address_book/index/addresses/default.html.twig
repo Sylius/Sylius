@@ -1,7 +1,9 @@
 {% if hookable_metadata.context.default_address is defined %}
+    {% set default_address = hookable_metadata.context.default_address %}
+
     <div class="card border-0 bg-body-tertiary mb-3">
         <div class="card-body" {{ sylius_test_html_attribute('default-address') }}>
-            {% hook 'default' %}
+            {% hook 'default' with { address: default_address } %}
         </div>
     </div>
 {% endif %}
