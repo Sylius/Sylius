@@ -30,9 +30,9 @@ twig_hooks:
 
         'sylius_shop.account.address_book.index.addresses.default.actions':
             edit:
-                template: '@SyliusShop/account/address_book/index/addresses/default/actions/edit.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/actions/edit.html.twig'
             delete:
-                template: '@SyliusShop/account/address_book/index/addresses/default/actions/delete.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/actions/delete.html.twig'
 
         'sylius_shop.account.address_book.index.addresses.list':
             address:
@@ -46,8 +46,8 @@ twig_hooks:
 
         'sylius_shop.account.address_book.index.addresses.list.address.actions':
             edit:
-                template: '@SyliusShop/account/address_book/index/addresses/list/address/actions/edit.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/actions/edit.html.twig'
             delete:
-                template: '@SyliusShop/account/address_book/index/addresses/list/address/actions/delete.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/actions/delete.html.twig'
             set_default:
                 template: '@SyliusShop/account/address_book/index/addresses/list/address/actions/set_default.html.twig'
