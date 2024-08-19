@@ -7,25 +7,29 @@ twig_hooks:
                 template: '@SyliusShop/checkout/select_shipping/form.html.twig'
                 
         'sylius_shop.checkout.select_shipping.form':
-            shipment:
-                template: '@SyliusShop/checkout/select_shipping/form/shipment.html.twig'
+            shipments:
+                template: '@SyliusShop/checkout/select_shipping/form/shipments.html.twig'
             navigation:
                 template: '@SyliusShop/checkout/select_shipping/form/navigation.html.twig'
                 
-        'sylius_shop.checkout.select_shipping.form.shipment':
+        'sylius_shop.checkout.select_shipping.form.shipments':
+            shipment:
+                template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment.html.twig'
+#                
+        'sylius_shop.checkout.select_shipping.form.shipments.shipment':
             header:
-                template: '@SyliusShop/checkout/select_shipping/form/shipment/header.html.twig'
+                template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/header.html.twig'
             choice:
-                template: '@SyliusShop/checkout/select_shipping/form/shipment/choice.html.twig'
-                
-        'sylius_shop.checkout.select_shipping.form.shipment.choice':
+                template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice.html.twig'
+
+        'sylius_shop.checkout.select_shipping.form.shipments.shipment.choice':
             details:
-                template: '@SyliusShop/checkout/select_shipping/form/shipment/choice/details.html.twig'
+                template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/details.html.twig'
             fee:
-                template: '@SyliusShop/checkout/select_shipping/form/shipment/choice/fee.html.twig'
-                
-        'sylius_shop.checkout.select_shipping.form.shipment.choice.details':
+                template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/fee.html.twig'
+
+        'sylius_shop.checkout.select_shipping.form.shipments.shipment.choice.details':
             name:
-                template: '@SyliusShop/checkout/select_shipping/form/shipment/choice/details/name.html.twig'
+                template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/details/name.html.twig'
             description:
-                template: '@SyliusShop/checkout/select_shipping/form/shipment/choice/details/description.html.twig'
+                template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/details/description.html.twig'
