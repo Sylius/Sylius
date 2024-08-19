@@ -101,9 +101,9 @@ final class ProductShowPriceComponent
 
         $variants = $product->getEnabledVariants();
 
-        /** @var ProductVariant $variant */
-        foreach ($variants as $variant) {
-            if ($product->getVariantSelectionMethod() === ProductInterface::VARIANT_SELECTION_CHOICE) {
+        if ($product->getVariantSelectionMethod() === ProductInterface::VARIANT_SELECTION_MATCH) {
+            /** @var ProductVariant $variant */
+            foreach ($variants as $variant) {
                 $values = $variant->getOptionValues();
 
                 foreach ($values as $value) {
@@ -111,7 +111,11 @@ final class ProductShowPriceComponent
                         return $variant;
                     }
                 }
-            } else {
+
+            }
+        } else {
+            /** @var ProductVariant $variant */
+            foreach ($variants as $variant) {
                 if ($variant->getCode() === $productVariantCode) {
                     return $variant;
                 }
