@@ -99,7 +99,6 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.context.currency" />
-            <argument type="service" id="sylius.repository.product_variant" />
 
             <tag
                 name="sylius.live_component"
@@ -116,7 +115,6 @@
             <argument type="service" id="sylius.factory.order_item" />
             <argument type="service" id="sylius.factory.add_to_cart_command" />
             <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument>Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType</argument>
 

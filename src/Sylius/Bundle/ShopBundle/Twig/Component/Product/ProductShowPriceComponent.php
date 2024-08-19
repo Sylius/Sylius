@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
@@ -7,9 +16,8 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -35,24 +43,14 @@ final class ProductShowPriceComponent
         private readonly ChannelContextInterface $channelContext,
         private readonly LocaleContextInterface $localeContext,
         private readonly CurrencyContextInterface $currencyContext,
-        private readonly ProductVariantRepositoryInterface $productVariantRepository,
-    ){
+    ) {
     }
 
     #[LiveListener('variantChanged')]
     public function updateProductVariant(
         #[LiveArg] string $productVariantCode,
-        #[LiveArg] string $productVariantSelectionMethod,
     ): void {
-
-        dd($productVariantCode, $productVariantSelectionMethod);
-
-        $selectedProductVariant = $this->productVariantRepository->findOneBy(['code' => $productVariantCode]);
-
-
-        if ($selectedProductVariant instanceof ProductVariantInterface) {
-            $this->productVariant = $selectedProductVariant;
-        }
+        $this->productVariant = $this->resolveProductVariant($productVariantCode);
     }
 
     #[ExposeInTemplate(name: 'has_discount')]
@@ -66,7 +64,7 @@ final class ProductShowPriceComponent
             >
             $this->productVariantPricesCalculator
                 ->calculate($this->productVariant, ['channel' => $channel])
-            ;
+        ;
     }
 
     #[ExposeInTemplate(name: 'price')]
@@ -94,5 +92,32 @@ final class ProductShowPriceComponent
             $this->currencyContext->getCurrencyCode(),
             $this->localeContext->getLocaleCode(),
         );
+    }
+
+    private function resolveProductVariant(string $productVariantCode): ProductVariant
+    {
+        /** @var ProductInterface $product */
+        $product = $this->productVariant->getProduct();
+
+        $variants = $product->getEnabledVariants();
+
+        /** @var ProductVariant $variant */
+        foreach ($variants as $variant) {
+            if ($product->getVariantSelectionMethod() === ProductInterface::VARIANT_SELECTION_CHOICE) {
+                $values = $variant->getOptionValues();
+
+                foreach ($values as $value) {
+                    if ($value->getCode() === $productVariantCode) {
+                        return $variant;
+                    }
+                }
+            } else {
+                if ($variant->getCode() === $productVariantCode) {
+                    return $variant;
+                }
+            }
+        }
+
+        throw new \InvalidArgumentException('Product variant with code "' . $productVariantCode . '" not found.');
     }
 }
