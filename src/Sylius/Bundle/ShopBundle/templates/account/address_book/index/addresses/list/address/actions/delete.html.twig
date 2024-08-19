@@ -1,5 +1,0 @@
-{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
-
-{% set address = hookable_metadata.context.address %}
-
-{{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': address.id}), null, true, address.id) }}
