@@ -13,20 +13,20 @@ Feature: Viewing different discounted price for different product variants
         And the product "Wyborowa Vodka" has "Wyborowa Pear" variant priced at "$30.00"
         And the "Wyborowa Pear" product variant has original price at "$20.00"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing a detailed page with default variant's price without discount
         When I view product "Wyborowa Vodka"
         Then the product price should be "$40.00"
         And I should not see any original price
 
-    @todo @ui @javascript @api
+    @api @ui @javascript
     Scenario: Viewing a detailed page with product's discount price for different variant
         When I view product "Wyborowa Vodka"
         And I select "Wyborowa Apple" variant
         Then the product variant price should be "$12.55"
         And the product original price should be "$20.00"
 
-    @todo @ui @javascript @no-api
+    @no-api @ui @javascript
     Scenario: Not seeing the discount when a variant's original price is lower than current price
         When I view product "Wyborowa Vodka"
         And I select "Wyborowa Pear" variant
