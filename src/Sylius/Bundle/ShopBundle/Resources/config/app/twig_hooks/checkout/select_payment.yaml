@@ -7,23 +7,27 @@ twig_hooks:
                 template: '@SyliusShop/checkout/select_payment/form.html.twig'
         
         'sylius_shop.checkout.select_payment.form':
-            payment:
-                template: '@SyliusShop/checkout/select_payment/form/payment.html.twig'
+            payments:
+                template: '@SyliusShop/checkout/select_payment/form/payments.html.twig'
             navigation:
                 template: '@SyliusShop/checkout/select_payment/form/navigation.html.twig'
         
-        'sylius_shop.checkout.select_payment.form.payment':
+        'sylius_shop.checkout.select_payment.form.payments':
+            payment:
+                template: '@SyliusShop/checkout/select_payment/form/payments/payment.html.twig'
+                
+        'sylius_shop.checkout.select_payment.form.payments.payment':
             header:
-                template: '@SyliusShop/checkout/select_payment/form/payment/header.html.twig'
+                template: '@SyliusShop/checkout/select_payment/form/payments/payment/header.html.twig'
             choice:
-                template: '@SyliusShop/checkout/select_payment/form/payment/choice.html.twig'
+                template: '@SyliusShop/checkout/select_payment/form/payments/payment/choice.html.twig'
         
-        'sylius_shop.checkout.select_payment.form.payment.choice':
+        'sylius_shop.checkout.select_payment.form.payments.payment.choice':
             details:
-                template: '@SyliusShop/checkout/select_payment/form/payment/choice/details.html.twig'
+                template: '@SyliusShop/checkout/select_payment/form/payments/payment/choice/details.html.twig'
         
-        'sylius_shop.checkout.select_payment.form.payment.choice.details':
+        'sylius_shop.checkout.select_payment.form.payments.payment.choice.details':
             name:
-                template: '@SyliusShop/checkout/select_payment/form/payment/choice/details/name.html.twig'
+                template: '@SyliusShop/checkout/select_payment/form/payments/payment/choice/details/name.html.twig'
             description:
-                template: '@SyliusShop/checkout/select_payment/form/payment/choice/details/description.html.twig'
+                template: '@SyliusShop/checkout/select_payment/form/payments/payment/choice/details/description.html.twig'
