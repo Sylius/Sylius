@@ -92,7 +92,7 @@ interface ShowPageInterface extends PageInterface
 
     public function getVariantsNames(): array;
 
-    public function getOptionValues(string $optionName): array;
+    public function getOptionValues(string $optionCode): array;
 
     public function getDescription(): string;
 

@@ -98,7 +98,6 @@ final class ProductShowPriceComponent
     {
         /** @var ProductInterface $product */
         $product = $this->productVariant->getProduct();
-
         $variants = $product->getEnabledVariants();
 
         if ($product->getVariantSelectionMethod() === ProductInterface::VARIANT_SELECTION_MATCH) {
