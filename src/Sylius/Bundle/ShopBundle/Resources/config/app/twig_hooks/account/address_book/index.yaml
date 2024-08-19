@@ -21,18 +21,18 @@ twig_hooks:
                 template: '@SyliusShop/account/address_book/index/addresses/default/badge.html.twig'
             content:
                 template: '@SyliusShop/account/address_book/index/addresses/default/content.html.twig'
+            actions:
+                template: '@SyliusShop/account/address_book/index/addresses/default/actions.html.twig'
 
         'sylius_shop.account.address_book.index.addresses.default.content':
             address:
                 template: '@SyliusShop/account/address_book/index/addresses/default/content/address.html.twig'
-            actions:
-                template: '@SyliusShop/account/address_book/index/addresses/default/content/actions.html.twig'
 
-        'sylius_shop.account.address_book.index.addresses.default.content.actions':
+        'sylius_shop.account.address_book.index.addresses.default.actions':
             edit:
-                template: '@SyliusShop/account/address_book/index/addresses/default/content/actions/edit.html.twig'
+                template: '@SyliusShop/account/address_book/index/addresses/default/actions/edit.html.twig'
             delete:
-                template: '@SyliusShop/account/address_book/index/addresses/default/content/actions/delete.html.twig'
+                template: '@SyliusShop/account/address_book/index/addresses/default/actions/delete.html.twig'
 
         'sylius_shop.account.address_book.index.addresses.list':
             address:
