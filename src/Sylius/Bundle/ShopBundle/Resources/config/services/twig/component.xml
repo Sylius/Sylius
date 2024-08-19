@@ -90,6 +90,20 @@
             />
         </service>
 
+
+        <service
+            id="sylius_shop.twig.component.product_summary"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\ProductSummaryComponent"
+        >
+            <argument type="service" id="sylius.product_variant_resolver.default" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:product:show_summary"
+                template="@SyliusShop/product/show/page/info/summary.html.twig"
+            />
+        </service>
+
         <service
             id="sylius_shop.twig.component.product_show_price"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Product\ProductShowPriceComponent"

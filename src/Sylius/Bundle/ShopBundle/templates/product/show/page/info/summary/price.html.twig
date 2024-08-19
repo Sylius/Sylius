@@ -1,9 +1,11 @@
-{% set variant = hookable_metadata.context.product|sylius_resolve_variant %}
+{% set variant = hookable_metadata.context.variant|default(null) %}
 
 {% if variant is not null %}
     {% set has_discount = variant|sylius_has_discount({'channel': sylius.channel}) %}
     {% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
     {% set has_lowest_price = variant|sylius_has_lowest_price({'channel': sylius.channel}) %}
+
+    <span data-loading>Loading</span>
 
     <div class="mb-3 pb-1">
         {% hook 'price' with { variant, has_discount, has_lowest_price, days } %}

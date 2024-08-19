@@ -34,7 +34,7 @@ final class ProductShowPriceComponent
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp]
+    #[LiveProp(updateFromParent: true)]
     public ProductVariant $productVariant;
 
     public function __construct(
@@ -44,13 +44,6 @@ final class ProductShowPriceComponent
         private readonly LocaleContextInterface $localeContext,
         private readonly CurrencyContextInterface $currencyContext,
     ) {
-    }
-
-    #[LiveListener('variantChanged')]
-    public function updateProductVariant(
-        #[LiveArg] string $productVariantCode,
-    ): void {
-        $this->productVariant = $this->resolveProductVariant($productVariantCode);
     }
 
     #[ExposeInTemplate(name: 'has_discount')]
@@ -92,35 +85,5 @@ final class ProductShowPriceComponent
             $this->currencyContext->getCurrencyCode(),
             $this->localeContext->getLocaleCode(),
         );
-    }
-
-    private function resolveProductVariant(string $productVariantCode): ProductVariant
-    {
-        /** @var ProductInterface $product */
-        $product = $this->productVariant->getProduct();
-        $variants = $product->getEnabledVariants();
-
-        if ($product->getVariantSelectionMethod() === ProductInterface::VARIANT_SELECTION_MATCH) {
-            /** @var ProductVariant $variant */
-            foreach ($variants as $variant) {
-                $values = $variant->getOptionValues();
-
-                foreach ($values as $value) {
-                    if ($value->getCode() === $productVariantCode) {
-                        return $variant;
-                    }
-                }
-
-            }
-        } else {
-            /** @var ProductVariant $variant */
-            foreach ($variants as $variant) {
-                if ($variant->getCode() === $productVariantCode) {
-                    return $variant;
-                }
-            }
-        }
-
-        throw new \InvalidArgumentException('Product variant with code "' . $productVariantCode . '" not found.');
     }
 }
