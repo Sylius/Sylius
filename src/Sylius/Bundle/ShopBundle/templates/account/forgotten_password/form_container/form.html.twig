@@ -1,0 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+
+<div>
+    {{ form_start(form, {'action': path('sylius_shop_request_password_reset_token'), 'attr': {'novalidate': 'novalidate'}}) }}
+    {% hook 'form' %}
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
