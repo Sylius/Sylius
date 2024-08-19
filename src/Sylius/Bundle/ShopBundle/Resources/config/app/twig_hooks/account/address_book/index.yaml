@@ -20,19 +20,15 @@ twig_hooks:
             badge:
                 template: '@SyliusShop/account/address_book/index/addresses/default/badge.html.twig'
             content:
-                template: '@SyliusShop/account/address_book/index/addresses/default/content.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/content.html.twig'
             actions:
-                template: '@SyliusShop/account/address_book/index/addresses/default/actions.html.twig'
-
-        'sylius_shop.account.address_book.index.addresses.default.content':
-            address:
-                template: '@SyliusShop/account/address_book/index/addresses/default/content/address.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/actions.html.twig'
 
         'sylius_shop.account.address_book.index.addresses.default.actions':
             edit:
-                template: '@SyliusShop/shared/account/address_book/index/actions/edit.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/actions/edit.html.twig'
             delete:
-                template: '@SyliusShop/shared/account/address_book/index/actions/delete.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/actions/delete.html.twig'
 
         'sylius_shop.account.address_book.index.addresses.list':
             address:
@@ -40,14 +36,14 @@ twig_hooks:
 
         'sylius_shop.account.address_book.index.addresses.list.address':
             content:
-                template: '@SyliusShop/account/address_book/index/addresses/list/address/content.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/content.html.twig'
             actions:
-                template: '@SyliusShop/account/address_book/index/addresses/list/address/actions.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/actions.html.twig'
 
         'sylius_shop.account.address_book.index.addresses.list.address.actions':
             edit:
-                template: '@SyliusShop/shared/account/address_book/index/actions/edit.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/actions/edit.html.twig'
             delete:
-                template: '@SyliusShop/shared/account/address_book/index/actions/delete.html.twig'
+                template: '@SyliusShop/shared/account/address_book/index/address/actions/delete.html.twig'
             set_default:
                 template: '@SyliusShop/account/address_book/index/addresses/list/address/actions/set_default.html.twig'
