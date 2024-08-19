@@ -1179,7 +1179,7 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->customItemAction(
             Resources::ORDERS,
             $this->sharedStorage->get('order')->getTokenValue(),
-            HttpRequest::METHOD_PATCH,
+            HttpRequest::METHOD_POST,
             'resend-confirmation-email',
         );
 

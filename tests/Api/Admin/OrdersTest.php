@@ -224,9 +224,9 @@ final class OrdersTest extends JsonApiTestCase
         $this->placeOrder($tokenValue);
 
         $this->client->request(
-            method: 'Patch',
+            method: 'POST',
             uri: sprintf('/api/v2/admin/orders/%s/resend-confirmation-email', $tokenValue),
-            server: $this->buildHeadersWithMergePatchJson('api@example.com'),
+            server: $this->buildHeadersWithJsonLd('api@example.com'),
             content: json_encode([]),
         );
 
@@ -252,9 +252,9 @@ final class OrdersTest extends JsonApiTestCase
         $this->cancelOrder($tokenValue);
 
         $this->client->request(
-            method: 'PATCH',
+            method: 'POST',
             uri: sprintf('/api/v2/admin/orders/%s/resend-confirmation-email', $tokenValue),
-            server: $this->buildHeadersWithMergePatchJson('api@example.com'),
+            server: $this->buildHeadersWithJsonLd('api@example.com'),
             content: json_encode([]),
         );
 
@@ -348,14 +348,14 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @return array<string, string> */
-    private function buildHeadersWithMergePatchJson(string $adminEmail): array
+    private function buildHeadersWithJsonLd(string $adminEmail): array
     {
         return $this
             ->headerBuilder()
-            ->withMergePatchJsonContentType()
+            ->withJsonLdContentType()
             ->withJsonLdAccept()
             ->withAdminUserAuthorization($adminEmail)
             ->build()
-        ;
+            ;
     }
 }

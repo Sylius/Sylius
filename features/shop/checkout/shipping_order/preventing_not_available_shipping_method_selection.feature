@@ -88,7 +88,7 @@ Feature: Preventing not available shipping method selection
         Then I should not be able to select "Dragon Post" shipping method
 
     @api @no-ui
-    Scenario: Not being able to select inexistent shipping method
+    Scenario: Not being able to select nonexistent shipping method
         Given the store has "Raven Post" shipping method with "$10.00" fee
         And I have product "Targaryen T-Shirt" in the cart
         And I am at the checkout addressing step

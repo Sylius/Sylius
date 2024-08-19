@@ -35,7 +35,7 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_orders(): void
+    public function it_gets_only_logged_in_user_orders_excluding_guest_and_other_users_orders(): void
     {
         $this->loadFixturesFromFiles([
             'channel/channel.yaml',

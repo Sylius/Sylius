@@ -28,7 +28,7 @@ Feature: Paying Offline during checkout as guest
         Then I should see the thank you page in "French (France)"
 
     @api @no-ui
-    Scenario: Successfully placing an order using custom locale2
+    Scenario: Successfully placing an order using the selected custom locale during cart pickup
         Given I pick up cart in the "French (France)" locale
         And I add product "PHP T-Shirt" to the cart
         When I proceed through checkout process

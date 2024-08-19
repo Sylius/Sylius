@@ -55,7 +55,7 @@ final readonly class CheckoutContext implements Context
 
         $cart->setLocaleCode($localeCode);
 
-        $command = new UpdateCart($email, $this->getDefaultAddress(), orderTokenValue: $cartToken);
+        $command = new UpdateCart(email: $email, billingAddress: $this->getDefaultAddress(), orderTokenValue: $cartToken);
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
@@ -72,7 +72,7 @@ final readonly class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
-        $command = new UpdateCart(null, $this->getDefaultAddress(), orderTokenValue: $cartToken);
+        $command = new UpdateCart(email: null, billingAddress: $this->getDefaultAddress(), orderTokenValue: $cartToken);
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
@@ -85,7 +85,7 @@ final readonly class CheckoutContext implements Context
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
-        $command = new UpdateCart(null, $this->getDefaultAddress(), orderTokenValue: $cartToken);
+        $command = new UpdateCart(email: null, billingAddress: $this->getDefaultAddress(), orderTokenValue: $cartToken);
         $this->commandBus->dispatch($command);
     }
 
