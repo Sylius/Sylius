@@ -24,10 +24,10 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final readonly class StateBasedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    /** @param array<string> $nonFilteredCartAllowedOperations */
+    /** @param array<string> $cartAllowedOperations */
     public function __construct(
         private SectionProviderInterface $sectionProvider,
-        private array $nonFilteredCartAllowedOperations = [],
+        private array $cartAllowedOperations = [],
     ) {
     }
 
@@ -78,7 +78,7 @@ final readonly class StateBasedExtension implements QueryCollectionExtensionInte
             return;
         }
 
-        if (in_array($operation->getName(), $this->nonFilteredCartAllowedOperations, true)) {
+        if (in_array($operation->getName(), $this->cartAllowedOperations, true)) {
             return;
         }
 

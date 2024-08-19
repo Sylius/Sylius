@@ -62,7 +62,7 @@
 <!--            <argument type="service" id="sylius.context.channel" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
+        <service id="sylius_api.listener.api_cart_blamer" class="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="sylius.command_bus" />

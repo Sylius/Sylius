@@ -56,7 +56,7 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Patch"
+                class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/orders/{tokenValue}/resend-confirmation-email"
                 messenger="input"
                 input="Sylius\Bundle\ApiBundle\Command\ResendOrderConfirmationEmail"

@@ -152,13 +152,13 @@ final readonly class CartContext implements Context
             }
         }
 
-        $commandPickupCart = new PickupCart(
+        $pickupCart = new PickupCart(
             tokenValue: $tokenValue,
             channelCode: $channelCode,
             email: $email ?? null,
         );
 
-        $this->commandBus->dispatch($commandPickupCart);
+        $this->commandBus->dispatch($pickupCart);
 
         $this->sharedStorage->set('cart_token', $tokenValue);
 

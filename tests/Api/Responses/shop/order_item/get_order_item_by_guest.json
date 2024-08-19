@@ -5,7 +5,7 @@
     "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
     "productName": "Mug",
     "id": "@integer@",
-    "order": "\/api\/v2\/shop\/orders\/@string@",
+    "order": "\/api\/v2\/shop\/orders\/token",
     "quantity": 3,
     "unitPrice": 2000,
     "originalUnitPrice": 2000,
