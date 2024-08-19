@@ -1,4 +1,5 @@
-{% set variant = hookable_metadata.context.product|sylius_resolve_variant %}
+{% set variant = hookable_metadata.context.variant|default(null) %}
+
 {% set applied_promotions = hookable_metadata.context.appliedPromotions|default({}) %}
 {% set with_description = hookable_metadata.context.withDescription|default({}) %}
 

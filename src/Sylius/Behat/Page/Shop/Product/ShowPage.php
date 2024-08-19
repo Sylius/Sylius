@@ -279,6 +279,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
         $optionElement->selectOption($optionValue);
+        $this->waitForCartSummary();
     }
 
     public function selectVariant(string $variantName): void

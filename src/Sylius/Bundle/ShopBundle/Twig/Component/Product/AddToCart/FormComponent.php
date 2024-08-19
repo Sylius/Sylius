@@ -64,7 +64,12 @@ final class FormComponent
     #[LiveAction]
     public function variantChanged(): void
     {
-        $selectedVariantCode = array_values($this->formValues['cartItem']['variant'])[0];
+        if (is_array($this->formValues['cartItem']['variant'])) {
+            $selectedVariantCode = array_values($this->formValues['cartItem']['variant'])[0];
+        } else {
+            $selectedVariantCode = $this->formValues['cartItem']['variant'];
+        }
+
         $this->emit('variantChanged', ['productVariantCode' => $selectedVariantCode]);
     }
 

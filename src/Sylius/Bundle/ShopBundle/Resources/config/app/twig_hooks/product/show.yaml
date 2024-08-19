@@ -14,7 +14,9 @@ twig_hooks:
 
         'sylius_shop.product.show.page.info':
             summary:
-                template: '@SyliusShop/product/show/page/info/summary.html.twig'
+                component: 'sylius_shop:product:show_summary'
+                props:
+                    product: '@=_context.product'
             overview:
                 template: '@SyliusShop/product/show/page/info/overview.html.twig'
 
@@ -36,7 +38,7 @@ twig_hooks:
                 props:
                     productVariant: '@=_context.variant'
             discount:
-                template: "@SyliusShop/product/show/page/info/summary/price/discount.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/price/lowest_price_before_discount.html.twig"
 
         'sylius_shop.product.show.page.info.summary.variant_selection':
             configurable_product:
