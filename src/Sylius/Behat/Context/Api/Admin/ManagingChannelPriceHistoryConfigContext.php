@@ -178,7 +178,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         Assert::false($this->isResourceAdminIriInArray($taxon, $excludedTaxons));
     }
 
-    private function getChannelPricingFieldFromLastResponse(string $field, ?array $default = null): bool|int|string|array|null
+    private function getChannelPricingFieldFromLastResponse(string $field, ?array $default = null): array|bool|int|string|null
     {
         return $this->responseChecker->getValue(
             $this->client->getLastResponse(),

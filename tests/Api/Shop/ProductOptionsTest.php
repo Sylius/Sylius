@@ -26,6 +26,6 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $this->requestGet('/api/v2/shop/product-options/COLOR');
 
-        $this->assertResponseSuccessful( 'shop/product_option/get_product_option');
+        $this->assertResponseSuccessful('shop/product_option/get_product_option');
     }
 }

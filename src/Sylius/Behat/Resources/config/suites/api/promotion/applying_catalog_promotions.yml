@@ -24,14 +24,14 @@ default:
                 - sylius.behat.context.transform.taxon
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
+                - sylius.behat.context.api.admin.creating_product_variant
                 - sylius.behat.context.api.admin.managing_catalog_promotions
+                - sylius.behat.context.api.admin.managing_product_taxons
+                - sylius.behat.context.api.admin.managing_product_variants_prices
                 - sylius.behat.context.api.admin.save
                 - sylius.behat.context.api.shop.login
                 - sylius.behat.context.api.shop.product
                 - sylius.behat.context.api.shop.product_variant
-                - Sylius\Behat\Context\Api\Admin\CreatingProductVariantContext
-                - Sylius\Behat\Context\Api\Admin\ManagingProductVariantsPricesContext
-                - Sylius\Behat\Context\Api\Admin\ManagingProductTaxonsContext
 
             filters:
                 tags: "@applying_catalog_promotions&&@api"

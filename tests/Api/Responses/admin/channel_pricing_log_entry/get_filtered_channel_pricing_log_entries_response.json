@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/admin\/channel-pricing-log-entries\/@integer@",
             "@type": "ChannelPricingLogEntry",
-            "channelPricing": "\/api\/v2\/admin\/channel-pricings\/@integer@",
+            "channelPricing": "\/api\/v2\/admin\/product-variants\/@string@\/channel-pricings\/@string@",
             "price": 1000,
             "originalPrice": 2000,
             "loggedAt": "@date@"
