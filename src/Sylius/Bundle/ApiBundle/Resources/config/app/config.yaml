@@ -66,7 +66,6 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
         Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException: 422
-        Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
