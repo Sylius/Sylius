@@ -49,7 +49,7 @@ final class ProductSummaryComponent
         $this->variant = $variant;
     }
 
-    #[LiveListener('variantChanged')]
+    #[LiveListener('sylius:shop:variant_changed')]
     public function updateProductVariant(
         #[LiveArg] mixed $productVariantCode,
     ): void {
