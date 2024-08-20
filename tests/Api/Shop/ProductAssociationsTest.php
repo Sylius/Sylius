@@ -19,6 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAssociationsTest extends JsonApiTestCase
 {
+    protected function setUp(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        parent::setUp();
+    }
+
     /** @test */
     public function it_gets_product_association(): void
     {
@@ -26,16 +33,12 @@ final class ProductAssociationsTest extends JsonApiTestCase
 
         /** @var ProductAssociationInterface $association */
         $association = $fixtures['product_association'];
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-associations/%s', $association->getId()),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+
+        $this->requestGet(sprintf('/api/v2/shop/product-associations/%s', $association->getId()));
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product_association/get_product_association_response',
-            Response::HTTP_OK,
         );
     }
 
@@ -44,14 +47,9 @@ final class ProductAssociationsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-associations/%s', 'wrong input'),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+        $this->requestGet(sprintf('/api/v2/shop/product-associations/%s', 'wrong_id'));
 
         $response = $this->client->getResponse();
-
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 }
