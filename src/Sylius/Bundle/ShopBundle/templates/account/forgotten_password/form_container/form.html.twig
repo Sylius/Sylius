@@ -1,5 +1,7 @@
 {% set form = hookable_metadata.context.form %}
 
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
 <div>
     {{ form_start(form, {'action': path('sylius_shop_request_password_reset_token'), 'attr': {'novalidate': 'novalidate'}}) }}
     {% hook 'form' %}
