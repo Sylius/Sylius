@@ -19,19 +19,19 @@ use ApiPlatform\State\ProcessorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-/** @implements ProcessorInterface<PaymentMethodInterface> */
+/** @implements ProcessorInterface<PaymentMethodInterface, void> */
 final readonly class RemoveProcessor implements ProcessorInterface
 {
+    /** @param ProcessorInterface<PaymentMethodInterface, void> $removeProcessor */
     public function __construct(
         private ProcessorInterface $removeProcessor,
     ) {
     }
 
     /**
-     * @param ProductInterface $data
+     * @param PaymentMethodInterface $data
      */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): void
     {

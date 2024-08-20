@@ -11,27 +11,26 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\DataPersister;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Common;
 
-use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProcessorInterface;
 use Symfony\Component\Messenger\Exception\DelayedMessageHandlingException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
-final class MessengerDataPersister implements ContextAwareDataPersisterInterface
+/** @implements ProcessorInterface<object, mixed> */
+final readonly class MessengerPersistProcessor implements ProcessorInterface
 {
-    public function __construct(private ContextAwareDataPersisterInterface $decoratedDataPersister)
+    /** @param ProcessorInterface<object, mixed> $decoratedProcessor */
+    public function __construct(private ProcessorInterface $decoratedProcessor)
     {
     }
 
-    public function supports($data, array $context = []): bool
-    {
-        return $this->decoratedDataPersister->supports($data, $context);
-    }
-
-    public function persist($data, array $context = [])
+    /** @throws \Throwable */
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         try {
-            return $this->decoratedDataPersister->persist($data, $context);
+            return $this->decoratedProcessor->process($data, $operation, $uriVariables, $context);
         } catch (DelayedMessageHandlingException|HandlerFailedException $e) {
             while ($e instanceof DelayedMessageHandlingException) {
                 /** @var \Throwable $e */
@@ -44,10 +43,5 @@ final class MessengerDataPersister implements ContextAwareDataPersisterInterface
 
             throw $e;
         }
-    }
-
-    public function remove($data, array $context = [])
-    {
-        $this->decoratedDataPersister->remove($data, $context);
     }
 }
