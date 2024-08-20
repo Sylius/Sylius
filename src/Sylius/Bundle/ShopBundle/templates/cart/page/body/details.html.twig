@@ -5,6 +5,6 @@
     {{ form_errors(form) }}
     <input type="hidden" name="_method" value="PATCH"/>
     {{ form_row(form._token) }}
-    {% hook 'details' %}
     {{ form_end(form, {'render_rest': false}) }}
+    {% hook 'details' %}
 </div>
