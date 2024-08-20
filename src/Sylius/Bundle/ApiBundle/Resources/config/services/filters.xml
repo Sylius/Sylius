@@ -138,7 +138,14 @@
 <!--            <tag name="api_platform.filter" />-->
 <!--        </service>-->
 
-        <service id="sylius.api.product_variant_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
+        <service id="sylius_api.search_filter.admin.product_variant" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="product">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.search_filter.shop.product_variant" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="product">exact</argument>
             </argument>
@@ -274,13 +281,13 @@
             <tag name="api_platform.filter" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter" public="true">-->
-<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
-<!--            <argument type="service" id="doctrine" />-->
-<!--            <tag name="api_platform.filter" />-->
-<!--        </service>-->
+        <service id="sylius_api.search_filter.shop.product_variant_option_value" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter" public="true">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter" public="true">
+        <service id="sylius_api.search_filter.admin.product_variant_catalog_promotion" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter" public="true">
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
@@ -418,7 +425,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.product_variant_position_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
+        <service id="sylius_api.order_filter.admin.product_variant" parent="api_platform.doctrine.orm.order_filter" public="true">
             <argument type="collection">
                 <argument key="position" />
             </argument>
