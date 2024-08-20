@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
@@ -314,20 +315,14 @@ final class ProductVariantContext implements Context
         $variant = $variants[$position - 1];
         Assert::same($variant['price'], $price);
 
-        foreach ($variant['optionValues'] as $optionValue) {
-            $optionValueData = $this->fetchItemByIri($optionValue);
-            $optionData = $this->fetchItemByIri($optionValueData['option']);
-
-            if ($optionData['name'] === $expectedOptionName && $optionValueData['value'] === $expectedOptionValueValue) {
-                return;
-            }
-        }
-
-        throw new \InvalidArgumentException(sprintf(
-            'There is no variant with "%s" option and "%s" option value',
-            $expectedOptionName,
-            $expectedOptionValueValue,
-        ));
+        Assert::true(
+            $this->isOptionValueInVariant(
+                $variant['optionValues'],
+                $expectedOptionName,
+                $expectedOptionValueValue
+            ),
+            sprintf('There is no variant with "%s" option value', $expectedOptionValueValue),
+        );
     }
 
     /**
@@ -338,15 +333,14 @@ final class ProductVariantContext implements Context
         $variants = $this->sharedStorage->get('product_variant_collection');
 
         foreach ($variants as $variant) {
-            foreach ($variant['optionValues'] as $optionValueIri) {
-                $optionValueData = $this->fetchItemByIri($optionValueIri);
-                $optionData = $this->fetchItemByIri($optionValueData['option']);
-
-                Assert::false(
-                    $optionData['name'] === $expectedOptionName &&
-                    $optionValueData['value'] === $expectedOptionValueValue,
-                );
-            }
+            Assert::false(
+                $this->isOptionValueInVariant(
+                    $variant['optionValues'],
+                    $expectedOptionName,
+                    $expectedOptionValueValue
+                ),
+                sprintf('There is a variant with "%s" option value', $expectedOptionValueValue),
+            );
         }
     }
 
@@ -374,8 +368,19 @@ final class ProductVariantContext implements Context
         return $this->responseChecker->getResponseContent($response);
     }
 
-    private function fetchItemByIri(string $iri): array
+    private function isOptionValueInVariant(array $optionValueIris, string $expectedOptionName, string $expectedOptionValueValue): bool
     {
-        return $this->responseChecker->getResponseContent($this->client->showByIri($iri));
+        foreach ($optionValueIris as $optionValueIri) {
+            $parts = explode('/', $optionValueIri);
+            $productOptionCode = $parts[5];
+            $productOptionValueCode = $parts[7];
+
+            if (StringInflector::nameToUppercaseCode($expectedOptionName) == StringInflector::nameToUppercaseCode($productOptionCode)) {
+
+                return StringInflector::nameToUppercaseCode($productOptionValueCode) == StringInflector::nameToUppercaseCode($expectedOptionValueValue);
+            }
+        }
+
+        return false;
     }
 }

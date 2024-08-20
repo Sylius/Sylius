@@ -7,7 +7,7 @@
     "optionValues": [],
     "channelPricings": {
         "WEB": {
-            "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-variants\/MUG_3\/channel-pricings\/WEB",
             "@type": "ChannelPricing",
             "price": 4000,
             "originalPrice": null,
@@ -18,9 +18,8 @@
     },
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-variants\/MUG_3\/translations\/en_US",
             "@type": "ProductVariantTranslation",
-            "id": "@integer@",
             "name": null
         }
     },

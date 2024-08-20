@@ -39,16 +39,16 @@ imports:
     - api/product/managing_product_attributes.yml
     - api/product/managing_product_options.yml
     - api/product/managing_product_reviews.yml
-#    - api/product/managing_product_variants.yml
-#    - api/product/managing_product_variants_ajax.yml
+    - api/product/managing_product_variants.yml
+    - api/product/managing_product_variants_ajax.yml
     - api/product/managing_products.yml
     - api/product/viewing_price_history.yml
     - api/product/viewing_price_history_after_catalog_promotions.yml
     - api/product/viewing_product_in_admin_panel.yaml
     - api/product/viewing_product_reviews.yml
-#    - api/product/viewing_product_variants.yml
+    - api/product/viewing_product_variants.yml
     - api/product/viewing_products.yml
-#    - api/promotion/applying_catalog_promotions.yml TODO: Enable after making product and product variant resources available in API
+    - api/promotion/applying_catalog_promotions.yml
 #    - api/promotion/applying_promotion_coupon.yml
 #    - api/promotion/applying_promotion_rules.yml
     - api/promotion/managing_catalog_promotions.yml

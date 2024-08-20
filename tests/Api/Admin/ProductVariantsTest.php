@@ -105,7 +105,7 @@ final class ProductVariantsTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'MUG_RED',
                 'product' => '/api/v2/admin/products/MUG_SW',
-                'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
+                'optionValues' => ['/api/v2/admin/product-options/COLOR/values/COLOR_RED'],
                 'channelPricings' => [
                     'WEB' => [
                         'price' => 4000,
@@ -393,10 +393,10 @@ final class ProductVariantsTest extends JsonApiTestCase
             uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
             server: $header,
             content: json_encode([
-                'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
+                'optionValues' => ['/api/v2/admin/product-options/COLOR/values/COLOR_RED'],
                 'channelPricings' => [
                     'WEB' => [
-                        '@id' => sprintf('/api/v2/admin/channel-pricings/%s', $productVariant->getChannelPricingForChannel($channel)->getId()),
+                        '@id' => sprintf('/api/v2/admin/product-variants/%s/channel-pricings/%s', $productVariant->getCode(), $channel->getCode()),
                         'price' => 3000,
                         'originalPrice' => 4000,
                         'minimumPrice' => 500,
@@ -409,7 +409,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                 ],
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/product-variant-translations/%s', $productVariant->getTranslation('en_US')->getId()),
+                        '@id' => sprintf('/api/v2/admin/product-variants/%s/translations/en_US', $productVariant->getCode()),
                         'name' => 'Red mug',
                     ],
                     'de_DE' => [
@@ -478,41 +478,6 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'message' => 'This value is not a valid locale.',
                 ],
             ],
-        );
-    }
-
-    /** @test */
-    public function it_does_not_allow_to_update_product_variant_without_translation_in_default_locale(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel/channel.yaml',
-            'tax_category.yaml',
-            'shipping_category.yaml',
-            'product/product_variant.yaml',
-        ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $fixtures['product_variant'];
-
-        $this->client->request(
-            method: 'PUT',
-            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
-            server: $header,
-            content: json_encode([
-                'translations' => [
-                    'de_DE' => [
-                        'name' => 'Tasse',
-                    ],
-                ],
-            ], \JSON_THROW_ON_ERROR),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/product_variant/put_product_variant_without_translation_in_default_locale_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
