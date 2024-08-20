@@ -36,14 +36,14 @@ final class ProductSummaryComponent
     public ?ProductVariant $variant = null;
 
     public function __construct(
-        private readonly ProductVariantResolverInterface $productVariantResolver
+        private readonly ProductVariantResolverInterface $productVariantResolver,
     ) {
     }
 
     #[PostMount]
     public function postMount(): void
     {
-        /** @var ProductVariant|null $variant **/
+        /** @var ProductVariant|null $variant * */
         $variant = $this->productVariantResolver->getVariant($this->product);
 
         $this->variant = $variant;
@@ -79,6 +79,7 @@ final class ProductSummaryComponent
                 foreach ($productVariantCode as $optionCode => $optionValueCode) {
                     if (!isset($variantOptionValues[$optionCode]) || $variantOptionValues[$optionCode] !== $optionValueCode) {
                         $matches = false;
+
                         break;
                     }
                 }
@@ -98,5 +99,4 @@ final class ProductSummaryComponent
 
         return null;
     }
-
 }

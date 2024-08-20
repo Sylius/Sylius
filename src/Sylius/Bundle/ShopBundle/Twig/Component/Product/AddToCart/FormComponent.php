@@ -51,7 +51,6 @@ final class FormComponent
      * @param class-string $formClass
      * @param FactoryInterface<OrderItem> $orderItemFactory
      */
-
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
         private readonly FactoryInterface $orderItemFactory,
@@ -79,7 +78,8 @@ final class FormComponent
         return $this->formFactory->create($this->formClass, $addToCartCommand, ['product' => $this->product]);
     }
 
-    private function extractFormValues(FormView $formView): array
+    /** @return array<array-key, string> */
+    protected function extractFormValues(FormView $formView): array
     {
         $values = [];
 
