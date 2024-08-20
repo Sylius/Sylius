@@ -63,6 +63,11 @@
             <tag name="api_platform.state_processor" />
         </service>
 
+        <service id="sylius_api.state_processor.admin.product_variant.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductVariant\RemoveProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
         <service id="sylius_api.state_processor.admin.product_attribute.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductAttribute\RemoveProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
             <tag name="api_platform.state_processor" />
