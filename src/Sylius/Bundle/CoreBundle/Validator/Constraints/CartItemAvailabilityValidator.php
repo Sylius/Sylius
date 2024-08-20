@@ -38,6 +38,12 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
         /** @var OrderItemInterface $cartItem */
         $cartItem = $value->getCartItem();
 
+        $variant = $cartItem->getVariant();
+
+        if ($variant === null) {
+            return;
+        }
+
         $isStockSufficient = $this->availabilityChecker->isStockSufficient(
             $cartItem->getVariant(),
             $cartItem->getQuantity() + $this->getExistingCartItemQuantityFromCart($value->getCart(), $cartItem),

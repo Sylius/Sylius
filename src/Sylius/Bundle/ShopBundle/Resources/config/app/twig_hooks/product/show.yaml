@@ -41,8 +41,6 @@ twig_hooks:
                 template: "@SyliusShop/product/show/page/info/summary/price/lowest_price_before_discount.html.twig"
 
         'sylius_shop.product.show.page.info.summary.variant_selection':
-            configurable_product:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/configurable_product.html.twig"
             availability_check:
                 template: "@SyliusShop/product/show/page/info/summary/variant_selection/availability_check.html.twig"
 
