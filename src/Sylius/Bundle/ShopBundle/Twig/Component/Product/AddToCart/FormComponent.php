@@ -23,6 +23,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -64,13 +65,7 @@ final class FormComponent
     #[LiveAction]
     public function variantChanged(): void
     {
-        if (is_array($this->formValues['cartItem']['variant'])) {
-            $selectedVariantCode = array_values($this->formValues['cartItem']['variant'])[0];
-        } else {
-            $selectedVariantCode = $this->formValues['cartItem']['variant'];
-        }
-
-        $this->emit('variantChanged', ['productVariantCode' => $selectedVariantCode]);
+        $this->emit('variantChanged', ['productVariantCode' => $this->formValues['cartItem']['variant']]);
     }
 
     protected function instantiateForm(): FormInterface
@@ -78,9 +73,32 @@ final class FormComponent
         $this->orderItem = $this->orderItemFactory->createNew();
         $cart = $this->cartContext->getCart();
 
-        $this->addToCartCommand = $this->addToCartCommandFactory->createWithCartAndCartItem($cart, $this->orderItem);
+        $addToCartCommand = $this->addToCartCommandFactory->createWithCartAndCartItem($cart, $this->orderItem);
         $this->quantityModifier->modify($this->orderItem, 1);
 
-        return $this->formFactory->create($this->formClass, $this->addToCartCommand, ['product' => $this->product]);
+        return $this->formFactory->create($this->formClass, $addToCartCommand, ['product' => $this->product]);
+    }
+
+    private function extractFormValues(FormView $formView): array
+    {
+        $values = [];
+
+        foreach ($formView->children as $child) {
+            $name = $child->vars['name'];
+            $isCompound = $child->vars['compound_data'] ?? $child->vars['compound'] ?? false;
+            if ($isCompound && !($child->vars['expanded'] ?? false)) {
+                $values[$name] = $this->extractFormValues($child);
+
+                continue;
+            }
+
+            if (\array_key_exists('choices', $child->vars)) {
+                $values[$name] = $child->vars['choices'][0]->value;
+            } else {
+                $values[$name] = $child->vars['value'];
+            }
+        }
+
+        return $values;
     }
 }

@@ -20,7 +20,6 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Service\DriverHelper;
-use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -46,7 +45,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->getElement('add_to_cart_button')->click();
 
-        $this->waitForCartSummary();
+        $this->waitForElementToBeReady();
     }
 
     public function addToCartWithQuantity(string $quantity): void
@@ -54,7 +53,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('quantity')->setValue($quantity);
         $this->getElement('add_to_cart_button')->click();
 
-        $this->waitForCartSummary();
+        $this->waitForElementToBeReady();
     }
 
     public function addToCartWithVariant(string $variant): void
@@ -63,7 +62,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $this->getElement('add_to_cart_button')->click();
 
-        $this->waitForCartSummary();
+        $this->waitForElementToBeReady();
     }
 
     public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void
@@ -73,7 +72,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
         $this->getElement('add_to_cart_button')->click();
 
-        $this->waitForCartSummary();
+        $this->waitForElementToBeReady();
     }
 
     public function getAttributeByName(string $name): ?string
@@ -177,6 +176,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getPrice(): string
     {
+        $this->waitForElementToBeReady();
         return $this->getElement('product_price')->getText();
     }
 
@@ -279,7 +279,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
         $optionElement->selectOption($optionValue);
-        $this->waitForCartSummary();
+        $this->waitForElementToBeReady();
     }
 
     public function selectVariant(string $variantName): void
@@ -292,6 +292,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         if (DriverHelper::isJavascript($this->getDriver())) {
             $variantRadio->click();
+            $this->waitForElementToBeReady();
 
             return;
         }
@@ -368,7 +369,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'out_of_stock' => '[data-test-product-out-of-stock]',
             'product_box' => '[data-test-product-box]',
             'product_name' => '[data-test-product-name]',
-            'product_original_price' => '[data-test-product-price-content] [data-test-product-original-price]',
+            'product_original_price' => '[data-test-product-original-price]',
             'product_price' => '[data-test-product-price]',
             'product_price_content' => '[data-test-product-price-content]',
             'quantity' => '[data-test-quantity]',
@@ -382,11 +383,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    private function waitForCartSummary(): void
+    private function waitForElementToBeReady(): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-            $this->getDocument()->waitFor(3, fn (): bool => $this->summaryPage->isOpen());
+            $this->getDocument()->waitFor(1, fn (): bool => $this->summaryPage->isOpen());
         }
     }
 
