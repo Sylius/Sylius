@@ -18,7 +18,13 @@
 >
     <resource class="Sylius\Component\Core\Model\ChannelPricing">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/channel-pricings/{id}" />
+            <operation class="ApiPlatform\Metadata\NotExposed"
+                       uriTemplate="/admin/product-variants/{code}/channel-pricings/{channelCode}">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\ProductVariant" fromProperty="channelPricings" />
+                    <uriVariable parameterName="channelCode" fromClass="Sylius\Component\Core\Model\ChannelPricing" />
+                </uriVariables>
+            </operation>
         </operations>
     </resource>
 </resources>
