@@ -32,20 +32,26 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_product_association_types(): void
     {
-        $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'product/product_with_many_locales.yaml',
+        ]);
 
         $this->requestGet('/api/v2/admin/product-association-types');
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product_association_type/get_product_association_type_collection_response',
+            'admin/product_association_type/get_product_association_types_response',
         );
     }
 
     /** @test */
     public function it_gets_a_product_association_type(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'product/product_with_many_locales.yaml',
+            'authentication/api_administrator.yaml',
+        ]);
 
         /** @var ProductAssociationTypeInterface $associationType */
         $associationType = $fixtures['product_association_type'];
@@ -61,7 +67,10 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     /** @test */
     public function it_returns_nothing_if_association_type_not_found(): void
     {
-        $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'product/product_with_many_locales.yaml',
+        ]);
 
         $this->requestGet('/api/v2/admin/product-association-types/wrong_input');
 
@@ -130,9 +139,8 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
                 'translations' => [
                     'en_US' => [
                         '@id' => sprintf(
-                            '/api/v2/admin/product-association-types/%s/translations/%s',
+                            '/api/v2/admin/product-association-types/%s/translations/en_US',
                             $associationType->getCode(),
-                            $associationType->getTranslation('en_US')->getId()
                         ),
                         'name' => 'Similar products',
                     ],
