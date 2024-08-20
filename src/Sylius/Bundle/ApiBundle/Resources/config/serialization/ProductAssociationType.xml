@@ -17,51 +17,37 @@
 >
     <class name="Sylius\Component\Product\Model\ProductAssociationType">
         <attribute name="id">
-            <group>admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:index</group>
-            <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
-            <group>shop:product_association_type:show</group>
-            <group>sylius:shop:product_association_type:show</group>
         </attribute>
+
         <attribute name="code">
-            <group>admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:index</group>
-            <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
-            <group>admin:product_association_type:create</group>
             <group>sylius:admin:product_association_type:create</group>
-            <group>shop:product_association_type:show</group>
             <group>sylius:shop:product_association_type:show</group>
         </attribute>
+
         <attribute name="name">
-            <group>admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:index</group>
-            <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
-            <group>shop:product_association_type:show</group>
             <group>sylius:shop:product_association_type:show</group>
         </attribute>
+
         <attribute name="createdAt">
-            <group>admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:index</group>
-            <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
         </attribute>
+
         <attribute name="updatedAt">
-            <group>admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:index</group>
-            <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
         </attribute>
+
         <attribute name="translations">
-            <group>admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:index</group>
-            <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
-            <group>admin:product_association_type:create</group>
             <group>sylius:admin:product_association_type:create</group>
-            <group>admin:product_association_type:update</group>
             <group>sylius:admin:product_association_type:update</group>
         </attribute>
     </class>

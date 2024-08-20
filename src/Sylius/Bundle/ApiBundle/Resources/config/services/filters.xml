@@ -245,7 +245,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.product_association_type_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
+        <service id="sylius_api.search_filter.product_association_type" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="translations.name">partial</argument>
                 <argument key="code">partial</argument>
