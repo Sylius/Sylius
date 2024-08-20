@@ -12,7 +12,7 @@ Feature: Order promotions integrity
         And there is a promotion "Christmas sale"
         And I am a logged in customer
 
-    @todo-api @ui  #TODO: Checkout MessengerDataPersister is not implemented yet
+    @api @ui
     Scenario: Preventing customer from completing checkout with already expired promotion
         Given this promotion gives "$10.00" discount to every order
         And this promotion expires tomorrow
@@ -74,7 +74,7 @@ Feature: Order promotions integrity
         When I confirm my order
         Then I should see the thank you page
 
-    @todo-api @ui
+    @api @ui
     Scenario: Preventing customer from completing checkout with already archived promotion
         Given this promotion gives "$10.00" discount to every order
         And I added product "PHP T-Shirt" to the cart
