@@ -167,7 +167,6 @@
                     </values>
                 </openapiContext>
             </operation>
-
         </operations>
     </resource>
 
@@ -255,5 +254,4 @@
             </operation>
         </operations>
     </resource>
-
 </resources>

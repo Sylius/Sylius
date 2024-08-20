@@ -23,7 +23,7 @@
             <argument type="service" id="api_platform.symfony.iri_converter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Creator\ProductImageCreator">
+        <service id="sylius_api.creator.product_image" class="Sylius\Bundle\ApiBundle\Creator\ProductImageCreator">
             <argument type="service" id="sylius.factory.product_image" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.image_uploader" />
