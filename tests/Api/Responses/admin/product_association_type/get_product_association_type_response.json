@@ -11,7 +11,6 @@
       "en_US": {
         "@id": "\/api\/v2\/admin\/product-association-type-translations\/@integer@",
         "@type": "ProductAssociationTypeTranslation",
-        "id": "@integer@",
         "name": "Similar products"
       }
     }

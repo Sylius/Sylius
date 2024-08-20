@@ -9,15 +9,13 @@
     "updatedAt": "@string@",
     "translations": {
         "de_DE": {
-            "@id": "\/api\/v2\/admin\/product-association-type-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-association-types\/similar_products\/translations\/@integer@",
             "@type": "ProductAssociationTypeTranslation",
-            "id": "@integer@",
             "name": "test"
         },
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-association-type-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-association-types\/similar_products\/translations\/@integer@",
             "@type": "ProductAssociationTypeTranslation",
-            "id": "@integer@",
             "name": "Similar products"
         }
     }
