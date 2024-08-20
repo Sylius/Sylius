@@ -86,9 +86,9 @@ final readonly class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I sort the product associations :sortType by code
      */
-    public function iSortProductAssociationsByCode(string $sortingOrder = 'ascending'): void
+    public function iSortProductAssociationsByCode(string $sortType = 'ascending'): void
     {
-        $this->client->sort(['code' => self::SORT_TYPES[$sortingOrder]]);
+        $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
     }
 
     /**
@@ -178,7 +178,7 @@ final readonly class ManagingProductAssociationTypesContext implements Context
      */
     public function iShouldSeeProductAssociationTypesInTheList(int $count = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::PRODUCT_ASSOCIATION_TYPES)), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     /**
