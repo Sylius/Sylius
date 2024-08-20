@@ -1,0 +1,15 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.contact.contact_request':
+            header:
+                template: '@SyliusShop/contact/contact_request/header.html.twig'
+            form:
+                template: '@SyliusShop/contact/contact_request/form.html.twig'
+                
+        'sylius_shop.contact.contact_request.form':
+            email:
+                template: '@SyliusShop/contact/contact_request/form/email.html.twig'
+            message:
+                template: '@SyliusShop/contact/contact_request/form/message.html.twig'
+            submit:
+                template: '@SyliusShop/contact/contact_request/form/submit.html.twig'
