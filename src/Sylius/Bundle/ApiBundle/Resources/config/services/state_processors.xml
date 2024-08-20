@@ -112,5 +112,14 @@
             <argument type="service" id="sylius_api.creator.taxon_image" />
             <tag name="api_platform.state_processor" />
         </service>
+
+        <service
+            id="sylius_api.state_processor.shop.messenger.persist"
+            class="Sylius\Bundle\ApiBundle\StateProcessor\Common\MessengerPersistProcessor"
+            decorates="api_platform.state_processor.write"
+        >
+            <argument type="service" id=".inner" />
+            <tag name="api_platform.state_processor" />
+        </service>
     </services>
 </container>

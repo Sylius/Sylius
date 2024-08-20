@@ -576,31 +576,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/CountryDataPersister.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:remove\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductDataPersister.php
