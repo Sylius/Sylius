@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCart;
 
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory;
+use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -49,11 +50,11 @@ final class FormComponent
 
     /**
      * @param class-string $formClass
-     * @param FactoryInterface<OrderItem> $orderItemFactory
+     * @param CartItemFactoryInterface<OrderItem> $cartItemFactory
      */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
-        private readonly FactoryInterface $orderItemFactory,
+        private readonly CartItemFactoryInterface $cartItemFactory,
         private readonly AddToCartCommandFactory $addToCartCommandFactory,
         private readonly CartContextInterface $cartContext,
         private readonly OrderItemQuantityModifierInterface $quantityModifier,
@@ -64,12 +65,15 @@ final class FormComponent
     #[LiveAction]
     public function variantChanged(): void
     {
-        $this->emit('variantChanged', ['productVariantCode' => $this->formValues['cartItem']['variant']]);
+        $this->emit('sylius:shop:variant_changed', ['productVariantCode' => $this->formValues['cartItem']['variant']]);
     }
 
     protected function instantiateForm(): FormInterface
     {
-        $this->orderItem = $this->orderItemFactory->createNew();
+        /** @var OrderItem $orderItem */
+        $orderItem = $this->cartItemFactory->createForProduct($this->product);
+        $this->orderItem = $orderItem;
+
         $cart = $this->cartContext->getCart();
 
         $addToCartCommand = $this->addToCartCommandFactory->createWithCartAndCartItem($cart, $this->orderItem);
