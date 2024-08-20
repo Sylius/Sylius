@@ -16,16 +16,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\ProductVariant" shortName="ProductVariant">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
+    <resource class="Sylius\Component\Core\Model\ProductVariant">
+        <!-- Admin operations -->
 
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-variants">
@@ -39,13 +31,34 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.product_variant_position_filter</filter>
-                    <filter>sylius.api.product_variant_product_filter</filter>
-                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter</filter>
+                    <filter>sylius_api.order_filter.admin.product_variant</filter>
+                    <filter>sylius_api.search_filter.admin.product_variant</filter>
+                    <filter>sylius_api.search_filter.admin.product_variant_catalog_promotion</filter>
                 </filters>
             </operation>
 
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-variants/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_variant:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-variants">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -66,19 +79,16 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-variants/{code}">
-                <normalizationContext>
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-variants/{code}">
+                <validationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:admin:product_variant:show</value>
+                                <value>sylius</value>
                             </values>
                         </value>
                     </values>
-                </normalizationContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-variants/{code}">
+                </validationContext>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -99,19 +109,9 @@
                 </denormalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-variants/{code}" />
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-variants/{code}" processor="sylius_api.state_processor.admin.product_variant.remove"/>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-variants/{code}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:product_variant:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
+            <!-- Shop operations -->
 
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/product-variants">
                 <normalizationContext>
@@ -124,9 +124,21 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.product_variant_product_filter</filter>
-                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter</filter>
+                    <filter>sylius_api.search_filter.shop.product_variant</filter>
+                    <filter>sylius_api.search_filter.shop.product_variant_option_value</filter>
                 </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-variants/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_variant:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
             </operation>
         </operations>
     </resource>
