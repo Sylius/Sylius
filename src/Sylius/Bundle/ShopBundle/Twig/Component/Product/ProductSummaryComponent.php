@@ -61,7 +61,6 @@ final class ProductSummaryComponent
         $variants = $this->product->getEnabledVariants();
 
         if ($this->product->getVariantSelectionMethod() === ProductInterface::VARIANT_SELECTION_MATCH) {
-            // Ensure the productVariantCode is an array
             if (!is_array($productVariantCode)) {
                 throw new \InvalidArgumentException('Product variant code must be an array for this selection method.');
             }

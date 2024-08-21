@@ -48,13 +48,13 @@ final class ProductShowPriceComponent
     {
         $channel = $this->channelContext->getChannel();
 
-        return
-            $this->productVariantPricesCalculator
-                ->calculateOriginal($this->productVariant, ['channel' => $channel])
-            >
-            $this->productVariantPricesCalculator
-                ->calculate($this->productVariant, ['channel' => $channel])
-        ;
+        $originalPrice = $this->productVariantPricesCalculator
+            ->calculateOriginal($this->productVariant, ['channel' => $channel]);
+
+        $price = $this->productVariantPricesCalculator
+            ->calculate($this->productVariant, ['channel' => $channel]);
+
+        return $originalPrice > $price;
     }
 
     #[ExposeInTemplate(name: 'price')]

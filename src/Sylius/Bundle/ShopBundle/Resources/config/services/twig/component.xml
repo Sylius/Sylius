@@ -116,7 +116,7 @@
             <tag
                 name="sylius.live_component"
                 key="sylius_shop:product:show_price"
-                template="@SyliusShop/product/show/page/info/summary/price/original.html.twig"
+                template="@SyliusShop/product/show/page/info/summary/prices/price.html.twig"
             />
         </service>
 
