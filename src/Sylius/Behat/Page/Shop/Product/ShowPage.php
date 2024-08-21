@@ -177,6 +177,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getPrice(): string
     {
         $this->waitForElementToBeReady();
+
         return $this->getElement('product_price')->getText();
     }
 

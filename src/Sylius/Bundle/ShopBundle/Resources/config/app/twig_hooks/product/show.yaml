@@ -23,8 +23,8 @@ twig_hooks:
         'sylius_shop.product.show.page.info.summary':
             header:
                 template: "@SyliusShop/product/show/page/info/summary/header.html.twig"
-            price:
-                template: "@SyliusShop/product/show/page/info/summary/price.html.twig"
+            prices:
+                template: "@SyliusShop/product/show/page/info/summary/prices.html.twig"
             catalog_promotions:
                 template: "@SyliusShop/product/show/page/info/summary/catalog_promotions.html.twig"
             variant_selection:
@@ -32,13 +32,13 @@ twig_hooks:
             short_description:
                 template: "@SyliusShop/product/show/page/info/summary/short_description.html.twig"
 
-        'sylius_shop.product.show.page.info.summary.price':
-            original_price:
+        'sylius_shop.product.show.page.info.summary.prices':
+            price:
                 component: 'sylius_shop:product:show_price'
                 props:
                     productVariant: '@=_context.variant'
-            discount:
-                template: "@SyliusShop/product/show/page/info/summary/price/lowest_price_before_discount.html.twig"
+            lowest_price_before_discount:
+                template: "@SyliusShop/product/show/page/info/summary/prices/lowest_price_before_discount.html.twig"
 
         'sylius_shop.product.show.page.info.summary.variant_selection':
             availability_check:

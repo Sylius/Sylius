@@ -69,12 +69,14 @@ class ProductCardComponent
     #[ExposeInTemplate(name: 'has_discount')]
     public function hasDiscount(): bool
     {
-        return
-            $this->productVariantPricesCalculator
-                ->calculateOriginal($this->variant, ['channel' => $this->channelContext->getChannel()])
-            >
-            $this->productVariantPricesCalculator
-                ->calculate($this->variant, ['channel' => $this->channelContext->getChannel()])
-        ;
+        $channel = $this->channelContext->getChannel();
+
+        $originalPrice = $this->productVariantPricesCalculator
+            ->calculateOriginal($this->variant, ['channel' => $channel]);
+
+        $price = $this->productVariantPricesCalculator
+            ->calculate($this->variant, ['channel' => $channel]);
+
+        return $originalPrice > $price;
     }
 }
