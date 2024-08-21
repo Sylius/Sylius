@@ -22,7 +22,6 @@
             <group>sylius:shop:cart:show</group>
             <group>sylius:shop:order:account:show</group>
             <group>sylius:shop:order:index</group>
-            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="number">
@@ -31,7 +30,6 @@
             <group>sylius:shop:cart:show</group>
             <group>sylius:shop:order:account:show</group>
             <group>sylius:shop:order:index</group>
-            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="currencyCode">
@@ -44,7 +42,6 @@
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>
             <group>sylius:shop:order:index</group>
-            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="customer">
@@ -77,7 +74,6 @@
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>
             <group>sylius:shop:order:index</group>
-            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="paymentState">
@@ -119,7 +115,6 @@
             <group>sylius:shop:cart:show</group>
             <group>sylius:shop:order:account:show</group>
             <group>sylius:shop:order:index</group>
-            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="items">
@@ -139,7 +134,6 @@
             <group>sylius:admin:order:show</group>
             <group>sylius:shop:cart:show</group>
             <group>sylius:shop:order:index</group>
-            <group>sylius:shop:order:show</group>
             <group>sylius:shop:order:account:show</group>
         </attribute>
 
@@ -148,7 +142,6 @@
             <group>sylius:admin:order:show</group>
             <group>sylius:shop:cart:show</group>
             <group>sylius:shop:order:index</group>
-            <group>sylius:shop:order:show</group>
             <group>sylius:shop:order:account:show</group>
         </attribute>
 
