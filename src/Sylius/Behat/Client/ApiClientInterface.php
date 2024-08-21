@@ -27,6 +27,7 @@ interface ApiClientInterface
 
     public function showByIri(string $iri, bool $forgetResponse = false): Response;
 
+    /** @param array<string, string> $queryParameters */
     public function subResourceIndex(string $resource, string $subResource, string $id, array $queryParameters = [], bool $forgetResponse = false): Response;
 
     public function show(string $resource, string $id, bool $forgetResponse = false): Response;
@@ -53,11 +54,12 @@ interface ApiClientInterface
 
     public function buildCreateRequest(string $resource): void;
 
-    public function buildUpdateRequest(string $resource, string $id): void;
+    public function buildUpdateRequest(string $resource, string $id): self;
 
-    public function setRequestData(array $data): void;
+    /** @param array<string, mixed> $data */
+    public function setRequestData(array $data): self;
 
-    public function addParameter(string $key, int|string $value): void;
+    public function addParameter(string $key, int|string $value): self;
 
     public function addFilter(string $key, bool|int|string $value): void;
 
