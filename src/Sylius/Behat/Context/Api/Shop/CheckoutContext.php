@@ -51,6 +51,11 @@ final class CheckoutContext implements Context
     /** @var string[] */
     private array $content = [];
 
+    /**
+     * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     * @param RepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     */
     public function __construct(
         private readonly ApiClientInterface $client,
         private readonly ResponseCheckerInterface $responseChecker,
@@ -421,6 +426,8 @@ final class CheckoutContext implements Context
 
     /**
      * @When I decide to change my address
+     * @When I go back to addressing step of the checkout
+     * @When I go to the addressing step
      */
     public function iDecideToChangeMyAddress(): void
     {
@@ -1159,8 +1166,7 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_POST,
             'items',
         );
-        /** @var ProductVariantInterface $variant */
-        $variant = $product->getVariants()->first();
+
         $request->setContent([
             'productVariant' => sprintf('/api/v2/shop/product-variants/%s', $code),
             'quantity' => 1,
@@ -1263,6 +1269,35 @@ final class CheckoutContext implements Context
         Assert::true($this->hasProductWithUnitPrice($product->getName(), $unitPrice));
     }
 
+    /**
+     * @Then I should be checking out as :email
+     */
+    public function iShouldBeCheckingOutAs(string $email): void
+    {
+        $cart = $this->getCart();
+
+        Assert::notNull($cart['customer'], sprintf('Customer with an email "%s" was not expected to be null.', $email));
+        Assert::same($this->responseChecker->getValue($this->client->showByIri($cart['customer']), 'email'), $email);
+    }
+
+    /**
+     * @Then I should not be able to change email
+     */
+    public function iShouldNotBeAbleToChangeEmail(): void
+    {
+        $response = $this->client
+            ->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue())
+            ->setRequestData(['email' => 'try_to_change@example.com'])
+            ->update()
+        ;
+
+        Assert::same($response->getStatusCode(), 422);
+        Assert::true($this->responseChecker->hasViolationWithMessage(
+            $response,
+            'Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can\'t be changed.',
+        ));
+    }
+
     private function assertProvinceMessage(string $addressType): void
     {
         $response = $this->client->getLastResponse();
@@ -1319,7 +1354,9 @@ final class CheckoutContext implements Context
 
     private function getCart(): array
     {
-        return $this->responseChecker->getResponseContent($this->client->show(Resources::ORDERS, $this->getCartTokenValue()));
+        $cart = $this->client->show(Resources::ORDERS, $this->getCartTokenValue());
+
+        return $this->responseChecker->getResponseContent($cart);
     }
 
     private function getCartTokenValue(): ?string
@@ -1487,6 +1524,7 @@ final class CheckoutContext implements Context
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
         Assert::notNull($productVariant = $this->productVariantResolver->getVariant($product));
+        Assert::isInstanceOf($productVariant, ProductVariantInterface::class);
 
         $this->putVariantToCart($productVariant, $tokenValue, $quantity);
     }
@@ -1532,6 +1570,9 @@ final class CheckoutContext implements Context
         return [];
     }
 
+    /**
+     * @param array<string, string> $address
+     */
     private function addressesAreEqual(array $address, AddressInterface $addressToCompare): bool
     {
         if (
