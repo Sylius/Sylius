@@ -17,15 +17,15 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
-use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class EnabledProductsExtension implements QueryItemExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
+    public function __construct(private SectionProviderInterface $sectionProvider)
     {
     }
 
@@ -45,8 +45,7 @@ final readonly class EnabledProductsExtension implements QueryItemExtensionInter
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 
