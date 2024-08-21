@@ -88,7 +88,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius_api.search_filter.product_association" parent="api_platform.doctrine.orm.search_filter" public="true">
+        <service id="sylius_api.search_filter.admin.product_association" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="owner.code">partial</argument>
                 <argument key="type.code">partial</argument>
