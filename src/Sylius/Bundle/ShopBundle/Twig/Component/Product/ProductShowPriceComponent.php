@@ -26,7 +26,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
-final class ProductShowPriceComponent
+class ProductShowPriceComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
