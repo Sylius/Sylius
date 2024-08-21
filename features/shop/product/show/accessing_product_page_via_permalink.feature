@@ -14,7 +14,7 @@ Feature: Viewing a product details using permalink
         Then I should be on "T-Shirt banana" product detailed page
         And I should see the product name "T-Shirt banana"
 
-    @api
+    @api @no-ui
     Scenario: Viewing a detailed page with product's slug
         When I view product "T-Shirt banana" using slug
         Then I should be redirected to "T-Shirt banana" product

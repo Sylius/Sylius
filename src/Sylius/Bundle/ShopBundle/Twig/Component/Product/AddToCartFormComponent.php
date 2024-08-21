@@ -11,9 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCart;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
-use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderItem;
@@ -31,18 +30,18 @@ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-class FormComponent
+class AddToCartFormComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
     use ComponentWithFormTrait;
     use ComponentToolsTrait;
 
-    #[LiveProp]
+    #[LiveProp(updateFromParent: false)]
     public Product $product;
 
-    #[LiveProp]
-    public OrderItem $orderItem;
+    #[LiveProp(updateFromParent: false)]
+    public ?OrderItem $orderItem = null;
 
     /**
      * @param class-string $formClass
@@ -61,25 +60,28 @@ class FormComponent
     #[PreReRender(priority: -100)]
     public function variantChanged(): void
     {
-        /** @var AddToCartCommandInterface $addToCommandCart */
-        $addToCommandCart = $this->getForm()->getViewData();
-        /** @var OrderItem $orderItem */
-        $orderItem = $addToCommandCart->getCartItem();
-        $variant = $orderItem->getVariant();
+        $variant = $this->orderItem->getVariant();
 
-        $this->emit('sylius:shop:variant_changed', ['productVariantCode' => $variant?->getCode()]);
+        if (!$variant->isEnabled()) {
+            $variant = null;
+        }
+
+        $this->emitUp('sylius:shop:variant_changed', ['variant' => $variant?->getId()]);
     }
 
     protected function instantiateForm(): FormInterface
     {
-        /** @var OrderItem $orderItem */
-        $orderItem = $this->cartItemFactory->createForProduct($this->product);
-        $this->orderItem = $orderItem;
-
         $cart = $this->cartContext->getCart();
 
+        if ($this->orderItem === null) {
+            /** @var OrderItem $orderItem */
+            $orderItem = $this->cartItemFactory->createForProduct($this->product);
+            $this->orderItem = $orderItem;
+
+            $this->quantityModifier->modify($this->orderItem, 1);
+        }
+
         $addToCartCommand = $this->addToCartCommandFactory->createWithCartAndCartItem($cart, $this->orderItem);
-        $this->quantityModifier->modify($this->orderItem, 1);
 
         return $this->formFactory->create($this->formClass, $addToCartCommand, ['product' => $this->product]);
     }

@@ -36,7 +36,7 @@ twig_hooks:
             price:
                 component: 'sylius_shop:product:show_price'
                 props:
-                    productVariant: '@=_context.variant'
+                    variant: '@=_context.variant'
             lowest_price_before_discount:
                 template: "@SyliusShop/product/show/page/info/summary/prices/lowest_price_before_discount.html.twig"
 

@@ -23,15 +23,15 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
-class ProductSummaryComponent
+class SummaryComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp(fieldName: 'product')]
+    #[LiveProp]
     public Product $product;
 
-    #[LiveProp(fieldName: 'variant')]
+    #[LiveProp]
     public ?ProductVariant $variant = null;
 
     public function __construct(
@@ -50,26 +50,8 @@ class ProductSummaryComponent
 
     #[LiveListener('sylius:shop:variant_changed')]
     public function updateProductVariant(
-        #[LiveArg] ?string $productVariantCode,
+        #[LiveArg] ?ProductVariant $variant,
     ): void {
-        $this->variant = $this->resolveProductVariant($productVariantCode);
-    }
-
-    private function resolveProductVariant(?string $productVariantCode): ?ProductVariant
-    {
-        if ($productVariantCode === null) {
-            return null;
-        }
-
-        $variants = $this->product->getEnabledVariants();
-
-        /** @var ProductVariant $variant */
-        foreach ($variants as $variant) {
-            if ($variant->getCode() === $productVariantCode) {
-                return $variant;
-            }
-        }
-
-        return null;
+        $this->variant = $variant;
     }
 }
