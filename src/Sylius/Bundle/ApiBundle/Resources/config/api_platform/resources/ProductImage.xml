@@ -33,7 +33,7 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.search_filter.product_image</filter>
+                    <filter>sylius_api.search_filter.admin.product_image</filter>
                 </filters>
                 <openapiContext>
                     <values>
