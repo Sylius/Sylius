@@ -23,7 +23,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-final class ProductPriceComponent
+class ProductPriceComponent
 {
     public ProductVariantInterface $productVariant;
 

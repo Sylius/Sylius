@@ -23,7 +23,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
-final class ProductSummaryComponent
+class ProductSummaryComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
