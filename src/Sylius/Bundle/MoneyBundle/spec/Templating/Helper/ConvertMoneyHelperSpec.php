@@ -16,18 +16,12 @@ namespace spec\Sylius\Bundle\MoneyBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 final class ConvertMoneyHelperSpec extends ObjectBehavior
 {
     function let(CurrencyConverterInterface $currencyConverter): void
     {
         $this->beConstructedWith($currencyConverter);
-    }
-
-    function it_is_a_templating_helper(): void
-    {
-        $this->shouldHaveType(Helper::class);
     }
 
     function it_is_a_convert_money_price_helper(): void

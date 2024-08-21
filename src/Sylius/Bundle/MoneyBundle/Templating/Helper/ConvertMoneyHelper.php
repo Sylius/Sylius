@@ -15,7 +15,6 @@ namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use Sylius\Component\Currency\Converter\CurrencyConverter;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 trigger_deprecation(
     'sylius/money-bundle',
@@ -26,8 +25,10 @@ trigger_deprecation(
 );
 
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Currency\Converter\CurrencyConverter} instead. */
-class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
+class ConvertMoneyHelper implements ConvertMoneyHelperInterface
 {
+    private string $charset = 'UTF-8';
+
     public function __construct(private CurrencyConverterInterface $currencyConverter)
     {
     }
@@ -35,6 +36,22 @@ class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
     public function convertAmount(int $amount, ?string $sourceCurrencyCode, ?string $targetCurrencyCode): string
     {
         return (string) $this->currencyConverter->convert($amount, $sourceCurrencyCode, $targetCurrencyCode);
+    }
+
+    /**
+     * Sets the default charset.
+     */
+    public function setCharset(string $charset): void
+    {
+        $this->charset = $charset;
+    }
+
+    /**
+     * Gets the default charset.
+     */
+    public function getCharset(): string
+    {
+        return $this->charset;
     }
 
     public function getName(): string

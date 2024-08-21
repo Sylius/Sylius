@@ -15,7 +15,6 @@ namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 trigger_deprecation(
     'sylius/money-bundle',
@@ -26,8 +25,10 @@ trigger_deprecation(
 );
 
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. Use {@see \Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter} instead. */
-class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
+class FormatMoneyHelper implements FormatMoneyHelperInterface
 {
+    private string $charset = 'UTF-8';
+
     public function __construct(private MoneyFormatterInterface $moneyFormatter)
     {
     }
@@ -35,6 +36,22 @@ class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
     public function formatAmount(int $amount, string $currencyCode, string $localeCode): string
     {
         return $this->moneyFormatter->format($amount, $currencyCode, $localeCode);
+    }
+
+    /**
+     * Sets the default charset.
+     */
+    public function setCharset(string $charset): void
+    {
+        $this->charset = $charset;
+    }
+
+    /**
+     * Gets the default charset.
+     */
+    public function getCharset(): string
+    {
+        return $this->charset;
     }
 
     public function getName(): string
