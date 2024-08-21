@@ -24,18 +24,21 @@ use Webmozart\Assert\Assert;
 
 final class UpdateCartEmailNotAllowedValidator extends ConstraintValidator
 {
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
-        private OrderRepositoryInterface $orderRepository,
-        private UserContextInterface $userContext,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly UserContextInterface $userContext,
     ) {
     }
 
+    /**
+     * @param LoggedInCustomerEmailAwareInterface&OrderTokenValueAwareInterface $value
+     * @param UpdateCartEmailNotAllowed $constraint
+     */
     public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
         Assert::isInstanceOf($value, LoggedInCustomerEmailAwareInterface::class);
-
-        /** @var UpdateCartEmailNotAllowed $constraint */
         Assert::isInstanceOf($constraint, UpdateCartEmailNotAllowed::class);
 
         $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
@@ -43,9 +46,15 @@ final class UpdateCartEmailNotAllowedValidator extends ConstraintValidator
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $user = $this->userContext->getUser();
+        if ($order->getCustomer() === null) {
+            return;
+        }
 
-        if ($user !== null && $value->getEmail()) {
+        if ($order->getCustomer()->getEmail() === $value->getEmail()) {
+            return;
+        }
+
+        if ($this->userContext->getUser() !== null) {
             $this->context->addViolation($constraint->message);
         }
     }

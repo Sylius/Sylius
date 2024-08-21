@@ -41,11 +41,6 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
-    }
-
     function it_throws_exception_if_cart_is_not_found(
         OrderRepositoryInterface $orderRepository,
         OrderAddressModifierInterface $orderAddressModifier,

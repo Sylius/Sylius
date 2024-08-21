@@ -18,7 +18,7 @@ use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-class UpdateCart implements OrderTokenValueAwareInterface, LoggedInCustomerEmailAwareInterface, LocaleCodeAwareInterface
+readonly class UpdateCart implements OrderTokenValueAwareInterface, LoggedInCustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
     public function __construct(
         public ?string $email = null,
@@ -28,11 +28,6 @@ class UpdateCart implements OrderTokenValueAwareInterface, LoggedInCustomerEmail
         public ?string $localeCode = null,
         public ?string $orderTokenValue = null,
     ) {
-    }
-
-    public static function createWithCouponData(?string $couponCode): self
-    {
-        return new self(null, null, null, $couponCode);
     }
 
     public function getOrderTokenValue(): ?string
@@ -53,11 +48,6 @@ class UpdateCart implements OrderTokenValueAwareInterface, LoggedInCustomerEmail
     public function getShippingAddress(): ?AddressInterface
     {
         return $this->shippingAddress;
-    }
-
-    public function getCouponCode(): ?string
-    {
-        return $this->couponCode;
     }
 
     public function getLocaleCode(): ?string
