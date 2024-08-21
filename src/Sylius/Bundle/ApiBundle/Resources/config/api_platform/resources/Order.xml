@@ -185,7 +185,6 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:order:show</value>
                                 <value>sylius:shop:cart:show</value>
                             </values>
                         </value>
@@ -267,7 +266,6 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:order:show</value>
                                 <value>sylius:shop:cart:show</value>
                             </values>
                         </value>
@@ -356,7 +354,6 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:order:show</value>
                                 <value>sylius:shop:cart:show</value>
                             </values>
                         </value>
@@ -401,7 +398,6 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:order:show</value>
                                 <value>sylius:shop:cart:show</value>
                             </values>
                         </value>
@@ -443,7 +439,6 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:order:show</value>
                                 <value>sylius:shop:cart:show</value>
                             </values>
                         </value>
