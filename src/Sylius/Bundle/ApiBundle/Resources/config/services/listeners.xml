@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ This file is part of the Sylius package.
+ (c) Sylius Sp. z o.o.
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius_api.listener.assign_cart_to_user"
+                 class="Sylius\Bundle\ApiBundle\EventListener\AssignCartToUserListener">
+            <argument type="service" id="sylius.context.cart"/>
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver"/>
+            <argument type="service" id="sylius.command_bus"/>
+            <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent"
+                 method="onLoginSuccess"/>
+        </service>
+
+        <service id="sylius_api.listener.authentication_success_listener"
+                 class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
+            <argument type="service" id="api_platform.symfony.iri_converter"/>
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success"
+                 method="onAuthenticationSuccessResponse"/>
+        </service>
+
+        <service id="sylius_api.listener.postgresql_driver_exception_listener"
+                 class="Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>
+        </service>
+    </services>
+</container>
