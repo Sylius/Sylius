@@ -17,17 +17,8 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Product\Model\ProductAssociationType">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
+            <!-- Admin operations-->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-association-types">
                 <normalizationContext>
                     <values>
@@ -39,8 +30,21 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.product_association_type_filter</filter>
+                    <filter>sylius_api.order_filter.admin.product_association_type</filter>
+                    <filter>sylius_api.search_filter.admin.product_association_type</filter>
                 </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-association-types/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_association_type:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-association-types">
@@ -62,18 +66,15 @@
                         </value>
                     </values>
                 </normalizationContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-association-types/{code}">
-                <normalizationContext>
+                <validationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:admin:product_association_type:show</value>
+                                <value>sylius</value>
                             </values>
                         </value>
                     </values>
-                </normalizationContext>
+                </validationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-association-types/{code}">
@@ -95,10 +96,20 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-association-types/{code}" />
 
+            <!-- Shop operations-->
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-association-types/{code}">
                 <normalizationContext>
                     <values>
@@ -110,8 +121,6 @@
                     </values>
                 </normalizationContext>
             </operation>
-
         </operations>
     </resource>
-
 </resources>
