@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
 use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -51,48 +50,23 @@ final class ProductSummaryComponent
 
     #[LiveListener('sylius:shop:variant_changed')]
     public function updateProductVariant(
-        #[LiveArg] mixed $productVariantCode,
+        #[LiveArg] ?string $productVariantCode,
     ): void {
         $this->variant = $this->resolveProductVariant($productVariantCode);
     }
 
-    private function resolveProductVariant(mixed $productVariantCode): ?ProductVariant
+    private function resolveProductVariant(?string $productVariantCode): ?ProductVariant
     {
+        if ($productVariantCode === null) {
+            return null;
+        }
+
         $variants = $this->product->getEnabledVariants();
 
-        if ($this->product->getVariantSelectionMethod() === ProductInterface::VARIANT_SELECTION_MATCH) {
-            if (!is_array($productVariantCode)) {
-                throw new \InvalidArgumentException('Product variant code must be an array for this selection method.');
-            }
-
-            /** @var ProductVariant $variant */
-            foreach ($variants as $variant) {
-                $values = $variant->getOptionValues();
-
-                $variantOptionValues = [];
-                foreach ($values as $value) {
-                    $variantOptionValues[$value->getOption()->getCode()] = $value->getCode();
-                }
-
-                $matches = true;
-                foreach ($productVariantCode as $optionCode => $optionValueCode) {
-                    if (!isset($variantOptionValues[$optionCode]) || $variantOptionValues[$optionCode] !== $optionValueCode) {
-                        $matches = false;
-
-                        break;
-                    }
-                }
-
-                if ($matches) {
-                    return $variant;
-                }
-            }
-        } else {
-            /** @var ProductVariant $variant */
-            foreach ($variants as $variant) {
-                if ($variant->getCode() === $productVariantCode) {
-                    return $variant;
-                }
+        /** @var ProductVariant $variant */
+        foreach ($variants as $variant) {
+            if ($variant->getCode() === $productVariantCode) {
+                return $variant;
             }
         }
 

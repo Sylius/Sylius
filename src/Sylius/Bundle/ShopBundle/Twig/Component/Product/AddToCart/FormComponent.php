@@ -20,20 +20,18 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-final class FormComponent
+class FormComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
@@ -45,8 +43,6 @@ final class FormComponent
 
     #[LiveProp]
     public OrderItem $orderItem;
-
-    public AddToCartCommandInterface $addToCartCommand;
 
     /**
      * @param class-string $formClass
@@ -62,10 +58,16 @@ final class FormComponent
     ) {
     }
 
-    #[LiveAction]
+    #[PreReRender(priority: -100)]
     public function variantChanged(): void
     {
-        $this->emit('sylius:shop:variant_changed', ['productVariantCode' => $this->formValues['cartItem']['variant']]);
+        /** @var AddToCartCommandInterface $addToCommandCart */
+        $addToCommandCart = $this->getForm()->getViewData();
+        /** @var OrderItem $orderItem */
+        $orderItem = $addToCommandCart->getCartItem();
+        $variant = $orderItem->getVariant();
+
+        $this->emit('sylius:shop:variant_changed', ['productVariantCode' => $variant?->getCode()]);
     }
 
     protected function instantiateForm(): FormInterface
@@ -80,29 +82,5 @@ final class FormComponent
         $this->quantityModifier->modify($this->orderItem, 1);
 
         return $this->formFactory->create($this->formClass, $addToCartCommand, ['product' => $this->product]);
-    }
-
-    /** @return array<array-key, string> */
-    protected function extractFormValues(FormView $formView): array
-    {
-        $values = [];
-
-        foreach ($formView->children as $child) {
-            $name = $child->vars['name'];
-            $isCompound = $child->vars['compound_data'] ?? $child->vars['compound'] ?? false;
-            if ($isCompound && !($child->vars['expanded'] ?? false)) {
-                $values[$name] = $this->extractFormValues($child);
-
-                continue;
-            }
-
-            if (\array_key_exists('choices', $child->vars)) {
-                $values[$name] = $child->vars['choices'][0]->value;
-            } else {
-                $values[$name] = $child->vars['value'];
-            }
-        }
-
-        return $values;
     }
 }
