@@ -16,18 +16,12 @@ namespace spec\Sylius\Bundle\MoneyBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 final class FormatMoneyHelperSpec extends ObjectBehavior
 {
     function let(MoneyFormatterInterface $moneyFormatter): void
     {
         $this->beConstructedWith($moneyFormatter);
-    }
-
-    function it_is_a_templating_helper(): void
-    {
-        $this->shouldHaveType(Helper::class);
     }
 
     function it_implements_format_money_helper_interface(): void

@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
-class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
+class ConvertMoneyHelper implements ConvertMoneyHelperInterface
 {
+    private string $charset = 'UTF-8';
+
     public function __construct(private CurrencyConverterInterface $currencyConverter)
     {
     }
@@ -25,6 +26,22 @@ class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
     public function convertAmount(int $amount, ?string $sourceCurrencyCode, ?string $targetCurrencyCode): string
     {
         return (string) $this->currencyConverter->convert($amount, $sourceCurrencyCode, $targetCurrencyCode);
+    }
+
+    /**
+     * Sets the default charset.
+     */
+    public function setCharset(string $charset): void
+    {
+        $this->charset = $charset;
+    }
+
+    /**
+     * Gets the default charset.
+     */
+    public function getCharset(): string
+    {
+        return $this->charset;
     }
 
     public function getName(): string
