@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\AssignCartToUser;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
@@ -35,7 +35,7 @@ use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
-final class ApiCartBlamerListenerSpec extends ObjectBehavior
+final class AssignCartToUserListenerSpec extends ObjectBehavior
 {
     function let(
         CartContextInterface $cartContext,
@@ -97,7 +97,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         $user->getEmail()->willReturn('email@sylius.com');
         $cart->getTokenValue()->willReturn('TOKEN');
 
-        $blameCart = new BlameCart('email@sylius.com', 'TOKEN');
+        $blameCart = new AssignCartToUser('email@sylius.com', 'TOKEN');
 
         $commandBus
             ->dispatch($blameCart)

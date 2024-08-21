@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\AssignCartToUser;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
-final readonly class ApiCartBlamerListener
+final readonly class AssignCartToUserListener
 {
     public function __construct(
         private CartContextInterface $cartContext,
@@ -49,7 +49,7 @@ final readonly class ApiCartBlamerListener
             return;
         }
 
-        $this->commandBus->dispatch(new BlameCart($user->getEmail(), $cart->getTokenValue()));
+        $this->commandBus->dispatch(new AssignCartToUser($user->getEmail(), $cart->getTokenValue()));
     }
 
     /**
