@@ -30,8 +30,8 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.order_filter.product_association_type</filter>
-                    <filter>sylius_api.search_filter.product_association_type</filter>
+                    <filter>sylius_api.order_filter.admin.product_association_type</filter>
+                    <filter>sylius_api.search_filter.admin.product_association_type</filter>
                 </filters>
             </operation>
 
