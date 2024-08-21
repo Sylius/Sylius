@@ -18,8 +18,10 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\UpdateCartEmailNotAllowed;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Validator\Constraint;
@@ -67,50 +69,97 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
     {
-        $value = new CompleteOrder(orderTokenValue: 'token');
+        $command = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$value, new UpdateCartEmailNotAllowed()])
+            ->during('validate', [$command, new UpdateCartEmailNotAllowed()])
         ;
     }
 
-    function it_adds_violation_if_the_user_is_logged_in(
+    function it_does_not_add_violation_if_the_customer_on_the_order_is_null(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
-        UserInterface $user,
-        ExecutionContextInterface $executionContext,
         UserContextInterface $userContext,
+        ExecutionContextInterface $executionContext,
+        OrderInterface $order,
+        ShopUserInterface $shopUser,
     ): void {
         $this->initialize($executionContext);
-
-        $value = new UpdateCart(email: 'sylius@example.com', orderTokenValue: 'token');
+        $command = new UpdateCart(email: 'shopuser@example.com', orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
-        $userContext->getUser()->shouldBeCalled()->willReturn($user);
+        $order->getCustomer()->willReturn(null);
+
+        $userContext->getUser()->willReturn($shopUser);
+        $executionContext->addViolation('sylius.checkout.email.not_changeable')->shouldNotBeCalled();
+
+        $this->validate($command, new UpdateCartEmailNotAllowed());
+    }
+
+    function it_does_not_add_violation_if_the_email_is_the_same_as_the_one_in_the_order(
+        OrderRepositoryInterface $orderRepository,
+        UserContextInterface $userContext,
+        CustomerInterface $customer,
+        ExecutionContextInterface $executionContext,
+        OrderInterface $order,
+        ShopUserInterface $shopUser,
+    ): void {
+        $this->initialize($executionContext);
+        $command = new UpdateCart(email: 'shopuser@example.com', orderTokenValue: 'token');
+
+        $customer->getEmail()->willReturn('shopuser@example.com');
+        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
+        $order->getCustomer()->willReturn($customer);
+
+        $userContext->getUser()->willReturn($shopUser);
+        $executionContext->addViolation('sylius.checkout.email.not_changeable')->shouldNotBeCalled();
+
+        $this->validate($command, new UpdateCartEmailNotAllowed());
+    }
+
+    function it_adds_violation_if_the_user_is_logged_in_and_they_try_to_change_the_email(
+        OrderRepositoryInterface $orderRepository,
+        UserContextInterface $userContext,
+        CustomerInterface $customer,
+        ExecutionContextInterface $executionContext,
+        OrderInterface $order,
+        ShopUserInterface $shopUser,
+    ): void {
+        $this->initialize($executionContext);
+        $command = new UpdateCart(email: 'changed_email@example.com', orderTokenValue: 'token');
+
+        $shopUser->getCustomer()->willReturn($customer);
+
+        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
+        $order->getCustomer()->willReturn($customer);
+        $userContext->getUser()->willReturn($shopUser);
 
         $executionContext->addViolation('sylius.checkout.email.not_changeable')->shouldBeCalled();
 
-        $this->validate($value, new UpdateCartEmailNotAllowed());
+        $this->validate($command, new UpdateCartEmailNotAllowed());
     }
 
     function it_does_not_add_violation_if_user_is_not_logged_in(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
-        ExecutionContextInterface $executionContext,
         UserContextInterface $userContext,
+        CustomerInterface $customer,
+        ExecutionContextInterface $executionContext,
+        OrderInterface $order,
+        ShopUserInterface $shopUser,
     ): void {
         $this->initialize($executionContext);
+        $command = new UpdateCart(email: 'customer@example.com', orderTokenValue: 'token');
 
-        $value = new UpdateCart(email: 'sylius@example.com', orderTokenValue: 'token');
+        $shopUser->getCustomer()->willReturn($customer);
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
+        $order->getCustomer()->willReturn($customer);
         $userContext->getUser()->shouldBeCalled()->willReturn(null);
 
         $executionContext->addViolation('sylius.checkout.email.not_changeable')->shouldNotBeCalled();
 
-        $this->validate($value, new UpdateCartEmailNotAllowed());
+        $this->validate($command, new UpdateCartEmailNotAllowed());
     }
 }

@@ -69,7 +69,7 @@ sylius:
         shipping_method:
             not_blank: Please select shipping method.
         email:
-            not_changeable: Email can't be changed for logged in customer.
+            not_changeable: Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can't be changed.
     contact:
         email:
             invalid: This email is invalid.

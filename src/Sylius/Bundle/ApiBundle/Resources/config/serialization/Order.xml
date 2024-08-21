@@ -47,6 +47,7 @@
         <attribute name="customer">
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="payments">
