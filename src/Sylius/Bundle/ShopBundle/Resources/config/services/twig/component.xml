@@ -92,7 +92,7 @@
 
         <service
             id="sylius_shop.twig.component.product_summary"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\ProductSummaryComponent"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\SummaryComponent"
         >
             <argument type="service" id="sylius.product_variant_resolver.default" />
 
@@ -105,7 +105,7 @@
 
         <service
             id="sylius_shop.twig.component.product_show_price"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\ProductShowPriceComponent"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\PriceComponent"
         >
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.templating.helper.format_money" />
@@ -122,7 +122,7 @@
 
         <service
             id="sylius_shop.twig.component.product_add_to_cart_form"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCart\FormComponent"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCartFormComponent"
         >
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.factory.order_item" />

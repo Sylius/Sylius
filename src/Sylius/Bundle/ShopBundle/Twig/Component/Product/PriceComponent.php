@@ -26,13 +26,13 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
-class ProductShowPriceComponent
+class PriceComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp(updateFromParent: true)]
-    public ProductVariant $productVariant;
+    #[LiveProp]
+    public ProductVariant $variant;
 
     public function __construct(
         private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
@@ -49,10 +49,10 @@ class ProductShowPriceComponent
         $channel = $this->channelContext->getChannel();
 
         $originalPrice = $this->productVariantPricesCalculator
-            ->calculateOriginal($this->productVariant, ['channel' => $channel]);
+            ->calculateOriginal($this->variant, ['channel' => $channel]);
 
         $price = $this->productVariantPricesCalculator
-            ->calculate($this->productVariant, ['channel' => $channel]);
+            ->calculate($this->variant, ['channel' => $channel]);
 
         return $originalPrice > $price;
     }
@@ -61,7 +61,7 @@ class ProductShowPriceComponent
     public function getPrice(): string
     {
         $price = $this->productVariantPricesCalculator
-            ->calculate($this->productVariant, ['channel' => $this->channelContext->getChannel()]);
+            ->calculate($this->variant, ['channel' => $this->channelContext->getChannel()]);
 
         return $this->formatPrice($price);
     }
@@ -70,7 +70,7 @@ class ProductShowPriceComponent
     public function getOriginalPrice(): string
     {
         $price = $this->productVariantPricesCalculator
-            ->calculateOriginal($this->productVariant, ['channel' => $this->channelContext->getChannel()]);
+            ->calculateOriginal($this->variant, ['channel' => $this->channelContext->getChannel()]);
 
         return $this->formatPrice($price);
     }
