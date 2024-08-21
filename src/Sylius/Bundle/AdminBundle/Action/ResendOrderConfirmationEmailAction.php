@@ -61,6 +61,20 @@ final readonly class ResendOrderConfirmationEmailAction
             ->add('success', 'sylius.email.order_confirmation_resent')
         ;
 
-        return new RedirectResponse($this->router->generate('sylius_admin_order_show', ['id' => $orderId]));
+        return $this->redirect($request, $order);
+    }
+
+    private function redirect(Request $request, OrderInterface $order): RedirectResponse
+    {
+        $redirect = $request->attributes->get('_sylius', [])['redirect'] ?? null;
+
+        if (null === $redirect || is_array($redirect)) {
+            return new RedirectResponse($this->router->generate(
+                $redirect['route'] ?? 'sylius_admin_order_show',
+                $redirect['params'] ?? ['id' => $order->getId()],
+            ));
+        }
+
+        return new RedirectResponse($this->router->generate($redirect));
     }
 }
