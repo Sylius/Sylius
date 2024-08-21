@@ -9,7 +9,7 @@
     "updatedAt": "@string@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-association-types\/TEST\/translations\/@string@",
+            "@id": "\/api\/v2\/admin\/product-association-types\/TEST\/translations\/en_US",
             "@type": "ProductAssociationTypeTranslation",
             "name": "test"
         }
