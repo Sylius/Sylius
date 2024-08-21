@@ -90,7 +90,6 @@
             />
         </service>
 
-
         <service
             id="sylius_shop.twig.component.product_summary"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Product\ProductSummaryComponent"
@@ -142,6 +141,5 @@
                 template="@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart.html.twig"
             />
         </service>
-
     </services>
 </container>
