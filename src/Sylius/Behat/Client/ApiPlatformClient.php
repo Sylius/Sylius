@@ -26,11 +26,11 @@ final class ApiPlatformClient implements ApiClientInterface
     private ?Response $lastResponse = null;
 
     public function __construct(
-        private AbstractBrowser $client,
-        private SharedStorageInterface $sharedStorage,
-        private RequestFactoryInterface $requestFactory,
-        private string $authorizationHeader,
-        private ?string $section = null,
+        private readonly AbstractBrowser $client,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly RequestFactoryInterface $requestFactory,
+        private readonly string $authorizationHeader,
+        private readonly string $section,
     ) {
     }
 
@@ -52,6 +52,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request, $forgetResponse);
     }
 
+    /** @param array<string, string> $queryParameters */
     public function subResourceIndex(string $resource, string $subResource, string $id, array $queryParameters = [], bool $forgetResponse = false): Response
     {
         $request = $this->requestFactory->subResourceIndex($this->section, $resource, $id, $subResource, $queryParameters);
@@ -152,7 +153,7 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request = $this->requestFactory->create($this->section, $resource, $this->authorizationHeader, $this->getToken());
     }
 
-    public function buildUpdateRequest(string $resource, string $id): void
+    public function buildUpdateRequest(string $resource, string $id): self
     {
         $this->show($resource, $id);
 
@@ -163,7 +164,10 @@ final class ApiPlatformClient implements ApiClientInterface
             $this->authorizationHeader,
             $this->getToken(),
         );
+
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
+
+        return $this;
     }
 
     public function buildCustomUpdateRequest(string $resource, string $id, string $customSuffix): void
@@ -177,15 +181,18 @@ final class ApiPlatformClient implements ApiClientInterface
         );
     }
 
-    /** @param string|int $value */
-    public function addParameter(string $key, $value): void
+    public function addParameter(string $key, int|string $value): self
     {
         $this->request->updateParameters([$key => $value]);
+
+        return $this;
     }
 
-    public function setRequestData(array $content): void
+    public function setRequestData(array $data): self
     {
-        $this->request->setContent($content);
+        $this->request->setContent($data);
+
+        return $this;
     }
 
     /** @param string|int $value */
