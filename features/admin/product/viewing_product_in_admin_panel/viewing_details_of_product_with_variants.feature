@@ -70,7 +70,7 @@ Feature: Viewing details of a product with variants
         And I should see product's meta keywords is "shield"
         And I should see product's short description is "good shield"
 
-    @todo-api @ui
+    @api @ui
     Scenario: Viewing association types
         Given the store has a "Glass shield" product
         And the product "Iron Shield" has an association "Similar" with product "Glass shield"

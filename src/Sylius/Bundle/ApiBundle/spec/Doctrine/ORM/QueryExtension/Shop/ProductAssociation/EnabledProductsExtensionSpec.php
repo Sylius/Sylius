@@ -17,28 +17,28 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
-use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class EnabledProductsExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($sectionProvider);
     }
 
     function it_does_nothing_if_current_resource_is_not_a_product_association(
-        UserContextInterface $userContext,
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
+        $sectionProvider->getSection()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
         $this->applyToItem(
@@ -50,16 +50,13 @@ final class EnabledProductsExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_does_nothing_if_current_user_is_an_admin_user(
-        UserContextInterface $userContext,
-        AdminUserInterface $adminUser,
+    function it_does_nothing_if_section_is_not_shop_api(
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
+        AdminApiSection $section,
     ): void {
-        $userContext->getUser()->willReturn($adminUser);
-        $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
-
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $sectionProvider->getSection()->willReturn($section);
 
         $this->applyToItem(
             $queryBuilder,
@@ -71,14 +68,13 @@ final class EnabledProductsExtensionSpec extends ObjectBehavior
     }
 
     function it_applies_conditions_for_customer(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
+        ShopApiSection $section,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $sectionProvider->getSection()->willReturn($section);
 
         $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
         $queryNameGenerator->generateParameterName('channel')->shouldBeCalled()->willReturn('channel');
