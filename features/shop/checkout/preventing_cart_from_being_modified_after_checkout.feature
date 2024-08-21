@@ -32,7 +32,7 @@ Feature: Preventing cart from being modified after checkout
         When I try to change shipping method to "UPS"
         Then I should be informed that cart is no longer available
 
-    @todo-api @no-ui #TODO: Checkout
+    @api @no-ui
     Scenario: Preventing from adding product after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
