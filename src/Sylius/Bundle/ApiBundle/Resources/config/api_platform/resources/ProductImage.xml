@@ -17,24 +17,12 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\ProductImage">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
-        <order>
-            <values>
-                <value name="createdAt">DESC</value>
-            </values>
-        </order>
-
+        <!-- Admin operations -->
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-images">
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/products/{code}/images">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -45,7 +33,7 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.product_image_product_variants_filter</filter>
+                    <filter>sylius_api.search_filter.admin.product_image</filter>
                 </filters>
                 <openapiContext>
                     <values>
@@ -69,91 +57,11 @@
                 </openapiContext>
             </operation>
 
-            <operation
-                class="ApiPlatform\Metadata\Post"
-                uriTemplate="/admin/products/{code}/images"
-                controller="Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction"
-                deserialize="false"
-            >
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/products/{code}/images/{id}">
                 <uriVariables>
-                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images"/>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
+                    <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\ProductImage" />
                 </uriVariables>
-                <inputFormats>
-                    <format name="multipart">multipart/form-data</format>
-                </inputFormats>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="code">
-                                    <values>
-                                        <value name="name">code</value>
-                                        <value name="in">path</value>
-                                        <value name="required">true</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                          <value name="requestBody">
-                                <values>
-                                    <value name="content">
-                                        <values>
-                                            <value name="multipart/form-data">
-                                                <values>
-                                                    <value name="schema">
-                                                        <values>
-                                                            <value name="type">object</value>
-                                                            <value name="properties">
-                                                                <values>
-                                                                    <value name="file">
-                                                                        <values>
-                                                                            <value name="type">string</value>
-                                                                            <value name="format">binary</value>
-                                                                        </values>
-                                                                    </value>
-                                                                    <value name="type">
-                                                                        <values>
-                                                                            <value name="type">string</value>
-                                                                        </values>
-                                                                    </value>
-                                                                    <value name="productVariants[]">
-                                                                        <values>
-                                                                            <value name="type">array</value>
-                                                                            <value name="items">
-                                                                                <values>
-                                                                                    <value name="type">string</value>
-                                                                                    <value name="format">iri-reference</value>
-                                                                                </values>
-                                                                            </value>
-                                                                        </values>
-                                                                    </value>
-                                                                </values>
-                                                            </value>
-                                                        </values>
-                                                    </value>
-                                                    <value name="encoding">
-                                                        <values>
-                                                            <value name="productVariants[]">
-                                                                <values>
-                                                                    <value name="style">form</value>
-                                                                    <value name="explode">true</value>
-                                                                </values>
-                                                            </value>
-                                                        </values>
-                                                    </value>
-                                                </values>
-                                            </value>
-                                        </values>
-                                    </value>
-                                </values>
-                            </value>
-                    </values>
-                </openapiContext>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -163,21 +71,8 @@
                         </value>
                     </values>
                 </normalizationContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-images/{id}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:product_image:showw</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
                 <openapiContext>
                     <values>
-                        <value name="summary">Use code to retrieve a product resource.</value>
                         <value name="parameters">
                             <values>
                                 <value name="imageFilter">
@@ -198,7 +93,53 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-images/{id}">
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/products/{code}/images/{id}">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
+                    <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\ProductImage" />
+                </uriVariables>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_image:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_image:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/products/{code}/images/{id}">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
+                    <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\ProductImage" />
+                </uriVariables>
+            </operation>
+
+            <!-- Shop operations -->
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/products/{code}/images/{id}">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images"/>
+                    <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\ProductImage"/>
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -229,48 +170,30 @@
                     </values>
                 </openapiContext>
             </operation>
-
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-images/{id}">
-                <denormalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:product_image:update</value>
-                            </values>
-                        </value>
-                    </values>
-                </denormalizationContext>
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:product_image:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-images/{id}" />
-
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\ProductImage" uriTemplate="/admin/products/{code}/images">
-        <uriVariables>
-            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images"/>
-        </uriVariables>
+    <resource class="Sylius\Component\Core\Model\Product">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <!-- Admin operations -->
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/products/{code}/images"
+                processor="sylius_api.state_processor.admin.product_image.persist"
+                deserialize="false"
+            >
+                <inputFormats>
+                    <format name="multipart">multipart/form-data</format>
+                </inputFormats>
                 <openapiContext>
                     <values>
                         <value name="parameters">
                             <values>
-                                <value name="imageFilter">
+                                <value name="code">
                                     <values>
-                                        <value name="name">imageFilter</value>
-                                        <value name="in">query</value>
-                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="name">code</value>
+                                        <value name="in">path</value>
+                                        <value name="required">true</value>
                                         <value name="schema">
                                             <values>
                                                 <value name="type">string</value>
@@ -280,8 +203,79 @@
                                 </value>
                             </values>
                         </value>
+                        <value name="requestBody">
+                            <values>
+                                <value name="content">
+                                    <values>
+                                        <value name="multipart/form-data">
+                                            <values>
+                                                <value name="schema">
+                                                    <values>
+                                                        <value name="type">object</value>
+                                                        <value name="properties">
+                                                            <values>
+                                                                <value name="file">
+                                                                    <values>
+                                                                        <value name="type">string</value>
+                                                                        <value name="format">binary</value>
+                                                                    </values>
+                                                                </value>
+                                                                <value name="type">
+                                                                    <values>
+                                                                        <value name="type">string</value>
+                                                                    </values>
+                                                                </value>
+                                                                <value name="productVariants[]">
+                                                                    <values>
+                                                                        <value name="type">array</value>
+                                                                        <value name="items">
+                                                                            <values>
+                                                                                <value name="type">string</value>
+                                                                                <value name="format">iri-reference</value>
+                                                                            </values>
+                                                                        </value>
+                                                                    </values>
+                                                                </value>
+                                                            </values>
+                                                        </value>
+                                                    </values>
+                                                </value>
+                                                <value name="encoding">
+                                                    <values>
+                                                        <value name="productVariants[]">
+                                                            <values>
+                                                                <value name="style">form</value>
+                                                                <value name="explode">true</value>
+                                                            </values>
+                                                        </value>
+                                                    </values>
+                                                </value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
                     </values>
                 </openapiContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_image:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
         </operations>
     </resource>

@@ -38,7 +38,7 @@
             "averageRating": "@integer@",
             "images": [
                 {
-                    "@id": "\/api\/v2\/shop\/product-images\/@integer@",
+                    "@id": "\/api\/v2\/shop\/products\/MUG\/images\/@integer@",
                     "@type": "ProductImage",
                     "id": "@integer@",
                     "type": "thumbnail",

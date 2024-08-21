@@ -1,10 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/ProductImage",
-    "@id": "\/api\/v2\/admin\/product-images",
+    "@id": "\/api\/v2\/admin\/products\/MUG\/images",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+            "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
             "@type": "ProductImage",
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/products\/MUG",
@@ -15,12 +15,12 @@
     ],
     "hydra:totalItems": 1,
     "hydra:view": {
-        "@id": "\/api\/v2\/admin\/product-images?productVariants=MUG_BLUE",
+        "@id": "\/api\/v2\/admin\/products\/MUG\/images?productVariants=%2Fapi%2Fv2%2Fadmin%2Fproduct-variants%2FMUG_BLUE",
         "@type": "hydra:PartialCollectionView"
     },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/product-images{?productVariants,productVariants[]}",
+        "hydra:template": "\/api\/v2\/admin\/products\/MUG\/images{?productVariants,productVariants[],productVariants.code,productVariants.code[]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -33,6 +33,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "productVariants[]",
                 "property": "productVariants",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productVariants.code",
+                "property": "productVariants.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productVariants.code[]",
+                "property": "productVariants.code",
                 "required": false
             }
         ]

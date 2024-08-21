@@ -41,7 +41,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         $this->shouldImplement(ProcessorInterface::class);
     }
 
-    function it_creates_and_processes_an_avatar_image(
+    function it_creates_and_processes_a_taxon_image(
         ProcessorInterface $processor,
         ImageCreatorInterface $taxonImageCreator,
         Request $request,

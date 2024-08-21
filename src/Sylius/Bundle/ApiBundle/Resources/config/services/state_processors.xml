@@ -95,6 +95,13 @@
             <tag name="api_platform.state_processor" />
         </service>
 
+        <service id="sylius_api.state_processor.admin.product_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductImage\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius_api.creator.product_image" />
+            <argument type="service" id="validator" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
         <service id="sylius_api.state_processor.admin.taxon_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius_api.creator.taxon_image" />

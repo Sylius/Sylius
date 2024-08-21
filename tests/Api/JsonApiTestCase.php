@@ -63,6 +63,11 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->isAdminContext = true;
     }
 
+    protected function disableAdminContext(): void
+    {
+        $this->isAdminContext = false;
+    }
+
     protected function setUpDefaultGetHeaders(): void
     {
         $this->defaultGetHeaders = [
@@ -145,13 +150,19 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      * @param array<string, string> $headers
      * @param array<string, mixed> $body
      */
-    protected function requestPost(string $uri, ?array $body = null, array $queryParameters = [], array $headers = []): Crawler
-    {
+    protected function requestPost(
+        string $uri,
+        ?array $body = null,
+        array $queryParameters = [],
+        array $parameters = [],
+        array $headers = [],
+        array $files = [],
+    ): Crawler {
         if (!empty($this->defaultPostHeaders)) {
             $headers = array_merge($this->defaultPostHeaders, $headers);
         }
 
-        return $this->request('POST', $uri, $queryParameters, $headers, $body);
+        return $this->request('POST', $uri, $queryParameters, $headers, $body, $parameters, $files);
     }
 
     /**
@@ -274,8 +285,15 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      * @param array<string, array<string>|string> $queryParameters
      * @param array<string, string> $headers
      */
-    protected function request(string $method, string $uri, array $queryParameters = [], array $headers = [], ?array $body = null): Crawler
-    {
+    protected function request(
+        string $method,
+        string $uri,
+        array $queryParameters = [],
+        array $headers = [],
+        ?array $body = null,
+        array $parameters = [],
+        array $files = [],
+    ): Crawler {
         if ($this->isAdminContext) {
             $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
         }
@@ -287,6 +305,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         return $this->client->request(
             method: $method,
             uri: $uri,
+            parameters: $parameters,
+            files: $files,
             server: $headers,
             content: is_array($body) ? json_encode($body, \JSON_THROW_ON_ERROR) : null,
         );

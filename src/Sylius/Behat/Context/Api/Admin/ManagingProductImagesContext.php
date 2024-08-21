@@ -75,7 +75,7 @@ final readonly class ManagingProductImagesContext implements Context
         $productImage = $product->getImagesByType($type)->first();
         Assert::notFalse($productImage);
 
-        $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
+        $this->removeProductImage($product->getCode(), (string) $productImage->getId());
     }
 
     /**
@@ -89,7 +89,7 @@ final readonly class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
+        $this->removeProductImage($product->getCode(), (string) $productImage->getId());
     }
 
     /**
@@ -103,9 +103,15 @@ final readonly class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
-        $this->client->updateRequestData(['type' => $type]);
-        $this->client->update();
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
+            Request::METHOD_PUT,
+        );
+        $builder->withContent(['type' => $type]);
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 
     /**
@@ -119,9 +125,15 @@ final readonly class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
-        $this->client->updateRequestData(['productVariants' => [$this->iriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
-        $this->client->update();
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
+            Request::METHOD_PUT,
+        );
+        $builder->withContent(['productVariants' => [$this->iriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 
     /**
@@ -246,6 +258,18 @@ final readonly class ManagingProductImagesContext implements Context
             }
             $builder->withParameter('productVariants', $variantsIris);
         }
+
+        $this->client->request($builder->build());
+    }
+
+    private function removeProductImage(string $productCode, string $productImageId): void
+    {
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/products/%s/images/%s', $productCode, $productImageId),
+            Request::METHOD_DELETE,
+        );
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());
     }

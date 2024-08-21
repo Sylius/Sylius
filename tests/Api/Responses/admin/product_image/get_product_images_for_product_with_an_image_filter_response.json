@@ -1,10 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/ProductImage",
-    "@id": "\/api\/v2\/admin\/products/MUG/images",
+    "@id": "\/api\/v2\/admin\/products\/MUG\/images",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+            "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
             "@type": "ProductImage",
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/products\/MUG",
@@ -13,11 +13,53 @@
             "productVariants": [
                 "\/api\/v2\/admin\/product-variants\/MUG_BLUE"
             ]
+        },
+        {
+            "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
+            "@type": "ProductImage",
+            "id": "@integer@",
+            "owner": "\/api\/v2\/admin\/products\/MUG",
+            "type": "main",
+            "path": "@string@.contains('sylius_small').endsWith('main.jpg')",
+            "productVariants": [
+                "\/api\/v2\/admin\/product-variants\/MUG_RED"
+            ]
         }
     ],
-    "hydra:totalItems": 1,
+    "hydra:totalItems": 2,
     "hydra:view": {
         "@id": "\/api\/v2\/admin\/products\/MUG\/images?imageFilter=sylius_small",
         "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/products\/MUG\/images{?productVariants,productVariants[],productVariants.code,productVariants.code[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productVariants",
+                "property": "productVariants",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productVariants[]",
+                "property": "productVariants",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productVariants.code",
+                "property": "productVariants.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productVariants.code[]",
+                "property": "productVariants.code",
+                "required": false
+            }
+        ]
     }
 }
