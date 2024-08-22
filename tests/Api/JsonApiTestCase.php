@@ -32,6 +32,10 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     private bool $isAdminContext = false;
 
+    private bool $isShopUserContext = false;
+
+    private ?string $shopUserEmail = null;
+
     /** @var array <string, string> */
     private array $defaultGetHeaders = [];
 
@@ -61,6 +65,12 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function setUpAdminContext(): void
     {
         $this->isAdminContext = true;
+    }
+
+    protected function setUpShopUserContext(?string $email = null): void
+    {
+        $this->isShopUserContext = true;
+        $this->shopUserEmail = $email;
     }
 
     protected function disableAdminContext(): void
@@ -296,6 +306,11 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     ): Crawler {
         if ($this->isAdminContext) {
             $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
+        }
+
+        if ($this->isShopUserContext) {
+            $email = $this->shopUserEmail ?? 'shop@example.com';
+            $headers = array_merge($this->headerBuilder()->withShopUserAuthorization($email)->build(), $headers);
         }
 
         $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
