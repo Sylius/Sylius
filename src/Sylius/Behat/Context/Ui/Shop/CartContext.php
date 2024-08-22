@@ -64,15 +64,6 @@ final readonly class CartContext implements Context
         $this->browserElement->resetSession();
     }
 
-//    /**
-//     * @When I update my cart
-//     * @When I try to update my cart
-//     */
-//    public function iUpdateMyCart(): void
-//    {
-//        $this->summaryPage->updateCart();
-//    }
-
     /**
      * @When I proceed to the checkout
      * @When I try to proceed to the checkout

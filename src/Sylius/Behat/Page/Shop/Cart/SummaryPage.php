@@ -27,7 +27,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 
     public function getGrandTotal(): string
     {
-        Assert::true(false);
+        Assert::true(false); // Tracks which methods can be removed after completing cart tasks
         $totalElement = $this->getElement('grand_total');
 
         return $totalElement->getText();
