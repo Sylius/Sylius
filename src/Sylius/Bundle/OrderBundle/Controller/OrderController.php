@@ -61,24 +61,6 @@ class OrderController extends ResourceController
         );
     }
 
-    public function widgetAction(Request $request): Response
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $cart = $this->getCurrentCart();
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($cart));
-        }
-
-        return $this->render(
-            $configuration->getTemplate('summary.html'),
-            [
-                'cart' => $cart,
-            ],
-        );
-    }
-
     public function saveAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -159,45 +141,6 @@ class OrderController extends ResourceController
         foreach ($cart->getItems() as $item) {
             $this->manager->refresh($item);
         }
-    }
-
-    public function clearAction(Request $request): Response
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $this->isGrantedOr403($configuration, ResourceActions::DELETE);
-        $resource = $this->getCurrentCart();
-
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $request->request->get('_csrf_token'))) {
-            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
-        }
-
-        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
-
-        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-            throw new HttpException($event->getErrorCode(), $event->getMessage());
-        }
-        if ($event->isStopped()) {
-            $this->flashHelper->addFlashFromEvent($configuration, $event);
-
-            return $this->redirectHandler->redirectToIndex($configuration, $resource);
-        }
-
-        $this->repository->remove($resource);
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
-
-        return $this->redirectHandler->redirectToIndex($configuration, $resource);
-    }
-
-    protected function getCartSummaryRoute(): string
-    {
-        return 'sylius_cart_summary';
     }
 
     protected function getCurrentCart(): OrderInterface

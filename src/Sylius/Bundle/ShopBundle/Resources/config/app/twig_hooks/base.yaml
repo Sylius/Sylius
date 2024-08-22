@@ -32,7 +32,7 @@ twig_hooks:
             security_widget:
                 template: "@SyliusShop/shared/layout/base/header/content/security_widget.html.twig"
             cart:
-                template: "@SyliusShop/shared/layout/base/header/content/cart.html.twig"
+                component: 'sylius_shop:common:header:cart'
             taxon_hamburger:
                 template: "@SyliusShop/shared/layout/base/header/content/taxon_hamburger.html.twig"
 
@@ -51,8 +51,6 @@ twig_hooks:
         'sylius_shop.base.footer':
             content:
                 template: '@SyliusShop/shared/layout/base/footer/content.html.twig'
-            offcanvas:
-                template: '@SyliusShop/shared/layout/base/footer/offcanvas.html.twig'
 
         'sylius_shop.base.footer.content':
             menu:
@@ -61,3 +59,23 @@ twig_hooks:
                 template: '@SyliusShop/shared/layout/base/footer/content/payment_methods.html.twig'
             copy:
                 template: '@SyliusShop/shared/layout/base/footer/content/copy.html.twig'
+
+        'sylius_shop.base.offcanvas':
+            cart:
+                component: 'sylius_shop:common:offcanvas:cart'
+
+        'sylius_shop.base.offcanvas.cart':
+            header:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/header.html.twig'
+            body:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/body.html.twig'
+            footer:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/footer.html.twig'
+
+        'sylius_shop.base.offcanvas.cart.body':
+            items:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/body/items.html.twig'
+
+        'sylius_shop.base.offcanvas.cart.body.items':
+            item:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/body/items/item.html.twig'

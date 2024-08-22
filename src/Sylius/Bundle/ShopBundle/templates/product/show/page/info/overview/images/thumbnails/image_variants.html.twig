@@ -1,3 +1,6 @@
+{% set product = hookable_metadata.context.product %}
+{% set image = hookable_metadata.context.image %}
+
 {% if product.isConfigurable() and product.enabledVariants|length > 0 %}
     <div>
         {% if product.getVariantSelectionMethod() == 'match' %}

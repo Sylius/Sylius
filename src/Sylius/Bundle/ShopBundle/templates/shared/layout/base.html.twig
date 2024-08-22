@@ -36,6 +36,7 @@
                     {% hook 'footer' with { _prefixes: prefixes } %}
                 {% endblock %}
             </div>
+            {% hook 'offcanvas' with { _prefixes: prefixes } %}
         {% endblock %}
 
         {% block javascripts %}
