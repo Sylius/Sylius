@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -508,6 +509,19 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('tokenValue', $tokenValue)
             ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /** @throws NonUniqueResultException */
+    public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.checkoutState = :checkoutState')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
+            ->setParameter('tokenValue', $tokenValue)
             ->getQuery()
             ->getOneOrNullResult()
         ;
