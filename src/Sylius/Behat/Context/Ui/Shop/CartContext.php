@@ -30,7 +30,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
-final class CartContext implements Context
+final readonly class CartContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
@@ -49,6 +49,7 @@ final class CartContext implements Context
      * @Given I am on the summary of my cart page
      * @When /^I see the summary of my (?:|previous )cart$/
      * @When /^I check details of my cart$/
+     * @When I check items in my cart
      */
     public function iOpenCartSummaryPage(): void
     {
@@ -63,17 +64,18 @@ final class CartContext implements Context
         $this->browserElement->resetSession();
     }
 
-    /**
-     * @When I update my cart
-     * @When I try to update my cart
-     */
-    public function iUpdateMyCart(): void
-    {
-        $this->summaryPage->updateCart();
-    }
+//    /**
+//     * @When I update my cart
+//     * @When I try to update my cart
+//     */
+//    public function iUpdateMyCart(): void
+//    {
+//        $this->summaryPage->updateCart();
+//    }
 
     /**
      * @When I proceed to the checkout
+     * @When I try to proceed to the checkout
      */
     public function iProceedToTheCheckout(): void
     {
@@ -107,9 +109,11 @@ final class CartContext implements Context
      */
     public function iRemoveVariantFromTheCart(ProductVariantInterface $variant): void
     {
-        $this->summaryPage->open();
-        $product = $variant->getProduct();
-        $this->summaryPage->removeProduct($product->getName());
+        if (!$this->summaryPage->isOpen()) {
+            $this->summaryPage->open();
+        }
+
+        $this->summaryPage->removeProduct($variant->getProduct()->getName());
     }
 
     /**
@@ -119,7 +123,10 @@ final class CartContext implements Context
      */
     public function iChangeQuantityTo(string $productName, string $quantity): void
     {
-        $this->summaryPage->open();
+        if (!$this->summaryPage->isOpen()) {
+            $this->summaryPage->open();
+        }
+
         $this->summaryPage->changeQuantity($productName, $quantity);
     }
 
@@ -148,6 +155,7 @@ final class CartContext implements Context
 
     /**
      * @Then my cart items total should be :total
+     * @Then my cart should have :total items total
      */
     public function myCartItemsTotalShouldBe(string $itemsTotal): void
     {
@@ -192,7 +200,9 @@ final class CartContext implements Context
      */
     public function myCartShippingFeeShouldBe(string $shippingTotal = '$0.00'): void
     {
-        $this->summaryPage->open();
+        if (!$this->summaryPage->isOpen()) {
+            $this->summaryPage->open();
+        }
 
         Assert::same($this->summaryPage->getShippingTotal(), $shippingTotal);
     }
@@ -202,7 +212,9 @@ final class CartContext implements Context
      */
     public function iShouldNotSeeShippingTotalForMyCart(): void
     {
-        $this->summaryPage->open();
+        if (!$this->summaryPage->isOpen()) {
+            $this->summaryPage->open();
+        }
 
         Assert::false($this->summaryPage->hasShippingTotal());
     }
@@ -410,7 +422,15 @@ final class CartContext implements Context
      */
     public function thereShouldBeOneItemInMyCart(): void
     {
-        Assert::true($this->summaryPage->isSingleItemOnPage());
+        Assert::same($this->summaryPage->countOrderItems(), 1);
+    }
+
+    /**
+     * @Then my cart should have quantity of :quantity items of product :productName
+     */
+    public function myCartShouldHaveItems(int $quantity, string $productName): void
+    {
+        Assert::same($this->summaryPage->getQuantity($productName), $quantity);
     }
 
     /**
@@ -568,7 +588,9 @@ final class CartContext implements Context
      */
     public function myCartSTotalShouldBe(string $total): void
     {
-        $this->summaryPage->open();
+        if (!$this->summaryPage->isOpen()) {
+            $this->summaryPage->open();
+        }
 
         Assert::same($this->summaryPage->getCartTotal(), $total);
     }
