@@ -24,7 +24,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
 
     public function hasValidationErrorWith(string $message): bool
     {
-        return $this->getElement('validation_error')->getText() === $message;
+        return $this->getElement('flash_message')->getText() === $message;
     }
 
     public function logIn(): void
@@ -48,7 +48,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
             'login_button' => '[data-test-button="login-button"]',
             'password' => '[data-test-login-password]',
             'username' => '[data-test-login-username]',
-            'validation_error' => '[data-test-flash-message]',
+            'flash_message' => '[data-test-sylius-flash-message]',
         ]);
     }
 }

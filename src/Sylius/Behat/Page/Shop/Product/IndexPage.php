@@ -75,7 +75,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function isEmpty(): bool
     {
-        return str_contains($this->getElement('validation_message')->getText(), 'There are no results to display');
+        return str_contains($this->getElement('flash_message')->getText(), 'There are no results to display');
     }
 
     public function getProductPrice(string $productCode): string
@@ -128,7 +128,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             'product' => '[data-test-product=%productCode%]',
             'products' => '[data-test-products]',
             'search_button' => '[data-test-search]',
-            'validation_message' => '[data-test-flash-message]',
+            'flash_message' => '[data-test-sylius-flash-message]',
         ]);
     }
 }
