@@ -61,12 +61,22 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $channel]);
             $data['originalPrice'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $channel]);
-            $data['lowestPriceBeforeDiscount'] = $this->priceCalculator->calculateLowestPriceBeforeDiscount(
-                $object,
-                ['channel' => $channel],
-            );
+
+            if (\method_exists($this->priceCalculator, 'calculateLowestPriceBeforeDiscount')) {
+                $data['lowestPriceBeforeDiscount'] = $this->priceCalculator->calculateLowestPriceBeforeDiscount(
+                    $object,
+                    ['channel' => $channel],
+                );
+            } else {
+                trigger_deprecation(
+                    'sylius/sylius',
+                    '1.13',
+                    'Not having `calculateLowestPriceBeforeDiscount` method on %s is deprecated since Sylius 1.13 and will be required in Sylius 2.0.',
+                    $this->priceCalculator::class,
+                );
+            }
         } catch (MissingChannelConfigurationException) {
-            unset($data['price'], $data['originalPrice']);
+            unset($data['price'], $data['originalPrice'], $data['lowestPriceBeforeDiscount']);
         }
 
         /** @var ArrayCollection $appliedPromotions */
