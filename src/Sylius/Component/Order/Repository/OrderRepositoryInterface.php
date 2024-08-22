@@ -46,5 +46,6 @@ interface OrderRepositoryInterface extends RepositoryInterface
 
     public function createCartQueryBuilder(): QueryBuilder;
 
+    /** @return OrderInterface[] */
     public function findAllExceptCarts(): array;
 }
