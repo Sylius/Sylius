@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.5 (2024-08-22)
+
+#### Details
+
+- [#16574](https://github.com/Sylius/Sylius/issues/16574) Use callback wrapper for LocaleChoiceType choices ([@wimulkeman](https://github.com/wimulkeman))
+- [#16633](https://github.com/Sylius/Sylius/issues/16633) [ChannelsTest] Use inArray to check locales ([@Wojdylak](https://github.com/Wojdylak))
+- [#16639](https://github.com/Sylius/Sylius/issues/16639) Fix PostgreSQL CI Full to run ([@Wojdylak](https://github.com/Wojdylak))
+- [#16638](https://github.com/Sylius/Sylius/issues/16638) Refactor GUS info ([@Wojdylak](https://github.com/Wojdylak))
+- [#16654](https://github.com/Sylius/Sylius/issues/16654) [API] Fix ShopUser docs example ([@mpysiak](https://github.com/mpysiak))
+- [#16697](https://github.com/Sylius/Sylius/issues/16697) [API] Fix translation.name filters ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#16699](https://github.com/Sylius/Sylius/issues/16699) Fixing configuration for customer order view ([@mamazu](https://github.com/mamazu))
+- [#16645](https://github.com/Sylius/Sylius/issues/16645) [BC-Break Fix][1.13] Do not enforce soft method requirement on ProductVar… ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.13.4 (2024-07-17)
 
 #### Details
