@@ -181,7 +181,7 @@ final class ApiPlatformClient implements ApiClientInterface
         );
     }
 
-    public function addParameter(string $key, int|string $value): self
+    public function addParameter(string $key, bool|int|string $value): self
     {
         $this->request->updateParameters([$key => $value]);
 
@@ -195,8 +195,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this;
     }
 
-    /** @param string|int $value */
-    public function addFilter(string $key, $value): void
+    public function addFilter(string $key, bool|int|string $value): void
     {
         $this->addParameter($key, $value);
     }

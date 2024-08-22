@@ -59,7 +59,7 @@ interface ApiClientInterface
     /** @param array<string, mixed> $data */
     public function setRequestData(array $data): self;
 
-    public function addParameter(string $key, int|string $value): self;
+    public function addParameter(string $key, bool|int|string $value): self;
 
     public function addFilter(string $key, bool|int|string $value): void;
 
