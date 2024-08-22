@@ -16,7 +16,7 @@ Feature: Changing quantity of a product in cart
         Then I should see "T-Shirt banana" with quantity 2 in my cart
         And my cart items total should be "$25.08"
 
-    @api @todo-ui
+    @todo-api @ui @javascript
     Scenario: Increasing quantity of an item in cart beyond the threshold
         Given I see the summary of my cart
         When I change product "T-Shirt banana" quantity to 20000 in my cart
