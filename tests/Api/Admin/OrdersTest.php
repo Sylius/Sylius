@@ -356,6 +356,6 @@ final class OrdersTest extends JsonApiTestCase
             ->withJsonLdAccept()
             ->withAdminUserAuthorization($adminEmail)
             ->build()
-            ;
+        ;
     }
 }
