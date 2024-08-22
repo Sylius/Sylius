@@ -3,5 +3,5 @@
 {% for payment_form in form.payments %}
     {% hook 'payment' with { 'form': payment_form, 'index': loop.index } %}
 {% else %}
-    {% hook 'payment_unavailable' %}
+    {% hook 'payment#unavailable' %}
 {% endfor %}
