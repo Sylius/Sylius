@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class UpdateCartHandlerSpec extends ObjectBehavior
 {

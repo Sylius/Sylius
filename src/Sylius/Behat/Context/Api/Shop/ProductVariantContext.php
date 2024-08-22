@@ -319,7 +319,7 @@ final class ProductVariantContext implements Context
             $this->isOptionValueInVariant(
                 $variant['optionValues'],
                 $expectedOptionName,
-                $expectedOptionValueValue
+                $expectedOptionValueValue,
             ),
             sprintf('There is no variant with "%s" option value', $expectedOptionValueValue),
         );
@@ -337,7 +337,7 @@ final class ProductVariantContext implements Context
                 $this->isOptionValueInVariant(
                     $variant['optionValues'],
                     $expectedOptionName,
-                    $expectedOptionValueValue
+                    $expectedOptionValueValue,
                 ),
                 sprintf('There is a variant with "%s" option value', $expectedOptionValueValue),
             );
@@ -376,7 +376,6 @@ final class ProductVariantContext implements Context
             $productOptionValueCode = $parts[7];
 
             if (StringInflector::nameToUppercaseCode($expectedOptionName) == StringInflector::nameToUppercaseCode($productOptionCode)) {
-
                 return StringInflector::nameToUppercaseCode($productOptionValueCode) == StringInflector::nameToUppercaseCode($expectedOptionValueValue);
             }
         }
