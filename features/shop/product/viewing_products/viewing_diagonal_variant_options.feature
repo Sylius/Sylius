@@ -23,7 +23,7 @@ Feature: Viewing diagonal variants options
         Then I should be able to select the "Yellow" and "Blue" Color option values
         And I should be able to select the "Small" and "Large" Size option values
 
-    @ui @javascript @no-api
+    @no-api @ui @javascript
     Scenario: Viewing an "Unavailable" message when selecting an unavailable combination
         When I view product "Extra Cool T-Shirt"
         And I select its color as "Blue"
@@ -31,7 +31,7 @@ Feature: Viewing diagonal variants options
         Then I should see that the combination is "Unavailable"
         And I should be unable to add it to the cart
 
-    @todo-api @no-ui
+    @api @no-ui
     Scenario: Not seeing unavailable variants
         When I view variants of the "Extra Cool T-Shirt" product
         And I filter them by "Blue" option value
