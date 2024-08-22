@@ -20,4 +20,5 @@ Feature: Changing quantity of a product in cart
     Scenario: Increasing quantity of an item in cart beyond the threshold
         Given I see the summary of my cart
         When I change product "T-Shirt banana" quantity to 20000 in my cart
-        Then I should see "T-Shirt banana" with quantity 9999 in my cart
+        Then I should be notified that the quantity of the product "T-Shirt banana" must be between 1 and 9999
+        And my cart items total should be "$12.54"

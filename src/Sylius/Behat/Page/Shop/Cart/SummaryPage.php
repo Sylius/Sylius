@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -208,18 +209,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return str_contains($product->getText(), 'Insufficient stock');
     }
 
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
-    {
-        Assert::true(false);
-        $message = sprintf('%s does not have sufficient stock.', $product->getName());
-
-        try {
-            return $this->getElement('validation_errors')->getText() === $message;
-        } catch (ElementNotFoundException) {
-            return false;
-        }
-    }
-
     public function isEmpty(): bool
     {
         return str_contains($this->getElement('flash_message')->getText(), 'Your cart is empty');
@@ -263,11 +252,17 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $this->getDocument()->waitFor($timeout, fn () => $this->isOpen());
     }
 
-    public function getPromotionCouponValidationMessage(): string
+    /** @param array<string, string> $parameters */
+    public function getValidationMessage(string $element, array $parameters = []): string
     {
-        Assert::true(false);
+        $foundElement = $this->getFieldElement($element, $parameters);
 
-        return $this->getElement('promotion_coupon_validation_message')->getText();
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
+        }
+
+        return $validationMessage->getText();
     }
 
     protected function getDefinedElements(): array
@@ -293,7 +288,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 //            'product_total' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-subtotal]',
 //            'product_unit_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-unit-price]',
 //            'product_unit_regular_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-regular-unit-price]',
-//            'promotion_coupon_validation_message' => '[data-test-cart-promotion-coupon] [data-test-validation-error]',
 //            'promotion_total' => '[data-test-cart-promotion-total]',
             'remove_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-remove-cart-item]',
 //            'save_button' => '[data-test-apply-coupon-button]',
@@ -301,7 +295,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 //            'tax_excluded' => '[data-test-cart-tax-exluded]',
 //            'tax_included' => '[data-test-cart-tax-included]',
 //            'update_button' => '[data-test-cart-update-button]',
-//            'validation_errors' => '[data-test-validation-error]',
         ]);
     }
 
@@ -339,5 +332,20 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         } catch (ElementNotFoundException) {
             return;
         }
+    }
+
+    /**
+     * @param array<string, string> $parameters
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getFieldElement(string $element, array $parameters): NodeElement
+    {
+        $element = $this->getElement($element, $parameters);
+        while (null !== $element && !$element->hasClass('field')) {
+            $element = $element->getParent();
+        }
+
+        return $element;
     }
 }

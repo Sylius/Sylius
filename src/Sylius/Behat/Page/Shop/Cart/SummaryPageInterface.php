@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 
 interface SummaryPageInterface extends PageInterface
 {
@@ -68,8 +67,6 @@ interface SummaryPageInterface extends PageInterface
 
     public function hasItemWithInsufficientStock(string $productName): bool;
 
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
-
     public function isEmpty(): bool;
 
     public function getQuantity(string $productName): int;
@@ -84,5 +81,5 @@ interface SummaryPageInterface extends PageInterface
 
     public function waitForRedirect(int $timeout): void;
 
-    public function getPromotionCouponValidationMessage(): string;
+    public function getValidationMessage(string $element, array $parameters = []): string;
 }

@@ -626,6 +626,17 @@ final readonly class CartContext implements Context
         Assert::true($this->summaryPage->isEmpty());
     }
 
+    /**
+     * @Then I should be notified that the quantity of the product :productName must be between 1 and 9999
+     */
+    public function iShouldBeNotifiedThatTheQuantityOfTheProductMustBeBetween1And9999(string $productName): void
+    {
+        Assert::same(
+            $this->summaryPage->getValidationMessage('item_quantity', ['%name%' => $productName]),
+            'Quantity must be between 1 and 9999.'
+        );
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
