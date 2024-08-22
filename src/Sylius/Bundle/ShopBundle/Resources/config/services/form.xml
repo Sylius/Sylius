@@ -24,5 +24,13 @@
             <argument>%sylius.form.type.add_to_cart.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
+        <service id="sylius_shop.form.type.cart" class="Sylius\Bundle\ShopBundle\Form\Type\CartType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.cart_item" class="Sylius\Bundle\ShopBundle\Form\Type\CartItemType" >
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

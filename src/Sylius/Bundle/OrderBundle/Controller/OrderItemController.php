@@ -23,7 +23,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -108,73 +107,6 @@ class OrderItemController extends ResourceController
                 'form' => $form->createView(),
             ],
         );
-    }
-
-    public function removeAction(Request $request): Response
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $this->isGrantedOr403($configuration, CartActions::REMOVE);
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $this->findOr404($configuration);
-
-        $event = $this->eventDispatcher->dispatchPreEvent(CartActions::REMOVE, $configuration, $orderItem);
-
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $orderItem->getId(), (string) $request->request->get('_csrf_token'))) {
-            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
-        }
-
-        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-            throw new HttpException($event->getErrorCode(), $event->getMessage());
-        }
-        if ($event->isStopped()) {
-            $this->flashHelper->addFlashFromEvent($configuration, $event);
-
-            return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
-        }
-
-        $cart = $this->getCurrentCart();
-        if ($cart !== $orderItem->getOrder()) {
-            $this->addFlash('error', $this->get('translator')->trans('sylius.cart.cannot_modify', [], 'flashes'));
-
-            if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-            }
-
-            return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
-        }
-
-        $this->getOrderModifier()->removeFromOrder($cart, $orderItem);
-
-        $this->repository->remove($orderItem);
-
-        $cartManager = $this->getCartManager();
-        $cartManager->persist($cart);
-        $cartManager->flush();
-
-        $this->eventDispatcher->dispatchPostEvent(CartActions::REMOVE, $configuration, $orderItem);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $this->flashHelper->addSuccessFlash($configuration, CartActions::REMOVE, $orderItem);
-
-        return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
-    }
-
-    protected function getOrderRepository(): OrderRepositoryInterface
-    {
-        return $this->get('sylius.repository.order');
-    }
-
-    protected function redirectToCartSummary(RequestConfiguration $configuration): Response
-    {
-        if (null === $configuration->getParameters()->get('redirect')) {
-            return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
-        }
-
-        return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
     }
 
     protected function getCartSummaryRoute(): string

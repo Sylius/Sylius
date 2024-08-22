@@ -155,5 +155,63 @@
                 template="@SyliusShop/product/show/page/product_listing/association.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_shop.twig.component.cart.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\CartType</argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:cart:form"
+                template="@SyliusShop/cart/page/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.checkout.summary"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\SummaryComponent"
+        >
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:checkout:summary"
+                template="@SyliusShop/checkout/summary.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.common.header.cart"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\CartComponent"
+        >
+            <argument type="service" id="sylius.context.cart" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:common:header:cart"
+                template="@SyliusShop/shared/components/header/cart.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.common.offcanvas_cart"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\CartComponent"
+        >
+            <argument type="service" id="sylius.context.cart" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:common:offcanvas:cart"
+                template="@SyliusShop/shared/layout/base/offcanvas/cart.html.twig"
+            />
+        </service>
     </services>
 </container>
