@@ -39,7 +39,7 @@ Feature: Preventing cart from being modified after checkout
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
         When I try to add product "AK-47" to the cart
-        Then I should be informed that cart items are no longer available
+        Then I should be informed that I cannot change the cart items after the checkout is completed
 
     @api @no-ui
     Scenario: Preventing from removing product after checkout
