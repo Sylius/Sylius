@@ -19,9 +19,6 @@
         <attribute name="id">
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>
-            <group>sylius:shop:cart:show</group>
-            <group>sylius:shop:order:account:show</group>
-            <group>sylius:shop:order:index</group>
         </attribute>
 
         <attribute name="number">
@@ -42,6 +39,7 @@
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>
             <group>sylius:shop:order:index</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="customer">
@@ -75,6 +73,7 @@
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>
             <group>sylius:shop:order:index</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="paymentState">
