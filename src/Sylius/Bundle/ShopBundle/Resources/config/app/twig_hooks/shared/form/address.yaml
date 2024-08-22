@@ -1,0 +1,25 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.shared.form.address':
+            name_row:
+                template: '@SyliusShop/shared/form/address/name_row.html.twig'
+            company:
+                template: '@SyliusShop/shared/form/address/company.html.twig'
+            street:
+                template: '@SyliusShop/shared/form/address/street.html.twig'
+            country:
+                template: '@SyliusShop/shared/form/address/country.html.twig'
+            province:
+                template: '@SyliusShop/shared/form/address/province.html.twig'
+            city:
+                template: '@SyliusShop/shared/form/address/city.html.twig'
+            postcode:
+                template: '@SyliusShop/shared/form/address/postcode.html.twig'
+            phone_number:
+                template: '@SyliusShop/shared/form/address/phone_number.html.twig'
+
+        'sylius_shop.shared.form.address.name_row':
+            first_name:
+                template: '@SyliusShop/shared/form/address/name_row/first_name.html.twig'
+            last_name:
+                template: '@SyliusShop/shared/form/address/name_row/last_name.html.twig'

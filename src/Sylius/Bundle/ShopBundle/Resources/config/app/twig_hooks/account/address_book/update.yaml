@@ -1,0 +1,17 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.account.address_book.update':
+            form:
+                template: '@SyliusShop/account/address_book/update/form.html.twig'
+
+        'sylius_shop.account.address_book.update.form':
+            fields:
+                template: '@SyliusShop/shared/account/address_book/form/fields.html.twig'
+            buttons:
+                template: '@SyliusShop/shared/account/address_book/form/buttons.html.twig'
+
+        'sylius_shop.account.address_book.update.form.buttons':
+            save:
+                template: '@SyliusShop/account/address_book/update/form/buttons/save.html.twig'
+            cancel:
+                template: '@SyliusShop/shared/account/address_book/form/buttons/cancel.html.twig'
