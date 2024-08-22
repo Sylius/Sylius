@@ -18,5 +18,5 @@ Feature: Viewing a cart summary
         And I added this product to the cart
         And I am on the summary of my cart page
         But I've been gone for a long time
-        When I try to update my cart
+        When I try to proceed to the checkout
         Then I should see an empty cart

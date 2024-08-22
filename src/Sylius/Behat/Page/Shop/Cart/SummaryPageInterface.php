@@ -56,7 +56,7 @@ interface SummaryPageInterface extends PageInterface
 
     public function applyCoupon(string $couponCode): void;
 
-    public function isSingleItemOnPage(): bool;
+    public function countOrderItems(): int;
 
     public function hasItemNamed(string $name): bool;
 

@@ -17,5 +17,7 @@ interface SyliusCartEvents
 {
     public const CART_CHANGE = 'sylius.cart_change';
 
+    public const CART_ITEM_REMOVE = 'sylius.cart_item_remove';
+
     public const CART_SUMMARY = 'sylius.cart_summary';
 }
