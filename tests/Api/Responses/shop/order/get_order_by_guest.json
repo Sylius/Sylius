@@ -2,6 +2,8 @@
     "@context": "\/api\/v2\/contexts\/Order",
     "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
+    "channel": "\/api\/v2\/shop\/channels\/WEB",
+    "customer": "\/api\/v2\/shop\/customers\/@integer@",
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
@@ -48,11 +50,11 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
+    "state": "new",
     "checkoutState": "completed",
     "paymentState": "awaiting_payment",
     "shippingState": "ready",
     "tokenValue": "token",
-    "id": "@integer@",
     "number": "000000001",
     "items": [
         {

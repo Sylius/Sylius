@@ -29,46 +29,46 @@ final class CartTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_creates_empty_cart(): void
+    public function it_creates_an_empty_cart_as_a_guest(): void
     {
+        $this->setUpDefaultPostHeaders();
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/shop/orders',
-            server: array_merge([], self::CONTENT_TYPE_HEADER),
-            content: '{}',
-        );
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/create_cart',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('shop/checkout/cart/create_cart_as_guest');
     }
 
     /** @test */
-    public function it_creates_empty_cart_with_provided_locale(): void
+    public function it_creates_an_empty_cart_as_a_shop_user(): void
     {
+        $this->setUpDefaultPostHeaders();
+        $this->setUpShopUserContext();
+
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
+
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
+
+        $this->assertResponseCreated('shop/checkout/cart/create_cart_as_shop_user');
+    }
+
+    /** @test */
+    public function it_creates_an_empty_cart_as_a_guest_with_provided_locale(): void
+    {
+        $this->setUpDefaultPostHeaders();
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/shop/orders',
-            server: array_merge(['HTTP_ACCEPT_LANGUAGE' => 'pl_PL'], self::CONTENT_TYPE_HEADER),
-            content: '{}',
-        );
+        $this->requestPost(uri: '/api/v2/shop/orders', body: [], headers: ['HTTP_ACCEPT_LANGUAGE' => 'pl_PL']);
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/create_cart_with_locale',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('shop/checkout/cart/create_cart_with_locale');
     }
 
     /** @test */
     public function it_gets_existing_cart_if_customer_has_cart(): void
     {
+        $this->setUpDefaultPostHeaders();
+        $this->setUpShopUserContext('dave@doe.com');
+
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel/channel.yaml',
@@ -76,22 +76,13 @@ final class CartTest extends JsonApiTestCase
             'cart/existing_cart.yaml',
         ]);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/shop/orders',
-            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('dave@doe.com')->build(),
-            content: '{}',
-        );
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/get_existing_cart_if_customer_has_cart',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('shop/checkout/cart/get_existing_cart_if_customer_has_cart');
     }
 
     /** @test */
-    public function it_gets_empty_cart(): void
+    public function it_gets_an_empty_cart_as_guest(): void
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
@@ -104,7 +95,7 @@ final class CartTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_a_cart(): void
+    public function it_gets_a_cart_as_a_guest(): void
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
@@ -124,8 +115,10 @@ final class CartTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_adds_item_to_order(): void
+    public function it_adds_item_to_order_as_guest(): void
     {
+        $this->setUpDefaultPostHeaders();
+
         $this->loadFixturesFromFiles([
             'channel/channel.yaml',
             'cart.yaml',
@@ -136,21 +129,15 @@ final class CartTest extends JsonApiTestCase
 
         $tokenValue = $this->pickUpCart();
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: sprintf('/api/v2/shop/orders/%s/items', $tokenValue),
-            server: self::CONTENT_TYPE_HEADER,
-            content: json_encode([
+            body: [
                 'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
                 'quantity' => 4,
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/add_item',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('shop/checkout/cart/add_item');
     }
 
     /** @test */
