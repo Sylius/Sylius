@@ -47,7 +47,6 @@
     "localeCode": "en_US",
     "checkoutState": "completed",
     "tokenValue": "token",
-    "id": "@integer@",
     "number": "000000001",
     "items": [
         {

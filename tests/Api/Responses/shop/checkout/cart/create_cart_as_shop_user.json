@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/existingCartToken",
+    "@id": "\/api\/v2\/shop\/orders\/@string@",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
     "customer": "\/api\/v2\/shop\/customers\/@integer@",
@@ -13,23 +13,9 @@
     "checkoutState": "cart",
     "paymentState": "cart",
     "shippingState": "cart",
-    "tokenValue": "existingCartToken",
+    "tokenValue": "@string@",
     "number": null,
-    "items": [
-        {
-            "@id": "\/api\/v2\/shop\/orders\/existingCartToken\/items\/@integer@",
-            "@type": "OrderItem",
-            "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
-            "productName": "Mug",
-            "id": "@integer@",
-            "quantity": 0,
-            "unitPrice": 0,
-            "originalUnitPrice": 0,
-            "total": 0,
-            "discountedUnitPrice": 0,
-            "subtotal": 0
-        }
-    ],
+    "items": [],
     "itemsTotal": 0,
     "total": 0,
     "state": "cart",

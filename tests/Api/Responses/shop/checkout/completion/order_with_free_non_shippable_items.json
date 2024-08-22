@@ -3,6 +3,7 @@
     "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
+    "customer": "\/api\/v2\/shop\/customers\/@integer@",
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
@@ -39,7 +40,6 @@
     "paymentState": "paid",
     "shippingState": "shipped",
     "tokenValue": "nAWw2jewpA",
-    "id": "@integer@",
     "number": "000000001",
     "items": [
         {
