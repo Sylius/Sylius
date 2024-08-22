@@ -221,7 +221,6 @@ final class CheckoutContext implements Context
      */
     public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
     {
-        $this->iSpecifyTheEmailAs(null);
         $this->iSpecifyTheBillingAddressAs($address);
         $this->iCompleteTheAddressingStep();
     }
@@ -1328,8 +1327,7 @@ final class CheckoutContext implements Context
 
     private function addressOrderWithCountryAndEmail(CountryInterface $country, ?string $email = null): void
     {
-        $this->addressOrder([
-            'email' => $email,
+        $content = [
             'billingAddress' => [
                 'city' => 'Madrid',
                 'street' => 'Av. de Concha Espina',
@@ -1338,18 +1336,23 @@ final class CheckoutContext implements Context
                 'firstName' => 'Santiago',
                 'lastName' => 'Bernabeu',
             ],
-        ]);
-    }
+        ];
 
-    private function addressOrder(array $content): void
-    {
-        if (!array_key_exists('email', $content)) {
-            $content['email'] = null;
+        if ($email !== null) {
+            $content['email'] = $email;
         }
 
-        $this->client->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue());
-        $this->client->setRequestData($content);
-        $this->client->update();
+        $this->addressOrder($content);
+    }
+
+    /** @param array<array-key, mixed> $content */
+    private function addressOrder(array $content): void
+    {
+        $this->client
+            ->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue())
+            ->setRequestData($content)
+            ->update()
+        ;
     }
 
     private function getCart(): array
@@ -1475,8 +1478,13 @@ final class CheckoutContext implements Context
 
     private function getArrayWithDefaultAddress(): array
     {
-        return [
-            'email' => 'rich@sylius.com',
+        try {
+            $email = $this->sharedStorage->get('created_as_guest') ? 'rich@sylius.com' : null;
+        } catch (\InvalidArgumentException) {
+            $email = null;
+        }
+
+        $content = [
             'billingAddress' => [
                 'city' => 'New York',
                 'street' => 'Wall Street',
@@ -1486,6 +1494,12 @@ final class CheckoutContext implements Context
                 'lastName' => 'Rich',
             ],
         ];
+
+        if ($email !== null) {
+            $content['email'] = $email;
+        }
+
+        return $content;
     }
 
     private function getViolation(array $violations, string $element): array
