@@ -1,0 +1,5 @@
+{% set order = hookable_metadata.context.order %}
+
+{% for payment in order.payments %}
+    {% hook 'payment_methods' with { payment } %}
+{% endfor %}

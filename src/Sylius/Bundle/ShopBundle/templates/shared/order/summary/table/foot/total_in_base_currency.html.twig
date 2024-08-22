@@ -1,0 +1,14 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set order = hookable_metadata.context.order %}
+
+{% if order.currencyCode is not same as(sylius.currencyCode) %}
+    <tr>
+        <td class="h5 text-end" colspan="3" {{ sylius_test_html_attribute('summary-order-total') }}>
+            {{ 'sylius.ui.total_in_base_currency'|trans }}:
+        </td>
+        <td class="h5 text-end" {{ sylius_test_html_attribute('summary-order-total') }}>
+            {{ money.format(order.total, order.currencyCode) }}
+        </td>
+    </tr>
+{% endif %}

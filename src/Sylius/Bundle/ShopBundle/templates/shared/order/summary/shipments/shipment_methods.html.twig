@@ -1,0 +1,5 @@
+{% set order = hookable_metadata.context.order %}
+
+{% for shipment in order.shipments %}
+    {% hook 'shipment_methods' with { shipment } %}
+{% endfor %}

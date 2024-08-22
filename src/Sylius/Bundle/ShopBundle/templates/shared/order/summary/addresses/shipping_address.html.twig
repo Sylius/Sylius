@@ -1,0 +1,5 @@
+{% set order = hookable_metadata.context.order %}
+
+<div class="col-12 col-md-6 mb-5" {{ sylius_test_html_attribute('shipping-address') }}>
+    {% hook 'shipping_address' with {'address': order.shippingAddress} %}
+</div>

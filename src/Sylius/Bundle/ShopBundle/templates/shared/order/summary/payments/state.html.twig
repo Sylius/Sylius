@@ -1,0 +1,6 @@
+{% set order = hookable_metadata.context.order %}
+{% set state = order.paymentState %}
+
+{% if state != 'cart' %}
+    {% include "@SyliusShop/shared/order/summary/payments/state/order_payment_state.html.twig" %}
+{% endif %}

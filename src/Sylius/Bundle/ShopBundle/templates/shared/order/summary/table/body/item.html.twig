@@ -1,0 +1,5 @@
+{% set item = hookable_metadata.context.item %}
+
+<td class="border-bottom">
+    {% hook 'item' with { item, 'variant': item.variant } %}
+</td>

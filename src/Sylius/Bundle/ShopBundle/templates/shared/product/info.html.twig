@@ -1,3 +1,8 @@
+{% if variant is not defined %}
+    {% set item = hookable_metadata.context.item %}
+    {% set variant = hookable_metadata.context.variant %}
+{% endif %}
+
 {% set product = variant.product %}
 
 <div class="d-flex align-items-center gap-4">
