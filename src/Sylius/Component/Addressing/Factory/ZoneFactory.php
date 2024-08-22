@@ -24,6 +24,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class ZoneFactory implements ZoneFactoryInterface
 {
+    /**
+     * @param FactoryInterface<ZoneInterface> $factory
+     * @param FactoryInterface<ZoneMemberInterface> $zoneMemberFactory
+     */
     public function __construct(private FactoryInterface $factory, private FactoryInterface $zoneMemberFactory)
     {
     }
@@ -35,7 +39,6 @@ final class ZoneFactory implements ZoneFactoryInterface
 
     public function createTyped(string $type): ZoneInterface
     {
-        /** @var ZoneInterface $zone */
         $zone = $this->createNew();
         $zone->setType($type);
 
@@ -44,10 +47,8 @@ final class ZoneFactory implements ZoneFactoryInterface
 
     public function createWithMembers(array $membersCodes): ZoneInterface
     {
-        /** @var ZoneInterface $zone */
         $zone = $this->createNew();
         foreach ($membersCodes as $memberCode) {
-            /** @var ZoneMemberInterface $zoneMember */
             $zoneMember = $this->zoneMemberFactory->createNew();
             $zoneMember->setCode($memberCode);
 

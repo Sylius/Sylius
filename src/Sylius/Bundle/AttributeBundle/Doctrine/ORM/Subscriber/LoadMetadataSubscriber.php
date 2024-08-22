@@ -17,6 +17,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\Persistence\Mapping\MappingException;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
@@ -44,6 +45,11 @@ final class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param class-string $subjectClass
+     * @throws MappingException
+     * @throws \ReflectionException
+     */
     private function mapSubjectOnAttributeValue(
         string $subject,
         string $subjectClass,
@@ -71,6 +77,11 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $metadata->mapManyToOne($subjectMapping);
     }
 
+    /**
+     * @param class-string $attributeClass
+     * @throws MappingException
+     * @throws \ReflectionException
+     */
     private function mapAttributeOnAttributeValue(
         string $attributeClass,
         ClassMetadataInfo $metadata,

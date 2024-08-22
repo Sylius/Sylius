@@ -17,6 +17,7 @@ use Doctrine\ORM\AbstractQuery;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @template T of ChannelInterface
@@ -29,22 +30,34 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
 
     public function findOneByHostname(string $hostname): ?ChannelInterface
     {
-        return $this->findOneBy(['hostname' => $hostname], self::ORDER_BY);
+        $channel = $this->findOneBy(['hostname' => $hostname], self::ORDER_BY);
+        Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
+
+        return $channel;
     }
 
     public function findOneEnabledByHostname(string $hostname): ?ChannelInterface
     {
-        return $this->findOneBy(['hostname' => $hostname, 'enabled' => true], self::ORDER_BY);
+        $channel = $this->findOneBy(['hostname' => $hostname, 'enabled' => true], self::ORDER_BY);
+        Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
+
+        return $channel;
     }
 
     public function findOneByCode(string $code): ?ChannelInterface
     {
-        return $this->findOneBy(['code' => $code], self::ORDER_BY);
+        $channel = $this->findOneBy(['code' => $code], self::ORDER_BY);
+        Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
+
+        return $channel;
     }
 
     public function findByName(string $name): iterable
     {
-        return $this->findBy(['name' => $name], self::ORDER_BY);
+        $channels = $this->findBy(['name' => $name], self::ORDER_BY);
+        Assert::allIsInstanceOf($channels, ChannelInterface::class);
+
+        return $channels;
     }
 
     public function findAllWithBasicData(): iterable

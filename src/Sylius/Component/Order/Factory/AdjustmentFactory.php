@@ -21,6 +21,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class AdjustmentFactory implements AdjustmentFactoryInterface
 {
+    /**
+     * @param FactoryInterface<AdjustmentInterface> $adjustmentFactory
+     */
     public function __construct(private FactoryInterface $adjustmentFactory)
     {
     }

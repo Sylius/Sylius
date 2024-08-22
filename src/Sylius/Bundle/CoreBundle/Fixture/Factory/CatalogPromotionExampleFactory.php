@@ -111,7 +111,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
                 return $code;
             })
-            ->setDefault('name', fn (Options $options): string => (string) $this->faker->words(3, true))
+            ->setDefault('name', fn (Options $options): string => (string) $this->faker->words(3, true)) // @phpstan-ignore-line
             ->setDefault('label', fn (Options $options): string => $options['name'])
             ->setDefault('description', fn (Options $options): string => $this->faker->sentence())
             ->setDefault('channels', LazyOption::all($this->channelRepository))

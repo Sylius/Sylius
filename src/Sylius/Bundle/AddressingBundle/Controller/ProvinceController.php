@@ -16,13 +16,16 @@ namespace Sylius\Bundle\AddressingBundle\Controller;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Webmozart\Assert\Assert;
 
 class ProvinceController extends ResourceController
 {
@@ -38,9 +41,11 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
-        /** @var CountryInterface|null $country */
-        $country = $this->get('sylius.repository.country')->findOneBy(['code' => $countryCode]);
-        if ($country === null) {
+        /** @var RepositoryInterface<CountryInterface>|mixed $countryRepository */
+        $countryRepository = $this->get('sylius.repository.country');
+        Assert::isInstanceOf($countryRepository, RepositoryInterface::class);
+        $country = $countryRepository->findOneBy(['code' => $countryCode]);
+        if (!$country instanceof CountryInterface) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 
@@ -77,7 +82,9 @@ class ProvinceController extends ResourceController
 
     protected function createProvinceChoiceForm(CountryInterface $country): FormInterface
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', ProvinceCodeChoiceType::class, null, [
+        $formFactory = $this->get('form.factory');
+        Assert::isInstanceOf($formFactory, FormFactoryInterface::class);
+        return $formFactory->createNamed('sylius_address_province', ProvinceCodeChoiceType::class, null, [
             'country' => $country,
             'label' => 'sylius.form.address.province',
             'placeholder' => 'sylius.form.province.select',
@@ -86,7 +93,9 @@ class ProvinceController extends ResourceController
 
     protected function createProvinceTextForm(): FormInterface
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', TextType::class, null, [
+        $formFactory = $this->get('form.factory');
+        Assert::isInstanceOf($formFactory, FormFactoryInterface::class);
+        return $formFactory->createNamed('sylius_address_province', TextType::class, null, [
             'required' => false,
             'label' => 'sylius.form.address.province',
         ]);

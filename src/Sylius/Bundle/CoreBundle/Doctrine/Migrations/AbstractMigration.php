@@ -63,6 +63,10 @@ abstract class AbstractMigration extends BaseAbstractMigration
         return false;
     }
 
+    /**
+     * @param class-string $className
+     * @throws \ReflectionException
+     */
     private function getVersion(): string
     {
         return (new \ReflectionClass($this))->getName();

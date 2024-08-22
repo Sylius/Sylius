@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
@@ -63,6 +64,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
         if (null === $filters) {
             return $data;
         }
+        Assert::isArray($data);
 
         if (!isset($filters['tokenValue']) || !isset($filters['shipmentId'])) {
             return null;
@@ -84,6 +86,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
         Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
 
         $calculator = $this->shippingCalculators->get($object->getCalculator());
+        Assert::isInstanceOf($calculator, CalculatorInterface::class);
         $data['price'] = $calculator->calculate($shipment, $object->getConfiguration());
 
         return $data;

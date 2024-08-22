@@ -68,7 +68,9 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
         ;
 
         foreach ($results as $result) {
-            $result->setFallbackLocale(array_key_first($result->getTranslations()->toArray()));
+            /** @var string $fallbackLocale */
+            $fallbackLocale = array_key_first($result->getTranslations()->toArray());
+            $result->setFallbackLocale($fallbackLocale);
         }
 
         return $results;

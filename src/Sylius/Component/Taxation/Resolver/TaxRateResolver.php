@@ -20,6 +20,9 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 class TaxRateResolver implements TaxRateResolverInterface
 {
+    /**
+     * @param RepositoryInterface<TaxRateInterface> $taxRateRepository
+     */
     public function __construct(
         protected RepositoryInterface $taxRateRepository,
         protected ?TaxRateDateEligibilityCheckerInterface $taxRateDateChecker = null,

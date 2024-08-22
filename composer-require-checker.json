@@ -56,6 +56,7 @@
     "Payum\\Core\\Storage\\AbstractStorage",
     "Payum\\Paypal\\ExpressCheckout\\Nvp\\PaypalExpressCheckoutGatewayFactory",
     "Payum\\Stripe\\StripeCheckoutGatewayFactory",
+    "Symfony\\Component\\HttpFoundation\\Session\\FlashBagAwareSessionInterface",
     "PHPUnit\\Framework\\ExpectationFailedException",
     "Psr\\Container\\ContainerInterface",
     "Psr\\Http\\Message\\RequestFactoryInterface",

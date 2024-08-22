@@ -55,7 +55,7 @@ final class ExtensionsRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.extensions.apc', []),
-                !(function_exists('apc_store') && ini_get('apc.enabled')) || version_compare(phpversion('apc'), '3.0.17', '>='),
+                !(function_exists('apc_store') && ini_get('apc.enabled')) || version_compare((string) phpversion('apc'), '3.0.17', '>='),
                 true,
                 $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'APC (>=3.0.17)']),
             ))
@@ -129,7 +129,7 @@ final class ExtensionsRequirements extends RequirementCollection
 
                 ob_start();
                 $reflector->info();
-                $output = strip_tags(ob_get_clean());
+                $output = strip_tags((string) ob_get_clean());
 
                 preg_match('/^ICU version +(?:=> )?(.*)$/m', $output, $matches);
                 $version = $matches[1];

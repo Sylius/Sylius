@@ -23,6 +23,9 @@ use Webmozart\Assert\Assert;
  */
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
+    /**
+     * @param FactoryInterface<PromotionCouponInterface> $factory
+     */
     public function __construct(private FactoryInterface $factory)
     {
     }
@@ -39,7 +42,6 @@ final class PromotionCouponFactory implements PromotionCouponFactoryInterface
             sprintf('Promotion with name %s is not coupon based.', $promotion->getName()),
         );
 
-        /** @var PromotionCouponInterface $coupon */
         $coupon = $this->factory->createNew();
         $coupon->setPromotion($promotion);
 

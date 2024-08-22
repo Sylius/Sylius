@@ -27,6 +27,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class PromotionRuleFactory implements PromotionRuleFactoryInterface
 {
+    /**
+     * @param FactoryInterface<PromotionRuleInterface> $decoratedFactory
+     */
     public function __construct(private FactoryInterface $decoratedFactory)
     {
     }
@@ -46,6 +49,10 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(ItemTotalRuleChecker::TYPE, [$channelCode => ['amount' => $amount]]);
     }
 
+    /**
+     * @param array<string> $taxons Taxons codes
+     * @return PromotionRuleInterface
+     */
     public function createHasTaxon(array $taxons): PromotionRuleInterface
     {
         return $this->createPromotionRule(HasTaxonRuleChecker::TYPE, ['taxons' => $taxons]);
@@ -70,9 +77,11 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(ContainsProductRuleChecker::TYPE, ['product_code' => $productCode]);
     }
 
+    /**
+     * @param array<array-key, mixed> $configuration
+     */
     private function createPromotionRule(string $type, array $configuration): PromotionRuleInterface
     {
-        /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType($type);
         $rule->setConfiguration($configuration);

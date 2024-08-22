@@ -24,6 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TaxonSlugController
 {
+    /**
+     * @param RepositoryInterface<TaxonInterface> $taxonRepository
+     * @param FactoryInterface<TaxonInterface> $taxonFactory
+     */
     public function __construct(
         private TaxonSlugGeneratorInterface $taxonSlugGenerator,
         private RepositoryInterface $taxonRepository,
@@ -40,7 +44,6 @@ final class TaxonSlugController
 
         $locale = (string) $request->query->get('locale');
 
-        /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();
         $taxon->setCurrentLocale($locale);
         $taxon->setFallbackLocale($locale);

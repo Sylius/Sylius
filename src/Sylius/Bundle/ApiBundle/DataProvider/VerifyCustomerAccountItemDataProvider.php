@@ -16,14 +16,24 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Webmozart\Assert\Assert;
 
 final class VerifyCustomerAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = [])
+    /**
+     * @param string $id
+     * @param array<string, mixed> $context
+     */
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = []): VerifyCustomerAccount
     {
+        Assert::string($id);
+
         return new VerifyCustomerAccount($id);
     }
 
+    /**
+     * @param array<string, mixed> $context
+     */
     public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, VerifyCustomerAccount::class, true);

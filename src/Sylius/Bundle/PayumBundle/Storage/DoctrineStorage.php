@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PayumBundle\Storage;
 use Doctrine\Persistence\ObjectManager;
 use Payum\Core\Model\Identity;
 use Payum\Core\Storage\AbstractStorage;
+use Webmozart\Assert\Assert;
 
 /**
  * It's a drop-in replacement for DoctrineStorage that accepts
@@ -27,11 +28,20 @@ use Payum\Core\Storage\AbstractStorage;
  */
 class DoctrineStorage extends AbstractStorage
 {
-    public function __construct(protected ObjectManager $objectManager, $modelClass)
+    /** @var class-string */
+    protected $modelClass;
+
+    /**
+     * @param class-string $modelClass
+     */
+    public function __construct(protected ObjectManager $objectManager, string $modelClass)
     {
         parent::__construct($modelClass);
     }
 
+    /**
+     * @param array<string, mixed> $criteria
+     */
     public function findBy(array $criteria): array
     {
         return $this->objectManager->getRepository($this->modelClass)->findBy($criteria);
@@ -39,6 +49,7 @@ class DoctrineStorage extends AbstractStorage
 
     protected function doFind($id): ?object
     {
+        Assert::classExists($this->modelClass);
         return $this->objectManager->find($this->modelClass, $id);
     }
 

@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
 {
@@ -223,12 +224,18 @@ class OrderController extends ResourceController
 
     protected function getContext(): CartContextInterface
     {
-        return $this->get('sylius.context.cart');
+        $cartContext = $this->get('sylius.context.cart');
+        Assert::isInstanceOf($cartContext, CartContextInterface::class);
+
+        return $cartContext;
     }
 
     protected function getOrderRepository(): OrderRepositoryInterface
     {
-        return $this->get('sylius.repository.order');
+        $orderRepository = $this->get('sylius.repository.order');
+        Assert::isInstanceOf($orderRepository, OrderRepositoryInterface::class);
+
+        return $orderRepository;
     }
 
     protected function getEventDispatcher(): EventDispatcherInterface

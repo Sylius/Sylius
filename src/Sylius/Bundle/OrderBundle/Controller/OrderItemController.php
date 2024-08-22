@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\CartActions;
@@ -27,10 +28,14 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Webmozart\Assert\Assert;
 
 class OrderItemController extends ResourceController
 {
@@ -45,8 +50,11 @@ class OrderItemController extends ResourceController
 
         $this->getQuantityModifier()->modify($orderItem, 1);
 
+        /** @var class-string<FormTypeInterface>|null $formType */
+        $formType = $configuration->getFormType();
+        Assert::classExists($formType);
         $form = $this->getFormFactory()->create(
-            $configuration->getFormType(),
+            $formType,
             $this->createAddToCartCommand($cart, $orderItem),
             $configuration->getFormOptions(),
         );
@@ -135,7 +143,9 @@ class OrderItemController extends ResourceController
 
         $cart = $this->getCurrentCart();
         if ($cart !== $orderItem->getOrder()) {
-            $this->addFlash('error', $this->get('translator')->trans('sylius.cart.cannot_modify', [], 'flashes'));
+            $translator = $this->get('translator');
+            Assert::isInstanceOf($translator, TranslatorInterface::class);
+            $this->addFlash('error', $translator->trans('sylius.cart.cannot_modify', [], 'flashes'));
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
@@ -165,7 +175,10 @@ class OrderItemController extends ResourceController
 
     protected function getOrderRepository(): OrderRepositoryInterface
     {
-        return $this->get('sylius.repository.order');
+        $orderRepository = $this->get('sylius.repository.order');
+        Assert::isInstanceOf($orderRepository, OrderRepositoryInterface::class);
+
+        return $orderRepository;
     }
 
     protected function redirectToCartSummary(RequestConfiguration $configuration): Response
@@ -189,38 +202,58 @@ class OrderItemController extends ResourceController
 
     protected function getContext(): CartContextInterface
     {
-        return $this->get('sylius.context.cart');
+        $cartContext = $this->get('sylius.context.cart');
+        Assert::isInstanceOf($cartContext, CartContextInterface::class);
+
+        return $cartContext;
     }
 
     protected function createAddToCartCommand(OrderInterface $cart, OrderItemInterface $cartItem): AddToCartCommandInterface
     {
-        return $this->get('sylius.factory.add_to_cart_command')->createWithCartAndCartItem($cart, $cartItem);
+        $addToCartCommandFactory = $this->get('sylius.factory.add_to_cart_command');
+        Assert::isInstanceOf($addToCartCommandFactory, AddToCartCommandFactoryInterface::class);
+
+        return $addToCartCommandFactory->createWithCartAndCartItem($cart, $cartItem);
     }
 
     protected function getFormFactory(): FormFactoryInterface
     {
-        return $this->get('form.factory');
+        $formFactory = $this->get('form.factory');
+        Assert::isInstanceOf($formFactory, FormFactoryInterface::class);
+
+        return $formFactory;
     }
 
     protected function getQuantityModifier(): OrderItemQuantityModifierInterface
     {
-        return $this->get('sylius.order_item_quantity_modifier');
+        $quantityModifier = $this->get('sylius.order_item_quantity_modifier');
+        Assert::isInstanceOf($quantityModifier, OrderItemQuantityModifierInterface::class);
+
+        return $quantityModifier;
     }
 
     protected function getOrderModifier(): OrderModifierInterface
     {
-        return $this->get('sylius.order_modifier');
+        $orderModifier = $this->get('sylius.order_modifier');
+        Assert::isInstanceOf($orderModifier, OrderModifierInterface::class);
+
+        return $orderModifier;
     }
 
     protected function getCartManager(): EntityManagerInterface
     {
-        return $this->get('sylius.manager.order');
+        $cartManager = $this->get('sylius.manager.order');
+        Assert::isInstanceOf($cartManager, EntityManagerInterface::class);
+
+        return $cartManager;
     }
 
     protected function getCartItemErrors(OrderItemInterface $orderItem): ConstraintViolationListInterface
     {
-        return $this
-            ->get('validator')
+        $validator = $this->get('validator');
+        Assert::isInstanceOf($validator, ValidatorInterface::class);
+
+        return $validator
             ->validate($orderItem, null, $this->getParameter('sylius.form.type.order_item.validation_groups'))
         ;
     }
@@ -232,7 +265,7 @@ class OrderItemController extends ResourceController
                 ? $form->get('cartItem')
                 : $form->get('cartItem')->get($error->getPropertyPath());
 
-            $formSelected->addError(new FormError($error->getMessage()));
+            $formSelected->addError(new FormError((string) $error->getMessage()));
         }
 
         return $form;

@@ -24,6 +24,9 @@ use Webmozart\Assert\Assert;
 
 final class SelectProductAttributeChoiceRemoveListener
 {
+    /**
+     * @param class-string $productAttributeValueClass
+     */
     public function __construct(private string $productAttributeValueClass)
     {
     }
@@ -60,8 +63,8 @@ final class SelectProductAttributeChoiceRemoveListener
      */
     public function removeValues(ObjectManager $entityManager, array $choiceKeys): void
     {
-        /** @var ProductAttributeValueRepositoryInterface $productAttributeValueRepository */
         $productAttributeValueRepository = $entityManager->getRepository($this->productAttributeValueClass);
+        Assert::isInstanceOf($productAttributeValueRepository, ProductAttributeValueRepositoryInterface::class);
         foreach ($choiceKeys as $choiceKey) {
             $productAttributeValues = $productAttributeValueRepository->findByJsonChoiceKey($choiceKey);
 

@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,7 +55,9 @@ final class ContactController
 
     public function requestAction(Request $request): Response
     {
+        /** @var class-string<FormTypeInterface>|null $formType */
         $formType = $this->getSyliusAttribute($request, 'form', ContactType::class);
+        Assert::notNull($formType);
         $form = $this->formFactory->create($formType, null, $this->getFormOptions());
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {

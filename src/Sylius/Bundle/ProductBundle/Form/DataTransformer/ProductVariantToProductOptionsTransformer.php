@@ -54,11 +54,11 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
             return null;
         }
 
-        if (!is_array($value) && !$value instanceof \Traversable && !$value instanceof \ArrayAccess) {
-            throw new UnexpectedTypeException($value, '\Traversable or \ArrayAccess');
+        if (!is_array($value) && !$value instanceof \Traversable) {
+            throw new UnexpectedTypeException($value, '\Traversable or array');
         }
 
-        return $this->matches(is_array($value) ? $value : iterator_to_array($value));
+        return $this->matches($value instanceof \Traversable ? iterator_to_array($value) : $value);
     }
 
     /**

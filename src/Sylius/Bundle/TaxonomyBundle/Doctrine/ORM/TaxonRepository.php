@@ -17,6 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @template T of TaxonInterface
@@ -144,7 +145,9 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
 
         foreach ($results as $result) {
-            $result->setFallbackLocale(array_key_first($result->getTranslations()->toArray()));
+            $fallbackLocale = array_key_first($result->getTranslations()->toArray());
+            Assert::notNull($fallbackLocale);
+            $result->setFallbackLocale((string) $fallbackLocale);
         }
 
         return $results;

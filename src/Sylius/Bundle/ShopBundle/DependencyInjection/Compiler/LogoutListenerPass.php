@@ -19,6 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
+use Webmozart\Assert\Assert;
 
 final class LogoutListenerPass implements CompilerPassInterface
 {
@@ -28,7 +29,8 @@ final class LogoutListenerPass implements CompilerPassInterface
             return;
         }
 
-        $firewallName = (string) $container->getParameter('sylius_shop.firewall_context_name');
+        $firewallName = $container->getParameter('sylius_shop.firewall_context_name');
+        Assert::string($firewallName);
         $securityDispatcherId = sprintf('security.event_dispatcher.%s', $firewallName);
 
         if (!$container->hasDefinition($securityDispatcherId)) {

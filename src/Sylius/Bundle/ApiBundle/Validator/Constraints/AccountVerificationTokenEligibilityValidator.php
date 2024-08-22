@@ -26,7 +26,7 @@ final class AccountVerificationTokenEligibilityValidator extends ConstraintValid
     {
     }
 
-    public function validate(mixed $value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint):  void
     {
         Assert::isInstanceOf($value, VerifyCustomerAccount::class);
 

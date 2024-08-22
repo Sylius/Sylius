@@ -26,10 +26,8 @@ trait PrependDoctrineMigrationsTrait
             return;
         }
 
-        if (
-            $container->hasParameter('sylius_core.prepend_doctrine_migrations') &&
-            !$container->getParameter('sylius_core.prepend_doctrine_migrations')
-        ) {
+        if ($container->hasParameter('sylius_core.prepend_doctrine_migrations') &&
+            !$container->getParameter('sylius_core.prepend_doctrine_migrations')) {
             return;
         }
 

@@ -18,6 +18,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CartContext implements CartContextInterface
 {
+    /**
+     * @param FactoryInterface<OrderInterface> $cartFactory
+     */
     public function __construct(private FactoryInterface $cartFactory)
     {
     }

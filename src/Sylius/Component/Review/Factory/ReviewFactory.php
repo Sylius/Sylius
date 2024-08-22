@@ -23,6 +23,9 @@ use Sylius\Component\Review\Model\ReviewInterface;
  */
 final class ReviewFactory implements ReviewFactoryInterface
 {
+    /**
+     * @param FactoryInterface<ReviewInterface> $factory
+     */
     public function __construct(private FactoryInterface $factory)
     {
     }
@@ -34,7 +37,6 @@ final class ReviewFactory implements ReviewFactoryInterface
 
     public function createForSubject(ReviewableInterface $subject): ReviewInterface
     {
-        /** @var ReviewInterface $review */
         $review = $this->factory->createNew();
         $review->setReviewSubject($subject);
 
@@ -43,7 +45,6 @@ final class ReviewFactory implements ReviewFactoryInterface
 
     public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer): ReviewInterface
     {
-        /** @var ReviewInterface $review */
         $review = $this->createForSubject($subject);
         $review->setAuthor($reviewer);
 

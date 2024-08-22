@@ -73,7 +73,9 @@ class ImageUploader implements ImageUploaderInterface
 
         Assert::isInstanceOf($file, File::class);
 
-        $fileContent = $this->sanitizeContent(file_get_contents($file->getPathname()), $file->getMimeType());
+        $fileContent = file_get_contents($file->getPathname());
+        Assert::notFalse($fileContent);
+        $fileContent = $this->sanitizeContent($fileContent, $file->getMimeType());
 
         if (null !== $image->getPath() && $this->filesystem->has($image->getPath())) {
             $this->remove($image->getPath());
@@ -103,6 +105,7 @@ class ImageUploader implements ImageUploaderInterface
     {
         if (self::MIME_SVG_XML === $mimeType || self::MIME_SVG === $mimeType) {
             $fileContent = $this->sanitizer->sanitize($fileContent);
+            Assert::notFalse($fileContent);
         }
 
         return $fileContent;
