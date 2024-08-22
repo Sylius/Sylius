@@ -7,7 +7,7 @@ Feature: Accessing a product which does not exist
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui @api
+    @api @ui
     Scenario: Accessing a product which does not exist
         When I try to reach nonexistent product
         Then I should be informed that the product does not exist

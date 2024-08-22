@@ -12,7 +12,7 @@ Feature: Viewing products from a specific taxon
         And the store has a product "Plastic Tomato" available in "Poland" channel
         And this product belongs to "Funny"
 
-    @ui @api
+    @api @ui
     Scenario: Viewing products from a specific taxon
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"
@@ -30,7 +30,7 @@ Feature: Viewing products from a specific taxon
         Then I should see the product "T-Shirt Banana"
         And I should not see the product "Plastic Tomato"
 
-    @ui @api
+    @api @ui
     Scenario: Viewing information about empty list of products from a given taxon
         When I browse products from taxon "Sad"
         Then I should see empty list of products
