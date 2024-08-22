@@ -23,6 +23,7 @@ use Webmozart\Assert\Assert;
 
 final readonly class RemoveItemFromCartHandler implements MessageHandlerInterface
 {
+    /** @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository */
     public function __construct(
         private OrderItemRepositoryInterface $orderItemRepository,
         private OrderModifierInterface $orderModifier,
