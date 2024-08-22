@@ -77,28 +77,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getAttributeByName(string $name): ?string
     {
-        $attributesTable = $this->getElement('attributes');
-
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            try {
-                $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
-                if (!$attributesTab->hasAttribute('[data-test-active]')) {
-                    $attributesTab->click();
-                }
-            } catch (ElementNotFoundException) {
-                return null;
-            }
-        }
-
-        $nameTd = $attributesTable->find('css', sprintf('[data-test-product-attribute-name="%s"]', $name));
-
-        if (null === $nameTd) {
+        try {
+            $attributeValueElement = $this->getElement('attributes')
+                ->find('css', sprintf('[data-test-product-attribute-value="%s"]', $name));
+        } catch (ElementNotFoundException) {
             return null;
         }
 
-        $row = $nameTd->getParent();
-
-        return trim($row->find('css', '[data-test-product-attribute-value]')->getText());
+        return $attributeValueElement->getText();
     }
 
     public function getAttributeListByName(string $name): array
@@ -110,9 +96,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getAttributes(): array
     {
-        $attributesTable = $this->getElement('attributes');
-
-        return $attributesTable->findAll('css', '[data-test-product-attribute-name]');
+        return $this->getElement('attributes')
+            ->findAll('css', '[data-test-product-attribute-name]');
     }
 
     public function getAverageRating(): float
