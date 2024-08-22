@@ -833,6 +833,10 @@ final class CartContext implements Context
         $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
+        $this->sharedStorage->set(
+            'created_as_guest',
+            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'customer') === null,
+        );
 
         return $tokenValue;
     }
