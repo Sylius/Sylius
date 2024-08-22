@@ -79,10 +79,11 @@
             id="sylius_api.validator.adding_eligible_product_variant_to_cart"
             class="Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCartValidator"
         >
-            <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.availability_checker" />
-            <tag name="validator.constraint_validator" alias="sylius_api_validator_adding_eligible_product_variant_to_cart" />
+            <argument type="service" id="sylius.repository.product_variant"/>
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="sylius.availability_checker"/>
+            <tag name="validator.constraint_validator"
+                 alias="sylius_api_validator_adding_eligible_product_variant_to_cart"/>
         </service>
 
         <service
@@ -258,5 +259,12 @@
             <tag name="validator.constraint_validator" alias="sylius_validator_update_cart_email_not_allowed" />
         </service>
 
+        <service
+            id="sylius_api.validator.placed_order_cart_items_immutable"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\PlacedOrderCartItemsImmutableValidator"
+        >
+            <argument type="service" id="sylius.repository.order"/>
+            <tag name="validator.constraint_validator" alias="sylius_validator_placed_order_cart_items_immutable"/>
+        </service>
     </services>
 </container>

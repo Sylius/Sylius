@@ -27,7 +27,10 @@ use Webmozart\Assert\Assert;
 
 final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 {
-    /** @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository */
+    /**
+     * @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
         private readonly OrderItemRepositoryInterface $orderItemRepository,
         private readonly OrderRepositoryInterface $orderRepository,
