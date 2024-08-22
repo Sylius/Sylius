@@ -25,8 +25,8 @@ final class ShopUserRegistrationType extends AbstractResourceType
         $builder
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'sylius.form.user.password.label'],
-                'second_options' => ['label' => 'sylius.form.user.password.confirmation'],
+                'first_options' => ['label' => 'sylius.form.user.password.label', 'always_empty' => false],
+                'second_options' => ['label' => 'sylius.form.user.password.confirmation', 'always_empty' => false],
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ])
         ;
