@@ -614,6 +614,18 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be informed that I cannot change the cart items after the checkout is completed
+     */
+    public function iShouldBeInformedThatICannotChangeTheCartItemsAfterTheCheckoutIsCompleted(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->shopClient->getLastResponse()),
+            'Cannot change cart items after the checkout is completed."',
+        );
+        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 422);
+    }
+
+    /**
      * @Then /^the administrator should see "([^"]+)" product with quantity (\d+) in the (?:customer|visitor) cart$/
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
