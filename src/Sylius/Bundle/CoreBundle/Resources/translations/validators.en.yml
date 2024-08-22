@@ -91,6 +91,8 @@ sylius:
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
         insufficient_stock: 'Insufficient stock'
+        quantity:
+            not_in_range: Quantity must be between {{ min }} and {{ max }}.
     max_integer: 'Value must be less than {{ compared_value }}.'
     order:
         address_requirement: 'Please provide a %addressName%.'
