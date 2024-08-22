@@ -1,24 +1,27 @@
 twig_hooks:
     hooks:
         'sylius_shop.account.register':
-            header:
-                template: '@SyliusShop/account/register/header.html.twig'
             form:
-                template: '@SyliusShop/account/register/form.html.twig'
-
-        'sylius_shop.account.register.header':
-            title:
-                template: '@SyliusShop/account/register/header/title.html.twig'
-            subtitle:
-                template: '@SyliusShop/account/register/header/subtitle.html.twig'
+                component: 'sylius_shop:account:register:form'
+                props:
+                    resource: '@=_context.customer'
+                    form: '@=_context.form'
 
         'sylius_shop.account.register.form':
+            header:
+                template: '@SyliusShop/account/register/form/header.html.twig'
             personal_information:
                 template: '@SyliusShop/account/register/form/personal_information.html.twig'
             credentials:
                 template: '@SyliusShop/account/register/form/credentials.html.twig'
             buttons:
                 template: '@SyliusShop/account/register/form/buttons.html.twig'
+                
+        'sylius_shop.account.register.form.header':
+            title:
+                template: '@SyliusShop/account/register/form/header/title.html.twig'
+            subtitle:
+                template: '@SyliusShop/account/register/form/header/subtitle.html.twig'
 
         'sylius_shop.account.register.form.personal_information':
             header:
