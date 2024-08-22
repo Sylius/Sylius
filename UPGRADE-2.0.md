@@ -180,7 +180,16 @@
       `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
       `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
 
-# Password Encoder & Salt
+* The following helper classes and interfaces have been removed:
+
+  Money:
+
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
+
+## Password Encoder & Salt
 The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
 
 This "encoder" is configured via the [Symfony security password hasher](https://symfony.com/doc/current/security/passwords.html#configuring-a-password-hasher).
