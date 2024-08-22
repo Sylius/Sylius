@@ -9,7 +9,7 @@ Feature: Signing out
         And I am a logged in customer
         And I am browsing my orders
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Signing out
         When I log out
         Then I should be redirected to the homepage

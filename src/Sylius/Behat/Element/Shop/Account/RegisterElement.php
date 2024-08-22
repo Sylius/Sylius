@@ -89,7 +89,7 @@ final class RegisterElement extends Element implements RegisterElementInterface
             'password' => '[data-test-password-first]',
             'password_verification' => '[data-test-password-second]',
             'phone_number' => '[data-test-phone-number]',
-            'register_button' => '[data-test-register-button]',
+            'register_button' => '[data-test-button="register-button"]',
         ]);
     }
 }

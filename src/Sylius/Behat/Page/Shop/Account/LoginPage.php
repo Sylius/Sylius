@@ -48,7 +48,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
             'login_button' => '[data-test-button="login-button"]',
             'password' => '[data-test-login-password]',
             'username' => '[data-test-login-username]',
-            'validation_error' => '[data-test-flash-message="negative"]',
+            'validation_error' => '[data-test-flash-message]',
         ]);
     }
 }
