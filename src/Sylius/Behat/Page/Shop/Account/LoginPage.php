@@ -45,7 +45,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'login_button' => '[data-test-login-button]',
+            'login_button' => '[data-test-button="login-button"]',
             'password' => '[data-test-login-password]',
             'username' => '[data-test-login-username]',
             'validation_error' => '[data-test-flash-message="negative"]',
