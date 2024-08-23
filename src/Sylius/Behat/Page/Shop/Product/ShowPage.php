@@ -341,7 +341,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'add_to_cart_button' => '[data-test-add-to-cart-button]',
+            'add_to_cart_button' => '[data-test-button="add-to-cart-button"]',
             'applied_catalog_promotions' => '[data-test-applied-catalog-promotions]',
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
