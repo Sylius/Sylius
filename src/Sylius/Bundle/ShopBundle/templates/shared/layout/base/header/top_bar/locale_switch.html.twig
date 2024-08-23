@@ -1,12 +1,14 @@
-{% if locales|length > 1 %}
-    <div {{ sylius_test_html_attribute('locale-selector') }}>
-        <span {{ sylius_test_html_attribute('active-locale') }}>{{ active|sylius_locale_name }}</span>
-        {% for code in locales %}
-            {% if code is not same as(active) %}
-                <a href="{{ path('sylius_shop_switch_locale', {'code': code}) }}" {{ sylius_test_html_attribute('available-locale') }}>
-                    {{ code|sylius_locale_name }}
-                </a>
-            {% endif %}
-        {% endfor %}
+{% if available_locales|length > 1 %}
+    <div class="col-auto">
+        <div {{ sylius_test_html_attribute('locale-selector') }}>
+            <span {{ sylius_test_html_attribute('active-locale') }}>{{ active_locale|sylius_locale_name }}</span>
+            {% for code in available_locales %}
+                {% if code is not same as(active_locale) %}
+                    <a href="{{ path('sylius_shop_switch_locale', {'code': code}) }}" {{ sylius_test_html_attribute('available-locale') }}>
+                        {{ code|sylius_locale_name }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 {% endif %}

@@ -227,5 +227,19 @@
                 template="@SyliusShop/account/register/form.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_shop.twig.component.locale_switcher"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\LocaleSwitcher"
+        >
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.locale_provider" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:common:locale_switcher"
+                template="@SyliusShop/shared/layout/base/header/top_bar/locale_switch.html.twig"
+            />
+        </service>
     </services>
 </container>

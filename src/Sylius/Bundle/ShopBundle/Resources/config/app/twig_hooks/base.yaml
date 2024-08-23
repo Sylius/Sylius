@@ -24,7 +24,7 @@ twig_hooks:
             currency_switcher:
                 template: '@SyliusShop/shared/layout/base/header/top_bar/currency_switcher.html.twig'
             locale_switcher:
-                template: '@SyliusShop/shared/layout/base/header/top_bar/locale_switcher.html.twig'
+                component: 'sylius_shop:common:locale_switcher'
 
         'sylius_shop.base.header.content':
             logo:
