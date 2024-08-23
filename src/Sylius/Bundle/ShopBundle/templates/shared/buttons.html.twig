@@ -11,14 +11,10 @@
     </a>
 {% endmacro %}
 
-{% macro submit(message, icon, class, sylius_test_attribute_name, sylius_test_attribute_value) %}
+{% macro submit(message, id, icon, class) %}
     {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
-    <button
-        type="submit"
-        class="btn {% if class is not empty %}{{ class }}{% endif %}"
-        {{ sylius_test_html_attribute(sylius_test_attribute_name|default('submit-button'), sylius_test_attribute_value|default('')) }}
-    >
+    <button type="submit" class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
             {{ icon(icon) }}
         {% endif %}
@@ -31,7 +27,7 @@
 {% macro transparent(url, message, id, icon, class) %}
     {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
-    <a href="{{ url }}" class="link-reset{% if class is not empty %} {{ class }}{% endif %}"{% if id is not null %} id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('link', id|default(message)) }}>
+    <a href="{{ url }}" class="link-reset{% if class is not empty %} {{ class }}{% endif %}"{% if id is not null %} id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
             {{ icon(icon) }}
         {% endif %}
@@ -56,7 +52,7 @@
 {% macro delete(url, message, labeled = true, resourceId = null) %}
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-sm btn-icon btn-outline-danger" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('delete-button') }}>
+        <button class="btn btn-sm btn-icon btn-outline-danger" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('button', 'delete') }}>
             <i class="icon trash"></i> {{ ((message is empty and labeled) ? 'sylius.ui.delete' : message)|trans }}
         </button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
