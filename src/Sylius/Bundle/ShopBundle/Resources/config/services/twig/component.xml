@@ -141,5 +141,19 @@
                 template="@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_shop.twig.component.product_association"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\ProductAssociationComponent"
+        >
+            <argument type="service" id="sylius.repository.product_association" />
+            <argument type="service" id="sylius.context.channel" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:product:association"
+                template="@SyliusShop/product/show/page/product_listing/association.html.twig"
+            />
+        </service>
     </services>
 </container>
