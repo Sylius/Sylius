@@ -29,11 +29,15 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. */
 final class ProductVariantNormalizerTest extends TestCase
 {
-    private ProductVariantPricesCalculatorInterface&MockObject $pricesCalculator;
+    private MockObject&ProductVariantPricesCalculatorInterface $pricesCalculator;
+
     private AvailabilityCheckerInterface&MockObject $availabilityChecker;
-    private SectionProviderInterface&MockObject $sectionProvider;
+
+    private MockObject&SectionProviderInterface $sectionProvider;
+
     private IriConverterInterface&MockObject $iriConverter;
-    private NormalizerInterface&MockObject $normalizer;
+
+    private MockObject&NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {
