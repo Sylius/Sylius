@@ -10,13 +10,13 @@ Feature: Redirecting to the default locale
         And it uses the "English (United States)" locale by default
         And the store has a product "PHP T-Shirt"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Staying on the current locale if it is available
         When I browse that channel
         And I use the locale "French (France)"
         Then I should shop using the "French (France)" locale
 
-    @todo @ui @api
+    @api @ui
     Scenario: Redirecting to default locale if it is not available
         When I browse that channel
         And I use the locale "Polish (Poland)"

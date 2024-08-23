@@ -16,7 +16,6 @@ sylius_shop_homepage:
     defaults:
         template: "@SyliusShop/homepage/index.html.twig"
 
-
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
 
