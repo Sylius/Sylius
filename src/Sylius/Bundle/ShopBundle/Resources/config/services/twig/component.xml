@@ -172,7 +172,7 @@
             <tag
                 name="sylius.live_component"
                 key="sylius_shop:cart:form"
-                template="@SyliusShop/cart/page/form.html.twig"
+                template="@SyliusShop/cart/index/form.html.twig"
             />
         </service>
 
