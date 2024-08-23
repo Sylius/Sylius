@@ -10,8 +10,8 @@
                     <th scope="row" {{ sylius_test_html_attribute('product-attribute-name', attribute_value.name) }}>{{ attribute_value.name }}</th>
                     <td {{ sylius_test_html_attribute('product-attribute-value', attribute_value.name) }}>
                         {% include [
-                            '@SyliusAttribute/types/'~attribute_value.type~'.html.twig',
-                            '@SyliusAttribute/types/default.html.twig'
+                            '@SyliusAttribute/Types/'~attribute_value.type~'.html.twig',
+                            '@SyliusAttribute/Types/default.html.twig'
                         ] with {
                             'attribute': attribute_value,
                             'locale': configuration.request.locale,
