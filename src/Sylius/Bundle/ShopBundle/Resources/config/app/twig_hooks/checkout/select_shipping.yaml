@@ -21,12 +21,20 @@ twig_hooks:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/header.html.twig'
             choice:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice.html.twig'
+                
+        'sylius_shop.checkout.select_shipping.form.shipments.shipment#unavailable':
+            unavailable:
+                template: '@SyliusShop/checkout/select_shipping/unavailable.html.twig'
 
         'sylius_shop.checkout.select_shipping.form.shipments.shipment.choice':
             details:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/details.html.twig'
             fee:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/fee.html.twig'
+                
+        'sylius_shop.checkout.select_shipping.form.shipments.shipment.choice#unavailable':
+            unavailable:
+                template: '@SyliusShop/checkout/select_shipping/unavailable.html.twig'
 
         'sylius_shop.checkout.select_shipping.form.shipments.shipment.choice.details':
             name:

@@ -13,6 +13,6 @@
             </label>
         </div>
     {% else %}
-        {% include '@SyliusShop/checkout/select_shipping/unavailable.html.twig' %}
+        {% hook 'choice#unavailable' %}
     {% endfor %}
 </div>

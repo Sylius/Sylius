@@ -4,5 +4,5 @@
 {% for key, shipment in order.shipments %}
     {% hook 'shipment' with { 'form': form.shipments[key], 'index': loop.index } %}
 {% else %}
-    {% include '@SyliusShop/checkout/select_shipping/unavailable.html.twig' %}
+    {% hook 'shipment#unavailable' %}
 {% endfor %}
