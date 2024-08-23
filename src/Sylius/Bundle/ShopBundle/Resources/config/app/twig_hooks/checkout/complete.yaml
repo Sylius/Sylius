@@ -51,8 +51,6 @@ twig_hooks:
         'sylius_shop.checkout.complete.form.summary.payments':
             header:
                 template: '@SyliusShop/shared/order/summary/payments/header.html.twig'
-            state:
-                template: '@SyliusShop/shared/order/summary/payments/state.html.twig'
             payment_methods:
                 template: '@SyliusShop/shared/order/summary/payments/payment_methods.html.twig'
 
@@ -65,14 +63,10 @@ twig_hooks:
                 template: '@SyliusShop/shared/order/summary/payments/payment_methods/payment_method/name.html.twig'
             price:
                 template: '@SyliusShop/shared/order/summary/payments/payment_methods/payment_method/price.html.twig'
-            state:
-                template: '@SyliusShop/shared/order/summary/payments/payment_methods/payment_method/state.html.twig'
 
         'sylius_shop.checkout.complete.form.summary.shipments':
             header:
                 template: '@SyliusShop/shared/order/summary/shipments/header.html.twig'
-            state:
-                template: '@SyliusShop/shared/order/summary/shipments/state.html.twig'
             shipment_methods:
                 template: '@SyliusShop/shared/order/summary/shipments/shipment_methods.html.twig'
                 
@@ -83,8 +77,6 @@ twig_hooks:
         'sylius_shop.checkout.complete.form.summary.shipments.shipment_methods.shipment_method':
             name:
                 template: '@SyliusShop/shared/order/summary/shipments/shipment_methods/shipment_method/name.html.twig'
-            state:
-                template: '@SyliusShop/shared/order/summary/shipments/shipment_methods/shipment_method/state.html.twig'
 
         'sylius_shop.checkout.complete.form.summary.table':
             head:

@@ -1,3 +1,6 @@
-{% set order = hookable_metadata.context.order %}
+{% from '@SyliusShop/shared/macro/state_label.html.twig' import label %}
 
-<div>{% include [('@SyliusShop/account/order/label/state' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}</div>
+{% set order = hookable_metadata.context.order %}
+{% set state = order.state %}
+
+{{ label(state) }}

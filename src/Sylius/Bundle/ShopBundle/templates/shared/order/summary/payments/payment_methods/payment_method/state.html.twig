@@ -1,8 +1,8 @@
+{% from '@SyliusShop/shared/macro/state_label.html.twig' import label %}
+
 {% set payment = hookable_metadata.context.payment %}
 {% set state = payment.state %}
 
-{% if state != 'cart' %}
-    <div {{ sylius_test_html_attribute('payment-state') }}>
-        {% include "@SyliusShop/shared/order/summary/payments/payment_methods/payment_method/state/single_payment_state.html.twig" with { 'state': state } %}
-    </div>
-{% endif %}
+<div {{ sylius_test_html_attribute('payment-state') }}>
+    {{ label(state) }}
+</div>

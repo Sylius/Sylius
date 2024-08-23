@@ -1,9 +1,9 @@
 {%
     set viewOptions = {
-    cart: { icon: "adjust", color: "grey" } ,
-    cancelled: { icon: "ban", color: "red" } ,
-    shipped: { icon: "plane", color: "green" } ,
-    ready: { icon: "clock", color: "blue" } ,
+        cart: { icon: "adjust", color: "grey" } ,
+        cancelled: { icon: "ban", color: "red" } ,
+        shipped: { icon: "plane", color: "green" } ,
+        ready: { icon: "clock", color: "blue" } ,
     }
 %}
 
@@ -11,5 +11,5 @@
 
 <span class="ui {{ viewOptions[state]['color'] }} label">
     <i class="{{ viewOptions[state]['icon'] }} icon"></i>
-    {{ value|trans }}
+    {{ value|trans }} SINGLE SHIP
 </span>
