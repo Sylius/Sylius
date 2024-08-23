@@ -24,5 +24,12 @@
         <service id="sylius_shop.form.type.cart_item" class="Sylius\Bundle\ShopBundle\Form\Type\CartItemType" >
             <tag name="form.type" />
         </service>
+
+        <service id="sylius_shop.form.type.customer_registration" class="Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.form.type.customer_registration.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

@@ -219,7 +219,7 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Register\FormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType</argument>
 
             <tag
                 name="sylius.live_component"

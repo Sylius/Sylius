@@ -27,7 +27,7 @@ sylius_shop_register:
         _controller: sylius.controller.customer::createAction
         _sylius:
             template: "@SyliusShop/account/register.html.twig"
-            form: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType
+            form: Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType
             event: register
             redirect:
                 route: sylius_shop_register_thank_you
@@ -39,7 +39,7 @@ sylius_shop_register_after_checkout:
     defaults:
         _controller: sylius.controller.customer::createAction
         _sylius:
-            form: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType
+            form: Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType
             factory:
                 method: ['expr:service("sylius.factory.customer_after_checkout")', 'createAfterCheckout']
                 arguments:
