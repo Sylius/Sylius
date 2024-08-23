@@ -144,7 +144,7 @@
 
         <service
             id="sylius_shop.twig.component.product_association"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\ProductAssociationComponent"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\AssociationComponent"
         >
             <argument type="service" id="sylius.repository.product_association" />
             <argument type="service" id="sylius.context.channel" />

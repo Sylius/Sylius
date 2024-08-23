@@ -22,7 +22,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-class ProductAssociationComponent
+class AssociationComponent
 {
     #[ExposeInTemplate('product_association')]
     public ProductAssociationInterface $productAssociation;
