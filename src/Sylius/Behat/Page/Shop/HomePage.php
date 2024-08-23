@@ -107,7 +107,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
             'latest_deals' => '[data-test-latest-deals]',
             'latest_products' => '[data-test-latest-products]',
             'locale_selector' => '[data-test-locale-selector]',
-            'logout_button' => '[data-test-link="logout-button"]',
+            'logout_button' => '[data-test-button="logout-button"]',
         ]);
     }
 
