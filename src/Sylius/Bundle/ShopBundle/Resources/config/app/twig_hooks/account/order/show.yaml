@@ -29,11 +29,13 @@ twig_hooks:
                 template: '@SyliusShop/shared/order/summary/addresses.html.twig'
             table:
                 template: '@SyliusShop/shared/order/summary/table.html.twig'
+            table_summary:
+                template: '@SyliusShop/shared/order/summary/table_summary.html.twig'
             payments:
                 template: '@SyliusShop/shared/order/summary/payments.html.twig'
             shipments:
                 template: '@SyliusShop/shared/order/summary/shipments.html.twig'
-                
+
         'sylius_shop.account.order.show.summary.addresses':
             billing_address:
                 template: '@SyliusShop/shared/order/summary/addresses/billing_address.html.twig'
@@ -79,7 +81,7 @@ twig_hooks:
                 template: '@SyliusShop/shared/order/summary/shipments/state.html.twig'
             shipment_methods:
                 template: '@SyliusShop/shared/order/summary/shipments/shipment_methods.html.twig'
-        
+
         'sylius_shop.account.order.show.summary.shipments.shipment_methods':
             shipment_method:
                 template: '@SyliusShop/shared/order/summary/shipments/shipment_methods/shipment_method.html.twig'
@@ -95,8 +97,6 @@ twig_hooks:
                 template: '@SyliusShop/shared/order/summary/table/head.html.twig'
             body:
                 template: '@SyliusShop/shared/order/summary/table/body.html.twig'
-            foot:
-                template: '@SyliusShop/shared/order/summary/table/foot.html.twig'
 
         'sylius_shop.account.order.show.summary.table.head':
             item:
@@ -107,7 +107,7 @@ twig_hooks:
                 template: '@SyliusShop/shared/order/summary/table/head/quantity.html.twig'
             subtotal:
                 template: '@SyliusShop/shared/order/summary/table/head/subtotal.html.twig'
-        
+
         'sylius_shop.account.order.show.summary.table.body':
             item:
                 template: '@SyliusShop/shared/order/summary/table/body/item.html.twig'
@@ -117,21 +117,22 @@ twig_hooks:
                 template: '@SyliusShop/shared/order/summary/table/body/quantity.html.twig'
             subtotal:
                 template: '@SyliusShop/shared/order/summary/table/body/subtotal.html.twig'
-        
+
         'sylius_shop.account.order.show.summary.table.body.item':
             product:
                 template: '@SyliusShop/shared/product/info.html.twig'
-        
-        'sylius_shop.account.order.show.summary.table.foot':
+
+        'sylius_shop.account.order.show.summary.table_summary':
             subtotal:
-                template: '@SyliusShop/shared/order/summary/table/foot/subtotal.html.twig'
+                template: '@SyliusShop/shared/order/summary/table_summary/subtotal.html.twig'
             taxes:
-                template: '@SyliusShop/shared/order/summary/table/foot/taxes.html.twig'
+                template: '@SyliusShop/shared/order/summary/table_summary/taxes.html.twig'
             promotions:
-                template: '@SyliusShop/shared/order/summary/table/foot/promotions.html.twig'
+                template: '@SyliusShop/shared/order/summary/table_summary/promotions.html.twig'
             shipping:
-                template: '@SyliusShop/shared/order/summary/table/foot/shipping.html.twig'
+                template: '@SyliusShop/shared/order/summary/table_summary/shipping.html.twig'
             total:
-                template: '@SyliusShop/shared/order/summary/table/foot/total.html.twig'
+                template: '@SyliusShop/shared/order/summary/table_summary/total.html.twig'
             total_in_base_currency:
-                template: '@SyliusShop/shared/order/summary/table/foot/total_in_base_currency.html.twig'
+                template: '@SyliusShop/shared/order/summary/table_summary/total_in_base_currency.html.twig'
+        

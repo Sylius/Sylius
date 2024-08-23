@@ -3,9 +3,9 @@
 {% set order = hookable_metadata.context.order %}
 
 <tr>
-    <td class="h5 text-end border-top pt-4" colspan="3" {{ sylius_test_html_attribute('order-total') }}>
+    <th scope="row" class="h5 text-end border-top pt-4" {{ sylius_test_html_attribute('order-total') }}>
         {{ 'sylius.ui.total'|trans }}:
-    </td>
+    </th>
     <td class="h5 text-end border-top pt-4" {{ sylius_test_html_attribute('order-total') }}>
         {{ money.convertAndFormat(order.total) }}
     </td>

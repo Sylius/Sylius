@@ -4,9 +4,9 @@
 
 {% if order.currencyCode is not same as(sylius.currencyCode) %}
     <tr>
-        <td class="h5 text-end" colspan="3" {{ sylius_test_html_attribute('summary-order-total') }}>
+        <th scope="row" class="h5 text-end" {{ sylius_test_html_attribute('summary-order-total') }}>
             {{ 'sylius.ui.total_in_base_currency'|trans }}:
-        </td>
+        </th>
         <td class="h5 text-end" {{ sylius_test_html_attribute('summary-order-total') }}>
             {{ money.format(order.total, order.currencyCode) }}
         </td>

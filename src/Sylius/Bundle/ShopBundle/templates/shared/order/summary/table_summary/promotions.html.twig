@@ -5,9 +5,9 @@
 {% set orderPromotions = sylius_aggregate_adjustments(order.adjustmentsRecursively(orderPromotionAdjustment)) %}
 
 <tr>
-    <td class="text-end" colspan="3">
+    <th scope="row" class="text-end">
         {{ 'sylius.ui.discount'|trans }}:
-    </td>
+    </th>
     <td class="text-end" {{ sylius_test_html_attribute('promotion-total') }}>
         {% if order.orderPromotionTotal != 0 %}
             <i {{ sylius_test_html_attribute('order-promotions-details') }} data-html="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}"></i>
