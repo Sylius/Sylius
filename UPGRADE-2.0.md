@@ -180,7 +180,40 @@
       `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
       `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
 
-# Password Encoder & Salt
+* The following classes and interfaces have been removed:
+
+  Money:
+
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
+
+### Constructors signature changes
+
+1. The following constructor signatures have been changed:
+
+   `Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension`
+    ```diff
+    use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+
+        public function __construct(
+    -       private ConvertMoneyHelperInterface|CurrencyConverterInterface $helper,
+    +       private CurrencyConverterInterface $currencyConverter,
+        )
+    ```
+
+   `Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension`
+    ```diff
+    use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
+
+        public function __construct(
+    -       private private FormatMoneyHelperInterface|MoneyFormatterInterface $helper,
+    +       private MoneyFormatterInterface $moneyFormatter,
+        )
+    ```
+
+## Password Encoder & Salt
 The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
 
 This "encoder" is configured via the [Symfony security password hasher](https://symfony.com/doc/current/security/passwords.html#configuring-a-password-hasher).
