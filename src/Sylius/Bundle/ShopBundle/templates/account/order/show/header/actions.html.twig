@@ -1,0 +1,7 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+{% set order = hookable_metadata.context.order %}
+
+<div class="d-flex gap-3 ms-auto">
+    {% hook 'actions' %}
+</div>

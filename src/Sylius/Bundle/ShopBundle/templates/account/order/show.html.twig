@@ -18,5 +18,5 @@
 {% endblock %}
 
 {% block account_content %}
-    {{ sylius_template_event('sylius.shop.account.order.show.content', _context) }}
+    {% hook 'sylius_shop.account.order.show' with { order } %}
 {% endblock %}

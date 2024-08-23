@@ -193,12 +193,3 @@ sylius_ui:
                 content:
                     template: "@SyliusShop/account/order/index/content.html.twig"
                     priority: 10
-
-        sylius.shop.account.order.show.content:
-            blocks:
-                header:
-                    template: "@SyliusShop/account/order/show/header.html.twig"
-                    priority: 20
-                summary:
-                    template: "@SyliusShop/shared/order/summary.html.twig"
-                    priority: 10
