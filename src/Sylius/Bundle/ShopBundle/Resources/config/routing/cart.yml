@@ -7,7 +7,7 @@ sylius_shop_cart_summary:
     defaults:
         _controller: sylius.controller.order::summaryAction
         _sylius:
-            template: "@SyliusShop/cart/page.html.twig"
+            template: "@SyliusShop/cart/index.html.twig"
             form: Sylius\Bundle\ShopBundle\Form\Type\CartType
 
 sylius_shop_cart_checkout:
@@ -16,7 +16,7 @@ sylius_shop_cart_checkout:
     defaults:
         _controller: sylius.controller.order::saveAction
         _sylius:
-            template: "@SyliusShop/cart/page.html.twig"
+            template: "@SyliusShop/cart/index.html.twig"
             redirect: sylius_shop_checkout_start
             form: Sylius\Bundle\ShopBundle\Form\Type\CartType
             flash: false
