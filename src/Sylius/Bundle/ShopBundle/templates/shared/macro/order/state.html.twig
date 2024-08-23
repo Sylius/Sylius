@@ -1,0 +1,21 @@
+{% macro base(type, value) %}
+    {% set types = {
+        'new': _self.new(value),
+        'fulfilled': _self.fulfilled(value),
+        'cancelled': _self.cancelled(value),
+    } %}
+
+    {{ types[type] }}
+{% endmacro %}
+
+{% macro new(value) %}
+    <span class="badge text-bg-primary">{{ value }}</span>
+{% endmacro %}
+
+{% macro fulfilled(value) %}
+    <span class="badge text-bg-info">{{ value }}</span>
+{% endmacro %}
+
+{% macro cancelled(value) %}
+    <span class="badge text-bg-danger">{{ value }}</span>
+{% endmacro %}
