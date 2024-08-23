@@ -151,8 +151,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getCatalogPromotionNames(): array
     {
-        $productPriceContent = $this->getElement('product_box');
-        $catalogPromotions = $productPriceContent->findAll('css', '.promotion_label');
+        $catalogPromotions = $this->getElement('applied_catalog_promotions')->findAll('css', '[data-test-applied-catalog-promotion]');
 
         return array_map(fn (NodeElement $element): string => $element->getText(), $catalogPromotions);
     }
@@ -183,9 +182,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getOriginalPrice(): ?string
     {
-        $originalPrice = $this->getElement('product_original_price');
-
-        if ($originalPrice->getAttribute('data-test-product-original-price-hidden') !== null) {
+        try {
+            $originalPrice = $this->getElement('product_original_price');
+        } catch (ElementNotFoundException) {
             return null;
         }
 
@@ -356,7 +355,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'add_to_cart_button' => '[data-test-add-to-cart-button]',
-            'applied_promotions' => '#appliedPromotions',
+            'applied_catalog_promotions' => '[data-test-applied-catalog-promotions]',
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
@@ -370,13 +369,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'out_of_stock' => '[data-test-product-out-of-stock]',
             'product_box' => '[data-test-product-box]',
             'product_name' => '[data-test-product-name]',
-            'product_original_price' => '[data-test-product-original-price]',
+            'product_original_price' => '[data-test-product-box] [data-test-product-original-price]',
             'product_price' => '[data-test-product-price]',
-            'product_price_content' => '[data-test-product-price-content]',
             'quantity' => '[data-test-quantity]',
             'reviews' => '[data-test-product-reviews]',
             'reviews_title' => '[data-test-title="%title%"]',
-            'selecting_variants' => '[data-test-product-selecting-variant]',
             'tab' => '[data-test-tab="%name%"]',
             'validation_errors' => '[data-test-cart-validation-error]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',

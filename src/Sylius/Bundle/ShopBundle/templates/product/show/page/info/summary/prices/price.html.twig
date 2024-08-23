@@ -1,8 +1,10 @@
 <div class="mb-2" {{ attributes }}>
     <div class="d-flex gap-3 align-items-center">
         <div class="fs-2" {{ sylius_test_html_attribute('product-price', price) }}>{{ price }}</div>
-        <div{% if not has_discount %} class="d-none" data-test-product-original-price-hidden{% endif %} {{ sylius_test_html_attribute('product-original-price', original_price) }}>
-            {% if has_discount %}<del>{{ original_price }}</del>{% endif %}
-        </div>
+        {% if has_discount %}
+            <div {{ sylius_test_html_attribute('product-original-price', original_price) }}>
+                <del>{{ original_price }}</del>
+            </div>
+        {% endif %}
     </div>
 </div>
