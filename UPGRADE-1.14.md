@@ -48,3 +48,31 @@
     +       private ?RouterInterface $router = null,
         )
     ```
+
+1. The following templating helpers and its interfaces have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
+    - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
+    - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
+    - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
+
+1. The following constructor signatures have been changed:
+
+   `Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension`
+    ```diff
+    use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+
+        public function __construct(
+    -       private ConvertMoneyHelperInterface $helper,
+    +       private ConvertMoneyHelperInterface|CurrencyConverterInterface $helper,
+        )
+    ```
+
+   `Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension`
+    ```diff
+    use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
+
+        public function __construct(
+    -       private FormatMoneyHelperInterface $helper,
+    +       private private FormatMoneyHelperInterface|MoneyFormatterInterface $helper,
+        )
+    ```
