@@ -72,7 +72,6 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
             return $optionMap;
         }
 
-
         if (\method_exists($this->productVariantPriceCalculator, 'calculateLowestPriceBeforeDiscount')) {
             $lowestPriceBeforeDiscount = $this->productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel]);
 
