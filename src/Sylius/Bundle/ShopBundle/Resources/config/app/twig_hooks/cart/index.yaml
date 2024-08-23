@@ -6,7 +6,7 @@ twig_hooks:
                 props:
                     cart: '@=_context.cart'
             suggested_products:
-                component: 'sylius_shop:homepage:latest_products'
+                component: 'sylius_shop:common:latest_products'
                 props:
                     limit: 4
                 configuration:

@@ -3,5 +3,5 @@
 {% for association in product.associations %}
     {{ component('sylius_shop:product:association', { productAssociation: association }) }}
 {% else %}
-    {{ component('sylius_shop:homepage:latest_products', { limit: 4 }) }}
+    {{ component('sylius_shop:common:latest_products', { limit: 4 }) }}
 {% endfor %}
