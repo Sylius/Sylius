@@ -13,7 +13,7 @@
     <services>
         <service
             id="sylius_shop.twig.component.latest_deals"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Homepage\LatestDealsComponent"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\LatestDealsComponent"
         >
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.context.locale" />
@@ -21,14 +21,14 @@
 
             <tag
                 name="twig.component"
-                key="sylius_shop:homepage:latest_deals"
-                template="@SyliusShop/homepage/latest_deals.html.twig"
+                key="sylius_shop:common:latest_deals"
+                template="@SyliusShop/common/latest_deals.html.twig"
             />
         </service>
 
         <service
             id="sylius_shop.twig.component.latest_products"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Homepage\LatestProductsComponent"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\LatestProductsComponent"
         >
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.context.locale" />
@@ -36,8 +36,8 @@
 
             <tag
                 name="twig.component"
-                key="sylius_shop:homepage:latest_products"
-                template="@SyliusShop/homepage/latest_products.html.twig"
+                key="sylius_shop:common:latest_products"
+                template="@SyliusShop/common/latest_products.html.twig"
             />
         </service>
 
