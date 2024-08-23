@@ -88,7 +88,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function getProductOriginalPrice(string $productCode): ?string
     {
         $element = $this->getElement('product', ['%productCode%' => $productCode]);
-        $originalPriceElement = $element->getParent()->find('css', '[data-test-product-original-price]');
+        $originalPriceElement = $element->find('css', '[data-test-product-original-price]');
 
         return ($originalPriceElement !== null) ? $originalPriceElement->getText() : null;
     }
@@ -96,7 +96,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function getProductPromotionLabel(string $productName): ?string
     {
         $element = $this->getElement('product_name', ['%productName%' => $productName]);
-        $promotionLabelElement = $element->getParent()->find('css', '[data-test-promotion-label]');
+        $promotionLabelElement = $element->getParent()->getParent()->find('css', '[data-test-promotion-label]');
 
         return ($promotionLabelElement !== null) ? $promotionLabelElement->getText() : null;
     }
