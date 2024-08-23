@@ -15,15 +15,15 @@ namespace Sylius\Bundle\CoreBundle\Tests\Helper;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
 
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. */
 final class PriceHelperTest extends TestCase
 {
-    private ProductVariantPricesCalculatorInterface&MockObject $productVariantPricesCalculator;
+    private MockObject&ProductVariantPricesCalculatorInterface $productVariantPricesCalculator;
 
     protected function setUp(): void
     {

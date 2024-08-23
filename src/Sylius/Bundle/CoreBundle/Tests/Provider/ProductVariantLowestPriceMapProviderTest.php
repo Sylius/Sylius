@@ -24,7 +24,7 @@ use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantLowestPriceMa
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. */
 final class ProductVariantLowestPriceMapProviderTest extends TestCase
 {
-    private ProductVariantPricesCalculatorInterface&MockObject $calculator;
+    private MockObject&ProductVariantPricesCalculatorInterface $calculator;
 
     protected function setUp(): void
     {

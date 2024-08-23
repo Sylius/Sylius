@@ -27,7 +27,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. */
 final class ProductVariantsPricesProviderTest extends TestCase
 {
-    private ProductVariantPricesCalculatorInterface&MockObject $productVariantPriceCalculator;
+    private MockObject&ProductVariantPricesCalculatorInterface $productVariantPriceCalculator;
 
     protected function setUp(): void
     {
