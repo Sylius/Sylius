@@ -16,7 +16,6 @@ namespace Sylius\Behat\Page\Shop\Cart;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 class SummaryPage extends SymfonyPage implements SummaryPageInterface
