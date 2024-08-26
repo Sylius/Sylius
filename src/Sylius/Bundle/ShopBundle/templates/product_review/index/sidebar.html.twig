@@ -2,6 +2,6 @@
     {% if hookable_metadata.context.product_reviews %}
         {% hook 'sidebar' with { product: hookable_metadata.context.product_reviews[0].reviewSubject } %}
     {% else %}
-        {% hook 'sidebar' %}
+        {% hook 'sidebar' with { slug: app.request.attributes.get('slug') } %}
     {% endif %}
 </div>

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -55,6 +56,19 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    public function countAcceptedByProduct(ProductInterface $product): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.reviewSubject = :product')
+            ->andWhere('o.status = :status')
+            ->setParameter('product', $product)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 

@@ -20,22 +20,41 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
+use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsTwigComponent]
 class ProductCardComponent
 {
-    public ProductInterface $product;
+    #[ExposeInTemplate(name: 'product')]
+    public ?ProductInterface $product = null;
 
-    public ProductVariantInterface $variant;
+    public ?ProductVariantInterface $variant = null;
 
+    public ?string $slug = null;
+
+    /**
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     */
     public function __construct(
+        private readonly ProductRepositoryInterface $productRepository,
         private readonly ProductVariantResolverInterface $productVariantResolver,
         private readonly ChannelContextInterface $channelContext,
+        private readonly LocaleContextInterface $localeContext,
         private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
     ) {
+    }
+
+    #[PostMount]
+    public function postMount(): void
+    {
+        if ($this->product === null && $this->slug !== null) {
+            $this->setProductBySlug($this->slug);
+        }
     }
 
     #[ExposeInTemplate(name: 'variant')]
@@ -78,5 +97,13 @@ class ProductCardComponent
             ->calculate($this->variant, ['channel' => $channel]);
 
         return $originalPrice > $price;
+    }
+
+    private function setProductBySlug(string $slug): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        $this->product = $this->productRepository->findOneByChannelAndSlug($channel, $this->localeContext->getLocaleCode(), $slug);
     }
 }

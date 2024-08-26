@@ -12,7 +12,3 @@ sylius_shop_partial_cart:
 sylius_shop_partial_product:
     resource: "@SyliusShopBundle/Resources/config/routing/partial/product.yml"
     prefix: /products
-
-sylius_shop_partial_product_review:
-    resource: "@SyliusShopBundle/Resources/config/routing/partial/product_review.yml"
-    prefix: /products/{productId}/reviews
