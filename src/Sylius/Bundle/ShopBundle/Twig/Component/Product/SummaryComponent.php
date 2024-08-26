@@ -17,12 +17,14 @@ use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
+#[AsLiveComponent]
 class SummaryComponent
 {
     use DefaultActionTrait;

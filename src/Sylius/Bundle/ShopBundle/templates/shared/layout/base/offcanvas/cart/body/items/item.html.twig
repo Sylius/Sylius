@@ -3,7 +3,7 @@
 {% set item = hookable_metadata.context.item %}
 
 <tr>
-    <td>{% include '@SyliusShop/shared/product/info.html.twig' with {'variant': item.variant} %}</td>
+    <td>{{ component('sylius_shop:order_item:product_info', { item: item }) }}</td>
     <td>{{ item.quantity }}</td>
     <td class="text-end">{{ money.convertAndFormat(item.unitPrice) }}</td>
 </tr>

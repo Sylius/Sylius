@@ -29,8 +29,10 @@ twig_hooks:
                 template: "@SyliusShop/product/show/page/info/summary/prices.html.twig"
             catalog_promotions:
                 template: "@SyliusShop/product/show/page/info/summary/catalog_promotions.html.twig"
-            variant_selection:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection.html.twig"
+            add_to_cart:
+                component: 'sylius_shop:product:add_to_cart_form'
+                props:
+                    product: '@=_context.product'
             short_description:
                 template: "@SyliusShop/product/show/page/info/summary/short_description.html.twig"
                 
@@ -52,49 +54,45 @@ twig_hooks:
             lowest_price_before_discount:
                 template: "@SyliusShop/product/show/page/info/summary/prices/lowest_price_before_discount.html.twig"
 
-        'sylius_shop.product.show.page.info.summary.variant_selection':
-            availability_check:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/availability_check.html.twig"
-
-        'sylius_shop.product.show.page.info.summary.variant_selection.add_to_cart':
+        'sylius_shop.product.show.page.info.summary.add_to_cart':
             errors:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/errors.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/errors.html.twig"
             table:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants.html.twig"
             quantity:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/quantity.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/quantity.html.twig"
             submit:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/submit.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/submit.html.twig"
 
-        'sylius_shop.product.show.page.info.summary.variant_selection.add_to_cart.variants':
+        'sylius_shop.product.show.page.info.summary.add_to_cart.variants':
             table:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table.html.twig"
 
-        'sylius_shop.product.show.page.info.summary.variant_selection.add_to_cart.variants.table':
+        'sylius_shop.product.show.page.info.summary.add_to_cart.variants.table':
             head:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/head.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/head.html.twig"
             body:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/body.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/body.html.twig"
 
-        'sylius_shop.product.show.page.info.summary.variant_selection.add_to_cart.variants.table.head':
+        'sylius_shop.product.show.page.info.summary.add_to_cart.variants.table.head':
             name:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/head/name.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/head/name.html.twig"
             price:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/head/price.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/head/price.html.twig"
             selection:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/head/selection.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/head/selection.html.twig"
 
-        'sylius_shop.product.show.page.info.summary.variant_selection.add_to_cart.variants.table.body':
+        'sylius_shop.product.show.page.info.summary.add_to_cart.variants.table.body':
             name:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/body/name.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/body/name.html.twig"
             price:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/body/price.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/body/price.html.twig"
             selection:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/variants/table/body/selection.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants/table/body/selection.html.twig"
 
-        'sylius_shop.product.show.page.info.summary.variant_selection.add_to_cart.options':
+        'sylius_shop.product.show.page.info.summary.add_to_cart.options':
             list:
-                template: "@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart/options/list.html.twig"
+                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/options/list.html.twig"
 
         'sylius_shop.product.show.page.info.overview':
             images:
