@@ -5,10 +5,6 @@ sylius_shop_ajax_user:
     resource: "@SyliusShopBundle/Resources/config/routing/ajax/user.yml"
     prefix: /users
 
-sylius_shop_ajax_cart:
-    resource: "@SyliusShopBundle/Resources/config/routing/ajax/cart.yml"
-    prefix: /cart
-
 sylius_shop_ajax_render_province_form:
     path: /render-province-form
     methods: [GET]

@@ -20,3 +20,21 @@ sylius_shop_cart_checkout:
             redirect: sylius_shop_checkout_start
             form: Sylius\Bundle\ShopBundle\Form\Type\CartType
             flash: false
+
+sylius_shop_cart_add_item:
+    path: /add
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.order_item::addAction
+        _sylius:
+            template: "@SyliusShop/product/show.html.twig"
+            factory:
+                method: createForProduct
+                arguments: [expr:notFoundOnNull(service('sylius.repository.product').find($productId))]
+            form:
+                type: Sylius\Bundle\ShopBundle\Form\Type\AddToCartType
+                options:
+                    product: expr:notFoundOnNull(service('sylius.repository.product').find($productId))
+            redirect:
+                route: sylius_shop_cart_summary
+            flash: sylius.cart.add_item

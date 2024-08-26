@@ -105,6 +105,7 @@ class OrderItemController extends ResourceController
                 'configuration' => $configuration,
                 $this->metadata->getName() => $orderItem,
                 'form' => $form->createView(),
+                'product' => $orderItem->getVariant()->getProduct(),
             ],
         );
     }

@@ -564,7 +564,7 @@ final readonly class ProductContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
-        Assert::true($this->showPage->hasProductOutOfStockValidationMessage($product));
+        Assert::same($this->showPage->getValidationMessage('quantity'), sprintf('%s does not have sufficient stock.', $product->getName()));
     }
 
     /**
@@ -572,7 +572,15 @@ final readonly class ProductContext implements Context
      */
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
-        Assert::false($this->showPage->hasProductOutOfStockValidationMessage($product));
+        Assert::notContains($this->showPage->getValidationMessage('quantity'), sprintf('%s does not have sufficient stock.', $product->getName()));
+    }
+
+    /**
+     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
+     */
+    public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween1And9999(ProductInterface $product): void
+    {
+        Assert::same($this->showPage->getValidationMessage('quantity'), 'Quantity must be between 1 and 9999.');
     }
 
     /**
