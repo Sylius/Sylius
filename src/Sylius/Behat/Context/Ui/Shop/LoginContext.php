@@ -43,7 +43,7 @@ final class LoginContext implements Context
         private NotificationCheckerInterface $notificationChecker,
         private CurrentPageResolverInterface $currentPageResolver,
         private SharedStorageInterface $sharedStorage,
-        private CustomerRepositoryInterface $customerRepository
+        private CustomerRepositoryInterface $customerRepository,
     ) {
     }
 
@@ -317,7 +317,7 @@ final class LoginContext implements Context
         Assert::contains(
             $this->homePage->getFullName(),
             $customer->getFirstName(),
-            'User should see their name on the page after logging in, but they do not.'
+            'User should see their name on the page after logging in, but they do not.',
         );
     }
 }
