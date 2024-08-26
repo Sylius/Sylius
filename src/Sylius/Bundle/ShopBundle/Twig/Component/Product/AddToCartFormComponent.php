@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommand;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -43,6 +45,9 @@ class AddToCartFormComponent
 
     #[LiveProp]
     public ?OrderItem $orderItem = null;
+
+    #[LiveProp]
+    public ?ProductVariant $variant = null;
 
     /**
      * @param class-string $formClass
@@ -71,13 +76,18 @@ class AddToCartFormComponent
     #[PreReRender(priority: -100)]
     public function variantChanged(): void
     {
-        $variant = $this->orderItem->getVariant();
-
-        if (!$variant->isEnabled()) {
-            $variant = null;
+        $newVariant = $this->orderItem->getVariant();
+        if ($newVariant === $this->variant) {
+            return;
         }
 
-        $this->emitUp('sylius:shop:variant_changed', ['variant' => $variant?->getId()]);
+        if (!$newVariant?->isEnabled()) {
+            $this->variant = null;
+        } else {
+            $this->variant = $newVariant;
+        }
+
+        $this->emitUp('sylius:shop:variant_changed', ['variant' => $this->variant?->getId()]);
     }
 
     protected function instantiateForm(): FormInterface
@@ -88,5 +98,10 @@ class AddToCartFormComponent
         );
 
         return $this->formFactory->create($this->formClass, $addToCartCommand, ['product' => $this->product]);
+    }
+
+    private function getDataModelValue(): string
+    {
+        return 'debounce(500)|*';
     }
 }

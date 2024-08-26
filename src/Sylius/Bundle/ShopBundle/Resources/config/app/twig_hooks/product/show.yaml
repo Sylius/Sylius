@@ -55,8 +55,6 @@ twig_hooks:
                 template: "@SyliusShop/product/show/page/info/summary/prices/lowest_price_before_discount.html.twig"
 
         'sylius_shop.product.show.page.info.summary.add_to_cart':
-            errors:
-                template: "@SyliusShop/product/show/page/info/summary/add_to_cart/errors.html.twig"
             table:
                 template: "@SyliusShop/product/show/page/info/summary/add_to_cart/variants.html.twig"
             quantity:

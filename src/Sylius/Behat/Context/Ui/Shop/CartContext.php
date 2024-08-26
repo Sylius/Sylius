@@ -362,6 +362,7 @@ final readonly class CartContext implements Context
 
     /**
      * @When /^I add (\d+) of (them) to (?:the|my) cart$/
+     * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
      */
     public function iAddQuantityOfProductsToTheCart(string $quantity, ProductInterface $product): void
     {

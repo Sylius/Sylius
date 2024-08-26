@@ -51,8 +51,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function addToCartWithQuantity(string $quantity): void
     {
         $this->getElement('quantity')->setValue($quantity);
-        $this->getElement('add_to_cart_button')->click();
+        $this->waitForElementToBeReady();
 
+        $this->getElement('add_to_cart_button')->click();
         $this->waitForElementToBeReady();
     }
 
@@ -214,17 +215,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $productName === $products->find('css', sprintf('[data-test-product-name="%s"]', $productName))?->getText();
     }
 
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
-    {
-        $message = sprintf('%s does not have sufficient stock.', $product->getName());
-
-        if (!$this->hasElement('validation_errors')) {
-            return false;
-        }
-
-        return $this->getElement('validation_errors')->getText() === $message;
-    }
-
     public function hasReviewTitled(string $title): bool
     {
         try {
@@ -338,6 +328,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('details')->getText();
     }
 
+    /** @param array<string, string> $parameters */
+    public function getValidationMessage(string $element, array $parameters = []): string
+    {
+        $foundElement = $this->getFieldElement($element, $parameters);
+
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
+        }
+
+        return $validationMessage->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -362,7 +365,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'reviews' => '[data-test-product-reviews]',
             'reviews_title' => '[data-test-title="%title%"]',
             'tab' => '[data-test-tab="%name%"]',
-            'validation_errors' => '[data-test-cart-validation-error]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
             'variants_rows' => '[data-test-product-variants-row]',
         ]);
@@ -378,5 +380,20 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function hasBreadcrumbLink(string $taxonName): bool
     {
         return $this->getElement('breadcrumb')->findLink($taxonName) != null;
+    }
+
+    /**
+     * @param array<string, string> $parameters
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getFieldElement(string $element, array $parameters): NodeElement
+    {
+        $element = $this->getElement($element, $parameters);
+        while (null !== $element && !$element->hasClass('field')) {
+            $element = $element->getParent();
+        }
+
+        return $element;
     }
 }
