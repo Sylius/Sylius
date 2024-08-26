@@ -2,8 +2,10 @@
 {% set order = hookable_metadata.context.order %}
 {% set type = hookable_metadata.context.type %}
 
+{% set prefixes = hookable_metadata.prefixes|merge(['sylius_shop.shared.form']) %}
+
 {% if type == 'shipping' %}
-    {% hook 'address' with { _prefixes: ['sylius_shop.shared.form'], 'form': form.shippingAddress, 'order': order, 'type': 'shipping' } %}
+    {% hook 'address' with { _prefixes: prefixes, 'form': form.shippingAddress, 'order': order, 'type': 'shipping' } %}
 {% else %}
-    {% hook 'address' with { _prefixes: ['sylius_shop.shared.form'], 'form': form.billingAddress, 'order': order, 'type': 'billing' } %}
+    {% hook 'address' with { _prefixes: prefixes, 'form': form.billingAddress, 'order': order, 'type': 'billing' } %}
 {% endif %}
