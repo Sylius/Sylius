@@ -474,14 +474,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given /^(this product) should have ([^"]+) "([^"]+)"$/
-     */
-    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
-    {
-        Assert::true($this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName, $optionValue));
-    }
-
-    /**
      * @When I clear my cart
      */
     public function iClearMyCart(): void
@@ -498,11 +490,11 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
-     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
-     * @Then /^the product "([^"]+)" should have discounted unit price ("[^"]+") in the cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with unit price "([^"]+)" in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price "([^"]+)" in my cart$/
+     * @Then /^the product "([^"]+)" should have discounted unit price "([^"]+)" in the cart$/
      */
-    public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, string $unitPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitPrice($productName), $unitPrice);
     }
@@ -516,20 +508,28 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Then /^I should see "([^"]+)" with original price ("[^"]+") in my cart$/
+     * @Then /^I should see "([^"]+)" with original price "([^"]+)" in my cart$/
      */
-    public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
+    public function iShouldSeeWithOriginalPriceInMyCart(string $productName, string $originalPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitRegularPrice($productName), $originalPrice);
     }
 
     /**
-     * @Then /^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see "([^"]+)" only with unit price "([^"]+)" in my cart$/
      */
-    public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, string $unitPrice): void
     {
         $this->iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice);
         Assert::false($this->summaryPage->hasOriginalPrice($productName));
+    }
+
+    /**
+     * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
+     */
+    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
+    {
+        Assert::same($this->summaryPage->getItemOptionValue($product->getName(), $optionName), $optionValue);
     }
 
     /**
