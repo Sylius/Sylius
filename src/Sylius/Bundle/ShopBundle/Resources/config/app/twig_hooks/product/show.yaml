@@ -38,7 +38,9 @@ twig_hooks:
             rating:
                 template: "@SyliusShop/product/show/page/info/summary/average_rating/rating.html.twig"
             number_of_reviews:
-                template: "@SyliusShop/product/show/page/info/summary/average_rating/number_of_reviews.html.twig"
+                component: 'sylius_shop:product:count_reviews'
+                props:
+                    product: '@=_context.product'
             add_review:
                 template: "@SyliusShop/product/show/page/info/summary/average_rating/add_review.html.twig"
 
@@ -140,7 +142,10 @@ twig_hooks:
 
         'sylius_shop.product.show.page.info.overview.accordion.reviews.content':
             list:
-                template: "@SyliusShop/product/show/page/info/overview/accordion/reviews/content/list.html.twig"
+                component: 'sylius_shop:product:review'
+                props:
+                    product: '@=_context.product'
+                    count: 3
             add_review:
                 template: "@SyliusShop/product/show/page/info/overview/accordion/reviews/content/add_review.html.twig"
             view_more:

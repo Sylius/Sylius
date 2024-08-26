@@ -8,7 +8,10 @@ twig_hooks:
 
         'sylius.shop.product_review.index.sidebar':
             product_card:
-                template: "@SyliusShop/shared/product_review/product_card.html.twig"
+                component: 'sylius_shop:common:product_card'
+                props:
+                    product: '@=_context.product'
+                    slug: '@=_context.slug'
 
         'sylius.shop.product_review.index.main':
             header:
