@@ -9,7 +9,7 @@ Feature: Adding a simple product to the cart
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And the store ships everywhere for free
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a simple product to the cart
         When I add this product to the cart
         Then I should be on my cart summary page
@@ -17,7 +17,7 @@ Feature: Adding a simple product to the cart
         And there should be one item in my cart
         And this item should have name "T-Shirt banana"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a product to the cart as a logged in customer
         Given I am a logged in customer
         And the store has a product "Oathkeeper" priced at "$99.99"
@@ -43,7 +43,7 @@ Feature: Adding a simple product to the cart
         And there should be one item in my cart
         And this item should have name "T-Shirt banana"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Increasing quantity of an item in cart by adding the product again
         Given I have product "T-Shirt banana" in the cart
         When I add this product to the cart

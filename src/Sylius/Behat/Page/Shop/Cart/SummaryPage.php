@@ -101,27 +101,19 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $itemTotalElement->getText();
     }
 
-    public function getItemUnitRegularPrice(string $productName): int
+    public function getItemUnitRegularPrice(string $productName): string
     {
-        Assert::true(false);
-        $regularUnitPrice = $this->getElement('product_unit_regular_price', ['%name%' => $productName]);
-
-        return $this->getPriceFromString(trim($regularUnitPrice->getText()));
+        return $this->getElement('item_unit_regular_price', ['%name%' => $productName])->getText();
     }
 
-    public function getItemUnitPrice(string $productName): int
+    public function getItemUnitPrice(string $productName): string
     {
-        Assert::true(false);
-        $unitPrice = $this->getElement('product_unit_price', ['%name%' => $productName]);
-
-        return $this->getPriceFromString(trim($unitPrice->getText()));
+        return $this->getElement('item_unit_price', ['%name%' => $productName])->getText();
     }
 
     public function hasOriginalPrice(string $productName): bool
     {
-        Assert::true(false);
-
-        return $this->hasElement('product_unit_regular_price', ['%name%' => $productName]);
+        return $this->hasElement('item_unit_regular_price', ['%name%' => $productName]);
     }
 
     public function getItemImage(int $itemNumber): string
@@ -173,31 +165,24 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 
     public function hasItemWithVariantNamed(string $variantName): bool
     {
-        Assert::true(false);
-
-        return $this->hasItemWith($variantName, '[data-test-product-variant-name]');
-    }
-
-    public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): bool
-    {
-        Assert::true(false);
-        $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-
-        $selector = sprintf('[data-test-product-options] [data-test-option-name="%s"]', $optionName);
-        $optionValueElement = $itemElement->find('css', $selector);
-
-        if (null === $optionValueElement) {
-            throw new ElementNotFoundException($this->getSession(), sprintf('ProductOption value of "%s"', $optionName), 'css', $selector);
+        $cartItems = $this->getElement('cart_items');
+        foreach ($cartItems->findAll('css', '[data-test-product-variant-name]') as $elementVariantName) {
+            if ($variantName === $elementVariantName->getText()) {
+                return true;
+            }
         }
 
-        return $optionValue === $optionValueElement->getText();
+        return false;
+    }
+
+    public function getItemOptionValue(string $productName, string $optionName): string
+    {
+        return $this->getElement('item_product_option_value', ['%name%' => $productName, '%option_name%' => $optionName])->getText();
     }
 
     public function hasItemWithCode(string $code): bool
     {
-        Assert::true(false);
-
-        return $this->hasItemWith($code, '[data-test-product-variant-code]');
+        return $this->hasElement('item_product_variant_code', ['%code%' => $code]);
     }
 
     public function hasItemWithInsufficientStock(string $productName): bool
@@ -280,13 +265,15 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'summary_component' => '[data-live-name-value="sylius_shop:checkout:summary"]',
 //            'grand_total' => '[data-test-cart-grand-total]',
             'item_image' => '[data-test-cart-items] [data-test-cart-item="%number%"] [data-test-cart-item-product] [data-test-main-image]',
+            'item_product_option_value' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-product] [data-test-option-name="%option_name%"] [data-test-option-value]',
+            'item_product_variant_code' => '[data-test-cart-items] [data-test-cart-item-product] [data-test-product-variant-code="%code%"]',
             'item_quantity' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-quantity]',
+            'item_unit_price' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-unit-price]',
+            'item_unit_regular_price' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-unit-regular-price]',
             'items_total' => '[data-test-cart-items-total]',
 //            'no_taxes' => '[data-test-cart-no-tax]',
 //            'product_row' => '[data-test-cart-product-row="%name%"]',
 //            'product_total' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-subtotal]',
-//            'product_unit_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-unit-price]',
-//            'product_unit_regular_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-regular-unit-price]',
 //            'promotion_total' => '[data-test-cart-promotion-total]',
             'remove_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-remove-cart-item]',
 //            'save_button' => '[data-test-apply-coupon-button]',

@@ -37,9 +37,9 @@ interface SummaryPageInterface extends PageInterface
 
     public function getItemTotal(string $productName): string;
 
-    public function getItemUnitRegularPrice(string $productName): int;
+    public function getItemUnitRegularPrice(string $productName): string;
 
-    public function getItemUnitPrice(string $productName): int;
+    public function getItemUnitPrice(string $productName): string;
 
     public function hasOriginalPrice(string $productName): bool;
 
@@ -63,7 +63,7 @@ interface SummaryPageInterface extends PageInterface
 
     public function hasItemWithVariantNamed(string $variantName): bool;
 
-    public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): bool;
+    public function getItemOptionValue(string $productName, string $optionName): string;
 
     public function hasItemWithInsufficientStock(string $productName): bool;
 
