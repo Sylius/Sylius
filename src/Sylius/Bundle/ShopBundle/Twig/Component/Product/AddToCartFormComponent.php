@@ -28,6 +28,7 @@ use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsLiveComponent]
 class AddToCartFormComponent
@@ -37,10 +38,10 @@ class AddToCartFormComponent
     use ComponentWithFormTrait;
     use ComponentToolsTrait;
 
-    #[LiveProp(updateFromParent: false)]
+    #[LiveProp]
     public Product $product;
 
-    #[LiveProp(updateFromParent: false)]
+    #[LiveProp]
     public ?OrderItem $orderItem = null;
 
     /**
@@ -57,6 +58,16 @@ class AddToCartFormComponent
     ) {
     }
 
+    #[PostMount(priority: 100)]
+    public function postMount(): void
+    {
+        /** @var OrderItem $orderItem */
+        $orderItem = $this->cartItemFactory->createForProduct($this->product);
+        $this->quantityModifier->modify($orderItem, 1);
+
+        $this->orderItem = $orderItem;
+    }
+
     #[PreReRender(priority: -100)]
     public function variantChanged(): void
     {
@@ -71,17 +82,10 @@ class AddToCartFormComponent
 
     protected function instantiateForm(): FormInterface
     {
-        $cart = $this->cartContext->getCart();
-
-        if ($this->orderItem === null) {
-            /** @var OrderItem $orderItem */
-            $orderItem = $this->cartItemFactory->createForProduct($this->product);
-            $this->orderItem = $orderItem;
-
-            $this->quantityModifier->modify($this->orderItem, 1);
-        }
-
-        $addToCartCommand = $this->addToCartCommandFactory->createWithCartAndCartItem($cart, $this->orderItem);
+        $addToCartCommand = $this->addToCartCommandFactory->createWithCartAndCartItem(
+            $this->cartContext->getCart(),
+            $this->orderItem
+        );
 
         return $this->formFactory->create($this->formClass, $addToCartCommand, ['product' => $this->product]);
     }

@@ -116,7 +116,7 @@
             <argument type="service" id="sylius.context.currency" />
 
             <tag
-                name="sylius.live_component"
+                name="twig.component"
                 key="sylius_shop:product:show_price"
                 template="@SyliusShop/product/show/page/info/summary/prices/price.html.twig"
             />
@@ -140,7 +140,7 @@
             <tag
                 name="sylius.live_component"
                 key="sylius_shop:product:add_to_cart_form"
-                template="@SyliusShop/product/show/page/info/summary/variant_selection/add_to_cart.html.twig"
+                template="@SyliusShop/product/show/page/info/summary/add_to_cart.html.twig"
             />
         </service>
 

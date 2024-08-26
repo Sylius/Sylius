@@ -23,15 +23,15 @@ use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent]
+#[AsTwigComponent]
 class PriceComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp]
     public ProductVariant $variant;
 
     public function __construct(
