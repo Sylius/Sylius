@@ -23,6 +23,8 @@ twig_hooks:
         'sylius_shop.product.show.page.info.summary':
             header:
                 template: "@SyliusShop/product/show/page/info/summary/header.html.twig"
+            average_rating:
+                template: "@SyliusShop/product/show/page/info/summary/average_rating.html.twig"
             prices:
                 template: "@SyliusShop/product/show/page/info/summary/prices.html.twig"
             catalog_promotions:
@@ -31,6 +33,14 @@ twig_hooks:
                 template: "@SyliusShop/product/show/page/info/summary/variant_selection.html.twig"
             short_description:
                 template: "@SyliusShop/product/show/page/info/summary/short_description.html.twig"
+                
+        'sylius_shop.product.show.page.info.summary.average_rating':
+            rating:
+                template: "@SyliusShop/product/show/page/info/summary/average_rating/rating.html.twig"
+            number_of_reviews:
+                template: "@SyliusShop/product/show/page/info/summary/average_rating/number_of_reviews.html.twig"
+            add_review:
+                template: "@SyliusShop/product/show/page/info/summary/average_rating/add_review.html.twig"
 
         'sylius_shop.product.show.page.info.summary.prices':
             price:
