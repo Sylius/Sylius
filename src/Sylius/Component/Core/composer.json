@@ -30,7 +30,7 @@
         "enshrined/svg-sanitize": "^0.16",
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "knplabs/gaufrette": "^0.10 || ^0.11",
-        "league/flysystem": "^2.4",
+        "league/flysystem": "^3.3",
         "payum/core": "^1.7.3",
         "psr/http-client": "^1.0",
         "psr/http-message": "^1.0",
