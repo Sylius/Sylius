@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Api\IriConverterInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -47,8 +46,6 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
      * @param ProductVariantInterface $object
      *
      * @return array<string, mixed>
-     *
-     * @throws ExceptionInterface
      */
     public function normalize($object, $format = null, array $context = []): array
     {
@@ -77,13 +74,13 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
             unset($data['price'], $data['originalPrice'], $data['lowestPriceBeforeDiscount']);
         }
 
-        /** @var ArrayCollection<array-key, CatalogPromotionInterface> $appliedPromotions */
+        /** @var Collection<array-key, CatalogPromotionInterface> $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(
-                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource($catalogPromotion),
-                $appliedPromotions->toArray(),
-            );
+            $data['appliedPromotions'] = $appliedPromotions
+                ->map(fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource($catalogPromotion))
+                ->toArray()
+            ;
         }
 
         return $data;
