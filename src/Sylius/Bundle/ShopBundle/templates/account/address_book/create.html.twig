@@ -9,7 +9,5 @@
 {% endblock %}
 
 {% block account_content %}
-    <div>
-        {% hook 'sylius_shop.account.address_book.create' with { form } %}
-    </div>
+    {% hook 'sylius_shop.account.address_book.create' with { form } %}
 {% endblock %}

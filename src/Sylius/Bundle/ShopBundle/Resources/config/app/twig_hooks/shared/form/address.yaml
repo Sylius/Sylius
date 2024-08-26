@@ -1,8 +1,8 @@
 twig_hooks:
     hooks:
         'sylius_shop.shared.form.address':
-            name_row:
-                template: '@SyliusShop/shared/form/address/name_row.html.twig'
+            name:
+                template: '@SyliusShop/shared/form/address/name.html.twig'
             company:
                 template: '@SyliusShop/shared/form/address/company.html.twig'
             street:
@@ -18,8 +18,8 @@ twig_hooks:
             phone_number:
                 template: '@SyliusShop/shared/form/address/phone_number.html.twig'
 
-        'sylius_shop.shared.form.address.name_row':
+        'sylius_shop.shared.form.address.name':
             first_name:
-                template: '@SyliusShop/shared/form/address/name_row/first_name.html.twig'
+                template: '@SyliusShop/shared/form/address/name/first_name.html.twig'
             last_name:
-                template: '@SyliusShop/shared/form/address/name_row/last_name.html.twig'
+                template: '@SyliusShop/shared/form/address/name/last_name.html.twig'
