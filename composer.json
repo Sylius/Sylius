@@ -136,7 +136,7 @@
         "symfony/ux-live-component": "^2.17",
         "symfony/ux-twig-component": "^2.17",
         "symfony/validator": "^6.4.0 || ^7.0",
-        "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/webpack-encore-bundle": "^2.1",
         "symfony/workflow": "^6.4.0 || ^7.0",
         "symfony/yaml": "^6.4.0 || ^7.0",
         "symfonycasts/dynamic-forms": "v0.1.1",

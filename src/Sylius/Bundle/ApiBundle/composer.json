@@ -43,7 +43,7 @@
         "symfony/browser-kit": "^6.4.0 || ^7.0",
         "symfony/debug-bundle": "^6.4.0 || ^7.0",
         "symfony/dotenv": "^6.4.0 || ^7.0",
-        "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/webpack-encore-bundle": "^2.1",
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "conflict": {
