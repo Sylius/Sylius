@@ -7,7 +7,7 @@ Feature: Account registration
     Background:
         Given the store operates on a single channel in "United States"
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Registering a new account with minimum information when channel has enabled registration verification
         Given on this channel account verification is required
         When I want to register a new account
@@ -21,7 +21,7 @@ Feature: Account registration
         And I should be on registration thank you page
         But I should not be logged in
 
-    @todo @api @no-ui
+    @api @no-ui
     Scenario: Registering a new account with minimum information when channel has enabled registration verification
         Given on this channel account verification is required
         When I want to register a new account
@@ -34,7 +34,7 @@ Feature: Account registration
         Then I should be notified that new account has been successfully created
         But I should not be logged in
 
-    @todo @ui @api
+    @api @ui
     Scenario: Registering a new account with minimum information when channel has disabled registration verification
         Given on this channel account verification is not required
         When I want to register a new account
@@ -48,7 +48,7 @@ Feature: Account registration
         And I should be logged in
         And I should be on my account dashboard
 
-    @todo @ui @api
+    @api @ui
     Scenario: Registering a new account with all details
         When I want to register a new account
         And I specify the first name as "Saul"
@@ -61,7 +61,7 @@ Feature: Account registration
         Then I should be notified that new account has been successfully created
         But I should not be logged in
 
-    @todo @ui @api
+    @api @ui
     Scenario: Registering a guest account
         Given there is a customer "goodman@gmail.com" that placed an order "#001"
         When I want to register a new account

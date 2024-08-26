@@ -276,7 +276,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'checkout_button' => '[data-test-cart-checkout-button]',
             'clear_cart' => '[data-test-clear-cart]',
 //            'coupon_field' => '[data-test-cart-promotion-coupon-input]',
-            'flash_message' => '[data-test-flash-message]',
+            'flash_message' => '[data-test-sylius-flash-message]',
             'form' => '[data-live-name-value="sylius_shop:cart:form"]',
             'summary_component' => '[data-live-name-value="sylius_shop:checkout:summary"]',
 //            'grand_total' => '[data-test-cart-grand-total]',
