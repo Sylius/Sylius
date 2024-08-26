@@ -30,16 +30,15 @@
         "doctrine/doctrine-migrations-bundle": "^3.0.1",
         "egulias/email-validator": "^3.1",
         "fakerphp/faker": "^1.10",
-        "jms/serializer-bundle": "^4.2",
+        "jms/serializer-bundle": "^5.0",
         "knplabs/gaufrette": "^0.10 || ^0.11",
         "knplabs/knp-gaufrette-bundle": "^0.7 || ^0.8",
-        "league/flysystem-bundle": "^2.4",
+        "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.10",
         "nyholm/psr7": "^1.6",
         "sonata-project/block-bundle": "^4.2 || ^5.0",
         "sylius-labs/association-hydrator": "^1.1 || ^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
-        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius/addressing-bundle": "^2.0",
         "sylius/attribute-bundle": "^2.0",
         "sylius/channel-bundle": "^2.0",
@@ -57,7 +56,7 @@
         "sylius/payum-bundle": "^2.0",
         "sylius/product-bundle": "^2.0",
         "sylius/promotion-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.10",
+        "sylius/resource-bundle": "^1.10 || dev-symfony-7",
         "sylius/review-bundle": "^2.0",
         "sylius/shipping-bundle": "^2.0",
         "sylius/state-machine-abstraction": "^2.0",
@@ -98,7 +97,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "7.0.*"
+            "require": "6.4.*"
         }
     },
     "autoload": {

@@ -13,20 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'sylius:inform-about-gus',
+    description: 'Informs about Sylius internal statistical service.',
+)]
 final class InformAboutGUSCommand extends Command
 {
-    protected static $defaultName = 'sylius:inform-about-gus';
-
-    protected function configure(): void
-    {
-        $this->setDescription('Informs about Sylius internal statistical service');
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);

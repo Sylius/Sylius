@@ -13,19 +13,30 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
+use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
+use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'sylius:install:database',
+    description: 'Install Sylius database.',
+)]
 final class InstallDatabaseCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'sylius:install:database';
+    public function __construct(
+        private DatabaseSetupCommandsProviderInterface $databaseSetupCommandsProvider,
+    ) {
+        parent::__construct();
+    }
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Install Sylius database.')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> command creates Sylius database.
@@ -46,8 +57,7 @@ EOT
         ));
 
         $commands = $this
-            ->getContainer()
-            ->get('sylius.commands_provider.database_setup')
+            ->databaseSetupCommandsProvider
             ->getCommands($input, $output, $this->getHelper('question'))
         ;
 
@@ -58,8 +68,10 @@ EOT
         if (null !== $suite) {
             $parameters['--fixture-suite'] = $suite;
         }
-        $this->commandExecutor->runCommand('sylius:install:sample-data', $parameters, $output);
 
-        return 0;
+        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
+        $commandExecutor->runCommand('sylius:install:sample-data', $parameters, $output);
+
+        return Command::SUCCESS;
     }
 }

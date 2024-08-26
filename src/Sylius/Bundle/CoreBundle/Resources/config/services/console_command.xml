@@ -16,10 +16,14 @@
         <defaults public="true" />
 
         <service id="sylius.console.command.cancel_unpaid_orders" class="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand">
+            <argument>%sylius_order.order_expiration_period%</argument>
+            <argument type="service" id="sylius.unpaid_orders_state_updater" />
+            <argument type="service" id="sylius.manager.order" />
             <tag name="console.command" />
         </service>
 
         <service id="sylius.console.command.check_requirements" class="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand">
+            <argument type="service" id="sylius.installer.checker.sylius_requirements" />
             <tag name="console.command" />
         </service>
 
@@ -37,6 +41,7 @@
         </service>
 
         <service id="sylius.console.command.install_database" class="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand">
+            <argument type="service" id="sylius.commands_provider.database_setup" />
             <tag name="console.command" />
         </service>
 
@@ -45,10 +50,6 @@
         </service>
 
         <service id="sylius.console.command.setup" class="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand">
-            <tag name="console.command" />
-        </service>
-
-        <service id="sylius.console.command.show_available_plugins" class="Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand">
             <tag name="console.command" />
         </service>
 
