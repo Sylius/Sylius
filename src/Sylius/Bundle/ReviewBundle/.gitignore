@@ -9,4 +9,4 @@ test/app/db.sql
 test/app/logs/
 test/var
 
-./.phpunit.result.cache
+/.phpunit.result.cache
