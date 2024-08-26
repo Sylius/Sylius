@@ -1,5 +1,6 @@
 {% set address = hookable_metadata.context.address %}
+{% set province = address|sylius_province_name %}
 
-{% if address|sylius_province_name is not empty %}
-    {{ address|sylius_province_name }}<br/>
+{% if province is not empty %}
+    {{ province }}<br/>
 {% endif %}

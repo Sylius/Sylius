@@ -1,7 +1,5 @@
-{% import '@SyliusShop/shared/macro/order/state.html.twig' as state %}
+{% from '@SyliusShop/shared/macro/order/state.html.twig' import label %}
 
 {% set order = hookable_metadata.context.order %}
-{% set label = ('sylius.ui.' ~ order.state)|trans %}
-<div>
-    {{ state.base(order.state, label) }}
-</div>
+
+{{ label(order.state) }}

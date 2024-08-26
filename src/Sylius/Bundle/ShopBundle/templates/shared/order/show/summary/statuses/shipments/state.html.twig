@@ -1,5 +1,5 @@
+{% from '@SyliusShop/shared/macro/order/state.html.twig' import label %}
+
 {% set state = hookable_metadata.context.order.shippingState %}
 
-{% if state != 'cart' %}
-    {% include "@SyliusShop/shared/order/label/shipment_state/order_shipment_state.html.twig" with { state } %}
-{% endif %}
+{{ label(state) }}

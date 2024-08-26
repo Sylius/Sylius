@@ -9,8 +9,8 @@ twig_hooks:
                 template: "@SyliusShop/shared/address/phone_number.html.twig"
             street:
                 template: "@SyliusShop/shared/address/street.html.twig"
-            city:
-                template: "@SyliusShop/shared/address/city.html.twig"
+            city_and_postcode:
+                template: "@SyliusShop/shared/address/city_and_postcode.html.twig"
             province:
                 template: "@SyliusShop/shared/address/province.html.twig"
             country:
