@@ -21,17 +21,15 @@ use Sylius\Component\Payment\PaymentTransitions;
 
 final class PaymentStateMachineTransitionApplicatorSpec extends ObjectBehavior
 {
-    function let(StateMachineInterface $stateMachineFactory)
+    function let(StateMachineInterface $stateMachine)
     {
-        $this->beConstructedWith($stateMachineFactory);
+        $this->beConstructedWith($stateMachine);
     }
 
     function it_completes_payment(
         StateMachineInterface $stateMachine,
         PaymentInterface $payment,
     ): void {
-        $this->beConstructedWith($stateMachine);
-
         $stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)->willReturn(true);
         $stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)->shouldBeCalled();
 
@@ -42,14 +40,35 @@ final class PaymentStateMachineTransitionApplicatorSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         PaymentInterface $payment,
     ): void {
-        $this->beConstructedWith($stateMachine);
-
         $stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)->willReturn(false);
         $stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)->shouldNotBeCalled();
 
         $this
             ->shouldThrow(StateMachineTransitionFailedException::class)
             ->during('complete', [$payment])
+        ;
+    }
+
+    function it_refunds_payment(
+        StateMachineInterface $stateMachine,
+        PaymentInterface $payment,
+    ): void {
+        $stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_REFUND)->willReturn(true);
+        $stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_REFUND)->shouldBeCalled();
+
+        $this->refund($payment);
+    }
+
+    function it_throws_exception_if_cannot_refund_payment(
+        StateMachineInterface $stateMachine,
+        PaymentInterface $payment,
+    ): void {
+        $stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_REFUND)->willReturn(false);
+        $stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_REFUND)->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(StateMachineTransitionFailedException::class)
+            ->during('refund', [$payment])
         ;
     }
 }

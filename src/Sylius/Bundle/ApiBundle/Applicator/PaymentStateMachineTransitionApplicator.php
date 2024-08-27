@@ -31,10 +31,21 @@ final readonly class PaymentStateMachineTransitionApplicator implements PaymentS
         return $data;
     }
 
+    public function refund(PaymentInterface $data): PaymentInterface
+    {
+        $this->applyTransition($data, PaymentTransitions::TRANSITION_REFUND);
+
+        return $data;
+    }
+
     private function applyTransition(PaymentInterface $payment, string $transition): void
     {
         if (false === $this->stateMachineFactory->can($payment, PaymentTransitions::GRAPH, $transition)) {
-            throw new StateMachineTransitionFailedException('Cannot complete the payment.');
+            throw new StateMachineTransitionFailedException(sprintf(
+                'Transition "%s" cannot be applied on "%s" payment.',
+                $transition,
+                $payment->getState(),
+            ));
         }
 
         $this->stateMachineFactory->apply($payment, PaymentTransitions::GRAPH, $transition);
