@@ -190,16 +190,17 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /**
-     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, mixed> $body
      * @param array<string, string> $headers
+     * @param array<string, array<string>|string> $queryParameters
      */
-    protected function requestPatch(string $uri, array $queryParameters = [], array $headers = []): Crawler
+    protected function requestPatch(string $uri, ?array $body = null, array $queryParameters = [], array $headers = []): Crawler
     {
         if (!empty($this->defaultPatchHeaders)) {
             $headers = array_merge($this->defaultPatchHeaders, $headers);
         }
 
-        return $this->request('PATCH', $uri, $queryParameters, $headers);
+        return $this->request('PATCH', $uri, $queryParameters, $headers, $body);
     }
 
     /**
