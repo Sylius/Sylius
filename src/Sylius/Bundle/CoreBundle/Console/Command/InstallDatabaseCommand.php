@@ -15,8 +15,10 @@ namespace Sylius\Bundle\CoreBundle\Console\Command;
 
 use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
 use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,7 +28,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'sylius:install:database',
     description: 'Install Sylius database.',
 )]
-final class InstallDatabaseCommand extends AbstractInstallCommand
+final class InstallDatabaseCommand extends Command
 {
     public function __construct(
         private DatabaseSetupCommandsProviderInterface $databaseSetupCommandsProvider,
@@ -56,12 +58,17 @@ EOT
             $this->getEnvironment(),
         ));
 
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+
         $commands = $this
             ->databaseSetupCommandsProvider
-            ->getCommands($input, $output, $this->getHelper('question'))
+            ->getCommands($input, $output, $questionHelper)
         ;
 
-        $this->runCommands($commands, $output);
+        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
+
+        $commandExecutor->runCommands($commands, $output);
         $outputStyle->newLine();
 
         $parameters = [];
@@ -69,9 +76,16 @@ EOT
             $parameters['--fixture-suite'] = $suite;
         }
 
-        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
         $commandExecutor->runCommand('sylius:install:sample-data', $parameters, $output);
 
         return Command::SUCCESS;
+    }
+
+    private function getEnvironment(): string
+    {
+        /** @var Application $application */
+        $application = $this->getApplication();
+
+        return $application->getKernel()->getEnvironment();
     }
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Executor;
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
@@ -56,6 +57,30 @@ final class CommandExecutor
         return $this;
     }
 
+    /**
+     * @param string[] $commands
+     */
+    public function runCommands(array $commands, OutputInterface $output, bool $displayProgress = true): void
+    {
+        $progress = $this->createProgressBar($displayProgress ? $output : new NullOutput(), count($commands));
+
+        foreach ($commands as $key => $value) {
+            if (is_string($key)) {
+                $command = $key;
+                $parameters = $value;
+            } else {
+                $command = $value;
+                $parameters = [];
+            }
+
+            $this->runCommand($command, $parameters);
+
+            $progress->advance();
+        }
+
+        $progress->finish();
+    }
+
     private function getDefaultParameters(): array
     {
         $defaultParameters = ['--no-debug' => true];
@@ -73,5 +98,17 @@ final class CommandExecutor
         }
 
         return $defaultParameters;
+    }
+
+    protected function createProgressBar(OutputInterface $output, int $length = 10): ProgressBar
+    {
+        $progress = new ProgressBar($output);
+        $progress->setBarCharacter('<info>░</info>');
+        $progress->setEmptyBarCharacter(' ');
+        $progress->setProgressCharacter('<comment>░</comment>');
+
+        $progress->start($length);
+
+        return $progress;
     }
 }
