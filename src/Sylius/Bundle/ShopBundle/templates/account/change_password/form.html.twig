@@ -1,0 +1,15 @@
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+<div {{ attributes }} class="mb-4 position-relative">
+    <div data-loading>
+        <div class="sylius-shop-loader">
+            <img src="{{ asset('build/shop/images/loader.gif', 'shop') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
+        </div>
+    </div>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'data-action': 'live#action:prevent', 'data-live-action-param': 'save'}}) }}
+
+    {% hook 'sylius_shop.account.change_password' with { form } %}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
