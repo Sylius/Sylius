@@ -27,7 +27,6 @@ jobs:
                 mysql: [ "8.0" ]
                 resource: ["^1.11@dev"]
                 grid: [ "^1.13@dev" ]
-          
 
         env:
             APP_ENV: test_cached
