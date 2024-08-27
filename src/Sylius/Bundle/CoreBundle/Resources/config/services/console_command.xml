@@ -44,11 +44,16 @@
         </service>
 
         <service id="sylius.console.command.install_database" class="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.installer.checker.command_directory" />
             <argument type="service" id="sylius.commands_provider.database_setup" />
             <tag name="console.command" />
         </service>
 
         <service id="sylius.console.command.install_sample_data" class="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.installer.checker.command_directory" />
+            <argument>%sylius_core.public_dir%</argument>
             <tag name="console.command" />
         </service>
 
@@ -60,7 +65,6 @@
             <argument type="service" id="sylius.setup.channel" />
             <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="sylius.manager.admin_user" />
             <argument type="service" id="validator" />
             <tag name="console.command" />
         </service>

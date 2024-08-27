@@ -47,7 +47,6 @@ final class SetupCommand extends AbstractInstallCommand
         protected readonly ChannelSetupInterface $channelSetup,
         protected readonly FactoryInterface $adminUserFactory,
         protected readonly UserRepositoryInterface $adminUserRepository,
-        protected readonly EntityManagerInterface $adminUserManager,
         protected readonly ValidatorInterface $validator,
 
     ) {
@@ -89,8 +88,8 @@ EOT
         $user->setEnabled(true);
         $user->setLocaleCode($localeCode);
 
-        $this->adminUserManager->persist($user);
-        $this->adminUserManager->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         $outputStyle->writeln('<info>Administrator account successfully registered.</info>');
         $outputStyle->newLine();
@@ -101,10 +100,8 @@ EOT
         InputInterface $input,
         OutputInterface $output,
     ): AdminUserInterface {
-        $userRepository = $this->getAdminUserRepository();
-
         if ($input->getOption('no-interaction')) {
-            Assert::null($userRepository->findOneByEmail('sylius@example.com'));
+            Assert::null($this->adminUserRepository->findOneByEmail('sylius@example.com'));
 
             $user->setEmail('sylius@example.com');
             $user->setUsername('sylius');

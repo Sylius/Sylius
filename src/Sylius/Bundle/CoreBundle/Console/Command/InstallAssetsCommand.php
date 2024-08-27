@@ -29,7 +29,7 @@ final class InstallAssetsCommand extends AbstractInstallCommand
     public function __construct(
         protected readonly EntityManagerInterface $entityManager,
         protected readonly CommandDirectoryChecker $commandDirectoryChecker,
-        protected readonly bool $publicDirectoryPath,
+        protected readonly bool $publicDir,
     ) {
         parent::__construct($this->entityManager, $this->commandDirectoryChecker);
     }
@@ -53,8 +53,8 @@ EOT
         ));
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDirectoryPath . '/assets/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDirectoryPath . '/bundles/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/assets/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/bundles/', $output);
         } catch (\RuntimeException $exception) {
             $output->writeln($exception->getMessage());
 
@@ -62,7 +62,7 @@ EOT
         }
 
         $commands = [
-            'assets:install' => ['target' => $this->publicDirectoryPath],
+            'assets:install' => ['target' => $this->publicDir],
         ];
 
         $this->runCommands($commands, $output);

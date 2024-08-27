@@ -33,7 +33,7 @@ final class InstallSampleDataCommand extends AbstractInstallCommand
     public function __construct(
         protected readonly EntityManagerInterface $entityManager,
         protected readonly CommandDirectoryChecker $commandDirectoryChecker,
-        protected readonly bool $publicDirectoryPath,
+        protected readonly bool $publicDir,
     ) {
         parent::__construct($this->entityManager, $this->commandDirectoryChecker);
     }
@@ -72,8 +72,8 @@ EOT
         }
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDirectoryPath. '/media/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDirectoryPath . '/media/image/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir. '/media/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/image/', $output);
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());
 
