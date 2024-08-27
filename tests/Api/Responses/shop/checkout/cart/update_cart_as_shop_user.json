@@ -1,40 +1,40 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/token",
+    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
     "customer": {
         "@id": "\/api\/v2\/shop\/customers\/@integer@",
         "@type": "Customer",
-        "email": "guest@doe.com"
+        "email": "shop@example.com"
     },
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
-        "firstName": "John",
-        "lastName": "Doe",
-        "phoneNumber": null,
+        "firstName": "Updated: Jane",
+        "lastName": "Updated: Doe",
+        "phoneNumber": "123456789",
         "company": null,
         "countryCode": "US",
-        "provinceCode": null,
+        "provinceCode": "US-MI",
         "provinceName": null,
-        "street": "Avenue",
-        "city": "New York",
-        "postcode": "90000"
+        "street": "Updated: Top secret",
+        "city": "Updated: Nebraska",
+        "postcode": "121212"
     },
     "billingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
-        "firstName": "John",
-        "lastName": "Doe",
-        "phoneNumber": null,
+        "firstName": "Updated: Jane",
+        "lastName": "Updated: Doe",
+        "phoneNumber": "123456789",
         "company": null,
         "countryCode": "US",
-        "provinceCode": null,
+        "provinceCode": "US-MI",
         "provinceName": null,
-        "street": "Avenue",
-        "city": "New York",
-        "postcode": "90000"
+        "street": "Updated: Top secret",
+        "city": "Updated: Nebraska",
+        "postcode": "10001"
     },
     "payments": [
         {
@@ -54,15 +54,14 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
-    "state": "new",
-    "checkoutState": "completed",
-    "paymentState": "awaiting_payment",
-    "shippingState": "ready",
-    "tokenValue": "token",
-    "number": "000000001",
+    "checkoutState": "addressed",
+    "paymentState": "cart",
+    "shippingState": "cart",
+    "tokenValue": "nAWw2jewpA",
+    "number": null,
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
@@ -77,6 +76,7 @@
     ],
     "itemsTotal": 6000,
     "total": 6500,
+    "state": "cart",
     "itemsSubtotal": 6000,
     "taxTotal": 0,
     "shippingTaxTotal": 500,
