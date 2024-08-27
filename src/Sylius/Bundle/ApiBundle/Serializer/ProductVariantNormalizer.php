@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Api\IriConverterInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
@@ -23,12 +23,12 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class ProductVariantNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
@@ -42,7 +42,12 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
     ) {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    /**
+     * @param ProductVariantInterface $object
+     *
+     * @return array<string, mixed>
+     */
+    public function normalize($object, $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ProductVariantInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -66,22 +71,23 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
                 ['channel' => $channel],
             );
         } catch (MissingChannelConfigurationException) {
-            unset($data['price'], $data['originalPrice']);
+            unset($data['price'], $data['originalPrice'], $data['lowestPriceBeforeDiscount']);
         }
 
-        /** @var ArrayCollection $appliedPromotions */
+        /** @var Collection<array-key, CatalogPromotionInterface> $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(
-                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource($catalogPromotion),
-                $appliedPromotions->toArray(),
-            );
+            $data['appliedPromotions'] = $appliedPromotions
+                ->map(fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource($catalogPromotion))
+                ->toArray()
+            ;
         }
 
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null, $context = []): bool
+    /** @param array<string, mixed> $context */
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         if (isset($context[self::ALREADY_CALLED])) {
             return false;

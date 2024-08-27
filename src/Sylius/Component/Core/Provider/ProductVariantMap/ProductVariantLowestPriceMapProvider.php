@@ -16,13 +16,18 @@ namespace Sylius\Component\Core\Provider\ProductVariantMap;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Webmozart\Assert\Assert;
 
-final class ProductVariantLowestPriceMapProvider implements ProductVariantMapProviderInterface
+final readonly class ProductVariantLowestPriceMapProvider implements ProductVariantMapProviderInterface
 {
     public function __construct(private ProductVariantPricesCalculatorInterface $calculator)
     {
     }
 
+    /**
+     * @param array<string, mixed> $context
+     * @return array<string, mixed>
+     */
     public function provide(ProductVariantInterface $variant, array $context): array
     {
         return [
@@ -30,6 +35,7 @@ final class ProductVariantLowestPriceMapProvider implements ProductVariantMapPro
         ];
     }
 
+    /** @param array<string, mixed> $context */
     public function supports(ProductVariantInterface $variant, array $context): bool
     {
         return
