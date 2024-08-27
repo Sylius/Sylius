@@ -430,7 +430,7 @@ final class CheckoutContext implements Context
      */
     public function iDecideToChangeMyAddress(): void
     {
-        // Intentionally left blank
+        // This step is relevant only for the UI
     }
 
     /**
@@ -1276,7 +1276,7 @@ final class CheckoutContext implements Context
         $cart = $this->getCart();
 
         Assert::notNull($cart['customer'], sprintf('Customer with an email "%s" was not expected to be null.', $email));
-        Assert::same($this->responseChecker->getValue($this->client->showByIri($cart['customer']), 'email'), $email);
+        Assert::same($cart['customer']['email'], $email);
     }
 
     /**
