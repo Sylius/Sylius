@@ -84,6 +84,28 @@
                 </openapiContext>
             </operation>
 
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/payments/{id}/refund"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface::refund"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Refunds Payment.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/payments/{id}">
                 <normalizationContext>
                     <values>
