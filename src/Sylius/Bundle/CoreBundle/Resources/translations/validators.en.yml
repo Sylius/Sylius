@@ -93,6 +93,8 @@ sylius:
         insufficient_stock: 'Insufficient stock'
         quantity:
             not_in_range: Quantity must be between {{ min }} and {{ max }}.
+        variant:
+            not_available: '%variantName% is not available.'
     max_integer: 'Value must be less than {{ compared_value }}.'
     order:
         address_requirement: 'Please provide a %addressName%.'

@@ -8,7 +8,7 @@ Feature: Adding a simple product of given quantity to the cart
         Given the store operates on a single channel in "United States"
         And the store has a product "T-Shirt banana" priced at "$12.54"
 
-    @api @ui
+    @api @ui @javascript
     Scenario: Adding a product with stated quantity to the cart
         Given there are 10 units of product "T-Shirt banana" available in the inventory
         When I add 5 of them to my cart

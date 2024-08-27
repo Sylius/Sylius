@@ -19,14 +19,18 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CartItemFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver): void
-    {
-        $this->beConstructedWith($decoratedFactory, $variantResolver);
+    function let(
+        FactoryInterface $decoratedFactory,
+        ProductVariantResolverInterface $variantResolver,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
+    ): void {
+        $this->beConstructedWith($decoratedFactory, $variantResolver, $orderItemQuantityModifier);
     }
 
     function it_implements_a_cart_item_factory_interface(): void
@@ -49,6 +53,7 @@ final class CartItemFactorySpec extends ObjectBehavior
     function it_creates_a_cart_item_and_assigns_a_product_variant(
         FactoryInterface $decoratedFactory,
         ProductVariantResolverInterface $variantResolver,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderItemInterface $cartItem,
         ProductInterface $product,
         ProductVariantInterface $productVariant,
@@ -59,6 +64,8 @@ final class CartItemFactorySpec extends ObjectBehavior
         $cartItem->setVariant($productVariant)->shouldBeCalled();
 
         $this->createForProduct($product)->shouldReturn($cartItem);
+
+        $orderItemQuantityModifier->modify($cartItem, 1)->shouldHaveBeenCalled();
     }
 
     function it_creates_a_cart_item_for_given_cart(

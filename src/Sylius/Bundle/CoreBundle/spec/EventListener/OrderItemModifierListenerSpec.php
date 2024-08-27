@@ -26,7 +26,32 @@ final class OrderItemModifierListenerSpec extends ObjectBehavior
         $this->beConstructedWith($orderModifier);
     }
 
-    function it_uses_order_processor_to_recalculate_order(
+    function it_adds_cart_item_to_order(
+        OrderModifierInterface $orderModifier,
+        GenericEvent $event,
+        OrderItemInterface $orderItem,
+        OrderInterface $order,
+    ): void {
+        $orderItem->getOrder()->willReturn($order);
+        $event->getSubject()->willReturn($orderItem);
+
+        $this->addToOrder($event);
+
+        $orderModifier->addToOrder($order, $orderItem)->shouldHaveBeenCalled();
+    }
+
+    function it_throws_exception_in_add_to_order_if_event_subject_is_not_order_item(
+        GenericEvent $event,
+    ): void {
+        $event->getSubject()->willReturn(new \stdClass());
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('addToOrder', [$event])
+        ;
+    }
+
+    function it_removes_order_item_from_order(
         OrderModifierInterface $orderModifier,
         GenericEvent $event,
         OrderItemInterface $orderItem,
@@ -40,13 +65,19 @@ final class OrderItemModifierListenerSpec extends ObjectBehavior
         $orderModifier->removeFromOrder($order, $orderItem)->shouldHaveBeenCalled();
     }
 
-    function it_throws_exception_if_event_subject_is_not_order_item(GenericEvent $event): void
-    {
+    function it_throws_exception_in_remove_order_item_if_event_subject_is_not_order_item(
+        GenericEvent $event,
+    ): void {
         $event->getSubject()->willReturn(new \stdClass());
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('removeOrderItem', [$event])
+        ;
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('addToOrder', [$event])
         ;
     }
 }
