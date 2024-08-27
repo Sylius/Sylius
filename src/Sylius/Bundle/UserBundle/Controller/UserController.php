@@ -16,10 +16,8 @@ namespace Sylius\Bundle\UserBundle\Controller;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest;
-use Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType;
 use Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType;
 use Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType;
 use Sylius\Bundle\UserBundle\UserEvents;
@@ -45,23 +43,8 @@ class UserController extends ResourceController
             throw new AccessDeniedException('You have to be registered user to access this section.');
         }
 
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
-
-        $changePassword = new ChangePassword();
-        $formType = $this->getSyliusAttribute($request, 'form', UserChangePasswordType::class);
-        $form = $this->createResourceForm($configuration, $formType, $changePassword);
-
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            return $this->handleChangePassword($request, $configuration, $user, $changePassword->getNewPassword());
-        }
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
-        }
-
         return new Response($this->container->get('twig')->render(
             $configuration->getTemplate('changePassword.html'),
-            ['form' => $form->createView()],
         ));
     }
 
@@ -329,32 +312,6 @@ class UserController extends ResourceController
         $this->addTranslatedFlash('success', 'sylius.user.reset_password');
 
         $dispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_RESET);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
-        Assert::notNull($redirectRouteName, 'Redirect is not configured.');
-
-        return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
-    }
-
-    protected function handleChangePassword(
-        Request $request,
-        RequestConfiguration $configuration,
-        UserInterface $user,
-        string $newPassword,
-    ): Response {
-        $user->setPlainPassword($newPassword);
-
-        $dispatcher = $this->container->get('event_dispatcher');
-        $dispatcher->dispatch(new GenericEvent($user), UserEvents::PRE_PASSWORD_CHANGE);
-
-        $this->manager->flush();
-        $this->addTranslatedFlash('success', 'sylius.user.change_password');
-
-        $dispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_CHANGE);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));

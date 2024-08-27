@@ -283,5 +283,26 @@
                 template="@SyliusShop/account/profile_update/form.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_shop.twig.component.change_password.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Account\ChangePassword\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="translator" />
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType</argument>
+            <argument>sylius_shop_account_dashboard</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:account:change_password:form"
+                template="@SyliusShop/account/change_password/form.html.twig"
+            />
+        </service>
     </services>
 </container>

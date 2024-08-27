@@ -47,9 +47,8 @@ sylius_shop_account_profile_update:
 
 sylius_shop_account_change_password:
     path: /change-password
-    methods: [GET, POST]
+    methods: [GET]
     defaults:
         _controller: sylius.controller.shop_user::changePasswordAction
         _sylius:
             template: "@SyliusShop/account/change_password.html.twig"
-            redirect: sylius_shop_account_dashboard

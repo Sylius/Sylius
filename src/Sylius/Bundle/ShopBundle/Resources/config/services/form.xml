@@ -37,5 +37,9 @@
             <argument>%sylius.form.type.customer_profile.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
+        <service id="sylius_shop.form.type.customer_profile" class="Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
