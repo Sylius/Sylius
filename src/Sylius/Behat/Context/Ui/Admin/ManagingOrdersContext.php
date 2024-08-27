@@ -615,9 +615,9 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it's payment state should be refunded
+     * @Then its payment state should be refunded
      */
-    public function orderPaymentStateShouldBeRefunded(): void
+    public function itsPaymentStateShouldBeRefunded(): void
     {
         Assert::same($this->showPage->getPaymentState(), 'Refunded');
     }

@@ -271,6 +271,18 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When /^I mark (this order)'s payment as refunded$/
+     */
+    public function iMarkThisOrderSPaymentAsRefunded(OrderInterface $order): void
+    {
+        $this->client->applyTransition(
+            Resources::PAYMENTS,
+            (string) $order->getLastPayment()->getId(),
+            PaymentTransitions::TRANSITION_REFUND,
+        );
+    }
+
+    /**
      * @When /^I ship (this order)$/
      */
     public function iShipThisOrder(OrderInterface $order): void
@@ -402,8 +414,9 @@ final readonly class ManagingOrdersContext implements Context
 
     /**
      * @Then it should have payment state :state
+     * @Then it should have payment with state :paymentState
      */
-    public function itShouldHavePaymentState($state): void
+    public function itShouldHavePaymentState(string $state): void
     {
         $paymentIri = $this->responseChecker->getValue(
             $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue()),
@@ -414,6 +427,16 @@ final readonly class ManagingOrdersContext implements Context
             $this->responseChecker->hasValue($this->client->showByIri($paymentIri['@id']), 'state', strtolower($state)),
             sprintf('payment for this order is not %s', $state),
         );
+    }
+
+    /**
+     * @Then /^(its) payment state should be refunded$/
+     */
+    public function itsPaymentStateShouldBeRefunded(OrderInterface $order): void
+    {
+        $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
+
+        Assert::same($this->responseChecker->getValue($response, 'paymentState'), 'refunded');
     }
 
     /**
@@ -1207,6 +1230,14 @@ final readonly class ManagingOrdersContext implements Context
      * @Then I should be notified that the order's payment has been successfully completed
      */
     public function iShouldBeNotifiedThatTheOrdersPaymentHasBeenSuccessfullyCompleted(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be notified that the order's payment has been successfully refunded
+     */
+    public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyRefunded(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
