@@ -97,7 +97,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "6.4.*"
+            "require": "7.0.*"
         }
     },
     "autoload": {
