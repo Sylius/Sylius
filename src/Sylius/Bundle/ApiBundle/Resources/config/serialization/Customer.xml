@@ -28,6 +28,7 @@
             <group>sylius:admin:customer:update</group>
             <group>sylius:shop:customer:show</group>
             <group>sylius:shop:customer:update</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="firstName">
