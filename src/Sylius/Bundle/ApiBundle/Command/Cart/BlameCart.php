@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-readonly class AssignCartToUser
+class BlameCart
 {
     public function __construct(public string $shopUserEmail, public string $orderTokenValue)
     {

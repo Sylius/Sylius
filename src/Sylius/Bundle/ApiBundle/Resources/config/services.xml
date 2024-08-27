@@ -28,7 +28,6 @@
         <import resource="services/event_subscribers.xml" />
         <import resource="services/extensions.xml" />
         <import resource="services/filters.xml" />
-        <import resource="services/listeners.xml" />
         <import resource="services/payments.xml" />
         <import resource="services/providers.xml" />
         <import resource="services/query_handlers.xml" />
@@ -61,6 +60,22 @@
 <!--        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />-->
 <!--            <argument type="service" id="sylius.context.channel" />-->
+<!--        </service>-->
+
+        <service id="sylius_api.listener.api_cart_blamer" class="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.command_bus" />
+            <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent" method="onLoginSuccess" />
+        </service>
+
+        <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
+        </service>
+
+<!--        <service id="sylius.listener.api_postgresql_driver_exception_listener" class="Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener">-->
+<!--            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />-->
 <!--        </service>-->
 
         <service id="sylius_api.converter.iri_to_identifier" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
