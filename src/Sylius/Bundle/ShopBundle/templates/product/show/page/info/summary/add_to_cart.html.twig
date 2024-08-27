@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="my-4" {{ sylius_test_html_attribute('product-selecting-variant') }}>
-            {{ form_start(form, {'action': path('sylius_shop_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart'}}) }}
+            {{ form_start(form, {'attr': {'data-action': 'live#action:prevent', 'data-live-action-param': 'addToCart'}}) }}
             {{ form_errors(form) }}
 
             {% hook 'add_to_cart' with { product, form } %}
@@ -22,7 +22,3 @@
         </div>
     {% endif %}
 </div>
-
-
-
-

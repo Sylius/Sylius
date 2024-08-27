@@ -24,6 +24,15 @@ final readonly class OrderItemModifierListener
     {
     }
 
+    public function addToOrder(GenericEvent $event): void
+    {
+        $orderItem = $event->getSubject();
+
+        Assert::isInstanceOf($orderItem, OrderItemInterface::class);
+
+        $this->orderModifier->addToOrder($orderItem->getOrder(), $orderItem);
+    }
+
     public function removeOrderItem(GenericEvent $event): void
     {
         $orderItem = $event->getSubject();

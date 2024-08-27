@@ -54,6 +54,6 @@ class SummaryComponent
     public function updateProductVariant(
         #[LiveArg] ?ProductVariant $variant,
     ): void {
-        $this->variant = $variant;
+        $this->variant = $variant->isEnabled() ? $variant : null;
     }
 }

@@ -127,10 +127,13 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCartFormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument type="service" id="sylius.factory.order_item" />
-            <argument type="service" id="sylius.factory.add_to_cart_command" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="router" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.factory.add_to_cart_command" />
+            <argument type="service" id="sylius.factory.order_item" />
             <argument>Sylius\Bundle\ShopBundle\Form\Type\AddToCartType</argument>
 
             <call method="setLiveResponder">

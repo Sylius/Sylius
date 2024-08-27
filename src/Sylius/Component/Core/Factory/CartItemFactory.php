@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
@@ -26,10 +27,13 @@ use Webmozart\Assert\Assert;
  *
  * @implements CartItemFactoryInterface<T>
  */
-final class CartItemFactory implements CartItemFactoryInterface
+final readonly class CartItemFactory implements CartItemFactoryInterface
 {
-    public function __construct(private FactoryInterface $decoratedFactory, private ProductVariantResolverInterface $variantResolver)
-    {
+    public function __construct(
+        private FactoryInterface $decoratedFactory,
+        private ProductVariantResolverInterface $variantResolver,
+        private OrderItemQuantityModifierInterface $orderItemQuantityModifier,
+    ) {
     }
 
     public function createNew(): OrderItemInterface
@@ -44,6 +48,7 @@ final class CartItemFactory implements CartItemFactoryInterface
         $variant = $this->variantResolver->getVariant($product);
         Assert::nullOrIsInstanceOf($variant, ProductVariantInterface::class);
         $cartItem->setVariant($variant);
+        $this->orderItemQuantityModifier->modify($cartItem, 1);
 
         return $cartItem;
     }

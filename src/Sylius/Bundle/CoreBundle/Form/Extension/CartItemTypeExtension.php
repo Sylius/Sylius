@@ -46,9 +46,9 @@ final class CartItemTypeExtension extends AbstractTypeExtension
                     'min' => 1,
                     'max' => $this->orderItemQuantityModifierLimit,
                     'notInRangeMessage' => 'sylius.cart_item.quantity.not_in_range',
-                    'groups' => 'sylius'
+                    'groups' => 'sylius',
                 ]),
-            ]
+            ],
         ]);
 
         if (isset($options['product']) && $options['product']->hasVariants() && !$options['product']->isSimple()) {

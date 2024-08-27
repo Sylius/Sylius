@@ -634,7 +634,7 @@ final readonly class CartContext implements Context
     {
         Assert::same(
             $this->summaryPage->getValidationMessage('item_quantity', ['%name%' => $productName]),
-            'Quantity must be between 1 and 9999.'
+            'Quantity must be between 1 and 9999.',
         );
     }
 
