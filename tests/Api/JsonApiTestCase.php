@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
+use PHPUnit\Framework\Assert;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Sylius\Tests\Api\Utils\HeadersBuilder;
 use Symfony\Component\DomCrawler\Crawler;
@@ -244,6 +245,23 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $filename,
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseErrorMessage(string $message, int $code = Response::HTTP_UNPROCESSABLE_ENTITY): void
+    {
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        Assert::assertIsArray($content, 'Response content supposed to be an array');
+
+        $expectedContent = [
+            '@context' => '/api/v2/contexts/Error',
+            '@type' => 'hydra:Error',
+            'hydra:title' => 'An error occurred',
+            'hydra:description' => $message,
+        ];
+
+        Assert::assertSame($expectedContent, $content);
+        $this->assertResponseCode($this->client->getResponse(), $code);
     }
 
     /**
