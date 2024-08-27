@@ -116,6 +116,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
+    /** @param array<string, mixed> $content */
     public function applyTransition(string $resource, string $id, string $transition, array $content = []): Response
     {
         $request = $this->requestFactory->transition($this->section, $resource, $id, $transition);
@@ -210,11 +211,13 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->updateFiles([$key => $file]);
     }
 
+    /** @param array<string, mixed> $value */
     public function addRequestData(string $key, array|bool|int|string|null $value): void
     {
         $this->request->updateContent([$key => $value]);
     }
 
+    /** @param array<string, mixed> $value */
     public function replaceRequestData(string $key, array|bool|int|string|null $value): void
     {
         $requestContent = $this->request->getContent();
@@ -222,16 +225,19 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->setContent(array_replace($requestContent, [$key => $value]));
     }
 
+    /** @param array<string, mixed> $data */
     public function updateRequestData(array $data): void
     {
         $this->request->updateContent($data);
     }
 
+    /** @param array<string, mixed> $data */
     public function setSubResourceData(string $key, array $data): void
     {
         $this->request->setSubResource($key, $data);
     }
 
+    /** @param array<string, mixed> $data */
     public function addSubResourceData(string $key, array $data): void
     {
         $this->request->addSubResource($key, $data);
@@ -247,6 +253,7 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->removeSubResource($subResourceKey, $value, $key);
     }
 
+    /** @return array<string, mixed> */
     public function getContent(): array
     {
         return $this->request->getContent();
