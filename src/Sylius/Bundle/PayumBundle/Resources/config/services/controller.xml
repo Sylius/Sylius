@@ -8,14 +8,6 @@
 
         <service id="sylius.controller.payum" class="Sylius\Bundle\PayumBundle\Controller\PayumController" public="true">
             <argument type="service" id="payum" />
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service">
-                <service class="Sylius\Resource\Metadata\MetadataInterface">
-                    <factory service="sylius.resource_registry" method="get" />
-                    <argument type="string">sylius.order</argument>
-                </service>
-            </argument>
-            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="router" />
             <argument type="service" id="sylius.factory.payum_get_status_action" />
             <argument type="service" id="sylius.factory.payum_resolve_next_route" />

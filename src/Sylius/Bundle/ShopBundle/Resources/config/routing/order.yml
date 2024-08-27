@@ -13,7 +13,7 @@ sylius_shop_order_pay:
     path: /{tokenValue}/pay
     methods: [GET]
     defaults:
-        _controller: sylius.controller.payum::prepareCaptureAction
+        _controller: sylius.controller.shop.order_pay::payAction
         _sylius:
             redirect:
                 route: sylius_shop_order_after_pay

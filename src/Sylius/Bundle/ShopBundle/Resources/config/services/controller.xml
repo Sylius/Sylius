@@ -54,5 +54,18 @@
 
             <tag name="controller.service_arguments" />
         </service>
+
+        <service id="sylius.controller.shop.order_pay" class="Sylius\Bundle\ShopBundle\Controller\OrderPayController">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service">
+                <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
+                    <factory service="sylius.resource_registry" method="get" />
+                    <argument type="string">sylius.order</argument>
+                </service>
+            </argument>
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
+            <argument type="tagged" tag="sylius.shop.provider.pay_response" />
+            <argument type="service" id="sylius.shop.provider.pay_response.default" />
+        </service>
     </services>
 </container>
