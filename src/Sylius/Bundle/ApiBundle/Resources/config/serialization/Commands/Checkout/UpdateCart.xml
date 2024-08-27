@@ -24,7 +24,6 @@
         </attribute>
         <attribute name="email">
             <group>sylius:shop:cart:update</group>
-            <group>sylius:shop:guest:write</group>
         </attribute>
         <attribute name="couponCode">
             <group>sylius:shop:cart:update</group>
