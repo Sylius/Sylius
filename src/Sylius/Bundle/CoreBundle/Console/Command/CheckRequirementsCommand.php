@@ -24,10 +24,10 @@ use Symfony\Component\Console\Output\OutputInterface;
     name: 'sylius:install:check-requirements',
     description: 'Checks if all Sylius requirements are satisfied.',
 )]
-final class CheckRequirementsCommand extends AbstractInstallCommand
+final class CheckRequirementsCommand extends Command
 {
     public function __construct(
-        private RequirementsCheckerInterface $requirementsChecker,
+        private readonly RequirementsCheckerInterface $requirementsChecker,
     ) {
         parent::__construct();
     }

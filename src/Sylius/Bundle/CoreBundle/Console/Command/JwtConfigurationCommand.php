@@ -51,7 +51,7 @@ EOT
 
         Assert::isInstanceOf($helper, QuestionHelper::class);
         if (!$helper->ask($input, $output, $question)) {
-            return 0;
+            return Command::SUCCESS;
         }
 
         $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
@@ -60,6 +60,6 @@ EOT
         $output->writeln('Please, remember to enable Sylius API');
         $output->writeln('https://docs.sylius.com/en/1.10/book/api/introduction.html');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

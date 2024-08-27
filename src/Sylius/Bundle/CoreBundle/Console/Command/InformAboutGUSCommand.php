@@ -29,7 +29,9 @@ final class InformAboutGUSCommand extends Command
     {
         $style = new SymfonyStyle($input, $output);
 
-        $style->info('To inform you about important updates and security patches, Sylius might send non-sensitive data(hostname, user-agent, locale, environment [prod/dev/test]), Sylius version, date of last contact) to our servers. An instruction on how to withdraw consent to this data collection is available in the Sylius documentation.');
+        $style->info(
+            'To inform you about important updates and security patches, Sylius might send non-sensitive data(hostname, user-agent, locale, environment [prod/dev/test]), Sylius version, date of last contact) to our servers. An instruction on how to withdraw consent to this data collection is available in the Sylius documentation.',
+        );
 
         return Command::SUCCESS;
     }

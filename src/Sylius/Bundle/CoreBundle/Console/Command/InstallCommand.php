@@ -104,7 +104,7 @@ EOT
         $outputStyle->success($this->getProperFinalMessage($errored));
         $outputStyle->writeln('You can now open your store at the following path under the website root: /');
 
-        return $errored ? 1 : 0;
+        return $errored ? Command::FAILURE : Command::SUCCESS;
     }
 
     private function getProperFinalMessage(bool $errored): string
