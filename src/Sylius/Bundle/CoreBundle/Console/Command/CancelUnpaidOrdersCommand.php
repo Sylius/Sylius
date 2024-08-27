@@ -27,9 +27,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class CancelUnpaidOrdersCommand extends Command
 {
     public function __construct(
-        public string $orderExpirationPeriod,
-        public UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater,
-        public EntityManagerInterface $orderManager,
+        private readonly UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater,
+        private readonly EntityManagerInterface $orderManager,
+        private readonly string $orderExpirationPeriod,
     ) {
         parent::__construct();
     }

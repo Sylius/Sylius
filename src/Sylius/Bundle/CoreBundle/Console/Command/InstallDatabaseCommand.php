@@ -31,7 +31,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class InstallDatabaseCommand extends Command
 {
     public function __construct(
-        private DatabaseSetupCommandsProviderInterface $databaseSetupCommandsProvider,
+        private readonly DatabaseSetupCommandsProviderInterface $databaseSetupCommandsProvider,
     ) {
         parent::__construct();
     }

@@ -13,9 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,17 +30,33 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
+#[AsCommand(
+    name: 'sylius:install:setup',
+    description: 'Sylius configuration setup.',
+)]
 final class SetupCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'sylius:install:setup';
+    public function __construct(
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly CommandDirectoryChecker $commandDirectoryChecker,
+        protected readonly CurrencySetupInterface $currencySetup,
+        protected readonly LocaleSetupInterface $localeSetup,
+        protected readonly ChannelSetupInterface $channelSetup,
+        protected readonly FactoryInterface $adminUserFactory,
+        protected readonly UserRepositoryInterface $adminUserRepository,
+        protected readonly EntityManagerInterface $adminUserManager,
+        protected readonly ValidatorInterface $validator,
+
+    ) {
+        parent::__construct($this->entityManager, $this->commandDirectoryChecker);
+    }
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Sylius configuration setup.')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> command allows user to configure basic Sylius data.
@@ -44,12 +67,12 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $currency = $this->getContainer()->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
-        $locale = $this->getContainer()->get('sylius.setup.locale')->setup($input, $output, $this->getHelper('question'));
-        $this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
+        $currency = $this->currencySetup->setup($input, $output, $this->getHelper('question'));
+        $locale = $this->localeSetup->setup($input, $output, $this->getHelper('question'));
+        $this->channelSetup->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): void
@@ -57,11 +80,8 @@ EOT
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('Create your administrator account.');
 
-        $userManager = $this->getContainer()->get('sylius.manager.admin_user');
-        $userFactory = $this->getContainer()->get('sylius.factory.admin_user');
-
         try {
-            $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
+            $user = $this->configureNewUser($this->adminUserFactory->createNew(), $input, $output);
         } catch (\InvalidArgumentException) {
             return;
         }
@@ -69,8 +89,8 @@ EOT
         $user->setEnabled(true);
         $user->setLocaleCode($localeCode);
 
-        $userManager->persist($user);
-        $userManager->flush();
+        $this->adminUserManager->persist($user);
+        $this->adminUserManager->flush();
 
         $outputStyle->writeln('<info>Administrator account successfully registered.</info>');
         $outputStyle->newLine();
@@ -109,8 +129,7 @@ EOT
                  * @param mixed $value
                  */
                 function ($value): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
+                    $errors = $this->validator->validate((string) $value, [new Email(), new NotBlank()]);
                     foreach ($errors as $error) {
                         throw new \DomainException((string) $error->getMessage());
                     }
@@ -126,12 +145,11 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
-        $userRepository = $this->getAdminUserRepository();
 
         do {
             $question = $this->createEmailQuestion();
             $email = $questionHelper->ask($input, $output, $question);
-            $exists = null !== $userRepository->findOneByEmail($email);
+            $exists = null !== $this->adminUserRepository->findOneByEmail($email);
 
             if ($exists) {
                 $output->writeln('<error>E-Mail is already in use!</error>');
@@ -145,12 +163,11 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
-        $userRepository = $this->getAdminUserRepository();
 
         do {
             $question = new Question('Username (press enter to use email): ', $email);
             $username = $questionHelper->ask($input, $output, $question);
-            $exists = null !== $userRepository->findOneBy(['username' => $username]);
+            $exists = null !== $this->adminUserRepository->findOneBy(['username' => $username]);
 
             if ($exists) {
                 $output->writeln('<error>Username is already in use!</error>');
@@ -186,8 +203,7 @@ EOT
         return
             /** @param mixed $value */
             function ($value): string {
-                /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
+                $errors = $this->validator->validate($value, [new NotBlank()]);
                 foreach ($errors as $error) {
                     throw new \DomainException((string) $error->getMessage());
                 }
@@ -205,11 +221,5 @@ EOT
             ->setHidden(true)
             ->setHiddenFallback(false)
         ;
-    }
-
-    /** @return UserRepositoryInterface<UserInterface> */
-    private function getAdminUserRepository(): UserRepositoryInterface
-    {
-        return $this->getContainer()->get('sylius.repository.admin_user');
     }
 }
