@@ -190,8 +190,10 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_changes_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
+    public function it_changes_payment_method_of_order_created_by_a_guest_authenticated_as_a_guest(): void
     {
+        $this->setUpDefaultPatchHeaders();
+
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel/channel.yaml',
@@ -204,21 +206,47 @@ final class OrdersTest extends JsonApiTestCase
 
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $fixtures['payment_method_bank_transfer'];
-        $order = $this->placeOrder('token', 'oliver@doe.com');
+        $order = $this->placeOrder('token', 'guest@doe.com');
 
-        $this->client->request(
-            method: 'PATCH',
+        $this->requestPatch(
             uri: sprintf('/api/v2/shop/orders/token/payments/%s', $order->getPayments()->first()->getId()),
-            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->withShopUserAuthorization('oliver@doe.com')->build(),
-            content: json_encode([
+            body: [
                 'paymentMethod' => $paymentMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/order/change_payment_method',
+        $this->assertResponseSuccessful('shop/order/change_payment_method_as_guest');
+    }
+
+
+    /** @test */
+    public function it_changes_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+        $this->setUpShopUserContext('shop@example.com');
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'customer.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $fixtures['payment_method_bank_transfer'];
+        $order = $this->placeOrder('token', 'shop@example.com');
+
+        $this->requestPatch(
+            uri: sprintf('/api/v2/shop/orders/token/payments/%s', $order->getPayments()->first()->getId()),
+            body: [
+                'paymentMethod' => $paymentMethod->getCode(),
+            ],
         );
+
+        $this->assertResponseSuccessful('shop/order/change_payment_method_as_user');
     }
 
     /** @test */
@@ -277,38 +305,6 @@ final class OrdersTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
-    }
-
-    /** @test */
-    public function it_changes_payment_method_of_order_created_by_a_guest_authenticated_as_a_guest(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/shop_user.yaml',
-            'channel/channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'customer.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $fixtures['payment_method_bank_transfer'];
-        $order = $this->placeOrder('token', 'guest@doe.com');
-
-        $this->client->request(
-            method: 'PATCH',
-            uri: sprintf('/api/v2/shop/orders/token/payments/%s', $order->getPayments()->first()->getId()),
-            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
-            content: json_encode([
-                'paymentMethod' => $paymentMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/order/change_payment_method',
-        );
     }
 
     /** @test */

@@ -33,6 +33,8 @@ final class PaymentMethodTest extends JsonApiTestCase
     /** @test */
     public function it_selects_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
+        $this->setUpDefaultPatchHeaders();
+
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel/channel.yaml',
@@ -44,27 +46,24 @@ final class PaymentMethodTest extends JsonApiTestCase
 
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $fixtures['payment_method_bank_transfer'];
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_oliver'];
+        /** @var string $email */
+        $email = $fixtures['customer_oliver']->getEmailCanonical();
 
-        $tokenValue = $this->pickUpCart(email: $customer->getEmailCanonical());
+        $this->setUpShopUserContext($email);
+
+        $tokenValue = $this->pickUpCart(email: $email);
         $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
-        $cart = $this->updateCartWithAddress($tokenValue, $customer->getEmailCanonical());
+        $cart = $this->updateCartWithAddress($tokenValue, $email);
         $cart = $this->dispatchShippingMethodChooseCommand($tokenValue, 'DHL', $cart->getShipments()->first()->getId());
 
-        $this->client->request(
-            method: 'PATCH',
+        $this->requestPatch(
             uri: sprintf('/api/v2/shop/orders/%s/payments/%s', $tokenValue, $cart->getLastPayment()->getId()),
-            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
-            content: json_encode([
+            body: [
                 'paymentMethod' => $paymentMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/payment_method/select_payment_method_by_user',
-        );
+        $this->assertResponseSuccessful('shop/checkout/payment_method/select_payment_method_by_user');
     }
 
     /** @test */
@@ -138,6 +137,8 @@ final class PaymentMethodTest extends JsonApiTestCase
     /** @test */
     public function it_selects_payment_method_of_order_created_by_a_guest_authenticated_as_a_guest(): void
     {
+        $this->setUpDefaultPatchHeaders();
+
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel/channel.yaml',
@@ -155,19 +156,14 @@ final class PaymentMethodTest extends JsonApiTestCase
         $cart = $this->updateCartWithAddress($tokenValue, 'guest@doe.com');
         $cart = $this->dispatchShippingMethodChooseCommand($tokenValue, 'DHL', $cart->getShipments()->first()->getId());
 
-        $this->client->request(
-            method: 'PATCH',
+        $this->requestPatch(
             uri: sprintf('/api/v2/shop/orders/%s/payments/%s', $tokenValue, $cart->getLastPayment()->getId()),
-            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
-            content: json_encode([
+            body: [
                 'paymentMethod' => $paymentMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/payment_method/select_payment_method_by_guest',
-        );
+        $this->assertResponseSuccessful('shop/checkout/payment_method/select_payment_method_by_guest');
     }
 
     /** @test */
