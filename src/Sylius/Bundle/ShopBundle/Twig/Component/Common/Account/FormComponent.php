@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Register;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Common\Account;
 
 use Sylius\Component\Core\Model\Customer;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;

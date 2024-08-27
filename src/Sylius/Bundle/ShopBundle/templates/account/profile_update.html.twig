@@ -1,8 +1,6 @@
 {% extends '@SyliusShop/account/layout.html.twig' %}
 {% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
 
-{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
-
 {% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
@@ -20,14 +18,5 @@
 {% endblock %}
 
 {% block account_content %}
-    <div>
-        {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-
-        <input type="hidden" name="_method" value="PUT" />
-
-        {% hook 'sylius_shop.account.profile_update' with { form } %}
-
-        {{ form_row(form._token) }}
-        {{ form_end(form, {'render_rest': false}) }}
-    </div>
+    {% hook 'sylius_shop.account.profile_update' with { form } %}
 {% endblock %}
