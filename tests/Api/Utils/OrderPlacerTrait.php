@@ -65,7 +65,7 @@ trait OrderPlacerTrait
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
             'CASH_ON_DELIVERY',
-            (string) $cart->getLastPayment()->getId(),
+            $cart->getLastPayment()->getId(),
         );
         $order = $this->dispatchCompleteOrderCommand($tokenValue);
         $this->payOrder($order);
@@ -170,13 +170,17 @@ trait OrderPlacerTrait
         return $order;
     }
 
-    private function setCheckoutCompletedAt(
-        OrderInterface $order,
-        ?\DateTimeImmutable $checkoutCompletedAt,
-    ): OrderInterface {
+    protected function refundOrder(OrderInterface $order): OrderInterface
+    {
         $objectManager = $this->get('doctrine.orm.entity_manager');
 
-        $order->setCheckoutCompletedAt($checkoutCompletedAt);
+        $stateMachineFactory = $this->get('sm.factory');
+
+        $orderStateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
+        $orderStateMachine->apply(OrderPaymentTransitions::TRANSITION_REFUND);
+
+        $paymentStateMachine = $stateMachineFactory->get($order->getLastPayment(), PaymentTransitions::GRAPH);
+        $paymentStateMachine->apply(PaymentTransitions::TRANSITION_REFUND);
 
         $objectManager->flush();
 
@@ -234,6 +238,19 @@ trait OrderPlacerTrait
         $envelope = $this->commandBus->dispatch($updateCartCommand);
 
         return $envelope->last(HandledStamp::class)->getResult();
+    }
+
+    private function setCheckoutCompletedAt(
+        OrderInterface $order,
+        ?\DateTimeImmutable $checkoutCompletedAt,
+    ): OrderInterface {
+        $objectManager = $this->get('doctrine.orm.entity_manager');
+
+        $order->setCheckoutCompletedAt($checkoutCompletedAt);
+
+        $objectManager->flush();
+
+        return $order;
     }
 
     private function checkSetUpOrderPlacerCalled(): void

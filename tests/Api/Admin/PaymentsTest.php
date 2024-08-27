@@ -119,6 +119,92 @@ final class PaymentsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_refunds_the_payment(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->fulfillOrder('token');
+
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/refund', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseSuccessful('admin/payment/patch_refund_payment');
+    }
+
+    /** @test */
+    public function it_does_not_refund_the_payment_if_it_is_not_fulfilled(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('token');
+
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/refund', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseErrorMessage('Transition "refund" cannot be applied on "new" payment.');
+    }
+
+    /** @test */
+    public function it_does_not_refund_the_payment_if_it_is_already_refunded(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->fulfillOrder('token');
+        $order = $this->refundOrder($order);
+
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/refund', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseErrorMessage('Transition "refund" cannot be applied on "refunded" payment.');
+    }
+
+    /** @test */
+    public function it_does_not_refund_the_payment_if_it_is_cancelled(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('token');
+        $this->cancelOrder('token');
+
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/refund', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseErrorMessage('Transition "refund" cannot be applied on "cancelled" payment.');
+    }
+
+    /** @test */
     public function it_does_not_complete_payment_if_it_is_not_in_the_new_state(): void
     {
         $this->setUpDefaultPatchHeaders();
@@ -137,6 +223,6 @@ final class PaymentsTest extends JsonApiTestCase
         $this->payOrder($order);
         $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
 
-        $this->assertResponseUnprocessableEntity('admin/payment/patch_not_complete_payment');
+        $this->assertResponseErrorMessage('Transition "complete" cannot be applied on "completed" payment.');
     }
 }
