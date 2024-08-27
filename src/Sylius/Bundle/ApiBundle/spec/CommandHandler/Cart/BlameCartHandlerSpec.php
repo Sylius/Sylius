@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Cart\AssignCartToUser;
+use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class AssignCartToUserHandlerSpec extends ObjectBehavior
+final class BlameCartHandlerSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $shopUserRepository,
@@ -42,7 +42,7 @@ final class AssignCartToUserHandlerSpec extends ObjectBehavior
         $this->shouldImplement(MessageHandlerInterface::class);
     }
 
-    function it_assigns_cart_to_user(
+    function it_blames_cart_with_given_data(
         UserRepositoryInterface $shopUserRepository,
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
@@ -61,7 +61,7 @@ final class AssignCartToUserHandlerSpec extends ObjectBehavior
 
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this(new AssignCartToUser('sylius@example.com', 'TOKEN'));
+        $this(new BlameCart('sylius@example.com', 'TOKEN'));
     }
 
     function it_throws_an_exception_if_cart_is_occupied(
@@ -79,7 +79,7 @@ final class AssignCartToUserHandlerSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [
-                new AssignCartToUser('sylius@example.com', 'TOKEN'),
+                new BlameCart('sylius@example.com', 'TOKEN'),
             ])
         ;
     }
@@ -92,7 +92,7 @@ final class AssignCartToUserHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [new AssignCartToUser('sylius@example.com', 'TOKEN')])
+            ->during('__invoke', [new BlameCart('sylius@example.com', 'TOKEN')])
         ;
     }
 
@@ -100,7 +100,7 @@ final class AssignCartToUserHandlerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [new AssignCartToUser('sylius@example.com', 'TOKEN')])
+            ->during('__invoke', [new BlameCart('sylius@example.com', 'TOKEN')])
         ;
     }
 }
