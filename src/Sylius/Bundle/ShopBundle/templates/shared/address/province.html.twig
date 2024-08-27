@@ -2,5 +2,5 @@
 {% set province = address|sylius_province_name %}
 
 {% if province is not empty %}
-    {{ province }}<br/>
+    <span>{{ province }}</span>
 {% endif %}
