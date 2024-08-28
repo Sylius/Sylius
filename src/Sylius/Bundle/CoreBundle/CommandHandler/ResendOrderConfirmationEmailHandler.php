@@ -18,9 +18,10 @@ use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class ResendOrderConfirmationEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class ResendOrderConfirmationEmailHandler
 {
     /**
      * @param RepositoryInterface<OrderInterface> $orderRepository

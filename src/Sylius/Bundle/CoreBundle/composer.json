@@ -46,7 +46,7 @@
         "sylius/currency-bundle": "^2.0",
         "sylius/customer-bundle": "^2.0",
         "sylius/fixtures-bundle": "^1.8",
-        "sylius/grid-bundle": "^1.12",
+        "sylius/grid-bundle": "^1.12 || dev-symfony-7",
         "sylius/inventory-bundle": "^2.0",
         "sylius/locale-bundle": "^2.0",
         "sylius/mailer-bundle": "^2.0",

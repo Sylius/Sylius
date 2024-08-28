@@ -18,9 +18,10 @@ use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class ResendShipmentConfirmationEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class ResendShipmentConfirmationEmailHandler
 {
     /**
      * @param RepositoryInterface<ShipmentInterface> $shipmentRepository
