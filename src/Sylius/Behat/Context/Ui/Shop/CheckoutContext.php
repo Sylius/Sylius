@@ -26,7 +26,6 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
@@ -73,8 +72,11 @@ final readonly class CheckoutContext implements Context
      */
     public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
     {
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
-        $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
+        $this->selectShippingPage->nextStep();
+
+        $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
+        $this->selectPaymentPage->nextStep();
     }
 
     /**
@@ -102,17 +104,6 @@ final readonly class CheckoutContext implements Context
         $this->paymentContext->iCompleteThePaymentStep();
 
         $this->sharedStorage->set('shipping_method', $shippingMethod);
-    }
-
-    /**
-     * @When /^I proceed with selecting ("[^"]+" as billing country) with "([^"]+)" method$/
-     */
-    public function iProceedSelectingBillingCountryAndShippingMethod(
-        ?CountryInterface $shippingCountry = null,
-        ?string $shippingMethodName = null,
-    ): void {
-        $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
     }
 
     /**

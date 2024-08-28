@@ -78,7 +78,7 @@ final readonly class CheckoutAddressingContext implements Context
         $this->addressPage->open();
         $this->iSpecifyTheEmail($email);
         $this->iSpecifyTheBillingAddressAs($address);
-        $this->iCompleteTheAddressingStep();
+        $this->addressPage->nextStep();
     }
 
     /**
@@ -88,7 +88,7 @@ final readonly class CheckoutAddressingContext implements Context
     {
         $this->addressPage->open();
         $this->iSpecifyTheBillingAddressAs($address);
-        $this->iCompleteTheAddressingStep();
+        $this->addressPage->nextStep();
     }
 
     /**
@@ -229,7 +229,7 @@ final readonly class CheckoutAddressingContext implements Context
         $key = sprintf('shipping_address_%s_%s', strtolower((string) $address->getFirstName()), strtolower((string) $address->getLastName()));
         $this->sharedStorage->set($key, $address);
 
-        $this->iCompleteTheAddressingStep();
+        $this->addressPage->nextStep();
     }
 
     /**
