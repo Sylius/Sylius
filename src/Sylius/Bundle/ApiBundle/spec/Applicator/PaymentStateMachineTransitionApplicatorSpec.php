@@ -59,7 +59,7 @@ final class PaymentStateMachineTransitionApplicatorSpec extends ObjectBehavior
         $this->refund($payment);
     }
 
-    function it_throws_exception_if_cannot_refund_payment(
+    function it_throws_an_exception_if_cannot_refund_payment(
         StateMachineInterface $stateMachine,
         PaymentInterface $payment,
     ): void {
