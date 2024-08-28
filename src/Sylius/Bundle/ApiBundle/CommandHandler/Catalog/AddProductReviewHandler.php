@@ -44,7 +44,7 @@ final readonly class AddProductReviewHandler implements MessageHandlerInterface
         }
 
         /** @var string|null $email */
-        $email = $addProductReview->getEmail();
+        $email = $addProductReview->email;
 
         if ($email === null) {
             throw new \InvalidArgumentException('Visitor should provide an email');

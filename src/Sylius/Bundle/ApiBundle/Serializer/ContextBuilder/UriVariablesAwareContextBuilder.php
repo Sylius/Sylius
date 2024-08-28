@@ -23,15 +23,9 @@ final class UriVariablesAwareContextBuilder extends AbstractInputContextBuilder
         SerializerContextBuilderInterface $decoratedContextBuilder,
         string $attributeClass,
         string $defaultConstructorArgumentName,
-        private readonly string $commandInterface,
         private readonly string $objectInterface,
     ) {
         parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
-    }
-
-    protected function supportsClass(string $class): bool
-    {
-        return is_a($class, $this->commandInterface, true);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

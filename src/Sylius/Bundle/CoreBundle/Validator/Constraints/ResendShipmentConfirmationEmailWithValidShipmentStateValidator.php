@@ -40,7 +40,7 @@ final class ResendShipmentConfirmationEmailWithValidShipmentStateValidator exten
         }
 
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->findOneBy(['id' => $value->getShipmentId()]);
+        $shipment = $this->shipmentRepository->findOneBy(['id' => $value->shipmentId]);
         if (null === $shipment) {
             return;
         }

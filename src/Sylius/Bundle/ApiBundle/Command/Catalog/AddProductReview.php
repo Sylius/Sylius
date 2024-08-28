@@ -13,22 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Catalog;
 
+use Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 
-readonly class AddProductReview implements IriToIdentifierConversionAwareInterface, LoggedInCustomerEmailAwareInterface
+#[LoggedInCustomerEmailAware]
+class AddProductReview implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public string $title,
-        public int $rating,
-        public string $comment,
-        public string $productCode,
-        public ?string $email = null,
+        public readonly string $title,
+        public readonly int $rating,
+        public readonly string $comment,
+        public readonly string $productCode,
+        public readonly ?string $email = null,
     ) {
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
     }
 }

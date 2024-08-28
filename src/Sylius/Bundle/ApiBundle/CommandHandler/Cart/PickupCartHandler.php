@@ -42,13 +42,13 @@ final readonly class PickupCartHandler implements MessageHandlerInterface
 
     public function __invoke(PickupCart $pickupCart): OrderInterface
     {
-        $channel = $this->channelRepository->findOneByCode($pickupCart->getChannelCode());
+        $channel = $this->channelRepository->findOneByCode($pickupCart->channelCode);
         Assert::isInstanceOf($channel, ChannelInterface::class);
 
         $customer = null;
-        if ($pickupCart->getEmail() !== null) {
+        if ($pickupCart->email !== null) {
             /** @var CustomerInterface|null $customer */
-            $customer = $this->customerRepository->findOneBy(['email' => $pickupCart->getEmail()]);
+            $customer = $this->customerRepository->findOneBy(['email' => $pickupCart->email]);
         }
 
         if (null === $customer) {
@@ -62,7 +62,7 @@ final readonly class PickupCartHandler implements MessageHandlerInterface
         }
 
         if (null === $activeCart->getTokenValue()) {
-            $activeCart->setTokenValue($pickupCart->getTokenValue() ?? $this->generateTokenValue());
+            $activeCart->setTokenValue($pickupCart->tokenValue ?? $this->generateTokenValue());
             $this->orderManager->persist($activeCart);
         }
 
@@ -74,8 +74,8 @@ final readonly class PickupCartHandler implements MessageHandlerInterface
         $cart = $this->cartFactory->createNewCart(
             $channel,
             $customer,
-            $this->getLocaleCode($pickupCart->getLocaleCode(), $channel),
-            $pickupCart->getTokenValue() ?? $this->generateTokenValue(),
+            $this->getLocaleCode($pickupCart->localeCode, $channel),
+            $pickupCart->tokenValue ?? $this->generateTokenValue(),
         );
 
         $this->orderManager->persist($cart);

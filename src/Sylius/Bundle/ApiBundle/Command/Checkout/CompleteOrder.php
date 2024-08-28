@@ -13,23 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 
-class CompleteOrder implements OrderTokenValueAwareInterface
+#[OrderTokenValueAware]
+class CompleteOrder
 {
     public function __construct(
-        protected ?string $notes = null,
-        protected ?string $orderTokenValue = null,
+        public readonly string $orderTokenValue,
+        public readonly ?string $notes = null,
     ) {
-    }
-
-    public function getNotes(): ?string
-    {
-        return $this->notes;
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
     }
 }

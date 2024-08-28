@@ -101,7 +101,6 @@
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware::DEFAULT_ARGUMENT_NAME</argument>
-            <argument>Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface</argument>
             <argument>Sylius\Component\Core\Model\ShipmentInterface</argument>
         </service>
 
@@ -114,7 +113,6 @@
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware::DEFAULT_ARGUMENT_NAME</argument>
-            <argument>Sylius\Bundle\ApiBundle\Command\PaymentIdAwareInterface</argument>
             <argument>Sylius\Component\Core\Model\PaymentInterface</argument>
         </service>
 
@@ -127,7 +125,6 @@
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware::DEFAULT_ARGUMENT_NAME</argument>
-            <argument>Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface</argument>
             <argument>Sylius\Component\Core\Model\OrderInterface</argument>
         </service>
 
@@ -140,7 +137,6 @@
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware::DEFAULT_ARGUMENT_NAME</argument>
-            <argument>Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface</argument>
             <argument>Sylius\Component\Core\Model\OrderItemInterface</argument>
         </service>
     </services>

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\TransitionInterface;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -34,13 +34,14 @@ class CheckoutCompletionValidator extends ConstraintValidator
 
     public function validate(mixed $value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
+        Assert::isInstanceOf($value, CompleteOrder::class);
+
 
         /** @var CheckoutCompletion $constraint */
         Assert::isInstanceOf($constraint, CheckoutCompletion::class);
 
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->orderTokenValue]);
 
         Assert::isInstanceOf($order, OrderInterface::class);
 

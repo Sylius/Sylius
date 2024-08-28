@@ -44,16 +44,16 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
         Assert::isInstanceOf($constraint, ChosenPaymentMethodEligibility::class);
 
         /** @var PaymentMethodInterface|null $paymentMethod */
-        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->getPaymentMethodCode()]);
+        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->paymentMethodCode]);
 
         if ($paymentMethod === null) {
-            $this->context->addViolation($constraint->notExist, ['%code%' => $value->getPaymentMethodCode()]);
+            $this->context->addViolation($constraint->notExist, ['%code%' => $value->paymentMethodCode]);
 
             return;
         }
 
         /** @var PaymentInterface|null $payment */
-        $payment = $this->paymentRepository->find($value->getPaymentId());
+        $payment = $this->paymentRepository->find($value->paymentId);
 
         if (null === $payment) {
             $this->context->addViolation($constraint->paymentNotFound);

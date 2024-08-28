@@ -36,12 +36,12 @@ final class ShopUserVerificationTokenEligibilityValidator extends ConstraintVali
         Assert::isInstanceOf($constraint, ShopUserVerificationTokenEligibility::class);
 
         /** @var UserInterface|null $user */
-        $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $value->getToken()]);
+        $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $value->token]);
 
         if (null === $user) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%verificationToken%' => $value->getToken()],
+                ['%verificationToken%' => $value->token],
             );
         }
     }

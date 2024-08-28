@@ -43,7 +43,7 @@ final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends Con
         }
 
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->orderTokenValue]);
         if (null === $order) {
             return;
         }

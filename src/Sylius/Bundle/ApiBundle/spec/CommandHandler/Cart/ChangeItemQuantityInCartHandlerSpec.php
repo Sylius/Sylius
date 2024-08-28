@@ -56,6 +56,6 @@ final class ChangeItemQuantityInCartHandlerSpec extends ObjectBehavior
         $orderItemQuantityModifier->modify($cartItem, 5)->shouldBeCalled();
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this(new ChangeItemQuantityInCart(5, 123, 'TOKEN_VALUE'));
+        $this(new ChangeItemQuantityInCart(orderTokenValue: 'TOKEN_VALUE', orderItemId: 123, quantity: 5));
     }
 }

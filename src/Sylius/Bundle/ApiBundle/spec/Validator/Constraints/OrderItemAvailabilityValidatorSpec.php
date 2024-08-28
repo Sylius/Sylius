@@ -48,7 +48,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new CompleteOrder(),
+                new CompleteOrder('TOKEN'),
                 new class() extends Constraint {
                 },
             ])

@@ -36,6 +36,10 @@ final readonly class VerifyShopUserProvider implements ProviderInterface
         Assert::isInstanceOf($this->sectionProvider->getSection(), ShopApiSection::class);
         Assert::stringNotEmpty($uriVariables['token'] ?? null, 'Token is required.');
 
-        return new VerifyShopUser($uriVariables['token'], $context[ContextKeys::CHANNEL]->getCode(), $context[ContextKeys::LOCALE_CODE]);
+        return new VerifyShopUser(
+            channelCode: $context[ContextKeys::CHANNEL]->getCode(),
+            localeCode: $context[ContextKeys::LOCALE_CODE],
+            token: $uriVariables['token'],
+        );
     }
 }

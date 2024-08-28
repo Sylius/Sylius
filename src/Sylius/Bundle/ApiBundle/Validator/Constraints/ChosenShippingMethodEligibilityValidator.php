@@ -45,15 +45,15 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
         Assert::isInstanceOf($constraint, ChosenShippingMethodEligibility::class);
 
         /** @var ShippingMethodInterface|null $shippingMethod */
-        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $value->getShippingMethodCode()]);
+        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $value->shippingMethodCode]);
         if (null === $shippingMethod) {
-            $this->context->addViolation($constraint->notFoundMessage, ['%code%' => $value->getShippingMethodCode()]);
+            $this->context->addViolation($constraint->notFoundMessage, ['%code%' => $value->shippingMethodCode]);
 
             return;
         }
 
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->find($value->getShipmentId());
+        $shipment = $this->shipmentRepository->find($value->shipmentId);
 
         if (null === $shipment) {
             $this->context->addViolation($constraint->shipmentNotFoundMessage);

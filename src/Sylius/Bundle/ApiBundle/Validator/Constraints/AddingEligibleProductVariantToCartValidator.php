@@ -49,19 +49,19 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         Assert::isInstanceOf($constraint, AddingEligibleProductVariantToCart::class);
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
+        $cart = $this->orderRepository->findCartByTokenValue($value->orderTokenValue);
 
         if ($cart === null) {
             return;
         }
 
         /** @var ProductVariantInterface|null $productVariant */
-        $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->getProductVariantCode()]);
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);
 
         if ($productVariant === null) {
             $this->context->addViolation(
                 $constraint->productVariantNotExistMessage,
-                ['%productVariantCode%' => $value->getProductVariantCode()],
+                ['%productVariantCode%' => $value->productVariantCode],
             );
 
             return;
@@ -89,7 +89,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
 
         if (!$this->availabilityChecker->isStockSufficient(
             $productVariant,
-            $value->getQuantity() + $this->getExistingCartItemQuantityFromCart($cart, $productVariant),
+            $value->quantity + $this->getExistingCartItemQuantityFromCart($cart, $productVariant),
         )) {
             $this->context->addViolation(
                 $constraint->productVariantNotSufficient,

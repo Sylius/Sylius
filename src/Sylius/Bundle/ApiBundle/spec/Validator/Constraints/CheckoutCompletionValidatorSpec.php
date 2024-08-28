@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\Transition;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletion;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -51,25 +51,24 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_checkout_completion(
         Constraint $constraint,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
+        CompleteOrder $completeOrder,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$orderTokenValueAware, $constraint])
+            ->during('validate', [$completeOrder, $constraint])
         ;
     }
 
     function it_throws_an_exception_if_order_with_given_token_value_does_not_exist(
         OrderRepositoryInterface $orderRepository,
         Constraint $constraint,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
     ): void {
-        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
+        $completeOrder = new CompleteOrder('xxx');
         $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$orderTokenValueAware, $constraint])
+            ->during('validate', [$completeOrder, $constraint])
         ;
     }
 
@@ -78,11 +77,10 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
     ): void {
         $this->initialize($executionContext);
 
-        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
+        $completeOrder = new CompleteOrder('xxx');
         $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn($order);
 
         $stateMachine->can($order, 'sylius_order_checkout', OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(true);
@@ -92,7 +90,7 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
             ->shouldNotBeCalled()
         ;
 
-        $this->validate($orderTokenValueAware, new CheckoutCompletion());
+        $this->validate($completeOrder, new CheckoutCompletion());
     }
 
     function it_adds_violation_if_order_cannot_be_completed(
@@ -100,11 +98,10 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
     ): void {
         $this->initialize($executionContext);
 
-        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
+        $completeOrder = new CompleteOrder('xxx');
         $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn($order);
 
         $stateMachine->can($order, 'sylius_order_checkout', OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
@@ -126,6 +123,6 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->validate($orderTokenValueAware, new CheckoutCompletion());
+        $this->validate($completeOrder, new CheckoutCompletion());
     }
 }

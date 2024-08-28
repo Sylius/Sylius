@@ -13,23 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
 
-class ShipShipment implements ShipmentIdAwareInterface
+#[ShipmentIdAware]
+class ShipShipment
 {
     public function __construct(
-        private ?int $shipmentId = null,
-        public ?string $trackingCode = null,
+        public readonly mixed $shipmentId = null,
+        public readonly ?string $trackingCode = null,
     ) {
-    }
-
-    public function getShipmentId(): ?int
-    {
-        return $this->shipmentId;
-    }
-
-    public function setShipmentId(?int $shipmentId): void
-    {
-        $this->shipmentId = $shipmentId;
     }
 }

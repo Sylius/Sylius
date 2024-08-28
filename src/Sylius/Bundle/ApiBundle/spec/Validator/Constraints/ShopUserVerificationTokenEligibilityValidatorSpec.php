@@ -60,7 +60,11 @@ final class ShopUserVerificationTokenEligibilityValidatorSpec extends ObjectBeha
         ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new ShopUserVerificationTokenEligibility();
-        $value = new VerifyShopUser('TOKEN', 'en_US', 'WEB');
+        $value = new VerifyShopUser(
+            channelCode: 'WEB',
+            localeCode: 'en_US',
+            token: 'TOKEN',
+        );
 
         $this->initialize($executionContext);
 
@@ -83,7 +87,11 @@ final class ShopUserVerificationTokenEligibilityValidatorSpec extends ObjectBeha
         ShopUserInterface $user,
     ): void {
         $constraint = new ShopUserVerificationTokenEligibility();
-        $value = new VerifyShopUser('TOKEN', 'en_US', 'WEB');
+        $value = new VerifyShopUser(
+            channelCode: 'WEB',
+            localeCode: 'en_US',
+            token: 'TOKEN',
+        );
 
         $this->initialize($executionContext);
 

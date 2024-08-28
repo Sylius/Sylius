@@ -42,7 +42,7 @@ final readonly class DeleteOrderItemAction
             throw new OrderItemNotFoundException();
         }
 
-        $this->commandBus->dispatch(new RemoveItemFromCart($orderItemId, $tokenValue));
+        $this->commandBus->dispatch(new RemoveItemFromCart(orderTokenValue: $tokenValue, itemId: $orderItemId));
 
         return new JsonResponse(status: Response::HTTP_NO_CONTENT);
     }

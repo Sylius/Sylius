@@ -72,9 +72,9 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         $orderModifier->addToOrder($cart, $cartItem)->shouldBeCalled();
 
         $this(new AddItemToCart(
-            'PRODUCT_VARIANT_CODE',
-            5,
-            'TOKEN',
+            orderTokenValue: 'TOKEN',
+            productVariantCode: 'PRODUCT_VARIANT_CODE',
+            quantity: 5,
         ))->shouldReturn($cart);
     }
 
@@ -89,9 +89,9 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [new AddItemToCart(
-                'PRODUCT_VARIANT_CODE',
-                1,
-                'TOKEN',
+                orderTokenValue: 'TOKEN',
+                productVariantCode: 'PRODUCT_VARIANT_CODE',
+                quantity: 1,
             )])
         ;
     }
@@ -114,9 +114,9 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [new AddItemToCart(
-                'PRODUCT_VARIANT_CODE',
-                1,
-                'TOKEN',
+                orderTokenValue: 'TOKEN',
+                productVariantCode: 'PRODUCT_VARIANT_CODE',
+                quantity: 1,
             )])
         ;
     }

@@ -70,7 +70,11 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentMethodInterface $thirdPaymentMethod,
         PaymentInterface $payment,
     ): void {
-        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE', 123, 'ORDER_TOKEN');
+        $command = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            paymentId: 123,
+        );
 
         $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($firstPaymentMethod);
         $firstPaymentMethod->getName()->willReturn('offline');
@@ -93,7 +97,11 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE', 123, 'ORDER_TOKEN');
+        $command = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            paymentId: 123,
+        );
 
         $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($paymentMethod);
 
@@ -111,7 +119,11 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE', 123, 'ORDER_TOKEN');
+        $command = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            paymentId: 123,
+        );
 
         $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn(null);
 
@@ -132,7 +144,11 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentMethodInterface $secondPaymentMethod,
         PaymentInterface $payment,
     ): void {
-        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE', 123, 'ORDER_TOKEN');
+        $command = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            paymentId: 123,
+        );
 
         $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($secondPaymentMethod);
 

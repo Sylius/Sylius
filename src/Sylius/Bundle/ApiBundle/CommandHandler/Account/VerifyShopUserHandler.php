@@ -23,7 +23,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final class VerifyShopUserHandler implements MessageHandlerInterface
+final readonly class VerifyShopUserHandler implements MessageHandlerInterface
 {
     /** @param RepositoryInterface<ShopUserInterface> $shopUserRepository */
     public function __construct(
@@ -36,10 +36,10 @@ final class VerifyShopUserHandler implements MessageHandlerInterface
     public function __invoke(VerifyShopUser $command): void
     {
         /** @var ShopUserInterface|null $user */
-        $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->getToken()]);
+        $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);
         if (null === $user) {
             throw new InvalidArgumentException(
-                sprintf('There is no shop user with %s email verification token', $command->getToken()),
+                sprintf('There is no shop user with %s email verification token', $command->token),
             );
         }
 
@@ -48,7 +48,7 @@ final class VerifyShopUserHandler implements MessageHandlerInterface
         $user->enable();
 
         $this->commandBus->dispatch(
-            new SendAccountRegistrationEmail($user->getEmail(), $command->getLocaleCode(), $command->getChannelCode()),
+            new SendAccountRegistrationEmail($user->getEmail(), $command->localeCode, $command->channelCode),
             [new DispatchAfterCurrentBusStamp()],
         );
     }

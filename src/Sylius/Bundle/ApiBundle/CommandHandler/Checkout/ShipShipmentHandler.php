@@ -24,7 +24,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-final class ShipShipmentHandler implements MessageHandlerInterface
+final readonly class ShipShipmentHandler implements MessageHandlerInterface
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,
@@ -36,7 +36,7 @@ final class ShipShipmentHandler implements MessageHandlerInterface
     public function __invoke(ShipShipment $shipShipment): ShipmentInterface
     {
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->find($shipShipment->getShipmentId());
+        $shipment = $this->shipmentRepository->find($shipShipment->shipmentId);
 
         Assert::notNull($shipment, 'Shipment has not been found.');
 
@@ -51,7 +51,7 @@ final class ShipShipmentHandler implements MessageHandlerInterface
 
         $this->stateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP);
 
-        $this->eventBus->dispatch(new SendShipmentConfirmationEmail($shipShipment->getShipmentId()), [new DispatchAfterCurrentBusStamp()]);
+        $this->eventBus->dispatch(new SendShipmentConfirmationEmail($shipShipment->shipmentId), [new DispatchAfterCurrentBusStamp()]);
 
         return $shipment;
     }

@@ -42,9 +42,9 @@ final class PlacedOrderCartItemsImmutableValidator extends ConstraintValidator
             is_a($value, RemoveItemFromCart::class),
         );
         Assert::isInstanceOf($constraint, PlacedOrderCartItemsImmutable::class);
-        Assert::string($value->getOrderTokenValue(), 'Order token value has to be a string.');
+        Assert::string($value->orderTokenValue, 'Order token value has to be a string.');
 
-        $order = $this->orderRepository->findOneWithCompletedCheckout($value->getOrderTokenValue());
+        $order = $this->orderRepository->findOneWithCompletedCheckout($value->orderTokenValue);
 
         if ($order === null) {
             return;

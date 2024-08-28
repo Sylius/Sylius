@@ -60,7 +60,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         ChannelInterface $channel,
     ): void {
-        $updateCart = new UpdateCart();
+        $updateCart = new UpdateCart('token');
 
         $this->validate($updateCart, new OrderAddressRequirement());
 
