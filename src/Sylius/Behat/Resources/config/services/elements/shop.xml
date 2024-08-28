@@ -25,5 +25,14 @@
         <service id="Sylius\Behat\Element\Shop\CartWidgetElementInterface" class="Sylius\Behat\Element\Shop\CartWidgetElement" parent="sylius.behat.element" public="false" />
 
         <service id="Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface" class="Sylius\Behat\Element\Shop\CheckoutSubtotalElement" parent="sylius.behat.element" public="false" />
+
+        <service id="sylius.behat.element.shop.crud.form" class="Sylius\Behat\Element\Shop\Crud\FormElement" parent="sylius.behat.element" />
+
+        <service
+            id="sylius.behat.element.shop.contact.form"
+            class="Sylius\Behat\Element\Shop\Contact\FormElement"
+            parent="sylius.behat.element.shop.crud.form"
+        >
+        </service>
     </services>
 </container>

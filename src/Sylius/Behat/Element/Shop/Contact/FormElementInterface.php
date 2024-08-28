@@ -11,11 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Shop\Contact;
+namespace Sylius\Behat\Element\Shop\Contact;
 
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Sylius\Behat\Element\Shop\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface ContactPageInterface extends PageInterface
+interface FormElementInterface extends BaseFormElementInterface
 {
-    public function send(): void;
 }
