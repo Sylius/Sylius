@@ -27,7 +27,7 @@ final class CorrectChangeShopUserConfirmPasswordValidator extends ConstraintVali
         /** @var CorrectChangeShopUserConfirmPassword $constraint */
         Assert::isInstanceOf($constraint, CorrectChangeShopUserConfirmPassword::class);
 
-        if ($value->getConfirmNewPassword() !== $value->getNewPassword()) {
+        if ($value->confirmNewPassword !== $value->newPassword) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('newPassword')
                 ->addViolation()
