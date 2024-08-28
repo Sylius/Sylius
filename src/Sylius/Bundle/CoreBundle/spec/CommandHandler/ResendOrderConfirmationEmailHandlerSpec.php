@@ -15,11 +15,13 @@ namespace spec\Sylius\Bundle\CoreBundle\CommandHandler;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Command\ResendOrderConfirmationEmail;
+use Sylius\Bundle\CoreBundle\CommandHandler\ResendOrderConfirmationEmailHandler;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Webmozart\Assert\Assert;
 
 final class ResendOrderConfirmationEmailHandlerSpec extends ObjectBehavior
 {
@@ -30,7 +32,10 @@ final class ResendOrderConfirmationEmailHandlerSpec extends ObjectBehavior
 
     function it_is_a_message_handler(): void
     {
-        $this->shouldImplement(MessageHandlerInterface::class);
+        $messageHandlerAttributes = (new \ReflectionClass(ResendOrderConfirmationEmailHandler::class))
+            ->getAttributes(AsMessageHandler::class);
+
+        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_resends_order_confirmation_email(
