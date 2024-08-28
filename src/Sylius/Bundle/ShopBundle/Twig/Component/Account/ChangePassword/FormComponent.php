@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Account\ChangePassword;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
@@ -23,12 +24,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -53,7 +51,6 @@ class FormComponent
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly RequestStack $requestStack,
-        private readonly TranslatorInterface $translator,
         private readonly string $formClass,
         private readonly string $redirectRouteName,
     ) {
@@ -73,7 +70,9 @@ class FormComponent
         $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::PRE_PASSWORD_CHANGE);
 
         $this->manager->flush();
-        $this->addTranslatedFlash($request, 'success', 'sylius.user.change_password');
+        FlashBagProvider
+            ::getFlashBag($this->requestStack)
+            ->add('success', 'sylius.user.change_password');
 
         $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_CHANGE);
 
@@ -83,13 +82,5 @@ class FormComponent
     protected function instantiateForm(): FormInterface
     {
         return $this->formFactory->create($this->formClass, $this->changePassword);
-    }
-
-    private function addTranslatedFlash(Request $request, string $type, string $message): void
-    {
-        /** @var Session $session */
-        $session = $request->getSession();
-
-        $session->getFlashBag()->add($type, $this->translator->trans($message, [], 'flashes'));
     }
 }
