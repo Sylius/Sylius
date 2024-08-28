@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Provider;
 
-use Payum\Core\Exception\InvalidArgumentException;
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
@@ -37,7 +36,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         OrderInterface $order
     ): Response {
         $payment = $this->getPaymentFromOrder($order);
-        Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId());
+        Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
 
         $redirectOptions = $requestConfiguration->getParameters()->get('redirect');
         if (is_string($redirectOptions)) {
@@ -110,10 +109,6 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         }
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        if (null === $gatewayConfig) {
-            return null;
-        }
-
-        return $gatewayConfig;
+        return $gatewayConfig ?? null;
     }
 }
