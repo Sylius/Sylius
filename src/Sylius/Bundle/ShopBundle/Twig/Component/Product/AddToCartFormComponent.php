@@ -102,7 +102,8 @@ class AddToCartFormComponent
         $this->submitForm();
         $addToCartCommand = $this->getForm()->getData();
 
-        $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand->getCartItem()), SyliusCartEvents::CART_ITEM_ADD);
+        $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_ADD);
+        $this->manager->persist($addToCartCommand->getCart());
         $this->manager->flush();
 
         FlashBagProvider
@@ -123,10 +124,5 @@ class AddToCartFormComponent
         );
 
         return $this->formFactory->create($this->formClass, $addToCartCommand, ['product' => $this->product]);
-    }
-
-    private function getDataModelValue(): string
-    {
-        return 'debounce(500)|*';
     }
 }
