@@ -45,7 +45,7 @@
         "twig/twig": "~3.8.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "php-http/message-factory": "^1.0",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
@@ -61,6 +61,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {
