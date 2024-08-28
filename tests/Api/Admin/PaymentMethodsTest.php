@@ -129,7 +129,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
             content: json_encode([
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/payment-method/%s/translations/en_US', $paymentMethod->getCode()),
+                        '@id' => sprintf('/api/v2/admin/payment-methods/%s/translations/en_US', $paymentMethod->getCode()),
                         'name' => 'Different name',
                         'description' => 'Different description',
                         'instructions' => 'Different instructions',
