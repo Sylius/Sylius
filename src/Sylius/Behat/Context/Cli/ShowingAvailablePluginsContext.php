@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\CoreBundle\Console\Command\SetupCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -39,7 +38,6 @@ final class ShowingAvailablePluginsContext implements Context
     public function runShowAvailablePluginsCommand(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new SetupCommand());
 
         $this->command = $this->application->find('sylius:show-available-plugins');
         $this->tester = new CommandTester($this->command);
