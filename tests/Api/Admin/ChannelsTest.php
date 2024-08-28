@@ -15,10 +15,13 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ChannelsTest extends JsonApiTestCase
 {
+    use AdminUserLoginTrait;
+
     protected function setUp(): void
     {
         parent::setUp();
