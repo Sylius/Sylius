@@ -218,7 +218,6 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/order/change_payment_method_as_guest');
     }
 
-
     /** @test */
     public function it_changes_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
