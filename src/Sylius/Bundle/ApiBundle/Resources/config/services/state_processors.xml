@@ -114,7 +114,7 @@
         </service>
 
         <service
-            id="sylius_api.state_processor.shop.messenger.persist"
+            id="sylius_api.state_processor.common.messenger.persist"
             class="Sylius\Bundle\ApiBundle\StateProcessor\Common\MessengerPersistProcessor"
             decorates="api_platform.state_processor.write"
         >

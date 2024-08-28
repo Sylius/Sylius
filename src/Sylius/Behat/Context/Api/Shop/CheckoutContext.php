@@ -30,6 +30,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -66,6 +67,8 @@ final class CheckoutContext implements Context
         private readonly IriConverterInterface $iriConverter,
         private readonly SharedStorageInterface $sharedStorage,
         private readonly RequestFactoryInterface $requestFactory,
+        private readonly string $shippingMethodClass,
+        private readonly string $paymentMethodClass,
     ) {
     }
 
@@ -400,7 +403,12 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
         );
-        $request->setContent(['shippingMethod' => sprintf('/api/v2/shop/shipping-methods/%s', $shippingMethodCode)]);
+        $request->setContent([
+            'shippingMethod' => $this->iriConverter->getIriFromResource(
+                resource: $this->shippingMethodClass,
+                context: ['uri_variables' => ['code' => $shippingMethodCode]]
+            )
+        ]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -418,7 +426,12 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             sprintf('payments/%s', $cart['payments'][0]['id']),
         );
-        $request->setContent(['paymentMethod' => sprintf('/api/v2/shop/payment-methods/%s', $paymentMethodCode)]);
+        $request->setContent([
+            'paymentMethod' => $this->iriConverter->getIriFromResource(
+                resource: $this->paymentMethodClass,
+                context: ['uri_variables' => ['code' => $paymentMethodCode]]
+            )
+        ]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -1166,8 +1179,12 @@ final class CheckoutContext implements Context
             'items',
         );
 
+        $variant = $product->getVariants()->first();
         $request->setContent([
-            'productVariant' => sprintf('/api/v2/shop/product-variants/%s', $code),
+            'productVariant' => $this->iriConverter->getIriFromResource(
+                resource: $variant::class,
+                context: ['uri_variables' => ['code' => $code]]
+            ),
             'quantity' => 1,
         ]);
 

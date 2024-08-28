@@ -337,7 +337,7 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_update_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
+    public function it_updates_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',

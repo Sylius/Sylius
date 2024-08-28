@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class PlacedOrderCartItemsImmutable extends Constraint
 {
-    public string $orderImmutableMessage = 'sylius.order.cart_items_immutable';
+    public string $message = 'sylius.order.cart_items_immutable';
 
     public function validatedBy(): string
     {
