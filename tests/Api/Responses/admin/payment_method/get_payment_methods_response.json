@@ -22,7 +22,7 @@
             "enabled": true,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method\/CASH_ON_DELIVERY\/translations\/en_US",
+                    "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY\/translations\/en_US",
                     "@type": "PaymentMethodTranslation",
                     "name": "Cash on delivery",
                     "description": "@string@",
@@ -49,7 +49,7 @@
             "enabled": true,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method\/BANK_TRANSFER\/translations\/en_US",
+                    "@id": "\/api\/v2\/admin\/payment-methods\/BANK_TRANSFER\/translations\/en_US",
                     "@type": "PaymentMethodTranslation",
                     "name": "Bank transfer",
                     "description": "@string@",
@@ -76,7 +76,7 @@
             "enabled": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method\/DISABLED_PAYMENT_METHOD\/translations\/en_US",
+                    "@id": "\/api\/v2\/admin\/payment-methods\/DISABLED_PAYMENT_METHOD\/translations\/en_US",
                     "@type": "PaymentMethodTranslation",
                     "name": "Disabled payment method",
                     "description": "@string@",
@@ -108,7 +108,7 @@
             "enabled": true,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method\/PAYPAL\/translations\/en_US",
+                    "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL\/translations\/en_US",
                     "@type": "PaymentMethodTranslation",
                     "name": "PayPal",
                     "description": "@string@",

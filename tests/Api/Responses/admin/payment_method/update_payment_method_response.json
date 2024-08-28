@@ -23,7 +23,7 @@
     "enabled": false,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/payment-method\/PAYPAL\/translations\/@string@",
+            "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL\/translations\/@string@",
             "@type": "PaymentMethodTranslation",
             "name": "Different name",
             "description": "Different description",

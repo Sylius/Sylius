@@ -21,7 +21,7 @@
     "enabled": true,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/payment-method\/test\/translations\/en_US",
+            "@id": "\/api\/v2\/admin\/payment-methods\/test\/translations\/en_US",
             "@type": "PaymentMethodTranslation",
             "name": "Test",
             "description": "Test",
