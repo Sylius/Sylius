@@ -32,6 +32,12 @@ use Webmozart\Assert\Assert;
 
 final readonly class CheckoutContext implements Context
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
+     * @param RepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     * @param FactoryInterface<AddressInterface> $addressFactory
+     */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private RepositoryInterface $shippingMethodRepository,
