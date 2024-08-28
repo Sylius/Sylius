@@ -15,10 +15,10 @@ Feature: Changing address during checkout
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I decide to change my address
         And I specify the email as "ned.stark@example.com"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be checking out as "ned.stark@example.com"
 
     @api @no-ui

@@ -19,7 +19,7 @@ Feature: Changing checkout steps
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
 
     @no-api @ui
@@ -29,7 +29,7 @@ Feature: Changing checkout steps
         And I have proceeded order with "Free" shipping method and "Offline" payment
         When I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
 
     @no-api @ui
@@ -39,7 +39,7 @@ Feature: Changing checkout steps
         And I have proceeded selecting "Free" shipping method
         When I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
 
     @no-api @ui

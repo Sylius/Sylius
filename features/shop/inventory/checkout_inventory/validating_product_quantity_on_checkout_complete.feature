@@ -36,7 +36,7 @@ Feature: Being unable to buy products that are out of stock
     Scenario: Being unable to place an order with products that are out of stock
         When I add 5 products "Iron Maiden T-Shirt" to the cart
         And I add 5 products "2Pac T-Shirt" to the cart
-        And I proceed selecting "Offline" payment method
+        And I proceed with selecting "Offline" payment method
         And other customer has bought 7 "2Pac T-Shirt" products by this time
         And I confirm my order
         Then I should not see the thank you page

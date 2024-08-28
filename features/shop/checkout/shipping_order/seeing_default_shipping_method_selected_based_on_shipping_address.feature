@@ -22,7 +22,7 @@ Feature: Seeing default shipping method selected based on shipping address
         Given I have product "Star Trek Ship" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
         And I should see selected "DHL" shipping method
         And I should not see "FedEx" shipping method
@@ -32,10 +32,10 @@ Feature: Seeing default shipping method selected based on shipping address
         Given I have product "Star Trek Ship" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I decide to change my address
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United Kingdom" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
         And I should see selected "FedEx" shipping method
         And I should not see "DHL" shipping method

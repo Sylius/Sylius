@@ -24,7 +24,7 @@ Feature: Apply correct shipping fee with product taxes on order
     @api @ui
     Scenario: Proper shipping fee, tax and product tax
         Given I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "DHL" shipping method
+        When I proceed with selecting "DHL" shipping method
         And I choose "Offline" payment method
         Then my cart total should be "$135.30"
         And my cart taxes should be "$25.30"
@@ -33,7 +33,7 @@ Feature: Apply correct shipping fee with product taxes on order
     @api @ui
     Scenario: Proper shipping fee, tax and products' taxes after addressing
         Given I have 3 products "PHP T-Shirt" in the cart
-        When I proceed selecting "Germany" as billing country with "FedEx" method
+        When I proceed with selecting "Germany" as billing country with "FedEx" method
         And I choose "Offline" payment method
         Then my cart total should be "$352.00"
         And my cart taxes should be "$32.00"

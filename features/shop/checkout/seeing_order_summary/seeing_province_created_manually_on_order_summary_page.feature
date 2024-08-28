@@ -20,7 +20,7 @@ Feature: Seeing province created manually on order summary page
         And I am at the checkout addressing step
         When I specify the billing address for "Jon Snow" from "Ankh Morpork", "90210", "London", "United Kingdom", "East of England"
         And I specify the shipping address for "Jon Snow" from "Ankh Morpork", "90210", "London", "United Kingdom", "East of England"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I proceed with "DHL" shipping method and "Cash on Delivery" payment
         Then I should be on the checkout summary step
         And I should see "East of England" in the shipping address

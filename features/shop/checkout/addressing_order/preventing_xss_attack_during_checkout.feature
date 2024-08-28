@@ -16,6 +16,6 @@ Feature: Preventing a potential XSS attack during updating the address in the ch
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Doe"
         And I specify the province name manually as '<img """><script>alert("XSS")</script>">' for billing address
-        And I complete the addressing step
+        And I confirm the addressing step
         And I decide to change my address
         Then I should be able to update the address without unexpected alert

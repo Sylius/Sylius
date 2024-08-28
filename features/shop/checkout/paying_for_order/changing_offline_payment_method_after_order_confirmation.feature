@@ -72,7 +72,7 @@ Feature: Changing the offline payment method after order confirmation
         Given I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
-        And I proceed selecting "Cash on delivery" payment method
+        And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
         And I change payment method to "Offline" after checkout
         Then I should have chosen "Offline" payment method
@@ -84,7 +84,7 @@ Feature: Changing the offline payment method after order confirmation
         When I added product "PHP T-Shirt" to the cart
         And I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
-        And I proceed selecting "Cash on delivery" payment method
+        And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
         And I change payment method to "Offline" after checkout
         Then I should have chosen "Offline" payment method
@@ -94,7 +94,7 @@ Feature: Changing the offline payment method after order confirmation
         Given I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
-        And I proceed selecting "Cash on delivery" payment method
+        And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
         And the payment method "Cash on delivery" gets disabled
         And I change payment method to "Offline" after checkout

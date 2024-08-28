@@ -18,5 +18,5 @@ Feature: Skipping shipping and payment step when order does not require any ship
         Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout summary step

@@ -23,7 +23,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         Given I have product "Picasso T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
         And I should see "Invisible Post" shipping method
 
@@ -32,7 +32,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         Given I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then there should be information about no available shipping methods
 
     @api @ui
@@ -41,7 +41,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then there should be information about no available shipping methods
 
     @api @ui
@@ -51,7 +51,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I have product "T-Shirt banana" with product option "Size" M in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then there should be information about no available shipping methods
 
     @api @ui
@@ -60,6 +60,6 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I have product "T-Shirt banana" with product option "Size" M in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
         And I should see "Invisible Post" shipping method

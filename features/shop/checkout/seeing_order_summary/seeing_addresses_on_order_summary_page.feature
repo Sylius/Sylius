@@ -25,7 +25,7 @@ Feature: Seeing order addresses on order summary page
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         Then I should be on the checkout summary step
         And my order's shipping address should be to "Jon Snow"

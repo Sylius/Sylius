@@ -15,22 +15,28 @@ Feature: Apply correct shipping fee on order
     @api @ui
     Scenario: Adding proper shipping fee
         Given I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "DHL" shipping method
+        And I addressed the cart
+        And I completed the shipping step with "DHL" shipping method
+        When I check details of my cart
         Then my cart total should be "$110.00"
         And my cart shipping total should be "$10.00"
 
     @api @ui
     Scenario: Changing shipping fee after shipping method change
         Given I have product "PHP T-Shirt" in the cart
-        And I chose "DHL" shipping method
+        And I addressed the cart
+        And I completed the shipping step with "DHL" shipping method
+        And I decided to change order shipping method
         When I change shipping method to "FedEx"
+        And I complete the shipping step
         Then my cart total should be "$130.00"
         And my cart shipping total should be "$30.00"
 
     @api @ui
     Scenario: Changing per unit shipping fee after decreasing quantity of item
         Given I have 2 products "PHP T-Shirt" in the cart
-        And I chose "UPS" shipping method
+        And I addressed the cart
+        And I completed the shipping step with "UPS" shipping method
         When I change "PHP T-Shirt" quantity to 1
         Then my cart total should be "$105.00"
         And my cart shipping total should be "$5.00"

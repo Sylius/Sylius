@@ -21,7 +21,7 @@ Feature: Specifying province for a country manually
         And I specify the province name manually as "Lubelskie" for shipping address
         And I specify the billing address as "Warsaw", "Obarowska", "91-242", "Poland" for "Frog Monica"
         And I specify the province name manually as "Mazowieckie" for billing address
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
 
     @api @ui @javascript

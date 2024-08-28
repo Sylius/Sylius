@@ -18,7 +18,7 @@ Feature: Preventing not available payment method selection
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
         Then I should not be able to select "Paypal Express Checkout" payment method
@@ -29,7 +29,7 @@ Feature: Preventing not available payment method selection
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
         Then I should not be able to select "Cash on delivery" payment method
@@ -40,7 +40,7 @@ Feature: Preventing not available payment method selection
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
         And I try to select "Free" payment method

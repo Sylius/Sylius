@@ -17,7 +17,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I select "Paypal Express Checkout" payment method
         And I complete the payment step
         Then I should be on the checkout complete step
@@ -30,7 +30,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I select "Paypal Express Checkout" payment method
         And I complete the payment step
         Then I should be on the checkout complete step
@@ -43,7 +43,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I select "Paypal Express Checkout" payment method
         And I complete the payment step
         Then I should be on the checkout complete step

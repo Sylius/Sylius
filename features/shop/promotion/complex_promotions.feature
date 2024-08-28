@@ -32,7 +32,8 @@ Feature: Receiving a discount based on a configured promotion
         And it gives "$10.00" off on every product classified as "Jackets" and a free shipping to every order with items total equal at least "$500.00"
         And I am a logged in customer
         When I add 7 products "Black Sabbath jacket" to the cart
-        And I proceed selecting "DHL" shipping method
+        And I addressed the cart
+        And I proceed with selecting "DHL" shipping method
         Then theirs subtotal price should be decreased by "$70.00"
         And my cart total should be "$630.00"
         And my cart shipping total should be "$0.00"

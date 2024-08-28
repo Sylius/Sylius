@@ -16,7 +16,7 @@ Feature: Returning to addressing step with a different shipping address
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I specify the shipping address as "Brooklyn", "70 Joy Ridge St", "11225", "United States" for "Jane Doe"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I decide to change my address
         Then different shipping address should be checked
 
@@ -26,7 +26,7 @@ Feature: Returning to addressing step with a different shipping address
         And I am at the checkout addressing step
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I decide to change my address
         Then different shipping address should not be checked
 
@@ -37,7 +37,7 @@ Feature: Returning to addressing step with a different shipping address
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I specify the shipping address as "Brooklyn", "70 Joy Ridge St", "11225", "United States" for "Jane Doe"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I decide to change my address
         And shipping address should be visible
 
@@ -47,6 +47,6 @@ Feature: Returning to addressing step with a different shipping address
         And I am at the checkout addressing step
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
-        And I complete the addressing step
+        And I confirm the addressing step
         And I decide to change my address
         And shipping address should not be visible

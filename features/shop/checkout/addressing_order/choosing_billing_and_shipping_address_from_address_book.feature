@@ -41,5 +41,5 @@ Feature: Choosing an address from address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for billing address
-        And I complete the addressing step
+        And I confirm the addressing step
         Then I should be on the checkout shipping step
