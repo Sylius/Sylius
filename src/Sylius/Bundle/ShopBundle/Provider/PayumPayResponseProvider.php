@@ -87,14 +87,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         $tokenFactory = $this->payum->getTokenFactory();
 
         if (isset($config['use_authorize']) && true === (bool) $config['use_authorize']) {
-            $token = $tokenFactory->createAuthorizeToken(
-                $gatewayConfig->getGatewayName(),
-                $payment,
-                $redirectOptions['route'] ?? null,
-                $redirectOptions['parameters'] ?? [],
-            );
-        } else {
-            $token = $tokenFactory->createCaptureToken(
+            return $tokenFactory->createAuthorizeToken(
                 $gatewayConfig->getGatewayName(),
                 $payment,
                 $redirectOptions['route'] ?? null,
@@ -102,7 +95,12 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
             );
         }
 
-        return $token;
+        return $tokenFactory->createCaptureToken(
+            $gatewayConfig->getGatewayName(),
+            $payment,
+            $redirectOptions['route'] ?? null,
+            $redirectOptions['parameters'] ?? [],
+        );
     }
 
     private function getPaymentFromOrder(OrderInterface $order): ?PaymentInterface
