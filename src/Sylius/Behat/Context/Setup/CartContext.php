@@ -84,9 +84,9 @@ final readonly class CartContext implements Context
         }
 
         $this->commandBus->dispatch(new AddItemToCart(
+            orderTokenValue: $tokenValue,
             productVariantCode: $productVariant->getCode(),
             quantity: 1,
-            orderTokenValue: $tokenValue,
         ));
 
         $this->sharedStorage->set('product', $productVariant->getProduct());
@@ -106,6 +106,7 @@ final readonly class CartContext implements Context
         }
 
         $this->commandBus->dispatch(new AddItemToCart(
+            orderTokenValue: $tokenValue,
             productVariantCode: $this
                 ->getProductVariantWithProductOptionAndProductOptionValue(
                     $product,
@@ -114,7 +115,6 @@ final readonly class CartContext implements Context
                 )
                 ->getCode(),
             quantity: 1,
-            orderTokenValue: $tokenValue,
         ));
     }
 
@@ -128,8 +128,8 @@ final readonly class CartContext implements Context
         }
 
         $updateCart = new UpdateCart(
-            couponCode: $couponCode,
             orderTokenValue: $tokenValue,
+            couponCode: $couponCode,
         );
 
         $this->commandBus->dispatch($updateCart);
@@ -153,9 +153,10 @@ final readonly class CartContext implements Context
         }
 
         $pickupCart = new PickupCart(
-            tokenValue: $tokenValue,
             channelCode: $channelCode,
+            localeCode: $channel->getDefaultLocale()->getCode(),
             email: $email ?? null,
+            tokenValue: $tokenValue,
         );
 
         $this->commandBus->dispatch($pickupCart);
@@ -192,9 +193,9 @@ final readonly class CartContext implements Context
         }
 
         $this->commandBus->dispatch(new AddItemToCart(
+            orderTokenValue: $tokenValue,
             productVariantCode: $this->productVariantResolver->getVariant($product)->getCode(),
             quantity: $quantity,
-            orderTokenValue: $tokenValue,
         ));
 
         $this->sharedStorage->set('product', $product);

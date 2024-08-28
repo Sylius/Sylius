@@ -55,7 +55,11 @@ final readonly class CheckoutContext implements Context
 
         $cart->setLocaleCode($localeCode);
 
-        $command = new UpdateCart(email: $email, billingAddress: $this->getDefaultAddress(), orderTokenValue: $cartToken);
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: $email,
+            billingAddress: $this->getDefaultAddress(),
+        );
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
@@ -72,7 +76,11 @@ final readonly class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
-        $command = new UpdateCart(email: null, billingAddress: $this->getDefaultAddress(), orderTokenValue: $cartToken);
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: null,
+            billingAddress: $this->getDefaultAddress(),
+        );
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
@@ -85,7 +93,11 @@ final readonly class CheckoutContext implements Context
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
-        $command = new UpdateCart(email: null, billingAddress: $this->getDefaultAddress(), orderTokenValue: $cartToken);
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: null,
+            billingAddress: $this->getDefaultAddress(),
+        );
         $this->commandBus->dispatch($command);
     }
 
@@ -130,9 +142,9 @@ final readonly class CheckoutContext implements Context
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
         $command = new ChooseShippingMethod(
-            $shippingMethod->getCode(),
-            $shipment->getId(),
-            $order->getTokenValue(),
+            orderTokenValue: $order->getTokenValue(),
+            shipmentId: $shipment->getId(),
+            shippingMethodCode: $shippingMethod->getCode(),
         );
 
         $this->commandBus->dispatch($command);
@@ -142,9 +154,9 @@ final readonly class CheckoutContext implements Context
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
         $command = new ChoosePaymentMethod(
-            $paymentMethod->getCode(),
-            $payment->getId(),
-            $order->getTokenValue(),
+            orderTokenValue: $order->getTokenValue(),
+            paymentId: $payment->getId(),
+            paymentMethodCode: $paymentMethod->getCode(),
         );
 
         $this->commandBus->dispatch($command);
