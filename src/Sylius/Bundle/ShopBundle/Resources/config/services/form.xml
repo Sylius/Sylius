@@ -38,7 +38,7 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius_shop.form.type.customer_profile" class="Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType">
+        <service id="sylius_shop.form.type.user_change_password" class="Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType">
             <tag name="form.type" />
         </service>
     </services>
