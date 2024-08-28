@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
+use LogicException;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ShopBundle\Provider\PayResponseProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -33,7 +34,6 @@ final class OrderPayController
         private MetadataInterface $orderMetadata,
         private RequestConfigurationFactoryInterface $requestConfigurationFactory,
         private iterable $payResponseProviders,
-        private PayResponseProviderInterface $defaultPayResponseProvider,
     ) {
     }
 
@@ -56,6 +56,6 @@ final class OrderPayController
             }
         }
 
-        return $this->defaultPayResponseProvider->getResponse($configuration, $order);
+        throw new LogicException(sprintf('No "pay response provider" available for order (id %s).',  $order->getId()));
     }
 }

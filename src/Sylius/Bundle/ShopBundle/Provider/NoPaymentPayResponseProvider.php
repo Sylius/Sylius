@@ -15,11 +15,12 @@ namespace Sylius\Bundle\ShopBundle\Provider;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
-final class DefaultPayResponseProvider implements PayResponseProviderInterface
+final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
 {
     public function __construct(
         private RouterInterface $router,
@@ -34,11 +35,13 @@ final class DefaultPayResponseProvider implements PayResponseProviderInterface
 
         return new RedirectResponse($url);
     }
-    
+
     public function supports(
         RequestConfiguration $requestConfiguration,
         OrderInterface $order
     ): bool {
-        return true;
+        $payment = $order->getLastPayment(PaymentInterface::STATE_NEW);
+
+        return null === $payment;
     }
 }

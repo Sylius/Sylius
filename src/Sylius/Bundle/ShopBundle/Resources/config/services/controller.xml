@@ -65,7 +65,6 @@
             </argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="tagged" tag="sylius.shop.provider.pay_response" />
-            <argument type="service" id="sylius.shop.provider.pay_response.default" />
         </service>
     </services>
 </container>

@@ -17,7 +17,7 @@
 >
     <services>
 
-        <service id="sylius.shop.provider.pay_response.default" class="Sylius\Bundle\ShopBundle\Provider\DefaultPayResponseProvider">
+        <service id="sylius.shop.provider.pay_response.no_payment" class="Sylius\Bundle\ShopBundle\Provider\NoPaymentPayResponseProvider">
             <argument type="service" id="router" />
             <tag name="sylius.shop.provider.pay_response" priority="-300" />
         </service>
