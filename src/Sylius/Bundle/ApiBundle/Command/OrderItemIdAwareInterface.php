@@ -15,5 +15,5 @@ namespace Sylius\Bundle\ApiBundle\Command;
 
 interface OrderItemIdAwareInterface
 {
-    public function getOrderItemId(): ?int;
+    public function getOrderItemId(): mixed;
 }

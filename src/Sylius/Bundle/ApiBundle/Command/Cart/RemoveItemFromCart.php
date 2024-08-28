@@ -17,22 +17,19 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
 class RemoveItemFromCart implements OrderTokenValueAwareInterface
 {
-    public function __construct(public ?string $orderTokenValue, public string $itemId)
-    {
+    public function __construct(
+        protected string $itemId,
+        protected string $orderTokenValue,
+    ) {
     }
 
-    public static function removeFromData(string $tokenValue, string $orderItemId): self
+    public function getItemId(): ?string
     {
-        return new self($tokenValue, $orderItemId);
+        return $this->itemId;
     }
 
     public function getOrderTokenValue(): ?string
     {
         return $this->orderTokenValue;
-    }
-
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
     }
 }

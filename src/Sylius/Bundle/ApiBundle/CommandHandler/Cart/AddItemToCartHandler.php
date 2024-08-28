@@ -42,14 +42,14 @@ final readonly class AddItemToCartHandler implements MessageHandlerInterface
     public function __invoke(AddItemToCart $addItemToCart): OrderInterface
     {
         /** @var ProductVariantInterface|null $productVariant */
-        $productVariant = $this->productVariantRepository->findOneBy(['code' => $addItemToCart->productVariantCode]);
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $addItemToCart->getProductVariantCode()]);
 
         if ($productVariant === null) {
             throw new \InvalidArgumentException('Product variant with given code has not been found.');
         }
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($addItemToCart->orderTokenValue);
+        $cart = $this->orderRepository->findCartByTokenValue($addItemToCart->getOrderTokenValue());
 
         if ($cart === null) {
             throw new \InvalidArgumentException('Cart with given token has not been found.');
@@ -59,7 +59,7 @@ final readonly class AddItemToCartHandler implements MessageHandlerInterface
         $cartItem = $this->cartItemFactory->createNew();
         $cartItem->setVariant($productVariant);
 
-        $this->orderItemQuantityModifier->modify($cartItem, $addItemToCart->quantity);
+        $this->orderItemQuantityModifier->modify($cartItem, $addItemToCart->getQuantity());
         $this->orderModifier->addToOrder($cart, $cartItem);
 
         return $cart;

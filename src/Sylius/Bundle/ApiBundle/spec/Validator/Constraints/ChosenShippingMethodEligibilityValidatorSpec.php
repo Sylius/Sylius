@@ -51,7 +51,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new ChooseShippingMethod('SHIPPING_METHOD_CODE'), new class() extends Constraint {
+            ->during('validate', [new ChooseShippingMethod('SHIPPING_METHOD_CODE', 123, 'ORDER_TOKEN'), new class() extends Constraint {
             }])
         ;
     }

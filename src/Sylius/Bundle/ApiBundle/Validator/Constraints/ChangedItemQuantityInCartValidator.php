@@ -47,8 +47,8 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
-            $value->orderItemId,
-            $value->orderTokenValue,
+            $value->getOrderItemId(),
+            $value->getOrderTokenValue(),
         );
 
         if ($orderItem === null) {
@@ -88,7 +88,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
             return;
         }
 
-        if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->quantity)) {
+        if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->getQuantity())) {
             $this->context->addViolation(
                 $constraint->productVariantNotSufficient,
                 ['%productVariantCode%' => $productVariantCode],

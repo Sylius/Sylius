@@ -52,7 +52,7 @@ final readonly class ChooseShippingMethodHandler implements MessageHandlerInterf
     public function __invoke(ChooseShippingMethod $chooseShippingMethod): OrderInterface
     {
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findOneBy(['tokenValue' => $chooseShippingMethod->orderTokenValue]);
+        $cart = $this->orderRepository->findOneBy(['tokenValue' => $chooseShippingMethod->getOrderTokenValue()]);
 
         Assert::notNull($cart, 'Cart has not been found.');
 
@@ -64,11 +64,11 @@ final readonly class ChooseShippingMethodHandler implements MessageHandlerInterf
 
         /** @var ShippingMethodInterface|null $shippingMethod */
         $shippingMethod = $this->shippingMethodRepository->findOneBy([
-            'code' => $chooseShippingMethod->shippingMethodCode,
+            'code' => $chooseShippingMethod->getShippingMethodCode(),
         ]);
         Assert::notNull($shippingMethod, 'Shipping method has not been found');
 
-        $shipment = $this->shipmentRepository->findOneByOrderId($chooseShippingMethod->shipmentId, $cart->getId());
+        $shipment = $this->shipmentRepository->findOneByOrderId($chooseShippingMethod->getShipmentId(), $cart->getId());
         Assert::notNull($shipment, 'Can not find shipment with given identifier.');
 
         Assert::true(

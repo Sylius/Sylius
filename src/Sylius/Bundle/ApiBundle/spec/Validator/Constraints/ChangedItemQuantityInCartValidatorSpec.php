@@ -59,7 +59,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new ChangeItemQuantityInCart(2),
+                new ChangeItemQuantityInCart(2, 11, 'token'),
                 new class() extends Constraint {
                 },
             ])

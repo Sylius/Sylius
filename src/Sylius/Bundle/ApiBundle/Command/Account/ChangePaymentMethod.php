@@ -16,23 +16,29 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\PaymentIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 
-class ChangePaymentMethod implements OrderTokenValueAwareInterface, PaymentIdAwareInterface, IriToIdentifierConversionAwareInterface
+class ChangePaymentMethod implements OrderTokenValueAwareInterface, PaymentIdAwareInterface, PaymentMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public string $paymentMethodCode,
-        public ?int $paymentId = null,
-        public ?string $orderTokenValue = null,
+        protected string $paymentMethodCode,
+        protected mixed $paymentId,
+        protected string $orderTokenValue,
     ) {
+    }
+
+    public function getPaymentMethodCode(): ?string
+    {
+        return $this->paymentMethodCode;
+    }
+
+    public function getPaymentId(): mixed
+    {
+        return $this->paymentId;
     }
 
     public function getOrderTokenValue(): ?string
     {
         return $this->orderTokenValue;
-    }
-
-    public function getPaymentId(): ?int
-    {
-        return $this->paymentId;
     }
 }
