@@ -66,13 +66,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
 
         $gatewayName = $gatewayConfig->getGatewayName() ?? '';
 
-        try {
-            $this->payum->getGateway($gatewayName);
-        } catch (InvalidArgumentException) {
-            return false;
-        }
-
-        return true;
+		return isset($this->payum->getGateways()[$gatewayName]);
     }
 
     /**
