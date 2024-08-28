@@ -294,7 +294,6 @@
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="request_stack" />
-            <argument type="service" id="translator" />
             <argument>Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType</argument>
             <argument>sylius_shop_account_dashboard</argument>
 
