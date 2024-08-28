@@ -59,7 +59,7 @@ final class VerifyShopUserHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope(new \stdClass()));
 
-        $this(new VerifyShopUser('ToKeN', 'WEB', 'en_US'));
+        $this(new VerifyShopUser(channelCode: 'WEB', localeCode:  'en_US', token: 'ToKeN'));
     }
 
     function it_throws_error_if_user_does_not_exist(
@@ -69,7 +69,7 @@ final class VerifyShopUserHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [new VerifyShopUser('ToKeN', 'WEB', 'en_US')])
+            ->during('__invoke', [new VerifyShopUser(channelCode: 'WEB', localeCode:  'en_US', token: 'ToKeN')])
         ;
     }
 }

@@ -20,9 +20,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware;
 use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
-use Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
+use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
+use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -37,7 +37,6 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
             $decoratedContextBuilder,
             ShipmentIdAware::class,
             'shipmentId',
-            ShipmentIdAwareInterface::class,
             ShipmentInterface::class,
         );
     }
@@ -76,13 +75,13 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
     ): void {
         $decoratedContextBuilder
             ->createFromRequest($request, true, ['operation' => $operation])
-            ->willReturn(['input' => ['class' => ShipmentIdAwareInterface::class]])
+            ->willReturn(['input' => ['class' => ChooseShippingMethod::class]])
         ;
         $operation->getUriVariables()->willReturn([]);
 
         $this
             ->createFromRequest($request, true, ['operation' => $operation])
-            ->shouldReturn(['input' => ['class' => ShipmentIdAwareInterface::class]])
+            ->shouldReturn(['input' => ['class' => ChooseShippingMethod::class]])
         ;
     }
 
@@ -93,14 +92,14 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
     ): void {
         $decoratedContextBuilder
             ->createFromRequest($request, true, ['operation' => $operation])
-            ->willReturn(['input' => ['class' => ShipmentIdAwareInterface::class]])
+            ->willReturn(['input' => ['class' => ChooseShippingMethod::class]])
         ;
         $uriVariable = new Link(fromClass: 'stdClass');
         $operation->getUriVariables()->willReturn([$uriVariable]);
 
         $this
             ->createFromRequest($request, true, ['operation' => $operation])
-            ->shouldReturn(['input' => ['class' => ShipmentIdAwareInterface::class]])
+            ->shouldReturn(['input' => ['class' => ChooseShippingMethod::class]])
         ;
     }
 
@@ -111,7 +110,7 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
     ): void {
         $decoratedContextBuilder
             ->createFromRequest($request, true, ['operation' => $operation])
-            ->willReturn(['input' => ['class' => ShipmentIdAwareInterface::class], 'uri_variables' => ['shipmentId' => '123']])
+            ->willReturn(['input' => ['class' => ChooseShippingMethod::class], 'uri_variables' => ['shipmentId' => '123']])
         ;
         $uriVariable = new Link(fromClass: ShipmentInterface::class, parameterName: 'shipmentId');
         $operation->getUriVariables()->willReturn([$uriVariable]);
@@ -119,10 +118,10 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
         $this
             ->createFromRequest($request, true, ['operation' => $operation])
             ->shouldReturn([
-                'input' => ['class' => ShipmentIdAwareInterface::class],
+                'input' => ['class' => ChooseShippingMethod::class],
                 'uri_variables' => ['shipmentId' => '123'],
                 'default_constructor_arguments' => [
-                    ShipmentIdAwareInterface::class => ['shipmentId' => '123'],
+                    ChooseShippingMethod::class => ['shipmentId' => '123'],
                 ],
             ])
         ;
@@ -137,13 +136,12 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
             $decoratedContextBuilder,
             OrderTokenValueAware::class,
             'orderTokenValue',
-            OrderTokenValueAwareInterface::class,
             OrderInterface::class,
         );
 
         $decoratedContextBuilder
             ->createFromRequest($request, true, ['operation' => $operation])
-            ->willReturn(['input' => ['class' => OrderTokenValueAwareInterface::class], 'uri_variables' => ['orderToken' => 'token123']])
+            ->willReturn(['input' => ['class' => CompleteOrder::class], 'uri_variables' => ['orderToken' => 'token123']])
         ;
         $uriVariable = new Link(fromClass: OrderInterface::class, parameterName: 'orderToken');
         $operation->getUriVariables()->willReturn([$uriVariable]);
@@ -151,10 +149,10 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
         $this
             ->createFromRequest($request, true, ['operation' => $operation])
             ->shouldReturn([
-                'input' => ['class' => OrderTokenValueAwareInterface::class],
+                'input' => ['class' => CompleteOrder::class],
                 'uri_variables' => ['orderToken' => 'token123'],
                 'default_constructor_arguments' => [
-                    OrderTokenValueAwareInterface::class => ['orderTokenValue' => 'token123'],
+                    CompleteOrder::class => ['orderTokenValue' => 'token123'],
                 ],
             ])
         ;
@@ -169,13 +167,12 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
             $decoratedContextBuilder,
             OrderItemIdAware::class,
             'orderItemId',
-            OrderItemIdAwareInterface::class,
             OrderItemInterface::class,
         );
 
         $decoratedContextBuilder
             ->createFromRequest($request, true, ['operation' => $operation])
-            ->willReturn(['input' => ['class' => OrderItemIdAwareInterface::class], 'uri_variables' => ['orderItemId' => '23']])
+            ->willReturn(['input' => ['class' => ChangeItemQuantityInCart::class], 'uri_variables' => ['orderItemId' => '23']])
         ;
         $uriVariable = new Link(fromClass: OrderItemInterface::class, parameterName: 'orderItemId');
         $operation->getUriVariables()->willReturn([$uriVariable]);
@@ -183,10 +180,10 @@ final class UriVariablesAwareContextBuilderSpec extends ObjectBehavior
         $this
             ->createFromRequest($request, true, ['operation' => $operation])
             ->shouldReturn([
-                'input' => ['class' => OrderItemIdAwareInterface::class],
+                'input' => ['class' => ChangeItemQuantityInCart::class],
                 'uri_variables' => ['orderItemId' => '23'],
                 'default_constructor_arguments' => [
-                    OrderItemIdAwareInterface::class => ['orderItemId' => '23'],
+                    ChangeItemQuantityInCart::class => ['orderItemId' => '23'],
                 ],
             ])
         ;

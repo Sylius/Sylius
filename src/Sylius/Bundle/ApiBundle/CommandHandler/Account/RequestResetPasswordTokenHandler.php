@@ -34,7 +34,7 @@ final readonly class RequestResetPasswordTokenHandler implements MessageHandlerI
 
     public function __invoke(RequestResetPasswordToken $command): void
     {
-        $user = $this->userRepository->findOneByEmail($command->getEmail());
+        $user = $this->userRepository->findOneByEmail($command->email);
         if (null === $user) {
             return;
         }
@@ -44,9 +44,9 @@ final readonly class RequestResetPasswordTokenHandler implements MessageHandlerI
 
         $this->commandBus->dispatch(
             new SendResetPasswordEmail(
-                $command->getEmail(),
-                $command->getChannelCode(),
-                $command->getLocaleCode(),
+                $command->email,
+                $command->channelCode,
+                $command->localeCode,
             ),
             [new DispatchAfterCurrentBusStamp()],
         );

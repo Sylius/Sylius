@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
-use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,11 +26,6 @@ final class ChannelCodeAwareContextBuilder extends AbstractInputContextBuilder
         private readonly ChannelContextInterface $channelContext,
     ) {
         parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
-    }
-
-    protected function supportsClass(string $class): bool
-    {
-        return is_a($class, ChannelCodeAwareInterface::class, true);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

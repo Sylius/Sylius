@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
-use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,11 +26,6 @@ final class LocaleCodeAwareContextBuilder extends AbstractInputContextBuilder
         private readonly LocaleContextInterface $localeContext,
     ) {
         parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
-    }
-
-    protected function supportsClass(string $class): bool
-    {
-        return is_a($class, LocaleCodeAwareInterface::class, true);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

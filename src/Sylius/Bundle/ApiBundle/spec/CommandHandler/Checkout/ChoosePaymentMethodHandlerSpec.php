@@ -58,7 +58,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($orderRepository, $paymentMethodRepository, $paymentRepository, $stateMachine, $paymentMethodChanger);
 
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $choosePaymentMethod = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
         $cart->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_SHIPPING_SELECTED);
@@ -83,7 +87,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentInterface $payment,
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $choosePaymentMethod = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
@@ -102,7 +110,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         PaymentInterface $payment,
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $choosePaymentMethod = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
@@ -127,7 +139,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         PaymentInterface $payment,
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $choosePaymentMethod = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
@@ -153,7 +169,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         PaymentMethodInterface $paymentMethod,
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $choosePaymentMethod = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
@@ -183,7 +203,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $choosePaymentMethod = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
@@ -209,7 +233,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         PaymentMethodChangerInterface $paymentMethodChanger,
         OrderInterface $cart,
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $choosePaymentMethod = new ChoosePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 

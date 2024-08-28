@@ -20,7 +20,7 @@ use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
+final readonly class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PasswordUpdaterInterface $passwordUpdater,
@@ -30,16 +30,16 @@ final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 
     public function __invoke(ChangeShopUserPassword $changeShopUserPassword): void
     {
-        if ($changeShopUserPassword->getConfirmNewPassword() !== $changeShopUserPassword->getNewPassword()) {
+        if ($changeShopUserPassword->confirmNewPassword !== $changeShopUserPassword->newPassword) {
             throw new \InvalidArgumentException('Passwords do not match.');
         }
 
         /** @var ShopUserInterface|null $user */
-        $user = $this->userRepository->find($changeShopUserPassword->getShopUserId());
+        $user = $this->userRepository->find($changeShopUserPassword->shopUserId);
 
         Assert::notNull($user);
 
-        $user->setPlainPassword($changeShopUserPassword->getNewPassword());
+        $user->setPlainPassword($changeShopUserPassword->newPassword);
 
         $this->passwordUpdater->updatePassword($user);
     }

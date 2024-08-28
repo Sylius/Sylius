@@ -24,7 +24,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-final class RequestShopUserVerificationHandler implements MessageHandlerInterface
+final readonly class RequestShopUserVerificationHandler implements MessageHandlerInterface
 {
     /**
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
@@ -39,7 +39,7 @@ final class RequestShopUserVerificationHandler implements MessageHandlerInterfac
     public function __invoke(RequestShopUserVerification $command): void
     {
         /** @var ShopUserInterface|null $user */
-        $user = $this->shopUserRepository->find($command->getShopUserId());
+        $user = $this->shopUserRepository->find($command->shopUserId);
         Assert::notNull($user);
 
         $token = $this->tokenGenerator->generate();
@@ -49,8 +49,8 @@ final class RequestShopUserVerificationHandler implements MessageHandlerInterfac
 
         $this->commandBus->dispatch(new SendShopUserVerificationEmail(
             $customer->getEmail(),
-            $command->getLocaleCode(),
-            $command->getChannelCode(),
+            $command->localeCode,
+            $command->channelCode,
         ), [new DispatchAfterCurrentBusStamp()]);
     }
 }

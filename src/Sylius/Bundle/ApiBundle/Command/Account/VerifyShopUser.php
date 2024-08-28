@@ -13,35 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Account;
 
-use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware;
+use Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware;
 
-/**
- * @experimental
- *
- * @psalm-immutable
- */
-class VerifyShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
+#[ChannelCodeAware]
+#[LocaleCodeAware]
+class VerifyShopUser
 {
     public function __construct(
-        protected string $token,
-        protected string $channelCode,
-        protected string $localeCode,
+        public readonly string $channelCode,
+        public readonly string $localeCode,
+        public readonly string $token,
     ) {
-    }
-
-    public function getChannelCode(): string
-    {
-        return $this->channelCode;
-    }
-
-    public function getLocaleCode(): string
-    {
-        return $this->localeCode;
-    }
-
-    public function getToken(): string
-    {
-        return $this->token;
     }
 }

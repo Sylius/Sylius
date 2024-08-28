@@ -87,7 +87,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         CustomerInterface $customer,
     ): void {
-        $completeOrder = new CompleteOrder('ThankYou', 'ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN', notes: 'ThankYou');
 
         $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(1500);
@@ -122,7 +122,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
         PromotionInterface $promotion,
     ): void {
-        $completeOrder = new CompleteOrder('ThankYou', 'ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN', notes: 'ThankYou');
 
         $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(1000);

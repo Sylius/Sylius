@@ -13,32 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
+use Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\PaymentIdAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 
-class ChoosePaymentMethod implements OrderTokenValueAwareInterface, PaymentIdAwareInterface, PaymentMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
+#[OrderTokenValueAware]
+#[PaymentIdAware]
+class ChoosePaymentMethod implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        protected string $paymentMethodCode,
-        protected mixed $paymentId,
-        protected string $orderTokenValue,
+        public readonly string $orderTokenValue,
+        public readonly mixed $paymentId,
+        public readonly string $paymentMethodCode,
     ) {
-    }
-
-    public function getPaymentMethodCode(): ?string
-    {
-        return $this->paymentMethodCode;
-    }
-
-    public function getPaymentId(): mixed
-    {
-        return $this->paymentId;
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
     }
 }

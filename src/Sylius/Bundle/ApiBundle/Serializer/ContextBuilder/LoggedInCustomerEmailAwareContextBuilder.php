@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
-use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -31,11 +30,6 @@ final class LoggedInCustomerEmailAwareContextBuilder extends AbstractInputContex
         private readonly UserContextInterface $userContext,
     ) {
         parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
-    }
-
-    protected function supportsClass(string $class): bool
-    {
-        return is_a($class, LoggedInCustomerEmailAwareInterface::class, true);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

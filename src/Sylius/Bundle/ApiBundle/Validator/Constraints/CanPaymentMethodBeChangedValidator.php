@@ -34,7 +34,7 @@ final class CanPaymentMethodBeChangedValidator extends ConstraintValidator
         Assert::isInstanceOf($constraint, CanPaymentMethodBeChanged::class);
 
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneByTokenValue($value->getOrderTokenValue());
+        $order = $this->orderRepository->findOneByTokenValue($value->orderTokenValue);
         Assert::notNull($order);
 
         if ($order->getState() === OrderInterface::STATE_CANCELLED) {

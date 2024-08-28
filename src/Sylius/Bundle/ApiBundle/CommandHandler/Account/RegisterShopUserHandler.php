@@ -27,7 +27,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final class RegisterShopUserHandler implements MessageHandlerInterface
+final readonly class RegisterShopUserHandler implements MessageHandlerInterface
 {
     public function __construct(
         private FactoryInterface $shopUserFactory,
@@ -43,28 +43,28 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserFactory->createNew();
-        $user->setPlainPassword($command->getPassword());
+        $user->setPlainPassword($command->password);
 
-        $customer = $this->customerResolver->resolve($command->getEmail());
+        $customer = $this->customerResolver->resolve($command->email);
 
         if ($customer->getUser() !== null) {
-            throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->getEmail()));
+            throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->email));
         }
 
-        $customer->setFirstName($command->getFirstName());
-        $customer->setLastName($command->getLastName());
-        $customer->setSubscribedToNewsletter($command->isSubscribedToNewsletter());
+        $customer->setFirstName($command->firstName);
+        $customer->setLastName($command->lastName);
+        $customer->setSubscribedToNewsletter($command->subscribedToNewsletter);
         $customer->setUser($user);
 
         /** @var ChannelInterface $channel */
-        $channel = $this->channelRepository->findOneByCode($command->getChannelCode());
+        $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
         $this->shopUserManager->persist($user);
 
         $this->commandBus->dispatch(new SendAccountRegistrationEmail(
-            $command->getEmail(),
-            $command->getLocaleCode(),
-            $command->getChannelCode(),
+            $command->email,
+            $command->localeCode,
+            $command->channelCode,
         ), [new DispatchAfterCurrentBusStamp()]);
 
         if (!$channel->isAccountVerificationRequired()) {
@@ -77,9 +77,9 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $user->setEmailVerificationToken($token);
 
         $this->commandBus->dispatch(new SendShopUserVerificationEmail(
-            $command->getEmail(),
-            $command->getLocaleCode(),
-            $command->getChannelCode(),
+            $command->email,
+            $command->localeCode,
+            $command->channelCode,
         ), [new DispatchAfterCurrentBusStamp()]);
 
         return $user;

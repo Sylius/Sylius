@@ -40,7 +40,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         MessageBusInterface $eventBus,
     ): void {
-        $shipShipment = new ShipShipment(123);
+        $shipShipment = new ShipShipment(shipmentId: 123);
 
         $shipmentRepository->find(123)->willReturn($shipment);
 
@@ -67,7 +67,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         MessageBusInterface $eventBus,
     ): void {
-        $shipShipment = new ShipShipment(123, 'TRACK');
+        $shipShipment = new ShipShipment(shipmentId: 123, trackingCode: 'TRACK');
 
         $shipmentRepository->find(123)->willReturn($shipment);
 
@@ -91,7 +91,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_shipment_does_not_exist(
         ShipmentRepositoryInterface $shipmentRepository,
     ): void {
-        $shipShipment = new ShipShipment(123, 'TRACK');
+        $shipShipment = new ShipShipment(shipmentId: 123, trackingCode: 'TRACK');
 
         $shipmentRepository->find(123)->willReturn(null);
 
@@ -106,7 +106,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         StateMachineInterface $stateMachine,
     ): void {
-        $shipShipment = new ShipShipment(123, 'TRACK');
+        $shipShipment = new ShipShipment(shipmentId: 123, trackingCode: 'TRACK');
 
         $shipmentRepository->find(123)->willReturn($shipment);
 

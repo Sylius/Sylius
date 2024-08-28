@@ -13,30 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-use Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware;
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 
-class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, OrderItemIdAwareInterface
+#[OrderTokenValueAware]
+#[OrderItemIdAware]
+class ChangeItemQuantityInCart
 {
     public function __construct(
-        protected int $quantity,
-        protected mixed $orderItemId,
-        protected string $orderTokenValue,
+        public readonly string $orderTokenValue,
+        public readonly mixed $orderItemId,
+        public readonly int $quantity,
     ) {
-    }
-
-    public function getQuantity(): int
-    {
-        return $this->quantity;
-    }
-
-    public function getOrderItemId(): mixed
-    {
-        return $this->orderItemId;
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
     }
 }

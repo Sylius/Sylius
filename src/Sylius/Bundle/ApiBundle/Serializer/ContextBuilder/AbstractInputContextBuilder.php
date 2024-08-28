@@ -46,11 +46,16 @@ abstract class AbstractInputContextBuilder implements SerializerContextBuilderIn
         return $context;
     }
 
-    abstract protected function supportsClass(string $class): bool;
-
     abstract protected function supports(Request $request, array $context, ?array $extractedAttributes): bool;
 
     abstract protected function resolveValue(array $context, ?array $extractedAttributes): mixed;
+
+    protected function supportsClass(string $class): bool
+    {
+        $attributes = (new \ReflectionClass($class))->getAttributes($this->attributeClass);
+
+        return !empty($attributes);
+    }
 
     /**
      * @param array<string, mixed> $context

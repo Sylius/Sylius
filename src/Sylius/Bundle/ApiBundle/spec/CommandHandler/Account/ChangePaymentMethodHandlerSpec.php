@@ -33,7 +33,11 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentMethodChangerInterface $paymentMethodChanger,
     ): void {
-        $changePaymentMethod = new ChangePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $changePaymentMethod = new ChangePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
@@ -57,7 +61,12 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
     ): void {
-        $changePaymentMethod = new ChangePaymentMethod('CASH_ON_DELIVERY_METHOD', 123, 'ORDERTOKEN');
+        $changePaymentMethod = new ChangePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
+
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 

@@ -13,32 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
+use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\ShippingMethodCodeAwareInterface;
 
-class ChooseShippingMethod implements OrderTokenValueAwareInterface, ShipmentIdAwareInterface, ShippingMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
+#[OrderTokenValueAware]
+#[ShipmentIdAware]
+class ChooseShippingMethod implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        protected string $shippingMethodCode,
-        protected mixed $shipmentId,
-        protected string $orderTokenValue,
+        public readonly string $orderTokenValue,
+        public readonly mixed $shipmentId,
+        public readonly string $shippingMethodCode,
     ) {
-    }
-
-    public function getShippingMethodCode(): ?string
-    {
-        return $this->shippingMethodCode;
-    }
-
-    public function getShipmentId(): mixed
-    {
-        return $this->shipmentId;
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
     }
 }

@@ -34,18 +34,18 @@ final readonly class UpdateCartHandler
 
     public function __invoke(UpdateCart $updateCart): OrderInterface
     {
-        $tokenValue = $updateCart->getOrderTokenValue();
+        $tokenValue = $updateCart->orderTokenValue;
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $tokenValue]);
         Assert::notNull($order, sprintf('Order with %s token has not been found.', $tokenValue));
 
-        if ($updateCart->getEmail()) {
-            $order->setCustomer($this->customerResolver->resolve($updateCart->getEmail()));
+        if ($updateCart->email) {
+            $order->setCustomer($this->customerResolver->resolve($updateCart->email));
         }
 
-        $billingAddress = $updateCart->getBillingAddress();
-        $shippingAddress = $updateCart->getShippingAddress();
+        $billingAddress = $updateCart->billingAddress;
+        $shippingAddress = $updateCart->shippingAddress;
         if ($billingAddress || $shippingAddress) {
             $order = $this->orderAddressModifier->modify($order, $billingAddress, $shippingAddress);
         }

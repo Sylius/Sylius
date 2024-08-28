@@ -13,45 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware;
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-readonly class UpdateCart implements OrderTokenValueAwareInterface, LoggedInCustomerEmailAwareInterface, LocaleCodeAwareInterface
+#[OrderTokenValueAware]
+#[LoggedInCustomerEmailAware]
+class UpdateCart
 {
     public function __construct(
-        public ?string $email = null,
-        public ?AddressInterface $billingAddress = null,
-        public ?AddressInterface $shippingAddress = null,
-        public ?string $couponCode = null,
-        public ?string $localeCode = null,
-        public ?string $orderTokenValue = null,
+        public readonly string $orderTokenValue,
+        public readonly ?string $email = null,
+        public readonly ?AddressInterface $billingAddress = null,
+        public readonly ?AddressInterface $shippingAddress = null,
+        public readonly ?string $couponCode = null,
     ) {
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function getBillingAddress(): ?AddressInterface
-    {
-        return $this->billingAddress;
-    }
-
-    public function getShippingAddress(): ?AddressInterface
-    {
-        return $this->shippingAddress;
-    }
-
-    public function getLocaleCode(): ?string
-    {
-        return $this->localeCode;
     }
 }

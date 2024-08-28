@@ -40,21 +40,11 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_value_is_not_an_instance_of_order_token_value_aware_interface(): void
+    function it_throws_an_exception_if_value_is_not_an_instance_of_update_cart(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new UpdateCart(), new class() extends Constraint {
-            }])
-        ;
-    }
-
-    function it_throws_an_exception_if_value_is_not_an_instance_of_email_value_aware_interface(): void
-    {
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new Order(), new class() extends Constraint {
-            }])
+            ->during('validate', [new CompleteOrder('token'), new UpdateCartEmailNotAllowed()])
         ;
     }
 
@@ -62,14 +52,14 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {
+            ->during('validate', [new UpdateCart('token'), new class() extends Constraint {
             }])
         ;
     }
 
     function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
     {
-        $command = new CompleteOrder(orderTokenValue: 'token');
+        $command = new UpdateCart(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 

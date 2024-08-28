@@ -46,7 +46,7 @@ final class PlacedOrderCartItemsImmutableValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new AddItemToCart('productVariantCode', 1, 'orderTokenValue'),
+                new AddItemToCart(orderTokenValue: 'orderTokenValue', productVariantCode: 'productVariantCode', quantity: 1),
                 new NotNull(),
             ]);
     }
@@ -67,7 +67,7 @@ final class PlacedOrderCartItemsImmutableValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new AddItemToCart('productVariantCode', 1, 'orderTokenValue'),
+            new AddItemToCart(orderTokenValue: 'orderTokenValue', productVariantCode: 'productVariantCode', quantity: 1),
             new PlacedOrderCartItemsImmutable(),
         );
     }
@@ -87,7 +87,7 @@ final class PlacedOrderCartItemsImmutableValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new AddItemToCart('productVariantCode', 1, 'orderTokenValue'),
+            new AddItemToCart(orderTokenValue: 'orderTokenValue', productVariantCode: 'productVariantCode', quantity: 1),
             new PlacedOrderCartItemsImmutable(),
         );
     }

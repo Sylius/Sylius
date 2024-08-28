@@ -40,12 +40,12 @@ final readonly class ChoosePaymentMethodHandler implements MessageHandlerInterfa
     public function __invoke(ChoosePaymentMethod $choosePaymentMethod): OrderInterface
     {
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findOneBy(['tokenValue' => $choosePaymentMethod->getOrderTokenValue()]);
+        $cart = $this->orderRepository->findOneBy(['tokenValue' => $choosePaymentMethod->orderTokenValue]);
 
         Assert::notNull($cart, 'Cart has not been found.');
 
-        $paymentMethodCode = $choosePaymentMethod->getPaymentMethodCode();
-        $paymentId = $choosePaymentMethod->getPaymentId();
+        $paymentMethodCode = $choosePaymentMethod->paymentMethodCode;
+        $paymentId = $choosePaymentMethod->paymentId;
 
         if ($cart->getState() === OrderInterface::STATE_NEW) {
             $this->paymentMethodChanger->changePaymentMethod($paymentMethodCode, $paymentId, $cart);

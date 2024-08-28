@@ -36,8 +36,8 @@ final readonly class ChangeItemQuantityInCartHandler implements MessageHandlerIn
     {
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
-            $command->getOrderItemId(),
-            $command->getOrderTokenValue(),
+            $command->orderItemId,
+            $command->orderTokenValue,
         );
 
         Assert::notNull($orderItem);
@@ -45,9 +45,9 @@ final readonly class ChangeItemQuantityInCartHandler implements MessageHandlerIn
         /** @var OrderInterface $cart */
         $cart = $orderItem->getOrder();
 
-        Assert::same($cart->getTokenValue(), $command->getOrderTokenValue());
+        Assert::same($cart->getTokenValue(), $command->orderTokenValue);
 
-        $this->orderItemQuantityModifier->modify($orderItem, $command->getQuantity());
+        $this->orderItemQuantityModifier->modify($orderItem, $command->quantity);
         $this->orderProcessor->process($cart);
 
         return $cart;

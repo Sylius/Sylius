@@ -47,8 +47,8 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
-            $value->getOrderItemId(),
-            $value->getOrderTokenValue(),
+            $value->orderItemId,
+            $value->orderTokenValue,
         );
 
         if ($orderItem === null) {
@@ -88,7 +88,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
             return;
         }
 
-        if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->getQuantity())) {
+        if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->quantity)) {
             $this->context->addViolation(
                 $constraint->productVariantNotSufficient,
                 ['%productVariantCode%' => $productVariantCode],
@@ -98,7 +98,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         }
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
+        $cart = $this->orderRepository->findCartByTokenValue($value->orderTokenValue);
         Assert::notNull($cart);
         $channel = $cart->getChannel();
         Assert::notNull($channel);
