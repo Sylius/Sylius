@@ -72,7 +72,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:payment:show</value>
+                                <value>sylius:admin:payment:show</value>
                             </values>
                         </value>
                     </values>
