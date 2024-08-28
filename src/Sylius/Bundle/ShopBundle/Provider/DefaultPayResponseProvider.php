@@ -34,6 +34,7 @@ final class DefaultPayResponseProvider implements PayResponseProviderInterface
 
         return new RedirectResponse($url);
     }
+    
     public function supports(
         RequestConfiguration $requestConfiguration,
         OrderInterface $order
