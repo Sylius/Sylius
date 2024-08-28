@@ -20,11 +20,16 @@ use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailAwareInterface;
 class PickupCart implements ChannelCodeAwareInterface, LoggedInCustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
     public function __construct(
-        public ?string $tokenValue = null,
-        public ?string $channelCode = null,
-        public ?string $email = null,
-        public ?string $localeCode = null,
+        protected ?string $tokenValue = null,
+        protected ?string $channelCode = null,
+        protected ?string $email = null,
+        protected ?string $localeCode = null,
     ) {
+    }
+
+    public function getTokenValue(): ?string
+    {
+        return $this->tokenValue;
     }
 
     public function getChannelCode(): ?string
