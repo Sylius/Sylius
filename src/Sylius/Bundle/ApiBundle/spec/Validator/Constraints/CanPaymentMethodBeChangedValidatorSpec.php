@@ -51,7 +51,7 @@ final class CanPaymentMethodBeChangedValidatorSpec extends ObjectBehavior
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new ChangePaymentMethod('code'), $constraint])
+            ->during('validate', [new ChangePaymentMethod('code', 123, 'ORDER_TOKEN'), $constraint])
         ;
     }
 
