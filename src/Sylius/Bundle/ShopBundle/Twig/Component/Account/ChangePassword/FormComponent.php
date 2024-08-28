@@ -70,9 +70,9 @@ class FormComponent
         $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::PRE_PASSWORD_CHANGE);
 
         $this->manager->flush();
-        FlashBagProvider
-            ::getFlashBag($this->requestStack)
-            ->add('success', 'sylius.user.change_password');
+        FlashBagProvider::getFlashBag($this->requestStack)
+            ->add('success', 'sylius.user.change_password')
+        ;
 
         $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_CHANGE);
 
