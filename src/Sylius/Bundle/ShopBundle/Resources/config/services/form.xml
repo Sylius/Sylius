@@ -31,5 +31,11 @@
             <argument type="service" id="sylius.repository.customer" />
             <tag name="form.type" />
         </service>
+
+        <service id="sylius_shop.form.type.customer_profile" class="Sylius\Bundle\ShopBundle\Form\Type\CustomerProfileType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.form.type.customer_profile.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

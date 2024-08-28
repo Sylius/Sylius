@@ -36,7 +36,7 @@ sylius_shop_account_profile_update:
         _controller: sylius.controller.customer::updateAction
         _sylius:
             template: "@SyliusShop/account/profile_update.html.twig"
-            form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType
+            form: Sylius\Bundle\ShopBundle\Form\Type\CustomerProfileType
             repository:
                 method: find
                 arguments:

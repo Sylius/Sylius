@@ -80,8 +80,8 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
             'email' => '[data-test-email]',
             'first_name' => '[data-test-first-name]',
             'last_name' => '[data-test-last-name]',
-            'phone_number' => '#sylius_customer_profile_phoneNumber',
-            'save_changes_button' => '[data-test-save-changes]',
+            'phone_number' => '[data-test-phone-number]',
+            'save_changes_button' => '[data-test-button="save-changes"]',
             'subscribe_newsletter' => '[data-test-subscribe-newsletter]',
         ]);
     }
