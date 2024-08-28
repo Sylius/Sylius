@@ -15,7 +15,6 @@ namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use PHPUnit\Framework\Assert;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Sylius\Tests\Api\Utils\HeadersBuilder;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,8 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
-    use AdminUserLoginTrait;
-
     public const CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
     public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
@@ -34,6 +31,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     private bool $isAdminContext = false;
 
     private bool $isShopUserContext = false;
+
+    private ?string $adminUserEmail = null;
 
     private ?string $shopUserEmail = null;
 
@@ -63,9 +62,10 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->expectedResponsesPath = __DIR__ . '/Responses';
     }
 
-    protected function setUpAdminContext(): void
+    protected function setUpAdminContext(?string $email = null): void
     {
         $this->isAdminContext = true;
+        $this->adminUserEmail = $email;
     }
 
     protected function setUpShopUserContext(?string $email = null): void
@@ -324,7 +324,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         array $files = [],
     ): Crawler {
         if ($this->isAdminContext) {
-            $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
+            $email = $this->adminUserEmail ?? 'api@example.com';
+            $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization($email)->build(), $headers);
         }
 
         if ($this->isShopUserContext) {
