@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Utils;
 
+/** @deprecated Call $this->setUpAdminContext() instead. */
 trait AdminUserLoginTrait
 {
     use UserLoginTrait;
 
+    /** @deprecated Call $this->setUpAdminContext() instead. */
     protected function logInAdminUser(string $email): array
     {
         return $this->logInUser('admin', $email);
