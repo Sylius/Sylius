@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Payment\Model\PaymentMethodTranslation">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/payment-method/{code}/translations/{localeCode}">
+            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/payment-methods/{code}/translations/{localeCode}">
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\PaymentMethod" fromProperty="translations"/>
                     <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Payment\Model\PaymentMethodTranslation"/>
