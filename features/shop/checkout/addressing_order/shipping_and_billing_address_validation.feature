@@ -15,7 +15,7 @@ Feature: Order addressing validation
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I do not specify any shipping address information
-        And I try to confirm the addressing step
+        And I try to complete the addressing step
         Then I should be notified that the "first name" and the "last name" in shipping details are required
         And I should also be notified that the "city" and the "street" in shipping details are required
 
@@ -25,6 +25,6 @@ Feature: Order addressing validation
         And I am at the checkout addressing step
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I do not specify any billing address information
-        And I try to confirm the addressing step
+        And I try to complete the addressing step
         Then I should be notified that the "first name" and the "last name" in billing details are required
         And I should also be notified that the "city" and the "street" in billing details are required

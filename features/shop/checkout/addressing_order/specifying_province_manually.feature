@@ -21,15 +21,26 @@ Feature: Specifying province for a country manually
         And I specify the province name manually as "Lubelskie" for shipping address
         And I specify the billing address as "Warsaw", "Obarowska", "91-242", "Poland" for "Frog Monica"
         And I specify the province name manually as "Mazowieckie" for billing address
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @api @ui @javascript
+    @no-api @ui @javascript
     Scenario: Being unable to specify province name manually for country with defined provinces
         Given the country "United States" has the "Utah" province with "UT" code
         And I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the shipping address as "Cavendish", "Green Gables", "91-242", "United States" for "Anne Shirley"
         And I specify the billing address as "Frogpolis", "Leaf", "91-242", "United States" for "Frog Monica"
+        Then I should not be able to specify province name manually for shipping address
+        And I should not be able to specify province name manually for billing address
+
+    @api @no-ui
+    Scenario: Being unable to specify province name manually for country with defined provinces
+        Given the country "United States" has the "Utah" province with "UT" code
+        And I added product "PHP T-Shirt" to the cart
+        And I am at the checkout addressing step
+        When I specify the shipping address as "Cavendish", "Green Gables", "91-242", "United States" for "Anne Shirley"
+        And I specify the billing address as "Frogpolis", "Leaf", "91-242", "United States" for "Frog Monica"
+        And I complete the addressing step
         Then I should not be able to specify province name manually for shipping address
         And I should not be able to specify province name manually for billing address

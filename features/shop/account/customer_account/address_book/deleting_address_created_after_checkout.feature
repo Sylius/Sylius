@@ -19,7 +19,7 @@ Feature: Removing an address from my book
         And I am at the checkout addressing step
         And my billing address is fulfilled automatically through default address
         When I specify the first and last name as "Mike Ross" for billing address
-        And I confirm the addressing step
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         And I browse my address book

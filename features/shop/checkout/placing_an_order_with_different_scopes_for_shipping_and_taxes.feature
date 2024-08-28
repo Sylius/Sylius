@@ -25,7 +25,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And I have product "Jane's Vest" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "Germany" for "Patrick Jane"
-        And I confirm the addressing step
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my tax total should be "$1.60"
@@ -41,7 +41,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And I have product "Jane's Vest" in the cart
         Given I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Patrick Jane"
-        And I confirm the addressing step
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my tax total should be "$1.60"
@@ -55,7 +55,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And I have product "Jane's Vest" in the cart
         Given I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Patrick Jane"
-        And I confirm the addressing step
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order total should be "$20.00"

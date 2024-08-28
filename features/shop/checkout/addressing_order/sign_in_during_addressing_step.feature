@@ -39,7 +39,7 @@ Feature: Sign in to the store during checkout
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address for "Jon Snow" from "Ankh Morpork", "Frost Alley", "90210", "United States", "Texas"
-        And I try to confirm the addressing step
+        And I try to complete the addressing step
         And I specify the email as "francis@underwood.com"
         And I specify the password as "whitehouse"
         And I sign in

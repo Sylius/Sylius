@@ -16,7 +16,7 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
     @api @ui
@@ -27,7 +27,7 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
     @api @ui
@@ -37,7 +37,7 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should not be able to select "Raven Post" shipping method
 
     @api @ui
@@ -48,7 +48,7 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should not be able to select "Raven Post" shipping method
         And I should not be able to select "Dragon Post" shipping method
         And I should be informed that my order cannot be shipped to this address
@@ -60,7 +60,7 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
     @api @ui
@@ -73,7 +73,7 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
     @api @ui
@@ -84,7 +84,7 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
     @api @no-ui
@@ -93,6 +93,6 @@ Feature: Preventing not available shipping method selection
         And I have product "Targaryen T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I confirm the addressing step
+        And I complete the addressing step
         And I try to select "Inexistent" shipping method
         Then I should be informed that shipping method with code "Inexistent" does not exist

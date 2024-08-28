@@ -18,7 +18,7 @@ Feature: Choosing province for country
         And I am at the checkout addressing step
         When I specify the billing address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
         And I specify billing country province as "New York"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should be on the checkout shipping step
 
     @api @ui @mink:chromedriver
@@ -28,7 +28,7 @@ Feature: Choosing province for country
         And I specify the billing address as "Nanda Parbat", "League of Assassins House", "11-333", "Nepal" for "Ra's al Ghul"
         When I specify the shipping address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
         And I specify shipping country province as "New York"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should be on the checkout shipping step
 
     @api @ui @mink:chromedriver
@@ -39,7 +39,7 @@ Feature: Choosing province for country
         And I specify billing country province as "New York"
         And I specify the shipping address as "Metropolis", "Clinton Str.", "344", "United States" for "Clark Kent"
         And I specify shipping country province as "New York"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should be on the checkout shipping step
 
     @api @no-ui
@@ -48,6 +48,6 @@ Feature: Choosing province for country
         And I am at the checkout addressing step
         When I specify the billing address as "Nanda Parbat", "League of Assassins House", "11-333", "Nepal" for "Ra's al Ghul"
         And I specify billing country province as "New York"
-        And I confirm the addressing step
+        And I complete the addressing step
         Then I should be notified that selected province is invalid for billing address
         And I should still be on the checkout addressing step

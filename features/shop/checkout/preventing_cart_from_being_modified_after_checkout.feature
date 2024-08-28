@@ -17,7 +17,7 @@ Feature: Preventing cart from being modified after checkout
     @api @no-ui
     Scenario: Preventing from changing billing address after checkout
         Given I added product "Sig Sauer P226" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I addressed the cart
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
         When I try to change the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -26,7 +26,7 @@ Feature: Preventing cart from being modified after checkout
     @api @no-ui
     Scenario: Preventing from changing shipping method after checkout
         Given I added product "Sig Sauer P226" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I addressed the cart
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
         When I try to change shipping method to "UPS"
@@ -35,7 +35,7 @@ Feature: Preventing cart from being modified after checkout
     @api @no-ui
     Scenario: Preventing from adding product after checkout
         Given I added product "Sig Sauer P226" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I addressed the cart
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
         When I try to add product "AK-47" to the cart
@@ -45,7 +45,7 @@ Feature: Preventing cart from being modified after checkout
     Scenario: Preventing from removing product after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I added product "AK-47" to the cart
-        Then I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I addressed the cart
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
         When I try to remove product "AK-47" from the cart
@@ -55,7 +55,7 @@ Feature: Preventing cart from being modified after checkout
     Scenario: Preventing from changing quantity of product after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I added product "AK-47" to the cart
-        Then I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I addressed the cart
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
         When I try to change product "Sig Sauer P226" quantity to 2 in my cart

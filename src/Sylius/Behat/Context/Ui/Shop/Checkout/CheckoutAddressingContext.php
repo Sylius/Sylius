@@ -250,10 +250,10 @@ final readonly class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @When I confirm the addressing step
-     * @When I try to confirm the addressing step
+     * @When I complete the addressing step
+     * @When I try to complete the addressing step
      */
-    public function iConfirmTheAddressingStep(): void
+    public function iCompleteTheAddressingStep(): void
     {
         if (!$this->addressPage->isOpen()) {
             throw new UnexpectedPageException('Addressing page should be open, but it is not.');

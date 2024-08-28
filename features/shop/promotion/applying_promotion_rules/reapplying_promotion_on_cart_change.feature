@@ -30,8 +30,8 @@ Feature: Reapplying promotion on cart change
         And I have product "PHP T-Shirt" in the cart
         And I addressed it
         And I chose "DHL" shipping method
-        And I decided to change order shipping method
-        When I change shipping method to "FedEx"
+        When I decide to change order shipping method
+        And I change shipping method to "FedEx"
         And I complete the shipping step
         Then my cart total should be "$100.00"
         And my cart shipping should be for Free
