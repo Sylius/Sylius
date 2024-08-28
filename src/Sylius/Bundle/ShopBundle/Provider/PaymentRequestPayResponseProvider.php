@@ -25,6 +25,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
     ): Response {
         return new Response('', Response::HTTP_NO_CONTENT);
     }
+    
     public function supports(
         RequestConfiguration $requestConfiguration,
         OrderInterface $order
