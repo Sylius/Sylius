@@ -11,29 +11,20 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-final readonly class OrderItemModifierListener
+final readonly class CartItemRemoveListener
 {
     public function __construct(private OrderModifierInterface $orderModifier)
     {
     }
 
-    public function addToOrder(GenericEvent $event): void
-    {
-        $orderItem = $event->getSubject();
-
-        Assert::isInstanceOf($orderItem, OrderItemInterface::class);
-
-        $this->orderModifier->addToOrder($orderItem->getOrder(), $orderItem);
-    }
-
-    public function removeOrderItem(GenericEvent $event): void
+    public function removeFromOrder(GenericEvent $event): void
     {
         $orderItem = $event->getSubject();
 

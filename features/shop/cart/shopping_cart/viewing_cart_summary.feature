@@ -12,7 +12,7 @@ Feature: Viewing a cart summary
         When I see the summary of my cart
         Then my cart should be empty
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @javascript
     Scenario: Viewing information about empty cart after clearing cookies
         Given the store has a product "T-Shirt banana" priced at "$12.54"
         And I added this product to the cart

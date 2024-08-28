@@ -83,6 +83,7 @@ class FormComponent
         $orderItem = $this->cart->getItems()->get($index);
         $this->eventDispatcher->dispatch(new GenericEvent($orderItem), SyliusCartEvents::CART_ITEM_REMOVE);
 
+        $this->manager->persist($this->cart);
         $this->manager->flush();
         $this->manager->refresh($this->cart);
 

@@ -51,12 +51,6 @@
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />
         </service>
 
-        <service id="sylius.listener.order_item_modifier" class="Sylius\Bundle\CoreBundle\EventListener\OrderItemModifierListener">
-            <argument type="service" id="sylius.order_modifier"/>
-            <tag name="kernel.event_listener" event="sylius.cart_item_add" method="addToOrder" />
-            <tag name="kernel.event_listener" event="sylius.cart_item_remove" method="removeOrderItem" />
-        </service>
-
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
