@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
-use Sylius\Bundle\ApiBundle\Attribute\AsCommandDataTransformer;
 use Sylius\Bundle\ApiBundle\Attribute\AsDocumentationModifier;
 use Sylius\Bundle\ApiBundle\Attribute\AsPaymentConfigurationProvider;
 use Symfony\Component\Config\FileLocator;
@@ -71,13 +70,6 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
 
     private function registerAutoconfiguration(ContainerBuilder $container): void
     {
-        $container->registerAttributeForAutoconfiguration(
-            AsCommandDataTransformer::class,
-            static function (ChildDefinition $definition, AsCommandDataTransformer $attribute): void {
-                $definition->addTag(AsCommandDataTransformer::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
-            },
-        );
-
         $container->registerAttributeForAutoconfiguration(
             AsDocumentationModifier::class,
             static function (ChildDefinition $definition, AsDocumentationModifier $attribute): void {
