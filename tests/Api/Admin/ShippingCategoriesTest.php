@@ -15,10 +15,13 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ShippingCategoriesTest extends JsonApiTestCase
 {
+    use AdminUserLoginTrait;
+
     protected function setUp(): void
     {
         $this->setUpAdminContext();
