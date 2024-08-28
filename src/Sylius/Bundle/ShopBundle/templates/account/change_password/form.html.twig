@@ -8,7 +8,7 @@
     </div>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'data-action': 'live#action:prevent', 'data-live-action-param': 'save'}}) }}
 
-    {% hook 'sylius_shop.account.change_password' with { form } %}
+    {% hook 'form' with { form } %}
 
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}

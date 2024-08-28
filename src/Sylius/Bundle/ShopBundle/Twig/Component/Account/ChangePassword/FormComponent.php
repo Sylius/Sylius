@@ -59,11 +59,6 @@ class FormComponent
     ) {
     }
 
-    protected function instantiateForm(): FormInterface
-    {
-        return $this->formFactory->create($this->formClass, $this->changePassword);
-    }
-
     #[LiveAction]
     public function save(): RedirectResponse
     {
@@ -83,6 +78,11 @@ class FormComponent
         $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_CHANGE);
 
         return new RedirectResponse($this->router->generate($this->redirectRouteName));
+    }
+
+    protected function instantiateForm(): FormInterface
+    {
+        return $this->formFactory->create($this->formClass, $this->changePassword);
     }
 
     private function addTranslatedFlash(Request $request, string $type, string $message): void
