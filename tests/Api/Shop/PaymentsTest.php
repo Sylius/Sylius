@@ -15,15 +15,16 @@ namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 
 final class PaymentsTest extends JsonApiTestCase
 {
-    use ShopUserLoginTrait;
     use OrderPlacerTrait;
 
     protected function setUp(): void
     {
+        $this->setUpShopUserContext();
+        $this->setUpDefaultGetHeaders();
+
         $this->setUpOrderPlacer();
 
         parent::setUp();
@@ -41,21 +42,10 @@ final class PaymentsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $header = array_merge($this->logInShopUser('oliver@doe.com'), self::CONTENT_TYPE_HEADER);
+        $order = $this->placeOrder('token');
 
-        $tokenValue = 'nAWw2jewpA';
+        $this->requestGet(sprintf('/api/v2/shop/payments/%s', $order->getLastPayment()->getId()));
 
-        $order = $this->placeOrder($tokenValue, 'oliver@doe.com');
-
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/payments/%s', $order->getLastPayment()->getId()),
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/payment/get_payment',
-        );
+        $this->assertResponseSuccessful('shop/payment/get_payment');
     }
 }
