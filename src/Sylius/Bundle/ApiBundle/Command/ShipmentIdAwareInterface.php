@@ -15,5 +15,5 @@ namespace Sylius\Bundle\ApiBundle\Command;
 
 interface ShipmentIdAwareInterface
 {
-    public function getShipmentId(): ?int;
+    public function getShipmentId(): mixed;
 }

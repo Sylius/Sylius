@@ -19,7 +19,7 @@ interface PaymentMethodChangerInterface
 {
     public function changePaymentMethod(
         string $paymentMethodCode,
-        int $paymentId,
+        mixed $paymentId,
         OrderInterface $order,
     ): OrderInterface;
 }

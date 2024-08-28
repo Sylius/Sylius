@@ -60,7 +60,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new AddItemToCart('productVariantCode', 1),
+                new AddItemToCart('productVariantCode', 1, 'ORDER_TOKEN'),
                 new class() extends Constraint {
                 },
             ])

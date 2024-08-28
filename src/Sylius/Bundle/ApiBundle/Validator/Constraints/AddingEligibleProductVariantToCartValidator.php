@@ -56,12 +56,12 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         }
 
         /** @var ProductVariantInterface|null $productVariant */
-        $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->getProductVariantCode()]);
 
         if ($productVariant === null) {
             $this->context->addViolation(
                 $constraint->productVariantNotExistMessage,
-                ['%productVariantCode%' => $value->productVariantCode],
+                ['%productVariantCode%' => $value->getProductVariantCode()],
             );
 
             return;
@@ -89,7 +89,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
 
         if (!$this->availabilityChecker->isStockSufficient(
             $productVariant,
-            $value->quantity + $this->getExistingCartItemQuantityFromCart($cart, $productVariant),
+            $value->getQuantity() + $this->getExistingCartItemQuantityFromCart($cart, $productVariant),
         )) {
             $this->context->addViolation(
                 $constraint->productVariantNotSufficient,

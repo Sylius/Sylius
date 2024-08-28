@@ -34,8 +34,8 @@ final readonly class RemoveItemFromCartHandler implements MessageHandlerInterfac
     {
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
-            $removeItemFromCart->itemId,
-            $removeItemFromCart->orderTokenValue,
+            $removeItemFromCart->getItemId(),
+            $removeItemFromCart->getOrderTokenValue(),
         );
 
         Assert::notNull($orderItem);
@@ -43,7 +43,7 @@ final readonly class RemoveItemFromCartHandler implements MessageHandlerInterfac
         /** @var OrderInterface $cart */
         $cart = $orderItem->getOrder();
 
-        Assert::same($cart->getTokenValue(), $removeItemFromCart->orderTokenValue);
+        Assert::same($cart->getTokenValue(), $removeItemFromCart->getOrderTokenValue());
 
         $this->orderModifier->removeFromOrder($cart, $orderItem);
 

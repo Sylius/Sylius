@@ -21,24 +21,24 @@ use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 class ChoosePaymentMethod implements OrderTokenValueAwareInterface, PaymentIdAwareInterface, PaymentMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public string $paymentMethodCode,
-        public ?int $paymentId = null,
-        public ?string $orderTokenValue = null,
+        protected string $paymentMethodCode,
+        protected mixed $paymentId,
+        protected string $orderTokenValue,
     ) {
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
-    }
-
-    public function getPaymentId(): ?int
-    {
-        return $this->paymentId;
     }
 
     public function getPaymentMethodCode(): ?string
     {
         return $this->paymentMethodCode;
+    }
+
+    public function getPaymentId(): mixed
+    {
+        return $this->paymentId;
+    }
+
+    public function getOrderTokenValue(): ?string
+    {
+        return $this->orderTokenValue;
     }
 }

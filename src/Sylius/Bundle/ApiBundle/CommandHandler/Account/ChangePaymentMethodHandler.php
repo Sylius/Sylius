@@ -31,13 +31,13 @@ final readonly class ChangePaymentMethodHandler implements MessageHandlerInterfa
     public function __invoke(ChangePaymentMethod $changePaymentMethod): OrderInterface
     {
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $changePaymentMethod->orderTokenValue]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $changePaymentMethod->getOrderTokenValue()]);
 
         Assert::notNull($order, 'Order has not been found.');
 
         return $this->paymentMethodChanger->changePaymentMethod(
-            $changePaymentMethod->paymentMethodCode,
-            $changePaymentMethod->paymentId,
+            $changePaymentMethod->getPaymentMethodCode(),
+            $changePaymentMethod->getPaymentId(),
             $order,
         );
     }

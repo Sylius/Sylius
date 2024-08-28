@@ -55,7 +55,7 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new ChoosePaymentMethod('code'), new class() extends Constraint {
+            ->during('validate', [new ChoosePaymentMethod('code', 123, 'ORDER_TOKEN'), new class() extends Constraint {
             }])
         ;
     }

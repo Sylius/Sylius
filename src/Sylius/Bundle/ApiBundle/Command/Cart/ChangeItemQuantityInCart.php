@@ -19,19 +19,24 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, OrderItemIdAwareInterface
 {
     public function __construct(
-        public int $quantity,
-        public ?int $orderItemId = null,
-        public ?string $orderTokenValue = null,
+        protected int $quantity,
+        protected mixed $orderItemId,
+        protected string $orderTokenValue,
     ) {
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    public function getOrderItemId(): mixed
+    {
+        return $this->orderItemId;
     }
 
     public function getOrderTokenValue(): ?string
     {
         return $this->orderTokenValue;
-    }
-
-    public function getOrderItemId(): ?int
-    {
-        return $this->orderItemId;
     }
 }

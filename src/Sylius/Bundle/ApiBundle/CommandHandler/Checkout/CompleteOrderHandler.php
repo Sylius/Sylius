@@ -45,7 +45,7 @@ final readonly class CompleteOrderHandler implements MessageHandlerInterface
      */
     public function __invoke(CompleteOrder $completeOrder): OrderInterface
     {
-        $orderTokenValue = $completeOrder->orderTokenValue;
+        $orderTokenValue = $completeOrder->getOrderTokenValue();
 
         /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findOneBy(['tokenValue' => $orderTokenValue]);
@@ -53,8 +53,8 @@ final readonly class CompleteOrderHandler implements MessageHandlerInterface
         Assert::notNull($cart, sprintf('Order with %s token has not been found.', $orderTokenValue));
         Assert::notNull($cart->getCustomer(), 'Please enter your email before completing the order.');
 
-        if ($completeOrder->notes !== null) {
-            $cart->setNotes($completeOrder->notes);
+        if ($completeOrder->getNotes() !== null) {
+            $cart->setNotes($completeOrder->getNotes());
         }
 
         $oldTotal = $cart->getTotal();

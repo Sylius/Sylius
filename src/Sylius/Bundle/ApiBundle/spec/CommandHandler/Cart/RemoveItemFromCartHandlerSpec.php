@@ -58,7 +58,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 
         $orderModifier->removeFromOrder($cart, $cartItem)->shouldBeCalled();
 
-        $this(RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID'))->shouldReturn($cart);
+        $this(new RemoveItemFromCart('ORDER_ITEM_ID', 'TOKEN_VALUE'))->shouldReturn($cart);
     }
 
     function it_throws_an_exception_if_order_item_was_not_found(
@@ -76,7 +76,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during(
                 '__invoke',
-                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')],
+                [new RemoveItemFromCart('ORDER_ITEM_ID', 'TOKEN_VALUE')],
             )
         ;
     }
@@ -102,7 +102,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during(
                 '__invoke',
-                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')],
+                [new RemoveItemFromCart('ORDER_ITEM_ID', 'TOKEN_VALUE')],
             )
         ;
     }
