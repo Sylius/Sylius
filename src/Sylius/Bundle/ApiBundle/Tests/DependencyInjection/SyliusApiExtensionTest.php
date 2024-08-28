@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Sylius\Bundle\ApiBundle\Attribute\AsCommandDataTransformer;
 use Sylius\Bundle\ApiBundle\Attribute\AsDocumentationModifier;
 use Sylius\Bundle\ApiBundle\Attribute\AsPaymentConfigurationProvider;
 use Sylius\Bundle\ApiBundle\DependencyInjection\SyliusApiExtension;
-use Sylius\Bundle\ApiBundle\Tests\Stub\CommandDataTransformerStub;
 use Sylius\Bundle\ApiBundle\Tests\Stub\DocumentationModifierStub;
 use Sylius\Bundle\ApiBundle\Tests\Stub\PaymentConfigurationProviderStub;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -168,27 +166,6 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         $this->assertSame($apiPlatformConfig['mapping']['paths'], [
             __DIR__ . '../../Resources/config/api_platform',
         ]);
-    }
-
-    /** @test */
-    public function it_autoconfigures_command_data_transformer_with_attribute(): void
-    {
-        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
-        $this->container->setDefinition(
-            'acme.command_data_transformer_with_attribute',
-            (new Definition())
-                ->setClass(CommandDataTransformerStub::class)
-                ->setAutoconfigured(true),
-        );
-
-        $this->load();
-        $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'acme.command_data_transformer_with_attribute',
-            AsCommandDataTransformer::SERVICE_TAG,
-            ['priority' => 15],
-        );
     }
 
     /** @test */
