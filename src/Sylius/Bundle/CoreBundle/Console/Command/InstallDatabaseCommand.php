@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
 use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -59,7 +60,10 @@ EOT
             $this->getEnvironment(),
         ));
 
-        $commands = $this->databaseSetupCommandsProvider->getCommands($input, $output, $this->getHelper('question'));
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+
+        $commands = $this->databaseSetupCommandsProvider->getCommands($input, $output, $questionHelper);
         $this->runCommands($commands, $output);
 
         $outputStyle->newLine();

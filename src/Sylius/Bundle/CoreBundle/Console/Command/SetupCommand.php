@@ -39,6 +39,10 @@ use Webmozart\Assert\Assert;
 )]
 final class SetupCommand extends AbstractInstallCommand
 {
+    /**
+     * @param FactoryInterface<AdminUserInterface> $adminUserFactory
+     * @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository
+     */
     public function __construct(
         protected readonly EntityManagerInterface $entityManager,
         protected readonly CommandDirectoryChecker $commandDirectoryChecker,
@@ -66,8 +70,11 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $currency = $this->currencySetup->setup($input, $output, $this->getHelper('question'));
-        $locale = $this->localeSetup->setup($input, $output, $this->getHelper('question'));
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+
+        $currency = $this->currencySetup->setup($input, $output, $questionHelper);
+        $locale = $this->localeSetup->setup($input, $output, $questionHelper);
         $this->channelSetup->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
 
