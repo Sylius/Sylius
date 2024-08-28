@@ -31,7 +31,7 @@
         "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-config-test": "^5.1",
         "phpunit/phpunit": "^9.5",
         "webmozart/assert": "^1.9"
     },
@@ -40,7 +40,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^5.4.21"
+            "require": "7.0.*"
         }
     }
 }
