@@ -37,9 +37,10 @@ final class CheckoutPaymentContext implements Context
     }
 
     /**
+     * @Given I decided to change order shipping method
      * @When I decide to change order shipping method
      */
-    public function iDecideToChangeMyShippingMethod()
+    public function iDecidedToChangeMyShippingMethod(): void
     {
         $this->selectPaymentPage->changeShippingMethod();
     }
