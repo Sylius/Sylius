@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-interface OrderItemIdAwareInterface extends CommandAwareDataTransformerInterface
+interface OrderItemIdAwareInterface
 {
     public function getOrderItemId(): ?int;
 }

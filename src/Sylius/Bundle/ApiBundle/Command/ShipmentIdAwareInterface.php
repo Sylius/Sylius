@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-interface ShipmentIdAwareInterface extends CommandAwareDataTransformerInterface
+interface ShipmentIdAwareInterface
 {
     public function getShipmentId(): ?int;
 }

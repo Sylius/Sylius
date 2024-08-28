@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-interface OrderTokenValueAwareInterface extends CommandAwareDataTransformerInterface
+interface OrderTokenValueAwareInterface
 {
     public function getOrderTokenValue(): ?string;
 }
