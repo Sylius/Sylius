@@ -37,7 +37,7 @@ final readonly class LocaleContext implements Context
     public function iSwitchTheLocaleToTheLocale(LocaleInterface $locale): void
     {
         $this->homePage->open();
-        $this->homePage->switchLocale($locale->getName('en_US'));
+        $this->homePage->switchLocale($locale->getCode());
 
         $this->sharedStorage->set('current_locale_code', $locale->getCode());
     }
