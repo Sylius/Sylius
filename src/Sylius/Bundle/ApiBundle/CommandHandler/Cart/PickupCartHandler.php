@@ -62,7 +62,7 @@ final readonly class PickupCartHandler implements MessageHandlerInterface
         }
 
         if (null === $activeCart->getTokenValue()) {
-            $activeCart->setTokenValue($pickupCart->tokenValue ?? $this->generateTokenValue());
+            $activeCart->setTokenValue($pickupCart->getTokenValue() ?? $this->generateTokenValue());
             $this->orderManager->persist($activeCart);
         }
 
@@ -75,7 +75,7 @@ final readonly class PickupCartHandler implements MessageHandlerInterface
             $channel,
             $customer,
             $this->getLocaleCode($pickupCart->getLocaleCode(), $channel),
-            $pickupCart->tokenValue ?? $this->generateTokenValue(),
+            $pickupCart->getTokenValue() ?? $this->generateTokenValue(),
         );
 
         $this->orderManager->persist($cart);
