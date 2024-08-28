@@ -15,10 +15,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Behat\Context\Cli\ShowingAvailablePluginsContext">
-            <argument type="service" id="kernel" />
-        </service>
-
         <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext">
             <argument type="service" id="kernel" />
             <argument type="service" id="doctrine.orm.entity_manager" />
