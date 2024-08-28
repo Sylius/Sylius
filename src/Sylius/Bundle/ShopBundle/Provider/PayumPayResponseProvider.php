@@ -37,7 +37,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         OrderInterface $order
     ): Response {
         $payment = $this->getPaymentFromOrder($order);
-        Assert::notNull($payment, 'An existing payment with state "new" must exist.');
+        Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId());
 
         $redirectOptions = $requestConfiguration->getParameters()->get('redirect');
         if (is_string($redirectOptions)) {
