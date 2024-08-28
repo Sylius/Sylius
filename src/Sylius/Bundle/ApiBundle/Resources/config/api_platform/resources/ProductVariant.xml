@@ -21,6 +21,11 @@
 
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-variants">
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
                 <normalizationContext>
                     <values>
                         <value name="groups">
