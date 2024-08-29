@@ -93,21 +93,6 @@ final readonly class CheckoutContext implements Context
     }
 
     /**
-     * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
-    public function iHaveSpecifiedDefaultBillingAddressForName(): void
-    {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
-        $command = new UpdateCart(
-            orderTokenValue: $cartToken,
-            email: null,
-            billingAddress: $this->getDefaultAddress(),
-        );
-        $this->commandBus->dispatch($command);
-    }
-
-    /**
      * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment method
      */
     public function iHaveProceededWithSelectingPaymentMethod(

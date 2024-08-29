@@ -49,7 +49,11 @@ final readonly class AddressContext implements Context
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
-        $command = new UpdateCart(email: null, billingAddress: $this->getDefaultAddress(), orderTokenValue: $cartToken);
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: null,
+            billingAddress: $this->getDefaultAddress(),
+        );
         $this->commandBus->dispatch($command);
     }
 
