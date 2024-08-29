@@ -40,6 +40,14 @@ abstract class Page extends SymfonyPage implements PageInterface
         return $validationMessage->getText();
     }
 
+    protected function waitForElementUpdate(string $element): void
+    {
+        $element = $this->getElement($element);
+
+        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $element->waitFor(1500, fn () => !$element->hasAttribute('busy'));
+    }
+
     /**
      * @param array<string, string> $parameters
      *

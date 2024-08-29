@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 
-interface ShowPageInterface extends PageInterface
+interface ShowPageInterface extends ShopPageInterface
 {
     /**
      * @throws ElementNotFoundException

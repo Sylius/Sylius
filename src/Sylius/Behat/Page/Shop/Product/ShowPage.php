@@ -16,15 +16,15 @@ namespace Sylius\Behat\Page\Shop\Product;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
+use Sylius\Behat\Page\Shop\Page as ShopPage;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends ShopPage implements ShowPageInterface
 {
     public function __construct(
         Session $session,
@@ -50,7 +50,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function addToCartWithQuantity(string $quantity): void
     {
         $this->getElement('quantity')->setValue($quantity);
-        $this->waitForElementToBeReady();
+        $this->waitForElementUpdate('add_to_cart_component');
 
         $this->getElement('add_to_cart_button')->click();
         $this->waitForElementToBeReady();
@@ -343,6 +343,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'add_to_cart_component' => '[data-live-name-value="sylius_shop:product:add_to_cart_form"]',
             'add_to_cart_button' => '[data-test-button="add-to-cart-button"]',
             'applied_catalog_promotions' => '[data-test-applied-catalog-promotions]',
             'association' => '[data-test-product-association="%associationName%"]',

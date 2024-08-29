@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 
-interface SummaryPageInterface extends PageInterface
+interface SummaryPageInterface extends ShopPageInterface
 {
     public function getGrandTotal(): string;
 
@@ -80,6 +80,4 @@ interface SummaryPageInterface extends PageInterface
     public function checkout(): void;
 
     public function waitForRedirect(int $timeout): void;
-
-    public function getValidationMessage(string $element, array $parameters = []): string;
 }
