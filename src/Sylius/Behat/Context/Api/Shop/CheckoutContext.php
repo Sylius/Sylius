@@ -224,8 +224,9 @@ final class CheckoutContext implements Context
      */
     public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
     {
-        $this->iSpecifyTheBillingAddressAs($address);
-        $this->iCompleteTheAddressingStep();
+        $this->fillAddress('billingAddress', $address);
+        $this->addressOrder($this->content);
+        $this->content = [];
     }
 
     /**
@@ -314,9 +315,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed selecting :country as billing country
+     * @When I proceed with selecting :country as billing country
      */
-    public function iProceedSelectingCountryAsBillingCountry(CountryInterface $country): void
+    public function iProceedWithSelectingCountryAsBillingCountry(CountryInterface $country): void
     {
         $this->addressOrderWithCountryAndEmail($country);
     }
@@ -374,6 +375,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I decide to change order shipping method
+     */
+    public function iDecideToChangeOrderShippingMethod(): void
+    {
+        // This step is relevant only for the UI
+    }
+
+    /**
      * @Given I completed the shipping step with :shippingMethod shipping method
      * @When I proceed with :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
@@ -381,7 +390,7 @@ final class CheckoutContext implements Context
      * @Given /^the (?:visitor|customer) has proceeded ("[^"]+" shipping method)$/
      * @When /^the visitor try to proceed with ("[^"]+" shipping method) in the customer cart$/
      * @When I try to change shipping method to :shippingMethod
-     * @Given I proceed selecting :shippingMethod shipping method
+     * @Given I proceed with selecting :shippingMethod shipping method
      * @Given I chose :shippingMethod shipping method
      * @When I change shipping method to :shippingMethod
      * @When I have proceeded selecting :shippingMethod shipping method
@@ -531,7 +540,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed selecting :paymentMethod payment method
+     * @When I proceed with selecting :paymentMethod payment method
      * @When I have proceeded selecting :paymentMethod payment method
      */
     public function iHaveProceededSelectingPaymentMethod(PaymentMethodInterface $paymentMethod): void
@@ -1224,8 +1233,6 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress(): void
     {
-        $this->iCompleteTheAddressingStep();
-
         $this->assertProvinceMessage('shippingAddress');
     }
 

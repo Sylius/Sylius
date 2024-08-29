@@ -41,7 +41,8 @@ Feature: Receiving fixed discount on cart
         And it gives "$10.00" discount to every order
         And I am a logged in customer
         When I add product "PHP T-Shirt" to the cart
-        And I proceed selecting "DHL" shipping method
+        And I addressed it
+        And I proceed with selecting "DHL" shipping method
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$10.00"
         And my discount should be "-$10.00"

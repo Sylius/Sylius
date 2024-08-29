@@ -51,7 +51,7 @@ Feature: Order promotions integrity
     Scenario: Receiving percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
-        When I proceed selecting "Offline" payment method
+        When I proceed with selecting "Offline" payment method
         Then my order total should be "$50.00"
 
     @api @ui

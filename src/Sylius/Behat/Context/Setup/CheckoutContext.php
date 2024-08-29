@@ -32,6 +32,12 @@ use Webmozart\Assert\Assert;
 
 final readonly class CheckoutContext implements Context
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
+     * @param RepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     * @param FactoryInterface<AddressInterface> $addressFactory
+     */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private RepositoryInterface $shippingMethodRepository,
@@ -84,21 +90,6 @@ final readonly class CheckoutContext implements Context
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
-    }
-
-    /**
-     * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
-    public function iHaveSpecifiedDefaultBillingAddressForName(): void
-    {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
-        $command = new UpdateCart(
-            orderTokenValue: $cartToken,
-            email: null,
-            billingAddress: $this->getDefaultAddress(),
-        );
-        $this->commandBus->dispatch($command);
     }
 
     /**

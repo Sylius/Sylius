@@ -15,7 +15,8 @@ Feature: Reapplying promotion on cart change
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
         And I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "DHL" shipping method
+        And I addressed it
+        When I proceed with selecting "DHL" shipping method
         And I remove product "PHP T-Shirt" from the cart
         Then cart should be empty with no value
         And there should be no shipping fee
@@ -27,8 +28,11 @@ Feature: Reapplying promotion on cart change
         And the store has "FedEx" shipping method with "$30.00" fee
         And the promotion gives "100%" discount on shipping to every order
         And I have product "PHP T-Shirt" in the cart
+        And I addressed it
         And I chose "DHL" shipping method
-        When I change shipping method to "FedEx"
+        When I decide to change order shipping method
+        And I change shipping method to "FedEx"
+        And I complete the shipping step
         Then my cart total should be "$100.00"
         And my cart shipping should be for Free
 
