@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Element\Shop\Crud;
+namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-class FormElement extends Element implements FormElementInterface
+abstract class Page extends SymfonyPage implements PageInterface
 {
     public function fillElement(string $value, string $element, array $parameters = []): void
     {

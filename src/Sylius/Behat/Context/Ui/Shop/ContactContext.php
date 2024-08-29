@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Element\Shop\Contact\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Contact\ContactPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -24,7 +23,6 @@ final readonly class ContactContext implements Context
 {
     public function __construct(
         private ContactPageInterface $contactPage,
-        private FormElementInterface $formElement,
         private NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -43,7 +41,7 @@ final readonly class ContactContext implements Context
      */
     public function iSpecifyTheEmail(string $email = ''): void
     {
-        $this->formElement->fillElement($email, 'email');
+        $this->contactPage->fillElement($email, 'email');
     }
 
     /**
@@ -52,7 +50,7 @@ final readonly class ContactContext implements Context
      */
     public function iSpecifyTheMessage(string $message = ''): void
     {
-        $this->formElement->fillElement($message, 'message');
+        $this->contactPage->fillElement($message, 'message');
     }
 
     /**
@@ -80,7 +78,7 @@ final readonly class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        Assert::same($this->formElement->getValidationMessage($element), sprintf('Please enter your %s.', $element));
+        Assert::same($this->contactPage->getValidationMessage($element), sprintf('Please enter your %s.', $element));
     }
 
     /**
@@ -88,7 +86,7 @@ final readonly class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsInvalid(): void
     {
-        Assert::same($this->formElement->getValidationMessage('email'), 'This email is invalid.');
+        Assert::same($this->contactPage->getValidationMessage('email'), 'This email is invalid.');
     }
 
     /**

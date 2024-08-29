@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Element\Shop\Crud;
+namespace Sylius\Behat\Page\Shop;
 
-use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface as BasePageInterface;
 
-interface FormElementInterface
+interface PageInterface extends BasePageInterface
 {
     /**
      * @param array<string, string> $parameters

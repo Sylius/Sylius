@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Contact;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\Shop\Page as ShopPage;
 
-class ContactPage extends SymfonyPage implements ContactPageInterface
+class ContactPage extends ShopPage implements ContactPageInterface
 {
     public function getRouteName(): string
     {
@@ -30,6 +30,8 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'email' => '[data-test-contact-email]',
+            'message' => '[data-test-contact-message]',
             'send_button' => '[data-test-button="contact-send"]',
         ]);
     }

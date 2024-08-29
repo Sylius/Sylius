@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Contact;
 
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 
-interface ContactPageInterface extends PageInterface
+interface ContactPageInterface extends ShopPageInterface
 {
     public function send(): void;
 }
