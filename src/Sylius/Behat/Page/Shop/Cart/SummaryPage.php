@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\Shop\Page as ShopPage;
 use Webmozart\Assert\Assert;
 
-class SummaryPage extends SymfonyPage implements SummaryPageInterface
+class SummaryPage extends ShopPage implements SummaryPageInterface
 {
     public function getRouteName(): string
     {
@@ -236,19 +235,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $this->getDocument()->waitFor($timeout, fn () => $this->isOpen());
     }
 
-    /** @param array<string, string> $parameters */
-    public function getValidationMessage(string $element, array $parameters = []): string
-    {
-        $foundElement = $this->getFieldElement($element, $parameters);
-
-        $validationMessage = $foundElement->find('css', '.invalid-feedback');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
-        }
-
-        return $validationMessage->getText();
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -307,31 +293,12 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 
     private function waitForComponentsUpdate(): void
     {
-        $form = $this->getElement('form');
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
+        $this->waitForElementUpdate('form');
 
         try {
-            $summaryComponent = $this->getElement('summary_component');
-            usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-            $summaryComponent->waitFor(1500, fn () => !$summaryComponent->hasAttribute('busy'));
+            $this->waitForElementUpdate('summary_component');
         } catch (ElementNotFoundException) {
             return;
         }
-    }
-
-    /**
-     * @param array<string, string> $parameters
-     *
-     * @throws ElementNotFoundException
-     */
-    private function getFieldElement(string $element, array $parameters): NodeElement
-    {
-        $element = $this->getElement($element, $parameters);
-        while (null !== $element && !$element->hasClass('field')) {
-            $element = $element->getParent();
-        }
-
-        return $element;
     }
 }
