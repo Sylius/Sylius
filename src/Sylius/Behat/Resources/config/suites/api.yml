@@ -24,9 +24,9 @@ imports:
     - api/currency/managing_exchange_rates.yml
 #    - api/currency/viewing_exchange_rates.yml
 #    - api/homepage/viewing_products.yml
-#    - api/inventory/cart_inventory.yml
-#    - api/inventory/checkout_inventory.yaml
-#    - api/inventory/managing_inventory.yaml
+    - api/inventory/cart_inventory.yml
+    - api/inventory/checkout_inventory.yaml
+    - api/inventory/managing_inventory.yaml
     - api/locale/locales.yaml
     - api/locale/managing_locales.yaml
     - api/order/managing_orders.yml
