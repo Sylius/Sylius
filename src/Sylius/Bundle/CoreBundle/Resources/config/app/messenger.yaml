@@ -32,14 +32,12 @@ framework:
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': main
         default_bus: sylius.command_bus
         buses:
-            sylius.command_bus: &command_bus
+            sylius.command_bus:
                 middleware:
                     - 'validation'
                     - 'doctrine_transaction'
             sylius.query_bus:
                 middleware:
                     - validation
-            sylius.event_bus: &event_bus
+            sylius.event_bus:
                 default_middleware: allow_no_handlers
-            sylius_default.bus: *command_bus
-            sylius_event.bus: *event_bus
