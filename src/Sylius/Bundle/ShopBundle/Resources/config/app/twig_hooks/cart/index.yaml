@@ -38,7 +38,7 @@ twig_hooks:
 
         'sylius_shop.cart.index.form.sections.general#right':
             summary:
-                component: 'sylius_shop:checkout:summary'
+                component: 'sylius_shop:cart:summary'
                 props:
                     cart: '@=_context.cart'
             checkout:
@@ -76,14 +76,14 @@ twig_hooks:
 
         'sylius_shop.cart.index.form.sections.general.summary':
             items_total:
-                template: '@SyliusShop/checkout/summary/items_total.html.twig'
+                template: '@SyliusShop/cart/index/form/sections/general/summary/items_total.html.twig'
             discount:
-                template: '@SyliusShop/checkout/summary/discount.html.twig'
+                template: '@SyliusShop/cart/index/form/sections/general/summary/discount.html.twig'
             estimated_cost:
-                template: '@SyliusShop/checkout/summary/estimated_cost.html.twig'
+                template: '@SyliusShop/cart/index/form/sections/general/summary/estimated_cost.html.twig'
             taxes_total:
-                template: '@SyliusShop/checkout/summary/taxes_total.html.twig'
+                template: '@SyliusShop/cart/index/form/sections/general/summary/taxes_total.html.twig'
             order_total:
-                template: '@SyliusShop/checkout/summary/order_total.html.twig'
+                template: '@SyliusShop/cart/index/form/sections/general/summary/order_total.html.twig'
             base_currency_order_total:
-                template: '@SyliusShop/checkout/summary/base_currency_order_total.html.twig'
+                template: '@SyliusShop/cart/index/form/sections/general/summary/base_currency_order_total.html.twig'

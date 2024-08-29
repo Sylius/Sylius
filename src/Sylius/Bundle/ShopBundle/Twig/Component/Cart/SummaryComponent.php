@@ -11,9 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
-use Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent;
 use Sylius\Component\Core\Model\Order;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;

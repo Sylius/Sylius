@@ -182,14 +182,14 @@
         </service>
 
         <service
-            id="sylius_shop.twig.component.checkout.summary"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\SummaryComponent"
+            id="sylius_shop.twig.component.cart.summary"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\SummaryComponent"
         >
 
             <tag
                 name="sylius.live_component"
-                key="sylius_shop:checkout:summary"
-                template="@SyliusShop/checkout/summary.html.twig"
+                key="sylius_shop:cart:summary"
+                template="@SyliusShop/cart/index/form/sections/general/summary.html.twig"
             />
         </service>
 
