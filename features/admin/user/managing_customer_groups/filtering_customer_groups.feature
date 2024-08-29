@@ -10,7 +10,7 @@ Feature: Filtering customer groups
         And the store has a customer group "Wholesale" with "whole" code
         And I am logged in as an administrator
 
-    @api-todo @ui
+    @todo-api @ui
     Scenario: Filtering customer groups
         When I browse customer groups
         And I search for them by "sale"

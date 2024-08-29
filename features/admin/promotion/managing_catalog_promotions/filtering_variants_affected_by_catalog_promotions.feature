@@ -14,14 +14,14 @@ Feature: Filtering product variants
         And there is a catalog promotion "T-Shirt promotion" that reduces price by "20%" and applies on "T-Shirt" product
         And I am logged in as an administrator
 
-    @ui @todo-api
+    @todo-api @ui
     Scenario: Filtering product variants by code
         Given I am browsing variants affected by catalog promotion "T-Shirt promotion"
         When I filter by code containing "PHP"
         Then there should be 1 product variant on the list
         And it should be the "PHP T-Shirt" product variant
 
-    @ui @todo-api
+    @todo-api @ui
     Scenario: Filtering product variants by name
         Given I am browsing variants affected by catalog promotion "T-Shirt promotion"
         When I filter by name containing "Sylius"
