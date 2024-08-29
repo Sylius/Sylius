@@ -178,6 +178,10 @@ sylius:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     translation:
+        locale:
+            not_blank: 'Please enter the locale.'
+            invalid: 'This value is not a valid locale.'
+            unique: 'A translation for the {{ value }} locale code already exists.'
         locale_code:
             invalid: 'Please choose one of the available locales: %locales%'
     user:

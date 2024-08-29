@@ -51,7 +51,6 @@
             <argument type="service" id="validator" />
             <argument>%sylius_admin.command_handler.create_admin_user.validation_groups%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
         <service id="sylius.console.command_factory.question" class="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory" />

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Api\IriConverterInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
@@ -43,7 +43,12 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
     ) {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    /**
+     * @param ProductVariantInterface $object
+     *
+     * @return array<string, mixed>
+     */
+    public function normalize($object, $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ProductVariantInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -67,25 +72,26 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
                 ['channel' => $channel],
             );
         } catch (MissingChannelConfigurationException) {
-            unset($data['price'], $data['originalPrice']);
+            unset($data['price'], $data['originalPrice'], $data['lowestPriceBeforeDiscount']);
         }
 
-        /** @var ArrayCollection $appliedPromotions */
+        /** @var Collection<array-key, CatalogPromotionInterface> $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(
-                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource(
+            $data['appliedPromotions'] = $appliedPromotions
+                ->map(fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource(
                     resource: $catalogPromotion,
                     context: $context,
-                ),
-                $appliedPromotions->toArray(),
-            );
+                ))
+                ->toArray()
+            ;
         }
 
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null, $context = []): bool
+    /** @param array<string, mixed> $context */
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         if (isset($context[self::ALREADY_CALLED])) {
             return false;

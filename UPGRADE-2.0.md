@@ -8,6 +8,12 @@
     + #[Groups(['sylius:admin:product:index'])]
     ```
 
+## Configuration
+
+* Messenger:
+    * The `sylius_default.bus` and `sylius_event.bus` configuration options were removed. Use `sylius.command_bus` and
+      `sylius.event_bus` for commands and events respectively.
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is not longer supported in ResourceBundle and GridBundle:
