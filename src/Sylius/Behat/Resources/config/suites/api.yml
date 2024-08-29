@@ -49,12 +49,12 @@ imports:
     - api/product/viewing_product_variants.yml
     - api/product/viewing_products.yml
     - api/promotion/applying_catalog_promotions.yml
-#    - api/promotion/applying_promotion_coupon.yml
-#    - api/promotion/applying_promotion_rules.yml
+    - api/promotion/applying_promotion_coupon.yml
+    - api/promotion/applying_promotion_rules.yml
     - api/promotion/managing_catalog_promotions.yml
     - api/promotion/managing_promotion_coupons.yml
     - api/promotion/managing_promotions.yml
-#    - api/promotion/receiving_discount.yml
+    - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
     - api/shipping/applying_shipping_method_rules.yml
 #    - api/shipping/applying_shipping_fee.yml TODO: Enable after making checkout resource available in API
