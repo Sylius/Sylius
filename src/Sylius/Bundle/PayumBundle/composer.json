@@ -35,7 +35,7 @@
         "sylius/currency": "^1.13",
         "sylius/order-bundle": "^1.13",
         "sylius/payment-bundle": "^1.13",
-        "sylius/resource-bundle": "^1.9",
+        "sylius/resource-bundle": "^1.11",
         "php-http/httplug": "^2.4"
     },
     "require-dev": {

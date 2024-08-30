@@ -32,7 +32,7 @@
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/calendar": "^0.3 || ^0.4 || ^0.5",
         "sylius/money-bundle": "^1.13",
-        "sylius/resource-bundle": "^1.9",
+        "sylius/resource-bundle": "^1.11",
         "sylius/shipping": "^1.13",
         "symfony/framework-bundle": "^5.4.21 || ^6.4"
     },

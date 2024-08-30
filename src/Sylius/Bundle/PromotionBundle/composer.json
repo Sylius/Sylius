@@ -33,7 +33,7 @@
         "sylius/money-bundle": "^1.13",
         "sylius/promotion": "^1.13",
         "sylius/registry": "^1.5",
-        "sylius/resource-bundle": "^1.9",
+        "sylius/resource-bundle": "^1.11",
         "symfony/framework-bundle": "^5.4.21 || ^6.4"
     },
     "conflict": {
