@@ -19,7 +19,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;

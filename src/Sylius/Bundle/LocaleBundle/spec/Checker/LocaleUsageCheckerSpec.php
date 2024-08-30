@@ -20,7 +20,7 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class LocaleUsageCheckerSpec extends ObjectBehavior
 {

@@ -17,7 +17,7 @@ use ApiPlatform\Core\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class AcceptLanguageHeaderDocumentationModifier implements DocumentationModifierInterface
 {

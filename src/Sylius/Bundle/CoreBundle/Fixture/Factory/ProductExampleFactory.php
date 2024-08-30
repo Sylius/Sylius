@@ -33,7 +33,7 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

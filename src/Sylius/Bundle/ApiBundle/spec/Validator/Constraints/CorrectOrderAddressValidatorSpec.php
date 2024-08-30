@@ -19,7 +19,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddress;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;

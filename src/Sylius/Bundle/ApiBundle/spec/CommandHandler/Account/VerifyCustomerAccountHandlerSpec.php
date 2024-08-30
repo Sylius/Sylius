@@ -18,7 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

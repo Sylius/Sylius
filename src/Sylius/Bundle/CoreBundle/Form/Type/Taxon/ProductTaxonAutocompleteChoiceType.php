@@ -18,7 +18,7 @@ use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

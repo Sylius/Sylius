@@ -20,7 +20,7 @@ use Prophecy\Prophecy\ProphecyInterface;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;

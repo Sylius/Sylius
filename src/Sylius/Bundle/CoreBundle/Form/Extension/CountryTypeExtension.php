@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

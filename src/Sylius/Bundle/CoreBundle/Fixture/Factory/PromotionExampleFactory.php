@@ -24,7 +24,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;

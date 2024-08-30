@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;

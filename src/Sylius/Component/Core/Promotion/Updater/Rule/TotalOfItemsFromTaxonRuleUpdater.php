@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Promotion\Updater\Rule;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0.

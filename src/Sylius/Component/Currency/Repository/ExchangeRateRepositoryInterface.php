@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Currency\Repository;
 
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ExchangeRateInterface

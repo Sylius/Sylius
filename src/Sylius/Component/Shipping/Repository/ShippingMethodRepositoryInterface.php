@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Repository;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**

@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**

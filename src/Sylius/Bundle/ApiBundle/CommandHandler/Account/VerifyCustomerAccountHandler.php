@@ -18,7 +18,7 @@ use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;

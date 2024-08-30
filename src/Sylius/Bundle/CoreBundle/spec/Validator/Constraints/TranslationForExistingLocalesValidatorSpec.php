@@ -20,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\TranslationForExistingLocales
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;

@@ -21,7 +21,7 @@ use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

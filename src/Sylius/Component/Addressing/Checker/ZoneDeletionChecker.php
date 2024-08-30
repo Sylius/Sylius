@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Checker;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ZoneDeletionChecker implements ZoneDeletionCheckerInterface
 {

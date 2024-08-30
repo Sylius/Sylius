@@ -15,7 +15,7 @@ namespace Sylius\Component\Addressing\Provider;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 class ProvinceNamingProvider implements ProvinceNamingProviderInterface

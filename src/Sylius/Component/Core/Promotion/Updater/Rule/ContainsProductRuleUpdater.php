@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Promotion\Updater\Rule;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @deprecated since Sylius 1.13 ane will be removed in Sylius 2.0

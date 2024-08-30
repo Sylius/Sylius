@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\CoreBundle\PriceHistory\Command\ApplyLowestPriceOnChannelPricings;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class BatchedApplyLowestPriceOnChannelPricingsCommandDispatcher implements ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface

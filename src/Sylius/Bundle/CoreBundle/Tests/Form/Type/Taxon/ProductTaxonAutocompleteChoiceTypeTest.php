@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;

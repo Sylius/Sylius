@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 final class ShippingCategoryContext implements Context

@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 

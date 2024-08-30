@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class TaxonInPromotionRuleCheckerSpec extends ObjectBehavior
 {

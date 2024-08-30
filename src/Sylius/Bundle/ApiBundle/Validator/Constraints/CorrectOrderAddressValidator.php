@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;

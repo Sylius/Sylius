@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Payment\Resolver;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class PaymentMethodsResolver implements PaymentMethodsResolverInterface
 {

@@ -35,7 +35,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;

@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ProductReviewContext implements Context

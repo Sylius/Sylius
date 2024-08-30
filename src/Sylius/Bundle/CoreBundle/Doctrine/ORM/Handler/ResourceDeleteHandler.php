@@ -19,7 +19,7 @@ use Doctrine\ORM\ORMException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
 use Sylius\Component\Resource\Exception\DeleteHandlingException;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
 {

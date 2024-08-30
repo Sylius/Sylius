@@ -20,7 +20,7 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior

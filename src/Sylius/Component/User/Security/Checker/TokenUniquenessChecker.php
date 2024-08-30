@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Checker;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class TokenUniquenessChecker implements UniquenessCheckerInterface
 {

@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductAttributeContext implements Context

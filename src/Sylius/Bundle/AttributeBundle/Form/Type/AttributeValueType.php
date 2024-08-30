@@ -21,7 +21,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

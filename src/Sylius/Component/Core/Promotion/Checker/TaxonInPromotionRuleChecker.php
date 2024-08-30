@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Promotion\Checker;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class TaxonInPromotionRuleChecker implements TaxonInPromotionRuleCheckerInterface
 {

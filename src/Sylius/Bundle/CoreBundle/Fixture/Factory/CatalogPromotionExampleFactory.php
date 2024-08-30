@@ -23,7 +23,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

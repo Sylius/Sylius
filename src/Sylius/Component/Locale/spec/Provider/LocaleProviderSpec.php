@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleCollectionProviderInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class LocaleProviderSpec extends ObjectBehavior
 {

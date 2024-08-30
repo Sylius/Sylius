@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
