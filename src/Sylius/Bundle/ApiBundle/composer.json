@@ -49,6 +49,7 @@
     "conflict": {
         "api-platform/core": "2.7.17",
         "doctrine/doctrine-bundle": "2.3.0",
+        "doctrine/orm": ">= 2.14.0",
         "lexik/jwt-authentication-bundle": "^2.18"
     },
     "config": {
