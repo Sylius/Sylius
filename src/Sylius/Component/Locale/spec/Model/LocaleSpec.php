@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Locale\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\TimestampableInterface;
 
 final class LocaleSpec extends ObjectBehavior
 {

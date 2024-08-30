@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-use Sylius\Component\Resource\Model\ResourceLogEntry;
+use Sylius\Resource\Model\ResourceLogEntry;
 
 class AddressLogEntry extends ResourceLogEntry
 {

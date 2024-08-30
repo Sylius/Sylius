@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Review\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 interface ReviewerInterface extends ResourceInterface
 {

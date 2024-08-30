@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Resource\StateMachine\Controller;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface as ResourceStateMachineInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Webmozart\Assert\Assert;
 
 final class CompositeStateMachine implements ResourceStateMachineInterface

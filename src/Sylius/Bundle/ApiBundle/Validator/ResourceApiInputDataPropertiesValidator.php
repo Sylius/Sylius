@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator;
 
 use ApiPlatform\Symfony\Validator\Exception\ValidationException;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ResourceApiInputDataPropertiesValidator implements ResourceInputDataPropertiesValidatorInterface

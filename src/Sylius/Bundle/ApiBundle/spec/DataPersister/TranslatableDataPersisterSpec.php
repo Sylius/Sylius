@@ -18,7 +18,7 @@ use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved;
-use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 final class TranslatableDataPersisterSpec extends ObjectBehavior

@@ -16,7 +16,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
 {

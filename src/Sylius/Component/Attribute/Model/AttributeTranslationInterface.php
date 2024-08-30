@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Attribute\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TranslationInterface;
 
 interface AttributeTranslationInterface extends ResourceInterface, TranslationInterface
 {

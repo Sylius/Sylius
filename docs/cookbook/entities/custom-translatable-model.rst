@@ -43,8 +43,8 @@ Below the final ``SupplierTranslation`` class is presented, it implements the ``
 
     namespace App\Entity;
 
-    use Sylius\Component\Resource\Model\AbstractTranslation;
-    use Sylius\Component\Resource\Model\ResourceInterface;
+    use Sylius\Resource\Model\AbstractTranslation;
+    use Sylius\Resource\Model\ResourceInterface;
 
     class SupplierTranslation extends AbstractTranslation implements ResourceInterface
     {
@@ -130,9 +130,9 @@ As a result you should get such a ``Supplier`` class:
 
     namespace App\Entity;
 
-    use Sylius\Component\Resource\Model\ResourceInterface;
-    use Sylius\Component\Resource\Model\TranslatableInterface;
-    use Sylius\Component\Resource\Model\TranslatableTrait;
+    use Sylius\Resource\Model\ResourceInterface;
+    use Sylius\Resource\Model\TranslatableInterface;
+    use Sylius\Resource\Model\TranslatableTrait;
 
     class Supplier implements ResourceInterface, TranslatableInterface
     {

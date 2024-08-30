@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Model\VersionedInterface;
+use Sylius\Resource\Model\VersionedInterface;
 
 final class OrderItemSpec extends ObjectBehavior
 {

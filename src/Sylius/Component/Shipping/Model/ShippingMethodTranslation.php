@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Model;
 
-use Sylius\Component\Resource\Model\AbstractTranslation;
+use Sylius\Resource\Model\AbstractTranslation;
 
 class ShippingMethodTranslation extends AbstractTranslation implements ShippingMethodTranslationInterface, \Stringable
 {
