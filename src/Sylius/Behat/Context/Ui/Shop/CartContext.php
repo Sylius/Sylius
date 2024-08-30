@@ -265,7 +265,10 @@ final readonly class CartContext implements Context
         $itemTotal = $this->summaryPage->getItemTotal($product->getName());
         $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
 
-        Assert::same($this->getPriceFromString($itemTotal), ($quantity * $regularUnitPrice) - $amount);
+        Assert::same(
+            $this->getPriceFromString($itemTotal),
+            ($quantity * $this->getPriceFromString($regularUnitPrice)) - $amount
+        );
     }
 
     /**
@@ -279,7 +282,10 @@ final readonly class CartContext implements Context
         $discountedUnitPrice = $this->summaryPage->getItemUnitPrice($product->getName());
         $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
 
-        Assert::same($discountedUnitPrice, ($quantity * $regularUnitPrice) - $amount);
+        Assert::same(
+            $this->getPriceFromString($discountedUnitPrice),
+            ($quantity * $this->getPriceFromString($regularUnitPrice)) - $amount
+        );
     }
 
     /**

@@ -26,10 +26,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function getGrandTotal(): string
     {
-        Assert::true(false); // Tracks which methods can be removed after completing cart tasks
-        $totalElement = $this->getElement('grand_total');
-
-        return $totalElement->getText();
+        return $this->getElement('grand_total')->getText();
     }
 
     public function getBaseGrandTotal(): string
@@ -81,10 +78,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function getPromotionTotal(): string
     {
-        Assert::true(false);
-        $shippingTotalElement = $this->getElement('promotion_total');
-
-        return $shippingTotalElement->getText();
+        return $this->getElement('promotion_total')->getText();
     }
 
     public function getItemsTotal(): string
@@ -94,7 +88,6 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function getItemTotal(string $productName): string
     {
-        Assert::true(false);
         $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
 
         return $itemTotalElement->getText();
@@ -122,9 +115,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function isItemDiscounted(string $productName): bool
     {
-        Assert::true(false);
-
-        return $this->hasElement('product_unit_regular_price', ['%name%' => $productName]);
+        return $this->hasElement('item_unit_regular_price', ['%name%' => $productName]);
     }
 
     public function removeProduct(string $productName): void
@@ -249,7 +240,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'flash_message' => '[data-test-sylius-flash-message]',
             'form' => '[data-live-name-value="sylius_shop:cart:form"]',
             'summary_component' => '[data-live-name-value="sylius_shop:checkout:summary"]',
-//            'grand_total' => '[data-test-cart-grand-total]',
+            'grand_total' => '[data-test-cart-grand-total]',
             'item_image' => '[data-test-cart-items] [data-test-cart-item="%number%"] [data-test-cart-item-product] [data-test-main-image]',
             'item_product_option_value' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-product] [data-test-option-name="%option_name%"] [data-test-option-value]',
             'item_product_variant_code' => '[data-test-cart-items] [data-test-cart-item-product] [data-test-product-variant-code="%code%"]',
@@ -259,8 +250,8 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'items_total' => '[data-test-cart-items-total]',
 //            'no_taxes' => '[data-test-cart-no-tax]',
 //            'product_row' => '[data-test-cart-product-row="%name%"]',
-//            'product_total' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-subtotal]',
-//            'promotion_total' => '[data-test-cart-promotion-total]',
+            'product_total' => '[data-test-cart-item-product-row="%name%"] [data-test-cart-product-subtotal]',
+            'promotion_total' => '[data-test-cart-promotion-total]',
             'remove_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-remove-cart-item]',
 //            'save_button' => '[data-test-apply-coupon-button]',
             'shipping_total' => '[data-test-cart-shipping-total]',
