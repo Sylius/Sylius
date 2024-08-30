@@ -169,9 +169,6 @@ class AttributeValue implements AttributeValueInterface
         return $this->datetime;
     }
 
-    /**
-     * @param \DateTimeInterface $datetime
-     */
     protected function setDatetime(?\DateTimeInterface $datetime): void
     {
         $this->datetime = $datetime;

@@ -49,9 +49,9 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Given the shipping methods are already sorted :sortType by name
      * @When I sort the shipping methods :sortType by name
      * @When I switch the way shipping methods are sorted :sortType by name
-     * @Given the shipping methods are already sorted :sortType by name
      */
     public function iSortShippingMethodsByName(string $sortType = 'ascending'): void
     {

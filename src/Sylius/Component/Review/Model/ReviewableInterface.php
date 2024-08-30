@@ -17,9 +17,6 @@ use Doctrine\Common\Collections\Collection;
 
 interface ReviewableInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): ?string;
 
     /**

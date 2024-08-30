@@ -18,9 +18,6 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface ProductVariantTranslationInterface extends ResourceInterface, TranslationInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): ?string;
 
     public function setName(?string $name): void;

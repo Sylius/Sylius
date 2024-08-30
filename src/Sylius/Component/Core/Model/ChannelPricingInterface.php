@@ -26,9 +26,6 @@ interface ChannelPricingInterface extends ResourceInterface
 
     public function setPrice(?int $price): void;
 
-    /**
-     * @return string
-     */
     public function getChannelCode(): ?string;
 
     public function setChannelCode(?string $channelCode): void;

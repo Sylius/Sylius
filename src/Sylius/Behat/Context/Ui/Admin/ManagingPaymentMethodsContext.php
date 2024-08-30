@@ -254,9 +254,9 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Given the payment methods are already sorted by :field
      * @When I switch the way payment methods are sorted by :field
      * @When I start sorting payment methods by :field
-     * @Given the payment methods are already sorted by :field
      */
     public function iSortPaymentMethodsBy($field)
     {

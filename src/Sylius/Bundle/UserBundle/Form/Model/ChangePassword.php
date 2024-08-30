@@ -29,17 +29,11 @@ class ChangePassword
         $this->currentPassword = $password;
     }
 
-    /**
-     * @return string
-     */
     public function getNewPassword(): ?string
     {
         return $this->newPassword;
     }
 
-    /**
-     * @param string $password
-     */
     public function setNewPassword(?string $password): void
     {
         $this->newPassword = $password;

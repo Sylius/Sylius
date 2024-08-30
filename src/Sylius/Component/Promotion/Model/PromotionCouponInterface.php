@@ -31,18 +31,12 @@ interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInte
 
     public function decrementUsed(): void;
 
-    /**
-     * @return PromotionInterface
-     */
     public function getPromotion(): ?PromotionInterface;
 
     public function setPromotion(?PromotionInterface $promotion): void;
 
     public function getExpiresAt(): ?\DateTimeInterface;
 
-    /**
-     * @param \DateTimeInterface $expiresAt
-     */
     public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
     public function isValid(): bool;

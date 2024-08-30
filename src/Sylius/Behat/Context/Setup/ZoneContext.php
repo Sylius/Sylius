@@ -190,9 +190,6 @@ final class ZoneContext implements Context
         return $zoneMember;
     }
 
-    /**
-     * @param string $scope
-     */
     private function createZone(string $name, ?string $code = null, ?string $scope = Scope::ALL): ZoneInterface
     {
         $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
