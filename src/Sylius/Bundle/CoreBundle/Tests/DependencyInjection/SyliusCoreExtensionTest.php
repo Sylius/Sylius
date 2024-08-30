@@ -416,7 +416,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $doctrineMigrationsExtensionConfig = $this->container->getExtensionConfig('doctrine_migrations');
 
         $this->assertTrue(isset(
-            $doctrineMigrationsExtensionConfig[0]['migrations_paths']['Sylius\Bundle\CoreBundle\Migrations']
+            $doctrineMigrationsExtensionConfig[0]['migrations_paths']['Sylius\Bundle\CoreBundle\Migrations'],
         ));
         $this->assertSame(
             '@SyliusCoreBundle/Migrations',
@@ -429,7 +429,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         ;
 
         $this->assertTrue(isset(
-            $syliusLabsDoctrineMigrationsExtraExtensionConfig[0]['migrations']['Sylius\Bundle\CoreBundle\Migrations']
+            $syliusLabsDoctrineMigrationsExtraExtensionConfig[0]['migrations']['Sylius\Bundle\CoreBundle\Migrations'],
         ));
         $this->assertSame(
             [],
