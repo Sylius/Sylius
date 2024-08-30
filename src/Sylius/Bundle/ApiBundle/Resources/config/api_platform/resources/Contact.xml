@@ -46,7 +46,7 @@
                 </denormalizationContext>
                 <openapiContext>
                     <values>
-                        <value name="summary">Send contact request</value>
+                        <value name="summary">Sends contact request.</value>
                     </values>
                 </openapiContext>
             </operation>
