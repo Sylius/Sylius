@@ -31,6 +31,10 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<TaxonInterface> $taxonFactory
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private FactoryInterface $taxonFactory,
         private TaxonRepositoryInterface $taxonRepository,

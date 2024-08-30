@@ -18,11 +18,11 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class LocaleProvider implements LocaleProviderInterface
 {
-    /**
-     * @param RepositoryInterface<LocaleInterface>|LocaleCollectionProviderInterface $localeRepository
-     */
-    public function __construct(private LocaleCollectionProviderInterface|RepositoryInterface $localeRepository, private string $defaultLocaleCode)
-    {
+    /** @param RepositoryInterface<LocaleInterface>|LocaleCollectionProviderInterface $localeRepository */
+    public function __construct(
+        private LocaleCollectionProviderInterface|RepositoryInterface $localeRepository,
+        private string $defaultLocaleCode,
+    ) {
         if ($this->localeRepository instanceof RepositoryInterface) {
             trigger_deprecation(
                 'sylius/locale',

@@ -36,6 +36,13 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<ShippingMethodInterface> $shippingMethodFactory
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     * @param RepositoryInterface<ShippingCategoryInterface> $shippingCategoryRepository
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param RepositoryInterface<TaxCategoryInterface>|null $taxCategoryRepository
+     */
     public function __construct(
         private FactoryInterface $shippingMethodFactory,
         private RepositoryInterface $zoneRepository,

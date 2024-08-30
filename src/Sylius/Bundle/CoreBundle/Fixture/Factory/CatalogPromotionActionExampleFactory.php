@@ -24,6 +24,7 @@ final class CatalogPromotionActionExampleFactory extends AbstractExampleFactory 
 {
     private OptionsResolver $optionsResolver;
 
+    /** @param FactoryInterface<CatalogPromotionActionInterface> $catalogPromotionActionFactory */
     public function __construct(private FactoryInterface $catalogPromotionActionFactory)
     {
         $this->optionsResolver = new OptionsResolver();

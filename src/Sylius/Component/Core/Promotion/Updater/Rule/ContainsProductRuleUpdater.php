@@ -23,6 +23,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 final class ContainsProductRuleUpdater implements ProductAwareRuleUpdaterInterface
 {
+    /** @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository */
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
         trigger_deprecation(

@@ -33,6 +33,8 @@ abstract class AttributeValueType extends AbstractResourceType
 {
     /**
      * @param DataTransformerInterface<LocaleInterface, string|null>|null $localeToCodeTransformer
+     * @param RepositoryInterface<AttributeInterface> $attributeRepository
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
      */
     public function __construct(
         string $dataClass,

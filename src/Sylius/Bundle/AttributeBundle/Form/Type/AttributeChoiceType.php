@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -22,6 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AttributeChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<AttributeInterface> $attributeRepository */
     public function __construct(protected RepositoryInterface $attributeRepository)
     {
     }

@@ -25,6 +25,10 @@ use Symfony\Component\Form\FormEvents;
 
 final class CustomerGuestType extends AbstractResourceType
 {
+    /**
+     * @param RepositoryInterface<CustomerInterface> $customerRepository
+     * @param FactoryInterface<CustomerInterface> $customerFactory
+     */
     public function __construct(
         string $dataClass,
         array $validationGroups,

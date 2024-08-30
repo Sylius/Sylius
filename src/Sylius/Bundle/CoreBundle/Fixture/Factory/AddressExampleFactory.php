@@ -33,6 +33,11 @@ class AddressExampleFactory extends AbstractExampleFactory
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<AddressInterface> $addressFactory
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     * @param RepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         private FactoryInterface $addressFactory,
         private RepositoryInterface $countryRepository,

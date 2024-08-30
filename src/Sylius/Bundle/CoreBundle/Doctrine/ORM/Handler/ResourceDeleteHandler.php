@@ -23,11 +23,15 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
 {
-    public function __construct(private ResourceDeleteHandlerInterface $decoratedHandler, private EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private ResourceDeleteHandlerInterface $decoratedHandler,
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     /**
+     * @param RepositoryInterface<ResourceInterface> $repository
+     *
      * @throws DeleteHandlingException
      */
     public function handle(ResourceInterface $resource, RepositoryInterface $repository): void

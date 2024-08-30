@@ -23,9 +23,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class LocaleUsageChecker implements LocaleUsageCheckerInterface
 {
-    /**
-     * @param RepositoryInterface<LocaleInterface> $localeRepository
-     */
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(
         private RepositoryInterface $localeRepository,
         private RegistryInterface $resourceRegistry,

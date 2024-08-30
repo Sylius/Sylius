@@ -33,6 +33,10 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<CatalogPromotionInterface> $catalogPromotionFactory
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private FactoryInterface $catalogPromotionFactory,
         private RepositoryInterface $localeRepository,

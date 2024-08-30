@@ -13,12 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Checker;
 
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class TokenUniquenessChecker implements UniquenessCheckerInterface
 {
-    public function __construct(private RepositoryInterface $repository, private string $tokenFieldName)
-    {
+    /** @param RepositoryInterface<UserInterface> $repository */
+    public function __construct(
+        private RepositoryInterface $repository,
+        private string $tokenFieldName,
+    ) {
     }
 
     public function isUnique(string $token): bool

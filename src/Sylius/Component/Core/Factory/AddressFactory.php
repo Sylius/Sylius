@@ -24,6 +24,7 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 class AddressFactory implements AddressFactoryInterface
 {
+    /** @param FactoryInterface<T> $decoratedFactory */
     public function __construct(private FactoryInterface $decoratedFactory)
     {
     }

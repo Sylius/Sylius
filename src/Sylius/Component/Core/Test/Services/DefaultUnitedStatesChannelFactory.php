@@ -37,6 +37,16 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
 
     public const DEFAULT_CHANNEL_NAME = 'United States';
 
+    /**
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     * @param RepositoryInterface<CurrencyInterface> $currencyRepository
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     * @param FactoryInterface<CountryInterface> $countryFactory
+     * @param FactoryInterface<CurrencyInterface> $currencyFactory
+     * @param FactoryInterface<LocaleInterface> $localeFactory
+     */
     public function __construct(
         private RepositoryInterface $channelRepository,
         private RepositoryInterface $countryRepository,

@@ -17,6 +17,7 @@ use Faker\Factory;
 use Faker\Generator;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\AvatarImage;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
@@ -30,6 +31,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<AdminUserInterface> $userFactory
+     * @param FactoryInterface<ImageInterface>|null $avatarImageFactory
+     */
     public function __construct(
         private FactoryInterface $userFactory,
         private string $localeCode,

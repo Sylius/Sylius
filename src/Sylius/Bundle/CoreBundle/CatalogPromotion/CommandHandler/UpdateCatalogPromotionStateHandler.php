@@ -20,6 +20,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class UpdateCatalogPromotionStateHandler
 {
+    /** @param RepositoryInterface<CatalogPromotionInterface> $catalogPromotionRepository */
     public function __construct(
         private CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         private RepositoryInterface $catalogPromotionRepository,

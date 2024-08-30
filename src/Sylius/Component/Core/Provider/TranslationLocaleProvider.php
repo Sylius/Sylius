@@ -20,11 +20,11 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
-    /**
-     * @param RepositoryInterface<LocaleInterface>|LocaleCollectionProviderInterface $localeRepository
-     */
-    public function __construct(private LocaleCollectionProviderInterface|RepositoryInterface $localeRepository, private string $defaultLocaleCode)
-    {
+    /** @param RepositoryInterface<LocaleInterface>|LocaleCollectionProviderInterface $localeRepository */
+    public function __construct(
+        private LocaleCollectionProviderInterface|RepositoryInterface $localeRepository,
+        private string $defaultLocaleCode,
+    ) {
         if ($this->localeRepository instanceof RepositoryInterface) {
             trigger_deprecation(
                 'sylius/core',

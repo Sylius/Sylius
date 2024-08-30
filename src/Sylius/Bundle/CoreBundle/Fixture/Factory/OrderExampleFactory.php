@@ -51,6 +51,14 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /** @var Generator */
     protected $faker;
 
+    /**
+     * @param FactoryInterface<OrderInterface> $orderFactory
+     * @param FactoryInterface<OrderItemInterface> $orderItemFactory
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param RepositoryInterface<CustomerInterface> $customerRepository
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     * @param FactoryInterface<AddressInterface> $addressFactory
+     */
     public function __construct(
         protected FactoryInterface $orderFactory,
         protected FactoryInterface $orderItemFactory,

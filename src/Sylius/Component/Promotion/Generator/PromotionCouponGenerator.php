@@ -23,6 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class PromotionCouponGenerator implements PromotionCouponGeneratorInterface
 {
+    /** @param FactoryInterface<PromotionCouponInterface> $couponFactory */
     public function __construct(
         private FactoryInterface $couponFactory,
         private PromotionCouponRepositoryInterface $couponRepository,

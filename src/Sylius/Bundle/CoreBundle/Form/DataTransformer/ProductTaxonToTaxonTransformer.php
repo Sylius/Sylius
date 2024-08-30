@@ -23,6 +23,10 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 {
+    /**
+     * @param FactoryInterface<ProductTaxonInterface> $productTaxonFactory
+     * @param RepositoryInterface<ProductTaxonInterface> $productTaxonRepository
+     */
     public function __construct(
         private FactoryInterface $productTaxonFactory,
         private RepositoryInterface $productTaxonRepository,

@@ -27,6 +27,7 @@ class TaxCategoryExampleFactory extends AbstractExampleFactory implements Exampl
 
     private OptionsResolver $optionsResolver;
 
+    /** @param FactoryInterface<TaxCategoryInterface> $taxCategoryFactory */
     public function __construct(private FactoryInterface $taxCategoryFactory)
     {
         $this->faker = Factory::create();

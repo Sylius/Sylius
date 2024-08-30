@@ -125,7 +125,7 @@ class ProductTaxonController extends ResourceController
     {
         $firstProductTaxonId = array_keys($productTaxonsPositions)[0];
 
-        /** @var EntityRepository&RepositoryInterface $repository */
+        /** @var EntityRepository&RepositoryInterface<ProductTaxonInterface> $repository */
         $repository = $this->repository;
 
         /** @var ProductTaxonInterface $productTaxon */

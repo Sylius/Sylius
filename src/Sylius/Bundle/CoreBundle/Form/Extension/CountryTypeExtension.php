@@ -27,6 +27,7 @@ use Symfony\Component\Intl\Countries;
 
 final class CountryTypeExtension extends AbstractTypeExtension
 {
+    /** @param RepositoryInterface<CountryInterface> $countryRepository */
     public function __construct(private RepositoryInterface $countryRepository)
     {
     }

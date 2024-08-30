@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Resource\Factory\Factory;
 use Sylius\Component\Taxation\Model\TaxCategory;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRate;

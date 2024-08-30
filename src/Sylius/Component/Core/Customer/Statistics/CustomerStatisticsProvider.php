@@ -21,8 +21,13 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class CustomerStatisticsProvider implements CustomerStatisticsProviderInterface
 {
-    public function __construct(private OrderRepositoryInterface $orderRepository, private RepositoryInterface $channelRepository)
-    {
+    /**
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     */
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository,
+        private RepositoryInterface $channelRepository,
+    ) {
     }
 
     public function getCustomerStatistics(CustomerInterface $customer): CustomerStatistics

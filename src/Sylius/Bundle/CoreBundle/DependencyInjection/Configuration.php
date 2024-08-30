@@ -37,7 +37,7 @@ use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Component\Core\Model\TaxonImage;
 use Sylius\Component\Core\Model\TaxonImageInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

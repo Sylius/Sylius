@@ -19,10 +19,13 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @implements PromotionCouponFactoryInterface<PromotionCouponInterface>
+ * @template T of PromotionCouponInterface
+ *
+ * @implements PromotionCouponFactoryInterface<T>
  */
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
+    /** @param FactoryInterface<T> $factory */
     public function __construct(private FactoryInterface $factory)
     {
     }

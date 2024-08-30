@@ -29,6 +29,10 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param array<string, string> $attributeTypes
+     */
     public function __construct(
         private AttributeFactoryInterface $productAttributeFactory,
         private RepositoryInterface $localeRepository,

@@ -26,6 +26,7 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
 {
     private OptionsResolver $optionsResolver;
 
+    /** @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory */
     public function __construct(
         private FactoryInterface $productAssociationFactory,
         private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,

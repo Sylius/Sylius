@@ -31,6 +31,11 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<TaxRateInterface> $taxRateFactory
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
+     */
     public function __construct(
         private FactoryInterface $taxRateFactory,
         private RepositoryInterface $zoneRepository,

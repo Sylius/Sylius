@@ -27,6 +27,10 @@ final class CurrencySetup implements CurrencySetupInterface
 {
     private string $currency;
 
+    /**
+     * @param RepositoryInterface<CurrencyInterface> $currencyRepository
+     * @param FactoryInterface<CurrencyInterface> $currencyFactory
+     */
     public function __construct(
         private RepositoryInterface $currencyRepository,
         private FactoryInterface $currencyFactory,

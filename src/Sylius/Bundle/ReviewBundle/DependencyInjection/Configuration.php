@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ReviewBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Resource\Factory\Factory;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

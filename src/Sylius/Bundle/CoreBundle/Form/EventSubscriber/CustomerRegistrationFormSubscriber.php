@@ -22,6 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class CustomerRegistrationFormSubscriber implements EventSubscriberInterface
 {
+    /** @param RepositoryInterface<CustomerInterface> $customerRepository */
     public function __construct(private RepositoryInterface $customerRepository)
     {
     }

@@ -182,7 +182,7 @@ To ease the update process, we have grouped the changes into the following categ
 
    `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory`
     ```diff
-    use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+    use Sylius\Component\Resource\Repository\RepositoryInterface;
    
         public function __construct(
             FactoryInterface $promotionFactory,
@@ -285,7 +285,7 @@ To ease the update process, we have grouped the changes into the following categ
    `Sylius\Component\Addressing\Matcher\ZoneMatcher`
     ```diff
     use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
-    use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+    use Sylius\Component\Resource\Repository\RepositoryInterface;
 
         public function __construct(
     -       private RepositoryInterface $zoneRepository,

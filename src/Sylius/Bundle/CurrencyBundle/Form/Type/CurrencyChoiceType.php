@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CurrencyChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<CurrencyInterface> $currencyRepository */
     public function __construct(private RepositoryInterface $currencyRepository)
     {
     }

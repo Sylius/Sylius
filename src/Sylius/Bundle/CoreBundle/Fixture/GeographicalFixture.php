@@ -26,6 +26,11 @@ use Webmozart\Assert\Assert;
 
 class GeographicalFixture extends AbstractFixture
 {
+    /**
+     * @param FactoryInterface<CountryInterface> $countryFactory
+     * @param FactoryInterface<ProvinceInterface> $provinceFactory
+     * @param ZoneFactoryInterface<ZoneInterface> $zoneFactory
+     */
     public function __construct(
         private FactoryInterface $countryFactory,
         private ObjectManager $countryManager,

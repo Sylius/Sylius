@@ -32,6 +32,7 @@ trigger_deprecation(
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class LocaleTypeExtension extends AbstractTypeExtension
 {
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(private RepositoryInterface $localeRepository)
     {
     }

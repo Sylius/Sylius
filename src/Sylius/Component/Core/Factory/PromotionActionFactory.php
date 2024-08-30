@@ -22,12 +22,14 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
+ * @template T of PromotionActionInterface
+ *
  * @implements PromotionActionFactoryInterface<PromotionActionInterface>
  */
 final class PromotionActionFactory implements PromotionActionFactoryInterface
 {
     /**
-     * @param FactoryInterface<PromotionActionInterface> $decoratedFactory
+     * @param FactoryInterface<T> $decoratedFactory
      */
     public function __construct(private FactoryInterface $decoratedFactory)
     {

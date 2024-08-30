@@ -20,9 +20,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class TaxonInPromotionRuleChecker implements TaxonInPromotionRuleCheckerInterface
 {
-    /**
-     * @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository
-     */
+    /** @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository */
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
     }

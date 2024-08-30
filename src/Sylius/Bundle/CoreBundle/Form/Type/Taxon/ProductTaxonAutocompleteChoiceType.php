@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductTaxonToTaxonTransformer
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -25,8 +26,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductTaxonAutocompleteChoiceType extends AbstractType
 {
-    public function __construct(private FactoryInterface $productTaxonFactory, private RepositoryInterface $productTaxonRepository)
-    {
+    /**
+     * @param FactoryInterface<ProductTaxonInterface> $productTaxonFactory
+     * @param RepositoryInterface<ProductTaxonInterface> $productTaxonRepository
+     */
+    public function __construct(
+        private FactoryInterface $productTaxonFactory,
+        private RepositoryInterface $productTaxonRepository,
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

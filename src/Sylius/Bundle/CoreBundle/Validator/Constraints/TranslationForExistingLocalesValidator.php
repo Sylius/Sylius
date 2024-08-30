@@ -23,6 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class TranslationForExistingLocalesValidator extends ConstraintValidator
 {
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(private RepositoryInterface $localeRepository)
     {
     }

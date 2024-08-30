@@ -23,6 +23,7 @@ use Twig\Environment;
 
 final class CustomerStatisticsController
 {
+    /** @param RepositoryInterface<CustomerInterface> $customerRepository */
     public function __construct(
         private CustomerStatisticsProviderInterface $statisticsProvider,
         private RepositoryInterface $customerRepository,

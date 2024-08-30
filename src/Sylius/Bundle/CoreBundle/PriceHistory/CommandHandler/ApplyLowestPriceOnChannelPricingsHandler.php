@@ -20,6 +20,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ApplyLowestPriceOnChannelPricingsHandler
 {
+    /** @param RepositoryInterface<ChannelPricingInterface> $channelPricingRepository */
     public function __construct(
         private ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
         private RepositoryInterface $channelPricingRepository,

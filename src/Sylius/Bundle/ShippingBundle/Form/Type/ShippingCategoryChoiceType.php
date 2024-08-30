@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingCategoryChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<ShippingCategoryInterface> $shippingCategoryRepository */
     public function __construct(private RepositoryInterface $shippingCategoryRepository)
     {
     }

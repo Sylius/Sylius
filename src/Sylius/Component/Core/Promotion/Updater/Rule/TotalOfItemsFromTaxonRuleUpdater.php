@@ -23,6 +23,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 final class TotalOfItemsFromTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
 {
+    /** @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository */
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
         trigger_deprecation(

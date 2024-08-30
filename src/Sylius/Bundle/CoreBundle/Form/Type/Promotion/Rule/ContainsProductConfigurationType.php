@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,7 @@ use Symfony\Component\Form\ReversedTransformer;
 
 final class ContainsProductConfigurationType extends AbstractType
 {
+    /** @param RepositoryInterface<ProductInterface> $productRepository */
     public function __construct(private RepositoryInterface $productRepository)
     {
     }

@@ -22,6 +22,7 @@ use Webmozart\Assert\Assert;
  */
 final class UserWithEncoderFactory implements FactoryInterface
 {
+    /** @param FactoryInterface<UserInterface> $decoratedUserFactory */
     public function __construct(private FactoryInterface $decoratedUserFactory, private string $encoderName)
     {
     }

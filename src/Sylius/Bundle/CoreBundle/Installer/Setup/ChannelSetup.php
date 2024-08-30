@@ -22,6 +22,10 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ChannelSetup implements ChannelSetupInterface
 {
+    /**
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param FactoryInterface<ChannelInterface> $channelFactory
+     */
     public function __construct(
         private RepositoryInterface $channelRepository,
         private FactoryInterface $channelFactory,

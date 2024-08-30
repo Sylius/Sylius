@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ChannelBundle\Form\Type;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<ChannelInterface> $channelRepository */
     public function __construct(private RepositoryInterface $channelRepository)
     {
     }

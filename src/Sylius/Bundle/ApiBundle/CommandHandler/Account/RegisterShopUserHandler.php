@@ -29,6 +29,7 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class RegisterShopUserHandler implements MessageHandlerInterface
 {
+    /** @param FactoryInterface<ShopUserInterface> $shopUserFactory */
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private ObjectManager $shopUserManager,

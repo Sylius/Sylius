@@ -27,6 +27,10 @@ use Symfony\Component\Yaml\Yaml;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param FactoryInterface<LocaleInterface> $localeFactory
+     */
     public function __construct(
         private RepositoryInterface $localeRepository,
         private FactoryInterface $localeFactory,

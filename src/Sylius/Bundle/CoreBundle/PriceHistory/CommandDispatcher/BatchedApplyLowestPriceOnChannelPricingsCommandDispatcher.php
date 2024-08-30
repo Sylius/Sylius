@@ -22,6 +22,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class BatchedApplyLowestPriceOnChannelPricingsCommandDispatcher implements ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface
 {
+    /** @param RepositoryInterface<ChannelPricingInterface> $channelPricingRepository */
     public function __construct(
         private RepositoryInterface $channelPricingRepository,
         private MessageBusInterface $commandBus,

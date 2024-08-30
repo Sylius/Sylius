@@ -22,9 +22,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class ResendOrderConfirmationEmailHandler implements MessageHandlerInterface
 {
-    /**
-     * @param RepositoryInterface<OrderInterface> $orderRepository
-     */
+    /** @param RepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private OrderEmailManagerInterface $orderEmailManager,
         private RepositoryInterface $orderRepository,

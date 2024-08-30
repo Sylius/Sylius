@@ -19,10 +19,13 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
- * @implements ReviewFactoryInterface<ReviewInterface>
+ * @template T of ReviewInterface
+ *
+ * @implements ReviewFactoryInterface<T>
  */
 final class ReviewFactory implements ReviewFactoryInterface
 {
+    /** @param FactoryInterface<T> $factory */
     public function __construct(private FactoryInterface $factory)
     {
     }

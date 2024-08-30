@@ -24,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAssociationsType extends AbstractType
 {
+    /** @param RepositoryInterface<ProductAssociationTypeInterface> $productAssociationTypeRepository */
     public function __construct(
         private RepositoryInterface $productAssociationTypeRepository,
         private DataTransformerInterface $productsToProductAssociationsTransformer,

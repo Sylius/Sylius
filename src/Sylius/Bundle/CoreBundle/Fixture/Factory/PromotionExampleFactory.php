@@ -36,6 +36,8 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
     private OptionsResolver $optionsResolver;
 
     /**
+     * @param FactoryInterface<PromotionInterface> $promotionFactory
+     * @param FactoryInterface<PromotionCouponInterface>|null $couponFactory
      * @param RepositoryInterface<LocaleInterface>|null $localeRepository
      */
     public function __construct(
@@ -171,6 +173,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
+    /** @param FactoryInterface<PromotionCouponInterface>|null $couponFactory */
     private static function getCouponNormalizer(?FactoryInterface $couponFactory): \Closure
     {
         return function (Options $options, array $couponDefinitions) use ($couponFactory): array {

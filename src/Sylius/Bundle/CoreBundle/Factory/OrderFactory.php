@@ -20,10 +20,13 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @implements OrderFactoryInterface<OrderInterface>
+ * @template T of OrderInterface
+ *
+ * @implements OrderFactoryInterface<T>
  */
 final class OrderFactory implements OrderFactoryInterface
 {
+    /** @param FactoryInterface<T> $decoratedFactory */
     public function __construct(
         private FactoryInterface $decoratedFactory,
     ) {

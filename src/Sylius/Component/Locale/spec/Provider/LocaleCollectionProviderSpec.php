@@ -20,6 +20,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class LocaleCollectionProviderSpec extends ObjectBehavior
 {
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     function let(RepositoryInterface $localeRepository): void
     {
         $this->beConstructedWith($localeRepository);

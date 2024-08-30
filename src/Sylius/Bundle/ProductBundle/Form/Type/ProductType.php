@@ -19,6 +19,7 @@ use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
@@ -30,6 +31,7 @@ final class ProductType extends AbstractResourceType
 {
     /**
      * @param array|string[] $validationGroups
+     * @param FactoryInterface<AttributeValueInterface> $attributeValueFactory
      */
     public function __construct(
         string $dataClass,

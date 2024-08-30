@@ -33,6 +33,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 
     private OptionsResolver $optionsResolver;
 
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(
         private PaymentMethodFactoryInterface $paymentMethodFactory,
         private RepositoryInterface $localeRepository,

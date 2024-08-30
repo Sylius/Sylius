@@ -25,6 +25,7 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
+    /** @param RepositoryInterface<ShopUserInterface> $shopUserRepository */
     public function __construct(
         private RepositoryInterface $shopUserRepository,
         private DateTimeProviderInterface $calendar,

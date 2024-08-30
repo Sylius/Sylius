@@ -20,6 +20,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 
 final class CustomerResolver implements CustomerResolverInterface
 {
+    /** @param FactoryInterface<CustomerInterface> $customerFactory */
     public function __construct(
         private FactoryInterface $customerFactory,
         private CustomerProviderInterface $customerProvider,

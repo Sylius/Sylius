@@ -15,7 +15,7 @@ namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\UserBundle\Controller\UserController;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Resource\Factory\Factory;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

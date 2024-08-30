@@ -23,6 +23,10 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterface
 {
+    /**
+     * @param RepositoryInterface<OrderSequenceInterface> $sequenceRepository
+     * @param FactoryInterface<OrderSequenceInterface> $sequenceFactory
+     */
     public function __construct(
         private RepositoryInterface $sequenceRepository,
         private FactoryInterface $sequenceFactory,

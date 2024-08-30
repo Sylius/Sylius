@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -26,6 +27,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
 {
     public const TYPE = 'unit_percentage_discount';
 
+    /** @param FactoryInterface<AdjustmentInterface> $adjustmentFactory */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         private FilterInterface $priceRangeFilter,

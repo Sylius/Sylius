@@ -24,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CustomerChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<CustomerInterface> $customerRepository */
     public function __construct(private RepositoryInterface $customerRepository)
     {
     }

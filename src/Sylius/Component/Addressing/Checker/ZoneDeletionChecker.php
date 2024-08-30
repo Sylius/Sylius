@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Checker;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ZoneDeletionChecker implements ZoneDeletionCheckerInterface
 {
+    /** @param RepositoryInterface<ZoneMemberInterface> $zoneMemberRepository */
     public function __construct(private RepositoryInterface $zoneMemberRepository)
     {
     }

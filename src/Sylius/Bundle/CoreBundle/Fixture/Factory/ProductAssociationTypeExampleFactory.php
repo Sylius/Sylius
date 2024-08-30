@@ -29,6 +29,10 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<ProductAssociationTypeInterface> $productAssociationTypeFactory
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private FactoryInterface $productAssociationTypeFactory,
         private RepositoryInterface $localeRepository,

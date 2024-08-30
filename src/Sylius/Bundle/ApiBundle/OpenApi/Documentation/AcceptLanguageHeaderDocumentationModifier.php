@@ -21,9 +21,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class AcceptLanguageHeaderDocumentationModifier implements DocumentationModifierInterface
 {
-    /**
-     * @param RepositoryInterface<LocaleInterface> $localeRepository
-     */
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(private RepositoryInterface $localeRepository)
     {
     }

@@ -27,6 +27,7 @@ class CustomerGroupExampleFactory extends AbstractExampleFactory implements Exam
 
     private OptionsResolver $optionsResolver;
 
+    /** @param FactoryInterface<CustomerGroupInterface> $customerGroupFactory */
     public function __construct(private FactoryInterface $customerGroupFactory)
     {
         $this->faker = Factory::create();

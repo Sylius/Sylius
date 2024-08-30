@@ -23,6 +23,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionEndedListener
 {
+    /** @param RepositoryInterface<CatalogPromotionInterface> $catalogPromotionRepository */
     public function __construct(
         private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         private RepositoryInterface $catalogPromotionRepository,

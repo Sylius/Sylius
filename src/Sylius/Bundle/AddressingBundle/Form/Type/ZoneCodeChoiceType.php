@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,6 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ZoneCodeChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<ZoneInterface> $zoneRepository */
     public function __construct(private RepositoryInterface $zoneRepository)
     {
     }

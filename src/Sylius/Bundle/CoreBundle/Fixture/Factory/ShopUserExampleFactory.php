@@ -31,6 +31,11 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<ShopUserInterface> $shopUserFactory
+     * @param FactoryInterface<CustomerInterface> $customerFactory
+     * @param RepositoryInterface<CustomerGroupInterface> $customerGroupRepository
+     */
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private FactoryInterface $customerFactory,

@@ -17,10 +17,13 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
- * @implements TaxonFactoryInterface<TaxonInterface>
+ * @template T of TaxonInterface
+ *
+ * @implements TaxonFactoryInterface<T>
  */
 final class TaxonFactory implements TaxonFactoryInterface
 {
+    /** @param FactoryInterface<T> $factory */
     public function __construct(private FactoryInterface $factory)
     {
     }

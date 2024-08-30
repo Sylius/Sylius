@@ -30,6 +30,11 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<ProductOptionInterface> $productOptionFactory
+     * @param FactoryInterface<ProductOptionValueInterface> $productOptionValueFactory
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private FactoryInterface $productOptionFactory,
         private FactoryInterface $productOptionValueFactory,

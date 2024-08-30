@@ -26,6 +26,7 @@ use Webmozart\Assert\Assert;
 
 final class UploadAvatarImageAction
 {
+    /** @param FactoryInterface<ImageInterface> $avatarImageFactory */
     public function __construct(
         private FactoryInterface $avatarImageFactory,
         private AvatarImageRepositoryInterface $avatarImageRepository,

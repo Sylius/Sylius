@@ -18,10 +18,13 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @implements ProductVariantFactoryInterface<ProductVariantInterface>
+ * @template T of ProductVariantInterface
+ *
+ * @implements ProductVariantFactoryInterface<T>
  */
 class ProductVariantFactory implements ProductVariantFactoryInterface
 {
+    /** @param FactoryInterface<T> $factory */
     public function __construct(private FactoryInterface $factory)
     {
     }
@@ -33,7 +36,6 @@ class ProductVariantFactory implements ProductVariantFactoryInterface
 
     public function createForProduct(ProductInterface $product): ProductVariantInterface
     {
-        /** @var ProductVariantInterface $variant */
         $variant = $this->createNew();
         $variant->setProduct($product);
 

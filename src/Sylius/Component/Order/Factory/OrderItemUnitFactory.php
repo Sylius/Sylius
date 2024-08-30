@@ -18,7 +18,9 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
- * @implements OrderItemUnitFactoryInterface<OrderItemUnitInterface>
+ * @template T of OrderItemUnitInterface
+ *
+ * @implements OrderItemUnitFactoryInterface<T>
  */
 class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 {
