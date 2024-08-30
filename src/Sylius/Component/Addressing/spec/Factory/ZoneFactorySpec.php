@@ -18,7 +18,7 @@ use Sylius\Component\Addressing\Factory\ZoneFactory;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ZoneFactorySpec extends ObjectBehavior
 {

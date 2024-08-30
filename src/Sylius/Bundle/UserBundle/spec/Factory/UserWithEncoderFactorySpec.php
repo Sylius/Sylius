@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UserBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 final class UserWithEncoderFactorySpec extends ObjectBehavior

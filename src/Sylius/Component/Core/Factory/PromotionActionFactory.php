@@ -19,7 +19,7 @@ use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionAc
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @implements PromotionActionFactoryInterface<PromotionActionInterface>

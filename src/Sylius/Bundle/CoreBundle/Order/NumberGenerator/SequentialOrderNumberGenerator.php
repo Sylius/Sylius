@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Component\Core\Model\OrderSequenceInterface;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterface

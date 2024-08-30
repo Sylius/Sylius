@@ -20,7 +20,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecke
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @implements PromotionRuleFactoryInterface<PromotionRuleInterface>

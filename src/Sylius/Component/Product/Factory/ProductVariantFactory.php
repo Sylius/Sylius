@@ -15,7 +15,7 @@ namespace Sylius\Component\Product\Factory;
 
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @implements ProductVariantFactoryInterface<ProductVariantInterface>

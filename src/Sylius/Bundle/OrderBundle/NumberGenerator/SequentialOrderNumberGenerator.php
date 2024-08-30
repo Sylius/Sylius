@@ -15,7 +15,7 @@ namespace Sylius\Bundle\OrderBundle\NumberGenerator;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterface

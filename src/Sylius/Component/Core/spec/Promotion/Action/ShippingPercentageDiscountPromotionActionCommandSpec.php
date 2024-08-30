@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ShippingPercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {

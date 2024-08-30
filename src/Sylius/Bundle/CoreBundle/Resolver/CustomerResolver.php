@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Resolver;
 use Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class CustomerResolver implements CustomerResolverInterface
 {
