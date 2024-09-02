@@ -8,7 +8,7 @@ Feature: Viewing empty address book
         Given the store operates on a single channel in "United States"
         And I am a logged in customer with name "Lucifer Morningstar"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing an empty address book
         When I browse my address book
         Then there should be no addresses
