@@ -11,19 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\ProductReview;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-class CountReviewsComponent
+class CountComponent
 {
     public Product $product;
 

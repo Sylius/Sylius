@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Common\Account;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Account;
 
-use Sylius\Component\Core\Model\Customer;
+use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -23,14 +23,14 @@ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-class FormComponent
+class ChangePasswordFormComponent
 {
     use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp(fieldName: 'resource')]
-    public ?Customer $resource = null;
+    #[LiveProp]
+    public ?ChangePassword $changePassword = null;
 
     /** @param class-string $formClass */
     public function __construct(
@@ -41,6 +41,6 @@ class FormComponent
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->formFactory->create($this->formClass, $this->resource);
+        return $this->formFactory->create($this->formClass, $this->changePassword);
     }
 }

@@ -5,7 +5,7 @@
 {% if resources.data|length > 0 %}
     <div class="products-grid" {{ sylius_test_html_attribute('products') }}>
         {% for product in resources.data %}
-            {{ component('sylius_shop:common:product_card', { product: product }) }}
+            {{ component('sylius_shop:product:card', { product: product }) }}
         {% endfor %}
     </div>
 {% else %}

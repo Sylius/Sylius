@@ -11,9 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Common;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
-use Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
@@ -27,7 +26,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsLiveComponent]
-class CartComponent
+class WidgetComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;

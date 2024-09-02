@@ -14,7 +14,7 @@ twig_hooks:
 
         'sylius_shop.product.show.page.info':
             summary:
-                component: 'sylius_shop:product:show_summary'
+                component: 'sylius_shop:product:summary'
                 props:
                     product: '@=_context.product'
             overview:
@@ -40,7 +40,7 @@ twig_hooks:
             rating:
                 template: "@SyliusShop/product/show/page/info/summary/average_rating/rating.html.twig"
             number_of_reviews:
-                component: 'sylius_shop:product:count_reviews'
+                component: 'sylius_shop:product_review.count'
                 props:
                     product: '@=_context.product'
             add_review:
@@ -48,7 +48,7 @@ twig_hooks:
 
         'sylius_shop.product.show.page.info.summary.prices':
             price:
-                component: 'sylius_shop:product:show_price'
+                component: 'sylius_shop:product:price'
                 props:
                     variant: '@=_context.variant'
             lowest_price_before_discount:
@@ -138,7 +138,7 @@ twig_hooks:
 
         'sylius_shop.product.show.page.info.overview.accordion.reviews.content':
             list:
-                component: 'sylius_shop:product:review'
+                component: 'sylius_shop:product_review:list'
                 props:
                     product: '@=_context.product'
                     count: 3

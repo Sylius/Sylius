@@ -4,7 +4,7 @@
     <div {{ sylius_test_html_attribute('latest-products') }}>
         <div class="products-grid">
             {% for product in latest_products %}
-                <div>{{ component('sylius_shop:common:product_card', { product: product }) }}</div>
+                <div>{{ component('sylius_shop:product:card', { product: product }) }}</div>
             {% endfor %}
         </div>
     </div>
