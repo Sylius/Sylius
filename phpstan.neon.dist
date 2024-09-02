@@ -35,7 +35,7 @@ parameters:
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
 
-        # To support both sylius/resource-bundle 1.10 and 1.11
+        # To support both sylius/resource-bundle 1.11 and older versions
         - 'src/Sylius/Bundle/AdminBundle/Controller/RedirectHandler.php'
         - 'src/Sylius/Bundle/ApiBundle/OpenApi/Documentation/AcceptLanguageHeaderDocumentationModifier.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/Handler/ResourceDeleteHandler.php'
@@ -62,6 +62,7 @@ parameters:
         - 'src/Sylius/Component/Core/Translation/TranslatableEntityLocaleAssigner.php'
         - 'src/Sylius/Component/Locale/Provider/LocaleCollectionProvider.php'
         - 'src/Sylius/Component/Locale/Provider/LocaleProvider.php'
+
     ignoreErrors:
         - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
@@ -74,7 +75,7 @@ parameters:
         - '/Method [a-zA-z\\]+Filter\:\:filterProperty\(\) has parameter \$value with no type specified./'
         - '/Method [a-zA-z\\]+Persister\:\:(persist|remove|supports)\(\) has parameter \$data with no type specified./'
 
-        # To support both sylius/resource-bundle 1.10 and 1.11
+        # To support both sylius/resource-bundle 1.11 and older versions
         - '/Call to an undefined method Sylius\\Resource\\Model\\ResourceInterface::\w+\(\)\./'
         - '/Method Sylius\\Component\\Payment\\Resolver\\PaymentMethodsResolver::getSupportedMethods\(\) should return array<Sylius\\Component\\Payment\\Model\\PaymentMethodInterface> but returns array<int, Sylius\\Resource\\Model\\ResourceInterface>\./'
         - '/Method Sylius\\Component\\Taxation\\Resolver\\TaxRateResolver::resolve\(\) should return Sylius\\Component\\Taxation\\Model\\TaxRateInterface\|null but returns Sylius\\Resource\\Model\\ResourceInterface\|null\./'
