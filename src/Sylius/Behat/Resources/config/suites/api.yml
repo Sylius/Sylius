@@ -19,10 +19,10 @@ imports:
     - api/checkout/checkout.yml
     - api/checkout/paying_for_order.yml
     - api/contact/requesting_contact.yml
-#    - api/currency/currencies.yml
+    - api/currency/currencies.yml
     - api/currency/managing_currencies.yml
     - api/currency/managing_exchange_rates.yml
-#    - api/currency/viewing_exchange_rates.yml
+    - api/currency/viewing_exchange_rates.yml
 #    - api/homepage/viewing_products.yml
     - api/inventory/cart_inventory.yml
     - api/inventory/checkout_inventory.yaml
