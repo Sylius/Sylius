@@ -51,7 +51,10 @@ final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommand
         $factoryName = $this->getFactoryName($paymentRequest);
         $commandProvider = $this->getCommandProvider($factoryName);
         if (null === $commandProvider) {
-            throw new PaymentRequestNotSupportedException();
+            throw new PaymentRequestNotSupportedException(sprintf(
+                'No payment request command provider supported for for the payment method factory name "%s".',
+                $factoryName
+            ));
         }
 
         return $commandProvider->provide($paymentRequest);
@@ -72,8 +75,6 @@ final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommand
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
 
-        $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
-
-        return $factoryName;
+        return $this->gatewayFactoryNameProvider->provide($paymentMethod);
     }
 }
