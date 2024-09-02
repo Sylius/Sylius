@@ -545,6 +545,7 @@ final readonly class CartContext implements Context
     public function iUseCouponWithCode(string $couponCode): void
     {
         $this->summaryPage->applyCoupon($couponCode);
+
     }
 
     /**
@@ -552,7 +553,10 @@ final readonly class CartContext implements Context
      */
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
-        Assert::same($this->summaryPage->getPromotionCouponValidationMessage(), 'Coupon code is invalid.');
+        Assert::same(
+            $this->summaryPage->getValidationMessage('promotion_coupon'),
+            'Coupon code is invalid.'
+        );
     }
 
     /**
