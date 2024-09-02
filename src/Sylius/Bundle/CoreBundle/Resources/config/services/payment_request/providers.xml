@@ -23,5 +23,10 @@
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProvider">
             <argument type="service" id="sylius.repository.payment_request" />
         </service>
+
+        <service id="sylius.payment_request.provider.http_response.gateway_factory" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryHttpResponseProvider">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface" />
+            <argument type="tagged_locator" tag="sylius.payment_request.http_response.provider" index-by="gateway-factory" />
+        </service>
     </services>
 </container>
