@@ -126,9 +126,8 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function applyCoupon(string $couponCode): void
     {
-        Assert::true(false);
         $this->getElement('coupon_field')->setValue($couponCode);
-        $this->getElement('apply_coupon_button')->press();
+        $this->waitForComponentsUpdate();
     }
 
     public function changeQuantity(string $productName, string $quantity): void
@@ -229,14 +228,14 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-//            'apply_coupon_button' => '[data-test-apply-coupon-button]',
+            'apply_coupon_button' => '[data-test-apply-coupon-button]',
 //            'base_grand_total' => '[data-test-cart-base-grand-total]',
             'cart_items' => '[data-test-cart-items]',
             'cart_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"]',
             'cart_total' => '[data-test-cart-total]',
             'checkout_button' => '[data-test-cart-checkout-button]',
             'clear_cart' => '[data-test-clear-cart]',
-//            'coupon_field' => '[data-test-cart-promotion-coupon-input]',
+            'coupon_field' => '[data-test-cart-promotion-coupon-input]',
             'flash_message' => '[data-test-sylius-flash-message]',
             'form' => '[data-live-name-value="sylius_shop:cart:form"]',
             'summary_component' => '[data-live-name-value="sylius_shop:checkout:summary"]',
@@ -251,6 +250,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 //            'no_taxes' => '[data-test-cart-no-tax]',
 //            'product_row' => '[data-test-cart-product-row="%name%"]',
             'product_total' => '[data-test-cart-item-product-row="%name%"] [data-test-cart-product-subtotal]',
+            'promotion_coupon' => '[data-test-cart-promotion-coupon]',
             'promotion_total' => '[data-test-cart-promotion-total]',
             'remove_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-remove-cart-item]',
 //            'save_button' => '[data-test-apply-coupon-button]',

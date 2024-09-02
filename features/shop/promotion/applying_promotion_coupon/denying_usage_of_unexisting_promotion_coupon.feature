@@ -1,5 +1,5 @@
 @applying_promotion_coupon
-Feature: Denying usage of unexisting promotion coupon
+Feature: Denying usage of nonexistent promotion coupon
     In order to pay proper amount after using the promotion coupon
     As a Visitor
     I want to have promotion coupon's discounts applied to my cart only if the given promotion coupon is valid
@@ -10,8 +10,8 @@ Feature: Denying usage of unexisting promotion coupon
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And this promotion gives "$10.00" discount to every order
 
-    @todo @ui @api
-    Scenario: Receiving no discount from unexisting coupon
+    @api @ui @mink:chromedriver
+    Scenario: Receiving no discount from nonexistent coupon
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2011"
         Then I should be notified that the coupon is invalid
