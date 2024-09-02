@@ -39,6 +39,11 @@ parameters:
 
         # To support both sylius/resource-bundle 1.11 and older versions
         - 'src/Sylius/Bundle/AdminBundle/Controller/RedirectHandler.php'
+        - 'src/Sylius/Bundle/AdminBundle/Form/DataTransformer/ProductsToProductAssociationsTransformer.php'
+        - 'src/Sylius/Bundle/AdminBundle/Provider/LoggedInAdminUserProvider.php'
+        - 'src/Sylius/Bundle/AdminBundle/Twig/Component/Customer/OrderStatisticsComponent.php'
+        - 'src/Sylius/Bundle/AdminBundle/Twig/Component/Order/AddressHistoryComponent.php'
+        - 'src/Sylius/Bundle/AdminBundle/Twig/Component/Taxon/FormComponent.php'
         - 'src/Sylius/Bundle/ApiBundle/OpenApi/Documentation/AcceptLanguageHeaderDocumentationModifier.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/Handler/ResourceDeleteHandler.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/Handler/ResourceUpdateHandler.php'
@@ -64,6 +69,7 @@ parameters:
         - 'src/Sylius/Component/Core/Translation/TranslatableEntityLocaleAssigner.php'
         - 'src/Sylius/Component/Locale/Provider/LocaleCollectionProvider.php'
         - 'src/Sylius/Component/Locale/Provider/LocaleProvider.php'
+        - 'src/Sylius/Component/Taxation/Resolver/TaxRateResolver.php'
 
     ignoreErrors:
         - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
@@ -86,3 +92,5 @@ parameters:
         - '/PHPDoc tag @extends contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
         - '/PHPDoc tag @param for parameter \$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
         - '/PHPDoc type for property Sylius\\Bundle\\\w+\\\w+\\\w+::\$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
+        - '/PHPDoc type for property Sylius\\Bundle\\\w+\\\w+\\\w+\\\w+::\$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
+        - '/PHPDoc type for property Sylius\\Bundle\\\w+\\\w+\\\w+\\\w+\\\w+::\$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
