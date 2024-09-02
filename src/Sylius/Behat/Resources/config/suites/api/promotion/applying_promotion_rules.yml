@@ -23,6 +23,7 @@ default:
 
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout.address
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.customer_group
                 - sylius.behat.context.setup.payment
