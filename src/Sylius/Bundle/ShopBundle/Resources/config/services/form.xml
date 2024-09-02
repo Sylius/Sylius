@@ -13,6 +13,11 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius_shop.form.type.address" class="Sylius\Bundle\ShopBundle\Form\Type\AddressType" >
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius_shop.form.type.add_to_cart" class="Sylius\Bundle\ShopBundle\Form\Type\AddToCartType">
             <tag name="form.type" />
         </service>
