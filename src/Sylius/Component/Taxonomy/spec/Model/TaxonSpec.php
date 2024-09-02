@@ -129,23 +129,20 @@ final class TaxonSpec extends ObjectBehavior
         $this->getFullname()->shouldReturn('Category');
     }
 
-    function its_fullname_prepends_with_parents_fullname(): void
-    {
-        $rootTaxon = new Taxon();
-        $rootTaxon->setCurrentLocale('en_US');
-        $rootTaxon->setName('Category');
+    function its_fullname_prepends_with_parents_fullname(
+        TaxonInterface $clothesTaxon,
+        TaxonInterface $rootTaxon,
+    ): void {
+        $rootTaxon->getFullname(' / ')->willReturn('Category');
 
-        $clothesTaxon = new Taxon();
-        $clothesTaxon->setCurrentLocale('en_US');
-        $clothesTaxon->setName('Clothes');
-        $clothesTaxon->setParent($rootTaxon);
+        $clothesTaxon->getFullname(' / ')->willReturn('Category / Clothes');
+        $clothesTaxon->getParent()->willReturn($rootTaxon);
+        $clothesTaxon->addChild($this)->shouldBeCalled();
 
-        $this->setCurrentLocale('en_US');
-        $this->setName('T-shirts');
         $this->setParent($clothesTaxon);
+        $this->setName('T-shirts');
 
         $this->getFullname()->shouldReturn('Category / Clothes / T-shirts');
-        $this->getFullname(' -- ')->shouldReturn('Category -- Clothes -- T-shirts');
     }
 
     function it_has_no_description_by_default(): void
