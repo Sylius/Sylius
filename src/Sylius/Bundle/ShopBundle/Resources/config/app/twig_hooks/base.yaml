@@ -32,7 +32,7 @@ twig_hooks:
             security_widget:
                 template: "@SyliusShop/shared/layout/base/header/content/security_widget.html.twig"
             cart:
-                component: 'sylius_shop:common:header:cart'
+                component: 'sylius_shop:cart:widget'
             taxon_hamburger:
                 template: "@SyliusShop/shared/layout/base/header/content/taxon_hamburger.html.twig"
 
@@ -62,7 +62,7 @@ twig_hooks:
 
         'sylius_shop.base.offcanvas':
             cart:
-                component: 'sylius_shop:common:offcanvas:cart'
+                component: 'sylius_shop:cart:widget:offcanvas'
 
         'sylius_shop.base.offcanvas.cart':
             header:

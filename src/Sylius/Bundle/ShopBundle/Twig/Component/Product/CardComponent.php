@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Common;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -28,7 +28,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsTwigComponent]
-class ProductCardComponent
+class CardComponent
 {
     #[ExposeInTemplate(name: 'product')]
     public ?ProductInterface $product = null;

@@ -1,10 +1,10 @@
 <div class="container mb-6">
     <h2 class="mb-5">{{ hookable_metadata.configuration.title|default('sylius.ui.latest_products')|trans }}</h2>
 
-    <div {{ sylius_test_html_attribute('latest-products') }}>
+    <div {{ sylius_test_html_attribute(hookable_metadata.configuration.test_attribute|default('latest-products')) }}>
         <div class="products-grid">
             {% for product in latest_products %}
-                <div>{{ component('sylius_shop:common:product_card', { product: product }) }}</div>
+                <div>{{ component('sylius_shop:product:card', { product: product }) }}</div>
             {% endfor %}
         </div>
     </div>

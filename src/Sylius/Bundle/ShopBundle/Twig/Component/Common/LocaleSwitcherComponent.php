@@ -21,7 +21,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-class LocaleSwitcher
+class LocaleSwitcherComponent
 {
     use DefaultActionTrait;
     use HookableComponentTrait;

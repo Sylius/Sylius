@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\ProductReview;
 
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductReview;
@@ -21,7 +21,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-class ReviewsComponent
+class ListComponent
 {
     public const DEFAULT_LIMIT = 3;
 
