@@ -22,12 +22,12 @@
                             aria-expanded="{{ item.open == true ? 'true' : 'false' }}"
                             aria-controls="{{ item_id }}">
 
-                        <span class="d-flex gap-2">
+                        <span class="d-flex gap-2 align-items-center">
                             {% if item.flag %}
                                 <span class="flag flag-country-{{ item.flag }}"></span>
                             {% endif %}
                             {% if item.icon %}
-                                <span class="d-flex align-items-center">{{ icon({ icon: item.icon }) }}</span>
+                                <span class="d-flex align-items-center">{{ icon(item.icon) }}</span>
                             {% endif %}
                             {{ item.title|default('Title') }}
                         </span>
