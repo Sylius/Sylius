@@ -31,7 +31,7 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class CartContext implements Context
+final readonly class CartContext implements Context
 {
     /**
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
