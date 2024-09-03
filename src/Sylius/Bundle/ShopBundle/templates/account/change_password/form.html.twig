@@ -7,7 +7,7 @@
             <img src="{{ asset('build/shop/images/loader.gif', 'shop') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
         </div>
     </div>
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'data-action': 'live#action:prevent', 'data-live-action-param': 'save'}}) }}
+    {{ form_start(form, {'action': path('sylius_shop_account_change_password'), 'attr': {'novalidate': 'novalidate'}}) }}
 
     {% hook 'form' with { form } %}
 
