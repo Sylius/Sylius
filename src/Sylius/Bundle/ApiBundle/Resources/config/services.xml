@@ -79,10 +79,6 @@
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">-->
-<!--            <argument type="service" id="validator" />-->
-<!--        </service>-->
-
         <service
             id="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter"
             decorates="api_platform.symfony.iri_converter"
