@@ -64,14 +64,8 @@ interface ShippingMethodInterface extends
 
     public function setCategoryRequirement(?int $categoryRequirement): void;
 
-    /**
-     * @return string
-     */
     public function getCalculator(): ?string;
 
-    /**
-     * @param string $calculator
-     */
     public function setCalculator(?string $calculator): void;
 
     public function getConfiguration(): array;

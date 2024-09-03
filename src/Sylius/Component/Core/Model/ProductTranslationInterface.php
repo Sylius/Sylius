@@ -17,9 +17,6 @@ use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTra
 
 interface ProductTranslationInterface extends BaseProductTranslationInterface
 {
-    /**
-     * @return string
-     */
     public function getShortDescription(): ?string;
 
     public function setShortDescription(?string $shortDescription): void;

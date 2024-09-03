@@ -30,8 +30,8 @@ final readonly class BrowsingCatalogPromotionProductVariantsContext implements C
     }
 
     /**
-     * @When I browse variants affected by catalog promotion :catalogPromotion
      * @Given I am browsing variants affected by catalog promotion :catalogPromotion
+     * @When I browse variants affected by catalog promotion :catalogPromotion
      */
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
