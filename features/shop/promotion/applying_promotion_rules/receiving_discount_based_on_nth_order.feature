@@ -25,7 +25,7 @@ Feature: Receiving discount based on nth order
         Given I have already placed 3 orders choosing "PHP T-Shirt" product, "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving a discount on 6th order when 5th one was cancelled

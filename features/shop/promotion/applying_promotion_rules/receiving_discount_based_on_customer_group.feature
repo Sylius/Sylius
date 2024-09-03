@@ -15,7 +15,7 @@ Feature: Receiving discount based on customer group
     Scenario: Not logged in customer should not receive discount
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving discounts when belonging to a specific customer group
@@ -34,4 +34,4 @@ Feature: Receiving discount based on customer group
         And I am logged in as "retail@sylius.com"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"
-        And there should be no discount
+        And there should be no discount applied

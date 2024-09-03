@@ -24,7 +24,7 @@ Feature: Seeing a summary of the order with free product
         And I proceed with "DHL" shipping method
         Then I should be on the checkout summary step
         And my order total should be "$0.00"
-        And there should be no discount
+        And there should be no discount applied
         And there should be no taxes charged
 
     @api @ui

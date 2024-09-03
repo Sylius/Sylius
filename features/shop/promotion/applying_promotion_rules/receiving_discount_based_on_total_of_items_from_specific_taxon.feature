@@ -25,14 +25,14 @@ Feature: Receiving discount based on total of items from specific taxon
         Given the promotion gives "$10.00" off if order contains products classified as "T-Shirts" with a minimum value of "$15.00"
         When I add product "PHP Mug" to the cart
         Then my cart total should be "$20.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving no discount on order while buying product from promoted taxon which not fits price criteria
         Given the promotion gives "$20.00" off if order contains products classified as "Mugs" with a minimum value of "$50.00"
         When I add product "PHP Mug" to the cart
         Then my cart total should be "$20.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving discount on order while buying multiple products from promoted taxon which fit price criteria
