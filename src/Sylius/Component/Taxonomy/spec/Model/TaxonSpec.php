@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class TaxonSpec extends ObjectBehavior
