@@ -150,8 +150,6 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @param string $transition
-     *
      * @return ReviewInterface
      */
     private function createProductReview(
