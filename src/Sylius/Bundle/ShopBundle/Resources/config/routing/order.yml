@@ -19,7 +19,7 @@ sylius_shop_order_pay:
                 route: sylius_shop_order_after_pay
 
 sylius_shop_order_after_pay:
-    path: /after-pay
+    path: /{tokenValue?}/after-pay
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.payum::afterCaptureAction
