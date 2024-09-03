@@ -1,5 +1,5 @@
 {% macro table_header(grid, field, attributes) %}
-    {% set sorting_order = grid.getSortingOrder(field.name) %}
+    {% set sorting_order = grid.getSortingOrder(field.name)|default('asc') %}
 
     {% if grid.isSortedBy(field.name) %}
         <th class="sortable sorted {{ sorting_order == 'desc' ? 'descending' : 'ascending' }} sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">
