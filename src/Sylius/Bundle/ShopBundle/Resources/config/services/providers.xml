@@ -17,17 +17,24 @@
 >
     <services>
 
-        <service id="sylius.shop.provider.pay_response.no_payment" class="Sylius\Bundle\ShopBundle\Provider\NoPaymentPayResponseProvider">
-            <argument type="service" id="router" />
+        <service id="sylius.shop.provider.pay_response.payum" class="Sylius\Bundle\ShopBundle\Provider\PayumPayResponseProvider">
+            <argument type="service" id="payum" />
+            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
             <tag name="sylius.shop.provider.pay_response" priority="-300" />
         </service>
 
-        <service id="sylius.shop.provider.pay_response.payum" class="Sylius\Bundle\ShopBundle\Provider\PayumPayResponseProvider">
-            <argument type="service" id="payum" />
+        <service id="sylius.shop.provider.pay_response.payment_request" class="Sylius\Bundle\ShopBundle\Provider\PaymentRequestPayResponseProvider">
+            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
+            <argument type="service" id="sylius.factory.payment_request" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface" />
+            <argument type="service" id="sylius.payment_request.provider.http_response.gateway_factory" />
+            <argument type="service" id="router" />
             <tag name="sylius.shop.provider.pay_response" priority="-200" />
         </service>
 
-        <service id="sylius.shop.provider.pay_response.payment_request" class="Sylius\Bundle\ShopBundle\Provider\PaymentRequestPayResponseProvider">
+        <service id="sylius.shop.provider.pay_response.no_payment" class="Sylius\Bundle\ShopBundle\Provider\NoPaymentPayResponseProvider">
+            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
+            <argument type="service" id="router" />
             <tag name="sylius.shop.provider.pay_response" priority="-100" />
         </service>
 

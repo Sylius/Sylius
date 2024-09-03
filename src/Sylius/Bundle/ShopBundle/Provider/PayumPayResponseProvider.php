@@ -16,10 +16,10 @@ namespace Sylius\Bundle\ShopBundle\Provider;
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Bundle\ShopBundle\Resolver\PaymentToPayResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
-use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -28,6 +28,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
 {
     public function __construct(
         private Payum $payum,
+        private PaymentToPayResolverInterface $paymentToPayResolver,
     ) {
     }
 
@@ -35,7 +36,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         RequestConfiguration $requestConfiguration,
         OrderInterface $order
     ): Response {
-        $payment = $this->getPaymentFromOrder($order);
+        $payment = $this->paymentToPayResolver->getLastPayment($order);
         Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
 
         $redirectOptions = $requestConfiguration->getParameters()->get('redirect');
@@ -53,7 +54,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         OrderInterface $order
     ): bool {
 
-        $payment = $this->getPaymentFromOrder($order);
+        $payment = $this->paymentToPayResolver->getLastPayment($order);
         if (null === $payment) {
             return false;
         }
@@ -94,11 +95,6 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
             $redirectOptions['route'] ?? null,
             $redirectOptions['parameters'] ?? [],
         );
-    }
-
-    private function getPaymentFromOrder(OrderInterface $order): ?PaymentInterface
-    {
-        return $order->getLastPayment(BasePaymentInterface::STATE_NEW);
     }
 
     private function getGatewayConfigFromPayment(PaymentInterface $payment): ?GatewayConfigInterface

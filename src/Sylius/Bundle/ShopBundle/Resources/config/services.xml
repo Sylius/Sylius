@@ -18,6 +18,7 @@
         <import resource="services/listeners.xml" />
         <import resource="services/menu.xml" />
         <import resource="services/providers.xml" />
+        <import resource="services/resolvers.xml" />
         <import resource="services/twig.xml" />
     </imports>
     <services>
