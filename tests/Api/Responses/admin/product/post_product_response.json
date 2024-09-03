@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Product",
     "@id": "\/api\/v2\/admin\/products\/MUG",
     "@type": "Product",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "MUG",
     "variantSelectionMethod": "match",
     "enabled": true,
@@ -21,7 +21,7 @@
         {
             "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe",
             "value": true,
             "localeCode": null
@@ -33,7 +33,7 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
             "@type": "ProductTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Mug",
             "slug": "mug",
             "description": "This is a mug",
@@ -44,7 +44,7 @@
         "pl_PL": {
             "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
             "@type": "ProductTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Kubek",
             "slug": "kubek",
             "description": "To jest kubek",
@@ -53,6 +53,6 @@
             "metaDescription": "Opis kubka"
         }
     },
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

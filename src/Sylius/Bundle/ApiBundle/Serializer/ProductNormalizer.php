@@ -17,20 +17,20 @@ use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
     private const ALREADY_CALLED = 'sylius_product_normalizer_already_called';
 
     public function __construct(
-        private ProductVariantResolverInterface $defaultProductVariantResolver,
-        private IriConverterInterface $iriConverter,
+        private readonly ProductVariantResolverInterface $defaultProductVariantResolver,
+        private readonly IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -50,6 +50,7 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
         ;
 
         $defaultVariant = $this->defaultProductVariantResolver->getVariant($object);
+
         $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromResource($defaultVariant);
 
         return $data;
@@ -66,11 +67,12 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
 
     private function isShopOperation(array $context): bool
     {
-        if (isset($context['item_operation_name'])) {
-            return \str_starts_with($context['item_operation_name'], 'shop_get');
+        if (isset($context['root_operation_name'])) {
+            return \str_starts_with($context['root_operation_name'], '_api_/shop');
         }
-        if (isset($context['collection_operation_name'])) {
-            return \str_starts_with($context['collection_operation_name'], 'shop_get');
+
+        if (isset($context['operation_name'])) {
+            return \str_starts_with($context['operation_name'], '_api_/shop');
         }
 
         return false;

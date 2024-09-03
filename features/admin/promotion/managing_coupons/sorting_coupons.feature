@@ -19,27 +19,27 @@ Feature: Sorting listed coupons
         And this coupon expires on "20-02-2023"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Coupons are sorted by descending number of uses by default
         When I want to view all coupons of this promotion
         Then I should see 3 coupons on the list
         And the first coupon should have code "Y"
 
-    @ui @api
+    @api @ui
     Scenario: Changing the number of uses sorting order to ascending
         Given I am browsing coupons of this promotion
         When I sort coupons by ascending number of uses
         Then I should see 3 coupons on the list
         And the first coupon should have code "X"
 
-    @ui @api
+    @api @ui
     Scenario: Sorting coupons by code in descending order
         Given I am browsing coupons of this promotion
         When I sort coupons by descending code
         Then I should see 3 coupons on the list
         And the first coupon should have code "Z"
 
-    @ui @api
+    @api @ui
     Scenario: Sorting coupons by code in ascending order
         Given I am browsing coupons of this promotion
         When I sort coupons by ascending code

@@ -13,7 +13,7 @@ Feature: Seeing order items on order summary page
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Seeing order items and theirs quantity on the order summary page
         When I add 4 products "Lannister Coat" to the cart
         And I add 2 products "Targaryen Jacket" to the cart

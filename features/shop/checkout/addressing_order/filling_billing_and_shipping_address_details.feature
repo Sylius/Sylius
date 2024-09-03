@@ -10,7 +10,7 @@ Feature: Addressing an order
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Address an order without different shipping address
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -18,7 +18,7 @@ Feature: Addressing an order
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @api
+    @api @ui
     Scenario: Address an order with different shipping address
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

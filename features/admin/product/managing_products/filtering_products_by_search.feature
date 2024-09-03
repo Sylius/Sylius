@@ -11,14 +11,14 @@ Feature: Filtering products by code and name
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui @api-todo
+    @todo-api @ui
     Scenario: Searching for a product by code
         When I search for products with "-pr"
         Then I should see 2 products in the list
         And I should see a product with name "MacBook Pro"
         And I should see a product with name "HP Pro"
 
-    @ui @api-todo
+    @todo-api @ui
     Scenario: Searching for a product by name
         When I search for products with "Mac"
         Then I should see 2 products in the list

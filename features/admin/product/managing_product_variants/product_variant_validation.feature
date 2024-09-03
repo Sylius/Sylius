@@ -18,7 +18,7 @@ Feature: Product variant validation
         Then I should be notified that prices in "United States" channel must be defined
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @no-ui @api
+    @api @no-ui
     Scenario: Trying to add product variant translation in unexisting locale
         When I want to create a new variant of this product
         And I specify its code as "lemon"

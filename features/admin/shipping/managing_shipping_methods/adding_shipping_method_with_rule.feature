@@ -10,7 +10,7 @@ Feature: Adding a new shipping method with rule
         And the store has a zone "United States" with code "US"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a new shipping method with total weight greater than or equal rule
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -23,7 +23,7 @@ Feature: Adding a new shipping method with rule
         And I add it
         Then the "FedEx Carrier" shipping method should be successfully created
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a new shipping method with total weight less than or equal rule
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -36,7 +36,7 @@ Feature: Adding a new shipping method with rule
         And I add it
         Then the "FedEx Carrier" shipping method should be successfully created
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a new shipping method with order total greater than or equal rule
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -49,7 +49,7 @@ Feature: Adding a new shipping method with rule
         And I add it
         Then the "FedEx Carrier" shipping method should be successfully created
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a new shipping method with order total less than or equal rule
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"

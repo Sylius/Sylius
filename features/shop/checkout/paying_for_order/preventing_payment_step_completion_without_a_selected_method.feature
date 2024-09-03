@@ -14,7 +14,7 @@ Feature: Preventing payment step completion without a selected method
     Scenario: Preventing payment step completion if there are no available methods
         Given I have product "PHP T-Shirt" in the cart
         When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed selecting "Free" shipping method
+        And I proceed with selecting "Free" shipping method
         And I do not select any payment method
         Then I should not be able to complete the payment step
         And there should be information about no payment methods available for my order
@@ -24,7 +24,7 @@ Feature: Preventing payment step completion without a selected method
         Given the store has "Cash on Delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
         When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed selecting "Free" shipping method
+        And I proceed with selecting "Free" shipping method
         And I do not select any payment method
         Then I should not be able to complete the payment step
         And there should be information about no payment methods available for my order
@@ -35,7 +35,7 @@ Feature: Preventing payment step completion without a selected method
         And this payment method is disabled
         And I have product "PHP T-Shirt" in the cart
         When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed selecting "Free" shipping method
+        And I proceed with selecting "Free" shipping method
         And I do not select any payment method
         Then I should not be able to complete the payment step
         And there should be information about no payment methods available for my order
@@ -47,7 +47,7 @@ Feature: Preventing payment step completion without a selected method
         And the store has "Cash on Delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
         When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed selecting "Free" shipping method
+        And I proceed with selecting "Free" shipping method
         And I do not select any payment method
         Then I should not be able to complete the payment step
         And there should be information about no payment methods available for my order

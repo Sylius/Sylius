@@ -19,7 +19,7 @@ Feature: Managing option values of a product option
         Then I should be notified that it has been successfully edited
         And this product option should have the "L" option value
 
-    @ui @javascript @todo
+    @api @ui @javascript
     Scenario: Removing an option value from an existing product option
         Given this product option has also the "L" option value with code "OV3"
         When I want to modify the "T-Shirt size" product option
@@ -28,7 +28,7 @@ Feature: Managing option values of a product option
         Then I should be notified that it has been successfully edited
         And this product option should not have the "L" option value
 
-    @ui @javascript @todo
+    @api @ui @javascript
     Scenario: Removing and adding a new option value to an existing product option
         When I want to modify the "T-Shirt size" product option
         And I delete the "M" option value of this product option

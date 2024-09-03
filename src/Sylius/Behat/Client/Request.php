@@ -95,11 +95,19 @@ final class Request implements RequestInterface
         $this->content[$key][] = $subResource;
     }
 
-    public function removeSubResource(string $subResource, string $id): void
+    public function removeSubResource(string $subResourceKey, string $value, string $key = '@id'): void
     {
-        foreach ($this->content[$subResource] as $key => $resource) {
-            if ($resource === $id) {
-                unset($this->content[$subResource][$key]);
+        foreach ($this->content[$subResourceKey] as $index => $objectOrIri) {
+            if (is_array($objectOrIri)) {
+                if (isset($objectOrIri[$key]) && $objectOrIri[$key] === $value) {
+                    unset($this->content[$subResourceKey][$index]);
+                }
+
+                continue;
+            }
+
+            if ($objectOrIri === $value) {
+                unset($this->content[$subResourceKey][$index]);
             }
         }
     }

@@ -26,11 +26,10 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
-final class CheckoutContext implements Context
+final readonly class CheckoutContext implements Context
 {
     public function __construct(
         private AddressPageInterface $addressPage,
@@ -50,28 +49,18 @@ final class CheckoutContext implements Context
     /**
      * @Given I was at the checkout summary step
      */
-    public function iWasAtTheCheckoutSummaryStep()
+    public function iWasAtTheCheckoutSummaryStep(): void
     {
         $this->addressingContext->iSpecifiedTheBillingAddress();
         $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
     }
 
     /**
-     * @Given I chose :shippingMethodname shipping method
-     * @When I proceed selecting :shippingMethodName shipping method
-     */
-    public function iProceedSelectingShippingMethod(string $shippingMethodName): void
-    {
-        $this->iProceedSelectingBillingCountryAndShippingMethod(null, $shippingMethodName);
-    }
-
-    /**
      * @Given I have proceeded selecting :paymentMethodName payment method
-     * @When I proceed selecting :paymentMethodName payment method
+     * @When I proceed with selecting :paymentMethodName payment method
      */
-    public function iProceedSelectingPaymentMethod($paymentMethodName)
+    public function iProceedSelectingPaymentMethod(string $paymentMethodName): void
     {
-        $this->iProceedSelectingBillingCountryAndShippingMethod();
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
     }
 
@@ -83,8 +72,11 @@ final class CheckoutContext implements Context
      */
     public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
     {
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
-        $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
+        $this->selectShippingPage->nextStep();
+
+        $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
+        $this->selectPaymentPage->nextStep();
     }
 
     /**
@@ -115,29 +107,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I proceed selecting ("[^"]+" as billing country) with "([^"]+)" method$/
-     */
-    public function iProceedSelectingBillingCountryAndShippingMethod(
-        ?CountryInterface $shippingCountry = null,
-        ?string $shippingMethodName = null,
-    ): void {
-        $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
-    }
-
-    /**
-     * @When /^I change shipping method to "([^"]*)"$/
-     */
-    public function iChangeShippingMethod(string $shippingMethodName): void
-    {
-        $this->paymentContext->iDecideToChangeMyShippingMethod();
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
-    }
-
-    /**
      * @When I go to the addressing step
      */
-    public function iGoToTheAddressingStep()
+    public function iGoToTheAddressingStep(): void
     {
         if ($this->selectShippingPage->isOpen()) {
             $this->selectShippingPage->changeAddressByStepLabel();
@@ -163,7 +135,7 @@ final class CheckoutContext implements Context
     /**
      * @When I go to the shipping step
      */
-    public function iGoToTheShippingStep()
+    public function iGoToTheShippingStep(): void
     {
         if ($this->selectPaymentPage->isOpen()) {
             $this->selectPaymentPage->changeShippingMethodByStepLabel();

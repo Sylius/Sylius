@@ -108,6 +108,34 @@
     +   private string $targetState = PaymentInterface::STATE_CART,
     )
 ```
+* The signature of method `applyToCollection` of the following classes has been changed:
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AvailableProductAssociationsInProductCollectionExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CountryCollectionExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CurrencyCollectionExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\EnabledProductVariantsExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByChannelExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByTaxonExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension`
+  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension`
+
+```php
+    public function applyToCollection(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+    -   string $operationName = null,
+    +   \ApiPlatform\Metadata\Operation $operation = null,
+        array $context = [],
+    ): void;
+```
 
 * The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
 
@@ -185,6 +213,24 @@
     * `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductAssociationRepository` extended class changed from
       `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
       `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
+
+* A new parameter has been added to specify the validation groups for a given zone.
+  If you have any custom validation groups for zone member, you need to add them to
+  your `config/packages/_sylius.yaml` file.
+  This is handled by `Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroup` and it resolves the groups
+  based on the type of the passed zone.
+
+  ```yaml
+  sylius_addressing:
+    zone_member:
+      validation_groups:
+        country:
+          - 'sylius'
+          - 'sylius_zone_member_country'
+        zone:
+          - 'sylius'
+          - 'sylius_zone_member_zone'
+  ```
 
 ## Frontend
 

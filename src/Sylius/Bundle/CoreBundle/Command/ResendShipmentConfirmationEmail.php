@@ -15,17 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 
 class ResendShipmentConfirmationEmail
 {
-    public function __construct(private ?int $shipmentId)
+    public function __construct(public readonly mixed $shipmentId)
     {
-    }
-
-    public function getShipmentId(): ?int
-    {
-        return $this->shipmentId;
-    }
-
-    public function setShipmentId(?int $shipmentId): void
-    {
-        $this->shipmentId = $shipmentId;
     }
 }

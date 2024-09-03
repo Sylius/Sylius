@@ -21,7 +21,7 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-final class AjaxTaxonsContext implements Context
+final readonly class AjaxTaxonsContext implements Context
 {
     public function __construct(
         private AbstractBrowser $client,

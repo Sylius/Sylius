@@ -12,7 +12,7 @@ Feature: Choosing province for country
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Address an order with country and its province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -21,7 +21,7 @@ Feature: Choosing province for country
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Address an order with country and its province and specify country without province for different billing address
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -31,7 +31,7 @@ Feature: Choosing province for country
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Address an order with country and its province and specify country with province for different billing address
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -42,7 +42,7 @@ Feature: Choosing province for country
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @api
+    @api @no-ui
     Scenario: Being unable to address an order with country without provinces and province from other country
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step

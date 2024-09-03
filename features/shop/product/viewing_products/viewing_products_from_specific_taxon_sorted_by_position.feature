@@ -24,7 +24,7 @@ Feature: Viewing products from specific taxon sorted by position
         Then I should see 3 products in the list
         And they should have order like "Old pug", "Young pug" and "Small pug"
 
-    @ui @api
+    @api @ui
     Scenario: Seeing sorted product on list from a child taxon code
         When I browse products from product taxon code "Soft Toys"
         Then I should see 3 products in the list

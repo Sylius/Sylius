@@ -16,7 +16,11 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, ResourceInterface
+interface OrderItemInterface extends
+    AdjustableInterface,
+    RecursiveAdjustmentsAwareInterface,
+    OrderAwareInterface,
+    ResourceInterface
 {
     public function getQuantity(): int;
 
@@ -55,13 +59,4 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function addUnit(OrderItemUnitInterface $itemUnit): void;
 
     public function removeUnit(OrderItemUnitInterface $itemUnit): void;
-
-    /**
-     * @return Collection<array-key, AdjustmentInterface>
-     */
-    public function getAdjustmentsRecursively(?string $type = null): Collection;
-
-    public function removeAdjustmentsRecursively(?string $type = null): void;
-
-    public function getAdjustmentsTotalRecursively(?string $type = null): int;
 }
