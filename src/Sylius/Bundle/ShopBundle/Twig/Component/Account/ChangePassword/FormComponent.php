@@ -13,22 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Account\ChangePassword;
 
-use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
-use Sylius\Bundle\UserBundle\UserEvents;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -46,37 +35,8 @@ class FormComponent
     /** @param class-string $formClass */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
-        private readonly RouterInterface $router,
-        private readonly ObjectManager $manager,
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly TokenStorageInterface $tokenStorage,
-        private readonly RequestStack $requestStack,
         private readonly string $formClass,
-        private readonly string $redirectRouteName,
     ) {
-    }
-
-    #[LiveAction]
-    public function save(): RedirectResponse
-    {
-        $this->submitForm();
-
-        /** @var UserInterface $user */
-        $user = $this->tokenStorage->getToken()->getUser();
-        $request = $this->requestStack->getCurrentRequest();
-
-        $user->setPlainPassword($this->formValues['newPassword']['first']);
-
-        $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::PRE_PASSWORD_CHANGE);
-
-        $this->manager->flush();
-        FlashBagProvider::getFlashBag($this->requestStack)
-            ->add('success', 'sylius.user.change_password')
-        ;
-
-        $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_CHANGE);
-
-        return new RedirectResponse($this->router->generate($this->redirectRouteName));
     }
 
     protected function instantiateForm(): FormInterface
