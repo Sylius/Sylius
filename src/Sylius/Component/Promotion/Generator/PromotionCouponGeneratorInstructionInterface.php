@@ -32,9 +32,6 @@ interface PromotionCouponGeneratorInstructionInterface extends ReadablePromotion
 
     public function setSuffix(?string $suffix): void;
 
-    /**
-     * @param \DateTimeInterface $expiresAt
-     */
     public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
     public function setUsageLimit(int $usageLimit): void;
