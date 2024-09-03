@@ -31,7 +31,7 @@
         "php": "^8.2",
         "behat/transliterator": "^1.3",
         "sylius/attribute": "^2.0",
-        "sylius/resource": "^1.10",
+        "sylius/resource": "^1.10 || dev-symfony-7",
         "symfony/polyfill-iconv": "^1.28",
         "webmozart/assert": "^1.9"
     },
@@ -49,6 +49,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {

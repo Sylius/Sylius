@@ -76,7 +76,7 @@ final class CreateAdminUserCommand extends Command
         } catch (HandlerFailedException $exception) {
             $this->io->error(
                 $exception
-                ->getNestedExceptionOfClass(CreateAdminUserFailedException::class)[0]
+                ->getWrappedExceptions(CreateAdminUserFailedException::class)[0]
                 ->getMessage(),
             );
 

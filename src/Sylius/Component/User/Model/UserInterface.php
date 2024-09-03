@@ -17,18 +17,13 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\Encoder\EncoderAwareInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
 
 interface UserInterface extends
     AdvancedUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
     TimestampableInterface,
-    ToggleableInterface,
-    EncoderAwareInterface,
-    PasswordHasherAwareInterface
+    ToggleableInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 
@@ -42,6 +37,8 @@ interface UserInterface extends
     public function getEmailCanonical(): ?string;
 
     public function setEmailCanonical(?string $emailCanonical): void;
+
+    public function getUsername(): ?string;
 
     public function setUsername(?string $username): void;
 
@@ -108,8 +105,6 @@ interface UserInterface extends
     public function getOAuthAccount(string $provider): ?UserOAuthInterface;
 
     public function addOAuthAccount(UserOAuthInterface $oauth): void;
-
-    public function setEncoderName(?string $encoderName): void;
 
     public function __serialize(): array;
 
