@@ -35,7 +35,6 @@ final readonly class CheckoutShippingContext implements Context
      * @Given I completed the shipping step with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
-     * @When I proceed with selecting :shippingMethodName shipping method
      */
     public function iHaveProceededWithSelectingShippingMethod(string $shippingMethodName): void
     {
@@ -48,16 +47,9 @@ final readonly class CheckoutShippingContext implements Context
     }
 
     /**
-     * @When I change shipping method to :shippingMethodName
-     */
-    public function iChangeShippingMethodTo(string $shippingMethodName): void
-    {
-        $this->iSelectShippingMethod($shippingMethodName);
-    }
-
-    /**
      * @Given I have selected :shippingMethodName shipping method
      * @When I select :shippingMethodName shipping method
+     * @When I change shipping method to :shippingMethodName
      */
     public function iSelectShippingMethod(string $shippingMethodName): void
     {
@@ -75,6 +67,7 @@ final readonly class CheckoutShippingContext implements Context
     /**
      * @When I complete the shipping step
      * @When I try to complete the shipping step
+     * @When I complete the shipping step with first shipping method
      */
     public function iCompleteTheShippingStep(): void
     {

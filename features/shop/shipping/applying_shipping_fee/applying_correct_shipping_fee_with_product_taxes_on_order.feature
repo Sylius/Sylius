@@ -35,7 +35,7 @@ Feature: Apply correct shipping fee with product taxes on order
     Scenario: Proper shipping fee, tax and products' taxes after addressing
         Given I have 3 products "PHP T-Shirt" in the cart
         When I proceed with selecting "Germany" as billing country
-        And I proceed with selecting "FedEx" shipping method
+        And I proceed with "FedEx" shipping method
         Then my cart total should be "$352.00"
         And my cart taxes should be "$32.00"
         And my cart shipping total should be "$22.00"
