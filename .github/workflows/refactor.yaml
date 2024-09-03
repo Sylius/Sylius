@@ -25,10 +25,10 @@ jobs:
             matrix:
                 include:
                     -
-                        branch: "1.12"
-                        php: "8.0"
-                    -
                         branch: "1.13"
+                        php: "8.1"
+                    -
+                        branch: "1.14"
                         php: "8.1"
                     -
                         branch: "2.0"
