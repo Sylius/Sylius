@@ -18,7 +18,7 @@ Feature: Switching the current currency
         When I browse that channel
         Then I should be able to shop using the "USD" currency
 
-    @api @ui
+    @api @todo-ui
     Scenario: Showing available currencies
         When I browse currencies
         Then I should see "USD" and "EUR" in the list

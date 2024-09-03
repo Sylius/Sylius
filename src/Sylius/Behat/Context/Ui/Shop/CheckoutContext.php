@@ -61,6 +61,8 @@ final readonly class CheckoutContext implements Context
      */
     public function iProceedSelectingPaymentMethod(string $paymentMethodName): void
     {
+        $this->addressingContext->iSpecifiedTheBillingAddress();
+        $this->shippingContext->iCompleteTheShippingStep();
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
     }
 
@@ -96,14 +98,26 @@ final readonly class CheckoutContext implements Context
 
     /**
      * @Given I have proceeded through checkout process with :shippingMethod shipping method
+     * @When I proceed through checkout with :shippingMethod shipping method
      */
     public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->addressingContext->iProceedSelectingBillingCountry();
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod->getName());
-        $this->paymentContext->iCompleteThePaymentStep();
+        $this->shippingContext->iHaveProceededWithSelectingShippingMethod($shippingMethod->getName());
+        if ($this->selectPaymentPage->isOpen()) {
+            $this->paymentContext->iCompleteThePaymentStep();
+        }
 
         $this->sharedStorage->set('shipping_method', $shippingMethod);
+    }
+
+    /**
+     * @When I proceed with selecting :shippingMethodName shipping method
+     */
+    public function iProceedWithSelectingShippingMethod(string $shippingMethodName): void
+    {
+        $this->addressingContext->iProceedSelectingBillingCountry();
+        $this->shippingContext->iHaveProceededWithSelectingShippingMethod($shippingMethodName);
     }
 
     /**
