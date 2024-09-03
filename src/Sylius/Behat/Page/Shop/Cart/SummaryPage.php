@@ -131,6 +131,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
         }
 
         $this->getElement('coupon_field')->setValue($couponCode);
+        $this->getElement('apply_coupon_button')->press();
         $this->waitForComponentsUpdate();
     }
 
