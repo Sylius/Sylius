@@ -51,10 +51,10 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
+     * @Given the products are already sorted :sortType by name
      * @When I start sorting products by name
      * @When I sort the products :sortType by name
      * @When I switch the way products are sorted :sortType by name
-     * @Given the products are already sorted :sortType by name
      */
     public function iStartSortingProductsByName(string $sortType = 'ascending'): void
     {

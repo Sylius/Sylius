@@ -30,7 +30,6 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -143,9 +142,9 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given /^the (?:customer|visitor) has specified the email as "([^"]+)"$/
      * @When I specify the email as :email
      * @When /^the (?:customer|visitor) specify the email as "([^"]+)"$/
-     * @Given /^the (?:customer|visitor) has specified the email as "([^"]+)"$/
      */
     public function iSpecifyTheEmailAs(?string $email): void
     {
@@ -153,11 +152,11 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify(?: the| different) billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^the visitor changes the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
     {
@@ -293,10 +292,10 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given /^the (?:customer|visitor) has completed the addressing step$/
      * @When I complete the addressing step
      * @When I try to complete the addressing step
      * @When /^the (?:customer|visitor) completes the addressing step$/
-     * @Given /^the (?:customer|visitor) has completed the addressing step$/
      * @When the visitor try to complete the addressing step in the customer cart
      */
     public function iCompleteTheAddressingStep(): void
@@ -384,14 +383,14 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I completed the shipping step with :shippingMethod shipping method
+     * @Given /^the (?:visitor|customer) has proceeded ("[^"]+" shipping method)$/
+     * @Given I chose :shippingMethod shipping method
      * @When I proceed with :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
      * @When /^the (?:visitor|customer) proceed with ("[^"]+" shipping method)$/
-     * @Given /^the (?:visitor|customer) has proceeded ("[^"]+" shipping method)$/
      * @When /^the visitor try to proceed with ("[^"]+" shipping method) in the customer cart$/
      * @When I try to change shipping method to :shippingMethod
-     * @Given I proceed with selecting :shippingMethod shipping method
-     * @Given I chose :shippingMethod shipping method
+     * @When I proceed with selecting :shippingMethod shipping method
      * @When I change shipping method to :shippingMethod
      * @When I have proceeded selecting :shippingMethod shipping method
      */
@@ -502,10 +501,10 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I completed the payment step with :paymentMethod payment method
+     * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
      * @When I choose :paymentMethod payment method
      * @When I select :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
-     * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
      * @When I try to change payment method to :paymentMethod payment
      * @When I change payment method to :paymentMethod after checkout
      * @When I retry the payment with :paymentMethod payment method

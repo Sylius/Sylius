@@ -270,9 +270,9 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Given the payment methods are already sorted by code
      * @When I start sorting payment methods by code
      * @When I switch the way payment methods are sorted to :sortType by code
-     * @Given the payment methods are already sorted by code
      */
     public function iSortShippingMethodsByCode(string $sortType = 'ascending'): void
     {
