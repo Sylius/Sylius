@@ -292,13 +292,7 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Account\ChangePassword\FormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument type="service" id="router.default" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="request_stack" />
             <argument>Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType</argument>
-            <argument>sylius_shop_account_dashboard</argument>
 
             <tag
                 name="sylius.live_component"
