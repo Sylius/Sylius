@@ -27,7 +27,7 @@ trigger_deprecation(
     'sylius/api-bundle',
     '1.14',
     'The "%s" class is deprecated and will be removed in Sylius 2.0. Starting with this version, promotion coupon collection will be filtered by promotion code, using API Platform search filter.',
-    PromotionCouponPromotionFilter::class
+    PromotionCouponPromotionFilter::class,
 );
 
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
