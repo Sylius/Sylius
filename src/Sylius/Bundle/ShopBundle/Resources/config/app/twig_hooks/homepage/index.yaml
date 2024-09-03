@@ -9,6 +9,7 @@ twig_hooks:
                     limit: 4
                 configuration:
                     title: 'sylius.homepage.latest_deals'
+                    test_attribute: 'latest-deals'
             new_collection:
                 template: '@SyliusShop/homepage/new_collection.html.twig'
             latest_products:
