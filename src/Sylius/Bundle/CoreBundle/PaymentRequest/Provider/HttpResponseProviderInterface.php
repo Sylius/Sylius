@@ -19,13 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface HttpResponseProviderInterface
 {
-    public function getResponse(
-        RequestConfiguration $requestConfiguration,
-        PaymentRequestInterface $paymentRequest,
-    ): Response;
-
     public function supports(
         RequestConfiguration $requestConfiguration,
         PaymentRequestInterface $paymentRequest,
     ): bool;
+
+    public function getResponse(
+        RequestConfiguration $requestConfiguration,
+        PaymentRequestInterface $paymentRequest,
+    ): Response;
 }

@@ -18,5 +18,5 @@ interface ServiceProviderAwareProviderInterface extends HttpResponseProviderInte
     public function getHttpResponseProvider(string $index): ?HttpResponseProviderInterface;
 
     /** @return string[] */
-    public function getProviderIndex(): array;
+    public function getProviderIndexes(): array;
 }
