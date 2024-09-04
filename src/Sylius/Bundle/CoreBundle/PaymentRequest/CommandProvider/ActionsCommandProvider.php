@@ -38,7 +38,7 @@ final class ActionsCommandProvider implements ServiceProviderAwareCommandProvide
     public function provide(PaymentRequestInterface $paymentRequest): object
     {
         $action = $paymentRequest->getAction();
-        $commandProvider = $this->locator->get($action);
+        $commandProvider = $this->getCommandProvider($action);
         if (null === $commandProvider) {
             throw new PaymentRequestNotSupportedException(sprintf(
                 'No payment request command provider supported for this action "%s".',
