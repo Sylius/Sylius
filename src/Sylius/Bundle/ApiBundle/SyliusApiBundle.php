@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle;
 
-use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\ExtractorMergingCompilerPass;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\FlattenExceptionNormalizerDecoratorCompilerPass;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\LegacyErrorHandlingCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,6 +24,5 @@ final class SyliusApiBundle extends Bundle
     {
         $container->addCompilerPass(new FlattenExceptionNormalizerDecoratorCompilerPass());
         $container->addCompilerPass(new LegacyErrorHandlingCompilerPass());
-        $container->addCompilerPass(new ExtractorMergingCompilerPass());
     }
 }

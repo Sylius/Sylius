@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Api\IriConverterInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -31,6 +33,7 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
     public function __construct(
         private readonly ProductVariantResolverInterface $defaultProductVariantResolver,
         private readonly IriConverterInterface $iriConverter,
+        private readonly SectionProviderInterface $sectionProvider,
     ) {
     }
 
@@ -38,6 +41,7 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
     {
         Assert::isInstanceOf($object, ProductInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
+        Assert::isInstanceOf($this->sectionProvider->getSection(), ShopApiSection::class);
 
         $context[self::ALREADY_CALLED] = true;
 
@@ -58,23 +62,10 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
 
     public function supportsNormalization($data, $format = null, $context = []): bool
     {
-        if (isset($context[self::ALREADY_CALLED])) {
-            return false;
-        }
-
-        return $data instanceof ProductInterface && $this->isShopOperation($context);
-    }
-
-    private function isShopOperation(array $context): bool
-    {
-        if (isset($context['root_operation_name'])) {
-            return \str_starts_with($context['root_operation_name'], '_api_/shop');
-        }
-
-        if (isset($context['operation_name'])) {
-            return \str_starts_with($context['operation_name'], '_api_/shop');
-        }
-
-        return false;
+        return
+            !isset($context[self::ALREADY_CALLED]) &&
+            $data instanceof ProductInterface &&
+            $this->sectionProvider->getSection() instanceof ShopApiSection
+        ;
     }
 }
