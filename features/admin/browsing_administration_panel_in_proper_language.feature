@@ -11,7 +11,7 @@ Feature: Browsing administration panel in a proper locale
         And I am logged in as an administrator
         And I am using "Polish (Poland)" locale for my panel
 
-    @todo-api @ui
+    @api @ui
     Scenario: Getting errors in my language
         Given I am editing my details
         When I change its email to "wrong-email"
