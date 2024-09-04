@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Controller;
+namespace Sylius\Bundle\ShopBundle\Provider;
 
 use Payum\Core\Payum;
 use Payum\Core\Request\Generic;
@@ -19,43 +19,51 @@ use Payum\Core\Request\GetStatusInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Bundle\ShopBundle\Handler\PaymentStatusFlashHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-final class PayumController
+final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInterface
 {
     public function __construct(
         private Payum $payum,
         private RouterInterface $router,
         private GetStatusFactoryInterface $getStatusRequestFactory,
         private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory,
+        private PaymentStatusFlashHandlerInterface $paymentStatusFlashHandler,
     ) {
     }
 
-    public function afterCaptureAction(Request $request): Response
+    public function getResponse(RequestConfiguration $requestConfiguration): Response
     {
-        $token = $this->getHttpRequestVerifier()->verify($request);
+        $token = $this->getHttpRequestVerifier()->verify($requestConfiguration->getRequest());
 
-        /** @var Generic&GetStatusInterface $status */
+        /** @var GetStatusInterface&Generic $status */
         $status = $this->getStatusRequestFactory->createNewWithModel($token);
         $this->payum->getGateway($token->getGatewayName())->execute($status);
 
         $resolveNextRoute = $this->resolveNextRouteRequestFactory->createNewWithModel($status->getFirstModel());
         $this->payum->getGateway($token->getGatewayName())->execute($resolveNextRoute);
 
+        $this->paymentStatusFlashHandler->handle($requestConfiguration, (string) $status->getValue());
+
+        $url = $this->router->generate(
+            $resolveNextRoute->getRouteName(),
+            $resolveNextRoute->getRouteParameters()
+        );
+
         $this->getHttpRequestVerifier()->invalidate($token);
 
-        if (PaymentInterface::STATE_NEW !== $status->getValue()) {
-            /** @var FlashBagInterface $flashBag */
-            $flashBag = $request->getSession()->getBag('flashes');
-            $flashBag->add('info', sprintf('sylius.payment.%s', $status->getValue()));
-        }
+        return new RedirectResponse($url);
+    }
+    public function supports(RequestConfiguration $requestConfiguration): bool
+    {
+        $request = $requestConfiguration->getRequest();
+        $hash = $request->attributes->get('payum_token', $request->get('payum_token', false));
 
-        return new RedirectResponse($this->router->generate($resolveNextRoute->getRouteName(), $resolveNextRoute->getRouteParameters()));
+		return false !== $hash;
     }
 
     private function getHttpRequestVerifier(): HttpRequestVerifierInterface
