@@ -1,14 +1,12 @@
 <?php
 
 /*
- * This file is part of the Flux:: shop sources.
- * COPYRIGHT (C) 2024, HARMAN INTERNATIONAL. ALL RIGHTS RESERVED.
- * -----------------------------------------------------------------------------
- * CONFIDENTIAL: NO PART OF THIS DOCUMENT MAY BE REPRODUCED IN ANY FORM WITHOUT THE
- * EXPRESSED WRITTEN PERMISSION OF HARMAN INTERNATIONAL.
- * DO NOT DISCLOSE ANY INFORMATION CONTAINED IN THIS DOCUMENT TO ANY THIRD-PARTY
- * WITHOUT THE PRIOR WRITTEN CONSENT OF HARMAN INTERNATIONAL.
+ * This file is part of the Sylius package.
  *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
