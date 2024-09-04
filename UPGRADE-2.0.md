@@ -1,12 +1,4 @@
-# UPGRADE FROM `1.13` TO `2.0`
-
-1. Non-prefix serialization groups in Sylius resources have been removed. 
-   If you have extended any of them, you must prefix them with `sylius:`, for example:
-
-    ```diff
-    - #[Groups(['admin:product:index'])]
-    + #[Groups(['sylius:admin:product:index'])]
-    ```
+# UPGRADE FROM `1.14` TO `2.0`
 
 ## Configuration
 
@@ -107,34 +99,6 @@
         private array $unprocessableOrderStates,
     +   private string $targetState = PaymentInterface::STATE_CART,
     )
-```
-* The signature of method `applyToCollection` of the following classes has been changed:
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AvailableProductAssociationsInProductCollectionExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CountryCollectionExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CurrencyCollectionExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\EnabledProductVariantsExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByChannelExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByTaxonExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension`
-  * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension`
-
-```php
-    public function applyToCollection(
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        string $resourceClass,
-    -   string $operationName = null,
-    +   \ApiPlatform\Metadata\Operation $operation = null,
-        array $context = [],
-    ): void;
 ```
 
 * The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
