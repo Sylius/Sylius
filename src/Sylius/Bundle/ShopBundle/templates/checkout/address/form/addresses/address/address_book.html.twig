@@ -3,7 +3,7 @@
 {% if addresses is not empty %}
     <div {{ attributes }} class="my-3">
         <div>
-            <select class="form-control" data-model="address" {{ sylius_test_html_attribute('address-book') }}>
+            <select class="form-control" data-model="addressId" {{ sylius_test_html_attribute('address-book') }}>
                 <option value="" selected hidden>{{ 'sylius.ui.select_address_from_book'|trans }}</option>
                 {% for address in addresses %}
                     <option value="{{ address.id }}">

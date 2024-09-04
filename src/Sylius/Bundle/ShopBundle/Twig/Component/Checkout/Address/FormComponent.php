@@ -65,7 +65,7 @@ class FormComponent
         }
     }
 
-    #[LiveListener('sylius:shop:address-updated')]
+    #[LiveListener(AddressBookComponent::SYLIUS_SHOP_ADDRESS_UPDATED)]
     public function addressFieldUpdated(#[LiveArg] mixed $addressId, #[LiveArg] string $field): void
     {
         $address = $this->addressRepository->find($addressId);

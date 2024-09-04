@@ -30,6 +30,8 @@ class AddressBookComponent
     use ComponentToolsTrait;
     use HookableLiveComponentTrait;
 
+    public const SYLIUS_SHOP_ADDRESS_UPDATED = 'sylius:shop:address-updated';
+
     #[LiveProp(writable: true, onUpdated: 'addressUpdated')]
     public mixed $addressId = null;
 
@@ -52,6 +54,6 @@ class AddressBookComponent
 
     public function addressUpdated(): void
     {
-        $this->emit('sylius:shop:address-updated', ['addressId' => $this->addressId, 'field' => $this->field]);
+        $this->emit(self::SYLIUS_SHOP_ADDRESS_UPDATED, ['addressId' => $this->addressId, 'field' => $this->field]);
     }
 }
