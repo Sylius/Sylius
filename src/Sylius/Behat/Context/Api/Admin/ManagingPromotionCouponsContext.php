@@ -21,7 +21,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
@@ -36,7 +36,7 @@ final class ManagingPromotionCouponsContext implements Context
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
         private ResponseCheckerInterface $responseChecker,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -49,8 +49,21 @@ final class ManagingPromotionCouponsContext implements Context
     {
         $this->client->index(Resources::PROMOTION_COUPONS);
         $this->client->addFilter(
-            'promotion',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
+            'promotion.code',
+            $promotion->getCode(),
+        );
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->client->index(Resources::PROMOTION_COUPONS);
+        $this->client->addFilter(
+            'code',
+            $phrase,
         );
         $this->client->filter();
     }
@@ -71,7 +84,7 @@ final class ManagingPromotionCouponsContext implements Context
         $this->client->buildCreateRequest(Resources::PROMOTION_COUPONS);
         $this->client->addRequestData(
             'promotion',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($promotion, 'admin'),
         );
     }
 
@@ -630,6 +643,26 @@ final class ManagingPromotionCouponsContext implements Context
             $used,
             sprintf('The promotion coupon %s has been used %s times', $promotionCoupon->getCode(), $returnedPromotionCoupon['used']),
         );
+    }
+
+    /**
+     * @Then I should see a single promotion coupon in the list
+     */
+    public function iShouldSeeASinglePromotionCouponInTheList(): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
+    }
+
+    /**
+     * @Then I should see the promotion coupon :coupon in the list
+     */
+    public function iShouldSeeThePromotionCouponInTheList(PromotionCouponInterface $coupon): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->getLastResponse(),
+            'code',
+            $coupon->getCode(),
+        ));
     }
 
     private function sortBy(string $order, string $field): void

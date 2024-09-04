@@ -14,7 +14,7 @@ Feature: Editing a zone
         And the store has a zone "South America" with code "SA"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing a country from a zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "France" country member
@@ -25,7 +25,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "France" country member
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing and adding countries to a zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "Belgium", "France" and "Germany" country members
@@ -36,7 +36,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "France" country member
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing a province from a zone
         Given the store has a zone "United States" with code "USA"
         And it has the "Alabama" province member
@@ -47,7 +47,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "Alabama" province member
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing a zone from a zone
         Given the store has a zone "America" with code "AM"
         And it has the zone named "North America"
@@ -58,7 +58,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "South America" zone member
 
-    @ui @api
+    @api @ui
     Scenario: Renaming a zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "France" country member

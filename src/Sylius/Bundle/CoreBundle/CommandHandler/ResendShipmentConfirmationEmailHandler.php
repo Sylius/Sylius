@@ -35,9 +35,9 @@ final class ResendShipmentConfirmationEmailHandler
     public function __invoke(ResendShipmentConfirmationEmail $resendShipmentConfirmationEmail): void
     {
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->find($resendShipmentConfirmationEmail->getShipmentId());
+        $shipment = $this->shipmentRepository->find($resendShipmentConfirmationEmail->shipmentId);
         if (null === $shipment) {
-            throw new NotFoundHttpException(sprintf('Shipment with id "%s" does not exist.', $resendShipmentConfirmationEmail->getShipmentId()));
+            throw new NotFoundHttpException(sprintf('Shipment with id "%s" does not exist.', $resendShipmentConfirmationEmail->shipmentId));
         }
 
         $this->shipmentEmailManager->resendConfirmationEmail($shipment);

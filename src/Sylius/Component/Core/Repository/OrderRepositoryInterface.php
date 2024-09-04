@@ -113,4 +113,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
         \DateTimeInterface $endDate,
         array $groupBy,
     ): array;
+
+    public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface;
 }

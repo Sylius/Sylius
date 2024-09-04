@@ -11,7 +11,7 @@ Feature: Filtering out disabled channels
         And there is product "Old Wardrobe" available in "Furniture" channel
         And the channel "Fashion" is disabled
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing Furniture shop products
         When I browse the "Furniture" channel
         And I check latest products

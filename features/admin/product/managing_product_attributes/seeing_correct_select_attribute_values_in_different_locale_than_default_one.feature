@@ -8,7 +8,7 @@ Feature: Seeing correct select attribute values in different locale than default
         Given the store is available in "French (France)"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing correct attribute values in different locale than default one
         When I want to create a new select product attribute
         And I specify its code as "mug_material"

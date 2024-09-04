@@ -9,7 +9,7 @@ Feature: Changing associations of an existing product
         And the store has "LG G3", "LG headphones" and "LG earphones" products
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Changing associated products of a product association
         Given the product "LG G3" has an association "Accessories" with product "LG headphones"
         When I want to modify the "LG G3" product
@@ -30,7 +30,7 @@ Feature: Changing associations of an existing product
         When I change this product association's product to the "LG earphones" product
         Then this association should only have product "LG earphones"
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Removing an associated product of a product association
         Given the product "LG G3" has an association "Accessories" with products "LG headphones" and "LG earphones"
         When I want to modify the "LG G3" product

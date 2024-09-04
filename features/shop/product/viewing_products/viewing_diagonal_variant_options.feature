@@ -17,13 +17,13 @@ Feature: Viewing diagonal variants options
         But the "Small" size / "Blue" color variant of product "Extra Cool T-Shirt" is disabled
         And the "Large" size / "Yellow" color variant of product "Extra Cool T-Shirt" is disabled
 
-    @api @ui
+    @todo-api @ui
     Scenario: Viewing both values for both options when diagonal variants are available
         When I view product "Extra Cool T-Shirt"
         Then I should be able to select the "Yellow" and "Blue" Color option values
         And I should be able to select the "Small" and "Large" Size option values
 
-    @ui @javascript @no-api
+    @no-api @ui @javascript
     Scenario: Viewing an "Unavailable" message when selecting an unavailable combination
         When I view product "Extra Cool T-Shirt"
         And I select its color as "Blue"

@@ -8,7 +8,7 @@ Feature: Adding product review as a guest
         Given the store operates on a single channel in "United States"
         And the store has a product "Necronomicon"
 
-    @ui @api
+    @api @ui
     Scenario: Adding product reviews as a guest
         When I want to review product "Necronomicon"
         And I leave a comment "I'm never gonna read this terrible book again.", titled "Never again" as "castiel@heaven.com"

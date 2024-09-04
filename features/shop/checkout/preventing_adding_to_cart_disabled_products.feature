@@ -11,14 +11,14 @@ Feature: Preventing adding to cart disabled products
         And this product has "Small", "Medium" and "Large" variants
         And I am a logged in customer
 
-    @api
+    @api @no-ui
     Scenario: Preventing customer from adding disabled product
         Given the product "PHP T-Shirt" has been disabled
         When I pick up my cart
         And I try to add product "PHP T-Shirt" to the cart
         Then I should be informed that product "PHP T-Shirt" does not exist
 
-    @api
+    @api @no-ui
     Scenario: Preventing customer from adding disabled variant
         Given the "Large" product variant is disabled
         When I pick up my cart

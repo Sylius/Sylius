@@ -13,8 +13,8 @@
             "used": 1,
             "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
             "expiresAt": null,
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         },
         {
             "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ2",
@@ -25,9 +25,9 @@
             "usageLimit": null,
             "used": 0,
             "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
-            "expiresAt": @date@,
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "expiresAt": "@date@",
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         }
     ],
     "hydra:totalItems": 2

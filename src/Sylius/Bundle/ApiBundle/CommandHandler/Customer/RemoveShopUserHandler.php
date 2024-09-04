@@ -18,7 +18,7 @@ use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-final class RemoveShopUserHandler
+final readonly class RemoveShopUserHandler
 {
     /**
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
@@ -30,7 +30,7 @@ final class RemoveShopUserHandler
 
     public function __invoke(RemoveShopUser $removeShopUser): void
     {
-        $shopUser = $this->shopUserRepository->find($removeShopUser->getShopUserId());
+        $shopUser = $this->shopUserRepository->find($removeShopUser->shopUserId);
 
         if (null === $shopUser) {
             throw new UserNotFoundException();

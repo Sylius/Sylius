@@ -23,9 +23,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final class ResendOrderConfirmationEmailHandler
 {
-    /**
-     * @param RepositoryInterface<OrderInterface> $orderRepository
-     */
+    /** @param RepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private OrderEmailManagerInterface $orderEmailManager,
         private RepositoryInterface $orderRepository,
@@ -35,9 +33,9 @@ final class ResendOrderConfirmationEmailHandler
     public function __invoke(ResendOrderConfirmationEmail $resendOrderConfirmation): void
     {
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $resendOrderConfirmation->getOrderTokenValue()]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $resendOrderConfirmation->orderTokenValue]);
         if ($order === null) {
-            throw new NotFoundHttpException(sprintf('The order with tokenValue %s has not been found', $resendOrderConfirmation->getOrderTokenValue()));
+            throw new NotFoundHttpException(sprintf('The order with tokenValue %s has not been found', $resendOrderConfirmation->orderTokenValue));
         }
 
         $this->orderEmailManager->resendConfirmationEmail($order);

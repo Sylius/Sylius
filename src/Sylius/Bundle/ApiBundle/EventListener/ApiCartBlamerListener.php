@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
-final class ApiCartBlamerListener
+final readonly class ApiCartBlamerListener
 {
     public function __construct(
         private CartContextInterface $cartContext,

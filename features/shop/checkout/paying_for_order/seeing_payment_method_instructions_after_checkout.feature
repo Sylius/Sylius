@@ -11,10 +11,10 @@ Feature: Seeing payment method instructions after checkout
         And the store has a payment method "Offline" with a code "OFFLINE"
         And it has instructions "Account number: 0000 1111 2222 3333"
 
-    @ui @api
+    @api @ui
     Scenario: Being informed about payment instructions
         Given I am a logged in customer
         And I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "Offline" payment method
+        When I proceed with selecting "Offline" payment method
         And I confirm my order
         Then I should be informed with "Offline" payment method instructions

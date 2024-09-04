@@ -9,7 +9,7 @@ Feature: Viewing a product's image on a product details page
         And the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "main" type
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Viewing a product's image on a product details page
         When I check this product's details
         Then I should see the product name "Lamborghini Gallardo Model"
