@@ -1,4 +1,12 @@
-# UPGRADE FROM `1.13` TO `2.0`
+# UPGRADE FROM `1.14` TO `2.0`
+
+* Non-prefix serialization groups in Sylius resources have been removed.
+   If you have extended any of them, you must prefix them with `sylius:`, for example:
+
+    ```diff
+    - #[Groups(['admin:product:index'])]
+    + #[Groups(['sylius:admin:product:index'])]
+    ```
 
 * API Platform has dropped `DataProviders` and `DataPersisters` in favor of `Providers` and `Processors`, respectively.
   Due to this change, Sylius custom `DataProviders` and `DataPersisters` have been adapted to the new API Platform interfaces
@@ -158,7 +166,7 @@ All the `setter` methods have been removed from the commands above and also ther
         }
     ```
 
-1. There has been introduced a new parameter:
+* There has been introduced a new parameter:
 
     ```yaml
     sylius_api:
@@ -168,3 +176,32 @@ All the `setter` methods have been removed from the commands above and also ther
     ```
 
     That avoids duplication of logic and is used in one `Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\NonArchivedExtension` rather than dedicated extensions for each entity.
+
+* The signature of method `applyToCollection` of the following classes has been changed:
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AvailableProductAssociationsInProductCollectionExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CountryCollectionExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CurrencyCollectionExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\EnabledProductVariantsExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByChannelExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByTaxonExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension`
+    * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension`
+
+```php
+    public function applyToCollection(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+    -   string $operationName = null,
+    +   \ApiPlatform\Metadata\Operation $operation = null,
+        array $context = [],
+    ): void;
+```
