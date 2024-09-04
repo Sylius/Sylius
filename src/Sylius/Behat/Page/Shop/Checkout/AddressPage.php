@@ -124,7 +124,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function selectShippingAddressProvince(string $province): void
     {
-        $this->waitForElement(5, 'shipping_country_province');
+        $this->waitForElementUpdate('form');
         $this->getElement('shipping_country_province')->selectOption($province);
     }
 
@@ -135,7 +135,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function selectBillingAddressProvince(string $province): void
     {
-        $this->waitForElement(5, 'billing_country_province');
+        $this->waitForElementUpdate('form');
         $this->getElement('billing_country_province')->selectOption($province);
     }
 
