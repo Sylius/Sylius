@@ -32,9 +32,15 @@
             <tag name="sylius.shop.provider.pay_response" priority="-200" />
         </service>
 
+        <service id="sylius.shop.provider.order_pay_final_url" class="Sylius\Bundle\ShopBundle\Provider\OrderPayFinalUrlProvider">
+            <argument type="service" id="router" />
+            <argument type="string">%sylius_shop.order_pay.final_route%</argument>
+            <argument type="string">%sylius_shop.order_pay.final_route_parameters%</argument>
+        </service>
+
         <service id="sylius.shop.provider.pay_response.no_payment" class="Sylius\Bundle\ShopBundle\Provider\NoPaymentPayResponseProvider">
             <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
-            <argument type="service" id="router" />
+            <argument type="service" id="sylius.shop.provider.order_pay_final_url" />
             <tag name="sylius.shop.provider.pay_response" priority="-100" />
         </service>
 
@@ -53,8 +59,19 @@
             <argument type="service" id="sylius.payment_request.provider.http_response.gateway_factory" />
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.shop.handler.payment_state_flash" />
-            <argument type="service" id="sylius.shop.resolver.after_pay_next_response" />
+            <argument type="service" id="sylius.shop.provider.order_pay_final_url" />
             <tag name="sylius.shop.provider.after_pay_response" priority="-100" />
+        </service>
+
+        <service id="sylius.shop.provider.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ActionsHttpResponseProvider">
+            <argument type="tagged_locator" tag="sylius.payment_request.http_response.provider.offline" index-by="action" />
+        </service>
+
+        <service id="sylius.payment_request.http_response.provider.offline.capture" class="Sylius\Bundle\ShopBundle\Provider\Offline\StatusHttpResponseProvider">
+            <argument type="service" id="router" />
+            <argument type="string">%sylius_shop.order_pay.final_route%</argument>
+            <argument type="string">%sylius_shop.order_pay.final_route_parameters%</argument>
+            <tag name="sylius.payment_request.http_response.provider.offline" action="status" />
         </service>
 
     </services>

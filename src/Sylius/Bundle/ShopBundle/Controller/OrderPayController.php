@@ -77,6 +77,6 @@ final class OrderPayController
             }
         }
 
-        throw new LogicException(sprintf('No "after pay response provider" available.'));
+        throw new LogicException('No "after pay response provider" available.');
     }
 }

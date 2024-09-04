@@ -17,10 +17,11 @@ use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInt
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ServiceProviderAwareProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ShopBundle\Handler\PaymentStateFlashHandlerInterface;
-use Sylius\Bundle\ShopBundle\Resolver\AfterPayNextResponseResolverInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
@@ -37,7 +38,7 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentStateFlashHandlerInterface $paymentStateFlashHandler,
-        private AfterPayNextResponseResolverInterface $afterPayNextResponseResolver,
+        private OrderPayFinalUrlProviderInterface $orderPayFinalUrlProvider,
     ) {
     }
 
@@ -60,9 +61,13 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
             return $this->httpResponseProvider->getResponse($requestConfiguration, $statusPaymentRequest);
         }
 
-        $this->paymentStateFlashHandler->handle($requestConfiguration, $paymentRequest->getPayment()->getState());
+        /** @var PaymentInterface $payment */
+        $payment = $paymentRequest->getPayment();
+        $this->paymentStateFlashHandler->handle($requestConfiguration, $payment->getState());
 
-        return $this->afterPayNextResponseResolver->getResponse($requestConfiguration, $statusPaymentRequest);
+        $url = $this->orderPayFinalUrlProvider->getUrl($payment);
+
+        return new RedirectResponse($url);
     }
 
     public function supports(RequestConfiguration $requestConfiguration): bool

@@ -66,6 +66,17 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('order_pay')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('final_route')
+                            ->defaultValue('sylius_shop_order_thank_you')
+                        ->end()
+                        ->arrayNode('final_route_parameters')
+                            ->addDefaultsIfNotSet()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

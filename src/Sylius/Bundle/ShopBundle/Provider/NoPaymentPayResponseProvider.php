@@ -18,13 +18,12 @@ use Sylius\Bundle\ShopBundle\Resolver\PaymentToPayResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
 
 final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
 {
     public function __construct(
         private PaymentToPayResolverInterface $paymentToPayResolver,
-        private RouterInterface $router,
+        private OrderPayFinalUrlProviderInterface $orderPayFinalUrlProvider,
     ) {
     }
 
@@ -32,7 +31,7 @@ final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
         RequestConfiguration $requestConfiguration,
         OrderInterface $order
     ): Response {
-        $url = $this->router->generate('sylius_shop_order_thank_you');
+        $url = $this->orderPayFinalUrlProvider->getUrl(null);
 
         return new RedirectResponse($url);
     }

@@ -41,6 +41,16 @@ final class SyliusShopExtension extends Extension
             'sylius_shop.product_grid.include_all_descendants',
             $config['product_grid']['include_all_descendants'],
         );
+
+        $container->setParameter(
+            'sylius_shop.order_pay.final_route',
+            $config['order_pay']['final_route'],
+        );
+        $container->setParameter(
+            'sylius_shop.order_pay.final_route_parameters',
+            $config['order_pay']['final_route_parameters'],
+        );
+
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
 
