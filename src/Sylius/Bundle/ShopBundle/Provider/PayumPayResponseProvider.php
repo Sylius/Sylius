@@ -99,12 +99,6 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
 
     private function getGatewayConfigFromPayment(PaymentInterface $payment): ?GatewayConfigInterface
     {
-        $paymentMethod = $payment->getMethod();
-        if (null === $paymentMethod) {
-            return null;
-        }
-
-        $gatewayConfig = $paymentMethod->getGatewayConfig();
-        return $gatewayConfig ?? null;
+        return $payment->getMethod()?->getGatewayConfig();
     }
 }
