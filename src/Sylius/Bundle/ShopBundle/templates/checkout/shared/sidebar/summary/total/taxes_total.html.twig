@@ -5,13 +5,13 @@
 {% set tax_excluded = order.getTaxExcludedTotal() %}
 
 <tr {% if tax_included and not tax_excluded %}class="disabled" {% endif %}>
-    <td>
+    <td class="pb-4">
         {{ 'sylius.ui.taxes_total'|trans }}:
         {% if tax_included %}
             <div class="text-body-tertiary"><small>({{ 'sylius.ui.included_in_price'|trans }})</small></div>
         {% endif %}
     </td>
-    <td class="text-end">
+    <td class="pb-4 text-end">
         {% if not tax_included and not tax_excluded %}
             <div>{{ money.convertAndFormat(0) }}</div>
         {% endif %}
