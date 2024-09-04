@@ -5,7 +5,7 @@
 {% set orderShippingPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderShippingPromotionAdjustment)) %}
 
 {% if not orderShippingPromotions is empty %}
-    <td colspan="3">
+    <td>
         {{ 'sylius.ui.shipping_total'|trans }}:
     </td>
     <td {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
@@ -18,7 +18,7 @@
         </span>
     </td>
 {% elseif order.shipments is not empty %}
-    <td class="text-end" colspan="3">
+    <td class="text-end">
         {{ 'sylius.ui.shipping_total'|trans }}:
     </td>
     <td class="text-end">
