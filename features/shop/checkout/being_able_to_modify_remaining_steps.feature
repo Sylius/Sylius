@@ -13,7 +13,7 @@ Feature: Changing checkout steps
         And the store allows paying "PayPal Express Checkout"
         And I am a logged in customer
 
-    @todo @ui @no-api
+    @no-api @ui @javascript
     Scenario: Changing address of my order
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

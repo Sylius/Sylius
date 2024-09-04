@@ -14,20 +14,20 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And I have product "The Pug Mug" in the cart
         And I switch to the "GBP" currency
 
-    @todo @ui @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Prices get updated on checkout's start
         When the exchange rate of "US Dollar" to "British Pound" is 2.0
         And I am at the checkout addressing step
         Then the subtotal of "The Pug Mug" item should be "£20.00"
 
-    @todo @ui @no-api
+    @no-api @ui @javascript
     Scenario: Prices get updated after the addressing step
         Given I am at the checkout addressing step
         When the exchange rate of "US Dollar" to "British Pound" is 5.0
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         Then the subtotal of "The Pug Mug" item should be "£50.00"
 
-    @todo @ui @no-api
+    @no-api @ui @javascript
     Scenario: Prices get updated on readdressing
         Given I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When the exchange rate of "US Dollar" to "British Pound" is 3.0
