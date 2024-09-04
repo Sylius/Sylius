@@ -25,8 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
-use function sprintf;
-
 final class PaymentRequestAfterPayResponseProvider implements AfterPayResponseProviderInterface
 {
     /**
