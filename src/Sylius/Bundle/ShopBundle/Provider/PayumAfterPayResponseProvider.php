@@ -20,7 +20,7 @@ use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ShopBundle\Handler\PaymentStatusFlashHandlerInterface;
+use Sylius\Bundle\ShopBundle\Handler\PaymentStateFlashHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
@@ -32,7 +32,7 @@ final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInt
         private RouterInterface $router,
         private GetStatusFactoryInterface $getStatusRequestFactory,
         private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory,
-        private PaymentStatusFlashHandlerInterface $paymentStatusFlashHandler,
+        private PaymentStateFlashHandlerInterface $paymentStatusFlashHandler,
     ) {
     }
 

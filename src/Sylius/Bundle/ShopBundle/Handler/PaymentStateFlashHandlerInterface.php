@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-interface PaymentStatusFlashHandlerInterface
+interface PaymentStateFlashHandlerInterface
 {
-    public function handle(RequestConfiguration $requestConfiguration, string $status): void;
+    public function handle(RequestConfiguration $requestConfiguration, string $state): void;
 }

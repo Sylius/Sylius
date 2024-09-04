@@ -17,15 +17,15 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
-final class PaymentStatusFlashHandler implements PaymentStatusFlashHandlerInterface
+final class PaymentStateFlashHandler implements PaymentStateFlashHandlerInterface
 {
-    public function handle(RequestConfiguration $requestConfiguration, string $status): void
+    public function handle(RequestConfiguration $requestConfiguration, string $state): void
     {
         $request = $requestConfiguration->getRequest();
-        if (PaymentInterface::STATE_NEW !== $status) {
+        if (PaymentInterface::STATE_NEW !== $state) {
             /** @var FlashBagInterface $flashBag */
             $flashBag = $request->getSession()->getBag('flashes');
-            $flashBag->add('info', sprintf('sylius.payment.%s', $status));
+            $flashBag->add('info', sprintf('sylius.payment.%s', $state));
         }
     }
 }

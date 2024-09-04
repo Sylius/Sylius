@@ -38,5 +38,24 @@
             <tag name="sylius.shop.provider.pay_response" priority="-100" />
         </service>
 
+        <service id="sylius.shop.provider.after_pay_response.payum" class="Sylius\Bundle\ShopBundle\Provider\PayumAfterPayResponseProvider">
+            <argument type="service" id="payum" />
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius.factory.payum_get_status_action" />
+            <argument type="service" id="sylius.factory.payum_resolve_next_route" />
+            <argument type="service" id="sylius.shop.handler.payment_state_flash" />
+            <tag name="sylius.shop.provider.after_pay_response" priority="-100" />
+        </service>
+
+        <service id="sylius.shop.provider.after_pay_response.payment_request" class="Sylius\Bundle\ShopBundle\Provider\PaymentRequestAfterPayResponseProvider">
+            <argument type="service" id="sylius.factory.payment_request" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface" />
+            <argument type="service" id="sylius.payment_request.provider.http_response.gateway_factory" />
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius.shop.handler.payment_state_flash" />
+            <argument type="service" id="sylius.shop.resolver.after_pay_response" />
+            <tag name="sylius.shop.provider.after_pay_response" priority="-100" />
+        </service>
+
     </services>
 </container>

@@ -17,13 +17,7 @@
 >
     <services>
 
-        <service id="sylius.shop.resolver.payment_to_pay" class="Sylius\Bundle\ShopBundle\Resolver\PaymentToPayResolver">
-            <argument type="constant">Sylius\Component\Payment\Model\PaymentInterface::STATE_NEW</argument>
-        </service>
-
-        <service id="sylius.shop.resolver.after_pay_response" class="Sylius\Bundle\ShopBundle\Resolver\AfterPayNextResponseResolver">
-            <argument type="service" id="router" />
-        </service>
+        <service id="sylius.shop.handler.payment_state_flash" class="Sylius\Bundle\ShopBundle\Handler\PaymentStateFlashHandler" />
 
     </services>
 </container>
