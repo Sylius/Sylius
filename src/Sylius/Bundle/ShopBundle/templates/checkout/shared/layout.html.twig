@@ -1,0 +1,26 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% block body %}
+    <div class="d-flex flex-column min-vh-100 overflow-hidden">
+        <div class="bg-white border-bottom py-5">
+            <div class="container d-flex">
+                {% hook 'sylius_shop.checkout.shared.header' %}
+            </div>
+        </div>
+        <div class="flex-grow-1 d-flex align-items-stretch">
+            <div class="container">
+                <div class="row h-100">
+                    <div class="col py-5 pe-lg-6">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                    {% block sidebar %}
+                        <div class="col-12 col-lg-5 py-5 ps-lg-6 position-relative checkout-sidebar">
+                            {% hook 'sylius_shop.checkout.shared.sidebar' with { order } %}
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

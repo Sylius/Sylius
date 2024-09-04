@@ -7,7 +7,7 @@ sylius_shop_order_thank_you:
     defaults:
         _controller: sylius.controller.order::thankYouAction
         _sylius:
-            template: "@SyliusShop/Order/thankYou.html.twig"
+            template: "@SyliusShop/Order/thank_you.html.twig"
 
 sylius_shop_order_pay:
     path: /{tokenValue}/pay

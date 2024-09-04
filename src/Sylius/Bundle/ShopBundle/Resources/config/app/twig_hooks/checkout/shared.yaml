@@ -1,0 +1,43 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.checkout.shared.header':
+            logo:
+                template: '@SyliusShop/checkout/shared/header/logo.html.twig'
+            account:
+                template: '@SyliusShop/checkout/shared/header/account.html.twig'
+        
+        'sylius_shop.checkout.shared.sidebar':
+            summary:
+                template: '@SyliusShop/checkout/shared/sidebar/summary.html.twig'
+        
+        'sylius_shop.checkout.shared.sidebar.summary':
+            header:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/header.html.twig'
+            items:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/items.html.twig'
+            total:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/total.html.twig'
+        
+        'sylius_shop.checkout.shared.sidebar.summary.items':
+            item:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/items/item.html.twig'
+        
+        'sylius_shop.checkout.shared.sidebar.summary.items.item':
+            name:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/items/item/name.html.twig'
+            quantity:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/items/item/quantity.html.twig'
+            subtotal:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/items/item/subtotal.html.twig'
+        
+        'sylius_shop.checkout.shared.sidebar.summary.total':
+            items_total:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/total/items_total.html.twig'
+            taxes_total:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/total/taxes_total.html.twig'
+            promotion_total:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/total/promotion_total.html.twig'
+            shipping_total:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/total/shipping_total.html.twig'
+            order_total:
+                template: '@SyliusShop/checkout/shared/sidebar/summary/total/order_total.html.twig'

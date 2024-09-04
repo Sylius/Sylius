@@ -27,7 +27,7 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
  */
 class ProductAssociationRepository extends BaseProductAssociationRepository implements ProductAssociationRepositoryInterface
 {
-    public function findWithProductsWithinChannel($associationId, ChannelInterface $channel): ProductAssociationInterface
+    public function findWithProductsWithinChannel(int $associationId, ChannelInterface $channel): ProductAssociationInterface
     {
         $productAssociation = $this->createQueryBuilder('o')
             ->addSelect('associatedProduct')

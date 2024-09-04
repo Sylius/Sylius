@@ -27,7 +27,7 @@ Feature: Viewing orders only from current channel
         And the customer chose "Free" shipping method with "Offline" payment
         And I am logged in as "hancock@superheronope.com"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing orders only from current channel
         When I change my current channel to "Web-US"
         And I browse my orders

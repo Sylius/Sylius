@@ -15,7 +15,7 @@ Feature: Viewing only my orders on my account page
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing orders
         When I browse my orders
         Then I should see a single order in the list

@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 
-interface SummaryPageInterface extends PageInterface
+interface SummaryPageInterface extends ShopPageInterface
 {
     public function getGrandTotal(): string;
 
@@ -38,9 +37,9 @@ interface SummaryPageInterface extends PageInterface
 
     public function getItemTotal(string $productName): string;
 
-    public function getItemUnitRegularPrice(string $productName): int;
+    public function getItemUnitRegularPrice(string $productName): string;
 
-    public function getItemUnitPrice(string $productName): int;
+    public function getItemUnitPrice(string $productName): string;
 
     public function hasOriginalPrice(string $productName): bool;
 
@@ -54,9 +53,9 @@ interface SummaryPageInterface extends PageInterface
 
     public function specifyQuantity(string $productName, int $quantity): void;
 
-    public function applyCoupon(string $couponCode): void;
+    public function applyCoupon(?string $couponCode = null): void;
 
-    public function isSingleItemOnPage(): bool;
+    public function countOrderItems(): int;
 
     public function hasItemNamed(string $name): bool;
 
@@ -64,11 +63,9 @@ interface SummaryPageInterface extends PageInterface
 
     public function hasItemWithVariantNamed(string $variantName): bool;
 
-    public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): bool;
+    public function getItemOptionValue(string $productName, string $optionName): string;
 
     public function hasItemWithInsufficientStock(string $productName): bool;
-
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 
     public function isEmpty(): bool;
 
@@ -83,6 +80,4 @@ interface SummaryPageInterface extends PageInterface
     public function checkout(): void;
 
     public function waitForRedirect(int $timeout): void;
-
-    public function getPromotionCouponValidationMessage(): string;
 }

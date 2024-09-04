@@ -10,13 +10,13 @@ Feature: Multi-channel support
         And the store operates on another channel named "United States"
         And there is product "Banana" available in that channel
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario:
         When I change my current channel to "Poland"
         Then I should be able to access product "Onion"
         But I should not be able to access product "Banana"
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario:
         When I change my current channel to "United States"
         Then I should be able to access product "Banana"

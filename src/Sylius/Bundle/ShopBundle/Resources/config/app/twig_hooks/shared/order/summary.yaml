@@ -1,0 +1,147 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.shared.order.show.summary':
+            addresses:
+                template: "@SyliusShop/shared/order/show/summary/addresses.html.twig"
+            table:
+                template: "@SyliusShop/shared/order/show/summary/table.html.twig"
+            statuses:
+                template: "@SyliusShop/shared/order/show/summary/statuses.html.twig"
+
+        'sylius_shop.shared.order.show.summary.addresses':
+            billing:
+                template: "@SyliusShop/shared/order/show/summary/addresses/billing.html.twig"
+            shipping:
+                template: "@SyliusShop/shared/order/show/summary/addresses/shipping.html.twig"
+
+        'sylius_shop.shared.order.show.summary.addresses.billing':
+            header:
+                template: "@SyliusShop/shared/order/show/summary/addresses/billing/header.html.twig"
+            address:
+                template: "@SyliusShop/shared/address.html.twig"
+
+        'sylius_shop.shared.order.show.summary.addresses.shipping':
+            header:
+                template: "@SyliusShop/shared/order/show/summary/addresses/shipping/header.html.twig"
+            address:
+                template: "@SyliusShop/shared/address.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table':
+            header:
+                template: "@SyliusShop/shared/order/show/summary/table/header.html.twig"
+            body:
+                template: "@SyliusShop/shared/order/show/summary/table/body.html.twig"
+            footer:
+                template: "@SyliusShop/shared/order/show/summary/table/footer.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table.header':
+            item:
+                template: "@SyliusShop/shared/order/show/summary/table/header/item.html.twig"
+                configuration:
+                    label: 'item'
+            unit_price:
+                template: "@SyliusShop/shared/order/show/summary/table/header/item.html.twig"
+                configuration:
+                    test_id: 'price'
+                    label: 'unit_price'
+                    class: 'text-end'
+            quantity:
+                template: "@SyliusShop/shared/order/show/summary/table/header/item.html.twig"
+                configuration:
+                    label: 'qty'
+                    class: 'text-end'
+            subtotal:
+                template: "@SyliusShop/shared/order/show/summary/table/header/item.html.twig"
+                configuration:
+                    label: 'subtotal'
+                    class: 'text-end'
+
+        'sylius_shop.shared.order.show.summary.table.body':
+            item:
+                template: "@SyliusShop/shared/order/show/summary/table/body/item.html.twig"
+            unit_price:
+                template: "@SyliusShop/shared/order/show/summary/table/body/unit_price.html.twig"
+            quantity:
+                template: "@SyliusShop/shared/order/show/summary/table/body/quantity.html.twig"
+            subtotal:
+                template: "@SyliusShop/shared/order/show/summary/table/body/subtotal.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table.footer':
+            subtotal:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/subtotal.html.twig"
+            taxes:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/taxes.html.twig"
+            discount:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/discount.html.twig"
+            shipping:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/shipping.html.twig"
+            total:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/total.html.twig"
+            total_in_base_currency:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/total_in_base_currency.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table.footer.subtotal':
+            label:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/subtotal/label.html.twig"
+            value:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/subtotal/value.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table.footer.taxes':
+            label:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/taxes/label.html.twig"
+            value:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/taxes/value.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table.footer.discount':
+            label:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/discount/label.html.twig"
+            value:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/discount/value.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table.footer.total':
+            label:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/total/label.html.twig"
+            value:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/total/value.html.twig"
+
+        'sylius_shop.shared.order.show.summary.table.footer.total_in_base_currency':
+            label:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/total_in_base_currency/label.html.twig"
+            value:
+                template: "@SyliusShop/shared/order/show/summary/table/footer/total_in_base_currency/value.html.twig"
+
+        'sylius_shop.shared.order.show.summary.statuses':
+            payments:
+                template: "@SyliusShop/shared/order/show/summary/statuses/payments.html.twig"
+            shipments:
+                template: "@SyliusShop/shared/order/show/summary/statuses/shipments.html.twig"
+
+        'sylius_shop.shared.order.show.summary.statuses.payments':
+            header:
+                template: "@SyliusShop/shared/order/show/summary/statuses/payments/header.html.twig"
+            state:
+                template: "@SyliusShop/shared/order/show/summary/statuses/payments/state.html.twig"
+            list:
+                template: "@SyliusShop/shared/order/show/summary/statuses/payments/list.html.twig"
+
+        'sylius_shop.shared.order.show.summary.statuses.payments.list':
+            method:
+                template: "@SyliusShop/shared/order/show/summary/statuses/payments/list/method.html.twig"
+            price:
+                template: "@SyliusShop/shared/order/show/summary/statuses/payments/list/price.html.twig"
+            state_label:
+                template: "@SyliusShop/shared/order/show/summary/statuses/payments/list/state_label.html.twig"
+
+        'sylius_shop.shared.order.show.summary.statuses.shipments':
+            header:
+                template: "@SyliusShop/shared/order/show/summary/statuses/shipments/header.html.twig"
+            state:
+                template: "@SyliusShop/shared/order/show/summary/statuses/shipments/state.html.twig"
+            list:
+                template: "@SyliusShop/shared/order/show/summary/statuses/shipments/list.html.twig"
+
+        'sylius_shop.shared.order.show.summary.statuses.shipments.list':
+            method:
+                template: "@SyliusShop/shared/order/show/summary/statuses/shipments/list/method.html.twig"
+            state_label:
+                template: "@SyliusShop/shared/order/show/summary/statuses/shipments/list/state_label.html.twig"

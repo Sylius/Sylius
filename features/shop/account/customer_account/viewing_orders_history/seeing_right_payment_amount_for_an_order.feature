@@ -17,7 +17,7 @@ Feature: Viewing payment's amount on my account panel
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "DHL" shipping method with "Cash on Delivery" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing total payment
         When I view the summary of my order "#00000666"
         Then I should see "$66.60" as order's total

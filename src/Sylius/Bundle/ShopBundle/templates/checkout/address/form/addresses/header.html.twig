@@ -1,0 +1,9 @@
+{% set type = hookable_metadata.context.type %}
+
+<div class="h4 mb-4">
+    {% if type == 'shipping' %}
+        {{ 'sylius.ui.shipping_address'|trans }}
+    {% else %}
+        {{ 'sylius.ui.billing_address'|trans }}
+    {% endif %}
+</div>

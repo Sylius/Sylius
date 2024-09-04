@@ -9,14 +9,16 @@ Feature: Changing quantity of a product in cart
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And I add this product to the cart
 
-    @ui @api
+    @api @ui @javascript
     Scenario: Increasing quantity of an item in cart
         Given I see the summary of my cart
         When I change product "T-Shirt banana" quantity to 2 in my cart
         Then I should see "T-Shirt banana" with quantity 2 in my cart
+        And my cart items total should be "$25.08"
 
-    @ui @api
+    @todo-api @ui @javascript
     Scenario: Increasing quantity of an item in cart beyond the threshold
         Given I see the summary of my cart
         When I change product "T-Shirt banana" quantity to 20000 in my cart
-        Then I should see "T-Shirt banana" with quantity 9999 in my cart
+        Then I should be notified that the quantity of the product "T-Shirt banana" must be between 1 and 9999
+        And my cart items total should be "$12.54"

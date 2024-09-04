@@ -15,14 +15,16 @@
   },
   "dependencies": {
     "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle",
+    "@sylius-ui/shop": "file:src/Sylius/Bundle/ShopBundle",
+    "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
+    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
     "chart.js": "^3.7.1",
+    "flag-icons": "^7.2.3",
     "jquery": "^3.5.0",
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
     "semantic-ui-css": "^2.2.0",
-    "slick-carousel": "^1.8.1",
-    "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
-    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

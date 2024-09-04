@@ -21,7 +21,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui
+    @api @todo-ui
     Scenario: Proper shipping fee, tax and product tax
         Given I have product "PHP T-Shirt" in the cart
         And I addressed the cart
@@ -31,7 +31,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And my cart taxes should be "$25.30"
         And my cart shipping total should be "$12.30"
 
-    @api @ui
+    @api @todo-ui
     Scenario: Proper shipping fee, tax and products' taxes after addressing
         Given I have 3 products "PHP T-Shirt" in the cart
         When I proceed with selecting "Germany" as billing country

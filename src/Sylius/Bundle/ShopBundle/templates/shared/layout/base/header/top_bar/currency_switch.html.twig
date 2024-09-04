@@ -1,0 +1,18 @@
+{% if currencies|length > 1 %}
+    <div class="dropdown" {{ sylius_test_html_attribute('currency-selector') }}>
+        <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('active-currency') }}>
+            {{ active }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+            {% for code in currencies %}
+                {% if code is not same as(active) %}
+                    <li>
+                        <a class="dropdown-item py-2" href="{{ path('sylius_shop_switch_currency', {'code': code}) }}" {{ sylius_test_html_attribute('available-currency') }}>
+                            {{ code }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

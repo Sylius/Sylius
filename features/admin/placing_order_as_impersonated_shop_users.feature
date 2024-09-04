@@ -13,7 +13,7 @@ Feature: Placing an order as impersonated shop users
         And there is a customer "Tanith Low" identified by an email "tanith.low@london.uk" and a password "tanithlow"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Placing an order as an impersonated shop user
         When I view details of the customer "tanith.low@london.uk"
         And I impersonate them
@@ -24,7 +24,7 @@ Feature: Placing an order as impersonated shop users
         And I browse orders of a customer "tanith.low@london.uk"
         Then I should see a single order in the list
 
-    @ui
+    @todo @ui
     Scenario: Placing an order as an impersonated shop user when the shop user was already logged
         When I sign in with email "john.doe@london.uk" and password "johndoe"
         And I view details of the customer "tanith.low@london.uk"

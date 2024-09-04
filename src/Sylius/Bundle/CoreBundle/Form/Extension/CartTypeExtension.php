@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\OrderBundle\Form\Type\CartType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -27,8 +26,6 @@ final class CartTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('shippingAddress', AddressType::class)
-            ->add('billingAddress', AddressType::class)
             ->add('promotionCoupon', PromotionCouponToCodeType::class, [
                 'by_reference' => false,
                 'label' => 'sylius.form.cart.coupon',

@@ -1,0 +1,89 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.cart.index':
+            form:
+                component: 'sylius_shop:cart:form'
+                props:
+                    cart: '@=_context.cart'
+            suggested_products:
+                component: 'sylius_shop:product:list'
+                props:
+                    limit: 4
+                configuration:
+                    title: 'sylius.ui.you_may_also_like'
+                    
+        'sylius_shop.cart.index.header':
+            flashes:
+                enabled: false
+
+        'sylius_shop.cart.index.form':
+            sections:
+                template: '@SyliusShop/cart/index/form/sections.html.twig'
+
+        'sylius_shop.cart.index.form.sections':
+            flashes:
+                template: "@SyliusShop/shared/flashes.html.twig"
+            header:
+                template: '@SyliusShop/cart/index/form/sections/header.html.twig'
+            general:
+                template: '@SyliusShop/cart/index/form/sections/general.html.twig'
+
+        'sylius_shop.cart.index.form.sections.general#left':
+            items:
+                template: '@SyliusShop/cart/index/form/sections/general/items.html.twig'
+            coupon:
+                template: '@SyliusShop/cart/index/form/sections/general/coupon.html.twig'
+            clear_cart:
+                template: '@SyliusShop/cart/index/form/sections/general/clear_cart.html.twig'
+
+        'sylius_shop.cart.index.form.sections.general#right':
+            summary:
+                component: 'sylius_shop:cart:summary'
+                props:
+                    cart: '@=_context.cart'
+            checkout:
+                template: '@SyliusShop/cart/index/form/sections/general/checkout.html.twig'
+
+        'sylius_shop.cart.index.form.sections.general.items':
+            head:
+                template: '@SyliusShop/cart/index/form/sections/general/items/head.html.twig'
+            body:
+                template: '@SyliusShop/cart/index/form/sections/general/items/body.html.twig'
+
+        'sylius_shop.cart.index.form.sections.general.items.head':
+            remove:
+                template: '@SyliusShop/cart/index/form/sections/general/items/head/remove.html.twig'
+            item:
+                template: '@SyliusShop/cart/index/form/sections/general/items/head/item.html.twig'
+            unit_price:
+                template: '@SyliusShop/cart/index/form/sections/general/items/head/unit_price.html.twig'
+            quantity:
+                template: '@SyliusShop/cart/index/form/sections/general/items/head/quantity.html.twig'
+            total:
+                template: '@SyliusShop/cart/index/form/sections/general/items/head/total.html.twig'
+
+        'sylius_shop.cart.index.form.sections.general.items.body':
+            remove:
+                template: '@SyliusShop/cart/index/form/sections/general/items/body/remove.html.twig'
+            item:
+                template: '@SyliusShop/cart/index/form/sections/general/items/body/item.html.twig'
+            unit_price:
+                template: '@SyliusShop/cart/index/form/sections/general/items/body/unit_price.html.twig'
+            quantity:
+                template: '@SyliusShop/cart/index/form/sections/general/items/body/quantity.html.twig'
+            total:
+                template: '@SyliusShop/cart/index/form/sections/general/items/body/total.html.twig'
+
+        'sylius_shop.cart.index.form.sections.general.summary':
+            items_total:
+                template: '@SyliusShop/cart/index/form/sections/general/summary/items_total.html.twig'
+            discount:
+                template: '@SyliusShop/cart/index/form/sections/general/summary/discount.html.twig'
+            estimated_cost:
+                template: '@SyliusShop/cart/index/form/sections/general/summary/estimated_cost.html.twig'
+            taxes_total:
+                template: '@SyliusShop/cart/index/form/sections/general/summary/taxes_total.html.twig'
+            order_total:
+                template: '@SyliusShop/cart/index/form/sections/general/summary/order_total.html.twig'
+            base_currency_order_total:
+                template: '@SyliusShop/cart/index/form/sections/general/summary/base_currency_order_total.html.twig'

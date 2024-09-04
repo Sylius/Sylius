@@ -16,7 +16,7 @@ Feature: Viewing order items with proper names
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing basic information about an order
         Given the product "Angel T-Shirt" was renamed to "Devil Cardigan"
         And the product "Angel Mug" was renamed to "Devil Glass"

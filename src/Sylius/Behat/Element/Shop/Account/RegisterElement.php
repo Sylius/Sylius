@@ -24,11 +24,11 @@ final class RegisterElement extends Element implements RegisterElementInterface
         $errorLabel = $this
             ->getElement(StringInflector::nameToCode($element))
             ->getParent()
-            ->find('css', '.sylius-validation-error')
+            ->find('css', '[data-test-validation-error]')
         ;
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $message === $errorLabel->getText();
@@ -89,7 +89,7 @@ final class RegisterElement extends Element implements RegisterElementInterface
             'password' => '[data-test-password-first]',
             'password_verification' => '[data-test-password-second]',
             'phone_number' => '[data-test-phone-number]',
-            'register_button' => '[data-test-register-button]',
+            'register_button' => '[data-test-button="register-button"]',
         ]);
     }
 }

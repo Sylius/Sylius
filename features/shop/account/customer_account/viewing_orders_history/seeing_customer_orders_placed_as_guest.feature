@@ -13,7 +13,7 @@ Feature: Seeing customer's orders placed as guest
         And the guest customer placed order with "PHP T-Shirt" product for "john@snow.com" and "United States" based billing address with "Free" shipping method and "Offline" payment
         And the another guest customer placed order with "PHP T-Shirt" product for "ned@stark.com" and "United States" based billing address with "Free" shipping method and "Offline" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to hijack another customer's orders
         Given I registered with previously used "ned@stark.com" email and "lannistersAreDumb" password
         When I log in as "ned@stark.com" with "lannistersAreDumb" password

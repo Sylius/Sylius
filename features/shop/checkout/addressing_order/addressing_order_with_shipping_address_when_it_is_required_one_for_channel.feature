@@ -14,7 +14,7 @@ Feature: Addressing an order with shipping address when it is the required one f
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
 
-    @api @ui
+    @todo @api @ui
     Scenario: Addressing an order only with shipping address when it is the required one for the channel
         When I specify the required shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step

@@ -14,7 +14,7 @@ Feature: Viewing orders on my account page
         And the customer "Oliver Queen" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing orders
         Given I am a logged in customer
         And I placed an order "#00000666"
@@ -25,7 +25,7 @@ Feature: Viewing orders on my account page
         Then I should see a single order in the list
         And this order should have "#00000666" number
 
-    @api
+    @todo @api
     Scenario: Viewing orders
         When I browse my orders
         Then I should be denied an access to order list

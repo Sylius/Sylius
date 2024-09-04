@@ -1,0 +1,15 @@
+<div class="ms-auto">
+    {% if order.customer.id|default(null) is not null %}
+        <div {{ sylius_test_html_attribute('purchaser-name-or-email') }}>
+            {{ 'sylius.ui.checking_out_as'|trans }} {{ app.user is null ? order.customer.email : order.customer.fullName|default(order.customer.email) }}.
+        </div>
+    {% else %}
+        <a class="btn btn-icon btn-transparent px-2" href="{{ path('sylius_shop_login') }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <div class="d-none d-lg-block ps-2">{{ 'sylius.ui.sign_in'|trans }}</div>
+        </a>
+    {% endif %}
+</div>

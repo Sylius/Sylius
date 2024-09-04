@@ -92,5 +92,15 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="kernel.event_listener" event="sylius.user.security.impersonate" method="onUserImpersonated" />
         </service>
+
+        <service id="sylius_shop.listener.cart_item_add" class="Sylius\Bundle\ShopBundle\EventListener\CartItemAddListener">
+            <argument type="service" id="sylius.order_modifier"/>
+            <tag name="kernel.event_listener" event="sylius.cart_item_add" method="addToOrder" />
+        </service>
+
+        <service id="sylius_shop.listener.cart_item_remove" class="Sylius\Bundle\ShopBundle\EventListener\CartItemRemoveListener">
+            <argument type="service" id="sylius.order_modifier"/>
+            <tag name="kernel.event_listener" event="sylius.cart_item_remove" method="removeFromOrder" />
+        </service>
     </services>
 </container>

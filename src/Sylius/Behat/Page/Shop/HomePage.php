@@ -50,7 +50,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
 
     public function getActiveCurrency(): string
     {
-        return $this->getElement('currency_selector')->find('css', '[data-test-active-currency]')->getText();
+        return $this->getElement('active_currency')->getText();
     }
 
     public function getAvailableCurrencies(): array
@@ -61,7 +61,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
         );
     }
 
-    public function switchCurrency($currencyCode): void
+    public function switchCurrency(string $currencyCode): void
     {
         try {
             $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
@@ -73,38 +73,51 @@ class HomePage extends SymfonyPage implements HomePageInterface
 
     public function getActiveLocale(): string
     {
-        return $this->getElement('locale_selector')->find('css', '[data-test-active-locale]')->getText();
+        return $this->getElement('active_locale')->getAttribute('data-test-active-locale');
     }
 
     public function getAvailableLocales(): array
     {
         return array_map(
-            fn (NodeElement $element) => $element->getText(),
+            fn (NodeElement $element) => $element->getAttribute('data-test-available-locale'),
             $this->getElement('locale_selector')->findAll('css', '[data-test-available-locale]'),
         );
     }
 
-    public function switchLocale($localeCode): void
+    public function switchLocale(string $localeCode): void
     {
-        $this->getElement('locale_selector')->clickLink($localeCode);
+        $this->getElement('locale_selector')->find('css', sprintf('[data-test-available-locale="%s"]', $localeCode))->click();
     }
 
     public function getLatestProductsNames(): array
     {
-        return array_map(
-            fn (NodeElement $element) => $element->getText(),
-            $this->getElement('latest_products')->findAll('css', '[data-test-product-name]'),
-        );
+        return $this->getProductsNames('latest_products');
+    }
+
+    public function getLatestDealsNames(): array
+    {
+        return $this->getProductsNames('latest_deals');
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'active_currency' => '[data-test-currency-selector] [data-test-active-currency]',
+            'active_locale' => '[data-test-locale-selector] [data-test-active-locale]',
             'currency_selector' => '[data-test-currency-selector]',
             'full_name' => '[data-test-full-name]',
+            'latest_deals' => '[data-test-latest-deals]',
             'latest_products' => '[data-test-latest-products]',
             'locale_selector' => '[data-test-locale-selector]',
-            'logout_button' => '[data-test-logout-button]',
+            'logout_button' => '[data-test-button="logout-button"]',
         ]);
+    }
+
+    private function getProductsNames(string $elementName): array
+    {
+        return array_map(
+            fn (NodeElement $element) => $element->getText(),
+            $this->getElement($elementName)->findAll('css', '[data-test-product-name]'),
+        );
     }
 }

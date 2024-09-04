@@ -1,0 +1,23 @@
+{% if available_locales|length > 1 %}
+    <div class="col-auto">
+        <div class="dropdown" {{ sylius_test_html_attribute('locale-selector') }}>
+            <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('active-locale', active_locale) }}>
+                <span class="fi fi-{{ active_locale|sylius_locale_country|lower }} me-2"></span>
+                {{ active_locale|sylius_locale_country }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                {% for code in available_locales %}
+                    {% if code is not same as(active_locale) %}
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ path('sylius_shop_switch_locale', {'code': code}) }}" {{ sylius_test_html_attribute('available-locale', code) }} >
+                                {% set country_code = code|sylius_locale_country %}
+                                <span class="fi fi-{{ country_code|lower }} me-2"></span>
+                                {{ country_code }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

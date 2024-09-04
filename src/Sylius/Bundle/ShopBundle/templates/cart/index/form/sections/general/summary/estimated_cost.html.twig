@@ -1,0 +1,15 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set cart = hookable_metadata.context.cart %}
+
+{% if cart.shipments is not empty %}
+    <div class="hstack gap-2 mb-2">
+        <div>{{ 'sylius.ui.shipping_estimated_cost'|trans }}:</div>
+        <div class="ms-auto text-end">
+            {% if cart.getAdjustmentsTotal('shipping') > cart.shippingTotal %}
+                <span>{{ money.convertAndFormat(cart.getAdjustmentsTotal('shipping')) }}</span>
+            {% endif %}
+            <span {{ sylius_test_html_attribute('cart-shipping-total') }}>{{ money.convertAndFormat(cart.shippingTotal) }}</span>
+        </div>
+    </div>
+{% endif %}

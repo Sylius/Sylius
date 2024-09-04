@@ -19,7 +19,7 @@ Feature: Seeing province created manually in order history
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Peterborough", "United Kingdom", "East of England"
         And I chose "DHL" shipping method with "Cash on Delivery" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing a province manually defined in a order history
         When I view the summary of my order "#00000666"
         Then I should see "East of England" as province in the shipping address

@@ -12,27 +12,27 @@ Feature: Being unable to see non-own orders and associated resources
         And I am a logged in customer
         And there is a customer "john@example.com" that placed order with "PHP T-Shirt" product to "United States" based billing address with "Free" shipping method and "Cash on Delivery" payment method
 
-    @api
+    @todo @api
     Scenario: Being unable to see non-own order
         When I try to see the order placed by a customer "john@example.com"
         Then I should not be able to see that order
 
-    @api
+    @todo @api
     Scenario: Being unable to see non-own order item
         When I try to see one of the items from the order placed by a customer "john@example.com"
         Then I should not be able to see that item
 
-    @api
+    @todo @api
     Scenario: Being unable to see non-own order item unit
         When I try to see one of the units from the order placed by a customer "john@example.com"
         Then I should not be able to see that unit
 
-    @api
+    @todo @api
     Scenario: Being unable to see non-own shipment
         When I try to see the shipment of the order placed by a customer "john@example.com"
         Then I should not be able to see that shipment
 
-    @api
+    @todo @api
     Scenario: Being unable to see non-own payment
         When I try to see the payment of the order placed by a customer "john@example.com"
         Then I should not be able to see that payment

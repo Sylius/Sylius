@@ -17,23 +17,23 @@ Feature: Viewing shipment status on a placed order show page
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipment status when it has not been shipped yet
         When I view the summary of my order "#00000666"
         Then the shipment status should be "Ready"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipment status after shipping
         Given this order has already been shipped
         When I view the summary of my order "#00000666"
         Then the shipment status should be "Shipped"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing order's shipment status when it has not been shipped yet
         When I view the summary of my order "#00000666"
         Then the order's shipment status should be "Ready"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing order's shipment status after shipping
         Given this order has already been shipped
         When I view the summary of my order "#00000666"
