@@ -25,8 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-use function sprintf;
-
 final class PaymentRequestPayResponseProvider implements PayResponseProviderInterface
 {
     /**
