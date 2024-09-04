@@ -10,7 +10,7 @@ Feature: Deleting multiple product variants
         And this product has "Small PHP Mug", "Medium PHP Mug" and "Big PHP Mug" variants
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver
+    @ui @javascript
     Scenario: Deleting multiple product variants at once
         When I browse variants of this product
         And I check the "Small PHP Mug" product variant

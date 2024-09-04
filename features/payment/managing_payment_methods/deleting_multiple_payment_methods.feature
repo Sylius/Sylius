@@ -10,7 +10,7 @@ Feature: Deleting multiple payment methods
         And the store has also a payment method "PayPal Express Checkout" with a code "paypal" and Paypal Express Checkout gateway
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver
+    @ui @javascript
     Scenario: Deleting multiple payment methods at once
         When I browse payment methods
         And I check the "Offline" payment method

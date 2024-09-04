@@ -27,7 +27,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
 
     public function specifyPrice(int $nth, int $price, ChannelInterface $channel): void
     {
-        $this->getElement('price', ['%position%' => $nth, '%channelCode%' => $channel->getCode()])->setValue($price);
+        $this->getElement('price', ['%position%' => $nth, '%channelCode%' => $channel->getCode()])->setValue((string) $price);
     }
 
     public function specifyCode(int $nth, string $code): void
