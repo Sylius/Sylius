@@ -57,9 +57,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
             return;
         }
 
-        $availableActions = $gatewayFactoryCommandProvider->getCommandProviderIndex();
-
-        $this->context->addViolation($constraint->notAvailable, ['%actions%' => implode(', ', $availableActions)]);
+        $this->context->addViolation($constraint->notAvailable);
     }
 
     private function getCommandProvider(AddPaymentRequest $addPaymentRequest): ?PaymentRequestCommandProviderInterface
