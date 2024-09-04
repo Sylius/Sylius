@@ -19,7 +19,7 @@ twig_hooks:
             navigation:
                 template: '@SyliusShop/checkout/address/form/navigation.html.twig'
 
-        'sylius_shop.checkout.address.form.addresses#billingRequired':
+        'sylius_shop.checkout.address.form.addresses#billing_required':
             billing_address:
                 template: '@SyliusShop/checkout/address/form/addresses/address.html.twig'
                 configuration:
@@ -34,9 +34,8 @@ twig_hooks:
                 configuration:
                     type: 'shipping'
                     isDifferentAddress: true
-        
 
-        'sylius_shop.checkout.address.form.addresses#shippingRequired':
+        'sylius_shop.checkout.address.form.addresses#shipping_required':
             shipping_address:
                 template: '@SyliusShop/checkout/address/form/addresses/address.html.twig'
                 configuration:
@@ -51,9 +50,8 @@ twig_hooks:
                 configuration:
                     type: 'billing'
                     isDifferentAddress: true
-            
-        
-        'sylius_shop.checkout.address.form.addresses.address#billing':
+
+        'sylius_shop.checkout.address.form.addresses.billing_address':
             header:
                 template: '@SyliusShop/checkout/address/form/addresses/address/header.html.twig'
                 configuration:
@@ -66,9 +64,8 @@ twig_hooks:
                 template: '@SyliusShop/checkout/address/form/addresses/address/form.html.twig'
                 configuration:
                     field: 'billingAddress'
-            
-        
-        'sylius_shop.checkout.address.form.addresses.address#shipping':
+
+        'sylius_shop.checkout.address.form.addresses.shipping_address':
             header:
                 template: '@SyliusShop/checkout/address/form/addresses/address/header.html.twig'
                 configuration:

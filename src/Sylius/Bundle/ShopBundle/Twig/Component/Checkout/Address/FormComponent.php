@@ -61,16 +61,12 @@ class FormComponent
     {
         $email = $this->formValues['customer']['email'] ?? null;
         if (null !== $email) {
-            if ($this->shopUserRepository->findOneByEmail($email)) {
-                $this->emailExists = true;
-            } else {
-                $this->emailExists = false;
-            }
+            $this->emailExists = $this->shopUserRepository->findOneByEmail($email) !== null;
         }
     }
 
     #[LiveListener('sylius:shop:address-updated')]
-    public function addressFieldUpdated(#[LiveArg] int $addressId, #[LiveArg] string $field): void
+    public function addressFieldUpdated(#[LiveArg] mixed $addressId, #[LiveArg] string $field): void
     {
         $address = $this->addressRepository->find($addressId);
 
@@ -98,7 +94,7 @@ class FormComponent
         return $this->formFactory->create(
             $this->formClass,
             $this->order,
-            ['customer' => $this->customerContext->getCustomer()]
+            ['customer' => $this->customerContext->getCustomer()],
         );
     }
 }

@@ -125,6 +125,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function selectShippingAddressProvince(string $province): void
     {
         $this->waitForElementUpdate('form');
+
         $this->getElement('shipping_country_province')->selectOption($province);
     }
 
@@ -136,6 +137,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function selectBillingAddressProvince(string $province): void
     {
         $this->waitForElementUpdate('form');
+
         $this->getElement('billing_country_province')->selectOption($province);
     }
 
@@ -155,6 +157,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function canSignIn(): bool
     {
         $this->waitForElementUpdate('form');
+
         return $this->hasElement('login_button');
     }
 
@@ -174,6 +177,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function specifyPassword(string $password): void
     {
         $this->waitForElementUpdate('form');
+
         $this->getElement('login_password')->setValue($password);
     }
 
@@ -209,18 +213,21 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function specifyBillingAddressProvince(string $provinceName): void
     {
         $this->waitForElementUpdate('form');
+
         $this->getElement('billing_province')->setValue($provinceName);
     }
 
     public function specifyShippingAddressProvince(string $provinceName): void
     {
         $this->waitForElementUpdate('form');
+
         $this->getElement('shipping_province')->setValue($provinceName);
     }
 
     public function hasShippingAddressInput(): bool
     {
         $this->waitForElementUpdate('form');
+
         return $this->hasElement('shipping_province');
     }
 
@@ -232,18 +239,21 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function hasBillingAddressInput(): bool
     {
         $this->waitForElementUpdate('form');
+
         return $this->hasElement('billing_province');
     }
 
     public function selectShippingAddressFromAddressBook(AddressInterface $address): void
     {
         $this->getElement('shipping_address_book')->selectOption($address->getId());
+
         $this->waitForElementUpdate('form');
     }
 
     public function selectBillingAddressFromAddressBook(AddressInterface $address): void
     {
         $this->getElement('billing_address_book')->selectOption($address->getId());
+
         $this->waitForElementUpdate('form');
     }
 

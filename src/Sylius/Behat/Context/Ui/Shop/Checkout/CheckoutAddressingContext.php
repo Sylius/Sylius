@@ -223,7 +223,7 @@ final class CheckoutAddressingContext implements Context
      * @When I specify the email as :email
      * @When I do not specify the email
      */
-    public function iSpecifyTheEmail($email = null): void
+    public function iSpecifyTheEmail(?string $email = null): void
     {
         $this->addressPage->specifyEmail($email);
     }

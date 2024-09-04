@@ -2,5 +2,4 @@
 {% set form = hookable_metadata.context.form %}
 {% set field = hookable_metadata.configuration.field %}
 
-
 {% hook 'address' with { _prefixes: prefixes, 'form': attribute(form, field) } %}

@@ -3,5 +3,5 @@
 {% set type = hookable_metadata.configuration.type %}
 
 <div class="mb-4 {% if is_different_address and not show_different_address %}d-none {% endif %}" {{ sylius_test_html_attribute(type ~ '-address') }}>
-    {% hook 'address#' ~ type %}
+    {% hook type ~ '_address' %}
 </div>
