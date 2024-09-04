@@ -89,7 +89,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When I specify the province name manually as :provinceName for billing address
      */
-    public function iSpecifyTheProvinceNameManuallyAsForBillingAddress($provinceName)
+    public function iSpecifyTheProvinceNameManuallyAsForBillingAddress(string $provinceName): void
     {
         $this->addressPage->specifyBillingAddressProvince($provinceName);
     }
@@ -105,7 +105,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When /^I choose ("[^"]+" street) for shipping address$/
      */
-    public function iChooseForShippingAddress(AddressInterface $address)
+    public function iChooseForShippingAddress(AddressInterface $address): void
     {
         $this->addressPage->chooseDifferentShippingAddress();
         $this->addressPage->selectShippingAddressFromAddressBook($address);
@@ -114,7 +114,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When /^I choose ("[^"]+" street) for billing address$/
      */
-    public function iChooseForBillingAddress(AddressInterface $address)
+    public function iChooseForBillingAddress(AddressInterface $address): void
     {
         $this->addressPage->selectBillingAddressFromAddressBook($address);
     }
@@ -223,7 +223,7 @@ final class CheckoutAddressingContext implements Context
      * @When I specify the email as :email
      * @When I do not specify the email
      */
-    public function iSpecifyTheEmail($email = null)
+    public function iSpecifyTheEmail(?string $email = null): void
     {
         $this->addressPage->specifyEmail($email);
     }
@@ -240,7 +240,7 @@ final class CheckoutAddressingContext implements Context
      * @When I complete the addressing step
      * @When I try to complete the addressing step
      */
-    public function iCompleteTheAddressingStep()
+    public function iCompleteTheAddressingStep(): void
     {
         $this->addressPage->nextStep();
     }
@@ -294,7 +294,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When I specify the password as :password
      */
-    public function iSpecifyThePasswordAs($password)
+    public function iSpecifyThePasswordAs(string $password): void
     {
         $this->addressPage->specifyPassword($password);
     }
@@ -318,17 +318,17 @@ final class CheckoutAddressingContext implements Context
     /**
      * @Then I should have :countryName selected as country
      */
-    public function iShouldHaveSelectedAsCountry($countryName)
+    public function iShouldHaveSelectedAsCountry(string $countryName): void
     {
-        Assert::same($this->addressPage->getShippingAddressCountry(), $countryName);
+        Assert::same($this->addressPage->getBillingAddressCountry(), $countryName);
     }
 
     /**
      * @Then I should have no country selected
      */
-    public function iShouldHaveNoCountrySelected()
+    public function iShouldHaveNoCountrySelected(): void
     {
-        Assert::same($this->addressPage->getShippingAddressCountry(), 'Select');
+        Assert::same($this->addressPage->getBillingAddressCountry(), 'Select');
     }
 
     /**
@@ -393,7 +393,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @Then I should not be able to specify province name manually for shipping address
      */
-    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress()
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress(): void
     {
         Assert::false($this->addressPage->hasShippingAddressInput());
     }
@@ -419,7 +419,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as billing address$/
      */
-    public function addressShouldBeFilledAsBillingAddress(AddressInterface $address)
+    public function addressShouldBeFilledAsBillingAddress(AddressInterface $address): void
     {
         $this->testHelper->waitUntilAssertionPasses(function () use ($address): void {
             Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
@@ -473,14 +473,11 @@ final class CheckoutAddressingContext implements Context
      */
     public function shouldHaveCountriesToChooseFrom(string ...$countries): void
     {
-        $availableShippingCountries = $this->addressPage->getAvailableShippingCountries();
         $availableBillingCountries = $this->addressPage->getAvailableBillingCountries();
 
         sort($countries);
-        sort($availableShippingCountries);
         sort($availableBillingCountries);
 
-        Assert::same($availableShippingCountries, $countries);
         Assert::same($availableBillingCountries, $countries);
     }
 

@@ -4,7 +4,7 @@
     <div class="d-flex flex-column min-vh-100 overflow-hidden">
         <div class="bg-white border-bottom py-5">
             <div class="container d-flex">
-                {% hook 'sylius_shop.checkout.shared.header' %}
+                {% hook 'sylius_shop.checkout.shared.header' with { order } %}
             </div>
         </div>
         <div class="flex-grow-1 d-flex align-items-stretch">
