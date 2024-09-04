@@ -93,7 +93,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
             'postcode' => '[data-test-postcode]',
             'province_name' => '[data-test-province-name]',
             'province_code' => '[data-test-province-code]',
-            'save_button' => '[data-test-save-changes]',
+            'save_button' => '[data-test-button="save-changes"]',
             'selected_province' => '[data-test-province-code] option[selected="selected"]',
             'street' => '[data-test-street]',
         ]);

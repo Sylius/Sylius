@@ -2,7 +2,12 @@ twig_hooks:
     hooks:
         'sylius_shop.account.address_book.update':
             form:
-                template: '@SyliusShop/account/address_book/update/form.html.twig'
+                component: 'sylius_shop:account:address:form'
+                props:
+                    form: '@=_context.form'
+                    address: '@=_context.address'
+                configuration:
+                    method: 'PUT'
 
         'sylius_shop.account.address_book.update.form':
             fields:
@@ -12,6 +17,6 @@ twig_hooks:
 
         'sylius_shop.account.address_book.update.form.buttons':
             save:
-                template: '@SyliusShop/account/address_book/update/form/buttons/save.html.twig'
+                template: '@SyliusShop/account/address_book/form/update/buttons/save.html.twig'
             cancel:
                 template: '@SyliusShop/shared/account/address_book/form/buttons/cancel.html.twig'
