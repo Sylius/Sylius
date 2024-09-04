@@ -27,7 +27,7 @@ Feature: Filtering products by taxons
         Then I should see 3 products in the list
         And I should not see any product with name "Colorful mug"
 
-    @todo-api @ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Filtering products by main taxon
         Given I am browsing products
         When I filter them by "Pugs" main taxon

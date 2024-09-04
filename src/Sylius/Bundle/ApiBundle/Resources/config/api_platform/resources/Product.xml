@@ -17,14 +17,9 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\Product" shortName="Product">
-
         <operations>
+            <!-- Admin operations -->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/products">
-                <order>
-                    <values>
-                        <value name="code">ASC</value>
-                    </values>
-                </order>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -35,12 +30,16 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.product_name_filter</filter>
-                    <filter>sylius.api.product_order_filter</filter>
-                    <filter>sylius.api.product_taxon_code_filter</filter>
-                    <filter>sylius.api.channel_aware_filter</filter>
-                    <filter>sylius_api.filter.translation_order_and_locale</filter>
+                    <filter>sylius_api.search_filter.admin.product</filter>
+                    <filter>sylius_api.search_filter.channel_aware</filter>
+                    <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
+                    <filter>sylius.api.order_filter.admin.product</filter>
                 </filters>
+                <order>
+                    <values>
+                        <value name="code">ASC</value>
+                    </values>
+                </order>
                 <openapiContext>
                     <values>
                         <value name="parameters">
@@ -63,31 +62,19 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/products">
-                <order>
-                    <values>
-                        <value name="code">ASC</value>
-                    </values>
-                </order>
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/products/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:product:index</value>
+                                <value>sylius:admin:product:show</value>
                             </values>
                         </value>
                     </values>
                 </normalizationContext>
-                <filters>
-                    <filter>sylius.api.product_name_filter</filter>
-                    <filter>sylius.api.product_order_filter</filter>
-                    <filter>sylius.api.product_taxon_code_filter</filter>
-                    <filter>sylius.api.product_price_order_filter</filter>
-                    <filter>sylius_api.filter.translation_order_and_locale</filter>
-                    <filter>sylius.api.taxon_filter</filter>
-                </filters>
                 <openapiContext>
                     <values>
+                        <value name="summary">Use code to retrieve a product resource.</value>
                         <value name="parameters">
                             <values>
                                 <value name="imageFilter">
@@ -109,15 +96,6 @@
             </operation>
 
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/products">
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -136,9 +114,27 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/products/{code}">
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/products/{code}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -148,9 +144,48 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/products/{code}"
+                processor="sylius_api.state_processor.admin.product.remove"
+            />
+
+            <!-- Shop operations -->
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/products">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius.api.search_filter.shop.product</filter>
+                    <filter>sylius.api.order_filter.shop.product</filter>
+                    <filter>sylius.api.filter.product_price_order</filter>
+                    <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
+                    <filter>sylius.api.filter.taxon</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="code">ASC</value>
+                    </values>
+                </order>
                 <openapiContext>
                     <values>
-                        <value name="summary">Use code to retrieve a product resource.</value>
                         <value name="parameters">
                             <values>
                                 <value name="imageFilter">
@@ -253,39 +288,6 @@
                     </values>
                 </openapiContext>
             </operation>
-
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/products/{code}">
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-                <denormalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:product:update</value>
-                            </values>
-                        </value>
-                    </values>
-                </denormalizationContext>
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:product:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/products/{code}" processor="sylius_api.state_processor.admin.product.remove"/>
-
         </operations>
     </resource>
 </resources>

@@ -17,35 +17,29 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Locale\Model\Locale" shortName="Locale">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/locales/{code}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:locale:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
+            <!-- Admin operations -->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/locales">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
                                 <value>sylius:admin:locale:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.admin.locale</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/locales/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:locale:show</value>
                             </values>
                         </value>
                     </values>
@@ -71,6 +65,15 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
             <operation
@@ -79,24 +82,25 @@
                 processor="sylius_api.state_processor.admin.locale.remove"
             />
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/locales/{code}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:locale:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
+            <!-- Shop operations -->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/locales" paginationEnabled="false">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
                                 <value>sylius:shop:locale:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/locales/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:locale:show</value>
                             </values>
                         </value>
                     </values>
