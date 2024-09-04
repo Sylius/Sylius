@@ -96,8 +96,10 @@ class StatisticsComponent
 
     #[LiveAction]
     public function changeRange(
-        #[LiveArg] string $period,
-        #[LiveArg] string $interval,
+        #[LiveArg]
+        string $period,
+        #[LiveArg]
+        string $interval,
     ): void {
         $this->period = $period;
         $this->interval = $interval;
@@ -107,7 +109,8 @@ class StatisticsComponent
 
     #[LiveListener('channelChanged')]
     public function changeChannel(
-        #[LiveArg] string $channelCode,
+        #[LiveArg]
+        string $channelCode,
     ): void {
         $this->channelCode = $channelCode;
     }
