@@ -22,6 +22,9 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 
 final class GatewayFactoryHttpResponseProvider implements ServiceProviderAwareProviderInterface
 {
+    /**
+     * @param ServiceProviderInterface<HttpResponseProviderInterface> $locator
+     */
     public function __construct(
         private GatewayFactoryNameProviderInterface $gatewayFactoryNameProvider,
         private ServiceProviderInterface $locator,

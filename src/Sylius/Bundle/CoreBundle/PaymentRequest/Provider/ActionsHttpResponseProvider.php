@@ -21,6 +21,9 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 
 final class ActionsHttpResponseProvider implements ServiceProviderAwareProviderInterface
 {
+    /**
+     * @param ServiceProviderInterface<HttpResponseProviderInterface> $locator
+     */
     public function __construct(
         private ServiceProviderInterface $locator,
     ) {
