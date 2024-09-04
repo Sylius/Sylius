@@ -58,7 +58,8 @@ final class ActionsHttpResponseProvider implements ServiceProviderAwareProviderI
         return $httpResponseProvider->supports($requestConfiguration, $paymentRequest);
     }
 
-    public function getProviderIndex(): array {
+    public function getProviderIndex(): array
+    {
         return $this->locator->getProvidedServices();
     }
 
