@@ -33,6 +33,7 @@ final readonly class ManagingProductAttributesContext implements Context
 
     /**
      * @When I want to see all product attributes in store
+     * @When I am browsing product attributes
      */
     public function iWantToBrowseProductAttributes(): void
     {
@@ -62,6 +63,48 @@ final readonly class ManagingProductAttributesContext implements Context
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When /^I search by "([^"]+)" (code|name)$/
+     */
+    public function iSearchBy(string $phrase, string $field): void
+    {
+        $field = $field === 'name' ? 'translations.name' : $field;
+
+        $this->client->addFilter($field, $phrase);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I choose :type in the type filter
+     * @When I choose :firstType and :secondType in the type filter
+     */
+    public function iChooseInTheTypeFilter(string ...$types): void
+    {
+        foreach ($types as $type) {
+            $this->client->addFilter('type[]', $type);
+        }
+    }
+
+    /**
+     * @When I choose :translatable in the translatable filter
+     */
+    public function iChooseInTheTranslatableFilter(string $translatable): void
+    {
+        match ($translatable) {
+            'Yes' => $this->client->addFilter('translatable', 1),
+            'No' => $this->client->addFilter('translatable', 0),
+            default => throw new \InvalidArgumentException(sprintf('Translatable value "%s" is not supported.', $translatable)),
+        };
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter();
     }
 
     /**
@@ -185,8 +228,9 @@ final readonly class ManagingProductAttributesContext implements Context
 
     /**
      * @Then I should see :count product attributes in the list
+     * @Then I should see a single product attribute in the list
      */
-    public function iShouldSeeCountProductAttributesInTheList(int $count): void
+    public function iShouldSeeCountProductAttributesInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
@@ -213,7 +257,7 @@ final readonly class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then I should see the product attribute :attributeName in the list
+     * @Then /^I should(?:| also) see the product attribute "([^"]+)" in the list$/
      */
     public function iShouldSeeTheProductAttributeInTheList(string $attributeName): void
     {

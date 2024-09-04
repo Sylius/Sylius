@@ -188,7 +188,7 @@ final class CartContext implements Context
 
     /**
      * @Given /^I change (product "[^"]+") quantity to (\d+)$/
-     * @Given I change :productName quantity to :quantity
+     * @Given I change :product quantity to :quantity
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
@@ -614,6 +614,18 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be informed that I cannot change the cart items after the checkout is completed
+     */
+    public function iShouldBeInformedThatICannotChangeTheCartItemsAfterTheCheckoutIsCompleted(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->shopClient->getLastResponse()),
+            'Cannot change cart items after the checkout is completed."',
+        );
+        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 422);
+    }
+
+    /**
      * @Then /^the administrator should see "([^"]+)" product with quantity (\d+) in the (?:customer|visitor) cart$/
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
@@ -821,6 +833,10 @@ final class CartContext implements Context
         $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
+        $this->sharedStorage->set(
+            'created_as_guest',
+            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'customer') === null,
+        );
 
         return $tokenValue;
     }

@@ -9,7 +9,7 @@ Feature: Addressing an order
         And the store ships everywhere for Free
         And the store has a product "PHP T-Shirt" priced at "$19.99"
 
-    @ui @api
+    @api @ui
     Scenario: Address an order without different shipping address
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -18,7 +18,7 @@ Feature: Addressing an order
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @api
+    @api @ui
     Scenario: Address an order with different shipping address
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -28,7 +28,7 @@ Feature: Addressing an order
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @api
+    @api @ui
     Scenario: Address an order using existing email
         Given the store has customer "eddard.stark@example.com"
         And I have product "PHP T-Shirt" in the cart

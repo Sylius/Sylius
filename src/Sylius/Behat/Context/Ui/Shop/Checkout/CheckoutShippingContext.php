@@ -21,7 +21,7 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Webmozart\Assert\Assert;
 
-final class CheckoutShippingContext implements Context
+final readonly class CheckoutShippingContext implements Context
 {
     public function __construct(
         private SelectShippingPageInterface $selectShippingPage,
@@ -31,19 +31,25 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
+     * @Given I chose :shippingMethodName shipping method
      * @Given I completed the shipping step with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
-    public function iHaveProceededSelectingShippingMethod(string $shippingMethodName): void
+    public function iHaveProceededWithSelectingShippingMethod(string $shippingMethodName): void
     {
-        $this->iSelectShippingMethod($shippingMethodName);
+        if (!$this->selectShippingPage->isOpen()) {
+            throw new UnexpectedPageException(sprintf('Shipping method "%s" cannot be selected because checkout shipping page is not open.', $shippingMethodName));
+        }
+
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
         $this->selectShippingPage->nextStep();
     }
 
     /**
      * @Given I have selected :shippingMethodName shipping method
      * @When I select :shippingMethodName shipping method
+     * @When I change shipping method to :shippingMethodName
      */
     public function iSelectShippingMethod(string $shippingMethodName): void
     {
@@ -53,13 +59,14 @@ final class CheckoutShippingContext implements Context
     /**
      * @When I try to open checkout shipping page
      */
-    public function iTryToOpenCheckoutShippingPage()
+    public function iTryToOpenCheckoutShippingPage(): void
     {
         $this->selectShippingPage->tryToOpen();
     }
 
     /**
-     * @When /^I(?:| try to) complete(?:|d) the shipping step$/
+     * @When I complete the shipping step
+     * @When I try to complete the shipping step
      * @When I complete the shipping step with first shipping method
      */
     public function iCompleteTheShippingStep(): void

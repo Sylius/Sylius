@@ -15,3 +15,15 @@ sylius_addressing:
             classes:
                 model: Sylius\Component\Addressing\Model\AddressLogEntry
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepository
+
+    zone_member:
+        validation_groups:
+            country:
+                - 'sylius'
+                - 'sylius_zone_member_country'
+            province:
+                - 'sylius'
+                - 'sylius_zone_member_province'
+            zone:
+                - 'sylius'
+                - 'sylius_zone_member_zone'

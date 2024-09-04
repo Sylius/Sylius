@@ -7,7 +7,7 @@
         {
             "propertyPath": "code",
             "message": "Taxon with given code already exists.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

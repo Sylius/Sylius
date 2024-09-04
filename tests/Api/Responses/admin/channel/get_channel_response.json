@@ -22,7 +22,20 @@
     "skippingPaymentStepAllowed": false,
     "accountVerificationRequired": true,
     "shippingAddressInCheckoutRequired": false,
-    "shopBillingData": "\/api\/v2\/admin\/shop-billing-datas\/@integer@",
-    "menuTaxon": null,
-    "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
+    "shopBillingData": {
+        "@type": "ShopBillingData",
+        "company": "Web Channel Company",
+        "taxId": "Web Channel Tax ID",
+        "countryCode": "EN",
+        "street": "Web Channel Street",
+        "city": "Web Channel City",
+        "postcode": "Web Channel Postcode"
+    },
+    "menuTaxon": "/api/v2/admin/taxons/CATEGORY",
+    "channelPriceHistoryConfig": {
+        "@type": "ChannelPriceHistoryConfig",
+        "lowestPriceForDiscountedProductsVisible": false,
+        "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+        "taxonsExcludedFromShowingLowestPrice": "@array@.count(2).inArray('/api/v2/admin/taxons/MUG').inArray('/api/v2/admin/taxons/HAT')"
+    }
 }

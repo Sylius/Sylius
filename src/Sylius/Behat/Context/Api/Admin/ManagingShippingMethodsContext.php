@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -30,7 +29,7 @@ use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
-final class ManagingShippingMethodsContext implements Context
+final readonly class ManagingShippingMethodsContext implements Context
 {
     use ValidationTrait;
 
@@ -40,7 +39,6 @@ final class ManagingShippingMethodsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -491,7 +489,7 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'channels',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Shipping method is not assigned to %s channel', $channel->getName()),
         );
@@ -650,7 +648,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Expected IRI or nested document for attribute "zone", "NULL" given.',
+            'The type of the "zone" attribute must be "array" (nested document) or "string" (IRI), "NULL" given.',
         );
     }
 

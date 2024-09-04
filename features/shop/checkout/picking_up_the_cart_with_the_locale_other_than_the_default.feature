@@ -10,13 +10,13 @@ Feature: Picking up the cart with the locale other than the default
         And this channel uses the "French (France)" locale as default
         And I am a logged in customer
 
-    @api
+    @api @no-ui
     Scenario: Picking up the cart with the locale other than default
         When I pick up cart in the "English (United States)" locale
         And I check details of my cart
         Then my cart's locale should be "English (United States)"
 
-    @api
+    @api @no-ui
     Scenario: Picking up the cart without specified locale
         When I pick up cart without specifying locale
         And I check details of my cart

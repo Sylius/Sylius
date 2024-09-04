@@ -58,10 +58,16 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $this->getDocument()->waitFor(5, fn () => null === $saveConfigurationButton->find('css', '.loading'));
     }
 
+    public function filterByName(string $name): void
+    {
+        $this->getElement('name_filter')->setValue($name);
+    }
+
     /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'name_filter' => '#criteria_search_value',
             'save_configuration_button' => '[data-test-save-configuration-button]',
         ]);
     }

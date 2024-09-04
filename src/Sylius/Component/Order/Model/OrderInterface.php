@@ -17,7 +17,11 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface OrderInterface extends AdjustableInterface, ResourceInterface, TimestampableInterface
+interface OrderInterface extends
+    AdjustableInterface,
+    RecursiveAdjustmentsAwareInterface,
+    ResourceInterface,
+    TimestampableInterface
 {
     public const STATE_CART = 'cart';
 
@@ -71,15 +75,6 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
     public function setState(string $state): void;
 
     public function isEmpty(): bool;
-
-    /**
-     * @return Collection<array-key, AdjustmentInterface>
-     */
-    public function getAdjustmentsRecursively(?string $type = null): Collection;
-
-    public function getAdjustmentsTotalRecursively(?string $type = null): int;
-
-    public function removeAdjustmentsRecursively(?string $type = null): void;
 
     public function canBeProcessed(): bool;
 }

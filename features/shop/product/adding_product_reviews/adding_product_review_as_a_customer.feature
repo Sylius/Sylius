@@ -8,7 +8,7 @@ Feature: Adding product review as a customer
         Given the store operates on a single channel in "United States"
         And the store has a product "Necronomicon"
 
-    @ui @api
+    @api @ui
     Scenario: Adding product reviews as a logged in customer
         Given I am a logged in customer
         When I want to review product "Necronomicon"
@@ -18,7 +18,7 @@ Feature: Adding product review as a customer
         Then I should be notified that my review is waiting for the acceptation
         And the "Scary but astonishing" product review of "Necronomicon" product should not be visible for customers
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Adding product reviews as a logged in customer with remember me option
         Given I am a logged in customer by using remember me option
         When I want to review product "Necronomicon"

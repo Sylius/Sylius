@@ -11,7 +11,7 @@ Feature: Seeing an order shipping method and payment method details on summary p
         And the store allows paying "Offline"
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Seeing shipping method and payment method
         Given I have product "Lannister Coat" in the cart
         When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

@@ -19,7 +19,7 @@ Feature: Recalculating product average rating
         Then I should be notified that it has been successfully edited
         And average rating of product "Lamborghini Gallardo Model" should be 4
 
-    @ui @api
+    @api @ui
     Scenario: Product's average rating is correctly recalculated after review's rate change
         When I delete the "Awesome" product review
         Then I should be notified that it has been successfully deleted

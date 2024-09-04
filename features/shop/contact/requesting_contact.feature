@@ -8,7 +8,7 @@ Feature: Requesting contact
         Given the store operates on a single channel in "United States"
         And this channel has contact email set as "contact@goodshop.com"
 
-    @ui @api @email
+    @ui @email #api
     Scenario: Requesting contact as a logged in customer
         Given there is a user "lucifer@morningstar.com"
         And I am logged in as "lucifer@morningstar.com"

@@ -20,14 +20,14 @@ Feature: Filtering products by taxons
         And this product belongs to "Pugs"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Filtering products by taxon
         Given I am browsing products
         When I filter them by "Pugs" taxon
         Then I should see 3 products in the list
         And I should not see any product with name "Colorful mug"
 
-    @ui @mink:chromedriver @api-todo
+    @todo-api @ui @mink:chromedriver
     Scenario: Filtering products by main taxon
         Given I am browsing products
         When I filter them by "Pugs" main taxon

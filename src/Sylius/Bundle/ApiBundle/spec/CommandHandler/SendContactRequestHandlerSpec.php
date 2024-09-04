@@ -34,9 +34,12 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
         ContactEmailManagerInterface $contactEmailManager,
         ChannelInterface $channel,
     ): void {
-        $command = new SendContactRequest('adam@sylius.com', 'message');
-        $command->setChannelCode('CODE');
-        $command->setLocaleCode('en_US');
+        $command = new SendContactRequest(
+            channelCode: 'CODE',
+            localeCode: 'en_US',
+            email: 'adam@sylius.com',
+            message: 'message',
+        );
 
         $channelRepository->findOneByCode('CODE')->willReturn($channel);
 
@@ -54,8 +57,12 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_channel_has_not_been_found(ChannelRepositoryInterface $channelRepository): void
     {
-        $command = new SendContactRequest('adam@sylius.com', 'message');
-        $command->setChannelCode('CODE');
+        $command = new SendContactRequest(
+            channelCode: 'CODE',
+            localeCode: 'en_US',
+            email: 'adam@sylius.com',
+            message: 'message',
+        );
 
         $channelRepository->findOneByCode('CODE')->willReturn(null);
 

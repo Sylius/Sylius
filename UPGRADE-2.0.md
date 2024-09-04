@@ -1,12 +1,4 @@
-# UPGRADE FROM `1.13` TO `2.0`
-
-1. Non-prefix serialization groups in Sylius resources have been removed. 
-   If you have extended any of them, you must prefix them with `sylius:`, for example:
-
-    ```diff
-    - #[Groups(['admin:product:index'])]
-    + #[Groups(['sylius:admin:product:index'])]
-    ```
+# UPGRADE FROM `1.14` TO `2.0`
 
 ## Configuration
 
@@ -185,6 +177,24 @@
     * `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductAssociationRepository` extended class changed from
       `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
       `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
+
+* A new parameter has been added to specify the validation groups for a given zone.
+  If you have any custom validation groups for zone member, you need to add them to
+  your `config/packages/_sylius.yaml` file.
+  This is handled by `Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroup` and it resolves the groups
+  based on the type of the passed zone.
+
+  ```yaml
+  sylius_addressing:
+    zone_member:
+      validation_groups:
+        country:
+          - 'sylius'
+          - 'sylius_zone_member_country'
+        zone:
+          - 'sylius'
+          - 'sylius_zone_member_zone'
+  ```
 
 ## Frontend
 

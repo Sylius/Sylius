@@ -17,7 +17,7 @@ Feature: Seeing a summary of the order with free product
         And it gives "$5.00" discount to every order
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Seeing Free order
         When I add "Greyjoy Coat" product to the cart
         And I define the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -27,7 +27,7 @@ Feature: Seeing a summary of the order with free product
         And there should be no discount
         And there should be no taxes charged
 
-    @ui @api
+    @api @ui
     Scenario: Seeing order with both Free and paid products
         Given I have product "Greyjoy Coat" in the cart
         And I have product "Lannister Coat" in the cart

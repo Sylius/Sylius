@@ -12,21 +12,21 @@ Feature: Filtering product reviews
         And I am logged in as an administrator
         And I am browsing product reviews
 
-    @ui @todo-api
+    @api @ui
     Scenario: Browsing accepted reviews
         When I choose "accepted" as a status filter
         And I filter
         Then I should see a single product review in the list
         And I should see the product review "Awesome" in the list
 
-    @ui @todo-api
+    @api @ui
     Scenario: Filtering product reviews by title
         When I filter with title containing "Great"
         Then I should see a single product review in the list
         And I should see the product review "Great book" in the list
 
-    @ui @mink:chromedriver @todo-api
-    Scenario: Filtering tracked product variants by product
+    @api @ui @mink:chromedriver
+    Scenario: Filtering product reviews by product
         When I filter by "PHP Book" product
         Then I should see a single product review in the list
         And I should see the product review "Awesome" in the list

@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/Adjustment",
+    "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@\/adjustments",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 0,
+    "hydra:member": [],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@\/adjustments?type=promotion",
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/orders\/token\/items\/@integer@\/adjustments{?}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": []
+    }
+}

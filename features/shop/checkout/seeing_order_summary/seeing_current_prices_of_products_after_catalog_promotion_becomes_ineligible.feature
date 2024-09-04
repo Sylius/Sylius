@@ -13,7 +13,7 @@ Feature: Seeing current prices of products after catalog promotion becomes ineli
         And there is a catalog promotion "Winter sale" available in "United States" channel that reduces price by "25%" and applies on "PHP T-Shirt" variant
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Processing order with valid prices after catalog promotion becomes ineligibly
         Given I have "PHP T-Shirt" variant of this product in the cart
         When the "Winter sale" catalog promotion is no longer available

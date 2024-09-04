@@ -55,6 +55,15 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('provider')->defaultValue('sylius.province_name_provider')->end()
+                ->arrayNode('zone_member')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('validation_groups')
+                            ->useAttributeAsKey('name')
+                            ->variablePrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
 
-final class FixedDiscountActionValidator implements ActionValidatorInterface
+final readonly class FixedDiscountActionValidator implements ActionValidatorInterface
 {
     public function __construct(
         private ActionValidatorInterface $baseActionValidator,

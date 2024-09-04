@@ -25,6 +25,11 @@ final class ResendOrderConfirmationEmailDispatcher implements ResendOrderConfirm
 
     public function dispatch(OrderInterface $order): void
     {
-        $this->messageBus->dispatch(new ResendOrderConfirmationEmail($order->getTokenValue()));
+        $orderTokenValue = $order->getTokenValue();
+        if (null === $orderTokenValue) {
+            throw new \InvalidArgumentException('Order token value cannot be null.');
+        }
+
+        $this->messageBus->dispatch(new ResendOrderConfirmationEmail($orderTokenValue));
     }
 }

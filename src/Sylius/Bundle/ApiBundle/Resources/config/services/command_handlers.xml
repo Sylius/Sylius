@@ -129,11 +129,11 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler">
-            <argument type="service" id="sylius.security.password_updater" />
-            <argument type="service" id="sylius.repository.shop_user" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler">-->
+<!--            <argument type="service" id="sylius.security.password_updater" />-->
+<!--            <argument type="service" id="sylius.repository.shop_user" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler">
             <argument type="service" id="sylius.repository.shop_user" />
@@ -143,7 +143,7 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResendVerificationEmailHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestShopUserVerificationHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="sylius.command_bus" />
@@ -162,7 +162,7 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendShopUserVerificationEmailHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" />
@@ -188,7 +188,7 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyShopUserHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="clock" />
             <argument type="service" id="sylius.command_bus" />
