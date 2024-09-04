@@ -53,7 +53,7 @@
             <argument type="service" id="sylius.payment_request.provider.http_response.gateway_factory" />
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.shop.handler.payment_state_flash" />
-            <argument type="service" id="sylius.shop.resolver.after_pay_response" />
+            <argument type="service" id="sylius.shop.resolver.after_pay_next_response" />
             <tag name="sylius.shop.provider.after_pay_response" priority="-100" />
         </service>
 
