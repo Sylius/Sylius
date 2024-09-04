@@ -36,22 +36,22 @@
         "sylius/core-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
         "sylius/twig-hooks": "~0.3.0",
-        "symfony/framework-bundle": "^6.4.1",
+        "symfony/framework-bundle": "^6.4.1 || ^7.0",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/ux-autocomplete": "^2.17",
         "symfony/ux-live-component": "^2.17",
-        "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/webpack-encore-bundle": "^2.1",
         "twig/extra-bundle": "~3.8.0",
         "twig/twig": "~3.8.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "php-http/message-factory": "^1.0",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1",
-        "symfony/dotenv": "^6.4.0"
+        "symfony/dependency-injection": "^6.4.1 || ^7.0",
+        "symfony/dotenv": "^6.4.0 || ^7.0"
     },
     "config": {
         "allow-plugins": {
@@ -61,6 +61,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {

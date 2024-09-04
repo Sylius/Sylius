@@ -16,10 +16,12 @@ namespace spec\Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Command\Admin\Account\SendResetPasswordEmail;
+use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\SendResetPasswordEmailHandler;
 use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Webmozart\Assert\Assert;
 
 final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
 {
@@ -30,9 +32,12 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($userRepository, $resetPasswordEmailManager);
     }
 
-    public function it_is_a_message_handler(): void
+    function it_is_a_message_handler(): void
     {
-        $this->shouldImplement(MessageHandlerInterface::class);
+        $messageHandlerAttributes = (new \ReflectionClass(SendResetPasswordEmailHandler::class))
+            ->getAttributes(AsMessageHandler::class);
+
+        Assert::count($messageHandlerAttributes, 1);
     }
 
     public function it_handles_sending_reset_password_email(

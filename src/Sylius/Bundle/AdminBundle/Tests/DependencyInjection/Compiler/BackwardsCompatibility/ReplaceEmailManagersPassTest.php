@@ -41,7 +41,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.listener.shipment_ship',
             0,
-            'sylius.email_manager.shipment',
+            new Reference('sylius.email_manager.shipment'),
         );
     }
 
@@ -57,7 +57,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.listener.shipment_ship',
             0,
-            'sylius.mailer.shipment_email_manager.admin',
+            new Reference('sylius.mailer.shipment_email_manager.admin'),
         );
     }
 
@@ -75,7 +75,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             ResendShipmentConfirmationEmailAction::class,
             1,
-            ShipmentEmailManagerInterface::class,
+            new Reference(ShipmentEmailManagerInterface::class),
         );
     }
 
@@ -92,7 +92,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             ResendShipmentConfirmationEmailAction::class,
             1,
-            ResendShipmentConfirmationEmailDispatcher::class,
+            new Reference(ResendShipmentConfirmationEmailDispatcher::class),
         );
     }
 
@@ -110,7 +110,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             ResendOrderConfirmationEmailAction::class,
             1,
-            OrderEmailManagerInterface::class,
+            new Reference(OrderEmailManagerInterface::class),
         );
     }
 
@@ -127,7 +127,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             ResendOrderConfirmationEmailAction::class,
             1,
-            ResendOrderConfirmationEmailDispatcher::class,
+            new Reference(ResendOrderConfirmationEmailDispatcher::class),
         );
     }
 

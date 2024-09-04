@@ -15,13 +15,8 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.templating.helper.convert_money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper" lazy="true">
-            <argument type="service" id="sylius.currency_converter" />
-            <tag name="templating.helper" alias="sylius_convert_money" />
-        </service>
-
         <service id="sylius.twig.extension.convert_amount" class="Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.convert_money" />
+            <argument type="service" id="sylius.currency_converter" />
             <tag name="twig.extension" />
         </service>
     </services>
