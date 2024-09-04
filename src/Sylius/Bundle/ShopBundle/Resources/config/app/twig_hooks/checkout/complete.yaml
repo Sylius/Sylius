@@ -1,0 +1,25 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.checkout.complete':
+            header:
+                template: '@SyliusShop/checkout/complete/header.html.twig'
+            flashes:
+                template: '@SyliusShop/shared/flashes.html.twig'
+            form:
+                template: '@SyliusShop/checkout/complete/form.html.twig'
+
+        'sylius_shop.checkout.complete.header':
+            currency:
+                template: '@SyliusShop/checkout/complete/header/currency.html.twig'
+            locale:
+                template: '@SyliusShop/checkout/complete/header/locale.html.twig'
+
+        'sylius_shop.checkout.complete.form':
+            extra_notes:
+                template: '@SyliusShop/checkout/complete/form/extra_notes.html.twig'
+            navigation:
+                template: '@SyliusShop/checkout/complete/form/navigation.html.twig'
+
+        'sylius_shop.checkout.complete.summary':
+            statuses:
+                enabled: false
