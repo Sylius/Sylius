@@ -13,9 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
 
-        <service id="sylius.shop.controller.order_pay" parent="Sylius\Bundle\CoreBundle\OrderPay\Controller\OrderPayController">
+        <service public="true" id="sylius.shop.controller.order_pay" parent="Sylius\Bundle\CoreBundle\OrderPay\Controller\OrderPayController">
             <argument type="tagged" tag="sylius.shop.order_pay.provider.pay_response" />
             <argument type="tagged" tag="sylius.shop.order_pay.provider.after_pay_response" />
         </service>
