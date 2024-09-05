@@ -234,10 +234,8 @@ final class ManagingProductOptionsContext implements Context
         ProductOptionInterface $productOption,
         string $optionValueName,
     ): void {
-        Assert::true($this->responseChecker->hasItemWithTranslationInCollection(
-            $this
-                ->responseChecker
-                ->getValue($this->client->show(Resources::PRODUCT_OPTIONS, $productOption->getCode()), 'values'),
+        Assert::true($this->responseChecker->hasItemWithTranslation(
+            $this->client->subResourceIndex(Resources::PRODUCT_OPTIONS, 'values', $productOption->getCode()),
             'en_US',
             'value',
             $optionValueName,

@@ -28,7 +28,7 @@ Feature: Receiving discount based on items total
         Given the promotion gives "$10.00" discount to every order with items total at least "$100.00"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui @mink:chromedriver
     Scenario: Receiving discount when buying different products for more than the required total value

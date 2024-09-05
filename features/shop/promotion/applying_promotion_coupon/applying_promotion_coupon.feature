@@ -12,7 +12,7 @@ Feature: Applying promotion coupon
 
     @api @ui @mink:chromedriver
     Scenario: Receiving fixed discount for my cart
-        When I add product "PHP T-Shirt" to the cart
+        When I add the product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"

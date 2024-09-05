@@ -259,4 +259,23 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
+
+    /** @test */
+    public function it_gets_values_of_product_option(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'product/product_option.yaml',
+        ]);
+
+        /** @var ProductOptionInterface $productOption */
+        $productOption = $fixtures['product_option_color'];
+
+        $this->requestGet(sprintf('/api/v2/admin/product-options/%s/values', $productOption->getCode()));
+
+        $this->assertResponseSuccessful('admin/product_option/get_product_option_values');
+    }
 }

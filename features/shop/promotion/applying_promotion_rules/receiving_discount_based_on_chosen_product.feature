@@ -27,4 +27,4 @@ Feature: Receiving discount based on chosen product
         Given the store has a product "PHP Mug" priced at "$20.00"
         When I add product "PHP Mug" to the cart
         Then my cart total should be "$20.00"
-        And there should be no discount
+        And there should be no discount applied

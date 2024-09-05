@@ -67,7 +67,7 @@ interface SummaryPageInterface extends ShopPageInterface
 
     public function hasItemWithInsufficientStock(string $productName): bool;
 
-    public function isEmpty(): bool;
+    public function cartIsEmpty(): bool;
 
     public function getQuantity(string $productName): int;
 

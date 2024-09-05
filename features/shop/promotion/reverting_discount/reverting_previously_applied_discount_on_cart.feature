@@ -17,7 +17,7 @@ Feature: Reverting previously applied discount on cart
         And I have product "PHP T-Shirt" in the cart
         When I remove product "PHP T-Shirt" from the cart
         Then my cart total should be "$20.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui @mink:chromedriver
     Scenario: Reverting discount applied from total item cost based promotion

@@ -21,4 +21,4 @@ Feature: Applying only promotions enabled for given channel
         Given the promotion was disabled for the channel "Web"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied

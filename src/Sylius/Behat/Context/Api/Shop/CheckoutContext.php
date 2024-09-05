@@ -989,7 +989,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^my discount should be ("[^"]+")$/
-     * @Then there should be no discount
+     * @Then there should be no discount applied
      */
     public function myDiscountShouldBe(int $discount = 0): void
     {

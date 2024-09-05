@@ -5,19 +5,7 @@
     "code": "COLOR",
     "position": 0,
     "values": [
-        {
-            "@id": "\/api\/v2\/admin\/product-options\/COLOR\/values\/CHANGED_COLOR",
-            "@type": "ProductOptionValue",
-            "code": "CHANGED_COLOR",
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-option-values\/CHANGED_COLOR\/translations\/en_US",
-                    "@type": "ProductOptionValueTranslation",
-                    "value": "Red"
-                }
-            },
-            "value": "Red"
-        }
+        "\/api\/v2\/admin\/product-options\/COLOR\/values\/CHANGED_COLOR"
     ],
     "createdAt": "@datetime@",
     "updatedAt": "@datetime@",
