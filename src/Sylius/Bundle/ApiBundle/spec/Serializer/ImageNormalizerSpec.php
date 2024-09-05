@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -33,7 +32,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
 
     function it_is_a_context_aware_normalizer(): void
     {
-        $this->shouldImplement(ContextAwareNormalizerInterface::class);
+        $this->shouldImplement(NormalizerInterface::class);
         $this->shouldImplement(NormalizerAwareInterface::class);
     }
 

@@ -18,12 +18,12 @@ use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class ProductAttributeValueNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 

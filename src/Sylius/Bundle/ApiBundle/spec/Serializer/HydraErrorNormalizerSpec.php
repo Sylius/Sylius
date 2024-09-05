@@ -16,8 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class HydraErrorNormalizerSpec extends ObjectBehavior
@@ -63,21 +61,8 @@ final class HydraErrorNormalizerSpec extends ObjectBehavior
         $this->supportsNormalization('data', 'format')->shouldReturn(true);
     }
 
-    function it_decorates_has_cacheable_supports_method(
-        NormalizerInterface $normalizer,
-        RequestStack $requestStack,
-    ): void {
-        $normalizer->implement(CacheableSupportsMethodInterface::class);
-
-        $this->beConstructedWith($normalizer, $requestStack, '/api/v2');
-
-        $normalizer->hasCacheableSupportsMethod()->shouldBeCalled();
-
-        $this->hasCacheableSupportsMethod();
-    }
-
     function it_doesnt_support_normalization_when_no_request_is_available(
-        ContextAwareNormalizerInterface $normalizer,
+        NormalizerInterface $normalizer,
         RequestStack $requestStack,
     ): void {
         $this->beConstructedWith($normalizer, $requestStack, '/api/v2');

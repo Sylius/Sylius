@@ -14,13 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final readonly class HydraErrorNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
+final readonly class HydraErrorNormalizer implements NormalizerInterface
 {
     public function __construct(
-        /** @var NormalizerInterface&CacheableSupportsMethodInterface */
         private NormalizerInterface $decorated,
         private RequestStack $requestStack,
         private string $newApiRoute,
@@ -50,10 +48,5 @@ final readonly class HydraErrorNormalizer implements NormalizerInterface, Cachea
     public function getSupportedTypes(?string $format): array
     {
         return ['object' => true];
-    }
-
-    public function hasCacheableSupportsMethod(): bool
-    {
-        return $this->decorated->hasCacheableSupportsMethod();
     }
 }

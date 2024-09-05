@@ -20,11 +20,11 @@ use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class ProductAttributeValueDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class ProductAttributeValueDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
