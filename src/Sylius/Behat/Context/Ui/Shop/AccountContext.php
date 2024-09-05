@@ -432,7 +432,6 @@ final readonly class AccountContext implements Context
 
         $this->orderIndexPage->open();
         $this->orderIndexPage->changePaymentMethod($order);
-        $this->orderShowPage->choosePaymentMethod($paymentMethod);
 
         Assert::same($this->orderShowPage->getChosenPaymentMethod(), $paymentMethod->getName());
     }
@@ -570,6 +569,7 @@ final readonly class AccountContext implements Context
 
     /**
      * @Then I should be on the login page
+     * @Then I should be denied an access to order list
      */
     public function iShouldBeOnTheLoginPage(): void
     {
