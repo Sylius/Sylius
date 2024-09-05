@@ -23,14 +23,11 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-class CurrencySwitcherComponent
+readonly class CurrencySwitcherComponent
 {
-    use DefaultActionTrait;
-    use HookableComponentTrait;
-
     public function __construct(
-        private readonly ChannelContextInterface $channelContext,
-        private readonly CurrencyContextInterface $currencyContext,
+        private ChannelContextInterface $channelContext,
+        private CurrencyContextInterface $currencyContext,
     ) {
     }
 

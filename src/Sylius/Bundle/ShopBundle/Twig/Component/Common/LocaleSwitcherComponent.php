@@ -21,14 +21,11 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-class LocaleSwitcherComponent
+readonly class LocaleSwitcherComponent
 {
-    use DefaultActionTrait;
-    use HookableComponentTrait;
-
     public function __construct(
-        private readonly LocaleContextInterface $localeContext,
-        private readonly LocaleProviderInterface $localeProvider,
+        private LocaleContextInterface $localeContext,
+        private LocaleProviderInterface $localeProvider,
     ) {
     }
 
