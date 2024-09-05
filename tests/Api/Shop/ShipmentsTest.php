@@ -39,9 +39,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $customer = $fixtures['customer_oliver'];
         $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
-        $tokenValue = 'nAWw2jewpA';
-
-        $order = $this->placeOrder($tokenValue, $customer->getEmailCanonical());
+        $order = $this->placeOrder(email: $customer->getEmailCanonical());
 
         $this->client->request(
             method: 'GET',

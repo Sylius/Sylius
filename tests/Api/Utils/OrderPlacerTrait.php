@@ -75,8 +75,8 @@ trait OrderPlacerTrait
     }
 
     protected function placeOrder(
-        string $tokenValue,
-        string $email = 'sylius@example.com',
+        string $tokenValue = 'token',
+        string $email = 'shop@example.com',
         string $productVariantCode = 'MUG_BLUE',
         int $quantity = 3,
         ?\DateTimeImmutable $checkoutCompletedAt = null,
@@ -114,7 +114,7 @@ trait OrderPlacerTrait
             orderTokenValue: $tokenValue,
             shipmentId: $shipmentId,
             shippingMethodCode: $shippingMethodCode,
-    );
+        );
 
         $envelope = $this->commandBus->dispatch($chooseShippingMethodCommand);
 
