@@ -59,7 +59,7 @@ abstract class AbstractServiceCommandProvider implements ServiceProviderAwareCom
 
     public function getCommandProviderIndexes(): array
     {
-        return $this->locator->getProvidedServices();
+        return array_keys($this->locator->getProvidedServices());
     }
 
     abstract protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string;
