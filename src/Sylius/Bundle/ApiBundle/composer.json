@@ -36,7 +36,7 @@
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "nelmio/alice": "^3.8",
-        "phparkitect/phparkitect": "^0.2.9",
+        "phparkitect/phparkitect": "^0.3",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
