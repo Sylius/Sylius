@@ -21,9 +21,10 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class SendShopUserVerificationEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class SendShopUserVerificationEmailHandler
 {
     /**
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository

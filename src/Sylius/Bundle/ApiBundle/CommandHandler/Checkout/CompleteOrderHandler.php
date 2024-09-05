@@ -23,12 +23,13 @@ use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterf
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-final readonly class CompleteOrderHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class CompleteOrderHandler
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,

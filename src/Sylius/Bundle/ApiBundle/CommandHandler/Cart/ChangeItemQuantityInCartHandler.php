@@ -19,10 +19,11 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class ChangeItemQuantityInCartHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class ChangeItemQuantityInCartHandler
 {
     /** @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository */
     public function __construct(

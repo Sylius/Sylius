@@ -18,10 +18,11 @@ use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class SendContactRequestHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class SendContactRequestHandler
 {
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
