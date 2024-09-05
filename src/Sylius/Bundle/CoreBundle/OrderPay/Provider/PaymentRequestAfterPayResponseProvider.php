@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
+use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ServiceProviderAwareProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ShopBundle\Handler\PaymentStateFlashHandlerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -38,7 +38,7 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentStateFlashHandlerInterface $paymentStateFlashHandler,
-        private OrderPayFinalUrlProviderInterface $orderPayFinalUrlProvider,
+        private FinalUrlProviderInterface $orderPayFinalUrlProvider,
     ) {
     }
 

@@ -42,14 +42,8 @@ final class SyliusShopExtension extends Extension
             $config['product_grid']['include_all_descendants'],
         );
 
-        $container->setParameter(
-            'sylius_shop.order_pay.final_route',
-            $config['order_pay']['final_route'],
-        );
-        $container->setParameter(
-            'sylius_shop.order_pay.final_route_parameters',
-            $config['order_pay']['final_route_parameters'],
-        );
+        $this->configureOrderPay($config['order_pay'], $container);
+        $loader->load('services/integrations/order_pay.xml');
 
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
@@ -109,4 +103,13 @@ final class SyliusShopExtension extends Extension
 
         return $checkoutRedirectListener;
     }
+
+    private function configureOrderPay(array $config, ContainerBuilder $container): void
+    {
+        $container->setParameter('sylius_shop.order_pay.final_route', $config['final_route']);
+        $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['final_route_parameters']);
+        $container->setParameter('sylius_shop.order_pay.final_route', $config['retry_route']);
+        $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['retry_route_parameters']);
+    }
+
 }

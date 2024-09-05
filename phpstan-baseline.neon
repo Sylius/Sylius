@@ -4316,6 +4316,11 @@ parameters:
 			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\DependencyInjection\\\\SyliusShopExtension\\:\\:configureOrderPay\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\EventListener\\\\UserImpersonatedListener\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/ShopBundle/EventListener/UserImpersonatedListener.php

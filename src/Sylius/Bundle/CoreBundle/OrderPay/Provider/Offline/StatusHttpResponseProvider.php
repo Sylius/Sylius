@@ -11,24 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Provider\Offline;
+namespace Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline;
 
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProviderInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\HttpResponseProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
 
 final class StatusHttpResponseProvider implements HttpResponseProviderInterface
 {
-    /**
-     * @param array<string, string> $finalRouteParameters
-     */
     public function __construct(
-        private RouterInterface $router,
-        private string $finalRoute,
-        private array $finalRouteParameters,
+        private FinalUrlProviderInterface $finalUrlProvider,
     ) {
     }
 
@@ -43,7 +38,8 @@ final class StatusHttpResponseProvider implements HttpResponseProviderInterface
         RequestConfiguration $requestConfiguration,
         PaymentRequestInterface $paymentRequest,
     ): Response {
-        $finalUrl = $this->router->generate($this->finalRoute, $this->finalRouteParameters);
+        // Force null payment to go to the thank you page
+        $finalUrl = $this->finalUrlProvider->getUrl(null);
 
         return new RedirectResponse($finalUrl);
     }

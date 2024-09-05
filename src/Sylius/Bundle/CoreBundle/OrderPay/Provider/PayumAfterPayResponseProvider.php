@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
 use Payum\Core\Payum;
 use Payum\Core\Request\Generic;
 use Payum\Core\Request\GetStatusInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
+use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ShopBundle\Handler\PaymentStateFlashHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;

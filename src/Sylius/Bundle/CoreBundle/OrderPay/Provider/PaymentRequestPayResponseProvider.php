@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
+use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ServiceProviderAwareProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ShopBundle\Resolver\PaymentToPayResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -31,11 +31,11 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
      * @param PaymentRequestFactoryInterface<PaymentRequestInterface> $paymentRequestFactory
      */
     public function __construct(
-        private PaymentToPayResolverInterface $paymentToPayResolver,
         private PaymentRequestFactoryInterface $paymentRequestFactory,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
         private RouterInterface $router,
+        private PaymentToPayResolverInterface $paymentToPayResolver,
     ) {
     }
 

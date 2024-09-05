@@ -11,22 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Controller;
+namespace Sylius\Bundle\CoreBundle\OrderPay\Controller;
 
 use LogicException;
-use Payum\Core\Request\Generic;
-use Payum\Core\Request\GetStatusInterface;
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayResponseProviderInterface;
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\PayResponseProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Bundle\ShopBundle\Provider\AfterPayResponseProviderInterface;
-use Sylius\Bundle\ShopBundle\Provider\PayResponseProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class OrderPayController

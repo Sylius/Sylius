@@ -11,43 +11,49 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\OrderPay\Processor\RouteParametersProcessorInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
-use Symfony\Component\Routing\RouterInterface;
 
-final class OrderPayFinalUrlProvider implements OrderPayFinalUrlProviderInterface
+final class FinalUrlProvider implements FinalUrlProviderInterface
 {
     /**
      * @param array<string, string> $finalRouteParameters
+     * @param array<string, string> $retryRouteParameters
      */
     public function __construct(
-        private RouterInterface $router,
+        private RouteParametersProcessorInterface $routeParametersProcessor,
         private string $finalRoute,
         private array $finalRouteParameters,
+        private string $retryRoute,
+        private array $retryRouteParameters,
     ) {
     }
 
     public function getUrl(?PaymentInterface $payment): string {
-        $finalUrl = $this->router->generate($this->finalRoute, $this->finalRouteParameters);
+        $context = [
+            'payment' => $payment,
+            'order' => $payment?->getOrder(),
+        ];
+
         if (
             null === $payment ||
             $payment->getState() === BasePaymentInterface::STATE_COMPLETED ||
             $payment->getState() === BasePaymentInterface::STATE_AUTHORIZED
         ) {
-            return $finalUrl;
+            return $this->routeParametersProcessor->process(
+                $this->finalRoute,
+                $this->finalRouteParameters,
+                $context
+            );
         }
 
-        /** @var OrderInterface $order */
-        $order = $payment->getOrder();
-
-        return $this->router->generate(
-            'sylius_shop_order_show',
-            [
-                'tokenValue' => $order->getTokenValue(),
-            ]
+        return $this->routeParametersProcessor->process(
+            $this->retryRoute,
+            $this->retryRouteParameters,
+            $context
         );
     }
 }

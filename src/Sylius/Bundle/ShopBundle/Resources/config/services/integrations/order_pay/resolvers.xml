@@ -17,7 +17,7 @@
 >
     <services>
 
-        <service id="sylius.shop.resolver.payment_to_pay" class="Sylius\Bundle\ShopBundle\Resolver\PaymentToPayResolver">
+        <service id="sylius.shop.resolver.payment_to_pay" class="Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolver">
             <argument type="constant">Sylius\Component\Payment\Model\PaymentInterface::STATE_NEW</argument>
         </service>
 

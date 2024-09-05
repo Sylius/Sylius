@@ -13,7 +13,7 @@ sylius_shop_order_pay:
     path: /{tokenValue}/pay
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.order_pay::payAction
+        _controller: sylius.shop.controller.order_pay::payAction
         _sylius:
             redirect:
                 route: sylius_shop_order_after_pay
@@ -22,7 +22,7 @@ sylius_shop_order_after_pay:
     path: /{hash?}/after-pay
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.shop.order_pay::afterPayAction
+        _controller: sylius.shop.controller.order_pay::afterPayAction
 
 sylius_shop_order_show:
     path: /{tokenValue}
