@@ -23,6 +23,14 @@ final class ProductVariantsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
+    protected function setUp(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+
+        parent::setUp();
+    }
+
     /** @test */
     public function it_denies_access_to_a_product_variants_list_for_not_authenticated_user(): void
     {
@@ -59,6 +67,25 @@ final class ProductVariantsTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'admin/product_variant/get_product_variants_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_gets_all_product_variants_when_invalid_product_filter_provided(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+
+        $this->requestGet(
+            uri: '/api/v2/admin/product-variants',
+            queryParameters: ['product' => 'INVALID-IRI'],
+        );
+
+        $this->assertResponseSuccessful('admin/product_variant/get_filtered_product_variants');
     }
 
     /** @test */

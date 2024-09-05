@@ -179,7 +179,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $command = new AddItemToCart(
             orderTokenValue: 'TOKEN',
             productVariantCode: 'productVariantCode',
-            quantity: 1
+            quantity: 1,
         );
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
@@ -231,7 +231,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $command = new AddItemToCart(
             orderTokenValue: 'TOKEN',
             productVariantCode: 'productVariantCode',
-            quantity: 1
+            quantity: 1,
         );
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
@@ -284,7 +284,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $command = new AddItemToCart(
             orderTokenValue: 'TOKEN',
             productVariantCode: 'productVariantCode',
-            quantity: 1
+            quantity: 1,
         );
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
@@ -338,7 +338,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $command = new AddItemToCart(
             orderTokenValue: 'TOKEN',
             productVariantCode: 'productVariantCode',
-            quantity: 1
+            quantity: 1,
         );
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);

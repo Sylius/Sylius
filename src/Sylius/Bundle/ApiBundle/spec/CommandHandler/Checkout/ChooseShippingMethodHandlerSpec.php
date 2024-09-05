@@ -58,7 +58,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $chooseShippingMethod = new ChooseShippingMethod(
             orderTokenValue: 'ORDERTOKEN',
             shipmentId: 123,
-            shippingMethodCode: 'DHL_SHIPPING_METHOD'
+            shippingMethodCode: 'DHL_SHIPPING_METHOD',
         );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
@@ -94,7 +94,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $chooseShippingMethod = new ChooseShippingMethod(
             orderTokenValue: 'ORDERTOKEN',
             shipmentId: 123,
-            shippingMethodCode: 'DHL_SHIPPING_METHOD'
+            shippingMethodCode: 'DHL_SHIPPING_METHOD',
         );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
@@ -127,7 +127,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $chooseShippingMethod = new ChooseShippingMethod(
             orderTokenValue: 'ORDERTOKEN',
             shipmentId: null,
-            shippingMethodCode: 'DHL_SHIPPING_METHOD'
+            shippingMethodCode: 'DHL_SHIPPING_METHOD',
         );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
@@ -150,7 +150,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $chooseShippingMethod = new ChooseShippingMethod(
             orderTokenValue: 'ORDERTOKEN',
             shipmentId: null,
-            shippingMethodCode: 'DHL_SHIPPING_METHOD'
+            shippingMethodCode: 'DHL_SHIPPING_METHOD',
         );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
@@ -177,7 +177,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $chooseShippingMethod = new ChooseShippingMethod(
             orderTokenValue: 'ORDERTOKEN',
             shipmentId: 123,
-            shippingMethodCode: 'DHL_SHIPPING_METHOD'
+            shippingMethodCode: 'DHL_SHIPPING_METHOD',
         );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
@@ -206,7 +206,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $chooseShippingMethod = new ChooseShippingMethod(
             orderTokenValue: 'ORDERTOKEN',
             shipmentId: 123,
-            shippingMethodCode: 'DHL_SHIPPING_METHOD'
+            shippingMethodCode: 'DHL_SHIPPING_METHOD',
         );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
