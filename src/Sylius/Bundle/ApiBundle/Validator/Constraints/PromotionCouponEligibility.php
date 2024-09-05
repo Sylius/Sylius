@@ -17,8 +17,11 @@ use Symfony\Component\Validator\Constraint;
 
 final class PromotionCouponEligibility extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.promotion_coupon.is_invalid';
+    public string $invalid = 'sylius.promotion_coupon.is_invalid';
+
+    public string $expired = 'sylius.promotion_coupon.expired';
+
+    public string $ineligible = 'sylius.promotion_coupon.ineligible';
 
     public function validatedBy(): string
     {

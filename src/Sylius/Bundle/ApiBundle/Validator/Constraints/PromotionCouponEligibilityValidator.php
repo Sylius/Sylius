@@ -25,10 +25,14 @@ use Webmozart\Assert\Assert;
 
 final class PromotionCouponEligibilityValidator extends ConstraintValidator
 {
+    /**
+     * @param PromotionCouponRepositoryInterface<PromotionCouponInterface> $promotionCouponRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
-        private PromotionCouponRepositoryInterface $promotionCouponRepository,
-        private OrderRepositoryInterface $orderRepository,
-        private AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
+        private readonly PromotionCouponRepositoryInterface $promotionCouponRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
     ) {
     }
 
@@ -43,29 +47,44 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
             return;
         }
 
+        /** @var PromotionCouponInterface|null $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
 
-        if (!$promotionCoupon instanceof PromotionCouponInterface) {
-            $this->context
-                ->buildViolation($constraint->message)
-                ->atPath('couponCode')
-                ->addViolation()
-            ;
+        if ($promotionCoupon === null) {
+            $this->addViolation($constraint->invalid, 'COUPON_INVALID');
 
             return;
         }
 
-        /** @var OrderInterface $cart */
+        $expirationDate = $promotionCoupon->getExpiresAt();
+
+        if ($expirationDate !== null && $expirationDate < new \DateTime()) {
+            $this->addViolation($constraint->expired, 'COUPON_EXPIRED');
+
+            return;
+        }
+
+        /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValue($value->orderTokenValue);
+
+        if ($cart === null) {
+            throw new \InvalidArgumentException('Cart with given token supposed to exist at this point.');
+        }
 
         $cart->setPromotionCoupon($promotionCoupon);
 
         if (!$this->appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)) {
-            $this->context
-                ->buildViolation($constraint->message)
-                ->atPath('couponCode')
-                ->addViolation()
-            ;
+            $this->addViolation($constraint->ineligible, 'PROMOTION_INELIGIBLE');
         }
+    }
+
+    private function addViolation(string $message, string $code): void
+    {
+        $this->context
+            ->buildViolation($message)
+            ->atPath('couponCode')
+            ->setCode($code)
+            ->addViolation()
+        ;
     }
 }
