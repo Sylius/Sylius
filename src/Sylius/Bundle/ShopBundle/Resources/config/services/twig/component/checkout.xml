@@ -48,15 +48,15 @@
         </service>
 
         <service
-            id="sylius_shop.twig.component.checkout.shipping_step.form"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\ShippingStepFormComponent"
+            id="sylius_shop.twig.component.checkout.shipping.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Shipping\FormComponent"
         >
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType</argument>
 
             <tag
                 name="sylius.live_component"
-                key="sylius_shop:checkout:select_shipping:form"
+                key="sylius_shop:checkout:shipping:form"
                 template="@SyliusShop/checkout/select_shipping/form.html.twig"
             />
         </service>

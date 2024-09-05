@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Shipping;
 
 use Sylius\Component\Core\Model\Order;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -14,11 +14,11 @@ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-class ShippingStepFormComponent
+class FormComponent
 {
+    use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use ComponentWithFormTrait;
 
     #[LiveProp(fieldName: 'order')]
     public ?Order $order = null;
