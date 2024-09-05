@@ -33,7 +33,7 @@
                     <filter>sylius_api.search_filter.admin.product</filter>
                     <filter>sylius_api.search_filter.channel_aware</filter>
                     <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
-                    <filter>sylius.api.order_filter.admin.product</filter>
+                    <filter>sylius_api.order_filter.admin.product</filter>
                 </filters>
                 <order>
                     <values>
@@ -173,11 +173,11 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.search_filter.shop.product</filter>
-                    <filter>sylius.api.order_filter.shop.product</filter>
-                    <filter>sylius.api.filter.product_price_order</filter>
+                    <filter>sylius_api.search_filter.shop.product</filter>
+                    <filter>sylius_api.order_filter.shop.product</filter>
+                    <filter>sylius_api.filter.product_price_order</filter>
                     <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
-                    <filter>sylius.api.filter.taxon</filter>
+                    <filter>sylius_api.filter.taxon</filter>
                 </filters>
                 <order>
                     <values>

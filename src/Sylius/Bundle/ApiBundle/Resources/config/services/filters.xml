@@ -96,7 +96,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.filter.taxon" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
+        <service id="sylius_api.filter.taxon" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="api_platform.filter" />
@@ -120,7 +120,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.order_filter.admin.product" parent="api_platform.doctrine.orm.order_filter" public="true">
+        <service id="sylius_api.order_filter.admin.product" parent="api_platform.doctrine.orm.order_filter" public="true">
             <argument type="collection">
                 <argument key="code" />
                 <argument key="createdAt" />
@@ -128,7 +128,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.search_filter.shop.product" parent="api_platform.doctrine.orm.search_filter" public="true">
+        <service id="sylius_api.search_filter.shop.product" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="translations.name">partial</argument>
                 <argument key="productTaxons.taxon.code">exact</argument>
@@ -136,7 +136,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.order_filter.shop.product" parent="api_platform.doctrine.orm.order_filter" public="true">
+        <service id="sylius_api.order_filter.shop.product" parent="api_platform.doctrine.orm.order_filter" public="true">
             <argument type="collection">
                 <argument key="code" />
                 <argument key="createdAt" />
@@ -293,7 +293,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.filter.product_price_order" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
+        <service id="sylius_api.filter.product_price_order" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
@@ -322,7 +322,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.order_filter.admin.catalog_promotion" parent="api_platform.doctrine.orm.order_filter" public="true">
+        <service id="sylius_api.order_filter.admin.catalog_promotion" parent="api_platform.doctrine.orm.order_filter" public="true">
             <argument type="collection">
                 <argument key="code" />
                 <argument key="name" />

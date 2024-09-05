@@ -46,7 +46,7 @@
                     <filter>sylius_api.boolean_filter.admin.catalog_promotion</filter>
                     <filter>sylius_api.date_filter.admin.catalog_promotion</filter>
                     <filter>sylius_api.search_filter.channel_aware</filter>
-                    <filter>sylius.api.order_filter.admin.catalog_promotion</filter>
+                    <filter>sylius_api.order_filter.admin.catalog_promotion</filter>
                 </filters>
             </operation>
 
