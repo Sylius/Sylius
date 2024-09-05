@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ This file is part of the Sylius package.
-  ~
-  ~ (c) Sylius Sp. z o.o.
-  ~
-  ~ For the full copyright and license information, please view the LICENSE
-  ~ file that was distributed with this source code.
-  -->
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
@@ -42,6 +44,20 @@
                 name="sylius.live_component"
                 key="sylius_shop:checkout:address:address_book"
                 template="@SyliusShop/checkout/address/form/addresses/address/address_book.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.checkout.shipping.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Shipping\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:checkout:shipping:form"
+                template="@SyliusShop/checkout/select_shipping/form.html.twig"
             />
         </service>
     </services>

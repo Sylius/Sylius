@@ -4,24 +4,26 @@ twig_hooks:
             steps:
                 template: '@SyliusShop/checkout/shared/steps.html.twig'
             form:
-                template: '@SyliusShop/checkout/select_shipping/form.html.twig'
-                
+                component: 'sylius_shop:checkout:shipping:form'
+                props:
+                    order: '@=_context.order'
+
         'sylius_shop.checkout.select_shipping.form':
             shipments:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments.html.twig'
             navigation:
                 template: '@SyliusShop/checkout/select_shipping/form/navigation.html.twig'
-                
+
         'sylius_shop.checkout.select_shipping.form.shipments':
             shipment:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment.html.twig'
-#                
+
         'sylius_shop.checkout.select_shipping.form.shipments.shipment':
             header:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/header.html.twig'
             choice:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice.html.twig'
-                
+
         'sylius_shop.checkout.select_shipping.form.shipments.shipment#unavailable':
             unavailable:
                 template: '@SyliusShop/checkout/select_shipping/unavailable.html.twig'
@@ -31,7 +33,7 @@ twig_hooks:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/details.html.twig'
             fee:
                 template: '@SyliusShop/checkout/select_shipping/form/shipments/shipment/choice/fee.html.twig'
-                
+
         'sylius_shop.checkout.select_shipping.form.shipments.shipment.choice#unavailable':
             unavailable:
                 template: '@SyliusShop/checkout/select_shipping/unavailable.html.twig'

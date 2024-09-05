@@ -59,6 +59,7 @@ docker-compose.override.yml
 /node_modules/
 /public/build/
 npm-debug.log
+pnpm-lock.yaml
 yarn-error.log
 yarn.lock
 package-lock.json
