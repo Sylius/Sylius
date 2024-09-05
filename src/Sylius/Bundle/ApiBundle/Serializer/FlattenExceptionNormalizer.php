@@ -25,7 +25,7 @@ final readonly class FlattenExceptionNormalizer implements NormalizerInterface
     ) {
     }
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         $request = $this->requestStack->getMainRequest();
         if (null === $request) {

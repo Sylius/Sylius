@@ -80,7 +80,7 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null, $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         if (isset($context[self::ALREADY_CALLED])) {
             return false;

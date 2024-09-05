@@ -30,7 +30,7 @@ final readonly class HydraErrorNormalizer implements NormalizerInterface
         return $this->decorated->normalize($object, $format, $context);
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         $request = $this->requestStack->getMainRequest();
 

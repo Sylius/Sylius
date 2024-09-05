@@ -42,7 +42,7 @@ final class ProductOptionValueNormalizer implements NormalizerInterface, Normali
         return $this->normalizer->normalize($object, $format, $context);
     }
 
-    public function supportsNormalization($data, $format = null, $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         if (isset($context[self::ALREADY_CALLED])) {
             return false;

@@ -60,7 +60,7 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null, $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return
             !isset($context[self::ALREADY_CALLED]) &&
