@@ -31,10 +31,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function getBaseGrandTotal(): string
     {
-        Assert::true(false);
-        $totalElement = $this->getElement('base_grand_total');
-
-        return $totalElement->getText();
+        return $this->getElement('base_grand_total')->getText();
     }
 
     public function getIncludedTaxTotal(): string
@@ -47,10 +44,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function getExcludedTaxTotal(): string
     {
-        Assert::true(false);
-        $excludedTaxTotalElement = $this->getElement('tax_excluded');
-
-        return $excludedTaxTotalElement->getText();
+        return $this->getElement('tax_excluded')->getText();
     }
 
     public function areTaxesCharged(): bool
@@ -234,7 +228,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'apply_coupon_button' => '[data-test-apply-coupon-button]',
-//            'base_grand_total' => '[data-test-cart-base-grand-total]',
+            'base_grand_total' => '[data-test-cart-base-grand-total]',
             'cart_items' => '[data-test-cart-items]',
             'cart_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"]',
             'cart_total' => '[data-test-cart-total]',
@@ -260,7 +254,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'remove_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-remove-cart-item]',
 //            'save_button' => '[data-test-apply-coupon-button]',
             'shipping_total' => '[data-test-cart-shipping-total]',
-//            'tax_excluded' => '[data-test-cart-tax-exluded]',
+            'tax_excluded' => '[data-test-cart-tax-excluded]',
 //            'tax_included' => '[data-test-cart-tax-included]',
 //            'update_button' => '[data-test-cart-update-button]',
         ]);

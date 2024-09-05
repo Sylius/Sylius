@@ -26,8 +26,6 @@
         </service>
 
         <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
-            <argument type="service" id="twig" />
-            <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.context.channel" />
         </service>
