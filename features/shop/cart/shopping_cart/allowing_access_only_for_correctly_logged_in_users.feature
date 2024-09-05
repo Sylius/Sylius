@@ -77,7 +77,6 @@ Feature: Allowing access only for correctly logged in users
     Scenario: Accessing to add shipping method to the cart by the customer
         Given the customer logged in
         And the customer has product "Stark T-Shirt" in the cart
-        And the customer has specified the email as "jon.snow@example.com"
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
         When the customer proceed with "UPS" shipping method
