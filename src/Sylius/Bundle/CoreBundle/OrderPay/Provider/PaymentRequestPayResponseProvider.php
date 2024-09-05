@@ -51,6 +51,12 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
 
+        $action = $paymentRequest->getAction();
+        if ($paymentMethod->getGatewayConfig()?->getConfig()['use_authorize'] ?? false) {
+            $action = PaymentRequestInterface::ACTION_AUTHORIZE;
+        }
+        $paymentRequest->setAction($action);
+
         $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 
         if ($this->httpResponseProvider->supports($requestConfiguration, $paymentRequest)) {
