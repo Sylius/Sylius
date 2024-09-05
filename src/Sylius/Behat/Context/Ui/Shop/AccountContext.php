@@ -290,6 +290,14 @@ final readonly class AccountContext implements Context
     }
 
     /**
+     * @When I try to browse my orders
+     */
+    public function iTryToBrowseMyOrders(): void
+    {
+        $this->orderIndexPage->tryToOpen();
+    }
+
+    /**
      * @When I change my payment method to :paymentMethod
      */
     public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
