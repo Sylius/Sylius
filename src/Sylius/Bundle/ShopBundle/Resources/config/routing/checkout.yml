@@ -56,7 +56,7 @@ sylius_shop_checkout_select_payment:
             event: payment
             flash: false
             template: "@SyliusShop/checkout/select_payment.html.twig"
-            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
+            form: Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType
             repository:
                 method: findCartForSelectingPayment
                 arguments:
