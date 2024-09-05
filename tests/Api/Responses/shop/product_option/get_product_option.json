@@ -4,18 +4,8 @@
     "@type": "ProductOption",
     "code": "COLOR",
     "values": [
-        {
-            "@id": "\/api\/v2\/shop\/product-options\/COLOR\/values\/COLOR_BLUE",
-            "@type": "ProductOptionValue",
-            "code": "COLOR_BLUE",
-            "value": "Blue"
-        },
-        {
-            "@id": "\/api\/v2\/shop\/product-options\/COLOR\/values\/COLOR_RED",
-            "@type": "ProductOptionValue",
-            "code": "COLOR_RED",
-            "value": "Red"
-        }
+        "\/api\/v2\/shop\/product-options\/COLOR\/values\/COLOR_BLUE",
+        "\/api\/v2\/shop\/product-options\/COLOR\/values\/COLOR_RED"
     ],
     "name": "Color"
 }
