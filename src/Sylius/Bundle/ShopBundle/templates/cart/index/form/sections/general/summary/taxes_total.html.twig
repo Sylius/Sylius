@@ -17,7 +17,7 @@
             <div {{ sylius_test_html_attribute('cart-no-tax') }}>{{ money.convertAndFormat(0) }}</div>
         {% endif %}
         {% if taxExcluded %}
-            <div {{ sylius_test_html_attribute('cart-tax-exluded') }}>{{ money.convertAndFormat(taxExcluded) }}</div>
+            <div {{ sylius_test_html_attribute('cart-tax-excluded') }}>{{ money.convertAndFormat(taxExcluded) }}</div>
         {% endif %}
         {% if taxIncluded %}
             <div {{ sylius_test_html_attribute('cart-tax-included') }}>{{ money.convertAndFormat(taxIncluded) }}</div>

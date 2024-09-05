@@ -14,7 +14,7 @@ Feature: Changing display currency of the cart
         And the store has a product "The Pug Mug" priced at "$10.00"
         And it belongs to "Mugs" tax category
 
-    @todo @ui @no-api
+    @no-api @ui @javascript
     Scenario: Changing the currency of my cart
         Given I have product "The Pug Mug" in the cart
         When I switch to the "GBP" currency

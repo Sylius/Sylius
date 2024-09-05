@@ -22,7 +22,7 @@ twig_hooks:
             info_message:
                 template: '@SyliusShop/shared/layout/base/header/top_bar/info_message.html.twig'
             currency_switcher:
-                template: '@SyliusShop/shared/layout/base/header/top_bar/currency_switcher.html.twig'
+                component: 'sylius_shop:common:currency_switcher'
             locale_switcher:
                 component: 'sylius_shop:common:locale_switcher'
 
