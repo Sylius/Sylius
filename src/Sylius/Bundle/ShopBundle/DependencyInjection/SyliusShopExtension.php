@@ -106,6 +106,8 @@ final class SyliusShopExtension extends Extension
 
     private function configureOrderPay(array $config, ContainerBuilder $container): void
     {
+        $container->setParameter('sylius_shop.order_pay.after_pay_route', $config['after_pay_route']);
+        $container->setParameter('sylius_shop.order_pay.after_pay_route_parameters', $config['after_pay_route_parameters']);
         $container->setParameter('sylius_shop.order_pay.final_route', $config['final_route']);
         $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['final_route_parameters']);
         $container->setParameter('sylius_shop.order_pay.retry_route', $config['retry_route']);

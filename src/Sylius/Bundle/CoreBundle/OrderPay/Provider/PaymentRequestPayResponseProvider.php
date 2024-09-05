@@ -38,6 +38,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
         private RouterInterface $router,
         private PaymentToPayResolverInterface $paymentToPayResolver,
+        private AfterPayUrlProvider $afterPayUrlProvider,
     ) {
     }
 
@@ -68,11 +69,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
             return $this->httpResponseProvider->getResponse($requestConfiguration, $paymentRequest);
         }
 
-        $url = $this->router->generate('sylius_shop_order_after_pay', [
-            'hash' => $paymentRequest->getId(),
-        ]);
-
-        return new RedirectResponse($url);
+        return new RedirectResponse($this->afterPayUrlProvider->getUrl($paymentRequest));
     }
 
     public function supports(

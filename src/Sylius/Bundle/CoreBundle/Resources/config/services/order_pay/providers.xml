@@ -14,6 +14,10 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
+        <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayUrlProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayUrlProvider">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\OrderPay\Processor\RouteParametersProcessorInterface" />
+        </service>
+
         <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProvider">
             <argument type="service" id="Sylius\Bundle\CoreBundle\OrderPay\Processor\RouteParametersProcessorInterface" />
         </service>
