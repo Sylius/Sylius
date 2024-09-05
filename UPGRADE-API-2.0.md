@@ -1,5 +1,14 @@
 # UPGRADE FROM `1.14` TO `2.0`
 
+## Codebase
+
+* The following classes were removed:
+    * `Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener`
+
+* The following services were removed:
+    * `sylius.listener.api_postgresql_driver_exception_listener`
+
+
 * Non-prefix serialization groups in Sylius resources have been removed.
    If you have extended any of them, you must prefix them with `sylius:`, for example:
 

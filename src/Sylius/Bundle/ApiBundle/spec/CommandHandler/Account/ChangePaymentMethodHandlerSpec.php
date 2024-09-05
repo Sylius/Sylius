@@ -67,7 +67,6 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
             paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
         );
 
-
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $paymentMethodChanger
