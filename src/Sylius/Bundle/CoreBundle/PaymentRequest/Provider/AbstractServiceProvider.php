@@ -61,6 +61,10 @@ abstract class AbstractServiceProvider implements ServiceProviderAwareProviderIn
 
     public function getHttpResponseProvider(string $index): ?HttpResponseProviderInterface
     {
+        if (false === $this->locator->has($index)) {
+            return null;
+        }
+
         return $this->locator->get($index);
     }
 

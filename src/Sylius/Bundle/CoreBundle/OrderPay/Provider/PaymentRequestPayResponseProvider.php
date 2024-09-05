@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ServiceProviderAwareProviderInterface;
@@ -32,6 +33,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
      */
     public function __construct(
         private PaymentRequestFactoryInterface $paymentRequestFactory,
+        private EntityManagerInterface $paymentRequestManager,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
         private RouterInterface $router,
@@ -56,6 +58,9 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
             $action = PaymentRequestInterface::ACTION_AUTHORIZE;
         }
         $paymentRequest->setAction($action);
+
+        $this->paymentRequestManager->persist($paymentRequest);
+        $this->paymentRequestManager->flush();
 
         $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 

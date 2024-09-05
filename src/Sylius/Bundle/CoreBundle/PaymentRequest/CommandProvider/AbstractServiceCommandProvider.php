@@ -50,6 +50,10 @@ abstract class AbstractServiceCommandProvider implements ServiceProviderAwareCom
 
     public function getCommandProvider(string $index): ?PaymentRequestCommandProviderInterface
     {
+        if (false === $this->locator->has($index)) {
+            return null;
+        }
+
         return $this->locator->get($index);
     }
 
