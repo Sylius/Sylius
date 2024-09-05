@@ -89,7 +89,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::true($this->summaryPage->isEmpty());
+        Assert::true($this->summaryPage->cartIsEmpty());
     }
 
     /**
@@ -218,7 +218,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^there should be no shipping fee$/
+     * @Then there should be no shipping fee
      */
     public function thereShouldBeNoShippingFee(): void
     {
@@ -234,9 +234,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^there should be no discount$/
+     * @Then there should be no discount applied
      */
-    public function thereShouldBeNoDiscount(): void
+    public function thereShouldBeNoDiscountApplied(): void
     {
         $this->summaryPage->open();
 
@@ -299,6 +299,7 @@ final class CartContext implements Context
      * @Given /^the customer (?:added|adds) ("[^"]+" product) to the cart$/
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When I add product :product to the cart
+     * @When I add the product :product to the cart
      * @When they add product :product to the cart
      */
     public function iAddProductToTheCart(ProductInterface $product): void
@@ -610,7 +611,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeAnEmptyCart(): void
     {
-        Assert::true($this->summaryPage->isEmpty());
+        Assert::true($this->summaryPage->cartIsEmpty());
     }
 
     private function getPriceFromString(string $price): int

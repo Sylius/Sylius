@@ -16,4 +16,4 @@ Feature: Removing promotion coupon
     Scenario: Removing coupon code from cart
         When I remove coupon from my cart
         Then my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied

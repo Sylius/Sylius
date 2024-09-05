@@ -10,7 +10,7 @@ Feature: Reapplying promotion on cart change
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @api @ui
+    @api @ui @mink:chromedriver
     Scenario: Not receiving discount on shipping after removing last item from cart
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
@@ -20,7 +20,7 @@ Feature: Reapplying promotion on cart change
         And I remove product "PHP T-Shirt" from the cart
         Then cart should be empty with no value
         And there should be no shipping fee
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving discount on shipping after shipping method change
@@ -52,7 +52,7 @@ Feature: Reapplying promotion on cart change
         And I have 2 products "PHP T-Shirt" in the cart
         When I change product "PHP T-Shirt" quantity to 1
         Then my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Not receiving discount when cart does not meet the required quantity after removing an item
@@ -60,4 +60,4 @@ Feature: Reapplying promotion on cart change
         And I have 3 products "PHP T-Shirt" in the cart
         When I change product "PHP T-Shirt" quantity to 1
         Then my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied

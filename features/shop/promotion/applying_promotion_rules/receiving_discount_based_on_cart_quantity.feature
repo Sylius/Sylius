@@ -28,7 +28,7 @@ Feature: Receiving discount based on cart quantity
         Given the promotion gives "$10.00" discount to every order with quantity at least 5
         When I add 2 products "PHP T-Shirt" to the cart
         Then my cart total should be "$200.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving discount when buying different products with the required quantity
