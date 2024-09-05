@@ -1,0 +1,30 @@
+Sylius\Component\Core\Model\Promotion:
+    promotion_ended:
+        code: 'promotion_ended'
+        name: 'Ended promotion with valid coupon'
+        description: 'This promotion has already ended but the coupon is still valid'
+        channels: ['@channel_web']
+        priority: 1
+        exclusive: true
+        appliesToDiscounted: false
+        usageLimit: 1
+        used: 0
+        couponBased: true
+        endsAt: <dateTimeBetween('-1 month', '-1 day')>
+        translations:
+            - '@promotion_ended_en'
+
+Sylius\Component\Promotion\Model\PromotionTranslation:
+    promotion_ended_en:
+        locale: 'en_US'
+        label: 'Ended promotion with valid coupon'
+        translatable: '@promotion_ended'
+
+Sylius\Component\Core\Model\PromotionCoupon:
+    promotion_coupon_valid:
+        code: 'PROMOTION_COUPON_VALID'
+        usageLimit: null
+        perCustomerUsageLimit: null
+        reusableFromCancelledOrders: false
+        promotion: '@promotion_ended'
+        expiresAt: <dateTimeBetween('+1 month', '+2 month')>

@@ -24,6 +24,7 @@ final class CartTest extends JsonApiTestCase
     protected function setUp(): void
     {
         $this->setUpOrderPlacer();
+        $this->setUpDefaultPutHeaders();
 
         parent::setUp();
     }
@@ -596,6 +597,93 @@ final class CartTest extends JsonApiTestCase
                 ['propertyPath' => 'shippingAddress.postcode', 'message' => 'Please enter postcode.'],
             ],
         );
+    }
+
+    /** @test */
+    public function it_does_not_apply_invalid_coupon_code(): void
+    {
+        $this->loadFixturesFromFiles([
+            'promotion/channel.yaml',
+            'promotion/product.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('CAP_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'INVALID'],
+        );
+
+        $this->assertResponseViolations($this->client->getResponse(), [
+            ['propertyPath' => 'couponCode', 'message' => 'Coupon code is invalid.'],
+        ]);
+    }
+
+    /** @test */
+    public function it_does_not_apply_expired_coupon_code(): void
+    {
+        $this->loadFixturesFromFiles([
+            'promotion/channel.yaml',
+            'promotion/product.yaml',
+            'promotion/promotion_coupon_expired.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('CAP_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'PROMOTION_COUPON_EXPIRED'],
+        );
+
+        $this->assertResponseViolations($this->client->getResponse(), [
+            ['propertyPath' => 'couponCode', 'message' => 'Coupon code has expired.'],
+        ]);
+    }
+
+    /** @test */
+    public function it_does_not_apply_a_valid_coupon_code_of_ended_promotion(): void
+    {
+        $this->loadFixturesFromFiles([
+            'promotion/channel.yaml',
+            'promotion/promotion_ended_with_valid_coupon.yaml',
+            'promotion/product.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('CAP_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'PROMOTION_COUPON_VALID'],
+        );
+
+        $this->assertResponseViolations($this->client->getResponse(), [
+            ['propertyPath' => 'couponCode', 'message' => 'Coupon code is not valid for this order.'],
+        ]);
+    }
+
+    /** @test */
+    public function it_does_not_apply_valid_coupon_with_ineligible_promotion(): void
+    {
+        $this->loadFixturesFromFiles([
+            'promotion/channel.yaml',
+            'promotion/promotion_ineligible.yaml',
+            'promotion/product.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('CAP_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'ELIGIBLE_COUPON_WITH_INELIGIBLE_PROMOTION'],
+        );
+
+        $this->assertResponseViolations($this->client->getResponse(), [
+            ['propertyPath' => 'couponCode', 'message' => 'Coupon code is not valid for this order.'],
+        ]);
     }
 
     /** @test */
