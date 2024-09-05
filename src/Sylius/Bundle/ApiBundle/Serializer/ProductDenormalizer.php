@@ -35,7 +35,7 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
@@ -43,6 +43,11 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         $data = $this->denormalizeOptions($data, $context);
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductInterface::class => true];
     }
 
     /**

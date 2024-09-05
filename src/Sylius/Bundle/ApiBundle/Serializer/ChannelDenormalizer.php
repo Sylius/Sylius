@@ -47,7 +47,7 @@ final class ChannelDenormalizer implements DenormalizerInterface, DenormalizerAw
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
@@ -67,5 +67,10 @@ final class ChannelDenormalizer implements DenormalizerInterface, DenormalizerAw
         }
 
         return $channel;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ChannelInterface::class => true];
     }
 }

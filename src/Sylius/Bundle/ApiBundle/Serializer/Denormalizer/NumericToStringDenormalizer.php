@@ -40,7 +40,7 @@ final class NumericToStringDenormalizer implements ContextAwareDenormalizerInter
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::getAlreadyCalledKey($type)] = true;
 
@@ -53,6 +53,11 @@ final class NumericToStringDenormalizer implements ContextAwareDenormalizerInter
         $data[$this->field] = (string) $data[$this->field];
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [$this->resourceClass => true];
     }
 
     private static function getAlreadyCalledKey(string $class): string

@@ -38,7 +38,7 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
     /**
      * @param ProductAttributeValueInterface $object
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ProductAttributeValueInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -73,6 +73,11 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
         }
 
         return $data instanceof ProductAttributeValueInterface;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductAttributeValueInterface::class => true];
     }
 
     private function normalizeSelectValue(ProductAttributeValueInterface $object): array

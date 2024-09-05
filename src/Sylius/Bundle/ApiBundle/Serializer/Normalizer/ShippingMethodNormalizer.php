@@ -45,7 +45,7 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
     ) {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array|null
     {
         Assert::isInstanceOf($object, ShippingMethodInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -95,5 +95,10 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
             $operation instanceof HttpOperation &&
             isset($operation->getUriVariables()['tokenValue'], $operation->getUriVariables()['shipmentId'])
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ShippingMethodInterface::class => true];
     }
 }

@@ -38,7 +38,7 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
     ) {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ImageInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -59,6 +59,11 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
         }
 
         return $data instanceof ImageInterface;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ImageInterface::class => true];
     }
 
     /** @param array<string, string> $data */

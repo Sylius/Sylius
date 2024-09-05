@@ -27,7 +27,7 @@ final readonly class HydraErrorNormalizer implements NormalizerInterface, Cachea
     ) {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         return $this->decorated->normalize($object, $format, $context);
     }
@@ -45,6 +45,11 @@ final readonly class HydraErrorNormalizer implements NormalizerInterface, Cachea
         }
 
         return $this->decorated->supportsNormalization($data, $format);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['object' => true];
     }
 
     public function hasCacheableSupportsMethod(): bool

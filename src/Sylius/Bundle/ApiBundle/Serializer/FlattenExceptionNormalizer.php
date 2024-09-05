@@ -40,8 +40,13 @@ final readonly class FlattenExceptionNormalizer implements ContextAwareNormalize
         return $this->decorated->supportsNormalization($data, $format, $context);
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         return $this->decorated->normalize($object, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['object' => true];
     }
 }

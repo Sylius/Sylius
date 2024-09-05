@@ -37,7 +37,7 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
     ) {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ProductInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -67,5 +67,10 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
             $data instanceof ProductInterface &&
             $this->sectionProvider->getSection() instanceof ShopApiSection
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductInterface::class => true];
     }
 }

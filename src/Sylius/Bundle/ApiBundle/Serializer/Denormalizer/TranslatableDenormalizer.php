@@ -32,7 +32,7 @@ final class TranslatableDenormalizer implements DenormalizerInterface, Denormali
     ) {
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::getAlreadyCalledKey($type)] = true;
 
@@ -54,6 +54,11 @@ final class TranslatableDenormalizer implements DenormalizerInterface, Denormali
             !isset($context[self::getAlreadyCalledKey($type)]) &&
             is_a($type, TranslatableInterface::class, true)
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [TranslatableInterface::class => true];
     }
 
     private static function getAlreadyCalledKey(string $class): string

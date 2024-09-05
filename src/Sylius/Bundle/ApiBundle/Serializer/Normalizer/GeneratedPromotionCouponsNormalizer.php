@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -32,7 +33,7 @@ final class GeneratedPromotionCouponsNormalizer implements NormalizerInterface, 
     {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ArrayCollection::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -59,5 +60,10 @@ final class GeneratedPromotionCouponsNormalizer implements NormalizerInterface, 
             $data instanceof ArrayCollection &&
             $this->sectionProvider->getSection() instanceof AdminApiSection
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [Collection::class => true];
     }
 }

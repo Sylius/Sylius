@@ -35,7 +35,7 @@ final class TranslatableLocaleKeyDenormalizer implements DenormalizerInterface, 
     }
 
     /** @param array<string, array{ translations: array<array-key, mixed> }> $data */
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::getAlreadyCalledKey($type)] = true;
 
@@ -54,6 +54,11 @@ final class TranslatableLocaleKeyDenormalizer implements DenormalizerInterface, 
         }
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [TranslatableInterface::class => true];
     }
 
     private static function getAlreadyCalledKey(string $class): string

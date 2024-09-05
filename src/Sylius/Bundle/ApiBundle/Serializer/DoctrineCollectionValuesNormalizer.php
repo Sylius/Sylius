@@ -32,8 +32,13 @@ final class DoctrineCollectionValuesNormalizer implements ContextAwareNormalizer
         ;
     }
 
-    public function normalize(mixed $object, ?string $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         return $this->normalizer->normalize($object->getValues(), $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [Collection::class => true];
     }
 }

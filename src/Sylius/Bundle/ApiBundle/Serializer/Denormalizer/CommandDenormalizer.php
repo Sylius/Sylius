@@ -33,7 +33,7 @@ final class CommandDenormalizer implements DenormalizerInterface
         return isset($context['input']['class']);
     }
 
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         try {
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
@@ -61,6 +61,11 @@ final class CommandDenormalizer implements DenormalizerInterface
                 )),
             ));
         }
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['object' => true];
     }
 
     private function normalizeFieldName(string $field, string $class): string
