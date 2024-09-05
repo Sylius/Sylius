@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
 use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ServiceProviderAwareProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -37,6 +38,7 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private PaymentRequestCommandProviderInterface $paymentRequestCommandProvider,
         private PaymentStateFlashHandlerInterface $paymentStateFlashHandler,
         private FinalUrlProviderInterface $orderPayFinalUrlProvider,
     ) {
@@ -47,20 +49,21 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
         $hash = $this->getPaymentRequestHash($requestConfiguration);
         Assert::notNull($hash, 'A request attribute "hash" is required to retrieve the related order.');
 
-        $paymentRequest = $this->paymentRequestRepository->find($hash);
-        if (null === $paymentRequest) {
+        $capturePaymentRequest = $this->paymentRequestRepository->find($hash);
+        if (null === $capturePaymentRequest) {
             throw new NotFoundHttpException(sprintf('The Payment Request with hash "%s" does not exist.', $hash));
         }
 
-        $statusPaymentRequest = $this->paymentRequestFactory->createFromPaymentRequest($paymentRequest);
-        $statusPaymentRequest->setAction(PaymentRequestInterface::ACTION_STATUS);
+        $paymentRequest = $this->paymentRequestFactory->createFromPaymentRequest($capturePaymentRequest);
+        $paymentRequest->setAction(PaymentRequestInterface::ACTION_STATUS);
 
-        $this->paymentRequestRepository->add($paymentRequest);
+        if ($this->paymentRequestCommandProvider->supports($paymentRequest)) {
+            $this->paymentRequestRepository->add($paymentRequest);
+            $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
+        }
 
-        $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($statusPaymentRequest);
-
-        if ($this->httpResponseProvider->supports($requestConfiguration, $statusPaymentRequest)) {
-            return $this->httpResponseProvider->getResponse($requestConfiguration, $statusPaymentRequest);
+        if ($this->httpResponseProvider->supports($requestConfiguration, $paymentRequest)) {
+            return $this->httpResponseProvider->getResponse($requestConfiguration, $paymentRequest);
         }
 
         /** @var PaymentInterface $payment */
