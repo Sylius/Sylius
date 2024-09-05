@@ -23,10 +23,10 @@ webpack_encore:
 sylius_grid:
     templates:
         action:
-            shop_show: "@SyliusShop/Grid/Action/show.html.twig"
+            shop_show: "@SyliusShop/grid/action/show.html.twig"
             shop_pay: "@SyliusShop/account/order/grid/action/pay.html.twig"
         filter:
-            shop_string: "@SyliusShop/Grid/Filter/string.html.twig"
+            shop_string: "@SyliusShop/grid/filter/string.html.twig"
 
 sylius_shop:
     checkout_resolver:

@@ -1,0 +1,9 @@
+{% set lastPayment = hookable_metadata.context.order.payments.last() %}
+
+{% if lastPayment != false %}
+    {%  if lastPayment.method.instructions is not null %}
+        <div {{ sylius_test_html_attribute('payment-method-instructions') }}>
+            {{ lastPayment.method.instructions }}
+        </div>
+    {% endif %}
+{% endif %}

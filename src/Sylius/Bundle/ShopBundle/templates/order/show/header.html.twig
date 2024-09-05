@@ -1,4 +1,5 @@
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+{% set order = hookable_metadata.context.order %}
 
 <div class="mb-4">
     <h1 class="h2">{{ 'sylius.ui.summary_of_your_order'|trans }} #{{ order.number }}</h1>

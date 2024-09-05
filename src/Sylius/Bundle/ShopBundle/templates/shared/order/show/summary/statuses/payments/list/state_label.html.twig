@@ -2,6 +2,6 @@
 
 {% set state = hookable_metadata.context.payment.state %}
 
-<p {{ sylius_test_html_attribute('payment-state') }}>
+<div {{ sylius_test_html_attribute('payment-state') }}>
     {{ label(state) }}
-</p>
+</div>
