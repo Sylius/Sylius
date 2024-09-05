@@ -1,0 +1,21 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.order.thank_you':
+            header:
+                template: '@SyliusShop/order/thank_you/header.html.twig'
+            subheader:
+                template: '@SyliusShop/order/thank_you/subheader.html.twig'
+            last_payment:
+                template: '@SyliusShop/order/thank_you/last_payment.html.twig'
+            buttons:
+                template: '@SyliusShop/order/thank_you/buttons.html.twig'
+
+        'sylius_shop.order.thank_you.buttons.logged_in':
+            show_order:
+                template: '@SyliusShop/order/thank_you/buttons/logged_in/show_order.html.twig'
+
+        'sylius_shop.order.thank_you.buttons.logged_out':
+            change_payment_method:
+                template: '@SyliusShop/order/thank_you/buttons/logged_out/change_payment_method.html.twig'
+            create_account:
+                template: '@SyliusShop/order/thank_you/buttons/logged_out/create_account.html.twig'

@@ -1,0 +1,11 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.thank_you'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container text-center my-auto">
+        <div class="row flex-column my-4">
+            {% hook 'sylius_shop.order.thank_you' with { order } %}
+        </div>
+    </div>
+{% endblock %}
