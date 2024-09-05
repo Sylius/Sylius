@@ -26,7 +26,7 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($normalizer, $requestStack, '/api/v1');
 
-        $normalizer->normalize('data', 'format', ['context'])->shouldBeCalled();
+        $normalizer->normalize('data', 'format', ['context'])->willReturn([])->shouldBeCalled();
 
         $this->normalize('data', 'format', ['context']);
     }

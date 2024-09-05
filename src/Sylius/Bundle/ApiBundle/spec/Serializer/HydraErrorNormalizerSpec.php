@@ -26,7 +26,7 @@ final class HydraErrorNormalizerSpec extends ObjectBehavior
     {
         $this->beConstructedWith($normalizer, $requestStack, '/api/v2');
 
-        $normalizer->normalize('data', 'format', ['context'])->shouldBeCalled();
+        $normalizer->normalize('data', 'format', ['context'])->willReturn([])->shouldBeCalled();
 
         $this->normalize('data', 'format', ['context']);
     }
