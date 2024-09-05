@@ -17,8 +17,9 @@
 >
     <services>
 
-        <service id="sylius.shop.provider.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ActionsHttpResponseProvider">
+        <service id="sylius.payment_request.http_response.provider.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ActionsHttpResponseProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.http_response.provider.offline" index-by="action" />
+            <tag name="sylius.payment_request.http_response.provider" gateway-factory="offline" />
         </service>
 
     </services>
