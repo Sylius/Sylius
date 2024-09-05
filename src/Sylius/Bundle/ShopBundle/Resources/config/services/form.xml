@@ -46,5 +46,9 @@
         <service id="sylius_shop.form.type.user_change_password" class="Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType">
             <tag name="form.type" />
         </service>
+
+        <service id="sylius_shop.form.type.checkout.address" class="Sylius\Bundle\ShopBundle\Form\Type\Checkout\AddressType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

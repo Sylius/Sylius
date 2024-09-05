@@ -18,7 +18,7 @@ sylius_shop_checkout_address:
             flash: false
             template: "@SyliusShop/checkout/address.html.twig"
             form:
-                type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
+                type: Sylius\Bundle\ShopBundle\Form\Type\Checkout\AddressType
                 options:
                     customer: expr:service('sylius.context.customer').getCustomer()
             repository:
