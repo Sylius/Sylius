@@ -1,6 +1,8 @@
 twig_hooks:
     hooks:
         'sylius_shop.checkout.complete':
+            steps:
+                template: '@SyliusShop/checkout/shared/steps.html.twig'
             header:
                 template: '@SyliusShop/checkout/complete/header.html.twig'
             flashes:
