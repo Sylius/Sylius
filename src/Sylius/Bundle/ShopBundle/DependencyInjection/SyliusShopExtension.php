@@ -108,8 +108,8 @@ final class SyliusShopExtension extends Extension
     {
         $container->setParameter('sylius_shop.order_pay.final_route', $config['final_route']);
         $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['final_route_parameters']);
-        $container->setParameter('sylius_shop.order_pay.final_route', $config['retry_route']);
-        $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['retry_route_parameters']);
+        $container->setParameter('sylius_shop.order_pay.retry_route', $config['retry_route']);
+        $container->setParameter('sylius_shop.order_pay.retry_route_parameters', $config['retry_route_parameters']);
     }
 
 }
