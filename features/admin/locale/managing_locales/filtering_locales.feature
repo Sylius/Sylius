@@ -11,7 +11,7 @@ Feature: Filtering locales
         And I am logged in as an administrator
         And I am browsing locales
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering locales by code
         When I filter by code containing "pl"
         Then I should see a single locale in the list

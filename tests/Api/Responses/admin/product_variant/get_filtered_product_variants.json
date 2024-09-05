@@ -91,7 +91,7 @@
     },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/product-variants{?order[position],product,product[],catalogPromotion}",
+        "hydra:template": "\/api\/v2\/admin\/product-variants{?order[position],product,product[],code,translations.name,catalogPromotion}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -110,6 +110,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "product[]",
                 "property": "product",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
                 "required": false
             },
             {

@@ -190,6 +190,33 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I search for products with :name name
+     */
+    public function iSearchForProductsWithName(string $name): void
+    {
+        $this->client->addFilter('translations.name', $name);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I search for products with :code code
+     */
+    public function iSearchForProductsWithCode(string $code): void
+    {
+        $this->client->addFilter('code', $code);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter them by :taxon main taxon
+     */
+    public function iFilterThemByMainTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->addFilter('mainTaxon.code', $taxon->getCode());
+        $this->client->filter();
+    }
+
+    /**
      * @When I start sorting products by code
      * @When I switch the way products are sorted :sortType by code
      */

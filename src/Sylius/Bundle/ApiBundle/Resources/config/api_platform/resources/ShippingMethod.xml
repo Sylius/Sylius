@@ -38,7 +38,7 @@
                 <filters>
                     <filter>sylius_api.exists_filter.shipping_method</filter>
                     <filter>sylius_api.order_filter.shipping_method</filter>
-                    <filter>sylius_api.filter.translation_order_and_locale</filter>
+                    <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
                 </filters>
             </operation>
 
