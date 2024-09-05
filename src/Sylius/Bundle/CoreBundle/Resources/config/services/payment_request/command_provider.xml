@@ -24,5 +24,7 @@
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider" index-by="gateway-factory" />
         </service>
 
+        <service id="sylius.payment_request.command_provider.default" alias="sylius.payment_request.command_provider.gateway_factory" />
+
     </services>
 </container>
