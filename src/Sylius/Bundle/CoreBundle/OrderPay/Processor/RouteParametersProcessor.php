@@ -24,7 +24,7 @@ final class RouteParametersProcessor implements RouteParametersProcessorInterfac
     ) {
     }
 
-    public function process(string $route, array $rawParameters, array $context): string
+    public function process(string $route, array $rawParameters = [], array $context = []): string
     {
         $parameters = [];
         foreach ($rawParameters as $key => $rawParameter) {

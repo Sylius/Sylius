@@ -19,5 +19,5 @@ interface RouteParametersProcessorInterface
      * @param array<string, string|int|bool> $rawParameters
      * @param array<string, mixed> $context
      */
-    public function process(string $route, array $rawParameters, array $context): string;
+    public function process(string $route, array $rawParameters = [], array $context = []): string;
 }
