@@ -26,7 +26,7 @@ Feature: Seeing correct percentage discounts while editing promotion with action
         Then I should be notified that it has been successfully edited
         And it should have "2.56%" of order percentage discount
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Seeing an accurate percentage amount after using a comma as a decimal separator
         When I want to modify a "Cheap Stuff" promotion
         And I edit this promotion percentage action to have "2,56%"

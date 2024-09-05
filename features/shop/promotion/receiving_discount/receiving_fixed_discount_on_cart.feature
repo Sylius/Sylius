@@ -34,14 +34,15 @@ Feature: Receiving fixed discount on cart
         Then my cart total should be "$0.00"
         And my discount should be "-$100.00"
 
-    @todo @api @ui @mink:chromedriver
+    @api @todo-ui @mink:chromedriver
     Scenario: Receiving fixed discount does not affect the shipping fee
         Given the store has "DHL" shipping method with "$10.00" fee
         And there is a promotion "Holiday promotion"
         And it gives "$10.00" discount to every order
         And I am a logged in customer
         When I add product "PHP T-Shirt" to the cart
-        And I proceed selecting "DHL" shipping method
+        And I addressed it
+        And I proceed with selecting "DHL" shipping method
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$10.00"
         And my discount should be "-$10.00"

@@ -17,7 +17,6 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">
         <attribute name="paymentMethodCode" serialized-name="paymentMethod">
-            <group>shop:cart:select_payment_method</group>
             <group>sylius:shop:cart:select_payment_method</group>
         </attribute>
     </class>

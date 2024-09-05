@@ -34,6 +34,9 @@ parameters:
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
 
+        # Temporary exclusion during upgrade to API Platform 3
+        - 'src/Sylius/Bundle/ApiBundle/**.php'
+
         # Random errors related to Template Events (we're going to replace them with Twig Events anyway)
         - 'src/Sylius/Bundle/UiBundle/Console/Command/DebugTemplateEventCommand.php'
 

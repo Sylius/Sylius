@@ -4,5 +4,7 @@ Sylius\Component\Core\Model\AdminUser:
         roles: [ROLE_API_ACCESS]
         enabled: true
         email: api@example.com
+        passwordResetToken: "valid_token"
+        passwordRequestedAt: "<(new \\DateTime())>"
         username: sylius
         localeCode: en

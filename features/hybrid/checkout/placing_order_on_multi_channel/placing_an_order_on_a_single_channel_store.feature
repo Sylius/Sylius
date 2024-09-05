@@ -19,8 +19,8 @@ Feature: Placing an order on a single channel store
     @api @todo-ui
     Scenario: Placing an order in a channels base currency
         Given I have product "PHP T-Shirt" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
+        And I addressed the cart
+        When I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         Then the administrator should see that order placed by "customer@example.com" has "USD" currency
 
@@ -29,7 +29,7 @@ Feature: Placing an order on a single channel store
         Given that channel also allows to shop using the "CAD" currency
         And I had product "PHP T-Shirt" in the cart
         And I changed my currency to "CAD"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
-        When I confirm my order
+        And I addressed the cart
+        When I proceed with "Free" shipping method and "Offline" payment
+        And I confirm my order
         Then the administrator should see that order placed by "customer@example.com" has "USD" currency

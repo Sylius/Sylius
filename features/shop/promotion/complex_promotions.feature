@@ -25,14 +25,15 @@ Feature: Receiving a discount based on a configured promotion
         Then my cart total should be "$40.00"
         And my discount should be "-$10.00"
 
-    @todo @ui @api
+    @api @todo-ui
     Scenario: Receiving a discount on items and shipping from one promotion based on items total
         Given the store has "DHL" shipping method with "$10.00" fee
         And there is a promotion "Jackets and shipping discount"
         And it gives "$10.00" off on every product classified as "Jackets" and a free shipping to every order with items total equal at least "$500.00"
         And I am a logged in customer
         When I add 7 products "Black Sabbath jacket" to the cart
-        And I proceed selecting "DHL" shipping method
+        And I addressed the cart
+        And I proceed with selecting "DHL" shipping method
         Then theirs subtotal price should be decreased by "$70.00"
         And my cart total should be "$630.00"
         And my cart shipping total should be "$0.00"

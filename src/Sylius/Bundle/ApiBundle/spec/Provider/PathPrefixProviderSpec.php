@@ -14,19 +14,17 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Provider\PathPrefixes;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class PathPrefixProviderSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(): void
     {
-        $this->beConstructedWith($userContext, '/api/v2');
+        $this->beConstructedWith('/api/v2', [PathPrefixes::ADMIN_PREFIX, PathPrefixes::SHOP_PREFIX]);
     }
 
-    function it_implements_a_path_prefix_provider_interface(): void
+    function it_implements_the_path_prefix_provider_interface(): void
     {
         $this->shouldImplement(PathPrefixProviderInterface::class);
     }
@@ -36,7 +34,7 @@ final class PathPrefixProviderSpec extends ObjectBehavior
         $this->getPathPrefix('/old-api/shop/certain-route')->shouldReturn(null);
     }
 
-    function it_returns_null_if_the_given_path_does_not_match_api_path(): void
+    function it_returns_null_if_the_given_path_does_not_match_api_prefixes(): void
     {
         $this->getPathPrefix('/api/v2/wrong/certain-route')->shouldReturn(null);
     }
@@ -51,34 +49,10 @@ final class PathPrefixProviderSpec extends ObjectBehavior
         $this->getPathPrefix('/api/v2/admin/certain-route')->shouldReturn('admin');
     }
 
-    function it_returns_prefix_from_api_route_with_slashes(UserContextInterface $userContext): void
+    function it_returns_prefix_from_api_route_with_slashes(): void
     {
-        $this->beConstructedWith($userContext, '/api/long/route/name');
+        $this->beConstructedWith('/api/long/route/name', [PathPrefixes::ADMIN_PREFIX]);
+
         $this->getPathPrefix('/api/long/route/name/admin/certain-route')->shouldReturn('admin');
-    }
-
-    function it_returns_admin_prefix_if_currently_logged_in_is_admin_user(
-        UserContextInterface $userContext,
-        AdminUserInterface $user,
-    ): void {
-        $userContext->getUser()->willReturn($user);
-
-        $this->getCurrentPrefix()->shouldReturn('admin');
-    }
-
-    function it_returns_shop_prefix_if_currently_logged_in_is_shop_user(
-        UserContextInterface $userContext,
-        ShopUserInterface $user,
-    ): void {
-        $userContext->getUser()->willReturn($user);
-
-        $this->getCurrentPrefix()->shouldReturn('shop');
-    }
-
-    function it_returns_shop_prefix_if_there_is_no_logged_in_user(UserContextInterface $userContext): void
-    {
-        $userContext->getUser()->willReturn(null);
-
-        $this->getCurrentPrefix()->shouldReturn('shop');
     }
 }

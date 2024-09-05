@@ -125,6 +125,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         return $queryBuilder->getQuery()->getResult();
     }
 
+    /** @return OrderInterface[] */
     public function findAllExceptCarts(): array
     {
         return $this->createQueryBuilder('o')

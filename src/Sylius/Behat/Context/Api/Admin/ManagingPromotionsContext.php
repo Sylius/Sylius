@@ -19,7 +19,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -38,7 +37,7 @@ use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-final class ManagingPromotionsContext implements Context
+final readonly class ManagingPromotionsContext implements Context
 {
     use ValidationTrait;
 
@@ -46,7 +45,6 @@ final class ManagingPromotionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -161,7 +159,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItApplicableForTheChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }
 
     /**
@@ -640,7 +638,7 @@ final class ManagingPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::PROMOTIONS, $promotion->getCode()),
                 'channels',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResource($channel),
             ),
         );
     }

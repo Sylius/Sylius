@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -37,7 +36,6 @@ final class ManagingShipmentsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
     ) {
@@ -66,10 +64,7 @@ final class ManagingShipmentsContext implements Context
     {
         $firstShipment = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
 
-        /** @var OrderInterface $order */
-        $order = $this->iriConverter->getResourceFromIri($firstShipment['order']);
-
-        $this->client->customItemAction(Resources::ORDERS, $order->getTokenValue(), HttpRequest::METHOD_GET, 'shipments');
+        $this->client->showByIri($firstShipment['order']);
     }
 
     /**
@@ -180,7 +175,7 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->index(Resources::SHIPMENTS), [
-                'order' => $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+                'order' => $this->iriConverter->getIriFromResourceInSection($order, 'admin'),
                 'state' => strtolower($shippingState),
             ]),
             sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState),
@@ -311,12 +306,9 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldSeeOrderWithDetails(OrderInterface $order): void
     {
-        Assert::true(
-            $this->responseChecker->hasItemWithValue(
-                $this->client->getLastResponse(),
-                'order',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
-            ),
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'number'),
+            $order->getNumber(),
             sprintf('Order with number %s does not exist', $order->getNumber()),
         );
     }
@@ -341,7 +333,7 @@ final class ManagingShipmentsContext implements Context
         return $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($order, 'admin'),
         );
     }
 }

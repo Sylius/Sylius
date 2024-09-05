@@ -16,7 +16,8 @@ Feature: Viewing diagonal variants options
         And this product has all possible variants
         But the "Small" size / "Blue" color variant of product "Extra Cool T-Shirt" is disabled
         And the "Large" size / "Yellow" color variant of product "Extra Cool T-Shirt" is disabled
-    @api @ui
+
+    @todo-api @ui
     Scenario: Viewing both values for both options when diagonal variants are available
         When I view product "Extra Cool T-Shirt"
         Then I should be able to select the "Yellow" and "Blue" Color option values

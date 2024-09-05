@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class DeleteOrderItemAction
+final readonly class DeleteOrderItemAction
 {
     public function __construct(
         private MessageBusInterface $commandBus,
@@ -31,7 +31,7 @@ final class DeleteOrderItemAction
 
     public function __invoke(Request $request): Response
     {
-        $orderItemId = $request->attributes->get('itemId');
+        $orderItemId = $request->attributes->get('orderItemId');
         $tokenValue = $request->attributes->get('tokenValue');
         if (null === $orderItemId || null === $tokenValue) {
             throw new OrderItemNotFoundException();
@@ -42,7 +42,7 @@ final class DeleteOrderItemAction
             throw new OrderItemNotFoundException();
         }
 
-        $this->commandBus->dispatch(new RemoveItemFromCart($tokenValue, $orderItemId));
+        $this->commandBus->dispatch(new RemoveItemFromCart(orderTokenValue: $tokenValue, itemId: $orderItemId));
 
         return new JsonResponse(status: Response::HTTP_NO_CONTENT);
     }

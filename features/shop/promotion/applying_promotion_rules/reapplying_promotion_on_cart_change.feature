@@ -10,29 +10,33 @@ Feature: Reapplying promotion on cart change
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @todo @ui @api
+    @api @todo-ui
     Scenario: Not receiving discount on shipping after removing last item from cart
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
         And I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "DHL" shipping method
+        And I addressed it
+        When I proceed with selecting "DHL" shipping method
         And I remove product "PHP T-Shirt" from the cart
         Then cart should be empty with no value
         And there should be no shipping fee
         And there should be no discount
 
-    @todo @ui @api
+    @api @todo-ui
     Scenario: Receiving discount on shipping after shipping method change
         Given the store has "DHL" shipping method with "$10.00" fee
         And the store has "FedEx" shipping method with "$30.00" fee
         And the promotion gives "100%" discount on shipping to every order
         And I have product "PHP T-Shirt" in the cart
+        And I addressed it
         And I chose "DHL" shipping method
-        When I change shipping method to "FedEx"
+        When I decide to change order shipping method
+        And I change shipping method to "FedEx"
+        And I complete the shipping step
         Then my cart total should be "$100.00"
         And my cart shipping should be for Free
 
-    @todo @ui @api
+    @api @todo-ui
     Scenario: Receiving discount after removing an item from the cart and then adding another one
         Given the store has a product "Symfony T-Shirt" priced at "$150.00"
         And the promotion gives "$10.00" discount to every order
@@ -42,7 +46,7 @@ Feature: Reapplying promotion on cart change
         Then my cart total should be "$140.00"
         And my discount should be "-$10.00"
 
-    @todo @ui @api
+    @api @todo-ui
     Scenario: Not receiving discount when cart does not meet the required total value after removing an item
         Given the promotion gives "$10.00" discount to every order with items total at least "$120.00"
         And I have 2 products "PHP T-Shirt" in the cart
@@ -50,7 +54,7 @@ Feature: Reapplying promotion on cart change
         Then my cart total should be "$100.00"
         And there should be no discount
 
-    @todo @ui @api
+    @api @todo-ui
     Scenario: Not receiving discount when cart does not meet the required quantity after removing an item
         Given the promotion gives "$10.00" discount to every order with quantity at least 3
         And I have 3 products "PHP T-Shirt" in the cart
