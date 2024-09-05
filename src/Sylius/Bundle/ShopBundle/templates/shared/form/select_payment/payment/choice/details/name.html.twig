@@ -1,0 +1,5 @@
+{% set form = hookable_metadata.context.form %}
+
+<div {{ sylius_test_html_attribute('payment-method-checkbox') }}>
+    {{ form_widget(form, sylius_test_form_attribute('payment-method-select')) }}
+</div>

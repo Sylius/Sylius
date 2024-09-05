@@ -2,4 +2,4 @@
 
 {% set items_subtotal = hookable_metadata.context.order.getItemsSubtotal() %}
 
-<td class="text-end">{{ money.convertAndFormat(items_subtotal) }}</td>
+<td class="text-end" {{ sylius_test_html_attribute('subtotal') }}>{{ money.convertAndFormat(items_subtotal) }}</td>
