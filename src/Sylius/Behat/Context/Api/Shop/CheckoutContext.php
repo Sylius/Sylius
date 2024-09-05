@@ -414,8 +414,8 @@ final class CheckoutContext implements Context
         $request->setContent([
             'shippingMethod' => $this->iriConverter->getIriFromResource(
                 resource: $this->shippingMethodClass,
-                context: ['uri_variables' => ['code' => $shippingMethodCode]]
-            )
+                context: ['uri_variables' => ['code' => $shippingMethodCode]],
+            ),
         ]);
 
         $this->client->executeCustomRequest($request);
@@ -437,8 +437,8 @@ final class CheckoutContext implements Context
         $request->setContent([
             'paymentMethod' => $this->iriConverter->getIriFromResource(
                 resource: $this->paymentMethodClass,
-                context: ['uri_variables' => ['code' => $paymentMethodCode]]
-            )
+                context: ['uri_variables' => ['code' => $paymentMethodCode]],
+            ),
         ]);
 
         $this->client->executeCustomRequest($request);
@@ -1191,7 +1191,7 @@ final class CheckoutContext implements Context
         $request->setContent([
             'productVariant' => $this->iriConverter->getIriFromResource(
                 resource: $variant::class,
-                context: ['uri_variables' => ['code' => $code]]
+                context: ['uri_variables' => ['code' => $code]],
             ),
             'quantity' => 1,
         ]);

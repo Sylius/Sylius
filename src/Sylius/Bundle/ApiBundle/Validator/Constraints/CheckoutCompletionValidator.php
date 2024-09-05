@@ -36,7 +36,6 @@ class CheckoutCompletionValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, CompleteOrder::class);
 
-
         /** @var CheckoutCompletion $constraint */
         Assert::isInstanceOf($constraint, CheckoutCompletion::class);
 

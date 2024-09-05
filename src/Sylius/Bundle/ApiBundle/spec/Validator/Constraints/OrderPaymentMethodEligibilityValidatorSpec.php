@@ -47,7 +47,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_constraint_does_not_type_of_order_payment_method_eligibility(
-        Constraint  $constraint,
+        Constraint $constraint,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

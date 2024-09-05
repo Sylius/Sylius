@@ -34,7 +34,7 @@ final class OrderNotEmptyValidator extends ConstraintValidator
     {
         Assert::true(
             is_a($value, CompleteOrder::class) ||
-            is_a($value, UpdateCart::class)
+            is_a($value, UpdateCart::class),
         );
 
         /** @var OrderNotEmpty $constraint */

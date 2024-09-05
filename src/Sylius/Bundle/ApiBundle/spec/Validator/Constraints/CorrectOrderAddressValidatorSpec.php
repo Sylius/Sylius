@@ -55,7 +55,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
                     orderTokenValue: 'TOKEN',
                     email: 'john@doe.com',
                     billingAddress: $billingAddress->getWrappedObject(),
-                    shippingAddress: $shippingAddress->getWrappedObject()
+                    shippingAddress: $shippingAddress->getWrappedObject(),
                 ),
                 new class() extends Constraint {
                 },
@@ -134,7 +134,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
                 orderTokenValue: 'TOKEN',
                 email: 'john@doe.com',
                 billingAddress: $billingAddress->getWrappedObject(),
-                shippingAddress: $shippingAddress->getWrappedObject()
+                shippingAddress: $shippingAddress->getWrappedObject(),
             ),
             new CorrectOrderAddress(),
         );
@@ -169,7 +169,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
                 orderTokenValue: 'TOKEN',
                 email: 'john@doe.com',
                 billingAddress: $billingAddress->getWrappedObject(),
-                shippingAddress: $shippingAddress->getWrappedObject()
+                shippingAddress: $shippingAddress->getWrappedObject(),
             ),
             new CorrectOrderAddress(),
         );
