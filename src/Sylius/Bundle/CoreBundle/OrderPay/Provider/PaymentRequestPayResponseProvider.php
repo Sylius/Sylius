@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ServiceProviderAwareProviderInterface;
@@ -21,22 +20,22 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 final class PaymentRequestPayResponseProvider implements PayResponseProviderInterface
 {
     /**
      * @param PaymentRequestFactoryInterface<PaymentRequestInterface> $paymentRequestFactory
+     * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository
      */
     public function __construct(
         private PaymentRequestFactoryInterface $paymentRequestFactory,
-        private EntityManagerInterface $paymentRequestManager,
+        private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
-        private RouterInterface $router,
         private PaymentToPayResolverInterface $paymentToPayResolver,
         private AfterPayUrlProvider $afterPayUrlProvider,
     ) {
@@ -60,8 +59,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
         }
         $paymentRequest->setAction($action);
 
-        $this->paymentRequestManager->persist($paymentRequest);
-        $this->paymentRequestManager->flush();
+        $this->paymentRequestRepository->add($paymentRequest);
 
         $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 

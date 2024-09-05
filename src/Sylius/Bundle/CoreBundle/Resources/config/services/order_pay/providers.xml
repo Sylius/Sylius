@@ -30,10 +30,9 @@
 
         <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider">
             <argument type="service" id="sylius.factory.payment_request" />
-            <argument type="service" id="sylius.manager.payment_request" />
+            <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface" />
             <argument type="service" id="sylius.payment_request.provider.http_response.gateway_factory" />
-            <argument type="service" id="router" />
         </service>
 
         <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider" />
@@ -49,7 +48,6 @@
 
         <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider">
             <argument type="service" id="sylius.factory.payment_request" />
-            <argument type="service" id="sylius.manager.payment_request" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface" />
             <argument type="service" id="sylius.payment_request.provider.http_response.gateway_factory" />
             <argument type="service" id="sylius.repository.payment_request" />
