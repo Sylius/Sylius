@@ -30,7 +30,7 @@
     "hydra:totalItems": 1,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/payments{?state,state[],order.channel.code,order.channel.code[]}",
+        "hydra:template": "\/api\/v2\/admin\/payments{?state,state[],order.channel.code,order.channel.code[],order[createdAt]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -55,6 +55,12 @@
                 "@type": "IriTemplateMapping",
                 "variable": "order.channel.code[]",
                 "property": "order.channel.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
                 "required": false
             }
         ]

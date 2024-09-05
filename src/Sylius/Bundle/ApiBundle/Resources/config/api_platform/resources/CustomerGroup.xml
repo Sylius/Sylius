@@ -12,35 +12,30 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Customer\Model\CustomerGroup" shortName="CustomerGroup">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/customer-groups/{code}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:customer_group:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
+            <!-- Admin operations -->
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/customer-groups">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
                                 <value>sylius:admin:customer_group:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.admin.customer_group</filter>
+                    <filter>sylius_api.order_filter.admin.customer_group</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/customer-groups/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:customer_group:show</value>
                             </values>
                         </value>
                     </values>
@@ -66,6 +61,15 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/customer-groups/{code}" >
@@ -87,6 +91,15 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/customer-groups/{code}" />

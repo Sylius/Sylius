@@ -13,14 +13,14 @@ Feature: Sorting payments
         And there is an "#00000002" order with "Apple" product ordered later
         And I am logged in as an administrator
 
-    @todo-api @ui
+    @api @ui
     Scenario: Sorting payments by date in ascending order
         When I browse payments
         And I sort payments by date in ascending order
         Then I should see payment for the "#00000001" order as 1st in the list
         And I should see payment for the "#00000002" order as 2nd in the list
 
-    @todo-api @ui
+    @api @ui
     Scenario: Sorting payments by date in descending order again
         When I browse payments
         And I sort payments by date in descending order

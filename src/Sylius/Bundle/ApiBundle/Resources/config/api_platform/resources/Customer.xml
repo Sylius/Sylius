@@ -32,8 +32,14 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.search_filter.customer_group</filter>
+                    <filter>sylius_api.search_filter.admin.customer</filter>
+                    <filter>sylius_api.order_filter.admin.customer</filter>
                 </filters>
+                <order>
+                    <values>
+                        <value name="createdAt">DESC</value>
+                    </values>
+                </order>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/customers/{id}">
