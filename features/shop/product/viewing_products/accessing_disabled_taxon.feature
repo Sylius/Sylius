@@ -7,7 +7,7 @@ Feature: Accessing a disabled taxon
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Accessing a disabled taxon
         Given the store has "T-Shirts" taxonomy
         And the "T-Shirts" taxon is disabled

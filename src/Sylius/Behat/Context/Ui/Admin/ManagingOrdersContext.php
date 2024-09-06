@@ -201,11 +201,11 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I filter by customer :customerName
+     * @When I filter by customer :customer
      */
-    public function iFilterByCustomer(string $customerName): void
+    public function iFilterByCustomer(CustomerInterface $customer): void
     {
-        $this->indexPage->specifyFilterCustomer($customerName);
+        $this->indexPage->specifyFilterCustomer($customer->getFullName());
         $this->iFilter();
     }
 
@@ -615,9 +615,9 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it's payment state should be refunded
+     * @Then its payment state should be refunded
      */
-    public function orderPaymentStateShouldBeRefunded(): void
+    public function itsPaymentStateShouldBeRefunded(): void
     {
         Assert::same($this->showPage->getPaymentState(), 'Refunded');
     }
@@ -636,7 +636,7 @@ final readonly class ManagingOrdersContext implements Context
     public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped(): void
     {
         $this->notificationChecker->checkNotification(
-            'Shipment has been successfully shipped.',
+            'Shipment has been successfully updated.',
             NotificationType::success(),
         );
     }

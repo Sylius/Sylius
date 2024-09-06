@@ -30,6 +30,7 @@ final class PaymentRequestProvider implements PaymentRequestProviderInterface
 
     public function provide(PaymentRequestHashAwareInterface $command): PaymentRequestInterface
     {
+        /** @var PaymentRequestInterface|null $paymentRequest */
         $paymentRequest = $this->paymentRequestRepository->find($command->getHash());
         if (null === $paymentRequest) {
             throw new PaymentRequestNotFoundException();

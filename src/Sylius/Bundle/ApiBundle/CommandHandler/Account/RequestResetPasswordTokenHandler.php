@@ -22,7 +22,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
+final readonly class RequestResetPasswordTokenHandler implements MessageHandlerInterface
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
@@ -34,7 +34,7 @@ final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
 
     public function __invoke(RequestResetPasswordToken $command): void
     {
-        $user = $this->userRepository->findOneByEmail($command->getEmail());
+        $user = $this->userRepository->findOneByEmail($command->email);
         if (null === $user) {
             return;
         }
@@ -44,9 +44,9 @@ final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
 
         $this->commandBus->dispatch(
             new SendResetPasswordEmail(
-                $command->getEmail(),
-                $command->getChannelCode(),
-                $command->getLocaleCode(),
+                $command->email,
+                $command->channelCode,
+                $command->localeCode,
             ),
             [new DispatchAfterCurrentBusStamp()],
         );

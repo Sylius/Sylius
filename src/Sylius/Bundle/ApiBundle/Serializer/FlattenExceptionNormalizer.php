@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class FlattenExceptionNormalizer implements ContextAwareNormalizerInterface
+final readonly class FlattenExceptionNormalizer implements ContextAwareNormalizerInterface
 {
     public function __construct(
         private ContextAwareNormalizerInterface|NormalizerInterface $decorated,

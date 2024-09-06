@@ -37,9 +37,6 @@ interface PaymentInterface extends TimestampableInterface, ResourceInterface
 
     public const STATE_UNKNOWN = 'unknown';
 
-    /**
-     * @return PaymentMethodInterface
-     */
     public function getMethod(): ?PaymentMethodInterface;
 
     public function setMethod(?PaymentMethodInterface $method): void;

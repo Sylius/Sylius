@@ -25,5 +25,5 @@ sylius_admin_payment_complete:
             state_machine:
                 graph: sylius_payment
                 transition: complete
-            redirect: referer
+            redirect: sylius_admin_payment_index
             flash: sylius.payment.completed

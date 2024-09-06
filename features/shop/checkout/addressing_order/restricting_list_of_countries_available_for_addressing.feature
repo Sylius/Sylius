@@ -11,14 +11,14 @@ Feature: Restricting list of countries available for addressing
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @ui
+    @no-api @ui
     Scenario: Having only countries available for current channel listed
         Given this channel operates in the "United States" country
         When I add product "PHP T-Shirt" to the cart
         And I go to the checkout addressing step
         Then I should have only "United States" country available to choose from
 
-    @ui
+    @no-api @ui
     Scenario: Having all the countries listed if channel does not define available ones
         Given this channel does not define operating countries
         When I add product "PHP T-Shirt" to the cart

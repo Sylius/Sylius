@@ -51,6 +51,12 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.setup.checkout.address" class="Sylius\Behat\Context\Setup\Checkout\AddressContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.factory.address" />
+        </service>
+
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.channel_context_setter" />

@@ -14,7 +14,7 @@ Feature: Prevent deletion of used shipping method
         And the customer chose "DHL Express" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Being unable to delete a shipping method which is in use
         When I try to delete shipping method "DHL Express"
         Then I should be notified that it is in use

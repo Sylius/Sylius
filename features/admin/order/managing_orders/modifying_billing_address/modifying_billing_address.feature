@@ -24,7 +24,7 @@ Feature: Modifying a customer billing address after an order has been placed
         Then I should be notified that it has been successfully edited
         And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Being able to choose only provinces of the selected country
         Given the store also has country "Poland"
         And this country has the "Malopolska" province with "ML" code

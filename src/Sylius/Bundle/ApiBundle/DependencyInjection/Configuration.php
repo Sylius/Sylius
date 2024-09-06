@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class Configuration implements ConfigurationInterface
+final readonly class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
@@ -37,6 +37,11 @@ final class Configuration implements ConfigurationInterface
             ->end()
             ->children()
                 ->arrayNode('order_states_to_filter_out')
+                    ->scalarPrototype()->end()
+                ->end()
+            ->end()
+            ->children()
+                ->arrayNode('non_archived_classes')
                     ->scalarPrototype()->end()
                 ->end()
             ->end()

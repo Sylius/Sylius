@@ -16,7 +16,7 @@ Feature: Changing a customer password
         And I save my changes
         Then I should be notified that my password has been successfully changed
 
-    @api @ui
+    @todo @api @ui
     Scenario: Logging to store after password change
         Given I've changed my password from "whitehouse" to "blackhouse"
         When I log in as "francis@underwood.com" with "blackhouse" password

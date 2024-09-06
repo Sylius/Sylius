@@ -20,7 +20,7 @@ use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
+final readonly class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PasswordUpdaterInterface $passwordUpdater,
@@ -35,7 +35,7 @@ final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
         }
 
         /** @var ShopUserInterface|null $user */
-        $user = $this->userRepository->find($changeShopUserPassword->getShopUserId());
+        $user = $this->userRepository->find($changeShopUserPassword->shopUserId);
 
         Assert::notNull($user);
 

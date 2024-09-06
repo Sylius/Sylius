@@ -48,9 +48,9 @@ final class CartContext implements Context
     /**
      * @Given I am on the summary of my cart page
      * @When /^I see the summary of my (?:|previous )cart$/
-     * @When /^I check details of my cart$/
+     * @When I check details of my cart
      */
-    public function iOpenCartSummaryPage(): void
+    public function iCheckDetailsOfMyCart(): void
     {
         $this->summaryPage->open();
     }
@@ -337,10 +337,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I add :variantName variant of product :product to the cart
-     * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      * @Given I have :variantName variant of product :product in the cart
      * @Given /^I have "([^"]+)" variant of (this product) in the cart$/
+     * @When I add :variantName variant of product :product to the cart
+     * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */
     public function iAddProductToTheCartSelectingVariant(string $variantName, ProductInterface $product): void
     {

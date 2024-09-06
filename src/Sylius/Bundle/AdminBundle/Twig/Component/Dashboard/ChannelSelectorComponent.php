@@ -52,7 +52,8 @@ class ChannelSelectorComponent
 
     #[LiveAction]
     public function changeChannel(
-        #[LiveArg] string $channelCode,
+        #[LiveArg]
+        string $channelCode,
     ): void {
         $this->channelCode = $channelCode;
 

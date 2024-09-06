@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-class InformAboutCartRecalculation
+readonly class InformAboutCartRecalculation
 {
     public function __construct(private string $promotionName)
     {

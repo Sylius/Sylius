@@ -14,19 +14,19 @@ Feature: Deleting a zone
         And the store has "Sales Tax" tax rate of 20% for "Sports gear" within the "SA" zone
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Deleted zone should disappear from the registry
         When I delete the zone named "North America"
         Then I should be notified that it has been successfully deleted
         And the zone named "North America" should no longer exist in the registry
 
-    @ui @api
+    @api @ui
     Scenario: Deleting zone with associated tax rates should not be possible
         When I try to delete the zone named "South America"
         Then I should be notified that this zone cannot be deleted
         And I should still see the zone named "South America" in the list
 
-    @ui @api
+    @api @ui
     Scenario: Deleting zone that is a zone member should not be possible
         When I try to delete the zone named "Central and Eastern Europe"
         Then I should be notified that this zone cannot be deleted

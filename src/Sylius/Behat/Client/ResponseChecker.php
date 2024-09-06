@@ -208,6 +208,17 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
+    public function hasItemWithTranslationInCollection(array $items, string $locale, string $key, string $translation): bool
+    {
+        foreach ($items as $item) {
+            if (isset($item['translations'][$locale]) && $item['translations'][$locale][$key] === $translation) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function hasKey(Response $response, string $key): bool
     {
         $content = json_decode($response->getContent(), true);

@@ -13,7 +13,7 @@ Feature: Viewing product reviews on product's details page
         And this product has also a review titled "Classic" and rated 5 added by customer "sir.terry@pratchett.com"
         And I am a logged in customer
 
-    @ui @api
+    @api @ui
     Scenario: Viewing last 3 product reviews on product's details page
         When I check this product's details
         Then I should see 3 product reviews

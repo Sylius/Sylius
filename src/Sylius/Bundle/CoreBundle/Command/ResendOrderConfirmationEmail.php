@@ -15,17 +15,8 @@ namespace Sylius\Bundle\CoreBundle\Command;
 
 class ResendOrderConfirmationEmail
 {
-    public function __construct(private ?string $orderTokenValue = null)
-    {
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
-    }
-
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
+    public function __construct(
+        public readonly string $orderTokenValue,
+    ) {
     }
 }

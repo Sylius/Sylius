@@ -10,7 +10,7 @@ Feature: Sorting customer groups
         And the store has a customer group "Online sale" with "ccc" code
         And I am logged in as an administrator
 
-    @api-todo @ui
+    @todo-api @ui
     Scenario: Sorting customer groups by name in ascending order
         When I browse customer groups
         And I sort them by the name in ascending order
@@ -19,7 +19,7 @@ Feature: Sorting customer groups
         And the 2nd customer group on the list should have code "bbb" and name "Retail"
         And the 3rd customer group on the list should have code "aaa" and name "Wholesale"
 
-    @api-todo @ui
+    @todo-api @ui
     Scenario: Sorting customer groups by name in descending order
         When I browse customer groups
         And I sort them by the name in descending order
@@ -28,7 +28,7 @@ Feature: Sorting customer groups
         And the 2nd customer group on the list should have code "bbb" and name "Retail"
         And the 3rd customer group on the list should have code "ccc" and name "Online sale"
 
-    @api-todo @ui
+    @todo-api @ui
     Scenario: Sorting customer groups by code in ascending order
         When I browse customer groups
         And I sort them by the code in ascending order
@@ -37,7 +37,7 @@ Feature: Sorting customer groups
         And the 2nd customer group on the list should have code "bbb" and name "Retail"
         And the 3rd customer group on the list should have code "ccc" and name "Online sale"
 
-    @api-todo @ui
+    @todo-api @ui
     Scenario: Sorting customer groups by code in descending order
         When I browse customer groups
         And I sort them by the code in descending order

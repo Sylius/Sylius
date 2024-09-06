@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -33,6 +34,7 @@ final readonly class ResendOrderConfirmationEmailAction
         private ResendOrderConfirmationEmailDispatcherInterface $resendOrderConfirmationEmailDispatcher,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack $requestStack,
+        private RouterInterface $router,
     ) {
     }
 
@@ -59,6 +61,20 @@ final readonly class ResendOrderConfirmationEmailAction
             ->add('success', 'sylius.email.order_confirmation_resent')
         ;
 
-        return new RedirectResponse($request->headers->get('referer'));
+        return $this->redirect($request, $order);
+    }
+
+    private function redirect(Request $request, OrderInterface $order): RedirectResponse
+    {
+        $redirect = $request->attributes->get('_sylius', [])['redirect'] ?? null;
+
+        if (null === $redirect || is_array($redirect)) {
+            return new RedirectResponse($this->router->generate(
+                $redirect['route'] ?? 'sylius_admin_order_show',
+                $redirect['params'] ?? ['id' => $order->getId()],
+            ));
+        }
+
+        return new RedirectResponse($this->router->generate($redirect));
     }
 }

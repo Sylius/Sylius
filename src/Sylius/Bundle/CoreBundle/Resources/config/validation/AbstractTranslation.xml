@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Resource\Model\AbstractTranslation">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>locale</value>
+                <value>translatable</value>
+            </option>
+            <option name="groups">sylius</option>
+            <option name="message">sylius.translation.locale.unique</option>
+        </constraint>
+        <property name="locale">
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+                <option name="message">sylius.translation.locale.not_blank</option>
+            </constraint>
+            <constraint name="Locale">
+                <option name="groups">sylius</option>
+                <option name="message">sylius.translation.locale.invalid</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

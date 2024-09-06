@@ -12,14 +12,14 @@ Feature: Preventing adding to cart product or variant from another channel
         And the store operates on a channel named "Poland" with hostname "poland"
         And I am a logged in customer
 
-    @api
+    @api @no-ui
     Scenario: Preventing customer from adding simple product from another channel
         Given I am browsing channel "Poland"
         When I pick up my cart
         And I try to add product "Pain" to the cart
         Then I should be informed that product "Pain" does not exist
 
-    @api
+    @api @no-ui
     Scenario: Preventing customer from adding product with variant from another channel
         Given I am browsing channel "Poland"
         When I pick up my cart

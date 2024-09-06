@@ -2216,21 +2216,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/PaymentMethodRepository.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\PaymentRepository\\:\\:findOneByCustomer\\(\\) has parameter \\$id with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/PaymentRepository.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\PaymentRepository\\:\\:findOneByOrderId\\(\\) has parameter \\$orderId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/PaymentRepository.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\PaymentRepository\\:\\:findOneByOrderId\\(\\) has parameter \\$paymentId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/PaymentRepository.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\ProductAssociationRepository\\:\\:findWithProductsWithinChannel\\(\\) has parameter \\$associationId with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ProductAssociationRepository.php
@@ -2321,17 +2306,7 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Factory/OrderFactory.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\AbstractResourceFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/AbstractResourceFixture.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\CurrencyFixture\\:\\:__construct\\(\\) has parameter \\$currencyFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/CurrencyFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\CurrencyFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/CurrencyFixture.php
 
@@ -2991,11 +2966,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Fixture/GeographicalFixture.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\GeographicalFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/GeographicalFixture.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\GeographicalFixture\\:\\:loadCountriesWithProvinces\\(\\) has parameter \\$countriesCodes with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/GeographicalFixture.php
@@ -3031,22 +3001,7 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Fixture/Listener/CatalogPromotionExecutorListener.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Listener\\\\CatalogPromotionExecutorListener\\:\\:afterFixture\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/Listener/CatalogPromotionExecutorListener.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Listener\\\\ImagesPurgerListener\\:\\:beforeSuite\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/Listener/ImagesPurgerListener.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\LocaleFixture\\:\\:__construct\\(\\) has parameter \\$localeFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/LocaleFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\LocaleFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/LocaleFixture.php
 
@@ -3142,11 +3097,6 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\SimilarProductAssociationFixture\\:\\:__construct\\(\\) has parameter \\$productRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ProductRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/SimilarProductAssociationFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\SimilarProductAssociationFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/SimilarProductAssociationFixture.php
 
@@ -5539,21 +5489,6 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentMethodRepositoryInterface\\:\\:findEnabledForChannel\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Repository/PaymentMethodRepositoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentRepositoryInterface\\:\\:findOneByCustomer\\(\\) has parameter \\$id with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Repository/PaymentRepositoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentRepositoryInterface\\:\\:findOneByOrderId\\(\\) has parameter \\$orderId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Repository/PaymentRepositoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentRepositoryInterface\\:\\:findOneByOrderId\\(\\) has parameter \\$paymentId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Repository/PaymentRepositoryInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\ProductAssociationRepositoryInterface\\:\\:findWithProductsWithinChannel\\(\\) has parameter \\$associationId with no type specified\\.$#"

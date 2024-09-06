@@ -14,26 +14,26 @@ Feature: Applying correct taxes for item units with the same tax rate
         And the store has a product "Symfony Hat" priced at "$30.00"
         And it belongs to "Clothes" tax category
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for a single unit
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for multiple units of the same product
         When I add 3 products "PHP T-Shirt" to the cart
         Then my cart total should be "$369.00"
         And my cart taxes should be "$69.00"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes for multiple units of different products
         When I add 3 products "PHP T-Shirt" to the cart
         And I add 2 products "Symfony Hat" to the cart
         Then my cart total should be "$442.80"
         And my cart taxes should be "$82.80"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes after removing one of the item
         Given I have 3 products "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Hat" in the cart
@@ -41,7 +41,7 @@ Feature: Applying correct taxes for item units with the same tax rate
         Then my cart total should be "$73.80"
         And my cart taxes should be "$13.80"
 
-    @ui @api
+    @api @ui
     Scenario: Applying correct taxes after changing item quantity
         Given I have 3 products "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Hat" in the cart

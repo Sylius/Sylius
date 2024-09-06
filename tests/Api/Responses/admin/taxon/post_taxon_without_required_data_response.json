@@ -7,17 +7,17 @@
         {
             "propertyPath":"translations[en_US].name",
             "message":"Please enter taxon name.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath":"translations[en_US].slug",
             "message":"Please enter taxon slug.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath":"code",
             "message":"Please enter taxon code.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

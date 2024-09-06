@@ -17,9 +17,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ImageInterface extends ResourceInterface
 {
-    /**
-     * @return string
-     */
     public function getType(): ?string;
 
     public function setType(?string $type): void;

@@ -13,16 +13,16 @@
                 "enabled": true,
                 "verified": false
             },
-            "id": @integer@,
+            "id": "@integer@",
             "email": "oliver@doe.com",
             "firstName": "oliver",
             "lastName": "Doe",
-            "birthday": @date@,
+            "birthday": "@date@",
             "gender": "u",
             "group": "\/api\/v2\/admin\/customer-groups\/premium",
             "phoneNumber": null,
             "subscribedToNewsletter": false,
-            "createdAt": @date@,
+            "createdAt": "@date@",
             "fullName": "oliver Doe"
         },
         {
@@ -35,16 +35,16 @@
                 "enabled": false,
                 "verified": false
             },
-            "id": @integer@,
+            "id": "@integer@",
             "email": "dave@doe.com",
             "firstName": "dave",
             "lastName": "Doe",
-            "birthday": @date@,
+            "birthday": "@date@",
             "gender": "u",
             "group": "\/api\/v2\/admin\/customer-groups\/premium",
             "phoneNumber": null,
             "subscribedToNewsletter": false,
-            "createdAt": @date@,
+            "createdAt": "@date@",
             "fullName": "dave Doe"
         },
         {
@@ -57,16 +57,16 @@
                 "enabled": true,
                 "verified": true
             },
-            "id": @integer@,
+            "id": "@integer@",
             "email": "tony@doe.com",
             "firstName": "tony",
             "lastName": "Doe",
-            "birthday": @date@,
+            "birthday": "@date@",
             "gender": "u",
             "group": null,
             "phoneNumber": null,
             "subscribedToNewsletter": false,
-            "createdAt": @date@,
+            "createdAt": "@date@",
             "fullName": "tony Doe"
         }
     ],

@@ -20,11 +20,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class ResendOrderConfirmationEmailHandler implements MessageHandlerInterface
+final readonly class ResendOrderConfirmationEmailHandler implements MessageHandlerInterface
 {
-    /**
-     * @param RepositoryInterface<OrderInterface> $orderRepository
-     */
+    /** @param RepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private OrderEmailManagerInterface $orderEmailManager,
         private RepositoryInterface $orderRepository,
@@ -34,9 +32,9 @@ final class ResendOrderConfirmationEmailHandler implements MessageHandlerInterfa
     public function __invoke(ResendOrderConfirmationEmail $resendOrderConfirmation): void
     {
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $resendOrderConfirmation->getOrderTokenValue()]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $resendOrderConfirmation->orderTokenValue]);
         if ($order === null) {
-            throw new NotFoundHttpException(sprintf('The order with tokenValue %s has not been found', $resendOrderConfirmation->getOrderTokenValue()));
+            throw new NotFoundHttpException(sprintf('The order with tokenValue %s has not been found', $resendOrderConfirmation->orderTokenValue));
         }
 
         $this->orderEmailManager->resendConfirmationEmail($order);

@@ -31,7 +31,7 @@ final class ShipmentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_shipments(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
         $anotherTokenValue = 'nAWw2jexpB';
@@ -45,14 +45,18 @@ final class ShipmentsTest extends JsonApiTestCase
             server: $this->buildHeadersWithJsonLd('api@example.com'),
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/shipment/get_shipments_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $this
+            ->client->getResponse(),
+            'admin/shipment/get_shipments_response',
+            Response::HTTP_OK,
+        );
     }
 
     /** @test */
     public function it_gets_shipment(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -64,14 +68,17 @@ final class ShipmentsTest extends JsonApiTestCase
             server: $this->buildHeadersWithJsonLd('api@example.com'),
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/shipment/get_shipment_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/shipment/get_shipment_response',
+            Response::HTTP_OK,
+        );
     }
 
     /** @test */
     public function it_ships_shipment(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $order = $this->placeOrder('nAWw2jewpA');
 
@@ -82,14 +89,13 @@ final class ShipmentsTest extends JsonApiTestCase
             content: json_encode([]),
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
     }
 
     /** @test */
     public function it_resends_shipment_confirmation_email(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $order = $this->placeOrder('nAWw2jewpA');
         $order->getShipments()->last()->setState('shipped');
@@ -101,15 +107,14 @@ final class ShipmentsTest extends JsonApiTestCase
             content: json_encode([]),
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
         $this->assertEmailCount(2);
     }
 
     /** @test */
     public function it_does_not_resends_shipment_confirmation_email_for_shipment_with_invalid_state(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -131,11 +136,12 @@ final class ShipmentsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
+            'cart/promotion.yaml',
         ]);
 
         $order = $this->placeOrder('token');
@@ -147,9 +153,11 @@ final class ShipmentsTest extends JsonApiTestCase
             server: $this->buildHeadersWithJsonLd('api@example.com'),
         );
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/shipment/get_shipment_adjustments', Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/shipment/get_shipment_adjustments',
+            Response::HTTP_OK,
+        );
     }
 
     /** @return array<string, string> */

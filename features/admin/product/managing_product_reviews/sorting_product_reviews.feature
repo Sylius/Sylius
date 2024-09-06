@@ -12,55 +12,55 @@ Feature: Sorting product reviews
         And I am logged in as an administrator
         And I am browsing product reviews
 
-    @ui @todo-api
+    @api @ui
     Scenario: Displaying product reviews sorted by date in descending order by default
         Then I should see 3 reviews in the list
         And the first product review in the list should have title "Great book"
         And the last product review in the list should have title "Awesome"
 
-    @ui @todo-api
+    @api @ui
     Scenario: Sorting product reviews ascending by date
         When I sort the product reviews ascending by date
         Then I should see 3 reviews in the list
         And the first product review in the list should have title "Awesome"
         And the last product review in the list should have title "Great book"
 
-    @ui @todo-api
+    @api @ui
     Scenario: Sorting product reviews ascending by title
         When I sort the product reviews ascending by title
         Then I should see 3 reviews in the list
         And the first product review in the list should have title "Awesome"
         And the last product review in the list should have title "Not bad"
 
-    @ui @todo-api
+    @api @ui
     Scenario: Sorting product reviews descending by title
         When I sort the product reviews descending by title
         Then I should see 3 reviews in the list
         And the first product review in the list should have title "Not bad"
         And the last product review in the list should have title "Awesome"
 
-    @ui @todo-api
+    @api @ui
     Scenario: Sorting product reviews ascending by rating
         When I sort the product reviews ascending by rating
         Then I should see 3 reviews in the list
         And the first product review in the list should have title "Not bad"
         And the last product review in the list should have title "Awesome"
 
-    @ui @todo-api
+    @api @ui
     Scenario: Sorting product reviews descending by rating
         When I sort the product reviews descending by rating
         Then I should see 3 reviews in the list
         And the first product review in the list should have title "Awesome"
         And the last product review in the list should have title "Not bad"
 
-    @ui @todo-api
+    @api @ui
     Scenario: Sorting product reviews ascending by status
         When I sort the product reviews ascending by status
         Then I should see 3 reviews in the list
         And the first product review in the list should have title "Not bad"
         And the last product review in the list should have title "Great book"
 
-    @ui @todo-api
+    @api @ui
     Scenario: Sorting product reviews descending by status
         When I sort the product reviews descending by status
         Then I should see 3 reviews in the list

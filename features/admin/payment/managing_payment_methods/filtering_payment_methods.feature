@@ -13,19 +13,19 @@ Feature: Filtering payment methods
         And I am logged in as an administrator
         And I am browsing payment methods
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering payment methods by name
         When I search by "PayPal" name
         Then I should see a single payment method in the list
         And I should see the payment method "PayPal Express Checkout"
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering payment methods by code
         When I search by "xyz" code
         Then I should see 2 payment methods in the list
         And I should not see the payment method "Offline"
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering enabled payment methods
         When I choose enabled filter
         And I filter

@@ -12,7 +12,7 @@ Feature: Accessing order right after completing checkout
         And there is a user "john@example.com"
         And I am logged in as "john@example.com"
 
-    @ui @api
+    @api @ui
     Scenario: Being able to access my order right after completing checkout
         Given I added product "PHP T-Shirt" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

@@ -63,9 +63,11 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalled();
 
-        $requestResetPasswordToken = new RequestResetPasswordToken('test@email.com');
-        $requestResetPasswordToken->setChannelCode('WEB');
-        $requestResetPasswordToken->setLocaleCode('en_US');
+        $requestResetPasswordToken = new RequestResetPasswordToken(
+            channelCode: 'WEB',
+            localeCode: 'en_US',
+            email: 'test@email.com',
+        );
 
         $this($requestResetPasswordToken);
     }
@@ -78,9 +80,11 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
 
         $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
 
-        $requestResetPasswordToken = new RequestResetPasswordToken('test@email.com');
-        $requestResetPasswordToken->setChannelCode('WEB');
-        $requestResetPasswordToken->setLocaleCode('en_US');
+        $requestResetPasswordToken = new RequestResetPasswordToken(
+            channelCode: 'WEB',
+            localeCode: 'en_US',
+            email: 'test@email.com',
+        );
 
         $this($requestResetPasswordToken);
     }

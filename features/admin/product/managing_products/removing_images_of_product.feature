@@ -8,7 +8,7 @@ Feature: Removing images of an existing product
         Given I am logged in as an administrator
         And the store operates on a single channel
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -18,7 +18,7 @@ Feature: Removing images of an existing product
         Then I should be notified that the changes have been successfully applied
         And this product should not have any images
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -28,7 +28,7 @@ Feature: Removing images of an existing product
         Then I should be notified that the changes have been successfully applied
         And this product should not have any images
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing all images of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -40,7 +40,7 @@ Feature: Removing images of an existing product
         Then I should be notified that the changes have been successfully applied
         And this product should not have any images
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing all images of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -52,7 +52,7 @@ Feature: Removing images of an existing product
         Then I should be notified that the changes have been successfully applied
         And this product should not have any images
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing only one image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -64,7 +64,7 @@ Feature: Removing images of an existing product
         And this product should have an image with "main" type
         But it should not have any images with "thumbnail" type
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing only one image of a simple product when all images have same type
         Given the store has a product "Lamborghini Ford Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -75,7 +75,7 @@ Feature: Removing images of an existing product
         Then I should be notified that the changes have been successfully applied
         And this product should have only one image
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Removing only one image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -87,7 +87,7 @@ Feature: Removing images of an existing product
         And this product should have an image with "main" type
         But it should not have any images with "thumbnail" type
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Adding multiple images and removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product
@@ -100,7 +100,7 @@ Feature: Removing images of an existing product
         And this product should have an image with "main" type
         But it should not have any images with "thumbnail" type
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Adding multiple images and removing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         When I want to modify this product

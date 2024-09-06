@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
 
-final class ForTaxonsScopeValidator implements ScopeValidatorInterface
+final readonly class ForTaxonsScopeValidator implements ScopeValidatorInterface
 {
     public function __construct(
         private ScopeValidatorInterface $baseScopeValidator,

@@ -11,13 +11,13 @@ Feature: Filtering tax categories
         And I am logged in as an administrator
         And I am browsing tax categories
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering tax categories by name
-        When I search by "Food" name
+        When I search by "ood" name
         Then I should see 2 tax categories in the list
         But I should not see the tax category "Alcohol"
 
-    @todo-api @ui
+    @api @ui
     Scenario: Filtering tax categories by code
         When I search by "alcohol" code
         Then I should see a single tax category in the list

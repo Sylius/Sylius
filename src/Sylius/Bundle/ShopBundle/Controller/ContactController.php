@@ -69,6 +69,8 @@ final class ContactController
 
             $contactEmail = $channel->getContactEmail();
 
+            $redirectRoute = $this->getSyliusAttribute($request, 'redirect', 'referer');
+
             if (null === $contactEmail) {
                 $errorMessage = $this->getSyliusAttribute(
                     $request,
@@ -80,7 +82,7 @@ final class ContactController
                 $flashBag = $request->getSession()->getBag('flashes');
                 $flashBag->add('error', $errorMessage);
 
-                return new RedirectResponse($request->headers->get('referer'));
+                return new RedirectResponse($this->router->generate($redirectRoute));
             }
 
             $localeCode = $this->localeContext->getLocaleCode();
@@ -95,8 +97,6 @@ final class ContactController
             /** @var FlashBagInterface $flashBag */
             $flashBag = $request->getSession()->getBag('flashes');
             $flashBag->add('success', $successMessage);
-
-            $redirectRoute = $this->getSyliusAttribute($request, 'redirect', 'referer');
 
             return new RedirectResponse($this->router->generate($redirectRoute));
         }
