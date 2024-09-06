@@ -162,12 +162,12 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
     ): void {
         $normalizer
             ->normalize($productAttributeValue, null, ['sylius_product_attribute_value_normalizer_already_called' => true])
-            ->willReturn([])
+            ->willReturn(['value' => 42])
         ;
 
         $productAttributeValue->getType()->willReturn('integer');
 
         $this->setNormalizer($normalizer);
-        $this->normalize($productAttributeValue)->shouldReturn([]);
+        $this->normalize($productAttributeValue)->shouldReturn(['value' => 42]);
     }
 }
