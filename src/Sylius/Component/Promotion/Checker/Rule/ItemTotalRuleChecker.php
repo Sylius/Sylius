@@ -20,7 +20,7 @@ trigger_deprecation(
     '1.13',
     'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
     ItemTotalRuleChecker::class,
-    \Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker::class,
+    'Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker',
 );
 
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker} instead. */
