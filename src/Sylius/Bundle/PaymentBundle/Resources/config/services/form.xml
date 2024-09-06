@@ -22,10 +22,20 @@
         <parameter key="sylius.form.type.payment_method_translation.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.gateway_config.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
     </parameters>
 
     <services>
         <defaults public="true" />
+
+        <service id="sylius.form.type.gateway_config" class="Sylius\Bundle\PaymentBundle\Form\Type\GatewayConfigType">
+            <argument>%sylius.model.gateway_config.class%</argument>
+            <argument>%sylius.form.type.gateway_config.validation_groups%</argument>
+            <argument type="service" id="sylius.form_registry.payment_gateway_config" />
+            <tag name="form.type" />
+        </service>
 
         <service id="sylius.form.type.payment" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentType">
             <argument>%sylius.model.payment.class%</argument>
@@ -36,6 +46,8 @@
         <service id="sylius.form.type.payment_method" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType">
             <argument>%sylius.model.payment_method.class%</argument>
             <argument>%sylius.form.type.payment_method.validation_groups%</argument>
+            <argument type="service" id="sylius.validator.payment_method_groups_generator" />
+            <argument type="service" id="sylius.gateway_config_name_generator" />
             <tag name="form.type" />
         </service>
 

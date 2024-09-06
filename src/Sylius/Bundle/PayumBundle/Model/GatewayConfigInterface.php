@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
-use Payum\Core\Model\GatewayConfigInterface as BaseGatewayConfigInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Payum\Core\Model\GatewayConfigInterface as PayumGatewayConfigInterface;
+use Payum\Core\Security\CryptedInterface;
+use Sylius\Component\Payment\Model\GatewayConfigInterface as BaseGatewayConfigInterface;
 
-interface GatewayConfigInterface extends BaseGatewayConfigInterface, ResourceInterface
+interface GatewayConfigInterface extends BaseGatewayConfigInterface, PayumGatewayConfigInterface, CryptedInterface
 {
 }

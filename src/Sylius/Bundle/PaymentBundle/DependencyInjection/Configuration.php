@@ -13,17 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
+use Sylius\Bundle\PaymentBundle\Form\Type\GatewayConfigType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Payment\Factory\PaymentRequestFactory;
+use Sylius\Component\Payment\Model\GatewayConfig;
+use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
+use Sylius\Component\Payment\Model\PaymentRequest;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -41,6 +47,15 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->arrayNode('gateway_config')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('validation_groups')
+                            ->useAttributeAsKey('name')
+                            ->variablePrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->arrayNode('gateways')
                     ->useAttributeAsKey('name')
@@ -61,6 +76,23 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->arrayNode('gateway_config')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(GatewayConfig::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(GatewayConfigInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(GatewayConfigType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
                         ->arrayNode('payment_method')
                             ->addDefaultsIfNotSet()
                             ->children()
@@ -114,6 +146,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PaymentType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('payment_request')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(PaymentRequest::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PaymentRequestInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(PaymentRequestFactory::class)->end()
+                                        ->scalarNode('form')->defaultValue(null)->end()
                                     ->end()
                                 ->end()
                             ->end()

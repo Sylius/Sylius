@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
-use Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType;
-use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
-use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken;
 use Sylius\Bundle\PayumBundle\Model\PaymentSecurityTokenInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -36,15 +33,6 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->arrayNode('gateway_config')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('validation_groups')
-                            ->useAttributeAsKey('name')
-                            ->variablePrototype()->end()
-                        ->end()
-                    ->end()
-                ->end()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->arrayNode('template')
                     ->addDefaultsIfNotSet()
@@ -81,24 +69,6 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(PaymentSecurityTokenInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('gateway_config')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->variableNode('options')
-                                    ->setDeprecated('sylius/payum-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
-                                ->end()
-                                ->arrayNode('classes')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->defaultValue(GatewayConfig::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(GatewayConfigInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->scalarNode('form')->defaultValue(GatewayConfigType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

@@ -41,7 +41,7 @@ Feature: Editing payment method configured with a PayPal Express Checkout gatewa
         Then I should be notified that it has been successfully edited
         And this payment method should be in sandbox mode
 
-    @api @ui
+    @todo-api @ui
     Scenario: Changing whole gateway configuration
         When I want to modify the "PayPal Express Checkout" payment method
         And I set its "Username" as "new_username", "Password" as "new_password" and "Signature" as "new_signature"

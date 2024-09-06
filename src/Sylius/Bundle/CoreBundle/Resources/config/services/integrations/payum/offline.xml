@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.payment_request.command_provider.payum.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider">
+            <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.offline" index-by="type" />
+            <tag name="sylius.payment_request.command_provider" gateway-factory="offline" />
+        </service>
+
+        <service id="sylius.payment_request.command_provider.payum.offline.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum\CaptureCommandProvider">
+            <tag name="sylius.payment_request.command_provider.payum.offline" type="capture" />
+        </service>
+
+        <service id="sylius.payment_request.command_provider.payum.offline.status" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum\StatusCommandProvider">
+            <tag name="sylius.payment_request.command_provider.payum.offline" type="status" />
+        </service>
+
+    </services>
+</container>

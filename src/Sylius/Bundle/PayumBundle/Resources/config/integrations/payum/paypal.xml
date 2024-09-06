@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.form.type.gateway_configuration.paypal" class="Sylius\Bundle\PayumBundle\Form\Type\PaypalGatewayConfigurationType">
+            <tag name="sylius.gateway_configuration_type" type="paypal_express_checkout" label="sylius.payum_gateway_factory.paypal_express_checkout" priority="100" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.payum_action.paypal_express_checkout.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction">
+            <argument type="service" id="sylius.invoice_number_generator" />
+            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout.convert_payment" />
+        </service>
+    </services>
+</container>
