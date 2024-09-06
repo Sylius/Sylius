@@ -45,4 +45,3 @@ parameters:
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
         - '/Method [a-zA-z\\]+Filter\:\:filterProperty\(\) has parameter \$value with no type specified./'
         - '/Method [a-zA-z\\]+Persister\:\:(persist|remove|supports)\(\) has parameter \$data with no type specified./'
-        - '/Method Sylius\\Bundle\\CoreBundle\\Fixture\\OptionsResolver\\LazyOption\:\:(\w+)\(\) has parameter \$repository with generic interface Sylius\\Resource\\Doctrine\\Persistence\\RepositoryInterface but does not specify its types\: T/'
