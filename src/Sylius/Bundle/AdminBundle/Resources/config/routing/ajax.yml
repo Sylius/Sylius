@@ -26,13 +26,6 @@ sylius_admin_ajax_product_option:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_option.yml"
     prefix: /product-options
 
-sylius_admin_ajax_render_province_form:
-    path: /render-province-form
-    defaults:
-        _controller: sylius.controller.province::choiceOrTextFieldFormAction
-        _sylius:
-            template: "@SyliusAdmin/common/form/province.html.twig"
-
 sylius_admin_ajax_get_version:
     path: /get-version
     defaults:

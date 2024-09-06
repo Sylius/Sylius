@@ -1,13 +1,10 @@
 {% set form = hookable_metadata.context.form %}
 
-<div data-url="{{ path('sylius_shop_ajax_render_province_form') }}">
+<div>
     {% if form.provinceCode is defined %}
         {{ form_row(form.provinceCode, sylius_test_form_attribute('province-code')|sylius_merge_recursive( {'attr': {'class': ''}})) }}
+        {{ form_errors(form.provinceCode) }}
     {% elseif form.provinceName is defined %}
         {{ form_row(form.provinceName, sylius_test_form_attribute('province-name')) }}
     {% endif %}
 </div>
-
-{% if form.provinceCode is defined %}
-    {{ form_errors(form) }}
-{% endif %}
