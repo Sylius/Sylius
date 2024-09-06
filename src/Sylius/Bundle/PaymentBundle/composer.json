@@ -28,7 +28,7 @@
     "require": {
         "php": "^8.2",
         "sylius/payment": "^2.0",
-        "sylius/resource-bundle": "^1.10 || dev-symfony-7",
+        "sylius/resource-bundle": "^1.11",
         "symfony/framework-bundle": "^6.4.1 || ^7.0"
     },
     "conflict": {
