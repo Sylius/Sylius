@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendShipmentConfirmationEmail;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -26,6 +27,8 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class ShipShipmentHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         ShipmentRepositoryInterface $shipmentRepository,
         StateMachineInterface $stateMachine,

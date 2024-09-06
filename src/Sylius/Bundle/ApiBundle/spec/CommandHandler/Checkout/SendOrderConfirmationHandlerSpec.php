@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,19 +27,13 @@ use Webmozart\Assert\Assert;
 
 final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderRepositoryInterface $orderRepository,
         OrderEmailManagerInterface $orderEmailManager,
     ): void {
         $this->beConstructedWith($orderRepository, $orderEmailManager);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(SendOrderConfirmationHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_sends_order_confirmation_message(

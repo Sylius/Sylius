@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -26,6 +27,8 @@ use Webmozart\Assert\Assert;
 
 final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
@@ -36,14 +39,6 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             $orderModifier,
             $variantResolver,
         );
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(RemoveItemFromCartHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_removes_order_item_from_cart(

@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
 use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -26,6 +27,8 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class SendShopUserVerificationEmailHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,

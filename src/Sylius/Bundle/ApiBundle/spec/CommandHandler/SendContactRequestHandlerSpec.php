@@ -16,12 +16,15 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 final class SendContactRequestHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         ChannelRepositoryInterface $channelRepository,
         ContactEmailManagerInterface $contactEmailManager,

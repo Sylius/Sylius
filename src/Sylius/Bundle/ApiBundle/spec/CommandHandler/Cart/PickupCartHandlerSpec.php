@@ -19,6 +19,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -33,6 +34,8 @@ use Webmozart\Assert\Assert;
 
 final class PickupCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     private const TOKEN_LENGTH = 20;
 
     function let(
@@ -52,14 +55,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $customerRepository,
             self::TOKEN_LENGTH,
         );
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(PickupCartHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_picks_up_a_new_cart_for_logged_in_shop_user(

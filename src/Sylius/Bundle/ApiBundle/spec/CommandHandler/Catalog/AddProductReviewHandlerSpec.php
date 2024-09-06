@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -26,6 +27,8 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class AddProductReviewHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         FactoryInterface $productReviewFactory,
         RepositoryInterface $productReviewRepository,

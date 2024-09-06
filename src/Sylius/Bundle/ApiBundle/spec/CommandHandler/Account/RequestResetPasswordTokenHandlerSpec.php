@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken;
 use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\RequestResetPasswordEmailHandler;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -30,6 +31,8 @@ use Webmozart\Assert\Assert;
 
 final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         UserRepositoryInterface $userRepository,
         MessageBusInterface $messageBus,
@@ -37,14 +40,6 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         ClockInterface $clock,
     ): void {
         $this->beConstructedWith($userRepository, $messageBus, $generator, $clock);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(RequestResetPasswordEmailHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_handles_request_for_password_reset_token(

@@ -16,23 +16,18 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetterInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
 final class ResetPasswordHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(UserPasswordResetterInterface $userPasswordResetter): void
     {
         $this->beConstructedWith($userPasswordResetter);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(ResetPasswordHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_delegates_password_resetting(UserPasswordResetterInterface $userPasswordResetter): void

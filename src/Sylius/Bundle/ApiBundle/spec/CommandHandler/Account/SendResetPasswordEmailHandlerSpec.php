@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -26,20 +27,14 @@ use Webmozart\Assert\Assert;
 
 final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         ChannelRepositoryInterface $channelRepository,
         UserRepositoryInterface $userRepository,
         ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
     ): void {
         $this->beConstructedWith($channelRepository, $userRepository, $resetPasswordEmailManager);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(SendResetPasswordEmailHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_sends_message_with_reset_password_token(

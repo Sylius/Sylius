@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
@@ -26,20 +27,14 @@ use Webmozart\Assert\Assert;
 
 final class ChangeItemQuantityInCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderItemRepositoryInterface $orderItemRepository,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderProcessorInterface $orderProcessor,
     ) {
         $this->beConstructedWith($orderItemRepository, $orderItemQuantityModifier, $orderProcessor);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(ChangeItemQuantityInCartHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_changes_order_item_quantity(

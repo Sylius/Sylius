@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler;
+use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -29,6 +30,8 @@ use Webmozart\Assert\Assert;
 
 final class AddItemToCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderRepositoryInterface $orderRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
@@ -43,14 +46,6 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
             $cartItemFactory,
             $orderItemQuantityModifier,
         );
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $messageHandlerAttributes = (new \ReflectionClass(AddItemToCartHandler::class))
-            ->getAttributes(AsMessageHandler::class);
-
-        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_adds_simple_product_to_cart(
