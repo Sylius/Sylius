@@ -19,8 +19,10 @@ use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
+#[AsMessageHandler]
 final readonly class UpdateCartHandler
 {
     /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
