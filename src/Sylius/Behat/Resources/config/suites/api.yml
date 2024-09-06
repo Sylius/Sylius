@@ -12,8 +12,8 @@ imports:
     - api/admin/dashboard.yaml
     - api/admin/login.yml
     - api/admin/security.yml
-#    - api/cart/accessing_cart.yml
-#    - api/cart/shopping_cart.yml
+    - api/cart/accessing_cart.yml
+    - api/cart/shopping_cart.yml
     - api/channel/channels.yml
     - api/channel/managing_channels.yml
     - api/checkout/checkout.yml
