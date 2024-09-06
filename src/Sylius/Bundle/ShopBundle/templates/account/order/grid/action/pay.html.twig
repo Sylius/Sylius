@@ -2,6 +2,6 @@
 
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
 
-{% if data.paymentState in ['awaiting_payment'] %}
-    {{ buttons.default(path, action.label, 'sylius-pay', action.options.icon|default('credit card alternative'), 'btn-sm btn-outline-gray') }}
+{% if data.paymentState == constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_AWAITING_PAYMENT') %}
+    {{ buttons.default(path, action.label, 'pay', action.options.icon|default('credit card alternative'), 'btn-sm btn-outline-gray') }}
 {% endif %}
