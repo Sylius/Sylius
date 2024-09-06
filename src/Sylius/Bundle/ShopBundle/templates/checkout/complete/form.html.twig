@@ -1,13 +1,10 @@
 {% set form = hookable_metadata.context.form %}
-{% set prefixes = hookable_metadata.prefixes|merge(['sylius_shop.shared.order.show']) %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'novalidate': 'novalidate'}}) }}
 {{ form_errors(form) }}
 <input type="hidden" name="_method" value="PUT" />
-
-{% hook 'summary' with { _prefixes: prefixes } %}
 
 {% hook 'form' %}
 

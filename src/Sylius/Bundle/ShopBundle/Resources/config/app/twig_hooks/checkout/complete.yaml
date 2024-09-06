@@ -17,11 +17,13 @@ twig_hooks:
                 template: '@SyliusShop/checkout/complete/header/locale.html.twig'
 
         'sylius_shop.checkout.complete.form':
+            summary:
+                template: '@SyliusShop/checkout/complete/form/summary.html.twig'
             extra_notes:
                 template: '@SyliusShop/checkout/complete/form/extra_notes.html.twig'
             navigation:
                 template: '@SyliusShop/checkout/complete/form/navigation.html.twig'
 
-        'sylius_shop.checkout.complete.summary':
+        'sylius_shop.checkout.complete.form.summary':
             statuses:
                 enabled: false
