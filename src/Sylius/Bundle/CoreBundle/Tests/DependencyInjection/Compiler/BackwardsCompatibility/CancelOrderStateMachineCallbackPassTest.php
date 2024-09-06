@@ -24,7 +24,7 @@ final class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPass
             'class' => 'Sylius\\Component\\Core\\Model\\Order',
             'property_path' => 'state',
             'graph' => 'sylius_order',
-            'state_machine_class' => 'Sylius\\Component\\Resource\\StateMachine\\StateMachine',
+            'state_machine_class' => 'Sylius\\Resource\\StateMachine\\StateMachine',
             'states' => [
                 'cart',
                 'new',

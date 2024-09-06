@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\Currency;
-use Sylius\Component\Resource\Storage\StorageInterface;
+use Sylius\Resource\Storage\StorageInterface;
 
 final class CurrencyStorageSpec extends ObjectBehavior
 {

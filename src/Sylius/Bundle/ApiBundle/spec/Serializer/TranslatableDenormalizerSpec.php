@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class TranslatableDenormalizerSpec extends ObjectBehavior

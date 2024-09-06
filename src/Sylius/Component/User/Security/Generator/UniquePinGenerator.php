@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Generator;
 
-use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Webmozart\Assert\Assert;
 

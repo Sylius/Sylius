@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved;
 use Sylius\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 final class TranslatableDataPersisterSpec extends ObjectBehavior
 {

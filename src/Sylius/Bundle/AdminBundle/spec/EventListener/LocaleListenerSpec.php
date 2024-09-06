@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,7 +29,7 @@ final class LocaleListenerSpec extends ObjectBehavior
     function it_does_nothing_if_locale_is_not_used(
         LocaleUsageCheckerInterface $localeUsageChecker,
         LocaleInterface $locale,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
     ): void {
         $localeUsageChecker->isUsed('en_US')->willReturn(false);
 
@@ -44,7 +44,7 @@ final class LocaleListenerSpec extends ObjectBehavior
     function it_stops_event_if_locale_is_used(
         LocaleUsageCheckerInterface $localeUsageChecker,
         LocaleInterface $locale,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
     ): void {
         $localeUsageChecker->isUsed('en_US')->willReturn(true);
 

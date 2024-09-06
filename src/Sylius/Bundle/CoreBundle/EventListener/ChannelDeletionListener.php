@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Exception\UnexpectedTypeException;
 
 final class ChannelDeletionListener
 {
@@ -27,7 +27,7 @@ final class ChannelDeletionListener
     /**
      * Prevent channel deletion if no more channels enabled.
      */
-    public function onChannelPreDelete(ResourceControllerEvent $event): void
+    public function onChannelPreDelete(GenericEvent $event): void
     {
         $channel = $event->getSubject();
 

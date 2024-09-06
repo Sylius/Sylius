@@ -38,7 +38,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLoca
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Metadata\Metadata;
+use Sylius\Resource\Metadata\Metadata;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle

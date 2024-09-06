@@ -15,7 +15,7 @@ namespace Sylius\Component\Order\Factory;
 
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Exception\UnsupportedMethodException;
+use Sylius\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @template T of OrderItemUnitInterface

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\EventListener;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
-use Sylius\Component\Resource\ResourceActions;
+use Sylius\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

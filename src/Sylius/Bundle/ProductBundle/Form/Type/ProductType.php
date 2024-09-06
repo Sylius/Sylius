@@ -22,7 +22,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Positioner\PositionerInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Component\Resource\ResourceActions;
+use Sylius\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

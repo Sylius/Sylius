@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Sylius\Resource\Metadata\RegistryInterface;
 use Sylius\Resource\Model\TranslationInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 

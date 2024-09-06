@@ -18,7 +18,7 @@ use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Exception\UnsupportedMethodException;
+use Sylius\Resource\Exception\UnsupportedMethodException;
 
 final class OrderItemUnitFactorySpec extends ObjectBehavior
 {

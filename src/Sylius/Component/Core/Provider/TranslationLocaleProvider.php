@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Provider;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleCollectionProviderInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {

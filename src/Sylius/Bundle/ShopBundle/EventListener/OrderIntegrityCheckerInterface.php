@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 interface OrderIntegrityCheckerInterface
 {
-    public function check(ResourceControllerEvent $event): void;
+    public function check(GenericEvent $event): void;
 }
