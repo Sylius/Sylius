@@ -17,7 +17,7 @@ use Sylius\Bundle\ApiBundle\Command\PaymentRequestHashAwareInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 /** @experimental */
-final class PaymentRequestHashAwareInputCommandDataTransformer implements CommandDataTransformerInterface
+final class PaymentRequestHashAwareInputCommandDataTransformer // implements CommandDataTransformerInterface
 {
     /**
      * @param PaymentRequestHashAwareInterface $object

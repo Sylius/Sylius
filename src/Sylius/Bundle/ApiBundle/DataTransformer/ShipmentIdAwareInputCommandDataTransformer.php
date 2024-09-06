@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use Sylius\Component\Core\Model\ShipmentInterface;
 
-final class ShipmentIdAwareInputCommandDataTransformer
+final class ShipmentIdAwareInputCommandDataTransformer // implements CommandDataTransformerInterface
 {
     /**
      * @param array<string, mixed> $context
@@ -32,6 +32,6 @@ final class ShipmentIdAwareInputCommandDataTransformer
 
     public function supportsTransformation($object): bool
     {
-        return $object instanceof ShipmentIdAwareInterface;
+//        return $object instanceof ShipmentIdAwareInterface;
     }
 }
