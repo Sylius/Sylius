@@ -49,6 +49,7 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
         $hash = $this->getPaymentRequestHash($requestConfiguration);
         Assert::notNull($hash, 'A request attribute "hash" is required to retrieve the related order.');
 
+        /** @var PaymentRequestInterface|null $capturePaymentRequest */
         $capturePaymentRequest = $this->paymentRequestRepository->find($hash);
         if (null === $capturePaymentRequest) {
             throw new NotFoundHttpException(sprintf('The Payment Request with hash "%s" does not exist.', $hash));
