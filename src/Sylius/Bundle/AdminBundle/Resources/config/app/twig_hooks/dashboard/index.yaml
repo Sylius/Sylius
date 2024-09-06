@@ -1,0 +1,62 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.dashboard.index':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+
+        'sylius_admin.dashboard.index.content':
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            grid:
+                enabled: false
+            statistics:
+                component: 'sylius_admin:dashboard:statistics'
+                props:
+                    channelCode: '@=_context.channel_code'
+            latest_statistics:
+                template: '@SyliusAdmin/dashboard/index/content/latest_statistics.html.twig'
+
+        'sylius_admin.dashboard.index.content.header':
+            breadcrumbs:
+                enabled: false
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+
+        'sylius_admin.dashboard.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: sylius.ui.dashboard
+                    sylius_test_html_attribute: 'dashboard-header'
+            actions:
+                component: 'sylius_admin:dashboard:channel_selector'
+                props:
+                    channelCode: '@=_context.channel_code'
+
+        'sylius_admin.dashboard.index.content.statistics':
+            statistics_grid:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid.html.twig'
+            statistics_chart:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_chart.html.twig'
+
+        'sylius_admin.dashboard.index.content.statistics.statistics_grid':
+            sales:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/sales.html.twig'
+            paid_orders:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/paid_orders.html.twig'
+            customers:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/customers.html.twig'
+            average_order_value:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/average_order_value.html.twig'
+
+        'sylius_admin.dashboard.index.content.latest_statistics':
+            new_customers:
+                component: 'sylius_admin:dashboard:new_customers'
+            new_orders:
+                component: 'sylius_admin:dashboard:new_orders'
+                props:
+                    channelCode: '@=_context.channel_code'

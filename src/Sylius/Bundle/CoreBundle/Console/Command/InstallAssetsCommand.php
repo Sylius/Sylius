@@ -59,5 +59,3 @@ EOT
         return 0;
     }
 }
-
-class_alias(InstallAssetsCommand::class, '\Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand');

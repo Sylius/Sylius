@@ -30,13 +30,13 @@ class ProductVariantController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        $productVariantsToUpdate = $this->getParameterFromRequest($request, 'productVariants');
+        $productVariantsToUpdate = $request->request->all('productVariants');
 
         if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-variant-position', (string) $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productVariantsToUpdate) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true)) {
             foreach ($productVariantsToUpdate as $productVariantToUpdate) {
                 if (!is_numeric($productVariantToUpdate['position'])) {
                     throw new HttpException(
@@ -53,28 +53,5 @@ class ProductVariantController extends ResourceController
         }
 
         return new JsonResponse();
-    }
-
-    /**
-     * @return mixed
-     *
-     * @deprecated This function will be removed in Sylius 2.0, since Symfony 5.4, use explicit input sources instead
-     * based on Symfony\Component\HttpFoundation\Request::get
-     */
-    private function getParameterFromRequest(Request $request, string $key)
-    {
-        if ($request !== $result = $request->attributes->get($key, $request)) {
-            return $result;
-        }
-
-        if ($request->query->has($key)) {
-            return $request->query->all()[$key];
-        }
-
-        if ($request->request->has($key)) {
-            return $request->request->all()[$key];
-        }
-
-        return null;
     }
 }

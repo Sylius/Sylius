@@ -3,11 +3,11 @@
 
 imports:
     - api/account/address_book.yml
-    - api/account/customer.yml
+#    - api/account/customer.yml
     - api/account/customer_registration.yml
     - api/account/email_verification.yml
-    - api/account/login.yml
-    - api/addressing/managing_countries.yml
+    - api/account/login.yaml
+    - api/addressing/managing_countries.yaml
     - api/addressing/managing_zones.yml
     - api/admin/dashboard.yaml
     - api/admin/login.yml
@@ -28,7 +28,7 @@ imports:
     - api/inventory/checkout_inventory.yaml
     - api/inventory/managing_inventory.yaml
     - api/locale/locales.yaml
-    - api/locale/managing_locales.yml
+    - api/locale/managing_locales.yaml
     - api/order/managing_orders.yml
     - api/order/modifying_placed_order_address.yaml
     - api/order/order_history.yaml
@@ -57,6 +57,7 @@ imports:
     - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
     - api/shipping/applying_shipping_method_rules.yml
+    - api/shipping/applying_shipping_fee.yml
     - api/shipping/viewing_shipping_methods.yml
     - api/shipping/managing_shipments.yml
     - api/shipping/managing_shipping_categories.yml
@@ -69,4 +70,4 @@ imports:
     - api/user/managing_administrators.yml
     - api/user/managing_customer_groups.yml
     - api/user/managing_customers.yml
-    - api/user/managing_users.yml
+#    - api/user/managing_users.yml

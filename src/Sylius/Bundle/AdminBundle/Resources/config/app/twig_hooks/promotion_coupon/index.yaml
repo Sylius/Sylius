@@ -1,0 +1,5 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.promotion_coupon.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/promotion_coupon/index/content/header/breadcrumbs.html.twig'

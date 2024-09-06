@@ -1,0 +1,23 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.exchange_rate.update.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.exchange_rate.update.content.form':
+            sections:
+                template: '@SyliusAdmin/exchange_rate/form/sections.html.twig'
+
+        'sylius_admin.exchange_rate.update.content.form.sections':
+            general:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general.html.twig'
+
+        'sylius_admin.exchange_rate.update.content.form.sections.general':
+            ratio:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general/ratio.html.twig'
+            source_currency:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general/source_currency.html.twig'
+            target_currency:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general/target_currency.html.twig'

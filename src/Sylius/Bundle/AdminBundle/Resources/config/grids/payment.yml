@@ -11,34 +11,43 @@ sylius_grid:
                 createdAt: desc
             fields:
                 createdAt:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.date
                     sortable: ~
                     options:
-                        format: d-m-Y H:i:s
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 number:
                     type: twig
                     label: sylius.ui.order
                     path: order
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
-                channel:
-                    type: twig
-                    label: sylius.ui.channel
-                    path: order.channel
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
+                        vars:
+                            th_class: "w-1"
                 customer:
                     type: twig
                     label: sylius.ui.customer
                     path: order.customer
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/customer.html.twig"
+                        vars:
+                            th_class: "w-100"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: order.channel
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: "@SyliusAdmin/Common/Label/paymentState.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/payment_state.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
             filters:
                 state:
                     type: select

@@ -8,7 +8,7 @@
     "used": 1,
     "reusableFromCancelledOrders": false,
     "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
-    "createdAt": @date@,
-    "updatedAt": @date@,
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
     "expiresAt": "2020-01-01 12:00:00"
 }

@@ -1,0 +1,134 @@
+sylius_grid:
+    grids:
+        sylius_admin_product_taxon:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_taxon.class%"
+                    repository:
+                        method: createListQueryBuilderForTaxon
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()", $taxonId]
+            sorting:
+                position: asc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: product
+                    options:
+                        template: "@SyliusAdmin/product/grid/field/product_image.html.twig"
+                name:
+                    type: twig
+                    label: sylius.ui.name
+                    sortable: product.translations.name
+                    path: product
+                    options:
+                        template: "@SyliusAdmin/product/grid/field/name.html.twig"
+                        vars:
+                            th_class: "w-75"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: product.code
+                    path: product
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-25"
+                mainTaxon:
+                    type: twig
+                    label: sylius.ui.main_taxon
+                    path: product.mainTaxon
+                    options:
+                        template: "@SyliusAdmin/product/grid/field/main_taxon.html.twig"
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    path: product
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                position:
+                    type: twig
+                    label: sylius.ui.position
+                    path: .
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/product_taxon/grid/field/position.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [product.code, product.translations.name]
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+                    options:
+                        field: product.enabled
+                channel:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        field: product.channels.id
+            actions:
+                main:
+                    update_positions:
+                        type: update_product_taxon_positions
+                item:
+                    details:
+                        label: sylius.ui.details
+                        type: show
+                        options:
+                            link:
+                                route: sylius_admin_product_show
+                                parameters:
+                                    id: resource.product.id
+                    update:
+                        type: update
+                        options:
+                            link:
+                                route: sylius_admin_product_update
+                                parameters:
+                                    id: resource.product.id
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                route: sylius_admin_product_delete
+                                parameters:
+                                    id: resource.product.id
+                subitem:
+                    variants:
+                        label: sylius.ui.variants
+                        type: list
+                        options:
+                            links:
+                                index:
+                                    label: sylius.ui.list_variants
+                                    route: sylius_admin_product_variant_index
+                                    parameters:
+                                        productId: resource.product.id
+                                create:
+                                    label: sylius.ui.create
+                                    route: sylius_admin_product_variant_create
+                                    parameters:
+                                        productId: resource.product.id
+                                generate:
+                                    label: sylius.ui.generate
+                                    route: sylius_admin_product_variant_generate
+                                    visible: resource.product.hasOptions
+                                    parameters:
+                                        productId: resource.product.id
+                bulk:
+                    delete:
+                        label: sylius.ui.delete_products
+                        type: delete
+                        options:
+                            link:
+                                route: sylius_admin_product_taxon_bulk_delete_products
+                                parameters:
+                                    taxonId: $taxonId

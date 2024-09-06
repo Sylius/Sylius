@@ -32,14 +32,14 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
-        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
+        TaxonAwareRuleUpdaterInterface $taxonAwareRuleUpdater,
     ): void {
         $this->beConstructedWith(
             $requestStack,
             $channelRepository,
             $taxonInPromotionRuleChecker,
             $hasTaxonRuleUpdater,
-            $totalOfItemsFromTaxonRuleUpdater,
+            $taxonAwareRuleUpdater,
         );
     }
 
@@ -101,7 +101,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         RequestStack $requestStack,
         SessionInterface $session,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
-        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
+        TaxonAwareRuleUpdaterInterface $taxonAwareRuleUpdater,
         FlashBagInterface $flashes,
         GenericEvent $event,
         TaxonInterface $taxon,
@@ -109,7 +109,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($taxon);
 
         $hasTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn(['christmas', 'holiday']);
-        $totalOfItemsFromTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn(['christmas']);
+        $taxonAwareRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn(['christmas']);
 
         $requestStack->getSession()->willReturn($session);
         $session->getBag('flashes')->willReturn($flashes);
@@ -128,14 +128,14 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         RequestStack $requestStack,
         SessionInterface $session,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
-        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
+        TaxonAwareRuleUpdaterInterface $taxonAwareRuleUpdater,
         GenericEvent $event,
         TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
 
         $hasTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn([]);
-        $totalOfItemsFromTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn([]);
+        $taxonAwareRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn([]);
 
         $requestStack->getSession()->willReturn($session);
         $session->getBag('flashes')->shouldNotBeCalled();

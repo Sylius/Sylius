@@ -41,5 +41,3 @@ final class PluginInfo
         return $this->url;
     }
 }
-
-class_alias(PluginInfo::class, '\Sylius\Bundle\CoreBundle\Command\Model\PluginInfo');

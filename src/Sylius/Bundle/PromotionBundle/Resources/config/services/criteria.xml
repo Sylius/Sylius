@@ -19,7 +19,7 @@
             <tag name="sylius.catalog_promotion.criteria" />
         </service>
         <service id="sylius.catalog_promotion.criteria.date_range" class="Sylius\Bundle\PromotionBundle\Criteria\DateRange">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <tag name="sylius.catalog_promotion.criteria" />
         </service>
     </services>

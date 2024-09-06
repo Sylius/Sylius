@@ -68,5 +68,3 @@ EOT
         }
     }
 }
-
-class_alias(PromoteUserCommand::class, \Sylius\Bundle\UserBundle\Command\PromoteUserCommand::class);

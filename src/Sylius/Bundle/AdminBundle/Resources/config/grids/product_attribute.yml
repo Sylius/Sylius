@@ -5,20 +5,28 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.product_attribute.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
+
             sorting:
                 position: asc
             fields:
+                name:
+                    type: twig
+                    label: sylius.ui.name
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                        vars:
+                            th_class: "w-75"
                 code:
-                    type: string
+                    type: twig
                     label: sylius.ui.code
                     sortable: ~
-                name:
-                    type: string
-                    label: sylius.ui.name
-                position:
-                    type: string
-                    enabled: false
-                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-25"
                 type:
                     type: twig
                     label: sylius.ui.type
@@ -30,11 +38,40 @@ sylius_grid:
                     label: sylius.ui.translatable
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                position:
+                    type: twig
+                    label: sylius.ui.position
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/position.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
             filters:
-                code:
+                search:
                     type: string
-                    label: sylius.ui.code
+                    label: sylius.ui.search
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
+                    options:
+                        fields: [translations.name, code]
+                type:
+                    type: select
+                    label: sylius.ui.type
+                    form_options:
+                        multiple: true
+                        autocomplete: true
+                        choices:
+                            sylius.ui.checkbox: !php/const Sylius\Component\Attribute\AttributeType\CheckboxAttributeType::TYPE
+                            sylius.ui.date: !php/const Sylius\Component\Attribute\AttributeType\DateAttributeType::TYPE
+                            sylius.ui.datetime: !php/const Sylius\Component\Attribute\AttributeType\DatetimeAttributeType::TYPE
+                            sylius.ui.float: !php/const Sylius\Component\Attribute\AttributeType\FloatAttributeType::TYPE
+                            sylius.ui.integer: !php/const Sylius\Component\Attribute\AttributeType\IntegerAttributeType::TYPE
+                            sylius.ui.percent: !php/const Sylius\Component\Attribute\AttributeType\PercentAttributeType::TYPE
+                            sylius.ui.select: !php/const Sylius\Component\Attribute\AttributeType\SelectAttributeType::TYPE
+                            sylius.ui.text: !php/const Sylius\Component\Attribute\AttributeType\TextAttributeType::TYPE
+                            sylius.ui.textarea: !php/const Sylius\Component\Attribute\AttributeType\TextareaAttributeType::TYPE
                 translatable:
                     type: boolean
                     label: sylius.ui.translatable

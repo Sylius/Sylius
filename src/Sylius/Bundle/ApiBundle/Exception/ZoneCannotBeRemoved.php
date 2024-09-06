@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 final class ZoneCannotBeRemoved extends \RuntimeException
 {
     public function __construct(
-        string $message = 'Cannot delete, the zone is in use.',
+        string $message = 'Cannot delete, the Zone is in use.',
         int $code = 0,
         ?\Throwable $previous = null,
     ) {

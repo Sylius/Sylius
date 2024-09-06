@@ -13,23 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
-use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Webmozart\Assert\Assert;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    public function isRegistered(): bool
-    {
-        $username = $this->getDocument()->find('css', '#username');
-
-        return null !== $username;
-    }
-
     public function deleteAccount(): void
     {
-        $deleteButton = $this->getElement('delete_account_button');
-        $deleteButton->pressButton('Delete');
+        $this->getElement('delete_account_button')->press();
     }
 
     public function getCustomerEmail(): string
@@ -49,7 +39,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getRegistrationDate(): \DateTimeInterface
     {
-        return new \DateTime(str_replace('Customer since ', '', $this->getElement('registration_date')->getText()));
+        return \DateTime::createFromFormat('d-m-Y H:i:s', $this->getElement('registration_date')->getText());
     }
 
     public function getDefaultAddress(): string
@@ -59,17 +49,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasAccount(): bool
     {
-        return $this->hasElement('no_account');
+        return $this->hasElement('delete_account_button');
     }
 
     public function isSubscribedToNewsletter(): bool
     {
-        $subscribedToNewsletter = $this->getElement('subscribed_to_newsletter');
-        if ($subscribedToNewsletter->find('css', 'i.green')) {
-            return true;
-        }
-
-        return false;
+        return null !== $this->getElement('subscribed_to_newsletter')->find('css', 'svg.text-green');
     }
 
     public function hasDefaultAddressProvinceName(string $provinceName): bool
@@ -81,23 +66,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasVerifiedEmail(): bool
     {
-        $verifiedEmail = $this->getElement('verified_email');
-        if ($verifiedEmail->find('css', 'i.green')) {
-            return true;
-        }
-
-        return false;
+        return null !== $this->getElement('verified_email')->find('css', 'svg.text-green');
     }
 
     public function getGroupName(): string
     {
-        $group = $this->getElement('group');
-
-        Assert::notNull($group, 'There should be element group on page.');
-
-        [$text, $groupName] = explode(':', $group->getText());
-
-        return trim($groupName);
+        return $this->getElement('group')->getText();
     }
 
     public function hasEmailVerificationInformation(): bool
@@ -117,34 +91,22 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasCustomerPlacedAnyOrders(): bool
     {
-        return null !== $this->getElement('statistics')->find('css', '.sylius-orders-overall-count');
+        return !$this->hasElement('statistics_no_orders');
     }
 
-    public function getOrdersCountInChannel(string $channelName): int
+    public function getOrdersCountInChannel(string $channelCode): int
     {
-        return (int) $this
-            ->getStatisticsForChannel($channelName)
-            ->find('css', '.sylius-orders-count')
-            ->getText()
-        ;
+        return (int) $this->getElement('statistics_orders_count', ['%channelCode%' => $channelCode])->getText();
     }
 
-    public function getOrdersTotalInChannel(string $channelName): string
+    public function getOrdersTotalInChannel(string $channelCode): string
     {
-        return $this
-            ->getStatisticsForChannel($channelName)
-            ->find('css', '.sylius-orders-total')
-            ->getText()
-        ;
+        return $this->getElement('statistics_orders_total', ['%channelCode%' => $channelCode])->getText();
     }
 
-    public function getAverageTotalInChannel(string $channelName): string
+    public function getAverageTotalInChannel(string $channelCode): string
     {
-        return $this
-            ->getStatisticsForChannel($channelName)
-            ->find('css', '.sylius-order-average-total')
-            ->getText()
-        ;
+        return $this->getElement('statistics_orders_average', ['%channelCode%' => $channelCode])->getText();
     }
 
     public function getSuccessFlashMessage(): string
@@ -160,48 +122,20 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'customer_email' => '#info .content.extra > a',
-            'customer_name' => '#info .content > a',
-            'customer_phone_number' => '#phone-number',
-            'default_address' => '#default-address',
-            'delete_account_button' => '#actions',
-            'flash_message' => '.ui.icon.positive.message .content p',
-            'group' => '.group',
-            'impersonate_button' => '#impersonate',
-            'no_account' => '#no-account',
-            'statistics' => '#statistics',
-            'registration_date' => '#info .content .date',
-            'subscribed_to_newsletter' => '#subscribed-to-newsletter',
-            'verified_email' => '#verified-email',
+            'customer_email' => '[data-test-customer-email]',
+            'customer_name' => '[data-test-customer-fullname]',
+            'customer_phone_number' => '[data-test-customer-phone]',
+            'default_address' => '[data-test-customer-default-address]',
+            'delete_account_button' => '[data-test-customer-actions-delete]',
+            'group' => '[data-test-customer-group]',
+            'impersonate_button' => '[data-test-customer-actions-impersonate]',
+            'registration_date' => '[data-test-customer-since]',
+            'statistics_no_orders' => '[data-test-customer-statistics-no-orders]',
+            'statistics_orders_average' => '[data-test-customer-statistics-%channelCode%-orders-average]',
+            'statistics_orders_count' => '[data-test-customer-statistics-%channelCode%-orders-count]',
+            'statistics_orders_total' => '[data-test-customer-statistics-%channelCode%-orders-total]',
+            'subscribed_to_newsletter' => '[data-test-customer-subscribed-to-newsletter]',
+            'verified_email' => '[data-test-customer-verified-email]',
         ]);
-    }
-
-    /**
-     * @throws \InvalidArgumentException
-     */
-    private function getStatisticsForChannel(string $channelName): NodeElement
-    {
-        $statisticsRibs = $this
-            ->getElement('statistics')
-            ->findAll('css', '.row > .column > .statistic > .sylius-channel-name')
-        ;
-
-        $statisticsRibs = array_filter($statisticsRibs, fn (NodeElement $statistic) => $channelName === trim($statistic->getText()));
-
-        $actualStatisticsCount = count($statisticsRibs);
-        Assert::same(
-            1,
-            $actualStatisticsCount,
-            sprintf(
-                'Expected a single statistic for channel "%s", but %d were found.',
-                $channelName,
-                $actualStatisticsCount,
-            ),
-        );
-
-        $statisticsContents = $this->getElement('statistics')->findAll('css', '.row');
-        $contentIndexes = array_keys($statisticsRibs);
-
-        return $statisticsContents[reset($contentIndexes)];
     }
 }

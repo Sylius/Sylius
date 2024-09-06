@@ -203,7 +203,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         }
     }
 
-    public function isEmpty(): bool
+    public function cartIsEmpty(): bool
     {
         return str_contains($this->getElement('flash_message')->getText(), 'Your cart is empty');
     }

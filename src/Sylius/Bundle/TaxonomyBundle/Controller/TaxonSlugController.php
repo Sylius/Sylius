@@ -56,21 +56,7 @@ final class TaxonSlugController
     private function getParentTaxon(Request $request): ?TaxonInterface
     {
         $parentCode = $request->query->get('parentCode');
-        if (null !== $parentCode) {
-            return $this->taxonRepository->findOneBy(['code' => $parentCode]);
-        }
 
-        $parentId = $request->query->get('parentId');
-        if (null !== $parentId) {
-            trigger_deprecation(
-                'sylius/taxonomy-bundle',
-                '1.13',
-                'Using "parentId" for slug generation is deprecated and will not be possible in 2.0. Use "parentCode" instead.',
-            );
-
-            return $this->taxonRepository->find($parentId);
-        }
-
-        return null;
+        return $this->taxonRepository->findOneBy(['code' => $parentCode]);
     }
 }

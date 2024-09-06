@@ -1,0 +1,13 @@
+{%- macro label(state) -%}
+    {% set label = 'sylius.ui.' ~ state %}
+
+    {% set state_badge = {
+        (constant('Sylius\\Component\\Order\\Model\\OrderInterface::STATE_NEW')): 'bg-blue-lt',
+        (constant('Sylius\\Component\\Order\\Model\\OrderInterface::STATE_FULFILLED')): 'bg-green-lt',
+        (constant('Sylius\\Component\\Order\\Model\\OrderInterface::STATE_CANCELLED')): 'bg-orange-lt',
+    } %}
+
+    <span class="badge {{ state_badge[state]|default('') }}" {{ sylius_test_html_attribute('order-state') }}>
+        {{ label|trans|title }}
+    </span>
+{%- endmacro -%}

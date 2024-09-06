@@ -1,0 +1,37 @@
+$choices-guttering: 12px;
+$choices-border-radius: $input-border-radius;
+$choices-border-radius-item: 4px;
+$choices-bg-color: $input-bg;
+$choices-bg-color-disabled: $input-disabled-bg;
+$choices-bg-color-dropdown: $input-bg;
+$choices-keyline-color: #dadfe5;
+$choices-primary-color: $blue-100;
+$choices-disabled-color: #dadfe5;
+$choices-highlight-color: $blue-800;
+$choices-button-dimension: 8px;
+$choices-button-offset: 8px;
+
+@import "choices.js/src/styles/choices.scss";
+
+.choices__input {
+    padding: 0;
+    margin: 0;
+}
+
+.choices__list--multiple .choices__item {
+    @extend .badge;
+    @extend .text-bg-primary;
+    border: 0;
+    margin: 0 8px 8px 0;
+}
+
+.choices__inner {
+    padding: 9px 0 0 9px;
+    margin: 0;
+    min-height: 40px;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted,
+.choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
+    background-color: #f6f8fb;
+}

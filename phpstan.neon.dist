@@ -29,14 +29,24 @@ parameters:
 
         # Deprecated classes
         - 'src/Sylius/Bundle/CoreBundle/Application/Kernel.php'
-        - 'src/Sylius/Bundle/UserBundle/Security/UserPasswordEncoder.php'
 
         # To investigate, occurs after release of doctrine/orm 2.14, the processing of these classes ends with exit code 143
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
 
+        # Temporary exclusion during upgrade to API Platform 3
+        - 'src/Sylius/Bundle/ApiBundle/**.php'
+
+        # Random errors related to Template Events (we're going to replace them with Twig Events anyway)
+        - 'src/Sylius/Bundle/UiBundle/Console/Command/DebugTemplateEventCommand.php'
+
         # To support both sylius/resource-bundle 1.11 and older versions
         - 'src/Sylius/Bundle/AdminBundle/Controller/RedirectHandler.php'
+        - 'src/Sylius/Bundle/AdminBundle/Form/DataTransformer/ProductsToProductAssociationsTransformer.php'
+        - 'src/Sylius/Bundle/AdminBundle/Provider/LoggedInAdminUserProvider.php'
+        - 'src/Sylius/Bundle/AdminBundle/Twig/Component/Customer/OrderStatisticsComponent.php'
+        - 'src/Sylius/Bundle/AdminBundle/Twig/Component/Order/AddressHistoryComponent.php'
+        - 'src/Sylius/Bundle/AdminBundle/Twig/Component/Taxon/FormComponent.php'
         - 'src/Sylius/Bundle/ApiBundle/OpenApi/Documentation/AcceptLanguageHeaderDocumentationModifier.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/Handler/ResourceDeleteHandler.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/Handler/ResourceUpdateHandler.php'
@@ -62,6 +72,7 @@ parameters:
         - 'src/Sylius/Component/Core/Translation/TranslatableEntityLocaleAssigner.php'
         - 'src/Sylius/Component/Locale/Provider/LocaleCollectionProvider.php'
         - 'src/Sylius/Component/Locale/Provider/LocaleProvider.php'
+        - 'src/Sylius/Component/Taxation/Resolver/TaxRateResolver.php'
 
     ignoreErrors:
         - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
@@ -74,6 +85,7 @@ parameters:
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
         - '/Method [a-zA-z\\]+Filter\:\:filterProperty\(\) has parameter \$value with no type specified./'
         - '/Method [a-zA-z\\]+Persister\:\:(persist|remove|supports)\(\) has parameter \$data with no type specified./'
+        - '/Method Sylius\\Bundle\\AdminBundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'
 
         # To support both sylius/resource-bundle 1.11 and older versions
         - '/Call to an undefined method Sylius\\Resource\\Model\\ResourceInterface::\w+\(\)\./'
@@ -83,3 +95,5 @@ parameters:
         - '/PHPDoc tag @extends contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
         - '/PHPDoc tag @param for parameter \$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
         - '/PHPDoc type for property Sylius\\Bundle\\\w+\\\w+\\\w+::\$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
+        - '/PHPDoc type for property Sylius\\Bundle\\\w+\\\w+\\\w+\\\w+::\$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'
+        - '/PHPDoc type for property Sylius\\Bundle\\\w+\\\w+\\\w+\\\w+\\\w+::\$(\w+) contains generic type Sylius\\Component\\Resource\\\w+\\\w+<Sylius\\Component\\\w+\\Model\\\w+> but interface Sylius\\Component\\Resource\\\w+\\\w+ is not generic\./'

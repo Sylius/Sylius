@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -49,9 +48,10 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\Clock\ClockInterface;
 use Webmozart\Assert\Assert;
 
-final class OrderContext implements Context
+final readonly class OrderContext implements Context
 {
     /**
      * @param FactoryInterface<OrderInterface> $orderFactory
@@ -66,23 +66,23 @@ final class OrderContext implements Context
      * @param ShippingMethodRepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
      */
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage,
-        private readonly FactoryInterface $orderFactory,
-        private readonly FactoryInterface $addressFactory,
-        private readonly FactoryInterface $customerFactory,
-        private readonly FactoryInterface $orderItemFactory,
-        private readonly FactoryInterface $shipmentFactory,
-        private readonly StateMachineInterface $stateMachine,
-        private readonly RepositoryInterface $countryRepository,
-        private readonly RepositoryInterface $customerRepository,
-        private readonly OrderRepositoryInterface $orderRepository,
-        private readonly PaymentMethodRepositoryInterface $paymentMethodRepository,
-        private readonly ShippingMethodRepositoryInterface $shippingMethodRepository,
-        private readonly ProductVariantResolverInterface $variantResolver,
-        private readonly OrderItemQuantityModifierInterface $itemQuantityModifier,
-        private readonly ObjectManager $objectManager,
-        private readonly DateTimeProviderInterface $dateTimeProvider,
-        private readonly RandomnessGeneratorInterface $randomnessGenerator,
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $orderFactory,
+        private FactoryInterface $addressFactory,
+        private FactoryInterface $customerFactory,
+        private FactoryInterface $orderItemFactory,
+        private FactoryInterface $shipmentFactory,
+        private StateMachineInterface $stateMachine,
+        private RepositoryInterface $countryRepository,
+        private RepositoryInterface $customerRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ProductVariantResolverInterface $variantResolver,
+        private OrderItemQuantityModifierInterface $itemQuantityModifier,
+        private ObjectManager $objectManager,
+        private ClockInterface $clock,
+        private RandomnessGeneratorInterface $randomnessGenerator,
     ) {
     }
 
@@ -917,7 +917,7 @@ final class OrderContext implements Context
             $customer->setFirstname('John');
             $customer->setLastname('Doe' . $i);
 
-            $customer->setCreatedAt($this->dateTimeProvider->now());
+            $customer->setCreatedAt($this->clock->now());
 
             $customers[] = $customer;
 
@@ -1021,7 +1021,7 @@ final class OrderContext implements Context
                 $this->shipOrder($order);
             }
 
-            $order->setCheckoutCompletedAt($this->dateTimeProvider->now());
+            $order->setCheckoutCompletedAt($this->clock->now());
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);

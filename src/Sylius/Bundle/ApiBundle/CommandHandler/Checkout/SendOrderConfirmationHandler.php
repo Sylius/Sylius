@@ -20,7 +20,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class SendOrderConfirmationHandler implements MessageHandlerInterface
+final readonly class SendOrderConfirmationHandler implements MessageHandlerInterface
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,

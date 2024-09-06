@@ -42,8 +42,7 @@ final class ShipmentAlreadyShippedValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new ShipmentAlreadyShipped();
-        $shipShipment = new ShipShipment();
-        $shipShipment->setShipmentId(123);
+        $shipShipment = new ShipShipment(shipmentId: 123);
 
         $shipmentRepository->find(123)->willReturn($shipment);
 
@@ -60,8 +59,7 @@ final class ShipmentAlreadyShippedValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new ShipmentAlreadyShipped();
-        $shipShipment = new ShipShipment();
-        $shipShipment->setShipmentId(123);
+        $shipShipment = new ShipShipment(shipmentId: 123);
 
         $shipmentRepository->find(123)->willReturn($shipment);
 

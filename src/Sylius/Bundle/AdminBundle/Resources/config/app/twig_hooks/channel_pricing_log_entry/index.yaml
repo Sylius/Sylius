@@ -1,0 +1,11 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.channel_pricing_log_entry.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/channel_pricing_log_entry/index/content/header/breadcrumbs.html.twig'
+                    
+        'sylius_admin.channel_pricing_log_entry.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'sylius.ui.channel_pricing_history'

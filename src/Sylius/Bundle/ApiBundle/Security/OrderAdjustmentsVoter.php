@@ -30,7 +30,7 @@ final class OrderAdjustmentsVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return $subject instanceof Collection;
+        return $subject instanceof Collection || is_array($subject);
     }
 
     public function supportsAttribute(string $attribute): bool

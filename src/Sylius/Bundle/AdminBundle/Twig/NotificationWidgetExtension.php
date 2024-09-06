@@ -44,7 +44,7 @@ final class NotificationWidgetExtension extends AbstractExtension
             return '';
         }
 
-        return $environment->render('@SyliusAdmin/_notification.html.twig', [
+        return $environment->render('@SyliusAdmin/Layout/_notification.html.twig', [
             'frequency' => $this->checkFrequency,
             'currentVersion' => SyliusCoreBundle::VERSION,
         ]);

@@ -26,9 +26,9 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "sylius/registry": "^1.5",
-        "sylius/resource": "^1.9"
+        "php": "^8.2",
+        "sylius/registry": "^1.6",
+        "sylius/resource": "^1.10"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

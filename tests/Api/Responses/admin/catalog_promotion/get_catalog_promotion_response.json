@@ -2,27 +2,27 @@
     "@context": "\/api\/v2\/contexts\/CatalogPromotion",
     "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
     "@type": "CatalogPromotion",
-    "id": @integer@,
+    "id": "@integer@",
     "name": "Mugs discount",
     "code": "mugs_discount",
     "startDate": null,
     "endDate": null,
     "priority": 0,
-    "state": @string@,
+    "state": "@string@",
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],
     "scopes": [],
     "actions": [],
-    "enabled": @boolean@,
+    "enabled": "@boolean@",
     "exclusive": false,
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
             "@type": "CatalogPromotionTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "label": "Mugs discount",
-            "description": @string@
+            "description": "@string@"
         }
     }
 }

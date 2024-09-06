@@ -1,0 +1,28 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set statistics_data = hookable_metadata.context.statistics_data %}
+
+<div class="col-sm-6 col-lg-3 mb-3">
+    <div class="card card-sm">
+        <div data-loading>
+            <div class="sylius-loader">
+                <img src="{{ asset('build/admin/images/loader.gif', 'admin') }}" alt="Loading"/>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <span class="bg-gray text-black-50 avatar">
+                        {{ icon({ icon: 'shopping_bag' }) }}
+                    </span>
+                </div>
+                <div class="col">
+                    <div class="subheader">{{ 'sylius.ui.paid_orders'|trans }}</div>
+                    <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('paid-orders') }}>
+                        {{ statistics_data.business_activity_summary.paidOrdersCount }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

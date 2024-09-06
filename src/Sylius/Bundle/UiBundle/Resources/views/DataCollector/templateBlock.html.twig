@@ -80,7 +80,8 @@
                                 <tr>
                                     {% if event.names|length > 1 %}<th>Origin event</th>{% endif %}
                                     <th>Name</th>
-                                    <th>Template</th>
+                                    <th>Type</th>
+                                    <th>Path</th>
                                     <th>Duration</th>
                                     <th>Priority</th>
                                 </tr>
@@ -88,7 +89,8 @@
                                     <tr>
                                         {% if event.names|length > 1 %}<td>{{ block.definition.eventName }}</td>{% endif %}
                                         <td>{{ block.definition.name }}</td>
-                                        <td>{{ block.definition.template }}</td>
+                                        <td>{{ block.definition.component != [] ? 'Component' : 'Template' }}</td>
+                                        <td>{{ block.definition.component ?? block.definition.template }}</td>
                                         <td>{{ '%.0f'|format(block.time * 1000) }}ms</td>
                                         <td>{{ block.definition.priority }}</td>
                                     </tr>

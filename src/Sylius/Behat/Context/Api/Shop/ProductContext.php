@@ -63,11 +63,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I try to reach unexistent product
+     * @When I try to reach nonexistent product
      */
-    public function iTryToReachUnexistentProduct(): void
+    public function iTryToReachNonexistentProduct(): void
     {
-        $this->client->show(Resources::PRODUCTS, 'unexistent');
+        $this->client->show(Resources::PRODUCTS, 'nonexistent');
     }
 
     /**

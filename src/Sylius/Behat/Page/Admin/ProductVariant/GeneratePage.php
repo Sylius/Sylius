@@ -13,81 +13,60 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\TabsHelper;
 
-class GeneratePage extends SymfonyPage implements GeneratePageInterface
+class GeneratePage extends BaseCreatePage implements GeneratePageInterface
 {
-    public function generate(): void
-    {
-        $this->getDocument()->pressButton('Generate');
-    }
-
-    public function specifyPrice(int $nth, int $price, ChannelInterface $channel): void
-    {
-        $this->getElement('price', ['%position%' => $nth, '%channelCode%' => $channel->getCode()])->setValue($price);
-    }
-
-    public function specifyCode(int $nth, string $code): void
-    {
-        $this->getDocument()->fillField(sprintf('sylius_product_generate_variants_variants_%s_code', $nth), $code);
-    }
-
-    public function removeVariant(int $nth): void
-    {
-        $item = $this->getDocument()->find('css', sprintf('div[data-form-collection-index="%s"]', $nth));
-
-        $item->clickLink('Delete');
-    }
-
     public function getRouteName(): string
     {
         return 'sylius_admin_product_variant_generate';
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
-    public function getValidationMessage(string $element, int $position): string
+    public function specifyCode(int $nth, string $code): void
     {
-        $foundElement = $this->getElement($element, ['%position%' => $position]);
-        $validatedField = $this->getValidatedField($foundElement);
-
-        return $validatedField->find('css', '.sylius-validation-error')->getText();
+        $this->getElement('code', ['%position%' => $nth])->setValue($code);
     }
 
-    public function getPricesValidationMessage(int $position): string
+    public function specifyPrice(int $nth, int $price, string $channelCode): void
     {
-        return $this->getElement('prices_validation_message', ['%position%' => $position])->getText();
+        $channelPricing = $this->getElement('channel_pricings', ['%position%' => $nth]);
+
+        TabsHelper::switchTab($this->getSession(), $channelPricing, $channelCode);
+
+        $channelPricing->find('css', sprintf('[id$="_channelPricings_%s"]', $channelCode))->fillField('Price', $price);
+    }
+
+    public function generate(): void
+    {
+        $this->getElement('generate_button')->press();
+    }
+
+    public function removeVariant(int $nth): void
+    {
+        $this->getElement('delete_button', ['%position%' => $nth])->click();
+        $this->waitForFormUpdate();
+    }
+
+    public function isGenerationPossible(): bool
+    {
+        return !$this->getElement('generate_button')->hasAttribute('disabled');
+    }
+
+    public function isProductVariantRemovable(int $nth): bool
+    {
+        return $this->hasElement('delete_button', ['%position%' => $nth]);
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_product_generate_variants_variants_%position%_code',
-            'price' => '#sylius_product_generate_variants_variants_%position%_channelPricings_%channelCode% input[id*="%channelCode%"]',
-            'prices_validation_message' => 'div[data-form-collection-index="%position%"] div.tabular.menu ~ .sylius-validation-error',
+            'channel_pricings' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-channel-pricings]',
+            'code' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-code]',
+            'delete_button' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-delete-button]',
+            'form' => 'form',
+            'generate_button' => '[data-test-generate-button]',
+            'price' => '#sylius_admin_product_generate_variants_variants_%position%_channelPricings_%channel_code%_price',
         ]);
-    }
-
-    /**
-     * @throws ElementNotFoundException
-     */
-    private function getValidatedField(NodeElement $element): NodeElement
-    {
-        while (null !== $element && !$element->hasClass('field')) {
-            $element = $element->getParent();
-        }
-
-        return $element;
-    }
-
-    public function isGenerationPossible(): bool
-    {
-        $generateButton = $this->getDocument()->find('css', 'button:contains("Generate")');
-
-        return !$generateButton->hasAttribute('disabled');
     }
 }

@@ -28,19 +28,19 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "payum/offline": "^1.7.3",
         "payum/payum-bundle": "^2.5",
-        "sylius/core": "^1.13",
-        "sylius/currency": "^1.13",
-        "sylius/order-bundle": "^1.13",
-        "sylius/payment-bundle": "^1.13",
-        "sylius/resource-bundle": "^1.9",
+        "sylius/core": "^2.0",
+        "sylius/currency": "^2.0",
+        "sylius/order-bundle": "^2.0",
+        "sylius/payment-bundle": "^2.0",
+        "sylius/resource-bundle": "^1.10",
         "php-http/httplug": "^2.4"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4"
+        "symfony/dependency-injection": "^6.4.1"
     },
     "suggest": {
         "payum/paypal-express-checkout-nvp": "To use PayPal Express Chekout NVP",
@@ -53,7 +53,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

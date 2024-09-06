@@ -34,10 +34,6 @@ sylius_admin_partial_promotion:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/promotion.yml"
     prefix: /promotions
 
-sylius_admin_partial_shipment:
-    resource: "@SyliusAdminBundle/Resources/config/routing/partial/shipment.yml"
-    prefix: /orders/{orderId}/shipments
-
 sylius_admin_partial_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/taxon.yml"
     prefix: /taxons

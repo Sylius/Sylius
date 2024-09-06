@@ -1,0 +1,23 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.tax_category.update.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.tax_category.update.content.form':
+            sections:
+                template: '@SyliusAdmin/tax_category/form/sections.html.twig'
+
+        'sylius_admin.tax_category.update.content.form.sections':
+            general:
+                template: '@SyliusAdmin/tax_category/form/sections/general.html.twig'
+
+        'sylius_admin.tax_category.update.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/tax_category/form/sections/general/code.html.twig'
+            name:
+                template: '@SyliusAdmin/tax_category/form/sections/general/name.html.twig'
+            description:
+                template: '@SyliusAdmin/tax_category/form/sections/general/description.html.twig'

@@ -21,16 +21,9 @@ use Symfony\Component\Templating\Helper\Helper;
 final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
     public function __construct(
-        private LocaleConverterInterface $localeConverter,
-        private ?LocaleContextInterface $localeContext = null,
+        private readonly LocaleConverterInterface $localeConverter,
+        private readonly LocaleContextInterface $localeContext,
     ) {
-        if (null === $localeContext) {
-            trigger_deprecation(
-                'sylius/locale-bundle',
-                '1.4',
-                'Not passing a $localeContext explicitly as the second argument is deprecated and will be prohibited in Sylius 2.0',
-            );
-        }
     }
 
     public function convertCodeToName(string $code, ?string $localeCode = null): ?string
@@ -51,10 +44,6 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
     {
         if (null !== $localeCode) {
             return $localeCode;
-        }
-
-        if (null === $this->localeContext) {
-            return null;
         }
 
         try {

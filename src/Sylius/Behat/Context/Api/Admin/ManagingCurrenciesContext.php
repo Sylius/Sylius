@@ -19,7 +19,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Webmozart\Assert\Assert;
 
-final class ManagingCurrenciesContext implements Context
+final readonly class ManagingCurrenciesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -62,7 +62,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then I should see :count currencies in the list
+     * @Then I should see :count currencies on the list
      */
     public function iShouldSeeCurrenciesInTheList(int $count): void
     {
@@ -72,7 +72,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then I should see the currency :currencyName in the list
+     * @Then I should see the currency :currencyName on the list
      * @Then the currency :currencyName should appear in the store
      */
     public function currencyShouldAppearInTheStore(string $currencyName): void

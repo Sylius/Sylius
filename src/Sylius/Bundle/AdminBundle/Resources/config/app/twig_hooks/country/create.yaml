@@ -1,0 +1,24 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.country.create.content':
+            form:
+                component: 'sylius_admin:country:form'
+                props:
+                    country: '@=_context.resource'
+                    form: '@=_context.form'
+
+        'sylius_admin.country.create.content.form':
+            sections:
+                template: '@SyliusAdmin/country/form/sections.html.twig'
+
+        'sylius_admin.country.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/country/form/sections/general.html.twig'
+
+        'sylius_admin.country.create.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/country/form/sections/general/code.html.twig'
+            enabled:
+                template: '@SyliusAdmin/country/form/sections/general/enabled.html.twig'
+            provinces:
+                template: '@SyliusAdmin/country/form/sections/general/provinces.html.twig'

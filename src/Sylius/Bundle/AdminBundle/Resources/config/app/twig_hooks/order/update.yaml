@@ -1,0 +1,63 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.order.update.content':
+            form:
+                component: 'sylius_admin:order:form'
+                props:
+                    order: '@=_context.resource'
+                    form: '@=_context.form'
+                configuration:
+                    method: 'PUT'
+
+        'sylius_admin.order.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
+
+        'sylius_admin.order.update.content.form':
+            billing_address:
+                template: '@SyliusAdmin/order/form/billing_address.html.twig'
+            shipping_address:
+                template: '@SyliusAdmin/order/form/shipping_address.html.twig'
+
+        'sylius_admin.order.update.content.form.billing_address':
+            company:
+                template: '@SyliusAdmin/order/form/common/company.html.twig'
+            first_name:
+                template: '@SyliusAdmin/order/form/common/first_name.html.twig'
+            last_name:
+                template: '@SyliusAdmin/order/form/common/last_name.html.twig'
+            country:
+                template: '@SyliusAdmin/order/form/common/country.html.twig'
+            phone_number:
+                template: '@SyliusAdmin/order/form/common/phone_number.html.twig'
+            street_address:
+                template: '@SyliusAdmin/order/form/common/street_address.html.twig'
+            city:
+                template: '@SyliusAdmin/order/form/common/city.html.twig'
+            postcode:
+                template: '@SyliusAdmin/order/form/common/postcode.html.twig'
+            province:
+                template: '@SyliusAdmin/order/form/common/province.html.twig'
+
+        'sylius_admin.order.update.content.form.shipping_address':
+            company:
+                template: '@SyliusAdmin/order/form/common/company.html.twig'
+            first_name:
+                template: '@SyliusAdmin/order/form/common/first_name.html.twig'
+            last_name:
+                template: '@SyliusAdmin/order/form/common/last_name.html.twig'
+            country:
+                template: '@SyliusAdmin/order/form/common/country.html.twig'
+            phone_number:
+                template: '@SyliusAdmin/order/form/common/phone_number.html.twig'
+            street_address:
+                template: '@SyliusAdmin/order/form/common/street_address.html.twig'
+            city:
+                template: '@SyliusAdmin/order/form/common/city.html.twig'
+            postcode:
+                template: '@SyliusAdmin/order/form/common/postcode.html.twig'
+            province:
+                template: '@SyliusAdmin/order/form/common/province.html.twig'

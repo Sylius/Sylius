@@ -1,0 +1,16 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.errors.404':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+
+        'sylius_admin.errors.404.content':
+            error:
+                template: '@SyliusAdmin/errors/error/404.html.twig'
+            footer:
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100

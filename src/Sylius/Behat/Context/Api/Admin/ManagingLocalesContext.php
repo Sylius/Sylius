@@ -21,7 +21,7 @@ use Sylius\Behat\Context\Api\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class ManagingLocalesContext implements Context
+final readonly class ManagingLocalesContext implements Context
 {
     use ValidationTrait;
 
@@ -29,6 +29,14 @@ final class ManagingLocalesContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
     ) {
+    }
+
+    /**
+     * @Given I am browsing locales
+     */
+    public function iAmBrowsingLocales(): void
+    {
+        $this->client->index(Resources::LOCALES);
     }
 
     /**
@@ -55,6 +63,18 @@ final class ManagingLocalesContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->client->addFilter(
+            'code',
+            $phrase,
+        );
+        $this->client->filter();
     }
 
     /**
@@ -167,6 +187,28 @@ final class ManagingLocalesContext implements Context
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $localeCode),
             sprintf('There is no locale with code "%s"', $localeCode),
+        );
+    }
+
+    /**
+     * @Then I should see a single locale in the list
+     */
+    public function iShouldSeeLocaleInTheList(int $amount = 1): void
+    {
+        Assert::same(
+            count($this->responseChecker->getCollection($this->client->getLastResponse())),
+            $amount,
+        );
+    }
+
+    /**
+     * @Then I should see the locale :localeName
+     */
+    public function iShouldSeeTheLocale(string $localeName): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $localeName),
+            sprintf('Locale with name %s does not exist', $localeName),
         );
     }
 }

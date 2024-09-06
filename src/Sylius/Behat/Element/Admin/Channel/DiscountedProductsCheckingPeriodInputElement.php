@@ -30,7 +30,7 @@ final class DiscountedProductsCheckingPeriodInputElement extends Element impleme
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'discounted_products_checking_period' => '#sylius_channel_channelPriceHistoryConfig_lowestPriceForDiscountedProductsCheckingPeriod',
+            'discounted_products_checking_period' => '#sylius_admin_channel_channelPriceHistoryConfig_lowestPriceForDiscountedProductsCheckingPeriod',
         ]);
     }
 }
