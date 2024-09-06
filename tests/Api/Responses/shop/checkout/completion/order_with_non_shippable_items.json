@@ -38,7 +38,7 @@
     },
     "payments": [
         {
-            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/payments\/@integer@",
             "@type": "Payment",
             "id": "@integer@",
             "method": "\/api\/v2\/shop\/payment-methods\/BANK_TRANSFER"

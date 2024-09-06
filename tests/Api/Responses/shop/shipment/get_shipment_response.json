@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Shipment",
-    "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+    "@id": "\/api\/v2\/shop\/orders\/token\/shipments\/@integer@",
     "@type": "Shipment",
     "order": "\/api\/v2\/shop\/orders\/token",
     "id": "@integer@",
