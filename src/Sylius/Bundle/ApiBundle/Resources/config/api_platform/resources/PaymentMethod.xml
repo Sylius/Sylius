@@ -39,7 +39,7 @@
 
                 <filters>
                     <filter>sylius_api.order_filter.admin.payment_method</filter>
-                    <filter>sylius_api.filter.translation_order_and_locale</filter>
+                    <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
                     <filter>sylius_api.search_filter.admin.payment_method</filter>
                     <filter>sylius_api.boolean_filter.admin.payment_method</filter>
                 </filters>

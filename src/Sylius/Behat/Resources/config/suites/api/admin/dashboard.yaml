@@ -32,7 +32,7 @@ default:
 
                 - sylius.behat.context.transform.shared_storage
 
-                - Sylius\Behat\Context\Api\Admin\DashboardContext
+                - sylius.behat.context.api.admin.dashboard_context
                 - sylius.behat.context.api.admin.login
 
             filters:

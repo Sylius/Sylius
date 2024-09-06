@@ -8,7 +8,7 @@
             "@type": "ProductVariant",
             "code": "MUG",
             "product": "\/api\/v2\/admin\/products\/MUG_SW",
-            "optionValues":[
+            "optionValues": [
                 "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_BLUE"
             ],
             "channelPricings": {
@@ -85,6 +85,10 @@
         }
     ],
     "hydra:totalItems": 2,
+    "hydra:view": {
+        "@id": "\/api\/v2\/admin\/product-variants?product=INVALID-IRI",
+        "@type": "hydra:PartialCollectionView"
+    },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
         "hydra:template": "\/api\/v2\/admin\/product-variants{?order[position],product,product[],code,translations.name,catalogPromotion}",

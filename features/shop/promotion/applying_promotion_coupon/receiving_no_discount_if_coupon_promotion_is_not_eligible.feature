@@ -20,7 +20,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving no discount if promotion for the applied coupon has not started yet
@@ -29,7 +29,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving no discount if promotion for the applied coupon has already expired
@@ -38,7 +38,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving no discount if promotion's usage for the applied coupon is already exceeded
@@ -48,7 +48,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving no discount if promotion's rules for the applied coupon are not fulfilled
@@ -56,4 +56,4 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied

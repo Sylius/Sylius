@@ -12,7 +12,7 @@ Feature: Applying promotion coupon with an expiration date
 
     @api @ui
     Scenario: Receiving discount from valid coupon with an expiration date
-        Given this coupon expires tomorrow
+        Given this coupon is valid until tomorrow
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
@@ -25,4 +25,4 @@ Feature: Applying promotion coupon with an expiration date
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied

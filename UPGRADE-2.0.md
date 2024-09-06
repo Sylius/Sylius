@@ -8,47 +8,49 @@
 
 ## Codebase
 
-* Doctrine MongoDB and PHPCR is not longer supported in ResourceBundle and GridBundle:
+* Doctrine MongoDB and PHPCR is no longer supported in ResourceBundle and GridBundle:
 
-    * The following classes were removed:
+* The following classes were removed:
 
-        * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource`
-        * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\Driver`
-        * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder`
-        * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilderInterface`
-        * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionVisitor`
-        * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExtraComparison`
-        * `Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine\DoctrineODMDriver`
-        * `Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine\DoctrinePHPCRDriver`
-        * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository`
-        * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\TranslatableRepository`
-        * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener`
-        * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener`
-        * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener`
-        * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder`
-        * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository`
-        * `Sylius\Bundle\ResourceBundle\EventListener\ODMMappedSuperClassSubscriber`
-        * `Sylius\Bundle\ResourceBundle\EventListener\ODMRepositoryClassSubscriber`
-        * `Sylius\Bundle\ResourceBundle\EventListener\ODMTranslatableListener`
+    * `Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener`
+    * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource`
+    * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\Driver`
+    * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder`
+    * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilderInterface`
+    * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionVisitor`
+    * `Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExtraComparison`
+    * `Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine\DoctrineODMDriver`
+    * `Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine\DoctrinePHPCRDriver`
+    * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository`
+    * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\TranslatableRepository`
+    * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository`
+    * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener`
+    * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener`
+    * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener`
+    * `Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder`
+    * `Sylius\Bundle\ResourceBundle\EventListener\ODMMappedSuperClassSubscriber`
+    * `Sylius\Bundle\ResourceBundle\EventListener\ODMRepositoryClassSubscriber`
+    * `Sylius\Bundle\ResourceBundle\EventListener\ODMTranslatableListener`
 
-    * The following services were removed:
+* The following services were removed:
 
-        * `sylius.event_subscriber.odm_mapped_super_class`
-        * `sylius.event_subscriber.odm_repository_class`
-        * `sylius.grid_driver.doctrine.phpcrodm`
+    * `sylius.event_subscriber.odm_mapped_super_class`
+    * `sylius.event_subscriber.odm_repository_class`
+    * `sylius.grid_driver.doctrine.phpcrodm`
+    * `sylius.listener.api_postgresql_driver_exception_listener`
 
-    * The following parameters were removed:
+* The following parameters were removed:
 
-        * `sylius.mongodb_odm.repository.class`
-        * `sylius.phpcr_odm.repository.class`
+    * `sylius.mongodb_odm.repository.class`
+    * `sylius.phpcr_odm.repository.class`
     
-    * The following parameters were renamed:
+* The following parameters were renamed:
 
-        * `sylius.message.admin_user_create.validation_groups` to `sylius_admin.command_handler.create_admin_user.validation_groups`
+    * `sylius.message.admin_user_create.validation_groups` to `sylius_admin.command_handler.create_admin_user.validation_groups`
 
-    * The following configuration options were removed:
+* The following configuration options were removed:
 
-        * `sylius.mailer.templates`
+    * `sylius.mailer.templates`
 
 * Added the `Sylius\Component\Order\Context\ResettableCartContextInterface` that
   extends `Sylius\Component\Order\Context\CartContextInterface` and `Symfony\Contracts\Service\ResetInterface`.

@@ -13,5 +13,5 @@ Feature: Browsing customers
     @api @ui
     Scenario: Browsing customers in store
         When I want to see all customers in store
-        Then I should see 3 customers in the list
+        Then I should see 3 customers on the list
         And I should see the customer "mr.banana@example.com" in the list

@@ -76,10 +76,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I (?:add|added) (this product) to the (cart)$/
-     * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
-     * @When /^I add (product "[^"]+") to the (cart)$/
-     * @When /^the (?:visitor|customer) adds ("[^"]+" product) to the (cart)$/
+     * @When /^I (?:add|added)(?:| the) (this product) to the (cart)$/
+     * @When /^I (?:add|added)(?:| the) ("[^"]+" product) to the (cart)$/
+     * @When /^I add(?:| the) (product "[^"]+") to the (cart)$/
+     * @When /^the (?:visitor|customer) adds(?:| the) ("[^"]+" product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {

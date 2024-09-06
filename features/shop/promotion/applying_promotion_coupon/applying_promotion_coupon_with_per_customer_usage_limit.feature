@@ -43,7 +43,7 @@ Feature: Applying promotion coupon with per customer usage limit
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Cancelled orders do not affect per customer usage limit by default
@@ -69,4 +69,4 @@ Feature: Applying promotion coupon with per customer usage limit
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied

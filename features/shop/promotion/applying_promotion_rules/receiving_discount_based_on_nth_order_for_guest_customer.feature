@@ -29,7 +29,7 @@ Feature: Receiving discount based on nth order
         When I add product "PHP T-Shirt" to the cart
         And I complete addressing step with email "john.doe@example.com" and "United States" based billing address
         Then my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving no discount on an order if I placed more than one order
@@ -38,4 +38,4 @@ Feature: Receiving discount based on nth order
         When I add product "PHP T-Shirt" to the cart
         And I complete addressing step with email "john.doe@example.com" and "United States" based billing address
         Then my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied
