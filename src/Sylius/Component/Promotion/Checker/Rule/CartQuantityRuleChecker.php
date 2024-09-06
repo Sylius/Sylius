@@ -21,7 +21,7 @@ trigger_deprecation(
     '1.13',
     'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
     CartQuantityRuleChecker::class,
-    \Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker::class,
+    'Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker',
 );
 
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker} instead. */
