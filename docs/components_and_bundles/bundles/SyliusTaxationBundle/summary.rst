@@ -23,7 +23,7 @@ Configuration Reference
                     interface:  Sylius\Component\Taxation\Model\TaxCategoryInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:       Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType
             tax_rate:
                 classes:
@@ -31,7 +31,7 @@ Configuration Reference
                     interface:  Sylius\Component\Taxation\Model\TaxRateInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:       Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType
 
 Bug tracking

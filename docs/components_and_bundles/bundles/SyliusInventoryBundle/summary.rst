@@ -31,7 +31,7 @@ Configuration reference
                     interface:  Sylius\Component\Inventory\Model\InventoryUnitInterface
                     controller: Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController
                     repository: ~ # You can override the repository class here.
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
             stockable:
                 classes:
                     model: ~ # The stockable model class.
