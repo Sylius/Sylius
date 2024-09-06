@@ -79,6 +79,11 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->isAdminContext = false;
     }
 
+    protected function disableShopUserContext(): void
+    {
+        $this->isShopUserContext = false;
+    }
+
     protected function setUpDefaultGetHeaders(): void
     {
         $this->defaultGetHeaders = [
