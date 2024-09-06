@@ -15,8 +15,8 @@ namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
-use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 
 final class LocaleListenerSpec extends ObjectBehavior

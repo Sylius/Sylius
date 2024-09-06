@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 interface ChannelPriceHistoryConfigInterface extends ResourceInterface
 {

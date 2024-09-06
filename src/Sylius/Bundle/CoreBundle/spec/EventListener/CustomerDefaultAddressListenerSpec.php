@@ -15,9 +15,9 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
 {

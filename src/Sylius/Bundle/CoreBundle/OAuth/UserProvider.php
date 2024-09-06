@@ -21,11 +21,11 @@ use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvide
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
-use Sylius\Resource\Factory\FactoryInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;

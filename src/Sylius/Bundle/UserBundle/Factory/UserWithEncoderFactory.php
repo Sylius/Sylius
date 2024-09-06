@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\Factory;
 
-use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

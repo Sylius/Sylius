@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;

@@ -28,10 +28,10 @@ use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator;
 use Sylius\Component\Order\Factory\AdjustmentFactory;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Resource\Factory\FactoryInterface;
-use Sylius\Resource\Factory\Factory;
 use Sylius\Component\Taxation\Calculator\DecimalCalculator;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Resource\Factory\Factory;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class OrderItemsTaxesApplicatorTest extends TestCase
 {
