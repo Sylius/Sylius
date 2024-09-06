@@ -1,5 +1,5 @@
-{% extends '@SyliusShop/errors/error.html.twig' %}
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
-{% block error_message %}
-    <span {{ sylius_test_html_attribute('shop-not-found-page') }}>{{ 'sylius.ui.the_page_you_are_looking_for_does_not_exist'|trans }}</span>
+{% block content %}
+    {% hook 'error' with { _prefixes: ['sylius_shop.error404', 'sylius_shop.shared'] } %}
 {% endblock %}
