@@ -16,8 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 use Sylius\Bundle\ApiBundle\Serializer\Exception\InvalidAmountTypeException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class NumericToStringDenormalizer implements DenormalizerAwareInterface
+final class NumericToStringDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 

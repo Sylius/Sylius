@@ -44,7 +44,7 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): ProductAttributeValueInterface
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
