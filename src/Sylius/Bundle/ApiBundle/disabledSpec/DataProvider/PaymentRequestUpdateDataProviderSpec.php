@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
+namespace Sylius\Bundle\ApiBundle\disabledSpec\DataProvider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Checker\UpdatePaymentRequestEligibilityCheckerInterface;
