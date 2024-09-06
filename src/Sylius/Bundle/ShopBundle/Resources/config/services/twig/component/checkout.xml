@@ -52,7 +52,7 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Shipping\FormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectShippingType</argument>
 
             <tag
                 name="sylius.live_component"
