@@ -76,6 +76,8 @@ final class CheckoutCompleteContext implements Context
 
     /**
      * @Given I have confirmed order
+     * @Given the visitor confirm his order
+     * @Given the customer confirm his order
      * @When I confirm my order
      * @When I try to confirm my order
      */
