@@ -116,6 +116,8 @@ final class CartContext implements Context
      * @Given I change :productName quantity to :quantity
      * @Given I change product :productName quantity to :quantity
      * @Given I change product :productName quantity to :quantity in my cart
+     * @When the customer change product :productName quantity to :quantity in his cart
+     * @When the visitor change product :productName quantity to :quantity in his cart
      */
     public function iChangeQuantityTo(string $productName, string $quantity): void
     {
@@ -298,6 +300,9 @@ final class CartContext implements Context
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @Given /^the customer (?:added|adds) ("[^"]+" product) to the cart$/
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
+     * @Given /^the visitor has (product "[^"]+") in the cart$/
+     * @Given /^the customer has (product "[^"]+") in the cart$/
+     * @When /^the visitor adds ("[^"]+" product) to the cart$/
      * @When I add product :product to the cart
      * @When they add product :product to the cart
      */
@@ -480,10 +485,24 @@ final class CartContext implements Context
 
     /**
      * @Then /^I should see "([^"]+)" with quantity (\d+) in my cart$/
+     * @Then /^the visitor should see product "([^"]+)" with quantity (\d+) in his cart$/
+     * @Then /^the customer should see product "([^"]+)" with quantity (\d+) in his cart$/
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
         Assert::same($this->summaryPage->getQuantity($productName), $quantity);
+    }
+
+    /**
+     * @Then /^the customer can see "([^"]+)" product in the cart$/
+     * @Then /^the visitor can see "([^"]+)" product in the cart$/
+     */
+    public function theCustomerCanSeeProductInTheCart(string $productName): void
+    {
+        Assert::true(
+            $this->summaryPage->hasItemNamed($productName),
+            sprintf('Product with name "%s" was not found in the cart.', $productName)
+        );
     }
 
     /**

@@ -46,6 +46,10 @@ final class CheckoutPaymentContext implements Context
 
     /**
      * @Given I completed the payment step with :paymentMethodName payment method
+     * @Given the visitor has proceeded :paymentMethodName payment
+     * @Given the customer has proceeded :paymentMethodName payment
+     * @Given the visitor proceed with :paymentMethodName payment
+     * @Given the customer proceed with :paymentMethodName payment
      * @When /^I choose "([^"]*)" payment method$/
      */
     public function iChoosePaymentMethod(string $paymentMethodName): void
@@ -175,6 +179,18 @@ final class CheckoutPaymentContext implements Context
                 sprintf('There is no %s payment method', $paymentMethodName),
             );
         }
+    }
+
+    /**
+     * @Then the customer should have checkout payment step completed
+     * @Then the visitor should have checkout payment step completed
+     */
+    public function theCustomerShouldHaveCheckoutPaymentStepCompleted(): void
+    {
+        Assert::false(
+            $this->selectPaymentPage->isOpen(),
+            'Customer should have checkout payment step completed, but it is not.',
+        );
     }
 
     /**

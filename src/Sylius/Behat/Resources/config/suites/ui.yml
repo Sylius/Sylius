@@ -15,6 +15,7 @@ imports:
     - ui/admin/login.yml
     - ui/admin/panel.yml
     - ui/admin/security.yml
+    - ui/cart/accessing_cart.yaml
     - ui/cart/shopping_cart.yml
     - ui/channel/channels.yml
     - ui/channel/managing_channels.yml
