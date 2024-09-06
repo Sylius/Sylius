@@ -55,5 +55,5 @@ interface RequestInterface
 
     public function removeSubResource(string $subResourceKey, string $value, string $key = '@id'): void;
 
-    public function authorize(?string $token, string $authorizationHeader): void;
+    public function authorize(?string $token, string $authorizationHeader): self;
 }
