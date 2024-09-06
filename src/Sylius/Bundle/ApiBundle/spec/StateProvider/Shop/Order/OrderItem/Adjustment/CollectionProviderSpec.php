@@ -25,6 +25,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CollectionProviderSpec extends ObjectBehavior
@@ -78,7 +79,6 @@ final class CollectionProviderSpec extends ObjectBehavior
         OrderItemRepositoryInterface $orderItemRepository,
         SectionProviderInterface $sectionProvider,
         Request $request,
-        Request $queryRequest,
         OrderItem $orderItem,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
@@ -86,8 +86,7 @@ final class CollectionProviderSpec extends ObjectBehavior
         $operation = new GetCollection(class: AdjustmentInterface::class);
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
 
-        $request->query = $queryRequest;
-        $queryRequest->get('type')->willReturn('type');
+        $request->query = new InputBag(['type' => 'type']);
         $adjustments = new ArrayCollection([
             $firstAdjustment->getWrappedObject(),
             $secondAdjustment->getWrappedObject(),

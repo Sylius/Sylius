@@ -21,6 +21,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor;
 use Sylius\Component\Core\Model\TaxonImageInterface;
+use Symfony\Component\HttpFoundation\FileBag;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,8 +48,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         ImageCreatorInterface $taxonImageCreator,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $files,
-        ParameterBag $requestParams,
+        FileBag $files,
         TaxonImageInterface $taxonImage,
     ): void {
         $operation = new Post();
@@ -59,8 +60,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         $files->get('file')->willReturn($file);
         $request->files = $files;
 
-        $requestParams->get('type')->willReturn('type');
-        $request->request = $requestParams;
+        $request->request = new InputBag(['type' => 'type']);
 
         $taxonImageCreator->create('code', $file, 'type')->willReturn($taxonImage);
 

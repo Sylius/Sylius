@@ -22,9 +22,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final readonly class AddProductReviewHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class AddProductReviewHandler
 {
     public function __construct(
         private FactoryInterface $productReviewFactory,

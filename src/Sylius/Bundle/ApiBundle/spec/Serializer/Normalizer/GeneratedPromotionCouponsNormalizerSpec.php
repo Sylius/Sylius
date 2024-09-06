@@ -79,6 +79,7 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
             ->normalize(new ArrayCollection([new \stdClass()]), null, [
                 'sylius_generated_promotion_coupons_normalizer_already_called' => true,
             ])
+            ->willReturn([])
             ->shouldBeCalled()
         ;
 

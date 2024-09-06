@@ -30,10 +30,7 @@ final class ProductOptionValueNormalizer implements NormalizerInterface, Normali
     {
     }
 
-    /**
-     * @param ProductOptionValueInterface $object
-     */
-    public function normalize($object, $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ProductOptionValueInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -45,12 +42,17 @@ final class ProductOptionValueNormalizer implements NormalizerInterface, Normali
         return $this->normalizer->normalize($object, $format, $context);
     }
 
-    public function supportsNormalization($data, $format = null, $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         if (isset($context[self::ALREADY_CALLED])) {
             return false;
         }
 
         return $data instanceof ProductOptionValueInterface;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductOptionValueInterface::class => false];
     }
 }

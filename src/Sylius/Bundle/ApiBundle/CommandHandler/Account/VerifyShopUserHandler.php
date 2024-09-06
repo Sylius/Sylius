@@ -19,11 +19,12 @@ use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Clock\ClockInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final readonly class VerifyShopUserHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class VerifyShopUserHandler
 {
     /** @param RepositoryInterface<ShopUserInterface> $shopUserRepository */
     public function __construct(

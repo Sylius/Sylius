@@ -20,11 +20,11 @@ use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class ProductAttributeValueDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class ProductAttributeValueDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
@@ -44,7 +44,7 @@ final class ProductAttributeValueDenormalizer implements ContextAwareDenormalize
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): ProductAttributeValueInterface
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
@@ -53,6 +53,11 @@ final class ProductAttributeValueDenormalizer implements ContextAwareDenormalize
         $data = $this->denormalizeValue($data);
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductAttributeValueInterface::class => false];
     }
 
     /**

@@ -14,19 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final readonly class FlattenExceptionNormalizer implements ContextAwareNormalizerInterface
+final readonly class FlattenExceptionNormalizer implements NormalizerInterface
 {
     public function __construct(
-        private ContextAwareNormalizerInterface|NormalizerInterface $decorated,
+        private NormalizerInterface $decorated,
         private RequestStack $requestStack,
         private string $newApiRoute,
     ) {
     }
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         $request = $this->requestStack->getMainRequest();
         if (null === $request) {
@@ -40,8 +39,13 @@ final readonly class FlattenExceptionNormalizer implements ContextAwareNormalize
         return $this->decorated->supportsNormalization($data, $format, $context);
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         return $this->decorated->normalize($object, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['object' => true];
     }
 }

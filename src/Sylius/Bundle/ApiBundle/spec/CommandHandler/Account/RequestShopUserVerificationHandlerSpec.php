@@ -16,14 +16,16 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification;
 use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestShopUserVerificationHandler;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
+use Webmozart\Assert\Assert;
 
 final class RequestShopUserVerificationHandlerSpec extends ObjectBehavior
 {
@@ -37,7 +39,10 @@ final class RequestShopUserVerificationHandlerSpec extends ObjectBehavior
 
     function it_is_a_message_handler(): void
     {
-        $this->shouldImplement(MessageHandlerInterface::class);
+        $messageHandlerAttributes = (new \ReflectionClass(RequestShopUserVerificationHandler::class))
+            ->getAttributes(AsMessageHandler::class);
+
+        Assert::count($messageHandlerAttributes, 1);
     }
 
     function it_throws_exception_if_shop_user_does_not_exist(UserRepositoryInterface $userRepository): void

@@ -54,4 +54,9 @@ final readonly class CommandNormalizer implements NormalizerInterface
             'message' => $data['message'],
         ];
     }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['object' => false];
+    }
 }
