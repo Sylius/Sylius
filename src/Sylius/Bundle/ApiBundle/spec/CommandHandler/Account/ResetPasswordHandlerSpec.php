@@ -14,12 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
-use Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler;
-use Sylius\Bundle\ApiBundle\spec\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetterInterface;
-use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Webmozart\Assert\Assert;
 
 final class ResetPasswordHandlerSpec extends ObjectBehavior
 {
