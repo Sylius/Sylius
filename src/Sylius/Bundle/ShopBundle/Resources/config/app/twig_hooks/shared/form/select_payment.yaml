@@ -10,7 +10,7 @@ twig_hooks:
             choice:
                 template: '@SyliusShop/shared/form/select_payment/payment/choice.html.twig'
         
-        'sylius_shop.shared.form.select_payment.payment.#unavailable':
+        'sylius_shop.shared.form.select_payment.payment#unavailable':
             unavailable:
                 template: '@SyliusShop/shared/form/select_payment/unavailable.html.twig'
                 
@@ -18,7 +18,7 @@ twig_hooks:
             details:
                 template: '@SyliusShop/shared/form/select_payment/payment/choice/details.html.twig'
         
-        'sylius_shop.shared.form.select_payment.payment.choice.#unavailable':
+        'sylius_shop.shared.form.select_payment.payment.choice#unavailable':
             unavailable:
                 template: '@SyliusShop/shared/form/select_payment/unavailable.html.twig'
                 

@@ -5,7 +5,7 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
-{% if order.paymentState in ['awaiting_payment'] %}
+{% if order.paymentState == constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_AWAITING_PAYMENT') %}
     {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'novalidate': 'novalidate'}}) }}
     <input type="hidden" name="_method" value="PUT" />
     {{ form_errors(form) }}
