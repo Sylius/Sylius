@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/admin\/payments\/@integer@",
             "@type": "Payment",
-            "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
+            "order": "\/api\/v2\/admin\/orders\/token",
             "id": "@integer@",
             "method": {
                 "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",

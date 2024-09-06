@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Shipment",
-    "@id": "\/api\/v2\/admin\/orders\/nAWw2jewpA\/shipments",
+    "@id": "\/api\/v2\/admin\/orders\/token\/shipments",
     "@type": "hydra:Collection",
     "hydra:totalItems": 1,
     "hydra:member": [

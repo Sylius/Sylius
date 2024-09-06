@@ -1,6 +1,6 @@
 {
     "@context": "/api/v2/contexts/Adjustment",
-    "@id": "/api/v2/admin/orders/nAWw2jewpA/adjustments",
+    "@id": "/api/v2/admin/orders/token/adjustments",
     "@type": "hydra:Collection",
     "hydra:totalItems": 4,
     "hydra:member": [
@@ -9,7 +9,7 @@
             "@type": "Adjustment",
             "shipment": "/api/v2/admin/shipments/@integer@",
             "id": "@integer@",
-            "order": "/api/v2/admin/orders/nAWw2jewpA",
+            "order": "/api/v2/admin/orders/token",
             "orderItem": null,
             "orderItemUnit": null,
             "type": "shipping",
@@ -63,7 +63,7 @@
     ],
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/orders\/nAWw2jewpA\/adjustments{?}",
+        "hydra:template": "\/api\/v2\/admin\/orders\/token\/adjustments{?}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": []
     }
