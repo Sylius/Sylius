@@ -189,4 +189,34 @@ final readonly class CheckoutPaymentContext implements Context
             );
         }
     }
+
+    /**
+     * @Given I do not select any payment method
+     */
+    public function iDoNotSelectAnyPaymentMethod(): void
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @Then I should not be able to complete the payment step
+     */
+    public function iShouldNotBeAbleToCompleteThePaymentStep(): void
+    {
+        Assert::true(
+            $this->selectPaymentPage->isNextStepButtonUnavailable(),
+            'The "next step" button should be disabled, but it does not.'
+        );
+    }
+
+    /**
+     * @Then there should be information about no payment methods available for my order
+     */
+    public function thereShouldBeInformationAboutNoPaymentMethodsAvailableForMyOrder(): void
+    {
+        Assert::true(
+            $this->selectPaymentPage->hasNoAvailablePaymentMethodsWarning(),
+            'There should be warning about no available payment methods, but it does not.'
+        );
+    }
 }
