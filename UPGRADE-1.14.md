@@ -1,5 +1,32 @@
 # UPGRADE FROM `v1.13.X` TO `v1.14.0`
 
+### Dependencies
+
+1. The minimum version of `SyliusResourceBundle` has been bumped to `1.11`.
+   Due to that the following namespaces have been updated throughout the codebase:
+   - `Sylius\Component\Resource\Model\ResourceInterface` -> `Sylius\Resource\Model\ResourceInterface`
+   - `Sylius\Component\Resource\Model\CodeAwareInterface` -> `Sylius\Resource\Model\CodeAwareInterface`
+   - `Sylius\Component\Resource\Repository\RepositoryInterface` -> `Sylius\Resource\Doctrine\Persistence\RepositoryInterface`
+   - `Sylius\Component\Resource\Factory\FactoryInterface` -> `Sylius\Resource\Factory\FactoryInterface`
+   - `Sylius\Component\Resource\Model\TranslatableInterface` -> `Sylius\Resource\Model\TranslatableInterface`
+   - `Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface` -> `Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface`
+   - `Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface` -> `Sylius\Resource\Translation\TranslatableEntityLocaleAssignerInterface`
+   - `Sylius\Component\Resource\Generator\RandomnessGeneratorInterface` -> `Sylius\Resource\Generator\RandomnessGeneratorInterface`
+   - `Sylius\Component\Resource\ResourceActions` -> `Sylius\Resource\ResourceActions`
+   - `Sylius\Component\Resource\Exception\UnexpectedTypeException` ->`Sylius\Resource\Exception\UnexpectedTypeException`
+   - `Sylius\Component\Resource\Metadata\Metadata` -> `Sylius\Resource\Metadata\Metadata`
+   - `Sylius\Component\Resource\Exception\DeleteHandlingException` -> `Sylius\Resource\Exception\DeleteHandlingException`
+   - `Sylius\Component\Resource\Exception\RaceConditionException` -> `Sylius\Resource\Exception\RaceConditionException`
+   - `Sylius\Component\Resource\StateMachine\StateMachine` -> `Sylius\Resource\StateMachine\StateMachine`
+   - `Sylius\Component\Resource\Metadata\RegistryInterface` -> `Sylius\Resource\Metadata\RegistryInterface`
+   - `Sylius\Component\Resource\Metadata\MetadataInterface` -> `Sylius\Resource\Metadata\MetadataInterface`
+   - `Sylius\Component\Resource\Exception\VariantWithNoOptionsValuesException` -> `Sylius\Resource\Exception\VariantWithNoOptionsValuesException`
+   - `Sylius\Component\Resource\Storage\StorageInterface` -> `Sylius\Resource\Storage\StorageInterface`
+   - `Sylius\Component\Resource\Exception\UnsupportedMethodException` -> `Sylius\Resource\Exception\UnsupportedMethodException`
+   - `Sylius\Component\Resource\Repository\InMemoryRepository` -> `Sylius\Resource\Doctrine\Persistence\InMemoryRepository`
+   - `Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent` -> `Sylius\Resource\Symfony\EventDispatcher\GenericEvent`
+   The previous namespaces are still usable, but are considered deprecated and may be removed in future versions of `SyliusResourceBundle`, update them at your own convenience.
+
 ### Deprecations
 
 1. The following form extensions have been deprecated and will be removed in Sylius 2.0:
