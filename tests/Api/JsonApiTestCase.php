@@ -248,6 +248,18 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /** @throws \Exception */
+    protected function assertResponseNotFound(): void
+    {
+        $this->assertResponseErrorMessage('Not Found', Response::HTTP_NOT_FOUND);
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseForbidden(): void
+    {
+        $this->assertResponseErrorMessage('Access Denied.', Response::HTTP_FORBIDDEN);
+    }
+
+    /** @throws \Exception */
     protected function assertResponseErrorMessage(string $message, int $code = Response::HTTP_UNPROCESSABLE_ENTITY): void
     {
         $content = json_decode($this->client->getResponse()->getContent(), true);
