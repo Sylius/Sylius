@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        ui_accessing_cart:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
+
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.cart
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.ui.browser
+                - sylius.behat.context.ui.channel
+                - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.checkout.addressing
+                - sylius.behat.context.ui.shop.checkout.shipping
+                - sylius.behat.context.ui.shop.checkout.payment
+                - sylius.behat.context.ui.shop.checkout.thank_you
+                - sylius.behat.context.ui.shop.checkout.complete
+                - sylius.behat.context.ui.user
+
+            filters:
+                tags: "@accessing_cart&&@ui"
