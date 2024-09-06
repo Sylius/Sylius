@@ -57,7 +57,7 @@ final class NumericToStringDenormalizer implements DenormalizerInterface, Denorm
 
     public function getSupportedTypes(?string $format): array
     {
-        return [$this->resourceClass => true];
+        return [$this->resourceClass => false];
     }
 
     private static function getAlreadyCalledKey(string $class): string

@@ -71,6 +71,6 @@ final class ChannelDenormalizer implements DenormalizerInterface, DenormalizerAw
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ChannelInterface::class => true];
+        return [ChannelInterface::class => false];
     }
 }

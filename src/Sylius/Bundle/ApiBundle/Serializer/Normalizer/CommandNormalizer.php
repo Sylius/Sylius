@@ -57,6 +57,6 @@ final readonly class CommandNormalizer implements NormalizerInterface
 
     public function getSupportedTypes(?string $format): array
     {
-        return ['object' => true];
+        return ['object' => false];
     }
 }

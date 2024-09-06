@@ -64,6 +64,6 @@ final class GeneratedPromotionCouponsNormalizer implements NormalizerInterface, 
 
     public function getSupportedTypes(?string $format): array
     {
-        return [Collection::class => true];
+        return [Collection::class => false];
     }
 }

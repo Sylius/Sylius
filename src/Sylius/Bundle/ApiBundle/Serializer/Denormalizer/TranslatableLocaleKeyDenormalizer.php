@@ -58,7 +58,7 @@ final class TranslatableLocaleKeyDenormalizer implements DenormalizerInterface, 
 
     public function getSupportedTypes(?string $format): array
     {
-        return [TranslatableInterface::class => true];
+        return [TranslatableInterface::class => false];
     }
 
     private static function getAlreadyCalledKey(string $class): string

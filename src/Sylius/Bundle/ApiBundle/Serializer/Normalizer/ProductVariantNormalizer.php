@@ -102,7 +102,7 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ProductVariantInterface::class => true];
+        return [ProductVariantInterface::class => false];
     }
 
     private function isNotAdminApiSection(): bool

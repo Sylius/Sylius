@@ -71,6 +71,6 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ProductInterface::class => true];
+        return [ProductInterface::class => false];
     }
 }

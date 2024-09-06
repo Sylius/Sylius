@@ -99,6 +99,6 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ShippingMethodInterface::class => true];
+        return [ShippingMethodInterface::class => false];
     }
 }

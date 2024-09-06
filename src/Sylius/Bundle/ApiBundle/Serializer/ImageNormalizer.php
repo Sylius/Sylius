@@ -63,7 +63,7 @@ class ImageNormalizer implements NormalizerInterface, NormalizerAwareInterface
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ImageInterface::class => true];
+        return [ImageInterface::class => false];
     }
 
     /** @param array<string, string> $data */

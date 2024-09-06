@@ -53,6 +53,6 @@ final class ProductOptionValueNormalizer implements NormalizerInterface, Normali
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ProductOptionValueInterface::class => true];
+        return [ProductOptionValueInterface::class => false];
     }
 }

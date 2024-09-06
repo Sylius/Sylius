@@ -77,7 +77,7 @@ final class ProductAttributeValueNormalizer implements NormalizerInterface, Norm
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ProductAttributeValueInterface::class => true];
+        return [ProductAttributeValueInterface::class => false];
     }
 
     private function normalizeSelectValue(ProductAttributeValueInterface $object): array

@@ -53,6 +53,6 @@ final class CustomerDenormalizer implements DenormalizerInterface, DenormalizerA
 
     public function getSupportedTypes(?string $format): array
     {
-        return [CustomerInterface::class => true];
+        return [CustomerInterface::class => false];
     }
 }

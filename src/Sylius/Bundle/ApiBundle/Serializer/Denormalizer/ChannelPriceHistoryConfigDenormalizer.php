@@ -64,6 +64,6 @@ final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterfa
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ChannelPriceHistoryConfigInterface::class => true];
+        return [ChannelPriceHistoryConfigInterface::class => false];
     }
 }

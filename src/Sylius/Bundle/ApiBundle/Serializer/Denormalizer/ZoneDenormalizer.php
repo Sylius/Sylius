@@ -65,6 +65,6 @@ final readonly class ZoneDenormalizer implements DenormalizerInterface
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ZoneInterface::class => true];
+        return [ZoneInterface::class => false];
     }
 }

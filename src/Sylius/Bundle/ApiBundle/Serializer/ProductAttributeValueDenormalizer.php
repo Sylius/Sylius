@@ -57,7 +57,7 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ProductAttributeValueInterface::class => true];
+        return [ProductAttributeValueInterface::class => false];
     }
 
     /**

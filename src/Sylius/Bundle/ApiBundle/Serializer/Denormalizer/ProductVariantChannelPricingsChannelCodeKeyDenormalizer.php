@@ -62,6 +62,6 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizer implements D
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ProductVariantInterface::class => true];
+        return [ProductVariantInterface::class => false];
     }
 }
