@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Resolver;
 
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 class TaxRateResolver implements TaxRateResolverInterface
 {

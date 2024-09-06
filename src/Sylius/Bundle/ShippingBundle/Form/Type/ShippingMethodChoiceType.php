@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;

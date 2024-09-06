@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Review\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ReviewFactorySpec extends ObjectBehavior
 {

@@ -16,8 +16,8 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

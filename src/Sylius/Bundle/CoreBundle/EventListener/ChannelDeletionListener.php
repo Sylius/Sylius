@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 final class ChannelDeletionListener
 {

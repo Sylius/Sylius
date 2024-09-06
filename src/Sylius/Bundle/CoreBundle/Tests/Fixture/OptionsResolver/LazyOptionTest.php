@@ -19,8 +19,8 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\ResourceNotFoundException;
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\OptionsResolver\Options;
 
 final class LazyOptionTest extends TestCase

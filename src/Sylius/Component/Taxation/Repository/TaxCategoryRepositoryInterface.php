@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Repository;
 
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of TaxCategoryInterface

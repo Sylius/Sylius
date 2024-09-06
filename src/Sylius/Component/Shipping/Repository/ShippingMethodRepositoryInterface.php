@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Repository;
 
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ShippingMethodInterface

@@ -24,7 +24,7 @@ final class HasTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
     /** @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository */
     public function __construct(
         private RepositoryInterface $promotionRuleRepository,
-        private EntityManagerInterface $manager
+        private EntityManagerInterface $manager,
     ) {
     }
 

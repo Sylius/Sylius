@@ -22,8 +22,8 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class OrdersByChannelExtensionSpec extends ObjectBehavior

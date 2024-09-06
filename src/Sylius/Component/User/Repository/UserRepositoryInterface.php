@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Repository;
 
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of UserInterface
