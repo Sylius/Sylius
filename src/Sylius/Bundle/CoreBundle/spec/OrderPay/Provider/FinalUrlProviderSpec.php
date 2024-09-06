@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
-class FinalUrlProviderSpec extends ObjectBehavior
+final class FinalUrlProviderSpec extends ObjectBehavior
 {
     function let(
         RouteParametersProcessorInterface $routeParametersProcessor,
