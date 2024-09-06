@@ -22,7 +22,7 @@ Feature: Changing checkout steps
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @no-api @todo-ui
+    @no-api @ui @javascript
     Scenario: Addressing my order after selecting payment method
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -32,7 +32,7 @@ Feature: Changing checkout steps
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @no-api @todo-ui
+    @no-api @ui @javascript
     Scenario: Addressing my order after selecting shipping method
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

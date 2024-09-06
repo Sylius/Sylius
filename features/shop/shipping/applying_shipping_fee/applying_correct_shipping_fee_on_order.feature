@@ -12,7 +12,7 @@ Feature: Apply correct shipping fee on order
         And the store has "UPS" shipping method with "$5.00" fee per unit for "United States" channel
         And I am a logged in customer
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Adding proper shipping fee
         Given I have product "PHP T-Shirt" in the cart
         And I addressed the cart
@@ -21,7 +21,7 @@ Feature: Apply correct shipping fee on order
         Then my cart total should be "$110.00"
         And my cart shipping total should be "$10.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Changing shipping fee after shipping method change
         Given I have product "PHP T-Shirt" in the cart
         And I addressed the cart
@@ -32,7 +32,7 @@ Feature: Apply correct shipping fee on order
         Then my cart total should be "$130.00"
         And my cart shipping total should be "$30.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Changing per unit shipping fee after decreasing quantity of item
         Given I have 2 products "PHP T-Shirt" in the cart
         And I addressed the cart

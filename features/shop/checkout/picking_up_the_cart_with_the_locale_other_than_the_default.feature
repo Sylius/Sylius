@@ -22,7 +22,7 @@ Feature: Picking up the cart with the locale other than the default
         And I check details of my cart
         Then my cart's locale should be "French (France)"
 
-    @todo @api @no-ui
+    @api @no-ui
     Scenario: Picking up the cart with non valid locale
         When I pick up cart using wrong locale
         And I check details of my cart
