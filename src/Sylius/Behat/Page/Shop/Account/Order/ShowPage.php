@@ -105,7 +105,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return trim(str_replace('Items total:', '', $totalElement->getText()));
     }
 
-    public function getOrderShipmentStatus(): string
+    public function getOrderShipmentState(): string
     {
         return $this->getElement('order_shipment_state')->getText();
     }
@@ -125,7 +125,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('payment_price')->getText();
     }
 
-    public function getPaymentStatus(): string
+    public function getPaymentState(): string
     {
         return $this->getElement('payment_state')->getText();
     }

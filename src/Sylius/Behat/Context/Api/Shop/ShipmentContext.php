@@ -49,6 +49,23 @@ final readonly class ShipmentContext implements Context
     }
 
     /**
+     * @Then /^the shipment state should be "([^"]+)"$/
+     * @Then /^the order's shipment state should be "([^"]+)"$/
+     */
+    public function theShipmentStateShouldBe(string $state): void
+    {
+        $response = $this->client->getLastResponse();
+        $shipments = $this->responseChecker->getValue($response, 'shipments');
+        $token = $this->responseChecker->getValue($response, 'tokenValue');
+
+        $response = $this->client->requestGet(
+            uri: sprintf('/api/v2/shop/orders/%s/shipments/%s', $token, $shipments[0]['id']),
+        );
+
+        Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
+    }
+
+    /**
      * @Then I should not be able to see that shipment
      */
     public function iShouldNotBeAbleToSeeThatShipment(): void

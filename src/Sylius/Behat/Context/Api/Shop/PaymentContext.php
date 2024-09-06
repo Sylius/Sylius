@@ -55,4 +55,20 @@ final readonly class PaymentContext implements Context
     {
         Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
+
+    /**
+     * @Then /^I should see its payment state as "([^"]+)"$/
+     */
+    public function iShouldSeeItsPaymentStateAs(string $state): void
+    {
+        $response = $this->client->getLastResponse();
+        $payments = $this->responseChecker->getValue($response, 'payments');
+        $token = $this->responseChecker->getValue($response, 'tokenValue');
+
+        $response = $this->client->requestGet(
+            uri: sprintf('/api/v2/shop/orders/%s/payments/%s', $token, $payments[0]['id']),
+        );
+
+        Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
+    }
 }
