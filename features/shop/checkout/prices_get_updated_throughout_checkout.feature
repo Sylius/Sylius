@@ -51,7 +51,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And I decide to change order shipping method
         Then the subtotal of "The Pug Mug" item should be "£30.00"
 
-    @no-api @ui @javascript
+    @no-api @todo-ui #requires implementation of checkout complete
     Scenario: Prices get updated after the select payment method step
         Given I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have selected "Pigeon Mail" shipping method
@@ -62,7 +62,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         Then the "The Pug Mug" product should have unit price "£20.00"
         And my order shipping should be "£10.00"
 
-    @no-api @ui @javascript
+    @no-api @todo-ui #requires implementation of checkout complete
     Scenario: Prices get updated on re-selecting payment method step
         Given I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "Pigeon Mail" shipping method and "Offline" payment
