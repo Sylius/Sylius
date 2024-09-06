@@ -16,14 +16,13 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Webmozart\Assert\Assert;
 
-final class ShipmentContext implements Context
+final readonly class ShipmentContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -44,7 +43,9 @@ final class ShipmentContext implements Context
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
 
-        $this->client->show(Resources::SHIPMENTS, (string) $shipment->getId());
+        $this->client->requestGet(
+            sprintf('api/v2/shop/orders/%s/shipments/%s', $order->getTokenValue(), $shipment->getId()),
+        );
     }
 
     /**

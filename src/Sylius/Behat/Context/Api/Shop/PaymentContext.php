@@ -16,14 +16,13 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Webmozart\Assert\Assert;
 
-final class PaymentContext implements Context
+final readonly class PaymentContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -44,7 +43,9 @@ final class PaymentContext implements Context
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
 
-        $this->client->show(Resources::PAYMENTS, (string) $payment->getId());
+        $this->client->requestGet(
+            uri: sprintf('api/v2/shop/orders/%s/payments/%s', $order->getTokenValue(), $payment->getId()),
+        );
     }
 
     /**
