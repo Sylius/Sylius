@@ -142,7 +142,7 @@ RefundPlugin doesn't know anything about order items, so we need to tell them ho
     namespace App\Provider;
 
     use Sylius\Component\Core\Model\OrderItemInterface;
-    use Sylius\Component\Resource\Repository\RepositoryInterface;
+    use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
     use Sylius\RefundPlugin\Provider\RefundUnitTotalProviderInterface;
     use Webmozart\Assert\Assert;
 
@@ -311,7 +311,7 @@ line items, we need to provide a converter that will convert the `OrderItemRefun
 
     use App\Entity\Refund\OrderItemRefund;
     use Sylius\Component\Core\Model\OrderItemInterface;
-    use Sylius\Component\Resource\Repository\RepositoryInterface;
+    use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
     use Sylius\RefundPlugin\Converter\LineItemsConverterUnitRefundAwareInterface;
     use Sylius\RefundPlugin\Entity\LineItem;
     use Sylius\RefundPlugin\Entity\LineItemInterface;

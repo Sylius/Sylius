@@ -16,17 +16,21 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductReviewInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class AddProductReviewHandler implements MessageHandlerInterface
 {
+    /**
+     * @param FactoryInterface<ProductReviewInterface> $productReviewFactory
+     * @param RepositoryInterface<ProductReviewInterface> $productReviewRepository
+     */
     public function __construct(
         private FactoryInterface $productReviewFactory,
         private RepositoryInterface $productReviewRepository,
@@ -51,7 +55,6 @@ final class AddProductReviewHandler implements MessageHandlerInterface
             throw new \InvalidArgumentException('Visitor should provide an email');
         }
 
-        /** @var CustomerInterface $customer */
         $customer = $this->customerResolver->resolve($email);
 
         /** @var ReviewInterface $review */

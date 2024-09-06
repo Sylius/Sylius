@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
@@ -31,6 +31,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodChoiceType extends AbstractType
 {
+    /**
+     * @param RepositoryInterface<ShippingMethodInterface> $repository
+     */
     public function __construct(
         private ShippingMethodsResolverInterface $shippingMethodsResolver,
         private ServiceRegistryInterface $calculators,

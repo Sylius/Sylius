@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TranslatableTrait;
+use Sylius\Resource\Model\TranslationInterface;
 
 class Attribute implements AttributeInterface, \Stringable
 {

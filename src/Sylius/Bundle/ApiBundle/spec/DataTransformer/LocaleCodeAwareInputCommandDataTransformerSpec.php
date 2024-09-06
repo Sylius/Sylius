@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavior
 {

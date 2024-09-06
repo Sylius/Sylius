@@ -18,14 +18,15 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 final class UploadAvatarImageAction
 {
+    /** @param FactoryInterface<ImageInterface> $avatarImageFactory */
     public function __construct(
         private FactoryInterface $avatarImageFactory,
         private AvatarImageRepositoryInterface $avatarImageRepository,

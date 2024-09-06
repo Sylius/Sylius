@@ -14,13 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
 final class ProvinceCodeChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<ProvinceInterface> $provinceRepository */
     public function __construct(private RepositoryInterface $provinceRepository)
     {
     }

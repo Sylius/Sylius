@@ -23,8 +23,8 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,6 +36,8 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
     private OptionsResolver $optionsResolver;
 
     /**
+     * @param FactoryInterface<PromotionInterface> $promotionFactory
+     * @param FactoryInterface<PromotionCouponInterface>|null $couponFactory
      * @param RepositoryInterface<LocaleInterface>|null $localeRepository
      */
     public function __construct(
@@ -171,6 +173,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
+    /** @param FactoryInterface<PromotionCouponInterface>|null $couponFactory */
     private static function getCouponNormalizer(?FactoryInterface $couponFactory): \Closure
     {
         return function (Options $options, array $couponDefinitions) use ($couponFactory): array {

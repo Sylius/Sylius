@@ -16,13 +16,11 @@ namespace Sylius\Component\Core\Promotion\Checker;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ProductInPromotionRuleChecker implements ProductInPromotionRuleCheckerInterface
 {
-    /**
-     * @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository
-     */
+    /** @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository */
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
     }

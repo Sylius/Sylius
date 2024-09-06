@@ -21,8 +21,8 @@ use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvide
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -35,6 +35,12 @@ use Webmozart\Assert\Assert;
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
+    /**
+     * @param FactoryInterface<CustomerInterface> $customerFactory
+     * @param FactoryInterface<SyliusUserInterface> $userFactory
+     * @param FactoryInterface<UserOAuthInterface> $oauthFactory
+     * @param RepositoryInterface<UserOAuthInterface> $oauthRepository
+     */
     public function __construct(
         string $supportedUserClass,
         private FactoryInterface $customerFactory,

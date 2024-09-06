@@ -15,7 +15,7 @@ namespace Sylius\Component\Promotion\Repository;
 
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of CatalogPromotionInterface

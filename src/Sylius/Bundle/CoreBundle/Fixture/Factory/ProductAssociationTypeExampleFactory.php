@@ -18,8 +18,8 @@ use Faker\Generator;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,6 +29,10 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<ProductAssociationTypeInterface> $productAssociationTypeFactory
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private FactoryInterface $productAssociationTypeFactory,
         private RepositoryInterface $localeRepository,

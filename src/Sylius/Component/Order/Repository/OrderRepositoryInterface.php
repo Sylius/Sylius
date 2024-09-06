@@ -15,7 +15,7 @@ namespace Sylius\Component\Order\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of OrderInterface

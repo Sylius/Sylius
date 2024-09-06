@@ -104,7 +104,7 @@ The **InventoryOperator** provides basic operations on your inventory.
 
     use Sylius\Component\Inventory\Operator\InventoryOperator;
     use Sylius\Component\Inventory\Checker\AvailabilityChecker;
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
+    use Sylius\Resource\Doctrine\Persistence\InMemoryRepository;
 
     $inMemoryRepository = new InMemoryRepository(); // Repository model.
     $product = new Product(); // Stockable model.

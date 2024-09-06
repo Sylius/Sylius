@@ -21,7 +21,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior

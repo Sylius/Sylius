@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
@@ -30,7 +30,7 @@ final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
     ) {
     }
 
-    public function check(ResourceControllerEvent $event): void
+    public function check(GenericEvent $event): void
     {
         $order = $event->getSubject();
 
@@ -42,7 +42,7 @@ final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
         if ($promotion = $this->orderPromotionsIntegrityChecker->check($order)) {
             $event->stop(
                 'sylius.order.promotion_integrity',
-                ResourceControllerEvent::TYPE_ERROR,
+                GenericEvent::TYPE_ERROR,
                 ['%promotionName%' => $promotion->getName()],
             );
 
@@ -55,7 +55,7 @@ final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
         }
 
         if ($order->getTotal() !== $oldTotal) {
-            $event->stop('sylius.order.total_integrity', ResourceControllerEvent::TYPE_ERROR);
+            $event->stop('sylius.order.total_integrity', GenericEvent::TYPE_ERROR);
             $event->setResponse(new RedirectResponse($this->router->generate('sylius_shop_checkout_complete')));
 
             $this->manager->persist($order);

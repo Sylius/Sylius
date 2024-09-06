@@ -19,7 +19,7 @@ use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,6 +29,10 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param array<string, string> $attributeTypes
+     */
     public function __construct(
         private AttributeFactoryInterface $productAttributeFactory,
         private RepositoryInterface $localeRepository,

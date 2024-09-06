@@ -56,7 +56,7 @@
         "sylius/payum-bundle": "^1.13",
         "sylius/product-bundle": "^1.13",
         "sylius/promotion-bundle": "^1.13",
-        "sylius/resource-bundle": "^1.9",
+        "sylius/resource-bundle": "^1.11",
         "sylius/review-bundle": "^1.13",
         "sylius/shipping-bundle": "^1.13",
         "sylius/state-machine-abstraction": "^1.13",

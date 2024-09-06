@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Customer;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
 final class CustomerDefaultAddressListener
 {
-    public function preCreate(ResourceControllerEvent $event): void
+    public function preCreate(GenericEvent $event): void
     {
         $address = $event->getSubject();
 

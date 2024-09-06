@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Model;
 
-use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Resource\Model\ToggleableInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\ToggleableInterface;
 
 interface ChannelInterface extends
     CodeAwareInterface,

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAssociationsType extends AbstractType
 {
+    /** @param RepositoryInterface<ProductAssociationTypeInterface> $productAssociationTypeRepository */
     public function __construct(
         private RepositoryInterface $productAssociationTypeRepository,
         private DataTransformerInterface $productsToProductAssociationsTransformer,

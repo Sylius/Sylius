@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Taxation\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;

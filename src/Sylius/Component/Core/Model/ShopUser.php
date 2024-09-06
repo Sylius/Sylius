@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\User as BaseUser;
 
 class ShopUser extends BaseUser implements ShopUserInterface

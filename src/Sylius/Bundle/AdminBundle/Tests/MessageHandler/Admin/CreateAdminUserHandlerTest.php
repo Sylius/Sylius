@@ -19,7 +19,7 @@ use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
 use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
 use Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\ConstraintViolation;

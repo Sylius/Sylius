@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityCheckerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 final class PaymentPreCompleteListener
 {
@@ -26,7 +26,7 @@ final class PaymentPreCompleteListener
     ) {
     }
 
-    public function checkStockAvailability(ResourceControllerEvent $event): void
+    public function checkStockAvailability(GenericEvent $event): void
     {
         /** @var PaymentInterface $payment */
         $payment = $event->getSubject();
@@ -65,7 +65,7 @@ final class PaymentPreCompleteListener
         ;
     }
 
-    private function stopEvent(ResourceControllerEvent $event, string $variantCode): void
+    private function stopEvent(GenericEvent $event, string $variantCode): void
     {
         $event->setMessageType('error');
         $event->setMessage('sylius.resource.payment.cannot_be_completed');

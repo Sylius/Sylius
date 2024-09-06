@@ -20,14 +20,21 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
+use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Webmozart\Assert\Assert;
 
@@ -41,6 +48,15 @@ class OrderFixture extends AbstractFixture
 
     private Generator $faker;
 
+    /**
+     * @param FactoryInterface<OrderInterface> $orderFactory
+     * @param FactoryInterface<OrderItemInterface> $orderItemFactory
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param RepositoryInterface<CustomerInterface> $customerRepository
+     * @param RepositoryInterface<ProductInterface>|ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     * @param FactoryInterface<AddressInterface> $addressFactory
+     */
     public function __construct(
         FactoryInterface $orderFactory,
         FactoryInterface $orderItemFactory,
@@ -48,7 +64,7 @@ class OrderFixture extends AbstractFixture
         ObjectManager $orderManager,
         RepositoryInterface $channelRepository,
         RepositoryInterface $customerRepository,
-        RepositoryInterface $productRepository,
+        RepositoryInterface|ProductRepositoryInterface $productRepository,
         RepositoryInterface $countryRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,

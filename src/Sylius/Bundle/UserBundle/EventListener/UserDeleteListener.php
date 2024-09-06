@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
+use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +43,7 @@ final class UserDeleteListener
     /**
      * @throws \InvalidArgumentException
      */
-    public function deleteUser(ResourceControllerEvent $event): void
+    public function deleteUser(GenericEvent $event): void
     {
         $user = $event->getSubject();
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 interface OrderItemUnitInterface extends ResourceInterface, AdjustableInterface
 {

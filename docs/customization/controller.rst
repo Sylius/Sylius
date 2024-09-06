@@ -61,7 +61,7 @@ getting a list of recommended products from your external api.
     namespace App\Controller;
 
     use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-    use Sylius\Component\Resource\ResourceActions;
+    use Sylius\Resource\ResourceActions;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
 

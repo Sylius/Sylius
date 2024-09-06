@@ -18,8 +18,8 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Positioner\PositionerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Resource\ResourceActions;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -125,7 +125,7 @@ class ProductTaxonController extends ResourceController
     {
         $firstProductTaxonId = array_keys($productTaxonsPositions)[0];
 
-        /** @var EntityRepository&RepositoryInterface $repository */
+        /** @var EntityRepository&RepositoryInterface<ProductTaxonInterface> $repository */
         $repository = $this->repository;
 
         /** @var ProductTaxonInterface $productTaxon */

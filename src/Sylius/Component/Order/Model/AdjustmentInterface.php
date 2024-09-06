@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TimestampableInterface;
 
 interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 {

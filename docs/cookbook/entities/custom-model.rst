@@ -67,7 +67,7 @@ Go to the generated class file and make it implement the ``ResourceInterface``:
 
     namespace App\Entity;
 
-    use Sylius\Component\Resource\Model\ResourceInterface;
+    use Sylius\Resource\Model\ResourceInterface;
 
     class Supplier implements ResourceInterface
     {

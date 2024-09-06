@@ -15,7 +15,7 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ToggleableTrait;
+use Sylius\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Countries;
 
 class Country implements CountryInterface, \Stringable

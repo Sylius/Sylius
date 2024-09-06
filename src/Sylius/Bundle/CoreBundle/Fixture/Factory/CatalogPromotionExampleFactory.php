@@ -22,8 +22,8 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,6 +33,10 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<CatalogPromotionInterface> $catalogPromotionFactory
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private FactoryInterface $catalogPromotionFactory,
         private RepositoryInterface $localeRepository,

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\Model;
 
 use Payum\Core\Security\TokenInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 interface PaymentSecurityTokenInterface extends ResourceInterface, TokenInterface
 {

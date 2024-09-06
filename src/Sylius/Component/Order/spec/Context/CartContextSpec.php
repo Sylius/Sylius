@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Order\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class CartContextSpec extends ObjectBehavior
 {

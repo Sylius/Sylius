@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Channel\Factory;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ChannelInterface

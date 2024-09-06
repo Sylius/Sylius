@@ -20,8 +20,8 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface as CustomerComponent;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,6 +31,11 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<ShopUserInterface> $shopUserFactory
+     * @param FactoryInterface<CustomerInterface> $customerFactory
+     * @param RepositoryInterface<CustomerGroupInterface> $customerGroupRepository
+     */
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private FactoryInterface $customerFactory,

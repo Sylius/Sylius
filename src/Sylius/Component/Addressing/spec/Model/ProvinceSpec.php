@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
 
 final class ProvinceSpec extends ObjectBehavior
 {

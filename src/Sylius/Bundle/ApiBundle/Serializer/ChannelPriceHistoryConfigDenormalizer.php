@@ -17,7 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -29,6 +29,10 @@ final class ChannelPriceHistoryConfigDenormalizer implements ContextAwareDenorma
 
     private const ALREADY_CALLED = 'sylius_channel_price_history_config_denormalizer_already_called';
 
+    /**
+     * @param FactoryInterface<ChannelPriceHistoryConfigInterface> $channelPriceHistoryConfigFactory
+     * @param array<string, string> $validationGroups
+     */
     public function __construct(
         private IriConverterInterface $iriConverter,
         private FactoryInterface $channelPriceHistoryConfigFactory,

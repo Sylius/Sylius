@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\User\Security\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 
 final class TokenUniquenessCheckerSpec extends ObjectBehavior

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Review\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TimestampableTrait;
 
 class Review implements ReviewInterface
 {

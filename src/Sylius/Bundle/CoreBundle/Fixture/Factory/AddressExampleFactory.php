@@ -21,8 +21,8 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
@@ -33,6 +33,11 @@ class AddressExampleFactory extends AbstractExampleFactory
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<AddressInterface> $addressFactory
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     * @param RepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         private FactoryInterface $addressFactory,
         private RepositoryInterface $countryRepository,
