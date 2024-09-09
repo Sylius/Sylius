@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Channel\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ChannelFactorySpec extends ObjectBehavior
 {

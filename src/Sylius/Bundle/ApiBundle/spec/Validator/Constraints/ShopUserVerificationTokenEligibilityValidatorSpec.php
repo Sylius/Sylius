@@ -18,7 +18,7 @@ use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserVerificationTokenEligibility;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 

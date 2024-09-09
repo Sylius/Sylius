@@ -34,7 +34,7 @@ First lets make some preparations.
    use Sylius\Component\Addressing\Model\Zone;
    use Sylius\Component\Addressing\Model\ZoneInterface;
    use Sylius\Component\Addressing\Model\ZoneMember;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+   use Sylius\Resource\Doctrine\Persistence\InMemoryRepository;
 
    $zoneRepository = new InMemoryRepository(ZoneInterface::class);
    $zone = new Zone();

@@ -26,18 +26,23 @@ use Sylius\Component\Core\Model\TaxRate;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator;
 use Sylius\Component\Order\Factory\AdjustmentFactory;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Taxation\Calculator\DecimalCalculator;
 use Sylius\Component\Taxation\Calculator\DefaultCalculator;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Resource\Factory\Factory;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class OrderItemUnitsTaxesApplicatorTest extends TestCase
 {
     public function test_it_calculates_tax_with_rounding(): void
     {
+        /** @var FactoryInterface<AdjustmentInterface> $adjustmentFactory */
+        $adjustmentFactory = new Factory(Adjustment::class);
+
         $applicator = new OrderItemUnitsTaxesApplicator(
             new DefaultCalculator(),
-            new AdjustmentFactory(new Factory(Adjustment::class)),
+            new AdjustmentFactory($adjustmentFactory),
             $this->createConfiguredMock(TaxRateResolverInterface::class, [
                 'resolve' => $this->createTaxRate(),
             ]),
@@ -54,9 +59,12 @@ final class OrderItemUnitsTaxesApplicatorTest extends TestCase
 
     public function test_it_calculates_tax_with_decimal_precision(): void
     {
+        /** @var FactoryInterface<AdjustmentInterface> $adjustmentFactory */
+        $adjustmentFactory = new Factory(Adjustment::class);
+
         $applicator = new OrderItemUnitsTaxesApplicator(
             new DecimalCalculator(),
-            new AdjustmentFactory(new Factory(Adjustment::class)),
+            new AdjustmentFactory($adjustmentFactory),
             $this->createConfiguredMock(TaxRateResolverInterface::class, [
                 'resolve' => $this->createTaxRate(),
             ]),

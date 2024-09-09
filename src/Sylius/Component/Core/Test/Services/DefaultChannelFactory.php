@@ -18,8 +18,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class DefaultChannelFactory implements DefaultChannelFactoryInterface
 {
@@ -29,6 +29,13 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
 
     public const DEFAULT_CHANNEL_CURRENCY = 'USD';
 
+    /**
+     * @param FactoryInterface<CurrencyInterface> $currencyFactory
+     * @param FactoryInterface<LocaleInterface> $localeFactory
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param RepositoryInterface<CurrencyInterface> $currencyRepository
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private ChannelFactoryInterface $channelFactory,
         private FactoryInterface $currencyFactory,

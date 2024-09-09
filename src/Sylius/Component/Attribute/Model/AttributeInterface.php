@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Attribute\Model;
 
-use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Model\TranslationInterface;
 
 interface AttributeInterface extends
     ResourceInterface,

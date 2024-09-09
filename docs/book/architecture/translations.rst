@@ -23,7 +23,7 @@ Assuming that we would like to have a translatable model of a ``Supplier``, we n
 
    namespace App\Entity;
 
-   use Sylius\Component\Resource\Model\AbstractTranslation;
+   use Sylius\Resource\Model\AbstractTranslation;
 
    class SupplierTranslation extends AbstractTranslation
    {
@@ -62,8 +62,8 @@ The actual entity has access to its translation by using the ``TranslatableTrait
 
    namespace App\Entity;
 
-   use Sylius\Component\Resource\Model\TranslatableInterface;
-   use Sylius\Component\Resource\Model\TranslatableTrait;
+   use Sylius\Resource\Model\TranslatableInterface;
+   use Sylius\Resource\Model\TranslatableTrait;
 
    class Supplier implements TranslatableInterface
    {

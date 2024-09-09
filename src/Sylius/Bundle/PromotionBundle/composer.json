@@ -33,7 +33,7 @@
         "sylius/money-bundle": "^2.0",
         "sylius/promotion": "^2.0",
         "sylius/registry": "^1.6",
-        "sylius/resource-bundle": "^1.10",
+        "sylius/resource-bundle": "^1.11",
         "symfony/clock": "^6.4.0",
         "symfony/framework-bundle": "^6.4.1"
     },

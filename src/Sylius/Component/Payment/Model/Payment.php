@@ -15,7 +15,7 @@ namespace Sylius\Component\Payment\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TimestampableTrait;
 
 class Payment implements PaymentInterface
 {

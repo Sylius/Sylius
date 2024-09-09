@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Customer\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TimestampableTrait;
 
 class Customer implements CustomerInterface, \Stringable
 {

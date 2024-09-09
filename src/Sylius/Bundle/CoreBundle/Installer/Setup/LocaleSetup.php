@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,6 +27,10 @@ use Symfony\Component\Yaml\Yaml;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param FactoryInterface<LocaleInterface> $localeFactory
+     */
     public function __construct(
         private RepositoryInterface $localeRepository,
         private FactoryInterface $localeFactory,

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Order\Repository;
 
 use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of OrderItemInterface

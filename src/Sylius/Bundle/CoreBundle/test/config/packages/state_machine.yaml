@@ -3,7 +3,7 @@ winzou_state_machine:
         class: Sylius\Bundle\CoreBundle\Application\Model\BlogPost
         property_path: state
         graph: app_blog_post
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: Sylius\Resource\StateMachine\StateMachine
         states:
             new: ~
             published: ~
@@ -19,7 +19,7 @@ winzou_state_machine:
         class: Sylius\Bundle\CoreBundle\Application\Model\Comment
         property_path: state
         graph: app_comment
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: Sylius\Resource\StateMachine\StateMachine
         states:
             new: ~
             published: ~

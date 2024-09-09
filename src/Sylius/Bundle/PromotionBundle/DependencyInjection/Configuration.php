@@ -42,7 +42,7 @@ use Sylius\Component\Promotion\Model\PromotionRule;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Model\PromotionTranslation;
 use Sylius\Component\Promotion\Model\PromotionTranslationInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

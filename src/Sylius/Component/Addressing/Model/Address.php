@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TimestampableTrait;
 
 class Address implements AddressInterface
 {

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\Factory;
 
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -22,6 +22,7 @@ use Webmozart\Assert\Assert;
  */
 final class UserWithEncoderFactory implements FactoryInterface
 {
+    /** @param FactoryInterface<UserInterface> $decoratedUserFactory */
     public function __construct(private FactoryInterface $decoratedUserFactory, private string $encoderName)
     {
     }

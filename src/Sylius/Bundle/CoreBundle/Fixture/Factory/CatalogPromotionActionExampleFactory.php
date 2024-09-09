@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,6 +24,7 @@ final class CatalogPromotionActionExampleFactory extends AbstractExampleFactory 
 {
     private OptionsResolver $optionsResolver;
 
+    /** @param FactoryInterface<CatalogPromotionActionInterface> $catalogPromotionActionFactory */
     public function __construct(private FactoryInterface $catalogPromotionActionFactory)
     {
         $this->optionsResolver = new OptionsResolver();

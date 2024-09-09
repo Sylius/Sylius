@@ -18,10 +18,10 @@ use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -44,7 +44,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
         OrderInterface $order,
         PromotionInterface $promotion,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
     ): void {
         $event->getSubject()->willReturn($order);
 
@@ -65,7 +65,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $oldPromotion,
         PromotionInterface $newPromotion,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         ObjectManager $orderManager,
     ): void {
         $event->getSubject()->willReturn($order);
@@ -84,7 +84,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
 
         $event->stop(
             'sylius.order.promotion_integrity',
-            ResourceControllerEvent::TYPE_ERROR,
+            GenericEvent::TYPE_ERROR,
             ['%promotionName%' => 'Christmas'],
         )->shouldBeCalled();
         $event->setResponse(new RedirectResponse('checkout.com'))->shouldBeCalled();
@@ -100,7 +100,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         RouterInterface $router,
         OrderInterface $order,
         PromotionInterface $promotion,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         ObjectManager $orderManager,
     ): void {
         $event->getSubject()->willReturn($order);
@@ -112,7 +112,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
 
         $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
 
-        $event->stop('sylius.order.total_integrity', ResourceControllerEvent::TYPE_ERROR)->shouldBeCalled();
+        $event->stop('sylius.order.total_integrity', GenericEvent::TYPE_ERROR)->shouldBeCalled();
         $event->setResponse(new RedirectResponse('checkout.com'))->shouldBeCalled();
 
         $orderManager->persist($order)->shouldBeCalled();
@@ -126,7 +126,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         RouterInterface $router,
         OrderInterface $order,
         PromotionInterface $promotion,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         ObjectManager $orderManager,
     ): void {
         $event->getSubject()->willReturn($order);
@@ -146,7 +146,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
 
         $event->stop(
             'sylius.order.promotion_integrity',
-            ResourceControllerEvent::TYPE_ERROR,
+            GenericEvent::TYPE_ERROR,
             ['%promotionName%' => 'Christmas'],
         )->shouldBeCalled();
         $event->setResponse(new RedirectResponse('checkout.com'))->shouldBeCalled();
@@ -157,7 +157,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         $this->check($event);
     }
 
-    function it_throws_invalid_argument_exception_if_event_subject_is_not_order(ResourceControllerEvent $event): void
+    function it_throws_invalid_argument_exception_if_event_subject_is_not_order(GenericEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

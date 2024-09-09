@@ -13,14 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxonomy\Factory;
 
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @implements TaxonFactoryInterface<TaxonInterface>
+ * @template T of TaxonInterface
+ *
+ * @implements TaxonFactoryInterface<T>
  */
 final class TaxonFactory implements TaxonFactoryInterface
 {
+    /** @param FactoryInterface<T> $factory */
     public function __construct(private FactoryInterface $factory)
     {
     }

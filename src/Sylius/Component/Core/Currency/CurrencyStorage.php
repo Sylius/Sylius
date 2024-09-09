@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Currency;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Storage\StorageInterface;
+use Sylius\Resource\Storage\StorageInterface;
 
 final class CurrencyStorage implements CurrencyStorageInterface
 {

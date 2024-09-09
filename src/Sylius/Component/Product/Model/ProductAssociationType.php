@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TranslatableTrait;
+use Sylius\Resource\Model\TranslationInterface;
 
 class ProductAssociationType implements ProductAssociationTypeInterface, \Stringable
 {

@@ -51,7 +51,7 @@ The output of that command should look similar to:
                         form: Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType
                         interface: Sylius\Component\User\Model\UserInterface
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
-                        factory: Sylius\Component\Resource\Factory\Factory
+                        factory: Sylius\Resource\Factory\Factory
                         ...
             shop:
                 user:
@@ -61,7 +61,7 @@ The output of that command should look similar to:
                         form: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
                         interface: Sylius\Component\User\Model\UserInterface
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
-                        factory: Sylius\Component\Resource\Factory\Factory
+                        factory: Sylius\Resource\Factory\Factory
                         ...
             oauth:
                 user:
@@ -69,7 +69,7 @@ The output of that command should look similar to:
                         model: Sylius\Component\User\Model\UserOAuth
                         interface: Sylius\Component\User\Model\UserOAuthInterface
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                        factory: Sylius\Component\Resource\Factory\Factory
+                        factory: Sylius\Resource\Factory\Factory
                         ...
 
 As you can see there is an extra layer in the configuration here.

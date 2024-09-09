@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,6 +27,10 @@ final class CurrencySetup implements CurrencySetupInterface
 {
     private string $currency;
 
+    /**
+     * @param RepositoryInterface<CurrencyInterface> $currencyRepository
+     * @param FactoryInterface<CurrencyInterface> $currencyFactory
+     */
     public function __construct(
         private RepositoryInterface $currencyRepository,
         private FactoryInterface $currencyFactory,

@@ -59,7 +59,7 @@ The **CurrencyProvider** allows you to get all available currencies.
    <?php
 
    use Sylius\Component\Currency\Provider\CurrencyProvider;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+   use Sylius\Resource\Doctrine\Persistence\InMemoryRepository;
 
    $currencyRepository = new InMemoryRepository();
    $currencyProvider = new CurrencyProvider($currencyRepository);

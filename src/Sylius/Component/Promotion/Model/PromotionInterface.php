@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ArchivableInterface;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Model\ArchivableInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\TranslatableInterface;
 
 interface PromotionInterface extends ArchivableInterface, CodeAwareInterface, TimestampableInterface, TranslatableInterface, ResourceInterface
 {

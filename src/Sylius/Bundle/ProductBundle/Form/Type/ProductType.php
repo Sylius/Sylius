@@ -18,9 +18,10 @@ use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscribe
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,6 +33,7 @@ final class ProductType extends AbstractResourceType
 {
     /**
      * @param array|string[] $validationGroups
+     * @param FactoryInterface<AttributeValueInterface> $attributeValueFactory
      */
     public function __construct(
         string $dataClass,

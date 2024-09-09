@@ -17,15 +17,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Metadata\RegistryInterface;
+use Sylius\Resource\Model\TranslationInterface;
 
 final class LocaleUsageChecker implements LocaleUsageCheckerInterface
 {
-    /**
-     * @param RepositoryInterface<LocaleInterface> $localeRepository
-     */
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(
         private RepositoryInterface $localeRepository,
         private RegistryInterface $resourceRegistry,

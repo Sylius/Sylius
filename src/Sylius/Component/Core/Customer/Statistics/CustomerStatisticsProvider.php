@@ -17,12 +17,17 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class CustomerStatisticsProvider implements CustomerStatisticsProviderInterface
 {
-    public function __construct(private OrderRepositoryInterface $orderRepository, private RepositoryInterface $channelRepository)
-    {
+    /**
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     */
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository,
+        private RepositoryInterface $channelRepository,
+    ) {
     }
 
     public function getCustomerStatistics(CustomerInterface $customer): CustomerStatistics

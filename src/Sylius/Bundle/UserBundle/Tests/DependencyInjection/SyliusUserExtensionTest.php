@@ -19,9 +19,9 @@ use Sylius\Bundle\UserBundle\DependencyInjection\SyliusUserExtension;
 use Sylius\Bundle\UserBundle\EventListener\UpdateUserEncoderListener;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Factory\Factory;
 
 final class SyliusUserExtensionTest extends AbstractExtensionTestCase
 {

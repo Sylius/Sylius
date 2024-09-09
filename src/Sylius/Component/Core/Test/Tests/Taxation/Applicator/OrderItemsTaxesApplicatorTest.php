@@ -27,17 +27,22 @@ use Sylius\Component\Core\Model\TaxRate;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator;
 use Sylius\Component\Order\Factory\AdjustmentFactory;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Taxation\Calculator\DecimalCalculator;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Resource\Factory\Factory;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class OrderItemsTaxesApplicatorTest extends TestCase
 {
     public function test_it_calculates_tax_with_decimal_precision(): void
     {
+        /** @var FactoryInterface<AdjustmentInterface> $adjustmentFactory */
+        $adjustmentFactory = new Factory(Adjustment::class);
+
         $applicator = new OrderItemsTaxesApplicator(
             new DecimalCalculator(),
-            new AdjustmentFactory(new Factory(Adjustment::class)),
+            new AdjustmentFactory($adjustmentFactory),
             new IntegerDistributor(),
             $this->createConfiguredMock(TaxRateResolverInterface::class, [
                 'resolve' => $this->createTaxRate(),

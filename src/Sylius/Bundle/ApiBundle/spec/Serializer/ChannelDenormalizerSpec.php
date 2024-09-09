@@ -18,7 +18,7 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class ChannelDenormalizerSpec extends ObjectBehavior

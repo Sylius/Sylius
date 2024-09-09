@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {

@@ -18,7 +18,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProvider;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ProvinceNamingProviderSpec extends ObjectBehavior
 {

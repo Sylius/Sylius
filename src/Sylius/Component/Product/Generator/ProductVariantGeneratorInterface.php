@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Generator;
 
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Exception\VariantWithNoOptionsValuesException;
+use Sylius\Resource\Exception\VariantWithNoOptionsValuesException;
 
 interface ProductVariantGeneratorInterface
 {

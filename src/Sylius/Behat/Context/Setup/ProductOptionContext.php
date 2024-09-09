@@ -20,7 +20,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ProductOptionContext implements Context
 {

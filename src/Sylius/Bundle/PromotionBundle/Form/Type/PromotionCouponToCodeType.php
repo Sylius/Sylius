@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -24,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PromotionCouponToCodeType extends AbstractType implements DataTransformerInterface
 {
+    /** @param RepositoryInterface<PromotionCouponInterface> $promotionCouponRepository */
     public function __construct(private RepositoryInterface $promotionCouponRepository)
     {
     }
