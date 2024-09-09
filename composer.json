@@ -75,7 +75,6 @@
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius-labs/association-hydrator": "^1.1 || ^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
-        "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/fixtures-bundle": "^1.8",
         "sylius/grid": "^1.12",
         "sylius/grid-bundle": "^1.12",
