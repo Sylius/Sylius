@@ -69,7 +69,7 @@ sylius:
         shipping_method:
             not_blank: Please select shipping method.
         email:
-            not_changeable: Email can't be changed for logged in customer.
+            not_changeable: Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can't be changed.
     contact:
         email:
             invalid: This email is invalid.
@@ -101,6 +101,7 @@ sylius:
         product_eligibility: 'This product %productName% has been disabled.'
         shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
         shipping_method_not_available: 'The "%shippingMethodName%" shipping method is not available. Please reselect your shipping method.'
+        cart_items_immutable: 'Cannot change cart items after the checkout is completed."'
     resend_order_confirmation_email:
         invalid_order_state: 'Cannot resend order confirmation email for order with state %state%.'
     resend_shipment_confirmation_email:
@@ -149,7 +150,8 @@ sylius:
             min: Depth cannot be negative.
             invalid: Depth must be a number.
         channel_pricing:
-            all_defined: 'You must define price for every enabled channel.'
+            price:
+                not_defined: 'You must define price.'
             existing_code: Channel with code {{ channelCode }} does not exist.
     promotion_coupon:
         per_customer_usage_limit:
@@ -157,6 +159,9 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    province:
+        code:
+            not_exist: Province with code {{ code }} does not exist.
     review:
         author:
             not_blank: Please enter your email.
@@ -195,3 +200,6 @@ sylius:
             max: Last name must not be longer than {{ limit }} characters.
         locale_code:
             not_blank: Please choose a locale.
+    zone:
+        code:
+            not_exist: Zone with code {{ code }} does not exist.

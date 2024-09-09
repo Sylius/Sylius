@@ -213,6 +213,126 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    /** @test */
+    public function component_block_configuration_can_be_shortened_to_template_string_only(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'events' => [
+                        'event_name' => [
+                            'blocks' => [
+                                'block_name' => [
+                                    'component' => 'component_name',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'events' => [
+                    'event_name' => [
+                        'blocks' => [
+                            'block_name' => [
+                                'component' => [
+                                    'name' => 'component_name',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'events.*.blocks.*.component',
+        );
+    }
+
+    /** @test */
+    public function component_block_configuration_can_be_defined_with_inputs(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'events' => [
+                        'event_name' => [
+                            'blocks' => [
+                                'block_name' => [
+                                    'component' => [
+                                        'name' => 'component_name',
+                                        'inputs' => [
+                                            'foo' => 'bar',
+                                            'bar' => 'baz',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'events' => [
+                    'event_name' => [
+                        'blocks' => [
+                            'block_name' => [
+                                'component' => [
+                                    'name' => 'component_name',
+                                    'inputs' => [
+                                        'foo' => 'bar',
+                                        'bar' => 'baz',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'events.*.blocks.*.component',
+        );
+    }
+
+    /** @test */
+    public function template_and_component_cannot_be_defined_at_the_same_time(): void
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                [
+                    'events' => [
+                        'event_name' => [
+                            'blocks' => [
+                                'block_name' => [
+                                    'template' => 'template.html.twig',
+                                    'component' => [
+                                        'name' => 'component_name',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'events.*.blocks.*.template',
+        );
+    }
+
+    /** @test */
+    public function it_allows_empty_twig_ux_configuration(): void
+    {
+        $this->assertConfigurationIsValid([['twig_ux' => []]], 'twig_ux');
+    }
+
+    /** @test */
+    public function it_allows_to_configure_anonymous_component_template_prefixes(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => ['anonymous_component_template_prefixes' => ['sylius_ui' => '@SyliusUi']]],
+            ],
+            ['twig_ux' => ['anonymous_component_template_prefixes' => ['sylius_ui' => '@SyliusUi']]],
+            'twig_ux.anonymous_component_template_prefixes',
+        );
+    }
+
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();

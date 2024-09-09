@@ -74,5 +74,3 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
         return 0;
     }
 }
-
-class_alias(RemoveExpiredCartsCommand::class, \Sylius\Bundle\OrderBundle\Command\RemoveExpiredCartsCommand::class);

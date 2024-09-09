@@ -1,7 +1,0 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
-
-{% block title %}{{ 'sylius.ui.shipment'|trans }} | {{ shipment.id }}{% endblock %}
-
-{% block content %}
-    {{ sylius_template_event('sylius.admin.shipment.show.content', _context) }}
-{% endblock %}

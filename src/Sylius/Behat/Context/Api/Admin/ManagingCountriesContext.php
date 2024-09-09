@@ -153,12 +153,12 @@ final class ManagingCountriesContext implements Context
      */
     public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province, CountryInterface $country): void
     {
-        $iri = $this->iriConverter->getItemIriFromResourceClass($province::class, ['code' => $province->getCode()]);
+        $iri = $this->iriConverter->getIriFromResource($province);
 
         $provinces = $this->responseChecker->getValue($this->client->show(Resources::COUNTRIES, $country->getCode()), 'provinces');
-        foreach ($provinces as $countryProvince) {
-            if ($iri === $countryProvince) {
-                $this->client->removeSubResource('provinces', $countryProvince);
+        foreach ($provinces as $provinceIri) {
+            if ($iri === $provinceIri) {
+                $this->client->removeSubResourceIri('provinces', $provinceIri);
             }
         }
     }
@@ -387,7 +387,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Cannot delete, the province is in use.',
+            'Cannot delete, the Province is in use.',
         );
     }
 

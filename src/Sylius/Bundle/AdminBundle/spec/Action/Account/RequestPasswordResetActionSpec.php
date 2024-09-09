@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
 use Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;

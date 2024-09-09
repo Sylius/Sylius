@@ -2,11 +2,11 @@
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": "type: The attribute type \"foobar\" is not registered.",
-    "violations":[
+    "hydra:description": "type: The attribute type \"foobar\" is not registered. Available attribute types: text, textarea, checkbox, integer, float, percent, datetime, date, select.",
+    "violations": [
         {
             "propertyPath": "type",
-            "message": "The attribute type \"foobar\" is not registered.",
+            "message": "The attribute type \"foobar\" is not registered. Available attribute types: text, textarea, checkbox, integer, float, percent, datetime, date, select.",
             "code": null
         }
     ]

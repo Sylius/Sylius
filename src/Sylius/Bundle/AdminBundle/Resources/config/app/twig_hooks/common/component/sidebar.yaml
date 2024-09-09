@@ -1,0 +1,9 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.common.component.sidebar':
+            logo:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/logo.html.twig'
+            toggle_button:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/toggle_button.html.twig'
+            menu:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/menu.html.twig'

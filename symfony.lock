@@ -529,9 +529,6 @@
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
     },
-    "stella-maris/clock": {
-        "version": "0.1.4"
-    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
         "recipe": {
@@ -562,9 +559,6 @@
     "sylius-labs/polyfill-symfony-security": {
         "version": "v1.0.0"
     },
-    "sylius/calendar": {
-        "version": "v0.3.0"
-    },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
     },
@@ -582,6 +576,9 @@
     },
     "sylius/theme-bundle": {
         "version": "v1.4.2"
+    },
+    "sylius/twig-hooks": {
+        "version": "dev-main"
     },
     "symfony/asset": {
         "version": "v4.1.3"
@@ -819,6 +816,15 @@
     "symfony/service-contracts": {
         "version": "v2.1.3"
     },
+    "symfony/stimulus-bundle": {
+        "version": "2.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.8",
+            "ref": "9e33a8a3794b603fb4be6c04ee5ecab901ce549e"
+        }
+    },
     "symfony/stopwatch": {
         "version": "v5.1.5"
     },
@@ -863,6 +869,33 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
+    },
+    "symfony/ux-autocomplete": {
+        "version": "2.9999999",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.6",
+            "ref": "07d9602b7231ba355f484305d6cea58310c01741"
+        },
+        "files": [
+            "config/routes/ux_autocomplete.yaml"
+        ]
+    },
+    "symfony/ux-live-component": {
+        "version": "2.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.6",
+            "ref": "73e69baf18f47740d6f58688c5464b10cdacae06"
+        },
+        "files": [
+            "config/routes/ux_live_component.yaml"
+        ]
+    },
+    "symfony/ux-twig-component": {
+        "version": "v2.11.2"
     },
     "symfony/validator": {
         "version": "4.3",
@@ -920,7 +953,7 @@
         ]
     },
     "symfony/workflow": {
-        "version": "5.4",
+        "version": "6.4",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -952,8 +985,8 @@
     "theseer/tokenizer": {
         "version": "1.2.0"
     },
-    "twig/intl-extra": {
-        "version": "v2.13.1"
+    "twig/extra-bundle": {
+        "version": "v3.9.3"
     },
     "twig/twig": {
         "version": "v2.13.1"

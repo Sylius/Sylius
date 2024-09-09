@@ -14,19 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
 use ApiPlatform\Api\IriConverterInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use ApiPlatform\Core\Exception\InvalidArgumentException;
-use ApiPlatform\Core\Exception\ItemNotFoundException;
+use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Exception\InvalidArgumentException;
+use ApiPlatform\Exception\ItemNotFoundException;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-final class TaxonFilter extends AbstractContextAwareFilter
+final class TaxonFilter extends AbstractFilter
 {
     public function __construct(
         ManagerRegistry $managerRegistry,
-        private IriConverterInterface $iriConverter,
+        private readonly IriConverterInterface $iriConverter,
     ) {
         parent::__construct($managerRegistry);
     }
@@ -37,9 +38,9 @@ final class TaxonFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        ?string $operationName = null,
+        ?Operation $operation = null,
         array $context = [],
-    ) {
+    ): void {
         if ($property !== 'taxon') {
             return;
         }

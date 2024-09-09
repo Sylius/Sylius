@@ -1,0 +1,9 @@
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
+
+{% set form = hookable_metadata.context.form %}
+
+<div class="tab-pane" role="tabpanel" tabindex="0">
+    <div class="bg-white mb-3">
+        {{ translations.default(form.translations) }}
+    </div>
+</div>

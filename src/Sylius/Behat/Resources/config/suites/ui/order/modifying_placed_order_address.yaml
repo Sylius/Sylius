@@ -35,6 +35,7 @@ default:
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.province
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.tax_rate

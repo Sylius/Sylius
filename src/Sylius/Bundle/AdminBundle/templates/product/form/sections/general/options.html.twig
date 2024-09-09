@@ -1,0 +1,10 @@
+{% set form = hookable_metadata.context.form %}
+{% set product = hookable_metadata.context.product %}
+{% set urls = {'search_url': path('sylius_admin_ajax_product_options_by_phrase'), 'init_load_url': path('sylius_admin_ajax_find_product_options')} %}
+{% set attributes = sylius_test_form_attribute('options')|merge(urls) %}
+
+{% if not product.isSimple %}
+    <div class="mb-3">
+        {{ form_row(form.options, attributes) }}
+    </div>
+{% endif %}

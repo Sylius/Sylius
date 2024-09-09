@@ -1,0 +1,9 @@
+{% if data.fullname is defined %}
+    {{ data.fullname }}
+{% else %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+    <span class="text-danger">
+        {{ icon({ icon: 'exclamation_circle' }) }} <i>{{ 'sylius.ui.no_main_taxon'|trans }}</i>
+    </span>
+{% endif %}

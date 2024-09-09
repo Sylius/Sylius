@@ -129,5 +129,3 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $checker->ensureDirectoryIsWritable($directory, $output);
     }
 }
-
-class_alias(AbstractInstallCommand::class, '\Sylius\Bundle\CoreBundle\Command\AbstractInstallCommand');

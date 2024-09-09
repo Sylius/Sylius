@@ -13,11 +13,10 @@ sylius_grid:
                     label: sylius.ui.priority
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/position.html.twig"
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
+                        template: "@SyliusAdmin/promotion/grid/field/priority.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 name:
                     type: twig
                     label: sylius.ui.name
@@ -25,18 +24,29 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/nameAndDescription.html.twig"
+                        vars:
+                            th_class: "w-100"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 couponBased:
                     type: twig
                     label: sylius.ui.coupons
                     options:
-                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 usage:
                     type: twig
                     label: sylius.ui.usage
                     path: .
                     sortable: used
                     options:
-                        template: "@SyliusAdmin/Promotion/Grid/Field/usage.html.twig"
+                        template: "@SyliusAdmin/promotion/grid/field/usage.html.twig"
             filters:
                 search:
                     type: string
@@ -62,37 +72,34 @@ sylius_grid:
                     create:
                         type: create
                 item:
-                    coupons:
-                        type: links
-                        label: sylius.ui.manage_coupons
-                        options:
-                            visible: resource.couponBased
-                            icon: ticket
-                            links:
-                                index:
-                                    label: sylius.ui.list_coupons
-                                    icon: list
-                                    route: sylius_admin_promotion_coupon_index
-                                    parameters:
-                                        promotionId: resource.id
-                                create:
-                                    label: sylius.ui.create
-                                    icon: plus
-                                    route: sylius_admin_promotion_coupon_create
-                                    parameters:
-                                        promotionId: resource.id
-                                generate:
-                                    label: sylius.ui.generate
-                                    icon: random
-                                    route: sylius_admin_promotion_coupon_generate
-                                    parameters:
-                                        promotionId: resource.id
                     update:
                         type: update
                     delete:
                         type: delete
                     archive:
                         type: archive
+                subitem:
+                    coupons:
+                        type: list
+                        label: sylius.ui.manage_coupons
+                        options:
+                            visible: resource.couponBased
+                            links:
+                                index:
+                                    label: sylius.ui.list_coupons
+                                    route: sylius_admin_promotion_coupon_index
+                                    parameters:
+                                        promotionId: resource.id
+                                create:
+                                    label: sylius.ui.create
+                                    route: sylius_admin_promotion_coupon_create
+                                    parameters:
+                                        promotionId: resource.id
+                                generate:
+                                    label: sylius.ui.generate
+                                    route: sylius_admin_promotion_coupon_generate
+                                    parameters:
+                                        promotionId: resource.id
                 bulk:
                     delete:
                         type: delete

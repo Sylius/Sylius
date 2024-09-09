@@ -9,15 +9,15 @@
         "enabled": true,
         "verified": true
     },
-    "id": @integer@,
+    "id": "@integer@",
     "email": "tony@doe.com",
     "firstName": "tony",
     "lastName": "Doe",
-    "birthday": @date@,
+    "birthday": "@date@",
     "gender": "u",
     "group": null,
     "phoneNumber": null,
     "subscribedToNewsletter": false,
-    "createdAt": @date@,
+    "createdAt": "@date@",
     "fullName": "tony Doe"
 }

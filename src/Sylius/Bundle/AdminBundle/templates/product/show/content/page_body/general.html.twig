@@ -1,0 +1,14 @@
+{% set product = hookable_metadata.context.resource %}
+{% set channels = [] %}
+{% for channel in product.channels %}
+    {% set channels = channels|merge({ (channel.code): channel }) %}
+{% endfor %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.general'|trans }}
+        </div>
+    </div>
+    {% hook 'general' with { product, channels } %}
+</div>

@@ -39,14 +39,9 @@ final class SecurityService implements RememberMeAwareSecurityServiceInterface
 
     public function logIn(UserInterface $user): void
     {
-        /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
-        if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
-            $token = new UsernamePasswordToken($user, $this->firewallContextName, $user->getRoles());
-        } else {
-            $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
-        }
-
-        $this->setToken($token);
+        $this->setToken(
+            new UsernamePasswordToken($user, $this->firewallContextName, $user->getRoles()),
+        );
     }
 
     public function logInWithRememberMe(UserInterface $user): void

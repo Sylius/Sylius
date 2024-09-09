@@ -66,11 +66,11 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
         $product->addReview($review->getWrappedObject())->shouldBeCalled();
 
         $this(new AddProductReview(
-            'Good stuff',
-            5,
-            'Really good stuff',
-            'winter_cap',
-            'mark@example.com',
+            title: 'Good stuff',
+            rating: 5,
+            comment: 'Really good stuff',
+            productCode: 'winter_cap',
+            email: 'mark@example.com',
         ));
     }
 
@@ -84,10 +84,10 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [
                 new AddProductReview(
-                    'Good stuff',
-                    5,
-                    'Really good stuff',
-                    'winter_cap',
+                    title: 'Good stuff',
+                    rating: 5,
+                    comment: 'Really good stuff',
+                    productCode: 'winter_cap',
                 ),
             ])
         ;
@@ -101,10 +101,10 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
             ->shouldThrow(ProductNotFoundException::class)
             ->during('__invoke', [
                 new AddProductReview(
-                    'Good stuff',
-                    5,
-                    'Really good stuff',
-                    'winter_cap',
+                    title: 'Good stuff',
+                    rating: 5,
+                    comment: 'Really good stuff',
+                    productCode: 'winter_cap',
                 ),
             ])
         ;

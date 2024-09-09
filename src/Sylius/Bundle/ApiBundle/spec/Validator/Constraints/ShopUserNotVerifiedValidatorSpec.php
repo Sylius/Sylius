@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerified;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -35,43 +35,31 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_value_is_not_an_instance_of_resend_verification_email_class(): void
+    function it_throws_an_exception_if_value_is_not_an_instance_of_request_shop_user_verification(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new class() extends Constraint {
+            ->during('validate', [new CompleteOrder('TOKEN'), new class() extends Constraint {
             }])
         ;
     }
 
-    function it_throws_an_exception_if_constraint_is_not_an_instance_of_shop_user_exists(): void
-    {
+    function it_throws_an_exception_if_constraint_is_not_an_instance_of_shop_user_exists(
+        Constraint $constraint,
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {
-            }])
+            ->during('validate', [new RequestShopUserVerification(42, '', ''), $constraint])
         ;
     }
 
     function it_throws_an_exception_if_shop_user_does_not_exist(UserRepositoryInterface $userRepository): void
     {
-        $value = new class() implements ShopUserIdAwareInterface {
-            public function getShopUserId()
-            {
-                return 42;
-            }
-
-            public function setShopUserId($shopUserId): void
-            {
-                // Intentionally left blank
-            }
-        };
-
         $userRepository->find(42)->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$value, new ShopUserNotVerified()])
+            ->during('validate', [new RequestShopUserVerification(42, '', ''), new ShopUserNotVerified()])
         ;
     }
 
@@ -81,18 +69,6 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
     ): void {
         $this->initialize($executionContext);
-
-        $value = new class() implements ShopUserIdAwareInterface {
-            public function getShopUserId()
-            {
-                return 42;
-            }
-
-            public function setShopUserId($shopUserId): void
-            {
-                // Intentionally left blank
-            }
-        };
 
         $userRepository->find(42)->willReturn($shopUser);
 
@@ -104,7 +80,7 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->validate($value, new ShopUserNotVerified());
+        $this->validate(new RequestShopUserVerification(42, '', ''), new ShopUserNotVerified());
     }
 
     function it_does_not_add_violation_if_shop_user_exists(
@@ -113,19 +89,6 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
     ): void {
         $this->initialize($executionContext);
-
-        $value = new class() implements ShopUserIdAwareInterface {
-            public function getShopUserId()
-            {
-                return 42;
-            }
-
-            public function setShopUserId($shopUserId): void
-            {
-                // Intentionally left blank
-            }
-        };
-
         $userRepository->find(42)->willReturn($shopUser);
 
         $shopUser->isVerified()->willReturn(false);
@@ -135,6 +98,6 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
             ->shouldNotBeCalled()
         ;
 
-        $this->validate($value, new ShopUserNotVerified());
+        $this->validate(new RequestShopUserVerification(42, '', ''), new ShopUserNotVerified());
     }
 }

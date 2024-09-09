@@ -1,6 +1,8 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
 
+const SyliusAdmin = require('@sylius-ui/admin');
+
 const uiBundleScripts = path.resolve(__dirname, 'src/Sylius/Bundle/UiBundle/Resources/private/js/');
 const uiBundleResources = path.resolve(__dirname, 'src/Sylius/Bundle/UiBundle/Resources/private/');
 
@@ -23,22 +25,6 @@ shopConfig.name = 'shop';
 
 Encore.reset();
 
-// Admin config
-Encore
-  .setOutputPath('public/build/admin/')
-  .setPublicPath('/build/admin')
-  .addEntry('admin-entry', './src/Sylius/Bundle/AdminBundle/Resources/private/entry.js')
-  .disableSingleRuntimeChunk()
-  .cleanupOutputBeforeBuild()
-  .enableSourceMaps(!Encore.isProduction())
-  .enableVersioning(Encore.isProduction())
-  .enableSassLoader();
-
-const adminConfig = Encore.getWebpackConfig();
-
-adminConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
-adminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
-adminConfig.externals = Object.assign({}, adminConfig.externals, { window: 'window', document: 'document' });
-adminConfig.name = 'admin';
+const adminConfig = SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
 
 module.exports = [shopConfig, adminConfig];

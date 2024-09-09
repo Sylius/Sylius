@@ -304,6 +304,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'different_billing_address_label' => '[data-test-different-billing-address-label]',
             'different_shipping_address' => '[data-test-different-shipping-address]',
             'different_shipping_address_label' => '[data-test-different-shipping-address-label]',
+            'form' => 'form[name="sylius_checkout_address"]',
             'login_button' => '[data-test-login-button]',
             'login_password' => '[data-test-password-input]',
             'login_validation_error' => '[data-test-login-validation-error]',
@@ -318,13 +319,10 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'shipping_postcode' => '[data-test-shipping-postcode]',
             'shipping_province' => '[data-test-shipping-address] [data-test-province-name]',
             'shipping_street' => '[data-test-shipping-street]',
-            'form' => 'form[name="sylius_checkout_address"]',
         ]);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     private function getOptionsFromSelect(NodeElement $element): array
     {
         return array_map(

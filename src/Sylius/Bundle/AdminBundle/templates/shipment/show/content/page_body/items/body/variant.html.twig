@@ -1,0 +1,9 @@
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
+
+{% set variant = hookable_metadata.context.item.variant %}
+
+<td>
+    <div class="d-flex gap-3 align-items-center">
+        <div>{{ variant.name }}</div>
+    </div>
+</td>
