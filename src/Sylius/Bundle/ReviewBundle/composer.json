@@ -40,7 +40,7 @@
     "require": {
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/mailer-bundle": "^2.0",
+        "sylius/mailer-bundle": "^2.0 || ^2.1@alpha",
         "sylius/resource-bundle": "^1.11",
         "sylius/review": "^2.0",
         "sylius/user-bundle": "^2.0",
