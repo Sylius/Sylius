@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\OrderBundle\Console\Command;
 
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
