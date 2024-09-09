@@ -54,10 +54,10 @@
 {% block _sylius_shop_product_review_rating_widget %}
     {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-    <div class="sylius-rating">
+    <div class="sylius-rating" {{ sylius_test_html_attribute('rating') }}>
         {% for entry in form.children %}
             <label>
-                <input type="radio" value="{{ entry.vars.value }}" id="{{ entry.vars.id }}" name="{{ entry.vars.full_name }}" {{ sylius_test_html_attribute('rating', entry.vars.value) }} {{ entry.vars.checked ? 'checked' }}>
+                <input type="radio" value="{{ entry.vars.value }}" id="{{ entry.vars.id }}" name="{{ entry.vars.full_name }}" {{ sylius_test_html_attribute('rating-option', entry.vars.value) }} {{ entry.vars.checked ? 'checked' }}>
                 {{ icon({ icon: 'star' }) }}
             </label>
         {% endfor %}

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
@@ -25,26 +26,31 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
     public function titleReview(?string $title): void
     {
+        $this->waitForElementToBeReady();
         $this->getElement('title')->setValue($title);
     }
 
     public function setComment(?string $comment): void
     {
+        $this->waitForElementToBeReady();
         $this->getElement('comment')->setValue($comment);
     }
 
     public function setAuthor(string $author): void
     {
+        $this->waitForElementToBeReady();
         $this->getElement('author')->setValue($author);
     }
 
     public function rateReview(int $rate): void
     {
-        $this->getElement('rating_option')->selectOption($rate);
+        $this->waitForElementToBeReady();
+        $this->getElement('rating_option', ['%value%' => $rate])->getParent()->click();
     }
 
     public function submitReview(): void
     {
+        $this->waitForElementToBeReady();
         $this->getElement('add')->press();
     }
 
@@ -75,8 +81,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             'author' => '[data-test-author-email]',
             'comment' => '[data-test-comment]',
             'rating' => '[data-test-rating]',
-            'rating_error' => '[data-test-rating] [data-test-validation-error]',
-            'rating_option' => '[data-test-rating] [data-test-option]',
+            'rating_option' => '[data-test-rating-option="%value%"]',
             'title' => '[data-test-title]',
         ]);
     }
@@ -87,5 +92,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         Assert::notNull($errorElement);
 
         return $errorElement->getText();
+    }
+
+    private function waitForElementToBeReady(): void
+    {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getDocument()->waitFor(1, fn (): bool => $this->isOpen());
+        }
     }
 }
