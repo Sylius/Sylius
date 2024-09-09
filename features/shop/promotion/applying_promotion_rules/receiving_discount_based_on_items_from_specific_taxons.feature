@@ -25,7 +25,7 @@ Feature: Receiving discount based on products from specific taxon
         Given the promotion gives "$20.00" off if order contains products classified as "T-Shirts"
         When I add product "PHP Mug" to the cart
         And my cart total should be "$20.00"
-        And there should be no discount
+        And there should be no discount applied
 
     @api @ui
     Scenario: Receiving discount on order while buying product from one of promoted taxon

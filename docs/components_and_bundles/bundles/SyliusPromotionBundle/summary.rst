@@ -22,7 +22,7 @@ Summary
                     interface:  Sylius\Component\Promotion\Model\PromotionInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionType
             promotion_rule:
                 classes:
@@ -38,7 +38,7 @@ Summary
                     interface:  Sylius\Component\Promotion\Model\PromotionActionInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
             promotion_action:
                 classes:
@@ -46,7 +46,7 @@ Summary
                     interface:  Sylius\Component\Promotion\Model\CouponInterface
                     controller: Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
 
 Bug tracking

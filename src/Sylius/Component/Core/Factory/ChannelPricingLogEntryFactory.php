@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
-use Sylius\Component\Resource\Exception\UnsupportedMethodException;
+use Sylius\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @template T of ChannelPricingLogEntryInterface

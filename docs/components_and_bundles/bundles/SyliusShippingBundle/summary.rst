@@ -23,7 +23,7 @@ Configuration Reference
                     interface:  Sylius\Component\Shipping\Model\ShipmentInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType
             shipment_item:
                 classes:
@@ -31,7 +31,7 @@ Configuration Reference
                     interface:  Sylius\Component\Shipping\Model\ShipmentItemInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentItemType
             shipping_method:
                 classes:
@@ -39,7 +39,7 @@ Configuration Reference
                     interface:  Sylius\Component\Shipping\Model\ShippingMethodInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType
                 translation:
                     classes:
@@ -47,7 +47,7 @@ Configuration Reference
                         interface:  Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        factory:    Sylius\Resource\Factory\Factory
                         form: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType
             shipping_category:
                 classes:
@@ -55,7 +55,7 @@ Configuration Reference
                     interface:  Sylius\Component\Shipping\Model\ShippingCategoryInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType
 
 Bug tracking

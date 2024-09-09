@@ -18,7 +18,7 @@ use Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemove
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingPriceHistoryContext implements Context

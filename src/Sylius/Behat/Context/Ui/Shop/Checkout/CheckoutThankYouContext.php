@@ -61,6 +61,8 @@ final class CheckoutThankYouContext implements Context
 
     /**
      * @Then I should see the thank you page
+     * @Then the visitor should see the thank you page
+     * @Then the customer should see the thank you page
      */
     public function iShouldSeeTheThankYouPage()
     {

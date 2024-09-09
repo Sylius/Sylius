@@ -16,7 +16,7 @@ namespace Sylius\Component\Product\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ProductVariantInterface

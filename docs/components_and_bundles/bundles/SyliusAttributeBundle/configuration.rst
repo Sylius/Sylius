@@ -22,7 +22,7 @@ Configuration reference
                           interface:  Sylius\Component\Attribute\Model\AttributeInterface
                           repository: Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository
                           controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                          factory:    Sylius\Component\Resource\Factory\Factory
+                          factory:    Sylius\Resource\Factory\Factory
                           form: Sylius\Bundle\AttributeBundle\Form\Type\AttributeType
                       translation:
                           classes:
@@ -30,7 +30,7 @@ Configuration reference
                               interface:  Sylius\Component\Attribute\Model\AttributeTranslationInterface
                               controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                               repository: ~ # Required: The repository class for the attribute translation.
-                              factory:    Sylius\Component\Resource\Factory\Factory
+                              factory:    Sylius\Resource\Factory\Factory
                               form: Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType
                   attribute_value:
                       classes:
@@ -38,5 +38,5 @@ Configuration reference
                           interface:  ~ # Required: The interface of the attribute value
                           controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                           repository: ~ # Required: The repository class for the attribute value.
-                          factory:    Sylius\Component\Resource\Factory\Factory
+                          factory:    Sylius\Resource\Factory\Factory
                           form: Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType

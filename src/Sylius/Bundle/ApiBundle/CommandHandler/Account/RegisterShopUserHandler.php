@@ -21,8 +21,8 @@ use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
@@ -30,6 +30,7 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 #[AsMessageHandler]
 final readonly class RegisterShopUserHandler
 {
+    /** @param FactoryInterface<ShopUserInterface> $shopUserFactory */
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private ObjectManager $shopUserManager,

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Resource\Model\AbstractTranslation;
+use Sylius\Resource\Model\AbstractTranslation;
 
 class ProductOptionTranslation extends AbstractTranslation implements ProductOptionTranslationInterface
 {

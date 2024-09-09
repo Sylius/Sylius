@@ -17,9 +17,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Checker\CLIContextCheckerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
-use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
+use Sylius\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 
 final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
 {

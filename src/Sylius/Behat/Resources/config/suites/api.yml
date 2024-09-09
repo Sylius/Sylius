@@ -9,11 +9,11 @@ imports:
     - api/account/login.yaml
     - api/addressing/managing_countries.yaml
     - api/addressing/managing_zones.yml
-#    - api/admin/dashboard.yaml
+    - api/admin/dashboard.yaml
     - api/admin/login.yml
-#    - api/admin/security.yml
-#    - api/cart/accessing_cart.yml
-#    - api/cart/shopping_cart.yml
+    - api/admin/security.yml
+    - api/cart/accessing_cart.yml
+    - api/cart/shopping_cart.yml
     - api/channel/channels.yml
     - api/channel/managing_channels.yml
     - api/checkout/checkout.yml
@@ -23,7 +23,7 @@ imports:
     - api/currency/managing_currencies.yml
     - api/currency/managing_exchange_rates.yml
     - api/currency/viewing_exchange_rates.yml
-#    - api/homepage/viewing_products.yml
+    - api/homepage/viewing_products.yml
     - api/inventory/cart_inventory.yml
     - api/inventory/checkout_inventory.yaml
     - api/inventory/managing_inventory.yaml

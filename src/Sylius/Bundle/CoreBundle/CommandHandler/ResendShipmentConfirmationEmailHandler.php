@@ -16,16 +16,14 @@ namespace Sylius\Bundle\CoreBundle\CommandHandler;
 use Sylius\Bundle\CoreBundle\Command\ResendShipmentConfirmationEmail;
 use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 final class ResendShipmentConfirmationEmailHandler
 {
-    /**
-     * @param RepositoryInterface<ShipmentInterface> $shipmentRepository
-     */
+    /** @param RepositoryInterface<ShipmentInterface> $shipmentRepository */
     public function __construct(
         private RepositoryInterface $shipmentRepository,
         private ShipmentEmailManagerInterface $shipmentEmailManager,

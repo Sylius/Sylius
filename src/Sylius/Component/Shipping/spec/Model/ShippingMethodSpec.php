@@ -32,7 +32,7 @@ final class ShippingMethodSpec extends ObjectBehavior
 
     function it_implements_Sylius_toogleable_interface(): void
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
+        $this->shouldImplement('Sylius\Resource\Model\ToggleableInterface');
     }
 
     function it_has_no_id_by_default(): void

@@ -20,7 +20,7 @@ use Doctrine\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity;
-use Sylius\Component\Resource\Model\ToggleableInterface;
+use Sylius\Resource\Model\ToggleableInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

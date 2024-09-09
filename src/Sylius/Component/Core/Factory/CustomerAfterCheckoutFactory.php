@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of CustomerInterface
@@ -24,6 +24,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactoryInterface
 {
+    /** @param FactoryInterface<T> $baseCustomerFactory */
     public function __construct(private FactoryInterface $baseCustomerFactory)
     {
     }

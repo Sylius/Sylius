@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Attribute\Factory;
 
 use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of AttributeInterface

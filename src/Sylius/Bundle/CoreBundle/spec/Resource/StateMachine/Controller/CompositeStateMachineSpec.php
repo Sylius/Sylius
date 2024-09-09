@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Resource\StateMachine\Controller;
 use PhpSpec\ObjectBehavior;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class CompositeStateMachineSpec extends ObjectBehavior
 {

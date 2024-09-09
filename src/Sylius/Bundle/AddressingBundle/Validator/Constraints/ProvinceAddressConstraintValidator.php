@@ -16,13 +16,17 @@ namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
+    /**
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     * @param RepositoryInterface<ProvinceInterface> $provinceRepository
+     */
     public function __construct(private RepositoryInterface $countryRepository, private RepositoryInterface $provinceRepository)
     {
     }

@@ -28,8 +28,8 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {

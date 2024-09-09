@@ -23,7 +23,7 @@ use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstruc
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class PromotionCouponGeneratorSpec extends ObjectBehavior
 {

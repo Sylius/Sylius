@@ -77,25 +77,13 @@
     "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],order[price],order[translation.name],localeCode for order[translation.name],taxon}",
+        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
                 "@type": "IriTemplateMapping",
                 "variable": "translations.name",
                 "property": "translations.name",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "order[code]",
-                "property": "code",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "order[createdAt]",
-                "property": "createdAt",
                 "required": false
             },
             {
@@ -108,6 +96,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "productTaxons.taxon.code[]",
                 "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
                 "required": false
             },
             {

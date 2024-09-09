@@ -15,14 +15,17 @@ namespace Sylius\Component\Promotion\Factory;
 
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @implements PromotionCouponFactoryInterface<PromotionCouponInterface>
+ * @template T of PromotionCouponInterface
+ *
+ * @implements PromotionCouponFactoryInterface<T>
  */
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
+    /** @param FactoryInterface<T> $factory */
     public function __construct(private FactoryInterface $factory)
     {
     }

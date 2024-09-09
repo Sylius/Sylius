@@ -16,4 +16,4 @@ Feature: Denying usage of unexisting promotion coupon
         And I use coupon with code "SANTA2011"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
-        And there should be no discount
+        And there should be no discount applied

@@ -16,7 +16,7 @@ namespace Sylius\Component\Attribute\Factory;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of AttributeInterface
@@ -25,8 +25,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class AttributeFactory implements AttributeFactoryInterface
 {
-    public function __construct(private FactoryInterface $factory, private ServiceRegistryInterface $attributeTypesRegistry)
-    {
+    /** @param FactoryInterface<T> $factory */
+    public function __construct(
+        private FactoryInterface $factory,
+        private ServiceRegistryInterface $attributeTypesRegistry,
+    ) {
     }
 
     public function createNew(): AttributeInterface

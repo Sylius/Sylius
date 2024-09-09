@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Locale;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Storage\StorageInterface;
+use Sylius\Resource\Storage\StorageInterface;
 
 final class LocaleStorage implements LocaleStorageInterface
 {

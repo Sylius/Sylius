@@ -17,16 +17,21 @@ use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductReviewInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 final readonly class AddProductReviewHandler
 {
+    /**
+     * @param FactoryInterface<ProductReviewInterface> $productReviewFactory
+     * @param RepositoryInterface<ProductReviewInterface> $productReviewRepository
+     */
     public function __construct(
         private FactoryInterface $productReviewFactory,
         private RepositoryInterface $productReviewRepository,

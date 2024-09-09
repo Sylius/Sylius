@@ -25,6 +25,6 @@ Feature: Filtering customers by groups
     Scenario: Filtering customers by multiple groups
         When I want to see all customers in store
         And I filter by groups "Retail" and "Wholesale"
-        Then I should see 2 customers in the list
+        Then I should see 2 customers on the list
         And I should see the customer "l.abhorsen@example.com" in the list
         And I should see the customer "g.bespoke@example.com" in the list

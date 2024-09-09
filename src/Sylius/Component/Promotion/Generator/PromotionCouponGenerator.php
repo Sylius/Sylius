@@ -18,11 +18,12 @@ use Sylius\Component\Promotion\Exception\FailedGenerationException;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 final class PromotionCouponGenerator implements PromotionCouponGeneratorInterface
 {
+    /** @param FactoryInterface<PromotionCouponInterface> $couponFactory */
     public function __construct(
         private FactoryInterface $couponFactory,
         private PromotionCouponRepositoryInterface $couponRepository,

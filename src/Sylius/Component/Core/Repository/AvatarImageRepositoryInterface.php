@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ImageInterface

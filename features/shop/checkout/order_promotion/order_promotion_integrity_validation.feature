@@ -15,7 +15,7 @@ Feature: Order promotions integrity
     @api @ui
     Scenario: Preventing customer from completing checkout with already expired promotion
         Given this promotion gives "$10.00" discount to every order
-        And this promotion expires tomorrow
+        And this promotion is valid until tomorrow
         And I added product "PHP T-Shirt" to the cart
         And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceeded with "Free" shipping method and "Offline" payment method
@@ -27,7 +27,7 @@ Feature: Order promotions integrity
     @api @ui
     Scenario: Recalculating cart when promotion already expired
         Given this promotion gives "$10.00" discount to every order
-        And this promotion expires tomorrow
+        And this promotion is valid until tomorrow
         And I added product "PHP T-Shirt" to the cart
         And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceeded with "Free" shipping method and "Offline" payment method

@@ -19,9 +19,9 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,6 +31,11 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<TaxRateInterface> $taxRateFactory
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
+     */
     public function __construct(
         private FactoryInterface $taxRateFactory,
         private RepositoryInterface $zoneRepository,

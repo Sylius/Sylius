@@ -14,13 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
 final class ProductCodeChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<ProductInterface> $productRepository */
     public function __construct(private RepositoryInterface $productRepository)
     {
     }

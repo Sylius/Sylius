@@ -105,6 +105,15 @@ final readonly class ManagingPaymentsContext implements Context
     }
 
     /**
+     * @When /^I sort payments by date in (ascending|descending) order$/
+     */
+    public function iSortPaymentsByRegistrationDate(string $order): void
+    {
+        $this->client->sort(['createdAt' => str_starts_with($order, 'de') ? 'desc' : 'asc']);
+        $this->client->filter();
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
