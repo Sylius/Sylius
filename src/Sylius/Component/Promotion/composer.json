@@ -28,7 +28,7 @@
         "php": "^8.2",
         "doctrine/orm": "^2.13",
         "sylius/registry": "^1.6",
-        "sylius/resource": "^1.11"
+        "sylius/resource": "^1.11 || ^1.12@alpha"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
