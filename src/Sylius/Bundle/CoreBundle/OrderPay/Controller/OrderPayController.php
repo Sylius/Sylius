@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\OrderPay\Provider\PayResponseProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
