@@ -44,10 +44,10 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $passwordUpdater->updatePassword($shopUser)->shouldBeCalled();
 
         $changePasswordShopUser = new ChangeShopUserPassword(
-            shopUserId: 42,
             newPassword: 'PLAIN_PASSWORD',
             confirmNewPassword: 'PLAIN_PASSWORD',
             currentPassword: 'OLD_PASSWORD',
+            shopUserId: 42,
         );
 
         $this($changePasswordShopUser);
@@ -64,10 +64,10 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
         $changePasswordShopUser = new ChangeShopUserPassword(
-            shopUserId: 42,
             newPassword: 'PLAIN_PASSWORD',
-            confirmNewPassword: 'PLAIN_PASSWORD',
+            confirmNewPassword: 'WRONG_PASSWORD',
             currentPassword: 'OLD_PASSWORD',
+            shopUserId: 42,
         );
 
         $this
@@ -87,10 +87,10 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
         $changePasswordShopUser = new ChangeShopUserPassword(
-            shopUserId: 42,
             newPassword: 'PLAIN_PASSWORD',
             confirmNewPassword: 'PLAIN_PASSWORD',
             currentPassword: 'OLD_PASSWORD',
+            shopUserId: 42,
         );
 
         $this

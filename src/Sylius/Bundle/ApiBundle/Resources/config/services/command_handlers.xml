@@ -129,11 +129,11 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler">-->
-<!--            <argument type="service" id="sylius.security.password_updater" />-->
-<!--            <argument type="service" id="sylius.repository.shop_user" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler">
+            <argument type="service" id="sylius.security.password_updater" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler">
             <argument type="service" id="sylius.repository.shop_user" />

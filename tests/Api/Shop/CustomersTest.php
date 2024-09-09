@@ -226,4 +226,24 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    /** @test */
+    public function it_changes_password(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+
+        $this->requestPut(
+            sprintf('/api/v2/shop/customers/%s/password', $customer->getId()),
+            [
+                'currentPassword' => 'sylius',
+                'newPassword' => 'newPassword',
+                'confirmNewPassword' => 'newPassword',
+            ],
+            headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
 }
