@@ -145,8 +145,6 @@
         "twig/string-extra": "^3.13.0",
         "twig/twig": "^3.14.0",
         "webmozart/assert": "^1.9",
-        "willdurand/hateoas": "^3.0",
-        "willdurand/hateoas-bundle": "^2.0",
         "winzou/state-machine": "^0.4",
         "winzou/state-machine-bundle": "^0.6"
     },
