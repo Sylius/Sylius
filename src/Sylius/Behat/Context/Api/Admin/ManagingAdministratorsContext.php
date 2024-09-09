@@ -21,8 +21,10 @@ use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
@@ -32,6 +34,7 @@ final class ManagingAdministratorsContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private \ArrayAccess $minkParameters,
+        private TranslatorInterface $translator,
     ) {
     }
 
@@ -367,6 +370,18 @@ final class ManagingAdministratorsContext implements Context
             'avatar',
             null,
         ));
+    }
+
+    /**
+     * @Then I should be notified that this email is not valid in :locale locale
+     */
+    public function iShouldBeNotifiedThatEmailIsNotValidInLocale(LocaleInterface $locale): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            $this->translator->trans('sylius.user.email.invalid', [], 'validators', $locale->getCode()),
+            'Email validation message is not displayed in the correct locale',
+        );
     }
 
     /**
