@@ -71,25 +71,25 @@
   "full": {
     "static-checks": {
       "php": [ "8.2" ],
-      "symfony": [ "^6.4" ],
+      "symfony": [ "^6.4", "^7.0" ],
       "api-platform": [ "^3.3" ]
     },
     "e2e-mariadb": {
       "php": [ "8.2" ],
-      "symfony": [ "^6.4" ],
+      "symfony": [ "^6.4", "^7.0" ],
       "mariadb": [ "10.4.10" ],
       "state_machine_adapter": [ "winzou_state_machine", "symfony_workflow" ]
     },
     "e2e-mysql": {
       "php": [ "8.2" ],
-      "symfony": [ "^6.4" ],
+      "symfony": [ "^6.4", "^7.0" ],
       "api-platform": [ "^3.3" ],
       "mysql": [ "5.7", "8.0" ],
       "twig": [ "^3.3" ]
     },
     "e2e-pgsql": {
       "php": [ "8.2" ],
-      "symfony": [ "^6.4" ],
+      "symfony": [ "^6.4", "^7.0" ],
       "postgres": [ "13.9", "14.6" ]
     },
     "frontend": {
@@ -101,7 +101,7 @@
     },
     "packages": {
       "php": [ "8.2" ],
-      "symfony": [ "^6.4" ]
+      "symfony": [ "^6.4", "^7.0" ]
     }
   }
 }
