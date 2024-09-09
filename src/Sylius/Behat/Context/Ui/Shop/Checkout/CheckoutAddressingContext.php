@@ -50,6 +50,17 @@ final readonly class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Given the visitor has completed the addressing step
+     * @Given the customer has completed the addressing step
+     * @When the customer completes the addressing step
+     * @When the visitor completes the addressing step
+     */
+    public function theVisitorHasCompletedTheAddressingStep(): void
+    {
+        $this->addressPage->nextStep();
+    }
+
+    /**
      * @Given my billing address is fulfilled automatically through default address
      */
     public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(): void
@@ -187,10 +198,18 @@ final readonly class CheckoutAddressingContext implements Context
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     * @Given /^the customer specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @Given /^the visitor specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @Given /^the visitor has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @Given /^the customer has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I (do not specify any billing address) information$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
     {
+        if (!$this->addressPage->isOpen()) {
+            $this->addressPage->open();
+        }
+
         $key = sprintf(
             'billing_address_%s_%s',
             strtolower((string) $address->getFirstName()),
@@ -242,6 +261,17 @@ final readonly class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Given the visitor has specified the email as :email
+     * @Given the customer has specified the email as :email
+     * @When the visitor specify the email as :email
+     */
+    public function theVisitorSpecifyTheEmail($email = null): void
+    {
+        $this->addressPage->open();
+        $this->addressPage->specifyEmail($email);
+    }
+
+    /**
      * @When I specify the first and last name as :fullName for billing address
      */
     public function iSpecifyTheFirstAndLastNameAsForBillingAddress(string $fullName): void
@@ -271,6 +301,7 @@ final readonly class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When /^I proceed selecting ("[^"]+" as billing country)$/
      * @When /^I proceed with selecting ("[^"]+" as billing country)$/
      * @When /^I proceed with selecting billing country$/
      */
@@ -505,6 +536,18 @@ final readonly class CheckoutAddressingContext implements Context
     public function iShouldBeAbleToUpdateTheAddressWithoutUnexpectedAlert(): void
     {
         $this->addressPage->waitForFormToStopLoading();
+    }
+
+    /**
+     * @Then the customer should have checkout address step completed
+     * @Then the visitor should have checkout address step completed
+     */
+    public function theCustomerShouldHaveCheckoutAddressStepCompleted(): void
+    {
+        Assert::false(
+            $this->addressPage->isOpen(),
+            'Customer should have checkout address step completed, but it is not.',
+        );
     }
 
     private function createDefaultAddress(): AddressInterface

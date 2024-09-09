@@ -31,8 +31,13 @@ final readonly class CheckoutShippingContext implements Context
     }
 
     /**
+     * @Given the visitor has proceeded :shippingMethodName shipping method
+     * @Given the customer has proceeded :shippingMethodName shipping method
+     * @Given the visitor proceed with :shippingMethodName shipping method
+     * @Given the customer proceed with :shippingMethodName shipping method
      * @Given I chose :shippingMethodName shipping method
      * @Given I completed the shipping step with :shippingMethodName shipping method
+     * @Given I have proceeded with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
@@ -201,6 +206,18 @@ final readonly class CheckoutShippingContext implements Context
     public function iShouldBeCheckingOutAs($email)
     {
         Assert::same($this->selectShippingPage->getPurchaserIdentifier(), 'Checking out as ' . $email . '.');
+    }
+
+    /**
+     * @Then the customer should have checkout shipping method step completed
+     * @Then the visitor should have checkout shipping method step completed
+     */
+    public function theCustomerShouldHaveCheckoutShippingMethodStepCompleted()
+    {
+        Assert::false(
+            $this->selectShippingPage->isOpen(),
+            'Customer should have checkout shipping method step completed, but it is not.',
+        );
     }
 
     /**
