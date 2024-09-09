@@ -46,7 +46,7 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $this->placeOrder('nAWw2jewpA', 'oliver@doe.com');
+        $this->placeOrder(email: 'oliver@doe.com');
         $this->placeOrder('nAWw2jewpB', 'oliver@doe.com');
         $this->placeOrder('nAWw2jewpC', 'dave@doe.com');
         $this->pickUpCart('nAWw2jewpD');
@@ -440,7 +440,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $fixtures['payment_method_bank_transfer'];
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $this->placeOrder($tokenValue, 'oliver@doe.com');
         $this->cancelOrder($tokenValue);
 
@@ -602,7 +602,7 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $this->placeOrder($tokenValue);
 
         $this->requestGet(sprintf('/api/v2/shop/orders/%s/payments/%s/configuration', $tokenValue, 'invalid-payment-id'));
@@ -622,7 +622,7 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $this->placeOrder($tokenValue, 'oliver@doe.com');
 
         $this->requestDelete(
@@ -694,10 +694,10 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $this->placeOrder($tokenValue, 'oliver@doe.com');
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/adjustments', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/token/adjustments', [], [], self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_UNAUTHORIZED);

@@ -45,7 +45,7 @@ interface ResponseCheckerInterface
 
     public function hasCollection(Response $response): bool;
 
-    public function hasValue(Response $response, string $key, bool|int|string|null $value): bool;
+    public function hasValue(Response $response, string $key, bool|int|string|null $value, bool $isCaseSensitive = true): bool;
 
     public function hasValueInCollection(Response $response, string $key, int|string $value): bool;
 

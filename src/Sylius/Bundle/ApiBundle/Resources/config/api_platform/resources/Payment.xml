@@ -115,7 +115,15 @@
             </operation>
 
             <!-- Shop operations -->
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/payments/{id}">
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}"
+                provider="sylius_api.state_provider.shop.payment.item"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" toProperty="order"/>
+                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment"/>
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">

@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/admin\/orders\/token",
     "@type": "Order",
     "customer": "\/api\/v2\/admin\/customers\/@integer@",
     "channel": "\/api\/v2\/admin\/channels\/WEB",
@@ -51,7 +51,7 @@
     "checkoutState": "completed",
     "paymentState": "awaiting_payment",
     "shippingState": "ready",
-    "tokenValue": "nAWw2jewpA",
+    "tokenValue": "token",
     "id": "@integer@",
     "number": "@string@",
     "notes": null,
