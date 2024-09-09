@@ -22,7 +22,7 @@ use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 

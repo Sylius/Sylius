@@ -70,7 +70,7 @@ To achieve that you will need to:
     use Sylius\Component\Core\Model\OrderInterface;
     use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
     use Sylius\Component\Mailer\Sender\SenderInterface;
-    use Sylius\Component\Resource\Repository\RepositoryInterface;
+    use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
     final class OutOfStockEmailManager
     {

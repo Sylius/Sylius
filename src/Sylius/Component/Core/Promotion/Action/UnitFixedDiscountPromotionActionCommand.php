@@ -13,19 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
     public const TYPE = 'unit_fixed_discount';
 
+    /** @param FactoryInterface<AdjustmentInterface> $adjustmentFactory */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         private FilterInterface $priceRangeFilter,

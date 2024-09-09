@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Bundle\CoreBundle\Command\ResendOrderConfirmationEmail;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;

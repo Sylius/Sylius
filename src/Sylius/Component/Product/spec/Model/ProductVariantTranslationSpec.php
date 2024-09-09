@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
-use Sylius\Component\Resource\Model\AbstractTranslation;
+use Sylius\Resource\Model\AbstractTranslation;
 
 final class ProductVariantTranslationSpec extends ObjectBehavior
 {

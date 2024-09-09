@@ -14,13 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Component\Payment\Factory;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @implements PaymentFactoryInterface<PaymentInterface>
+ * @template T of PaymentInterface
+ *
+ * @implements PaymentFactoryInterface<T>
  */
 final class PaymentFactory implements PaymentFactoryInterface
 {
+    /** @param FactoryInterface<T> $factory */
     public function __construct(private FactoryInterface $factory)
     {
     }

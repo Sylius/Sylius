@@ -60,13 +60,15 @@ Currently **Sylius** by default is using route definition and **sylius-add-to-ca
         }
     });
 
-If you want to have custom logic after cart add action you can use **ResourceControllerEvent** to set your custom response.
+If you want to have custom logic after cart add action you can use Resource's **GenericEvent** to set your custom response.
 
 Let's assume that you would like such a feature in your system:
 
 .. code-block:: php
 
     <?php
+
+    use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
     final class ChangeRedirectAfterAddingToCartListener
     {
@@ -84,9 +86,9 @@ Let's assume that you would like such a feature in your system:
         }
 
         /**
-         * @param ResourceControllerEvent $event
+         * @param GenericEvent $event
          */
-        public function onSuccessfulAddToCart(ResourceControllerEvent $event)
+        public function onSuccessfulAddToCart(GenericEvent $event)
         {
             if (!$event->getSubject() instanceof OrderItemInterface) {
                 throw new \LogicException(

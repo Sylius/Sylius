@@ -25,8 +25,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalGreaterThanOrEqualRuleChecker;
 use Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalLessThanOrEqualRuleChecker;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Checker\Rule\TotalWeightGreaterThanOrEqualRuleChecker;
 use Sylius\Component\Shipping\Checker\Rule\TotalWeightLessThanOrEqualRuleChecker;
@@ -34,6 +32,8 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodRuleInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ShippingContext implements Context
 {

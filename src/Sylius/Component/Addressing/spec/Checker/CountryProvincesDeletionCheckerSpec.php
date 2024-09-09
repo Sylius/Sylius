@@ -19,7 +19,7 @@ use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class CountryProvincesDeletionCheckerSpec extends ObjectBehavior
 {

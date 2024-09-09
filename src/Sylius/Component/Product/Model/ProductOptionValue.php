@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\TranslatableTrait;
+use Sylius\Resource\Model\TranslationInterface;
 
 class ProductOptionValue implements ProductOptionValueInterface, \Stringable
 {

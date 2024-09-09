@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderSequenceInterface;
 use Sylius\Component\Order\Model\OrderSequence as BaseOrderSequence;
-use Sylius\Component\Resource\Model\VersionedInterface;
+use Sylius\Resource\Model\VersionedInterface;
 
 final class OrderSequenceSpec extends ObjectBehavior
 {

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\TokenAssigner;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 
 final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterface
 {

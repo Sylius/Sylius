@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\GenericEvent as SymfonyGenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -43,7 +43,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_throws_an_exception_when_subject_is_not_a_taxon(ResourceControllerEvent $event): void
+    function it_throws_an_exception_when_subject_is_not_a_taxon(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('subject');
 
@@ -54,7 +54,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         RequestStack $requestStack,
         SessionInterface $session,
         ChannelRepositoryInterface $channelRepository,
-        GenericEvent $event,
+        SymfonyGenericEvent $event,
         TaxonInterface $taxon,
         ChannelInterface $channel,
         FlashBagInterface $flashes,
@@ -75,7 +75,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         RequestStack $requestStack,
         SessionInterface $session,
         ChannelRepositoryInterface $channelRepository,
-        GenericEvent $event,
+        SymfonyGenericEvent $event,
         TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
@@ -87,7 +87,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         $this->protectFromRemovingMenuTaxon($event);
     }
 
-    function it_throws_an_exception_if_an_event_subject_is_not_taxon(GenericEvent $event): void
+    function it_throws_an_exception_if_an_event_subject_is_not_taxon(SymfonyGenericEvent $event): void
     {
         $event->getSubject()->willReturn('wrongSubject');
 
@@ -103,7 +103,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
         TaxonAwareRuleUpdaterInterface $taxonAwareRuleUpdater,
         FlashBagInterface $flashes,
-        GenericEvent $event,
+        SymfonyGenericEvent $event,
         TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
@@ -129,7 +129,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         SessionInterface $session,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
         TaxonAwareRuleUpdaterInterface $taxonAwareRuleUpdater,
-        GenericEvent $event,
+        SymfonyGenericEvent $event,
         TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
@@ -144,7 +144,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
     }
 
     function it_changes_taxon_position_to_minus_one_if_base_position_is_zero(
-        GenericEvent $event,
+        SymfonyGenericEvent $event,
         TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
@@ -156,7 +156,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
 
     function it_does_nothing_when_product_is_not_assigned_to_rule(
         TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
@@ -172,7 +172,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
 
     function it_prevents_to_remove_product_if_it_is_assigned_to_rule(
         TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);

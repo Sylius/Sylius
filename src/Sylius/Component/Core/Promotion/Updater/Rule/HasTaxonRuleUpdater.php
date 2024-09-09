@@ -17,12 +17,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class HasTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
 {
-    public function __construct(private RepositoryInterface $promotionRuleRepository, private EntityManagerInterface $manager)
-    {
+    /** @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository */
+    public function __construct(
+        private RepositoryInterface $promotionRuleRepository,
+        private EntityManagerInterface $manager,
+    ) {
     }
 
     public function updateAfterDeletingTaxon(TaxonInterface $taxon): array

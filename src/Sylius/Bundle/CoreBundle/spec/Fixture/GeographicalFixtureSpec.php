@@ -20,7 +20,7 @@ use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class GeographicalFixtureSpec extends ObjectBehavior
 {

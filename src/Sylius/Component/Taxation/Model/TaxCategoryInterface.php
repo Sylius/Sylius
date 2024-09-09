@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Taxation\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TimestampableInterface;
 
 interface TaxCategoryInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {

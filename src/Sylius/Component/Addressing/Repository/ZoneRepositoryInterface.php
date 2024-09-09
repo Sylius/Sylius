@@ -16,7 +16,7 @@ namespace Sylius\Component\Addressing\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ZoneInterface

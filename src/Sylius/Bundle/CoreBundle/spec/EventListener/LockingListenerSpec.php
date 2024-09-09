@@ -17,7 +17,7 @@ use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Sylius\Component\Resource\Model\VersionedInterface;
+use Sylius\Resource\Model\VersionedInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class LockingListenerSpec extends ObjectBehavior

@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 

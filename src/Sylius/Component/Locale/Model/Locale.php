@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TimestampableTrait;
 use Symfony\Component\Intl\Locales;
 
 class Locale implements LocaleInterface, \Stringable

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException;
-use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Model\TranslatableInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;

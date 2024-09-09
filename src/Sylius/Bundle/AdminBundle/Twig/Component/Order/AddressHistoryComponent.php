@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Order;
 
 use Sylius\Component\Addressing\Model\AddressLogEntry;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class AddressHistoryComponent

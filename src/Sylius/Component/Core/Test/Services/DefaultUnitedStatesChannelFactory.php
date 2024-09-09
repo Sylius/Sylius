@@ -20,8 +20,8 @@ use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryInterface
 {
@@ -37,6 +37,16 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
 
     public const DEFAULT_CHANNEL_NAME = 'United States';
 
+    /**
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     * @param RepositoryInterface<CurrencyInterface> $currencyRepository
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     * @param FactoryInterface<CountryInterface> $countryFactory
+     * @param FactoryInterface<CurrencyInterface> $currencyFactory
+     * @param FactoryInterface<LocaleInterface> $localeFactory
+     */
     public function __construct(
         private RepositoryInterface $channelRepository,
         private RepositoryInterface $countryRepository,

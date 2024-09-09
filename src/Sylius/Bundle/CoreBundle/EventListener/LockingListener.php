@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Resource\Model\VersionedInterface;
+use Sylius\Resource\Model\VersionedInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 

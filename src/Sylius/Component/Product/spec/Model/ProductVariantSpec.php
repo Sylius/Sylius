@@ -17,8 +17,8 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\ToggleableInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ToggleableInterface;
 
 final class ProductVariantSpec extends ObjectBehavior
 {

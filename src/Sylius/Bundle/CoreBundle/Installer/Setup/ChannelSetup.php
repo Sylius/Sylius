@@ -17,11 +17,15 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ChannelSetup implements ChannelSetupInterface
 {
+    /**
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param FactoryInterface<ChannelInterface> $channelFactory
+     */
     public function __construct(
         private RepositoryInterface $channelRepository,
         private FactoryInterface $channelFactory,

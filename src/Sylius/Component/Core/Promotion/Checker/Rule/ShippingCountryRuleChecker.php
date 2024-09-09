@@ -18,12 +18,13 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'shipping_country';
 
+    /** @param RepositoryInterface<CountryInterface> $countryRepository */
     public function __construct(private RepositoryInterface $countryRepository)
     {
     }

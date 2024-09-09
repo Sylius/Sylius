@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
+use Sylius\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\ToggleableTrait;
 
 class Channel implements ChannelInterface, \Stringable
 {

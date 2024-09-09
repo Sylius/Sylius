@@ -17,7 +17,7 @@ use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\Page;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Payum\Core\Security\TokenInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
 {

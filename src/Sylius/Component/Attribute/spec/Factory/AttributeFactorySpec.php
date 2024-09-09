@@ -19,7 +19,7 @@ use Sylius\Component\Attribute\Factory\AttributeFactory;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class AttributeFactorySpec extends ObjectBehavior
 {

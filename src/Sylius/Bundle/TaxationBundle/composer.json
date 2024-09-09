@@ -30,7 +30,7 @@
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/registry": "^1.6",
-        "sylius/resource-bundle": "^1.10",
+        "sylius/resource-bundle": "^1.11",
         "sylius/taxation": "^2.0",
         "symfony/clock": "^6.4.0",
         "symfony/framework-bundle": "^6.4.1"

@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 

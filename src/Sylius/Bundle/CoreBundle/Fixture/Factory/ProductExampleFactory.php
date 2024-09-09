@@ -21,6 +21,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -31,10 +32,11 @@ use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
@@ -47,6 +49,20 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<ProductInterface> $productFactory
+     * @param FactoryInterface<ProductVariantInterface> $productVariantFactory
+     * @param FactoryInterface<ChannelPricingInterface> $channelPricingFactory
+     * @param FactoryInterface<ProductAttributeValueInterface> $productAttributeValueFactory
+     * @param FactoryInterface<ProductImageInterface> $productImageFactory
+     * @param FactoryInterface<ProductTaxonInterface> $productTaxonFactory
+     * @param RepositoryInterface<TaxonInterface> $taxonRepository
+     * @param RepositoryInterface<ProductAttributeInterface> $productAttributeRepository
+     * @param RepositoryInterface<ProductOptionInterface> $productOptionRepository
+     * @param RepositoryInterface<ChannelInterface> $channelRepository
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
+     */
     public function __construct(
         private FactoryInterface $productFactory,
         private FactoryInterface $productVariantFactory,

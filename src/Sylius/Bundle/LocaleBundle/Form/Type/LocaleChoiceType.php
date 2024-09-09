@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class LocaleChoiceType extends AbstractType
 {
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(private RepositoryInterface $localeRepository)
     {
     }

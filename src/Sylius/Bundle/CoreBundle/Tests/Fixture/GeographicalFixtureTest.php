@@ -18,7 +18,7 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Intl\Countries;
 
 final class GeographicalFixtureTest extends TestCase

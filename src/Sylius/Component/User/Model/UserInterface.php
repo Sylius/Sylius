@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Resource\Model\ToggleableInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\ToggleableInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Encoder\EncoderAwareInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;

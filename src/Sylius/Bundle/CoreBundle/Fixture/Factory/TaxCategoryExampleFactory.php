@@ -16,8 +16,8 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,6 +27,7 @@ class TaxCategoryExampleFactory extends AbstractExampleFactory implements Exampl
 
     private OptionsResolver $optionsResolver;
 
+    /** @param FactoryInterface<TaxCategoryInterface> $taxCategoryFactory */
     public function __construct(private FactoryInterface $taxCategoryFactory)
     {
         $this->faker = Factory::create();

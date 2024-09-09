@@ -19,7 +19,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;

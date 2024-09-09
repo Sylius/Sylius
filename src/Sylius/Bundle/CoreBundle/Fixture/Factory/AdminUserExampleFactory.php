@@ -16,8 +16,9 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
@@ -29,6 +30,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param FactoryInterface<AdminUserInterface> $userFactory
+     * @param FactoryInterface<ImageInterface> $avatarImageFactory
+     */
     public function __construct(
         private FactoryInterface $userFactory,
         private string $localeCode,

@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 final class OrderLocaleAssignerSpec extends ObjectBehavior
 {
@@ -28,7 +28,7 @@ final class OrderLocaleAssignerSpec extends ObjectBehavior
     function it_assigns_locale_to_an_order(
         LocaleContextInterface $localeContext,
         OrderInterface $order,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
     ): void {
         $event->getSubject()->willReturn($order);
         $localeContext->getLocaleCode()->willReturn('pl_PL');
@@ -38,7 +38,7 @@ final class OrderLocaleAssignerSpec extends ObjectBehavior
         $this->assignLocale($event);
     }
 
-    function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event): void
+    function it_throws_invalid_argument_exception_if_subject_it_not_order(GenericEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

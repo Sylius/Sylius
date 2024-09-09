@@ -16,10 +16,10 @@ namespace Sylius\Component\Product\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\ToggleableTrait;
+use Sylius\Resource\Model\TranslatableTrait;
+use Sylius\Resource\Model\TranslationInterface;
 use Webmozart\Assert\Assert;
 
 class Product implements ProductInterface, \Stringable

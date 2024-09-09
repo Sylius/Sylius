@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType as BaseLocaleType;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType as SymfonyLocaleType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -20,7 +20,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItem;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CollectionProviderSpec extends ObjectBehavior

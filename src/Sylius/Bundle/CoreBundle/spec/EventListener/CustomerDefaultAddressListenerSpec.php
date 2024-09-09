@@ -15,14 +15,14 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
 {
     function it_adds_the_address_as_default_to_the_customer_on_pre_create_resource_controller_event(
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         AddressInterface $address,
         CustomerInterface $customer,
     ): void {
@@ -41,7 +41,7 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
     }
 
     function it_does_not_set_address_as_default_if_customer_already_have_a_default_address(
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         AddressInterface $address,
         CustomerInterface $customer,
         AddressInterface $anotherAddress,
@@ -59,7 +59,7 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_event_subject_is_not_an_address(
-        ResourceControllerEvent $event,
+        GenericEvent $event,
     ): void {
         $event->getSubject()->willReturn(Argument::any());
 
@@ -70,7 +70,7 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_address_does_have_an_id(
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         AddressInterface $address,
     ): void {
         $event->getSubject()->willReturn($address);
@@ -83,7 +83,7 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_address_does_not_have_a_customer_assigned(
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         AddressInterface $address,
         CustomerInterface $customer,
     ): void {

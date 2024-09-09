@@ -16,10 +16,15 @@ namespace Sylius\Component\Addressing\Checker;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class CountryProvincesDeletionChecker implements CountryProvincesDeletionCheckerInterface
 {
+    /**
+     * @param RepositoryInterface<ZoneMemberInterface> $zoneMemberRepository
+     * @param RepositoryInterface<ProvinceInterface> $provinceRepository
+     */
     public function __construct(
         private RepositoryInterface $zoneMemberRepository,
         private RepositoryInterface $provinceRepository,

@@ -25,7 +25,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;

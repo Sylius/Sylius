@@ -23,7 +23,7 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class ChannelBasedExtensionSpec extends ObjectBehavior
 {

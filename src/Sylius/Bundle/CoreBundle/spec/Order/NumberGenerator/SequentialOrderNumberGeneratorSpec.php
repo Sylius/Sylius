@@ -20,7 +20,7 @@ use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderSequenceInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 {

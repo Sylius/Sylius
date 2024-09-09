@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Repository;
 
 use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ProductAttributeTranslationInterface

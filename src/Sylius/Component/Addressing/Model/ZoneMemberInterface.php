@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 interface ZoneMemberInterface extends ResourceInterface, CodeAwareInterface
 {

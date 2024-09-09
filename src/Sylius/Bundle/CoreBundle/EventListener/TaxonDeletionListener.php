@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\GenericEvent as SymfonyGenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
@@ -37,7 +37,7 @@ final class TaxonDeletionListener
         $this->ruleUpdaters = $ruleUpdaters;
     }
 
-    public function protectFromRemovingMenuTaxon(GenericEvent $event): void
+    public function protectFromRemovingMenuTaxon(SymfonyGenericEvent $event): void
     {
         $taxon = $event->getSubject();
         Assert::isInstanceOf($taxon, TaxonInterface::class);
@@ -51,7 +51,7 @@ final class TaxonDeletionListener
         }
     }
 
-    public function protectFromRemovingTaxonInUseByPromotionRule(ResourceControllerEvent $event): void
+    public function protectFromRemovingTaxonInUseByPromotionRule(GenericEvent $event): void
     {
         $taxon = $event->getSubject();
         Assert::isInstanceOf($taxon, TaxonInterface::class);
@@ -63,7 +63,7 @@ final class TaxonDeletionListener
         }
     }
 
-    public function removeTaxonFromPromotionRules(GenericEvent $event): void
+    public function removeTaxonFromPromotionRules(SymfonyGenericEvent $event): void
     {
         $taxon = $event->getSubject();
         Assert::isInstanceOf($taxon, TaxonInterface::class);
@@ -82,7 +82,7 @@ final class TaxonDeletionListener
         }
     }
 
-    public function handleRemovingRootTaxonAtPositionZero(GenericEvent $event): void
+    public function handleRemovingRootTaxonAtPositionZero(SymfonyGenericEvent $event): void
     {
         /** @var TaxonInterface $taxon */
         $taxon = $event->getSubject();
