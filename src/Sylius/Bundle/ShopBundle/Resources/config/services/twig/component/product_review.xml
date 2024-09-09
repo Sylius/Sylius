@@ -36,5 +36,19 @@
                 template="@SyliusShop/product/show/page/info/summary/average_rating/number_of_reviews.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_shop.twig.component.product_review.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\ProductReview\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:product_review:form"
+                template="@SyliusShop/product_review/create/main/form.html.twig"
+            />
+        </service>
     </services>
 </container>

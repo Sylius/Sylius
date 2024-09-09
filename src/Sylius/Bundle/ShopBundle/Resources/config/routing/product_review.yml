@@ -23,6 +23,7 @@ sylius_shop_product_review_create:
         _sylius:
             template: "@SyliusShop/product_review/create.html.twig"
             form:
+                type: Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType
                 options:
                     validation_groups: ['sylius', 'sylius_review']
             factory:

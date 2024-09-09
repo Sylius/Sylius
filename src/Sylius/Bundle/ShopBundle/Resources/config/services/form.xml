@@ -58,5 +58,9 @@
         <service id="sylius_shop.form.type.checkout.select_payment" class="Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType">
             <tag name="form.type" />
         </service>
+
+        <service id="sylius_shop.form.type.product_review" class="Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
