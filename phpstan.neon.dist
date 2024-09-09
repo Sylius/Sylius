@@ -86,6 +86,7 @@ parameters:
         - '/Method [a-zA-z\\]+Filter\:\:filterProperty\(\) has parameter \$value with no type specified./'
         - '/Method [a-zA-z\\]+Persister\:\:(persist|remove|supports)\(\) has parameter \$data with no type specified./'
         - '/Method Sylius\\Bundle\\AdminBundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'
+        - '/Method Sylius\\Bundle\\ShopBundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'
 
         # To support both sylius/resource-bundle 1.11 and older versions
         - '/Call to an undefined method Sylius\\Resource\\Model\\ResourceInterface::\w+\(\)\./'

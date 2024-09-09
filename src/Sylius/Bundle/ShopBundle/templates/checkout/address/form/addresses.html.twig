@@ -1,0 +1,10 @@
+{% set form = hookable_metadata.context.form %}
+{% set order = hookable_metadata.context.order %}
+
+<div class="mb-4" >
+    {% if not order.channel.shippingAddressInCheckoutRequired %}
+        {% hook 'addresses#billing_required' with { show_different_address: form.differentShippingAddress.vars.data } %}
+    {% else %}
+        {% hook 'addresses#shipping_required' with { show_different_address: form.differentBillingAddress.vars.data } %}
+    {% endif %}
+</div>

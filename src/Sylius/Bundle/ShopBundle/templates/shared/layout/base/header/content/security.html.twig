@@ -1,0 +1,42 @@
+{% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+{% if is_granted('ROLE_USER') %}
+    <div class="d-lg-none">
+        <button class="btn btn-icon btn-transparent px-0" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ icon('user') }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                {{ buttons.transparent(path('sylius_shop_account_dashboard'), 'sylius.ui.my_account'|trans, 'mobile-my-account-button', null, 'dropdown-item') }}
+            </li>
+            <li>
+                {{ buttons.transparent(path('sylius_shop_logout'), 'sylius.ui.logout'|trans, 'mobile-logout-button', null, 'dropdown-item') }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="d-none d-lg-flex gap-2 align-items-center ps-2">
+        {{ icon('user') }}
+        <span {{ sylius_test_html_attribute('full-name') }}>
+            {{ 'sylius.ui.hello'|trans }} {{ app.user.customer.firstName }}!
+        </span>
+        <small class="text-black-50 px-1">|</small>
+        {{ buttons.transparent(path('sylius_shop_account_dashboard'), 'sylius.ui.my_account'|trans, 'my-account-button', null, null) }}
+        <small class="text-black-50 px-1">|</small>
+        {{ buttons.transparent(path('sylius_shop_logout'), 'sylius.ui.logout'|trans, 'logout-button', null, null) }}
+    </div>
+{% else %}
+    <div class="d-flex align-items-center">
+        <div class="d-lg-none">
+            {{ buttons.transparent(path('sylius_shop_login'), null, 'mobile-login-button', 'user', null) }}
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-2 ps-2">
+            {{ icon('user') }}
+            {{ buttons.transparent(path('sylius_shop_login'), 'sylius.ui.login'|trans, 'login-page-button', null, null) }}
+            <small class="text-black-50 px-1">|</small>
+            {{ buttons.transparent(path('sylius_shop_register'), 'sylius.ui.register'|trans, 'login-page-button', null, null) }}
+        </div>
+    </div>
+{% endif %}

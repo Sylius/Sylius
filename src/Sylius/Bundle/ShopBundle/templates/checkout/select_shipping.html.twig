@@ -1,0 +1,11 @@
+{% extends '@SyliusShop/checkout/shared/layout.html.twig' %}
+
+{% set active_step = 'select_shipping' %}
+
+{% block title %}
+    {{ 'sylius.ui.shipping'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% hook 'sylius_shop.checkout.select_shipping' with { active_step, form, order } %}
+{% endblock %}

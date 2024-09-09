@@ -1,0 +1,25 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set variant = hookable_metadata.context.variant %}
+{% set channel_pricing = variant.getChannelPricingForChannel(sylius.channel) %}
+{% set applied_promotions = channel_pricing.appliedPromotions|map(promotion => ({'label': promotion.label, 'description': promotion.description})) %}
+{% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
+{% set has_lowest_price = variant|sylius_has_lowest_price({'channel': sylius.channel})%}
+{% set has_discount = variant|sylius_has_discount({'channel': sylius.channel}) %}
+
+<td
+    data-applied-promotions="{{ applied_promotions|json_encode }}"
+    {% if has_discount %}
+        data-original-price="{{ money.calculateOriginalPrice(variant) }}"
+        {% if has_lowest_price %}
+            {% set lowest_price_before_discount = money.calculateLowestPrice(variant) %}
+            data-lowest-price-before-discount="{{
+            'sylius.ui.lowest_price_days_before_discount_was'|trans({
+                '%days%': days,
+                '%price%': lowest_price_before_discount
+            })
+            }}"
+        {% endif %}
+    {% endif %}>
+    {{ money.calculatePrice(variant) }}
+</td>

@@ -1,0 +1,17 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.customer_login'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container my-auto">
+        {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'novalidate': 'novalidate'}}) }}
+
+        {% hook 'sylius_shop.account.login' with { form, last_error } %}
+
+        {% include '@SyliusShop/account/login/csrf_token.html.twig' %}
+
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

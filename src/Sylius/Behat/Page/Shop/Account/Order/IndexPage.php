@@ -47,7 +47,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             ['number' => $order->getNumber()],
         );
 
-        $link = $row->find('css', '[data-test-button="sylius.ui.pay"]');
+        $link = $row->find('css', '[data-test-button="pay"]');
         $link->click();
     }
 
@@ -72,7 +72,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function openLastOrderPage(): void
     {
-        $this->getElement('last_order')->find('css', '[data-test-button="sylius.ui.show"]')->click();
+        $this->getElement('last_order')->find('css', '[data-test-button="show"]')->click();
     }
 
     protected function getDefinedElements(): array

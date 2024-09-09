@@ -1,0 +1,13 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.checkout.select_payment':
+            steps:
+                template: '@SyliusShop/checkout/shared/steps.html.twig'
+            form:
+                template: '@SyliusShop/checkout/select_payment/form.html.twig'
+        
+        'sylius_shop.checkout.select_payment.form':
+            payments:
+                template: '@SyliusShop/checkout/select_payment/form/payments.html.twig'
+            navigation:
+                template: '@SyliusShop/checkout/select_payment/form/navigation.html.twig'

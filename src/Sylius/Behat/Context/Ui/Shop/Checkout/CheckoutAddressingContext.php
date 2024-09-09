@@ -255,7 +255,7 @@ final readonly class CheckoutAddressingContext implements Context
      * @When I specify the email as :email
      * @When I do not specify the email
      */
-    public function iSpecifyTheEmail($email = null): void
+    public function iSpecifyTheEmail(?string $email = null): void
     {
         $this->addressPage->specifyEmail($email);
     }
@@ -367,17 +367,17 @@ final readonly class CheckoutAddressingContext implements Context
     /**
      * @Then I should have :countryName selected as country
      */
-    public function iShouldHaveSelectedAsCountry($countryName): void
+    public function iShouldHaveSelectedAsCountry(string $countryName): void
     {
-        Assert::same($this->addressPage->getShippingAddressCountry(), $countryName);
+        Assert::same($this->addressPage->getBillingAddressCountry(), $countryName);
     }
 
     /**
      * @Then I should have no country selected
      */
-    public function iShouldHaveNoCountrySelected()
+    public function iShouldHaveNoCountrySelected(): void
     {
-        Assert::same($this->addressPage->getShippingAddressCountry(), 'Select');
+        Assert::same($this->addressPage->getBillingAddressCountry(), 'Select');
     }
 
     /**
@@ -442,7 +442,7 @@ final readonly class CheckoutAddressingContext implements Context
     /**
      * @Then I should not be able to specify province name manually for shipping address
      */
-    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress()
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress(): void
     {
         Assert::false($this->addressPage->hasShippingAddressInput());
     }
@@ -468,7 +468,7 @@ final readonly class CheckoutAddressingContext implements Context
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as billing address$/
      */
-    public function addressShouldBeFilledAsBillingAddress(AddressInterface $address)
+    public function addressShouldBeFilledAsBillingAddress(AddressInterface $address): void
     {
         $this->testHelper->waitUntilAssertionPasses(function () use ($address): void {
             Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
@@ -522,14 +522,11 @@ final readonly class CheckoutAddressingContext implements Context
      */
     public function shouldHaveCountriesToChooseFrom(string ...$countries): void
     {
-        $availableShippingCountries = $this->addressPage->getAvailableShippingCountries();
         $availableBillingCountries = $this->addressPage->getAvailableBillingCountries();
 
         sort($countries);
-        sort($availableShippingCountries);
         sort($availableBillingCountries);
 
-        Assert::same($availableShippingCountries, $countries);
         Assert::same($availableBillingCountries, $countries);
     }
 

@@ -10,7 +10,7 @@ Feature: Applying promotion coupon with an expiration date
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And this promotion gives "$10.00" discount to every order
 
-    @api @ui
+    @api @ui @mink:chromedriver
     Scenario: Receiving discount from valid coupon with an expiration date
         Given this coupon is valid until tomorrow
         When I add product "PHP T-Shirt" to the cart
@@ -18,7 +18,7 @@ Feature: Applying promotion coupon with an expiration date
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api @ui
+    @api @ui @mink:chromedriver
     Scenario: Receiving no discount from expired coupon
         Given this coupon has already expired
         When I add product "PHP T-Shirt" to the cart
