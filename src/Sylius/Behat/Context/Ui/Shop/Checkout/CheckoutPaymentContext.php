@@ -85,6 +85,14 @@ final readonly class CheckoutPaymentContext implements Context
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
     }
+    
+    /**
+     * @When I do not select any payment method
+     */
+    public function iDoNotSelectAnyPaymentMethod(): void
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
 
     /**
      * @Then I should be on the checkout payment step
@@ -188,14 +196,6 @@ final readonly class CheckoutPaymentContext implements Context
                 sprintf('There is %s payment method', $paymentMethodName),
             );
         }
-    }
-
-    /**
-     * @Given I do not select any payment method
-     */
-    public function iDoNotSelectAnyPaymentMethod(): void
-    {
-        // Intentionally left blank to fulfill context expectation
     }
 
     /**
