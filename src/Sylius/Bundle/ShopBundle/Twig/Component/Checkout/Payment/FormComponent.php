@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Shipping;
+namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Payment;
 
 use Sylius\Component\Core\Model\Order;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -29,7 +29,7 @@ class FormComponent
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp(fieldName: 'order')]
+    #[LiveProp]
     public ?Order $order = null;
 
     /** @param class-string $formClass */

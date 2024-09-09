@@ -4,7 +4,9 @@ twig_hooks:
             steps:
                 template: '@SyliusShop/checkout/shared/steps.html.twig'
             form:
-                template: '@SyliusShop/checkout/select_payment/form.html.twig'
+                component: 'sylius_shop:checkout:payment:form'
+                props:
+                    order: '@=_context.order'
         
         'sylius_shop.checkout.select_payment.form':
             payments:

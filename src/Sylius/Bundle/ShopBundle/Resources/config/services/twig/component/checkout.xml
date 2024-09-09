@@ -52,12 +52,26 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Shipping\FormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectShippingType</argument>
 
             <tag
                 name="sylius.live_component"
                 key="sylius_shop:checkout:shipping:form"
                 template="@SyliusShop/checkout/select_shipping/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.checkout.payment.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Payment\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_shop:checkout:payment:form"
+                template="@SyliusShop/checkout/select_payment/form.html.twig"
             />
         </service>
     </services>
