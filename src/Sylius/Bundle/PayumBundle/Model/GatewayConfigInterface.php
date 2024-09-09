@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PayumBundle\Model;
 
 use Payum\Core\Model\GatewayConfigInterface as PayumGatewayConfigInterface;
 use Payum\Core\Security\CryptedInterface;
-use Sylius\Payment\Model\GatewayConfigInterface as BaseGatewayConfigInterface;
+use Sylius\Component\Payment\Model\GatewayConfigInterface as BaseGatewayConfigInterface;
 
 interface GatewayConfigInterface extends BaseGatewayConfigInterface, PayumGatewayConfigInterface, CryptedInterface
 {
