@@ -16,7 +16,10 @@ twig_hooks:
             header:
                 template: "@SyliusShop/product_review/create/main/header.html.twig"
             form:
-                template: "@SyliusShop/product_review/create/main/form.html.twig"
+                component: 'sylius_shop:product_review:form'
+                props:
+                    review: '@=_context.product_review'
+                    form: '@=_context.form'
                 
         'sylius.shop.product_review.create.main.form':
             rating:
