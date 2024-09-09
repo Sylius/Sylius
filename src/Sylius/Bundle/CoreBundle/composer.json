@@ -49,7 +49,7 @@
         "sylius/grid-bundle": "^1.12",
         "sylius/inventory-bundle": "^2.0",
         "sylius/locale-bundle": "^2.0",
-        "sylius/mailer-bundle": "^2.0",
+        "sylius/mailer-bundle": "^2.0 || ^2.1@alpha",
         "sylius/money-bundle": "^2.0",
         "sylius/order-bundle": "^2.0",
         "sylius/payment-bundle": "^2.0",
