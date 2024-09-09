@@ -146,7 +146,6 @@ final readonly class CheckoutAddressingContext implements Context
     /**
      * @When /^I specify the shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I specify the shipping (address for "[^"]+" from "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/
-     * @When /^I (do not specify any shipping address) information$/
      * @When /^I change the shipping (address to "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address): void
@@ -161,6 +160,14 @@ final readonly class CheckoutAddressingContext implements Context
         $this->sharedStorage->set($key, $address);
 
         $this->addressPage->specifyShippingAddress($address);
+    }
+
+    /**
+     * @When /^I (do not specify any shipping address) information$/
+     */
+    public function iDoNotSpecifyAnyShippingAddressInformation(): void
+    {
+        $this->addressPage->chooseDifferentShippingAddress();
     }
 
     /**
@@ -514,6 +521,14 @@ final readonly class CheckoutAddressingContext implements Context
     {
         $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
         $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
+    }
+
+    /**
+     * @Then /^I should(?:| also) be notified that the "([^"]+)" in (shipping|billing) details is required$/
+     */
+    public function iShouldBeNotifiedThatTheInShippingDetailsIsRequired(string $element, string $type): void
+    {
+        $this->assertElementValidationMessage($type, $element, sprintf('Please enter %s.', $element));
     }
 
     /**

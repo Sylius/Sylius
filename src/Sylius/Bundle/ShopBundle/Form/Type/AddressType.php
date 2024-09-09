@@ -74,6 +74,14 @@ final class AddressType extends AbstractType
             })
         ;
 
+        $builder->get('countryCode')->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $choices = $event->getForm()->getConfig()->getOption('choices');
+            if (1 === count($choices)) {
+                $country = reset($choices);
+                $event->setData($country->getCode());
+            }
+        });
+
         $builder->addEventListener(
             FormEvents::SUBMIT,
             function (FormEvent $formEvent) {
