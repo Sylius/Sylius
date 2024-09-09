@@ -198,22 +198,6 @@ final readonly class OrderContext implements Context
     }
 
     /**
-     * @Then /^the (shipment) status should be "([^"]+)"$/
-     * @Then /^I should see its (payment) status as "([^"]+)"$/
-     */
-    public function theShipmentStatusShouldBe(
-        string $elementType,
-        string $elementStatus,
-        int $position = 0,
-    ): void {
-        $resources = $this->responseChecker->getValue($this->shopClient->getLastResponse(), $elementType . 's');
-
-        $resource = $this->iriConverter->getResourceFromIri($resources[$position]['@id']);
-
-        Assert::same(ucfirst($resource->getState()), $elementStatus);
-    }
-
-    /**
      * @Then /^the order's (shipment) status should be "([^"]+)"$/
      * @Then /^I should see its order's (payment) status as "([^"]+)"$/
      */

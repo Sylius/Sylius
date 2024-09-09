@@ -273,6 +273,21 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 
+    /** @inheritDoc */
+    public function requestGet(string $uri, array $queryParameters = [], array $headers = []): Response
+    {
+        $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
+        $uri = $queryStrings ? $uri . '?' . $queryStrings : $uri;
+
+        $request = $this
+            ->requestFactory
+            ->custom($uri, HttpRequest::METHOD_GET, $headers)
+            ->authorize($this->getToken(), $this->authorizationHeader)
+        ;
+
+        return $this->request($request);
+    }
+
     public function request(RequestInterface $request, bool $forgetResponse = false): Response
     {
         $this->setServerParameters();

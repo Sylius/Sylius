@@ -109,8 +109,15 @@
             </operation>
 
             <!-- Shop Section -->
-
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/shipments/{id}">
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/orders/{tokenValue}/shipments/{shipmentId}"
+                provider="sylius_api.state_provider.shop.shipment.item"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" toProperty="order"/>
+                    <uriVariable parameterName="shipmentId" fromClass="Sylius\Component\Core\Model\Shipment"/>
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">

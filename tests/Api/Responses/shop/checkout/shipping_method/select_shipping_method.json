@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
     "customer": {
@@ -38,7 +38,7 @@
     },
     "payments": [
         {
-            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/payments\/@integer@",
             "@type": "Payment",
             "id": "@integer@",
             "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY"
@@ -46,7 +46,7 @@
     ],
     "shipments": [
         {
-            "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/shipments\/@integer@",
             "@type": "Shipment",
             "id": "@integer@",
             "method": "\/api\/v2\/shop\/shipping-methods\/DHL"
@@ -57,11 +57,11 @@
     "checkoutState": "shipping_selected",
     "paymentState": "cart",
     "shippingState": "cart",
-    "tokenValue": "nAWw2jewpA",
+    "tokenValue": "token",
     "number": null,
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",

@@ -16,21 +16,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius_api.state_provider.admin.order.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="string">tokenValue</argument>
-            <tag name="api_platform.state_provider" priority="10"/>
-        </service>
-
         <service id="sylius_api.state_provider.shop.order.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="string">tokenValue</argument>
-            <tag name="api_platform.state_provider" priority="10"/>
-        </service>
-
-        <service id="sylius_api.state_provider.admin.order_item.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider">
-            <argument type="service" id="sylius.repository.order_item" />
-            <argument type="string">id</argument>
             <tag name="api_platform.state_provider" priority="10"/>
         </service>
 
@@ -46,11 +34,6 @@
         </service>
 
         <service id="sylius_api.state_provider.shop.shop_user.verify_shop_user" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\ShopUser\VerifyShopUserProvider">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <tag name="api_platform.state_provider" priority="10" />
-        </service>
-
-        <service id="sylius_api.state_provider.admin.admin_user.reset_password" class="Sylius\Bundle\ApiBundle\StateProvider\Admin\AdminUser\ResetPasswordProvider">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <tag name="api_platform.state_provider" priority="10" />
         </service>
@@ -83,6 +66,20 @@
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="sylius.payment_methods_resolver" />
             <tag name="api_platform.state_provider" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.shipment.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Shipment\ItemProvider">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius.repository.shipment"/>
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+        <service id="sylius_api.state_provider.shop.payment.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\ItemProvider">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius.repository.payment"/>
+            <tag name="api_platform.state_provider" priority="10"/>
         </service>
     </services>
 </container>
