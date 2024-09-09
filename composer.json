@@ -76,7 +76,6 @@
         "sylius-labs/association-hydrator": "^1.1 || ^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius-labs/polyfill-symfony-security": "^1.1",
         "sylius/fixtures-bundle": "^1.8",
         "sylius/grid": "^1.12",
