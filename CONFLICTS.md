@@ -3,11 +3,6 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
-- `doctrine/orm:>= 2.16.0`
-
-  This version makes Sylius Fixtures loading fail on the product review fixtures.
-  References: https://github.com/doctrine/orm/issues/10869
-
 - `stof/doctrine-extensions-bundle:1.8.0`
 
   This version introduced configuring the metadata cache for the extensions, what breaks the `Timestampable` behaviour.
