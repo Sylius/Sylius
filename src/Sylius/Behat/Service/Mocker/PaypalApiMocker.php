@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Mocker;
 
-use Mockery\Mock;
+use Mockery\MockInterface;
 use Payum\Core\HttpClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -27,21 +27,21 @@ class PaypalApiMocker
     ) {
     }
 
-    public function performActionInApiInitializeScope(callable $action)
+    public function performActionInApiInitializeScope(callable $action): void
     {
         $this->mockApiPaymentInitializeResponse();
         $action();
         $this->mocker->unmockAll();
     }
 
-    public function performActionInApiSuccessfulScope(callable $action)
+    public function performActionInApiSuccessfulScope(callable $action): void
     {
         $this->mockApiSuccessfulPaymentResponse();
         $action();
         $this->mocker->unmockAll();
     }
 
-    private function mockApiSuccessfulPaymentResponse()
+    private function mockApiSuccessfulPaymentResponse(): void
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_successful_payment.json');
         $firstGetExpressCheckoutDetailsStream = $this->mockStream($mockedResponse['firstGetExpressCheckoutDetails']);
@@ -57,13 +57,13 @@ class PaypalApiMocker
         $getTransactionDetailsResponse = $this->mockHttpResponse(200, $getTransactionDetailsStream);
 
         $this->mocker->mockService('sylius.payum.http_client', HttpClientInterface::class)
-            ->shouldReceive('send')
+            ->expects('send')
             ->times(4)
-            ->andReturn($firstGetExpressCheckoutDetailsResponse, $doExpressCheckoutPaymentResponse, $secondGetExpressCheckoutDetailsResponse, $getTransactionDetailsResponse)
+            ->andReturns($firstGetExpressCheckoutDetailsResponse, $doExpressCheckoutPaymentResponse, $secondGetExpressCheckoutDetailsResponse, $getTransactionDetailsResponse)
         ;
     }
 
-    private function mockApiPaymentInitializeResponse()
+    private function mockApiPaymentInitializeResponse(): void
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_initialize_payment.json');
         $setExpressCheckoutStream = $this->mockStream($mockedResponse['setExpressCheckout']);
@@ -73,36 +73,26 @@ class PaypalApiMocker
         $getExpressCheckoutDetailsResponse = $this->mockHttpResponse(200, $getExpressCheckoutDetailsStream);
 
         $this->mocker->mockService('sylius.payum.http_client', HttpClientInterface::class)
-            ->shouldReceive('send')
+            ->expects('send')
             ->twice()
-            ->andReturn($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
+            ->andReturns($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
         ;
     }
 
-    /**
-     * @param string $content
-     *
-     * @return Mock
-     */
-    private function mockStream($content)
+    private function mockStream(string $content): MockInterface
     {
         $mockedStream = $this->mocker->mockCollaborator(StreamInterface::class);
-        $mockedStream->shouldReceive('getContents')->once()->andReturn($content);
-        $mockedStream->shouldReceive('close')->once()->andReturn();
+        $mockedStream->expects('getContents')->andReturns($content);
+        $mockedStream->expects('close')->andReturns();
 
         return $mockedStream;
     }
 
-    /**
-     * @param int $statusCode
-     *
-     * @return Mock
-     */
-    private function mockHttpResponse($statusCode, $streamMock)
+    private function mockHttpResponse(int $statusCode, MockInterface $streamMock): MockInterface
     {
         $mockedHttpResponse = $this->mocker->mockCollaborator(ResponseInterface::class);
-        $mockedHttpResponse->shouldReceive('getStatusCode')->once()->andReturn($statusCode);
-        $mockedHttpResponse->shouldReceive('getBody')->once()->andReturn($streamMock);
+        $mockedHttpResponse->expects('getStatusCode')->andReturns($statusCode);
+        $mockedHttpResponse->expects('getBody')->andReturns($streamMock);
 
         return $mockedHttpResponse;
     }

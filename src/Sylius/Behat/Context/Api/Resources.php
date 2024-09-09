@@ -55,6 +55,8 @@ final class Resources
 
     public const PAYMENTS = 'payments';
 
+    public const PAYMENT_REQUESTS = 'payment-requests';
+
     public const PRODUCT_ASSOCIATION_TYPES = 'product-association-types';
 
     public const PRODUCT_ASSOCIATIONS = 'product-associations';

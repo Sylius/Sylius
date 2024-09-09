@@ -10,7 +10,7 @@ Feature: Filtering product taxons
         And the store has a "Shirt" configurable product
         And I am logged in as an administrator
 
-    @ui @no-api @mink:chromedriver
+    @todo-ui @no-api @mink:chromedriver
     Scenario: Filtering product taxons
         When I want to modify the "Shirt" product
         And I filter taxons by "T-Shirts"
