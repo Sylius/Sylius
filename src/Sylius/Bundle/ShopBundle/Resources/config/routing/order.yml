@@ -19,7 +19,7 @@ sylius_shop_order_pay:
                 route: sylius_shop_order_after_pay
 
 sylius_shop_order_after_pay:
-    path: /{hash?}/after-pay
+    path: /after-pay/{hash?}
     methods: [GET, POST]
     defaults:
         _controller: sylius.shop.controller.order_pay::afterPayAction
