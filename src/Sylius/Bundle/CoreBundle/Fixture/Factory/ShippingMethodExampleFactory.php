@@ -41,7 +41,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
      * @param RepositoryInterface<ZoneInterface> $zoneRepository
      * @param RepositoryInterface<ShippingCategoryInterface> $shippingCategoryRepository
      * @param RepositoryInterface<LocaleInterface> $localeRepository
-     * @param RepositoryInterface<TaxCategoryInterface>|null $taxCategoryRepository
+     * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
      */
     public function __construct(
         private FactoryInterface $shippingMethodFactory,

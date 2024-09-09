@@ -32,7 +32,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
     /**
      * @param FactoryInterface<AdminUserInterface> $userFactory
-     * @param FactoryInterface<ImageInterface>|null $avatarImageFactory
+     * @param FactoryInterface<ImageInterface> $avatarImageFactory
      */
     public function __construct(
         private FactoryInterface $userFactory,

@@ -61,7 +61,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param RepositoryInterface<ProductOptionInterface> $productOptionRepository
      * @param RepositoryInterface<ChannelInterface> $channelRepository
      * @param RepositoryInterface<LocaleInterface> $localeRepository
-     * @param RepositoryInterface<TaxCategoryInterface>|null $taxCategoryRepository
+     * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
      */
     public function __construct(
         private FactoryInterface $productFactory,
