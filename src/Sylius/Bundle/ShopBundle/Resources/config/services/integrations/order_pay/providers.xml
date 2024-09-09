@@ -32,14 +32,14 @@
 
         <!-- Pay -->
 
-        <service id="sylius.shop.order_pay.provider.pay_response.payum" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PayumPayResponseProvider">
-            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
-            <tag name="sylius.shop.order_pay.provider.pay_response" priority="-300" />
-        </service>
-
         <service id="sylius.shop.order_pay.provider.pay_response.payment_request" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider">
             <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
             <argument type="service" id="sylius.shop.order_pay.provider.after_pay_url" />
+            <tag name="sylius.shop.order_pay.provider.pay_response" priority="-300" />
+        </service>
+
+        <service id="sylius.shop.order_pay.provider.pay_response.payum" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PayumPayResponseProvider">
+            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
             <tag name="sylius.shop.order_pay.provider.pay_response" priority="-200" />
         </service>
 
