@@ -26,7 +26,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "sylius/resource-bundle": "^1.11",
+        "sylius/resource-bundle": "^1.11 || ^1.12@alpha",
         "symfony/framework-bundle": "^6.4.1 || ^7.0",
         "symfony/intl": "^6.4.0 || ^7.0",
         "symfony/templating": "^6.4.0 || ^7.0",

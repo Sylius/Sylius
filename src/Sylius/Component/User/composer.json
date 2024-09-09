@@ -36,7 +36,7 @@
         "php": "^8.2",
         "doctrine/collections": "^1.6",
         "phpunit/phpunit": "^9.5",
-        "sylius/resource": "^1.11",
+        "sylius/resource": "^1.11 || ^1.12@alpha",
         "symfony/polyfill-mbstring": "^1.28",
         "symfony/security-core": "^6.4.0 || ^7.0"
     },
