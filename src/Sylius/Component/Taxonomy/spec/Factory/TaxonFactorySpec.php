@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Taxonomy\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class TaxonFactorySpec extends ObjectBehavior
 {

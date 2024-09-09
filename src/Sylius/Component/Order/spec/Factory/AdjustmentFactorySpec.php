@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Order\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class AdjustmentFactorySpec extends ObjectBehavior
 {

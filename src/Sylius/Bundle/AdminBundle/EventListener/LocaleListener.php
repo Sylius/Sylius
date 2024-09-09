@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 
 final class LocaleListener
@@ -24,7 +24,7 @@ final class LocaleListener
     {
     }
 
-    public function preDelete(ResourceControllerEvent $event): void
+    public function preDelete(GenericEvent $event): void
     {
         /** @var LocaleInterface $locale */
         $locale = $event->getSubject();

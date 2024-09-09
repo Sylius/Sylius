@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -29,7 +29,7 @@ final class CheckoutRedirectListener
     ) {
     }
 
-    public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent): void
+    public function handleCheckoutRedirect(GenericEvent $event): void
     {
         $request = $this->requestStack->getCurrentRequest();
         if (
@@ -40,10 +40,10 @@ final class CheckoutRedirectListener
             return;
         }
 
-        $order = $resourceControllerEvent->getSubject();
+        $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $resourceControllerEvent->setResponse(
+        $event->setResponse(
             new RedirectResponse($this->checkoutStateUrlGenerator->generateForOrderCheckoutState($order)),
         );
     }

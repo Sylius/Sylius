@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

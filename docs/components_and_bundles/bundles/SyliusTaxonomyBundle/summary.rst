@@ -23,7 +23,7 @@ Configuration Reference
                     interface:  Sylius\Component\Taxonomy\Model\TaxonInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\TranslatableFactory
+                    factory:    Sylius\Resource\Factory\TranslatableFactory
                     form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType
                 translation:
                     classes:
@@ -31,7 +31,7 @@ Configuration Reference
                         interface:  Sylius\Component\Taxonomy\Model\TaxonTranslationInterface
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        factory:    Sylius\Resource\Factory\Factory
                         form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
 
 Bug tracking

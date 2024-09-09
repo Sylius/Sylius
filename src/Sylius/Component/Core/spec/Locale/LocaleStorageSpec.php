@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Storage\StorageInterface;
+use Sylius\Resource\Storage\StorageInterface;
 
 final class LocaleStorageSpec extends ObjectBehavior
 {

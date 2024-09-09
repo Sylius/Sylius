@@ -43,8 +43,8 @@ Below the final ``SupplierTranslation`` class is presented, it implements the ``
 
     namespace App\Entity;
 
-    use Sylius\Component\Resource\Model\AbstractTranslation;
-    use Sylius\Component\Resource\Model\ResourceInterface;
+    use Sylius\Resource\Model\AbstractTranslation;
+    use Sylius\Resource\Model\ResourceInterface;
 
     class SupplierTranslation extends AbstractTranslation implements ResourceInterface
     {
@@ -130,9 +130,9 @@ As a result you should get such a ``Supplier`` class:
 
     namespace App\Entity;
 
-    use Sylius\Component\Resource\Model\ResourceInterface;
-    use Sylius\Component\Resource\Model\TranslatableInterface;
-    use Sylius\Component\Resource\Model\TranslatableTrait;
+    use Sylius\Resource\Model\ResourceInterface;
+    use Sylius\Resource\Model\TranslatableInterface;
+    use Sylius\Resource\Model\TranslatableTrait;
 
     class Supplier implements ResourceInterface, TranslatableInterface
     {
@@ -319,7 +319,7 @@ Then let's prepare the entity type, that will include the translation type.
 
     use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
     use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
-    use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+    use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
     use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
     use Symfony\Component\Form\Extension\Core\Type\TextareaType;
     use Symfony\Component\Form\Extension\Core\Type\TextType;

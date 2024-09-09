@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
 
@@ -36,6 +37,10 @@ use Webmozart\Assert\Assert;
  */
 final class LazyOption
 {
+    /**
+     * @param RepositoryInterface<covariant ResourceInterface> $repository
+     * @param array<string, mixed> $criteria
+     */
     public static function randomOne(RepositoryInterface $repository, array $criteria = []): \Closure
     {
         return function (Options $options) use ($repository, $criteria): object {
@@ -51,6 +56,10 @@ final class LazyOption
         };
     }
 
+    /**
+     * @param RepositoryInterface<covariant ResourceInterface> $repository
+     * @param array<string, mixed> $criteria
+     */
     public static function randomOneOrNull(
         RepositoryInterface $repository,
         int $chanceOfRandomOne = 100,
@@ -70,6 +79,10 @@ final class LazyOption
         };
     }
 
+    /**
+     * @param RepositoryInterface<covariant ResourceInterface> $repository
+     * @param array<string, mixed> $criteria
+     */
     public static function randomOnes(RepositoryInterface $repository, int $amount, array $criteria = []): \Closure
     {
         return function (Options $options) use ($repository, $amount, $criteria): iterable {
@@ -92,11 +105,16 @@ final class LazyOption
         };
     }
 
+    /** @param RepositoryInterface<covariant ResourceInterface> $repository */
     public static function all(RepositoryInterface $repository): \Closure
     {
         return fn (Options $options): iterable => $repository->findAll();
     }
 
+    /**
+     * @param RepositoryInterface<covariant ResourceInterface> $repository
+     * @param array<string, mixed> $criteria
+     */
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
         return function (Options $options, ?array $previousValues) use ($repository, $field, $criteria): ?iterable {
@@ -117,6 +135,10 @@ final class LazyOption
         };
     }
 
+    /**
+     * @param RepositoryInterface<covariant ResourceInterface> $repository
+     * @param array<string, mixed> $criteria
+     */
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
         return
@@ -135,6 +157,10 @@ final class LazyOption
         ;
     }
 
+    /**
+     * @param RepositoryInterface<covariant ResourceInterface> $repository
+     * @param array<string, mixed> $criteria
+     */
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
         return
@@ -166,6 +192,7 @@ final class LazyOption
         ;
     }
 
+    /** @param array<string, mixed> $criteria */
     private static function findRandomOne(
         EntityRepository $repository,
         array $criteria,
@@ -181,6 +208,7 @@ final class LazyOption
         return $object;
     }
 
+    /** @param array<string, mixed> $criteria */
     private static function findRandom(EntityRepository $repository, array $criteria, int $limit): array
     {
         $queryBuilder = $repository->createQueryBuilder('o');

@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,6 +29,7 @@ use Webmozart\Assert\Assert;
  */
 final readonly class CartItemFactory implements CartItemFactoryInterface
 {
+    /** @param FactoryInterface<T> $decoratedFactory */
     public function __construct(
         private FactoryInterface $decoratedFactory,
         private ProductVariantResolverInterface $variantResolver,

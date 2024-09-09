@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -58,6 +59,7 @@ class FormComponent
     /**
      * @param class-string $formClass
      * @param RepositoryInterface<ProductAttributeInterface> $productAttributeRepository
+     * @param ProductFactoryInterface<ProductInterface> $productFactory
      */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,

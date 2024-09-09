@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\ShippingMethod;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {

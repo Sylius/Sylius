@@ -26,14 +26,14 @@ Configuration reference
                         choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
                     interface: Sylius\Component\Customer\Model\CustomerInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
             customer_group:
                 classes:
                     model: Sylius\Component\Customer\Model\CustomerGroup
                     repository: Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerGroupRepository
                     interface: Sylius\Component\Customer\Model\CustomerGroupInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType
 
 Bug tracking

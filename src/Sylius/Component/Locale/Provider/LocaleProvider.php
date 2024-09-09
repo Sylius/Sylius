@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Component\Locale\Provider;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class LocaleProvider implements LocaleProviderInterface
 {
-    /**
-     * @param RepositoryInterface<LocaleInterface>|LocaleCollectionProviderInterface $localeRepository
-     */
-    public function __construct(private LocaleCollectionProviderInterface|RepositoryInterface $localeRepository, private string $defaultLocaleCode)
-    {
+    /** @param RepositoryInterface<LocaleInterface>|LocaleCollectionProviderInterface $localeRepository */
+    public function __construct(
+        private LocaleCollectionProviderInterface|RepositoryInterface $localeRepository,
+        private string $defaultLocaleCode,
+    ) {
         if ($this->localeRepository instanceof RepositoryInterface) {
             trigger_deprecation(
                 'sylius/locale',

@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\PriceHistory\Command\ApplyLowestPriceOnChannelPrici
 use Sylius\Bundle\CoreBundle\PriceHistory\CommandHandler\ApplyLowestPriceOnChannelPricingsHandler;
 use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ApplyLowestPriceOnChannelPricingsHandlerSpec extends ObjectBehavior
 {

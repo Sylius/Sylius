@@ -23,7 +23,7 @@ Configuration Reference
                     interface: Sylius\Component\Addressing\Model\AddressInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\AddressingBundle\Form\Type\AddressType
             country:
                 classes:
@@ -31,7 +31,7 @@ Configuration Reference
                     interface: Sylius\Component\Addressing\Model\CountryInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\AddressingBundle\Form\Type\CountryType
             province:
                 classes:
@@ -39,7 +39,7 @@ Configuration Reference
                     interface: Sylius\Component\Addressing\Model\ProvinceInterface
                     controller: Sylius\Bundle\AddressingBundle\Controller\ProvinceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType
             zone:
                 classes:
@@ -47,7 +47,7 @@ Configuration Reference
                     interface: Sylius\Component\Addressing\Model\ZoneInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneType
             zone_member:
                 classes:
@@ -55,7 +55,7 @@ Configuration Reference
                     interface: Sylius\Component\Addressing\Model\ZoneMemberInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType
 
 Bug tracking

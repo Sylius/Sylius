@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ChannelPricingLogEntryInterface

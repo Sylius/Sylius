@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Taxation\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class TaxRateResolverSpec extends ObjectBehavior
 {

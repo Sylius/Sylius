@@ -16,8 +16,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +40,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         Request $request,
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
-        ResourceControllerEvent $resourceControllerEvent,
+        GenericEvent $resourceControllerEvent,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
@@ -58,7 +58,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         Request $request,
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
-        ResourceControllerEvent $resourceControllerEvent,
+        GenericEvent $resourceControllerEvent,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(false);
@@ -72,7 +72,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         Request $request,
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
-        ResourceControllerEvent $resourceControllerEvent,
+        GenericEvent $resourceControllerEvent,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
@@ -87,7 +87,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         Request $request,
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
-        ResourceControllerEvent $resourceControllerEvent,
+        GenericEvent $resourceControllerEvent,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);

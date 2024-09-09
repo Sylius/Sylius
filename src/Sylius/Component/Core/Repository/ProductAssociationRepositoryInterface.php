@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ProductAssociationInterface

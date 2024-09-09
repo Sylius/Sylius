@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class OrderCheckoutWorkflowTest extends KernelTestCase

@@ -15,7 +15,7 @@ namespace Sylius\Component\Order\Factory;
 
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of OrderItemUnitInterface

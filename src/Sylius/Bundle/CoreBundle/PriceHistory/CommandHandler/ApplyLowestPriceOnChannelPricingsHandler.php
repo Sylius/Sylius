@@ -16,10 +16,11 @@ namespace Sylius\Bundle\CoreBundle\PriceHistory\CommandHandler;
 use Sylius\Bundle\CoreBundle\PriceHistory\Command\ApplyLowestPriceOnChannelPricings;
 use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ApplyLowestPriceOnChannelPricingsHandler
 {
+    /** @param RepositoryInterface<ChannelPricingInterface> $channelPricingRepository */
     public function __construct(
         private ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
         private RepositoryInterface $channelPricingRepository,

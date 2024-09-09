@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of ChannelPricingLogEntryInterface

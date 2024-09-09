@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Customer\Repository;
 
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
  * @template T of CustomerGroupInterface

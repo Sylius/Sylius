@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
 final class ProductDeletionListener
@@ -24,7 +24,7 @@ final class ProductDeletionListener
     {
     }
 
-    public function protectFromRemovingProductInUseByPromotionRule(ResourceControllerEvent $event): void
+    public function protectFromRemovingProductInUseByPromotionRule(GenericEvent $event): void
     {
         $product = $event->getSubject();
         Assert::isInstanceOf($product, ProductInterface::class);

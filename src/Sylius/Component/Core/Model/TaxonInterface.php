@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
+use Sylius\Resource\Model\TimestampableInterface;
 
 interface TaxonInterface extends BaseTaxonInterface, ImagesAwareInterface, TimestampableInterface
 {

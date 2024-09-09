@@ -24,7 +24,7 @@ use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ChangeAddressOrderHandlerTest extends KernelTestCase

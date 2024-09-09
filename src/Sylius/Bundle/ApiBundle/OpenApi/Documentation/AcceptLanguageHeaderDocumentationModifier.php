@@ -17,13 +17,11 @@ use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class AcceptLanguageHeaderDocumentationModifier implements DocumentationModifierInterface
 {
-    /**
-     * @param RepositoryInterface<LocaleInterface> $localeRepository
-     */
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(private RepositoryInterface $localeRepository)
     {
     }

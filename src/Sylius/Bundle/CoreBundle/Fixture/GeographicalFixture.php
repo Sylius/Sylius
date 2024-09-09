@@ -19,13 +19,18 @@ use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
 
 class GeographicalFixture extends AbstractFixture
 {
+    /**
+     * @param FactoryInterface<CountryInterface> $countryFactory
+     * @param FactoryInterface<ProvinceInterface> $provinceFactory
+     * @param ZoneFactoryInterface<ZoneInterface> $zoneFactory
+     */
     public function __construct(
         private FactoryInterface $countryFactory,
         private ObjectManager $countryManager,

@@ -43,7 +43,7 @@
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius/mailer-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.10",
+        "sylius/resource-bundle": "^1.11",
         "sylius/user": "^2.0",
         "symfony/framework-bundle": "^6.4.1",
         "symfony/password-hasher": "^6.4.0",

@@ -16,8 +16,8 @@ namespace Sylius\Bundle\CoreBundle\Factory;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 /**
  * @template T of ResourceInterface

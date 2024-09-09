@@ -16,8 +16,8 @@ namespace spec\Sylius\Component\Core\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntry;
-use Sylius\Component\Resource\Exception\UnsupportedMethodException;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Exception\UnsupportedMethodException;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class ChannelPricingLogEntryFactorySpec extends ObjectBehavior
 {

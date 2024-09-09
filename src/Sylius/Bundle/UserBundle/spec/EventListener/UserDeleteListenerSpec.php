@@ -15,8 +15,8 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -36,7 +36,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     function it_deletes_user_if_it_is_different_than_currently_logged_one(
         TokenStorageInterface $tokenStorage,
         FlashBagInterface $flashBag,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         UserInterface $userToBeDeleted,
         UserInterface $currentlyLoggedUser,
         TokenInterface $tokenInterface,
@@ -59,7 +59,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     function it_deletes_user_if_no_user_is_logged_in(
         TokenStorageInterface $tokenStorage,
         FlashBagInterface $flashBag,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         UserInterface $userToBeDeleted,
         TokenInterface $tokenInterface,
     ): void {
@@ -81,7 +81,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     function it_deletes_user_if_there_is_no_token(
         TokenStorageInterface $tokenStorage,
         FlashBagInterface $flashBag,
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         UserInterface $userToBeDeleted,
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
@@ -99,7 +99,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     }
 
     function it_does_not_allow_to_delete_currently_logged_user(
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         UserInterface $userToBeDeleted,
         UserInterface $currentlyLoggedInUser,
         $tokenStorage,
@@ -124,7 +124,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     }
 
     function it_deletes_shop_user_even_if_admin_user_has_same_id(
-        ResourceControllerEvent $event,
+        GenericEvent $event,
         UserInterface $userToBeDeleted,
         UserInterface $currentlyLoggedInUser,
         $tokenStorage,

@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 final class RedirectHandlerSpec extends ObjectBehavior

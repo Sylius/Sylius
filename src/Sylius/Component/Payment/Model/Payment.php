@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\TimestampableTrait;
 
 class Payment implements PaymentInterface
 {

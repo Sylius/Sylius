@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Payment\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class PaymentFactorySpec extends ObjectBehavior
 {

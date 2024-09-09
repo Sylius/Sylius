@@ -16,11 +16,11 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
-use Sylius\Component\Resource\Model\VersionedInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Resource\Model\VersionedInterface;
 
 interface ProductVariantInterface extends
     BaseVariantInterface,

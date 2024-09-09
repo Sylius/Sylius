@@ -17,7 +17,7 @@ use FOS\RestBundle\View\View;
 use Sylius\Bundle\OrderBundle\Controller\OrderController as BaseOrderController;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\SyliusCartEvents;
-use Sylius\Component\Resource\ResourceActions;
+use Sylius\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

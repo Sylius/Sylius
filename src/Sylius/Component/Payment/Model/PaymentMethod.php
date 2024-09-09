@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\TimestampableTrait;
+use Sylius\Resource\Model\ToggleableTrait;
+use Sylius\Resource\Model\TranslatableTrait;
+use Sylius\Resource\Model\TranslationInterface;
 
 class PaymentMethod implements PaymentMethodInterface, \Stringable
 {

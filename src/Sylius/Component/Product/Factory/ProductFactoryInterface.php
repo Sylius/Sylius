@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Factory;
 
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
+use Sylius\Resource\Factory\TranslatableFactoryInterface;
 
 /**
- * @extends TranslatableFactoryInterface<ProductInterface>
+ * @template T of ProductInterface
+ *
+ * @extends TranslatableFactoryInterface<T>
  */
 interface ProductFactoryInterface extends TranslatableFactoryInterface
 {

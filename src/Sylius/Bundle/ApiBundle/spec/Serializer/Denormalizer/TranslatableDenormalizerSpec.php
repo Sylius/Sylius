@@ -15,8 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
-use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class TranslatableDenormalizerSpec extends ObjectBehavior
@@ -37,7 +37,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         ])->shouldReturn(false);
 
         $this->supportsDenormalization([], TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldReturn(false);
 
@@ -55,7 +55,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         $localeProvider->getDefaultLocaleCode()->willReturn('en');
 
         $denormalizer->denormalize($data, TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldBeCalled()->willReturn($data);
 
@@ -74,7 +74,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
 
         $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldBeCalled()->willReturn($updatedData);
 
@@ -94,7 +94,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
 
         $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldBeCalled()->willReturn($updatedData);
 
@@ -114,7 +114,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
 
         $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldBeCalled()->willReturn($updatedData);
 
@@ -134,7 +134,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
 
         $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldBeCalled()->willReturn($updatedData);
 
@@ -154,7 +154,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
 
         $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldBeCalled()->willReturn($updatedData);
 
@@ -174,7 +174,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         $updatedData = ['translations' => ['en' => ['locale' => 'en'], 'pl' => ['locale' => 'pl']]];
 
         $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
-            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
             ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
         ])->shouldBeCalled()->willReturn($updatedData);
 

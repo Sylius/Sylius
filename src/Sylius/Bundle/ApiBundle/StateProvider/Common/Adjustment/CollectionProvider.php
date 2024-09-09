@@ -19,7 +19,7 @@ use ApiPlatform\State\ProviderInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\RecursiveAdjustmentsAwareInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /** @implements ProviderInterface<AdjustmentInterface> */

@@ -15,7 +15,7 @@ To create new resources you should use the default factory implementation.
     <?php
 
     use Sylius\Component\Product\Model\Product;
-    use Sylius\Component\Resource\Factory\Factory;
+    use Sylius\Resource\Factory\Factory;
 
     $factory = new Factory(Product::class);
 

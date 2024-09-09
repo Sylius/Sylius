@@ -15,7 +15,7 @@ namespace Sylius\Component\Addressing\Factory;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ZoneInterface
@@ -24,8 +24,14 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class ZoneFactory implements ZoneFactoryInterface
 {
-    public function __construct(private FactoryInterface $factory, private FactoryInterface $zoneMemberFactory)
-    {
+    /**
+     * @param FactoryInterface<T> $factory
+     * @param FactoryInterface<ZoneMemberInterface> $zoneMemberFactory
+     */
+    public function __construct(
+        private FactoryInterface $factory,
+        private FactoryInterface $zoneMemberFactory,
+    ) {
     }
 
     public function createNew(): ZoneInterface

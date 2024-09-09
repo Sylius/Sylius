@@ -512,7 +512,7 @@ final readonly class CartContext implements Context
     {
         Assert::true(
             $this->summaryPage->hasItemNamed($productName),
-            sprintf('Product with name "%s" was not found in the cart.', $productName)
+            sprintf('Product with name "%s" was not found in the cart.', $productName),
         );
     }
 

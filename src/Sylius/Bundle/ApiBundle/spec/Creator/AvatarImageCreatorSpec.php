@@ -20,8 +20,8 @@ use Sylius\Bundle\ApiBundle\Exception\NoFileUploadedException;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class AvatarImageCreatorSpec extends ObjectBehavior
 {

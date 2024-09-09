@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Order\Factory;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of AdjustmentInterface
