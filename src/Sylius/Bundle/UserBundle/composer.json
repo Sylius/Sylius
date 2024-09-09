@@ -53,6 +53,7 @@
         "doctrine/orm": "2.15.2"
     },
     "require-dev": {
+        "friendsofsymfony/rest-bundle": "^3.0",
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
