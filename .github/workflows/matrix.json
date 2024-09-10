@@ -25,7 +25,7 @@
         {
           "php": "8.2",
           "symfony": "^6.4",
-          "api-platform": "^3.3",
+          "api-platform": "3.4.0-alpha.5",
           "mysql": "8.0",
           "twig": "^3.3"
         }
