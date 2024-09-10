@@ -42,7 +42,7 @@ final readonly class ShopUserBasedExtension implements QueryCollectionExtensionI
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
+        $this->filterOutCustomers($queryBuilder, $queryNameGenerator, $resourceClass);
     }
 
     /**
@@ -57,10 +57,10 @@ final readonly class ShopUserBasedExtension implements QueryCollectionExtensionI
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
+        $this->filterOutCustomers($queryBuilder, $queryNameGenerator, $resourceClass);
     }
 
-    private function filterOutOrders(
+    private function filterOutCustomers(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
