@@ -390,6 +390,6 @@ class RegistrationContext implements Context
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
-        Assert::same($this->registerElement->getValidationMessage($element), $expectedMessage);
+        Assert::same($this->registerElement->getValidationMessage(str_replace(' ', '_', $element)), $expectedMessage);
     }
 }
