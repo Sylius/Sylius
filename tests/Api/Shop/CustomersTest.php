@@ -31,7 +31,37 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_customer(): void
+    public function it_gets_customer_as_logged_user(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+
+        $this->requestGet(
+            uri: '/api/v2/shop/customers/' . $customer->getId(),
+            headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/customer/get_customer_response');
+    }
+
+    /** @test */
+    public function it_gets_customer_as_another_logged_user(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+
+        $this->requestGet(
+            uri: '/api/v2/shop/customers/' . $customer->getId(),
+            headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /** @test */
+    public function it_gets_customer_as_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
         /** @var CustomerInterface $customer */
@@ -39,7 +69,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->requestGet('/api/v2/shop/customers/' . $customer->getId());
 
-        $this->assertResponse($this->client->getResponse(), 'shop/customer/get_customer_response');
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
     /** @test */
@@ -95,6 +125,7 @@ final class CustomersTest extends JsonApiTestCase
                 'birthday' => '2023-10-24T11:00:00.000Z',
                 'subscribedToNewsletter' => true,
             ],
+            headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
         );
 
         $this->assertResponse($this->client->getResponse(), 'shop/customer/put_customer_response');
@@ -194,5 +225,25 @@ final class CustomersTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_changes_password(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+
+        $this->requestPut(
+            sprintf('/api/v2/shop/customers/%s/password', $customer->getId()),
+            [
+                'currentPassword' => 'sylius',
+                'newPassword' => 'newPassword',
+                'confirmNewPassword' => 'newPassword',
+            ],
+            headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 }

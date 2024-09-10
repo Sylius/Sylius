@@ -198,5 +198,15 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
+
+        <service
+            id="sylius_api.doctrine.orm.query_extension.shop.customer.shop_user_based"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Customer\ShopUserBasedExtension"
+        >
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
     </services>
 </container>

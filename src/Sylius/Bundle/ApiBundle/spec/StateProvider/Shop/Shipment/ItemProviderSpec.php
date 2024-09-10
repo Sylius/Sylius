@@ -50,7 +50,7 @@ final class ItemProviderSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('provide', [$operation]);
     }
 
-    function it_throw_an_exception_if_operation_is_not_get(
+    function it_throws_an_exception_if_operation_is_not_get(
         Operation $operation,
     ): void {
         $operation->getClass()->willReturn(\stdClass::class);
