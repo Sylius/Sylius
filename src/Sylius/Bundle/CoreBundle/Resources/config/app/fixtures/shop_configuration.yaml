@@ -74,7 +74,7 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'MENU_CATEGORY'
+                                code: 'category'
                                 name: 'Category'
                                 translations:
                                     en_US:
@@ -102,7 +102,7 @@ sylius_fixtures:
                                     street: 'Test St. 15'
                                     city: 'eCommerce Town'
                                     postcode: '00 33 22'
-                                menu_taxon: 'MENU_CATEGORY'
+                                menu_taxon: 'category'
                                 contact_phone_number: '+41 123 456 789'
                                 contact_email: 'contact@example.com'
 
