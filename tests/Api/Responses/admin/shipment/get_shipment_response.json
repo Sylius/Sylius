@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Shipment",
     "@id": "\/api\/v2\/admin\/shipments\/@integer@",
     "@type": "Shipment",
-    "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
+    "order": "\/api\/v2\/admin\/orders\/token",
     "id": "@integer@",
     "state": "ready",
     "method": "\/api\/v2\/admin\/shipping-methods\/UPS",

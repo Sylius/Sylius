@@ -79,6 +79,11 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->isAdminContext = false;
     }
 
+    protected function disableShopUserContext(): void
+    {
+        $this->isShopUserContext = false;
+    }
+
     protected function setUpDefaultGetHeaders(): void
     {
         $this->defaultGetHeaders = [
@@ -245,6 +250,18 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $filename,
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseNotFound(): void
+    {
+        $this->assertResponseErrorMessage('Not Found', Response::HTTP_NOT_FOUND);
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseForbidden(): void
+    {
+        $this->assertResponseErrorMessage('Access Denied.', Response::HTTP_FORBIDDEN);
     }
 
     /** @throws \Exception */

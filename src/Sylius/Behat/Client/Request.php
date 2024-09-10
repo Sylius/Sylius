@@ -112,11 +112,13 @@ final class Request implements RequestInterface
         }
     }
 
-    public function authorize(?string $token, string $authorizationHeader): void
+    public function authorize(?string $token, string $authorizationHeader): self
     {
         if ($token !== null) {
             $this->headers['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         }
+
+        return $this;
     }
 
     private function mergeArraysUniquely(array $firstArray, array $secondArray): array

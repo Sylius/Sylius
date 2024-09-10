@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
     "customer": null,
@@ -13,7 +13,7 @@
     "checkoutState": "cart",
     "paymentState": "cart",
     "shippingState": "cart",
-    "tokenValue": "nAWw2jewpA",
+    "tokenValue": "token",
     "number": null,
     "items": [],
     "itemsTotal": 0,

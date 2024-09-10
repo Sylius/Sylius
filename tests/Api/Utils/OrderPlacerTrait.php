@@ -75,8 +75,8 @@ trait OrderPlacerTrait
     }
 
     protected function placeOrder(
-        string $tokenValue,
-        string $email = 'sylius@example.com',
+        string $tokenValue = 'token',
+        string $email = 'shop@example.com',
         string $productVariantCode = 'MUG_BLUE',
         int $quantity = 3,
         ?\DateTimeImmutable $checkoutCompletedAt = null,
@@ -114,7 +114,7 @@ trait OrderPlacerTrait
             orderTokenValue: $tokenValue,
             shipmentId: $shipmentId,
             shippingMethodCode: $shippingMethodCode,
-    );
+        );
 
         $envelope = $this->commandBus->dispatch($chooseShippingMethodCommand);
 
@@ -195,7 +195,7 @@ trait OrderPlacerTrait
         return $order;
     }
 
-    protected function pickUpCart(string $tokenValue = 'nAWw2jewpA', string $channelCode = 'WEB', ?string $email = null, string $localeCode = 'en_US'): string
+    protected function pickUpCart(string $tokenValue = 'token', string $channelCode = 'WEB', ?string $email = null, string $localeCode = 'en_US'): string
     {
         $pickupCartCommand = new PickupCart(
             channelCode: $channelCode,

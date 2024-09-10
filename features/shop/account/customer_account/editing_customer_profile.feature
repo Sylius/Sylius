@@ -9,7 +9,7 @@ Feature: Editing a customer profile
         And there is a user "francis@underwood.com" identified by "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @ui @api
+    @api @ui
     Scenario: Changing my first name and last name
         When I want to modify my profile
         And I specify the first name as "Will"
@@ -18,7 +18,7 @@ Feature: Editing a customer profile
         Then I should be notified that it has been successfully edited
         And my name should be "Will Conway"
 
-    @ui @email @no-api
+    @no-api @ui @email
     Scenario: Changing my email if channel requires verification
         When I want to modify my profile
         And I specify the customer email as "frank@underwood.com"
@@ -35,7 +35,7 @@ Feature: Editing a customer profile
         And I save my changes
         And I should not be logged in
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Changing my email if channel does not require verification
         Given "United States" channel has account verification disabled
         When I want to modify my profile

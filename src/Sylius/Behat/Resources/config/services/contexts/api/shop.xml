@@ -154,11 +154,11 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
-<!--        <service id="sylius.behat.context.api.shop.order_item" class="Sylius\Behat\Context\Api\Shop\OrderItemContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.order_item" class="Sylius\Behat\Context\Api\Shop\OrderItemContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
 
         <service id="sylius.behat.context.api.paypal" class="Sylius\Behat\Context\Api\PaypalContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
@@ -169,11 +169,17 @@
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
 
-<!--        <service id="sylius.behat.context.api.shop.shipment" class="Sylius\Behat\Context\Api\Shop\ShipmentContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.payment" class="Sylius\Behat\Context\Api\Shop\PaymentContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <service id="sylius.behat.context.api.shop.shipment" class="Sylius\Behat\Context\Api\Shop\ShipmentContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
 
         <service id="sylius.behat.context.api.shop.locale" class="Sylius\Behat\Context\Api\Shop\LocaleContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />

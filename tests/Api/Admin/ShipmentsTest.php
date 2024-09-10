@@ -33,7 +33,7 @@ final class ShipmentsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $anotherTokenValue = 'nAWw2jexpB';
 
         $this->placeOrder($tokenValue);
@@ -58,7 +58,7 @@ final class ShipmentsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
 
         $order = $this->placeOrder($tokenValue);
 
@@ -80,7 +80,7 @@ final class ShipmentsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $order = $this->placeOrder('nAWw2jewpA');
+        $order = $this->placeOrder('token');
 
         $this->client->request(
             method: 'PATCH',
@@ -97,7 +97,7 @@ final class ShipmentsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $order = $this->placeOrder('nAWw2jewpA');
+        $order = $this->placeOrder('token');
         $order->getShipments()->last()->setState('shipped');
 
         $this->client->request(
@@ -116,7 +116,7 @@ final class ShipmentsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
 
         $order = $this->placeOrder($tokenValue);
 
