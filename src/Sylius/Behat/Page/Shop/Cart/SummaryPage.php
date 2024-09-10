@@ -36,10 +36,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function getIncludedTaxTotal(): string
     {
-        Assert::true(false);
-        $includedTaxTotalElement = $this->getElement('tax_included');
-
-        return $includedTaxTotalElement->getText();
+        return $this->getElement('tax_included')->getText();
     }
 
     public function getExcludedTaxTotal(): string
@@ -49,8 +46,6 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function areTaxesCharged(): bool
     {
-        Assert::true(false);
-
         try {
             $this->getElement('no_taxes');
         } catch (ElementNotFoundException) {
@@ -246,7 +241,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'item_unit_price' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-unit-price]',
             'item_unit_regular_price' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-unit-regular-price]',
             'items_total' => '[data-test-cart-items-total]',
-//            'no_taxes' => '[data-test-cart-no-tax]',
+            'no_taxes' => '[data-test-cart-no-tax]',
 //            'product_row' => '[data-test-cart-product-row="%name%"]',
             'product_total' => '[data-test-cart-item-product-row="%name%"] [data-test-cart-product-subtotal]',
             'promotion_coupon' => '[data-test-cart-promotion-coupon]',
@@ -255,7 +250,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 //            'save_button' => '[data-test-apply-coupon-button]',
             'shipping_total' => '[data-test-cart-shipping-total]',
             'tax_excluded' => '[data-test-cart-tax-excluded]',
-//            'tax_included' => '[data-test-cart-tax-included]',
+            'tax_included' => '[data-test-cart-tax-included]',
 //            'update_button' => '[data-test-cart-update-button]',
         ]);
     }
