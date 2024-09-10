@@ -263,7 +263,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "^6.4"
+            "require": "^7.0"
         },
         "branch-alias": {
             "dev-main": "2.0-dev"
