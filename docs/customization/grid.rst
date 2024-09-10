@@ -66,7 +66,7 @@ If you would like to modify for instance a label of any field from a grid, that'
                     date:
                         label: "When was it added?"
 
-Good practices is translate labels, look :doc:`here </customization/grid>`. how to do that
+Alternatively you can translate labels, look :doc:`here </customization/translation>` how to do that.
 
 How to customize filters of a grid?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
