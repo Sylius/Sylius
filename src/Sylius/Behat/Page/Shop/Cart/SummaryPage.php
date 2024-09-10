@@ -130,12 +130,6 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
         $this->waitForComponentsUpdate();
     }
 
-    public function specifyQuantity(string $productName, int $quantity): void
-    {
-        Assert::true(false);
-        $this->getElement('item_quantity_input', ['%name%' => $productName])->setValue($quantity);
-    }
-
     public function countOrderItems(): int
     {
         return count($this->getElement('cart_items')->findAll('css', '[data-test-cart-item]'));

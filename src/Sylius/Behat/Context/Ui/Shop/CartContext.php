@@ -395,14 +395,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @When I specify product :productName quantity to :quantity
-     */
-    public function iSpecifyQuantityToInMyCart(string $productName, int $quantity): void
-    {
-        $this->summaryPage->specifyQuantity($productName, $quantity);
-    }
-
-    /**
      * @Then /^I should be(?: on| redirected to) my cart summary page$/
      * @Then I should not be able to address an order with an empty cart
      */
