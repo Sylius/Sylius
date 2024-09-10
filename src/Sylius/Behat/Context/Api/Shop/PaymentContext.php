@@ -57,7 +57,7 @@ final readonly class PaymentContext implements Context
     }
 
     /**
-     * @Then /^I should see its payment state as "([^"]+)"$/
+     * @Then I should see its payment state as :state
      */
     public function iShouldSeeItsPaymentStateAs(string $state): void
     {
@@ -65,9 +65,7 @@ final readonly class PaymentContext implements Context
         $payments = $this->responseChecker->getValue($response, 'payments');
         $token = $this->responseChecker->getValue($response, 'tokenValue');
 
-        $response = $this->client->requestGet(
-            uri: sprintf('/api/v2/shop/orders/%s/payments/%s', $token, $payments[0]['id']),
-        );
+        $response = $this->client->requestGet(sprintf('/api/v2/shop/orders/%s/payments/%s', $token, $payments[0]['id']));
 
         Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
     }

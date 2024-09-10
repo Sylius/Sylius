@@ -141,7 +141,11 @@
 
             <!-- Shop operations-->
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/customers/{id}">
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/customers/{id}"
+                security="is_granted('SYLIUS_SHOP_USER')"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -185,12 +189,18 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/shop/customers/{id}" >
+            <operation
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/shop/customers/{id}"
+                security="is_granted('SYLIUS_SHOP_USER')"
+            >
                 <validationContext>
                     <values>
                         <value name="groups">
                             <values>
+                                <value>sylius</value>
                                 <value>sylius_api_user_update</value>
+                                <value>sylius_customer_profile</value>
                             </values>
                         </value>
                     </values>
@@ -215,6 +225,38 @@
                 </normalizationContext>
             </operation>
 
+            <operation
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/shop/customers/{id}/password"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword"
+                output="false"
+                security="is_granted('SYLIUS_SHOP_USER')"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:customer:password:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Change password for logged in customer.</value>
+                    </values>
+                </openapiContext>
+            </operation>
         </operations>
     </resource>
 </resources>

@@ -19,10 +19,10 @@ use Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware;
 class ChangeShopUserPassword
 {
     public function __construct(
-        public readonly mixed $shopUserId,
         public readonly string $newPassword,
         public readonly string $confirmNewPassword,
         public readonly string $currentPassword,
+        public readonly mixed $shopUserId,
     ) {
     }
 }
