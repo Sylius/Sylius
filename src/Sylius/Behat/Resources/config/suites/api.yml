@@ -10,6 +10,7 @@ imports:
     - api/addressing/managing_countries.yaml
     - api/addressing/managing_zones.yml
     - api/admin/dashboard.yaml
+    - api/admin/locale.yaml
     - api/admin/login.yml
     - api/admin/security.yml
     - api/cart/accessing_cart.yml
