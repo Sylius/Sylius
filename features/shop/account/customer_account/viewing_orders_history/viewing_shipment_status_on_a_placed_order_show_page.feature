@@ -18,39 +18,23 @@ Feature: Viewing shipment state on a placed order show page
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
     @api @ui
-<<<<<<< HEAD
-    Scenario: Seeing shipment status when it has not been shipped yet
-=======
     Scenario: Seeing shipment state when it has not been shipped yet
->>>>>>> 2.0
         When I view the summary of my order "#00000666"
         Then the shipment state should be "Ready"
 
     @api @ui
-<<<<<<< HEAD
-    Scenario: Seeing shipment status after shipping
-=======
     Scenario: Seeing shipment state after shipping
->>>>>>> 2.0
         Given this order has already been shipped
         When I view the summary of my order "#00000666"
         Then the shipment state should be "Shipped"
 
     @api @ui
-<<<<<<< HEAD
-    Scenario: Seeing order's shipment status when it has not been shipped yet
-=======
     Scenario: Seeing order's shipment state when it has not been shipped yet
->>>>>>> 2.0
         When I view the summary of my order "#00000666"
         Then the order's shipment state should be "Ready"
 
     @api @ui
-<<<<<<< HEAD
-    Scenario: Seeing order's shipment status after shipping
-=======
     Scenario: Seeing order's shipment state after shipping
->>>>>>> 2.0
         Given this order has already been shipped
         When I view the summary of my order "#00000666"
         Then the order's shipment state should be "Shipped"
