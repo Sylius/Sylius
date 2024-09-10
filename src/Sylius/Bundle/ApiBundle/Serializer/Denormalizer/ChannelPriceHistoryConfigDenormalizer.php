@@ -30,7 +30,6 @@ final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterfa
 
     /**
      * @param FactoryInterface<ChannelPriceHistoryConfigInterface> $channelPriceHistoryConfigFactory
-     * @param array<string, string> $validationGroups
      */
     public function __construct(
         private readonly IriConverterInterface $iriConverter,
