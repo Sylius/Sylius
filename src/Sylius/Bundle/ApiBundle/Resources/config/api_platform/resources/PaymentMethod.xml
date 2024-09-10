@@ -48,7 +48,7 @@
             <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/payment-methods">
                 <validationContext>
                     <values>
-                        <value name="groups">sylius_api.payment_method_configuration_groups_generator</value>
+                        <value name="groups">sylius_api.validator.payment_method_groups_generator</value>
                     </values>
                 </validationContext>
 
@@ -88,7 +88,7 @@
             <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/payment-methods/{code}">
                 <validationContext>
                     <values>
-                        <value name="groups">sylius_api.payment_method_configuration_groups_generator</value>
+                        <value name="groups">sylius_api.validator.payment_method_groups_generator</value>
                     </values>
                 </validationContext>
 
