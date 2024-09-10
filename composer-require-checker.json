@@ -3,6 +3,7 @@
     "null", "true", "false",
     "static", "self", "parent",
     "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
+    "random_bytes", "random_int",
     "ApiPlatform\\Core\\Api\\FilterInterface",
     "ApiPlatform\\Core\\Api\\IriConverterInterface",
     "ApiPlatform\\Core\\Api\\OperationType",
