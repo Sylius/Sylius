@@ -70,7 +70,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         foreach ($paymentMethodItems as $method) {
             if ($method->find('css', '[data-test-payment-method-select]')->hasAttribute('checked')) {
-                return $method->find('css', '[data-test-payment-method-label-wrapper]')->getText();
+                return $method->find('css', '[data-test-payment-method-checkbox]')->getText();
             }
         }
 

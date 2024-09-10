@@ -70,7 +70,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
             'create_account_button' => '[data-test-create-an-account]',
             'instructions' => '[data-test-payment-method-instructions]',
             'order_details_in_account' => '[data-test-show-order-in-account]',
-            'payment_method_page' => '[data-test-payment-method-page]',
+            'payment_method_page' => '[data-test-button="payment-method-page"]',
             'thank_you' => '[data-test-thank-you]',
         ]);
     }
