@@ -10,7 +10,7 @@ Feature: Registering a new account after checkout
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @no-api @todo-ui
+    @no-api @ui @javascript
     Scenario: Displaying thank you page after registration
         Given on this channel account verification is required
         And I have product "PHP T-Shirt" in the cart
@@ -23,7 +23,7 @@ Feature: Registering a new account after checkout
         And I register this account
         Then I should be on registration thank you page
 
-    @no-api @todo-ui
+    @no-api @ui @javascript
     Scenario: Registering a new account after checkout when channel has enabled registration verification
         Given on this channel account verification is required
         And I have product "PHP T-Shirt" in the cart
@@ -37,7 +37,7 @@ Feature: Registering a new account after checkout
         And I verify my account using link sent to "john@example.com"
         Then I should be able to log in as "john@example.com" with "sylius" password
 
-    @no-api @todo-ui
+    @no-api @ui @javascript
     Scenario: Registering a new account after checkout when channel has disabled registration verification
         Given on this channel account verification is not required
         And I have product "PHP T-Shirt" in the cart
