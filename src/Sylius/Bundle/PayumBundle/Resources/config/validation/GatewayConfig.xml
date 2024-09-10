@@ -81,9 +81,7 @@
                         </constraint>
                     </value>
                 </option>
-                <option name="allowExtraFields">
-                    <value>true</value>
-                </option>
+                <option name="allowExtraFields">true</option>
             </constraint>
         </property>
     </class>
