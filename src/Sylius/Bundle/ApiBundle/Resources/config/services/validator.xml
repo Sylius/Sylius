@@ -249,12 +249,12 @@
         </service>
 
         <service
-            id="sylius_api.payment_method_configuration_groups_generator"
-            class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator"
-            decorates="sylius.validator.gateway_config_groups_generator"
+            id="sylius_api.validator.payment_method_groups_generator"
+            class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGenerator"
+            decorates="sylius.validator.payment_method_groups_generator"
         >
-            <argument>%sylius.form.type.gateway_config.validation_groups%</argument>
-            <argument>%sylius.gateway_config.validation_groups%</argument>
+            <argument>%sylius.form.type.payment_method.validation_groups%</argument>
+            <argument type="service" id="sylius.validator.gateway_config_groups_generator" />
             <tag name="api_platform.validation_groups_generator" />
         </service>
 

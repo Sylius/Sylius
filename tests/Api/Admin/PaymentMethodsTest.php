@@ -68,6 +68,47 @@ final class PaymentMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_creates_a_payment_method(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+        ]);
+
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request('POST', '/api/v2/admin/payment-methods', [], [], $header, json_encode([
+            'code' => 'test',
+            'name' => 'Test',
+            'description' => 'Test',
+            'translations' => [
+                'en_US' => [
+                    'name' => 'Test',
+                    'description' => 'Test',
+                    'instructions' => 'Testing instructions',
+                ],
+            ],
+            'gatewayConfig' => [
+                'factoryName' => 'paypal_express_checkout',
+                'gatewayName' => 'paypal_express_checkout',
+                'config' => [
+                    'username' => 'test',
+                    'password' => 'test',
+                    'signature' => 'test',
+                    'sandbox' => true,
+                ],
+            ],
+            'enabled' => true,
+        ]));
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/payment_method/create_payment_method_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
     public function it_removes_a_payment_method(): void
     {
         $this->setUpAdminContext();
@@ -84,5 +125,91 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $this->requestDelete(uri: '/api/v2/admin/payment-methods/' . $paymentMethod->getCode());
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
+    public function it_updates_a_payment_method(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $fixtures['paypal_payment_method'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/payment-methods/%s', $paymentMethod->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        '@id' => sprintf('/api/v2/admin/payment-methods/%s/translations/en_US', $paymentMethod->getCode()),
+                        'name' => 'Different name',
+                        'description' => 'Different description',
+                        'instructions' => 'Different instructions',
+                    ],
+                ],
+                'position' => 1,
+                'enabled' => false,
+                'channels' => [
+                    sprintf('/api/v2/admin/channels/%s', $fixtures['channel_mobile']->getCode()),
+                ],
+                'gatewayConfig' => [
+                    '@id' => sprintf('/api/v2/admin/gateway-configs/%s', $paymentMethod->getGatewayConfig()->getId()),
+                    'config' => [
+                        'username' => 'differentTest',
+                        'password' => 'differentTest',
+                        'signature' => 'differentTest',
+                        'sandbox' => false,
+                    ],
+                ],
+            ]),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/payment_method/update_payment_method_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_a_payment_method_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $fixtures['paypal_payment_method'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/payment-methods/%s', $paymentMethod->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Different name',
+                        'description' => 'Different description',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/payment_method/put_payment_method_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
     }
 }
