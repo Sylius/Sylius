@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\DataTransformer;
 
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
