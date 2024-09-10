@@ -181,14 +181,14 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
             ->during(
                 '__invoke',
                 [new RegisterShopUser(
-                channelCode: 'CHANNEL_CODE',
-                localeCode: 'en_US',
-                firstName: 'Will',
-                lastName: 'Smith',
-                email: 'WILL.SMITH@example.com',
-                password: 'iamrobot',
-                subscribedToNewsletter: true,
-            )],
+                    channelCode: 'CHANNEL_CODE',
+                    localeCode: 'en_US',
+                    firstName: 'Will',
+                    lastName: 'Smith',
+                    email: 'WILL.SMITH@example.com',
+                    password: 'iamrobot',
+                    subscribedToNewsletter: true,
+                )],
             )
         ;
     }
