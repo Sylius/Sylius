@@ -1,0 +1,5 @@
+{% for payment in hookable_metadata.context.order.payments %}
+    <div>
+        {% hook 'list' with { payment } %}
+    </div>
+{% endfor %}

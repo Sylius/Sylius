@@ -1,0 +1,5 @@
+{% set method = hookable_metadata.context.shipment.method %}
+
+<div {{ sylius_test_html_attribute('shipping-method', method.code) }}>
+    {{ method.name }}
+</div>

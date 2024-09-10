@@ -88,11 +88,11 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
     public function getPaymentMethods(): array
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-payment-method-label]');
+        $inputs = $this->getDocument()->findAll('css', '[data-test-payment-method-select]');
 
         $paymentMethods = [];
         foreach ($inputs as $input) {
-            $paymentMethods[] = trim($input->getText());
+            $paymentMethods[] = trim($input->getParent()->getText());
         }
 
         return $paymentMethods;

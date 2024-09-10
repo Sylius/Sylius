@@ -1,0 +1,7 @@
+{% embed '@SyliusShop/shared/accordion/accordion_item_content.html.twig' with { accordion_item_id: 'reviews' } %}
+    {% block accordion_item_content %}
+        <div {{ sylius_test_html_attribute('product-reviews') }}>
+            {% hook 'content' %}
+        </div>
+    {% endblock %}
+{% endembed %}

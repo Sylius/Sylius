@@ -1,0 +1,13 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.write_your_own_review'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% hook 'sylius.shop.product_review.create' with { form, product_review } %}
+        </div>
+    </div>
+{% endblock %}

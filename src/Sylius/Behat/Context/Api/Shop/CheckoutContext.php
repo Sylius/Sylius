@@ -1065,6 +1065,22 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then /^I should(?:| also) be notified that the "([^"]+)" in (shipping|billing) details is required$/
+     */
+    public function iShouldBeNotifiedThatTheInShippingDetailsIsRequired(string $element, string $type): void
+    {
+        /** @var array|null $violations */
+        $violations = $this->responseChecker->getResponseContent($this->client->getLastResponse())['violations'];
+        $type .= 'Address';
+
+        $violation = $this->getViolation(
+            $violations,
+            $type . '.' . StringInflector::nameToCamelCase($element),
+        );
+        Assert::same($violation['message'], sprintf('Please enter %s.', $element));
+    }
+
+    /**
      * @Then /^I should be informed that (this product) has been disabled$/
      * @Then /^I should be informed that (product "[^"]+") is disabled$/
      */

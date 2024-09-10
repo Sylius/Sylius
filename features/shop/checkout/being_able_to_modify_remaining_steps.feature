@@ -13,7 +13,7 @@ Feature: Changing checkout steps
         And the store allows paying "PayPal Express Checkout"
         And I am a logged in customer
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Changing address of my order
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -22,7 +22,7 @@ Feature: Changing checkout steps
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Addressing my order after selecting payment method
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -32,7 +32,7 @@ Feature: Changing checkout steps
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Addressing my order after selecting shipping method
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -42,7 +42,7 @@ Feature: Changing checkout steps
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Changing shipping method of my order
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -52,7 +52,7 @@ Feature: Changing checkout steps
         And I complete the shipping step
         Then I should be on the checkout payment step
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Selecting shipping method after selecting payment method
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -62,7 +62,7 @@ Feature: Changing checkout steps
         And I complete the shipping step
         Then I should be on the checkout payment step
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Selecting payment method after complete checkout
         Given I had product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

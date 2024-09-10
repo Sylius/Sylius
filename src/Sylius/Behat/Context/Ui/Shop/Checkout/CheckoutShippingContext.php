@@ -229,6 +229,9 @@ final readonly class CheckoutShippingContext implements Context
 
         try {
             $this->selectShippingPage->nextStep();
+            if ($this->selectShippingPage->isOpen()) {
+                return;
+            }
         } catch (ElementNotFoundException) {
             return;
         }

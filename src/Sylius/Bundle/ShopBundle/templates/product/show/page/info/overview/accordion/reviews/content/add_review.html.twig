@@ -1,0 +1,5 @@
+{% set product = hookable_metadata.context.product %}
+
+<a href="{{ path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="btn btn-primary">
+    <div>{{ 'sylius.ui.add_your_review'|trans }}</div>
+</a>

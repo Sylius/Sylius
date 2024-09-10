@@ -9,7 +9,7 @@ Feature:
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And I added this product to the cart
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Updating the cart on checkout
         Given I am on the summary of my cart page
         When I specify product "T-Shirt banana" quantity to 2

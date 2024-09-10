@@ -1,0 +1,13 @@
+{% extends '@SyliusShop/account/address_book/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.address_book'|trans }} | {{ parent() }}{% endblock %}
+
+{% block account_header %}
+    {% set title = 'sylius.ui.address_book'|trans %}
+    {% set description = 'sylius.ui.manage_your_saved_addresses'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block account_content %}
+    {% hook 'sylius_shop.account.address_book.index' with { addresses, default_address: sylius.customer.defaultAddress|default(null) } %}
+{% endblock %}
