@@ -44,7 +44,7 @@ final class PaymentsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $this->placeOrder('nAWw2jewpA');
+        $this->placeOrder();
 
         $this->requestGet(uri: '/api/v2/admin/payments');
 
@@ -85,9 +85,9 @@ final class PaymentsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $this->placeOrder('nAWw2jewpA');
+        $this->placeOrder('token');
 
-        $this->requestGet(uri: '/api/v2/admin/orders/nAWw2jewpA');
+        $this->requestGet(uri: '/api/v2/admin/orders/token');
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->requestGet(uri: '/api/v2/admin/payments/' . $orderResponse['payments'][0]['id']);
@@ -107,7 +107,7 @@ final class PaymentsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $order = $this->placeOrder('nAWw2jewpA');
+        $order = $this->placeOrder('token');
 
         $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
 
@@ -204,7 +204,7 @@ final class PaymentsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $order = $this->placeOrder('nAWw2jewpA');
+        $order = $this->placeOrder('token');
         $this->payOrder($order);
 
         $this->requestPatch(sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));

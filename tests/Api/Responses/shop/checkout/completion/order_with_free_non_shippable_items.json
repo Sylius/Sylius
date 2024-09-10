@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
     "customer": {
@@ -43,11 +43,11 @@
     "checkoutState": "completed",
     "paymentState": "paid",
     "shippingState": "shipped",
-    "tokenValue": "nAWw2jewpA",
+    "tokenValue": "token",
     "number": "000000001",
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_NFT_FREE",
             "productName": "Mug",

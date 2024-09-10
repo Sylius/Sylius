@@ -76,6 +76,22 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
         ;
     }
 
+    public function findOneByCustomerAndOrderToken(mixed $id, CustomerInterface $customer, string $token): ?ShipmentInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'ord')
+            ->innerJoin('ord.customer', 'customer')
+            ->andWhere('o.id = :id')
+            ->andWhere('customer = :customer')
+            ->andWhere('ord.tokenValue = :token')
+            ->setParameter('id', $id)
+            ->setParameter('customer', $customer)
+            ->setParameter('token', $token)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')

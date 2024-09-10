@@ -24,15 +24,8 @@ final class PaymentsTest extends JsonApiTestCase
     {
         $this->setUpShopUserContext();
         $this->setUpDefaultGetHeaders();
-
         $this->setUpOrderPlacer();
 
-        parent::setUp();
-    }
-
-    /** @test */
-    public function it_gets_payment_from_placed_order(): void
-    {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel/channel.yaml',
@@ -42,10 +35,37 @@ final class PaymentsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $order = $this->placeOrder('token');
+        parent::setUp();
+    }
 
-        $this->requestGet(sprintf('/api/v2/shop/payments/%s', $order->getLastPayment()->getId()));
+    /** @test */
+    public function it_gets_payment_from_placed_order(): void
+    {
+        $order = $this->placeOrder();
+
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/payments/%s', $order->getLastPayment()->getId()));
 
         $this->assertResponseSuccessful('shop/payment/get_payment');
+    }
+
+    /** @test */
+    public function it_does_not_get_another_user_payment(): void
+    {
+        $order = $this->placeOrder(email: 'another_user@example.com');
+
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/payments/%s', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseNotFound();
+    }
+
+    /** @test */
+    public function it_does_not_get_the_shop_user_payment_when_not_authenticated(): void
+    {
+        $order = $this->placeOrder();
+        $this->disableShopUserContext();
+
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/payments/%s', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseNotFound();
     }
 }

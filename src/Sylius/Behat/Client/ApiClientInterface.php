@@ -94,4 +94,10 @@ interface ApiClientInterface
     public function getLastResponse(): Response;
 
     public function getToken(): ?string;
+
+    /**
+     * @param array<string, int|string|bool> $queryParameters
+     * @param array<string, string> $headers
+     */
+    public function requestGet(string $uri, array $queryParameters = [], array $headers = []): Response;
 }

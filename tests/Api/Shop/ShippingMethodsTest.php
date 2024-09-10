@@ -67,7 +67,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $this->getCartAndPutItemForCustomer($tokenValue, 'guest@example.com');
 
         $this->requestGet(sprintf('/api/v2/shop/orders/%s', $tokenValue));
@@ -93,7 +93,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'shipping_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $this->getCartAndPutItemForCustomer($tokenValue, 'oliver@doe.com');
 
         /** @var ShipmentRepositoryInterface $shipmentRepository */
@@ -117,7 +117,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'shipping_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
         $this->getCartAndPutItemForCustomer($tokenValue, 'oliver@doe.com');
 
         /** @var ShipmentRepositoryInterface $shipmentRepository */
@@ -145,7 +145,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'shipping_method.yaml',
         ]);
 
-        $this->requestGet('/api/v2/shop/orders/nAWw2jewpA/shipments/-10/methods');
+        $this->requestGet('/api/v2/shop/orders/token/shipments/-10/methods');
 
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_empty_order_shipping_methods_response');
     }

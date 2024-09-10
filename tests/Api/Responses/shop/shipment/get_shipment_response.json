@@ -1,8 +1,8 @@
 {
     "@context": "\/api\/v2\/contexts\/Shipment",
-    "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+    "@id": "\/api\/v2\/shop\/orders\/token\/shipments\/@integer@",
     "@type": "Shipment",
-    "order": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "order": "\/api\/v2\/shop\/orders\/token",
     "id": "@integer@",
     "state": "ready",
     "method": "\/api\/v2\/shop\/shipping-methods\/UPS",

@@ -15,7 +15,11 @@ Feature: Order is always placed in a base currency of a channel
         And the store has a product "Angel T-Shirt" priced at "$20.00"
         And I am a logged in customer
 
+<<<<<<< HEAD
     @no-api @ui @javascript
+=======
+    @no-api @ui
+>>>>>>> 2.0
     Scenario: Placing an order with other than base display currency
         Given I changed my currency to "GBP"
         And I had product "Angel T-Shirt" in the cart

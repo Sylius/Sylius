@@ -501,11 +501,11 @@ final readonly class AccountContext implements Context
     }
 
     /**
-     * @Then I should see its payment status as :paymentStatus
+     * @Then I should see its payment state as :paymentState
      */
-    public function shouldSeePaymentStatus(string $paymentStatus): void
+    public function shouldSeePaymentStatus(string $paymentState): void
     {
-        Assert::same($this->orderShowPage->getPaymentStatus(), $paymentStatus);
+        Assert::same($this->orderShowPage->getPaymentState(), $paymentState);
     }
 
     /**
@@ -517,15 +517,15 @@ final readonly class AccountContext implements Context
     }
 
     /**
-     * @Then the order's shipment status should be :orderShipmentStatus
+     * @Then the order's shipment state should be :orderShipmentStatus
      */
-    public function theOrderShipmentStatusShouldBe(string $orderShipmentStatus): void
+    public function theOrderShipmentStateShouldBe(string $orderShipmentStatus): void
     {
-        Assert::same($this->orderShowPage->getOrderShipmentStatus(), $orderShipmentStatus);
+        Assert::same($this->orderShowPage->getOrderShipmentState(), $orderShipmentStatus);
     }
 
     /**
-     * @Then the shipment status should be :shipmentStatus
+     * @Then the shipment state should be :shipmentStatus
      */
     public function theShipmentStatusShouldBe(string $shipmentStatus): void
     {

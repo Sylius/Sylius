@@ -24,8 +24,6 @@ final class OrdersTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
 
-    private const TEST_TOKEN_VALUE = 'nAWw2jewpA';
-
     protected function setUp(): void
     {
         $this->setUpOrderPlacer();
@@ -198,7 +196,7 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
 
         $this->placeOrder($tokenValue);
 
@@ -219,7 +217,7 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
 
         $this->placeOrder($tokenValue);
 
@@ -246,7 +244,7 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
 
         $this->placeOrder($tokenValue);
         $this->cancelOrder($tokenValue);
@@ -274,7 +272,7 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
 
         $this->placeOrder($tokenValue);
 
@@ -295,11 +293,9 @@ final class OrdersTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
+        $this->placeOrder();
 
-        $this->placeOrder($tokenValue);
-
-        $this->requestGet(uri: sprintf('/api/v2/admin/orders/%s/shipments', $tokenValue));
+        $this->requestGet('/api/v2/admin/orders/token/shipments');
 
         $this->assertResponseSuccessful('admin/order/get_shipments_of_order');
     }
@@ -317,9 +313,9 @@ final class OrdersTest extends JsonApiTestCase
             'cart/promotion.yaml',
         ]);
 
-        $this->placeOrder(self::TEST_TOKEN_VALUE);
+        $this->placeOrder();
 
-        $this->requestGet(uri: sprintf('/api/v2/admin/orders/%s/adjustments', self::TEST_TOKEN_VALUE));
+        $this->requestGet('/api/v2/admin/orders/token/adjustments');
 
         $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order');
     }
@@ -337,10 +333,10 @@ final class OrdersTest extends JsonApiTestCase
             'cart/promotion.yaml',
         ]);
 
-        $this->placeOrder(self::TEST_TOKEN_VALUE);
+        $this->placeOrder();
 
         $this->requestGet(
-            uri: sprintf('/api/v2/admin/orders/%s/adjustments', self::TEST_TOKEN_VALUE),
+            uri: '/api/v2/admin/orders/token/adjustments',
             queryParameters: ['type' => 'order_promotion'],
         );
 

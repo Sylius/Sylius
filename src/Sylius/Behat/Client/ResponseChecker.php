@@ -108,9 +108,13 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $response->getStatusCode() === Response::HTTP_OK;
     }
 
-    public function hasValue(Response $response, string $key, bool|int|string|null $value): bool
+    public function hasValue(Response $response, string $key, bool|int|string|null $value, bool $isCaseSensitive = true): bool
     {
-        return $this->getResponseContentValue($response, $key) === $value;
+        if ($isCaseSensitive) {
+            return $this->getResponseContentValue($response, $key) === $value;
+        }
+
+        return strcasecmp((string) $this->getResponseContentValue($response, $key), (string) $value) === 0;
     }
 
     public function hasValueInCollection(Response $response, string $key, bool|int|string $value): bool

@@ -26,7 +26,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = 'token';
 
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
@@ -45,7 +45,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
         $commandBus->dispatch($addItemToCartCommand);
 
-        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/token', server: self::CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(

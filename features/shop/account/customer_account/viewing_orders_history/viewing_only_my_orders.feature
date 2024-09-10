@@ -25,7 +25,13 @@ Feature: Viewing orders on my account page
         Then I should see a single order in the list
         And this order should have "#00000666" number
 
+<<<<<<< HEAD
     @api @ui
     Scenario: Unauthenticated user cannot view orders
         When I try to browse my orders
+=======
+    @api @no-ui
+    Scenario: Viewing orders
+        When I browse my orders
+>>>>>>> 2.0
         Then I should be denied an access to order list
