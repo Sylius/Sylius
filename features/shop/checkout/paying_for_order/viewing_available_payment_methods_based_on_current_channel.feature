@@ -30,7 +30,7 @@ Feature: Viewing available payment methods based on current channel
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
-    @api @ui
+    @ui @api
     Scenario: Seeing shipping methods that are available in another channel as an logged in customer
         Given I am a logged in customer
         And I am in the "Poland" channel

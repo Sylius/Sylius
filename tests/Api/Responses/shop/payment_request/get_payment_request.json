@@ -1,0 +1,23 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentRequest",
+    "@id": "\/api\/v2\/shop\/payment-requests\/@string@",
+    "@type": "PaymentRequest",
+    "hash": "@string@",
+    "state": "processing",
+    "action": "capture",
+    "payload": {
+        "http_request": {
+            "query": {
+                "token": "EC-2d9EV13959UR209410U",
+                "PayerID": "UX8WBNYWGBVMG"
+            }
+        }
+    },
+    "responseData": {
+        "after_url": "https:\/\/myshop.tld\/after-path"
+    },
+    "payment": "\/api\/v2\/shop\/payments\/@integer@",
+    "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY",
+    "createdAt": @datetime@,
+    "updatedAt": @datetime@
+}

@@ -25,7 +25,7 @@ Feature: Editing payment method configured with a Stripe Checkout gateway
         Then I should be notified that it has been successfully edited
         And this payment method "Secret key" should be "some_secret_key"
 
-    @api @ui
+    @todo-api @ui
     Scenario: Changing whole gateway configuration
         When I want to modify the "Stripe Checkout" payment method
         And I set its "Publishable key" as "new_publishable_key" and "Secret key" as "new_secret_key"

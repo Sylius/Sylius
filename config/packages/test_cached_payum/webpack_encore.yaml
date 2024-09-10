@@ -1,0 +1,2 @@
+imports:
+    - { resource: "../test_cached/webpack_encore.yaml" }
