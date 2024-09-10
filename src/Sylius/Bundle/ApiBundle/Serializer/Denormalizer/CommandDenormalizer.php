@@ -17,14 +17,14 @@ use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
-use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class CommandDenormalizer implements DenormalizerInterface
 {
     public function __construct(
         private DenormalizerInterface $itemNormalizer,
-        private AdvancedNameConverterInterface $nameConverter,
+        private NameConverterInterface $nameConverter,
     ) {
     }
 
