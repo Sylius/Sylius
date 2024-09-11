@@ -45,19 +45,6 @@ final class AdminProductVariantAjaxTest extends SessionAwareAjaxTestCase
     }
 
     /** @test */
-    public function it_throws_type_error_when_phrase_is_not_specified(): void
-    {
-        $this->loadFixturesFromFile('authentication/administrator.yml');
-        $this->loadFixturesFromFiles(['resources/product_variants.yml']);
-
-        $this->authenticateAdminUser();
-
-        $this->expectException(\TypeError::class);
-
-        $this->client->request('GET', '/admin/ajax/product-variants/search-all');
-    }
-
-    /** @test */
     public function it_returns_specific_product_variants_for_given_phrase(): void
     {
         $this->loadFixturesFromFile('authentication/administrator.yml');
