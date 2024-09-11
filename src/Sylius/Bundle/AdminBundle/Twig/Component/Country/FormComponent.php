@@ -16,7 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Country;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 #[AsLiveComponent]
 class FormComponent
@@ -25,5 +24,4 @@ class FormComponent
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
-    use LiveCollectionTrait;
 }

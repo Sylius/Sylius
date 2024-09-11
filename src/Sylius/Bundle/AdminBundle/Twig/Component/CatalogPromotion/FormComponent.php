@@ -22,8 +22,8 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 class FormComponent
 {
     /** @use ResourceFormComponentTrait<CatalogPromotionInterface> */
-    use ResourceFormComponentTrait {
+    use ResourceFormComponentTrait, TypedLiveCollectionTrait {
+        TypedLiveCollectionTrait::addCollectionItem insteadof ResourceFormComponentTrait;
         initialize as public __construct;
     }
-    use TypedLiveCollectionTrait;
 }

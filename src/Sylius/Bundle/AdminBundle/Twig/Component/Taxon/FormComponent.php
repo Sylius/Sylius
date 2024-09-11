@@ -16,17 +16,15 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Taxon;
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 #[AsLiveComponent]
 class FormComponent
 {
-    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<TaxonInterface> */
     use ResourceFormComponentTrait;
 
