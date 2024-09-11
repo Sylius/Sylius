@@ -3,30 +3,51 @@
 {% set order_requires_shipping = sylius_is_shipping_required(order) %}
 {% set order_requires_payment = sylius_is_payment_required(order) %}
 
-<div class="steps mt-4 mb-5">
-    <div class="steps-item{{ active_step == 'address' ? ' active' }}">
-        <a href="{{ path('sylius_shop_checkout_address') }}" {{ sylius_test_html_attribute('step-address') }}>
-            {{ 'sylius.ui.address'|trans }}
-        </a>
-    </div>
+{% set steps = [
+    {
+        'name': 'address',
+        'route': 'sylius_shop_checkout_address',
+        'label': 'sylius.ui.address'|trans,
+        'required': true,
+        'state': active_step == 'address' ? 'active' : 'completed',
+        'test_attribute': 'step-address',
+    },
+    {
+        'name': 'select_shipping',
+        'route': 'sylius_shop_checkout_select_shipping',
+        'label': 'sylius.ui.shipping'|trans,
+        'required': order_requires_shipping,
+        'state': active_step == 'select_shipping' ? 'active' : (active_step == 'address' ? 'disabled' : 'completed'),
+        'test_attribute': 'step-shipping',
+    },
+    {
+        'name': 'select_payment',
+        'route': 'sylius_shop_checkout_select_payment',
+        'label': 'sylius.ui.payment'|trans,
+        'required': order_requires_payment,
+        'state': active_step == 'select_payment' ? 'active' : (active_step == 'complete' ? 'completed' : 'disabled'),
+        'test_attribute': 'step-payment',
+    },
+    {
+        'name': 'complete',
+        'route': 'sylius_shop_checkout_complete',
+        'label': 'sylius.ui.complete'|trans,
+        'required': true,
+        'state': active_step == 'complete' ? 'active' : 'disabled',
+        'test_attribute': 'step-complete',
+    },
+] %}
 
-    {% if order_requires_shipping %}
-        <div class="steps-item{{ active_step == 'select_shipping' ? ' active' }}">
-            <a href="{{ path('sylius_shop_checkout_select_shipping') }}" {{ sylius_test_html_attribute('step-shipping') }}>
-                {{ 'sylius.ui.shipping'|trans }}
-            </a>
+<div class="steps mb-5">
+    {% for step in steps|filter(step => step.required) %}
+        <div class="steps-item steps-item-{{ step.state }}" {{ sylius_test_html_attribute(step.test_attribute) }}>
+            {% if step.state != 'disabled' %}
+                <a href="{{ path(step.route) }}" >
+                    {{ step.label|trans }}
+                </a>
+            {% else %}
+                {{ step.label|trans }}
+            {% endif %}
         </div>
-    {% endif %}
-
-    {% if order_requires_payment %}
-        <div class="steps-item{{ active_step == 'select_payment' ? ' active' }}">
-            <a href="{{ path('sylius_shop_checkout_select_payment') }}" {{ sylius_test_html_attribute('step-payment') }}>
-                {{ 'sylius.ui.payment'|trans }}
-            </a>
-        </div>
-    {% endif %}
-
-    <div class="steps-item{{ active_step == 'complete' ? ' active' }}">
-        {{ 'sylius.ui.complete'|trans }}
-    </div>
+    {% endfor %}
 </div>
