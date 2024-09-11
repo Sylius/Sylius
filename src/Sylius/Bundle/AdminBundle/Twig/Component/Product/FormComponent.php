@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
+use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
@@ -20,7 +21,6 @@ use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -29,7 +29,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
@@ -41,12 +40,9 @@ class FormComponent
     public const AUTOCOMPLETE_CLEAR_REQUESTED_EVENT = 'sylius_admin.product_attribute_autocomplete.clear_requested';
 
     use ComponentToolsTrait;
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
     use LiveCollectionTrait;
-
-    #[LiveProp(dehydrateWith: 'dehydrateFormData', fieldName: 'formData')]
-    public ?Product $resource = null;
+    /** @use ResourceFormComponentTrait<ProductInterface> */
+    use ResourceFormComponentTrait;
 
     /** @var array<string> */
     #[LiveProp(writable: true, hydrateWith: 'hydrateAttributesToBeAdded', dehydrateWith: 'dehydrateAttributesToBeAdded')]
@@ -57,28 +53,20 @@ class FormComponent
     public bool $isSimple = false;
 
     /**
-     * @param class-string $formClass
+     * @param RepositoryInterface<ProductInterface> $productRepository
      * @param RepositoryInterface<ProductAttributeInterface> $productAttributeRepository
      * @param ProductFactoryInterface<ProductInterface> $productFactory
      */
     public function __construct(
-        private readonly FormFactoryInterface $formFactory,
-        private readonly string $formClass,
+        RepositoryInterface $productRepository,
+        FormFactoryInterface $formFactory,
+        string $resourceClass,
+        string $formClass,
         private readonly SlugGeneratorInterface $slugGenerator,
         private readonly RepositoryInterface $productAttributeRepository,
         private readonly ProductFactoryInterface $productFactory,
     ) {
-    }
-
-    protected function instantiateForm(): FormInterface
-    {
-        if (null === $this->resource) {
-            /** @var Product $product */
-            $product = $this->isSimple ? $this->productFactory->createWithVariant() : $this->productFactory->createNew();
-            $this->resource = $product;
-        }
-
-        return $this->formFactory->create($this->formClass, $this->resource);
+        $this->initialize($productRepository, $formFactory, $resourceClass, $formClass);
     }
 
     /**
@@ -182,12 +170,18 @@ class FormComponent
         return implode(',', $value);
     }
 
-    public function dehydrateFormData(): ?int
+    protected function instantiateForm(): FormInterface
     {
-        return $this->resource?->getId();
+        if (null === $this->resource) {
+            /** @var Product $product */
+            $product = $this->isSimple ? $this->productFactory->createWithVariant() : $this->productFactory->createNew();
+            $this->resource = $product;
+        }
+
+        return $this->formFactory->create($this->formClass, $this->resource);
     }
 
-    private function getDataModelValue(): string
+    protected function getDataModelValue(): string
     {
         return 'norender|*';
     }

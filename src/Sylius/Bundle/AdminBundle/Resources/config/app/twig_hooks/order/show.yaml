@@ -153,9 +153,9 @@ twig_hooks:
             ship:
                 component: 'sylius_admin:shipment:ship_form'
                 props:
-                    shipment: '@=_context.shipment'
+                    resource: '@=_context.shipment'
                     path: 'sylius_admin_order_shipment_ship'
-                    pathParameters: 
+                    pathParameters:
                         id: '@=_context.shipment.getId()'
                         orderId: '@=_context.resource.getId()'
             resend_confirmation:

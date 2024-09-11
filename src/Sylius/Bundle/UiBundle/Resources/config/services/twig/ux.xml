@@ -12,6 +12,15 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service
+            id="sylius_ui.twig.component.resource_form"
+            class="ResourceFormComponentTrait"
+            abstract="true"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <service
             id="sylius_ui.twig.ux.component_template_finder"
             class="Sylius\Bundle\UiBundle\Twig\Ux\ComponentTemplateFinder"
             decorates="ux.twig_component.component_template_finder"
