@@ -21,6 +21,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 /** @template T of ResourceInterface */
 trait ResourceFormComponentTrait
@@ -28,6 +29,7 @@ trait ResourceFormComponentTrait
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
     use ComponentWithFormTrait;
+    use LiveCollectionTrait;
 
     /** @var T|null */
     #[LiveProp(hydrateWith: 'hydrateResource', dehydrateWith: 'dehydrateResource')]

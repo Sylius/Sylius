@@ -18,13 +18,10 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
-/** @extends ResourceFormComponentTrait<ZoneInterface> */
 #[AsLiveComponent]
 class FormComponent
 {
-    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<ZoneInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;

@@ -29,7 +29,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
@@ -40,7 +39,6 @@ class FormComponent
     public const AUTOCOMPLETE_CLEAR_REQUESTED_EVENT = 'sylius_admin.product_attribute_autocomplete.clear_requested';
 
     use ComponentToolsTrait;
-    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait;
 

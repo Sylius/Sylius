@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Twig\Component;
 
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
 #[AsLiveComponent]
 class ResourceFormComponent
 {
+    /** @use ResourceFormComponentTrait<ResourceInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }

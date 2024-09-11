@@ -23,7 +23,6 @@ use Symfony\UX\LiveComponent\LiveCollectionTrait;
 #[AsLiveComponent]
 class FormComponent
 {
-    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<ProductOptionInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;
