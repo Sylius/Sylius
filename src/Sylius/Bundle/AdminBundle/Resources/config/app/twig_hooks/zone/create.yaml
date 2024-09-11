@@ -4,7 +4,7 @@ twig_hooks:
             form:
                 component: 'sylius_admin:zone:form'
                 props:
-                    zone: '@=_context.resource'
+                    resource: '@=_context.resource'
                     type: '@=_context.resource.getType()'
                     form: '@=_context.form'
 
