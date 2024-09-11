@@ -56,13 +56,13 @@ final class LocaleUsageCheckerSpec extends ObjectBehavior
         $firstResourceMetadata->getParameters()->willReturn([
             'translation' => [
                 'classes' => [
-                    'interface' => 'Sylius\Component\Locale\Model\LocaleInterface',
+                    'model' => 'Sylius\Component\Locale\Model\Locale',
                 ],
             ],
         ]);
         $secondResourceMetadata->getParameters()->willReturn([]);
 
-        $entityManager->getRepository('Sylius\Component\Locale\Model\LocaleInterface')->willReturn($localeRepository);
+        $entityManager->getRepository('Sylius\Component\Locale\Model\Locale')->willReturn($localeRepository);
 
         $this->isUsed('en_US')->shouldReturn(true);
     }
@@ -83,13 +83,13 @@ final class LocaleUsageCheckerSpec extends ObjectBehavior
         $firstResourceMetadata->getParameters()->willReturn([
             'translation' => [
                 'classes' => [
-                    'interface' => 'Sylius\Component\Locale\Model\LocaleInterface',
+                    'model' => 'Sylius\Component\Locale\Model\Locale',
                 ],
             ],
         ]);
         $secondResourceMetadata->getParameters()->willReturn([]);
 
-        $entityManager->getRepository('Sylius\Component\Locale\Model\LocaleInterface')->willReturn($localeRepository);
+        $entityManager->getRepository('Sylius\Component\Locale\Model\Locale')->willReturn($localeRepository);
 
         $this->isUsed('en_US')->shouldReturn(false);
     }
