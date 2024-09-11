@@ -11,18 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
+namespace Sylius\Bundle\UiBundle\Twig\Component;
 
-use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 #[AsLiveComponent]
-class GenerateProductVariantsFormComponent
+class ResourceFormComponent
 {
-    use LiveCollectionTrait;
-    /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
