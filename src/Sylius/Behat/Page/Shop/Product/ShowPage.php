@@ -327,19 +327,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
         return $this->getElement('details')->getText();
     }
 
-    /** @param array<string, string> $parameters */
-    public function getValidationMessage(string $element, array $parameters = []): string
-    {
-        $foundElement = $this->getFieldElement($element, $parameters);
-
-        $validationMessage = $foundElement->find('css', '.invalid-feedback');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
-        }
-
-        return $validationMessage->getText();
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

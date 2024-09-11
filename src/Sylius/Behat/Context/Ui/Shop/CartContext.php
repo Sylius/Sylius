@@ -25,8 +25,8 @@ use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SessionManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 interface SummaryPageInterface extends ShopPageInterface
 {
@@ -73,9 +74,9 @@ interface SummaryPageInterface extends ShopPageInterface
 
     public function clearCart(): void;
 
-    public function updateCart(): void;
-
     public function checkout(): void;
 
     public function waitForRedirect(int $timeout): void;
+
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 }

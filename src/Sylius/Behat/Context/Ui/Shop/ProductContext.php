@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\LowestPriceInformationElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
@@ -572,7 +573,13 @@ final readonly class ProductContext implements Context
      */
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
-        Assert::notContains($this->showPage->getValidationMessage('quantity'), sprintf('%s does not have sufficient stock.', $product->getName()));
+        try {
+            $validationMessage = $this->showPage->getValidationMessage('quantity');
+        } catch (ElementNotFoundException $exception) {
+            $validationMessage = '';
+        }
+
+        Assert::notContains($validationMessage, sprintf('%s does not have sufficient stock.', $product->getName()));
     }
 
     /**
