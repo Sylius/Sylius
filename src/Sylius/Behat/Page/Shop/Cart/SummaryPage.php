@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop\Cart;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Shop\Page as ShopPage;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Core\Model\ProductInterface;
 
 class SummaryPage extends ShopPage implements SummaryPageInterface
 {
@@ -164,7 +164,6 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function hasItemWithInsufficientStock(string $productName): bool
     {
-        Assert::true(false);
         $product = $this->getElement('product_row', ['%name%' => $productName]);
 
         return str_contains($product->getText(), 'Insufficient stock');
@@ -197,12 +196,6 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
         $this->waitForComponentsUpdate();
     }
 
-    public function updateCart(): void
-    {
-        Assert::true(false);
-        $this->getElement('update_button')->click();
-    }
-
     public function checkout(): void
     {
         $this->getElement('checkout_button')->click();
@@ -211,6 +204,13 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
     public function waitForRedirect(int $timeout): void
     {
         $this->getDocument()->waitFor($timeout, fn () => $this->isOpen());
+    }
+
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
+    {
+        $message = sprintf('%s does not have sufficient stock.', $product->getName());
+
+        return $this->hasElement('validation_errors') && $this->getElement('validation_errors')->getText() === $message;
     }
 
     protected function getDefinedElements(): array
@@ -236,7 +236,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'item_unit_regular_price' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-unit-regular-price]',
             'items_total' => '[data-test-cart-items-total]',
             'no_taxes' => '[data-test-cart-no-tax]',
-//            'product_row' => '[data-test-cart-product-row="%name%"]',
+            'product_row' => '[data-test-cart-item-product-row="%name%"]',
             'product_total' => '[data-test-cart-item-product-row="%name%"] [data-test-cart-product-subtotal]',
             'promotion_coupon' => '[data-test-cart-promotion-coupon]',
             'promotion_total' => '[data-test-cart-promotion-total]',
@@ -245,7 +245,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'shipping_total' => '[data-test-cart-shipping-total]',
             'tax_excluded' => '[data-test-cart-tax-excluded]',
             'tax_included' => '[data-test-cart-tax-included]',
-//            'update_button' => '[data-test-cart-update-button]',
+            'validation_errors' => '[data-test-validation-error]',
         ]);
     }
 
