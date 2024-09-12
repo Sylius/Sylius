@@ -92,7 +92,8 @@
     "Symfony\\Bridge\\Twig\\ErrorRenderer\\TwigErrorRenderer",
     "Symfony\\Component\\ErrorHandler\\ErrorRenderer\\ErrorRendererInterface",
     "Symfony\\Component\\ErrorHandler\\Exception\\FlattenException",
-    "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface"
+    "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
+    "Symfony\\Contracts\\EventDispatcher\\Event"
   ],
   "php-core-extensions" : [
     "Core",
