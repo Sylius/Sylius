@@ -16,17 +16,16 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class PaymentRequestsTest extends JsonApiTestCase
 {
-    use ShopUserLoginTrait;
     use OrderPlacerTrait;
 
     protected function setUp(): void
     {
         $this->setUpOrderPlacer();
+        $this->setUpShopUserContext();
 
         parent::setUp();
     }
@@ -37,8 +36,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->setUpDefaultGetHeaders();
 
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/customer.yaml',
-            'channel.yaml',
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
             'payment_method.yaml',
             'payment_request/payment_request.yaml',
             'payment_request/order_with_customer.yaml',
@@ -58,9 +57,11 @@ final class PaymentRequestsTest extends JsonApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider createPaymentRequestProvider
      *
      * @param array<string> $fixturesPaths
+     *
      * @throws \JsonException
      */
     public function it_creates_a_payment_request(array $fixturesPaths, string $responsePath): void
@@ -75,14 +76,14 @@ final class PaymentRequestsTest extends JsonApiTestCase
             uri: '/api/v2/shop/payment-requests',
             server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
             content: json_encode([
-                'paymentId' => sprintf('/api/v2/shop/payments/%s', $payment->getId()),
+                'paymentId' => $payment->getId(),
                 'paymentMethodCode' => $payment->getMethod()->getCode(),
                 'action' => 'capture',
                 'payload' => [
                     'target_path' => 'https://myshop.tld/target-path',
-                    'after_path' => 'https://myshop.tld/after-path'
+                    'after_path' => 'https://myshop.tld/after-path',
                 ],
-            ], \JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -99,8 +100,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
         if ($environment === 'test_cached_payum') {
             yield [
                 [
-                    'authentication/customer.yaml',
-                    'channel.yaml',
+                    'authentication/shop_user.yaml',
+                    'channel/channel.yaml',
                     'cart.yaml',
                     'country.yaml',
                     'shipping_method.yaml',
@@ -114,8 +115,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
 
         yield [
             [
-                'authentication/customer.yaml',
-                'channel.yaml',
+                'authentication/shop_user.yaml',
+                'channel/channel.yaml',
                 'cart.yaml',
                 'country.yaml',
                 'shipping_method.yaml',
@@ -129,8 +130,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
     public function it_does_not_create_a_payment_request_without_required_data(): void
     {
         $this->loadFixturesFromFiles([
-            'authentication/customer.yaml',
-            'channel.yaml',
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -143,7 +144,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/shop/payment-requests',
             server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
-            content: json_encode([], \JSON_THROW_ON_ERROR)
+            content: json_encode([], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -155,9 +156,11 @@ final class PaymentRequestsTest extends JsonApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider updatePaymentRequestProvider
      *
      * @param array<string> $fixturesPaths
+     *
      * @throws \JsonException
      */
     public function it_updates_a_payment_request(array $fixturesPaths, string $responsePath): void
@@ -176,9 +179,9 @@ final class PaymentRequestsTest extends JsonApiTestCase
             content: json_encode([
                 'payload' => [
                     'target_path' => 'https://myshop.tld/new-target-path',
-                    'after_path' => 'https://myshop.tld/new-after-path'
+                    'after_path' => 'https://myshop.tld/new-after-path',
                 ],
-            ], \JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseSuccessful($responsePath);
@@ -191,8 +194,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
         if ($environment === 'test_cached_payum') {
             yield [
                 [
-                    'authentication/customer.yaml',
-                    'channel.yaml',
+                    'authentication/shop_user.yaml',
+                    'channel/channel.yaml',
                     'payment_method.yaml',
                     'payment_request/payment_request_payum.yaml',
                     'payment_request/order_with_customer.yaml',
@@ -205,8 +208,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
 
         yield [
             [
-                'authentication/customer.yaml',
-                'channel.yaml',
+                'authentication/shop_user.yaml',
+                'channel/channel.yaml',
                 'payment_method.yaml',
                 'payment_request/payment_request.yaml',
                 'payment_request/order_with_customer.yaml',
@@ -221,8 +224,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->setUpDefaultGetHeaders();
 
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/customer.yaml',
-            'channel.yaml',
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
             'payment_method.yaml',
             'payment_request/payment_request.yaml',
             'payment_request/order_with_customer.yaml',
@@ -238,9 +241,9 @@ final class PaymentRequestsTest extends JsonApiTestCase
             content: json_encode([
                 'payload' => [
                     'target_path' => 'https://myshop.tld/new-target-path',
-                    'after_path' => 'https://myshop.tld/new-after-path'
+                    'after_path' => 'https://myshop.tld/new-after-path',
                 ],
-            ], \JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
