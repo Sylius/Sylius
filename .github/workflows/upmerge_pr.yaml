@@ -46,6 +46,11 @@ jobs:
                     ref: ${{ matrix.target_branch }}
 
             -
+                name: Checkout temporary branch
+                run: |
+                    git checkout -b temp-upmerge-branch
+
+            -
                 name: Reset upmerge branch
                 run: |
                     git fetch origin ${{ matrix.base_branch }}:${{ matrix.base_branch }}
