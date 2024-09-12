@@ -33,7 +33,7 @@
         "symfony/framework-bundle": "^6.4.1 || ^7.0"
     },
     "conflict": {
-        "doctrine/orm": ">= 3.0.0",
+        "doctrine/orm": ">= 3.0.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",
