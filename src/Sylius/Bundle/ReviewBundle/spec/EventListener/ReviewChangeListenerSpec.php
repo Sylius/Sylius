@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PostRemoveEventArgs;
+use Doctrine\ORM\Event\PreRemoveEventArgs;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
@@ -49,7 +49,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         ReviewableInterface $reviewSubject,
         EntityManagerInterface $entityManager,
     ): void {
-        $event = new PostRemoveEventArgs($review->getWrappedObject(), $entityManager->getWrappedObject());
+        $event = new PreRemoveEventArgs($review->getWrappedObject(), $entityManager->getWrappedObject());
         $review->getReviewSubject()->willReturn($reviewSubject);
 
         $reviewSubject->removeReview($review)->shouldBeCalled();
