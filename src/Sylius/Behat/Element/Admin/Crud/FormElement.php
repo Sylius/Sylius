@@ -19,7 +19,6 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 class FormElement extends Element implements FormElementInterface
 {
-    private ?NodeElement $form = null;
 
     public function fillElement(string $value, string $element, array $parameters = []): void
     {
@@ -70,12 +69,10 @@ class FormElement extends Element implements FormElementInterface
 
     protected function waitForFormUpdate(): void
     {
-        if (null === $this->form) {
-            $this->form = $this->getElement('form');
-        }
+        $form = $this->getElement('form');
 
         usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $this->form->waitFor(1500, fn () => !$this->form->hasAttribute('busy'));
+        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }
 
     /**
