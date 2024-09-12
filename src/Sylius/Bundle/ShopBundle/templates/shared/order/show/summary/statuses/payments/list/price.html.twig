@@ -2,4 +2,6 @@
 
 {% set payment = hookable_metadata.context.payment %}
 
-<div {{ sylius_test_html_attribute('payment-price') }}>{{ money.format(payment.amount, payment.currencyCode) }}</div>
+<div class="fw-medium" {{ sylius_test_html_attribute('payment-price') }}>
+    {{ money.format(payment.amount, payment.currencyCode) }}
+</div>

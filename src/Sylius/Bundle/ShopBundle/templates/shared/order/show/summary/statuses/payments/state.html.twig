@@ -1,7 +1,0 @@
-{% from '@SyliusShop/shared/macro/order/state.html.twig' import label %}
-
-{% set state = hookable_metadata.context.order.paymentState %}
-
-<div {{ sylius_test_html_attribute('order-payment-state') }}>
-    {{ label(state) }}
-</div>
