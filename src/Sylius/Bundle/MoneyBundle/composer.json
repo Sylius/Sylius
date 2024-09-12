@@ -33,8 +33,7 @@
         "webmozart/assert": "^1.9"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0",
-        "twig/twig": "3.9.0"
+        "doctrine/orm": ">= 2.16.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",
@@ -45,7 +44,7 @@
         "symfony/browser-kit": "^6.4.0",
         "symfony/dependency-injection": "^6.4.1",
         "symfony/form": "^6.4.1",
-        "twig/twig": "~3.8.0"
+        "twig/twig": "^3.14.0"
     },
     "config": {
         "allow-plugins": {

@@ -488,6 +488,7 @@ final readonly class CartContext implements Context
 
     /**
      * @Then /^I should see "([^"]+)" with quantity (\d+) in my cart$/
+     * @Then my cart should have quantity of :quantity items of product :productName
      * @Then /^the visitor should see product "([^"]+)" with quantity (\d+) in his cart$/
      * @Then /^the customer should see product "([^"]+)" with quantity (\d+) in his cart$/
      */
@@ -600,6 +601,7 @@ final readonly class CartContext implements Context
 
     /**
      * @Then my cart's total should be :total
+     * @Then my cart should have :total items total
      */
     public function myCartSTotalShouldBe(string $total): void
     {

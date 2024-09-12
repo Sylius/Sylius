@@ -11,7 +11,7 @@ Feature: Viewing a cart summary with the correct default shipping method
         And the store has a product "T-Shirt banana" priced at "$10.00"
 
     @api @ui @javascript
-    Scenario:
+    Scenario: Viewing a cart summary with the correct default shipping method
         Given I added product "T-Shirt banana" to the cart
         When I see the summary of my cart
         Then my cart shipping total should be "$6.00"

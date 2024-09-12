@@ -16,7 +16,7 @@ Feature: Adding a simple product of given quantity to the cart
         And I should be notified that the product has been successfully added
         And I should see "T-Shirt banana" with quantity 5 in my cart
 
-    @todo-api @ui @javascript
+    @api @ui @javascript
     Scenario: Adding way too many products sets their quantity to 9999
         Given there are 100000 units of product "T-Shirt banana" available in the inventory
         When I try to add 20000 products "T-Shirt banana" to the cart
