@@ -422,14 +422,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Then my cart should have quantity of :quantity items of product :productName
-     */
-    public function myCartShouldHaveItems(int $quantity, string $productName): void
-    {
-        Assert::same($this->summaryPage->getQuantity($productName), $quantity);
-    }
-
-    /**
      * @Then this item should have name :itemName
      */
     public function thisProductShouldHaveName(string $itemName): void
@@ -601,7 +593,6 @@ final readonly class CartContext implements Context
 
     /**
      * @Then my cart's total should be :total
-     * @Then my cart should have :total items total
      */
     public function myCartSTotalShouldBe(string $total): void
     {
