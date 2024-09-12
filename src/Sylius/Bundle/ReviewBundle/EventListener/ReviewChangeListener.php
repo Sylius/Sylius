@@ -18,23 +18,23 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-final class ReviewChangeListener
+final readonly class ReviewChangeListener
 {
     public function __construct(private ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
     }
 
-    public function postPersist(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }
 
-    public function postUpdate(LifecycleEventArgs $args)
+    public function postUpdate(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }
 
-    public function postRemove(LifecycleEventArgs $args)
+    public function preRemove(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }
