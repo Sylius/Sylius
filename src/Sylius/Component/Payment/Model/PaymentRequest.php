@@ -28,7 +28,7 @@ class PaymentRequest implements PaymentRequestInterface
 
     protected mixed $payload = null;
 
-    /** @var array<string, mixed> $responseData */
+    /** @var array<string, mixed> */
     protected array $responseData = [];
 
     public function __construct(

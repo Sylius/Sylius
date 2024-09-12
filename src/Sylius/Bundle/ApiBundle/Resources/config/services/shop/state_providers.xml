@@ -82,7 +82,7 @@
             <tag name="api_platform.state_provider" priority="10"/>
         </service>
 
-        <service id="sylius_api.state_provider.shop.payment_request.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\Request\ItemProvider">
+        <service id="sylius_api.state_provider.shop.payment.payment_request.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentRequest\ItemProvider">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <argument type="service" id="sylius.repository.payment_request"/>
             <argument type="service" id="sylius.api.checker.update_payment_request_eligibility"/>
