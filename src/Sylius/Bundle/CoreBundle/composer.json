@@ -70,7 +70,7 @@
         "symfony/intl": "^6.4.0 || ^7.0",
         "symfony/mailer": "^6.4.0 || ^7.0",
         "symfony/messenger": "^6.4.0 || ^7.0",
-        "symfony/templating": "^6.4.0 || ^7.0",
+        "symfony/templating": "^6.4.0",
         "symfony/webpack-encore-bundle": "^2.1",
         "symfony/workflow": "^6.4.0 || ^7.0",
         "winzou/state-machine-bundle": "^0.6"

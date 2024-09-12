@@ -30,7 +30,7 @@
         "sylius/resource-bundle": "^1.11",
         "symfony/framework-bundle": "^6.4.1 || ^7.0",
         "symfony/intl": "^6.4.0 || ^7.0",
-        "symfony/templating": "^6.4.0 || ^7.0"
+        "symfony/templating": "^6.4.0"
     },
     "conflict": {
         "doctrine/orm": ">= 3.0.0",
