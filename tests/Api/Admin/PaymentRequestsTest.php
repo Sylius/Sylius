@@ -33,7 +33,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'payment_method.yaml',
             'payment_request/payment_request.yaml',
             'payment_request/order.yaml',
@@ -54,7 +54,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'payment_method.yaml',
             'payment_request/payment_request.yaml',
             'payment_request/order.yaml',
