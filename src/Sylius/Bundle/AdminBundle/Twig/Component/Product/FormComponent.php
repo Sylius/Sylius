@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -170,13 +170,13 @@ class FormComponent
 
     protected function instantiateForm(): FormInterface
     {
-        if (null === $this->resource) {
-            /** @var Product $product */
-            $product = $this->isSimple ? $this->productFactory->createWithVariant() : $this->productFactory->createNew();
-            $this->resource = $product;
-        }
-
         return $this->formFactory->create($this->formClass, $this->resource);
+    }
+
+    /** @return ProductInterface */
+    protected function createResource(): ResourceInterface
+    {
+        return $this->isSimple ? $this->productFactory->createWithVariant() : $this->productFactory->createNew();
     }
 
     protected function getDataModelValue(): string

@@ -24,6 +24,7 @@ class FormComponent
     /** @use ResourceFormComponentTrait<PromotionInterface> */
     use ResourceFormComponentTrait, TypedLiveCollectionTrait {
         TypedLiveCollectionTrait::addCollectionItem insteadof ResourceFormComponentTrait;
+        ResourceFormComponentTrait::removeCollectionItem insteadof TypedLiveCollectionTrait;
         initialize as public __construct;
     }
 }

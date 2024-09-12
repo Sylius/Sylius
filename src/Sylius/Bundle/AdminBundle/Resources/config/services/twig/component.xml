@@ -47,7 +47,7 @@
 
         <service
             id="sylius_admin.twig.component.country.form"
-            class="Sylius\Bundle\AdminBundle\Twig\Component\Country\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="form.factory" />
@@ -244,7 +244,7 @@
 
         <service
             id="sylius_admin.twig.component.product.generate_product_variants_form"
-            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\GenerateProductVariantsFormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />

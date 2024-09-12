@@ -18,6 +18,9 @@ use Sylius\Resource\Model\ResourceInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -26,9 +29,9 @@ use Symfony\UX\LiveComponent\LiveCollectionTrait;
 /** @template T of ResourceInterface */
 trait ResourceFormComponentTrait
 {
+    use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use ComponentWithFormTrait;
     use LiveCollectionTrait;
 
     /** @var T|null */
@@ -45,6 +48,34 @@ trait ResourceFormComponentTrait
 
     /** @var class-string */
     protected string $formClass;
+
+    /** @return T|null */
+    public function hydrateResource(mixed $value): ?ResourceInterface
+    {
+        if (empty($value)) {
+            return $this->createResource();
+        }
+
+        return $this->repository->find($value);
+    }
+
+    /** @param T|null $resource */
+    public function dehydrateResource(ResourceInterface|null $resource): mixed
+    {
+        return $resource?->getId();
+    }
+
+    #[LiveAction]
+    public function removeCollectionItem(
+        PropertyAccessorInterface $propertyAccessor,
+        #[LiveArg] string $name,
+        #[LiveArg] int|string $index,
+    ): void {
+        $propertyPath = $this->fieldNameToPropertyPath($name, $this->formName);
+        $data = $propertyAccessor->getValue($this->formValues, $propertyPath);
+        unset($data[$index]);
+        $propertyAccessor->setValue($this->formValues, $propertyPath, $data);
+    }
 
     /**
      * @param RepositoryInterface<T> $repository
@@ -63,24 +94,14 @@ trait ResourceFormComponentTrait
         $this->formClass = $formClass;
     }
 
-    /** @return T|null */
-    public function hydrateResource(mixed $value): ?ResourceInterface
-    {
-        if (empty($value)) {
-            return new $this->resourceClass();
-        }
-
-        return $this->repository->find($value);
-    }
-
-    /** @param T|null $resource */
-    public function dehydrateResource(ResourceInterface|null $resource): mixed
-    {
-        return $resource?->getId();
-    }
-
     protected function instantiateForm(): FormInterface
     {
         return $this->formFactory->create($this->formClass, $this->resource);
+    }
+
+    /** @return T */
+    protected function createResource(): ResourceInterface
+    {
+        return new $this->resourceClass();
     }
 }
