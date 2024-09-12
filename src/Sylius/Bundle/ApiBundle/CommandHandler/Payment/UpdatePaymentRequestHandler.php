@@ -32,12 +32,12 @@ final class UpdatePaymentRequestHandler implements MessageHandlerInterface
 
     public function __invoke(UpdatePaymentRequest $updatePaymentRequest): PaymentRequestInterface
     {
-        $paymentRequest = $this->paymentRequestRepository->find($updatePaymentRequest->getHash());
+        $paymentRequest = $this->paymentRequestRepository->find($updatePaymentRequest->hash);
         if (null === $paymentRequest) {
             throw new PaymentRequestNotFoundException();
         }
 
-        $paymentRequest->setPayload($updatePaymentRequest->getPayload());
+        $paymentRequest->setPayload($updatePaymentRequest->payload);
 
         return $paymentRequest;
     }
