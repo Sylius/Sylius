@@ -42,8 +42,10 @@ final class LocaleUsageChecker implements LocaleUsageCheckerInterface
             throw new LocaleNotFoundException();
         }
 
-        foreach ($this->getTranslationEntityClasses() as $entityClass) {
-            if ($this->isLocaleUsedByTranslation($entityClass, $localeCode)) {
+        $translationEntityInterfaces = $this->getTranslationEntityInterfaces();
+
+        foreach ($translationEntityInterfaces as $entityInterface) {
+            if ($this->isLocaleUsedByTranslation($entityInterface, $localeCode)) {
                 return true;
             }
         }
@@ -54,28 +56,28 @@ final class LocaleUsageChecker implements LocaleUsageCheckerInterface
     /**
      * @return array<int, class-string>
      */
-    private function getTranslationEntityClasses(): array
+    private function getTranslationEntityInterfaces(): array
     {
-        $translationEntityClasses = [];
+        $translationEntityInterfaces = [];
 
         foreach ($this->resourceRegistry->getAll() as $resource) {
             $resourceParameters = $resource->getParameters();
 
-            if (isset($resourceParameters['translation']['classes']['model'])) {
-                $translationEntityClasses[] = $resourceParameters['translation']['classes']['model'];
+            if (isset($resourceParameters['translation']['classes']['interface'])) {
+                $translationEntityInterfaces[] = $resourceParameters['translation']['classes']['interface'];
             }
         }
 
-        return $translationEntityClasses;
+        return $translationEntityInterfaces;
     }
 
     /**
-     * @param class-string<TranslationInterface> $translationEntityClasses
+     * @param class-string<TranslationInterface> $translationEntityInterface
      */
-    private function isLocaleUsedByTranslation(string $translationEntityClasses, string $localeCode): bool
+    private function isLocaleUsedByTranslation(string $translationEntityInterface, string $localeCode): bool
     {
         /** @var EntityRepository<TranslationInterface> $repository */
-        $repository = $this->entityManager->getRepository($translationEntityClasses);
+        $repository = $this->entityManager->getRepository($translationEntityInterface);
 
         return $repository->count(['locale' => $localeCode]) > 0;
     }
