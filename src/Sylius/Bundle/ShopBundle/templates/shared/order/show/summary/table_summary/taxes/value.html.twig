@@ -15,4 +15,12 @@
             <div class="disabled">{{ money.convertAndFormat(tax_included) }}</div>
         {% endif %}
     </div>
+
+    {% if tax_included %}
+        <div>
+            <small class="text-body-tertiary">
+                {{ 'sylius.ui.included_in_price'|trans }}
+            </small>
+        </div>
+    {% endif %}
 </td>

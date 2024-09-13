@@ -4,7 +4,7 @@
     <div class="col-12 col-md-auto" {{ sylius_test_html_attribute('purchaser-name-or-email') }}>
         {{ 'sylius.ui.checking_out_as'|trans }}
         <a class="link-reset" href="{{ path('sylius_shop_account_dashboard') }}">
-            {{ app.user is null ? order.customer.email : order.customer.fullName|default(order.customer.email) }}
+            {{ app.user is null ? order.customer.email : order.customer.fullName|default(order.customer.email) }}.
         </a>
     </div>
 {% else %}
