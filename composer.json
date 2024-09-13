@@ -64,6 +64,7 @@
         "pagerfanta/pagerfanta": "^3.0",
         "payum/offline": "^1.7.3",
         "payum/payum-bundle": "^2.5",
+        "php-http/guzzle7-adapter": "^1.0",
         "php-http/httplug": "^2.4",
         "php-http/message-factory": "^1.0",
         "psr/cache": "^2.0",
