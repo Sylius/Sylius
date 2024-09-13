@@ -1,0 +1,35 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set order = hookable_metadata.context.order %}
+{% set orderShippingPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set orderShippingPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderShippingPromotionAdjustment)) %}
+
+{% if not orderShippingPromotions is empty %}
+    <td class="text-end" {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
+        <div>
+            <span class="text-decoration-line-through text-body-tertiary me-2">
+                {{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment)) }}
+            </span>
+            <span {{ sylius_test_html_attribute('shipping-total') }}>
+                {{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment) + order.getAdjustmentsTotal(orderShippingPromotionAdjustment)) }}
+            </span>
+        </div>
+
+        <div {{ sylius_test_html_attribute('shipping-promotion-details') }}>
+            {% for label, amount in orderShippingPromotions %}
+                <div>
+                    <small class="text-body-tertiary">
+                        {{ label }}: {{ money.convertAndFormat(amount) }}
+                    </small>
+                </div>
+            {% endfor %}
+        </div>
+    </td>
+{% elseif order.shipments is not empty %}
+    <td class="text-end">
+        <div {{ sylius_test_html_attribute('shipping-total') }}>
+            {{ money.convertAndFormat(order.shippingTotal) }}
+        </div>
+    </td>
+{% endif %}

@@ -108,6 +108,12 @@ twig_hooks:
             value:
                 template: "@SyliusShop/shared/order/show/summary/table_summary/discount/value.html.twig"
 
+        'sylius_shop.shared.order.show.summary.table_summary.shipping':
+            label:
+                template: "@SyliusShop/shared/order/show/summary/table_summary/shipping/label.html.twig"
+            value:
+                template: "@SyliusShop/shared/order/show/summary/table_summary/shipping/value.html.twig"
+
         'sylius_shop.shared.order.show.summary.table_summary.total':
             label:
                 template: "@SyliusShop/shared/order/show/summary/table_summary/total/label.html.twig"
