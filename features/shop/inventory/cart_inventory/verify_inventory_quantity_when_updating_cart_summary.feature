@@ -19,7 +19,7 @@ Feature: Verifying inventory quantity on cart summary
         When I change product "Iron Maiden T-Shirt" quantity to 6 in my cart
         Then I should be notified that this product has insufficient stock
 
-    @api @ui @javascript
+    @no-api @ui @javascript
     Scenario: Preventing the cart recalculation when the form has errors
         Given I have added 3 products "Iron Maiden T-Shirt" to the cart
         And I have added 1 product "Black Dress" to the cart

@@ -287,6 +287,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
+     * @Then I should be notified that the quantity of the product :product must be between 1 and 9999
      */
     public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween(ProductInterface $product): void
     {
@@ -603,7 +604,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantityByCustomer($this->shopClient->getLastResponse(), $productName, $quantity);
+        $this->checkProductQuantityByCustomer($this->getCartResponse(), $productName, $quantity);
     }
 
     /**
@@ -1028,7 +1029,7 @@ final class CartContext implements Context
 
     private function compareItemPrice(string $productName, int $productPrice, string $priceType = 'total'): void
     {
-        $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'items');
+        $items = $this->responseChecker->getValue($this->getCartResponse(), 'items');
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
@@ -1043,7 +1044,7 @@ final class CartContext implements Context
 
     private function getExpectedPriceOfProductTimesQuantity(ProductInterface $product): int
     {
-        $cartResponse = $this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
+        $cartResponse = $this->getCartResponse();
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
         foreach ($items as $item) {
@@ -1057,5 +1058,10 @@ final class CartContext implements Context
         }
 
         throw new \InvalidArgumentException(sprintf('Price for product %s had not been found', $product->getName()));
+    }
+
+    private function getCartResponse(): Response
+    {
+        return $this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
     }
 }
