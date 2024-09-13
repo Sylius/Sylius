@@ -1196,26 +1196,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataTransformer/OrderTokenValueAwareInputCommandDataTransformer.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataTransformer\\\\ShipmentIdAwareInputCommandDataTransformer\\:\\:supportsTransformation\\(\\) has parameter \\$object with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataTransformer/ShipmentIdAwareInputCommandDataTransformer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataTransformer\\\\ShipmentIdAwareInputCommandDataTransformer\\:\\:transform\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataTransformer/ShipmentIdAwareInputCommandDataTransformer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataTransformer\\\\ShipmentIdAwareInputCommandDataTransformer\\:\\:transform\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataTransformer/ShipmentIdAwareInputCommandDataTransformer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataTransformer\\\\ShipmentIdAwareInputCommandDataTransformer\\:\\:transform\\(\\) has parameter \\$object with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataTransformer/ShipmentIdAwareInputCommandDataTransformer.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataTransformer\\\\SubresourceIdAwareCommandDataTransformer\\:\\:supportsTransformation\\(\\) has parameter \\$object with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataTransformer/SubresourceIdAwareCommandDataTransformer.php
