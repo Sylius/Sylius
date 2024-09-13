@@ -53,13 +53,13 @@
             "@type": "ProductImage",
             "id": "@integer@",
             "type": "thumbnail",
-            "path": "@string@.contains('sylius_original').endsWith('product.jpg')",
+            "path": "@string@\/sylius_original\/product.jpg",
             "productVariants": []
         }
     ],
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/products\/MUG\/translations\/en_US",
             "@type": "ProductTranslation",
             "id": "@integer@",
             "name": "Mug",
@@ -70,7 +70,7 @@
             "metaDescription": "Mug description"
         },
         "pl_PL": {
-            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/products\/MUG\/translations\/pl_PL",
             "@type": "ProductTranslation",
             "id": "@integer@",
             "name": "Kubek",
