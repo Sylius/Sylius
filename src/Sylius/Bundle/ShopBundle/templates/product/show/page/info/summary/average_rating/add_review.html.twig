@@ -1,3 +1,5 @@
-<a class="col-md-auto" href="{{ path('sylius_shop_product_review_create', {'slug': app.request.get('slug')}) }}">
+{% set slug = hookable_metadata.context.product.slug %}
+
+<a class="col-md-auto" href="{{ path('sylius_shop_product_review_create', {'slug': slug}) }}">
     {{ 'sylius.ui.add_your_review'|trans }}
 </a>
