@@ -12,7 +12,7 @@ Feature: Modifying taxons assigned to an existing product
         And the product "T-Shirt" belongs to taxon "Clothes"
         And I am logged in as an administrator
 
-    @api @todo-ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Modifying taxons assigned to a product
         When I want to modify the "T-Shirt" product
         And I change that the "T-Shirt" product does not belong to the "Clothes" taxon
@@ -21,7 +21,7 @@ Feature: Modifying taxons assigned to an existing product
         Then the product "T-Shirt" should have the "T-Shirts" taxon
         And the product "T-Shirt" should not have the "Clothes" taxon
 
-    @api @todo-ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Adding taxons to product
         When I want to modify the "Shirt" product
         And I add "Clothes" taxon to the "Shirt" product

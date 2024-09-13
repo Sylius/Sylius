@@ -73,7 +73,7 @@ final class CheckoutOrderDetailsContext implements Context
         $payment = end($payments);
 
         $paymentId = $payment['id'];
-        $response = $this->client->show(Resources::PAYMENTS, (string) $paymentId);
+        $response = $this->client->requestGet(sprintf('/api/v2/shop/orders/%s/payments/%s', $this->sharedStorage->get('cart_token'), $paymentId));
 
         return $this->responseChecker->getValue($response, 'state');
     }
