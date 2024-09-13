@@ -25,6 +25,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony5AuthenticationManagerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony6PrivateServicesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CheckStatisticsOrdersTotalsProviderTypePass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
@@ -82,6 +83,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new CircularDependencyBreakingErrorListenerPass());
         $container->addCompilerPass(new IgnoreAnnotationsPass());
         $container->addCompilerPass(new LazyCacheWarmupPass());
         $container->addCompilerPass(new LiipImageFiltersPass());
