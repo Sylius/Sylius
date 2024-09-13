@@ -18,13 +18,9 @@ use Sylius\Resource\Model\ResourceInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 /** @template T of ResourceInterface */
 trait ResourceFormComponentTrait
@@ -32,7 +28,6 @@ trait ResourceFormComponentTrait
     use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use LiveCollectionTrait;
 
     /** @var T|null */
     #[LiveProp(hydrateWith: 'hydrateResource', dehydrateWith: 'dehydrateResource')]
@@ -63,18 +58,6 @@ trait ResourceFormComponentTrait
     public function dehydrateResource(ResourceInterface|null $resource): mixed
     {
         return $resource?->getId();
-    }
-
-    #[LiveAction]
-    public function removeCollectionItem(
-        PropertyAccessorInterface $propertyAccessor,
-        #[LiveArg] string $name,
-        #[LiveArg] int|string $index,
-    ): void {
-        $propertyPath = $this->fieldNameToPropertyPath($name, $this->formName);
-        $data = $propertyAccessor->getValue($this->formValues, $propertyPath);
-        unset($data[$index]);
-        $propertyAccessor->setValue($this->formValues, $propertyPath, $data);
     }
 
     /**
