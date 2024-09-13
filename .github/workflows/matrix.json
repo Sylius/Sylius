@@ -55,7 +55,7 @@
         {
           "php": "8.2",
           "symfony": "^6.4",
-          "postgres": "14.6"
+          "postgres": "14.13"
         }
       ]
     },
