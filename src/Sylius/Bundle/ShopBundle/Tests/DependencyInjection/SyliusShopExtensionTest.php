@@ -30,7 +30,6 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sylius.controller.shop.contact');
         $this->assertContainerBuilderHasService('sylius.controller.shop.currency_switch');
         $this->assertContainerBuilderHasService('sylius.controller.shop.locale_switch');
-        $this->assertContainerBuilderHasService('sylius.controller.shop.security_widget');
     }
 
     /**

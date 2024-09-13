@@ -35,10 +35,6 @@
             <argument type="service" id="sylius.shop.locale_switcher" />
         </service>
 
-        <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController">
-            <argument type="service" id="twig" />
-        </service>
-
         <service id="sylius.controller.shop.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.context.channel" />
