@@ -29,12 +29,56 @@ twig_hooks:
         'sylius_shop.base.header.content':
             logo:
                 template: "@SyliusShop/shared/layout/base/header/content/logo.html.twig"
-            security_widget:
-                template: "@SyliusShop/shared/layout/base/header/content/security_widget.html.twig"
+            security:
+                template: "@SyliusShop/shared/layout/base/header/content/security.html.twig"
             cart:
                 component: 'sylius_shop:cart:widget'
             taxon_hamburger:
                 template: "@SyliusShop/shared/layout/base/header/content/taxon_hamburger.html.twig"
+                
+        'sylius_shop.base.header.content.security':
+            logged_in_user:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user.html.twig'
+            visitor:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor.html.twig'
+                
+        'sylius_shop.base.header.content.security.logged_in_user':
+            mobile:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile.html.twig'
+            desktop:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop.html.twig'
+                
+        'sylius_shop.base.header.content.security.logged_in_user.mobile':
+            menu:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile/menu.html.twig'
+
+        'sylius_shop.base.header.content.security.logged_in_user.mobile.menu':
+            my_account:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile/menu/my_account.html.twig'
+            logout:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile/menu/logout.html.twig'
+
+        'sylius_shop.base.header.content.security.logged_in_user.desktop':
+            welcome_message:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop/welcome_message.html.twig'
+            my_account:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop/my_account.html.twig'
+            logout:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop/logout.html.twig'
+        
+        'sylius_shop.base.header.content.security.visitor':
+            mobile:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/mobile.html.twig'
+            desktop:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop.html.twig'
+        
+        'sylius_shop.base.header.content.security.visitor.desktop':
+            user_icon:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop/user_icon.html.twig'
+            login:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop/login.html.twig'
+            register:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop/register.html.twig'
 
         'sylius_shop.base.header.content.logo':
             content:
