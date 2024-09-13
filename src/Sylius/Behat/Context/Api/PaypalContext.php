@@ -165,7 +165,7 @@ final class PaypalContext implements Context
         $authorize = $gatewayConfig->getConfig()['use_authorize'] ?? false;
 
         $request->setContent([
-            'paymentId' => $payment['@id'],
+            'paymentId' => $payment['id'],
             'paymentMethodCode' => $payment['method'],
             'action' => $authorize
                 ? PaymentRequestInterface::ACTION_AUTHORIZE
