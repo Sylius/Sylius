@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
+use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
@@ -39,6 +40,7 @@ class FormComponent
     public const AUTOCOMPLETE_CLEAR_REQUESTED_EVENT = 'sylius_admin.product_attribute_autocomplete.clear_requested';
 
     use ComponentToolsTrait;
+    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait;
 

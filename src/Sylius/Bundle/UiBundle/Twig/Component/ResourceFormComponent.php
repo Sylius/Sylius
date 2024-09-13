@@ -19,6 +19,7 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 #[AsLiveComponent]
 class ResourceFormComponent
 {
+    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<ResourceInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;

@@ -13,18 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\ShippingMethod;
 
+use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\TypedLiveCollectionTrait;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
 #[AsLiveComponent]
 class FormComponent
 {
+    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<ShippingMethodInterface> */
-    use ResourceFormComponentTrait, TypedLiveCollectionTrait {
-        TypedLiveCollectionTrait::addCollectionItem insteadof ResourceFormComponentTrait;
-        ResourceFormComponentTrait::removeCollectionItem insteadof TypedLiveCollectionTrait;
+    use ResourceFormComponentTrait {
         initialize as public __construct;
     }
 }

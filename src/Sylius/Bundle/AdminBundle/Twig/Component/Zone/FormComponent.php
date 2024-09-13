@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Zone;
 
+use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormInterface;
@@ -22,6 +23,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 #[AsLiveComponent]
 class FormComponent
 {
+    use LiveCollectionTrait;
     /** @use ResourceFormComponentTrait<ZoneInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;
