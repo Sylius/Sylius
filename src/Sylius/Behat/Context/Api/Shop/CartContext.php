@@ -243,19 +243,21 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I update my cart
-     */
-    public function iUpdateMyCart(): void
-    {
-        // Intentionally left blank
-    }
-
-    /**
      * @When /^I check details of my (cart)$/
      */
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
+    }
+
+    /**
+     * @When I update my cart
+     * @Then I should still be on product :product page
+     * @Then I should be on :product product detailed page
+     */
+    public function intentionallyLeftBlank(): void
+    {
+        // Intentionally left blank
     }
 
     /**
@@ -284,11 +286,14 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should still be on product :product page
+     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
      */
-    public function iShouldStillBeOnProductPage(ProductInterface $product): void
+    public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween(ProductInterface $product): void
     {
-        // Intentionally left blank
+        Assert::false($this->responseChecker->hasViolationWithMessage(
+            $this->shopClient->getLastResponse(),
+            'Quantity must be between 1 and 9999.',
+        ));
     }
 
     /**

@@ -1244,20 +1244,13 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to specify province name manually for shipping address
+     * @Then /^I should not be able to specify province name manually for (billing address|shipping address)$/
+     * @Then /^I should be notified that selected province is invalid for (billing address|shipping address)$/
      */
-    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress(): void
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForAddress(string $addressType): void
     {
-        $this->assertProvinceMessage('shippingAddress');
-    }
-
-    /**
-     * @Then I should not be able to specify province name manually for billing address
-     * @Then I should be notified that selected province is invalid for billing address
-     */
-    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForBillingAddress(): void
-    {
-        $this->assertProvinceMessage('billingAddress');
+        $response = $this->client->getLastResponse();
+        $this->assertProvinceMessage(StringInflector::nameToCamelCase($addressType));
     }
 
     /**
@@ -1341,10 +1334,10 @@ final class CheckoutContext implements Context
         $response = $this->client->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->hasViolationWithMessage(
             $response,
             'Please select proper province.',
-            $addressType,
+            sprintf('%s.%s', $addressType, 'provinceCode'),
         ));
     }
 
