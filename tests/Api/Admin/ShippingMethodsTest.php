@@ -23,6 +23,8 @@ final class ShippingMethodsTest extends JsonApiTestCase
     {
         $this->setUpAdminContext();
         $this->setUpDefaultGetHeaders();
+        $this->setUpDefaultPostHeaders();
+        $this->setUpDefaultPutHeaders();
 
         parent::setUp();
     }
@@ -39,7 +41,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $this->requestGet('/api/v2/admin/shipping-methods');
 
-        $this->assertResponse($this->client->getResponse(), 'admin/shipping_method/get_shipping_methods_response');
+        $this->assertResponseSuccessful('admin/shipping_method/get_shipping_methods_response');
     }
 
     /** @test */
@@ -57,7 +59,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $this->requestGet(sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()));
 
-        $this->assertResponse($this->client->getResponse(), 'admin/shipping_method/get_shipping_method_response');
+        $this->assertResponseSuccessful('admin/shipping_method/get_shipping_method_response');
     }
 
     /** @test */
@@ -70,11 +72,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'zones.yaml',
         ]);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/shipping-methods',
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'name' => 'UPS',
                 'code' => 'UPS',
                 'shippingChargesCalculator' => 'flat_rate',
@@ -132,7 +132,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         'description' => 'This is a UPS shipping method.',
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponse(
@@ -152,11 +152,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'zones.yaml',
         ]);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/shipping-methods',
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'name' => 'UPS',
                 'code' => 'UPS',
                 'shippingChargesCalculator' => 'flat_rate',
@@ -178,7 +176,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         'description' => 'This is a UPS shipping method.',
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponseViolations(
@@ -206,11 +204,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'zones.yaml',
         ]);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/shipping-methods',
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'name' => 'UPS',
                 'code' => 'UPS',
                 'shippingChargesCalculator' => 'flat_rate',
@@ -268,7 +264,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         'description' => 'This is a UPS shipping method.',
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponseViolations(
@@ -315,11 +311,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'rules' => [
                     [
                         'type' => 'total_weight_greater_than_or_equal',
@@ -356,7 +350,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponse(
@@ -378,11 +372,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'calculator' => 'per_unit_rate',
                 'calculatorConfiguration' => [
                     'WEB' => [
@@ -392,7 +384,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         'amount' => 123,
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponse(
@@ -414,11 +406,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'calculator' => 'per_unit_rate',
                 'configuration' => [
                     'WEB' => [
@@ -428,7 +418,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         'amount' => 'wrong_value',
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponseViolations(
@@ -467,17 +457,15 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'translations' => [
                     'en_US' => [
                         'name' => 'New UPS',
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponseViolations(
@@ -504,11 +492,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'rules' => [
                     [
                         'type' => 'total_weight_greater_than_or_equal',
@@ -545,7 +531,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponseViolations(
@@ -592,11 +578,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-            content: json_encode([
+            body: [
                 'rules' => [
                     [
                         'type' => 'wrong_type',
@@ -605,7 +589,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponseViolations(
@@ -636,7 +620,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $this->requestPatch(sprintf('/api/v2/admin/shipping-methods/%s/archive', $shippingMethod->getCode()));
 
-        $this->assertResponse($this->client->getResponse(), 'admin/shipping_method/archive_shipping_method_response');
+        $this->assertResponseSuccessful('admin/shipping_method/archive_shipping_method_response');
     }
 
     /** @test */
@@ -657,7 +641,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->requestPatch(sprintf('/api/v2/admin/shipping-methods/%s/archive', $shippingMethod->getCode()));
         $this->requestPatch(sprintf('/api/v2/admin/shipping-methods/%s/restore', $shippingMethod->getCode()));
 
-        $this->assertResponse($this->client->getResponse(), 'admin/shipping_method/restore_shipping_method_response');
+        $this->assertResponseSuccessful('admin/shipping_method/restore_shipping_method_response');
     }
 
     /** @test */
