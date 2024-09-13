@@ -12,7 +12,7 @@ Feature: Receiving percentage discount on shipping
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Receiving percentage discount on shipping
         Given the promotion gives "20%" discount on shipping to every order
         When I add product "PHP T-Shirt" to the cart
@@ -20,7 +20,7 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$108.00"
         And my cart shipping total should be "$8.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Receiving free shipping
         Given the promotion gives free shipping to every order
         When I add product "PHP T-Shirt" to the cart
@@ -28,7 +28,7 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
         When I add product "PHP Mug" to the cart
@@ -36,7 +36,7 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$80.00"
         And my cart shipping total should be "$0.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Not receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
         When I add product "PHP Mug" to the cart
@@ -45,7 +45,7 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$50.00"
         And my cart shipping total should be "$10.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Not receiving negative discount on shipping
         Given the promotion gives free shipping to every order over "$70.00"
         And there is a promotion "Shipping promotion"
@@ -54,7 +54,7 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$80.00"
         And my cart shipping total should be "$0.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Still receiving free shipping after removing the product from the cart
         Given the promotion gives free shipping to every order over "$70.00"
         When I add product "PHP Mug" to the cart
@@ -63,7 +63,7 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Not receiving free shipping after removing the product from the cart
         Given the promotion gives free shipping to every order over "$70.00"
         When I add product "PHP Mug" to the cart

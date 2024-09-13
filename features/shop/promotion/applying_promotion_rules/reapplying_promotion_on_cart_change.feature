@@ -10,7 +10,7 @@ Feature: Reapplying promotion on cart change
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @api @todo-ui @mink:chromedriver
+    @api @ui @javascript
     Scenario: Not receiving discount on shipping after removing last item from cart
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
@@ -22,7 +22,7 @@ Feature: Reapplying promotion on cart change
         And there should be no shipping fee
         And there should be no discount applied
 
-    @todo @api @ui
+    @api @ui @javascript
     Scenario: Receiving discount on shipping after shipping method change
         Given the store has "DHL" shipping method with "$10.00" fee
         And the store has "FedEx" shipping method with "$30.00" fee

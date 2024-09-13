@@ -25,7 +25,7 @@ Feature: Receiving a discount based on a configured promotion
         Then my cart total should be "$40.00"
         And my discount should be "-$10.00"
 
-    @api @todo-ui
+    @api @ui @javascript
     Scenario: Receiving a discount on items and shipping from one promotion based on items total
         Given the store has "DHL" shipping method with "$10.00" fee
         And there is a promotion "Jackets and shipping discount"
