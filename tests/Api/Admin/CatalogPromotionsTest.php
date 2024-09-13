@@ -578,8 +578,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     '/api/v2/admin/channels/MOBILE',
                 ],
                 'translations' => ['en_US' => [
-                    '@id' => sprintf('/api/v2/admin/catalog-promotion-translations/%s', $catalogPromotion->getTranslation('en_US')->getId()),
-                    'label' => 'T-Shirts discount',
+                    '@id' => sprintf(
+                        '/api/v2/admin/catalog-promotions/%s/translations/%s',
+                        $catalogPromotion->getCode(),
+                        $catalogPromotion->getTranslation('en_US')->getLocale(),
+                    ),
+                    'label' => 'T-Shirts discount: edited',
                 ]],
                 'enabled' => true,
                 'exclusive' => false,
