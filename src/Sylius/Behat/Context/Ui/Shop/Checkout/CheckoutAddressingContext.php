@@ -232,7 +232,7 @@ final readonly class CheckoutAddressingContext implements Context
      */
     public function iSpecifyDifferentBillingAddressAs(AddressInterface $address): void
     {
-        $this->addressPage->chooseDifferentShippingAddress();
+        $this->addressPage->chooseDifferentBillingAddress();
 
         $this->iSpecifyTheBillingAddressAs($address);
     }

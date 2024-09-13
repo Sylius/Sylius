@@ -1,8 +1,8 @@
 @paying_for_order
-Feature: Inform customer about any order total changes during checkout process
-    In order inform the customer about any changes that affect order total
+Feature: Informing customer about any order total changes during checkout process
+    In order to inform the customer about any changes that affect order total
     As a Customer
-    I want to be able prevent placing order with invalid order total
+    I want to be prevented from placing order with invalid order total
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -12,8 +12,8 @@ Feature: Inform customer about any order total changes during checkout process
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @api @todo-ui
-    Scenario: Inform customer about order total change due to product price change
+    @api @ui @javascript
+    Scenario: Informing customer about order total change due to product price change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
         And I proceeded through checkout process
@@ -21,8 +21,8 @@ Feature: Inform customer about any order total changes during checkout process
         When I confirm my order
         Then my order should not be placed due to changed order total
 
-    @api @todo-ui
-    Scenario: Be able to confirm order after information appears
+    @api @ui @javascript
+    Scenario: Being able to confirm order after information appears
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
         And I proceeded through checkout process
@@ -30,8 +30,8 @@ Feature: Inform customer about any order total changes during checkout process
         And I have confirmed order
         Then my order should not be placed due to changed order total
 
-    @api @todo-ui
-    Scenario: Inform customer about order total change due to tax change
+    @api @ui @javascript
+    Scenario: Informing customer about order total change due to tax change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
         And I proceeded through checkout process
@@ -39,8 +39,8 @@ Feature: Inform customer about any order total changes during checkout process
         When I confirm my order
         Then my order should not be placed due to changed order total
 
-    @api @todo-ui
-    Scenario: Inform customer about order total change due to shipping method fee change
+    @api @ui @javascript
+    Scenario: Informing customer about order total change due to shipping method fee change
         Given the store has "UPS" shipping method with "$20.00" fee
         And I added product "PHP T-Shirt" to the cart
         And I have completed addressing step with email "guest@example.com" and "United States" based billing address

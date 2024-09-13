@@ -24,6 +24,18 @@ twig_hooks:
             navigation:
                 template: '@SyliusShop/checkout/complete/form/navigation.html.twig'
 
-        'sylius_shop.checkout.complete.form.summary':
-            statuses:
+        'sylius_shop.checkout.complete.form.summary.statuses.payments':
+            state:
+                enabled: false
+
+        'sylius_shop.checkout.complete.form.summary.statuses.payments.list':
+            state_label:
+                enabled: false
+
+        'sylius_shop.checkout.complete.form.summary.statuses.shipments':
+            state:
+                enabled: false
+
+        'sylius_shop.checkout.complete.form.summary.statuses.shipments.list':
+            state_label:
                 enabled: false

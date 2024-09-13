@@ -600,7 +600,7 @@ final readonly class CartContext implements Context
             $this->summaryPage->open();
         }
 
-        Assert::same($this->summaryPage->getCartTotal(), $total);
+        Assert::same($this->summaryPage->getGrandTotal(), $total);
     }
 
     /**

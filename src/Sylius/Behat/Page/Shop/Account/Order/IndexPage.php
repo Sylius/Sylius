@@ -79,7 +79,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'customer_orders' => '[data-test-grid-table]',
-            'flash_message' => '[data-test-flash-message]',
+            'flash_message' => '[data-test-sylius-flash-message]',
             'last_order' => '[data-test-grid-table-body] [data-test-row]:last-child [data-test-actions]',
         ]);
     }
