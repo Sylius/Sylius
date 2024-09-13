@@ -15,7 +15,7 @@
     "scopes": [
         {
             "@type": "CatalogPromotionScope",
-            "@id": "\/api\/v2\/admin\/catalog-promotion-scopes\/@integer@",
+            "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount\/scopes\/@integer@",
             "id": "@integer@",
             "type": "for_variants",
             "configuration": {
@@ -28,7 +28,7 @@
     "actions": [
         {
             "@type": "CatalogPromotionAction",
-            "@id": "\/api\/v2\/admin\/catalog-promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount\/actions\/@integer@",
             "id": "@integer@",
             "type": "percentage_discount",
             "configuration": {
@@ -40,10 +40,9 @@
   "exclusive": false,
   "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount\/translations\/en_US",
             "@type": "CatalogPromotionTranslation",
-            "id": "@integer@",
-            "label": "T-Shirts discount",
+            "label": "T-Shirts discount: edited",
             "description": "@string@"
         }
     }
