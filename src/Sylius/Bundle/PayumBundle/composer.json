@@ -42,9 +42,6 @@
         "phpspec/phpspec": "^7.2",
         "symfony/dependency-injection": "^6.4.1"
     },
-    "suggest": {
-        "payum/paypal-express-checkout-nvp": "To use PayPal Express Chekout NVP"
-    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true

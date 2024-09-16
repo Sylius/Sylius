@@ -7,7 +7,7 @@ Feature: Deleting multiple payment methods
     Background:
         Given the store has a payment method "Offline" with a code "Offline"
         And the store has also a payment method "Bank transfer" with a code "transfer"
-        And the store has also a payment method "PayPal Express Checkout" with a code "paypal" and "Paypal Express Checkout" gateway
+        And the store has also a payment method "Cash on Delivery" with a code "cash_on_delivery"
         And I am logged in as an administrator
 
     @no-api @ui @mink:chromedriver
@@ -18,4 +18,4 @@ Feature: Deleting multiple payment methods
         And I delete them
         Then I should be notified that they have been successfully deleted
         And I should see a single payment method in the list
-        And I should see the payment method "PayPal Express Checkout" in the list
+        And I should see the payment method "Cash on Delivery" in the list

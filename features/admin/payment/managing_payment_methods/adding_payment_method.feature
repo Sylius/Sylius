@@ -48,13 +48,3 @@ Feature: Adding a new payment method
         Then I should be notified that it has been successfully created
         And the payment method "Offline" should appear in the registry
         And the payment method "Offline" should be available in channel "United States"
-
-    @api @ui
-    Scenario: Adding a new paypal payment method
-        When I want to create a new payment method with "Paypal Express Checkout" gateway factory
-        And I name it "Paypal Express Checkout" in "English (United States)"
-        And I specify its code as "PEC"
-        And I configure it with test paypal credentials
-        And I add it
-        Then I should be notified that it has been successfully created
-        And the payment method "Paypal Express Checkout" should appear in the registry

@@ -164,7 +164,6 @@
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="collection">
                 <argument key="offline">Offline</argument>
-                <argument key="paypal_express_checkout">Paypal Express Checkout</argument>
             </argument>
         </service>
 
@@ -449,13 +448,6 @@
         <service id="sylius.behat.context.ui.customer" class="Sylius\Behat\Context\Ui\CustomerContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
-        </service>
-
-        <service id="sylius.behat.context.ui.paypal" class="Sylius\Behat\Context\Ui\PaypalContext">
-            <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
-            <argument type="service" id="sylius.behat.page.shop.order.show" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
-            <argument type="service" id="sylius.behat.paypal_api_mocker" />
         </service>
 
         <service id="sylius.behat.context.ui.theme" class="Sylius\Behat\Context\Ui\ThemeContext">

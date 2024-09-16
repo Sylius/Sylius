@@ -8,7 +8,7 @@ Feature: Selecting an order payment method
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
-        And the store allows paying with "Paypal Express Checkout"
+        And the store allows paying with "Bank transfer"
         And I am a logged in customer
 
     @api @ui
@@ -17,6 +17,6 @@ Feature: Selecting an order payment method
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I select "Free" shipping method
         And I complete the shipping step
-        When I select "Paypal Express Checkout" payment method
+        When I select "Bank transfer" payment method
         And I complete the payment step
         Then I should be on the checkout complete step

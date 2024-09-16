@@ -9,7 +9,7 @@ Feature: Skipping payment step when only one payment method is available
         And the store ships everywhere for Free
         And on this channel payment step is skipped if only a single payment method is available
         And the store has a product "Guards! Guards!" priced at "$20.00"
-        And the store allows paying with "Paypal Express Checkout"
+        And the store allows paying with "Bank transfer"
 
     @api @ui
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
@@ -17,7 +17,7 @@ Feature: Skipping payment step when only one payment method is available
         And I complete addressing step with email "guest@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout complete step
-        And my order's payment method should be "Paypal Express Checkout"
+        And my order's payment method should be "Bank transfer"
 
     @api @ui
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
@@ -26,7 +26,7 @@ Feature: Skipping payment step when only one payment method is available
         And I complete addressing step with email "guest@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout complete step
-        And my order's payment method should be "Paypal Express Checkout"
+        And my order's payment method should be "Bank transfer"
 
     @api @ui
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
@@ -36,7 +36,7 @@ Feature: Skipping payment step when only one payment method is available
         And I complete addressing step with email "guest@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout complete step
-        And my order's payment method should be "Paypal Express Checkout"
+        And my order's payment method should be "Bank transfer"
 
     @api @ui
     Scenario: Preventing skipping the payment method choosing step when no payment method is available

@@ -88,15 +88,6 @@
             <argument type="string">%sylius_core.public_dir%</argument>
         </service>
 
-        <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
-            <argument type="service" id="sylius.behat.mocker" />
-            <argument type="service" id="sylius.behat.response_loader" />
-        </service>
-
-        <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" public="false">
-            <argument type="service" id="service_container" />
-        </service>
-
         <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />
 
         <service id="sylius.behat.notification_accessor.admin" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">

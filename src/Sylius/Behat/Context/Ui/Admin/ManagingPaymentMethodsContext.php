@@ -63,29 +63,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I update its :field with :value
-     */
-    public function iUpdateItsWith(string $field, string $value): void
-    {
-        match ($field) {
-            'Username' => $this->updatePage->setPaypalGatewayUsername($value),
-            'Password' => $this->updatePage->setPaypalGatewayPassword($value),
-            'Signature' => $this->updatePage->setPaypalGatewaySignature($value),
-            default => throw new \InvalidArgumentException(sprintf('There is no configuration for "%s" field.', $field)),
-        };
-    }
-
-    /**
-     * @When /^I set its "Username" as "([^"]+)", "Password" as "([^"]+)" and "Signature" as "([^"]+)"$/
-     */
-    public function iSetItsUsernameAsPasswordAsAndSignatureAs(string $username, string $password, string $signature): void
-    {
-        $this->updatePage->setPaypalGatewayUsername($username);
-        $this->updatePage->setPaypalGatewayPassword($password);
-        $this->updatePage->setPaypalGatewaySignature($signature);
-    }
-
-    /**
      * @When I enable sandbox mode
      */
     public function iEnableSandboxMode(): void
@@ -341,19 +318,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I have to specify paypal :element
-     *
-     * @throws ElementNotFoundException
-     */
-    public function iShouldBeNotifiedThatIHaveToSpecifyPaypal(string $element): void
-    {
-        Assert::same(
-            $this->createPage->getValidationMessage('paypal_' . $element),
-            sprintf('Please enter paypal %s.', $element),
-        );
-    }
-
-    /**
      * @Then I should be notified that gateway name should contain only letters and underscores
      *
      * @throws ElementNotFoundException
@@ -487,31 +451,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->iBrowsePaymentMethods();
 
         Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
-    }
-
-    /**
-     * @When I configure it with test paypal credentials
-     */
-    public function iConfigureItWithTestPaypalCredentials(): void
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->setPaypalGatewayUsername('TEST');
-        $currentPage->setPaypalGatewayPassword('TEST');
-        $currentPage->setPaypalGatewaySignature('TEST');
-    }
-
-    /**
-     * @When I configure it for username :username with :signature signature
-     */
-    public function iConfigureItForUsernameWithSignature(string $username, string $signature): void
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->setPaypalGatewayUsername($username);
-        $currentPage->setPaypalGatewaySignature($signature);
     }
 
     /**

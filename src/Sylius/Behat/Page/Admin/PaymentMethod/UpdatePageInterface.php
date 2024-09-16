@@ -23,12 +23,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function nameIt(string $name, string $languageCode): void;
 
-    public function setPaypalGatewayUsername(string $username): void;
-
-    public function setPaypalGatewayPassword(string $password): void;
-
-    public function setPaypalGatewaySignature(string $signature): void;
-
     public function enableSandboxMode(): void;
 
     public function isCodeDisabled(): bool;
