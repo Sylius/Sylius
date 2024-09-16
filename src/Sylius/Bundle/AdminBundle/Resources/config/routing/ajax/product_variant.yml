@@ -7,6 +7,7 @@ sylius_admin_ajax_product_variants_update_position:
         _sylius:
             permission: true
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_product_variants_by_phrase:
     path: /search
     methods: [GET]
@@ -23,6 +24,7 @@ sylius_admin_ajax_product_variants_by_phrase:
                     locale: expr:service('sylius.context.locale').getLocaleCode()
                     productCode: $productCode
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_all_product_variants_by_phrase:
     path: /search-all
     methods: [GET]
@@ -39,6 +41,7 @@ sylius_admin_ajax_all_product_variants_by_phrase:
                     locale: expr:service('sylius.context.locale').getLocaleCode()
                     limit: "!!int %sylius.ajax.product.variant_autocomplete_limit%"
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_product_variants_by_codes:
     path: /
     methods: [GET]
@@ -52,6 +55,7 @@ sylius_admin_ajax_product_variants_by_codes:
                 method: findByCodesAndProductCode
                 arguments: [$code, $productCode]
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_all_product_variants_by_codes:
     path: /all
     methods: [GET]

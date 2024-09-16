@@ -1,3 +1,4 @@
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_get_attribute_types:
     path: /attribute-types
     methods: [GET]
@@ -5,6 +6,7 @@ sylius_admin_get_attribute_types:
         _controller: sylius.controller.product_attribute::getAttributeTypesAction
         template: "@SyliusAdmin/ProductAttribute/Types/attributeTypes.html.twig"
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_get_product_attributes:
     path: /attributes
     methods: [GET]
