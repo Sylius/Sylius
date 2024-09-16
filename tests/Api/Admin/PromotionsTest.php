@@ -19,14 +19,14 @@ use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionComm
 use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +39,7 @@ final class PromotionsTest extends JsonApiTestCase
     public function it_gets_promotions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+        $this->setUpAdminContext('api@example.com');
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/promotions', server: $header);
@@ -382,13 +383,11 @@ final class PromotionsTest extends JsonApiTestCase
                     ],
                     [
                         'type' => ItemTotalRuleChecker::TYPE,
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                     [
                         'type' => 'wrong_type',
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                 ],
             ], \JSON_THROW_ON_ERROR),
@@ -447,13 +446,11 @@ final class PromotionsTest extends JsonApiTestCase
                     ],
                     [
                         'type' => ShippingPercentageDiscountPromotionActionCommand::TYPE,
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                     [
                         'type' => 'wrong_type',
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                 ],
             ], \JSON_THROW_ON_ERROR),

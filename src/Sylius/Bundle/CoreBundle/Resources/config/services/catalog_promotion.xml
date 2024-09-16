@@ -19,7 +19,6 @@
         <import resource="catalog_promotion/command_handlers.xml" />
         <import resource="catalog_promotion/listeners.xml" />
         <import resource="catalog_promotion/processors.xml" />
-        <import resource="catalog_promotion/validators.xml" />
     </imports>
 
     <services>
