@@ -18,6 +18,7 @@ use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Webmozart\Assert\Assert;
 
 final class PayumTokenFactory implements PayumTokenFactoryInterface
 {
@@ -33,6 +34,7 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
         $paymentMethod = $paymentRequest->getMethod();
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
+        Assert::notNull($gatewayConfig, sprintf('Gateway config of the payment method (code %s) cannot be null.', $paymentMethod->getCode()));
         $gatewayName = $gatewayConfig->getGatewayName();
 
         /** @var array{
@@ -44,7 +46,7 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
          */
         $payload = $paymentRequest->getPayload();
         if (null === $payload) {
-            throw new InvalidPaymentRequestPayloadException('Payload of the payment request cannot be null');
+            throw new InvalidPaymentRequestPayloadException('Payload of the payment request cannot be null.');
         }
 
         $targetPath = $payload['target_path'] ?? null;
