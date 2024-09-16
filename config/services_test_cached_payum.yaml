@@ -2,9 +2,27 @@ imports:
     - { resource: "services_test_cached.yaml" }
 
 services:
+    ##
+    # Prioritize Payum by tagging services with a higher priority (or lower for tagged_iterator).
+    ##
+    
     'sylius.payment_request.command_provider.payum.offline':
         class: Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider
         arguments:
             - !tagged_locator { tag: 'sylius.payment_request.command_provider.payum.offline', index_by: 'action' }
         tags:
-            - { name: 'sylius.payment_request.command_provider', gateway-factory: 'offline', priority: -200 }
+            - { name: 'sylius.payment_request.command_provider', gateway-factory: 'offline', priority: -100 }
+
+    'sylius.shop.order_pay.provider.pay_response.payum':
+        parent: Sylius\Bundle\CoreBundle\OrderPay\Provider\PayumPayResponseProvider
+        arguments:
+            - '@sylius.shop.resolver.payment_to_pay'
+        tags:
+            - { name: 'sylius.shop.order_pay.provider.pay_response', priority: -150 }
+                
+    'sylius.shop.order_pay.provider.after_pay_response.payum':
+        parent: Sylius\Bundle\CoreBundle\OrderPay\Provider\PayumAfterPayResponseProvider
+        arguments:
+            - '@sylius.shop.order_pay.handler.payment_state_flash'
+        tags:
+            - { name: 'sylius.shop.order_pay.provider.after_pay_response', priority: -50 }

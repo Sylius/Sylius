@@ -16,9 +16,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="true" />
+
         <service id="sylius.payment_request.command_provider.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider.offline" index-by="action" />
-            <tag name="sylius.payment_request.command_provider" gateway-factory="offline" priority="-100" />
+            <tag name="sylius.payment_request.command_provider" gateway-factory="offline" />
         </service>
 
         <service id="sylius.payment_request.command_provider.offline.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Offline\CapturePaymentRequestCommandProvider">
