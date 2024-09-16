@@ -23,21 +23,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use ChecksCodeImmutability;
     use Toggles;
 
-    public function setPaypalGatewayUsername(string $username): void
-    {
-        $this->getDocument()->fillField('Username', $username);
-    }
-
-    public function setPaypalGatewayPassword(string $password): void
-    {
-        $this->getDocument()->fillField('Password', $password);
-    }
-
-    public function setPaypalGatewaySignature(string $signature): void
-    {
-        $this->getDocument()->fillField('Signature', $signature);
-    }
-
     public function nameIt(string $name, string $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_admin_payment_method_translations_%s_name', $languageCode), $name);

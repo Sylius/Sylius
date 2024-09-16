@@ -33,12 +33,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function setInstructions(string $instructions, string $languageCode): void;
 
-    public function setPaypalGatewayUsername(string $username): void;
-
-    public function setPaypalGatewayPassword(string $password): void;
-
-    public function setPaypalGatewaySignature(string $signature): void;
-
     public function isCodeDisabled(): bool;
 
     public function isPaymentMethodEnabled(): bool;

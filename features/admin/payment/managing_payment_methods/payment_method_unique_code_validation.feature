@@ -12,7 +12,7 @@ Feature: Payment method unique code validation
     @api @ui
     Scenario: Trying to add payment method with taken code
         When I want to create a new offline payment method
-        And I name it "Paypal Express Checkout" in "English (United States)"
+        And I name it "Bank transfer" in "English (United States)"
         And I specify its code as "Offline"
         And I try to add it
         Then I should be notified that payment method with this code already exists

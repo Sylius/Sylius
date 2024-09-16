@@ -10,7 +10,7 @@ Feature: Changing checkout steps
         And the store ships everywhere for Free
         And the store has "Raven Post" shipping method with "$10.00" fee
         And the store allows paying Offline
-        And the store allows paying "PayPal Express Checkout"
+        And the store allows paying "Bank transfer"
         And I am a logged in customer
 
     @no-api @ui
@@ -68,6 +68,6 @@ Feature: Changing checkout steps
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have proceeded order with "Free" shipping method and "Offline" payment
         When I go back to payment step of the checkout
-        And I select "PayPal Express Checkout" payment method
+        And I select "Bank transfer" payment method
         And I complete the payment step
         Then I should be on the checkout summary step

@@ -89,28 +89,6 @@ final readonly class PaymentContext implements Context
     }
 
     /**
-     * @Given /^the store has(?:| also) a payment method "([^"]+)" with a code "([^"]+)" and "([^"]+)" gateway$/
-     */
-    public function theStoreHasPaymentMethodWithCodeAndGateway(
-        string $paymentMethodName,
-        string $paymentMethodCode,
-        string $gatewayFactory,
-    ): void {
-        $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, $gatewayFactory);
-
-        match ($gatewayFactory) {
-            'Paypal Express Checkout' => $this->configurePaypalExpressCheckoutGateway($paymentMethod),
-            default => throw new \InvalidArgumentException(
-                sprintf('Gateway factory "%s" is not supported. Available options are: %s', $gatewayFactory, implode(', ', $this->gatewayFactories)),
-            ),
-        };
-
-        $this->paymentMethodManager->flush();
-
-        $this->sharedStorage->set('payment_method', $paymentMethod);
-    }
-
-    /**
      * @Given /^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/
      */
     public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale)
@@ -222,16 +200,5 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodRepository->add($paymentMethod);
 
         return $paymentMethod;
-    }
-
-    private function configurePaypalExpressCheckoutGateway(PaymentMethodInterface $paymentMethod): void
-    {
-        $paymentMethod->getGatewayConfig()->setConfig([
-            'username' => 'TEST',
-            'password' => 'TEST',
-            'signature' => 'TEST',
-            'payum.http_client' => '@sylius.payum.http_client',
-            'sandbox' => true,
-        ]);
     }
 }

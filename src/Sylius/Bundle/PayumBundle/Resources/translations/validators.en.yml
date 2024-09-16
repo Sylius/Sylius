@@ -5,12 +5,3 @@ sylius:
             not_blank: Please enter gateway name.
         factory_name:
             not_blank: Please enter gateway factory name.
-        paypal:
-            password:
-                not_blank: Please enter paypal password.
-            signature:
-                not_blank: Please enter paypal signature.
-            username:
-                not_blank: Please enter paypal username.
-            sandbox:
-                not_null: Please set your paypal sandbox status.

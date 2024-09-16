@@ -54,21 +54,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         );
     }
 
-    public function setPaypalGatewayUsername(string $username): void
-    {
-        $this->getDocument()->fillField('Username', $username);
-    }
-
-    public function setPaypalGatewayPassword(string $password): void
-    {
-        $this->getDocument()->fillField('Password', $password);
-    }
-
-    public function setPaypalGatewaySignature(string $signature): void
-    {
-        $this->getDocument()->fillField('Signature', $signature);
-    }
-
     public function isPaymentMethodEnabled(): bool
     {
         return (bool) $this->getToggleableElement()->getValue();
@@ -94,7 +79,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'enabled' => '#sylius_admin_payment_method_enabled',
             'gateway_name' => '#sylius_admin_payment_method_gatewayConfig_gatewayName',
             'name' => '#sylius_admin_payment_method_translations_en_US_name',
-            'paypal_password' => '#sylius_admin_payment_method_gatewayConfig_config_password',
         ]);
     }
 }

@@ -207,3 +207,4 @@
 ## Payment method gateways
 
 * Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.
+* PayPal Express Checkout gateway has been removed. Use now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.

@@ -6,7 +6,7 @@ Feature: Sorting listed payment methods by position
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store allows paying with "Paypal Express Checkout" at position 0
+        And the store allows paying with "Bank transfer" at position 0
         And the store allows paying with "Cash on Delivery" at position 2
         And the store allows paying with "Offline" at position 1
         And I am logged in as an administrator
@@ -15,7 +15,7 @@ Feature: Sorting listed payment methods by position
     Scenario: Payment methods are sorted by position in ascending order by default
         When I browse payment methods
         Then I should see 3 payment methods in the list
-        And the first payment method on the list should have name "Paypal Express Checkout"
+        And the first payment method on the list should have name "Bank transfer"
         And the last payment method on the list should have name "Cash on Delivery"
 
     @api @ui

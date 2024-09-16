@@ -81,7 +81,6 @@
     "Payum\\Core\\Security\\TokenInterface",
     "Payum\\Core\\Security\\Util\\Random",
     "Payum\\Core\\Storage\\AbstractStorage",
-    "Payum\\Paypal\\ExpressCheckout\\Nvp\\PaypalExpressCheckoutGatewayFactory",
     "PHPUnit\\Framework\\ExpectationFailedException",
     "Psr\\Clock\\ClockInterface",
     "Psr\\Container\\ContainerInterface",
