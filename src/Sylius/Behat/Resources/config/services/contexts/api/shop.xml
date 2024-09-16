@@ -163,9 +163,16 @@
         <service id="sylius.behat.context.api.paypal" class="Sylius\Behat\Context\Api\PaypalContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="sylius.behat.paypal_api_mocker" />
+            <argument type="service" id="sylius.behat.context.api.shop.checkout.complete" />
+            <argument type="service" id="sylius.behat.context.api.shop.payment_request" />
+        </service>
+
+        <service id="sylius.behat.context.api.shop.payment_request" class="Sylius\Behat\Context\Api\Shop\PaymentRequestContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
 
