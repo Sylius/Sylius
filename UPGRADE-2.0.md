@@ -203,3 +203,7 @@
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
+
+## Payment method gateways
+
+* Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.

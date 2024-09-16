@@ -69,16 +69,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField('Signature', $signature);
     }
 
-    public function setStripeSecretKey(string $secretKey): void
-    {
-        $this->getDocument()->fillField('Secret key', $secretKey);
-    }
-
-    public function setStripePublishableKey(string $publishableKey): void
-    {
-        $this->getDocument()->fillField('Publishable key', $publishableKey);
-    }
-
     public function isPaymentMethodEnabled(): bool
     {
         return (bool) $this->getToggleableElement()->getValue();
@@ -105,8 +95,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'gateway_name' => '#sylius_admin_payment_method_gatewayConfig_gatewayName',
             'name' => '#sylius_admin_payment_method_translations_en_US_name',
             'paypal_password' => '#sylius_admin_payment_method_gatewayConfig_config_password',
-            'stripe_secret_key' => '#sylius_admin_payment_method_gatewayConfig_config_secret_key',
-            'stripe_publishable_key' => '#sylius_admin_payment_method_gatewayConfig_config_publishable_key',
         ]);
     }
 }

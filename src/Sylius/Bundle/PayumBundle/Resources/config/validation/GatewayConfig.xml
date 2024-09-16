@@ -32,24 +32,6 @@
         </property>
         <property name="config">
             <constraint name="Collection">
-                <option name="groups">sylius_stripe_checkout</option>
-                <option name="fields">
-                    <value key="secret_key">
-                        <constraint name="NotBlank">
-                            <option name="message">sylius.gateway_config.stripe.secret_key.not_blank</option>
-                            <option name="groups">sylius_stripe_checkout</option>
-                        </constraint>
-                    </value>
-                    <value key="publishable_key">
-                        <constraint name="NotBlank">
-                            <option name="message">sylius.gateway_config.stripe.publishable_key.not_blank</option>
-                            <option name="groups">sylius_stripe_checkout</option>
-                        </constraint>
-                    </value>
-                </option>
-            </constraint>
-
-            <constraint name="Collection">
                 <option name="groups">sylius_paypal_express_checkout</option>
                 <option name="fields">
                     <value key="username">

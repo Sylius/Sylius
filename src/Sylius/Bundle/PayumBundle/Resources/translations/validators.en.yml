@@ -14,8 +14,3 @@ sylius:
                 not_blank: Please enter paypal username.
             sandbox:
                 not_null: Please set your paypal sandbox status.
-        stripe:
-            secret_key:
-                not_blank: Please enter stripe secret key.
-            publishable_key:
-                not_blank: Please enter stripe publishable key.

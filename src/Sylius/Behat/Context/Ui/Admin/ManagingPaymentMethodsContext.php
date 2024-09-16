@@ -68,24 +68,10 @@ final readonly class ManagingPaymentMethodsContext implements Context
     public function iUpdateItsWith(string $field, string $value): void
     {
         match ($field) {
-            'Publishable key' => $this->updatePage->setStripePublishableKey($value),
-            'Secret key' => $this->updatePage->setStripeSecretKey($value),
             'Username' => $this->updatePage->setPaypalGatewayUsername($value),
             'Password' => $this->updatePage->setPaypalGatewayPassword($value),
             'Signature' => $this->updatePage->setPaypalGatewaySignature($value),
             default => throw new \InvalidArgumentException(sprintf('There is no configuration for "%s" field.', $field)),
-        };
-    }
-
-    /**
-     * @When I configure it with( only) :element
-     */
-    public function iConfigureItWith(string $element): void
-    {
-        match ($element) {
-            'Publishable key' => $this->createPage->setStripePublishableKey('TEST'),
-            'Secret key' => $this->createPage->setStripeSecretKey('TEST'),
-            default => throw new \InvalidArgumentException(sprintf('There is no configuration for "%s" element.', $element)),
         };
     }
 
@@ -97,15 +83,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->updatePage->setPaypalGatewayUsername($username);
         $this->updatePage->setPaypalGatewayPassword($password);
         $this->updatePage->setPaypalGatewaySignature($signature);
-    }
-
-    /**
-     * @When /^I set its "Publishable key" as "([^"]+)" and "Secret key" as "([^"]+)"$/
-     */
-    public function iSetItsPublishableKeyAsAndSecretKeyAs(string $publishableKey, string $secretKey): void
-    {
-        $this->updatePage->setStripePublishableKey($publishableKey);
-        $this->updatePage->setStripeSecretKey($secretKey);
     }
 
     /**
@@ -377,19 +354,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I have to specify stripe :element
-     *
-     * @throws ElementNotFoundException
-     */
-    public function iShouldBeNotifiedThatIHaveToSpecifyStripe(string $element): void
-    {
-        Assert::same(
-            $this->createPage->getValidationMessage('stripe_' . str_replace(' ', '_', strtolower($element))),
-            sprintf('Please enter stripe %s.', strtolower($element)),
-        );
-    }
-
-    /**
      * @Then I should be notified that gateway name should contain only letters and underscores
      *
      * @throws ElementNotFoundException
@@ -556,15 +520,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     public function iDoNotSpecifyConfigurationPassword(): void
     {
         // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @When I configure it with test stripe gateway data
-     */
-    public function iConfigureItWithTestStripeGatewayData(): void
-    {
-        $this->createPage->setStripeSecretKey('TEST');
-        $this->createPage->setStripePublishableKey('TEST');
     }
 
     /**

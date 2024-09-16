@@ -100,7 +100,6 @@ final readonly class PaymentContext implements Context
 
         match ($gatewayFactory) {
             'Paypal Express Checkout' => $this->configurePaypalExpressCheckoutGateway($paymentMethod),
-            'Stripe Checkout' => $this->configureStripeCheckoutGateway($paymentMethod),
             default => throw new \InvalidArgumentException(
                 sprintf('Gateway factory "%s" is not supported. Available options are: %s', $gatewayFactory, implode(', ', $this->gatewayFactories)),
             ),
@@ -233,14 +232,6 @@ final readonly class PaymentContext implements Context
             'signature' => 'TEST',
             'payum.http_client' => '@sylius.payum.http_client',
             'sandbox' => true,
-        ]);
-    }
-
-    private function configureStripeCheckoutGateway(PaymentMethodInterface $paymentMethod): void
-    {
-        $paymentMethod->getGatewayConfig()->setConfig([
-            'publishable_key' => 'TEST',
-            'secret_key' => 'TEST',
         ]);
     }
 }
