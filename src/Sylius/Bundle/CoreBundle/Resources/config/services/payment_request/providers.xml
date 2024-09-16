@@ -30,5 +30,11 @@
         </service>
 
         <service id="sylius.payment_request.provider.http_response.default" alias="sylius.payment_request.provider.http_response.gateway_factory" />
+
+        <service id="sylius.payment_request.provider.default_action" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultActionProvider" />
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultActionProviderInterface" alias="sylius.payment_request.provider.default_action" />
+
+        <service id="sylius.payment_request.provider.default_payload" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultPayloadProvider" />
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultPayloadProviderInterface" alias="sylius.payment_request.provider.default_payload" />
     </services>
 </container>

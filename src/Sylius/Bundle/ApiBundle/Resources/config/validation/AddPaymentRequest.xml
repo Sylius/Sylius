@@ -32,12 +32,5 @@
                 </option>
             </constraint>
         </property>
-        <property name="action">
-            <constraint name="NotBlank">
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
-        </property>
     </class>
 </constraint-mapping>

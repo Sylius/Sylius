@@ -33,6 +33,8 @@
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface" />
             <argument type="service" id="sylius.payment_request.provider.http_response.default" />
+            <argument type="service" id="sylius.payment_request.provider.default_action" />
+            <argument type="service" id="sylius.payment_request.provider.default_payload" />
         </service>
 
         <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider" />

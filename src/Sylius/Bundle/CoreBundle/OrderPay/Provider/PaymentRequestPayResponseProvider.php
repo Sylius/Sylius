@@ -15,6 +15,8 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
 use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultActionProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultPayloadProviderInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ServiceProviderAwareProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -36,6 +38,8 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private ServiceProviderAwareProviderInterface $httpResponseProvider,
+        private DefaultActionProviderInterface $defaultActionProvider,
+        private DefaultPayloadProviderInterface $defaultPayloadProvider,
         private PaymentToPayResolverInterface $paymentToPayResolver,
         private AfterPayUrlProvider $afterPayUrlProvider,
     ) {
@@ -53,11 +57,8 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
 
-        $action = $paymentRequest->getAction();
-        if ($paymentMethod->getGatewayConfig()?->getConfig()['use_authorize'] ?? false) {
-            $action = PaymentRequestInterface::ACTION_AUTHORIZE;
-        }
-        $paymentRequest->setAction($action);
+        $paymentRequest->setAction($this->defaultActionProvider->getAction($paymentRequest));
+        $paymentRequest->setPayload($this->defaultPayloadProvider->getPayload($paymentRequest));
 
         $this->paymentRequestRepository->add($paymentRequest);
 
