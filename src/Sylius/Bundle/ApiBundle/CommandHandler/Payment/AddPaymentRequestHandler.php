@@ -55,7 +55,7 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
     {
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([
-            'code' => $addPaymentRequest->getPaymentMethodCode(),
+            'code' => $addPaymentRequest->paymentMethodCode,
         ]);
 
         if (null === $paymentMethod) {
@@ -63,15 +63,15 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
         }
 
         /** @var PaymentInterface|null $payment */
-        $payment = $this->paymentRepository->find($addPaymentRequest->getPaymentId());
+        $payment = $this->paymentRepository->find($addPaymentRequest->paymentId);
 
         if (null === $payment) {
             throw new PaymentNotFoundException();
         }
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
-        $paymentRequest->setAction($addPaymentRequest->getAction());
-        $paymentRequest->setPayload($addPaymentRequest->getPayload());
+        $paymentRequest->setAction($addPaymentRequest->action);
+        $paymentRequest->setPayload($addPaymentRequest->payload);
 
         return $paymentRequest;
     }

@@ -65,7 +65,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
     private function getCommandProvider(AddPaymentRequest $addPaymentRequest): ?PaymentRequestCommandProviderInterface
     {
         /** @var PaymentMethodInterface|null $paymentMethod */
-        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->getPaymentMethodCode()]);
+        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->paymentMethodCode]);
 
         if ($paymentMethod === null) {
             return null;
