@@ -48,10 +48,6 @@
             <tag name="console.command" />
         </service>
 
-        <service id="sylius.console.command.show_available_plugins" class="Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand">
-            <tag name="console.command" />
-        </service>
-
         <service id="sylius.console.command.inform_about_gus" class="Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand">
             <tag name="console.command" />
         </service>
