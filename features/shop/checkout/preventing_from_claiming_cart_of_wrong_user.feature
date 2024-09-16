@@ -32,9 +32,9 @@ Feature: Preventing from claiming cart of a wrong user
         And they add product "Symfony T-Shirt" to the cart
         And I view my cart in the previous session
         Then there should be one item in my cart
-        And my cart's total should be "$20.00"
+        And my cart total should be "$20.00"
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given I have product "PHP T-Shirt" in the cart
         When I sign in with email "robb@stark.com" and password "KingInTheNorth"
@@ -45,9 +45,9 @@ Feature: Preventing from claiming cart of a wrong user
         And I sign in again with email "robb@stark.com" and password "KingInTheNorth" in the previous session
         And I see the summary of my previous cart
         Then there should be one item in my cart
-        And my cart's total should be "$20.00"
+        And my cart total should be "$20.00"
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given on this channel account verification is not required
         And I have product "PHP T-Shirt" in the cart
@@ -59,7 +59,7 @@ Feature: Preventing from claiming cart of a wrong user
         And I sign in again with email "eddard@stark.com" and password "handOfTheKing" in the previous session
         And I see the summary of my previous cart
         Then there should be one item in my cart
-        And my cart's total should be "$20.00"
+        And my cart total should be "$20.00"
 
     @no-api @ui @javascript
     Scenario: Preventing logged in user from claiming cart of anonymous user
@@ -69,4 +69,4 @@ Feature: Preventing from claiming cart of a wrong user
         And I add product "Sylius T-Shirt" to the cart
         And I view my cart in the previous session
         Then there should be one item in my cart
-        And my cart's total should be "$150.00"
+        And my cart total should be "$150.00"
