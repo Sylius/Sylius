@@ -1,10 +1,6 @@
 # This file is a part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
-sylius_shop_ajax:
-    resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
-    prefix: /ajax
-
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
