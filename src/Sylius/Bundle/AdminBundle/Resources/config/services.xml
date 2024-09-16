@@ -17,10 +17,6 @@
     </imports>
 
     <parameters>
-        <parameter key="sylius.ajax.product.autocomplete_limit">25</parameter>
-        <parameter key="sylius.ajax.product.variant_autocomplete_limit">25</parameter>
-        <parameter key="sylius.ajax.product.option_autocomplete_limit">10</parameter>
-        <parameter key="sylius.ajax.customer_group.autocomplete_limit">25</parameter>
         <parameter key="sylius_admin.command_handler.create_admin_user.validation_groups" type="collection">
             <parameter>sylius</parameter>
             <parameter>sylius_user_create</parameter>
