@@ -11,18 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Twig\Component\Promotion;
+namespace Sylius\Bundle\UiBundle\Twig\Component;
 
-use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
 #[AsLiveComponent]
-class FormComponent
+class ResourceFormComponent
 {
     use LiveCollectionTrait;
-    /** @use ResourceFormComponentTrait<PromotionInterface> */
+    /** @use ResourceFormComponentTrait<ResourceInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
