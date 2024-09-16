@@ -1,6 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Sylius Sp. z o.o.
-
-sylius_shop_ajax_user:
-    resource: "@SyliusShopBundle/Resources/config/routing/ajax/user.yml"
-    prefix: /users
