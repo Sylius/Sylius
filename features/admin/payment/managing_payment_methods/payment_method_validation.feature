@@ -73,26 +73,6 @@ Feature: Payment method validation
         Then I should be notified that I have to specify paypal sandbox status that is boolean
         And the payment method with code "PEC" should not be added
 
-    @api @ui
-    Scenario: Trying to add a new stripe payment method with only publishable key specified
-        When I want to create a new payment method with "Stripe Checkout" gateway factory
-        And I name it "Stripe Checkout" in "English (United States)"
-        And I specify its code as "SC"
-        And I configure it with only "Publishable key"
-        And I add it
-        Then I should be notified that I have to specify stripe "Secret key"
-        And the payment method with code "PEC" should not be added
-
-    @api @ui
-    Scenario: Trying to add a new stripe payment method with only secret key specified
-        When I want to create a new payment method with "Stripe Checkout" gateway factory
-        And I name it "Stripe Checkout" in "English (United States)"
-        And I specify its code as "SC"
-        And I configure it with only "Secret key"
-        And I add it
-        Then I should be notified that I have to specify stripe "Publishable key"
-        And the payment method with code "PEC" should not be added
-
     @api @no-ui
     Scenario: Trying to add a new payment method without gateway configuration
         When I want to create a new payment method without gateway configuration

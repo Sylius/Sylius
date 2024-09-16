@@ -142,7 +142,6 @@
             <argument type="collection">
                 <argument key="offline">Offline</argument>
                 <argument key="paypal_express_checkout">Paypal Express Checkout</argument>
-                <argument key="stripe_checkout">Stripe Checkout</argument>
             </argument>
 
         </service>
