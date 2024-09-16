@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/PaymentMethod",
-    "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL",
+    "@id": "\/api\/v2\/admin\/payment-methods\/BANK_TRANSFER",
     "@type": "PaymentMethod",
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
@@ -8,22 +8,17 @@
     "gatewayConfig": {
         "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
         "@type": "GatewayConfig",
-        "factoryName": "paypal_express_checkout",
-        "gatewayName": "paypal_express_checkout",
-        "config": {
-            "sandbox": false,
-            "password": "differentTest",
-            "username": "differentTest",
-            "signature": "differentTest"
-        }
+        "factoryName": "offline",
+        "gatewayName": "Offline",
+        "config": {}
     },
     "id": "@integer@",
-    "code": "PAYPAL",
-    "position": 1,
+    "code": "BANK_TRANSFER",
+    "position": 0,
     "enabled": false,
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL\/translations\/@string@",
+            "@id": "\/api\/v2\/admin\/payment-methods\/BANK_TRANSFER\/translations\/@string@",
             "@type": "PaymentMethodTranslation",
             "name": "Different name",
             "description": "Different description",
