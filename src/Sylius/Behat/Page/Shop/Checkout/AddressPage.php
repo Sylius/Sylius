@@ -395,7 +395,8 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     private function chooseDifferentAddress(string $type): void
     {
-        $this->getElement(sprintf('different_%s_address', $type))->click();
+        $elem = $this->getElement(sprintf('different_%s_address', $type));
+        $elem->click();
         $this->waitForElementUpdate('form');
     }
 }

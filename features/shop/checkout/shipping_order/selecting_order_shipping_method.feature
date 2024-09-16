@@ -19,7 +19,7 @@ Feature: Selecting order shipping method
         And I complete the shipping step
         Then I should be on the checkout payment step
 
-    @api @todo-ui
+    @api @no-ui
     Scenario: Selecting shipping method before addressing the order
         Given I have product "Targaryen T-Shirt" in the cart
         When I select "Raven Post" shipping method
