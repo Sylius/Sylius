@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -31,19 +29,8 @@ final class CheckoutResolver implements EventSubscriberInterface
         private CartContextInterface $cartContext,
         private CheckoutStateUrlGeneratorInterface $urlGenerator,
         private RequestMatcherInterface $requestMatcher,
-        private FactoryInterface|StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachineFactory,
     ) {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the fourth argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    FactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public static function getSubscribedEvents(): array
@@ -86,7 +73,7 @@ final class CheckoutResolver implements EventSubscriberInterface
             return;
         }
 
-        if ($this->getStateMachine()->can($order, $graph, $transition)) {
+        if ($this->stateMachineFactory->can($order, $graph, $transition)) {
             return;
         }
 
@@ -101,14 +88,5 @@ final class CheckoutResolver implements EventSubscriberInterface
     private function getRequestedTransition(Request $request): ?string
     {
         return $request->attributes->get('_sylius', [])['state_machine']['transition'] ?? null;
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }
