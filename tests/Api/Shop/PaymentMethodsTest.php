@@ -80,7 +80,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: '/api/v2/shop/payment-methods/PAYPAL',
+            uri: '/api/v2/shop/payment-methods/BANK_TRANSFER',
             server: self::CONTENT_TYPE_HEADER,
         );
         $response = $this->client->getResponse();

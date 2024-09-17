@@ -15,7 +15,7 @@
     <services>
         <service
             id="sylius_admin.twig.component.catalog_promotion.form"
-            class="Sylius\Bundle\AdminBundle\Twig\Component\CatalogPromotion\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="form.factory" />
@@ -290,7 +290,7 @@
 
         <service
             id="sylius_admin.twig.component.promotion.form"
-            class="Sylius\Bundle\AdminBundle\Twig\Component\Promotion\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="form.factory" />
@@ -347,7 +347,7 @@
 
         <service
             id="sylius_admin.twig_component.shipping_method.form"
-            class="Sylius\Bundle\AdminBundle\Twig\Component\ShippingMethod\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="form.factory" />

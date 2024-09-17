@@ -83,41 +83,9 @@
                     "instructions": null
                 }
             }
-        },
-        {
-            "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL",
-            "@type": "PaymentMethod",
-            "channels": [
-                "\/api\/v2\/admin\/channels\/WEB"
-            ],
-            "gatewayConfig": {
-                "@type": "GatewayConfig",
-                "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-                "factoryName": "paypal_express_checkout",
-                "gatewayName": "paypal_express_checkout",
-                "config": {
-                    "sandbox": true,
-                    "password": "test",
-                    "username": "test",
-                    "signature": "test"
-                }
-            },
-            "id": "@integer@",
-            "code": "PAYPAL",
-            "position": 3,
-            "enabled": true,
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL\/translations\/en_US",
-                    "@type": "PaymentMethodTranslation",
-                    "name": "PayPal",
-                    "description": "@string@",
-                    "instructions": null
-                }
-            }
         }
     ],
-    "hydra:totalItems": 4,
+    "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
         "hydra:template": "\/api\/v2\/admin\/payment-methods{?order[code],order[translation.name],localeCode for order[translation.name],translations.name,code,enabled}",

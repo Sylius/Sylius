@@ -39,7 +39,6 @@
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "sylius/currency-bundle": "^2.0",
         "symfony/browser-kit": "^6.4.0",
         "symfony/dependency-injection": "^6.4.1",

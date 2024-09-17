@@ -8,7 +8,7 @@ Feature: Skipping shipping step when only one shipping method is available
         Given the store operates on a single channel in "United States"
         And on this channel shipping step is skipped if only a single shipping method is available
         And the store has a product "Guards! Guards!" priced at "$20.00"
-        And the store allows paying with "Paypal Express Checkout"
+        And the store allows paying with "Bank transfer"
         And I am a logged in customer
 
     @api @ui @javascript
@@ -18,7 +18,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
-        And I select "Paypal Express Checkout" payment method
+        And I select "Bank transfer" payment method
         And I complete the payment step
         Then I should be on the checkout complete step
         And my order's shipping method should be "DHL"
@@ -31,7 +31,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
-        And I select "Paypal Express Checkout" payment method
+        And I select "Bank transfer" payment method
         And I complete the payment step
         Then I should be on the checkout complete step
         And my order's shipping method should be "DHL"
@@ -44,7 +44,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
-        And I select "Paypal Express Checkout" payment method
+        And I select "Bank transfer" payment method
         And I complete the payment step
         Then I should be on the checkout complete step
         And my order's shipping method should be "DHL"

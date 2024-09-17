@@ -283,24 +283,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I configure it with test paypal credentials
-     */
-    public function iConfigureItWithTestPaypalCredentials(): void
-    {
-        $this->client->addRequestData(
-            'gatewayConfig',
-            [
-                'config' => [
-                    'username' => 'test',
-                    'password' => 'test',
-                    'signature' => 'test',
-                    'sandbox' => true,
-                ],
-            ],
-        );
-    }
-
-    /**
      * @When I configure it for username :username with :signature signature
      */
     public function iConfigureItForUsernameWithSignature(string $username, string $signature): void
@@ -381,22 +363,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
             [
                 'config' => [
                     'password' => null,
-                ],
-            ],
-        );
-    }
-
-    /**
-     * @When I configure it with test stripe gateway data
-     */
-    public function iConfigureItWithTestStripeGatewayData(): void
-    {
-        $this->client->addRequestData(
-            'gatewayConfig',
-            [
-                'config' => [
-                    'publishable_key' => 'test',
-                    'secret_key' => 'test',
                 ],
             ],
         );
@@ -488,52 +454,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter payment method %s.', $element, $element),
-        );
-    }
-
-    /**
-     * @Then I should be notified that I have to specify paypal :element
-     */
-    public function iShouldBeNotifiedThatIHaveToSpecifyPaypal(string $element): void
-    {
-        Assert::same(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('gatewayConfig.config[%s]: Please enter paypal %s.', $element, $element),
-        );
-    }
-
-    /**
-     * @Then I should be notified that I have to specify paypal sandbox status
-     */
-    public function iShouldBeNotifiedThatIHaveToSpecifyPaypalSandboxStatus(): void
-    {
-        Assert::same(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'gatewayConfig.config[sandbox]: Please set your paypal sandbox status.',
-        );
-    }
-
-    /**
-     * @Then I should be notified that I have to specify paypal sandbox status that is boolean
-     */
-    public function iShouldBeNotifiedThatIHaveToSpecifyPaypalSandboxStatusThatIsBoolean(): void
-    {
-        Assert::same(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'gatewayConfig.config[sandbox]: This value should be of type bool.',
-        );
-    }
-
-    /**
-     * @Then I should be notified that I have to specify stripe :element
-     */
-    public function iShouldBeNotifiedThatIHaveToSpecifyStripe(string $element): void
-    {
-        $element = strtolower($element);
-
-        Assert::same(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('gatewayConfig.config[%s]: Please enter stripe %s.', str_replace(' ', '_', $element), $element),
         );
     }
 
