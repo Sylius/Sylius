@@ -10,17 +10,17 @@ Feature: Viewing a total quantity of the cart
         And the store has a product "Sylius T-Shirt"
         And the store has a product "Symfony T-Shirt"
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Viewing a total quantity for 1 product with quantity equals 1
         When I add product "PHP T-Shirt" to the cart
         Then I should see cart total quantity is 1
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Viewing a total quantity for 1 product with quantity equals 2
         When I add 2 products "PHP T-Shirt" to the cart
         Then I should see cart total quantity is 2
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Viewing a total quantity for 3 products with various quantities
         When I add 2 products "PHP T-Shirt" to the cart
         And I add 3 products "Sylius T-Shirt" to the cart

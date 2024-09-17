@@ -20,7 +20,7 @@ Feature: Apply correct shipping fee with taxes on order
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui
+    @api @ui @javascript
     Scenario: Proper shipping fee and tax
         Given I have product "PHP T-Shirt" in the cart
         And I addressed the cart
@@ -30,7 +30,7 @@ Feature: Apply correct shipping fee with taxes on order
         And my cart taxes should be "$2.30"
         And my cart shipping total should be "$12.30"
 
-    @api @ui
+    @api @ui @javascript
     Scenario: Proper shipping fee and tax after addressing
         Given I have product "PHP T-Shirt" in the cart
         When I proceed with selecting "Germany" as billing country

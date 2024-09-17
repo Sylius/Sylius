@@ -9,7 +9,7 @@ Feature: Changing address during checkout
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And the store ships everywhere for Free
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Going back to addressing step with and changing email
         Given I have product "T-Shirt banana" in the cart
         And I am at the checkout addressing step

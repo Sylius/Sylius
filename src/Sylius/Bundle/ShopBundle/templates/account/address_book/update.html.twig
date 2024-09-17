@@ -1,0 +1,13 @@
+{% extends '@SyliusShop/account/address_book/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.edit_my_address'|trans }} | {{ parent() }}{% endblock %}
+
+{% block account_header %}
+    {% set title = 'sylius.ui.address_book'|trans %}
+    {% set description = 'sylius.ui.edit_my_address'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block account_content %}
+    {% hook 'sylius_shop.account.address_book.update' with { form, address } %}
+{% endblock %}

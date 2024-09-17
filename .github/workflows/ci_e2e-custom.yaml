@@ -22,11 +22,11 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ "8.2" ]
-                symfony: [ "^6.4" ]
-                mysql: [ "8.0" ]
+                php: ["8.2"]
+                symfony: ["^6.4"]
+                mysql: ["8.0"]
                 resource: ["^1.11@dev"]
-                grid: [ "^1.13@dev" ]
+                grid: ["^1.13@dev"]
 
         env:
             APP_ENV: test_cached
@@ -73,7 +73,7 @@ jobs:
             -   name: Require SyliusResourceBundle version
                 run: |
                     composer require sylius/resource-bundle:${{ matrix.resource }} --no-update    
-                    
+
             -   name: Require SyliusGridBundle version
                 run: |
                     composer require sylius/grid-bundle:${{ matrix.grid }} --no-update                    
@@ -82,7 +82,7 @@ jobs:
                 uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
                     build_type: "sylius"
-                    cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     e2e: "yes"
                     database_version: ${{ matrix.mysql }}

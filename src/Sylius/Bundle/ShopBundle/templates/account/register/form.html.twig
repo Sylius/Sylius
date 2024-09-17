@@ -1,0 +1,14 @@
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+<div class="container" {{ attributes }}>
+    {{ form_start(form, {'action': path('sylius_shop_register'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {{ form_row(form._token) }}
+
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-12 col-md-6">
+            {% hook 'form' with { form } %}
+        </div>
+    </div>
+
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

@@ -28,6 +28,7 @@
     "require": {
         "php": "^8.2",
         "sylius/core-bundle": "^2.0",
+        "sylius/twig-hooks": "~0.3.0",
         "sylius/ui-bundle": "^2.0",
         "symfony/framework-bundle": "^6.4.1",
         "symfony/security-bundle": "^6.4.0",

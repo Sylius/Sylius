@@ -1,0 +1,3 @@
+{% set address = hookable_metadata.context.address %}
+
+<strong {{ sylius_test_html_attribute('full-name', address.fullName) }}>{{ address.fullName }}</strong>

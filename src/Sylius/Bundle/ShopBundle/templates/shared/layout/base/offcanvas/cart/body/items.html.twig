@@ -1,0 +1,13 @@
+{% set cart = hookable_metadata.context.cart %}
+
+{% if cart.empty %}
+    {{ 'sylius.ui.your_cart_is_empty'|trans }}.
+{% else %}
+    <table class="table table-borderless align-middle">
+        <tbody>
+            {% for item in cart.items %}
+                {% hook 'items' with { item } %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

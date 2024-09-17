@@ -1,0 +1,5 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.error404.error.layout':
+            message:
+                template: '@SyliusShop/errors/error404/layout/message.html.twig'

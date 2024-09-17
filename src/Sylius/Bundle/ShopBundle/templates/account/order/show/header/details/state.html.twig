@@ -1,0 +1,5 @@
+{% from '@SyliusShop/shared/macro/order/state.html.twig' import label %}
+
+{% set order = hookable_metadata.context.order %}
+
+{{ label(order.state) }}
