@@ -38,5 +38,20 @@
                 template="@SyliusShop/shared/layout/base/header/top_bar/currency_switcher.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_shop.twig.component.taxon_menu"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\TaxonMenuComponent"
+        >
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.context.locale" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:common:taxon_menu"
+                template="@SyliusShop/shared/layout/base/header/navbar/menu.html.twig"
+            />
+        </service>
     </services>
 </container>

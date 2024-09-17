@@ -86,7 +86,7 @@ twig_hooks:
 
         'sylius_shop.base.header.navbar':
             menu:
-                template: "@SyliusShop/shared/layout/base/header/navbar/menu.html.twig"
+                component: "sylius_shop:common:taxon_menu"
 
         'sylius_shop.base.header.flashes':
             content:
