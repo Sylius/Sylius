@@ -1,6 +1,6 @@
 {# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Payment\FormComponent #}
 
-{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
 
 <div {{ attributes }}>
     {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'novalidate': 'novalidate'}}) }}
