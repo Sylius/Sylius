@@ -7,8 +7,14 @@
         <div class="dropdown" {{ sylius_test_html_attribute('locale-selector') }}>
             <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('active-locale', active_locale) }}>
                 {% set locale_country = active_locale|sylius_locale_country|default(active_locale) %}
-                {{ flag(locale_country) }}
-                {{ locale_country|upper }}
+                {% if locale_country == '001' %}
+                    {% set split_active_locale = active_locale|split('_') %}
+                    {{ flag(split_active_locale[1]) }}
+                    {{ split_active_locale[0]|upper }} {{ 'sylius.ui.world'|trans }}
+                {% else %}
+                    {{ flag(locale_country) }}
+                    {{ locale_country|upper }}
+                {% endif %}
             </button>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                 {% for code in available_locales %}
@@ -16,8 +22,14 @@
                         <li>
                             <a class="dropdown-item py-2" href="{{ path('sylius_shop_switch_locale', {'code': code}) }}" {{ sylius_test_html_attribute('available-locale', code) }} >
                                 {% set country_code = code|sylius_locale_country|default(code) %}
-                                {{ flag(country_code) }}
-                                {{ country_code|upper }}
+                                {% if country_code == '001' %}
+                                    {% set split_code = code|split('_') %}
+                                    {{ flag(split_code[1]) }}
+                                    {{ split_code[0]|upper }} {{ 'sylius.ui.world'|trans }}
+                                {% else %}
+                                    {{ flag(country_code) }}
+                                    {{ country_code|upper }}
+                                {% endif %}
                             </a>
                         </li>
                     {% endif %}
