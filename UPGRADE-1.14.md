@@ -109,26 +109,28 @@
     ```
 
 1. The following routes has been deprecated and will be removed in Sylius 2.0:
-    - `sylius_admin_dashboard_statistics`
-    - `sylius_admin_ajax_customer_groups_by_phrase`
-    - `sylius_admin_ajax_customer_group_by_code`
-    - `sylius_admin_render_attribute_forms`
-    - `sylius_admin_ajax_product_options_by_phrase`
-    - `sylius_admin_ajax_find_product_options`
-    - `sylius_admin_ajax_product_variants_by_phrase`
-    - `sylius_admin_ajax_all_product_variants_by_phrase`
-    - `sylius_admin_ajax_product_variants_by_codes`
     - `sylius_admin_ajax_all_product_variants_by_codes`
+    - `sylius_admin_ajax_all_product_variants_by_phrase`
+    - `sylius_admin_ajax_customer_group_by_code`
+    - `sylius_admin_ajax_customer_groups_by_phrase`
+    - `sylius_admin_ajax_find_product_options`
     - `sylius_admin_ajax_generate_product_slug`
-    - `sylius_admin_ajax_product_by_name_phrase`
-    - `sylius_admin_ajax_products_by_phrase`
+    - `sylius_admin_ajax_generate_taxon_slug`
     - `sylius_admin_ajax_product_by_code`
+    - `sylius_admin_ajax_product_by_name_phrase`
     - `sylius_admin_ajax_product_index`
-    - `sylius_admin_ajax_taxon_root_nodes`
-    - `sylius_admin_ajax_taxon_leafs`
+    - `sylius_admin_ajax_product_options_by_phrase`
+    - `sylius_admin_ajax_products_by_phrase`
+    - `sylius_admin_ajax_product_variants_by_codes`
+    - `sylius_admin_ajax_product_variants_by_phrase`
     - `sylius_admin_ajax_taxon_by_code`
     - `sylius_admin_ajax_taxon_by_name_phrase`
-    - `sylius_admin_ajax_generate_taxon_slug`
+    - `sylius_admin_ajax_taxon_leafs`
+    - `sylius_admin_ajax_taxon_root_nodes`
+    - `sylius_admin_dashboard_statistics`
+    - `sylius_admin_get_attribute_types`
+    - `sylius_admin_get_payment_gateways`
+    - `sylius_admin_get_product_attributes`
     - `sylius_admin_partial_address_log_entry_index`
     - `sylius_admin_partial_catalog_promotion_show`
     - `sylius_admin_partial_channel_index`
@@ -136,10 +138,8 @@
     - `sylius_admin_partial_customer_show`
     - `sylius_admin_partial_order_latest`
     - `sylius_admin_partial_order_latest_in_channel`
-    - `sylius_admin_get_payment_gateways`
-    - `sylius_admin_get_attribute_types`
-    - `sylius_admin_get_product_attributes`
     - `sylius_admin_partial_product_show`
     - `sylius_admin_partial_promotion_show`
-    - `sylius_admin_partial_taxon_tree`
     - `sylius_admin_partial_taxon_show`
+    - `sylius_admin_partial_taxon_tree`
+    - `sylius_admin_render_attribute_forms`
