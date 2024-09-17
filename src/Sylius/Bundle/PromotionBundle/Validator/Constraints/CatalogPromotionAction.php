@@ -15,6 +15,12 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+trigger_deprecation(
+    'sylius/promotion-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0, use the usual symfony logic for validation.',
+    CatalogPromotionAction::class,
+);
 final class CatalogPromotionAction extends Constraint
 {
     public string $invalidType = 'sylius.catalog_promotion_action.invalid_type';
