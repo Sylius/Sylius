@@ -1,4 +1,18 @@
-{{ render(url('sylius_shop_partial_taxon_show_by_slug', {
-    'slug': app.request.attributes.get('slug'),
-    'template': '@SyliusShop/product/index/page/breadcrumbs/breadcrumbs_taxonomy.html.twig'
-})) }}
+{% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+
+{% set items = [] %}
+
+{% set items = items|merge([{ path: path('sylius_shop_homepage'), label: 'sylius.ui.home'|trans }]) %}
+{% set ancestors = taxon.ancestors|reverse %}
+
+{% for ancestor in ancestors %}
+    {% if ancestor.isRoot() or not ancestor.enabled %}
+        {% set items = items|merge([{ label: ancestor.name }]) %}
+    {% else %}
+        {% set items = items|merge([{ path: path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}), label: ancestor.name }]) %}
+    {% endif %}
+{% endfor %}
+
+{% set items = items|merge([{ label: taxon.name, active: true }]) %}
+
+{{ breadcrumbs(items) }}
