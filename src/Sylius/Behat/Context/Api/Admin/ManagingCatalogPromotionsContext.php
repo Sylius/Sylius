@@ -1416,9 +1416,9 @@ final readonly class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatAtLeastOneOfTheProvidedChannelCodesDoesNotExist(): void
     {
-        Assert::contains(
+        Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. At least one of the provided channel codes does not exist.',
+            '/Channel with code [^"]+ does not exist/',
         );
     }
 
