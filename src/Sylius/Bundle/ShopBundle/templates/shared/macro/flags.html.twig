@@ -1,1 +1,3 @@
-{% extends '@SyliusUi/Macro/flags.html.twig' %}
+{% macro flag(code) %}
+    <span class="fi fi-{{ code|lower }} me-2"></span>
+{% endmacro %}

@@ -1,3 +1,6 @@
+{% from '@SyliusShop/shared/macro/flags.html.twig' import flag %}
+
 <div {{ sylius_test_html_attribute('order-locale-name') }}>
-    <span class="fi fi-{{ sylius.localeCode|sylius_locale_country|lower }} mx-2"></span>{{ sylius.localeCode|sylius_locale_name }}
+    {{ flag(sylius.localeCode|sylius_locale_country) }}
+    {{ sylius.localeCode|sylius_locale_name }}
 </div>
