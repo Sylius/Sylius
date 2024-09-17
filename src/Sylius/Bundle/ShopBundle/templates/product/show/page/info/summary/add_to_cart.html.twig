@@ -1,6 +1,6 @@
 {# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCartFormComponent #}
 
-{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
 
 <div class="position-relative" {{ attributes }}>
     {% if product.enabledVariants.empty() or product.simple and not sylius_inventory_is_available(product.enabledVariants.first) %}
