@@ -1168,11 +1168,12 @@ final readonly class PromotionContext implements Context
         ?string $prefix = null,
         ?string $suffix = null,
     ): void {
-        $instruction = new PromotionCouponGeneratorInstruction();
-        $instruction->setAmount($amount);
-        $instruction->setCodeLength($codeLength);
-        $instruction->setPrefix($prefix);
-        $instruction->setSuffix($suffix);
+        $instruction = new PromotionCouponGeneratorInstruction(
+            amount: $amount,
+            prefix: $prefix,
+            codeLength: $codeLength,
+            suffix: $suffix,
+        );
 
         $this->couponGenerator->generate($promotion, $instruction);
     }

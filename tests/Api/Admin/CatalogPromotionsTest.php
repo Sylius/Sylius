@@ -486,6 +486,10 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'message' => 'This field is missing.',
             ],
             [
+                'propertyPath' => 'actions[7].configuration',
+                'message' => 'Channel with code invalid_channel does not exist.',
+            ],
+            [
                 'propertyPath' => 'actions[7].configuration[WEB]',
                 'message' => 'This field is missing.',
             ],
