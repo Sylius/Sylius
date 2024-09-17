@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_shop.product.index.page':
             breadcrumbs:
-                template: "@SyliusShop/product/index/page/breadcrumbs.html.twig"
+                component: "sylius_shop:product:show:breadcrumbs"
             body:
                 template: "@SyliusShop/product/index/page/body.html.twig"
 
@@ -14,11 +14,11 @@ twig_hooks:
 
         'sylius_shop.product.index.page.body.sidebar':
             taxonomy:
-                template: "@SyliusShop/product/index/page/body/sidebar/taxonomy.html.twig"
+                component: "sylius_shop:product:show:taxonomy"
 
         'sylius_shop.product.index.page.body.main':
             header:
-                template: "@SyliusShop/product/index/page/body/main/header.html.twig"
+                component: "sylius_shop:product:show:header"
             filters:
                 template: "@SyliusShop/product/index/page/body/main/filters.html.twig"
             products:

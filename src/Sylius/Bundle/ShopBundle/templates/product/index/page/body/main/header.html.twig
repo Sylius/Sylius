@@ -1,6 +1,3 @@
 <div class="mb-4">
-    {{ render(url('sylius_shop_partial_taxon_show_by_slug', {
-        'slug': app.request.attributes.get('slug'),
-        'template': '@SyliusShop/product/index/page/body/main/header/header_taxonomy.html.twig'
-    })) }}
+    {% hook 'sylius_shop.product.index.page.body.main.header'  with { taxon } %}
 </div>
