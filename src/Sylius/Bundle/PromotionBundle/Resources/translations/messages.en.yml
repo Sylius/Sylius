@@ -64,12 +64,30 @@ sylius:
             total_price_of_items_from_taxon: Total price of items from taxon
             cart_quantity_configuration:
                 count: Count
+                comparison_operator:
+                    label: Comparison operator
+                    choices:
+                        greater_than_equal: Greater than or equal (>=)
+                        equal: Equal (===)
+                        different: Different (!==)
+                        lower_than: Lower than (<)
+                        lower_than_equal: Lower than or equal (<=)
+                        greater_than: Greater than (>)
                 equal: Equal
             contains_product_configuration:
                 exclude: Exclude
                 variants: Products
             item_total_configuration:
                 amount: Amount
+                comparison_operator:
+                    label: Comparison operator
+                    choices:
+                        greater_than_equal: Greater than or equal (>=)
+                        equal: Equal (===)
+                        different: Different (!==)
+                        lower_than: Lower than (<)
+                        lower_than_equal: Lower than or equal (<=)
+                        greater_than: Greater than (>)
             nth_order_configuration:
                 nth: Nth
             shipping_country_configuration:
