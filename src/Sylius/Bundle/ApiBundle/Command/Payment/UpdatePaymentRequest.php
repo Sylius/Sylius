@@ -20,7 +20,7 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 class UpdatePaymentRequest implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public ?string $hash = null,
+        public readonly string $hash,
         public mixed $payload = null,
     ) {
     }
