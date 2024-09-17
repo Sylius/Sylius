@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Twig\Component;
@@ -17,8 +26,10 @@ trait LiveCollectionTrait
     #[LiveAction]
     public function addCollectionItem(
         PropertyAccessorInterface $propertyAccessor,
-        #[LiveArg] string $name,
-        #[LiveArg] ?string $type = null,
+        #[LiveArg]
+        string $name,
+        #[LiveArg]
+        ?string $type = null,
     ): void {
         $propertyPath = $this->fieldNameToPropertyPath($name, $this->formName);
         $data = $propertyAccessor->getValue($this->formValues, $propertyPath);
@@ -39,8 +50,10 @@ trait LiveCollectionTrait
     #[LiveAction]
     public function removeCollectionItem(
         PropertyAccessorInterface $propertyAccessor,
-        #[LiveArg] string $name,
-        #[LiveArg] int|string $index,
+        #[LiveArg]
+        string $name,
+        #[LiveArg]
+        int|string $index,
     ): void {
         $propertyPath = $this->fieldNameToPropertyPath($name, $this->formName);
         $data = $propertyAccessor->getValue($this->formValues, $propertyPath);

@@ -27,6 +27,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveArg;
 class FormComponent
 {
     use LiveCollectionTrait;
+
     /** @use ResourceFormComponentTrait<TaxonInterface> */
     use ResourceFormComponentTrait;
 

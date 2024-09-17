@@ -24,6 +24,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 class FormComponent
 {
     use LiveCollectionTrait;
+
     /** @use ResourceFormComponentTrait<ZoneInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;

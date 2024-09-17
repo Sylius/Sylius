@@ -19,7 +19,6 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 class FormElement extends Element implements FormElementInterface
 {
-
     public function fillElement(string $value, string $element, array $parameters = []): void
     {
         $foundElement = $this->getElement($element, $parameters);
