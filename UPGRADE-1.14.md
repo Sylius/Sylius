@@ -143,3 +143,15 @@
     - `sylius_admin_partial_taxon_show`
     - `sylius_admin_partial_taxon_tree`
     - `sylius_admin_render_attribute_forms`
+    - `sylius_shop_ajax_cart_add_item`
+    - `sylius_shop_ajax_cart_item_remove`
+    - `sylius_shop_ajax_user_check_action`
+    - `sylius_shop_partial_cart_summary`
+    - `sylius_shop_partial_cart_add_item`
+    - `sylius_shop_partial_channel_menu_taxon_index`
+    - `sylius_shop_partial_product_association_show`
+    - `sylius_shop_partial_product_index_latest`
+    - `sylius_shop_partial_product_review_latest`
+    - `sylius_shop_partial_product_show_by_slug`
+    - `sylius_shop_partial_taxon_index_by_code`
+    - `sylius_shop_partial_taxon_show_by_slug`

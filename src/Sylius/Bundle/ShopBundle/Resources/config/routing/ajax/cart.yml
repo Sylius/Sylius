@@ -1,6 +1,7 @@
 # This file is a part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_shop_ajax_cart_add_item:
     path: /add
     methods: [POST]
@@ -20,6 +21,7 @@ sylius_shop_ajax_cart_add_item:
                 parameters: {}
             flash: sylius.cart.add_item
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_shop_ajax_cart_item_remove:
     path: /{id}/remove
     methods: [DELETE]
