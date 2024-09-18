@@ -20,6 +20,12 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0, use the usual symfony logic for validation.',
+    ForTaxonsScopeValidator::class,
+);
 final class ForTaxonsScopeValidator implements ScopeValidatorInterface
 {
     public function __construct(private TaxonRepositoryInterface $taxonRepository)
