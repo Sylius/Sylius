@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address;
 
-use Sylius\Component\Core\Model\Order;
+use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -26,33 +27,30 @@ use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
-use Symfony\UX\LiveComponent\ComponentWithFormTrait;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
 class FormComponent
 {
-    use ComponentWithFormTrait;
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
-
-    #[LiveProp]
-    public ?Order $order = null;
+    /** @use ResourceFormComponentTrait<OrderInterface> */
+    use ResourceFormComponentTrait;
 
     #[LiveProp]
     public bool $emailExists = false;
 
     /**
+     * @param OrderRepositoryInterface<OrderInterface> $repository
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
-     * @param class-string $formClass
      */
     public function __construct(
+        OrderRepositoryInterface $repository,
+        FormFactoryInterface $formFactory,
+        string $resourceClass,
+        string $formClass,
         private readonly CustomerContextInterface $customerContext,
         private readonly UserRepositoryInterface $shopUserRepository,
         private readonly AddressRepositoryInterface $addressRepository,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly string $formClass,
     ) {
+        $this->initialize($repository, $formFactory, $resourceClass, $formClass);
     }
 
     #[PreReRender(priority: -100)]
@@ -92,7 +90,7 @@ class FormComponent
     {
         return $this->formFactory->create(
             $this->formClass,
-            $this->order,
+            $this->resource,
             ['customer' => $this->customerContext->getCustomer()],
         );
     }
