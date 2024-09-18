@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\Order">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/orders">
+            <operation name="sylius_api_admin_order_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/orders">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -41,7 +41,7 @@
                 </filters>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/orders/{tokenValue}">
+            <operation name="sylius_api_admin_order_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/orders/{tokenValue}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -54,6 +54,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_order_post_resend_confirmation_email"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/orders/{tokenValue}/resend-confirmation-email"
                 messenger="input"
@@ -78,6 +79,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_order_patch_cancel"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/orders/{tokenValue}/cancel"
                 input="false"

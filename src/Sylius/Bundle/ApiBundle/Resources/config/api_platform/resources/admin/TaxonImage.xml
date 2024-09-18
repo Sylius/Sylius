@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\TaxonImage">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/taxons/{code}/images">
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/taxons/{code}/images"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
                 </uriVariables>
@@ -53,7 +57,11 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}/images/{id}">
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/taxons/{code}/images/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\TaxonImage"/>
@@ -89,7 +97,11 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/taxons/{code}/images/{id}">
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/taxons/{code}/images/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\TaxonImage"/>
@@ -123,7 +135,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/taxons/{code}/images/{id}">
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/taxons/{code}/images/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="images"/>
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\TaxonImage"/>
@@ -135,6 +151,7 @@
     <resource class="Sylius\Component\Core\Model\Taxon">
         <operations>
             <operation
+                name="sylius_api_admin_taxon_taxon_image_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/taxons/{code}/images"
                 processor="sylius_api.state_processor.admin.taxon_image.persist"

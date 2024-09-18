@@ -14,7 +14,11 @@
 >
     <resource class="Sylius\Component\Customer\Model\CustomerGroup">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/customer-groups">
+            <operation
+                name="sylius_api_admin_customer_group_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/customer-groups"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +34,11 @@
                 </filters>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/customer-groups/{code}">
+            <operation
+                name="sylius_api_admin_customer_group_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/customer-groups/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -42,7 +50,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/customer-groups" >
+            <operation
+                name="sylius_api_admin_customer_group_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/customer-groups"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -72,7 +84,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/customer-groups/{code}" >
+            <operation
+                name="sylius_api_admin_customer_group_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/customer-groups/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -102,7 +118,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/customer-groups/{code}" />
+            <operation
+                name="sylius_api_admin_customer_group_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/customer-groups/{code}"
+            />
         </operations>
     </resource>
 </resources>

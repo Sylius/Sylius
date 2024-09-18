@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\Product">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/products">
+            <operation name="sylius_api_admin_product_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/products">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -61,7 +61,7 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/products/{code}">
+            <operation name="sylius_api_admin_product_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/products/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -94,7 +94,7 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/products">
+            <operation name="sylius_api_admin_product_post" class="ApiPlatform\Metadata\Post" uriTemplate="/admin/products">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -124,7 +124,7 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/products/{code}">
+            <operation name="sylius_api_admin_product_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/products/{code}">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -155,6 +155,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_product_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/products/{code}"
                 processor="sylius_api.state_processor.admin.product.remove"

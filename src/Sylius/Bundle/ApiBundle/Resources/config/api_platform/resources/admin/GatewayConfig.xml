@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Bundle\PayumBundle\Model\GatewayConfig">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/gateway-configs/{id}" />
+            <operation
+                name="sylius_api_admin_gateway_config_get"
+                class="ApiPlatform\Metadata\NotExposed"
+                uriTemplate="/admin/gateway-configs/{id}"
+            />
         </operations>
     </resource>
 </resources>

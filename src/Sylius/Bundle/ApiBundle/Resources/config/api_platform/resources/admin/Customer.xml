@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\Customer">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/customers">
+            <operation
+                name="sylius_api_admin_customer_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/customers"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -39,7 +43,7 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/customers/{id}">
+            <operation name="sylius_api_admin_customer_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/customers/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -52,6 +56,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_customer_get_statistics"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/admin/customers/{id}/statistics"
                 controller="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction"
@@ -67,7 +72,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/customers" >
+            <operation name="sylius_api_admin_customer_post" class="ApiPlatform\Metadata\Post" uriTemplate="/admin/customers" >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -99,7 +104,7 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/customers/{id}" >
+            <operation name="sylius_api_admin_customer_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/customers/{id}" >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -131,6 +136,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_customer_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/customers/{id}/user"
                 controller="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction"

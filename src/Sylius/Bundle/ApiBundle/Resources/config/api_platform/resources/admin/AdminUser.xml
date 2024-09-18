@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\AdminUser" shortName="Administrator" routePrefix="admin">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation name="sylius_api_admin_admin_user_get_collection" class="ApiPlatform\Metadata\GetCollection">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +30,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get">
+            <operation name="sylius_api_admin_admin_user_get" class="ApiPlatform\Metadata\Get">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -42,7 +42,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post">
+            <operation name="sylius_api_admin_admin_user_post" class="ApiPlatform\Metadata\Post">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -73,7 +73,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" processor="sylius_api.state_processor.admin.admin_user.persist">
+            <operation
+                name="sylius_api_admin_admin_user_put"
+                class="ApiPlatform\Metadata\Put"
+                processor="sylius_api.state_processor.admin.admin_user.persist"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -103,7 +107,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" processor="sylius_api.state_processor.admin.admin_user.remove"/>
+            <operation
+                name="sylius_api_admin_admin_user_delete"
+                class="ApiPlatform\Metadata\Delete"
+                processor="sylius_api.state_processor.admin.admin_user.remove"
+            />
         </operations>
     </resource>
 </resources>

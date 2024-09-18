@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\CatalogPromotion">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/catalog-promotions">
+            <operation
+                name="sylius_api_admin_catalog_promotion_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/catalog-promotions"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -37,7 +41,11 @@
                 </filters>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get"  uriTemplate="/admin/catalog-promotions/{code}">
+            <operation
+                name="sylius_api_admin_catalog_promotion_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/catalog-promotions/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -49,7 +57,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/catalog-promotions" >
+            <operation
+                name="sylius_api_admin_catalog_promotion_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/catalog-promotions"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -108,7 +120,11 @@ Example configuration for `percentage_discount` action type:
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/catalog-promotions/{code}">
+            <operation
+                name="sylius_api_admin_catalog_promotion_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/catalog-promotions/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -168,6 +184,7 @@ Example configuration for `percentage_discount` action type:
             </operation>
 
             <operation
+                name="sylius_api_admin_catalog_promotion_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/catalog-promotions/{code}"
                 controller="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction"

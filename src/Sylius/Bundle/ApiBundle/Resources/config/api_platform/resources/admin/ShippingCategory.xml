@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Shipping\Model\ShippingCategory">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipping-categories">
+            <operation
+                name="sylius_api_admin_shipping_category_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/shipping-categories"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +34,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/shipping-categories/{code}">
+            <operation
+                name="sylius_api_admin_shipping_category_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/shipping-categories/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -42,7 +50,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/shipping-categories" >
+            <operation
+                name="sylius_api_admin_shipping_category_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/shipping-categories"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -72,7 +84,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/shipping-categories/{code}" >
+            <operation
+                name="sylius_api_admin_shipping_category_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/shipping-categories/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -102,7 +118,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/shipping-categories/{code}" />
+            <operation
+                name="sylius_api_admin_shipping_category_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/shipping-categories/{code}"
+            />
         </operations>
     </resource>
 </resources>

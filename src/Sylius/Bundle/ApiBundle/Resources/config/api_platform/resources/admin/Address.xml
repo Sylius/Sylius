@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\Address">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/addresses/{id}">
+            <operation name="sylius_api_admin_address_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/addresses/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +30,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/addresses/{id}">
+            <operation name="sylius_api_admin_address_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/addresses/{id}">
                 <denormalizationContext>
                     <values>
                         <value name="groups">

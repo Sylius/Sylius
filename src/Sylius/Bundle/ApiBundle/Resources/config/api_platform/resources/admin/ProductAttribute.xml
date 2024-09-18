@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Product\Model\ProductAttribute">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-attributes">
+            <operation
+                name="sylius_api_admin_product_attribute_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/product-attributes"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -40,7 +44,11 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-attributes/{code}">
+            <operation
+                name="sylius_api_admin_product_attribute_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/product-attributes/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -52,7 +60,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-attributes">
+            <operation
+                name="sylius_api_admin_product_attribute_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/product-attributes"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -144,7 +156,11 @@ Example configuration for a `select` type attribute:
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-attributes/{code}">
+            <operation
+                name="sylius_api_admin_product_attribute_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/product-attributes/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -237,6 +253,7 @@ Example configuration for a `select` type attribute:
             </operation>
 
             <operation
+                name="sylius_api_admin_product_attribute_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/product-attributes/{code}"
                 processor="sylius_api.state_processor.admin.product_attribute.remove"

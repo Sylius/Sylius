@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\Taxon">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/taxons">
+            <operation name="sylius_api_admin_taxon_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/taxons">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -50,7 +50,7 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}">
+            <operation name="sylius_api_admin_taxon_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -82,7 +82,7 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/taxons">
+            <operation name="sylius_api_admin_taxon_post" class="ApiPlatform\Metadata\Post" uriTemplate="/admin/taxons">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -112,7 +112,7 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/taxons/{code}">
+            <operation name="sylius_api_admin_taxon_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/taxons/{code}">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -142,7 +142,7 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/taxons/{code}" />
+            <operation name="sylius_api_admin_taxon_delete" class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/taxons/{code}" />
         </operations>
     </resource>
 </resources>

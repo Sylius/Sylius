@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\ProductTaxon">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-taxons">
+            <operation
+                name="sylius_api_admin_product_taxon_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/product-taxons"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -39,7 +43,11 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-taxons/{id}">
+            <operation
+                name="sylius_api_admin_product_taxon_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/product-taxons/{id}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -51,7 +59,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-taxons">
+            <operation
+                name="sylius_api_admin_product_taxon_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/product-taxons"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -81,7 +93,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-taxons/{id}">
+            <operation
+                name="sylius_api_admin_product_taxon_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/product-taxons/{id}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -111,7 +127,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-taxons/{id}"/>
+            <operation
+                name="sylius_api_admin_product_taxon_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/product-taxons/{id}"
+            />
         </operations>
     </resource>
 </resources>

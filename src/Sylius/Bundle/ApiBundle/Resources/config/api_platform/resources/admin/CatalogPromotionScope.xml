@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\CatalogPromotionScope">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/catalog-promotions/{code}/scopes/{id}">
+            <operation
+                name="sylius_api_admin_catalog_promotion_scope_get"
+                class="ApiPlatform\Metadata\NotExposed"
+                uriTemplate="/admin/catalog-promotions/{code}/scopes/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\CatalogPromotion" fromProperty="scopes" />
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\CatalogPromotionScope" />

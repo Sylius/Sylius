@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Shipping\Model\ShippingMethodRule">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" routePrefix="admin" />
+            <operation
+                name="sylius_api_admin_shipping_method_rule_get"
+                class="ApiPlatform\Metadata\NotExposed"
+                routePrefix="admin"
+            />
         </operations>
     </resource>
 </resources>

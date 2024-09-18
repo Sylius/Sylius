@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Product\Model\ProductAssociation">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-associations">
+            <operation
+                name="sylius_api_admin_product_association_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/product-associations"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -33,7 +37,11 @@
                 </filters>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-associations/{id}">
+            <operation
+                name="sylius_api_admin_product_association_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/product-associations/{id}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -45,7 +53,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-associations">
+            <operation
+                name="sylius_api_admin_product_association_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/product-associations"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -75,7 +87,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-associations/{id}">
+            <operation
+                name="sylius_api_admin_product_association_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/product-associations/{id}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -105,7 +121,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-associations/{id}" />
+            <operation
+                name="sylius_api_admin_product_association_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/product-associations/{id}"
+            />
         </operations>
     </resource>
 </resources>
