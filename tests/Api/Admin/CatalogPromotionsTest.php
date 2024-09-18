@@ -20,7 +20,6 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChe
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CatalogPromotionsTest extends JsonApiTestCase
@@ -485,6 +484,10 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             [
                 'propertyPath' => 'actions[6].configuration[WEB]',
                 'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[7].configuration',
+                'message' => 'Channel with code invalid_channel does not exist.',
             ],
             [
                 'propertyPath' => 'actions[7].configuration[WEB]',

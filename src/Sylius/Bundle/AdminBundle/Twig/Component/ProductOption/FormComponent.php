@@ -24,6 +24,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveArg;
 class FormComponent
 {
     use LiveCollectionTrait;
+
     /** @use ResourceFormComponentTrait<ProductOptionInterface> */
     use ResourceFormComponentTrait {
         initialize as public __construct;

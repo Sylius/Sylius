@@ -41,6 +41,7 @@ class FormComponent
 
     use ComponentToolsTrait;
     use LiveCollectionTrait;
+
     /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait;
 

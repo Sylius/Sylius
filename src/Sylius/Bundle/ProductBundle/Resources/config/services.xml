@@ -19,13 +19,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.controller.product_slug" class="Sylius\Bundle\ProductBundle\Controller\ProductSlugController">
-            <argument type="service" id="sylius.generator.slug" />
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.product_variant.inner" />
         </service>

@@ -114,9 +114,10 @@ final class GenerateCouponsCommandTest extends KernelTestCase
             ->willReturn($promotion)
         ;
 
-        $expectedInstructions = new PromotionCouponGeneratorInstruction();
-        $expectedInstructions->setAmount(10);
-        $expectedInstructions->setCodeLength(10);
+        $expectedInstructions = new PromotionCouponGeneratorInstruction(
+            amount: 10,
+            codeLength: 10,
+        );
 
         $this->couponGenerator
             ->method('generate')
@@ -153,9 +154,10 @@ final class GenerateCouponsCommandTest extends KernelTestCase
             ->willReturn($promotion)
         ;
 
-        $expectedInstructions = new PromotionCouponGeneratorInstruction();
-        $expectedInstructions->setAmount(5);
-        $expectedInstructions->setCodeLength(10);
+        $expectedInstructions = new PromotionCouponGeneratorInstruction(
+            amount: 5,
+            codeLength: 10,
+        );
 
         $this->couponGenerator
             ->expects($this->once())
@@ -192,9 +194,10 @@ final class GenerateCouponsCommandTest extends KernelTestCase
             ->willReturn($promotion)
         ;
 
-        $expectedInstructions = new PromotionCouponGeneratorInstruction();
-        $expectedInstructions->setAmount(10);
-        $expectedInstructions->setCodeLength(7);
+        $expectedInstructions = new PromotionCouponGeneratorInstruction(
+            amount: 10,
+            codeLength: 7,
+        );
 
         $this->couponGenerator
             ->expects($this->once())

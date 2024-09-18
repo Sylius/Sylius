@@ -45,7 +45,6 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),

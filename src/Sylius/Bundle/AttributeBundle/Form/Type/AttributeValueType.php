@@ -32,7 +32,7 @@ use Symfony\Component\Form\ReversedTransformer;
 abstract class AttributeValueType extends AbstractResourceType
 {
     /**
-     * @param DataTransformerInterface<LocaleInterface, string|null>|null $localeToCodeTransformer
+     * @param DataTransformerInterface<LocaleInterface, string|null> $localeToCodeTransformer
      * @param RepositoryInterface<AttributeInterface> $attributeRepository
      * @param RepositoryInterface<LocaleInterface> $localeRepository
      */
@@ -43,18 +43,8 @@ abstract class AttributeValueType extends AbstractResourceType
         protected RepositoryInterface $attributeRepository,
         protected RepositoryInterface $localeRepository,
         protected FormTypeRegistryInterface $formTypeRegistry,
-        protected ?DataTransformerInterface $localeToCodeTransformer = null,
+        protected DataTransformerInterface $localeToCodeTransformer,
     ) {
-        if (null === $this->localeToCodeTransformer) {
-            trigger_deprecation(
-                'sylius/attribute-bundle',
-                '1.13',
-                'Not passing a "%s" instance as argument 7 to "%s" is deprecated. It will not be possible in Sylius 2.0.',
-                LocaleToCodeTransformer::class,
-                self::class,
-            );
-        }
-
         parent::__construct($dataClass, $validationGroups);
     }
 
@@ -97,7 +87,7 @@ abstract class AttributeValueType extends AbstractResourceType
         ;
 
         $builder->get('localeCode')->addModelTransformer(
-            new ReversedTransformer($this->localeToCodeTransformer ?? new ResourceToIdentifierTransformer($this->localeRepository, 'code')),
+            new ReversedTransformer($this->localeToCodeTransformer),
         );
     }
 

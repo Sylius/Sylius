@@ -31,9 +31,9 @@ use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionAction
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
