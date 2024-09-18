@@ -9,7 +9,7 @@
 
 import { startStimulusApp } from '@symfony/stimulus-bridge';
 import LiveController from '@symfony/ux-live-component';
-import ApiLoginController from "./controllers/ApiLoginController";
+import ApiLoginController from './controllers/ApiLoginController';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
