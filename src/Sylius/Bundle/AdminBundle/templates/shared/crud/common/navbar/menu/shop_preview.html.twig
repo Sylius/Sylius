@@ -1,0 +1,17 @@
+{% set homepage_path = sylius_bundle_loaded_checker('SyliusShopBundle') ? path('sylius_shop_homepage') : '/' %}
+
+{% if channels|length == 1 %}
+    {% set channel = channels|first %}
+    <a class="btn btn-outline-secondary" href="{{ sylius_channel_url(homepage_path, channel) }}">{{ 'sylius.ui.view_your_store'|trans }}</a>
+{% elseif channels|length > 1 %}
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ 'sylius.ui.view_your_store'|trans }}
+        </button>
+        <ul class="dropdown-menu">
+            {% for channel in channels %}
+                <li><a class="dropdown-item" href="{{ sylius_channel_url(homepage_path, channel) }}">{{ channel.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

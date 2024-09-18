@@ -11,5 +11,7 @@ twig_hooks:
             user_dropdown:
                 template: '@SyliusAdmin/shared/crud/common/navbar/items/user.html.twig'
         'sylius_admin.common.component.navbar.menu':
+            shop_preview:
+                component: 'sylius_admin:navbar:shop_preview'
             search:
                 template: '@SyliusAdmin/shared/crud/common/navbar/menu/search.html.twig'

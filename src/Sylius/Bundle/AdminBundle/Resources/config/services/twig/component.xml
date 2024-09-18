@@ -321,6 +321,19 @@
         </service>
 
         <service
+                id="sylius_admin.twig.component.shared.navbar.shop_preview"
+                class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\ShopPreviewComponent"
+        >
+            <argument type="service" id="sylius.repository.channel" />
+
+            <tag
+                    name="twig.component"
+                    key="sylius_admin:navbar:shop_preview"
+                    template="@SyliusAdmin/shared/crud/common/navbar/menu/shop_preview.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.shared.navbar.notifications"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent"
         >
