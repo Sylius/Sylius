@@ -9,7 +9,7 @@
 
 import './styles/main.scss';
 
-import './bootstrap';
+import './app';
 
 import './scripts/bulk-delete';
 import './scripts/check-all';
