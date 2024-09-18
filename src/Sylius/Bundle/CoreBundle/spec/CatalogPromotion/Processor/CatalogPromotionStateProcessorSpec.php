@@ -41,11 +41,11 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
     ): void {
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
 
-        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
+        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
 
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldNotBeCalled();
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldNotBeCalled();
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldNotBeCalled();
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }
@@ -57,12 +57,12 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
     ): void {
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
 
-        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(false);
-        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_ACTIVATE)->willReturn(true);
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
+        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(false);
+        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE)->willReturn(true);
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
 
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldNotBeCalled();
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldNotBeCalled();
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldNotBeCalled();
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }
@@ -74,12 +74,12 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
     ): void {
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(false);
 
-        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(false);
-        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
+        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(false);
+        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
 
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldNotBeCalled();
-        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH,CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldNotBeCalled();
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldNotBeCalled();
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }

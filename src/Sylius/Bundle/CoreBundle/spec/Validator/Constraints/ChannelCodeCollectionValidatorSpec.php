@@ -38,7 +38,7 @@ final class ChannelCodeCollectionValidatorSpec extends ObjectBehavior
     function let(
         ChannelRepositoryInterface $channelRepository,
         PropertyAccessorInterface $propertyAccessor,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
     ): void {
         $this->beConstructedWith($channelRepository, $propertyAccessor);
 
@@ -292,7 +292,7 @@ final class ChannelCodeCollectionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         ValidatorInterface $validator,
         ContextualValidatorInterface $contextualValidator,
-        ChannelsAwareInterface $channelsAware
+        ChannelsAwareInterface $channelsAware,
     ): void {
         $channelsAware->getChannels()->willReturn(new ArrayCollection());
 

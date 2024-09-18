@@ -19,7 +19,6 @@ use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
-    /** @param LocaleCollectionProviderInterface $localeRepository */
     public function __construct(
         private LocaleCollectionProviderInterface $localeRepository,
         private string $defaultLocaleCode,
