@@ -23,6 +23,9 @@
 }
 
 body {
+    --bs-body-bg: #{$body-bg};
+    --bs-tertiary-bg: #{$body-bg};
+    --bs-body-color: #{$body-color};
     font-feature-settings: "cv03", "cv04", "cv11";
 }
 

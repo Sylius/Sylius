@@ -10,22 +10,16 @@
 @import "variables";
 
 @import "@tabler/core/src/scss/tabler.scss";
+@import "@tabler/core/src/scss/tabler-flags.scss";
 
-// TODO: Once https://github.com/tabler/tabler/pull/1718 merged or resolve remove the custom _flags.scss and import the tabler's one
-//@import "@tabler/core/src/scss/tabler-flags.scss";
-@import "_flags.scss";
-
-body {
-    --bs-body-bg: #{$body-bg};
-    --bs-tertiary-bg: #{$body-bg};
-    --bs-body-color: #{$body-color};
-}
-
+@import "body";
 @import "alert";
 @import "avatar";
+@import "choices";
 @import "collapse";
 @import "datatable";
 @import "filters";
+@import "flags";
 @import "form";
 @import "infinite-tree";
 @import "layout";
@@ -35,12 +29,4 @@ body {
 @import "rating";
 @import "sidebar";
 @import "tom-select";
-
-@import "body";
-@import "choices";
-
-.sylius-admin-product-attribute-autocomplete {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.5rem;
-}
+@import "utils";
