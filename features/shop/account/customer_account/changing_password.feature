@@ -9,7 +9,7 @@ Feature: Changing a customer password
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @api @ui
+    @api @ui @mink:chromedriver
     Scenario: Changing my password
         When I want to change my password
         And I change password from "sylius" to "blackhouse"

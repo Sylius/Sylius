@@ -1,0 +1,9 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-4 mb-5">
+        {% hook 'sylius_shop.product.show.page' with { product, configuration } %}
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+.accordion-flat {
+    .accordion-collapse {
+        border-width: 0;
+    }
+
+    .accordion-item {
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+
+        .accordion-button,
+        .accordion-body {
+            padding-left: 0;
+            padding-right: 0;
+            border-radius: 0;
+        }
+
+        .accordion-button {
+            &:active {
+                background: $gray-100;
+            }
+
+            &:not(.collapsed) {
+                box-shadow: none;
+            }
+        }
+
+        .accordion-body {
+            padding-top: $s_accordion-body-padding-top;
+            padding-bottom: $s_accordion-body-padding-bottom;
+        }
+    }
+}

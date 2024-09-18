@@ -14,11 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 
-interface ShowPageInterface extends PageInterface
+interface ShowPageInterface extends ShopPageInterface
 {
     /**
      * @throws ElementNotFoundException
@@ -74,8 +73,6 @@ interface ShowPageInterface extends PageInterface
 
     public function hasProductInAssociation(string $productName, string $productAssociationName): bool;
 
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
-
     public function hasReviewTitled(string $title): bool;
 
     public function isOutOfStock(): bool;
@@ -92,9 +89,11 @@ interface ShowPageInterface extends PageInterface
 
     public function getVariantsNames(): array;
 
-    public function getOptionValues(string $optionName): array;
+    public function getOptionValues(string $optionCode): array;
 
     public function getDescription(): string;
 
     public function hasBreadcrumbLink(string $taxonName): bool;
+
+    public function getValidationMessage(string $element, array $parameters = []): string;
 }

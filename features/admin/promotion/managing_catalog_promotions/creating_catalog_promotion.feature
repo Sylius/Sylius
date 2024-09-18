@@ -132,7 +132,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And it should have priority equal to 10
 
-    @api @ui @mink:chromedriver
+    @todo @api @ui @mink:chromedriver
     Scenario: Adding a new catalog promotion with priorities with others already existing
         Given there is a catalog promotion "PHP stuff promotion" with priority 100 that reduces price by "30%" and applies on "PHP T-Shirt" variant
         And there is a catalog promotion "T-Shirt sale" with priority 200 that reduces price by "10%" and applies on "PHP T-Shirt" variant

@@ -20,7 +20,7 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
-final class LocaleContext implements Context
+final readonly class LocaleContext implements Context
 {
     public function __construct(
         private HomePageInterface $homePage,
@@ -37,7 +37,7 @@ final class LocaleContext implements Context
     public function iSwitchTheLocaleToTheLocale(LocaleInterface $locale): void
     {
         $this->homePage->open();
-        $this->homePage->switchLocale($locale->getName('en_US'));
+        $this->homePage->switchLocale($locale->getCode());
 
         $this->sharedStorage->set('current_locale_code', $locale->getCode());
     }
@@ -63,7 +63,7 @@ final class LocaleContext implements Context
      * @Then I should be able to shop using the :localeNameInCurrentLocale locale
      * @Then the store should be available in the :localeNameInCurrentLocale locale
      */
-    public function iShouldBeAbleToShopUsingTheLocale(string $localeNameInCurrentLocale)
+    public function iShouldBeAbleToShopUsingTheLocale(string $localeNameInCurrentLocale): void
     {
         Assert::oneOf($localeNameInCurrentLocale, $this->homePage->getAvailableLocales());
     }
@@ -72,7 +72,7 @@ final class LocaleContext implements Context
      * @Then I should not be able to shop using the :locale locale
      * @Then the store should not be available in the :locale locale
      */
-    public function iShouldNotBeAbleToShopUsingTheLocale($locale)
+    public function iShouldNotBeAbleToShopUsingTheLocale(string $locale): void
     {
         if (in_array($locale, $this->homePage->getAvailableLocales(), true)) {
             throw new \InvalidArgumentException(sprintf(
@@ -86,7 +86,7 @@ final class LocaleContext implements Context
     /**
      * @Then I should not be able to shop without default locale
      */
-    public function iShouldNotBeAbleToShop()
+    public function iShouldNotBeAbleToShop(): void
     {
         try {
             $this->homePage->tryToOpen();

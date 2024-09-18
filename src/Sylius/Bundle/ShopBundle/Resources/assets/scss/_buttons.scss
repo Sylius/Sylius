@@ -1,0 +1,37 @@
+.btn-icon {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    padding-left: 1.4rem;
+    padding-right: 1.6rem;
+}
+
+.btn-primary {
+    color: #fff;
+}
+
+.btn-transparent {
+    @extend .btn-light;
+    background-color: transparent;
+    border-color: transparent;
+
+    &:hover {
+        background-color: $gray-100;
+        border-color: transparent;
+    }
+
+    &:focus {
+        background-color: transparent !important;
+        border-color: transparent !important;
+    }
+
+    &:active {
+        background-color: $gray-200 !important;
+        border-color: transparent !important;
+    }
+}
+
+.btn-outline-gray {
+    @extend .btn-outline-dark;
+    --bs-btn-border-color: var(--bs-gray-400);
+}

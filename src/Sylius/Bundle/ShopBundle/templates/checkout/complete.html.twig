@@ -1,0 +1,13 @@
+{% extends '@SyliusShop/checkout/shared/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.complete'|trans }} | {{ parent() }}{% endblock %}
+{% block content_title %}{{ 'sylius.ui.summary_of_your_order'|trans }}{% endblock %}
+
+{% set active_step = 'complete' %}
+
+{% block content %}
+    {% hook 'sylius_shop.checkout.complete' with { order, form, active_step } %}
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}

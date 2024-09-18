@@ -1,0 +1,18 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.homepage.index':
+            banner:
+                template: '@SyliusShop/homepage/banner.html.twig'
+            latest_deals:
+                component: 'sylius_shop:product:list'
+                props:
+                    limit: 4
+                configuration:
+                    title: 'sylius.homepage.latest_deals'
+                    test_attribute: 'latest-deals'
+            new_collection:
+                template: '@SyliusShop/homepage/new_collection.html.twig'
+            latest_products:
+                component: 'sylius_shop:product:list'
+                props:
+                    limit: 8

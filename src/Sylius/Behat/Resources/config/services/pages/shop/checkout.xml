@@ -22,7 +22,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.page.shop.checkout.address" class="%sylius.behat.page.shop.checkout.address.class%" parent="sylius.behat.symfony_page" public="false" >
+        <service id="sylius.behat.page.shop.checkout.address" class="%sylius.behat.page.shop.checkout.address.class%" parent="sylius.behat.page.shop.page" public="false" >
             <argument type="service" id="sylius.factory.address" />
         </service>
         <service id="sylius.behat.page.shop.checkout.select_payment" class="%sylius.behat.page.shop.checkout.select_payment.class%" parent="sylius.behat.symfony_page" public="false" />
