@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_shop_partial_cart_summary:
     path: /summary
     methods: [GET]
@@ -9,6 +10,7 @@ sylius_shop_partial_cart_summary:
         _sylius:
             template: $template
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_shop_partial_cart_add_item:
     path: /add-item
     methods: [GET]
