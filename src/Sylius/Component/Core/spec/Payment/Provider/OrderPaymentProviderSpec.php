@@ -110,7 +110,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
             ->willReturn(PaymentTransitions::TRANSITION_CREATE)
         ;
         $stateMachine
-            ->apply($newPayment,PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
+            ->apply($newPayment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
             ->shouldBeCalled()
         ;
 
@@ -146,7 +146,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
             ->willReturn(PaymentTransitions::TRANSITION_CREATE)
         ;
         $stateMachine
-            ->apply($newPayment,PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
+            ->apply($newPayment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
             ->shouldBeCalled()
         ;
 
