@@ -67,16 +67,8 @@
         <service id="sylius.form.extension.type.address" class="Sylius\Bundle\CoreBundle\Form\Extension\AddressTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
         </service>
-        <service id="sylius.form.extension.type.country" class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">
-            <argument type="service" id="sylius.repository.country" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
-        </service>
         <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="100" />
-        </service>
-        <service id="sylius.form.extension.type.locale" class="Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension">
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.order" class="Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\OrderType" priority="100" />
@@ -99,9 +91,6 @@
         </service>
         <service id="sylius.form.extension.type.taxon" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxonTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType" priority="100" />
-        </service>
-        <service id="sylius.form.extension.type.customer" class="Sylius\Bundle\CoreBundle\Form\Extension\CustomerTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\CustomerBundle\Form\Type\CustomerType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.promotion" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType" priority="100" />
@@ -153,6 +142,7 @@
 
         <service id="sylius.form.type.product_image" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType">
             <argument>%sylius.model.product_image.class%</argument>
+            <argument>%sylius.model.product_variant.class%</argument>
             <argument>%sylius.form.type.product_image.validation_groups%</argument>
             <tag name="form.type" />
         </service>

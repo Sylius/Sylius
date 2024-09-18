@@ -55,11 +55,6 @@ final class FilterElement extends Element implements FilterElementInterface
         $this->getElement('end_date_to')->setValue($date);
     }
 
-    public function search(string $phrase): void
-    {
-        $this->getElement('search')->setValue($phrase);
-    }
-
     public function filter(): void
     {
         $this->getElement('filter')->click();
@@ -73,7 +68,6 @@ final class FilterElement extends Element implements FilterElementInterface
             'end_date_from' => '#criteria_endDate_from_date',
             'end_date_to' => '#criteria_endDate_to_date',
             'filter' => 'button[type="submit"]:contains("Filter")',
-            'search' => '#criteria_search_value',
             'start_date_from' => '#criteria_startDate_from_date',
             'start_date_to' => '#criteria_startDate_to_date',
             'state' => '#criteria_state',

@@ -95,20 +95,30 @@ final class Request implements RequestInterface
         $this->content[$key][] = $subResource;
     }
 
-    public function removeSubResource(string $subResource, string $id): void
+    public function removeSubResource(string $subResourceKey, string $value, string $key = '@id'): void
     {
-        foreach ($this->content[$subResource] as $key => $resource) {
-            if ($resource === $id) {
-                unset($this->content[$subResource][$key]);
+        foreach ($this->content[$subResourceKey] as $index => $objectOrIri) {
+            if (is_array($objectOrIri)) {
+                if (isset($objectOrIri[$key]) && $objectOrIri[$key] === $value) {
+                    unset($this->content[$subResourceKey][$index]);
+                }
+
+                continue;
+            }
+
+            if ($objectOrIri === $value) {
+                unset($this->content[$subResourceKey][$index]);
             }
         }
     }
 
-    public function authorize(?string $token, string $authorizationHeader): void
+    public function authorize(?string $token, string $authorizationHeader): self
     {
         if ($token !== null) {
             $this->headers['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         }
+
+        return $this;
     }
 
     private function mergeArraysUniquely(array $firstArray, array $secondArray): array

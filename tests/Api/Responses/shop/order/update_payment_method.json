@@ -1,13 +1,17 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"
@@ -17,37 +21,40 @@
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"
     },
     "payments": [
         {
-            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/payments\/@integer@",
             "@type": "Payment",
             "method": "\/api\/v2\/shop\/payment-methods\/BANK_TRANSFER"
         }
     ],
     "shipments": [
         {
-            "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/shipments\/@integer@",
             "@type": "Shipment",
             "method": "\/api\/v2\/shop\/shipping-methods\/UPS"
         }
     ],
     "localeCode": "en_US",
     "checkoutState": "completed",
-    "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "tokenValue": "token",
     "number": "000000001",
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 3
         }
     ],

@@ -51,7 +51,7 @@ final class ThemeContext implements Context
     public function iUnsetThemeOnChannel(ChannelInterface $channel)
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
-        $this->channelUpdatePage->unsetTheme();
+        $this->channelUpdatePage->setTheme('');
         $this->channelUpdatePage->saveChanges();
     }
 

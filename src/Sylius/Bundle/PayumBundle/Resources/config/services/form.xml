@@ -31,15 +31,5 @@
             <argument type="service" id="payum.dynamic_gateways.cypher" on-invalid="null" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType" priority="100" />
         </service>
-
-        <service id="sylius.form.type.gateway_configuration.paypal" class="Sylius\Bundle\PayumBundle\Form\Type\PaypalGatewayConfigurationType">
-            <tag name="sylius.gateway_configuration_type" type="paypal_express_checkout" label="sylius.payum_gateway_factory.paypal_express_checkout" priority="100" />
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.gateway_configuration.stripe" class="Sylius\Bundle\PayumBundle\Form\Type\StripeGatewayConfigurationType">
-            <tag name="sylius.gateway_configuration_type" type="stripe_checkout" label="sylius.payum_gateway_factory.stripe_checkout" priority="50" />
-            <tag name="form.type" />
-        </service>
     </services>
 </container>

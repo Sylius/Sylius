@@ -15,8 +15,7 @@ namespace spec\Sylius\Component\Core\StateResolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Prophecy\Argument;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -26,9 +25,9 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class OrderShippingStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory): void
+    function let(StateMachineInterface $stateMachine): void
     {
-        $this->beConstructedWith($stateMachineFactory);
+        $this->beConstructedWith($stateMachine);
     }
 
     function it_implements_an_order_state_resolver_interface(): void
@@ -37,36 +36,11 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
     }
 
     function it_marks_an_order_as_shipped_if_all_shipments_delivered(
-        FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
-        ShipmentInterface $shipment1,
-        ShipmentInterface $shipment2,
-        WinzouStateMachineInterface $orderStateMachine,
-    ): void {
-        $shipments = new ArrayCollection();
-        $shipments->add($shipment1->getWrappedObject());
-        $shipments->add($shipment2->getWrappedObject());
-
-        $order->getShipments()->willReturn($shipments);
-        $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
-        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
-
-        $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
-        $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
-
-        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_uses_the_new_state_machine_abstraction_if_passed(
-        StateMachineInterface $orderStateMachine,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
     ): void {
-        $this->beConstructedWith($orderStateMachine);
-
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
         $shipments->add($shipment2->getWrappedObject());
@@ -77,31 +51,34 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
 
-        $orderStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP)->shouldBeCalled();
+        $stateMachine
+            ->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP)
+            ->shouldBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_marks_an_order_as_shipped_if_there_are_no_shipments_to_deliver(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
-        WinzouStateMachineInterface $orderStateMachine,
     ): void {
         $order->getShipments()->willReturn(new ArrayCollection());
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
-        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
 
-        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP)->shouldBeCalled();
+        $stateMachine
+            ->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP)
+            ->shouldBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_marks_an_order_as_partially_shipped_if_some_shipments_are_delivered(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        WinzouStateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
@@ -109,22 +86,23 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
 
         $order->getShipments()->willReturn($shipments);
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
-        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_CANCELLED);
 
-        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP)->shouldBeCalled();
+        $stateMachine
+            ->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP)
+            ->shouldBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_does_not_mark_an_order_if_it_is_already_in_this_shipping_state(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        WinzouStateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
@@ -132,12 +110,11 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
 
         $order->getShipments()->willReturn($shipments);
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);
-        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
 
-        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP)->shouldNotBeCalled();
+        $stateMachine->apply(Argument::cetera())->shouldNotBeCalled();
 
         $this->resolve($order);
     }

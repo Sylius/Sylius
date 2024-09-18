@@ -33,16 +33,18 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentMethodChangerInterface $paymentMethodChanger,
     ): void {
-        $changePaymentMethod = new ChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
-        $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $changePaymentMethod->setSubresourceId('123');
+        $changePaymentMethod = new ChangePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
         $paymentMethodChanger
             ->changePaymentMethod(
                 'CASH_ON_DELIVERY_METHOD',
-                '123',
+                123,
                 Argument::type(OrderInterface::class),
             )
             ->shouldNotBeCalled()
@@ -59,16 +61,18 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
     ): void {
-        $changePaymentMethod = new ChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
-        $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $changePaymentMethod->setSubresourceId('123');
+        $changePaymentMethod = new ChangePaymentMethod(
+            orderTokenValue: 'ORDERTOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'CASH_ON_DELIVERY_METHOD',
+        );
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $paymentMethodChanger
             ->changePaymentMethod(
                 'CASH_ON_DELIVERY_METHOD',
-                '123',
+                123,
                 $order,
             )
             ->willReturn($order)

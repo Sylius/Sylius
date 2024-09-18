@@ -13,24 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Account;
 
-use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware;
 
-class ChangeShopUserPassword implements ShopUserIdAwareInterface
+#[ShopUserIdAware]
+class ChangeShopUserPassword
 {
-    /** @var mixed|null */
-    public $shopUserId;
-
-    public function __construct(public string $newPassword, public string $confirmNewPassword, public string $currentPassword)
-    {
-    }
-
-    public function getShopUserId()
-    {
-        return $this->shopUserId;
-    }
-
-    public function setShopUserId($shopUserId): void
-    {
-        $this->shopUserId = $shopUserId;
+    public function __construct(
+        public readonly string $newPassword,
+        public readonly string $confirmNewPassword,
+        public readonly string $currentPassword,
+        public readonly mixed $shopUserId,
+    ) {
     }
 }

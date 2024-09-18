@@ -2,8 +2,8 @@ sylius_admin_shipment:
     resource: |
         alias: sylius.shipment
         section: admin
-        templates: "@SyliusAdmin\\Crud"
-        only: ['index']
+        templates: "@SyliusAdmin\\shared\\crud"
+        only: ['index', 'show']
         grid: sylius_admin_shipment
         permission: true
         vars:
@@ -27,17 +27,7 @@ sylius_admin_shipment_ship:
                 transition: ship
             redirect: sylius_admin_shipment_index
             flash: sylius.shipment.shipped
-            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
-
-sylius_admin_shipment_show:
-    path: /shipments/{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.shipment::showAction
-        _sylius:
-            section: admin
-            permission: true
-            template: "@SyliusAdmin/Shipment/show.html.twig"
+            form: Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType
 
 sylius_admin_shipment_resend_confirmation_email:
     path: /shipments/{id}/resend-confirmation-email

@@ -24,18 +24,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
-    /** @deprecated */
-    public const WEB_ASSETS_DIRECTORY = 'web/assets/';
-
-    /** @deprecated */
-    public const WEB_BUNDLES_DIRECTORY = 'web/bundles/';
-
-    /** @deprecated */
-    public const WEB_MEDIA_DIRECTORY = 'web/media/';
-
-    /** @deprecated */
-    public const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
-
     /** @var CommandExecutor|null */
     protected $commandExecutor;
 
@@ -129,5 +117,3 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $checker->ensureDirectoryIsWritable($directory, $output);
     }
 }
-
-class_alias(AbstractInstallCommand::class, '\Sylius\Bundle\CoreBundle\Command\AbstractInstallCommand');

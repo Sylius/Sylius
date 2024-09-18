@@ -1,0 +1,52 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+<div class="col-12 col-md-6" {{ attributes }}>
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'sylius.ui.new_orders'|trans }}</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-vcenter card-table" {{ sylius_test_html_attribute('new-orders') }}>
+                <thead>
+                <tr>
+                    <th>{{ 'sylius.ui.customer'|trans }}</th>
+                    <th class="text-center">{{ 'sylius.ui.items'|trans }}</th>
+                    <th class="text-center">{{ 'sylius.ui.total'|trans }}</th>
+                    <th class="w-1"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for order in new_orders %}
+                        <tr>
+                            <td>
+                                <div class="row align-items-center py-1">
+                                    <div class="col-auto">
+                                        <span class="avatar ">
+                                            {{ order.customer.firstName|first }}{{ order.customer.lastName|first }}
+                                        </span>
+                                    </div>
+                                    <div class="col text-truncate">
+                                        <div>{{ order.customer.firstName }} {{ order.customer.lastName }}</div>
+                                        <div class="text-muted text-truncate mt-n1">{{ order.customer.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">{{ order.items|length }}</td>
+                            <td class="text-center text-muted">{{ order.total|sylius_format_money(order.currencyCode, order.localeCode) }}</td>
+                            <td class="text-end">
+                                <a href="{{ path('sylius_admin_order_show', { id: order.id }) }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.show'|trans }}">
+                                    {{ icon({ icon: action.icon|default('eye'), class: 'icon icon-tabler' }) }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4" class="text-center"><a href="{{ path('sylius_admin_order_index') }}">{{ 'sylius.ui.show_all'|trans }}</a></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

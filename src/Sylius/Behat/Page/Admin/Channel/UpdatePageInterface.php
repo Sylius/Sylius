@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
@@ -22,38 +21,33 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function disable(): void;
 
+    public function getTheme(): string;
+
     public function setTheme(string $themeName): void;
 
-    /**
-     * @throws ElementNotFoundException
-     */
-    public function unsetTheme(): void;
+    /** @return string[] */
+    public function getLocales(): array;
 
     public function chooseLocale(string $language): void;
 
+    /** @return string[] */
+    public function getCurrencies(): array;
+
     public function chooseCurrency(string $currencyCode): void;
 
+    public function getDefaultTaxZone(): ?string;
+
     public function chooseDefaultTaxZone(string $taxZone): void;
+
+    public function getTaxCalculationStrategy(): string;
 
     public function chooseTaxCalculationStrategy(string $taxCalculationStrategy): void;
 
     public function isCodeDisabled(): bool;
 
-    public function isLocaleChosen(string $language): bool;
-
-    public function isCurrencyChosen(string $currencyCode): bool;
-
-    public function isDefaultTaxZoneChosen(string $taxZone): bool;
-
-    public function isAnyDefaultTaxZoneChosen(): bool;
-
-    public function isTaxCalculationStrategyChosen(string $taxCalculationStrategy): bool;
-
     public function isBaseCurrencyDisabled(): bool;
 
-    public function changeMenuTaxon(string $menuTaxon): void;
+    public function specifyMenuTaxon(string $menuTaxon): void;
 
     public function getMenuTaxon(): string;
-
-    public function getUsedTheme(): string;
 }

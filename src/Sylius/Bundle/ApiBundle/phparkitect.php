@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
+use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use Arkitect\ClassSet;
 use Arkitect\CLI\Config;
 use Arkitect\Expression\ForClasses\Extend;
@@ -31,13 +31,13 @@ return static function (Config $config): void {
     /** Filtration rules */
     $rules[] = Rule::allClasses()
         ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\ApiBundle\Filter\Doctrine'))
-        ->should(new Extend(AbstractContextAwareFilter::class))
+        ->should(new Extend(AbstractFilter::class))
         ->because('All ORM Api Platform filters should be placed in one namespace')
     ;
 
     $rules[] = Rule::allClasses()
         ->that(new NotResideInTheseNamespaces('Sylius\Bundle\ApiBundle\Filter\Doctrine'))
-        ->should(new NotExtend(AbstractContextAwareFilter::class))
+        ->should(new NotExtend(AbstractFilter::class))
         ->because('All ORM Api Platform filters should be placed in one namespace')
     ;
 

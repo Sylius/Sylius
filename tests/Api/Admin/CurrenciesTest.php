@@ -62,7 +62,7 @@ final class CurrenciesTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_allow_creating_a_currency_with_invalid_code(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/api_administrator.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(

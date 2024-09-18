@@ -25,7 +25,7 @@ final class AddressesTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'address_with_customer.yaml']);
 
         /** @var AddressInterface $address */
-        $address = $fixtures['address'];
+        $address = $fixtures['address_tony'];
 
         $this->client->request(
             method: 'GET',
@@ -46,7 +46,7 @@ final class AddressesTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'address_with_customer.yaml']);
 
         /** @var AddressInterface $address */
-        $address = $fixtures['address'];
+        $address = $fixtures['address_tony'];
 
         $this->client->request(
             method: 'PUT',
@@ -78,7 +78,7 @@ final class AddressesTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'address_with_customer.yaml']);
 
         /** @var AddressInterface $address */
-        $address = $fixtures['address'];
+        $address = $fixtures['address_tony'];
 
         $this->client->request(
             method: 'PUT',
@@ -120,7 +120,7 @@ final class AddressesTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'address_with_customer.yaml']);
 
         /** @var AddressInterface $address */
-        $address = $fixtures['address'];
+        $address = $fixtures['address_tony'];
 
         $this->client->request(
             method: 'GET',

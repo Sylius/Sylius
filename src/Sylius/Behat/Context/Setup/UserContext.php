@@ -181,9 +181,12 @@ final class UserContext implements Context
      */
     public function iveChangedMyPasswordFromTo(UserInterface $user, string $currentPassword, string $newPassword): void
     {
-        $changeShopUserPassword = new ChangeShopUserPassword($newPassword, $newPassword, $currentPassword);
-
-        $changeShopUserPassword->setShopUserId($user->getId());
+        $changeShopUserPassword = new ChangeShopUserPassword(
+            newPassword: $newPassword,
+            confirmNewPassword: $newPassword,
+            currentPassword: $currentPassword,
+            shopUserId: $user->getId(),
+        );
 
         $this->messageBus->dispatch($changeShopUserPassword);
     }

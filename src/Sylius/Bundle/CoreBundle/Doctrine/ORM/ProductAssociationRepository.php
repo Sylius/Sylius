@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository as BaseProductAssociationRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductAssociationRepositoryInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
@@ -21,9 +21,11 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
 /**
  * @template T of ProductAssociationInterface
  *
+ * @extends BaseProductAssociationRepository<T>
+ *
  * @implements ProductAssociationRepositoryInterface<T>
  */
-class ProductAssociationRepository extends EntityRepository implements ProductAssociationRepositoryInterface
+class ProductAssociationRepository extends BaseProductAssociationRepository implements ProductAssociationRepositoryInterface
 {
     public function findWithProductsWithinChannel($associationId, ChannelInterface $channel): ProductAssociationInterface
     {

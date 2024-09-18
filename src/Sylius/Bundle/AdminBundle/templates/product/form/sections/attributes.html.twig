@@ -1,0 +1,112 @@
+{% set product_attributes = hookable_metadata.context.mapped_product_attributes %}
+
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-attributes" role="tabpanel" tabindex="0">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 id="product-attributes" class="card-title">
+                {{ 'sylius.ui.attributes'|trans }}
+            </h2>
+        </div>
+        <div class="card-body py-4 border-bottom">
+            <div class="sylius-admin-product-attribute-autocomplete">
+                <twig:sylius_admin:product:product_attribute_autocomplete data-model="attributesToBeAdded:selectedAttributeCodes" :excludedAttributeCodes="product_attributes|keys" />
+                <button type="button" class="btn btn-primary" data-action="live#action" data-live-action-param="prevent|addAttributes" {{ sylius_test_html_attribute('attribute-add-button') }}>
+                    {{ 'sylius.ui.add'|trans }}
+                </button>
+            </div>
+        </div>
+        <div class="row" {{ stimulus_controller('tabs-errors') }}>
+            <div class="col-12 col-sm-4">
+                <div class="border-end">
+                    <div id="product_attribute_tabs" class="list-group list-group-flush" role="tablist">
+                        {% for product_attribute_code, product_attribute_value in product_attributes %}
+                            {% set product_attribute_name = (product_attribute_value|first).vars.data.name %}
+                            <div
+                                class="py-2 cursor-pointer list-group-item list-group-item-action {% if loop.first %}active{% endif %}"
+                                data-tabs-errors-target="tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#{{ product_attribute_code }}"
+                                aria-selected="{{ loop.first ? 'true' : 'false' }}"
+                                role="tab"
+                                {{ sylius_test_html_attribute('attribute-tab', product_attribute_name) }}
+                            >
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>{{ product_attribute_name }}</div>
+                                    <div class="tab-icons d-flex align-items-center" style="transform: translateX(1rem)">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm border-0 shadow-none"
+                                            data-action="live#action:stop"
+                                            data-live-action-param="prevent|removeAttribute"
+                                            data-live-attribute-code-param="{{ product_attribute_code }}"
+                                            {{ sylius_test_html_attribute('attribute-delete-button', product_attribute_name) }}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="text-muted" width="12" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M18 6l-12 12"></path>
+                                                <path d="M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-8">
+                <div class="py-3 px-5">
+                    <div class="tab-content">
+                        {% for product_attribute_code, product_attribute_values in product_attributes %}
+                            <div
+                                class="tab-pane show {% if loop.first %}active{% endif %}"
+                                id="{{ product_attribute_code }}"
+                                role="tabpanel"
+                            >
+                                {% for product_attribute_value in product_attribute_values %}
+                                    {% set locale_code = product_attribute_value.vars.data.localeCode %}
+                                    <div class="field d-flex gap-2 mb-3">
+                                        {% if locale_code is not null %}
+                                            <div>
+                                                <span class="flag flag-sm flag-country-{{ locale_code|sylius_locale_country|lower }} me-2"></span>
+                                            </div>
+                                        {% endif %}
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                {% set required_class = not locale_code or locale_code == sylius_base_locale ? 'required' : '' %}
+                                                {{ form_label(product_attribute_value.value, null, {label_attr: {class: required_class}}) }}
+                                                {% if locale_code is not null %}
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-secondary btn-sm"
+                                                        data-action="live#action"
+                                                        data-live-action-param="applyToAll"
+                                                        data-live-attribute-code-param="{{ product_attribute_code }}"
+                                                        data-live-locale-code-param="{{ product_attribute_value.vars.data.localeCode }}"
+                                                    >
+                                                        {{ 'sylius.ui.apply_to_all'|trans }}
+                                                    </button>
+                                                {% endif %}
+                                            </div>
+                                            {{ form_widget(
+                                                product_attribute_value.value,
+                                                sylius_test_form_attributes({
+                                                    'attribute-value': '',
+                                                    'attribute-name': product_attribute_value.value.vars.label,
+                                                    'locale-code': product_attribute_value.localeCode.vars.value,
+                                                })
+                                            ) }}
+                                            {{ form_errors(product_attribute_value.value) }}
+                                            <input type="hidden" name="{{ product_attribute_value.attribute.vars.full_name }}" value="{{ product_attribute_value.attribute.vars.value }}">
+                                            <input type="hidden" name="{{ product_attribute_value.localeCode.vars.full_name }}" value="{{ product_attribute_value.localeCode.vars.value }}">
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

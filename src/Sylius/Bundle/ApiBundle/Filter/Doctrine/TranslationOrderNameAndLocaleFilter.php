@@ -13,21 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
-use ApiPlatform\Core\Bridge\Doctrine\Common\Filter\OrderFilterInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface as LegacyQueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Common\Filter\OrderFilterInterface;
+use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilter
+final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
 {
     protected function filterProperty(
         string $property,
         $value,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface|QueryNameGeneratorInterface $queryNameGenerator,
+        QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        ?string $operationName = null,
+        ?Operation $operation = null,
+        array $context = [],
     ): void {
         if ('order' === $property && isset($value['translation.name'])) {
             /** @phpstan-ignore-next-line */
@@ -56,7 +57,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
                     ],
                 ],
             ],
-            /* @see \Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TranslationOrderLocaleExtension */
+            /* @see \Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\TranslationOrderLocaleExtension */
             'localeCode for order[translation.name]' => [
                 'type' => 'string',
                 'required' => false,

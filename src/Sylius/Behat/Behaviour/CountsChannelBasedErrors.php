@@ -23,7 +23,7 @@ trait CountsChannelBasedErrors
     /** @throws ElementNotFoundException */
     protected function countChannelErrors(NodeElement $channelCollectionElement, string $channelCode): int
     {
-        $errorCountSelector = sprintf('.item[data-tab*="[%s]"] span.label', $channelCode);
+        $errorCountSelector = sprintf('[data-test-tab="%s"] .badge', $channelCode);
         /** @var NodeElement $element */
         $element = $channelCollectionElement->find('css', $errorCountSelector);
 

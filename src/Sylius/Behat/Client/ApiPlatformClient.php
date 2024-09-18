@@ -26,11 +26,11 @@ final class ApiPlatformClient implements ApiClientInterface
     private ?Response $lastResponse = null;
 
     public function __construct(
-        private AbstractBrowser $client,
-        private SharedStorageInterface $sharedStorage,
-        private RequestFactoryInterface $requestFactory,
-        private string $authorizationHeader,
-        private ?string $section = null,
+        private readonly AbstractBrowser $client,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly RequestFactoryInterface $requestFactory,
+        private readonly string $authorizationHeader,
+        private readonly string $section,
     ) {
     }
 
@@ -52,6 +52,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request, $forgetResponse);
     }
 
+    /** @param array<string, string> $queryParameters */
     public function subResourceIndex(string $resource, string $subResource, string $id, array $queryParameters = [], bool $forgetResponse = false): Response
     {
         $request = $this->requestFactory->subResourceIndex($this->section, $resource, $id, $subResource, $queryParameters);
@@ -115,6 +116,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
+    /** @param array<string, mixed> $content */
     public function applyTransition(string $resource, string $id, string $transition, array $content = []): Response
     {
         $request = $this->requestFactory->transition($this->section, $resource, $id, $transition);
@@ -152,7 +154,7 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request = $this->requestFactory->create($this->section, $resource, $this->authorizationHeader, $this->getToken());
     }
 
-    public function buildUpdateRequest(string $resource, string $id): void
+    public function buildUpdateRequest(string $resource, string $id): self
     {
         $this->show($resource, $id);
 
@@ -163,7 +165,10 @@ final class ApiPlatformClient implements ApiClientInterface
             $this->authorizationHeader,
             $this->getToken(),
         );
+
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
+
+        return $this;
     }
 
     public function buildCustomUpdateRequest(string $resource, string $id, string $customSuffix): void
@@ -177,19 +182,21 @@ final class ApiPlatformClient implements ApiClientInterface
         );
     }
 
-    /** @param string|int $value */
-    public function addParameter(string $key, $value): void
+    public function addParameter(string $key, bool|int|string $value): self
     {
         $this->request->updateParameters([$key => $value]);
+
+        return $this;
     }
 
-    public function setRequestData(array $content): void
+    public function setRequestData(array $data): self
     {
-        $this->request->setContent($content);
+        $this->request->setContent($data);
+
+        return $this;
     }
 
-    /** @param string|int $value */
-    public function addFilter(string $key, $value): void
+    public function addFilter(string $key, bool|int|string $value): void
     {
         $this->addParameter($key, $value);
     }
@@ -204,11 +211,13 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->updateFiles([$key => $file]);
     }
 
+    /** @param array<string, mixed> $value */
     public function addRequestData(string $key, array|bool|int|string|null $value): void
     {
         $this->request->updateContent([$key => $value]);
     }
 
+    /** @param array<string, mixed> $value */
     public function replaceRequestData(string $key, array|bool|int|string|null $value): void
     {
         $requestContent = $this->request->getContent();
@@ -216,26 +225,35 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->setContent(array_replace($requestContent, [$key => $value]));
     }
 
+    /** @param array<string, mixed> $data */
     public function updateRequestData(array $data): void
     {
         $this->request->updateContent($data);
     }
 
+    /** @param array<string, mixed> $data */
     public function setSubResourceData(string $key, array $data): void
     {
         $this->request->setSubResource($key, $data);
     }
 
+    /** @param array<string, mixed> $data */
     public function addSubResourceData(string $key, array $data): void
     {
         $this->request->addSubResource($key, $data);
     }
 
-    public function removeSubResource(string $subResource, string $id): void
+    public function removeSubResourceIri(string $subResourceKey, string $iri): void
     {
-        $this->request->removeSubResource($subResource, $id);
+        $this->request->removeSubResource($subResourceKey, $iri);
     }
 
+    public function removeSubResourceObject(string $subResourceKey, string $value, string $key = '@id'): void
+    {
+        $this->request->removeSubResource($subResourceKey, $value, $key);
+    }
+
+    /** @return array<string, mixed> */
     public function getContent(): array
     {
         return $this->request->getContent();
@@ -253,6 +271,21 @@ final class ApiPlatformClient implements ApiClientInterface
     public function getToken(): ?string
     {
         return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
+    }
+
+    /** @inheritDoc */
+    public function requestGet(string $uri, array $queryParameters = [], array $headers = []): Response
+    {
+        $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
+        $uri = $queryStrings ? $uri . '?' . $queryStrings : $uri;
+
+        $request = $this
+            ->requestFactory
+            ->custom($uri, HttpRequest::METHOD_GET, $headers)
+            ->authorize($this->getToken(), $this->authorizationHeader)
+        ;
+
+        return $this->request($request);
     }
 
     public function request(RequestInterface $request, bool $forgetResponse = false): Response

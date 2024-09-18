@@ -18,7 +18,7 @@ use Twig\TwigFunction;
 
 final class TestFormAttributeExtension extends AbstractExtension
 {
-    public function __construct(private string $environment)
+    public function __construct(private readonly string $environment, private readonly bool $isDebugEnabled)
     {
     }
 
@@ -30,15 +30,38 @@ final class TestFormAttributeExtension extends AbstractExtension
         return [
             new TwigFunction(
                 'sylius_test_form_attribute',
-                function (string $name, ?string $value = null): array {
-                    if (str_starts_with($this->environment, 'test')) {
-                        return ['attr' => ['data-test-' . $name => (string) $value]];
+                [$this, 'getTestFormAttribute'],
+                ['is_safe' => ['html']],
+            ),
+            new TwigFunction(
+                'sylius_test_form_attributes',
+                function (array $attributes): array {
+                    if (!str_starts_with($this->environment, 'test') && $this->isDebugEnabled === false) {
+                        return [];
                     }
 
-                    return [];
+                    $result = [];
+
+                    foreach ($attributes as $name => $value) {
+                        $result[sprintf('data-test-%s', $name)] = (string) $value;
+                    }
+
+                    return ['attr' => $result];
                 },
                 ['is_safe' => ['html']],
             ),
         ];
+    }
+
+    /**
+     * @return array{attr: non-empty-array<non-falsy-string, string>}|array{}
+     */
+    public function getTestFormAttribute(string $name, ?string $value = null): array
+    {
+        if (str_starts_with($this->environment, 'test') || $this->isDebugEnabled) {
+            return ['attr' => ['data-test-' . $name => (string) $value]];
+        }
+
+        return [];
     }
 }

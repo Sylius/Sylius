@@ -1,0 +1,140 @@
+@mixin sylius-filters__defaults {
+    @include media-breakpoint-up(md) {
+        display: flex;
+        align-items: end;
+        gap: .7rem;
+    }
+}
+
+@mixin sylius-filters__connect {
+
+    > * {
+        position: relative;
+
+        &:not(:last-child)::after {
+            content: '-';
+            position: absolute;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3px;
+            background: $gray-100;
+
+            @include media-breakpoint-down(md) {
+                bottom: -19px;
+                right: 0;
+                width: 30px;
+                height: 20px;
+            }
+
+            @include media-breakpoint-up(md) {
+                bottom: 9px;
+                right: -12px;
+                width: 13px;
+                height: 38px;
+            }
+        }
+    }
+}
+
+.sylius-filters {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    container-type: inline-size;
+    container-name: filters;
+}
+
+.sylius-filters__item {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .field {
+        margin-bottom: 0 !important;
+        padding-bottom: .5rem;
+    }
+
+    .choices {
+        margin-bottom: 0 !important;
+    }
+
+    .col-form-label {
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: .5rem;
+    }
+}
+
+@container filters (min-width: 768px) {
+    .sylius-filters__item {
+        flex-grow: 1;
+        width: 45%;
+    }
+    .sylius-filters__item:has(.sylius-filters__date),
+    .sylius-filters__item:has(.sylius-filters__money) {
+        flex-grow: 0;
+        width: 100%;
+    }
+}
+
+@container filters (min-width: 1100px) {
+    .sylius-filters__item {
+        flex-grow: 2;
+        width: 30%;
+    }
+    .sylius-filters__item:has(.sylius-filters__date),
+    .sylius-filters__item:has(.sylius-filters__money) {
+        flex-grow: 3;
+        width: 45%;
+    }
+}
+
+.sylius-filters__string {
+    @include sylius-filters__defaults;
+    @include sylius-filters__connect;
+
+    > *:has(select) {
+        @include media-breakpoint-up(md) {
+            width: 20%;
+            min-width: 8rem;
+        }
+    }
+
+    > *:has(input) {
+        flex-grow: 1;
+    }
+
+    > *:not(:last-child)::after {
+        content: ':';
+    }
+}
+
+.sylius-filters__date {
+    @include sylius-filters__defaults;
+    @include sylius-filters__connect;
+
+    > * {
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    input[type="time"] {
+        width: 8rem;
+        flex-grow: 0;
+    }
+}
+
+.sylius-filters__money {
+    @include sylius-filters__defaults;
+    @include sylius-filters__connect;
+
+    > * {
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    > *:nth-child(2)::after {
+        content: ':';
+    }
+}

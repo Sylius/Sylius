@@ -37,9 +37,9 @@
         <defaults public="true" />
 
         <service id="sylius.form.type.checkout_address" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType">
+            <argument type="service" id="sylius.address_comparator" />
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.form.type.checkout_address.validation_groups%</argument>
-            <argument type="service" id="sylius.address_comparator" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_select_shipping" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType">

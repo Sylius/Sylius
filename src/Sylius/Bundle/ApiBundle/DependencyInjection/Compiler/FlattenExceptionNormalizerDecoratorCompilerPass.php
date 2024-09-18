@@ -17,9 +17,9 @@ use Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-final class FlattenExceptionNormalizerDecoratorCompilerPass implements CompilerPassInterface
+final readonly class FlattenExceptionNormalizerDecoratorCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('fos_rest.serializer.flatten_exception_normalizer')) {
             $container->removeDefinition(FlattenExceptionNormalizer::class);

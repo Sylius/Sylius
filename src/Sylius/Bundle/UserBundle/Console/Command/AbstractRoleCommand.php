@@ -160,5 +160,3 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /** @param array<array-key, string> $securityRoles */
     abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void;
 }
-
-class_alias(AbstractRoleCommand::class, \Sylius\Bundle\UserBundle\Command\AbstractRoleCommand::class);

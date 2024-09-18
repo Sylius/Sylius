@@ -1,0 +1,47 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.common.update':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+
+        'sylius_admin.common.update.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            form_error_alert:
+                template: '@SyliusAdmin/shared/crud/common/content/form_error_alert.html.twig'
+            form:
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: true
+            footer:
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
+
+        'sylius_admin.common.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+
+        'sylius_admin.common.update.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
+
+        'sylius_admin.common.update.content.header.title_block.actions':
+            show:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
+                priority: 300
+            cancel:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                priority: -200
+            update:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/update.html.twig'
+                priority: -300

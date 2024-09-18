@@ -11,7 +11,6 @@ imports:
     - { resource: "@SyliusLocaleBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusOrderBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusPayumBundle/Resources/config/app/config.yaml" }
     - { resource: "@SyliusProductBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPromotionBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShippingBundle/Resources/config/app/config.yml" }
@@ -81,12 +80,14 @@ knp_gaufrette:
             adapter: "%sylius.uploader.filesystem%"
 
 liip_imagine:
+    cache: sylius_image
+    data_loader: sylius_image
     loaders:
-        default:
+        sylius_image:
             filesystem:
                 data_root: "%sylius_core.images_dir%"
     resolvers:
-        default:
+        sylius_image:
             web_path:
                 web_root: "%sylius_core.public_dir%"
                 cache_prefix: "media/cache"

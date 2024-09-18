@@ -1,0 +1,44 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.promotion_coupon.create.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.promotion_coupon.create.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/promotion_coupon/form/content/create/header/breadcrumbs.html.twig'
+
+        'sylius_admin.promotion_coupon.create.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'sylius.ui.new_promotion_coupon'
+
+        'sylius_admin.promotion_coupon.create.content.form':
+            sections:
+                template: '@SyliusAdmin/promotion_coupon/form/sections.html.twig'
+
+        'sylius_admin.promotion_coupon.create.content.form.sections#left':
+            general:
+                template: '@SyliusAdmin/promotion_coupon/form/sections/general.html.twig'
+        
+        'sylius_admin.promotion_coupon.create.content.form.sections#right':
+            configuration:
+                template: '@SyliusAdmin/promotion_coupon/form/sections/configuration.html.twig'
+            
+
+        'sylius_admin.promotion_coupon.create.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/promotion_coupon/form/sections/general/code.html.twig'
+
+        'sylius_admin.promotion_coupon.create.content.form.sections.configuration':
+            usage_limit:
+                template: '@SyliusAdmin/promotion_coupon/form/sections/configuration/usage_limit.html.twig'
+            per_customer_usage_limit:
+                template: '@SyliusAdmin/promotion_coupon/form/sections/configuration/per_customer_usage_limit.html.twig'
+            expires_at:
+                template: '@SyliusAdmin/promotion_coupon/form/sections/configuration/expires_at.html.twig'
+            reusable_from_cancelled_orders:
+                template: '@SyliusAdmin/promotion_coupon/form/sections/configuration/reusable_from_cancelled_orders.html.twig'

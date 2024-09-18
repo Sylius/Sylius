@@ -42,6 +42,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Given I am browsing product options
      * @When I browse product options
      */
     public function iBrowseProductOptions(): void
@@ -101,24 +102,22 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I add the :value option value identified by :code
-     */
-    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code): void
-    {
-        $this->client->addSubResourceData(
-            'values',
-            ['code' => $code, 'translations' => ['en_US' => ['value' => $value]]],
-        );
-    }
-
-    /**
      * @When I add the :value option value identified by :code in :localeCode
      */
-    public function iAddTheOptionValueWithCodeAndValueInLocale(string $value, string $code, string $localeCode): void
+    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code, string $localeCode = 'en_US'): void
     {
         $this->client->addSubResourceData(
             'values',
             ['code' => $code, 'translations' => [$localeCode => ['value' => $value]]],
         );
+    }
+
+    /**
+     * @When I delete the :value option value of this product option
+     */
+    public function iDeleteTheOptionValueOfThisProductOption(string $value): void
+    {
+        $this->client->removeSubResourceObject('values', $value, 'value');
     }
 
     /**
@@ -135,6 +134,15 @@ final class ManagingProductOptionsContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When /^I search for product options with "([^"]+)" (code|name)$/
+     */
+    public function iSearchForProductOptionsWith(string $phrase, string $field): void
+    {
+        $this->client->addFilter($field === 'name' ? 'translations.name' : 'code', $phrase);
+        $this->client->filter();
     }
 
     /**
@@ -155,8 +163,9 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->sharedStorage->set('product_option', $productOption);
 
+        $response = $this->client->index(Resources::PRODUCT_OPTIONS);
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_OPTIONS), 'name', $productOption->getName()),
+            $this->responseChecker->hasItemWithValue($response, 'name', $productOption->getName()),
             sprintf('Product option should have name "%s", but it does not.', $productOption->getName()),
         );
     }
@@ -234,13 +243,30 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     * @Then /^(this product option) should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
+     */
+    public function thisProductOptionShouldNotHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValueName,
+    ): void {
+        Assert::false($this->responseChecker->hasItemWithTranslationInCollection(
+            $this->responseChecker->getValue($this->client->show(Resources::PRODUCT_OPTIONS, $productOption->getCode()), 'values'),
+            'en_US',
+            'value',
+            $optionValueName,
+        ));
+    }
+
+    /**
      * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
 
-        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
+        $res = $this->client->update();
+        Assert::false($this->responseChecker->hasValue($res, 'code', 'NEW_CODE'));
     }
 
     /**

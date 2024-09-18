@@ -34,7 +34,7 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class OrderContext implements Context
+final readonly class OrderContext implements Context
 {
     public function __construct(
         private ApiClientInterface $shopClient,
@@ -195,22 +195,6 @@ final class OrderContext implements Context
         }
 
         throw new \InvalidArgumentException('There is no product with given name.');
-    }
-
-    /**
-     * @Then /^the (shipment) status should be "([^"]+)"$/
-     * @Then /^I should see its (payment) status as "([^"]+)"$/
-     */
-    public function theShipmentStatusShouldBe(
-        string $elementType,
-        string $elementStatus,
-        int $position = 0,
-    ): void {
-        $resources = $this->responseChecker->getValue($this->shopClient->getLastResponse(), $elementType . 's');
-
-        $resource = $this->iriConverter->getResourceFromIri($resources[$position]['@id']);
-
-        Assert::same(ucfirst($resource->getState()), $elementStatus);
     }
 
     /**

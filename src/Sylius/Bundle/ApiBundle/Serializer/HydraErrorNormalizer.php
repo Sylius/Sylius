@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class HydraErrorNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
+final readonly class HydraErrorNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
 {
     public function __construct(
         /** @var NormalizerInterface&CacheableSupportsMethodInterface */
