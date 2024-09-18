@@ -28,8 +28,8 @@ readonly class TaxonMenuComponent
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
      */
     public function __construct(
-        private ChannelContextInterface $channelContext,
         private TaxonRepositoryInterface $taxonRepository,
+        private ChannelContextInterface $channelContext,
         private LocaleContextInterface $localeContext,
     ) {
     }
@@ -45,6 +45,7 @@ readonly class TaxonMenuComponent
         $menuTaxon = $channel->getMenuTaxon();
 
         return $this->taxonRepository
-            ->findChildrenByChannelMenuTaxon($menuTaxon, $this->localeContext->getLocaleCode());
+            ->findChildrenByChannelMenuTaxon($menuTaxon, $this->localeContext->getLocaleCode())
+        ;
     }
 }

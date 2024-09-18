@@ -1,8 +1,6 @@
 {% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
 
-{% set items = [] %}
-
-{% set items = items|merge([{ path: path('sylius_shop_homepage'), label: 'sylius.ui.home'|trans }]) %}
+{% set items = [{ path: path('sylius_shop_homepage'), label: 'sylius.ui.home'|trans }] %}
 {% set ancestors = taxon.ancestors|reverse %}
 
 {% for ancestor in ancestors %}
