@@ -43,8 +43,8 @@
             id="sylius_shop.twig.component.taxon_menu"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Common\TaxonMenuComponent"
         >
-            <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />
 
             <tag

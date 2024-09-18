@@ -7,8 +7,8 @@
                 {{ taxon.name }}
             </a>
             <div class="dropdown-menu">
-                {% for childTaxon in taxon.enabledChildren %}
-                    {{ macros.item(childTaxon) }}
+                {% for child_taxon in taxon.enabledChildren %}
+                    {{ macros.item(child_taxon) }}
                 {% endfor %}
             </div>
         </div>
