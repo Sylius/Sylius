@@ -116,11 +116,6 @@ final readonly class LocaleContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @param string $localeCode
-     *
-     * @return LocaleInterface
-     */
     private function createLocale(string $localeCode): LocaleInterface
     {
         /** @var LocaleInterface $locale */
@@ -130,11 +125,6 @@ final readonly class LocaleContext implements Context
         return $locale;
     }
 
-    /**
-     * @param string $localeCode
-     *
-     * @return LocaleInterface
-     */
     private function provideLocale(string $localeCode): LocaleInterface
     {
         $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);

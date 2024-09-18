@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Page\Shop\Page;
-use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends Page implements CreatePageInterface

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address;
 
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;

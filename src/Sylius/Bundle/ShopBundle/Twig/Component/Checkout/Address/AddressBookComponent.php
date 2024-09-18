@@ -47,8 +47,9 @@ class AddressBookComponent
     #[ExposeInTemplate(name: 'addresses')]
     public function getAddresses(): array
     {
-        /** @var null|CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerContext->getCustomer();
+
         return $customer?->getAddresses()->toArray() ?? [];
     }
 

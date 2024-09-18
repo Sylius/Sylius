@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
