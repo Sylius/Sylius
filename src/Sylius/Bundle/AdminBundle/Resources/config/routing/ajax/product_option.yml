@@ -1,3 +1,4 @@
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_product_options_by_phrase:
     path: /search-phrase
     methods: [GET]
@@ -15,6 +16,7 @@ sylius_admin_ajax_product_options_by_phrase:
                     limit: "!!int %sylius.ajax.product.option_autocomplete_limit%"
                     excludes: $excludes
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_find_product_options:
     path: /options
     methods: [GET]

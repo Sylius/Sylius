@@ -1,3 +1,4 @@
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_taxon_root_nodes:
     path: /root-nodes
     methods: [GET]
@@ -10,6 +11,7 @@ sylius_admin_ajax_taxon_root_nodes:
             repository:
                 method: findRootNodes
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_taxon_leafs:
     path: /leafs
     methods: [GET]
@@ -24,6 +26,7 @@ sylius_admin_ajax_taxon_leafs:
                 arguments:
                     parentCode: $parentCode
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_taxon_by_code:
     path: /leaf
     methods: [GET]
@@ -37,6 +40,7 @@ sylius_admin_ajax_taxon_by_code:
                 method: findBy
                 arguments: [code: $code]
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_taxon_by_name_phrase:
     path: /search
     methods: [GET]
@@ -54,6 +58,7 @@ sylius_admin_ajax_taxon_by_name_phrase:
                     limit: 25
                     excludes: $excludes
 
+# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
 sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/
     methods: [GET]
