@@ -127,7 +127,7 @@ so that it does not count the average rating but does something else - you need 
 
     # config/packages/_sylius.yaml
     winzou_state_machine:
-        sylius_review:
+        sylius_product_review:
             callbacks:
                 after:
                     update_price:
@@ -147,7 +147,7 @@ On the example of the state machine of ProductReview, we can turn off the ``upda
 
     # config/packages/_sylius.yaml
     winzou_state_machine:
-        sylius_review:
+        sylius_product_review:
             callbacks:
                 after:
                     update_price:
