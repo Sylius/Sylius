@@ -1,0 +1,29 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.shared.form.select_payment':
+            payment:
+                template: '@SyliusShop/shared/form/select_payment/payment.html.twig'
+        
+        'sylius_shop.shared.form.select_payment.payment':
+            header:
+                template: '@SyliusShop/shared/form/select_payment/payment/header.html.twig'
+            choice:
+                template: '@SyliusShop/shared/form/select_payment/payment/choice.html.twig'
+        
+        'sylius_shop.shared.form.select_payment.payment#unavailable':
+            unavailable:
+                template: '@SyliusShop/shared/form/select_payment/unavailable.html.twig'
+                
+        'sylius_shop.shared.form.select_payment.payment.choice':
+            details:
+                template: '@SyliusShop/shared/form/select_payment/payment/choice/details.html.twig'
+        
+        'sylius_shop.shared.form.select_payment.payment.choice#unavailable':
+            unavailable:
+                template: '@SyliusShop/shared/form/select_payment/unavailable.html.twig'
+                
+        'sylius_shop.shared.form.select_payment.payment.choice.details':
+            name:
+                template: '@SyliusShop/shared/form/select_payment/payment/choice/details/name.html.twig'
+            description:
+                template: '@SyliusShop/shared/form/select_payment/payment/choice/details/description.html.twig'

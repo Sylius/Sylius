@@ -39,7 +39,7 @@ final class HomepageContext implements Context
     public function iCheckLatestProducts(): void
     {
         $this->client->customAction(
-            sprintf('%s/shop/products?itemsPerPage=3&order[createdAt]=desc', $this->apiUrlPrefix),
+            sprintf('%s/shop/products?itemsPerPage=4&order[createdAt]=desc', $this->apiUrlPrefix),
             HttpRequest::METHOD_GET,
         );
     }

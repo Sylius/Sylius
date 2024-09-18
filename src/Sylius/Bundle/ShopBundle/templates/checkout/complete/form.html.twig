@@ -1,0 +1,12 @@
+{% set form = hookable_metadata.context.form %}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+{{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_errors(form) }}
+<input type="hidden" name="_method" value="PUT" />
+
+{% hook 'form' %}
+
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

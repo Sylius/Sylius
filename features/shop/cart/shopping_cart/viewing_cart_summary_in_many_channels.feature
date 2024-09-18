@@ -18,7 +18,7 @@ Feature: Viewing a cart summary in many channels
         And I see the summary of my cart
         Then my cart should be empty
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Viewing item in cart after switching channels
         Given I changed my current channel to "Poland"
         And I added product "Onion" to the cart
@@ -28,7 +28,7 @@ Feature: Viewing a cart summary in many channels
         Then there should be one item in my cart
         And this item should have name "Onion"
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Viewing item in cart after switching channels when product was added in every channel
         Given I changed my current channel to "Poland"
         And I added product "Onion" to the cart

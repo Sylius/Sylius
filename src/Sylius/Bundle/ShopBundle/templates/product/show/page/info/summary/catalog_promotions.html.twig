@@ -1,0 +1,17 @@
+{% set variant = hookable_metadata.context.variant|default(null) %}
+{% set applied_promotions = hookable_metadata.context.appliedPromotions|default({}) %}
+{% set with_description = hookable_metadata.context.withDescription|default({}) %}
+
+{% if variant is not null %}
+    {% set applied_promotions = variant.getChannelPricingForChannel(sylius.channel).getAppliedPromotions() %}
+    {% set with_description = true %}
+
+    <div data-applied-promotions-locale="{{ sylius.localeCode }}" {{ sylius_test_html_attribute('applied-catalog-promotions') }}>
+        {% for applied_promotion in applied_promotions %}
+            <div class="mb-3" {{ sylius_test_html_attribute('applied-catalog-promotion') }}>
+                <div class="badge bg-success-subtle text-success" style="transform: translateY(-1px)" data-test-promotion-label>{{ applied_promotion.label }}</div>
+                {% if applied_promotion.description and with_description %}<small class="text-success">{{ applied_promotion.description }}</small>{% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

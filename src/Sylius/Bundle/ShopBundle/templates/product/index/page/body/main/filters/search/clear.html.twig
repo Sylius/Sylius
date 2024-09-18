@@ -1,0 +1,5 @@
+{% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
+
+<a class="btn btn btn-outline-secondary btn-sm" href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" {{ sylius_test_html_attribute('clear') }}>
+    {{ icon('x') }}
+</a>

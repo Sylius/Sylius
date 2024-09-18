@@ -1,0 +1,12 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set cart_hook = 'sylius_shop.cart.index' %}
+{% set prefixes = [cart_hook] %}
+
+{% block title %}{{ 'sylius.ui.your_shopping_cart'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-4 mb-5">
+        {% hook cart_hook with { cart, form } %}
+    </div>
+{% endblock %}

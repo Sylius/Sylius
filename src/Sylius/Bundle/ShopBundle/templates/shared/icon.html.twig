@@ -1,0 +1,12 @@
+{% macro icon(iconName, style) %}
+    {% set icon = source('@SyliusShopAssets/icons/' ~ iconName ~ '.svg', ignore_missing = true) %}
+    {% if icon %}
+        {% apply spaceless %}
+            {% if style %}
+                {{ icon|replace({'xmlns': 'style="' ~ style ~ '" xmlns'})|raw }}
+            {% else %}
+                {{ icon|raw }}
+            {% endif %}
+        {% endapply %}
+    {% endif %}
+{% endmacro %}

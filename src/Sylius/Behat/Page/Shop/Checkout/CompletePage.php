@@ -253,7 +253,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'addressing_step_label' => '[data-test-step-address]',
             'base_order_total' => '[data-test-summary-order-total]',
             'billing_address' => '[data-test-billing-address]',
-            'confirm_button' => '[data-test-confirmation-button]',
+            'confirm_button' => '[data-test-button="confirmation-button"]',
             'currency' => '[data-test-order-currency-code]',
             'extra_notes' => '[data-test-extra-notes]',
             'items_table' => '[data-test-order-table]',

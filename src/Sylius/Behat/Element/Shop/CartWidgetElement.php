@@ -19,10 +19,9 @@ final class CartWidgetElement extends Element implements CartWidgetElementInterf
 {
     public function getCartTotalQuantity(): int
     {
-        $cartTotal = $this->getElement('cart_button')->getText();
-        preg_match('/.+,\s(\d+)\s(items|item)/', $cartTotal, $parts);
+        $quantity = $this->getElement('cart_button')->getText();
 
-        return (int) ($parts[1] ?? 0);
+        return (int) ($quantity ?? 0);
     }
 
     protected function getDefinedElements(): array

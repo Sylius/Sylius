@@ -1,0 +1,13 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set prefixes = ['sylius_shop.order'] %}
+
+{% block title %}{{ 'sylius.ui.thank_you'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container text-center my-auto">
+        <div class="row flex-column my-4">
+            {% hook 'thank_you' with { _prefixes: prefixes, order } %}
+        </div>
+    </div>
+{% endblock %}
