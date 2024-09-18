@@ -89,7 +89,7 @@ final readonly class CheckoutPaymentContext implements Context
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
     }
-    
+
     /**
      * @When I do not select any payment method
      */
@@ -221,7 +221,7 @@ final readonly class CheckoutPaymentContext implements Context
     {
         Assert::true(
             $this->selectPaymentPage->isNextStepButtonUnavailable(),
-            'The "next step" button should be disabled, but it does not.'
+            'The "next step" button should be disabled, but it does not.',
         );
     }
 
@@ -232,7 +232,7 @@ final readonly class CheckoutPaymentContext implements Context
     {
         Assert::true(
             $this->selectPaymentPage->hasNoAvailablePaymentMethodsWarning(),
-            'There should be warning about no available payment methods, but it does not.'
+            'There should be warning about no available payment methods, but it does not.',
         );
     }
 }

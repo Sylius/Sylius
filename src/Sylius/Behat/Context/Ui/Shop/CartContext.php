@@ -269,7 +269,7 @@ final readonly class CartContext implements Context
 
         Assert::same(
             $this->getPriceFromString($itemTotal),
-            ($quantity * $this->getPriceFromString($regularUnitPrice)) - $amount
+            ($quantity * $this->getPriceFromString($regularUnitPrice)) - $amount,
         );
     }
 
@@ -286,7 +286,7 @@ final readonly class CartContext implements Context
 
         Assert::same(
             $this->getPriceFromString($discountedUnitPrice),
-            ($quantity * $this->getPriceFromString($regularUnitPrice)) - $amount
+            ($quantity * $this->getPriceFromString($regularUnitPrice)) - $amount,
         );
     }
 
@@ -561,7 +561,7 @@ final readonly class CartContext implements Context
     {
         Assert::same(
             $this->summaryPage->getValidationMessage('promotion_coupon'),
-            'Coupon code is invalid.'
+            'Coupon code is invalid.',
         );
     }
 

@@ -52,7 +52,8 @@ class SummaryComponent
 
     #[LiveListener('sylius:shop:variant_changed')]
     public function updateProductVariant(
-        #[LiveArg] ?ProductVariant $variant,
+        #[LiveArg]
+        ?ProductVariant $variant,
     ): void {
         $this->variant = $variant->isEnabled() ? $variant : null;
     }

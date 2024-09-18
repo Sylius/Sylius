@@ -57,12 +57,12 @@ class PriceComponent
     {
         $price = $this->convertPrice(
             $this->productVariantPricesCalculator
-                ->calculate($this->variant, ['channel' => $this->channelContext->getChannel()])
+                ->calculate($this->variant, ['channel' => $this->channelContext->getChannel()]),
         );
 
         $originalPrice = $this->convertPrice(
             $this->productVariantPricesCalculator
-                ->calculateOriginal($this->variant, ['channel' => $this->channelContext->getChannel()])
+                ->calculateOriginal($this->variant, ['channel' => $this->channelContext->getChannel()]),
         );
 
         $this->price = $this->formatPrice($price);

@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Shop\Account;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-
 interface RegisterElementInterface
 {
     public function register(): void;
