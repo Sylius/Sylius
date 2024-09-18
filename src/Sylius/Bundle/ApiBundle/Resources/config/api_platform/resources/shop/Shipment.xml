@@ -19,6 +19,7 @@
     <resource class="Sylius\Component\Core\Model\Shipment">
         <operations>
             <operation
+                name="sylius_api_shop_order_shipment_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/orders/{tokenValue}/shipments/{shipmentId}"
                 provider="sylius_api.state_provider.shop.shipment.item"

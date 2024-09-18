@@ -18,7 +18,12 @@
 >
     <resource class="Sylius\Component\Locale\Model\Locale">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/locales" paginationEnabled="false">
+            <operation
+                name="sylius_api_shop_locale_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/locales"
+                paginationEnabled="false"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +35,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/locales/{code}">
+            <operation name="sylius_api_shop_locale_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/locales/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">

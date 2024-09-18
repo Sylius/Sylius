@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\Taxon">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/taxons">
+            <operation name="sylius_api_shop_taxon_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/taxons">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -50,7 +50,7 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/taxons/{code}">
+            <operation name="sylius_api_shop_taxon_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/taxons/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">

@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Product\Model\ProductAssociation">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-associations/{id}">
+            <operation
+                name="sylius_api_shop_product_association_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/product-associations/{id}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">

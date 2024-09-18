@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\Adjustment">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/shop/adjustments/{id}" />
+            <operation
+                name="sylius_api_shop_adjustment_get"
+                class="ApiPlatform\Metadata\NotExposed"
+                uriTemplate="/shop/adjustments/{id}"
+            />
         </operations>
     </resource>
 
@@ -31,7 +35,11 @@
             <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="adjustments" />
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.order.adjustment.collection">
+            <operation
+                name="sylius_api_shop_order_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.shop.order.adjustment.collection"
+            >
                 <parameters>
                     <parameter key="type" />
                 </parameters>
@@ -58,7 +66,11 @@
             <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="items" />
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.order.order_item.adjustment.collection">
+            <operation
+                name="sylius_api_shop_order_order_item_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.shop.order.order_item.adjustment.collection"
+            >
                 <parameters>
                     <parameter key="type" />
                 </parameters>

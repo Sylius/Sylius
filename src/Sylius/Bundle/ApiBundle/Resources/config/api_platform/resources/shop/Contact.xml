@@ -26,7 +26,7 @@
         status="202"
     >
         <operations>
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/contact">
+            <operation name="sylius_api_shop_contact_post_send_contact_request" class="ApiPlatform\Metadata\Post" uriTemplate="/contact">
                 <denormalizationContext>
                     <values>
                         <value name="groups">

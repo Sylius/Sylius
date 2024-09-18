@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\ProductTaxon">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-taxons/{id}">
+            <operation
+                name="sylius_api_shop_product_taxon_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/product-taxons/{id}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
