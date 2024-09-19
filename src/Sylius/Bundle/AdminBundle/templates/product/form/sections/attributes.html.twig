@@ -1,3 +1,5 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
 {% set product_attributes = hookable_metadata.context.mapped_product_attributes %}
 
 <div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-attributes" role="tabpanel" tabindex="0">
@@ -72,31 +74,34 @@
                                             </div>
                                         {% endif %}
                                         <div class="flex-grow-1">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                {% set required_class = not locale_code or locale_code == sylius_base_locale ? 'required' : '' %}
-                                                {{ form_label(product_attribute_value.value, null, {label_attr: {class: required_class}}) }}
+                                            {% set required_class = not locale_code or locale_code == sylius_base_locale ? 'required' : '' %}
+                                            {{ form_label(product_attribute_value.value, null, {label_attr: {class: required_class}}) }}
+                                            <div class="input-group">
+                                                {{ form_widget(
+                                                    product_attribute_value.value,
+                                                    sylius_test_form_attributes({
+                                                        'attribute-value': '',
+                                                        'attribute-name': product_attribute_value.value.vars.label,
+                                                        'locale-code': product_attribute_value.localeCode.vars.value,
+                                                    })
+                                                ) }}
                                                 {% if locale_code is not null %}
                                                     <button
                                                         type="button"
-                                                        class="btn btn-secondary btn-sm"
+                                                        class="btn btn-icon"
+                                                        data-bs-toggle="tooltip"
+                                                        data-bs-title="{{ 'sylius.ui.apply_to_all'|trans }}"
                                                         data-action="live#action"
                                                         data-live-action-param="applyToAll"
                                                         data-live-attribute-code-param="{{ product_attribute_code }}"
                                                         data-live-locale-code-param="{{ product_attribute_value.vars.data.localeCode }}"
+                                                        {{ sylius_test_html_attribute('apply-to-all') }}
                                                     >
-                                                        {{ 'sylius.ui.apply_to_all'|trans }}
+                                                        {{ icon({ icon: 'duplicate', class: 'icon icon-tabler' }) }}
                                                     </button>
                                                 {% endif %}
+                                                {{ form_errors(product_attribute_value.value) }}
                                             </div>
-                                            {{ form_widget(
-                                                product_attribute_value.value,
-                                                sylius_test_form_attributes({
-                                                    'attribute-value': '',
-                                                    'attribute-name': product_attribute_value.value.vars.label,
-                                                    'locale-code': product_attribute_value.localeCode.vars.value,
-                                                })
-                                            ) }}
-                                            {{ form_errors(product_attribute_value.value) }}
                                             <input type="hidden" name="{{ product_attribute_value.attribute.vars.full_name }}" value="{{ product_attribute_value.attribute.vars.value }}">
                                             <input type="hidden" name="{{ product_attribute_value.localeCode.vars.full_name }}" value="{{ product_attribute_value.localeCode.vars.value }}">
                                         </div>
