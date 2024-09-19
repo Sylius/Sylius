@@ -12,10 +12,6 @@ imports:
 parameters:
     sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
 
-twig:
-    paths:
-        '%kernel.project_dir%/src/Sylius/Bundle/ShopBundle/Resources/assets/': 'SyliusShopAssets'
-
 webpack_encore:
     builds:
         shop: '%kernel.project_dir%/public/build/shop'
