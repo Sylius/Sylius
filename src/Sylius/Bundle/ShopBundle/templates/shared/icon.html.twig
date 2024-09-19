@@ -1,5 +1,5 @@
 {% macro icon(iconName, style) %}
-    {% set icon = source('@SyliusShopAssets/icons/' ~ iconName ~ '.svg', ignore_missing = true) %}
+    {% set icon = source('@SyliusShop/icons/' ~ iconName ~ '.svg', ignore_missing = true) %}
     {% if icon %}
         {% apply spaceless %}
             {% if style %}
