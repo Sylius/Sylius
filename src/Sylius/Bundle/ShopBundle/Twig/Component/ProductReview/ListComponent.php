@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\Component\ProductReview;
 
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -25,7 +26,7 @@ class ListComponent
 {
     public const DEFAULT_LIMIT = 3;
 
-    public Product $product;
+    public ProductInterface $product;
 
     public int $count = self::DEFAULT_LIMIT;
 

@@ -17,7 +17,7 @@ use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -31,7 +31,7 @@ class PriceComponent
 {
     use HookableComponentTrait;
 
-    public ProductVariant $variant;
+    public ProductVariantInterface $variant;
 
     #[ExposeInTemplate]
     public ?string $price = null;
