@@ -960,6 +960,7 @@ sylius:
         user_details: 'User details'
         username: 'Username'
         users_list_of_all_users_registered_in_store: 'Users <small>List of all users registered in store</small>'
+        world: 'World'
         value: 'Value'
         values: 'Values'
         variant: 'Variant'
