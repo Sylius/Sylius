@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-12 col-md-3">
-                {{ sylius_template_event('sylius.shop.account.layout.menu') }}
+                {{ knp_menu_render('sylius.shop.account', {'template': '@SyliusShop/account/menu/content.html.twig'}) }}
             </div>
             <div class="col-12 col-md-9">
                 {% block account_header %}
