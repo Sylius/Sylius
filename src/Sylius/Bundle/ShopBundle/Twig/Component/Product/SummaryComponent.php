@@ -13,32 +13,36 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
-use Sylius\Component\Core\Model\Product;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
-use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsLiveComponent]
 class SummaryComponent
 {
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
+    use ProductLivePropTrait;
+    use ProductVariantLivePropTrait;
 
-    #[LiveProp]
-    public Product $product;
-
-    #[LiveProp]
-    public ?ProductVariant $variant = null;
-
+    /**
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
+     */
     public function __construct(
         private readonly ProductVariantResolverInterface $productVariantResolver,
+        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
     ) {
+        $this->initializeProduct($productRepository);
+        $this->initializeProductVariant($productVariantRepository);
     }
 
     #[PostMount]

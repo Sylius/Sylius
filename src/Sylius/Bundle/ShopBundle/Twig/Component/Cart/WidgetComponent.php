@@ -13,29 +13,33 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
-use Sylius\Component\Core\Model\Order;
+use Sylius\Bundle\UiBundle\Twig\Component\ResourceLivePropTrait;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsLiveComponent]
 class WidgetComponent
 {
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
+    /** @use ResourceLivePropTrait<OrderInterface> */
+    use ResourceLivePropTrait;
 
-    #[LiveProp(fieldName: 'cart')]
-    public ?Order $cart;
+    #[LiveProp(hydrateWith: 'hydrateResource', dehydrateWith: 'dehydrateResource')]
+    public ?ResourceInterface $cart = null;
 
-    public function __construct(private readonly CartContextInterface $cartContext)
-    {
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
+    public function __construct(
+        private readonly CartContextInterface $cartContext,
+        OrderRepositoryInterface $orderRepository,
+    ) {
+        $this->initialize($orderRepository);
     }
 
     #[PreMount]
@@ -46,21 +50,28 @@ class WidgetComponent
 
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CHANGED)]
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CLEARED)]
-    public function refreshCart(#[LiveArg] ?Order $cart = null): void
+    public function refreshCart(#[LiveArg] ?OrderInterface $cart = null): void
     {
         $this->cart = $cart ?? $this->getCart();
     }
 
-    private function getCart(): ?Order
+    public function dehydrate(OrderInterface|null $order): mixed
+    {
+        return $order?->getId();
+    }
+
+    public function hydrate(): OrderInterface
+    {
+        return $this->getCart();
+    }
+
+    private function getCart(): ?OrderInterface
     {
         try {
+            /** @var OrderInterface $cart */
             $cart = $this->cartContext->getCart();
         } catch (CartNotFoundException) {
             return null;
-        }
-
-        if (!$cart instanceof Order) {
-            throw new UnexpectedTypeException($cart, Order::class);
         }
 
         return $cart;

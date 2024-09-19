@@ -37,6 +37,7 @@
             id="sylius_shop.twig.component.cart.summary"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\SummaryComponent"
         >
+            <argument type="service" id="sylius.repository.order" />
 
             <tag
                 name="sylius.live_component"
@@ -50,6 +51,7 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\WidgetComponent"
         >
             <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.order" />
 
             <tag
                 name="sylius.live_component"
@@ -63,6 +65,7 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\WidgetComponent"
         >
             <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.order" />
 
             <tag
                 name="sylius.live_component"

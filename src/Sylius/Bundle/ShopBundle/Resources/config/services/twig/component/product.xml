@@ -24,6 +24,8 @@
             <argument type="service" id="sylius.factory.add_to_cart_command" />
             <argument type="service" id="sylius.factory.order_item" />
             <argument>Sylius\Bundle\ShopBundle\Form\Type\AddToCartType</argument>
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.product_variant" />
 
             <call method="setLiveResponder">
                 <argument type="service" id="ux.live_component.live_responder"/>
@@ -102,6 +104,8 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Product\SummaryComponent"
         >
             <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.product_variant" />
 
             <tag
                 name="sylius.live_component"
