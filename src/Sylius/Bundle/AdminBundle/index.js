@@ -12,9 +12,6 @@ const Encore = require('@symfony/webpack-encore');
 
 class SyliusAdmin {
   static getWebpackConfig(rootDir) {
-    const uiBundleScripts = path.resolve(__dirname, '../UiBundle/Resources/private/js/');
-    const uiBundleResources = path.resolve(__dirname, '../UiBundle/Resources/private/');
-
     Encore
       .setOutputPath('public/build/admin/')
       .setPublicPath('/build/admin')
@@ -32,8 +29,6 @@ class SyliusAdmin {
 
     const adminConfig = Encore.getWebpackConfig();
 
-    adminConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
-    adminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
     adminConfig.externals = { ...adminConfig.externals, window: 'window', document: 'document' };
     adminConfig.name = 'admin';
 

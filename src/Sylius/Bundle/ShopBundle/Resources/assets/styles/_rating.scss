@@ -1,4 +1,4 @@
-/*!
+/*
  * This file is part of the Sylius package.
  *
  * (c) Sylius Sp. z o.o.
@@ -11,6 +11,10 @@
     display: inline-block;
 }
 
+.sylius-rating.hoverless {
+    pointer-events: none;
+}
+
 .sylius-rating label {
     cursor: pointer;
 }
@@ -19,23 +23,27 @@
     display: none;
 }
 
-.sylius-rating label svg {
-    color: var(--tblr-gray-300);
+.sylius-rating svg {
+    color: var(--bs-gray-400);
     transition: color 0.2s;
 }
 
 .sylius-rating label:has(> :checked) svg {
-    color: var(--tblr-yellow);
+    color: var(--bs-yellow);
 }
 
 .sylius-rating label:has(~ label > :checked) svg {
-    color: var(--tblr-yellow);
+    color: var(--bs-yellow);
 }
 
 .sylius-rating:hover label svg {
-    color: var(--tblr-yellow);
+    color: var(--bs-yellow);
 }
 
 .sylius-rating label:hover ~ label svg {
-    color: var(--tblr-gray-300);
+    color: var(--bs-gray-400);
+}
+
+.sylius-rating span.checked svg {
+    color: var(--bs-yellow);
 }

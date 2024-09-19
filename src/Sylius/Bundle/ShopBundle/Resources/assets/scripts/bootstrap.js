@@ -1,4 +1,4 @@
-/*!
+/*
  * This file is part of the Sylius package.
  *
  * (c) Sylius Sp. z o.o.
@@ -7,7 +7,4 @@
  * file that was distributed with this source code.
  */
 
-.modal-backdrop {
-    --tblr-backdrop-bg: #000;
-    --tblr-backdrop-opacity: 0.75;
-}
+import * as bootstrap from 'bootstrap';
