@@ -4,7 +4,7 @@ twig_hooks:
             form:
                 component: 'sylius_shop:cart:form'
                 props:
-                    cart: '@=_context.cart'
+                    resource: '@=_context.cart'
             suggested_products:
                 component: 'sylius_shop:product:list'
                 props:

@@ -6,7 +6,7 @@ twig_hooks:
             form:
                 component: 'sylius_shop:checkout:address:form'
                 props:
-                    order: '@=_context.order'
+                    resource: '@=_context.order'
                     form: '@=_context.form'
 
         'sylius_shop.checkout.address.form':

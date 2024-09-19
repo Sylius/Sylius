@@ -5,7 +5,7 @@
 {% form_theme form '@SyliusShop/form/theme.html.twig' %}
 
 <div {{ attributes }} >
-    {% if cart.empty %}
+    {% if resource.empty %}
         {{ messages.info('sylius.ui.your_cart_is_empty') }}
     {% else %}
         {{ form_start(form, {'action': path('sylius_shop_cart_checkout'), 'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}

@@ -5,7 +5,7 @@ twig_hooks:
                 component: 'sylius_shop:account:address:form'
                 props:
                     form: '@=_context.form'
-                    address: '@=_context.address'
+                    resource: '@=_context.address'
                 configuration:
                     method: 'PUT'
 

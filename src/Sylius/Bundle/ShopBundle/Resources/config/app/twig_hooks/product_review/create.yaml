@@ -18,7 +18,7 @@ twig_hooks:
             form:
                 component: 'sylius_shop:product_review:form'
                 props:
-                    review: '@=_context.product_review'
+                    resource: '@=_context.product_review'
                     form: '@=_context.form'
                 
         'sylius.shop.product_review.create.main.form':

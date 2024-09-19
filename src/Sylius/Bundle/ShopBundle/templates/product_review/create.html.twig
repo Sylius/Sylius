@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            {% hook 'sylius.shop.product_review.create' with { form, product_review } %}
+            {% hook 'sylius.shop.product_review.create' with { form, product_review: resource } %}
         </div>
     </div>
 {% endblock %}
