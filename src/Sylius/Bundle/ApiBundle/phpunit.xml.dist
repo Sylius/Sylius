@@ -36,7 +36,6 @@
     <testsuites>
         <testsuite name="SyliusApiBundle Test Suite">
             <directory>./Tests/</directory>
-            <exclude>./Tests/Application/src/Tests</exclude>
         </testsuite>
     </testsuites>
 </phpunit>
