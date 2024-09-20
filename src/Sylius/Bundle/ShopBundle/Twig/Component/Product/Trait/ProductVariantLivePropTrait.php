@@ -29,7 +29,7 @@ trait ProductVariantLivePropTrait
         }
 
         /** @var ProductVariantInterface $variant */
-        $variant = $this->productRepository->find($value);
+        $variant = $this->productVariantRepository->find($value);
 
         return $variant;
     }

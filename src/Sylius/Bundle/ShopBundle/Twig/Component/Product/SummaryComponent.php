@@ -59,6 +59,10 @@ class SummaryComponent
         #[LiveArg]
         ?ProductVariant $variant,
     ): void {
+        if ($variant->getId() === $this->variant->getId()) {
+            return;
+        }
+
         $this->variant = $variant->isEnabled() ? $variant : null;
     }
 }
