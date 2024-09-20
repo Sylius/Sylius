@@ -25,8 +25,9 @@ jobs:
                 php: ["8.2"]
                 symfony: ["^6.4"]
                 mysql: ["8.0"]
-                resource: ["^1.11@dev"]
-                grid: ["^1.13@dev"]
+                resource: ["^1.12@alpha"]
+                grid: ["^1.13@alpha"]
+                mailer: ["^2.1@alpha"]
 
         env:
             APP_ENV: test_cached
@@ -76,7 +77,11 @@ jobs:
 
             -   name: Require SyliusGridBundle version
                 run: |
-                    composer require sylius/grid-bundle:${{ matrix.grid }} --no-update                    
+                    composer require sylius/grid-bundle:${{ matrix.grid }} --no-update  
+                    
+            -   name: Require SyliusMailerBundle version
+                run: |
+                    composer require sylius/mailer-bundle:${{ matrix.mailer }} --no-update                    
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
