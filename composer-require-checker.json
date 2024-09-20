@@ -3,6 +3,7 @@
     "null", "true", "false",
     "static", "self", "parent",
     "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
+    "random_bytes", "random_int",
     "Swift_Message",
     "ApiPlatform\\Core\\Api\\FilterInterface",
     "ApiPlatform\\Core\\Bridge\\Doctrine\\Orm\\Util\\QueryNameGeneratorInterface",

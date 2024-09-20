@@ -59,10 +59,3 @@ jobs:
         uses: ./.github/workflows/ci_packages.yaml
         with:
             type: minimal
-    unstable:
-        if: contains(github.event.pull_request.title, '[Unstable]')
-        name: Unstable
-        needs: static-checks
-        uses: ./.github/workflows/ci__unstable.yaml
-        with:
-            ignore-failure: true
