@@ -28,9 +28,7 @@ final class FooTest extends ApiTestCase
         $this->setUpTest();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_collection_as_a_logged_in_administrator(): void
     {
         static::createClient()->request(
@@ -61,9 +59,7 @@ final class FooTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_collection_as_a_visitor(): void
     {
         static::createClient()->request('GET', 'api/v2/foos');
@@ -90,9 +86,7 @@ final class FooTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_an_item_as_a_vistor(): void
     {
         /** @var Foo $foo */
@@ -112,9 +106,7 @@ final class FooTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_an_item_as_a_logged_in_administrator_by_admin_endpoint(): void
     {
         /** @var Foo $foo */
@@ -138,9 +130,7 @@ final class FooTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_get_an_item_as_a_visitor_by_admin_endpoint(): void
     {
         /** @var Foo $foo */
@@ -152,9 +142,7 @@ final class FooTest extends ApiTestCase
         $this->assertJsonContains(['message' => 'JWT Token not found']);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_creates_a_new_entity_as_a_visitor(): void
     {
         $fooSyliusResourceIri = $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']);
