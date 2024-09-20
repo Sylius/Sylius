@@ -77,6 +77,12 @@ lexik_jwt_authentication:
     public_key: "%kernel.project_dir%/config/jwt/public-test.pem"
     pass_phrase: "ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST"
 
+sylius_currency:
+    resources:
+        currency:
+            classes:
+                model: Sylius\Bundle\ApiBundle\Application\Entity\Currency
+
 sylius_taxonomy:
     resources:
         taxon:

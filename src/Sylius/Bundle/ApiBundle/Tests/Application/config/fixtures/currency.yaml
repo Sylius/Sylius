@@ -1,0 +1,7 @@
+Sylius\Bundle\ApiBundle\Application\Entity\Currency:
+    currency_gbp:
+        code: 'GBP'
+        type: 'test_GBP'
+    currency_eur:
+        code: 'EUR'
+        type: 'test_EUR'
