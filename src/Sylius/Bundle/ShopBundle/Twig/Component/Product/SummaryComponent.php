@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
@@ -48,7 +47,7 @@ class SummaryComponent
     #[PostMount]
     public function postMount(): void
     {
-        /** @var ProductVariant|null $variant * */
+        /** @var ProductVariantInterface|null $variant * */
         $variant = $this->productVariantResolver->getVariant($this->product);
 
         $this->variant = $variant;
@@ -56,13 +55,15 @@ class SummaryComponent
 
     #[LiveListener('sylius:shop:variant_changed')]
     public function updateProductVariant(
-        #[LiveArg]
-        ?ProductVariant $variant,
+        #[LiveArg] ?int $variant,
     ): void {
-        if ($variant->getId() === $this->variant->getId()) {
+
+        $changedVariant = $this->productVariantRepository->find($variant);
+
+        if ($changedVariant === $this->variant) {
             return;
         }
 
-        $this->variant = $variant->isEnabled() ? $variant : null;
+        $this->variant = $changedVariant->isEnabled() ? $changedVariant : null;
     }
 }
