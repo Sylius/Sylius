@@ -39,12 +39,8 @@ trait ResourceLivePropTrait
 
     /**
      * @param RepositoryInterface<T> $repository
-     *
-     * @phpstan-return void
      */
-    protected function initialize(
-        RepositoryInterface $repository,
-    ): void {
+    protected function initialize(RepositoryInterface $repository): void {
         $this->repository = $repository;
     }
 }

@@ -60,7 +60,7 @@ class FormComponent
             if ($form->isValid()) {
                 $this->eventDispatcher->dispatch(new GenericEvent($form->getData()), SyliusCartEvents::CART_CHANGE);
                 $this->manager->flush();
-                $this->emit(self::SYLIUS_SHOP_CART_CHANGED, ['cart' => $this->resource->getId()]);
+                $this->emit(self::SYLIUS_SHOP_CART_CHANGED, ['cartId' => $this->resource->getId()]);
             }
         }
     }
@@ -81,7 +81,7 @@ class FormComponent
 
         $this->shouldSaveCart = false;
         $this->submitForm();
-        $this->emit(self::SYLIUS_SHOP_CART_CHANGED, ['cart' => $this->resource->getId()]);
+        $this->emit(self::SYLIUS_SHOP_CART_CHANGED, ['cartId' => $this->resource->getId()]);
     }
 
     #[LiveAction]

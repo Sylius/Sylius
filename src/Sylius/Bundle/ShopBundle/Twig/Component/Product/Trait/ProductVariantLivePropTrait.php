@@ -16,7 +16,7 @@ trait ProductVariantLivePropTrait
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp(hydrateWith: "hydrateProductVariant", dehydrateWith: "dehydrateProductVariant")]
+    #[LiveProp(hydrateWith: 'hydrateProductVariant', dehydrateWith: 'dehydrateProductVariant')]
     public ?ProductVariantInterface $variant = null;
 
     /** @var ProductVariantRepositoryInterface<ProductVariantInterface> */
@@ -40,9 +40,7 @@ trait ProductVariantLivePropTrait
     }
 
     /** @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository*/
-    protected function initializeProductVariant(
-        ProductVariantRepositoryInterface $productVariantRepository,
-    ): void {
+    protected function initializeProductVariant(ProductVariantRepositoryInterface $productVariantRepository): void {
         $this->productVariantRepository = $productVariantRepository;
     }
 }

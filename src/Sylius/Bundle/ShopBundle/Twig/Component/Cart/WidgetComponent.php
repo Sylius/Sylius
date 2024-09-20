@@ -50,15 +50,15 @@ class WidgetComponent
 
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CHANGED)]
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CLEARED)]
-    public function refreshCart(#[LiveArg] ?int $cart = null): void
+    public function refreshCart(#[LiveArg] mixed $cartId = null): void
     {
-        if ($cart === null) {
+        if ($cartId === null) {
             $this->cart = $this->getCart();
 
             return;
         }
 
-        $this->cart = $this->hydrateResource($cart);
+        $this->cart = $this->hydrateResource($cartId);
     }
 
     private function getCart(): ?OrderInterface

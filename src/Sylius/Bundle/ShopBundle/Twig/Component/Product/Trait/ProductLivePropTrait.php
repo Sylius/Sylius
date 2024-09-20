@@ -14,7 +14,7 @@ trait ProductLivePropTrait
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp(hydrateWith: "hydrateProduct", dehydrateWith: "dehydrateProduct")]
+    #[LiveProp(hydrateWith: 'hydrateProduct', dehydrateWith: 'dehydrateProduct')]
     public ?ProductInterface $product = null;
 
     /** @var ProductRepositoryInterface<ProductInterface> */
@@ -34,9 +34,7 @@ trait ProductLivePropTrait
     }
 
     /** @param ProductRepositoryInterface<ProductInterface> $productRepository */
-    protected function initializeProduct(
-        RepositoryInterface $productRepository,
-    ): void {
+    protected function initializeProduct(RepositoryInterface $productRepository): void {
         $this->productRepository = $productRepository;
     }
 }
