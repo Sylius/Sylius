@@ -19,13 +19,13 @@
         {
           "php": "8.1",
           "symfony": "^5.4",
-          "mariadb": "10.11",
+          "mariadb": "10.11.9",
           "state_machine_adapter": "winzou_state_machine"
         },
         {
           "php": "8.2",
           "symfony": "^6.4",
-          "mariadb": "11.4",
+          "mariadb": "11.4.3",
           "dbal": "^3.0",
           "state_machine_adapter": "symfony_workflow"
         }
@@ -100,7 +100,7 @@
     "e2e-mariadb": {
       "php": ["8.1", "8.2"],
       "symfony": ["^5.4", "^6.4"],
-      "mariadb": ["10.11", "11.4"],
+      "mariadb": ["10.11.9", "11.4.3"],
       "state_machine_adapter": ["winzou_state_machine", "symfony_workflow"]
     },
     "e2e-mysql": {
