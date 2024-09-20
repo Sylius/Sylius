@@ -23,7 +23,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:currency:show</value>
+                                <value>sylius:shop:currency:index</value>
                             </values>
                         </value>
                     </values>
