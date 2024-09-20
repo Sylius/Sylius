@@ -28,9 +28,9 @@ trait ProductLivePropTrait
         return $product;
     }
 
-    public function dehydrateProduct(ProductInterface $product): mixed
+    public function dehydrateProduct(?ProductInterface $product): mixed
     {
-        return $product->getId();
+        return $product?->getId();
     }
 
     /** @param ProductRepositoryInterface<ProductInterface> $productRepository */

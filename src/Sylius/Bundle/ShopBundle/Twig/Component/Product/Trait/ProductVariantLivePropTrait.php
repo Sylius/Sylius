@@ -30,9 +30,9 @@ trait ProductVariantLivePropTrait
         return $variant;
     }
 
-    public function dehydrateProductVariant(ProductVariantInterface $product): mixed
+    public function dehydrateProductVariant(?ProductVariantInterface $product): mixed
     {
-        return $product->getId();
+        return $product?->getId();
     }
 
     /** @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository*/
