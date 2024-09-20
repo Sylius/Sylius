@@ -31,7 +31,10 @@ final class StateBasedExtensionSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($sectionProvider, ['_api_/shop/orders/{tokenValue}_get', '_api_/shop/orders/{tokenValue}/payments/{paymentId}/configuration_get']);
+        $this->beConstructedWith(
+            $sectionProvider,
+            ['sylius_api_shop_order_get', 'sylius_api_shop_order_payment_get_configuration']
+        );
     }
 
     function it_does_not_apply_conditions_to_collection_for_unsupported_resource(
@@ -108,7 +111,7 @@ final class StateBasedExtensionSpec extends ObjectBehavior
         Operation $operation,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
-        $operation->getName()->willReturn('_api_/shop/orders/{tokenValue}/payments/{paymentId}/configuration_get');
+        $operation->getName()->willReturn('sylius_api_shop_order_payment_get_configuration');
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], $operation);
@@ -119,13 +122,12 @@ final class StateBasedExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
-        CustomerInterface $customer,
         Operation $operation,
         Expr $expr,
         Expr\Func $exprEq,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
-        $operation->getName()->willReturn('_api_/shop/orders/{tokenValue}/new_get');
+        $operation->getName()->willReturn('sylius_api_shop_order_get_custom');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryNameGenerator->generateParameterName('state')->willReturn('state');
