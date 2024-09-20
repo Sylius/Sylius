@@ -24,6 +24,10 @@ trait ProductVariantLivePropTrait
 
     public function hydrateProductVariant(mixed $value): ?ProductVariantInterface
     {
+        if (empty($value)) {
+            return null;
+        }
+
         /** @var ProductVariantInterface $variant */
         $variant = $this->productRepository->find($value);
 

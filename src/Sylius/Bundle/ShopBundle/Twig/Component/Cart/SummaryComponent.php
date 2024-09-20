@@ -39,8 +39,8 @@ class SummaryComponent
     }
 
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CHANGED)]
-    public function refreshCart(#[LiveArg] OrderInterface $cart): void
+    public function refreshCart(#[LiveArg] int $cart): void
     {
-        $this->cart = $cart;
+        $this->cart = $this->hydrateResource($cart);
     }
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceLivePropTrait;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -50,19 +51,15 @@ class WidgetComponent
 
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CHANGED)]
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CLEARED)]
-    public function refreshCart(#[LiveArg] ?OrderInterface $cart = null): void
+    public function refreshCart(#[LiveArg] ?int $cart = null): void
     {
-        $this->cart = $cart ?? $this->getCart();
-    }
+        if ($cart === null) {
+            $this->cart = $this->getCart();
 
-    public function dehydrate(OrderInterface|null $order): mixed
-    {
-        return $order?->getId();
-    }
+            return;
+        }
 
-    public function hydrate(): OrderInterface
-    {
-        return $this->getCart();
+        $this->cart = $this->hydrateResource($cart);
     }
 
     private function getCart(): ?OrderInterface
