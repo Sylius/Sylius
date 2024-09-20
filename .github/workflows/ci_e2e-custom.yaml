@@ -16,7 +16,7 @@ permissions:
 jobs:
     behat-no-js-unstable-dependencies:
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }} (Unstable Dependencies)"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }}, Mailer ${{ matrix.mailer }} (Unstable Dependencies)"
         timeout-minutes: 45
         continue-on-error: true
         strategy:
@@ -101,7 +101,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}) [Unstable], MySQL ${{ matrix.mysql }})"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }}, Mailer ${{ matrix.mailer }})"
                     path: |
                         etc/build/
                         var/log
