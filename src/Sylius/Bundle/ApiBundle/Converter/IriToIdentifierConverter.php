@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Converter;
 
-use ApiPlatform\Api\UriVariablesConverterInterface;
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Exception\InvalidArgumentException;
 use ApiPlatform\Metadata\Exception\InvalidIdentifierException;
@@ -21,6 +20,7 @@ use ApiPlatform\Metadata\Exception\RuntimeException;
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
+use ApiPlatform\Metadata\UriVariablesConverterInterface;
 use ApiPlatform\State\UriVariablesResolverTrait;
 use Sylius\Bundle\ApiBundle\Exception\NoRouteMatchesException;
 use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingExceptionInterface;
