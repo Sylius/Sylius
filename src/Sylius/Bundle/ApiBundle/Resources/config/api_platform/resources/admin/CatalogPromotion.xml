@@ -89,35 +89,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="description">
-Example configuration for `for_variants` scope type:
-
-```
-{
-    "type": "for_variants",
-    "configuration": {
-        "variants": [
-            "string"
-        ]
-    }
-}
-```
-
-Example configuration for `percentage_discount` action type:
-
-```
-{
-    "type": "percentage_discount",
-    "configuration": {
-        "amount": float
-    }
-}
-```
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -152,35 +123,6 @@ Example configuration for `percentage_discount` action type:
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="description">
-Example configuration for `for_variants` scope type:
-
-```
-{
-    "type": "for_variants",
-    "configuration": {
-        "variants": [
-            "string"
-        ]
-    }
-}
-```
-
-Example configuration for `percentage_discount` action type:
-
-```
-{
-    "type": "percentage_discount",
-    "configuration": {
-        "amount": float
-    }
-}
-```
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation

@@ -109,11 +109,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Accepts Product Review.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -132,11 +127,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Rejects Product Review.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation

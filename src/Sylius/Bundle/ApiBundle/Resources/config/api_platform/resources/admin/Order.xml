@@ -71,11 +71,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Resends order confirmation email.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -103,11 +98,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Cancels Order.</value>
-                    </values>
-                </openapiContext>
             </operation>
         </operations>
     </resource>

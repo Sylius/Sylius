@@ -146,12 +146,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Generates promotion coupons.</value>
-                        <value name="description">Generates promotion coupons</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
