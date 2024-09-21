@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command\Checkout;
+namespace Sylius\Bundle\ApiBundle\Command\Order;
 
 class SendShipmentConfirmationEmail
 {

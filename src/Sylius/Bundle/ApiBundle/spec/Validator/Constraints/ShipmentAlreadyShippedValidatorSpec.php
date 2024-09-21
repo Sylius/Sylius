@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
+use Sylius\Bundle\ApiBundle\Command\Order\ShipShipment;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShipped;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;

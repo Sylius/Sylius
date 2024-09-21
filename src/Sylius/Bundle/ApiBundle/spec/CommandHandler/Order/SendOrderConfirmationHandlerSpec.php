@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
+namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Order;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
+use Sylius\Bundle\ApiBundle\Command\Order\SendOrderConfirmation;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;

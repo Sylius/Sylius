@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
+use Sylius\Bundle\ApiBundle\Command\Order\ChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChanged;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
