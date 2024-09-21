@@ -85,38 +85,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="description">
-Example configuration for `total_of_items_from_taxon` rule type:
-
-```
-{
-    "type": "total_of_items_from_taxon",
-    "configuration": {
-        "channel-code": {
-            "taxon": "taxon-code",
-            "amount": int
-        }
-    }
-}
-```
-
-Example configuration for `order_fixed_discount` action type:
-
-```
-{
-    "type": "order_fixed_discount",
-    "configuration": {
-        "channel-code": {
-            "amount": int,
-        }
-    }
-}
-```
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation name="sylius_api_admin_promotion_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/promotions/{code}">
@@ -148,38 +116,6 @@ Example configuration for `order_fixed_discount` action type:
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="description">
-Example configuration for `total_of_items_from_taxon` rule type:
-
-```
-{
-    "type": "total_of_items_from_taxon",
-    "configuration": {
-        "channel-code": {
-            "taxon": "taxon-code",
-            "amount": int
-        }
-    }
-}
-```
-
-Example configuration for `order_fixed_discount` action type:
-
-```
-{
-    "type": "order_fixed_discount",
-    "configuration": {
-        "channel-code": {
-            "amount": int
-        }
-    }
-}
-```
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -209,11 +145,6 @@ Example configuration for `order_fixed_discount` action type:
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Archives Promotion.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -243,11 +174,6 @@ Example configuration for `order_fixed_discount` action type:
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Restores Archived Promotion.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation

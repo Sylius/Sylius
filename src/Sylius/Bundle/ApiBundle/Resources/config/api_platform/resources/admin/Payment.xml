@@ -76,11 +76,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Completes Payment.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -108,11 +103,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Refunds Payment.</value>
-                    </values>
-                </openapiContext>
             </operation>
         </operations>
     </resource>

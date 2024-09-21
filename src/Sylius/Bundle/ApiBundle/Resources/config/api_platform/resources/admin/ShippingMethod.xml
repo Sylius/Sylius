@@ -88,46 +88,6 @@
                         <value name="groups">sylius_api.validator.groups_generator.shipping_method_configuration</value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="description">
-Example configuration for `total_weight_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "total_weight_greater_than_or_equal",
-    "configuration": {
-        "weight": int
-    }
-}
-```
-
-Example configuration for `order_total_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "order_total_greater_than_or_equal",
-    "configuration": {
-        "channel-code": [
-            "amount": int,
-        ]
-    }
-}
-```
-
-Example configuration for `flat_rate` shipping charges calculator:
-
-```
-"shippingChargesCalculator": "flat_rate",
-"shippingChargesCalculatorConfiguration": {
-    "channel-code": [
-        "amount": int,
-    ]
-}
-```
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -158,46 +118,6 @@ Example configuration for `flat_rate` shipping charges calculator:
                         <value name="groups">sylius_api.validator.groups_generator.shipping_method_configuration</value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="description">
-Example configuration for `total_weight_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "total_weight_greater_than_or_equal",
-    "configuration": {
-        "weight": int
-    }
-}
-```
-
-Example configuration for `order_total_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "order_total_greater_than_or_equal",
-    "configuration": {
-        "channel-code": [
-            "amount": int,
-        ]
-    }
-}
-```
-
-Example configuration for `flat_rate` shipping charges calculator:
-
-```
-"shippingChargesCalculator": "flat_rate",
-"shippingChargesCalculatorConfiguration": {
-    "channel-code": [
-        "amount": int,
-    ]
-}
-```
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -216,11 +136,6 @@ Example configuration for `flat_rate` shipping charges calculator:
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Archives Shipping Method.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -239,11 +154,6 @@ Example configuration for `flat_rate` shipping charges calculator:
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Restores archived Shipping Method.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation

@@ -61,11 +61,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Registers a new shop user</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -132,11 +127,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Change password for logged in customer.</value>
-                    </values>
-                </openapiContext>
             </operation>
         </operations>
     </resource>

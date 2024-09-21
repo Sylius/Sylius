@@ -28,26 +28,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="imageFilter">
-                                    <values>
-                                        <value name="name">imageFilter</value>
-                                        <value name="in">query</value>
-                                        <value name="description">Provide one of supported image liip imagine filters</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation name="sylius_api_shop_taxon_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/taxons/{code}">
@@ -60,26 +40,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="imageFilter">
-                                    <values>
-                                        <value name="name">imageFilter</value>
-                                        <value name="in">query</value>
-                                        <value name="description">Provide one of supported image liip imagine filters</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
         </operations>
     </resource>
