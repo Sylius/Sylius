@@ -25,6 +25,9 @@
     </parameters>
 
     <services>
+        <service id="api_platform.path_segment_name_generator.underscore" class="ApiPlatform\Metadata\Operation\UnderscorePathSegmentNameGenerator" public="false" />
+        <service id="api_platform.path_segment_name_generator.dash" class="ApiPlatform\Metadata\Operation\DashPathSegmentNameGenerator" public="false" />
+
         <service id="sylius_api.extractor.property_info.empty_property_list" class="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
