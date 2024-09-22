@@ -19,5 +19,12 @@
         <service id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" class="Sylius\Bundle\ApiBundle\Resolver\PathPrefixBasedOperationResolver">
             <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
         </service>
+
+        <service
+            id="sylius_api.resolver.uri_template_parent_resource_resolver"
+            class="Sylius\Bundle\ApiBundle\Resolver\UriTemplateParentResourceResolver"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 </container>
