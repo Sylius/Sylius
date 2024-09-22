@@ -139,5 +139,17 @@
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Core\Model\OrderItemInterface</argument>
         </service>
+
+        <service
+            id="sylius_api.context_builder.promotion_code_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Core\Model\PromotionInterface</argument>
+        </service>
     </services>
 </container>

@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Promotion;
 
+use Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware;
 use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
-class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstructionInterface
+#[PromotionCodeAware]
+readonly class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstructionInterface
 {
     public function __construct(
         private string $promotionCode,
