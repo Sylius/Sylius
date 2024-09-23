@@ -53,7 +53,7 @@ class SummaryComponent
         $this->variant = $variant;
     }
 
-    #[LiveListener('sylius:shop:variant_changed')]
+    #[LiveListener(AddToCartFormComponent::SYLIUS_SHOP_VARIANT_CHANGED)]
     public function updateProductVariant(#[LiveArg] mixed $variantId): void
     {
         if (null === $variantId) {
