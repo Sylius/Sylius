@@ -49,7 +49,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_specific_promotion_coupons(): void
+    public function it_gets_promotion_coupons_for_specific_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
@@ -59,6 +59,16 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->requestGet(sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()));
 
         $this->assertResponseSuccessful('admin/promotion_coupon/get_promotion_coupons_response');
+    }
+
+    /** @test */
+    public function it_gets_an_empty_array_result_when_the_promotion_has_not_exist(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
+
+        $this->requestGet('/api/v2/admin/promotions/NON_EXISTING_PROMOTION_CODE/coupons');
+
+        $this->assertResponseSuccessful('admin/promotion_coupon/get_empty_promotion_coupons_response');
     }
 
     /** @test */
@@ -81,6 +91,25 @@ final class PromotionCouponsTest extends JsonApiTestCase
         );
 
         $this->assertResponseCreated('admin/promotion_coupon/post_promotion_coupon_response');
+    }
+
+    /** @test */
+    public function it_does_not_create_promotion_coupon_if_promotion_does_not_exist(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+
+        $this->requestPost(
+            '/api/v2/admin/promotions/NON_EXISTING_PROMOTION_CODE/coupons',
+            [
+                'code' => 'XYZ3',
+                'usageLimit' => 100,
+                'perCustomerUsageLimit' => 3,
+                'reusableFromCancelledOrders' => false,
+                'expiresAt' => '23-12-2023',
+            ],
+        );
+
+        $this->assertResponseNotFound('Parent resource not found.');
     }
 
     /** @test */
