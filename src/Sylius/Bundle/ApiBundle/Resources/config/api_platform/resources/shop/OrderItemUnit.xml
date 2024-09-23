@@ -19,7 +19,7 @@
     <resource class="Sylius\Component\Core\Model\OrderItemUnit">
         <operations>
             <operation
-                name="sylius_api_shop_order_order_item_unit_get"
+                name="sylius_api_shop_order_item_unit_get"
                 class="ApiPlatform\Metadata\NotExposed"
                 uriTemplate="/shop/order-item-units/{id}"
             />

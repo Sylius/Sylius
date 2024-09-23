@@ -19,7 +19,7 @@
     <resource class="Sylius\Component\Promotion\Model\CatalogPromotionAction">
         <operations>
             <operation
-                name="sylius_api_admin_catalog_promotion_action_get"
+                name="sylius_api_admin_catalog_promotion_catalog_promotion_action_get"
                 class="ApiPlatform\Metadata\NotExposed"
                 uriTemplate="/admin/catalog-promotions/{code}/actions/{id}"
             >

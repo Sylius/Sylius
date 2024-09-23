@@ -19,7 +19,7 @@
     <resource class="Sylius\Component\Core\Model\CatalogPromotionScope">
         <operations>
             <operation
-                name="sylius_api_admin_catalog_promotion_scope_get"
+                name="sylius_api_admin_catalog_promotion_catalog_promotion_scope_get"
                 class="ApiPlatform\Metadata\NotExposed"
                 uriTemplate="/admin/catalog-promotions/{code}/scopes/{id}"
             >
