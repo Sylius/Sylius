@@ -16,9 +16,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\OrderItem" uriTemplate="/shop/orders/{tokenValue}/items">
+    <resource class="%sylius.model.order_item.class%" uriTemplate="/shop/orders/{tokenValue}/items">
         <uriVariables>
-            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="items" />
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="items" />
         </uriVariables>
         <operations>
             <operation name="sylius_api_shop_order_order_item_get_collection" class="ApiPlatform\Metadata\GetCollection">
@@ -35,10 +35,10 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\OrderItem" uriTemplate="/shop/orders/{tokenValue}/items/{id}">
+    <resource class="%sylius.model.order_item.class%" uriTemplate="/shop/orders/{tokenValue}/items/{id}">
         <uriVariables>
-            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="items" />
-            <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\OrderItem"/>
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="items" />
+            <uriVariable parameterName="id" fromClass="%sylius.model.order_item.class%"/>
         </uriVariables>
         <operations>
             <operation name="sylius_api_shop_order_order_item_get" class="ApiPlatform\Metadata\Get">

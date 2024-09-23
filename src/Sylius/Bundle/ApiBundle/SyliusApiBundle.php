@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle;
 
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\FlattenExceptionNormalizerDecoratorCompilerPass;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\LegacyErrorHandlingCompilerPass;
+use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\XmlResourceExtractorCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -24,5 +25,6 @@ final class SyliusApiBundle extends Bundle
     {
         $container->addCompilerPass(new FlattenExceptionNormalizerDecoratorCompilerPass());
         $container->addCompilerPass(new LegacyErrorHandlingCompilerPass());
+        $container->addCompilerPass(new XmlResourceExtractorCompilerPass());
     }
 }

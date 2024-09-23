@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Payment">
+    <resource class="%sylius.model.payment.class%">
         <operations>
             <operation name="sylius_api_admin_payment_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/payments">
                 <normalizationContext>
@@ -117,9 +117,9 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Payment" uriTemplate="/admin/orders/{tokenValue}/payments">
+    <resource class="%sylius.model.payment.class%" uriTemplate="/admin/orders/{tokenValue}/payments">
         <uriVariables>
-            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="payments"/>
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="payments"/>
         </uriVariables>
         <operations>
             <operation name="sylius_api_admin_order_payment_get_collection" class="ApiPlatform\Metadata\GetCollection">

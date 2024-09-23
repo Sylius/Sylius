@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Adjustment">
+    <resource class="%sylius.model.adjustment.class%">
         <operations>
             <operation name="sylius_api_admin_adjustment_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/adjustments/{id}">
                 <normalizationContext>
@@ -32,9 +32,9 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Adjustment" uriTemplate="/admin/orders/{tokenValue}/adjustments">
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/orders/{tokenValue}/adjustments">
         <uriVariables>
-            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="adjustments" />
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="adjustments" />
         </uriVariables>
 
         <operations>
@@ -59,9 +59,9 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Adjustment" uriTemplate="/admin/order-items/{id}/adjustments">
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/order-items/{id}/adjustments">
         <uriVariables>
-            <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\OrderItem" fromProperty="adjustments" />
+            <uriVariable parameterName="id" fromClass="%sylius.model.order_item.class%" fromProperty="adjustments" />
         </uriVariables>
 
         <operations>
@@ -86,9 +86,9 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Adjustment" uriTemplate="/admin/order-item-units/{id}/adjustments">
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/order-item-units/{id}/adjustments">
         <uriVariables>
-            <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\OrderItemUnit" fromProperty="adjustments" />
+            <uriVariable parameterName="id" fromClass="%sylius.model.order_item_unit.class%" fromProperty="adjustments" />
         </uriVariables>
 
         <operations>
@@ -106,9 +106,9 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Adjustment" uriTemplate="/admin/shipments/{id}/adjustments">
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/shipments/{id}/adjustments">
         <uriVariables>
-            <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\Shipment" fromProperty="adjustments" />
+            <uriVariable parameterName="id" fromClass="%sylius.model.shipment.class%" fromProperty="adjustments" />
         </uriVariables>
 
         <operations>

@@ -15,16 +15,16 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="id" identifier="true" writable="false" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="email" required="true" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="username" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="plainPassword" readable="false" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="enabled" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="firstName" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="lastName" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="localeCode" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="avatar" writable="true" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="updatedAt" writable="false" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="verifiedAt" writable="false" />
-    <property resource="Sylius\Component\Core\Model\AdminUser" name="lastLogin" writable="false" />
+    <property resource="%sylius.model.admin_user.class%" name="id" identifier="true" writable="false" />
+    <property resource="%sylius.model.admin_user.class%" name="email" required="true" />
+    <property resource="%sylius.model.admin_user.class%" name="username" />
+    <property resource="%sylius.model.admin_user.class%" name="plainPassword" readable="false" />
+    <property resource="%sylius.model.admin_user.class%" name="enabled" />
+    <property resource="%sylius.model.admin_user.class%" name="firstName" />
+    <property resource="%sylius.model.admin_user.class%" name="lastName" />
+    <property resource="%sylius.model.admin_user.class%" name="localeCode" />
+    <property resource="%sylius.model.admin_user.class%" name="avatar" writable="true" />
+    <property resource="%sylius.model.admin_user.class%" name="updatedAt" writable="false" />
+    <property resource="%sylius.model.admin_user.class%" name="verifiedAt" writable="false" />
+    <property resource="%sylius.model.admin_user.class%" name="lastLogin" writable="false" />
 </properties>

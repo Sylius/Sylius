@@ -15,8 +15,8 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Currency\Model\ExchangeRate" name="id" identifier="true"/>
-    <property resource="Sylius\Component\Currency\Model\ExchangeRate" name="ratio" required="true"/>
-    <property resource="Sylius\Component\Currency\Model\ExchangeRate" name="sourceCurrency" required="true"/>
-    <property resource="Sylius\Component\Currency\Model\ExchangeRate" name="targetCurrency" required="true"/>
+    <property resource="%sylius.model.exchange_rate.class%" name="id" identifier="true"/>
+    <property resource="%sylius.model.exchange_rate.class%" name="ratio" required="true"/>
+    <property resource="%sylius.model.exchange_rate.class%" name="sourceCurrency" required="true"/>
+    <property resource="%sylius.model.exchange_rate.class%" name="targetCurrency" required="true"/>
 </properties>

@@ -15,15 +15,15 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="id" identifier="false" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="code" identifier="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="name" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="startDate" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="endDate" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="priority" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="state" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="channels" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="translations" readable="true" writable="true">
+    <property resource="%sylius.model.catalog_promotion.class%" name="id" identifier="false" writable="false"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="code" identifier="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="name" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="startDate" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="endDate" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="priority" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="state" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="channels" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="translations" readable="true" writable="true">
         <openapiContext>
             <values>
                 <value name="type">object</value>
@@ -41,9 +41,9 @@
             </values>
         </openapiContext>
     </property>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="channels" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="actions" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="enabled" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="exclusive" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="label" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="channels" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="actions" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="enabled" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="exclusive" writable="true"/>
+    <property resource="%sylius.model.catalog_promotion.class%" name="label" writable="true"/>
 </properties>

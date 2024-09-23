@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Shipment">
+    <resource class="%sylius.model.shipment.class%">
         <operations>
             <operation
                 name="sylius_api_shop_order_shipment_get"
@@ -25,8 +25,8 @@
                 provider="sylius_api.state_provider.shop.shipment.item"
             >
                 <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" toProperty="order"/>
-                    <uriVariable parameterName="shipmentId" fromClass="Sylius\Component\Core\Model\Shipment"/>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" toProperty="order"/>
+                    <uriVariable parameterName="shipmentId" fromClass="%sylius.model.shipment.class%"/>
                 </uriVariables>
                 <normalizationContext>
                     <values>
