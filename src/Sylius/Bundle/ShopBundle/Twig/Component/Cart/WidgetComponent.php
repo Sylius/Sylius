@@ -19,15 +19,19 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Resource\Model\ResourceInterface;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsLiveComponent]
 class WidgetComponent
 {
+    use DefaultActionTrait;
+    use HookableLiveComponentTrait;
     /** @use ResourceLivePropTrait<OrderInterface> */
     use ResourceLivePropTrait;
 
