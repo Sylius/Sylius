@@ -11,7 +11,7 @@ Sylius\Component\Core\Model\Channel:
         enabled: true
         taxCalculationStrategy: "order_items_based"
 
-Sylius\Bundle\ApiBundle\Application\Entity\Currency:
+Sylius\Component\Currency\Model\Currency:
     currency1:
         code: "USD"
 
