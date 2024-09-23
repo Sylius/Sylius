@@ -26,6 +26,7 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\SyliusCartEvents;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -39,15 +40,20 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsLiveComponent]
 class AddToCartFormComponent
 {
-    use ProductLivePropTrait;
-    use ProductVariantLivePropTrait;
     use ComponentToolsTrait;
     use ComponentWithFormTrait;
+    use DefaultActionTrait;
+    use HookableLiveComponentTrait;
+    use ProductLivePropTrait;
+    use ProductVariantLivePropTrait;
+
+    public const SYLIUS_SHOP_VARIANT_CHANGED = 'sylius:shop:variant_changed';
 
     #[LiveProp]
     public string $routeName = 'sylius_shop_cart_summary';
@@ -95,7 +101,7 @@ class AddToCartFormComponent
         }
         $this->variant = $newVariant;
 
-        $this->emitUp('sylius:shop:variant_changed', ['variantId' => $this->variant?->getId()]);
+        $this->emitUp(self::SYLIUS_SHOP_VARIANT_CHANGED, ['variantId' => $this->variant?->getId()]);
     }
 
     #[LiveAction]

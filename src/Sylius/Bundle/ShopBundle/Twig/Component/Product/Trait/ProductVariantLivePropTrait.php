@@ -13,9 +13,6 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 trait ProductVariantLivePropTrait
 {
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
-
     #[LiveProp(hydrateWith: 'hydrateProductVariant', dehydrateWith: 'dehydrateProductVariant')]
     public ?ProductVariantInterface $variant = null;
 

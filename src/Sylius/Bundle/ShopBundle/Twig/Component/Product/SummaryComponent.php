@@ -20,14 +20,18 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsLiveComponent]
 class SummaryComponent
 {
+    use DefaultActionTrait;
+    use HookableLiveComponentTrait;
     use ProductLivePropTrait;
     use ProductVariantLivePropTrait;
 
@@ -53,7 +57,7 @@ class SummaryComponent
         $this->variant = $variant;
     }
 
-    #[LiveListener('sylius:shop:variant_changed')]
+    #[LiveListener(AddToCartFormComponent::SYLIUS_SHOP_VARIANT_CHANGED)]
     public function updateProductVariant(#[LiveArg] mixed $variantId): void
     {
         if (null === $variantId) {

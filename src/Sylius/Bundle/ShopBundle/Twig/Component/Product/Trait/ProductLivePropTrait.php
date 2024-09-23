@@ -11,9 +11,6 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 trait ProductLivePropTrait
 {
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
-
     #[LiveProp(hydrateWith: 'hydrateProduct', dehydrateWith: 'dehydrateProduct')]
     public ?ProductInterface $product = null;
 

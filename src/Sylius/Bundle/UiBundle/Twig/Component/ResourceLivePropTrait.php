@@ -21,9 +21,6 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 /** @template T of ResourceInterface */
 trait ResourceLivePropTrait
 {
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
-
     /** @var RepositoryInterface<T> */
     protected RepositoryInterface $repository;
 

@@ -31,6 +31,8 @@ class ChannelSelectorComponent
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
+    public const SYLIUS_ADMIN_CHANNEL_CHANGED = 'sylius:admin:channel_changed';
+
     #[LiveProp]
     public string $channelCode = '';
 
@@ -57,7 +59,7 @@ class ChannelSelectorComponent
     ): void {
         $this->channelCode = $channelCode;
 
-        $this->emit('channelChanged', ['channelCode' => $channelCode]);
+        $this->emit(self::SYLIUS_ADMIN_CHANNEL_CHANGED, ['channelCode' => $channelCode]);
     }
 
     #[ExposeInTemplate(name: 'channel_name')]
