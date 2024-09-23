@@ -1,13 +1,11 @@
-{% extends '@SyliusShop/account/address_book/layout.html.twig' %}
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
 {% block title %}{{ 'sylius.ui.edit_my_address'|trans }} | {{ parent() }}{% endblock %}
 
-{% block account_header %}
-    {% set title = 'sylius.ui.address_book'|trans %}
-    {% set description = 'sylius.ui.edit_my_address'|trans %}
-    {{ parent() }}
-{% endblock %}
-
-{% block account_content %}
-    {% hook 'sylius_shop.account.address_book.update' with { form, address } %}
+{% block content %}
+    <div class="container mb-auto">
+        <div class="row my-4">
+            {% hook 'layout' with { _prefixes: ['sylius_shop.account.address_book.update', 'sylius_shop.shared.account'], form, address } %}
+        </div>
+    </div>
 {% endblock %}

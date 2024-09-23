@@ -1,22 +1,11 @@
-{% extends '@SyliusShop/account/layout.html.twig' %}
-{% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
 {% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
 
-{% block breadcrumb %}
-    {{ breadcrumbs([
-        { label: 'sylius.ui.home'|trans, path: path('sylius_shop_homepage')},
-        { label: 'sylius.ui.my_account'|trans, path: path('sylius_shop_account_dashboard')},
-        { label: 'sylius.ui.personal_information'|trans, active: true }
-    ]) }}
-{% endblock %}
-
-{% block account_header %}
-    {% set title = 'sylius.ui.your_profile'|trans %}
-    {% set description = 'sylius.ui.edit_your_personal_information'|trans %}
-    {{ parent() }}
-{% endblock %}
-
-{% block account_content %}
-    {% hook 'sylius_shop.account.profile_update' with { form } %}
+{% block content %}
+    <div class="container mb-auto">
+        <div class="row my-4">
+            {% hook 'layout' with { _prefixes: ['sylius_shop.account.profile_update', 'sylius_shop.shared.account'], customer, form } %}
+        </div>
+    </div>
 {% endblock %}
