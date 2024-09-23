@@ -54,7 +54,11 @@ class SummaryComponent
     }
 
     #[LiveListener('sylius:shop:variant_changed')]
-    public function updateProductVariant(#[LiveArg] mixed $variantId): void {
+    public function updateProductVariant(#[LiveArg] mixed $variantId): void
+    {
+        if (null === $variantId) {
+            return;
+        }
 
         $changedVariant = $this->productVariantRepository->find($variantId);
 

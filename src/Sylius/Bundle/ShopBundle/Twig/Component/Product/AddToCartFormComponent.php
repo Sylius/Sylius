@@ -95,7 +95,7 @@ class AddToCartFormComponent
         }
         $this->variant = $newVariant;
 
-        $this->emitUp('sylius:shop:variant_changed', ['variant' => $this->variant?->getId()]);
+        $this->emitUp('sylius:shop:variant_changed', ['variantId' => $this->variant?->getId()]);
     }
 
     #[LiveAction]
