@@ -3,5 +3,5 @@
 {% set path = hookable_metadata.context.path %}
 
 <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}">
-    <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
+    <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" {{ sylius_test_html_attribute('thumbnail-image', image.type) }} />
 </a>
