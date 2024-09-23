@@ -54,7 +54,8 @@
             "id": "@integer@",
             "type": "thumbnail",
             "path": "@string@\/sylius_original\/product.jpg",
-            "productVariants": []
+            "productVariants": [],
+            "position": 0
         }
     ],
     "translations": {

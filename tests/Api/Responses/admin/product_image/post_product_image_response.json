@@ -6,5 +6,6 @@
     "owner": "\/api\/v2\/admin\/products\/MUG",
     "type": null,
     "path": "@string@.contains('sylius_original').endsWith('mugs.jpg')",
-    "productVariants": []
+    "productVariants": [],
+    "position": 3
 }
