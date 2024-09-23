@@ -44,7 +44,7 @@ final readonly class PaymentContext implements Context
         $payment = $order->getPayments()->first();
 
         $this->client->requestGet(
-            uri: sprintf('api/v2/shop/orders/%s/payments/%s', $order->getTokenValue(), $payment->getId()),
+            uri: sprintf('orders/%s/payments/%s', $order->getTokenValue(), $payment->getId()),
         );
     }
 
@@ -65,7 +65,7 @@ final readonly class PaymentContext implements Context
         $payments = $this->responseChecker->getValue($response, 'payments');
         $token = $this->responseChecker->getValue($response, 'tokenValue');
 
-        $response = $this->client->requestGet(sprintf('/api/v2/shop/orders/%s/payments/%s', $token, $payments[0]['id']));
+        $response = $this->client->requestGet(sprintf('orders/%s/payments/%s', $token, $payments[0]['id']));
 
         Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
     }
