@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PaymentRequestEventSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private PaymentRequestAnnouncerInterface $paymentMethodAnnouncer)
+    public function __construct(private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer)
     {
     }
 
@@ -44,13 +44,13 @@ final class PaymentRequestEventSubscriber implements EventSubscriberInterface
 
         $method = $event->getRequest()->getMethod();
         if ($method === Request::METHOD_POST) {
-            $this->paymentMethodAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
+            $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 
             return;
         }
 
         if (in_array($method, [Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
-            $this->paymentMethodAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
+            $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
         }
     }
 }

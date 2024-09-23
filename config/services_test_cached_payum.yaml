@@ -2,9 +2,13 @@ imports:
     - { resource: "services_test_cached.yaml" }
 
 services:
+    ##
+    # Prioritize Payum by tagging services with a higher priority (or lower for tagged_iterator).
+    ##
+    
     'sylius.payment_request.command_provider.payum.offline':
         class: Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider
         arguments:
-            - !tagged_locator { tag: 'sylius.payment_request.command_provider.payum.offline', index_by: 'type' }
+            - !tagged_locator { tag: 'sylius.payment_request.command_provider.payum.offline', index_by: 'action' }
         tags:
-            - { name: 'sylius.payment_request.command_provider', gateway-factory: 'offline', priority: -200 }
+            - { name: 'sylius.payment_request.command_provider', gateway-factory: 'offline', priority: -100 }

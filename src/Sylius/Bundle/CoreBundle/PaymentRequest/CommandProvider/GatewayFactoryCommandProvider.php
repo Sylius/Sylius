@@ -20,12 +20,15 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
-final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommandProviderInterface
+final class GatewayFactoryCommandProvider extends AbstractServiceCommandProvider
 {
+    /**
+     * @param ServiceProviderInterface<PaymentRequestCommandProviderInterface> $locator
+     */
     public function __construct(
         private PaymentRequestDuplicationCheckerInterface $paymentRequestDuplicationChecker,
         private GatewayFactoryNameProviderInterface $gatewayFactoryNameProvider,
-        private ServiceProviderInterface $locator,
+        protected ServiceProviderInterface $locator,
     ) {
     }
 
@@ -37,43 +40,10 @@ final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommand
             return false;
         }
 
-        $factoryName = $this->getFactoryName($paymentRequest);
-        $commandProvider = $this->getCommandProvider($factoryName);
-        if (null === $commandProvider) {
-            return false;
-        }
-
-        return $commandProvider->supports($paymentRequest);
+        return parent::supports($paymentRequest);
     }
 
-    public function provide(PaymentRequestInterface $paymentRequest): object
-    {
-        $factoryName = $this->getFactoryName($paymentRequest);
-        $commandProvider = $this->getCommandProvider($factoryName);
-        if (null === $commandProvider) {
-            throw new PaymentRequestNotSupportedException();
-        }
-
-        return $commandProvider->provide($paymentRequest);
-    }
-
-    public function getCommandProvider(string $index): ?PaymentRequestCommandProviderInterface
-    {
-        return $this->locator->get($index);
-    }
-
-    public function getCommandProviderIndex(): array
-    {
-        return $this->locator->getProvidedServices();
-    }
-
-    private function getFactoryName(PaymentRequestInterface $paymentRequest): string
-    {
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $paymentRequest->getMethod();
-
-        $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
-
-        return $factoryName;
+    protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string {
+        return $this->gatewayFactoryNameProvider->provideFromPaymentRequest($paymentRequest);
     }
 }

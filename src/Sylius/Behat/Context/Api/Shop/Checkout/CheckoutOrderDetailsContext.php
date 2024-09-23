@@ -59,6 +59,15 @@ final class CheckoutOrderDetailsContext implements Context
         Assert::notEq($state, PaymentInterface::STATE_NEW);
     }
 
+    /**
+     * @When I want to pay for my order
+     * @When I go to the change payment method page
+     */
+    public function iWantToPayForMyOrder(): void
+    {
+        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
+    }
+
     private function getLatestPaymentState(): ?string
     {
         $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));

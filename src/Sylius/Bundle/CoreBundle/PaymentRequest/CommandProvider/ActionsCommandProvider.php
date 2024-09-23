@@ -13,44 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider;
 
-use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
-final class ActionsCommandProvider implements ServiceProviderAwareCommandProviderInterface
+final class ActionsCommandProvider extends AbstractServiceCommandProvider
 {
+    /**
+     * @param ServiceProviderInterface<PaymentRequestCommandProviderInterface> $locator
+     */
     public function __construct(
-        private ServiceProviderInterface $locator,
+        protected ServiceProviderInterface $locator,
     ) {
     }
 
-    public function supports(PaymentRequestInterface $paymentRequest): bool
-    {
-        $commandProvider = $this->locator->get($paymentRequest->getAction());
-        if (null === $commandProvider) {
-            return false;
-        }
-
-        return $commandProvider->supports($paymentRequest);
-    }
-
-    public function provide(PaymentRequestInterface $paymentRequest): object
-    {
-        $commandProvider = $this->locator->get($paymentRequest->getAction());
-        if (null === $commandProvider) {
-            throw new PaymentRequestNotSupportedException();
-        }
-
-        return $commandProvider->provide($paymentRequest);
-    }
-
-    public function getCommandProvider(string $index): ?PaymentRequestCommandProviderInterface
-    {
-        return $this->locator->get($index);
-    }
-
-    public function getCommandProviderIndex(): array
-    {
-        return $this->locator->getProvidedServices();
+    protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string {
+        return $paymentRequest->getAction();
     }
 }

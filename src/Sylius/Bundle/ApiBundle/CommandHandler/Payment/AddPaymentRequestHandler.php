@@ -16,6 +16,8 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultActionProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\DefaultPayloadProviderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -28,6 +30,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class AddPaymentRequestHandler implements MessageHandlerInterface
 {
+
     /**
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
      * @param PaymentRepositoryInterface<PaymentInterface> $paymentRepository
@@ -39,6 +42,8 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
         private PaymentRepositoryInterface $paymentRepository,
         private PaymentRequestFactoryInterface $paymentRequestFactory,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private DefaultActionProviderInterface $defaultActionProvider,
+        private DefaultPayloadProviderInterface $defaultPayloadProvider,
     ) {
     }
 
@@ -70,8 +75,8 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
         }
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
-        $paymentRequest->setAction($addPaymentRequest->action);
-        $paymentRequest->setPayload($addPaymentRequest->payload);
+        $paymentRequest->setAction($addPaymentRequest->action ?? $this->defaultActionProvider->getAction($paymentRequest));
+        $paymentRequest->setPayload($addPaymentRequest->payload ?? $this->defaultPayloadProvider->getPayload($paymentRequest));
 
         return $paymentRequest;
     }

@@ -217,6 +217,8 @@
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius.payment_request.provider.default_action" />
+            <argument type="service" id="sylius.payment_request.provider.default_payload" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 

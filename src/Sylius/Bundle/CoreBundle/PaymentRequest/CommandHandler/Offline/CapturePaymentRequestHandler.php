@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Offline;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Offline\CapturePaymentRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessorInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental */
@@ -23,7 +24,6 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
         private readonly PaymentRequestProviderInterface $paymentRequestProvider,
-        private readonly CaptureProcessorInterface $offlineCaptureProcessor,
     ) {
     }
 
@@ -31,6 +31,6 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
     {
         $paymentRequest = $this->paymentRequestProvider->provide($capturePaymentRequest);
 
-        $this->offlineCaptureProcessor->process($paymentRequest);
+        $paymentRequest->setState(PaymentRequestInterface::STATE_COMPLETED);
     }
 }

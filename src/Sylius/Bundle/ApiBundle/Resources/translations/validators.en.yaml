@@ -28,7 +28,7 @@ sylius:
         not_exist: 'The payment method with %code% code does not exist.'
     payment_request:
         action_not_available: 'The payment request (method code "%code%" and payment id "%id%") has no handler. Please choose another payment method.'
-        not_available: 'The payment request is not supporting this action (actions available are: %actions%).'
+        not_available: 'The payment request is not supporting this action.'
     product:
         not_exist: 'The product %productName% does not exist.'
     product_variant:
