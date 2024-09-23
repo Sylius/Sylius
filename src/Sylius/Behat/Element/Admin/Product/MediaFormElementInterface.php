@@ -31,7 +31,15 @@ interface MediaFormElementInterface
 
     public function countImages(): int;
 
+    public function getImages(): array;
+
+    public function assertImageTypeAndPosition($image, string $expectedType, int $expectedPosition): void;
+
     public function modifyFirstImageType(string $type): void;
+
+    public function modifyFirstImagePosition(int $position): void;
+
+    public function modifyPositionOfImageWithType(string $type, int $position): void;
 
     public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void;
 }

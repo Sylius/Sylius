@@ -863,6 +863,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) has an image "([^"]+)" with "([^"]+)" type at position (\d+)$/
+     */
+    public function thisProductHasAnImageWithTypeAtPosition(ProductInterface $product, string $imagePath, string $imageType, int $position): void
+    {
+        $this->createProductImage($product, $imagePath, $imageType, null, $position);
+    }
+
+    /**
      * @Given /^(this product) has an image "([^"]+)" with "([^"]+)" type for ("[^"]+" variant)$/
      */
     public function thisProductHasAnImageWithTypeForVariant(
@@ -1585,6 +1593,7 @@ final class ProductContext implements Context
         string $imagePath,
         string $imageType,
         ?ProductVariantInterface $variant = null,
+        ?int $position = null,
     ): void {
         $filesPath = $this->getParameter('files_path');
 
@@ -1592,6 +1601,7 @@ final class ProductContext implements Context
         $productImage = $this->productImageFactory->createNew();
         $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $productImage->setType($imageType);
+        $productImage->setPosition($position);
 
         if (null !== $variant) {
             $productImage->addProductVariant($variant);

@@ -93,6 +93,14 @@ final class NavigatingBetweenProductShowAndEditPagesContext implements Context
     }
 
     /**
+     * @When I change position of the :image image to :position
+     */
+    public function iChangePositionOfTheImageTo(string $image, int $position): void
+    {
+        $this->updateSimpleProductPage->changeImagePosition($image, $position);
+    }
+
+    /**
      * @Then I should be on :product product edit page
      */
     public function iShouldBeOnProductEditPage(ProductInterface $product): void
