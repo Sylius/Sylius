@@ -18,11 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ApiClientInterface
 {
-    public function request(RequestInterface $request, bool $forgetResponse = true): Response;
+    public function request(?RequestInterface $request = null, bool $forgetResponse = false): Response;
 
-    /**
-     * @param array<string, mixed> $queryParameters
-     */
+    /** @param array<string, mixed> $queryParameters */
     public function index(string $resource, array $queryParameters = [], bool $forgetResponse = false): Response;
 
     public function showByIri(string $iri, bool $forgetResponse = false): Response;
@@ -54,9 +52,10 @@ interface ApiClientInterface
 
     public function executeCustomRequest(RequestInterface $request): Response;
 
-    public function buildCreateRequest(string $resource): void;
+    public function buildCreateRequest(string $url): self;
 
-    public function buildUpdateRequest(string $resource, string $id): self;
+    /** @param ?string $id Deprecated, pass the id as a part of the uri */
+    public function buildUpdateRequest(string $uri, ?string $id = null): self;
 
     /** @param array<string, mixed> $data */
     public function setRequestData(array $data): self;
@@ -70,7 +69,7 @@ interface ApiClientInterface
     public function addFile(string $key, UploadedFile $file): void;
 
     /** @param array<string, mixed> $value */
-    public function addRequestData(string $key, array|bool|int|string|null $value): void;
+    public function addRequestData(string $key, array|bool|int|string|null $value): self;
 
     /** @param array<string, mixed> $value */
     public function replaceRequestData(string $key, array|bool|int|string|null $value): void;
@@ -100,4 +99,6 @@ interface ApiClientInterface
      * @param array<string, string> $headers
      */
     public function requestGet(string $uri, array $queryParameters = [], array $headers = []): Response;
+
+    public function requestDelete(string $uri): Response;
 }
