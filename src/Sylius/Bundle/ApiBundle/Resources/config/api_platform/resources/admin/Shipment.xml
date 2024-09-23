@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\Shipment">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipments">
+            <operation
+                name="sylius_api_admin_shipment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/shipments"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -38,7 +42,7 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/shipments/{id}">
+            <operation name="sylius_api_admin_shipment_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/shipments/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -51,6 +55,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_shipment_post_resend_confirmation_email"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/shipments/{id}/resend-confirmation-email"
                 messenger="input"
@@ -75,6 +80,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_shipment_patch_ship"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/shipments/{id}/ship"
                 messenger="input"
@@ -115,7 +121,7 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation name="sylius_api_admin_order_shipment_get_collection" class="ApiPlatform\Metadata\GetCollection">
                 <normalizationContext>
                     <values>
                         <value name="groups">

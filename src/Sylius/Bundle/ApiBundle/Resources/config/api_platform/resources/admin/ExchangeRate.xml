@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Currency\Model\ExchangeRate">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/exchange-rates">
+            <operation
+                name="sylius_api_admin_exchange_rate_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/exchange-rates"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -33,7 +37,11 @@
                 </filters>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/exchange-rates/{id}">
+            <operation
+                name="sylius_api_admin_exchange_rate_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/exchange-rates/{id}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -45,7 +53,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/exchange-rates" >
+            <operation
+                name="sylius_api_admin_exchange_rate_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/exchange-rates"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -75,7 +87,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/exchange-rates/{id}" >
+            <operation
+                name="sylius_api_admin_exchange_rate_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/exchange-rates/{id}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -105,7 +121,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/exchange-rates/{id}" />
+            <operation
+                name="sylius_api_admin_exchange_rate_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/exchange-rates/{id}"
+            />
         </operations>
     </resource>
 </resources>

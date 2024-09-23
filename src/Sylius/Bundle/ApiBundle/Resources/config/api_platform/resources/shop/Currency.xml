@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Currency\Model\Currency">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/currencies">
+            <operation name="sylius_api_shop_currency_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/currencies">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +30,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/currencies/{code}">
+            <operation name="sylius_api_shop_currency_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/currencies/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">

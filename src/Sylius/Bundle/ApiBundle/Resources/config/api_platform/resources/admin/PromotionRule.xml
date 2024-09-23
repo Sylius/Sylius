@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Promotion\Model\PromotionRule">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/promotions/{code}/rules/{id}">
+            <operation
+                name="sylius_api_admin_promotion_promotion_rule_get"
+                class="ApiPlatform\Metadata\NotExposed"
+                uriTemplate="/admin/promotions/{code}/rules/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Promotion" fromProperty="rules" />
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Promotion\Model\PromotionRule" />

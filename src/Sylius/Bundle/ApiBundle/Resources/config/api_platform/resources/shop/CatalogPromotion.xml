@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\CatalogPromotion">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get"  uriTemplate="/shop/catalog-promotions/{code}">
+            <operation
+                name="sylius_api_shop_catalog_promotion_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/catalog-promotions/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">

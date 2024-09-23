@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Product\Model\ProductAttribute">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-attributes/{code}">
+            <operation
+                name="sylius_api_shop_product_attribute_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/product-attributes/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">

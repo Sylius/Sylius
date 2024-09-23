@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Product\Model\ProductVariantTranslation">
         <operations>
-            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/product-variants/{code}/translations/{localeCode}">
+            <operation
+                name="sylius_api_admin_product_variant_product_variant_translation_get_collection"
+                class="ApiPlatform\Metadata\NotExposed"
+                uriTemplate="/admin/product-variants/{code}/translations/{localeCode}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\ProductVariant" fromProperty="translations" />
                     <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Product\Model\ProductVariantTranslation" />

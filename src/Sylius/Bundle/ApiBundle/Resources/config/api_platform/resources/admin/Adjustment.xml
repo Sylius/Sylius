@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\Adjustment">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/adjustments/{id}">
+            <operation name="sylius_api_admin_adjustment_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/adjustments/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -38,7 +38,11 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.admin.order.adjustment.collection">
+            <operation
+                name="sylius_api_admin_order_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.admin.order.adjustment.collection"
+            >
                 <parameters>
                     <parameter key="type" />
                 </parameters>
@@ -61,7 +65,11 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.admin.order_item.adjustment.collection">
+            <operation
+                name="sylius_api_admin_order_item_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.admin.order_item.adjustment.collection"
+            >
                 <parameters>
                     <parameter key="type" />
                 </parameters>
@@ -84,7 +92,7 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation name="sylius_api_admin_order_item_unit_adjustment_get_collection" class="ApiPlatform\Metadata\GetCollection">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -104,7 +112,7 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation name="sylius_api_admin_shipment_adjustment_get_collection" class="ApiPlatform\Metadata\GetCollection">
                 <normalizationContext>
                     <values>
                         <value name="groups">

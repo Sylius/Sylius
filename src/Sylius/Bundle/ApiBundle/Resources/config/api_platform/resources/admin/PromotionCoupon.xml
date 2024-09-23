@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\PromotionCoupon">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/promotion-coupons">
+            <operation
+                name="sylius_api_admin_promotion_coupon_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/promotion-coupons"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -39,7 +43,11 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/promotion-coupons/{code}">
+            <operation
+                name="sylius_api_admin_promotion_coupon_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/promotion-coupons/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -51,7 +59,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/promotion-coupons">
+            <operation
+                name="sylius_api_admin_promotion_coupon_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/promotion-coupons"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -82,6 +94,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_promotion_coupon_post_generate"
                 class="ApiPlatform\Metadata\Post"
                 messenger="input"
                 uriTemplate="/admin/promotion-coupons/generate"
@@ -123,7 +136,11 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/promotion-coupons/{code}">
+            <operation
+                name="sylius_api_admin_promotion_coupon_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/promotion-coupons/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -154,6 +171,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_promotion_coupon_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotion-coupons/{code}"
                 processor="sylius_api.state_processor.admin.promotion_coupon.remove"
@@ -167,7 +185,11 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/promotions/{code}/coupons">
+            <operation
+                name="sylius_api_admin_promotion_promotion_coupon_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/promotions/{code}/coupons"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">

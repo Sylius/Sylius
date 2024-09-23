@@ -22,7 +22,7 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\Get">
+            <operation name="sylius_api_admin_admin_user_avatar_image_get" class="ApiPlatform\Metadata\Get">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -35,6 +35,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_admin_user_avatar_image_post"
                 class="ApiPlatform\Metadata\Post"
                 processor="sylius_api.state_processor.admin.avatar_image.persist"
                 deserialize="false"
@@ -89,7 +90,7 @@
                 </openapi>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete"/>
+            <operation name="sylius_api_admin_admin_user_avatar_image_delete" class="ApiPlatform\Metadata\Delete" />
         </operations>
     </resource>
 </resources>

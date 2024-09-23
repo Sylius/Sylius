@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Addressing\Model\Province">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/provinces/{code}">
+            <operation name="sylius_api_admin_province_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/provinces/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +30,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/provinces/{code}">
+            <operation name="sylius_api_admin_province_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/provinces/{code}">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -68,7 +68,7 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation name="sylius_api_admin_country_province_get_collection" class="ApiPlatform\Metadata\GetCollection">
                 <normalizationContext>
                     <values>
                         <value name="groups">

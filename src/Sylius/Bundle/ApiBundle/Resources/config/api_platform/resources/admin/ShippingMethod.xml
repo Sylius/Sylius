@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\ShippingMethod">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipping-methods">
+            <operation
+                name="sylius_api_admin_shipping_method_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/shipping-methods"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -40,7 +44,11 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/shipping-methods/{code}">
+            <operation
+                name="sylius_api_admin_shipping_method_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/shipping-methods/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -52,7 +60,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/shipping-methods">
+            <operation
+                name="sylius_api_admin_shipping_method_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/shipping-methods"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -118,7 +130,11 @@ Example configuration for `flat_rate` shipping charges calculator:
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/shipping-methods/{code}">
+            <operation
+                name="sylius_api_admin_shipping_method_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/shipping-methods/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -185,6 +201,7 @@ Example configuration for `flat_rate` shipping charges calculator:
             </operation>
 
             <operation
+                name="sylius_api_admin_shipping_method_patch_archive"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/shipping-methods/{code}/archive"
                 input="false"
@@ -207,6 +224,7 @@ Example configuration for `flat_rate` shipping charges calculator:
             </operation>
 
             <operation
+                name="sylius_api_admin_shipping_method_patch_restore"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/shipping-methods/{code}/restore"
                 input="false"
@@ -229,6 +247,7 @@ Example configuration for `flat_rate` shipping charges calculator:
             </operation>
 
             <operation
+                name="sylius_api_admin_shipping_method_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/shipping-methods/{code}"
                 processor="sylius_api.state_processor.admin.shipping_method.remove"

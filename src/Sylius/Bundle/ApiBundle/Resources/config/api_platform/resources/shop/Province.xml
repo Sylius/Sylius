@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Addressing\Model\Province">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/provinces/{code}">
+            <operation name="sylius_api_shop_province_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/provinces/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">

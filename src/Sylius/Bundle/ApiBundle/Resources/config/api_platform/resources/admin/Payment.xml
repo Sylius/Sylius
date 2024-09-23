@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Core\Model\Payment">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/payments">
+            <operation name="sylius_api_admin_payment_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/payments">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -39,7 +39,7 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/payments/{id}">
+            <operation name="sylius_api_admin_payment_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/payments/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -52,6 +52,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_payment_patch_complete"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/payments/{id}/complete"
                 input="false"
@@ -83,6 +84,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_payment_patch_refund"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/payments/{id}/refund"
                 input="false"
@@ -120,7 +122,7 @@
             <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="payments"/>
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation name="sylius_api_admin_order_payment_get_collection" class="ApiPlatform\Metadata\GetCollection">
                 <normalizationContext>
                     <values>
                         <value name="groups">

@@ -5,10 +5,10 @@ parameters:
     env(SYLIUS_API_AUTHORIZATION_HEADER): Authorization
     sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
     sylius.api.doctrine.orm.query.extension.shop.order.filter_cart.allowed_operations:
-        - "_api_/shop/orders/{tokenValue}/payments/{paymentId}_patch"
-        - "_api_/shop/account/orders/{tokenValue}/payments/{paymentId}_patch"
-        - "_api_/shop/orders/{tokenValue}_get"
-        - "_api_/shop/orders/{tokenValue}/payments/{paymentId}/configuration_get"
+        - "sylius_api_shop_order_get"
+        - "sylius_api_shop_order_payment_get_configuration"
+        - "sylius_api_shop_order_payment_patch"
+        - "sylius_api_shop_order_payment_patch_account"
     sylius.api.paths_to_hide:
         - "%sylius.security.new_api_route%/admin/address-log-entry/{id}"
         - "%sylius.security.new_api_route%/admin/catalog-promotion-actions/{id}"
@@ -33,7 +33,7 @@ sylius_api:
         restricted_resources:
             '%sylius.model.product.class%':
                 operations:
-                    _api_/shop/products_get_collection: ~
+                    sylius_api_shop_product_get_collection: ~
     order_states_to_filter_out:
         - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
     non_archived_classes:

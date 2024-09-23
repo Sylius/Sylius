@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Product\Model\ProductOptionValue">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-options/{optionCode}/values/{code}">
+            <operation
+                name="sylius_api_admin_product_option_product_option_value_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/product-options/{optionCode}/values/{code}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="optionCode" fromClass="Sylius\Component\Product\Model\ProductOption" fromProperty="values"/>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Product\Model\ProductOptionValue" />
@@ -42,7 +46,10 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation
+                name="sylius_api_admin_product_option_product_option_value_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">

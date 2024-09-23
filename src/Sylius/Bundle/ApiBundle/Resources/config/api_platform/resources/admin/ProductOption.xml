@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Product\Model\ProductOption">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-options">
+            <operation
+                name="sylius_api_admin_product_option_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/product-options"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -38,7 +42,11 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-options/{code}">
+            <operation
+                name="sylius_api_admin_product_option_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/product-options/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -50,7 +58,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-options">
+            <operation
+                name="sylius_api_admin_product_option_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/product-options"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -80,7 +92,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-options/{code}">
+            <operation
+                name="sylius_api_admin_product_option_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/product-options/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -110,7 +126,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-options/{code}"/>
+            <operation
+                name="sylius_api_admin_product_option_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/product-options/{code}"
+            />
         </operations>
     </resource>
 </resources>

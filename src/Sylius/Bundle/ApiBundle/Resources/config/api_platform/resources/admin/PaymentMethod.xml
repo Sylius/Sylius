@@ -18,12 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\PaymentMethod">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/payment-methods">
-                <order>
-                    <values>
-                        <value name="position">ASC</value>
-                    </values>
-                </order>
+            <operation
+                name="sylius_api_admin_payment_method_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/payment-methods"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -39,9 +38,18 @@
                     <filter>sylius_api.search_filter.admin.payment_method</filter>
                     <filter>sylius_api.boolean_filter.admin.payment_method</filter>
                 </filters>
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/payment-methods/{code}">
+            <operation
+                name="sylius_api_admin_payment_method_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/payment-methods/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -53,7 +61,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/payment-methods">
+            <operation
+                name="sylius_api_admin_payment_method_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/payment-methods"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -79,7 +91,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/payment-methods/{code}">
+            <operation
+                name="sylius_api_admin_payment_method_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/payment-methods/{code}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -106,6 +122,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_payment_method_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/payment-methods/{code}"
                 processor="sylius_api.state_processor.admin.payment_method.remove"

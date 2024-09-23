@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\ProductReview">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-reviews">
+            <operation
+                name="sylius_api_admin_product_review_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/product-reviews"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -39,7 +43,11 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-reviews/{id}">
+            <operation
+                name="sylius_api_admin_product_review_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/product-reviews/{id}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -51,7 +59,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-reviews/{id}">
+            <operation
+                name="sylius_api_admin_product_review_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/product-reviews/{id}"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -82,6 +94,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_product_review_patch_accept"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/product-reviews/{id}/accept"
                 input="false"
@@ -104,6 +117,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_product_review_patch_reject"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/product-reviews/{id}/reject"
                 input="false"
@@ -125,7 +139,11 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-reviews/{id}" />
+            <operation
+                name="sylius_api_admin_product_review_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/product-reviews/{id}"
+            />
         </operations>
     </resource>
 </resources>

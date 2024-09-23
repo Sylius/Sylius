@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\ProductImage">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/products/{code}/images">
+            <operation
+                name="sylius_api_admin_product_product_image_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/products/{code}/images"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
                 </uriVariables>
@@ -56,7 +60,11 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/products/{code}/images/{id}">
+            <operation
+                name="sylius_api_admin_product_product_image_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/products/{code}/images/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\ProductImage" />
@@ -92,7 +100,11 @@
                 </openapiContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/products/{code}/images/{id}">
+            <operation
+                name="sylius_api_admin_product_product_image_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/products/{code}/images/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\ProductImage" />
@@ -126,7 +138,11 @@
                 </validationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/products/{code}/images/{id}">
+            <operation
+                name="sylius_api_admin_product_product_image_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/products/{code}/images/{id}"
+            >
                 <uriVariables>
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images" />
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\ProductImage" />
@@ -138,6 +154,7 @@
     <resource class="Sylius\Component\Core\Model\Product">
         <operations>
             <operation
+                name="sylius_api_admin_product_product_image_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/products/{code}/images"
                 processor="sylius_api.state_processor.admin.product_image.persist"

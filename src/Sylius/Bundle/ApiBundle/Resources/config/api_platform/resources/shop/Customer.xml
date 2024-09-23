@@ -19,6 +19,7 @@
     <resource class="Sylius\Component\Core\Model\Customer">
         <operations>
             <operation
+                name="sylius_api_shop_customer_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/customers/{id}"
                 security="is_granted('SYLIUS_SHOP_USER')"
@@ -35,6 +36,7 @@
             </operation>
 
             <operation
+                name="sylius_api_shop_customer_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/shop/customers"
                 messenger="input"
@@ -67,6 +69,7 @@
             </operation>
 
             <operation
+                name="sylius_api_shop_customer_put"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/shop/customers/{id}"
                 security="is_granted('SYLIUS_SHOP_USER')"
@@ -103,6 +106,7 @@
             </operation>
 
             <operation
+                name="sylius_api_shop_customer_put_password"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/shop/customers/{id}/password"
                 messenger="input"

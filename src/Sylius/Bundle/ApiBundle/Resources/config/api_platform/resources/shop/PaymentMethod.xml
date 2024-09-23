@@ -19,6 +19,7 @@
     <resource class="Sylius\Component\Core\Model\PaymentMethod">
         <operations>
             <operation
+                name="sylius_api_shop_payment_method_get_collection"
                 class="ApiPlatform\Metadata\GetCollection"
                 uriTemplate="/shop/payment-methods"
                 paginationEnabled="false"
@@ -39,7 +40,11 @@
                 </order>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/payment-methods/{code}">
+            <operation
+                name="sylius_api_shop_payment_method_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/payment-methods/{code}"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -60,7 +65,11 @@
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.order.payment.payment_method.collection">
+            <operation
+                name="sylius_api_shop_order_payment_payment_method_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.shop.order.payment.payment_method.collection"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">

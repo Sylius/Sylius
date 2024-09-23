@@ -18,7 +18,7 @@
 >
     <resource class="Sylius\Component\Addressing\Model\Country">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/countries">
+            <operation name="sylius_api_shop_country_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/countries">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +30,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/countries/{code}">
+            <operation name="sylius_api_shop_country_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/countries/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">

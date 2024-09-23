@@ -18,7 +18,11 @@
 >
     <resource class="Sylius\Component\Addressing\Model\Country">
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/countries">
+            <operation
+                name="sylius_api_admin_country_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/countries"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +34,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/countries/{code}">
+            <operation name="sylius_api_admin_country_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/countries/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -43,6 +47,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_country_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/countries"
                 processor="sylius_api.state_processor.admin.country.persist"
@@ -77,6 +82,7 @@
             </operation>
 
             <operation
+                name="sylius_api_admin_country_put"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/admin/countries/{code}"
                 processor="sylius_api.state_processor.admin.country.persist"
