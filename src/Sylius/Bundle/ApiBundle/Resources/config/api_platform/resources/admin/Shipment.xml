@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Shipment">
+    <resource class="%sylius.model.shipment.class%">
         <operations>
             <operation
                 name="sylius_api_admin_shipment_get_collection"
@@ -115,9 +115,9 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Shipment" uriTemplate="/admin/orders/{tokenValue}/shipments">
+    <resource class="%sylius.model.shipment.class%" uriTemplate="/admin/orders/{tokenValue}/shipments">
         <uriVariables>
-            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="shipments" />
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="shipments" />
         </uriVariables>
 
         <operations>

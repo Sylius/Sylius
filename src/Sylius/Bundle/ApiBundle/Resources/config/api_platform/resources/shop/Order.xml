@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Order">
+    <resource class="%sylius.model.order.class%">
         <operations>
             <operation
                 name="sylius_api_shop_order_get_collection"
@@ -54,8 +54,8 @@
                 controller="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration"
             >
                 <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
+                    <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="order"/>
                 </uriVariables>
                 <openapiContext>
                     <values>
@@ -197,8 +197,8 @@
                 input="Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart"
             >
                 <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="orderItemId" fromClass="Sylius\Component\Core\Model\OrderItem" fromProperty="order"/>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
+                    <uriVariable parameterName="orderItemId" fromClass="%sylius.model.order_item.class%" fromProperty="order"/>
                 </uriVariables>
                 <denormalizationContext>
                     <values>
@@ -242,8 +242,8 @@
                 input="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod"
             >
                 <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="shipmentId" fromClass="Sylius\Component\Core\Model\Shipment" fromProperty="order"/>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
+                    <uriVariable parameterName="shipmentId" fromClass="%sylius.model.shipment.class%" fromProperty="order"/>
                 </uriVariables>
                 <denormalizationContext>
                     <values>
@@ -287,8 +287,8 @@
                 input="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod"
             >
                 <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
+                    <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="order"/>
                 </uriVariables>
                 <denormalizationContext>
                     <values>
@@ -374,8 +374,8 @@
                 input="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod"
             >
                 <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
+                    <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="order"/>
                 </uriVariables>
                 <validationContext>
                     <values>
@@ -430,8 +430,8 @@
                 controller="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction"
             >
                 <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="orderItemId" fromClass="Sylius\Component\Core\Model\OrderItem" fromProperty="order"/>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
+                    <uriVariable parameterName="orderItemId" fromClass="%sylius.model.order_item.class%" fromProperty="order"/>
                 </uriVariables>
             </operation>
         </operations>

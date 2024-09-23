@@ -15,14 +15,14 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="id" identifier="true" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="type" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="label" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="amount" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="order" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="orderItem" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="orderItemUnit" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="shipment" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="neutral" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Adjustment" name="locked" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="id" identifier="true" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="type" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="label" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="amount" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="order" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="orderItem" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="orderItemUnit" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="shipment" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="neutral" writable="false"/>
+    <property resource="%sylius.model.adjustment.class%" name="locked" writable="false"/>
 </properties>
