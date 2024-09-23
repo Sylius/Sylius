@@ -273,10 +273,10 @@ final class XmlResourceExtractor extends AbstractResourceExtractor
             if ($toProperty = $this->phpize($data, 'toProperty', 'string')) {
                 $uriVariables[$parameterName]['to_property'] = $toProperty;
             }
-            if ($fromClass = $this->phpize($data, 'fromClass', 'string')) {
+            if ($fromClass = $this->resolve($this->phpize($data, 'fromClass', 'string'))) {
                 $uriVariables[$parameterName]['from_class'] = $fromClass;
             }
-            if ($toClass = $this->phpize($data, 'toClass', 'string')) {
+            if ($toClass = $this->resolve($this->phpize($data, 'toClass', 'string'))) {
                 $uriVariables[$parameterName]['to_class'] = $toClass;
             }
             if (isset($data->identifiers->values)) {
