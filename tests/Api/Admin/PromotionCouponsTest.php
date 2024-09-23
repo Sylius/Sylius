@@ -29,12 +29,15 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/promotion-coupons/%s', $coupon->getCode()),
+            uri: sprintf(sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode())),
             server: $header,
         );
 
@@ -46,12 +49,15 @@ final class PromotionCouponsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_promotion_coupons(): void
+    public function it_gets_specific_promotion_coupons(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/promotion-coupons', server: $header);
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
+        $this->client->request(method: 'GET', uri: sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()), server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -71,7 +77,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons',
+            uri: sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()),
             server: $header,
             content: json_encode([
                 'code' => 'XYZ3',
@@ -79,7 +85,6 @@ final class PromotionCouponsTest extends JsonApiTestCase
                 'perCustomerUsageLimit' => 3,
                 'reusableFromCancelledOrders' => false,
                 'expiresAt' => '23-12-2023',
-                'promotion' => 'api/v2/admin/promotions/' . $promotion->getCode(),
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -96,12 +101,15 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
         $this->client->request(
             method: 'PUT',
-            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
+            uri: sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()),
             server: $header,
             content: json_encode([
                 'usageLimit' => 1000,
@@ -129,10 +137,9 @@ final class PromotionCouponsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons/generate',
+            uri: sprintf('/api/v2/admin/promotions/%s/coupons/generate', $promotion->getCode()),
             server: $header,
             content: json_encode([
-                'promotionCode' => $promotion->getCode(),
                 'amount' => 4,
                 'prefix' => 'ABC',
                 'codeLength' => 6,
@@ -150,17 +157,15 @@ final class PromotionCouponsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_generate_promotion_coupons_with_invalid_promotion_code(): void
+    public function it_does_not_generate_promotion_coupons_with_non_existing_promotion_code(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons/generate',
+            uri: '/api/v2/admin/promotions/non_existing_promotion_code/coupons/generate',
             server: $header,
             content: json_encode([
-                'promotionCode' => 'invalid',
                 'amount' => 4,
                 'prefix' => 'ABC',
                 'codeLength' => 6,
@@ -183,12 +188,15 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
         $this->client->request(
             method: 'DELETE',
-            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
+            uri: sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()),
             server: $header,
         );
 
@@ -206,12 +214,15 @@ final class PromotionCouponsTest extends JsonApiTestCase
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
         $this->client->request(
             method: 'DELETE',
-            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
+            uri: sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()),
             server: $header,
         );
 
