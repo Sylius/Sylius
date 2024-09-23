@@ -15,7 +15,9 @@
             id="sylius_shop.twig.component.cart.form"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent"
         >
+            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\CartType</argument>
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="event_dispatcher" />
@@ -35,6 +37,7 @@
             id="sylius_shop.twig.component.cart.summary"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\SummaryComponent"
         >
+            <argument type="service" id="sylius.repository.order" />
 
             <tag
                 name="sylius.live_component"
@@ -48,6 +51,7 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\WidgetComponent"
         >
             <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.order" />
 
             <tag
                 name="sylius.live_component"
@@ -61,6 +65,7 @@
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\WidgetComponent"
         >
             <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.order" />
 
             <tag
                 name="sylius.live_component"

@@ -16,13 +16,16 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderItem;
-use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\SyliusCartEvents;
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -36,22 +39,15 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsLiveComponent]
 class AddToCartFormComponent
 {
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
+    use ProductLivePropTrait;
+    use ProductVariantLivePropTrait;
     use ComponentToolsTrait;
     use ComponentWithFormTrait;
-
-    #[LiveProp]
-    public Product $product;
-
-    #[LiveProp]
-    public ?ProductVariant $variant = null;
 
     #[LiveProp]
     public string $routeName = 'sylius_shop_cart_summary';
@@ -63,6 +59,8 @@ class AddToCartFormComponent
     /**
      * @param CartItemFactoryInterface<OrderItem> $cartItemFactory
      * @param class-string $formClass
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
      */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
@@ -74,7 +72,11 @@ class AddToCartFormComponent
         private readonly AddToCartCommandFactory $addToCartCommandFactory,
         private readonly CartItemFactoryInterface $cartItemFactory,
         private readonly string $formClass,
+        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
     ) {
+        $this->initializeProduct($productRepository);
+        $this->initializeProductVariant($productVariantRepository);
     }
 
     #[PostMount(priority: 100)]
@@ -93,7 +95,7 @@ class AddToCartFormComponent
         }
         $this->variant = $newVariant;
 
-        $this->emitUp('sylius:shop:variant_changed', ['variant' => $this->variant?->getId()]);
+        $this->emitUp('sylius:shop:variant_changed', ['variantId' => $this->variant?->getId()]);
     }
 
     #[LiveAction]

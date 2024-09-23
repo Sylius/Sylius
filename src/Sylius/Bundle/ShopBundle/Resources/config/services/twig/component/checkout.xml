@@ -17,11 +17,13 @@
             id="sylius_shop.twig.component.checkout.address.form"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent"
         >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\AddressType</argument>
             <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.address" />
-            <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\AddressType</argument>
 
             <tag
                 name="sylius.live_component"
@@ -49,9 +51,11 @@
 
         <service
             id="sylius_shop.twig.component.checkout.shipping.form"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Shipping\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
+            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectShippingType</argument>
 
             <tag
@@ -63,9 +67,11 @@
 
         <service
             id="sylius_shop.twig.component.checkout.payment.form"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Payment\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
+            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType</argument>
 
             <tag

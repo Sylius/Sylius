@@ -13,9 +13,11 @@
     <services>
         <service
             id="sylius_shop.twig.component.account.register.form"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Account\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
+            <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.customer.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType</argument>
 
             <tag
@@ -27,9 +29,11 @@
 
         <service
             id="sylius_shop.twig.component.account.profile_update.form"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\Account\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
+            <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.customer.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerProfileType</argument>
 
             <tag
@@ -57,7 +61,9 @@
             id="sylius_shop.twig.component.account.address.default_form"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Account\Address\DefaultFormComponent"
         >
+            <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.customer.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerDefaultAddressType</argument>
 
             <tag
@@ -71,7 +77,9 @@
             id="sylius_shop.twig.component.account.address.form"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Account\Address\FormComponent"
         >
+            <argument type="service" id="sylius.repository.address" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.address.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\AddressType</argument>
 
             <tag

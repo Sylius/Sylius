@@ -39,9 +39,11 @@
 
         <service
             id="sylius_shop.twig.component.product_review.form"
-            class="Sylius\Bundle\ShopBundle\Twig\Component\ProductReview\FormComponent"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
+            <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="form.factory" />
+            <argument>%sylius.model.product_review.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType</argument>
 
             <tag
