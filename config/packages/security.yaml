@@ -102,11 +102,6 @@ security:
             security: false
 
     access_control:
-        - { path: "%sylius.security.admin_regex%/_partial", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
-        - { path: "%sylius.security.admin_regex%/_partial", role: ROLE_NO_ACCESS }
-        - { path: "%sylius.security.shop_regex%/_partial", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
-        - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
-
         - { path: "%sylius.security.admin_regex%/forgotten-password", role: PUBLIC_ACCESS }
 
         - { path: "%sylius.security.admin_regex%/login", role: PUBLIC_ACCESS }
