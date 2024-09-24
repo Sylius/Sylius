@@ -13,13 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
-use Symfony\Component\Templating\Helper\HelperInterface;
-
-interface LocaleHelperInterface extends HelperInterface
+interface LocaleHelperInterface
 {
     /**
      * @param string $code The code to be converted to a name
      * @param string|null $localeCode The locale that the returned name should be in
      */
     public function convertCodeToName(string $code, ?string $localeCode = null): ?string;
+
+    /**
+     * Returns the canonical name of this helper.
+     */
+    public function getName(): string;
+
+    /**
+     * Sets the default charset.
+     */
+    public function setCharset(string $charset): void;
+
+    /**
+     * Gets the default charset.
+     */
+    public function getCharset(): string;
 }

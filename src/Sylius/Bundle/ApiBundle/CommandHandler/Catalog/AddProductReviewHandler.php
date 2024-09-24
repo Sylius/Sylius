@@ -23,9 +23,10 @@ use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final readonly class AddProductReviewHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class AddProductReviewHandler
 {
     /**
      * @param FactoryInterface<ProductReviewInterface> $productReviewFactory

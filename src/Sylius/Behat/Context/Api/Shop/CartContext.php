@@ -239,7 +239,7 @@ final class CartContext implements Context
      */
     public function iPickUpMyCartUsingWrongLocale(): void
     {
-        $this->pickupCart('en');
+        $this->pickupCart('not_valid');
     }
 
     /**

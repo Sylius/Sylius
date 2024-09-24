@@ -35,12 +35,13 @@
         "sylius/currency": "^2.0",
         "sylius/order-bundle": "^2.0",
         "sylius/payment-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.11",
+        "sylius/resource-bundle": "^1.11 || ^1.12@alpha",
         "php-http/httplug": "^2.4"
     },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.2",
-        "symfony/dependency-injection": "^6.4.1"
+        "symfony/dependency-injection": "^6.4.1 || ^7.0"
     },
     "config": {
         "allow-plugins": {
@@ -50,6 +51,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {

@@ -19,11 +19,13 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Clock\ClockInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class RequestResetPasswordEmailHandler
 {
     /** @param UserRepositoryInterface<AdminUserInterface> $userRepository */
     public function __construct(

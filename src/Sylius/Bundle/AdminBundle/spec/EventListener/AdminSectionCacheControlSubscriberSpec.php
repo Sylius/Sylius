@@ -52,7 +52,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
         $event = new ResponseEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            KernelInterface::MASTER_REQUEST,
+            KernelInterface::MAIN_REQUEST,
             $response->getWrappedObject(),
         );
 
@@ -79,7 +79,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
         $event = new ResponseEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            KernelInterface::MASTER_REQUEST,
+            KernelInterface::MAIN_REQUEST,
             $response->getWrappedObject(),
         );
 

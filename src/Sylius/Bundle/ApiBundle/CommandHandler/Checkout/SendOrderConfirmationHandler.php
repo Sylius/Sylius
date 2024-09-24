@@ -17,10 +17,11 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class SendOrderConfirmationHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class SendOrderConfirmationHandler
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,

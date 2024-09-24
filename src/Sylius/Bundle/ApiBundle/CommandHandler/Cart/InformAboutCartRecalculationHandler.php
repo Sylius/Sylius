@@ -15,9 +15,10 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class InformAboutCartRecalculationHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class InformAboutCartRecalculationHandler
 {
     public function __invoke(InformAboutCartRecalculation $command): void
     {

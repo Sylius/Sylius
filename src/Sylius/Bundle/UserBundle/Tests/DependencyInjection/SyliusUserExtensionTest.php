@@ -42,63 +42,6 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
-    public function it_decorates_user_factory_if_its_configuration_has_encoder_specified(): void
-    {
-        $this->load([
-            'resources' => [
-                'admin' => [
-                    'user' => [
-                        'encoder' => 'customencoder',
-                    ],
-                ],
-            ],
-        ]);
-
-        $factoryDefinition = $this->container->getDefinition('sylius.factory.admin_user');
-
-        Assert::assertSame(UserWithEncoderFactory::class, $factoryDefinition->getClass());
-        Assert::assertSame('customencoder', $factoryDefinition->getArgument(1));
-    }
-
-    /** @test */
-    public function it_decorates_user_factory_if_there_is_a_global_encoder_specified_in_the_configuration(): void
-    {
-        $this->load([
-            'encoder' => 'customencoder',
-            'resources' => [
-                'admin' => [
-                    'user' => [],
-                ],
-            ],
-        ]);
-
-        $factoryDefinition = $this->container->getDefinition('sylius.factory.admin_user');
-
-        Assert::assertSame(UserWithEncoderFactory::class, $factoryDefinition->getClass());
-        Assert::assertSame('customencoder', $factoryDefinition->getArgument(1));
-    }
-
-    /** @test */
-    public function it_decorates_user_factory_using_the_most_specific_encoder_configured(): void
-    {
-        $this->load([
-            'encoder' => 'customencoder',
-            'resources' => [
-                'admin' => [
-                    'user' => [
-                        'encoder' => 'evenmorecustomencoder',
-                    ],
-                ],
-            ],
-        ]);
-
-        $factoryDefinition = $this->container->getDefinition('sylius.factory.admin_user');
-
-        Assert::assertSame(UserWithEncoderFactory::class, $factoryDefinition->getClass());
-        Assert::assertSame('evenmorecustomencoder', $factoryDefinition->getArgument(1));
-    }
-
-    /** @test */
     public function it_creates_last_login_subscriber_for_each_user_type(): void
     {
         $this->load([
@@ -124,42 +67,6 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
         Assert::assertSame(UserLastLoginSubscriber::class, $customLastLoginSubscriber->getClass());
         Assert::assertSame(User::class, $customLastLoginSubscriber->getArgument(1));
         Assert::assertNull($customLastLoginSubscriber->getArgument(2));
-    }
-
-    /** @test */
-    public function it_creates_an_update_user_encoder_listener_for_each_user_type(): void
-    {
-        $this->load([
-            'encoder' => 'customencoder',
-            'resources' => [
-                'admin' => [
-                    'user' => [
-                        'encoder' => 'evenmorecustomencoder',
-                        'classes' => [
-                            'model' => 'AdminUserClass',
-                            'interface' => 'AdminUserInterface',
-                        ],
-                    ],
-                ],
-                'shop' => [],
-            ],
-        ]);
-
-        $adminUserListenerDefinition = $this->container->getDefinition('sylius.admin_user.listener.update_user_encoder');
-
-        Assert::assertSame(UpdateUserEncoderListener::class, $adminUserListenerDefinition->getClass());
-        Assert::assertSame('evenmorecustomencoder', $adminUserListenerDefinition->getArgument(1));
-        Assert::assertSame('AdminUserClass', $adminUserListenerDefinition->getArgument(2));
-        Assert::assertSame('AdminUserInterface', $adminUserListenerDefinition->getArgument(3));
-        Assert::assertSame('_password', $adminUserListenerDefinition->getArgument(4));
-
-        $shopUserListenerDefinition = $this->container->getDefinition('sylius.shop_user.listener.update_user_encoder');
-
-        Assert::assertSame(UpdateUserEncoderListener::class, $shopUserListenerDefinition->getClass());
-        Assert::assertSame('customencoder', $shopUserListenerDefinition->getArgument(1));
-        Assert::assertSame(User::class, $shopUserListenerDefinition->getArgument(2));
-        Assert::assertSame(UserInterface::class, $shopUserListenerDefinition->getArgument(3));
-        Assert::assertSame('_password', $shopUserListenerDefinition->getArgument(4));
     }
 
     /** @test */

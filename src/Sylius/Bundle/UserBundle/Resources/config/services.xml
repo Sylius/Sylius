@@ -28,10 +28,14 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand">
+            <argument type="service" id="doctrine" />
+            <argument>%sylius.user.users%</argument>
             <tag name="console.command" />
         </service>
 
         <service id="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand">
+            <argument type="service" id="doctrine" />
+            <argument>%sylius.user.users%</argument>
             <tag name="console.command" />
         </service>
 

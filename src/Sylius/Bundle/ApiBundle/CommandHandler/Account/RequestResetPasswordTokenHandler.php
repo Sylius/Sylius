@@ -18,11 +18,12 @@ use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Clock\ClockInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final readonly class RequestResetPasswordTokenHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class RequestResetPasswordTokenHandler
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,

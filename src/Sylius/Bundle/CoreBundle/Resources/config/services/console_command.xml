@@ -16,10 +16,14 @@
         <defaults public="true" />
 
         <service id="sylius.console.command.cancel_unpaid_orders" class="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand">
+            <argument type="service" id="sylius.unpaid_orders_state_updater" />
+            <argument type="service" id="sylius.manager.order" />
+            <argument>%sylius_order.order_expiration_period%</argument>
             <tag name="console.command" />
         </service>
 
         <service id="sylius.console.command.check_requirements" class="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand">
+            <argument type="service" id="sylius.installer.checker.sylius_requirements" />
             <tag name="console.command" />
         </service>
 
@@ -29,6 +33,9 @@
         </service>
 
         <service id="sylius.console.command.install_assets" class="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.installer.checker.command_directory" />
+            <argument>%sylius_core.public_dir%</argument>
             <tag name="console.command" />
         </service>
 
@@ -37,14 +44,28 @@
         </service>
 
         <service id="sylius.console.command.install_database" class="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.installer.checker.command_directory" />
+            <argument type="service" id="sylius.commands_provider.database_setup" />
             <tag name="console.command" />
         </service>
 
         <service id="sylius.console.command.install_sample_data" class="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.installer.checker.command_directory" />
+            <argument>%sylius_core.public_dir%</argument>
             <tag name="console.command" />
         </service>
 
         <service id="sylius.console.command.setup" class="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.installer.checker.command_directory" />
+            <argument type="service" id="sylius.setup.currency" />
+            <argument type="service" id="sylius.setup.locale" />
+            <argument type="service" id="sylius.setup.channel" />
+            <argument type="service" id="sylius.factory.admin_user" />
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="validator" />
             <tag name="console.command" />
         </service>
 

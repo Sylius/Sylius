@@ -24,10 +24,11 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class PickupCartHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class PickupCartHandler
 {
     public function __construct(
         private OrderFactoryInterface $cartFactory,

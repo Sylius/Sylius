@@ -26,23 +26,25 @@
     ],
     "require": {
         "php": "^8.2",
-        "sylius/resource-bundle": "^1.11",
-        "symfony/framework-bundle": "^6.4.1",
-        "symfony/intl": "^6.4.0",
+        "sylius/resource-bundle": "^1.11 || ^1.12@alpha",
+        "symfony/framework-bundle": "^6.4.1 || ^7.0",
+        "symfony/intl": "^6.4.0 || ^7.0",
         "symfony/templating": "^6.4.0",
         "webmozart/assert": "^1.9"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0"
+        "doctrine/orm": ">= 3.0.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^5.0",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "sylius/currency-bundle": "^2.0",
-        "symfony/browser-kit": "^6.4.0",
-        "symfony/dependency-injection": "^6.4.1",
-        "symfony/form": "^6.4.1",
+        "symfony/browser-kit": "^6.4.0 || ^7.0",
+        "symfony/dependency-injection": "^6.4.1 || ^7.0",
+        "symfony/form": "^6.4.1 || ^7.0",
         "twig/twig": "^3.14.0"
     },
     "config": {
@@ -53,6 +55,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {

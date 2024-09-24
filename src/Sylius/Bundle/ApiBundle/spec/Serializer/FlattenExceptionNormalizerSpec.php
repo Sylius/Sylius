@@ -16,23 +16,23 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class FlattenExceptionNormalizerSpec extends ObjectBehavior
 {
     function it_decorates_normalize_method(
-        ContextAwareNormalizerInterface $normalizer,
+        NormalizerInterface $normalizer,
         RequestStack $requestStack,
     ): void {
         $this->beConstructedWith($normalizer, $requestStack, '/api/v1');
 
-        $normalizer->normalize('data', 'format', ['context'])->shouldBeCalled();
+        $normalizer->normalize('data', 'format', ['context'])->willReturn([])->shouldBeCalled();
 
         $this->normalize('data', 'format', ['context']);
     }
 
     function it_doesnt_support_normalization_when_path_starts_with_new_api_route(
-        ContextAwareNormalizerInterface $normalizer,
+        NormalizerInterface $normalizer,
         RequestStack $requestStack,
         Request $request,
     ): void {
@@ -48,7 +48,7 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
     }
 
     function it_supports_normalization_when_path_doesnt_start_with_new_api_route(
-        ContextAwareNormalizerInterface $normalizer,
+        NormalizerInterface $normalizer,
         RequestStack $requestStack,
         Request $request,
     ): void {
@@ -64,7 +64,7 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
     }
 
     function it_doesnt_support_normalization_when_no_request_is_available(
-        ContextAwareNormalizerInterface $normalizer,
+        NormalizerInterface $normalizer,
         RequestStack $requestStack,
     ): void {
         $this->beConstructedWith($normalizer, $requestStack, '/api/v2');

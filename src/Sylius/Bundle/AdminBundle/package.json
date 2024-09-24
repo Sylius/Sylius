@@ -16,8 +16,11 @@
     "stimulus-use": "^0.52"
   },
   "devDependencies": {
+    "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
+    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
     "sass": "^1.54.8",
-    "sass-loader": "^13.0.0"
+    "sass-loader": "^13.0.0",
+    "tom-select": "^2.2.2"
   },
   "engines": {
     "node": "^18 || ^20"

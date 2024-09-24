@@ -22,9 +22,10 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final readonly class AddItemToCartHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class AddItemToCartHandler
 {
     /**
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository

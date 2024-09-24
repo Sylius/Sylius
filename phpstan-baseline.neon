@@ -2551,7 +2551,7 @@ parameters:
 			path: src/Sylius/Bundle/ReviewBundle/EventListener/ReviewChangeListener.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ReviewBundle\\\\EventListener\\\\ReviewChangeListener\\:\\:postRemove\\(\\) has parameter \\$args with generic class Doctrine\\\\Persistence\\\\Event\\\\LifecycleEventArgs but does not specify its types\\: TObjectManager$#"
+			message: "#^Method Sylius\\\\Bundle\\\\ReviewBundle\\\\EventListener\\\\ReviewChangeListener\\:\\:preRemove\\(\\) has parameter \\$args with generic class Doctrine\\\\Persistence\\\\Event\\\\LifecycleEventArgs but does not specify its types\\: TObjectManager$#"
 			count: 1
 			path: src/Sylius/Bundle/ReviewBundle/EventListener/ReviewChangeListener.php
 
@@ -2861,11 +2861,6 @@ parameters:
 			path: src/Sylius/Bundle/UserBundle/DependencyInjection/SyliusUserExtension.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\DependencyInjection\\\\SyliusUserExtension\\:\\:registerUpdateUserEncoderListener\\(\\) has parameter \\$resourceConfig with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/DependencyInjection/SyliusUserExtension.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\DependencyInjection\\\\SyliusUserExtension\\:\\:resolveResources\\(\\) has parameter \\$resources with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/DependencyInjection/SyliusUserExtension.php
@@ -2894,11 +2889,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\EventListener\\\\UserLastLoginSubscriber\\:\\:onSecurityInteractiveLogin\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/EventListener/UserLastLoginSubscriber.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Factory\\\\UserWithEncoderFactory\\:\\:__construct\\(\\) has parameter \\$decoratedUserFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Factory/UserWithEncoderFactory.php
 
 		-
 			message: "#^Class Sylius\\\\Bundle\\\\UserBundle\\\\Form\\\\UserVerifiedAtToBooleanTransformer implements generic interface Symfony\\\\Component\\\\Form\\\\DataTransformerInterface but does not specify its types\\: T, R$#"
