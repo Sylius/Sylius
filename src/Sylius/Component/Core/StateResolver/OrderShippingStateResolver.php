@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderShippingStateResolver implements StateResolverInterface
 {
-    public function __construct(private StateMachineInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachine)
     {
     }
 
@@ -38,11 +38,11 @@ final class OrderShippingStateResolver implements StateResolverInterface
         }
 
         if ($this->allShipmentsInStateButOrderStateNotUpdated($order, ShipmentInterface::STATE_SHIPPED, OrderShippingStates::STATE_SHIPPED)) {
-            $this->stateMachineFactory->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP);
+            $this->stateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP);
         }
 
         if ($this->isPartiallyShippedButOrderStateNotUpdated($order)) {
-            $this->stateMachineFactory->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP);
+            $this->stateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP);
         }
     }
 

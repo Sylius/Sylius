@@ -35,7 +35,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         private ReviewFactoryInterface $productReviewFactory,
         private ProductRepositoryInterface $productRepository,
         private CustomerRepositoryInterface $customerRepository,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -95,10 +95,10 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
 
     private function applyReviewTransition(ReviewInterface $productReview, string $targetState): void
     {
-        $transition = $this->stateMachineFactory->getTransitionToState($productReview, ProductReviewTransitions::GRAPH, $targetState);
+        $transition = $this->stateMachine->getTransitionToState($productReview, ProductReviewTransitions::GRAPH, $targetState);
 
         if (null !== $transition) {
-            $this->stateMachineFactory->apply($productReview, ProductReviewTransitions::GRAPH, $transition);
+            $this->stateMachine->apply($productReview, ProductReviewTransitions::GRAPH, $transition);
         }
     }
 }

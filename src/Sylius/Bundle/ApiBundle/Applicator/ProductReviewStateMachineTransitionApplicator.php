@@ -20,7 +20,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ProductReviewStateMachineTransitionApplicator implements ProductReviewStateMachineTransitionApplicatorInterface
 {
-    public function __construct(private StateMachineInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachine)
     {
     }
 
@@ -40,10 +40,10 @@ final class ProductReviewStateMachineTransitionApplicator implements ProductRevi
 
     private function applyTransition(ReviewInterface $review, string $transition): void
     {
-        if (false === $this->stateMachineFactory->can($review, ProductReviewTransitions::GRAPH, $transition)) {
+        if (false === $this->stateMachine->can($review, ProductReviewTransitions::GRAPH, $transition)) {
             throw new StateMachineTransitionFailedException(sprintf('Cannot %s  the product review.', $transition));
         }
 
-        $this->stateMachineFactory->apply($review, ProductReviewTransitions::GRAPH, $transition);
+        $this->stateMachine->apply($review, ProductReviewTransitions::GRAPH, $transition);
     }
 }

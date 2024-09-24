@@ -32,7 +32,7 @@ final readonly class ChoosePaymentMethodHandler implements MessageHandlerInterfa
         private OrderRepositoryInterface $orderRepository,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRepositoryInterface $paymentRepository,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private PaymentMethodChangerInterface $paymentMethodChanger,
     ) {
     }
@@ -64,12 +64,12 @@ final readonly class ChoosePaymentMethodHandler implements MessageHandlerInterfa
 
         if ($cart->getState() === OrderInterface::STATE_CART) {
             Assert::true(
-                $this->stateMachineFactory->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
+                $this->stateMachine->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
                 'Order cannot have payment method assigned.',
             );
 
             $payment->setMethod($paymentMethod);
-            $this->stateMachineFactory->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+            $this->stateMachine->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
 
             return $cart;
         }

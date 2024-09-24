@@ -25,7 +25,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
-    public function __construct(private StateMachineInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachine)
     {
     }
 
@@ -36,8 +36,8 @@ final class OrderPaymentStateResolver implements StateResolverInterface
 
         $targetTransition = $this->getTargetTransition($order);
         if (null !== $targetTransition) {
-            if ($this->stateMachineFactory->can($order, OrderPaymentTransitions::GRAPH, $targetTransition)) {
-                $this->stateMachineFactory->apply($order, OrderPaymentTransitions::GRAPH, $targetTransition);
+            if ($this->stateMachine->can($order, OrderPaymentTransitions::GRAPH, $targetTransition)) {
+                $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, $targetTransition);
             }
         }
     }
