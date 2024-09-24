@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
+namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Order;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
-use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
+use Sylius\Bundle\ApiBundle\Command\Order\ChangePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 

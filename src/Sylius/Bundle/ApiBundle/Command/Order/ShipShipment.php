@@ -11,12 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\Command\Order;
 
 use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
-use Sylius\Bundle\CoreBundle\Command\ResendShipmentConfirmationEmail as BaseResendShipmentConfirmationEmail;
 
 #[ShipmentIdAware]
-class ResendShipmentConfirmationEmail extends BaseResendShipmentConfirmationEmail
+class ShipShipment
 {
+    public function __construct(
+        public readonly mixed $shipmentId = null,
+        public readonly ?string $trackingCode = null,
+    ) {
+    }
 }

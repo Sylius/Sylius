@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
+use Sylius\Bundle\ApiBundle\Command\Order\ShipShipment;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;

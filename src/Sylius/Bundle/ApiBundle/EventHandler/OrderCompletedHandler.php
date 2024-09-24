@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventHandler;
 
-use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
+use Sylius\Bundle\ApiBundle\Command\Order\SendOrderConfirmation;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Symfony\Component\Messenger\MessageBusInterface;
 

@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
+namespace Sylius\Bundle\ApiBundle\CommandHandler\Order;
 
-use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
+use Sylius\Bundle\ApiBundle\Command\Order\SendOrderConfirmation;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;

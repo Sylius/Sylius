@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\Command\Order;
 
 use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\CoreBundle\Command\ResendOrderConfirmationEmail as BaseResendOrderConfirmationEmail;
