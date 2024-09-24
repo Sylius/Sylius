@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
-use Payum\Paypal\ExpressCheckout\Nvp\PaypalExpressCheckoutGatewayFactory;
-use Payum\Stripe\StripeCheckoutGatewayFactory;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,14 +28,6 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-
-        if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
-            $loader->load('integrations/payum/paypal.xml');
-        }
-
-        if (class_exists(StripeCheckoutGatewayFactory::class)) {
-            $loader->load('integrations/payum/stripe.xml');
-        }
 
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
