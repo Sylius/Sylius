@@ -43,7 +43,8 @@
         "symfony/ux-live-component": "^2.17",
         "symfony/ux-twig-component": "^2.17",
         "symfony/webpack-encore-bundle": "^2.1",
-        "laminas/laminas-stdlib": "^3.3.1"
+        "laminas/laminas-stdlib": "^3.3.1",
+        "sylius/twig-extra": "dev-main"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^5.1",
