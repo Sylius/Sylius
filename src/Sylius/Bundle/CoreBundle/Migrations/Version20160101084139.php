@@ -13,21 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Types\Types;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractPostgreSQLMigration;
 
-final class Version20230419092354 extends AbstractPostgreSQLMigration
+final class Version20160101084139 extends AbstractPostgreSQLMigration
 {
     public function getDescription(): string
     {
-        return 'Initial migration for handling PostgreSQL. It is omitted if migrated from Sylius 1.12.x';
+        return 'Regenerated Sylius migrations from 1.X';
+    }
+
+    public function postUp(Schema $schema): void
+    {
+        $this->cleanMigrationsTable();
     }
 
     public function up(Schema $schema): void
     {
-        if ($schema->hasTable('sylius_address')) {
-            $this->markAsExecuted($this->getVersion());
-            $this->skipIf(true, 'This migration is marked as completed.');
+        if ($schema->hasTable('sylius_channel_price_history_config')) {
+            return;
         }
 
         $this->addSql('CREATE SEQUENCE sylius_address_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
@@ -40,7 +46,9 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE SEQUENCE sylius_catalog_promotion_scope_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_catalog_promotion_translation_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_channel_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE sylius_channel_price_history_config_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_channel_pricing_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE sylius_channel_pricing_log_entry_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_country_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_currency_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_customer_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
@@ -76,6 +84,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE SEQUENCE sylius_promotion_action_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_promotion_coupon_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_promotion_rule_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE sylius_promotion_translation_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_province_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_shipment_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sylius_shipping_category_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
@@ -94,15 +103,15 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE SEQUENCE sylius_zone_member_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE sylius_address (id INT NOT NULL, customer_id INT DEFAULT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, phone_number VARCHAR(255) DEFAULT NULL, street VARCHAR(255) NOT NULL, company VARCHAR(255) DEFAULT NULL, city VARCHAR(255) NOT NULL, postcode VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, country_code VARCHAR(255) NOT NULL, province_code VARCHAR(255) DEFAULT NULL, province_name VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_B97FF0589395C3F3 ON sylius_address (customer_id)');
-        $this->addSql('CREATE TABLE sylius_address_log_entries (id INT NOT NULL, action VARCHAR(255) NOT NULL, logged_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, object_id VARCHAR(64) DEFAULT NULL, object_class VARCHAR(255) NOT NULL, version INT NOT NULL, data TEXT NOT NULL, username VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('COMMENT ON COLUMN sylius_address_log_entries.data IS \'(DC2Type:array)\'');
+        $this->addSql('CREATE TABLE sylius_address_log_entries (id INT NOT NULL, action VARCHAR(255) NOT NULL, logged_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, object_id VARCHAR(64) DEFAULT NULL, object_class VARCHAR(255) NOT NULL, version INT NOT NULL, data JSONB DEFAULT NULL, username VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE sylius_adjustment (id INT NOT NULL, order_id INT DEFAULT NULL, order_item_id INT DEFAULT NULL, order_item_unit_id INT DEFAULT NULL, shipment_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, label VARCHAR(255) DEFAULT NULL, amount INT NOT NULL, is_neutral BOOLEAN NOT NULL, is_locked BOOLEAN NOT NULL, origin_code VARCHAR(255) DEFAULT NULL, details JSON NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_ACA6E0F28D9F6D38 ON sylius_adjustment (order_id)');
         $this->addSql('CREATE INDEX IDX_ACA6E0F2E415FB15 ON sylius_adjustment (order_item_id)');
         $this->addSql('CREATE INDEX IDX_ACA6E0F2F720C233 ON sylius_adjustment (order_item_unit_id)');
         $this->addSql('CREATE INDEX IDX_ACA6E0F27BE036FC ON sylius_adjustment (shipment_id)');
-        $this->addSql('CREATE TABLE sylius_admin_user (id INT NOT NULL, username VARCHAR(255) DEFAULT NULL, username_canonical VARCHAR(255) DEFAULT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) DEFAULT NULL, encoder_name VARCHAR(255) DEFAULT NULL, last_login TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, password_reset_token VARCHAR(255) DEFAULT NULL, password_requested_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, email_verification_token VARCHAR(255) DEFAULT NULL, verified_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, locked BOOLEAN NOT NULL, expires_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, credentials_expire_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles TEXT NOT NULL, email VARCHAR(255) DEFAULT NULL, email_canonical VARCHAR(255) DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, locale_code VARCHAR(12) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('COMMENT ON COLUMN sylius_admin_user.roles IS \'(DC2Type:array)\'');
+        $this->addSql('CREATE TABLE sylius_admin_user (id INT NOT NULL, username VARCHAR(255) DEFAULT NULL, username_canonical VARCHAR(255) DEFAULT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) DEFAULT NULL, encoder_name VARCHAR(255) DEFAULT NULL, last_login TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, password_reset_token VARCHAR(255) DEFAULT NULL, password_requested_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, email_verification_token VARCHAR(255) DEFAULT NULL, verified_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, locked BOOLEAN NOT NULL, expires_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, credentials_expire_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles JSONB NOT NULL, email VARCHAR(255) DEFAULT NULL, email_canonical VARCHAR(255) DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, locale_code VARCHAR(12) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_88D5CC4D6B7BA4B6 ON sylius_admin_user (password_reset_token)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_88D5CC4DC4995C67 ON sylius_admin_user (email_verification_token)');
         $this->addSql('CREATE TABLE sylius_avatar_image (id INT NOT NULL, owner_id INT NOT NULL, type VARCHAR(255) DEFAULT NULL, path VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_1068A3A97E3C61F9 ON sylius_avatar_image (owner_id)');
         $this->addSql('CREATE TABLE sylius_catalog_promotion (id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, start_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, end_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, enabled BOOLEAN NOT NULL, priority INT DEFAULT 0 NOT NULL, exclusive BOOLEAN DEFAULT false NOT NULL, state VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
@@ -110,18 +119,17 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE TABLE sylius_catalog_promotion_channels (catalog_promotion_id INT NOT NULL, channel_id INT NOT NULL, PRIMARY KEY(catalog_promotion_id, channel_id))');
         $this->addSql('CREATE INDEX IDX_48E9AE7622E2CB5A ON sylius_catalog_promotion_channels (catalog_promotion_id)');
         $this->addSql('CREATE INDEX IDX_48E9AE7672F5A1AA ON sylius_catalog_promotion_channels (channel_id)');
-        $this->addSql('CREATE TABLE sylius_catalog_promotion_action (id INT NOT NULL, catalog_promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_catalog_promotion_action (id INT NOT NULL, catalog_promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration JSONB NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_F529624722E2CB5A ON sylius_catalog_promotion_action (catalog_promotion_id)');
-        $this->addSql('COMMENT ON COLUMN sylius_catalog_promotion_action.configuration IS \'(DC2Type:array)\'');
-        $this->addSql('CREATE TABLE sylius_catalog_promotion_scope (id INT NOT NULL, promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_catalog_promotion_scope (id INT NOT NULL, promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration JSONB NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_584AA86A139DF194 ON sylius_catalog_promotion_scope (promotion_id)');
-        $this->addSql('COMMENT ON COLUMN sylius_catalog_promotion_scope.configuration IS \'(DC2Type:array)\'');
         $this->addSql('CREATE TABLE sylius_catalog_promotion_translation (id INT NOT NULL, translatable_id INT NOT NULL, label VARCHAR(255) DEFAULT NULL, description VARCHAR(255) DEFAULT NULL, locale VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_BA065D3C2C2AC5D3 ON sylius_catalog_promotion_translation (translatable_id)');
         $this->addSql('CREATE UNIQUE INDEX sylius_catalog_promotion_translation_uniq_trans ON sylius_catalog_promotion_translation (translatable_id, locale)');
-        $this->addSql('CREATE TABLE sylius_channel (id INT NOT NULL, shop_billing_data_id INT DEFAULT NULL, default_locale_id INT NOT NULL, base_currency_id INT NOT NULL, default_tax_zone_id INT DEFAULT NULL, menu_taxon_id INT DEFAULT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, color VARCHAR(255) DEFAULT NULL, description TEXT DEFAULT NULL, enabled BOOLEAN NOT NULL, hostname VARCHAR(255) DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, theme_name VARCHAR(255) DEFAULT NULL, tax_calculation_strategy VARCHAR(255) NOT NULL, contact_email VARCHAR(255) DEFAULT NULL, contact_phone_number VARCHAR(255) DEFAULT NULL, skipping_shipping_step_allowed BOOLEAN NOT NULL, skipping_payment_step_allowed BOOLEAN NOT NULL, account_verification_required BOOLEAN NOT NULL, shipping_address_in_checkout_required BOOLEAN DEFAULT false NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_channel (id INT NOT NULL, shop_billing_data_id INT DEFAULT NULL, channel_price_history_config_id INT DEFAULT NULL, default_locale_id INT NOT NULL, base_currency_id INT NOT NULL, default_tax_zone_id INT DEFAULT NULL, menu_taxon_id INT DEFAULT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, color VARCHAR(255) DEFAULT NULL, description TEXT DEFAULT NULL, enabled BOOLEAN NOT NULL, hostname VARCHAR(255) DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, theme_name VARCHAR(255) DEFAULT NULL, tax_calculation_strategy VARCHAR(255) NOT NULL, contact_email VARCHAR(255) DEFAULT NULL, contact_phone_number VARCHAR(255) DEFAULT NULL, skipping_shipping_step_allowed BOOLEAN NOT NULL, skipping_payment_step_allowed BOOLEAN NOT NULL, account_verification_required BOOLEAN NOT NULL, shipping_address_in_checkout_required BOOLEAN DEFAULT false NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_16C8119E77153098 ON sylius_channel (code)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_16C8119EB5282EDF ON sylius_channel (shop_billing_data_id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_16C8119E75F20EAE ON sylius_channel (channel_price_history_config_id)');
         $this->addSql('CREATE INDEX IDX_16C8119E743BF776 ON sylius_channel (default_locale_id)');
         $this->addSql('CREATE INDEX IDX_16C8119E3101778E ON sylius_channel (base_currency_id)');
         $this->addSql('CREATE INDEX IDX_16C8119EA978C17 ON sylius_channel (default_tax_zone_id)');
@@ -136,12 +144,18 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE TABLE sylius_channel_countries (channel_id INT NOT NULL, country_id INT NOT NULL, PRIMARY KEY(channel_id, country_id))');
         $this->addSql('CREATE INDEX IDX_D96E51AE72F5A1AA ON sylius_channel_countries (channel_id)');
         $this->addSql('CREATE INDEX IDX_D96E51AEF92F3E70 ON sylius_channel_countries (country_id)');
-        $this->addSql('CREATE TABLE sylius_channel_pricing (id INT NOT NULL, product_variant_id INT NOT NULL, price INT DEFAULT NULL, original_price INT DEFAULT NULL, minimum_price INT DEFAULT 0, channel_code VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_channel_price_history_config (id INT NOT NULL, lowest_price_for_discounted_products_checking_period INT DEFAULT 30 NOT NULL, lowest_price_for_discounted_products_visible BOOLEAN DEFAULT true NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_channel_price_history_config_excluded_taxons (channel_id INT NOT NULL, taxon_id INT NOT NULL, PRIMARY KEY(channel_id, taxon_id))');
+        $this->addSql('CREATE INDEX IDX_77FD02A72F5A1AA ON sylius_channel_price_history_config_excluded_taxons (channel_id)');
+        $this->addSql('CREATE INDEX IDX_77FD02ADE13F470 ON sylius_channel_price_history_config_excluded_taxons (taxon_id)');
+        $this->addSql('CREATE TABLE sylius_channel_pricing (id INT NOT NULL, product_variant_id INT NOT NULL, price INT DEFAULT NULL, original_price INT DEFAULT NULL, minimum_price INT DEFAULT 0, lowest_price_before_discount INT DEFAULT NULL, channel_code VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_7801820CA80EF684 ON sylius_channel_pricing (product_variant_id)');
         $this->addSql('CREATE UNIQUE INDEX product_variant_channel_idx ON sylius_channel_pricing (product_variant_id, channel_code)');
         $this->addSql('CREATE TABLE sylius_channel_pricing_catalog_promotions (channel_pricing_id INT NOT NULL, catalog_promotion_id INT NOT NULL, PRIMARY KEY(channel_pricing_id, catalog_promotion_id))');
         $this->addSql('CREATE INDEX IDX_9F52FF513EADFFE5 ON sylius_channel_pricing_catalog_promotions (channel_pricing_id)');
         $this->addSql('CREATE INDEX IDX_9F52FF5122E2CB5A ON sylius_channel_pricing_catalog_promotions (catalog_promotion_id)');
+        $this->addSql('CREATE TABLE sylius_channel_pricing_log_entry (id INT NOT NULL, channel_pricing_id INT NOT NULL, price INT NOT NULL, original_price INT DEFAULT NULL, logged_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_77181A53EADFFE5 ON sylius_channel_pricing_log_entry (channel_pricing_id)');
         $this->addSql('CREATE TABLE sylius_country (id INT NOT NULL, code VARCHAR(2) NOT NULL, enabled BOOLEAN NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_E74256BF77153098 ON sylius_country (code)');
         $this->addSql('CREATE INDEX IDX_E74256BF77153098 ON sylius_country (code)');
@@ -216,13 +230,12 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE TABLE sylius_product_association_type_translation (id INT NOT NULL, translatable_id INT NOT NULL, name VARCHAR(255) DEFAULT NULL, locale VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_4F618E52C2AC5D3 ON sylius_product_association_type_translation (translatable_id)');
         $this->addSql('CREATE UNIQUE INDEX sylius_product_association_type_translation_uniq_trans ON sylius_product_association_type_translation (translatable_id, locale)');
-        $this->addSql('CREATE TABLE sylius_product_attribute (id INT NOT NULL, code VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, storage_type VARCHAR(255) NOT NULL, configuration TEXT NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, position INT NOT NULL, translatable BOOLEAN DEFAULT true NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_product_attribute (id INT NOT NULL, code VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, storage_type VARCHAR(255) NOT NULL, configuration JSONB NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, position INT NOT NULL, translatable BOOLEAN DEFAULT true NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_BFAF484A77153098 ON sylius_product_attribute (code)');
-        $this->addSql('COMMENT ON COLUMN sylius_product_attribute.configuration IS \'(DC2Type:array)\'');
         $this->addSql('CREATE TABLE sylius_product_attribute_translation (id INT NOT NULL, translatable_id INT NOT NULL, name VARCHAR(255) NOT NULL, locale VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_93850EBA2C2AC5D3 ON sylius_product_attribute_translation (translatable_id)');
         $this->addSql('CREATE UNIQUE INDEX sylius_product_attribute_translation_uniq_trans ON sylius_product_attribute_translation (translatable_id, locale)');
-        $this->addSql('CREATE TABLE sylius_product_attribute_value (id INT NOT NULL, product_id INT NOT NULL, attribute_id INT NOT NULL, locale_code VARCHAR(255) DEFAULT NULL, text_value TEXT DEFAULT NULL, boolean_value BOOLEAN DEFAULT NULL, integer_value INT DEFAULT NULL, float_value DOUBLE PRECISION DEFAULT NULL, datetime_value TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, date_value DATE DEFAULT NULL, json_value JSON DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_product_attribute_value (id INT NOT NULL, product_id INT NOT NULL, attribute_id INT NOT NULL, locale_code VARCHAR(255) DEFAULT NULL, text_value TEXT DEFAULT NULL, boolean_value BOOLEAN DEFAULT NULL, integer_value INT DEFAULT NULL, float_value DOUBLE PRECISION DEFAULT NULL, datetime_value TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, date_value DATE DEFAULT NULL, json_value JSONB DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_8A053E544584665A ON sylius_product_attribute_value (product_id)');
         $this->addSql('CREATE INDEX IDX_8A053E54B6E62EFA ON sylius_product_attribute_value (attribute_id)');
         $this->addSql('CREATE TABLE sylius_product_image (id INT NOT NULL, owner_id INT NOT NULL, type VARCHAR(255) DEFAULT NULL, path VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
@@ -263,20 +276,21 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE TABLE sylius_product_variant_translation (id INT NOT NULL, translatable_id INT NOT NULL, name VARCHAR(255) DEFAULT NULL, locale VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_8DC18EDC2C2AC5D3 ON sylius_product_variant_translation (translatable_id)');
         $this->addSql('CREATE UNIQUE INDEX sylius_product_variant_translation_uniq_trans ON sylius_product_variant_translation (translatable_id, locale)');
-        $this->addSql('CREATE TABLE sylius_promotion (id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, priority INT NOT NULL, exclusive BOOLEAN NOT NULL, usage_limit INT DEFAULT NULL, used INT NOT NULL, coupon_based BOOLEAN NOT NULL, starts_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, ends_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, applies_to_discounted BOOLEAN DEFAULT true NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_promotion (id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, priority INT NOT NULL, exclusive BOOLEAN NOT NULL, usage_limit INT DEFAULT NULL, used INT NOT NULL, coupon_based BOOLEAN NOT NULL, starts_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, ends_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, applies_to_discounted BOOLEAN DEFAULT true NOT NULL, archived_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_F157396377153098 ON sylius_promotion (code)');
         $this->addSql('CREATE TABLE sylius_promotion_channels (promotion_id INT NOT NULL, channel_id INT NOT NULL, PRIMARY KEY(promotion_id, channel_id))');
         $this->addSql('CREATE INDEX IDX_1A044F64139DF194 ON sylius_promotion_channels (promotion_id)');
         $this->addSql('CREATE INDEX IDX_1A044F6472F5A1AA ON sylius_promotion_channels (channel_id)');
-        $this->addSql('CREATE TABLE sylius_promotion_action (id INT NOT NULL, promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_promotion_action (id INT NOT NULL, promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration JSONB NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_933D0915139DF194 ON sylius_promotion_action (promotion_id)');
-        $this->addSql('COMMENT ON COLUMN sylius_promotion_action.configuration IS \'(DC2Type:array)\'');
         $this->addSql('CREATE TABLE sylius_promotion_coupon (id INT NOT NULL, promotion_id INT DEFAULT NULL, code VARCHAR(255) NOT NULL, usage_limit INT DEFAULT NULL, used INT NOT NULL, expires_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, per_customer_usage_limit INT DEFAULT NULL, reusable_from_cancelled_orders BOOLEAN DEFAULT true NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B04EBA8577153098 ON sylius_promotion_coupon (code)');
         $this->addSql('CREATE INDEX IDX_B04EBA85139DF194 ON sylius_promotion_coupon (promotion_id)');
-        $this->addSql('CREATE TABLE sylius_promotion_rule (id INT NOT NULL, promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_promotion_rule (id INT NOT NULL, promotion_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration JSONB NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_2C188EA8139DF194 ON sylius_promotion_rule (promotion_id)');
-        $this->addSql('COMMENT ON COLUMN sylius_promotion_rule.configuration IS \'(DC2Type:array)\'');
+        $this->addSql('CREATE TABLE sylius_promotion_translation (id INT NOT NULL, translatable_id INT NOT NULL, label VARCHAR(255) DEFAULT NULL, locale VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_3C7A76182C2AC5D3 ON sylius_promotion_translation (translatable_id)');
+        $this->addSql('CREATE UNIQUE INDEX sylius_promotion_translation_uniq_trans ON sylius_promotion_translation (translatable_id, locale)');
         $this->addSql('CREATE TABLE sylius_province (id INT NOT NULL, country_id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, abbreviation VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B5618FE477153098 ON sylius_province (code)');
         $this->addSql('CREATE INDEX IDX_B5618FE4F92F3E70 ON sylius_province (country_id)');
@@ -286,25 +300,24 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE INDEX IDX_FD707B338D9F6D38 ON sylius_shipment (order_id)');
         $this->addSql('CREATE TABLE sylius_shipping_category (id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B1D6465277153098 ON sylius_shipping_category (code)');
-        $this->addSql('CREATE TABLE sylius_shipping_method (id INT NOT NULL, category_id INT DEFAULT NULL, zone_id INT NOT NULL, tax_category_id INT DEFAULT NULL, code VARCHAR(255) NOT NULL, configuration TEXT NOT NULL, category_requirement INT NOT NULL, calculator VARCHAR(255) NOT NULL, is_enabled BOOLEAN NOT NULL, position INT NOT NULL, archived_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_shipping_method (id INT NOT NULL, category_id INT DEFAULT NULL, zone_id INT NOT NULL, tax_category_id INT DEFAULT NULL, code VARCHAR(255) NOT NULL, configuration JSONB NOT NULL, category_requirement INT NOT NULL, calculator VARCHAR(255) NOT NULL, is_enabled BOOLEAN NOT NULL, position INT NOT NULL, archived_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_5FB0EE1177153098 ON sylius_shipping_method (code)');
         $this->addSql('CREATE INDEX IDX_5FB0EE1112469DE2 ON sylius_shipping_method (category_id)');
         $this->addSql('CREATE INDEX IDX_5FB0EE119F2C3FAB ON sylius_shipping_method (zone_id)');
         $this->addSql('CREATE INDEX IDX_5FB0EE119DF894ED ON sylius_shipping_method (tax_category_id)');
-        $this->addSql('COMMENT ON COLUMN sylius_shipping_method.configuration IS \'(DC2Type:array)\'');
         $this->addSql('CREATE TABLE sylius_shipping_method_channels (shipping_method_id INT NOT NULL, channel_id INT NOT NULL, PRIMARY KEY(shipping_method_id, channel_id))');
         $this->addSql('CREATE INDEX IDX_2D9833355F7D6850 ON sylius_shipping_method_channels (shipping_method_id)');
         $this->addSql('CREATE INDEX IDX_2D98333572F5A1AA ON sylius_shipping_method_channels (channel_id)');
-        $this->addSql('CREATE TABLE sylius_shipping_method_rule (id INT NOT NULL, shipping_method_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_shipping_method_rule (id INT NOT NULL, shipping_method_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, configuration JSONB NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_88A0EB655F7D6850 ON sylius_shipping_method_rule (shipping_method_id)');
-        $this->addSql('COMMENT ON COLUMN sylius_shipping_method_rule.configuration IS \'(DC2Type:array)\'');
         $this->addSql('CREATE TABLE sylius_shipping_method_translation (id INT NOT NULL, translatable_id INT NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, locale VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_2B37DB3D2C2AC5D3 ON sylius_shipping_method_translation (translatable_id)');
         $this->addSql('CREATE UNIQUE INDEX sylius_shipping_method_translation_uniq_trans ON sylius_shipping_method_translation (translatable_id, locale)');
         $this->addSql('CREATE TABLE sylius_shop_billing_data (id INT NOT NULL, company VARCHAR(255) DEFAULT NULL, tax_id VARCHAR(255) DEFAULT NULL, country_code VARCHAR(255) DEFAULT NULL, street VARCHAR(255) DEFAULT NULL, city VARCHAR(255) DEFAULT NULL, postcode VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE sylius_shop_user (id INT NOT NULL, customer_id INT NOT NULL, username VARCHAR(255) DEFAULT NULL, username_canonical VARCHAR(255) DEFAULT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) DEFAULT NULL, encoder_name VARCHAR(255) DEFAULT NULL, last_login TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, password_reset_token VARCHAR(255) DEFAULT NULL, password_requested_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, email_verification_token VARCHAR(255) DEFAULT NULL, verified_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, locked BOOLEAN NOT NULL, expires_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, credentials_expire_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles TEXT NOT NULL, email VARCHAR(255) DEFAULT NULL, email_canonical VARCHAR(255) DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_shop_user (id INT NOT NULL, customer_id INT NOT NULL, username VARCHAR(255) DEFAULT NULL, username_canonical VARCHAR(255) DEFAULT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) DEFAULT NULL, encoder_name VARCHAR(255) DEFAULT NULL, last_login TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, password_reset_token VARCHAR(255) DEFAULT NULL, password_requested_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, email_verification_token VARCHAR(255) DEFAULT NULL, verified_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, locked BOOLEAN NOT NULL, expires_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, credentials_expire_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles JSONB NOT NULL, email VARCHAR(255) DEFAULT NULL, email_canonical VARCHAR(255) DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_7C2B74806B7BA4B6 ON sylius_shop_user (password_reset_token)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_7C2B7480C4995C67 ON sylius_shop_user (email_verification_token)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_7C2B74809395C3F3 ON sylius_shop_user (customer_id)');
-        $this->addSql('COMMENT ON COLUMN sylius_shop_user.roles IS \'(DC2Type:array)\'');
         $this->addSql('CREATE TABLE sylius_tax_category (id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_221EB0BE77153098 ON sylius_tax_category (code)');
         $this->addSql('CREATE TABLE sylius_tax_rate (id INT NOT NULL, category_id INT NOT NULL, zone_id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, amount NUMERIC(10, 5) NOT NULL, included_in_price BOOLEAN NOT NULL, calculator VARCHAR(255) NOT NULL, start_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, end_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
@@ -321,7 +334,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE INDEX IDX_1487DFCF2C2AC5D3 ON sylius_taxon_translation (translatable_id)');
         $this->addSql('CREATE UNIQUE INDEX slug_uidx ON sylius_taxon_translation (locale, slug)');
         $this->addSql('CREATE UNIQUE INDEX sylius_taxon_translation_uniq_trans ON sylius_taxon_translation (translatable_id, locale)');
-        $this->addSql('CREATE TABLE sylius_user_oauth (id INT NOT NULL, user_id INT DEFAULT NULL, provider VARCHAR(255) NOT NULL, identifier VARCHAR(255) NOT NULL, access_token VARCHAR(255) DEFAULT NULL, refresh_token VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE sylius_user_oauth (id INT NOT NULL, user_id INT DEFAULT NULL, provider VARCHAR(255) NOT NULL, identifier VARCHAR(255) NOT NULL, access_token TEXT DEFAULT NULL, refresh_token TEXT DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_C3471B78A76ED395 ON sylius_user_oauth (user_id)');
         $this->addSql('CREATE UNIQUE INDEX user_provider ON sylius_user_oauth (user_id, provider)');
         $this->addSql('CREATE TABLE sylius_zone (id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(8) NOT NULL, scope VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
@@ -329,18 +342,6 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE TABLE sylius_zone_member (id INT NOT NULL, belongs_to INT DEFAULT NULL, code VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_E8B5ABF34B0E929B ON sylius_zone_member (belongs_to)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_E8B5ABF34B0E929B77153098 ON sylius_zone_member (belongs_to, code)');
-        $this->addSql('CREATE TABLE messenger_messages (id BIGSERIAL NOT NULL, body TEXT NOT NULL, headers TEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, available_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, delivered_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
-        $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');
-        $this->addSql('CREATE INDEX IDX_75EA56E016BA31DB ON messenger_messages (delivered_at)');
-        $this->addSql('CREATE OR REPLACE FUNCTION notify_messenger_messages() RETURNS TRIGGER AS $$
-            BEGIN
-                PERFORM pg_notify(\'messenger_messages\', NEW.queue_name::text);
-                RETURN NEW;
-            END;
-        $$ LANGUAGE plpgsql;');
-        $this->addSql('DROP TRIGGER IF EXISTS notify_trigger ON messenger_messages;');
-        $this->addSql('CREATE TRIGGER notify_trigger AFTER INSERT OR UPDATE ON messenger_messages FOR EACH ROW EXECUTE PROCEDURE notify_messenger_messages();');
         $this->addSql('ALTER TABLE sylius_address ADD CONSTRAINT FK_B97FF0589395C3F3 FOREIGN KEY (customer_id) REFERENCES sylius_customer (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_adjustment ADD CONSTRAINT FK_ACA6E0F28D9F6D38 FOREIGN KEY (order_id) REFERENCES sylius_order (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_adjustment ADD CONSTRAINT FK_ACA6E0F2E415FB15 FOREIGN KEY (order_item_id) REFERENCES sylius_order_item (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -353,6 +354,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_catalog_promotion_scope ADD CONSTRAINT FK_584AA86A139DF194 FOREIGN KEY (promotion_id) REFERENCES sylius_catalog_promotion (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_catalog_promotion_translation ADD CONSTRAINT FK_BA065D3C2C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES sylius_catalog_promotion (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel ADD CONSTRAINT FK_16C8119EB5282EDF FOREIGN KEY (shop_billing_data_id) REFERENCES sylius_shop_billing_data (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE sylius_channel ADD CONSTRAINT FK_16C8119E75F20EAE FOREIGN KEY (channel_price_history_config_id) REFERENCES sylius_channel_price_history_config (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel ADD CONSTRAINT FK_16C8119E743BF776 FOREIGN KEY (default_locale_id) REFERENCES sylius_locale (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel ADD CONSTRAINT FK_16C8119E3101778E FOREIGN KEY (base_currency_id) REFERENCES sylius_currency (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel ADD CONSTRAINT FK_16C8119EA978C17 FOREIGN KEY (default_tax_zone_id) REFERENCES sylius_zone (id) ON DELETE SET NULL NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -363,9 +365,12 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_channel_locales ADD CONSTRAINT FK_786B7A84E559DFD1 FOREIGN KEY (locale_id) REFERENCES sylius_locale (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel_countries ADD CONSTRAINT FK_D96E51AE72F5A1AA FOREIGN KEY (channel_id) REFERENCES sylius_channel (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel_countries ADD CONSTRAINT FK_D96E51AEF92F3E70 FOREIGN KEY (country_id) REFERENCES sylius_country (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE sylius_channel_price_history_config_excluded_taxons ADD CONSTRAINT FK_77FD02A72F5A1AA FOREIGN KEY (channel_id) REFERENCES sylius_channel_price_history_config (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE sylius_channel_price_history_config_excluded_taxons ADD CONSTRAINT FK_77FD02ADE13F470 FOREIGN KEY (taxon_id) REFERENCES sylius_taxon (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel_pricing ADD CONSTRAINT FK_7801820CA80EF684 FOREIGN KEY (product_variant_id) REFERENCES sylius_product_variant (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel_pricing_catalog_promotions ADD CONSTRAINT FK_9F52FF513EADFFE5 FOREIGN KEY (channel_pricing_id) REFERENCES sylius_channel_pricing (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_channel_pricing_catalog_promotions ADD CONSTRAINT FK_9F52FF5122E2CB5A FOREIGN KEY (catalog_promotion_id) REFERENCES sylius_catalog_promotion (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE sylius_channel_pricing_log_entry ADD CONSTRAINT FK_77181A53EADFFE5 FOREIGN KEY (channel_pricing_id) REFERENCES sylius_channel_pricing (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_customer ADD CONSTRAINT FK_7E82D5E6D2919A68 FOREIGN KEY (customer_group_id) REFERENCES sylius_customer_group (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_customer ADD CONSTRAINT FK_7E82D5E6BD94FB16 FOREIGN KEY (default_address_id) REFERENCES sylius_address (id) ON DELETE SET NULL NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_exchange_rate ADD CONSTRAINT FK_5F52B852A76BEED FOREIGN KEY (source_currency) REFERENCES sylius_currency (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -387,7 +392,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_payment_method_channels ADD CONSTRAINT FK_543AC0CC5AA1164F FOREIGN KEY (payment_method_id) REFERENCES sylius_payment_method (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_payment_method_channels ADD CONSTRAINT FK_543AC0CC72F5A1AA FOREIGN KEY (channel_id) REFERENCES sylius_channel (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_payment_method_translation ADD CONSTRAINT FK_966BE3A12C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES sylius_payment_method (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE sylius_product ADD CONSTRAINT FK_677B9B74731E505 FOREIGN KEY (main_taxon_id) REFERENCES sylius_taxon (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE sylius_product ADD CONSTRAINT FK_677B9B74731E505 FOREIGN KEY (main_taxon_id) REFERENCES sylius_taxon (id) ON DELETE SET NULL NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_product_channels ADD CONSTRAINT FK_F9EF269B4584665A FOREIGN KEY (product_id) REFERENCES sylius_product (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_product_channels ADD CONSTRAINT FK_F9EF269B72F5A1AA FOREIGN KEY (channel_id) REFERENCES sylius_channel (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_product_options ADD CONSTRAINT FK_2B5FF0094584665A FOREIGN KEY (product_id) REFERENCES sylius_product (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -422,6 +427,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_promotion_action ADD CONSTRAINT FK_933D0915139DF194 FOREIGN KEY (promotion_id) REFERENCES sylius_promotion (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_promotion_coupon ADD CONSTRAINT FK_B04EBA85139DF194 FOREIGN KEY (promotion_id) REFERENCES sylius_promotion (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_promotion_rule ADD CONSTRAINT FK_2C188EA8139DF194 FOREIGN KEY (promotion_id) REFERENCES sylius_promotion (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE sylius_promotion_translation ADD CONSTRAINT FK_3C7A76182C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES sylius_promotion (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_province ADD CONSTRAINT FK_B5618FE4F92F3E70 FOREIGN KEY (country_id) REFERENCES sylius_country (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_shipment ADD CONSTRAINT FK_FD707B3319883967 FOREIGN KEY (method_id) REFERENCES sylius_shipping_method (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_shipment ADD CONSTRAINT FK_FD707B338D9F6D38 FOREIGN KEY (order_id) REFERENCES sylius_order (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -455,7 +461,9 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('DROP SEQUENCE sylius_catalog_promotion_scope_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_catalog_promotion_translation_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_channel_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE sylius_channel_price_history_config_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_channel_pricing_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE sylius_channel_pricing_log_entry_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_country_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_currency_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_customer_id_seq CASCADE');
@@ -491,6 +499,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('DROP SEQUENCE sylius_promotion_action_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_promotion_coupon_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_promotion_rule_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE sylius_promotion_translation_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_province_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_shipment_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sylius_shipping_category_id_seq CASCADE');
@@ -519,6 +528,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_catalog_promotion_scope DROP CONSTRAINT FK_584AA86A139DF194');
         $this->addSql('ALTER TABLE sylius_catalog_promotion_translation DROP CONSTRAINT FK_BA065D3C2C2AC5D3');
         $this->addSql('ALTER TABLE sylius_channel DROP CONSTRAINT FK_16C8119EB5282EDF');
+        $this->addSql('ALTER TABLE sylius_channel DROP CONSTRAINT FK_16C8119E75F20EAE');
         $this->addSql('ALTER TABLE sylius_channel DROP CONSTRAINT FK_16C8119E743BF776');
         $this->addSql('ALTER TABLE sylius_channel DROP CONSTRAINT FK_16C8119E3101778E');
         $this->addSql('ALTER TABLE sylius_channel DROP CONSTRAINT FK_16C8119EA978C17');
@@ -529,9 +539,12 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_channel_locales DROP CONSTRAINT FK_786B7A84E559DFD1');
         $this->addSql('ALTER TABLE sylius_channel_countries DROP CONSTRAINT FK_D96E51AE72F5A1AA');
         $this->addSql('ALTER TABLE sylius_channel_countries DROP CONSTRAINT FK_D96E51AEF92F3E70');
+        $this->addSql('ALTER TABLE sylius_channel_price_history_config_excluded_taxons DROP CONSTRAINT FK_77FD02A72F5A1AA');
+        $this->addSql('ALTER TABLE sylius_channel_price_history_config_excluded_taxons DROP CONSTRAINT FK_77FD02ADE13F470');
         $this->addSql('ALTER TABLE sylius_channel_pricing DROP CONSTRAINT FK_7801820CA80EF684');
         $this->addSql('ALTER TABLE sylius_channel_pricing_catalog_promotions DROP CONSTRAINT FK_9F52FF513EADFFE5');
         $this->addSql('ALTER TABLE sylius_channel_pricing_catalog_promotions DROP CONSTRAINT FK_9F52FF5122E2CB5A');
+        $this->addSql('ALTER TABLE sylius_channel_pricing_log_entry DROP CONSTRAINT FK_77181A53EADFFE5');
         $this->addSql('ALTER TABLE sylius_customer DROP CONSTRAINT FK_7E82D5E6D2919A68');
         $this->addSql('ALTER TABLE sylius_customer DROP CONSTRAINT FK_7E82D5E6BD94FB16');
         $this->addSql('ALTER TABLE sylius_exchange_rate DROP CONSTRAINT FK_5F52B852A76BEED');
@@ -588,6 +601,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_promotion_action DROP CONSTRAINT FK_933D0915139DF194');
         $this->addSql('ALTER TABLE sylius_promotion_coupon DROP CONSTRAINT FK_B04EBA85139DF194');
         $this->addSql('ALTER TABLE sylius_promotion_rule DROP CONSTRAINT FK_2C188EA8139DF194');
+        $this->addSql('ALTER TABLE sylius_promotion_translation DROP CONSTRAINT FK_3C7A76182C2AC5D3');
         $this->addSql('ALTER TABLE sylius_province DROP CONSTRAINT FK_B5618FE4F92F3E70');
         $this->addSql('ALTER TABLE sylius_shipment DROP CONSTRAINT FK_FD707B3319883967');
         $this->addSql('ALTER TABLE sylius_shipment DROP CONSTRAINT FK_FD707B338D9F6D38');
@@ -621,8 +635,11 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('DROP TABLE sylius_channel_currencies');
         $this->addSql('DROP TABLE sylius_channel_locales');
         $this->addSql('DROP TABLE sylius_channel_countries');
+        $this->addSql('DROP TABLE sylius_channel_price_history_config');
+        $this->addSql('DROP TABLE sylius_channel_price_history_config_excluded_taxons');
         $this->addSql('DROP TABLE sylius_channel_pricing');
         $this->addSql('DROP TABLE sylius_channel_pricing_catalog_promotions');
+        $this->addSql('DROP TABLE sylius_channel_pricing_log_entry');
         $this->addSql('DROP TABLE sylius_country');
         $this->addSql('DROP TABLE sylius_currency');
         $this->addSql('DROP TABLE sylius_customer');
@@ -667,6 +684,7 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('DROP TABLE sylius_promotion_action');
         $this->addSql('DROP TABLE sylius_promotion_coupon');
         $this->addSql('DROP TABLE sylius_promotion_rule');
+        $this->addSql('DROP TABLE sylius_promotion_translation');
         $this->addSql('DROP TABLE sylius_province');
         $this->addSql('DROP TABLE sylius_shipment');
         $this->addSql('DROP TABLE sylius_shipping_category');
@@ -684,6 +702,19 @@ final class Version20230419092354 extends AbstractPostgreSQLMigration
         $this->addSql('DROP TABLE sylius_user_oauth');
         $this->addSql('DROP TABLE sylius_zone');
         $this->addSql('DROP TABLE sylius_zone_member');
-        $this->addSql('DROP TABLE messenger_messages');
+    }
+
+    private function cleanMigrationsTable(): void
+    {
+        $this->connection->executeStatement('DELETE FROM sylius_migrations WHERE version LIKE :version AND version NOT IN (:current)', [
+            'version' => 'Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version%',
+            'current' => [
+                'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20160101092155',
+                self::class,
+            ],
+        ], [
+            'version' => Types::STRING,
+            'current' => ArrayParameterType::STRING,
+        ]);
     }
 }
