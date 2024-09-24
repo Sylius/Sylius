@@ -41,7 +41,6 @@ imports:
     - api/product/managing_product_options.yml
     - api/product/managing_product_reviews.yml
     - api/product/managing_product_variants.yml
-    - api/product/managing_product_variants_ajax.yml
     - api/product/managing_products.yml
     - api/product/viewing_price_history.yml
     - api/product/viewing_price_history_after_catalog_promotions.yml
@@ -67,7 +66,6 @@ imports:
     - api/taxation/managing_tax_categories.yml
     - api/taxation/managing_tax_rates.yml
     - api/taxon/managing_taxons.yml
-    - api/taxon/managing_taxons_ajax.yml
     - api/user/managing_administrators.yml
     - api/user/managing_customer_groups.yml
     - api/user/managing_customers.yml

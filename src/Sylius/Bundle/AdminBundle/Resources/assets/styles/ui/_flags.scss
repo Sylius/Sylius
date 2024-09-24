@@ -7,7 +7,8 @@ $countries: (
     display: inline-block;
     height: $avatar-size;
     aspect-ratio: 1.33333;
-    background: no-repeat center/cover;
+    background-position: center;
+    background-repeat: no-repeat;
     box-shadow: $flag-box-shadow;
     border-radius: $flag-border-radius;
     vertical-align: bottom;
@@ -28,4 +29,127 @@ $countries: (
     .flag-#{$flag-size} {
         height: map-get($size, size);
     }
+}
+
+@mixin flag($country, $locale) {
+    .flag-country-#{$locale} {
+        background-image: url("#{$assets-base}/img/flags/#{$country}.svg");
+    }
+}
+
+@include flag("na", "af");
+@include flag("gh", "ak");
+@include flag("et", "am");
+@include flag("in", "as");
+@include flag("by", "be");
+@include flag("ml", "bm");
+@include flag("bd", "bn");
+@include flag("cn", "bo");
+@include flag("fr", "br");
+@include flag("ba", "bs");
+@include flag("ad", "ca");
+@include flag("ru", "ce");
+@include flag("cz", "cs");
+@include flag("ru", "cv");
+@include flag("gb", "cy");
+@include flag("dk", "da");
+@include flag("bt", "dz");
+@include flag("gh", "ee");
+@include flag("cy", "el");
+@include flag("gb", "en");
+@include flag("ee", "et");
+@include flag("es", "eu");
+@include flag("af", "fa");
+@include flag("dk", "fo");
+@include flag("nl", "fy");
+@include flag("ie", "ga");
+@include flag("gb", "gd");
+@include flag("es", "gl");
+@include flag("in", "gu");
+@include flag("im", "gv");
+@include flag("gh", "ha");
+@include flag("il", "he");
+@include flag("in", "hi");
+@include flag("ba", "hr");
+@include flag("am", "hy");
+@include flag("ee", "ie");
+@include flag("ng", "ig");
+@include flag("cn", "ii");
+@include flag("jp", "ja");
+@include flag("id", "jv");
+@include flag("ge", "ka");
+@include flag("ke", "ki");
+@include flag("kz", "kk");
+@include flag("gl", "kl");
+@include flag("kh", "km");
+@include flag("in", "kn");
+@include flag("cn", "ko");
+@include flag("ae", "ks");
+@include flag("tr", "ku");
+@include flag("gb", "kw");
+@include flag("kg", "ky");
+@include flag("lu", "lb");
+@include flag("ug", "lg");
+@include flag("ao", "ln");
+@include flag("la", "lo");
+@include flag("cd", "lu");
+@include flag("nz", "mi");
+@include flag("in", "ml");
+@include flag("in", "mr");
+@include flag("bn", "ms");
+@include flag("mm", "my");
+@include flag("no", "nb");
+@include flag("zw", "nd");
+@include flag("in", "ne");
+@include flag("aw", "nl");
+@include flag("no", "nn");
+@include flag("fr", "oc");
+@include flag("et", "om");
+@include flag("in", "or");
+@include flag("ge", "os");
+@include flag("ae", "pa");
+@include flag("af", "ps");
+@include flag("ao", "pt");
+@include flag("bo", "qu");
+@include flag("ch", "rm");
+@include flag("bi", "rn");
+@include flag("md", "ro");
+@include flag("by", "ru");
+@include flag("in", "sa");
+@include flag("it", "sc");
+@include flag("ae", "sd");
+@include flag("fi", "se");
+@include flag("cf", "sg");
+@include flag("ba", "sh");
+@include flag("lk", "si");
+@include flag("zw", "sn");
+@include flag("dj", "so");
+@include flag("al", "sq");
+@include flag("ba", "sr");
+@include flag("id", "su");
+@include flag("ax", "sv");
+@include flag("cd", "sw");
+@include flag("in", "ta");
+@include flag("in", "te");
+@include flag("tj", "tg");
+@include flag("er", "ti");
+@include flag("tm", "tk");
+@include flag("ph", "tl");
+@include flag("cy", "tr");
+@include flag("ru", "tt");
+@include flag("cn", "ug");
+@include flag("ua", "uk");
+@include flag("in", "ur");
+@include flag("af", "uz");
+@include flag("vn", "vi");
+@include flag("sn", "wo");
+@include flag("za", "xh");
+@include flag("ua", "yi");
+@include flag("bj", "yo");
+@include flag("cn", "za");
+@include flag("cn", "zh");
+@include flag("za", "zu");
+
+.flag-country-001 {
+    background-image: url("../../images/flags/un.svg");
 }

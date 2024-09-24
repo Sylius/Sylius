@@ -1,0 +1,34 @@
+twig_hooks:
+    hooks:
+        'sylius.shop.product_review.create':
+            sidebar:
+                template: "@SyliusShop/product_review/create/sidebar.html.twig"
+            main:
+                template: "@SyliusShop/product_review/create/main.html.twig"
+                
+        'sylius.shop.product_review.create.sidebar':
+            product_card:
+                component: 'sylius_shop:product:card'
+                props:
+                    product: '@=_context.product'
+            
+        'sylius.shop.product_review.create.main':
+            header:
+                template: "@SyliusShop/product_review/create/main/header.html.twig"
+            form:
+                component: 'sylius_shop:product_review:form'
+                props:
+                    resource: '@=_context.product_review'
+                    form: '@=_context.form'
+                
+        'sylius.shop.product_review.create.main.form':
+            rating:
+                template: "@SyliusShop/product_review/create/main/form/rating.html.twig"
+            title:
+                template: "@SyliusShop/product_review/create/main/form/title.html.twig"
+            comment:
+                template: "@SyliusShop/product_review/create/main/form/comment.html.twig"
+            email:
+                template: "@SyliusShop/product_review/create/main/form/email.html.twig"
+            submit:
+                template: "@SyliusShop/product_review/create/main/form/submit.html.twig"

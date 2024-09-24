@@ -13,7 +13,7 @@ Feature: Removing an address from my book
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And my default address is of "Lucifer Morningstar"
 
-    @api @ui
+    @api @ui @javascript
     Scenario: Deleting address created after placing an order
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

@@ -1,0 +1,7 @@
+{% from '@SyliusShop/shared/macro/order/state.html.twig' import label %}
+
+{% set state = hookable_metadata.context.shipment.state %}
+
+<div {{ sylius_test_html_attribute('shipment-state') }}>
+    {{  label(state) }}
+</div>

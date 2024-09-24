@@ -107,7 +107,7 @@ class StatisticsComponent
         $this->resolveDates();
     }
 
-    #[LiveListener('channelChanged')]
+    #[LiveListener(ChannelSelectorComponent::SYLIUS_ADMIN_CHANNEL_CHANGED)]
     public function changeChannel(
         #[LiveArg]
         string $channelCode,

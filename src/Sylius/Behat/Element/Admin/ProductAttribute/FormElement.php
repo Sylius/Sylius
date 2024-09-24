@@ -24,8 +24,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
     use ChecksCodeImmutability;
     use SpecifiesItsField;
 
-    private ?int $choiceListIndex = null;
-
     public function changeName(string $name, string $language): void
     {
         $this->getDocument()->fillField(sprintf('sylius_admin_product_attribute_translations_%s_name', $language), $name);
@@ -53,20 +51,15 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function addAttributeValue(string $value, string $localeCode): void
     {
-        $this->addEmptyChoice();
+        $this->getElement('add_button')->click();
         $this->waitForFormUpdate();
+
         $lastChoice = $this->getLastChoiceElement();
         $lastChoice->find('css', 'input[data-test-locale="' . $localeCode . '"]')->setValue($value);
-
-        ++$this->choiceListIndex;
     }
 
     public function deleteAttributeValue(string $value, string $localeCode): void
     {
-        if (null === $this->choiceListIndex) {
-            $this->choiceListIndex = $this->getChoicesCount();
-        }
-
         $input = $this->getElement('choice_direct_input', ['%value%' => $value, '%locale_code%' => $localeCode]);
         $this->getElement('delete_button', ['%key%' => $input->getAttribute('data-test-key')])->click();
         $this->waitForFormUpdate();
@@ -99,37 +92,21 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     protected function getDefinedElements(): array
     {
-        return array_merge(
-            parent::getDefinedElements(),
-            [
+        return array_merge(parent::getDefinedElements(), [
             'add_button' => '#sylius_admin_product_attribute_configuration_choices_add',
             'choice' => '[data-test-choice-key="%key%"] input[data-test-locale="%locale_code%"]',
             'choice_direct_input' => 'input[value="%value%"][data-test-locale="%locale_code%"]',
             'choices' => '[data-test-choice-key]',
             'code' => '[data-test-code]',
             'delete_button' => '[data-test-choice-removal="%key%"]',
+            'form' => 'form[name="sylius_admin_product_attribute"]',
             'max' => '#sylius_admin_product_attribute_configuration_max',
             'min' => '#sylius_admin_product_attribute_configuration_min',
             'multiple' => 'label[for=sylius_admin_product_attribute_configuration_multiple]',
             'name' => '[data-test-name]',
             'translatable' => '[data-test-translatable]',
             'type' => '[data-test-type]',
-        ],
-        );
-    }
-
-    private function getChoicesCount(): int
-    {
-        return count($this->getDocument()->findAll('css', '[data-test-choices]'));
-    }
-
-    private function addEmptyChoice(): void
-    {
-        if (null === $this->choiceListIndex) {
-            $this->choiceListIndex = $this->getChoicesCount();
-        }
-
-        $this->getElement('add_button')->click();
+        ]);
     }
 
     private function getLastChoiceElement(): NodeElement

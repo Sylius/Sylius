@@ -1,0 +1,3 @@
+{% for shipment in hookable_metadata.context.order.shipments %}
+    {% hook 'list' with { shipment } %}
+{% endfor %}

@@ -13,15 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Shop\Account;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-
 interface RegisterElementInterface
 {
-    /**
-     * @throws ElementNotFoundException
-     */
-    public function checkValidationMessageFor(string $element, string $message): bool;
-
     public function register(): void;
 
     public function specifyEmail(?string $email): void;
@@ -39,4 +32,6 @@ interface RegisterElementInterface
     public function verifyPassword(?string $password): void;
 
     public function subscribeToTheNewsletter(): void;
+
+    public function getValidationMessage(string $element, array $parameters = []): string;
 }

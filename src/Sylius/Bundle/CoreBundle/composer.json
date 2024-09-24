@@ -76,7 +76,7 @@
         "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
+        "doctrine/doctrine-bundle": "^2.3.1",
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",

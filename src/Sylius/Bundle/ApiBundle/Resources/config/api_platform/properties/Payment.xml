@@ -15,13 +15,13 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Core\Model\Payment" name="id" identifier="true" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="method" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="currencyCode" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="amount" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="state" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="details" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="order" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="createdAt" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\Payment" name="updatedAt" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="id" identifier="true" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="method" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="currencyCode" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="amount" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="state" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="details" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="order" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="createdAt" writable="false"/>
+    <property resource="%sylius.model.payment.class%" name="updatedAt" writable="false"/>
 </properties>

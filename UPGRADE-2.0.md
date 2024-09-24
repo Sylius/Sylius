@@ -280,3 +280,8 @@ If your app never changed the hasher name configuration, you don't need to confi
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
+
+## Payment method gateways
+
+* Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.
+* PayPal Express Checkout gateway has been removed. Use now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.

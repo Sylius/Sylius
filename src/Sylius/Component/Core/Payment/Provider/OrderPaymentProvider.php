@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Payment\Provider;
 
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -31,19 +29,8 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
     public function __construct(
         private DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         private PaymentFactoryInterface $paymentFactory,
-        private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachineFactory,
     ) {
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the third argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    StateMachineFactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface
@@ -100,20 +87,9 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
             return;
         }
 
-        $stateMachine = $this->getStateMachine();
-
-        $targetTransition = $stateMachine->getTransitionToState($payment, PaymentTransitions::GRAPH, $targetState);
+        $targetTransition = $this->stateMachineFactory->getTransitionToState($payment, PaymentTransitions::GRAPH, $targetState);
         if (null !== $targetTransition) {
-            $stateMachine->apply($payment, PaymentTransitions::GRAPH, $targetTransition);
+            $this->stateMachineFactory->apply($payment, PaymentTransitions::GRAPH, $targetTransition);
         }
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }

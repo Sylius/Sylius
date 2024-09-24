@@ -14,52 +14,44 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Taxon;
 
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface;
-use Sylius\Component\Core\Model\Taxon;
+use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
-use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 #[AsLiveComponent]
 class FormComponent
 {
-    use DefaultActionTrait;
-    use HookableLiveComponentTrait;
     use LiveCollectionTrait;
 
-    #[LiveProp(fieldName: 'resource')]
-    public ?Taxon $resource = null;
+    /** @use ResourceFormComponentTrait<TaxonInterface> */
+    use ResourceFormComponentTrait;
 
     /**
+     * @param RepositoryInterface<TaxonInterface> $repository
+     * @param class-string $resourceClass
      * @param class-string $formClass
-     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
      */
     public function __construct(
-        private readonly FormFactoryInterface $formFactory,
-        private readonly string $formClass,
-        private readonly TaxonRepositoryInterface $taxonRepository,
+        RepositoryInterface $repository,
+        FormFactoryInterface $formFactory,
+        string $resourceClass,
+        string $formClass,
         private readonly TaxonSlugGeneratorInterface $slugGenerator,
     ) {
+        $this->initialize($repository, $formFactory, $resourceClass, $formClass);
     }
 
     #[LiveAction]
     public function generateTaxonSlug(#[LiveArg] string $localeCode): void
     {
         $name = $this->formValues['translations'][$localeCode]['name'];
-        $parent = $this->taxonRepository->findOneBy(['code' => $this->formValues['parent']]);
+        $parent = $this->repository->findOneBy(['code' => $this->formValues['parent']]);
 
         $this->formValues['translations'][$localeCode]['slug'] = $this->slugGenerator->generate($name, $localeCode, $parent);
-    }
-
-    protected function instantiateForm(): FormInterface
-    {
-        return $this->formFactory->create($this->formClass, $this->resource);
     }
 }

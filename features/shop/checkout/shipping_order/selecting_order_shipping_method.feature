@@ -11,7 +11,7 @@ Feature: Selecting order shipping method
         And the store has "Dragon Post" shipping method with "$30.00" fee
         And I am a logged in customer
 
-    @api @ui
+    @api @ui @javascript
     Scenario: Selecting one of available shipping method
         Given I have product "Targaryen T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

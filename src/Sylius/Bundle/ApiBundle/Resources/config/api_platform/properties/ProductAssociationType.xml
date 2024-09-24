@@ -15,9 +15,9 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Product\Model\ProductAssociationType" name="id" identifier="false" />
-    <property resource="Sylius\Component\Product\Model\ProductAssociationType" name="code" identifier="true" />
-    <property resource="Sylius\Component\Product\Model\ProductAssociationType" name="translations">
+    <property resource="%sylius.model.product_association_type.class%" name="id" identifier="false" />
+    <property resource="%sylius.model.product_association_type.class%" name="code" identifier="true" />
+    <property resource="%sylius.model.product_association_type.class%" name="translations">
         <openapiContext>
             <values>
                 <value name="type">object</value>

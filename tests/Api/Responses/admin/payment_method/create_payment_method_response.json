@@ -6,8 +6,8 @@
     "gatewayConfig": {
         "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
         "@type": "GatewayConfig",
-        "factoryName": "paypal_express_checkout",
-        "gatewayName": "paypal_express_checkout",
+        "factoryName": "offline",
+        "gatewayName": "Offline",
         "config": {
             "sandbox": true,
             "password": "test",

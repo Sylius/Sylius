@@ -23,7 +23,7 @@ use Twig\Loader\LoaderInterface;
 
 final class ErrorTemplateFinderSpec extends ObjectBehavior
 {
-    private const TEMPLATE_PREFIX = '@SyliusShop/Errors';
+    private const TEMPLATE_PREFIX = '@SyliusShop/errors';
 
     function let(SectionProviderInterface $sectionProvider, Environment $twig): void
     {

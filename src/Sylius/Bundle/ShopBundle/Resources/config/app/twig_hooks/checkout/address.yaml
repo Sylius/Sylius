@@ -1,0 +1,80 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.checkout.address':
+            steps:
+                template: '@SyliusShop/checkout/shared/steps.html.twig'
+            form:
+                component: 'sylius_shop:checkout:address:form'
+                props:
+                    resource: '@=_context.order'
+                    form: '@=_context.form'
+
+        'sylius_shop.checkout.address.form':
+            header:
+                template: '@SyliusShop/checkout/address/form/header.html.twig'
+            user:
+                template: '@SyliusShop/checkout/address/form/user.html.twig'
+            addresses:
+                template: '@SyliusShop/checkout/address/form/addresses.html.twig'
+            navigation:
+                template: '@SyliusShop/checkout/address/form/navigation.html.twig'
+
+        'sylius_shop.checkout.address.form.addresses#billing_required':
+            billing_address:
+                template: '@SyliusShop/checkout/address/form/addresses/address.html.twig'
+                configuration:
+                    type: 'billing'
+            different_shipping_address:
+                template: '@SyliusShop/checkout/address/form/addresses/different_address.html.twig'
+                configuration:
+                    type: 'shipping'
+                    field: 'differentShippingAddress'
+            shipping_address:
+                template: '@SyliusShop/checkout/address/form/addresses/address.html.twig'
+                configuration:
+                    type: 'shipping'
+                    isDifferentAddress: true
+
+        'sylius_shop.checkout.address.form.addresses#shipping_required':
+            shipping_address:
+                template: '@SyliusShop/checkout/address/form/addresses/address.html.twig'
+                configuration:
+                    type: 'shipping'
+            different_billing_address:
+                template: '@SyliusShop/checkout/address/form/addresses/different_address.html.twig'
+                configuration:
+                    type: 'billing'
+                    field: 'differentBillingAddress'
+            billing_address:
+                template: '@SyliusShop/checkout/address/form/addresses/address.html.twig'
+                configuration:
+                    type: 'billing'
+                    isDifferentAddress: true
+
+        'sylius_shop.checkout.address.form.addresses.billing_address':
+            header:
+                template: '@SyliusShop/checkout/address/form/addresses/address/header.html.twig'
+                configuration:
+                    title: 'sylius.ui.billing_address'
+            address_book:
+                component: 'sylius_shop:checkout:address:address_book'
+                props:
+                    field: 'billingAddress'
+            form:
+                template: '@SyliusShop/checkout/address/form/addresses/address/form.html.twig'
+                configuration:
+                    field: 'billingAddress'
+
+        'sylius_shop.checkout.address.form.addresses.shipping_address':
+            header:
+                template: '@SyliusShop/checkout/address/form/addresses/address/header.html.twig'
+                configuration:
+                    title: 'sylius.ui.shipping_address'
+            address_book:
+                component: 'sylius_shop:checkout:address:address_book'
+                props:
+                    field: 'shippingAddress'
+            form:
+                template: '@SyliusShop/checkout/address/form/addresses/address/form.html.twig'
+                configuration:
+                    field: 'shippingAddress'

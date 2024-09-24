@@ -18,17 +18,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.context.api.admin.ajax" class="Sylius\Behat\Context\Api\Admin\AjaxContext">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="request_stack" />
-        </service>
-
-        <service id="sylius.behat.context.api.admin.ajax_taxons" class="Sylius\Behat\Context\Api\Admin\AjaxTaxonsContext">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="request_stack" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-        </service>
-
         <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
             <argument type="service" id="sylius.behat.client.admin_api_platform_security_client" />
             <argument type="service" id="sylius.behat.shared_storage" />

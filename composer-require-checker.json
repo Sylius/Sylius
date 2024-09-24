@@ -82,8 +82,6 @@
     "Payum\\Core\\Security\\TokenInterface",
     "Payum\\Core\\Security\\Util\\Random",
     "Payum\\Core\\Storage\\AbstractStorage",
-    "Payum\\Paypal\\ExpressCheckout\\Nvp\\PaypalExpressCheckoutGatewayFactory",
-    "Payum\\Stripe\\StripeCheckoutGatewayFactory",
     "PHPUnit\\Framework\\ExpectationFailedException",
     "Psr\\Clock\\ClockInterface",
     "Psr\\Container\\ContainerInterface",
@@ -94,6 +92,7 @@
     "Symfony\\Component\\ErrorHandler\\ErrorRenderer\\ErrorRendererInterface",
     "Symfony\\Component\\ErrorHandler\\Exception\\FlattenException",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
+    "Symfony\\Component\\WebLink\\Link",
     "Symfony\\Contracts\\EventDispatcher\\Event"
   ],
   "php-core-extensions" : [
