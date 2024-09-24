@@ -1,5 +1,31 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.6 (2024-09-24)
+
+#### Details
+
+- [#16753](https://github.com/Sylius/Sylius/issues/16753) [CS][DX] Refactor
+- [#16794](https://github.com/Sylius/Sylius/issues/16794) [Core] Move validation of translation classes to Core ([@GSadee](https://github.com/GSadee))
+- [#15706](https://github.com/Sylius/Sylius/issues/15706) Try SyliusResourceBundle 1.11 & SyliusGridBundle 1.13 ([@loic425](https://github.com/loic425))
+- [#16819](https://github.com/Sylius/Sylius/issues/16819) Fix static analysis to support both sylius/resource-bundle 1.11 and older versions ([@Rafikooo](https://github.com/Rafikooo), [@GSadee](https://github.com/GSadee))
+- [#16827](https://github.com/Sylius/Sylius/issues/16827) [Behat] Switch random JS failed scenarios to Chromedriver ([@GSadee](https://github.com/GSadee))
+- [#16812](https://github.com/Sylius/Sylius/issues/16812) [CS][DX] Refactor
+- [#16836](https://github.com/Sylius/Sylius/issues/16836) [CS][DX] Refactor
+- [#16868](https://github.com/Sylius/Sylius/issues/16868) Cover the scenario for allowing access for only correctly logged in users ([@TheMilek](https://github.com/TheMilek))
+- [#16885](https://github.com/Sylius/Sylius/issues/16885) [CS][DX] Refactor
+- [#16897](https://github.com/Sylius/Sylius/issues/16897) [Docs] Fix link in grids customization guide ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#16922](https://github.com/Sylius/Sylius/issues/16922) [CI] Split JS builds for Panther and Chromedriver + add additional rerun ([@GSadee](https://github.com/GSadee))
+- [#16966](https://github.com/Sylius/Sylius/issues/16966) Update state_machine.rst ([@JakubCzech-pl](https://github.com/JakubCzech-pl))
+- [#16891](https://github.com/Sylius/Sylius/issues/16891) [CI] Upgrade ResourceBundle in unstable custom build ([@GSadee](https://github.com/GSadee))
+- [#16979](https://github.com/Sylius/Sylius/issues/16979) [CI] Add SyliusMailerBundle alpha version to custom build ([@GSadee](https://github.com/GSadee))
+- [#16978](https://github.com/Sylius/Sylius/issues/16978) [CI] Bump up DB versions to current LTS ([@GSadee](https://github.com/GSadee))
+- [#16981](https://github.com/Sylius/Sylius/issues/16981) [CI] Extract unstable build from full builds ([@GSadee](https://github.com/GSadee))
+- [#16982](https://github.com/Sylius/Sylius/issues/16982) [CI] Adjust titles in custom build ([@GSadee](https://github.com/GSadee))
+- [#16983](https://github.com/Sylius/Sylius/issues/16983) [CI] Minor refactor in full builds ([@GSadee](https://github.com/GSadee))
+- [#16984](https://github.com/Sylius/Sylius/issues/16984) [CI] Add PHP 8.3 to builds ([@GSadee](https://github.com/GSadee))
+- [#16985](https://github.com/Sylius/Sylius/issues/16985) [CI] Fix minimal builds ([@GSadee](https://github.com/GSadee))
+- [#16997](https://github.com/Sylius/Sylius/issues/16997) [CI] Improve notification Slack message ([@GSadee](https://github.com/GSadee))
+
 ## v1.13.5 (2024-08-22)
 
 #### Details
