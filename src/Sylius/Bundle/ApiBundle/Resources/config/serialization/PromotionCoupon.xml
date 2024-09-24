@@ -61,7 +61,6 @@
         <attribute name="promotion">
             <group>sylius:admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:show</group>
-            <group>sylius:admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="expiresAt">

@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/PromotionCoupon",
-    "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ3",
+    "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/coupons\/XYZ3",
     "@type": "PromotionCoupon",
     "code": "XYZ3",
     "usageLimit": 100,

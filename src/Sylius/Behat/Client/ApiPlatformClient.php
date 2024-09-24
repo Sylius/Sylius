@@ -111,6 +111,10 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function sort(array $sorting): Response
     {
+        if ($this->request === null) {
+            throw new \RuntimeException('There is no request to sort.');
+        }
+
         $this->request->updateParameters(['order' => $sorting]);
 
         return $this->request($this->request);
@@ -149,24 +153,37 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request);
     }
 
-    public function buildCreateRequest(string $resource): void
+    public function buildCreateRequest(string $url): self
     {
-        $this->request = $this->requestFactory->create($this->section, $resource, $this->authorizationHeader, $this->getToken());
+        $this->validateUri($url);
+        $this->request = $this->requestFactory->default(
+            section: $this->section,
+            url: $url,
+            method: 'POST',
+            token: $this->getToken(),
+        );
+
+        return $this;
     }
 
-    public function buildUpdateRequest(string $resource, string $id): self
+    public function buildUpdateRequest(string $uri, ?string $id = null): self
     {
-        $this->show($resource, $id);
+        $this->validateUri($uri);
+
+        if ($id !== null) {
+            $uri = sprintf('%s/%s', $uri, $id);
+        }
+
+        $response = $this->requestGet($uri);
 
         $this->request = $this->requestFactory->update(
             $this->section,
-            $resource,
-            $id,
+            $uri,
             $this->authorizationHeader,
             $this->getToken(),
         );
 
-        $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
+        $this->request->setContent(json_decode($response->getContent(), true));
 
         return $this;
     }
@@ -212,9 +229,11 @@ final class ApiPlatformClient implements ApiClientInterface
     }
 
     /** @param array<string, mixed> $value */
-    public function addRequestData(string $key, array|bool|int|string|null $value): void
+    public function addRequestData(string $key, array|bool|int|string|null $value): self
     {
         $this->request->updateContent([$key => $value]);
+
+        return $this;
     }
 
     /** @param array<string, mixed> $value */
@@ -273,23 +292,36 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 
-    /** @inheritDoc */
     public function requestGet(string $uri, array $queryParameters = [], array $headers = []): Response
     {
-        $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
-        $uri = $queryStrings ? $uri . '?' . $queryStrings : $uri;
+        $this->validateUri($uri);
 
-        $request = $this
+        $this->request = $this
             ->requestFactory
-            ->custom($uri, HttpRequest::METHOD_GET, $headers)
+            ->default($this->section, $uri, HttpRequest::METHOD_GET, $queryParameters, $headers)
             ->authorize($this->getToken(), $this->authorizationHeader)
         ;
 
-        return $this->request($request);
+        return $this->request();
     }
 
-    public function request(RequestInterface $request, bool $forgetResponse = false): Response
+    public function requestDelete(string $uri): Response
     {
+        $this->request = $this
+            ->requestFactory
+            ->default($this->section, $uri, HttpRequest::METHOD_DELETE)
+            ->authorize($this->getToken(), $this->authorizationHeader)
+        ;
+
+        return $this->request();
+    }
+
+    public function request(?RequestInterface $request = null, bool $forgetResponse = false): Response
+    {
+        if ($request === null) {
+            $request = $this->request;
+        }
+
         $this->setServerParameters();
 
         $this->client->request(
@@ -298,7 +330,7 @@ final class ApiPlatformClient implements ApiClientInterface
             $request->parameters(),
             $request->files(),
             $request->headers(),
-            $request->content() ?? null,
+            $request->content(),
         );
 
         /** @var Response $response */
@@ -319,6 +351,21 @@ final class ApiPlatformClient implements ApiClientInterface
 
         if ($this->sharedStorage->has('current_locale_code')) {
             $this->client->setServerParameter('HTTP_ACCEPT_LANGUAGE', $this->sharedStorage->get('current_locale_code'));
+        }
+    }
+
+    private function validateUri(string $uri): void
+    {
+        if (str_starts_with($uri, '/')) {
+            throw new \InvalidArgumentException('URI should not start with a slash.');
+        }
+
+        if (str_starts_with($uri, 'http')) {
+            throw new \InvalidArgumentException('URI should not start with "http".');
+        }
+
+        if (str_starts_with($uri, 'api')) {
+            throw new \InvalidArgumentException('URI should not start with "api".');
         }
     }
 }

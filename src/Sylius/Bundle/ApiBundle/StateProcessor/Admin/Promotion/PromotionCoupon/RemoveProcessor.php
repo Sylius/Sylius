@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\PromotionCoupon;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\PromotionCoupon;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;

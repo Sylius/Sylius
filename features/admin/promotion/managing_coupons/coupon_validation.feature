@@ -54,8 +54,8 @@ Feature: Coupon validation
         And there should be 0 coupons related to this promotion
 
     @api @no-ui
-    Scenario: Trying to add a new coupon with no promotion
-        When I want to create a new coupon
+    Scenario: Trying to add a new coupon with non-existing promotion
+        When I want to create a new coupon for a non-existing promotion
         And I specify its code as "RANDOM"
         And I limit its usage to 30 times
         And I limit its per customer usage to 3 times

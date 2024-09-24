@@ -23,8 +23,8 @@
             "startsAt": null,
             "endsAt": null,
             "coupons": [
-                "\/api\/v2\/admin\/promotion-coupons\/XYZ1",
-                "\/api\/v2\/admin\/promotion-coupons\/XYZ2"
+                "\/api\/v2\/admin\/promotions\/dollar_off\/coupons\/XYZ1",
+                "\/api\/v2\/admin\/promotions\/dollar_off\/coupons\/XYZ2"
             ],
             "rules": [],
             "actions": [
