@@ -103,7 +103,7 @@ jobs:
                     channel: "#daily-build"
                     username: "GitHub Actions"
                     text: |
-                        *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
+                        *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has been completed for ${{ steps.process-data.outputs.branch }} branch.>*
 
                         ${{ needs.static-checks.result == 'success' && ':+1:' || ':x:' }} Static Checks
                         ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
