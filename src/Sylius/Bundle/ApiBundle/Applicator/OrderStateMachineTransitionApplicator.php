@@ -20,7 +20,7 @@ use Sylius\Component\Order\OrderTransitions;
 
 final class OrderStateMachineTransitionApplicator implements OrderStateMachineTransitionApplicatorInterface
 {
-    public function __construct(private StateMachineInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachine)
     {
     }
 
@@ -33,10 +33,10 @@ final class OrderStateMachineTransitionApplicator implements OrderStateMachineTr
 
     private function applyTransition(OrderInterface $order, string $transition): void
     {
-        if (false === $this->stateMachineFactory->can($order, OrderTransitions::GRAPH, $transition)) {
+        if (false === $this->stateMachine->can($order, OrderTransitions::GRAPH, $transition)) {
             throw new StateMachineTransitionFailedException('Cannot cancel the order.');
         }
 
-        $this->stateMachineFactory->apply($order, OrderTransitions::GRAPH, $transition);
+        $this->stateMachine->apply($order, OrderTransitions::GRAPH, $transition);
     }
 }

@@ -28,11 +28,12 @@ final class OrderShowMenuBuilder
     public function __construct(
         private FactoryInterface $factory,
         private EventDispatcherInterface $eventDispatcher,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
 
+    /** @param array<string, mixed> $options */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
@@ -52,7 +53,7 @@ final class OrderShowMenuBuilder
             ->setLabel('sylius.ui.history')
             ->setLabelAttribute('icon', 'history');
 
-        if ($this->stateMachineFactory->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)) {
+        if ($this->stateMachine->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)) {
             $menu
                 ->addChild('cancel', [
                     'route' => 'sylius_admin_order_cancel',
@@ -69,7 +70,7 @@ final class OrderShowMenuBuilder
         }
 
         $this->eventDispatcher->dispatch(
-            new OrderShowMenuBuilderEvent($this->factory, $menu, $order, $this->stateMachineFactory),
+            new OrderShowMenuBuilderEvent($this->factory, $menu, $order, $this->stateMachine),
             self::EVENT_NAME,
         );
 

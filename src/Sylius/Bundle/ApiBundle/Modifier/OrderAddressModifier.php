@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 final readonly class OrderAddressModifier implements OrderAddressModifierInterface
 {
     public function __construct(
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private AddressMapperInterface $addressMapper,
     ) {
     }
@@ -34,7 +34,7 @@ final readonly class OrderAddressModifier implements OrderAddressModifierInterfa
         ?AddressInterface $shippingAddress = null,
     ): OrderInterface {
         Assert::true(
-            $this->stateMachineFactory->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS),
+            $this->stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS),
             sprintf('Order with %s token cannot be addressed.', $order->getTokenValue()),
         );
 
@@ -57,7 +57,7 @@ final readonly class OrderAddressModifier implements OrderAddressModifierInterfa
         $this->setBillingAddress($order, $oldBillingAddress, $billingAddress);
         $this->setShippingAddress($order, $oldShippingAddress, $shippingAddress);
 
-        $this->stateMachineFactory->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS);
+        $this->stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         return $order;
     }

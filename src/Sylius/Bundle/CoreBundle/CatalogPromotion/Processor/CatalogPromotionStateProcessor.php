@@ -22,28 +22,28 @@ final class CatalogPromotionStateProcessor implements CatalogPromotionStateProce
 {
     public function __construct(
         private CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
     ) {
     }
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
-        if ($this->stateMachineFactory->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)) {
-            $this->stateMachineFactory->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS);
+        if ($this->stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)) {
+            $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS);
 
             return;
         }
 
         if (!$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)) {
-            if ($this->stateMachineFactory->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
-                $this->stateMachineFactory->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+            if ($this->stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
+                $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
             }
 
             return;
         }
 
-        if ($this->stateMachineFactory->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE)) {
-            $this->stateMachineFactory->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE);
+        if ($this->stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE)) {
+            $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE);
         }
     }
 }

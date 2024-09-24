@@ -33,7 +33,7 @@ final readonly class CompleteOrderHandler
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private MessageBusInterface $commandBus,
         private MessageBusInterface $eventBus,
         private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
@@ -74,11 +74,11 @@ final readonly class CompleteOrderHandler
         }
 
         Assert::true(
-            $this->stateMachineFactory->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE),
+            $this->stateMachine->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE),
             sprintf('Order with %s token cannot be completed.', $orderTokenValue),
         );
 
-        $this->stateMachineFactory->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE);
+        $this->stateMachine->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $this->eventBus->dispatch(new OrderCompleted($cart->getTokenValue()), [new DispatchAfterCurrentBusStamp()]);
 

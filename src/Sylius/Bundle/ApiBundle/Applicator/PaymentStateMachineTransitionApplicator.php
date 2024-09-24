@@ -20,7 +20,7 @@ use Sylius\Component\Payment\PaymentTransitions;
 
 final readonly class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
 {
-    public function __construct(private StateMachineInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachine)
     {
     }
 
@@ -40,7 +40,7 @@ final readonly class PaymentStateMachineTransitionApplicator implements PaymentS
 
     private function applyTransition(PaymentInterface $payment, string $transition): void
     {
-        if (false === $this->stateMachineFactory->can($payment, PaymentTransitions::GRAPH, $transition)) {
+        if (false === $this->stateMachine->can($payment, PaymentTransitions::GRAPH, $transition)) {
             throw new StateMachineTransitionFailedException(sprintf(
                 'Transition "%s" cannot be applied on "%s" payment.',
                 $transition,
@@ -48,6 +48,6 @@ final readonly class PaymentStateMachineTransitionApplicator implements PaymentS
             ));
         }
 
-        $this->stateMachineFactory->apply($payment, PaymentTransitions::GRAPH, $transition);
+        $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, $transition);
     }
 }
