@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -22,6 +23,8 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         PaymentMethodChangerInterface $paymentMethodChanger,
         OrderRepositoryInterface $orderRepository,

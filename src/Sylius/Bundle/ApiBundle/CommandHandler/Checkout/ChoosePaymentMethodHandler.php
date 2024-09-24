@@ -23,10 +23,11 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class ChoosePaymentMethodHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class ChoosePaymentMethodHandler
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,

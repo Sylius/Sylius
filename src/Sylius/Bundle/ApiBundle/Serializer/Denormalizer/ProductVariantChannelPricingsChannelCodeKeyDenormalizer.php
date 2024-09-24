@@ -39,7 +39,7 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizer implements D
     }
 
     /** @param array<string, array{ channelPricings: array<array-key, mixed> }> $data */
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::ALREADY_CALLED] = true;
 
@@ -58,5 +58,10 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizer implements D
         }
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductVariantInterface::class => false];
     }
 }

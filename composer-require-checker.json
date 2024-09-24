@@ -92,7 +92,8 @@
     "Symfony\\Component\\ErrorHandler\\ErrorRenderer\\ErrorRendererInterface",
     "Symfony\\Component\\ErrorHandler\\Exception\\FlattenException",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
-    "Symfony\\Component\\WebLink\\Link"
+    "Symfony\\Component\\WebLink\\Link",
+    "Symfony\\Contracts\\EventDispatcher\\Event"
   ],
   "php-core-extensions" : [
     "Core",

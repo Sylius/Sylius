@@ -37,7 +37,7 @@ final class CommandArgumentsDenormalizer implements DenormalizerInterface
         return is_subclass_of($inputClassName, IriToIdentifierConversionAwareInterface::class);
     }
 
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         /** @var class-string $inputClassName */
         $inputClassName = $this->getInputClassName($context);
@@ -47,6 +47,11 @@ final class CommandArgumentsDenormalizer implements DenormalizerInterface
         }
 
         return $this->commandDenormalizer->denormalize($data, $inputClassName, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['object' => true];
     }
 
     private function getInputClassName(array $context): ?string

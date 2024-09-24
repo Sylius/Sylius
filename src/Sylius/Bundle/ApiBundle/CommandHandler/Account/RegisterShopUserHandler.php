@@ -23,11 +23,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final readonly class RegisterShopUserHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class RegisterShopUserHandler
 {
     /** @param FactoryInterface<ShopUserInterface> $shopUserFactory */
     public function __construct(

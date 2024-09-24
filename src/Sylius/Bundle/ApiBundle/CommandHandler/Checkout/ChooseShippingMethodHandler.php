@@ -22,10 +22,11 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class ChooseShippingMethodHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class ChooseShippingMethodHandler
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,

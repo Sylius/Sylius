@@ -46,6 +46,7 @@ parameters:
         - '/Class "Sylius\\Bundle\\CoreBundle\\Fixture\\PaymentFixture" not found/'
         - '/Class Symfony\\Component\\Clock\\Clock not found\./'
         - '/Class Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken constructor invoked with 4 parameters\, 2\-3 required./'
+        - '/Method Symfony\\Component\\HttpKernel\\CacheWarmer\\WarmableInterface\:\:warmUp\(\) invoked with 2 parameters\, 1 required\./'
         - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
         - '/Symfony\\Component\\Serializer\\NameConverter\\NameConverterInterface::normalize\(\) invoked with 2 parameters, 1 required./'
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'

@@ -24,7 +24,7 @@ final readonly class AddressDenormalizer implements DenormalizerInterface
     ) {
     }
 
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return $this->objectNormalizer->denormalize(
             $data,
@@ -37,5 +37,10 @@ final readonly class AddressDenormalizer implements DenormalizerInterface
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
         return $type === $this->interfaceType;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [$this->interfaceType => true];
     }
 }

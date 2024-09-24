@@ -72,7 +72,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
                     'lazy' => true,
                 ])
                 ->addTag('doctrine.event_listener', [
-                    'event' => 'postRemove',
+                    'event' => 'preRemove',
                     'lazy' => true,
                 ])
             ;

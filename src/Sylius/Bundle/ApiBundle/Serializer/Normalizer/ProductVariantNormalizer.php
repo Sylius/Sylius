@@ -48,7 +48,7 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
      *
      * @return array<string, mixed>
      */
-    public function normalize($object, $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ProductVariantInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -98,6 +98,11 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
         }
 
         return $data instanceof ProductVariantInterface && $this->isNotAdminApiSection();
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductVariantInterface::class => false];
     }
 
     private function isNotAdminApiSection(): bool

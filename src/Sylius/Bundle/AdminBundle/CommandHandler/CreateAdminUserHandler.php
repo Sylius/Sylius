@@ -19,11 +19,12 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class CreateAdminUserHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class CreateAdminUserHandler
 {
     /**
      * @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository

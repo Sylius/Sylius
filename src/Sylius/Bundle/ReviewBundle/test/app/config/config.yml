@@ -40,8 +40,6 @@ fos_rest:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
 
 security:
-    enable_authenticator_manager: true
-
     providers:
         sylius_admin_user_provider:
             memory:

@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "sylius/resource": "^1.11",
+        "sylius/resource": "^1.11 || ^1.12@alpha",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
@@ -41,6 +41,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {
