@@ -13,7 +13,7 @@ Feature: Checking taxons of a product
         And the product "T-Shirt" belongs to taxon "T-Shirts"
         And I am logged in as an administrator
 
-    @ui @no-api @mink:chromedriver
+    @no-api @ui @mink:chromedriver
     Scenario: Checking all taxons
         When I want to modify the "Shirt" product
         And I check all taxons
@@ -21,7 +21,7 @@ Feature: Checking taxons of a product
         Then the product "Shirt" should have the "Clothes" taxon
         And the product "Shirt" should have the "T-Shirts" taxon
 
-    @ui @no-api @mink:chromedriver
+    @no-api @ui @mink:chromedriver
     Scenario: Unchecking all taxons
         When I want to modify the "T-Shirt" product
         And I uncheck all taxons
@@ -29,7 +29,7 @@ Feature: Checking taxons of a product
         Then the product "Shirt" should not have the "Clothes" taxon
         And the product "Shirt" should not have the "T-Shirts" taxon
 
-    @ui @no-api @mink:chromedriver
+    @no-api @ui @mink:chromedriver
     Scenario: Checking all filtered taxons
         When I want to modify the "Shirt" product
         And I filter taxons by "T-Shirts"
@@ -38,7 +38,7 @@ Feature: Checking taxons of a product
         Then the product "Shirt" should have the "T-Shirts" taxon
         But the product "Shirt" should not have the "Clothes" taxon
 
-    @ui @no-api @mink:chromedriver
+    @no-api @ui @mink:chromedriver
     Scenario: Unchecking all filtered taxons
         When I want to modify the "T-Shirt" product
         And I filter taxons by "T-Shirts"

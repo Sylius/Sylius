@@ -27,7 +27,16 @@
           "symfony": "^6.4",
           "api-platform": "^3.3",
           "mysql": "8.4",
-          "twig": "^3.3"
+          "twig": "^3.3",
+          "env": "test_cached"
+        },
+        {
+          "php": "8.3",
+          "symfony": "^6.4",
+          "api-platform": "^2.7.10",
+          "mysql": "8.4",
+          "twig": "^3.3",
+          "env": "test_cached_payum"
         }
       ]
     },
@@ -73,7 +82,18 @@
       "symfony": ["^6.4"],
       "api-platform": ["^3.3"],
       "mysql": ["8.0", "8.4"],
-      "twig": ["^3.3"]
+      "twig": ["^3.3"],
+      "env": "test_cached",
+      "include": [
+        {
+          "php": "8.3",
+          "symfony": "^6.4",
+          "api-platform": "^2.7.10",
+          "mysql": "8.4",
+          "twig": "^3.3",
+          "env": "test_cached_payum"
+        }
+      ]
     },
     "e2e-pgsql": {
       "php": ["8.2", "8.3"],
