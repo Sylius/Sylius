@@ -25,9 +25,7 @@ final class TaxonTest extends ApiTestCase
         $this->setUpTest();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_collection_with_shop_iris_as_a_visitor(): void
     {
         static::createClient()->request('GET', '/api/v2/shop/taxons');
@@ -55,9 +53,7 @@ final class TaxonTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_collection_with_admin_iris_as_a_logged_in_administrator(): void
     {
         static::createClient()->request(
