@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\ProductReview;
 
-use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;

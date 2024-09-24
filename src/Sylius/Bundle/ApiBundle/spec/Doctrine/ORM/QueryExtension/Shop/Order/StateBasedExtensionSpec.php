@@ -33,7 +33,7 @@ final class StateBasedExtensionSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             $sectionProvider,
-            ['sylius_api_shop_order_get', 'sylius_api_shop_order_payment_get_configuration']
+            ['sylius_api_shop_order_get', 'sylius_api_shop_order_payment_get_configuration'],
         );
     }
 

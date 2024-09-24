@@ -32,6 +32,7 @@ class WidgetComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
+
     /** @use ResourceLivePropTrait<OrderInterface> */
     use ResourceLivePropTrait;
 

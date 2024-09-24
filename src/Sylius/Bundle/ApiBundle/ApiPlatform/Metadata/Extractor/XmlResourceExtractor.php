@@ -42,7 +42,7 @@ final class XmlResourceExtractor extends AbstractResourceExtractor
     use ResourceExtractorTrait;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function extractPath(string $path): void
     {
@@ -159,6 +159,7 @@ final class XmlResourceExtractor extends AbstractResourceExtractor
         foreach ($resource->{$key}->format as $format) {
             if (isset($format['name'])) {
                 $data[(string) $format['name']] = (string) $format;
+
                 continue;
             }
 
@@ -264,6 +265,7 @@ final class XmlResourceExtractor extends AbstractResourceExtractor
             $parameterName = (string) $data['parameterName'];
             if (1 === (null === $data->attributes() ? 0 : \count($data->attributes()))) {
                 $uriVariables[$parameterName] = $parameterName;
+
                 continue;
             }
 
@@ -300,6 +302,7 @@ final class XmlResourceExtractor extends AbstractResourceExtractor
         foreach ($resource->cacheHeaders->cacheHeader as $cacheHeader) {
             if (isset($cacheHeader->values->value)) {
                 $data[(string) $cacheHeader['name']] = $this->buildValues($cacheHeader->values);
+
                 continue;
             }
 
