@@ -8,7 +8,7 @@ Feature: Clearing cart after logging out
         Given the store operates on a single channel in "United States"
         And the store has a product "Stark T-Shirt" priced at "$12.00"
 
-    @ui @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Clearing cart after logging out
         Given I am a logged in customer
         And I have product "Stark T-Shirt" in the cart

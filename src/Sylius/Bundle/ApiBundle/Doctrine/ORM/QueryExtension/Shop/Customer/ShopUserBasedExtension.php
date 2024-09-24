@@ -84,7 +84,7 @@ final readonly class ShopUserBasedExtension implements QueryCollectionExtensionI
                 sprintf('%s.user', $rootAlias),
                 $userJoinAlias,
                 Join::WITH,
-                $queryBuilder->expr()->eq(sprintf('%s.id', $userJoinAlias), sprintf(':%s', $userParameterName))
+                $queryBuilder->expr()->eq(sprintf('%s.id', $userJoinAlias), sprintf(':%s', $userParameterName)),
             )
             ->setParameter($userParameterName, $user)
         ;

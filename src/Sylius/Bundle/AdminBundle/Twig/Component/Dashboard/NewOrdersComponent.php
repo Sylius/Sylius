@@ -55,7 +55,7 @@ class NewOrdersComponent
         return $this->orderRepository->findLatestInChannel($this->limit, $this->getChannel());
     }
 
-    #[LiveListener('channelChanged')]
+    #[LiveListener(ChannelSelectorComponent::SYLIUS_ADMIN_CHANNEL_CHANGED)]
     public function changeChannel(#[LiveArg] string $channelCode): void
     {
         $this->channelCode = $channelCode;

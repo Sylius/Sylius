@@ -16,17 +16,18 @@ permissions:
 jobs:
     behat-no-js-unstable-dependencies:
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }} (Unstable Dependencies)"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }}, Mailer ${{ matrix.mailer }} (Unstable Dependencies)"
         timeout-minutes: 45
         continue-on-error: true
         strategy:
             fail-fast: false
             matrix:
-                php: [ "8.2" ]
-                symfony: [ "^6.4" ]
-                mysql: [ "8.0" ]
-                resource: ["^1.11@dev"]
-                grid: [ "^1.13@dev" ]
+                php: ["8.2"]
+                symfony: ["^6.4"]
+                mysql: ["8.0"]
+                resource: ["^1.12@alpha"]
+                grid: ["^1.13@alpha"]
+                mailer: ["^2.1@alpha"]
 
         env:
             APP_ENV: test_cached
@@ -73,16 +74,20 @@ jobs:
             -   name: Require SyliusResourceBundle version
                 run: |
                     composer require sylius/resource-bundle:${{ matrix.resource }} --no-update    
-                    
+
             -   name: Require SyliusGridBundle version
                 run: |
-                    composer require sylius/grid-bundle:${{ matrix.grid }} --no-update                    
+                    composer require sylius/grid-bundle:${{ matrix.grid }} --no-update  
+                    
+            -   name: Require SyliusMailerBundle version
+                run: |
+                    composer require sylius/mailer-bundle:${{ matrix.mailer }} --no-update                    
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
                     build_type: "sylius"
-                    cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     e2e: "yes"
                     database_version: ${{ matrix.mysql }}
@@ -108,7 +113,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}) [Unstable], MySQL ${{ matrix.mysql }})"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }}, Mailer ${{ matrix.mailer }})"
                     path: |
                         etc/build/
                         var/log

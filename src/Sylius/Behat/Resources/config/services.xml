@@ -22,7 +22,7 @@
     <parameters>
         <parameter key="sylius.behat.clock.date_file">%kernel.project_dir%/var/date.txt</parameter>
         <parameter key="sylius.behat.notification_accessor.admin.locator" type="string">[data-test-sylius-flash-message]</parameter>
-        <parameter key="sylius.behat.notification_accessor.shop.locator" type="string">.sylius-flash-message</parameter>
+        <parameter key="sylius.behat.notification_accessor.shop.locator" type="string">[data-test-sylius-flash-message]</parameter>
         <parameter key="sylius.behat.notification_checker.admin.class_map" type="collection">
             <parameter key="failure">alert-danger</parameter> <!-- Deprecated and will be removed in Sylius 2.0, use "error" instead -->
             <parameter key="error">alert-danger</parameter>
@@ -30,9 +30,10 @@
             <parameter key="success">alert-success</parameter>
         </parameter>
         <parameter key="sylius.behat.notification_checker.shop.class_map" type="collection">
-            <parameter key="failure">negative</parameter>
-            <parameter key="info">info</parameter>
-            <parameter key="success">positive</parameter>
+            <parameter key="failure">alert-danger</parameter> <!-- Deprecated and will be removed in Sylius 2.0, use "error" instead -->
+            <parameter key="error">alert-danger</parameter>
+            <parameter key="info">alert-info</parameter>
+            <parameter key="success">alert-success</parameter>
         </parameter>
     </parameters>
 
@@ -86,15 +87,6 @@
         <service id="sylius.behat.checker.image_existence" class="Sylius\Behat\Service\Checker\ImageExistenceChecker">
             <argument type="service" id="sylius.liip.filter_service" />
             <argument type="string">%sylius_core.public_dir%</argument>
-        </service>
-
-        <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
-            <argument type="service" id="sylius.behat.mocker" />
-            <argument type="service" id="sylius.behat.response_loader" />
-        </service>
-
-        <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" public="false">
-            <argument type="service" id="service_container" />
         </service>
 
         <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />

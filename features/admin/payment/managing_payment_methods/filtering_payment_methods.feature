@@ -6,7 +6,7 @@ Feature: Filtering payment methods
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a payment method "PayPal Express Checkout" with a code "paypal_xyz" and "Paypal Express Checkout" gateway
+        And the store has a payment method "Bank transfer" with a code "bank_xyz"
         And the store has a payment method "Offline" with a code "offline_abc"
         And this payment method is disabled
         And the store has a payment method "Cash on Delivery" with a code "cash_on_delivery_xyz"
@@ -15,9 +15,9 @@ Feature: Filtering payment methods
 
     @api @ui
     Scenario: Filtering payment methods by name
-        When I search by "PayPal" name
+        When I search by "Bank" name
         Then I should see a single payment method in the list
-        And I should see the payment method "PayPal Express Checkout"
+        And I should see the payment method "Bank transfer"
 
     @api @ui
     Scenario: Filtering payment methods by code

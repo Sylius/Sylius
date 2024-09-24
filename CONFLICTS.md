@@ -17,8 +17,3 @@ references related issues.
 
     - https://github.com/stof/StofDoctrineExtensionsBundle/issues/455
     - https://github.com/doctrine-extensions/DoctrineExtensions/issues/2600
-
-- `twig/twig:3.9.0`:
-
-  This version has a bug, which lead to a fatal error:
-  `An exception has been thrown during the rendering of a template ("Warning: Undefined variable $blocks").`

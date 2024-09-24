@@ -43,9 +43,6 @@
     "coduo/php-to-string": {
         "version": "3.0.0"
     },
-    "composer/semver": {
-        "version": "1.5.1"
-    },
     "dealerdirect/phpcodesniffer-composer-installer": {
         "version": "v0.7.0"
     },
@@ -550,12 +547,6 @@
     "sylius-labs/polyfill-symfony-event-dispatcher": {
         "version": "v1.0.0"
     },
-    "sylius-labs/polyfill-symfony-framework-bundle": {
-        "version": "v1.0.0"
-    },
-    "sylius-labs/polyfill-symfony-security": {
-        "version": "v1.0.0"
-    },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
     },
@@ -1003,15 +994,12 @@
     "webmozart/assert": {
         "version": "1.9.1"
     },
-    "willdurand/hateoas": {
-        "version": "2.12.0"
-    },
     "willdurand/hateoas-bundle": {
-        "version": "1.4",
+        "version": "2.6",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.4",
+            "branch": "main",
+            "version": "2.0",
             "ref": "34df072c6edaa61ae19afb2f3a239f272fecab87"
         }
     },

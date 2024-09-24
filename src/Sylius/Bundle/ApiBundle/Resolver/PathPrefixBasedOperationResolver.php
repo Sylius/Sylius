@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Resolver;
 
-use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\NotExposed;
 use ApiPlatform\Metadata\Operation;
@@ -42,15 +41,14 @@ final readonly class PathPrefixBasedOperationResolver implements OperationResolv
         $resourceMetadataCollection = $this->resourceMetadataCollectionFactory->create($resourceClass);
         foreach ($resourceMetadataCollection as $resourceMetadata) {
             foreach ($resourceMetadata->getOperations() as $operationName => $resourceOperation) {
-                if ($resourceOperation instanceof CollectionOperationInterface) {
-                    continue;
-                }
-
                 if ((!$resourceOperation instanceof Get) && (!$resourceOperation instanceof NotExposed)) {
                     continue;
                 }
 
-                if (str_starts_with($operationName, '_api_/' . $pathPrefix)) {
+                if (
+                    str_starts_with($operationName, '_api_/' . $pathPrefix) ||
+                    str_starts_with($operationName, 'sylius_api_' . $pathPrefix)
+                ) {
                     return $resourceOperation;
                 }
             }

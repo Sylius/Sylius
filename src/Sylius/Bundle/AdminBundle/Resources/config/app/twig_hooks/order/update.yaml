@@ -4,7 +4,7 @@ twig_hooks:
             form:
                 component: 'sylius_admin:order:form'
                 props:
-                    order: '@=_context.resource'
+                    resource: '@=_context.resource'
                     form: '@=_context.form'
                 configuration:
                     method: 'PUT'

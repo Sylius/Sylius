@@ -1,0 +1,27 @@
+{% extends '@SyliusShop/account/layout.html.twig' %}
+{% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+
+{% set prefixes = [
+    'sylius_shop.account.order',
+    'sylius_shop.shared.order'
+] %}
+
+{% block title %}{{ 'sylius.ui.order'|trans }} #{{ order.number }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ breadcrumbs([
+        { label: 'sylius.ui.home'|trans, path: path('sylius_shop_homepage')},
+        { label: 'sylius.ui.my_account'|trans, path: path('sylius_shop_account_dashboard')},
+        { label: 'sylius.ui.order_history'|trans, path: path('sylius_shop_account_order_index')},
+        { label: '<span '~sylius_test_html_attribute('order-number')~'>#'~order.number~'</span>', active: true }
+    ]) }}
+{% endblock %}
+
+{% block account_header %}
+    {% set title = 'sylius.ui.order'|trans ~ ' #' ~ order.number %}
+    {{ parent() }}
+{% endblock %}
+
+{% block account_content %}
+    {% hook 'show' with { order, _prefixes: prefixes } %}
+{% endblock %}

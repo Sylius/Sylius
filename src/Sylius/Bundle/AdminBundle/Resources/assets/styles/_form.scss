@@ -42,3 +42,11 @@ textarea.form-control {
 .form-select:disabled {
     color: var(--tblr-gray-500);
 }
+
+.input-group {
+    box-shadow: none;
+
+    .form-check {
+        flex-grow: 1;
+    }
+}

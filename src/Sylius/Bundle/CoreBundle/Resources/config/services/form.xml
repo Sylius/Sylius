@@ -77,6 +77,7 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Extension\CartItemTypeExtension">
+            <argument>%sylius.order_item_quantity_modifier.limit%</argument>
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartItemType" priority="100" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionTypeExtension">

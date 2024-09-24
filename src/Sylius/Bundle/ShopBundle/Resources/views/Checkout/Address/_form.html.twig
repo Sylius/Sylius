@@ -1,7 +1,0 @@
-{% set channel = order.channel %}
-
-{% if channel.shippingAddressInCheckoutRequired %}
-    {% include '@SyliusShop/Checkout/Address/_shippingAddressRequired.html.twig' %}
-{% else %}
-    {% include '@SyliusShop/Checkout/Address/_billingAddressRequired.html.twig' %}
-{% endif %}

@@ -1,0 +1,19 @@
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% set order = hookable_metadata.context.order %}
+{% set form = hookable_metadata.context.form %}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+{% if order.paymentState == constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_AWAITING_PAYMENT') %}
+    {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'novalidate': 'novalidate'}}) }}
+    <input type="hidden" name="_method" value="PUT" />
+    {{ form_errors(form) }}
+
+    {% hook 'form' %}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% else %}
+    {{ messages.info('sylius.ui.you_can_no_longer_change_payment_method_of_this_order') }}
+{% endif %}

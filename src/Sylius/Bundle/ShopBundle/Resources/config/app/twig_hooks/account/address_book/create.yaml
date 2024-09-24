@@ -1,0 +1,20 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.account.address_book.create':
+            form:
+                component: 'sylius_shop:account:address:form'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.address'
+
+        'sylius_shop.account.address_book.create.form':
+            fields:
+                template: '@SyliusShop/shared/account/address_book/form/fields.html.twig'
+            buttons:
+                template: '@SyliusShop/shared/account/address_book/form/buttons.html.twig'
+
+        'sylius_shop.account.address_book.create.form.buttons':
+            add:
+                template: '@SyliusShop/account/address_book/form/create/buttons/add.html.twig'
+            cancel:
+                template: '@SyliusShop/shared/account/address_book/form/buttons/cancel.html.twig'

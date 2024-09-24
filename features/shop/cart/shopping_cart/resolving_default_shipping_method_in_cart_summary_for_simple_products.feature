@@ -22,14 +22,14 @@ Feature: Viewing a cart summary with correct default shipping method based on va
         And the store has a product "T-Shirt banana" priced at "$9.99"
         And this product belongs to "Free" shipping category
 
-    @ui @api
-    Scenario:
+    @api @ui @javascript
+    Scenario: Viewing a cart summary with correct default shipping method based on product shipping category
         Given I added product "Star Trek Table Linen" to the cart
         When I see the summary of my cart
         Then my cart shipping total should be "$5.00"
 
-    @ui @api
-    Scenario:
+    @api @ui @javascript
+    Scenario: Viewing a cart summary with correct default shipping method based on product shipping category
         Given I have product "T-Shirt banana" in the cart
         When I see the summary of my cart
         Then my cart shipping total should be "$0.00"

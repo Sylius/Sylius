@@ -1,7 +1,3 @@
-sylius_admin_partial:
-    resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
-    prefix: /_partial
-
 sylius_admin_ajax:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax.yml"
     prefix: /ajax

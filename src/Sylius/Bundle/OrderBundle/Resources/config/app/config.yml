@@ -4,6 +4,7 @@
 parameters:
     sylius_order.resend_order_confirmation_email.order_states:
         - !php/const Sylius\Component\Order\Model\OrderInterface::STATE_NEW
+        - !php/const Sylius\Component\Order\Model\OrderInterface::STATE_FULFILLED
 
 jms_serializer:
     metadata:

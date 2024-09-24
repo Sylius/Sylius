@@ -387,7 +387,7 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @When I browse my orders
+     * @When I (try to) browse my orders
      */
     public function iBrowseMyOrders(): void
     {

@@ -3821,16 +3821,6 @@ parameters:
 			path: src/Sylius/Bundle/PaymentBundle/SyliusPaymentBundle.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Action\\\\Paypal\\\\ExpressCheckout\\\\ConvertPaymentAction\\:\\:prepareAddressData\\(\\) has parameter \\$details with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Action/Paypal/ExpressCheckout/ConvertPaymentAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Action\\\\Paypal\\\\ExpressCheckout\\\\ConvertPaymentAction\\:\\:prepareAddressData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Action/Paypal/ExpressCheckout/ConvertPaymentAction.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Controller\\\\PayumController\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Order\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php

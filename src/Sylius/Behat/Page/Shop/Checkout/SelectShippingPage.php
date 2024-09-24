@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
@@ -39,11 +38,11 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function getShippingMethods(): array
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-method-label]');
+        $inputs = $this->getDocument()->findAll('css', '[data-test-shipping-method-select]');
 
         $shippingMethods = [];
         foreach ($inputs as $input) {
-            $shippingMethods[] = trim($input->getText());
+            $shippingMethods[] = trim($input->getParent()->getText());
         }
 
         return $shippingMethods;
@@ -51,16 +50,10 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function getSelectedShippingMethodName(): ?string
     {
-        $shippingMethods = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-item]');
-
-        /** @var NodeElement $shippingMethod */
-        foreach ($shippingMethods as $shippingMethod) {
-            if (null !== $shippingMethod->find('css', 'input:checked')) {
-                return $shippingMethod->find('css', '[data-test-shipping-method-label]')->getText();
-            }
-        }
-
-        return null;
+        return $this->hasElement('shipping_method_option_selected')
+            ? $this->getElement('shipping_method_option_selected')->getParent()->getText()
+            : null
+        ;
     }
 
     public function hasNoShippingMethodsMessage(): bool
@@ -137,14 +130,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function hasShippingMethod(string $shippingMethodName): bool
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-method-label]');
-
-        $shippingMethods = [];
-        foreach ($inputs as $input) {
-            $shippingMethods[] = trim($input->getText());
-        }
-
-        return in_array($shippingMethodName, $shippingMethods);
+        return $this->hasElement('shipping_method_item', ['%shipping_method%' => $shippingMethodName]);
     }
 
     protected function getDefinedElements(): array
@@ -156,10 +142,11 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'order_cannot_be_shipped_message' => '[data-test-order-cannot-be-shipped]',
             'purchaser_email' => '[data-test-purchaser-name-or-email]',
             'shipment' => '[data-test-shipments]',
-            'shipping_method' => '[data-test-shipping-method-select]',
+            'shipping_method_item' => '[data-test-shipping-item]:contains("%shipping_method%")',
             'shipping_method_fee' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-fee]',
             'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-checkbox]',
             'shipping_method_option' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-select]',
+            'shipping_method_option_selected' => '[data-test-shipping-method-select][checked="checked"]',
             'warning_no_shipping_methods' => '[data-test-order-cannot-be-shipped]',
         ]);
     }

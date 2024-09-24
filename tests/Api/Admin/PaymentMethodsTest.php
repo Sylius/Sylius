@@ -89,8 +89,8 @@ final class PaymentMethodsTest extends JsonApiTestCase
                 ],
             ],
             'gatewayConfig' => [
-                'factoryName' => 'paypal_express_checkout',
-                'gatewayName' => 'paypal_express_checkout',
+                'factoryName' => 'offline',
+                'gatewayName' => 'Offline',
                 'config' => [
                     'username' => 'test',
                     'password' => 'test',
@@ -139,7 +139,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $fixtures['paypal_payment_method'];
+        $paymentMethod = $fixtures['payment_method_bank_transfer'];
 
         $this->client->request(
             method: 'PUT',
@@ -154,19 +154,13 @@ final class PaymentMethodsTest extends JsonApiTestCase
                         'instructions' => 'Different instructions',
                     ],
                 ],
-                'position' => 1,
+                'position' => 0,
                 'enabled' => false,
                 'channels' => [
                     sprintf('/api/v2/admin/channels/%s', $fixtures['channel_mobile']->getCode()),
                 ],
                 'gatewayConfig' => [
                     '@id' => sprintf('/api/v2/admin/gateway-configs/%s', $paymentMethod->getGatewayConfig()->getId()),
-                    'config' => [
-                        'username' => 'differentTest',
-                        'password' => 'differentTest',
-                        'signature' => 'differentTest',
-                        'sandbox' => false,
-                    ],
                 ],
             ]),
         );
@@ -190,7 +184,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $fixtures['paypal_payment_method'];
+        $paymentMethod = $fixtures['payment_method_bank_transfer'];
 
         $this->client->request(
             method: 'PUT',

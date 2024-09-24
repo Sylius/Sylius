@@ -1,6 +1,0 @@
-{% for association in product.associations %}
-    {{ render(url('sylius_shop_partial_product_association_show', {'productId': product.id, 'id': association.id, 'template': '@SyliusShop/Product/Show/_association.html.twig'})) }}
-{% else %}
-    <h4 class="ui horizontal section divider header">{{ 'sylius.ui.latest_products'|trans }}</h4>
-    {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_horizontalList.html.twig'})) }}
-{% endfor %}

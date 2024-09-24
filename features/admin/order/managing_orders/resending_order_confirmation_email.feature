@@ -32,6 +32,14 @@ Feature: Resending an order confirmation email for a chosen order
         And an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com" in "Polish (Poland)" locale
 
     @api @ui @email
+    Scenario: Resending a confirmation email for an order after it has been fulfilled
+        When I view the summary of the order "#00000666"
+        And I ship this order
+        And I resend the order confirmation email
+        Then I should be notified that the order confirmation email has been successfully resent to the customer
+        And an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com"
+
+    @api @ui @email
     Scenario: Not being able to resend a confirmation email for an order with wrong state
         When I view the summary of the order "#00000666"
         And I cancel this order

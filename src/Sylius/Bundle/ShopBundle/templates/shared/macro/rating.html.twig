@@ -1,0 +1,12 @@
+{% macro show(rating = 3) %}
+    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
+
+    <div class="sylius-rating hoverless">
+        {% for i in 1..5 %}
+            <label>
+                <input type="radio" {% if loop.index == rating %}checked{% endif %} disabled>
+                {{ icon('star') }}
+            </label>
+        {% endfor %}
+    </div>
+{% endmacro %}
