@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\PromotionCoupon;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved;
-use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 final class RemoveProcessorSpec extends ObjectBehavior
 {
@@ -36,30 +36,30 @@ final class RemoveProcessorSpec extends ObjectBehavior
     public function it_processes_remove_operation(
         ProcessorInterface $removeProcessor,
         Operation $operation,
-        PromotionInterface $promotion,
+        PromotionCouponInterface $promotionCoupon,
     ) {
         $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($promotion, $operation, [], [])->willReturn(null);
+        $removeProcessor->process($promotionCoupon, $operation, [], [])->willReturn(null);
 
-        $this->process($promotion, $operation, [], [])->shouldReturn(null);
+        $this->process($promotionCoupon, $operation, [], [])->shouldReturn(null);
     }
 
     public function it_throws_an_exception_when_foreign_key_constraint_violation_occurs(
         ProcessorInterface $removeProcessor,
         Operation $operation,
-        PromotionInterface $promotion,
+        PromotionCouponInterface $promotionCoupon,
     ) {
         $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($promotion, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
+        $removeProcessor->process($promotionCoupon, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
 
-        $this->shouldThrow(PromotionCannotBeRemoved::class)->during('process', [$promotion, $operation, [], []]);
+        $this->shouldThrow(PromotionCouponCannotBeRemoved::class)->during('process', [$promotionCoupon, $operation, [], []]);
     }
 
     public function it_throws_exception_if_operation_is_not_delete(
         Operation $operation,
-        PromotionInterface $promotion,
+        PromotionCouponInterface $promotionCoupon,
     ) {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$promotion, $operation, [], []]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$promotionCoupon, $operation, [], []]);
     }
 
     public function it_throws_exception_if_data_is_not_promotion_interface(

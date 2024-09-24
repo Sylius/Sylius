@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\PromotionCoupon;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\PromotionCoupon;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Post;

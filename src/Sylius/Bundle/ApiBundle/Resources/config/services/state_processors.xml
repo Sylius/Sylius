@@ -73,7 +73,10 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius_api.state_processor.admin.promotion_coupon.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\PromotionCoupon\RemoveProcessor">
+        <service
+            id="sylius_api.state_processor.admin.promotion.promotion_coupon.remove"
+            class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\PromotionCoupon\RemoveProcessor"
+        >
             <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
             <tag name="api_platform.state_processor" />
         </service>
@@ -123,8 +126,8 @@
         </service>
 
         <service
-            id="sylius_api.state_processor.admin.promotion_coupon.persist"
-            class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\PromotionCoupon\PersistProcessor"
+            id="sylius_api.state_processor.admin.promotion.promotion_coupon.persist"
+            class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\PromotionCoupon\PersistProcessor"
         >
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius_api.resolver.uri_template_parent_resource_resolver"/>

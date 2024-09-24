@@ -72,7 +72,7 @@
                 name="sylius_api_admin_promotion_coupon_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons"
-                processor="sylius_api.state_processor.admin.promotion_coupon.persist"
+                processor="sylius_api.state_processor.admin.promotion.promotion_coupon.persist"
             >
                 <uriVariables>
                     <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
@@ -197,7 +197,7 @@
                 name="sylius_api_admin_promotion_coupon_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
-                processor="sylius_api.state_processor.admin.promotion_coupon.remove"
+                processor="sylius_api.state_processor.admin.promotion.promotion_coupon.remove"
             >
                 <uriVariables>
                     <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
