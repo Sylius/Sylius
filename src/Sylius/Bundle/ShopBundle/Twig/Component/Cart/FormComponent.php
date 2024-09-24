@@ -31,6 +31,7 @@ use Symfony\UX\LiveComponent\ComponentToolsTrait;
 class FormComponent
 {
     use ComponentToolsTrait;
+
     /** @use ResourceFormComponentTrait<OrderInterface> */
     use ResourceFormComponentTrait;
 

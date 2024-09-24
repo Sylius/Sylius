@@ -15,8 +15,6 @@ namespace Sylius\Bundle\UiBundle\Twig\Component;
 
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Model\ResourceInterface;
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 /** @template T of ResourceInterface */
 trait ResourceLivePropTrait
@@ -37,7 +35,8 @@ trait ResourceLivePropTrait
     /**
      * @param RepositoryInterface<T> $repository
      */
-    protected function initialize(RepositoryInterface $repository): void {
+    protected function initialize(RepositoryInterface $repository): void
+    {
         $this->repository = $repository;
     }
 }
