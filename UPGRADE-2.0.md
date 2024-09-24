@@ -79,29 +79,29 @@
 
 * The parameter order of `Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType::__construct` has been changed:
 
-```php
-    public function __construct(
-    +   private readonly AddressComparatorInterface $addressComparator,
-        string $dataClass,
-        array $validationGroups = []
-    -   private readonly AddressComparatorInterface $addressComparator = null,
-    )
-```
+    ```php
+        public function __construct(
+        +   private readonly AddressComparatorInterface $addressComparator,
+            string $dataClass,
+            array $validationGroups = []
+        -   private readonly AddressComparatorInterface $addressComparator = null,
+        )
+    ```
 
 * The `\Serializable` interface has been removed from the `Sylius\Component\User\Model\UserInterface`.
 
 * The parameter order of the `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor::__construct` has been
   changed:
 
-```php
-    public function __construct(
-        private OrderPaymentProviderInterface $orderPaymentProvider,
-    -   private string $targetState = PaymentInterface::STATE_CART,
-        private OrderPaymentsRemoverInterface $orderPaymentsRemover,
-        private array $unprocessableOrderStates,
-    +   private string $targetState = PaymentInterface::STATE_CART,
-    )
-```
+    ```php
+        public function __construct(
+            private OrderPaymentProviderInterface $orderPaymentProvider,
+        -   private string $targetState = PaymentInterface::STATE_CART,
+            private OrderPaymentsRemoverInterface $orderPaymentsRemover,
+            private array $unprocessableOrderStates,
+        +   private string $targetState = PaymentInterface::STATE_CART,
+        )
+    ```
 
 * The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
 
@@ -185,6 +185,13 @@
   your `config/packages/_sylius.yaml` file.
   This is handled by `Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroup` and it resolves the groups
   based on the type of the passed zone.
+
+* The following constructor parameter has been changed across the codebase:
+
+    ```php
+    -   private StateMachineInterface $stateMachineFactory,
+    +   private StateMachineInterface $stateMachine,
+    ```    
 
   ```yaml
   sylius_addressing:
