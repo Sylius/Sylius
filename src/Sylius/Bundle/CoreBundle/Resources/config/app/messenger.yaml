@@ -51,3 +51,7 @@ framework:
                     - validation
             sylius.event_bus:
                 default_middleware: allow_no_handlers
+            sylius.payment_request.command_bus:
+                middleware:
+                    - 'validation'
+                    - 'doctrine_transaction'
