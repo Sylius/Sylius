@@ -31,7 +31,6 @@ framework:
                 failure_transport: 'payment_request_failed'
             payment_request_failed:
                 dsn: '%sylius_messenger_transport_payment_request_failed_dsn%'
-        reset_on_message: true
         routing:
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants': main
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\DisableCatalogPromotion': main

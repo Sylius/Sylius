@@ -29,7 +29,7 @@ final class CheckoutResolver implements EventSubscriberInterface
         private CartContextInterface $cartContext,
         private CheckoutStateUrlGeneratorInterface $urlGenerator,
         private RequestMatcherInterface $requestMatcher,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
     ) {
     }
 
@@ -73,7 +73,7 @@ final class CheckoutResolver implements EventSubscriberInterface
             return;
         }
 
-        if ($this->stateMachineFactory->can($order, $graph, $transition)) {
+        if ($this->stateMachine->can($order, $graph, $transition)) {
             return;
         }
 

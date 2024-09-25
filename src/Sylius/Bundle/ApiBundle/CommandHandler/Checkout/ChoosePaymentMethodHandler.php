@@ -23,16 +23,17 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class ChoosePaymentMethodHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class ChoosePaymentMethodHandler
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRepositoryInterface $paymentRepository,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private PaymentMethodChangerInterface $paymentMethodChanger,
     ) {
     }
@@ -64,12 +65,12 @@ final readonly class ChoosePaymentMethodHandler implements MessageHandlerInterfa
 
         if ($cart->getState() === OrderInterface::STATE_CART) {
             Assert::true(
-                $this->stateMachineFactory->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
+                $this->stateMachine->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
                 'Order cannot have payment method assigned.',
             );
 
             $payment->setMethod($paymentMethod);
-            $this->stateMachineFactory->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+            $this->stateMachine->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
 
             return $cart;
         }

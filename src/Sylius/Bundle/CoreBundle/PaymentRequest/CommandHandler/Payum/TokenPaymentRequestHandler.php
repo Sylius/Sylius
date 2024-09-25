@@ -21,9 +21,10 @@ use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInte
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
 use Sylius\Component\Payment\Exception\NonExistingPayumTokenException;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class TokenPaymentRequestHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class TokenPaymentRequestHandler
 {
     public function __construct(
         private PaymentRequestProviderInterface $paymentRequestProvider,

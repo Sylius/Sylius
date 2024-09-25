@@ -14,20 +14,17 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetterInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class ResetPasswordHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(UserPasswordResetterInterface $userPasswordResetter): void
     {
         $this->beConstructedWith($userPasswordResetter);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
     }
 
     function it_delegates_password_resetting(UserPasswordResetterInterface $userPasswordResetter): void

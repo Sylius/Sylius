@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -29,6 +30,8 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheck
 
 final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,

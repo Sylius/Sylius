@@ -29,7 +29,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
     public function __construct(
         private DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         private PaymentFactoryInterface $paymentFactory,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
     ) {
     }
 
@@ -87,9 +87,9 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
             return;
         }
 
-        $targetTransition = $this->stateMachineFactory->getTransitionToState($payment, PaymentTransitions::GRAPH, $targetState);
+        $targetTransition = $this->stateMachine->getTransitionToState($payment, PaymentTransitions::GRAPH, $targetState);
         if (null !== $targetTransition) {
-            $this->stateMachineFactory->apply($payment, PaymentTransitions::GRAPH, $targetTransition);
+            $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, $targetTransition);
         }
     }
 }

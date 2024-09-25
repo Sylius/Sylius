@@ -23,7 +23,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingProductImagesContext implements Context
@@ -103,9 +102,8 @@ final readonly class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createPut(
             sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
-            Request::METHOD_PUT,
         );
         $builder->withContent(['type' => $type]);
         $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
@@ -125,9 +123,8 @@ final readonly class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createPut(
             sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
-            Request::METHOD_PUT,
         );
         $builder->withContent(['productVariants' => [$this->iriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
         $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
@@ -238,9 +235,8 @@ final readonly class ManagingProductImagesContext implements Context
         ?string $type = null,
         array $variants = [],
     ): void {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createPost(
             sprintf('/api/v2/admin/products/%s/images', $product->getCode()),
-            Request::METHOD_POST,
         );
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
@@ -264,9 +260,8 @@ final readonly class ManagingProductImagesContext implements Context
 
     private function removeProductImage(string $productCode, string $productImageId): void
     {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createDelete(
             sprintf('/api/v2/admin/products/%s/images/%s', $productCode, $productImageId),
-            Request::METHOD_DELETE,
         );
         $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
         $builder->withHeader('CONTENT_TYPE', 'application/ld+json');

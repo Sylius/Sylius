@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
@@ -26,6 +27,8 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class UpdateCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderRepositoryInterface $orderRepository,
         OrderAddressModifierInterface $orderAddressModifier,

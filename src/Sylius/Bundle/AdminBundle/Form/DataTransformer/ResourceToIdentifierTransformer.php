@@ -39,7 +39,7 @@ final readonly class ResourceToIdentifierTransformer implements DataTransformerI
      *
      * @param object|null $value
      */
-    public function transform($value)
+    public function transform(mixed $value): mixed
     {
         if (null === $value) {
             return null;

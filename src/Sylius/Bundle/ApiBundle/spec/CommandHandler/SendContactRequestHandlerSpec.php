@@ -22,6 +22,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class SendContactRequestHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         ChannelRepositoryInterface $channelRepository,
         ContactEmailManagerInterface $contactEmailManager,

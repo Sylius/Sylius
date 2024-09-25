@@ -36,30 +36,30 @@ final class RemoveProcessorSpec extends ObjectBehavior
     public function it_processes_remove_operation(
         ProcessorInterface $removeProcessor,
         Operation $operation,
-        PromotionInterface $Promotion,
+        PromotionInterface $promotion,
     ) {
         $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($Promotion, $operation, [], [])->willReturn(null);
+        $removeProcessor->process($promotion, $operation, [], [])->willReturn(null);
 
-        $this->process($Promotion, $operation, [], [])->shouldReturn(null);
+        $this->process($promotion, $operation, [], [])->shouldReturn(null);
     }
 
     public function it_throws_an_exception_when_foreign_key_constraint_violation_occurs(
         ProcessorInterface $removeProcessor,
         Operation $operation,
-        PromotionInterface $Promotion,
+        PromotionInterface $promotion,
     ) {
         $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($Promotion, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
+        $removeProcessor->process($promotion, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
 
-        $this->shouldThrow(PromotionCannotBeRemoved::class)->during('process', [$Promotion, $operation, [], []]);
+        $this->shouldThrow(PromotionCannotBeRemoved::class)->during('process', [$promotion, $operation, [], []]);
     }
 
     public function it_throws_exception_if_operation_is_not_delete(
         Operation $operation,
-        PromotionInterface $Promotion,
+        PromotionInterface $promotion,
     ) {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$Promotion, $operation, [], []]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$promotion, $operation, [], []]);
     }
 
     public function it_throws_exception_if_data_is_not_promotion_interface(

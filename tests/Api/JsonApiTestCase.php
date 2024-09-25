@@ -253,9 +253,9 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /** @throws \Exception */
-    protected function assertResponseNotFound(): void
+    protected function assertResponseNotFound(string $message = 'Not Found'): void
     {
-        $this->assertResponseErrorMessage('Not Found', Response::HTTP_NOT_FOUND);
+        $this->assertResponseErrorMessage($message, Response::HTTP_NOT_FOUND);
     }
 
     /** @throws \Exception */

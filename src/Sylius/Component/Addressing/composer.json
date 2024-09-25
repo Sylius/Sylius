@@ -28,8 +28,8 @@
     "require": {
         "php": "^8.2",
         "sylius/registry": "^1.6",
-        "sylius/resource": "^1.11",
-        "symfony/intl": "^6.4.0"
+        "sylius/resource": "^1.11 || ^1.12@alpha",
+        "symfony/intl": "^6.4.0 || ^7.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -42,6 +42,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {

@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\ApiPlatformClient;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -65,8 +64,7 @@ final class CustomerContext implements Context
         /** @var CustomerInterface $customer */
         $customer = $shopUser->getCustomer();
 
-        Assert::isInstanceOf($this->client, ApiPlatformClient::class);
-        $this->client->buildCustomUpdateRequest(Resources::CUSTOMERS, (string) $customer->getId(), 'password');
+        $this->client->buildUpdateRequest(sprintf('customers/%s/password', $customer->getId()));
     }
 
     /**

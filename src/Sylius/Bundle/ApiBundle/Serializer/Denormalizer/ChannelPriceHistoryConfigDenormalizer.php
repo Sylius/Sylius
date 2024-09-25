@@ -46,7 +46,7 @@ final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterfa
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
@@ -63,5 +63,10 @@ final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterfa
         }
 
         return $channelPriceHistoryConfig;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ChannelPriceHistoryConfigInterface::class => false];
     }
 }

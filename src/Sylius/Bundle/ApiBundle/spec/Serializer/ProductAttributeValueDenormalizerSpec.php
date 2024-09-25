@@ -76,6 +76,7 @@ final class ProductAttributeValueDenormalizerSpec extends ObjectBehavior
         IriConverterInterface $iriConverter,
         DenormalizerInterface $denormalizer,
         ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $productAttributeValue,
     ): void {
         $iriConverter->getResourceFromIri('/attributes/material')->willReturn($attribute);
 
@@ -90,6 +91,7 @@ final class ProductAttributeValueDenormalizerSpec extends ObjectBehavior
                 null,
                 [self::ALREADY_CALLED => true],
             )
+            ->willReturn($productAttributeValue)
             ->shouldBeCalled()
         ;
 

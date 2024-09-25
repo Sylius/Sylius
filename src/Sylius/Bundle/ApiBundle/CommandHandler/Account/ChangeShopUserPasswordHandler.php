@@ -17,10 +17,11 @@ use Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final readonly class ChangeShopUserPasswordHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class ChangeShopUserPasswordHandler
 {
     public function __construct(
         private PasswordUpdaterInterface $passwordUpdater,

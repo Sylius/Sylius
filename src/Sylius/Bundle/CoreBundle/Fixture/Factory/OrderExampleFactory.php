@@ -69,7 +69,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         protected PaymentMethodRepositoryInterface $paymentMethodRepository,
         protected ShippingMethodRepositoryInterface $shippingMethodRepository,
         protected FactoryInterface $addressFactory,
-        protected StateMachineInterface $stateMachineFactory,
+        protected StateMachineInterface $stateMachine,
         protected OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         protected OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
     ) {
@@ -267,7 +267,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     protected function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
-        $this->stateMachineFactory->apply($order, OrderCheckoutTransitions::GRAPH, $transition);
+        $this->stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, $transition);
     }
 
     protected function generateInvalidSkipMessage(string $type, string $channelCode): string
@@ -298,8 +298,8 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected function completePayments(OrderInterface $order): void
     {
         foreach ($order->getPayments() as $payment) {
-            if ($this->stateMachineFactory->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)) {
-                $this->stateMachineFactory->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
+            if ($this->stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)) {
+                $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
             }
         }
     }
@@ -307,8 +307,8 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected function completeShipments(OrderInterface $order): void
     {
         foreach ($order->getShipments() as $shipment) {
-            if ($this->stateMachineFactory->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP)) {
-                $this->stateMachineFactory->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP);
+            if ($this->stateMachine->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP)) {
+                $this->stateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP);
             }
         }
     }

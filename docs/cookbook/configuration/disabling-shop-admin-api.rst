@@ -82,9 +82,6 @@ The part that has to be removed from this file is shown below:
     #            anonymous: true
 
     access_control:
-    #    - { path: "%sylius.security.shop_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-    #    - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
-
     #    - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     #    - { path: "%sylius.security.shop_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -165,9 +162,6 @@ The part that has to be removed from this file is shown below:
 
     access_control:
     # Delete or leave this part commented
-    #    - { path: "%sylius.security.admin_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-    #    - { path: "%sylius.security.admin_regex%/_partial", role: ROLE_NO_ACCESS }
-
     #    - { path: "%sylius.security.admin_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     #    - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }

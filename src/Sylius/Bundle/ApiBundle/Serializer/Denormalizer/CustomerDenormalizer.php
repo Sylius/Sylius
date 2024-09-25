@@ -38,7 +38,7 @@ final class CustomerDenormalizer implements DenormalizerInterface, DenormalizerA
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
@@ -49,5 +49,10 @@ final class CustomerDenormalizer implements DenormalizerInterface, DenormalizerA
         }
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [CustomerInterface::class => false];
     }
 }

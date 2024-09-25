@@ -17,10 +17,11 @@ use Sylius\Bundle\CoreBundle\Command\Admin\Account\SendResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final class SendResetPasswordEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class SendResetPasswordEmailHandler
 {
     /**
      * @param UserRepositoryInterface<AdminUserInterface> $userRepository

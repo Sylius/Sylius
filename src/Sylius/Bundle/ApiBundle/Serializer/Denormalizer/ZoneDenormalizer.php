@@ -30,7 +30,7 @@ final readonly class ZoneDenormalizer implements DenormalizerInterface
     ) {
     }
 
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         Assert::keyNotExists($context, self::ALREADY_CALLED);
         Assert::isInstanceOf($this->sectionProvider->getSection(), AdminApiSection::class);
@@ -65,6 +65,6 @@ final readonly class ZoneDenormalizer implements DenormalizerInterface
 
     public function getSupportedTypes(?string $format): array
     {
-        return [ZoneInterface::class => true];
+        return [ZoneInterface::class => false];
     }
 }

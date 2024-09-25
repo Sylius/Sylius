@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderStateResolver implements StateResolverInterface
 {
-    public function __construct(private StateMachineInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachine)
     {
     }
 
@@ -34,9 +34,9 @@ final class OrderStateResolver implements StateResolverInterface
 
         if (
             $this->canOrderBeFulfilled($order) &&
-            $this->stateMachineFactory->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_FULFILL)
+            $this->stateMachine->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_FULFILL)
         ) {
-            $this->stateMachineFactory->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_FULFILL);
+            $this->stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_FULFILL);
         }
     }
 

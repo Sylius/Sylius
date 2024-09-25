@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\HttpFoundation\RequestMatcher;
+use Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusShopExtension extends Extension
@@ -59,7 +59,7 @@ final class SyliusShopExtension extends Extension
             [
                 new Reference('sylius.context.cart'),
                 new Reference('sylius.router.checkout_state'),
-                new Definition(RequestMatcher::class, [$config['pattern']]),
+                new Definition(PathRequestMatcher::class, [$config['pattern']]),
                 new Reference('sylius_abstraction.state_machine'),
             ],
         );
@@ -83,7 +83,7 @@ final class SyliusShopExtension extends Extension
         $checkoutRedirectListener = new Definition(CheckoutRedirectListener::class, [
             new Reference('request_stack'),
             new Reference('sylius.router.checkout_state'),
-            new Definition(RequestMatcher::class, [$config['pattern']]),
+            new Definition(PathRequestMatcher::class, [$config['pattern']]),
         ]);
 
         $checkoutRedirectListener

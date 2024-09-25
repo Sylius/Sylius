@@ -20,6 +20,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
+use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -39,7 +40,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         AvatarImageRepositoryInterface $avatarImageRepository,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $files,
+        FileBag $files,
         AvatarImageInterface $avatarImage,
     ): void {
         $operation = new Post();
@@ -68,7 +69,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         AvatarImageRepositoryInterface $avatarImageRepository,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $files,
+        FileBag $files,
         AvatarImageInterface $oldAvatarImage,
         AvatarImageInterface $avatarImage,
     ): void {

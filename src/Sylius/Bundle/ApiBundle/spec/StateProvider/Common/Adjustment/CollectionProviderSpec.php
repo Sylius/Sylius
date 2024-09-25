@@ -21,6 +21,7 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CollectionProviderSpec extends ObjectBehavior
@@ -74,14 +75,12 @@ final class CollectionProviderSpec extends ObjectBehavior
     function it_returns_adjustments_recursively(
         RepositoryInterface $repository,
         Request $request,
-        Request $queryRequest,
         OrderItem $orderItem,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
     ): void {
         $operation = new GetCollection(class: AdjustmentInterface::class);
-        $request->query = $queryRequest;
-        $queryRequest->get('type')->willReturn('type');
+        $request->query = new InputBag(['type' => 'type']);
         $adjustments = new ArrayCollection([
             $firstAdjustment->getWrappedObject(),
             $secondAdjustment->getWrappedObject(),

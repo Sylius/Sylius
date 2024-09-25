@@ -994,15 +994,6 @@
     "webmozart/assert": {
         "version": "1.9.1"
     },
-    "willdurand/hateoas-bundle": {
-        "version": "2.6",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "2.0",
-            "ref": "34df072c6edaa61ae19afb2f3a239f272fecab87"
-        }
-    },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"
     },

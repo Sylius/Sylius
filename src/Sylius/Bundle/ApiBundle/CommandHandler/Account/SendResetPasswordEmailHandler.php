@@ -19,9 +19,10 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class SendResetPasswordEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class SendResetPasswordEmailHandler
 {
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository

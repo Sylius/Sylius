@@ -1,10 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/PromotionCoupon",
-    "@id": "\/api\/v2\/admin\/promotion-coupons",
+    "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/coupons",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ1",
+            "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/coupons\/XYZ1",
             "@type": "PromotionCoupon",
             "perCustomerUsageLimit": 1,
             "reusableFromCancelledOrders": true,
@@ -17,7 +17,7 @@
             "updatedAt": "@date@"
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ2",
+            "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/coupons\/XYZ2",
             "@type": "PromotionCoupon",
             "perCustomerUsageLimit": null,
             "reusableFromCancelledOrders": false,
@@ -33,7 +33,7 @@
     "hydra:totalItems": 2,
         "hydra:search": {
             "@type": "hydra:IriTemplate",
-            "hydra:template": "\/api\/v2\/admin\/promotion-coupons{?order[code],order[expiresAt],order[usageLimit],order[perCustomerUsageLimit],order[used],code,code[],promotion.code,promotion.code[]}",
+            "hydra:template": "\/api\/v2\/admin\/promotions/dollar_off/coupons{?order[code],order[expiresAt],order[usageLimit],order[perCustomerUsageLimit],order[used],code,code[],promotion.code,promotion.code[]}",
             "hydra:variableRepresentation": "BasicRepresentation",
             "hydra:mapping": [
                 {

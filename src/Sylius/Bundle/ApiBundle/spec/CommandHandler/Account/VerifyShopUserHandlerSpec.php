@@ -15,29 +15,26 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class VerifyShopUserHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         RepositoryInterface $shopUserRepository,
         ClockInterface $clock,
         MessageBusInterface $commandBus,
     ): void {
         $this->beConstructedWith($shopUserRepository, $clock, $commandBus);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
     }
 
     function it_verifies_shop_user(

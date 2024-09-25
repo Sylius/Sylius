@@ -79,29 +79,29 @@
 
 * The parameter order of `Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType::__construct` has been changed:
 
-```php
-    public function __construct(
-    +   private readonly AddressComparatorInterface $addressComparator,
-        string $dataClass,
-        array $validationGroups = []
-    -   private readonly AddressComparatorInterface $addressComparator = null,
-    )
-```
+    ```php
+        public function __construct(
+        +   private readonly AddressComparatorInterface $addressComparator,
+            string $dataClass,
+            array $validationGroups = []
+        -   private readonly AddressComparatorInterface $addressComparator = null,
+        )
+    ```
 
 * The `\Serializable` interface has been removed from the `Sylius\Component\User\Model\UserInterface`.
 
 * The parameter order of the `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor::__construct` has been
   changed:
 
-```php
-    public function __construct(
-        private OrderPaymentProviderInterface $orderPaymentProvider,
-    -   private string $targetState = PaymentInterface::STATE_CART,
-        private OrderPaymentsRemoverInterface $orderPaymentsRemover,
-        private array $unprocessableOrderStates,
-    +   private string $targetState = PaymentInterface::STATE_CART,
-    )
-```
+    ```php
+        public function __construct(
+            private OrderPaymentProviderInterface $orderPaymentProvider,
+        -   private string $targetState = PaymentInterface::STATE_CART,
+            private OrderPaymentsRemoverInterface $orderPaymentsRemover,
+            private array $unprocessableOrderStates,
+        +   private string $targetState = PaymentInterface::STATE_CART,
+        )
+    ```
 
 * The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
 
@@ -186,6 +186,13 @@
   This is handled by `Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroup` and it resolves the groups
   based on the type of the passed zone.
 
+* The following constructor parameter has been changed across the codebase:
+
+    ```php
+    -   private StateMachineInterface $stateMachineFactory,
+    +   private StateMachineInterface $stateMachine,
+    ```    
+
   ```yaml
   sylius_addressing:
     zone_member:
@@ -197,6 +204,83 @@
           - 'sylius'
           - 'sylius_zone_member_zone'
   ```
+
+* The following classes and interfaces have been removed:
+
+  Money:
+
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
+    * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
+
+### Constructors signature changes
+
+1. The following constructor signatures have been changed:
+
+   `Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension`
+    ```diff
+    use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+
+        public function __construct(
+    -       private ConvertMoneyHelperInterface|CurrencyConverterInterface $helper,
+    +       private CurrencyConverterInterface $currencyConverter,
+        )
+    ```
+
+   `Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension`
+    ```diff
+    use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
+
+        public function __construct(
+    -       private private FormatMoneyHelperInterface|MoneyFormatterInterface $helper,
+    +       private MoneyFormatterInterface $moneyFormatter,
+        )
+    ```
+
+## Password Encoder & Salt
+The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
+
+This "encoder" is configured via the [Symfony security password hasher](https://symfony.com/doc/current/security/passwords.html#configuring-a-password-hasher).
+
+You may have already something like that configuration bellow.
+
+```yaml
+# config/packages/security.yaml
+security:
+    # ...
+
+    password_hashers:
+        Sylius\Component\User\Model\UserInterface: argon2i
+```
+
+Check if you have an encoder configured in the `sylius_user` package configuration.
+
+```yaml
+sylius_user:
+    # ...
+    
+    encoder: plaintext # Remove this line
+
+    # ...
+    resources:
+        oauth:
+            user:
+                encoder: false # Remove this line
+                classes: Sylius\Component\User\Model\UserOAuth
+```
+
+Check your user hashed passwords in your production database.
+In modern Symfony projects, the hasher name is stored on the password.
+
+Example:
+`$argon2i$v=19$m=65536,t=4,p=1$VVJuMnpUUWhRY1daN1ppMA$2Tx6l3I+OUx+PUPn+vZz1jI3Z6l6IHh2kpG0NdpmYWE`
+
+If some of your users do not have the hasher name stored in the password field you may need to configure the "migrate_from" option into Symfony, following that documentation:
+https://symfony.com/doc/current/security/passwords.html#configure-a-new-hasher-using-migrate-from
+
+Note:
+If your app never changed the hasher name configuration, you don't need to configure this "migrate_from" configuration.
 
 ## Frontend
 

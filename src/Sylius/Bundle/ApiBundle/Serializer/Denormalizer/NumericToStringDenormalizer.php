@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use Sylius\Bundle\ApiBundle\Serializer\Exception\InvalidAmountTypeException;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class NumericToStringDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class NumericToStringDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
@@ -40,7 +40,7 @@ final class NumericToStringDenormalizer implements ContextAwareDenormalizerInter
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::getAlreadyCalledKey($type)] = true;
 
@@ -53,6 +53,11 @@ final class NumericToStringDenormalizer implements ContextAwareDenormalizerInter
         $data[$this->field] = (string) $data[$this->field];
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [$this->resourceClass => false];
     }
 
     private static function getAlreadyCalledKey(string $class): string

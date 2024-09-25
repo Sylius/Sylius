@@ -18,14 +18,15 @@ use Psr\Log\LoggerInterface;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private string $expirationPeriod,
         private LoggerInterface $logger,
         private ObjectManager $orderManager,
@@ -33,6 +34,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     ) {
     }
 
+    /** @throws \Exception */
     public function cancel(): void
     {
         while ([] !== $expiredUnpaidOrders = $this->findExpiredUnpaidOrders($this->batchSize)) {
@@ -45,6 +47,11 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         }
     }
 
+    /**
+     * @return array<OrderInterface>
+     *
+     * @throws \Exception
+     */
     private function findExpiredUnpaidOrders(int $batchSize): array
     {
         return $this->orderRepository->findOrdersUnpaidSince(
@@ -56,7 +63,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     private function cancelOrder(OrderInterface $expiredUnpaidOrder): void
     {
         try {
-            $this->stateMachineFactory->apply($expiredUnpaidOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL);
+            $this->stateMachine->apply($expiredUnpaidOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL);
         } catch (StateMachineExecutionException $e) {
             $this->logger->error(
                 sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),

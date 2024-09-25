@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class DoctrineCollectionValuesNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class DoctrineCollectionValuesNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
@@ -32,8 +32,13 @@ final class DoctrineCollectionValuesNormalizer implements ContextAwareNormalizer
         ;
     }
 
-    public function normalize(mixed $object, ?string $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         return $this->normalizer->normalize($object->getValues(), $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [Collection::class => true];
     }
 }

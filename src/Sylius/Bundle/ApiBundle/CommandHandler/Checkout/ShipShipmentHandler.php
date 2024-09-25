@@ -19,12 +19,13 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-final readonly class ShipShipmentHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class ShipShipmentHandler
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,

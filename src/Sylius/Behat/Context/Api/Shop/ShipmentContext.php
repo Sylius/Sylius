@@ -44,7 +44,7 @@ final readonly class ShipmentContext implements Context
         $shipment = $order->getShipments()->first();
 
         $this->client->requestGet(
-            sprintf('api/v2/shop/orders/%s/shipments/%s', $order->getTokenValue(), $shipment->getId()),
+            sprintf('orders/%s/shipments/%s', $order->getTokenValue(), $shipment->getId()),
         );
     }
 
@@ -58,7 +58,7 @@ final readonly class ShipmentContext implements Context
         $shipments = $this->responseChecker->getValue($response, 'shipments');
         $token = $this->responseChecker->getValue($response, 'tokenValue');
 
-        $response = $this->client->requestGet(sprintf('/api/v2/shop/orders/%s/shipments/%s', $token, $shipments[0]['id']));
+        $response = $this->client->requestGet(sprintf('orders/%s/shipments/%s', $token, $shipments[0]['id']));
 
         Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
     }

@@ -4,5 +4,9 @@ bin/
 composer.phar
 composer.lock
 
-test/var/cache
-test/var/logs
+test/app/cache
+test/app/db.sql
+test/app/logs
+test/var
+
+/.phpunit.result.cache

@@ -20,9 +20,6 @@ when@test_cached_payum:
         password_hashers:
             plaintext: plaintext
 
-sylius_user:
-    encoder: argon2i
-
 jms_serializer:
     metadata:
         directories:

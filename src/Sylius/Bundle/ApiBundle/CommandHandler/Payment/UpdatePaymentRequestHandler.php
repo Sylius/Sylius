@@ -17,10 +17,11 @@ use Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest;
 use Sylius\Component\Payment\Exception\PaymentRequestNotFoundException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /** @experimental */
-final class UpdatePaymentRequestHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class UpdatePaymentRequestHandler
 {
     /**
      * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository

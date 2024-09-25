@@ -22,6 +22,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductImage\PersistProcessor;
 use Sylius\Component\Core\Model\ProductImageInterface;
+use Symfony\Component\HttpFoundation\FileBag;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -54,8 +56,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         ValidatorInterface $validator,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $files,
-        ParameterBag $requestParams,
+        FileBag $files,
         ProductImageInterface $productImage,
         ConstraintViolationListInterface $constraintViolationList,
     ): void {
@@ -68,8 +69,10 @@ final class PersistProcessorSpec extends ObjectBehavior
         $files->get('file')->willReturn($file);
         $request->files = $files;
 
-        $requestParams->get('type')->willReturn('type');
-        $requestParams->all('productVariants')->willReturn(['/api/v2/admin/product-variants/MUG']);
+        $requestParams = new InputBag([
+            'type' => 'type',
+            'productVariants' => ['/api/v2/admin/product-variants/MUG'],
+        ]);
         $request->request = $requestParams;
 
         $productImageCreator
@@ -94,8 +97,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         ValidatorInterface $validator,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $files,
-        ParameterBag $requestParams,
+        FileBag $files,
         ProductImageInterface $productImage,
         ConstraintViolationListInterface $constraintViolationList,
         ConstraintViolationInterface $constraintViolation,
@@ -109,8 +111,10 @@ final class PersistProcessorSpec extends ObjectBehavior
         $files->get('file')->willReturn($file);
         $request->files = $files;
 
-        $requestParams->get('type')->willReturn('type');
-        $requestParams->all('productVariants')->willReturn(['/api/v2/admin/product-variants/MUG']);
+        $requestParams = new InputBag([
+            'type' => 'type',
+            'productVariants' => ['/api/v2/admin/product-variants/MUG'],
+        ]);
         $request->request = $requestParams;
 
         $productImageCreator

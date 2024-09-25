@@ -19,12 +19,13 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-final readonly class RequestShopUserVerificationHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class RequestShopUserVerificationHandler
 {
     /**
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
