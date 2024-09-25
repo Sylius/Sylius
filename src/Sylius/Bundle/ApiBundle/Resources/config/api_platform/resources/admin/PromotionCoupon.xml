@@ -19,7 +19,7 @@
     <resource class="%sylius.model.promotion_coupon.class%">
         <operations>
             <operation
-                name="sylius_api_admin_promotion_coupon_get_collection"
+                name="sylius_api_admin_promotion_promotion_coupon_get_collection"
                 class="ApiPlatform\Metadata\GetCollection"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons"
             >
@@ -48,7 +48,7 @@
             </operation>
 
             <operation
-                name="sylius_api_admin_promotion_coupon_get"
+                name="sylius_api_admin_promotion_promotion_coupon_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
             >
@@ -69,7 +69,7 @@
             </operation>
 
             <operation
-                name="sylius_api_admin_promotion_coupon_post"
+                name="sylius_api_admin_promotion_promotion_coupon_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons"
                 processor="sylius_api.state_processor.admin.promotion.promotion_coupon.persist"
@@ -108,7 +108,7 @@
             </operation>
 
             <operation
-                name="sylius_api_admin_promotion_coupon_post_generate"
+                name="sylius_api_admin_promotion_promotion_coupon_post_generate"
                 class="ApiPlatform\Metadata\Post"
                 messenger="input"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/generate"
@@ -155,7 +155,7 @@
             </operation>
 
             <operation
-                name="sylius_api_admin_promotion_coupon_put"
+                name="sylius_api_admin_promotion_promotion_coupon_put"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
             >
@@ -194,7 +194,7 @@
             </operation>
 
             <operation
-                name="sylius_api_admin_promotion_coupon_delete"
+                name="sylius_api_admin_promotion_promotion_coupon_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
                 processor="sylius_api.state_processor.admin.promotion.promotion_coupon.remove"
