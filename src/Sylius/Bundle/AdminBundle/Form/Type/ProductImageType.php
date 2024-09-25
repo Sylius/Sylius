@@ -19,7 +19,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductImageType extends AbstractType
@@ -46,10 +45,6 @@ final class ProductImageType extends AbstractType
                         ;
                     },
                     'autocomplete' => true,
-                ])
-                ->add('position', IntegerType::class, [
-                    'label' => 'sylius.ui.position',
-                    'required' => false,
                 ])
             ;
         }
