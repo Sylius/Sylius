@@ -10,7 +10,8 @@
             "owner": "\/api\/v2\/admin\/products\/MUG",
             "type": "thumbnail",
             "path": "@string@.contains('sylius_original').endsWith('thumbnail.jpg')",
-            "productVariants": ["\/api\/v2\/admin\/product-variants\/MUG_BLUE"]
+            "productVariants": ["\/api\/v2\/admin\/product-variants\/MUG_BLUE"],
+            "position": 0
         },
         {
             "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
@@ -19,7 +20,8 @@
             "owner": "\/api\/v2\/admin\/products\/MUG",
             "type": "main",
             "path": "@string@.contains('sylius_original').endsWith('main.jpg')",
-            "productVariants": ["\/api\/v2\/admin\/product-variants\/MUG_RED"]
+            "productVariants": ["\/api\/v2\/admin\/product-variants\/MUG_RED"],
+            "position": 1
         }
     ],
     "hydra:totalItems": 2,

@@ -31,7 +31,8 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
         $this->getCode($request)->shouldReturn('channel_code_form_get');
     }
 
-    function it_returns_fake_channel_code_from_cookie_if_there_is_none_in_query_string(): void {
+    function it_returns_fake_channel_code_from_cookie_if_there_is_none_in_query_string(): void
+    {
         $request = new Request(
             query: ['_channel_code' => null],
             cookies: ['_channel_code' => 'channel_code_form_cookie'],
@@ -40,7 +41,8 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
         $this->getCode($request)->shouldReturn('channel_code_form_cookie');
     }
 
-    function it_returns_null_channel_code_if_no_fake_channel_code_was_found(): void {
+    function it_returns_null_channel_code_if_no_fake_channel_code_was_found(): void
+    {
         $request = new Request(
             query: ['_channel_code' => null],
             cookies: ['_channel_code' => null],

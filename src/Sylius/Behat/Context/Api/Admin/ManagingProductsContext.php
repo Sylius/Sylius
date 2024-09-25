@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
@@ -32,6 +33,7 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -344,6 +346,39 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I want to modify the images of :product product
+     */
+    public function iWantToModifyTheImagesOfProduct(ProductInterface $product): void
+    {
+        $this->sharedStorage->set('productIri', $this->iriConverter->getIriFromResource($product));
+    }
+
+    /**
+     * @When I change the :type image position to :position
+     */
+    public function iChangeTheImagePositionTo(string $imageType, int $position): void
+    {
+        $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
+        $productCode = $this->responseChecker->getValue($this->client->getLastResponse(), 'code');
+
+        foreach ($images as $key => $imageData) {
+            if ($imageData['type'] === $imageType) {
+                $imageId = $imageData['id'];
+            }
+        }
+
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/products/%s/images/%s', $productCode, $imageId),
+            Request::METHOD_PUT,
+        );
+        $builder->withContent(['position' => $position]);
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
+    }
+
+    /**
      * @When I set its :attribute attribute to :value
      * @When I set its :attribute attribute to :value in :localeCode locale
      * @When I do not set its :attribute attribute in :localeCode locale
@@ -614,6 +649,28 @@ final readonly class ManagingProductsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('Please enter product %s.', $element),
         );
+    }
+
+    /**
+     * @Then the one before last image on the list should have type :type with position :position
+     */
+    public function theOneBeforeLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
+    {
+        $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
+
+        Assert::same($images[count($images) - 2]['type'], $imageType);
+        Assert::same($images[count($images) - 2]['position'], $position);
+    }
+
+    /**
+     * @Then the last image on the list should have type :type with position :position
+     */
+    public function theLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
+    {
+        $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
+
+        Assert::same($images[count($images) - 1]['type'], $imageType);
+        Assert::same($images[count($images) - 1]['position'], $position);
     }
 
     /**

@@ -18,6 +18,12 @@ twig_hooks:
         'sylius_admin.shipping_method.create.content.form#right':
             translations:
                 template: '@SyliusAdmin/shipping_method/form/translations.html.twig'
+                
+        'sylius_admin.shipping_method.create.content.form.translations':
+            name:
+                template: '@SyliusAdmin/shipping_method/form/translations/name.html.twig'
+            description:
+                template: '@SyliusAdmin/shipping_method/form/translations/description.html.twig'
 
         'sylius_admin.shipping_method.create.content.form.general':
             code:

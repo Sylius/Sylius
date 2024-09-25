@@ -26,6 +26,10 @@ twig_hooks:
                 template: '@SyliusAdmin/promotion/form/sections/translations.html.twig'
             rules_and_actions:
                 template: '@SyliusAdmin/promotion/form/sections/rules_and_actions.html.twig'
+                
+        'sylius_admin.promotion.update.content.form.sections.translations':
+            label:
+                template: '@SyliusAdmin/promotion/form/sections/translations/label.html.twig'
         
         'sylius_admin.promotion.update.content.form.sections.general':
             code:

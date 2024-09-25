@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Model;
 
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
-
 use Symfony\Component\Security\Core\Exception\AccountExpiredException;
 use Symfony\Component\Security\Core\Exception\CredentialsExpiredException;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\Exception\LockedException;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 /**
  * This interface has been removed from Symfony, but we still need some advanced account features.

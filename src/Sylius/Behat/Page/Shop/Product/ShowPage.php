@@ -230,18 +230,41 @@ class ShowPage extends ShopPage implements ShowPageInterface
         return $this->hasElement('out_of_stock');
     }
 
-    public function isMainImageDisplayed(): bool
+    public function isMainImageOfType(string $type): bool
     {
-        if (!$this->hasElement('main_image')) {
+        $mainImage = $this->getElement('main_image', ['%type%' => $type]);
+
+        return $mainImage !== null;
+    }
+
+    public function isMainImageOfTypeDisplayed(string $type): bool
+    {
+        if (!$this->hasElement('main_image', ['%type%' => $type])) {
             return false;
         }
 
-        $imageUrl = $this->getElement('main_image')->getAttribute('src');
+        $imageUrl = $this->getElement('main_image', ['%type%' => $type])->getAttribute('src');
         $this->getDriver()->visit($imageUrl);
         $pageText = $this->getDocument()->getText();
         $this->getDriver()->back();
 
         return false === stripos($pageText, '404 Not Found');
+    }
+
+    public function getFirstThumbnailsImageType(): string
+    {
+        $thumbnails = $this->getElement('thumbnails');
+        $images = $thumbnails->findAll('css', 'img');
+
+        return $images[0]->getAttribute('data-test-thumbnail-image');
+    }
+
+    public function getSecondThumbnailsImageType(): string
+    {
+        $thumbnails = $this->getElement('thumbnails');
+        $images = $thumbnails->findAll('css', 'img');
+
+        return $images[1]->getAttribute('data-test-thumbnail-image');
     }
 
     public function countReviews(): int
@@ -330,8 +353,8 @@ class ShowPage extends ShopPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'add_to_cart_component' => '[data-live-name-value="sylius_shop:product:add_to_cart_form"]',
             'add_to_cart_button' => '[data-test-button="add-to-cart-button"]',
+            'add_to_cart_component' => '[data-live-name-value="sylius_shop:product:add_to_cart_form"]',
             'applied_catalog_promotions' => '[data-test-applied-catalog-promotions]',
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
@@ -340,7 +363,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
             'catalog_promotion' => '[data-test-promotion-label]',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-test-product-details]',
-            'main_image' => '[data-test-main-image]',
+            'main_image' => '[data-test-main-image="%type%"]',
             'name' => '[data-test-product-name]',
             'option_select' => '#sylius_shop_add_to_cart_cartItem_variant_%optionCode%',
             'out_of_stock' => '[data-test-product-out-of-stock]',
@@ -352,6 +375,8 @@ class ShowPage extends ShopPage implements ShowPageInterface
             'reviews' => '[data-test-product-reviews]',
             'reviews_title' => '[data-test-title="%title%"]',
             'tab' => '[data-test-tab="%name%"]',
+            'thumbnail_image' => '[data-test-thumbnail-image="%type%"]',
+            'thumbnails' => '[data-test-thumbnails]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
             'variants_rows' => '[data-test-product-variants-row]',
         ]);

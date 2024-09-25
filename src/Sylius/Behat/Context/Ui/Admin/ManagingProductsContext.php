@@ -402,6 +402,32 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the one before last image on the list should have type :type with position :position
+     */
+    public function theOneBeforeLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
+    {
+        $images = $this->mediaFormElement->getImages();
+        if (count($images) < 2) {
+            throw new \Exception('There are less than two images on the list.');
+        }
+
+        $oneBeforeLastImage = $images[count($images) - 2];
+
+        $this->mediaFormElement->assertImageTypeAndPosition($oneBeforeLastImage, $imageType, $position);
+    }
+
+    /**
+     * @Then the last image on the list should have type :type with position :position
+     */
+    public function theLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
+    {
+        $images = $this->mediaFormElement->getImages();
+        $lastImage = end($images);
+
+        $this->mediaFormElement->assertImageTypeAndPosition($lastImage, $imageType, $position);
+    }
+
+    /**
      * @Then the last product on the list should have :field :value
      * @Then the last product on the list within this taxon should have :field :value
      */
@@ -492,6 +518,7 @@ final readonly class ManagingProductsContext implements Context
      * @When /^I want to modify (this product)$/
      * @When /^I want to edit (this product)$/
      * @When I modify the :product product
+     * @When I want to modify the images of :product product
      */
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
@@ -998,6 +1025,14 @@ final readonly class ManagingProductsContext implements Context
     public function iChangeTheFirstImageTypeTo(string $type): void
     {
         $this->mediaFormElement->modifyFirstImageType($type);
+    }
+
+    /**
+     * @When I change the :type image position to :position
+     */
+    public function iChangeTheImagePositionTo(string $image, int $position): void
+    {
+        $this->mediaFormElement->modifyPositionOfImageWithType($image, $position);
     }
 
     /**

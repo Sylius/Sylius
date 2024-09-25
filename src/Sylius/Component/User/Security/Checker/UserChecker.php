@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Copied from Symfony 4.4.
  *
- * @link https://github.com/symfony/symfony/blob/v4.4.18/src/Symfony/Component/Security/Core/User/UserChecker.php
+ * @see https://github.com/symfony/symfony/blob/v4.4.18/src/Symfony/Component/Security/Core/User/UserChecker.php
  */
 final class UserChecker implements UserCheckerInterface
 {

@@ -37,6 +37,11 @@
                 <div class="mb-3">
                     {{ form_row(image_form.file, sylius_test_form_attribute('file')) }}
                 </div>
+                {% if image_form.position is defined %}
+                    <div class="mb-3">
+                        {{ form_row(image_form.position, sylius_test_form_attribute('position')) }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

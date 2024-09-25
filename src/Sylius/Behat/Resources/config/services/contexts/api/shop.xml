@@ -111,6 +111,7 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
             <argument type="service" id="sylius.behat.request_factory" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
