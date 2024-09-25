@@ -27,6 +27,7 @@ final class SyliusProductBundle extends AbstractResourceBundle
         $container->addCompilerPass(new DefaultProductVariantResolverCompilerPass());
     }
 
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [
