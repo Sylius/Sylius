@@ -1,11 +1,11 @@
 {
     "@context": "/api/v2/contexts/Customer",
-    "@id": "@string@",
+    "@id": "\/api\/v2\/shop\/customers\/@integer@",
     "@type": "Customer",
     "defaultAddress": null,
     "user": {
-        "@id": "@string@",
-        "@type": "@string@",
+        "@id": "\/api\/v2\/shop\/shop-users\/@integer@",
+        "@type": "ShopUser",
         "verified": false
     },
     "email": "oliver@doe.com",
