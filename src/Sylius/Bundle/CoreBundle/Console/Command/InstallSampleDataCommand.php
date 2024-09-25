@@ -72,7 +72,7 @@ EOT
         }
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDir. '/media/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/', $output);
             $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/image/', $output);
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());

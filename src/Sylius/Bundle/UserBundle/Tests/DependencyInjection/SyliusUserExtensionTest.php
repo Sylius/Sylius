@@ -16,11 +16,8 @@ namespace Sylius\Bundle\UserBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use PHPUnit\Framework\Assert;
 use Sylius\Bundle\UserBundle\DependencyInjection\SyliusUserExtension;
-use Sylius\Bundle\UserBundle\EventListener\UpdateUserEncoderListener;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
-use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
 use Sylius\Component\User\Model\User;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Resource\Factory\Factory;
 
 final class SyliusUserExtensionTest extends AbstractExtensionTestCase

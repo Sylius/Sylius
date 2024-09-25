@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 /** @mixin ObjectBehavior */
 trait MessageHandlerAttributeTrait
 {
-    function it_is_a_message_handler(): void
+    public function it_is_a_message_handler(): void
     {
         $messageHandlerAttributes = (new \ReflectionClass($this->getWrappedObject()::class))
             ->getAttributes(AsMessageHandler::class);
