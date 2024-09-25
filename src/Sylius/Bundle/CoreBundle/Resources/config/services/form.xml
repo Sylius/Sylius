@@ -65,58 +65,58 @@
         <defaults public="true" />
 
         <service id="sylius.form.extension.type.address" class="Sylius\Bundle\CoreBundle\Form\Extension\AddressTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.order" class="Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\OrderType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.cart" class="Sylius\Bundle\CoreBundle\Form\Extension\CartTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Extension\CartItemTypeExtension">
             <argument>%sylius.order_item_quantity_modifier.limit%</argument>
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartItemType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
             <argument type="service" id="Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.taxon" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxonTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.promotion" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.promotion_coupon" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionCouponTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.promotion_filter_collection" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionFilterCollectionTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionFilterCollectionType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
             <argument type="service" id="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.product" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.product_translation" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTranslationTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.product_variant_generation" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantGenerationTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
 
         <service id="sylius.form.type.product_review" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType">
