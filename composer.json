@@ -130,6 +130,7 @@
         "symfony/translation": "^6.4.0 || ^7.0",
         "symfony/translation-contracts": "^3.3",
         "symfony/twig-bundle": "^6.4.0 || ^7.0",
+        "symfony/uid": "^6.4.0 || ^7.0",
         "symfony/ux-autocomplete": "^2.17",
         "symfony/ux-live-component": "^2.17",
         "symfony/ux-twig-component": "^2.17",
