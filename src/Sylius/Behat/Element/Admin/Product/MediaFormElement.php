@@ -119,6 +119,31 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
         return count($imageSubforms);
     }
 
+    public function getImages(): array
+    {
+        $images = $this->getElement('images');
+
+        return $images->findAll('css', '[data-test-image-subform]');
+    }
+
+    public function assertImageTypeAndPosition($image, string $expectedType, int $expectedPosition): void
+    {
+        $type = $image->find('css', 'input[data-test-type]')->getValue();
+        $position = $image->find('css', 'input[data-test-position]')->getValue();
+
+        if (!$type || !$position) {
+            throw new \Exception('Type or position element not found in the image subform.');
+        }
+
+        if ($type !== $expectedType) {
+            throw new \Exception(sprintf('Expected type "%s", but got "%s".', $expectedType, $type));
+        }
+
+        if ((int) $position !== $expectedPosition) {
+            throw new \Exception(sprintf('Expected position "%d", but got "%d".', $expectedPosition, $position));
+        }
+    }
+
     public function modifyFirstImageType(string $type): void
     {
         $this->changeTab();
@@ -126,6 +151,34 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
         $firstImageSubform = $this->getFirstImageSubform();
 
         $firstImageSubform->find('css', 'input[data-test-type]')->setValue($type);
+    }
+
+    public function modifyFirstImagePosition(int $position): void
+    {
+        $this->changeTab();
+
+        $firstImageSubform = $this->getFirstImageSubform();
+
+        $firstImageSubform->find('css', 'input[data-test-position]')->setValue($position);
+    }
+
+    public function modifyPositionOfImageWithType(string $type, int $position): void
+    {
+        $this->changeTab();
+
+        $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
+
+        $imageSubform->find('css', 'input[data-test-position]')->setValue($position);
+    }
+
+    public function hasImageWithTypeOnPosition(string $type, int $position): bool
+    {
+        $this->changeTab();
+
+        $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
+        $imagePosition = $imageSubform->find('css', 'input[data-test-position]')->getValue();
+
+        return $imagePosition === (string) $position;
     }
 
     public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void

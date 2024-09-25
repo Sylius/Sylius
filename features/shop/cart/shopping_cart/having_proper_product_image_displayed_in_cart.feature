@@ -9,8 +9,8 @@ Feature: Having proper product image displayed in the cart
         And the store has a product "T-Shirt Car"
         And this product has "Small logo" variant priced at "$12.35"
         And this product has "Medium logo" variant priced at "$15.35"
-        And this product has an image "lamborghini.jpg" with "main" type
-        And this product has an image "ford.jpg" with "main" type for "Medium logo" variant
+        And this product has an image "lamborghini.jpg" with "main" type at position 0
+        And this product has an image "ford.jpg" with "main" type at position 1 for "Medium logo" variant
 
     @no-api @ui @javascript
     Scenario: Having a variant's image displayed in the cart

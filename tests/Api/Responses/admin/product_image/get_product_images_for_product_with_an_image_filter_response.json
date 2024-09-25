@@ -12,7 +12,8 @@
             "path": "@string@.contains('sylius_small').endsWith('thumbnail.jpg')",
             "productVariants": [
                 "\/api\/v2\/admin\/product-variants\/MUG_BLUE"
-            ]
+            ],
+            "position": 0
         },
         {
             "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
@@ -23,7 +24,8 @@
             "path": "@string@.contains('sylius_small').endsWith('main.jpg')",
             "productVariants": [
                 "\/api\/v2\/admin\/product-variants\/MUG_RED"
-            ]
+            ],
+            "position": 1
         }
     ],
     "hydra:totalItems": 2,
