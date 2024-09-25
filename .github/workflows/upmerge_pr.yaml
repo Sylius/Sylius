@@ -29,12 +29,6 @@ jobs:
                     -
                         base_branch: "1.14"
                         target_branch: "2.0"
-                    -
-                        base_branch: "2.0"
-                        target_branch: "symfony-7"
-                    -
-                        base_branch: "2.0"
-                        target_branch: "payment-request"
 
         steps:
             -
