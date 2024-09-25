@@ -69,6 +69,15 @@ sylius_grid:
                         class: "%sylius.model.channel.class%"
             actions:
                 item:
+                    show_payment_requests:
+                        type: show
+                        icon: list_letters
+                        label: sylius.ui.list_payment_requests
+                        options:
+                            link:
+                                route: sylius_admin_payment_payment_request_index
+                                parameters:
+                                    id: resource.id
                     complete:
                         type: apply_transition
                         label: sylius.ui.complete

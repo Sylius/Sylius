@@ -27,3 +27,29 @@ sylius_admin_payment_complete:
                 transition: complete
             redirect: sylius_admin_payment_index
             flash: sylius.payment.completed
+
+sylius_admin_payment_payment_request_index:
+    path: /payments/{id}/payment_requests
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.payment_request::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/payment/payment_request/index.html.twig"
+            grid: sylius_admin_payment_payment_request
+            
+sylius_admin_payment_payment_request_show:
+    path: /payments/{paymentId}/payment_requests/{hash}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.payment_request::showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/payment/payment_request/show.html.twig"
+            repository:
+                method: findOneByPaymentId
+                arguments:
+                    hash: $hash
+                    paymentId: $paymentId

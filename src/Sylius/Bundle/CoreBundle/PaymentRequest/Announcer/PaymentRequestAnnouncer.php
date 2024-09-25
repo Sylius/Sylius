@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\Announcer;
 
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
+use Sylius\Bundle\CoreBundle\Command\CapturePaymentRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

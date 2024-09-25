@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
+use Symfony\Bridge\Doctrine\Types\UuidType;
 
 /**
  * @template T of PaymentRequestInterface
@@ -24,6 +26,31 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
  */
 class PaymentRequestRepository extends EntityRepository implements PaymentRequestRepositoryInterface
 {
+    public function findOneByPaymentId(mixed $hash, mixed $paymentId): ?PaymentRequestInterface
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.hash', ':hash'))
+            ->andWhere($queryBuilder->expr()->eq('o.payment', ':paymentId'))
+            ->setParameter('hash', $hash, UuidType::NAME)
+            ->setParameter('paymentId', $paymentId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function createForPaymentQueryBuilder(string $paymentId): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.payment', ':paymentId'))
+            ->setParameter('paymentId', $paymentId)
+        ;
+
+        return $queryBuilder;
+    }
+
     public function duplicateExists(PaymentRequestInterface $paymentRequest): bool
     {
         /** @var PaymentRequestInterface[] $paymentRequests */

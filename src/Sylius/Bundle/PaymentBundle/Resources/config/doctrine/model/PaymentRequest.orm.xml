@@ -24,7 +24,7 @@
             <join-column name="method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
-        <many-to-one field="payment" target-entity="Sylius\Component\Payment\Model\PaymentInterface">
+        <many-to-one field="payment" target-entity="Sylius\Component\Payment\Model\PaymentInterface" inversed-by="paymentRequests">
             <join-column name="payment_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
