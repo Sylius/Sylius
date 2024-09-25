@@ -20,9 +20,10 @@ use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInter
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class ModelPaymentRequestHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class ModelPaymentRequestHandler
 {
     public function __construct(
         private PaymentRequestProviderInterface $paymentRequestProvider,

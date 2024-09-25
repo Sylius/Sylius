@@ -25,10 +25,11 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /** @experimental */
-final class AddPaymentRequestHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class AddPaymentRequestHandler
 {
 
     /**
