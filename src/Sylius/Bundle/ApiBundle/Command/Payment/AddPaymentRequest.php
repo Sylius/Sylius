@@ -18,7 +18,7 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public readonly mixed $paymentId,
+        public readonly int|string $paymentId,
         public readonly string $paymentMethodCode,
         public readonly ?string $action = null,
         public readonly mixed $payload = null,
