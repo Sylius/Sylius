@@ -24,7 +24,7 @@
                 uriTemplate="/admin/promotions/{promotionCode}/coupons"
             >
                 <uriVariables>
-                    <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
                         fromProperty="coupons"/>
                 </uriVariables>
                 <normalizationContext>
@@ -53,9 +53,9 @@
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
             >
                 <uriVariables>
-                    <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
                         fromProperty="coupons"/>
-                    <uriVariable parameterName="couponCode" fromClass="Sylius\Component\Core\Model\PromotionCoupon"/>
+                    <uriVariable parameterName="couponCode" fromClass="%sylius.model.promotion_coupon.class%"/>
                 </uriVariables>
                 <normalizationContext>
                     <values>
@@ -75,7 +75,7 @@
                 processor="sylius_api.state_processor.admin.promotion.promotion_coupon.persist"
             >
                 <uriVariables>
-                    <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
                         fromProperty="coupons"/>
                 </uriVariables>
                 <denormalizationContext>
@@ -116,7 +116,7 @@
                 status="201"
             >
                 <uriVariables>
-                    <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
                         fromProperty="coupons"/>
                 </uriVariables>
                 <denormalizationContext>
@@ -160,9 +160,9 @@
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
             >
                 <uriVariables>
-                    <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
                         fromProperty="coupons"/>
-                    <uriVariable parameterName="couponCode" fromClass="Sylius\Component\Core\Model\PromotionCoupon"/>
+                    <uriVariable parameterName="couponCode" fromClass="%sylius.model.promotion_coupon.class%"/>
                 </uriVariables>
                 <denormalizationContext>
                     <values>
@@ -200,9 +200,9 @@
                 processor="sylius_api.state_processor.admin.promotion.promotion_coupon.remove"
             >
                 <uriVariables>
-                    <uriVariable parameterName="promotionCode" fromClass="Sylius\Component\Core\Model\Promotion"
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
                         fromProperty="coupons"/>
-                    <uriVariable parameterName="couponCode" fromClass="Sylius\Component\Core\Model\PromotionCoupon"/>
+                    <uriVariable parameterName="couponCode" fromClass="%sylius.model.promotion_coupon.class%"/>
                 </uriVariables>
             </operation>
         </operations>
