@@ -34,7 +34,6 @@ final class CancelUnpaidOrdersCommand extends Command
         parent::__construct();
     }
 
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf(

@@ -52,7 +52,6 @@ final class SetupCommand extends AbstractInstallCommand
         protected readonly FactoryInterface $adminUserFactory,
         protected readonly UserRepositoryInterface $adminUserRepository,
         protected readonly ValidatorInterface $validator,
-
     ) {
         parent::__construct($this->entityManager, $this->commandDirectoryChecker);
     }

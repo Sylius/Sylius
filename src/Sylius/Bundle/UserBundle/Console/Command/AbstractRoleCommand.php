@@ -32,8 +32,7 @@ abstract class AbstractRoleCommand extends Command
         private ManagerRegistry $managerRegistry,
         private array $usersConfig,
         ?string $name = null,
-    )
-    {
+    ) {
         parent::__construct($name);
     }
 
