@@ -24,7 +24,7 @@ final class CustomersTest extends JsonApiTestCase
     use ShopUserLoginTrait;
 
     /** @test */
-    public function it_gets_customer(): void
+    public function it_gets_a_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
         /** @var CustomerInterface $customer */
