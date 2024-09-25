@@ -8,7 +8,7 @@ Feature: Removing an administrator avatar
         Given I am logged in as an administrator
         And this administrator has the "troll.jpg" image as avatar
 
-    @ui @api
+    @api @ui
     Scenario: Removing an administrator avatar
         Given I am editing my details
         When I remove the avatar
