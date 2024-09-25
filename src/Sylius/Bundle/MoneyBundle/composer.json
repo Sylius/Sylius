@@ -27,8 +27,8 @@
     "require": {
         "php": "^8.2",
         "sylius/resource-bundle": "^1.11 || ^1.12@alpha",
-        "symfony/framework-bundle": "^6.4.1 || ^7.0",
-        "symfony/intl": "^6.4.0 || ^7.0",
+        "symfony/framework-bundle": "^6.4.1 || ^7.1",
+        "symfony/intl": "^6.4.0 || ^7.1",
         "symfony/templating": "^6.4.0",
         "webmozart/assert": "^1.9"
     },
@@ -43,9 +43,9 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "sylius/currency-bundle": "^2.0",
-        "symfony/browser-kit": "^6.4.0 || ^7.0",
-        "symfony/dependency-injection": "^6.4.1 || ^7.0",
-        "symfony/form": "^6.4.1 || ^7.0",
+        "symfony/browser-kit": "^6.4.0 || ^7.1",
+        "symfony/dependency-injection": "^6.4.1 || ^7.1",
+        "symfony/form": "^6.4.1 || ^7.1",
         "twig/twig": "^3.14.0"
     },
     "config": {
@@ -58,7 +58,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "7.0.*"
+            "require": "^7.1"
         }
     },
     "autoload": {
