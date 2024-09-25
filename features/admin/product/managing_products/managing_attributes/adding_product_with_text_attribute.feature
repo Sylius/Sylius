@@ -11,7 +11,7 @@ Feature: Adding a new product with text attribute
         And the store has a non-translatable text product attribute "Author"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a text attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
@@ -24,7 +24,7 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a non-translatable text attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
@@ -37,7 +37,7 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And non-translatable attribute "Author" of product "44 Magnum" should be "Colt"
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding and removing text attributes on product create page
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"

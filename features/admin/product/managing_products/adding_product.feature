@@ -68,7 +68,7 @@ Feature: Adding a new product
         And the product "Dice Brewing" should not have shipping required
         And the product "Dice Brewing" should appear in the store
 
-    @ui @api
+    @api @ui
     Scenario: Adding a new configurable product without options
         When I want to create a new configurable product
         And I specify its code as "WHISKEY_GENTLEMEN"
@@ -78,7 +78,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a new configurable product
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"

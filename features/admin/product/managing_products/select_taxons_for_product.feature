@@ -11,7 +11,7 @@ Feature: Select taxon for an existing product
         And the store has a product "T-Shirt Batman"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Specifying main taxon for configurable product
         When I want to modify the "T-Shirt Banana" product
         And I choose main taxon "T-Shirts"
