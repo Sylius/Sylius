@@ -21,7 +21,7 @@ Feature: Changing the offline payment method after order confirmation
         And I retry the payment with "Offline" payment method
         Then I should have chosen "Offline" payment method
 
-    @api
+    @api @ui @javascript
     Scenario: Retrying the payment with different Offline payment works correctly together with inventory
         Given there is 1 unit of product "PHP T-Shirt" available in the inventory
         And this product is tracked by the inventory
