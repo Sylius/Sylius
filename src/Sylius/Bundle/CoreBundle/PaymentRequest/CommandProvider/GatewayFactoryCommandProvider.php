@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestDuplicationCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface;
-use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationCheckerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
