@@ -15,6 +15,7 @@ namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\ExpectationFailedException;
 use Sylius\Tests\Api\Utils\HeadersBuilder;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -173,7 +174,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         array $parameters = [],
         array $headers = [],
         array $files = [],
-    ): Crawler {
+    ): Crawler
+    {
         if (!empty($this->defaultPostHeaders)) {
             $headers = array_merge($this->defaultPostHeaders, $headers);
         }
@@ -282,19 +284,25 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /**
+     * @param array<array-key, mixed> $expectedViolations
      * @throws \Exception
      *
-     * @param array<array-key, mixed> $expectedViolations
      */
-    protected function assertResponseViolations(Response $response, array $expectedViolations): void
+    protected function assertResponseViolations(array $expectedViolations, bool $assertViolationsCount = true): void
     {
+        $response = $this->client->getResponse();
+
         if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
             $this->showErrorInBrowserIfOccurred($response);
         }
 
         $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertJsonHeader($response);
-        $this->assertJsonResponseViolations($response, $expectedViolations);
+
+        $assertViolationsCount ?
+            $this->assertResponseExactViolations($expectedViolations) :
+            $this->assertJsonResponseContainsViolations($response, $expectedViolations)
+        ;
     }
 
     /**
@@ -302,18 +310,61 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      *
      * @param array<array-key, mixed> $expectedViolations
      */
-    protected function assertJsonResponseViolations(
+    protected function assertResponseExactViolations(array $expectedViolations): void
+    {
+        $response = $this->client->getResponse();
+
+        $responseContent = $response->getContent() ?: '';
+        $this->assertNotEmpty($responseContent);
+
+        $actualViolations = json_decode($responseContent, true)['violations'];
+        $actualDescription = json_decode($responseContent, true)['hydra:description'];
+
+        array_walk($actualViolations, function (&$item) {
+            unset($item['code']);
+        });
+
+        $mappedViolations = array_map(function ($violation) {
+            if (empty($violation['propertyPath'])) {
+                return $violation['message'];
+            }
+
+            return $violation['propertyPath'] . ': ' . $violation['message'];
+        }, $expectedViolations);
+
+        $expectedDescription = implode("\n", $mappedViolations);
+
+        $expected = [
+            '@context' => '/api/v2/contexts/ConstraintViolationList',
+            '@type' => 'ConstraintViolationList',
+            'hydra:title' => 'An error occurred',
+            'hydra:description' => $expectedDescription,
+            'violations' => $expectedViolations,
+        ];
+
+        $actual = [
+            '@context' => '/api/v2/contexts/ConstraintViolationList',
+            '@type' => 'ConstraintViolationList',
+            'hydra:title' => 'An error occurred',
+            'hydra:description' => $actualDescription,
+            'violations' => $actualViolations,
+        ];
+
+        $this->assertSame($expected, $actual);
+    }
+
+    /**
+     * @throws \Exception
+     *
+     * @param array<array-key, mixed> $expectedViolations
+     */
+    private function assertJsonResponseContainsViolations(
         Response $response,
         array $expectedViolations,
-        bool $assertViolationsCount = true,
     ): void {
         $responseContent = $response->getContent() ?: '';
         $this->assertNotEmpty($responseContent);
         $violations = json_decode($responseContent, true)['violations'] ?? [];
-
-        if ($assertViolationsCount) {
-            $this->assertCount(count($expectedViolations), $violations, $responseContent);
-        }
 
         $violationMap = [];
         foreach ($violations as $violation) {
@@ -362,5 +413,106 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             server: $headers,
             content: is_array($body) ? json_encode($body, \JSON_THROW_ON_ERROR) : null,
         );
+    }
+
+    protected function assertResponse(Response $response, string $filename, int $statusCode = 200): void
+    {
+        if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
+            $this->showErrorInBrowserIfOccurred($response);
+        }
+
+        self::assertEquals(
+            $statusCode,
+            $response->getStatusCode(),
+            json_encode(json_decode($response->getContent(), true), JSON_PRETTY_PRINT)
+        );
+        $this->assertJsonHeader($response);
+        $this->assertJsonResponseContent($response, $filename);
+    }
+
+    protected function assertJsonResponseContent(Response $response, string $filename): void
+    {
+        $expectedFilePath = $this->expectedResponsesPath . '/' . $filename . '.json';
+        $expected = file_get_contents($expectedFilePath);
+        $actual = $response->getContent() ?: '';
+
+        $expectedArray = json_decode($expected, true);
+        if (null === $expectedArray) {
+            $this->fail(sprintf('Expected response content is not a valid JSON, check the file: "%s".json', $filename));
+        }
+
+        $actualArray = json_decode($actual, true);
+        if (null === $actualArray) {
+            $this->fail('Actual response content is not a valid JSON');
+        }
+
+        $actualArray = $this->replaceDynamicValues($expectedArray, $actualArray);
+
+        try {
+            $this->assertJsonStringEqualsJsonString(json_encode($expectedArray), json_encode($actualArray));
+        } catch (ExpectationFailedException $e) {
+            $expectedFileReferenceMessage = "Check the expected response file: \n" . $expectedFilePath;
+            $this->fail($e->getComparisonFailure()->getDiff() . "\n" . $expectedFileReferenceMessage);
+        }
+    }
+
+    protected function replaceDynamicValues(array $expectedArray, array $actualArray): array
+    {
+        foreach ($expectedArray as $key => $value) {
+            if (is_array($value) && isset($actualArray[$key]) && is_array($actualArray[$key])) {
+                $actualArray[$key] = $this->replaceDynamicValues($value, $actualArray[$key]);
+
+                continue;
+            }
+
+            if (is_string($value)) {
+                if (str_contains($value, '@integer@')) {
+                    if (!isset($actualArray[$key])) {
+                        continue;
+                    }
+                    $position = strpos($value, '@integer@');
+                    if (strcmp(substr($value, 0, $position), substr((string) $actualArray[$key], 0, $position)) !== 0) {
+                        continue;
+                    }
+                    $actualArray[$key] = substr_replace((string)$actualArray[$key], '@integer@', $position);
+                }
+                elseif (str_contains($value, '@array@')) {
+                    $position = strpos($value, '@array@');
+                    $actualArray[$key] = substr_replace(json_encode($actualArray[$key]), '@array@', $position);
+                }
+                elseif (str_contains($value, '@boolean@')) {
+                    $position = strpos($value, '@boolean@');
+                    $actualArray[$key] = substr_replace((string)$actualArray[$key], '@boolean@', $position);
+                }
+                elseif (str_contains($value, '@string@')) {
+                    if (!isset($actualArray[$key])) {
+                        continue;
+                    }
+                    $position = strpos($value, '@string@');
+                    if (strcmp(substr($value, 0, $position), substr((string) $actualArray[$key], 0, $position)) !== 0) {
+                        continue;
+                    }
+                    if (!str_contains($actualArray[$key], substr($value, 8))) {
+                        continue;
+                    }
+
+                    $position = strpos($value, '@string@');
+                    $limit = null;
+                    if (strlen($value) > strlen('@string@')) {
+                        $expectedRightSubstring = substr($value, $position + strlen('@string@'));
+                        $actualRightSubstringPosition = strpos($actualArray[$key], $expectedRightSubstring);
+                        if (false !== $actualRightSubstringPosition) {
+                            $limit = $actualRightSubstringPosition - $position;
+                        }
+                    }
+                    $actualArray[$key] = substr_replace((string)$actualArray[$key], '@string@', $position, $limit);
+                } elseif (str_contains($value, '@date@')) {
+                    $position = strpos($value, '@date@');
+                    $actualArray[$key] = substr_replace((string)$actualArray[$key], '@date@', $position);
+                }
+            }
+        }
+
+        return $actualArray;
     }
 }

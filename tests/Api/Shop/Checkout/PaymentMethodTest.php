@@ -286,7 +286,6 @@ final class PaymentMethodTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'The payment method with invalid code does not exist.'],
             ],

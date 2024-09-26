@@ -46,7 +46,6 @@ final class CompletionTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Cannot complete as order is in a wrong state. Current: cart. Possible transitions: address.'],
             ],
@@ -74,7 +73,6 @@ final class CompletionTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Cannot complete as order is in a wrong state. Current: addressed. Possible transitions: address, skip_shipping, select_shipping.'],
             ],
@@ -104,7 +102,6 @@ final class CompletionTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Cannot complete as order is in a wrong state. Current: shipping_selected. Possible transitions: address, select_shipping, skip_payment, select_payment.'],
             ],
@@ -133,7 +130,6 @@ final class CompletionTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Cannot complete as order is in a wrong state. Current: shipping_skipped. Possible transitions: address, skip_payment, select_payment.'],
             ],
