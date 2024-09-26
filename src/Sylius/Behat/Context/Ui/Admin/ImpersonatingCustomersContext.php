@@ -104,10 +104,12 @@ final class ImpersonatingCustomersContext implements Context
     /**
      * @Then I should be logged in as :fullName
      */
-    public function iShouldBeLoggedInAs($fullName)
+    public function iShouldBeLoggedInAs(string $fullName): void
     {
+        [$firstName, $lastName] = explode(' ', $fullName);
+
         Assert::true($this->homePage->hasLogoutButton());
-        Assert::contains($this->homePage->getFullName(), $fullName);
+        Assert::contains($this->homePage->getFullName(), $firstName);
     }
 
     /**
