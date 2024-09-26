@@ -6,9 +6,9 @@ sylius_grid:
                 options:
                     class: "%sylius.model.payment_request.class%"
                     repository:
-                        method: createForPaymentQueryBuilder
+                        method: createQueryBuilderForPayment
                         arguments:
-                            paymentId: $id
+                            paymentId: $paymentId
             sorting:
                 createdAt: desc
             fields:
@@ -63,24 +63,24 @@ sylius_grid:
                     type: select
                     label: sylius.ui.action
                     form_options:
-                        choices:
-                            sylius.ui.authorize: authorize
-                            sylius.ui.cancel: cancel
-                            sylius.ui.capture: capture
-                            sylius.ui.payout: payout
-                            sylius.ui.refund: refund
-                            sylius.ui.status: status
-                            sylius.ui.sync: sync
+                        choices:                            
+                            sylius.ui.authorize: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_AUTHORIZE
+                            sylius.ui.cancel: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_CANCEL
+                            sylius.ui.capture: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_CAPTURE
+                            sylius.ui.payout: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_PAYOUT
+                            sylius.ui.refund: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_REFUND
+                            sylius.ui.status: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_STATUS
+                            sylius.ui.sync: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_SYNC
                 state:
                     type: select
                     label: sylius.ui.state
                     form_options:
                         choices:
-                            sylius.ui.cancelled: cancelled
-                            sylius.ui.completed: completed
-                            sylius.ui.failed: failed
-                            sylius.ui.new: new
-                            sylius.ui.processing: processing
+                            sylius.ui.cancelled: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_CANCELLED
+                            sylius.ui.completed: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_COMPLETED
+                            sylius.ui.failed: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_FAILED
+                            sylius.ui.new: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+                            sylius.ui.processing: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
             actions:
                 item:
                     show:

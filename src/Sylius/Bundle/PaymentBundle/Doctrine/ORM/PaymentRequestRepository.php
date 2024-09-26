@@ -40,7 +40,7 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
         ;
     }
 
-    public function createForPaymentQueryBuilder(string $paymentId): QueryBuilder
+    public function createQueryBuilderForPayment(string $paymentId): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder

@@ -26,7 +26,7 @@ interface PaymentRequestRepositoryInterface extends RepositoryInterface
 {
     public function findOneByPaymentId(mixed $hash, mixed $paymentId): ?PaymentRequestInterface;
 
-    public function createForPaymentQueryBuilder(string $paymentId): QueryBuilder;
+    public function createQueryBuilderForPayment(string $paymentId): QueryBuilder;
 
     public function duplicateExists(PaymentRequestInterface $paymentRequest): bool;
 }
