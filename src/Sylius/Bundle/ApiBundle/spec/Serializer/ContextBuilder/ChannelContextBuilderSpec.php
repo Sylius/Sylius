@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
-use ApiPlatform\Serializer\SerializerContextBuilderInterface;
+use ApiPlatform\State\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
