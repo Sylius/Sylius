@@ -33,17 +33,17 @@
         "php": "^8.2",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
+        "sylius/admin-ui": "dev-main",
         "sylius/core-bundle": "^2.0",
-        "sylius/ui-bundle": "^2.0",
         "sylius/twig-hooks": "~0.3.0",
+        "sylius/ui-bundle": "^2.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.1",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/ux-autocomplete": "^2.17",
         "symfony/ux-live-component": "^2.17",
         "symfony/webpack-encore-bundle": "^2.1",
         "twig/extra-bundle": "^3.13.0",
-        "twig/twig": "^3.14.0",
-        "sylius/admin-ui": "dev-main"
+        "twig/twig": "^3.14.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
@@ -57,7 +57,8 @@
     "config": {
         "allow-plugins": {
             "symfony/flex": true
-        }
+        },
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
