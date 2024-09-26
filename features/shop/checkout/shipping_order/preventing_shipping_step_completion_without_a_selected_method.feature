@@ -7,7 +7,7 @@ Feature: Preventing shipping step completion without a selected method
     Background:
         Given I am a logged in customer
 
-    @todo-api @ui @javascript
+    @api @ui @javascript
     Scenario: Preventing shipping step completion if there are no available shipping methods
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
@@ -16,7 +16,7 @@ Feature: Preventing shipping step completion without a selected method
         Then I should be informed that my order cannot be shipped to this address
         And I should not be able to proceed checkout shipping step
 
-    @todo-api @ui @javascript
+    @api @ui @javascript
     Scenario: Preventing shipping step completion if there are no available shipping methods for selected country
         Given the store operates on a channel named "Web"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
@@ -30,7 +30,7 @@ Feature: Preventing shipping step completion without a selected method
         Then I should be informed that my order cannot be shipped to this address
         And I should not be able to proceed checkout shipping step
 
-    @todo-api @no-ui
+    @api @no-ui
     Scenario: Preventing shipping step completion if there are no available shipping methods for selected country
         Given the store operates on a channel named "Web"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
