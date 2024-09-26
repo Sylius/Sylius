@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Announcer;
+namespace Sylius\Bundle\PaymentBundle\Announcer;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -27,8 +27,6 @@ final readonly class PaymentRequestAnnouncer implements PaymentRequestAnnouncerI
 
     public function dispatchPaymentRequestCommand(PaymentRequestInterface $paymentRequest): void
     {
-        $command = $this->paymentRequestCommandProvider->provide($paymentRequest);
-
-        $this->commandBus->dispatch($command);
+        $this->commandBus->dispatch($this->paymentRequestCommandProvider->provide($paymentRequest));
     }
 }

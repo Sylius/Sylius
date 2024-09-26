@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Announcer;
+namespace Sylius\Bundle\PaymentBundle\Announcer;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
