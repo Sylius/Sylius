@@ -288,6 +288,19 @@ If your app never changed the hasher name configuration, you don't need to confi
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
 
+* Some Twig extension services has been moved from UI bundle to new Twig Extra package
+* The following classes have been removed:
+    * `Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension`
+    * `Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension`
+    * `Sylius\Bundle\UiBundle\Twig\RouteExistsExtension`
+    * `Sylius\Bundle\UiBundle\Twig\SortByExtension`
+
+* The following services have been renamed:
+    * `sylius.twig.extension.form_test_attribute_array` => `sylius_twig_extra.twig.extension.test_form_attribute`
+    * `sylius.twig.extension.form_test_attribute_name` => `sylius_twig_extra.twig.extension.test_html_attribute`
+    * `sylius.twig.extension.sort_by` => `sylius_twig_extra.twig.extension.sort_by`
+    * `Sylius\Bundle\UiBundle\Twig\RouteExistsExtension` => `sylius_twig_extra.twig.extension.route_exists`
+
 ## Payment method gateways
 
 * Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.
