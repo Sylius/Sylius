@@ -63,4 +63,5 @@ return [
     Sylius\TwigHooks\TwigHooksBundle::class => ['all' => true],
     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
+    Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle::class => ['all' => true],
 ];
