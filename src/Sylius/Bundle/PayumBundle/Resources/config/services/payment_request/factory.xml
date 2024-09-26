@@ -18,9 +18,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver\DoctrineProxyObjectResolverInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver\DoctrineProxyObjectResolver">
-            <argument type="service" id="doctrine.orm.entity_manager" />
+        <service id="sylius.payum.payment_request.factory.payum_token" class="Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactory">
+            <argument type="service" id="payum" />
         </service>
-
+        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface" alias="sylius.payum.payment_request.factory.payum_token" />
     </services>
 </container>

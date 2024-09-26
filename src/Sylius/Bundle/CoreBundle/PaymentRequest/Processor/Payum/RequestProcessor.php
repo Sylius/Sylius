@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum;
 
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenAggregateInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\PaymentRequestContextInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class RequestProcessor implements RequestProcessorInterface

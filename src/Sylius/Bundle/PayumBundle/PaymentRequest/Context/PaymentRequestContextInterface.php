@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum;
+namespace Sylius\Bundle\PayumBundle\PaymentRequest\Context;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 

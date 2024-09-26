@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\PaymentRequest\Action;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetHttpRequest;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\PaymentRequestContextInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface;
 
 final class SyliusGetHttpRequestAction implements ActionInterface
 {

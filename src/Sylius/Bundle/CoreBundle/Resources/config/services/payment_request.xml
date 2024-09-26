@@ -17,12 +17,4 @@
         <import resource="payment_request/payum/*.xml" />
         <import resource="payment_request/offline/*.xml" />
     </imports>
-
-    <services>
-        <defaults public="true" />
-
-        <service id="sylius.payment_request.payum.context" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\PaymentRequestContext" />
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\PaymentRequestContextInterface" alias="sylius.payment_request.payum.context" />
-
-    </services>
 </container>
