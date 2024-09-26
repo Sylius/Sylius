@@ -288,7 +288,7 @@ If your app never changed the hasher name configuration, you don't need to confi
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
 
-* Some Twig extension services have been moved from UI bundle to new Twig Extra package.
+* Some Twig extension services have been moved from the UI bundle to the new Twig Extra package.
 * The following classes have been removed:
     * `Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension`
     * `Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension`
