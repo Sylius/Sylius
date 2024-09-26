@@ -8,7 +8,6 @@
 * The following services were removed:
     * `sylius.listener.api_postgresql_driver_exception_listener`
 
-
 * Non-prefix serialization groups in Sylius resources have been removed.
    If you have extended any of them, you must prefix them with `sylius:`, for example:
 
@@ -214,3 +213,7 @@ All the `setter` methods have been removed from the commands above and also ther
         array $context = [],
     ): void;
 ```
+
+* The `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier` class and service have been removed.
+  The `sylius.api.paths_to_hide` parameter used in this class has also been removed. We recommend defining endpoints
+  with the `ApiPlatform\Metadata\NotExposed` class to hide specific operations.
