@@ -42,7 +42,8 @@
         "symfony/ux-live-component": "^2.17",
         "symfony/webpack-encore-bundle": "^2.1",
         "twig/extra-bundle": "^3.13.0",
-        "twig/twig": "^3.14.0"
+        "twig/twig": "^3.14.0",
+        "sylius/admin-ui": "dev-main"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",

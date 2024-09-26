@@ -2,7 +2,7 @@ sylius_admin_exchange_rate:
     resource: |
         alias: sylius.exchange_rate
         section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
+        templates: "@SyliusAdminUi\\crud"
         except: ['show']
         redirect: update
         grid: sylius_admin_exchange_rate
