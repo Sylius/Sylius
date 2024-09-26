@@ -46,7 +46,7 @@ api_platform:
     exception_to_status:
         # Default API Platform exception to status code mapping
         ApiPlatform\Exception\FilterValidationException: 400
-        ApiPlatform\Exception\InvalidArgumentException: 400
+        ApiPlatform\Metadata\Exception\InvalidArgumentException: 400
         ApiPlatform\Validator\Exception\ValidationException: 422
         Doctrine\ORM\OptimisticLockException: 409
         Symfony\Component\Serializer\Exception\ExceptionInterface: 400
