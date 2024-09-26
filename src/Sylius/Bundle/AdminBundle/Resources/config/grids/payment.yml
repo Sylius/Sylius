@@ -75,7 +75,7 @@ sylius_grid:
                         label: sylius.ui.list_payment_requests
                         options:
                             link:
-                                route: sylius_admin_payment_payment_request_index
+                                route: sylius_admin_payment_request_index
                                 parameters:
                                     paymentId: resource.id
                     complete:

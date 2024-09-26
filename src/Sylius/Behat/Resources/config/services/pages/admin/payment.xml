@@ -30,7 +30,7 @@
             class="%sylius.behat.page.admin.payment.payment_request.index.class%"
             parent="sylius.behat.page.admin.crud.index"
         >
-            <argument type="string">sylius_admin_payment_payment_request_index</argument>
+            <argument type="string">sylius_admin_payment_request_index</argument>
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 

@@ -19,7 +19,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     public function getRouteName(): string
     {
-        return 'sylius_admin_payment_payment_request_show';
+        return 'sylius_admin_payment_request_show';
     }
 
     public function getFieldText(string $fieldName): string

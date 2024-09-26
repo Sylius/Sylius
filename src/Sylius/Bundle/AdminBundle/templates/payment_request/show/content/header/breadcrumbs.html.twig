@@ -7,6 +7,6 @@
     { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: 'sylius.ui.payments'|trans, url: path('sylius_admin_payment_index'), active: false },
     { name: payment_id, active: false },
-    { name: 'sylius.ui.payment_requests'|trans, url: path('sylius_admin_payment_payment_request_index', {'paymentId': payment_id}), active: false },
+    { name: 'sylius.ui.payment_requests'|trans, url: path('sylius_admin_payment_request_index', {'paymentId': payment_id}), active: false },
     { name: payment_request.hash, active: true },
 ]) }}

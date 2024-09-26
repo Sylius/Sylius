@@ -1,4 +1,4 @@
-sylius_admin_payment_payment_request_index:
+sylius_admin_payment_request_index:
     path: /
     methods: [GET]
     defaults:
@@ -6,10 +6,10 @@ sylius_admin_payment_payment_request_index:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/payment/payment_request/index.html.twig"
-            grid: sylius_admin_payment_payment_request
+            template: "@SyliusAdmin/shared/crud/index.html.twig"
+            grid: sylius_admin_payment_request
             
-sylius_admin_payment_payment_request_show:
+sylius_admin_payment_request_show:
     path: /{hash}
     methods: [GET]
     defaults:
@@ -17,7 +17,7 @@ sylius_admin_payment_payment_request_show:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/payment/payment_request/show.html.twig"
+            template: "@SyliusAdmin/shared/crud/show.html.twig"
             repository:
                 method: findOneByPaymentId
                 arguments:
