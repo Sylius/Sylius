@@ -1,11 +1,13 @@
 {% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
+{% set prefixes = ['sylius_shop.account.address_book.update', 'sylius_shop.shared.account'] %}
+
 {% block title %}{{ 'sylius.ui.edit_my_address'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container mb-auto">
         <div class="row my-4">
-            {% hook 'layout' with { _prefixes: ['sylius_shop.account.address_book.update', 'sylius_shop.shared.account'], form, address } %}
+            {% hook 'layout' with { _prefixes: prefixes, form, address } %}
         </div>
     </div>
 {% endblock %}
