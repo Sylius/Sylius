@@ -35,7 +35,7 @@ final readonly class ManagingPaymentRequestsContext implements Context
      */
     public function iBrowseOrdersOfACustomer(OrderInterface $order): void
     {
-        $this->indexPage->open(['id' => $order->getLastPayment()->getId()]);
+        $this->indexPage->open(['paymentId' => $order->getLastPayment()->getId()]);
     }
 
     /**
