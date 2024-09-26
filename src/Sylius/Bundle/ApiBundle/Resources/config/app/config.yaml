@@ -34,8 +34,6 @@ api_platform:
     serializer:
         hydra_prefix: true
     use_symfony_listeners: true
-    validator:
-        legacy_validation_exception: true
     patch_formats:
         json: ['application/merge-patch+json']
     path_segment_name_generator: api_platform.path_segment_name_generator.dash
