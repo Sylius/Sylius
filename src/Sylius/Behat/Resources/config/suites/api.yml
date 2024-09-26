@@ -69,4 +69,4 @@ imports:
     - api/user/managing_administrators.yml
     - api/user/managing_customer_groups.yml
     - api/user/managing_customers.yml
-#    - api/user/managing_users.yml
+    - api/user/managing_users.yml
