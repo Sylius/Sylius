@@ -1101,6 +1101,26 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Order/Checker/OrderPromotionsIntegrityChecker.php
 
 		-
+			message: "#^Call to method toBinary\\(\\) on an unknown class Symfony\\\\Component\\\\Uid\\\\Uuid\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/CommandProvider/Offline/CapturePaymentRequestCommandProvider.php
+
+		-
+			message: "#^Call to method toBinary\\(\\) on an unknown class Symfony\\\\Component\\\\Uid\\\\Uuid\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/CommandProvider/Payum/AuthorizeCommandProvider.php
+
+		-
+			message: "#^Call to method toBinary\\(\\) on an unknown class Symfony\\\\Component\\\\Uid\\\\Uuid\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/CommandProvider/Payum/CaptureCommandProvider.php
+
+		-
+			message: "#^Call to method toBinary\\(\\) on an unknown class Symfony\\\\Component\\\\Uid\\\\Uuid\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/CommandProvider/Payum/StatusCommandProvider.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PriceHistory\\\\Command\\\\ApplyLowestPriceOnChannelPricings\\:\\:__construct\\(\\) has parameter \\$channelPricingIds with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/PriceHistory/Command/ApplyLowestPriceOnChannelPricings.php
@@ -1334,41 +1354,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Form\\\\Type\\\\PaymentGatewayChoiceType\\:\\:__construct\\(\\) has parameter \\$gateways with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/PaymentBundle/Form/Type/PaymentGatewayChoiceType.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Controller\\\\PayumController\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Order\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Controller\\\\PayumController\\:\\:prepareCaptureAction\\(\\) has parameter \\$tokenValue with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Controller\\\\PayumController\\:\\:provideTokenBasedOnPayment\\(\\) has parameter \\$redirectOptions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\GetStatusFactory\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/GetStatusFactory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\GetStatusFactoryInterface\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/GetStatusFactoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\ResolveNextRouteFactory\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/ResolveNextRouteFactory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\ResolveNextRouteFactoryInterface\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/ResolveNextRouteFactoryInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Request\\\\ResolveNextRoute\\:\\:getRouteParameters\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -1677,6 +1662,11 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\DependencyInjection\\\\SyliusShopExtension\\:\\:configureCheckoutResolverIfNeeded\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\DependencyInjection\\\\SyliusShopExtension\\:\\:configureOrderPay\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
 
@@ -2919,6 +2909,26 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentInterface\\:\\:setDetails\\(\\) has parameter \\$details with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Payment/Model/PaymentInterface.php
+
+		-
+			message: "#^Call to method toBinary\\(\\) on an unknown class Symfony\\\\Component\\\\Uid\\\\Uuid\\.$#"
+			count: 1
+			path: src/Sylius/Component/Payment/Model/PaymentRequest.php
+
+		-
+			message: "#^Method Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentRequest\\:\\:getHash\\(\\) has invalid return type Symfony\\\\Component\\\\Uid\\\\Uuid\\.$#"
+			count: 1
+			path: src/Sylius/Component/Payment/Model/PaymentRequest.php
+
+		-
+			message: "#^Property Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentRequest\\:\\:\\$hash has unknown class Symfony\\\\Component\\\\Uid\\\\Uuid as its type\\.$#"
+			count: 1
+			path: src/Sylius/Component/Payment/Model/PaymentRequest.php
+
+		-
+			message: "#^Method Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentRequestInterface\\:\\:getHash\\(\\) has invalid return type Symfony\\\\Component\\\\Uid\\\\Uuid\\.$#"
+			count: 1
+			path: src/Sylius/Component/Payment/Model/PaymentRequestInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Payment\\\\Resolver\\\\DefaultPaymentMethodResolver\\:\\:__construct\\(\\) has parameter \\$paymentMethodRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentMethodRepositoryInterface but does not specify its types\\: T$#"

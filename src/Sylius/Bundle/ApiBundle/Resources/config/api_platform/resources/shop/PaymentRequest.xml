@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Component\Payment\Model\PaymentRequest">
+        <operations>
+            <operation
+                name="sylius_api_show_payment_request_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/payment-requests/{hash}"
+            >
+                <normalizationContext>
+                    <values>
+                        <value>sylius:shop:payment_request:show</value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_show_payment_request_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/payment-requests"
+                itemUriTemplate="/shop/payment-requests/{hash}"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest"
+            >
+                <normalizationContext>
+                    <values>
+                        <value>sylius:shop:payment_request:show</value>
+                    </values>
+                </normalizationContext>
+                <denormalizationContext>
+                    <values>
+                        <value>sylius:shop:payment_request:create</value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value>sylius</value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_show_payment_request_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/shop/payment-requests/{hash}"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest"
+                provider="sylius_api.state_provider.shop.payment.payment_request.item"
+            >
+                <normalizationContext>
+                    <values>
+                        <value>sylius:shop:payment_request:show</value>
+                    </values>
+                </normalizationContext>
+                <denormalizationContext>
+                    <values>
+                        <value>sylius:shop:payment_request:update</value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value>sylius</value>
+                    </values>
+                </validationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>
