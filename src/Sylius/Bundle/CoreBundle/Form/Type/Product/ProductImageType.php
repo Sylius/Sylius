@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -49,6 +50,10 @@ final class ProductImageType extends ImageType
                             ->setParameter('product', $options['product'])
                         ;
                     },
+                ])
+                ->add('position', IntegerType::class, [
+                    'label' => 'sylius.ui.position',
+                    'required' => false,
                 ])
             ;
         }

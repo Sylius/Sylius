@@ -17,7 +17,7 @@
 
         <service id="sylius.form.extension.type.gateway_config.crypted" class="Sylius\Bundle\PayumBundle\Form\Extension\CryptedGatewayConfigTypeExtension">
             <argument type="service" id="payum.dynamic_gateways.cypher" on-invalid="null" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType" priority="100" />
+            <tag name="form.type_extension" priority="100" />
         </service>
     </services>
 </container>

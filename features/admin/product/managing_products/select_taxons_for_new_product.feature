@@ -9,7 +9,7 @@ Feature: Select taxon for a new product
         And the store classifies its products as "T-Shirts", "Accessories", "Funny" and "Sad"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Specifying main taxon for configurable product
         When I want to create a new configurable product
         And I specify its code as "WHISKEY_GENTLEMEN"

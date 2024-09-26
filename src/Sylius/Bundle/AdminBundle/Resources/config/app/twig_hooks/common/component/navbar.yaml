@@ -6,6 +6,8 @@ twig_hooks:
             items:
                 template: '@SyliusAdmin/shared/crud/common/navbar/items.html.twig'
         'sylius_admin.common.component.navbar.items':
+            shop_preview:
+                component: 'sylius_admin:navbar:shop_preview'
             notifications:
                 component: 'sylius_admin:navbar:notifications'
             user_dropdown:

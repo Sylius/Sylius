@@ -15,27 +15,27 @@ Feature: Browsing variants affected by catalog promotions
         And this product has "Sylius T-Shirt" variant priced at "$15.00"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Browsing product variants affected by a catalog promotion applied on variants
         Given there is a catalog promotion "PHP T-Shirt promotion" that reduces price by "50%" and applies on "PHP T-Shirt" variant
         When I browse variants affected by catalog promotion "PHP T-Shirt promotion"
         Then there should be 1 product variant on the list
         And it should be the "PHP T-Shirt" product variant
 
-    @ui @api
+    @api @ui
     Scenario: Browsing product variants affected by a catalog promotion applied on products
         Given there is a catalog promotion "T-Shirt promotion" that reduces price by "20%" and applies on "T-Shirt" product
         When I browse variants affected by catalog promotion "T-Shirt promotion"
         Then there should be 2 product variants on the list
         And it should be "PHP T-Shirt" and "Sylius T-Shirt" product variants
 
-    @ui @api
+    @api @ui
     Scenario: Browsing product variants affected by a catalog promotion applied on taxons
         Given there is a catalog promotion "Clothes promotion" that reduces price by "10%" and applies on "Clothes" taxon
         When I browse variants affected by catalog promotion "Clothes promotion"
         Then there should be 3 product variants on the list
 
-    @ui @api
+    @api @ui
     Scenario: Browsing product variants affected by a catalog promotion when its scope overlaps with an exclusive promotion
         Given there is a catalog promotion "T-Shirt promotion" that reduces price by "20%" and applies on "T-Shirt" product
         And there is an exclusive catalog promotion "Sylius T-Shirt promotion" with priority 100 that reduces price by "30%" and applies on "Sylius T-Shirt" variant

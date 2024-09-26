@@ -31,7 +31,7 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_customer_as_logged_user(): void
+    public function it_gets_a_customer_as_logged_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
         /** @var CustomerInterface $customer */

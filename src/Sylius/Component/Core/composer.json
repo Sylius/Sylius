@@ -53,18 +53,18 @@
         "sylius/taxation": "^2.0",
         "sylius/taxonomy": "^2.0",
         "sylius/user": "^2.0",
-        "symfony/http-client": "^6.4.0 || ^7.0",
-        "symfony/http-foundation": "^6.4.0 || ^7.0",
-        "symfony/mime": "^6.3.3 || ^7.0",
+        "symfony/http-client": "^6.4.0 || ^7.1",
+        "symfony/http-foundation": "^6.4.0 || ^7.1",
+        "symfony/mime": "^6.3.3 || ^7.1",
         "symfony/service-contracts": "^2.5 || ^3.0",
-        "symfony/string": "^6.4.0 || ^7.0",
+        "symfony/string": "^6.4.0 || ^7.1",
         "webmozart/assert": "^1.9",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/property-access": "^6.4.0 || ^7.0"
+        "symfony/property-access": "^6.4.0 || ^7.1"
     },
     "config": {
         "allow-plugins": {
@@ -76,7 +76,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "7.0.*"
+            "require": "^7.1"
         }
     },
     "autoload": {
