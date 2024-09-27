@@ -1,5 +1,5 @@
 imports:
-    - { resource: '../../vendor/sylius/bootstrap-admin-ui/config/app.php' }
+    - { resource: '@SyliusBootstrapAdminUiBundle/config/app.php' }
         
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
 
