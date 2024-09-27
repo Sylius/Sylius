@@ -65,4 +65,5 @@ return [
     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle::class => ['all' => true],
+    Sylius\BootstrapAdminUi\Symfony\SyliusBootstrapAdminUiBundle::class => ['all' => true],
 ];

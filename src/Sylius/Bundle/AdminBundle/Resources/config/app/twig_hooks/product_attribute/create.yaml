@@ -15,6 +15,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product_attribute/form/translations.html.twig'
             configuration:
                 template: '@SyliusAdmin/product_attribute/form/configuration.html.twig'
+            sections:
+                enabled: false
 
         'sylius_admin.product_attribute.create.content.form.general':
             code:

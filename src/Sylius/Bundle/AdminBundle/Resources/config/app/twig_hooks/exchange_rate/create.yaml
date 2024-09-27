@@ -15,6 +15,8 @@ twig_hooks:
                 template: '@SyliusAdmin/exchange_rate/form/sections/general.html.twig'
 
         'sylius_admin.exchange_rate.create.content.form.sections.general':
+            default:
+                enabled: false
             ratio:
                 template: '@SyliusAdmin/exchange_rate/form/sections/general/ratio.html.twig'
             source_currency:

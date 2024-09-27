@@ -15,5 +15,7 @@ twig_hooks:
                 template: '@SyliusAdmin/locale/form/sections/general.html.twig'
 
         'sylius_admin.locale.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/locale/form/sections/general/code.html.twig'

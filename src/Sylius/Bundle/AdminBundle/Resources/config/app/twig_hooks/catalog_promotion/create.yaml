@@ -28,6 +28,8 @@ twig_hooks:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/translations/description.html.twig'
 
         'sylius_admin.catalog_promotion.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/general/code.html.twig'
             name:
