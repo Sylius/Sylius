@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
@@ -86,6 +87,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function impersonate(): void
     {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getElement('actions_button')->click();
+        }
         $this->getElement('impersonate_button')->click();
     }
 
@@ -122,6 +126,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'actions_button' => '[data-test-customer-actions]',
             'customer_email' => '[data-test-customer-email]',
             'customer_name' => '[data-test-customer-fullname]',
             'customer_phone_number' => '[data-test-customer-phone]',
