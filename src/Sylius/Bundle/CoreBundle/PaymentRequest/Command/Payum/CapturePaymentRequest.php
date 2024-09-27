@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareTrait;
+use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
+use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareTrait;
 
 class CapturePaymentRequest implements PaymentRequestHashAwareInterface
 {
