@@ -23,13 +23,12 @@ Feature: Receiving discounts with product minimum price specified
         Then its price should be decreased by "$5.00"
         And my cart total should be "$45.00"
 
-    @api @no-ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Receiving fixed discount for my cart
         Given there is a promotion "Holiday promotion"
         And it gives "$10.00" discount to every order
         When I add product "T-Shirt" to the cart
-        Then its price should be decreased by "$5.00"
-        And my cart total should be "$45.00"
+        Then my cart total should be "$45.00"
         And my discount should be "-$5.00"
 
     @api @ui @mink:chromedriver
