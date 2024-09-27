@@ -42,7 +42,6 @@ Don't worry, everything was automatically installed via Composer.
     {
         $bundles = array(
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),

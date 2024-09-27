@@ -46,7 +46,7 @@
         "sylius/product": "^2.0",
         "sylius/promotion": "^2.0",
         "sylius/registry": "^1.6",
-        "sylius/resource": "^1.11 || ^1.12@alpha",
+        "sylius/resource": "^1.12@alpha",
         "sylius/review": "^2.0",
         "sylius/shipping": "^2.0",
         "sylius/state-machine-abstraction": "^2.0",
