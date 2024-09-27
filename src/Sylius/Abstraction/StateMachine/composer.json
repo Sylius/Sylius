@@ -21,9 +21,9 @@
     },
     "require": {
         "php": "^8.2",
-        "symfony/dependency-injection": "^6.4.1 || ^7.0",
-        "symfony/http-kernel": "^6.4.1 || ^7.0",
-        "symfony/workflow": "^6.4.0 || ^7.0",
+        "symfony/dependency-injection": "^6.4.1 || ^7.1",
+        "symfony/http-kernel": "^6.4.1 || ^7.1",
+        "symfony/workflow": "^6.4.0 || ^7.1",
         "winzou/state-machine": "^0.4",
         "winzou/state-machine-bundle": "^0.6"
     },
@@ -40,7 +40,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "7.0.*"
+            "require": "^7.1"
         }
     }
 }

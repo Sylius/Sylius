@@ -59,5 +59,12 @@
             <group>sylius:admin:product:index</group>
             <group>sylius:admin:product:show</group>
         </attribute>
+
+        <attribute name="position">
+            <group>sylius:admin:product_image:index</group>
+            <group>sylius:admin:product_image:show</group>
+            <group>sylius:admin:product_image:update</group>
+            <group>sylius:admin:product:show</group>
+        </attribute>
     </class>
 </serializer>

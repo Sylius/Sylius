@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Application\CommandHandler;
 
 use Sylius\Bundle\ApiBundle\Application\Command\FooCommand;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 #[AsMessageHandler]
 final class FooHandler

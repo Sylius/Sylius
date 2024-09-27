@@ -7,7 +7,7 @@ Feature: Administrator validation
     Background:
         Given I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator without email and name
         When I want to create a new administrator
         And I do not specify its email
@@ -16,21 +16,21 @@ Feature: Administrator validation
         Then I should be notified that the email is required
         And I should be notified that the name is required
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator without password
         When I want to create a new administrator
         And I do not specify its password
         And I try to add it
         Then I should be notified that the password is required
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator with invalid email
         When I want to create a new administrator
         And I specify its email as "Ted"
         And I try to add it
         Then I should be notified that this email is not valid
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator with taken email
         Given there is an administrator "ted@example.com"
         When I want to create a new administrator
@@ -39,7 +39,7 @@ Feature: Administrator validation
         Then I should be notified that email must be unique
         And there should still be only one administrator with an email "ted@example.com"
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator with taken name
         Given there is an administrator with name "Ted"
         When I want to create a new administrator
@@ -48,7 +48,7 @@ Feature: Administrator validation
         Then I should be notified that name must be unique
         And there should still be only one administrator with name "Ted"
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator with too long username specified
         When I want to create a new administrator
         And I specify its email as "l.skywalker@gmail.com"
@@ -58,7 +58,7 @@ Feature: Administrator validation
         And I try to add it
         Then I should be notified that this "username" is too long
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator with too long first name specified
         When I want to create a new administrator
         And I specify its email as "l.skywalker@gmail.com"
@@ -69,7 +69,7 @@ Feature: Administrator validation
         And I try to add it
         Then I should be notified that this "first name" is too long
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new administrator with too long last name specified
         When I want to create a new administrator
         And I specify its email as "l.skywalker@gmail.com"
@@ -80,7 +80,7 @@ Feature: Administrator validation
         And I try to add it
         Then I should be notified that this "last name" is too long
 
-    @no-ui @api
+    @api @no-ui
     Scenario: Trying to add a new administrator with wrong locale code specified
         When I want to create a new administrator
         And I specify its email as "l.skywalker@gmail.com"

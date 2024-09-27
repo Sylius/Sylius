@@ -1,6 +1,7 @@
 {% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
 
 {% set form = hookable_metadata.context.form %}
+{% set prefixes = hookable_metadata.prefixes %}
 
 <div class="card mb-3">
     <div class="card-header">
@@ -8,5 +9,5 @@
             {{ 'sylius.ui.translations'|trans }}
         </div>
     </div>
-    {{ translations.default(form.translations, null, { accordion_flush: true }) }}
+    {{ translations.with_hook(form.translations, prefixes, null, { accordion_flush: true }) }}
 </div>

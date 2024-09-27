@@ -31,8 +31,8 @@ Feature: Changing images of an existing product
     @api @ui @mink:chromedriver
     Scenario: Changing the type of image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
-        And this product has an image "lamborghini.jpg" with "thumbnail" type
-        And this product has an image "ford.jpg" with "banner" type
+        And this product has an image "lamborghini.jpg" with "thumbnail" type at position 1
+        And this product has an image "ford.jpg" with "banner" type at position 2
         When I want to modify this product
         And I change the first image type to "banner"
         And I save my changes to the images
@@ -43,8 +43,8 @@ Feature: Changing images of an existing product
     @api @ui @mink:chromedriver
     Scenario: Changing the type of image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
-        And this product has an image "lamborghini.jpg" with "thumbnail" type
-        And this product has an image "ford.jpg" with "banner" type
+        And this product has an image "lamborghini.jpg" with "thumbnail" type at position 1
+        And this product has an image "ford.jpg" with "banner" type at position 2
         When I want to modify this product
         And I change the first image type to "banner"
         And I save my changes to the images

@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 #[AsMessageHandler]

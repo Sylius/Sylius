@@ -53,6 +53,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
 
     public const EXTRA_VERSION = 'DEV';
 
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [

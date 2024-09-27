@@ -591,11 +591,35 @@ final readonly class ProductContext implements Context
     }
 
     /**
-     * @Then I should see a main image
+     * @Then I should be able to see a main image of type :type
      */
-    public function iShouldSeeAMainImage(): void
+    public function iShouldSeeAMainImageOfType(string $type): void
     {
-        Assert::true($this->showPage->isMainImageDisplayed());
+        Assert::true($this->showPage->isMainImageOfTypeDisplayed($type));
+    }
+
+    /**
+     * @Then the main image should be of type :type
+     */
+    public function theMainImageShouldBeOfType(string $type): void
+    {
+        Assert::true($this->showPage->isMainImageOfType($type));
+    }
+
+    /**
+     * @Then the first thumbnail image should be of type :type
+     */
+    public function theFirstThumbnailImageShouldBeOfType(string $type): void
+    {
+        Assert::true($this->showPage->getFirstThumbnailsImageType() === $type);
+    }
+
+    /**
+     * @Then the second thumbnail image should be of type :type
+     */
+    public function theSecondThumbnailImageShouldBeOfType(string $type): void
+    {
+        Assert::true($this->showPage->getSecondThumbnailsImageType() === $type);
     }
 
     /**

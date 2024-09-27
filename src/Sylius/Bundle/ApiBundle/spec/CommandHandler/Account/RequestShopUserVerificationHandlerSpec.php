@@ -24,7 +24,6 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
-use Webmozart\Assert\Assert;
 
 final class RequestShopUserVerificationHandlerSpec extends ObjectBehavior
 {

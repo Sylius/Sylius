@@ -27,6 +27,7 @@ final class SyliusLocaleBundle extends AbstractResourceBundle
         $container->addCompilerPass(new CompositeLocaleContextPass());
     }
 
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [

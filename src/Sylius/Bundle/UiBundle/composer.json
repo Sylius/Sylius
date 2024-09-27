@@ -37,11 +37,11 @@
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/grid-bundle": "^1.12 || ^1.13@alpha",
         "sylius/twig-extra": "dev-main",
-        "symfony/config": "^6.4.0 || ^7.0",
-        "symfony/expression-language": "^6.4.0 || ^7.0",
-        "symfony/framework-bundle": "^6.4.1 || ^7.0",
-        "symfony/security-bundle": "^6.4.0 || ^7.0",
-        "symfony/security-core": "^6.4.0 || ^7.0",
+        "symfony/config": "^6.4.0 || ^7.1",
+        "symfony/expression-language": "^6.4.0 || ^7.1",
+        "symfony/framework-bundle": "^6.4.1 || ^7.1",
+        "symfony/security-core": "^6.4.0 || ^7.1",
+        "symfony/security-bundle": "^6.4.0 || ^7.1",
         "symfony/templating": "^6.4.0",
         "symfony/ux-live-component": "^2.17",
         "symfony/ux-twig-component": "^2.17",
@@ -52,8 +52,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.0",
-        "symfony/form": "^6.4.1 || ^7.0",
+        "symfony/dependency-injection": "^6.4.1 || ^7.1",
+        "symfony/form": "^6.4.1 || ^7.1",
         "twig/twig": "^3.14.0"
     },
     "config": {
@@ -68,7 +68,7 @@
         },
         "symfony": {
             "allow-contrib": false,
-            "require": "7.0.*"
+            "require": "^7.1"
         }
     },
     "autoload": {

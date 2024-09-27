@@ -13,7 +13,7 @@ Feature: Filtering products by a channel
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui @api
+    @api @ui
     Scenario: Filtering products by a chosen channel
         When I choose "Web-EU" as a channel filter
         And I filter
@@ -22,7 +22,7 @@ Feature: Filtering products by a channel
         And I should see a product with name "MacBook Pro"
         But I should not see any product with name "HP Spectre"
 
-    @ui @api
+    @api @ui
     Scenario: Filtering products by a chosen channel
         When I choose "Web-US" as a channel filter
         And I filter

@@ -39,3 +39,7 @@ twig_hooks:
                 template: '@SyliusAdmin/product_variant/form/sections/translations.html.twig'
             taxes:
                 template: '@SyliusAdmin/product_variant/form/sections/taxes.html.twig'
+
+        'sylius_admin.product_variant.create.content.form.sections.translations':
+            name:
+                template: '@SyliusAdmin/product_variant/form/sections/translations/name.html.twig'

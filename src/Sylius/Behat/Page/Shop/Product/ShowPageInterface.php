@@ -77,7 +77,13 @@ interface ShowPageInterface extends ShopPageInterface
 
     public function isOutOfStock(): bool;
 
-    public function isMainImageDisplayed(): bool;
+    public function isMainImageOfTypeDisplayed(string $type): bool;
+
+    public function isMainImageOfType(string $type): bool;
+
+    public function getFirstThumbnailsImageType(): string;
+
+    public function getSecondThumbnailsImageType(): string;
 
     public function countReviews(): int;
 
