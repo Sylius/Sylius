@@ -119,6 +119,11 @@
             <tag name="kernel.event_listener" event="sylius.product.pre_delete" method="protectFromRemovingProductInUseByPromotionRule" />
         </service>
 
+        <service id="sylius.listener.product_option_value" class="Sylius\Bundle\CoreBundle\EventListener\ProductOptionValueDeletionListener">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="doctrine.orm.entity_listener" event="preRemove" entity="%sylius.model.product_option_value.class%" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener">
             <tag name="doctrine.event_listener" event="postGenerateSchema" method="postGenerateSchema" lazy="true" />
         </service>
