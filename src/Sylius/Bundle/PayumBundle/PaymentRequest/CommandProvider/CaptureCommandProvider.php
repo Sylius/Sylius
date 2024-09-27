@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum;
+namespace Sylius\Bundle\PayumBundle\PaymentRequest\CommandProvider;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Command\CapturePaymentRequest;
