@@ -81,9 +81,9 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
-     * @When I want to view the payment request of the first payment
+     * @When I want to view the payment requests of the first payment
      */
-    public function iWantToViewThePaymentRequestOfTheFirstPayment(): void
+    public function iWantToViewThePaymentRequestsOfTheFirstPayment(): void
     {
         $this->indexPage->showPaymentRequestOfNthPayment(1);
     }
