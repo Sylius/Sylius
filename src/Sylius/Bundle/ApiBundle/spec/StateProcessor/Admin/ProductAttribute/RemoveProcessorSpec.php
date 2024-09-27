@@ -19,6 +19,7 @@ use ApiPlatform\State\ProcessorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 final class RemoveProcessorSpec extends ObjectBehavior
