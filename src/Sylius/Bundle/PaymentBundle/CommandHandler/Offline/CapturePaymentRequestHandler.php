@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\CommandHandler\Offline;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Bundle\PaymentBundle\Command\Offline\CapturePaymentRequest;
+use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

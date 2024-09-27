@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\PaymentBundle\CommandHandler\Offline;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Bundle\PaymentBundle\Command\Offline\CapturePaymentRequest;
+use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class CapturePaymentRequestHandlerSpec extends ObjectBehavior

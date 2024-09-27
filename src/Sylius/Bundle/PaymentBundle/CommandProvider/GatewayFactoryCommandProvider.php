@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\CommandProvider;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface;
 use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationCheckerInterface;
+use Sylius\Bundle\PaymentBundle\Provider\GatewayFactoryNameProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 

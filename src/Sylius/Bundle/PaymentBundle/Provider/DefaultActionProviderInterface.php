@@ -11,14 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Provider;
+namespace Sylius\Bundle\PaymentBundle\Provider;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-final class DefaultPayloadProvider implements DefaultPayloadProviderInterface
+interface DefaultActionProviderInterface
 {
-    public function getPayload(PaymentRequestInterface $paymentRequest): mixed
-    {
-        return null;
-    }
+    public function getAction(PaymentRequestInterface $paymentRequest): string;
 }

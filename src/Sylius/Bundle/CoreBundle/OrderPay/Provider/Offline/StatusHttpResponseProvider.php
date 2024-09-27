@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline;
 
 use Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProviderInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\HttpResponseProviderInterface;
+use Sylius\Bundle\PaymentBundle\Provider\HttpResponseProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

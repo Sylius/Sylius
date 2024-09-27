@@ -11,16 +11,15 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-
-        <service id="sylius.payment_request.http_response.provider.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\ActionsHttpResponseProvider">
+        <service id="sylius.payment_request.http_response.provider.offline" class="Sylius\Bundle\PaymentBundle\Provider\ActionsHttpResponseProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.http_response.provider.offline" index-by="action" />
             <tag name="sylius.payment_request.http_response.provider" gateway-factory="offline" />
         </service>
-
     </services>
 </container>

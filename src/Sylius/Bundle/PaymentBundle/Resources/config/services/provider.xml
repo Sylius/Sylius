@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.payment_request.provider.gateway_factory_name" class="Sylius\Bundle\PaymentBundle\Provider\GatewayFactoryNameProvider" />
+        <service id="Sylius\Bundle\PaymentBundle\Provider\GatewayFactoryNameProviderInterface" alias="sylius.payment_request.provider.gateway_factory_name" />
+
+        <service id="sylius.payment_request.provider.payment_request" class="Sylius\Bundle\PaymentBundle\Provider\PaymentRequestProvider">
+            <argument type="service" id="sylius.repository.payment_request" />
+        </service>
+        <service id="Sylius\Bundle\PaymentBundle\Provider\PaymentRequestProviderInterface" alias="sylius.payment_request.provider.payment_request" />
+
+        <service id="sylius.payment_request.provider.http_response.gateway_factory" class="Sylius\Bundle\PaymentBundle\Provider\GatewayFactoryHttpResponseProvider">
+            <argument type="service" id="sylius.payment_request.provider.gateway_factory_name" />
+            <argument type="tagged_locator" tag="sylius.payment_request.http_response.provider" index-by="gateway-factory" />
+        </service>
+        <service id="sylius.payment_request.provider.http_response.default" alias="sylius.payment_request.provider.http_response.gateway_factory" />
+
+        <service id="sylius.payment_request.provider.default_action" class="Sylius\Bundle\PaymentBundle\Provider\DefaultActionProvider" />
+        <service id="Sylius\Bundle\PaymentBundle\Provider\DefaultActionProviderInterface" alias="sylius.payment_request.provider.default_action" />
+
+        <service id="sylius.payment_request.provider.default_payload" class="Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProvider" />
+        <service id="Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProviderInterface" alias="sylius.payment_request.provider.default_payload" />
+    </services>
+</container>
