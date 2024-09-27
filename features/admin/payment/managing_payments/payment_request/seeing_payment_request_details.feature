@@ -1,5 +1,5 @@
 @managing_payments
-Feature: Seeing payment request details
+Feature: Seeing payment request's details
     In order to have an overview of one of payment requests
     As an Administrator
     I want to be able to see its details

@@ -84,10 +84,7 @@ final readonly class ManagingPaymentRequestsContext implements Context
      */
     public function thereShouldBeProductVariantsOnTheList(int $count): void
     {
-        Assert::same(
-            $this->indexPage->countItems(),
-            $count,
-        );
+        Assert::same($this->indexPage->countItems(), $count);
     }
 
     /**

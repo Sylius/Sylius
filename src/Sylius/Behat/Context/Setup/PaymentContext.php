@@ -127,7 +127,7 @@ final readonly class PaymentContext implements Context
     /**
      * @Given the store has :paymentMethodName payment method not assigned to any channel
      */
-    public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName): void
+    public function theStoreHasPaymentMethodNotAssignedToAnyChannel(string $paymentMethodName): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
     }

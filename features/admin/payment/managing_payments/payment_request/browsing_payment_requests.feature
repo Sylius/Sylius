@@ -18,7 +18,7 @@ Feature: Browsing payment requests
     @api @ui
     Scenario: Browsing payment requests of a payment
         When I browse payments
-        And I want to view the payment request of the first payment
+        And I want to view the payment requests of the first payment
         Then there should be 3 payment requests on the list
         And it should be the payment request with action "authorize"
         And it should be the payment request with action "capture"

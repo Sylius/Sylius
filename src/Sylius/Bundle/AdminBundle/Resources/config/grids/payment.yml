@@ -69,7 +69,7 @@ sylius_grid:
                         class: "%sylius.model.channel.class%"
             actions:
                 item:
-                    show_payment_requests:
+                    list_payment_requests:
                         type: show
                         icon: list_letters
                         label: sylius.ui.list_payment_requests

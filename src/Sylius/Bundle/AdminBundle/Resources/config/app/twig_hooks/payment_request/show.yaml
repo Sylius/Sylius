@@ -33,6 +33,3 @@ twig_hooks:
                 template: '@SyliusAdmin/payment_request/show/content/sections/general/created_at.html.twig'
             updated_at:
                 template: '@SyliusAdmin/payment_request/show/content/sections/general/updated_at.html.twig'
-            
-                
-            

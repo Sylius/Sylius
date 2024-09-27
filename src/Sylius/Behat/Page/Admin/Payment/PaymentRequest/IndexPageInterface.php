@@ -22,5 +22,4 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function chooseActionToFilter(string $action): void;
 
     public function chooseStateToFilter(string $state): void;
-
 }
