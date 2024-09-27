@@ -26,7 +26,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: mysql
         ports:
-            - ${MYSQL_PORT:-3307}:3306
+            - ${MYSQL_PORT:-3306}:3306
         networks:
             - sylius
     
