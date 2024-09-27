@@ -4,7 +4,7 @@
     <div class="sf-toolbar-block">
         <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
             <div class="sf-toolbar-icon">
-                {{ include('@SyliusUi/DataCollector/icon.svg') }}
+                {{ include('@SyliusUi/data_collector/icon.svg') }}
                 <span class="sf-toolbar-value">{{ collector.numberOfRenderedEvents }}</span>
             </div>
         </a>
@@ -25,7 +25,7 @@
 {% block menu %}
     <span class="label">
         <span class="icon">
-            {{ include('@SyliusUi/DataCollector/icon.svg') }}
+            {{ include('@SyliusUi/data_collector/icon.svg') }}
         </span>
         <strong>Template events</strong>
         <span class="count">

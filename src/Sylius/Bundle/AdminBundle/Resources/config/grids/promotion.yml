@@ -23,7 +23,7 @@ sylius_grid:
                     path: .
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/nameAndDescription.html.twig"
+                        template: "@SyliusUi/grid/field/name_and_description.html.twig"
                         vars:
                             th_class: "w-100"
                 code:
