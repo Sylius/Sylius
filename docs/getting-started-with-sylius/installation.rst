@@ -28,6 +28,18 @@ The easiest way to install Sylius on your local machine is to use the following 
 
 It will create a ``MyFirstShop`` directory with a brand new Sylius application inside.
 
+.. tip::
+
+    We are about to release a new major version of Sylius, which is going to be 2.0.
+    Worry not, upgrading from 1.x to 2.x will be possible.
+    It is currently recommended to start with 1.x and upgrade the project once 2.0 is there,
+    but if you'd like to start playing around with the still-in-progress version, you can use this command to set the environment
+    on Sylius 2.0-ALPHA.X/BETA.X.
+
+    .. code-block:: bash
+
+        composer composer create-project --stability=dev sylius/sylius-standard:2.0.x-dev acme
+
 .. note::
 
     Are you familiar with Docker? Check out the :doc:`Sylius Installation Guide with Docker </book/installation/installation_with_docker>`
