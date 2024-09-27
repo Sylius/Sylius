@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Offline;
+namespace Sylius\Bundle\PaymentBundle\CommandHandler\Offline;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Offline\CapturePaymentRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
+use Sylius\Bundle\PaymentBundle\Command\Offline\CapturePaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

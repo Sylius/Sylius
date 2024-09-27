@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\CommandProvider\Offline;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Offline\CapturePaymentRequest;
+use Sylius\Bundle\PaymentBundle\Command\Offline\CapturePaymentRequest;
 use Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 

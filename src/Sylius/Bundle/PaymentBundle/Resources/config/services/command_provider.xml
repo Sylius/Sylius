@@ -31,7 +31,7 @@
             <tag name="sylius.payment_request.command_provider" gateway-factory="offline" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.offline.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Offline\CapturePaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.offline.capture" class="Sylius\Bundle\PaymentBundle\CommandProvider\Offline\CapturePaymentRequestCommandProvider">
             <tag name="sylius.payment_request.command_provider.offline" action="capture" />
         </service>
     </services>
