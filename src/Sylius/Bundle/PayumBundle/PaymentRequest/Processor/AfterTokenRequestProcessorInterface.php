@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum;
+namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
 
+use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface RequestProcessorInterface
+interface AfterTokenRequestProcessorInterface
 {
     public function process(
         PaymentRequestInterface $paymentRequest,
-        mixed $request,
-        string $gatewayName,
+        TokenInterface $token,
     ): void;
 }
