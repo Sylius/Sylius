@@ -2,7 +2,7 @@ sylius_admin_payment_method:
     resource: |
         alias: sylius.payment_method
         section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
+        templates: "@SyliusAdminUi\\crud"
         except: ['show']
         redirect: update
         grid: sylius_admin_payment_method
@@ -31,7 +31,7 @@ sylius_admin_payment_method_create:
                     gatewayFactory: $factory
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType
-            template: "@SyliusAdmin/shared/crud/create.html.twig"
+            template: "@SyliusAdminUi/crud/create.html.twig"
             redirect: sylius_admin_payment_method_update
             permission: true
             vars:

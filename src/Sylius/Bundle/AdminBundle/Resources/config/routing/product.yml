@@ -2,7 +2,7 @@ sylius_admin_product:
     resource: |
         alias: sylius.product
         section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
+        templates: "@SyliusAdminUi\\crud"
         redirect: update
         grid: sylius_admin_product
         form:
@@ -29,7 +29,7 @@ sylius_admin_product_create_simple:
                 method: createWithVariant
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
-            template: "@SyliusAdmin/shared/crud/create.html.twig"
+            template: "@SyliusAdminUi/crud/create.html.twig"
             redirect: sylius_admin_product_update
             vars:
                 route:

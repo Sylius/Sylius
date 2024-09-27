@@ -2,7 +2,7 @@ sylius_admin_locale:
     resource: |
         alias: sylius.locale
         section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
+        templates: "@SyliusAdminUi\\crud"
         only: ['index', 'create']
         redirect: index
         grid: sylius_admin_locale

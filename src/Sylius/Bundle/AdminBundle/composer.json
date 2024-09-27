@@ -33,9 +33,10 @@
         "php": "^8.2",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
+        "sylius/admin-ui": "dev-main",
         "sylius/core-bundle": "^2.0",
-        "sylius/ui-bundle": "^2.0",
         "sylius/twig-hooks": "~0.3.0",
+        "sylius/ui-bundle": "^2.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.1",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/ux-autocomplete": "^2.17",
@@ -56,7 +57,8 @@
     "config": {
         "allow-plugins": {
             "symfony/flex": true
-        }
+        },
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {

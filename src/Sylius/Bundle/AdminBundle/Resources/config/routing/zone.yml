@@ -2,7 +2,7 @@ sylius_admin_zone:
     resource: |
         alias: sylius.zone
         section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
+        templates: "@SyliusAdminUi\\crud"
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_zone
@@ -29,7 +29,7 @@ sylius_admin_zone_create:
                     type: $type
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
-            template: "@SyliusAdmin/shared/crud/create.html.twig"
+            template: "@SyliusAdminUi/crud/create.html.twig"
             redirect: sylius_admin_zone_update
             permission: true
             vars:
