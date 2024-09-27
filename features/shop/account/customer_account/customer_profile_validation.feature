@@ -10,7 +10,7 @@ Feature: Customer profile validation
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @api @ui
+    @ui
     Scenario: Trying to remove my first name
         When I want to modify my profile
         And I remove the first name

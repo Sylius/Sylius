@@ -8,7 +8,7 @@ sylius_twig_hooks:
             form:
                 component: 'sylius_shop:account:profile_update:form'
                 props:
-                    resource: '@=_context.customer'
+                    resource: '@=_context.resource'
                     form: '@=_context.form'
                     template: '@SyliusShop/account/profile_update/layout/content/form.html.twig'
 

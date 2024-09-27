@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
+{% set prefixes = ['sylius_shop.account.dashboard', 'sylius_shop.shared.account'] %}
+
 {% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
 
 {% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
@@ -7,7 +9,7 @@
 {% block content %}
     <div class="container mb-auto">
         <div class="row my-4">
-            {% hook 'layout' with { _prefixes: ['sylius_shop.account.dashboard', 'sylius_shop.shared.account'], customer } %}
+            {% hook 'layout' with { _prefixes: prefixes, customer } %}
         </div>
     </div>
 {% endblock %}
