@@ -28,11 +28,13 @@ class ProductVariantController extends ResourceController
      */
     public function updatePositionsAction(Request $request): Response
     {
+        $data = json_decode($request->getContent(), true);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        $productVariantsToUpdate = $request->request->all('productVariants');
+        $productVariantsToUpdate = $data['productVariants'] ?? [];
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-variant-position', (string) $request->request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-variant-position', $data['_csrf_token'] ?? '')) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
