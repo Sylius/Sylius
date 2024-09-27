@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Command\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
-/** @experimental */
 class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(

@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Payment\Model\PaymentRequest">
+    <resource class="%sylius.model.payment_request.class%">
         <operations>
             <operation
                 name="sylius_api_admin_payment_request_get"
@@ -32,9 +32,9 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Payment\Model\PaymentRequest" uriTemplate="/admin/payments/{paymentId}/payment-requests">
+    <resource class="%sylius.model.payment_request.class%" uriTemplate="/admin/payments/{paymentId}/payment-requests">
         <uriVariables>
-            <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="id" toClass="Sylius\Component\Payment\Model\PaymentRequest" toProperty="payment"/>
+            <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="paymentRequests"/>
         </uriVariables>
         <operations>
             <operation name="sylius_api_admin_payment_payment_request_get_collection" class="ApiPlatform\Metadata\GetCollection">
@@ -47,6 +47,9 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.admin.payment_request</filter>
+                </filters>
             </operation>
         </operations>
     </resource>

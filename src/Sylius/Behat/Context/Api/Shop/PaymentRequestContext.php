@@ -15,14 +15,13 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 
-final class PaymentRequestContext implements Context
+final readonly class PaymentRequestContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private RequestFactoryInterface $requestFactory,
-        private PaymentMethodRepositoryInterface $paymentMethodRepository,
     ) {
     }
 

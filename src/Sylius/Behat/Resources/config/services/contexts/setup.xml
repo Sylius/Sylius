@@ -142,7 +142,6 @@
             <argument type="collection">
                 <argument key="offline">Offline</argument>
             </argument>
-
         </service>
 
         <service id="Sylius\Behat\Context\Setup\PriceHistoryContext">
@@ -319,6 +318,10 @@
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <service id="sylius.behat.context.setup.payment_request" class="Sylius\Behat\Context\Setup\PaymentRequestContext">
+            <argument type="service" id="sylius.command_bus" />
         </service>
     </services>
 </container>

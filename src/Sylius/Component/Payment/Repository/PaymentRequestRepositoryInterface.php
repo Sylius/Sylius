@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
@@ -23,5 +24,9 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface PaymentRequestRepositoryInterface extends RepositoryInterface
 {
+    public function findOneByPaymentId(mixed $hash, mixed $paymentId): ?PaymentRequestInterface;
+
+    public function createQueryBuilderForPayment(string $paymentId): QueryBuilder;
+
     public function duplicateExists(PaymentRequestInterface $paymentRequest): bool;
 }
