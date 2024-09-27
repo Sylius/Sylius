@@ -291,7 +291,7 @@ final class CartContext implements Context
      */
     public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween(ProductInterface $product): void
     {
-        Assert::false($this->responseChecker->hasViolationWithMessage(
+        Assert::true($this->responseChecker->hasViolationWithMessage(
             $this->shopClient->getLastResponse(),
             'Quantity must be between 1 and 9999.',
         ));

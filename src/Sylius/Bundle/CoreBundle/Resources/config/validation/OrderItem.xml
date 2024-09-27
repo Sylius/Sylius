@@ -27,5 +27,13 @@
                 <value>sylius_checkout_complete</value>
             </option>
         </constraint>
+        <property name="quantity">
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemQuantityRange">
+                <option name="min">1</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

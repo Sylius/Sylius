@@ -19,10 +19,11 @@
             </option>
         </constraint>
         <property name="quantity">
-            <constraint name="Range">
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemQuantityRange">
                 <option name="min">1</option>
-                <option name="minMessage">sylius.order_item.quantity.min</option>
-                <option name="groups">sylius</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="message">sylius.order_item.quantity.not_blank</option>

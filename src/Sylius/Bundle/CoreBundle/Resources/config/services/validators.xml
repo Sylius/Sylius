@@ -136,5 +136,11 @@
             <argument type="service" id="sylius.repository.zone" />
             <tag name="validator.constraint_validator" alias="sylius_zone_code_exists" />
         </service>
+
+        <service id="sylius.validator.cart_item_quantity_range" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemQuantityRangeValidator">
+            <argument type="service" id="property_accessor" />
+            <argument>%sylius.order_item_quantity_modifier.limit%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_cart_item_quantity_range" />
+        </service>
     </services>
 </container>
