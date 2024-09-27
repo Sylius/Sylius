@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.payment_method.update.content':
             form:

@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius.shop.product_review.create':
             sidebar:
