@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\PaymentRequest\CommandProvider;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Command\StatusPaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 

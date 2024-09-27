@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider;
+namespace Sylius\Bundle\PaymentBundle\CommandProvider;
 
 interface ServiceProviderAwareCommandProviderInterface extends PaymentRequestCommandProviderInterface
 {

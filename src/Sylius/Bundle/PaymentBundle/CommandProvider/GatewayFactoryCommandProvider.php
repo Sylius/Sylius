@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider;
+namespace Sylius\Bundle\PaymentBundle\CommandProvider;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface;
 use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationCheckerInterface;
