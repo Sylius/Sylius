@@ -7,7 +7,7 @@ services:
     ##
     
     'sylius.payment_request.command_provider.payum.offline':
-        class: Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider
+        class: Sylius\Bundle\PaymentBundle\CommandProvider\ActionsCommandProvider
         arguments:
             - !tagged_locator { tag: 'sylius.payment_request.command_provider.payum.offline', index_by: 'action' }
         tags:
