@@ -69,7 +69,7 @@
         </service>
 
         <service id="sylius_api.state_processor.admin.product_option_value.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductOption\PersistProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <tag name="api_platform.state_processor" />
         </service>
 

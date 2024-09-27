@@ -29,7 +29,7 @@ final readonly class PersistProcessor implements ProcessorInterface
     ) {
     }
 
-    public function process($data, Operation $operation, array $uriVariables = [], array $context = []): void
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         Assert::isInstanceOf($data, ProductOptionInterface::class);
         Assert::isInstanceOf($operation, Put::class);
@@ -39,5 +39,7 @@ final readonly class PersistProcessor implements ProcessorInterface
         } catch (ResourceDeleteException) {
             throw new ProductOptionValueCannotBeRemoved();
         }
+
+        return $this->processor->process($data, $operation, $uriVariables, $context);
     }
 }
