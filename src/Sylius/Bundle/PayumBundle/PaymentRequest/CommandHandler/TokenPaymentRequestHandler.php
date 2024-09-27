@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
+namespace Sylius\Bundle\PayumBundle\PaymentRequest\CommandHandler;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;

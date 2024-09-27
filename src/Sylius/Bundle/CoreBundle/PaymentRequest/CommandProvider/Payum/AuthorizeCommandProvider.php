@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\AuthorizePaymentRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Command\AuthorizePaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class AuthorizeCommandProvider implements PaymentRequestCommandProviderInterface

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\StatusPaymentRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Command\StatusPaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class StatusCommandProvider implements PaymentRequestCommandProviderInterface
