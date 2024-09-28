@@ -46,13 +46,7 @@ final class NonChannelLocaleListener
      */
     public function restrictRequestLocale(RequestEvent $event): void
     {
-        if (\method_exists($event, 'isMainRequest')) {
-            $isMainRequest = $event->isMainRequest();
-        } else {
-            /** @phpstan-ignore-next-line */
-            $isMainRequest = $event->isMasterRequest();
-        }
-        if (!$isMainRequest) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
