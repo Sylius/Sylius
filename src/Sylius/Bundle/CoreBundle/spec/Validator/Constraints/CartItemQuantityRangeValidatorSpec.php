@@ -74,6 +74,6 @@ final class CartItemQuantityRangeValidatorSpec extends ObjectBehavior
 
         $context->buildViolation(self::MESSAGE)->shouldBeCalled()->willReturn($constraintViolationBuilder);
 
-        $this->validate(18, new CartItemQuantityRange(min: 1));
+        $this->validate(18, new CartItemQuantityRange(notInRangeMessage: self::MESSAGE, min: 1));
     }
 }
