@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Customer;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProcessorInterface;
 use Sylius\Component\Core\Model\Customer;
@@ -35,10 +36,12 @@ final readonly class PersistProcessor implements ProcessorInterface
         Assert::isInstanceOf($data, Customer::class);
         Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
-        if ($operation instanceof Put) {
+        if ($operation instanceof Put || $operation instanceof Post) {
             $shopUser = $data->getUser();
 
-            $this->passwordUpdater->updatePassword($shopUser);
+            if (null !== $shopUser) {
+                $this->passwordUpdater->updatePassword($shopUser);
+            }
         }
 
         return $this->persistProcessor->process($data, $operation, $uriVariables, $context);
