@@ -15,7 +15,7 @@ Feature: Displaying themed channel website
         When I visit this channel's homepage
         Then I should not see a homepage from "maverick/meerkat" theme
 
-    @no-api @todo-ui
+    @no-api @ui
     Scenario: Displaying themed shop homepage
         Given channel "United States" uses "maverick/meerkat" theme
         When I visit this channel's homepage
