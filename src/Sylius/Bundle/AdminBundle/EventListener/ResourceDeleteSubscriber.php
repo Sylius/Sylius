@@ -46,13 +46,7 @@ final readonly class ResourceDeleteSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        if (\method_exists($event, 'isMainRequest')) {
-            $isMainRequest = $event->isMainRequest();
-        } else {
-            /** @phpstan-ignore-next-line */
-            $isMainRequest = $event->isMasterRequest();
-        }
-        if (!$isMainRequest || 'html' !== $event->getRequest()->getRequestFormat()) {
+        if (!$event->isMainRequest() || 'html' !== $event->getRequest()->getRequestFormat()) {
             return;
         }
 
