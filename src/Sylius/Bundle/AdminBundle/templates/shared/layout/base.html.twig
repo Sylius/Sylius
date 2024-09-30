@@ -10,7 +10,6 @@
         <title>{% block title %}Sylius{% endblock %}</title>
 
         {% block metatags %}{% endblock %}
-        {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
         {% block stylesheets %}
             {% hook generic_hook ~ '#stylesheets' %}
         {% endblock %}
@@ -20,7 +19,6 @@
             {% block body %}{% endblock %}
         </div>
 
-        {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
         {% block javascripts %}
             {% hook generic_hook ~ '#javascripts' %}
         {% endblock %}
