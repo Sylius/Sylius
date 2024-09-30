@@ -134,5 +134,11 @@
             <argument type="service" id="validator"/>
             <tag name="api_platform.state_processor"/>
         </service>
+
+        <service id="sylius_api.state_processor.admin.customer.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Customer\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius.security.password_updater" />
+            <tag name="api_platform.state_processor" />
+        </service>
     </services>
 </container>
