@@ -14,19 +14,26 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ShopSecurityContext implements Context
 {
+    /**
+     * @param ExampleFactoryInterface<ShopUserInterface> $userFactory
+     * @param UserRepositoryInterface<ShopUserInterface> $userRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private SecurityServiceInterface $securityService,
         private ExampleFactoryInterface $userFactory,
         private UserRepositoryInterface $userRepository,
+        private JWTTokenManagerInterface $jwtTokenManager,
     ) {
     }
 
@@ -67,6 +74,7 @@ final readonly class ShopSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('user', $user);
+        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
     }
 
     /**
