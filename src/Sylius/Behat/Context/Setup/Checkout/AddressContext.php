@@ -61,23 +61,8 @@ final readonly class AddressContext implements Context
         $command = new UpdateCart(
             orderTokenValue: $cartToken,
             email: null,
-            billingAddress: $this->getDefaultAddress(),
+            billingAddress: $this->addressFactory->createDefaultWithCountryCode('US'),
         );
         $this->commandBus->dispatch($command);
-    }
-
-    private function getDefaultAddress(): AddressInterface
-    {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
-
-        $address->setCity('New York');
-        $address->setStreet('Wall Street');
-        $address->setPostcode('00-001');
-        $address->setCountryCode('US');
-        $address->setFirstName('Richy');
-        $address->setLastName('Rich');
-
-        return $address;
     }
 }
