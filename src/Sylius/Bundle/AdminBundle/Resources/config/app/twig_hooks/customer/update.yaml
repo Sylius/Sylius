@@ -25,6 +25,8 @@ twig_hooks:
                 template: '@SyliusAdmin/customer/form/sections/account_credentials.html.twig'
 
         'sylius_admin.customer.update.content.form.sections.general':
+            default:
+                enabled: false
             first_name:
                 template: '@SyliusAdmin/customer/form/sections/general/first_name.html.twig'
             last_name:

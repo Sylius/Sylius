@@ -40,3 +40,15 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
             create:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/create.html.twig'
+
+        'sylius_admin.common.create.content.form':
+            sections:
+                template: '@SyliusAdmin/shared/crud/common/content/form/sections.html.twig'
+
+        'sylius_admin.common.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/shared/crud/common/content/form/sections/general.html.twig'
+
+        'sylius_admin.common.create.content.form.sections.general':
+            default:
+                template: '@SyliusAdmin/shared/crud/common/content/form/sections/general/default.html.twig'

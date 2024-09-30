@@ -15,5 +15,7 @@ twig_hooks:
                 template: '@SyliusAdmin/currency/form/sections/general.html.twig'
 
         'sylius_admin.currency.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/currency/form/sections/general/code.html.twig'

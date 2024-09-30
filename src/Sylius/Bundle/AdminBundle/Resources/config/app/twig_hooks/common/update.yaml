@@ -45,3 +45,15 @@ twig_hooks:
             update:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/update.html.twig'
                 priority: -300
+
+        'sylius_admin.common.update.content.form':
+            sections:
+                template: '@SyliusAdmin/shared/crud/common/content/form/sections.html.twig'
+                
+        'sylius_admin.common.update.content.form.sections':
+            general:
+                template: '@SyliusAdmin/shared/crud/common/content/form/sections/general.html.twig'                
+
+        'sylius_admin.common.update.content.form.sections.general':
+            default:
+                template: '@SyliusAdmin/shared/crud/common/content/form/sections/general/default.html.twig'            
