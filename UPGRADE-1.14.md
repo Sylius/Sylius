@@ -97,12 +97,34 @@
 1. The following templating helpers and its interfaces have been deprecated and will be removed in Sylius 2.0:
     - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper`
     - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface`
+    - `Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
 
 1. The following constructor signatures have been changed:
+
+   `Sylius\Bundle\InventoryBundle\Twig\InventoryExtension`
+    ```diff
+    use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+
+        public function __construct(
+    -       private InventoryHelper $helper,
+    +       private InventoryHelper|AvailabilityCheckerInterface $helper
+        )
+    ```
+
+   `Sylius\Bundle\LocaleBundle\Twig\LocaleExtension`
+    ```diff
+    use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+
+        public function __construct(
+    -       private LocaleHelperInterface $localeHelper,
+    +       private LocaleHelperInterface|LocaleConverterInterface $localeHelper,
+    +       private ?LocaleContextInterface $localeContext = null,
+        )
+    ```
 
    `Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension`
     ```diff
