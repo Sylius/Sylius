@@ -11,8 +11,8 @@
             "name": "United States",
             "enabled": true,
             "provinces": [
-                "\/api\/v2\/admin\/provinces\/US-MI",
-                "\/api\/v2\/admin\/provinces\/US-WY"
+                "\/api\/v2\/admin\/countries\/US\/provinces\/US-MI",
+                "\/api\/v2\/admin\/countries\/US\/provinces\/US-WY"
             ]
         },
         {

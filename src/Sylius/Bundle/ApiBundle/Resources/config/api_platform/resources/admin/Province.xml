@@ -18,7 +18,15 @@
 >
     <resource class="%sylius.model.province.class%">
         <operations>
-            <operation name="sylius_api_admin_province_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/provinces/{code}">
+            <operation
+                name="sylius_api_admin_province_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/countries/{countryCode}/provinces/{provinceCode}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="countryCode" fromClass="%sylius.model.country.class%" fromProperty="provinces" />
+                    <uriVariable parameterName="provinceCode" fromClass="%sylius.model.province.class%"/>
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,7 +38,15 @@
                 </normalizationContext>
             </operation>
 
-            <operation name="sylius_api_admin_province_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/provinces/{code}">
+            <operation
+                name="sylius_api_admin_province_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/countries/{countryCode}/provinces/{provinceCode}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="countryCode" fromClass="%sylius.model.country.class%" fromProperty="provinces" />
+                    <uriVariable parameterName="provinceCode" fromClass="%sylius.model.province.class%"/>
+                </uriVariables>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
