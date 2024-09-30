@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.channel_pricing_log_entry.index.content.header':
             breadcrumbs:
