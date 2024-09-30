@@ -34,7 +34,6 @@
         </service>
 
         <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.currency" />
             <tag name="twig.extension" />
         </service>
 

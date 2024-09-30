@@ -95,6 +95,8 @@
     ```
 
 1. The following templating helpers and its interfaces have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper`
+    - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
