@@ -304,6 +304,7 @@ final readonly class CartContext implements Context
      * @Given /^an anonymous user added (product "([^"]+)") to the cart$/
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given /^I have (product "[^"]+") added to the cart$/
+     * @Given /^I have the (product "[^"]+") added to the cart$/
      * @Given I added product :product to the cart
      * @Given he added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
