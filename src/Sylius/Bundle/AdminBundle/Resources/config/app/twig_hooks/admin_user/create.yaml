@@ -11,6 +11,8 @@ twig_hooks:
                 template: '@SyliusAdmin/admin_user/form/sections.html.twig'
 
         'sylius_admin.admin_user.create.content.form.sections':
+            general:
+                enabled: false
             account:
                 template: '@SyliusAdmin/admin_user/form/sections/account.html.twig'
             personal_information:
