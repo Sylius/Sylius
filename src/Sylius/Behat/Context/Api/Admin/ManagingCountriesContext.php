@@ -178,7 +178,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iRemoveProvinceName(ProvinceInterface $province): void
     {
-        $this->client->buildUpdateRequest(Resources::PROVINCES, $province->getCode());
+        $this->client->buildUpdateRequest(
+            sprintf('countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
+        );
         $this->client->addRequestData('name', '');
         $this->client->update();
     }
