@@ -1,6 +1,6 @@
 {
   "name": "@sylius-ui/shop",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha-1",
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
@@ -23,5 +23,12 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sylius/SyliusShopBundle.git"
-  }
+  },
+  "files": [
+    "./package.json",
+    "./README.md",
+    "./LICENSE",
+    "./index.js",
+    "./Resources/assets/"
+  ]
 }
