@@ -226,7 +226,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'coupon_field' => '[data-test-cart-promotion-coupon-input]',
             'flash_message' => '[data-test-sylius-flash-message]',
             'form' => '[data-live-name-value="sylius_shop:cart:form"]',
-            'summary_component' => '[data-live-name-value="sylius_shop:checkout:summary"]',
+            'summary_component' => '[data-live-name-value="sylius_shop:cart:summary"]',
             'grand_total' => '[data-test-cart-grand-total]',
             'item_image' => '[data-test-cart-items] [data-test-cart-item="%number%"] [data-test-cart-item-product] [data-test-main-image]',
             'item_product_option_value' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-cart-item-product] [data-test-option-name="%option_name%"] [data-test-option-value]',
