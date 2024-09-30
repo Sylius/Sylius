@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
+use Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentRequestRepository;
 use Sylius\Bundle\PaymentBundle\Form\Type\GatewayConfigType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
@@ -160,7 +161,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(PaymentRequest::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PaymentRequestInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(PaymentRequestRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(PaymentRequestFactory::class)->end()
                                         ->scalarNode('form')->defaultValue(null)->end()
                                     ->end()
