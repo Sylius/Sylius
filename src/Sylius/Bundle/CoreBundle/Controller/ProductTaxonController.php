@@ -29,11 +29,13 @@ class ProductTaxonController extends ResourceController
 {
     public function updateProductTaxonsPositionsAction(Request $request): Response
     {
+        $data = json_decode($request->getContent(), true);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $this->validateCsrfProtection($request, $configuration);
+        $this->validateCsrfProtection($data['_csrf_token'] ?? [], $configuration);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
-        $productTaxonsPositions = $request->request->all('productTaxons');
+        $productTaxonsPositions = $data['productTaxons'] ?? [];
         $productTaxonsPositions = array_combine(
             array_column($productTaxonsPositions, 'id'),
             array_column($productTaxonsPositions, 'position'),
@@ -98,9 +100,9 @@ class ProductTaxonController extends ResourceController
         return $this->repository->count(['taxon' => $productTaxon->getTaxon()]) - 1;
     }
 
-    private function validateCsrfProtection(Request $request, RequestConfiguration $configuration): void
+    private function validateCsrfProtection(string $csrfToken, RequestConfiguration $configuration): void
     {
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-taxon-position', (string) $request->request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-taxon-position', $csrfToken)) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
     }

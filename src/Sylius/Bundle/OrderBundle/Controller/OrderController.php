@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -47,7 +46,7 @@ class OrderController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($cart));
+            return $this->createRestView($configuration, $cart);
         }
 
         $form = $this->resourceFormFactory->create($configuration, $cart);
@@ -94,7 +93,7 @@ class OrderController extends ResourceController
             $this->manager->flush();
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+                return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
@@ -108,7 +107,7 @@ class OrderController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+            return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
 
         return $this->render(
@@ -122,7 +121,7 @@ class OrderController extends ResourceController
         );
     }
 
-    protected function addFlash(string $type, $message): void
+    protected function addFlash(string $type, mixed $message): void
     {
         /** @var SessionInterface $session */
         $session = $this->get('request_stack')->getSession();

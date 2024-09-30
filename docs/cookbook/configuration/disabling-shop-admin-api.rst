@@ -226,15 +226,6 @@ The part that has to be removed from this file is shown below:
 
     #    - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
 
-**5.** Remove fos_rest config from ``config/packages/fos_rest.yaml``.
-
-.. code-block:: yaml
-
-    fos_rest:
-        format_listener:
-            rules:
-            #    - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true } # remove or leave this line commented
-
 **Done!** There is no API in Sylius now, just admin and shop.
 
 Learn more

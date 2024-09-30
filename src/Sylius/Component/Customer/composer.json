@@ -33,7 +33,7 @@
     "require": {
         "php": "^8.2",
         "doctrine/collections": "^1.6",
-        "sylius/resource": "^1.11 || ^1.12@alpha"
+        "sylius/resource": "^1.12@alpha"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
