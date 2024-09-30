@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.customer_group.create.content':
             form:
@@ -18,6 +18,8 @@ twig_hooks:
                 template: '@SyliusAdmin/customer_group/form/sections/general.html.twig'
 
         'sylius_admin.customer_group.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/customer_group/form/sections/general/code.html.twig'
             name:

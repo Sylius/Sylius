@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.payment_method.create.content':
             form:
@@ -20,6 +20,8 @@ twig_hooks:
                 template: '@SyliusAdmin/payment_method/form/sections/translations.html.twig'
 
         'sylius_admin.payment_method.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/payment_method/form/sections/general/code.html.twig'
             position:

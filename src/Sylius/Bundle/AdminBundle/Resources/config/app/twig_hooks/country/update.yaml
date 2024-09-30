@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.country.update.content':
             form:
@@ -18,6 +18,8 @@ twig_hooks:
                 template: '@SyliusAdmin/country/form/sections/general.html.twig'
 
         'sylius_admin.country.update.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/country/form/sections/general/code.html.twig'
             enabled:

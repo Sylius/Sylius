@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.promotion.create.content':
             form:
@@ -28,6 +28,8 @@ twig_hooks:
                 template: '@SyliusAdmin/promotion/form/sections/translations/label.html.twig'
         
         'sylius_admin.promotion.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/promotion/form/sections/general/code.html.twig'
             name:

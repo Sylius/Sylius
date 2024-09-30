@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.shipping_method.create.content':
             form:
@@ -6,6 +6,10 @@ twig_hooks:
                 props:
                     form: '@=_context.form'
                     resource: '@=_context.resource'
+                    
+        'sylius_admin.shipping_method.create.content.form':
+            sections:
+                enabled: false                    
 
         'sylius_admin.shipping_method.create.content.form#left':
             general:

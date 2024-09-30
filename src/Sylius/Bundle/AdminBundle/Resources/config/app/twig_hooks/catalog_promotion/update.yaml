@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.catalog_promotion.update.content':
             form:
@@ -30,6 +30,8 @@ twig_hooks:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/translations/description.html.twig'
 
         'sylius_admin.catalog_promotion.update.content.form.sections.general':
+            default: 
+                enabled: false
             code:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/general/code.html.twig'
             name:

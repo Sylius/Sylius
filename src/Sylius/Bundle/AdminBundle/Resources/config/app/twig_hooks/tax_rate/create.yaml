@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.tax_rate.create.content':
             form:
@@ -17,6 +17,8 @@ twig_hooks:
                 template: '@SyliusAdmin/tax_rate/form/sections/configuration.html.twig'
 
         'sylius_admin.tax_rate.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/tax_rate/form/sections/general/code.html.twig'
             name:

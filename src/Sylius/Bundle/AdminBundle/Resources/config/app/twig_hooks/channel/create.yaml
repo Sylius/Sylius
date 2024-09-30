@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.channel.create.content':
             form:
@@ -24,6 +24,8 @@ twig_hooks:
                 template: '@SyliusAdmin/channel/form/sections/look_and_feel.html.twig'
 
         'sylius_admin.channel.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/channel/form/sections/general/code.html.twig'
             color:

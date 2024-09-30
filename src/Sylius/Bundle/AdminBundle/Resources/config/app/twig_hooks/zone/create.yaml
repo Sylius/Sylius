@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.zone.create.content':
             form:
@@ -23,6 +23,8 @@ twig_hooks:
                 template: '@SyliusAdmin/zone/form/sections/members/member.html.twig'
 
         'sylius_admin.zone.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/zone/form/sections/general/code.html.twig'
             type:
