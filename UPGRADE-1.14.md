@@ -98,6 +98,8 @@
     - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper`
     - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface`
     - `Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper`
+    - `Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper`
+    - `Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
@@ -117,7 +119,8 @@
 
    `Sylius\Bundle\LocaleBundle\Twig\LocaleExtension`
     ```diff
-    use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+    use Sylius\Component\Locale\Context\LocaleContextInterface;
+    use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
         public function __construct(
     -       private LocaleHelperInterface $localeHelper,

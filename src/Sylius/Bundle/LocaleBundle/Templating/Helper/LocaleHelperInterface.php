@@ -13,8 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
+use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Symfony\Component\Templating\Helper\HelperInterface;
 
+trigger_deprecation(
+    'sylius/locale-bundle',
+    '1.14',
+    'The "%s" interface is deprecated, use "%s" instead.',
+    LocaleHelperInterface::class,
+    LocaleConverterInterface::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Locale\Converter\LocaleConverterInterface} instead. */
 interface LocaleHelperInterface extends HelperInterface
 {
     /**
