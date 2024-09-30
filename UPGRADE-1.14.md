@@ -104,6 +104,7 @@
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
     - `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
+    - `Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper`
 
 1. The following constructor signatures have been changed:
 
@@ -146,6 +147,16 @@
         public function __construct(
     -       private FormatMoneyHelperInterface $helper,
     +       private private FormatMoneyHelperInterface|MoneyFormatterInterface $helper,
+        )
+    ```
+
+   `Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension`
+    ```diff
+    use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
+
+        public function __construct(
+    -       private AdjustmentsHelper $adjustmentsHelper,
+    +       private AdjustmentsHelper|AdjustmentsAggregatorInterface $adjustmentsHelper,
         )
     ```
 
