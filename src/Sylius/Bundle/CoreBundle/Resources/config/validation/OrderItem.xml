@@ -30,6 +30,7 @@
         <property name="quantity">
             <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemQuantityRange">
                 <option name="min">1</option>
+                <option name="notInRangeMessage">sylius.cart_item.quantity.not_in_range</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>

@@ -18,8 +18,6 @@ use Symfony\Component\Validator\Constraints\Range;
 
 final class CartItemQuantityRange extends Range
 {
-    public string $notInRangeMessage = 'sylius.cart_item.quantity.not_in_range';
-
     public function validatedBy(): string
     {
         return 'sylius_cart_item_quantity_range';
