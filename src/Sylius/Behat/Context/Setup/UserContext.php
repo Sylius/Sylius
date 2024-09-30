@@ -69,7 +69,7 @@ final readonly class UserContext implements Context
      * @Given the account of :email was deleted
      * @Given my account :email was deleted
      */
-    public function accountWasDeleted(string $email)
+    public function accountWasDeleted(string $email): void
     {
         /** @var ShopUserInterface $user */
         $user = $this->userRepository->findOneByEmail($email);

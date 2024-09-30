@@ -18,7 +18,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProcessorInterface;
-use Sylius\Component\Core\Model\Customer;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Webmozart\Assert\Assert;
 
@@ -33,7 +33,7 @@ final readonly class PersistProcessor implements ProcessorInterface
 
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
-        Assert::isInstanceOf($data, Customer::class);
+        Assert::isInstanceOf($data, CustomerInterface::class);
         Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
         if ($operation instanceof Put || $operation instanceof Post) {
