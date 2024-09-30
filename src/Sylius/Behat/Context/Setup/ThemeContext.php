@@ -74,7 +74,7 @@ final readonly class ThemeContext implements Context
      */
     public function themeChangesHomepageTemplateContents(ThemeInterface $theme, string $contents): void
     {
-        $this->changeTemplateContents('/templates/bundles/SyliusShopBundle/Homepage/index.html.twig', $theme, $contents);
+        $this->changeTemplateContents('/templates/bundles/SyliusShopBundle/homepage/index.html.twig', $theme, $contents);
     }
 
     /**
