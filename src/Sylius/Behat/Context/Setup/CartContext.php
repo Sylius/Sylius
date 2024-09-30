@@ -64,7 +64,9 @@ final readonly class CartContext implements Context
     /**
      * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I (?:have|had) (product "[^"]+") in the (cart)$/
+     * @Given /^I have the (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
+     * @Given /^I have the (product "[^"]+") added to the (cart)$/
      * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
      * @Given /^the (?:customer|visitor) added ("[^"]+" product) to the (cart)$/
      * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/

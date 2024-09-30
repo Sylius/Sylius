@@ -199,6 +199,7 @@ final class ShippingContext implements Context
 
     /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee within the ("[^"]+" zone)$/
+     * @Given /^the store has the "([^"]+)" shipping method with a ("[^"]+") fee within the ("[^"]+" zone)$/
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee for the (rest of the world)$/
      */
     public function storeHasShippingMethodWithFeeAndZone(string $shippingMethodName, int $fee, ZoneInterface $zone): void

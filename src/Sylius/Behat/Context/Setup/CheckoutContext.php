@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Service\Factory\AddressFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
@@ -26,7 +27,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
@@ -36,14 +36,13 @@ final readonly class CheckoutContext implements Context
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
      * @param RepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
-     * @param FactoryInterface<AddressInterface> $addressFactory
      */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private RepositoryInterface $shippingMethodRepository,
         private RepositoryInterface $paymentMethodRepository,
         private MessageBusInterface $commandBus,
-        private FactoryInterface $addressFactory,
+        private AddressFactoryInterface $addressFactory,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -64,7 +63,7 @@ final readonly class CheckoutContext implements Context
         $command = new UpdateCart(
             orderTokenValue: $cartToken,
             email: $email,
-            billingAddress: $this->getDefaultAddress(),
+            billingAddress: $this->addressFactory->createDefault(),
         );
         $this->commandBus->dispatch($command);
 
@@ -85,7 +84,7 @@ final readonly class CheckoutContext implements Context
         $command = new UpdateCart(
             orderTokenValue: $cartToken,
             email: null,
-            billingAddress: $this->getDefaultAddress(),
+            billingAddress: $this->addressFactory->createDefault(),
         );
         $this->commandBus->dispatch($command);
 
@@ -106,21 +105,6 @@ final readonly class CheckoutContext implements Context
         Assert::notNull($cart);
 
         $this->completeCheckout($cart, $shippingMethod, $paymentMethod);
-    }
-
-    private function getDefaultAddress(): AddressInterface
-    {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
-
-        $address->setCity('New York');
-        $address->setStreet('Wall Street');
-        $address->setPostcode('00-001');
-        $address->setCountryCode('US');
-        $address->setFirstName('Richy');
-        $address->setLastName('Rich');
-
-        return $address;
     }
 
     private function completeCheckout(
