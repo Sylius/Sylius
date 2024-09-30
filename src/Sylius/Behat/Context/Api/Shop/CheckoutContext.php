@@ -897,8 +897,9 @@ final class CheckoutContext implements Context
 
     /**
      * @Then I should not be able to proceed checkout shipping step
+     * @Then I should not be able to proceed to the checkout shipping step
      */
-    public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
+    public function iShouldNotBeAbleToProceedToTheCheckoutShippingStep(): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
         Assert::isEmpty($this->getCart()['shipments']);

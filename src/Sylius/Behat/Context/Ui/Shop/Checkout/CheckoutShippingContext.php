@@ -75,6 +75,10 @@ final readonly class CheckoutShippingContext implements Context
      */
     public function iCompleteTheShippingStep(): void
     {
+        if (!$this->selectShippingPage->isOpen()) {
+            $this->selectShippingPage->open();
+        }
+
         $this->selectShippingPage->nextStep();
     }
 
@@ -222,8 +226,9 @@ final readonly class CheckoutShippingContext implements Context
 
     /**
      * @Then I should not be able to proceed checkout shipping step
+     * @Then I should not be able to proceed to the checkout shipping step
      */
-    public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
+    public function iShouldNotBeAbleToProceedToTheCheckoutShippingStep(): void
     {
         $this->selectShippingPage->tryToOpen();
 
