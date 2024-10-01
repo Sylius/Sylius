@@ -287,7 +287,8 @@ If your app never changed the hasher name configuration, you don't need to confi
 
 ## Directory structure
 
-* Configuration file `state_machine.yaml` has been moved from `@SyliusPaymentBundle/Resources/config/workflow` to `@SyliusPaymentBundle/Resources/config/app/workflow` and renamed to `payment.yaml`.
+* The Winzou state machine configuration file `state_machine.yml` has been moved from `@SyliusPaymentBundle/Resources/config/app` to `@SyliusPaymentBundle/Resources/config/app/state_machine` and renamed to `payment.yaml`.
+* The Symfony workflow configuration file `state_machine.yaml` has been moved from `@SyliusPaymentBundle/Resources/config/workflow` to `@SyliusPaymentBundle/Resources/config/app/workflow` and renamed to `payment.yaml`.
 
 ## Frontend
 

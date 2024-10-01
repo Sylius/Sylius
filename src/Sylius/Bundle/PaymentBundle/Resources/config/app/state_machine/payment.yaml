@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+winzou_state_machine:
+    sylius_payment:
+        class: "%sylius.model.payment.class%"
+        property_path: state
+        graph: sylius_payment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            new: ~
+            processing: ~
+            authorized: ~
+            completed: ~
+            failed: ~
+            cancelled: ~
+            unknown: ~
+            refunded: ~
+        transitions:
+            create:
+                from: [cart]
+                to: new
+            process:
+                from: [new]
+                to: processing
+            authorize:
+                from: [new, processing]
+                to: authorized
+            complete:
+                from: [new, processing, authorized]
+                to: completed
+            fail:
+                from: [new, processing, authorized]
+                to: failed
+            cancel:
+                from: [new, processing, authorized]
+                to: cancelled
+            refund:
+                from: [completed]
+                to: refunded
+            void:
+                from: [new, processing, authorized]
+                to: unknown
