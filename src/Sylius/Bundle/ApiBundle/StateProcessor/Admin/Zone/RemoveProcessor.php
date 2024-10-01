@@ -20,7 +20,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Webmozart\Assert\Assert;
 
 /** @implements ProcessorInterface<ZoneInterface> */
