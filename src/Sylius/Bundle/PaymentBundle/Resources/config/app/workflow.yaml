@@ -1,0 +1,5 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+imports:
+    - { resource: "@SyliusPaymentBundle/Resources/config/app/workflow/payment_request.yaml" }

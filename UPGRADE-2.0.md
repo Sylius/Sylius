@@ -282,6 +282,10 @@ https://symfony.com/doc/current/security/passwords.html#configure-a-new-hasher-u
 Note:
 If your app never changed the hasher name configuration, you don't need to configure this "migrate_from" configuration.
 
+## Directory structure
+
+* Configuration file `state_machine.yaml` has been moved from `@SyliusPaymentBundle/Resources/config/workflow` to `@SyliusPaymentBundle/Resources/config/app/workflow` and renamed to `payment.yaml`.
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module

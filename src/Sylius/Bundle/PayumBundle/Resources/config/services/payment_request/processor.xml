@@ -29,6 +29,7 @@
         <service id="sylius.payum.payment_request.processor.request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessor">
             <argument type="service" id="payum" />
             <argument type="service" id="sylius.payum.payment_request.context.payment_request" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
         <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface" alias="sylius.payum.payment_request.processor.request" />
     </services>

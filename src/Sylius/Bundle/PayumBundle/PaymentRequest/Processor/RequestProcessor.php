@@ -15,14 +15,17 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
 
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenAggregateInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\PaymentRequestTransitions;
 
-final class RequestProcessor implements RequestProcessorInterface
+final readonly class RequestProcessor implements RequestProcessorInterface
 {
     public function __construct(
         private Payum $payum,
         private PaymentRequestContextInterface $payumApiContext,
+        private StateMachineInterface $stateMachine,
     ) {
     }
 
@@ -41,7 +44,11 @@ final class RequestProcessor implements RequestProcessorInterface
             return;
         }
 
-        $paymentRequest->setState(PaymentRequestInterface::STATE_COMPLETED);
+        $this->stateMachine->apply(
+            $paymentRequest,
+            PaymentRequestTransitions::GRAPH,
+            PaymentRequestTransitions::TRANSITION_COMPLETE
+        );
 
         if (false === $request instanceof TokenAggregateInterface) {
             return;
