@@ -21,7 +21,7 @@
         </service>
 
         <service id="sylius.twig.extension.convert_amount" class="Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.convert_money" />
+            <argument type="service" id="sylius.currency_converter" />
             <tag name="twig.extension" />
         </service>
     </services>

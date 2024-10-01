@@ -28,7 +28,7 @@
         </service>
 
         <service id="sylius.twig.extension.money" class="Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.format_money" />
+            <argument type="service" id="sylius.money_formatter" />
             <tag name="twig.extension" />
         </service>
     </services>
