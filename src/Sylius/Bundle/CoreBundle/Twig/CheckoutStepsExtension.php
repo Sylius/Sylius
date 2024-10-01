@@ -41,6 +41,16 @@ final class CheckoutStepsExtension extends AbstractExtension
                 'The argument name $checkoutStepsHelper is deprecated and will be renamed to $orderPaymentMethodSelectionRequirementChecker in Sylius 2.0.',
             );
         }
+
+        if (null === $this->orderShippingMethodSelectionRequirementChecker) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.14',
+                'Not passing a $orderShippingMethodSelectionRequirementChecker to %s constructor as a second argument is deprecated and will be prohibited in Sylius 2.0. Pass an instance of %s instead.',
+                self::class,
+                OrderShippingMethodSelectionRequirementCheckerInterface::class,
+            );
+        }
     }
 
     public function getFunctions(): array

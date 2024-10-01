@@ -31,7 +31,7 @@
 
         <service id="sylius.templating.helper.currency" class="Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper" lazy="true">
             <tag name="templating.helper" alias="sylius_currency" />
-            <deprecated package="sylius/sylius" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
+            <deprecated package="sylius/currency-bundle" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension" public="false">
