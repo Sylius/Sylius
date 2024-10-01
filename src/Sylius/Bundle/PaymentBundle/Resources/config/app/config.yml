@@ -3,8 +3,6 @@
 
 imports:
     - { resource: "@SyliusPaymentBundle/Resources/config/app/messenger.yaml" }
-    - { resource: "@SyliusPaymentBundle/Resources/config/app/state_machine.yml" }
-    - { resource: "@SyliusPaymentBundle/Resources/config/app/workflow.yaml" }
 
 jms_serializer:
     metadata:

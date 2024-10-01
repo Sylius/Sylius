@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PaymentBundle\Tests\Functional\StateMachine;
+namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;

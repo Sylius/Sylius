@@ -46,8 +46,7 @@
         "phpunit/phpunit": "^9.5",
         "sylius/locale-bundle": "^2.0",
         "symfony/browser-kit": "^6.4.0 || ^7.1",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1",
-        "symfony/stopwatch": "^6.4 || ^7.1"
+        "symfony/dependency-injection": "^6.4.1 || ^7.1"
     },
     "config": {
         "allow-plugins": {
