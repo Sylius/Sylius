@@ -1,7 +1,7 @@
 {% set form = hookable_metadata.context.form %}
 
 {% if form.customer is defined %}
-    <div {{ stimulus_controller('api-login', {url: path('sylius_shop_login_check')} ) }}>
+    <div {{ stimulus_controller('api-login', {url: path('sylius_shop_json_login_check')} ) }}>
         <div class="d-none">
             <div class="alert alert-danger" data-api-login-target="errorPrototype"></div>
         </div>

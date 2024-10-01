@@ -11,6 +11,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product_association_type/form/general.html.twig'
             translations:
                 template: '@SyliusAdmin/product_association_type/form/translations.html.twig'
+            sections:
+                enabled: false             
 
         'sylius_admin.product_association_type.create.content.form.general':
             code:

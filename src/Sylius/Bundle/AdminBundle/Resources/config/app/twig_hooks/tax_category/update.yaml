@@ -15,6 +15,8 @@ twig_hooks:
                 template: '@SyliusAdmin/tax_category/form/sections/general.html.twig'
 
         'sylius_admin.tax_category.update.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/tax_category/form/sections/general/code.html.twig'
             name:

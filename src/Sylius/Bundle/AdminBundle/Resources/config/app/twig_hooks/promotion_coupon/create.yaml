@@ -27,9 +27,10 @@ twig_hooks:
         'sylius_admin.promotion_coupon.create.content.form.sections#right':
             configuration:
                 template: '@SyliusAdmin/promotion_coupon/form/sections/configuration.html.twig'
-            
 
         'sylius_admin.promotion_coupon.create.content.form.sections.general':
+            default:
+                enabled: false
             code:
                 template: '@SyliusAdmin/promotion_coupon/form/sections/general/code.html.twig'
 

@@ -1,2 +1,0 @@
-imports:
-    - { resource: "../test_cached/fos_rest.yaml" }
