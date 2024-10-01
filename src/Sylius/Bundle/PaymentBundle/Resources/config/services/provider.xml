@@ -38,5 +38,10 @@
 
         <service id="sylius.payment_request.provider.default_payload" class="Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProvider" />
         <service id="Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProviderInterface" alias="sylius.payment_request.provider.default_payload" />
+
+        <service id="sylius.payment_request.http_response.provider.offline" class="Sylius\Bundle\PaymentBundle\Provider\ActionsHttpResponseProvider">
+            <argument type="tagged_locator" tag="sylius.payment_request.http_response.provider.offline" index-by="action" />
+            <tag name="sylius.payment_request.http_response.provider" gateway-factory="offline" />
+        </service>
     </services>
 </container>

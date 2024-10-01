@@ -19,9 +19,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum.payment_request.resolver.doctrine_proxy_object_resolver" class="Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolver">
+        <service id="sylius.payum.payment_request.resolver.doctrine_proxy_object" class="Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolver">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
-        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolverInterface" alias="sylius.payum.payment_request.resolver.doctrine_proxy_object_resolver" />
+        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolverInterface" alias="sylius.payum.payment_request.resolver.doctrine_proxy_object" />
     </services>
 </container>

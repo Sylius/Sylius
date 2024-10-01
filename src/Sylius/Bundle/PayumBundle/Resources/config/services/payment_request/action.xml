@@ -19,14 +19,14 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum_action.payment_request.action.get_http_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Action\SyliusGetHttpRequestAction">
-            <argument type="service" id="sylius.payum.context.payment_request" />
+        <service id="sylius.payum.payment_request.action.get_http_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Action\SyliusGetHttpRequestAction">
+            <argument type="service" id="sylius.payum.payment_request.context.payment_request" />
 
             <tag name="payum.action" all="true" prepend="true" />
         </service>
 
-        <service id="sylius.payum_action.payment_request.action.render_template" class="Sylius\Bundle\PayumBundle\PaymentRequest\Action\SyliusRenderTemplateAction">
-            <argument type="service" id="sylius.payum.context.payment_request" />
+        <service id="sylius.payum.payment_request.action.render_template" class="Sylius\Bundle\PayumBundle\PaymentRequest\Action\SyliusRenderTemplateAction">
+            <argument type="service" id="sylius.payum.payment_request.context.payment_request" />
 
             <tag name="payum.action" all="true" prepend="true" />
         </service>

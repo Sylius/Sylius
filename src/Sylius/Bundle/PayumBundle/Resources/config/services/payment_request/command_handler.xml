@@ -21,7 +21,7 @@
 
         <service id="sylius.payum.payment_request.command_handler.token_payment_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\CommandHandler\TokenPaymentRequestHandler" abstract="true">
             <argument type="service" id="sylius.payment_request.provider.payment_request" />
-            <argument type="service" id="sylius.payum.payment_request.resolver.doctrine_proxy_object_resolver" />
+            <argument type="service" id="sylius.payum.payment_request.resolver.doctrine_proxy_object" />
             <argument type="service" id="sylius.payum.payment_request.factory.payum_token" />
             <argument type="service" id="sylius.payum.payment_request.processor.request" />
             <argument type="service" id="sylius.payum.payment_request.processor.after_token_request" />
@@ -39,7 +39,7 @@
 
         <service id="sylius.payum.payment_request.command_handler.model_payment_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\CommandHandler\ModelPaymentRequestHandler" abstract="true">
             <argument type="service" id="sylius.payment_request.provider.payment_request" />
-            <argument type="service" id="sylius.payum.payment_request.resolver.doctrine_proxy_object_resolver" />
+            <argument type="service" id="sylius.payum.payment_request.resolver.doctrine_proxy_object" />
             <argument type="service" id="sylius.payum.payment_request.processor.request" />
         </service>
 

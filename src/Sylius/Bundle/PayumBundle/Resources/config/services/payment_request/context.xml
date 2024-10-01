@@ -20,7 +20,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum.context.payment_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContext" />
-        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface" alias="sylius.payum.context.payment_request" />
+        <service id="sylius.payum.payment_request.context.payment_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContext" />
+        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface" alias="sylius.payum.payment_request.context.payment_request" />
     </services>
 </container>
