@@ -28,7 +28,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('default_adapter')->defaultValue('winzou_state_machine')->end()
+                ->scalarNode('default_adapter')->defaultValue('symfony_workflow')->end()
                 ->arrayNode('graphs_to_adapters_mapping')
                     ->useAttributeAsKey('graph_name')
                     ->scalarPrototype()->end()

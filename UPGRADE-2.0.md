@@ -6,6 +6,9 @@
     * The `sylius_default.bus` and `sylius_event.bus` configuration options were removed. Use `sylius.command_bus` and
       `sylius.event_bus` for commands and events respectively.
 
+* SyliusStateMachineAbstraction:
+    * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine` to `symfony_workflow`.
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is no longer supported in ResourceBundle and GridBundle:
