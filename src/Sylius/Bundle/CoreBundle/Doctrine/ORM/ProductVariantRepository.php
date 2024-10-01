@@ -73,6 +73,7 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
             ->innerJoin('o.optionValues', 'optionValue', Join::WITH, 'optionValue.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 }
