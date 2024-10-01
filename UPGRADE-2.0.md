@@ -268,6 +268,16 @@
         )
     ```
 
+   `Sylius\Bundle\InventoryBundle\Twig\InventoryExtension`
+    ```diff
+    use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+
+        public function __construct(
+    -       private InventoryHelper|AvailabilityCheckerInterface $helper,
+    +       private AvailabilityCheckerInterface $availabilityChecker,
+        )
+    ```
+
    `Sylius\Bundle\LocaleBundle\Twig\LocaleExtension`
     ```diff
     use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -298,6 +308,16 @@
         public function __construct(
     -       private private FormatMoneyHelperInterface|MoneyFormatterInterface $helper,
     +       private MoneyFormatterInterface $moneyFormatter,
+        )
+    ```
+
+   `Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension`
+    ```diff
+    use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
+
+        public function __construct(
+    -       private AdjustmentsHelper|AdjustmentsAggregatorInterface $adjustmentsHelper,
+    +       private AdjustmentsAggregatorInterface $adjustmentsAggregator,
         )
     ```
 
