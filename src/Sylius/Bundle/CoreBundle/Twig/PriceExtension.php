@@ -63,7 +63,11 @@ final class PriceExtension extends AbstractExtension
         ];
     }
 
-    /** @throws \InvalidArgumentException */
+    /**
+     * @param array<array-key, mixed> $context
+     *
+     * @throws \InvalidArgumentException
+     */
     private function getPrice(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');
@@ -71,7 +75,11 @@ final class PriceExtension extends AbstractExtension
         return $this->helper->calculate($productVariant, $context);
     }
 
-    /** @throws \InvalidArgumentException */
+    /**
+     * @param array<array-key, mixed> $context
+     *
+     * @throws \InvalidArgumentException
+     */
     private function getOriginalPrice(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');
@@ -79,7 +87,11 @@ final class PriceExtension extends AbstractExtension
         return $this->helper->calculateOriginal($productVariant, $context);
     }
 
-    /** @throws \InvalidArgumentException */
+    /**
+     * @param array<array-key, mixed> $context
+     *
+     * @throws \InvalidArgumentException
+     */
     private function getLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): ?int
     {
         Assert::keyExists($context, 'channel');
@@ -91,7 +103,11 @@ final class PriceExtension extends AbstractExtension
         return $this->getPrice($productVariant, $context);
     }
 
-    /** @throws \InvalidArgumentException */
+    /**
+     * @param array<array-key, mixed> $context
+     *
+     * @throws \InvalidArgumentException
+     */
     private function hasLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): bool
     {
         Assert::keyExists($context, 'channel');
@@ -99,7 +115,11 @@ final class PriceExtension extends AbstractExtension
         return null !== $this->getLowestPriceBeforeDiscount($productVariant, $context);
     }
 
-    /** @throws \InvalidArgumentException */
+    /**
+     * @param array<array-key, mixed> $context
+     *
+     * @throws \InvalidArgumentException
+     */
     private function hasDiscount(ProductVariantInterface $productVariant, array $context): bool
     {
         Assert::keyExists($context, 'channel');
