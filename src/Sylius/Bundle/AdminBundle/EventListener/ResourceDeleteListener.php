@@ -14,31 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
-use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
-use Sylius\Resource\ResourceActions;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final readonly class ResourceDeleteSubscriber implements EventSubscriberInterface
+final readonly class ResourceDeleteListener
 {
-    public function __construct(
-        private UrlGeneratorInterface $router,
-        private RequestStack $requestStack,
-    ) {
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            KernelEvents::EXCEPTION => 'onResourceDelete',
-        ];
-    }
-
     public function onResourceDelete(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
@@ -67,19 +48,7 @@ final readonly class ResourceDeleteSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        FlashBagProvider::getFlashBag($this->requestStack)->add('error', [
-            'message' => 'sylius.resource.delete_error',
-            'parameters' => ['%resource%' => $resourceName],
-        ]);
-
-        $referrer = $eventRequest->headers->get('referer');
-        if (null !== $referrer) {
-            $event->setResponse(new RedirectResponse($referrer));
-
-            return;
-        }
-
-        $event->setResponse($this->createRedirectResponse($originalRoute, ResourceActions::INDEX));
+        throw new ResourceDeleteException($resourceName);
     }
 
     private function getResourceNameFromRoute(string $route): string
@@ -92,13 +61,6 @@ final readonly class ResourceDeleteSubscriber implements EventSubscriberInterfac
         return trim(implode(' ', $routeArrayWithoutPrefixes));
     }
 
-    private function createRedirectResponse(string $originalRoute, string $targetAction): RedirectResponse
-    {
-        $redirectRoute = str_replace(ResourceActions::DELETE, $targetAction, $originalRoute);
-
-        return new RedirectResponse($this->router->generate($redirectRoute));
-    }
-
     private function isMethodDelete(Request $request): bool
     {
         return Request::METHOD_DELETE === $request->getMethod();
@@ -109,6 +71,7 @@ final readonly class ResourceDeleteSubscriber implements EventSubscriberInterfac
         return str_starts_with($route, 'sylius');
     }
 
+    /** @param array<string, mixed> $syliusParameters */
     private function isAdminSection(array $syliusParameters): bool
     {
         return array_key_exists('section', $syliusParameters) && 'admin' === $syliusParameters['section'];

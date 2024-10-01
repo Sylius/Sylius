@@ -22,6 +22,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 
 final class RemoveProcessorSpec extends ObjectBehavior
 {
