@@ -3,7 +3,7 @@
 {% if order.paymentState == 'awaiting_payment' %}
     {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
 
-    <div>
-        {{ buttons.default(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'credit card alternative', 'green') }}
+    <div class="d-flex gap-3 justify-content-end mb-3">
+        {{ buttons.primary(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'credit card alternative', 'green') }}
     </div>
 {% endif %}

@@ -134,7 +134,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         /** @var NodeElement $shippingPromotions */
         $shippingPromotions = $this->getElement('promotions_shipping_details');
 
-        return str_contains($shippingPromotions->getAttribute('data-html'), $promotionName);
+        return str_contains($shippingPromotions->getText(), $promotionName);
     }
 
     public function getTaxTotal(): string
@@ -220,7 +220,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         /** @var NodeElement $shippingPromotions */
         $shippingPromotions = $this->getElement('promotions_shipping_details');
 
-        return str_contains($shippingPromotions->getAttribute('data-html'), $promotionWithDiscount);
+        return str_contains($shippingPromotions->getText(), $promotionWithDiscount);
     }
 
     public function hasOrderPromotion(string $promotionName): bool
@@ -228,7 +228,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         /** @var NodeElement $shippingPromotions */
         $shippingPromotions = $this->getElement('order_promotions_details');
 
-        return str_contains($shippingPromotions->getAttribute('data-html'), $promotionName);
+        return str_contains($shippingPromotions->getText(), $promotionName);
     }
 
     public function tryToOpen(array $urlParameters = []): void
