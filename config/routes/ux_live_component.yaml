@@ -1,5 +1,3 @@
 live_component:
     resource: '@LiveComponentBundle/config/routes.php'
-    prefix: '/_components'
-    # adjust prefix to add localization to your components
-    #prefix: '/{_locale}/_components'
+    prefix: '/{_locale}/_components'

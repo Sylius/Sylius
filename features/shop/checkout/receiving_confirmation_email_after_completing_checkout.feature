@@ -19,7 +19,7 @@ Feature: Receiving confirmation email after finalizing checkout
         When I confirm my order
         Then an email with the summary of order placed by "john@example.com" should be sent to him
 
-    @api @todo-ui @javascript @email
+    @api @ui @javascript @email
     Scenario: Receiving confirmation email after finalizing checkout in different locale than the default one
         Given I have product "Sig Sauer P226" in the cart
         And I have proceeded through checkout process in the "Polish (Poland)" locale with email "john@example.com"
