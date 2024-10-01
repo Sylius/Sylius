@@ -15,8 +15,8 @@ namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentRequestTransitions;
