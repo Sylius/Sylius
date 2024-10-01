@@ -813,9 +813,6 @@
     "symfony/string": {
         "version": "v5.2.1"
     },
-    "symfony/templating": {
-        "version": "v4.4.13"
-    },
     "symfony/thanks": {
         "version": "v1.2.9"
     },
