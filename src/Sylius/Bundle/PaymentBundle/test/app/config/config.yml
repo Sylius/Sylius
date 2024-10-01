@@ -1,4 +1,5 @@
 imports:
+    - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPaymentBundle/test/app/config/parameters.yml" }
 
 framework:
