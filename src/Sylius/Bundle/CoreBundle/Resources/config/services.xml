@@ -150,7 +150,8 @@
         </service>
 
         <service id="sylius.twig.extension.checkout_steps" class="Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.checkout_steps" />
+            <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
+            <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
             <tag name="twig.extension" />
         </service>
 

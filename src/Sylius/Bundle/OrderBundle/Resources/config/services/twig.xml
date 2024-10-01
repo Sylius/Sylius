@@ -16,7 +16,7 @@
         <defaults public="true" />
 
         <service id="sylius.twig.extension.aggregate_adjustments" class="Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.adjustment" />
+            <argument type="service" id="sylius.adjustments_aggregator" />
             <tag name="twig.extension" />
         </service>
     </services>

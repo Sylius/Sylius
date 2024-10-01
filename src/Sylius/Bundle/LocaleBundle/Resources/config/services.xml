@@ -77,10 +77,12 @@
             <argument type="service" id="sylius.locale_converter" />
             <argument type="service" id="sylius.context.locale" />
             <tag name="templating.helper" alias="sylius_locale" />
+            <deprecated package="sylius/sylius" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.locale" class="Sylius\Bundle\LocaleBundle\Twig\LocaleExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.locale" />
+            <argument type="service" id="sylius.locale_converter" />
+            <argument type="service" id="sylius.context.locale" />
             <tag name="twig.extension" />
         </service>
 
