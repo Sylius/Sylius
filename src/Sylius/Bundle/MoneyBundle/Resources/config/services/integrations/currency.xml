@@ -18,6 +18,7 @@
         <service id="sylius.templating.helper.convert_money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper" lazy="true">
             <argument type="service" id="sylius.currency_converter" />
             <tag name="templating.helper" alias="sylius_convert_money" />
+            <deprecated package="sylius/sylius" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.convert_amount" class="Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension" public="false">

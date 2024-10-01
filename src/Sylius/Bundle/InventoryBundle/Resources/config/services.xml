@@ -25,6 +25,7 @@
         <service id="sylius.templating.helper.inventory" class="Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper">
             <argument type="service" id="sylius.availability_checker" />
             <tag name="templating.helper" alias="sylius_inventory" />
+            <deprecated package="sylius/sylius" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.inventory" class="Sylius\Bundle\InventoryBundle\Twig\InventoryExtension" public="false">
