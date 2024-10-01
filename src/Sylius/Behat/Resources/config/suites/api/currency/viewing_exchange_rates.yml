@@ -16,6 +16,7 @@ default:
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.exchange_rate
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.currency
                 - sylius.behat.context.api.shop.exchange_rate

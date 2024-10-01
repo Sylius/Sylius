@@ -34,6 +34,7 @@ default:
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.calendar
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
 

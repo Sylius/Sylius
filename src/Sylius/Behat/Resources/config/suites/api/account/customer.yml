@@ -33,6 +33,7 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.email
                 - sylius.behat.context.api.shop.checkout
                 - sylius.behat.context.api.shop.customer

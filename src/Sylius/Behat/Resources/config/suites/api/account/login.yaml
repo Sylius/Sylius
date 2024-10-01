@@ -18,6 +18,7 @@ default:
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.email
                 - sylius.behat.context.api.shop.customer
                 - sylius.behat.context.api.shop.login

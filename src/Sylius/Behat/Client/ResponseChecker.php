@@ -20,6 +20,14 @@ use Webmozart\Assert\Assert;
 
 final class ResponseChecker implements ResponseCheckerInterface
 {
+    /** @var array<array-key, string> */
+    private array $errors;
+
+    public function __construct()
+    {
+        $this->errors = [];
+    }
+
     public function countCollectionItems(Response $response): int
     {
         return count($this->getCollection($response));
@@ -273,6 +281,16 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function appendError(Response $response): ResponseCheckerInterface
+    {
+        $this->errors[] = $this->getError($response);
+
+        return $this;
+    }
+
     private function getResponseContentValue(Response $response, string $key)
     {
         $content = json_decode($response->getContent(), true);
@@ -329,5 +347,20 @@ final class ResponseChecker implements ResponseCheckerInterface
                 implode(', ', array_keys($resource)),
             ),
         );
+    }
+
+    public function debugErrorsOccurred(): bool
+    {
+        return count($this->errors) > 0;
+    }
+
+    public function cleanErrors(): void
+    {
+        $this->errors = [];
+    }
+
+    public function getDebugErrors(): array
+    {
+        return $this->errors;
     }
 }

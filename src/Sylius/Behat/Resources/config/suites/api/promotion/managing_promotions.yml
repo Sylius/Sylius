@@ -34,11 +34,12 @@ default:
                 - sylius.behat.context.setup.admin_api_security
 
                 - sylius.behat.context.api.admin.managing_promotions
-                - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.removing_product
+                - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
-                - Sylius\Behat\Context\Api\Admin\RemovingTaxonContext
                 - sylius.behat.context.api.admin.translation
+                - sylius.behat.context.api.debug
+                - Sylius\Behat\Context\Api\Admin\RemovingTaxonContext
 
             filters:
                 tags: "@managing_promotions&&@api"

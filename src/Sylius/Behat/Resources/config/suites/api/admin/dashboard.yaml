@@ -34,6 +34,7 @@ default:
 
                 - sylius.behat.context.api.admin.dashboard_context
                 - sylius.behat.context.api.admin.login
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@admin_dashboard&&@api"

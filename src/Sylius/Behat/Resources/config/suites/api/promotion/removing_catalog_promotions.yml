@@ -26,6 +26,7 @@ default:
                 - sylius.behat.context.setup.calendar
 
                 - sylius.behat.context.api.admin.managing_catalog_promotions
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.product_variant
 
             filters:

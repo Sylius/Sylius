@@ -27,10 +27,11 @@ default:
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.shared_storage
                     
-                - sylius.behat.context.api.admin.save
-                - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.managing_payment_methods
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
                 - sylius.behat.context.api.admin.translation
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@managing_payment_methods&&@api"

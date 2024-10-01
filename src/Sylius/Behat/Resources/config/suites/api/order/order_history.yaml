@@ -32,6 +32,7 @@ default:
                 - sylius.behat.context.api.admin.managing_placed_order_addresses
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@order_history&&@api"
