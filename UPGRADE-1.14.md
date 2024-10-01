@@ -146,6 +146,15 @@
         )
     ```
 
+    `Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension`
+    ```diff
+
+        public function __construct(
+    -       private CurrencyHelperInterface $helper,
+    +       private ?CurrencyHelperInterface $helper = null,
+        )
+    ```
+
    `Sylius\Bundle\InventoryBundle\Twig\InventoryExtension`
     ```diff
     use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
