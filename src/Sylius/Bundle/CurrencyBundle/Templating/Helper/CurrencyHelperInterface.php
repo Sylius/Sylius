@@ -13,6 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
+trigger_deprecation(
+    'sylius/currency-bundle',
+    '1.14',
+    'The "%s" interface is deprecated.',
+    CurrencyHelperInterface::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 interface CurrencyHelperInterface
 {
     public function convertCurrencyCodeToSymbol(string $code): string;

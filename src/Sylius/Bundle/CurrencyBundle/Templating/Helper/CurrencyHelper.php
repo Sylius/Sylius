@@ -16,6 +16,15 @@ namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 use Symfony\Component\Intl\Currencies;
 use Symfony\Component\Templating\Helper\Helper;
 
+trigger_deprecation(
+    'sylius/currency-bundle',
+    '1.14',
+    'The "%s" class is deprecated, use "%s::getSymbol" instead.',
+    CurrencyHelper::class,
+    Currencies::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. Use {@see \Symfony\Component\Intl\Currencies} instead. */
 class CurrencyHelper extends Helper implements CurrencyHelperInterface
 {
     public function convertCurrencyCodeToSymbol(string $code): string
