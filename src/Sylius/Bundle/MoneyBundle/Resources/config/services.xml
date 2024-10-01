@@ -25,7 +25,7 @@
         <service id="sylius.templating.helper.format_money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper" lazy="true">
             <argument type="service" id="sylius.money_formatter" />
             <tag name="templating.helper" alias="sylius_format_money" />
-            <deprecated package="sylius/sylius" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
+            <deprecated package="sylius/money-bundle" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.money" class="Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension" public="false">
