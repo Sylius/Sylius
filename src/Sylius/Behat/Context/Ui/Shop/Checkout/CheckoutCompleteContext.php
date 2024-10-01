@@ -90,7 +90,7 @@ final class CheckoutCompleteContext implements Context
      * @Then I should be on the checkout complete step
      * @Then I should be on the checkout summary step
      */
-    public function iShouldBeOnTheCheckoutCompleteStep()
+    public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
         $this->completePage->verify();
     }

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponGeneratorInstructionType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
@@ -49,7 +48,7 @@ class PromotionCouponController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form));
+            return $this->createRestView($configuration, $form);
         }
 
         return $this->render(

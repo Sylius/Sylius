@@ -82,6 +82,12 @@ security:
                 enable_csrf: true
                 csrf_parameter: _csrf_shop_security_token
                 csrf_token_id: shop_authenticate
+            json_login:
+                check_path: sylius_shop_json_login_check
+                username_path: _username
+                password_path: _password
+                success_handler: sylius.authentication.success_handler
+                failure_handler: sylius.authentication.failure_handler
             remember_me:
                 secret: "%env(APP_SECRET)%"
                 name: APP_SHOP_REMEMBER_ME

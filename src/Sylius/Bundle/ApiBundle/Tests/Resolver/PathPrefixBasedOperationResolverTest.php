@@ -17,7 +17,7 @@ use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInter
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixes;
 use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;
 use Sylius\Bundle\ApiBundle\Resolver\PathPrefixBasedOperationResolver;
-use Sylius\Component\Addressing\Model\Province;
+use Sylius\Component\Addressing\Model\Country;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class PathPrefixBasedOperationResolverTest extends KernelTestCase
@@ -35,17 +35,17 @@ final class PathPrefixBasedOperationResolverTest extends KernelTestCase
     /** @test */
     public function it_provides_shop_operation_if_request_prefix_is_shop(): void
     {
-        $operation = $this->operationResolver->resolve(Province::class, PathPrefixes::SHOP_PREFIX, null);
+        $operation = $this->operationResolver->resolve(Country::class, PathPrefixes::SHOP_PREFIX, null);
 
-        $this->assertSame('/shop/provinces/{code}', $operation->getUriTemplate());
+        $this->assertSame('/shop/countries/{code}', $operation->getUriTemplate());
     }
 
     /** @test */
     public function it_provides_admin_operation_if_request_prefix_is_admin(): void
     {
-        $operation = $this->operationResolver->resolve(Province::class, PathPrefixes::ADMIN_PREFIX, null);
+        $operation = $this->operationResolver->resolve(Country::class, PathPrefixes::ADMIN_PREFIX, null);
 
-        $this->assertSame('/admin/provinces/{code}', $operation->getUriTemplate());
+        $this->assertSame('/admin/countries/{code}', $operation->getUriTemplate());
     }
 
     private function getResourceMetadataCollectionFactory(): ResourceMetadataCollectionFactoryInterface

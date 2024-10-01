@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.base#stylesheets':
             styles:
-                template: '@SyliusAdmin/shared/layout/stylesheets.html.twig'
+                template: '@SyliusAdmin/shared/layout/base/stylesheets.html.twig'
         'sylius_admin.base#javascripts':
             javascripts:
-                template: '@SyliusAdmin/shared/layout/javascripts.html.twig'
+                template: '@SyliusAdmin/shared/layout/base/javascripts.html.twig'

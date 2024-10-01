@@ -1276,11 +1276,6 @@ parameters:
 			path: src/Sylius/Bundle/OrderBundle/Context/SessionBasedCartContext.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\OrderBundle\\\\Controller\\\\OrderController\\:\\:addFlash\\(\\) has parameter \\$message with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Controller/OrderController.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\OrderBundle\\\\Controller\\\\OrderController\\:\\:getOrderRepository\\(\\) return type with generic interface Sylius\\\\Component\\\\Order\\\\Repository\\\\OrderRepositoryInterface does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/OrderBundle/Controller/OrderController.php
@@ -1834,11 +1829,6 @@ parameters:
 			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getRepository\\(\\)$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/Console/Command/AbstractRoleCommand.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Controller\\\\UserController\\:\\:getSyliusAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Controller/UserController.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Controller\\\\UserController\\:\\:getSyliusAttribute\\(\\) has parameter \\$default with no type specified\\.$#"

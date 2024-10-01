@@ -9,6 +9,10 @@ twig_hooks:
                 configuration:
                     method: PUT
 
+        'sylius_admin.shipping_method.update.content.form':
+            sections:
+                enabled: false
+        
         'sylius_admin.shipping_method.update.content.form#left':
             general:
                 template: '@SyliusAdmin/shipping_method/form/general.html.twig'

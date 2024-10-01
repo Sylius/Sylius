@@ -72,7 +72,12 @@
                 </normalizationContext>
             </operation>
 
-            <operation name="sylius_api_admin_customer_post" class="ApiPlatform\Metadata\Post" uriTemplate="/admin/customers" >
+            <operation
+                name="sylius_api_admin_customer_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/customers"
+                processor="sylius_api.state_processor.admin.customer.persist"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -104,7 +109,12 @@
                 </validationContext>
             </operation>
 
-            <operation name="sylius_api_admin_customer_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/customers/{id}" >
+            <operation
+                name="sylius_api_admin_customer_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/customers/{id}"
+                processor="sylius_api.state_processor.admin.customer.persist"
+            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">

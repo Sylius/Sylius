@@ -21,7 +21,6 @@ class AppKernel extends Kernel
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

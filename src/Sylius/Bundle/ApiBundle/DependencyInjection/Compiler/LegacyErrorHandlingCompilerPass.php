@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer;
 use Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -34,10 +33,6 @@ final readonly class LegacyErrorHandlingCompilerPass implements CompilerPassInte
 
         if ($container->hasDefinition(HydraErrorNormalizer::class)) {
             $container->removeDefinition(HydraErrorNormalizer::class);
-        }
-
-        if ($container->hasDefinition(FlattenExceptionNormalizer::class)) {
-            $container->removeDefinition(FlattenExceptionNormalizer::class);
         }
     }
 }
