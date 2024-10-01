@@ -31,7 +31,7 @@
         </service>
 
         <service id="sylius.twig.extension.price" class="Sylius\Bundle\CoreBundle\Twig\PriceExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.price" />
+            <argument type="service" id="sylius.calculator.product_variant_price" />
             <tag name="twig.extension" />
         </service>
 
@@ -41,7 +41,7 @@
         </service>
 
         <service id="sylius.twig.extension.variant_resolver" class="Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.variant_resolver" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <tag name="twig.extension" />
         </service>
 

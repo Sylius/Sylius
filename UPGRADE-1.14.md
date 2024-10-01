@@ -95,6 +95,9 @@
     ```
 
 1. The following templating helpers and its interfaces have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper`
+    - `Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper`
+    - `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`
     - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper`
     - `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface`
     - `Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper`
@@ -107,6 +110,41 @@
     - `Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper`
 
 1. The following constructor signatures have been changed:
+
+   `Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension`
+    ```diff
+    
+    use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
+    use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
+
+        public function __construct(
+    -       private CheckoutStepsHelper $checkoutStepsHelper,
+    +       private readonly CheckoutStepsHelper|OrderPaymentMethodSelectionRequirementCheckerInterface $checkoutStepsHelper,
+    +       private readonly ?OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker = null,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Twig\PriceExtension`
+    ```diff
+    
+    use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+
+        public function __construct(
+    -       private PriceHelper $helper,
+    +       private readonly PriceHelper|ProductVariantPricesCalculatorInterface $helper,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension`
+    ```diff
+    
+    use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+
+        public function __construct(
+    -       private VariantResolverHelper $helper,
+    +       private readonly VariantResolverHelper|ProductVariantResolverInterface $helper,
+        )
+    ```
 
    `Sylius\Bundle\InventoryBundle\Twig\InventoryExtension`
     ```diff

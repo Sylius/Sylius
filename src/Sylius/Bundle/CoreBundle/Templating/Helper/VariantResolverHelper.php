@@ -15,9 +15,19 @@ namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Resolver\CompositeProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated, use "%s" instead.',
+    VariantResolverHelper::class,
+    CompositeProductVariantResolver::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Product\Resolver\CompositeProductVariantResolver} instead. */
 class VariantResolverHelper extends Helper
 {
     public function __construct(private ProductVariantResolverInterface $productVariantResolver)
