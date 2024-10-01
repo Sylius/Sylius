@@ -212,6 +212,9 @@
 
   Money:
 
+    * `Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper`
+    * `Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper`
+    * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
@@ -220,6 +223,42 @@
 ### Constructors signature changes
 
 1. The following constructor signatures have been changed:
+
+   `Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension`
+    ```diff
+    
+    use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
+    use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
+
+        public function __construct(
+    -       private readonly CheckoutStepsHelper|OrderPaymentMethodSelectionRequirementCheckerInterface $checkoutStepsHelper,
+    -       private readonly ?OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker = null,
+    +       private readonly OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
+    +       private readonly OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Twig\PriceExtension`
+    ```diff
+    
+    use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+
+        public function __construct(
+    -       private readonly PriceHelper|ProductVariantPricesCalculatorInterface $helper,
+    +       private readonly ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension`
+    ```diff
+    
+    use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+
+        public function __construct(
+    -       private readonly VariantResolverHelper|ProductVariantResolverInterface $helper,
+    +       private readonly ProductVariantResolverInterface $productVariantResolver,
+        )
+    ```
 
    `Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension`
     ```diff
