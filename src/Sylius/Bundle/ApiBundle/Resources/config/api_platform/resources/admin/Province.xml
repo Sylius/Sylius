@@ -19,7 +19,7 @@
     <resource class="%sylius.model.province.class%">
         <operations>
             <operation
-                name="sylius_api_admin_province_get"
+                name="sylius_api_admin_country_province_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/admin/countries/{countryCode}/provinces/{provinceCode}"
             >
@@ -39,7 +39,7 @@
             </operation>
 
             <operation
-                name="sylius_api_admin_province_put"
+                name="sylius_api_admin_country_province_put"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/admin/countries/{countryCode}/provinces/{provinceCode}"
             >

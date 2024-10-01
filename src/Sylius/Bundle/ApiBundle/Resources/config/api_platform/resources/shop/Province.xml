@@ -19,7 +19,7 @@
     <resource class="%sylius.model.province.class%">
         <operations>
             <operation
-                name="sylius_api_shop_province_get"
+                name="sylius_api_shop_country_province_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/countries/{countryCode}/provinces/{provinceCode}"
             >
