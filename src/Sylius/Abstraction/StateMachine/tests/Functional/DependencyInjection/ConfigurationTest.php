@@ -51,7 +51,7 @@ final class ConfigurationTest extends TestCase
                 ],
             ],
             [
-                'default_adapter' => 'winzou_state_machine',
+                'default_adapter' => 'symfony_workflow',
                 'graphs_to_adapters_mapping' => [
                     'order' => 'symfony_workflow',
                     'payment' => 'winzou_state_machine',

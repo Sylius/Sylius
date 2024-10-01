@@ -19,15 +19,15 @@ use Symfony\Component\Uid\Uuid;
 
 interface PaymentRequestInterface extends TimestampableInterface, ResourceInterface
 {
-    public const STATE_NEW = 'new';
-
-    public const STATE_PROCESSING = 'processing';
-
-    public const STATE_FAILED = 'failed';
-
     public const STATE_CANCELLED = 'cancelled';
 
     public const STATE_COMPLETED = 'completed';
+
+    public const STATE_FAILED = 'failed';
+
+    public const STATE_NEW = 'new';
+
+    public const STATE_PROCESSING = 'processing';
 
     public const ACTION_CAPTURE = 'capture';
 

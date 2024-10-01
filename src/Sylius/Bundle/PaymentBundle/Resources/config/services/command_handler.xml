@@ -21,6 +21,7 @@
 
         <service id="sylius.command_handler.offline.capture_payment_request" class="Sylius\Bundle\PaymentBundle\CommandHandler\Offline\CapturePaymentRequestHandler">
             <argument type="service" id="sylius.provider.payment_request" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="messenger.message_handler" bus="sylius.payment_request.command_bus" />
         </service>
     </services>

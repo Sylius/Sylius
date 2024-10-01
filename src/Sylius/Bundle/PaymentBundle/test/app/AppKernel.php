@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Sylius\Bundle\PaymentBundle\SyliusPaymentBundle(),
             new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Abstraction\StateMachine\SyliusStateMachineAbstractionBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
         ];
     }

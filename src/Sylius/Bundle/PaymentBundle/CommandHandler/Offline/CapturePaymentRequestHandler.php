@@ -13,16 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\CommandHandler\Offline;
 
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\PaymentBundle\Command\Offline\CapturePaymentRequest;
 use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestProviderInterface;
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\PaymentRequestTransitions;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-final class CapturePaymentRequestHandler
+final readonly class CapturePaymentRequestHandler
 {
     public function __construct(
-        private readonly PaymentRequestProviderInterface $paymentRequestProvider,
+        private PaymentRequestProviderInterface $paymentRequestProvider,
+        private StateMachineInterface $stateMachine
     ) {
     }
 
@@ -30,6 +32,10 @@ final class CapturePaymentRequestHandler
     {
         $paymentRequest = $this->paymentRequestProvider->provide($capturePaymentRequest);
 
-        $paymentRequest->setState(PaymentRequestInterface::STATE_COMPLETED);
+        $this->stateMachine->apply(
+            $paymentRequest,
+            PaymentRequestTransitions::GRAPH,
+            PaymentRequestTransitions::TRANSITION_COMPLETE
+        );
     }
 }
