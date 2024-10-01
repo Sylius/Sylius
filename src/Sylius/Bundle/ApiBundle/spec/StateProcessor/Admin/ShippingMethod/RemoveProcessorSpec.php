@@ -21,7 +21,6 @@ use ApiPlatform\State\ProcessorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved;
-use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class RemoveProcessorSpec extends ObjectBehavior

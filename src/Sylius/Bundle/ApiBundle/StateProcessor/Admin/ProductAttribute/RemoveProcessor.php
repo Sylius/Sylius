@@ -18,7 +18,6 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved;
-use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
