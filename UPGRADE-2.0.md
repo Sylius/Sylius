@@ -60,6 +60,9 @@
   To change the default resolver and/or loader for `LiipImagineBundle`, configure `cache` and/or `data_loader`
   parameters under the `liip_imagine` key.
 
+* The class `Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber` has been removed and replaced with
+  `Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteListener`.
+
 * The `sylius/calendar` package has been replaced with `symfony/clock` package. All usages of
   the `Sylius\Calendar\Provider\DateTimeProviderInterface` class
   have been replaced with `Symfony\Component\Clock\ClockInterface` class.
