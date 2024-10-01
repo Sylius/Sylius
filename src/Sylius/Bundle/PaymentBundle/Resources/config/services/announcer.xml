@@ -20,7 +20,7 @@
         <defaults public="true" />
 
         <service id="sylius.announcer.payment_request" class="Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncer">
-            <argument type="service" id="sylius.payment_request.command_provider.default" />
+            <argument type="service" id="sylius.command_provider.payment_request.default" />
             <argument type="service" id="sylius.payment_request.command_bus" />
         </service>
         <service id="Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface" alias="sylius.announcer.payment_request" />

@@ -17,9 +17,9 @@
 >
     <services>
 
-        <service id="sylius.payment_request.http_response.provider.offline.capture" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline\StatusHttpResponseProvider">
+        <service id="sylius.http_response.provider.offline.capture" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline\StatusHttpResponseProvider">
             <argument type="service" id="sylius.shop.order_pay.provider.final_url" />
-            <tag name="sylius.payment_request.http_response.provider.offline" action="status" />
+            <tag name="sylius.http_response.provider.offline" action="status" />
         </service>
 
     </services>

@@ -32,9 +32,9 @@
             <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
-            <argument type="service" id="sylius.payment_request.provider.http_response.default" />
-            <argument type="service" id="sylius.payment_request.provider.default_action" />
-            <argument type="service" id="sylius.payment_request.provider.default_payload" />
+            <argument type="service" id="sylius.provider.http_response.default" />
+            <argument type="service" id="sylius.provider.default_action" />
+            <argument type="service" id="sylius.provider.default_payload" />
         </service>
 
         <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider" />
@@ -51,9 +51,9 @@
         <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider">
             <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
-            <argument type="service" id="sylius.payment_request.provider.http_response.default" />
+            <argument type="service" id="sylius.provider.http_response.default" />
             <argument type="service" id="sylius.repository.payment_request" />
-            <argument type="service" id="sylius.payment_request.command_provider.default" />
+            <argument type="service" id="sylius.command_provider.payment_request.default" />
         </service>
 
     </services>
