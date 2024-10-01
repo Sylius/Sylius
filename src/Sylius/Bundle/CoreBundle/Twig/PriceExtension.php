@@ -68,7 +68,7 @@ final class PriceExtension extends AbstractExtension
      *
      * @throws \InvalidArgumentException
      */
-    private function getPrice(ProductVariantInterface $productVariant, array $context): int
+    public function getPrice(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');
 
@@ -80,7 +80,7 @@ final class PriceExtension extends AbstractExtension
      *
      * @throws \InvalidArgumentException
      */
-    private function getOriginalPrice(ProductVariantInterface $productVariant, array $context): int
+    public function getOriginalPrice(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');
 
@@ -92,7 +92,7 @@ final class PriceExtension extends AbstractExtension
      *
      * @throws \InvalidArgumentException
      */
-    private function getLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): ?int
+    public function getLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): ?int
     {
         Assert::keyExists($context, 'channel');
 
@@ -108,7 +108,7 @@ final class PriceExtension extends AbstractExtension
      *
      * @throws \InvalidArgumentException
      */
-    private function hasLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): bool
+    public function hasLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): bool
     {
         Assert::keyExists($context, 'channel');
 
@@ -120,7 +120,7 @@ final class PriceExtension extends AbstractExtension
      *
      * @throws \InvalidArgumentException
      */
-    private function hasDiscount(ProductVariantInterface $productVariant, array $context): bool
+    public function hasDiscount(ProductVariantInterface $productVariant, array $context): bool
     {
         Assert::keyExists($context, 'channel');
 

@@ -46,7 +46,7 @@ final class CurrencyExtension extends AbstractExtension
         ];
     }
 
-    private function convertCurrencyCodeToSymbol(string $code): string
+    public function convertCurrencyCodeToSymbol(string $code): string
     {
         return Currencies::getSymbol($code);
     }

@@ -71,7 +71,7 @@ final class LocaleExtension extends AbstractExtension
         ];
     }
 
-    private function convertCodeToName(string $code, ?string $localeCode = null): ?string
+    public function convertCodeToName(string $code, ?string $localeCode = null): ?string
     {
         try {
             return $this->localeHelper->convertCodeToName($code, $this->getLocaleCode($localeCode));
@@ -80,7 +80,7 @@ final class LocaleExtension extends AbstractExtension
         }
     }
 
-    private function getLocaleCode(?string $localeCode): ?string
+    public function getLocaleCode(?string $localeCode): ?string
     {
         if (null !== $localeCode) {
             return $localeCode;
