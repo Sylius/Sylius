@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemQuantityRange;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\CountryCodeExists;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
