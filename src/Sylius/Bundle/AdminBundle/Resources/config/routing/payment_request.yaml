@@ -1,0 +1,25 @@
+sylius_admin_payment_request_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.payment_request::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/shared/crud/index.html.twig"
+            grid: sylius_admin_payment_request
+            
+sylius_admin_payment_request_show:
+    path: /{hash}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.payment_request::showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/shared/crud/show.html.twig"
+            repository:
+                method: findOneByPaymentId
+                arguments:
+                    hash: $hash
+                    paymentId: $paymentId

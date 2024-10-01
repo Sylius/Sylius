@@ -17,14 +17,13 @@ use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use Webmozart\Assert\Assert;
 
 final readonly class PaymentContext implements Context
 {
@@ -71,7 +70,7 @@ final readonly class PaymentContext implements Context
     /**
      * @Given /^the store allows paying (\w+) for (all channels)$/
      */
-    public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
+    public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels): void
     {
         $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Offline', 'Payment method', false);
 
@@ -91,7 +90,7 @@ final readonly class PaymentContext implements Context
     /**
      * @Given /^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/
      */
-    public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale)
+    public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale): void
     {
         /** @var PaymentMethodTranslationInterface $translation */
         $translation = $this->paymentMethodTranslationFactory->createNew();
@@ -108,7 +107,7 @@ final readonly class PaymentContext implements Context
      * @Given /^(this payment method) (?:has been|is) disabled$/
      * @When the payment method :paymentMethod gets disabled
      */
-    public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod)
+    public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod): void
     {
         $paymentMethod->disable();
 
@@ -118,7 +117,7 @@ final readonly class PaymentContext implements Context
     /**
      * @Given /^(it) has instructions "([^"]+)"$/
      */
-    public function itHasInstructions(PaymentMethodInterface $paymentMethod, $instructions)
+    public function itHasInstructions(PaymentMethodInterface $paymentMethod, $instructions): void
     {
         $paymentMethod->setInstructions($instructions);
 
@@ -128,7 +127,7 @@ final readonly class PaymentContext implements Context
     /**
      * @Given the store has :paymentMethodName payment method not assigned to any channel
      */
-    public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
+    public function theStoreHasPaymentMethodNotAssignedToAnyChannel(string $paymentMethodName): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
     }
@@ -136,8 +135,9 @@ final readonly class PaymentContext implements Context
     /**
      * @Given the payment method :paymentMethod requires authorization before capturing
      */
-    public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod)
+    public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod): void
     {
+        /** @var GatewayConfigInterface $config */
         $config = $paymentMethod->getGatewayConfig();
         $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => true]));
         $paymentMethod->setGatewayConfig($config);
@@ -159,16 +159,6 @@ final readonly class PaymentContext implements Context
         );
 
         $paymentMethod->addChannel($channel);
-    }
-
-    /**
-     * @Then /^the (latest order) should have a payment with state "([^"]+)"$/
-     */
-    public function theLatestOrderHasAuthorizedPayment(OrderInterface $order, string $state)
-    {
-        $payment = $order->getLastPayment();
-
-        Assert::eq($payment->getState(), $state);
     }
 
     private function createPaymentMethod(
