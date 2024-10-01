@@ -260,6 +260,27 @@
         )
     ```
 
+   `Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension`
+    ```diff
+
+        public function __construct(
+    -       private ?CurrencyHelperInterface $helper = null,
+        )
+    ```
+
+   `Sylius\Bundle\LocaleBundle\Twig\LocaleExtension`
+    ```diff
+    use Sylius\Component\Locale\Context\LocaleContextInterface;
+    use Sylius\Component\Locale\Converter\LocaleConverterInterface;
+
+        public function __construct(
+    -       private LocaleHelperInterface|LocaleConverterInterface $localeHelper,
+    -       private ?LocaleContextInterface $localeContext = null,
+    +       private LocaleConverterInterface $localeConverter,
+    +       private LocaleContextInterface $localeContext,
+        )
+    ```
+
    `Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension`
     ```diff
     use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
