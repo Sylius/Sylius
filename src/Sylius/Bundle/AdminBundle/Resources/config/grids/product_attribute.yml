@@ -32,7 +32,7 @@ sylius_grid:
                     label: sylius.ui.type
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/label.html.twig"
+                        template: "@SyliusUi/grid/field/label.html.twig"
                 translatable:
                     type: twig
                     label: sylius.ui.translatable
@@ -44,7 +44,7 @@ sylius_grid:
                     label: sylius.ui.position
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/position.html.twig"
+                        template: "@SyliusUi/grid/field/position.html.twig"
                         vars:
                             th_class: "w-1 text-center"
                             td_class: "text-center"
