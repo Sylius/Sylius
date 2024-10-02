@@ -77,8 +77,6 @@ final class Resources
 
     public const PROMOTIONS = 'promotions';
 
-    public const PROVINCES = 'provinces';
-
     public const SHIPMENTS = 'shipments';
 
     public const SHIPPING_CATEGORIES = 'shipping-categories';

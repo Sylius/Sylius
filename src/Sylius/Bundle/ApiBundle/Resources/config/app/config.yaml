@@ -62,6 +62,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\ProductOptionValueCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductVariantCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422

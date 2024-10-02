@@ -17,7 +17,7 @@
 
         <service id="Sylius\Bundle\UiBundle\DataCollector\TemplateBlockDataCollector">
             <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\BlockRenderingHistory" />
-            <tag name="data_collector" template="@SyliusUi/DataCollector/templateBlock.html.twig" id="sylius_ui.template_block" />
+            <tag name="data_collector" template="@SyliusUi/data_collector/template_block.html.twig" id="sylius_ui.template_block" />
         </service>
 
         <service id="Sylius\Bundle\UiBundle\DataCollector\TraceableBlockRenderer" decorates="sylius.ui.block_renderer.composite">

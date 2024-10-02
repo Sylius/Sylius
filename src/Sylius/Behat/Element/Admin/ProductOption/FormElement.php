@@ -28,6 +28,17 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->getElement('name', ['%locale_code%' => $localeCode])->setValue($name);
     }
 
+    public function removeOptionValue(string $optionValue): void
+    {
+        $optionValues = $this->getDocument()->findAll('css', '[data-test-option-value]');
+        foreach ($optionValues as $optionValueElement) {
+            if ($optionValueElement->has('css', sprintf('input[value="%s"]', $optionValue))) {
+                $optionValueElement->find('css', '[data-test-delete-option-value]')->click();
+                $this->waitForFormUpdate();
+            }
+        }
+    }
+
     public function addOptionValue(string $code, string $localeCode, string $value): void
     {
         $this->getElement('add_option_value')->press();
@@ -56,6 +67,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'add_option_value' => '[data-test-add-option-value]',
             'apply_to_all' => '[data-test-option-value="%value_code%"] [data-test-option-value-locale="%locale_code%"] [data-test-apply-to-all]',
             'code' => '[data-test-code]',
+            'delete_option_value' => '[data-test-delete-option-value]',
             'form' => '[data-live-name-value="sylius_admin:product_option:form"]',
             'last_option_value' => '[data-test-option-values] [data-test-option-value]:last-child',
             'name' => '#sylius_admin_product_option_translations_%locale_code%_name',

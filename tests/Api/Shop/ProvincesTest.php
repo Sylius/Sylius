@@ -33,7 +33,9 @@ final class ProvincesTest extends JsonApiTestCase
         /** @var ProvinceInterface $province */
         $province = $fixtures['province_US_WY'];
 
-        $this->requestGet(sprintf('/api/v2/shop/provinces/%s', $province->getCode()));
+        $this->requestGet(
+            sprintf('/api/v2/shop/countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
+        );
 
         $this->assertResponse($this->client->getResponse(), 'shop/province/get_province_response');
     }

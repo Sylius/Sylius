@@ -42,3 +42,5 @@ twig_hooks:
                 template: '@SyliusAdmin/product_option/form/sections/values/value/code.html.twig'
             translations:
                 template: '@SyliusAdmin/product_option/form/sections/values/value/translations.html.twig'
+            button_delete:
+                template: '@SyliusAdmin/product_option/form/sections/values/value/button_delete.html.twig'

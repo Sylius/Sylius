@@ -415,7 +415,7 @@ To have templates for your Entity administration out of the box you can use Grid
                         type: twig
                         label: sylius.ui.enabled
                         options:
-                            template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                            template: "@SyliusUi/grid/field/enabled.html.twig"
                 actions:
                     main:
                         create:

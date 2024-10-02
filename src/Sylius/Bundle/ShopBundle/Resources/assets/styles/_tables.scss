@@ -31,3 +31,13 @@
         padding-bottom: 1rem;
     }
 }
+
+.table-space > tbody {
+    > tr:first-child > td, {
+        padding-top: 2rem;
+    }
+
+    > tr:last-child > td {
+        padding-bottom: 2rem;
+    }
+}

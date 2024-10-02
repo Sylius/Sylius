@@ -96,6 +96,7 @@
                 name="sylius_api_admin_product_option_put"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/admin/product-options/{code}"
+                processor="sylius_api.state_processor.admin.product_option_value.persist"
             >
                 <denormalizationContext>
                     <values>

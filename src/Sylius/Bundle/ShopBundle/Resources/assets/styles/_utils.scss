@@ -27,3 +27,11 @@ $utilities: (
         )
     ),
 );
+
+$positions: 40px, 50px, 80px;
+
+@each $position in $positions {
+    .border-#{$position}-dashed {
+        border-#{$position}-style: dashed !important;
+    }
+}

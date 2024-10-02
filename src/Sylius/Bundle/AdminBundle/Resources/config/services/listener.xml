@@ -26,10 +26,14 @@
             <tag name="kernel.event_listener" event="sylius.locale.pre_delete" method="preDelete" />
         </service>
 
-        <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
+        <service id="sylius.event_listener.resource_delete_exception" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteExceptionListener">
             <argument type="service" id="router" />
             <argument type="service" id="request_stack" />
-            <tag name="kernel.event_subscriber" event="kernel.exception" />
+            <tag name="kernel.event_listener" event="kernel.exception" method="onResourceDeleteException" />
+        </service>
+
+        <service id="sylius.event_listener.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteListener">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onResourceDelete" />
         </service>
 
         <service id="sylius.event_subscriber.admin_cache_control_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminSectionCacheControlSubscriber">

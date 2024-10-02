@@ -1,8 +1,5 @@
 {% set tax_included = hookable_metadata.context.order.getTaxIncludedTotal() %}
 
-<td class="text-end">
-    <div>{{ 'sylius.ui.taxes_total'|trans }}:&nbsp;</div>
-    {% if tax_included %}
-        <small class="text-muted">({{ 'sylius.ui.included_in_price'|trans }})</small>
-    {% endif %}
+<td class="text-end w-75">
+    {{ 'sylius.ui.taxes_total'|trans }}:
 </td>

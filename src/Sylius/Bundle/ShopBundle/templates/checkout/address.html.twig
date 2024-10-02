@@ -9,5 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    {% hook checkout_address_hook with { active_step, form, order } %}
+    <div class="pe-lg-6">
+        {% hook checkout_address_hook with { active_step, form, order } %}
+    </div>
 {% endblock %}

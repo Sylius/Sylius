@@ -7,5 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    {% hook 'sylius_shop.checkout.select_shipping' with { active_step, form, order } %}
+    <div class="pe-lg-6">
+        {% hook 'sylius_shop.checkout.select_shipping' with { active_step, form, order } %}
+    </div>
 {% endblock %}

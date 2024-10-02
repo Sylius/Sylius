@@ -7,7 +7,7 @@
     "enabled": true,
     "name": "Ireland",
     "provinces": [
-        "\/api\/v2\/admin\/provinces\/IE-CON",
-        "\/api\/v2\/admin\/provinces\/IE-LEI"
+        "\/api\/v2\/admin\/countries\/IE\/provinces\/IE-CON",
+        "\/api\/v2\/admin\/countries\/IE\/provinces\/IE-LEI"
     ]
 }
