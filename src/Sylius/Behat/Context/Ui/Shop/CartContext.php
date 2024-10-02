@@ -556,7 +556,7 @@ final readonly class CartContext implements Context
      * @Given I use coupon with code :couponCode
      * @Given this cart has promotion applied with coupon :couponCode
      */
-    public function iUseCouponWithCode(?string $couponCode = null): void
+    public function iUseCouponWithCode(string $couponCode): void
     {
         $this->summaryPage->applyCoupon($couponCode);
     }

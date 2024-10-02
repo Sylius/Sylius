@@ -113,14 +113,16 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
         $this->waitForComponentsUpdate();
     }
 
-    public function applyCoupon(?string $couponCode = null): void
+    public function applyCoupon(string $couponCode): void
     {
-        if ($couponCode === null) {
-            $couponCode = '';
-        }
-
         $this->getElement('coupon_field')->setValue($couponCode);
         $this->getElement('apply_coupon_button')->press();
+        $this->waitForComponentsUpdate();
+    }
+
+    public function removeCoupon(): void
+    {
+        $this->getElement('remove_coupon')->press();
         $this->waitForComponentsUpdate();
     }
 
@@ -240,6 +242,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'product_total' => '[data-test-cart-item-product-row="%name%"] [data-test-cart-product-subtotal]',
             'promotion_coupon' => '[data-test-cart-promotion-coupon]',
             'promotion_total' => '[data-test-cart-promotion-total]',
+            'remove_coupon' => '[data-test-cart-promotion-remove-coupon]',
             'remove_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-remove-cart-item]',
             'shipping_total' => '[data-test-cart-shipping-total]',
             'tax_excluded' => '[data-test-cart-tax-excluded]',
