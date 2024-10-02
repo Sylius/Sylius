@@ -22,22 +22,26 @@ final class LiveComponentTagPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        foreach ($container->findTaggedServiceIds('sylius.live_component') as $id => $tags) {
-            foreach ($tags as $tag) {
-                $liveComponentService = $container->getDefinition($id);
-                $liveComponentService->addTag('twig.component', [
-                    'key' => $tag['key'] ?? throw new InvalidArgumentException('The "key" attribute is required for the "sylius.live_component" tag'),
-                    'template' => $tag['template'] ?? throw new InvalidArgumentException('The "template" attribute is required for the "sylius.live_component" tag'),
-                    'expose_public_props' => $tag['expose_public_props'] ?? true,
-                    'attributes_var' => $tag['attributes_var'] ?? 'attributes',
-                    'default_action' => $tag['default_action'] ?? null,
-                    'live' => true,
-                    'csrf' => $tag['csrf'] ?? true,
-                    'route' => $tag['route'] ?? 'ux_live_component',
-                    'method' => $tag['method'] ?? 'post',
-                    'url_reference_type' => $tag['url_reference_type'] ?? UrlGeneratorInterface::ABSOLUTE_PATH,
-                ]);
-                $liveComponentService->addTag('controller.service_arguments');
+        $liveComponentTags = $container->getParameter('sylius_ui.twig_ux.live_component_tags') ?? [];
+
+        foreach ($liveComponentTags as $name => $tagOptions) {
+            foreach ($container->findTaggedServiceIds(sprintf('sylius.live_component.%s', $name)) as $id => $tags) {
+                foreach ($tags as $tag) {
+                    $liveComponentService = $container->getDefinition($id);
+                    $liveComponentService->addTag('twig.component', [
+                        'key' => $tag['key'] ?? $tagOptions['key'] ?? throw new InvalidArgumentException('The "key" attribute is required for the "sylius.live_component" tag'),
+                        'template' => $tag['template'] ?? $tagOptions['template'] ?? throw new InvalidArgumentException('The "template" attribute is required for the "sylius.live_component" tag'),
+                        'expose_public_props' => $tag['expose_public_props'] ?? $tagOptions['expose_public_props'] ?? true,
+                        'attributes_var' => $tag['attributes_var'] ?? $tagOptions['attributes_var'] ?? 'attributes',
+                        'default_action' => $tag['default_action'] ?? $tagOptions['default_action'] ?? null,
+                        'live' => true,
+                        'csrf' => $tag['csrf'] ?? $tagOptions['csrf'] ?? true,
+                        'route' => $tag['route'] ?? $tagOptions['route'],
+                        'method' => $tag['method'] ?? $tagOptions['method'] ?? 'post',
+                        'url_reference_type' => $tag['url_reference_type'] ?? $tagOptions['url_reference_type'] ?? UrlGeneratorInterface::ABSOLUTE_PATH,
+                    ]);
+                    $liveComponentService->addTag('controller.service_arguments');
+                }
             }
         }
     }

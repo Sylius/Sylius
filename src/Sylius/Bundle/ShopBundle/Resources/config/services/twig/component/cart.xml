@@ -27,7 +27,7 @@
             </call>
 
             <tag
-                name="sylius.live_component"
+                name="sylius.live_component.shop"
                 key="sylius_shop:cart:form"
                 template="@SyliusShop/cart/index/form.html.twig"
             />
@@ -40,7 +40,7 @@
             <argument type="service" id="sylius.repository.order" />
 
             <tag
-                name="sylius.live_component"
+                name="sylius.live_component.shop"
                 key="sylius_shop:cart:summary"
                 template="@SyliusShop/cart/index/form/sections/general/summary.html.twig"
             />
@@ -54,7 +54,7 @@
             <argument type="service" id="sylius.repository.order" />
 
             <tag
-                name="sylius.live_component"
+                name="sylius.live_component.shop"
                 key="sylius_shop:cart:widget"
                 template="@SyliusShop/shared/components/header/cart.html.twig"
             />
@@ -68,7 +68,7 @@
             <argument type="service" id="sylius.repository.order" />
 
             <tag
-                name="sylius.live_component"
+                name="sylius.live_component.shop"
                 key="sylius_shop:cart:widget:offcanvas"
                 template="@SyliusShop/shared/layout/base/offcanvas/cart.html.twig"
             />

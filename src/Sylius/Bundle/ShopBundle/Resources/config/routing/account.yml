@@ -1,6 +1,11 @@
 # This file is a part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+sylius_shop_account_live_component:
+    path: '/_components/{_live_component}/{_live_action}'
+    defaults:
+        _live_action: 'get'
+
 sylius_shop_account_order:
     resource: "@SyliusShopBundle/Resources/config/routing/account/order.yml"
     prefix: /orders
