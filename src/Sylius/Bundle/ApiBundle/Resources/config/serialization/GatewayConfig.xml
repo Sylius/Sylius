@@ -15,7 +15,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Bundle\PayumBundle\Model\GatewayConfig">
+    <class name="Sylius\Component\Payment\Model\GatewayConfig">
         <attribute name="config">
             <group>sylius:admin:payment_method:show</group>
             <group>sylius:admin:payment_method:index</group>
