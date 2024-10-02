@@ -18,14 +18,9 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\IriConverterInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingPaymentRequestsContext implements Context
@@ -46,7 +41,7 @@ final readonly class ManagingPaymentRequestsContext implements Context
         $this->client->subResourceIndex(
             Resources::PAYMENTS,
             Resources::PAYMENT_REQUESTS,
-            (string) $order->getLastPayment()->getId()
+            (string) $order->getLastPayment()->getId(),
         );
     }
 
@@ -122,10 +117,12 @@ final readonly class ManagingPaymentRequestsContext implements Context
      */
     public function itsMethodShouldBe(PaymentMethodInterface $paymentMethod): void
     {
-        Assert::true($this->responseChecker->hasValue(
+        Assert::true(
+            $this->responseChecker->hasValue(
             $this->client->getLastResponse(),
             'method',
-            $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'admin'))
+            $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'admin'),
+        ),
         );
     }
 
@@ -152,5 +149,4 @@ final readonly class ManagingPaymentRequestsContext implements Context
     {
         Assert::isEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'responseData'));
     }
-
 }

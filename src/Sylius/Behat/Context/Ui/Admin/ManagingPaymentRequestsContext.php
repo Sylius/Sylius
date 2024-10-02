@@ -48,7 +48,7 @@ final readonly class ManagingPaymentRequestsContext implements Context
 
         $this->showPage->open([
             'hash' => $paymentRequest->getHash(),
-            'paymentId' => $payment->getId()
+            'paymentId' => $payment->getId(),
         ]);
     }
 
