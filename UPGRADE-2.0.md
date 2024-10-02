@@ -346,8 +346,7 @@ sylius_grid:
                         field: product.channels.id
 ```
 
-After
-Before:
+After:
 ```yaml
 sylius_grid:
     grids:
