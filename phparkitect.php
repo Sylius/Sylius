@@ -6,8 +6,8 @@ use Arkitect\ClassSet;
 use Arkitect\CLI\Config;
 use Arkitect\Expression\ForClasses\Extend;
 use Arkitect\Expression\ForClasses\HaveNameMatching;
-use Arkitect\Expression\ForClasses\IsNotAbstract;
 use Arkitect\Expression\ForClasses\IsFinal;
+use Arkitect\Expression\ForClasses\IsNotAbstract;
 use Arkitect\Expression\ForClasses\NotDependsOnTheseNamespaces;
 use Arkitect\Expression\ForClasses\ResideInOneOfTheseNamespaces;
 use Arkitect\Rules\Rule;
@@ -75,6 +75,7 @@ return static function (Config $config): void
                 'Sylius\Bundle\AdminBundle',
                 'Sylius\Bundle\ApiBundle',
                 'Sylius\Bundle\CoreBundle',
+                'Sylius\Bundle\PayumBundle',
                 'Sylius\Bundle\ShopBundle',
             )
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle'))
