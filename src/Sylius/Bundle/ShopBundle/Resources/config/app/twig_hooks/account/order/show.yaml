@@ -7,10 +7,10 @@ twig_hooks:
                 template: "@SyliusShop/shared/order/show/summary.html.twig"
 
         'sylius_shop.account.order.show.header':
-            details:
-                template: "@SyliusShop/account/order/show/header/details.html.twig"
             buttons:
                 template: "@SyliusShop/account/order/show/header/buttons.html.twig"
+            details:
+                template: "@SyliusShop/account/order/show/header/details.html.twig"
 
         'sylius_shop.account.order.show.header.details':
             state:

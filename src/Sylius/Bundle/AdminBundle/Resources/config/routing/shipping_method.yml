@@ -19,7 +19,6 @@ sylius_admin_shipping_method_archive:
         _sylius:
             section: admin
             permission: true
-            template: '@SyliusUi/Grid/Action/archive.html.twig'
             form:
                 type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
             redirect:

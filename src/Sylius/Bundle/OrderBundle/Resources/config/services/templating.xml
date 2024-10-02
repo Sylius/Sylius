@@ -18,6 +18,7 @@
         <service id="sylius.templating.helper.adjustment" class="Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper">
             <argument type="service" id="sylius.adjustments_aggregator" />
             <tag name="templating.helper" alias="sylius_adjustments" />
+            <deprecated package="sylius/order-bundle" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
         </service>
     </services>
 </container>

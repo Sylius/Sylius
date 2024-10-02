@@ -15,8 +15,18 @@ namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
+use Sylius\Component\Locale\Converter\LocaleConverter;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
+trigger_deprecation(
+    'sylius/locale-bundle',
+    '1.14',
+    'The "%s" class is deprecated, use "%s" instead.',
+    LocaleHelper::class,
+    LocaleConverter::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Locale\Converter\LocaleConverter} instead. */
 final class LocaleHelper implements LocaleHelperInterface
 {
     private string $charset = 'UTF-8';

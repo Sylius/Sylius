@@ -6,7 +6,9 @@
 {% set active_step = 'complete' %}
 
 {% block content %}
-    {% hook 'sylius_shop.checkout.complete' with { order, form, active_step } %}
+    <div class="mx-auto" style="max-width: var(--bs-breakpoint-lg)">
+        {% hook 'sylius_shop.checkout.complete' with { order, form, active_step } %}
+    </div>
 {% endblock %}
 
 {% block sidebar %}

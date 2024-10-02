@@ -143,7 +143,7 @@ final readonly class ManagingProductOptionsContext implements Context
      */
     public function iDeleteTheOptionValueWithCodeAndValue(string $value): void
     {
-        // TODO: Implement deleting option value
+        $this->formElement->removeOptionValue($value);
     }
 
     /**
@@ -253,6 +253,7 @@ final readonly class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      * @Then /^(product option "[^"]+") should have the "([^"]*)" option value$/
+     * @Then /^(product option "[^"]+") should still have the "([^"]*)" option value$/
      * @Then /^(this product option) should have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
     public function thisProductOptionShouldHaveTheOptionValue(

@@ -112,3 +112,11 @@ $s_accordion-body-padding-bottom: calc($accordion-padding-y * 1.5);
 // Tables
 
 $table-bg: transparent;
+
+// Cards
+
+$card-spacer-y: $spacer * 1.3;
+$card-spacer-x: $spacer * 1.5;
+$card-cap-padding-y: $card-spacer-y * 0.8;
+$card-cap-padding-x: 0;
+$card-cap-bg: transparent;

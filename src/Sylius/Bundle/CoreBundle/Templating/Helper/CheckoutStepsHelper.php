@@ -13,11 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
+use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated, use "%s" and "%s" instead.',
+    CheckoutStepsHelper::class,
+    OrderPaymentMethodSelectionRequirementChecker::class,
+    OrderShippingMethodSelectionRequirementChecker::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker} and {@see \Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker} instead. */
 class CheckoutStepsHelper extends Helper
 {
     public function __construct(

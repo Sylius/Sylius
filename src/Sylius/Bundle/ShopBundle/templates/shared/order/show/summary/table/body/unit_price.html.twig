@@ -4,7 +4,7 @@
 {% set unit_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
 {% set unit_promotions = item.units.first.adjustments(unit_promotion_adjustment) %}
 
-<td class="text-end border-bottom">
+<td class="text-end">
     {% if item.unitPrice != item.discountedUnitPrice %}
         <span {{ sylius_test_html_attribute('product-old-price', item.productName) }}>{{ money.convertAndFormat(item.unitPrice) }}</span>
     {% endif %}

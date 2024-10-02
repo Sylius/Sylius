@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -20,6 +21,7 @@ use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
@@ -30,6 +32,7 @@ final class ManagingProductOptionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -113,11 +116,12 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I delete the :value option value of this product option
+     * @When I delete the :optionValue option value of this product option
      */
-    public function iDeleteTheOptionValueOfThisProductOption(string $value): void
+    public function iDeleteTheOptionValueOfThisProductOption(ProductOptionValueInterface $optionValue): void
     {
-        $this->client->removeSubResourceObject('values', $value, 'value');
+        $optionValueIri = $this->iriConverter->getIriFromResource($optionValue);
+        $this->client->removeSubResourceObject('values', $optionValueIri, 'value');
     }
 
     /**
@@ -228,6 +232,7 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @Then /^(product option "[^"]+") should have the "([^"]+)" option value$/
+     * @Then /^(product option "[^"]+") should still have the "([^"]+)" option value$/
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      */
     public function productOptionShouldHaveTheOptionValue(
@@ -293,6 +298,17 @@ final class ManagingProductOptionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter option %s.', $element, $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that it is in use
+     */
+    public function iShouldBeNotifiedThatItIsInUse(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot delete, the product option value is in use.',
         );
     }
 
