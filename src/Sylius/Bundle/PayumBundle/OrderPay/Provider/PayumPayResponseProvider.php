@@ -11,10 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
+namespace Sylius\Bundle\PayumBundle\OrderPay\Provider;
 
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenInterface;
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\PayResponseProviderInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <!-- Pay -->
+
+        <service id="sylius.shop.order_pay.provider.pay_response.payum" parent="sylius.payum.order_pay.provider.pay_response">
+            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
+            <tag name="sylius.shop.order_pay.provider.pay_response" priority="-200" />
+        </service>
+
+        <!-- After pay -->
+
+        <service id="sylius.shop.order_pay.provider.after_pay_response.payum" parent="sylius.payum.order_pay.provider.after_pay_response">
+            <argument type="service" id="sylius.shop.order_pay.handler.payment_state_flash" />
+            <tag name="sylius.shop.order_pay.provider.after_pay_response" priority="-200" />
+        </service>
+    </services>
+</container>
