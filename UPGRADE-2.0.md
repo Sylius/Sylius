@@ -210,16 +210,90 @@
 
 * The following classes and interfaces have been removed:
 
-  Money:
-
+    * `Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper`
+    * `Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper`
+    * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`
+    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelper`
+    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelperInterface`
+    * `Sylius\Bundle\InventoryBundle/Templating/Helper/InventoryHelper`
+    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelper`
+    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
+    * `Sylius\Bundle\OrderBundle/Templating/Helper/AdjustmentsHelper`
 
 ### Constructors signature changes
 
 1. The following constructor signatures have been changed:
+
+   `Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension`
+    ```diff
+    
+    use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
+    use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
+
+        public function __construct(
+    -       private readonly CheckoutStepsHelper|OrderPaymentMethodSelectionRequirementCheckerInterface $checkoutStepsHelper,
+    -       private readonly ?OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker = null,
+    +       private readonly OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
+    +       private readonly OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Twig\PriceExtension`
+    ```diff
+    
+    use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+
+        public function __construct(
+    -       private readonly PriceHelper|ProductVariantPricesCalculatorInterface $helper,
+    +       private readonly ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension`
+    ```diff
+    
+    use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+
+        public function __construct(
+    -       private readonly VariantResolverHelper|ProductVariantResolverInterface $helper,
+    +       private readonly ProductVariantResolverInterface $productVariantResolver,
+        )
+    ```
+
+   `Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension`
+    ```diff
+
+        public function __construct(
+    -       private ?CurrencyHelperInterface $helper = null,
+        )
+    ```
+
+   `Sylius\Bundle\InventoryBundle\Twig\InventoryExtension`
+    ```diff
+    use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+
+        public function __construct(
+    -       private InventoryHelper|AvailabilityCheckerInterface $helper,
+    +       private AvailabilityCheckerInterface $availabilityChecker,
+        )
+    ```
+
+   `Sylius\Bundle\LocaleBundle\Twig\LocaleExtension`
+    ```diff
+    use Sylius\Component\Locale\Context\LocaleContextInterface;
+    use Sylius\Component\Locale\Converter\LocaleConverterInterface;
+
+        public function __construct(
+    -       private LocaleHelperInterface|LocaleConverterInterface $localeHelper,
+    -       private ?LocaleContextInterface $localeContext = null,
+    +       private LocaleConverterInterface $localeConverter,
+    +       private LocaleContextInterface $localeContext,
+        )
+    ```
 
    `Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension`
     ```diff
@@ -238,6 +312,16 @@
         public function __construct(
     -       private private FormatMoneyHelperInterface|MoneyFormatterInterface $helper,
     +       private MoneyFormatterInterface $moneyFormatter,
+        )
+    ```
+
+   `Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension`
+    ```diff
+    use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
+
+        public function __construct(
+    -       private AdjustmentsHelper|AdjustmentsAggregatorInterface $adjustmentsHelper,
+    +       private AdjustmentsAggregatorInterface $adjustmentsAggregator,
         )
     ```
 

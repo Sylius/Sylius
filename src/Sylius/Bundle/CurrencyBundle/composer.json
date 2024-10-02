@@ -29,8 +29,7 @@
         "sylius/currency": "^2.0",
         "sylius/resource-bundle": "^1.11 || ^1.12@alpha",
         "symfony/framework-bundle": "^6.4.1 || ^7.1",
-        "symfony/intl": "^6.4.0 || ^7.1",
-        "symfony/templating": "^6.4.0"
+        "symfony/intl": "^6.4.0 || ^7.1"
     },
     "conflict": {
         "doctrine/orm": ">= 3.0.0"
