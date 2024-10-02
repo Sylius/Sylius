@@ -18,7 +18,6 @@ use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Event\Event;
 
 final class OrderCustomerIpListenerSpec extends ObjectBehavior
@@ -43,12 +42,12 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
         $this->__invoke($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_order(Event $event): void
+    function it_throws_exception_if_event_subject_is_not_order(Event $event, \stdClass $order): void
     {
-        $event->getSubject()->willReturn('badObject');
+        $event->getSubject()->willReturn($order);
 
         $this
-            ->shouldThrow(\TypeError::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [$event])
         ;
     }
