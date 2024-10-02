@@ -20,13 +20,13 @@ use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstruc
 readonly class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstructionInterface
 {
     public function __construct(
-        private string $promotionCode,
-        private ?string $prefix = null,
-        private ?int $codeLength = null,
-        private ?string $suffix = null,
-        private ?int $amount = null,
-        private ?\DateTimeInterface $expiresAt = null,
-        private ?int $usageLimit = null,
+        protected string $promotionCode,
+        protected ?string $prefix = null,
+        protected ?int $codeLength = null,
+        protected ?string $suffix = null,
+        protected ?int $amount = null,
+        protected ?\DateTimeInterface $expiresAt = null,
+        protected ?int $usageLimit = null,
     ) {
     }
 

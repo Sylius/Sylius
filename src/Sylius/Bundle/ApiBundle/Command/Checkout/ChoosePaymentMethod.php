@@ -19,12 +19,12 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
 #[OrderTokenValueAware]
 #[PaymentIdAware]
-class ChoosePaymentMethod implements IriToIdentifierConversionAwareInterface
+readonly class ChoosePaymentMethod implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public readonly string $orderTokenValue,
-        public readonly mixed $paymentId,
-        public readonly string $paymentMethodCode,
+        public string $orderTokenValue,
+        public mixed $paymentId,
+        public string $paymentMethodCode,
     ) {
     }
 }

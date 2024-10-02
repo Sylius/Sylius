@@ -51,11 +51,10 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_checkout_completion(
         Constraint $constraint,
-        CompleteOrder $completeOrder,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$completeOrder, $constraint])
+            ->during('validate', [new CompleteOrder('token'), $constraint])
         ;
     }
 

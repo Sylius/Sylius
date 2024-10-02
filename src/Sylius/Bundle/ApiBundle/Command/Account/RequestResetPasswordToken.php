@@ -19,12 +19,12 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
 #[ChannelCodeAware]
 #[LocaleCodeAware]
-class RequestResetPasswordToken implements IriToIdentifierConversionAwareInterface
+readonly class RequestResetPasswordToken implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public readonly string $channelCode,
-        public readonly string $localeCode,
-        public readonly string $email,
+        public string $channelCode,
+        public string $localeCode,
+        public string $email,
     ) {
     }
 }

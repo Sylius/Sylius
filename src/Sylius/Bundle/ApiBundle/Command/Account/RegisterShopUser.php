@@ -18,16 +18,16 @@ use Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware;
 
 #[ChannelCodeAware]
 #[LocaleCodeAware]
-class RegisterShopUser
+readonly class RegisterShopUser
 {
     public function __construct(
-        public readonly string $channelCode,
-        public readonly string $localeCode,
-        public readonly string $firstName,
-        public readonly string $lastName,
-        public readonly string $email,
-        public readonly string $password,
-        public readonly bool $subscribedToNewsletter = false,
+        public string $channelCode,
+        public string $localeCode,
+        public string $firstName,
+        public string $lastName,
+        public string $email,
+        public string $password,
+        public bool $subscribedToNewsletter = false,
     ) {
     }
 }

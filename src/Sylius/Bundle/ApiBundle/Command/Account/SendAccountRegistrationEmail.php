@@ -13,22 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Account;
 
-/** @immutable */
-class SendAccountRegistrationEmail
+readonly class SendAccountRegistrationEmail
 {
-    /** @var string */
-    public $shopUserEmail;
-
-    /** @var string */
-    public $localeCode;
-
-    /** @var string */
-    public $channelCode;
-
-    public function __construct(string $shopUserEmail, string $localeCode, string $channelCode)
-    {
-        $this->shopUserEmail = $shopUserEmail;
-        $this->localeCode = $localeCode;
-        $this->channelCode = $channelCode;
+    public function __construct(
+        public string $shopUserEmail,
+        public string $localeCode,
+        public string $channelCode,
+    ) {
     }
 }

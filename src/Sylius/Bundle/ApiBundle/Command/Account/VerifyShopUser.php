@@ -18,12 +18,12 @@ use Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware;
 
 #[ChannelCodeAware]
 #[LocaleCodeAware]
-class VerifyShopUser
+readonly class VerifyShopUser
 {
     public function __construct(
-        public readonly string $channelCode,
-        public readonly string $localeCode,
-        public readonly string $token,
+        public string $channelCode,
+        public string $localeCode,
+        public string $token,
     ) {
     }
 }

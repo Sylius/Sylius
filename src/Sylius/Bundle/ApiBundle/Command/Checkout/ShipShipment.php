@@ -16,11 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
 
 #[ShipmentIdAware]
-class ShipShipment
+readonly class ShipShipment
 {
     public function __construct(
-        public readonly mixed $shipmentId = null,
-        public readonly ?string $trackingCode = null,
+        public mixed $shipmentId = null,
+        public ?string $trackingCode = null,
     ) {
     }
 }

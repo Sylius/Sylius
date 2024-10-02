@@ -21,12 +21,12 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 #[ShopUserIdAware]
 #[ChannelCodeAware]
 #[LocaleCodeAware]
-class RequestShopUserVerification implements IriToIdentifierConversionAwareInterface
+readonly class RequestShopUserVerification implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public readonly mixed $shopUserId,
-        public readonly string $channelCode,
-        public readonly string $localeCode,
+        public mixed $shopUserId,
+        public string $channelCode,
+        public string $localeCode,
     ) {
     }
 }
