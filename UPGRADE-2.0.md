@@ -210,15 +210,19 @@
 
 * The following classes and interfaces have been removed:
 
-  Money:
-
     * `Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper`
     * `Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper`
     * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`
+    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelper`
+    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelperInterface`
+    * `Sylius\Bundle\InventoryBundle/Templating/Helper/InventoryHelper`
+    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelper`
+    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
+    * `Sylius\Bundle\OrderBundle/Templating/Helper/AdjustmentsHelper`
 
 ### Constructors signature changes
 
