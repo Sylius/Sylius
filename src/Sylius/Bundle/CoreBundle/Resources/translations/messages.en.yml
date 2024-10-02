@@ -280,9 +280,5 @@ sylius:
             version_recommended: Recommended PHP version
             version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.
 
-    payum_gateway:
-        cash_on_delivery: Cash on delivery
-        offline: Offline
-
     shipping_method_resolver:
         by_zones_and_channel: By zones and channel

@@ -2,5 +2,8 @@ sylius:
     form:
         gateway_config:
             type: Type
+    payum_gateway:
+        cash_on_delivery: Cash on delivery
+        offline: Offline
     payum_gateway_factory:
         offline: Offline
