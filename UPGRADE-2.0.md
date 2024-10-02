@@ -325,6 +325,45 @@
         )
     ```
 
+## Grids
+
+The experimental `entities` filter has been removed. It has been replaced by the generic `entity` one.
+
+Before:
+```yaml
+sylius_grid:
+    grids:
+        # ...
+        sylius_admin_catalog_promotion:
+            # ...
+            filters:
+                channel:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        field: product.channels.id
+```
+
+After
+Before:
+```yaml
+sylius_grid:
+    grids:
+        # ...
+        sylius_admin_catalog_promotion:
+            # ...
+            filters:
+                channel:
+                    type: entity
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        fields: [product.channels.id]
+```
+
 ## Password Encoder & Salt
 The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
 
