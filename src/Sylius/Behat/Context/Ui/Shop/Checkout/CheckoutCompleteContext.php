@@ -81,8 +81,12 @@ final class CheckoutCompleteContext implements Context
      * @When I confirm my order
      * @When I try to confirm my order
      */
-    public function iConfirmMyOrder()
+    public function iConfirmMyOrder(): void
     {
+        if (!$this->completePage->isOpen()) {
+            $this->completePage->open();
+        }
+
         $this->completePage->confirmOrder();
     }
 

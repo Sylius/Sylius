@@ -55,6 +55,7 @@ final readonly class ManagingOrdersContext implements Context
      * @Given /^I am viewing the summary of (this order)$/
      * @Given I am viewing the summary of the order :order
      * @When I view the summary of the order :order
+     * @When /^I view the summary of the (order placed by "[^"]+")$/
      */
     public function iSeeTheOrder(OrderInterface $order): void
     {
@@ -120,7 +121,6 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->addRequestData('tracking', $trackingCode);
         $this->client->update();
     }
-
     /**
      * @When /^I try to view the summary of the (customer's latest cart)$/
      */
@@ -1265,6 +1265,15 @@ final readonly class ManagingOrdersContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Not enough units to decrease on hold quantity from the inventory of a variant',
         );
+    }
+
+    /**
+     * @Then I should see that customer's IP address is :ipAddress
+     */
+    public function iShouldSeeCustomersIpAddress(
+        string $ipAddress,
+    ): void {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'customerIp'), $ipAddress);
     }
 
     /**

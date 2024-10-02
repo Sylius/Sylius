@@ -27,6 +27,7 @@ default:
                 - sylius.behat.context.transform.user
                 - sylius.behat.context.transform.zone
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
+                - sylius.behat.context.transform.customer    
 
                 - sylius.behat.context.setup.address
                 - sylius.behat.context.setup.admin_user
@@ -48,13 +49,15 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.order
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.address
                 - sylius.behat.context.api.shop.checkout
-                - sylius.behat.context.api.shop.login
-                - sylius.behat.context.api.shop.order
+                - sylius.behat.context.api.admin.login
+                - sylius.behat.context.api.admin.managing_orders
 
                 - sylius.behat.context.api.email
 

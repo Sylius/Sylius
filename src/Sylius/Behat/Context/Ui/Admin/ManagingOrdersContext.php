@@ -55,6 +55,7 @@ final readonly class ManagingOrdersContext implements Context
      * @Given /^I am viewing the summary of (this order)$/
      * @Given I am viewing the summary of the order :order
      * @When I view the summary of the order :order
+     * @When /^I view the summary of the (order placed by "[^"]+")$/
      */
     public function iViewTheSummaryOfTheOrder(OrderInterface $order): void
     {
@@ -865,20 +866,12 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^(the administrator) should know about IP address of (this order made by "[^"]+")$/
+     * @Then I should see that customer's IP address is :ipAddress
      */
-    public function theAdministratorShouldKnowAboutIPAddressOfThisOrderMadeBy(
-        AdminUserInterface $user,
-        OrderInterface $order,
+    public function iShouldSeeCustomersIpAddress(
+        string $ipAddress,
     ): void {
-        $this->sharedSecurityService->performActionAsAdminUser(
-            $user,
-            function () use ($order) {
-                $this->showPage->open(['id' => $order->getId()]);
-
-                Assert::notSame($this->showPage->getIpAddressAssigned(), '');
-            },
-        );
+        Assert::same($this->showPage->getIpAddressAssigned(), $ipAddress);
     }
 
     /**
