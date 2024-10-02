@@ -37,7 +37,7 @@ final class PriceExtension extends AbstractExtension
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.14',
-                'The argument name $helper is deprecated and will be renamed to $productVariantPriceCalculator in Sylius 2.0.',
+                'The argument name $helper is deprecated and will be renamed to $productVariantPricesCalculator in Sylius 2.0.',
             );
         }
     }
