@@ -17,15 +17,17 @@ use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Workflow\Event\CompletedEvent;
+use Symfony\Component\Workflow\Event\Event;
 use Webmozart\Assert\Assert;
 
-final class OrderCustomerIpListener
+final readonly class OrderCustomerIpListener
 {
     public function __construct(private IpAssignerInterface $ipAssigner, private RequestStack $requestStack)
     {
     }
 
-    public function assignCustomerIpToOrder(GenericEvent $event): void
+    public function __invoke(Event $event): void
     {
         $subject = $event->getSubject();
         Assert::isInstanceOf($subject, OrderInterface::class);

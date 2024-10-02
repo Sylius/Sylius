@@ -16,9 +16,10 @@ namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Workflow\Event\CompletedEvent;
+use Symfony\Component\Workflow\Event\Event;
 
 final class OrderCustomerIpListenerSpec extends ObjectBehavior
 {
@@ -28,7 +29,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
     }
 
     function it_uses_assigner_to_assign_customer_ip_to_order(
-        GenericEvent $event,
+        Event $event,
         IpAssignerInterface $ipAssigner,
         OrderInterface $order,
         Request $request,
@@ -39,22 +40,22 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
 
         $ipAssigner->assign($order, $request)->shouldBeCalled();
 
-        $this->assignCustomerIpToOrder($event);
+        $this->__invoke($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_order(GenericEvent $event): void
+    function it_throws_exception_if_event_subject_is_not_order(Event $event): void
     {
         $event->getSubject()->willReturn('badObject');
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('assignCustomerIpToOrder', [$event])
+            ->shouldThrow(\TypeError::class)
+            ->during('__invoke', [$event])
         ;
     }
 
     function it_throws_exception_if_request_is_null(
         OrderInterface $order,
-        GenericEvent $event,
+        Event $event,
         RequestStack $requestStack,
     ): void {
         $event->getSubject()->willReturn($order);
@@ -63,7 +64,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('assignCustomerIpToOrder', [$event])
+            ->during('__invoke', [$event])
         ;
     }
 }
