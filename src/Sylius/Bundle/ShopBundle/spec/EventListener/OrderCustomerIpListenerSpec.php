@@ -52,18 +52,18 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_request_is_null(
+    function it_does_nothing_if_request_is_not_available(
+        IpAssignerInterface $ipAssigner,
         OrderInterface $order,
         Event $event,
         RequestStack $requestStack,
+        Request $request,
     ): void {
         $event->getSubject()->willReturn($order);
-
         $requestStack->getMainRequest()->willReturn(null);
 
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [$event])
-        ;
+        $ipAssigner->assign($order, $request)->shouldNotBeCalled();
+
+        $this->__invoke($event);
     }
 }

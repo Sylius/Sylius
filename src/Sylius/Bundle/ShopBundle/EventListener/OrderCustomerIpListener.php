@@ -33,7 +33,10 @@ final readonly class OrderCustomerIpListener
         Assert::isInstanceOf($subject, OrderInterface::class);
 
         $request = $this->requestStack->getMainRequest();
-        Assert::notNull($request);
+
+        if (null === $request) {
+            return;
+        }
 
         $this->ipAssigner->assign($subject, $request);
     }
