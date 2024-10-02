@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Payment\Exception;
+namespace Sylius\Bundle\PayumBundle\Exception;
 
 /** @experimental */
 final class NonExistingPayumTokenException extends \RuntimeException
