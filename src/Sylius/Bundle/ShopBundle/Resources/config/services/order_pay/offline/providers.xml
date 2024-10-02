@@ -11,16 +11,15 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-
         <service id="sylius.http_response.provider.offline.capture" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline\StatusHttpResponseProvider">
             <argument type="service" id="sylius.shop.order_pay.provider.final_url" />
             <tag name="sylius.http_response.provider.offline" action="status" />
         </service>
-
     </services>
 </container>
