@@ -20,7 +20,7 @@ use Twig\TwigFilter;
 
 final class VariantResolverExtension extends AbstractExtension
 {
-    public function __construct(private readonly VariantResolverHelper|ProductVariantResolverInterface $helper)
+    public function __construct(private readonly ProductVariantResolverInterface|VariantResolverHelper $helper)
     {
         if ($this->helper instanceof VariantResolverHelper) {
             trigger_deprecation(

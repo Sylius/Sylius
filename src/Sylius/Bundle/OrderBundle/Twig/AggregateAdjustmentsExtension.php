@@ -20,7 +20,7 @@ use Twig\TwigFunction;
 
 final class AggregateAdjustmentsExtension extends AbstractExtension
 {
-    public function __construct(private AdjustmentsHelper|AdjustmentsAggregatorInterface $adjustmentsHelper)
+    public function __construct(private AdjustmentsAggregatorInterface|AdjustmentsHelper $adjustmentsHelper)
     {
         if ($this->adjustmentsHelper instanceof AdjustmentsHelper) {
             trigger_deprecation(
