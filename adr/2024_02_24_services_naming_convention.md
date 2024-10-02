@@ -1,18 +1,18 @@
-# Remove flush from handlers
+# Services naming convention
 
-* Status: drafted
+* Status: Accepted
 * Date: 2024-02-24
 
 ## Context and Problem Statement
 
 Services in Sylius are named in different ways, depending on the time of their creation, and other services' names.
-Also, some services named with using the `dot` notation are harder to be used with using the `autowire` feature.
+Also, some services named with using the `dot` notation are harder to be used with `autowire` feature.
 
 ## Decision Drivers
 
-* make naming services predictable
-* provide a consistent way of naming services
-* support the `autowire` feature
+* Make naming services predictable
+* Provide a consistent way of naming services
+* Support the `autowire` feature
 
 ## Considered Options
 
@@ -49,9 +49,7 @@ Chosen option: **"Combine the `dot` notation with the FQCN (when it makes sense)
 Despite the fact that it requires more work, it is the best option to provide a consistent way of naming services and support the `autowire` feature.
 Also, thanks to this approach, we stay consistent with the Symfony best practices.
 
-Some services that are not meant to be used with the `autowire` feature can be should be named with the `dot` notation.
-
-Example:
+Some services that are not meant to be used with the `autowire` feature should only be named with the `dot` notation:
 - form types/extensions
 - message handlers
 - validators
