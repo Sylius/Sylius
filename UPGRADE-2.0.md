@@ -249,7 +249,7 @@
 
         public function __construct(
     -       private readonly PriceHelper|ProductVariantPricesCalculatorInterface $helper,
-    +       private readonly ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+    +       private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
         )
     ```
 

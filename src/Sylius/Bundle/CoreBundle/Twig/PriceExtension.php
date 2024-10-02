@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class PriceExtension extends AbstractExtension
 {
-    public function __construct(private readonly ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator)
     {
     }
 
@@ -45,7 +45,7 @@ final class PriceExtension extends AbstractExtension
     {
         Assert::keyExists($context, 'channel');
 
-        return $this->productVariantPriceCalculator->calculate($productVariant, $context);
+        return $this->productVariantPricesCalculator->calculate($productVariant, $context);
     }
 
     /**
@@ -57,7 +57,7 @@ final class PriceExtension extends AbstractExtension
     {
         Assert::keyExists($context, 'channel');
 
-        return $this->productVariantPriceCalculator->calculateOriginal($productVariant, $context);
+        return $this->productVariantPricesCalculator->calculateOriginal($productVariant, $context);
     }
 
     /**
@@ -69,7 +69,7 @@ final class PriceExtension extends AbstractExtension
     {
         Assert::keyExists($context, 'channel');
 
-        return $this->productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($productVariant, $context);
+        return $this->productVariantPricesCalculator->calculateLowestPriceBeforeDiscount($productVariant, $context);
     }
 
     /**
