@@ -54,6 +54,8 @@ interface SummaryPageInterface extends ShopPageInterface
 
     public function applyCoupon(?string $couponCode = null): void;
 
+    public function removeCoupon(): void;
+
     public function countOrderItems(): int;
 
     public function hasItemNamed(string $name): bool;

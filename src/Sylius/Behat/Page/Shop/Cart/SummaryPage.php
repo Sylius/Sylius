@@ -241,34 +241,12 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
             'promotion_coupon' => '[data-test-cart-promotion-coupon]',
             'promotion_total' => '[data-test-cart-promotion-total]',
             'remove_item' => '[data-test-cart-items] [data-test-cart-item-product-row="%name%"] [data-test-remove-cart-item]',
-//            'save_button' => '[data-test-apply-coupon-button]',
             'shipping_total' => '[data-test-cart-shipping-total]',
             'tax_excluded' => '[data-test-cart-tax-excluded]',
             'tax_included' => '[data-test-cart-tax-included]',
             'validation_errors' => '[data-test-validation-error]',
         ]);
     }
-
-//    /**
-//     * @throws ElementNotFoundException
-//     */
-//    private function hasItemWith(string $attributeName, array|string $selector): bool
-//    {
-//        $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
-//
-//        foreach ($itemsAttributes as $itemAttribute) {
-//            if ($attributeName === $itemAttribute->getText()) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-//
-//    private function getPriceFromString(string $price): int
-//    {
-//        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
-//    }
 
     private function waitForComponentsUpdate(): void
     {

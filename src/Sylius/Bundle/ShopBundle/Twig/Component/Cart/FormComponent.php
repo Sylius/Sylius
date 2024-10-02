@@ -97,6 +97,14 @@ class FormComponent
         $this->emit(self::SYLIUS_SHOP_CART_CLEARED);
     }
 
+    #[LiveAction]
+    public function removeCoupon(): void
+    {
+        $this->formValues['promotionCoupon'] = '';
+
+        $this->submitForm();
+    }
+
     private function getDataModelValue(): string
     {
         return 'debounce(500)|*';
