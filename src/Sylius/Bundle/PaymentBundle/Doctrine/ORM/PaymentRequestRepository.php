@@ -73,4 +73,21 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
 
         return count($paymentRequests) > 0;
     }
+
+    /**
+     * @param array<string> $states
+     *
+     * @return array<PaymentRequestInterface>
+     */
+    public function findByPaymentIdAndStates(mixed $paymentId, array $states): array
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.payment = :paymentId')
+            ->andWhere('o.state IN (:states)')
+            ->setParameter('paymentId', $paymentId)
+            ->setParameter('states', $states)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

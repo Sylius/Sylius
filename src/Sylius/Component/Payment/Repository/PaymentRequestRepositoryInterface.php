@@ -29,4 +29,11 @@ interface PaymentRequestRepositoryInterface extends RepositoryInterface
     public function createQueryBuilderForPayment(string $paymentId): QueryBuilder;
 
     public function duplicateExists(PaymentRequestInterface $paymentRequest): bool;
+
+    /**
+     * @param array<string> $states
+     *
+     * @return array<PaymentRequestInterface>
+     */
+    public function findByPaymentIdAndStates(mixed $paymentId, array $states): array;
 }

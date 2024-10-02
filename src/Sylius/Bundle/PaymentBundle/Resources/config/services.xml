@@ -38,6 +38,11 @@
         </service>
         <service id="Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface" alias="sylius.payment_methods_resolver" />
 
+        <service id="sylius.canceller.payment_method" class="Sylius\Bundle\PaymentBundle\Canceller\PaymentRequestCanceller">
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
+        </service>
+
         <service id="sylius.payment_methods_resolver.default" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver" public="false">
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="default" label="Default" />
