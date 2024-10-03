@@ -78,11 +78,6 @@
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 
-        <service id="sylius.listener.change_payment_method" class="Sylius\Bundle\ApiBundle\EventListener\ChangePaymentMethodEventListener">
-            <argument type="service" id="sylius.canceller.payment_method" />
-            <tag name="kernel.event_listener" event="kernel.controller_arguments" method="cancelPaymentRequestsWithDifferentPaymentMethod" />
-        </service>
-
         <service
             id="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter"
             decorates="api_platform.symfony.iri_converter"
