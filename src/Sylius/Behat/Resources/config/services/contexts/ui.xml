@@ -391,7 +391,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.checkout.address" />
             <argument type="service" id="sylius.factory.address" />
-            <argument type="service" id="sylius.address_comparator" />
+            <argument type="service" id="sylius.comparator.address" />
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
             <argument type="service" id="sylius.behat.java_script_test_helper" />
         </service>

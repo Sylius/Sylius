@@ -44,7 +44,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\DataPersister\CountryDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
+            <argument type="service" id="sylius.checker.country_provinces_deletion" />
             <tag name="api_platform.data_persister" />
         </service>
 
@@ -97,7 +97,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\DataPersister\ZoneDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
+            <argument type="service" id="sylius.checker.zone_deletion" />
             <tag name="api_platform.data_persister" />
         </service>
 
