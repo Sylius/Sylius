@@ -153,7 +153,19 @@
         </service>
 
         <service
-            id="sylius_api.context_builder.token_aware.reset_password"
+            id="sylius_api.context_builder.token_aware.admin_user_reset_password"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\Admin\Account\ResetPassword</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.token_aware.shop_user_reset_password"
             class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
