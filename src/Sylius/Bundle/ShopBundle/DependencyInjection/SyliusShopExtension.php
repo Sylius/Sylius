@@ -44,8 +44,6 @@ final class SyliusShopExtension extends Extension
             $config['product_grid']['include_all_descendants'],
         );
 
-        $loader->load('services/integrations/payum.xml');
-
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
 

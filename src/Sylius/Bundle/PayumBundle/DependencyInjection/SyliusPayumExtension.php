@@ -29,6 +29,11 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
 
         $loader->load('services.xml');
 
+        $bundles = $container->getParameter('kernel.bundles');
+        if (array_key_exists('SyliusShopBundle', $bundles)) {
+            $loader->load('services/integrations/sylius_shop.xml');
+        }
+
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
     }

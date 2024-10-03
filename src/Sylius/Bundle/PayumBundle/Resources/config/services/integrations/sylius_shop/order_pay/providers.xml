@@ -21,14 +21,14 @@
 
         <!-- Pay -->
 
-        <service id="sylius.shop.order_pay.provider.pay_response.payum" parent="sylius.payum.order_pay.provider.pay_response">
+        <service id="sylius_shop.order_pay.provider.pay_response.payum" parent="sylius.payum.order_pay.provider.pay_response">
             <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
             <tag name="sylius.shop.order_pay.provider.pay_response" priority="-200" />
         </service>
 
         <!-- After pay -->
 
-        <service id="sylius.shop.order_pay.provider.after_pay_response.payum" parent="sylius.payum.order_pay.provider.after_pay_response">
+        <service id="sylius_shop.order_pay.provider.after_pay_response.payum" parent="sylius.payum.order_pay.provider.after_pay_response">
             <argument type="service" id="sylius.shop.order_pay.handler.payment_state_flash" />
             <tag name="sylius.shop.order_pay.provider.after_pay_response" priority="-200" />
         </service>
