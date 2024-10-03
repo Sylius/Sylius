@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
-final class SyliusConfigMergeTest extends ApiTestCase
+final class MergingConfigsTest extends ApiTestCase
 {
     use SetUpTestsTrait;
 
