@@ -35,12 +35,11 @@
 
 1. Aliases for the following services have been introduced to standardize service IDs and will replace the incorrect IDs in Sylius 2.0:
     
-    | Old ID                                    | New ID                                         |
-    |-------------------------------------------|------------------------------------------------|
-    | `sylius.province_naming_provider`         | `sylius.provider.province_naming`              |
-    | `sylius.zone_matcher`                     | `sylius.matcher.zone`                          |
-    | `sylius.address_comparator`               | `sylius.comparator.address`                    |
-    | `sylius.validator.valid_province_address` | `sylius.validator.province_address_constraint` |
+    | Old ID                            | New ID                            |
+    |-----------------------------------|-----------------------------------|
+    | `sylius.province_naming_provider` | `sylius.provider.province_naming` |
+    | `sylius.zone_matcher`             | `sylius.matcher.zone`             |
+    | `sylius.address_comparator`       | `sylius.comparator.address`       |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
