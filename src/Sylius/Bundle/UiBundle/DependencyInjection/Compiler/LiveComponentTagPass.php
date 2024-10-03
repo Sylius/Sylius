@@ -30,7 +30,7 @@ final class LiveComponentTagPass implements CompilerPassInterface
                     $liveComponentService = $container->getDefinition($id);
                     $liveComponentService->addTag('twig.component', [
                         'key' => $tag['key'] ?? $tagOptions['key'] ?? throw new InvalidArgumentException('The "key" attribute is required for the "sylius.live_component" tag'),
-                        'template' => $tag['template'] ?? $tagOptions['template'] ?? throw new InvalidArgumentException('The "template" attribute is required for the "sylius.live_component" tag'),
+                        'template' => $tag['template'] ?? $tagOptions['template'] ?? [],
                         'expose_public_props' => $tag['expose_public_props'] ?? $tagOptions['expose_public_props'] ?? true,
                         'attributes_var' => $tag['attributes_var'] ?? $tagOptions['attributes_var'] ?? 'attributes',
                         'default_action' => $tag['default_action'] ?? $tagOptions['default_action'] ?? null,
