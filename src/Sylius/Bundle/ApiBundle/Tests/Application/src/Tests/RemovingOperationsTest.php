@@ -16,24 +16,20 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-final class DisablingDocumentationTest extends ApiTestCase
+final class RemovingOperationsTest extends ApiTestCase
 {
     use SetUpTestsTrait;
 
     public function setUp(): void
     {
         $this->setFixturesFiles();
-
         $this->setUpTest();
     }
 
     /** @test */
-    public function it_disables_documentation(): void
+    public function it_allows_to_remove_an_existing_operation(): void
     {
-        static::createClient()->request(
-            'GET',
-            'api/v2/docs',
-        );
+        static::createClient()->request('GET', '/api/v2/shop/currencies');
 
         self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
