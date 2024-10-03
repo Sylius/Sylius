@@ -50,6 +50,9 @@ sylius_grid:
 
 sylius_ui:
     twig_ux:
+        live_component_tags:
+            admin:
+                route: sylius_admin_live_component
         anonymous_component_template_prefixes:
             sylius_admin: "@SyliusAdmin/shared/components"
 

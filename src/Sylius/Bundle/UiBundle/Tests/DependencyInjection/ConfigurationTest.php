@@ -333,6 +333,29 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    /** @test */
+    public function it_allows_to_configure_live_component_tags(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => ['live_component_tags' => ['ui' => ['route' => 'sylius_ui', 'method' => 'get']]]],
+            ],
+            ['twig_ux' => ['live_component_tags' => ['ui' => ['route' => 'sylius_ui', 'method' => 'get']]]],
+            'twig_ux.live_component_tags',
+        );
+    }
+
+    /** @test */
+    public function it_throws_an_exception_if_live_component_tags_route_is_missing(): void
+    {
+        $this->assertConfigurationIsInvalid(
+            [
+                ['twig_ux' => ['live_component_tags' => ['ui' => ['method' => 'get']]]]
+            ],
+            'The "route" attribute is required for the child of "sylius_ui.twig_ux.live_component_tags".',
+        );
+    }
+
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();
