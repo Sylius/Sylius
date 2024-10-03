@@ -151,5 +151,17 @@
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Core\Model\PromotionInterface</argument>
         </service>
+
+        <service
+            id="sylius_api.context_builder.token_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\Account\ResetPassword</argument>
+        </service>
     </services>
 </container>
