@@ -123,6 +123,27 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
+    public function it_loads_operations_to_remove_properly(): void
+    {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
+
+        $this->load([
+            'operations_to_remove' => [
+                'sylius_api_shop_country_get',
+                'sylius_api_shop_country_get_collection',
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.operations_to_remove',
+            [
+                'sylius_api_shop_country_get',
+                'sylius_api_shop_country_get_collection',
+            ],
+        );
+    }
+
+    /** @test */
     public function it_loads_skip_read_and_skip_index_and_show_serialization_groups_parameters_properly(): void
     {
         $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
