@@ -48,6 +48,8 @@ return [
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
     Sylius\Bundle\FixturesBundle\SyliusFixturesBundle::class => ['all' => true],
+    Payum\Bundle\PayumBundle\PayumBundle::class => ['all' => true],
+    Sylius\Bundle\PayumBundle\SyliusPayumBundle::class => ['all' => true],
     Sylius\Bundle\ThemeBundle\SyliusThemeBundle::class => ['all' => true],
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
