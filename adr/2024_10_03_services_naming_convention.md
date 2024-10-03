@@ -1,7 +1,7 @@
 # Services naming convention
 
 * Status: Accepted
-* Date: 2024-02-24
+* Date: 2024-10-03
 
 ## Context and Problem Statement
 
