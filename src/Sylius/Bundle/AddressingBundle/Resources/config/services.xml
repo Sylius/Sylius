@@ -54,7 +54,7 @@
             <tag name="twig.extension"/>
         </service>
         <service id="sylius.twig.extension.province_naming" class="Sylius\Bundle\AddressingBundle\Twig\ProvinceNamingExtension">
-            <argument type="service" id="sylius.checker.country_provinces_deletion" />
+            <argument type="service" id="sylius.provider.province_naming" />
             <argument type="string" id="provinceCode" />
             <tag name="twig.extension" />
         </service>
