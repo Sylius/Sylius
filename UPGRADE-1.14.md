@@ -33,6 +33,27 @@
 
 ### Deprecations
 
+1. Aliases for the following services have been introduced to standardize service IDs and will replace the incorrect IDs in Sylius 2.0:
+    
+    | Old ID                                    | New ID                                         |
+    |-------------------------------------------|------------------------------------------------|
+    | `sylius.province_naming_provider`         | `sylius.provider.province_naming`              |
+    | `sylius.zone_matcher`                     | `sylius.matcher.zone`                          |
+    | `sylius.address_comparator`               | `sylius.comparator.address`                    |
+    | `sylius.validator.valid_province_address` | `sylius.validator.province_address_constraint` |
+
+   The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
+
+1. For the following services, new aliases have been added in Sylius 1.14.
+   These aliases will become the primary services IDs in Sylius 2.0, while the current service IDs will be converted into aliases:
+    
+    | Current ID                                                                     | New Alias                                   |
+    |--------------------------------------------------------------------------------|---------------------------------------------|
+    | `Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface`             | `sylius.checker.zone_deletion`              |
+    | `Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface` | `sylius.checker.country_provinces_deletion` |
+    
+    We recommend using the new aliases introduced in Sylius 1.14 to ensure compatibility with Sylius 2.0.
+
 1. The following form extensions have been deprecated and will be removed in Sylius 2.0:
     - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension`
     - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension`
