@@ -15,9 +15,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 
 use Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware;
 use Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware;
+use Sylius\Bundle\ApiBundle\Attribute\TokenAware;
 
 #[ChannelCodeAware]
 #[LocaleCodeAware]
+#[TokenAware]
 readonly class VerifyShopUser
 {
     public function __construct(
