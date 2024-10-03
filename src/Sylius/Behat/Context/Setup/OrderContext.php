@@ -1171,7 +1171,6 @@ final readonly class OrderContext implements Context
 
         $order = $this->createOrder($customer, '#00000' . $number);
         $order->addItem($item);
-        $order->setCustomer($customer);
 
         $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod, $completeOrder);
 
@@ -1181,7 +1180,9 @@ final readonly class OrderContext implements Context
 
         $this->objectManager->persist($order);
         $this->sharedStorage->set('order', $order);
-        $this->sharedStorage->set('cart_token', $order->getTokenValue());
+        if (!$completeOrder) {
+            $this->sharedStorage->set('cart_token', $order->getTokenValue());
+        }
     }
 
     private function getProductVariant(ProductInterface $product): ProductVariantInterface
