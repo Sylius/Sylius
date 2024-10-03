@@ -59,6 +59,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.addressing
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.currency
+                - sylius.behat.context.ui.shop.checkout.thank_you
 
             filters:
                 tags: "@managing_orders&&@ui"

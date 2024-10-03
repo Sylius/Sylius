@@ -1,4 +1,4 @@
-@checkout
+@managing_orders
 Feature: Assigning customer's IP address to a placed order
     In order to know from which IP address a new order has been places
     As an Administrator
