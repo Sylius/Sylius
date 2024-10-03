@@ -1,0 +1,13 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set prefixes = ['sylius_shop.order'] %}
+
+{% block title %}{{ 'sylius.ui.payment_method_changed'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container text-center my-auto">
+        <div class="row flex-column my-4">
+            {% hook 'payment_method_changed' with { _prefixes: prefixes, order } %}
+        </div>
+    </div>
+{% endblock %}
