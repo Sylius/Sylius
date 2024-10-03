@@ -33,6 +33,14 @@
 
 ### Deprecations
 
+1. Aliases for the following services have been introduced to standardize service IDs and will replace the incorrect IDs in Sylius 2.0:
+
+   | Old ID                     | New ID                     |
+   |----------------------------|----------------------------|
+   | `sylius.channel_collector` | `sylius.collector.channel` |
+
+   The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
+
 1. The following form extensions have been deprecated and will be removed in Sylius 2.0:
     - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension`
     - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension`
