@@ -63,5 +63,9 @@
         <service id="Sylius\Bundle\UiBundle\Storage\FilterStorage" public="false">
             <argument type="service" id="request_stack" />
         </service>
+
+        <service id="sylius.component.subscriber" class="Sylius\Bundle\UiBundle\Twig\Subscriber\ComponentPreRenderSubscriber">
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>
