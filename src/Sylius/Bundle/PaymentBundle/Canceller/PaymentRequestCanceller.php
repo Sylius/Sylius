@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Canceller;
 
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -27,6 +28,7 @@ final class PaymentRequestCanceller implements PaymentRequestCancellerInterface
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private StateMachineInterface $stateMachine,
+        private ObjectManager $objectManager,
     ) {
     }
 
@@ -41,6 +43,9 @@ final class PaymentRequestCanceller implements PaymentRequestCancellerInterface
                     PaymentRequestTransitions::GRAPH,
                     PaymentRequestTransitions::TRANSITION_CANCEL,
                 );
+
+                $this->objectManager->persist($paymentRequest);
+                $this->objectManager->flush();
             }
         }
     }
