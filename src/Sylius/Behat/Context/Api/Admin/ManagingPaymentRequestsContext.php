@@ -15,12 +15,16 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\IriConverterInterface;
+use Sylius\Behat\Service\SharedSecurityServiceInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
+use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingPaymentRequestsContext implements Context
@@ -30,6 +34,9 @@ final readonly class ManagingPaymentRequestsContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private RequestFactoryInterface $requestFactory,
+        private SharedSecurityServiceInterface $sharedSecurityService,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -119,10 +126,10 @@ final readonly class ManagingPaymentRequestsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue(
-            $this->client->getLastResponse(),
-            'method',
-            $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'admin'),
-        ),
+                $this->client->getLastResponse(),
+                'method',
+                $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'admin'),
+            ),
         );
     }
 
@@ -148,5 +155,34 @@ final readonly class ManagingPaymentRequestsContext implements Context
     public function itsResponseDataShouldHasEmptyValue(): void
     {
         Assert::isEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'responseData'));
+    }
+
+    /**
+     * @Then the administrator should see the payment request with action :action for :paymentMethod payment method and state :state
+     */
+    public function administratorShouldSeeThePaymentRequestWithActionAndState(string $action, PaymentMethodInterface $paymentMethod, string $state): void
+    {
+        $adminUser = $this->sharedStorage->get('administrator');
+
+        /** @var OrderInterface $order */
+        $this->sharedSecurityService->performActionAsAdminUser($adminUser, function () {
+            $order = $this->sharedStorage->get('order');
+
+            $request = $this->requestFactory->custom('/api/v2/admin/payments/' . $order->getLastPayment()->getId() . '/payment-requests', HTTPRequest::METHOD_GET, [], $this->client->getToken());
+            $this->client->executeCustomRequest($request);
+        });
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'action', $action),
+            sprintf('Payment request should have action %s', $action),
+        );
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'method', $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'admin')),
+            sprintf('Payment request should have payment method %s', $paymentMethod->getCode()),
+        );
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'state', $state),
+            sprintf('Payment request should have state %s', $state),
+        );
     }
 }

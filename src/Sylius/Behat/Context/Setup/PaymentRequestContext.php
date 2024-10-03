@@ -52,13 +52,13 @@ final readonly class PaymentRequestContext implements Context
     }
 
     /**
-     * @Given there is (also) a payment request action :action executed for order :order with the payment method :paymentMethod and state :state
+     * @Given there is (also) a :state :action payment request for order :order using the :paymentMethod payment method
      */
     public function thePaymentRequestActionHasBeenExecutedForOrderWithThePaymentMethodAndState(
+        string $state = null,
         string $action,
         OrderInterface $order,
         PaymentMethodInterface $paymentMethod,
-        string $state,
     ): void {
         $paymentRequest = $this->paymentRequestFactory->create($order->getLastPayment(), $paymentMethod);
 
