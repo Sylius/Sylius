@@ -17,6 +17,6 @@ use Sylius\Bundle\ApiBundle\Attribute\TokenAware;
 use Sylius\Bundle\CoreBundle\Command\Admin\Account\ResetPassword as BaseResetPassword;
 
 #[TokenAware]
-readonly class ResetPassword extends BaseResetPassword
+class ResetPassword extends BaseResetPassword
 {
 }

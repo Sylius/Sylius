@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-readonly class SendShipmentConfirmationEmail
+class SendShipmentConfirmationEmail
 {
-    public function __construct(public mixed $shipmentId)
+    public function __construct(public readonly mixed $shipmentId)
     {
     }
 }

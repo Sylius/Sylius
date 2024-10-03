@@ -20,12 +20,12 @@ use Sylius\Bundle\ApiBundle\Attribute\TokenAware;
 #[ChannelCodeAware]
 #[LocaleCodeAware]
 #[TokenAware]
-readonly class VerifyShopUser
+class VerifyShopUser
 {
     public function __construct(
-        public string $channelCode,
-        public string $localeCode,
-        public string $token,
+        public readonly string $channelCode,
+        public readonly string $localeCode,
+        public readonly string $token,
     ) {
     }
 }

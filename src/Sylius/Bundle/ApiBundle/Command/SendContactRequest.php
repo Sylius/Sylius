@@ -20,13 +20,13 @@ use Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware;
 #[ChannelCodeAware]
 #[LocaleCodeAware]
 #[LoggedInCustomerEmailAware]
-readonly class SendContactRequest
+class SendContactRequest
 {
     public function __construct(
-        public string $channelCode,
-        public string $localeCode,
-        public ?string $email = null,
-        public ?string $message = null,
+        public readonly string $channelCode,
+        public readonly string $localeCode,
+        public readonly ?string $email = null,
+        public readonly ?string $message = null,
     ) {
     }
 }

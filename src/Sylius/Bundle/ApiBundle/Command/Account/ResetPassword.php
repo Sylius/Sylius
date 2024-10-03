@@ -16,12 +16,12 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 use Sylius\Bundle\ApiBundle\Attribute\TokenAware;
 
 #[TokenAware]
-readonly class ResetPassword
+class ResetPassword
 {
     public function __construct(
-        public string $token,
-        public string $newPassword,
-        public string $confirmNewPassword,
+        public readonly string $token,
+        public readonly string $newPassword,
+        public readonly string $confirmNewPassword,
     ) {
     }
 }

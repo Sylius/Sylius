@@ -17,14 +17,14 @@ use Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
 #[LoggedInCustomerEmailAware]
-readonly class AddProductReview implements IriToIdentifierConversionAwareInterface
+class AddProductReview implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public string $title,
-        public int $rating,
-        public string $comment,
-        public string $productCode,
-        public ?string $email = null,
+        public readonly string $title,
+        public readonly int $rating,
+        public readonly string $comment,
+        public readonly string $productCode,
+        public readonly ?string $email = null,
     ) {
     }
 }

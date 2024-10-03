@@ -19,14 +19,14 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 
 #[OrderTokenValueAware]
 #[LoggedInCustomerEmailAware]
-readonly class UpdateCart
+class UpdateCart
 {
     public function __construct(
-        public string $orderTokenValue,
-        public ?string $email = null,
-        public ?AddressInterface $billingAddress = null,
-        public ?AddressInterface $shippingAddress = null,
-        public ?string $couponCode = null,
+        public readonly string $orderTokenValue,
+        public readonly ?string $email = null,
+        public readonly ?AddressInterface $billingAddress = null,
+        public readonly ?AddressInterface $shippingAddress = null,
+        public readonly ?string $couponCode = null,
     ) {
     }
 }

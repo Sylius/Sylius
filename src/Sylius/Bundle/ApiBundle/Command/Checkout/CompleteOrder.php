@@ -16,11 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 
 #[OrderTokenValueAware]
-readonly class CompleteOrder
+class CompleteOrder
 {
     public function __construct(
-        public string $orderTokenValue,
-        public ?string $notes = null,
+        public readonly string $orderTokenValue,
+        public readonly ?string $notes = null,
     ) {
     }
 }

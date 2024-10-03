@@ -18,12 +18,12 @@ use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 
 #[OrderTokenValueAware]
 #[OrderItemIdAware]
-readonly class ChangeItemQuantityInCart
+class ChangeItemQuantityInCart
 {
     public function __construct(
-        public string $orderTokenValue,
-        public mixed $orderItemId,
-        public int $quantity,
+        public readonly string $orderTokenValue,
+        public readonly mixed $orderItemId,
+        public readonly int $quantity,
     ) {
     }
 }

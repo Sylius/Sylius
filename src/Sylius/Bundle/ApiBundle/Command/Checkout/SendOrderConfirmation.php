@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-readonly class SendOrderConfirmation
+class SendOrderConfirmation
 {
-    public function __construct(public string $orderToken)
+    public function __construct(public readonly string $orderToken)
     {
     }
 }

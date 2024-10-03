@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Account;
 
-readonly class SendResetPasswordEmail
+class SendResetPasswordEmail
 {
     public function __construct(
-        public string $email,
-        public string $channelCode,
-        public string $localeCode,
+        public readonly string $email,
+        public readonly string $channelCode,
+        public readonly string $localeCode,
     ) {
     }
 }

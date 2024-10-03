@@ -19,12 +19,12 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
 #[OrderTokenValueAware]
 #[ShipmentIdAware]
-readonly class ChooseShippingMethod implements IriToIdentifierConversionAwareInterface
+class ChooseShippingMethod implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public string $orderTokenValue,
-        public mixed $shipmentId,
-        public string $shippingMethodCode,
+        public readonly string $orderTokenValue,
+        public readonly mixed $shipmentId,
+        public readonly string $shippingMethodCode,
     ) {
     }
 }

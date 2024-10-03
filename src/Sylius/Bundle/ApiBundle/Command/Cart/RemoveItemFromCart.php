@@ -16,11 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 
 #[OrderTokenValueAware]
-readonly class RemoveItemFromCart
+class RemoveItemFromCart
 {
     public function __construct(
-        public string $orderTokenValue,
-        public mixed $itemId,
+        public readonly string $orderTokenValue,
+        public readonly mixed $itemId,
     ) {
     }
 }

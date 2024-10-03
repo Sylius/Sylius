@@ -16,13 +16,13 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 use Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware;
 
 #[ShopUserIdAware]
-readonly class ChangeShopUserPassword
+class ChangeShopUserPassword
 {
     public function __construct(
-        public string $newPassword,
-        public string $confirmNewPassword,
-        public string $currentPassword,
-        public mixed $shopUserId,
+        public readonly string $newPassword,
+        public readonly string $confirmNewPassword,
+        public readonly string $currentPassword,
+        public readonly mixed $shopUserId,
     ) {
     }
 }

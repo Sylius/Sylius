@@ -17,12 +17,12 @@ use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
 #[OrderTokenValueAware]
-readonly class AddItemToCart implements IriToIdentifierConversionAwareInterface
+class AddItemToCart implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        public string $orderTokenValue,
-        public string $productVariantCode,
-        public int $quantity,
+        public readonly string $orderTokenValue,
+        public readonly string $productVariantCode,
+        public readonly int $quantity,
     ) {
     }
 }

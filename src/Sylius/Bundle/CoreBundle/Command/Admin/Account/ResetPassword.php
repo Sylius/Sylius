@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command\Admin\Account;
 
-readonly class ResetPassword
+class ResetPassword
 {
     public function __construct(
-        public string $token,
-        public string $newPassword,
-        public ?string $confirmNewPassword = null,
+        public readonly string $token,
+        public readonly string $newPassword,
+        public readonly ?string $confirmNewPassword = null,
     ) {
     }
 }
