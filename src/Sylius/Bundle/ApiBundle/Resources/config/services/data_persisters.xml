@@ -50,7 +50,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\DataPersister\LocaleDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+            <argument type="service" id="sylius.checker.locale_usage" />
             <tag name="api_platform.data_persister" />
         </service>
 

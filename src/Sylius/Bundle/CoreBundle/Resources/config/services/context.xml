@@ -61,19 +61,19 @@
             <argument type="service" id="sylius.context.channel" />
         </service>
 
-        <service id="sylius.locale_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedLocaleProvider" decorates="sylius.locale_provider" decoration-priority="256">
+        <service id="sylius.locale_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedLocaleProvider" decorates="sylius.provider.locale" decoration-priority="256">
             <argument type="service" id="sylius.context.channel" />
             <argument>%locale%</argument>
         </service>
 
         <service id="sylius.context.locale.request_based" class="Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext">
             <argument type="service" id="request_stack" />
-            <argument type="service" id="sylius.locale_provider" />
+            <argument type="service" id="sylius.provider.locale" />
             <tag name="sylius.context.locale" priority="64" />
         </service>
 
         <service id="sylius.context.locale.provider_based" class="Sylius\Component\Locale\Context\ProviderBasedLocaleContext">
-            <argument type="service" id="sylius.locale_provider" />
+            <argument type="service" id="sylius.provider.locale" />
             <tag name="sylius.context.locale" priority="-128" />
         </service>
     </services>

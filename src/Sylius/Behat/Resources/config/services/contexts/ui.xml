@@ -121,7 +121,7 @@
             <argument type="service" id="sylius.behat.page.admin.locale.create" />
             <argument type="service" id="sylius.behat.page.admin.locale.index" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <argument type="service" id="sylius.locale_converter" />
+            <argument type="service" id="sylius.converter.locale" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_orders" class="Sylius\Behat\Context\Ui\Admin\ManagingOrdersContext">
