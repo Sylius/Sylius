@@ -43,7 +43,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.product_variant_resolver" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument>%sylius.security.new_api_route%</argument>
@@ -77,7 +77,7 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.payment_method" />
-            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.product_variant_resolver" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.request_factory" />

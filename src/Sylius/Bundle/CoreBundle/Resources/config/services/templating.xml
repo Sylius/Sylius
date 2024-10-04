@@ -38,13 +38,13 @@
         </service>
 
         <service id="sylius.templating.helper.variant_resolver" class="Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper">
-            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.product_variant_resolver" />
             <tag name="templating.helper" alias="sylius_resolve_variant" />
             <deprecated package="sylius/core-bundle" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.variant_resolver" class="Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension" public="false">
-            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.product_variant_resolver" />
             <tag name="twig.extension" />
         </service>
 

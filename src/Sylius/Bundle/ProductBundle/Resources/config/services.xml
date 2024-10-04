@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="services/**/*.xml" />
     </imports>
@@ -52,6 +56,8 @@
         <service id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" class="Sylius\Component\Product\Resolver\CompositeProductVariantResolver">
             <argument type="tagged_iterator" tag="sylius.product_variant_resolver" />
         </service>
+        <service id="sylius.product_variant_resolver.composite" alias="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+        <service id="sylius.product_variant_resolver" alias="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
 
         <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
             <argument type="service" id="sylius.repository.product_variant" />
@@ -65,5 +71,6 @@
 
         <service id="sylius.available_product_option_values_resolver" class="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolver" />
         <service id="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface" alias="sylius.available_product_option_values_resolver" />
+        <service id="sylius.resolver.available_product_option_values" alias="sylius.available_product_option_values_resolver" />
     </services>
 </container>

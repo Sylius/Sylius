@@ -24,7 +24,7 @@ final class SyliusProductBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new DefaultProductVariantResolverCompilerPass());
+//        $container->addCompilerPass(new DefaultProductVariantResolverCompilerPass());
     }
 
     public function getSupportedDrivers(): array
