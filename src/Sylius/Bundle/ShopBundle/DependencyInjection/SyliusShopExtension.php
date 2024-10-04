@@ -37,6 +37,13 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
         $container->setAlias(LocaleSwitcherInterface::class, 'sylius.shop.locale_switcher');
 
+        if ($container->hasParameter('kernel.bundles')) {
+            $bundles = $container->getParameter('kernel.bundles');
+            if (array_key_exists('SyliusAdminBundle', $bundles)) {
+                $loader->load('services/integrations/sylius_admin.xml');
+            }
+        }
+
         $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
         $container->setParameter(
             'sylius_shop.product_grid.include_all_descendants',
