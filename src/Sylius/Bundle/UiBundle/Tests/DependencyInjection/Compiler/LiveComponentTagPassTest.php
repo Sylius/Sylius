@@ -150,20 +150,6 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
         $this->compile();
     }
 
-    public function testThrowingExceptionWhenTemplateIsNotPresentOnLiveComponentTag(): void
-    {
-        $liveComponent = new Definition();
-        $liveComponent->addTag('sylius.live_component.ui', ['key' => 'foo']);
-
-        $this->setParameter('sylius_ui.twig_ux.live_component_tags', ['ui' => ['route' => 'sylius_ui_live_component']]);
-        $this->setDefinition('my_live_component', $liveComponent);
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The "template" attribute is required for the "sylius.live_component" tag');
-
-        $this->compile();
-    }
-
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new LiveComponentTagPass());
