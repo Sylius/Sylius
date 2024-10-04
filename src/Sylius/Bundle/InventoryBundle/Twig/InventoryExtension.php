@@ -20,7 +20,7 @@ use Twig\TwigFunction;
 
 final class InventoryExtension extends AbstractExtension
 {
-    public function __construct(private InventoryHelper|AvailabilityCheckerInterface $helper)
+    public function __construct(private AvailabilityCheckerInterface|InventoryHelper $helper)
     {
         if ($this->helper instanceof InventoryHelper) {
             trigger_deprecation(
