@@ -23,7 +23,7 @@ use Twig\TwigFilter;
 final class LocaleExtension extends AbstractExtension
 {
     public function __construct(
-        private LocaleHelperInterface|LocaleConverterInterface $localeHelper,
+        private LocaleConverterInterface|LocaleHelperInterface $localeHelper,
         private ?LocaleContextInterface $localeContext = null,
     ) {
         if ($this->localeHelper instanceof LocaleHelperInterface) {
