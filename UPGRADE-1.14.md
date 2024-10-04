@@ -35,43 +35,50 @@
 
 1. Aliases for the following services have been introduced to standardize service IDs and will replace the incorrect IDs in Sylius 2.0:
     
-    | Old ID                                                                         | New ID                                                                              |
-    |--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-    | **AttributeBundle**                                                            |                                                                                     |
-    | `sylius.form.type.attribute_type.select.choices_collection`                    | `sylius.form.type.attribute_type.configuration.select_attribute_choices_collection` |
-    | `sylius.attribute_type.select.value.translations`                              | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations` |
-    | `sylius.validator.valid_text_attribute`                                        | `sylius.validator.valid_text_attribute_configuration`                               |
-    | `sylius.validator.valid_select_attribute`                                      | `sylius.validator.valid_select_attribute_configuration`                             |
-    | **AddressingBundle**                                                           |                                                                                     |
-    | `sylius.province_naming_provider`                                              | `sylius.provider.province_naming`                                                   |
-    | `sylius.zone_matcher`                                                          | `sylius.matcher.zone`                                                               |
-    | `sylius.address_comparator`                                                    | `sylius.comparator.address`                                                         |
-    | **ChannelBundle**                                                              |                                                                                     |
-    | `sylius.channel_collector`                                                     | `sylius.collector.channel`                                                          |
-    | **CurrencyBundle**                                                             |                                                                                     |
-    | `sylius.currency_converter`                                                    | `sylius.converter.currency`                                                         |
-    | `sylius.currency_name_converter`                                               | `sylius.converter.currency_name`                                                    |
-    | **InventoryBundle**                                                            |                                                                                     |
-    | `sylius.availability_checker.default`                                          | `sylius.availability_checker`                                                       |
-    | **LocaleBundle**                                                               |                                                                                     |
-    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`           | `sylius.context.locale.request_header_based`                                        |
-    | `sylius.locale_collection_provider`                                            | `sylius.provider.locale_collection`                                                 |
-    | `sylius.locale_collection_provider.cahced`                                     | `sylius.provider.locale_collection.cached`                                          |
-    | `sylius.locale_provider`                                                       | `sylius.provider.locale`                                                            |
-    | `sylius.locale_converter`                                                      | `sylius.converter.locale`                                                           |
-    | `Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener` | `sylius.doctrine.listener.locale_modification`                                      |
-    | **MoneyBundle**                                                                |                                                                                     |
-    | `sylius.twig.extension.convert_amount`                                         | `sylius.twig.extension.convert_money`                                               |
-    | `sylius.twig.extension.money`                                                  | `sylius.twig.extension.format_money`                                                |
-    | `sylius.money_formatter`                                                       | `sylius.formatter.money`                                                            |
-    | **OrderBundle**                                                                |
-    | `sylius.order_modifier`                                                        | `sylius.modifier.order`                                                             |
-    | `sylius.order_item_quantity_modifier`                                          | `sylius.modifier.order_item_quantity`                                               |
-    | `sylius.order_number_assigner`                                                 | `sylius.number_assigner.order_number`                                               |
-    | `sylius.adjustments_aggregator`                                                | `sylius.aggregator.adjustments_by_label`                                            |
-    | `sylius.expired_carts_remover`                                                 | `sylius.remover.expired_carts`                                                      |
-    | `sylius.sequential_order_number_generator`                                     | `sylius.number_generator.sequential_order`                                          |
-    | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`          | `sylius.console.command.remove_expired_carts`                                       |
+    | Old ID                                                                                   | New ID                                                                              |
+    |------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+    | **AttributeBundle**                                                                      |                                                                                     |
+    | `sylius.form.type.attribute_type.select.choices_collection`                              | `sylius.form.type.attribute_type.configuration.select_attribute_choices_collection` |
+    | `sylius.attribute_type.select.value.translations`                                        | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations` |
+    | `sylius.validator.valid_text_attribute`                                                  | `sylius.validator.valid_text_attribute_configuration`                               |
+    | `sylius.validator.valid_select_attribute`                                                | `sylius.validator.valid_select_attribute_configuration`                             |
+    | **AddressingBundle**                                                                     |                                                                                     |
+    | `sylius.province_naming_provider`                                                        | `sylius.provider.province_naming`                                                   |
+    | `sylius.zone_matcher`                                                                    | `sylius.matcher.zone`                                                               |
+    | `sylius.address_comparator`                                                              | `sylius.comparator.address`                                                         |
+    | **ChannelBundle**                                                                        |                                                                                     |
+    | `sylius.channel_collector`                                                               | `sylius.collector.channel`                                                          |
+    | **CurrencyBundle**                                                                       |                                                                                     |
+    | `sylius.currency_converter`                                                              | `sylius.converter.currency`                                                         |
+    | `sylius.currency_name_converter`                                                         | `sylius.converter.currency_name`                                                    |
+    | **InventoryBundle**                                                                      |                                                                                     |
+    | `sylius.availability_checker.default`                                                    | `sylius.availability_checker`                                                       |
+    | **LocaleBundle**                                                                         |                                                                                     |
+    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`                     | `sylius.context.locale.request_header_based`                                        |
+    | `sylius.locale_collection_provider`                                                      | `sylius.provider.locale_collection`                                                 |
+    | `sylius.locale_collection_provider.cahced`                                               | `sylius.provider.locale_collection.cached`                                          |
+    | `sylius.locale_provider`                                                                 | `sylius.provider.locale`                                                            |
+    | `sylius.locale_converter`                                                                | `sylius.converter.locale`                                                           |
+    | `Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener`           | `sylius.doctrine.listener.locale_modification`                                      |
+    | **MoneyBundle**                                                                          |                                                                                     |
+    | `sylius.twig.extension.convert_amount`                                                   | `sylius.twig.extension.convert_money`                                               |
+    | `sylius.twig.extension.money`                                                            | `sylius.twig.extension.format_money`                                                |
+    | `sylius.money_formatter`                                                                 | `sylius.formatter.money`                                                            |
+    | **OrderBundle**                                                                          |
+    | `sylius.order_modifier`                                                                  | `sylius.modifier.order`                                                             |
+    | `sylius.order_item_quantity_modifier`                                                    | `sylius.modifier.order_item_quantity`                                               |
+    | `sylius.order_number_assigner`                                                           | `sylius.number_assigner.order_number`                                               |
+    | `sylius.adjustments_aggregator`                                                          | `sylius.aggregator.adjustments_by_label`                                            |
+    | `sylius.expired_carts_remover`                                                           | `sylius.remover.expired_carts`                                                      |
+    | `sylius.sequential_order_number_generator`                                               | `sylius.number_generator.sequential_order`                                          |
+    | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`                    | `sylius.console.command.remove_expired_carts`                                       |
+    | `sylius.form.type.sylius_product_associations`                                           | `sylius.form.type.product_associations`                                             |
+    | `sylius.form.event_subscriber.product_variant_generator`                                 | `sylius.form.event_subscriber.generate_product_variants`                            |
+    | `Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator` | `sylius.validator.product_variant_option_values_configuration`                      |
+    | `sylius.validator.product_code_uniqueness`                                               | `sylius.validator.unique_simple_product_code`                                       |
+    | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`                      | `sylius.product_variant_resolver`                                                   |
+    | `sylius.available_product_option_values_resolver`                                        | `sylius.resolver.available_product_option_values`                                   |
+
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
