@@ -1,6 +1,6 @@
-sylius_twig_hooks:
+twig_hooks:
     hooks:
-        'sylius_shop.shared.account.layout':
+        'sylius_shop.account.common.update':
             breadcrumbs:
                 template: '@SyliusShop/shared/account/layout/breadcrumbs.html.twig'
             menu:
@@ -8,6 +8,6 @@ sylius_twig_hooks:
             content:
                 template: '@SyliusShop/shared/account/layout/content.html.twig'
 
-        'sylius_shop.shared.account.layout.content':
+        'sylius_shop.account.common.update.content':
             header:
                 template: '@SyliusShop/shared/account/layout/content/header.html.twig'

@@ -1,10 +1,9 @@
-{% extends '@SyliusShop/account/layout.html.twig' %}
 {% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
 
-{% block breadcrumb %}
+<div class="col-12">
     {{ breadcrumbs([
         { label: 'sylius.ui.home'|trans, path: path('sylius_shop_homepage')},
         { label: 'sylius.ui.my_account'|trans, path: path('sylius_shop_account_dashboard')},
-        { label: 'sylius.ui.address_book'|trans, active: true }
+        { label: 'sylius.ui.address_book'|trans, active: true},
     ]) }}
-{% endblock %}
+</div>

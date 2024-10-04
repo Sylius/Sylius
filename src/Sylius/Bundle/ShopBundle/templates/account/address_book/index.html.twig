@@ -1,11 +1,5 @@
-{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+{% extends '@SyliusShop/account/common/index.html.twig' %}
+
+{% set prefixes = ['sylius_shop.account.address_book'] %}
 
 {% block title %}{{ 'sylius.ui.address_book'|trans }} | {{ parent() }}{% endblock %}
-
-{% block content %}
-    <div class="container mb-auto">
-        <div class="row my-4">
-            {% hook 'layout' with { _prefixes: ['sylius_shop.account.address_book.index', 'sylius_shop.shared.account'], addresses, default_address: sylius.customer.defaultAddress|default(null) } %}
-        </div>
-    </div>
-{% endblock %}

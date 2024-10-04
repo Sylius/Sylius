@@ -1,0 +1,11 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set prefixes = prefixes|default([])|merge(['sylius_shop.account.common']) %}
+
+{% block content %}
+    <div class="container mb-auto">
+        <div class="row my-4">
+            {% hook 'create' with { _prefixes: prefixes, form } %}
+        </div>
+    </div>
+{% endblock %}

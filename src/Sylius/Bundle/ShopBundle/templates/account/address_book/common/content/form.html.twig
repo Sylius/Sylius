@@ -3,7 +3,7 @@
 {% form_theme form '@SyliusShop/form/theme.html.twig' %}
 
 <div {{ attributes }}>
-    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {{ form_start(form, {'attr': { 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
     {% if hookable_metadata.configuration.method is defined %}
         <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
     {% endif %}

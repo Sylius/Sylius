@@ -1,10 +1,10 @@
 sylius_twig_hooks:
     hooks:
-        'sylius_shop.account.address_book.update.layout':
+        'sylius_shop.account.address_book.update':
             breadcrumbs:
-                template: '@SyliusShop/shared/account/address_book/layout/breadcrumbs.html.twig'
+                template: '@SyliusShop/account/address_book/update/breadcrumbs.html.twig'
 
-        'sylius_shop.account.address_book.update.layout.content':
+        'sylius_shop.account.address_book.update.content':
             form:
                 component: 'sylius_shop:account:address:form'
                 props:
@@ -14,20 +14,20 @@ sylius_twig_hooks:
                 configuration:
                     method: 'PUT'
 
-        'sylius_shop.account.address_book.update.layout.content.header':
+        'sylius_shop.account.address_book.update.content.header':
             title:
-                template: '@SyliusShop/account/address_book/form/update/layout/content/header/title.html.twig'
+                template: '@SyliusShop/account/address_book/update/content/header/title.html.twig'
             subtitle:
-                template: '@SyliusShop/account/address_book/form/update/layout/content/header/subtitle.html.twig'
+                template: '@SyliusShop/account/address_book/update/content/header/subtitle.html.twig'
 
-        'sylius_shop.account.address_book.update.layout.content.form':
+        'sylius_shop.account.address_book.update.content.form':
             fields:
-                template: '@SyliusShop/shared/account/address_book/form/fields.html.twig'
+                template: '@SyliusShop/account/address_book/common/content/form/fields.html.twig'
             buttons:
-                template: '@SyliusShop/shared/account/address_book/form/buttons.html.twig'
+                template: '@SyliusShop/account/address_book/common/content/form/buttons.html.twig'
 
-        'sylius_shop.account.address_book.update.layout.content.form.buttons':
+        'sylius_shop.account.address_book.update.content.form.buttons':
             save:
-                template: '@SyliusShop/account/address_book/form/update/layout/content/buttons/save.html.twig'
+                template: '@SyliusShop/account/address_book/update/content/form/buttons/save.html.twig'
             cancel:
-                template: '@SyliusShop/shared/account/address_book/form/buttons/cancel.html.twig'
+                template: '@SyliusShop/account/address_book/common/content/form/buttons/cancel.html.twig'
