@@ -171,7 +171,7 @@
         </service>
         <service id="Sylius\Component\Core\Customer\OrderAddressesSaverInterface" alias="sylius.customer_order_addresses_saver" />
 
-        <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.order_item_quantity_modifier" decoration-priority="256">
+        <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.modifier.order_item_quantity" decoration-priority="256">
             <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
             <argument>%sylius.order_item_quantity_modifier.limit%</argument>
         </service>
@@ -237,6 +237,7 @@
             <argument type="service" id="sylius.factory.order_sequence" />
             <argument type="service" id="sylius.manager.order_sequence" />
         </service>
+        <service id="sylius.number_generator.sequential_order" alias="sylius.sequential_order_number_generator" />
 
         <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />

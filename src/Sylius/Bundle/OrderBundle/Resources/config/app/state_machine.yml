@@ -26,5 +26,5 @@ winzou_state_machine:
             before:
                 sylius_assign_number:
                     on: "create"
-                    do: ["@sylius.order_number_assigner", "assignNumber"]
+                    do: ["@sylius.number_assigner.order_number", "assignNumber"]
                     args: ["object"]
