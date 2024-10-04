@@ -10,3 +10,9 @@ jms_serializer:
             sylius-payment:
                 namespace_prefix: "Sylius\\Component\\Payment"
                 path: "@SyliusPaymentBundle/Resources/config/serializer"
+
+sylius_payment:
+    payment_request:
+        states_that_should_be_cancelled_when_payment_request_has_changed:
+            - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
+            - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW

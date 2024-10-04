@@ -25,7 +25,7 @@ final class PaymentRequestCancellerSpec extends ObjectBehavior
 {
     function let(PaymentRequestRepositoryInterface $paymentRequestRepository, StateMachineInterface $stateMachine, ObjectManager $objectManager): void
     {
-        $this->beConstructedWith($paymentRequestRepository, $stateMachine, $objectManager);
+        $this->beConstructedWith($paymentRequestRepository, $stateMachine, $objectManager, [PaymentRequestInterface::STATE_NEW, PaymentRequestInterface::STATE_PROCESSING]);
     }
 
     function it_cancels_payment_requests_if_the_payment_method_code_is_different(

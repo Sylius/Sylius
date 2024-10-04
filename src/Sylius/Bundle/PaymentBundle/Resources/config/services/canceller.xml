@@ -17,12 +17,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.canceller.payment_request" class="Sylius\Bundle\PaymentBundle\Canceller\PaymentRequestCanceller">
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%sylius.payment_request.states_that_should_be_cancelled_when_payment_request_has_changed%</argument>
         </service>
+        <service id="Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface" alias="sylius.canceller.payment_request" />
     </services>
 </container>
