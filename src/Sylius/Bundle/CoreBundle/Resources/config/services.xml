@@ -76,7 +76,7 @@
 
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.zone_matcher" />
+            <argument type="service" id="sylius.matcher.zone" />
             <argument type="service" id="sylius.shipping_method_eligibility_checker" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
@@ -94,7 +94,7 @@
         <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_method_eligibility_checker" />
-            <argument type="service" id="sylius.zone_matcher" />
+            <argument type="service" id="sylius.matcher.zone" />
         </service>
         <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
 
@@ -162,7 +162,7 @@
         <service id="Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface" alias="sylius.unique_id_based_order_token_assigner" />
 
         <service id="sylius.customer_unique_address_adder" class="Sylius\Component\Core\Customer\CustomerUniqueAddressAdder">
-            <argument type="service" id="sylius.address_comparator" />
+            <argument type="service" id="sylius.comparator.address" />
         </service>
         <service id="Sylius\Component\Core\Customer\CustomerAddressAdderInterface" alias="sylius.customer_unique_address_adder" />
 
