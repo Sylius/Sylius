@@ -40,7 +40,7 @@
         </service>
 
         <service id="sylius.behat.context.transform.currency" class="Sylius\Behat\Context\Transform\CurrencyContext">
-            <argument type="service" id="sylius.currency_name_converter" />
+            <argument type="service" id="sylius.converter.currency_name" />
             <argument type="service" id="sylius.repository.currency" />
         </service>
 
@@ -58,7 +58,7 @@
         </service>
 
         <service id="sylius.behat.context.transform.exchange_rate" class="Sylius\Behat\Context\Transform\ExchangeRateContext">
-            <argument type="service" id="sylius.currency_name_converter" />
+            <argument type="service" id="sylius.converter.currency_name" />
             <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="sylius.repository.exchange_rate" />
         </service>

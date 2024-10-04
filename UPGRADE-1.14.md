@@ -45,6 +45,8 @@
     | `sylius.zone_matcher`                                       | `sylius.matcher.zone`                                                               |
     | `sylius.address_comparator`                                 | `sylius.comparator.address`                                                         |
     | `sylius.channel_collector`                                  | `sylius.collector.channel`                                                          |
+    | `sylius.currency_converter`                                 | `sylius.converter.currency`                                                         |
+    | `sylius.currency_name_converter`                            | `sylius.converter.currency_name`                                                    |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
