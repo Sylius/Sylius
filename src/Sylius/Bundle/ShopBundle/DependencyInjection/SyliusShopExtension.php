@@ -20,12 +20,13 @@ use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusShopExtension extends Extension
+final class SyliusShopExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -42,6 +43,11 @@ final class SyliusShopExtension extends Extension
             $config['product_grid']['include_all_descendants'],
         );
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $this->prependSyliusThemeBundle($container);
     }
 
     private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container): void
@@ -98,5 +104,14 @@ final class SyliusShopExtension extends Extension
         ;
 
         return $checkoutRedirectListener;
+    }
+
+    private function prependSyliusThemeBundle(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('sylius_theme')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
     }
 }

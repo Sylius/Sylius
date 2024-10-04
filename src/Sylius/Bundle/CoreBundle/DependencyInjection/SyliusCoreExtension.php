@@ -100,7 +100,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $config = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
 
-        $this->prependSyliusThemeBundle($container, $config['driver']);
+        $this->prependDefaultDriver($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
         $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
@@ -122,6 +122,15 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         return [];
     }
 
+    private function prependDefaultDriver(ContainerBuilder $container, string $driver): void
+    {
+        foreach ($container->getExtensions() as $name => $extension) {
+            if (in_array($name, self::$bundles, true)) {
+                $container->prependExtensionConfig($name, ['driver' => $driver]);
+            }
+        }
+    }
+
     private function prependHwiOauth(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('hwi_oauth')) {
@@ -131,21 +140,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services/integrations/hwi_oauth.xml');
-    }
-
-    private function prependSyliusThemeBundle(ContainerBuilder $container, string $driver): void
-    {
-        if (!$container->hasExtension('sylius_theme')) {
-            return;
-        }
-
-        foreach ($container->getExtensions() as $name => $extension) {
-            if (in_array($name, self::$bundles, true)) {
-                $container->prependExtensionConfig($name, ['driver' => $driver]);
-            }
-        }
-
-        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
     }
 
     private function prependJmsSerializerIfAdminApiBundleIsNotPresent(ContainerBuilder $container): void
