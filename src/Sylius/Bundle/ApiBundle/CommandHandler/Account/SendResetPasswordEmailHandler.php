@@ -38,8 +38,8 @@ final class SendResetPasswordEmailHandler
     public function __invoke(SendResetPasswordEmail $command): void
     {
         $user = $this->userRepository->findOneByEmail($command->email);
-        $channel = $this->channelRepository->findOneByCode($command->channelCode());
+        $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
-        $this->resetPasswordEmailManager->sendResetPasswordEmail($user, $channel, $command->localeCode());
+        $this->resetPasswordEmailManager->sendResetPasswordEmail($user, $channel, $command->localeCode);
     }
 }

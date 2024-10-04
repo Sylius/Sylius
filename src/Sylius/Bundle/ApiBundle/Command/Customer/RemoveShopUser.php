@@ -18,8 +18,7 @@ use Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware;
 #[ShopUserIdAware]
 class RemoveShopUser
 {
-    public function __construct(
-        public readonly mixed $shopUserId,
-    ) {
+    public function __construct(public readonly mixed $shopUserId)
+    {
     }
 }

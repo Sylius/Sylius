@@ -13,14 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-readonly class InformAboutCartRecalculation
+class InformAboutCartRecalculation
 {
-    public function __construct(private string $promotionName)
+    public function __construct(public readonly string $promotionName)
     {
-    }
-
-    public function promotionName(): string
-    {
-        return $this->promotionName;
     }
 }
