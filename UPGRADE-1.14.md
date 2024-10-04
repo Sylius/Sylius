@@ -57,6 +57,13 @@
     | `sylius.currency_converter`                                                    | `sylius.converter.currency`                                                         |
     | `sylius.currency_name_converter`                                               | `sylius.converter.currency_name`                                                    |
     | `sylius.availability_checker.default`                                          | `sylius.availability_checker`                                                       |
+    | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`          | `sylius.console.command.remove_expired_carts`                                       |
+    | `sylius.order_modifier`                                                        | `sylius.modifier.order`                                                             |
+    | `sylius.order_item_quantity_modifier`                                          | `sylius.modifier.order_item_quantity`                                               |
+    | `sylius.order_number_assigner`                                                 | `sylius.number_assigner.order_number`                                               |
+    | `sylius.adjustments_aggregator`                                                | `sylius.aggregator.adjustments_by_label`                                            |
+    | `sylius.expired_carts_remover`                                                 | `sylius.remover.expired_carts`                                                      |
+    | `sylius.sequential_order_number_generator`                                     | `sylius.number_generator.sequential_order`                                          |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
