@@ -17,7 +17,9 @@ class ResetPassword
 {
     public function __construct(
         public readonly string $token,
+        #[\SensitiveParameter]
         public readonly string $newPassword,
+        #[\SensitiveParameter]
         public readonly ?string $confirmNewPassword = null,
     ) {
     }
