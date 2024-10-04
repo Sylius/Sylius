@@ -45,6 +45,9 @@
     | `sylius.zone_matcher`                                       | `sylius.matcher.zone`                                                               |
     | `sylius.address_comparator`                                 | `sylius.comparator.address`                                                         |
     | `sylius.channel_collector`                                  | `sylius.collector.channel`                                                          |
+    | `sylius.twig.extension.convert_amount`                      | `sylius.twig.extension.convert_money`                                               |
+    | `sylius.twig.extension.money`                               | `sylius.twig.extension.format_money`                                                |
+    | `sylius.money_formatter`                                    | `sylius.formatter.money`                                                            |
     | `sylius.currency_converter`                                 | `sylius.converter.currency`                                                         |
     | `sylius.currency_name_converter`                            | `sylius.converter.currency_name`                                                    |
     | `sylius.availability_checker.default`                       | `sylius.availability_checker`                                                       |

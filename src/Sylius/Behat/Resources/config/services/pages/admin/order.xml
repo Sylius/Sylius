@@ -27,7 +27,7 @@
         </service>
         <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
-            <argument type="service" id="sylius.money_formatter" />
+            <argument type="service" id="sylius.formatter.money" />
         </service>
         <service id="sylius.behat.page.admin.order.update" class="%sylius.behat.page.admin.order.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_order_update</argument>
