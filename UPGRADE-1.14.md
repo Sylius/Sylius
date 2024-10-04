@@ -45,6 +45,9 @@
     | `sylius.zone_matcher`                                       | `sylius.matcher.zone`                                                               |
     | `sylius.address_comparator`                                 | `sylius.comparator.address`                                                         |
     | `sylius.channel_collector`                                  | `sylius.collector.channel`                                                          |
+    | `sylius.twig.extension.convert_amount`                      | `sylius.twig.extension.convert_money`                                               |
+    | `sylius.twig.extension.money`                               | `sylius.twig.extension.format_money`                                                |
+    | `sylius.money_formatter`                                    | `sylius.formatter.money`                                                            |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
