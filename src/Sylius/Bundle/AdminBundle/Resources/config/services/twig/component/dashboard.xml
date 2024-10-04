@@ -26,7 +26,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:dashboard:channel_selector"
-                template="@SyliusAdmin/dashboard/index/component/channel_selector.html.twig"
             />
         </service>
 
@@ -39,7 +38,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:dashboard:new_customers"
-                template="@SyliusAdmin/dashboard/index/component/new_customers.html.twig"
             />
         </service>
 
@@ -53,7 +51,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:dashboard:new_orders"
-                template="@SyliusAdmin/dashboard/index/component/new_orders.html.twig"
             />
         </service>
 
@@ -67,7 +64,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:dashboard:statistics"
-                template="@SyliusAdmin/dashboard/index/component/statistics.html.twig"
             />
         </service>
     </services>

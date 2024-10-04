@@ -25,7 +25,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:shipment:ship_form"
-                template="@SyliusAdmin/shipment/component/ship.html.twig"
             />
         </service>
     </services>

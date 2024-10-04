@@ -29,7 +29,10 @@
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
 
-            <tag name="sylius.live_component.admin" key="sylius_admin:product:form" template="@SyliusAdmin/product/form.html.twig" />
+            <tag
+                name="sylius.live_component.admin"
+                key="sylius_admin:product:form"
+            />
         </service>
 
         <service
@@ -45,7 +48,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:product:product_attribute_autocomplete"
-                template="@SyliusAdmin/product/product_attribute_autocomplete.html.twig"
             />
         </service>
 
@@ -58,7 +60,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:product:form:product_taxons"
-                template="@SyliusAdmin/product/form/sections/taxonomy/product_taxons.html.twig"
             />
         </service>
     </services>

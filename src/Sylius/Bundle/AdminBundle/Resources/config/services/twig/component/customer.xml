@@ -23,7 +23,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:customer:order_statistics"
-                template="@SyliusAdmin/customer/show/component/order_statistics.html.twig"
             />
         </service>
     </services>

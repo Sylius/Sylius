@@ -6,6 +6,7 @@ twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
+                    template: '@SyliusAdmin/channel/form.html.twig'
 
         'sylius_admin.channel.create.content.form':
             sections:

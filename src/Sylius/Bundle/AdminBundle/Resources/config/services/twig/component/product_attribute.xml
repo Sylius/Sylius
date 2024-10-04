@@ -25,7 +25,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:product_attribute:form"
-                template="@SyliusAdmin/product_attribute/form.html.twig"
             />
         </service>
     </services>

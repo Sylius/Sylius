@@ -22,7 +22,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:order:address_history"
-                template="@SyliusAdmin/order/history/content/sections/addresses/address.html.twig"
             />
         </service>
 
@@ -38,7 +37,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:order:form"
-                template="@SyliusAdmin/order/form.html.twig"
             />
         </service>
     </services>

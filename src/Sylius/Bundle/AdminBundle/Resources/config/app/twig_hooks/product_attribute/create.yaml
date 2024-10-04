@@ -7,6 +7,7 @@ twig_hooks:
                     form: '@=_context.form'
                     type: '@=_context.resource.getType()'
                     resource: '@=_context.resource'
+                    template: '@SyliusAdmin/product_attribute/form.html.twig'
 
         'sylius_admin.product_attribute.create.content.form':
             general:

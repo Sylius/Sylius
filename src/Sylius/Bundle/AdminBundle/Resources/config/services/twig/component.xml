@@ -25,7 +25,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:catalog_promotion:form"
-                template="@SyliusAdmin/catalog_promotion/form.html.twig"
             />
         </service>
 
@@ -41,7 +40,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:channel:form"
-                template="@SyliusAdmin/channel/form.html.twig"
             />
         </service>
 
@@ -57,7 +55,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:country:form"
-                template="@SyliusAdmin/country/form.html.twig"
             />
         </service>
 
@@ -73,7 +70,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:customer_group:form"
-                template="@SyliusAdmin/shared/crud/common/content/form.html.twig"
             />
         </service>
 
@@ -89,7 +85,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:payment_method:form"
-                template="@SyliusAdmin/payment_method/form.html.twig"
             />
         </service>
 
@@ -105,7 +100,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:product:generate_product_variants_form"
-                template="@SyliusAdmin/product/generate_variants/form.html.twig"
             />
         </service>
 
@@ -121,7 +115,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:promotion:form"
-                template="@SyliusAdmin/promotion/form.html.twig"
             />
         </service>
 
@@ -137,7 +130,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:shipping_method:form"
-                template="@SyliusAdmin/shipping_method/form.html.twig"
             />
         </service>
 
@@ -150,7 +142,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:render_entity_with_template"
-                template="@SyliusAdmin/shared/components/render_entity_with_template.html.twig"
             />
         </service>
 
@@ -161,7 +152,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:navbar:notifications"
-                template="@SyliusAdmin/shared/components/navbar/notifications.html.twig"
             />
         </service>
 
@@ -174,7 +164,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:navbar:shop_preview"
-                template="@SyliusAdmin/shared/crud/common/navbar/menu/shop_preview.html.twig"
             />
         </service>
 
@@ -188,7 +177,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_admin:navbar:user_dropdown"
-                template="@SyliusAdmin/shared/components/navbar/user.html.twig"
             />
         </service>
     </services>

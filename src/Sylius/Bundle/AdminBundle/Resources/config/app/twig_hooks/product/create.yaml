@@ -10,6 +10,7 @@ twig_hooks:
                     form: '@=_context.form'
                     resource: '@=_context.resource'
                     isSimple: '@=_context.resource.isSimple()'
+                    template: '@SyliusAdmin/product/form.html.twig'
 
         'sylius_admin.product.create.content.form':
             side_navigation:
@@ -136,6 +137,7 @@ twig_hooks:
                 component: 'sylius_admin:product:form:product_taxons'
                 props:
                     form: '@=_context.form'
+                    template: '@SyliusAdmin/product/form/sections/taxonomy/product_taxons.html.twig'
                 configuration:
                     auto_open: false
 

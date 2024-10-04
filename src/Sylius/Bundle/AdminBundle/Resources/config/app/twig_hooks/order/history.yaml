@@ -47,9 +47,11 @@ twig_hooks:
                     addressId: '@=_context.resource.getBillingAddress().getId()'
                     header: 'sylius.ui.billing_address'
                     sort: 'desc'
+                    template: '@SyliusAdmin/order/history/content/sections/addresses/address.html.twig'
             shipping_address:
                 component: sylius_admin:order:address_history
                 props:
                     addressId: '@=_context.resource.getShippingAddress().getId()'
                     header: 'sylius.ui.shipping_address'
                     sort: 'desc'
+                    template: '@SyliusAdmin/order/history/content/sections/addresses/address.html.twig'
