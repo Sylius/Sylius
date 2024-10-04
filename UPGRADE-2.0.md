@@ -259,7 +259,7 @@
     use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
         public function __construct(
-    -       private readonly VariantResolverHelper|ProductVariantResolverInterface $helper,
+    -       private readonly ProductVariantResolverInterface|VariantResolverHelper $helper,
     +       private readonly ProductVariantResolverInterface $productVariantResolver,
         )
     ```
@@ -277,7 +277,7 @@
     use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 
         public function __construct(
-    -       private InventoryHelper|AvailabilityCheckerInterface $helper,
+    -       private AvailabilityCheckerInterface|InventoryHelper $helper,
     +       private AvailabilityCheckerInterface $availabilityChecker,
         )
     ```
@@ -288,7 +288,7 @@
     use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
         public function __construct(
-    -       private LocaleHelperInterface|LocaleConverterInterface $localeHelper,
+    -       private LocaleConverterInterface|LocaleHelperInterface $localeHelper,
     -       private ?LocaleContextInterface $localeContext = null,
     +       private LocaleConverterInterface $localeConverter,
     +       private LocaleContextInterface $localeContext,
@@ -320,7 +320,7 @@
     use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 
         public function __construct(
-    -       private AdjustmentsHelper|AdjustmentsAggregatorInterface $adjustmentsHelper,
+    -       private AdjustmentsAggregatorInterface|AdjustmentsHelper $adjustmentsHelper,
     +       private AdjustmentsAggregatorInterface $adjustmentsAggregator,
         )
     ```
