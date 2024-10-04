@@ -11,6 +11,7 @@ twig_hooks:
                 component: 'sylius_shop:product:card'
                 props:
                     product: '@=_context.product'
+                    template: '@SyliusShop/product/common/card.html.twig'
             
         'sylius.shop.product_review.create.main':
             header:
@@ -20,6 +21,7 @@ twig_hooks:
                 props:
                     resource: '@=_context.product_review'
                     form: '@=_context.form'
+                    template: '@SyliusShop/product_review/create/main/form.html.twig'
                 
         'sylius.shop.product_review.create.main.form':
             rating:

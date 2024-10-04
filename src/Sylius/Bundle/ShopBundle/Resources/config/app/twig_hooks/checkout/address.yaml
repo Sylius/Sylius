@@ -8,6 +8,7 @@ twig_hooks:
                 props:
                     resource: '@=_context.order'
                     form: '@=_context.form'
+                    template: '@SyliusShop/checkout/address/form.html.twig'
 
         'sylius_shop.checkout.address.form':
             header:
@@ -60,6 +61,7 @@ twig_hooks:
                 component: 'sylius_shop:checkout:address:address_book'
                 props:
                     field: 'billingAddress'
+                    template: '@SyliusShop/checkout/address/form/addresses/address/address_book.html.twig'
             form:
                 template: '@SyliusShop/checkout/address/form/addresses/address/form.html.twig'
                 configuration:
@@ -74,6 +76,7 @@ twig_hooks:
                 component: 'sylius_shop:checkout:address:address_book'
                 props:
                     field: 'shippingAddress'
+                    template: '@SyliusShop/checkout/address/form/addresses/address/address_book.html.twig'
             form:
                 template: '@SyliusShop/checkout/address/form/addresses/address/form.html.twig'
                 configuration:

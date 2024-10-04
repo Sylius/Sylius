@@ -34,7 +34,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:product:add_to_cart_form"
-                template="@SyliusShop/product/show/page/info/summary/add_to_cart.html.twig"
             />
         </service>
 
@@ -48,7 +47,6 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_shop:product:association"
-                template="@SyliusShop/product/show/page/product_listing/association.html.twig"
             />
         </service>
 
@@ -62,7 +60,10 @@
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.calculator.product_variant_price" />
 
-            <tag name="sylius.twig_component" key="sylius_shop:product:card" template="@SyliusShop/product/common/card.html.twig" />
+            <tag
+                name="sylius.twig_component"
+                key="sylius_shop:product:card"
+            />
         </service>
 
         <service
@@ -73,7 +74,10 @@
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.context.channel" />
 
-            <tag name="sylius.twig_component" key="sylius_shop:product:list" template="@SyliusShop/product/common/list.html.twig" />
+            <tag
+                name="sylius.twig_component"
+                key="sylius_shop:product:list"
+            />
         </service>
 
         <service
@@ -90,12 +94,10 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_shop:product:price"
-                template="@SyliusShop/product/show/page/info/summary/prices/price.html.twig"
             />
             <tag
                 name="sylius.twig_component"
                 key="sylius_shop:product:card:price"
-                template="@SyliusShop/product/common/price.html.twig"
             />
         </service>
 
@@ -110,7 +112,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:product:summary"
-                template="@SyliusShop/product/show/page/info/summary.html.twig"
             />
         </service>
 
@@ -125,17 +126,14 @@
             <tag
                 name="sylius.twig_component"
                 key="sylius_shop:product:show:breadcrumbs"
-                template="@SyliusShop/product/index/page/breadcrumbs.html.twig"
             />
             <tag
                 name="sylius.twig_component"
                 key="sylius_shop:product:show:taxonomy"
-                template="@SyliusShop/product/index/page/body/sidebar/taxonomy.html.twig"
             />
             <tag
                 name="sylius.twig_component"
                 key="sylius_shop:product:show:header"
-                template="@SyliusShop/product/index/page/body/main/header.html.twig"
             />
         </service>
     </services>

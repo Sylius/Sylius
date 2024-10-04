@@ -23,7 +23,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:account:register:form"
-                template="@SyliusShop/account/register/form.html.twig"
             />
         </service>
 
@@ -39,7 +38,6 @@
             <tag
                 name="sylius.live_component.shop_account"
                 key="sylius_shop:account:profile_update:form"
-                template="@SyliusShop/account/profile_update/form.html.twig"
             />
         </service>
 
@@ -53,7 +51,6 @@
             <tag
                 name="sylius.live_component.shop_account"
                 key="sylius_shop:account:change_password_form"
-                template="@SyliusShop/account/change_password/form.html.twig"
             />
         </service>
 
@@ -69,7 +66,6 @@
             <tag
                 name="sylius.live_component.shop_account"
                 key="sylius_shop:account:address:default_form"
-                template="@SyliusShop/account/address_book/set_as_default.html.twig"
             />
         </service>
 
@@ -85,7 +81,6 @@
             <tag
                 name="sylius.live_component.shop_account"
                 key="sylius_shop:account:address:form"
-                template="@SyliusShop/account/address_book/form/form.html.twig"
             />
         </service>
     </services>

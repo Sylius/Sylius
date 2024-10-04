@@ -28,7 +28,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:checkout:address:form"
-                template="@SyliusShop/checkout/address/form.html.twig"
             />
         </service>
 
@@ -45,7 +44,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:checkout:address:address_book"
-                template="@SyliusShop/checkout/address/form/addresses/address/address_book.html.twig"
             />
         </service>
 
@@ -61,7 +59,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:checkout:shipping:form"
-                template="@SyliusShop/checkout/select_shipping/form.html.twig"
             />
         </service>
 
@@ -77,7 +74,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:checkout:payment:form"
-                template="@SyliusShop/checkout/select_payment/form.html.twig"
             />
         </service>
     </services>

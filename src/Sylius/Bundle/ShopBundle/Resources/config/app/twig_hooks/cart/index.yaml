@@ -5,10 +5,12 @@ twig_hooks:
                 component: 'sylius_shop:cart:form'
                 props:
                     resource: '@=_context.cart'
+                    template: '@SyliusShop/cart/index/form.html.twig'
             suggested_products:
                 component: 'sylius_shop:product:list'
                 props:
                     limit: 4
+                    template: '@SyliusShop/product/common/list.html.twig'
                 configuration:
                     title: 'sylius.ui.you_may_also_like'
                     
@@ -41,6 +43,7 @@ twig_hooks:
                 component: 'sylius_shop:cart:summary'
                 props:
                     cart: '@=_context.cart'
+                    template: '@SyliusShop/cart/index/form/sections/general/summary.html.twig'
             checkout:
                 template: '@SyliusShop/cart/index/form/sections/general/checkout.html.twig'
 

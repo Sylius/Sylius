@@ -12,6 +12,7 @@ twig_hooks:
                 props:
                     product: '@=_context.product'
                     slug: '@=_context.slug'
+                    template: '@SyliusShop/product/common/card.html.twig'
 
         'sylius.shop.product_review.index.main':
             header:
