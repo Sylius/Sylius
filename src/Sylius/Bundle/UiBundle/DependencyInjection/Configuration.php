@@ -77,6 +77,17 @@ final class Configuration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('twig_ux')
                     ->children()
+                        ->arrayNode('live_component_tags')
+                            ->useAttributeAsKey('name')
+                            ->variablePrototype()
+                                ->validate()
+                                    ->ifTrue(function($tagOptions) {
+                                        return !is_array($tagOptions) || !array_key_exists('route', $tagOptions);
+                                    })
+                                    ->thenInvalid('The "route" attribute is required for the child of "sylius_ui.twig_ux.live_component_tags".')
+                                ->end()
+                            ->end()
+                        ->end()
                         ->arrayNode('anonymous_component_template_prefixes')
                             ->useAttributeAsKey('prefix_name')
                             ->scalarPrototype()->end()

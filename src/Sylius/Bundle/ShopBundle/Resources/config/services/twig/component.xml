@@ -19,7 +19,7 @@
             <argument type="service" id="sylius.locale_provider" />
 
             <tag
-                name="twig.component"
+                name="sylius.twig_component"
                 key="sylius_shop:common:locale_switcher"
                 template="@SyliusShop/shared/layout/base/header/top_bar/locale_switcher.html.twig"
             />
@@ -33,7 +33,7 @@
             <argument type="service" id="sylius.context.currency" />
 
             <tag
-                name="twig.component"
+                name="sylius.twig_component"
                 key="sylius_shop:common:currency_switcher"
                 template="@SyliusShop/shared/layout/base/header/top_bar/currency_switcher.html.twig"
             />
@@ -48,7 +48,7 @@
             <argument type="service" id="sylius.context.locale" />
 
             <tag
-                name="twig.component"
+                name="sylius.twig_component"
                 key="sylius_shop:common:taxon_menu"
                 template="@SyliusShop/shared/layout/base/header/navbar/menu.html.twig"
             />
