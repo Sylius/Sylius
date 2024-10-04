@@ -34,7 +34,7 @@ final class ZoneMatcherTest extends KernelTestCase
         $address->setCountryCode('PL');
         $address->setProvinceCode('MA');
 
-        $zoneMatcher = self::getContainer()->get('sylius.zone_matcher');
+        $zoneMatcher = self::getContainer()->get('sylius.matcher.zone');
         $matchedZones = [];
 
         foreach ($zoneMatcher->matchAll($address) as $zone) {
@@ -55,7 +55,7 @@ final class ZoneMatcherTest extends KernelTestCase
         $address->setCountryCode('PL');
         $address->setProvinceCode('MA');
 
-        $zoneMatcher = self::getContainer()->get('sylius.zone_matcher');
+        $zoneMatcher = self::getContainer()->get('sylius.matcher.zone');
         $matchedZones = [];
 
         foreach ($zoneMatcher->matchAll($address, 'shipping') as $zone) {

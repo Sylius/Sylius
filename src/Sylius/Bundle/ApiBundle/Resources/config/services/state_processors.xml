@@ -30,7 +30,7 @@
 
         <service id="sylius_api.state_processor.admin.country.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
-            <argument type="service" id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
+            <argument type="service" id="sylius.checker.country_provinces_deletion" />
             <tag name="api_platform.state_processor" />
         </service>
 
@@ -98,7 +98,7 @@
 
         <service id="sylius_api.state_processor.admin.zone.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Zone\RemoveProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
-            <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
+            <argument type="service" id="sylius.checker.zone_deletion" />
             <tag name="api_platform.state_processor" />
         </service>
 
