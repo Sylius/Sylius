@@ -78,7 +78,6 @@ api_platform:
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException: 422
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException: 422
         Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException: 422
-        Sylius\Component\Payment\Exception\PayumTokenDoesNotExist: 422
         Sylius\Component\Promotion\Exception\FailedGenerationException: 422
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400

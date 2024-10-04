@@ -15,12 +15,12 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\CommandHandler;
 
 use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestProviderInterface;
+use Sylius\Bundle\PayumBundle\Exception\NonExistingPayumTokenException;
 use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolverInterface;
-use Sylius\Component\Payment\Exception\NonExistingPayumTokenException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

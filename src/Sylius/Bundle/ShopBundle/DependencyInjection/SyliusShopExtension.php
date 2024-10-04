@@ -32,6 +32,8 @@ final class SyliusShopExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
+        $this->configureOrderPay($config['order_pay'], $container);
+
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
         $container->setAlias(LocaleSwitcherInterface::class, 'sylius.shop.locale_switcher');
@@ -41,9 +43,6 @@ final class SyliusShopExtension extends Extension
             'sylius_shop.product_grid.include_all_descendants',
             $config['product_grid']['include_all_descendants'],
         );
-
-        $this->configureOrderPay($config['order_pay'], $container);
-        $loader->load('services/integrations/order_pay.xml');
 
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }

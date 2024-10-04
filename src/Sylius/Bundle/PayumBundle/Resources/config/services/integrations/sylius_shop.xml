@@ -17,15 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <imports>
-        <import resource="services/**.xml" />
-        <import resource="services/payment_request/**/*.xml" />
+        <import resource="sylius_shop/**/*.xml" />
     </imports>
-
-    <services>
-        <defaults public="true" />
-
-        <service id="sylius.payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient">
-            <argument type="service" id="Psr\Http\Client\ClientInterface" />
-        </service>
-    </services>
 </container>

@@ -11,11 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
-
     <services>
         <defaults public="true" />
 
@@ -39,11 +39,6 @@
             <tag name="sylius.shop.order_pay.provider.pay_response" priority="-100" />
         </service>
 
-        <service id="sylius.shop.order_pay.provider.pay_response.payum" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PayumPayResponseProvider">
-            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
-            <tag name="sylius.shop.order_pay.provider.pay_response" priority="-200" />
-        </service>
-
         <service id="sylius.shop.order_pay.provider.pay_response.payment_request" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider">
             <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
             <argument type="service" id="sylius.shop.order_pay.provider.after_pay_url" />
@@ -57,11 +52,5 @@
             <argument type="service" id="sylius.shop.order_pay.provider.final_url" />
             <tag name="sylius.shop.order_pay.provider.after_pay_response" priority="-100" />
         </service>
-
-        <service id="sylius.shop.order_pay.provider.after_pay_response.payum" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PayumAfterPayResponseProvider">
-            <argument type="service" id="sylius.shop.order_pay.handler.payment_state_flash" />
-            <tag name="sylius.shop.order_pay.provider.after_pay_response" priority="-200" />
-        </service>
-
     </services>
 </container>

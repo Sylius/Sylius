@@ -387,3 +387,13 @@ If your app never changed the hasher name configuration, you don't need to confi
 
 * Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.
 * PayPal Express Checkout gateway has been removed. Use now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.
+
+## Routing
+
+* Routing for the `sylius_shop_payum` has been moved from the `SyliusShopBundle` to the `SyliusPayumBundle`:
+
+```yaml
+sylius_shop_payum:
+-   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
++   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
+```
