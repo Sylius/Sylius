@@ -17,12 +17,10 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-readonly class ShopPreviewComponent
+class ShopPreviewComponent
 {
-    /**
-     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
-     */
-    public function __construct(private ChannelRepositoryInterface $channelRepository)
+    /** @param ChannelRepositoryInterface<ChannelInterface> $channelRepository */
+    public function __construct(private readonly ChannelRepositoryInterface $channelRepository)
     {
     }
 

@@ -21,11 +21,18 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->container->setParameter('sylius_ui.twig_ux.live_component_tags', []);
+    }
+
     public function testAddingTwigComponentTagToServicesTaggedWithLiveComponentTag(): void
     {
         $liveComponent = new Definition();
-        $liveComponent->addTag('sylius.live_component', ['key' => 'foo', 'template' => 'bar']);
+        $liveComponent->addTag('sylius.live_component.ui', ['key' => 'foo', 'template' => 'bar']);
 
+        $this->setParameter('sylius_ui.twig_ux.live_component_tags', ['ui' => ['route' => 'sylius_ui_live_component']]);
         $this->setDefinition('my_live_component', $liveComponent);
 
         $this->compile();
@@ -41,7 +48,7 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
                 'default_action' => null,
                 'live' => true,
                 'csrf' => true,
-                'route' => 'ux_live_component',
+                'route' => 'sylius_ui_live_component',
                 'method' => 'post',
                 'url_reference_type' => UrlGeneratorInterface::ABSOLUTE_PATH,
             ],
@@ -52,7 +59,7 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
     public function testOverridingTagAttributesWithLiveComponentTag(): void
     {
         $liveComponent = new Definition();
-        $liveComponent->addTag('sylius.live_component', [
+        $liveComponent->addTag('sylius.live_component.ui', [
             'key' => 'foo',
             'template' => 'bar',
             'expose_public_props' => false,
@@ -64,6 +71,7 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
             'url_reference_type' => UrlGeneratorInterface::ABSOLUTE_URL,
         ]);
 
+        $this->setParameter('sylius_ui.twig_ux.live_component_tags', ['ui' => ['route' => 'sylius_ui_live_component']]);
         $this->setDefinition('my_live_component', $liveComponent);
 
         $this->compile();
@@ -86,11 +94,55 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
         );
     }
 
+    public function testOverridingTagAttributesWithDefaultTagOptions(): void
+    {
+        $liveComponent = new Definition();
+        $liveComponent->addTag('sylius.live_component.ui', ['key' => 'foo', 'template' => 'bar']);
+
+        $this->setParameter('sylius_ui.twig_ux.live_component_tags',
+            [
+                'ui' =>
+                    [
+                        'expose_public_props' => false,
+                        'attributes_var' => 'custom_attributes',
+                        'default_action' => 'customAction',
+                        'csrf' => false,
+                        'route' => 'sylius_ui_live_component',
+                        'method' => 'get',
+                        'url_reference_type' => UrlGeneratorInterface::ABSOLUTE_URL,
+                    ],
+                ],
+        );
+        $this->setDefinition('my_live_component', $liveComponent);
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'my_live_component',
+            'twig.component',
+            [
+                'key' => 'foo',
+                'template' => 'bar',
+                'expose_public_props' => false,
+                'attributes_var' => 'custom_attributes',
+                'default_action' => 'customAction',
+                'live' => true,
+                'csrf' => false,
+                'route' => 'sylius_ui_live_component',
+                'method' => 'get',
+                'url_reference_type' => UrlGeneratorInterface::ABSOLUTE_URL,
+            ],
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithTag('my_live_component', 'controller.service_arguments');
+    }
+
+
     public function testThrowingExceptionWhenKeyIsNotPresentOnLiveComponentTag(): void
     {
         $liveComponent = new Definition();
-        $liveComponent->addTag('sylius.live_component', ['template' => 'bar']);
+        $liveComponent->addTag('sylius.live_component.ui', ['template' => 'bar']);
 
+        $this->setParameter('sylius_ui.twig_ux.live_component_tags', ['ui' => ['route' => 'sylius_ui_live_component']]);
         $this->setDefinition('my_live_component', $liveComponent);
 
         $this->expectException(\InvalidArgumentException::class);
@@ -102,8 +154,9 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
     public function testThrowingExceptionWhenTemplateIsNotPresentOnLiveComponentTag(): void
     {
         $liveComponent = new Definition();
-        $liveComponent->addTag('sylius.live_component', ['key' => 'foo']);
+        $liveComponent->addTag('sylius.live_component.ui', ['key' => 'foo']);
 
+        $this->setParameter('sylius_ui.twig_ux.live_component_tags', ['ui' => ['route' => 'sylius_ui_live_component']]);
         $this->setDefinition('my_live_component', $liveComponent);
 
         $this->expectException(\InvalidArgumentException::class);

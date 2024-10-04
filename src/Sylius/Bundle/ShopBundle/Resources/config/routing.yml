@@ -8,6 +8,11 @@ sylius_shop_homepage:
     defaults:
         template: "@SyliusShop/homepage/index.html.twig"
 
+sylius_shop_live_component:
+    path: '/_components/{_live_component}/{_live_action}'
+    defaults:
+        _live_action: 'get'
+
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
 

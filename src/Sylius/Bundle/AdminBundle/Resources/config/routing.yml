@@ -13,6 +13,11 @@ sylius_admin_impersonate_user:
         _controller: sylius.controller.impersonate_user::impersonateAction
         username: $username
 
+sylius_admin_live_component:
+    path: '/{_locale}/_components/{_live_component}/{_live_action}'
+    defaults:
+        _live_action: 'get'
+
 sylius_admin_admin_user:
     resource: "@SyliusAdminBundle/Resources/config/routing/admin_user.yml"
 
