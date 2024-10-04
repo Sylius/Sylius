@@ -48,6 +48,9 @@
     | `sylius.twig.extension.convert_amount`                      | `sylius.twig.extension.convert_money`                                               |
     | `sylius.twig.extension.money`                               | `sylius.twig.extension.format_money`                                                |
     | `sylius.money_formatter`                                    | `sylius.formatter.money`                                                            |
+    | `sylius.currency_converter`                                 | `sylius.converter.currency`                                                         |
+    | `sylius.currency_name_converter`                            | `sylius.converter.currency_name`                                                    |
+    | `sylius.availability_checker.default`                       | `sylius.availability_checker`                                                       |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
