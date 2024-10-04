@@ -86,5 +86,15 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
             <argument type="service" id="api_platform.router" />
         </service>
+
+        <service
+            id="sylius_api.api_platform.routing.api_loader"
+            class="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\ApiLoader"
+            decorates="api_platform.route_loader"
+            public="false"
+        >
+            <argument type="service" id=".inner" />
+            <argument>%sylius_api.operations_to_remove%</argument>
+        </service>
     </services>
 </container>
