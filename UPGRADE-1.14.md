@@ -44,6 +44,7 @@
     | `sylius.province_naming_provider`                           | `sylius.provider.province_naming`                                                   |
     | `sylius.zone_matcher`                                       | `sylius.matcher.zone`                                                               |
     | `sylius.address_comparator`                                 | `sylius.comparator.address`                                                         |
+    | `sylius.channel_collector`                                  | `sylius.collector.channel`                                                          |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
