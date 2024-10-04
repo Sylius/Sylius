@@ -381,6 +381,7 @@ If your app never changed the hasher name configuration, you don't need to confi
 * PayPal Express Checkout gateway has been removed. Use now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.
 
 ## Theming
-Dependency on `sylius/theme-bundle` is moved from CoreBundle to ShopBundle and it will no longer be installed if you're running your shop in headless mode.
-* Channel's `themeName` form field existence is made optional and depends `ShopBundle` presence.
-* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`
+* Dependency on `sylius/theme-bundle` is moved from CoreBundle to ShopBundle and it will no longer be installed 
+  if you're running your shop in headless mode.
+* Channel's `themeName` form field existence is made optional and depends on `ShopBundle` presence.
+* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.
