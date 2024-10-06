@@ -37,7 +37,6 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.3.1",
         "doctrine/orm": "^2.13",
-        "jms/serializer-bundle": "^5.0",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "sylius/currency-bundle": "^2.0",

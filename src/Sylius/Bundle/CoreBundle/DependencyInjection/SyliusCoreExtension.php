@@ -103,7 +103,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependDefaultDriver($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
-        $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
         $this->prependSyliusOrderBundle($container, $config);
     }
 
@@ -142,29 +141,19 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader->load('services/integrations/hwi_oauth.xml');
     }
 
-    private function prependJmsSerializerIfAdminApiBundleIsNotPresent(ContainerBuilder $container): void
+    private function prependSyliusThemeBundle(ContainerBuilder $container, string $driver): void
     {
-        if (!$container->hasExtension('jms_serializer')) {
+        if (!$container->hasExtension('sylius_theme')) {
             return;
         }
 
-        if ($container->hasExtension('sylius_admin_api')) {
-            return;
+        foreach ($container->getExtensions() as $name => $extension) {
+            if (in_array($name, self::$bundles, true)) {
+                $container->prependExtensionConfig($name, ['driver' => $driver]);
+            }
         }
 
-        $container->prependExtensionConfig('jms_serializer', [
-            'metadata' => [
-                'directories' => [
-                    'sylius-core' => [
-                        'namespace_prefix' => 'Sylius\Component\Core',
-                        'path' => '@SyliusCoreBundle/Resources/config/serializer',
-                    ],
-                ],
-            ],
-            'property_naming' => [
-                'id' => 'jms_serializer.identical_property_naming_strategy',
-            ],
-        ]);
+        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
     }
 
     private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
