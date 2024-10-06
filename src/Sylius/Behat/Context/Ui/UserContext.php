@@ -34,8 +34,12 @@ final class UserContext implements Context
     /**
      * @When I log out
      */
-    public function iLogOut()
+    public function iLogOut(): void
     {
+        if (!$this->homePage->isOpen()) {
+            $this->homePage->open();
+        }
+
         $this->homePage->logOut();
     }
 

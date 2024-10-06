@@ -9,6 +9,7 @@ Feature: Reverting previously applied discount on cart
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And the store has a product "PHP Mug" priced at "$20.00"
         And there is a promotion "Christmas promotion"
+        And I am a logged in customer
 
     @api @ui @mink:chromedriver
     Scenario: Reverting discount applied from total item quantity based promotion

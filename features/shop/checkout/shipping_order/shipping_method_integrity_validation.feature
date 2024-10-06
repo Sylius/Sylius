@@ -18,12 +18,12 @@ Feature: Order shipping method integrity
         And the store has a product "T-Shirt Breaking Bad" priced at "$12.54"
         And this product belongs to "Small stuff" shipping category
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Validate shipping method after administrator changes shipping method requirements
-        Given I added product "Westworld host" to the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
-        And I have proceeded order with "DHL" shipping method and "Offline" payment
+        When I add product "Westworld host" to the cart
+        And I complete addressing step with email "guest@example.com" and "United States" based billing address
+        And I proceed with "DHL" shipping method and "Offline" payment
         And product "Westworld host" shipping category has been changed to "Small stuff"
-        When I want to complete checkout
+        And I want to complete checkout
         Then I should not be able to confirm order because products do not fit "DHL" requirements
         And I should not see the thank you page

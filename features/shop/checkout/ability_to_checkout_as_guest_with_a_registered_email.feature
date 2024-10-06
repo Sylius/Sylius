@@ -11,20 +11,20 @@ Feature: Checking out as guest with a registered email
         And the store allows paying Offline
         And there is a customer account "john@example.com"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Successfully placing an order
-        Given I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        When I add product "PHP T-Shirt" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
         And I select "Free" shipping method
         And I complete the shipping step
         And I choose "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Placing an order using email with mixed case
-        Given I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "JOhn@example.COM" and "United States" based billing address
+        When I add product "PHP T-Shirt" to the cart
+        And I complete addressing step with email "JOhn@example.COM" and "United States" based billing address
         And I select "Free" shipping method
         And I complete the shipping step
         And I choose "Offline" payment method

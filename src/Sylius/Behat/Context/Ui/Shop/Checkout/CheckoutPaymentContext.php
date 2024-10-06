@@ -46,8 +46,8 @@ final readonly class CheckoutPaymentContext implements Context
 
     /**
      * @Given I completed the payment step with :paymentMethodName payment method
-     * @Given the visitor has proceeded :paymentMethodName payment
-     * @Given the customer has proceeded :paymentMethodName payment
+     * @Given the visitor has proceeded with :paymentMethodName payment
+     * @Given the customer has proceeded with :paymentMethodName payment
      * @Given the visitor proceed with :paymentMethodName payment
      * @Given the customer proceed with :paymentMethodName payment
      * @When /^I choose "([^"]*)" payment method$/

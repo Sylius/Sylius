@@ -9,11 +9,11 @@ Feature: Removing promotion coupon
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And this promotion gives "$10.00" discount to every order
-        And I have product "PHP T-Shirt" in the cart
         And this cart has promotion applied with coupon "SANTA2016"
 
     @api @ui @mink:chromedriver
     Scenario: Removing coupon code from cart
-        When I remove coupon from my cart
+        When I add product "PHP T-Shirt" to the cart
+        And I remove coupon from my cart
         Then my cart total should be "$100.00"
         And there should be no discount applied

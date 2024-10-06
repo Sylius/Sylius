@@ -50,6 +50,8 @@ final readonly class ShopSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('user', $user);
+        // Set the token in the shared storage to have access both in UI and API to resources created in the setup context
+        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
     }
 
     /**
@@ -59,7 +61,7 @@ final readonly class ShopSecurityContext implements Context
      */
     public function iAmLoggedInCustomer(?string $fullName = null): void
     {
-        $userData = ['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true];
+        $userData = ['email' => 'shop@example.com', 'password' => 'sylius', 'enabled' => true];
 
         if ($fullName !== null) {
             $names = explode(' ', $fullName);

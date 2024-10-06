@@ -52,6 +52,19 @@ final readonly class AddressContext implements Context
     }
 
     /**
+     * @Given I addressed the cart with email :email
+     */
+    public function iAddressedTheCartWithEmail(string $email): void
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+
+        $address = $this->addressFactory->createDefault();
+
+        $command = new UpdateCart(orderTokenValue: $cartToken, email: $email, billingAddress: $address);
+        $this->commandBus->dispatch($command);
+    }
+
+    /**
      * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iHaveSpecifiedDefaultBillingAddressForName(): void
@@ -62,6 +75,21 @@ final readonly class AddressContext implements Context
             orderTokenValue: $cartToken,
             email: null,
             billingAddress: $this->addressFactory->createDefaultWithCountryCode('US'),
+        );
+        $this->commandBus->dispatch($command);
+    }
+
+    /**
+     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
+     */
+    public function iCompleteAddressingStepWithEmail(string $email, AddressInterface $address): void
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: $email,
+            billingAddress: $address,
         );
         $this->commandBus->dispatch($command);
     }

@@ -431,6 +431,8 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <argument type="service" id="sylius.behat.notification_checker.shop" />
             <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
+            <argument type="service" id="sylius.storage.cart_session" />
+            <argument type="service" id="behat.mink" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.checkout.registration_after_checkout" class="Sylius\Behat\Context\Ui\Shop\Checkout\RegistrationAfterCheckoutContext">

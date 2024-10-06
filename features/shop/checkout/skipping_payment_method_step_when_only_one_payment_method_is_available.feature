@@ -11,7 +11,7 @@ Feature: Skipping payment step when only one payment method is available
         And the store has a product "Guards! Guards!" priced at "$20.00"
         And the store allows paying with "Bank transfer"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
         When I add product "Guards! Guards!" to the cart
         And I complete addressing step with email "guest@example.com" and "United States" based billing address
