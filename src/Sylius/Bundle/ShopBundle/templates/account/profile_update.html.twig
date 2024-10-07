@@ -1,13 +1,6 @@
-{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+{% extends '@SyliusShop/account/common/update.html.twig' %}
 
-{% set prefixes = ['sylius_shop.account.profile_update', 'sylius_shop.shared.account'] %}
+{% set prefixes = ['sylius_shop.account.profile_update'] %}
+{% set attrs = { resource, form } %}
 
 {% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
-
-{% block content %}
-    <div class="container mb-auto">
-        <div class="row my-4">
-            {% hook 'layout' with { _prefixes: prefixes, resource, form } %}
-        </div>
-    </div>
-{% endblock %}

@@ -1,13 +1,6 @@
-{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+{% extends '@SyliusShop/account/common/index.html.twig' %}
 
-{% set prefixes = ['sylius_shop.account.order.index', 'sylius_shop.shared.account'] %}
+{% set prefixes = ['sylius_shop.account.order'] %}
+{% set attrs = { resources } %}
 
 {% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
-
-{% block content %}
-    <div class="container mb-auto">
-        <div class="row my-4">
-            {% hook 'layout' with { _prefixes: prefixes, resources } %}
-        </div>
-    </div>
-{% endblock %}
