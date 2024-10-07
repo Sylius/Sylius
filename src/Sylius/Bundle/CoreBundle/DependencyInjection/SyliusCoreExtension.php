@@ -103,7 +103,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependDefaultDriver($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
-        $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
         $this->prependSyliusOrderBundle($container, $config);
     }
 
@@ -140,31 +139,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services/integrations/hwi_oauth.xml');
-    }
-
-    private function prependJmsSerializerIfAdminApiBundleIsNotPresent(ContainerBuilder $container): void
-    {
-        if (!$container->hasExtension('jms_serializer')) {
-            return;
-        }
-
-        if ($container->hasExtension('sylius_admin_api')) {
-            return;
-        }
-
-        $container->prependExtensionConfig('jms_serializer', [
-            'metadata' => [
-                'directories' => [
-                    'sylius-core' => [
-                        'namespace_prefix' => 'Sylius\Component\Core',
-                        'path' => '@SyliusCoreBundle/Resources/config/serializer',
-                    ],
-                ],
-            ],
-            'property_naming' => [
-                'id' => 'jms_serializer.identical_property_naming_strategy',
-            ],
-        ]);
     }
 
     private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void

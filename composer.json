@@ -50,7 +50,6 @@
         "gedmo/doctrine-extensions": "^3.2",
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "guzzlehttp/psr7": "^2.5",
-        "jms/serializer-bundle": "^5.0",
         "knplabs/gaufrette": "^0.10 || ^0.11",
         "knplabs/knp-gaufrette-bundle": "^0.8 || ^0.9",
         "knplabs/knp-menu": "^3.1",
