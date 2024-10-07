@@ -54,7 +54,7 @@
     | **InventoryBundle**                                                            |                                                                                     |
     | `sylius.availability_checker.default`                                          | `sylius.availability_checker`                                                       |
     | **LocaleBundle**                                                               |                                                                                     |
-    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`           | `sylius.context.locale.request_based`                                               |
+    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`           | `sylius.context.locale.request_header_based`                                        |
     | `sylius.locale_collection_provider`                                            | `sylius.provider.locale_collection`                                                 |
     | `sylius.locale_collection_provider.cahced`                                     | `sylius.provider.locale_collection.cached`                                          |
     | `sylius.locale_provider`                                                       | `sylius.provider.locale`                                                            |
