@@ -208,5 +208,9 @@
             <group>sylius:shop:cart:show</group>
             <group>sylius:shop:order:account:show</group>
         </attribute>
+
+        <attribute name="customerIp">
+            <group>sylius:admin:order:show</group>
+        </attribute>
     </class>
 </serializer>

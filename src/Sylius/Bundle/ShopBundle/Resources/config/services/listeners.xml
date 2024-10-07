@@ -41,7 +41,7 @@
         <service id="sylius.listener.order_customer_ip" class="Sylius\Bundle\ShopBundle\EventListener\OrderCustomerIpListener">
             <argument type="service" id="sylius.customer_ip_assigner" />
             <argument type="service" id="request_stack" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignCustomerIpToOrder" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="500"/>
         </service>
 
         <service id="sylius.listener.order_complete" class="Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener">
