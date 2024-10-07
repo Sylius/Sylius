@@ -2,7 +2,7 @@ sylius_admin_taxon:
     resource: |
         alias: sylius.taxon
         section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
+        templates: "@SyliusAdminUi\\crud"
         except: ['show', 'index']
         redirect: update
         permission: true
@@ -26,7 +26,7 @@ sylius_admin_taxon_create_for_parent:
         _sylius:
             section: admin
             permission: true
-            template: '@SyliusAdmin/shared/crud/create.html.twig'
+            template: '@SyliusAdminUi/crud/create.html.twig'
             redirect: sylius_admin_taxon_update
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\TaxonType

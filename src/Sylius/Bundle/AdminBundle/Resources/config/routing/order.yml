@@ -2,7 +2,7 @@ sylius_admin_order:
     resource: |
         alias: sylius.order
         section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
+        templates: "@SyliusAdminUi\\crud"
         only: ['index']
         grid: sylius_admin_order
         form:
@@ -27,7 +27,7 @@ sylius_admin_order_show:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/shared/crud/show.html.twig"
+            template: "@SyliusAdminUi/crud/show.html.twig"
 
 sylius_admin_order_history:
     path: /orders/{id}/history
@@ -55,7 +55,7 @@ sylius_admin_order_update:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/shared/crud/update.html.twig"
+            template: "@SyliusAdminUi/crud/update.html.twig"
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
                 options:
