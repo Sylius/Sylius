@@ -1,0 +1,8 @@
+{% set payment_method = hookable_metadata.context.resource.method %}
+
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.payment_method'|trans }}</div>
+    <div class="col-12 col-md-8" {{ sylius_test_html_attribute('method') }}>
+        <a href="{{ path('sylius_admin_payment_method_update', {'id' : payment_method.id }) }}">{{ payment_method.name }}</a>
+    </div>
+</div>

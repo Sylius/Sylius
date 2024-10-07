@@ -59,6 +59,20 @@ final readonly class ManagingPaymentsContext implements Context
     }
 
     /**
+     * @When I want to view the payment requests of the first payment
+     */
+    public function iWantToViewThePaymentRequestsOfTheFirstPayment(): void
+    {
+        $response = $this->client->getLastResponse();
+
+        $this->client->subResourceIndex(
+            Resources::PAYMENTS,
+            Resources::PAYMENT_REQUESTS,
+            (string) $this->responseChecker->getCollection($response)[0]['id'],
+        );
+    }
+
+    /**
      * @Then I should see the details of order :order
      */
     public function iShouldSeeOrderWithDetails(OrderInterface $order): void

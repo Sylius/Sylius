@@ -117,6 +117,18 @@
         </service>
 
         <service
+            id="sylius_api.context_builder.payment_request_hash_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentRequestHashAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentRequestHashAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Payment\Model\PaymentRequestInterface</argument>
+        </service>
+
+        <service
             id="sylius_api.context_builder.order_token_value_aware"
             class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"

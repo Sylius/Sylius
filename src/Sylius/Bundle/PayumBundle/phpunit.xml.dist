@@ -7,10 +7,4 @@
     <php>
         <server name="KERNEL_CLASS" value="AppKernel" />
     </php>
-
-    <testsuites>
-        <testsuite name="SyliusPayumBundle Test Suite">
-            <directory>./Tests/</directory>
-        </testsuite>
-    </testsuites>
 </phpunit>

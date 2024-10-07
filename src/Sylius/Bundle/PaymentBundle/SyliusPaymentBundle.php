@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle;
 
+use Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler\RegisterGatewayConfigTypePass;
 use Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler\RegisterPaymentMethodsResolversPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -36,6 +37,7 @@ final class SyliusPaymentBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterPaymentMethodsResolversPass());
+        $container->addCompilerPass(new RegisterGatewayConfigTypePass());
     }
 
     protected function getModelNamespace(): string
