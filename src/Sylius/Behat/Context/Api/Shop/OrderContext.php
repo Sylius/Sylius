@@ -110,6 +110,8 @@ final readonly class OrderContext implements Context
     public function iViewTheSummaryOfMyOrder(OrderInterface $order): void
     {
         $this->shopClient->show(Resources::ORDERS, $order->getTokenValue());
+
+        $this->sharedStorage->set('cart_token', $order->getTokenValue());
     }
 
     /**

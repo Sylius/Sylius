@@ -1,19 +1,29 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
+use Webmozart\Assert\Assert;
 
 final readonly class PaymentRequestContext implements Context
 {
@@ -22,6 +32,7 @@ final readonly class PaymentRequestContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private RequestFactoryInterface $requestFactory,
+        private PaymentRequestRepositoryInterface $paymentRequestRepository,
     ) {
     }
 
@@ -80,5 +91,32 @@ final readonly class PaymentRequestContext implements Context
         ]);
 
         $this->client->executeCustomRequest($request);
+    }
+
+    /**
+     * @Then my payment request with action :action for payment method :paymentMethod should have state :state
+     */
+    public function myPaymentRequestShouldBeCancelled(string $action, PaymentMethodInterface $paymentMethod, string $state): void
+    {
+        $request = $this->getRequestForPaymentRequestWithAction($action);
+        Assert::notNull($request, sprintf('Payment request with action %s not found', $action));
+
+        $this->client->executeCustomRequest($request);
+        $response = $this->client->getLastResponse();
+
+        Assert::same($this->responseChecker->getValue($response, 'action'), $action, sprintf('Payment request should have action %s', $action));
+        Assert::true(str_contains($this->responseChecker->getValue($response, 'method'), $paymentMethod->getCode()), sprintf('Payment request should have payment method %s', $paymentMethod->getCode()));
+        Assert::same($this->responseChecker->getValue($response, 'state'), $state, sprintf('Payment request should have state %s', $state));
+    }
+
+    private function getRequestForPaymentRequestWithAction(string $action): ?Request
+    {
+        $orderToken = $this->sharedStorage->get('cart_token');
+        $order = $this->client->show(Resources::ORDERS, $orderToken);
+        $payments = $this->responseChecker->getValue($order, 'payments');
+        $paymentId = end($payments)['id'];
+        $paymentRequest = $this->paymentRequestRepository->findOneBy(['payment' => $paymentId, 'action' => $action]);
+
+        return $paymentRequest ? $this->requestFactory->custom('/api/v2/shop/payment-requests/' . $paymentRequest->getHash(), HttpRequest::METHOD_GET, [], $this->client->getToken()) : null;
     }
 }

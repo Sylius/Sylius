@@ -19,6 +19,7 @@ use Sylius\Bundle\PaymentBundle\Attribute\AsPaymentMethodsResolver;
 use Sylius\Bundle\PaymentBundle\DependencyInjection\SyliusPaymentExtension;
 use Sylius\Bundle\PaymentBundle\Tests\Stub\GatewayConfigurationTypeStub;
 use Sylius\Bundle\PaymentBundle\Tests\Stub\PaymentMethodsResolverStub;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
@@ -62,6 +63,7 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
             ['type' => 'test', 'label' => 'Test', 'priority' => 15],
         );
     }
+
     /** @test */
     public function it_loads_gateway_config_validation_groups_parameter_value_properly(): void
     {
@@ -77,6 +79,24 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter(
             'sylius.gateway_config.validation_groups',
             ['paypal_express_checkout' => ['sylius', 'paypal'], 'offline' => ['sylius']],
+        );
+    }
+
+    /** @test */
+    public function it_loads_parameter_with_payment_request_states_that_should_be_cancelled_when_payment_method_is_changed(): void
+    {
+        $this->load([
+            'payment_request' => [
+                'states_that_should_be_cancelled_when_payment_request_has_changed' => [
+                    PaymentRequestInterface::STATE_NEW,
+                    PaymentRequestInterface::STATE_PROCESSING,
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.payment_request.states_that_should_be_cancelled_when_payment_request_has_changed',
+            [PaymentRequestInterface::STATE_NEW, PaymentRequestInterface::STATE_PROCESSING],
         );
     }
 

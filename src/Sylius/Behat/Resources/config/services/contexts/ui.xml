@@ -618,6 +618,8 @@
             <argument type="service" id="sylius.behat.page.admin.payment.payment_request.index" />
             <argument type="service" id="sylius.behat.page.admin.payment.payment_request.show"/>
             <argument type="service" id="sylius.repository.payment_request"/>
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.shared_security" />
         </service>
     </services>
 </container>

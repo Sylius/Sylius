@@ -68,7 +68,7 @@ final readonly class ManagingPaymentsContext implements Context
         $this->client->subResourceIndex(
             Resources::PAYMENTS,
             Resources::PAYMENT_REQUESTS,
-            (string) $this->responseChecker->getCollection($response)[0]['id']
+            (string) $this->responseChecker->getCollection($response)[0]['id'],
         );
     }
 

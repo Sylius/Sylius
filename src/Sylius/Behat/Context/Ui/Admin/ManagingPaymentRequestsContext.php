@@ -16,6 +16,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Payment\PaymentRequest\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Payment\PaymentRequest\ShowPageInterface;
+use Sylius\Behat\Service\SharedSecurityServiceInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
@@ -27,13 +29,15 @@ final readonly class ManagingPaymentRequestsContext implements Context
         private IndexPageInterface $indexPage,
         private ShowPageInterface $showPage,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private SharedStorageInterface $sharedStorage,
+        private SharedSecurityServiceInterface $sharedSecurityService,
     ) {
     }
 
     /**
      * @When I browse payment requests of an order :order
      */
-    public function iBrowseOrdersOfACustomer(OrderInterface $order): void
+    public function iBrowsePaymentRequestsOfACustomer(OrderInterface $order): void
     {
         $this->indexPage->open(['paymentId' => $order->getLastPayment()->getId()]);
     }
@@ -48,7 +52,7 @@ final readonly class ManagingPaymentRequestsContext implements Context
 
         $this->showPage->open([
             'hash' => $paymentRequest->getHash(),
-            'paymentId' => $payment->getId()
+            'paymentId' => $payment->getId(),
         ]);
     }
 
@@ -125,5 +129,23 @@ final readonly class ManagingPaymentRequestsContext implements Context
     public function itsResponseDataShouldBe(): void
     {
         Assert::same($this->showPage->getFieldText('response_data'), json_encode([]));
+    }
+
+    /**
+     * @Then the administrator should see the payment request with action :action for :method payment method and state :state
+     */
+    public function administratorShouldSeeThePaymentRequestWithActionAndState(string $action, string $paymentMethod, string $state): void
+    {
+        $adminUser = $this->sharedStorage->get('administrator');
+
+        $this->sharedSecurityService->performActionAsAdminUser($adminUser, function () {
+            $this->iBrowsePaymentRequestsOfACustomer($this->sharedStorage->get('order'));
+        });
+
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'action' => $action,
+            'state' => $state,
+            'method' => $paymentMethod,
+        ]));
     }
 }
