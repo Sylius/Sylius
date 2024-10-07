@@ -80,7 +80,7 @@ final readonly class CheckoutCompleteContext implements Context
      * @Given the customer confirm his order
      * @When I confirm my order
      * @When I try to confirm my order
-     * @When The customer confirmed the order
+     * @Given the customer confirmed the order
      */
     public function iConfirmMyOrder(): void
     {

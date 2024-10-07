@@ -39,7 +39,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
 
         $ipAssigner->assign($order, $request)->shouldBeCalled();
 
-        $this->__invoke($event);
+        $this($event);
     }
 
     function it_throws_exception_if_event_subject_is_not_order(Event $event, \stdClass $order): void
@@ -64,6 +64,6 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
 
         $ipAssigner->assign($order, $request)->shouldNotBeCalled();
 
-        $this->__invoke($event);
+        $this($event);
     }
 }
