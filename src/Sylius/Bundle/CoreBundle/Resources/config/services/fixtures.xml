@@ -190,7 +190,7 @@
         <service id="sylius.fixture.order" class="Sylius\Bundle\CoreBundle\Fixture\OrderFixture">
             <argument type="service" id="sylius.factory.order" />
             <argument type="service" id="sylius.factory.order_item" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.customer" />

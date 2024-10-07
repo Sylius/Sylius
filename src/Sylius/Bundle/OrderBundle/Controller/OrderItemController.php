@@ -204,12 +204,12 @@ class OrderItemController extends ResourceController
 
     protected function getQuantityModifier(): OrderItemQuantityModifierInterface
     {
-        return $this->get('sylius.order_item_quantity_modifier');
+        return $this->get('sylius.modifier.order_item_quantity');
     }
 
     protected function getOrderModifier(): OrderModifierInterface
     {
-        return $this->get('sylius.order_modifier');
+        return $this->get('sylius.modifier.order');
     }
 
     protected function getCartManager(): EntityManagerInterface
