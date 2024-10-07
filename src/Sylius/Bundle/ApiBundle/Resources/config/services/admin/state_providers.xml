@@ -27,11 +27,5 @@
             <argument type="string">id</argument>
             <tag name="api_platform.state_provider" priority="10"/>
         </service>
-
-        <service id="sylius_api.state_provider.admin.admin_user.reset_password" class="Sylius\Bundle\ApiBundle\StateProvider\Admin\AdminUser\ResetPasswordProvider">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <tag name="api_platform.state_provider" priority="10" />
-        </service>
-
     </services>
 </container>

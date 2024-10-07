@@ -137,7 +137,7 @@
     * `Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeValueRepository`
       extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
       implements `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
-  
+
   Product:
 
     * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
@@ -176,7 +176,7 @@
     * `Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface` extended interface changed from
       `Sylius\Component\Resource\Repository\RepositoryInterface` to
       `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
-  
+
   Product:
 
     * `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductAssociationRepository` extended class changed from
@@ -259,7 +259,7 @@
     use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
         public function __construct(
-    -       private readonly VariantResolverHelper|ProductVariantResolverInterface $helper,
+    -       private readonly ProductVariantResolverInterface|VariantResolverHelper $helper,
     +       private readonly ProductVariantResolverInterface $productVariantResolver,
         )
     ```
@@ -277,7 +277,7 @@
     use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 
         public function __construct(
-    -       private InventoryHelper|AvailabilityCheckerInterface $helper,
+    -       private AvailabilityCheckerInterface|InventoryHelper $helper,
     +       private AvailabilityCheckerInterface $availabilityChecker,
         )
     ```
@@ -288,7 +288,7 @@
     use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
         public function __construct(
-    -       private LocaleHelperInterface|LocaleConverterInterface $localeHelper,
+    -       private LocaleConverterInterface|LocaleHelperInterface $localeHelper,
     -       private ?LocaleContextInterface $localeContext = null,
     +       private LocaleConverterInterface $localeConverter,
     +       private LocaleContextInterface $localeContext,
@@ -320,7 +320,7 @@
     use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 
         public function __construct(
-    -       private AdjustmentsHelper|AdjustmentsAggregatorInterface $adjustmentsHelper,
+    -       private AdjustmentsAggregatorInterface|AdjustmentsHelper $adjustmentsHelper,
     +       private AdjustmentsAggregatorInterface $adjustmentsAggregator,
         )
     ```
@@ -392,3 +392,9 @@ If your app never changed the hasher name configuration, you don't need to confi
 
 * Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.
 * PayPal Express Checkout gateway has been removed. Use now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.
+
+## Theming
+* Dependency on `sylius/theme-bundle` is moved from CoreBundle to ShopBundle and it will no longer be installed 
+  if you're running your shop in headless mode.
+* Channel's `themeName` form field existence is made optional and depends on `ShopBundle` presence.
+* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.

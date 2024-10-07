@@ -22,6 +22,6 @@ final class InformAboutCartRecalculationHandler
 {
     public function __invoke(InformAboutCartRecalculation $command): void
     {
-        throw new OrderNoLongerEligibleForPromotion($command->promotionName());
+        throw new OrderNoLongerEligibleForPromotion($command->promotionName);
     }
 }

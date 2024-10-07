@@ -81,7 +81,7 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('name')
                             ->variablePrototype()
                                 ->validate()
-                                    ->ifTrue(function($tagOptions) {
+                                    ->ifTrue(function ($tagOptions) {
                                         return !is_array($tagOptions) || !array_key_exists('route', $tagOptions);
                                     })
                                     ->thenInvalid('The "route" attribute is required for the child of "sylius_ui.twig_ux.live_component_tags".')

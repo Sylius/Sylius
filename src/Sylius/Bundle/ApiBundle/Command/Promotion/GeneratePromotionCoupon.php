@@ -17,16 +17,16 @@ use Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware;
 use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
 #[PromotionCodeAware]
-readonly class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstructionInterface
+class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstructionInterface
 {
     public function __construct(
-        private string $promotionCode,
-        private ?string $prefix = null,
-        private ?int $codeLength = null,
-        private ?string $suffix = null,
-        private ?int $amount = null,
-        private ?\DateTimeInterface $expiresAt = null,
-        private ?int $usageLimit = null,
+        protected readonly string $promotionCode,
+        protected readonly ?string $prefix = null,
+        protected readonly ?int $codeLength = null,
+        protected readonly ?string $suffix = null,
+        protected readonly ?int $amount = null,
+        protected readonly ?\DateTimeInterface $expiresAt = null,
+        protected readonly ?int $usageLimit = null,
     ) {
     }
 

@@ -28,7 +28,7 @@
         <service id="sylius.context.locale.storage_based" class="Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.storage.locale" />
-            <argument type="service" id="sylius.locale_provider" />
+            <argument type="service" id="sylius.provider.locale" />
             <tag name="sylius.context.locale" priority="-64" />
         </service>
 

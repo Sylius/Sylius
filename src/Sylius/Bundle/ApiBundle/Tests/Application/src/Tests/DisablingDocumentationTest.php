@@ -22,7 +22,7 @@ final class DisablingDocumentationTest extends ApiTestCase
 
     public function setUp(): void
     {
-        $this->setFixturesFiles([]);
+        $this->setFixturesFiles();
 
         $this->setUpTest();
     }

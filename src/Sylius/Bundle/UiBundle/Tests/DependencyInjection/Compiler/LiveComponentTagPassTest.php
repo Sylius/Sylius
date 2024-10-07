@@ -99,10 +99,10 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
         $liveComponent = new Definition();
         $liveComponent->addTag('sylius.live_component.ui', ['key' => 'foo', 'template' => 'bar']);
 
-        $this->setParameter('sylius_ui.twig_ux.live_component_tags',
+        $this->setParameter(
+            'sylius_ui.twig_ux.live_component_tags',
             [
-                'ui' =>
-                    [
+                'ui' => [
                         'expose_public_props' => false,
                         'attributes_var' => 'custom_attributes',
                         'default_action' => 'customAction',
@@ -135,7 +135,6 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
         );
         $this->assertContainerBuilderHasServiceDefinitionWithTag('my_live_component', 'controller.service_arguments');
     }
-
 
     public function testThrowingExceptionWhenKeyIsNotPresentOnLiveComponentTag(): void
     {

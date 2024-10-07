@@ -30,7 +30,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
 
         $this->load([]);
 
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.channel_collector', 2, true);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, true);
     }
 
     /** @test */
@@ -40,7 +40,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
 
         $this->load([]);
 
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.channel_collector', 2, false);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, false);
     }
 
     /** @test */
@@ -48,7 +48,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
     {
         $this->load(['debug' => true]);
 
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.channel_collector', 2, true);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, true);
     }
 
     /** @test */
@@ -56,7 +56,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
     {
         $this->load(['debug' => false]);
 
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.channel_collector', 2, false);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, false);
     }
 
     /** @test */
