@@ -15,16 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 class SendOrderConfirmation
 {
-    /** @var string */
-    public $orderToken;
-
-    public function __construct(string $orderToken)
+    public function __construct(public readonly string $orderToken)
     {
-        $this->orderToken = $orderToken;
-    }
-
-    public function orderToken(): string
-    {
-        return $this->orderToken;
     }
 }

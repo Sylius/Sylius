@@ -22,6 +22,8 @@ api_platform:
 
 sylius_api:
     enabled: '%env(bool:SYLIUS_API_ENABLED)%'
+    operations_to_remove:
+        - 'sylius_api_shop_currency_get_collection'
 
 framework:
     secret: "ch4mb3r0f5ecr3ts"

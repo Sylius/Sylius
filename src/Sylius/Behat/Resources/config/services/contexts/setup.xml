@@ -106,7 +106,7 @@
 
         <service id="sylius.behat.context.setup.locale" class="Sylius\Behat\Context\Setup\LocaleContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.locale_converter" />
+            <argument type="service" id="sylius.converter.locale" />
             <argument type="service" id="sylius.factory.locale" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.manager.locale" />

@@ -11,14 +11,18 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
         <service id="sylius.listener.zone_member_integrity" class="Sylius\Bundle\AddressingBundle\EventListener\ZoneMemberIntegrityListener">
             <argument type="service" id="request_stack" />
-            <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
-            <argument type="service" id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
+            <argument type="service" id="sylius.checker.zone_deletion" />
+            <argument type="service" id="sylius.checker.country_provinces_deletion" />
             <tag name="kernel.event_listener" event="sylius.zone.pre_delete" method="protectFromRemovingZone" />
             <tag name="kernel.event_listener" event="sylius.country.pre_update" method="protectFromRemovingProvinceWithinCountry" />
         </service>

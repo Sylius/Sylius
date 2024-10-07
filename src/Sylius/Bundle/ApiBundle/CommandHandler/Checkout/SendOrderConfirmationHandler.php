@@ -32,7 +32,7 @@ final readonly class SendOrderConfirmationHandler
     public function __invoke(SendOrderConfirmation $sendOrderConfirmation): void
     {
         /** @var OrderInterface $order */
-        $order = $this->orderRepository->findOneByTokenValue($sendOrderConfirmation->orderToken());
+        $order = $this->orderRepository->findOneByTokenValue($sendOrderConfirmation->orderToken);
         $email = $order->getCustomer()->getEmail();
         Assert::notNull($email);
 

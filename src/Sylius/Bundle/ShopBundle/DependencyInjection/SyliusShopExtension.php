@@ -20,12 +20,13 @@ use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusShopExtension extends Extension
+final class SyliusShopExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -38,6 +39,13 @@ final class SyliusShopExtension extends Extension
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
         $container->setAlias(LocaleSwitcherInterface::class, 'sylius.shop.locale_switcher');
 
+        if ($container->hasParameter('kernel.bundles')) {
+            $bundles = $container->getParameter('kernel.bundles');
+            if (array_key_exists('SyliusAdminBundle', $bundles)) {
+                $loader->load('services/integrations/sylius_admin.xml');
+            }
+        }
+
         $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
         $container->setParameter(
             'sylius_shop.product_grid.include_all_descendants',
@@ -45,6 +53,11 @@ final class SyliusShopExtension extends Extension
         );
 
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $this->prependSyliusThemeBundle($container);
     }
 
     private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container): void
@@ -103,6 +116,15 @@ final class SyliusShopExtension extends Extension
         return $checkoutRedirectListener;
     }
 
+    private function prependSyliusThemeBundle(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('sylius_theme')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
+    }
+
     private function configureOrderPay(array $config, ContainerBuilder $container): void
     {
         $container->setParameter('sylius_shop.order_pay.after_pay_route', $config['after_pay_route']);
@@ -112,5 +134,4 @@ final class SyliusShopExtension extends Extension
         $container->setParameter('sylius_shop.order_pay.retry_route', $config['retry_route']);
         $container->setParameter('sylius_shop.order_pay.retry_route_parameters', $config['retry_route_parameters']);
     }
-
 }

@@ -21,7 +21,7 @@
         </service>
 
         <service id="sylius.listener.locale" class="Sylius\Bundle\AdminBundle\EventListener\LocaleListener">
-            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+            <argument type="service" id="sylius.checker.locale_usage" />
 
             <tag name="kernel.event_listener" event="sylius.locale.pre_delete" method="preDelete" />
         </service>

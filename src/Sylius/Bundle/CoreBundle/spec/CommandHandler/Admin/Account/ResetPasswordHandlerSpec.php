@@ -37,11 +37,8 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
 
     function it_delegates_password_resetting(UserPasswordResetterInterface $userPasswordResetter): void
     {
-        $command = new ResetPassword('TOKEN');
-        $command->newPassword = 'newPassword';
-
         $userPasswordResetter->reset('TOKEN', 'newPassword')->shouldBeCalled();
 
-        $this->__invoke($command);
+        $this(new ResetPassword('TOKEN', 'newPassword'));
     }
 }

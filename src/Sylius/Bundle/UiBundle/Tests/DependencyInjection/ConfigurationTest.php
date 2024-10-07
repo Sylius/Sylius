@@ -350,7 +350,7 @@ final class ConfigurationTest extends TestCase
     {
         $this->assertConfigurationIsInvalid(
             [
-                ['twig_ux' => ['live_component_tags' => ['ui' => ['method' => 'get']]]]
+                ['twig_ux' => ['live_component_tags' => ['ui' => ['method' => 'get']]]],
             ],
             'The "route" attribute is required for the child of "sylius_ui.twig_ux.live_component_tags".',
         );
