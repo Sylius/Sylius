@@ -46,7 +46,7 @@ final class GenerateCouponsCommandTest extends KernelTestCase
         $kernel->getContainer()->set('sylius.repository.promotion', $this->promotionRepository);
 
         $this->couponGenerator = $this->createMock(PromotionCouponGeneratorInterface::class);
-        $kernel->getContainer()->set('sylius.promotion_coupon_generator', $this->couponGenerator);
+        $kernel->getContainer()->set('sylius.generator.promotion_coupon', $this->couponGenerator);
 
         $this->command = $application->find('sylius:promotion:generate-coupons');
         $this->commandTester = new CommandTester($this->command);

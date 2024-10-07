@@ -65,6 +65,6 @@ class PromotionCouponController extends ResourceController
 
     protected function getGenerator(): PromotionCouponGeneratorInterface
     {
-        return $this->container->get('sylius.promotion_coupon_generator');
+        return $this->container->get('sylius.generator.promotion_coupon');
     }
 }

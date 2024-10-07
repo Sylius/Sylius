@@ -88,7 +88,7 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartItemType" priority="100" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType" priority="100" />
+            <tag name="form.type_extension" extended-type="sylius.form.type.catalog_promotion" priority="100" />
         </service>
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
             <argument type="service" id="Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator" />
