@@ -85,7 +85,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.context.currency" />
-            <argument type="service" id="sylius.currency_converter" />
+            <argument type="service" id="sylius.converter.currency" />
 
             <tag
                 name="sylius.twig_component"
