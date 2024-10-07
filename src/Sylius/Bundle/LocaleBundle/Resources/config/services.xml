@@ -52,7 +52,7 @@
             <argument type="service" id="sylius.provider.locale" />
             <tag name="sylius.context.locale" priority="32" />
         </service>
-        <service id="sylius.context.locale.request_based" alias="Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext" />
+        <service id="sylius.context.locale.request_header_based" alias="Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext" />
 
         <service id="sylius.locale_collection_provider" class="Sylius\Component\Locale\Provider\LocaleCollectionProvider">
             <argument type="service" id="sylius.repository.locale" />

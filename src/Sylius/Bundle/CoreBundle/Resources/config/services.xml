@@ -159,7 +159,7 @@
         </service>
         <service id="Sylius\Component\Core\Customer\OrderAddressesSaverInterface" alias="sylius.customer_order_addresses_saver" />
 
-        <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.order_item_quantity_modifier" decoration-priority="256">
+        <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.modifier.order_item_quantity" decoration-priority="256">
             <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
             <argument>%sylius.order_item_quantity_modifier.limit%</argument>
         </service>

@@ -127,7 +127,7 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.behat.clock" />
             <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface" />
