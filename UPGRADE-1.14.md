@@ -52,7 +52,7 @@
     | `sylius.currency_converter`                                                    | `sylius.converter.currency`                                                         |
     | `sylius.currency_name_converter`                                               | `sylius.converter.currency_name`                                                    |
     | **InventoryBundle**                                                            |                                                                                     |
-   | `sylius.availability_checker.default`                                          | `sylius.availability_checker`                                                       |
+    | `sylius.availability_checker.default`                                          | `sylius.availability_checker`                                                       |
     | **LocaleBundle**                                                               |                                                                                     |
     | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`           | `sylius.context.locale.request_based`                                               |
     | `sylius.locale_collection_provider`                                            | `sylius.provider.locale_collection`                                                 |
@@ -71,6 +71,7 @@
     | `sylius.adjustments_aggregator`                                                | `sylius.aggregator.adjustments_by_label`                                            |
     | `sylius.expired_carts_remover`                                                 | `sylius.remover.expired_carts`                                                      |
     | `sylius.sequential_order_number_generator`                                     | `sylius.number_generator.sequential_order`                                          |
+    | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`          | `sylius.console.command.remove_expired_carts`                                       |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
