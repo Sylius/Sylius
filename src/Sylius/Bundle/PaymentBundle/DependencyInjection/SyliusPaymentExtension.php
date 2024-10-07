@@ -34,7 +34,7 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
         $container->setParameter('sylius.gateway_config.validation_groups', $config['gateway_config']['validation_groups']);
-        $container->setParameter('sylius.payment_request.states_that_should_be_cancelled_when_payment_request_has_changed', $config['payment_request']['states_that_should_be_cancelled_when_payment_request_has_changed']);
+        $container->setParameter('sylius.payment_request.states_to_be_cancelled_when_payment_method_changed', $config['payment_request']['states_to_be_cancelled_when_payment_method_changed']);
 
         $this->registerAutoconfiguration($container);
     }

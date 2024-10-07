@@ -21,7 +21,7 @@
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument>%sylius.payment_request.states_that_should_be_cancelled_when_payment_request_has_changed%</argument>
+            <argument>%sylius.payment_request.states_to_be_cancelled_when_payment_method_changed%</argument>
         </service>
         <service id="Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface" alias="sylius.canceller.payment_request" />
     </services>

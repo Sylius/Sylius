@@ -87,7 +87,7 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([
             'payment_request' => [
-                'states_that_should_be_cancelled_when_payment_request_has_changed' => [
+                'states_to_be_cancelled_when_payment_method_changed' => [
                     PaymentRequestInterface::STATE_NEW,
                     PaymentRequestInterface::STATE_PROCESSING,
                 ],
@@ -95,7 +95,7 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasParameter(
-            'sylius.payment_request.states_that_should_be_cancelled_when_payment_request_has_changed',
+            'sylius.payment_request.states_to_be_cancelled_when_payment_method_changed',
             [PaymentRequestInterface::STATE_NEW, PaymentRequestInterface::STATE_PROCESSING],
         );
     }

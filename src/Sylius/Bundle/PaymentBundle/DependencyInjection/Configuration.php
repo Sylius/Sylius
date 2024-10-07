@@ -60,7 +60,7 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('payment_request')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('states_that_should_be_cancelled_when_payment_request_has_changed')
+                        ->arrayNode('states_to_be_cancelled_when_payment_method_changed')
                             ->scalarPrototype()->end()
                         ->end()
                     ->end()
