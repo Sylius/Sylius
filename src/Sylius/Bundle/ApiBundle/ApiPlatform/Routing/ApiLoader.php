@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the API Platform project.
+ * This file is part of the Sylius package.
  *
- * (c) Kévin Dunglas <dunglas@gmail.com>
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\RouteCollection;
 
+/** @see \ApiPlatform\Symfony\Routing\ApiLoader */
 final class ApiLoader implements LoaderInterface
 {
     /** @param array<array-key, string> $operationsToRemove */
