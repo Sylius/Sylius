@@ -25,7 +25,7 @@
             <argument type="service" id="sylius.repository.address"/>
             <argument type="service" id="sylius.repository.adjustment"/>
             <argument type="service" id="sylius.manager.order"/>
-            <argument type="service" id="sylius.product_variant_resolver"/>
+            <argument type="service" id="sylius.resolver.product_variant"/>
             <argument type="service" id="sylius.unpaid_orders_state_updater" />
         </service>
 
@@ -35,7 +35,7 @@
 
         <service id="Sylius\Behat\Context\Domain\ManagingPriceHistoryContext">
             <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
-            <argument type="service" id="sylius.product_variant_resolver" />
+            <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" />
         </service>
 

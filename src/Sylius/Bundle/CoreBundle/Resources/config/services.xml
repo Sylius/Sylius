@@ -121,7 +121,7 @@
 
         <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.order_item.inner" />
-            <argument type="service" id="sylius.product_variant_resolver" />
+            <argument type="service" id="sylius.resolver.product_variant" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
         <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">

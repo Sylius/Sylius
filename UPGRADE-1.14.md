@@ -77,7 +77,7 @@
     | `sylius.form.event_subscriber.product_variant_generator`                                 | `sylius.form.event_subscriber.generate_product_variants`                            |
     | `Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator` | `sylius.validator.product_variant_option_values_configuration`                      |
     | `sylius.validator.product_code_uniqueness`                                               | `sylius.validator.unique_simple_product_code`                                       |
-    | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`                      | `sylius.product_variant_resolver`                                                   |
+    | `sylius.product_variant_resolver.default`                                                | `sylius.resolver.product_variant.default`                                           |
     | `sylius.available_product_option_values_resolver`                                        | `sylius.resolver.available_product_option_values`                                   |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
@@ -92,6 +92,8 @@
     | `Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface` | `sylius.checker.country_provinces_deletion` |
     | **LocaleBundle**                                                               |                                             |
     | `Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface`               | `sylius.checker.locale_usage`               |
+    | **ProductBundle**                                                              |
+    | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`            | `sylius.resolver.product_variant`           |
     
     We recommend using the new aliases introduced in Sylius 1.14 to ensure compatibility with Sylius 2.0.
 
