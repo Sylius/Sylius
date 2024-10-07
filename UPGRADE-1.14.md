@@ -72,13 +72,13 @@
     | `sylius.expired_carts_remover`                                                           | `sylius.remover.expired_carts`                                                      |
     | `sylius.sequential_order_number_generator`                                               | `sylius.number_generator.sequential_order`                                          |
     | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`                    | `sylius.console.command.remove_expired_carts`                                       |
+    | **ProductBundle**                                                                        |
     | `sylius.form.type.sylius_product_associations`                                           | `sylius.form.type.product_associations`                                             |
     | `sylius.form.event_subscriber.product_variant_generator`                                 | `sylius.form.event_subscriber.generate_product_variants`                            |
     | `Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator` | `sylius.validator.product_variant_option_values_configuration`                      |
     | `sylius.validator.product_code_uniqueness`                                               | `sylius.validator.unique_simple_product_code`                                       |
     | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`                      | `sylius.product_variant_resolver`                                                   |
     | `sylius.available_product_option_values_resolver`                                        | `sylius.resolver.available_product_option_values`                                   |
-
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
