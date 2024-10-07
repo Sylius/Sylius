@@ -19,7 +19,7 @@
     <resource class="%sylius.model.channel.class%">
         <operations>
             <operation
-                name="test_channels_new_path_xml"
+                name="test_channel_new_path_xml"
                 class="ApiPlatform\Metadata\GetCollection"
                 uriTemplate="/shop/channels-new-path-xml"
             >
@@ -34,7 +34,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation name="sylius_api_shop_channel_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/channels/new/{code}">
+            <operation name="sylius_api_shop_channel_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/channels/new-xml/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
