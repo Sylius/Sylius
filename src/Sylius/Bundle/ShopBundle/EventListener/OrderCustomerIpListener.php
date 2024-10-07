@@ -23,27 +23,32 @@ final class OrderCustomerIpListener
 {
     public function __construct(
         private readonly IpAssignerInterface $ipAssigner,
-        private readonly RequestStack $requestStack
+        private readonly RequestStack $requestStack,
     ) {
     }
 
     public function __invoke(Event|OrderInterface $event): void
     {
-        if ($event instanceof Event) {
-            $subject = $event->getSubject();
-            Assert::isInstanceOf($subject, OrderInterface::class);
-        }
-
-        if ($event instanceof OrderInterface) {
-            $subject = $event;
-        }
-
+        $order = $this->getOrder($event);
         $request = $this->requestStack->getMainRequest();
-
         if (null === $request) {
             return;
         }
 
-        $this->ipAssigner->assign($subject, $request);
+        $this->ipAssigner->assign($order, $request);
+    }
+
+    private function getOrder(Event|OrderInterface $event): OrderInterface
+    {
+        if ($event instanceof Event) {
+            $order = $event->getSubject();
+            Assert::isInstanceOf($order, OrderInterface::class);
+        }
+
+        if ($event instanceof OrderInterface) {
+            $order = $event;
+        }
+
+        return $order;
     }
 }

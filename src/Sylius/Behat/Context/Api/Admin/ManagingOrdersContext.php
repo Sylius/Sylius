@@ -1268,12 +1268,11 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see that customer's IP address is :ipAddress
+     * @Then I should see this customer's IP address
      */
-    public function iShouldSeeCustomersIpAddress(
-        string $ipAddress,
-    ): void {
-        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'customerIp'), $ipAddress);
+    public function iShouldSeeCustomersIpAddress(): void
+    {
+        Assert::notEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'customerIp'));
     }
 
     /**

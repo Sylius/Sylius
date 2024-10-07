@@ -890,7 +890,11 @@ final readonly class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->orderFactory->createNew();
 
-        $order->setCustomerWithAuthorization($customer);
+
+        $customer->getUser() === null
+            ? $order->setCustomer($customer)
+            : $order->setCustomerWithAuthorization($customer)
+        ;
         $order->setChannel($channel ?? $this->sharedStorage->get('channel'));
         $order->setLocaleCode($this->sharedStorage->get('locale')->getCode());
         $order->setCurrencyCode($order->getChannel()->getBaseCurrency()->getCode());

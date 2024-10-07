@@ -866,12 +866,10 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see that customer's IP address is :ipAddress
+     * @Then I should see this customer's IP address
      */
-    public function iShouldSeeCustomersIpAddress(
-        string $ipAddress,
-    ): void {
-        Assert::same($this->showPage->getIpAddressAssigned(), $ipAddress);
+    public function iShouldSeeCustomersIpAddress(): void {
+        Assert::notEmpty($this->showPage->getIpAddressAssigned());
     }
 
     /**

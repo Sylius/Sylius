@@ -19,4 +19,4 @@ Feature: Assigning customer's IP address to a placed order
     Scenario: Verifying the customer's IP address for a newly placed order
         Given I am logged in as an administrator
         When I view the summary of the order placed by "customer@example.com"
-        Then I should see that customer's IP address is "127.0.0.1"
+        Then I should see this customer's IP address

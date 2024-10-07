@@ -27,7 +27,7 @@ default:
                 - sylius.behat.context.transform.user
                 - sylius.behat.context.transform.zone
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
-                - sylius.behat.context.transform.customer    
+                - sylius.behat.context.transform.customer
 
                 - sylius.behat.context.setup.address
                 - sylius.behat.context.setup.admin_user
