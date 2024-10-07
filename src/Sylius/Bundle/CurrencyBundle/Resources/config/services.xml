@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="services/form.xml" />
     </imports>
@@ -25,9 +29,11 @@
             <argument type="service" id="sylius.repository.exchange_rate" />
         </service>
         <service id="Sylius\Component\Currency\Converter\CurrencyConverterInterface" alias="sylius.currency_converter" />
+        <service id="sylius.converter.currency" alias="sylius.currency_converter" />
 
         <service id="sylius.currency_name_converter" class="Sylius\Component\Currency\Converter\CurrencyNameConverter" />
         <service id="Sylius\Component\Currency\Converter\CurrencyNameConverterInterface" alias="sylius.currency_name_converter" />
+        <service id="sylius.converter.currency_name" alias="sylius.currency_name_converter" />
 
         <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension" public="false">
             <tag name="twig.extension" />

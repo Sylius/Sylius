@@ -188,6 +188,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
+        "gedmo/doctrine-extensions": "^3.17.0",
         "stof/doctrine-extensions-bundle": "1.8.0"
     },
     "require-dev": {

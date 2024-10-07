@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -21,10 +25,12 @@
 
         <service id="sylius.money_formatter" class="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter" />
         <service id="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface" alias="sylius.money_formatter" />
+        <service id="sylius.formatter.money" alias="sylius.money_formatter" />
 
         <service id="sylius.twig.extension.money" class="Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension" public="false">
-            <argument type="service" id="sylius.money_formatter" />
+            <argument type="service" id="sylius.formatter.money" />
             <tag name="twig.extension" />
         </service>
+        <service id="sylius.twig.extension.format_money" alias="sylius.twig.extension.money" />
     </services>
 </container>
