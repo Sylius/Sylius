@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Behat\Service\Converter;
 
-use ApiPlatform\Api\IriConverterInterface as BaseIriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface as BaseIriConverterInterface;
 use ApiPlatform\Api\UrlGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use PhpSpec\ObjectBehavior;

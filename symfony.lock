@@ -427,9 +427,6 @@
             "ref": "c276fa48d4713de91eb410289b3b1834acb7e403"
         }
     },
-    "polishsymfonycommunity/symfony-mocker-container": {
-        "version": "v1.0.2"
-    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -525,9 +522,6 @@
             "version": "1.2",
             "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
         }
-    },
-    "stripe/stripe-php": {
-        "version": "v4.13.0"
     },
     "sylius-labs/association-hydrator": {
         "version": "v1.1.0"

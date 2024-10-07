@@ -38,26 +38,6 @@
                 <filters>
                     <filter>sylius_api.search_filter.admin.product_image</filter>
                 </filters>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="imageFilter">
-                                    <values>
-                                        <value name="name">imageFilter</value>
-                                        <value name="in">query</value>
-                                        <value name="description">Provide one of supported image liip imagine filters</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -78,26 +58,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="imageFilter">
-                                    <values>
-                                        <value name="name">imageFilter</value>
-                                        <value name="in">query</value>
-                                        <value name="description">Provide one of supported image liip imagine filters</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -163,79 +123,6 @@
                 <inputFormats>
                     <format name="multipart">multipart/form-data</format>
                 </inputFormats>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="code">
-                                    <values>
-                                        <value name="name">code</value>
-                                        <value name="in">path</value>
-                                        <value name="required">true</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                        <value name="requestBody">
-                            <values>
-                                <value name="content">
-                                    <values>
-                                        <value name="multipart/form-data">
-                                            <values>
-                                                <value name="schema">
-                                                    <values>
-                                                        <value name="type">object</value>
-                                                        <value name="properties">
-                                                            <values>
-                                                                <value name="file">
-                                                                    <values>
-                                                                        <value name="type">string</value>
-                                                                        <value name="format">binary</value>
-                                                                    </values>
-                                                                </value>
-                                                                <value name="type">
-                                                                    <values>
-                                                                        <value name="type">string</value>
-                                                                    </values>
-                                                                </value>
-                                                                <value name="productVariants[]">
-                                                                    <values>
-                                                                        <value name="type">array</value>
-                                                                        <value name="items">
-                                                                            <values>
-                                                                                <value name="type">string</value>
-                                                                                <value name="format">iri-reference</value>
-                                                                            </values>
-                                                                        </value>
-                                                                    </values>
-                                                                </value>
-                                                            </values>
-                                                        </value>
-                                                    </values>
-                                                </value>
-                                                <value name="encoding">
-                                                    <values>
-                                                        <value name="productVariants[]">
-                                                            <values>
-                                                                <value name="style">form</value>
-                                                                <value name="explode">true</value>
-                                                            </values>
-                                                        </value>
-                                                    </values>
-                                                </value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                    </values>
-                </openapiContext>
                 <normalizationContext>
                     <values>
                         <value name="groups">
