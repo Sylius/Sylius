@@ -35,65 +35,107 @@
 
 1. Aliases for the following services have been introduced to standardize service IDs and will replace the incorrect IDs in Sylius 2.0:
     
-    | Old ID                                                                                   | New ID                                                                              |
-    |------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-    | **AttributeBundle**                                                                      |                                                                                     |
-    | `sylius.form.type.attribute_type.select.choices_collection`                              | `sylius.form.type.attribute_type.configuration.select_attribute_choices_collection` |
-    | `sylius.attribute_type.select.value.translations`                                        | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations` |
-    | `sylius.validator.valid_text_attribute`                                                  | `sylius.validator.valid_text_attribute_configuration`                               |
-    | `sylius.validator.valid_select_attribute`                                                | `sylius.validator.valid_select_attribute_configuration`                             |
-    | **AddressingBundle**                                                                     |                                                                                     |
-    | `sylius.province_naming_provider`                                                        | `sylius.provider.province_naming`                                                   |
-    | `sylius.zone_matcher`                                                                    | `sylius.matcher.zone`                                                               |
-    | `sylius.address_comparator`                                                              | `sylius.comparator.address`                                                         |
-    | **ChannelBundle**                                                                        |                                                                                     |
-    | `sylius.channel_collector`                                                               | `sylius.collector.channel`                                                          |
-    | **CurrencyBundle**                                                                       |                                                                                     |
-    | `sylius.currency_converter`                                                              | `sylius.converter.currency`                                                         |
-    | `sylius.currency_name_converter`                                                         | `sylius.converter.currency_name`                                                    |
-    | **InventoryBundle**                                                                      |                                                                                     |
-    | `sylius.availability_checker.default`                                                    | `sylius.availability_checker`                                                       |
-    | **LocaleBundle**                                                                         |                                                                                     |
-    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`                     | `sylius.context.locale.request_header_based`                                        |
-    | `sylius.locale_collection_provider`                                                      | `sylius.provider.locale_collection`                                                 |
-    | `sylius.locale_collection_provider.cahced`                                               | `sylius.provider.locale_collection.cached`                                          |
-    | `sylius.locale_provider`                                                                 | `sylius.provider.locale`                                                            |
-    | `sylius.locale_converter`                                                                | `sylius.converter.locale`                                                           |
-    | `Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener`           | `sylius.doctrine.listener.locale_modification`                                      |
-    | **MoneyBundle**                                                                          |                                                                                     |
-    | `sylius.twig.extension.convert_amount`                                                   | `sylius.twig.extension.convert_money`                                               |
-    | `sylius.twig.extension.money`                                                            | `sylius.twig.extension.format_money`                                                |
-    | `sylius.money_formatter`                                                                 | `sylius.formatter.money`                                                            |
-    | **OrderBundle**                                                                          |
-    | `sylius.order_modifier`                                                                  | `sylius.modifier.order`                                                             |
-    | `sylius.order_item_quantity_modifier`                                                    | `sylius.modifier.order_item_quantity`                                               |
-    | `sylius.order_number_assigner`                                                           | `sylius.number_assigner.order_number`                                               |
-    | `sylius.adjustments_aggregator`                                                          | `sylius.aggregator.adjustments_by_label`                                            |
-    | `sylius.expired_carts_remover`                                                           | `sylius.remover.expired_carts`                                                      |
-    | `sylius.sequential_order_number_generator`                                               | `sylius.number_generator.sequential_order`                                          |
-    | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`                    | `sylius.console.command.remove_expired_carts`                                       |
-    | **ProductBundle**                                                                        |
-    | `sylius.form.type.sylius_product_associations`                                           | `sylius.form.type.product_associations`                                             |
-    | `sylius.form.event_subscriber.product_variant_generator`                                 | `sylius.form.event_subscriber.generate_product_variants`                            |
-    | `Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator` | `sylius.validator.product_variant_option_values_configuration`                      |
-    | `sylius.validator.product_code_uniqueness`                                               | `sylius.validator.unique_simple_product_code`                                       |
-    | `sylius.product_variant_resolver.default`                                                | `sylius.resolver.product_variant.default`                                           |
-    | `sylius.available_product_option_values_resolver`                                        | `sylius.resolver.available_product_option_values`                                   |
+    | Old ID                                                                                                     | New ID                                                                               |
+    |------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+    | **AttributeBundle**                                                                                        |                                                                                      |
+    | `sylius.form.type.attribute_type.select.choices_collection`                                                | `sylius.form.type.attribute_type.configuration.select_attribute_choices_collection`  |
+    | `sylius.attribute_type.select.value.translations`                                                          | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations`  |
+    | `sylius.validator.valid_text_attribute`                                                                    | `sylius.validator.valid_text_attribute_configuration`                                |
+    | `sylius.validator.valid_select_attribute`                                                                  | `sylius.validator.valid_select_attribute_configuration`                              |
+    | **AddressingBundle**                                                                                       |                                                                                      |
+    | `sylius.province_naming_provider`                                                                          | `sylius.provider.province_naming`                                                    |
+    | `sylius.zone_matcher`                                                                                      | `sylius.matcher.zone`                                                                |
+    | `sylius.address_comparator`                                                                                | `sylius.comparator.address`                                                          |
+    | **ChannelBundle**                                                                                          |                                                                                      |
+    | `sylius.channel_collector`                                                                                 | `sylius.collector.channel`                                                           |
+    | **CurrencyBundle**                                                                                         |                                                                                      |
+    | `sylius.currency_converter`                                                                                | `sylius.converter.currency`                                                          |
+    | `sylius.currency_name_converter`                                                                           | `sylius.converter.currency_name`                                                     |
+    | **InventoryBundle**                                                                                        |                                                                                      |
+    | `sylius.availability_checker.default`                                                                      | `sylius.availability_checker`                                                        |
+    | **LocaleBundle**                                                                                           |                                                                                      |
+    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`                                       | `sylius.context.locale.request_header_based`                                         |
+    | `sylius.locale_collection_provider`                                                                        | `sylius.provider.locale_collection`                                                  |
+    | `sylius.locale_collection_provider.cahced`                                                                 | `sylius.provider.locale_collection.cached`                                           |
+    | `sylius.locale_provider`                                                                                   | `sylius.provider.locale`                                                             |
+    | `sylius.locale_converter`                                                                                  | `sylius.converter.locale`                                                            |
+    | `Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener`                             | `sylius.doctrine.listener.locale_modification`                                       |
+    | **MoneyBundle**                                                                                            |                                                                                      |
+    | `sylius.twig.extension.convert_amount`                                                                     | `sylius.twig.extension.convert_money`                                                |
+    | `sylius.twig.extension.money`                                                                              | `sylius.twig.extension.format_money`                                                 |
+    | `sylius.money_formatter`                                                                                   | `sylius.formatter.money`                                                             |
+    | **OrderBundle**                                                                                            |
+    | `sylius.order_modifier`                                                                                    | `sylius.modifier.order`                                                              |
+    | `sylius.order_item_quantity_modifier`                                                                      | `sylius.modifier.order_item_quantity`                                                |
+    | `sylius.order_number_assigner`                                                                             | `sylius.number_assigner.order_number`                                                |
+    | `sylius.adjustments_aggregator`                                                                            | `sylius.aggregator.adjustments_by_label`                                             |
+    | `sylius.expired_carts_remover`                                                                             | `sylius.remover.expired_carts`                                                       |
+    | `sylius.sequential_order_number_generator`                                                                 | `sylius.number_generator.sequential_order`                                           |
+    | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`                                      | `sylius.console.command.remove_expired_carts`                                        |
+    | **ProductBundle**                                                                                          |
+    | `sylius.form.type.sylius_product_associations`                                                             | `sylius.form.type.product_associations`                                              |
+    | `sylius.form.event_subscriber.product_variant_generator`                                                   | `sylius.form.event_subscriber.generate_product_variants`                             |
+    | `Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator`                   | `sylius.validator.product_variant_option_values_configuration`                       |
+    | `sylius.validator.product_code_uniqueness`                                                                 | `sylius.validator.unique_simple_product_code`                                        |
+    | `sylius.product_variant_resolver.default`                                                                  | `sylius.resolver.product_variant.default`                                            |
+    | `sylius.available_product_option_values_resolver`                                                          | `sylius.resolver.available_product_option_values`                                    |
+   | **PromotionBundle**                                                                                        |                                                                                      |
+   | `Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand`                                     | `sylius.console.command.generate_coupons`                                            |
+   | `sylius.promotion_coupon_duration_eligibility_checker`                                                     | `sylius.eligibility_checker.promotion_coupon.duration`                               |
+   | `sylius.promotion_coupon_usage_limit_eligibility_checker`                                                  | `sylius.eligibility_checker.promotion_coupon.usage_limit`                            |
+   | `sylius.promotion_coupon_eligibility_checker`                                                              | `sylius.eligibility_checker.promotion_coupon`                                        |
+   | `sylius.promotion_duration_eligibility_checker`                                                            | `sylius.eligibility_checker.promotion.duration`                                      |
+   | `sylius.promotion_usage_limit_eligibility_checker`                                                         | `sylius.eligibility_checker.promotion.usage_limit`                                   |
+   | `sylius.promotion_subject_coupon_eligibility_checker`                                                      | `sylius.eligibility_checker.promotion.subject_coupon`                                |
+   | `sylius.promotion_rules_eligibility_checker`                                                               | `sylius.eligibility_checker.promotion.rules`                                         |
+   | `sylius.promotion_archival_eligibility_checker`                                                            | `sylius.eligibility_checker.promotion.archival`                                      |
+   | `sylius.promotion_eligibility_checker`                                                                     | `sylius.eligibility_checker.promotion`                                               |
+   | `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType`                                             | `sylius.form.type.catalog_promotion`                                                 |
+   | `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType`                                        | `sylius.form.type.catalog_promotion_scope`                                           |
+   | `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType` | `sylius.form.type.catalog_promotion_action.percentage_discount_action_configuration` |
+   | `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType`                                       | `sylius.form.type.catalog_promotion_action`                                          |
+   | `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType`                                  | `sylius.form.type.catalog_promotion_translation`                                     |
+   | `Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType`                                         | `sylius.form.type.promotion_translation`                                             |
+   | `sylius.form.type.promotion_action.collection`                                                             | `sylius.form.type.promotion_action_collection`                                       |
+   | `sylius.form.type.promotion_rule.collection`                                                               | `sylius.form.type.promotion_rule_collection`                                         |
+   | `sylius.validator.date_range`                                                                              | `sylius.validator.promotion_date_range`                                              |
+   | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator`                                  | `sylius.validator.catalog_promotion_action`                                          |
+   | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionGroupValidator`                             | `sylius.validator.catalog_promotion_action_group`                                    |
+   | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionTypeValidator`                              | `sylius.validator.catalog_promotion_action_type`                                     |
+   | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeValidator`                                   | `sylius.validator.catalog_promotion_scope`                                           |
+   | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeGroupValidator`                              | `sylius.validator.catalog_promotion_scope_group`                                     |
+   | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeTypeValidator`                               | `sylius.validator.catalog_promotion_scope_type`                                      |
+   | `Sylius\Bundle\PromotionBundle\Validator\PromotionActionGroupValidator`                                    | `sylius.validator.promotion_action_group`                                            |
+   | `Sylius\Bundle\PromotionBundle\Validator\PromotionActionTypeValidator`                                     | `sylius.validator.promotion_action_type`                                             |
+   | `Sylius\Bundle\PromotionBundle\Validator\PromotionRuleGroupValidator`                                      | `sylius.validator.promotion_role_group`                                              |
+   | `Sylius\Bundle\PromotionBundle\Validator\PromotionRuleTypeValidator`                                       | `sylius.validator.promotion_role_type`                                               |
+   | `Sylius\Bundle\PromotionBundle\Validator\PromotionNotCouponBasedValidator`                                 | `sylius.validator.promotion_not_coupon_based`                                        |
+   | `sylius.promotion_processor`                                                                               | `sylius.processor.promotion`                                                         |
+   | `sylius.promotion_applicator`                                                                              | `sylius.action.applicator.promotion`                                                 |
+   | `sylius.registry_promotion_rule_checker`                                                                   | `sylius.registry.promotion.rule_checker`                                             |
+   | `sylius.form_registry.promotion_rule_checker`                                                              | `sylius.form.registry.promotion.rule_checker`                                        |
+   | `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion.action`                                                   |
+   | `sylius.form_registry.promotion_action`                                                                    | `sylius.form.registry.promotion.action`                                              |
+   | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
+   | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
+   | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
 1. For the following services, new aliases have been added in Sylius 1.14.
    These aliases will become the primary services IDs in Sylius 2.0, while the current service IDs will be converted into aliases:
     
-    | Current ID                                                                     | New Alias                                   |
-    |--------------------------------------------------------------------------------|---------------------------------------------|
-    | **AddressingBundle**                                                           |                                             |
-    | `Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface`             | `sylius.checker.zone_deletion`              |
-    | `Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface` | `sylius.checker.country_provinces_deletion` |
-    | **LocaleBundle**                                                               |                                             |
-    | `Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface`               | `sylius.checker.locale_usage`               |
-    | **ProductBundle**                                                              |
-    | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`            | `sylius.resolver.product_variant`           |
+    | Current ID                                                                          | New Alias                                     |
+    |-------------------------------------------------------------------------------------|-----------------------------------------------|
+    | **AddressingBundle**                                                                |                                               |
+    | `Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface`                  | `sylius.checker.zone_deletion`                |
+    | `Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface`      | `sylius.checker.country_provinces_deletion`   |
+    | **LocaleBundle**                                                                    |                                               |
+    | `Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface`                    | `sylius.checker.locale_usage`                 |
+    | **ProductBundle**                                                                   |
+    | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`                 | `sylius.resolver.product_variant`             |
+    | **PromotionBundle**                                                                 |                                               |
+    | `Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface` | `sylius.provider.eligible_catalog_promotions` |
     
     We recommend using the new aliases introduced in Sylius 1.14 to ensure compatibility with Sylius 2.0.
 
