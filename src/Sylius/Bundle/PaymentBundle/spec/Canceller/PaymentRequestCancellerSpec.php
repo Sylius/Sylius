@@ -37,8 +37,10 @@ final class PaymentRequestCancellerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         ObjectManager $objectManager,
     ): void {
-        $paymentRequestRepository->findByPaymentIdAndStates(1, [PaymentRequestInterface::STATE_NEW, PaymentRequestInterface::STATE_PROCESSING])
-            ->willReturn([$paymentRequest1, $paymentRequest2]);
+        $paymentRequestRepository
+            ->findByPaymentIdAndStates(1, [PaymentRequestInterface::STATE_NEW, PaymentRequestInterface::STATE_PROCESSING])
+            ->willReturn([$paymentRequest1, $paymentRequest2])
+        ;
 
         $paymentRequest1->getMethod()->willReturn($paymentMethod1);
         $paymentMethod1->getCode()->willReturn('payment_method_with_different_code');

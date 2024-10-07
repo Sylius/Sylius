@@ -34,9 +34,7 @@ final class PaymentMethodChangeEventListenerTest extends TestCase
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $unitOfWork = $this->createMock(UnitOfWork::class);
 
-        $payment->expects($this->once())
-            ->method('getId')
-            ->willReturn(1);
+        $payment->expects($this->once())->method('getId')->willReturn(1);
 
         $newMethod->expects($this->once())
             ->method('getCode')

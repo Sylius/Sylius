@@ -13,6 +13,6 @@ jms_serializer:
 
 sylius_payment:
     payment_request:
-        states_that_should_be_cancelled_when_payment_request_has_changed:
+        states_to_be_cancelled_when_payment_method_changed:
             - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
             - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
