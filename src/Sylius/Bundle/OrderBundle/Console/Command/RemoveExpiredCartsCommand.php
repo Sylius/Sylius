@@ -66,7 +66,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
                 ExpiredCartsRemoverInterface::class,
                 self::class,
             );
-            $this->getContainer()->get('sylius.expired_carts_remover')->remove();
+            $this->getContainer()->get('sylius.remover.expired_carts')->remove();
         } else {
             $this->expiredCartsRemover->remove();
         }

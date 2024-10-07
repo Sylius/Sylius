@@ -66,7 +66,7 @@
 
         <service id="sylius.behat.context.domain.cart" class="Sylius\Behat\Context\Domain\CartContext">
             <argument type="service" id="sylius.manager.order" />
-            <argument type="service" id="sylius.expired_carts_remover" />
+            <argument type="service" id="sylius.remover.expired_carts" />
         </service>
 
         <service id="sylius.behat.context.domain.managing_shipping_methods" class="Sylius\Behat\Context\Domain\ManagingShippingMethodsContext">
