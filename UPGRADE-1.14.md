@@ -45,7 +45,7 @@
     | `sylius.zone_matcher`                                                          | `sylius.matcher.zone`                                                               |
     | `sylius.address_comparator`                                                    | `sylius.comparator.address`                                                         |
     | `sylius.channel_collector`                                                     | `sylius.collector.channel`                                                          |
-    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`           | `sylius.context.locale.request_based`                                               |
+    | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`           | `sylius.context.locale.request_header_based`                                        |
     | `sylius.locale_collection_provider`                                            | `sylius.provider.locale_collection`                                                 |
     | `sylius.locale_collection_provider.cahced`                                     | `sylius.provider.locale_collection.cached`                                          |
     | `sylius.locale_provider`                                                       | `sylius.provider.locale`                                                            |
