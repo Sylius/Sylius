@@ -141,21 +141,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader->load('services/integrations/hwi_oauth.xml');
     }
 
-    private function prependSyliusThemeBundle(ContainerBuilder $container, string $driver): void
-    {
-        if (!$container->hasExtension('sylius_theme')) {
-            return;
-        }
-
-        foreach ($container->getExtensions() as $name => $extension) {
-            if (in_array($name, self::$bundles, true)) {
-                $container->prependExtensionConfig($name, ['driver' => $driver]);
-            }
-        }
-
-        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
-    }
-
     private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
     {
         if (!$container->hasExtension('sylius_order')) {
