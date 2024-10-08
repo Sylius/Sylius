@@ -57,7 +57,6 @@
         <service id="sylius.registry.promotion.rule_checker" alias="sylius.registry_promotion_rule_checker" />
 
         <service id="sylius.form_registry.promotion_rule_checker" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
-        <service id="sylius.form.registry.promotion.rule_checker" alias="sylius.form_registry.promotion_rule_checker" />
 
         <service id="sylius.registry_promotion_action" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>Sylius\Component\Promotion\Action\PromotionActionCommandInterface</argument>
@@ -66,7 +65,6 @@
         <service id="sylius.registry.promotion.action" alias="sylius.registry_promotion_action" />
 
         <service id="sylius.form_registry.promotion_action" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
-        <service id="sylius.form.registry.promotion.action" alias="sylius.form_registry.promotion_action" />
 
         <service id="sylius.active_promotions_provider" class="Sylius\Component\Promotion\Provider\ActivePromotionsProvider">
             <argument type="service" id="sylius.repository.promotion" />
