@@ -3,6 +3,14 @@ import sys, os
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
+html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "https://docs.sylius.com")
+
+# Tell Jinja2 templates the build is running on Read the Docs
+if os.environ.get("READTHEDOCS", "") == "True":
+    if "html_context" not in globals():
+        html_context = {}
+    html_context["READTHEDOCS"] = True
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
@@ -21,8 +29,10 @@ copyright = u'2011-2024, Sylius Sp. z o.o.'
 version = ''
 release = ''
 exclude_patterns = ['_includes/*.rst']
-html_theme = 'sylius_rtd_theme'
+html_theme = "sylius_rtd_theme"
 html_theme_path = ["_themes"]
+html_context = html_context if 'html_context' in globals() else {}
+html_context['style'] = 'css/theme.css'
 html_favicon = 'favicon.ico'
 htmlhelp_basename = 'Syliusdoc'
 man_pages = [
