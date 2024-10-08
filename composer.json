@@ -48,7 +48,7 @@
         "fakerphp/faker": "^1.10",
         "friendsofphp/proxy-manager-lts": "^1.0.7",
         "friendsofsymfony/rest-bundle": "^3.0",
-        "gedmo/doctrine-extensions": "^3.2",
+        "gedmo/doctrine-extensions": "^3.17.1",
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "guzzlehttp/psr7": "^2.5",
         "jms/serializer-bundle": "^4.2",
@@ -192,8 +192,7 @@
         "lexik/jwt-authentication-bundle": "^2.18",
         "stof/doctrine-extensions-bundle": "1.8.0",
         "symfony/validator": "5.4.25",
-        "twig/twig": "3.9.0",
-        "gedmo/doctrine-extensions": "^3.17.0"
+        "twig/twig": "3.9.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
