@@ -16,7 +16,7 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\ApplyCatalogPromotionsOnVariantsHandler">
-            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
+            <argument type="service" id="sylius.provider.eligible_catalog_promotions" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplicatorInterface"/>
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionClearerInterface" />
