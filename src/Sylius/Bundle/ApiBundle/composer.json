@@ -46,9 +46,6 @@
         "symfony/webpack-encore-bundle": "^2.1",
         "theofidry/alice-data-fixtures": "^1.4"
     },
-    "conflict": {
-        "gedmo/doctrine-extensions": "^3.17.0"
-    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true

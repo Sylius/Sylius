@@ -68,12 +68,12 @@ sylius_grid:
                     options:
                         field: product.enabled
                 channel:
-                    type: entities
+                    type: entity
                     label: sylius.ui.channel
                     form_options:
                         class: "%sylius.model.channel.class%"
                     options:
-                        field: product.channels.id
+                        fields: [product.channels.id]
             actions:
                 main:
                     update_positions:
