@@ -4906,12 +4906,12 @@ parameters:
 			path: src/Sylius/Bundle/ReviewBundle/EventListener/ReviewChangeListener.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ReviewBundle\\\\EventListener\\\\ReviewChangeListener\\:\\:postRemove\\(\\) has no return type specified\\.$#"
+			message: "#^Method Sylius\\\\Bundle\\\\ReviewBundle\\\\EventListener\\\\ReviewChangeListener\\:\\:preRemove\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ReviewBundle/EventListener/ReviewChangeListener.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ReviewBundle\\\\EventListener\\\\ReviewChangeListener\\:\\:postRemove\\(\\) has parameter \\$args with generic class Doctrine\\\\Persistence\\\\Event\\\\LifecycleEventArgs but does not specify its types\\: TObjectManager$#"
+			message: "#^Method Sylius\\\\Bundle\\\\ReviewBundle\\\\EventListener\\\\ReviewChangeListener\\:\\:preRemove\\(\\) has parameter \\$args with generic class Doctrine\\\\Persistence\\\\Event\\\\LifecycleEventArgs but does not specify its types\\: TObjectManager$#"
 			count: 1
 			path: src/Sylius/Bundle/ReviewBundle/EventListener/ReviewChangeListener.php
 
