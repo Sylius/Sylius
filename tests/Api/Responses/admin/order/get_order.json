@@ -49,6 +49,7 @@
     "currencyCode": "USD",
     "localeCode": "en_US",
     "checkoutState": "completed",
+    "customerIp": null,
     "paymentState": "awaiting_payment",
     "shippingState": "ready",
     "tokenValue": "token",

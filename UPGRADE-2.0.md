@@ -42,6 +42,41 @@
     * `sylius.grid_driver.doctrine.phpcrodm`
     * `sylius.listener.api_postgresql_driver_exception_listener`
 
+* Aliases introduced in Sylius 1.14 have now become the primary service IDs in Sylius 2.0. The old service IDs have been removed, and all references must be updated accordingly:
+
+| Old ID                                                      | New ID                                                                              |
+|-------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| **AttributeBundle**                                         |                                                                                     |
+| `sylius.form.type.attribute_type.select.choices_collection` | `sylius.form.type.attribute_type.configuration.select_attribute_choices_collection` |
+| `sylius.attribute_type.select.value.translations`           | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations` |
+| `sylius.validator.valid_text_attribute`                     | `sylius.validator.valid_text_attribute_configuration`                               |
+| `sylius.validator.valid_select_attribute`                   | `sylius.validator.valid_select_attribute_configuration`                             |
+| **AddressingBundle**                                        |                                                                                     |
+| `sylius.province_naming_provider`                           | `sylius.provider.province_naming`                                                   |
+| `sylius.zone_matcher`                                       | `sylius.matcher.zone`                                                               |
+| `sylius.address_comparator`                                 | `sylius.comparator.address`                                                         |
+| **ChannelBundle**                                           |                                                                                     |
+| `sylius.channel_collector`                                  | `sylius.collector.channel`                                                          |
+| **CurrencyBundle**                                          |                                                                                     |
+| `sylius.currency_converter`                                 | `sylius.converter.currency`                                                         |
+| `sylius.currency_name_converter`                            | `sylius.converter.currency_name`                                                    |
+| **InventoryBundle**                                         |                                                                                     |
+| `sylius.availability_checker.default`                       | `sylius.availability_checker`                                                       |
+| **MoneyBundle**                                             |                                                                                     |
+| `sylius.twig.extension.convert_amount`                      | `sylius.twig.extension.convert_money`                                               |
+| `sylius.twig.extension.money`                               | `sylius.twig.extension.format_money`                                                |
+| `sylius.money_formatter`                                    | `sylius.formatter.money`                                                            |
+
+  The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
+
+* The following services had new aliases added in Sylius 1.14. In Sylius 2.0, these aliases have become the primary service IDs, and the old service IDs remain as aliases:
+
+| Current ID                                                                     | New Alias                                   | 
+|--------------------------------------------------------------------------------|---------------------------------------------|
+| **AddressingBundle**                                                           |                                             |
+| `Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface`             | `sylius.checker.zone_deletion`              |
+| `Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface` | `sylius.checker.country_provinces_deletion` |
+
 * The following parameters were removed:
 
     * `sylius.mongodb_odm.repository.class`
@@ -327,6 +362,37 @@
     +       private AdjustmentsAggregatorInterface $adjustmentsAggregator,
         )
     ```
+
+## Grids
+
+The experimental `entities` filter has been removed. It has been replaced by the generic `entity` one.
+
+```diff
+sylius_grid:
+    grids:
+        # ...
+        sylius_admin_catalog_promotion:
+            # ...
+            filters:
+                channel:
+-                   type: entities
++                   type: entity
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+-                       field: product.channels.id
++                       fields: [product.channels.id]
+```
+
+The following service has been removed:
+
+    - sylius.grid_filter.entities
+
+The following classes have been removed:
+
+    - Sylius\Component\Core\Grid\Filter\EntitiesFilter
+    - Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType
 
 ## Password Encoder & Salt
 The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.

@@ -2,20 +2,11 @@
 # (c) Sylius Sp. z o.o.
 
 imports:
-    - { resource: "@SyliusAddressingBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusAttributeBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusChannelBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusCurrencyBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusCustomerBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusInventoryBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusLocaleBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusOrderBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusProductBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPromotionBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShippingBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusTaxationBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusTaxonomyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusUserBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 

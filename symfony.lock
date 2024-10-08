@@ -203,21 +203,6 @@
     "instaclick/php-webdriver": {
         "version": "1.4.7"
     },
-    "jms/metadata": {
-        "version": "1.7.0"
-    },
-    "jms/serializer": {
-        "version": "1.14.1"
-    },
-    "jms/serializer-bundle": {
-        "version": "2.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.0",
-            "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
-        }
-    },
     "knplabs/gaufrette": {
         "version": "v0.8.3"
     },

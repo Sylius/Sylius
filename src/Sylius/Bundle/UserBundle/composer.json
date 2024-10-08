@@ -53,7 +53,6 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.3.1",
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
-        "jms/serializer-bundle": "^5.0",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",

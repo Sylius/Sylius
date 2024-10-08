@@ -42,15 +42,15 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.order_modifier" />
+            <argument type="service" id="sylius.modifier.order" />
             <argument type="service" id="sylius.factory.order_item" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">
             <argument type="service" id="sylius.repository.order_item" />
-            <argument type="service" id="sylius.order_modifier" />
+            <argument type="service" id="sylius.modifier.order" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
@@ -109,7 +109,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler">
             <argument type="service" id="sylius.repository.order_item" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>

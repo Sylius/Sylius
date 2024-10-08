@@ -398,7 +398,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'cancel_order' => '[data-test-cancel-order]',
             'currency' => '[data-test-currency]',
             'customer_email' => '[data-test-customer] [data-test-email]',
-            'ip_address' => '#ipAddress',
+            'ip_address' => '[data-test-ip-address]',
             'item' => '[data-test-item="%name%"]',
             'items_total' => '[data-test-items-total]',
             'notes' => '[data-test-notes]',

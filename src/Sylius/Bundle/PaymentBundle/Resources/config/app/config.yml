@@ -4,13 +4,6 @@
 imports:
     - { resource: "@SyliusPaymentBundle/Resources/config/app/messenger.yaml" }
 
-jms_serializer:
-    metadata:
-        directories:
-            sylius-payment:
-                namespace_prefix: "Sylius\\Component\\Payment"
-                path: "@SyliusPaymentBundle/Resources/config/serializer"
-
 sylius_payment:
     payment_request:
         states_to_be_cancelled_when_payment_method_changed:

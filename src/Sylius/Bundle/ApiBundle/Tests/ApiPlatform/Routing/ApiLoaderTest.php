@@ -25,7 +25,7 @@ final class ApiLoaderTest extends TestCase
 {
     use ProphecyTrait;
 
-    private ObjectProphecy|LoaderInterface $baseApiLoader;
+    private LoaderInterface|ObjectProphecy $baseApiLoader;
 
     private LoaderInterface $apiLoader;
 
@@ -49,7 +49,7 @@ final class ApiLoaderTest extends TestCase
     }
 
     /** @test */
-    function it_removes_routes_from_route_collection_loaded_by_base_api_loader(): void
+    public function it_removes_routes_from_route_collection_loaded_by_base_api_loader(): void
     {
         $routeCollection = $this->prophesize(RouteCollection::class);
 
@@ -66,7 +66,7 @@ final class ApiLoaderTest extends TestCase
     }
 
     /** @test */
-    function it_uses_base_api_loader_for_supports_method(): void
+    public function it_uses_base_api_loader_for_supports_method(): void
     {
         $this->baseApiLoader->supports('.', 'api_platform')->willReturn(true);
 
@@ -74,7 +74,7 @@ final class ApiLoaderTest extends TestCase
     }
 
     /** @test */
-    function it_uses_base_api_loader_to_get_resolver(): void
+    public function it_uses_base_api_loader_to_get_resolver(): void
     {
         $loaderResolver = $this->prophesize(LoaderResolverInterface::class);
 
@@ -84,7 +84,7 @@ final class ApiLoaderTest extends TestCase
     }
 
     /** @test */
-    function it_uses_base_api_loader_to_set_resolver(): void
+    public function it_uses_base_api_loader_to_set_resolver(): void
     {
         $loaderResolver = $this->prophesize(LoaderResolverInterface::class);
 
