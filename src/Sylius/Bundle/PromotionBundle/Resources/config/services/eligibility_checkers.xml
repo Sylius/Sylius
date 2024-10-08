@@ -19,71 +19,62 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.promotion_coupon_duration_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion_coupon.duration"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponDurationEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion_coupon.duration" alias="sylius.promotion_coupon_duration_eligibility_checker" />
 
-        <service id="sylius.promotion_coupon_usage_limit_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion_coupon.usage_limit"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponUsageLimitEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion_coupon.usage_limit" alias="sylius.promotion_coupon_usage_limit_eligibility_checker" />
 
-        <service id="sylius.promotion_coupon_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion_coupon"
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionCouponEligibilityChecker">
             <argument type="collection" />
         </service>
-        <service id="sylius.eligibility_checker.promotion_coupon" alias="sylius.promotion_coupon_eligibility_checker" />
-        <service id="sylius.eligibility_checker.promotion_coupon.composite" alias="sylius.promotion_coupon_eligibility_checker" />
-        <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface" alias="sylius.promotion_coupon_eligibility_checker" />
+        <service id="sylius.eligibility_checker.promotion_coupon.composite" alias="sylius.eligibility_checker.promotion_coupon" />
+        <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface" alias="sylius.eligibility_checker.promotion_coupon" />
 
-        <service id="sylius.promotion_duration_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion.duration"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionDurationEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion.duration" alias="sylius.promotion_duration_eligibility_checker" />
 
-        <service id="sylius.promotion_usage_limit_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion.usage_limit"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion.usage_limit" alias="sylius.promotion_usage_limit_eligibility_checker" />
 
-        <service id="sylius.promotion_subject_coupon_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion.subject_coupon"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionSubjectCouponEligibilityChecker"
                  public="false">
             <argument type="service" id="sylius.eligibility_checker.promotion_coupon" />
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion.subject_coupon" alias="sylius.promotion_subject_coupon_eligibility_checker" />
 
-        <service id="sylius.promotion_rules_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion.rules"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionRulesEligibilityChecker"
                  public="false">
             <argument type="service" id="sylius.registry.promotion.rule_checker" />
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion.rules" alias="sylius.promotion_rules_eligibility_checker" />
 
-        <service id="sylius.promotion_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion"
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker">
             <argument type="collection" />
         </service>
-        <service id="sylius.eligibility_checker.promotion" alias="sylius.promotion_eligibility_checker" />
-        <service id="sylius.eligibility_checker.promotion.composite" alias="sylius.promotion_eligibility_checker" />
-        <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface" alias="sylius.promotion_eligibility_checker" />
+        <service id="sylius.eligibility_checker.promotion.composite" alias="sylius.eligibility_checker.promotion" />
+        <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface" alias="sylius.eligibility_checker.promotion" />
 
-        <service id="sylius.promotion_archival_eligibility_checker"
+        <service id="sylius.eligibility_checker.promotion.archival"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionArchivalEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion.archival" alias="sylius.promotion_archival_eligibility_checker" />
     </services>
 </container>

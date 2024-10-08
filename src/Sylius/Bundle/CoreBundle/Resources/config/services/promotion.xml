@@ -25,7 +25,7 @@
         </service>
         <service id="Sylius\Component\Core\Factory\PromotionRuleFactoryInterface" alias="sylius.custom_factory.promotion_rule" />
 
-        <service id="sylius.active_promotions_provider" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
+        <service id="sylius.provider.active_promotions" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
             <argument type="service" id="sylius.repository.promotion" />
         </service>
 
