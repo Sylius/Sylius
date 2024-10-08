@@ -890,7 +890,6 @@ final readonly class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->orderFactory->createNew();
 
-
         $customer->getUser() === null
             ? $order->setCustomer($customer)
             : $order->setCustomerWithAuthorization($customer)
