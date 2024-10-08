@@ -3,7 +3,7 @@ twig_hooks:
         'sylius_admin.product_variant.create.content':
             form:
                 template: '@SyliusAdmin/product_variant/form.html.twig'
-                    
+
         'sylius_admin.product_variant.create.content.header':
             breadcrumbs:
                 template: '@SyliusAdmin/product_variant/form/content/create/header/breadcrumbs.html.twig'
@@ -11,6 +11,7 @@ twig_hooks:
         'sylius_admin.product_variant.create.content.form':
             side_navigation:
                 template: '@SyliusAdmin/product_variant/form/side_navigation.html.twig'
+                priority: 1
             sections:
                 template: '@SyliusAdmin/product_variant/form/sections.html.twig'
 
