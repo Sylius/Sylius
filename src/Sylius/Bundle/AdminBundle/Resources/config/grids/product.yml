@@ -55,12 +55,12 @@ sylius_grid:
                     type: boolean
                     label: sylius.ui.enabled
                 channel:
-                    type: entities
+                    type: entity
                     label: sylius.ui.channel
                     form_options:
                         class: "%sylius.model.channel.class%"
                     options:
-                        field: "channels.id"
+                        fields: [channels.id]
                 taxon:
                     type: ux_translatable_autocomplete
                     label: sylius.ui.taxon

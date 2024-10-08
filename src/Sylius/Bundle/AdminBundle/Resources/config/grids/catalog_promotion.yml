@@ -79,12 +79,12 @@ sylius_grid:
                     options:
                         fields: [name, code]
                 channel:
-                    type: entities
+                    type: entity
                     label: sylius.ui.channel
                     form_options:
                         class: "%sylius.model.channel.class%"
                     options:
-                        field: channels.id
+                        fields: [channels.id]
                 startDate:
                     type: date
                     label: sylius.ui.start_date
