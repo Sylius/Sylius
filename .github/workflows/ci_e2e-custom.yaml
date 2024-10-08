@@ -16,7 +16,7 @@ permissions:
 jobs:
     behat-no-js-unstable-dependencies:
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }}, Mailer ${{ matrix.mailer }} (Unstable Dependencies)"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }} (Unstable Dependencies)"
         timeout-minutes: 45
         continue-on-error: true
         strategy:
@@ -25,9 +25,8 @@ jobs:
                 php: ["8.2"]
                 symfony: ["^6.4"]
                 mysql: ["8.0"]
-                resource: ["^1.12@alpha"]
-                grid: ["^1.13@alpha"]
-                mailer: ["^2.1@alpha"]
+                resource: ["^1.12@beta"]
+                grid: ["^1.13@beta"]
 
         env:
             APP_ENV: test_cached
@@ -66,11 +65,7 @@ jobs:
                     
             -   name: Require SyliusGridBundle version
                 run: |
-                    composer require sylius/grid-bundle:${{ matrix.grid }} --no-update  
-                    
-            -   name: Require SyliusMailerBundle version
-                run: |
-                    composer require sylius/mailer-bundle:${{ matrix.mailer }} --no-update                    
+                    composer require sylius/grid-bundle:${{ matrix.grid }} --no-update                   
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
@@ -101,7 +96,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }}, Mailer ${{ matrix.mailer }})"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }})"
                     path: |
                         etc/build/
                         var/log
