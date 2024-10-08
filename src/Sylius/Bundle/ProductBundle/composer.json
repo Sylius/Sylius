@@ -31,7 +31,7 @@
         "sylius/attribute-bundle": "^2.0",
         "sylius/locale-bundle": "^2.0",
         "sylius/product": "^2.0",
-        "sylius/resource-bundle": "^1.11 || ^1.12@alpha",
+        "sylius/resource-bundle": "^1.12",
         "symfony/framework-bundle": "^6.4.1 || ^7.1"
     },
     "require-dev": {
