@@ -41,28 +41,35 @@
 
 * Aliases introduced in Sylius 1.14 have now become the primary service IDs in Sylius 2.0. The old service IDs have been removed, and all references must be updated accordingly:
 
-| Old ID                                                      | New ID                                                                              |
-|-------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| **AttributeBundle**                                         |                                                                                     |
-| `sylius.form.type.attribute_type.select.choices_collection` | `sylius.form.type.attribute_type.configuration.select_attribute_choices_collection` |
-| `sylius.attribute_type.select.value.translations`           | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations` |
-| `sylius.validator.valid_text_attribute`                     | `sylius.validator.valid_text_attribute_configuration`                               |
-| `sylius.validator.valid_select_attribute`                   | `sylius.validator.valid_select_attribute_configuration`                             |
-| **AddressingBundle**                                        |                                                                                     |
-| `sylius.province_naming_provider`                           | `sylius.provider.province_naming`                                                   |
-| `sylius.zone_matcher`                                       | `sylius.matcher.zone`                                                               |
-| `sylius.address_comparator`                                 | `sylius.comparator.address`                                                         |
-| **ChannelBundle**                                           |                                                                                     |
-| `sylius.channel_collector`                                  | `sylius.collector.channel`                                                          |
-| **CurrencyBundle**                                          |                                                                                     |
-| `sylius.currency_converter`                                 | `sylius.converter.currency`                                                         |
-| `sylius.currency_name_converter`                            | `sylius.converter.currency_name`                                                    |
-| **InventoryBundle**                                         |                                                                                     |
-| `sylius.availability_checker.default`                       | `sylius.availability_checker`                                                       |
-| **MoneyBundle**                                             |                                                                                     |
-| `sylius.twig.extension.convert_amount`                      | `sylius.twig.extension.convert_money`                                               |
-| `sylius.twig.extension.money`                               | `sylius.twig.extension.format_money`                                                |
-| `sylius.money_formatter`                                    | `sylius.formatter.money`                                                            |
+| Old ID                                                                         | New ID                                                                              |
+|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| **AttributeBundle**                                                            |                                                                                     |
+| `sylius.form.type.attribute_type.select.choices_collection`                    | `sylius.form.type.attribute_type.configuration.select_attribute_choices_collection` |
+| `sylius.attribute_type.select.value.translations`                              | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations` |
+| `sylius.validator.valid_text_attribute`                                        | `sylius.validator.valid_text_attribute_configuration`                               |
+| `sylius.validator.valid_select_attribute`                                      | `sylius.validator.valid_select_attribute_configuration`                             |
+| **AddressingBundle**                                                           |                                                                                     |
+| `sylius.province_naming_provider`                                              | `sylius.provider.province_naming`                                                   |
+| `sylius.zone_matcher`                                                          | `sylius.matcher.zone`                                                               |
+| `sylius.address_comparator`                                                    | `sylius.comparator.address`                                                         |
+| **ChannelBundle**                                                              |                                                                                     |
+| `sylius.channel_collector`                                                     | `sylius.collector.channel`                                                          |
+| **CurrencyBundle**                                                             |                                                                                     |
+| `sylius.currency_converter`                                                    | `sylius.converter.currency`                                                         |
+| `sylius.currency_name_converter`                                               | `sylius.converter.currency_name`                                                    |
+| **InventoryBundle**                                                            |                                                                                     |
+| `sylius.availability_checker.default`                                          | `sylius.availability_checker`                                                       |
+| **LocaleBundle**                                                               |                                                                                     |
+| `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`           | `sylius.context.locale.request_header_based`                                        |
+| `sylius.locale_collection_provider`                                            | `sylius.provider.locale_collection`                                                 |
+| `sylius.locale_collection_provider.cahced`                                     | `sylius.provider.locale_collection.cached`                                          |
+| `sylius.locale_provider`                                                       | `sylius.provider.locale`                                                            |
+| `sylius.locale_converter`                                                      | `sylius.converter.locale`                                                           |
+| `Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener` | `sylius.doctrine.listener.locale_modification`                                      |
+| **MoneyBundle**                                                                |                                                                                     |
+| `sylius.twig.extension.convert_amount`                                         | `sylius.twig.extension.convert_money`                                               |
+| `sylius.twig.extension.money`                                                  | `sylius.twig.extension.format_money`                                                |
+| `sylius.money_formatter`                                                       | `sylius.formatter.money`                                                            |
 
   The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
 
@@ -73,6 +80,8 @@
 | **AddressingBundle**                                                           |                                             |
 | `Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface`             | `sylius.checker.zone_deletion`              |
 | `Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface` | `sylius.checker.country_provinces_deletion` |
+| **LocaleBundle**                                                               |                                             |
+| `Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface`               | `sylius.checker.locale_usage`               |
 
 * The following parameters were removed:
 
