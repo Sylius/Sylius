@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Customer;
 
+use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
 use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
 use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -28,6 +29,7 @@ class OrderStatisticsComponent
 {
     use HookableLiveComponentTrait;
     use DefaultActionTrait;
+    use TemplateLivePropTrait;
 
     #[LiveProp]
     public ?string $customerId = null;

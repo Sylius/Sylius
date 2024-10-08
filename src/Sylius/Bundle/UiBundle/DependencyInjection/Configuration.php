@@ -92,6 +92,7 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('prefix_name')
                             ->scalarPrototype()->end()
                         ->end()
+                        ->scalarNode('component_default_template')->defaultNull()->end()
                     ->end()
                 ->end()
             ->end()

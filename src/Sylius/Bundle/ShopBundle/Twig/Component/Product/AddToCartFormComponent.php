@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -52,6 +53,7 @@ class AddToCartFormComponent
     use HookableLiveComponentTrait;
     use ProductLivePropTrait;
     use ProductVariantLivePropTrait;
+    use TemplateLivePropTrait;
 
     public const SYLIUS_SHOP_VARIANT_CHANGED = 'sylius:shop:variant_changed';
 

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Resource\Model\ResourceInterface;
@@ -32,6 +33,7 @@ class SummaryComponent
 
     /** @use ResourceLivePropTrait<OrderInterface> */
     use ResourceLivePropTrait;
+    use TemplateLivePropTrait;
 
     #[LiveProp(hydrateWith: 'hydrateResource', dehydrateWith: 'dehydrateResource')]
     public ?ResourceInterface $cart = null;

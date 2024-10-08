@@ -21,9 +21,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 class ResourceFormComponent
 {
     use LiveCollectionTrait;
-
-    #[LiveProp]
-    public ?string $template = null;
+    use TemplateLivePropTrait;
 
     /** @use ResourceFormComponentTrait<ResourceInterface> */
     use ResourceFormComponentTrait {

@@ -55,6 +55,7 @@ sylius_ui:
                 route: sylius_admin_live_component
         anonymous_component_template_prefixes:
             sylius_admin: "@SyliusAdmin/shared/components"
+        component_default_template: "@SyliusUi/components/default.html.twig"
 
 liip_imagine:
     filter_sets:

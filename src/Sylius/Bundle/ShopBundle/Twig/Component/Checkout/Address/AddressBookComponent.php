@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address;
 
+use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
@@ -29,6 +30,7 @@ class AddressBookComponent
     use DefaultActionTrait;
     use ComponentToolsTrait;
     use HookableLiveComponentTrait;
+    use TemplateLivePropTrait;
 
     public const SYLIUS_SHOP_ADDRESS_UPDATED = 'sylius:shop:address-updated';
 

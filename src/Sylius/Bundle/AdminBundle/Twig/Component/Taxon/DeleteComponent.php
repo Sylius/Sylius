@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Taxon;
 
+use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -28,6 +29,7 @@ final class DeleteComponent
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
     use ComponentToolsTrait;
+    use TemplateLivePropTrait;
 
     public const OPEN_DELETE_MODAL_EVENT = 'sylius_admin:taxon:open_delete_modal';
 
