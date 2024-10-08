@@ -24,7 +24,7 @@ It was the only considered option in Symfony-based projects before the `autowire
 * Good, because it is a common way of naming services in Symfony
 * Bad, because you have to use `#[Autowire]` attribute to inject services
 
-### Use the FQCN as a service name
+### Use the FQCN as a service id
 
 This variant of naming appeared along with introducing the `autowire` feature in Symfony.
 It makes using services easier, but at the same time introduces a little bit magic to the code.
@@ -36,6 +36,18 @@ It makes using services easier, but at the same time introduces a little bit mag
 ### Combine the `dot` notation with the FQCN (when it makes sense)
 
 This variant is a combination of the previous two options, but it considers declaring the `FQCN` alias only when it makes sense.
+The `FQCN` alias should be declared only for services that implement a non-generic interface. 
+
+Some services that are not meant to be used with the `autowire` feature should continue to be named with the `dot` notation, including:
+- form types/extensions
+- message handlers
+- validators
+- event listeners/subscribers
+- service/form type registry
+- etc.
+
+For services that adhere to the Composite pattern, the `FQCN` alias should be declared for the composite service, and the alias should be based on the interface name.
+This ensures clarity in identifying composite services while maintaining a consistent and logical structure.
 
 * Good, because it is a recommended way by Symfony [Best Practices for Reusable Bundles](https://symfony.com/doc/current/bundles/best_practices.html#services)
 * Good, because we use the `dot` notation for many services, so we do not have to rename them
@@ -49,32 +61,12 @@ Chosen option: **"Combine the `dot` notation with the FQCN (when it makes sense)
 Despite the fact that it requires more work, it is the best option to provide a consistent way of naming services and support the `autowire` feature.
 Also, thanks to this approach, we stay consistent with the Symfony best practices.
 
-Some services that are not meant to be used with the `autowire` feature should only be named with the `dot` notation:
-- form types/extensions
-- message handlers
-- validators
-- etc.
-
 ## Example
-
-The simplest case is when we have 1:1 relation between the interface and the implementation:
 
 ```xml
 <services>
     <service id="sylius_admin.resolver.some" class="Sylius\Bundle\AdminBundle\Resolver\SomeResolver" />
     <service id="Sylius\Bundle\AdminBundle\Resolver\ResolverInterface" alias="sylius_admin.resolver.some" />
-</services>
-```
-
-If there are multiple services implementing the same interface:
-
-```xml
-<services>
-    <service id="sylius_admin.resolver.some" class="Sylius\Bundle\AdminBundle\Resolver\SomeResolver" />
-    <service id="sylius_admin.resolver.another" class="Sylius\Bundle\AdminBundle\Resolver\AnotherResolver" />
-    <service id="Sylius\Bundle\AdminBundle\Resolver\ResolverInterface" alias="sylius_admin.resolver.some" /> <!-- default when the parameter name is different from belows -->
-    <service id="Sylius\Bundle\AdminBundle\Resolver\ResolverInterface $someResolver" alias="sylius_admin.resolver.some" /> <!-- added just in case the default one changes -->
-    <service id="Sylius\Bundle\AdminBundle\Resolver\ResolverInterface $anotherResolver" alias="sylius_admin.resolver.another" />
 </services>
 ```
 
