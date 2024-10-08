@@ -218,7 +218,7 @@
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.factory.promotion_rule" />
             <argument type="service" id="sylius.repository.promotion" />
-            <argument type="service" id="sylius.promotion_coupon_generator" />
+            <argument type="service" id="sylius.generator.promotion_coupon" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.fixture.example_factory.promotion" />
         </service>
