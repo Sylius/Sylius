@@ -1,4 +1,4 @@
-sylius_shop_webhook_payment_method:
+sylius_webhook_payment_method:
     path: /payment-method/{code}
     defaults:
         _controller: sylius.action.webhook_payment_request
