@@ -66,7 +66,6 @@
             <tag name="sylius.catalog_promotion.action_configuration_type" key="%sylius.catalog_promotion.action.percentage_discount%" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.catalog_promotion_action.percentage_discount_action_configuration" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType" />
 
         <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType">
             <argument>%sylius.model.catalog_promotion_action.class%</argument>
@@ -74,7 +73,6 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.catalog_promotion_action" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" />
 
         <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType">
             <argument>%sylius.model.catalog_promotion_translation.class%</argument>
