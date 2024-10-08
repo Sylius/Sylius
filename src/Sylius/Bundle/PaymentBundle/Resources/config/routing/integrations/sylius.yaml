@@ -1,9 +1,9 @@
-sylius_webhook_payment_method:
+sylius_payment_method_notify:
     path: /payment-method/{code}
     defaults:
-        _controller: sylius.action.webhook_payment_request
+        _controller: sylius.controller.payment_request_notify
 
-sylius_shop_webhook_payment_request:
+sylius_payment_request_notify:
     path: /payment-request/{hash}
     defaults:
-        _controller: sylius.action.webhook_payment_method
+        _controller: sylius.controller.payment_method_notify

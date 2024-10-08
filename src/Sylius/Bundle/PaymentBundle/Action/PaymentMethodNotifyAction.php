@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Action;
 
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
-use Sylius\Bundle\PaymentBundle\Provider\WebhookPaymentProviderInterface;
+use Sylius\Bundle\PaymentBundle\Provider\PaymentNotifyProviderInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class WebhookPaymentMethodAction
+final class PaymentMethodNotifyAction
 {
     /**
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
@@ -36,7 +36,7 @@ final class WebhookPaymentMethodAction
         private PaymentRequestFactoryInterface $paymentRequestFactory,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
-        private WebhookPaymentProviderInterface $webhookPaymentProvider,
+        private PaymentNotifyProviderInterface $webhookPaymentProvider,
     ) {
     }
 

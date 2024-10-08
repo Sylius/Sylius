@@ -19,18 +19,18 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.action.webhook_payment_request" class="Sylius\Bundle\PaymentBundle\Action\WebhookPaymentRequestAction">
+        <service id="sylius.controller.payment_request_notify" class="Sylius\Bundle\PaymentBundle\Action\PaymentRequestNotifyAction">
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
             <argument type="service" id="sylius.manager.payment_request" />
         </service>
 
-        <service id="sylius.action.webhook_payment_method" class="Sylius\Bundle\PaymentBundle\Action\WebhookPaymentMethodAction">
+        <service id="sylius.controller.payment_method_notify" class="Sylius\Bundle\PaymentBundle\Action\PaymentMethodNotifyAction">
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
-            <argument type="service" id="sylius.provider.webhook_payment.composite" />
+            <argument type="service" id="sylius.provider.payment_notify" />
         </service>
     </services>
 </container>
