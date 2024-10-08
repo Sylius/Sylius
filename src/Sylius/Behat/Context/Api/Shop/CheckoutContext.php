@@ -345,9 +345,9 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I confirmed my order
+     * @Given the customer confirmed the order
      * @When I confirm my order
      * @When /^the (?:visitor|customer) confirm his order$/
-     * @Given the customer confirmed the order
      */
     public function iConfirmMyOrder(): void
     {

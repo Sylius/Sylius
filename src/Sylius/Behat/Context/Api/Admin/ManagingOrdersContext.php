@@ -121,6 +121,7 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->addRequestData('tracking', $trackingCode);
         $this->client->update();
     }
+
     /**
      * @When /^I try to view the summary of the (customer's latest cart)$/
      */
