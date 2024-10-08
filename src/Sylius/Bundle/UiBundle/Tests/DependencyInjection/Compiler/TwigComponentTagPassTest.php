@@ -20,6 +20,12 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->container->setParameter('sylius_ui.twig_ux.component_default_template', '@SyliusUi/components/default.html.twig');
+    }
+
     public function testAddingTwigComponentTagToServicesTaggedWithTwigComponentTag(): void
     {
         $twigComponent = new Definition();

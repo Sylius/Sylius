@@ -25,6 +25,7 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
     {
         parent::setUp();
         $this->container->setParameter('sylius_ui.twig_ux.live_component_tags', []);
+        $this->container->setParameter('sylius_ui.twig_ux.component_default_template', '@SyliusUi/components/default.html.twig');
     }
 
     public function testAddingTwigComponentTagToServicesTaggedWithLiveComponentTag(): void
