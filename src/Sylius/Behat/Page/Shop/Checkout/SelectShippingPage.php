@@ -56,17 +56,6 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         ;
     }
 
-    public function hasNoShippingMethodsMessage(): bool
-    {
-        try {
-            $this->getElement('order_cannot_be_shipped_message');
-        } catch (ElementNotFoundException) {
-            return false;
-        }
-
-        return true;
-    }
-
     public function hasShippingMethodFee(string $shippingMethodName, string $fee): bool
     {
         $feeElement = $this->getElement('shipping_method_fee', ['%shipping_method%' => $shippingMethodName])->getText();
@@ -118,7 +107,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return $validationMessage->getText();
     }
 
-    public function hasNoAvailableShippingMethodsWarning(): bool
+    public function hasNoAvailableShippingMethodsMessage(): bool
     {
         return $this->hasElement('warning_no_shipping_methods');
     }
@@ -139,14 +128,12 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'address' => '[data-test-step-address]',
             'checkout_subtotal' => '[data-test-checkout-subtotal]',
             'next_step' => '[data-test-next-step]',
-            'order_cannot_be_shipped_message' => '[data-test-order-cannot-be-shipped]',
             'purchaser_email' => '[data-test-purchaser-name-or-email]',
-            'shipment' => '[data-test-shipments]',
-            'shipping_method_item' => '[data-test-shipping-item]:contains("%shipping_method%")',
             'shipping_method_fee' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-fee]',
-            'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-checkbox]',
+            'shipping_method_item' => '[data-test-shipping-item]:contains("%shipping_method%")',
             'shipping_method_option' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-select]',
             'shipping_method_option_selected' => '[data-test-shipping-method-select][checked="checked"]',
+            'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-checkbox]',
             'warning_no_shipping_methods' => '[data-test-order-cannot-be-shipped]',
         ]);
     }

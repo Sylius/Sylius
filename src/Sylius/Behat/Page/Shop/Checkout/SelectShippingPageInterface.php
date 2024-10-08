@@ -23,8 +23,6 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
 
     public function getSelectedShippingMethodName(): ?string;
 
-    public function hasNoShippingMethodsMessage(): bool;
-
     public function hasShippingMethodFee(string $shippingMethodName, string $fee): bool;
 
     public function getItemSubtotal(string $itemName): string;
@@ -39,7 +37,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
 
     public function getValidationMessageForShipment(): string;
 
-    public function hasNoAvailableShippingMethodsWarning(): bool;
+    public function hasNoAvailableShippingMethodsMessage(): bool;
 
     public function isNextStepButtonUnavailable(): bool;
 

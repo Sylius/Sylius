@@ -80,6 +80,14 @@ final readonly class CheckoutShippingContext implements Context
     }
 
     /**
+     * @When I do not select any shipping method
+     */
+    public function iDoNotSelectAnyShippingMethod(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
      * @When I decide to change my address
      */
     public function iDecideToChangeMyAddress()
@@ -134,10 +142,11 @@ final readonly class CheckoutShippingContext implements Context
 
     /**
      * @Then I should be informed that my order cannot be shipped to this address
+     * @Then there should be information about no available shipping methods
      */
-    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress()
+    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress(): void
     {
-        Assert::true($this->selectShippingPage->hasNoShippingMethodsMessage());
+        Assert::true($this->selectShippingPage->hasNoAvailableShippingMethodsMessage());
     }
 
     /**
@@ -166,14 +175,6 @@ final readonly class CheckoutShippingContext implements Context
     public function iShouldSeeShippingFee($shippingMethodName, $fee)
     {
         Assert::true($this->selectShippingPage->hasShippingMethodFee($shippingMethodName, $fee));
-    }
-
-    /**
-     * @Then there should be information about no available shipping methods
-     */
-    public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress()
-    {
-        Assert::true($this->selectShippingPage->hasNoAvailableShippingMethodsWarning());
     }
 
     /**
@@ -237,5 +238,13 @@ final readonly class CheckoutShippingContext implements Context
         }
 
         throw new UnexpectedPageException('It should not be possible to complete checkout shipping step.');
+    }
+
+    /**
+     * @Then I should still be on the shipping step
+     */
+    public function iShouldStillBeOnTheShippingStep(): void
+    {
+        Assert::true($this->selectShippingPage->isOpen(), 'Shipping page is not open.');
     }
 }

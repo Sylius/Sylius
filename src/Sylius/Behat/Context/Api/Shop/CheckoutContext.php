@@ -122,6 +122,26 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should see that there is no assigned shipping method
+     */
+    public function iShouldSeeThatThereIsNoAssignedShippingMethod(): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+
+        Assert::isEmpty($this->responseChecker->getValue($response, 'shipments'));
+    }
+
+    /**
+     * @Then there should not be any shipping method available to choose
+     */
+    public function thereShouldNotBeAnyShippingMethodAvailableToChoose(): void
+    {
+        $response = $this->client->requestGet('shipping-methods');
+
+        Assert::isEmpty($this->responseChecker->getCollection($response));
+    }
+
+    /**
      * @When /^I choose "([^"]+)" street for (billing|shipping) address$/
      */
     public function iChooseForBillingAddress(string $street, string $addressType): void
@@ -822,7 +842,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
     {
-        $this->iShouldBeOnTheCheckoutShippingStep();
+        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
         Assert::isEmpty($this->getCart()['shipments']);
     }
 

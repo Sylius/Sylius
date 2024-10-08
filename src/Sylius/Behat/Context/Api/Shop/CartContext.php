@@ -244,6 +244,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I check details of my (cart)$/
+     * @When /^I check the details of my (cart)$/
      */
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
