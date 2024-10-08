@@ -99,10 +99,8 @@
     | `sylius.form.type.promotion_action.collection`                                                             | `sylius.form.type.promotion_action_collection`                                       |
     | `sylius.form.type.promotion_rule.collection`                                                               | `sylius.form.type.promotion_rule_collection`                                         |
     | `sylius.validator.date_range`                                                                              | `sylius.validator.promotion_date_range`                                              |
-    | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator`                                  | `sylius.validator.catalog_promotion_action`                                          |
     | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionGroupValidator`                             | `sylius.validator.catalog_promotion_action_group`                                    |
     | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionTypeValidator`                              | `sylius.validator.catalog_promotion_action_type`                                     |
-    | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeValidator`                                   | `sylius.validator.catalog_promotion_scope`                                           |
     | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeGroupValidator`                              | `sylius.validator.catalog_promotion_scope_group`                                     |
     | `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeTypeValidator`                               | `sylius.validator.catalog_promotion_scope_type`                                      |
     | `Sylius\Bundle\PromotionBundle\Validator\PromotionActionGroupValidator`                                    | `sylius.validator.promotion_action_group`                                            |
