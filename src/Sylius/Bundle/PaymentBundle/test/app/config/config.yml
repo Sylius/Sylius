@@ -1,4 +1,5 @@
 imports:
+    - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPaymentBundle/test/app/config/parameters.yml" }
 
 framework:
@@ -15,6 +16,7 @@ framework:
         storage_factory_id: session.storage.factory.mock_file
     http_method_override: true
     test: ~
+    workflows: ~
 
 twig:
     debug: "%kernel.debug%"

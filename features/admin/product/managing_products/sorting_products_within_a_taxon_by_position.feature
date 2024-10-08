@@ -80,7 +80,7 @@ Feature: Sorting listed products from a taxon by position
         And the 7th product on this page should be named "Pug Master"
         And this product should be at position 16
 
-    @no-api @ui @mink:chromedriver
+    @no-api @tod-ui @mink:chromedriver
     Scenario: Setting two products to the positions overflowing the max available position on the non-last page
         When I am browsing the 1st page of products from "Soft Toys" taxon
         And I set the position of "Old pug" to "25"

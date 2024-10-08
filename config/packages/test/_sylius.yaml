@@ -13,5 +13,6 @@ sylius_state_machine_abstraction:
         sylius_order_payment: '%test_sylius_state_machine_adapter%'
         sylius_order_shipping: '%test_sylius_state_machine_adapter%'
         sylius_payment: '%test_sylius_state_machine_adapter%'
+        sylius_payment_request: '%test_sylius_state_machine_adapter%'
         sylius_product_review: '%test_sylius_state_machine_adapter%'
         sylius_shipment: '%test_sylius_state_machine_adapter%'

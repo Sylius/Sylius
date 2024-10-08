@@ -33,6 +33,8 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
+        $this->configureOrderPay($config['order_pay'], $container);
+
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
         $container->setAlias(LocaleSwitcherInterface::class, 'sylius.shop.locale_switcher');
@@ -49,6 +51,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
             'sylius_shop.product_grid.include_all_descendants',
             $config['product_grid']['include_all_descendants'],
         );
+
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
 
@@ -120,5 +123,15 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         }
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
+    }
+
+    private function configureOrderPay(array $config, ContainerBuilder $container): void
+    {
+        $container->setParameter('sylius_shop.order_pay.after_pay_route', $config['after_pay_route']);
+        $container->setParameter('sylius_shop.order_pay.after_pay_route_parameters', $config['after_pay_route_parameters']);
+        $container->setParameter('sylius_shop.order_pay.final_route', $config['final_route']);
+        $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['final_route_parameters']);
+        $container->setParameter('sylius_shop.order_pay.retry_route', $config['retry_route']);
+        $container->setParameter('sylius_shop.order_pay.retry_route_parameters', $config['retry_route_parameters']);
     }
 }

@@ -6,6 +6,9 @@
     * The `sylius_default.bus` and `sylius_event.bus` configuration options were removed. Use `sylius.command_bus` and
       `sylius.event_bus` for commands and events respectively.
 
+* SyliusStateMachineAbstraction:
+    * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine` to `symfony_workflow`.
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is no longer supported in ResourceBundle and GridBundle:
@@ -435,6 +438,11 @@ https://symfony.com/doc/current/security/passwords.html#configure-a-new-hasher-u
 Note:
 If your app never changed the hasher name configuration, you don't need to configure this "migrate_from" configuration.
 
+## Directory structure
+
+* The Winzou state machine configuration file `state_machine.yml` has been moved from `@SyliusPaymentBundle/Resources/config/app` to `@SyliusPaymentBundle/Resources/config/app/state_machine` and renamed to `sylius_payment.yaml`.
+* The Symfony workflow configuration file `state_machine.yaml` has been moved from `@SyliusPaymentBundle/Resources/config/workflow` to `@SyliusPaymentBundle/Resources/config/app/workflow` and renamed to `sylius_payment.yaml`.
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
@@ -451,3 +459,13 @@ If your app never changed the hasher name configuration, you don't need to confi
   if you're running your shop in headless mode.
 * Channel's `themeName` form field existence is made optional and depends on `ShopBundle` presence.
 * The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.
+
+## Routing
+
+* Routing for the `sylius_shop_payum` has been moved from the `SyliusShopBundle` to the `SyliusPayumBundle`:
+
+```yaml
+sylius_shop_payum:
+-   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
++   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
+```
