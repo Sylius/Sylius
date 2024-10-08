@@ -8,11 +8,6 @@ references related issues.
   After bumping to this version ApiBundle starts failing due to requesting a non-existing `api_platform.openapi.factory.legacy` service.
   As we are not using this service across the ApiBundle we added this conflict to unlock the builds, until we investigate the problem.
 
-- `doctrine/orm:>= 2.16.0`
-
-  This version makes Sylius Fixtures loading fail on the product review fixtures.
-  References: https://github.com/doctrine/orm/issues/10869
-
 - `symfony/validator:5.4.25`
 
   This version introduced a bug, causing validation constraints to not work.
