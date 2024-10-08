@@ -132,11 +132,31 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should see that no payment method is assigned
+     */
+    public function iShouldSeeThatNoPaymentMethodIsAssigned(): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+
+        Assert::isEmpty($this->responseChecker->getValue($response, 'payments'));
+    }
+
+    /**
      * @Then there should not be any shipping method available to choose
      */
     public function thereShouldNotBeAnyShippingMethodAvailableToChoose(): void
     {
         $response = $this->client->requestGet('shipping-methods');
+
+        Assert::isEmpty($this->responseChecker->getCollection($response));
+    }
+
+    /**
+     * @Then there should not be any payment methods available for selection
+     */
+    public function thereShouldNotBeAnyPaymentMethodsAvailableForSelection(): void
+    {
+        $response = $this->client->requestGet('payment-methods');
 
         Assert::isEmpty($this->responseChecker->getCollection($response));
     }
