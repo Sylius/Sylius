@@ -20,7 +20,6 @@ class AppKernel extends Kernel
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),

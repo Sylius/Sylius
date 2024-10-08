@@ -43,7 +43,6 @@ Don't worry, everything was automatically installed via Composer.
         $bundles = array(
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
-            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
             new Sylius\Bundle\UserBundle\SyliusUserBundle(),

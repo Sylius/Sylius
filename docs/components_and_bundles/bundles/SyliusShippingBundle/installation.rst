@@ -41,7 +41,6 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
-            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
