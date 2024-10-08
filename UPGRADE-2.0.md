@@ -345,6 +345,16 @@ sylius_grid:
                     options:
 -                       field: product.channels.id
 +                       fields: [product.channels.id]
+```
+
+The following service has been removed:
+
+    - sylius.grid_filter.entities
+
+The following classes have been removed:
+
+    - Sylius\Component\Core\Grid\Filter\EntitiesFilter
+    - Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType
 
 ## Password Encoder & Salt
 The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
