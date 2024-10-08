@@ -43,6 +43,8 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public const ACTION_PAYOUT = 'payout';
 
+    public const ACTION_NOTIFY = 'notify';
+
     public function getId(): ?string;
 
     public function getHash(): ?Uuid;

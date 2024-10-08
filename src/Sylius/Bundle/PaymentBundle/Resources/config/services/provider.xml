@@ -43,5 +43,9 @@
             <argument type="tagged_locator" tag="sylius.http_response.provider.offline" index-by="action" />
             <tag name="sylius.payment_request.http_response.provider" gateway-factory="offline" />
         </service>
+
+        <service id="sylius.provider.webhook_payment.composite" class="Sylius\Bundle\PaymentBundle\Provider\CompositeWebhookPaymentProvider">
+            <argument type="tagged_iterator" tag="sylius.payment_request.webhook.payment_provider" />
+        </service>
     </services>
 </container>
