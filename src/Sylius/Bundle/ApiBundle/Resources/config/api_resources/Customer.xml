@@ -31,6 +31,9 @@
                 <attribute name="filters">
                     <attribute>sylius.api.customer_group_filter</attribute>
                 </attribute>
+                <attribute name="order">
+                    <attribute name="createdAt">DESC</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
