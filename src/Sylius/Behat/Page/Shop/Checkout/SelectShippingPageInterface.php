@@ -39,7 +39,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
 
     public function hasNoAvailableShippingMethodsMessage(): bool;
 
-    public function isNextStepButtonUnavailable(): bool;
+    public function isNextStepButtonEnabled(): bool;
 
     public function hasShippingMethod(string $shippingMethodName): bool;
 }

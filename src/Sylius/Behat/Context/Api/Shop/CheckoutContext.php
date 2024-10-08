@@ -87,6 +87,44 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I try to complete the shipping step
+     */
+    public function iTryToCompleteTheShippingStep(): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+        $content = $this->responseChecker->getResponseContent($response);
+
+        $this->client->requestPatch(
+            uri: sprintf(
+                'orders/%s/shipments/%s',
+                $this->sharedStorage->get('cart_token'),
+                $content['shipments'][0]['id'],
+            ),
+            body: ['shippingMethod' => $content['shipments'][0]['method']],
+        );
+    }
+
+    /**
+     * @When I try to complete the shipping step with :shippingMethod shipping method
+     */
+    public function iTryToCompleteTheShippingStepWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+        $content = $this->responseChecker->getResponseContent($response);
+
+        $this->sharedStorage->set('shipping_method', $shippingMethod);
+
+        $this->client->requestPatch(
+            uri: sprintf(
+                'orders/%s/shipments/%s',
+                $this->sharedStorage->get('cart_token'),
+                $content['shipments'][0]['id'],
+            ),
+            body: ['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)],
+        );
+    }
+
+    /**
      * @When I specified the billing address
      */
     public function iSpecifiedTheBillingAddress(): void
@@ -122,9 +160,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should see that there is no assigned shipping method
+     * @Then I should see that there is no shipment assigned
      */
-    public function iShouldSeeThatThereIsNoAssignedShippingMethod(): void
+    public function iShouldSeeThatThereIsNoShipmentAssigned(): void
     {
         $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
 
@@ -1368,6 +1406,28 @@ final class CheckoutContext implements Context
             $response,
             'Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can\'t be changed.',
         ));
+    }
+
+    /**
+     * @Then I should see that this shipping method is not available for this address
+     * @Then I should see that this shipping method is also not available for this address
+     */
+    public function iShouldSeeThatThisShippingMethodIsNotAvailableForThisAddress(): void
+    {
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage(
+                $this->client->getLastResponse(),
+                sprintf(
+                    'The shipping method %s is not available for this order. Please reselect your shipping method.',
+                    $this->sharedStorage->get('shipping_method'),
+                ),
+            ),
+            sprintf(
+                'Expected to see message that shipping method "%s" is not available. Got message: "%s".',
+                $this->sharedStorage->get('shipping_method'),
+                $this->responseChecker->getError($this->client->getLastResponse()),
+            ),
+        );
     }
 
     private function assertProvinceMessage(string $addressType): void

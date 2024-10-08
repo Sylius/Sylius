@@ -112,9 +112,9 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return $this->hasElement('warning_no_shipping_methods');
     }
 
-    public function isNextStepButtonUnavailable(): bool
+    public function isNextStepButtonEnabled(): bool
     {
-        return $this->getElement('next_step')->hasClass('disabled');
+        return !$this->getElement('next_step')->hasClass('disabled');
     }
 
     public function hasShippingMethod(string $shippingMethodName): bool

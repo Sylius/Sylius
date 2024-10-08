@@ -71,20 +71,11 @@ final readonly class CheckoutShippingContext implements Context
 
     /**
      * @When I complete the shipping step
-     * @When I try to complete the shipping step
      * @When I complete the shipping step with first shipping method
      */
     public function iCompleteTheShippingStep(): void
     {
         $this->selectShippingPage->nextStep();
-    }
-
-    /**
-     * @When I do not select any shipping method
-     */
-    public function iDoNotSelectAnyShippingMethod(): void
-    {
-        // Intentionally left blank
     }
 
     /**
@@ -96,9 +87,17 @@ final readonly class CheckoutShippingContext implements Context
     }
 
     /**
+     * @When I want to complete the shipping step
+     */
+    public function iWantToCompleteTheShippingStep(): void
+    {
+        $this->selectShippingPage->open();
+    }
+
+    /**
      * @When I go back to shipping step of the checkout
      */
-    public function iGoBackToShippingStepOfTheCheckout()
+    public function iGoBackToShippingStepOfTheCheckout(): void
     {
         $this->selectShippingPage->open();
     }
@@ -246,5 +245,16 @@ final readonly class CheckoutShippingContext implements Context
     public function iShouldStillBeOnTheShippingStep(): void
     {
         Assert::true($this->selectShippingPage->isOpen(), 'Shipping page is not open.');
+    }
+
+    /**
+     * @Then I should not be able to complete the shipping step
+     */
+    public function iShouldNotBeAbleToCompleteTheShippingStep(): void
+    {
+        Assert::false(
+            $this->selectShippingPage->isNextStepButtonEnabled(),
+            'The "next step" button should be disabled, but it does not.',
+        );
     }
 }
