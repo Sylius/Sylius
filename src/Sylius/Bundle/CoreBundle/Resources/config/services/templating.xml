@@ -26,7 +26,7 @@
         </service>
 
         <service id="sylius.twig.extension.variant_resolver" class="Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension" public="false">
-            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.resolver.product_variant" />
             <tag name="twig.extension" />
         </service>
 

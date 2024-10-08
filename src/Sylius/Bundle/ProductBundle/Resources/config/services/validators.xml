@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="true" />
@@ -26,10 +27,12 @@
         <service id="Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator">
             <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_option_values_configuration" />
         </service>
+        <service id="sylius.validator.product_variant_option_values_configuration" alias="Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator" />
 
         <service id="sylius.validator.product_code_uniqueness" class="Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="validator.constraint_validator" alias="sylius.validator.unique_simple_product_code" />
         </service>
+        <service id="sylius.validator.unique_simple_product_code" alias="sylius.validator.product_code_uniqueness" />
     </services>
 </container>
