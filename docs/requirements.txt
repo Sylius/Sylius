@@ -1,8 +1,8 @@
-sphinx==1.8.5
-alabaster==0.7.13
-docutils<0.18
-jinja2==3.0.0
-pyOpenSSL
-requests[security]
-sphinx-copybutton
-sphinx-autobuild
+sphinx>=7.0.1
+alabaster>=0.7.13
+docutils>=0.18.1,<0.21
+jinja2>=3.0.0,<4.0
+pyOpenSSL>=21.0.0
+requests[security]>=2.25.0
+sphinx-copybutton>=0.5.0
+sphinx-autobuild>=2021.3.14
