@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <parameters>
         <parameter key="sylius.form.type.product_association.validation_groups" type="collection">
             <parameter>sylius</parameter>
@@ -94,6 +98,7 @@
             <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations" />
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.product_associations" alias="sylius.form.type.sylius_product_associations" />
 
         <service id="sylius.form.type.product_attribute" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType">
             <argument>%sylius.model.product_attribute.class%</argument>
@@ -128,7 +133,7 @@
         <service id="sylius.form.type.product" class="Sylius\Bundle\ProductBundle\Form\Type\ProductType">
             <argument>%sylius.model.product.class%</argument>
             <argument>%sylius.form.type.product.validation_groups%</argument>
-            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="sylius.factory.product_attribute_value" />
             <argument type="service" id="sylius.translation_locale_provider" />
             <tag name="form.type" />
@@ -153,7 +158,7 @@
         <service id="sylius.form.type.product_generate_variants" class="Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType">
             <argument>%sylius.model.product.class%</argument>
             <argument>%sylius.form.type.product_generate_variants.validation_groups%</argument>
-            <argument type="service" id="sylius.form.event_subscriber.product_variant_generator" />
+            <argument type="service" id="sylius.form.event_subscriber.generate_product_variants" />
             <tag name="form.type" />
         </service>
 
@@ -208,6 +213,7 @@
             <argument type="service" id="sylius.generator.product_variant" />
             <argument type="service" id="request_stack" />
         </service>
+        <service id="sylius.form.event_subscriber.generate_product_variants" alias="sylius.form.event_subscriber.product_variant_generator" />
 
         <service id="sylius.form.type.data_transformer.products_to_product_associations" class="Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer">
             <argument type="service" id="sylius.factory.product_association" />
@@ -216,7 +222,7 @@
         </service>
 
         <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
-            <argument type="service" id="sylius.available_product_option_values_resolver" />
+            <argument type="service" id="sylius.resolver.available_product_option_values" />
             <tag name="form.type" />
         </service>
     </services>
