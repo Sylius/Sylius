@@ -70,6 +70,14 @@
 | `sylius.twig.extension.convert_amount`                                         | `sylius.twig.extension.convert_money`                                               |
 | `sylius.twig.extension.money`                                                  | `sylius.twig.extension.format_money`                                                |
 | `sylius.money_formatter`                                                       | `sylius.formatter.money`                                                            |
+| **OrderBundle**                                                                |                                                                                     |
+| `sylius.order_modifier`                                                        | `sylius.modifier.order`                                                             |
+| `sylius.order_item_quantity_modifier`                                          | `sylius.modifier.order_item_quantity`                                               |
+| `sylius.order_number_assigner`                                                 | `sylius.number_assigner.order_number`                                               |
+| `sylius.adjustments_aggregator`                                                | `sylius.aggregator.adjustments_by_label`                                            |
+| `sylius.expired_carts_remover`                                                 | `sylius.remover.expired_carts`                                                      |
+| `sylius.sequential_order_number_generator`                                     | `sylius.number_generator.sequential_order`                                          |
+| `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`          | `sylius.console.command.remove_expired_carts`                                       |
 
   The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
 

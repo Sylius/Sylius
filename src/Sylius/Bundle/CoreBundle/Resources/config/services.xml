@@ -114,7 +114,7 @@
         <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.order_item.inner" />
             <argument type="service" id="sylius.resolver.product_variant" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
         <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
@@ -220,7 +220,7 @@
         </service>
         <service id="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface" alias="sylius.customer_statistics_provider" />
 
-        <service id="sylius.sequential_order_number_generator" class="Sylius\Bundle\CoreBundle\Order\NumberGenerator\SequentialOrderNumberGenerator">
+        <service id="sylius.number_generator.sequential_order" class="Sylius\Bundle\CoreBundle\Order\NumberGenerator\SequentialOrderNumberGenerator">
             <argument type="service" id="sylius.repository.order_sequence" />
             <argument type="service" id="sylius.factory.order_sequence" />
             <argument type="service" id="sylius.manager.order_sequence" />
