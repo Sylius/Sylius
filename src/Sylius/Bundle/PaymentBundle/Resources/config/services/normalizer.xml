@@ -17,5 +17,6 @@
 >
     <services>
         <service id="sylius.normalizer.symfony_request" class="Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizer" />
+        <service id="Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface" alias="sylius.normalizer.symfony_request" />
     </services>
 </container>
