@@ -19,6 +19,6 @@ winzou_state_machine:
             after:
                 sylius_update_rating:
                     on: ["accept"]
-                    do: ["@sylius.updater.product_review.average_rating", "updateFromReview"]
+                    do: ["@sylius.product_review.average_rating_updater", "updateFromReview"]
                     args: ["object"]
                     priority: -100
