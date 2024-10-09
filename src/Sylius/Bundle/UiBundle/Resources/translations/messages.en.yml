@@ -64,6 +64,7 @@ sylius:
         amount: 'Amount'
         an_error_occurred: 'An error occurred'
         api: 'Api'
+        applied_coupon: 'Applied coupon'
         apply_coupon: 'Apply coupon'
         apply_to_all: 'Apply to all'
         archival: 'Archival'
