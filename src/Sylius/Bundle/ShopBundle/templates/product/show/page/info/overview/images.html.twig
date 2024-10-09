@@ -9,7 +9,7 @@
     {% set path = original_path %}
 {% endif %}
 
-<div class="mb-5">
+<div class="spotlight-group mb-5">
     <div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>
     {% hook 'images' with { original_path, path } %}
 </div>
