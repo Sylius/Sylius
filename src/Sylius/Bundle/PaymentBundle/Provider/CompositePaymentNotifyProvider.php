@@ -21,16 +21,16 @@ use Webmozart\Assert\Assert;
 final class CompositePaymentNotifyProvider implements PaymentNotifyProviderInterface
 {
     /**
-     * @param iterable<PaymentNotifyProviderInterface> $webhookPaymentProviders
+     * @param iterable<PaymentNotifyProviderInterface> $paymentNotifyProviders
      */
     public function __construct(
-        private iterable $webhookPaymentProviders,
+        private iterable $paymentNotifyProviders,
     ) {
-        Assert::allIsInstanceOf($this->webhookPaymentProviders, PaymentNotifyProviderInterface::class);
+        Assert::allIsInstanceOf($this->paymentNotifyProviders, PaymentNotifyProviderInterface::class);
     }
 
     public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface {
-        foreach ($this->webhookPaymentProviders as $provider) {
+        foreach ($this->paymentNotifyProviders as $provider) {
             if ($provider->supports($request, $paymentMethod)) {
                 return $provider->getPayment($request, $paymentMethod);
             }
