@@ -22,10 +22,7 @@
             <argument>%sylius.model.product_attribute.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:product_attribute:form"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:product_attribute:form" />
         </service>
     </services>
 </container>

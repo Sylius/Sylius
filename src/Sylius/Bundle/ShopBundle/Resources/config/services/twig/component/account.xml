@@ -20,10 +20,7 @@
             <argument>%sylius.model.customer.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType</argument>
 
-            <tag
-                name="sylius.live_component.shop"
-                key="sylius_shop:account:register:form"
-            />
+            <tag name="sylius.live_component.shop" key="sylius_shop:account:register:form" />
         </service>
 
         <service

@@ -26,10 +26,7 @@
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
 
-            <tag
-                name="sylius.live_component.shop"
-                key="sylius_shop:cart:form"
-            />
+            <tag name="sylius.live_component.shop" key="sylius_shop:cart:form" />
         </service>
 
         <service

@@ -18,10 +18,7 @@
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.locale_provider" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_shop:common:locale_switcher"
-            />
+            <tag name="sylius.twig_component" key="sylius_shop:common:locale_switcher" />
         </service>
 
         <service
@@ -31,10 +28,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.currency" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_shop:common:currency_switcher"
-            />
+            <tag name="sylius.twig_component" key="sylius_shop:common:currency_switcher" />
         </service>
 
         <service
@@ -45,10 +39,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_shop:common:taxon_menu"
-            />
+            <tag name="sylius.twig_component" key="sylius_shop:common:taxon_menu" />
         </service>
     </services>
 </container>

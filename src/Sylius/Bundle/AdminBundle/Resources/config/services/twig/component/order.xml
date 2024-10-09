@@ -19,10 +19,7 @@
         >
             <argument type="service" id="sylius.repository.address_log_entry" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:order:address_history"
-            />
+            <tag name="sylius.twig_component" key="sylius_admin:order:address_history" />
         </service>
 
         <service
@@ -34,10 +31,7 @@
             <argument>%sylius.model.order.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\OrderType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:order:form"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:order:form" />
         </service>
     </services>
 </container>

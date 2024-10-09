@@ -17,10 +17,7 @@
         >
             <argument type="service" id="sylius.repository.product_review" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_shop:product_review:list"
-            />
+            <tag name="sylius.twig_component" key="sylius_shop:product_review:list" />
         </service>
 
         <service
@@ -29,10 +26,7 @@
         >
             <argument type="service" id="sylius.repository.product_review" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_shop:product_review.count"
-            />
+            <tag name="sylius.twig_component" key="sylius_shop:product_review.count" />
         </service>
 
         <service
@@ -44,10 +38,7 @@
             <argument>%sylius.model.product_review.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType</argument>
 
-            <tag
-                name="sylius.live_component.shop"
-                key="sylius_shop:product_review:form"
-            />
+            <tag name="sylius.live_component.shop" key="sylius_shop:product_review:form" />
         </service>
     </services>
 </container>

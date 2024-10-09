@@ -23,10 +23,7 @@
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:dashboard:channel_selector"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:dashboard:channel_selector" />
         </service>
 
         <service
@@ -35,9 +32,7 @@
         >
             <argument type="service" id="sylius.repository.customer" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:dashboard:new_customers"
+            <tag name="sylius.twig_component" key="sylius_admin:dashboard:new_customers"
             />
         </service>
 
@@ -48,10 +43,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.channel" />
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:dashboard:new_orders"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:dashboard:new_orders" />
         </service>
 
         <service
@@ -61,10 +53,7 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:dashboard:statistics"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:dashboard:statistics" />
         </service>
     </services>
 </container>

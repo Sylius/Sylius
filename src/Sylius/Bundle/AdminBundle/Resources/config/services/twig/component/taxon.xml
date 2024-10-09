@@ -23,10 +23,7 @@
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:taxon:delete"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:taxon:delete" />
         </service>
 
         <service
