@@ -163,5 +163,22 @@
         >
             <argument type="service" id=".inner" />
         </service>
+
+        <!-- Dummy service for payment request -->
+
+        <service id="Sylius\Behat\Service\PaymentRequest\Provider\DummyPaymentNotifyProvider" autoconfigure="true">
+            <argument type="service" id="sylius.repository.payment" />
+        </service>
+
+        <service id="Sylius\Behat\Service\PaymentRequest\CommandProvider\Offline\NotifyPaymentRequestCommandProvider">
+            <tag name="sylius.command_provider.payment_request.offline" action="notify" />
+        </service>
+
+        <service id="Sylius\Behat\Service\PaymentRequest\CommandHandler\Offline\NotifyPaymentRequestHandler">
+            <argument type="service" id="sylius.provider.payment_request" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="messenger.message_handler" bus="sylius.payment_request.command_bus" />
+        </service>
+
     </services>
 </container>
