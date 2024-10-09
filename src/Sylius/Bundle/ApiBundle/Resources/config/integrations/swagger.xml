@@ -87,6 +87,14 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
+        <service
+            id="sylius_api.open_api.documentation_modifier.not_api_routes_removal"
+            class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\NotApiRoutesRemovalDocumentationModifier"
+        >
+            <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\OrderAdjustmentsTypeDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
             <argument>%sylius.model.adjustment.class%</argument>
