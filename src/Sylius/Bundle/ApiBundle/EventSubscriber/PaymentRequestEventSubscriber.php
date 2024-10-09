@@ -43,13 +43,8 @@ final class PaymentRequestEventSubscriber implements EventSubscriberInterface
         }
 
         $method = $event->getRequest()->getMethod();
-        if ($method === Request::METHOD_POST) {
-            $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 
-            return;
-        }
-
-        if (in_array($method, [Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
+        if (in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
             $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
         }
     }
