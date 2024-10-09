@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
+use Sylius\Bundle\PaymentBundle\Wrapper\SymfonyRequestWrapperInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,7 @@ final class PaymentRequestNotifyAction
      */
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private SymfonyRequestWrapperInterface $requestWrapper,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private EntityManagerInterface $paymentRequestManager
     ) {
@@ -43,7 +45,17 @@ final class PaymentRequestNotifyAction
             throw new NotFoundHttpException(sprintf('No payment request found with hash "%s".', $hash));
         }
 
-        $paymentRequest->setPayload($request);
+        if (PaymentRequestInterface::STATE_COMPLETED === $paymentRequest->getState()) {
+            throw new NotFoundHttpException(sprintf('The payment request with hash "%s" is already completed.', $hash));
+        }
+
+        $payload = $this->requestWrapper->wrap($request);
+        $currentPayload = $paymentRequest->getPayload();
+        if (is_array($currentPayload)) {
+            $payload += $currentPayload;
+        }
+
+        $paymentRequest->setPayload($payload);
 
         $this->paymentRequestManager->flush();
 
