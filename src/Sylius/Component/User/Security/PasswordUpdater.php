@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final class PasswordUpdater implements PasswordUpdaterInterface
+final readonly class PasswordUpdater implements PasswordUpdaterInterface
 {
     public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
     {
@@ -27,7 +28,7 @@ final class PasswordUpdater implements PasswordUpdaterInterface
             return;
         }
 
-        $user->setPassword($this->userPasswordHasher->hash($user));
+        $user->setPassword($this->userPasswordHasher->hashPassword($user, $user->getPlainPassword()));
         $user->eraseCredentials();
     }
 }

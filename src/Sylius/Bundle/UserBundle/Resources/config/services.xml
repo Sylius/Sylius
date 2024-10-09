@@ -58,13 +58,8 @@
         <service id="sylius.canonicalizer" class="Sylius\Component\User\Canonicalizer\Canonicalizer" />
         <service id="Sylius\Component\User\Canonicalizer\CanonicalizerInterface" alias="sylius.canonicalizer" />
 
-        <service id="sylius.security.password_hasher" class="Sylius\Bundle\UserBundle\Security\UserPasswordHasher">
-            <argument type="service" id="security.password_hasher_factory" />
-        </service>
-        <service id="Sylius\Component\User\Security\UserPasswordHasherInterface" alias="sylius.security.password_hasher" />
-
         <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
-            <argument type="service" id="sylius.security.password_hasher" />
+            <argument type="service" id="security.user_password_hasher" />
         </service>
 
         <service id="Sylius\Component\User\Security\PasswordUpdaterInterface" alias="sylius.security.password_updater" />
