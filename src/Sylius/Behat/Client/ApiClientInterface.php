@@ -100,5 +100,12 @@ interface ApiClientInterface
      */
     public function requestGet(string $uri, array $queryParameters = [], array $headers = []): Response;
 
+    /**
+     * @param array<string, int|string|bool> $body
+     * @param array<string, int|string|bool> $queryParameters
+     * @param array<string, string> $headers
+     */
+    public function requestPatch(string $uri, array $body = [], array $queryParameters = [], array $headers = []): Response;
+
     public function requestDelete(string $uri): Response;
 }
