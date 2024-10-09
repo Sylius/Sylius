@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PaymentBundle\Wrapper;
+namespace Sylius\Bundle\PaymentBundle\Normalizer;
 
 use Symfony\Component\HttpFoundation\Request;
 
-interface SymfonyRequestWrapperInterface
+interface SymfonyRequestNormalizerInterface
 {
     /**
      * @param Request $request
@@ -22,5 +22,5 @@ interface SymfonyRequestWrapperInterface
      *      },
      *  }
      */
-    public function wrap(Request $request): array;
+    public function normalize(Request $request): array;
 }

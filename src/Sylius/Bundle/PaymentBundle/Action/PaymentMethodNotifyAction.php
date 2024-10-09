@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Provider\PaymentNotifyProviderInterface;
-use Sylius\Bundle\PaymentBundle\Wrapper\SymfonyRequestWrapperInterface;
+use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -35,7 +35,7 @@ final class PaymentMethodNotifyAction
     public function __construct(
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRequestFactoryInterface $paymentRequestFactory,
-        private SymfonyRequestWrapperInterface $requestWrapper,
+        private SymfonyRequestNormalizerInterface $requestWrapper,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private PaymentNotifyProviderInterface $paymentNotifyProvider,
@@ -56,7 +56,7 @@ final class PaymentMethodNotifyAction
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
         $paymentRequest->setAction(PaymentRequestInterface::ACTION_NOTIFY);
-        $paymentRequest->setPayload($this->requestWrapper->wrap($request));
+        $paymentRequest->setPayload($this->requestWrapper->normalize($request));
 
         $this->paymentRequestRepository->add($paymentRequest);
 

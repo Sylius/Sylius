@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PaymentBundle\Wrapper;
+namespace Sylius\Bundle\PaymentBundle\Normalizer;
 
 use Symfony\Component\HttpFoundation\Request;
 
-final class SymfonyRequestWrapper implements SymfonyRequestWrapperInterface
+final class SymfonyRequestNormalizer implements SymfonyRequestNormalizerInterface
 {
-    public function wrap(Request $request): array
+    public function normalize(Request $request): array
     {
         return [
             'http_request' => [

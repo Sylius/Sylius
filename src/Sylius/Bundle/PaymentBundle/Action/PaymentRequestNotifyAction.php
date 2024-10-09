@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
-use Sylius\Bundle\PaymentBundle\Wrapper\SymfonyRequestWrapperInterface;
+use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentRequestTransitions;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
@@ -31,7 +31,7 @@ final class PaymentRequestNotifyAction
      */
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
-        private SymfonyRequestWrapperInterface $requestWrapper,
+        private SymfonyRequestNormalizerInterface $requestWrapper,
         private StateMachineInterface $stateMachine,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private EntityManagerInterface $paymentRequestManager,
@@ -59,7 +59,7 @@ final class PaymentRequestNotifyAction
             throw new NotFoundHttpException(sprintf('The payment request with hash "%s" is on a final state (state: %s).', $hash, $state));
         }
 
-        $payload = $this->requestWrapper->wrap($request);
+        $payload = $this->requestWrapper->normalize($request);
         $currentPayload = $paymentRequest->getPayload();
         if (is_array($currentPayload)) {
             $payload += $currentPayload;
