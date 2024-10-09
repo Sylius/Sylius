@@ -1856,11 +1856,6 @@ parameters:
 			path: src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Security\\\\UserLoginInterface\\:\\:login\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Security/UserLoginInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Addressing\\\\Comparator\\\\AddressComparator\\:\\:normalizeAddress\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Addressing/Comparator/AddressComparator.php

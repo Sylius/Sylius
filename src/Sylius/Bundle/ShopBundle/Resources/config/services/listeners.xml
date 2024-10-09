@@ -58,7 +58,7 @@
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.security.user_login" />
+            <argument type="service" id="security.helper" />
             <argument>%sylius_shop.firewall_context_name%</argument>
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="handleUserVerification" />
         </service>

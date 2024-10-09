@@ -236,7 +236,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition($providerEmailOrNameBasedServiceId, $emailOrNameBasedProviderDefinition);
     }
 
-    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container)
+    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container): void
     {
         $container->setParameter(sprintf('sylius.%s_user.token.password_reset.ttl', $userType), $config['resetting']['token']['ttl']);
     }
