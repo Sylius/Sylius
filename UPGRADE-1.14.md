@@ -115,6 +115,9 @@
     | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
     | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
     | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+    | **TaxationBundle**                                                                                         |                                                                                      |
+    | `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
+    | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
