@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Provider\PaymentNotifyProviderInterface;
+use Sylius\Bundle\PaymentBundle\Wrapper\SymfonyRequestWrapperInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -34,9 +35,10 @@ final class PaymentMethodNotifyAction
     public function __construct(
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRequestFactoryInterface $paymentRequestFactory,
+        private SymfonyRequestWrapperInterface $requestWrapper,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
-        private PaymentNotifyProviderInterface $webhookPaymentProvider,
+        private PaymentNotifyProviderInterface $paymentNotifyProvider,
     ) {
     }
 
@@ -50,11 +52,11 @@ final class PaymentMethodNotifyAction
             throw new NotFoundHttpException(sprintf('No payment method found with code "%s".', $code));
         }
 
-        $payment = $this->webhookPaymentProvider->getPayment($request, $paymentMethod);
+        $payment = $this->paymentNotifyProvider->getPayment($request, $paymentMethod);
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
         $paymentRequest->setAction(PaymentRequestInterface::ACTION_NOTIFY);
-        $paymentRequest->setPayload($request);
+        $paymentRequest->setPayload($this->requestWrapper->wrap($request));
 
         $this->paymentRequestRepository->add($paymentRequest);
 
