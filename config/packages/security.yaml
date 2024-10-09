@@ -17,6 +17,7 @@ security:
             context: admin
             pattern: "%sylius.security.admin_regex%"
             provider: sylius_admin_user_provider
+            user_checker: sylius.user_checker
             form_login:
                 provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
@@ -41,6 +42,7 @@ security:
         new_api_admin_user:
             pattern: "%sylius.security.new_api_admin_regex%/.*"
             provider: sylius_api_admin_user_provider
+            user_checker: sylius.user_checker
             stateless: true
             entry_point: jwt
             json_login:
@@ -54,6 +56,7 @@ security:
         new_api_shop_user:
             pattern: "%sylius.security.new_api_shop_regex%/.*"
             provider: sylius_api_shop_user_provider
+            user_checker: sylius.user_checker
             stateless: true
             entry_point: jwt
             json_login:
@@ -69,6 +72,7 @@ security:
             context: shop
             pattern: "%sylius.security.shop_regex%"
             provider: sylius_shop_user_provider
+            user_checker: sylius.user_checker
             form_login:
                 success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler

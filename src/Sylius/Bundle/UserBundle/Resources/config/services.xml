@@ -102,5 +102,7 @@
             <argument>%sylius.form.type.user_change_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
+        <service id="sylius.user_checker" class="Sylius\Component\User\Security\Checker\UserChecker" />
     </services>
 </container>
