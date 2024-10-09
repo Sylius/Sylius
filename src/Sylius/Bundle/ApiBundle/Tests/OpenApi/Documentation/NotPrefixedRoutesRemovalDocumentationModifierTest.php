@@ -19,15 +19,15 @@ use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\OpenApi;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\OpenApi\Documentation\DocumentationModifierInterface;
-use Sylius\Bundle\ApiBundle\OpenApi\Documentation\NotApiRoutesRemovalDocumentationModifier;
+use Sylius\Bundle\ApiBundle\OpenApi\Documentation\NotPrefixedRoutesRemovalDocumentationModifier;
 
-final class NotApiRoutesRemovalDocumentationModifierTest extends TestCase
+final class NotPrefixedRoutesRemovalDocumentationModifierTest extends TestCase
 {
-    private NotApiRoutesRemovalDocumentationModifier $notApiRoutesRemovalDocumentationModifier;
+    private NotPrefixedRoutesRemovalDocumentationModifier $notApiRoutesRemovalDocumentationModifier;
 
     protected function setUp(): void
     {
-        $this->notApiRoutesRemovalDocumentationModifier = new NotApiRoutesRemovalDocumentationModifier('/api/v2');
+        $this->notApiRoutesRemovalDocumentationModifier = new NotPrefixedRoutesRemovalDocumentationModifier(['/api/v2', '/custom-api']);
     }
 
     /** @test */
@@ -43,6 +43,8 @@ final class NotApiRoutesRemovalDocumentationModifierTest extends TestCase
         $paths->addPath('/api/v2/admin/currencies', new PathItem());
         $paths->addPath('/api/v2/shop/currencies', new PathItem());
         $paths->addPath('/admin/currencies', new PathItem());
+        $paths->addPath('/shop/currencies', new PathItem());
+        $paths->addPath('/custom-api/currencies', new PathItem());
 
         $openApi = new OpenApi(new Info('title', 'version'), [], $paths);
 
@@ -51,6 +53,8 @@ final class NotApiRoutesRemovalDocumentationModifierTest extends TestCase
 
         $this->assertArrayHasKey('/api/v2/admin/currencies', $modifiedPaths);
         $this->assertArrayHasKey('/api/v2/shop/currencies', $modifiedPaths);
+        $this->assertArrayHasKey('/custom-api/currencies', $modifiedPaths);
         $this->assertArrayNotHasKey('/admin/currencies', $modifiedPaths);
+        $this->assertArrayNotHasKey('/shop/currencies', $modifiedPaths);
     }
 }

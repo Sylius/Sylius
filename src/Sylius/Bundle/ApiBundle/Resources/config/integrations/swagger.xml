@@ -88,10 +88,12 @@
         </service>
 
         <service
-            id="sylius_api.open_api.documentation_modifier.not_api_routes_removal"
-            class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\NotApiRoutesRemovalDocumentationModifier"
+            id="sylius_api.open_api.documentation_modifier.not_prefixed_routes_removal"
+            class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\NotPrefixedRoutesRemovalDocumentationModifier"
         >
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument type="collection">
+                <argument>%sylius.security.new_api_route%</argument>
+            </argument>
             <tag name="sylius.open_api.modifier" />
         </service>
 

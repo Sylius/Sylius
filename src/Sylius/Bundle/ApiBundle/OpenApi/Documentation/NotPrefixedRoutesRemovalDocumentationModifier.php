@@ -17,9 +17,10 @@ use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\OpenApi;
 
-final readonly class NotApiRoutesRemovalDocumentationModifier implements DocumentationModifierInterface
+final readonly class NotPrefixedRoutesRemovalDocumentationModifier implements DocumentationModifierInterface
 {
-    public function __construct(private string $apiRoute)
+    /** @param array<string> $prefixesToRemove */
+    public function __construct(private array $prefixesToRemove)
     {
     }
 
@@ -29,9 +30,13 @@ final readonly class NotApiRoutesRemovalDocumentationModifier implements Documen
         $pathItems = $docs->getPaths()->getPaths();
 
         foreach ($pathItems as $path => $pathItem) {
-            if (!str_starts_with($path, $this->apiRoute)) {
-                unset($pathItems[$path]);
+            foreach ($this->prefixesToRemove as $prefix) {
+                if (str_starts_with($path, $prefix)) {
+                    continue 2;
+                }
             }
+
+            unset($pathItems[$path]);
         }
 
         $paths = new Paths();
