@@ -56,6 +56,7 @@ final class PaymentMethodNotifyAction
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
         $paymentRequest->setAction(PaymentRequestInterface::ACTION_NOTIFY);
+
         $this->requestPayloadProcessor->process($paymentRequest, $request);
 
         $this->paymentRequestRepository->add($paymentRequest);

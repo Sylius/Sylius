@@ -47,5 +47,10 @@
             <argument type="service" id="sylius.factory.payum_get_status_action" />
             <tag name="messenger.message_handler" bus="sylius.payment_request.command_bus" handles="Sylius\Bundle\PayumBundle\PaymentRequest\Command\StatusPaymentRequest" />
         </service>
+
+        <service id="sylius.payum.payment_request.command_handler.model_payment_request.notify" parent="sylius.payum.payment_request.command_handler.model_payment_request">
+            <argument type="service" id="sylius.factory.payum_get_status_action" />
+            <tag name="messenger.message_handler" bus="sylius.payment_request.command_bus" handles="Sylius\Bundle\PayumBundle\PaymentRequest\Command\NotifyPaymentRequest" />
+        </service>
     </services>
 </container>

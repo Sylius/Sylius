@@ -31,5 +31,9 @@
         <service id="sylius.payum.payment_request.command_provider.offline.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\CommandProvider\StatusCommandProvider">
             <tag name="sylius.payum.payment_request.command_provider.offline" action="status" />
         </service>
+
+        <service id="sylius.payum.payment_request.command_provider.offline.notify" class="Sylius\Bundle\PayumBundle\PaymentRequest\CommandProvider\NotifyCommandProvider">
+            <tag name="sylius.payum.payment_request.command_provider.offline" action="notify" />
+        </service>
     </services>
 </container>
