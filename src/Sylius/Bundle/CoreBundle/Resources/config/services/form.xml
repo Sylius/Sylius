@@ -156,7 +156,13 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.catalog_promotion_action.percentage_discount_action_configuration" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType" />
+        <service
+            id="sylius.form.type.catalog_promotion_action.percentage_discount_action_configuration"
+            class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType"
+        >
+            <tag name="sylius.catalog_promotion.action_configuration_type" key="%sylius.catalog_promotion.action.percentage_discount%" />
+            <tag name="form.type" />
+        </service>
 
         <service id="Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionAction\ChannelBasedFixedDiscountActionConfigurationType">
             <tag name="sylius.catalog_promotion.action_configuration_type" key="%sylius.catalog_promotion.action.fixed_discount%" />
@@ -291,9 +297,14 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.catalog_promotion_action" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" />
+        <service id="sylius.form.type.catalog_promotion_action" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType">
+            <argument>%sylius.model.catalog_promotion_action.class%</argument>
+            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
+            <tag name="form.type" />
+        </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
+        <service id="sylius.form.type.catalog_promotion_scope" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
             <argument>%sylius.model.catalog_promotion_scope.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
