@@ -11,7 +11,7 @@
             <div id="media-body" class="accordion-collapse collapse" data-bs-parent="#media">
                 <div class="accordion-body">
                     {% if product.images|length >= 1 %}
-                        <div {{ sylius_test_html_attribute('media') }}>
+                        <div class="spotlight-group" {{ sylius_test_html_attribute('media') }}>
                             {% for image in product.images %}
                                 {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
                                     {% if product.isConfigurable() and product.variants|length > 0 %}
@@ -25,13 +25,13 @@
                                             {% endfor %}
                                         {% endif %}
                                     {% endif %}
-                                    <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" data-lightbox="sylius-product-image">
-                                        <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_admin_product_large_thumbnail') }}" alt="{{ product.name }}" />
+                                    <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" class="spotlight">
+                                        <img src="{{ path }}" alt="{{ product.name }}" />
                                     </a>
                             {% endfor %}
                         </div>
-                        {% else %}
-                            {{ 'sylius.ui.there_are_no_images_for_this_product'|trans }}
+                    {% else %}
+                        {{ 'sylius.ui.there_are_no_images_for_this_product'|trans }}
                     {% endif %}
             </div>
             </div>
