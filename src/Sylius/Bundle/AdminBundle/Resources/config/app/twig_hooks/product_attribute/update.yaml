@@ -1,4 +1,4 @@
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.product_attribute.update.content':
             form:
