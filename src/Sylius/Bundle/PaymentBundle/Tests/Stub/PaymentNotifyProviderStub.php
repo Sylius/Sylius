@@ -23,11 +23,13 @@ use Symfony\Component\HttpFoundation\Request;
 #[AsPaymentNotifyProvider(priority: 15)]
 final class PaymentNotifyProviderStub implements PaymentNotifyProviderInterface
 {
-    public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface {
+    public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface
+    {
         return new Payment();
     }
 
-    public function supports(Request $request, PaymentMethodInterface $paymentMethod): bool {
+    public function supports(Request $request, PaymentMethodInterface $paymentMethod): bool
+    {
         return true;
     }
 }
