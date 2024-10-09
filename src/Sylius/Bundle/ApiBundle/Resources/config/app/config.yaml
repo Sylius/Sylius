@@ -56,7 +56,10 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
         Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException: 422
+        Sylius\Component\Payment\Exception\PaymentRequestNotFoundException: 404
+        Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductOptionValueCannotBeRemoved: 422
@@ -74,6 +77,7 @@ api_platform:
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException: 422
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException: 422
+        Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException: 422
         Sylius\Component\Promotion\Exception\FailedGenerationException: 422
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400

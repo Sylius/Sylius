@@ -58,6 +58,10 @@ sylius_admin_payment:
 sylius_admin_payment_method:
     resource: "@SyliusAdminBundle/Resources/config/routing/payment_method.yml"
 
+sylius_admin_payment_request:
+    resource: "@SyliusAdminBundle/Resources/config/routing/payment_request.yaml"
+    prefix: /payments/{paymentId}/payment-requests/
+
 sylius_admin_product:
     resource: "@SyliusAdminBundle/Resources/config/routing/product.yml"
 

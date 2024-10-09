@@ -124,6 +124,8 @@ sylius_twig_hooks:
                 template: '@SyliusAdmin/order/show/content/sections/payments/item/actions.html.twig'
 
         'sylius_admin.order.show.content.sections.payments.item.actions':
+            list_payment_requests:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/list_payment_requests.html.twig'
             complete:
                 template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/complete.html.twig'
             refund:

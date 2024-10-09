@@ -29,6 +29,7 @@
         "enshrined/svg-sanitize": "^0.16",
         "lexik/jwt-authentication-bundle": "^2.11",
         "sylius/core-bundle": "^2.0",
+        "sylius/payum-bundle": "^2.0",
         "symfony/messenger": "^6.4.0 || ^7.1"
     },
     "require-dev": {
