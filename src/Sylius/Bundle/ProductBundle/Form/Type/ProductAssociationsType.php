@@ -29,7 +29,7 @@ final class ProductAssociationsType extends AbstractType
         private DataTransformerInterface $productsToProductAssociationsTransformer,
     ) {
     }
-
+// WIP
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer($this->productsToProductAssociationsTransformer);
