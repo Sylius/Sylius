@@ -16,9 +16,11 @@ namespace Sylius\Bundle\PaymentBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\PaymentBundle\Attribute\AsGatewayConfigurationType;
 use Sylius\Bundle\PaymentBundle\Attribute\AsPaymentMethodsResolver;
+use Sylius\Bundle\PaymentBundle\Attribute\AsPaymentNotifyProvider;
 use Sylius\Bundle\PaymentBundle\DependencyInjection\SyliusPaymentExtension;
 use Sylius\Bundle\PaymentBundle\Tests\Stub\GatewayConfigurationTypeStub;
 use Sylius\Bundle\PaymentBundle\Tests\Stub\PaymentMethodsResolverStub;
+use Sylius\Bundle\PaymentBundle\Tests\Stub\PaymentNotifyProviderStub;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -61,6 +63,26 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
             'acme.gateway_configuration_type_with_attribute',
             AsGatewayConfigurationType::SERVICE_TAG,
             ['type' => 'test', 'label' => 'Test', 'priority' => 15],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_payment_notify_provider_with_attribute(): void
+    {
+        $this->container->setDefinition(
+            'acme.payment_notify_provider_with_attribute',
+            (new Definition())
+                ->setClass(PaymentNotifyProviderStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.payment_notify_provider_with_attribute',
+            AsPaymentNotifyProvider::SERVICE_TAG,
+            ['priority' => 15],
         );
     }
 
