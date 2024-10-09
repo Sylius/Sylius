@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Action;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Wrapper\SymfonyRequestWrapperInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\PaymentRequestTransitions;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +32,7 @@ final class PaymentRequestNotifyAction
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private SymfonyRequestWrapperInterface $requestWrapper,
+        private StateMachineInterface $stateMachine,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private EntityManagerInterface $paymentRequestManager,
     ) {
@@ -45,8 +48,15 @@ final class PaymentRequestNotifyAction
             throw new NotFoundHttpException(sprintf('No payment request found with hash "%s".', $hash));
         }
 
-        if (PaymentRequestInterface::STATE_COMPLETED === $paymentRequest->getState()) {
-            throw new NotFoundHttpException(sprintf('The payment request with hash "%s" is already completed.', $hash));
+        $state = $paymentRequest->getState();
+        $nextTransition = $this->stateMachine->getTransitionFromState(
+            $paymentRequest,
+            PaymentRequestTransitions::GRAPH,
+            $state
+        );
+
+        if (null === $nextTransition) {
+            throw new NotFoundHttpException(sprintf('The payment request with hash "%s" is on a final state (state: %s).', $hash, $state));
         }
 
         $payload = $this->requestWrapper->wrap($request);
