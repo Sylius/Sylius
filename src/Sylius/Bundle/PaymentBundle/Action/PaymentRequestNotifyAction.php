@@ -31,7 +31,7 @@ final class PaymentRequestNotifyAction
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private SymfonyRequestWrapperInterface $requestWrapper,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
-        private EntityManagerInterface $paymentRequestManager
+        private EntityManagerInterface $paymentRequestManager,
     ) {
     }
 

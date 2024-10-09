@@ -38,7 +38,7 @@ final readonly class PaymentRequestContext implements Context
     {
         $this->paymentMethodNotifyPage->openWithClient(
             'GET',
-            [ 'code' => $paymentMethodCode ],
+            ['code' => $paymentMethodCode],
         );
     }
 
@@ -51,14 +51,14 @@ final readonly class PaymentRequestContext implements Context
         $paymentRequests = $this->paymentRequestRepository->findBy(
             ['action' => PaymentRequestInterface::ACTION_NOTIFY],
             ['createdAt' => 'ASC'],
-            1
+            1,
         );
 
         $paymentRequest = $paymentRequests[0];
 
         $this->paymentRequestNotifyPage->openWithClient(
             'GET',
-            [ 'hash' => $paymentRequest->getHash() ],
+            ['hash' => $paymentRequest->getHash()],
         );
     }
 
@@ -73,7 +73,7 @@ final readonly class PaymentRequestContext implements Context
         $paymentRequests = $this->paymentRequestRepository->findBy(
             ['action' => $action],
             ['createdAt' => 'ASC'],
-            1
+            1,
         );
 
         Assert::count($paymentRequests, 1);
@@ -91,7 +91,7 @@ final readonly class PaymentRequestContext implements Context
         $paymentRequests = $this->paymentRequestRepository->findBy(
             ['action' => $action],
             ['createdAt' => 'ASC'],
-            1
+            1,
         );
 
         Assert::isEmpty($paymentRequests);

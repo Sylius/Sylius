@@ -34,7 +34,7 @@ final class DummyPaymentNotifyProvider implements PaymentNotifyProviderInterface
         $payments = $this->paymentRepository->findBy(
             [],
             ['createdAt' => 'ASC'],
-            1
+            1,
         );
 
         return $payments[0];

@@ -39,7 +39,7 @@ final class CompositePaymentNotifyProvider implements PaymentNotifyProviderInter
 
         throw new \LogicException(sprintf(
             'No webhook payment provider found supporting this request and payment method (code: %s).',
-            $paymentMethod->getCode()
+            $paymentMethod->getCode(),
         ));
     }
 
