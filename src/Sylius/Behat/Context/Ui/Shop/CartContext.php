@@ -479,6 +479,14 @@ final readonly class CartContext implements Context
     }
 
     /**
+     * @When I remove coupon from my cart
+     */
+    public function iRemoveCouponFromMyCart(): void
+    {
+        $this->summaryPage->removeCoupon();
+    }
+
+    /**
      * @Then /^I should see "([^"]+)" with quantity (\d+) in my cart$/
      * @Then my cart should have quantity of :quantity items of product :productName
      * @Then /^the visitor should see product "([^"]+)" with quantity (\d+) in his cart$/
@@ -546,10 +554,9 @@ final readonly class CartContext implements Context
 
     /**
      * @Given I use coupon with code :couponCode
-     * @Given I remove coupon from my cart
      * @Given this cart has promotion applied with coupon :couponCode
      */
-    public function iUseCouponWithCode(?string $couponCode = null): void
+    public function iUseCouponWithCode(string $couponCode): void
     {
         $this->summaryPage->applyCoupon($couponCode);
     }
