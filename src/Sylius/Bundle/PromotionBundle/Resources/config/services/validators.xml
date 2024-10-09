@@ -39,7 +39,6 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_action" />
         </service>
-        <service id="sylius.validator.catalog_promotion_action" alias="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator" />
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionGroupValidator">
             <argument>%sylius.promotion.catalog_promotion_action.validation_groups%</argument>
@@ -58,7 +57,6 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
         </service>
-        <service id="sylius.validator.catalog_promotion_scope" alias="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeValidator" />
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeGroupValidator">
             <argument>%sylius.promotion.catalog_promotion_scope.validation_groups%</argument>
