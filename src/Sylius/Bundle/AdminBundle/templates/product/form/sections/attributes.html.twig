@@ -11,7 +11,11 @@
         </div>
         <div class="card-body py-4 border-bottom">
             <div class="sylius-admin-product-attribute-autocomplete">
-                <twig:sylius_admin:product:product_attribute_autocomplete data-model="attributesToBeAdded:selectedAttributeCodes" :excludedAttributeCodes="product_attributes|keys" />
+                <twig:sylius_admin:product:product_attribute_autocomplete
+                    data-model="attributesToBeAdded:selectedAttributeCodes"
+                    :excludedAttributeCodes="product_attributes|keys"
+                    template="@SyliusAdmin/product/product_attribute_autocomplete.html.twig"
+                />
                 <button type="button" class="btn btn-primary" data-action="live#action" data-live-action-param="prevent|addAttributes" {{ sylius_test_html_attribute('attribute-add-button') }}>
                     {{ 'sylius.ui.add'|trans }}
                 </button>

@@ -17,6 +17,7 @@ sylius_twig_hooks:
                 component: 'sylius_admin:dashboard:statistics'
                 props:
                     channelCode: '@=_context.channel_code'
+                    template: '@SyliusAdmin/dashboard/index/component/statistics.html.twig'
             latest_statistics:
                 template: '@SyliusAdmin/dashboard/index/content/latest_statistics.html.twig'
 
@@ -36,6 +37,7 @@ sylius_twig_hooks:
                 component: 'sylius_admin:dashboard:channel_selector'
                 props:
                     channelCode: '@=_context.channel_code'
+                    template: '@SyliusAdmin/dashboard/index/component/channel_selector.html.twig'
 
         'sylius_admin.dashboard.index.content.statistics':
             statistics_grid:
@@ -56,7 +58,10 @@ sylius_twig_hooks:
         'sylius_admin.dashboard.index.content.latest_statistics':
             new_customers:
                 component: 'sylius_admin:dashboard:new_customers'
+                props:
+                    template: '@SyliusAdmin/dashboard/index/component/new_customers.html.twig'
             new_orders:
                 component: 'sylius_admin:dashboard:new_orders'
                 props:
                     channelCode: '@=_context.channel_code'
+                    template: '@SyliusAdmin/dashboard/index/component/new_orders.html.twig'

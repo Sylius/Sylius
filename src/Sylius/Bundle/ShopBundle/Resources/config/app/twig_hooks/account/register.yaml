@@ -6,6 +6,7 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.customer'
                     form: '@=_context.form'
+                    template: '@SyliusShop/account/register/form.html.twig'
 
         'sylius_shop.account.register.form':
             header:

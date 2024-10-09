@@ -23,11 +23,7 @@
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:dashboard:channel_selector"
-                template="@SyliusAdmin/dashboard/index/component/channel_selector.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:dashboard:channel_selector" />
         </service>
 
         <service
@@ -36,10 +32,7 @@
         >
             <argument type="service" id="sylius.repository.customer" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:dashboard:new_customers"
-                template="@SyliusAdmin/dashboard/index/component/new_customers.html.twig"
+            <tag name="sylius.twig_component" key="sylius_admin:dashboard:new_customers"
             />
         </service>
 
@@ -50,11 +43,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.channel" />
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:dashboard:new_orders"
-                template="@SyliusAdmin/dashboard/index/component/new_orders.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:dashboard:new_orders" />
         </service>
 
         <service
@@ -64,11 +53,7 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:dashboard:statistics"
-                template="@SyliusAdmin/dashboard/index/component/statistics.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:dashboard:statistics" />
         </service>
     </services>
 </container>

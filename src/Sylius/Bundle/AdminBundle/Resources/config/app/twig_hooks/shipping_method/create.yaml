@@ -6,6 +6,7 @@ sylius_twig_hooks:
                 props:
                     form: '@=_context.form'
                     resource: '@=_context.resource'
+                    template: '@SyliusAdmin/shipping_method/form.html.twig'
                     
         'sylius_admin.shipping_method.create.content.form':
             sections:

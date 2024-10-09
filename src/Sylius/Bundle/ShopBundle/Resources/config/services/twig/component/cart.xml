@@ -26,11 +26,7 @@
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
 
-            <tag
-                name="sylius.live_component.shop"
-                key="sylius_shop:cart:form"
-                template="@SyliusShop/cart/index/form.html.twig"
-            />
+            <tag name="sylius.live_component.shop" key="sylius_shop:cart:form" />
         </service>
 
         <service
@@ -42,7 +38,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:cart:summary"
-                template="@SyliusShop/cart/index/form/sections/general/summary.html.twig"
             />
         </service>
 
@@ -56,7 +51,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:cart:widget"
-                template="@SyliusShop/shared/components/header/cart.html.twig"
             />
         </service>
 
@@ -70,7 +64,6 @@
             <tag
                 name="sylius.live_component.shop"
                 key="sylius_shop:cart:widget:offcanvas"
-                template="@SyliusShop/shared/layout/base/offcanvas/cart.html.twig"
             />
         </service>
     </services>

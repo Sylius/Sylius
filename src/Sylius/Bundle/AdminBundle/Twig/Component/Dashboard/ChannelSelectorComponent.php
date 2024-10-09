@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Dashboard;
 
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -30,6 +31,7 @@ class ChannelSelectorComponent
     use ComponentToolsTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
+    use TemplatePropTrait;
 
     public const SYLIUS_ADMIN_CHANNEL_CHANGED = 'sylius:admin:channel_changed';
 

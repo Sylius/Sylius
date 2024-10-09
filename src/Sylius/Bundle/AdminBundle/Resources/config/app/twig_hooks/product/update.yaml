@@ -10,6 +10,7 @@ sylius_twig_hooks:
                     form: '@=_context.form'
                     resource: '@=_context.resource'
                     isSimple: '@=_context.resource.isSimple()'
+                    template: '@SyliusAdmin/product/form.html.twig'
                 configuration:
                     method: 'PUT'
 
@@ -155,6 +156,7 @@ sylius_twig_hooks:
                 component: 'sylius_admin:product:form:product_taxons'
                 props:
                     form: '@=_context.form'
+                    template: '@SyliusAdmin/product/form/sections/taxonomy/product_taxons.html.twig'
                 configuration:
                     auto_open: false
 

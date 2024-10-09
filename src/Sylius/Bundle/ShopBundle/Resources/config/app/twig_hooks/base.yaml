@@ -23,8 +23,12 @@ sylius_twig_hooks:
                 template: '@SyliusShop/shared/layout/base/header/top_bar/info_message.html.twig'
             currency_switcher:
                 component: 'sylius_shop:common:currency_switcher'
+                props:
+                    template: '@SyliusShop/shared/layout/base/header/top_bar/currency_switcher.html.twig'
             locale_switcher:
                 component: 'sylius_shop:common:locale_switcher'
+                props:
+                    template: '@SyliusShop/shared/layout/base/header/top_bar/locale_switcher.html.twig'
 
         'sylius_shop.base.header.content':
             logo:
@@ -33,6 +37,8 @@ sylius_twig_hooks:
                 template: "@SyliusShop/shared/layout/base/header/content/security.html.twig"
             cart:
                 component: 'sylius_shop:cart:widget'
+                props:
+                    template: '@SyliusShop/shared/components/header/cart.html.twig'
             taxon_hamburger:
                 template: "@SyliusShop/shared/layout/base/header/content/taxon_hamburger.html.twig"
                 
@@ -87,6 +93,8 @@ sylius_twig_hooks:
         'sylius_shop.base.header.navbar':
             menu:
                 component: "sylius_shop:common:taxon_menu"
+                props:
+                    template: '@SyliusShop/shared/layout/base/header/navbar/menu.html.twig'
 
         'sylius_shop.base.header.flashes':
             content:
@@ -107,6 +115,8 @@ sylius_twig_hooks:
         'sylius_shop.base.offcanvas':
             cart:
                 component: 'sylius_shop:cart:widget:offcanvas'
+                props:
+                    template: '@SyliusShop/shared/layout/base/offcanvas/cart.html.twig'
 
         'sylius_shop.base.offcanvas.cart':
             header:

@@ -7,6 +7,7 @@ sylius_twig_hooks:
                     resource: '@=_context.resource'
                     type: '@=_context.resource.getType()'
                     form: '@=_context.form'
+                    template: '@SyliusAdmin/zone/form.html.twig'
 
         'sylius_admin.zone.create.content.form':
             sections:

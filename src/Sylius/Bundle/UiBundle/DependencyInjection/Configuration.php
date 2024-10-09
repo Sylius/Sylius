@@ -92,6 +92,7 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('prefix_name')
                             ->scalarPrototype()->end()
                         ->end()
+                        ->scalarNode('component_default_template')->cannotBeEmpty()->defaultValue('@SyliusUi/components/default.html.twig')->end()
                     ->end()
                 ->end()
             ->end()

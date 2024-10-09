@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Zone;
 
 use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -29,6 +30,7 @@ class FormComponent
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
+    use TemplatePropTrait;
 
     #[LiveProp(fieldName: 'type')]
     public ?string $type = null;
