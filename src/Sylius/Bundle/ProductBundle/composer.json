@@ -26,6 +26,8 @@
         }
     ],
     "require": {
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^4.2",
         "php": "^8.1",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/attribute-bundle": "^1.13",
@@ -35,6 +37,7 @@
         "symfony/framework-bundle": "^5.4.21 || ^6.4"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
         "doctrine/orm": "^2.13",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "mockery/mockery": "^1.4",

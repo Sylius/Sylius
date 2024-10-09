@@ -25,6 +25,8 @@
         }
     ],
     "require": {
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^4.2",
         "php": "^8.1",
         "sylius/resource-bundle": "^1.11",
         "symfony/framework-bundle": "^5.4.21 || ^6.4",
@@ -36,6 +38,7 @@
         "twig/twig": "^1.0 || 3.9.0"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
