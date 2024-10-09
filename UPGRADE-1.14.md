@@ -115,6 +115,10 @@
     | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
     | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
     | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+    | **ReviewBundle**                                                                                           |                                                                                      |
+    | `sylius.average_rating_calculator`                                                                         | `sylius.calculator.average_rating`                                                   |
+    | `sylius.%s_review.average_rating_updater`                                                                  | `sylius.updater.%s_review.average_rating`                                            |
+    | **Note: `%s` refers to the entity names associated with reviews (e.g., `product`, etc.).**                 |                                                                                      |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
