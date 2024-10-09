@@ -13,28 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ReviewBundle\EventListener;
 
-use Doctrine\ORM\Event\PostRemoveEventArgs;
+use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewChangeListener
 {
-    public function __construct(private ReviewableRatingUpdaterInterface $averageRatingUpdater)
+    public function __construct(private readonly ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
     }
 
-    public function postPersist(LifecycleEventArgs $args)
-    {
-        $this->recalculateSubjectRating($args);
-    }
-
-    public function postUpdate(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }
 
-    public function postRemove(LifecycleEventArgs $args)
+    public function postUpdate(LifecycleEventArgs $args): void
+    {
+        $this->recalculateSubjectRating($args);
+    }
+
+    public function preRemove(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }
@@ -49,7 +49,7 @@ final class ReviewChangeListener
 
         $reviewSubject = $subject->getReviewSubject();
 
-        if ($args instanceof PostRemoveEventArgs) {
+        if ($args instanceof PreRemoveEventArgs) {
             $reviewSubject->removeReview($subject);
         }
 
