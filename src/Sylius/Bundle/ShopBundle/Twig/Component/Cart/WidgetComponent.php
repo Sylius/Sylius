@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceLivePropTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -33,7 +33,7 @@ class WidgetComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     /** @use ResourceLivePropTrait<OrderInterface> */
     use ResourceLivePropTrait;

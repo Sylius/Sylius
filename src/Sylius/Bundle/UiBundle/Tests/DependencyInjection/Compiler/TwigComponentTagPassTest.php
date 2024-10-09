@@ -73,6 +73,30 @@ final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
         );
     }
 
+    public function testUsingDefaultTemplateWithTwigComponentTag(): void
+    {
+        $twigComponent = new Definition();
+        $twigComponent->addTag('sylius.twig_component', [
+            'key' => 'foo',
+            'expose_public_props' => false,
+        ]);
+
+        $this->setDefinition('my_twig_component', $twigComponent);
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'my_twig_component',
+            'twig.component',
+            [
+                'key' => 'foo',
+                'template' => '@SyliusUi/components/default.html.twig',
+                'expose_public_props' => false,
+                'attributes_var' => 'attributes',
+            ],
+        );
+    }
+
     public function testThrowingExceptionWhenKeyIsNotPresentOnTwigComponentTag(): void
     {
         $twigComponent = new Definition();

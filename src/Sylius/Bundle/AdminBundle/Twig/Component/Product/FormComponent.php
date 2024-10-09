@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
 use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -42,7 +42,7 @@ class FormComponent
 
     use ComponentToolsTrait;
     use LiveCollectionTrait;
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait;

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\ProductOption;
 
 use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -30,7 +30,7 @@ class FormComponent
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     #[LiveAction]
     public function applyToAll(#[LiveArg] string $valueKey, #[LiveArg] string $translationKey): void

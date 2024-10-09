@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Shipment;
 
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
@@ -26,7 +26,7 @@ class ShipFormComponent
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     /** @var array<string, mixed> $pathParameters */
     #[ExposeInTemplate('path_parameters')]

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Taxon;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\AdminBundle\Doctrine\Query\Taxon\AllTaxonsInterface;
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -29,7 +29,7 @@ class TreeComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     /** @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository */
     public function __construct(

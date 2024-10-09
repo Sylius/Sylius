@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\ProductAttribute;
 
 use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -25,7 +25,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 class FormComponent
 {
     use LiveCollectionTrait;
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     /** @use ResourceFormComponentTrait<ProductAttributeInterface> */
     use ResourceFormComponentTrait {

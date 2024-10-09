@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Account;
 
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -29,7 +29,7 @@ class ChangePasswordFormComponent
     use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     #[LiveProp]
     public ?ChangePassword $changePassword = null;

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -35,7 +35,7 @@ class SummaryComponent
     use HookableLiveComponentTrait;
     use ProductLivePropTrait;
     use ProductVariantLivePropTrait;
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     /**
      * @param ProductRepositoryInterface<ProductInterface> $productRepository

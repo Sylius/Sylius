@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Dashboard;
 
-use Sylius\Bundle\UiBundle\Twig\Component\TemplateLivePropTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
@@ -34,7 +34,7 @@ class StatisticsComponent
     use ComponentToolsTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use TemplateLivePropTrait;
+    use TemplatePropTrait;
 
     #[LiveProp]
     public string $channelCode;
