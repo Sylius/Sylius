@@ -34,7 +34,6 @@
         "symfony/intl": "^5.4.21 || ^6.4"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0",
         "stof/doctrine-extensions-bundle": "1.8.0",
         "twig/twig": "^1.0 || ^3.0"
     },

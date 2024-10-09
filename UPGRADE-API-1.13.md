@@ -1,3 +1,13 @@
+# UPGRADE FROM `v1.13.6` TO `v1.13.7`
+
+1. The default order attribute has been added to the endpoint GET `/admin/customers` endpoint
+
+    ```diff
+    +   <attribute name="order">
+    +       <attribute name="createdAt">DESC</attribute>
+    +   </attribute>
+    ```
+
 # UPGRADE FROM `v1.13.3` TO `v1.13.4`
 
 1. The `api/v2/shop/adjustments/{id}` endpoint has been disabled.

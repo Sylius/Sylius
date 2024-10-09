@@ -53,15 +53,6 @@ jobs:
         with:
             branch: ${{ matrix.branch }}
             type: full
-    e2e-custom:
-        strategy:
-            matrix:
-                branch: ["2.0"]
-        name: "[${{ matrix.branch }}] End-to-end tests (Custom)"
-        needs: static-checks
-        uses: ./.github/workflows/ci_e2e-custom.yaml
-        with:
-            branch: ${{ matrix.branch }}
     frontend:
         name: Frontend
         needs: static-checks
@@ -82,7 +73,7 @@ jobs:
     notify-about-build-status:
         if: ${{ always() }}
         name: "Notify about build status"
-        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-custom, packages]
+        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, packages]
         runs-on: ubuntu-latest
         timeout-minutes: 5
 
@@ -109,7 +100,6 @@ jobs:
                         ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
                         ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} End-to-End (MySQL)
                         ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} End-to-End (PostgreSQL)
-                        ${{ needs.e2e-custom.result == 'success' && ':+1:' || ':x:' }} End-to-End (Custom)
                         ${{ needs.packages.result == 'success' && ':+1:' || ':x:' }} Packages
 
                         _ _ _ _ _ _ _

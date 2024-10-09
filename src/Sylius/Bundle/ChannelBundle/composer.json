@@ -42,7 +42,6 @@
         "twig/twig": "^2.12 || ^3.3"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0",
         "twig/twig": "3.9.0"
     },
     "config": {

@@ -1,3 +1,8 @@
+# UPGRADING FROM `v1.13.6` TO `v1.13.7`
+
+1. The `sylius.product_review.average_rating_updater` has changed its `doctrine.event_listener` event 
+   from `postRemove` to `preRemove`.
+
 # UPGRADING FROM `v1.13.1` TO `v1.13.2`
 
 1. Due to a bug that was causing wrong calculation of available stock during completing a payment [REF](https://github.com/Sylius/Sylius/issues/16160),
