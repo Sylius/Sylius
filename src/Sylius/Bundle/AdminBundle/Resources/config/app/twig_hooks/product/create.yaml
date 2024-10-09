@@ -14,6 +14,7 @@ twig_hooks:
         'sylius_admin.product.create.content.form':
             side_navigation:
                 template: '@SyliusAdmin/product/form/side_navigation.html.twig'
+                priority: 1
             sections:
                 template: '@SyliusAdmin/product/form/sections.html.twig'
 
@@ -66,7 +67,7 @@ twig_hooks:
                 template: '@SyliusAdmin/product/form/sections/media.html.twig'
 
         'sylius_admin.product.create.content.form.sections.general':
-            default: 
+            default:
                 enabled: false
             code:
                 template: '@SyliusAdmin/product/form/sections/general/code.html.twig'

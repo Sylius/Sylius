@@ -56,7 +56,7 @@
         </service>
 
         <service id="sylius.order_processing.order_promotion_processor" class="Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor">
-            <argument type="service" id="sylius.promotion_processor" />
+            <argument type="service" id="sylius.processor.promotion" />
             <tag name="sylius.order_processor" priority="20"/>
         </service>
 

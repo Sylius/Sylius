@@ -21,6 +21,7 @@ twig_hooks:
         'sylius_admin.product_variant.update.content.form':
             side_navigation:
                 template: '@SyliusAdmin/product_variant/form/side_navigation.html.twig'
+                priority: 1
             sections:
                 template: '@SyliusAdmin/product_variant/form/sections.html.twig'
 
@@ -49,7 +50,7 @@ twig_hooks:
                 template: '@SyliusAdmin/product_variant/form/sections/translations.html.twig'
             taxes:
                 template: '@SyliusAdmin/product_variant/form/sections/taxes.html.twig'
-        
+
         'sylius_admin.product_variant.update.content.form.sections.translations':
             name:
                 template: '@SyliusAdmin/product_variant/form/sections/translations/name.html.twig'

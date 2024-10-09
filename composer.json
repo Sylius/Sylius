@@ -47,7 +47,7 @@
         "enshrined/svg-sanitize": "^0.16",
         "fakerphp/faker": "^1.10",
         "friendsofphp/proxy-manager-lts": "^1.0.7",
-        "gedmo/doctrine-extensions": "^3.2",
+        "gedmo/doctrine-extensions": "^3.17.1",
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "guzzlehttp/psr7": "^2.5",
         "knplabs/gaufrette": "^0.10 || ^0.11",
@@ -188,7 +188,6 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "gedmo/doctrine-extensions": "^3.17.0",
         "stof/doctrine-extensions-bundle": "1.8.0"
     },
     "require-dev": {
