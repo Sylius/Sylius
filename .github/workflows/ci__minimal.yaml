@@ -43,10 +43,6 @@ jobs:
         uses: ./.github/workflows/ci_e2e-pgsql.yaml
         with:
             type: minimal
-    e2e-custom:
-        name: End-to-end tests (Custom)
-        needs: static-checks
-        uses: ./.github/workflows/ci_e2e-custom.yaml
     frontend:
         name: Frontend
         needs: static-checks

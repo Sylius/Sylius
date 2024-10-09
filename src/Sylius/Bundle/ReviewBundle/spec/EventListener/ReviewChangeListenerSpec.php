@@ -43,7 +43,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $this->recalculateSubjectRating($event);
     }
 
-    function it_removes_a_review_from_a_review_subject_on_the_post_remove_event(
+    function it_removes_a_review_from_a_review_subject_on_the_pre_remove_event(
         ReviewableRatingUpdaterInterface $averageRatingUpdater,
         ReviewInterface $review,
         ReviewableInterface $reviewSubject,
