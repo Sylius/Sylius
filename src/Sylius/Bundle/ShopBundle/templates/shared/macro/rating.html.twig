@@ -1,11 +1,9 @@
 {% macro show(rating = 3) %}
-    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
-
     <div class="sylius-rating hoverless">
         {% for i in 1..5 %}
             <label>
                 <input type="radio" {% if loop.index == rating %}checked{% endif %} disabled>
-                {{ icon('star') }}
+                {{ ux_icon('tabler:star-filled', { class: 'symfony-icon symfony-icon-xs' }) }}
             </label>
         {% endfor %}
     </div>
