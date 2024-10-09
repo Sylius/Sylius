@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\SyliusCartEvents;
@@ -34,6 +35,7 @@ class FormComponent
 
     /** @use ResourceFormComponentTrait<OrderInterface> */
     use ResourceFormComponentTrait;
+    use TemplatePropTrait;
 
     public const SYLIUS_SHOP_CART_CHANGED = 'sylius:shop:cart_changed';
 

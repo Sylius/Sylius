@@ -17,11 +17,7 @@
         >
             <argument type="service" id="sylius.repository.product_review" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_shop:product_review:list"
-                template="@SyliusShop/shared/product_review/list.html.twig"
-            />
+            <tag name="sylius.twig_component" key="sylius_shop:product_review:list" />
         </service>
 
         <service
@@ -30,11 +26,7 @@
         >
             <argument type="service" id="sylius.repository.product_review" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_shop:product_review.count"
-                template="@SyliusShop/product/show/page/info/summary/average_rating/number_of_reviews.html.twig"
-            />
+            <tag name="sylius.twig_component" key="sylius_shop:product_review.count" />
         </service>
 
         <service
@@ -46,11 +38,7 @@
             <argument>%sylius.model.product_review.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType</argument>
 
-            <tag
-                name="sylius.live_component.shop"
-                key="sylius_shop:product_review:form"
-                template="@SyliusShop/product_review/create/main/form.html.twig"
-            />
+            <tag name="sylius.live_component.shop" key="sylius_shop:product_review:form" />
         </service>
     </services>
 </container>

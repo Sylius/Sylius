@@ -6,6 +6,7 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
+                    template: '@SyliusAdmin/product_option/form.html.twig'
                 configuration:
                     method: 'PUT'
         

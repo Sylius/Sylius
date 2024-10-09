@@ -7,6 +7,7 @@ sylius_twig_hooks:
                 component: 'sylius_shop:checkout:shipping:form'
                 props:
                     order: '@=_context.order'
+                    template: '@SyliusShop/checkout/select_shipping/form.html.twig'
 
         'sylius_shop.checkout.select_shipping.form':
             shipments:

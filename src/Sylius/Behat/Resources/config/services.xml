@@ -155,5 +155,13 @@
             <argument type="service" id=".inner" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
         </service>
+
+        <service
+            id="sylius.behat.factory.address"
+            class="Sylius\Behat\Service\Factory\AddressFactory"
+            decorates="sylius.custom_factory.address"
+        >
+            <argument type="service" id=".inner" />
+        </service>
     </services>
 </container>

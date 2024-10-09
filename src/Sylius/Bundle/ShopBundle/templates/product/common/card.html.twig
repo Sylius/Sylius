@@ -12,7 +12,7 @@
     <div>
         {% if not product.enabledVariants.empty() %}
             {{ component('sylius_shop:catalog_promotions', { variant: variant, appliedPromotions: applied_promotions, withDescription: false }) }}
-            {{ component('sylius_shop:product:card:price', { variant: variant }) }}
+            {{ component('sylius_shop:product:card:price', { variant: variant, template: '@SyliusShop/product/common/price.html.twig' }) }}
         {% endif %}
     </div>
 </div>

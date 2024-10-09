@@ -15,11 +15,13 @@ namespace Sylius\Bundle\UiBundle\Twig\Component;
 
 use Sylius\Resource\Model\ResourceInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
 
 #[AsLiveComponent]
 class ResourceFormComponent
 {
     use LiveCollectionTrait;
+    use TemplatePropTrait;
 
     /** @use ResourceFormComponentTrait<ResourceInterface> */
     use ResourceFormComponentTrait {

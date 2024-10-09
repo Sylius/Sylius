@@ -305,6 +305,21 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request();
     }
 
+    public function requestPatch(string $uri, array $body = [], array $queryParameters = [], array $headers = []): Response
+    {
+        $this->validateUri($uri);
+
+        $this->request = $this
+            ->requestFactory
+            ->default($this->section, $uri, HttpRequest::METHOD_PATCH, $queryParameters, $headers)
+            ->authorize($this->getToken(), $this->authorizationHeader)
+        ;
+
+        $this->request->setContent($body);
+
+        return $this->request();
+    }
+
     public function requestDelete(string $uri): Response
     {
         $this->request = $this

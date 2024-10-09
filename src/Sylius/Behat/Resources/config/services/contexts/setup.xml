@@ -55,6 +55,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sylius.converter.country_name" />
         </service>
 
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">

@@ -6,6 +6,7 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.customer'
                     form: '@=_context.form'
+                    template: '@SyliusShop/account/profile_update/form.html.twig'
 
         'sylius_shop.account.profile_update.form':
             full_name:

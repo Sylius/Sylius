@@ -20,6 +20,12 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->container->setParameter('sylius_ui.twig_ux.component_default_template', '@SyliusUi/components/default.html.twig');
+    }
+
     public function testAddingTwigComponentTagToServicesTaggedWithTwigComponentTag(): void
     {
         $twigComponent = new Definition();
@@ -67,6 +73,30 @@ final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
         );
     }
 
+    public function testUsingDefaultTemplateWithTwigComponentTag(): void
+    {
+        $twigComponent = new Definition();
+        $twigComponent->addTag('sylius.twig_component', [
+            'key' => 'foo',
+            'expose_public_props' => false,
+        ]);
+
+        $this->setDefinition('my_twig_component', $twigComponent);
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'my_twig_component',
+            'twig.component',
+            [
+                'key' => 'foo',
+                'template' => '@SyliusUi/components/default.html.twig',
+                'expose_public_props' => false,
+                'attributes_var' => 'attributes',
+            ],
+        );
+    }
+
     public function testThrowingExceptionWhenKeyIsNotPresentOnTwigComponentTag(): void
     {
         $twigComponent = new Definition();
@@ -75,20 +105,7 @@ final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('my_twig_component', $twigComponent);
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The "key" and "template" attributes are required for the "sylius.twig_component" tag');
-
-        $this->compile();
-    }
-
-    public function testThrowingExceptionWhenTemplateIsNotPresentOnTwigComponentTag(): void
-    {
-        $twigComponent = new Definition();
-        $twigComponent->addTag('sylius.twig_component', ['key' => 'foo']);
-
-        $this->setDefinition('my_twig_component', $twigComponent);
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The "key" and "template" attributes are required for the "sylius.twig_component" tag');
+        $this->expectExceptionMessage('The "key" attribute is required for the "sylius.twig_component" tag');
 
         $this->compile();
     }

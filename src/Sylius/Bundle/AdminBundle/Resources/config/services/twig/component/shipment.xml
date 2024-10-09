@@ -22,11 +22,7 @@
             <argument>%sylius.model.shipment.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:shipment:ship_form"
-                template="@SyliusAdmin/shipment/component/ship.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:shipment:ship_form" />
         </service>
     </services>
 </container>

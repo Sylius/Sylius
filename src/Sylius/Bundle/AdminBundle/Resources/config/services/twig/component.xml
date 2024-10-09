@@ -22,11 +22,7 @@
             <argument>%sylius.model.catalog_promotion.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:catalog_promotion:form"
-                template="@SyliusAdmin/catalog_promotion/form.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:catalog_promotion:form" />
         </service>
 
         <service
@@ -38,11 +34,7 @@
             <argument>%sylius.model.channel.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ChannelType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:channel:form"
-                template="@SyliusAdmin/channel/form.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:channel:form" />
         </service>
 
         <service
@@ -54,11 +46,7 @@
             <argument>%sylius.model.country.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CountryType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:country:form"
-                template="@SyliusAdmin/country/form.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:country:form" />
         </service>
 
         <service
@@ -70,11 +58,7 @@
             <argument>%sylius.model.customer_group.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CustomerGroupType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:customer_group:form"
-                template="@SyliusAdmin/shared/crud/common/content/form.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:customer_group:form" />
         </service>
 
         <service
@@ -86,11 +70,7 @@
             <argument>%sylius.model.payment_method.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType</argument>
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:payment_method:form"
-                template="@SyliusAdmin/payment_method/form.html.twig"
-            />
+            <tag name="sylius.twig_component" key="sylius_admin:payment_method:form" />
         </service>
 
         <service
@@ -102,11 +82,7 @@
             <argument>%sylius.model.product.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:product:generate_product_variants_form"
-                template="@SyliusAdmin/product/generate_variants/form.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:product:generate_product_variants_form" />
         </service>
 
         <service
@@ -118,11 +94,7 @@
             <argument>%sylius.model.promotion.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\PromotionType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:promotion:form"
-                template="@SyliusAdmin/promotion/form.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:promotion:form" />
         </service>
 
         <service
@@ -134,11 +106,7 @@
             <argument>%sylius.model.shipping_method.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType</argument>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:shipping_method:form"
-                template="@SyliusAdmin/shipping_method/form.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:shipping_method:form" />
         </service>
 
         <service
@@ -147,22 +115,14 @@
         >
             <argument type="service" id="doctrine.orm.entity_manager" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:render_entity_with_template"
-                template="@SyliusAdmin/shared/components/render_entity_with_template.html.twig"
-            />
+            <tag name="sylius.twig_component" key="sylius_admin:render_entity_with_template" />
         </service>
 
         <service
             id="sylius_admin.twig.component.shared.navbar.notifications"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent"
         >
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:navbar:notifications"
-                template="@SyliusAdmin/shared/components/navbar/notifications.html.twig"
-            />
+            <tag name="sylius.twig_component" key="sylius_admin:navbar:notifications" />
         </service>
 
         <service
@@ -171,11 +131,7 @@
         >
             <argument type="service" id="sylius.repository.channel" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:navbar:shop_preview"
-                template="@SyliusAdmin/shared/crud/common/navbar/menu/shop_preview.html.twig"
-            />
+            <tag name="sylius.twig_component" key="sylius_admin:navbar:shop_preview" />
         </service>
 
         <service
@@ -185,11 +141,7 @@
             <argument type="service" id="router" />
             <argument type="service" id="sylius_admin.logged_in_admin_user_provider" />
 
-            <tag
-                name="sylius.twig_component"
-                key="sylius_admin:navbar:user_dropdown"
-                template="@SyliusAdmin/shared/components/navbar/user.html.twig"
-            />
+            <tag name="sylius.twig_component" key="sylius_admin:navbar:user_dropdown" />
         </service>
     </services>
 </container>

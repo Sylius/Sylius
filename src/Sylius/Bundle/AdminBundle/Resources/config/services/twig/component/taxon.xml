@@ -23,11 +23,7 @@
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
 
-            <tag
-                name="sylius.live_component.admin"
-                key="sylius_admin:taxon:delete"
-                template="@SyliusAdmin/taxon/sections/tree/actions/dropdown/delete.html.twig"
-            />
+            <tag name="sylius.live_component.admin" key="sylius_admin:taxon:delete" />
         </service>
 
         <service
@@ -43,7 +39,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:taxon:form"
-                template="@SyliusAdmin/taxon/sections/form.html.twig"
             />
         </service>
 
@@ -58,7 +53,6 @@
             <tag
                 name="sylius.live_component.admin"
                 key="sylius_admin:taxon:tree"
-                template="@SyliusAdmin/taxon/sections/tree.html.twig"
             />
         </service>
     </services>

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Taxon;
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
+use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -30,6 +31,7 @@ class FormComponent
 
     /** @use ResourceFormComponentTrait<TaxonInterface> */
     use ResourceFormComponentTrait;
+    use TemplatePropTrait;
 
     /**
      * @param RepositoryInterface<TaxonInterface> $repository
