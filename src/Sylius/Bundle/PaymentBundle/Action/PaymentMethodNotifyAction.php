@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Processor\RequestPayloadProcessorInterface;
+use Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProviderInterface;
 use Sylius\Bundle\PaymentBundle\Provider\PaymentNotifyProviderInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -39,6 +40,7 @@ final class PaymentMethodNotifyAction
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private PaymentNotifyProviderInterface $paymentNotifyProvider,
+        private NotifyResponseProviderInterface $notifyResponseProvider,
     ) {
     }
 
@@ -63,6 +65,6 @@ final class PaymentMethodNotifyAction
 
         $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 
-        return new Response('', 204);
+        return $this->notifyResponseProvider->provide($paymentRequest);
     }
 }

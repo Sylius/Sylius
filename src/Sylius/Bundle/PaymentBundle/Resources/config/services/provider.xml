@@ -47,5 +47,8 @@
         <service id="sylius.provider.payment_notify" class="Sylius\Bundle\PaymentBundle\Provider\CompositePaymentNotifyProvider">
             <argument type="tagged_iterator" tag="sylius.payment_request.payment_notify_provider" />
         </service>
+
+        <service id="sylius.provider.notify_response" class="Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProvider" />
+        <service id="Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProviderInterface" alias="sylius.provider.notify_response" />
     </services>
 </container>

@@ -25,6 +25,7 @@
             <argument type="service" id="sylius.processor.payment_request.request_payload" />
             <argument type="service" id="sylius.manager.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
+            <argument type="service" id="sylius.provider.notify_response" />
         </service>
 
         <service id="sylius.controller.payment_method_notify" class="Sylius\Bundle\PaymentBundle\Action\PaymentMethodNotifyAction">
@@ -34,6 +35,7 @@
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
             <argument type="service" id="sylius.provider.payment_notify" />
+            <argument type="service" id="sylius.provider.notify_response" />
         </service>
     </services>
 </container>

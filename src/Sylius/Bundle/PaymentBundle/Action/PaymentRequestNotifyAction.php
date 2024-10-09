@@ -14,13 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Action;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestFinalTransitionCheckerInterface;
-use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
 use Sylius\Bundle\PaymentBundle\Processor\RequestPayloadProcessorInterface;
+use Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Sylius\Component\Payment\PaymentRequestTransitions;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +35,7 @@ final class PaymentRequestNotifyAction
         private RequestPayloadProcessorInterface $requestPayloadProcessor,
         private EntityManagerInterface $paymentRequestManager,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
+        private NotifyResponseProviderInterface $notifyResponseProvider,
     ) {
     }
 
@@ -60,6 +59,6 @@ final class PaymentRequestNotifyAction
 
         $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 
-        return new Response('', 204);
+        return $this->notifyResponseProvider->provide($paymentRequest);
     }
 }
