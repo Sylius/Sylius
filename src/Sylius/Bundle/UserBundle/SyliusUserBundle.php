@@ -15,7 +15,6 @@ namespace Sylius\Bundle\UserBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\UserBundle\DependencyInjection\Compiler\DecorateUserCheckerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusUserBundle extends AbstractResourceBundle
@@ -31,8 +30,6 @@ final class SyliusUserBundle extends AbstractResourceBundle
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
-
-        $container->addCompilerPass(new DecorateUserCheckerPass());
     }
 
     protected function getModelNamespace(): string
