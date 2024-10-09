@@ -8,7 +8,8 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-interface PaymentNotifyProviderInterface {
+interface PaymentNotifyProviderInterface
+{
     public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface;
 
     public function supports(Request $request, PaymentMethodInterface $paymentMethod): bool;

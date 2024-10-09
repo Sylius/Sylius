@@ -29,7 +29,8 @@ final class CompositePaymentNotifyProvider implements PaymentNotifyProviderInter
         Assert::allIsInstanceOf($this->paymentNotifyProviders, PaymentNotifyProviderInterface::class);
     }
 
-    public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface {
+    public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface
+    {
         foreach ($this->paymentNotifyProviders as $provider) {
             if ($provider->supports($request, $paymentMethod)) {
                 return $provider->getPayment($request, $paymentMethod);
@@ -42,7 +43,8 @@ final class CompositePaymentNotifyProvider implements PaymentNotifyProviderInter
         ));
     }
 
-    public function supports(Request $request, PaymentMethodInterface $paymentMethod): bool {
+    public function supports(Request $request, PaymentMethodInterface $paymentMethod): bool
+    {
         return true;
     }
 }
