@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
+use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestFinalTransitionCheckerInterface;
 use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentRequestTransitions;
@@ -32,7 +33,7 @@ final class PaymentRequestNotifyAction
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private SymfonyRequestNormalizerInterface $requestWrapper,
-        private StateMachineInterface $stateMachine,
+        private PaymentRequestFinalTransitionCheckerInterface $finalTransitionChecker,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private EntityManagerInterface $paymentRequestManager,
     ) {
@@ -48,21 +49,14 @@ final class PaymentRequestNotifyAction
             throw new NotFoundHttpException(sprintf('No payment request found with hash "%s".', $hash));
         }
 
-        $state = $paymentRequest->getState();
-        $nextTransition = $this->stateMachine->getTransitionFromState(
-            $paymentRequest,
-            PaymentRequestTransitions::GRAPH,
-            $state
-        );
-
-        if (null === $nextTransition) {
-            throw new NotFoundHttpException(sprintf('The payment request with hash "%s" is on a final state (state: %s).', $hash, $state));
+        if ($this->finalTransitionChecker->isFinal($paymentRequest)) {
+            throw new NotFoundHttpException(sprintf('The payment request with hash "%s" is on a final state (state: %s).', $hash, $paymentRequest->getState()));
         }
 
-        $payload = $this->requestWrapper->normalize($request);
-        $currentPayload = $paymentRequest->getPayload();
-        if (is_array($currentPayload)) {
-            $payload += $currentPayload;
+        $requestPayload = $this->requestWrapper->normalize($request);
+        $payload = $paymentRequest->getPayload();
+        if (is_array($payload)) {
+            $payload += $requestPayload;
         }
 
         $paymentRequest->setPayload($payload);

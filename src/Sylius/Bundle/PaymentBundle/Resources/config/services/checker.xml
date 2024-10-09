@@ -23,5 +23,10 @@
             <argument type="service" id="sylius.repository.payment_request" />
         </service>
         <service id="Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationCheckerInterface" alias="sylius.checker.payment_request_duplication" />
+
+        <service id="sylius.checker.payment_request_final_transition" class="Sylius\Bundle\PaymentBundle\Checker\PaymentRequestFinalTransitionChecker">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+        </service>
+        <service id="Sylius\Bundle\PaymentBundle\Checker\PaymentRequestFinalTransitionCheckerInterface" alias="sylius.checker.payment_request_final_transition" />
     </services>
 </container>

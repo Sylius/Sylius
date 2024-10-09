@@ -22,7 +22,7 @@
         <service id="sylius.controller.payment_request_notify" class="Sylius\Bundle\PaymentBundle\Action\PaymentRequestNotifyAction">
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.normalizer.symfony_request" />
-            <argument type="service" id="sylius_abstraction.state_machine" />
+            <argument type="service" id="sylius.checker.payment_request_final_transition" />
             <argument type="service" id="sylius.announcer.payment_request" />
             <argument type="service" id="sylius.manager.payment_request" />
         </service>
