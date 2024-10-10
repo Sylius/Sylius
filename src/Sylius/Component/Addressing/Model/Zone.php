@@ -36,6 +36,9 @@ class Zone implements ZoneInterface, \Stringable
     /** @var Collection<array-key, ZoneMemberInterface> */
     protected $members;
 
+    /** @var int */
+    protected $position = 0;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -125,5 +128,15 @@ class Zone implements ZoneInterface, \Stringable
     public function hasMember(ZoneMemberInterface $member): bool
     {
         return $this->members->contains($member);
+    }
+
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): void
+    {
+        $this->position = $position;
     }
 }
