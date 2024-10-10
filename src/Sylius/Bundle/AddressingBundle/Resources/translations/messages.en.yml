@@ -34,5 +34,6 @@ sylius:
             scopes:
                 all: All
             select: Select
+            position: Position
         zone_member:
             select: Select

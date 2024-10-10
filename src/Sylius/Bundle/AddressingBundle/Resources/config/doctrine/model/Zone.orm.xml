@@ -11,7 +11,8 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Addressing\Model\Zone" table="sylius_zone">
         <id name="id" column="id" type="integer">
@@ -22,6 +23,10 @@
         <field name="name" column="name" type="string" />
         <field name="type" column="type" type="string" length="8" />
         <field name="scope" column="scope" type="string" nullable="true"/>
+
+        <field name="position" type="integer">
+            <gedmo:sortable-position />
+        </field>
 
         <one-to-many field="members" target-entity="Sylius\Component\Addressing\Model\ZoneMemberInterface" mapped-by="belongsTo" orphan-removal="true">
             <cascade>

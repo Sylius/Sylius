@@ -38,5 +38,6 @@ sylius:
                 all: Alle
             select: Gebiet auswählen
             select_scope: Bereich wählen
+            position: Position
         zone_member:
             select: Mitglied auswählen
