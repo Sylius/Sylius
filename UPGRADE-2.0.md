@@ -39,7 +39,8 @@
     * `sylius.grid_driver.doctrine.phpcrodm`
     * `sylius.listener.api_postgresql_driver_exception_listener`
 
-* Aliases introduced in Sylius 1.14 have now become the primary service IDs in Sylius 2.0. The old service IDs have been removed, and all references must be updated accordingly:
+* Aliases introduced in Sylius 1.14 have now become the primary service IDs in Sylius 2.0. The old service IDs have been
+  removed, and all references must be updated accordingly:
 
 | Old ID                                                                                                     | New ID                                                                               |
 |------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
@@ -122,9 +123,11 @@
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
 | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
 
-  The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
+The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use
+the new service IDs.
 
-* The following services had new aliases added in Sylius 1.14. In Sylius 2.0, these aliases have become the primary service IDs, and the old service IDs remain as aliases:
+* The following services had new aliases added in Sylius 1.14. In Sylius 2.0, these aliases have become the primary
+  service IDs, and the old service IDs remain as aliases:
 
 | Current ID                                                                          | New Alias                                     | 
 |-------------------------------------------------------------------------------------|-----------------------------------------------|
@@ -146,10 +149,11 @@
 
     * `sylius.mongodb_odm.repository.class`
     * `sylius.phpcr_odm.repository.class`
-    
+
 * The following parameters were renamed:
 
-    * `sylius.message.admin_user_create.validation_groups` to `sylius_admin.command_handler.create_admin_user.validation_groups`
+    * `sylius.message.admin_user_create.validation_groups`
+      to `sylius_admin.command_handler.create_admin_user.validation_groups`
 
 * The following configuration options were removed:
 
@@ -327,6 +331,11 @@
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
     * `Sylius\Bundle\OrderBundle/Templating/Helper/AdjustmentsHelper`
 
+* Since the `Sylius Template Events` feature is obsolete and has been replaced by `Sylius Twig Hooks`, the following
+  console command has been removed:
+
+    * `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
+
 ### Constructors signature changes
 
 1. The following constructor signatures have been changed:
@@ -460,9 +469,12 @@ The following classes have been removed:
     - Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType
 
 ## Password Encoder & Salt
-The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
 
-This "encoder" is configured via the [Symfony security password hasher](https://symfony.com/doc/current/security/passwords.html#configuring-a-password-hasher).
+The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony
+security configuration.
+
+This "encoder" is configured via
+the [Symfony security password hasher](https://symfony.com/doc/current/security/passwords.html#configuring-a-password-hasher).
 
 You may have already something like that configuration bellow.
 
@@ -480,7 +492,7 @@ Check if you have an encoder configured in the `sylius_user` package configurati
 ```yaml
 sylius_user:
     # ...
-    
+
     encoder: plaintext # Remove this line
 
     # ...
@@ -497,7 +509,8 @@ In modern Symfony projects, the hasher name is stored on the password.
 Example:
 `$argon2i$v=19$m=65536,t=4,p=1$VVJuMnpUUWhRY1daN1ppMA$2Tx6l3I+OUx+PUPn+vZz1jI3Z6l6IHh2kpG0NdpmYWE`
 
-If some of your users do not have the hasher name stored in the password field you may need to configure the "migrate_from" option into Symfony, following that documentation:
+If some of your users do not have the hasher name stored in the password field you may need to configure the "
+migrate_from" option into Symfony, following that documentation:
 https://symfony.com/doc/current/security/passwords.html#configure-a-new-hasher-using-migrate-from
 
 Note:
@@ -512,10 +525,13 @@ If your app never changed the hasher name configuration, you don't need to confi
 ## Payment method gateways
 
 * Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.
-* PayPal Express Checkout gateway has been removed. Use now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.
+* PayPal Express Checkout gateway has been removed. Use
+  now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.
 
 ## Theming
-* Dependency on `sylius/theme-bundle` is moved from CoreBundle to ShopBundle and it will no longer be installed 
+
+* Dependency on `sylius/theme-bundle` is moved from CoreBundle to ShopBundle and it will no longer be installed
   if you're running your shop in headless mode.
 * Channel's `themeName` form field existence is made optional and depends on `ShopBundle` presence.
-* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.
+* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to
+  the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.
