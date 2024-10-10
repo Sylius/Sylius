@@ -33,6 +33,7 @@ class SummaryComponent
 
     /** @use ResourceLivePropTrait<OrderInterface> */
     use ResourceLivePropTrait;
+
     use TemplatePropTrait;
 
     #[LiveProp(hydrateWith: 'hydrateResource', dehydrateWith: 'dehydrateResource')]

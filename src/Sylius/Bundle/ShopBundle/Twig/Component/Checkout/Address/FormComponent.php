@@ -34,6 +34,7 @@ class FormComponent
 {
     /** @use ResourceFormComponentTrait<OrderInterface> */
     use ResourceFormComponentTrait;
+
     use TemplatePropTrait;
 
     #[LiveProp]
