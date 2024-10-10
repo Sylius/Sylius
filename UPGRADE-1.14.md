@@ -132,6 +132,38 @@
     | `sylius.shipping_date_assigner`                                                                            | `sylius.assigner.shipping_date`                                                      |
     | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                   | `sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal`             |
     | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                      | `sylius.rule_checker.shipping_method.total_weight_less_than_or_equal`                |
+    | **ShopBundle**                                                                                             |                                                                                      |
+    | `sylius.shop.locale_switcher`                                                                              | `sylius_shop.locale_switcher`                                                        |
+    | `sylius.storage.locale`                                                                                    | `sylius_shop.locale_storage`                                                         |
+    | `sylius.context.locale.storage_based`                                                                      | `sylius_shop.locale_context.storage_based`                                           |
+    | `sylius.shop.locale_stripping_router`                                                                      | `sylius_shop.router.locale_stripping`                                                |
+    | `sylius.listener.non_channel_request_locale`                                                               | `sylius_shop.listener.non_channel_locale`                                            |
+    | `sylius.controller.shop.contact`                                                                           | `sylius_shop.controller.contact`                                                     |
+    | `sylius.controller.shop.homepage`                                                                          | `sylius_shop.controller.homepage`                                                    |
+    | `sylius.controller.shop.currency_switch`                                                                   | `sylius_shop.controller.currency_switch`                                             |
+    | `sylius.controller.shop.locale_switch`                                                                     | `sylius_shop.controller.locale_switch`                                               |
+    | `sylius.controller.shop.security_widget`                                                                   | `sylius_shop.controller.security_widget`                                             |
+    | `sylius.controller.shop.register_thank_you`                                                                | `sylius_shop.controller.register_thank_you`                                          |
+    | `sylius.mailer.contact_email_manager.shop`                                                                 | `sylius_shop.mailer.contact_email_manager`                                           |
+    | `sylius.mailer.order_email_manager.shop`                                                                   | `sylius_shop.mailer.order_email_manager`                                             |
+    | `sylius.listener.shop_cart_blamer`                                                                         | `sylius_shop.listener.shop_cart_blamer`                                              |
+    | `sylius.listener.email_updater`                                                                            | `sylius_shop.listener.customer_email_updater`                                        |
+    | `sylius.listener.shop_customer_account_sub_section_cache_control_subscriber`                               | `sylius_shop.event_subscriber.shop_customer_account_sub_section_cache_control`       |
+    | `sylius.listener.order_customer_ip`                                                                        | `sylius_shop.listener.order_customer_ip`                                             |
+    | `sylius.listener.order_complete`                                                                           | `sylius_shop.listener.order_complete`                                                |
+    | `sylius.listener.user_registration`                                                                        | `sylius_shop.listener.user_registration`                                             |
+    | `sylius.listener.order_integrity_checker`                                                                  | `sylius_shop.listener.order_integrity_checker`                                       |
+    | `sylius.order_locale_assigner`                                                                             | `sylius_shop.listener.order_locale_assigner`                                         |
+    | `sylius.listener.session_cart`                                                                             | `sylius_shop.event_subscriber.session_cart`                                          |
+    | `sylius.listener.user_cart_recalculation`                                                                  | `sylius_shop.listener.user_cart_recalculation`                                       |
+    | `sylius.listener.user_impersonated`                                                                        | `sylius_shop.listener.user_impersonated`                                             |
+    | `sylius.shop.menu_builder.account`                                                                         | `sylius_shop.menu_builder.account`                                                   |
+    | `sylius.twig.extension.original_price_to_display`                                                          | `sylius_shop.twig.extension.order_item_original_price_to_display`                    |
+    | `Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension`                                                     | `sylius_shop.twig.extension.order_payments`                                          |
+    | `sylius.section_resolver.shop_uri_based_section_resolver`                                                  | `sylius_shop.section_resolver.shop_uri_based`                                        |
+    | `sylius.context.cart.session_and_channel_based`                                                            | `sylius_shop.context.cart.session_and_channel_based`                                 |
+    | `sylius.storage.cart_session`                                                                              | `sylius_shop.storage.cart_session`                                                   |
+    | `sylius.grid_filter.shop_string`                                                                           | `sylius_shop.grid.filter.string`                                                     |
     | **TaxationBundle**                                                                                         |                                                                                      |
     | `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
     | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
