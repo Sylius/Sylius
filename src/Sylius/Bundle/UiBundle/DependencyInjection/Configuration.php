@@ -76,6 +76,7 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('twig_ux')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('live_component_tags')
                             ->useAttributeAsKey('name')
