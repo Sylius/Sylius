@@ -9,6 +9,10 @@
 * SyliusStateMachineAbstraction:
     * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine` to `symfony_workflow`.
 
+* Resource:
+    * The configuration nodes for resource options `sylius_*.resources.**.options` (`sylius_addressing.resources.address.options` etc.)
+      were removed from all resource definitions in all bundles.
+
 * The `sylius_core.autoconfigure_with_attributes` and `sylius_order.autoconfigure_with_attributes` configuration parameters 
   have been removed. If you want to autoconfigure order processors and cart contexts, use corresponding attributes 
   instead of interfaces: 
