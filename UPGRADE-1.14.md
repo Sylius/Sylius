@@ -118,6 +118,9 @@
     | **TaxationBundle**                                                                                         |                                                                                      |
     | `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
     | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
+    | **UserBundle**                                                                                             |                                                                                      |
+    | `Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`                                               | `sylius.console.command.demote_user`                                                 |
+    | `Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`                                              | `sylius.console.command.promote_user`                                                |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
