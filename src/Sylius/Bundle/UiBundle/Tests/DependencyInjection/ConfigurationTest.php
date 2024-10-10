@@ -346,6 +346,30 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
+    public function it_allows_to_configure_component_default_template(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => ['component_default_template' => 'components/my_default_component.html.twig'],],
+            ],
+            ['twig_ux' => ['component_default_template' => 'components/my_default_component.html.twig']],
+            'twig_ux.component_default_template',
+        );
+    }
+
+    /** @test */
+    public function it_uses_default_component_default_template_when_not_configured(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => []],
+            ],
+            ['twig_ux' => ['component_default_template' => '@SyliusUi/components/default.html.twig']],
+            'twig_ux.component_default_template',
+        );
+    }
+
+    /** @test */
     public function it_throws_an_exception_if_live_component_tags_route_is_missing(): void
     {
         $this->assertConfigurationIsInvalid(
