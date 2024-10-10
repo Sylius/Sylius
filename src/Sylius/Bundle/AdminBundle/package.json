@@ -1,30 +1,33 @@
 {
   "name": "@sylius-ui/admin",
-  "version": "2.0.0-alpha-1",
+  "version": "2.0.0",
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
-    "@hotwired/stimulus": "^3.0.0",
     "@popperjs/core": "^2.11.8",
-    "@symfony/stimulus-bridge": "^3.2.2",
-    "@symfony/webpack-encore": "^3.1.0",
     "@tabler/core": "^1.0.0-beta21",
     "apexcharts": "^3.41.0",
     "bootstrap": "^5.3.0",
     "infinite-tree": "^1.17.1",
     "slugify": "^1.6",
     "spotlight.js": "^0.7.8",
-    "stimulus-use": "^0.52"
-  },
-  "devDependencies": {
-    "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
-    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
-    "sass": "^1.54.8",
-    "sass-loader": "^13.0.0",
+    "stimulus-use": "^0.52",
     "tom-select": "^2.2.2"
   },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.18.9",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/register": "^7.0.0",
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/stimulus-bridge": "^3.2.2",
+    "@symfony/webpack-encore": "^3.1.0",
+    "sass": "^1.54.8",
+    "sass-loader": "^13.0.0"
+  },
   "engines": {
-    "node": "^18 || ^20"
+    "node": "^20"
   },
   "engineStrict": true,
   "main": "index.js",
