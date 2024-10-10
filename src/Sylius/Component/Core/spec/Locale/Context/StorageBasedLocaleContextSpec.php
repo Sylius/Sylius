@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Locale\Context;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Symfony\Component\Security\Core\Exception\SessionUnavailableException;
 
 final class StorageBasedLocaleContextSpec extends ObjectBehavior
 {
@@ -42,13 +45,49 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         ChannelInterface $channel,
     ): void {
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
         $channelContext->getChannel()->willReturn($channel);
-
         $localeStorage->get($channel)->willReturn('pl_PL');
 
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
-
         $this->getLocaleCode()->shouldReturn('pl_PL');
+    }
+
+    function it_throws_an_exception_when_channel_cannot_be_found(
+        ChannelContextInterface $channelContext,
+        LocaleStorageInterface $localeStorage,
+        LocaleProviderInterface $localeProvider,
+    ): void {
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
+        $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
+        $localeStorage->get(Argument::any())->shouldNotBeCalled();
+
+        $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
+    }
+
+    function it_throws_an_exception_when_storage_is_unavailable(
+        ChannelContextInterface $channelContext,
+        LocaleStorageInterface $localeStorage,
+        LocaleProviderInterface $localeProvider,
+        ChannelInterface $channel,
+    ): void {
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
+        $channelContext->getChannel()->willReturn($channel);
+        $localeStorage->get($channel)->willThrow(\RuntimeException::class);
+
+        $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
+    }
+
+    function it_throws_an_exception_when_session_is_unavailable(
+        ChannelContextInterface $channelContext,
+        LocaleStorageInterface $localeStorage,
+        LocaleProviderInterface $localeProvider,
+        ChannelInterface $channel,
+    ): void {
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
+        $channelContext->getChannel()->willReturn($channel);
+        $localeStorage->get($channel)->willThrow(SessionUnavailableException::class);
+
+        $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
     function it_throws_an_exception_if_locale_taken_from_storage_is_not_available(
@@ -57,11 +96,9 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         ChannelInterface $channel,
     ): void {
-        $channelContext->getChannel()->willReturn($channel);
-
-        $localeStorage->get($channel)->willReturn('pl_PL');
-
         $localeProvider->getAvailableLocalesCodes()->willReturn(['en_US', 'en_GB']);
+        $channelContext->getChannel()->willReturn($channel);
+        $localeStorage->get($channel)->willReturn('pl_PL');
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
