@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -20,5 +24,6 @@
             <argument type="service" id="event_dispatcher" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.shop.account" />
         </service>
+        <service id="sylius_shop.menu_builder.account" alias="sylius.shop.menu_builder.account" />
     </services>
 </container>

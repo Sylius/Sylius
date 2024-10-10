@@ -3,7 +3,7 @@
 <!--
 
  This file is part of the Sylius package.
-
+sylius.controller.shop.contact
  (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -22,12 +26,14 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.mailer.contact_email_manager.shop" />
+            <argument type="service" id="sylius_shop.mailer.contact_email_manager" />
         </service>
+        <service id="sylius_shop.controller.contact" alias="sylius.controller.shop.contact" />
 
         <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController">
             <argument type="service" id="twig" />
         </service>
+        <service id="sylius_shop.controller.homepage" alias="sylius.controller.shop.homepage" />
 
         <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
             <argument type="service" id="twig" />
@@ -35,17 +41,20 @@
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.context.channel" />
         </service>
+        <service id="sylius_shop.controller.currency_switch" alias="sylius.controller.shop.currency_switch" />
 
         <service id="sylius.controller.shop.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController">
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.provider.locale" />
-            <argument type="service" id="sylius.shop.locale_switcher" />
+            <argument type="service" id="sylius_shop.locale_switcher" />
         </service>
+        <service id="sylius_shop.controller.locale_switch" alias="sylius.controller.shop.locale_switch" />
 
         <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController">
             <argument type="service" id="twig" />
         </service>
+        <service id="sylius_shop.controller.security_widget" alias="sylius.controller.shop.security_widget" />
 
         <service id="sylius.controller.shop.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
             <argument type="service" id="twig" />
@@ -54,5 +63,6 @@
 
             <tag name="controller.service_arguments" />
         </service>
+        <service id="sylius_shop.controller.register_thank_you" alias="sylius.controller.shop.register_thank_you" />
     </services>
 </container>
