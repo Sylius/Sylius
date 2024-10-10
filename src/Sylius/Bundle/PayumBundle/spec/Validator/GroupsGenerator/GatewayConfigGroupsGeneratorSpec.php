@@ -23,7 +23,7 @@ final class GatewayConfigGroupsGeneratorSpec extends ObjectBehavior
     function let(): void
     {
         $this->beConstructedWith([
-            'paypal_express_checkout' => ['paypal_express_checkout', 'sylius'],
+            'paypal' => ['paypal', 'sylius'],
             'stripe_checkout' => ['stripe_checkout', 'sylius'],
         ]);
     }
@@ -41,9 +41,9 @@ final class GatewayConfigGroupsGeneratorSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
     ): void {
         $paymentMethod->getGatewayConfig()->willReturn($gatewayConfig);
-        $gatewayConfig->getFactoryName()->willReturn('paypal_express_checkout');
+        $gatewayConfig->getFactoryName()->willReturn('paypal');
 
-        $this($paymentMethod)->shouldReturn(['paypal_express_checkout', 'sylius']);
+        $this($paymentMethod)->shouldReturn(['paypal', 'sylius']);
     }
 
     function it_returns_default_validation_groups_if_gateway_config_is_null(
@@ -61,8 +61,8 @@ final class GatewayConfigGroupsGeneratorSpec extends ObjectBehavior
     ): void {
         $form->getData()->willReturn($paymentMethod);
         $paymentMethod->getGatewayConfig()->willReturn($gatewayConfig);
-        $gatewayConfig->getFactoryName()->willReturn('paypal_express_checkout');
+        $gatewayConfig->getFactoryName()->willReturn('paypal');
 
-        $this($form)->shouldReturn(['paypal_express_checkout', 'sylius']);
+        $this($form)->shouldReturn(['paypal', 'sylius']);
     }
 }

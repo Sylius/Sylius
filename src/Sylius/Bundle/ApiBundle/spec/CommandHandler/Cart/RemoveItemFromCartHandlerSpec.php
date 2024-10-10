@@ -14,16 +14,18 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
@@ -34,11 +36,6 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             $orderModifier,
             $variantResolver,
         );
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
     }
 
     function it_removes_order_item_from_cart(
@@ -58,7 +55,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 
         $orderModifier->removeFromOrder($cart, $cartItem)->shouldBeCalled();
 
-        $this(RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID'))->shouldReturn($cart);
+        $this(new RemoveItemFromCart(orderTokenValue: 'TOKEN_VALUE', itemId: 'ORDER_ITEM_ID'))->shouldReturn($cart);
     }
 
     function it_throws_an_exception_if_order_item_was_not_found(
@@ -76,7 +73,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during(
                 '__invoke',
-                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')],
+                [new RemoveItemFromCart(orderTokenValue: 'TOKEN_VALUE', itemId: 'ORDER_ITEM_ID')],
             )
         ;
     }
@@ -102,7 +99,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during(
                 '__invoke',
-                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')],
+                [new RemoveItemFromCart(orderTokenValue: 'TOKEN_VALUE', itemId: 'ORDER_ITEM_ID')],
             )
         ;
     }

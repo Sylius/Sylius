@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\StateResolver;
 
 use PhpSpec\ObjectBehavior;
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
@@ -26,12 +24,12 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 final class CheckoutStateResolverSpec extends ObjectBehavior
 {
     function let(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
     ): void {
         $this->beConstructedWith(
-            $stateMachineFactory,
+            $stateMachine,
             $orderPaymentMethodSelectionRequirementChecker,
             $orderShippingMethodSelectionRequirementChecker,
         );
@@ -43,176 +41,215 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     }
 
     function it_applies_transition_skip_shipping_and_skip_payment_if_shipping_method_selection_is_not_required_and_payment_method_selection_is_not_required_and_this_transitions_are_possible(
-        FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
-        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
-        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        WinzouStateMachineInterface $stateMachine,
-    ): void {
-        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
-
-        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
-
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_uses_the_new_state_machine_abstraction_if_passed(
         StateMachineInterface $stateMachine,
+        OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        OrderInterface $order,
     ): void {
-        $this->beConstructedWith($stateMachine, $orderPaymentMethodSelectionRequirementChecker, $orderShippingMethodSelectionRequirementChecker);
-
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
 
-        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->shouldBeCalled()
+        ;
 
-        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
-
-        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldBeCalled();
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_applies_transition_skip_shipping_if_shipping_method_selection_is_not_required_and_this_transition_is_possible(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        WinzouStateMachineInterface $stateMachine,
     ): void {
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
-        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->shouldBeCalled()
+        ;
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldNotBeCalled();
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldNotBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_does_not_apply_skip_shipping_transition_if_shipping_method_selection_is_required(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->shouldNotBeCalled()
+        ;
 
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldNotBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_does_not_apply_skip_shipping_transition_if_it_is_not_possible(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->shouldNotBeCalled()
+        ;
 
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldNotBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_applies_transition_skip_payment_if_payment_method_selection_is_not_required_and_this_transition_is_possible(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->shouldNotBeCalled()
+        ;
 
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldBeCalled();
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_does_not_apply_skip_payment_transition_if_payment_method_selection_is_required(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->shouldNotBeCalled()
+        ;
 
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->willReturn(true)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldNotBeCalled()
+        ;
 
         $this->resolve($order);
     }
 
     function it_does_not_apply_skip_payment_transition_if_transition_skip_payment_is_not_possible(
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->willReturn(false)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            ->shouldNotBeCalled()
+        ;
 
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(false);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(false);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+        $stateMachine
+            ->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->willReturn(false)
+        ;
+        $stateMachine
+            ->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            ->shouldNotBeCalled()
+        ;
 
         $this->resolve($order);
     }

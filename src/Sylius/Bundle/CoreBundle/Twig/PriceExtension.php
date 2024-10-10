@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Twig\Extension\AbstractExtension;
@@ -22,44 +21,18 @@ use Webmozart\Assert\Assert;
 
 final class PriceExtension extends AbstractExtension
 {
-    public function __construct(private readonly PriceHelper|ProductVariantPricesCalculatorInterface $helper)
+    public function __construct(private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator)
     {
-        if ($this->helper instanceof PriceHelper) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.14',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be prohibited in Sylius 2.0. Pass an instance of %s instead.',
-                PriceHelper::class,
-                self::class,
-                ProductVariantPricesCalculatorInterface::class,
-            );
-
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.14',
-                'The argument name $helper is deprecated and will be renamed to $productVariantPricesCalculator in Sylius 2.0.',
-            );
-        }
     }
 
     public function getFilters(): array
     {
-        if ($this->helper instanceof ProductVariantPricesCalculatorInterface) {
-            return [
-                new TwigFilter('sylius_calculate_price', [$this, 'getPrice']),
-                new TwigFilter('sylius_calculate_original_price', [$this, 'getOriginalPrice']),
-                new TwigFilter('sylius_has_discount', [$this, 'hasDiscount']),
-                new TwigFilter('sylius_has_lowest_price', [$this, 'hasLowestPriceBeforeDiscount']),
-                new TwigFilter('sylius_calculate_lowest_price', [$this, 'getLowestPriceBeforeDiscount']),
-            ];
-        }
-
         return [
-            new TwigFilter('sylius_calculate_price', [$this->helper, 'getPrice']),
-            new TwigFilter('sylius_calculate_original_price', [$this->helper, 'getOriginalPrice']),
-            new TwigFilter('sylius_has_discount', [$this->helper, 'hasDiscount']),
-            new TwigFilter('sylius_has_lowest_price', [$this->helper, 'hasLowestPriceBeforeDiscount']),
-            new TwigFilter('sylius_calculate_lowest_price', [$this->helper, 'getLowestPriceBeforeDiscount']),
+            new TwigFilter('sylius_calculate_price', [$this, 'getPrice']),
+            new TwigFilter('sylius_calculate_original_price', [$this, 'getOriginalPrice']),
+            new TwigFilter('sylius_has_discount', [$this, 'hasDiscount']),
+            new TwigFilter('sylius_has_lowest_price', [$this, 'hasLowestPriceBeforeDiscount']),
+            new TwigFilter('sylius_calculate_lowest_price', [$this, 'getLowestPriceBeforeDiscount']),
         ];
     }
 
@@ -72,7 +45,7 @@ final class PriceExtension extends AbstractExtension
     {
         Assert::keyExists($context, 'channel');
 
-        return $this->helper->calculate($productVariant, $context);
+        return $this->productVariantPricesCalculator->calculate($productVariant, $context);
     }
 
     /**
@@ -84,7 +57,7 @@ final class PriceExtension extends AbstractExtension
     {
         Assert::keyExists($context, 'channel');
 
-        return $this->helper->calculateOriginal($productVariant, $context);
+        return $this->productVariantPricesCalculator->calculateOriginal($productVariant, $context);
     }
 
     /**
@@ -96,11 +69,7 @@ final class PriceExtension extends AbstractExtension
     {
         Assert::keyExists($context, 'channel');
 
-        if (\method_exists($this->helper, 'calculateLowestPriceBeforeDiscount')) {
-            return $this->helper->calculateLowestPriceBeforeDiscount($productVariant, $context);
-        }
-
-        return $this->getPrice($productVariant, $context);
+        return $this->productVariantPricesCalculator->calculateLowestPriceBeforeDiscount($productVariant, $context);
     }
 
     /**

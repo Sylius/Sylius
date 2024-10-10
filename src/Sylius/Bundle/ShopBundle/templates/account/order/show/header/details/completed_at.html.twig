@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-12 col-sm-4">
+        {{ 'sylius.ui.created_at'|trans }}
+    </div>
+    <div class="col">
+        {{ hookable_metadata.context.order.checkoutCompletedAt|format_date }}
+    </div>
+</div>

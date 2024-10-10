@@ -13,12 +13,29 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/_calendar_services.php" />
         <import resource="services/api.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/elements.xml" />
         <import resource="services/pages.xml" />
     </imports>
+
+    <parameters>
+        <parameter key="sylius.behat.clock.date_file">%kernel.project_dir%/var/date.txt</parameter>
+        <parameter key="sylius.behat.notification_accessor.admin.locator" type="string">[data-test-sylius-flash-message]</parameter>
+        <parameter key="sylius.behat.notification_accessor.shop.locator" type="string">[data-test-sylius-flash-message]</parameter>
+        <parameter key="sylius.behat.notification_checker.admin.class_map" type="collection">
+            <parameter key="failure">alert-danger</parameter> <!-- Deprecated and will be removed in Sylius 2.0, use "error" instead -->
+            <parameter key="error">alert-danger</parameter>
+            <parameter key="info">alert-info</parameter>
+            <parameter key="success">alert-success</parameter>
+        </parameter>
+        <parameter key="sylius.behat.notification_checker.shop.class_map" type="collection">
+            <parameter key="failure">alert-danger</parameter> <!-- Deprecated and will be removed in Sylius 2.0, use "error" instead -->
+            <parameter key="error">alert-danger</parameter>
+            <parameter key="info">alert-info</parameter>
+            <parameter key="success">alert-success</parameter>
+        </parameter>
+    </parameters>
 
     <services>
         <defaults public="true" />
@@ -72,23 +89,26 @@
             <argument type="string">%sylius_core.public_dir%</argument>
         </service>
 
-        <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
-            <argument type="service" id="sylius.behat.mocker" />
-            <argument type="service" id="sylius.behat.response_loader" />
-        </service>
-
-        <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" public="false">
-            <argument type="service" id="service_container" />
-        </service>
-
         <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />
 
-        <service id="sylius.behat.notification_accessor" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
+        <service id="sylius.behat.notification_accessor.admin" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
             <argument type="service" id="behat.mink.default_session" />
+            <argument type="string">%sylius.behat.notification_accessor.admin.locator%</argument>
         </service>
 
-        <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" public="false">
-            <argument type="service" id="sylius.behat.notification_accessor" />
+        <service id="sylius.behat.notification_accessor.shop" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
+            <argument type="service" id="behat.mink.default_session" />
+            <argument type="string">%sylius.behat.notification_accessor.shop.locator%</argument>
+        </service>
+
+        <service id="sylius.behat.notification_checker.admin" class="Sylius\Behat\Service\NotificationChecker" public="false">
+            <argument type="service" id="sylius.behat.notification_accessor.admin"/>
+            <argument>%sylius.behat.notification_checker.admin.class_map%</argument>
+        </service>
+
+        <service id="sylius.behat.notification_checker.shop" class="Sylius\Behat\Service\NotificationChecker" public="false">
+            <argument type="service" id="sylius.behat.notification_accessor.shop"/>
+            <argument>%sylius.behat.notification_checker.shop.class_map%</argument>
         </service>
 
         <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" public="false">
@@ -97,6 +117,8 @@
         </service>
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
+
+        <service id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" class="Sylius\Behat\Service\Helper\AutocompleteHelper" />
 
         <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
             <argument>1000000</argument>
@@ -116,20 +138,30 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="sylius.behat.section_iri_converter" class="Sylius\Behat\Service\Converter\SectionAwareIriConverter" public="false">
-            <argument type="service" id="api_platform.route_name_resolver" />
-            <argument type="service" id="api_platform.router" />
-            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
-            <argument type="service" id="api_platform.property_accessor" />
-            <argument type="service" id="api_platform.identifiers_extractor.cached" />
-            <argument type="service" id="api_platform.resource_class_resolver" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
+        <service id="sylius.behat.clock" class="Sylius\Behat\Service\Clock">
+            <argument>%sylius.behat.clock.date_file%</argument>
+        </service>
+        <service id="clock" alias="sylius.behat.clock" />
+        <service id="Symfony\Component\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="Psr\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="argument_resolver.datetime" alias="sylius.behat.clock" />
+
+        <service
+            id="Sylius\Behat\Service\Converter\IriConverter"
+            decorates="api_platform.symfony.iri_converter"
+            decoration-priority="32"
+            public="false"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
         </service>
 
-        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter">
-            <argument type="service" id="api_platform.iri_converter.legacy" />
-            <argument type="service" id="api_platform.symfony.iri_converter" />
+        <service
+            id="sylius.behat.factory.address"
+            class="Sylius\Behat\Service\Factory\AddressFactory"
+            decorates="sylius.custom_factory.address"
+        >
+            <argument type="service" id=".inner" />
         </service>
     </services>
 </container>

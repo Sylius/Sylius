@@ -198,7 +198,7 @@ final class TaxonsTest extends JsonApiTestCase
                 'parent' => '/api/v2/admin/taxons/BRAND',
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/taxon-translations/%s', $taxon->getTranslation('en_US')->getId()),
+                        '@id' => sprintf('/api/v2/admin/taxon/%s/translations/en_US', $taxon->getCode()),
                         'name' => 'Watches',
                         'slug' => 'watches',
                     ],

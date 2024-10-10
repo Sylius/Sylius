@@ -19,79 +19,53 @@ use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionComm
 use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class PromotionsTest extends JsonApiTestCase
 {
-    use AdminUserLoginTrait;
-
-    /** @test */
-    public function it_gets_a_promotion(): void
+    protected function setUp(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $this->setUpAdminContext();
 
-        /** @var PromotionInterface $promotion */
-        $promotion = $fixtures['promotion_50_off'];
+        $this->setUpDefaultPostHeaders();
+        $this->setUpDefaultGetHeaders();
+        $this->setUpDefaultPutHeaders();
+        $this->setUpDefaultPatchHeaders();
+        $this->setUpDefaultDeleteHeaders();
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/get_promotion_response',
-            Response::HTTP_OK,
-        );
+        parent::setUp();
     }
 
     /** @test */
     public function it_gets_promotions(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/promotions', server: $header);
+        $this->requestGet('/api/v2/admin/promotions');
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/get_promotions_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/promotion/get_promotions_response');
     }
 
     /** @test */
-    public function it_gets_promotion_coupons(): void
+    public function it_gets_a_promotion(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
         /** @var PromotionInterface $promotion */
-        $promotion = $fixtures['promotion_1_off'];
+        $promotion = $fixtures['promotion_50_off'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()),
-            server: $header,
-        );
+        $this->requestGet(sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()));
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/get_promotion_coupons_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/promotion/get_promotion_response');
     }
 
     /** @test */
@@ -99,19 +73,16 @@ final class PromotionsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'country.yaml',
             'customer_group.yaml',
             'promotion/product.yaml',
             'promotion/taxon.yaml',
         ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/promotions',
-            server: $header,
-            content: json_encode([
+            body: [
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
                 'channels' => [
@@ -243,95 +214,67 @@ final class PromotionsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/post_promotion_response',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('admin/promotion/post_promotion_response');
     }
 
     /** @test */
     public function it_does_not_create_a_promotion_without_required_data(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/promotions',
-            server: $header,
-            content: json_encode([], \JSON_THROW_ON_ERROR),
+            body: [],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/post_promotion_without_required_data_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_without_required_data_response');
     }
 
     /** @test */
     public function it_does_not_create_a_promotion_with_taken_code(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/promotions',
-            server: $header,
-            content: json_encode([
+            body: [
                 'name' => '50% Off on your first order',
                 'code' => '50_off',
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/post_promotion_with_taken_code_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_taken_code_response');
     }
 
     /** @test */
     public function it_does_not_create_a_promotion_with_end_date_earlier_than_start_date(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/promotions',
-            server: $header,
-            content: json_encode([
+            body: [
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
                 'startsAt' => '2023-12-04 12:30:00',
                 'endsAt' => '2023-11-04 12:30:00',
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/post_promotion_with_invalid_dates_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_dates_response');
     }
 
     /** @test */
     public function it_does_not_create_a_promotion_with_invalid_rules(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/promotions',
-            server: $header,
-            content: json_encode([
+            body: [
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
                 'rules' => [
@@ -382,36 +325,27 @@ final class PromotionsTest extends JsonApiTestCase
                     ],
                     [
                         'type' => ItemTotalRuleChecker::TYPE,
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                     [
                         'type' => 'wrong_type',
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/post_promotion_with_invalid_rules_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_rules_response');
     }
 
     /** @test */
     public function it_does_not_create_a_promotion_with_invalid_actions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: '/api/v2/admin/promotions',
-            server: $header,
-            content: json_encode([
+            body: [
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
                 'actions' => [
@@ -447,39 +381,30 @@ final class PromotionsTest extends JsonApiTestCase
                     ],
                     [
                         'type' => ShippingPercentageDiscountPromotionActionCommand::TYPE,
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                     [
                         'type' => 'wrong_type',
-                        'configuration' => [
-                        ],
+                        'configuration' => [],
                     ],
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/post_promotion_with_invalid_actions_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_actions_response');
     }
 
     /** @test */
     public function it_updates_promotion(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-            content: json_encode([
+            body: [
                 'name' => 'Christmas',
                 'code' => 'new_code',
                 'appliesToDiscounted' => true,
@@ -511,135 +436,62 @@ final class PromotionsTest extends JsonApiTestCase
                     '/api/v2/admin/channels/MOBILE',
                 ],
                 'translations' => ['en_US' => [
-                    '@id' => sprintf('/api/v2/admin/promotion-translations/%s', $promotion->getTranslation('en_US')->getId()),
+                    '@id' => '/api/v2/admin/promotions/50_off/translations/en_US',
                     'label' => 'Christmas',
                 ]],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/put_promotion_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/promotion/put_promotion_response');
     }
 
     /** @test */
     public function it_updates_promotion_to_last_priority_when_priority_is_minus_one(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-            content: json_encode([
+            body: [
                 'priority' => -1,
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/put_promotion_to_last_priority_when_priority_is_minus_one_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/promotion/put_promotion_to_last_priority_when_priority_is_minus_one_response');
     }
 
     /** @test */
     public function it_does_not_update_a_promotion_with_duplicate_locale_translation(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-            content: json_encode([
+            body: [
                 'translations' => ['en_US' => [
                     'label' => 'Christmas',
                 ]],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/put_promotion_with_duplicate_locale_translation',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
-    }
-
-    /** @test */
-    public function it_archives_a_promotion(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'promotion/promotion.yaml',
-        ]);
-
-        /** @var PromotionInterface $promotion */
-        $promotion = $fixtures['promotion_50_off'];
-
-        $this->client->request(
-            method: 'PATCH',
-            uri: sprintf('/api/v2/admin/promotions/%s/archive', $promotion->getCode()),
-            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/archive_promotion',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_restores_a_promotion(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'promotion/promotion.yaml',
-        ]);
-
-        /** @var PromotionInterface $promotion */
-        $promotion = $fixtures['promotion_back_to_school'];
-
-        $this->client->request(
-            method: 'PATCH',
-            uri: sprintf('/api/v2/admin/promotions/%s/restore', $promotion->getCode()),
-            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/restore_promotion',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseUnprocessableEntity('admin/promotion/put_promotion_with_duplicate_locale_translation');
     }
 
     /** @test */
     public function it_deletes_a_promotion(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
-        $this->client->request(
-            method: 'DELETE',
-            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-        );
+        $this->requestDelete(sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
@@ -649,20 +501,52 @@ final class PromotionsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'promotion/promotion.yaml',
             'promotion/promotion_order.yaml',
         ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
-        $this->client->request(
-            method: 'DELETE',
-            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-        );
+        $this->requestDelete(sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_archives_a_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'promotion/promotion.yaml',
+        ]);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->requestPatch(
+            uri: sprintf('/api/v2/admin/promotions/%s/archive', $promotion->getCode()),
+        );
+
+        $this->assertResponseSuccessful('admin/promotion/archive_promotion');
+    }
+
+    /** @test */
+    public function it_restores_a_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'promotion/promotion.yaml',
+        ]);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_back_to_school'];
+
+        $this->requestPatch(sprintf('/api/v2/admin/promotions/%s/restore', $promotion->getCode()));
+
+        $this->assertResponseSuccessful('admin/promotion/restore_promotion');
     }
 }

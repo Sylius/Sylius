@@ -20,4 +20,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function specifyFilterType(string $field, string $type): void;
 
     public function specifyFilterValue(string $field, string $value): void;
+
+    public function filterByProduct(string $productName): void;
 }

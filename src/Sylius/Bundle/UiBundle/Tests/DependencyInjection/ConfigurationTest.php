@@ -213,6 +213,173 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    /** @test */
+    public function component_block_configuration_can_be_shortened_to_template_string_only(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'events' => [
+                        'event_name' => [
+                            'blocks' => [
+                                'block_name' => [
+                                    'component' => 'component_name',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'events' => [
+                    'event_name' => [
+                        'blocks' => [
+                            'block_name' => [
+                                'component' => [
+                                    'name' => 'component_name',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'events.*.blocks.*.component',
+        );
+    }
+
+    /** @test */
+    public function component_block_configuration_can_be_defined_with_inputs(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'events' => [
+                        'event_name' => [
+                            'blocks' => [
+                                'block_name' => [
+                                    'component' => [
+                                        'name' => 'component_name',
+                                        'inputs' => [
+                                            'foo' => 'bar',
+                                            'bar' => 'baz',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'events' => [
+                    'event_name' => [
+                        'blocks' => [
+                            'block_name' => [
+                                'component' => [
+                                    'name' => 'component_name',
+                                    'inputs' => [
+                                        'foo' => 'bar',
+                                        'bar' => 'baz',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'events.*.blocks.*.component',
+        );
+    }
+
+    /** @test */
+    public function template_and_component_cannot_be_defined_at_the_same_time(): void
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                [
+                    'events' => [
+                        'event_name' => [
+                            'blocks' => [
+                                'block_name' => [
+                                    'template' => 'template.html.twig',
+                                    'component' => [
+                                        'name' => 'component_name',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'events.*.blocks.*.template',
+        );
+    }
+
+    /** @test */
+    public function it_allows_empty_twig_ux_configuration(): void
+    {
+        $this->assertConfigurationIsValid([['twig_ux' => []]], 'twig_ux');
+    }
+
+    /** @test */
+    public function it_allows_to_configure_anonymous_component_template_prefixes(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => ['anonymous_component_template_prefixes' => ['sylius_ui' => '@SyliusUi']]],
+            ],
+            ['twig_ux' => ['anonymous_component_template_prefixes' => ['sylius_ui' => '@SyliusUi']]],
+            'twig_ux.anonymous_component_template_prefixes',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_configure_live_component_tags(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => ['live_component_tags' => ['ui' => ['route' => 'sylius_ui', 'method' => 'get']]]],
+            ],
+            ['twig_ux' => ['live_component_tags' => ['ui' => ['route' => 'sylius_ui', 'method' => 'get']]]],
+            'twig_ux.live_component_tags',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_configure_component_default_template(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => ['component_default_template' => 'components/my_default_component.html.twig'],],
+            ],
+            ['twig_ux' => ['component_default_template' => 'components/my_default_component.html.twig']],
+            'twig_ux.component_default_template',
+        );
+    }
+
+    /** @test */
+    public function it_uses_default_component_default_template_when_not_configured(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => []],
+            ],
+            ['twig_ux' => ['component_default_template' => '@SyliusUi/components/default.html.twig']],
+            'twig_ux.component_default_template',
+        );
+    }
+
+    /** @test */
+    public function it_throws_an_exception_if_live_component_tags_route_is_missing(): void
+    {
+        $this->assertConfigurationIsInvalid(
+            [
+                ['twig_ux' => ['live_component_tags' => ['ui' => ['method' => 'get']]]],
+            ],
+            'The "route" attribute is required for the child of "sylius_ui.twig_ux.live_component_tags".',
+        );
+    }
+
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();

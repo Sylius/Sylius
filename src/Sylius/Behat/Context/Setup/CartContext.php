@@ -31,7 +31,7 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class CartContext implements Context
+final readonly class CartContext implements Context
 {
     /**
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
@@ -83,10 +83,10 @@ final class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $this->commandBus->dispatch(AddItemToCart::createFromData(
-            $tokenValue,
-            $productVariant->getCode(),
-            1,
+        $this->commandBus->dispatch(new AddItemToCart(
+            orderTokenValue: $tokenValue,
+            productVariantCode: $productVariant->getCode(),
+            quantity: 1,
         ));
 
         $this->sharedStorage->set('product', $productVariant->getProduct());
@@ -105,16 +105,16 @@ final class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $this->commandBus->dispatch(AddItemToCart::createFromData(
-            $tokenValue,
-            $this
+        $this->commandBus->dispatch(new AddItemToCart(
+            orderTokenValue: $tokenValue,
+            productVariantCode: $this
                 ->getProductVariantWithProductOptionAndProductOptionValue(
                     $product,
                     $productOption,
                     $productOptionValue,
                 )
                 ->getCode(),
-            1,
+            quantity: 1,
         ));
     }
 
@@ -127,8 +127,10 @@ final class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $updateCart = UpdateCart::createWithCouponData($couponCode);
-        $updateCart->setOrderTokenValue($tokenValue);
+        $updateCart = new UpdateCart(
+            orderTokenValue: $tokenValue,
+            couponCode: $couponCode,
+        );
 
         $this->commandBus->dispatch($updateCart);
     }
@@ -141,20 +143,23 @@ final class CartContext implements Context
         $channel = $this->sharedStorage->get('channel');
         $channelCode = $channel->getCode();
 
-        $commandPickupCart = new PickupCart($tokenValue);
-        $commandPickupCart->setChannelCode($channelCode);
-
         if ($this->sharedStorage->has('token') && $this->sharedStorage->has('user')) {
             $user = $this->sharedStorage->get('user');
 
             if ($user instanceof ShopUserInterface) {
                 /** @var CustomerInterface $customer */
-                $customer = $user->getCustomer();
-                $commandPickupCart->setEmail($customer->getEmail());
+                $email = $user->getCustomer()->getEmail();
             }
         }
 
-        $this->commandBus->dispatch($commandPickupCart);
+        $pickupCart = new PickupCart(
+            channelCode: $channelCode,
+            localeCode: $channel->getDefaultLocale()->getCode(),
+            email: $email ?? null,
+            tokenValue: $tokenValue,
+        );
+
+        $this->commandBus->dispatch($pickupCart);
 
         $this->sharedStorage->set('cart_token', $tokenValue);
 
@@ -187,10 +192,10 @@ final class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $this->commandBus->dispatch(AddItemToCart::createFromData(
-            $tokenValue,
-            $this->productVariantResolver->getVariant($product)->getCode(),
-            $quantity,
+        $this->commandBus->dispatch(new AddItemToCart(
+            orderTokenValue: $tokenValue,
+            productVariantCode: $this->productVariantResolver->getVariant($product)->getCode(),
+            quantity: $quantity,
         ));
 
         $this->sharedStorage->set('product', $product);

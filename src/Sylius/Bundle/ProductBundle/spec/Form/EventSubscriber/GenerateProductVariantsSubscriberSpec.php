@@ -78,22 +78,4 @@ final class GenerateProductVariantsSubscriberSpec extends ObjectBehavior
 
         $this->preSetData($event);
     }
-
-    function it_can_retrieve_session_directly_for_bc_layer(
-        FormEvent $event,
-        ProductInterface $product,
-        ProductVariantGeneratorInterface $generator,
-        Session $session,
-        FlashBagInterface $flashBag,
-    ): void {
-        $this->let($generator, $session);
-
-        $event->getData()->willReturn($product);
-        $generator->generate($product)->willThrow(new VariantWithNoOptionsValuesException());
-        $session->getBag('flashes')->willReturn($flashBag);
-
-        $flashBag->add('error', 'sylius.product_variant.cannot_generate_variants')->shouldBeCalled();
-
-        $this->preSetData($event);
-    }
 }

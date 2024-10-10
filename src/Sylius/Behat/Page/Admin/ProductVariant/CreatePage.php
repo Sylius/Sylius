@@ -24,17 +24,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyPrice(string $price, ChannelInterface $channel): void
     {
-        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+        $this->getElement('price', ['%channel_code%' => $channel->getCode()])->setValue($price);
     }
 
     public function specifyMinimumPrice(string $price, ChannelInterface $channel): void
     {
-        $this->getElement('minimum_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+        $this->getElement('minimum_price', ['%channel_code%' => $channel->getCode()])->setValue($price);
     }
 
     public function specifyOriginalPrice(string $originalPrice, ChannelInterface $channel): void
     {
-        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
+        $this->getElement('original_price', ['%channel_code%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function specifyCurrentStock(string $currentStock): void
@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_product_variant_translations_%s_name', $language),
+            sprintf('sylius_admin_product_variant_translations_%s_name', $language),
             $name,
         );
     }
@@ -71,14 +71,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function getValidationMessageForForm(): string
     {
-        $formElement = $this->getDocument()->find('css', 'form[name="sylius_product_variant"]');
-        if (null === $formElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
+        $validationMessage = $this->getDocument()->find('css', '.alert.alert-danger.d-block');
 
-        $validationMessage = $formElement->find('css', '.sylius-validation-error');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.alert.alert-danger.d-block');
         }
 
         return $validationMessage->getText();
@@ -91,7 +87,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function getPricesValidationMessage(): string
     {
-        return $this->getElement('prices_validation_message')->getText();
+        return $this->getElement('prices-body')->getText();
     }
 
     public function setShippingRequired(bool $isShippingRequired): void
@@ -108,21 +104,20 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_product_variant_code',
-            'depth' => '#sylius_product_variant_depth',
-            'form' => 'form[name="sylius_product_variant"]',
-            'height' => '#sylius_product_variant_height',
-            'minimum_price' => '#sylius_product_variant_channelPricings_%channelCode%_minimumPrice',
-            'on_hand' => '#sylius_product_variant_onHand',
-            'option_select' => '#sylius_product_variant_optionValues_%option-name%',
-            'price_calculator' => '#sylius_product_variant_pricingCalculator',
-            'shipping_category' => '#sylius_product_variant_shippingCategory',
-            'shipping_required' => '#sylius_product_variant_shippingRequired',
-            'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
-            'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
-            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
-            'weight' => '#sylius_product_variant_weight',
-            'width' => '#sylius_product_variant_width',
+            'code' => '#sylius_admin_product_variant_code',
+            'depth' => '#sylius_admin_product_variant_depth',
+            'height' => '#sylius_admin_product_variant_height',
+            'minimum_price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_minimumPrice',
+            'on_hand' => '#sylius_admin_product_variant_onHand',
+            'option_select' => '#sylius_admin_product_variant_optionValues_%option-name%',
+            'original_price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_originalPrice',
+            'price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_price',
+            'price_calculator' => '#sylius_admin_product_variant_pricingCalculator',
+            'prices-body' => '[data-test-product-channel-pricings-accordion-body]',
+            'shipping_category' => '#sylius_admin_product_variant_shippingCategory',
+            'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
+            'weight' => '#sylius_admin_product_variant_weight',
+            'width' => '#sylius_admin_product_variant_width',
         ]);
     }
 }

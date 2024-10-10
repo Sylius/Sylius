@@ -33,22 +33,9 @@ use Webmozart\Assert\Assert;
 
 final class AddressType extends AbstractResourceType
 {
-    private ?AddressComparatorInterface $addressComparator;
-
-    public function __construct(string $dataClass, array $validationGroups = [], ?AddressComparatorInterface $addressComparator = null)
+    public function __construct(private readonly AddressComparatorInterface $addressComparator, string $dataClass, array $validationGroups = [])
     {
         parent::__construct($dataClass, $validationGroups);
-
-        if (null === $addressComparator) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.8',
-                'Not passing an $addressComparator to "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
-
-        $this->addressComparator = $addressComparator;
     }
 
     /**
@@ -175,7 +162,7 @@ final class AddressType extends AbstractResourceType
 
     private function areAddressesDifferent(?AddressInterface $firstAddress, ?AddressInterface $secondAddress): bool
     {
-        if (null === $this->addressComparator || null === $firstAddress || null === $secondAddress) {
+        if (null === $firstAddress || null === $secondAddress) {
             return false;
         }
 

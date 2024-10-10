@@ -1,0 +1,38 @@
+{% macro item(taxon) %}
+    {% import _self as macros %}
+
+    {% if taxon.enabledChildren|length > 0 %}
+        <div class="nav-item dropdown" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ taxon.name }}
+            </a>
+            <div class="dropdown-menu">
+                {% for child_taxon in taxon.enabledChildren %}
+                    {{ macros.item(child_taxon) }}
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <a class="nav-link" href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
+            {{ taxon.name }}
+        </a>
+    {% endif %}
+{% endmacro %}
+
+{% import _self as macros %}
+
+<div class="w-100 border-bottom">
+    {% if taxons|length > 0 %}
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="container">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <div class="navbar-nav my-2" {{ sylius_test_html_attribute('menu') }}>
+                        {% for taxon in taxons %}
+                            {{ macros.item(taxon) }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+</div>

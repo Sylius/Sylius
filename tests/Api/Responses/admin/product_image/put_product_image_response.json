@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/ProductImage",
-    "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+    "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
     "@type": "ProductImage",
     "id": "@integer@",
     "owner": "\/api\/v2\/admin\/products\/MUG",
@@ -9,5 +9,6 @@
     "productVariants": [
         "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
         "\/api\/v2\/admin\/product-variants\/MUG_RED"
-    ]
+    ],
+    "position": 0
 }

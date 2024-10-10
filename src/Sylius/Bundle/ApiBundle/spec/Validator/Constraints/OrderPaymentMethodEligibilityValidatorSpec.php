@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -38,34 +38,20 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_constraint_does_not_extend_order_token_value_aware_interface(): void
+    function it_throws_an_exception_if_value_is_not_instance_of_complete_order(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {
-            }])
+            ->during('validate', ['', new OrderPaymentMethodEligibility()])
         ;
     }
 
-    function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void
-    {
-        $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
-            private ?string $orderTokenValue = null;
-
-            function getOrderTokenValue(): ?string
-            {
-                return 'abc';
-            }
-
-            function setOrderTokenValue(?string $orderTokenValue): void
-            {
-                $this->orderTokenValue = $orderTokenValue;
-            }
-        };
-
+    function it_throws_an_exception_if_constraint_does_not_type_of_order_payment_method_eligibility(
+        Constraint $constraint,
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', $constraint])
+            ->during('validate', [new UpdateCart('token'), $constraint])
         ;
     }
 
@@ -73,8 +59,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $constraint = new OrderPaymentMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
@@ -95,8 +80,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderPaymentMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
@@ -130,8 +114,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderPaymentMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 

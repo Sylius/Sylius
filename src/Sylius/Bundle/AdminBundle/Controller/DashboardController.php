@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Controller;
 
-use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,25 +22,16 @@ use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 use Webmozart\Assert\Assert;
 
-final class DashboardController
+final readonly class DashboardController
 {
     public function __construct(
         private ChannelRepositoryInterface $channelRepository,
         private Environment $templatingEngine,
         private RouterInterface $router,
-        private ?StatisticsDataProviderInterface $statisticsDataProvider = null,
     ) {
-        trigger_deprecation(
-            'sylius/admin-bundle',
-            '1.14',
-            sprintf(
-                'Passing an instance of "%s" as the fourth argument is deprecated. It will be removed in Sylius 2.0.',
-                StatisticsDataProviderInterface::class,
-            ),
-        );
     }
 
-    public function indexAction(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         /** @var ChannelInterface|null $channel */
         $channel = $this->findChannelByCodeOrFindFirst($request->query->has('channel') ? (string) $request->query->get('channel') : null);
@@ -51,28 +40,9 @@ final class DashboardController
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
 
-        return new Response($this->templatingEngine->render('@SyliusAdmin/Dashboard/index.html.twig', [
+        return new Response($this->templatingEngine->render('@SyliusAdmin/dashboard/index.html.twig', [
             'channel' => $channel,
         ]));
-    }
-
-    public function getRawData(Request $request): Response
-    {
-        /** @var ChannelInterface|null $channel */
-        $channel = $this->findChannelByCodeOrFindFirst((string) $request->query->get('channelCode'));
-
-        if (null === $channel) {
-            return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
-        }
-
-        return new JsonResponse(
-            $this->statisticsDataProvider->getRawData(
-                $channel,
-                (new \DateTime((string) $request->query->get('startDate'))),
-                (new \DateTime((string) $request->query->get('endDate'))),
-                (string) $request->query->get('interval'),
-            ),
-        );
     }
 
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface

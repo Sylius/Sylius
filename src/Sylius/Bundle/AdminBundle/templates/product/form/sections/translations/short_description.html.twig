@@ -1,0 +1,6 @@
+{% set form = hookable_metadata.context.form %}
+{% set locale = hookable_metadata.context.locale %}
+
+<div class="col-12">
+    {{ form_row(form.shortDescription, sylius_test_form_attribute('short-description', locale)) }}
+</div>

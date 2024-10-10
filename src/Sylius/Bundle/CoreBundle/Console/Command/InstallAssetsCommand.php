@@ -13,17 +13,30 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'sylius:install:assets',
+    description: 'Installs all Sylius assets.',
+)]
 final class InstallAssetsCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'sylius:install:assets';
+    public function __construct(
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly CommandDirectoryChecker $commandDirectoryChecker,
+        protected readonly string $publicDir,
+    ) {
+        parent::__construct($this->entityManager, $this->commandDirectoryChecker);
+    }
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Installs all Sylius assets.')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> command downloads and installs all Sylius media assets.
@@ -40,24 +53,20 @@ EOT
         ));
 
         try {
-            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
-
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/assets/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/bundles/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/assets/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/bundles/', $output);
         } catch (\RuntimeException $exception) {
             $output->writeln($exception->getMessage());
 
-            return 1;
+            return Command::FAILURE;
         }
 
         $commands = [
-            'assets:install' => ['target' => $publicDir],
+            'assets:install' => ['target' => $this->publicDir],
         ];
 
         $this->runCommands($commands, $output);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
-
-class_alias(InstallAssetsCommand::class, '\Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand');

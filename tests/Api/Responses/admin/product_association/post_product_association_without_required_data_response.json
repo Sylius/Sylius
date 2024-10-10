@@ -7,12 +7,12 @@
         {
             "propertyPath": "type",
             "message": "Please enter association type.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "owner",
             "message": "Please enter association owner.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

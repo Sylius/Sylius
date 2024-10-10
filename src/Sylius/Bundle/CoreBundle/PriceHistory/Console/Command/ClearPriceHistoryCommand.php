@@ -44,7 +44,7 @@ final class ClearPriceHistoryCommand extends Command
         $this->io = new SymfonyStyle($input, $output);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $days = filter_var($input->getArgument('days'), \FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
         if (false === $days) {

@@ -13,21 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Customer;
 
-use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware;
 
-class RemoveShopUser implements ShopUserIdAwareInterface
+#[ShopUserIdAware]
+class RemoveShopUser
 {
-    public function __construct(private mixed $shopUserId)
+    public function __construct(public readonly mixed $shopUserId)
     {
-    }
-
-    public function getShopUserId(): mixed
-    {
-        return $this->shopUserId;
-    }
-
-    public function setShopUserId(mixed $shopUserId): void
-    {
-        $this->shopUserId = $shopUserId;
     }
 }

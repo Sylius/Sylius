@@ -71,10 +71,8 @@
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label"/>
         </service>
 
-        <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
-
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface"/>
+            <argument type="service" id="clock"/>
         </service>
 
         <service id="sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal"

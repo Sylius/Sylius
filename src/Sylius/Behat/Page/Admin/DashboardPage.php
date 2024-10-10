@@ -17,6 +17,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
@@ -43,9 +44,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     }
 
     /** @throws ElementNotFoundException */
-    public function getNumberOfNewOrders(): int
+    public function getNumberOfPaidOrders(): int
     {
-        return (int) $this->getElement('new_orders')->getText();
+        return (int) $this->getElement('paid_orders')->getText();
     }
 
     /** @throws ElementNotFoundException */
@@ -72,16 +73,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         return $this->getElement('average_order_value')->getText();
     }
 
-    /** @throws ElementNotFoundException */
-    public function getSubHeader(): string
+    public function getDashboardHeader(): string
     {
-        return trim($this->getElement('sub_header')->getText());
-    }
-
-    /** @throws ElementNotFoundException */
-    public function isSectionWithLabelVisible(string $name): bool
-    {
-        return $this->getElement('admin_menu')->find('css', sprintf('div:contains(%s)', $name)) !== null;
+        return $this->getElement('dashboard_header')->getText();
     }
 
     /** @throws ElementNotFoundException */
@@ -93,13 +87,16 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /** @throws ElementNotFoundException */
     public function chooseChannel(string $channelName): void
     {
-        $this->getElement('channel_choosing_link', ['%channelName%' => $channelName])->click();
+        $this->getElement('channel_choosing_button')->click();
+        $this->getElement('channel_choosing_list', ['%channelName%' => $channelName])->click();
+        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
     public function chooseYearSplitByMonthsInterval(): void
     {
         $this->getElement('year_split_by_months_statistics_button')->click();
+        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
@@ -111,17 +108,22 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /** @throws ElementNotFoundException */
     public function choosePreviousPeriod(): void
     {
-        $this->getElement('navigation_previous')->click();
-
-        usleep(500000);
+        $this->getElement('previous_period')->click();
+        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
     public function chooseNextPeriod(): void
     {
-        $this->getElement('navigation_next')->click();
+        $this->getElement('next_period')->click();
+        $this->waitForStatisticsUpdate();
+    }
 
-        usleep(500000);
+    public function searchForProductViaNavbar(ProductInterface $productName): void
+    {
+        $form = $this->getElement('product_navbar_search');
+        $form->find('css', 'input')->setValue($productName);
+        $form->find('css', 'button')->click();
     }
 
     public function getRouteName(): string
@@ -133,21 +135,30 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'admin_menu' => '.sylius-admin-menu',
-            'average_order_value' => '#average-order-value',
-            'channel_choosing_link' => 'a:contains("%channelName%")',
+            'average_order_value' => '[data-test-average-order-value]',
+            'channel_choosing_button' => '[data-test-choose-channel-button]',
+            'channel_choosing_list' => '[data-test-choose-channel-list] a:contains("%channelName%")',
             'customer_list' => '#customers',
+            'dashboard_header' => '[data-test-dashboard-header]',
             'dropdown' => 'i.dropdown',
-            'logout' => '#sylius-logout-button',
+            'logout' => '[data-test-user-dropdown-item="Logout"]',
             'month_split_by_days_statistics_button' => 'button[data-stats-button="month"]',
-            'navigation_next' => '#navigation-next',
-            'navigation_previous' => '#navigation-prev',
-            'new_customers' => '#new-customers',
-            'new_orders' => '#new-orders',
-            'order_list' => '#orders',
-            'sub_header' => '.ui.header .content .sub.header',
-            'total_sales' => '#total-sales',
-            'year_split_by_months_statistics_button' => 'button[data-stats-button="year"]',
+            'new_customers' => '[data-test-new-customers]',
+            'next_period' => '[data-test-next-period]',
+            'order_list' => '[data-test-new-orders]',
+            'paid_orders' => '[data-test-paid-orders]',
+            'previous_period' => '[data-test-previous-period]',
+            'product_navbar_search' => '[data-test-navbar-product-search]',
+            'statistics_component' => '[data-test-statistics-component]',
+            'total_sales' => '[data-test-total-sales]',
+            'year_split_by_months_statistics_button' => '[data-test-year-split-into-months]',
         ]);
+    }
+
+    private function waitForStatisticsUpdate(): void
+    {
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $liveElement = $this->getElement('statistics_component');
+        $liveElement->waitFor(2500, fn () => !$liveElement->hasAttribute('busy'));
     }
 }

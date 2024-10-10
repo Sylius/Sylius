@@ -1,0 +1,12 @@
+{% set variant = hookable_metadata.context.variant %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'sylius.ui.shipping'|trans }}</div>
+    </div>
+    <div class="card-body">
+        <div class="divide-y">
+            {% hook 'shipping' with { variant } %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: 'WEB'
+        name: 'Web Channel'
+        hostname: 'localhost'
+        contactEmail: 'web@sylius.com'
+        description: 'Lorem ipsum'
+        baseCurrency: '@currency_usd'
+        defaultLocale: '@locale_en'
+        locales: ['@locale_en', '@locale_pl']
+        color: 'black'
+        enabled: true
+        menu_taxon: '@menu_taxon'
+        taxCalculationStrategy: 'order_items_based'
+        channelPriceHistoryConfig: '@web_price_history_config'
+        shopBillingData: '@channel_web_billing_data'
+    channel_mobile:
+        code: 'MOBILE'
+        name: 'Mobile Channel'
+        hostname: 'localhost'
+        contactEmail: 'mobile@sylius.com'
+        description: 'Lorem ipsum'
+        baseCurrency: '@currency_usd'
+        defaultLocale: '@locale_en'
+        locales: ['@locale_en', '@locale_pl']
+        color: 'black'
+        enabled: true
+        taxCalculationStrategy: 'order_items_based'
+        channelPriceHistoryConfig: '@mobile_price_history_config'
+        shopBillingData: '@channel_mobile_billing_data'
+        shippingAddressInCheckoutRequired: true
+
+Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
+    web_price_history_config:
+        lowestPriceForDiscountedProductsVisible: false
+    mobile_price_history_config:
+        lowestPriceForDiscountedProductsCheckingPeriod: 25
+        lowestPriceForDiscountedProductsVisible: true
+        __calls:
+            - addTaxonExcludedFromShowingLowestPrice: ["@menu_taxon"]
+
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Core\Model\ShopBillingData:
+    channel_web_billing_data:
+        company: 'Web Channel Company'
+        taxId: 'Web Channel Tax ID'
+        country_code: 'EN'
+        street: 'Web Channel Street'
+        city: 'Web Channel City'
+        postcode: 'Web Channel Postcode'
+    channel_mobile_billing_data:
+        company: 'Mobile Channel Company'
+        taxId: 'Mobile Channel Tax ID'
+        country_code: 'PL'
+        street: 'Mobile Channel Street'
+        city: 'Mobile Channel City'
+        postcode: 'Mobile Channel Postcode'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en:
+        code: 'en_US'
+    locale_pl:
+        code: 'pl_PL'
+    locale_de:
+        code: 'de_DE'
+
+Sylius\Component\Core\Model\Taxon:
+    menu_taxon:
+        code: "MENU"

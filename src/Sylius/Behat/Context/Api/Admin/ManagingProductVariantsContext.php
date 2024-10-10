@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -43,7 +42,6 @@ final class ManagingProductVariantsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -202,7 +200,7 @@ final class ManagingProductVariantsContext implements Context
     public function iSetItsOptionAs(string $optionName, ProductOptionValueInterface $optionValue): void
     {
         $content = $this->client->getContent();
-        $content['optionValues'][] = $this->sectionAwareIriConverter->getIriFromResourceInSection($optionValue, 'admin');
+        $content['optionValues'][] = $this->iriConverter->getIriFromResourceInSection($optionValue, 'admin');
 
         $this->client->setRequestData($content);
     }
@@ -567,13 +565,13 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should be notified that prices in all channels must be defined
+     * @Then I should be notified that prices in :channel channel must be defined
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined(): void
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined(ChannelInterface $channel): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'You must define price for every enabled channel.',
+            sprintf('channelPricings[%s].price: You must define price.', $channel->getCode()),
         );
     }
 
@@ -750,7 +748,7 @@ final class ManagingProductVariantsContext implements Context
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
             'optionValues',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($optionValue, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($optionValue, 'admin'),
         ));
     }
 

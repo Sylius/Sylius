@@ -25,7 +25,7 @@
         </service>
         <service id="Sylius\Component\Core\Factory\PromotionRuleFactoryInterface" alias="sylius.custom_factory.promotion_rule" />
 
-        <service id="sylius.active_promotions_provider" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
+        <service id="sylius.provider.active_promotions" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
             <argument type="service" id="sylius.repository.promotion" />
         </service>
 
@@ -52,9 +52,6 @@
         </service>
         <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="item_total" label="sylius.form.promotion_rule.item_total" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedItemTotalConfigurationType" />
-        </service>
-        <service id="sylius.channel_aware_promotion_rule_checker.item_total" alias="sylius.promotion_rule_checker.item_total">
-            <deprecated package="sylius/core-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "%alias_id%" instead</deprecated>
         </service>
         <service id="sylius.promotion_rule_checker.cart_quantity" class="Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="cart_quantity" label="sylius.form.promotion_rule.cart_quantity" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType" />
@@ -121,14 +118,6 @@
         <service id="sylius.promotion_rule_updater.has_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\HasTaxonRuleUpdater">
             <argument type="service" id="sylius.repository.promotion_rule" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-        </service>
-
-        <service id="sylius.promotion_rule_updater.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater">
-            <argument type="service" id="sylius.repository.promotion_rule" />
-        </service>
-
-        <service id="Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater">
-            <argument type="service" id="sylius.repository.promotion_rule" />
         </service>
 
         <service id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" class="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleChecker">

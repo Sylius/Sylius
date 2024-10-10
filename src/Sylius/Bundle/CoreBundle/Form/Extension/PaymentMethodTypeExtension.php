@@ -27,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentMethodTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(private GatewayConfigGroupsGenerator $gatewayConfigGroupsGenerator)
+    public function __construct(private readonly GatewayConfigGroupsGenerator $gatewayConfigGroupsGenerator)
     {
     }
 

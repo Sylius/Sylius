@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -23,7 +23,7 @@ final class DisablingApiTest extends ApiTestCase
 
     public function setUp(): void
     {
-        $this->setFixturesFiles([]);
+        $this->setFixturesFiles();
         $this->setUpTest();
     }
 

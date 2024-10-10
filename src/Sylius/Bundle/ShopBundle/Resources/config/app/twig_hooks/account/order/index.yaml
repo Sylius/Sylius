@@ -1,0 +1,9 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.order.index':
+            content:
+                template: '@SyliusShop/account/order/index/content.html.twig'
+
+        'sylius_shop.account.order.index.content':
+            grid:
+                template: '@SyliusShop/shared/grid.html.twig'

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
-interface AddressPageInterface extends SymfonyPageInterface
+interface AddressPageInterface extends ShopPageInterface
 {
     public function chooseDifferentShippingAddress(): void;
 
@@ -49,6 +49,8 @@ interface AddressPageInterface extends SymfonyPageInterface
     public function getItemSubtotal(string $itemName): string;
 
     public function getShippingAddressCountry(): string;
+
+    public function getBillingAddressCountry(): string;
 
     public function nextStep(): void;
 

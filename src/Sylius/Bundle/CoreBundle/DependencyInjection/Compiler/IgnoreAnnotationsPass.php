@@ -23,6 +23,10 @@ final class IgnoreAnnotationsPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
+        if (!$container->hasDefinition('annotations.reader')) {
+            return;
+        }
+
         $annotationsReader = $container->getDefinition('annotations.reader');
 
         $annotationsReader->addMethodCall('addGlobalIgnoredName', ['template']);

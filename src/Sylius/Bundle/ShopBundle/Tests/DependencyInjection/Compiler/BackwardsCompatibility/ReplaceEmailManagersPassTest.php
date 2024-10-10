@@ -35,7 +35,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.listener.order_complete',
             0,
-            'sylius.email_manager.order',
+            new Reference('sylius.email_manager.order'),
         );
     }
 
@@ -51,7 +51,7 @@ final class ReplaceEmailManagersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.listener.order_complete',
             0,
-            'sylius.mailer.order_email_manager.shop',
+            new Reference('sylius.mailer.order_email_manager.shop'),
         );
     }
 

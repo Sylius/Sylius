@@ -84,7 +84,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         foreach ($paymentMethodItems as $method) {
             if ($method->find('css', '[data-test-payment-method-select]')->hasAttribute('checked')) {
-                return $method->find('css', 'a')->getText();
+                return $method->find('css', '[data-test-payment-method-checkbox]')->getText();
             }
         }
 
@@ -93,19 +93,15 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getTotal(): string
     {
-        $totalElement = $this->getElement('total');
-
-        return trim(str_replace('Total:', '', $totalElement->getText()));
+        return $this->getElement('total')->getText();
     }
 
     public function getSubtotal(): string
     {
-        $totalElement = $this->getElement('subtotal');
-
-        return trim(str_replace('Items total:', '', $totalElement->getText()));
+        return $this->getElement('subtotal')->getText();
     }
 
-    public function getOrderShipmentStatus(): string
+    public function getOrderShipmentState(): string
     {
         return $this->getElement('order_shipment_state')->getText();
     }
@@ -125,7 +121,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('payment_price')->getText();
     }
 
-    public function getPaymentStatus(): string
+    public function getPaymentState(): string
     {
         return $this->getElement('payment_state')->getText();
     }
@@ -163,6 +159,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '[data-test-billing-address]',
+            'checked_payment_method' => '[data-test-payment-item] div.form-check:has(input:checked)',
             'number' => '[data-test-order-number]',
             'order_items' => '[data-test-order-table]',
             'order_payment_state' => '[data-test-order-payment-state]',

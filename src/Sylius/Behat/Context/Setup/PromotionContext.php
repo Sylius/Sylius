@@ -37,8 +37,14 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
-final class PromotionContext implements Context
+final readonly class PromotionContext implements Context
 {
+    /**
+     * @param PromotionActionFactoryInterface<PromotionActionInterface> $actionFactory
+     * @param PromotionCouponFactoryInterface<PromotionCouponInterface> $couponFactory
+     * @param PromotionRuleFactoryInterface<PromotionRuleInterface> $ruleFactory
+     * @param PromotionRepositoryInterface<PromotionInterface> $promotionRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private PromotionActionFactoryInterface $actionFactory,
@@ -252,9 +258,9 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(this promotion) expires tomorrow$/
+     * @Given /^(this promotion) is valid until tomorrow$/
      */
-    public function thisPromotionExpiresTomorrow(PromotionInterface $promotion): void
+    public function thisPromotionIsValidUntilTomorrow(PromotionInterface $promotion): void
     {
         $promotion->setEndsAt(new \DateTime('tomorrow'));
 
@@ -262,9 +268,9 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(this promotion) has started yesterday$/
+     * @Given /^(this promotion) started yesterday$/
      */
-    public function thisPromotionHasStartedYesterday(PromotionInterface $promotion): void
+    public function thisPromotionStartedYesterday(PromotionInterface $promotion): void
     {
         $promotion->setStartsAt(new \DateTime('1 day ago'));
 
@@ -302,9 +308,9 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(this coupon) expires tomorrow$/
+     * @Given /^(this coupon) is valid until tomorrow$/
      */
-    public function thisCouponExpiresTomorrow(PromotionCouponInterface $coupon): void
+    public function thisCouponIsValidUntilTomorrow(PromotionCouponInterface $coupon): void
     {
         $coupon->setExpiresAt(new \DateTime('tomorrow'));
 
@@ -370,6 +376,7 @@ final class PromotionContext implements Context
     {
         $coupon = $this->createCoupon($couponCode);
         $promotion->addCoupon($coupon);
+        $promotion->setCouponBased(true);
 
         $this->sharedStorage->set('coupon', $coupon);
         $this->objectManager->flush();
@@ -436,7 +443,6 @@ final class PromotionContext implements Context
         int $secondChannelDiscount,
         ChannelInterface $secondChannel,
     ): void {
-        /** @var PromotionActionInterface $action */
         $action = $this->actionFactory->createFixedDiscount($firstChannelDiscount, $firstChannel->getCode());
         $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['amount' => $secondChannelDiscount]]));
 
@@ -457,7 +463,6 @@ final class PromotionContext implements Context
         int $secondAmount,
         ChannelInterface $secondChannel,
     ): void {
-        /** @var PromotionActionInterface $action */
         $action = $this->actionFactory->createUnitFixedDiscount($firstAmount, $firstChannel->getCode());
         $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['amount' => $secondAmount]]));
 
@@ -478,7 +483,6 @@ final class PromotionContext implements Context
         float $secondPercentage,
         ChannelInterface $secondChannel,
     ): void {
-        /** @var PromotionActionInterface $action */
         $action = $this->actionFactory->createUnitPercentageDiscount($firstPercentage, $firstChannel->getCode());
         $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['percentage' => $secondPercentage]]));
 
@@ -1164,11 +1168,12 @@ final class PromotionContext implements Context
         ?string $prefix = null,
         ?string $suffix = null,
     ): void {
-        $instruction = new PromotionCouponGeneratorInstruction();
-        $instruction->setAmount($amount);
-        $instruction->setCodeLength($codeLength);
-        $instruction->setPrefix($prefix);
-        $instruction->setSuffix($suffix);
+        $instruction = new PromotionCouponGeneratorInstruction(
+            amount: $amount,
+            prefix: $prefix,
+            codeLength: $codeLength,
+            suffix: $suffix,
+        );
 
         $this->couponGenerator->generate($promotion, $instruction);
     }

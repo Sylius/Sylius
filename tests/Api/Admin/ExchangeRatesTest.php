@@ -27,7 +27,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -53,7 +53,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -76,7 +76,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -104,7 +104,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -136,7 +136,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
 

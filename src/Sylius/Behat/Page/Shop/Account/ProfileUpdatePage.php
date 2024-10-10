@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 
 class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterface
 {
@@ -62,6 +63,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     public function saveChanges(): void
     {
         $this->getElement('save_changes_button')->press();
+        $this->waitForElementToBeReady();
     }
 
     public function subscribeToTheNewsletter(): void
@@ -80,9 +82,16 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
             'email' => '[data-test-email]',
             'first_name' => '[data-test-first-name]',
             'last_name' => '[data-test-last-name]',
-            'phone_number' => '#sylius_customer_profile_phoneNumber',
-            'save_changes_button' => '[data-test-save-changes]',
+            'phone_number' => '[data-test-phone-number]',
+            'save_changes_button' => '[data-test-button="save-changes"]',
             'subscribe_newsletter' => '[data-test-subscribe-newsletter]',
         ]);
+    }
+
+    private function waitForElementToBeReady(): void
+    {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getDocument()->waitFor(1, fn (): bool => $this->isOpen());
+        }
     }
 }
