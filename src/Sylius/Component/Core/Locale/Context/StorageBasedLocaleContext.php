@@ -19,6 +19,7 @@ use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Symfony\Component\Security\Core\Exception\SessionUnavailableException;
 
 final class StorageBasedLocaleContext implements LocaleContextInterface
 {
@@ -35,7 +36,7 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
 
         try {
             $localeCode = $this->localeStorage->get($this->channelContext->getChannel());
-        } catch (ChannelNotFoundException $exception) {
+        } catch (ChannelNotFoundException|\RuntimeException|SessionUnavailableException $exception) {
             throw new LocaleNotFoundException(null, $exception);
         }
 
