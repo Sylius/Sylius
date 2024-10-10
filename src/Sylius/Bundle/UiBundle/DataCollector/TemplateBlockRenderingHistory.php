@@ -15,6 +15,12 @@ namespace Sylius\Bundle\UiBundle\DataCollector;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    TemplateBlockRenderingHistory::class,
+);
 /** @internal */
 final class TemplateBlockRenderingHistory
 {

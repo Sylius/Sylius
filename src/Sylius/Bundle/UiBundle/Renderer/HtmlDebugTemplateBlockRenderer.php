@@ -15,6 +15,12 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    HtmlDebugTemplateBlockRenderer::class,
+);
 final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
     public function __construct(private TemplateBlockRendererInterface $templateBlockRenderer)
