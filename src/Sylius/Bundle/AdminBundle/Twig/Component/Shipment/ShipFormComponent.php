@@ -26,6 +26,7 @@ class ShipFormComponent
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
+
     use TemplatePropTrait;
 
     /** @var array<string, mixed> $pathParameters */

@@ -26,6 +26,7 @@ class DefaultFormComponent
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
+
     use TemplatePropTrait;
 
     protected function instantiateForm(): FormInterface

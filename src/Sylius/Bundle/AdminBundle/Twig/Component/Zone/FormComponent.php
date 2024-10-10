@@ -30,6 +30,7 @@ class FormComponent
     use ResourceFormComponentTrait {
         initialize as public __construct;
     }
+
     use TemplatePropTrait;
 
     #[LiveProp(fieldName: 'type')]

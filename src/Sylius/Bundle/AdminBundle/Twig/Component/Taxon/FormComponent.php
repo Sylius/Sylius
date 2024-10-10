@@ -31,6 +31,7 @@ class FormComponent
 
     /** @use ResourceFormComponentTrait<TaxonInterface> */
     use ResourceFormComponentTrait;
+
     use TemplatePropTrait;
 
     /**

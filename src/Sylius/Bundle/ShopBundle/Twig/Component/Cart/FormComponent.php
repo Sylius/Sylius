@@ -35,6 +35,7 @@ class FormComponent
 
     /** @use ResourceFormComponentTrait<OrderInterface> */
     use ResourceFormComponentTrait;
+
     use TemplatePropTrait;
 
     public const SYLIUS_SHOP_CART_CHANGED = 'sylius:shop:cart_changed';
