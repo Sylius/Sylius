@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestFinalTransitionCheckerInterface;
-use Sylius\Bundle\PaymentBundle\Processor\RequestPayloadProcessorInterface;
+use Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessorInterface;
 use Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
@@ -32,7 +32,7 @@ final class PaymentRequestNotifyAction
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestFinalTransitionCheckerInterface $finalTransitionChecker,
-        private RequestPayloadProcessorInterface $requestPayloadProcessor,
+        private NotifyPayloadProcessorInterface $notifyPayloadProcessor,
         private EntityManagerInterface $paymentRequestManager,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
         private NotifyResponseProviderInterface $notifyResponseProvider,
@@ -53,7 +53,7 @@ final class PaymentRequestNotifyAction
             throw new NotFoundHttpException(sprintf('The payment request with hash "%s" is on a final state (state: %s).', $hash, $paymentRequest->getState()));
         }
 
-        $this->requestPayloadProcessor->process($paymentRequest, $request);
+        $this->notifyPayloadProcessor->process($paymentRequest, $request);
 
         $this->paymentRequestManager->flush();
 

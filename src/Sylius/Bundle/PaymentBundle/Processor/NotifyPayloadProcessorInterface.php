@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Processor;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-interface RequestPayloadProcessorInterface
+interface NotifyPayloadProcessorInterface
 {
     public function process(PaymentRequestInterface $paymentRequest, Request $request): void;
 }

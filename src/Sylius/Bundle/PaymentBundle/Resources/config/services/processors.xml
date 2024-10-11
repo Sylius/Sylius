@@ -16,9 +16,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius.processor.payment_request.request_payload" class="Sylius\Bundle\PaymentBundle\Processor\RequestPayloadProcessor">
+        <service id="sylius.processor.payment_request.notify_payload" class="Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessor">
             <argument type="service" id="sylius.normalizer.symfony_request" />
         </service>
-        <service id="Sylius\Bundle\PaymentBundle\Processor\RequestPayloadProcessorInterface" alias="sylius.processor.payment_request.request_payload" />
+        <service id="Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessorInterface" alias="sylius.processor.payment_request.notify_payload" />
     </services>
 </container>

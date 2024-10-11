@@ -17,21 +17,20 @@ use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class RequestPayloadProcessor implements RequestPayloadProcessorInterface
+final class NotifyPayloadProcessor implements NotifyPayloadProcessorInterface
 {
     public function __construct(
-        private SymfonyRequestNormalizerInterface $requestWrapper,
+        private SymfonyRequestNormalizerInterface $requestNormalizer,
     ) {
     }
 
     public function process(PaymentRequestInterface $paymentRequest, Request $request): void
     {
-        $requestPayload = $this->requestWrapper->normalize($request);
+        $requestPayload = $this->requestNormalizer->normalize($request);
         $payload = $paymentRequest->getPayload();
 
         if (is_array($payload)) {
-            $payload += $requestPayload;
-            $paymentRequest->setPayload($payload);
+            $paymentRequest->setPayload(array_merge($payload, $requestPayload));
         }
 
         if (null === $payload) {
