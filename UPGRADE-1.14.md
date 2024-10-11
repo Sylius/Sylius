@@ -137,6 +137,11 @@
     | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
     | **TaxonomyBundle**                                                                                         |                                                                                      |
     | `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
+    | **UiBundle**                                                                                               |                                                                                      |
+    | `sylius.twig.extension.form_test_attribute_array`                                                          | `sylius.twig.extension.test_form_attribute`                                          |
+    | `sylius.twig.extension.form_test_attribute_name`                                                           | `sylius.twig.extension.test_html_attribute`                                          |
+    | `Sylius\Bundle\UiBundle\Twig\RedirectPathExtension`                                                        | `sylius.twig.extension.redirect_path`                                                |
+    | `Sylius\Bundle\UiBundle\Storage\FilterStorage`                                                             | `sylius.twig.storage.filter`                                                         |
     | **UserBundle**                                                                                             |                                                                                      |
     | `Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`                                               | `sylius.console.command.demote_user`                                                 |
     | `Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`                                              | `sylius.console.command.promote_user`                                                |
@@ -234,6 +239,25 @@
     +       private ?RouterInterface $router = null,
         )
     ```
+1. The following services have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\UiBundle\DataCollector\TemplateBlockRenderingHistory`
+    - `Sylius\Bundle\UiBundle\DataCollector\TemplateBlockDataCollector`
+    - `Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateBlockRenderer`
+    - `Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateBlockRendererInterface`
+    - `Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateEventRenderer`
+    - `Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateEventRendererInterface`
+    - `Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateBlockRenderer`
+    - `Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateEventRenderer`
+    - `Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider`
+    - `Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface`
+    - `Sylius\Bundle\UiBundle\Registry\TemplateBlock`
+    - `Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistry`
+    - `Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface`
+    - `Sylius\Bundle\UiBundle\Renderer\TwigTemplateBlockRenderer`
+    - `Sylius\Bundle\UiBundle\Renderer\DelegatingTemplateEventRenderer`
+    - `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
+    - `Sylius\Bundle\UiBundle\Twig\TemplateEventExtension`
+    - `Sylius\Bundle\UiBundle\Twig\LegacySonataBlockExtension`
 
 1. The following templating helpers and its interfaces have been deprecated and will be removed in Sylius 2.0:
     - `Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper`

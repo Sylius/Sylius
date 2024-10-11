@@ -17,6 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    TemplateBlockDataCollector::class,
+);
 /** @internal */
 final class TemplateBlockDataCollector extends DataCollector
 {
