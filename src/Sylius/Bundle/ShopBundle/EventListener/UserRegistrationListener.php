@@ -74,6 +74,6 @@ final readonly class UserRegistrationListener
         $this->userManager->persist($user);
         $this->userManager->flush();
 
-        $this->security->login($user, $this->firewallContextName);
+        $this->security->login($user, null, $this->firewallContextName);
     }
 }
