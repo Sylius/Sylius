@@ -135,6 +135,8 @@
     | **TaxationBundle**                                                                                         |                                                                                      |
     | `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
     | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
+    | **TaxonomyBundle**                                                                                         |                                                                                      |
+    | `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
@@ -152,6 +154,8 @@
     | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`                 | `sylius.resolver.product_variant`             |
     | **PromotionBundle**                                                                 |                                               |
     | `Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface` | `sylius.provider.eligible_catalog_promotions` |
+    | **TaxonomyBundle**                                                                  |                                               |
+    | `Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface`              | `sylius.custom_repository.tree.taxon`         |
     
     We recommend using the new aliases introduced in Sylius 1.14 to ensure compatibility with Sylius 2.0.
 

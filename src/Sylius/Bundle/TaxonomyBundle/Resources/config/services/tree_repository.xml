@@ -11,11 +11,16 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <service id="Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface" class="Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepository" decorates="sylius.repository.tree.taxon">
             <argument type="service" id="Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface.inner" />
         </service>
+        <service id="sylius.custom_repository.tree.taxon" alias="Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface" />
 
         <service id="sylius.repository.tree.taxon" class="Gedmo\Tree\Entity\Repository\NestedTreeRepository">
             <argument type="service" id="doctrine.orm.entity_manager" />
