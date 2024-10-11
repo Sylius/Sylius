@@ -1,18 +1,23 @@
 {
   "name": "@sylius-ui/shop",
-  "version": "2.0.0-alpha-1",
+  "version": "2.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusShopBundle.git"
+  },
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.18.9",
     "@hotwired/stimulus": "^3.0.0",
     "@popperjs/core": "^2.11.8",
     "@symfony/stimulus-bridge": "^3.2.2",
     "@symfony/webpack-encore": "^3.1.0",
     "bootstrap": "^5.3.0",
     "flag-icons": "^7.2.3",
-    "spotlight.js": "^0.7.8"
-  },
-  "devDependencies": {
+    "spotlight.js": "^0.7.8",
     "sass": "^1.54.8",
     "sass-loader": "^13.0.0"
   },
@@ -20,11 +25,6 @@
     "node": "^20 || ^22"
   },
   "engineStrict": true,
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sylius/SyliusShopBundle.git"
-  },
   "files": [
     "./package.json",
     "./README.md",
