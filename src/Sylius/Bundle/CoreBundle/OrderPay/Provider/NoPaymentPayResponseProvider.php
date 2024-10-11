@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
+/** @experimental */
 final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
 {
     public function __construct(
@@ -41,6 +42,7 @@ final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
         OrderInterface $order
     ): bool {
         $payment = $this->paymentToPayResolver->getLastPayment($order);
+
         return null === $payment;
     }
 }

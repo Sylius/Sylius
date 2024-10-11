@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class PaymentRequestPayResponseProvider implements PayResponseProviderInterface
 {
     /**
@@ -45,10 +46,8 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
     ) {
     }
 
-    public function getResponse(
-        RequestConfiguration $requestConfiguration,
-        OrderInterface $order
-    ): Response {
+    public function getResponse(RequestConfiguration $requestConfiguration, OrderInterface $order): Response
+    {
         $payment = $this->paymentToPayResolver->getLastPayment($order);
         Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
 
@@ -71,10 +70,8 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
         return new RedirectResponse($this->afterPayUrlProvider->getUrl($paymentRequest));
     }
 
-    public function supports(
-        RequestConfiguration $requestConfiguration,
-        OrderInterface $order
-    ): bool {
+    public function supports(RequestConfiguration $requestConfiguration, OrderInterface $order): bool
+    {
         return true;
     }
 }

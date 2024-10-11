@@ -16,14 +16,15 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Resolver;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
+/** @experimental */
 final class PaymentToPayResolver implements PaymentToPayResolverInterface
 {
-    public function __construct(
-        private string $state,
-    ) {
+    public function __construct(private string $state)
+    {
     }
 
-    public function getLastPayment(OrderInterface $order): ?PaymentInterface {
+    public function getLastPayment(OrderInterface $order): ?PaymentInterface
+    {
         return $order->getLastPayment($this->state);
     }
 }

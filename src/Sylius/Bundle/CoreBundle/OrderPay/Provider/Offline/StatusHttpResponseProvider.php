@@ -20,11 +20,11 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
+/** @experimental */
 final class StatusHttpResponseProvider implements HttpResponseProviderInterface
 {
-    public function __construct(
-        private FinalUrlProviderInterface $finalUrlProvider,
-    ) {
+    public function __construct(private FinalUrlProviderInterface $finalUrlProvider)
+    {
     }
 
     public function supports(

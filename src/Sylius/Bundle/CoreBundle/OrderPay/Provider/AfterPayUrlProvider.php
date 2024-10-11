@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 use Sylius\Bundle\CoreBundle\OrderPay\Processor\RouteParametersProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 final class AfterPayUrlProvider implements AfterPayUrlProviderInterface
 {
     /**

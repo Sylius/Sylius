@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 
+/** @experimental */
 interface FinalUrlProviderInterface
 {
     public function getUrl(?PaymentInterface $payment): string;
