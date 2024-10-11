@@ -30,7 +30,7 @@ final class PaymentRequestFinalTransitionChecker implements PaymentRequestFinalT
         $nextTransition = $this->stateMachine->getTransitionFromState(
             $paymentRequest,
             PaymentRequestTransitions::GRAPH,
-            $state
+            $state,
         );
 
         return null === $nextTransition;

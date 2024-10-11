@@ -28,7 +28,7 @@ final class NotifyPayloadProcessorTest extends TestCase
     {
         $requestNormalizer = $this->createMock(SymfonyRequestNormalizerInterface::class);
         $notifyPayloadProcessor = new NotifyPayloadProcessor(
-            $requestNormalizer
+            $requestNormalizer,
         );
 
         $requestNormalizer->expects(self::once())

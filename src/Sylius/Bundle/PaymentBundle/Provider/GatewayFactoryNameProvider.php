@@ -27,7 +27,8 @@ final class GatewayFactoryNameProvider implements GatewayFactoryNameProviderInte
         return $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
     }
 
-    public function provideFromPaymentRequest(PaymentRequestInterface $paymentRequest): string {
+    public function provideFromPaymentRequest(PaymentRequestInterface $paymentRequest): string
+    {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
 

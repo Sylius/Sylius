@@ -26,7 +26,8 @@ final class ActionsCommandProvider extends AbstractServiceCommandProvider
     ) {
     }
 
-    protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string {
+    protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string
+    {
         return $paymentRequest->getAction();
     }
 }

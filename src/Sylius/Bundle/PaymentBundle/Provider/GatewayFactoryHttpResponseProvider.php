@@ -27,7 +27,8 @@ final class GatewayFactoryHttpResponseProvider extends AbstractServiceProvider
     ) {
     }
 
-    protected function getHttpResponseProviderIndex(PaymentRequestInterface $paymentRequest): string {
+    protected function getHttpResponseProviderIndex(PaymentRequestInterface $paymentRequest): string
+    {
         return $this->gatewayFactoryNameProvider->provideFromPaymentRequest($paymentRequest);
     }
 }

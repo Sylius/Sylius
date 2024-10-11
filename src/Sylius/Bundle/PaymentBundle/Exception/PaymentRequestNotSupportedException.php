@@ -19,7 +19,7 @@ final class PaymentRequestNotSupportedException extends \RuntimeException
     public function __construct(
         string $message = 'Payment request not supported.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

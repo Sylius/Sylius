@@ -28,7 +28,7 @@ final class SymfonyRequestNormalizer implements SymfonyRequestNormalizerInterfac
                 'headers' => $request->headers->all(),
                 'content' => $request->getContent(),
                 'clientIp' => $request->getClientIp(),
-            ]
+            ],
         ];
     }
 }

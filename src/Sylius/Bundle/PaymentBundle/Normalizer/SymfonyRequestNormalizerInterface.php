@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 interface SymfonyRequestNormalizerInterface
 {
     /**
-     * @param Request $request
      * @return array{
      *      'http_request'?: array{
      *          'uri'?: string,

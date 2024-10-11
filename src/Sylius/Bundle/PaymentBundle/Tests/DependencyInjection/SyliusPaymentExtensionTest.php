@@ -15,12 +15,12 @@ namespace Sylius\Bundle\PaymentBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\PaymentBundle\Attribute\AsGatewayConfigurationType;
-use Sylius\Bundle\PaymentBundle\Attribute\AsPaymentMethodsResolver;
 use Sylius\Bundle\PaymentBundle\Attribute\AsNotifyPaymentProvider;
+use Sylius\Bundle\PaymentBundle\Attribute\AsPaymentMethodsResolver;
 use Sylius\Bundle\PaymentBundle\DependencyInjection\SyliusPaymentExtension;
 use Sylius\Bundle\PaymentBundle\Tests\Stub\GatewayConfigurationTypeStub;
-use Sylius\Bundle\PaymentBundle\Tests\Stub\PaymentMethodsResolverStub;
 use Sylius\Bundle\PaymentBundle\Tests\Stub\NotifyPaymentProviderStub;
+use Sylius\Bundle\PaymentBundle\Tests\Stub\PaymentMethodsResolverStub;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
