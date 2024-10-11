@@ -139,8 +139,6 @@
     | **TaxonomyBundle**                                                                                         |                                                                                      |
     | `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
     | **UiBundle**                                                                                               |                                                                                      |
-    | `sylius.twig.extension.form_test_attribute_array`                                                          | `sylius.twig.extension.test_form_attribute`                                          |
-    | `sylius.twig.extension.form_test_attribute_name`                                                           | `sylius.twig.extension.test_html_attribute`                                          |
     | `Sylius\Bundle\UiBundle\Twig\RedirectPathExtension`                                                        | `sylius.twig.extension.redirect_path`                                                |
     | `Sylius\Bundle\UiBundle\Storage\FilterStorage`                                                             | `sylius.twig.storage.filter`                                                         |
     | **UserBundle**                                                                                             |                                                                                      |

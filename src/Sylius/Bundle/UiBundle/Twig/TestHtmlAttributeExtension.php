@@ -16,6 +16,12 @@ namespace Sylius\Bundle\UiBundle\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use sylius/twig-extra package instead.',
+    TestFormAttributeExtension::class,
+);
 final class TestHtmlAttributeExtension extends AbstractExtension
 {
     public function __construct(private string $env)
