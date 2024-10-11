@@ -17,6 +17,7 @@ use Sonata\BlockBundle\SonataBlockBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
 use Sylius\Bundle\UiBundle\Tests\Functional\src\CustomContextProvider;
 use Sylius\Bundle\UiBundle\Tests\Functional\src\SomeTwigComponent;
+use Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -40,6 +41,7 @@ final class Kernel extends HttpKernel
             new SyliusUiBundle(),
             new WebpackEncoreBundle(),
             new TwigComponentBundle(),
+            new SyliusTwigExtraBundle(),
         ];
     }
 

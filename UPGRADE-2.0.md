@@ -135,6 +135,8 @@
 | `sylius.shipping_date_assigner`                                                                            | `sylius.assigner.shipping_date`                                                      |
 | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                   | `sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal`             |
 | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                      | `sylius.rule_checker.shipping_method.total_weight_less_than_or_equal`                |
+| **TaxonomyBundle**                                                                                         |                                                                                      |
+| `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
 
   The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
 
@@ -151,6 +153,8 @@
 | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`                 | `sylius.resolver.product_variant`             |
 | **PromotionBundle**                                                                 |                                               |
 | `Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface` | `sylius.provider.eligible_catalog_promotions` |
+| **TaxonomyBundle**                                                                  |                                               |
+| `Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface`              | `sylius.custom_repository.tree.taxon`         |
 
 * The following class definitions were moved to a `CoreBundle`:
     - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
@@ -522,6 +526,20 @@ If your app never changed the hasher name configuration, you don't need to confi
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
+
+* Some Twig extension services have been moved from the UiBundle to the new Twig Extra package
+
+* The following classes have been removed:
+    * `Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension`
+    * `Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension`
+    * `Sylius\Bundle\UiBundle\Twig\RouteExistsExtension`
+    * `Sylius\Bundle\UiBundle\Twig\SortByExtension`
+
+* The following services have been renamed:
+    * `sylius.twig.extension.form_test_attribute_array` => `sylius_twig_extra.twig.extension.test_form_attribute`
+    * `sylius.twig.extension.form_test_attribute_name` => `sylius_twig_extra.twig.extension.test_html_attribute`
+    * `sylius.twig.extension.sort_by` => `sylius_twig_extra.twig.extension.sort_by`
+    * `Sylius\Bundle\UiBundle\Twig\RouteExistsExtension` => `sylius_twig_extra.twig.extension.route_exists`
 
 ## Payment method gateways
 
