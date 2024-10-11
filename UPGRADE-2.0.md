@@ -121,6 +121,8 @@
 | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
 | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+| **TaxonomyBundle**                                                                                         |                                                                                      |
+| `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
 
   The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
 
@@ -137,6 +139,8 @@
 | `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`                 | `sylius.resolver.product_variant`             |
 | **PromotionBundle**                                                                 |                                               |
 | `Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface` | `sylius.provider.eligible_catalog_promotions` |
+| **TaxonomyBundle**                                                                  |                                               |
+| `Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface`              | `sylius.custom_repository.tree.taxon`         |
 
 * The following class definitions were moved to a `CoreBundle`:
     - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
