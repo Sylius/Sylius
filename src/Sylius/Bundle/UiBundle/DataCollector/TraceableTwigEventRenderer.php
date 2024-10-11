@@ -19,7 +19,7 @@ trigger_deprecation(
     'sylius/ui-bundle',
     '1.14',
     'The "%s" class is deprecated and will be removed in Sylius 2.0',
-    TraceableTemplateEventRenderer::class,
+    TraceableTwigEventRenderer::class,
 );
 /** @internal */
 final class TraceableTwigEventRenderer implements TwigEventRendererInterface

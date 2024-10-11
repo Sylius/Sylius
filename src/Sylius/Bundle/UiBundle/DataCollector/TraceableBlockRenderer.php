@@ -20,7 +20,7 @@ trigger_deprecation(
     'sylius/ui-bundle',
     '1.14',
     'The "%s" class is deprecated and will be removed in Sylius 2.0',
-    TraceableTemplateBlockRenderer::class,
+    TraceableBlockRenderer::class,
 );
 /** @internal */
 final class TraceableBlockRenderer implements BlockRendererInterface
