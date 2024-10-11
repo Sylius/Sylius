@@ -244,6 +244,7 @@
 
     | Old Alias                           | New Alias                           |
     |-------------------------------------|-------------------------------------|
+    | **AdminBundle**                     |                                     |
     | `sylius.admin.customer.show`        | `sylius_admin.customer.show`        |
     | `sylius.admin.main`                 | `sylius_admin.main`                 |
     | `sylius.admin.order.show`           | `sylius_admin.order.show`           |
