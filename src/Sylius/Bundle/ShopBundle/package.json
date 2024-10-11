@@ -17,7 +17,7 @@
     "sass-loader": "^13.0.0"
   },
   "engines": {
-    "node": "^18 || ^20 || ^22"
+    "node": "^20 || ^22"
   },
   "engineStrict": true,
   "main": "index.js",
