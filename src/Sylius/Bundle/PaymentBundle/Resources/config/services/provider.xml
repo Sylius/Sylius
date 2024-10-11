@@ -44,7 +44,7 @@
             <tag name="sylius.payment_request.http_response.provider" gateway-factory="offline" />
         </service>
 
-        <service id="sylius.provider.payment_notify" class="Sylius\Bundle\PaymentBundle\Provider\CompositePaymentNotifyProvider">
+        <service id="sylius.provider.notify_payment" class="Sylius\Bundle\PaymentBundle\Provider\CompositeNotifyPaymentProvider">
             <argument type="tagged_iterator" tag="sylius.payment_request.payment_notify_provider" />
         </service>
 

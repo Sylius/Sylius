@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Attribute;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class AsPaymentNotifyProvider
+final class AsNotifyPaymentProvider
 {
     public const SERVICE_TAG = 'sylius.payment_request.payment_notify_provider';
 

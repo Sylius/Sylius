@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\PaymentRequest\Provider;
 
-use Sylius\Bundle\PaymentBundle\Attribute\AsPaymentNotifyProvider;
-use Sylius\Bundle\PaymentBundle\Provider\PaymentNotifyProviderInterface;
+use Sylius\Bundle\PaymentBundle\Attribute\AsNotifyPaymentProvider;
+use Sylius\Bundle\PaymentBundle\Provider\NotifyPaymentProviderInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-#[AsPaymentNotifyProvider()]
-final class DummyPaymentNotifyProvider implements PaymentNotifyProviderInterface
+#[AsNotifyPaymentProvider()]
+final class DummyNotifyPaymentProvider implements NotifyPaymentProviderInterface
 {
     public function __construct(
         private EntityRepository $paymentRepository,

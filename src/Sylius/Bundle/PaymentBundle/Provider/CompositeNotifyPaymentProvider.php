@@ -18,15 +18,15 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-final class CompositePaymentNotifyProvider implements PaymentNotifyProviderInterface
+final class CompositeNotifyPaymentProvider implements NotifyPaymentProviderInterface
 {
     /**
-     * @param iterable<PaymentNotifyProviderInterface> $paymentNotifyProviders
+     * @param iterable<NotifyPaymentProviderInterface> $paymentNotifyProviders
      */
     public function __construct(
         private iterable $paymentNotifyProviders,
     ) {
-        Assert::allIsInstanceOf($this->paymentNotifyProviders, PaymentNotifyProviderInterface::class);
+        Assert::allIsInstanceOf($this->paymentNotifyProviders, NotifyPaymentProviderInterface::class);
     }
 
     public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface

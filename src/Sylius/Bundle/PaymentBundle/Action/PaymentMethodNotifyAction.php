@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Action;
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessorInterface;
 use Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProviderInterface;
-use Sylius\Bundle\PaymentBundle\Provider\PaymentNotifyProviderInterface;
+use Sylius\Bundle\PaymentBundle\Provider\NotifyPaymentProviderInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -35,11 +35,11 @@ final class PaymentMethodNotifyAction
      */
     public function __construct(
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private NotifyPaymentProviderInterface $notifyPaymentProvider,
         private PaymentRequestFactoryInterface $paymentRequestFactory,
         private NotifyPayloadProcessorInterface $notifyPayloadProcessor,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer,
-        private PaymentNotifyProviderInterface $paymentNotifyProvider,
         private NotifyResponseProviderInterface $notifyResponseProvider,
     ) {
     }
@@ -54,7 +54,7 @@ final class PaymentMethodNotifyAction
             throw new NotFoundHttpException(sprintf('No payment method found with code "%s".', $code));
         }
 
-        $payment = $this->paymentNotifyProvider->getPayment($request, $paymentMethod);
+        $payment = $this->notifyPaymentProvider->getPayment($request, $paymentMethod);
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
         $paymentRequest->setAction(PaymentRequestInterface::ACTION_NOTIFY);
