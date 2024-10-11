@@ -23,7 +23,11 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/** @implements ProviderInterface<PaymentRequestInterface> */
+/**
+ * @implements ProviderInterface<PaymentRequestInterface>
+ *
+ * @experimental
+ */
 final readonly class ItemProvider implements ProviderInterface
 {
     /** @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository */
