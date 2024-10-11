@@ -18,6 +18,7 @@
 >
     <services>
         <service id="sylius.encrypter" class="Sylius\Component\Payment\Encryption\Encrypter">
+<!--            TODO: cover actual changing values here -->
             <argument>lalalalalalalala</argument>
             <argument>lolololololololo</argument>
         </service>
@@ -29,6 +30,23 @@
 
         <service id="sylius.encrypter.gateway_config" class="Sylius\Component\Payment\Encryption\GatewayConfigEncrypter">
             <argument type="service" id="sylius.encrypter" />
+        </service>
+
+        <service id="sylius.listener.gateway_config_encryption" class="Sylius\Bundle\PaymentBundle\Listener\GatewayConfigEncryptionListener">
+            <argument type="service" id="sylius.encrypter.gateway_config" />
+            <argument>%sylius.encryption.disabled_gateways%</argument>
+            <argument>%sylius.model.gateway_config.class%</argument>
+            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="postFlush" />
+            <tag name="doctrine.event_listener" event="postLoad" />
+        </service>
+
+        <service id="sylius.listener.payment_request_encryption" class="Sylius\Bundle\PaymentBundle\Listener\PaymentRequestEncryptionListener">
+            <argument type="service" id="sylius.encrypter.payment_request" />
+            <argument>%sylius.model.payment_request.class%</argument>
+            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="postFlush" />
+            <tag name="doctrine.event_listener" event="postLoad" />
         </service>
     </services>
 </container>

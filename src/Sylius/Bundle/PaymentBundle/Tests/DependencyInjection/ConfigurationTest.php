@@ -36,9 +36,9 @@ final class ConfigurationTest extends TestCase
     public function it_treats_null_like_true_in_gateways_encryption_configuration(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['encryption' => ['gateways' => ['offline' => null]]]],
-            ['encryption' => ['gateways' => ['offline' => true]]],
-            'encryption.gateways'
+            [['encryption' => ['disabled_gateways' => ['offline']]]],
+            ['encryption' => ['disabled_gateways' => ['offline']]],
+            'encryption.disabled_gateways'
         );
     }
 
@@ -46,9 +46,9 @@ final class ConfigurationTest extends TestCase
     public function it_can_configure_not_encrypted_gateways(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['encryption' => ['gateways' => ['offline' => false]]]],
-            ['encryption' => ['gateways' => ['offline' => false]]],
-            'encryption.gateways'
+            [['encryption' => ['disabled_gateways' => ['offline']]]],
+            ['encryption' => ['disabled_gateways' => ['offline']]],
+            'encryption.disabled_gateways'
         );
     }
 

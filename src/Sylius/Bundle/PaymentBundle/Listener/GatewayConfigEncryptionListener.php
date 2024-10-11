@@ -11,6 +11,7 @@ final class GatewayConfigEncryptionListener extends EntityEncryptionListener
     /** @param class-string $gatewayConfigClass  */
     public function __construct(
         EntityEncrypterInterface $entityEncrypter,
+        private readonly array $disabledGateways,
         private readonly string $gatewayConfigClass,
     ) {
         parent::__construct($entityEncrypter);
@@ -18,6 +19,9 @@ final class GatewayConfigEncryptionListener extends EntityEncryptionListener
 
     protected function supports(mixed $entity): bool
     {
-        return is_a($entity, $this->gatewayConfigClass, true);
+        return
+            is_a($entity, $this->gatewayConfigClass, true) &&
+            !in_array($entity->get(), $this->disabledGateways, true)
+        ;
     }
 }

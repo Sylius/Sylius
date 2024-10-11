@@ -23,21 +23,5 @@
             <argument type="service" id="sylius.canceller.payment_request" />
             <tag name="doctrine.event_listener" event="postUpdate" />
         </service>
-
-        <service id="sylius.listener.gateway_config_encryption" class="Sylius\Bundle\PaymentBundle\Listener\GatewayConfigEncryptionListener">
-            <argument type="service" id="sylius.encrypter.gateway_config" />
-            <argument>%sylius.model.gateway_config.class%</argument>
-            <tag name="doctrine.event_listener" event="onFlush" />
-            <tag name="doctrine.event_listener" event="postFlush" />
-            <tag name="doctrine.event_listener" event="postLoad" />
-        </service>
-
-        <service id="sylius.listener.payment_request_encryption" class="Sylius\Bundle\PaymentBundle\Listener\PaymentRequestEncryptionListener">
-            <argument type="service" id="sylius.encrypter.payment_request" />
-            <argument>%sylius.model.payment_request.class%</argument>
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
-            <tag name="doctrine.event_listener" event="postLoad" />
-        </service>
     </services>
 </container>

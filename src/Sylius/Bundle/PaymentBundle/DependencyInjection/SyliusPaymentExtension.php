@@ -37,6 +37,8 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
         $container->setParameter('sylius.gateway_config.validation_groups', $config['gateway_config']['validation_groups']);
         $container->setParameter('sylius.payment_request.states_to_be_cancelled_when_payment_method_changed', $config['payment_request']['states_to_be_cancelled_when_payment_method_changed']);
 
+        $this->configureEncryption($config['encryption'], $container);
+
         $this->registerAutoconfiguration($container);
     }
 
@@ -72,5 +74,21 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
                 ]);
             },
         );
+    }
+
+    private function configureEncryption(
+        array $encryptionConfig,
+        ContainerBuilder $container,
+    ): void {
+        $container->setParameter('sylius.encryption.enabled', $encryptionConfig['enabled']);
+        if (false === $encryptionConfig['enabled']) {
+            return;
+        }
+
+        $container->setParameter('sylius.encryption.disabled_gateways', $encryptionConfig['disabled_gateways']);
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services/encryption'));
+
+        $loader->load('encryption.xml');
     }
 }
