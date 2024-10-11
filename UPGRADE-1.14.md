@@ -111,7 +111,6 @@
     | `sylius.promotion_processor`                                                                               | `sylius.processor.promotion`                                                         |
     | `sylius.promotion_applicator`                                                                              | `sylius.action.applicator.promotion`                                                 |
     | `sylius.registry_promotion_rule_checker`                                                                   | `sylius.registry.promotion.rule_checker`                                             |
-    | `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion.action`                                                   |
     | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
     | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
     | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
@@ -138,9 +137,14 @@
     
     We recommend using the new aliases introduced in Sylius 1.14 to ensure compatibility with Sylius 2.0.
 
-1. The following class definitions will be moved to `CoreBundle` in Sylius 2.0:
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType`
+1. The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
+   in the `PromotionBundle` has been deprecated and will be removed in Sylius 2.0. This definition has been copied to the `CoreBundle`.
+
+1. The tag `sylius.catalog_promotion.action_configuration_type` for the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
+   in the `PromotionBundle` has been removed, as it has used a parameter from the `CoreBundle`. This tag has been added to the service in the `CoreBundle`.
+
+1. The following class definitions will be moved to `PromotionBundle` in Sylius 2.0:
+    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType`
 
 1. The following form extensions have been deprecated and will be removed in Sylius 2.0:
     - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension`
