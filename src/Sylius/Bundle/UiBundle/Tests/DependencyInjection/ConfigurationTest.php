@@ -350,7 +350,7 @@ final class ConfigurationTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [
-                ['twig_ux' => ['component_default_template' => 'components/my_default_component.html.twig'],],
+                ['twig_ux' => ['component_default_template' => 'components/my_default_component.html.twig']],
             ],
             ['twig_ux' => ['component_default_template' => 'components/my_default_component.html.twig']],
             'twig_ux.component_default_template',
