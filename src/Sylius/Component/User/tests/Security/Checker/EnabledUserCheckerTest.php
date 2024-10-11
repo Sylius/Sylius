@@ -33,10 +33,7 @@ final class EnabledUserCheckerTest extends TestCase
         $this->expectException(DisabledException::class);
 
         $user = $this->createMock(UserInterface::class);
-        $user->method('isAccountNonLocked')->willReturn(true);
         $user->method('isEnabled')->willReturn(false);
-        $user->method('isAccountNonExpired')->willReturn(true);
-        $user->method('isCredentialsNonExpired')->willReturn(true);
 
         $this->userChecker->checkPreAuth($user);
         $this->userChecker->checkPostAuth($user);
