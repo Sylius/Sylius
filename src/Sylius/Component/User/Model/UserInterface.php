@@ -17,13 +17,14 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableInterface;
 use Sylius\Resource\Model\ToggleableInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 interface UserInterface extends
-    AdvancedUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
     TimestampableInterface,
-    ToggleableInterface
+    ToggleableInterface,
+    SymfonyUserInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 

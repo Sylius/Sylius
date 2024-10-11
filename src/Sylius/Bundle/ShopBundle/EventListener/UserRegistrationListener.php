@@ -23,6 +23,7 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class UserRegistrationListener
@@ -74,6 +75,6 @@ final readonly class UserRegistrationListener
         $this->userManager->persist($user);
         $this->userManager->flush();
 
-        $this->security->login($user, null, $this->firewallContextName);
+        $this->security->login($user, 'form_login', $this->firewallContextName);
     }
 }

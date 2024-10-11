@@ -233,16 +233,6 @@ class User implements UserInterface, \Stringable
         $this->passwordResetToken = $passwordResetToken;
     }
 
-    public function isCredentialsNonExpired(): bool
-    {
-        return !$this->hasExpired($this->credentialsExpireAt);
-    }
-
-    public function isAccountNonExpired(): bool
-    {
-        return !$this->hasExpired($this->expiresAt);
-    }
-
     public function setLocked(bool $locked): void
     {
         $this->locked = $locked;
@@ -386,10 +376,5 @@ class User implements UserInterface, \Stringable
             $this->enabled,
             $this->id,
         ] = $data;
-    }
-
-    protected function hasExpired(?\DateTimeInterface $date): bool
-    {
-        return null !== $date && new \DateTime() >= $date;
     }
 }

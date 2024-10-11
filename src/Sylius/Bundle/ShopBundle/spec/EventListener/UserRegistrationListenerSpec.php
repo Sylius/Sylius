@@ -97,7 +97,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
 
-        $security->login($user, null, 'shop')->shouldBeCalled();
+        $security->login($user, 'form_login', 'shop')->shouldBeCalled();
 
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
@@ -132,7 +132,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
 
-        $security->login($user, null, 'shop')->shouldBeCalled();
+        $security->login($user, 'form_login', 'shop')->shouldBeCalled();
 
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();

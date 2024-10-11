@@ -103,6 +103,11 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.user_checker" class="Sylius\Component\User\Security\Checker\UserChecker" />
+        <service id="sylius.user_checker.enabled" class="Sylius\Component\User\Security\Checker\EnabledUserChecker">
+            <tag name="security.user_checker.admin" />
+            <tag name="security.user_checker.shop" />
+            <tag name="security.user_checker.new_api_admin_user" />
+            <tag name="security.user_checker.new_api_shop_user" />
+        </service>
     </services>
 </container>
