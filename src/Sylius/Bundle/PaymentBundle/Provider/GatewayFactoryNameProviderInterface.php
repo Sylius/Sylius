@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Provider;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface GatewayFactoryNameProviderInterface
 {
     public function provide(PaymentMethodInterface $paymentMethod): string;

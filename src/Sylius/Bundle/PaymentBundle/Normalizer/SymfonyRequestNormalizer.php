@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Normalizer;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/** @experimental */
 final class SymfonyRequestNormalizer implements SymfonyRequestNormalizerInterface
 {
     public function normalize(Request $request): array

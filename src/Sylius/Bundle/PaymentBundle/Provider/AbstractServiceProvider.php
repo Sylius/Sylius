@@ -19,6 +19,7 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
+/** @experimental */
 abstract class AbstractServiceProvider implements ServiceProviderAwareProviderInterface
 {
     /** @var ServiceProviderInterface<HttpResponseProviderInterface> */

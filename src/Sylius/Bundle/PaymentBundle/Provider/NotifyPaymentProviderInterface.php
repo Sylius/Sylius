@@ -17,6 +17,7 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/** @experimental */
 interface NotifyPaymentProviderInterface
 {
     public function getPayment(Request $request, PaymentMethodInterface $paymentMethod): PaymentInterface;

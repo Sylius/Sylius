@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class PaymentRequestAfterPayResponseProvider implements AfterPayResponseProviderInterface
 {
     /**
@@ -71,16 +72,12 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
         $payment = $paymentRequest->getPayment();
         $this->paymentStateFlashHandler->handle($requestConfiguration, $payment->getState());
 
-        $url = $this->orderPayFinalUrlProvider->getUrl($payment);
-
-        return new RedirectResponse($url);
+        return new RedirectResponse($this->orderPayFinalUrlProvider->getUrl($payment));
     }
 
     public function supports(RequestConfiguration $requestConfiguration): bool
     {
-        $hash = $this->getPaymentRequestHash($requestConfiguration);
-
-        return null !== $hash;
+        return null !== $this->getPaymentRequestHash($requestConfiguration);
     }
 
     private function getPaymentRequestHash(RequestConfiguration $requestConfiguration): mixed

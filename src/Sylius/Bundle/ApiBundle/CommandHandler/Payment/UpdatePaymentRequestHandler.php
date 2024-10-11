@@ -19,15 +19,13 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+/** @experimental */
 #[AsMessageHandler]
 final class UpdatePaymentRequestHandler
 {
-    /**
-     * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository
-     */
-    public function __construct(
-        private PaymentRequestRepositoryInterface $paymentRequestRepository,
-    ) {
+    /** @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository */
+    public function __construct(private PaymentRequestRepositoryInterface $paymentRequestRepository)
+    {
     }
 
     public function __invoke(UpdatePaymentRequest $updatePaymentRequest): PaymentRequestInterface

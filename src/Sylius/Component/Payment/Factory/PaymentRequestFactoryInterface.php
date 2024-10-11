@@ -22,6 +22,8 @@ use Sylius\Resource\Factory\FactoryInterface;
  * @template T of PaymentRequestInterface
  *
  * @extends FactoryInterface<T>
+ *
+ * @experimental
  */
 interface PaymentRequestFactoryInterface extends FactoryInterface
 {

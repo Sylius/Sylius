@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+/** @experimental */
 interface HttpResponseProviderInterface
 {
     public function supports(

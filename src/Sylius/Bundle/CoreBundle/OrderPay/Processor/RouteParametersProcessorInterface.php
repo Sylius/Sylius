@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\OrderPay\Processor;
 
+/** @experimental */
 interface RouteParametersProcessorInterface
 {
     /**

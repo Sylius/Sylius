@@ -23,6 +23,7 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface
 use Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolverInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+/** @experimental */
 #[AsMessageHandler]
 final class TokenPaymentRequestHandler
 {

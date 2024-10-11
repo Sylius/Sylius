@@ -18,6 +18,7 @@ use Doctrine\Persistence\Proxy;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 final class DoctrineProxyObjectResolver implements DoctrineProxyObjectResolverInterface
 {
     public function __construct(

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Checker;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface PaymentRequestDuplicationCheckerInterface
 {
     public function hasDuplicates(PaymentRequestInterface $paymentRequest): bool;

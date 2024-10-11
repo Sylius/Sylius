@@ -20,6 +20,7 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentRequestTransitions;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
+/** @experimental */
 final class PaymentRequestCanceller implements PaymentRequestCancellerInterface
 {
     /**

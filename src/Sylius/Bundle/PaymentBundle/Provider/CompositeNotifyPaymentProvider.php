@@ -18,6 +18,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class CompositeNotifyPaymentProvider implements NotifyPaymentProviderInterface
 {
     /**

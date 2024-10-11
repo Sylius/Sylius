@@ -16,6 +16,7 @@ namespace Sylius\Component\Payment\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Symfony\Component\Uid\Uuid;
 
+/** @experimental */
 class PaymentRequest implements PaymentRequestInterface
 {
     use TimestampableTrait;

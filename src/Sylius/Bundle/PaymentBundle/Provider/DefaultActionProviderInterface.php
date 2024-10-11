@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Provider;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface DefaultActionProviderInterface
 {
     public function getAction(PaymentRequestInterface $paymentRequest): string;

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\Factory;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface PayumTokenFactoryInterface
 {
     public function createNew(PaymentRequestInterface $paymentRequest): TokenInterface;

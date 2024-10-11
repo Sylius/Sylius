@@ -17,6 +17,7 @@ use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/** @experimental */
 final class NotifyPayloadProcessor implements NotifyPayloadProcessorInterface
 {
     public function __construct(

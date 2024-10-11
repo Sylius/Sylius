@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Normalizer;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/** @experimental */
 interface SymfonyRequestNormalizerInterface
 {
     /**

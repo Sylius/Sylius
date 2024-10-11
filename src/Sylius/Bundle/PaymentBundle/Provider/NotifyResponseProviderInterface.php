@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Provider;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+/** @experimental */
 interface NotifyResponseProviderInterface
 {
     public function provide(PaymentRequestInterface $paymentRequest): Response;

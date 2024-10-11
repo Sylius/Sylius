@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\Resolver;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface DoctrineProxyObjectResolverInterface
 {
     public function resolve(PaymentRequestInterface $paymentRequest): void;

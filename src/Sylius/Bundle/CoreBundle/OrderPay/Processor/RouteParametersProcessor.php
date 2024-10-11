@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Processor;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Routing\RouterInterface;
 
+/** @experimental */
 final class RouteParametersProcessor implements RouteParametersProcessorInterface
 {
     public function __construct(
@@ -31,9 +32,6 @@ final class RouteParametersProcessor implements RouteParametersProcessorInterfac
             $parameters[$key] = (string) $this->expressionLanguage->evaluate($rawParameter, $context);
         }
 
-        return $this->router->generate(
-            $route,
-            $parameters,
-        );
+        return $this->router->generate($route, $parameters);
     }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Canceller;
 
+/** @experimental */
 interface PaymentRequestCancellerInterface
 {
     public function cancelPaymentRequests(mixed $paymentId, string $paymentMethodCode): void;

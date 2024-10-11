@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\Context;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface PaymentRequestContextInterface
 {
     public function isEnabled(): bool;
