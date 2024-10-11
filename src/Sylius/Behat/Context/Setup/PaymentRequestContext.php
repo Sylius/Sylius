@@ -43,9 +43,10 @@ final readonly class PaymentRequestContext implements Context
         PaymentMethodInterface $paymentMethod,
     ): void {
         $addPaymentRequest = new AddPaymentRequest(
-            paymentId: $order->getLastPayment()->getId(),
-            paymentMethodCode: $paymentMethod->getCode(),
-            action: $action,
+            $order->getTokenValue(),
+            $order->getLastPayment()->getId(),
+            $paymentMethod->getCode(),
+            $action,
         );
 
         $this->commandBus->dispatch($addPaymentRequest);

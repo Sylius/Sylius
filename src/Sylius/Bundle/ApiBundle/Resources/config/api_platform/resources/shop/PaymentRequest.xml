@@ -25,7 +25,11 @@
             >
                 <normalizationContext>
                     <values>
-                        <value>sylius:shop:payment_request:show</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:payment_request:show</value>
+                            </values>
+                        </value>
                     </values>
                 </normalizationContext>
             </operation>
@@ -33,24 +37,40 @@
             <operation
                 name="sylius_api_show_payment_request_post"
                 class="ApiPlatform\Metadata\Post"
-                uriTemplate="/shop/payment-requests"
+                uriTemplate="/shop/orders/{tokenValue}/payment-requests"
                 itemUriTemplate="/shop/payment-requests/{hash}"
                 messenger="input"
+                read="false"
                 input="Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest"
             >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" toProperty="payment.order"/>
+                </uriVariables>
                 <normalizationContext>
                     <values>
-                        <value>sylius:shop:payment_request:show</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:payment_request:show</value>
+                            </values>
+                        </value>
                     </values>
                 </normalizationContext>
                 <denormalizationContext>
                     <values>
-                        <value>sylius:shop:payment_request:create</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:payment_request:create</value>
+                            </values>
+                        </value>
                     </values>
                 </denormalizationContext>
                 <validationContext>
                     <values>
-                        <value>sylius</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
                     </values>
                 </validationContext>
             </operation>
@@ -65,17 +85,29 @@
             >
                 <normalizationContext>
                     <values>
-                        <value>sylius:shop:payment_request:show</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:payment_request:show</value>
+                            </values>
+                        </value>
                     </values>
                 </normalizationContext>
                 <denormalizationContext>
                     <values>
-                        <value>sylius:shop:payment_request:update</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:payment_request:update</value>
+                            </values>
+                        </value>
                     </values>
                 </denormalizationContext>
                 <validationContext>
                     <values>
-                        <value>sylius</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
                     </values>
                 </validationContext>
             </operation>

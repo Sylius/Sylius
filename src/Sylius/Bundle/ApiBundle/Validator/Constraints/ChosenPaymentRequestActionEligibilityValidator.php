@@ -43,8 +43,8 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         $gatewayFactoryCommandProvider = $this->getCommandProvider($value);
         if (null === $gatewayFactoryCommandProvider) {
             $this->context->addViolation($constraint->notAvailable, [
-                '%code%' => $value->getPaymentMethodCode(),
-                '%id%' => $value->getPaymentId(),
+                '%code%' => $value->paymentMethodCode,
+                '%id%' => $value->paymentId,
             ]);
         }
 
@@ -52,12 +52,15 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
             return;
         }
 
-        $actionsCommandProvider = $gatewayFactoryCommandProvider->getCommandProvider($value->getAction());
+        $actionsCommandProvider = $gatewayFactoryCommandProvider->getCommandProvider($value->action);
         if (null !== $actionsCommandProvider) {
             return;
         }
 
-        $this->context->addViolation($constraint->notAvailable);
+        $this->context->addViolation($constraint->notAvailable, [
+            '%code%' => $value->paymentMethodCode,
+            '%id%' => $value->paymentId,
+        ]);
     }
 
     private function getCommandProvider(AddPaymentRequest $addPaymentRequest): ?PaymentRequestCommandProviderInterface

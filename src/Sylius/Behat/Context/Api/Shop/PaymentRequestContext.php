@@ -21,6 +21,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
@@ -59,40 +60,6 @@ final readonly class PaymentRequestContext implements Context
         $this->putPaymentRequest($this->sharedStorage->get('payment_request_uri'), $payload);
     }
 
-    private function postPaymentRequest(array $payment, array $payload): void
-    {
-        $request = $this->requestFactory->create(
-            'shop',
-            Resources::PAYMENT_REQUESTS,
-            'Authorization',
-            $this->client->getToken(),
-        );
-
-        $request->setContent([
-            'paymentId' => $payment['id'],
-            'paymentMethodCode' => $payment['method'],
-            'payload' => $payload,
-        ]);
-
-        $this->client->executeCustomRequest($request);
-    }
-
-    public function putPaymentRequest(string $paymentRequestUri, array $payload = []): void
-    {
-        $request = $this->requestFactory->custom(
-            $paymentRequestUri,
-            HttpRequest::METHOD_PUT,
-            [],
-            $this->client->getToken(),
-        );
-
-        $request->setContent([
-            'payload' => $payload,
-        ]);
-
-        $this->client->executeCustomRequest($request);
-    }
-
     /**
      * @Then my payment request with action :action for payment method :paymentMethod should have state :state
      */
@@ -107,6 +74,39 @@ final readonly class PaymentRequestContext implements Context
         Assert::same($this->responseChecker->getValue($response, 'action'), $action, sprintf('Payment request should have action %s', $action));
         Assert::true(str_contains($this->responseChecker->getValue($response, 'method'), $paymentMethod->getCode()), sprintf('Payment request should have payment method %s', $paymentMethod->getCode()));
         Assert::same($this->responseChecker->getValue($response, 'state'), $state, sprintf('Payment request should have state %s', $state));
+    }
+
+    private function postPaymentRequest(array $payment, array $payload): void
+    {
+        $request = $this->requestFactory->create(
+            'shop',
+            sprintf('orders/%s/payment-requests', $this->sharedStorage->get('cart_token')),
+            'Authorization',
+            $this->client->getToken(),
+        );
+
+        $request->setContent([
+            'paymentId' => $payment['id'],
+            'paymentMethodCode' => $payment['method'],
+            'action' => PaymentRequestInterface::ACTION_CAPTURE,
+            'payload' => $payload,
+        ]);
+
+        $this->client->executeCustomRequest($request);
+    }
+
+    private function putPaymentRequest(string $paymentRequestUri, array $payload = []): void
+    {
+        $request = $this->requestFactory->custom(
+            $paymentRequestUri,
+            HttpRequest::METHOD_PUT,
+            [],
+            $this->client->getToken(),
+        );
+
+        $request->setContent(['payload' => $payload]);
+
+        $this->client->executeCustomRequest($request);
     }
 
     private function getRequestForPaymentRequestWithAction(string $action): ?Request
