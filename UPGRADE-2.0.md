@@ -121,6 +121,20 @@
 | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
 | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+| **ShippingBundle**                                                                                         |                                                                                      |
+| `sylius.category_requirement_shipping_method_eligibility_checker`                                          | `sylius.eligibility_checker.shipping_method.category_requirement`                    |
+| `sylius.shipping_method_rules_shipping_method_eligibility_checker`                                         | `sylius.eligibility_checker.shipping_method.rules`                                   |
+| `sylius.shipping_method_eligibility_checker`                                                               | `sylius.eligibility_checker.shipping_method`                                         |
+| `sylius.form.type.shipping_method_rule.collection`                                                         | `sylius.form.type.shipping_method_rule_collection`                                   |
+| `Sylius\Bundle\ShippingBundle\Validator\ShippingMethodCalculatorExistsValidator`                           | `sylius.validator.shipping_method_calculator_exists`                                 |
+| `Sylius\Bundle\ShippingBundle\Validator\ShippingMethodRuleValidator`                                       | `sylius.validator.shipping_method_rule`                                              |
+| `Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator`        | `sylius.validator.groups_generator.shipping_method_configuration`                    |
+| `sylius.shipping_methods_resolver`                                                                         | `sylius.resolver.shipping_methods`                                                   |
+| `sylius.shipping_methods_resolver.default`                                                                 | `sylius.resolver.shipping_methods.default`                                           |
+| `sylius.shipping_method_resolver.default`                                                                  | `sylius.resolver.shipping_method.default`                                            |
+| `sylius.shipping_date_assigner`                                                                            | `sylius.assigner.shipping_date`                                                      |
+| `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                   | `sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal`             |
+| `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                      | `sylius.rule_checker.shipping_method.total_weight_less_than_or_equal`                |
 | **TaxonomyBundle**                                                                                         |                                                                                      |
 | `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
 
