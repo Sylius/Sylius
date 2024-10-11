@@ -120,7 +120,7 @@
 | `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion.action`                                                   |
 | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
-| `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+| `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      
 | **ReviewBundle**                                                                                           |                                                                                      |
 | `sylius.average_rating_calculator`                                                                         | `sylius.calculator.average_rating`                                                   |
 | `sylius.%s_review.average_rating_updater`                                                                  | `sylius.updater.%s_review.average_rating`                                            |
@@ -139,6 +139,9 @@
 | `sylius.shipping_date_assigner`                                                                            | `sylius.assigner.shipping_date`                                                      |
 | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                   | `sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal`             |
 | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                      | `sylius.rule_checker.shipping_method.total_weight_less_than_or_equal`                |
+| **TaxationBundle**                                                                                         |                                                                                      |
+| `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
+| `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
 | **TaxonomyBundle**                                                                                         |                                                                                      |
 | `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
 
