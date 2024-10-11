@@ -19,6 +19,14 @@ use Sylius\Bundle\AdminBundle\Event\PromotionMenuBuilderEvent;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    PromotionUpdateMenuBuilder::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class PromotionUpdateMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.promotion.update';

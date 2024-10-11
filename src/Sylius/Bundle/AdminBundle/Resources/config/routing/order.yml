@@ -149,4 +149,4 @@ sylius_admin_order_resend_confirmation_email:
     path: /orders/{id}/resend-confirmation-email
     methods: [GET]
     defaults:
-        _controller: Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction
+        _controller: sylius_admin.controller.resend_order-confirmation_email

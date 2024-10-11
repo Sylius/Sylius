@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <parameters>
         <parameter key="sylius.admin.notification.uri">https://gus.sylius.com/version</parameter>
     </parameters>
@@ -27,6 +31,7 @@
             <argument type="service" id="twig" />
             <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
         </service>
+        <service id="sylius_admin.controller.account.render_reset_password_page" alias="Sylius\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction" />
 
         <service id="Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction">
             <argument type="service" id="form.factory" />
@@ -35,12 +40,14 @@
             <argument type="service" id="router" />
             <argument type="service" id="twig" />
         </service>
+        <service id="sylius_admin.controller.account.reset_password" alias="Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction" />
 
         <service id="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction" public="true">
             <argument type='service' id="sylius.repository.avatar_image" />
             <argument type="service" id="router" />
             <argument type="service" id="security.csrf.token_manager" />
         </service>
+        <service id="sylius_admin.controller.remove_avatar" alias="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction" />
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.order" />
@@ -49,6 +56,7 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
         </service>
+        <service id="sylius_admin.controller.resend_order-confirmation_email" alias="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction" />
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.shipment" />
@@ -56,11 +64,13 @@
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="request_stack" />
         </service>
+        <service id="sylius_admin.controller.resend_shipment_confirmation_email" alias="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" />
 
         <service id="Sylius\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction">
             <argument type="service" id="twig"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="sylius_admin.controller.account.render_request_password_reset_page" alias="Sylius\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction" />
 
         <service id="Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction">
             <argument type="service" id="form.factory"/>
@@ -69,6 +79,7 @@
             <argument type="service" id="router"/>
             <argument type="service" id="twig" />
         </service>
+        <service id="sylius_admin.controller.account.request_password_reset" alias="Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction" />
 
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">
             <argument type="service" id="sylius.repository.channel" />
@@ -76,17 +87,20 @@
             <argument type="service" id="router" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
         </service>
+        <service id="sylius_admin.controller.dashboard" alias="sylius.controller.admin.dashboard" />
 
         <service id="sylius.controller.admin.dashboard.statistics" class="Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController">
             <argument type="service" id="twig" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
         </service>
+        <service id="sylius_admin.controller.dashboard.statistics" alias="sylius.controller.admin.dashboard.statistics" />
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">
             <argument type='service' id="sylius.customer_statistics_provider" />
             <argument type='service' id="sylius.repository.customer" />
             <argument type='service' id="twig" />
         </service>
+        <service id="sylius_admin.controller.customer_statistics" alias="sylius.controller.customer_statistics" />
 
         <service id="sylius.controller.admin.notification" class="Sylius\Bundle\AdminBundle\Controller\NotificationController" public="true">
             <argument type="service" id="sylius.http_client" />
@@ -95,10 +109,12 @@
             <argument type="string">%kernel.environment%</argument>
             <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />
         </service>
+        <service id="sylius_admin.controller.notification" alias="sylius.controller.admin.notification" />
 
         <service id="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
         </service>
+        <service id="sylius_admin.controller.remove_catalog_promotion" alias="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" />
 
         <service
             id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler"
@@ -108,5 +124,6 @@
             <argument type="service" id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler.inner" />
             <argument type="service" id="sylius.twig.storage.filter" />
         </service>
+        <service id="sylius_admin.resource_controller.redirect_handler" alias="Sylius\Bundle\AdminBundle\Controller\RedirectHandler" />
     </services>
 </container>
