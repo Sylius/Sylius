@@ -26,7 +26,7 @@
         <service id="sylius.twig.extension.template_event" class="Sylius\Bundle\UiBundle\Twig\TemplateEventExtension" public="false">
             <argument type="service" id="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface" />
             <tag name="twig.extension" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.merge_recursive" class="Sylius\Bundle\UiBundle\Twig\MergeRecursiveExtension">
@@ -36,7 +36,7 @@
         <service id="Sylius\Bundle\UiBundle\Twig\LegacySonataBlockExtension">
             <argument>%sylius_ui.sonata_block.whitelisted_variables%</argument>
             <tag name="twig.extension" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
         </service>
 
         <service id="Sylius\Bundle\UiBundle\Twig\RedirectPathExtension">
