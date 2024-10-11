@@ -23,6 +23,8 @@ class PaymentRequest implements PaymentRequestInterface
 
     protected ?Uuid $hash = null;
 
+    protected bool $encrypted = false;
+
     protected string $state = PaymentRequestInterface::STATE_NEW;
 
     protected string $action = PaymentRequestInterface::ACTION_CAPTURE;

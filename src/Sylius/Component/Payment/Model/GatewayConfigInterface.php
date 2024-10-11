@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Payment\Encryption\EncryptionAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface GatewayConfigInterface extends ResourceInterface
+interface GatewayConfigInterface extends ResourceInterface, EncryptionAwareInterface
 {
     public function getGatewayName(): ?string;
 
