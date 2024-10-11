@@ -77,7 +77,7 @@
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.matcher.zone" />
-            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
+            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
 
@@ -93,7 +93,7 @@
 
         <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
+            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <argument type="service" id="sylius.matcher.zone" />
         </service>
         <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
