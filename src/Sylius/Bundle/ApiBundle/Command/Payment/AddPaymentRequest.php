@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Payment;
 
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
+#[OrderTokenValueAware]
 class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
+        public readonly string $orderTokenValue,
         public readonly int|string $paymentId,
         public readonly string $paymentMethodCode,
         public readonly ?string $action = null,

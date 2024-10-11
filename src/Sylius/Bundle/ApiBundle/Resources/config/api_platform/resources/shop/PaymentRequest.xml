@@ -37,11 +37,15 @@
             <operation
                 name="sylius_api_show_payment_request_post"
                 class="ApiPlatform\Metadata\Post"
-                uriTemplate="/shop/payment-requests"
+                uriTemplate="/shop/orders/{tokenValue}/payment-requests"
                 itemUriTemplate="/shop/payment-requests/{hash}"
                 messenger="input"
+                read="false"
                 input="Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest"
             >
+                <uriVariables>
+                    <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" toProperty="payment.order"/>
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">

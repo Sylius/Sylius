@@ -68,12 +68,13 @@ final class PaymentRequestsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles($fixturesPaths);
 
-        $order = $this->placeOrder('nAWw2jewpA', 'oliver@doe.com');
+        $tokenValue = 'nAWw2jewpA';
+        $order = $this->placeOrder($tokenValue, 'oliver@doe.com');
         $payment = $order->getLastPayment();
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/payment-requests',
+            uri: sprintf('/api/v2/shop/orders/%s/payment-requests', $tokenValue),
             server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
             content: json_encode([
                 'paymentId' => $payment->getId(),
@@ -94,6 +95,39 @@ final class PaymentRequestsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_payment_request_for_not_existent_order(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('nAWw2jewpA', 'oliver@doe.com');
+        $payment = $order->getLastPayment();
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/orders/invalid_token/payment-requests',
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
+            content: json_encode([
+                'paymentId' => $payment->getId(),
+                'paymentMethodCode' => $payment->getMethod()->getCode(),
+                'action' => 'capture',
+                'payload' => [
+                    'target_path' => 'https://myshop.tld/target-path',
+                    'after_path' => 'https://myshop.tld/after-path',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /** @test */
     public function it_does_not_create_a_payment_request_without_required_data(): void
     {
         $this->loadFixturesFromFiles([
@@ -105,11 +139,12 @@ final class PaymentRequestsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $this->placeOrder('nAWw2jewpA', 'oliver@doe.com');
+        $tokenValue = 'nAWw2jewpA';
+        $this->placeOrder($tokenValue, 'oliver@doe.com');
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/payment-requests',
+            uri: sprintf('/api/v2/shop/orders/%s/payment-requests', $tokenValue),
             server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
             content: json_encode([], \JSON_THROW_ON_ERROR),
         );
@@ -133,14 +168,13 @@ final class PaymentRequestsTest extends JsonApiTestCase
             'payment_method.yaml',
         ]);
 
-        $order = $this->placeOrder('nAWw2jewpA', 'oliver@doe.com');
+        $tokenValue = 'nAWw2jewpA';
+        $order = $this->placeOrder($tokenValue, 'oliver@doe.com');
         $payment = $order->getLastPayment();
-
-        $this->placeOrder('test', 'oliver@doe.com');
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/payment-requests',
+            uri: sprintf('/api/v2/shop/orders/%s/payment-requests', $tokenValue),
             server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
             content: json_encode([
                     'paymentId' => $payment->getId(),

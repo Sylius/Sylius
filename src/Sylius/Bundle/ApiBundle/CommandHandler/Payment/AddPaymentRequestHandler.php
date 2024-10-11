@@ -30,7 +30,6 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final class AddPaymentRequestHandler
 {
-
     /**
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
      * @param PaymentRepositoryInterface<PaymentInterface> $paymentRepository
@@ -58,20 +57,16 @@ final class AddPaymentRequestHandler
 
     private function createPaymentRequest(AddPaymentRequest $addPaymentRequest): PaymentRequestInterface
     {
-        /** @var PaymentMethodInterface|null $paymentMethod */
-        $paymentMethod = $this->paymentMethodRepository->findOneBy([
-            'code' => $addPaymentRequest->paymentMethodCode,
-        ]);
-
-        if (null === $paymentMethod) {
-            throw new PaymentMethodNotFoundException();
-        }
-
         /** @var PaymentInterface|null $payment */
-        $payment = $this->paymentRepository->find($addPaymentRequest->paymentId);
-
+        $payment = $this->paymentRepository->findOneByOrderToken($addPaymentRequest->paymentId, $addPaymentRequest->orderTokenValue);
         if (null === $payment) {
             throw new PaymentNotFoundException();
+        }
+
+        /** @var PaymentMethodInterface|null $paymentMethod */
+        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->paymentMethodCode]);
+        if (null === $paymentMethod) {
+            throw new PaymentMethodNotFoundException();
         }
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
