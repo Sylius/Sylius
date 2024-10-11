@@ -12,7 +12,7 @@
             <div class="mb-3">
                 <form method="get" action="{{ path }}" novalidate>
                     <div class="sylius-filters">
-                        {% for filter in definition.enabledFilters|filter(filter => filter.enabled)|sort_by('position') %}
+                        {% for filter in definition.enabledFilters|filter(filter => filter.enabled)|sylius_sort_by('position') %}
                             <div class="sylius-filters__field">
                                 {{ sylius_grid_render_filter(resources, filter) }}
                             </div>
