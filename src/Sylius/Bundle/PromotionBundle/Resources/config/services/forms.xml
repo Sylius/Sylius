@@ -108,9 +108,10 @@
         </service>
 
         <service id="sylius.form.type.promotion_action_collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionCollectionType">
-            <argument type="service" id="sylius.registry.promotion.action" />
+            <argument type="service" id="sylius.registry.promotion_action" />
             <tag name="form.type" />
         </service>
+
 
         <service id="sylius.form.type.promotion_rule_collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleCollectionType">
             <argument type="service" id="sylius.registry.promotion.rule_checker" />

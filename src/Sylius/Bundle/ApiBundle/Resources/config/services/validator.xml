@@ -201,7 +201,7 @@
         <service
             id="sylius_api.shipping_method_configuration_groups_generator"
             class="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator"
-            decorates="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator"
+            decorates="sylius.validator.groups_generator.shipping_method_configuration"
         >
             <argument>%sylius.shipping.shipping_method_calculator.validation_groups%</argument>
             <tag name="api_platform.validation_groups_generator" />
