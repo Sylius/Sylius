@@ -20,6 +20,7 @@ use Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class PayumTokenFactory implements PayumTokenFactoryInterface
 {
     public function __construct(private Payum $payum)

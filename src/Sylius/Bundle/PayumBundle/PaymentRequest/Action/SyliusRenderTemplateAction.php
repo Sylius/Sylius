@@ -18,11 +18,11 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\RenderTemplate;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface;
 
+/** @experimental */
 final class SyliusRenderTemplateAction implements ActionInterface
 {
-    public function __construct(
-        private PaymentRequestContextInterface $payumApiContext,
-    ) {
+    public function __construct(private PaymentRequestContextInterface $payumApiContext)
+    {
     }
 
     public function execute($request): void

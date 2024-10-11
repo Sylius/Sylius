@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\Command;
 use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareTrait;
 
+/** @experimental */
 class AuthorizePaymentRequest implements PaymentRequestHashAwareInterface
 {
     use PaymentRequestHashAwareTrait;
