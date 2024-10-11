@@ -121,6 +121,10 @@
 | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
 | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+| **ReviewBundle**                                                                                           |                                                                                      |
+| `sylius.average_rating_calculator`                                                                         | `sylius.calculator.average_rating`                                                   |
+| `sylius.%s_review.average_rating_updater`                                                                  | `sylius.updater.%s_review.average_rating`                                            |
+| **Note: `%s` refers to the entity names associated with reviews (e.g., `product`, etc.).**                 |                                                                                      |
 | **ShippingBundle**                                                                                         |                                                                                      |
 | `sylius.category_requirement_shipping_method_eligibility_checker`                                          | `sylius.eligibility_checker.shipping_method.category_requirement`                    |
 | `sylius.shipping_method_rules_shipping_method_eligibility_checker`                                         | `sylius.eligibility_checker.shipping_method.rules`                                   |
