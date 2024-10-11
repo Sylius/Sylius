@@ -15,6 +15,12 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    DelegatingTwigEventRenderer::class,
+);
 final class DelegatingTwigEventRenderer implements TwigEventRendererInterface
 {
     public function __construct(private BlockRegistryInterface $templateBlockRegistry, private BlockRendererInterface $templateBlockRenderer)

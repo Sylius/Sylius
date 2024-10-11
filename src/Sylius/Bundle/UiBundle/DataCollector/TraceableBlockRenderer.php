@@ -16,6 +16,12 @@ namespace Sylius\Bundle\UiBundle\DataCollector;
 use Sylius\Bundle\UiBundle\Registry\Block;
 use Sylius\Bundle\UiBundle\Renderer\BlockRendererInterface;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    TraceableBlockRenderer::class,
+);
 /** @internal */
 final class TraceableBlockRenderer implements BlockRendererInterface
 {
