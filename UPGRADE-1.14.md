@@ -114,6 +114,10 @@
     | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
     | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
     | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+    | **ReviewBundle**                                                                                           |                                                                                      |
+    | `sylius.average_rating_calculator`                                                                         | `sylius.calculator.average_rating`                                                   |
+    | `sylius.%s_review.average_rating_updater`                                                                  | `sylius.updater.%s_review.average_rating`                                            |
+    | **Note: `%s` refers to the entity names associated with reviews (e.g., `product`, etc.).**                 |                                                                                      |
     | **TaxationBundle**                                                                                         |                                                                                      |
     | `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
     | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
