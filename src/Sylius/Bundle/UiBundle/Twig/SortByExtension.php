@@ -18,6 +18,12 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use sylius/twig-extra package instead.',
+    TestFormAttributeExtension::class,
+);
 class SortByExtension extends AbstractExtension
 {
     public function getFilters(): array
