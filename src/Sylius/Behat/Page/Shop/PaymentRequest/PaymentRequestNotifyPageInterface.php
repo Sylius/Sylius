@@ -18,15 +18,6 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
 
 interface PaymentRequestNotifyPageInterface extends BasePageInterface
 {
-    /**
-     * Calls a URI.
-     *
-     * @param string      $method        The request method
-     * @param array       $urlParameters The url parameters
-     * @param array       $files         The files
-     * @param array       $server        The server parameters (HTTP headers are referenced with an HTTP_ prefix as PHP does)
-     * @param string|null $content       The raw body data
-     */
     public function openWithClient(
         string $method,
         array $urlParameters = [],
