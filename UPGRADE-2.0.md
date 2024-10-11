@@ -120,7 +120,7 @@
 | `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion.action`                                                   |
 | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
-| `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      
+| `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
 | **ReviewBundle**                                                                                           |                                                                                      |
 | `sylius.average_rating_calculator`                                                                         | `sylius.calculator.average_rating`                                                   |
 | `sylius.%s_review.average_rating_updater`                                                                  | `sylius.updater.%s_review.average_rating`                                            |
@@ -144,6 +144,9 @@
 | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
 | **TaxonomyBundle**                                                                                         |                                                                                      |
 | `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
+| **UserBundle**                                                                                             |                                                                                      |
+| `Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`                                               | `sylius.console.command.demote_user`                                                 |
+| `Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`                                              | `sylius.console.command.promote_user`                                                |
 
   The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
 
