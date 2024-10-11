@@ -111,10 +111,13 @@
     | `sylius.promotion_processor`                                                                               | `sylius.processor.promotion`                                                         |
     | `sylius.promotion_applicator`                                                                              | `sylius.action.applicator.promotion`                                                 |
     | `sylius.registry_promotion_rule_checker`                                                                   | `sylius.registry.promotion.rule_checker`                                             |
-    | `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion.action`                                                   |
     | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
     | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
     | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
+    | **ReviewBundle**                                                                                           |                                                                                      |
+    | `sylius.average_rating_calculator`                                                                         | `sylius.calculator.average_rating`                                                   |
+    | `sylius.%s_review.average_rating_updater`                                                                  | `sylius.updater.%s_review.average_rating`                                            |
+    | **Note: `%s` refers to the entity names associated with reviews (e.g., `product`, etc.).**                 |                                                                                      |
     | **ShippingBundle**                                                                                         |                                                                                      |
     | `sylius.category_requirement_shipping_method_eligibility_checker`                                          | `sylius.eligibility_checker.shipping_method.category_requirement`                    |
     | `sylius.shipping_method_rules_shipping_method_eligibility_checker`                                         | `sylius.eligibility_checker.shipping_method.rules`                                   |
@@ -129,6 +132,9 @@
     | `sylius.shipping_date_assigner`                                                                            | `sylius.assigner.shipping_date`                                                      |
     | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                   | `sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal`             |
     | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                      | `sylius.rule_checker.shipping_method.total_weight_less_than_or_equal`                |
+    | **TaxationBundle**                                                                                         |                                                                                      |
+    | `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
+    | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
 
    The old service IDs are now deprecated and will be removed in Sylius 2.0. Please update your service references accordingly to ensure compatibility with Sylius 2.0.
 
@@ -149,9 +155,14 @@
     
     We recommend using the new aliases introduced in Sylius 1.14 to ensure compatibility with Sylius 2.0.
 
-1. The following class definitions will be moved to `CoreBundle` in Sylius 2.0:
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType`
+1. The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
+   in the `PromotionBundle` has been deprecated and will be removed in Sylius 2.0. This definition has been copied to the `CoreBundle`.
+
+1. The tag `sylius.catalog_promotion.action_configuration_type` for the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
+   in the `PromotionBundle` has been removed, as it has used a parameter from the `CoreBundle`. This tag has been added to the service in the `CoreBundle`.
+
+1. The following class definitions will be moved to `PromotionBundle` in Sylius 2.0:
+    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType`
 
 1. The following form extensions have been deprecated and will be removed in Sylius 2.0:
     - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension`

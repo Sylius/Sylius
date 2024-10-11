@@ -26,7 +26,7 @@
         <service id="sylius.taxation.order_shipment_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.tax_rate_resolver" />
+            <argument type="service" id="sylius.resolver.tax_rate" />
             <tag name="sylius.taxation.items.applicator" />
             <tag name="sylius.taxation.item_units.applicator" />
         </service>
@@ -34,14 +34,14 @@
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.integer_distributor" />
-            <argument type="service" id="sylius.tax_rate_resolver" />
+            <argument type="service" id="sylius.resolver.tax_rate" />
             <argument type="service" id="sylius.proportional_integer_distributor" />
             <tag name="sylius.taxation.items.applicator" />
         </service>
         <service id="sylius.taxation.order_item_units_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.tax_rate_resolver" />
+            <argument type="service" id="sylius.resolver.tax_rate" />
             <argument type="service" id="sylius.proportional_integer_distributor" />
             <tag name="sylius.taxation.item_units.applicator" />
         </service>
