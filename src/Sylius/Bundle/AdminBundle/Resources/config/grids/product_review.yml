@@ -8,35 +8,45 @@ sylius_grid:
             sorting:
                 date: desc
             fields:
-                date:
-                    type: datetime
-                    label: sylius.ui.date
-                    path: createdAt
-                    sortable: createdAt
+                rating:
+                    type: twig
+                    label: sylius.ui.rating
+                    sortable: ~
                     options:
-                        format: d-m-Y H:i:s
+                        template: "@SyliusAdmin/product_review/grid/field/rating.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
+                author:
+                    type: twig
+                    label: sylius.ui.customer
+                    options:
+                        template: '@SyliusAdmin/shared/grid/field/customer.html.twig'
                 title:
                     type: string
                     label: sylius.ui.title
                     sortable: ~
-                rating:
+                reviewSubject:
                     type: string
-                    label: sylius.ui.rating
-                    sortable: ~
+                    label: sylius.ui.product
+                date:
+                    type: twig
+                    label: sylius.ui.date
+                    path: createdAt
+                    sortable: createdAt
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "text-center"
                 status:
                     type: twig
                     label: sylius.ui.status
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        template: "@SyliusAdmin/product_review/grid/field/status.html.twig"
                         vars:
-                            labels: "@SyliusAdmin/ProductReview/Label/Status"
-                reviewSubject:
-                    type: string
-                    label: sylius.ui.product
-                author:
-                    type: string
-                    label: sylius.ui.customer
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
             filters:
                 title:
                     type: string
@@ -49,34 +59,47 @@ sylius_grid:
                             sylius.ui.new: new
                             sylius.ui.accepted: accepted
                             sylius.ui.rejected: rejected
+                product:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.product
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%sylius.model.product.class%'
+                            translation_fields: [ name ]
+                            choice_label: name
+                    options:
+                        fields: [ reviewSubject.id ]
             actions:
                 item:
-                    update:
-                        type: update
                     accept:
                         type: apply_transition
                         label: sylius.ui.accept
-                        icon: checkmark
+                        icon: check
                         options:
                             link:
                                 route: sylius_admin_product_review_accept
                                 parameters:
                                     id: resource.id
-                            class: green
+                            class: btn-success btn-icon
+                            show_disabled: false
                             transition: accept
                             graph: sylius_product_review
                     reject:
                         type: apply_transition
                         label: sylius.ui.reject
-                        icon: remove
+                        icon: x
                         options:
                             link:
                                 route: sylius_admin_product_review_reject
                                 parameters:
                                     id: resource.id
-                            class: yellow
+                            class: btn-warning btn-icon
+                            show_disabled: false
                             transition: reject
                             graph: sylius_product_review
+                    update:
+                        type: update
                     delete:
                         type: delete
                 bulk:

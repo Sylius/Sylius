@@ -17,6 +17,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ShopBundle\DependencyInjection\SyliusShopExtension;
 use Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher;
 use Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher;
+use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
 
 final class SyliusShopExtensionTest extends AbstractExtensionTestCase
 {
@@ -29,9 +30,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasService('sylius.controller.shop.contact');
         $this->assertContainerBuilderHasService('sylius.controller.shop.currency_switch');
-        $this->assertContainerBuilderHasService('sylius.controller.shop.homepage');
         $this->assertContainerBuilderHasService('sylius.controller.shop.locale_switch');
-        $this->assertContainerBuilderHasService('sylius.controller.shop.security_widget');
     }
 
     /**
@@ -132,6 +131,18 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->load(['firewall_context_name' => 'myshopfirewall']);
 
         $this->assertContainerBuilderHasParameter('sylius_shop.firewall_context_name', 'myshopfirewall');
+    }
+
+    /** @test */
+    public function it_prepends_sylius_theme_configuration_with_channel_based_context(): void
+    {
+        $this->container->registerExtension(new SyliusThemeExtension());
+
+        $this->load();
+
+        $syliusThemeConfig = $this->container->getExtensionConfig('sylius_theme')[0];
+
+        $this->assertSame('sylius.theme.context.channel_based', $syliusThemeConfig['context']);
     }
 
     protected function getContainerExtensions(): array

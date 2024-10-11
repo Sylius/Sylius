@@ -18,12 +18,12 @@ use Liip\ImagineBundle\Exception\Imagine\Filter\NonExistingFilterException;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+class ImageNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
@@ -38,7 +38,7 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
     ) {
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ImageInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -59,6 +59,11 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
         }
 
         return $data instanceof ImageInterface;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ImageInterface::class => false];
     }
 
     /** @param array<string, string> $data */

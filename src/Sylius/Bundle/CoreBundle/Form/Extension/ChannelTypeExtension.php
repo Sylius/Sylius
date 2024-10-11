@@ -24,10 +24,10 @@ use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
-use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Sylius\Component\Core\Model\Scope;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -58,6 +58,7 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.channel.countries',
                 'required' => false,
                 'multiple' => true,
+                'expanded' => false,
             ])
             ->add('defaultTaxZone', ZoneChoiceType::class, [
                 'required' => false,
@@ -66,12 +67,6 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
-            ])
-            ->add('themeName', ThemeNameChoiceType::class, [
-                'label' => 'sylius.form.channel.theme',
-                'required' => false,
-                'empty_data' => null,
-                'placeholder' => 'sylius.ui.no_theme',
             ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'sylius.form.channel.contact_email',
@@ -93,8 +88,15 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.channel.account_verification_required',
                 'required' => false,
             ])
-            ->add('shippingAddressInCheckoutRequired', CheckboxType::class, [
+            ->add('shippingAddressInCheckoutRequired', ChoiceType::class, [
                 'label' => 'sylius.form.channel.shipping_address_in_checkout_required',
+                'choices' => [
+                    'sylius.ui.billing_address' => false,
+                    'sylius.ui.shipping_address' => true,
+                ],
+                'placeholder' => false,
+                'multiple' => false,
+                'expanded' => true,
                 'required' => false,
             ])
             ->add('shopBillingData', ShopBillingDataType::class, [

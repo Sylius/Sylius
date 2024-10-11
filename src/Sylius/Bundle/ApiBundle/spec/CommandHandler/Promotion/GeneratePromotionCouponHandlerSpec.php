@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Promotion;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon;
 use Sylius\Bundle\ApiBundle\Exception\PromotionNotFoundException;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -23,6 +24,8 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 
 final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         PromotionRepositoryInterface $promotionRepository,
         PromotionCouponGeneratorInterface $promotionCouponGenerator,

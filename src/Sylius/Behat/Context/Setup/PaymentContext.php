@@ -26,8 +26,14 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-final class PaymentContext implements Context
+final readonly class PaymentContext implements Context
 {
+    /**
+     * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     * @param ExampleFactoryInterface<PaymentMethodInterface> $paymentMethodExampleFactory
+     * @param FactoryInterface<PaymentMethodTranslationInterface> $paymentMethodTranslationFactory
+     * @param array<string, string> $gatewayFactories
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
@@ -42,7 +48,7 @@ final class PaymentContext implements Context
      * @Given the store (also )allows paying (with ):paymentMethodName
      * @Given the store (also )allows paying with :paymentMethodName at position :position
      */
-    public function storeAllowsPaying($paymentMethodName, $position = null)
+    public function storeAllowsPaying(string $paymentMethodName, ?int $position = null): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
     }
@@ -77,28 +83,9 @@ final class PaymentContext implements Context
     /**
      * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode
      */
-    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
+    public function theStoreHasAPaymentMethodWithACode(string $paymentMethodName, string $paymentMethodCode): void
     {
         $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Offline');
-    }
-
-    /**
-     * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
-     */
-    public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
-        $paymentMethodName,
-        $paymentMethodCode,
-    ) {
-        $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Paypal Express Checkout');
-        $paymentMethod->getGatewayConfig()->setConfig([
-            'username' => 'TEST',
-            'password' => 'TEST',
-            'signature' => 'TEST',
-            'payum.http_client' => '@sylius.payum.http_client',
-            'sandbox' => true,
-        ]);
-
-        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -118,7 +105,7 @@ final class PaymentContext implements Context
 
     /**
      * @Given the payment method :paymentMethod is disabled
-     * @Given /^(this payment method) has been disabled$/
+     * @Given /^(this payment method) (?:has been|is) disabled$/
      * @When the payment method :paymentMethod gets disabled
      */
     public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod)
@@ -184,24 +171,14 @@ final class PaymentContext implements Context
         Assert::eq($payment->getState(), $state);
     }
 
-    /**
-     * @param string $name
-     * @param string $code
-     * @param string $gatewayFactory
-     * @param string $description
-     * @param bool $addForCurrentChannel
-     * @param int|null $position
-     *
-     * @return PaymentMethodInterface
-     */
     private function createPaymentMethod(
-        $name,
-        $code,
-        $gatewayFactory = 'Offline',
-        $description = '',
-        $addForCurrentChannel = true,
-        $position = null,
-    ) {
+        string $name,
+        string $code,
+        string $gatewayFactory,
+        string $description = '',
+        bool $addForCurrentChannel = true,
+        ?int $position = null,
+    ): PaymentMethodInterface {
         $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
 
         /** @var PaymentMethodInterface $paymentMethod */
@@ -216,7 +193,7 @@ final class PaymentContext implements Context
         ]);
 
         if (null !== $position) {
-            $paymentMethod->setPosition((int) $position);
+            $paymentMethod->setPosition($position);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);

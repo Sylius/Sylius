@@ -74,7 +74,10 @@ final class ProductReviewContext implements Context
     {
         $this->client->addRequestData('title', $title);
         $this->client->addRequestData('comment', $comment);
-        $this->client->addRequestData('email', $email);
+
+        if (null !== $email) {
+            $this->client->addRequestData('email', $email);
+        }
     }
 
     /**

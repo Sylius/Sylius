@@ -56,9 +56,9 @@ Copy the contents of the original template to make your work easier. And then mo
 
 .. code-block:: twig
 
-    {% extends '@SyliusShop/layout.html.twig' %}
+    {% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
-    {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+    {% import '@SyliusUi/macro/messages.html.twig' as messages %}
 
     {% block content %}
     <div class="ui column stackable center page grid">

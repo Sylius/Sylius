@@ -34,4 +34,6 @@ interface ProductVariantRepositoryInterface extends BaseProductVariantRepository
         string $locale,
         CatalogPromotionInterface $catalogPromotion,
     ): QueryBuilder;
+
+    public function countByProductOptionValueId(mixed $id): int;
 }

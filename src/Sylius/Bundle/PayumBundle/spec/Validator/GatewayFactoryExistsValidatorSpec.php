@@ -28,7 +28,7 @@ final class GatewayFactoryExistsValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
     ): void {
         $this->beConstructedWith(
-            ['paypal_express_checkout' => 'sylius.payum_gateway_factory.paypal_express_checkout', 'stripe_checkout' => 'sylius.payum_gateway_factory.stripe_checkout'],
+            ['paypal' => 'sylius.payum_gateway_factory.paypal', 'stripe_checkout' => 'sylius.payum_gateway_factory.stripe_checkout'],
         );
 
         $this->initialize($executionContext);
@@ -60,6 +60,6 @@ final class GatewayFactoryExistsValidatorSpec extends ObjectBehavior
     ): void {
         $executionContext->buildViolation(Argument::cetera())->shouldNotBeCalled();
 
-        $this->validate('paypal_express_checkout', new GatewayFactoryExists());
+        $this->validate('paypal', new GatewayFactoryExists());
     }
 }

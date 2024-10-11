@@ -17,10 +17,11 @@ use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final class ChangePaymentMethodHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class ChangePaymentMethodHandler
 {
     public function __construct(
         private PaymentMethodChangerInterface $paymentMethodChanger,

@@ -1,0 +1,39 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.profile_update':
+            form:
+                component: 'sylius_shop:account:profile_update:form'
+                props:
+                    resource: '@=_context.customer'
+                    form: '@=_context.form'
+                    template: '@SyliusShop/account/profile_update/form.html.twig'
+
+        'sylius_shop.account.profile_update.form':
+            full_name:
+                template: '@SyliusShop/account/profile_update/form/full_name.html.twig'
+            email:
+                template: '@SyliusShop/account/profile_update/form/email.html.twig'
+            additional_information:
+                template: '@SyliusShop/account/profile_update/form/additional_information.html.twig'
+            phone_number:
+                template: '@SyliusShop/account/profile_update/form/phone_number.html.twig'
+            newsletter:
+                template: '@SyliusShop/account/profile_update/form/newsletter.html.twig'
+            buttons:
+                template: '@SyliusShop/account/profile_update/form/buttons.html.twig'
+
+        'sylius_shop.account.profile_update.form.full_name':
+            name:
+                template: '@SyliusShop/account/profile_update/form/full_name/name.html.twig'
+            surname:
+                template: '@SyliusShop/account/profile_update/form/full_name/surname.html.twig'
+
+        'sylius_shop.account.profile_update.form.additional_information':
+            birthday:
+                template: '@SyliusShop/account/profile_update/form/additional_information/birthday.html.twig'
+            gender:
+                template: '@SyliusShop/account/profile_update/form/additional_information/gender.html.twig'
+
+        'sylius_shop.account.profile_update.form.buttons':
+            submit:
+                template: '@SyliusShop/account/profile_update/form/buttons/submit.html.twig'

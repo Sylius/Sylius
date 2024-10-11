@@ -18,6 +18,7 @@ default:
                 - sylius.behat.context.setup.product
 
                 - sylius.behat.context.ui.admin.managing_product_attributes
+                - sylius.behat.context.ui.admin.search_filter
                 - sylius.behat.context.ui.admin.notification
 
             filters:

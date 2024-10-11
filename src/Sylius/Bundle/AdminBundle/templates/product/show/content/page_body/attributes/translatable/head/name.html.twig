@@ -1,0 +1,9 @@
+{% if hookable_metadata.context.locale_code is defined %}
+    {% set locale_code = hookable_metadata.context.locale_code %}
+    {% set loop = hookable_metadata.context.loop %}
+
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#translation-{{ locale_code }}" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="translation-{{ locale_code }}">
+    <span class="flag flag-sm flag-country-{{ locale_code|lower|split('_')|last }} me-3"></span>
+    {{ locale_code|sylius_locale_name }}
+</button>
+{% endif %}

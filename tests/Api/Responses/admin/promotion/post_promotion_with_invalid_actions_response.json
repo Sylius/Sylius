@@ -2,17 +2,17 @@
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": @string@,
+    "hydra:description": "@string@",
     "violations": [
         {
             "propertyPath": "actions[0].configuration[WEB][amount]",
             "message": "This value should be of type numeric.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[1].configuration[WEB][amount]",
             "message": "This field is missing.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[1].configuration[WEB][filters]",
@@ -22,17 +22,17 @@
         {
             "propertyPath": "actions[2].configuration[percentage]",
             "message": "The percentage discount must be between 0% and 100%.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[3].configuration[WEB][percentage]",
             "message": "The percentage discount must be between 0% and 100%.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[4].configuration[percentage]",
             "message": "This field is missing.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[5].type",

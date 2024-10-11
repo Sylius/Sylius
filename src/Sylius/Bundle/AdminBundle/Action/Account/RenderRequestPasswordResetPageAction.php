@@ -31,7 +31,7 @@ final class RenderRequestPasswordResetPageAction
         $form = $this->formFactory->create(RequestPasswordResetType::class);
 
         return new Response(
-            $this->twig->render('@SyliusAdmin/Security/requestPasswordReset.html.twig', [
+            $this->twig->render('@SyliusAdmin/security/request_password_reset.html.twig', [
                 'form' => $form->createView(),
             ]),
         );

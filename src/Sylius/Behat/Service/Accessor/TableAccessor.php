@@ -194,11 +194,11 @@ final class TableAccessor implements TableAccessorInterface
         return false !== stripos(trim($sourceText), $searchedValue);
     }
 
-    /**
-     * @return string
-     */
-    private function getColumnFieldName(NodeElement $column)
+    private function getColumnFieldName(NodeElement $column): string
     {
-        return preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class'));
+        return
+            $column->getAttribute('data-test-table') ??
+            preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class'))
+        ;
     }
 }

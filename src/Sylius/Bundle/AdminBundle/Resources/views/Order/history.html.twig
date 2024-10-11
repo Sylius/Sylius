@@ -1,9 +1,0 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
-
-{% import '@SyliusUi/Macro/labels.html.twig' as label %}
-
-{% block title %}{{ 'sylius.ui.order'|trans }} #{{ order.number }} - {{ 'sylius.ui.order_history'|trans }} {{ parent() }}{% endblock %}
-
-{% block content %}
-    {{ sylius_template_event('sylius.admin.order.history.content', _context) }}
-{% endblock %}

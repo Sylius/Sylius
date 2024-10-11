@@ -26,7 +26,7 @@ trigger_deprecation(
 /** @internal */
 final class TemplateBlockDataCollector extends DataCollector
 {
-    public function __construct(private TemplateBlockRenderingHistory $templateBlockRenderingHistory)
+    public function __construct(private BlockRenderingHistory $templateBlockRenderingHistory)
     {
         $this->reset();
     }

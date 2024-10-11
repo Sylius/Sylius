@@ -15,11 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 class SendShipmentConfirmationEmail
 {
-    /** @var mixed */
-    public $shipmentId;
-
-    public function __construct($shipmentId)
+    public function __construct(public readonly mixed $shipmentId)
     {
-        $this->shipmentId = $shipmentId;
     }
 }

@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use PhpSpec\ObjectBehavior;
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
@@ -33,55 +32,19 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class CompleteOrderHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         MessageBusInterface $commandBus,
         MessageBusInterface $eventBus,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory, $commandBus, $eventBus, $orderPromotionsIntegrityChecker);
+        $this->beConstructedWith($orderRepository, $stateMachine, $commandBus, $eventBus, $orderPromotionsIntegrityChecker);
     }
 
     function it_handles_order_completion_without_notes(
-        OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
-        WinzouStateMachineInterface $stateMachine,
-        OrderInterface $order,
-        CustomerInterface $customer,
-    ): void {
-        $completeOrder = new CompleteOrder();
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
-
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-
-        $order->getCustomer()->willReturn($customer);
-        $order->getTotal()->willReturn(1500);
-
-        $order->setNotes(null)->shouldNotBeCalled();
-
-        $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
-
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('complete')->willReturn(true);
-        $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
-
-        $stateMachine->apply('complete')->shouldBeCalled();
-
-        $orderCompleted = new OrderCompleted('COMPLETED_ORDER_TOKEN');
-
-        $eventBus
-            ->dispatch($orderCompleted, [new DispatchAfterCurrentBusStamp()])
-            ->willReturn(new Envelope($orderCompleted))
-            ->shouldBeCalled()
-        ;
-
-        $this($completeOrder)->shouldReturn($order);
-    }
-
-    function it_uses_the_new_state_machine_abstraction_if_passed(
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $stateMachine,
         MessageBusInterface $commandBus,
@@ -92,8 +55,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($orderRepository, $stateMachine, $commandBus, $eventBus, $orderPromotionsIntegrityChecker);
 
-        $completeOrder = new CompleteOrder();
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
@@ -122,15 +84,13 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_handles_order_completion_with_notes(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         MessageBusInterface $eventBus,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
-        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         CustomerInterface $customer,
     ): void {
-        $completeOrder = new CompleteOrder('ThankYou');
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN', notes: 'ThankYou');
 
         $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(1500);
@@ -141,11 +101,10 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('complete')->willReturn(true);
+        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, 'complete')->willReturn(true);
         $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
 
-        $stateMachine->apply('complete')->shouldBeCalled();
+        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, 'complete')->shouldBeCalled();
 
         $orderCompleted = new OrderCompleted('COMPLETED_ORDER_TOKEN');
 
@@ -166,8 +125,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
         PromotionInterface $promotion,
     ): void {
-        $completeOrder = new CompleteOrder('ThankYou');
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN', notes: 'ThankYou');
 
         $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(1000);
@@ -193,8 +151,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_order_does_not_exist(
         OrderRepositoryInterface $orderRepository,
     ): void {
-        $completeOrder = new CompleteOrder();
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
@@ -210,8 +167,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         CustomerInterface $customer,
     ): void {
-        $completeOrder = new CompleteOrder();
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
@@ -228,14 +184,12 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_cannot_be_completed(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
-        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         CustomerInterface $customer,
     ): void {
-        $completeOrder = new CompleteOrder();
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
@@ -244,8 +198,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
+        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -257,8 +210,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
     ): void {
-        $completeOrder = new CompleteOrder();
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+        $completeOrder = new CompleteOrder(orderTokenValue: 'ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 

@@ -17,10 +17,11 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\SendShipmentConfirmationEmail;
 use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final class SendShipmentConfirmationEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class SendShipmentConfirmationEmailHandler
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,

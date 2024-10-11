@@ -43,6 +43,8 @@ components:
                 context: .
                 dockerfile: .bunnyshell/docker/php/Dockerfile
                 target: sylius_php_prod
+                args:
+                    DATABASE_URL: 'mysql://{{ env.vars.MYSQL_USER }}:{{ env.vars.MYSQL_PASSWORD }}@database/{{ env.vars.MYSQL_DATABASE }}?serverVersion=8.0'
             command: php-fpm
             entrypoint: /usr/local/bin/php-entrypoint
             environment:

@@ -17,11 +17,9 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart">
         <attribute name="productVariantCode" serialized-name="productVariant">
-            <group>shop:cart:add_item</group>
             <group>sylius:shop:cart:add_item</group>
         </attribute>
         <attribute name="quantity">
-            <group>shop:cart:add_item</group>
             <group>sylius:shop:cart:add_item</group>
         </attribute>
     </class>

@@ -31,22 +31,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createListQueryBuilder(): QueryBuilder;
 
     /**
-     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see createCriteriaAwareSearchListQueryBuilder()} instead.
-     */
-    public function createSearchListQueryBuilder(): QueryBuilder;
-
-    /**
-     * @param array{product: string, variant: string}|null $criteria
+     * @param array<string, mixed>|null $criteria
      */
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder;
 
     /**
-     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see createByCustomerIdCriteriaAwareQueryBuilder()} instead.
-     */
-    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
-
-    /**
-     * @param array{product: string, variant: string}|null $criteria
+     * @param array<string, mixed>|null $criteria
      */
     public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder;
 
@@ -123,4 +113,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
         \DateTimeInterface $endDate,
         array $groupBy,
     ): array;
+
+    public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface;
 }

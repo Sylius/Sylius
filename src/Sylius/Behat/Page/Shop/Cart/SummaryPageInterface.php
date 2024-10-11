@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Sylius\Behat\Page\Shop\PageInterface as ShopPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-interface SummaryPageInterface extends PageInterface
+interface SummaryPageInterface extends ShopPageInterface
 {
     public function getGrandTotal(): string;
 
@@ -38,9 +38,9 @@ interface SummaryPageInterface extends PageInterface
 
     public function getItemTotal(string $productName): string;
 
-    public function getItemUnitRegularPrice(string $productName): int;
+    public function getItemUnitRegularPrice(string $productName): string;
 
-    public function getItemUnitPrice(string $productName): int;
+    public function getItemUnitPrice(string $productName): string;
 
     public function hasOriginalPrice(string $productName): bool;
 
@@ -52,11 +52,11 @@ interface SummaryPageInterface extends PageInterface
 
     public function changeQuantity(string $productName, string $quantity): void;
 
-    public function specifyQuantity(string $productName, int $quantity): void;
-
     public function applyCoupon(string $couponCode): void;
 
-    public function isSingleItemOnPage(): bool;
+    public function removeCoupon(): void;
+
+    public function countOrderItems(): int;
 
     public function hasItemNamed(string $name): bool;
 
@@ -64,13 +64,11 @@ interface SummaryPageInterface extends PageInterface
 
     public function hasItemWithVariantNamed(string $variantName): bool;
 
-    public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): bool;
+    public function getItemOptionValue(string $productName, string $optionName): string;
 
     public function hasItemWithInsufficientStock(string $productName): bool;
 
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
-
-    public function isEmpty(): bool;
+    public function cartIsEmpty(): bool;
 
     public function getQuantity(string $productName): int;
 
@@ -78,11 +76,9 @@ interface SummaryPageInterface extends PageInterface
 
     public function clearCart(): void;
 
-    public function updateCart(): void;
-
     public function checkout(): void;
 
     public function waitForRedirect(int $timeout): void;
 
-    public function getPromotionCouponValidationMessage(): string;
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 }

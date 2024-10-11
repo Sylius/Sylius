@@ -2,6 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Adjustment",
     "@id": "\/api\/v2\/admin\/shipments\/@integer@\/adjustments",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
     "hydra:member": [
         {
             "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
@@ -11,6 +12,5 @@
             "neutral": false,
             "locked": false
         }
-    ],
-    "hydra:totalItems": 1
+    ]
 }

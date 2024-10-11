@@ -51,7 +51,7 @@ final class TaxonSlugEventSubscriberSpec extends ObjectBehavior
         $this->generateSlug(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $taxon->getWrappedObject(),
         ));
     }
@@ -75,7 +75,7 @@ final class TaxonSlugEventSubscriberSpec extends ObjectBehavior
         $this->generateSlug(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $taxon->getWrappedObject(),
         ));
     }
@@ -99,7 +99,7 @@ final class TaxonSlugEventSubscriberSpec extends ObjectBehavior
         $this->generateSlug(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $taxon->getWrappedObject(),
         ));
     }
