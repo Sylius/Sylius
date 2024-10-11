@@ -62,35 +62,6 @@ Feature: Prevent shipping step completion without a selected shipping method
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store operates in "United States"
         And the store operates in "France"
-        And the store has a zone "Europe" with code "EU"
-        And this zone has the "France" country member
-        And the store has "DHL" shipping method with "$20.00" fee within the "EU" zone
-        And I have product "PHP T-Shirt" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I try to complete the shipping step
-        Then I should see that this shipping method is not available for this address
-
-    @no-api @ui @javascript
-    Scenario: Preventing shipping step completion if there are no available shipping methods for selected country
-        Given the store operates on a channel named "Web"
-        And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store operates in "United States"
-        And the store operates in "France"
-        And the store has a zone "Europe" with code "EU"
-        And this zone has the "France" country member
-        And the store has "DHL" shipping method with "$20.00" fee within the "EU" zone
-        And I have product "PHP T-Shirt" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I want to complete the shipping step
-        Then I should be informed that my order cannot be shipped to this address
-        And I should not be able to complete the shipping step
-
-    @api @no-ui
-    Scenario: Preventing shipping step completion if there are no available shipping methods for selected country
-        Given the store operates on a channel named "Web"
-        And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store operates in "United States"
-        And the store operates in "France"
         And the store operates in "Poland"
         And the store has a zone "Europe" with code "EU"
         And this zone has the "France" country member

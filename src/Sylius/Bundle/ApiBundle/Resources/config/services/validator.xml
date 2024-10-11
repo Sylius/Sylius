@@ -52,7 +52,7 @@
             class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator"
         >
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
+            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />
         </service>
 
@@ -71,7 +71,7 @@
         >
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <argument type="service" id="sylius.resolver.shipping_methods" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_chosen_shipping_method_eligibility" />
         </service>
 

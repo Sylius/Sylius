@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="services/form.xml" />
     </imports>
@@ -42,13 +46,15 @@
 
         <service id="sylius.tax_rate_resolver" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
             <argument type="service" id="sylius.repository.tax_rate" />
-            <argument type="service" id="sylius.tax_rate_date_eligibility_checker" on-invalid="null" />
+            <argument type="service" id="sylius.eligibility_checker.tax_rate_date" on-invalid="null" />
         </service>
+        <service id="sylius.resolver.tax_rate" alias="sylius.tax_rate_resolver" />
         <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.tax_rate_resolver" />
 
         <service id="sylius.tax_rate_date_eligibility_checker" class="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker">
             <argument type="service" id="clock" />
         </service>
+        <service id="sylius.eligibility_checker.tax_rate_date" alias="sylius.tax_rate_date_eligibility_checker" />
         <service id="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface" alias="sylius.tax_rate_date_eligibility_checker" />
     </services>
 </container>

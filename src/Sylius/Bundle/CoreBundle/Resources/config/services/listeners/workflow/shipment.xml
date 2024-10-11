@@ -24,7 +24,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\AssignShippingDateListener">
-            <argument type="service" id="sylius.shipping_date_assigner" />
+            <argument type="service" id="sylius.assigner.shipping_date" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_shipment.transition.ship"
                  priority="100"

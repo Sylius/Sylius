@@ -102,7 +102,7 @@
             <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
-            <argument type="service" id="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator" />
+            <argument type="service" id="sylius.validator.groups_generator.shipping_method_configuration" />
             <tag name="form.type_extension" priority="100" />
         </service>
         <service id="sylius.form.extension.type.product" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTypeExtension">
