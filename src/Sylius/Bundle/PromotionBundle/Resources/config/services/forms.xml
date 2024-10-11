@@ -117,7 +117,7 @@
         </service>
 
         <service id="sylius.form.type.promotion_action.collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionCollectionType">
-            <argument type="service" id="sylius.registry_promotion_action" />
+            <argument type="service" id="sylius.registry.promotion_action" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.promotion_action_collection" alias="sylius.form.type.promotion_action.collection" />
