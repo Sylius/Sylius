@@ -199,6 +199,15 @@
     
     We recommend using the new aliases introduced in Sylius 1.14 to ensure compatibility with Sylius 2.0.
 
+1. Aliases for the following `knp_menu.menu_builder` service tags have been introduced to standardize tag aliases and will replace the incorrect aliases in Sylius 2.0:
+
+   | Old Alias             | New Alias             |
+   |-----------------------|-----------------------|
+   | **ShopBundle**        |                       |
+   | `sylius.shop.account` | `sylius_shop.account` |
+
+   The old alias are now deprecated and will be removed in Sylius 2.0.
+
 1. The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
    in the `PromotionBundle` has been deprecated and will be removed in Sylius 2.0. This definition has been copied to the `CoreBundle`.
 
