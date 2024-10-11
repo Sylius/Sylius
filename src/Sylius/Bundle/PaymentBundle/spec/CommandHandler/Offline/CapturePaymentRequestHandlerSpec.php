@@ -24,7 +24,7 @@ final class CapturePaymentRequestHandlerSpec extends ObjectBehavior
 {
     function let(
         PaymentRequestProviderInterface $paymentRequestProvider,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $this->beConstructedWith($paymentRequestProvider, $stateMachine);
     }
@@ -32,7 +32,7 @@ final class CapturePaymentRequestHandlerSpec extends ObjectBehavior
     function it_processes_offline_capture(
         PaymentRequestProviderInterface $paymentRequestProvider,
         StateMachineInterface $stateMachine,
-        PaymentRequestInterface $paymentRequest
+        PaymentRequestInterface $paymentRequest,
     ): void {
         $capturePaymentRequest = new CapturePaymentRequest('hash');
         $paymentRequestProvider->provide($capturePaymentRequest)->willReturn($paymentRequest);

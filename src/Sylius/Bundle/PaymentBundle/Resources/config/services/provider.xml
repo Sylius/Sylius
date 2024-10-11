@@ -43,5 +43,12 @@
             <argument type="tagged_locator" tag="sylius.http_response.provider.offline" index-by="action" />
             <tag name="sylius.payment_request.http_response.provider" gateway-factory="offline" />
         </service>
+
+        <service id="sylius.provider.notify_payment" class="Sylius\Bundle\PaymentBundle\Provider\CompositeNotifyPaymentProvider">
+            <argument type="tagged_iterator" tag="sylius.payment_request.payment_notify_provider" />
+        </service>
+
+        <service id="sylius.provider.notify_response" class="Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProvider" />
+        <service id="Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProviderInterface" alias="sylius.provider.notify_response" />
     </services>
 </container>

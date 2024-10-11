@@ -26,6 +26,5 @@ final class DefaultActionProvider implements DefaultActionProviderInterface
         $authorize = $gatewayConfig->getConfig()['use_authorize'] ?? false;
 
         return $authorize ? PaymentRequestInterface::ACTION_AUTHORIZE : $paymentRequest->getAction();
-
     }
 }

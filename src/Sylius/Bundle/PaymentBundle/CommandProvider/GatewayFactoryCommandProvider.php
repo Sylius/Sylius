@@ -41,7 +41,8 @@ final class GatewayFactoryCommandProvider extends AbstractServiceCommandProvider
         return parent::supports($paymentRequest);
     }
 
-    protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string {
+    protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string
+    {
         return $this->gatewayFactoryNameProvider->provideFromPaymentRequest($paymentRequest);
     }
 }

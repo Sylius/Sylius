@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\PaymentBundle\Attribute\AsGatewayConfigurationType;
+use Sylius\Bundle\PaymentBundle\Attribute\AsNotifyPaymentProvider;
 use Sylius\Bundle\PaymentBundle\Attribute\AsPaymentMethodsResolver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
@@ -58,6 +59,15 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
                 $definition->addTag(AsPaymentMethodsResolver::SERVICE_TAG, [
                     'type' => $attribute->getType(),
                     'label' => $attribute->getLabel(),
+                    'priority' => $attribute->getPriority(),
+                ]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsNotifyPaymentProvider::class,
+            static function (ChildDefinition $definition, AsNotifyPaymentProvider $attribute): void {
+                $definition->addTag(AsNotifyPaymentProvider::SERVICE_TAG, [
                     'priority' => $attribute->getPriority(),
                 ]);
             },

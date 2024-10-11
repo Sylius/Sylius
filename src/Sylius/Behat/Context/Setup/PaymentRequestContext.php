@@ -56,7 +56,7 @@ final readonly class PaymentRequestContext implements Context
      * @Given there is (also) a :state :action payment request for order :order using the :paymentMethod payment method
      */
     public function thePaymentRequestActionHasBeenExecutedForOrderWithThePaymentMethodAndState(
-        string $state = null,
+        string $state,
         string $action,
         OrderInterface $order,
         PaymentMethodInterface $paymentMethod,

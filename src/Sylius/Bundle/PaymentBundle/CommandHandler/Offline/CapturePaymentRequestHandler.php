@@ -24,7 +24,7 @@ final readonly class CapturePaymentRequestHandler
 {
     public function __construct(
         private PaymentRequestProviderInterface $paymentRequestProvider,
-        private StateMachineInterface $stateMachine
+        private StateMachineInterface $stateMachine,
     ) {
     }
 
@@ -35,7 +35,7 @@ final readonly class CapturePaymentRequestHandler
         $this->stateMachine->apply(
             $paymentRequest,
             PaymentRequestTransitions::GRAPH,
-            PaymentRequestTransitions::TRANSITION_COMPLETE
+            PaymentRequestTransitions::TRANSITION_COMPLETE,
         );
     }
 }
