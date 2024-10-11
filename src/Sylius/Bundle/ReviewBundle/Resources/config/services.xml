@@ -19,7 +19,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.average_rating_calculator" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />
-        <service id="sylius.calculator.average_rating" alias="sylius.average_rating_calculator" />
+        <service id="sylius.calculator.average_rating" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />
     </services>
 </container>
