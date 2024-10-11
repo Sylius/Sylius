@@ -39,11 +39,11 @@
         <service id="sylius.mailer.contact_email_manager.shop" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
-        <service id="sylius_shop.mailer.contact_email_manager" alias="sylius.mailer.contact_email_manager.shop" />
+        <service id="sylius_shop.mailer.email_manager.contact" alias="sylius.mailer.contact_email_manager.shop" />
 
         <service id="sylius.mailer.order_email_manager.shop" class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
-        <service id="sylius_shop.mailer.order_email_manager" alias="sylius.mailer.order_email_manager.shop" />
+        <service id="sylius_shop.mailer.email_manager.order" alias="sylius.mailer.order_email_manager.shop" />
     </services>
 </container>

@@ -135,7 +135,7 @@
     | **ShopBundle**                                                                                             |                                                                                      |
     | `sylius.shop.locale_switcher`                                                                              | `sylius_shop.locale_switcher`                                                        |
     | `sylius.storage.locale`                                                                                    | `sylius_shop.locale_storage`                                                         |
-    | `sylius.context.locale.storage_based`                                                                      | `sylius_shop.locale_context.storage_based`                                           |
+    | `sylius.context.locale.storage_based`                                                                      | `sylius_shop.context.locale.storage_based`                                           |
     | `sylius.shop.locale_stripping_router`                                                                      | `sylius_shop.router.locale_stripping`                                                |
     | `sylius.listener.non_channel_request_locale`                                                               | `sylius_shop.listener.non_channel_locale`                                            |
     | `sylius.controller.shop.contact`                                                                           | `sylius_shop.controller.contact`                                                     |
@@ -144,8 +144,8 @@
     | `sylius.controller.shop.locale_switch`                                                                     | `sylius_shop.controller.locale_switch`                                               |
     | `sylius.controller.shop.security_widget`                                                                   | `sylius_shop.controller.security_widget`                                             |
     | `sylius.controller.shop.register_thank_you`                                                                | `sylius_shop.controller.register_thank_you`                                          |
-    | `sylius.mailer.contact_email_manager.shop`                                                                 | `sylius_shop.mailer.contact_email_manager`                                           |
-    | `sylius.mailer.order_email_manager.shop`                                                                   | `sylius_shop.mailer.order_email_manager`                                             |
+    | `sylius.mailer.contact_email_manager.shop`                                                                 | `sylius_shop.mailer.email_manager.contact`                                           |
+    | `sylius.mailer.order_email_manager.shop`                                                                   | `sylius_shop.mailer.email_manager.order`                                             |
     | `sylius.listener.shop_cart_blamer`                                                                         | `sylius_shop.listener.shop_cart_blamer`                                              |
     | `sylius.listener.email_updater`                                                                            | `sylius_shop.listener.customer_email_updater`                                        |
     | `sylius.listener.shop_customer_account_sub_section_cache_control_subscriber`                               | `sylius_shop.event_subscriber.shop_customer_account_sub_section_cache_control`       |
