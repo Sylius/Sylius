@@ -11,34 +11,45 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
-        <service id="Sylius\Bundle\UiBundle\DataCollector\BlockRenderingHistory" />
+        <service id="Sylius\Bundle\UiBundle\DataCollector\BlockRenderingHistory">
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
+        </service>
 
         <service id="Sylius\Bundle\UiBundle\DataCollector\TemplateBlockDataCollector">
             <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\BlockRenderingHistory" />
             <tag name="data_collector" template="@SyliusUi/data_collector/template_block.html.twig" id="sylius_ui.template_block" />
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
         </service>
 
         <service id="Sylius\Bundle\UiBundle\DataCollector\TraceableBlockRenderer" decorates="sylius.ui.block_renderer.composite">
             <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\TraceableBlockRenderer.inner" />
             <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\BlockRenderingHistory" />
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
         </service>
         <service id="Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateBlockRenderer" alias="Sylius\Bundle\UiBundle\DataCollector\TraceableBlockRenderer" />
 
         <service id="Sylius\Bundle\UiBundle\DataCollector\TraceableTwigEventRenderer" decorates="Sylius\Bundle\UiBundle\Renderer\TwigEventRendererInterface">
             <argument type="service" id=".inner" />
             <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\BlockRenderingHistory" />
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
         </service>
 
         <service id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugBlockRenderer" decorates="sylius.ui.block_renderer.composite">
             <argument type="service" id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugBlockRenderer.inner" />
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
         </service>
         <service id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateBlockRenderer" alias="Sylius\Bundle\UiBundle\Renderer\HtmlDebugBlockRenderer" />
 
         <service id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTwigEventRenderer" decorates="Sylius\Bundle\UiBundle\Renderer\TwigEventRendererInterface">
             <argument type="service" id=".inner" />
             <argument type="service" id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" />
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
         </service>
         <service id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateEventRenderer" alias="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTwigEventRenderer" />
     </services>

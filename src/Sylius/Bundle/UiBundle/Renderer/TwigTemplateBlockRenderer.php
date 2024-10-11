@@ -18,6 +18,12 @@ use Sylius\Bundle\UiBundle\Registry\Block;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Twig\Environment;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    TwigTemplateBlockRenderer::class,
+);
 final class TwigTemplateBlockRenderer implements SupportableBlockRendererInterface
 {
     /**

@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -20,6 +24,7 @@
             class="Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider"
         >
             <tag name="sylius.ui.template_event.context_provider" />
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
         </service>
     </services>
 </container>

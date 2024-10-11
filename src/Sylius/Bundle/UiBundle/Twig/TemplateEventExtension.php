@@ -18,6 +18,12 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    TemplateEventExtension::class,
+);
 final class TemplateEventExtension extends AbstractExtension
 {
     public function __construct(private TwigEventRendererInterface $templateEventRenderer)

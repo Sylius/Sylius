@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Renderer;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    TwigEventRendererInterface::class,
+);
 interface TwigEventRendererInterface
 {
     /**

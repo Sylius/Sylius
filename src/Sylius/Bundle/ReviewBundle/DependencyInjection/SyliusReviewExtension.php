@@ -77,13 +77,19 @@ final class SyliusReviewExtension extends AbstractResourceExtension
                 ])
             ;
 
+            $averageRatingUpdaterOldId = sprintf('sylius.%s_review.average_rating_updater', $reviewSubject);
             $container->addDefinitions([
-                sprintf('sylius.%s_review.average_rating_updater', $reviewSubject) => (new Definition(AverageRatingUpdater::class, [
-                    new Reference('sylius.average_rating_calculator'),
+                $averageRatingUpdaterOldId => (new Definition(AverageRatingUpdater::class, [
+                    new Reference('sylius.calculator.average_rating'),
                     new Reference(sprintf('sylius.manager.%s_review', $reviewSubject)),
                 ]))->setPublic(true),
                 sprintf('sylius.listener.%s_review_change', $reviewSubject) => $reviewChangeListener,
             ]);
+
+            $container->setAlias(
+                sprintf('sylius.updater.%s_review.average_rating', $reviewSubject),
+                $averageRatingUpdaterOldId
+            );
         }
     }
 }

@@ -15,6 +15,12 @@ namespace Sylius\Bundle\UiBundle\ContextProvider;
 
 use Sylius\Bundle\UiBundle\Registry\Block;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    DefaultContextProvider::class,
+);
 final class DefaultContextProvider implements ContextProviderInterface
 {
     public function provide(array $templateContext, Block $templateBlock): array

@@ -69,7 +69,7 @@
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.matcher.zone" />
-            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
+            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
 
@@ -83,12 +83,12 @@
         </service>
         <service id="Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface" alias="sylius.payment_method_resolver.default" />
 
-        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
+        <service id="sylius.resolver.shipping_method.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
+            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <argument type="service" id="sylius.matcher.zone" />
         </service>
-        <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
+        <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.resolver.shipping_method.default" />
 
         <service id="sylius.taxation_address_resolver" class="Sylius\Component\Core\Resolver\TaxationAddressResolver">
             <argument>%sylius_core.taxation.shipping_address_based_taxation%</argument>
@@ -184,7 +184,7 @@
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />
-            <argument type="service" id="sylius.product_review.average_rating_updater" />
+            <argument type="service" id="sylius.updater.product_review.average_rating" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface" alias="sylius.reviewer_reviews_remover" />
 

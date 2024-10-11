@@ -16,7 +16,7 @@
         <defaults public="true" />
 
         <service id="sylius.checker.order_shipping_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker">
-            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <argument type="service" id="sylius.resolver.shipping_methods" />
         </service>
         <service id="Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_shipping_method_selection_requirement" />
 
