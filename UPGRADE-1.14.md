@@ -111,6 +111,7 @@
     | `sylius.promotion_processor`                                                                               | `sylius.processor.promotion`                                                         |
     | `sylius.promotion_applicator`                                                                              | `sylius.action.applicator.promotion`                                                 |
     | `sylius.registry_promotion_rule_checker`                                                                   | `sylius.registry.promotion.rule_checker`                                             |
+    | `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion_action`                                                   |
     | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
     | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
     | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
