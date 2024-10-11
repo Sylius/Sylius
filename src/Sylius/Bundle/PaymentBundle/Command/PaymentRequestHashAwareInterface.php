@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Command;
 
+/** @experimental */
 interface PaymentRequestHashAwareInterface
 {
     public function getHash(): string;

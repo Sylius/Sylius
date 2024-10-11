@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Checker;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface FinalizedPaymentRequestCheckerInterface
 {
     public function isFinal(PaymentRequestInterface $paymentRequest): bool;

@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Symfony\Component\Uid\Uuid;
 
+/** @experimental */
 interface PaymentRequestInterface extends TimestampableInterface, ResourceInterface
 {
     public const STATE_CANCELLED = 'cancelled';

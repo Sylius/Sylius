@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Provider;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 final class DefaultPayloadProvider implements DefaultPayloadProviderInterface
 {
     public function getPayload(PaymentRequestInterface $paymentRequest): mixed

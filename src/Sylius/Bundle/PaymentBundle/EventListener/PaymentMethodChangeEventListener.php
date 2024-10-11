@@ -17,6 +17,7 @@ use Doctrine\ORM\Event\PostUpdateEventArgs;
 use Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
+/** @experimental */
 final class PaymentMethodChangeEventListener
 {
     public function __construct(private PaymentRequestCancellerInterface $paymentRequestCanceller)

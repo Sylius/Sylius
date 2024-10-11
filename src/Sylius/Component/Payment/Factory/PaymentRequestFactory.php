@@ -20,6 +20,8 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @implements PaymentRequestFactoryInterface<PaymentRequestInterface>
+ *
+ * @experimental
  */
 final class PaymentRequestFactory implements PaymentRequestFactoryInterface
 {
@@ -33,9 +35,7 @@ final class PaymentRequestFactory implements PaymentRequestFactoryInterface
         }
     }
 
-    /**
-     * @throws UnsupportedMethodException
-     */
+    /** @throws UnsupportedMethodException */
     public function createNew(): object
     {
         throw new UnsupportedMethodException('createNew');

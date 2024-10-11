@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment;
 
+/** @experimental */
 interface PaymentRequestTransitions
 {
     public const GRAPH = 'sylius_payment_request';

@@ -19,6 +19,7 @@ use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestProviderInterface;
 use Sylius\Component\Payment\PaymentRequestTransitions;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+/** @experimental */
 #[AsMessageHandler]
 final readonly class CapturePaymentRequestHandler
 {

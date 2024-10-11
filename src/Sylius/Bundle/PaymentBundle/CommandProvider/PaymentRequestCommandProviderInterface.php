@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\CommandProvider;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface PaymentRequestCommandProviderInterface
 {
     public function supports(PaymentRequestInterface $paymentRequest): bool;

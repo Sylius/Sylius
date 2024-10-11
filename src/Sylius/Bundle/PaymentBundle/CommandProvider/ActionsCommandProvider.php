@@ -16,14 +16,12 @@ namespace Sylius\Bundle\PaymentBundle\CommandProvider;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
+/** @experimental */
 final class ActionsCommandProvider extends AbstractServiceCommandProvider
 {
-    /**
-     * @param ServiceProviderInterface<PaymentRequestCommandProviderInterface> $locator
-     */
-    public function __construct(
-        protected ServiceProviderInterface $locator,
-    ) {
+    /** @param ServiceProviderInterface<PaymentRequestCommandProviderInterface> $locator */
+    public function __construct(protected ServiceProviderInterface $locator)
+    {
     }
 
     protected function getCommandProviderIndex(PaymentRequestInterface $paymentRequest): string

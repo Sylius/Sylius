@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Provider;
 use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+/** @experimental */
 interface PaymentRequestProviderInterface
 {
     public function provide(PaymentRequestHashAwareInterface $command): PaymentRequestInterface;

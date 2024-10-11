@@ -16,11 +16,10 @@ namespace Sylius\Bundle\PaymentBundle\Provider;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
+/** @experimental */
 final class GatewayFactoryHttpResponseProvider extends AbstractServiceProvider
 {
-    /**
-     * @param ServiceProviderInterface<HttpResponseProviderInterface> $locator
-     */
+    /** @param ServiceProviderInterface<HttpResponseProviderInterface> $locator */
     public function __construct(
         private GatewayFactoryNameProviderInterface $gatewayFactoryNameProvider,
         protected ServiceProviderInterface $locator,
