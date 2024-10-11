@@ -21,6 +21,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    DebugTemplateEventCommand::class,
+);
 final class DebugTemplateEventCommand extends Command
 {
     protected static $defaultName = 'sylius:debug:template-event';

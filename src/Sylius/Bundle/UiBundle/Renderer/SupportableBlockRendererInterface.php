@@ -15,6 +15,12 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\Registry\Block;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    SupportableBlockRendererInterface::class,
+);
 interface SupportableBlockRendererInterface extends BlockRendererInterface
 {
     public function supports(Block $block): bool;
