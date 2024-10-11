@@ -23,7 +23,7 @@ winzou_state_machine:
             before:
                 sylius_assign_date:
                     on: ["ship"]
-                    do: ["@sylius.shipping_date_assigner", "assign"]
+                    do: ["@sylius.assigner.shipping_date", "assign"]
                     args: ["object"]
                     priority: -200
             after:

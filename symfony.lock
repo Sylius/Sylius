@@ -535,6 +535,15 @@
     "sylius/theme-bundle": {
         "version": "v1.4.2"
     },
+    "sylius/twig-extra": {
+        "version": "0.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.4",
+            "ref": "00e1c7f2e97de7b0d990e507e1541fd05d4cdbfe"
+        }
+    },
     "sylius/twig-hooks": {
         "version": "dev-main"
     },

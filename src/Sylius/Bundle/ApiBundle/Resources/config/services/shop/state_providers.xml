@@ -46,7 +46,7 @@
         <service id="sylius_api.state_provider.shop.order.shipment.shipping_method.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Shipment\ShippingMethod\CollectionProvider">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <argument type="service" id="sylius.resolver.shipping_methods" />
             <tag name="api_platform.state_provider" />
         </service>
 

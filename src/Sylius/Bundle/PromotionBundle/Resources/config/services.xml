@@ -39,7 +39,7 @@
         <service id="Sylius\Component\Promotion\Processor\PromotionProcessorInterface" alias="sylius.processor.promotion" />
 
         <service id="sylius.action.applicator.promotion" class="Sylius\Component\Promotion\Action\PromotionApplicator">
-            <argument type="service" id="sylius.registry.promotion.action" />
+            <argument type="service" id="sylius.registry.promotion_action" />
         </service>
         <service id="Sylius\Component\Promotion\Action\PromotionApplicatorInterface" alias="sylius.action.applicator.promotion" />
 
@@ -54,6 +54,7 @@
             <argument>Sylius\Component\Promotion\Action\PromotionActionCommandInterface</argument>
             <argument>promotion action</argument>
         </service>
+        <service id="sylius.registry.promotion_action" alias="sylius.registry.promotion.action" />
 
         <service id="sylius.form_registry.promotion_action" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
