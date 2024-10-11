@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
-use ApiPlatform\Core\EventListener\EventPriorities;
+use ApiPlatform\Symfony\EventListener\EventPriorities;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
+final readonly class CatalogPromotionEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(private CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer)
     {

@@ -18,6 +18,7 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 
+/** TODO: possibly remove */
 class CustomerShowMenuBuilderEvent extends MenuBuilderEvent
 {
     public function __construct(FactoryInterface $factory, ItemInterface $menu, private CustomerInterface $customer)

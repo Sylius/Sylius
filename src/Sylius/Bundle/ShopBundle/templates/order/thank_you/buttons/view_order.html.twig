@@ -1,0 +1,4 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+{% set order = hookable_metadata.context.order %}
+
+{{ buttons.primary(path('sylius_shop_account_order_show', {'number': order.number}), 'sylius.ui.view_order'|trans, 'show-order-in-account', null) }}

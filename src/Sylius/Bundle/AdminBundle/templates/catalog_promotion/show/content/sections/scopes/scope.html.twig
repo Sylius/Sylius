@@ -1,0 +1,9 @@
+{% for scope in hookable_metadata.context.resource.scopes %}
+    <div class="card mb-3" {{ sylius_test_html_attribute('scope') }}>
+        <div class="card-body">
+            <div class="divide-y">
+                {% hook 'scope#' ~ scope.type with { scope } %}
+            </div>
+        </div>
+    </div>
+{% endfor %}

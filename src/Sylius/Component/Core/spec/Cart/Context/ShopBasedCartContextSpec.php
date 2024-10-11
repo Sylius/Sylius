@@ -30,9 +30,12 @@ use Symfony\Contracts\Service\ResetInterface;
 
 final class ShopBasedCartContextSpec extends ObjectBehavior
 {
-    function let(CartContextInterface $cartContext, ShopperContextInterface $shopperContext): void
-    {
-        $this->beConstructedWith($cartContext, $shopperContext);
+    function let(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
+    ): void {
+        $this->beConstructedWith($cartContext, $shopperContext, $createdByGuestFlagResolver);
     }
 
     function it_implements_a_cart_context_interface(): void
@@ -48,6 +51,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -63,6 +67,8 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $channel->getBaseCurrency()->willReturn($currency);
         $currency->getCode()->willReturn('PLN');
 
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
+
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
         $cart->setLocaleCode('pl')->shouldBeCalled();
@@ -74,6 +80,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration_and_customer_default_address_if_is_not_null(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
         AddressInterface $defaultAddress,
         OrderInterface $cart,
         ChannelInterface $channel,
@@ -89,6 +96,8 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
 
         $channel->getBaseCurrency()->willReturn($currency);
         $currency->getCode()->willReturn('PLN');
+
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
 
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
@@ -137,6 +146,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_caches_a_cart(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -152,6 +162,8 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $channel->getBaseCurrency()->shouldBeCalledTimes(1)->willReturn($currency);
         $currency->getCode()->shouldBeCalledTimes(1)->willReturn('PLN');
 
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
+
         $cart->setChannel($channel)->shouldBeCalledTimes(1);
         $cart->setCurrencyCode('PLN')->shouldBeCalledTimes(1);
         $cart->setLocaleCode('pl')->shouldBeCalledTimes(1);
@@ -164,6 +176,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_recreates_a_cart_after_it_is_reset(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
         OrderInterface $firstCart,
         OrderInterface $secondCart,
         ChannelInterface $channel,
@@ -179,6 +192,8 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
 
         $channel->getBaseCurrency()->shouldBeCalledTimes(2)->willReturn($currency);
         $currency->getCode()->shouldBeCalledTimes(2)->willReturn('PLN');
+
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true, true);
 
         $firstCart->setChannel($channel)->shouldBeCalledTimes(1);
         $firstCart->setCurrencyCode('PLN')->shouldBeCalledTimes(1);
@@ -204,8 +219,6 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         CurrencyInterface $currency,
         CustomerInterface $customer,
     ): void {
-        $this->beConstructedWith($cartContext, $shopperContext, $createdByGuestFlagResolver);
-
         $createdByGuestFlagResolver->resolveFlag()->willReturn(false);
 
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);

@@ -7,12 +7,12 @@
         {
             "propertyPath": "code",
             "message": "Please enter catalog promotion code.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "name",
             "message": "Please enter catalog promotion name.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

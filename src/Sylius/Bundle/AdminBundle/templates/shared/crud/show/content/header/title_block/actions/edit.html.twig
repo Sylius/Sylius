@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set resource_id = hookable_metadata.context.resource.id %}
+{% set resource_name = hookable_metadata.context.metadata.name %}
+{% set url = 'sylius_admin_' ~ resource_name ~ '_update' %}
+
+<a class="btn" href="{{ path(url, {'id': resource_id}) }}" {{ sylius_test_html_attribute('edit-' ~ resource_name) }}>
+    {{ icon({icon: 'pencil'}) }}
+    {{ 'sylius.ui.edit'|trans }}
+</a>

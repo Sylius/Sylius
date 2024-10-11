@@ -2,10 +2,12 @@ sylius_admin_customer:
     resource: |
         alias: sylius.customer
         section: admin
-        templates: "@SyliusAdmin\\Crud"
-        except: ['show', 'delete']
+        templates: "@SyliusAdmin\\shared\\crud"
+        except: ['delete']
         redirect: update
         grid: sylius_admin_customer
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CustomerType
         permission: true
         vars:
             all:
@@ -16,15 +18,6 @@ sylius_admin_customer:
                 icon: users
     type: sylius.resource
 
-sylius_admin_customer_show:
-    path: /customers/{id}
-    defaults:
-        _controller: sylius.controller.customer::showAction
-        _sylius:
-            section: admin
-            template: "@SyliusAdmin/Customer/show.html.twig"
-            permission: true
-
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]
@@ -33,17 +26,8 @@ sylius_admin_customer_order_index:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/Crud/index.html.twig"
+            template: "@SyliusAdmin/shared/crud/index.html.twig"
             grid: sylius_admin_customer_order
-            vars:
-                route:
-                    parameters:
-                        $customerId: $id
-                templates:
-                    breadcrumb: '@SyliusAdmin/Customer/Order/Index/_breadcrumb.html.twig'
-                    header_title: '@SyliusAdmin/Customer/Order/Index/_headerTitle.html.twig'
-                subheader: sylius.ui.process_your_orders
-                icon: cart
 
 sylius_admin_customer_orders_statistics:
     path: /orders-statistics

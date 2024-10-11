@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
-use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Sylius\Component\User\Security\UserPasswordHasherInterface;
 
 final class PasswordUpdaterSpec extends ObjectBehavior
@@ -28,7 +27,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
         $this->shouldImplement(PasswordUpdaterInterface::class);
     }
 
-    function it_updates_user_profile_with_hashed_password_if_using_symfony_6(
+    function it_updates_user_profile_with_hashed_password(
         UserPasswordHasherInterface $userPasswordHasher,
         UserInterface $user,
     ): void {
@@ -39,21 +38,6 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
         $user->eraseCredentials()->shouldBeCalled();
         $user->setPassword('topSecretHashedPassword')->shouldBeCalled();
-
-        $this->updatePassword($user);
-    }
-
-    function it_updates_user_profile_with_encoded_password_if_using_symfony_5_4(
-        UserPasswordEncoderInterface $userPasswordEncoder,
-        UserInterface $user,
-    ): void {
-        $this->beConstructedWith($userPasswordEncoder);
-        $user->getPlainPassword()->willReturn('topSecretPlainPassword');
-
-        $userPasswordEncoder->encode($user)->willReturn('topSecretEncodedPassword');
-
-        $user->eraseCredentials()->shouldBeCalled();
-        $user->setPassword('topSecretEncodedPassword')->shouldBeCalled();
 
         $this->updatePassword($user);
     }

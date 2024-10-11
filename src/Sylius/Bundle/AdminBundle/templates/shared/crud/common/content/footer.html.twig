@@ -1,0 +1,45 @@
+<footer class="footer footer-transparent d-print-none">
+    <div class="container-xl">
+        <div class="row text-center align-items-center">
+            <div class="col-12 col-lg-12">
+                <ul class="list-inline list-inline-dots">
+                    <li class="list-inline-item">
+                        {{ 'sylius.ui.copyright'|trans }} © {{ 'now'|date("Y") }}
+                        <a href="https://sylius.com/" target="_blank" class="link-secondary">Sylius</a>.
+                        {{ 'sylius.ui.all_rights_reserved'|trans }}.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-12 ms-lg-auto">
+                <ul class="list-inline list-inline-dots m-1">
+                    <li class="list-inline-item">
+                        <a href="https://docs.sylius.com" target="_blank" class="link-secondary" rel="noopener">
+                            {{ 'sylius.ui.documentation'|trans }}
+                        </a></li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/Sylius/Sylius?tab=MIT-1-ov-file#readme" target="_blank"
+                           class="link-secondary" rel="noopener">
+                            {{ 'sylius.ui.license'|trans }}
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/Sylius/Sylius" target="_blank" class="link-secondary"
+                           rel="noopener">
+                            {{ 'sylius.ui.source_code'|trans }}
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/Sylius/Sylius/issues" target="_blank" class="link-secondary"
+                           rel="noopener">
+                            {{ 'sylius.ui.see_issue'|trans }}? {{ 'sylius.ui.report_it'|trans }}!
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        {{ 'sylius.ui.powered_by'|trans }} Sylius v{{ sylius_meta.version }}.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

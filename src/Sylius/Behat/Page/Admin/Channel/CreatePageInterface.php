@@ -37,16 +37,16 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function chooseLocale(string $language): void;
 
-    public function chooseCurrency(string $currencyCode): void;
+    public function chooseCurrency(string $currencyName): void;
 
     public function chooseDefaultTaxZone(string $taxZone): void;
 
-    public function chooseDefaultLocale(?string $locale): void;
+    public function chooseDefaultLocale(string $locale): void;
 
     /** @param string[] $countries */
     public function chooseOperatingCountries(array $countries): void;
 
-    public function chooseBaseCurrency(?string $currency): void;
+    public function chooseBaseCurrency(string $currency): void;
 
     public function chooseTaxCalculationStrategy(string $taxCalculationStrategy): void;
 

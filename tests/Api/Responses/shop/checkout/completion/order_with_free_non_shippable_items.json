@@ -1,14 +1,23 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
+    "customer": {
+        "@id": "\/api\/v2\/shop\/customers\/@integer@",
+        "@type": "Customer",
+        "email": "sylius@example.com"
+    },
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"
@@ -18,7 +27,11 @@
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"
@@ -30,16 +43,15 @@
     "checkoutState": "completed",
     "paymentState": "paid",
     "shippingState": "shipped",
-    "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "tokenValue": "token",
     "number": "000000001",
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_NFT_FREE",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 1,
             "unitPrice": 0,
             "originalUnitPrice": 0,

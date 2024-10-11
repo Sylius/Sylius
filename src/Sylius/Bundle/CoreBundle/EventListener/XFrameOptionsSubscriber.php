@@ -28,22 +28,12 @@ final class XFrameOptionsSubscriber implements EventSubscriberInterface
 
     public function onKernelResponse(ResponseEvent $event): void
     {
-        if (!$this->isMainRequest($event)) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
         $response = $event->getResponse();
 
         $response->headers->set('X-Frame-Options', 'sameorigin');
-    }
-
-    private function isMainRequest(ResponseEvent $event): bool
-    {
-        if (\method_exists($event, 'isMainRequest')) {
-            return $event->isMainRequest();
-        }
-
-        /** @phpstan-ignore-next-line */
-        return $event->isMasterRequest();
     }
 }

@@ -30,7 +30,7 @@
 
         <service id="Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction">
             <argument type="service" id="form.factory" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher" />
+            <argument type="service" id="sylius.command_dispatcher.reset_password" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
             <argument type="service" id="twig" />
@@ -44,7 +44,7 @@
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.order" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface" />
+            <argument type="service" id="sylius.command_dispatcher.resend_order_confirmation_email" />
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
@@ -52,7 +52,7 @@
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.shipment" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcher" />
+            <argument type="service" id="sylius.command_dispatcher.resend_shipment_confirmation_email" />
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="request_stack" />
         </service>
@@ -74,12 +74,6 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="twig" />
             <argument type="service" id="router" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
-        </service>
-
-        <service id="sylius.controller.admin.dashboard.statistics" class="Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController">
-            <argument type="service" id="twig" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
         </service>
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">

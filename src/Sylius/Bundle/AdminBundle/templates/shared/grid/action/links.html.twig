@@ -1,0 +1,35 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set visible = options.visible is defined ? options.visible : true %}
+
+{% if visible %}
+    <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            {% if options.icon is defined %}
+                {{ icon({ icon: options.icon, class: 'icon icon-tabler' }) }}
+            {% endif %}
+            {{ action.label|trans }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            {% if options.header is defined %}
+                <li><h6 class="dropdown-header">{{ options.header.label|trans }}</h6></li>
+            {% endif %}
+            {% for link in options.links %}
+                {% set is_link_visible = link.visible is defined ? link.visible : true %}
+
+                {% if is_link_visible %}
+                    {% set path = link.url is defined ? link.url : path(link.route, link.parameters|default([])) %}
+
+                    <li>
+                        <a class="dropdown-item" href="{{ path }}">
+                            {% if link.icon is defined %}
+                                {{ icon({ icon: link.icon, class: 'icon icon-tabler dropdown-item-icon' }) }}
+                            {% endif %}
+                            {{ link.label|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

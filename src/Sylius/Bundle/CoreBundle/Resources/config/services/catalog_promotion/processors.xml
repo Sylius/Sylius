@@ -33,7 +33,7 @@
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessor"
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker" />
-            <argument type="service" id="SM\Factory\Factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
         <service

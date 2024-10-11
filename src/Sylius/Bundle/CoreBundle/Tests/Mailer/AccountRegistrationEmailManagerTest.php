@@ -17,7 +17,6 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -25,15 +24,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class AccountRegistrationEmailManagerTest extends KernelTestCase
 {
     use ProphecyTrait;
-    use SwiftmailerAssertionTrait;
 
     /** @test */
     public function it_sends_account_registration_email(): void
     {
-        if (self::isSwiftmailerTestEnv()) {
-            self::markTestSkipped('This test should be executed only outside of test_with_swiftmailer environment');
-        }
-
         $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */

@@ -1,0 +1,5 @@
+{% set method = hookable_metadata.context.method %}
+
+<div class="flex-grow-1">
+    {% hook 'details' with { method } %}
+</div>

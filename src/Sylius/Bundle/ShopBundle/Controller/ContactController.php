@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ContactType;
 use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
-use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface as DeprecatedContactEmailManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
@@ -38,18 +37,8 @@ final class ContactController
         private ChannelContextInterface $channelContext,
         private CustomerContextInterface $customerContext,
         private LocaleContextInterface $localeContext,
-        private ContactEmailManagerInterface|DeprecatedContactEmailManagerInterface $contactEmailManager,
+        private ContactEmailManagerInterface $contactEmailManager,
     ) {
-        if ($this->contactEmailManager instanceof DeprecatedContactEmailManagerInterface) {
-            trigger_deprecation(
-                'sylius/shop-bundle',
-                '1.13',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be prohibited in Sylius 2.0. Pass an instance of %s instead.',
-                DeprecatedContactEmailManagerInterface::class,
-                self::class,
-                ContactEmailManagerInterface::class,
-            );
-        }
     }
 
     public function requestAction(Request $request): Response
@@ -101,7 +90,7 @@ final class ContactController
             return new RedirectResponse($this->router->generate($redirectRoute));
         }
 
-        $template = $this->getSyliusAttribute($request, 'template', '@SyliusShop/Contact/request.html.twig');
+        $template = $this->getSyliusAttribute($request, 'template', '@SyliusShop/contact/contact_request.html.twig');
 
         return new Response($this->templatingEngine->render($template, ['form' => $form->createView()]));
     }

@@ -14,11 +14,32 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
+    use NavigationTrait;
+
+    /**
+     * @template TKey of array-key
+     * @template TValue
+     *
+     * @param array<TKey, TValue>|\ArrayAccess<TKey, TValue> $minkParameters
+     */
+    public function __construct(Session $session, $minkParameters, RouterInterface $router)
+    {
+        parent::__construct($session, $minkParameters, $router);
+    }
+
+    public function getResourceName(): string
+    {
+        return 'product';
+    }
+
     public function isSimpleProductPage(): bool
     {
         return !$this->hasElement('variants');
@@ -26,9 +47,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isShowInShopButtonDisabled(): bool
     {
-        return $this->getElement('show_product_single_button')->hasClass('disabled');
+        return $this->getElement('show_product_button')->hasClass('disabled');
     }
 
+    /** @return string[] */
     public function getAppliedCatalogPromotionsLinks(string $variantName, string $channelName): array
     {
         $appliedPromotions = $this->getAppliedCatalogPromotions($variantName, $channelName);
@@ -36,6 +58,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_map(fn (NodeElement $element): string => $element->getAttribute('href'), $appliedPromotions);
     }
 
+    /** @return string[] */
     public function getAppliedCatalogPromotionsNames(string $variantName, string $channelName): array
     {
         $appliedPromotions = $this->getAppliedCatalogPromotions($variantName, $channelName);
@@ -60,37 +83,33 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function showProductInChannel(string $channel): void
     {
-        $this->getElement('show_product_dropdown')->clickLink($channel);
+        $this->getElement('show_product_button')->clickLink($channel);
     }
 
     public function showProductInSingleChannel(): void
     {
-        $this->getElement('show_product_single_button')->click();
-    }
-
-    public function showProductEditPage(): void
-    {
-        $this->getElement('edit_product_button')->click();
+        $this->getElement('show_product_button')->click();
     }
 
     public function showVariantEditPage(ProductVariantInterface $variant): void
     {
-        $this->getElement('edit_variant_button', ['%variantCode%' => $variant->getCode()])->click();
+        $this->getElement('edit_variant_button', ['%variant_code%' => $variant->getCode()])->click();
     }
 
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'edit_product_button' => '#edit-product',
-            'edit_variant_button' => '#variants .variants-accordion__title:contains("%variantCode%") .edit-variant',
-            'product_name' => '#header h1 .content > span',
-            'show_product_dropdown' => '.scrolling.menu',
-            'show_product_single_button' => '.ui.labeled.icon.button',
-            'variants' => '#variants',
-            'breadcrumb' => '.breadcrumb > div',
+            'breadcrumb' => '.breadcrumb',
+            'edit_product_button' => '[data-test-edit-product]',
+            'edit_variant_button' => '[data-test-edit-variant="%variant_code%"]',
+            'product_name' => '[data-test-product-name]',
+            'show_product_button' => '[data-test-view-in-store]',
+            'variants' => '[data-test-variant-pricing]',
         ]);
     }
 
+    /** @return NodeElement[] */
     private function getAppliedCatalogPromotions(string $variantName, string $channelName): array
     {
         $pricingElement = $this->getPricingRow($variantName, $channelName);

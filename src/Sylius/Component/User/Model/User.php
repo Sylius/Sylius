@@ -36,13 +36,6 @@ class User implements UserInterface, \Stringable
     protected $usernameCanonical;
 
     /**
-     * Random data that is used as an additional input to a function that hashes a password.
-     *
-     * @var string|null
-     */
-    protected $salt;
-
-    /**
      * Encrypted password. Must be persisted.
      *
      * @var string|null
@@ -104,13 +97,8 @@ class User implements UserInterface, \Stringable
     /** @var string|null */
     protected $emailCanonical;
 
-    /** @var string|null */
-    protected $encoderName;
-
     public function __construct()
     {
-        $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
-
         /** @var ArrayCollection<array-key, UserOAuthInterface> $this->oauthAccounts */
         $this->oauthAccounts = new ArrayCollection();
 
@@ -173,11 +161,6 @@ class User implements UserInterface, \Stringable
     public function getUserIdentifier(): string
     {
         return (string) $this->usernameCanonical;
-    }
-
-    public function getSalt(): ?string
-    {
-        return $this->salt;
     }
 
     public function getPlainPassword(): ?string
@@ -291,6 +274,9 @@ class User implements UserInterface, \Stringable
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getRoles(): array
     {
         return $this->roles;
@@ -368,21 +354,6 @@ class User implements UserInterface, \Stringable
         }
     }
 
-    public function getEncoderName(): ?string
-    {
-        return $this->encoderName;
-    }
-
-    public function setEncoderName(?string $encoderName): void
-    {
-        $this->encoderName = $encoderName;
-    }
-
-    public function getPasswordHasherName(): ?string
-    {
-        return $this->getEncoderName();
-    }
-
     /**
      * The serialized data have to contain the fields used by the equals method and the username.
      */
@@ -390,54 +361,31 @@ class User implements UserInterface, \Stringable
     {
         return [
             $this->password,
-            $this->salt,
             $this->usernameCanonical,
             $this->username,
             $this->locked,
             $this->enabled,
             $this->id,
-            $this->encoderName,
         ];
     }
 
     /**
-     * @internal
-     *
-     * @deprecated since Sylius 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__serialize() or \serialize($user) in PHP 8.1 instead
+     * @inheritdoc
      */
-    public function serialize(): string
-    {
-        return serialize($this->__serialize());
-    }
-
-    public function __unserialize(array $serialized): void
+    public function __unserialize(array $data): void
     {
         // add a few extra elements in the array to ensure that we have enough keys when unserializing
         // older data which does not include all properties.
-        $serialized = array_merge($serialized, array_fill(0, 2, null));
+        $data = array_merge($data, array_fill(0, 2, null));
 
         [
             $this->password,
-            $this->salt,
             $this->usernameCanonical,
             $this->username,
             $this->locked,
             $this->enabled,
             $this->id,
-            $this->encoderName,
-        ] = $serialized;
-    }
-
-    /**
-     * @param string $serialized
-     *
-     * @internal
-     *
-     * @deprecated since Sylius 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__unserialize() or \unserialize($serialized) in PHP 8.1 instead
-     */
-    public function unserialize($serialized): void
-    {
-        $this->__unserialize(unserialize($serialized));
+        ] = $data;
     }
 
     protected function hasExpired(?\DateTimeInterface $date): bool

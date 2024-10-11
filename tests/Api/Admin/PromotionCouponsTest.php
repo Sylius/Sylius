@@ -16,158 +16,164 @@ namespace Sylius\Tests\Api\Admin;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class PromotionCouponsTest extends JsonApiTestCase
 {
-    use AdminUserLoginTrait;
+    protected function setUp(): void
+    {
+        $this->setUpAdminContext();
+
+        $this->setUpDefaultPostHeaders();
+        $this->setUpDefaultGetHeaders();
+        $this->setUpDefaultPutHeaders();
+        $this->setUpDefaultDeleteHeaders();
+
+        parent::setUp();
+    }
 
     /** @test */
     public function it_gets_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
 
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/promotion-coupons/%s', $coupon->getCode()),
-            server: $header,
-        );
+        $this->requestGet(sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()));
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion_coupon/get_promotion_coupon_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/promotion_coupon/get_promotion_coupon_response');
     }
 
     /** @test */
-    public function it_gets_promotion_coupons(): void
+    public function it_gets_promotion_coupons_for_specific_promotion(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/promotion-coupons', server: $header);
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion_coupon/get_promotion_coupons_response',
-            Response::HTTP_OK,
-        );
+        $this->requestGet(sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()));
+
+        $this->assertResponseSuccessful('admin/promotion_coupon/get_promotion_coupons_response');
+    }
+
+    /** @test */
+    public function it_gets_an_empty_array_result_when_the_promotion_has_not_exist(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
+
+        $this->requestGet('/api/v2/admin/promotions/NON_EXISTING_PROMOTION_CODE/coupons');
+
+        $this->assertResponseSuccessful('admin/promotion_coupon/get_empty_promotion_coupons_response');
     }
 
     /** @test */
     public function it_creates_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_1_off'];
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons',
-            server: $header,
-            content: json_encode([
+        $this->requestPost(
+            sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()),
+            [
                 'code' => 'XYZ3',
                 'usageLimit' => 100,
                 'perCustomerUsageLimit' => 3,
                 'reusableFromCancelledOrders' => false,
                 'expiresAt' => '23-12-2023',
-                'promotion' => 'api/v2/admin/promotions/' . $promotion->getCode(),
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion_coupon/post_promotion_coupon_response',
-            Response::HTTP_CREATED,
+        $this->assertResponseCreated('admin/promotion_coupon/post_promotion_coupon_response');
+    }
+
+    /** @test */
+    public function it_does_not_create_promotion_coupon_if_promotion_does_not_exist(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+
+        $this->requestPost(
+            '/api/v2/admin/promotions/NON_EXISTING_PROMOTION_CODE/coupons',
+            [
+                'code' => 'XYZ3',
+                'usageLimit' => 100,
+                'perCustomerUsageLimit' => 3,
+                'reusableFromCancelledOrders' => false,
+                'expiresAt' => '23-12-2023',
+            ],
         );
+
+        $this->assertResponseNotFound('Parent resource not found.');
     }
 
     /** @test */
     public function it_updates_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
 
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
-        $this->client->request(
-            method: 'PUT',
-            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
-            server: $header,
-            content: json_encode([
+        $this->requestPut(
+            sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()),
+            [
                 'usageLimit' => 1000,
                 'perCustomerUsageLimit' => 5,
                 'reusableFromCancelledOrders' => false,
                 'expiresAt' => '2020-01-01 12:00:00',
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion_coupon/put_promotion_coupon_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/promotion_coupon/put_promotion_coupon_response');
     }
 
     /** @test */
-    public function it_generates_a_promotion_coupons(): void
+    public function it_generates_promotion_coupons(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons/generate',
-            server: $header,
-            content: json_encode([
-                'promotionCode' => $promotion->getCode(),
+        $this->requestPost(
+            sprintf('/api/v2/admin/promotions/%s/coupons/generate', $promotion->getCode()),
+            [
                 'amount' => 4,
                 'prefix' => 'ABC',
                 'codeLength' => 6,
                 'suffix' => 'XYZ',
                 'usageLimit' => 10,
                 'expiresAt' => '2020-01-01 12:00:00',
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion_coupon/generate_promotion_coupons_response',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('admin/promotion_coupon/generate_promotion_coupons_response');
     }
 
     /** @test */
-    public function it_does_not_generate_promotion_coupons_with_invalid_promotion_code(): void
+    public function it_does_not_generate_promotion_coupons_with_non_existing_promotion_code(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons/generate',
-            server: $header,
-            content: json_encode([
-                'promotionCode' => 'invalid',
+        $this->requestPost(
+            '/api/v2/admin/promotions/non_existing_promotion_code/coupons/generate',
+            [
                 'amount' => 4,
                 'prefix' => 'ABC',
                 'codeLength' => 6,
                 'suffix' => 'XYZ',
                 'usageLimit' => 10,
                 'expiresAt' => '2020-01-01 12:00:00',
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponse(
@@ -180,40 +186,31 @@ final class PromotionCouponsTest extends JsonApiTestCase
     /** @test */
     public function it_removes_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
 
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
-        $this->client->request(
-            method: 'DELETE',
-            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
-            server: $header,
-        );
+        $this->requestDelete(sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
     /** @test */
-    public function it_does_not_delete_the_promotion_coupon_in_use(): void
+    public function it_does_not_delete_a_promotion_coupon_in_use(): void
     {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'promotion/promotion.yaml',
-            'promotion/promotion_order.yaml',
-        ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml', 'promotion/promotion_order.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
 
         /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
-        $this->client->request(
-            method: 'DELETE',
-            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
-            server: $header,
-        );
+        $this->requestDelete(sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }

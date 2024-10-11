@@ -18,12 +18,12 @@ use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class ProductAttributeValueNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
@@ -38,7 +38,7 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
     /**
      * @param ProductAttributeValueInterface $object
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         Assert::isInstanceOf($object, ProductAttributeValueInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
@@ -66,13 +66,18 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null, $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         if (isset($context[self::ALREADY_CALLED])) {
             return false;
         }
 
         return $data instanceof ProductAttributeValueInterface;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductAttributeValueInterface::class => false];
     }
 
     private function normalizeSelectValue(ProductAttributeValueInterface $object): array

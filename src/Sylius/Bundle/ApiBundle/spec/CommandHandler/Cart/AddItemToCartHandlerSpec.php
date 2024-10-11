@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,10 +24,11 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class AddItemToCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderRepositoryInterface $orderRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
@@ -41,11 +43,6 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
             $cartItemFactory,
             $orderItemQuantityModifier,
         );
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
     }
 
     function it_adds_simple_product_to_cart(
@@ -71,10 +68,10 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         $orderItemQuantityModifier->modify($cartItem, 5)->shouldBeCalled();
         $orderModifier->addToOrder($cart, $cartItem)->shouldBeCalled();
 
-        $this(AddItemToCart::createFromData(
-            'TOKEN',
-            'PRODUCT_VARIANT_CODE',
-            5,
+        $this(new AddItemToCart(
+            orderTokenValue: 'TOKEN',
+            productVariantCode: 'PRODUCT_VARIANT_CODE',
+            quantity: 5,
         ))->shouldReturn($cart);
     }
 
@@ -88,10 +85,10 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [AddItemToCart::createFromData(
-                'TOKEN',
-                'PRODUCT_VARIANT_CODE',
-                1,
+            ->during('__invoke', [new AddItemToCart(
+                orderTokenValue: 'TOKEN',
+                productVariantCode: 'PRODUCT_VARIANT_CODE',
+                quantity: 1,
             )])
         ;
     }
@@ -113,10 +110,10 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [AddItemToCart::createFromData(
-                'TOKEN',
-                'PRODUCT_VARIANT_CODE',
-                1,
+            ->during('__invoke', [new AddItemToCart(
+                orderTokenValue: 'TOKEN',
+                productVariantCode: 'PRODUCT_VARIANT_CODE',
+                quantity: 1,
             )])
         ;
     }

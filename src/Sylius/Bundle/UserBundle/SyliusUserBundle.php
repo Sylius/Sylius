@@ -15,11 +15,12 @@ namespace Sylius\Bundle\UserBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\UserBundle\DependencyInjection\Compiler\RemoveUserPasswordEncoderPass;
+use Sylius\Bundle\UserBundle\DependencyInjection\Compiler\DecorateUserCheckerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusUserBundle extends AbstractResourceBundle
 {
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [
@@ -31,7 +32,7 @@ final class SyliusUserBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new RemoveUserPasswordEncoderPass());
+        $container->addCompilerPass(new DecorateUserCheckerPass());
     }
 
     protected function getModelNamespace(): string

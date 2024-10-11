@@ -18,7 +18,7 @@ sylius:
             min_length: Attribute presentation must be at least 1 character long.|Attribute presentation must be at least {{ limit }} characters long.
             max_length: Attribute presentation must not be longer than 1 character.|Attribute presentation must not be longer than {{ limit }} characters.
         type:
-            unregistered: The attribute type "%type%" is not registered.
+            unregistered: 'The attribute type "%type%" is not registered. Available attribute types: %available_types%.'
     attribute_value:
         attribute:
             not_blank: Please select attribute.

@@ -82,18 +82,6 @@ In order to send emails you need to configure Mailer Service. Basically there ar
 
 * We are recommending to use `Symfony Mailer <https://symfony.com/doc/current/mailer.html>`_ where out of the box, you can deliver emails by configuring the ``MAILER_DSN`` variable in your .env file.
 * In Symfony Mailer use the `3rd Party Transports <https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport>`_
-* (deprecated) Use SwiftMailer with this short configuration:
-
-1. **Create an account on a mailing service.**
-2. **In your** ``.env`` **file modify/add the** ``MAILER_URL`` **variable.**
-
-.. code-block:: text
-
-    MAILER_URL=gmail://username:password@local
-
-.. note::
-
-    Email delivery is disabled for test, dev and staging environments by default. The prod environment has delivery turned on.
 
 You can learn more about configuring mailer service in :doc:`How to configure mailer? </cookbook/emails/mailer>`
 

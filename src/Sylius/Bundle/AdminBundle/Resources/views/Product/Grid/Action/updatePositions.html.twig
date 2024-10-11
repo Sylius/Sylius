@@ -1,8 +1,0 @@
-<form id="sylius-update-product-taxons" class="sylius-update-product-taxons" action="{{ path('sylius_admin_product_taxons_update_position') }}" method="post">
-    <input type="hidden" name="_method" value="PUT" />
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('update-product-taxon-position') }}" />
-    <button class="ui labeled loadable icon button sylius-save-position" type="submit">
-        <i class="icon checkmark"></i>
-        {{ 'sylius.ui.save_positions'|trans }}
-    </button>
-</form>

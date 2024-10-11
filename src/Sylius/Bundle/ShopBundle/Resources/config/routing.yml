@@ -1,19 +1,17 @@
 # This file is a part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
-sylius_shop_ajax:
-    resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
-    prefix: /ajax
-
-sylius_shop_partial:
-    resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
-    prefix: /_partial
-
 sylius_shop_homepage:
     path: /
     methods: [GET]
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     defaults:
-        _controller: sylius.controller.shop.homepage::indexAction
+        template: "@SyliusShop/homepage/index.html.twig"
+
+sylius_shop_live_component:
+    path: '/_components/{_live_component}/{_live_action}'
+    defaults:
+        _live_action: 'get'
 
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"

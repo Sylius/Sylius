@@ -21,7 +21,7 @@ final class Resources
 
     public const ADMINISTRATORS = 'administrators';
 
-    public const AVATAR_IMAGES = 'avatar-images';
+    public const AVATAR_IMAGE = 'avatar-image';
 
     public const CATALOG_PROMOTIONS = 'catalog-promotions';
 
@@ -74,10 +74,6 @@ final class Resources
     public const PRODUCTS = 'products';
 
     public const PROMOTIONS = 'promotions';
-
-    public const PROMOTION_COUPONS = 'promotion-coupons';
-
-    public const PROVINCES = 'provinces';
 
     public const SHIPMENTS = 'shipments';
 

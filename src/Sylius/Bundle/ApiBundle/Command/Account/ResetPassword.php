@@ -13,12 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Account;
 
+use Sylius\Bundle\ApiBundle\Attribute\TokenAware;
+
+#[TokenAware]
 class ResetPassword
 {
     public function __construct(
-        public string $token,
-        public ?string $newPassword = null,
-        public ?string $confirmNewPassword = null,
+        public readonly string $token,
+        #[\SensitiveParameter]
+        public readonly string $newPassword,
+        #[\SensitiveParameter]
+        public readonly string $confirmNewPassword,
     ) {
     }
 }

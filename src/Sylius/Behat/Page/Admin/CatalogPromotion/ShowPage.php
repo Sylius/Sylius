@@ -47,7 +47,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasActionWithPercentageDiscount(string $amount): bool
     {
-        $amountsElements = $this->getDocument()->findAll('css', '[data-test-action-amount]');
+        $amountsElements = $this->getElement('actions')->findAll('css', '[data-test-action] [data-test-amount]');
         foreach ($amountsElements as $amountElement) {
             if ($amountElement->getText() === $amount) {
                 return true;
@@ -59,7 +59,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasActionWithFixedDiscount(string $amount, ChannelInterface $channel): bool
     {
-        $amountsElements = $this->getDocument()->findAll('css', '[data-test-action-' . $channel->getCode() . '-amount]');
+        $amountsElements = $this->getElement('actions')->findAll('css', '[data-test-' . $channel->getCode() . '-amount]');
         foreach ($amountsElements as $amountElement) {
             if ($amountElement->getText() === $amount) {
                 return true;
@@ -71,7 +71,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasScopeWithVariant(ProductVariantInterface $variant): bool
     {
-        $variantsElements = $this->getDocument()->findAll('css', '[data-test-scope-variants]');
+        $variantsElements = $this->getElement('scopes')->findAll('css', '[data-test-variants] li');
         foreach ($variantsElements as $variantElement) {
             if ($variantElement->getText() === $variant->getCode()) {
                 return true;
@@ -83,7 +83,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasScopeWithProduct(ProductInterface $product): bool
     {
-        $productsElements = $this->getDocument()->findAll('css', '[data-test-scope-products]');
+        $productsElements = $this->getElement('scopes')->findAll('css', '[data-test-products] li');
         foreach ($productsElements as $productElement) {
             if ($productElement->getText() === $product->getCode()) {
                 return true;
@@ -95,16 +95,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isExclusive(): bool
     {
-        return $this->hasElement('exclusive');
+        return null !== $this->getElement('exclusive')->find('css', 'svg.text-green');
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'actions' => '[data-test-actions]',
             'end_date' => '[data-test-end-date]',
             'exclusive' => '[data-test-exclusive]',
             'name' => '[data-test-name]',
             'priority' => '[data-test-priority]',
+            'scopes' => '[data-test-scopes]',
             'start_date' => '[data-test-start-date]',
         ]);
     }
