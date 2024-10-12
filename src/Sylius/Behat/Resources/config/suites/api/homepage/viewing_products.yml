@@ -16,6 +16,7 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.taxonomy
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.homepage
 
             filters:

@@ -29,6 +29,7 @@ final class ApiPlatformClient implements ApiClientInterface
         private readonly AbstractBrowser $client,
         private readonly SharedStorageInterface $sharedStorage,
         private readonly RequestFactoryInterface $requestFactory,
+        private readonly ResponseCheckerInterface $responseChecker,
         private readonly string $authorizationHeader,
         private readonly string $section,
     ) {
@@ -350,6 +351,10 @@ final class ApiPlatformClient implements ApiClientInterface
 
         /** @var Response $response */
         $response = $this->client->getResponse();
+
+        if (!$response->isSuccessful() && $response->getStatusCode() >= 400) {
+            $this->responseChecker->appendError($response);
+        }
 
         if (false === $forgetResponse) {
             $this->lastResponse = $response;

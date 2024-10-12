@@ -46,11 +46,12 @@ default:
 
                 - sylius.behat.context.api.admin.managing_product_associations
                 - sylius.behat.context.api.admin.managing_product_images
+                - sylius.behat.context.api.admin.managing_product_taxons
                 - sylius.behat.context.api.admin.managing_products
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
-                - sylius.behat.context.api.admin.managing_product_taxons
                 - sylius.behat.context.api.admin.translation
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@managing_products&&@api"

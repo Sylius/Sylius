@@ -39,6 +39,7 @@ default:
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
 
                 - sylius.behat.context.api.admin.managing_products
+                - sylius.behat.context.api.debug
                 - Sylius\Behat\Context\Api\Admin\BrowsingCatalogPromotionProductVariantsContext
 
             filters:
