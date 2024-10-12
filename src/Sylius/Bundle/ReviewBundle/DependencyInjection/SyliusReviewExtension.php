@@ -88,7 +88,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
 
             $container->setAlias(
                 sprintf('sylius.updater.%s_review.average_rating', $reviewSubject),
-                $averageRatingUpdaterOldId
+                $averageRatingUpdaterOldId,
             );
         }
     }
