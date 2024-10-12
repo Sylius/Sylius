@@ -30,6 +30,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 final readonly class CartContext implements Context
 {
@@ -64,7 +65,9 @@ final readonly class CartContext implements Context
     /**
      * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I (?:have|had) (product "[^"]+") in the (cart)$/
+     * @Given /^I have the (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
+     * @Given /^I have the (product "[^"]+") added to the (cart)$/
      * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
      * @Given /^the (?:customer|visitor) added ("[^"]+" product) to the (cart)$/
      * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
@@ -159,9 +162,13 @@ final readonly class CartContext implements Context
             tokenValue: $tokenValue,
         );
 
-        $this->commandBus->dispatch($pickupCart);
+        $message = $this->commandBus->dispatch($pickupCart);
 
         $this->sharedStorage->set('cart_token', $tokenValue);
+        $this->sharedStorage->set(
+            'order',
+            $message->last(HandledStamp::class)->getResult()
+        );
 
         return $tokenValue;
     }

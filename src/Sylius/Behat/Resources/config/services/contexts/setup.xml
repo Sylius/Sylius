@@ -243,6 +243,7 @@
             <argument type="service" id="sylius.behat.shop_security" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.shop_api_security" class="Sylius\Behat\Context\Setup\ShopSecurityContext">
@@ -250,6 +251,7 @@
             <argument type="service" id="sylius.behat.api_security" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.shipping" class="Sylius\Behat\Context\Setup\ShippingContext">

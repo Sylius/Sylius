@@ -46,5 +46,6 @@ Feature: Informing customer about any order total changes during checkout proces
         And I have completed addressing step with email "guest@example.com" and "United States" based billing address
         And I have proceeded order with "UPS" shipping method and "Offline" payment
         And the shipping fee for "UPS" shipping method has been changed to "$30.00"
+        When I want to continue checkout
         When I confirm my order
         Then my order should not be placed due to changed order total

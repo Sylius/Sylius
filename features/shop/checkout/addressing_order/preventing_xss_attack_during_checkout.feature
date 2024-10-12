@@ -8,12 +8,12 @@ Feature: Preventing a potential XSS attack during updating the address in the ch
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
-        And I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
 
     @no-api @ui @mink:chromedriver
     Scenario: Preventing a potential XSS attack during updating the address in the checkout
-        When I specify the email as "john.doe@example.com"
+        When I add product "PHP T-Shirt" to the cart
+        And I am at the checkout addressing step
+        And I specify the email as "john.doe@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Doe"
         And I specify the province name manually as '<img """><script>alert("XSS")</script>">' for billing address
         And I complete the addressing step

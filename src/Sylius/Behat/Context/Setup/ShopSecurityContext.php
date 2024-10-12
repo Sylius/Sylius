@@ -14,19 +14,26 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ShopSecurityContext implements Context
 {
+    /**
+     * @param ExampleFactoryInterface<ShopUserInterface> $userFactory
+     * @param UserRepositoryInterface<ShopUserInterface> $userRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private SecurityServiceInterface $securityService,
         private ExampleFactoryInterface $userFactory,
         private UserRepositoryInterface $userRepository,
+        private JWTTokenManagerInterface $jwtTokenManager,
     ) {
     }
 
@@ -43,6 +50,8 @@ final readonly class ShopSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('user', $user);
+        // Set the token in the shared storage to have access both in UI and API to resources created in the setup context
+        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
     }
 
     /**
@@ -52,7 +61,7 @@ final readonly class ShopSecurityContext implements Context
      */
     public function iAmLoggedInCustomer(?string $fullName = null): void
     {
-        $userData = ['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true];
+        $userData = ['email' => 'shop@example.com', 'password' => 'sylius', 'enabled' => true];
 
         if ($fullName !== null) {
             $names = explode(' ', $fullName);
@@ -67,6 +76,7 @@ final readonly class ShopSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('user', $user);
+        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
     }
 
     /**

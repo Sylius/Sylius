@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Sylius\Behat\Service\Factory\AddressFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
@@ -26,7 +28,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
@@ -36,21 +37,35 @@ final readonly class CheckoutContext implements Context
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
      * @param RepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
-     * @param FactoryInterface<AddressInterface> $addressFactory
      */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private RepositoryInterface $shippingMethodRepository,
         private RepositoryInterface $paymentMethodRepository,
         private MessageBusInterface $commandBus,
-        private FactoryInterface $addressFactory,
+        private AddressFactoryInterface $addressFactory,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
 
-    /**
-     * @Given I have proceeded through checkout process in the :localeCode locale with email :email
-     */
+    #[Given('I have proceeded through checkout process with :shippingMethod shipping method')]
+    public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
+        Assert::notNull($cart);
+
+        $address = $this->addressFactory->createDefault();
+
+        $this->addressCart($cart, $address);
+        $this->chooseShippingMethod($cart, $shippingMethod);
+        $this->choosePaymentMethod($cart);
+    }
+
+    #[Given('I have proceeded through checkout process in the :localeCode locale with email :email')]
+    #[Given('I proceed through checkout process in the :localeCode locale with email :email')]
     public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
@@ -64,16 +79,15 @@ final readonly class CheckoutContext implements Context
         $command = new UpdateCart(
             orderTokenValue: $cartToken,
             email: $email,
-            billingAddress: $this->getDefaultAddress(),
+            billingAddress: $this->addressFactory->createDefault(),
         );
         $this->commandBus->dispatch($command);
 
-        $this->completeCheckout($cart);
+        $this->chooseShippingMethod($cart);
+        $this->choosePaymentMethod($cart);
     }
 
-    /**
-     * @Given I have proceeded through checkout process
-     */
+    #[Given('I have proceeded through checkout process')]
     public function iHaveProceededThroughCheckoutProcess(): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
@@ -85,16 +99,29 @@ final readonly class CheckoutContext implements Context
         $command = new UpdateCart(
             orderTokenValue: $cartToken,
             email: null,
-            billingAddress: $this->getDefaultAddress(),
+            billingAddress: $this->addressFactory->createDefault(),
         );
         $this->commandBus->dispatch($command);
 
-        $this->completeCheckout($cart);
+        $this->chooseShippingMethod($cart);
+        $this->choosePaymentMethod($cart);
     }
 
-    /**
-     * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment method
-     */
+    #[Given('I completed the shipping step with :shippingMethod shipping method')]
+    #[Given('I have proceeded selecting :shippingMethod shipping method')]
+    public function iTryToSelectShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
+        Assert::notNull($cart);
+
+        $this->chooseShippingMethod($cart, $shippingMethod);
+    }
+
+    #[Given('I have proceeded with :shippingMethod shipping method and :paymentMethod payment method')]
+    #[Given('I have proceeded order with :shippingMethod shipping method and :paymentMethod payment')]
     public function iHaveProceededWithSelectingPaymentMethod(
         ShippingMethodInterface $shippingMethod,
         PaymentMethodInterface $paymentMethod,
@@ -105,28 +132,19 @@ final readonly class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
-        $this->completeCheckout($cart, $shippingMethod, $paymentMethod);
+        $this->chooseShippingMethod($cart, $shippingMethod);
+        $this->choosePaymentMethod($cart, $paymentMethod);
     }
 
-    private function getDefaultAddress(): AddressInterface
+    private function addressCart(?OrderInterface $cart, AddressInterface $address): void
     {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
-
-        $address->setCity('New York');
-        $address->setStreet('Wall Street');
-        $address->setPostcode('00-001');
-        $address->setCountryCode('US');
-        $address->setFirstName('Richy');
-        $address->setLastName('Rich');
-
-        return $address;
+        $command = new UpdateCart(orderTokenValue: $cart->getTokenValue(), email: null, billingAddress: $address);
+        $this->commandBus->dispatch($command);
     }
 
-    private function completeCheckout(
+    private function chooseShippingMethod(
         OrderInterface $order,
         ?ShippingMethodInterface $shippingMethod = null,
-        ?PaymentMethodInterface $paymentMethod = null,
     ): void {
         $shippingMethod = $shippingMethod ?: $this->shippingMethodRepository->findOneBy([]);
 
@@ -139,7 +157,12 @@ final readonly class CheckoutContext implements Context
         );
 
         $this->commandBus->dispatch($command);
+    }
 
+    private function choosePaymentMethod(
+        OrderInterface $order,
+        ?PaymentMethodInterface $paymentMethod = null,
+    ): void {
         $paymentMethod = $paymentMethod ?: $this->paymentMethodRepository->findOneBy([]);
 
         /** @var PaymentInterface $payment */

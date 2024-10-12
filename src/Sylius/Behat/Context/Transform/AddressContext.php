@@ -21,8 +21,9 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-final class AddressContext implements Context
+final readonly class AddressContext implements Context
 {
+    /** @param FactoryInterface<AddressInterface> $addressFactory */
     public function __construct(
         private FactoryInterface $addressFactory,
         private CountryNameConverterInterface $countryNameConverter,
@@ -36,23 +37,27 @@ final class AddressContext implements Context
      * @Transform /^"([^"]+)" based \w+ address$/
      * @Transform /^"([^"]+)" based address$/
      */
-    public function createNewAddress($countryName)
+    public function createNewAddress(string $countryName): AddressInterface
     {
-        return $this->exampleAddressFactory->create([
+        /** @var AddressInterface $address */
+        $address = $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),
             'customer' => null,
         ]);
+
+        return $address;
     }
 
     /**
      * @Transform /^address (?:as |is |to )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      * @Transform /^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" specified as$/
      */
-    public function createNewAddressWith($city, $street, $postcode, $countryName, $customerName)
+    public function createNewAddressWith(string $city, string $street, string $postcode, string $countryName, string $customerName): AddressInterface
     {
         [$firstName, $lastName] = explode(' ', $customerName);
 
-        return $this->exampleAddressFactory->create([
+        /** @var AddressInterface $address */
+        $address = $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -63,13 +68,15 @@ final class AddressContext implements Context
             'street' => $street,
             'postcode' => $postcode,
         ]);
+
+        return $address;
     }
 
     /**
      * @Transform /^clear the (shipping|billing) address$/
      * @Transform /^do not specify any (shipping|billing) address$/
      */
-    public function createEmptyAddress()
+    public function createEmptyAddress(): AddressInterface
     {
         return $this->addressFactory->createNew();
     }
@@ -81,11 +88,18 @@ final class AddressContext implements Context
      * @Transform /^addressed it to "([^"]+)", "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)", "([^"]+)"$/
      * @Transform /^address (?:|is |as )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
-    public function createNewAddressWithNameAndProvince($name, $street, $postcode, $city, $countryName, $provinceName)
-    {
+    public function createNewAddressWithNameAndProvince(
+        string $name,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
+        string $provinceName,
+    ): AddressInterface {
         [$firstName, $lastName] = explode(' ', $name);
 
-        return $this->exampleAddressFactory->create([
+        /** @var AddressInterface $address */
+        $address = $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -97,6 +111,8 @@ final class AddressContext implements Context
             'postcode' => $postcode,
             'province_name' => $provinceName,
         ]);
+
+        return $address;
     }
 
     /**
@@ -107,11 +123,17 @@ final class AddressContext implements Context
      * @Transform /^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address$/
      * @Transform /^be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
-    public function createNewAddressWithName($name, $street, $postcode, $city, $countryName)
-    {
+    public function createNewAddressWithName(
+        string $name,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
+    ): AddressInterface {
         [$firstName, $lastName] = explode(' ', $name);
 
-        return $this->exampleAddressFactory->create([
+        /** @var AddressInterface $address */
+        $address = $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -122,13 +144,16 @@ final class AddressContext implements Context
             'street' => $street,
             'postcode' => $postcode,
         ]);
+
+        return $address;
     }
 
     /**
      * @Transform /^"([^"]+)" street$/
      */
-    public function getByStreet($street)
+    public function getByStreet(string $street): AddressInterface
     {
+        /** @var AddressInterface $address */
         $address = $this->addressRepository->findOneBy(['street' => $street]);
         Assert::notNull($address, sprintf('Cannot find address by %s street.', $street));
 

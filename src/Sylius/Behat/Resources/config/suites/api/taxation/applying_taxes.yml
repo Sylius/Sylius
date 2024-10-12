@@ -36,6 +36,7 @@ default:
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.checkout.shipping
 
             filters:
                 tags: "@applying_taxes&&@api"

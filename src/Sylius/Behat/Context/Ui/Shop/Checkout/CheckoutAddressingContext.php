@@ -39,17 +39,6 @@ final readonly class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @Given I addressed the cart
-     * @Given I addressed it
-     */
-    public function iAddressedTheCart(): void
-    {
-        $this->addressPage->open();
-        $this->addressPage->specifyBillingAddress($this->createDefaultAddress());
-        $this->addressPage->nextStep();
-    }
-
-    /**
      * @Given the visitor has completed the addressing step
      * @Given the customer has completed the addressing step
      * @When the customer completes the addressing step
@@ -79,7 +68,6 @@ final readonly class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
      * @Given /^they have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
      * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
      * @When /^they complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
@@ -238,7 +226,6 @@ final readonly class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When I specified the billing address
      * @When /^I specified the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I define the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/

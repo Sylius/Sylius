@@ -52,6 +52,19 @@ final readonly class AddressContext implements Context
     }
 
     /**
+     * @Given I addressed the cart with email :email
+     */
+    public function iAddressedTheCartWithEmail(string $email): void
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+
+        $address = $this->addressFactory->createDefault();
+
+        $command = new UpdateCart(orderTokenValue: $cartToken, email: $email, billingAddress: $address);
+        $this->commandBus->dispatch($command);
+    }
+
+    /**
      * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iHaveSpecifiedDefaultBillingAddressForName(): void
@@ -61,23 +74,23 @@ final readonly class AddressContext implements Context
         $command = new UpdateCart(
             orderTokenValue: $cartToken,
             email: null,
-            billingAddress: $this->getDefaultAddress(),
+            billingAddress: $this->addressFactory->createDefaultWithCountryCode('US'),
         );
         $this->commandBus->dispatch($command);
     }
 
-    private function getDefaultAddress(): AddressInterface
+    /**
+     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
+     */
+    public function iCompleteAddressingStepWithEmail(string $email, AddressInterface $address): void
     {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
+        $cartToken = $this->sharedStorage->get('cart_token');
 
-        $address->setCity('New York');
-        $address->setStreet('Wall Street');
-        $address->setPostcode('00-001');
-        $address->setCountryCode('US');
-        $address->setFirstName('Richy');
-        $address->setLastName('Rich');
-
-        return $address;
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: $email,
+            billingAddress: $address,
+        );
+        $this->commandBus->dispatch($command);
     }
 }

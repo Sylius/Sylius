@@ -40,6 +40,7 @@ default:
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
                 - sylius.behat.context.api.shop.checkout.complete
+                - sylius.behat.context.api.shop.checkout.shipping
                 - sylius.behat.context.api.shop.order
                 - sylius.behat.context.api.shop.response
 

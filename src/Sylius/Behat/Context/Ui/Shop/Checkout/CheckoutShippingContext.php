@@ -31,12 +31,11 @@ final readonly class CheckoutShippingContext implements Context
     }
 
     /**
-     * @Given the visitor has proceeded :shippingMethodName shipping method
-     * @Given the customer has proceeded :shippingMethodName shipping method
+     * @Given the visitor has proceeded with :shippingMethodName shipping method
+     * @Given the customer has proceeded with :shippingMethodName shipping method
      * @Given the visitor proceed with :shippingMethodName shipping method
-     * @Given the customer proceed with :shippingMethodName shipping method
+     * @Given the customer proceeds with :shippingMethodName shipping method
      * @Given I chose :shippingMethodName shipping method
-     * @Given I completed the shipping step with :shippingMethodName shipping method
      * @Given I have proceeded with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
@@ -44,7 +43,7 @@ final readonly class CheckoutShippingContext implements Context
     public function iHaveProceededWithSelectingShippingMethod(string $shippingMethodName): void
     {
         if (!$this->selectShippingPage->isOpen()) {
-            throw new UnexpectedPageException(sprintf('Shipping method "%s" cannot be selected because checkout shipping page is not open.', $shippingMethodName));
+            $this->selectShippingPage->open();
         }
 
         $this->selectShippingPage->selectShippingMethod($shippingMethodName);
@@ -75,6 +74,10 @@ final readonly class CheckoutShippingContext implements Context
      */
     public function iCompleteTheShippingStep(): void
     {
+        if (!$this->selectShippingPage->isOpen()) {
+            $this->selectShippingPage->open();
+        }
+
         $this->selectShippingPage->nextStep();
     }
 
@@ -222,8 +225,9 @@ final readonly class CheckoutShippingContext implements Context
 
     /**
      * @Then I should not be able to proceed checkout shipping step
+     * @Then I should not be able to proceed to the checkout shipping step
      */
-    public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
+    public function iShouldNotBeAbleToProceedToTheCheckoutShippingStep(): void
     {
         $this->selectShippingPage->tryToOpen();
 

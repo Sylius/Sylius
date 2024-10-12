@@ -185,6 +185,14 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
+        <service id="sylius.behat.context.api.shop.checkout.shipping" class="Sylius\Behat\Context\Api\Shop\Checkout\CheckoutShippingContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+        </service>
+
         <service id="sylius.behat.context.api.shop.checkout.complete" class="Sylius\Behat\Context\Api\Shop\Checkout\CheckoutCompleteContext">
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="sylius.behat.shared_storage" />

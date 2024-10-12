@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Mink;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
@@ -27,7 +28,11 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionFactoryInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class CheckoutCompleteContext implements Context
@@ -37,6 +42,8 @@ final readonly class CheckoutCompleteContext implements Context
         private CompletePageInterface $completePage,
         private NotificationCheckerInterface $notificationChecker,
         private ThankYouPageInterface $thankYouPage,
+        private CartStorageInterface $cartStorage,
+        private Mink $mink,
     ) {
     }
 
@@ -89,6 +96,19 @@ final readonly class CheckoutCompleteContext implements Context
         }
 
         $this->completePage->confirmOrder();
+    }
+
+    /**
+     * @When I want to continue checkout
+     */
+    public function iWantToContinueCheckout(): void
+    {
+        $this->mink->getDefaultSessionName();
+
+        $this->cartStorage->setForChannel(
+            $this->sharedStorage->get('channel'),
+            $this->sharedStorage->get('order'),
+        );
     }
 
     /**

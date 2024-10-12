@@ -27,6 +27,7 @@ default:
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.checkout.shipping
                 - sylius.behat.context.api.shop.login
 
             filters:
