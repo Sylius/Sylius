@@ -6,6 +6,10 @@
     * The `sylius_default.bus` and `sylius_event.bus` configuration options were removed. Use `sylius.command_bus` and
       `sylius.event_bus` for commands and events respectively.
 
+* Resource:
+    * The configuration nodes for resource options `sylius_*.resources.**.options` (`sylius_addressing.resources.address.options` etc.)
+      were removed from all resource definitions in all bundles.
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is no longer supported in ResourceBundle and GridBundle:
