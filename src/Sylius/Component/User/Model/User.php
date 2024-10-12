@@ -72,15 +72,6 @@ class User implements UserInterface, \Stringable
     /** @var \DateTimeInterface|null */
     protected $verifiedAt;
 
-    /** @var bool */
-    protected $locked = false;
-
-    /** @var \DateTimeInterface|null */
-    protected $expiresAt;
-
-    /** @var \DateTimeInterface|null */
-    protected $credentialsExpireAt;
-
     /**
      * We need at least one role to be able to authenticate
      *
@@ -183,26 +174,6 @@ class User implements UserInterface, \Stringable
         $this->password = $encodedPassword;
     }
 
-    public function getExpiresAt(): ?\DateTimeInterface
-    {
-        return $this->expiresAt;
-    }
-
-    public function setExpiresAt(?\DateTimeInterface $date): void
-    {
-        $this->expiresAt = $date;
-    }
-
-    public function getCredentialsExpireAt(): ?\DateTimeInterface
-    {
-        return $this->credentialsExpireAt;
-    }
-
-    public function setCredentialsExpireAt(?\DateTimeInterface $date): void
-    {
-        $this->credentialsExpireAt = $date;
-    }
-
     public function getLastLogin(): ?\DateTimeInterface
     {
         return $this->lastLogin;
@@ -231,16 +202,6 @@ class User implements UserInterface, \Stringable
     public function setPasswordResetToken(?string $passwordResetToken): void
     {
         $this->passwordResetToken = $passwordResetToken;
-    }
-
-    public function setLocked(bool $locked): void
-    {
-        $this->locked = $locked;
-    }
-
-    public function isAccountNonLocked(): bool
-    {
-        return !$this->locked;
     }
 
     public function hasRole(string $role): bool
@@ -353,7 +314,6 @@ class User implements UserInterface, \Stringable
             $this->password,
             $this->usernameCanonical,
             $this->username,
-            $this->locked,
             $this->enabled,
             $this->id,
         ];
@@ -372,7 +332,6 @@ class User implements UserInterface, \Stringable
             $this->password,
             $this->usernameCanonical,
             $this->username,
-            $this->locked,
             $this->enabled,
             $this->id,
         ] = $data;

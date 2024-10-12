@@ -50,8 +50,6 @@ interface UserInterface extends
 
     public function setUsernameCanonical(?string $usernameCanonical): void;
 
-    public function setLocked(bool $locked): void;
-
     public function getEmailVerificationToken(): ?string;
 
     public function setEmailVerificationToken(?string $verificationToken): void;
@@ -71,14 +69,6 @@ interface UserInterface extends
     public function getVerifiedAt(): ?\DateTimeInterface;
 
     public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void;
-
-    public function getExpiresAt(): ?\DateTimeInterface;
-
-    public function setExpiresAt(?\DateTimeInterface $date): void;
-
-    public function getCredentialsExpireAt(): ?\DateTimeInterface;
-
-    public function setCredentialsExpireAt(?\DateTimeInterface $date): void;
 
     public function getLastLogin(): ?\DateTimeInterface;
 
