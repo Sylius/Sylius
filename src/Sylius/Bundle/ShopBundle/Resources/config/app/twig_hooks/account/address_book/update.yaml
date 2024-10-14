@@ -10,7 +10,7 @@ sylius_twig_hooks:
                 props:
                     form: '@=_context.form'
                     resource: '@=_context.address'
-                    template: '@SyliusShop/account/address_book/form/form.html.twig'
+                    template: '@SyliusShop/account/address_book/common/content/form.html.twig'
                 configuration:
                     method: 'PUT'
 

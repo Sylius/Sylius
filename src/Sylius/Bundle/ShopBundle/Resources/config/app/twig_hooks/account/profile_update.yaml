@@ -10,7 +10,7 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    template: '@SyliusShop/account/profile_update/layout/content/form.html.twig'
+                    template: '@SyliusShop/account/profile_update/update/content/form.html.twig'
 
         'sylius_shop.account.profile_update.update.content.header':
             title:
