@@ -56,7 +56,7 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
         </service>
-        <service id="sylius_admin.controller.resend_order-confirmation_email" alias="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction" />
+        <service id="sylius_admin.controller.resend_order_confirmation_email" alias="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction" />
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.shipment" />
