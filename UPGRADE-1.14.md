@@ -140,10 +140,8 @@
     | `sylius.shop.locale_stripping_router`                                                                      | `sylius_shop.router.locale_stripping`                                                |
     | `sylius.listener.non_channel_request_locale`                                                               | `sylius_shop.listener.non_channel_locale`                                            |
     | `sylius.controller.shop.contact`                                                                           | `sylius_shop.controller.contact`                                                     |
-    | `sylius.controller.shop.homepage`                                                                          | `sylius_shop.controller.homepage`                                                    |
     | `sylius.controller.shop.currency_switch`                                                                   | `sylius_shop.controller.currency_switch`                                             |
     | `sylius.controller.shop.locale_switch`                                                                     | `sylius_shop.controller.locale_switch`                                               |
-    | `sylius.controller.shop.security_widget`                                                                   | `sylius_shop.controller.security_widget`                                             |
     | `sylius.controller.shop.register_thank_you`                                                                | `sylius_shop.controller.register_thank_you`                                          |
     | `sylius.mailer.contact_email_manager.shop`                                                                 | `sylius_shop.mailer.email_manager.contact`                                           |
     | `sylius.mailer.order_email_manager.shop`                                                                   | `sylius_shop.mailer.email_manager.order`                                             |
@@ -280,6 +278,8 @@
         )
     ```
 1. The following services have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\ShopBundle\Controller\HomepageController`
+    - `Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController`
     - `Sylius\Bundle\UiBundle\DataCollector\TemplateBlockRenderingHistory`
     - `Sylius\Bundle\UiBundle\DataCollector\TemplateBlockDataCollector`
     - `Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateBlockRenderer`
