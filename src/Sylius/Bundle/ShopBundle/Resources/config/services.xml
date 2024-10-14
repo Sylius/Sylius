@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="services/**.xml" />
         <import resource="services/twig/**/*.xml" />
@@ -24,23 +28,26 @@
             <argument>account</argument>
             <tag name="sylius.uri_based_section_resolver" priority="-10" />
         </service>
+        <service id="sylius_shop.section_resolver.shop_uri_based" alias="sylius.section_resolver.shop_uri_based_section_resolver" />
 
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
-            <argument type="service" id="sylius.storage.cart_session" />
+            <argument type="service" id="sylius_shop.storage.cart_session" />
             <argument type="service" id="sylius.context.channel" />
             <tag name="sylius.context.cart" priority="-777" />
         </service>
+        <service id="sylius_shop.context.cart.session_and_channel_based" alias="sylius.context.cart.session_and_channel_based" />
 
         <service id="sylius.storage.cart_session" class="Sylius\Bundle\CoreBundle\Storage\CartSessionStorage">
             <argument type="service" id="request_stack" />
             <argument>_sylius.cart</argument>
             <argument type="service" id="sylius.repository.order" />
         </service>
-
+        <service id="sylius_shop.storage.cart_session" alias="sylius.storage.cart_session" />
         <service id="Sylius\Component\Core\Storage\CartStorageInterface" alias="sylius.storage.cart_session" />
 
         <service id="sylius.grid_filter.shop_string" class="Sylius\Component\Grid\Filter\StringFilter">
             <tag name="sylius.grid_filter" type="shop_string" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType" />
         </service>
+        <service id="sylius_shop.grid.filter.string" alias="sylius.grid_filter.shop_string" />
     </services>
 </container>
