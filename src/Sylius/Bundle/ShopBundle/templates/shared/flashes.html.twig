@@ -1,4 +1,6 @@
 {% if app.session is not null and app.session.started %}
+    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
+
     {% for type in ['success', 'error', 'info', 'warning'] %}
         {% for flash in app.session.flashbag.get(type) %}
             {% set header = 'sylius.ui.'~type %}
@@ -7,7 +9,12 @@
             {% endif %}
 
             <div class="alert alert-{{ type }} my-0" role="alert" data-test-sylius-flash-message>
-                <div class="fw-bold">{{ header|trans }}</div>
+                <div class="d-flex justify-content-between">
+                    <div class="fw-bold">{{ header|trans }}</div>
+                    <span class="close" data-bs-dismiss="alert" aria-label="Close">
+                        {{ icon('x') }}
+                    </span>
+                </div>
                 <div {{ sylius_test_html_attribute('flash-messages') }}>
                     {% if flash is iterable %}
                         {{ flash.message|trans(flash.parameters, 'flashes') }}
