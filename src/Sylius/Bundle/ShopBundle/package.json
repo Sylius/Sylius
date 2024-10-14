@@ -1,6 +1,5 @@
 {
   "name": "@sylius-ui/shop",
-  "version": "2.0.0",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -10,16 +9,19 @@
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
     "@babel/core": "^7.17.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.18.9",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/preset-env": "^7.25.8",
     "@hotwired/stimulus": "^3.0.0",
     "@popperjs/core": "^2.11.8",
     "@symfony/stimulus-bridge": "^3.2.2",
-    "@symfony/webpack-encore": "^3.1.0",
-    "bootstrap": "^5.3.0",
+    "@symfony/webpack-encore": "^5.0.1",
+    "bootstrap": "^5.3.3",
     "flag-icons": "^7.2.3",
+    "sass": "~1.64.2",
+    "sass-loader": "^16.0.1",
     "spotlight.js": "^0.7.8",
-    "sass": "^1.54.8",
-    "sass-loader": "^13.0.0"
+    "webpack": "^5.72",
+    "webpack-cli": "^5.1.4"
   },
   "engines": {
     "node": "^20 || ^22"
