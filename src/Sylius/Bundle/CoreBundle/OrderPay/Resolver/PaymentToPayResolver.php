@@ -23,7 +23,7 @@ final class PaymentToPayResolver implements PaymentToPayResolverInterface
     {
     }
 
-    public function getLastPayment(OrderInterface $order): ?PaymentInterface
+    public function getPayment(OrderInterface $order): ?PaymentInterface
     {
         return $order->getLastPayment($this->state);
     }

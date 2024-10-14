@@ -82,9 +82,7 @@ final class PaymentMethodType extends AbstractResourceType
     {
         $resolver->setDefaults([
             'validation_groups' => function (FormInterface $form): array {
-                $data = $form->getData();
-
-                return $this->paymentMethodGroupsGenerator->__invoke($data);
+                return $this->paymentMethodGroupsGenerator->__invoke($form->getData());
             },
         ]);
     }

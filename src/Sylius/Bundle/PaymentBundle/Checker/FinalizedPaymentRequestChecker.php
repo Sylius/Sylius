@@ -20,20 +20,16 @@ use Sylius\Component\Payment\PaymentRequestTransitions;
 /** @experimental */
 final class FinalizedPaymentRequestChecker implements FinalizedPaymentRequestCheckerInterface
 {
-    public function __construct(
-        private StateMachineInterface $stateMachine,
-    ) {
+    public function __construct(private StateMachineInterface $stateMachine)
+    {
     }
 
     public function isFinal(PaymentRequestInterface $paymentRequest): bool
     {
-        $state = $paymentRequest->getState();
-        $nextTransition = $this->stateMachine->getTransitionFromState(
+        return null === $this->stateMachine->getTransitionFromState(
             $paymentRequest,
             PaymentRequestTransitions::GRAPH,
-            $state,
+            $paymentRequest->getState(),
         );
-
-        return null === $nextTransition;
     }
 }

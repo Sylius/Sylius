@@ -48,8 +48,9 @@ final class PaymentRequestCanceller implements PaymentRequestCancellerInterface
                 );
 
                 $this->objectManager->persist($paymentRequest);
-                $this->objectManager->flush();
             }
         }
+
+        $this->objectManager->flush();
     }
 }

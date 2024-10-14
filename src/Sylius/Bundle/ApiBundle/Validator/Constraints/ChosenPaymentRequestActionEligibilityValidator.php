@@ -67,19 +67,12 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
     {
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->paymentMethodCode]);
-
-        if ($paymentMethod === null) {
-            return null;
-        }
-
-        $gatewayConfig = $paymentMethod->getGatewayConfig();
-        if (null === $gatewayConfig) {
+        if ($paymentMethod?->getGatewayConfig() === null) {
             return null;
         }
 
         $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
-        $commandProvider = $this->gatewayFactoryCommandProvider->getCommandProvider($factoryName);
 
-        return $commandProvider ?? null;
+        return $this->gatewayFactoryCommandProvider->getCommandProvider($factoryName);
     }
 }
