@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Generator;
 
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
-final readonly class GatewayConfigNameGenerator implements GatewayConfigNameGeneratorInterface
+final readonly class GatewayNameGenerator implements GatewayNameGeneratorInterface
 {
     public function generate(PaymentMethodInterface $paymentMethod): ?string
     {
