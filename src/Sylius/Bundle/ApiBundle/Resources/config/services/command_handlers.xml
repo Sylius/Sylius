@@ -211,5 +211,20 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler">
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="sylius.factory.payment_request" />
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius.provider.default_action" />
+            <argument type="service" id="sylius.provider.default_payload" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Payment\UpdatePaymentRequestHandler">
+            <argument type="service" id="sylius.repository.payment_request" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
     </services>
 </container>

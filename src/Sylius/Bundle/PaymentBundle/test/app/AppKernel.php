@@ -20,11 +20,13 @@ class AppKernel extends Kernel
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sylius\Bundle\PaymentBundle\SyliusPaymentBundle(),
             new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Abstraction\StateMachine\SyliusStateMachineAbstractionBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
         ];
     }

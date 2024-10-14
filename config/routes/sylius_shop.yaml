@@ -5,7 +5,10 @@ sylius_shop:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
 sylius_shop_payum:
-    resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
+    resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
+
+sylius_payment_notify:
+    resource: "@SyliusPaymentBundle/Resources/config/routing/integrations/sylius.yaml"
 
 sylius_shop_default_locale:
     path: /

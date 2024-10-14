@@ -46,11 +46,6 @@ parameters:
 			path: src/Sylius/Bundle/AdminBundle/EventListener/AdminFilterSubscriber.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\EventListener\\\\ResourceDeleteSubscriber\\:\\:isAdminSection\\(\\) has parameter \\$syliusParameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/AdminBundle/EventListener/ResourceDeleteSubscriber.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Form\\\\RequestPasswordResetType\\:\\:__construct\\(\\) has parameter \\$validationGroups with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/AdminBundle/Form/RequestPasswordResetType.php
@@ -1196,31 +1191,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Taxation/Strategy/TaxCalculationStrategy.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\PriceHelper\\:\\:getLowestPriceBeforeDiscount\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/PriceHelper.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\PriceHelper\\:\\:getOriginalPrice\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/PriceHelper.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\PriceHelper\\:\\:getPrice\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/PriceHelper.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\PriceHelper\\:\\:hasDiscount\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/PriceHelper.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\PriceHelper\\:\\:hasLowestPriceBeforeDiscount\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/PriceHelper.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Twig\\\\BundleLoadedCheckerExtension\\:\\:__construct\\(\\) has parameter \\$listOfBundles with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Twig/BundleLoadedCheckerExtension.php
@@ -1321,49 +1291,9 @@ parameters:
 			path: src/Sylius/Bundle/OrderBundle/Remover/ExpiredCartsRemover.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\OrderBundle\\\\Templating\\\\Helper\\\\AdjustmentsHelper\\:\\:getAggregatedAdjustments\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Templating/Helper/AdjustmentsHelper.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Form\\\\Type\\\\PaymentGatewayChoiceType\\:\\:__construct\\(\\) has parameter \\$gateways with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/PaymentBundle/Form/Type/PaymentGatewayChoiceType.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Controller\\\\PayumController\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Order\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Controller\\\\PayumController\\:\\:prepareCaptureAction\\(\\) has parameter \\$tokenValue with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Controller\\\\PayumController\\:\\:provideTokenBasedOnPayment\\(\\) has parameter \\$redirectOptions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\GetStatusFactory\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/GetStatusFactory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\GetStatusFactoryInterface\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/GetStatusFactoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\ResolveNextRouteFactory\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/ResolveNextRouteFactory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Factory\\\\ResolveNextRouteFactoryInterface\\:\\:createNewWithModel\\(\\) has parameter \\$model with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Factory/ResolveNextRouteFactoryInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Request\\\\ResolveNextRoute\\:\\:getRouteParameters\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -1676,6 +1606,11 @@ parameters:
 			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\DependencyInjection\\\\SyliusShopExtension\\:\\:configureOrderPay\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\DependencyInjection\\\\SyliusShopExtension\\:\\:registerCheckoutRedirectListener\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
@@ -1794,26 +1729,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\RedirectPathExtension\\:\\:hasAdditionalParameters\\(\\) has parameter \\$routeInfo with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UiBundle/Twig/RedirectPathExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\SortByExtension\\:\\:sortBy\\(\\) has parameter \\$iterable with no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Twig/SortByExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\SortByExtension\\:\\:sortBy\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Twig/SortByExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\SortByExtension\\:\\:transformIterableToArray\\(\\) has parameter \\$iterable with no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Twig/SortByExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\SortByExtension\\:\\:transformIterableToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Twig/SortByExtension.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\TemplateEventExtension\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
@@ -2249,11 +2164,6 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Factory\\\\PromotionRuleFactoryInterface\\:\\:createHasTaxon\\(\\) has parameter \\$taxons with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Factory/PromotionRuleFactoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Grid\\\\Filter\\\\EntitiesFilter\\:\\:apply\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Grid/Filter/EntitiesFilter.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Grid\\\\Filter\\\\ResourceAutocompleteFilter\\:\\:apply\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"

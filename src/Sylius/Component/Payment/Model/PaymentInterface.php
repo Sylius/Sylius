@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableInterface;
 
@@ -55,4 +56,9 @@ interface PaymentInterface extends TimestampableInterface, ResourceInterface
     public function getDetails(): array;
 
     public function setDetails(array $details): void;
+
+    /**
+     * @return Collection<array-key, PaymentRequestInterface>
+     */
+    public function getPaymentRequests(): Collection;
 }

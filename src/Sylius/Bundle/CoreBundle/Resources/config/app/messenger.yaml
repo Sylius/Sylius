@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
 parameters:
     env(SYLIUS_MESSENGER_TRANSPORT_MAIN_DSN): 'doctrine://default'
     env(SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN): 'doctrine://default?queue_name=main_failed'

@@ -18,6 +18,7 @@
 >
     <imports>
         <import resource="services/**.xml" />
+        <import resource="services/order_pay/**/*.xml" />
         <import resource="services/twig/**/*.xml" />
     </imports>
 

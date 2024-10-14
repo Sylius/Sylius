@@ -1172,7 +1172,7 @@ final readonly class OrderContext implements Context
 
         $this->itemQuantityModifier->modify($item, 1);
 
-        $order = $this->createOrder($customer, '#00000' . $number);
+        $order = $this->createOrder($customer, '00000' . $number);
         $order->addItem($item);
 
         $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod, $completeOrder);
