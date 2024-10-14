@@ -31,9 +31,6 @@ jobs:
                         target_branch: "2.0"
                     -
                         base_branch: "2.0"
-                        target_branch: "payment-request"
-                    -
-                        base_branch: "2.0"
                         target_branch: "sylius-stack"
 
         steps:
