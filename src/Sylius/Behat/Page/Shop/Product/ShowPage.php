@@ -98,8 +98,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
 
         $row = $nameTd->getParent();
+        $text = $row->find('css', '[data-test-product-attribute-value]')->getText();
 
-        return trim($row->find('css', '[data-test-product-attribute-value]')->getText());
+        return trim(str_replace("\u{202F}", ' ', $text));
     }
 
     public function getAttributeListByName(string $name): array
