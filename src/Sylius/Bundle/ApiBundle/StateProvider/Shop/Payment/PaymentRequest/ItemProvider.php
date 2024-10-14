@@ -16,9 +16,9 @@ namespace Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentRequest;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProviderInterface;
-use Sylius\Bundle\ApiBundle\Checker\UpdatePaymentRequestEligibilityCheckerInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestCheckerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -34,7 +34,7 @@ final readonly class ItemProvider implements ProviderInterface
     public function __construct(
         private SectionProviderInterface $sectionProvider,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
-        private UpdatePaymentRequestEligibilityCheckerInterface $updatePaymentRequestEligibilityChecker,
+        private FinalizedPaymentRequestCheckerInterface $finalizedPaymentRequestChecker,
     ) {
     }
 
@@ -48,7 +48,7 @@ final readonly class ItemProvider implements ProviderInterface
 
         if (
             $paymentRequest === null ||
-            !$this->updatePaymentRequestEligibilityChecker->isEligible($paymentRequest)
+            $this->finalizedPaymentRequestChecker->isFinal($paymentRequest)
         ) {
             return null;
         }
