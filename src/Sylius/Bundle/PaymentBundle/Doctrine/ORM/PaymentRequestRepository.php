@@ -63,9 +63,7 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
             ->andWhere('o.action = :action')
             ->andWhere('o.payment = :payment')
             ->andWhere('o.method = :method')
-            // Symfony\Bridge\Doctrine\Types\UuidType has signature changes between sf 5.4 and 6.4
-            // We are forced to use type: "uuid" to use both Sf versions
-            ->setParameter('paymentRequest', $paymentRequest->getHash(), 'uuid')
+            ->setParameter('paymentRequest', $paymentRequest->getHash(), UuidType::NAME)
             ->setParameter('action', $paymentRequest->getAction())
             ->setParameter('method', $paymentRequest->getMethod())
             ->setParameter('payment', $paymentRequest->getPayment())

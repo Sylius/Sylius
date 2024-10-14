@@ -19,5 +19,5 @@ use Sylius\Component\Core\Model\PaymentInterface;
 /** @experimental */
 interface PaymentToPayResolverInterface
 {
-    public function getLastPayment(OrderInterface $order): ?PaymentInterface;
+    public function getPayment(OrderInterface $order): ?PaymentInterface;
 }

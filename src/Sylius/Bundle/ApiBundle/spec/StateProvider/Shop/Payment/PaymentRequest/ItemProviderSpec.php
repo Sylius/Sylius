@@ -18,10 +18,10 @@ use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Checker\UpdatePaymentRequestEligibilityCheckerInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestCheckerInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
@@ -30,9 +30,9 @@ final class ItemProviderSpec extends ObjectBehavior
     public function let(
         SectionProviderInterface $sectionProvider,
         PaymentRequestRepositoryInterface $paymentRequestRepository,
-        UpdatePaymentRequestEligibilityCheckerInterface $updatePaymentRequestEligibilityChecker,
+        FinalizedPaymentRequestCheckerInterface $finalizedPaymentRequestChecker,
     ): void {
-        $this->beConstructedWith($sectionProvider, $paymentRequestRepository, $updatePaymentRequestEligibilityChecker);
+        $this->beConstructedWith($sectionProvider, $paymentRequestRepository, $finalizedPaymentRequestChecker);
     }
 
     function it_is_a_state_provider(): void
@@ -67,13 +67,28 @@ final class ItemProviderSpec extends ObjectBehavior
     function it_returns_nothing_if_payment_request_is_not_found(
         SectionProviderInterface $sectionProvider,
         PaymentRequestRepositoryInterface $paymentRequestRepository,
-        UpdatePaymentRequestEligibilityCheckerInterface $updatePaymentRequestEligibilityChecker,
+        FinalizedPaymentRequestCheckerInterface $finalizedPaymentRequestChecker,
     ): void {
         $hash = 'hash';
         $operation = new Put(class: PaymentRequestInterface::class, name: 'put');
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
         $paymentRequestRepository->find($hash)->willReturn(null);
-        $updatePaymentRequestEligibilityChecker->isEligible(Argument::any())->shouldNotBeCalled();
+        $finalizedPaymentRequestChecker->isFinal(Argument::any())->shouldNotBeCalled();
+
+        $this->provide($operation, ['hash' => $hash], [])->shouldReturn(null);
+    }
+
+    function it_returns_nothing_if_payment_request_is_in_final_state(
+        SectionProviderInterface $sectionProvider,
+        PaymentRequestRepositoryInterface $paymentRequestRepository,
+        FinalizedPaymentRequestCheckerInterface $finalizedPaymentRequestChecker,
+        PaymentRequestInterface $paymentRequest,
+    ): void {
+        $hash = 'hash';
+        $operation = new Put(class: PaymentRequestInterface::class, name: 'put');
+        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+        $paymentRequestRepository->find($hash)->willReturn($paymentRequest);
+        $finalizedPaymentRequestChecker->isFinal($paymentRequest)->willReturn(true);
 
         $this->provide($operation, ['hash' => $hash], [])->shouldReturn(null);
     }
@@ -81,14 +96,14 @@ final class ItemProviderSpec extends ObjectBehavior
     function it_returns_payment_request_by_hash(
         SectionProviderInterface $sectionProvider,
         PaymentRequestRepositoryInterface $paymentRequestRepository,
-        UpdatePaymentRequestEligibilityCheckerInterface $updatePaymentRequestEligibilityChecker,
+        FinalizedPaymentRequestCheckerInterface $finalizedPaymentRequestChecker,
         PaymentRequestInterface $paymentRequest,
     ): void {
         $hash = 'hash';
         $operation = new Put(class: PaymentRequestInterface::class, name: 'put');
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
         $paymentRequestRepository->find($hash)->willReturn($paymentRequest);
-        $updatePaymentRequestEligibilityChecker->isEligible($paymentRequest)->willReturn(true);
+        $finalizedPaymentRequestChecker->isFinal($paymentRequest)->willReturn(false);
 
         $this->provide($operation, ['hash' => $hash], [])->shouldReturn($paymentRequest);
     }

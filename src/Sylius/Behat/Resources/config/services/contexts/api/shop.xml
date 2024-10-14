@@ -167,8 +167,6 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="sylius.repository.payment_request" />
-            <argument type="service" id="sylius.behat.page.shop.payment_request.payment_method_notify" />
-            <argument type="service" id="test.client" />
         </service>
 
         <service id="sylius.behat.context.api.shop.payment" class="Sylius\Behat\Context\Api\Shop\PaymentContext">

@@ -39,8 +39,6 @@ final class StatusHttpResponseProvider implements HttpResponseProviderInterface
         PaymentRequestInterface $paymentRequest,
     ): Response {
         // Force null payment to go to the thank you page
-        $finalUrl = $this->finalUrlProvider->getUrl(null);
-
-        return new RedirectResponse($finalUrl);
+        return new RedirectResponse($this->finalUrlProvider->getUrl(null));
     }
 }

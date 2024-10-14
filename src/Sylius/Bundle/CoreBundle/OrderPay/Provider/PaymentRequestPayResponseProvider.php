@@ -48,7 +48,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
 
     public function getResponse(RequestConfiguration $requestConfiguration, OrderInterface $order): Response
     {
-        $payment = $this->paymentToPayResolver->getLastPayment($order);
+        $payment = $this->paymentToPayResolver->getPayment($order);
         Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
 
         $paymentMethod = $payment->getMethod();

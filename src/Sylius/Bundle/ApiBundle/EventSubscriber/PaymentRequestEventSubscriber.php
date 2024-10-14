@@ -38,14 +38,11 @@ final class PaymentRequestEventSubscriber implements EventSubscriberInterface
     public function postWrite(ViewEvent $event): void
     {
         $paymentRequest = $event->getControllerResult();
-
         if (!$paymentRequest instanceof PaymentRequestInterface) {
             return;
         }
 
-        $method = $event->getRequest()->getMethod();
-
-        if (in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
+        if (in_array($event->getRequest()->getMethod(), [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
             $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
         }
     }

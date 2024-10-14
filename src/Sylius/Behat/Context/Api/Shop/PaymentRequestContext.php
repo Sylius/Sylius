@@ -72,7 +72,7 @@ final readonly class PaymentRequestContext implements Context
         $response = $this->client->getLastResponse();
 
         Assert::same($this->responseChecker->getValue($response, 'action'), $action, sprintf('Payment request should have action %s', $action));
-        Assert::true(str_contains($this->responseChecker->getValue($response, 'method'), $paymentMethod->getCode()), sprintf('Payment request should have payment method %s', $paymentMethod->getCode()));
+        Assert::contains($this->responseChecker->getValue($response, 'method'), $paymentMethod->getCode(), sprintf('Payment request should have payment method %s', $paymentMethod->getCode()));
         Assert::same($this->responseChecker->getValue($response, 'state'), $state, sprintf('Payment request should have state %s', $state));
     }
 

@@ -38,7 +38,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         RequestConfiguration $requestConfiguration,
         OrderInterface $order
     ): Response {
-        $payment = $this->paymentToPayResolver->getLastPayment($order);
+        $payment = $this->paymentToPayResolver->getPayment($order);
         Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
 
         $redirectOptions = $requestConfiguration->getParameters()->get('redirect');
@@ -56,7 +56,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         OrderInterface $order
     ): bool {
 
-        $payment = $this->paymentToPayResolver->getLastPayment($order);
+        $payment = $this->paymentToPayResolver->getPayment($order);
         if (null === $payment) {
             return false;
         }

@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\PaymentBundle\Generator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
-final class GatewayConfigNameGeneratorSpec extends ObjectBehavior
+final class GatewayNameGeneratorSpec extends ObjectBehavior
 {
     function it_generates_gateway_config_name_based_on_payment_method_code(
         PaymentMethodInterface $paymentMethod,

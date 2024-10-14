@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Checker;
+namespace Sylius\Bundle\PaymentBundle\Generator;
 
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
-interface UpdatePaymentRequestEligibilityCheckerInterface
+interface GatewayNameGeneratorInterface
 {
-    public function isEligible(PaymentRequestInterface $paymentRequest): bool;
+    public function generate(PaymentMethodInterface $paymentMethod): ?string;
 }

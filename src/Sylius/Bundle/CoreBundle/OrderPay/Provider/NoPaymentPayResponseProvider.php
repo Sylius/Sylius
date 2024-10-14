@@ -28,21 +28,13 @@ final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
     ) {
     }
 
-    public function getResponse(
-        RequestConfiguration $requestConfiguration,
-        OrderInterface $order
-    ): Response {
-        $url = $this->orderPayFinalUrlProvider->getUrl(null);
-
-        return new RedirectResponse($url);
+    public function getResponse(RequestConfiguration $requestConfiguration, OrderInterface $order): Response
+    {
+        return new RedirectResponse($this->orderPayFinalUrlProvider->getUrl(null));
     }
 
-    public function supports(
-        RequestConfiguration $requestConfiguration,
-        OrderInterface $order
-    ): bool {
-        $payment = $this->paymentToPayResolver->getLastPayment($order);
-
-        return null === $payment;
+    public function supports(RequestConfiguration $requestConfiguration, OrderInterface $order): bool
+    {
+        return null === $this->paymentToPayResolver->getPayment($order);
     }
 }

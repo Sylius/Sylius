@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
-use Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGeneratorInterface;
+use Sylius\Bundle\PaymentBundle\Generator\GatewayNameGeneratorInterface;
 use Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -33,7 +33,7 @@ final class PaymentMethodType extends AbstractResourceType
         string $dataClass,
         array $validationGroups,
         private readonly PaymentMethodGroupsGeneratorInterface $paymentMethodGroupsGenerator,
-        private readonly GatewayConfigNameGeneratorInterface $gatewayConfigNameGenerator,
+        private readonly GatewayNameGeneratorInterface $gatewayNameGenerator,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -72,7 +72,7 @@ final class PaymentMethodType extends AbstractResourceType
                 $gatewayName = $gatewayConfig->getGatewayName();
 
                 if (null === $gatewayName && null !== $paymentMethod->getCode()) {
-                    $gatewayConfig->setGatewayName($this->gatewayConfigNameGenerator->generate($paymentMethod));
+                    $gatewayConfig->setGatewayName($this->gatewayNameGenerator->generate($paymentMethod));
                 }
             })
         ;
@@ -82,9 +82,7 @@ final class PaymentMethodType extends AbstractResourceType
     {
         $resolver->setDefaults([
             'validation_groups' => function (FormInterface $form): array {
-                $data = $form->getData();
-
-                return $this->paymentMethodGroupsGenerator->__invoke($data);
+                return $this->paymentMethodGroupsGenerator->__invoke($form->getData());
             },
         ]);
     }

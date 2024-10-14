@@ -57,7 +57,7 @@
         </service>
         <service id="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGeneratorInterface" alias="sylius.validator.payment_method_groups_generator" />
 
-        <service id="sylius.gateway_config_name_generator" class="Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGenerator" />
-        <service id="Sylius\Bundle\PaymentBundle\Generator\GatewayConfigNameGeneratorInterface" alias="sylius.gateway_config_name_generator" />
+        <service id="sylius.generator.gateway_name" class="Sylius\Bundle\PaymentBundle\Generator\GatewayNameGenerator" />
+        <service id="Sylius\Bundle\PaymentBundle\Generator\GatewayNameGeneratorInterface" alias="sylius.generator.gateway_name" />
     </services>
 </container>

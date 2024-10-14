@@ -2,10 +2,7 @@ imports:
     - { resource: "services_test_cached.yaml" }
 
 services:
-    ##
     # Prioritize Payum by tagging services with a higher priority (or lower for tagged_iterator).
-    ##
-    
     'sylius.payum.payment_request.command_provider.offline':
         class: Sylius\Bundle\PaymentBundle\CommandProvider\ActionsCommandProvider
         arguments:
