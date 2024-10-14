@@ -25,7 +25,11 @@
             >
                 <normalizationContext>
                     <values>
-                        <value>sylius:admin:payment_request:show</value>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_request:show</value>
+                            </values>
+                        </value>
                     </values>
                 </normalizationContext>
             </operation>

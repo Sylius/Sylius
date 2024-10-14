@@ -11,9 +11,10 @@
 
 -->
 
-<properties xmlns="https://api-platform.com/schema/metadata/properties-3.0"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
+<properties
+    xmlns="https://api-platform.com/schema/metadata/properties-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
     <property resource="%sylius.model.payment_request.class%" name="hash" identifier="true" />
 </properties>
