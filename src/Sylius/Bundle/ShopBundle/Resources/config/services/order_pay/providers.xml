@@ -19,12 +19,12 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.shop.order_pay.provider.after_pay_url" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayUrlProvider">
+        <service id="sylius_shop.order_pay.provider.after_pay_url" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayUrlProvider">
             <argument type="string">%sylius_shop.order_pay.after_pay_route%</argument>
             <argument type="string">%sylius_shop.order_pay.after_pay_route_parameters%</argument>
         </service>
 
-        <service id="sylius.shop.order_pay.provider.final_url" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProvider">
+        <service id="sylius_shop.order_pay.provider.final_url" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProvider">
             <argument type="string">%sylius_shop.order_pay.final_route%</argument>
             <argument type="string">%sylius_shop.order_pay.final_route_parameters%</argument>
             <argument type="string">%sylius_shop.order_pay.retry_route%</argument>
@@ -33,24 +33,24 @@
 
         <!-- Pay -->
 
-        <service id="sylius.shop.order_pay.provider.pay_response.no_payment" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider">
-            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
-            <argument type="service" id="sylius.shop.order_pay.provider.final_url" />
-            <tag name="sylius.shop.order_pay.provider.pay_response" priority="-100" />
+        <service id="sylius_shop.order_pay.provider.pay_response.no_payment" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider">
+            <argument type="service" id="sylius_shop.order_pay.resolver.payment_to_pay" />
+            <argument type="service" id="sylius_shop.order_pay.provider.final_url" />
+            <tag name="sylius_shop.order_pay.provider.pay_response" priority="-100" />
         </service>
 
-        <service id="sylius.shop.order_pay.provider.pay_response.payment_request" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider">
-            <argument type="service" id="sylius.shop.resolver.payment_to_pay" />
-            <argument type="service" id="sylius.shop.order_pay.provider.after_pay_url" />
-            <tag name="sylius.shop.order_pay.provider.pay_response" priority="-300" />
+        <service id="sylius_shop.order_pay.provider.pay_response.payment_request" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider">
+            <argument type="service" id="sylius_shop.order_pay.resolver.payment_to_pay" />
+            <argument type="service" id="sylius_shop.order_pay.provider.after_pay_url" />
+            <tag name="sylius_shop.order_pay.provider.pay_response" priority="-300" />
         </service>
 
         <!-- After pay -->
 
-        <service id="sylius.shop.order_pay.provider.after_pay_response.payment_request" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider">
-            <argument type="service" id="sylius.shop.order_pay.handler.payment_state_flash" />
-            <argument type="service" id="sylius.shop.order_pay.provider.final_url" />
-            <tag name="sylius.shop.order_pay.provider.after_pay_response" priority="-100" />
+        <service id="sylius_shop.order_pay.provider.after_pay_response.payment_request" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider">
+            <argument type="service" id="sylius_shop.order_pay.handler.payment_state_flash" />
+            <argument type="service" id="sylius_shop.order_pay.provider.final_url" />
+            <tag name="sylius_shop.order_pay.provider.pay_response" priority="-100" />
         </service>
     </services>
 </container>

@@ -50,10 +50,10 @@ sylius_shop_switch_currency:
     path: /switch-currency/{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.currency_switch::switchAction
+        _controller: sylius_shop.controller.currency_switch::switchAction
 
 sylius_shop_switch_locale:
     path: /switch-locale/{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.locale_switch::switchAction
+        _controller: sylius_shop.controller.locale_switch::switchAction

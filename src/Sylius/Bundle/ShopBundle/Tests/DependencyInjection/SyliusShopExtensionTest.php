@@ -28,9 +28,9 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('sylius.controller.shop.contact');
-        $this->assertContainerBuilderHasService('sylius.controller.shop.currency_switch');
-        $this->assertContainerBuilderHasService('sylius.controller.shop.locale_switch');
+        $this->assertContainerBuilderHasService('sylius_shop.controller.contact');
+        $this->assertContainerBuilderHasService('sylius_shop.controller.currency_switch');
+        $this->assertContainerBuilderHasService('sylius_shop.controller.locale_switch');
     }
 
     /**
@@ -40,11 +40,11 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('sylius.listener.order_customer_ip');
-        $this->assertContainerBuilderHasService('sylius.listener.order_complete');
-        $this->assertContainerBuilderHasService('sylius.listener.user_registration');
-        $this->assertContainerBuilderHasService('sylius.listener.order_integrity_checker');
-        $this->assertContainerBuilderHasService('sylius.order_locale_assigner');
+        $this->assertContainerBuilderHasService('sylius_shop.listener.order_customer_ip');
+        $this->assertContainerBuilderHasService('sylius_shop.listener.order_complete');
+        $this->assertContainerBuilderHasService('sylius_shop.listener.user_registration');
+        $this->assertContainerBuilderHasService('sylius_shop.listener.order_integrity_checker');
+        $this->assertContainerBuilderHasService('sylius_shop.listener.order_locale_assigner');
     }
 
     /**
@@ -54,7 +54,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('sylius.shop.menu_builder.account');
+        $this->assertContainerBuilderHasService('sylius_shop.menu_builder.account');
     }
 
     /**
@@ -64,11 +64,11 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('sylius.shop.locale_switcher', UrlBasedLocaleSwitcher::class);
-        $this->assertContainerBuilderHasService('sylius.listener.non_channel_request_locale');
+        $this->assertContainerBuilderHasService('sylius_shop.locale_switcher', UrlBasedLocaleSwitcher::class);
+        $this->assertContainerBuilderHasService('sylius_shop.listener.non_channel_locale');
 
-        $this->assertContainerBuilderNotHasService('sylius.storage.locale');
-        $this->assertContainerBuilderNotHasService('sylius.context.locale.storage_based');
+        $this->assertContainerBuilderNotHasService('sylius_shop.locale_storage');
+        $this->assertContainerBuilderNotHasService('sylius_shop.context.locale.storage_based');
     }
 
     /**
@@ -80,11 +80,11 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
             'locale_switcher' => 'storage',
         ]);
 
-        $this->assertContainerBuilderHasService('sylius.shop.locale_switcher', StorageBasedLocaleSwitcher::class);
-        $this->assertContainerBuilderHasService('sylius.storage.locale');
-        $this->assertContainerBuilderHasService('sylius.context.locale.storage_based');
+        $this->assertContainerBuilderHasService('sylius_shop.locale_switcher', StorageBasedLocaleSwitcher::class);
+        $this->assertContainerBuilderHasService('sylius_shop.locale_storage');
+        $this->assertContainerBuilderHasService('sylius_shop.context.locale.storage_based');
 
-        $this->assertContainerBuilderNotHasService('sylius.listener.non_channel_request_locale');
+        $this->assertContainerBuilderNotHasService('sylius_shop.listener.non_channel_locale');
     }
 
     /**
@@ -142,7 +142,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
 
         $syliusThemeConfig = $this->container->getExtensionConfig('sylius_theme')[0];
 
-        $this->assertSame('sylius.theme.context.channel_based', $syliusThemeConfig['context']);
+        $this->assertSame('sylius_shop.theme.context.channel_based', $syliusThemeConfig['context']);
     }
 
     protected function getContainerExtensions(): array

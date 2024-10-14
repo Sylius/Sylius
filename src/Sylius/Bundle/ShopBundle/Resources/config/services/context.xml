@@ -17,7 +17,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius.theme.context.channel_based" class="Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext">
+        <service id="sylius_shop.theme.context.channel_based" class="Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.repository.theme" />
         </service>

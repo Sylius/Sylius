@@ -23,15 +23,13 @@
             <tag name="sylius.twig.error_template_finder" />
         </service>
 
-        <service id="sylius.twig.extension.original_price_to_display" class="Sylius\Bundle\ShopBundle\Twig\OrderItemOriginalPriceToDisplayExtension">
+        <service id="sylius_shop.twig.extension.order_item_original_price_to_display" class="Sylius\Bundle\ShopBundle\Twig\OrderItemOriginalPriceToDisplayExtension">
             <tag name="twig.extension" />
         </service>
-        <service id="sylius_shop.twig.extension.order_item_original_price_to_display" alias="sylius.twig.extension.original_price_to_display" />
 
-        <service id="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension">
+        <service id="sylius_shop.twig.extension.order_payments" class="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension">
             <argument type="service" id="sylius.payment_methods_resolver" />
             <tag name="twig.extension" />
         </service>
-        <service id="sylius_shop.twig.extension.order_payments" alias="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension" />
     </services>
 </container>
