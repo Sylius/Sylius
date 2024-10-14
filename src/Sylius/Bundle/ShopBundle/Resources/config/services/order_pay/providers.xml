@@ -50,7 +50,7 @@
         <service id="sylius_shop.order_pay.provider.after_pay_response.payment_request" parent="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider">
             <argument type="service" id="sylius_shop.order_pay.handler.payment_state_flash" />
             <argument type="service" id="sylius_shop.order_pay.provider.final_url" />
-            <tag name="sylius_shop.order_pay.provider.pay_response" priority="-100" />
+            <tag name="sylius_shop.order_pay.provider.after_pay_response" priority="-100" />
         </service>
     </services>
 </container>

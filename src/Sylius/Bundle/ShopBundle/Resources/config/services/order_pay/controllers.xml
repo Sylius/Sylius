@@ -19,7 +19,7 @@
     <services>
         <service public="true" id="sylius_shop.controller.order_pay" parent="Sylius\Bundle\CoreBundle\OrderPay\Controller\OrderPayController">
             <argument type="tagged" tag="sylius_shop.order_pay.provider.pay_response" />
-            <argument type="tagged" tag="sylius_shop.order_pay.provider.pay_response" />
+            <argument type="tagged" tag="sylius_shop.order_pay.provider.after_pay_response" />
         </service>
     </services>
 </container>
