@@ -63,6 +63,7 @@ final readonly class MainMenuBuilder
             ->addChild('catalog')
             ->setLabel('sylius.menu.admin.main.catalog.header')
             ->setLabelAttribute('icon', 'list_details')
+            ->setExtra('always_open', true)
         ;
 
         $catalog
@@ -129,6 +130,7 @@ final readonly class MainMenuBuilder
             ->addChild('customers')
             ->setLabel('sylius.menu.admin.main.customers.header')
             ->setLabelAttribute('icon', 'users')
+            ->setExtra('always_open', true)
         ;
 
         $customers
@@ -197,6 +199,7 @@ final readonly class MainMenuBuilder
             ->addChild('sales')
             ->setLabel('sylius.menu.admin.main.sales.header')
             ->setLabelAttribute('icon', 'shopping_bag')
+            ->setExtra('always_open', true)
         ;
 
         $sales
