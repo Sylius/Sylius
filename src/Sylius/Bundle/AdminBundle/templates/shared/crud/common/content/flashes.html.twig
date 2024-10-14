@@ -11,23 +11,28 @@
                     {{ sylius_test_html_attribute('sylius-flash-message') }}
                     {{ sylius_test_html_attribute('sylius-flash-message-type', type) }}
                 >
-                    <div class="d-flex">
-                        <div>
-                            {{ icon({ icon: type == 'error' ? 'danger' : type }) }}
-                        </div>
-                        <div class="mx-2">
-                            <h4 class="alert-title">
-                                {% set header = 'sylius.ui.' ~ type %}
-                                {{ header|trans }}
-                            </h4>
-                            <div class="text-secondary">
-                                {% if flash is iterable %}
-                                    {{ flash.message|trans(flash.parameters, 'flashes') }}
-                                {% else %}
-                                    {{ flash|trans({}, 'flashes') }}
-                                {% endif %}
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <div>
+                                {{ icon({ icon: type == 'error' ? 'danger' : type }) }}
+                            </div>
+                            <div class="mx-2">
+                                <h4 class="alert-title">
+                                    {% set header = 'sylius.ui.' ~ type %}
+                                    {{ header|trans }}
+                                </h4>
+                                <div class="text-secondary">
+                                    {% if flash is iterable %}
+                                        {{ flash.message|trans(flash.parameters, 'flashes') }}
+                                    {% else %}
+                                        {{ flash|trans({}, 'flashes') }}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
+                        <span class="justify-self-end close" data-bs-dismiss="alert" aria-label="Close">
+                            {{ icon({icon: 'x'}) }}
+                        </span>
                     </div>
                 </div>
             {% endfor %}
