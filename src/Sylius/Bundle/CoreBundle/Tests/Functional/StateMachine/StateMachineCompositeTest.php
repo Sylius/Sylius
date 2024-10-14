@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Application\Model\BlogPost;
-use Sylius\Bundle\CoreBundle\Application\Model\Comment;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class StateMachineCompositeTest extends KernelTestCase
@@ -30,18 +29,8 @@ final class StateMachineCompositeTest extends KernelTestCase
         $this->assertTrue($stateMachine->can($subject, 'app_blog_post', 'publish'));
     }
 
-    /** @test */
-    public function it_calls_a_method_on_a_configured_adapter_for_a_given_graph(): void
-    {
-        $stateMachine = $this->getStateMachine();
-
-        $subject = new Comment();
-
-        $this->assertTrue($stateMachine->can($subject, 'app_comment', 'post'));
-    }
-
     private function getStateMachine(): StateMachineInterface
     {
-        return self::getContainer()->get('sylius_abstraction.state_machine.composite');
+        return self::getContainer()->get('sylius_abstraction.state_machine');
     }
 }
