@@ -56,7 +56,7 @@
     | **LocaleBundle**                                                                                           |                                                                                      |
     | `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext`                                       | `sylius.context.locale.request_header_based`                                         |
     | `sylius.locale_collection_provider`                                                                        | `sylius.provider.locale_collection`                                                  |
-    | `sylius.locale_collection_provider.cahced`                                                                 | `sylius.provider.locale_collection.cached`                                           |
+    | `sylius.locale_collection_provider.cached`                                                                 | `sylius.provider.locale_collection.cached`                                           |
     | `sylius.locale_provider`                                                                                   | `sylius.provider.locale`                                                             |
     | `sylius.locale_converter`                                                                                  | `sylius.converter.locale`                                                            |
     | `Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener`                             | `sylius.doctrine.listener.locale_modification`                                       |
