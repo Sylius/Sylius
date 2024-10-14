@@ -88,7 +88,7 @@ sylius_twig_hooks:
 
         'sylius_shop.base.header.content.logo':
             content:
-                template: "@SyliusShop/shared/sylius_logo.html.twig"
+                template: "@SyliusShop/shared/logo.html.twig"
 
         'sylius_shop.base.header.navbar':
             menu:
