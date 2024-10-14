@@ -12,7 +12,7 @@ imports:
 
     - { resource: "@SyliusCoreBundle/Resources/config/app/parameters.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
-    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/winzou_state_machine.php" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/workflow.yaml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/messenger.yaml" }
