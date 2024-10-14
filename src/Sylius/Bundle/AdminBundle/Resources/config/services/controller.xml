@@ -106,7 +106,7 @@
             public="false"
         >
             <argument type="service" id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler.inner" />
-            <argument type="service" id="sylius.twig.storage.filter" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
         </service>
     </services>
 </container>

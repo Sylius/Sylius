@@ -38,7 +38,7 @@
         </service>
 
         <service id="sylius.event_subscriber.admin_filter_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber">
-            <argument type="service" id="sylius.twig.storage.filter" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
             <tag name="kernel.event_subscriber" event="kernel.request" />
         </service>
     </services>
