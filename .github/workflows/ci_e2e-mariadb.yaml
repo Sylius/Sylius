@@ -77,6 +77,12 @@ jobs:
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
 
+            -   name: Require Winzou State Machine
+                if: "${{ matrix.state_machine_adapter == 'winzou_state_machine' }}"
+                run: |
+                    composer require winzou/state-machine:^0.4 --no-update   
+                    composer require winzou/state-machine-bundle:^0.6 --no-update   
+
             -   name: Prepare manifest.json files
                 run: |
                     mkdir -p public/build/admin
