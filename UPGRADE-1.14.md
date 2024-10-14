@@ -459,3 +459,6 @@
     - `sylius_shop_partial_product_show_by_slug`
     - `sylius_shop_partial_taxon_index_by_code`
     - `sylius_shop_partial_taxon_show_by_slug`
+
+1. The `sylius_core.state_machine` configuration parameter is deprecated and will be removed in 2.0. 
+   Use `sylius_state_machine_abstraction.state_machine` instead.
