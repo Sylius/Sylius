@@ -60,7 +60,7 @@ final class OrderPayController
             }
         }
 
-        throw new LogicException(sprintf('No "pay response provider" available for order (id %s).',  $order->getId()));
+        throw new LogicException(sprintf('No "pay response provider" available for order (id %s).', $order->getId()));
     }
 
     public function afterPayAction(Request $request): Response

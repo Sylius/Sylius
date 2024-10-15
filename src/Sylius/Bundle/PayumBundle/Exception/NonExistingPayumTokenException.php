@@ -19,7 +19,7 @@ final class NonExistingPayumTokenException extends \RuntimeException
     public function __construct(
         string $message = 'Payum token cannot be null.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }
