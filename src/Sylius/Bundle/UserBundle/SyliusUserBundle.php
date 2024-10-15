@@ -15,7 +15,6 @@ namespace Sylius\Bundle\UserBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusUserBundle extends AbstractResourceBundle
 {
@@ -25,11 +24,6 @@ final class SyliusUserBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
-    }
-
-    public function build(ContainerBuilder $container): void
-    {
-        parent::build($container);
     }
 
     protected function getModelNamespace(): string

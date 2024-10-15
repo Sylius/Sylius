@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Checker;
 
-use Sylius\Resource\Model\ToggleableInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 final class EnabledUserChecker implements UserCheckerInterface
 {
-    public function checkPreAuth(UserInterface $user): void
+    public function checkPreAuth(SymfonyUserInterface $user): void
     {
-        if (!$user instanceof ToggleableInterface) {
+        if (!$user instanceof UserInterface) {
             return;
         }
 
@@ -34,7 +34,7 @@ final class EnabledUserChecker implements UserCheckerInterface
         }
     }
 
-    public function checkPostAuth(UserInterface $user): void
+    public function checkPostAuth(SymfonyUserInterface $user): void
     {
     }
 }
