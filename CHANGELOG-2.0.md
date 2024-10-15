@@ -6,6 +6,9 @@
 
 - [#16680](https://github.com/Sylius/Sylius/issues/16680) [PaymentRequest] Fix incompatible dependency versions + static analysis ([@GSadee](https://github.com/GSadee))
 - [#16695](https://github.com/Sylius/Sylius/issues/16695) Move GatewayConfig to Payment component ([@GSadee](https://github.com/GSadee))
+- [#16910](https://github.com/Sylius/Sylius/issues/16910) API Platform 3 support for payment requests ([@Wojdylak](https://github.com/Wojdylak))
+- [#16928](https://github.com/Sylius/Sylius/issues/16928) Upgrade PaymentRequests to APIP3 ([@TheMilek](https://github.com/TheMilek))
+- [#16953](https://github.com/Sylius/Sylius/issues/16953) Make the hash in UpdatePaymentRequest required ([@TheMilek](https://github.com/TheMilek))
 - [#16790](https://github.com/Sylius/Sylius/issues/16790) Payment request UI ([@Prometee](https://github.com/Prometee))
 - [#16996](https://github.com/Sylius/Sylius/issues/16996) [API] Promotion Coupons as Subresource ([@Rafikooo](https://github.com/Rafikooo))
 - [#17010](https://github.com/Sylius/Sylius/issues/17010) [CS][DX] Refactor
