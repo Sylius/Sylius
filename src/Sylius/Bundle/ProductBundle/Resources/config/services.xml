@@ -62,8 +62,7 @@
             <tag name="doctrine.event_listener" event="postUpdate" lazy="true" />
         </service>
 
-        <service id="sylius.available_product_option_values_resolver" class="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolver" />
-        <service id="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface" alias="sylius.available_product_option_values_resolver" />
-        <service id="sylius.resolver.available_product_option_values" alias="sylius.available_product_option_values_resolver" />
+        <service id="sylius.resolver.available_product_option_values" class="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolver" />
+        <service id="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface" alias="sylius.resolver.available_product_option_values" />
     </services>
 </container>
