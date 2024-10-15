@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <parameters>
         <parameter key="sylius.form.type.product_review.validation_groups" type="collection">
             <parameter>sylius</parameter>
@@ -29,22 +33,26 @@
             <argument type="service" id="twig" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" priority="100" />
         </service>
+        <service id="sylius_admin.form.extension.type.catalog_promotion_action" alias="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension" />
 
         <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
             <argument type="service" id="twig" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" priority="100" />
         </service>
+        <service id="sylius_admin.form.extension.type.catalog_promotion_scope" alias="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension" />
 
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
             <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius_admin.form.type.request_password_reset" alias="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType" />
 
         <service id="Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType">
             <argument>%sylius.form.type.admin.reset_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius_admin.form.type.reset_password" alias="Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType" />
 
         <service id="sylius_admin.form.type.address" class="Sylius\Bundle\AdminBundle\Form\Type\AddressType" >
             <tag name="form.type" />
