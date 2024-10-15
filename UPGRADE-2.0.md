@@ -206,10 +206,6 @@
 | **ShopBundle**        |                       |
 | `sylius.shop.account` | `sylius_shop.account` |
 
-* The following class definitions were moved to a `CoreBundle`:
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType`
-
 * The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType` was moved to the `CoreBundle`.
 
 * The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType` was moved to the `PromotionBundle`.
