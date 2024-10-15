@@ -54,6 +54,7 @@
             <argument type="service" id="sylius.repository.order_sequence" />
             <argument type="service" id="sylius.factory.order_sequence" />
         </service>
+        <service id="Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface" alias="sylius.number_generator.sequential_order" />
 
         <service id="sylius.number_assigner.order_number" class="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner">
             <argument type="service" id="sylius.number_generator.sequential_order" />
@@ -77,5 +78,6 @@
         <service id="Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface" alias="sylius.remover.expired_carts" />
 
         <service id="sylius.factory.add_to_cart_command" class="Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory" />
+        <service id="Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface" alias="sylius.factory.add_to_cart_command" />
     </services>
 </container>
