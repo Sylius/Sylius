@@ -24,6 +24,12 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/user-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    UserLogin::class,
+);
 class UserLogin implements UserLoginInterface
 {
     public function __construct(

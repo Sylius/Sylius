@@ -15,6 +15,12 @@ namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 
+trigger_deprecation(
+    'sylius/user-bundle',
+    '1.14',
+    'The "%s" interface is deprecated and will be removed in Sylius 2.0.',
+    UserPasswordHasherInterface::class,
+);
 interface UserPasswordHasherInterface
 {
     public function hash(CredentialsHolderInterface $user): string;

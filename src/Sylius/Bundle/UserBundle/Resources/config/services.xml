@@ -70,8 +70,11 @@
 
         <service id="sylius.security.password_hasher" class="Sylius\Bundle\UserBundle\Security\UserPasswordHasher">
             <argument type="service" id="security.password_hasher_factory" />
+            <deprecated package="sylius/user-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
         </service>
-        <service id="Sylius\Component\User\Security\UserPasswordHasherInterface" alias="sylius.security.password_hasher" />
+        <service id="Sylius\Component\User\Security\UserPasswordHasherInterface" alias="sylius.security.password_hasher">
+            <deprecated package="sylius/user-bundle" version="1.14">The service %alias_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
+        </service>
 
         <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
             <argument type="service" id="sylius.security.password_hasher" />
@@ -83,8 +86,11 @@
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.user_checker" />
             <argument type="service" id="event_dispatcher" />
+            <deprecated package="sylius/user-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
         </service>
-        <service id="Sylius\Bundle\UserBundle\Security\UserLoginInterface" alias="sylius.security.user_login" />
+        <service id="Sylius\Bundle\UserBundle\Security\UserLoginInterface" alias="sylius.security.user_login">
+            <deprecated package="sylius/user-bundle" version="1.14">The service %alias_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
+        </service>
 
         <!-- Listeners -->
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener">
