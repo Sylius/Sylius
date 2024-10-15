@@ -60,7 +60,7 @@ winzou_state_machine:
                     priority: -100
                 sylius_customer_ip_assign:
                     on: ["complete"]
-                    do: ["@sylius.listener.order_customer_ip", "__invoke"]
+                    do: ["@sylius_shop.listener.order_customer_ip", "__invoke"]
                     args: ["object"]
                     priority: -500
                 sylius_control_payment_state:

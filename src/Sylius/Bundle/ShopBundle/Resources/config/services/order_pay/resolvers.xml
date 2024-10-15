@@ -17,7 +17,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius.shop.resolver.payment_to_pay" class="Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolver">
+        <service id="sylius_shop.order_pay.resolver.payment_to_pay" class="Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolver">
             <argument type="constant">Sylius\Component\Payment\Model\PaymentInterface::STATE_NEW</argument>
         </service>
     </services>

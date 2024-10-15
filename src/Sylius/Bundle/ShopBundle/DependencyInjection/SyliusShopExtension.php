@@ -37,7 +37,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
 
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
-        $container->setAlias(LocaleSwitcherInterface::class, 'sylius.shop.locale_switcher');
+        $container->setAlias(LocaleSwitcherInterface::class, 'sylius_shop.locale_switcher');
 
         if ($container->hasParameter('kernel.bundles')) {
             $bundles = $container->getParameter('kernel.bundles');
@@ -122,7 +122,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
             return;
         }
 
-        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
+        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius_shop.theme.context.channel_based']);
     }
 
     private function configureOrderPay(array $config, ContainerBuilder $container): void
