@@ -34,13 +34,13 @@ final class AddPaymentRequestHandlerTest extends TestCase
 {
     use ProphecyTrait;
 
-    private PaymentMethodRepositoryInterface|ObjectProphecy $paymentMethodRepository;
+    private ObjectProphecy|PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    private PaymentRepositoryInterface|ObjectProphecy $paymentRepository;
+    private ObjectProphecy|PaymentRepositoryInterface $paymentRepository;
 
-    private PaymentRequestFactoryInterface|ObjectProphecy $paymentRequestFactory;
+    private ObjectProphecy|PaymentRequestFactoryInterface $paymentRequestFactory;
 
-    private PaymentRequestRepositoryInterface|ObjectProphecy $paymentRequestRepository;
+    private ObjectProphecy|PaymentRequestRepositoryInterface $paymentRequestRepository;
 
     private DefaultActionProviderInterface|ObjectProphecy $defaultActionProvider;
 
@@ -63,7 +63,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
             $this->paymentRequestFactory->reveal(),
             $this->paymentRequestRepository->reveal(),
             $this->defaultActionProvider->reveal(),
-            $this->defaultPayloadProvider->reveal()
+            $this->defaultPayloadProvider->reveal(),
         );
     }
 

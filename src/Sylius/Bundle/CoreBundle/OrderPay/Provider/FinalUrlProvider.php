@@ -33,7 +33,8 @@ final class FinalUrlProvider implements FinalUrlProviderInterface
     ) {
     }
 
-    public function getUrl(?PaymentInterface $payment): string {
+    public function getUrl(?PaymentInterface $payment): string
+    {
         $context = [
             'payment' => $payment,
             'order' => $payment?->getOrder(),
