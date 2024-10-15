@@ -35,7 +35,7 @@
         <service id="sylius.mailer.shipment_email_manager.admin" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
-        <service id="sylius_admin.mailer.shipment_email_manager" alias="sylius.mailer.shipment_email_manager.admin" />
+        <service id="sylius_admin.mailer.email_manager.shipment" alias="sylius.mailer.shipment_email_manager.admin" />
         <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager.admin" />
     </services>
 </container>

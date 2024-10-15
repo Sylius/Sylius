@@ -92,8 +92,8 @@
         <service id="sylius.controller.admin.dashboard.statistics" class="Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController">
             <argument type="service" id="twig" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
+            <deprecated package="sylius/admin-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
-        <service id="sylius_admin.controller.dashboard.statistics" alias="sylius.controller.admin.dashboard.statistics" />
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">
             <argument type='service' id="sylius.customer_statistics_provider" />
