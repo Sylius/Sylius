@@ -1,7 +1,7 @@
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusPayumBundle/Resources/config/app/config.yaml" }
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
-    - { resource: "_sylius.yaml" }
     - { resource: "security.yaml" }
 
 parameters:
@@ -22,9 +22,10 @@ api_platform:
 
 sylius_api:
     enabled: '%env(bool:SYLIUS_API_ENABLED)%'
+    operations_to_remove:
+        - 'sylius_api_shop_currency_get_collection'
 
 framework:
-    assets: ~
     secret: "ch4mb3r0f5ecr3ts"
     default_locale: "%locale%"
     session:
@@ -39,6 +40,16 @@ framework:
             paths: ['%kernel.project_dir%/config/serialization']
     mailer:
         dsn: 'null://null'
+    assets:
+        packages:
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            app.admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/admin/manifest.json'
+            app.shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/shop/manifest.json'
     workflows: ~
 
 doctrine_migrations:
@@ -81,16 +92,14 @@ sylius_resource:
                 model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource
 
 services:
-    test.channel.id_filter:
-        parent: api_platform.doctrine.orm.search_filter
-        arguments: [{id: 'exact', hostname: 'partial'}]
-        tags: ['api_platform.filter']
-
-    test.country.id_filter:
-        parent: api_platform.doctrine.orm.search_filter
-        arguments: [{id: 'exact', code: 'partial'}]
-        tags: ['api_platform.filter']
-
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
         tags:
             - { name: messenger.message_handler, bus: sylius.command_bus }
+
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build/default'
+    builds:
+        admin: '%kernel.project_dir%/public/build/admin'
+        shop: '%kernel.project_dir%/public/build/shop'
+        app.admin: '%kernel.project_dir%/public/build/app/admin'
+        app.shop: '%kernel.project_dir%/public/build/app/shop'

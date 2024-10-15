@@ -75,5 +75,3 @@ final class DebugTemplateEventCommand extends Command
         return 0;
     }
 }
-
-class_alias(DebugTemplateEventCommand::class, \Sylius\Bundle\UiBundle\Command\DebugTemplateEventCommand::class);

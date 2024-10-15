@@ -1,0 +1,9 @@
+{% set form = hookable_metadata.context.form %}
+{% set product = hookable_metadata.context.product %}
+{% set attributes = sylius_test_form_attribute('options') %}
+
+{% if not product.isSimple %}
+    <div class="mb-3">
+        {{ form_row(form.options, attributes) }}
+    </div>
+{% endif %}

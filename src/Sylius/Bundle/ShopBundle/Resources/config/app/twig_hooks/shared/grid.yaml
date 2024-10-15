@@ -1,0 +1,9 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.shared.grid':
+            filters:
+                template: '@SyliusShop/shared/grid/filters.html.twig'
+            data_table:
+                template: '@SyliusShop/shared/grid/data_table.html.twig'
+            no_results:
+                template: '@SyliusShop/shared/grid/no_results.html.twig'

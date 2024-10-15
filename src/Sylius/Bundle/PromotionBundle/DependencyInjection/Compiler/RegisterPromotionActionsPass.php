@@ -21,11 +21,11 @@ final class RegisterPromotionActionsPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('sylius.registry_promotion_action') || !$container->has('sylius.form_registry.promotion_action')) {
+        if (!$container->has('sylius.registry.promotion_action') || !$container->has('sylius.form_registry.promotion_action')) {
             return;
         }
 
-        $promotionActionRegistry = $container->getDefinition('sylius.registry_promotion_action');
+        $promotionActionRegistry = $container->getDefinition('sylius.registry.promotion_action');
         $promotionActionFormTypeRegistry = $container->getDefinition('sylius.form_registry.promotion_action');
 
         $promotionActionTypeToLabelMap = [];

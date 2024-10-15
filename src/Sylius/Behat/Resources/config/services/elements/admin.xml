@@ -16,15 +16,23 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="sylius.behat.element.admin.crud.form" class="Sylius\Behat\Element\Admin\Crud\FormElement" parent="sylius.behat.element" />
+
+        <service id="sylius.behat.element.admin.crud.index.search_filter" class="Sylius\Behat\Element\Admin\Crud\Index\SearchFilterElement" parent="sylius.behat.element" />
+
         <service id="sylius.behat.element.admin.account.reset" class="Sylius\Behat\Element\Admin\Account\ResetElement" parent="sylius.behat.element" />
 
         <service id="sylius.behat.element.admin.channel.shipping_address_in_checkout_required" class="Sylius\Behat\Element\Admin\Channel\ShippingAddressInCheckoutRequiredElement" parent="sylius.behat.element" />
 
         <service id="sylius.behat.element.admin.channel.shop_billing_data" class="Sylius\Behat\Element\Admin\Channel\ShopBillingDataElement" parent="sylius.behat.element" />
 
+        <service id="sylius.behat.element.admin.notifications" class="Sylius\Behat\Element\Admin\NotificationsElement" parent="sylius.behat.element" />
+
         <service id="sylius.behat.element.admin.top_bar" class="Sylius\Behat\Element\Admin\TopBarElement" parent="sylius.behat.element" />
 
-        <service id="Sylius\Behat\Element\Admin\CatalogPromotion\FormElement" parent="sylius.behat.element" />
+        <service id="Sylius\Behat\Element\Admin\CatalogPromotion\FormElement" parent="sylius.behat.element" >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
 
         <service id="Sylius\Behat\Element\Admin\CatalogPromotion\FilterElement" parent="sylius.behat.element" />
 
@@ -45,13 +53,103 @@
         <service
             id="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface"
             class="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElement"
-            parent="sylius.behat.element"
-        />
+            parent="sylius.behat.element.admin.crud.form"
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
 
         <service
             id="Sylius\Behat\Element\Admin\Promotion\FormElementInterface"
             class="Sylius\Behat\Element\Admin\Promotion\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
+
+        <service
+            id="sylius.behat.element.admin.shipping_method.form"
+            class="Sylius\Behat\Element\Admin\ShippingMethod\FormElement"
             parent="sylius.behat.element"
         />
+
+        <service
+            id="sylius.behat.element.admin.product_option.form"
+            class="Sylius\Behat\Element\Admin\ProductOption\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
+            id="sylius.behat.element.admin.customer.form"
+            class="Sylius\Behat\Element\Admin\Customer\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
+            id="sylius.behat.element.admin.zone.form"
+            class="Sylius\Behat\Element\Admin\Zone\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
+            id="sylius.behat.element.admin.taxon.form"
+            class="Sylius\Behat\Element\Admin\Taxon\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
+
+        <service
+            id="sylius.behat.element.admin.taxon.image_form"
+            class="Sylius\Behat\Element\Admin\Taxon\ImageFormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
+            id="sylius.behat.element.admin.taxon.tree"
+            class="Sylius\Behat\Element\Admin\Taxon\TreeElement"
+            parent="sylius.behat.element"
+        />
+
+        <service
+            id="sylius.behat.element.admin.promotion_coupon.form"
+            class="Sylius\Behat\Element\Admin\PromotionCoupon\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
+            id="sylius.behat.element.admin.tax_category.form"
+            class="Sylius\Behat\Element\Admin\TaxCategory\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
+            id="sylius.behat.element.admin.currency.form"
+            class="Sylius\Behat\Element\Admin\Currency\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
+
+        <service
+            id="sylius.behat.element.admin.locale.form"
+            class="Sylius\Behat\Element\Admin\Locale\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
+
+        <service
+            id="sylius.behat.element.admin.exchange_rate.form"
+            class="Sylius\Behat\Element\Admin\ExchangeRate\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+        </service>
+
+        <service
+            id="sylius.behat.element.admin.customer_group.form"
+            class="Sylius\Behat\Element\Admin\CustomerGroup\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+        </service>
     </services>
 </container>

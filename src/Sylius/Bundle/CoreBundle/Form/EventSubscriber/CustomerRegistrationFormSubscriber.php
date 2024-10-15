@@ -18,7 +18,6 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Webmozart\Assert\Assert;
 
 final class CustomerRegistrationFormSubscriber implements EventSubscriberInterface
 {
@@ -34,19 +33,17 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
         ];
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function preSubmit(FormEvent $event): void
     {
         $rawData = $event->getData();
         $form = $event->getForm();
         $data = $form->getData();
 
-        Assert::isInstanceOf($data, CustomerInterface::class);
+        if (!$data instanceof CustomerInterface) {
+            return;
+        }
 
-        // if email is not filled in, go on
-        if (!isset($rawData['email']) || empty($rawData['email'])) {
+        if (empty($rawData['email'])) {
             return;
         }
 

@@ -26,7 +26,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
      */
     public function it_registers_collected_promotion_actions_in_the_registry(): void
     {
-        $this->setDefinition('sylius.registry_promotion_action', new Definition());
+        $this->setDefinition('sylius.registry.promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
             'action',
@@ -38,12 +38,12 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.registry_promotion_action',
+            'sylius.registry.promotion_action',
             'register',
             ['custom', new Reference('action')],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.registry_promotion_action',
+            'sylius.registry.promotion_action',
             'register',
             ['another_custom', new Reference('action')],
         );
@@ -54,7 +54,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
      */
     public function it_creates_parameter_which_maps_promotion_action_type_to_label(): void
     {
-        $this->setDefinition('sylius.registry_promotion_action', new Definition());
+        $this->setDefinition('sylius.registry.promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
             'action',
@@ -76,7 +76,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
      */
     public function it_registers_collected_promotion_actions_form_types_in_the_registry(): void
     {
-        $this->setDefinition('sylius.registry_promotion_action', new Definition());
+        $this->setDefinition('sylius.registry.promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
             'action',

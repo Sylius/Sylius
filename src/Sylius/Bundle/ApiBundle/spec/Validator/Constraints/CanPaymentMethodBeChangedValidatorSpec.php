@@ -51,15 +51,17 @@ final class CanPaymentMethodBeChangedValidatorSpec extends ObjectBehavior
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new ChangePaymentMethod('code'), $constraint])
+            ->during('validate', [new ChangePaymentMethod('code', 123, 'ORDER_TOKEN'), $constraint])
         ;
     }
 
     function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
     {
-        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChangePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            paymentId: 123,
+        );
 
         $orderRepository->findOneByTokenValue('ORDER_TOKEN')->willReturn(null);
 
@@ -74,9 +76,11 @@ final class CanPaymentMethodBeChangedValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChangePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            paymentId: 123,
+        );
 
         $orderRepository->findOneByTokenValue('ORDER_TOKEN')->willReturn($order);
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
@@ -94,9 +98,11 @@ final class CanPaymentMethodBeChangedValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChangePaymentMethod('PAYMENT_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChangePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            paymentId: 123,
+        );
 
         $orderRepository->findOneByTokenValue('ORDER_TOKEN')->willReturn($order);
         $order->getState()->willReturn(OrderInterface::STATE_NEW);

@@ -11,6 +11,7 @@ default:
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
 
@@ -18,10 +19,12 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.payment_request
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
 
                 - sylius.behat.context.api.admin.managing_payments
+                - sylius.behat.context.api.admin.managing_payment_requests
 
             filters:
                 tags: "@managing_payments&&@api"

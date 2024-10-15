@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set variant = hookable_metadata.context.variant %}
+
+<td>
+    <div class="btn-collapse collapsed" data-bs-toggle="collapse" href="#product-variant-details-{{ variant.code }}">
+        <div class="btn btn-icon icon-chevron-right">{{ icon({ icon: 'chevron_right' }) }}</div>
+        <div class="btn btn-icon icon-chevron-down">{{ icon({ icon: 'chevron_down' }) }}</div>
+    </div>
+</td>

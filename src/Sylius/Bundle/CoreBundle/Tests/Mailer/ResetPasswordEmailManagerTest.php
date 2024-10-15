@@ -15,14 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Mailer;
 
 use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
 use Sylius\Component\Core\Model\AdminUser;
-use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ResetPasswordEmailManagerTest extends KernelTestCase
 {
-    use SwiftmailerAssertionTrait;
-
     private const RECIPIENT_EMAIL = 'sylius@example.com';
 
     private ResetPasswordEmailManagerInterface $resetPasswordEmailManager;
@@ -44,10 +41,6 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
     /** @test */
     public function it_sends_admin_reset_password_email(): void
     {
-        if (self::isSwiftmailerTestEnv()) {
-            $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
-        }
-
         $this->resetPasswordEmailManager->sendAdminResetPasswordEmail($this->adminUser, 'en_US');
 
         self::assertEmailCount(1);

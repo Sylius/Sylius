@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\ContextProvider;
 
-use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Sylius\Bundle\UiBundle\Registry\Block;
 
 trigger_deprecation(
     'sylius/ui-bundle',
@@ -23,12 +23,12 @@ trigger_deprecation(
 );
 final class DefaultContextProvider implements ContextProviderInterface
 {
-    public function provide(array $templateContext, TemplateBlock $templateBlock): array
+    public function provide(array $templateContext, Block $templateBlock): array
     {
         return array_replace($templateBlock->getContext(), $templateContext);
     }
 
-    public function supports(TemplateBlock $templateBlock): bool
+    public function supports(Block $templateBlock): bool
     {
         return true;
     }

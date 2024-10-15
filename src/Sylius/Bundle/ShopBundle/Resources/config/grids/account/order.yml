@@ -21,7 +21,7 @@ sylius_grid:
                     label: sylius.ui.number
                     sortable: ~
                     options:
-                        template: "@SyliusShop/Account/Order/Grid/Field/number.html.twig"
+                        template: "@SyliusShop/account/order/grid/field/number.html.twig"
                 checkoutCompletedAt:
                     type: datetime
                     label: sylius.ui.date
@@ -32,22 +32,22 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.ship_to
                     options:
-                        template: "@SyliusShop/Account/Order/Grid/Field/address.html.twig"
+                        template: "@SyliusShop/account/order/grid/field/address.html.twig"
                 total:
                     type: twig
                     label: sylius.ui.total
                     path: .
                     sortable: total
                     options:
-                        template: "@SyliusShop/Account/Order/Grid/Field/total.html.twig"
+                        template: "@SyliusShop/account/order/grid/field/total.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/label.html.twig"
+                        template: "@SyliusUi/grid/field/label.html.twig"
                         vars:
-                            labels: "@SyliusShop/Account/Order/Label/State"
+                            labels: "@SyliusShop/account/order/label/state"
             actions:
                 item:
                     show:

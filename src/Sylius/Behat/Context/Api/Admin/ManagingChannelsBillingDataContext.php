@@ -13,22 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingChannelsBillingDataContext implements Context
+final readonly class ManagingChannelsBillingDataContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -39,17 +36,17 @@ final class ManagingChannelsBillingDataContext implements Context
     {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
 
-        Assert::same($shopBillingData->getCompany(), $company);
+        Assert::same($shopBillingData['company'], $company);
     }
 
     /**
      * @Then /^(this channel) tax ID should be "([^"]+)"$/
      */
-    public function thisChanneTaxIdShouldBe(ChannelInterface $channel, string $taxId): void
+    public function thisChannelTaxIdShouldBe(ChannelInterface $channel, string $taxId): void
     {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
 
-        Assert::same($shopBillingData->getTaxId(), $taxId);
+        Assert::same($shopBillingData['taxId'], $taxId);
     }
 
     /**
@@ -65,19 +62,19 @@ final class ManagingChannelsBillingDataContext implements Context
     ): void {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
 
-        Assert::same($shopBillingData->getStreet(), $street);
-        Assert::same($shopBillingData->getPostcode(), $postcode);
-        Assert::same($shopBillingData->getCity(), $city);
-        Assert::same($shopBillingData->getCountryCode(), $country->getCode());
+        Assert::same($shopBillingData['street'], $street);
+        Assert::same($shopBillingData['postcode'], $postcode);
+        Assert::same($shopBillingData['city'], $city);
+        Assert::same($shopBillingData['countryCode'], $country->getCode());
     }
 
-    private function getShopBillingDataFromChannel(ChannelInterface $channel): ShopBillingDataInterface
+    /**
+     * @return array<string, string>
+     */
+    private function getShopBillingDataFromChannel(ChannelInterface $channel): array
     {
-        $this->client->show(Resources::CHANNELS, $channel->getCode());
+        $response = $this->client->show(Resources::CHANNELS, $channel->getCode());
 
-        /** @var ShopBillingDataInterface $shopBillingData */
-        $shopBillingData = $this->iriConverter->getResourceFromIri($this->responseChecker->getValue($this->client->getLastResponse(), 'shopBillingData'));
-
-        return $shopBillingData;
+        return $this->responseChecker->getValue($response, 'shopBillingData');
     }
 }

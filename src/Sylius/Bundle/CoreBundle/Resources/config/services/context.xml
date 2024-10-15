@@ -20,11 +20,6 @@
             <argument type="service" id="request_stack" />
         </service>
 
-        <service id="sylius.theme.context.channel_based" class="Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext" public="false">
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.repository.theme" />
-        </service>
-
         <service id="sylius.context.shopper" class="Sylius\Component\Core\Context\ShopperContext" lazy="true">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.currency" />

@@ -34,15 +34,16 @@ final class DoctrineCollectionValuesNormalizerSpec extends ObjectBehavior
         $this->supportsNormalization($collection, null, ['collection_values' => true])->shouldReturn(true);
     }
 
-    function it_normalizes_collection_values(
-        NormalizerInterface $normalizer,
-    ): void {
+    function it_normalizes_collection_values(NormalizerInterface $normalizer): void
+    {
         $this->setNormalizer($normalizer);
 
-        $collection = new ArrayCollection(['1' => ['id' => 1], '2' => ['id' => 2]]);
+        $normalizer
+            ->normalize([['id' => 1], ['id' => 2]], null, ['collection_values' => true])
+            ->willReturn([])
+            ->shouldBeCalled()
+        ;
 
-        $this->normalize($collection, null, ['collection_values' => true]);
-
-        $normalizer->normalize([['id' => 1], ['id' => 2]], null, ['collection_values' => true])->shouldHaveBeenCalled();
+        $this->normalize(new ArrayCollection(['1' => ['id' => 1], '2' => ['id' => 2]]), null, ['collection_values' => true]);
     }
 }

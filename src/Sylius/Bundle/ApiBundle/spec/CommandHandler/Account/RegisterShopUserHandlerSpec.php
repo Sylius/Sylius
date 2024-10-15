@@ -15,9 +15,10 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -26,12 +27,13 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class RegisterShopUserHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
@@ -50,11 +52,6 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
-    }
-
     function it_creates_a_shop_user_with_given_data(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
@@ -66,9 +63,15 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         GeneratorInterface $generator,
         MessageBusInterface $commandBus,
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true);
-        $command->setChannelCode('CHANNEL_CODE');
-        $command->setLocaleCode('en_US');
+        $command = new RegisterShopUser(
+            channelCode: 'CHANNEL_CODE',
+            localeCode: 'en_US',
+            firstName: 'Will',
+            lastName: 'Smith',
+            email: 'WILL.SMITH@example.com',
+            password: 'iamrobot',
+            subscribedToNewsletter: true,
+        );
 
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerResolver->resolve('WILL.SMITH@example.com')->willReturn($customer);
@@ -96,7 +99,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
             ->willReturn(new Envelope($sendRegistrationEmailCommand))
         ;
 
-        $sendVerificationEmailCommand = new SendAccountVerificationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
+        $sendVerificationEmailCommand = new SendShopUserVerificationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
         $commandBus
             ->dispatch($sendVerificationEmailCommand, [new DispatchAfterCurrentBusStamp()])
             ->shouldBeCalled()
@@ -116,9 +119,15 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         MessageBusInterface $commandBus,
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true);
-        $command->setChannelCode('CHANNEL_CODE');
-        $command->setLocaleCode('en_US');
+        $command = new RegisterShopUser(
+            channelCode: 'CHANNEL_CODE',
+            localeCode: 'en_US',
+            firstName: 'Will',
+            lastName: 'Smith',
+            email: 'WILL.SMITH@example.com',
+            password: 'iamrobot',
+            subscribedToNewsletter: true,
+        );
 
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerResolver->resolve('WILL.SMITH@example.com')->willReturn($customer);
@@ -169,7 +178,18 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\DomainException::class)
-            ->during('__invoke', [new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true)])
+            ->during(
+                '__invoke',
+                [new RegisterShopUser(
+                    channelCode: 'CHANNEL_CODE',
+                    localeCode: 'en_US',
+                    firstName: 'Will',
+                    lastName: 'Smith',
+                    email: 'WILL.SMITH@example.com',
+                    password: 'iamrobot',
+                    subscribedToNewsletter: true,
+                )],
+            )
         ;
     }
 }

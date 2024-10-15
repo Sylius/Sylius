@@ -60,12 +60,12 @@ trait OrderPlacerTrait
         $this->dispatchShippingMethodChooseCommand(
             $tokenValue,
             'UPS',
-            (string) $cart->getShipments()->first()->getId(),
+            $cart->getShipments()->first()->getId(),
         );
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
             'CASH_ON_DELIVERY',
-            (string) $cart->getLastPayment()->getId(),
+            $cart->getLastPayment()->getId(),
         );
         $order = $this->dispatchCompleteOrderCommand($tokenValue);
         $this->payOrder($order);
@@ -75,8 +75,8 @@ trait OrderPlacerTrait
     }
 
     protected function placeOrder(
-        string $tokenValue,
-        string $email = 'sylius@example.com',
+        string $tokenValue = 'token',
+        string $email = 'shop@example.com',
         string $productVariantCode = 'MUG_BLUE',
         int $quantity = 3,
         ?\DateTimeImmutable $checkoutCompletedAt = null,
@@ -84,18 +84,18 @@ trait OrderPlacerTrait
     ): OrderInterface {
         $this->checkSetUpOrderPlacerCalled();
 
-        $this->pickUpCart($tokenValue);
+        $this->pickUpCart(tokenValue: $tokenValue, email: $email);
         $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
         $cart = $this->updateCartWithAddressAndCouponCode($tokenValue, $email, $couponCode);
         $this->dispatchShippingMethodChooseCommand(
             $tokenValue,
             'UPS',
-            (string) $cart->getShipments()->first()->getId(),
+            $cart->getShipments()->first()->getId(),
         );
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
             'CASH_ON_DELIVERY',
-            (string) $cart->getLastPayment()->getId(),
+            $cart->getLastPayment()->getId(),
         );
 
         $order = $this->dispatchCompleteOrderCommand($tokenValue);
@@ -108,11 +108,13 @@ trait OrderPlacerTrait
     private function dispatchShippingMethodChooseCommand(
         string $tokenValue,
         string $shippingMethodCode = 'UPS',
-        ?string $subresourceId = null,
+        ?int $shipmentId = null,
     ): OrderInterface {
-        $chooseShippingMethodCommand = new ChooseShippingMethod($shippingMethodCode);
-        $chooseShippingMethodCommand->setOrderTokenValue($tokenValue);
-        $chooseShippingMethodCommand->setSubresourceId($subresourceId);
+        $chooseShippingMethodCommand = new ChooseShippingMethod(
+            orderTokenValue: $tokenValue,
+            shipmentId: $shipmentId,
+            shippingMethodCode: $shippingMethodCode,
+        );
 
         $envelope = $this->commandBus->dispatch($chooseShippingMethodCommand);
 
@@ -122,11 +124,13 @@ trait OrderPlacerTrait
     private function dispatchPaymentMethodChooseCommand(
         string $tokenValue,
         string $paymentMethodCode = 'CASH_ON_DELIVERY',
-        ?string $subresourceId = null,
+        ?int $paymentId = null,
     ): OrderInterface {
-        $choosePaymentMethodCommand = new ChoosePaymentMethod($paymentMethodCode);
-        $choosePaymentMethodCommand->setOrderTokenValue($tokenValue);
-        $choosePaymentMethodCommand->setSubresourceId($subresourceId);
+        $choosePaymentMethodCommand = new ChoosePaymentMethod(
+            orderTokenValue: $tokenValue,
+            paymentId: $paymentId,
+            paymentMethodCode: $paymentMethodCode,
+        );
 
         $envelope = $this->commandBus->dispatch($choosePaymentMethodCommand);
 
@@ -136,8 +140,7 @@ trait OrderPlacerTrait
     protected function dispatchCompleteOrderCommand(
         string $tokenValue,
     ): OrderInterface {
-        $completeOrderCommand = new CompleteOrder();
-        $completeOrderCommand->setOrderTokenValue($tokenValue);
+        $completeOrderCommand = new CompleteOrder(orderTokenValue: $tokenValue);
         $envelope = $this->commandBus->dispatch($completeOrderCommand);
 
         return $envelope->last(HandledStamp::class)->getResult();
@@ -175,23 +178,31 @@ trait OrderPlacerTrait
         return $order;
     }
 
-    private function setCheckoutCompletedAt(
-        OrderInterface $order,
-        ?\DateTimeImmutable $checkoutCompletedAt,
-    ): OrderInterface {
+    protected function refundOrder(OrderInterface $order): OrderInterface
+    {
         $objectManager = $this->get('doctrine.orm.entity_manager');
 
-        $order->setCheckoutCompletedAt($checkoutCompletedAt);
+        $stateMachineFactory = $this->get('sm.factory');
+
+        $orderStateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
+        $orderStateMachine->apply(OrderPaymentTransitions::TRANSITION_REFUND);
+
+        $paymentStateMachine = $stateMachineFactory->get($order->getLastPayment(), PaymentTransitions::GRAPH);
+        $paymentStateMachine->apply(PaymentTransitions::TRANSITION_REFUND);
 
         $objectManager->flush();
 
         return $order;
     }
 
-    protected function pickUpCart(string $tokenValue = 'nAWw2jewpA', string $channelCode = 'WEB'): string
+    protected function pickUpCart(string $tokenValue = 'token', string $channelCode = 'WEB', ?string $email = null, string $localeCode = 'en_US'): string
     {
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode($channelCode);
+        $pickupCartCommand = new PickupCart(
+            channelCode: $channelCode,
+            localeCode: $localeCode,
+            email: $email,
+            tokenValue: $tokenValue,
+        );
 
         $this->commandBus->dispatch($pickupCartCommand);
 
@@ -200,8 +211,11 @@ trait OrderPlacerTrait
 
     protected function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue): string
     {
-        $addItemToCartCommand = new AddItemToCart($productVariantCode, $quantity);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $addItemToCartCommand = new AddItemToCart(
+            orderTokenValue: $tokenValue,
+            productVariantCode: $productVariantCode,
+            quantity: $quantity,
+        );
 
         $this->commandBus->dispatch($addItemToCartCommand);
 
@@ -228,12 +242,29 @@ trait OrderPlacerTrait
         $address->setCountryCode('US');
         $address->setPostcode('90000');
 
-        $updateCartCommand = new UpdateCart(email: $email, billingAddress: $address, couponCode: $couponCode);
-        $updateCartCommand->setOrderTokenValue($tokenValue);
+        $updateCartCommand = new UpdateCart(
+            orderTokenValue: $tokenValue,
+            email: $email,
+            billingAddress: $address,
+            couponCode: $couponCode,
+        );
 
         $envelope = $this->commandBus->dispatch($updateCartCommand);
 
         return $envelope->last(HandledStamp::class)->getResult();
+    }
+
+    private function setCheckoutCompletedAt(
+        OrderInterface $order,
+        ?\DateTimeImmutable $checkoutCompletedAt,
+    ): OrderInterface {
+        $objectManager = $this->get('doctrine.orm.entity_manager');
+
+        $order->setCheckoutCompletedAt($checkoutCompletedAt);
+
+        $objectManager->flush();
+
+        return $order;
     }
 
     private function checkSetUpOrderPlacerCalled(): void

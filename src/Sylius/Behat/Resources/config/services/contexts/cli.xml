@@ -15,12 +15,17 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Behat\Context\Cli\ShowingAvailablePluginsContext">
-            <argument type="service" id="kernel" />
-        </service>
-
         <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext">
             <argument type="service" id="kernel" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.installer.checker.command_directory" />
+            <argument type="service" id="sylius.setup.currency" />
+            <argument type="service" id="sylius.setup.locale" />
+            <argument type="service" id="sylius.setup.channel" />
+            <argument type="service" id="sylius.factory.admin_user" />
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="validator" />
+            <argument>%sylius_core.public_dir%</argument>
         </service>
 
         <service id="sylius.behat.context.cli.cancel_unpaid_orders" class="Sylius\Behat\Context\Cli\CancelUnpaidOrdersContext">

@@ -30,17 +30,11 @@
         <service id="sylius.admin.menu_builder.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="router" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.main" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.main" />
         </service>
         <service id="sylius_admin.menu_builder.main" alias="sylius.admin.menu_builder.main" />
-
-        <service id="sylius.admin.menu_builder.promotion.update" class="Sylius\Bundle\AdminBundle\Menu\PromotionUpdateMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.promotion.update" />
-            <deprecated package="sylius/admin-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
-        </service>
 
         <service id="sylius.admin.menu_builder.order.show" class="Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder">
             <argument type="service" id="knp_menu.factory" />

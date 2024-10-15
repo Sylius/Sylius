@@ -15,30 +15,55 @@ namespace Sylius\Behat\Client;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class RequestBuilder
+final class RequestBuilder implements RequestBuilderInterface
 {
+    /** @var array<string, mixed> */
     private array $parameters = [];
 
+    /** @var array<string, mixed> */
     private array $headers = [];
 
+    /** @var array<string, mixed> */
     private array $content = [];
 
+    /** @var array<string, UploadedFile> */
     private array $files = [];
 
     private function __construct(
-        private string $uri,
-        private string $method,
+        private readonly string $uri,
+        private readonly string $method,
     ) {
     }
 
+    /** @deprecated Use method-specific factory methods instead */
     public static function create(string $uri, string $method): self
     {
         return new self($uri, $method);
     }
 
-    public function withHeader(string $name, string $value): self
+    public static function createGet(string $uri): self
     {
-        $this->headers[$name] = $value;
+        return new self($uri, 'GET');
+    }
+
+    public static function createPost(string $uri): RequestBuilderInterface
+    {
+        return new self($uri, 'POST');
+    }
+
+    public static function createPut(string $uri): self
+    {
+        return new self($uri, 'PUT');
+    }
+
+    public static function createDelete(string $uri): self
+    {
+        return new self($uri, 'DELETE');
+    }
+
+    public function withHeader(string $key, string $value): self
+    {
+        $this->headers[$key] = $value;
 
         return $this;
     }

@@ -15,12 +15,12 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class ProductDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
@@ -35,7 +35,7 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
@@ -43,6 +43,11 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         $data = $this->denormalizeOptions($data, $context);
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ProductInterface::class => false];
     }
 
     /**

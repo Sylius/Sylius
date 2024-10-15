@@ -1,0 +1,5 @@
+{% set form = hookable_metadata.context.form %}
+
+<td>
+    {{ form_row(form.quantity, sylius_test_form_attribute('cart-item-quantity')|sylius_merge_recursive({label: false, row_attr: {'class': 'mt-3'}})) }}
+</td>

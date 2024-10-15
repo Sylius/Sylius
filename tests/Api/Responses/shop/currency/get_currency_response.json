@@ -1,7 +1,7 @@
 {
     "@context": "\/api\/v2\/contexts\/Currency",
-    "@id": "\/api\/v2\/shop\/currencies\/GBP",
+    "@id": "\/api\/v2\/shop\/currencies\/USD",
     "@type": "Currency",
-    "code": "GBP",
-    "name": "British Pound"
+    "code": "USD",
+    "name": "US Dollar"
 }

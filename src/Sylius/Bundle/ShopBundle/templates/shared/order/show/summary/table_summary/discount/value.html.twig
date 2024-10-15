@@ -1,0 +1,21 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set order = hookable_metadata.context.order %}
+{% set order_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set order_promotions = sylius_aggregate_adjustments(order.adjustmentsRecursively(order_promotion_adjustment)) %}
+
+<td class="text-end" {{ sylius_test_html_attribute('promotion-total') }}>
+    {{ money.convertAndFormat(order.orderPromotionTotal)  }}
+
+    {% if order.orderPromotionTotal != 0 %}
+        <div {{ sylius_test_html_attribute('order-promotions-details') }}>
+            {% for key, value in order_promotions %}
+                <div>
+                    <small class="text-body-tertiary">
+                        {{ key }}: {{ money.convertAndFormat(value) }}
+                    </small>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</td>

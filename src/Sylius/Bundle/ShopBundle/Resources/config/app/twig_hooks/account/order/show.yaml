@@ -1,0 +1,21 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.order.show':
+            header:
+                template: "@SyliusShop/account/order/show/header.html.twig"
+            summary:
+                template: "@SyliusShop/shared/order/show/summary.html.twig"
+
+        'sylius_shop.account.order.show.header':
+            buttons:
+                template: "@SyliusShop/account/order/show/header/buttons.html.twig"
+            details:
+                template: "@SyliusShop/account/order/show/header/details.html.twig"
+
+        'sylius_shop.account.order.show.header.details':
+            state:
+                template: "@SyliusShop/account/order/show/header/details/state.html.twig"
+            completed_at:
+                template: "@SyliusShop/account/order/show/header/details/completed_at.html.twig"
+            currency:
+                template: "@SyliusShop/account/order/show/header/details/currency.html.twig"

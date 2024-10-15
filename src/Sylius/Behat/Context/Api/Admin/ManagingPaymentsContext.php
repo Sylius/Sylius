@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -27,12 +26,11 @@ use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
-final class ManagingPaymentsContext implements Context
+final readonly class ManagingPaymentsContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private IriConverterInterface $iriConverter,
         private string $apiUrlPrefix,
     ) {
@@ -61,6 +59,20 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
+     * @When I want to view the payment requests of the first payment
+     */
+    public function iWantToViewThePaymentRequestsOfTheFirstPayment(): void
+    {
+        $response = $this->client->getLastResponse();
+
+        $this->client->subResourceIndex(
+            Resources::PAYMENTS,
+            Resources::PAYMENT_REQUESTS,
+            (string) $this->responseChecker->getCollection($response)[0]['id'],
+        );
+    }
+
+    /**
      * @Then I should see the details of order :order
      */
     public function iShouldSeeOrderWithDetails(OrderInterface $order): void
@@ -69,7 +81,7 @@ final class ManagingPaymentsContext implements Context
             $this->responseChecker->hasItemWithValue(
                 $this->client->getLastResponse(),
                 'order',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($order, 'admin'),
             ),
             sprintf('Order with number %s does not exist', $order->getNumber()),
         );
@@ -104,6 +116,15 @@ final class ManagingPaymentsContext implements Context
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
     {
         $this->client->addFilter('order.channel.code', $channel->getCode());
+    }
+
+    /**
+     * @When /^I sort payments by date in (ascending|descending) order$/
+     */
+    public function iSortPaymentsByRegistrationDate(string $order): void
+    {
+        $this->client->sort(['createdAt' => str_starts_with($order, 'de') ? 'desc' : 'asc']);
+        $this->client->filter();
     }
 
     /**
@@ -200,7 +221,7 @@ final class ManagingPaymentsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($order, 'admin'),
         ));
     }
 
@@ -212,7 +233,7 @@ final class ManagingPaymentsContext implements Context
         Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($order, 'admin'),
         ));
     }
 }

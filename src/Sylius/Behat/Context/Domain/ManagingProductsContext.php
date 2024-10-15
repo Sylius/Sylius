@@ -54,7 +54,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I delete the ("[^"]+" product)$/
      */
-    public function iDeleteTheProduct(ProductInterface $product)
+    public function iDeleteTheProduct(ProductInterface $product): void
     {
         $this->productRepository->remove($product);
     }

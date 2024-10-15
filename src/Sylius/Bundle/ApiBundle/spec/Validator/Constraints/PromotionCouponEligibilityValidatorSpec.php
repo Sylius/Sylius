@@ -65,8 +65,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         $this->initialize($executionContext);
         $constraint = new PromotionCouponEligibility();
 
-        $value = UpdateCart::createWithCouponData('couponCode');
-        $value->setOrderTokenValue('token');
+        $value = new UpdateCart(couponCode: 'couponCode', orderTokenValue: 'token');
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
         $orderRepository->findCartByTokenValue('token')->willReturn($cart);
@@ -93,8 +92,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         $constraint = new PromotionCouponEligibility();
         $constraint->message = 'message';
 
-        $value = UpdateCart::createWithCouponData('couponCode');
-        $value->setOrderTokenValue('token');
+        $value = new UpdateCart(couponCode: 'couponCode', orderTokenValue: 'token');
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
         $orderRepository->findCartByTokenValue('token')->willReturn($cart);
@@ -120,8 +118,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         $constraint = new PromotionCouponEligibility();
         $constraint->message = 'message';
 
-        $value = UpdateCart::createWithCouponData('couponCode');
-        $value->setOrderTokenValue('token');
+        $value = new UpdateCart(couponCode: 'couponCode', orderTokenValue: 'token');
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn(null);
 

@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class Configuration implements ConfigurationInterface
+final readonly class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
@@ -34,13 +34,15 @@ final class Configuration implements ConfigurationInterface
                 ->booleanNode('legacy_error_handling')
                     ->defaultFalse()
                 ->end()
-            ->end()
-            ->children()
                 ->arrayNode('order_states_to_filter_out')
                     ->scalarPrototype()->end()
                 ->end()
-            ->end()
-            ->children()
+                ->arrayNode('non_archived_classes')
+                    ->scalarPrototype()->end()
+                ->end()
+                ->arrayNode('operations_to_remove')
+                    ->scalarPrototype()->end()
+                ->end()
                 ->arrayNode('serialization_groups')
                 ->addDefaultsIfNotSet()
                     ->children()
@@ -52,13 +54,9 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-            ->children()
                 ->variableNode('default_image_filter')
                     ->defaultValue('sylius_original')
                 ->end()
-            ->end()
-            ->children()
                 ->arrayNode('filter_eager_loading_extension')
                     ->addDefaultsIfNotSet()
                     ->children()
