@@ -10,13 +10,13 @@
 
         <!-- Generic -->
         <service id="sylius.payum_action.authorize_payment" class="Sylius\Bundle\PayumBundle\Action\AuthorizePaymentAction">
-            <argument type="service" id="sylius_payum.factory.resolve_next_route" />
+            <argument type="service" id="sylius.payment_description_provider" />
             <tag name="payum.action" all="true" alias="sylius.authorize_payment" />
         </service>
         <service id="sylius_payum.action.authorize_payment" alias="sylius.payum_action.authorize_payment" />
 
         <service id="sylius.payum_action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
-            <argument type="service" id="sylius_payum.factory.resolve_next_route" />
+            <argument type="service" id="sylius.payment_description_provider" />
             <tag name="payum.action" all="true" alias="sylius.capture_payment" />
         </service>
         <service id="sylius_payum.action.capture_payment" alias="sylius.payum_action.capture_payment" />
