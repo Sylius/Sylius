@@ -36,7 +36,6 @@
             <argument type="service" id="sylius_admin.console.command_factory.question" />
             <tag name="console.command" />
         </service>
-        <service id="sylius_admin.console.command.create_admin_user" alias="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand" />
 
         <service id="sylius_admin.console.command.change_admin_user_password" class="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
             <argument type="service" id="sylius.repository.admin_user" />
@@ -44,7 +43,6 @@
             <argument type="service" id="sylius_admin.console.command_factory.question" />
             <tag name="console.command" />
         </service>
-        <service id="sylius_admin.console.command.change_admin_user_password" alias="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand" />
 
         <service id="sylius_admin.command_handler.create_admin_user" class="Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler">
             <argument type="service" id="sylius.repository.admin_user" />
@@ -54,7 +52,6 @@
             <argument>%sylius_admin.command_handler.create_admin_user.validation_groups%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
-        <service id="sylius_admin.command_handler.create_admin_user" alias="Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler" />
 
         <service id="sylius.console.command_factory.question" class="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory" />
         <service id="sylius_admin.console.command_factory.question" alias="sylius.console.command_factory.question" />
