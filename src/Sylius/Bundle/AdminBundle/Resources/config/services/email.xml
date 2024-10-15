@@ -19,10 +19,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.mailer.shipment_email_manager.admin" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
+        <service id="sylius_admin.mailer.email_manager.shipment" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
-        <service id="sylius_admin.mailer.shipment_email_manager" alias="sylius.mailer.shipment_email_manager.admin" />
-        <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager.admin" />
+        <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius_admin.mailer.email_manager.shipment" />
     </services>
 </container>

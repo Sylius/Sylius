@@ -5,12 +5,12 @@ sylius_admin_ajax:
 sylius_admin_dashboard:
     path: /
     defaults:
-        _controller: sylius.controller.admin.dashboard
+        _controller: sylius_admin.controller.dashboard
 
 sylius_admin_impersonate_user:
     path: /impersonate/{username}
     defaults:
-        _controller: sylius.controller.impersonate_user::impersonateAction
+        _controller: sylius_admin.controller.impersonate_user::impersonateAction
         username: $username
 
 sylius_admin_live_component:
