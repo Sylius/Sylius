@@ -28,7 +28,7 @@ sylius_admin_catalog_promotion_delete:
     path: /catalog-promotions/{code}
     methods: [DELETE]
     defaults:
-        _controller: Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction
+        _controller: sylius_admin.controller.remove_catalog_promotion
         _sylius:
             section: admin
             permission: true

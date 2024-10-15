@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="services/**/*.xml" />
     </imports>
@@ -29,14 +33,14 @@
         <service id="sylius_admin.console.command.create_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_locale.locale%</argument>
-            <argument type="service" id="sylius.console.command_factory.question" />
+            <argument type="service" id="sylius_admin.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
         <service id="sylius_admin.console.command.change_admin_user_password" class="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.security.password_updater" />
-            <argument type="service" id="sylius.console.command_factory.question" />
+            <argument type="service" id="sylius_admin.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
@@ -50,13 +54,14 @@
         </service>
 
         <service id="sylius.console.command_factory.question" class="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory" />
-
+        <service id="sylius_admin.console.command_factory.question" alias="sylius.console.command_factory.question" />
         <service id="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface" alias="sylius.console.command_factory.question" />
 
         <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
             <argument type="service" id="security.token_storage" />
             <tag name="sylius.context.locale" priority="128" />
         </service>
+        <service id="sylius_admin.context.locale.admin_based" alias="sylius.context.locale.admin_based" />
 
         <service id="sylius.section_resolver.admin_uri_based_section_resolver" class="Sylius\Bundle\AdminBundle\SectionResolver\AdminUriBasedSectionResolver">
             <argument>/admin</argument>
@@ -68,6 +73,7 @@
             <argument>%sylius.admin.notification.frequency%</argument>
             <tag name="twig.extension" />
         </service>
+        <service id="sylius_admin.twig.extension.notification_widget" alias="sylius.twig.extension.widget.admin_notification" />
 
         <service id="sylius.twig.extension.attribute" class="Sylius\Bundle\AdminBundle\Twig\AttributeExtension">
             <argument type="service" id="sylius.registry.attribute_type" />
@@ -78,20 +84,24 @@
             <argument>%sylius.admin.shop_enabled%</argument>
             <tag name="twig.extension" />
         </service>
+        <service id="sylius_admin.twig.extension.shop" alias="sylius.twig.extension.shop" />
 
         <service id="sylius.twig.extension.channels_currencies" class="Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="twig.extension"/>
         </service>
+        <service id="sylius_admin.twig.extension.channels_currencies" alias="sylius.twig.extension.channels_currencies" />
 
         <service id="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension">
             <tag name="twig.extension"/>
         </service>
+        <service id="sylius_admin.twig.extension.order_unit_taxes" alias="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension" />
 
         <service id="Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="twig.extension" />
         </service>
+        <service id="sylius_admin.twig.extension.channel_name" alias="Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension" />
 
         <service id="Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension">
             <argument>%sylius.gateway_factories%</argument>

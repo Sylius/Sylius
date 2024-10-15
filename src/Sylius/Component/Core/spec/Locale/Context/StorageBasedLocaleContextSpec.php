@@ -22,7 +22,7 @@ use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Symfony\Component\Security\Core\Exception\SessionUnavailableException;
+use Sylius\Resource\Exception\StorageUnavailableException;
 
 final class StorageBasedLocaleContextSpec extends ObjectBehavior
 {
@@ -72,20 +72,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
     ): void {
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
         $channelContext->getChannel()->willReturn($channel);
-        $localeStorage->get($channel)->willThrow(\RuntimeException::class);
-
-        $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
-    }
-
-    function it_throws_an_exception_when_session_is_unavailable(
-        ChannelContextInterface $channelContext,
-        LocaleStorageInterface $localeStorage,
-        LocaleProviderInterface $localeProvider,
-        ChannelInterface $channel,
-    ): void {
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
-        $channelContext->getChannel()->willReturn($channel);
-        $localeStorage->get($channel)->willThrow(SessionUnavailableException::class);
+        $localeStorage->get($channel)->willThrow(StorageUnavailableException::class);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }

@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -19,14 +23,18 @@
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.customer.show" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.customer.show" />
         </service>
+        <service id="sylius_admin.menu_builder.customer.show" alias="sylius.admin.menu_builder.customer.show" />
 
         <service id="sylius.admin.menu_builder.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="router" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.main" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.main" />
         </service>
+        <service id="sylius_admin.menu_builder.main" alias="sylius.admin.menu_builder.main" />
 
         <service id="sylius.admin.menu_builder.order.show" class="Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
@@ -34,24 +42,32 @@
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="security.csrf.token_manager" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.order.show" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.order.show" />
         </service>
+        <service id="sylius_admin.menu_builder.order.show" alias="sylius.admin.menu_builder.order.show" />
 
         <service id="sylius.admin.menu_builder.product_form" class="Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product_form" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.product.form" />
         </service>
+        <service id="sylius_admin.menu_builder.product.form" alias="sylius.admin.menu_builder.product_form" />
 
         <service id="sylius.admin.menu_builder.product.update" class="Sylius\Bundle\AdminBundle\Menu\ProductUpdateMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product.update" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.product.update" />
         </service>
+        <service id="sylius_admin.menu_builder.product.update" alias="sylius.admin.menu_builder.product.update" />
 
         <service id="sylius.admin.menu_builder.product_variant_form" class="Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product_variant_form" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.product_variant.form" />
         </service>
+        <service id="sylius_admin.menu_builder.product_variant.form" alias="sylius.admin.menu_builder.product_variant_form" />
     </services>
 </container>

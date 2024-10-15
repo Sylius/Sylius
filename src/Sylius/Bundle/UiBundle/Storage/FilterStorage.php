@@ -16,6 +16,12 @@ namespace Sylius\Bundle\UiBundle\Storage;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+trigger_deprecation(
+    'sylius/ui-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use Sylius\Bundle\GridBundle\Storage\SessionFilterStorage from sylius/grid-bundle version 1.13 or later instead.',
+    FilterStorage::class,
+);
 final readonly class FilterStorage implements FilterStorageInterface
 {
     public function __construct(private RequestStack $requestStack)
