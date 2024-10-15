@@ -1,5 +1,23 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.7 (2024-10-15)
+
+#### Details
+
+- [#17012](https://github.com/Sylius/Sylius/issues/17012) [CI] Remove unused social media notifications action +  improvements ([@GSadee](https://github.com/GSadee))
+- [#17017](https://github.com/Sylius/Sylius/issues/17017) [API] Add missing endpoint for ShopUser in shop context ([@GSadee](https://github.com/GSadee))
+- [#17044](https://github.com/Sylius/Sylius/issues/17044) [Docs] Add 2.0-dev installation instructions ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17070](https://github.com/Sylius/Sylius/issues/17070) Fix comparison of order items ([@jaroslavtyc](https://github.com/jaroslavtyc))
+- [#17120](https://github.com/Sylius/Sylius/issues/17120) Add gedmo/doctrine-extensions conflict ([@mpysiak](https://github.com/mpysiak))
+- [#17138](https://github.com/Sylius/Sylius/issues/17138) Remove winzouStateMachineBundle from packages' test applications to support ResourceBundle 1.12 ([@GSadee](https://github.com/GSadee))
+- [#17144](https://github.com/Sylius/Sylius/issues/17144) [Docs] Fix readthedocs configuration file ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17148](https://github.com/Sylius/Sylius/issues/17148) [CI] Remove currently unneeded custom build ([@GSadee](https://github.com/GSadee))
+- [#17139](https://github.com/Sylius/Sylius/issues/17139) [Composer] Remove conflict to doctrine/orm ([@GSadee](https://github.com/GSadee))
+- [#17163](https://github.com/Sylius/Sylius/issues/17163) Add the packages that have become optional in version 1.12 of the ResourceBundle. ([@Wojdylak](https://github.com/Wojdylak))
+- [#17169](https://github.com/Sylius/Sylius/issues/17169) Update README.md ([@kulczy](https://github.com/kulczy))
+- [#17162](https://github.com/Sylius/Sylius/issues/17162) Fix session unavailable in locale context ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#17219](https://github.com/Sylius/Sylius/issues/17219) [Behat] Normalize whitespace characters in string ([@Wojdylak](https://github.com/Wojdylak))
+
 ## v1.13.6 (2024-09-24)
 
 #### Details
