@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="services/form.xml" />
     </imports>
@@ -36,11 +40,14 @@
         <service id="sylius.payment_methods_resolver" class="Sylius\Component\Payment\Resolver\CompositeMethodsResolver">
             <argument type="service" id="sylius.registry.payment_methods_resolver" />
         </service>
+        <service id="sylius.resolver.payment_methods" alias="sylius.payment_methods_resolver" />
+        <service id="sylius.resolver.payment_methods.composite" alias="sylius.payment_methods_resolver" />
         <service id="Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface" alias="sylius.payment_methods_resolver" />
 
         <service id="sylius.payment_methods_resolver.default" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver" public="false">
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="default" label="Default" />
         </service>
+        <service id="sylius.resolver.payment_methods.default" alias="sylius.payment_methods_resolver.default"/>
     </services>
 </container>

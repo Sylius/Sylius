@@ -34,7 +34,7 @@
         <service id="sylius_shop.twig.extension.order_item_original_price_to_display" alias="sylius.twig.extension.original_price_to_display" />
 
         <service id="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension" public="false">
-            <argument type="service" id="sylius.payment_methods_resolver" />
+            <argument type="service" id="sylius.resolver.payment_methods" />
             <tag name="twig.extension" />
         </service>
         <service id="sylius_shop.twig.extension.order_payments" alias="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension" />
