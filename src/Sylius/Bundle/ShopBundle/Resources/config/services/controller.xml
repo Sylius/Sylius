@@ -32,8 +32,8 @@
 
         <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController">
             <argument type="service" id="twig" />
+            <deprecated package="sylius/shop-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
-        <service id="sylius_shop.controller.homepage" alias="sylius.controller.shop.homepage" />
 
         <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
             <argument type="service" id="twig" />
@@ -53,8 +53,8 @@
 
         <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController">
             <argument type="service" id="twig" />
+            <deprecated package="sylius/shop-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
-        <service id="sylius_shop.controller.security_widget" alias="sylius.controller.shop.security_widget" />
 
         <service id="sylius.controller.shop.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
             <argument type="service" id="twig" />
