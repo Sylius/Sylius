@@ -57,7 +57,7 @@
         </service>
 
         <service id="Sylius\Bundle\UiBundle\Twig\RedirectPathExtension">
-            <argument type="service" id="sylius.twig.storage.filter" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
             <argument type="service" id="router" />
             <tag name="twig.extension" />
         </service>
@@ -65,7 +65,7 @@
 
         <service id="Sylius\Bundle\UiBundle\Storage\FilterStorage" public="false">
             <argument type="service" id="request_stack" />
+            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
         </service>
-        <service id="sylius.twig.storage.filter" alias="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
     </services>
 </container>

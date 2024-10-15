@@ -45,7 +45,7 @@
         <service id="sylius_admin.event_subscriber.admin_section_cache_control" alias="sylius.event_subscriber.admin_cache_control_subscriber" />
 
         <service id="sylius.event_subscriber.admin_filter_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber">
-            <argument type="service" id="sylius.twig.storage.filter" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
             <tag name="kernel.event_subscriber" event="kernel.request" />
         </service>
         <service id="sylius_admin.event_subscriber.admin_filter" alias="sylius.event_subscriber.admin_filter_subscriber" />
