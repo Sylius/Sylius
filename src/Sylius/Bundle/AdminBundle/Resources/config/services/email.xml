@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -31,5 +35,7 @@
         <service id="sylius.mailer.shipment_email_manager.admin" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
+        <service id="sylius_admin.mailer.shipment_email_manager" alias="sylius.mailer.shipment_email_manager.admin" />
+        <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager.admin" />
     </services>
 </container>
