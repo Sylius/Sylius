@@ -87,27 +87,33 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a promotion "([^"]+)" with "Total price of items from taxon" rule configured with ("[^"]+" taxon) and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
+     * @Given /^there is a promotion "([^"]+)" with "Total price of items from taxon" rule configured with ("[^"]+" taxon) and ("[^"]+") amount for ("[^"]+" channel)$/
+     * @Given /^there is a promotion "([^"]+)" with "Total price of items from taxon" rule configured with ("[^"]+" taxon) and ("[^"]+") amount for ("[^"]+" channel) of coupon code "([^"]+)"$/
      */
     public function thereIsAPromotionWithTotalPriceOfItemsFromTaxonRuleConfiguredWithTaxonAndAmountForChannel(
         string $name,
         TaxonInterface $taxon,
         int $amount,
         ChannelInterface $channel,
+        ?string $couponCode,
     ): void {
         $rule = $this->ruleFactory->createItemsFromTaxonTotal($channel->getCode(), $taxon->getCode(), $amount);
 
-        $this->createPromotion(
+        $promotion = $this->createPromotion(
             name: $name,
-            rules: [
-                [
-                    'type' => TotalOfItemsFromTaxonRuleChecker::TYPE,
-                    'configuration' => [$channel->getCode() => ['taxon' => $taxon->getCode(), 'amount' => $amount]],
-                ],
-            ],
             startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
             endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
+        $promotion->addRule($rule);
+
+        if (null !== $couponCode) {
+            $coupon = $this->createCoupon($couponCode);
+            $promotion->addCoupon($coupon);
+            $promotion->setCouponBased(true);
+            $this->sharedStorage->set('coupon', $coupon);
+
+            $this->objectManager->flush();
+        }
     }
 
     /**
