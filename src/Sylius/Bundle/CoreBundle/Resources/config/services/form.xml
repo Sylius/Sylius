@@ -296,20 +296,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.catalog_promotion_action" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType">
-            <argument>%sylius.model.catalog_promotion_action.class%</argument>
-            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.catalog_promotion_scope" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
-            <argument>%sylius.model.catalog_promotion_scope.class%</argument>
-            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius.form.type.channel_price_history_config" class="Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType">
             <argument type="service">
                 <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />

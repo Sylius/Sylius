@@ -120,7 +120,7 @@
 | `sylius.promotion_processor`                                                                               | `sylius.processor.promotion`                                                         |
 | `sylius.promotion_applicator`                                                                              | `sylius.action.applicator.promotion`                                                 |
 | `sylius.registry_promotion_rule_checker`                                                                   | `sylius.registry.promotion.rule_checker`                                             |
-| `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion.action`                                                   |
+| `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion_action`                                                   |
 | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
 | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
@@ -209,6 +209,10 @@
 * The following class definitions were moved to a `CoreBundle`:
     - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
     - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType`
+
+* The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType` was moved to the `CoreBundle`.
+
+* The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType` was moved to the `PromotionBundle`.
 
 * The following parameters were removed:
 

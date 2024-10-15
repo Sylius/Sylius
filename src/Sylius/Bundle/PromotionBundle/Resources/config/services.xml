@@ -50,11 +50,10 @@
 
         <service id="sylius.form_registry.promotion_rule_checker" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
-        <service id="sylius.registry.promotion.action" class="Sylius\Component\Registry\ServiceRegistry">
+        <service id="sylius.registry.promotion_action" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>Sylius\Component\Promotion\Action\PromotionActionCommandInterface</argument>
             <argument>promotion action</argument>
         </service>
-        <service id="sylius.registry.promotion_action" alias="sylius.registry.promotion.action" />
 
         <service id="sylius.form_registry.promotion_action" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
