@@ -106,8 +106,8 @@
         <service id="sylius.user_checker.enabled" class="Sylius\Component\User\Security\Checker\EnabledUserChecker">
             <tag name="security.user_checker.admin" priority="100" />
             <tag name="security.user_checker.shop" priority="100" />
-            <tag name="security.user_checker.new_api_admin_user" priority="100" />
-            <tag name="security.user_checker.new_api_shop_user" priority="100" />
+            <tag name="security.user_checker.api_admin" priority="100" />
+            <tag name="security.user_checker.api_shop" priority="100" />
         </service>
     </services>
 </container>

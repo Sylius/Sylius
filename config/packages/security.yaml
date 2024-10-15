@@ -39,10 +39,10 @@ security:
                 path: sylius_admin_logout
                 target: sylius_admin_login
 
-        new_api_admin_user:
+        api_admin:
             pattern: "%sylius.security.api_admin_regex%/.*"
             provider: sylius_api_admin_user_provider
-            user_checker: security.user_checker.chain.new_api_admin_user
+            user_checker: security.user_checker.chain.api_admin
             stateless: true
             entry_point: jwt
             json_login:
@@ -53,10 +53,10 @@ security:
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: true
 
-        new_api_shop_user:
+        api_shop:
             pattern: "%sylius.security.api_shop_regex%/.*"
             provider: sylius_api_shop_user_provider
-            user_checker: security.user_checker.chain.new_api_shop_user
+            user_checker: security.user_checker.chain.api_shop
             stateless: true
             entry_point: jwt
             json_login:
