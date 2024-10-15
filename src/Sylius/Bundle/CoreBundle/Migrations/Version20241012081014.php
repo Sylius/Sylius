@@ -20,19 +20,17 @@ final class Version20241012081014 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Remove locked, expires_at and credentials_expire_at columns from User Model';
+        return 'Remove locked, expires_at and credentials_expire_at columns from User model';
     }
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE sylius_admin_user DROP locked, DROP expires_at, DROP credentials_expire_at');
         $this->addSql('ALTER TABLE sylius_shop_user DROP locked, DROP expires_at, DROP credentials_expire_at');
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE sylius_admin_user ADD locked TINYINT(1) NOT NULL, ADD expires_at DATETIME DEFAULT NULL, ADD credentials_expire_at DATETIME DEFAULT NULL');
         $this->addSql('ALTER TABLE sylius_shop_user ADD locked TINYINT(1) NOT NULL, ADD expires_at DATETIME DEFAULT NULL, ADD credentials_expire_at DATETIME DEFAULT NULL');
     }

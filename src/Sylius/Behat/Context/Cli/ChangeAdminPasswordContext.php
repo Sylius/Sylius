@@ -38,7 +38,6 @@ final class ChangeAdminPasswordContext implements Context
         KernelInterface $kernel,
         private readonly UserRepositoryInterface $adminUserRepository,
         private readonly UserPasswordHasherInterface $userPasswordHasher,
-
     ) {
         $this->application = new Application($kernel);
     }
