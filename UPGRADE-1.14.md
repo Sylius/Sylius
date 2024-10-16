@@ -514,3 +514,10 @@
 
 1. The `sylius_core.state_machine` configuration parameter is deprecated and will be removed in 2.0. 
    Use `sylius_state_machine_abstraction.state_machine` instead.
+
+1. The `sylius_core.autoconfigure_with_attributes` and `sylius_order.autoconfigure_with_attributes` configuration parameters 
+   are deprecated and will be removed in 2.0. To autoconfigure order processors and cart contexts, use corresponding attributes
+   instead of interfaces:
+
+   - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext`
+   - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor`
