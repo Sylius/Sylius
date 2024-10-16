@@ -60,7 +60,6 @@
         "sylius/state-machine-abstraction": "^2.0",
         "sylius/taxation-bundle": "^2.0",
         "sylius/taxonomy-bundle": "^2.0",
-        "sylius/ui-bundle": "^2.0",
         "sylius/user-bundle": "^2.0",
         "symfony/clock": "^6.4.0 || ^7.1",
         "symfony/framework-bundle": "^6.4.1 || ^7.1",
