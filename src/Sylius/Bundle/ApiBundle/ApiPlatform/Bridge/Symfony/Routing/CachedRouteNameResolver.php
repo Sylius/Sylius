@@ -18,8 +18,15 @@ use ApiPlatform\Core\Cache\CachedTrait;
 use Psr\Cache\CacheItemPoolInterface;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CachedRouteNameResolver::class,
+);
 /**
  * This class is based on src/Bridge/Symfony/Routing/CachedRouteNameResolver.php, but has added logic for matching /shop, /admin prefixes
+ * @deprecated since Sylius 1.14 and will be removed in Sylius 2.0.
  */
 final class CachedRouteNameResolver implements RouteNameResolverInterface
 {

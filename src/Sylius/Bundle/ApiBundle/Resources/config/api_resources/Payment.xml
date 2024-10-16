@@ -65,7 +65,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="path">/admin/payments/{id}/complete</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface::complete</attribute>
+                <attribute name="controller">sylius_api.applicator.payment_state_machine_transition::complete</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes Payment.</attribute>
                 </attribute>

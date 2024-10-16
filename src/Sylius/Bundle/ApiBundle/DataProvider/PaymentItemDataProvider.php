@@ -22,6 +22,13 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    PaymentItemDataProvider::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class PaymentItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct(

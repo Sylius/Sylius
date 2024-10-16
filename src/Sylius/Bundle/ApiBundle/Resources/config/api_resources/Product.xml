@@ -158,7 +158,7 @@
             <itemOperation name="shop_get_by_slug">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/products-by-slug/{slug}</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction</attribute>
+                <attribute name="controller">sylius_api.controller.get_product_by_slug</attribute>
                 <attribute name="read">false</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use slug to retrieve a product resource.</attribute>

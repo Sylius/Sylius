@@ -14,7 +14,7 @@ sylius_api_admin_statistics:
     path: /admin/statistics
     methods: ['GET']
     defaults:
-        _controller: Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction
+        _controller: sylius_api.controller.get_statistics
 
 sylius_api_shop_authentication_token:
     path: /shop/customers/token

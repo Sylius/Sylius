@@ -16,6 +16,13 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CommandAwareInputDataTransformer::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class CommandAwareInputDataTransformer implements DataTransformerInterface
 {
     /** @var CommandDataTransformerInterface[] */

@@ -16,6 +16,13 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ShipmentIdAwareInputCommandDataTransformer::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ShipmentIdAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function transform($object, string $to, array $context = [])

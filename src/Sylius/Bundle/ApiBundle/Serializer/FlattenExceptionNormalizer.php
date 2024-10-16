@@ -16,7 +16,15 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    FlattenExceptionNormalizer::class,
+);
+/**
+ * @deprecated since Sylius 1.14 and will be removed in Sylius 2.0.
+ */
 final class FlattenExceptionNormalizer implements ContextAwareNormalizerInterface
 {
     public function __construct(

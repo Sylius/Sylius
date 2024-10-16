@@ -18,6 +18,13 @@ use Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException;
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    LocaleDataPersister::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class LocaleDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

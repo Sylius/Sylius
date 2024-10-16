@@ -18,6 +18,13 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
 use Sylius\Component\Core\Model\ProductInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ProductDataPersister::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ProductDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

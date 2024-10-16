@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="true" />
@@ -21,5 +22,8 @@
         <service id="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider">
             <argument type="tagged_iterator" tag="sylius.api.payment_method_handler" />
         </service>
+        <service id="sylius_api.provider.payment_configuration" alias="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider" />
+        <service id="sylius_api.provider.payment_configuration.composite" alias="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider" />
+        <service id="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterface" alias="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider" />
     </services>
 </container>

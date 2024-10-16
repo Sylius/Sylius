@@ -18,6 +18,13 @@ use Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ChannelDataPersister::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ChannelDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

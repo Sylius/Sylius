@@ -19,6 +19,14 @@ use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntryCollection;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepositoryInterface;
 use Sylius\Component\Addressing\Model\AddressLogEntry;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    GetAddressLogEntryCollectionHandler::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class GetAddressLogEntryCollectionHandler
 {
     public function __construct(

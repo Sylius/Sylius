@@ -26,6 +26,7 @@ trigger_deprecation(
     'The "%s" class is deprecated and will be removed in Sylius 2.0, use the usual symfony logic for validation.',
     ForTaxonsScopeValidator::class,
 );
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0, use the usual symfony logic for validation. */
 final class ForTaxonsScopeValidator implements ScopeValidatorInterface
 {
     public function __construct(private TaxonRepositoryInterface $taxonRepository)

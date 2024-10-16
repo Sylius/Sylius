@@ -22,6 +22,13 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ShipmentItemDataProvider::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ShipmentItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct(

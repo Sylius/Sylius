@@ -19,8 +19,15 @@ use ApiPlatform\Core\Exception\InvalidArgumentException;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    RouteNameResolver::class,
+);
 /**
  * This class is based on src/Bridge/Symfony/Routing/RouteNameResolver.php, but has added logic for matching /shop, /admin prefixes
+ * @deprecated since Sylius 1.14 and will be removed in Sylius 2.0.
  */
 final class RouteNameResolver implements RouteNameResolverInterface
 {

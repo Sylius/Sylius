@@ -159,7 +159,7 @@ Example configuration for `order_fixed_discount` action type:
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/promotions/{code}/archive</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive</attribute>
+                <attribute name="controller">sylius_api.applicator.archiving_promotion::archive</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Archives Promotion.</attribute>
                 </attribute>
@@ -174,7 +174,7 @@ Example configuration for `order_fixed_discount` action type:
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/promotions/{code}/restore</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore</attribute>
+                <attribute name="controller">sylius_api.applicator.archiving_promotion::restore</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Restores Archived Promotion.</attribute>
                 </attribute>

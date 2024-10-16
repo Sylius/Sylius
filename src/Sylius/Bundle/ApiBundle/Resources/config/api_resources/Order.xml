@@ -134,7 +134,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface::cancel</attribute>
+                <attribute name="controller">sylius_api.applicator.order_state_machine_transition::cancel</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:order:update</attribute>
@@ -303,7 +303,7 @@
 
             <itemOperation name="get_configuration">
                 <attribute name="method">GET</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration</attribute>
+                <attribute name="controller">sylius_api.controller.payment.get_payment_configuration</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/payments/{paymentId}/configuration</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Retrieve payment method configuration.</attribute>
@@ -359,7 +359,7 @@
             <itemOperation name="shop_remove_item">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items/{itemId}</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction</attribute>
+                <attribute name="controller">sylius_api.controller.delete_order_item</attribute>
                 <attribute name="write">false</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
