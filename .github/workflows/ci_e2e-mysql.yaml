@@ -119,7 +119,7 @@ jobs:
 
     behat-ui-js-chromedriver:
         needs: get-matrix
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-22.04
         name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
@@ -180,7 +180,7 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
-                    chrome_version: stable
+                    chrome_version: 1343863
 
             -   name: Run Behat (Chromedriver)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun
@@ -258,7 +258,6 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
-                    chrome_version: stable
 
             -   name: Install Behat driver
                 run: vendor/bin/bdi detect drivers
