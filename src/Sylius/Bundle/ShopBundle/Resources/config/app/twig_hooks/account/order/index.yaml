@@ -1,9 +1,19 @@
 sylius_twig_hooks:
     hooks:
         'sylius_shop.account.order.index':
-            content:
-                template: '@SyliusShop/account/order/index/content.html.twig'
+            breadcrumbs:
+                template: '@SyliusShop/account/order/index/breadcrumbs.html.twig'
 
         'sylius_shop.account.order.index.content':
+            main_section:
+                template: '@SyliusShop/account/order/index/content/main_section.html.twig'
+
+        'sylius_shop.account.order.index.content.header':
+            title:
+                template: '@SyliusShop/account/order/index/content/header/title.html.twig'
+            subtitle:
+                template: '@SyliusShop/account/order/index/content/header/subtitle.html.twig'
+
+        'sylius_shop.account.order.index.content.main_section':
             grid:
                 template: '@SyliusShop/shared/grid.html.twig'

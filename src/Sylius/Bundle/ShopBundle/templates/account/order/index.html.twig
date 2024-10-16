@@ -1,24 +1,6 @@
-{% extends '@SyliusShop/account/layout.html.twig' %}
-{% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+{% extends '@SyliusShop/account/common/index.html.twig' %}
 
 {% set prefixes = ['sylius_shop.account.order'] %}
+{% set attrs = { resources } %}
 
 {% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
-
-{% block breadcrumb %}
-    {{ breadcrumbs([
-        { label: 'sylius.ui.home'|trans, path: path('sylius_shop_homepage')},
-        { label: 'sylius.ui.my_account'|trans, path: path('sylius_shop_account_dashboard')},
-        { label: 'sylius.ui.order_history'|trans, active: true }
-    ]) }}
-{% endblock %}
-
-{% block account_header %}
-    {% set title = 'sylius.ui.order_history'|trans %}
-    {% set description = 'sylius.ui.browse_your_orders_from_the_past'|trans %}
-    {{ parent() }}
-{% endblock %}
-
-{% block account_content %}
-    {% hook 'index' with { _prefixes: prefixes, resources } %}
-{% endblock %}
