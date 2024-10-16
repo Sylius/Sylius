@@ -14,7 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service
-            id="sylius_admin.twig_component.product_attribute.form"
+            id="sylius_admin.twig.component.product_attribute.form"
             class="Sylius\Bundle\AdminBundle\Twig\Component\ProductAttribute\FormComponent"
         >
             <argument type="service" id="sylius.repository.product_attribute" />

@@ -1,0 +1,13 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.common.show':
+            breadcrumbs:
+                template: '@SyliusShop/account/common/layout/breadcrumbs.html.twig'
+            menu:
+                template: '@SyliusShop/account/common/layout/menu.html.twig'
+            content:
+                template: '@SyliusShop/account/common/layout/content.html.twig'
+
+        'sylius_shop.account.common.show.content':
+            header:
+                template: '@SyliusShop/account/common/layout/content/header.html.twig'

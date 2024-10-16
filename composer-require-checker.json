@@ -92,13 +92,17 @@
     "Psr\\Container\\ContainerInterface",
     "Psr\\Http\\Message\\RequestFactoryInterface",
     "Psr\\Http\\Message\\StreamFactoryInterface",
+    "SM\\Factory\\FactoryInterface",
+    "SM\\SMException",
+    "SM\\StateMachine\\StateMachineInterface",
     "Sylius\\Bundle\\UiBundle\\Registry\\TemplateBlockRegistryInterface",
     "Symfony\\Bridge\\Twig\\ErrorRenderer\\TwigErrorRenderer",
     "Symfony\\Component\\ErrorHandler\\ErrorRenderer\\ErrorRendererInterface",
     "Symfony\\Component\\ErrorHandler\\Exception\\FlattenException",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
     "Symfony\\Component\\WebLink\\Link",
-    "Symfony\\Contracts\\EventDispatcher\\Event"
+    "Symfony\\Contracts\\EventDispatcher\\Event",
+    "winzou\\Bundle\\StateMachineBundle\\winzouStateMachineBundle"
   ],
   "php-core-extensions" : [
     "Core",

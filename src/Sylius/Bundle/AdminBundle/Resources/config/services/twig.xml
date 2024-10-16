@@ -21,7 +21,48 @@
     </imports>
 
     <services>
-        <service id="Twig\Extension\StringLoaderExtension">
+        <service id="sylius_admin.twig.extension.string_loader" class="Twig\Extension\StringLoaderExtension">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.notification_widget" class="Sylius\Bundle\AdminBundle\Twig\NotificationWidgetExtension">
+            <argument>%sylius.admin.notification.enabled%</argument>
+            <argument>%sylius.admin.notification.frequency%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.attribute" class="Sylius\Bundle\AdminBundle\Twig\AttributeExtension">
+            <argument type="service" id="sylius.registry.attribute_type" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.shop" class="Sylius\Bundle\AdminBundle\Twig\ShopExtension">
+            <argument>%sylius.admin.shop_enabled%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.channels_currencies" class="Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="sylius_admin.twig.extension.order_unit_taxes" class="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="sylius_admin.twig.extension.channel_name" class="Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.payment_method" class="Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension">
+            <argument>%sylius.gateway_factories%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.promotion_labels" class="Sylius\Bundle\AdminBundle\Twig\PromotionLabelsExtension">
+            <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion_actions%</argument>
             <tag name="twig.extension" />
         </service>
     </services>

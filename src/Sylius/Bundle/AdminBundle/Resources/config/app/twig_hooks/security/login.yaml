@@ -3,27 +3,38 @@ sylius_twig_hooks:
         'sylius_admin.security.login':
             logo:
                 template: '@SyliusAdmin/security/common/logo.html.twig'
+                priority: 100
             content:
                 template: '@SyliusAdmin/security/common/content.html.twig'
+                priority: 0
 
         'sylius_admin.security.login.content':
             header:
                 template: '@SyliusAdmin/security/login/content/header.html.twig'
+                priority: 200
             flashes:
                 template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 100
             form:
                 template: '@SyliusAdmin/security/login/content/form.html.twig'
+                priority: 0
 
         'sylius_admin.security.login.content.form':
             error:
                 template: '@SyliusAdmin/security/login/content/form/error.html.twig'
+                priority: 500
             username:
                 template: '@SyliusAdmin/security/login/content/form/username.html.twig'
+                priority: 400
             password:
                 template: '@SyliusAdmin/security/login/content/form/password.html.twig'
+                priority: 300
             remember_me:
                 template: '@SyliusAdmin/security/login/content/form/remember_me.html.twig'
+                priority: 200
             submit:
                 template: '@SyliusAdmin/security/login/content/form/submit.html.twig'
+                priority: 100
             forgot_password:
                 template: '@SyliusAdmin/security/login/content/form/forgot_password.html.twig'
+                priority: 0

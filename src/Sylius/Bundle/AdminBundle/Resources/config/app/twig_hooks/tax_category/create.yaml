@@ -5,21 +5,27 @@ sylius_twig_hooks:
                 template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
                 configuration:
                     render_rest: false
+                priority: 0
 
         'sylius_admin.tax_category.create.content.form':
             sections:
                 template: '@SyliusAdmin/tax_category/form/sections.html.twig'
+                priority: 0
 
         'sylius_admin.tax_category.create.content.form.sections':
             general:
                 template: '@SyliusAdmin/tax_category/form/sections/general.html.twig'
+                priority: 0
 
         'sylius_admin.tax_category.create.content.form.sections.general':
             default:
                 enabled: false
             code:
                 template: '@SyliusAdmin/tax_category/form/sections/general/code.html.twig'
+                priority: 200
             name:
                 template: '@SyliusAdmin/tax_category/form/sections/general/name.html.twig'
+                priority: 100
             description:
                 template: '@SyliusAdmin/tax_category/form/sections/general/description.html.twig'
+                priority: 0

@@ -29,6 +29,13 @@
           "mariadb": "11.4.3",
           "dbal": "^3.0",
           "state_machine_adapter": "symfony_workflow"
+        },
+        {
+          "php": "8.3",
+          "symfony": "^7.1",
+          "mariadb": "11.4.3",
+          "dbal": "^3.0",
+          "state_machine_adapter": "winzou_state_machine"
         }
       ]
     },
@@ -39,16 +46,14 @@
           "symfony": "^6.4",
           "api-platform": "^3.3",
           "mysql": "8.0",
-          "twig": "^3.3",
-          "env": "test_cached"
+          "twig": "^3.3"
         },
         {
           "php": "8.3",
           "symfony": "^7.1",
           "api-platform": "^3.3",
           "mysql": "8.4",
-          "twig": "^3.3",
-          "env": "test_cached"
+          "twig": "^3.3"
         },
         {
           "php": "8.3",
@@ -104,7 +109,15 @@
       "php": ["8.2", "8.3"],
       "symfony": ["^6.4", "^7.1"],
       "mariadb": ["10.11.9", "11.4.3"],
-      "state_machine_adapter": ["winzou_state_machine", "symfony_workflow"]
+      "state_machine_adapter": ["symfony_workflow"],
+      "include": [
+        {
+          "php": "8.3",
+          "symfony": "^7.1",
+          "mariadb": "11.4.3",
+          "state_machine_adapter": "winzou_state_machine"
+        }
+      ]
     },
     "e2e-mysql": {
       "php": ["8.2", "8.3"],
@@ -112,7 +125,6 @@
       "api-platform": ["^3.3"],
       "mysql": ["8.0", "8.4"],
       "twig": ["^3.3"],
-      "env": "test_cached",
       "include": [
         {
           "php": "8.3",

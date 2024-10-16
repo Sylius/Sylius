@@ -16,11 +16,12 @@ parameters:
 
     excludePaths:
         # Test dependencies
-        - '**/spec/**.php'
+        - '**/Abstraction/*/tests/**.php'
         - '**/Bundle/*/test/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/Tests/**.php'
+        - '**/spec/**.php'
         - 'src/Sylius/Behat/**.php'
 
         # Vendor files in subpackages
@@ -36,6 +37,9 @@ parameters:
 
         # Random errors related to Template Events (we're going to replace them with Twig Events anyway)
         - 'src/Sylius/Bundle/UiBundle/Console/Command/DebugTemplateEventCommand.php'
+
+        # Optional Winzou State Machine
+        - 'src/Sylius/Abstraction/StateMachine/src/WinzouStateMachineAdapter.php'
 
     ignoreErrors:
         - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks

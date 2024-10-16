@@ -23,12 +23,12 @@
         "php": "^8.2",
         "symfony/dependency-injection": "^6.4.1 || ^7.1",
         "symfony/http-kernel": "^6.4.1 || ^7.1",
-        "symfony/workflow": "^6.4.0 || ^7.1",
-        "winzou/state-machine": "^0.4",
-        "winzou/state-machine-bundle": "^0.6"
+        "symfony/workflow": "^6.4.0 || ^7.1"
     },
     "suggest": {
-        "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)"
+        "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)",
+        "winzou/state-machine": "If you want to use Winzou State Machine (^0.4)",
+        "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^5.1",

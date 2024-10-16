@@ -98,7 +98,7 @@
         </service>
 
         <service
-            id="sylius_admin.twig_component.shipping_method.form"
+            id="sylius_admin.twig.component.shipping_method.form"
             class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="sylius.repository.shipping_method" />
@@ -139,7 +139,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent"
         >
             <argument type="service" id="router" />
-            <argument type="service" id="sylius_admin.logged_in_admin_user_provider" />
+            <argument type="service" id="sylius_admin.provider.logged_in_admin_user" />
 
             <tag name="sylius.twig_component" key="sylius_admin:navbar:user_dropdown" />
         </service>

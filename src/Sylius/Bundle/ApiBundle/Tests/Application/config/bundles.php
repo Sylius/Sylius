@@ -34,12 +34,10 @@ return [
     Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle::class => ['all' => true],
     Sylius\Bundle\UserBundle\SyliusUserBundle::class => ['all' => true],
     Sylius\Bundle\CustomerBundle\SyliusCustomerBundle::class => ['all' => true],
-    Sylius\Bundle\UiBundle\SyliusUiBundle::class => ['all' => true],
     Sylius\Bundle\ReviewBundle\SyliusReviewBundle::class => ['all' => true],
     Sylius\Bundle\CoreBundle\SyliusCoreBundle::class => ['all' => true],
     Sylius\Bundle\ResourceBundle\SyliusResourceBundle::class => ['all' => true],
     Sylius\Bundle\GridBundle\SyliusGridBundle::class => ['all' => true],
-    winzou\Bundle\StateMachineBundle\winzouStateMachineBundle::class => ['all' => true],
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
     Knp\Bundle\GaufretteBundle\KnpGaufretteBundle::class => ['all' => true],
     League\FlysystemBundle\FlysystemBundle::class => ['all' => true],
@@ -58,5 +56,4 @@ return [
     Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
     SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle::class => ['all' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
-    Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
 ];
