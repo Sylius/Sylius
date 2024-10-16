@@ -3,6 +3,13 @@ sylius_twig_hooks:
         'sylius_shop.account.address_book.create':
             breadcrumbs:
                 template: '@SyliusShop/account/address_book/create/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/layout/menu.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusShop/account/common/layout/content.html.twig'
+                priority: 0
 
         'sylius_shop.account.address_book.create.content':
             form:
@@ -11,21 +18,28 @@ sylius_twig_hooks:
                     form: '@=_context.form'
                     resource: '@=_context.address'
                     template: '@SyliusShop/account/address_book/common/content/form.html.twig'
+                priority: 0
 
         'sylius_shop.account.address_book.create.content.header':
             title:
                 template: '@SyliusShop/account/address_book/create/content/header/title.html.twig'
+                priority: 100
             subtitle:
                 template: '@SyliusShop/account/address_book/create/content/header/subtitle.html.twig'
+                priority: 0
 
         'sylius_shop.account.address_book.create.content.form':
             fields:
                 template: '@SyliusShop/account/address_book/common/content/form/fields.html.twig'
+                priority: 100
             buttons:
                 template: '@SyliusShop/account/address_book/common/content/form/buttons.html.twig'
+                priority: 0
 
         'sylius_shop.account.address_book.create.content.form.buttons':
             add:
                 template: '@SyliusShop/account/address_book/create/content/form/buttons/add.html.twig'
+                priority: 100
             cancel:
                 template: '@SyliusShop/account/address_book/common/content/form/buttons/cancel.html.twig'
+                priority: 0
