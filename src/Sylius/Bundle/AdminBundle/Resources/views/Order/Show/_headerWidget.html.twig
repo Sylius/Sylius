@@ -3,6 +3,6 @@
         {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
     </div>
 
-    {% set menu = knp_menu_get('sylius_admin.order.show', [], {'order': order}) %}
+    {% set menu = knp_menu_get('sylius.admin.order.show', [], {'order': order}) %}
     {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
 </div>

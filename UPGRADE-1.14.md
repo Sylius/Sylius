@@ -53,26 +53,18 @@
     | `Sylius\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction`                            | `sylius_admin.controller.account.render_request_password_reset_page`                 |
     | `Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction`                                      | `sylius_admin.controller.account.request_password_reset`                             |
     | `sylius.controller.admin.dashboard`                                                                        | `sylius_admin.controller.dashboard`                                                  |
-    | `sylius.controller.admin.dashboard.statistics`                                                             | `sylius_admin.controller.dashboard.statistics`                                       |
     | `sylius.controller.customer_statistics`                                                                    | `sylius_admin.controller.customer_statistics`                                        |
     | `sylius.controller.admin.notification`                                                                     | `sylius_admin.controller.notification`                                               |
     | `Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction`                                        | `sylius_admin.controller.remove_catalog_promotion`                                   |
     | `Sylius\Bundle\AdminBundle\Controller\RedirectHandler`                                                     | `sylius_admin.resource_controller.redirect_handler`                                  |
-    | `sylius.mailer.shipment_email_manager.admin`                                                               | `sylius_admin.mailer.shipment_email_manager`                                         |
-    | `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension`                             | `sylius_admin.form.extension.type.catalog_promotion_action`                          |
-    | `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension`                              | `sylius_admin.form.extension.type.catalog_promotion_scope`                           |
+    | `sylius.mailer.shipment_email_manager.admin`                                                               | `sylius_admin.mailer.email_manager.shipment`                                         |
     | `Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType`                                                  | `sylius_admin.form.type.request_password_reset`                                      |
     | `Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType`                                                    | `sylius_admin.form.type.reset_password`                                              |
     | `sylius.listener.shipment_ship`                                                                            | `sylius_admin.listener.shipment_ship`                                                |
     | `sylius.listener.locale`                                                                                   | `sylius_admin.listener.locale`                                                       |
     | `sylius.event_subscriber.admin_cache_control_subscriber`                                                   | `sylius_admin.event_subscriber.admin_section_cache_control`                          |
     | `sylius.event_subscriber.admin_filter_subscriber`                                                          | `sylius_admin.event_subscriber.admin_filter`                                         |
-    | `sylius.admin.menu_builder.customer.show`                                                                  | `sylius_admin.menu_builder.customer.show`                                            |
     | `sylius.admin.menu_builder.main`                                                                           | `sylius_admin.menu_builder.main`                                                     |
-    | `sylius.admin.menu_builder.order.show`                                                                     | `sylius_admin.menu_builder.order.show`                                               |
-    | `sylius.admin.menu_builder.product_form`                                                                   | `sylius_admin.menu_builder.product.form`                                             |
-    | `sylius.admin.menu_builder.product.update`                                                                 | `sylius_admin.menu_builder.product.update`                                           |
-    | `sylius.admin.menu_builder.product_variant_form`                                                           | `sylius_admin.menu_builder.product_variant.form`                                     |
     | `Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand`                                         | `sylius_admin.console.command.create_admin_user`                                     |
     | `Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand`                                 | `sylius_admin.console.command.change_admin_user_password`                            |
     | `Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler`                                          | `sylius_admin.command_handler.create_admin_user`                                     |
@@ -239,17 +231,12 @@
 
 1. Aliases for the following `knp_menu.menu_builder` service tags have been introduced to standardize tag aliases and will replace the incorrect aliases in Sylius 2.0:
 
-    | Old Alias                           | New Alias                           |
-    |-------------------------------------|-------------------------------------|
-    | **AdminBundle**                     |                                     |
-    | `sylius.admin.customer.show`        | `sylius_admin.customer.show`        |
-    | `sylius.admin.main`                 | `sylius_admin.main`                 |
-    | `sylius.admin.order.show`           | `sylius_admin.order.show`           |
-    | `sylius.admin.product_form`         | `sylius_admin.product.form`         |
-    | `sylius.admin.product.update`       | `sylius_admin.product.update`       |
-    | `sylius.admin.product_variant_form` | `sylius_admin.product_variant.form` |
-    | **ShopBundle**                      |                                     |
-    | `sylius.shop.account`               | `sylius_shop.account`               |
+    | Old Alias             | New Alias             |
+    |-----------------------|-----------------------|
+    | **AdminBundle**       |                       |
+    | `sylius.admin.main`   | `sylius_admin.main`   |
+    | **ShopBundle**        |                       |
+    | `sylius.shop.account` | `sylius_shop.account` |
 
     The old alias are now deprecated and will be removed in Sylius 2.0.
 
@@ -327,7 +314,13 @@
     ```
 
 1. The following services have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController`
+    - `Sylius\Bundle\AdminBundle\Menu\CustomerShowMenuBuilder`
     - `Sylius\Bundle\AdminBundle\Menu\PromotionUpdateMenuBuilder`
+    - `Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder`
+    - `Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder`
+    - `Sylius\Bundle\AdminBundle\Menu\ProductUpdateMenuBuilder`
+    - `Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder`
     - `Sylius\Bundle\ShopBundle\Controller\HomepageController`
     - `Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController`
     - `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
