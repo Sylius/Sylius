@@ -14,12 +14,12 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service
-            id="sylius_ui.twig.error_renderer"
+            id="sylius.twig.error_renderer"
             class="Sylius\Bundle\UiBundle\Twig\ErrorRenderer\TwigErrorRenderer"
             decorates="twig.error_renderer.html"
             decoration-priority="64"
         >
-            <argument type="service" id="sylius_ui.twig.error_renderer.inner"/>
+            <argument type="service" id=".inner"/>
             <argument type="service" id="twig" />
             <argument type="tagged_iterator" tag="sylius.twig.error_template_finder" />
             <argument>%kernel.debug%</argument>

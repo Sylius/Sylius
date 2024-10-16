@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
-use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
+use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
