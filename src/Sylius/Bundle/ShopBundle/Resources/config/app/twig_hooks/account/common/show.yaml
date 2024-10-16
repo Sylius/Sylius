@@ -2,12 +2,12 @@ sylius_twig_hooks:
     hooks:
         'sylius_shop.account.common.show':
             breadcrumbs:
-                template: '@SyliusShop/shared/account/layout/breadcrumbs.html.twig'
+                template: '@SyliusShop/account/common/layout/breadcrumbs.html.twig'
             menu:
-                template: '@SyliusShop/shared/account/layout/menu.html.twig'
+                template: '@SyliusShop/account/common/layout/menu.html.twig'
             content:
-                template: '@SyliusShop/shared/account/layout/content.html.twig'
+                template: '@SyliusShop/account/common/layout/content.html.twig'
 
         'sylius_shop.account.common.show.content':
             header:
-                template: '@SyliusShop/shared/account/layout/content/header.html.twig'
+                template: '@SyliusShop/account/common/layout/content/header.html.twig'

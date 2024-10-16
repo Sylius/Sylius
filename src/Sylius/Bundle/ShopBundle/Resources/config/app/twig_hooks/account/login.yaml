@@ -32,4 +32,4 @@ sylius_twig_hooks:
 
         'sylius_shop.account.login.form.register_container':
             register_here:
-                template: "@SyliusShop/shared/account/register_box.html.twig"
+                template: "@SyliusShop/account/common/register_box.html.twig"
