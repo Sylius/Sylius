@@ -19,7 +19,10 @@ sylius_twig_hooks:
                 enabled: false
             ratio:
                 template: '@SyliusAdmin/exchange_rate/form/sections/general/ratio.html.twig'
+                priority: 200
             source_currency:
                 template: '@SyliusAdmin/exchange_rate/form/sections/general/source_currency.html.twig'
+                priority: 100
             target_currency:
                 template: '@SyliusAdmin/exchange_rate/form/sections/general/target_currency.html.twig'
+                priority: 0

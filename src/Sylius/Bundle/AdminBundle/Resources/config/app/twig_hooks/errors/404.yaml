@@ -3,14 +3,18 @@ sylius_twig_hooks:
         'sylius_admin.errors.404':
             sidebar:
                 template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
             navbar:
                 template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
             content:
                 template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+                priority: 0
 
         'sylius_admin.errors.404.content':
             error:
                 template: '@SyliusAdmin/errors/error/404.html.twig'
+                priority: 100
             footer:
                 template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
-                priority: -100
+                priority: 0
