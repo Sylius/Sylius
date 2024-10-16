@@ -45,7 +45,6 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
             ->end()
         ;
 
