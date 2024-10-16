@@ -141,9 +141,7 @@
         "twig/intl-extra": "^3.13.0",
         "twig/string-extra": "^3.13.0",
         "twig/twig": "^3.14.0",
-        "webmozart/assert": "^1.9",
-        "winzou/state-machine": "^0.4",
-        "winzou/state-machine-bundle": "^0.6"
+        "webmozart/assert": "^1.9"
     },
     "replace": {
         "sylius/addressing": "self.version",
@@ -239,7 +237,9 @@
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
         "ext-intl": "For better performance than using Symfony Polyfill Component",
         "ext-mbstring": "For better performance than using Symfony Polyfill Component",
-        "hwi/oauth-bundle": "If you want to use Facebook login (see https://docs.sylius.com/en/latest/cookbook/shop/facebook-login.html)"
+        "hwi/oauth-bundle": "If you want to use Facebook login (see https://docs.sylius.com/en/latest/cookbook/shop/facebook-login.html)",
+        "winzou/state-machine": "If you want to use Winzou State Machine (^0.4)",
+        "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "config": {
         "preferred-install": {

@@ -27,6 +27,13 @@ final class SyliusStateMachineAbstractionExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(dirname(__DIR__, 2) . '/config/'));
         $loader->load('services.xml');
 
+        if ($container->hasParameter('kernel.bundles')) {
+            $bundles = $container->getParameter('kernel.bundles');
+            if (array_key_exists('winzouStateMachineBundle', $bundles)) {
+                $loader->load('services/integrations/winzou.xml');
+            }
+        }
+
         $container->setParameter('sylius_abstraction.state_machine.default_adapter', $config['default_adapter']);
         $container->setParameter('sylius_abstraction.state_machine.graphs_to_adapters_mapping', $config['graphs_to_adapters_mapping']);
     }

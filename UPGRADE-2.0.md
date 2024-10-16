@@ -9,6 +9,15 @@
 * SyliusStateMachineAbstraction:
     * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine` to `symfony_workflow`.
 
+## Dependencies
+
+* The following dependencies have been removed, install them in your application, if you still want to use Winzou State Machine:
+
+    * `winzou/state-machine`
+    * `winzou/state-machine-bundle`
+
+* The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is no longer supported in ResourceBundle and GridBundle:
@@ -314,8 +323,6 @@
         +   private string $targetState = PaymentInterface::STATE_CART,
         )
     ```
-
-* The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
 
 * The following repository classes and interfaces were added, if you have custom repositories,
   you need to update them to extend the new ones:

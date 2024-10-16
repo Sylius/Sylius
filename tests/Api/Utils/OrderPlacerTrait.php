@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Utils;
 
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
@@ -153,10 +154,9 @@ trait OrderPlacerTrait
         $order = $this->orderRepository->findOneByTokenValue($tokenValue);
         Assert::notNull($order);
 
-        $stateMachineFactory = $this->get('sm.factory');
-
-        $stateMachine = $stateMachineFactory->get($order, OrderTransitions::GRAPH);
-        $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);
+        /** @var StateMachineInterface $stateMachine */
+        $stateMachine = $this->get('sylius_abstraction.state_machine');
+        $stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL);
 
         $objectManager->flush();
     }
@@ -165,13 +165,10 @@ trait OrderPlacerTrait
     {
         $objectManager = $this->get('doctrine.orm.entity_manager');
 
-        $stateMachineFactory = $this->get('sm.factory');
-
-        $orderStateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
-        $orderStateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY);
-
-        $paymentStateMachine = $stateMachineFactory->get($order->getLastPayment(), PaymentTransitions::GRAPH);
-        $paymentStateMachine->apply(PaymentTransitions::TRANSITION_COMPLETE);
+        /** @var StateMachineInterface $stateMachine */
+        $stateMachine = $this->get('sylius_abstraction.state_machine');
+        $stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
+        $stateMachine->apply($order->getLastPayment(), PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
 
         $objectManager->flush();
 
@@ -182,13 +179,10 @@ trait OrderPlacerTrait
     {
         $objectManager = $this->get('doctrine.orm.entity_manager');
 
-        $stateMachineFactory = $this->get('sm.factory');
-
-        $orderStateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
-        $orderStateMachine->apply(OrderPaymentTransitions::TRANSITION_REFUND);
-
-        $paymentStateMachine = $stateMachineFactory->get($order->getLastPayment(), PaymentTransitions::GRAPH);
-        $paymentStateMachine->apply(PaymentTransitions::TRANSITION_REFUND);
+        /** @var StateMachineInterface $stateMachine */
+        $stateMachine = $this->get('sylius_abstraction.state_machine');
+        $stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REFUND);
+        $stateMachine->apply($order->getLastPayment(), PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_REFUND);
 
         $objectManager->flush();
 

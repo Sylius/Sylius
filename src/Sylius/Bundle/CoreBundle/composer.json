@@ -67,8 +67,7 @@
         "symfony/mailer": "^6.4.0 || ^7.1",
         "symfony/messenger": "^6.4.0 || ^7.1",
         "symfony/webpack-encore-bundle": "^2.1",
-        "symfony/workflow": "^6.4.0 || ^7.1",
-        "winzou/state-machine-bundle": "^0.6"
+        "symfony/workflow": "^6.4.0 || ^7.1"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.3.1",

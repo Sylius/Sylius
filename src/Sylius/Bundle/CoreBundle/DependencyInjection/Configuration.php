@@ -132,17 +132,6 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('state_machine')
-                    ->setDeprecated('sylius/core-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('default_adapter')->defaultValue('winzou_state_machine')->end()
-                        ->arrayNode('graphs_to_adapters_mapping')
-                            ->useAttributeAsKey('graph_name')
-                            ->scalarPrototype()->end()
-                        ->end()
-                    ->end()
-                ->end()
             ->end()
         ;
 
