@@ -15,6 +15,14 @@ imports:
 ```
 
 ```md
+#config/routes/sylius_shop.yaml
+
+sylius_shop_payum:
+-   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
++   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
+```
+
+```md
 #config/packages/_sylius.yaml
 
 sylius_payment:
@@ -848,13 +856,3 @@ If your app never changed the hasher name configuration, you don't need to confi
 * Channel's `themeName` form field existence is made optional and depends on `ShopBundle` presence.
 * The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to
   the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.
-
-## Routing
-
-* Routing for the `sylius_shop_payum` has been moved from the `SyliusShopBundle` to the `SyliusPayumBundle`:
-
-```yaml
-sylius_shop_payum:
-    -   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
-+   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
-```
