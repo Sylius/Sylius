@@ -725,6 +725,8 @@ If your app never changed the hasher name configuration, you don't need to confi
 
 ## Frontend
 
+* Unused, legacy node packages have been removed, while the required ones have been updated to newer versions. To ensure a smooth transition, it is recommended to delete the `node_modules` directory and reinstall the packages.
+* The recommended Node.js versions are 20 or 22, as support for version 18 has been dropped.
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
