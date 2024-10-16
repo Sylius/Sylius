@@ -514,3 +514,7 @@
 
 1. The `sylius_core.state_machine` configuration parameter is deprecated and will be removed in 2.0. 
    Use `sylius_state_machine_abstraction.state_machine` instead.
+
+1. The `sylius_user.resources.{name}.user.resetting.pin` configuration parameter is deprecated and will be removed in 2.0. 
+   The corresponding email `reset_password_pin` and `Sylius\Bundle\UserBundle\Controller\UserController::requestPasswordResetPinAction` 
+   method have been also deprecated and will be removed in 2.0. 
