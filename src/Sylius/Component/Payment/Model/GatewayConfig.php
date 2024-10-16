@@ -21,7 +21,7 @@ class GatewayConfig implements GatewayConfigInterface
 
     protected ?string $gatewayName = null;
 
-    /** @var array<string, mixed> $config */
+    /** @var array<string, mixed> */
     protected array $config;
 
     public function __construct()

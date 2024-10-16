@@ -23,4 +23,4 @@ sylius_admin_admin_user_remove_avatar:
     path: /users/{id}/remove-avatar
     methods: [PUT]
     defaults:
-        _controller: Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction
+        _controller: sylius_admin.controller.remove_avatar

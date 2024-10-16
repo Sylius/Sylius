@@ -18,7 +18,7 @@ use Sylius\Component\Payment\Model\GatewayConfig as BaseGatewayConfig;
 
 class GatewayConfig extends BaseGatewayConfig implements GatewayConfigInterface
 {
-    /** @var array<string, mixed> $decryptedConfig */
+    /** @var array<string, mixed> */
     protected array $decryptedConfig;
 
     public function __construct()

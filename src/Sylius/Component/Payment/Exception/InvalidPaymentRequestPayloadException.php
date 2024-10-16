@@ -19,7 +19,7 @@ final class InvalidPaymentRequestPayloadException extends \RuntimeException
     public function __construct(
         string $message = 'Payload of the payment request is invalid.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

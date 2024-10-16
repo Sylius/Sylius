@@ -33,4 +33,4 @@ sylius_admin_shipment_resend_confirmation_email:
     path: /shipments/{id}/resend-confirmation-email
     methods: [GET]
     defaults:
-        _controller: Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction
+        _controller: sylius_admin.controller.resend_shipment_confirmation_email

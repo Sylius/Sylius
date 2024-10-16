@@ -45,7 +45,7 @@ final class RouteParametersProcessorSpec extends ObjectBehavior
 
         $router->generate(
             'a_route',
-            ['aParam'=>'value'],
+            ['aParam' => 'value'],
         )->willReturn('https://localhost/a_route?aParam=value');
 
         $this->process(
@@ -59,12 +59,12 @@ final class RouteParametersProcessorSpec extends ObjectBehavior
         ExpressionLanguage $expressionLanguage,
     ): void {
         $expressionLanguage->evaluate('value', [
-            'value' => '1'
+            'value' => '1',
         ])->willReturn('1')->shouldBeCalledOnce();
 
         $router->generate(
             'a_route',
-            ['aParam'=>'1'],
+            ['aParam' => '1'],
         )->willReturn('https://localhost/a_route?aParam=1');
 
         $this->process(

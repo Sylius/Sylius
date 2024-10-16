@@ -48,7 +48,7 @@ final readonly class RequestProcessor implements RequestProcessorInterface
         $this->stateMachine->apply(
             $paymentRequest,
             PaymentRequestTransitions::GRAPH,
-            PaymentRequestTransitions::TRANSITION_COMPLETE
+            PaymentRequestTransitions::TRANSITION_COMPLETE,
         );
 
         if (false === $request instanceof TokenAggregateInterface) {

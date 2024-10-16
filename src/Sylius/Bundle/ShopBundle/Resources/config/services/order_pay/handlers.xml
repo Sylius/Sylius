@@ -17,6 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius.shop.order_pay.handler.payment_state_flash" parent="Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface" />
+        <service id="sylius_shop.order_pay.handler.payment_state_flash" parent="Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface" />
     </services>
 </container>

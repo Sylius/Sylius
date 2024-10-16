@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
-use Sylius\Bundle\CoreBundle\OrderPay\Processor\RouteParametersProcessorInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\OrderPay\Processor\RouteParametersProcessorInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
@@ -31,6 +31,7 @@ final class FinalUrlProviderSpec extends ObjectBehavior
             [],
         );
     }
+
     function it_provides_a_final_url_from_null_payment(
         RouteParametersProcessorInterface $routeParametersProcessor,
     ): void {

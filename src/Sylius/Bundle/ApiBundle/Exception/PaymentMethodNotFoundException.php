@@ -19,7 +19,7 @@ final class PaymentMethodNotFoundException extends \RuntimeException
     public function __construct(
         string $message = 'Payment method not found.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

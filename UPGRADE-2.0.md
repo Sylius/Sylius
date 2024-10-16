@@ -51,6 +51,40 @@
 | `sylius.attribute_type.select.value.translations`                                                          | `sylius.form.type.attribute_type.configuration.select_attribute_value_translations`  |
 | `sylius.validator.valid_text_attribute`                                                                    | `sylius.validator.valid_text_attribute_configuration`                                |
 | `sylius.validator.valid_select_attribute`                                                                  | `sylius.validator.valid_select_attribute_configuration`                              |
+| **AdminBundle**                                                                                            |                                                                                      |
+| `sylius.security.shop_user_impersonator`                                                                   | `sylius_admin.security.shop_user_impersonator`                                       |
+| `sylius.controller.impersonate_user`                                                                       | `sylius_admin.controller.impersonate_user`                                           |
+| `Sylius\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction`                                   | `sylius_admin.controller.account.render_reset_password_page`                         |
+| `Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction`                                             | `sylius_admin.controller.account.reset_password`                                     |
+| `Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction`                                                      | `sylius_admin.controller.remove_avatar`                                              |
+| `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction`                                      | `sylius_admin.controller.resend_order_confirmation_email`                            |
+| `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction`                                   | `sylius_admin.controller.resend_shipment_confirmation_email`                         |
+| `Sylius\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction`                            | `sylius_admin.controller.account.render_request_password_reset_page`                 |
+| `Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction`                                      | `sylius_admin.controller.account.request_password_reset`                             |
+| `sylius.controller.admin.dashboard`                                                                        | `sylius_admin.controller.dashboard`                                                  |
+| `sylius.controller.customer_statistics`                                                                    | `sylius_admin.controller.customer_statistics`                                        |
+| `sylius.controller.admin.notification`                                                                     | `sylius_admin.controller.notification`                                               |
+| `Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction`                                        | `sylius_admin.controller.remove_catalog_promotion`                                   |
+| `Sylius\Bundle\AdminBundle\Controller\RedirectHandler`                                                     | `sylius_admin.resource_controller.redirect_handler`                                  |
+| `sylius.mailer.shipment_email_manager.admin`                                                               | `sylius_admin.mailer.email_manager.shipment`                                         |
+| `Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType`                                                  | `sylius_admin.form.type.request_password_reset`                                      |
+| `Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType`                                                    | `sylius_admin.form.type.reset_password`                                              |
+| `sylius.listener.shipment_ship`                                                                            | `sylius_admin.listener.shipment_ship`                                                |
+| `sylius.listener.locale`                                                                                   | `sylius_admin.listener.locale`                                                       |
+| `sylius.event_subscriber.admin_cache_control_subscriber`                                                   | `sylius_admin.event_subscriber.admin_section_cache_control`                          |
+| `sylius.event_subscriber.admin_filter_subscriber`                                                          | `sylius_admin.event_subscriber.admin_filter`                                         |
+| `sylius.admin.menu_builder.main`                                                                           | `sylius_admin.menu_builder.main`                                                     |
+| `Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand`                                         | `sylius_admin.console.command.create_admin_user`                                     |
+| `Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand`                                 | `sylius_admin.console.command.change_admin_user_password`                            |
+| `Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler`                                          | `sylius_admin.command_handler.create_admin_user`                                     |
+| `sylius.console.command_factory.question`                                                                  | `sylius_admin.console.command_factory.question`                                      |
+| `sylius.context.locale.admin_based`                                                                        | `sylius_admin.context.locale.admin_based`                                            |
+| `sylius.section_resolver.admin_uri_based_section_resolver`                                                 | `sylius_admin.section_resolver.admin_uri_based`                                      |
+| `sylius.twig.extension.widget.admin_notification`                                                          | `sylius_admin.twig.extension.notification_widget`                                    |
+| `sylius.twig.extension.shop`                                                                               | `sylius_admin.twig.extension.shop`                                                   |
+| `sylius.twig.extension.channels_currencies`                                                                | `sylius_admin.twig.extension.channels_currencies`                                    |
+| `Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension`                                                   | `sylius_admin.twig.extension.order_unit_taxes`                                       |
+| `Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension`                                                      | `sylius_admin.twig.extension.channel_name`                                           |
 | **AddressingBundle**                                                                                       |                                                                                      |
 | `sylius.province_naming_provider`                                                                          | `sylius.provider.province_naming`                                                    |
 | `sylius.zone_matcher`                                                                                      | `sylius.matcher.zone`                                                                |
@@ -120,7 +154,7 @@
 | `sylius.promotion_processor`                                                                               | `sylius.processor.promotion`                                                         |
 | `sylius.promotion_applicator`                                                                              | `sylius.action.applicator.promotion`                                                 |
 | `sylius.registry_promotion_rule_checker`                                                                   | `sylius.registry.promotion.rule_checker`                                             |
-| `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion.action`                                                   |
+| `sylius.registry_promotion_action`                                                                         | `sylius.registry.promotion_action`                                                   |
 | `sylius.active_promotions_provider`                                                                        | `sylius.provider.active_promotions`                                                  |
 | `sylius.promotion_coupon_generator`                                                                        | `sylius.generator.promotion_coupon`                                                  |
 | `sylius.promotion_coupon_generator.percentage_policy`                                                      | `sylius.generator.percentage_generation_policy`                                      |
@@ -142,11 +176,43 @@
 | `sylius.shipping_date_assigner`                                                                            | `sylius.assigner.shipping_date`                                                      |
 | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                   | `sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal`             |
 | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                      | `sylius.rule_checker.shipping_method.total_weight_less_than_or_equal`                |
+| **ShopBundle**                                                                                             |                                                                                      |
+| `sylius.shop.locale_switcher`                                                                              | `sylius_shop.locale_switcher`                                                        |
+| `sylius.storage.locale`                                                                                    | `sylius_shop.locale_storage`                                                         |
+| `sylius.context.locale.storage_based`                                                                      | `sylius_shop.context.locale.storage_based`                                           |
+| `sylius.shop.locale_stripping_router`                                                                      | `sylius_shop.router.locale_stripping`                                                |
+| `sylius.listener.non_channel_request_locale`                                                               | `sylius_shop.listener.non_channel_locale`                                            |
+| `sylius.controller.shop.contact`                                                                           | `sylius_shop.controller.contact`                                                     |
+| `sylius.controller.shop.currency_switch`                                                                   | `sylius_shop.controller.currency_switch`                                             |
+| `sylius.controller.shop.locale_switch`                                                                     | `sylius_shop.controller.locale_switch`                                               |
+| `sylius.controller.shop.register_thank_you`                                                                | `sylius_shop.controller.register_thank_you`                                          |
+| `sylius.mailer.contact_email_manager.shop`                                                                 | `sylius_shop.mailer.email_manager.contact`                                           |
+| `sylius.mailer.order_email_manager.shop`                                                                   | `sylius_shop.mailer.email_manager.order`                                             |
+| `sylius.listener.shop_cart_blamer`                                                                         | `sylius_shop.listener.shop_cart_blamer`                                              |
+| `sylius.listener.email_updater`                                                                            | `sylius_shop.listener.customer_email_updater`                                        |
+| `sylius.listener.shop_customer_account_sub_section_cache_control_subscriber`                               | `sylius_shop.event_subscriber.shop_customer_account_sub_section_cache_control`       |
+| `sylius.listener.order_customer_ip`                                                                        | `sylius_shop.listener.order_customer_ip`                                             |
+| `sylius.listener.order_complete`                                                                           | `sylius_shop.listener.order_complete`                                                |
+| `sylius.listener.user_registration`                                                                        | `sylius_shop.listener.user_registration`                                             |
+| `sylius.listener.order_integrity_checker`                                                                  | `sylius_shop.listener.order_integrity_checker`                                       |
+| `sylius.order_locale_assigner`                                                                             | `sylius_shop.listener.order_locale_assigner`                                         |
+| `sylius.listener.session_cart`                                                                             | `sylius_shop.event_subscriber.session_cart`                                          |
+| `sylius.listener.user_cart_recalculation`                                                                  | `sylius_shop.listener.user_cart_recalculation`                                       |
+| `sylius.listener.user_impersonated`                                                                        | `sylius_shop.listener.user_impersonated`                                             |
+| `sylius.shop.menu_builder.account`                                                                         | `sylius_shop.menu_builder.account`                                                   |
+| `sylius.twig.extension.original_price_to_display`                                                          | `sylius_shop.twig.extension.order_item_original_price_to_display`                    |
+| `Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension`                                                     | `sylius_shop.twig.extension.order_payments`                                          |
+| `sylius.section_resolver.shop_uri_based_section_resolver`                                                  | `sylius_shop.section_resolver.shop_uri_based`                                        |
+| `sylius.context.cart.session_and_channel_based`                                                            | `sylius_shop.context.cart.session_and_channel_based`                                 |
+| `sylius.storage.cart_session`                                                                              | `sylius_shop.storage.cart_session`                                                   |
+| `sylius.grid_filter.shop_string`                                                                           | `sylius_shop.grid.filter.string`                                                     |
 | **TaxationBundle**                                                                                         |                                                                                      |
 | `sylius.tax_rate_resolver`                                                                                 | `sylius.resolver.tax_rate`                                                           |
 | `sylius.tax_rate_date_eligibility_checker`                                                                 | `sylius.eligibility_checker.tax_rate_date`                                           |
 | **TaxonomyBundle**                                                                                         |                                                                                      |
 | `sylius.doctrine.odm.mongodb.unitOfWork`                                                                   | `sylius.doctrine.odm.mongodb.unit_of_work`                                           |
+| **UiBundle**                                                                                               |                                                                                      |
+| `Sylius\Bundle\UiBundle\Twig\RedirectPathExtension`                                                        | `sylius.twig.extension.redirect_path`                                                |
 | **UserBundle**                                                                                             |                                                                                      |
 | `Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`                                               | `sylius.console.command.demote_user`                                                 |
 | `Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`                                              | `sylius.console.command.promote_user`                                                |
@@ -169,9 +235,18 @@
 | **TaxonomyBundle**                                                                  |                                               |
 | `Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface`              | `sylius.custom_repository.tree.taxon`         |
 
-* The following class definitions were moved to a `CoreBundle`:
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
-    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType`
+* Aliases for the `knp_menu.menu_builder` tags introduced in Sylius 1.14 are now the only valid menu builder tags in Sylius 2.0:
+
+| Old Alias             | New Alias             |
+|-----------------------|-----------------------|
+| **AdminBundle**       |                       |
+| `sylius.admin.main`   | `sylius_admin.main`   |
+| **ShopBundle**        |                       |
+| `sylius.shop.account` | `sylius_shop.account` |
+
+* The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType` was moved to the `CoreBundle`.
+
+* The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType` was moved to the `PromotionBundle`.
 
 * The following parameters were removed:
 
@@ -459,6 +534,46 @@
         )
     ```
 
+   `Sylius\Bundle\AdminBundle\Controller\DashboardController`
+    ```diff
+        public function __construct(
+            private ChannelRepositoryInterface $channelRepository,
+            private Environment $templatingEngine,
+            private RouterInterface $router,
+    -       private ?StatisticsDataProviderInterface $statisticsDataProvider = null,
+        )
+    ```
+
+   `Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber`
+    ```diff
+    - use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
+    + use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
+
+        public function __construct(private FilterStorageInterface $filterStorage)
+    ```
+
+   `Sylius\Bundle\AdminBundle\Controller\RedirectHandler`
+    ```diff
+    - use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
+    + use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
+
+        public function __construct(
+            private RedirectHandlerInterface $decoratedRedirectHandler,
+            private FilterStorageInterface $filterStorage,
+        )
+    ```
+
+   `Sylius\Bundle\UiBundle\Twig\RedirectPathExtension`
+    ```diff
+    - use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
+    + use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
+
+        public function __construct(
+            private FilterStorageInterface $filterStorage,
+            private RouterInterface $router,
+        )
+    ```
+
 ## Grids
 
 The experimental `entities` filter has been removed. It has been replaced by the generic `entity` one.
@@ -548,6 +663,35 @@ If your app never changed the hasher name configuration, you don't need to confi
 * Some Twig extension services have been moved from the UiBundle to the new Twig Extra package
 
 * The following classes have been removed:
+    * `Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController`
+    * `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension`
+    * `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionSvopeTypeExtension`
+    * `Sylius\Bundle\AdminBundle\Menu\CustomerShowMenuBuilder`
+    * `Sylius\Bundle\AdminBundle\Menu\PromotionUpdateMenuBuilder`
+    * `Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder`
+    * `Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder`
+    * `Sylius\Bundle\AdminBundle\Menu\ProductUpdateMenuBuilder`
+    * `Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder`
+    * `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
+    * `Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider`
+    * `Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface`
+    * `Sylius\Bundle\UiBundle\DataCollector\TemplateBlockRenderingHistory`
+    * `Sylius\Bundle\UiBundle\DataCollector\TemplateBlockDataCollector`
+    * `Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateBlockRenderer`
+    * `Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateEventRenderer`
+    * `Sylius\Bundle\UiBundle\Registry\TemplateBlock`
+    * `Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistry`
+    * `Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface`
+    * `Sylius\Bundle\UiBundle\Renderer\DelegatingTemplateEventRenderer`
+    * `Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateBlockRenderer`
+    * `Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateEventRenderer`
+    * `Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface`
+    * `Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface`
+    * `Sylius\Bundle\UiBundle\Renderer\TwigTemplateBlockRenderer`
+    * `Sylius\Bundle\UiBundle\Storage\FilterStorage`
+    * `Sylius\Bundle\UiBundle\Storage\FilterStorageInterface`
+    * `Sylius\Bundle\UiBundle\Twig\LegacySonataBlockExtension`
+    * `Sylius\Bundle\UiBundle\Twig\TemplateEventExtension`
     * `Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension`
     * `Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension`
     * `Sylius\Bundle\UiBundle\Twig\RouteExistsExtension`

@@ -33,7 +33,7 @@ final class PaymentRequestWorkflowTest extends KernelTestCase
 
         $this->paymentRequest = new PaymentRequest(
             $this->createMock(PaymentInterface::class),
-            $this->createMock(PaymentMethodInterface::class)
+            $this->createMock(PaymentMethodInterface::class),
         );
     }
 

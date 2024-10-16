@@ -29,7 +29,8 @@ final class AfterPayUrlProvider implements AfterPayUrlProviderInterface
     ) {
     }
 
-    public function getUrl(PaymentRequestInterface $paymentRequest): string {
+    public function getUrl(PaymentRequestInterface $paymentRequest): string
+    {
         $context = [
             'paymentRequest' => $paymentRequest,
             'payment' => $paymentRequest->getPayment(),
@@ -39,7 +40,7 @@ final class AfterPayUrlProvider implements AfterPayUrlProviderInterface
         return $this->routeParametersProcessor->process(
             $this->afterPayRoute,
             $this->afterPayRouteParameters,
-            $context
+            $context,
         );
     }
 }

@@ -14,7 +14,7 @@ sylius_shop_default_locale:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.locale_switch::switchAction
+        _controller: sylius_shop.controller.locale_switch::switchAction
 
 # see https://web.dev/change-password-url/
 sylius_shop_request_password_reset_token_redirect:

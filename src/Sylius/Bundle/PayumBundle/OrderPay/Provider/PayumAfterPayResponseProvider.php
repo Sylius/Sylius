@@ -53,19 +53,20 @@ final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInt
 
         $url = $this->router->generate(
             $resolveNextRoute->getRouteName(),
-            $resolveNextRoute->getRouteParameters()
+            $resolveNextRoute->getRouteParameters(),
         );
 
         $this->getHttpRequestVerifier()->invalidate($token);
 
         return new RedirectResponse($url);
     }
+
     public function supports(RequestConfiguration $requestConfiguration): bool
     {
         $request = $requestConfiguration->getRequest();
         $hash = $request->attributes->get('payum_token', $request->get('payum_token', false));
 
-		return false !== $hash;
+        return false !== $hash;
     }
 
     private function getHttpRequestVerifier(): HttpRequestVerifierInterface
