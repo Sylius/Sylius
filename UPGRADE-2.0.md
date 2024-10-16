@@ -1,5 +1,66 @@
 # UPGRADE FROM `1.14` TO `2.0`
 
+## Initial part
+
+Even if your app is barely customized, it will require some manual adjustments before it can run again. Depending on
+whether you use Symfony Flex, some of these changes may be applied automatically, but it’s important to check them
+manually regardless.
+
+```md
+#config/packages/_sylius.yaml
+
+imports:
+...
++   - { resource: "@SyliusPayumBundle/Resources/config/app/config.yaml" }
+```
+
+```md
+#config/packages/_sylius.yaml
+
+sylius_payment:
+    resources:
++       gateway_config:
++           classes:
++               model: App\Entity\Payment\GatewayConfig
+
+...
+
+sylius_payum:
+    resources:
+-       gateway_config:
+-           classes:
+-               model: App\Entity\Payment\GatewayConfig
+```
+
+```md
+#config/bundles.php
+
+<?php
+
+return [
+-   Sylius\Calendar\SyliusCalendarBundle::class => ['all' => true],
+-   winzou\Bundle\StateMachineBundle\winzouStateMachineBundle::class => ['all' => true],
+-   Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle::class => ['all' => true],
+-   JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
+-   FOS\RestBundle\FOSRestBundle::class => ['all' => true],
+-   ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
+-   SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
++   ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
++   Sylius\TwigHooks\SyliusTwigHooksBundle::class => ['all' => true],
++   Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
++   Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
++   Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
++   Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
+];
+
+```
+
+## The rest of the changes
+
+Once you’ve applied these initial changes, your app should be able to run. However, depending on the customizations
+you’ve made, you may need to make some additional adjustments. Carefully review the following changes and apply them to
+your app as necessary.
+
 ## Configuration
 
 * Messenger:
@@ -7,11 +68,13 @@
       `sylius.event_bus` for commands and events respectively.
 
 * SyliusStateMachineAbstraction:
-    * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine` to `symfony_workflow`.
+    * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine`
+      to `symfony_workflow`.
 
 ## Dependencies
 
-* The following dependencies have been removed, install them in your application, if you still want to use Winzou State Machine:
+* The following dependencies have been removed, install them in your application, if you still want to use Winzou State
+  Machine:
 
     * `winzou/state-machine`
     * `winzou/state-machine-bundle`
@@ -51,7 +114,8 @@
     * `sylius.grid_driver.doctrine.phpcrodm`
     * `sylius.listener.api_postgresql_driver_exception_listener`
 
-* Aliases introduced in Sylius 1.14 have now become the primary service IDs in Sylius 2.0. The old service IDs have been removed, and all references must be updated accordingly:
+* Aliases introduced in Sylius 1.14 have now become the primary service IDs in Sylius 2.0. The old service IDs have been
+  removed, and all references must be updated accordingly:
 
 | Old ID                                                                                                     | New ID                                                                               |
 |------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
@@ -229,9 +293,11 @@
 | `Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`                                               | `sylius.console.command.demote_user`                                                 |
 | `Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`                                              | `sylius.console.command.promote_user`                                                |
 
-  The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use the new service IDs.
+The old service IDs are no longer available in Sylius 2.0. Please ensure your configurations and service references use
+the new service IDs.
 
-* The following services had new aliases added in Sylius 1.14. In Sylius 2.0, these aliases have become the primary service IDs, and the old service IDs remain as aliases:
+* The following services had new aliases added in Sylius 1.14. In Sylius 2.0, these aliases have become the primary
+  service IDs, and the old service IDs remain as aliases:
 
 | Current ID                                                                          | New Alias                                     | 
 |-------------------------------------------------------------------------------------|-----------------------------------------------|
@@ -247,7 +313,8 @@
 | **TaxonomyBundle**                                                                  |                                               |
 | `Sylius\Bundle\TaxonomyBundle\Repository\TaxonTreeRepositoryInterface`              | `sylius.custom_repository.tree.taxon`         |
 
-* Aliases for the `knp_menu.menu_builder` tags introduced in Sylius 1.14 are now the only valid menu builder tags in Sylius 2.0:
+* Aliases for the `knp_menu.menu_builder` tags introduced in Sylius 1.14 are now the only valid menu builder tags in
+  Sylius 2.0:
 
 | Old Alias             | New Alias             |
 |-----------------------|-----------------------|
@@ -256,18 +323,22 @@
 | **ShopBundle**        |                       |
 | `sylius.shop.account` | `sylius_shop.account` |
 
-* The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType` was moved to the `CoreBundle`.
+* The definition of the
+  service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType` was
+  moved to the `CoreBundle`.
 
-* The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType` was moved to the `PromotionBundle`.
+* The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType` was moved to
+  the `PromotionBundle`.
 
 * The following parameters were removed:
 
     * `sylius.mongodb_odm.repository.class`
     * `sylius.phpcr_odm.repository.class`
-    
+
 * The following parameters were renamed:
 
-    * `sylius.message.admin_user_create.validation_groups` to `sylius_admin.command_handler.create_admin_user.validation_groups`
+    * `sylius.message.admin_user_create.validation_groups`
+      to `sylius_admin.command_handler.create_admin_user.validation_groups`
 
 * The following configuration options were removed:
 
@@ -660,9 +731,12 @@ The following classes have been removed:
     ```
 
 ## Password Encoder & Salt
-The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
 
-This "encoder" is configured via the [Symfony security password hasher](https://symfony.com/doc/current/security/passwords.html#configuring-a-password-hasher).
+The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony
+security configuration.
+
+This "encoder" is configured via
+the [Symfony security password hasher](https://symfony.com/doc/current/security/passwords.html#configuring-a-password-hasher).
 
 You may have already something like that configuration bellow.
 
@@ -680,7 +754,7 @@ Check if you have an encoder configured in the `sylius_user` package configurati
 ```yaml
 sylius_user:
     # ...
-    
+
     encoder: plaintext # Remove this line
 
     # ...
@@ -697,7 +771,8 @@ In modern Symfony projects, the hasher name is stored on the password.
 Example:
 `$argon2i$v=19$m=65536,t=4,p=1$VVJuMnpUUWhRY1daN1ppMA$2Tx6l3I+OUx+PUPn+vZz1jI3Z6l6IHh2kpG0NdpmYWE`
 
-If some of your users do not have the hasher name stored in the password field you may need to configure the "migrate_from" option into Symfony, following that documentation:
+If some of your users do not have the hasher name stored in the password field you may need to configure the "
+migrate_from" option into Symfony, following that documentation:
 https://symfony.com/doc/current/security/passwords.html#configure-a-new-hasher-using-migrate-from
 
 Note:
@@ -705,8 +780,12 @@ If your app never changed the hasher name configuration, you don't need to confi
 
 ## Directory structure
 
-* The Winzou state machine configuration file `state_machine.yml` has been moved from `@SyliusPaymentBundle/Resources/config/app` to `@SyliusPaymentBundle/Resources/config/app/state_machine` and renamed to `sylius_payment.yaml`.
-* The Symfony workflow configuration file `state_machine.yaml` has been moved from `@SyliusPaymentBundle/Resources/config/workflow` to `@SyliusPaymentBundle/Resources/config/app/workflow` and renamed to `sylius_payment.yaml`.
+* The Winzou state machine configuration file `state_machine.yml` has been moved
+  from `@SyliusPaymentBundle/Resources/config/app` to `@SyliusPaymentBundle/Resources/config/app/state_machine` and
+  renamed to `sylius_payment.yaml`.
+* The Symfony workflow configuration file `state_machine.yaml` has been moved
+  from `@SyliusPaymentBundle/Resources/config/workflow` to `@SyliusPaymentBundle/Resources/config/app/workflow` and
+  renamed to `sylius_payment.yaml`.
 
 ## Frontend
 
@@ -759,13 +838,16 @@ If your app never changed the hasher name configuration, you don't need to confi
 ## Payment method gateways
 
 * Stripe gateway has been removed. This implementation has been deprecated and not SCA Ready.
-* PayPal Express Checkout gateway has been removed. Use now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.
+* PayPal Express Checkout gateway has been removed. Use
+  now [PayPal Commerce Platform](https://github.com/Sylius/PayPalPlugin) integration.
 
 ## Theming
-* Dependency on `sylius/theme-bundle` is moved from CoreBundle to ShopBundle and it will no longer be installed 
+
+* Dependency on `sylius/theme-bundle` is moved from CoreBundle to ShopBundle and it will no longer be installed
   if you're running your shop in headless mode.
 * Channel's `themeName` form field existence is made optional and depends on `ShopBundle` presence.
-* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.
+* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to
+  the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`.
 
 ## Routing
 
@@ -773,6 +855,6 @@ If your app never changed the hasher name configuration, you don't need to confi
 
 ```yaml
 sylius_shop_payum:
--   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
+    -   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 +   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
 ```
