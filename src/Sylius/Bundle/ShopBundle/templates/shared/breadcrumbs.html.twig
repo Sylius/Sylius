@@ -5,7 +5,7 @@
                 {% if item.path is defined %}
                     <a class="link-reset" href="{{ item.path }}">{{ item.label|raw }}</a>
                 {% else %}
-                    <span class="text-body-tertiary">{{ item.label|raw }}</span>
+                    <span class="text-body-tertiary text-break">{{ item.label|raw }}</span>
                 {% endif %}
             </li>
         {% endfor %}
