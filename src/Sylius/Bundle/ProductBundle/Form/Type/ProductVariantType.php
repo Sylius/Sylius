@@ -29,6 +29,12 @@ final class ProductVariantType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.product.enabled',
             ])
+            ->add('showDisabledChannels', CheckboxType::class, [
+                'required' => false,
+                'label' => 'sylius.ui.show_disabled_channels',
+                'data' => true,
+                'mapped' => false,
+            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductVariantTranslationType::class,
                 'label' => 'sylius.form.product_variant.translations',
