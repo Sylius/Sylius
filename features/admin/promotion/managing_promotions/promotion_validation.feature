@@ -78,7 +78,7 @@ Feature: Promotion validation
         Then I should be notified that promotion label in "Polish (Poland)" locale is too long
 
     @api @ui @mink:chromedriver
-    Scenario: Trying to add a new promotion without specifying a order percentage discount
+    Scenario: Trying to add a new promotion without specifying an order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
         And I name it "Christmas sale"
