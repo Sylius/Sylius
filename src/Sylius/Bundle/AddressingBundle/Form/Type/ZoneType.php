@@ -19,6 +19,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -44,6 +45,10 @@ final class ZoneType extends AbstractResourceType
             ])
             ->add('type', ZoneTypeChoiceType::class, [
                 'disabled' => true,
+            ])
+            ->add('priority', IntegerType::class, [
+                'label' => 'sylius.form.zone.priority',
+                'required' => true,
             ])
         ;
 
