@@ -9,24 +9,14 @@ parameters:
         - "sylius_api_shop_order_payment_get_configuration"
         - "sylius_api_shop_order_payment_patch"
         - "sylius_api_shop_order_payment_patch_account"
-    sylius.security.api_route: "%sylius.security.new_api_route%"
-    sylius.security.api_regex: "%sylius.security.new_api_regex%"
-    sylius.security.api_admin_route: "%sylius.security.new_api_admin_route%"
-    sylius.security.api_admin_regex: "%sylius.security.new_api_admin_regex%"
-    sylius.security.api_shop_route: "%sylius.security.new_api_shop_route%"
-    sylius.security.api_shop_regex: "%sylius.security.new_api_shop_regex%"
-    sylius.security.api_shop_account_route: "%sylius.security.new_api_user_account_route%"
-    sylius.security.api_shop_account_regex: "%sylius.security.new_api_user_account_regex%"
-
-    # Below parameters are deprecated since Sylius 1.14 and will be removed in 2.0.    
-    sylius.security.new_api_route: "/api/v2"
-    sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
-    sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
-    sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
-    sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
-    sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
-    sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
-    sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
+    sylius.security.api_route: "/api/v2"
+    sylius.security.api_regex: "^%sylius.security.api_route%"
+    sylius.security.api_admin_route: "%sylius.security.api_route%/admin"
+    sylius.security.api_admin_regex: "^%sylius.security.api_admin_route%"
+    sylius.security.api_shop_route: "%sylius.security.api_route%/shop"
+    sylius.security.api_shop_regex: "^%sylius.security.api_shop_route%"
+    sylius.security.api_shop_account_route: "%sylius.security.api_shop_route%/account"
+    sylius.security.api_shop_account_regex: "^%sylius.security.api_shop_account_route%"
 
 sylius_api:
     filter_eager_loading_extension:
@@ -100,6 +90,6 @@ api_platform:
 
 lexik_jwt_authentication:
     api_platform:
-        check_path: "%sylius.security.new_api_route%/administrators/token"
+        check_path: "%sylius.security.api_route%/administrators/token"
         username_path: email
         password_path: password
