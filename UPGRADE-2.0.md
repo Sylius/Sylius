@@ -124,6 +124,9 @@
 | `sylius.expired_carts_remover`                                                                             | `sylius.remover.expired_carts`                                                       |
 | `sylius.sequential_order_number_generator`                                                                 | `sylius.number_generator.sequential_order`                                           |
 | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`                                      | `sylius.console.command.remove_expired_carts`                                        |
+| **PaymentBundle**                                                                                          |                                                                                      |
+| `sylius.payment_methods_resolver`                                                                          | `sylius.resolver.payment_methods`                                                    |
+| `sylius.payment_methods_resolver.default`                                                                  | `sylius.resolver.payment_methods.default`                                            |
 | **ProductBundle**                                                                                          |                                                                                      |
 | `sylius.form.type.sylius_product_associations`                                                             | `sylius.form.type.product_associations`                                              |
 | `sylius.form.event_subscriber.product_variant_generator`                                                   | `sylius.form.event_subscriber.generate_product_variants`                             |
@@ -453,6 +456,12 @@
     * `sylius.security.user_login`
     * `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
     * `Sylius\Component\User\Security\UserPasswordHasherInterface`
+
+* The service `sylius.form_registry.payum_gateway_config` has been moved to the `PaymentBundle`, and its ID changed to `sylius.form_registry.payment_gateway_config`.
+
+* The class `Sylius\Bundle\PayumBundle\Validator\GatewayFactoryExistsValidator` has been moved to the `PaymentBundle`, and its service ID changed to`sylius.validator.gateway_factory_exists`.
+
+* The class `Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator` has been moved to the `PaymentBundle`, and its service ID changed to`sylius.validator.groups_generator.gateway_config`.
 
 ### Constructors signature changes
 

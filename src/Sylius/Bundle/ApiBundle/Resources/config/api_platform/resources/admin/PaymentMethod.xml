@@ -86,7 +86,7 @@
                 </normalizationContext>
                 <validationContext>
                     <values>
-                        <value name="groups">sylius_api.validator.payment_method_groups_generator</value>
+                        <value name="groups">sylius_api.validator.groups_generator.payment_method</value>
                     </values>
                 </validationContext>
             </operation>
@@ -116,7 +116,7 @@
                 </normalizationContext>
                 <validationContext>
                     <values>
-                        <value name="groups">sylius_api.validator.payment_method_groups_generator</value>
+                        <value name="groups">sylius_api.validator.groups_generator.payment_method</value>
                     </values>
                 </validationContext>
             </operation>

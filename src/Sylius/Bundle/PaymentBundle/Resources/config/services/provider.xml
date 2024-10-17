@@ -29,7 +29,7 @@
 
         <service id="sylius.provider.http_response.gateway_factory" class="Sylius\Bundle\PaymentBundle\Provider\GatewayFactoryHttpResponseProvider">
             <argument type="service" id="sylius.provider.gateway_factory_name" />
-            <argument type="tagged_locator" tag="sylius.payment_request.http_response.provider" index-by="gateway-factory" />
+            <argument type="tagged_locator" tag="sylius.payment_request.provider.http_response" index-by="gateway-factory" />
         </service>
         <service id="sylius.provider.http_response.default" alias="sylius.provider.http_response.gateway_factory" />
 
@@ -39,14 +39,16 @@
         <service id="sylius.provider.default_payload" class="Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProvider" />
         <service id="Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProviderInterface" alias="sylius.provider.default_payload" />
 
-        <service id="sylius.http_response.provider.offline" class="Sylius\Bundle\PaymentBundle\Provider\ActionsHttpResponseProvider">
-            <argument type="tagged_locator" tag="sylius.http_response.provider.offline" index-by="action" />
-            <tag name="sylius.payment_request.http_response.provider" gateway-factory="offline" />
+        <service id="sylius.provider.http_response.offline" class="Sylius\Bundle\PaymentBundle\Provider\ActionsHttpResponseProvider">
+            <argument type="tagged_locator" tag="sylius.provider.http_response.offline" index-by="action" />
+            <tag name="sylius.payment_request.provider.http_response" gateway-factory="offline" />
         </service>
 
         <service id="sylius.provider.notify_payment" class="Sylius\Bundle\PaymentBundle\Provider\CompositeNotifyPaymentProvider">
             <argument type="tagged_iterator" tag="sylius.payment_request.payment_notify_provider" />
         </service>
+        <service id="sylius.provider.notify_payment.composite" alias="sylius.provider.notify_payment" />
+        <service id="Sylius\Bundle\PaymentBundle\Provider\NotifyPaymentProviderInterface" alias="sylius.provider.notify_payment" />
 
         <service id="sylius.provider.notify_response" class="Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProvider" />
         <service id="Sylius\Bundle\PaymentBundle\Provider\NotifyResponseProviderInterface" alias="sylius.provider.notify_response" />
