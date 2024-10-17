@@ -1,0 +1,43 @@
+Sylius\Component\Core\Model\Promotion:
+    promotion_ineligible:
+        code: 'promotion_ineligible'
+        name: 'Ineligible promotion'
+        description: 'This promotion is not eligible for the cart that contains more than 10 items'
+        channels: ['@channel_web']
+        priority: 1
+        exclusive: true
+        appliesToDiscounted: false
+        usageLimit: 1
+        used: 0
+        couponBased: true
+        translations:
+            - '@promotion_ineligible_en'
+
+Sylius\Component\Promotion\Model\PromotionTranslation:
+    promotion_ineligible_en:
+        locale: 'en_US'
+        label: 'Ineligible'
+        translatable: '@promotion_ineligible'
+
+Sylius\Component\Core\Model\PromotionCoupon:
+    promotion_coupon_ineligible:
+        code: 'ELIGIBLE_COUPON_WITH_INELIGIBLE_PROMOTION'
+        usageLimit: null
+        perCustomerUsageLimit: null
+        reusableFromCancelledOrders: false
+        promotion: '@promotion_ineligible'
+
+Sylius\Component\Promotion\Model\PromotionRule:
+    promotion_rule_cart_quantity_more_than_10:
+        type: "cart_quantity"
+        promotion: "@promotion_ineligible"
+        configuration:
+            count: 5
+
+Sylius\Component\Promotion\Model\PromotionAction:
+    promotion_action_unit_fixed_discount_100:
+        type: "unit_fixed_discount"
+        promotion: "@promotion_ineligible"
+        configuration:
+            WEB:
+                amount: 100

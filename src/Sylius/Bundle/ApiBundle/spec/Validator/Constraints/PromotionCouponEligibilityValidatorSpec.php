@@ -54,18 +54,87 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_add_violation_if_promotion_coupon_is_eligible(
+    function it_does_not_add_violation_if_coupon_code_was_not_provided(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
+        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
+        ExecutionContextInterface $executionContext,
+    ): void {
+        $this->initialize($executionContext);
+
+        $value = new UpdateCart(orderTokenValue: 'token', couponCode: null);
+        $constraint = new PromotionCouponEligibility();
+
+        $promotionCouponRepository->findOneBy(Argument::any())->shouldNotBeCalled();
+        $orderRepository->findCartByTokenValue(Argument::any())->shouldNotBeCalled();
+        $appliedCouponEligibilityChecker->isEligible(Argument::cetera())->shouldNotBeCalled();
+        $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate($value, $constraint);
+    }
+
+    function it_adds_violation_if_coupon_code_was_provided_but_it_does_not_exist(
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
+        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+    ): void {
+        $this->initialize($executionContext);
+
+        $value = new UpdateCart(orderTokenValue: 'token', couponCode: 'couponCode');
+        $constraint = new PromotionCouponEligibility();
+
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn(null);
+        $orderRepository->findCartByTokenValue('token')->shouldNotBeCalled();
+        $appliedCouponEligibilityChecker->isEligible(Argument::cetera())->shouldNotBeCalled();
+
+        $executionContext->buildViolation($constraint->invalid)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->setCode('COUPON_INVALID')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($value, $constraint);
+    }
+
+    function it_adds_violation_if_coupon_code_was_provided_but_it_is_expired(
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
+        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+        ExecutionContextInterface $executionContext,
+        PromotionCouponInterface $promotionCoupon,
+    ): void {
+        $this->initialize($executionContext);
+
+        $value = new UpdateCart(orderTokenValue: 'token', couponCode: 'couponCode');
+        $constraint = new PromotionCouponEligibility();
+
+        $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('-1 day'));
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
+        $orderRepository->findCartByTokenValue('token')->shouldNotBeCalled();
+        $appliedCouponEligibilityChecker->isEligible(Argument::cetera())->shouldNotBeCalled();
+
+        $executionContext->buildViolation($constraint->expired)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->setCode('COUPON_EXPIRED')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($value, $constraint);
+    }
+
+    function it_does_not_add_violation_if_promotion_with_given_coupon_is_eligible(
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
         AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
         PromotionCouponInterface $promotionCoupon,
-        OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
         ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
         $constraint = new PromotionCouponEligibility();
 
-        $value = new UpdateCart(couponCode: 'couponCode', orderTokenValue: 'token');
+        $value = new UpdateCart(orderTokenValue: 'token', couponCode: 'couponCode');
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
         $orderRepository->findCartByTokenValue('token')->willReturn($cart);
@@ -79,21 +148,21 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         $this->validate($value, $constraint);
     }
 
-    function it_adds_violation_if_promotion_coupon_is_not_eligible(
+    function it_adds_violation_if_promotion_with_given_coupon_is_not_eligible(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
         AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
         PromotionCouponInterface $promotionCoupon,
-        OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $this->initialize($executionContext);
+
+        $value = new UpdateCart(orderTokenValue: 'token', couponCode: 'couponCode');
         $constraint = new PromotionCouponEligibility();
-        $constraint->message = 'message';
 
-        $value = new UpdateCart(couponCode: 'couponCode', orderTokenValue: 'token');
-
+        $promotionCoupon->getExpiresAt()->willReturn(null);
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
         $orderRepository->findCartByTokenValue('token')->willReturn($cart);
 
@@ -101,33 +170,35 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)->willReturn(false);
 
-        $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation($constraint->ineligible)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->setCode('PROMOTION_INELIGIBLE')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($value, $constraint);
     }
 
-    function it_adds_violation_if_promotion_coupon_is_not_instance_of_promotion_coupon_interface(
+    function it_throws_an_exception_if_cart_with_given_token_does_not_exist(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         OrderRepositoryInterface $orderRepository,
+        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
+        PromotionCouponInterface $promotionCoupon,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $this->initialize($executionContext);
+
+        $value = new UpdateCart(orderTokenValue: 'token', couponCode: 'couponCode');
         $constraint = new PromotionCouponEligibility();
-        $constraint->message = 'message';
 
-        $value = new UpdateCart(couponCode: 'couponCode', orderTokenValue: 'token');
+        $promotionCoupon->getExpiresAt()->willReturn(null);
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
+        $appliedCouponEligibilityChecker->isEligible(Argument::cetera())->shouldNotBeCalled();
 
-        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn(null);
+        $orderRepository->findCartByTokenValue('token')->willReturn(null);
 
-        $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
-
-        $orderRepository->findCartByTokenValue('token')->shouldNotBeCalled();
-
-        $this->validate($value, $constraint);
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('validate', [$value, $constraint])
+        ;
     }
 }
