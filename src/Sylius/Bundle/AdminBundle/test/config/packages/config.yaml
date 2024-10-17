@@ -27,6 +27,7 @@ framework:
             app.shop:
                 json_manifest_path: '%kernel.project_dir%/public/build/app/shop/manifest.json'
     workflows: ~
+    http_method_override: true
 
 security:
     firewalls:
