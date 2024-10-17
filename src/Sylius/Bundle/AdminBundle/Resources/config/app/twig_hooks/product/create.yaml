@@ -191,6 +191,65 @@ sylius_twig_hooks:
                     auto_open: false
                 priority: 0
 
+        'sylius_admin.product.create.content.form.sections.attributes':
+            autocomplete:
+                template: '@SyliusAdmin/product/form/sections/attributes/autocomplete.html.twig'
+                priority: 100
+            list:
+                template: '@SyliusAdmin/product/form/sections/attributes/list.html.twig'
+                priority: 0
+
+        'sylius_admin.product.create.content.form.sections.attributes.autocomplete':
+            input:
+                template: '@SyliusAdmin/product/form/sections/attributes/autocomplete/input.html.twig'
+                priority: 100
+            button:
+                template: '@SyliusAdmin/product/form/sections/attributes/autocomplete/button.html.twig'
+                priority: 0
+
+        'sylius_admin.product.create.content.form.sections.attributes.list':
+            name:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/name.html.twig'
+                priority: 100
+            translations:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations.html.twig'
+                priority: 0
+
+        'sylius_admin.product.create.content.form.sections.attributes.list.name':
+            label:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/name/label.html.twig'
+                priority: 100
+            remove_button:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/name/remove_button.html.twig'
+                priority: 0
+
+        'sylius_admin.product.create.content.form.sections.attributes.list.translations':
+            flag:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations/flag.html.twig'
+                priority: 100
+            field:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations/field.html.twig'
+                priority: 0
+
+        'sylius_admin.product.create.content.form.sections.attributes.list.translations.field':
+            label:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations/field/label.html.twig'
+                priority: 100
+            input:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations/field/input_group.html.twig'
+                priority: 0
+
+        'sylius_admin.product.create.content.form.sections.attributes.list.translations.field.input_group':
+            widget:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations/field/input_group/widget.html.twig'
+                priority: 200
+            button:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations/field/input_group/apply_to_all.html.twig'
+                priority: 100
+            errors:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/translations/field/input_group/errors.html.twig'
+                priority: 0
+
         'sylius_admin.product.create.content.form.sections.associations':
             associations:
                 template: '@SyliusAdmin/product/form/sections/associations/associations.html.twig'

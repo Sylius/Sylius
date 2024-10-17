@@ -1,0 +1,7 @@
+{% set product_attributes = hookable_metadata.context.product_attributes %}
+
+<twig:sylius_admin:product:product_attribute_autocomplete
+    data-model="attributesToBeAdded:selectedAttributeCodes"
+    :excludedAttributeCodes="product_attributes|keys"
+    template="@SyliusAdmin/product/product_attribute_autocomplete.html.twig"
+/>
