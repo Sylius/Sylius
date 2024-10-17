@@ -551,4 +551,8 @@
 
 1. The `sylius_user.resources.{name}.user.resetting.pin` configuration parameter is deprecated and will be removed in 2.0. 
    The corresponding email `reset_password_pin` and `Sylius\Bundle\UserBundle\Controller\UserController::requestPasswordResetPinAction` 
-   method have been also deprecated and will be removed in 2.0. 
+   method have been also deprecated and will be removed in 2.0. The related class `Sylius\Component\User\Security\Generator\UniquePinGenerator`
+   and services have been deprecated as well:
+
+    * `sylius.{user_type}_user.pin_generator.password_reset`
+    * `sylius.{user_type}_user.pin_uniqueness_checker.password_reset`
