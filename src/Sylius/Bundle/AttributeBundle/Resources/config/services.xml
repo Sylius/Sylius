@@ -57,5 +57,13 @@
         <service id="sylius.validator.valid_select_attribute" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidSelectAttributeConfigurationValidator">
             <tag name="validator.constraint_validator" alias="sylius_valid_select_attribute_validator" />
         </service>
+
+        <service id="sylius.validator.valid_date_attribute" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidDateAttributeConfigurationValidator">
+            <tag name="validator.constraint_validator" alias="sylius_valid_date_attribute_validator" />
+        </service>
+
+        <service id="sylius.validator.valid_datetime_attribute" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidDatetimeAttributeConfigurationValidator">
+            <tag name="validator.constraint_validator" alias="sylius_valid_datetime_attribute_validator" />
+        </service>
     </services>
 </container>
