@@ -20,6 +20,10 @@ imports:
 sylius_shop_payum:
 -   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 +   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
+
+sylius_payment_notify:
++   resource: "@SyliusPaymentBundle/Resources/config/routing/integrations/sylius.yaml"
+
 ```
 
 ```md
