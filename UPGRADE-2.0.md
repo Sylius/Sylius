@@ -701,7 +701,6 @@ If your app never changed the hasher name configuration, you don't need to confi
     * `Sylius\Bundle\UiBundle\Twig\TemplateEventExtension`
     * `Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension`
     * `Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension`
-    * `Sylius\Bundle\UiBundle\Twig\RouteExistsExtension`
     * `Sylius\Bundle\UiBundle\Twig\SortByExtension`
 
 * The following services have been renamed:
