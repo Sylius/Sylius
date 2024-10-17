@@ -9,7 +9,7 @@ Feature: Adding promotion in different languages
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Adding a promotion with a label in a different language
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
