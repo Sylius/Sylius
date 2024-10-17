@@ -1,5 +1,3 @@
-.. rst-class:: outdated
-
 Custom calculators
 ==================
 
@@ -25,37 +23,24 @@ All shipping cost calculators implement ``CalculatorInterface``. In our example 
     namespace App\Shipping\Calculator;
 
     use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+    use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface;
+    use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorTrait;
     use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-    final class DHLCalculator implements CalculatorInterface
+    final class DHLCalculator implements CalculatorInterface, SettableTypeCalculatorInterface
     {
-        /**
-         * @var DHLService
-         */
-        private $dhlService;
+        use SettableTypeCalculatorTrait;
 
-        /**
-         * @param DHLService $dhlService
-         */
+        private DHLService $dhlService;
+
         public function __construct(DHLService $dhlService)
         {
             $this->dhlService = $dhlService;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function calculate(ShipmentInterface $subject, array $configuration): int
         {
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
-        }
-
-        /**
-         * {@inheritdoc}
-         */
-        public function getType(): string
-        {
-            return 'dhl';
         }
     }
 
@@ -98,9 +83,6 @@ First step is to create a form type which will be displayed if our calculator is
 
     final class DHLConfigurationType extends AbstractType
     {
-        /**
-         * {@inheritdoc}
-         */
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             $builder
@@ -114,9 +96,6 @@ First step is to create a form type which will be displayed if our calculator is
             ;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function configureOptions(OptionsResolver $resolver): void
         {
             $resolver
@@ -128,9 +107,6 @@ First step is to create a form type which will be displayed if our calculator is
             ;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function getBlockPrefix(): string
         {
             return 'app_shipping_calculator_dhl';
@@ -165,26 +141,21 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
     namespace App\Shipping\Calculator;
 
     use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+    use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface;
+    use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorTrait;
     use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-    final class DHLCalculator implements CalculatorInterface
+    final class DHLCalculator implements CalculatorInterface, SettableTypeCalculatorInterface
     {
-        /**
-         * @var DHLService
-         */
-        private $dhlService;
+        use SettableTypeCalculatorTrait;
 
-        /**
-         * @param DHLService $dhlService
-         */
+        private DHLService $dhlService;
+
         public function __construct(DHLService $dhlService)
         {
             $this->dhlService = $dhlService;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function calculate(ShipmentInterface $subject, array $configuration): int
         {
             if ($subject->getShippingUnitCount() > $configuration['limit']) {
@@ -192,14 +163,6 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
             }
 
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
-        }
-
-        /**
-         * {@inheritdoc}
-         */
-        public function getType(): string
-        {
-            return 'dhl';
         }
     }
 
