@@ -92,7 +92,7 @@
             class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\NotPrefixedRoutesRemovalDocumentationModifier"
         >
             <argument type="collection">
-                <argument>%sylius.security.new_api_route%</argument>
+                <argument>%sylius.security.api_route%</argument>
             </argument>
             <tag name="sylius.open_api.modifier" />
         </service>

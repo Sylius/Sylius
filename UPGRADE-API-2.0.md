@@ -217,3 +217,16 @@ All the `setter` methods have been removed from the commands above and also ther
 * The `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier` class and service have been removed.
   The `sylius.api.paths_to_hide` parameter used in this class has also been removed. We recommend defining endpoints
   with the `ApiPlatform\Metadata\NotExposed` class to hide specific operations.
+
+* The following parameters have been renamed:
+    
+  | Old parameter                                | New parameter                            |
+  |----------------------------------------------|------------------------------------------|
+  | `sylius.security.new_api_route`              | `sylius.security.api_route`              |
+  | `sylius.security.new_api_regex`              | `sylius.security.api_regex`              |
+  | `sylius.security.new_api_admin_route`        | `sylius.security.api_admin_route`        |
+  | `sylius.security.new_api_admin_regex`        | `sylius.security.api_admin_regex`        |
+  | `sylius.security.new_api_shop_route`         | `sylius.security.api_shop_route`         |
+  | `sylius.security.new_api_shop_regex`         | `sylius.security.api_shop_regex`         |
+  | `sylius.security.new_api_user_account_route` | `sylius.security.api_shop_account_route` |
+  | `sylius.security.new_api_user_account_regex` | `sylius.security.api_shop_account_regex` |
