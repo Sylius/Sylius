@@ -17,6 +17,13 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CustomerDataPersister::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class CustomerDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

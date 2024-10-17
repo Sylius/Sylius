@@ -21,6 +21,13 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private UserContextInterface $userContext)

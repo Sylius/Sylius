@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CommandDataTransformerInterface::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 interface CommandDataTransformerInterface
 {
     public function transform($object, string $to, array $context = []);

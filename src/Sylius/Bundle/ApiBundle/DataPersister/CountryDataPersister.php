@@ -18,6 +18,13 @@ use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CountryDataPersister::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class CountryDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

@@ -158,7 +158,7 @@ Example configuration for `percentage_discount` action type:
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/admin/catalog-promotions/{code}</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction</attribute>
+                <attribute name="controller">sylius_api.controller.remove_catalog_promotion</attribute>
                 <attribute name="openapi_context">
                     <attribute name="responses">
                         <attribute name="202">

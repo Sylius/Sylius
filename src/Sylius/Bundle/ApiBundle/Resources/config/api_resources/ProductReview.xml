@@ -124,7 +124,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/accept</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::accept</attribute>
+                <attribute name="controller">sylius_api.applicator.product_review_state_machine_transition::accept</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Accepts Product Review.</attribute>
                 </attribute>
@@ -140,7 +140,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/reject</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::reject</attribute>
+                <attribute name="controller">sylius_api.applicator.product_review_state_machine_transition::reject</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Rejects Product Review.</attribute>
                 </attribute>

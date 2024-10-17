@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="false" />
@@ -26,6 +27,7 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder.inner" />
             <argument type="service" id="sylius.context.channel" />
         </service>
+        <service id="sylius_api.context_builder.channel" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder" />
 
         <service
             id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ReadOperationContextBuilder"
@@ -35,6 +37,7 @@
             <argument type="service" id=".inner" />
             <argument>%sylius_api.serialization_groups.skip_adding_read_group%</argument>
             <argument>%sylius_api.serialization_groups.skip_adding_index_and_show_groups%</argument>
+            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service
@@ -45,6 +48,7 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder.inner" />
             <argument type="service" id="sylius.context.locale" />
         </service>
+        <service id="sylius_api.context_builder.locale" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder" />
 
         <service
             id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder"
@@ -53,5 +57,6 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder.inner" />
         </service>
+        <service id="sylius_api.context_builder.http_request_method_type" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder" />
     </services>
 </container>

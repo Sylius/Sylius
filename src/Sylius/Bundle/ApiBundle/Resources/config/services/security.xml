@@ -11,14 +11,16 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <service id="sylius_api.security.voter.order" class="Sylius\Bundle\ApiBundle\Security\OrderAdjustmentsVoter">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" />
+            <argument type="service" id="sylius_api.provider.adjustment_order" />
             <tag name="security.voter" />
         </service>
+        <service id="sylius_api.security.voter.order_adjustments" alias="sylius_api.security.voter.order" />
     </services>
 </container>

@@ -16,6 +16,13 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ChannelCodeAwareInputCommandDataTransformer::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ChannelCodeAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private ChannelContextInterface $channelContext)

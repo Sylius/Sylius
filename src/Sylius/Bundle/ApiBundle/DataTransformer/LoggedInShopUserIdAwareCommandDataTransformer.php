@@ -18,6 +18,13 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    LoggedInShopUserIdAwareCommandDataTransformer::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class LoggedInShopUserIdAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private UserContextInterface $userContext)

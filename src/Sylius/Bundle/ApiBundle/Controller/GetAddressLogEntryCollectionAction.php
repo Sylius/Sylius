@@ -19,6 +19,14 @@ use Sylius\Component\Addressing\Model\AddressLogEntry;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    GetAddressLogEntryCollectionAction::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class GetAddressLogEntryCollectionAction
 {
     use HandleTrait;

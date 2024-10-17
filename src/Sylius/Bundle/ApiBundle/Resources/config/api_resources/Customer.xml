@@ -91,7 +91,7 @@
             <itemOperation name="admin_statistics_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/customers/{id}/statistics</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction</attribute>
+                <attribute name="controller">sylius_api.controller.get_customer_statistics</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:customer:statistics:show</attribute>
@@ -124,7 +124,7 @@
             <itemOperation name="admin_delete_user">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/admin/customers/{id}/user</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction</attribute>
+                <attribute name="controller">sylius_api.controller.remove_customer_shop_user</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">

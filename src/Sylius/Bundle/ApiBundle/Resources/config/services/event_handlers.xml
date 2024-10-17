@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="true" />
@@ -23,5 +24,6 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
+        <service id="sylius_api.event_handler.order_completed" alias="Sylius\Bundle\ApiBundle\EventHandler\OrderCompletedHandler" />
     </services>
 </container>

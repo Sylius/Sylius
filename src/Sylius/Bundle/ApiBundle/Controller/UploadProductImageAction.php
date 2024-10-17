@@ -17,6 +17,14 @@ use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    UploadProductImageAction::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class UploadProductImageAction
 {
     public function __construct(private ImageCreatorInterface $productImageCreator)
