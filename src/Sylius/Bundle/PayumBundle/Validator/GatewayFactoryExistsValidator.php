@@ -18,6 +18,13 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
+trigger_deprecation(
+    'sylius/payum-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be moved to the PaymentBundle in Sylius 2.0.',
+    GatewayFactoryExistsValidator::class,
+);
+/** @deprecated since Sylius 1.14 and will be moved to the PaymentBundle in Sylius 2.0. */
 final class GatewayFactoryExistsValidator extends ConstraintValidator
 {
     /** @param array<string, string> $factoryNames */

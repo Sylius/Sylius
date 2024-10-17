@@ -21,6 +21,13 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 
+trigger_deprecation(
+    'sylius/payum-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ConvertPaymentAction::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ConvertPaymentAction implements ActionInterface
 {
     public function __construct(private InvoiceNumberGeneratorInterface $invoiceNumberGenerator)

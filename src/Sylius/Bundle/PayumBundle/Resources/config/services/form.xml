@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <parameters>
         <parameter key="sylius.form.type.gateway_config.validation_groups" type="collection">
             <parameter>sylius</parameter>
@@ -31,15 +35,18 @@
             <argument type="service" id="payum.dynamic_gateways.cypher" on-invalid="null" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType" priority="100" />
         </service>
+        <service id="sylius_payum.form.extension.type.crypted_gateway_config" alias="sylius.form.extension.type.gateway_config.crypted" />
 
         <service id="sylius.form.type.gateway_configuration.paypal" class="Sylius\Bundle\PayumBundle\Form\Type\PaypalGatewayConfigurationType">
             <tag name="sylius.gateway_configuration_type" type="paypal_express_checkout" label="sylius.payum_gateway_factory.paypal_express_checkout" priority="100" />
             <tag name="form.type" />
+            <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.form.type.gateway_configuration.stripe" class="Sylius\Bundle\PayumBundle\Form\Type\StripeGatewayConfigurationType">
             <tag name="sylius.gateway_configuration_type" type="stripe_checkout" label="sylius.payum_gateway_factory.stripe_checkout" priority="50" />
             <tag name="form.type" />
+            <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
     </services>
 </container>
