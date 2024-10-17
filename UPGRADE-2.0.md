@@ -424,21 +424,35 @@
           - 'sylius_zone_member_zone'
   ```
 
+* The `locked`, `expiresAt` and `credentialsExpireAt` fields have been removed from the User model, both ShopUser and AdminUser, 
+  as well as the corresponding methods in the User model and columns in the database tables.
+
 * The following classes and interfaces have been removed:
 
     * `Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper`
     * `Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper`
     * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`
-    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelper`
-    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelperInterface`
-    * `Sylius\Bundle\InventoryBundle/Templating/Helper/InventoryHelper`
-    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelper`
-    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelperInterface`
+    * `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper`
+    * `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface`
+    * `Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper`
+    * `Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper`
+    * `Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
-    * `Sylius\Bundle\OrderBundle/Templating/Helper/AdjustmentsHelper`
+    * `Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper`
+    * `Sylius\Bundle\UserBundle\Security\UserLogin`
+    * `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
+    * `Sylius\Bundle\UserBundle\Security\UserPasswordHasher`
+    * `Sylius\Bundle\UserBundle\Security\UserPasswordHasherInterface`
+
+* The following services and aliases have been removed:
+
+    * `sylius.security.password_hasher`
+    * `sylius.security.user_login`
+    * `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
+    * `Sylius\Component\User\Security\UserPasswordHasherInterface`
 
 ### Constructors signature changes
 
@@ -611,6 +625,27 @@ The following classes have been removed:
 
     - Sylius\Component\Core\Grid\Filter\EntitiesFilter
     - Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType
+
+## Security
+
+* User checkers have been configured on firewalls with `security.user_checker.chain.<firewall>` service:
+
+    ```diff
+    security:
+        firewalls:
+            admin:
+                ...
+    +           user_checker: security.user_checker.chain.admin
+            new_api_admin_user:
+                ...
+    +           user_checker: security.user_checker.chain.new_api_admin_user
+            new_api_shop_user:
+                ...
+    +           user_checker: security.user_checker.chain.new_api_shop_user
+            shop:
+                ...
+    +           user_checker: security.user_checker.chain.shop
+    ```
 
 ## Password Encoder & Salt
 The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.

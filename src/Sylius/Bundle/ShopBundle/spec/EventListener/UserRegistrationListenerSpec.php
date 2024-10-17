@@ -16,13 +16,13 @@ namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -33,14 +33,14 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
         ChannelContextInterface $channelContext,
-        UserLoginInterface $userLogin,
+        Security $security,
     ): void {
         $this->beConstructedWith(
             $userManager,
             $tokenGenerator,
             $eventDispatcher,
             $channelContext,
-            $userLogin,
+            $security,
             'shop',
         );
     }
@@ -80,7 +80,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
         ChannelContextInterface $channelContext,
-        UserLoginInterface $userLogin,
+        Security $security,
         GenericEvent $event,
         CustomerInterface $customer,
         ShopUserInterface $user,
@@ -97,7 +97,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
 
-        $userLogin->login($user, 'shop')->shouldBeCalled();
+        $security->login($user, 'form_login', 'shop')->shouldBeCalled();
 
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
@@ -115,7 +115,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
         ChannelContextInterface $channelContext,
-        UserLoginInterface $userLogin,
+        Security $security,
         GenericEvent $event,
         CustomerInterface $customer,
         ShopUserInterface $user,
@@ -132,7 +132,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
 
-        $userLogin->login($user, 'shop')->shouldBeCalled();
+        $security->login($user, 'form_login', 'shop')->shouldBeCalled();
 
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();

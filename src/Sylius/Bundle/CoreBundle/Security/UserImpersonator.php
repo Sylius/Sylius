@@ -29,9 +29,9 @@ final class UserImpersonator implements UserImpersonatorInterface
     private string $firewallContextName;
 
     public function __construct(
-        private RequestStack $requestStack,
+        private readonly RequestStack $requestStack,
         string $firewallContextName,
-        private EventDispatcherInterface $eventDispatcher,
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
         $this->sessionTokenParameter = sprintf('_security_%s', $firewallContextName);
         $this->firewallContextName = $firewallContextName;
