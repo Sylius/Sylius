@@ -102,6 +102,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->end()
                                             ->end()
                                             ->arrayNode('pin')
+                                                ->setDeprecated('sylius/user-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
                                                     ->integerNode('length')
