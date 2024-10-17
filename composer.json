@@ -130,6 +130,7 @@
         "symfony/twig-bundle": "^6.4.0 || ^7.1",
         "symfony/uid": "^6.4.0 || ^7.1",
         "symfony/ux-autocomplete": "^2.17",
+        "symfony/ux-icons": "^2.20",
         "symfony/ux-live-component": "^2.17",
         "symfony/ux-twig-component": "^2.17",
         "symfony/validator": "^6.4.0 || ^7.1",
