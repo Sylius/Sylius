@@ -36,10 +36,6 @@ final class ConfigurationTest extends TestCase
                                 'length' => 64,
                                 'field_name' => 'passwordResetToken',
                             ],
-                            'pin' => [
-                                'length' => 4,
-                                'field_name' => 'passwordResetToken',
-                            ],
                         ],
                     ],
                 ],

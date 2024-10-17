@@ -33,9 +33,6 @@ Configuration reference
                             ttl: P1D
                             length: 16
                             field_name: passwordResetToken
-                        pin:
-                            length: 4
-                            field_name: passwordResetToken
                     verification:
                         token:
                             length: 16
@@ -56,9 +53,6 @@ Configuration reference
                             ttl: P1D
                             length: 16
                             field_name: passwordResetToken
-                        pin:
-                            length: 4
-                            field_name: passwordResetToken
                     verification:
                         token:
                             length: 16
@@ -78,9 +72,6 @@ Configuration reference
                         token:
                             ttl: P1D
                             length: 16
-                            field_name: passwordResetToken
-                        pin:
-                            length: 4
                             field_name: passwordResetToken
                     verification:
                         token:
