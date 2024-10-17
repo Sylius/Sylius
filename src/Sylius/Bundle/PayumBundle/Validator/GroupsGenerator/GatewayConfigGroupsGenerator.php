@@ -17,7 +17,16 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Form\FormInterface;
 use Webmozart\Assert\Assert;
 
-/** @internal */
+trigger_deprecation(
+    'sylius/payum-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be moved to the PaymentBundle in Sylius 2.0.',
+    GatewayConfigGroupsGenerator::class,
+);
+/**
+ * @deprecated since Sylius 1.14 and will be moved to the PaymentBundle in Sylius 2.0.
+ * @internal
+ */
 class GatewayConfigGroupsGenerator
 {
     /** @param array<string, array<string, string>> $validationGroups */

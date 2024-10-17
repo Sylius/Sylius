@@ -119,29 +119,37 @@ final class SyliusUserExtension extends AbstractResourceExtension
             ),
         )->setPublic(true);
 
-        $container->setDefinition(
-            sprintf('sylius.%s_user.pin_generator.password_reset', $userType),
-            $this->createTokenGeneratorDefinition(
-                UniquePinGenerator::class,
-                [
-                    new Reference('sylius.random_generator'),
-                    new Reference(sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType)),
-                    $config['resetting']['pin']['length'],
-                ],
-            ),
-        )->setPublic(true);
+        $container
+            ->setDefinition(
+                sprintf('sylius.%s_user.pin_generator.password_reset', $userType),
+                $this->createTokenGeneratorDefinition(
+                    UniquePinGenerator::class,
+                    [
+                        new Reference('sylius.random_generator'),
+                        new Reference(sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType)),
+                        $config['resetting']['pin']['length'],
+                    ],
+                ),
+            )
+            ->setPublic(true)
+            ->setDeprecated('sylius/user-bundle', '1.14', 'The "%service_id%" is deprecated and will be removed in Sylius 2.0.')
+        ;
 
-        $container->setDefinition(
-            sprintf('sylius.%s_user.token_generator.email_verification', $userType),
-            $this->createTokenGeneratorDefinition(
-                UniqueTokenGenerator::class,
-                [
-                    new Reference('sylius.random_generator'),
-                    new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType)),
-                    $config['verification']['token']['length'],
-                ],
-            ),
-        )->setPublic(true);
+        $container
+            ->setDefinition(
+                sprintf('sylius.%s_user.token_generator.email_verification', $userType),
+                $this->createTokenGeneratorDefinition(
+                    UniqueTokenGenerator::class,
+                    [
+                        new Reference('sylius.random_generator'),
+                        new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType)),
+                        $config['verification']['token']['length'],
+                    ],
+                ),
+            )
+            ->setPublic(true)
+            ->setDeprecated('sylius/user-bundle', '1.14', 'The "%service_id%" is deprecated and will be removed in Sylius 2.0.')
+        ;
     }
 
     private function createTokenGeneratorDefinition(string $generatorClass, array $arguments): Definition

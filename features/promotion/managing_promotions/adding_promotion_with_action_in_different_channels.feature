@@ -9,8 +9,7 @@ Feature: Adding a new promotion with action configured in different channels
         And the store also operates on another channel named "Web-GB" in "GBP" currency
         And I am logged in as an administrator
 
-    # Temporarily disable in UI context because of the timeout exceptions in build
-    @api @todo-ui @mink:chromedriver
+    @ui @mink:chromedriver @api
     Scenario: Adding a new promotion with item fixed discount
         When I want to create a new promotion
         And I specify its code as "20_for_all_products"
