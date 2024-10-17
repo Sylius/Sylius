@@ -2,6 +2,8 @@
 
 {% set order = hookable_metadata.context.resource %}
 
-<span class="ms-2" {{ sylius_test_html_attribute('order-payment-state') }}>
-    {{ label(order.paymentState) }}
-</span>
+<div class="ms-auto">
+    <span class="ms-2" {{ sylius_test_html_attribute('order-payment-state') }}>
+        {{ label(order.paymentState) }}
+    </span>
+</div>
