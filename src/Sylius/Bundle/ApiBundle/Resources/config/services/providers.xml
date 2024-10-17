@@ -20,7 +20,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
         </service>
 
         <service id="sylius.api.provider.liip_image_filters" class="Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider">

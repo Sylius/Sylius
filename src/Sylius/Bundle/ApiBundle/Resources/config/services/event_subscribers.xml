@@ -30,7 +30,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber">
             <argument>%sylius_api.enabled%</argument>
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 

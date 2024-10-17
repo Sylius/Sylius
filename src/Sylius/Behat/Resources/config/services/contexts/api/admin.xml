@@ -100,7 +100,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_locales" class="Sylius\Behat\Context\Api\Admin\ManagingLocalesContext">
@@ -149,7 +149,7 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.section_iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
@@ -212,7 +212,7 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.section_iri_converter" />
             <argument type="service" id="api_platform.iri_converter" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_shipments" class="Sylius\Behat\Context\Api\Admin\ManagingShipmentsContext">
@@ -221,7 +221,7 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.section_iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_orders" class="Sylius\Behat\Context\Api\Admin\ManagingOrdersContext">
@@ -286,7 +286,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
         </service>
 
         <service id="Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext">
