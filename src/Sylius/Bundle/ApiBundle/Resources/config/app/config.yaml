@@ -9,6 +9,16 @@ parameters:
         - "sylius_api_shop_order_payment_get_configuration"
         - "sylius_api_shop_order_payment_patch"
         - "sylius_api_shop_order_payment_patch_account"
+    sylius.security.api_route: "%sylius.security.new_api_route%"
+    sylius.security.api_regex: "%sylius.security.new_api_regex%"
+    sylius.security.api_admin_route: "%sylius.security.new_api_admin_route%"
+    sylius.security.api_admin_regex: "%sylius.security.new_api_admin_regex%"
+    sylius.security.api_shop_route: "%sylius.security.new_api_shop_route%"
+    sylius.security.api_shop_regex: "%sylius.security.new_api_shop_regex%"
+    sylius.security.api_shop_account_route: "%sylius.security.new_api_user_account_route%"
+    sylius.security.api_shop_account_regex: "%sylius.security.new_api_user_account_regex%"
+
+    # Below parameters are deprecated since Sylius 1.14 and will be removed in 2.0.    
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"

@@ -40,7 +40,7 @@
         <service id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer" decorates="api_platform.hydra.normalizer.error">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer.inner" />
             <argument type="service" id="request_stack" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">

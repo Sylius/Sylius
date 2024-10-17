@@ -22,7 +22,7 @@ The next step is to modify the security configuration in ``config/packages/secur
 .. code-block:: yaml
 
     parameters:
-        sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/retail"
+        sylius.security.api_shop_route: "%sylius.security.api_route%/retail"
 
 .. warning::
 

@@ -25,7 +25,7 @@
         <service id="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.order" />
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
             <tag name="sylius.context.cart" priority="-333" />
         </service>
     </services>
