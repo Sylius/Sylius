@@ -10,7 +10,7 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'MENU_CATEGORY'
+                                code: 'category'
                                 name: 'Category'
                                 translations:
                                     en_US:
