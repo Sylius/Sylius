@@ -98,7 +98,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @return array|OrderInterface[]
      */
-    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate, ?int $limit = null): array;
+    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate, ?int $limit = null, ?ChannelInterface $channel = null): array;
 
     public function findCartForSummary($id): ?OrderInterface;
 

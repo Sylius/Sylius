@@ -16,6 +16,7 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand">
+            <argument type="service" id="sylius.repository.channel" />
             <tag name="console.command" />
         </service>
 
