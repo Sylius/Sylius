@@ -18,6 +18,7 @@ sylius_mailer:
         reset_password_token:
             subject: sylius.emails.user.password_reset.subject
             template: "@SyliusShop/email/password_reset.html.twig"
+        # This email is deprecated since Sylius 1.14 and will be removed in 2.0.
         reset_password_pin:
             subject: sylius.emails.user.password_reset.subject
             template: "@SyliusShop/email/password_reset.html.twig"
