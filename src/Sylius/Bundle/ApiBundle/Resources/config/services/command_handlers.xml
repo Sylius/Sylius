@@ -183,7 +183,7 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
-        <service id="sylius_api.command_handler.request_shop_user_verification_email" alias="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResendVerificationEmailHandler" />
+        <service id="sylius_api.command_handler.account.request_shop_user_verification" alias="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResendVerificationEmailHandler" />
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler">
             <argument type="service" id="sylius.user_password_resetter.shop" />

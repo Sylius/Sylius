@@ -188,7 +188,7 @@
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
-        <service id="sylius_api.listener.admin__authentication_success" alias="sylius.listener.admin_api_authentication_success_listener" />
+        <service id="sylius_api.listener.admin_authentication_success" alias="sylius.listener.admin_api_authentication_success_listener" />
 
         <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">
             <argument type="service" id="validator" />

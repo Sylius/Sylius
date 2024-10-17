@@ -95,7 +95,7 @@
     | `Sylius\Bundle\ApiBundle\CommandHandler\Cart\BlameCartHandler`                                             | `sylius_api.command_handler.cart.blame_cart`                                         |
     | `Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler`                             | `sylius_api.command_handler.account.change_shop_user_password`                       |
     | `Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler`                          | `sylius_api.command_handler.account.request_reset_password_token`                    |
-    | `Sylius\Bundle\ApiBundle\CommandHandler\Account\ResendVerificationEmailHandler`                            | `sylius_api.command_handler.request_shop_user_verification_email`                    |
+    | `Sylius\Bundle\ApiBundle\CommandHandler\Account\ResendVerificationEmailHandler`                            | `sylius_api.command_handler.account.request_shop_user_verification`                  |
     | `Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler`                                      | `sylius_api.command_handler.account.reset_password`                                  |
     | `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler`                       | `sylius_api.command_handler.account.send_account_registration_email`                 |
     | `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler`                       | `sylius_api.command_handler.account.send_shop_user_verification_email`               |
@@ -184,7 +184,7 @@
     | `Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver`                                   | `sylius_api.section_resolver.shop_api_uri_based`                                     |
     | `Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener`                                              | `sylius_api.listener.api_cart_blamer`                                                |
     | `sylius.listener.api_authentication_success_listener`                                                      | `sylius_api.listener.authentication_success`                                         |
-    | `sylius.listener.admin_api_authentication_success_listener`                                                | `sylius_api.listener.admin__authentication_success`                                  |
+    | `sylius.listener.admin_api_authentication_success_listener`                                                | `sylius_api.listener.admin_authentication_success`                                   |
     | **AddressingBundle**                                                                                       |                                                                                      |
     | `sylius.province_naming_provider`                                                                          | `sylius.provider.province_naming`                                                    |
     | `sylius.zone_matcher`                                                                                      | `sylius.matcher.zone`                                                                |
