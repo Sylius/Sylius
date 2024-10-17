@@ -193,8 +193,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function hasLabel(string $label, string $localeCode): bool
     {
-        $this->getDocument()->find('css', 'div[data-locale="' . $localeCode . '"]')->click();
-
         $labelElement = $this->getDocument()->find('css', sprintf('label:contains("%s")', $label));
         if (null === $labelElement) {
             return false;
