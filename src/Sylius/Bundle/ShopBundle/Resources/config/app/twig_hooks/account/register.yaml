@@ -7,45 +7,62 @@ sylius_twig_hooks:
                     resource: '@=_context.customer'
                     form: '@=_context.form'
                     template: '@SyliusShop/account/register/form.html.twig'
+                priority: 0
 
         'sylius_shop.account.register.form':
             header:
                 template: '@SyliusShop/account/register/form/header.html.twig'
+                priority: 300
             personal_information:
                 template: '@SyliusShop/account/register/form/personal_information.html.twig'
+                priority: 200
             credentials:
                 template: '@SyliusShop/account/register/form/credentials.html.twig'
+                priority: 100
             buttons:
                 template: '@SyliusShop/account/register/form/buttons.html.twig'
+                priority: 0
                 
         'sylius_shop.account.register.form.header':
             title:
                 template: '@SyliusShop/account/register/form/header/title.html.twig'
+                priority: 100
             subtitle:
                 template: '@SyliusShop/account/register/form/header/subtitle.html.twig'
+                priority: 0
 
         'sylius_shop.account.register.form.personal_information':
             header:
                 template: '@SyliusShop/account/register/form/personal_information/header.html.twig'
+                priority: 500
             first_name:
                 template: '@SyliusShop/account/register/form/personal_information/first_name.html.twig'
+                priority: 400
             last_name:
                 template: '@SyliusShop/account/register/form/personal_information/last_name.html.twig'
+                priority: 300
             email:
                 template: '@SyliusShop/account/register/form/personal_information/email.html.twig'
+                priority: 200
             phone_number:
                 template: '@SyliusShop/account/register/form/personal_information/phone_number.html.twig'
+                priority: 100
             newsletter:
                 template: '@SyliusShop/account/register/form/personal_information/newsletter.html.twig'
+                priority: 0
 
         'sylius_shop.account.register.form.credentials':
             header:
                 template: '@SyliusShop/account/register/form/credentials/header.html.twig'
+                priority: 200
             password:
                 template: '@SyliusShop/account/register/form/credentials/password.html.twig'
+                priority: 100
             password_confirmation:
                 template: '@SyliusShop/account/register/form/credentials/password_confirmation.html.twig'
+                priority: 0
 
         'sylius_shop.account.register.form.buttons':
             submit:
                 template: '@SyliusShop/account/register/form/buttons/submit.html.twig'
+                priority: 0

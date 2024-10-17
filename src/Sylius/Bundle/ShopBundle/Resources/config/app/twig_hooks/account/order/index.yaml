@@ -3,17 +3,28 @@ sylius_twig_hooks:
         'sylius_shop.account.order.index':
             breadcrumbs:
                 template: '@SyliusShop/account/order/index/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/layout/menu.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusShop/account/common/layout/content.html.twig'
+                priority: 0
 
         'sylius_shop.account.order.index.content':
             main_section:
                 template: '@SyliusShop/account/order/index/content/main_section.html.twig'
+                priority: 0
 
         'sylius_shop.account.order.index.content.header':
             title:
                 template: '@SyliusShop/account/order/index/content/header/title.html.twig'
+                priority: 100
             subtitle:
                 template: '@SyliusShop/account/order/index/content/header/subtitle.html.twig'
+                priority: 0
 
         'sylius_shop.account.order.index.content.main_section':
             grid:
                 template: '@SyliusShop/shared/grid.html.twig'
+                priority: 0

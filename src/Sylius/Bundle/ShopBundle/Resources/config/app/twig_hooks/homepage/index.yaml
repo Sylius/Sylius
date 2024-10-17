@@ -3,6 +3,7 @@ sylius_twig_hooks:
         'sylius_shop.homepage.index':
             banner:
                 template: '@SyliusShop/homepage/banner.html.twig'
+                priority: 300
             latest_deals:
                 component: 'sylius_shop:product:list'
                 props:
@@ -11,10 +12,13 @@ sylius_twig_hooks:
                 configuration:
                     title: 'sylius.homepage.latest_deals'
                     test_attribute: 'latest-deals'
+                priority: 200
             new_collection:
                 template: '@SyliusShop/homepage/new_collection.html.twig'
+                priority: 100
             latest_products:
                 component: 'sylius_shop:product:list'
                 props:
                     limit: 8
                     template: '@SyliusShop/product/common/list.html.twig'
+                priority: 0

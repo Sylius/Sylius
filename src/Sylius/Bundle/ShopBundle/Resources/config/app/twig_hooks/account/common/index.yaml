@@ -3,11 +3,15 @@ sylius_twig_hooks:
         'sylius_shop.account.common.index':
             breadcrumbs:
                 template: '@SyliusShop/account/common/layout/breadcrumbs.html.twig'
+                priority: 200
             menu:
                 template: '@SyliusShop/account/common/layout/menu.html.twig'
+                priority: 100
             content:
                 template: '@SyliusShop/account/common/layout/content.html.twig'
+                priority: 0
 
         'sylius_shop.account.common.index.content':
             header:
                 template: '@SyliusShop/account/common/layout/content/header.html.twig'
+                priority: 0
