@@ -54,7 +54,7 @@ final class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('enabled')->defaultValue(true)->end()
-                        ->arrayNode('disabled_gateways')
+                        ->arrayNode('disabled_for_factories')
                             ->scalarPrototype()->end()
                         ->end()
                     ->end()

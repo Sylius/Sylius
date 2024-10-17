@@ -132,11 +132,23 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasParameter('sylius.encryption.enabled', true);
-        $this->assertContainerBuilderHasParameter('sylius.encryption.disabled_gateways', []);
+        $this->assertContainerBuilderHasParameter('sylius.encryption.disabled_for_factories', []);
 
         $this->compile();
 
         $this->assertContainerBuilderHasService('sylius.encrypter');
+    }
+
+    /** @test */
+    public function it_populates_encryption_disabled_for_factories_parameter(): void
+    {
+        $this->load([
+            'encryption' => [
+                'disabled_for_factories' => ['paypal_express_checkout'],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius.encryption.disabled_for_factories', ['paypal_express_checkout']);
     }
 
     /** @test */

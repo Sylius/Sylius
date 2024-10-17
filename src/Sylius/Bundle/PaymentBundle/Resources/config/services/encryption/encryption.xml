@@ -34,7 +34,7 @@
 
         <service id="sylius.listener.gateway_config_encryption" class="Sylius\Bundle\PaymentBundle\Listener\GatewayConfigEncryptionListener">
             <argument type="service" id="sylius.encrypter.gateway_config" />
-            <argument>%sylius.encryption.disabled_gateways%</argument>
+            <argument>%sylius.encryption.disabled_for_factories%</argument>
             <argument>%sylius.model.gateway_config.class%</argument>
             <tag name="doctrine.event_listener" event="onFlush" />
             <tag name="doctrine.event_listener" event="postFlush" />
