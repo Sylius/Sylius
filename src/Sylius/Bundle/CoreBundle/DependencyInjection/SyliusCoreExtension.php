@@ -102,7 +102,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependDefaultDriver($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
-        $this->prependSyliusOrderBundle($container, $config);
     }
 
     protected function getMigrationsNamespace(): string
@@ -138,17 +137,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services/integrations/hwi_oauth.xml');
-    }
-
-    private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
-    {
-        if (!$container->hasExtension('sylius_order')) {
-            return;
-        }
-
-        $container->prependExtensionConfig('sylius_order', [
-            'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
-        ]);
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void
