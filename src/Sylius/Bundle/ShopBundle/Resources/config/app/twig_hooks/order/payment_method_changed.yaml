@@ -1,0 +1,9 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.order.payment_method_changed':
+            header:
+                template: "@SyliusShop/order/payment_method_changed/header.html.twig"
+            payment_instruction:
+                template: "@SyliusShop/shared/order/process/payment_instruction.html.twig"
+            buttons:
+                template: "@SyliusShop/order/payment_method_changed/buttons.html.twig"

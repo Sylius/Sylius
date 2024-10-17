@@ -1,5 +1,5 @@
 {% set order = hookable_metadata.context.order %}
-{% set prefixes = ['sylius_shop.base.thank_you', 'sylius_shop.order.thank_you', 'sylius_shop.shared.order.process'] %}
+{% set prefixes = ['sylius_shop.base.payment_method_changed', 'sylius_shop.order.payment_method_changed', 'sylius_shop.shared.order.process'] %}
 
 <div class="d-flex flex-column flex-lg-row justify-content-center gap-2 mt-4">
     {% if order.customer.user is not null %}

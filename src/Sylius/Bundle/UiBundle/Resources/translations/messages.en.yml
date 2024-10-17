@@ -655,6 +655,8 @@ sylius:
         payment: 'Payment'
         payment_details: 'Payment details'
         payment_method: 'Payment method'
+        payment_method_change_success: 'Successfully changed payment method'
+        payment_method_changed: 'Payment method changed'
         payment_methods: 'Payment methods'
         payment_mode: 'Payment mode'
         payment_ready_to_pay: 'You can now make your payment'
