@@ -27,5 +27,6 @@
         <service id="sylius.payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient">
             <argument type="service" id="Psr\Http\Client\ClientInterface" />
         </service>
+        <service id="sylius_payum.http_client" alias="sylius.payum.http_client" />
     </services>
 </container>

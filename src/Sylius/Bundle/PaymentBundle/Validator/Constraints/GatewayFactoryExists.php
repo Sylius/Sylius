@@ -15,6 +15,13 @@ namespace Sylius\Bundle\PaymentBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+trigger_deprecation(
+    'sylius/payum-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be moved to the PaymentBundle in Sylius 2.0.',
+    GatewayFactoryExists::class,
+);
+/** @deprecated since Sylius 1.14 and will be moved to the PaymentBundle in Sylius 2.0. */
 final class GatewayFactoryExists extends Constraint
 {
     public string $invalidGatewayFactory = 'sylius.gateway_config.invalid_gateway_factory';
