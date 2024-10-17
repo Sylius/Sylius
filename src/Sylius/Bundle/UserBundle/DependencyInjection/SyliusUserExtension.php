@@ -148,7 +148,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
                 ),
             )
             ->setPublic(true)
-            ->setDeprecated('sylius/user-bundle', '1.14', 'The "%service_id%" is deprecated and will be removed in Sylius 2.0.')
         ;
     }
 
@@ -175,6 +174,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $resetPasswordPinUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
         $resetPasswordPinUniquenessCheckerDefinition->addArgument(new Reference($repositoryServiceId));
         $resetPasswordPinUniquenessCheckerDefinition->addArgument($config['resetting']['pin']['field_name']);
+        $resetPasswordPinUniquenessCheckerDefinition->setDeprecated('sylius/user-bundle', '1.14', 'The "%service_id%" is deprecated and will be removed in Sylius 2.0.');
         $container->setDefinition(
             sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType),
             $resetPasswordPinUniquenessCheckerDefinition,
