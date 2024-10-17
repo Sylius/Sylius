@@ -69,7 +69,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion cannot end before it starts
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Adding a promotion with label exceeding 255 characters
         Given there is a promotion "Christmas sale"
         When I want to modify this promotion
@@ -78,7 +78,7 @@ Feature: Promotion validation
         Then I should be notified that promotion label in "Polish (Poland)" locale is too long
 
     @api @ui @javascript
-    Scenario: Trying to add a new promotion without specifying a order percentage discount
+    Scenario: Trying to add a new promotion without specifying an order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
         And I name it "Christmas sale"
