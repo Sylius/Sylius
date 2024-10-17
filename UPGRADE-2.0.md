@@ -628,7 +628,8 @@ The following classes have been removed:
 
 ## Security
 
-* User checkers have been configured on firewalls with `security.user_checker.chain.<firewall>` service:
+* API firewalls have been renamed and user checkers have been configured on firewalls 
+  with `security.user_checker.chain.<firewall>` service:
 
     ```diff
     security:
@@ -636,12 +637,14 @@ The following classes have been removed:
             admin:
                 ...
     +           user_checker: security.user_checker.chain.admin
-            new_api_admin_user:
+    -       new_api_admin_user:
+    +       api_admin:
                 ...
-    +           user_checker: security.user_checker.chain.new_api_admin_user
-            new_api_shop_user:
+    +           user_checker: security.user_checker.chain.api_admin
+    -       new_api_shop_user:
+    +       api_shop:
                 ...
-    +           user_checker: security.user_checker.chain.new_api_shop_user
+    +           user_checker: security.user_checker.chain.api_shop
             shop:
                 ...
     +           user_checker: security.user_checker.chain.shop
