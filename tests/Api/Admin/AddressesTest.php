@@ -98,20 +98,23 @@ final class AddressesTest extends JsonApiTestCase
         );
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $this->assertJsonResponseViolations($this->client->getResponse(), [
+        $this->assertResponseViolations(
             [
-                'propertyPath' => 'countryCode',
-                'message' => 'This value is not a valid country.',
+                [
+                    'propertyPath' => 'countryCode',
+                    'message' => 'This value is not a valid country.',
+                ],
+                [
+                    'propertyPath' => 'phoneNumber',
+                    'message' => 'This value is too long. It should have 255 characters or less.',
+                ],
+                [
+                    'propertyPath' => 'company',
+                    'message' => 'This value is too long. It should have 255 characters or less.',
+                ],
             ],
-            [
-                'propertyPath' => 'phoneNumber',
-                'message' => 'This value is too long. It should have 255 characters or less.',
-            ],
-            [
-                'propertyPath' => 'company',
-                'message' => 'This value is too long. It should have 255 characters or less.',
-            ],
-        ]);
+            false,
+        );
     }
 
     /** @test */

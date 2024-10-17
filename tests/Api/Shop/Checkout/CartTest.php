@@ -442,7 +442,6 @@ final class CartTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can\'t be changed.'],
             ],
@@ -466,7 +465,6 @@ final class CartTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'An empty order cannot be processed.'],
             ],
@@ -505,7 +503,6 @@ final class CartTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Please provide a billing address.'],
             ],
@@ -544,7 +541,6 @@ final class CartTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Please provide a shipping address.'],
             ],
@@ -577,7 +573,6 @@ final class CartTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'The country invalid-code does not exist.'],
                 ['propertyPath' => '', 'message' => 'The address without country cannot exist'],

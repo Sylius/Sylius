@@ -252,7 +252,7 @@ final class AddressesTest extends JsonApiTestCase
         );
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $this->assertJsonResponseViolations($this->client->getResponse(), [
+        $this->assertResponseViolations([
             [
                 'propertyPath' => 'countryCode',
                 'message' => 'This value is not a valid country.',
