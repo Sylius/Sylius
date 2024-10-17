@@ -15,6 +15,12 @@ namespace Sylius\Bundle\UserBundle\Security;
 
 use Sylius\Component\User\Model\UserInterface;
 
+trigger_deprecation(
+    'sylius/user-bundle',
+    '1.14',
+    'The "%s" interface is deprecated and will be removed in Sylius 2.0.',
+    UserLoginInterface::class,
+);
 interface UserLoginInterface
 {
     public function login(UserInterface $user, ?string $firewallName = null);

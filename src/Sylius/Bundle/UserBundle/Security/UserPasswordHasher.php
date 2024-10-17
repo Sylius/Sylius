@@ -18,6 +18,12 @@ use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
+trigger_deprecation(
+    'sylius/user-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    UserPasswordHasher::class,
+);
 final class UserPasswordHasher implements UserPasswordHasherInterface
 {
     public function __construct(private PasswordHasherFactoryInterface $passwordHasherFactory)

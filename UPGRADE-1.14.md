@@ -303,6 +303,18 @@
     - The class `Sylius\Component\Core\Dashboard\SalesDataProvider` and interface `Sylius\Component\Core\Dashboard\SalesDataProviderInterface` have been deprecated and will be removed in Sylius 2.0.
     - The class `Sylius\Component\Core\Dashboard\SalesSummary` and interface `Sylius\Component\Core\Dashboard\SalesSummaryInterface` have been deprecated and will be removed in Sylius 2.0.
 
+1. The following security related classes and interfaces have been deprecated, and they will be removed in 2.0:
+    - `Sylius\Bundle\UserBundle\Security\UserLogin`
+    - `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
+    - `Sylius\Bundle\UserBundle\Security\UserPasswordHasher`
+    - `Sylius\Bundle\UserBundle\Security\UserPasswordHasherInterface`
+
+1. The following security related services and aliases have been deprecated, and they will be removed in 2.0:
+    - `sylius.security.password_hasher`
+    - `sylius.security.user_login`
+    - `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
+    - `Sylius\Component\User\Security\UserPasswordHasherInterface`
+
 1. The constructor signature of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` has been changed:
     ```diff
     use Symfony\Component\Routing\RouterInterface;
