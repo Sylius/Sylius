@@ -73,6 +73,7 @@ class UserController extends ResourceController
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
+    /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
     public function requestPasswordResetPinAction(Request $request): Response
     {
         /** @var GeneratorInterface $generator */

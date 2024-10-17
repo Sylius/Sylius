@@ -30,6 +30,7 @@ class MailerListener
         $this->sendEmail($event->getSubject(), Emails::RESET_PASSWORD_TOKEN);
     }
 
+    /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
     public function sendResetPasswordPinEmail(GenericEvent $event): void
     {
         $this->sendEmail($event->getSubject(), Emails::RESET_PASSWORD_PIN);

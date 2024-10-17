@@ -521,3 +521,7 @@
 
    - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext`
    - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor`
+
+1. The `sylius_user.resources.{name}.user.resetting.pin` configuration parameter is deprecated and will be removed in 2.0. 
+   The corresponding email `reset_password_pin` and `Sylius\Bundle\UserBundle\Controller\UserController::requestPasswordResetPinAction` 
+   method have been also deprecated and will be removed in 2.0. 
