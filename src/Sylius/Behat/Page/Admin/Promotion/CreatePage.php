@@ -29,8 +29,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyLabel(string $label, string $localeCode): void
     {
-        $this->getDocument()->find('css', 'div[data-locale="' . $localeCode . '"]')->click();
-
         $this->getDocument()->fillField(sprintf('sylius_promotion_translations_%s_label', $localeCode), $label);
     }
 
