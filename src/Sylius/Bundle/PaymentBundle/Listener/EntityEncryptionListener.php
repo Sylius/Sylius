@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Listener;
@@ -9,12 +18,21 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PostLoadEventArgs;
 use Doctrine\ORM\UnitOfWork;
+use Sylius\Component\Payment\Encryption\EncryptionAwareInterface;
 use Sylius\Component\Payment\Encryption\EntityEncrypterInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template T of EncryptionAwareInterface
+ *
+ * @experimental
+ */
 class EntityEncryptionListener
 {
-    /** @param class-string $entityClass  */
+    /**
+     * @param EntityEncrypterInterface<T> $entityEncrypter
+     * @param class-string<T> $entityClass
+     */
     public function __construct(
         protected readonly EntityEncrypterInterface $entityEncrypter,
         protected readonly string $entityClass,
@@ -37,6 +55,7 @@ class EntityEncryptionListener
         Assert::isInstanceOf($entityManager, EntityManagerInterface::class);
         $unitOfWork = $entityManager->getUnitOfWork();
 
+        /** @var array<T> $entitiesToBeDecrypted */
         $entitiesToBeDecrypted = $unitOfWork->getIdentityMap()[$this->entityClass] ?? [];
         if ([] !== $entitiesToBeDecrypted) {
             $this->decryptEntities($entitiesToBeDecrypted);
@@ -48,6 +67,7 @@ class EntityEncryptionListener
         $this->decryptEntities([$args->getObject()]);
     }
 
+    /** @param array<T> $entities */
     protected function encryptEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
         foreach ($entities as $entity) {
@@ -61,6 +81,7 @@ class EntityEncryptionListener
         }
     }
 
+    /** @param array<T> $entities */
     protected function decryptEntities(array $entities): void
     {
         foreach ($entities as $entity) {

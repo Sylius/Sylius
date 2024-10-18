@@ -15,7 +15,11 @@ namespace Sylius\Component\Payment\Encryption;
 
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 
-/** @implements EntityEncrypterInterface<GatewayConfigInterface> */
+/**
+ * @implements EntityEncrypterInterface<GatewayConfigInterface>
+ *
+ * @experimental
+ */
 final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
 {
     public function __construct(

@@ -20,6 +20,7 @@ use ParagonIE\Halite\Symmetric\EncryptionKey;
 use ParagonIE\HiddenString\HiddenString;
 use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 
+/** @experimental */
 final class Encrypter implements EncrypterInterface
 {
     private const ENCRYPTION_SUFFIX = '#ENCRYPTED';
@@ -40,7 +41,7 @@ final class Encrypter implements EncrypterInterface
     {
         try {
             return Crypto::encrypt(new HiddenString($data), $this->getKey()) . self::ENCRYPTION_SUFFIX;
-        } catch (\TypeError|\SodiumException|HaliteAlert $exception) {
+        } catch (HaliteAlert|\SodiumException|\TypeError $exception) {
             throw EncryptionException::cannotEncrypt($exception);
         }
     }
@@ -55,7 +56,7 @@ final class Encrypter implements EncrypterInterface
             $data = substr($data, 0, -self::ENCRYPTION_SUFFIX_LENGTH);
 
             return Crypto::decrypt($data, $this->getKey())->getString();
-        } catch (\TypeError|\SodiumException|HaliteAlert $exception) {
+        } catch (HaliteAlert|\SodiumException|\TypeError $exception) {
             throw EncryptionException::cannotDecrypt($exception);
         }
     }

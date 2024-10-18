@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Encryption\Exception;
 
+/** @experimental */
 final class EncryptionException extends \RuntimeException
 {
     public static function cannotEncrypt(\Throwable $previousException): self

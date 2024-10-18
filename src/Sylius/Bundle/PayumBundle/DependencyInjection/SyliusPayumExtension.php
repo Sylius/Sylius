@@ -58,11 +58,13 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
             }
             foreach ($config['gateways'] as $gatewayKey => $gatewayConfig) {
                 $gateways[$gatewayKey] = 'sylius.payum_gateway.' . $gatewayKey;
-                $gatewayFactories[] = $gatewayConfig['factory'];
+                $gatewayFactories[] = $gatewayConfig['factory'] ?? null;
             }
         }
 
         $container->prependExtensionConfig('sylius_payment', ['gateways' => $gateways]);
-        $container->prependExtensionConfig('sylius_payment', ['encryption' => ['disabled_for_factories' => $gatewayFactories]]);
+        $container->prependExtensionConfig('sylius_payment', ['encryption' => [
+            'disabled_for_factories' => array_filter($gatewayFactories),
+        ]]);
     }
 }

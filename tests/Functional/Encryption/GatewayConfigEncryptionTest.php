@@ -98,16 +98,16 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
 
         $this->entityManager->clear();
 
-        $gatewayConfigFromDbal = $this->getDatabaseConfigDataForGateway('online_disabled');
-        self::assertSame($gatewayConfig->getConfig(), $gatewayConfigFromDbal);
+        $gatewayConfigFromDatabase = $this->getDatabaseConfigDataForGateway('online_disabled');
+        self::assertSame($gatewayConfig->getConfig(), $gatewayConfigFromDatabase);
 
         $gatewayFromRepository = $this->gatewayConfigRepository->findOneBy(['gatewayName' => 'online_disabled']);
         self::assertSame($gatewayConfig->getConfig(), $gatewayFromRepository->getConfig());
         self::assertSame(self::$gatewayConfigData, $gatewayConfig->getConfig());
 
-        $gatewayConfigFromDbal = $this->getDatabaseConfigDataForGateway('online_disabled');
-        self::assertSame($gatewayConfig->getConfig(), $gatewayConfigFromDbal);
-        self::assertSame(self::$gatewayConfigData, $gatewayConfigFromDbal);
+        $gatewayConfigFromDatabase = $this->getDatabaseConfigDataForGateway('online_disabled');
+        self::assertSame($gatewayConfig->getConfig(), $gatewayConfigFromDatabase);
+        self::assertSame(self::$gatewayConfigData, $gatewayConfigFromDatabase);
     }
 
     /** @test */
@@ -123,16 +123,16 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
 
         $this->entityManager->clear();
 
-        $gatewayConfigFromDbal = $this->getDatabaseConfigDataForGateway('Online');
-        self::assertSame([], $gatewayConfigFromDbal);
+        $gatewayConfigFromDatabase = $this->getDatabaseConfigDataForGateway('Online');
+        self::assertSame([], $gatewayConfigFromDatabase);
 
         $gatewayFromRepository = $this->gatewayConfigRepository->findOneBy(['gatewayName' => 'Online']);
         self::assertSame($gatewayConfig->getConfig(), $gatewayFromRepository->getConfig());
         self::assertSame([], $gatewayConfig->getConfig());
 
-        $gatewayConfigFromDbal = $this->getDatabaseConfigDataForGateway('Online');
-        self::assertSame($gatewayConfig->getConfig(), $gatewayConfigFromDbal);
-        self::assertSame([], $gatewayConfigFromDbal);
+        $gatewayConfigFromDatabase = $this->getDatabaseConfigDataForGateway('Online');
+        self::assertSame($gatewayConfig->getConfig(), $gatewayConfigFromDatabase);
+        self::assertSame([], $gatewayConfigFromDatabase);
     }
 
     private function getDatabaseConfigDataForGateway(string $gatewayName): array

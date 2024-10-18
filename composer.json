@@ -30,6 +30,7 @@
         "ext-intl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
+        "ext-sodium": "*",
         "api-platform/core": "^3.4.2",
         "babdev/pagerfanta-bundle": "^3.7 || ^4.0",
         "behat/transliterator": "^1.3",

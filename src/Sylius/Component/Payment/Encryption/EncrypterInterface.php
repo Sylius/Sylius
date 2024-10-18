@@ -15,6 +15,7 @@ namespace Sylius\Component\Payment\Encryption;
 
 use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 
+/** @experimental */
 interface EncrypterInterface
 {
     /** @throws EncryptionException */

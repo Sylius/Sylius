@@ -76,6 +76,7 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
         );
     }
 
+    /** @param array<string, mixed> $encryptionConfig */
     private function configureEncryption(
         array $encryptionConfig,
         ContainerBuilder $container,

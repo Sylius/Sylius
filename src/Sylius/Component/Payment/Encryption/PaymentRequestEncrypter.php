@@ -15,7 +15,11 @@ namespace Sylius\Component\Payment\Encryption;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-/** @implements EntityEncrypterInterface<PaymentRequestInterface> */
+/**
+ * @implements EntityEncrypterInterface<PaymentRequestInterface>
+ *
+ * @experimental
+ */
 final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
 {
     public function __construct(

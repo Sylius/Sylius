@@ -23,7 +23,6 @@ use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Uid\Uuid;
 
 final class PaymentRequestEncryptionTest extends KernelTestCase
 {
@@ -65,14 +64,14 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
 
         $this->entityManager->clear();
 
-        $payloadFromDatabase = $this->getDatabaseFieldForHash('payload', $hash);
+        $payloadFromDatabase = unserialize($this->getDatabaseColumnDataForHash('payload'));
         self::assertNotEquals($paymentRequest->getPayload(), $payloadFromDatabase);
 
         $paymentRequestFromRepository = $this->paymentRequestRepository->find($hash);
         self::assertEquals($paymentRequest->getPayload(), $paymentRequestFromRepository->getPayload());
         self::assertEquals($payload, $paymentRequest->getPayload());
 
-        $payloadFromDatabase = $this->getDatabaseFieldForHash('payload', $hash);
+        $payloadFromDatabase = unserialize($this->getDatabaseColumnDataForHash('payload'));
         self::assertNotEquals($paymentRequest->getPayload(), $payloadFromDatabase);
         self::assertNotEquals($payload, $payloadFromDatabase);
     }
@@ -89,23 +88,14 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
 
         $this->entityManager->clear();
 
-        // Doctrine serializes "object" type columns data in the database when using PostgreSQl
-        $payloadFromDatabase = $this->getDatabaseFieldForHash('payload', $hash);
-        if (is_a($this->entityManager->getConnection()->getDatabasePlatform(), PostgreSQLPlatform::class, true)) {
-            $payloadFromDatabase = unserialize($payloadFromDatabase);
-        }
-
+        $payloadFromDatabase = unserialize($this->getDatabaseColumnDataForHash('payload'));
         self::assertSame($paymentRequest->getPayload(), $payloadFromDatabase);
 
         $paymentRequestFromRepository = $this->paymentRequestRepository->find($hash);
         self::assertSame($paymentRequest->getPayload(), $paymentRequestFromRepository->getPayload());
         self::assertNull($paymentRequest->getPayload());
 
-        $payloadFromDatabase = $this->getDatabaseFieldForHash('payload', $hash);
-        if (is_a($this->entityManager->getConnection()->getDatabasePlatform(), PostgreSQLPlatform::class, true)) {
-            $payloadFromDatabase = unserialize($payloadFromDatabase);
-        }
-
+        $payloadFromDatabase = unserialize($this->getDatabaseColumnDataForHash('payload'));
         self::assertEquals($paymentRequest->getPayload(), $payloadFromDatabase);
         self::assertNull($payloadFromDatabase);
     }
@@ -127,14 +117,14 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
 
         $this->entityManager->clear();
 
-        $responseDataFromDatabase = json_decode($this->getDatabaseFieldForHash('response_data', $hash), true);
+        $responseDataFromDatabase = json_decode($this->getDatabaseColumnDataForHash('response_data'), true);
         self::assertNotEquals($paymentRequest->getResponseData(), $responseDataFromDatabase);
 
         $paymentRequestFromRepository = $this->paymentRequestRepository->find($hash);
         self::assertEquals($paymentRequest->getResponseData(), $paymentRequestFromRepository->getResponseData());
         self::assertEquals($responseData, $paymentRequest->getResponseData());
 
-        $responseDataFromDatabase = json_decode($this->getDatabaseFieldForHash('response_data', $hash), true);
+        $responseDataFromDatabase = json_decode($this->getDatabaseColumnDataForHash('response_data'), true);
         self::assertNotEquals($paymentRequest->getResponseData(), $responseDataFromDatabase);
         self::assertNotEquals($responseData, $responseDataFromDatabase);
     }
@@ -187,11 +177,10 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
         return $this->paymentRequestFactory->create($payment, $payment->getMethod());
     }
 
-    private function getDatabaseFieldForHash(string $column, Uuid $hash): mixed
+    private function getDatabaseColumnDataForHash(string $column): mixed
     {
         $result = $this->entityManager->getConnection()->executeQuery(
-            'SELECT * FROM sylius_payment_request WHERE hash = :hash',
-            ['hash' => $hash],
+            'SELECT * FROM sylius_payment_request LIMIT 1',
         );
 
         return $result->fetchAssociative()[$column];
