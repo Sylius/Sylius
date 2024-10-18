@@ -194,26 +194,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_does_not_autoconfigure_with_attributes_by_default(): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [[]],
-            ['autoconfigure_with_attributes' => false],
-            'autoconfigure_with_attributes',
-        );
-    }
-
-    /** @test */
-    public function it_allows_to_enable_autoconfiguring_with_attributes(): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [['autoconfigure_with_attributes' => true]],
-            ['autoconfigure_with_attributes' => true],
-            'autoconfigure_with_attributes',
-        );
-    }
-
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();

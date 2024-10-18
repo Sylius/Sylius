@@ -53,12 +53,6 @@ Once you have your own :ref:`component_order_processors_order-processor-interfac
             }
         }
 
-    Then you should enable autoconfiguring with attributes in your ``config/packages/_sylius.yaml`` file:
-
-    .. code-block:: yaml
-
-        sylius_order:
-            autoconfigure_with_attributes: true
 
 Using CompositeOrderProcessor
 -----------------------------

@@ -9,6 +9,13 @@
 * SyliusStateMachineAbstraction:
     * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine` to `symfony_workflow`.
 
+* The `sylius_core.autoconfigure_with_attributes` and `sylius_order.autoconfigure_with_attributes` configuration parameters 
+  have been removed. If you want to autoconfigure order processors and cart contexts, use corresponding attributes 
+  instead of interfaces: 
+  
+  * `Sylius\Bundle\OrderBundle\Attribute\AsCartContext`
+  * `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor`
+
 * The `sylius_user.resources.{name}.user.resetting.pin` configuration parameter has been removed.
   The corresponding email `reset_password_pin` and `Sylius\Bundle\UserBundle\Controller\UserController::requestPasswordResetPinAction`
   method have been removed. The related services have been removed as well:
