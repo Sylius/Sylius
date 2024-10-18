@@ -33,7 +33,6 @@
         "knplabs/knp-menu": "^3.5",
         "knplabs/knp-menu-bundle": "^3.4",
         "laminas/laminas-stdlib": "^3.19",
-        "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/grid-bundle": "^1.13",
         "sylius/twig-extra": "^0.4",
         "symfony/config": "^6.4 || ^7.1",
