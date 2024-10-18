@@ -31,7 +31,6 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_not_empty" />
         </service>
-        <service id="sylius_api.validator.order_not_empty" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator" />
 
         <service
             id="sylius_api.validator.order_product_eligibility"
@@ -40,7 +39,6 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_product_eligibility" />
         </service>
-        <service id="sylius_api.validator.order_product_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator" />
 
         <service
             id="sylius_api.validator.order_item_availability"
@@ -50,7 +48,6 @@
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_item_availability" />
         </service>
-        <service id="sylius_api.validator.order_item_availability" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator" />
 
         <service
             id="sylius_api.validator.order_shipping_method_eligibility"
@@ -60,7 +57,6 @@
             <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.order_shipping_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator" />
 
         <service
             id="sylius_api.validator.checkout_completion"
@@ -70,7 +66,6 @@
             <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />
         </service>
-        <service id="sylius_api.validator.checkout_completion" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator" />
 
         <service
             id="sylius_api.validator.chosen_shipping_method_eligibility"
@@ -81,7 +76,6 @@
             <argument type="service" id="sylius.resolver.shipping_methods" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_chosen_shipping_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.chosen_shipping_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibilityValidator" />
 
         <service
             id="sylius_api.validator.adding_eligible_product_variant_to_cart"
@@ -93,7 +87,6 @@
             <tag name="validator.constraint_validator"
                  alias="sylius_api_validator_adding_eligible_product_variant_to_cart"/>
         </service>
-        <service id="sylius_api.validator.adding_eligible_product_variant_to_cart" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCartValidator" />
 
         <service
             id="sylius_api.validator.changed_item_quantity_in_cart"
@@ -104,7 +97,6 @@
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_changed_item_quantity_in_cart" />
         </service>
-        <service id="sylius_api.validator.changed_item_quantity_in_cart" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCartValidator" />
 
         <service
             id="sylius_api.validator.correct_order_address"
@@ -113,7 +105,6 @@
             <argument type="service" id="sylius.repository.country" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_correct_order_address" />
         </service>
-        <service id="sylius_api.validator.correct_order_address" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddressValidator" />
 
         <service
             id="sylius_api.validator.order_payment_method_eligibility"
@@ -122,7 +113,6 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_order_payment_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.order_payment_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator" />
 
         <service
             id="sylius_api.validator.chosen_payment_method_eligibility"
@@ -133,7 +123,6 @@
             <argument type="service" id="sylius.resolver.payment_methods" />
             <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.chosen_payment_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator" />
 
         <service
             id="sylius_api.validator.can_payment_method_be_changed"
@@ -142,7 +131,6 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_can_payment_method_be_changed" />
         </service>
-        <service id="sylius_api.validator.can_payment_method_be_changed" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChangedValidator" />
 
         <service
             id="sylius_api.validator.correct_change_shop_user_confirm_password"
@@ -150,7 +138,6 @@
         >
             <tag name="validator.constraint_validator" alias="sylius_api_correct_change_shop_user_confirm_password" />
         </service>
-        <service id="sylius_api.validator.correct_change_shop_user_confirm_password" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator" />
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPasswordValidator">
             <tag name="validator.constraint_validator" alias="sylius_api_confirm_reset_password" />
@@ -166,13 +153,11 @@
             <argument type="service" id="sylius_api.eligibility_checker.applied_coupon" />
             <tag name="validator.constraint_validator" alias="sylius_api_promotion_coupon_eligibility" />
         </service>
-        <service id="sylius_api.validator.promotion_coupon_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator" />
 
         <service id="sylius_api.validator.shipment_already_shipped" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShippedValidator">
             <argument type="service" id="sylius.repository.shipment" />
             <tag name="validator.constraint_validator" alias="sylius_api_shipment_already_shipped" />
         </service>
-        <service id="sylius_api.validator.shipment_already_shipped" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShippedValidator" />
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenExistsValidator">
             <argument type="service" id="sylius.repository.shop_user" />
