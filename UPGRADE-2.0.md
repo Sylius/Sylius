@@ -6,28 +6,16 @@ Even if your app is barely customized, it will require some manual adjustments b
 whether you use Symfony Flex, some of these changes may be applied automatically, but it’s important to check them
 manually regardless.
 
+* Packages configuration changes:
+
 ```md
 #config/packages/_sylius.yaml
 
 imports:
 ...
 +   - { resource: "@SyliusPayumBundle/Resources/config/app/config.yaml" }
-```
 
-```md
-#config/routes/sylius_shop.yaml
-
-sylius_shop_payum:
--   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
-+   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
-
-sylius_payment_notify:
-+   resource: "@SyliusPaymentBundle/Resources/config/routing/integrations/sylius.yaml"
-
-```
-
-```md
-#config/packages/_sylius.yaml
+...
 
 sylius_payment:
     resources:
@@ -43,6 +31,46 @@ sylius_payum:
 -           classes:
 -               model: App\Entity\Payment\GatewayConfig
 ```
+
+* API firewalls have been renamed and user checkers have been configured on firewalls
+  with `security.user_checker.chain.<firewall>` service:
+
+```diff
+#config/packages/security.yaml
+
+security:
+    firewalls:
+        admin:
+            ...
++           user_checker: security.user_checker.chain.admin
+-       new_api_admin_user:
++       api_admin:
+            ...
++           user_checker: security.user_checker.chain.api_admin
+-       new_api_shop_user:
++       api_shop:
+            ...
++           user_checker: security.user_checker.chain.api_shop
+        shop:
+            ...
++           user_checker: security.user_checker.chain.shop
+```
+
+* Routing changes (note that these shop routes are not localized with the prefix: /{_locale} configuration entry):
+
+```md
+#config/routes/sylius_shop.yaml
+
+sylius_shop_payum:
+-   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
++   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
+
+sylius_payment_notify:
++   resource: "@SyliusPaymentBundle/Resources/config/routing/integrations/sylius.yaml"
+
+```
+
+* Bundle configuration changes:
 
 ```md
 #config/bundles.php
@@ -717,30 +745,6 @@ The following classes have been removed:
 
     - Sylius\Component\Core\Grid\Filter\EntitiesFilter
     - Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType
-
-## Security
-
-* API firewalls have been renamed and user checkers have been configured on firewalls 
-  with `security.user_checker.chain.<firewall>` service:
-
-    ```diff
-    security:
-        firewalls:
-            admin:
-                ...
-    +           user_checker: security.user_checker.chain.admin
-    -       new_api_admin_user:
-    +       api_admin:
-                ...
-    +           user_checker: security.user_checker.chain.api_admin
-    -       new_api_shop_user:
-    +       api_shop:
-                ...
-    +           user_checker: security.user_checker.chain.api_shop
-            shop:
-                ...
-    +           user_checker: security.user_checker.chain.shop
-    ```
 
 ## Password Encoder & Salt
 
