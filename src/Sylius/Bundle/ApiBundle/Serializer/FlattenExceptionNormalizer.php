@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 trigger_deprecation(
     'sylius/api-bundle',
     '1.14',
