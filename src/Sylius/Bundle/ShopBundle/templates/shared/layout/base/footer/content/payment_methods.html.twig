@@ -1,5 +1,3 @@
-{% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
-
 <div class="col-12 text-center col-md-6 order-md-4 text-md-start col-lg-3 order-lg-4 text-lg-center">
     <div class="mb-3 fw-medium">Payment methods:</div>
 
@@ -22,8 +20,8 @@
     </div>
 
     <div class="d-flex justify-content-center justify-content-md-start justify-content-lg-center gap-3 mb-5">
-        <a class="link-reset" href="#">{{ icon('instagram') }}</a>
-        <a class="link-reset" href="#">{{ icon('facebook') }}</a>
-        <a class="link-reset" href="#">{{ icon('twitter-x') }}</a>
+        <a class="link-reset" href="#">{{ ux_icon('tabler:brand-instagram', { class: 'symfony-icon symfony-icon-md' }) }}</a>
+        <a class="link-reset" href="#">{{ ux_icon('tabler:brand-facebook', { class: 'symfony-icon symfony-icon-md' }) }}</a>
+        <a class="link-reset" href="#">{{ ux_icon('tabler:brand-x', { class: 'symfony-icon symfony-icon-md' }) }}</a>
     </div>
 </div>

@@ -1,6 +1,5 @@
 {% macro table_header(grid, field, attributes) %}
     {% from _self import link %}
-    {% from '@SyliusShop/shared/icon.html.twig' import icon %}
 
     {% set order = grid.getSortingOrder(field.name) %}
 
@@ -10,10 +9,10 @@
                 {{ field.label|trans }}
 
                 {% if order == 'desc' %}
-                    {{ icon('chevron-down') }}
+                    {{ ux_icon('tabler:chevron-down') }}
                 {% endif %}
                 {% if order == 'asc' %}
-                    {{ icon('chevron-up') }}
+                    {{ ux_icon('tabler:chevron-up') }}
                 {% endif %}
             </a>
         </th>
@@ -21,7 +20,7 @@
         <th class="sortable sylius-table-column-{{ field.name }}">
             <a class="link-reset" href="{{ link(field.name, attributes, order, grid.parameters.all) }}">
                 {{ field.label|trans }}
-                {{ icon('selector') }}
+                {{ ux_icon('tabler:selector') }}
             </a>
         </th>
     {% endif %}

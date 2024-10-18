@@ -858,6 +858,18 @@
             "config/routes/ux_autocomplete.yaml"
         ]
     },
+    "symfony/ux-icons": {
+        "version": "2.20",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.17",
+            "ref": "803a3bbd5893f9584969ab8670290cdfb6a0a5b5"
+        },
+        "files": [
+            "assets/icons/symfony.svg"
+        ]
+    },
     "symfony/ux-live-component": {
         "version": "2.12",
         "recipe": {
