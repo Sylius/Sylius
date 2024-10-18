@@ -34,14 +34,14 @@
 
         <service id="sylius.listener.gateway_config_encryption" class="Sylius\Bundle\PaymentBundle\Listener\GatewayConfigEncryptionListener">
             <argument type="service" id="sylius.encrypter.gateway_config" />
-            <argument>%sylius.encryption.disabled_for_factories%</argument>
             <argument>%sylius.model.gateway_config.class%</argument>
+            <argument>%sylius.encryption.disabled_for_factories%</argument>
             <tag name="doctrine.event_listener" event="onFlush" />
             <tag name="doctrine.event_listener" event="postFlush" />
             <tag name="doctrine.event_listener" event="postLoad" />
         </service>
 
-        <service id="sylius.listener.payment_request_encryption" class="Sylius\Bundle\PaymentBundle\Listener\PaymentRequestEncryptionListener">
+        <service id="sylius.listener.payment_request_encryption" class="Sylius\Bundle\PaymentBundle\Listener\EntityEncryptionListener">
             <argument type="service" id="sylius.encrypter.payment_request" />
             <argument>%sylius.model.payment_request.class%</argument>
             <tag name="doctrine.event_listener" event="onFlush" />

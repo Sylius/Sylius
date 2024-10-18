@@ -8,20 +8,20 @@ use Sylius\Component\Payment\Encryption\EntityEncrypterInterface;
 
 final class GatewayConfigEncryptionListener extends EntityEncryptionListener
 {
-    /** @param class-string $gatewayConfigClass  */
+    /** @param class-string $entityClass  */
     public function __construct(
         EntityEncrypterInterface $entityEncrypter,
+        string $entityClass,
         private readonly array $disabledGateways,
-        private readonly string $gatewayConfigClass,
     ) {
-        parent::__construct($entityEncrypter);
+        parent::__construct($entityEncrypter, $entityClass);
     }
 
     protected function supports(mixed $entity): bool
     {
         return
-            is_a($entity, $this->gatewayConfigClass, true) &&
-            !in_array($entity->get(), $this->disabledGateways, true)
+            parent::supports($entity) &&
+            !in_array($entity->getFactoryName(), $this->disabledGateways, true)
         ;
     }
 }

@@ -12,10 +12,12 @@ use Doctrine\ORM\UnitOfWork;
 use Sylius\Component\Payment\Encryption\EntityEncrypterInterface;
 use Webmozart\Assert\Assert;
 
-abstract class EntityEncryptionListener
+class EntityEncryptionListener
 {
+    /** @param class-string $entityClass  */
     public function __construct(
         protected readonly EntityEncrypterInterface $entityEncrypter,
+        protected readonly string $entityClass,
     ) {
     }
 
@@ -35,18 +37,15 @@ abstract class EntityEncryptionListener
         Assert::isInstanceOf($entityManager, EntityManagerInterface::class);
         $unitOfWork = $entityManager->getUnitOfWork();
 
-        $this->decryptEntities($unitOfWork->getScheduledEntityInsertions());
-        $this->decryptEntities($unitOfWork->getScheduledEntityUpdates());
+        $entitiesToBeDecrypted = $unitOfWork->getIdentityMap()[$this->entityClass] ?? [];
+        if ([] !== $entitiesToBeDecrypted) {
+            $this->decryptEntities($entitiesToBeDecrypted);
+        }
     }
 
     public function postLoad(PostLoadEventArgs $args): void
     {
-        $entityManager = $args->getObjectManager();
-        Assert::isInstanceOf($entityManager, EntityManagerInterface::class);
-        $unitOfWork = $entityManager->getUnitOfWork();
-
-        $this->decryptEntities($unitOfWork->getScheduledEntityInsertions());
-        $this->decryptEntities($unitOfWork->getScheduledEntityUpdates());
+        $this->decryptEntities([$args->getObject()]);
     }
 
     protected function encryptEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
@@ -73,5 +72,8 @@ abstract class EntityEncryptionListener
         }
     }
 
-    abstract protected function supports(mixed $entity): bool;
+    protected function supports(mixed $entity): bool
+    {
+        return is_a($entity, $this->entityClass, true);
+    }
 }
