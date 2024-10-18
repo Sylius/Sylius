@@ -24,9 +24,9 @@
 </tr>
 
 {% for label, amount in promotion_adjustments  %}
-    <tr class="text-muted">
+    <tr class="text-muted" {{ sylius_test_html_attribute('promotion', label) }}>
         <td>
-            <div class="ps-2" {{ sylius_test_html_attribute('promotion', label) }}>
+            <div class="ps-2">
                 &bull; {{ label }}:
             </div>
         </td>
