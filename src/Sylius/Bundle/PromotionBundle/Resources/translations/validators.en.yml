@@ -58,6 +58,8 @@ sylius:
             not_blank: Please enter coupon code.
             regex: Coupon code can only be comprised of letters, numbers, dashes and underscores.
             unique: This coupon already exists.
+        expired: Coupon code has expired.
+        ineligible: Coupon code is not valid for this order.
         is_invalid: Coupon code is invalid.
         promotion:
             not_blank: Please provide a promotion for this coupon.
