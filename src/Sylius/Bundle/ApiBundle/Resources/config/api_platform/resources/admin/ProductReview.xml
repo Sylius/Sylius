@@ -98,7 +98,7 @@
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/product-reviews/{id}/accept"
                 input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::accept"
+                controller="sylius_api.applicator.product_review_state_machine_transition::accept"
             >
                 <normalizationContext>
                     <values>
@@ -121,7 +121,7 @@
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/product-reviews/{id}/reject"
                 input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::reject"
+                controller="sylius_api.applicator.product_review_state_machine_transition::reject"
             >
                 <normalizationContext>
                     <values>

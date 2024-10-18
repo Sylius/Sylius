@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Serializer;
+namespace spec\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Exception\InvalidArgumentException;
 use Liip\ImagineBundle\Exception\Imagine\Filter\NonExistingFilterException;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Exception\InvalidArgumentException;
 use Liip\ImagineBundle\Exception\Imagine\Filter\NonExistingFilterException;

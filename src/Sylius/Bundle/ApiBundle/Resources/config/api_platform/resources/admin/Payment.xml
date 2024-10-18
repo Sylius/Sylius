@@ -56,7 +56,7 @@
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/payments/{id}/complete"
                 input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface::complete"
+                controller="sylius_api.applicator.payment_state_machine_transition::complete"
             >
                 <normalizationContext>
                     <values>
@@ -88,7 +88,7 @@
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/payments/{id}/refund"
                 input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface::refund"
+                controller="sylius_api.applicator.payment_state_machine_transition::refund"
             >
                 <normalizationContext>
                     <values>

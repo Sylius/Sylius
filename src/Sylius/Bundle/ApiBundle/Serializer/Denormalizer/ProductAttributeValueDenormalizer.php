@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException;

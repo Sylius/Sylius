@@ -59,7 +59,7 @@
                 name="sylius_api_admin_customer_get_statistics"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/admin/customers/{id}/statistics"
-                controller="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction"
+                controller="sylius_api.controller.get_customer_statistics"
             >
                 <normalizationContext>
                     <values>
@@ -149,7 +149,7 @@
                 name="sylius_api_admin_customer_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/customers/{id}/user"
-                controller="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction"
+                controller="sylius_api.controller.remove_customer_shop_user"
             />
         </operations>
     </resource>

@@ -18,12 +18,12 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
+        <service id="sylius_api.section_resolver.admin_api_uri_based" class="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
             <argument>%sylius.security.api_admin_route%</argument>
             <tag name="sylius.uri_based_section_resolver" priority="30" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">
+        <service id="sylius_api.section_resolver.shop_api_uri_based" class="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">
             <argument>%sylius.security.api_shop_route%</argument>
             <argument>orders</argument>
             <tag name="sylius.uri_based_section_resolver" priority="40" />

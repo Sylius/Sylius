@@ -99,7 +99,7 @@
                 name="sylius_api_shop_product_get_by_slug"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/products-by-slug/{slug}"
-                controller="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction"
+                controller="sylius_api.controller.get_product_by_slug"
                 read="false"
             >
                 <normalizationContext>

@@ -33,8 +33,8 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.exists_filter.shipping_method</filter>
-                    <filter>sylius_api.order_filter.shipping_method</filter>
+                    <filter>sylius_api.exists_filter.admin.shipping_method</filter>
+                    <filter>sylius_api.order_filter.admin.shipping_method</filter>
                     <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
                 </filters>
                 <order>
@@ -85,7 +85,7 @@
                 </normalizationContext>
                 <validationContext>
                     <values>
-                        <value name="groups">sylius_api.shipping_method_configuration_groups_generator</value>
+                        <value name="groups">sylius_api.validator.groups_generator.shipping_method_configuration</value>
                     </values>
                 </validationContext>
                 <openapiContext>
@@ -155,7 +155,7 @@ Example configuration for `flat_rate` shipping charges calculator:
                 </normalizationContext>
                 <validationContext>
                     <values>
-                        <value name="groups">sylius_api.shipping_method_configuration_groups_generator</value>
+                        <value name="groups">sylius_api.validator.groups_generator.shipping_method_configuration</value>
                     </values>
                 </validationContext>
                 <openapiContext>
@@ -205,7 +205,7 @@ Example configuration for `flat_rate` shipping charges calculator:
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/shipping-methods/{code}/archive"
                 input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::archive"
+                controller="sylius_api.applicator.archiving_shipping_method::archive"
             >
                 <normalizationContext>
                     <values>
@@ -228,7 +228,7 @@ Example configuration for `flat_rate` shipping charges calculator:
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/shipping-methods/{code}/restore"
                 input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::restore"
+                controller="sylius_api.applicator.archiving_shipping_method::restore"
             >
                 <normalizationContext>
                     <values>

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\LegacyErrorHandlingCompilerPass;
-use Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\HydraErrorNormalizer;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
