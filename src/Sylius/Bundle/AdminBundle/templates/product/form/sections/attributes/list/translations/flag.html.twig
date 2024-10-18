@@ -1,4 +1,4 @@
-{% set locale_code = hookable_metadata.context.locale_code %}
+{% set locale_code = hookable_metadata.context.locale_code|default(null) %}
 
 {% if locale_code is not null %}
     <div>

@@ -1,6 +1,6 @@
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-{% set locale_code = hookable_metadata.context.locale_code %}
+{% set locale_code = hookable_metadata.context.locale_code|default(null) %}
 {% set product_attribute_value = hookable_metadata.context.product_attribute_value %}
 {% set product_attribute_code = hookable_metadata.context.product_attribute_code %}
 
