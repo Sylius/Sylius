@@ -93,6 +93,14 @@ return [
 +   Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
 ];
 
+* New Symfony/Messenger transports for handling payment requests have been added. 
+Therefore, you need to add the following configuration to your .env file:
+```md
+###> symfony/messenger ###
+...
+SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_DSN=doctrine://default?queue_name=payment_request
+SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_FAILED_DSN=doctrine://default?queue_name=payment_request_failed
+###< symfony/messenger ###
 ```
 
 ## The rest of the changes
