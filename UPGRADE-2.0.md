@@ -9,6 +9,13 @@
 * SyliusStateMachineAbstraction:
     * The `sylius_state_machine_abstraction.default_adapter` option has been changed from `winzou_state_machine` to `symfony_workflow`.
 
+* The `sylius_user.resources.{name}.user.resetting.pin` configuration parameter has been removed.
+  The corresponding email `reset_password_pin` and `Sylius\Bundle\UserBundle\Controller\UserController::requestPasswordResetPinAction`
+  method have been removed. The related services have been removed as well:
+
+    * `sylius.{user_type}_user.pin_generator.password_reset`
+    * `sylius.{user_type}_user.pin_uniqueness_checker.password_reset`
+
 ## Dependencies
 
 * The following dependencies have been removed, install them in your application, if you still want to use Winzou State Machine:
@@ -449,6 +456,7 @@
     * `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
     * `Sylius\Bundle\UserBundle\Security\UserPasswordHasher`
     * `Sylius\Bundle\UserBundle\Security\UserPasswordHasherInterface`
+    * `Sylius\Component\User\Security\Generator\UniquePinGenerator`
 
 * The following services and aliases have been removed:
 
