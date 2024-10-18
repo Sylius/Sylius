@@ -96,7 +96,7 @@
         </service>
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">
-            <argument type='service' id="sylius.customer_statistics_provider" />
+            <argument type='service' id="sylius.provider.statistics.customer" />
             <argument type='service' id="sylius.repository.customer" />
             <argument type='service' id="twig" />
         </service>
@@ -112,7 +112,7 @@
         <service id="sylius_admin.controller.notification" alias="sylius.controller.admin.notification" />
 
         <service id="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+            <argument type="service" id="sylius.processor.catalog_promotion.removal" />
         </service>
         <service id="sylius_admin.controller.remove_catalog_promotion" alias="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" />
 

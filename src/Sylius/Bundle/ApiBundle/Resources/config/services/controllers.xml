@@ -41,14 +41,14 @@
         <service id="sylius_api.controller.get_product_by_slug" alias="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+            <argument type="service" id="sylius.processor.catalog_promotion.removal" />
         </service>
         <service id="sylius_api.controller.remove_catalog_promotion" alias="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction">
             <argument type="service" id="sylius.factory.avatar_image" />
             <argument type="service" id="sylius.repository.avatar_image" />
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>

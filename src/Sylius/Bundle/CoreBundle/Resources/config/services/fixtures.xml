@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -58,9 +62,10 @@
 
         <service id="Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionFixture">
             <argument type="service" id="sylius.manager.catalog_promotion" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionExampleFactory" />
+            <argument type="service" id="sylius.fixture.example_factory.catalog_promotion" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+        <service id="sylius.fixture.catalog_promotion" alias="Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionFixture" />
 
         <service id="sylius.fixture.channel" class="Sylius\Bundle\CoreBundle\Fixture\ChannelFixture">
             <argument type="service" id="sylius.manager.channel" />

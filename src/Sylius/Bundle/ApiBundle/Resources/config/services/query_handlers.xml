@@ -23,12 +23,12 @@
 
         <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetCustomerStatisticsHandler">
             <argument type="service" id="sylius.repository.customer" />
-            <argument type="service" id="sylius.customer_statistics_provider" />
+            <argument type="service" id="sylius.provider.statistics.customer" />
         </service>
         <service id="sylius_api.query_handler.get_customer_statistics" alias="Sylius\Bundle\ApiBundle\QueryHandler\GetCustomerStatisticsHandler" />
 
         <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler">
-            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
+            <argument type="service" id="sylius.provider.statistics" />
             <argument type="service" id="sylius.repository.channel" />
         </service>
         <service id="sylius_api.query_handler.get_statistics" alias="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler" />

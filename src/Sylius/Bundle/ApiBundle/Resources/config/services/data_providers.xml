@@ -68,7 +68,7 @@
             <argument type="tagged_iterator" tag="api_platform.doctrine.orm.query_extension.collection" />
             <argument type="service" id="sylius.repository.product_attribute_value" />
             <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.locale_provider.channel_based" />
+            <argument type="service" id="sylius.provider.locale.channel_based" />
             <argument>%locale%</argument>
             <tag name="api_platform.subresource_data_provider" priority="10" />
             <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
@@ -130,7 +130,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\AdminOrderItemAdjustmentsSubresourceDataProvider">
             <argument type="service" id="sylius.repository.order_item" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="api_platform.subresource_data_provider" priority="10" />
             <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>

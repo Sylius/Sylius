@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -23,12 +27,12 @@
         <service id="sylius.checker.order_payment_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker" >
             <argument type="service" id="sylius.resolver.payment_methods"/>
         </service>
+        <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
 
         <service id="Sylius\Component\Core\Checker\CLIContextCheckerInterface" class="Sylius\Component\Core\Checker\CLIContextChecker">
             <argument type="service" id="request_stack" />
         </service>
-
-        <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
+        <service id="sylius.checker.cli_context" alias="Sylius\Component\Core\Checker\CLIContextCheckerInterface" />
 
         <service
             id="sylius.promotion_coupon_channels_eligibility_checker"
@@ -37,5 +41,6 @@
         >
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
+        <service id="sylius.eligibility_checker.promotion_coupon.channel" alias="sylius.promotion_coupon_channels_eligibility_checker" />
     </services>
 </container>

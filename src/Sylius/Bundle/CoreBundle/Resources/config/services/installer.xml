@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <parameters>
         <parameter key="sylius_installer_currency">USD</parameter>
     </parameters>
@@ -21,13 +25,17 @@
         <service id="sylius.installer.checker.command_directory" class="Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker">
             <argument type="service" id="filesystem" />
         </service>
+        <service id="sylius.checker.installer.command_directory" alias="sylius.installer.checker.command_directory" />
+
         <service id="sylius.installer.checker.sylius_requirements" class="Sylius\Bundle\CoreBundle\Installer\Checker\SyliusRequirementsChecker">
             <argument type="service" id="sylius.requirements" />
         </service>
+        <service id="sylius.checker.installer.sylius_requirements" alias="sylius.installer.checker.sylius_requirements" />
 
         <service id="sylius.commands_provider.database_setup" class="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+        <service id="sylius.commands_provider.installer.database_setup" alias="sylius.commands_provider.database_setup" />
         <service id="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface" alias="sylius.commands_provider.database_setup" />
 
         <service id="sylius.setup.currency" class="Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup">
@@ -35,6 +43,7 @@
             <argument type="service" id="sylius.factory.currency" />
             <argument>%sylius_installer_currency%</argument>
         </service>
+        <service id="sylius.setup.installer.currency" alias="sylius.setup.currency" />
         <service id="Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface" alias="sylius.setup.currency" />
 
         <service id="sylius.setup.locale" class="Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup">
@@ -43,6 +52,7 @@
             <argument>%locale%</argument>
             <argument type="service" id="filesystem" />
         </service>
+        <service id="sylius.setup.installer.locale" alias="sylius.setup.locale" />
         <service id="Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface" alias="sylius.setup.locale" />
 
         <service id="sylius.setup.channel" class="Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetup">
@@ -50,6 +60,7 @@
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.manager.channel" />
         </service>
+        <service id="sylius.setup.installer.channel" alias="sylius.setup.channel" />
         <service id="Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface" alias="sylius.setup.channel" />
     </services>
 </container>

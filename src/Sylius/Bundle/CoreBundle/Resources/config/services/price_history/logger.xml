@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -23,5 +27,6 @@
             <argument type="service" id="sylius.manager.channel_pricing_log_entry" />
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
         </service>
+        <service id="sylius.logger.price_history.price_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface" />
     </services>
 </container>

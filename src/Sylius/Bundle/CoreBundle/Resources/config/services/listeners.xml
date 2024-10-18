@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="listeners/workflow/*.xml" />
     </imports>
@@ -23,9 +27,10 @@
             <argument type="service" id="sylius.checker.channel_deletion" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
         </service>
+        <service id="sylius.listener.channel_deletion" alias="sylius.listener.channel" />
 
         <service id="sylius.listener.images_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener">
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadImages" />
             <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadImages" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadImages" />
@@ -33,7 +38,7 @@
         </service>
 
         <service id="sylius.listener.images_remove" class="Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener">
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="liip_imagine.filter.manager" />
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
@@ -41,7 +46,7 @@
         </service>
 
         <service id="sylius.listener.avatar_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener">
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <tag name="kernel.event_listener" event="sylius.admin_user.pre_create" method="uploadImage" />
             <tag name="kernel.event_listener" event="sylius.admin_user.pre_update" method="uploadImage" />
         </service>
@@ -54,6 +59,7 @@
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
+        <service id="sylius.listener.default_username_orm" alias="sylius.listener.default_username" />
 
         <service id="sylius.listener.canonicalizer" class="Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener">
             <argument type="service" id="sylius.canonicalizer" />
@@ -93,17 +99,19 @@
         <service id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
             <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
         </service>
+        <service id="sylius.listener.locale_aware" alias="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" />
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\XFrameOptionsSubscriber">
             <tag name="kernel.event_subscriber" />
         </service>
+        <service id="sylius.event_subscriber.x_frame_options" alias="Sylius\Bundle\CoreBundle\EventListener\XFrameOptionsSubscriber" />
 
         <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface" />
+            <argument type="service" id="sylius.checker.promotion.taxon_in_promotion_rule" />
             <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
-            <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
+            <argument type="service" id="sylius.updater.promotion_rule.has_taxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="handleRemovingRootTaxonAtPositionZero" />
@@ -111,17 +119,20 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener">
-            <argument type="service" id="sylius.inventory.order_item_availability_checker" />
+            <argument type="service" id="sylius.checker.inventory.order_item_availability" />
             <tag name="kernel.event_listener" event="sylius.payment.pre_complete" method="checkStockAvailability" />
         </service>
+        <service id="syrlius.listener.payment_pre_complete" alias="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener" />
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener">
-            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" />
+            <argument type="service" id="sylius.checker.promotion.product_in_promotion_rule" />
             <tag name="kernel.event_listener" event="sylius.product.pre_delete" method="protectFromRemovingProductInUseByPromotionRule" />
         </service>
+        <service id="sylius.listener.product_deletion" alias="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener" />
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener">
             <tag name="doctrine.event_listener" event="postGenerateSchema" method="postGenerateSchema" lazy="true" />
         </service>
+        <service id="sylius.listener.postgre_sql_default_schema" alias="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener" />
     </services>
 </container>
