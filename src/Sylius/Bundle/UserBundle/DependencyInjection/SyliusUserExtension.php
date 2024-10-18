@@ -23,7 +23,6 @@ use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameProvider;
 use Sylius\Bundle\UserBundle\Reloader\UserReloader;
 use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
-use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
@@ -101,29 +100,20 @@ final class SyliusUserExtension extends AbstractResourceExtension
             ),
         )->setPublic(true);
 
-        $container->setDefinition(
-            sprintf('sylius.%s_user.pin_generator.password_reset', $userType),
-            $this->createTokenGeneratorDefinition(
-                UniquePinGenerator::class,
-                [
-                    new Reference('sylius.random_generator'),
-                    new Reference(sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType)),
-                    $config['resetting']['pin']['length'],
-                ],
-            ),
-        )->setPublic(true);
-
-        $container->setDefinition(
-            sprintf('sylius.%s_user.token_generator.email_verification', $userType),
-            $this->createTokenGeneratorDefinition(
-                UniqueTokenGenerator::class,
-                [
-                    new Reference('sylius.random_generator'),
-                    new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType)),
-                    $config['verification']['token']['length'],
-                ],
-            ),
-        )->setPublic(true);
+        $container
+            ->setDefinition(
+                sprintf('sylius.%s_user.token_generator.email_verification', $userType),
+                $this->createTokenGeneratorDefinition(
+                    UniqueTokenGenerator::class,
+                    [
+                        new Reference('sylius.random_generator'),
+                        new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType)),
+                        $config['verification']['token']['length'],
+                    ],
+                ),
+            )
+            ->setPublic(true)
+        ;
     }
 
     private function createTokenGeneratorDefinition(string $generatorClass, array $arguments): Definition
@@ -144,14 +134,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition(
             sprintf('sylius.%s_user.token_uniqueness_checker.password_reset', $userType),
             $resetPasswordTokenUniquenessCheckerDefinition,
-        );
-
-        $resetPasswordPinUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
-        $resetPasswordPinUniquenessCheckerDefinition->addArgument(new Reference($repositoryServiceId));
-        $resetPasswordPinUniquenessCheckerDefinition->addArgument($config['resetting']['pin']['field_name']);
-        $container->setDefinition(
-            sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType),
-            $resetPasswordPinUniquenessCheckerDefinition,
         );
 
         $emailVerificationTokenUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
@@ -236,7 +218,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition($providerEmailOrNameBasedServiceId, $emailOrNameBasedProviderDefinition);
     }
 
-    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container)
+    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container): void
     {
         $container->setParameter(sprintf('sylius.%s_user.token.password_reset.ttl', $userType), $config['resetting']['token']['ttl']);
     }

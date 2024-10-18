@@ -17,13 +17,14 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableInterface;
 use Sylius\Resource\Model\ToggleableInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 interface UserInterface extends
-    AdvancedUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
     TimestampableInterface,
-    ToggleableInterface
+    ToggleableInterface,
+    SymfonyUserInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 
@@ -49,8 +50,6 @@ interface UserInterface extends
 
     public function setUsernameCanonical(?string $usernameCanonical): void;
 
-    public function setLocked(bool $locked): void;
-
     public function getEmailVerificationToken(): ?string;
 
     public function setEmailVerificationToken(?string $verificationToken): void;
@@ -70,14 +69,6 @@ interface UserInterface extends
     public function getVerifiedAt(): ?\DateTimeInterface;
 
     public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void;
-
-    public function getExpiresAt(): ?\DateTimeInterface;
-
-    public function setExpiresAt(?\DateTimeInterface $date): void;
-
-    public function getCredentialsExpireAt(): ?\DateTimeInterface;
-
-    public function setCredentialsExpireAt(?\DateTimeInterface $date): void;
 
     public function getLastLogin(): ?\DateTimeInterface;
 

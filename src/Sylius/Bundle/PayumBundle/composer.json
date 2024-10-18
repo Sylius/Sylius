@@ -41,6 +41,7 @@
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.2",
+        "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.1"
     },
     "config": {

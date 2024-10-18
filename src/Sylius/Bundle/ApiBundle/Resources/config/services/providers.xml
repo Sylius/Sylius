@@ -25,7 +25,7 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
-            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.security.api_route%</argument>
             <argument>%sylius.api_path_prefixes%</argument>
         </service>
 

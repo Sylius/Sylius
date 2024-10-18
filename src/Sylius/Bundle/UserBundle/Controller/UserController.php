@@ -72,14 +72,6 @@ class UserController extends ResourceController
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
-    public function requestPasswordResetPinAction(Request $request): Response
-    {
-        /** @var GeneratorInterface $generator */
-        $generator = $this->container->get(sprintf('sylius.%s.pin_generator.password_reset', $this->metadata->getName()));
-
-        return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
-    }
-
     public function resetPasswordAction(Request $request, string $token): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

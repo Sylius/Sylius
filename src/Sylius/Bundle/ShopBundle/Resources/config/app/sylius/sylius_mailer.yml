@@ -18,9 +18,6 @@ sylius_mailer:
         reset_password_token:
             subject: sylius.emails.user.password_reset.subject
             template: "@SyliusShop/email/password_reset.html.twig"
-        reset_password_pin:
-            subject: sylius.emails.user.password_reset.subject
-            template: "@SyliusShop/email/password_reset.html.twig"
         verification_token:
             subject: sylius.emails.user.verification_token.subject
             template: "@SyliusShop/email/verification.html.twig"

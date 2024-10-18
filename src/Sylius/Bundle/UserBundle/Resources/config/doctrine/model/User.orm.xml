@@ -28,9 +28,6 @@
         <field name="emailVerificationToken" column="email_verification_token" type="string" unique="true" nullable="true" />
         <field name="verifiedAt" column="verified_at" type="datetime" nullable="true" />
 
-        <field name="locked" column="locked" type="boolean" nullable="false" />
-        <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />
-        <field name="credentialsExpireAt" column="credentials_expire_at" type="datetime" nullable="true" />
         <field name="roles" column="roles" type="json" nullable="false">
             <options>
                 <option name="jsonb">true</option>

@@ -17,8 +17,6 @@ interface UserEvents
 {
     public const REQUEST_RESET_PASSWORD_TOKEN = 'sylius.user.password_reset.request.token';
 
-    public const REQUEST_RESET_PASSWORD_PIN = 'sylius.user.password_reset.request.pin';
-
     public const REQUEST_VERIFICATION_TOKEN = 'sylius.user.email_verification.token';
 
     public const PRE_EMAIL_VERIFICATION = 'sylius.user.pre_email_verification';

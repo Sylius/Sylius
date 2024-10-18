@@ -37,32 +37,30 @@
             <argument>Payment methods resolver</argument>
         </service>
 
-        <service id="sylius.payment_methods_resolver" class="Sylius\Component\Payment\Resolver\CompositeMethodsResolver">
+        <service id="sylius.resolver.payment_methods" class="Sylius\Component\Payment\Resolver\CompositeMethodsResolver">
             <argument type="service" id="sylius.registry.payment_methods_resolver" />
         </service>
-        <service id="sylius.resolver.payment_methods" alias="sylius.payment_methods_resolver" />
-        <service id="sylius.resolver.payment_methods.composite" alias="sylius.payment_methods_resolver" />
-        <service id="Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface" alias="sylius.payment_methods_resolver" />
+        <service id="sylius.resolver.payment_methods.composite" alias="sylius.resolver.payment_methods" />
+        <service id="Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface" alias="sylius.resolver.payment_methods" />
 
-        <service id="sylius.payment_methods_resolver.default" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver" public="false">
+        <service id="sylius.resolver.payment_methods.default" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver" public="false">
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="default" label="Default" />
         </service>
-        <service id="sylius.resolver.payment_methods.default" alias="sylius.payment_methods_resolver.default"/>
 
         <service id="sylius.form_registry.payment_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
-        <service id="sylius.validator.gateway_config_groups_generator" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator">
+        <service id="sylius.validator.groups_generator.gateway_config" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator">
             <argument>%sylius.form.type.gateway_config.validation_groups%</argument>
             <argument>%sylius.gateway_config.validation_groups%</argument>
         </service>
-        <service id="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGeneratorInterface" alias="sylius.validator.gateway_config_groups_generator" />
+        <service id="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGeneratorInterface" alias="sylius.validator.groups_generator.gateway_config" />
 
-        <service id="sylius.validator.payment_method_groups_generator" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGenerator">
+        <service id="sylius.validator.groups_generator.payment_method" class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGenerator">
             <argument>%sylius.form.type.payment_method.validation_groups%</argument>
-            <argument type="service" id="sylius.validator.gateway_config_groups_generator" />
+            <argument type="service" id="sylius.validator.groups_generator.gateway_config" />
         </service>
-        <service id="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGeneratorInterface" alias="sylius.validator.payment_method_groups_generator" />
+        <service id="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGeneratorInterface" alias="sylius.validator.groups_generator.payment_method" />
 
         <service id="sylius.generator.gateway_name" class="Sylius\Bundle\PaymentBundle\Generator\GatewayNameGenerator" />
         <service id="Sylius\Bundle\PaymentBundle\Generator\GatewayNameGeneratorInterface" alias="sylius.generator.gateway_name" />

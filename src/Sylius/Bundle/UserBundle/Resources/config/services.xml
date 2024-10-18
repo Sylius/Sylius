@@ -58,23 +58,11 @@
         <service id="sylius.canonicalizer" class="Sylius\Component\User\Canonicalizer\Canonicalizer" />
         <service id="Sylius\Component\User\Canonicalizer\CanonicalizerInterface" alias="sylius.canonicalizer" />
 
-        <service id="sylius.security.password_hasher" class="Sylius\Bundle\UserBundle\Security\UserPasswordHasher">
-            <argument type="service" id="security.password_hasher_factory" />
-        </service>
-        <service id="Sylius\Component\User\Security\UserPasswordHasherInterface" alias="sylius.security.password_hasher" />
-
         <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
-            <argument type="service" id="sylius.security.password_hasher" />
+            <argument type="service" id="security.user_password_hasher" />
         </service>
 
         <service id="Sylius\Component\User\Security\PasswordUpdaterInterface" alias="sylius.security.password_updater" />
-
-        <service id="sylius.security.user_login" class="Sylius\Bundle\UserBundle\Security\UserLogin">
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="security.user_checker" />
-            <argument type="service" id="event_dispatcher" />
-        </service>
-        <service id="Sylius\Bundle\UserBundle\Security\UserLoginInterface" alias="sylius.security.user_login" />
 
         <!-- Listeners -->
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener">
@@ -87,7 +75,6 @@
 
         <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\UserBundle\EventListener\MailerListener">
             <argument type="service" id="sylius.email_sender" />
-            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
             <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
         </service>
@@ -113,6 +100,13 @@
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</argument>
             <argument>%sylius.form.type.user_change_password.validation_groups%</argument>
             <tag name="form.type" />
+        </service>
+
+        <service id="sylius.user_checker.enabled" class="Sylius\Component\User\Security\Checker\EnabledUserChecker">
+            <tag name="security.user_checker.admin" priority="100" />
+            <tag name="security.user_checker.shop" priority="100" />
+            <tag name="security.user_checker.api_admin" priority="100" />
+            <tag name="security.user_checker.api_shop" priority="100" />
         </service>
     </services>
 </container>

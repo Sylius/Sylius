@@ -22,7 +22,7 @@
         <service id="sylius.controller.payment_request_notify" class="Sylius\Bundle\PaymentBundle\Action\PaymentRequestNotifyAction">
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.checker.finalized_payment_request" />
-            <argument type="service" id="sylius.processor.payment_request.notify_payload" />
+            <argument type="service" id="sylius.processor.notify_payload" />
             <argument type="service" id="sylius.manager.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
             <argument type="service" id="sylius.provider.notify_response" />
@@ -32,7 +32,7 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.provider.notify_payment" />
             <argument type="service" id="sylius.factory.payment_request" />
-            <argument type="service" id="sylius.processor.payment_request.notify_payload" />
+            <argument type="service" id="sylius.processor.notify_payload" />
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
             <argument type="service" id="sylius.provider.notify_response" />

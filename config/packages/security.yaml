@@ -17,6 +17,7 @@ security:
             context: admin
             pattern: "%sylius.security.admin_regex%"
             provider: sylius_admin_user_provider
+            user_checker: security.user_checker.chain.admin
             form_login:
                 provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
@@ -38,26 +39,28 @@ security:
                 path: sylius_admin_logout
                 target: sylius_admin_login
 
-        new_api_admin_user:
-            pattern: "%sylius.security.new_api_admin_regex%/.*"
+        api_admin:
+            pattern: "%sylius.security.api_admin_regex%/.*"
             provider: sylius_api_admin_user_provider
+            user_checker: security.user_checker.chain.api_admin
             stateless: true
             entry_point: jwt
             json_login:
-                check_path: "%sylius.security.new_api_admin_route%/administrators/token"
+                check_path: "%sylius.security.api_admin_route%/administrators/token"
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: true
 
-        new_api_shop_user:
-            pattern: "%sylius.security.new_api_shop_regex%/.*"
+        api_shop:
+            pattern: "%sylius.security.api_shop_regex%/.*"
             provider: sylius_api_shop_user_provider
+            user_checker: security.user_checker.chain.api_shop
             stateless: true
             entry_point: jwt
             json_login:
-                check_path: "%sylius.security.new_api_shop_route%/customers/token"
+                check_path: "%sylius.security.api_shop_route%/customers/token"
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -69,6 +72,7 @@ security:
             context: shop
             pattern: "%sylius.security.shop_regex%"
             provider: sylius_shop_user_provider
+            user_checker: security.user_checker.chain.shop
             form_login:
                 success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler
@@ -118,9 +122,9 @@ security:
         - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
 
-        - { path: "%sylius.security.new_api_admin_route%/administrators/reset-password", role: PUBLIC_ACCESS }
-        - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
-        - { path: "%sylius.security.new_api_admin_route%/administrators/token", role: PUBLIC_ACCESS }
-        - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
-        - { path: "%sylius.security.new_api_shop_route%/customers/token", role: PUBLIC_ACCESS }
-        - { path: "%sylius.security.new_api_shop_regex%/.*", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.api_admin_route%/administrators/reset-password", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.api_admin_regex%/.*", role: ROLE_API_ACCESS }
+        - { path: "%sylius.security.api_admin_route%/administrators/token", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.api_shop_account_regex%/.*", role: ROLE_USER }
+        - { path: "%sylius.security.api_shop_route%/customers/token", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.api_shop_regex%/.*", role: PUBLIC_ACCESS }

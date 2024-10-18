@@ -16,6 +16,13 @@
   * `Sylius\Bundle\OrderBundle\Attribute\AsCartContext`
   * `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor`
 
+* The `sylius_user.resources.{name}.user.resetting.pin` configuration parameter has been removed.
+  The corresponding email `reset_password_pin` and `Sylius\Bundle\UserBundle\Controller\UserController::requestPasswordResetPinAction`
+  method have been removed. The related services have been removed as well:
+
+    * `sylius.{user_type}_user.pin_generator.password_reset`
+    * `sylius.{user_type}_user.pin_uniqueness_checker.password_reset`
+
 ## Dependencies
 
 * The following dependencies have been removed, install them in your application, if you still want to use Winzou State Machine:
@@ -131,6 +138,9 @@
 | `sylius.expired_carts_remover`                                                                             | `sylius.remover.expired_carts`                                                       |
 | `sylius.sequential_order_number_generator`                                                                 | `sylius.number_generator.sequential_order`                                           |
 | `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`                                      | `sylius.console.command.remove_expired_carts`                                        |
+| **PaymentBundle**                                                                                          |                                                                                      |
+| `sylius.payment_methods_resolver`                                                                          | `sylius.resolver.payment_methods`                                                    |
+| `sylius.payment_methods_resolver.default`                                                                  | `sylius.resolver.payment_methods.default`                                            |
 | **ProductBundle**                                                                                          |                                                                                      |
 | `sylius.form.type.sylius_product_associations`                                                             | `sylius.form.type.product_associations`                                              |
 | `sylius.form.event_subscriber.product_variant_generator`                                                   | `sylius.form.event_subscriber.generate_product_variants`                             |
@@ -431,21 +441,42 @@
           - 'sylius_zone_member_zone'
   ```
 
+* The `locked`, `expiresAt` and `credentialsExpireAt` fields have been removed from the User model, both ShopUser and AdminUser, 
+  as well as the corresponding methods in the User model and columns in the database tables.
+
 * The following classes and interfaces have been removed:
 
     * `Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper`
     * `Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper`
     * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`
-    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelper`
-    * `Sylius\Bundle\CurrencyBundle/Templating/Helper/CurrencyHelperInterface`
-    * `Sylius\Bundle\InventoryBundle/Templating/Helper/InventoryHelper`
-    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelper`
-    * `Sylius\Bundle\LocaleBundle/Templating/Helper/LocaleHelperInterface`
+    * `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper`
+    * `Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface`
+    * `Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper`
+    * `Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper`
+    * `Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper`
     * `Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface`
-    * `Sylius\Bundle\OrderBundle/Templating/Helper/AdjustmentsHelper`
+    * `Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper`
+    * `Sylius\Bundle\UserBundle\Security\UserLogin`
+    * `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
+    * `Sylius\Bundle\UserBundle\Security\UserPasswordHasher`
+    * `Sylius\Bundle\UserBundle\Security\UserPasswordHasherInterface`
+    * `Sylius\Component\User\Security\Generator\UniquePinGenerator`
+
+* The following services and aliases have been removed:
+
+    * `sylius.security.password_hasher`
+    * `sylius.security.user_login`
+    * `Sylius\Bundle\UserBundle\Security\UserLoginInterface`
+    * `Sylius\Component\User\Security\UserPasswordHasherInterface`
+
+* The service `sylius.form_registry.payum_gateway_config` has been moved to the `PaymentBundle`, and its ID changed to `sylius.form_registry.payment_gateway_config`.
+
+* The class `Sylius\Bundle\PayumBundle\Validator\GatewayFactoryExistsValidator` has been moved to the `PaymentBundle`, and its service ID changed to`sylius.validator.gateway_factory_exists`.
+
+* The class `Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator` has been moved to the `PaymentBundle`, and its service ID changed to`sylius.validator.groups_generator.gateway_config`.
 
 ### Constructors signature changes
 
@@ -619,6 +650,30 @@ The following classes have been removed:
     - Sylius\Component\Core\Grid\Filter\EntitiesFilter
     - Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType
 
+## Security
+
+* API firewalls have been renamed and user checkers have been configured on firewalls 
+  with `security.user_checker.chain.<firewall>` service:
+
+    ```diff
+    security:
+        firewalls:
+            admin:
+                ...
+    +           user_checker: security.user_checker.chain.admin
+    -       new_api_admin_user:
+    +       api_admin:
+                ...
+    +           user_checker: security.user_checker.chain.api_admin
+    -       new_api_shop_user:
+    +       api_shop:
+                ...
+    +           user_checker: security.user_checker.chain.api_shop
+            shop:
+                ...
+    +           user_checker: security.user_checker.chain.shop
+    ```
+
 ## Password Encoder & Salt
 The encoder and salt has been removed from the User entities. It will use the password hasher configured on Symfony security configuration.
 
@@ -708,7 +763,6 @@ If your app never changed the hasher name configuration, you don't need to confi
     * `Sylius\Bundle\UiBundle\Twig\TemplateEventExtension`
     * `Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension`
     * `Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension`
-    * `Sylius\Bundle\UiBundle\Twig\RouteExistsExtension`
     * `Sylius\Bundle\UiBundle\Twig\SortByExtension`
 
 * The following services have been renamed:

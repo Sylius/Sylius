@@ -37,13 +37,13 @@ We will modify the same file as in example on top, the ``security.yaml``:
     # config/packages/security.yaml
     security:
         access_control:
-           - { path: "%sylius.security.new_api_shop_regex%/orders", method: POST, GET , role: IS_AUTHENTICATED_ANONYMOUSLY }
-           - { path: "%sylius.security.new_api_shop_regex%/orders/.*/items", method: POST , role: IS_AUTHENTICATED_ANONYMOUSLY }
-           - { path: "%sylius.security.new_api_shop_regex%/.*", role: ROLE_USER }
+           - { path: "%sylius.security.api_shop_regex%/orders", method: POST, GET , role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: "%sylius.security.api_shop_regex%/orders/.*/items", method: POST , role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: "%sylius.security.api_shop_regex%/.*", role: ROLE_USER }
 
 .. warning::
 
-    The "main" path (in this example ``"%sylius.security.new_api_shop_regex%/.*"`` ) should be at the very end of the configuration
+    The "main" path (in this example ``"%sylius.security.api_shop_regex%/.*"`` ) should be at the very end of the configuration
     with the same route, otherwise this would not work.
 
 Now when an anonymous user will try to use other checkout routes they will be informed that they are not authenticated:

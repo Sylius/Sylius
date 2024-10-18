@@ -39,11 +39,6 @@ final class MailerListener
         $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_TOKEN);
     }
 
-    public function sendResetPasswordPinEmail(GenericEvent $event): void
-    {
-        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_PIN);
-    }
-
     public function sendVerificationTokenEmail(GenericEvent $event): void
     {
         $this->sendEmail($event->getSubject(), UserBundleEmails::EMAIL_VERIFICATION_TOKEN);
