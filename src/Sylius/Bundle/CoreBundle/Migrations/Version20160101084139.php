@@ -104,6 +104,8 @@ final class Version20160101084139 extends AbstractPostgreSQLMigration
         $this->addSql('CREATE TABLE sylius_address (id INT NOT NULL, customer_id INT DEFAULT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, phone_number VARCHAR(255) DEFAULT NULL, street VARCHAR(255) NOT NULL, company VARCHAR(255) DEFAULT NULL, city VARCHAR(255) NOT NULL, postcode VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, country_code VARCHAR(255) NOT NULL, province_code VARCHAR(255) DEFAULT NULL, province_name VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_B97FF0589395C3F3 ON sylius_address (customer_id)');
         $this->addSql('CREATE TABLE sylius_address_log_entries (id INT NOT NULL, action VARCHAR(255) NOT NULL, logged_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, object_id VARCHAR(64) DEFAULT NULL, object_class VARCHAR(255) NOT NULL, version INT NOT NULL, data JSONB DEFAULT NULL, username VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX object_id_index ON sylius_address_log_entries (object_id)');
+        $this->addSql('CREATE INDEX object_class_index ON sylius_address_log_entries (object_class)');
         $this->addSql('CREATE TABLE sylius_adjustment (id INT NOT NULL, order_id INT DEFAULT NULL, order_item_id INT DEFAULT NULL, order_item_unit_id INT DEFAULT NULL, shipment_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, label VARCHAR(255) DEFAULT NULL, amount INT NOT NULL, is_neutral BOOLEAN NOT NULL, is_locked BOOLEAN NOT NULL, origin_code VARCHAR(255) DEFAULT NULL, details JSON NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_ACA6E0F28D9F6D38 ON sylius_adjustment (order_id)');
         $this->addSql('CREATE INDEX IDX_ACA6E0F2E415FB15 ON sylius_adjustment (order_item_id)');
@@ -706,15 +708,18 @@ final class Version20160101084139 extends AbstractPostgreSQLMigration
 
     private function cleanMigrationsTable(): void
     {
-        $this->connection->executeStatement('DELETE FROM sylius_migrations WHERE version LIKE :version AND version NOT IN (:current)', [
+        $this->connection->executeStatement('DELETE FROM sylius_migrations WHERE version LIKE :version AND version NOT IN (:current) AND version < :new', [
             'version' => 'Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version%',
             'current' => [
                 'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20160101092155',
                 self::class,
             ],
+            'new' => 'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20241020131407',
         ], [
             'version' => Types::STRING,
             'current' => ArrayParameterType::STRING,
+            'new' => Types::STRING,
         ]);
     }
+
 }
