@@ -3,3 +3,4 @@ sylius_twig_hooks:
         'sylius_shop.error404.error.layout':
             message:
                 template: '@SyliusShop/errors/error404/layout/message.html.twig'
+                priority: 0
