@@ -29,7 +29,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
-final class AccountContext implements Context
+final readonly class AccountContext implements Context
 {
     public function __construct(
         private DashboardPageInterface $dashboardPage,
@@ -290,6 +290,14 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I try to browse my orders
+     */
+    public function iTryToBrowseMyOrders(): void
+    {
+        $this->orderIndexPage->tryToOpen();
+    }
+
+    /**
      * @When I change my payment method to :paymentMethod
      */
     public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
@@ -432,7 +440,6 @@ final class AccountContext implements Context
 
         $this->orderIndexPage->open();
         $this->orderIndexPage->changePaymentMethod($order);
-        $this->orderShowPage->choosePaymentMethod($paymentMethod);
 
         Assert::same($this->orderShowPage->getChosenPaymentMethod(), $paymentMethod->getName());
     }
@@ -494,11 +501,11 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should see its payment status as :paymentStatus
+     * @Then I should see its payment state as :paymentState
      */
-    public function shouldSeePaymentStatus(string $paymentStatus): void
+    public function shouldSeePaymentStatus(string $paymentState): void
     {
-        Assert::same($this->orderShowPage->getPaymentStatus(), $paymentStatus);
+        Assert::same($this->orderShowPage->getPaymentState(), $paymentState);
     }
 
     /**
@@ -510,15 +517,15 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then the order's shipment status should be :orderShipmentStatus
+     * @Then the order's shipment state should be :orderShipmentStatus
      */
-    public function theOrderShipmentStatusShouldBe(string $orderShipmentStatus): void
+    public function theOrderShipmentStateShouldBe(string $orderShipmentStatus): void
     {
-        Assert::same($this->orderShowPage->getOrderShipmentStatus(), $orderShipmentStatus);
+        Assert::same($this->orderShowPage->getOrderShipmentState(), $orderShipmentStatus);
     }
 
     /**
-     * @Then the shipment status should be :shipmentStatus
+     * @Then the shipment state should be :shipmentStatus
      */
     public function theShipmentStatusShouldBe(string $shipmentStatus): void
     {
@@ -570,6 +577,7 @@ final class AccountContext implements Context
 
     /**
      * @Then I should be on the login page
+     * @Then I should be denied an access to order list
      */
     public function iShouldBeOnTheLoginPage(): void
     {

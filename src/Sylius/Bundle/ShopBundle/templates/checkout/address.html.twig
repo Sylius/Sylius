@@ -1,0 +1,15 @@
+{% extends '@SyliusShop/checkout/shared/layout.html.twig' %}
+
+{% set checkout_address_hook = 'sylius_shop.checkout.address' %}
+{% set prefixes = [checkout_address_hook] %}
+{% set active_step = 'address' %}
+
+{% block title %}
+    {{ 'sylius.ui.address'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="pe-lg-6">
+        {% hook checkout_address_hook with { active_step, form, order } %}
+    </div>
+{% endblock %}

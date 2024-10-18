@@ -15,7 +15,9 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmpty;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -36,12 +38,11 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_value_is_not_an_instance_of_order_token_value_aware_interface(): void
+    function it_throws_an_exception_if_value_is_not_an_instance_of_complete_order_or_update_cart(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new class() extends Constraint {
-            }])
+            ->during('validate', [new RemoveItemFromCart('token', 1), new OrderNotEmpty()])
         ;
     }
 
@@ -49,15 +50,14 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {
+            ->during('validate', [new UpdateCart('token'), new class() extends Constraint {
             }])
         ;
     }
 
     function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
     {
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
@@ -74,8 +74,7 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
@@ -93,8 +92,7 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new UpdateCart(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 

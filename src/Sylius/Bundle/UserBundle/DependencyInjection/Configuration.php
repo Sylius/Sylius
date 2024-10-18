@@ -34,7 +34,6 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('encoder')->defaultNull()->end()
             ->end()
         ;
 
@@ -55,7 +54,6 @@ final class Configuration implements ConfigurationInterface
                                 ->addDefaultsIfNotSet()
                                 ->children()
                                     ->scalarNode('templates')->defaultValue('SyliusUserBundle:User')->end()
-                                    ->scalarNode('encoder')->defaultNull()->end()
                                     ->scalarNode('login_tracking_interval')->defaultNull()->end()
                                     ->variableNode('options')
                                         ->setDeprecated('sylius/user-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')

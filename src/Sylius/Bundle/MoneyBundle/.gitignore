@@ -5,4 +5,8 @@ composer.phar
 composer.lock
 
 test/app/cache
+test/app/db.sql
 test/app/logs
+test/var
+
+/.phpunit.result.cache

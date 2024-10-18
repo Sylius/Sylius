@@ -35,8 +35,8 @@ default:
 
                 - sylius.behat.context.api.admin.managing_promotions
                 - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.removing_product
                 - sylius.behat.context.api.admin.save
-                - Sylius\Behat\Context\Api\Admin\RemovingProductContext
                 - Sylius\Behat\Context\Api\Admin\RemovingTaxonContext
                 - sylius.behat.context.api.admin.translation
 

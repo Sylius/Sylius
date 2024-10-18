@@ -18,26 +18,15 @@ use Payum\Core\Extension\ExtensionInterface;
 use Payum\Core\Request\Generic;
 use Payum\Core\Request\GetStatusInterface;
 use Payum\Core\Request\Notify;
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
 final class UpdatePaymentStateExtension implements ExtensionInterface
 {
-    public function __construct(private FactoryInterface|StateMachineInterface $factory)
+    public function __construct(private StateMachineInterface $factory)
     {
-        trigger_deprecation(
-            'sylius/payum-bundle',
-            '1.13',
-            sprintf(
-                'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                FactoryInterface::class,
-                StateMachineInterface::class,
-            ),
-        );
     }
 
     public function onPreExecute(Context $context): void
@@ -93,19 +82,8 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
 
     private function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
-        $stateMachine = $this->getStateMachine();
-
-        if (null !== $transition = $stateMachine->getTransitionToState($payment, PaymentTransitions::GRAPH, $nextState)) {
-            $stateMachine->apply($payment, PaymentTransitions::GRAPH, $transition);
+        if (null !== $transition = $this->factory->getTransitionToState($payment, PaymentTransitions::GRAPH, $nextState)) {
+            $this->factory->apply($payment, PaymentTransitions::GRAPH, $transition);
         }
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->factory instanceof FactoryInterface) {
-            return new WinzouStateMachineAdapter($this->factory);
-        }
-
-        return $this->factory;
     }
 }

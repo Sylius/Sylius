@@ -7,6 +7,6 @@
     "enabled": false,
     "name": "United States",
     "provinces": [
-        "\/api\/v2\/admin\/provinces\/US-WA"
+        "\/api\/v2\/admin\/countries\/US\/provinces\/US-WA"
     ]
 }

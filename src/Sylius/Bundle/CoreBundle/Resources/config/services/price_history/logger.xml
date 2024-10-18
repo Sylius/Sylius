@@ -21,7 +21,7 @@
         >
             <argument type="service" id="sylius.factory.channel_pricing_log_entry" />
             <argument type="service" id="sylius.manager.channel_pricing_log_entry" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
     </services>
 </container>

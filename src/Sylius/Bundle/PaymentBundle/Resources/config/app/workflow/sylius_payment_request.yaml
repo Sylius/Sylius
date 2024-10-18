@@ -1,0 +1,35 @@
+framework:
+    workflows:
+        !php/const Sylius\Component\Payment\PaymentRequestTransitions::GRAPH:
+            type: state_machine
+            marking_store:
+                type: method
+                property: state
+            supports:
+                - Sylius\Component\Payment\Model\PaymentRequestInterface
+            initial_marking: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+            places:
+                - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+                - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
+                - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_COMPLETED
+                - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_FAILED
+                - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_CANCELLED
+            transitions:
+                !php/const Sylius\Component\Payment\PaymentRequestTransitions::TRANSITION_PROCESS:
+                    from: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+                    to: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
+                !php/const Sylius\Component\Payment\PaymentRequestTransitions::TRANSITION_COMPLETE:
+                    from:
+                        - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+                        - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
+                    to: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_COMPLETED
+                !php/const Sylius\Component\Payment\PaymentRequestTransitions::TRANSITION_FAIL:
+                    from:
+                        - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+                        - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
+                    to: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_FAILED
+                !php/const Sylius\Component\Payment\PaymentRequestTransitions::TRANSITION_CANCEL:
+                    from:
+                        - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+                        - !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
+                    to: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_CANCELLED

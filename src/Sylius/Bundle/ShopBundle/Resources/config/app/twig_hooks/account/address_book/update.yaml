@@ -1,0 +1,33 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.address_book.update':
+            breadcrumbs:
+                template: '@SyliusShop/account/address_book/update/breadcrumbs.html.twig'
+
+        'sylius_shop.account.address_book.update.content':
+            form:
+                component: 'sylius_shop:account:address:form'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.address'
+                    template: '@SyliusShop/account/address_book/common/content/form.html.twig'
+                configuration:
+                    method: 'PUT'
+
+        'sylius_shop.account.address_book.update.content.header':
+            title:
+                template: '@SyliusShop/account/address_book/update/content/header/title.html.twig'
+            subtitle:
+                template: '@SyliusShop/account/address_book/update/content/header/subtitle.html.twig'
+
+        'sylius_shop.account.address_book.update.content.form':
+            fields:
+                template: '@SyliusShop/account/address_book/common/content/form/fields.html.twig'
+            buttons:
+                template: '@SyliusShop/account/address_book/common/content/form/buttons.html.twig'
+
+        'sylius_shop.account.address_book.update.content.form.buttons':
+            save:
+                template: '@SyliusShop/account/address_book/update/content/form/buttons/save.html.twig'
+            cancel:
+                template: '@SyliusShop/account/address_book/common/content/form/buttons/cancel.html.twig'

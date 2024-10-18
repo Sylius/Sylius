@@ -22,13 +22,21 @@ class HistoryPage extends SymfonyPage implements HistoryPageInterface
         return 'sylius_admin_order_history';
     }
 
-    public function countShippingAddressChanges(): int
-    {
-        return count($this->getDocument()->findAll('css', '#shipping-address-changes tbody tr'));
-    }
-
     public function countBillingAddressChanges(): int
     {
-        return count($this->getDocument()->findAll('css', '#billing-address-changes tbody tr'));
+        return count($this->getElement('billing_address_logs')->findAll('css', '[data-test-address-log]'));
+    }
+
+    public function countShippingAddressChanges(): int
+    {
+        return count($this->getElement('shipping_address_logs')->findAll('css', '[data-test-address-log]'));
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'billing_address_logs' => '[data-test-address-type="Billing address"]',
+            'shipping_address_logs' => '[data-test-address-type="Shipping address"]',
+        ]);
     }
 }

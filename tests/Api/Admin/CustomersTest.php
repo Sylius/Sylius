@@ -70,7 +70,7 @@ final class CustomersTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'customer.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'order/fulfilled.yaml',
         ]);
         $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();

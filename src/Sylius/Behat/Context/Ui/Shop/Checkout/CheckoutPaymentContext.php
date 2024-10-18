@@ -20,7 +20,7 @@ use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Webmozart\Assert\Assert;
 
-final class CheckoutPaymentContext implements Context
+final readonly class CheckoutPaymentContext implements Context
 {
     public function __construct(
         private SelectPaymentPageInterface $selectPaymentPage,
@@ -31,7 +31,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @When I try to open checkout payment page
      */
-    public function iTryToOpenCheckoutPaymentPage()
+    public function iTryToOpenCheckoutPaymentPage(): void
     {
         $this->selectPaymentPage->tryToOpen();
     }
@@ -39,7 +39,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @When I decide to change order shipping method
      */
-    public function iDecideToChangeMyShippingMethod()
+    public function iDecideToChangeOrderShippingMethod(): void
     {
         $this->selectPaymentPage->changeShippingMethod();
     }
@@ -61,7 +61,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @When I want to pay for order
      */
-    public function iWantToPayForOrder()
+    public function iWantToPayForOrder(): void
     {
         $this->selectPaymentPage->tryToOpen();
     }
@@ -69,7 +69,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @When I go back to payment step of the checkout
      */
-    public function iAmAtTheCheckoutPaymentStep()
+    public function iAmAtTheCheckoutPaymentStep(): void
     {
         $this->selectPaymentPage->open();
     }
@@ -77,23 +77,31 @@ final class CheckoutPaymentContext implements Context
     /**
      * @When /^I complete(?:|d) the payment step$/
      */
-    public function iCompleteThePaymentStep()
+    public function iCompleteThePaymentStep(): void
     {
         $this->selectPaymentPage->nextStep();
     }
 
     /**
-     * @When I select :name payment method
+     * @When I select :paymentMethodName payment method
      */
-    public function iSelectPaymentMethod($name): void
+    public function iSelectPaymentMethod(string $paymentMethodName): void
     {
-        $this->selectPaymentPage->selectPaymentMethod($name);
+        $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
+    }
+
+    /**
+     * @When I do not select any payment method
+     */
+    public function iDoNotSelectAnyPaymentMethod(): void
+    {
+        // Intentionally left blank to fulfill context expectation
     }
 
     /**
      * @Then I should be on the checkout payment step
      */
-    public function iShouldBeOnTheCheckoutPaymentStep()
+    public function iShouldBeOnTheCheckoutPaymentStep(): void
     {
         $this->selectPaymentPage->verify();
     }
@@ -101,7 +109,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @Then I should be able to select :paymentMethodName payment method
      */
-    public function iShouldBeAbleToSelectPaymentMethod($paymentMethodName)
+    public function iShouldBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
         Assert::true($this->selectPaymentPage->hasPaymentMethod($paymentMethodName));
     }
@@ -109,7 +117,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @Then I should not be able to select :paymentMethodName payment method
      */
-    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
+    public function iShouldNotBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
         Assert::false($this->selectPaymentPage->hasPaymentMethod($paymentMethodName));
     }
@@ -117,7 +125,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @Then I should be redirected to the payment step
      */
-    public function iShouldBeRedirectedToThePaymentStep()
+    public function iShouldBeRedirectedToThePaymentStep(): void
     {
         $this->selectPaymentPage->verify();
     }
@@ -125,7 +133,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @Then I should be able to go to the summary page again
      */
-    public function iShouldBeAbleToGoToTheSummaryPageAgain()
+    public function iShouldBeAbleToGoToTheSummaryPageAgain(): void
     {
         $this->selectPaymentPage->nextStep();
 
@@ -135,7 +143,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @Then I should have :paymentMethodName payment method available as the first choice
      */
-    public function iShouldHavePaymentMethodAvailableAsFirstChoice($paymentMethodName)
+    public function iShouldHavePaymentMethodAvailableAsFirstChoice(string $paymentMethodName): void
     {
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
 
@@ -145,7 +153,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @Then I should have :paymentMethodName payment method available as the last choice
      */
-    public function iShouldHavePaymentMethodAvailableAsLastChoice($paymentMethodName)
+    public function iShouldHavePaymentMethodAvailableAsLastChoice(string $paymentMethodName): void
     {
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
 
@@ -204,5 +212,27 @@ final class CheckoutPaymentContext implements Context
                 sprintf('There is %s payment method', $paymentMethodName),
             );
         }
+    }
+
+    /**
+     * @Then I should not be able to complete the payment step
+     */
+    public function iShouldNotBeAbleToCompleteThePaymentStep(): void
+    {
+        Assert::true(
+            $this->selectPaymentPage->isNextStepButtonUnavailable(),
+            'The "next step" button should be disabled, but it does not.',
+        );
+    }
+
+    /**
+     * @Then there should be information about no payment methods available for my order
+     */
+    public function thereShouldBeInformationAboutNoPaymentMethodsAvailableForMyOrder(): void
+    {
+        Assert::true(
+            $this->selectPaymentPage->hasNoAvailablePaymentMethodsWarning(),
+            'There should be warning about no available payment methods, but it does not.',
+        );
     }
 }

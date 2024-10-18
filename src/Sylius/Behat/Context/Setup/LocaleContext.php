@@ -22,8 +22,12 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
-final class LocaleContext implements Context
+final readonly class LocaleContext implements Context
 {
+    /**
+     * @param FactoryInterface<LocaleInterface> $localeFactory
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private LocaleConverterInterface $localeConverter,
@@ -39,7 +43,7 @@ final class LocaleContext implements Context
      * @Given the store is( also) available in :localeCode
      * @Given the locale :localeCode is enabled
      */
-    public function theStoreHasLocale($localeCode)
+    public function theStoreHasLocale(string $localeCode): void
     {
         $locale = $this->provideLocale($localeCode);
 
@@ -67,7 +71,7 @@ final class LocaleContext implements Context
     /**
      * @Given the locale :localeCode does not exist in the store
      */
-    public function theStoreDoesNotHaveLocale($localeCode)
+    public function theStoreDoesNotHaveLocale(string $localeCode): void
     {
         /** @var LocaleInterface $locale */
         $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
@@ -83,7 +87,7 @@ final class LocaleContext implements Context
      * @Given /^(this channel) allows to shop using the "([^"]+)" locale$/
      * @Given /^(this channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
      */
-    public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames)
+    public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames): void
     {
         foreach ($channel->getLocales() as $locale) {
             $channel->removeLocale($locale);
@@ -112,12 +116,7 @@ final class LocaleContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @param string $localeCode
-     *
-     * @return LocaleInterface
-     */
-    private function createLocale($localeCode)
+    private function createLocale(string $localeCode): LocaleInterface
     {
         /** @var LocaleInterface $locale */
         $locale = $this->localeFactory->createNew();
@@ -126,16 +125,10 @@ final class LocaleContext implements Context
         return $locale;
     }
 
-    /**
-     * @param string $localeCode
-     *
-     * @return LocaleInterface
-     */
-    private function provideLocale($localeCode)
+    private function provideLocale(string $localeCode): LocaleInterface
     {
         $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
         if (null === $locale) {
-            /** @var LocaleInterface $locale */
             $locale = $this->createLocale($localeCode);
 
             $this->localeRepository->add($locale);
@@ -144,7 +137,7 @@ final class LocaleContext implements Context
         return $locale;
     }
 
-    private function saveLocale(LocaleInterface $locale)
+    private function saveLocale(LocaleInterface $locale): void
     {
         $this->sharedStorage->set('locale', $locale);
         $this->localeRepository->add($locale);

@@ -1,0 +1,49 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.profile_update.update':
+            breadcrumbs:
+                template: '@SyliusShop/account/profile_update/update/breadcrumbs.html.twig'
+
+        'sylius_shop.account.profile_update.update.content':
+            form:
+                component: 'sylius_shop:account:profile_update:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusShop/account/profile_update/update/content/form.html.twig'
+
+        'sylius_shop.account.profile_update.update.content.header':
+            title:
+                template: '@SyliusShop/account/profile_update/update/content/header/title.html.twig'
+            subtitle:
+                template: '@SyliusShop/account/profile_update/update/content/header/subtitle.html.twig'
+
+        'sylius_shop.account.profile_update.update.content.form':
+            full_name:
+                template: '@SyliusShop/account/profile_update/update/content/form/full_name.html.twig'
+            email:
+                template: '@SyliusShop/account/profile_update/update/content/form/email.html.twig'
+            additional_information:
+                template: '@SyliusShop/account/profile_update/update/content/form/additional_information.html.twig'
+            phone_number:
+                template: '@SyliusShop/account/profile_update/update/content/form/phone_number.html.twig'
+            newsletter:
+                template: '@SyliusShop/account/profile_update/update/content/form/newsletter.html.twig'
+            buttons:
+                template: '@SyliusShop/account/profile_update/update/content/form/buttons.html.twig'
+
+        'sylius_shop.account.profile_update.update.content.form.full_name':
+            name:
+                template: '@SyliusShop/account/profile_update/update/content/form/full_name/name.html.twig'
+            surname:
+                template: '@SyliusShop/account/profile_update/update/content/form/full_name/surname.html.twig'
+
+        'sylius_shop.account.profile_update.update.content.form.additional_information':
+            birthday:
+                template: '@SyliusShop/account/profile_update/update/content/form/additional_information/birthday.html.twig'
+            gender:
+                template: '@SyliusShop/account/profile_update/update/content/form/additional_information/gender.html.twig'
+
+        'sylius_shop.account.profile_update.update.content.form.buttons':
+            submit:
+                template: '@SyliusShop/account/profile_update/update/content/form/buttons/submit.html.twig'

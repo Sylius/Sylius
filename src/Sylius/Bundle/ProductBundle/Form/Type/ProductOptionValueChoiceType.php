@@ -23,19 +23,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductOptionValueChoiceType extends AbstractType
 {
-    private ?AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver;
-
-    public function __construct(?AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver = null)
+    public function __construct(private readonly AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver)
     {
-        if (null === $availableProductOptionValuesResolver) {
-            trigger_deprecation(
-                'sylius/product-bundle',
-                '1.8',
-                'Not passing an $availableProductOptionValuesResolver through constructor is deprecated and will be removed in Sylius 2.0',
-            );
-        }
-
-        $this->availableProductOptionValuesResolver = $availableProductOptionValuesResolver;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -48,17 +37,6 @@ final class ProductOptionValueChoiceType extends AbstractType
                         if (null === $options['product']) {
                             throw new \RuntimeException(
                                 'You must specify the "product" option when "only_available_values" is true.',
-                            );
-                        }
-
-                        if (null === $this->availableProductOptionValuesResolver) {
-                            throw new \RuntimeException(
-                                sprintf(
-                                    'Cannot provide only available values in "%s" because a "%s" is required but ' .
-                                    'none has been set.',
-                                    __CLASS__,
-                                    AvailableProductOptionValuesResolverInterface::class,
-                                ),
                             );
                         }
 

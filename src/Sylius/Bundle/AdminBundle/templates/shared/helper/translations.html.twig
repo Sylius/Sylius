@@ -1,0 +1,80 @@
+{% macro default(translation_fields, body = null, options = {}) %}
+    {% from _self import accordion_header %}
+
+    {% set accordion_id = options.accordion_id|default('translations') %}
+    {% set accordion_flush = options.accordion_flush|default(false) %}
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" id="{{ accordion_id }}">
+        {% for locale, translation_form in translation_fields %}
+            <div class="accordion-item">
+                {{ accordion_header(locale, accordion_id, loop.first) }}
+                <div id="translation-{{ accordion_id }}-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
+                    <div class="accordion-body">
+                        {% if body is not null %}
+                            {{ include(template_from_string(body), { locale: locale, translation_form: translation_form }) }}
+                        {% else %}
+                            {% for field in translation_form %}
+                                {{ form_row(field) }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro with_hook(translation_fields, prefixes, hook_name = null, options = {}) %}
+    {% from _self import accordion_header %}
+
+    {% set accordion_id = options.accordion_id|default('translations') %}
+    {% set accordion_flush = options.accordion_flush|default(false) %}
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" id="{{ accordion_id }}">
+        {% for locale, translation_form in translation_fields %}
+            <div class="accordion-item">
+                {{ accordion_header(locale, accordion_id, loop.first) }}
+                <div id="translation-{{ accordion_id }}-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
+                    <div class="accordion-body row">
+                        {% hook hook_name|default('translations') with { form: translation_form, locale, _prefixes: prefixes } %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro single_field(translationFields, key, options = {}) %}
+    {% from _self import accordion_header %}
+
+    {% set accordion_id = options.accordion_id|default('translations') %}
+    {% set accordion_flush = options.accordion_flush|default(false) %}
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" {{ sylius_test_html_attribute('accordion-key', key)}} id="{{ accordion_id }}">
+        {% for locale, translationForm in translationFields %}
+            <div class="accordion-item">
+                {{ accordion_header(locale, accordion_id, loop.first) }}
+                <div id="translation-{{ accordion_id }}-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
+                    <div class="accordion-body">
+                        {%  set attributes = sylius_test_form_attribute('key', key)|sylius_merge_recursive(sylius_test_form_attribute('locale', locale)) %}
+                        {{ form_widget(translationForm, attributes) }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro accordion_header(locale, accordion_id, is_first = false) %}
+    <h2 class="accordion-header">
+        <button
+            class="accordion-button {% if is_first == false %}collapsed{% endif %}"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#translation-{{ accordion_id }}-{{ locale }}"
+            aria-expanded="{% if is_first %}true{% else %}false{% endif %}"
+            aria-controls="translation-{{ accordion_id }}-{{ locale }}"
+            {{ sylius_test_html_attribute( accordion_id ~ '-accordion', locale) }}
+        >
+            <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
+            {{ locale|sylius_locale_name }}
+        </button>
+    </h2>
+{% endmacro %}

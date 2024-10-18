@@ -17,11 +17,11 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
 use Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -57,7 +57,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         RouterInterface $router,
         FormInterface $form,
         Request $request,
-        ParameterBagInterface $attributesBag,
+        ParameterBag $attributesBag,
     ): void {
         $formFactory
             ->create(RequestPasswordResetType::class)
@@ -100,7 +100,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         RouterInterface $router,
         FormInterface $form,
         Request $request,
-        ParameterBagInterface $attributesBag,
+        ParameterBag $attributesBag,
     ): void {
         $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
 
@@ -142,7 +142,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         RouterInterface $router,
         FormInterface $form,
         Request $request,
-        ParameterBagInterface $attributesBag,
+        ParameterBag $attributesBag,
     ): void {
         $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
 

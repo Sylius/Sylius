@@ -6,17 +6,21 @@ sylius_grid:
                 options:
                     class: "%sylius.model.zone.class%"
             fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
                 name:
-                    type: string
+                    type: twig
                     label: sylius.ui.name
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 type:
                     type: twig
                     label: sylius.ui.type
                     options:
-                        template: "@SyliusUi/Grid/Field/label.html.twig"
+                        template: "@SyliusAdmin/zone/grid/field/type.html.twig"
             filters:
                 name:
                     type: string

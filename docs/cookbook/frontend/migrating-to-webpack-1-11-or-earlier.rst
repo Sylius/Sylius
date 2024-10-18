@@ -113,7 +113,7 @@ Now we will walk through the process of migrating your project from Gulp to Webp
 
 .. code-block:: twig
 
-    {% include '@SyliusUi/Security/_login.html.twig'
+    {% include '@SyliusUi/security/_login.html.twig'
         with {
             'action': path('sylius_admin_login_check'),
             'paths': {'logo': asset('build/admin/images/logo.png', 'admin')}

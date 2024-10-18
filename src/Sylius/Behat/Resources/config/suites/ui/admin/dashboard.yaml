@@ -15,6 +15,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.geographical
@@ -24,10 +25,10 @@ default:
                 - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.zone
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.ui.admin.dashboard
                 - sylius.behat.context.ui.admin.login
+                - sylius.behat.context.ui.admin.managing_products
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.browser
 

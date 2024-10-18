@@ -1,0 +1,9 @@
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters)) %}
+
+{{ component('sylius_admin:delete_modal', {
+    id: options.link.parameters.code,
+    path: path,
+    label: action.label,
+    icon: action.icon,
+    disabled: options.state == 'processing',
+}) }}

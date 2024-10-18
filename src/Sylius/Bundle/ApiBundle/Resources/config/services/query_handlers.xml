@@ -32,10 +32,5 @@
             <argument type="service" id="sylius.repository.channel" />
         </service>
         <service id="sylius_api.query_handler.get_statistics" alias="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler" />
-
-        <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler">
-            <argument type="service" id="sylius.repository.address_log_entry" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
     </services>
 </container>

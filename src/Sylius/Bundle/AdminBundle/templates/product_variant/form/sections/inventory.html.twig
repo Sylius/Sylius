@@ -1,0 +1,14 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="tab-pane" id="product-variant-inventory" role="tabpanel" tabindex="0">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 id="inventory" class="card-title">{{ 'sylius.ui.inventory'|trans }}</h2>
+        </div>
+        <div class="card-body">
+            {{ form_row(form.onHand) }}
+            {{ form_row(form.tracked) }}
+            {{ form_row(form.version) }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.product_attribute.create.content':
+            form:
+                component: 'sylius_admin:product_attribute:form'
+                props:
+                    form: '@=_context.form'
+                    type: '@=_context.resource.getType()'
+                    resource: '@=_context.resource'
+                    template: '@SyliusAdmin/product_attribute/form.html.twig'
+                priority: 0
+
+        'sylius_admin.product_attribute.create.content.form':
+            general:
+                template: '@SyliusAdmin/product_attribute/form/general.html.twig'
+                priority: 200
+            translations:
+                template: '@SyliusAdmin/product_attribute/form/translations.html.twig'
+                priority: 100
+            configuration:
+                template: '@SyliusAdmin/product_attribute/form/configuration.html.twig'
+                priority: 0
+            sections:
+                enabled: false
+
+        'sylius_admin.product_attribute.create.content.form.general':
+            code:
+                template: '@SyliusAdmin/product_attribute/form/general/code.html.twig'
+                priority: 300
+            type:
+                template: '@SyliusAdmin/product_attribute/form/general/type.html.twig'
+                priority: 200
+            position:
+                template: '@SyliusAdmin/product_attribute/form/general/position.html.twig'
+                priority: 100
+            translatable:
+                template: '@SyliusAdmin/product_attribute/form/general/translatable.html.twig'
+                priority: 0
+
+        'sylius_admin.product_attribute.create.content.form.translations':
+            name:
+                template: '@SyliusAdmin/product_attribute/form/translations/name.html.twig'
+                priority: 0
+
+        'sylius_admin.product_attribute.create.content.form.configuration.text':
+            min_length:
+                template: '@SyliusAdmin/product_attribute/form/configuration/text/min_length.html.twig'
+                priority: 100
+            max_length:
+                template: '@SyliusAdmin/product_attribute/form/configuration/text/max_length.html.twig'
+                priority: 0
+
+        'sylius_admin.product_attribute.create.content.form.configuration.datetime':
+            format:
+                template: '@SyliusAdmin/product_attribute/form/configuration/datetime/format.html.twig'
+                priority: 0
+
+        'sylius_admin.product_attribute.create.content.form.configuration.date':
+            format:
+                template: '@SyliusAdmin/product_attribute/form/configuration/date/format.html.twig'
+                priority: 0
+
+        'sylius_admin.product_attribute.create.content.form.configuration.select':
+            min_entries:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/min_entries.html.twig'
+                priority: 300
+            max_entries:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/max_entries.html.twig'
+                priority: 200
+            multiple:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/multiple.html.twig'
+                priority: 100
+            choices:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/choices.html.twig'
+                priority: 0

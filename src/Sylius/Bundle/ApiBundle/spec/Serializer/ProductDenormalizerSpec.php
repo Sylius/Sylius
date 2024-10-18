@@ -60,6 +60,7 @@ final class ProductDenormalizerSpec extends ObjectBehavior
                     self::ALREADY_CALLED => true,
                 ],
             )
+            ->willReturn($product)
             ->shouldBeCalled()
         ;
 
@@ -88,6 +89,7 @@ final class ProductDenormalizerSpec extends ObjectBehavior
                     self::ALREADY_CALLED => true,
                 ],
             )
+            ->willReturn($product)
             ->shouldBeCalled()
         ;
 
@@ -101,6 +103,7 @@ final class ProductDenormalizerSpec extends ObjectBehavior
 
     function it_does_not_remove_options_from_data_if_there_is_no_object_to_populate_in_context_defined(
         DenormalizerInterface $denormalizer,
+        ProductInterface $product,
     ): void {
         $this->setDenormalizer($denormalizer);
         $denormalizer
@@ -110,6 +113,7 @@ final class ProductDenormalizerSpec extends ObjectBehavior
                 null,
                 [self::ALREADY_CALLED => true],
             )
+            ->willReturn($product)
             ->shouldBeCalled()
         ;
 

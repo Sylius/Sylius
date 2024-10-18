@@ -20,7 +20,7 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicator">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
         <service id="sylius_api.applicator.archiving_shipping_method" alias="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface" />
 
@@ -29,10 +29,11 @@
         </service>
         <service id="sylius_api.applicator.order_state_machine_transition" alias="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface" />
 
-        <service id="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator">
+        <service id="sylius.api.applicator.payment_state_machine_transition" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator">
             <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
         <service id="sylius_api.applicator.payment_state_machine_transition" alias="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface" alias="sylius.api.applicator.payment_state_machine_transition" />
 
         <service id="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicator">
             <argument type="service" id="sylius_abstraction.state_machine" />
@@ -40,7 +41,7 @@
         <service id="sylius_api.applicator.product_review_state_machine_transition" alias="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface" />
 
         <service id="sylius.api.applicator.archiving_promotion" class="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicator">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
         <service id="sylius_api.applicator.archiving_promotion" alias="sylius.api.applicator.archiving_promotion" />
         <service id="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface" alias="sylius.api.applicator.archiving_promotion" />
