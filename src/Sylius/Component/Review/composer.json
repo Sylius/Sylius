@@ -38,11 +38,11 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/collections": "^1.6",
+        "doctrine/collections": "^2.2",
         "sylius/resource": "^1.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
+        "phpspec/phpspec": "^7.5"
     },
     "config": {
         "allow-plugins": {

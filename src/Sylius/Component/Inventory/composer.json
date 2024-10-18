@@ -28,10 +28,10 @@
     "require": {
         "php": "^8.2",
         "sylius/resource": "^1.12",
-        "webmozart/assert": "^1.9"
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
+        "phpspec/phpspec": "^7.5"
     },
     "config": {
         "allow-plugins": {

@@ -29,14 +29,14 @@
     ],
     "require": {
         "php": "^8.2",
-        "behat/transliterator": "^1.3",
+        "behat/transliterator": "^1.5",
         "sylius/attribute": "^2.0",
         "sylius/resource": "^1.12",
-        "symfony/polyfill-iconv": "^1.28",
-        "webmozart/assert": "^1.9"
+        "symfony/polyfill-iconv": "^1.31",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
+        "phpspec/phpspec": "^7.5"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"
