@@ -123,5 +123,10 @@
         <service id="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener">
             <tag name="doctrine.event_listener" event="postGenerateSchema" method="postGenerateSchema" lazy="true" />
         </service>
+
+        <service id="sylius.listener.user_impersonator" class="Sylius\Bundle\CoreBundle\EventListener\UserImpersonatorSubscriber">
+            <argument type="service" id="security.firewall.map" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>
