@@ -68,7 +68,7 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius_api.state_processor.admin.product_option_value.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductOption\PersistProcessor">
+        <service id="sylius_api.state_processor.admin.product_option.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductOption\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <tag name="api_platform.state_processor" />
         </service>
@@ -104,7 +104,7 @@
 
         <service id="sylius_api.state_processor.shop.address.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
             <tag name="api_platform.state_processor" />
         </service>
 

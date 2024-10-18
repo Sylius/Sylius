@@ -25,19 +25,18 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
+        <service id="sylius_api.provider.path_prefix" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
             <argument>%sylius.security.api_route%</argument>
             <argument>%sylius.api_path_prefixes%</argument>
         </service>
-        <service id="sylius_api.provider.path_prefix" alias="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" alias="sylius_api.provider.path_prefix" />
 
-        <service id="sylius.api.provider.liip_image_filters" class="Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider">
+        <service id="sylius_api.provider.liip_image_filters" class="Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider">
             <argument>%liip_imagine.filter_sets%</argument>
         </service>
-        <service id="sylius_api.provider.liip_image_filters" alias="sylius.api.provider.liip_image_filters" />
-        <service id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" alias="sylius.api.provider.liip_image_filters" />
+        <service id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" alias="sylius_api.provider.liip_image_filters" />
 
-        <service id="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProvider" />
-        <service id="sylius_api.provider.adjustment_order" alias="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" />
+        <service id="sylius_api.provider.adjustment_order" class="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProvider" />
+        <service id="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" alias="sylius_api.provider.adjustment_order" />
     </services>
 </container>

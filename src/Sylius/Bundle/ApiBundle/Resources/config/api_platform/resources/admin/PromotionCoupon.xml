@@ -37,8 +37,8 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius.api.order_filter.promotion_coupon</filter>
-                    <filter>sylius_api.search_filter.promotion_coupon</filter>
+                    <filter>sylius_api.order_filter.admin.promotion_coupon</filter>
+                    <filter>sylius_api.search_filter.admin.promotion_coupon</filter>
                 </filters>
                 <order>
                     <values>

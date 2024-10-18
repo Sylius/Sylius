@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\HydraErrorNormalizer;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
