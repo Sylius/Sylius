@@ -33,7 +33,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
     function it_updates_user_profile_with_hashed_password(
         UserPasswordHasherInterface $userPasswordHasher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $userPasswordHasher->hashPassword($user, 'topSecretPlainPassword')->willReturn('topSecretHashedPassword');
