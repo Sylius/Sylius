@@ -107,8 +107,8 @@ final class MergingXmlExtractor extends AbstractResourceExtractor implements Pro
                     $resourceMetadata,
                 );
                 $this->properties[$resourceClass] = array_merge(
-                    $this->properties[$resourceClass],
-                    $resourceMetadata['properties'],
+                    $this->properties[$resourceClass] ?? [],
+                    $resourceMetadata['properties'] ?? [],
                 );
 
                 continue;
