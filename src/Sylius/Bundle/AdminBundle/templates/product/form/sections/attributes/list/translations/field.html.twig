@@ -1,4 +1,4 @@
-{% set locale_code = hookable_metadata.context.locale_code %}
+{% set locale_code = hookable_metadata.context.locale_code|default(null) %}
 {% set product_attribute_value = hookable_metadata.context.product_attribute_value %}
 
 <div class="flex-grow-1">
