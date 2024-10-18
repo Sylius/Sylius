@@ -29,32 +29,31 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/collections": "^1.6",
-        "knplabs/knp-menu": "^3.1",
-        "knplabs/knp-menu-bundle": "^3.0",
-        "laminas/laminas-stdlib": "^3.3.1",
-        "sonata-project/block-bundle": "^4.2 || ^5.0",
+        "doctrine/collections": "^2.2",
+        "knplabs/knp-menu": "^3.5",
+        "knplabs/knp-menu-bundle": "^3.4",
+        "laminas/laminas-stdlib": "^3.19",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/grid-bundle": "^1.13",
         "sylius/twig-extra": "^0.4",
-        "symfony/config": "^6.4.0 || ^7.1",
-        "symfony/expression-language": "^6.4.0 || ^7.1",
+        "symfony/config": "^6.4 || ^7.1",
+        "symfony/expression-language": "^6.4 || ^7.1",
         "symfony/framework-bundle": "^6.4.1 || ^7.1",
-        "symfony/security-core": "^6.4.0 || ^7.1",
-        "symfony/security-bundle": "^6.4.0 || ^7.1",
+        "symfony/security-core": "^6.4 || ^7.1",
+        "symfony/security-bundle": "^6.4 || ^7.1",
         "symfony/ux-icons": "^2.20",
-        "symfony/ux-live-component": "^2.17",
-        "symfony/ux-twig-component": "^2.17",
-        "symfony/webpack-encore-bundle": "^2.1"
+        "symfony/ux-live-component": "^2.20",
+        "symfony/ux-twig-component": "^2.20",
+        "symfony/webpack-encore-bundle": "^2.2"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/phpspec": "^7.2",
+        "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.1",
         "symfony/form": "^6.4.1 || ^7.1",
-        "twig/twig": "^3.14.0"
+        "twig/twig": "^3.14"
     },
     "config": {
         "allow-plugins": {

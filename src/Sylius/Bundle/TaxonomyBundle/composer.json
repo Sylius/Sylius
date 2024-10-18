@@ -29,19 +29,15 @@
     ],
     "require": {
         "php": "^8.2",
-        "stof/doctrine-extensions-bundle": "^1.4",
+        "stof/doctrine-extensions-bundle": "^1.12",
         "sylius/resource-bundle": "^1.12",
         "sylius/taxonomy": "^2.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.1"
     },
-    "conflict": {
-        "doctrine/orm": "2.15.2",
-        "stof/doctrine-extensions-bundle": "1.8.0"
-    },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.3.1",
-        "doctrine/orm": "^2.13",
-        "phpspec/phpspec": "^7.2",
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/orm": "^2.18",
+        "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.1"
     },
