@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -21,13 +25,16 @@
         >
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.price_calculator" />
         </service>
+        <service id="sylius.calculator.catalog_promotion.price" alias="Sylius\Component\CoreBundle\CatalogPromotion\Calculator\CatalogPromotionPriceCalculatorInterface" />
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator">
             <tag name="sylius.catalog_promotion.price_calculator" type="fixed_discount" />
         </service>
+        <service id="sylius.calculator.catalog_promotion.fixed_discount" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator" />
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator">
             <tag name="sylius.catalog_promotion.price_calculator" type="percentage_discount" />
         </service>
+        <service id="sylius.calculator.catalog_promotion.percentage_discount_price" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator" />
     </services>
 </container>

@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="false" />
 
@@ -20,6 +24,7 @@
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.fail" priority="100" />
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.cancel" priority="100" />
         </service>
+        <service id="sylius.listener.workflow.payment.process_order" alias="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ProcessOrderListener" />
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ResolveOrderPaymentStateListener">
             <argument type="service" id="sylius.state_resolver.order_payment" />
@@ -28,5 +33,6 @@
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.refund" priority="100" />
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.authorize" priority="100" />
         </service>
+        <service id="sylius.listener.workflow.payment.resolve_order_payment_state" alias="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ResolveOrderPaymentStateListener" />
     </services>
 </container>

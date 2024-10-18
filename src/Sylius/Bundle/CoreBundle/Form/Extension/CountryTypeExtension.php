@@ -25,6 +25,14 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\Countries;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CountryTypeExtension::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class CountryTypeExtension extends AbstractTypeExtension
 {
     /** @param RepositoryInterface<CountryInterface> $countryRepository */

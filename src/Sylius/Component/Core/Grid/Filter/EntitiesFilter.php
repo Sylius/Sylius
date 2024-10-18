@@ -16,8 +16,16 @@ namespace Sylius\Component\Core\Grid\Filter;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    EntitiesFilter::class,
+);
+
 /**
  * @experimental
+ * @deprecated since Sylius 1.14 and will be removed in Sylius 2.0.
  */
 final class EntitiesFilter implements FilterInterface
 {
