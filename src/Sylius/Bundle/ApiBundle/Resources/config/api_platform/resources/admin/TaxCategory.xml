@@ -33,7 +33,7 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.search_filter.tax_category</filter>
+                    <filter>sylius_api.search_filter.admin.tax_category</filter>
                 </filters>
             </operation>
 

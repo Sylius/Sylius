@@ -712,6 +712,6 @@ final class OrdersTest extends JsonApiTestCase
             'orderId' => 111,
             'orderToken' => 'token',
         ]);
-        self::getContainer()->set('Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider', $configurationProvider);
+        self::getContainer()->set('sylius_api.provider.payment_configuration', $configurationProvider);
     }
 }

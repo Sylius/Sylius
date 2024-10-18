@@ -33,7 +33,7 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.search_filter.shipment</filter>
+                    <filter>sylius_api.search_filter.admin.shipment</filter>
                 </filters>
                 <order>
                     <values>

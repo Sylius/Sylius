@@ -40,18 +40,18 @@
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware::DEFAULT_ARGUMENT_NAME</argument>
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder"
+            id="sylius_api.context_builder.channel"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\ChannelContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.channel" />
         </service>
-        <service id="sylius_api.context_builder.channel" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder" />
 
         <service
             id="sylius_api.context_builder.locale_code_aware"
@@ -66,17 +66,18 @@
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder"
+            id="sylius_api.context_builder.locale"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LocaleContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.locale" />
         </service>
-        <service id="sylius_api.context_builder.locale" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder" />
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder"
+            id="sylius_api.context_builder.http_request_method_type"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\HttpRequestMethodTypeContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
@@ -92,7 +93,7 @@
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware::DEFAULT_ARGUMENT_NAME</argument>
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
         </service>
 
         <service
@@ -202,6 +203,5 @@
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser</argument>
         </service>
-        <service id="sylius_api.context_builder.http_request_method_type" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder" />
     </services>
 </container>

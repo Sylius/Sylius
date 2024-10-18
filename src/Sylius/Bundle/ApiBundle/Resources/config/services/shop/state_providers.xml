@@ -60,14 +60,14 @@
 
         <service id="sylius_api.state_provider.shop.shipment.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Shipment\ItemProvider">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
             <argument type="service" id="sylius.repository.shipment"/>
             <tag name="api_platform.state_provider" priority="10"/>
         </service>
 
         <service id="sylius_api.state_provider.shop.payment.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\ItemProvider">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
             <argument type="service" id="sylius.repository.payment"/>
             <tag name="api_platform.state_provider" priority="10"/>
         </service>

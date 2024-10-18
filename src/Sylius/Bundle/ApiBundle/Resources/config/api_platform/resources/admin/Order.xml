@@ -83,7 +83,7 @@
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/admin/orders/{tokenValue}/cancel"
                 input="false"
-                controller="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface::cancel"
+                controller="sylius_api.applicator.order_state_machine_transition::cancel"
             >
                 <normalizationContext>
                     <values>

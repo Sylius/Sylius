@@ -33,7 +33,7 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.date_filter.tax_rate</filter>
+                    <filter>sylius_api.date_filter.admin.tax_rate</filter>
                 </filters>
             </operation>
 
