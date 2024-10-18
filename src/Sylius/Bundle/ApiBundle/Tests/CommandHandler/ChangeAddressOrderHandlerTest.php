@@ -43,9 +43,9 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         /** @var ObjectManager $manager */
         $manager = $container->get('doctrine.orm.default_entity_manager');
 
-        $orderAddressModifier = $container->get(OrderAddressModifierInterface::class);
+        $orderAddressModifier = $container->get('sylius_api.modifier.order_address');
 
-        $orderPromotionCodeAssigner = $container->get(OrderPromotionCodeAssignerInterface::class);
+        $orderPromotionCodeAssigner = $container->get('sylius_api.assigner.order_promotion_code');
 
         $customerResolver = $container->get(CustomerResolverInterface::class);
 
