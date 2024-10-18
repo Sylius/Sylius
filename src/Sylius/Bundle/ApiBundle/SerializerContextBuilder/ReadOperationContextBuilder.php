@@ -16,6 +16,14 @@ namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ReadOperationContextBuilder::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ReadOperationContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(

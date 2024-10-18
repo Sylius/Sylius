@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults>
@@ -24,10 +25,12 @@
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.customer_statistics_provider" />
         </service>
+        <service id="sylius_api.query_handler.get_customer_statistics" alias="Sylius\Bundle\ApiBundle\QueryHandler\GetCustomerStatisticsHandler" />
 
         <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler">
             <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
             <argument type="service" id="sylius.repository.channel" />
         </service>
+        <service id="sylius_api.query_handler.get_statistics" alias="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler" />
     </services>
 </container>

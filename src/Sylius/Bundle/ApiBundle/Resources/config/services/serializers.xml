@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="true" />
@@ -42,6 +43,7 @@
             <argument type="service" id="request_stack" />
             <argument>%sylius.security.api_route%</argument>
         </service>
+        <service id="sylius_api.normalizer.hydra_error" alias="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer" />
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">
             <argument type="service" id="sylius.resolver.product_variant" />
@@ -49,21 +51,25 @@
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
+        <service id="sylius_api.normalizer.product" alias="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer" />
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueDenormalizer">
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
+        <service id="sylius_api.denormalizer.product_attribute_value" alias="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueDenormalizer" />
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductDenormalizer">
             <tag name="serializer.normalizer" priority="64" />
         </service>
+        <service id="sylius_api.denormalizer.product" alias="Sylius\Bundle\ApiBundle\Serializer\ProductDenormalizer" />
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueNormalizer">
             <argument type="service" id="sylius.locale_provider.channel_based" />
             <argument>%locale%</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
+        <service id="sylius_api.normalizer.product_attribute_value" alias="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueNormalizer" />
 
         <service id="sylius_api.normalizer.product_option_value" class="Sylius\Bundle\ApiBundle\Serializer\ProductOptionValueNormalizer">
             <argument type="service" id="Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface"/>
@@ -76,6 +82,7 @@
             <argument type="string">%sylius_api.default_image_filter%</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
+        <service id="sylius_api.normalizer.image" alias="Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer" />
 
         <service id="sylius_api.normalizer.command" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\CommandNormalizer">
             <argument type="service" id="serializer.normalizer.object" />
@@ -121,6 +128,7 @@
             </argument>
             <tag name="serializer.normalizer"/>
         </service>
+        <service id="sylius_api.normalizer.date_time" alias="date_time_normalizer" />
 
         <service id="sylius_api.denormalizer.channel_price_history_config" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelPriceHistoryConfigDenormalizer">
             <argument type="service" id="api_platform.symfony.iri_converter" />
@@ -133,6 +141,7 @@
             <argument type="service" id="sylius.factory.shop_billing_data" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
+        <service id="sylius_api.denormalizer.channel" alias="Sylius\Bundle\ApiBundle\Serializer\ChannelDenormalizer" />
 
         <service id="sylius_api.denormalizer.numeric_to_string.tax_rate" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\NumericToStringDenormalizer">
             <argument type="string">%sylius.model.tax_rate.class%</argument>
@@ -162,5 +171,6 @@
         <service id="Sylius\Bundle\ApiBundle\Serializer\DoctrineCollectionValuesNormalizer">
             <tag name="serializer.normalizer" priority="64" />
         </service>
+        <service id="sylius_api.normalizer.doctrine_collection_values" alias="Sylius\Bundle\ApiBundle\Serializer\DoctrineCollectionValuesNormalizer" />
     </services>
 </container>

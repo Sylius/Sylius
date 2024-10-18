@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="true" />
@@ -22,11 +23,13 @@
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.order_item" />
         </service>
+        <service id="sylius_api.controller.delete_order_item" alias="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction">
             <argument type="service" id="sylius.query_bus" />
             <tag name="controller.service_arguments" />
         </service>
+        <service id="sylius_api.controller.get_customer_statistics" alias="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction">
             <argument type="service" id="sylius.context.channel" />
@@ -35,15 +38,18 @@
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="request_stack" />
         </service>
+        <service id="sylius_api.controller.get_product_by_slug" alias="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction">
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
         </service>
+        <service id="sylius_api.controller.remove_catalog_promotion" alias="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction">
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.shop_user" />
         </service>
+        <service id="sylius_api.controller.remove_customer_shop_user" alias="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction">
             <argument type="service" id="sylius.query_bus" />
@@ -51,5 +57,6 @@
             <argument type="service" id="validator" />
             <argument>%sylius_core.orders_statistics.intervals_map%</argument>
         </service>
+        <service id="sylius_api.controller.get_statistics" alias="Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction" />
     </services>
 </container>

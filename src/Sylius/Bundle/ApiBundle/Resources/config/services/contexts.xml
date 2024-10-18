@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="false" />
@@ -28,5 +29,6 @@
             <argument>%sylius.security.api_route%</argument>
             <tag name="sylius.context.cart" priority="-333" />
         </service>
+        <service id="sylius_api.context.cart.token_value_based" alias="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext" />
     </services>
 </container>

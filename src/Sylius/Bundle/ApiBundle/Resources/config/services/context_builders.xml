@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
         <defaults public="false" />
@@ -50,6 +51,7 @@
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.channel" />
         </service>
+        <service id="sylius_api.context_builder.channel" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder" />
 
         <service
             id="sylius_api.context_builder.locale_code_aware"
@@ -71,6 +73,7 @@
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.locale" />
         </service>
+        <service id="sylius_api.context_builder.locale" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder" />
 
         <service
             id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder"
@@ -199,5 +202,6 @@
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser</argument>
         </service>
+        <service id="sylius_api.context_builder.http_request_method_type" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder" />
     </services>
 </container>

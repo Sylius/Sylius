@@ -43,7 +43,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" />
+            <argument type="service" id="sylius_api.provider.liip_image_filters" />
             <tag name="sylius.open_api.modifier" />
         </service>
 
