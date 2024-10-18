@@ -118,7 +118,6 @@ final class ProductOptionsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'code',
@@ -137,6 +136,7 @@ final class ProductOptionsTest extends JsonApiTestCase
                     'message' => 'Please enter option name.',
                 ],
             ],
+            false,
         );
     }
 
