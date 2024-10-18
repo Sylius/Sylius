@@ -19,7 +19,7 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\Image;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -47,14 +47,14 @@ final class ImageNormalizerSpec extends ObjectBehavior
         $this->setNormalizer($normalizer);
     }
 
-    function it_supports_only_images(ImageInterface $image): void
+    function it_supports_only_images(Image $image): void
     {
         $this->supportsNormalization(new \stdClass(), Argument::any())->shouldReturn(false);
         $this->supportsNormalization($image, Argument::any())->shouldReturn(true);
     }
 
     function it_does_not_support_if_the_normalizer_has_been_already_called(
-        ImageInterface $image,
+        Image $image,
     ): void {
         $this->supportsNormalization(
             $image,
@@ -67,7 +67,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
         CacheManager $cacheManager,
         RequestStack $requestStack,
         NormalizerInterface $normalizer,
-        ImageInterface $image,
+        Image $image,
     ): void {
         $normalizer
             ->normalize($image, null, ['sylius_image_normalizer_already_called' => true])
@@ -92,7 +92,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         Request $request,
         ParameterBag $queryBag,
-        ImageInterface $image,
+        Image $image,
     ): void {
         $normalizer
             ->normalize($image, null, ['sylius_image_normalizer_already_called' => true])
@@ -123,7 +123,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         Request $request,
         ParameterBag $queryBag,
-        ImageInterface $image,
+        Image $image,
     ): void {
         $normalizer
             ->normalize($image, null, ['sylius_image_normalizer_already_called' => true])
@@ -157,7 +157,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         Request $request,
         ParameterBag $queryBag,
-        ImageInterface $image,
+        Image $image,
     ): void {
         $normalizer
             ->normalize($image, null, ['sylius_image_normalizer_already_called' => true])
@@ -191,7 +191,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         Request $request,
         ParameterBag $queryBag,
-        ImageInterface $image,
+        Image $image,
     ): void {
         $normalizer
             ->normalize($image, null, ['sylius_image_normalizer_already_called' => true])

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 use ApiPlatform\Exception\InvalidArgumentException;
 use Liip\ImagineBundle\Exception\Imagine\Filter\NonExistingFilterException;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\Image;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
@@ -40,7 +40,7 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
 
     public function normalize($object, $format = null, array $context = [])
     {
-        Assert::isInstanceOf($object, ImageInterface::class);
+        Assert::isInstanceOf($object, Image::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
 
         $context[self::ALREADY_CALLED] = true;
@@ -58,7 +58,7 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
             return false;
         }
 
-        return $data instanceof ImageInterface;
+        return $data instanceof Image;
     }
 
     /** @param array<string, string> $data */
