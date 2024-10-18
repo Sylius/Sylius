@@ -1,20 +1,21 @@
+<div class="ui segment">
+    {{ form_row(variantForm.showDisabledChannels) }}
+</div>
 <div id="sylius_product_variant_channelPricings">
     {{ form_errors(variantForm.channelPricings) }}
     <div class="ui top attached tabular menu">
         {% for channelCode, channelPricing in variantForm.channelPricings %}
-            {% if loop.index0 == 0 %}
-                <a class="item active" data-tab="{{ channelCode }}">{{ channelPricing.vars.label }}</a>
-            {% else %}
-                <a class="item" data-tab="{{ channelCode }}">{{ channelPricing.vars.label }}</a>
-            {% endif %}
+            {% set disabledChannelPricing = channelCode not in product.channels|map(channel => channel.code) %}
+            {% set firstTab = (loop.index0 == 0) %}
+{#            <a class="item{{ firstTab ? ' active' : '' }}" data-tab="{{ channelCode }}">{{ channelPricing.vars.label }}</a>#}
+            <a class="item{{ firstTab ? ' active' : '' }}"{{ disabledChannelPricing ? ' data-disabled-channel-pricing' : '' }} data-tab="{{ channelCode }}">{{ channelPricing.vars.label }}</a>
         {% endfor %}
     </div>
     {% for channelCode, channelPricing in variantForm.channelPricings %}
-        {% if loop.index0 == 0 %}
-            <div class="ui bottom attached active tab segment" data-tab="{{ channelCode }}">
-        {% else %}
-            <div class="ui bottom attached tab segment" data-tab="{{ channelCode }}">
-        {% endif %}
+        {% set disabledChannelPricing = channelCode not in product.channels|map(channel => channel.code) %}
+        {% set firstTab = (loop.index0 == 0) %}
+{#        <div class="ui bottom attached tab segment{{ firstTab ? ' active' : '' }}" data-tab="{{ channelCode }}">#}
+        <div class="ui bottom attached tab segment{{ firstTab ? ' active' : '' }}"{{ disabledChannelPricing ? ' data-disabled-channel-pricing' : '' }} data-tab="{{ channelCode }}">
 
         {% if channelCode not in product.channels|map(channel => channel.code) %}
         <div class="ui info message">
