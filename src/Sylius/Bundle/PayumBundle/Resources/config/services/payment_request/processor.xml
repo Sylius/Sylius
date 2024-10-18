@@ -19,18 +19,18 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum.payment_request.processor.after_token_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessor">
+        <service id="sylius_payum.processor.payment_request.after_token_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessor">
             <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.announcer.payment_request" />
         </service>
-        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessorInterface" alias="sylius.payum.payment_request.processor.after_token_request" />
+        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessorInterface" alias="sylius_payum.processor.payment_request.after_token_request" />
 
-        <service id="sylius.payum.payment_request.processor.request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessor">
+        <service id="sylius_payum.processor.payment_request.request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessor">
             <argument type="service" id="payum" />
-            <argument type="service" id="sylius.payum.payment_request.context.payment_request" />
+            <argument type="service" id="sylius_payum.context.payment_request" />
             <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
-        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface" alias="sylius.payum.payment_request.processor.request" />
+        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface" alias="sylius_payum.processor.payment_request.request" />
     </services>
 </container>

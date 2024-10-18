@@ -17,15 +17,15 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service abstract="true" id="sylius.payum.order_pay.provider.pay_response" class="Sylius\Bundle\PayumBundle\OrderPay\Provider\PayumPayResponseProvider">
+        <service abstract="true" id="sylius_payum.provider.order_pay.pay_response" class="Sylius\Bundle\PayumBundle\OrderPay\Provider\PayumPayResponseProvider">
             <argument type="service" id="payum" />
         </service>
 
-        <service abstract="true" id="sylius.payum.order_pay.provider.after_pay_response" class="Sylius\Bundle\PayumBundle\OrderPay\Provider\PayumAfterPayResponseProvider">
+        <service abstract="true" id="sylius_payum.provider.order_pay.after_pay_response" class="Sylius\Bundle\PayumBundle\OrderPay\Provider\PayumAfterPayResponseProvider">
             <argument type="service" id="payum" />
             <argument type="service" id="router" />
-            <argument type="service" id="sylius.factory.payum_get_status_action" />
-            <argument type="service" id="sylius.factory.payum_resolve_next_route" />
+            <argument type="service" id="sylius_payum.factory.get_status" />
+            <argument type="service" id="sylius_payum.factory.resolve_next_route" />
         </service>
     </services>
 </container>
