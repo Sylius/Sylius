@@ -27,6 +27,7 @@ trigger_deprecation(
 );
 /**
  * This class is overwriting ApiPlatform ExtractorResourceMetadataFactory to allow yaml files to be merged into api platform config
+ *
  * @deprecated since Sylius 1.14 and will be removed in Sylius 2.0.
  */
 final class MergingExtractorResourceMetadataFactory implements ResourceMetadataFactoryInterface

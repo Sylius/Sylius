@@ -25,6 +25,7 @@ trigger_deprecation(
 );
 /**
  * @deprecated since Sylius 1.14 and will be moved to the PaymentBundle in Sylius 2.0.
+ *
  * @internal
  */
 class GatewayConfigGroupsGenerator
