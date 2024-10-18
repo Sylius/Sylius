@@ -96,7 +96,7 @@ final class ChangeAdminPasswordContext implements Context
 
         Assert::same(
             $adminUser->getPassword(),
-            $this->userPasswordHasher->hashPassword($adminUser, $adminUser->getPlainPassword())
+            $this->userPasswordHasher->hashPassword($adminUser, $adminUser->getPlainPassword()),
         );
     }
 }
