@@ -110,6 +110,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $zone->setCode('POLAND')->shouldBeCalled();
         $zone->setName('Poland')->shouldBeCalled();
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
+        $zone->setPriority(0)->shouldBeCalled();
 
         $countryManager->persist($country)->shouldBeCalled();
         $zoneManager->persist($zone)->shouldBeCalled();
@@ -123,6 +124,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => ['PL'],
                 'provinces' => [],
                 'zones' => [],
+                'priority' => 0,
             ],
         ]]);
     }
@@ -144,6 +146,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $zone->setName('Poland')->shouldBeCalled();
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
         $zone->setScope('tax')->shouldBeCalled();
+        $zone->setPriority(0)->shouldBeCalled();
 
         $countryManager->persist($country)->shouldBeCalled();
         $zoneManager->persist($zone)->shouldBeCalled();
@@ -158,6 +161,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'provinces' => [],
                 'zones' => [],
                 'scope' => 'tax',
+                'priority' => 0,
             ],
         ]]);
     }
@@ -187,6 +191,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $zone->setCode('SILESIA')->shouldBeCalled();
         $zone->setName('Silesia')->shouldBeCalled();
         $zone->setType(ZoneInterface::TYPE_PROVINCE)->shouldBeCalled();
+        $zone->setPriority(0)->shouldBeCalled();
 
         $countryManager->persist($country)->shouldBeCalled();
         $provinceManager->persist($province)->shouldBeCalled();
@@ -202,6 +207,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => [],
                 'provinces' => ['PL-SL'],
                 'zones' => [],
+                'priority' => 0,
             ],
         ]]);
     }
@@ -223,11 +229,13 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $countryTypeZone->setCode('POLAND')->shouldBeCalled();
         $countryTypeZone->setName('Poland')->shouldBeCalled();
         $countryTypeZone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
+        $countryTypeZone->setPriority(0)->shouldBeCalled();
 
         $zoneFactory->createWithMembers(['POLAND'])->willReturn($zoneTypeZone);
         $zoneTypeZone->setCode('YO-DAWG')->shouldBeCalled();
         $zoneTypeZone->setName('Yo dawg')->shouldBeCalled();
         $zoneTypeZone->setType(ZoneInterface::TYPE_ZONE)->shouldBeCalled();
+        $zoneTypeZone->setPriority(0)->shouldBeCalled();
 
         $countryManager->persist($country)->shouldBeCalled();
         $zoneManager->persist($countryTypeZone)->shouldBeCalled();
@@ -242,12 +250,14 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => ['PL'],
                 'provinces' => [],
                 'zones' => [],
+                'priority' => 0,
             ],
             'YO-DAWG' => [
                 'name' => 'Yo dawg',
                 'countries' => [],
                 'provinces' => [],
                 'zones' => ['POLAND'],
+                'priority' => 0,
             ],
         ]]);
     }
@@ -260,6 +270,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => ['PL'],
                 'provinces' => [],
                 'zones' => [],
+                'priority' => 0,
             ],
         ]]]);
     }
@@ -272,6 +283,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => [],
                 'provinces' => ['PL-SL'],
                 'zones' => [],
+                'priority' => 0,
             ],
         ]]]);
     }
@@ -284,6 +296,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => [],
                 'provinces' => [],
                 'zones' => ['DAWG'],
+                'priority' => 0,
             ],
         ]]]);
     }
