@@ -56,6 +56,18 @@ security:
 +           user_checker: security.user_checker.chain.shop
 ```
 
+To reflect these changes, the route configuration must be updated accordingly:
+
+```diff
+# config/routes/sylius_api.yaml
+
+sylius_api:
+    resource: "@SyliusApiBundle/Resources/config/routing.yml"
+-   prefix: "%sylius.security.new_api_route%"
++   prefix: "%sylius.security.api_route%"
+
+```
+
 * Routing changes (note that these shop routes are not localized with the prefix: /{_locale} configuration entry):
 
 ```md
