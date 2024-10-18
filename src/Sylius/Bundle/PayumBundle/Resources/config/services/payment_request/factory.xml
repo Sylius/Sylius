@@ -18,9 +18,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum.payment_request.factory.payum_token" class="Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactory">
+        <service id="sylius_payum.factory.payment_request.payum_token" class="Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactory">
             <argument type="service" id="payum" />
         </service>
-        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface" alias="sylius.payum.payment_request.factory.payum_token" />
+        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface" alias="sylius_payum.factory.payment_request.payum_token" />
     </services>
 </container>
