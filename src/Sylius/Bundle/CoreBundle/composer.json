@@ -35,7 +35,6 @@
         "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.13",
         "nyholm/psr7": "^1.8",
-        "sonata-project/block-bundle": "^4.2 || ^5.0",
         "sylius-labs/association-hydrator": "^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.2",
         "sylius/addressing-bundle": "^2.0",

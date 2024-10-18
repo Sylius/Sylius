@@ -58,9 +58,6 @@ liip_imagine:
             filters:
                 thumbnail: { size: [1200, 300], mode: outbound }
 
-sonata_block:
-    default_contexts: ~
-
 sylius_ui:
     twig_ux:
         live_component_tags:

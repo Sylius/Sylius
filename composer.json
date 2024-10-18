@@ -70,7 +70,6 @@
         "psr/http-message": "^1.0",
         "psr/log": "^2.0 || ^3.0",
         "ramsey/uuid": "^4.0",
-        "sonata-project/block-bundle": "^4.2 || ^5.0",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius-labs/association-hydrator": "^1.1 || ^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",

@@ -111,25 +111,3 @@ twig:
         sylius_base_locale: "%locale%"
         sylius_meta:
             version: !php/const Sylius\Bundle\CoreBundle\SyliusCoreBundle::VERSION
-
-sonata_block:
-    blocks:
-        sonata.block.service.template:
-            settings:
-                address: ~
-                addresses: ~
-                cart: ~
-                channel: ~
-                customer: ~
-                form: ~
-                order: ~
-                order_item: ~
-                orders: ~
-                product: ~
-                product_review: ~
-                product_reviews: ~
-                products: ~
-                resource: ~
-                resources: ~
-                statistics: ~
-                taxon: ~
