@@ -21,7 +21,7 @@
 
         <service id="sylius_shop.listener.shop_cart_blamer" class="Sylius\Bundle\ShopBundle\EventListener\ShopCartBlamerListener">
             <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="onImplicitLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
         </service>
@@ -31,19 +31,19 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="request_stack" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <argument type="service" id="security.token_storage" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="eraseVerification" />
             <tag name="kernel.event_listener" event="sylius.customer.post_update" method="sendVerificationEmail" />
         </service>
 
         <service id="sylius_shop.event_subscriber.shop_customer_account_sub_section_cache_control" class="Sylius\Bundle\ShopBundle\EventListener\ShopCustomerAccountSubSectionCacheControlSubscriber">
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="kernel.event_subscriber" event="kernel.response" />
         </service>
 
         <service id="sylius_shop.listener.order_customer_ip" class="Sylius\Bundle\ShopBundle\EventListener\OrderCustomerIpListener">
-            <argument type="service" id="sylius.customer_ip_assigner" />
+            <argument type="service" id="sylius.assigner.customer_id" />
             <argument type="service" id="request_stack" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="500"/>
         </service>
@@ -66,7 +66,7 @@
         <service id="sylius_shop.listener.order_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityChecker">
             <argument type="service" id="router" />
             <argument type="service" id="sylius.manager.order" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />
+            <argument type="service" id="sylius.checker.order.promotions_integrity" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
         <service id="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityCheckerInterface" alias="sylius_shop.listener.order_integrity_checker" />
@@ -85,7 +85,7 @@
         <service id="sylius_shop.listener.user_cart_recalculation" class="Sylius\Bundle\ShopBundle\EventListener\UserCartRecalculationListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.order_processing.order_processor" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
         </service>

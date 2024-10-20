@@ -26,7 +26,7 @@
         <service id="sylius_api.event_subscriber.product_variant" alias="Sylius\Bundle\ApiBundle\EventSubscriber\ProductVariantEventSubscriber" />
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\CatalogPromotionEventSubscriber">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface" />
+            <argument type="service" id="sylius.announcer.catalog_promotion" />
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="sylius_api.event_subscriber.catalog_promotion" alias="Sylius\Bundle\ApiBundle\EventSubscriber\CatalogPromotionEventSubscriber" />
@@ -44,7 +44,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductDeletionEventSubscriber">
-            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" />
+            <argument type="service" id="sylius.checker.promotion.product_in_promotion_rule" />
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="sylius_api.event_subscriber.product_deletion" alias="Sylius\Bundle\ApiBundle\EventSubscriber\ProductDeletionEventSubscriber" />
@@ -57,7 +57,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber">
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface" />
+            <argument type="service" id="sylius.checker.promotion.taxon_in_promotion_rule" />
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="sylius_api.event_subscriber.taxon_deletion" alias="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber" />

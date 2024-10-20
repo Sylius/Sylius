@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <parameters>
         <parameter key="sylius.form.type.checkout_address.validation_groups" type="collection">
             <parameter>sylius</parameter>
@@ -42,30 +46,41 @@
             <argument>%sylius.form.type.checkout_address.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.checkout.address" alias="sylius.form.type.checkout_address" />
+
         <service id="sylius.form.type.checkout_select_shipping" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.form.type.checkout_select_shipping.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.checkout.select_shipping" alias="sylius.form.type.checkout_select_shipping" />
+
         <service id="sylius.form.type.checkout_shipment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType">
             <argument>%sylius.model.shipment.class%</argument>
             <argument>%sylius.form.type.checkout_shipment.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.checkout.shipment" alias="sylius.form.type.checkout_shipment" />
+
         <service id="sylius.form.type.checkout_select_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.form.type.checkout_select_payment.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.checkout.select_payment" alias="sylius.form.type.checkout_select_payment" />
+
         <service id="sylius.form.type.checkout_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType">
             <argument>%sylius.model.payment.class%</argument>
             <argument>%sylius.form.type.checkout_payment.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.checkout.payment" alias="sylius.form.type.checkout_payment" />
+
         <service id="sylius.form.type.checkout_complete" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.form.type.checkout_complete.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.checkout.complete" alias="sylius.form.type.checkout_complete" />
     </services>
 </container>

@@ -19,7 +19,7 @@ Feature: Seeing order addresses on order summary page
         Then I should be on the checkout summary step
         And address to "Jon Snow" should be used for both shipping and billing of my order
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Seeing different shipping and billing address on order summary
         Given I have product "Lannister Coat" in the cart
         And I am at the checkout addressing step

@@ -78,6 +78,7 @@
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
             <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
         </service>
+        <service id="sylius.listener.user_mailer" alias="sylius.listener.user_mailer_listener" />
 
         <!-- Forms -->
         <service id="sylius.form.type.user_login" class="Sylius\Bundle\UserBundle\Form\Type\UserLoginType">

@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <parameters>
         <parameter key="sylius.order_payment_processor.checkout.unsupported_states" type="collection">
             <parameter type="constant">Sylius\Component\Order\Model\OrderInterface::STATE_CANCELLED</parameter>
@@ -61,23 +65,23 @@
         </service>
 
         <service id="sylius.order_processing.order_taxes_processor" class="Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor">
-            <argument type="service" id="sylius.provider.channel_based_default_zone_provider" />
+            <argument type="service" id="sylius.provider.channel_based_default_zone" />
             <argument type="service" id="sylius.matcher.zone" />
             <argument type="service" id="sylius.registry.tax_calculation_strategy" />
-            <argument type="service" id="sylius.taxation_address_resolver" />
+            <argument type="service" id="sylius.resolver.taxation_address" />
             <tag name="sylius.order_processor" priority="10"/>
         </service>
 
         <service id="sylius.order_processing.order_payment_processor.checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
-            <argument type="service" id="sylius.order_payment_provider" />
-            <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
+            <argument type="service" id="sylius.provider.payment.order" />
+            <argument type="service" id="sylius.remover.payment.order" />
             <argument>%sylius.order_payment_processor.checkout.unsupported_states%</argument>
             <argument>cart</argument>
             <tag name="sylius.order_processor" priority="0"/>
         </service>
         <service id="sylius.order_processing.order_payment_processor.after_checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
-            <argument type="service" id="sylius.order_payment_provider" />
-            <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
+            <argument type="service" id="sylius.provider.payment.order" />
+            <argument type="service" id="sylius.remover.payment.order" />
             <argument>%sylius.order_payment_processor.after_checkout.unsupported_states%</argument>
             <argument>new</argument>
         </service>

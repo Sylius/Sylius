@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -19,17 +23,20 @@
             <argument type="service" id="sylius.factory.catalog_promotion" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory" />
+            <argument type="service" id="sylius.fixture.example_factory.catalog_promotion_scope" />
+            <argument type="service" id="sylius.fixture.example_factory.catalog_promotion_action" />
         </service>
+        <service id="sylius.fixture.example_factory.catalog_promotion" alias="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionExampleFactory" />
 
         <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory">
             <argument type="service" id="sylius.factory.catalog_promotion_scope" />
         </service>
+        <service id="sylius.fixture.example_factory.catalog_promotion_scope" alias="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory" />
 
         <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory">
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
         </service>
+        <service id="sylius.fixture.example_factory.catalog_promotion_action" alias="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory" />
 
         <service id="sylius.fixture.example_factory.payment_method" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentMethodExampleFactory">
             <argument type="service" id="sylius.factory.payment_method" />
@@ -73,7 +80,7 @@
             <argument type="service" id="sylius.factory.admin_user" />
             <argument>%locale%</argument>
             <argument type="service" id="file_locator" />
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="sylius.factory.avatar_image" />
         </service>
 
@@ -149,7 +156,7 @@
             <argument type="service" id="sylius.factory.product_attribute_value" />
             <argument type="service" id="sylius.factory.product_image" />
             <argument type="service" id="sylius.factory.product_taxon" />
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.product_attribute" />

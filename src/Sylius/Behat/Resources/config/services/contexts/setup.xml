@@ -25,7 +25,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.fixture.example_factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="behat.mink.parameters" />
         </service>
@@ -167,7 +167,7 @@
             <argument type="service" id="sylius.generator.product_variant" />
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.resolver.product_variant" />
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="behat.mink.parameters" />
             <argument type="service" id="sylius.event_bus" />
@@ -281,7 +281,7 @@
             <argument type="service" id="sylius.factory.taxon_translation" />
             <argument type="service" id="sylius.factory.taxon_image" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="sylius.generator.taxon_slug" />
             <argument type="service" id="behat.mink.parameters" />
         </service>
@@ -311,7 +311,7 @@
         </service>
 
         <service id="Sylius\Behat\Context\Setup\CatalogPromotionContext">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionExampleFactory" />
+            <argument type="service" id="sylius.fixture.example_factory.catalog_promotion" />
             <argument type="service" id="sylius.factory.catalog_promotion_scope" />
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
             <argument type="service" id="sylius.manager.catalog_promotion" />

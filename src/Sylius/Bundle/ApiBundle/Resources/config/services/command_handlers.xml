@@ -22,7 +22,7 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\RegisterShopUserHandler">
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
+            <argument type="service" id="sylius.resolver.customer" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="sylius.command_bus" />
@@ -68,7 +68,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius_api.modifier.order_address"/>
             <argument type="service" id="sylius_api.assigner.order_promotion_code" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
+            <argument type="service" id="sylius.resolver.customer" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
         <service id="sylius_api.command_handler.checkout.update_cart" alias="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler" />
@@ -98,7 +98,7 @@
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.event_bus" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />
+            <argument type="service" id="sylius.checker.order.promotions_integrity" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
         <service id="sylius_api.command_handler.checkout.complete_order" alias="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler" />
@@ -130,7 +130,7 @@
             <argument type="service" id="sylius.factory.product_review" />
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
+            <argument type="service" id="sylius.resolver.customer" />
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
         </service>
         <service id="sylius_api.command_handler.catalog.add_product_review" alias="Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler" />
@@ -167,7 +167,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler">
-            <argument type="service" id="sylius.user_password_resetter.shop" />
+            <argument type="service" id="sylius.resetter.user_password.shop" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
         <service id="sylius_api.command_handler.account.reset_password" alias="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler" />

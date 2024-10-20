@@ -41,7 +41,7 @@
         <service id="sylius_api.controller.get_product_by_slug" alias="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+            <argument type="service" id="sylius.processor.catalog_promotion.removal" />
         </service>
         <service id="sylius_api.controller.remove_catalog_promotion" alias="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" />
 
