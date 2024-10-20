@@ -1,6 +1,8 @@
 parameters:
     test_default_state_machine_adapter: 'symfony_workflow'
     test_sylius_state_machine_adapter: '%env(string:default:test_default_state_machine_adapter:TEST_SYLIUS_STATE_MACHINE_ADAPTER)%'
+    env(SYLIUS_PAYMENT_ENCRYPTION_PASSWORD): 'test-password'
+    env(SYLIUS_PAYMENT_ENCRYPTION_SALT): '9cef0eca7b496271306caf3ef94c70be'
 
 sylius_api:
     enabled: true

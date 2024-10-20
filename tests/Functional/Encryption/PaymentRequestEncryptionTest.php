@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Encryption;
 
-use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;

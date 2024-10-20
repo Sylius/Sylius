@@ -21,7 +21,7 @@ final class EncrypterSpec extends ObjectBehavior
 {
     function let(): void
     {
-        $this->beConstructedWith('a_very_strong_password', 'very_strong_salt');
+        $this->beConstructedWith('a_very_strong_password', '6081e27f4be703ebe4626fb40c40cb2c');
     }
 
     function it_is_an_encrypter(): void
