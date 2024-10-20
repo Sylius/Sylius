@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractPostgreSQLMigration;
 
-final class Version20240203222417 extends AbstractPostgreSQLMigration
+final class Version20241020131432 extends AbstractPostgreSQLMigration
 {
     public function getDescription(): string
     {

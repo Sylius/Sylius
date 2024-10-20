@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
-final class Version20241012081014 extends AbstractMigration
+final class Version20241020131604 extends AbstractMigration
 {
     public function getDescription(): string
     {

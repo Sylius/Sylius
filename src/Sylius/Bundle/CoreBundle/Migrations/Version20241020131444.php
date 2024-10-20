@@ -16,20 +16,22 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
-final class Version20240918120744 extends AbstractMigration
+final class Version20241020131444 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add position field to ProductImage entity';
+        return 'Remove encoder name and salt on user tables';
     }
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE sylius_product_image ADD position INT NOT NULL');
+        $this->addSql('ALTER TABLE sylius_admin_user DROP salt, DROP encoder_name');
+        $this->addSql('ALTER TABLE sylius_shop_user DROP salt, DROP encoder_name');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE sylius_product_image DROP position');
+        $this->addSql('ALTER TABLE sylius_admin_user ADD salt VARCHAR(255) NOT NULL, ADD encoder_name VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_shop_user ADD salt VARCHAR(255) NOT NULL, ADD encoder_name VARCHAR(255) DEFAULT NULL');
     }
 }
