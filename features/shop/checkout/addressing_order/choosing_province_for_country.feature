@@ -21,7 +21,7 @@ Feature: Choosing province for country
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Address an order with country and its province and specify country without province for different billing address
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step

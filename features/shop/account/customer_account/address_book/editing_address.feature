@@ -39,7 +39,7 @@ Feature: Making changes in existing addresses
         And it should contain "Liverpool"
         And it should contain "GBA-20B"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Changing province to one from the list
         Given the store also has country "Australia"
         And this country has the "Queensland" province with "AU-QLD" code

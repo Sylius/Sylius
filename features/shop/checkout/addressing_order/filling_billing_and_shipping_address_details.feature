@@ -18,7 +18,7 @@ Feature: Addressing an order
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Address an order with different shipping address
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
