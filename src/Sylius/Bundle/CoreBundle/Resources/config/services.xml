@@ -104,7 +104,7 @@
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
         <service id="sylius.resolver.payment_method.default" alias="sylius.payment_method_resolver.default" />
-<!--        <service id="Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface" alias="sylius.payment_method_resolver.default" />-->
+        <service id="Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface" alias="sylius.payment_method_resolver.default" />
 
         <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />

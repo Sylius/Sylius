@@ -33,7 +33,7 @@
             <argument type="service" id="sylius.processor.catalog_promotion.all_product_variant"/>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
-        <service id="sylius.command_handler.catalog_promotion.disabled" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\DisableCatalogPromotionHandler" />
+        <service id="sylius.command_handler.catalog_promotion.disable" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\DisableCatalogPromotionHandler" />
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\RemoveCatalogPromotionHandler">
             <argument type="service" id="sylius.repository.catalog_promotion" />

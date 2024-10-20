@@ -31,7 +31,7 @@
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker">
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
-        <service id="sylius.eligibility_checker.catalog_promotion" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker" />
+        <service id="sylius.checker.catalog_promotion_eligibility" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker" />
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker">
             <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
