@@ -22,6 +22,7 @@ trigger_deprecation(
     'The "%s" class is deprecated and will be removed in Sylius 2.0.',
     OrderTokenValueAwareInputCommandDataTransformer::class,
 );
+
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class OrderTokenValueAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
