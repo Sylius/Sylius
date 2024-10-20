@@ -29,6 +29,11 @@
                 <option name="message">sylius.exchange_rate.ratio.greater_than</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="LessThan">
+                <option name="value">100000</option>
+                <option name="groups">sylius</option>
+                <option name="message">sylius.exchange_rate.ratio.less_than</option>
+            </constraint>
         </property>
         <property name="sourceCurrency">
             <constraint name="NotBlank">

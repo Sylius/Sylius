@@ -1,0 +1,37 @@
+{# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\Taxon\DeleteComponent #}
+
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+{% set id = taxon_id|default('__TAXON_ID__') %}
+
+<div {{ attributes.defaults(stimulus_controller('delete-taxon')) }}>
+    <button
+        class="dropdown-item"
+        data-action="live#action:prevent"
+        data-live-action-param="delete"
+        data-live-taxon-id-param="{{ id }}"
+        {{ sylius_test_html_attribute('delete') }}
+    >
+        {{ 'sylius.ui.delete'|trans }}
+    </button>
+
+    <div data-delete-taxon-target="parent">
+        <div class="modal fade" id="delete-modal-{{ id }}" tabindex="-1" aria-hidden="true" data-delete-taxon-target="modal" {{ sylius_test_html_attribute('delete-modal') }}>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title py-5">{{ 'sylius.ui.are_your_sure_you_want_to_perform_this_action'|trans }}</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ path('sylius_admin_taxon_delete', {id: id}) }}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_csrf_token" data-delete-taxon-target="csrfToken"/>
+
+                            {{ button.default({ text: 'sylius.ui.cancel'|trans, attr: 'data-bs-dismiss=modal' }) }}
+                            {{ button.default({ text: 'sylius.ui.delete'|trans, type: 'submit', class: 'btn-danger', attr: sylius_test_html_attribute('confirm-button') }) }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

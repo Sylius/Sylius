@@ -19,33 +19,23 @@
     <services>
         <defaults public="true"/>
 
-        <service id="sylius.category_requirement_shipping_method_eligibility_checker"
+        <service id="sylius.eligibility_checker.shipping_method.category_requirement"
                  class="Sylius\Component\Shipping\Checker\Eligibility\CategoryRequirementEligibilityChecker">
             <tag name="sylius.shipping_method_eligibility_checker"/>
         </service>
-        <service id="sylius.eligibility_checker.shipping_method.category_requirement" alias="sylius.category_requirement_shipping_method_eligibility_checker"/>
 
-        <service id="sylius.shipping_method_rules_shipping_method_eligibility_checker"
+        <service id="sylius.eligibility_checker.shipping_method.rules"
                  class="Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodRulesEligibilityChecker">
             <argument type="service" id="sylius.registry.shipping_method_rule_checker"/>
             <tag name="sylius.shipping_method_eligibility_checker"/>
         </service>
-        <service id="sylius.eligibility_checker.shipping_method.rules" alias="sylius.shipping_method_rules_shipping_method_eligibility_checker"/>
 
-        <service id="sylius.shipping_method_eligibility_checker"
+        <service id="sylius.eligibility_checker.shipping_method"
                  class="Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker">
             <argument type="collection"/>
         </service>
-        <service id="sylius.eligibility_checker.shipping_method" alias="sylius.shipping_method_eligibility_checker"/>
-        <service id="sylius.eligibility_checker.shipping_method.composite" alias="sylius.shipping_method_eligibility_checker"/>
+        <service id="sylius.eligibility_checker.shipping_method.composite" alias="sylius.eligibility_checker.shipping_method"/>
         <service id="Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface"
-                 alias="sylius.shipping_method_eligibility_checker"/>
-
-        <service id="sylius.shipping_eligibility_checker"
-                 class="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker">
-            <deprecated package="sylius/shipping-bundle" version="1.8">The "%service_id%" is deprecated since Sylius 1.8 and will be removed in 2.0. Use "sylius.shipping_method_eligibility_checker" instead</deprecated>
-        </service>
-        <service id="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface"
-                 alias="sylius.shipping_method_eligibility_checker"/>
+                 alias="sylius.eligibility_checker.shipping_method"/>
     </services>
 </container>

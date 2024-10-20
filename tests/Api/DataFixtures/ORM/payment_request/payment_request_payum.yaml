@@ -1,0 +1,16 @@
+Sylius\Component\Payment\Model\PaymentRequest:
+    payment_request_capture:
+        __construct: [ '@payment', '@payment_method_cash_on_delivery' ]
+        state: "processing"
+        action: "capture"
+        payload: {
+            "http_request": {
+                "query": {
+                    "token": "EC-2d9EV13959UR209410U",
+                    "PayerID": "UX8WBNYWGBVMG"
+                }
+            }
+        }
+        responseData: {
+            "after_url": "https://myshop.tld/after-path",
+        }

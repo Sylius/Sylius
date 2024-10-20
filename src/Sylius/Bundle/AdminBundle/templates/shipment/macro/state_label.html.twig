@@ -1,0 +1,13 @@
+{%- macro label(state) -%}
+    {% set label = 'sylius.ui.' ~ state %}
+
+    {% set state_badge = {
+        ready: 'bg-blue-lt',
+        shipped: 'bg-green-lt',
+        cancelled: 'bg-orange-lt',
+    } %}
+
+    <span class="badge {{ state_badge[state] }}" {{ sylius_test_html_attribute('shipment-state') }}>
+        {{ label|trans }}
+    </span>
+{%- endmacro -%}

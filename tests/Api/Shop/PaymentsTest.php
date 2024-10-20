@@ -15,17 +15,25 @@ namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class PaymentsTest extends JsonApiTestCase
 {
-    use ShopUserLoginTrait;
     use OrderPlacerTrait;
 
     protected function setUp(): void
     {
+        $this->setUpShopUserContext();
+        $this->setUpDefaultGetHeaders();
         $this->setUpOrderPlacer();
+
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         parent::setUp();
     }
@@ -33,30 +41,31 @@ final class PaymentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payment_from_placed_order(): void
     {
-        $this->loadFixturesFromFiles([
-            'authentication/customer.yaml',
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
+        $order = $this->placeOrder();
 
-        $header = array_merge($this->logInShopUser('oliver@doe.com'), self::CONTENT_TYPE_HEADER);
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/payments/%s', $order->getLastPayment()->getId()));
 
-        $tokenValue = 'nAWw2jewpA';
+        $this->assertResponseSuccessful('shop/payment/get_payment');
+    }
 
-        $this->placeOrder($tokenValue, 'oliver@doe.com');
+    /** @test */
+    public function it_does_not_get_another_user_payment(): void
+    {
+        $order = $this->placeOrder(email: 'another_user@example.com');
 
-        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: $header);
-        $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/payments/%s', $order->getPayments()->first()->getId()));
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/payments/' . $orderResponse['payments'][0]['id'],
-            server: $header,
-        );
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/payment/get_payment_response', Response::HTTP_OK);
+        $this->assertResponseNotFound();
+    }
+
+    /** @test */
+    public function it_does_not_get_the_shop_user_payment_when_not_authenticated(): void
+    {
+        $order = $this->placeOrder();
+        $this->disableShopUserContext();
+
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/payments/%s', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseNotFound();
     }
 }

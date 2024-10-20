@@ -1,0 +1,5 @@
+{% set form = hookable_metadata.context.form %}
+
+{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {{ form_row(form.author.email, sylius_test_form_attribute('author-email')) }}
+{% endif %}

@@ -20,10 +20,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
 use Sylius\Component\Core\Model\ImageInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -33,7 +32,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
 
     function it_is_a_context_aware_normalizer(): void
     {
-        $this->shouldImplement(ContextAwareNormalizerInterface::class);
+        $this->shouldImplement(NormalizerInterface::class);
         $this->shouldImplement(NormalizerAwareInterface::class);
     }
 
@@ -83,7 +82,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
             ->willReturn('default_filter_path')
         ;
 
-        $this->normalize($image, null, [])->shouldReturn(['path' => 'default_filter_path']);
+        $this->normalize($image)->shouldReturn(['path' => 'default_filter_path']);
     }
 
     function it_resolves_image_path_based_on_default_filter_if_there_no_image_filter_has_been_passed_via_request(
@@ -91,7 +90,6 @@ final class ImageNormalizerSpec extends ObjectBehavior
         RequestStack $requestStack,
         NormalizerInterface $normalizer,
         Request $request,
-        ParameterBag $queryBag,
         ImageInterface $image,
     ): void {
         $normalizer
@@ -100,12 +98,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
             ->willReturn(['path' => 'some_path'])
         ;
 
-        $queryBag
-            ->get(ImageNormalizer::FILTER_QUERY_PARAMETER, '')
-            ->shouldBeCalled()
-            ->willReturn('')
-        ;
-        $request->query = $queryBag;
+        $request->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => '']);
         $requestStack->getCurrentRequest()->willReturn($request);
 
         $cacheManager
@@ -114,7 +107,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
             ->willReturn('default_filter_path')
         ;
 
-        $this->normalize($image, null, [])->shouldReturn(['path' => 'default_filter_path']);
+        $this->normalize($image)->shouldReturn(['path' => 'default_filter_path']);
     }
 
     function it_throws_validation_exception_when_passing_an_invalid_image_filter(
@@ -122,7 +115,6 @@ final class ImageNormalizerSpec extends ObjectBehavior
         RequestStack $requestStack,
         NormalizerInterface $normalizer,
         Request $request,
-        ParameterBag $queryBag,
         ImageInterface $image,
     ): void {
         $normalizer
@@ -131,12 +123,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
             ->willReturn(['path' => 'some_path'])
         ;
 
-        $queryBag
-            ->get(ImageNormalizer::FILTER_QUERY_PARAMETER, '')
-            ->shouldBeCalled()
-            ->willReturn('invalid')
-        ;
-        $request->query = $queryBag;
+        $request->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid']);
         $requestStack->getCurrentRequest()->willReturn($request);
 
         $cacheManager
@@ -156,7 +143,6 @@ final class ImageNormalizerSpec extends ObjectBehavior
         RequestStack $requestStack,
         NormalizerInterface $normalizer,
         Request $request,
-        ParameterBag $queryBag,
         ImageInterface $image,
     ): void {
         $normalizer
@@ -165,12 +151,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
             ->willReturn(['path' => 'some_path'])
         ;
 
-        $queryBag
-            ->get(ImageNormalizer::FILTER_QUERY_PARAMETER, '')
-            ->shouldBeCalled()
-            ->willReturn('no-resolver-filter')
-        ;
-        $request->query = $queryBag;
+        $request->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => 'no-resolver-filter']);
         $requestStack->getCurrentRequest()->willReturn($request);
 
         $cacheManager
@@ -190,7 +171,6 @@ final class ImageNormalizerSpec extends ObjectBehavior
         RequestStack $requestStack,
         NormalizerInterface $normalizer,
         Request $request,
-        ParameterBag $queryBag,
         ImageInterface $image,
     ): void {
         $normalizer
@@ -199,12 +179,7 @@ final class ImageNormalizerSpec extends ObjectBehavior
             ->willReturn(['path' => 'some_path'])
         ;
 
-        $queryBag
-            ->get(ImageNormalizer::FILTER_QUERY_PARAMETER, '')
-            ->shouldBeCalled()
-            ->willReturn('sylius_large')
-        ;
-        $request->query = $queryBag;
+        $request->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_large']);
         $requestStack->getCurrentRequest()->willReturn($request);
 
         $cacheManager
@@ -213,6 +188,6 @@ final class ImageNormalizerSpec extends ObjectBehavior
             ->willReturn('large_filter_path')
         ;
 
-        $this->normalize($image, null, [])->shouldReturn(['path' => 'large_filter_path']);
+        $this->normalize($image)->shouldReturn(['path' => 'large_filter_path']);
     }
 }

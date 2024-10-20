@@ -15,5 +15,8 @@
         <service id="sylius.factory.payum_resolve_next_route" class="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactory" />
         <service id="sylius_payum.factory.resolve_next_route" alias="sylius.factory.payum_resolve_next_route" />
         <service id="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface" alias="sylius.factory.payum_resolve_next_route" />
+
+        <service id="sylius.factory.payum_capture" class="Sylius\Bundle\PayumBundle\Factory\CaptureFactory" />
+        <service id="sylius.factory.payum_authorize" class="Sylius\Bundle\PayumBundle\Factory\AuthorizeFactory" />
     </services>
 </container>

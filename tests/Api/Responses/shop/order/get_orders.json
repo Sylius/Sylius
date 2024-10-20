@@ -2,13 +2,13 @@
     "@context": "\/api\/v2\/contexts\/Order",
     "@id": "\/api\/v2\/shop\/orders",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 2,
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+            "@id": "\/api\/v2\/shop\/orders\/token",
             "@type": "Order",
             "channel": "\/api\/v2\/shop\/channels\/WEB",
-            "tokenValue": "nAWw2jewpA",
-            "id": @integer@,
+            "tokenValue": "token",
             "number": "000000001",
             "itemsTotal": 6000,
             "state": "new",
@@ -19,12 +19,10 @@
             "@type": "Order",
             "channel": "\/api\/v2\/shop\/channels\/WEB",
             "tokenValue": "nAWw2jewpB",
-            "id": @integer@,
             "number": "000000002",
             "itemsTotal": 6000,
             "state": "new",
             "itemsSubtotal": 6000
         }
-    ],
-    "hydra:totalItems": 2
+    ]
 }

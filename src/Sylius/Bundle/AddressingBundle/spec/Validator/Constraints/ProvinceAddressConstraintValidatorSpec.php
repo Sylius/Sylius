@@ -25,6 +25,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 {
@@ -108,6 +109,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
@@ -122,7 +124,9 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
             $this->createViolation('other_property_path'),
         ]));
 
-        $context->addViolation(Argument::any())->shouldBeCalled();
+        $context->buildViolation('sylius.address.province.valid')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('provinceCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($address, $constraint);
     }
@@ -135,6 +139,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         Province $province,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $country->getCode()->willReturn('US');
         $address->getCountryCode()->willReturn('US');
@@ -154,7 +159,9 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
             $this->createViolation('other_property_path'),
         ]));
 
-        $context->addViolation(Argument::any())->shouldBeCalled();
+        $context->buildViolation('sylius.address.province.valid')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('provinceCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($address, $constraint);
     }
@@ -166,6 +173,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $country->getCode()->willReturn('US');
         $address->getCountryCode()->willReturn('US');
@@ -183,7 +191,9 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
             $this->createViolation('other_property_path'),
         ]));
 
-        $context->addViolation(Argument::any())->shouldBeCalled();
+        $context->buildViolation('sylius.address.province.valid')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('provinceCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($address, $constraint);
     }
@@ -215,7 +225,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
             $this->createViolation('other_property_path'),
         ]));
 
-        $context->addViolation(Argument::any())->shouldNotBeCalled();
+        $context->buildViolation('sylius.address.province.valid')->shouldNotBeCalled();
 
         $this->validate($address, $constraint);
     }

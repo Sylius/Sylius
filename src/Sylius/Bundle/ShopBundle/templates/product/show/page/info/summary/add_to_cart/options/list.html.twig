@@ -1,0 +1,3 @@
+{% for option_form in hookable_metadata.context.form.cartItem.variant %}
+    {{ form_row(option_form, { 'attr': { 'data-option': option_form.vars.name } }) }}
+{% endfor %}

@@ -1,0 +1,84 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.dashboard.index':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+                priority: 0
+
+        'sylius_admin.dashboard.index.content':
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                priority: 200
+            grid:
+                enabled: false
+            statistics:
+                component: 'sylius_admin:dashboard:statistics'
+                props:
+                    channelCode: '@=_context.channel_code'
+                    template: '@SyliusAdmin/dashboard/index/component/statistics.html.twig'
+                priority: 100
+            latest_statistics:
+                template: '@SyliusAdmin/dashboard/index/content/latest_statistics.html.twig'
+                priority: 0
+
+        'sylius_admin.dashboard.index.content.header':
+            breadcrumbs:
+                enabled: false
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'sylius_admin.dashboard.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: sylius.ui.dashboard
+                    sylius_test_html_attribute: 'dashboard-header'
+                priority: 100
+            actions:
+                component: 'sylius_admin:dashboard:channel_selector'
+                props:
+                    channelCode: '@=_context.channel_code'
+                    template: '@SyliusAdmin/dashboard/index/component/channel_selector.html.twig'
+                priority: 0
+
+        'sylius_admin.dashboard.index.content.statistics':
+            statistics_grid:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid.html.twig'
+                priority: 100
+            statistics_chart:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_chart.html.twig'
+                priority: 0
+
+        'sylius_admin.dashboard.index.content.statistics.statistics_grid':
+            sales:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/sales.html.twig'
+                priority: 300
+            paid_orders:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/paid_orders.html.twig'
+                priority: 200
+            customers:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/customers.html.twig'
+                priority: 100
+            average_order_value:
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/average_order_value.html.twig'
+                priority: 0
+
+        'sylius_admin.dashboard.index.content.latest_statistics':
+            new_customers:
+                component: 'sylius_admin:dashboard:new_customers'
+                props:
+                    template: '@SyliusAdmin/dashboard/index/component/new_customers.html.twig'
+                priority: 100
+            new_orders:
+                component: 'sylius_admin:dashboard:new_orders'
+                props:
+                    channelCode: '@=_context.channel_code'
+                    template: '@SyliusAdmin/dashboard/index/component/new_orders.html.twig'
+                priority: 0

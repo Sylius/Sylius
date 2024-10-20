@@ -1,0 +1,15 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Account\Address\FormComponent #}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+<div {{ attributes }}>
+    {{ form_start(form, {'attr': { 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {% if hookable_metadata.configuration.method is defined %}
+        <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
+    {% endif %}
+
+    {% hook 'form' with { form } %}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

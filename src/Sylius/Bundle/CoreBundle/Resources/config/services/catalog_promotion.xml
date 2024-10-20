@@ -23,7 +23,6 @@
         <import resource="catalog_promotion/command_handlers.xml" />
         <import resource="catalog_promotion/listeners.xml" />
         <import resource="catalog_promotion/processors.xml" />
-        <import resource="catalog_promotion/validators.xml" />
     </imports>
 
     <services>
@@ -45,7 +44,7 @@
         >
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="sylius.calculator.delay_stamp" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
         <service id="sylius.announcer.catalog_promotion" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface"/>
 

@@ -25,7 +25,7 @@
         >
             <argument type="service" id="sylius.factory.channel_pricing_log_entry" />
             <argument type="service" id="sylius.manager.channel_pricing_log_entry" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
         <service id="sylius.logger.price_history.price_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface" />
     </services>

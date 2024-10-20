@@ -50,5 +50,12 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 
     public function findByTaxon(TaxonInterface $taxon): array;
 
+    /**
+     * @param array<array-key, mixed> $ids
+     *
+     * @return ProductInterface[]
+     */
+    public function findByProductTaxonIds(array $ids): array;
+
     public function findOneByChannelAndCodeWithAvailableAssociations(ChannelInterface $channel, string $code): ?ProductInterface;
 }

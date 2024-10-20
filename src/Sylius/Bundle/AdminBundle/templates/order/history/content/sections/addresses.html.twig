@@ -1,0 +1,12 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'sylius.ui.addresses'|trans }}</div>
+    </div>
+    <div class="py-3">
+        <div class="container-xl">
+            <div class="row">
+                {% hook 'addresses' %}
+            </div>
+        </div>
+    </div>
+</div>

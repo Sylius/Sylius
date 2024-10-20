@@ -1,6 +1,3 @@
-sylius_user:
-    encoder: argon2i
-    
 security:
     password_hashers:
         argon2i: argon2i

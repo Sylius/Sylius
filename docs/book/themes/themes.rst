@@ -99,9 +99,9 @@ Let's remove the registration column in this example:
 
 .. code-block:: twig
 
-   {% extends '@SyliusShop/layout.html.twig' %}
+   {% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
-   {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+   {% form_theme form '@SyliusShop/form/theme.html.twig' %}
 
    {% block title %}{{ 'sylius.ui.customer_login'|trans }} | {{ parent() }}{% endblock %}
 

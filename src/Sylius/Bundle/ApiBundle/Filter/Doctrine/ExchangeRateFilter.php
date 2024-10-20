@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-final class ExchangeRateFilter extends AbstractContextAwareFilter
+final class ExchangeRateFilter extends AbstractFilter
 {
     protected function filterProperty(
         string $property,
@@ -25,17 +26,18 @@ final class ExchangeRateFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        ?string $operationName = null,
-    ) {
-        if ($property === 'currencyCode') {
+        ?Operation $operation = null,
+        array $context = [],
+    ): void {
+        if ('currencyCode' === $property) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
-            $codeParameterName = $queryNameGenerator->generateParameterName('code');
+            $codeParameterName = $queryNameGenerator->generateParameterName(':code');
             $queryBuilder
                 ->innerJoin(sprintf('%s.sourceCurrency', $rootAlias), 'sourceCurrency')
                 ->innerJoin(sprintf('%s.targetCurrency', $rootAlias), 'targetCurrency')
-                ->where('sourceCurrency.code LIKE CONCAT(\'%\', :' . $codeParameterName . ', \'%\')')
-                ->orWhere('targetCurrency.code LIKE CONCAT(\'%\', :' . $codeParameterName . ', \'%\')')
-                ->setParameter($codeParameterName, $value)
+                ->where($queryBuilder->expr()->like('sourceCurrency.code', $codeParameterName))
+                ->orWhere($queryBuilder->expr()->like('targetCurrency.code', $codeParameterName))
+                ->setParameter($codeParameterName, sprintf('%%%s%%', $value))
             ;
         }
     }

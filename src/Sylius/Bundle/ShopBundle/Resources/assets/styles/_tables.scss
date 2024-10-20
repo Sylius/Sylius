@@ -1,0 +1,43 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.table-list {
+    tr {
+        > {
+            *:first-child {
+                padding-left: 0;
+            }
+
+            *:last-child {
+                padding-right: 0;
+            }
+        }
+
+        &:last-child > * {
+            border: 0;
+        }
+    }
+}
+
+.table-lg {
+    > :not(caption) > * > * {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+.table-space > tbody {
+    > tr:first-child > td, {
+        padding-top: 2rem;
+    }
+
+    > tr:last-child > td {
+        padding-bottom: 2rem;
+    }
+}

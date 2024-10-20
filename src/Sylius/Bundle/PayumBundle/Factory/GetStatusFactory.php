@@ -18,7 +18,7 @@ use Sylius\Bundle\PayumBundle\Request\GetStatus;
 
 final class GetStatusFactory implements GetStatusFactoryInterface
 {
-    public function createNewWithModel($model): GetStatusInterface
+    public function createNewWithModel(mixed $model): GetStatusInterface
     {
         return new GetStatus($model);
     }

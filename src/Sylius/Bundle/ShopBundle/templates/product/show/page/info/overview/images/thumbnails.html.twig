@@ -1,0 +1,12 @@
+{% set product = hookable_metadata.context.product %}
+
+{% if product.images|length > 1 %}
+    <div class="row g-3" {{ sylius_test_html_attribute('thumbnails') }}>
+        {% for image in product.images %}
+            {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : asset('build/shop/images/200x200.png') %}
+            <div class="col-4">
+                {% hook 'thumbnails' with {image, path} %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

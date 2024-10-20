@@ -1,0 +1,87 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.address_book.index':
+            breadcrumbs:
+                template: '@SyliusShop/account/address_book/index/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/layout/menu.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusShop/account/common/layout/content.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content':
+            buttons:
+                template: '@SyliusShop/account/address_book/index/content/buttons.html.twig'
+                priority: 100
+            addresses:
+                template: '@SyliusShop/account/address_book/index/content/addresses.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.header':
+            title:
+                template: '@SyliusShop/account/address_book/index/content/header/title.html.twig'
+                priority: 100
+            subtitle:
+                template: '@SyliusShop/account/address_book/index/content/header/subtitle.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.buttons':
+            add_address:
+                template: '@SyliusShop/account/address_book/index/content/buttons/add_address.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.addresses':
+            default:
+                template: '@SyliusShop/account/address_book/index/content/addresses/default.html.twig'
+                priority: 100
+            list:
+                template: '@SyliusShop/account/address_book/index/content/addresses/list.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.addresses.default':
+            badge:
+                template: '@SyliusShop/account/address_book/index/content/addresses/default/badge.html.twig'
+                priority: 200
+            content:
+                template: '@SyliusShop/account/address_book/common/content/address/content.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusShop/account/address_book/common/content/address/actions.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.addresses.default.actions':
+            edit:
+                template: '@SyliusShop/account/address_book/common/content/address/actions/edit.html.twig'
+                priority: 100
+            delete:
+                template: '@SyliusShop/account/address_book/common/content/address/actions/delete.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.addresses.list':
+            address:
+                template: '@SyliusShop/account/address_book/index/content/addresses/list/address.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.addresses.list.address':
+            content:
+                template: '@SyliusShop/account/address_book/common/content/address/content.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusShop/account/address_book/common/content/address/actions.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.addresses.list.address.actions':
+            edit:
+                template: '@SyliusShop/account/address_book/common/content/address/actions/edit.html.twig'
+                priority: 200
+            delete:
+                template: '@SyliusShop/account/address_book/common/content/address/actions/delete.html.twig'
+                priority: 100
+            set_default:
+                component: 'sylius_shop:account:address:default_form'
+                props:
+                    customer: '@=_context.customer'
+                    template: '@SyliusShop/account/address_book/set_as_default.html.twig'
+                priority: 0

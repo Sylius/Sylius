@@ -1,0 +1,8 @@
+{% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
+
+<button class="btn btn-icon btn-transparent px-0" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ icon('user') }}
+</button>
+<ul class="dropdown-menu dropdown-menu-end">
+    {% hook 'menu' %}
+</ul>

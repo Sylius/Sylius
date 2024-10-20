@@ -20,9 +20,7 @@
         <field name="username" column="username" type="string" nullable="true" />
         <field name="usernameCanonical" column="username_canonical" type="string" nullable="true" />
         <field name="enabled" column="enabled" type="boolean" nullable="false" />
-        <field name="salt" column="salt" type="string" nullable="false" />
         <field name="password" column="password" type="string" nullable="true" />
-        <field name="encoderName" column="encoder_name" type="string" nullable="true" />
 
         <field name="lastLogin" column="last_login" type="datetime" nullable="true" />
         <field name="passwordResetToken" column="password_reset_token" type="string" unique="true" nullable="true" />
@@ -30,9 +28,6 @@
         <field name="emailVerificationToken" column="email_verification_token" type="string" unique="true" nullable="true" />
         <field name="verifiedAt" column="verified_at" type="datetime" nullable="true" />
 
-        <field name="locked" column="locked" type="boolean" nullable="false" />
-        <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />
-        <field name="credentialsExpireAt" column="credentials_expire_at" type="datetime" nullable="true" />
         <field name="roles" column="roles" type="json" nullable="false">
             <options>
                 <option name="jsonb">true</option>

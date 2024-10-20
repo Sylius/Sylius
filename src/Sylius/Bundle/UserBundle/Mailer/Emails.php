@@ -17,8 +17,5 @@ final class Emails
 {
     public const RESET_PASSWORD_TOKEN = 'reset_password_token';
 
-    /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
-    public const RESET_PASSWORD_PIN = 'reset_password_pin';
-
     public const EMAIL_VERIFICATION_TOKEN = 'verification_token';
 }

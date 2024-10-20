@@ -110,7 +110,6 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.checker.promotion.taxon_in_promotion_rule" />
-            <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
             <argument type="service" id="sylius.updater.promotion_rule.has_taxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
@@ -129,6 +128,11 @@
             <tag name="kernel.event_listener" event="sylius.product.pre_delete" method="protectFromRemovingProductInUseByPromotionRule" />
         </service>
         <service id="sylius.listener.product_deletion" alias="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener" />
+
+        <service id="sylius.listener.product_option_value" class="Sylius\Bundle\CoreBundle\EventListener\ProductOptionValueDeletionListener">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="doctrine.orm.entity_listener" event="preRemove" entity="%sylius.model.product_option_value.class%" />
+        </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener">
             <tag name="doctrine.event_listener" event="postGenerateSchema" method="postGenerateSchema" lazy="true" />

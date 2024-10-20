@@ -1,6 +1,0 @@
-<div class="ui tab" data-tab="taxes">
-    <h3 class="ui dividing header">{{ 'sylius.ui.taxes'|trans }}</h3>
-    {{ form_row(form.taxCategory) }}
-
-    {{ sylius_template_event(['sylius.admin.product_variant.' ~ action ~ '.tab_taxes', 'sylius.admin.product_variant.tab_taxes'], {'form': form}) }}
-</div>

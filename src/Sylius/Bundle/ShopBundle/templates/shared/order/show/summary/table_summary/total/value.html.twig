@@ -1,0 +1,7 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+<td>
+    <div class="h5 text-end border-top pt-4 mt-3" {{ sylius_test_html_attribute('order-total') }}>
+        {{ money.convertAndFormat(hookable_metadata.context.order.total) }}
+    </div>
+</td>

@@ -19,13 +19,10 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand">
+        <service id="sylius.console.command.generate_coupons" class="Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand">
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="sylius.generator.promotion_coupon" />
-            <tag name="console.command" command="sylius:promotion:generate-coupons"/>
+            <tag name="console.command" />
         </service>
-
-        <service id="Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand" alias="Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand" />
-        <service id="sylius.console.command.generate_coupons" alias="Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand" />
     </services>
 </container>

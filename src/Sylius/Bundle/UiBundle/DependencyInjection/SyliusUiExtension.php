@@ -13,17 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\DependencyInjection;
 
-use Laminas\Stdlib\SplPriorityQueue;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusUiExtension extends Extension implements PrependExtensionInterface
+final class SyliusUiExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -32,79 +27,8 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
 
         $loader->load('services.xml');
 
-        if ($container->getParameter('kernel.debug')) {
-            $loader->load('services/debug/template_event.xml');
-        }
-
-        $this->loadEvents($config['events'], $container);
-    }
-
-    /**
-     * @param array<string, array{blocks: array<string, array{template: string, context: array, priority?: int, enabled: bool}>}> $eventsConfig
-     */
-    private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
-    {
-        $templateBlockRegistryDefinition = $container->findDefinition(TemplateBlockRegistryInterface::class);
-
-        $blocksForEvents = [];
-        foreach ($eventsConfig as $eventName => $eventConfiguration) {
-            $blocksPriorityQueue = new SplPriorityQueue();
-
-            foreach ($eventConfiguration['blocks'] as $blockName => $details) {
-                $details['name'] = $blockName;
-                $details['eventName'] = $eventName;
-
-                $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
-            }
-
-            foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
-                $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
-                    $details['name'],
-                    $details['eventName'],
-                    $details['template'],
-                    $details['context'],
-                    $details['priority'],
-                    $details['enabled'],
-                ]);
-            }
-        }
-
-        $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
-    }
-
-    public function prepend(ContainerBuilder $container): void
-    {
-        $useWebpack = $this->isWebpackEnabled($container);
-
-        $container->setParameter('sylius_ui.use_webpack', $useWebpack);
-
-        if (true === $useWebpack) {
-            $container->prependExtensionConfig('framework', [
-                'assets' => [
-                    'packages' => [
-                        'shop' => [
-                            'json_manifest_path' => '%kernel.project_dir%/public/build/shop/manifest.json',
-                        ],
-                        'admin' => [
-                            'json_manifest_path' => '%kernel.project_dir%/public/build/admin/manifest.json',
-                        ],
-                    ],
-                ],
-            ]);
-        }
-    }
-
-    private function isWebpackEnabled(ContainerBuilder $container): bool
-    {
-        $configs = $container->getExtensionConfig($this->getAlias());
-
-        foreach (array_reverse($configs) as $config) {
-            if (isset($config['use_webpack'])) {
-                return (bool) $config['use_webpack'];
-            }
-        }
-
-        return true;
+        $container->setParameter('sylius_ui.twig_ux.anonymous_component_template_prefixes', $config['twig_ux']['anonymous_component_template_prefixes'] ?? []);
+        $container->setParameter('sylius_ui.twig_ux.live_component_tags', $config['twig_ux']['live_component_tags'] ?? []);
+        $container->setParameter('sylius_ui.twig_ux.component_default_template', $config['twig_ux']['component_default_template']);
     }
 }

@@ -1,0 +1,25 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.order.thank_you':
+            header:
+                template: "@SyliusShop/order/thank_you/header.html.twig"
+                priority: 200
+            payment_instruction:
+                template: "@SyliusShop/order/thank_you/payment_instruction.html.twig"
+                priority: 100
+            buttons:
+                template: "@SyliusShop/order/thank_you/buttons.html.twig"
+                priority: 0
+
+        'sylius_shop.order.thank_you.buttons#customer':
+            view_order:
+                template: "@SyliusShop/order/thank_you/buttons/view_order.html.twig"
+                priority: 0
+
+        'sylius_shop.order.thank_you.buttons#guest':
+            change_payment_method:
+                template: "@SyliusShop/order/thank_you/buttons/change_payment_method.html.twig"
+                priority: 100
+            create_account:
+                template: "@SyliusShop/order/thank_you/buttons/create_account.html.twig"
+                priority: 0

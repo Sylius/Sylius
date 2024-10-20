@@ -17,12 +17,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ChannelDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class ChannelDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
@@ -47,7 +47,7 @@ final class ChannelDenormalizer implements ContextAwareDenormalizerInterface, De
         ;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
@@ -67,5 +67,10 @@ final class ChannelDenormalizer implements ContextAwareDenormalizerInterface, De
         }
 
         return $channel;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [ChannelInterface::class => false];
     }
 }

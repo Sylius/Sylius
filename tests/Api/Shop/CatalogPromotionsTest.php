@@ -39,7 +39,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
 
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $fixtures['catalog_promotion'];

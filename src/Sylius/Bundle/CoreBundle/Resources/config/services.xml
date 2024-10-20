@@ -58,14 +58,6 @@
             <argument type="service" id="sylius.storage" />
         </service>
         <service id="sylius.adapter.filesystem.flysystem" alias="Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter" />
-        <service id="Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter">
-            <argument type="service">
-                <service class="Gaufrette\Filesystem">
-                    <argument>%sylius.uploader.filesystem%</argument>
-                    <factory service="knp_gaufrette.filesystem_map" method="get" />
-                </service>
-            </argument>
-        </service>
 
         <service
             id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface"
@@ -104,15 +96,14 @@
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
         <service id="sylius.resolver.payment_method.default" alias="sylius.payment_method_resolver.default" />
-<!--        <service id="Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface" alias="sylius.payment_method_resolver.default" />-->
+        <service id="Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface" alias="sylius.payment_method_resolver.default" />
 
-        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
+        <service id="sylius.resolver.shipping_method.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <argument type="service" id="sylius.matcher.zone" />
         </service>
-        <service id="sylius.resolver.shipping_method.default" alias="sylius.shipping_method_resolver.default" />
-        <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
+        <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.resolver.shipping_method.default" />
 
         <service id="sylius.taxation_address_resolver" class="Sylius\Component\Core\Resolver\TaxationAddressResolver">
             <argument>%sylius_core.taxation.shipping_address_based_taxation%</argument>
@@ -142,6 +133,7 @@
         <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.order_item.inner" />
             <argument type="service" id="sylius.resolver.product_variant" />
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
         <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
@@ -158,11 +150,6 @@
             <argument type="service" id="sylius.factory.customer" />
         </service>
         <service id="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface" alias="sylius.factory.customer_after_checkout" />
-
-        <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.product_variants_prices" />
-            <tag name="twig.extension" />
-        </service>
 
         <service id="Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension">
             <argument type="service" id="sylius.provider.product_variant_map" />
@@ -211,7 +198,7 @@
         >
             <argument type="service" id="sylius.checker.product_variant_lowest_price_display" />
         </service>
-        <service id="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" alias="sylius.calculator.product_variant_price" />
+        <service id="Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" alias="sylius.calculator.product_variant_price" />
 
         <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
             <argument type="service" id="request_stack" />
@@ -231,7 +218,7 @@
         <service id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" class="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemover">
             <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <argument type="service" id="event_dispatcher" />
             <argument>%sylius.channel_pricing_log_entry.old_logs_removal_batch_size%</argument>
         </service>
@@ -265,7 +252,7 @@
         <service id="sylius.provider.statistics.customer" alias="sylius.customer_statistics_provider" />
         <service id="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface" alias="sylius.customer_statistics_provider" />
 
-        <service id="sylius.sequential_order_number_generator" class="Sylius\Bundle\CoreBundle\Order\NumberGenerator\SequentialOrderNumberGenerator">
+        <service id="sylius.number_generator.sequential_order" class="Sylius\Bundle\CoreBundle\Order\NumberGenerator\SequentialOrderNumberGenerator">
             <argument type="service" id="sylius.repository.order_sequence" />
             <argument type="service" id="sylius.factory.order_sequence" />
             <argument type="service" id="sylius.manager.order_sequence" />
@@ -285,10 +272,6 @@
         <service id="sylius.setter.order.item_names" alias="sylius.order_item_names_setter" />
         <service id="Sylius\Component\Core\Order\OrderItemNamesSetterInterface" alias="sylius.order_item_names_setter" />
 
-        <service id="sylius.grid_filter.entities" class="Sylius\Component\Core\Grid\Filter\EntitiesFilter">
-            <tag name="sylius.grid_filter" type="entities" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType" />
-            <deprecated package="sylius/core-bundle" version="1.14">The "%service_id%" service is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
         <service id="sylius.grid_filter.resource_autocomplete" class="Sylius\Component\Core\Grid\Filter\ResourceAutocompleteFilter">
             <tag name="sylius.grid_filter" type="resource_autocomplete" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\ResourceAutocompleteFilterType" />
         </service>
@@ -316,18 +299,6 @@
             <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
         </service>
         <service id="sylius.resetter.user_password.shop" alias="sylius.user_password_resetter.shop" />
-
-        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher">
-            <argument type="service" id="sylius.command_bus" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface" class="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcher">
-            <argument type="service" id="sylius.command_bus" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcher">
-            <argument type="service" id="sylius.command_bus" />
-        </service>
 
         <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
             <argument type="service" id="sylius.factory.customer" />

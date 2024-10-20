@@ -20,6 +20,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 final class ZoneChoiceType extends AbstractType
 {
@@ -27,15 +28,11 @@ final class ZoneChoiceType extends AbstractType
      * @param RepositoryInterface<ZoneInterface> $zoneRepository
      * @param array<string, mixed> $scopeTypes
      */
-    public function __construct(private RepositoryInterface $zoneRepository, private array $scopeTypes = [])
-    {
-        if (count($scopeTypes) === 0) {
-            trigger_deprecation(
-                'sylius/addressing-bundle',
-                '1.5',
-                'Not passing $scopeTypes through constructor is deprecated and will be prohibited in Sylius 2.0.',
-            );
-        }
+    public function __construct(
+        private readonly RepositoryInterface $zoneRepository,
+        private readonly array $scopeTypes,
+    ) {
+        Assert::notEmpty($this->scopeTypes, 'There should be at least one scope type.');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

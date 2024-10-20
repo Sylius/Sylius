@@ -16,7 +16,7 @@ sylius_grid:
                     path: .
                     label: sylius.ui.name
                     options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
+                        template: "@SyliusAdmin/product_variant/grid/field/name.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -24,20 +24,20 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.enabled
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
                 inventory:
                     type: twig
                     path: .
                     label: sylius.ui.inventory
                     options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
+                        template: "@SyliusAdmin/product_variant/grid/field/inventory.html.twig"
                 position:
                     type: twig
                     label: sylius.ui.position
                     path: .
                     sortable: position
                     options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/position.html.twig"
+                        template: "@SyliusAdmin/product_variant/grid/field/position.html.twig"
             filters:
                 code:
                     type: string
@@ -83,3 +83,7 @@ sylius_grid:
                             link:
                                 parameters:
                                     productId: $productId
+                subitem:
+                    price_history:
+                        type: price_history
+                        label: sylius.ui.price_history

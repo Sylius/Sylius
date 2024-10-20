@@ -22,6 +22,7 @@
 
         <service id="sylius.behat.page.admin.shipment.index" class="%sylius.behat.page.admin.shipment.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_shipment_index</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 
         <service id="sylius.behat.page.admin.shipment.show" class="%sylius.behat.page.admin.shipment.show.class%" parent="sylius.behat.symfony_page" public="false" />

@@ -1,0 +1,17 @@
+Sylius\Component\Core\Model\Payment:
+    payment:
+        method: "@payment_method_cash_on_delivery"
+        order: "@order"
+        state: "processing"
+        amount: 1000
+        currencyCode: "USD"
+    
+Sylius\Component\Core\Model\Order:
+    order:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "new"
+        paymentState: "awaiting_payment"
+        shippingState: "ready"
+        tokenValue: "token"

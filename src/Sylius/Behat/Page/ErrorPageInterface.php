@@ -13,14 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-
 interface ErrorPageInterface
 {
     public function getCode(): int;
 
-    /**
-     * @throws ElementNotFoundException
-     */
-    public function getTitle(): string;
+    public function isItAdminNotFoundPage(): bool;
+
+    public function isItShopNotFoundPage(): bool;
 }

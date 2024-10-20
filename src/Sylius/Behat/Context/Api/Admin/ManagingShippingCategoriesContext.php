@@ -26,8 +26,8 @@ final class ManagingShippingCategoriesContext implements Context
     use ValidationTrait;
 
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
     ) {
     }
 

@@ -41,7 +41,6 @@ Don't worry, everything was automatically installed via Composer.
     {
         $bundles = array(
             // ...
-            new FOS\RestBundle\FOSRestBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
         );

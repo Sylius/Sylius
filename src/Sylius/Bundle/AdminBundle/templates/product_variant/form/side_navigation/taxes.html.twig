@@ -1,0 +1,10 @@
+<button
+    type="button"
+    class="list-group-item list-group-item-action {% if hookable_metadata.configuration.active|default(false) %}active{% endif %}"
+    data-bs-toggle="tab"
+    data-bs-target="#product-variant-taxes"
+    role="tab"
+    {{ sylius_test_html_attribute('side-navigation-tab', 'taxes') }}
+>
+    {{ 'sylius.ui.taxes'|trans }}
+</button>
