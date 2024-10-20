@@ -229,6 +229,12 @@
 
         <service id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" class="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemover" />
 
+        <service id="sylius.order_payment_refresher" class="Sylius\Component\Core\Payment\Refresher\OrderPaymentRefresher">
+            <argument type="service" id="Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface" />
+            <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
+        </service>
+        <service id="Sylius\Component\Core\Payment\Refresher\OrderPaymentRefresherInterface" alias="sylius.order_payment_refresher" />
+
         <service id="sylius.customer_statistics_provider" class="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.channel" />
