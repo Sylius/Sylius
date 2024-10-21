@@ -20,7 +20,7 @@ use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
-final class PromotionContext implements Context
+final readonly class PromotionContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -35,7 +35,11 @@ final class PromotionContext implements Context
      */
     public function iUseCouponWithCode(?string $couponCode = null): void
     {
-        $this->useCouponCode($couponCode);
+        $this->client
+            ->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue())
+            ->setRequestData(['couponCode' => $couponCode])
+            ->update()
+        ;
     }
 
     /**
@@ -45,23 +49,22 @@ final class PromotionContext implements Context
     {
         $response = $this->client->getLastResponse();
 
+        $availableErrors = [
+            'couponCode: Coupon code is invalid.',
+            'couponCode: Coupon code has expired.',
+            'couponCode: Coupon code is not valid for this order.',
+        ];
+
         Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
+        Assert::inArray($this->responseChecker->getError($response), $availableErrors);
     }
 
-    private function getCartTokenValue(): ?string
+    private function getCartTokenValue(): string
     {
-        if ($this->sharedStorage->has('cart_token')) {
-            return $this->sharedStorage->get('cart_token');
+        if (!$this->sharedStorage->has('cart_token')) {
+            throw new \RuntimeException('There is no cart token set in shared storage.');
         }
 
-        return null;
-    }
-
-    private function useCouponCode(?string $couponCode): void
-    {
-        $this->client->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue());
-        $this->client->setRequestData(['couponCode' => $couponCode]);
-        $this->client->update();
+        return $this->sharedStorage->get('cart_token');
     }
 }

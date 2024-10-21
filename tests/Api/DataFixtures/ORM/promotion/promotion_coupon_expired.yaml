@@ -1,0 +1,29 @@
+Sylius\Component\Core\Model\Promotion:
+    promotion_active:
+        code: 'promotion_active'
+        name: 'Active promotion with expired coupon'
+        description: 'This promotion is active but the coupon has already expired'
+        channels: ['@channel_web']
+        priority: 1
+        exclusive: true
+        appliesToDiscounted: false
+        usageLimit: 1
+        used: 0
+        couponBased: true
+        translations:
+            - '@promotion_active_en'
+
+Sylius\Component\Promotion\Model\PromotionTranslation:
+    promotion_active_en:
+        locale: 'en_US'
+        label: 'Active promotion with expired coupon'
+        translatable: '@promotion_active'
+
+Sylius\Component\Core\Model\PromotionCoupon:
+    promotion_coupon_expired:
+        code: 'PROMOTION_COUPON_EXPIRED'
+        usageLimit: null
+        perCustomerUsageLimit: null
+        reusableFromCancelledOrders: false
+        promotion: '@promotion_active'
+        expiresAt: <dateTimeBetween('-2 month', '-1 month')>

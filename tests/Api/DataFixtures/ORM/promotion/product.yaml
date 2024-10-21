@@ -3,7 +3,17 @@ Sylius\Component\Core\Model\Product:
         code: 'CAP'
         channels: ['@channel_web']
         currentLocale: 'en_US'
-    product_socks:
-        code: 'SOCKS'
-        channels: ['@channel_web']
+
+Sylius\Component\Core\Model\ProductVariant:
+    product_variant_cap_blue:
+        code: 'CAP_BLUE'
+        product: '@product_cap'
         currentLocale: 'en_US'
+        channelPricings:
+            WEB: '@channel_pricing_cap_blue_web'
+
+Sylius\Component\Core\Model\ChannelPricing:
+    channel_pricing_cap_blue_web:
+        channelCode: 'WEB'
+        price: 2000
+        originalPrice: 3000
