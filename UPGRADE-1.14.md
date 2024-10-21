@@ -188,7 +188,6 @@
     | `Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory`                                                            | `sylius_api.open_api.factory`                                                                       |
     | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier`                           | `sylius_api.open_api.documentation_modifier.accept_language_header`                                 |
     | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdministratorDocumentationModifier`                                  | `sylius_api.open_api.documentation_modifier.administrator`                                          |
-    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier`                                      | `sylius_api.open_api.documentation_modifier.path_hider`                                             |
     | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier`                                  | `sylius_api.open_api.documentation_modifier.attribute_type`                                         |
     | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier`                                        | `sylius_api.open_api.documentation_modifier.product`                                                |
     | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier`                                          | `sylius_api.open_api.documentation_modifier.image`                                                  |
@@ -766,6 +765,7 @@
     - `Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer`
     - `Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer`
     - `Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer`
+    - `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier`
     - `Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler`
     - `Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\RouteNameResolver`
     - `Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\CachedRouteNameResolver`

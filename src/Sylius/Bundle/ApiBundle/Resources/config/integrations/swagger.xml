@@ -39,8 +39,8 @@
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier">
             <argument>%sylius.api.paths_to_hide%</argument>
             <tag name="sylius.open_api.modifier" />
+            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
-        <service id="sylius_api.open_api.documentation_modifier.path_hider" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier">
             <argument type="service" id="sylius.registry.attribute_type" />

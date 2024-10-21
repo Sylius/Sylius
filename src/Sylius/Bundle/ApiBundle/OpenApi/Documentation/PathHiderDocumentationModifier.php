@@ -17,6 +17,14 @@ use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\OpenApi;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    PathHiderDocumentationModifier::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class PathHiderDocumentationModifier implements DocumentationModifierInterface
 {
     /**
