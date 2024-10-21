@@ -44,8 +44,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.type.catalog_promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType">
             <argument>%sylius.model.catalog_promotion.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
