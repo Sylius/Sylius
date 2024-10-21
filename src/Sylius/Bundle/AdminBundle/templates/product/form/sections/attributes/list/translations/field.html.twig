@@ -1,0 +1,9 @@
+{% set locale_code = hookable_metadata.context.locale_code|default(null) %}
+{% set product_attribute_value = hookable_metadata.context.product_attribute_value %}
+
+<div class="flex-grow-1">
+    {% set required_class = not locale_code or locale_code == sylius_base_locale ? 'required' : '' %}
+    {% hook 'field' with { required_class } %}
+    <input type="hidden" name="{{ product_attribute_value.attribute.vars.full_name }}" value="{{ product_attribute_value.attribute.vars.value }}">
+    <input type="hidden" name="{{ product_attribute_value.localeCode.vars.full_name }}" value="{{ product_attribute_value.localeCode.vars.value }}">
+</div>
