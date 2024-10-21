@@ -20,7 +20,7 @@
         <defaults public="true" />
 
         <service id="sylius.shop.locale_switcher" class="Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher" public="false">
-            <argument type="service" id="sylius_shop.locale_storage" />
+            <argument type="service" id="sylius_shop.storage.locale" />
             <argument type="service" id="sylius.context.channel" />
         </service>
         <service id="sylius_shop.locale_switcher" alias="sylius.shop.locale_switcher" />
@@ -28,12 +28,12 @@
         <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\LocaleStorage">
             <argument type="service" id="sylius.storage.session" />
         </service>
-        <service id="sylius_shop.locale_storage" alias="sylius.storage.locale" />
+        <service id="sylius_shop.storage.locale" alias="sylius.storage.locale" />
         <service id="Sylius\Component\Core\Locale\LocaleStorageInterface" alias="sylius.storage.locale" />
 
         <service id="sylius.context.locale.storage_based" class="Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext">
             <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius_shop.locale_storage" />
+            <argument type="service" id="sylius_shop.storage.locale" />
             <argument type="service" id="sylius.provider.locale" />
             <tag name="sylius.context.locale" priority="-64" />
         </service>

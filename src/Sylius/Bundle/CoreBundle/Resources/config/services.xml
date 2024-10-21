@@ -111,7 +111,6 @@
             <argument type="service" id="sylius.eligibility_checker.shipping_method" />
             <argument type="service" id="sylius.matcher.zone" />
         </service>
-        <service id="sylius.resolver.shipping_method.default" alias="sylius.shipping_method_resolver.default" />
         <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
 
         <service id="sylius.taxation_address_resolver" class="Sylius\Component\Core\Resolver\TaxationAddressResolver">
