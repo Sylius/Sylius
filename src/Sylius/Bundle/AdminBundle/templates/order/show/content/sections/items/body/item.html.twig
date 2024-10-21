@@ -4,12 +4,12 @@
 {% set variant = hookable_metadata.context.variant %}
 
 <td>
-    <div class="d-flex gap-3 align-items-center">
-        <div>
+    <div class="thumbnail-box">
+        <div class="thumbnail-box-image">
             {{ image(product) }}
         </div>
-        <div>
-            <div>
+        <div class="thumbnail-box-content">
+            <div class="mb-1">
                 <a href="{{ path('sylius_admin_product_show', { id: product.id }) }}">
                     <strong>{{ product.name }}</strong>
                 </a>
