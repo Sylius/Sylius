@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.command_provider.gateway_factory" class="Sylius\Bundle\PaymentBundle\CommandProvider\GatewayFactoryCommandProvider">
             <argument type="service" id="sylius.checker.payment_request_duplication" />
             <argument type="service" id="sylius.provider.gateway_factory_name" />
