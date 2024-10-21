@@ -29,7 +29,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/collections": "^2.2",
+        "doctrine/collections": "^1.8",
         "knplabs/knp-menu": "^3.5",
         "knplabs/knp-menu-bundle": "^3.4",
         "laminas/laminas-stdlib": "^3.19",
