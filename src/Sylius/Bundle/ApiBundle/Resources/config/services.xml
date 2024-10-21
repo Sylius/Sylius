@@ -86,7 +86,6 @@
             class="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter"
             decorates="api_platform.symfony.iri_converter"
             decoration-priority="64"
-            public="false"
         >
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius_api.provider.path_prefix" />
@@ -98,7 +97,6 @@
             id="sylius_api.api_platform.routing.api_loader"
             class="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\ApiLoader"
             decorates="api_platform.route_loader"
-            public="false"
         >
             <argument type="service" id=".inner" />
             <argument>%sylius_api.operations_to_remove%</argument>

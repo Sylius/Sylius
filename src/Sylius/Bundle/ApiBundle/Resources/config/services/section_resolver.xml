@@ -16,8 +16,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="false" />
-
         <service id="sylius_api.section_resolver.admin_api_uri_based" class="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
             <argument>%sylius.security.api_admin_route%</argument>
             <tag name="sylius.uri_based_section_resolver" priority="30" />
