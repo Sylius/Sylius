@@ -22,9 +22,7 @@
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.console.command.remove_expired_carts" class="Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand">
+        <service id="sylius.console.command.remove_expired_carts" class="Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand" public="true">
             <argument type="service" id="sylius.remover.expired_carts" />
             <argument>%sylius_order.cart_expiration_period%</argument>
 
@@ -35,9 +33,9 @@
             <argument type="service" id="sylius.factory.order" />
             <tag name="sylius.context.cart" priority="-999" />
         </service>
-        <service id="sylius.context.cart.composite" class="Sylius\Component\Order\Context\CompositeCartContext" public="false" />
+        <service id="sylius.context.cart.composite" class="Sylius\Component\Order\Context\CompositeCartContext" />
 
-        <service id="sylius.order_processing.order_processor.composite" class="Sylius\Component\Order\Processor\CompositeOrderProcessor" public="false" />
+        <service id="sylius.order_processing.order_processor.composite" class="Sylius\Component\Order\Processor\CompositeOrderProcessor" />
 
         <service id="sylius.modifier.order" class="Sylius\Component\Order\Modifier\OrderModifier">
             <argument type="service" id="sylius.order_processing.order_processor" />
