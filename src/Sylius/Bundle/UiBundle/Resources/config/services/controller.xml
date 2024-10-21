@@ -19,7 +19,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.controller.security" class="Sylius\Bundle\UiBundle\Controller\SecurityController" public="true">
+        <service id="sylius.controller.security" class="Sylius\Bundle\UiBundle\Controller\SecurityController">
             <argument type="service" id="security.authentication_utils" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="twig" />

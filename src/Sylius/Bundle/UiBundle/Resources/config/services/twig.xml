@@ -17,9 +17,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.twig.extension.percentage" class="Sylius\Bundle\UiBundle\Twig\PercentageExtension" public="false">
+        <service id="sylius.twig.extension.percentage" class="Sylius\Bundle\UiBundle\Twig\PercentageExtension">
             <tag name="twig.extension" />
         </service>
 
