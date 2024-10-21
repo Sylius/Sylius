@@ -1036,3 +1036,7 @@ sylius_shop_payum:
 -   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 +   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
 ```
+
+## Testing Suite
+
+* The `sylius.behat.api_security` has been replaced by `sylius.behat.api_admin_security` and `sylius.behat.api_shop_security` services.
