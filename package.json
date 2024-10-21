@@ -10,29 +10,13 @@
   "scripts": {
     "build": "encore dev",
     "build:prod": "encore production",
-    "lint": "yarn lint:js",
     "watch": "encore dev --watch"
   },
   "dependencies": {
     "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle",
     "@sylius-ui/shop": "file:src/Sylius/Bundle/ShopBundle",
     "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
-    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
-    "chart.js": "^3.7.1",
-    "flag-icons": "^7.2.3"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.18.9",
-    "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.18.10",
-    "@babel/register": "^7.0.0",
-    "@hotwired/stimulus": "^3.0.0",
-    "@symfony/stimulus-bridge": "^3.2.2",
-    "@symfony/webpack-encore": "^3.1.0",
-    "sass": "^1.54.8",
-    "sass-loader": "^13.0.0",
-    "tom-select": "^2.2.2"
+    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
   },
   "engines": {
     "node": "^20 || ^22"
