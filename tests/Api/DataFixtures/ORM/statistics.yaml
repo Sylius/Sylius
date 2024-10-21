@@ -2,14 +2,13 @@ Sylius\Component\Core\Model\Product:
     product:
         code: 'PRODUCT'
         channels: ['@channel_web']
-        translations:
-            en_US: '@product_translation'
 
 Sylius\Component\Core\Model\ProductTranslation:
     product_translation:
         slug: 'product'
         locale: 'en_US'
         name: 'Product'
+        translatable: '@product'
 
 Sylius\Component\Core\Model\ProductVariant:
     product_variant_that_costs_1000:

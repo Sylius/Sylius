@@ -10,8 +10,6 @@ Sylius\Component\Core\Model\Product:
         code: 'MUG'
         channels: ['@channel_web']
         currentLocale: 'en_US'
-        translations:
-            en_US: '@product_translation_mug'
         options: ['@product_option_color']
 
 Sylius\Component\Core\Model\ProductTranslation:
@@ -27,8 +25,6 @@ Sylius\Component\Core\Model\ProductVariant:
         code: 'MUG_BLUE'
         product: '@product_mug'
         currentLocale: 'en_US'
-        translations:
-            en_US: '@product_variant_translation_mug_blue'
         optionValues: ['@product_option_value_color_blue']
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_blue_web'
@@ -41,8 +37,6 @@ Sylius\Component\Core\Model\ProductVariant:
         optionValues: ['@product_option_value_color_blue']
         product: '@product_mug'
         shippingRequired: false
-        translations:
-            en_US: '@product_variant_translation_mug_nft'
     product_variant_free_mug_nft:
         channelPricings:
             WEB: '@channel_pricing_product_variant_free_mug_nft_web'
@@ -51,8 +45,6 @@ Sylius\Component\Core\Model\ProductVariant:
         optionValues: ['@product_option_value_color_blue']
         product: '@product_mug'
         shippingRequired: false
-        translations:
-            en_US: '@product_variant_translation_free_mug_nft'
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
     product_variant_translation_mug_blue:
@@ -92,8 +84,6 @@ Sylius\Component\Product\Model\ProductOptionValue:
         currentLocale: 'en_US'
         fallbackLocale: 'en_US'
         option: '@product_option_color'
-        translations:
-            - '@product_option_value_translation_blue'
 
 Sylius\Component\Product\Model\ProductOptionValueTranslation:
     product_option_value_translation_blue:
