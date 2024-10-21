@@ -174,13 +174,13 @@ final class StatisticsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => '',
                     'message' => 'The start date must be earlier than the end date.',
                 ],
             ],
+            false,
         );
     }
 
@@ -204,7 +204,7 @@ final class StatisticsTest extends JsonApiTestCase
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponseViolations($this->client->getResponse(), $expectedViolations);
+        $this->assertResponseViolations($expectedViolations, false);
     }
 
     public function missingQueryParameters(): iterable
