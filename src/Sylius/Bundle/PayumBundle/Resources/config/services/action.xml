@@ -6,8 +6,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <!-- Generic -->
         <service id="sylius_payum.action.authorize_payment" class="Sylius\Bundle\PayumBundle\Action\AuthorizePaymentAction">
             <argument type="service" id="sylius_payum.provider.payment_description" />
