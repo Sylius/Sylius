@@ -15,7 +15,6 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/workflow.yaml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/messenger.yaml" }
-    - { resource: "@SyliusCoreBundle/Resources/config/app/nyholm_psr7.yaml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/doctrine_migrations.yaml" }
 
 parameters:
