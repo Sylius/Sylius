@@ -25,6 +25,7 @@ trigger_deprecation(
 
 /**
  * @experimental
+ *
  * @deprecated since Sylius 1.14 and will be removed in Sylius 2.0.
  */
 final class EntitiesFilter implements FilterInterface
