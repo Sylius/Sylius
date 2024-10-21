@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.validator.has_enabled_entity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator">
             <argument type="service" id="doctrine" />
             <argument type="service" id="property_accessor" />

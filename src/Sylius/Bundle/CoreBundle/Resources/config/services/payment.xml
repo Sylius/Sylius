@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.custom_factory.payment_method" class="Sylius\Component\Core\Factory\PaymentMethodFactory" decorates="sylius.factory.payment_method" public="false">
             <argument type="service" id="sylius.custom_factory.payment_method.inner" />
             <argument type="service" id="sylius.factory.gateway_config" />

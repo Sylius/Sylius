@@ -17,9 +17,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius_fixtures.listener.catalog_promotion_executor" class="Sylius\Bundle\CoreBundle\Fixture\Listener\CatalogPromotionExecutorListener" public="false">
+        <service id="sylius_fixtures.listener.catalog_promotion_executor" class="Sylius\Bundle\CoreBundle\Fixture\Listener\CatalogPromotionExecutorListener">
             <argument type="service" id="sylius.processor.catalog_promotion.all_product_variant" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="sylius.command_bus" />
@@ -28,7 +26,7 @@
         </service>
         <service id="sylius.fixtures.listener.catalog_promotion_executor" alias="sylius_fixtures.listener.catalog_promotion_executor" />
 
-        <service id="Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener" public="false">
+        <service id="Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener">
             <argument type="service" id="filesystem" />
             <argument>%sylius_core.images_dir%</argument>
             <tag name="sylius_fixtures.listener" />
