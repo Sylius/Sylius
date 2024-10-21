@@ -54,10 +54,10 @@
         </service>
         <service id="Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface" alias="sylius.number_generator.sequential_order" />
 
-        <service id="sylius.number_assigner.order_number" class="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner">
+        <service id="sylius.number_assigner.order_number" class="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner" public="true">
             <argument type="service" id="sylius.number_generator.sequential_order" />
         </service>
-        <service id="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface" alias="sylius.number_assigner.order_number" />
+        <service id="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface" alias="sylius.number_assigner.order_number" public="true" />
 
         <service id="sylius.aggregator.adjustments_by_label" class="Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator" />
         <service id="Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface" alias="sylius.aggregator.adjustments_by_label" />
