@@ -19,6 +19,7 @@
     <mapped-superclass name="Sylius\Component\Core\Model\ProductImage" table="sylius_product_image">
         <many-to-one field="owner" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="images">
             <join-column name="owner_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
+            <gedmo:sortable-group />
         </many-to-one>
         <many-to-many field="productVariants" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="images">
             <order-by>
