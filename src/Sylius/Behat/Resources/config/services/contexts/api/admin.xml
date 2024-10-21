@@ -205,7 +205,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
-            <argument type="service" id="sylius.behat.api_security" />
+            <argument type="service" id="sylius.behat.api_admin_security" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.api.shared_security" />
         </service>
