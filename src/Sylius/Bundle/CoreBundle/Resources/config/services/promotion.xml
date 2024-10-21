@@ -124,10 +124,10 @@
         </service>
         <service id="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface" alias="sylius.applicator.promotion.units_adjustments" />
 
-        <service id="sylius.modifier.promotion.order_usage" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier">
+        <service id="sylius.modifier.promotion.order_usage" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier" public="true">
             <argument type="service" id="sylius.manager.promotion" />
         </service>
-        <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.modifier.promotion.order_usage" />
+        <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.modifier.promotion.order_usage" public="true" />
 
         <service id="sylius.updater.promotion_rule.has_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\HasTaxonRuleUpdater">
             <argument type="service" id="sylius.repository.promotion_rule" />
