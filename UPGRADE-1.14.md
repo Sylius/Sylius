@@ -258,6 +258,7 @@
     | `Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ResolveOrderPaymentStateListener`                          | `sylius.listener.workflow.payment.resolve_order_payment_state`                                      |
     | `Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\AssignShippingDateListener`                               | `sylius.listener.workflow.shipment.assign_shipping_date`                                            |
     | `Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\ResolveOrderShipmentStateListener`                        | `sylius.listener.workflow.shipment.resolve_order_shipment_state`                                    |
+    | `Sylius\Bundle\CoreBundle\PriceHistory\CommandHandler\ApplyLowestPriceOnChannelPricingsHandler`                     | `sylius.command_handler.price_history.apply_lowest_price_on_channel_pricings`                       |
     | `Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\CreateLogEntryOnPriceChangeObserver`                          | `sylius.entity_observer.price_history.create_log_entry_on_price_change`                             |
     | `Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelChangeObserver`                   | `sylius.entity_observer.price_history.process_lowest_prices_on_channel_change`                      |
     | `Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver` | `sylius.entity_observer.price_history.process_lowest_prices_on_channel_price_history_config_change` |
@@ -348,14 +349,11 @@
     | `sylius.orders_totals_provider.day`                                                                                 | `sylius.provider.statistics.orders_totals.day`                                                      |
     | `sylius.orders_totals_provider.month`                                                                               | `sylius.provider.statistics.orders_totals.month`                                                    |
     | `sylius.orders_totals_provider.year`                                                                                | `sylius.provider.statistics.orders_totals.year`                                                     |
-    | `sylius.shipping_calculator.flat_rate`                                                                              | `sylius.calculator.shipping.flat_rate`                                                              |
-    | `sylius.shipping_calculator.per_unit_rate`                                                                          | `sylius.calculator.shipping.per_unit_rate`                                                          |
     | `sylius.shipping_method_rule_checker.order_total_greater_than_or_equal`                                             | `sylius.checker.shipping_method_rule.order_total_greater_than_or_equal`                             |
     | `sylius.shipping_method_rule_checker.order_total_less_than_or_equal`                                                | `sylius.checker.shipping_method_rule.order_total_less_than_or_equal`                                |
     | `sylius.state_resolver.order_checkout`                                                                              | `sylius.state_resolver.checkout`                                                                    |
     | `sylius.taxation.order_shipment_taxes_applicator`                                                                   | `sylius.applicator.taxation.order_shipment`                                                         |
     | `sylius.taxation.order_items_taxes_applicator`                                                                      | `sylius.applicator.taxation.order_items`                                                            |
-    | `sylius.taxation.order_item_units_taxes_applicator`                                                                 | `sylius.applicator.taxation.order_item_units`                                                       |
     | `sylius.taxation.order_item_units_taxes_applicator`                                                                 | `sylius.applicator.taxation.order_item_units`                                                       |
     | `sylius.taxation.order_items_based_strategy`                                                                        | `sylius.strategy.taxation.tax_calculation.order_items_based`                                        |
     | `sylius.taxation.order_item_units_based_strategy`                                                                   | `sylius.strategy.taxation.tax_calculation.order_item_units_based`                                   |
@@ -371,12 +369,10 @@
     | `sylius.invoice_number_generator`                                                                                   | `sylius.generator.invoice_number`                                                                   |
     | `sylius.image_uploader`                                                                                             | `sylius.uploader.image`                                                                             |
     | `Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter`                                               | `sylius.adapter.filesystem.flysystem`                                                               |
-    | `Sylius\Component\Core\Generator\ImagePathGeneratorInterface`                                                       | `sylius.generator.image_path`                                                                       |
     | `Sylius\Bundle\CoreBundle\Collector\CartCollector`                                                                  | `sylius.collector.cart`                                                                             |
     | `sylius.shipping_methods_resolver.zones_and_channel_based`                                                          | `sylius.resolver.shipping_methods.zones_and_channel_based`                                          |
     | `sylius.payment_methods_resolver.channel_based`                                                                     | `sylius.resolver.payment_methods.channel_based`                                                     |
     | `sylius.payment_method_resolver.default`                                                                            | `sylius.resolver.payment_method.default`                                                            |
-    | `sylius.shipping_method_resolver.default`                                                                           | `sylius.resolver.shipping_method.default`                                                           |
     | `sylius.taxation_address_resolver`                                                                                  | `sylius.resolver.taxation_address`                                                                  |
     | `sylius.inventory.order_item_availability_checker`                                                                  | `sylius.checker.inventory.order_item_availability`                                                  |
     | `sylius.inventory.order_inventory_operator`                                                                         | `sylius.operator.inventory.order_inventory`                                                         |
@@ -386,8 +382,8 @@
     | `sylius.customer_unique_address_adder`                                                                              | `sylius.adder.customer.unique_address`                                                              |
     | `sylius.customer_order_addresses_saver`                                                                             | `sylius.saver.customer.order_addresses`                                                             |
     | `sylius.order_item_quantity_modifier.limiting`                                                                      | `sylius.modifier.cart.limiting_order_item_quantity`                                                 |
-    | `sylius.customer_ip_assigner`                                                                                       | `sylius.section_resolver.uri_based`                                                                 |
-    | `sylius.section_resolver.uri_based_section_resolver`                                                                | `sylius.assigner.customer_id`                                                                       |
+    | `sylius.customer_ip_assigner`                                                                                       | `sylius.assigner.customer_id`                                                                       |
+    | `sylius.section_resolver.uri_based_section_resolver`                                                                | `sylius.section_resolver.uri_based`                                                                 |
     | `sylius.reviewer_reviews_remover`                                                                                   | `sylius.remover.reviewer_reviews`                                                                   |
     | `sylius.unpaid_orders_state_updater`                                                                                | `sylius.updater.unpaid_orders_state`                                                                |
     | `sylius.order_payment_provider`                                                                                     | `sylius.provider.payment.order`                                                                     |
@@ -494,12 +490,14 @@
     | `sylius.shipping_methods_resolver`                                                                                  | `sylius.resolver.shipping_methods`                                                                  |
     | `sylius.shipping_methods_resolver.default`                                                                          | `sylius.resolver.shipping_methods.default`                                                          |
     | `sylius.shipping_method_resolver.default`                                                                           | `sylius.resolver.shipping_method.default`                                                           |
+    | `sylius.shipping_calculator.flat_rate`                                                                              | `sylius.calculator.shipping.flat_rate`                                                              |
+    | `sylius.shipping_calculator.per_unit_rate`                                                                          | `sylius.calculator.shipping.per_unit_rate`                                                          |
     | `sylius.shipping_date_assigner`                                                                                     | `sylius.assigner.shipping_date`                                                                     |
-    | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                            | `sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal`                            |
-    | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                               | `sylius.rule_checker.shipping_method.total_weight_less_than_or_equal`                               |
+    | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                            | `sylius.checker.shipping_method_rule.total_weight_greater_than_or_equal`                            |
+    | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                               | `sylius.checker.shipping_method_rule.total_weight_less_than_or_equal`                               |
     | **ShopBundle**                                                                                                      |                                                                                                     |
     | `sylius.shop.locale_switcher`                                                                                       | `sylius_shop.locale_switcher`                                                                       |
-    | `sylius.storage.locale`                                                                                             | `sylius_shop.locale_storage`                                                                        |
+    | `sylius.storage.locale`                                                                                             | `sylius_shop.storage.locale`                                                                        |
     | `sylius.context.locale.storage_based`                                                                               | `sylius_shop.context.locale.storage_based`                                                          |
     | `sylius.shop.locale_stripping_router`                                                                               | `sylius_shop.router.locale_stripping`                                                               |
     | `sylius.listener.non_channel_request_locale`                                                                        | `sylius_shop.listener.non_channel_locale`                                                           |
@@ -576,7 +574,6 @@
     | `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface`                          | `sylius.processor.catalog_promotion.removal`                                         |
     | `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface`                                         | `sylius.checker.product_variant_lowest_price_display`                                |
     | `Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface`    | `sylius.command_dispatcher.price_history.apply_lowest_price_on_channel_pricings`     |
-    | `Sylius\Bundle\CoreBundle\PriceHistory\CommandHandler\ApplyLowestPriceOnChannelPricingsHandler`                          | `sylius.command_handler.price_history.apply_lowest_price_on_channel_pricings`        |
     | `Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface`                                                | `sylius.logger.price_history.price_change`                                           |
     | `Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface`                     | `sylius.processor.price_history.product_lowest_price_before_discount`                |
     | `Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface`                                                      | `sylius.calculator.delay_stamp`                                                      |
@@ -593,6 +590,7 @@
     | `Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface`                                     | `sylius.provider.statistics.business_activity_summary`                               |
     | `Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface`                                             | `sylius.provider.statistics.sales`                                                   |
     | `Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface`                                                     | `sylius.distributor.minimum_price`                                                   |
+    | `Sylius\Component\Core\Generator\ImagePathGeneratorInterface`                                                            | `sylius.generator.image_path`                                                        |
     | `Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface`                                 | `sylius.remover.channel_pricing_log_entries`                                         |
     | `Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface`                                                    | `sylius.remover.payment.order`                                                       |
     | `Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface`                                                | `sylius.resolver.cart.created_by_guest_flag`                                         |
@@ -630,6 +628,9 @@
 
 1. The following class definitions will be moved to `PromotionBundle` in Sylius 2.0:
     - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType`
+
+1. The following class will be moved to `ShopBundle` in Sylius 2.0:
+    - `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext`
 
 1. The following form extensions have been deprecated and will be removed in Sylius 2.0:
     - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension`
@@ -779,7 +780,6 @@
     - `Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface`
     - `api_platform.action.post_item`
     - **CoreBundle**
-    - `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext`
     - `Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension`
     - `Sylius\Bundle\CoreBundle\Form\Extension\CustomerTypeExtension`
     - `Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension`
