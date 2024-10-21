@@ -134,8 +134,8 @@ final class ChannelBasedProductTranslationProviderTest extends TestCase
     private function createProductTranslation(ProductInterface $product, string $localeCode, string $slug = ''): ProductTranslationInterface
     {
         $productTranslation = new ProductTranslation();
-        $productTranslation->setTranslatable($product);
         $productTranslation->setLocale($localeCode);
+        $productTranslation->setTranslatable($product);
         $productTranslation->setSlug($slug);
 
         return $productTranslation;

@@ -1711,21 +1711,6 @@ parameters:
 			path: src/Sylius/Bundle/UiBundle/Storage/FilterStorageInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\LegacySonataBlockExtension\\:\\:__construct\\(\\) has parameter \\$whitelistedVariables with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Twig/LegacySonataBlockExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\LegacySonataBlockExtension\\:\\:getWhitelistedVariables\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Twig/LegacySonataBlockExtension.php
-
-		-
-			message: "#^Property Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\LegacySonataBlockExtension\\:\\:\\$whitelistedVariables type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Twig/LegacySonataBlockExtension.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Twig\\\\RedirectPathExtension\\:\\:hasAdditionalParameters\\(\\) has parameter \\$routeInfo with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UiBundle/Twig/RedirectPathExtension.php
