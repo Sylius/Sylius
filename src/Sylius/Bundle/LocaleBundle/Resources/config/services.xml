@@ -38,7 +38,7 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext">
+        <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext" public="true">
             <argument>%sylius_locale.locale%</argument>
         </service>
         <service id="Sylius\Component\Locale\Context\LocaleContextInterface" alias="sylius.context.locale" />
