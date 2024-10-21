@@ -28,8 +28,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.distributor.integer" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\IntegerDistributorInterface" alias="sylius.distributor.integer" />
 
@@ -60,7 +58,7 @@
         />
         <service id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface" alias="sylius.generator.image_path" />
 
-        <service id="sylius.collector.core" class="Sylius\Bundle\CoreBundle\Collector\SyliusCollector" public="false">
+        <service id="sylius.collector.core" class="Sylius\Bundle\CoreBundle\Collector\SyliusCollector">
             <argument type="service" id="sylius.context.shopper" />
             <argument>%kernel.bundles%</argument>
             <argument>%locale%</argument>
@@ -116,17 +114,17 @@
             <argument type="service" id="sylius.manager.product_variant" />
         </service>
 
-        <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256" public="false">
+        <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256">
             <argument type="service" id="sylius.custom_factory.order_item.inner" />
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="sylius.modifier.order_item_quantity" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
-        <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
+        <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256">
             <argument type="service" id="sylius.custom_factory.address.inner" />
         </service>
 
-        <service id="sylius.custom_factory.channel" class="Sylius\Component\Core\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256" public="false">
+        <service id="sylius.custom_factory.channel" class="Sylius\Component\Core\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256">
             <argument type="service" id="sylius.custom_factory.channel.inner" />
             <argument>order_items_based</argument>
             <argument type="service" id="sylius.factory.channel_price_history_config" />
@@ -142,7 +140,7 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.twig.extension.checkout_steps" class="Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension" public="false">
+        <service id="sylius.twig.extension.checkout_steps" class="Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension">
             <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
             <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
             <tag name="twig.extension" />
@@ -233,12 +231,12 @@
             <argument type="service" id="sylius.manager.order_sequence" />
         </service>
 
-        <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
+        <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler">
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-        <service id="sylius.custom_resource_controller.resource_delete_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">
+        <service id="sylius.custom_resource_controller.resource_delete_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler">
             <argument type="service" id="sylius.custom_resource_controller.resource_delete_handler.inner" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>

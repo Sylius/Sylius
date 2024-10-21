@@ -38,8 +38,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.type.checkout.address" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType">
             <argument type="service" id="sylius.comparator.address" />
             <argument>%sylius.model.order.class%</argument>
