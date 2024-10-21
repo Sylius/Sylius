@@ -56,7 +56,7 @@
         "knplabs/knp-menu-bundle": "^3.4",
         "laminas/laminas-stdlib": "^3.19",
         "league/flysystem-bundle": "^3.3",
-        "lexik/jwt-authentication-bundle": "^3.1",
+        "lexik/jwt-authentication-bundle": "^2.21",
         "liip/imagine-bundle": "^2.13",
         "pagerfanta/pagerfanta": "^4.0",
         "payum/offline": "^1.7.5",
