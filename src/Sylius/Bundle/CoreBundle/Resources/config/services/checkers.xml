@@ -41,6 +41,6 @@
         >
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion_coupon.channel" alias="sylius.promotion_coupon_channels_eligibility_checker" />
+        <service id="sylius.checker.promotion_coupon.channel_eligibility" alias="sylius.promotion_coupon_channels_eligibility_checker" />
     </services>
 </container>
