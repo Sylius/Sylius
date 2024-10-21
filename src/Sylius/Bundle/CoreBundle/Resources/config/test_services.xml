@@ -43,6 +43,6 @@
             <argument>%locale%</argument>
         </service>
 
-        <service id="sylius.liip.filter_service" alias="liip_imagine.service.filter" public="true" />
+        <service id="sylius.liip.filter_service" alias="liip_imagine.service.filter" />
     </services>
 </container>

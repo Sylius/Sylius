@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius_api.denormalizer.address" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\AddressDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
             <argument type="string">%sylius.model.address.class%</argument>

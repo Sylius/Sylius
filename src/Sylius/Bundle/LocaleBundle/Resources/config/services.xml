@@ -23,8 +23,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.type.locale" class="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType">
             <argument>%sylius.model.locale.class%</argument>
             <argument>%sylius.form.type.locale.validation_groups%</argument>
@@ -40,7 +38,7 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext">
+        <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext" public="true">
             <argument>%sylius_locale.locale%</argument>
         </service>
         <service id="Sylius\Component\Locale\Context\LocaleContextInterface" alias="sylius.context.locale" />
@@ -77,7 +75,7 @@
             <tag name="kernel.event_listener" event="kernel.request" priority="4" />
         </service>
 
-        <service id="sylius.twig.extension.locale" class="Sylius\Bundle\LocaleBundle\Twig\LocaleExtension" public="false">
+        <service id="sylius.twig.extension.locale" class="Sylius\Bundle\LocaleBundle\Twig\LocaleExtension">
             <argument type="service" id="sylius.converter.locale" />
             <argument type="service" id="sylius.context.locale" />
             <tag name="twig.extension" />

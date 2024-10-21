@@ -29,8 +29,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.type.taxon" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType">
             <argument>%sylius.model.taxon.class%</argument>
             <argument>%sylius.form.type.taxon.validation_groups%</argument>

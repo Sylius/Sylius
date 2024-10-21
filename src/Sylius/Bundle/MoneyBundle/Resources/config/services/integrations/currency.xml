@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.twig.extension.convert_money" class="Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension" public="false">
             <argument type="service" id="sylius.converter.currency" />
             <tag name="twig.extension" />

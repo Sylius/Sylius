@@ -21,5 +21,10 @@
   "engines": {
     "node": "^20 || ^22"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "tom-select": "^2.2.2"
+  }
 }

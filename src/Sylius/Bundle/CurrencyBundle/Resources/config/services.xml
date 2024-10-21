@@ -21,9 +21,7 @@
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" decoration-priority="256" public="false" />
+        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" decoration-priority="256" />
 
         <service id="sylius.converter.currency" class="Sylius\Component\Currency\Converter\CurrencyConverter">
             <argument type="service" id="sylius.repository.exchange_rate" />
@@ -33,7 +31,7 @@
         <service id="sylius.converter.currency_name" class="Sylius\Component\Currency\Converter\CurrencyNameConverter" />
         <service id="Sylius\Component\Currency\Converter\CurrencyNameConverterInterface" alias="sylius.converter.currency_name" />
 
-        <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension" public="false">
+        <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension">
             <tag name="twig.extension" />
         </service>
 

@@ -18,8 +18,6 @@
 >
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius_payum.context.payment_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContext" />
         <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface" alias="sylius_payum.context.payment_request" />
     </services>

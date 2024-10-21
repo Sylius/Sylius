@@ -18,9 +18,7 @@
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" decoration-priority="256" public="false">
+        <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" decoration-priority="256">
             <argument type="service" id="sylius.custom_factory.taxon.inner" />
         </service>
         <service id="Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface" alias="sylius.custom_factory.taxon" />

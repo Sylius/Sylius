@@ -38,8 +38,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form_registry.shipping_calculator" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
         <service id="sylius.form.type.shipping_method" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType">

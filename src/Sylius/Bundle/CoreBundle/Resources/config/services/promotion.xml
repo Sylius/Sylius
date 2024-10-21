@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.custom_factory.promotion_action" class="Sylius\Component\Core\Factory\PromotionActionFactory" decorates="sylius.factory.promotion_action" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.promotion_action.inner" />
         </service>
@@ -132,11 +130,11 @@
         <service id="sylius.applicator.promotion.units_adjustments" alias="sylius.promotion.units_promotion_adjustments_applicator" />
         <service id="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface" alias="sylius.promotion.units_promotion_adjustments_applicator" />
 
-        <service id="sylius.promotion_usage_modifier" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier">
+        <service id="sylius.promotion_usage_modifier" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier" public="true">
             <argument type="service" id="sylius.manager.promotion" />
         </service>
-        <service id="sylius.modifier.promotion.order_usage" alias="sylius.promotion_usage_modifier" />
-        <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.promotion_usage_modifier" />
+        <service id="sylius.modifier.promotion.order_usage" alias="sylius.promotion_usage_modifier" public="true" />
+        <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.promotion_usage_modifier" public="true" />
 
         <service id="sylius.promotion_rule_updater.has_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\HasTaxonRuleUpdater">
             <argument type="service" id="sylius.repository.promotion_rule" />
