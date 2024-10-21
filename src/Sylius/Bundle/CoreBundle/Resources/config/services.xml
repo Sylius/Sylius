@@ -298,11 +298,11 @@
         </service>
         <service id="sylius.resetter.user_password.shop" alias="sylius.user_password_resetter.shop" />
 
-        <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
+        <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver" public="true">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.provider.customer" />
         </service>
-        <service id="sylius.resolver.customer" alias="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
+        <service id="sylius.resolver.customer" alias="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" public="true" />
 
         <service id="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistryInterface" class="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistry">
             <argument type="tagged_iterator" index-by="type" tag="sylius.statistics.orders_totals_provider" />
