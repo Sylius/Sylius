@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.calculator.average_rating" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />
     </services>
 </container>
