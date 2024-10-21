@@ -142,7 +142,8 @@
         "twig/intl-extra": "^3.13.0",
         "twig/string-extra": "^3.13.0",
         "twig/twig": "^3.14.0",
-        "webmozart/assert": "^1.9"
+        "webmozart/assert": "^1.9",
+        "winzou/state-machine-bundle": "^0.6"
     },
     "replace": {
         "sylius/addressing": "self.version",

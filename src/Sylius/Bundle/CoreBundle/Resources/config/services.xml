@@ -108,19 +108,19 @@
         </service>
         <service id="sylius.resolver.taxation_address" alias="sylius.taxation_address_resolver" />
 
-        <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
+        <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext" public="true">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />
         </service>
-        <service id="Sylius\Component\Customer\Context\CustomerContextInterface" alias="sylius.context.customer" />
+        <service id="Sylius\Component\Customer\Context\CustomerContextInterface" alias="sylius.context.customer" public="true" />
 
         <service id="sylius.inventory.order_item_availability_checker" class="Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityChecker"/>
         <service id="sylius.checker.inventory.order_item_availability" alias="sylius.inventory.order_item_availability_checker" />
         <service id="Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityCheckerInterface" alias="sylius.inventory.order_item_availability_checker" />
 
-        <service id="sylius.inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator"/>
-        <service id="sylius.operator.inventory.order_inventory" alias="sylius.inventory.order_inventory_operator" />
-        <service id="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface" alias="sylius.inventory.order_inventory_operator" />
+        <service id="sylius.inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator" public="true"/>
+        <service id="sylius.operator.inventory.order_inventory" alias="sylius.inventory.order_inventory_operator" public="true" />
+        <service id="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface" alias="sylius.inventory.order_inventory_operator" public="true" />
 
         <service id="sylius.custom_inventory.order_inventory_operator" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator" decorates="sylius.inventory.order_inventory_operator">
             <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
@@ -144,10 +144,10 @@
             <argument type="service" id="sylius.factory.channel_price_history_config" />
         </service>
 
-        <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory">
+        <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory" public="true">
             <argument type="service" id="sylius.factory.customer" />
         </service>
-        <service id="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface" alias="sylius.factory.customer_after_checkout" />
+        <service id="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface" alias="sylius.factory.customer_after_checkout" public="true" />
 
         <service id="Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension">
             <argument type="service" id="sylius.provider.product_variant_map" />
@@ -161,11 +161,11 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.unique_id_based_order_token_assigner" class="Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner">
+        <service id="sylius.unique_id_based_order_token_assigner" class="Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner" public="true">
             <argument type="service" id="sylius.random_generator" />
             <argument>%sylius_core.order_token_length%</argument>
         </service>
-        <service id="sylius.assigner.order_token.unique_id_based" alias="sylius.unique_id_based_order_token_assigner" />
+        <service id="sylius.assigner.order_token.unique_id_based" alias="sylius.unique_id_based_order_token_assigner" public="true" />
         <service id="Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface" alias="sylius.unique_id_based_order_token_assigner" />
 
         <service id="sylius.customer_unique_address_adder" class="Sylius\Component\Core\Customer\CustomerUniqueAddressAdder">
@@ -174,11 +174,11 @@
         <service id="sylius.adder.customer.unique_address" alias="sylius.customer_unique_address_adder" />
         <service id="Sylius\Component\Core\Customer\CustomerAddressAdderInterface" alias="sylius.customer_unique_address_adder" />
 
-        <service id="sylius.customer_order_addresses_saver" class="Sylius\Component\Core\Customer\CustomerOrderAddressesSaver">
+        <service id="sylius.customer_order_addresses_saver" class="Sylius\Component\Core\Customer\CustomerOrderAddressesSaver" public="true">
             <argument type="service" id="sylius.adder.customer.unique_address" />
         </service>
-        <service id="sylius.saver.customer.order_addresses" alias="sylius.customer_order_addresses_saver" />
-        <service id="Sylius\Component\Core\Customer\OrderAddressesSaverInterface" alias="sylius.customer_order_addresses_saver" />
+        <service id="sylius.saver.customer.order_addresses" alias="sylius.customer_order_addresses_saver" public="true" />
+        <service id="Sylius\Component\Core\Customer\OrderAddressesSaverInterface" alias="sylius.customer_order_addresses_saver" public="true" />
 
         <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.modifier.order_item_quantity" decoration-priority="256">
             <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
@@ -266,9 +266,9 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-        <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" />
-        <service id="sylius.setter.order.item_names" alias="sylius.order_item_names_setter" />
-        <service id="Sylius\Component\Core\Order\OrderItemNamesSetterInterface" alias="sylius.order_item_names_setter" />
+        <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" public="true" />
+        <service id="sylius.setter.order.item_names" alias="sylius.order_item_names_setter" public="true" />
+        <service id="Sylius\Component\Core\Order\OrderItemNamesSetterInterface" alias="sylius.order_item_names_setter" public="true" />
 
         <service id="sylius.grid_filter.resource_autocomplete" class="Sylius\Component\Core\Grid\Filter\ResourceAutocompleteFilter">
             <tag name="sylius.grid_filter" type="resource_autocomplete" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\ResourceAutocompleteFilterType" />
@@ -309,7 +309,7 @@
         </service>
         <service id="sylius.registry.statistics.orders_totals_providers" alias="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistryInterface" />
 
-        <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />
-        <service id="sylius.positioner" alias="Sylius\Component\Core\Positioner\PositionerInterface" />
+        <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" public="true" />
+        <service id="sylius.positioner" alias="Sylius\Component\Core\Positioner\PositionerInterface" public="true" />
     </services>
 </container>

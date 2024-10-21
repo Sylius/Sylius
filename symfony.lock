@@ -352,9 +352,6 @@
     "php-http/message": {
         "version": "1.7.0"
     },
-    "php-http/message-factory": {
-        "version": "v1.0.2"
-    },
     "phparkitect/phparkitect": {
         "version": "0.2.9"
     },
@@ -984,5 +981,8 @@
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
+    },
+    "winzou/state-machine-bundle": {
+        "version": "v0.6.2"
     }
 }
