@@ -15,14 +15,6 @@
             "@id": "\/api\/v2\/admin\/channel-pricing-log-entries\/@integer@",
             "@type": "ChannelPricingLogEntry",
             "channelPricing": "\/api\/v2\/admin\/product-variants\/@string@\/channel-pricings\/@string@",
-            "price": 1000,
-            "originalPrice": 2000,
-            "loggedAt": "@date@"
-        },
-        {
-            "@id": "\/api\/v2\/admin\/channel-pricing-log-entries\/@integer@",
-            "@type": "ChannelPricingLogEntry",
-            "channelPricing": "\/api\/v2\/admin\/product-variants\/@string@\/channel-pricings\/@string@",
             "price": 3000,
             "originalPrice": null,
             "loggedAt": "@date@"
@@ -33,6 +25,14 @@
             "channelPricing": "\/api\/v2\/admin\/product-variants\/@string@\/channel-pricings\/@string@",
             "price": 2000,
             "originalPrice": null,
+            "loggedAt": "@date@"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/channel-pricing-log-entries\/@integer@",
+            "@type": "ChannelPricingLogEntry",
+            "channelPricing": "\/api\/v2\/admin\/product-variants\/@string@\/channel-pricings\/@string@",
+            "price": 1000,
+            "originalPrice": 2000,
             "loggedAt": "@date@"
         }
     ],
