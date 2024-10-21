@@ -35,7 +35,6 @@
         "symfony/framework-bundle": "^6.4.1 || ^7.1",
         "symfony/security-bundle": "^6.4 || ^7.1",
         "symfony/webpack-encore-bundle": "^2.2",
-        "twig/intl-extra": "^3.13",
         "twig/twig": "^3.14"
     },
     "require-dev": {
