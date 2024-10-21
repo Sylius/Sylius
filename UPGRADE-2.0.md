@@ -145,6 +145,20 @@
 | **PaymentBundle**                                                                                          |                                                                                      |
 | `sylius.payment_methods_resolver`                                                                          | `sylius.resolver.payment_methods`                                                    |
 | `sylius.payment_methods_resolver.default`                                                                  | `sylius.resolver.payment_methods.default`                                            |
+| **PayumBundle**                                                                                            |                                                                                      |
+| `sylius.payum_action.authorize_payment`                                                                    | `sylius_payum.action.authorize_payment`                                              |
+| `sylius.payum_action.capture_payment`                                                                      | `sylius_payum.action.capture_payment`                                                |
+| `sylius.payum_action.execute_same_request_with_payment_details`                                            | `sylius_payum.action.execute_same_request_with_payment_details`                      |
+| `sylius.payum_action.resolve_next_route`                                                                   | `sylius_payum.action.resolve_next_route`                                             |
+| `sylius.payum_action.offline.convert_payment`                                                              | `sylius_payum.action.offline.convert_payment`                                        |
+| `sylius.payum_action.offline.status`                                                                       | `sylius_payum.action.offline.status`                                                 |
+| `sylius.payum_action.offline.resolve_next_route`                                                           | `sylius_payum.action.offline.resolve_next_route`                                     |
+| `sylius.payum_extension.update_payment_state`                                                              | `sylius_payum.extension.update_payment_state`                                        |
+| `sylius.factory.payum_get_status_action`                                                                   | `sylius_payum.factory.get_status`                                                    |
+| `sylius.factory.payum_resolve_next_route`                                                                  | `sylius_payum.factory.resolve_next_route`                                            |
+| `sylius.form.extension.type.gateway_config.crypted`                                                        | `sylius_payum.form.extension.type.crypted_gateway_config`                            |
+| `sylius.payment_description_provider`                                                                      | `sylius_payum.provider.payment_description`                                          |
+| `sylius.payum.http_client`                                                                                 | `sylius_payum.http_client`                                                           |
 | **ProductBundle**                                                                                          |                                                                                      |
 | `sylius.form.type.sylius_product_associations`                                                             | `sylius.form.type.product_associations`                                              |
 | `sylius.form.event_subscriber.product_variant_generator`                                                   | `sylius.form.event_subscriber.generate_product_variants`                             |
@@ -745,6 +759,10 @@ If your app never changed the hasher name configuration, you don't need to confi
     * `Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder`
     * `Sylius\Bundle\AdminBundle\Menu\ProductUpdateMenuBuilder`
     * `Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder`
+    * `Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction`
+    * `Sylius\Bundle\PayumBundle\Controller\PayumController`
+    * `Sylius\Bundle\PayumBundle\Form\Type\PaypalGatewayConfigurationType`
+    * `Sylius\Bundle\PayumBundle\Form\Type\StripeGatewayConfigurationType`
     * `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
     * `Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider`
     * `Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface`
