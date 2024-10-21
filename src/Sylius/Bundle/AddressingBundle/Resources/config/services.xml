@@ -23,9 +23,7 @@
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.custom_factory.zone" class="Sylius\Component\Addressing\Factory\ZoneFactory" decorates="sylius.factory.zone" decoration-priority="256" public="false">
+        <service id="sylius.custom_factory.zone" class="Sylius\Component\Addressing\Factory\ZoneFactory" decorates="sylius.factory.zone" decoration-priority="256">
             <argument type="service" id="sylius.custom_factory.zone.inner" />
             <argument type="service" id="sylius.factory.zone_member" />
         </service>
