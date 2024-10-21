@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.twig.extension.aggregate_adjustments" class="Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension" public="false">
             <argument type="service" id="sylius.aggregator.adjustments_by_label" />
             <tag name="twig.extension" />
