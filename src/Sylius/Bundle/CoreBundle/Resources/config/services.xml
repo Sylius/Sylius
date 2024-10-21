@@ -270,11 +270,11 @@
             <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
         </service>
 
-        <service id="sylius.resolver.customer" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
+        <service id="sylius.resolver.customer" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver" public="true">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.provider.customer" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" alias="sylius.resolver.customer" />
+        <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" alias="sylius.resolver.customer" public="true" />
 
         <service id="sylius.registry.statistics.orders_totals_providers" class="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistry">
             <argument type="tagged_iterator" index-by="type" tag="sylius.statistics.orders_totals_provider" />
