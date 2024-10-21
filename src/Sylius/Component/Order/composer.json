@@ -27,12 +27,12 @@
     ],
     "require": {
         "php": "^8.2",
+        "laminas/laminas-stdlib": "^3.19",
         "sylius/resource": "^1.12",
-        "webmozart/assert": "^1.9",
-        "laminas/laminas-stdlib": "^3.3.1"
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
+        "phpspec/phpspec": "^7.5"
     },
     "config": {
         "allow-plugins": {

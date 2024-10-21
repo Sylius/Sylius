@@ -80,9 +80,6 @@ liip_imagine:
             filters:
                 thumbnail: { size: [550, 412], mode: outbound }
 
-sonata_block:
-    default_contexts: ~
-
 sylius_twig_hooks:
     enable_autoprefixing: true
     hook_name_section_separator: '#'
