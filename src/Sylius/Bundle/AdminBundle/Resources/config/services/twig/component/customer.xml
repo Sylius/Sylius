@@ -22,7 +22,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Customer\OrderStatisticsComponent"
         >
             <argument type="service" id="sylius.repository.customer" />
-            <argument type="service" id="sylius.customer_statistics_provider" />
+            <argument type="service" id="sylius.provider.statistics.customer" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:customer:order_statistics"
             />

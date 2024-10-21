@@ -29,7 +29,7 @@ final class CatalogPromotionRemovalAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer */
-        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface');
+        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('sylius.announcer.catalog_promotion.removal');
         $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval($catalogPromotion);
 
         $this->assertSame('processing', $catalogPromotion->getState());
@@ -43,7 +43,7 @@ final class CatalogPromotionRemovalAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer */
-        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface');
+        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('sylius.announcer.catalog_promotion.removal');
         $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval($catalogPromotion);
 
         $this->assertNull(self::$kernel->getContainer()->get('sylius.repository.catalog_promotion')->findOneBy(['code' => $catalogPromotion->getCode()]));

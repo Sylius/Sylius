@@ -136,7 +136,8 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
         $this->load();
 
-        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, FlysystemFilesystemAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.adapter.filesystem.default', 'sylius.adapter.filesystem.flysystem');
+        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, 'sylius.adapter.filesystem.default');
     }
 
     /** @test */
@@ -146,7 +147,8 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
         $this->load(['filesystem' => ['adapter' => 'flysystem']]);
 
-        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, FlysystemFilesystemAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.adapter.filesystem.default', 'sylius.adapter.filesystem.flysystem');
+        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, 'sylius.adapter.filesystem.default');
     }
 
     /** @test */

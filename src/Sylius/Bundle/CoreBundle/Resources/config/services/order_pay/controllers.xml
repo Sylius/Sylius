@@ -18,7 +18,7 @@
 >
     <services>
 
-        <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Controller\OrderPayController" class="Sylius\Bundle\CoreBundle\OrderPay\Controller\OrderPayController">
+        <service abstract="true" id="sylius.controller.order_pay" class="Sylius\Bundle\CoreBundle\OrderPay\Controller\OrderPayController">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service">
                 <service class="Sylius\Component\Resource\Metadata\MetadataInterface">

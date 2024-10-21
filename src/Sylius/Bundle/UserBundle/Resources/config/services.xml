@@ -73,12 +73,11 @@
             <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
 
-        <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\UserBundle\EventListener\MailerListener">
+        <service id="sylius.listener.user_mailer" class="Sylius\Bundle\UserBundle\EventListener\MailerListener">
             <argument type="service" id="sylius.email_sender" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
             <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
         </service>
-        <service id="sylius.listener.user_mailer" alias="sylius.listener.user_mailer_listener" />
 
         <!-- Forms -->
         <service id="sylius.form.type.user_login" class="Sylius\Bundle\UserBundle\Form\Type\UserLoginType">

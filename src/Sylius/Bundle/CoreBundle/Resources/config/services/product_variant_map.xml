@@ -18,39 +18,34 @@
 >
     <services>
         <service
-            id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface"
+            id="sylius.provider.product_variant_map"
             class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider"
         >
             <argument type="tagged_iterator" tag="sylius.product_variant_data_map_provider" />
         </service>
-        <service id="sylius.provider.product_variant_map" alias="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface" />
+        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface" alias="sylius.provider.product_variant_map" />
 
-        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOptionsMapProvider">
+        <service id="sylius.provider.product_variant_map.options" class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOptionsMapProvider">
             <tag name="sylius.product_variant_data_map_provider" />
         </service>
-        <service id="sylius.provider.product_variant_map.options" alias="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOptionsMapProvider" />
 
-        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantPriceMapProvider">
+        <service id="sylius.provider.product_variant_map.price" class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantPriceMapProvider">
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <tag name="sylius.product_variant_data_map_provider" />
         </service>
-        <service id="sylius.provider.product_variant_map.price" alias="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantPriceMapProvider" />
 
-        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOriginalPriceMapProvider">
+        <service id="sylius.provider.product_variant_map.original_price" class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOriginalPriceMapProvider">
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <tag name="sylius.product_variant_data_map_provider" />
         </service>
-        <service id="sylius.provider.product_variant_map.original_price" alias="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOriginalPriceMapProvider" />
 
-        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantAppliedPromotionsMapProvider">
+        <service id="sylius.provider.product_variant_map.applied_promotions" class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantAppliedPromotionsMapProvider">
             <tag name="sylius.product_variant_data_map_provider" />
         </service>
-        <service id="sylius.provider.product_variant_map.applied_promotions" alias="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantAppliedPromotionsMapProvider" />
 
-        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantLowestPriceMapProvider">
+        <service id="sylius.provider.product_variant_map.lowest_price" class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantLowestPriceMapProvider">
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <tag name="sylius.product_variant_data_map_provider" />
         </service>
-        <service id="sylius.provider.product_variant_map.lowest_price" alias="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantLowestPriceMapProvider" />
     </services>
 </container>

@@ -31,7 +31,7 @@ final class CartCollectorTest extends KernelTestCase
     {
         $this->loadFixtures([]);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect(new Request(), new Response());
 
         $this->assertFalse($collector->hasCart());
@@ -42,7 +42,7 @@ final class CartCollectorTest extends KernelTestCase
     {
         $this->loadFixtures([__DIR__ . '/../DataFixtures/ORM/resources/order.yml']);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect(new Request(), new Response());
 
         $this->assertFalse($collector->hasCart());
@@ -62,7 +62,7 @@ final class CartCollectorTest extends KernelTestCase
         $requestStack = self::getContainer()->get('request_stack');
         $requestStack->push($request);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect($request, new Response());
 
         $this->assertFalse($collector->hasCart());
@@ -90,7 +90,7 @@ final class CartCollectorTest extends KernelTestCase
         $sessionCartStorage = self::getContainer()->get(CartStorageInterface::class);
         $sessionCartStorage->setForChannel($channel, $cart);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect($request, new Response());
 
         $this->assertFalse($collector->hasCart());
@@ -118,7 +118,7 @@ final class CartCollectorTest extends KernelTestCase
         $sessionCartStorage->setForChannel($channel, $cart);
 
         /** @var CartCollector $collector */
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect($request, new Response());
 
         $this->assertTrue($collector->hasCart());

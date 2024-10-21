@@ -67,7 +67,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sylius_shop.locale_switcher', UrlBasedLocaleSwitcher::class);
         $this->assertContainerBuilderHasService('sylius_shop.listener.non_channel_locale');
 
-        $this->assertContainerBuilderNotHasService('sylius_shop.locale_storage');
+        $this->assertContainerBuilderNotHasService('sylius_shop.storage.locale');
         $this->assertContainerBuilderNotHasService('sylius_shop.context.locale.storage_based');
     }
 
@@ -81,7 +81,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasService('sylius_shop.locale_switcher', StorageBasedLocaleSwitcher::class);
-        $this->assertContainerBuilderHasService('sylius_shop.locale_storage');
+        $this->assertContainerBuilderHasService('sylius_shop.storage.locale');
         $this->assertContainerBuilderHasService('sylius_shop.context.locale.storage_based');
 
         $this->assertContainerBuilderNotHasService('sylius_shop.listener.non_channel_locale');

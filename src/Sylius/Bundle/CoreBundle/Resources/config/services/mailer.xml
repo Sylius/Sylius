@@ -19,7 +19,7 @@
     <services>
         <defaults public="true" />
 
-    <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\CoreBundle\EventListener\MailerListener" public="false">
+    <service id="sylius.listener.user_mailer" class="Sylius\Bundle\CoreBundle\EventListener\MailerListener" public="false">
         <argument type="service" id="sylius.email_sender" />
         <argument type="service" id="sylius.context.channel" />
         <argument type="service" id="sylius.context.locale" />

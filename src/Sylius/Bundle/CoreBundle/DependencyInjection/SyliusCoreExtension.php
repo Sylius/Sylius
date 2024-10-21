@@ -24,7 +24,6 @@ use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
-use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -81,15 +80,16 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
 
         $container->setAlias(
-            FilesystemAdapterInterface::class,
+            'sylius.adapter.filesystem.default',
             match ($config['filesystem']['adapter']) {
-                'default', 'flysystem' => FlysystemFilesystemAdapter::class,
+                'default', 'flysystem' => 'sylius.adapter.filesystem.flysystem',
                 default => throw new \InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
                     $config['filesystem']['adapter'],
                 )),
             },
         );
+        $container->setAlias(FilesystemAdapterInterface::class, 'sylius.adapter.filesystem.default');
 
         $this->registerAutoconfiguration($container);
     }

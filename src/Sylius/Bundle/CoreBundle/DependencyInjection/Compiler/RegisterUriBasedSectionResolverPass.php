@@ -24,11 +24,11 @@ final class RegisterUriBasedSectionResolverPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('sylius.section_resolver.uri_based_section_resolver')) {
+        if (!$container->hasDefinition('sylius.section_resolver.uri_based')) {
             return;
         }
 
-        $uriBasedSectionResolver = $container->getDefinition('sylius.section_resolver.uri_based_section_resolver');
+        $uriBasedSectionResolver = $container->getDefinition('sylius.section_resolver.uri_based');
         $uriBasedSectionProviders = [];
 
         foreach ($container->findTaggedServiceIds('sylius.uri_based_section_resolver') as $id => $tags) {

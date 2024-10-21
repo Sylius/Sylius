@@ -17,7 +17,8 @@
 >
     <services>
 
-        <service abstract="true" id="Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface" class="Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandler" />
+        <service abstract="true" id="sylius.handler.order_pay.payment_state_flash" class="Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandler" />
+        <service id="Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface" alias="sylius.handler.order_pay.payment_state_flash" />
 
     </services>
 </container>

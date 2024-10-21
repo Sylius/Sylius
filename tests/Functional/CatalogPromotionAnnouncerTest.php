@@ -29,7 +29,7 @@ final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionAnnouncer $catalogPromotionAnnouncer */
-        $catalogPromotionAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
+        $catalogPromotionAnnouncer = self::$kernel->getContainer()->get('sylius.announcer.catalog_promotion');
         $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion);
 
         $this->assertSame('processing', $catalogPromotion->getState());
@@ -43,7 +43,7 @@ final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionAnnouncer $catalogPromotionAnnouncer */
-        $catalogPromotionAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
+        $catalogPromotionAnnouncer = self::$kernel->getContainer()->get('sylius.announcer.catalog_promotion');
         $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion);
 
         $this->assertSame('active', $catalogPromotion->getState());
