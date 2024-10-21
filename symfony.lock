@@ -294,9 +294,6 @@
     "myclabs/deep-copy": {
         "version": "1.10.1"
     },
-    "namshi/jose": {
-        "version": "7.2.3"
-    },
     "nelmio/alice": {
         "version": "3.2",
         "recipe": {
@@ -720,9 +717,6 @@
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
-    },
-    "symfony/polyfill-php56": {
-        "version": "v1.15.0"
     },
     "symfony/polyfill-php72": {
         "version": "v1.18.1"
