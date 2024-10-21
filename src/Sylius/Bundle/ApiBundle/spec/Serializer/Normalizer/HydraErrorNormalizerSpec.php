@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Serializer;
+namespace spec\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;

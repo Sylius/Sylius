@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Tests\Api\JsonApiTestCase;

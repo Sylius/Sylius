@@ -33,9 +33,9 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.search_filter.promotion</filter>
-                    <filter>sylius_api.order_filter.promotion</filter>
-                    <filter>sylius_api.exists_filter.promotion</filter>
+                    <filter>sylius_api.search_filter.admin.promotion</filter>
+                    <filter>sylius_api.order_filter.admin.promotion</filter>
+                    <filter>sylius_api.exists_filter.admin.promotion</filter>
                 </filters>
                 <order>
                     <values>

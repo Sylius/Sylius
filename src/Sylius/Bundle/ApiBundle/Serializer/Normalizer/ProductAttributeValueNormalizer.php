@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use Sylius\Component\Attribute\AttributeType\DateAttributeType;
 use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;

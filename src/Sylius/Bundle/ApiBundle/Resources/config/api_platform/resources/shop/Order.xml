@@ -51,7 +51,7 @@
                 name="sylius_api_shop_order_payment_get_configuration"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}/configuration"
-                controller="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration"
+                controller="sylius_api.controller.payment.get_payment_configuration"
             >
                 <uriVariables>
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
@@ -427,7 +427,7 @@
                 name="sylius_api_shop_order_order_item_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/shop/orders/{tokenValue}/items/{orderItemId}"
-                controller="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction"
+                controller="sylius_api.controller.delete_order_item"
             >
                 <uriVariables>
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>

@@ -32,7 +32,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         $this->setParameter('api_platform.swagger.api_keys', []);
         $this->load();
 
-        $this->assertContainerBuilderHasService('Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier');
+        $this->assertContainerBuilderHasService('sylius_api.open_api.documentation_modifier.accept_language_header');
     }
 
     /** @test */
@@ -42,7 +42,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
 
         $this->load();
 
-        $this->assertContainerBuilderNotHasService('Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier');
+        $this->assertContainerBuilderNotHasService('sylius_api.open_api.documentation_modifier.accept_language_header');
     }
 
     /** @test */

@@ -17,7 +17,7 @@ use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface;
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 
 final class ImageDocumentationModifier implements DocumentationModifierInterface
 {

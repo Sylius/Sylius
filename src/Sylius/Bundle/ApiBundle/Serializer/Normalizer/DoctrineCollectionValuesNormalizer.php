@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
