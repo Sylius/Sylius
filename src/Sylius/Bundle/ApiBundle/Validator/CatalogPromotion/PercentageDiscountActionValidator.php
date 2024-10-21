@@ -27,6 +27,7 @@ trigger_deprecation(
     'The "%s" class is deprecated and will be removed in Sylius 2.0, use the usual symfony logic for validation.',
     PercentageDiscountActionValidator::class,
 );
+
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0, use the usual symfony logic for validation. */
 final class PercentageDiscountActionValidator implements ActionValidatorInterface
 {

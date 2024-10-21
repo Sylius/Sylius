@@ -179,12 +179,28 @@
     | `Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator`                                        | `sylius_api.validator.unique_reviewer_email`                                                        |
     | `Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpiredValidator`                          | `sylius_api.validator.admin_reset_password_token_non_expired`                                       |
     | `sylius.validator.order_address_requirement`                                                                        | `sylius_api.validator.order_address_requirement`                                                    |
-    | `Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor`                                         | `sylius_api.property_info.extractor.empty_property_list`                                            |
+    | `Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor`                                         | `sylius_api.extractor.property_info.empty_property_list`                                            |
     | `Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver`                                           | `sylius_api.section_resolver.admin_api_uri_based`                                                   |
     | `Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver`                                            | `sylius_api.section_resolver.shop_api_uri_based`                                                    |
     | `Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener`                                                       | `sylius_api.listener.api_cart_blamer`                                                               |
     | `sylius.listener.api_authentication_success_listener`                                                               | `sylius_api.listener.authentication_success`                                                        |
     | `sylius.listener.admin_api_authentication_success_listener`                                                         | `sylius_api.listener.admin_authentication_success`                                                  |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory`                                                            | `sylius_api.open_api.factory`                                                                       |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier`                           | `sylius_api.open_api.documentation_modifier.accept_language_header`                                 |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdministratorDocumentationModifier`                                  | `sylius_api.open_api.documentation_modifier.administrator`                                          |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier`                                      | `sylius_api.open_api.documentation_modifier.path_hider`                                             |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier`                                  | `sylius_api.open_api.documentation_modifier.attribute_type`                                         |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier`                                        | `sylius_api.open_api.documentation_modifier.product`                                                |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier`                                          | `sylius_api.open_api.documentation_modifier.image`                                                  |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier`                                  | `sylius_api.open_api.documentation_modifier.product_review`                                         |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier`                                    | `sylius_api.open_api.documentation_modifier.product_slug`                                           |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationModifier`                                 | `sylius_api.open_api.documentation_modifier.product_variant`                                        |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier`                                 | `sylius_api.open_api.documentation_modifier.shipping_method`                                        |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\CustomerDocumentationModifier`                                       | `sylius_api.open_api.documentation_modifier.customer`                                               |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsDocumentationModifier`                                     | `sylius_api.open_api.documentation_modifier.statistics`                                             |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentationModifier`                                      | `sylius_api.open_api.documentation_modifier.promotion`                                              |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\OrderAdjustmentsTypeDocumentationModifier`                           | `sylius_api.open_api.documentation_modifier.order_adjustments`                                      |
+    | `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AddressLogEntryDocumentationModifier`                                | `sylius_api.open_api.documentation_modifier.address_log_entry`                                      |
     | **AddressingBundle**                                                                                                |                                                                                                     |
     | `sylius.province_naming_provider`                                                                                   | `sylius.provider.province_naming`                                                                   |
     | `sylius.zone_matcher`                                                                                               | `sylius.matcher.zone`                                                                               |
@@ -544,7 +560,7 @@
     | `Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface`                                                          | `sylius_api.changer.payment_method`                                                  |
     | `Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface`                                                    | `sylius_api.converter.iri_to_identifier`                                             |
     | `Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface`                                                                  | `sylius_api.mapper.address`                                                          |
-    | `Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface`                                               | `sylius_api.eligibility_checker.applied_coupon`                                      |
+    | `Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface`                                               | `sylius_api.checker.applied_coupon_eligibility`                                      |
     | `Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface`                                                         | `sylius_api.modifier.order_address`                                                  |
     | `Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface`                                                   | `sylius_api.assigner.order_promotion_code`                                           |
     | **CoreBundle**                                                                                                           |                                                                                      |
@@ -690,6 +706,7 @@
     ```
 
 1. The following services have been deprecated and will be removed in Sylius 2.0:
+    - **AdminBundle**
     - `Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController`
     - `Sylius\Bundle\AdminBundle\Menu\CustomerShowMenuBuilder`
     - `Sylius\Bundle\AdminBundle\Menu\PromotionUpdateMenuBuilder`
@@ -697,6 +714,7 @@
     - `Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder`
     - `Sylius\Bundle\AdminBundle\Menu\ProductUpdateMenuBuilder`
     - `Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder`
+    - **ApiBundle**
     - `Sylius\Bundle\ApiBundle\SerializerContextBuilder\ReadOperationContextBuilder`
     - `Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction`
     - `Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction`
@@ -760,13 +778,15 @@
     - `Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator`
     - `Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface`
     - `api_platform.action.post_item`
-    - `sylius.form_registry.payum_gateway_config`
+    - **CoreBundle**
     - `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext`
     - `Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension`
     - `Sylius\Bundle\CoreBundle\Form\Extension\CustomerTypeExtension`
     - `Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension`
     - `Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType`
     - `Sylius\Component\Core\Grid\Filter\EntitiesFilter`
+    - **PayumBundle**
+    - `sylius.form_registry.payum_gateway_config`
     - `Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction`
     - `Sylius\Bundle\PayumBundle\Controller\PayumController`
     - `Sylius\Bundle\PayumBundle\Form\Type\PaypalGatewayConfigurationType`
@@ -774,8 +794,10 @@
     - `Sylius\Bundle\PayumBundle\Validator\Constraints\GatewayFactoryExists`
     - `Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator`
     - `Sylius\Bundle\PayumBundle\Validator\GatewayFactoryExistsValidator`
+    - **ShopBundle**
     - `Sylius\Bundle\ShopBundle\Controller\HomepageController`
     - `Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController`
+    - **UiBundle**
     - `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
     - `Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider`
     - `Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface`

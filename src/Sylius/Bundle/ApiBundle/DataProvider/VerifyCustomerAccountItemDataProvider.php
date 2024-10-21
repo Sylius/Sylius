@@ -23,6 +23,7 @@ trigger_deprecation(
     'The "%s" class is deprecated and will be removed in Sylius 2.0.',
     VerifyCustomerAccountItemDataProvider::class,
 );
+
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class VerifyCustomerAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
