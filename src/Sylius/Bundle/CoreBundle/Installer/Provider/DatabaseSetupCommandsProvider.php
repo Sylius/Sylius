@@ -40,6 +40,21 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     {
         $outputStyle = new SymfonyStyle($input, $output);
 
+        if ($this->isSQLite()) {
+            $outputStyle->writeln('Sylius dont support officially SQLite, do you want to continue?');
+            $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
+
+            $question = new ConfirmationQuestion('Do you want to drop all of them? (y/N) ', false);
+            if ($questionHelper->ask($input, $output, $question)) {
+                return [
+                    'doctrine:schema:drop' => ['--force' => true],
+                    'doctrine:schema:update' => ['--force' => true],
+                ];
+            }
+
+            return [];
+        }
+
         if ($this->isSchemaHasAnyTable()) {
             $outputStyle->writeln(sprintf('The database <info>%s</info> exists and it contains some tables.', $this->getDatabaseName()));
             $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
@@ -105,5 +120,16 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         }
 
         return $this->schemaManager;
+    }
+
+    protected function isSQLite(): bool
+    {
+        $platform = $this->entityManager->getConnection()->getDatabasePlatform();
+
+        if (class_exists(\Doctrine\DBAL\Platforms\SqlitePlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\SqlitePlatform::class)) {
+            return true;
+        }
+
+        return false;
     }
 }
