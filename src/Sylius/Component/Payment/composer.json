@@ -27,6 +27,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "paragonie/halite": "^5.0",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.12",
         "symfony/uid": "^6.4.0 || ^7.1"

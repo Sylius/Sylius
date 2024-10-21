@@ -9,6 +9,8 @@ parameters:
     database_driver: pdo_sqlite
     database_path: "%kernel.project_dir%/var/db.sql"
     kernel.api_bundle_path: '%kernel.project_dir%/../../'
+    env(SYLIUS_PAYMENT_ENCRYPTION_PASSWORD): 'test-password'
+    env(SYLIUS_PAYMENT_ENCRYPTION_SALT): '9cef0eca7b496271306caf3ef94c70be'
 
 api_platform:
     enable_swagger_ui: false

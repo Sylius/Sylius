@@ -5,6 +5,8 @@ parameters:
     locale: en_US
     database_driver: pdo_sqlite
     database_path: "%kernel.project_dir%/var/db.sql"
+    env(SYLIUS_PAYMENT_ENCRYPTION_PASSWORD): 'test-password'
+    env(SYLIUS_PAYMENT_ENCRYPTION_SALT): '9cef0eca7b496271306caf3ef94c70be'
 
 framework:
     secret: "ch4mb3r0f5ecr3ts"
