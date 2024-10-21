@@ -22,44 +22,53 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory.inner" />
             <argument type="tagged_iterator" tag="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.factory" alias="Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier">
             <argument type="service" id="sylius.repository.locale" />
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.accept_language_header" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdministratorDocumentationModifier">
             <argument>%sylius.security.api_route%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.administrator" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdministratorDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier">
             <argument type="service" id="sylius.registry.attribute_type" />
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.attribute_type" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier" />
 
         <service id="sylius.api.open_api.product_documentation_modifier" class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier">
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.product" alias="sylius.api.open_api.product_documentation_modifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier">
             <argument type="service" id="sylius_api.provider.liip_image_filters" />
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.image" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier">
             <argument>%sylius.security.api_route%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.product_review" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier">
             <argument>%sylius.security.api_route%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.product_slug" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationModifier">
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.product_variant" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier">
             <argument>%sylius.security.api_route%</argument>
@@ -67,11 +76,13 @@
             <argument>%sylius.shipping_calculators%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.shipping_method" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\CustomerDocumentationModifier">
             <argument>%sylius.security.api_route%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.customer" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\CustomerDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsDocumentationModifier">
             <argument>%sylius.security.api_route%</argument>
@@ -79,6 +90,7 @@
             <argument>%sylius_core.orders_statistics.intervals_map%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.statistics" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentationModifier">
             <argument>%sylius.security.api_route%</argument>
@@ -86,6 +98,7 @@
             <argument>%sylius.promotion_rules%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.promotion" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentationModifier" />
 
         <service
             id="sylius_api.open_api.documentation_modifier.not_prefixed_routes_removal"
@@ -102,9 +115,11 @@
             <argument>%sylius.model.adjustment.class%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.order_adjustments" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\OrderAdjustmentsTypeDocumentationModifier" />
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AddressLogEntryDocumentationModifier">
             <tag name="sylius.open_api.modifier" />
         </service>
+        <service id="sylius_api.open_api.documentation_modifier.address_log_entry" alias="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AddressLogEntryDocumentationModifier" />
     </services>
 </container>

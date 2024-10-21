@@ -28,7 +28,7 @@
         <service id="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
-        <service id="sylius_api.property_info.extractor.empty_property_list" alias="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor" />
+        <service id="sylius_api.extractor.property_info.empty_property_list" alias="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor" />
 
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />
@@ -76,7 +76,7 @@
             <argument type="service" id="sylius.eligibility_checker.promotion" />
             <argument type="service" id="sylius.eligibility_checker.promotion_coupon" />
         </service>
-        <service id="sylius_api.eligibility_checker.applied_coupon" alias="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" />
+        <service id="sylius_api.checker.applied_coupon_eligibility" alias="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" />
 
         <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
             <argument type="service" id="sylius_abstraction.state_machine" />
