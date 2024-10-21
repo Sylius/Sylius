@@ -24,7 +24,6 @@ use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
-use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
