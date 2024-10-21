@@ -1,11 +1,10 @@
 {% macro default(back_text, back_link, can_submit = true) %}
     {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
-    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
     <div class="d-flex justify-content-between">
-        {{ buttons.default(back_link, back_text, null, 'chevron-left', 'btn-light') }}
+        {{ buttons.default(back_link, back_text, null, 'tabler:chevron-left', 'btn-light') }}
         <button type="submit" class="btn btn-primary btn-icon{% if not can_submit %} disabled{% endif %}"{% if not can_submit %} disabled{% endif %} {{ sylius_test_html_attribute('next-step') }}>
-            {{ 'sylius.ui.next'|trans }} {{ icon('chevron-right') }}
+            {{ 'sylius.ui.next'|trans }} {{ ux_icon('tabler:chevron-right') }}
         </button>
     </div>
 {% endmacro %}
