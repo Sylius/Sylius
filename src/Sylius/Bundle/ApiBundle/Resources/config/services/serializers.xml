@@ -47,7 +47,7 @@
         <service id="sylius_api.normalizer.product" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductNormalizer">
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -92,7 +92,7 @@
         </service>
 
         <service id="sylius_api.normalizer.shipping_method" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\ShippingMethodNormalizer">
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
@@ -101,13 +101,13 @@
         </service>
 
         <service id="sylius_api.normalizer.generated_promotion_coupons" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\GeneratedPromotionCouponsNormalizer">
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
         <service id="sylius_api.denormalizer.zone" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ZoneDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 

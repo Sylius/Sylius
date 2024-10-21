@@ -28,7 +28,7 @@ winzou_state_machine:
                     priority: -200
                 sylius_assign_token:
                     on: ["create"]
-                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValueIfNotSet"]
+                    do: ["@sylius.assigner.order_token.unique_id_based", "assignTokenValueIfNotSet"]
                     args: ["object"]
                     priority: -100
             after:
@@ -54,22 +54,22 @@ winzou_state_machine:
                     priority: -500
                 sylius_hold_inventory:
                     on: ["create"]
-                    do: ["@sylius.inventory.order_inventory_operator", "hold"]
+                    do: ["@sylius.operator.inventory.order_inventory", "hold"]
                     args: ["object"]
                     priority: -400
                 sylius_increment_promotions_usages:
                     on: ["create"]
-                    do: ["@sylius.promotion_usage_modifier", "increment"]
+                    do: ["@sylius.modifier.promotion.order_usage", "increment"]
                     args: ["object"]
                     priority: -300
                 sylius_save_addresses_on_customer:
                     on: ["create"]
-                    do: ["@sylius.customer_order_addresses_saver", "saveAddresses"]
+                    do: ["@sylius.saver.customer.order_addresses", "saveAddresses"]
                     args: ["object"]
                     priority: -200
                 sylius_set_order_immutable_names:
                     on: ["create"]
-                    do: ["@sylius.order_item_names_setter", "__invoke"]
+                    do: ["@sylius.setter.order.item_names", "__invoke"]
                     args: ["object"]
                     priority: -100
                 sylius_cancel_payment:
@@ -94,11 +94,11 @@ winzou_state_machine:
                     priority: -300
                 sylius_cancel_order:
                     on: ["cancel"]
-                    do: ["@sylius.inventory.order_inventory_operator", "cancel"]
+                    do: ["@sylius.operator.inventory.order_inventory", "cancel"]
                     args: ["object"]
                     priority: -200
                 sylius_decrement_promotions_usages:
                     on: ["cancel"]
-                    do: ["@sylius.promotion_usage_modifier", "decrement"]
+                    do: ["@sylius.modifier.promotion.order_usage", "decrement"]
                     args: ["object"]
                     priority: -100

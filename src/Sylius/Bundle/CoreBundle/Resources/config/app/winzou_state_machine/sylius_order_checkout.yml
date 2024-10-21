@@ -50,12 +50,12 @@ winzou_state_machine:
                     priority: -300
                 sylius_skip_shipping:
                     on: ["address"]
-                    do: ["@sylius.state_resolver.order_checkout", "resolve"]
+                    do: ["@sylius.state_resolver.checkout", "resolve"]
                     args: ["object"]
                     priority: -100
                 sylius_skip_payment:
                     on: ["select_shipping"]
-                    do: ["@sylius.state_resolver.order_checkout", "resolve"]
+                    do: ["@sylius.state_resolver.checkout", "resolve"]
                     args: ["object"]
                     priority: -100
                 sylius_customer_ip_assign:
