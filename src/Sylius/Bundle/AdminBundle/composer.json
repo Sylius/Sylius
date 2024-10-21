@@ -47,7 +47,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "php-http/message-factory": "^1.0",
+        "php-http/message-factory": "^1.1",
         "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^9.5",
