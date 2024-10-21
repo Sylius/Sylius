@@ -7,7 +7,7 @@
             {% if user.avatar.path is not defined or user.avatar.path is empty %}
                 {{ avatar.small() }}
             {% else %}
-                {{ avatar.small(user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail')) }}
+                {{ avatar.small(user.avatar.path|imagine_filter('sylius_admin_avatar')) }}
             {% endif %}
         </div>
         <div class="d-none d-xl-block ps-2">

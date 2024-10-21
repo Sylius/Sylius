@@ -4,12 +4,14 @@
 {% set product = hookable_metadata.context.product %}
 
 <td>
-    <div class="d-flex gap-3 align-items-center">
-        <div>
+    <div class="thumbnail-box">
+        <div class="thumbnail-box-image">
             {{ image(product) }}
         </div>
-        <div>
-            <div><strong {{ sylius_test_html_attribute('product-variant-name') }}>{{ variant.name }}</strong></div>
+        <div class="thumbnail-box-content">
+            <div class="mb-1">
+                <strong {{ sylius_test_html_attribute('product-variant-name') }}>{{ variant.name }}</strong>
+            </div>
             {% if product.isSimple() %}
                 <div class="text-muted small" {{ sylius_test_html_attribute('product-code') }}>{{ product.code }}</div>
             {% else %}

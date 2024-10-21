@@ -61,24 +61,15 @@ sylius_ui:
 liip_imagine:
     filter_sets:
         sylius_admin_product_original: ~
-        sylius_admin_admin_user_avatar:
+        sylius_admin_avatar:
             filters:
-                thumbnail: { size: [ 80, 80 ], mode: outbound }
-        sylius_admin_admin_user_avatar_thumbnail:
-            filters:
-                thumbnail: { size: [50, 50], mode: outbound }
-        sylius_admin_product_tiny_thumbnail:
-            filters:
-                thumbnail: { size: [64, 64], mode: outbound }
+                thumbnail: { size: [ 200, 200 ], mode: outbound }
         sylius_admin_product_thumbnail:
             filters:
-                thumbnail: { size: [50, 50], mode: outbound }
-        sylius_admin_product_small_thumbnail:
-            filters:
-                thumbnail: { size: [150, 112], mode: outbound }
+                thumbnail: { size: [200, 200], mode: outbound }
         sylius_admin_product_large_thumbnail:
             filters:
-                thumbnail: { size: [550, 412], mode: outbound }
+                thumbnail: { size: [600, 800], mode: outbound }
 
 sonata_block:
     default_contexts: ~

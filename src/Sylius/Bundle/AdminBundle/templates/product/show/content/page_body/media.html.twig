@@ -13,7 +13,7 @@
                     {% if product.images|length >= 1 %}
                         <div class="spotlight-group" {{ sylius_test_html_attribute('media') }}>
                             {% for image in product.images %}
-                                {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
+                                {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
                                     {% if product.isConfigurable() and product.variants|length > 0 %}
                                         {% if product.getVariantSelectionMethod() == 'match' %}
                                             {% for variant in image.productVariants %}
