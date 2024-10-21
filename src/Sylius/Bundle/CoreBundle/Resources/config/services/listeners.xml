@@ -122,7 +122,7 @@
             <argument type="service" id="sylius.checker.inventory.order_item_availability" />
             <tag name="kernel.event_listener" event="sylius.payment.pre_complete" method="checkStockAvailability" />
         </service>
-        <service id="syrlius.listener.payment_pre_complete" alias="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener" />
+        <service id="sylius.listener.payment_pre_complete" alias="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener" />
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener">
             <argument type="service" id="sylius.checker.promotion.product_in_promotion_rule" />

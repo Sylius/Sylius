@@ -26,14 +26,14 @@
         <service id="sylius.entity_observer.price_history.create_log_entry_on_price_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\CreateLogEntryOnPriceChangeObserver" />
 
         <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelChangeObserver">
-            <argument type="service" id="sylius.command_dispatcher.price_history.apply_lowest_price_on_channel_pricings" />
+            <argument type="service" id="sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings" />
             <tag name="sylius.entity_observer" />
         </service>
         <service id="sylius.entity_observer.price_history.process_lowest_prices_on_channel_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelChangeObserver" />
 
         <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver">
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.command_dispatcher.price_history.apply_lowest_price_on_channel_pricings" />
+            <argument type="service" id="sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings" />
             <tag name="sylius.entity_observer" />
         </service>
         <service id="sylius.entity_observer.price_history.process_lowest_prices_on_channel_price_history_config_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver" />

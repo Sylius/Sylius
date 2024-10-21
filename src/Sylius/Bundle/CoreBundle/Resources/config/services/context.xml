@@ -27,7 +27,7 @@
         <service id="sylius.theme.context.channel_based" class="Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext" public="false">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.repository.theme" />
-            <deprecated package="sylius/core-bundle" version="1.14">The "%service_id%" service is deprecated and will be removed in Sylius 2.0.</deprecated>
+            <deprecated package="sylius/core-bundle" version="1.14">The "%service_id%" service is deprecated and will be moved to the ShopBundle in Sylius 2.0.</deprecated>
         </service>
 
         <service id="sylius.context.shopper" class="Sylius\Component\Core\Context\ShopperContext" lazy="true">

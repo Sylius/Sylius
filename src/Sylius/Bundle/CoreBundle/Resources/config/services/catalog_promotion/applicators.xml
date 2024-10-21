@@ -25,7 +25,7 @@
         >
             <argument type="service" id="sylius.applicator.catalog_promotion.action_based_discount" />
             <argument type="service" id="sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility" />
-            <argument type="service" id="sylius.eligibility_checker.catalog_promotion" />
+            <argument type="service" id="sylius.checker.catalog_promotion_eligibility" />
         </service>
         <service id="sylius.applicator.catalog_promotion" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplicatorInterface" />
 
