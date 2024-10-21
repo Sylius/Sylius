@@ -221,6 +221,21 @@
 | `Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener`                                              | `sylius_api.listener.api_cart_blamer`                                                |
 | `sylius.listener.api_authentication_success_listener`                                                      | `sylius_api.listener.authentication_success`                                         |
 | `sylius.listener.admin_api_authentication_success_listener`                                                | `sylius_api.listener.admin_authentication_success`                                   |
+| `Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory`                                                   | `sylius_api.open_api.factory`                                                        |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier`                  | `sylius_api.open_api.documentation_modifier.accept_language_header`                  |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdministratorDocumentationModifier`                         | `sylius_api.open_api.documentation_modifier.administrator`                           |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier`                         | `sylius_api.open_api.documentation_modifier.attribute_type`                          |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier`                               | `sylius_api.open_api.documentation_modifier.product`                                 |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier`                                 | `sylius_api.open_api.documentation_modifier.image`                                   |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier`                         | `sylius_api.open_api.documentation_modifier.product_review`                          |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier`                           | `sylius_api.open_api.documentation_modifier.product_slug`                            |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationModifier`                        | `sylius_api.open_api.documentation_modifier.product_variant`                         |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier`                        | `sylius_api.open_api.documentation_modifier.shipping_method`                         |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\CustomerDocumentationModifier`                              | `sylius_api.open_api.documentation_modifier.customer`                                |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsDocumentationModifier`                            | `sylius_api.open_api.documentation_modifier.statistics`                              |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentationModifier`                             | `sylius_api.open_api.documentation_modifier.promotion`                               |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\OrderAdjustmentsTypeDocumentationModifier`                  | `sylius_api.open_api.documentation_modifier.order_adjustments`                       |
+| `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AddressLogEntryDocumentationModifier`                       | `sylius_api.open_api.documentation_modifier.address_log_entry`                       |
 | **AddressingBundle**                                                                                       |                                                                                      |
 | `sylius.province_naming_provider`                                                                          | `sylius.provider.province_naming`                                                    |
 | `sylius.zone_matcher`                                                                                      | `sylius.matcher.zone`                                                                |
@@ -889,6 +904,7 @@ If your app never changed the hasher name configuration, you don't need to confi
 * Some Twig extension services have been moved from the UiBundle to the new Twig Extra package
 
 * The following classes have been removed:
+    * **AdminBundle**
     * `Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController`
     * `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension`
     * `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionSvopeTypeExtension`
