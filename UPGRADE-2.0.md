@@ -525,6 +525,9 @@
 | `sylius.shipping_methods_resolver`                                                                                  | `sylius.resolver.shipping_methods`                                                                  |
 | `sylius.shipping_methods_resolver.default`                                                                          | `sylius.resolver.shipping_methods.default`                                                          |
 | `sylius.shipping_method_resolver.default`                                                                           | `sylius.resolver.shipping_method.default`                                                           |
+| `sylius.shipping_calculator`                                                                                        | `sylius.calculator.shipping`                                                                        |
+| `sylius.shipping_calculator.flat_rate`                                                                              | `sylius.calculator.shipping.flat_rate`                                                              |
+| `sylius.shipping_calculator.per_unit_rate`                                                                          | `sylius.calculator.shipping.per_unit_rate`                                                          |
 | `sylius.shipping_date_assigner`                                                                                     | `sylius.assigner.shipping_date`                                                                     |
 | `sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal`                                            | `sylius.checker.shipping_method_rule.total_weight_greater_than_or_equal`                            |
 | `sylius.shipping_method_rule_checker.total_weight_less_than_or_equal`                                               | `sylius.checker.shipping_method_rule.total_weight_less_than_or_equal`                               |
@@ -667,9 +670,6 @@
 * The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType` was moved to the `CoreBundle`.
 
 * The definition of the service `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType` was moved to the `PromotionBundle`.
-
-* The following class have been moved to the `ShopBundle`:
-    * `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext`
 
 * The following parameters were removed:
 
