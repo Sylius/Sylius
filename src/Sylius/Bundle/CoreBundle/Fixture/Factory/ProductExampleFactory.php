@@ -28,6 +28,8 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsException;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsValuesException;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -205,7 +207,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         try {
             $this->variantGenerator->generate($product);
-        } catch (\InvalidArgumentException) {
+        } catch (ProductWithoutOptionsException|ProductWithoutOptionsValuesException) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 
