@@ -17,25 +17,26 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
-use Sylius\Component\User\Security\UserPasswordEncoderInterface;
-use Sylius\Component\User\Security\UserPasswordHasherInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class PasswordUpdaterSpec extends ObjectBehavior
 {
-    function it_implements_password_updater_interface(UserPasswordHasherInterface $userPasswordHasher): void
+    function let(UserPasswordHasherInterface $userPasswordHasher): void
     {
         $this->beConstructedWith($userPasswordHasher);
+    }
+
+    function it_implements_password_updater_interface(): void
+    {
         $this->shouldImplement(PasswordUpdaterInterface::class);
     }
 
-    function it_updates_user_profile_with_hashed_password_if_using_symfony_6(
+    function it_updates_user_profile_with_hashed_password(
         UserPasswordHasherInterface $userPasswordHasher,
         UserInterface $user,
     ): void {
-        $this->beConstructedWith($userPasswordHasher);
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
-
-        $userPasswordHasher->hash($user)->willReturn('topSecretHashedPassword');
+        $userPasswordHasher->hashPassword($user, 'topSecretPlainPassword')->willReturn('topSecretHashedPassword');
 
         $user->eraseCredentials()->shouldBeCalled();
         $user->setPassword('topSecretHashedPassword')->shouldBeCalled();
@@ -43,48 +44,23 @@ final class PasswordUpdaterSpec extends ObjectBehavior
         $this->updatePassword($user);
     }
 
-    function it_updates_user_profile_with_encoded_password_if_using_symfony_5_4(
-        UserPasswordEncoderInterface $userPasswordEncoder,
-        UserInterface $user,
-    ): void {
-        $this->beConstructedWith($userPasswordEncoder);
-        $user->getPlainPassword()->willReturn('topSecretPlainPassword');
-
-        $userPasswordEncoder->encode($user)->willReturn('topSecretEncodedPassword');
-
-        $user->eraseCredentials()->shouldBeCalled();
-        $user->setPassword('topSecretEncodedPassword')->shouldBeCalled();
-
-        $this->updatePassword($user);
-    }
-
-    function it_does_nothing_if_plain_password_is_empty(
-        UserPasswordHasherInterface $userPasswordHasher,
-        UserInterface $user,
-    ): void {
-        $this->beConstructedWith($userPasswordHasher);
+    function it_does_nothing_if_plain_password_is_empty(UserInterface $user): void
+    {
         $user->getPlainPassword()->willReturn('');
 
-        $userPasswordHasher->hash($user)->shouldNotBeCalled();
+        $this->updatePassword($user);
 
         $user->setPassword(Argument::any())->shouldNotBeCalled();
         $user->eraseCredentials()->shouldNotBeCalled();
-
-        $this->updatePassword($user);
     }
 
-    function it_does_nothing_if_plain_password_is_null(
-        UserPasswordHasherInterface $userPasswordHasher,
-        UserInterface $user,
-    ): void {
-        $this->beConstructedWith($userPasswordHasher);
+    function it_does_nothing_if_plain_password_is_null(UserInterface $user): void
+    {
         $user->getPlainPassword()->willReturn(null);
 
-        $userPasswordHasher->hash($user)->shouldNotBeCalled();
+        $this->updatePassword($user);
 
         $user->setPassword(Argument::any())->shouldNotBeCalled();
         $user->eraseCredentials()->shouldNotBeCalled();
-
-        $this->updatePassword($user);
     }
 }

@@ -21,7 +21,7 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Webmozart\Assert\Assert;
 
-final class CheckoutShippingContext implements Context
+final readonly class CheckoutShippingContext implements Context
 {
     public function __construct(
         private SelectShippingPageInterface $selectShippingPage,
@@ -35,20 +35,26 @@ final class CheckoutShippingContext implements Context
      * @Given the customer has proceeded :shippingMethodName shipping method
      * @Given the visitor proceed with :shippingMethodName shipping method
      * @Given the customer proceed with :shippingMethodName shipping method
+     * @Given I chose :shippingMethodName shipping method
      * @Given I completed the shipping step with :shippingMethodName shipping method
      * @Given I have proceeded with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
-    public function iHaveProceededSelectingShippingMethod(string $shippingMethodName): void
+    public function iHaveProceededWithSelectingShippingMethod(string $shippingMethodName): void
     {
-        $this->iSelectShippingMethod($shippingMethodName);
+        if (!$this->selectShippingPage->isOpen()) {
+            throw new UnexpectedPageException(sprintf('Shipping method "%s" cannot be selected because checkout shipping page is not open.', $shippingMethodName));
+        }
+
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
         $this->selectShippingPage->nextStep();
     }
 
     /**
      * @Given I have selected :shippingMethodName shipping method
      * @When I select :shippingMethodName shipping method
+     * @When I change shipping method to :shippingMethodName
      */
     public function iSelectShippingMethod(string $shippingMethodName): void
     {
@@ -64,8 +70,7 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
-     * @When I try to complete the shipping step
-     * @When /^I(?:| try to) complete(?:|d) the shipping step$/
+     * @When I complete the shipping step
      * @When I complete the shipping step with first shipping method
      */
     public function iCompleteTheShippingStep(): void
@@ -82,9 +87,17 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
+     * @When I want to complete the shipping step
+     */
+    public function iWantToCompleteTheShippingStep(): void
+    {
+        $this->selectShippingPage->open();
+    }
+
+    /**
      * @When I go back to shipping step of the checkout
      */
-    public function iGoBackToShippingStepOfTheCheckout()
+    public function iGoBackToShippingStepOfTheCheckout(): void
     {
         $this->selectShippingPage->open();
     }
@@ -128,10 +141,11 @@ final class CheckoutShippingContext implements Context
 
     /**
      * @Then I should be informed that my order cannot be shipped to this address
+     * @Then there should be information about no available shipping methods
      */
-    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress()
+    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress(): void
     {
-        Assert::true($this->selectShippingPage->hasNoShippingMethodsMessage());
+        Assert::true($this->selectShippingPage->hasNoAvailableShippingMethodsMessage());
     }
 
     /**
@@ -160,14 +174,6 @@ final class CheckoutShippingContext implements Context
     public function iShouldSeeShippingFee($shippingMethodName, $fee)
     {
         Assert::true($this->selectShippingPage->hasShippingMethodFee($shippingMethodName, $fee));
-    }
-
-    /**
-     * @Then there should be information about no available shipping methods
-     */
-    public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress()
-    {
-        Assert::true($this->selectShippingPage->hasNoAvailableShippingMethodsWarning());
     }
 
     /**
@@ -223,10 +229,32 @@ final class CheckoutShippingContext implements Context
 
         try {
             $this->selectShippingPage->nextStep();
+            if ($this->selectShippingPage->isOpen()) {
+                return;
+            }
         } catch (ElementNotFoundException) {
             return;
         }
 
         throw new UnexpectedPageException('It should not be possible to complete checkout shipping step.');
+    }
+
+    /**
+     * @Then I should still be on the shipping step
+     */
+    public function iShouldStillBeOnTheShippingStep(): void
+    {
+        Assert::true($this->selectShippingPage->isOpen(), 'Shipping page is not open.');
+    }
+
+    /**
+     * @Then I should not be able to complete the shipping step
+     */
+    public function iShouldNotBeAbleToCompleteTheShippingStep(): void
+    {
+        Assert::false(
+            $this->selectShippingPage->isNextStepButtonEnabled(),
+            'The "next step" button should be disabled, but it does not.',
+        );
     }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.promotion.class%" routePrefix="/custom">
+        <operations>
+            <operation
+                name="sylius_api_admin_promotion_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/promotions"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.admin.promotion</filter>
+                    <filter>sylius_api.order_filter.admin.promotion</filter>
+                    <filter>sylius_api.exists_filter.admin.promotion</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="priority">DESC</value>
+                    </values>
+                </order>
+            </operation>
+
+            <operation name="sylius_api_admin_promotion_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/promotions/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

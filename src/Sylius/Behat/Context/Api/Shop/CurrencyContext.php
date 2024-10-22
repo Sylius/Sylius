@@ -18,7 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 
-final class CurrencyContext implements Context
+final readonly class CurrencyContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,

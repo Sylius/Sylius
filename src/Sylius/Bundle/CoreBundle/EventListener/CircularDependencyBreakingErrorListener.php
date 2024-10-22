@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * For Symfony 5+.
@@ -45,10 +47,11 @@ use Symfony\Component\HttpKernel\EventListener\ErrorListener;
  *
  * @see \Symfony\Component\HttpKernel\EventListener\ErrorListener
  */
-final class CircularDependencyBreakingErrorListener extends ErrorListener
+final readonly class CircularDependencyBreakingErrorListener implements EventSubscriberInterface
 {
-    public function __construct(private ErrorListener $decoratedListener)
-    {
+    public function __construct(
+        private ErrorListener $decoratedListener,
+    ) {
     }
 
     public function logKernelException(ExceptionEvent $event): void
@@ -56,11 +59,11 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
         $this->decoratedListener->logKernelException($event);
     }
 
-    public function onKernelException(ExceptionEvent $event, ?string $eventName = null, ?EventDispatcherInterface $eventDispatcher = null): void
+    public function onKernelException(ExceptionEvent $event): void
     {
         try {
             /** @phpstan-ignore-next-line */
-            $this->decoratedListener->onKernelException($event, $eventName, $eventDispatcher);
+            $this->decoratedListener->onKernelException($event);
         } catch (\Throwable $throwable) {
             $this->breakCircularDependency($throwable);
 
@@ -68,9 +71,26 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
         }
     }
 
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::CONTROLLER_ARGUMENTS => 'onControllerArguments',
+            KernelEvents::EXCEPTION => [
+                ['logKernelException', 0],
+                ['onKernelException', -128],
+            ],
+            KernelEvents::RESPONSE => ['removeCspHeader', -128],
+        ];
+    }
+
     public function onControllerArguments(ControllerArgumentsEvent $event): void
     {
         $this->decoratedListener->onControllerArguments($event);
+    }
+
+    public function removeCspHeader(ResponseEvent $event): void
+    {
+        $this->decoratedListener->removeCspHeader($event);
     }
 
     private function breakCircularDependency(\Throwable $throwable): void

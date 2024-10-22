@@ -50,9 +50,9 @@ final class OrderAddressRequirementValidator extends ConstraintValidator
             throw new ChannelNotFoundException();
         }
 
-        [$method, $addressName] = $channel->isShippingAddressInCheckoutRequired() ? ['getShippingAddress', 'shipping address'] : ['getBillingAddress', 'billing address'];
+        [$property, $addressName] = $channel->isShippingAddressInCheckoutRequired() ? ['shippingAddress', 'shipping address'] : ['billingAddress', 'billing address'];
 
-        if (null === $value->$method()) {
+        if (null === $value->$property) {
             $this->context->addViolation($constraint->message, ['%addressName%' => $addressName]);
         }
     }

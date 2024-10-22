@@ -1,0 +1,20 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.contact.contact_request':
+            header:
+                template: '@SyliusShop/contact/contact_request/header.html.twig'
+                priority: 100
+            form:
+                template: '@SyliusShop/contact/contact_request/form.html.twig'
+                priority: 0
+                
+        'sylius_shop.contact.contact_request.form':
+            email:
+                template: '@SyliusShop/contact/contact_request/form/email.html.twig'
+                priority: 200
+            message:
+                template: '@SyliusShop/contact/contact_request/form/message.html.twig'
+                priority: 100
+            submit:
+                template: '@SyliusShop/contact/contact_request/form/submit.html.twig'
+                priority: 0

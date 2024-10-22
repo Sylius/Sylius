@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set author = hookable_metadata.context.resource.author %}
+
+<div class="card-footer">
+    <div class="py-1">{{ icon({icon: 'mail'}) }}<a href="mailto:{{ author.email }}">{{ author.email }}</a></div>
+    {% if author.phoneNumber is not empty %}
+        <div class="py-1">{{ icon({icon: 'phone'}) }} {{ author.phoneNumber }}</div>
+    {% endif %}
+</div>

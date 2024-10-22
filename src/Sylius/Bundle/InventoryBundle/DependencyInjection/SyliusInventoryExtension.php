@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -29,8 +28,5 @@ final class SyliusInventoryExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-
-        $container->setAlias('sylius.availability_checker', $config['checker']);
-        $container->setAlias(AvailabilityCheckerInterface::class, $config['checker']);
     }
 }

@@ -28,15 +28,21 @@ class ErrorPage extends Page implements ErrorPageInterface
         return $this->getSession()->getStatusCode();
     }
 
-    public function getTitle(): string
+    public function isItAdminNotFoundPage(): bool
     {
-        return $this->getElement('title')->getText();
+        return $this->getCode() === 404 && $this->hasElement('admin_back_to_dashboard_link');
+    }
+
+    public function isItShopNotFoundPage(): bool
+    {
+        return $this->getCode() === 404 && $this->hasElement('shop_not_found_page');
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'title' => 'h2.header',
+            'admin_back_to_dashboard_link' => '[data-test-back-to-dashboard-link]',
+            'shop_not_found_page' => '[data-test-shop-not-found-page]',
         ]);
     }
 }

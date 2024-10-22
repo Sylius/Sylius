@@ -51,7 +51,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         $this->onKernelResponse(new ResponseEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $response->getWrappedObject(),
         ));
     }
@@ -74,7 +74,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         $this->onKernelResponse(new ResponseEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $response->getWrappedObject(),
         ));
     }

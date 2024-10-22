@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -51,18 +51,23 @@ final class CheckoutContext implements Context
     /** @var string[] */
     private array $content = [];
 
+    /**
+     * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     * @param RepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     */
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
-        private RepositoryInterface $shippingMethodRepository,
-        private OrderRepositoryInterface $orderRepository,
-        private RepositoryInterface $paymentMethodRepository,
-        private ProductVariantResolverInterface $productVariantResolver,
-        private IriConverterInterface $iriConverter,
-        private SharedStorageInterface $sharedStorage,
-        private RequestFactoryInterface $requestFactory,
-        private string $paymentMethodClass,
-        private string $shippingMethodClass,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
+        private readonly RepositoryInterface $shippingMethodRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly RepositoryInterface $paymentMethodRepository,
+        private readonly ProductVariantResolverInterface $productVariantResolver,
+        private readonly IriConverterInterface $iriConverter,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly RequestFactoryInterface $requestFactory,
+        private readonly string $shippingMethodClass,
+        private readonly string $paymentMethodClass,
     ) {
     }
 
@@ -79,6 +84,44 @@ final class CheckoutContext implements Context
         Assert::notNull($defaultAddress);
 
         $this->iSpecifyTheBillingAddressAs($defaultAddress);
+    }
+
+    /**
+     * @When I try to complete the shipping step
+     */
+    public function iTryToCompleteTheShippingStep(): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+        $content = $this->responseChecker->getResponseContent($response);
+
+        $this->client->requestPatch(
+            uri: sprintf(
+                'orders/%s/shipments/%s',
+                $this->sharedStorage->get('cart_token'),
+                $content['shipments'][0]['id'],
+            ),
+            body: ['shippingMethod' => $content['shipments'][0]['method']],
+        );
+    }
+
+    /**
+     * @When I try to complete the shipping step with :shippingMethod shipping method
+     */
+    public function iTryToCompleteTheShippingStepWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+        $content = $this->responseChecker->getResponseContent($response);
+
+        $this->sharedStorage->set('shipping_method', $shippingMethod);
+
+        $this->client->requestPatch(
+            uri: sprintf(
+                'orders/%s/shipments/%s',
+                $this->sharedStorage->get('cart_token'),
+                $content['shipments'][0]['id'],
+            ),
+            body: ['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)],
+        );
     }
 
     /**
@@ -114,6 +157,46 @@ final class CheckoutContext implements Context
     public function iAmAtTheCheckoutAddressingStep(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @Then I should see that there is no shipment assigned
+     */
+    public function iShouldSeeThatThereIsNoShipmentAssigned(): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+
+        Assert::isEmpty($this->responseChecker->getValue($response, 'shipments'));
+    }
+
+    /**
+     * @Then I should see that no payment method is assigned
+     */
+    public function iShouldSeeThatNoPaymentMethodIsAssigned(): void
+    {
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+
+        Assert::isEmpty($this->responseChecker->getValue($response, 'payments'));
+    }
+
+    /**
+     * @Then there should not be any shipping method available to choose
+     */
+    public function thereShouldNotBeAnyShippingMethodAvailableToChoose(): void
+    {
+        $response = $this->client->requestGet('shipping-methods');
+
+        Assert::isEmpty($this->responseChecker->getCollection($response));
+    }
+
+    /**
+     * @Then there should not be any payment methods available for selection
+     */
+    public function thereShouldNotBeAnyPaymentMethodsAvailableForSelection(): void
+    {
+        $response = $this->client->requestGet('payment-methods');
+
+        Assert::isEmpty($this->responseChecker->getCollection($response));
     }
 
     /**
@@ -218,9 +301,9 @@ final class CheckoutContext implements Context
      */
     public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
     {
-        $this->iSpecifyTheEmailAs(null);
-        $this->iSpecifyTheBillingAddressAs($address);
-        $this->iCompleteTheAddressingStep();
+        $this->fillAddress('billingAddress', $address);
+        $this->addressOrder($this->content);
+        $this->content = [];
     }
 
     /**
@@ -309,9 +392,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed selecting :country as billing country
+     * @When I proceed with selecting :country as billing country
      */
-    public function iProceedSelectingCountryAsBillingCountry(CountryInterface $country): void
+    public function iProceedWithSelectingCountryAsBillingCountry(CountryInterface $country): void
     {
         $this->addressOrderWithCountryAndEmail($country);
     }
@@ -340,6 +423,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I confirmed my order
+     * @Given the customer confirmed the order
      * @When I confirm my order
      * @When /^the (?:visitor|customer) confirm his order$/
      */
@@ -369,15 +453,23 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I decide to change order shipping method
+     */
+    public function iDecideToChangeOrderShippingMethod(): void
+    {
+        // This step is relevant only for the UI
+    }
+
+    /**
      * @Given I completed the shipping step with :shippingMethod shipping method
      * @Given /^the (?:visitor|customer) has proceeded ("[^"]+" shipping method)$/
-     * @Given I proceed selecting :shippingMethod shipping method
      * @Given I chose :shippingMethod shipping method
      * @When I proceed with :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
      * @When /^the (?:visitor|customer) proceed with ("[^"]+" shipping method)$/
      * @When /^the visitor try to proceed with ("[^"]+" shipping method) in the customer cart$/
      * @When I try to change shipping method to :shippingMethod
+     * @When I proceed with selecting :shippingMethod shipping method
      * @When I change shipping method to :shippingMethod
      * @When I have proceeded selecting :shippingMethod shipping method
      */
@@ -398,7 +490,12 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
         );
-        $request->setContent(['shippingMethod' => $this->iriConverter->getItemIriFromResourceClass($this->shippingMethodClass, ['code' => $shippingMethodCode])]);
+        $request->setContent([
+            'shippingMethod' => $this->iriConverter->getIriFromResource(
+                resource: $this->shippingMethodClass,
+                context: ['uri_variables' => ['code' => $shippingMethodCode]],
+            ),
+        ]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -408,24 +505,32 @@ final class CheckoutContext implements Context
      */
     public function iTryToSelectPaymentMethod(string $paymentMethodCode): void
     {
+        $cart = $this->getCart();
         $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            sprintf('payments/%s', $this->getCart()['payments'][0]['id']),
+            sprintf('payments/%s', $cart['payments'][0]['id']),
         );
-        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass($this->paymentMethodClass, ['code' => $paymentMethodCode])]);
+        $request->setContent([
+            'paymentMethod' => $this->iriConverter->getIriFromResource(
+                resource: $this->paymentMethodClass,
+                context: ['uri_variables' => ['code' => $paymentMethodCode]],
+            ),
+        ]);
 
         $this->client->executeCustomRequest($request);
     }
 
     /**
      * @When I decide to change my address
+     * @When I go back to addressing step of the checkout
+     * @When I go to the addressing step
      */
     public function iDecideToChangeMyAddress(): void
     {
-        // Intentionally left blank
+        // This step is relevant only for the UI
     }
 
     /**
@@ -513,7 +618,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed selecting :paymentMethod payment method
+     * @When I proceed with selecting :paymentMethod payment method
      * @When I have proceeded selecting :paymentMethod payment method
      */
     public function iHaveProceededSelectingPaymentMethod(PaymentMethodInterface $paymentMethod): void
@@ -795,7 +900,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
     {
-        $this->iShouldBeOnTheCheckoutShippingStep();
+        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
         Assert::isEmpty($this->getCart()['shipments']);
     }
 
@@ -963,7 +1068,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^my discount should be ("[^"]+")$/
-     * @Then there should be no discount
+     * @Then there should be no discount applied
      */
     public function myDiscountShouldBe(int $discount = 0): void
     {
@@ -1036,6 +1141,22 @@ final class CheckoutContext implements Context
             );
             Assert::same($violation['message'], sprintf('Please enter %s.', $element));
         }
+    }
+
+    /**
+     * @Then /^I should(?:| also) be notified that the "([^"]+)" in (shipping|billing) details is required$/
+     */
+    public function iShouldBeNotifiedThatTheInShippingDetailsIsRequired(string $element, string $type): void
+    {
+        /** @var array|null $violations */
+        $violations = $this->responseChecker->getResponseContent($this->client->getLastResponse())['violations'];
+        $type .= 'Address';
+
+        $violation = $this->getViolation(
+            $violations,
+            $type . '.' . StringInflector::nameToCamelCase($element),
+        );
+        Assert::same($violation['message'], sprintf('Please enter %s.', $element));
     }
 
     /**
@@ -1160,10 +1281,13 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_POST,
             'items',
         );
-        /** @var ProductVariantInterface $variant */
+
         $variant = $product->getVariants()->first();
         $request->setContent([
-            'productVariant' => $this->iriConverter->getItemIriFromResourceClass($variant::class, ['code' => $code]),
+            'productVariant' => $this->iriConverter->getIriFromResource(
+                resource: $variant::class,
+                context: ['uri_variables' => ['code' => $code]],
+            ),
             'quantity' => 1,
         ]);
 
@@ -1199,22 +1323,13 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to specify province name manually for shipping address
+     * @Then /^I should not be able to specify province name manually for (billing address|shipping address)$/
+     * @Then /^I should be notified that selected province is invalid for (billing address|shipping address)$/
      */
-    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress(): void
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForAddress(string $addressType): void
     {
-        $this->iCompleteTheAddressingStep();
-
-        $this->assertProvinceMessage('shippingAddress');
-    }
-
-    /**
-     * @Then I should not be able to specify province name manually for billing address
-     * @Then I should be notified that selected province is invalid for billing address
-     */
-    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForBillingAddress(): void
-    {
-        $this->assertProvinceMessage('billingAddress');
+        $response = $this->client->getLastResponse();
+        $this->assertProvinceMessage(StringInflector::nameToCamelCase($addressType));
     }
 
     /**
@@ -1264,15 +1379,66 @@ final class CheckoutContext implements Context
         Assert::true($this->hasProductWithUnitPrice($product->getName(), $unitPrice));
     }
 
+    /**
+     * @Then I should be checking out as :email
+     */
+    public function iShouldBeCheckingOutAs(string $email): void
+    {
+        $cart = $this->getCart();
+
+        Assert::notNull($cart['customer'], sprintf('Customer with an email "%s" was not expected to be null.', $email));
+        Assert::same($cart['customer']['email'], $email);
+    }
+
+    /**
+     * @Then I should not be able to change email
+     */
+    public function iShouldNotBeAbleToChangeEmail(): void
+    {
+        $response = $this->client
+            ->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue())
+            ->setRequestData(['email' => 'try_to_change@example.com'])
+            ->update()
+        ;
+
+        Assert::same($response->getStatusCode(), 422);
+        Assert::true($this->responseChecker->hasViolationWithMessage(
+            $response,
+            'Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can\'t be changed.',
+        ));
+    }
+
+    /**
+     * @Then I should see that this shipping method is not available for this address
+     * @Then I should see that this shipping method is also not available for this address
+     */
+    public function iShouldSeeThatThisShippingMethodIsNotAvailableForThisAddress(): void
+    {
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage(
+                $this->client->getLastResponse(),
+                sprintf(
+                    'The shipping method %s is not available for this order. Please reselect your shipping method.',
+                    $this->sharedStorage->get('shipping_method'),
+                ),
+            ),
+            sprintf(
+                'Expected to see message that shipping method "%s" is not available. Got message: "%s".',
+                $this->sharedStorage->get('shipping_method'),
+                $this->responseChecker->getError($this->client->getLastResponse()),
+            ),
+        );
+    }
+
     private function assertProvinceMessage(string $addressType): void
     {
         $response = $this->client->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->hasViolationWithMessage(
             $response,
             'Please select proper province.',
-            $addressType,
+            sprintf('%s.%s', $addressType, 'provinceCode'),
         ));
     }
 
@@ -1294,8 +1460,7 @@ final class CheckoutContext implements Context
 
     private function addressOrderWithCountryAndEmail(CountryInterface $country, ?string $email = null): void
     {
-        $this->addressOrder([
-            'email' => $email,
+        $content = [
             'billingAddress' => [
                 'city' => 'Madrid',
                 'street' => 'Av. de Concha Espina',
@@ -1304,23 +1469,30 @@ final class CheckoutContext implements Context
                 'firstName' => 'Santiago',
                 'lastName' => 'Bernabeu',
             ],
-        ]);
-    }
+        ];
 
-    private function addressOrder(array $content): void
-    {
-        if (!array_key_exists('email', $content)) {
-            $content['email'] = null;
+        if ($email !== null) {
+            $content['email'] = $email;
         }
 
-        $this->client->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue());
-        $this->client->setRequestData($content);
-        $this->client->update();
+        $this->addressOrder($content);
+    }
+
+    /** @param array<array-key, mixed> $content */
+    private function addressOrder(array $content): void
+    {
+        $this->client
+            ->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue())
+            ->setRequestData($content)
+            ->update()
+        ;
     }
 
     private function getCart(): array
     {
-        return $this->responseChecker->getResponseContent($this->client->show(Resources::ORDERS, $this->getCartTokenValue()));
+        $cart = $this->client->show(Resources::ORDERS, $this->getCartTokenValue());
+
+        return $this->responseChecker->getResponseContent($cart);
     }
 
     private function getCartTokenValue(): ?string
@@ -1347,10 +1519,10 @@ final class CheckoutContext implements Context
 
     private function getCartShippingMethods(array $cart): array
     {
-        $this->client->index(Resources::SHIPPING_METHODS);
-        $this->client->addFilter('tokenValue', $cart['tokenValue']);
-        $this->client->addFilter('shipmentId', $cart['shipments'][0]['id']);
-        $this->client->filter();
+        $this->client->customAction(
+            sprintf('/api/v2/shop/orders/%s/shipments/%s/methods', $cart['tokenValue'], $cart['shipments'][0]['id']),
+            HTTPRequest::METHOD_GET,
+        );
 
         return $this->responseChecker->getCollection($this->client->getLastResponse());
     }
@@ -1439,8 +1611,13 @@ final class CheckoutContext implements Context
 
     private function getArrayWithDefaultAddress(): array
     {
-        return [
-            'email' => 'rich@sylius.com',
+        try {
+            $email = $this->sharedStorage->get('created_as_guest') ? 'rich@sylius.com' : null;
+        } catch (\InvalidArgumentException) {
+            $email = null;
+        }
+
+        $content = [
             'billingAddress' => [
                 'city' => 'New York',
                 'street' => 'Wall Street',
@@ -1450,6 +1627,12 @@ final class CheckoutContext implements Context
                 'lastName' => 'Rich',
             ],
         ];
+
+        if ($email !== null) {
+            $content['email'] = $email;
+        }
+
+        return $content;
     }
 
     private function getViolation(array $violations, string $element): array
@@ -1488,6 +1671,7 @@ final class CheckoutContext implements Context
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
         Assert::notNull($productVariant = $this->productVariantResolver->getVariant($product));
+        Assert::isInstanceOf($productVariant, ProductVariantInterface::class);
 
         $this->putVariantToCart($productVariant, $tokenValue, $quantity);
     }
@@ -1533,6 +1717,9 @@ final class CheckoutContext implements Context
         return [];
     }
 
+    /**
+     * @param array<string, string> $address
+     */
     private function addressesAreEqual(array $address, AddressInterface $addressToCompare): bool
     {
         if (

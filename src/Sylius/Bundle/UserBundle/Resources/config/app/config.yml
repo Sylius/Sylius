@@ -15,12 +15,7 @@ when@test_cached:
         password_hashers:
             plaintext: plaintext
 
-sylius_user:
-    encoder: argon2i
-
-jms_serializer:
-    metadata:
-        directories:
-            sylius-user:
-                namespace_prefix: "Sylius\\Component\\User"
-                path: "@SyliusUserBundle/Resources/config/serializer"
+when@test_cached_payum:
+    security:
+        password_hashers:
+            plaintext: plaintext

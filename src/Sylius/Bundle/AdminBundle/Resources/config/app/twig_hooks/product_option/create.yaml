@@ -1,0 +1,57 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.product_option.create.content':
+            form:
+                component: 'sylius_admin:product_option:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/product_option/form.html.twig'
+                priority: 0
+
+        'sylius_admin.product_option.create.content.form':
+            sections:
+                template: '@SyliusAdmin/product_option/form/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.product_option.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/product_option/form/sections/general.html.twig'
+                priority: 200
+            translations:
+                template: '@SyliusAdmin/product_option/form/sections/translations.html.twig'
+                priority: 100
+            values:
+                template: '@SyliusAdmin/product_option/form/sections/values.html.twig'
+                priority: 0
+                
+        'sylius_admin.product_option.create.content.form.sections.general':
+            default:
+                enabled: false
+            code:
+                template: '@SyliusAdmin/product_option/form/sections/general/code.html.twig'
+                priority: 100
+            position:
+                template: '@SyliusAdmin/product_option/form/sections/general/position.html.twig'
+                priority: 0
+                
+        'sylius_admin.product_option.create.content.form.sections.translations':
+            translations:
+                template: '@SyliusAdmin/product_option/form/sections/translations/name.html.twig'
+                priority: 0
+                
+        'sylius_admin.product_option.create.content.form.sections.values':
+            value:
+                template: '@SyliusAdmin/product_option/form/sections/values/value.html.twig'
+                priority: 0
+                
+        'sylius_admin.product_option.create.content.form.sections.values.value':
+            code:
+                template: '@SyliusAdmin/product_option/form/sections/values/value/code.html.twig'
+                priority: 200
+            translations:
+                template: '@SyliusAdmin/product_option/form/sections/values/value/translations.html.twig'
+                priority: 100
+            button_delete:
+                template: '@SyliusAdmin/product_option/form/sections/values/value/button_delete.html.twig'
+                priority: 0

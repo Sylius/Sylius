@@ -1,0 +1,13 @@
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% set resources = hookable_metadata.context.resources %}
+
+{% if resources.data|length > 0 %}
+    <div class="products-grid" {{ sylius_test_html_attribute('products') }}>
+        {% for product in resources.data %}
+            {{ component('sylius_shop:product:card', { product: product, template: '@SyliusShop/product/common/card.html.twig' }) }}
+        {% endfor %}
+    </div>
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display') }}
+{% endif %}

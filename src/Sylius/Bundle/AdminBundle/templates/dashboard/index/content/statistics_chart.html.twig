@@ -1,0 +1,70 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set statistics_data = hookable_metadata.context.statistics_data %}
+{% set period = hookable_metadata.context.period %}
+
+<div class="card mb-3">
+    <div data-loading>
+        <div class="sylius-loader">
+            <img src="{{ asset('build/admin/images/loader.gif', 'admin') }}" alt="Loading"/>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-end gap-5 mb-3">
+            <div class="btn-group" role="group">
+                <button
+                    type="button"
+                    class="btn {% if period == '2 weeks' %}btn-light border{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-period-param="2 weeks"
+                    data-live-interval-param="day"
+                >
+                    {{ 'sylius.ui.statistics.2weeks'|trans }}
+                </button>
+                <button
+                    type="button"
+                    class="btn {% if period == 'month' %}btn-light border{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-period-param="month"
+                    data-live-interval-param="day"
+                >
+                    {{ 'sylius.ui.statistics.month'|trans }}
+                </button>
+                <button
+                    type="button"
+                    class="btn {% if period == 'year' %}btn-light border{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-period-param="year"
+                    data-live-interval-param="month"
+                    {{ sylius_test_html_attribute('year-split-into-months') }}
+                >
+                    {{ 'sylius.ui.statistics.year'|trans }}
+                </button>
+            </div>
+            <div class="btn-group" role="group">
+                <button
+                    type="button"
+                    class="btn btn-icon navigation navigation-prev"
+                    data-action="live#action"
+                    data-live-action-param="prevent|getPreviousPeriod"
+                    {{ sylius_test_html_attribute('previous-period') }}
+                >
+                    {{ icon({ icon: 'arrow_left', class: 'icon dropdown-item-icon icon-tabler' }) }}
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-icon navigation navigation-prev"
+                    data-action="live#action"
+                    data-live-action-param="prevent|getNextPeriod"
+                    {{ sylius_test_html_attribute('next-period') }}
+                >
+                    {{ icon({ icon: 'arrow_right', class: 'icon dropdown-item-icon icon-tabler' }) }}
+                </button>
+            </div>
+        </div>
+        <div id="statistics-chart" class="chart-lg" data-intervals="{{ statistics_data.sales_summary.intervals|json_encode }}" data-sales="{{ statistics_data.sales_summary.sales|json_encode }}" data-currency="{{ statistics_data.currency_symbol }}"></div>
+    </div>
+</div>

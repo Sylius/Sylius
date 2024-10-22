@@ -29,9 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ChangeAddressOrderHandlerTest extends KernelTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_changes_address_order_without_duplication_in_database(): void
     {
         $container = self::bootKernel()->getContainer();
@@ -45,9 +43,9 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         /** @var ObjectManager $manager */
         $manager = $container->get('doctrine.orm.default_entity_manager');
 
-        $orderAddressModifier = $container->get(OrderAddressModifierInterface::class);
+        $orderAddressModifier = $container->get('sylius_api.modifier.order_address');
 
-        $orderPromotionCodeAssigner = $container->get(OrderPromotionCodeAssignerInterface::class);
+        $orderPromotionCodeAssigner = $container->get('sylius_api.assigner.order_promotion_code');
 
         $customerResolver = $container->get(CustomerResolverInterface::class);
 
@@ -89,9 +87,7 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         $address->setProvinceName('111');
         $address->setPhoneNumber('west');
 
-        $updateCart = new UpdateCart('john@doe.com', $newBillingAddress);
-        $updateCart->setOrderTokenValue('token');
-
+        $updateCart = new UpdateCart('token', 'john@doe.com', $newBillingAddress);
         $updateCartHandler($updateCart);
 
         $this->assertCount(1, $addressRepository->findAll());

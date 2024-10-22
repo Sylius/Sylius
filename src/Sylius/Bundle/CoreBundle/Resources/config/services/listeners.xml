@@ -23,11 +23,10 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.listener.channel" class="Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener">
+        <service id="sylius.listener.channel_deletion" class="Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener">
             <argument type="service" id="sylius.checker.channel_deletion" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
         </service>
-        <service id="sylius.listener.channel_deletion" alias="sylius.listener.channel" />
 
         <service id="sylius.listener.images_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener">
             <argument type="service" id="sylius.uploader.image" />
@@ -56,10 +55,9 @@
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />
         </service>
 
-        <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
+        <service id="sylius.listener.default_username_orm" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
-        <service id="sylius.listener.default_username_orm" alias="sylius.listener.default_username" />
 
         <service id="sylius.listener.canonicalizer" class="Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener">
             <argument type="service" id="sylius.canonicalizer" />
@@ -96,21 +94,18 @@
             <tag name="kernel.event_listener" event="sylius.address.pre_create" method="preCreate" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
+        <service id="sylius.listener.locale_aware" class="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
+            <argument type="service" id=".inner" />
         </service>
-        <service id="sylius.listener.locale_aware" alias="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" />
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\XFrameOptionsSubscriber">
+        <service id="sylius.event_subscriber.x_frame_options" class="Sylius\Bundle\CoreBundle\EventListener\XFrameOptionsSubscriber">
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius.event_subscriber.x_frame_options" alias="Sylius\Bundle\CoreBundle\EventListener\XFrameOptionsSubscriber" />
 
         <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.checker.promotion.taxon_in_promotion_rule" />
-            <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
             <argument type="service" id="sylius.updater.promotion_rule.has_taxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
@@ -118,21 +113,23 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingTaxonInUseByPromotionRule" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener">
+        <service id="sylius.listener.payment_pre_complete" class="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener">
             <argument type="service" id="sylius.checker.inventory.order_item_availability" />
             <tag name="kernel.event_listener" event="sylius.payment.pre_complete" method="checkStockAvailability" />
         </service>
-        <service id="sylius.listener.payment_pre_complete" alias="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener" />
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener">
+        <service id="sylius.listener.product_deletion" class="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener">
             <argument type="service" id="sylius.checker.promotion.product_in_promotion_rule" />
             <tag name="kernel.event_listener" event="sylius.product.pre_delete" method="protectFromRemovingProductInUseByPromotionRule" />
         </service>
-        <service id="sylius.listener.product_deletion" alias="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener" />
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener">
+        <service id="sylius.listener.product_option_value" class="Sylius\Bundle\CoreBundle\EventListener\ProductOptionValueDeletionListener">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="doctrine.orm.entity_listener" event="preRemove" entity="%sylius.model.product_option_value.class%" />
+        </service>
+
+        <service id="sylius.listener.postgre_sql_default_schema" class="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener">
             <tag name="doctrine.event_listener" event="postGenerateSchema" method="postGenerateSchema" lazy="true" />
         </service>
-        <service id="sylius.listener.postgre_sql_default_schema" alias="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener" />
     </services>
 </container>

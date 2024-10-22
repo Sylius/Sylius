@@ -139,25 +139,6 @@ final class MailerListenerSpec extends ObjectBehavior
         $this->sendResetPasswordTokenEmail($event);
     }
 
-    function it_send_password_reset_pin_mail(
-        SenderInterface $emailSender,
-        ChannelInterface $channel,
-        GenericEvent $event,
-        UserInterface $user,
-    ): void {
-        $event->getSubject()->willReturn($user);
-
-        $user->getEmail()->willReturn('test@example.com');
-
-        $emailSender->send('reset_password_pin', ['test@example.com'], [
-            'user' => $user,
-            'channel' => $channel,
-            'localeCode' => 'en_US',
-        ])->shouldBeCalled();
-
-        $this->sendResetPasswordPinEmail($event);
-    }
-
     function it_sends_verification_success_email(
         SenderInterface $emailSender,
         GenericEvent $event,

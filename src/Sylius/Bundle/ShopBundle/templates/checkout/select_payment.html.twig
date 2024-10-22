@@ -1,0 +1,13 @@
+{% extends '@SyliusShop/checkout/shared/layout.html.twig' %}
+
+{% set active_step = 'select_payment' %}
+
+{% block title %}
+    {{ 'sylius.ui.payment'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="pe-lg-6">
+        {% hook 'sylius_shop.checkout.select_payment' with { active_step, form, order } %}
+    </div>
+{% endblock %}

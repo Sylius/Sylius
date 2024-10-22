@@ -1,0 +1,6 @@
+{% extends '@SyliusShop/account/common/update.html.twig' %}
+
+{% set prefixes = ['sylius_shop.account.profile_update'] %}
+{% set attrs = { resource, form } %}
+
+{% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}

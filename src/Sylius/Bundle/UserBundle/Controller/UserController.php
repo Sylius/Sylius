@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
@@ -56,7 +55,7 @@ class UserController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+            return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
 
         return new Response($this->container->get('twig')->render(
@@ -71,15 +70,6 @@ class UserController extends ResourceController
         $generator = $this->container->get(sprintf('sylius.%s.token_generator.password_reset', $this->metadata->getName()));
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
-    }
-
-    /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
-    public function requestPasswordResetPinAction(Request $request): Response
-    {
-        /** @var GeneratorInterface $generator */
-        $generator = $this->container->get(sprintf('sylius.%s.pin_generator.password_reset', $this->metadata->getName()));
-
-        return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
     public function resetPasswordAction(Request $request, string $token): Response
@@ -106,7 +96,7 @@ class UserController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+            return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
 
         return new Response($this->container->get('twig')->render(
@@ -129,7 +119,7 @@ class UserController extends ResourceController
         $user = $this->repository->findOneBy(['emailVerificationToken' => $token]);
         if (null === $user) {
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
+                return $this->createRestView($configuration, $configuration, Response::HTTP_BAD_REQUEST);
             }
 
             $this->addTranslatedFlash('error', 'sylius.user.verify_email_by_invalid_token');
@@ -149,7 +139,7 @@ class UserController extends ResourceController
         $eventDispatcher->dispatch(new GenericEvent($user), UserEvents::POST_EMAIL_VERIFICATION);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($user));
+            return $this->createRestView($configuration, $user);
         }
 
         $flashMessage = $this->getSyliusAttribute($request, 'flash', 'sylius.user.verify_email');
@@ -166,7 +156,7 @@ class UserController extends ResourceController
         $user = $this->getUser();
         if (null === $user) {
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_UNAUTHORIZED));
+                return $this->createRestView($configuration, $configuration, Response::HTTP_UNAUTHORIZED);
             }
 
             $this->addTranslatedFlash('notice', 'sylius.user.verify_no_user');
@@ -176,7 +166,7 @@ class UserController extends ResourceController
 
         if (null !== $user->getVerifiedAt()) {
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
+                return $this->createRestView($configuration, $configuration, Response::HTTP_BAD_REQUEST);
             }
 
             $this->addTranslatedFlash('notice', 'sylius.user.verify_verified_email');
@@ -194,7 +184,7 @@ class UserController extends ResourceController
         $eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
         }
 
         $this->addTranslatedFlash('success', 'sylius.user.verify_email_request');
@@ -226,7 +216,7 @@ class UserController extends ResourceController
             }
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+                $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
             }
 
             $this->addTranslatedFlash('success', 'sylius.user.reset_password_request');
@@ -245,7 +235,7 @@ class UserController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+            return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
 
         return new Response($this->container->get('twig')->render(
@@ -285,7 +275,7 @@ class UserController extends ResourceController
         $this->manager->flush();
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($user, Response::HTTP_BAD_REQUEST));
+            return $this->createRestView($configuration, $user, Response::HTTP_BAD_REQUEST);
         }
 
         $this->addTranslatedFlash('error', 'sylius.user.expire_password_reset_token');
@@ -332,7 +322,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_RESET);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
         }
 
         $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
@@ -358,7 +348,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_CHANGE);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
         }
 
         $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
@@ -382,7 +372,7 @@ class UserController extends ResourceController
         return null;
     }
 
-    private function getSyliusAttribute(Request $request, string $attribute, $default = null)
+    private function getSyliusAttribute(Request $request, string $attribute, $default = null): mixed
     {
         $attributes = $request->attributes->get('_sylius', []);
 

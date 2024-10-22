@@ -1,3 +1,0 @@
-fos_rest:
-    exception:
-        debug: true

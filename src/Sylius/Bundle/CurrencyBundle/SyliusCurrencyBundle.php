@@ -27,6 +27,7 @@ final class SyliusCurrencyBundle extends AbstractResourceBundle
         $container->addCompilerPass(new CompositeCurrencyContextPass());
     }
 
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [

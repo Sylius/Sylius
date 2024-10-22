@@ -1,0 +1,9 @@
+{% from '@SyliusAdmin/order/macro/order_shipping_state_label.html.twig' import label %}
+
+{% set order = hookable_metadata.context.resource %}
+
+<div class="ms-auto">
+    <span class="ms-2" {{ sylius_test_html_attribute('order-shipping-state') }}>
+        {{ label(order.shippingState) }}
+    </span>
+</div>

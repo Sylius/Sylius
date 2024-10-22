@@ -19,16 +19,15 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\CoreBundle\EventListener\MailerListener" public="false">
-            <argument type="service" id="sylius.email_sender" />
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.context.locale" />
-            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
-            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
-            <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
-            <tag name="kernel.event_listener" event="sylius.user.post_email_verification" method="sendVerificationSuccessEmail" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserRegistrationEmail" />
-        </service>
+    <service id="sylius.listener.user_mailer" class="Sylius\Bundle\CoreBundle\EventListener\MailerListener" public="false">
+        <argument type="service" id="sylius.email_sender" />
+        <argument type="service" id="sylius.context.channel" />
+        <argument type="service" id="sylius.context.locale" />
+        <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
+        <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
+        <tag name="kernel.event_listener" event="sylius.user.post_email_verification" method="sendVerificationSuccessEmail" />
+        <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserRegistrationEmail" />
+    </service>
 
         <service id="sylius.mailer.contact_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
             <argument type="service" id="sylius.email_sender" />

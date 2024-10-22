@@ -1,0 +1,6 @@
+{% set address = hookable_metadata.context.address %}
+{% set prefixes = hookable_metadata.prefixes|merge(['sylius_shop.shared']) %}
+
+<address class="d-flex flex-column" {{ sylius_test_html_attribute('address-context', "%s %s"|format(address.firstName, address.lastName)) }}>
+    {% hook 'address' with { _prefixes: prefixes } %}
+</address>

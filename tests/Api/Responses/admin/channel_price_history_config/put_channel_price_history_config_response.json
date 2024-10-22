@@ -1,9 +1,0 @@
-{
-    "@context": "\/api\/v2\/contexts\/ChannelPriceHistoryConfig",
-    "@id": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@",
-    "@type": "ChannelPriceHistoryConfig",
-    "id": "@integer@",
-    "lowestPriceForDiscountedProductsVisible": true,
-    "lowestPriceForDiscountedProductsCheckingPeriod": 60,
-    "taxonsExcludedFromShowingLowestPrice": ["\/api\/v2\/admin\/taxons\/BRAND"]
-}

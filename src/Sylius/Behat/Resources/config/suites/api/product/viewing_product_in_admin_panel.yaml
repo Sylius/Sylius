@@ -24,6 +24,7 @@ default:
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
                 - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
@@ -36,7 +37,6 @@ default:
                 - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.api.admin.managing_products
                 - Sylius\Behat\Context\Api\Admin\BrowsingCatalogPromotionProductVariantsContext

@@ -1,0 +1,278 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.order.show.content':
+            sections:
+                template: '@SyliusAdmin/order/show/content/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
+                priority: 0
+
+        'sylius_admin.order.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/order/show/content/header/title_block/title.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.header.title_block.actions':
+            history:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/history.html.twig'
+                priority: 200
+            cancel:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/cancel.html.twig'
+                priority: 100
+            resend_confirmation_email:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/resend_confirmation_email.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections#left':
+            items:
+                template: '@SyliusAdmin/order/show/content/sections/items.html.twig'
+                priority: 300
+            summary:
+                template: '@SyliusAdmin/order/show/content/sections/summary.html.twig'
+                priority: 200
+            payments:
+                template: '@SyliusAdmin/order/show/content/sections/payments.html.twig'
+                priority: 100
+            shipments:
+                template: '@SyliusAdmin/order/show/content/sections/shipments.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.items':
+            head:
+                template: '@SyliusAdmin/order/show/content/sections/items/head.html.twig'
+                priority: 200
+            body:
+                template: '@SyliusAdmin/order/show/content/sections/items/body.html.twig'
+                priority: 100
+            foot:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.items.head':
+            item:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/item.html.twig'
+                priority: 800
+            unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/unit_price.html.twig'
+                priority: 700
+            unit_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/unit_discount.html.twig'
+                priority: 600
+            distributed_order_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/distributed_order_discount.html.twig'
+                priority: 500
+            discounted_unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/discounted_unit_price.html.twig'
+                priority: 400
+            quantity:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/quantity.html.twig'
+                priority: 300
+            subtotal:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/subtotal.html.twig'
+                priority: 200
+            tax:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/tax.html.twig'
+                priority: 100
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/total.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.items.body':
+            item:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/item.html.twig'
+                priority: 800
+            unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/unit_price.html.twig'
+                priority: 700
+            unit_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/unit_discount.html.twig'
+                priority: 600
+            distributed_order_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/distributed_order_discount.html.twig'
+                priority: 500
+            discounted_unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/discounted_unit_price.html.twig'
+                priority: 400
+            quantity:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/quantity.html.twig'
+                priority: 300
+            subtotal:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/subtotal.html.twig'
+                priority: 200
+            tax:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/tax.html.twig'
+                priority: 100
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/total.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.items.foot':
+            label:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/label.html.twig'
+                priority: 200
+            tax_total:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/tax_total.html.twig'
+                priority: 100
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/total.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.summary':
+            items_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/items_total.html.twig'
+                priority: 300
+            tax_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/tax_total.html.twig'
+                priority: 200
+            shipping_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/shipping_total.html.twig'
+                priority: 100
+            promotion_total:
+                template: '@SyliusAdmin/order/show/content/sections/summary/promotion_total.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.payments':
+            header:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header.html.twig'
+                priority: 100
+            items:
+                template: '@SyliusAdmin/order/show/content/sections/payments/items.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.payments.header':
+            title:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header/title.html.twig'
+                priority: 100
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header/state.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.payments.item':
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/state.html.twig'
+                priority: 300
+            name:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/name.html.twig'
+                priority: 200
+            amount:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/amount.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.payments.item.actions':
+            list_payment_requests:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/list_payment_requests.html.twig'
+                priority: 200
+            complete:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/complete.html.twig'
+                priority: 100
+            refund:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/refund.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.shipments':
+            header:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/header.html.twig'
+                priority: 100
+            items:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/items.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.shipments.header':
+            title:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/header/title.html.twig'
+                priority: 100
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/header/state.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.shipments.item':
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/state.html.twig'
+                priority: 200
+            general:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/general.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.shipments.item.actions':
+            ship:
+                component: 'sylius_admin:shipment:ship_form'
+                props:
+                    resource: '@=_context.shipment'
+                    path: 'sylius_admin_order_shipment_ship'
+                    pathParameters:
+                        id: '@=_context.shipment.getId()'
+                        orderId: '@=_context.resource.getId()'
+                    template: '@SyliusAdmin/shipment/component/ship.html.twig'
+                priority: 200
+            resend_confirmation:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/resend_confirmation.html.twig'
+                priority: 100
+            show:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/show.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections#right':
+            general:
+                template: '@SyliusAdmin/order/show/content/sections/general.html.twig'
+                priority: 100
+            customer:
+                template: '@SyliusAdmin/order/show/content/sections/customer.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.general':
+            order_date:
+                template: '@SyliusAdmin/order/show/content/sections/general/order_date.html.twig'
+                priority: 500
+            currency:
+                template: '@SyliusAdmin/order/show/content/sections/general/currency.html.twig'
+                priority: 400
+            language:
+                template: '@SyliusAdmin/order/show/content/sections/general/language.html.twig'
+                priority: 300
+            channel:
+                template: '@SyliusAdmin/order/show/content/sections/general/channel.html.twig'
+                priority: 200
+            ip_address:
+                template: '@SyliusAdmin/order/show/content/sections/general/ip_address.html.twig'
+                priority: 100
+            notes:
+                template: '@SyliusAdmin/order/show/content/sections/general/notes.html.twig'
+                priority: 0
+
+        'sylius_admin.order.show.content.sections.customer':
+            full_name:
+                template: '@SyliusAdmin/order/show/content/sections/customer/full_name.html.twig'
+                priority: 600
+            customer_since:
+                template: '@SyliusAdmin/order/show/content/sections/customer/customer_since.html.twig'
+                priority: 500
+            email:
+                template: '@SyliusAdmin/order/show/content/sections/customer/email.html.twig'
+                priority: 400
+            phone:
+                template: '@SyliusAdmin/order/show/content/sections/customer/phone.html.twig'
+                priority: 300
+            billing_address:
+                template: '@SyliusAdmin/order/show/content/sections/customer/billing_address.html.twig'
+                priority: 200
+            shipping_address:
+                template: '@SyliusAdmin/order/show/content/sections/customer/shipping_address.html.twig'
+                priority: 100
+            edit_addresses:
+                template: '@SyliusAdmin/order/show/content/sections/customer/edit_addresses.html.twig'
+                priority: 0

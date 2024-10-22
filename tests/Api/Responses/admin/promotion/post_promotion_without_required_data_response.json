@@ -7,12 +7,12 @@
         {
             "propertyPath": "code",
             "message": "Please enter promotion code.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "name",
             "message": "Please enter promotion name.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

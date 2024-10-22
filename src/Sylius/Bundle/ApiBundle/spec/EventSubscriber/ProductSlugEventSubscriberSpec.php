@@ -50,7 +50,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         $this->generateSlug(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $product->getWrappedObject(),
         ));
     }
@@ -74,7 +74,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         $this->generateSlug(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $product->getWrappedObject(),
         ));
     }
@@ -98,7 +98,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         $this->generateSlug(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $product->getWrappedObject(),
         ));
     }

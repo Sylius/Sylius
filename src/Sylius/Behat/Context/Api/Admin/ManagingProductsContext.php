@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -33,10 +33,11 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductsContext implements Context
+final readonly class ManagingProductsContext implements Context
 {
     use ValidationTrait;
 
@@ -46,7 +47,6 @@ final class ManagingProductsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
     ) {
@@ -112,24 +112,35 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I name it :name in :localeCode
-     * @When I rename it to :name in :localeCode
      * @When I do not name it
      */
-    public function iRenameItToIn(?string $name = null, string $localeCode = 'en_US'): void
+    public function iDoNotNameIt(): void
     {
-        $data['translations'][$localeCode] = [];
+        // Intentionally left blank.
+    }
 
-        if ($name !== null) {
-            $data['translations'][$localeCode]['name'] = $name;
-        }
+    /**
+     * @When I name it :name in :localeCode locale
+     * @When I rename it to :name in :localeCode locale
+     */
+    public function iRenameItToInLocale(string $name, string $localeCode): void
+    {
+        $data['translations'][$localeCode]['name'] = $name;
 
         $this->client->updateRequestData($data);
     }
 
     /**
+     * @When I generate its slug in :localeCode locale
+     */
+    public function iGenerateItsSlugIn(string $localeCode): void
+    {
+        // Intentionally left blank, as this is a UI-specific action.
+    }
+
+    /**
      * @When I set its slug to :slug
-     * @When I set its slug to :slug in :localeCode
+     * @When I set its slug to :slug in :localeCode locale
      * @When I remove its slug
      */
     public function iSetItsSlugTo(?string $slug = null, $localeCode = 'en_US'): void
@@ -158,7 +169,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAddTheOptionToIt(ProductOptionInterface $productOption): void
     {
-        $this->client->updateRequestData(['options' => [$this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin')]]);
+        $this->client->updateRequestData(['options' => [$this->iriConverter->getIriFromResourceInSection($productOption, 'admin')]]);
     }
 
     /**
@@ -166,7 +177,7 @@ final class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $this->client->updateRequestData(['mainTaxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin')]);
+        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin')]);
     }
 
     /**
@@ -175,6 +186,35 @@ final class ManagingProductsContext implements Context
     public function iFilterThemByTaxon(TaxonInterface $taxon): void
     {
         $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
+        $this->client->filter();
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
+     * @When I search for products with :name name
+     */
+    public function iSearchForProductsWithName(string $name): void
+    {
+        $this->client->addFilter('translations.name', $name);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I search for products with :code code
+     */
+    public function iSearchForProductsWithCode(string $code): void
+    {
+        $this->client->addFilter('code', $code);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter them by :taxon main taxon
+     */
+    public function iFilterThemByMainTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->addFilter('mainTaxon.code', $taxon->getCode());
         $this->client->filter();
     }
 
@@ -204,17 +244,6 @@ final class ManagingProductsContext implements Context
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
         $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
-    }
-
-    /**
-     * @When I enable slug modification
-     * @When I enable slug modification in :localeCode
-     */
-    public function iEnableSlugModification(string $localeCode = 'en_US'): void
-    {
-        $data['translations'][$localeCode]['slug'] = '';
-
-        $this->client->updateRequestData($data);
     }
 
     /**
@@ -317,9 +346,43 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I want to modify the images of :product product
+     */
+    public function iWantToModifyTheImagesOfProduct(ProductInterface $product): void
+    {
+        $this->sharedStorage->set('productIri', $this->iriConverter->getIriFromResource($product));
+    }
+
+    /**
+     * @When I change the :type image position to :position
+     */
+    public function iChangeTheImagePositionTo(string $imageType, int $position): void
+    {
+        $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
+        $productCode = $this->responseChecker->getValue($this->client->getLastResponse(), 'code');
+
+        foreach ($images as $key => $imageData) {
+            if ($imageData['type'] === $imageType) {
+                $imageId = $imageData['id'];
+            }
+        }
+
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/products/%s/images/%s', $productCode, $imageId),
+            Request::METHOD_PUT,
+        );
+        $builder->withContent(['position' => $position]);
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
+    }
+
+    /**
      * @When I set its :attribute attribute to :value
-     * @When I set its :attribute attribute to :value in :localeCode
-     * @When I do not set its :attribute attribute in :localeCode
+     * @When I set its :attribute attribute to :value in :localeCode locale
+     * @When I do not set its :attribute attribute in :localeCode locale
+     * @When I set the :attribute attribute value to :value in :localeCode locale
      */
     public function iSetItsAttributeTo(
         ProductAttributeInterface $attribute,
@@ -329,7 +392,7 @@ final class ManagingProductsContext implements Context
         $this->client->addSubResourceData(
             'attributes',
             [
-                'attribute' => $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin'),
+                'attribute' => $this->iriConverter->getIriFromResourceInSection($attribute, 'admin'),
                 'value' => $value !== null ? $this->getAttributeValueInProperType($attribute, $value) : null,
                 'localeCode' => $localeCode,
             ],
@@ -341,7 +404,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveItsAttribute(ProductAttributeInterface $attribute): void
     {
-        $attributeIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin');
+        $attributeIri = $this->iriConverter->getIriFromResourceInSection($attribute, 'admin');
 
         $content = $this->client->getContent();
         foreach ($content['attributes'] as $key => $attributeValue) {
@@ -355,6 +418,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I add the :attributeName attribute
+     * @When I add the :attributeName attribute to it
      */
     public function iAddTheAttribute(string $attributeName): void
     {
@@ -396,9 +460,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I assign it to channel :channel
+     * @When I enable it in channel :channel
      */
-    public function iAssignItToChannel(ChannelInterface $channel): void
+    public function iEnableItInChannel(ChannelInterface $channel): void
     {
         $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }
@@ -444,7 +508,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'mainTaxon'),
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
         );
     }
 
@@ -463,7 +527,7 @@ final class ManagingProductsContext implements Context
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
             'productTaxons',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($productTaxon, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($productTaxon, 'admin'),
         ));
     }
 
@@ -475,7 +539,7 @@ final class ManagingProductsContext implements Context
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
             'options',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($productOption, 'admin'),
         ));
     }
 
@@ -498,7 +562,7 @@ final class ManagingProductsContext implements Context
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
             'variants',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($variant, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($variant, 'admin'),
         ));
     }
 
@@ -585,6 +649,28 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('Please enter product %s.', $element),
         );
+    }
+
+    /**
+     * @Then the one before last image on the list should have type :type with position :position
+     */
+    public function theOneBeforeLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
+    {
+        $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
+
+        Assert::same($images[count($images) - 2]['type'], $imageType);
+        Assert::same($images[count($images) - 2]['position'], $position);
+    }
+
+    /**
+     * @Then the last image on the list should have type :type with position :position
+     */
+    public function theLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
+    {
+        $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
+
+        Assert::same($images[count($images) - 1]['type'], $imageType);
+        Assert::same($images[count($images) - 1]['position'], $position);
     }
 
     /**
@@ -685,7 +771,7 @@ final class ManagingProductsContext implements Context
 
         $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
 
-        Assert::same($mainTaxon, $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'));
+        Assert::same($mainTaxon, $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'));
     }
 
     /**
@@ -696,21 +782,36 @@ final class ManagingProductsContext implements Context
         $this->client->index(Resources::PRODUCT_TAXONS);
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
-                'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
-                'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+                'product' => $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
+                'taxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
             ]),
         );
     }
 
     /**
-     * @Then /^(this product) name should be "([^"]+)"$/
+     * @Then the product :product should not have the :taxon taxon
      */
-    public function thisProductNameShouldBe(ProductInterface $product, string $name): void
+    public function thisProductTaxonShouldHaveNotTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $this->client->index(Resources::PRODUCT_TAXONS);
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
+                'product' => $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
+                'taxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
+            ]),
+        );
+    }
+
+    /**
+     * @Then /^(this product) name should be "([^"]+)" in ("([^"]+)" locale)$/
+     */
+    public function thisProductNameShouldBe(ProductInterface $product, string $name, string $localeCode): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         Assert::true(
-            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $name),
+            $this->responseChecker->hasTranslation($response, $localeCode, 'name', $name),
             sprintf('Product\'s name %s does not exist', $name),
         );
     }
@@ -738,7 +839,7 @@ final class ManagingProductsContext implements Context
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse['options'], true),
+            in_array($this->iriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse['options'], true),
             sprintf('Product with option %s does not exist', $productOption->getName()),
         );
     }
@@ -780,7 +881,7 @@ final class ManagingProductsContext implements Context
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      * @Then /^(this product) should(?:| still) have slug "([^"]+)" in ("[^"]+" locale)$/
      */
-    public function productSlugShouldBe(ProductInterface $product, string $slug, $localeCode = 'en_US'): void
+    public function productSlugShouldBe(ProductInterface $product, string $slug, string $localeCode = 'en_US'): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
@@ -801,7 +902,7 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->getCollectionItemsWithValue(
                 $response,
                 'reviewSubject',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
             ),
             'Should be no reviews, but some exist',
         );
@@ -863,8 +964,8 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then attribute :attribute of product :product should be :value
-     * @Then attribute :attribute of product :product should be :value in :localeCode
-     * @Then select attribute :attribute of product :product should be :value in :localeCode
+     * @Then attribute :attribute of product :product should be :value in :localeCode locale
+     * @Then select attribute :attribute of product :product should be :value in :localeCode locale
      */
     public function attributeOfProductShouldBe(
         ProductAttributeInterface $attribute,
@@ -884,7 +985,7 @@ final class ManagingProductsContext implements Context
     {
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
         foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin')) {
+            if ($attributeValue['attribute'] === $this->iriConverter->getIriFromResourceInSection($attribute, 'admin')) {
                 throw new \InvalidArgumentException(
                     sprintf('Product %s have attribute %s', $product->getName(), $attribute->getName()),
                 );
@@ -898,7 +999,7 @@ final class ManagingProductsContext implements Context
     public function iShouldNotBeAbleToEditItsOptions(): void
     {
         $productOption = $this->sharedStorage->get('product_option');
-        $productOptionIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin');
+        $productOptionIri = $this->iriConverter->getIriFromResourceInSection($productOption, 'admin');
         $this->client->updateRequestData(['options' => [$productOptionIri]]);
 
         $res = $this->client->update();
@@ -932,9 +1033,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I have to define the :attributeName attribute in :localeCode
+     * @Then I should be notified that I have to define the :attributeName attribute in :localeCode locale
      */
-    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attributeName, string $localeCode): void
+    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeInLocale(string $attributeName, string $localeCode): void
     {
         Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -943,7 +1044,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the :attributeName attribute in :localeCode should be longer than :number
+     * @Then I should be notified that the :attributeName attribute in :localeCode locale should be longer than :number
      */
     public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(
         string $attributeName,
@@ -1075,7 +1176,7 @@ final class ManagingProductsContext implements Context
         string $value,
         ?string $localeCode = null,
     ): void {
-        $attributeIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin');
+        $attributeIri = $this->iriConverter->getIriFromResourceInSection($attribute, 'admin');
 
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
         foreach ($attributes as $attributeValue) {

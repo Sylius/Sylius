@@ -47,7 +47,7 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
         ;
     }
 
-    public function findByPhrase(string $phrase, string $locale, int $limit = 10): array
+    public function findByPhrase(string $phrase, string $locale, int $limit = 10, ?array $excludes = null): array
     {
         $subqueryBuilder = $this->createQueryBuilder('sq')
             ->innerJoin('sq.translations', 'translation', 'WITH', 'translation.name LIKE :name')
@@ -57,6 +57,12 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
         ;
 
         $queryBuilder = $this->createQueryBuilder('o');
+
+        if (null !== $excludes) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->notIn('o.code', $excludes))
+            ;
+        }
 
         /** @var ProductOptionInterface[] $results */
         $results = $queryBuilder

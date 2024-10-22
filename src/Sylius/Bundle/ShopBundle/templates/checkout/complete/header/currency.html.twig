@@ -1,0 +1,10 @@
+{% set order = hookable_metadata.context.order %}
+
+<div class="row">
+    <div class="col-12 col-sm-4">
+        {{ 'sylius.ui.currency'|trans }}
+    </div>
+    <div class="col" {{ sylius_test_html_attribute('order-currency-code') }}>
+        {{ order.currencyCode }}
+    </div>
+</div>

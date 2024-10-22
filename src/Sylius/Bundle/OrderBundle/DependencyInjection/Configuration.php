@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
-use Sylius\Bundle\OrderBundle\Controller\OrderItemController;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -46,10 +45,6 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('autoconfigure_with_attributes')
-                    ->setDeprecated('sylius/order-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
-                    ->defaultFalse()
-                ->end()
             ->end()
         ;
 
@@ -69,9 +64,6 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('order')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')
-                                    ->setDeprecated('sylius/order-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
-                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -88,15 +80,12 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('order_item')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')
-                                    ->setDeprecated('sylius/order-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
-                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(OrderItem::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(OrderItemInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(OrderItemController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(OrderItemType::class)->cannotBeEmpty()->end()
@@ -107,9 +96,6 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('order_item_unit')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')
-                                    ->setDeprecated('sylius/order-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
-                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -125,9 +111,6 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('adjustment')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')
-                                    ->setDeprecated('sylius/order-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
-                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -143,9 +126,6 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('order_sequence')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')
-                                    ->setDeprecated('sylius/order-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
-                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

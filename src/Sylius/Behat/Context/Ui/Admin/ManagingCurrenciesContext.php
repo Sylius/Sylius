@@ -14,25 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Currency\CreatePageInterface;
+use Sylius\Behat\Element\Admin\Currency\FormElementInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Currency\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Currency\UpdatePageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingCurrenciesContext implements Context
+final readonly class ManagingCurrenciesContext implements Context
 {
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
-        private UpdatePageInterface $updatePage,
+        private FormElementInterface $formElement,
     ) {
     }
 
     /**
      * @When I want to add a new currency
      */
-    public function iWantToAddNewCurrency()
+    public function iWantToAddNewCurrency(): void
     {
         $this->createPage->open();
     }
@@ -40,25 +40,25 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @When I choose :currencyName
      */
-    public function iChoose($currencyName)
+    public function iChoose($currencyName): void
     {
-        $this->createPage->chooseName($currencyName);
+        $this->formElement->chooseCurrency($currencyName);
     }
 
     /**
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
 
     /**
      * @Then the currency :currency should appear in the store
-     * @Then I should see the currency :currency in the list
+     * @Then I should see the currency :currency on the list
      */
-    public function currencyShouldAppearInTheStore(CurrencyInterface $currency)
+    public function currencyShouldAppearInTheStore(CurrencyInterface $currency): void
     {
         $this->indexPage->open();
 
@@ -66,77 +66,26 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @When /^I want to edit (this currency)$/
-     */
-    public function iWantToEditThisCurrency(CurrencyInterface $currency)
-    {
-        $this->updatePage->open(['id' => $currency->getId()]);
-    }
-
-    /**
-     * @When I enable it
-     */
-    public function iEnableIt()
-    {
-        $this->updatePage->enable();
-    }
-
-    /**
-     * @When I disable it
-     */
-    public function iDisableIt()
-    {
-        $this->updatePage->disable();
-    }
-
-    /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then the code field should be disabled
-     */
-    public function theCodeFiledShouldBeDisabled()
-    {
-        Assert::same($this->updatePage->getCodeDisabledAttribute(), 'disabled');
-    }
-
-    /**
-     * @Then I should be notified that currency code must be unique
-     */
-    public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique()
-    {
-        Assert::same($this->createPage->getValidationMessage('code'), 'Currency code must be unique.');
-    }
-
-    /**
-     * @Then there should still be only one currency with :element :code
-     */
-    public function thereShouldStillBeOnlyOneCurrencyWithCode($element, $codeValue)
-    {
-        $this->indexPage->open();
-
-        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $codeValue]));
-    }
-
-    /**
      * @When I want to browse currencies of the store
      */
-    public function iWantToSeeAllCurrenciesInStore()
+    public function iWantToSeeAllCurrenciesInStore(): void
     {
         $this->indexPage->open();
     }
 
     /**
-     * @Then /^I should see (\d+) currencies in the list$/
+     * @Then /^I should see (\d+) currencies on the list$/
      */
-    public function iShouldSeeCurrenciesInTheList($amountOfCurrencies)
+    public function iShouldSeeCurrenciesInTheList(int $amountOfCurrencies): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amountOfCurrencies);
+        Assert::same($this->indexPage->countItems(), $amountOfCurrencies);
+    }
+
+    /**
+     * @Then I should not be able to choose :name
+     */
+    public function iShouldNotBeAbleToChoose(string $name): void
+    {
+        Assert::false($this->formElement->isCurrencyAvailable($name));
     }
 }

@@ -1,0 +1,47 @@
+{% macro accordion(items, open = false, auto_close = null, flush = false) %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+    {% set auto_close = auto_close|default(true) %}
+    {% set id = id|default(random()) %}
+
+    <div class="accordion{% if flush %} accordion-flush{% endif %}" id="{{ id }}">
+        {% for item in items %}
+            {% set item = {
+                'open': open,
+                'flag': null,
+                'icon': null,
+            }|merge(item) %}
+            {% set item_id = item.id|default('collapse' ~ loop.index) %}
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button {{ item.open == true ? '' : 'collapsed' }}"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#{{ item_id }}"
+                            aria-expanded="{{ item.open == true ? 'true' : 'false' }}"
+                            aria-controls="{{ item_id }}">
+
+                        <span class="d-flex gap-2">
+                            {% if item.flag %}
+                                <span class="flag flag-country-{{ item.flag }}"></span>
+                            {% endif %}
+                            {% if item.icon %}
+                                <span class="d-flex align-items-center">{{ icon({ icon: item.icon }) }}</span>
+                            {% endif %}
+                            {{ item.title|default('Title') }}
+                        </span>
+                    </button>
+                </h2>
+                <div id="{{ item_id }}"
+                     class="accordion-collapse collapse {{ item.open == true ? 'show' : '' }}"
+                     {% if auto_close == true %}data-bs-parent="#{{ id }}"{% endif %}>
+
+                    <div class="accordion-body">
+                        {{ item.content|default('Content') }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

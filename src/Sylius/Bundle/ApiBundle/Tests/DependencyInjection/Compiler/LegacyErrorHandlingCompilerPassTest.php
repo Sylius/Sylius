@@ -15,8 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\LegacyErrorHandlingCompilerPass;
-use Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer;
-use Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\HydraErrorNormalizer;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -27,12 +26,10 @@ final class LegacyErrorHandlingCompilerPassTest extends AbstractCompilerPassTest
     {
         $this->setParameter('sylius_api.legacy_error_handling', false);
         $this->setDefinition(HydraErrorNormalizer::class, new Definition());
-        $this->setDefinition(FlattenExceptionNormalizer::class, new Definition());
 
         $this->compile();
 
         $this->assertContainerBuilderHasService(HydraErrorNormalizer::class);
-        $this->assertContainerBuilderHasService(FlattenExceptionNormalizer::class);
     }
 
     /** @test */
@@ -40,12 +37,10 @@ final class LegacyErrorHandlingCompilerPassTest extends AbstractCompilerPassTest
     {
         $this->setParameter('sylius_api.legacy_error_handling', true);
         $this->setDefinition(HydraErrorNormalizer::class, new Definition());
-        $this->setDefinition(FlattenExceptionNormalizer::class, new Definition());
 
         $this->compile();
 
         $this->assertContainerBuilderNotHasService(HydraErrorNormalizer::class);
-        $this->assertContainerBuilderNotHasService(FlattenExceptionNormalizer::class);
     }
 
     protected function registerCompilerPass(ContainerBuilder $container): void

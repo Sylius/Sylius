@@ -15,16 +15,41 @@ namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class ProductType extends AbstractType
 {
-    public function getBlockPrefix(): string
+    /** @param array<string, mixed> $options */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        return 'sylius_admin_product';
+        $builder
+            ->add('images', LiveCollectionType::class, [
+                'entry_type' => ProductImageType::class,
+                'entry_options' => ['product' => $options['data']],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'sylius.form.product.images',
+                'block_name' => 'entry',
+            ])
+            ->add('associations', ProductAssociationsType::class, [
+                'label' => false,
+            ])
+            ->add('mainTaxon', TaxonAutocompleteType::class, [
+                'label' => 'sylius.form.product.main_taxon',
+                'multiple' => false,
+            ])
+        ;
     }
 
     public function getParent(): string
     {
         return BaseProductType::class;
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_product';
     }
 }

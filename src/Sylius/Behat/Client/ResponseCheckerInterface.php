@@ -45,7 +45,7 @@ interface ResponseCheckerInterface
 
     public function hasCollection(Response $response): bool;
 
-    public function hasValue(Response $response, string $key, int|string $value): bool;
+    public function hasValue(Response $response, string $key, bool|int|string|null $value, bool $isCaseSensitive = true): bool;
 
     public function hasValueInCollection(Response $response, string $key, int|string $value): bool;
 
@@ -65,9 +65,21 @@ interface ResponseCheckerInterface
         array $expectedValues,
     ): bool;
 
+    public function hasValueInSubresourceObject(
+        Response $response,
+        string $subResource,
+        string $key,
+        bool|int|string $expectedValue,
+    ): bool;
+
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, array|string $value): bool;
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool;
+
+    /**
+     * @param array<array-key, array> $items
+     */
+    public function hasItemWithTranslationInCollection(array $items, string $locale, string $key, string $translation): bool;
 
     public function hasKey(Response $response, string $key): bool;
 

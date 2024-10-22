@@ -27,15 +27,11 @@ Configuration reference
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Resource\Factory\Factory
                     templates: 'SyliusUserBundle:User'
-                    encoder: null
                     login_tracking_interval: null
                     resetting:
                         token:
                             ttl: P1D
                             length: 16
-                            field_name: passwordResetToken
-                        pin:
-                            length: 4
                             field_name: passwordResetToken
                     verification:
                         token:
@@ -51,15 +47,11 @@ Configuration reference
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Resource\Factory\Factory
                     templates: 'SyliusUserBundle:User'
-                    encoder: null
                     login_tracking_interval: null
                     resetting:
                         token:
                             ttl: P1D
                             length: 16
-                            field_name: passwordResetToken
-                        pin:
-                            length: 4
                             field_name: passwordResetToken
                     verification:
                         token:
@@ -80,9 +72,6 @@ Configuration reference
                         token:
                             ttl: P1D
                             length: 16
-                            field_name: passwordResetToken
-                        pin:
-                            length: 4
                             field_name: passwordResetToken
                     verification:
                         token:

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_shop.twig.component.checkout.address.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\AddressType</argument>
+            <argument type="service" id="sylius.context.customer" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="sylius.repository.address" />
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:checkout:address:form" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.checkout.address.address_book"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\AddressBookComponent"
+        >
+            <argument type="service" id="sylius.context.customer" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:checkout:address:address_book" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.checkout.shipping.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectShippingType</argument>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:checkout:shipping:form" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.checkout.payment.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType</argument>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:checkout:payment:form" />
+        </service>
+    </services>
+</container>

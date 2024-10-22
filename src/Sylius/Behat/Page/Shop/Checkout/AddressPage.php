@@ -17,15 +17,14 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Page\Shop\Page as ShopPage;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-class AddressPage extends SymfonyPage implements AddressPageInterface
+class AddressPage extends ShopPage implements AddressPageInterface
 {
     public const TYPE_BILLING = 'billing';
 
@@ -125,7 +124,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function selectShippingAddressProvince(string $province): void
     {
-        $this->waitForElement(5, 'shipping_country_province');
+        $this->waitForElementUpdate('form');
+
         $this->getElement('shipping_country_province')->selectOption($province);
     }
 
@@ -136,7 +136,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function selectBillingAddressProvince(string $province): void
     {
-        $this->waitForElement(5, 'billing_country_province');
+        $this->waitForElementUpdate('form');
+
         $this->getElement('billing_country_province')->selectOption($province);
     }
 
@@ -155,12 +156,14 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function canSignIn(): bool
     {
-        return $this->waitForElement(5, 'login_button');
+        $this->waitForElementUpdate('form');
+
+        return $this->hasElement('login_button');
     }
 
     public function signIn(): void
     {
-        $this->waitForElement(5, 'login_button');
+        $this->waitForElementUpdate('form');
 
         try {
             $this->getElement('login_button')->press();
@@ -173,7 +176,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function specifyPassword(string $password): void
     {
-        $this->getDocument()->waitFor(5, fn () => $this->getElement('login_password')->isVisible());
+        $this->waitForElementUpdate('form');
 
         $this->getElement('login_password')->setValue($password);
     }
@@ -192,6 +195,11 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->getElement('shipping_country')->find('css', 'option:selected')->getText();
     }
 
+    public function getBillingAddressCountry(): string
+    {
+        return $this->getElement('billing_country')->find('css', 'option:selected')->getText();
+    }
+
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
@@ -204,19 +212,23 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function specifyBillingAddressProvince(string $provinceName): void
     {
-        $this->waitForElement(5, 'billing_province');
+        $this->waitForElementUpdate('form');
+
         $this->getElement('billing_province')->setValue($provinceName);
     }
 
     public function specifyShippingAddressProvince(string $provinceName): void
     {
-        $this->waitForElement(5, 'shipping_province');
+        $this->waitForElementUpdate('form');
+
         $this->getElement('shipping_province')->setValue($provinceName);
     }
 
     public function hasShippingAddressInput(): bool
     {
-        return $this->waitForElement(5, 'shipping_province');
+        $this->waitForElementUpdate('form');
+
+        return $this->hasElement('shipping_province');
     }
 
     public function hasEmailInput(): bool
@@ -226,39 +238,23 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function hasBillingAddressInput(): bool
     {
-        return $this->waitForElement(5, 'billing_province');
+        $this->waitForElementUpdate('form');
+
+        return $this->hasElement('billing_province');
     }
 
     public function selectShippingAddressFromAddressBook(AddressInterface $address): void
     {
-        $this->waitForElement(2, sprintf('%s_province', self::TYPE_SHIPPING));
-        $addressBookSelect = $this->getElement('shipping_address_book');
+        $this->getElement('shipping_address_book')->selectOption($address->getId());
 
-        $addressBookSelect->click();
-        $addressOption = $addressBookSelect->waitFor(5, fn () => $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId())));
-
-        if (null === $addressOption) {
-            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
-        }
-
-        $addressOption->click();
+        $this->waitForElementUpdate('form');
     }
 
     public function selectBillingAddressFromAddressBook(AddressInterface $address): void
     {
-        $this->waitForElement(2, sprintf('%s_province', self::TYPE_BILLING));
-        $addressBookSelect = $this->getElement('billing_address_book');
+        $this->getElement('billing_address_book')->selectOption($address->getId());
 
-        $addressBookSelect->click();
-        $addressOption = $addressBookSelect->waitFor(5, fn () => $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId())));
-
-        if (null === $addressOption) {
-            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
-        }
-
-        $addressOption->click();
-
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        $this->waitForElementUpdate('form');
     }
 
     public function getPreFilledShippingAddress(): AddressInterface
@@ -290,41 +286,37 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address_book' => '[data-test-billing-address] [data-test-address-book]',
-            'billing_city' => '[data-test-billing-city]',
-            'billing_country' => '[data-test-billing-country]',
+            'billing_city' => '[data-test-billing-address] [data-test-city]',
+            'billing_country' => '[data-test-billing-address] [data-test-country]',
             'billing_country_province' => '[data-test-billing-address] [data-test-province-code]',
-            'billing_first_name' => '[data-test-billing-first-name]',
-            'billing_last_name' => '[data-test-billing-last-name]',
-            'billing_postcode' => '[data-test-billing-postcode]',
+            'billing_first_name' => '[data-test-billing-address] [data-test-first-name]',
+            'billing_last_name' => '[data-test-billing-address] [data-test-last-name]',
+            'billing_postcode' => '[data-test-billing-address] [data-test-postcode]',
             'billing_province' => '[data-test-billing-address] [data-test-province-name]',
-            'billing_street' => '[data-test-billing-street]',
+            'billing_street' => '[data-test-billing-address] [data-test-street]',
             'checkout_subtotal' => '[data-test-checkout-subtotal]',
             'customer_email' => '[data-test-login-email]',
             'different_billing_address' => '[data-test-different-billing-address]',
-            'different_billing_address_label' => '[data-test-different-billing-address-label]',
             'different_shipping_address' => '[data-test-different-shipping-address]',
-            'different_shipping_address_label' => '[data-test-different-shipping-address-label]',
+            'form' => '[data-live-name-value="sylius_shop:checkout:address:form"]',
             'login_button' => '[data-test-login-button]',
             'login_password' => '[data-test-password-input]',
             'login_validation_error' => '[data-test-login-validation-error]',
             'next_step' => '[data-test-next-step]',
             'shipping_address' => '[data-test-shipping-address]',
             'shipping_address_book' => '[data-test-shipping-address] [data-test-address-book]',
-            'shipping_city' => '[data-test-shipping-city]',
-            'shipping_country' => '[data-test-shipping-country]',
+            'shipping_city' => '[data-test-shipping-address] [data-test-city]',
+            'shipping_country' => '[data-test-shipping-address] [data-test-country]',
             'shipping_country_province' => '[data-test-shipping-address] [data-test-province-code]',
-            'shipping_first_name' => '[data-test-shipping-first-name]',
-            'shipping_last_name' => '[data-test-shipping-last-name]',
-            'shipping_postcode' => '[data-test-shipping-postcode]',
+            'shipping_first_name' => '[data-test-shipping-address] [data-test-first-name]',
+            'shipping_last_name' => '[data-test-shipping-address] [data-test-last-name]',
+            'shipping_postcode' => '[data-test-shipping-address] [data-test-postcode]',
             'shipping_province' => '[data-test-shipping-address] [data-test-province-name]',
-            'shipping_street' => '[data-test-shipping-street]',
-            'form' => 'form[name="sylius_checkout_address"]',
+            'shipping_street' => '[data-test-shipping-address] [data-test-street]',
         ]);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     private function getOptionsFromSelect(NodeElement $element): array
     {
         return array_map(
@@ -347,7 +339,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $address->setCountryCode($this->getElement(sprintf('%s_country', $type))->getValue());
         $address->setCity($this->getElement(sprintf('%s_city', $type))->getValue());
         $address->setPostcode($this->getElement(sprintf('%s_postcode', $type))->getValue());
-        $this->waitForElement(5, sprintf('%s_province', $type));
+        $this->waitForElementUpdate('form');
 
         try {
             $address->setProvinceName($this->getElement(sprintf('%s_province', $type))->getValue());
@@ -369,14 +361,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement(sprintf('%s_city', $type))->setValue($address->getCity());
         $this->getElement(sprintf('%s_postcode', $type))->setValue($address->getPostcode());
 
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
-
         if (null !== $address->getProvinceName()) {
-            $this->waitForElement(5, sprintf('%s_province', $type));
+            $this->waitForElementUpdate('form');
             $this->getElement(sprintf('%s_province', $type))->setValue($address->getProvinceName());
         }
         if (null !== $address->getProvinceCode()) {
-            $this->waitForElement(5, sprintf('%s_country_province', $type));
+            $this->waitForElementUpdate('form');
             $this->getElement(sprintf('%s_country_province', $type))->selectOption($address->getProvinceCode());
         }
     }
@@ -396,11 +386,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->getDocument()->waitFor(5, fn () => !$this->hasElement('login_password'));
     }
 
-    private function waitForElement(int $timeout, string $elementName): bool
-    {
-        return $this->getDocument()->waitFor($timeout, fn () => $this->hasElement($elementName));
-    }
-
     private function assertAddressType(string $type): void
     {
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
@@ -410,12 +395,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     private function chooseDifferentAddress(string $type): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getElement(sprintf('different_%s_address_label', $type))->click();
-
-            return;
-        }
-
-        $this->getElement(sprintf('different_%s_address', $type))->check();
+        $elem = $this->getElement(sprintf('different_%s_address', $type));
+        $elem->click();
+        $this->waitForElementUpdate('form');
     }
 }

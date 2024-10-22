@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class TaxonomyElement extends Element implements TaxonomyElementInterface
@@ -23,25 +22,16 @@ final class TaxonomyElement extends Element implements TaxonomyElementInterface
         return $this->getElement('main_taxon')->getText();
     }
 
-    public function hasProductTaxon(string $taxonName): bool
+    public function getProductTaxons(): string
     {
-        $taxons = $this->getElement('product_taxon');
-
-        /** @var NodeElement $taxon */
-        foreach ($taxons->findAll('css', 'li') as $taxon) {
-            if ($taxon->getText() === $taxonName) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->getElement('product_taxons')->getText();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'main_taxon' => '#taxonomy tr:contains("Main taxon") td:nth-child(2)',
-            'product_taxon' => '#taxonomy tr:contains("Product taxon") td:nth-child(2)',
+            'main_taxon' => '[data-test-main-taxon]',
+            'product_taxons' => '[data-test-product-taxons]',
         ]);
     }
 }
