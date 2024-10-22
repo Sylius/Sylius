@@ -25,6 +25,10 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 class ProductSlugComponent
 {
     public string $slug = '';
+
+    /**
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     */
     public function __construct(
         private readonly ProductRepositoryInterface $productRepository,
         private readonly ChannelContextInterface $channelContext,
