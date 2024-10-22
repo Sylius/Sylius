@@ -55,7 +55,7 @@
             id="sylius_api.doctrine.orm.query_extension.shop.product.channel_and_locale_based"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\ChannelAndLocaleBasedExtension"
         >
-            <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
@@ -63,7 +63,7 @@
             id="sylius_api.doctrine.orm.query_extension.shop.product.taxon_based"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\TaxonBasedExtension"
         >
-            <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
@@ -97,9 +97,11 @@
 
         <service
             id="sylius_api.doctrine.orm.query_extension.shop.product.enabled"
-            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\EnabledExtension"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\EnabledExtension"
         >
-            <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument>%sylius.model.product.class%</argument>
+            <argument>Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
@@ -107,7 +109,7 @@
             id="sylius_api.doctrine.orm.query_extension.shop.country.channel_based"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Country\ChannelBasedExtension"
         >
-            <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
@@ -115,7 +117,7 @@
             id="sylius_api.doctrine.orm.query_extension.shop.taxon.channel_based"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon\ChannelBasedExtension"
         >
-            <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
@@ -176,9 +178,11 @@
 
         <service
             id="sylius_api.doctrine.orm.query_extension.shop.product_variant.enabled"
-            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductVariant\EnabledExtension"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\EnabledExtension"
         >
-            <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument>Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
@@ -214,14 +218,25 @@
             id="sylius_api.doctrine.orm.query_extension.admin.promotion.promotion_coupon.post_result"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\Promotion\PromotionCoupon\PostResultExtension"
         >
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="api_platform.doctrine.orm.query_extension.item"/>
         </service>
 
         <service
-            id="sylius_api.doctrine.orm.query_extension.shop.taxon.enabled"
-            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon\EnabledExtension"
+            id="sylius_api.doctrine.orm.query_extension.shop.taxon.enabled_children"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon\EnabledChildrenExtension"
         >
-            <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
+        <service
+            id="sylius_api.doctrine.orm.query_extension.shop.taxon.enabled"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\EnabledExtension"
+        >
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument>%sylius.model.taxon.class%</argument>
+            <argument>Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection</argument>
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 

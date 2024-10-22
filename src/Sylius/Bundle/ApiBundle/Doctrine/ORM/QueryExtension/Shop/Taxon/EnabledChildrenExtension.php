@@ -17,12 +17,13 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-final readonly class EnabledExtension implements QueryItemExtensionInterface
+final readonly class EnabledChildrenExtension implements QueryItemExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
+    public function __construct(private SectionProviderInterface $sectionProvider)
     {
     }
 
@@ -42,8 +43,7 @@ final readonly class EnabledExtension implements QueryItemExtensionInterface
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 
@@ -53,7 +53,6 @@ final readonly class EnabledExtension implements QueryItemExtensionInterface
 
         $queryBuilder->addSelect($childAlias);
         $queryBuilder->leftJoin(sprintf('%s.children', $rootAlias), $childAlias, 'WITH', sprintf('%s.enabled = :%s', $childAlias, $enabledParameter));
-        $queryBuilder->andWhere(sprintf('%s.enabled = :%s', $rootAlias, $enabledParameter));  // TODO: potentially remove from here and apply via a global enabled query extension
         $queryBuilder->setParameter($enabledParameter, true);
     }
 }

@@ -70,7 +70,6 @@ final readonly class EnabledWithinProductAssociationExtension implements QueryCo
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
-        $enabledParameterName = $queryNameGenerator->generateParameterName('enabled');
         $associationAliasName = $queryNameGenerator->generateJoinAlias('association');
         $productAssociationAliasName = $queryNameGenerator->generateJoinAlias('associatedProduct');
 
@@ -88,8 +87,6 @@ final readonly class EnabledWithinProductAssociationExtension implements QueryCo
                 ),
             )
             ->andWhere(sprintf('%s.associations IS EMPTY OR %s.id IS NOT NULL', $rootAlias, $productAssociationAliasName))
-            ->andWhere(sprintf('%s.enabled = :%s', $rootAlias, $enabledParameterName))
-            ->setParameter($enabledParameterName, true)
         ;
     }
 }

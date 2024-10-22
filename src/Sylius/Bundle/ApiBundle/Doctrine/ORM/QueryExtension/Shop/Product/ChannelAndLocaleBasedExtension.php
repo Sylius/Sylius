@@ -17,14 +17,15 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ChannelAndLocaleBasedExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
+    public function __construct(private SectionProviderInterface $sectionProvider)
     {
     }
 
@@ -42,8 +43,7 @@ final readonly class ChannelAndLocaleBasedExtension implements QueryCollectionEx
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 

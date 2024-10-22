@@ -11,60 +11,62 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductVariant;
+namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class EnabledExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext)
+    function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith(
+            $sectionProvider,
+            ProductVariantInterface::class,
+            ShopApiSection::class,
+        );
     }
 
-    function it_does_nothing_if_current_resource_is_not_a_product_variant_for_item(
-        UserContextInterface $userContext,
+    public function it_does_not_apply_conditions_to_item_for_unsupported_resource(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $this->applyToItem($queryBuilder, $queryNameGenerator, \stdClass::class, []);
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator, TaxonInterface::class, [], new Get());
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
-    function it_does_nothing_if_current_user_is_an_admin_user_for_item(
-        UserContextInterface $userContext,
-        UserInterface $user,
+    function it_does_not_apply_conditions_to_item_for_admin_api_section(
+        SectionProviderInterface $sectionProvider,
+        AdminApiSection $adminApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $this->applyToItem($queryBuilder, $queryNameGenerator, ProductVariantInterface::class, []);
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator, ProductVariantInterface::class, [], new Get());
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
     function it_filters_enabled_variant(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
 
@@ -82,40 +84,38 @@ final class EnabledExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_does_nothing_if_current_resource_is_not_a_product_variant(
-        UserContextInterface $userContext,
+    public function it_does_not_apply_conditions_to_collection_for_unsupported_resource(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, \stdClass::class);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, new Get());
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
-    function it_does_nothing_if_current_user_is_an_admin_user_for_collection(
-        UserContextInterface $userContext,
-        UserInterface $user,
+    function it_does_not_apply_conditions_to_collection_for_admin_api_section(
+        SectionProviderInterface $sectionProvider,
+        AdminApiSection $adminApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductVariantInterface::class);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductVariantInterface::class, new Get());
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
     function it_filters_variants(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
 

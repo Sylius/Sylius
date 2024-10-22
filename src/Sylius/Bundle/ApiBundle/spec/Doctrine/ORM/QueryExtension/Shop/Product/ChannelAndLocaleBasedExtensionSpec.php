@@ -17,40 +17,52 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ChannelAndLocaleBasedExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($sectionProvider);
     }
 
-    function it_does_nothing_if_current_resource_is_not_a_product(
-        UserContextInterface $userContext,
+    public function it_does_not_apply_conditions_to_collection_for_unsupported_resource(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
-        $queryBuilder->addSelect('translation')->shouldNotBeCalled();
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, \stdClass::class);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, new Get());
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
+    }
+
+    function it_does_not_apply_conditions_to_collection_for_admin_api_section(
+        SectionProviderInterface $sectionProvider,
+        AdminApiSection $adminApiSection,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+    ): void {
+        $sectionProvider->getSection()->willReturn($adminApiSection);
+
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, AddressInterface::class);
+
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
     function it_throws_an_exception_if_context_has_no_channel_for_shop_user(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -59,14 +71,13 @@ final class ChannelAndLocaleBasedExtensionSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_context_has_no_locale_for_shop_user(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -77,30 +88,14 @@ final class ChannelAndLocaleBasedExtensionSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_current_user_is_an_admin_user(
-        UserContextInterface $userContext,
-        UserInterface $user,
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-    ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
-
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
-        $queryBuilder->addSelect('translation')->shouldNotBeCalled();
-
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, new Get());
-    }
-
     function it_filters_products_by_channel_and_locale_code_for_shop_user(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $queryNameGenerator->generateParameterName('channel')->shouldBeCalled()->willReturn('channel');
         $queryNameGenerator->generateParameterName('localeCode')->shouldBeCalled()->willReturn('localeCode');
