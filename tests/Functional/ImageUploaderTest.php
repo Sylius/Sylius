@@ -30,7 +30,7 @@ final class ImageUploaderTest extends WebTestCase
     {
         self::$client = static::createClient();
 
-        $imageUploader = self::$kernel->getContainer()->get('sylius.image_uploader');
+        $imageUploader = self::$kernel->getContainer()->get('sylius.uploader.image');
         $fileSystem = self::$kernel->getContainer()->get('gaufrette.sylius_image_filesystem');
 
         $file = new UploadedFile(__DIR__ . '/../Resources/xss.svg', 'xss.svg');

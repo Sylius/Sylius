@@ -60,12 +60,11 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionFixture">
+        <service id="sylius.fixture.catalog_promotion" class="Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionFixture">
             <argument type="service" id="sylius.manager.catalog_promotion" />
             <argument type="service" id="sylius.fixture.example_factory.catalog_promotion" />
             <tag name="sylius_fixtures.fixture" />
         </service>
-        <service id="sylius.fixture.catalog_promotion" alias="Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionFixture" />
 
         <service id="sylius.fixture.channel" class="Sylius\Bundle\CoreBundle\Fixture\ChannelFixture">
             <argument type="service" id="sylius.manager.channel" />

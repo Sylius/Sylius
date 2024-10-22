@@ -58,14 +58,14 @@
         </service>
         <service id="Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface" alias="sylius.shipping_calculator"/>
 
-        <service id="sylius.shipping_calculator.flat_rate"
+        <service id="sylius.calculator.shipping.flat_rate"
                  class="Sylius\Component\Shipping\Calculator\FlatRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="flat_rate"
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType"
                  label="sylius.form.shipping_calculator.flat_rate_configuration.label"/>
         </service>
 
-        <service id="sylius.shipping_calculator.per_unit_rate"
+        <service id="sylius.calculator.shipping.per_unit_rate"
                  class="Sylius\Component\Shipping\Calculator\PerUnitRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="per_unit_rate"
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType"
@@ -76,14 +76,14 @@
             <argument type="service" id="clock"/>
         </service>
 
-        <service id="sylius.rule_checker.shipping_method.total_weight_greater_than_or_equal"
+        <service id="sylius.checker.shipping_method_rule.total_weight_greater_than_or_equal"
                  class="Sylius\Component\Shipping\Checker\Rule\TotalWeightGreaterThanOrEqualRuleChecker">
             <tag name="sylius.shipping_method_rule_checker" type="total_weight_greater_than_or_equal"
                  label="sylius.form.shipping_method_rule.total_weight_greater_than_or_equal"
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Rule\TotalWeightGreaterThanOrEqualConfigurationType"/>
         </service>
 
-        <service id="sylius.rule_checker.shipping_method.total_weight_less_than_or_equal"
+        <service id="sylius.checker.shipping_method_rule.total_weight_less_than_or_equal"
                  class="Sylius\Component\Shipping\Checker\Rule\TotalWeightLessThanOrEqualRuleChecker">
             <tag name="sylius.shipping_method_rule_checker" type="total_weight_less_than_or_equal"
                  label="sylius.form.shipping_method_rule.total_weight_less_than_or_equal"

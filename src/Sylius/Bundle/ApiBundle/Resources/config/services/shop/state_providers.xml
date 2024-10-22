@@ -38,13 +38,13 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <argument type="service" id="sylius.repository.product_attribute_value" />
             <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.locale_provider.channel_based" />
+            <argument type="service" id="sylius.provider.locale.channel_based" />
             <argument>%locale%</argument>
             <tag name="api_platform.state_provider" priority="10"/>
         </service>
 
         <service id="sylius_api.state_provider.shop.order.shipment.shipping_method.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Shipment\ShippingMethod\CollectionProvider">
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.resolver.shipping_methods" />
             <tag name="api_platform.state_provider" />
@@ -53,7 +53,7 @@
         <service id="sylius_api.state_provider.shop.order.payment.payment_method.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Payment\PaymentMethod\CollectionProvider">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.section_resolver.uri_based" />
             <argument type="service" id="sylius.resolver.payment_methods" />
             <tag name="api_platform.state_provider" />
         </service>
