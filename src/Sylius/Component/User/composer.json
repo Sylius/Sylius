@@ -34,7 +34,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/collections": "^1.8",
+        "doctrine/collections": "^2.2",
         "sylius/resource": "^1.12",
         "symfony/polyfill-mbstring": "^1.31",
         "symfony/security-core": "^6.4 || ^7.1"
