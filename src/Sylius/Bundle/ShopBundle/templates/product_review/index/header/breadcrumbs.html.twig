@@ -1,0 +1,8 @@
+{% from '@SyliusShop/product_review/common/macro/breadcrumbs.html.twig' import product_review_breadcrumbs %}
+
+{% set new_items = [
+    { label: product.name, path: path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) },
+    { label: 'sylius.ui.reviews'|trans, active: true }
+] %}
+
+{{ product_review_breadcrumbs(product, new_items) }}

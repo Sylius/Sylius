@@ -1,13 +1,24 @@
 sylius_twig_hooks:
     hooks:
         'sylius.shop.product_review.create':
+            header:
+                template: '@SyliusShop/product_review/create/header.html.twig'
+                priority: 200
             sidebar:
                 template: "@SyliusShop/product_review/create/sidebar.html.twig"
                 priority: 100
             main:
                 template: "@SyliusShop/product_review/create/main.html.twig"
                 priority: 0
-                
+
+        'sylius.shop.product_review.create.header':
+            breadcrumbs:
+                component: 'sylius_shop:common.product_slug'
+                props:
+                    slug: '@=_context.slug'
+                    template: '@SyliusShop/product_review/create/header/breadcrumbs.html.twig'
+                priority: 0
+
         'sylius.shop.product_review.create.sidebar':
             product_card:
                 component: 'sylius_shop:product:card'
@@ -15,7 +26,7 @@ sylius_twig_hooks:
                     product: '@=_context.product'
                     template: '@SyliusShop/product/common/card.html.twig'
                 priority: 0
-            
+
         'sylius.shop.product_review.create.main':
             header:
                 template: "@SyliusShop/product_review/create/main/header.html.twig"
@@ -27,7 +38,7 @@ sylius_twig_hooks:
                     form: '@=_context.form'
                     template: '@SyliusShop/product_review/create/main/form.html.twig'
                 priority: 0
-                
+
         'sylius.shop.product_review.create.main.form':
             rating:
                 template: "@SyliusShop/product_review/create/main/form/rating.html.twig"

@@ -41,5 +41,16 @@
 
             <tag name="sylius.twig_component" key="sylius_shop:common:taxon_menu" />
         </service>
+
+        <service
+                id="sylius_shop.twig.component.common.product_slug"
+                class="Sylius\Bundle\ShopBundle\Twig\Component\Common\ProductSlugComponent"
+        >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+
+            <tag name="sylius.twig_component" key="sylius_shop:common.product_slug" />
+        </service>
     </services>
 </container>
