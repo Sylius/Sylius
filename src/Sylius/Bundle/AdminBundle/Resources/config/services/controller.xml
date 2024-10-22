@@ -40,13 +40,13 @@
             <argument type="service" id="twig" />
         </service>
 
-        <service id="sylius_admin.controller.remove_avatar" class="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction" public="true">
+        <service id="sylius_admin.controller.remove_avatar" class="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction">
             <argument type='service' id="sylius.repository.avatar_image" />
             <argument type="service" id="router" />
             <argument type="service" id="security.csrf.token_manager" />
         </service>
 
-        <service id="sylius_admin.controller.resend_order_confirmation_email" class="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction" public="true">
+        <service id="sylius_admin.controller.resend_order_confirmation_email" class="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction">
             <argument type='service' id="sylius.repository.order" />
             <argument type="service" id="sylius.command_dispatcher.resend_order_confirmation_email" />
             <argument type="service" id="security.csrf.token_manager" />
@@ -54,7 +54,7 @@
             <argument type="service" id="router" />
         </service>
 
-        <service id="sylius_admin.controller.resend_shipment_confirmation_email" class="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
+        <service id="sylius_admin.controller.resend_shipment_confirmation_email" class="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction">
             <argument type='service' id="sylius.repository.shipment" />
             <argument type="service" id="sylius.command_dispatcher.resend_shipment_confirmation_email" />
             <argument type="service" id="security.csrf.token_manager" />
@@ -74,19 +74,19 @@
             <argument type="service" id="twig" />
         </service>
 
-        <service id="sylius_admin.controller.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">
+        <service id="sylius_admin.controller.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="twig" />
             <argument type="service" id="router" />
         </service>
 
-        <service id="sylius_admin.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">
+        <service id="sylius_admin.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController">
             <argument type='service' id="sylius.provider.statistics.customer" />
             <argument type='service' id="sylius.repository.customer" />
             <argument type='service' id="twig" />
         </service>
 
-        <service id="sylius_admin.controller.notification" class="Sylius\Bundle\AdminBundle\Controller\NotificationController" public="true">
+        <service id="sylius_admin.controller.notification" class="Sylius\Bundle\AdminBundle\Controller\NotificationController">
             <argument type="service" id="sylius.http_client" />
             <argument type="service" id="Psr\Http\Message\RequestFactoryInterface" />
             <argument type="string">%sylius.admin.notification.uri%</argument>
@@ -94,7 +94,7 @@
             <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />
         </service>
 
-        <service id="sylius_admin.controller.remove_catalog_promotion" class="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">
+        <service id="sylius_admin.controller.remove_catalog_promotion" class="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction">
             <argument type="service" id="sylius.processor.catalog_promotion.removal" />
         </service>
 
@@ -102,6 +102,7 @@
             id="sylius_admin.resource_controller.redirect_handler"
             class="Sylius\Bundle\AdminBundle\Controller\RedirectHandler"
             decorates="sylius.resource_controller.redirect_handler"
+            public="false"
         >
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.grid.filter_storage" />
