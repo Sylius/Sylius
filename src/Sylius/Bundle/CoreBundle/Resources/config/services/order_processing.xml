@@ -55,7 +55,7 @@
 
         <service id="sylius.order_processing.shipping_charges_processor" class="Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor">
             <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.shipping_calculator" />
+            <argument type="service" id="sylius.calculator.shipping" />
             <tag name="sylius.order_processor" priority="30"/>
         </service>
 
