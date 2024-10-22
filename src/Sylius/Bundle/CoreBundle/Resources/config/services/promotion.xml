@@ -116,7 +116,7 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-        <service id="sylius.eligibility_checker.promotion.promotion_coupon_per_customer_usage_limit"
+        <service id="sylius.checker.promotion.promotion_coupon_per_customer_usage_limit_eligibility "
                  alias="sylius.promotion.eligibility_checker.promotion_coupon_per_customer_usage_limit" />
 
         <service id="sylius.promotion_filter.taxon" class="Sylius\Component\Core\Promotion\Filter\TaxonFilter" />
