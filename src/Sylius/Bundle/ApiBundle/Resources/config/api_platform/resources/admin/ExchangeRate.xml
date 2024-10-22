@@ -33,7 +33,7 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ExchangeRateFilter</filter>
+                    <filter>sylius_api.currency_search_filter.admin.exchange_rate</filter>
                 </filters>
             </operation>
 
