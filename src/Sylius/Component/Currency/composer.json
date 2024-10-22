@@ -26,12 +26,12 @@
     ],
     "require": {
         "php": "^8.2",
+        "laminas/laminas-stdlib": "^3.19",
         "sylius/resource": "^1.12",
-        "symfony/intl": "^6.4.0 || ^7.1",
-        "laminas/laminas-stdlib": "^3.3.1"
+        "symfony/intl": "^6.4 || ^7.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
+        "phpspec/phpspec": "^7.5"
     },
     "config": {
         "allow-plugins": {

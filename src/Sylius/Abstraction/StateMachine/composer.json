@@ -23,7 +23,7 @@
         "php": "^8.2",
         "symfony/dependency-injection": "^6.4.1 || ^7.1",
         "symfony/http-kernel": "^6.4.1 || ^7.1",
-        "symfony/workflow": "^6.4.0 || ^7.1"
+        "symfony/workflow": "^6.4 || ^7.1"
     },
     "suggest": {
         "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)",
@@ -33,7 +33,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^5.1",
         "phpunit/phpunit": "^9.5",
-        "webmozart/assert": "^1.9"
+        "webmozart/assert": "^1.11"
     },
     "extra": {
         "branch-alias": {

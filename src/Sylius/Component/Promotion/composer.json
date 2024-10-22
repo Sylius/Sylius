@@ -26,15 +26,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/orm": "^2.13",
+        "doctrine/collections": "^1.8",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
-    },
-    "conflict": {
-        "doctrine/orm": "2.15.2"
+        "phpspec/phpspec": "^7.5"
     },
     "config": {
         "allow-plugins": {

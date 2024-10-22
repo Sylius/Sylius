@@ -33,16 +33,15 @@
         "sylius/ui-bundle": "^2.0",
         "sylius/theme-bundle": "^2.4",
         "symfony/framework-bundle": "^6.4.1 || ^7.1",
-        "symfony/security-bundle": "^6.4.0 || ^7.1",
-        "symfony/webpack-encore-bundle": "^2.1",
-        "twig/intl-extra": "^3.13.0",
-        "twig/twig": "^3.14.0"
+        "symfony/security-bundle": "^6.4 || ^7.1",
+        "symfony/webpack-encore-bundle": "^2.2",
+        "twig/twig": "^3.14"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "mockery/mockery": "^1.4",
-        "phpspec/phpspec": "^7.2",
+        "mockery/mockery": "^1.6",
+        "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.1"
     },

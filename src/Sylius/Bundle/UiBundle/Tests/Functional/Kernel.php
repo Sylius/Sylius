@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Tests\Functional;
 
-use Sonata\BlockBundle\SonataBlockBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
 use Sylius\Bundle\UiBundle\Tests\Functional\src\SomeTwigComponent;
 use Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle;
@@ -36,7 +35,6 @@ final class Kernel extends HttpKernel
             new FrameworkBundle(),
             new SecurityBundle(),
             new TwigBundle(),
-            new SonataBlockBundle(),
             new SyliusUiBundle(),
             new WebpackEncoreBundle(),
             new TwigComponentBundle(),

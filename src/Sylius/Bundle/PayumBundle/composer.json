@@ -29,8 +29,8 @@
     ],
     "require": {
         "php": "^8.2",
-        "payum/offline": "^1.7.3",
-        "payum/payum-bundle": "^2.5",
+        "payum/offline": "^1.7.5",
+        "payum/payum-bundle": "^2.6",
         "sylius/core-bundle": "^2.0",
         "sylius/currency": "^2.0",
         "sylius/order-bundle": "^2.0",
@@ -40,7 +40,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/phpspec": "^7.2",
+        "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.1"
     },
