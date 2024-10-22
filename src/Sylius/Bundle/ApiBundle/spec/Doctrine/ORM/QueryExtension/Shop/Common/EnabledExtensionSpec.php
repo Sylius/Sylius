@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common;
+namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Common;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
@@ -23,16 +23,13 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Resource\Model\ToggleableInterface;
 
 final class EnabledExtensionSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith(
-            $sectionProvider,
-            ProductVariantInterface::class,
-            ShopApiSection::class,
-        );
+        $this->beConstructedWith($sectionProvider);
     }
 
     public function it_does_not_apply_conditions_to_item_for_unsupported_resource(
@@ -53,7 +50,7 @@ final class EnabledExtensionSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator, ProductVariantInterface::class, []);
+        $this->applyToItem($queryBuilder, $queryNameGenerator, ToggleableInterface::class, []);
 
         $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
@@ -77,7 +74,7 @@ final class EnabledExtensionSpec extends ObjectBehavior
         $this->applyToItem(
             $queryBuilder,
             $queryNameGenerator,
-            ProductVariantInterface::class,
+            ToggleableInterface::class,
             [],
             new Get(),
             [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US'],
@@ -102,7 +99,7 @@ final class EnabledExtensionSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductVariantInterface::class);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ToggleableInterface::class);
 
         $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
@@ -126,7 +123,7 @@ final class EnabledExtensionSpec extends ObjectBehavior
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
-            ProductVariantInterface::class,
+            ToggleableInterface::class,
             new Get(),
             [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US'],
         );

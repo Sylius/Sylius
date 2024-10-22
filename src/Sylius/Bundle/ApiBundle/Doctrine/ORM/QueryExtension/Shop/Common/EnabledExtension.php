@@ -11,22 +11,20 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common;
+namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Common;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Resource\Model\ToggleableInterface;
 
 final readonly class EnabledExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    public function __construct(
-        private SectionProviderInterface $sectionProvider,
-        private string $resourceClass,
-        private string $section,
-    ) {
+    public function __construct(private SectionProviderInterface $sectionProvider) {
     }
 
     /**
@@ -62,11 +60,11 @@ final readonly class EnabledExtension implements QueryCollectionExtensionInterfa
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
     ): void {
-        if (!is_a($resourceClass, $this->resourceClass, true)) {
+        if (!is_a($resourceClass, ToggleableInterface::class, true)) {
             return;
         }
 
-        if (!$this->sectionProvider->getSection() instanceof $this->section) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 

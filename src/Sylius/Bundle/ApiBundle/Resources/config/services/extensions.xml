@@ -96,16 +96,6 @@
         </service>
 
         <service
-            id="sylius_api.doctrine.orm.query_extension.shop.product.enabled"
-            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\EnabledExtension"
-        >
-            <argument type="service" id="sylius.section_resolver.uri_based" />
-            <argument>%sylius.model.product.class%</argument>
-            <argument>Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection</argument>
-            <tag name="api_platform.doctrine.orm.query_extension.collection" />
-        </service>
-
-        <service
             id="sylius_api.doctrine.orm.query_extension.shop.country.channel_based"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Country\ChannelBasedExtension"
         >
@@ -177,12 +167,10 @@
         </service>
 
         <service
-            id="sylius_api.doctrine.orm.query_extension.shop.product_variant.enabled"
-            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\EnabledExtension"
+            id="sylius_api.doctrine.orm.query_extension.shop.common.enabled"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Common\EnabledExtension"
         >
             <argument type="service" id="sylius.section_resolver.uri_based" />
-            <argument>%sylius.model.product_variant.class%</argument>
-            <argument>Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
@@ -227,16 +215,6 @@
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon\EnabledChildrenExtension"
         >
             <argument type="service" id="sylius.section_resolver.uri_based" />
-            <tag name="api_platform.doctrine.orm.query_extension.item" />
-        </service>
-
-        <service
-            id="sylius_api.doctrine.orm.query_extension.shop.taxon.enabled"
-            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\EnabledExtension"
-        >
-            <argument type="service" id="sylius.section_resolver.uri_based" />
-            <argument>%sylius.model.taxon.class%</argument>
-            <argument>Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection</argument>
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
