@@ -61,7 +61,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius_api.name_search_order_by_locale_filter.shop.translatable" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter" public="true">
+        <service id="sylius_api.name_with_locale_order_filter.shop.translatable" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>

@@ -34,7 +34,7 @@
                 </normalizationContext>
                 <filters>
                     <filter>sylius_api.search_filter.shop.product_variant</filter>
-                    <filter>sylius_api.search_filter.shop.product_variant_option_value</filter>
+                    <filter>sylius_api.option_value_search_filter.shop.product_variant</filter>
                 </filters>
             </operation>
 
