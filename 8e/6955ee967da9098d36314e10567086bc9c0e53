@@ -1,0 +1,61 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2024-04-05T12:21:14Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deleted
+
+Available commands:
+  - `/bns:deploy` to redeploy the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by mamazu at 2024-06-13T14:40:05Z
+
+Any idea why the pipeline's red?
+
+---------------------------------------------------------------------------
+
+by NoResponseMate at 2024-06-21T09:36:02Z
+
+Hi @mamazu 👋
+
+You'll probably need to rebase and push again.
+That might fix the build as the content shouldn't make it red, but changing the base branch of a PR tends to bug out the runners, so in the worst-case scenario, you'd need to recreate the PR with the 2.0 base branch directly.
+Try rebasing first though, maybe it'll kick in.
+
+Cheers 🍻
+
+---------------------------------------------------------------------------
+
+by mamazu at 2024-06-21T11:47:20Z
+
+Thanks @NoResponseMate I rebased it and it's green now.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2024-08-05T15:51:27Z
+
+@Rafikooo Is there anything that's preventing it from being merged into 2.0?
+
+---------------------------------------------------------------------------
+
+by diimpp at 2024-08-05T20:15:09Z
+
+> Is there anything that's preventing it from being merged into 2.0?
+
+@mamazu shouldn't there be a mysql migration as well?
+
+@Rafikooo why this change needs to be merged at 2.0 and not upcoming 1.14 (or even 1.13)? Change seems like a performance fix and backward compatible.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2024-08-05T22:20:20Z
+
+@diimpp that's a good question I haven't worked with sylius' migration system. I thought the migration is being run on both mysql and postgres. If not then I need to look into that.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-10-22T12:19:15Z
+
+Thank you, @mamazu! :tada:
