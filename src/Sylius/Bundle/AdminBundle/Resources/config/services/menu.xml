@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius_admin.menu_builder.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />

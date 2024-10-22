@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius_admin.mailer.email_manager.shipment" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
