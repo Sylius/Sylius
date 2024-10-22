@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
-final readonly class EnabledExtension implements QueryCollectionExtensionInterface
+final readonly class EnabledExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     public function __construct(
         private SectionProviderInterface $sectionProvider,
