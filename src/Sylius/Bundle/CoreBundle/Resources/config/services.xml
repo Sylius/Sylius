@@ -42,11 +42,11 @@
         <service id="sylius.generator.invoice_number" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
         <service id="Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface" alias="sylius.generator.invoice_number" />
 
-        <service id="sylius.uploader.image" class="Sylius\Component\Core\Uploader\ImageUploader">
+        <service id="sylius.uploader.image" class="Sylius\Component\Core\Uploader\ImageUploader" public="true">
             <argument type="service" id="sylius.adapter.filesystem.default" />
             <argument type="service" id="sylius.generator.image_path" />
         </service>
-        <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.uploader.image" />
+        <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.uploader.image" public="true" />
 
         <service id="sylius.adapter.filesystem.flysystem" class="Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter">
             <argument type="service" id="sylius.storage" />

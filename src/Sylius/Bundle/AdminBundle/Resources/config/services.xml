@@ -64,7 +64,7 @@
             <tag name="sylius.uri_based_section_resolver" priority="20" />
         </service>
 
-        <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
+        <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" />
 
         <service id="sylius.attribute_type.select" class="Sylius\Component\Attribute\AttributeType\SelectAttributeType">
             <tag name="sylius.attribute.type" attribute-type="select" label="Select"

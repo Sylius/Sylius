@@ -102,7 +102,6 @@
             id="sylius_admin.resource_controller.redirect_handler"
             class="Sylius\Bundle\AdminBundle\Controller\RedirectHandler"
             decorates="sylius.resource_controller.redirect_handler"
-            public="false"
         >
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.grid.filter_storage" />
