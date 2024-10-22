@@ -7,5 +7,5 @@
     "type": null,
     "path": "@string@.contains('sylius_original').endsWith('mugs.jpg')",
     "productVariants": [],
-    "position": 3
+    "position": 2
 }
