@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\ApiBundle\Serializer\SerializationGroupsSupportTrait;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
@@ -27,6 +28,7 @@ use Webmozart\Assert\Assert;
 final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
+    use SerializationGroupsSupportTrait;
 
     private const ALREADY_CALLED = 'sylius_product_normalizer_already_called';
 
@@ -34,6 +36,7 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
         private readonly ProductVariantResolverInterface $defaultProductVariantResolver,
         private readonly IriConverterInterface $iriConverter,
         private readonly SectionProviderInterface $sectionProvider,
+        private readonly array $serializationGroups,
     ) {
     }
 
@@ -42,6 +45,7 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
         Assert::isInstanceOf($object, ProductInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
         Assert::isInstanceOf($this->sectionProvider->getSection(), ShopApiSection::class);
+        Assert::true($this->supportsSerializationGroups($context, $this->serializationGroups));
 
         $context[self::ALREADY_CALLED] = true;
 
@@ -65,7 +69,8 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
         return
             !isset($context[self::ALREADY_CALLED]) &&
             $data instanceof ProductInterface &&
-            $this->sectionProvider->getSection() instanceof ShopApiSection
+            $this->sectionProvider->getSection() instanceof ShopApiSection &&
+            $this->supportsSerializationGroups($context, $this->serializationGroups)
         ;
     }
 

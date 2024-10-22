@@ -15,8 +15,9 @@ namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Api\IriConverterInterface;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\ApiBundle\Serializer\SerializationGroupsSupportTrait;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
@@ -32,6 +33,7 @@ use Webmozart\Assert\Assert;
 final class ProductVariantNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
+    use SerializationGroupsSupportTrait;
 
     private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
@@ -40,6 +42,7 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
         private readonly AvailabilityCheckerInterface $availabilityChecker,
         private readonly SectionProviderInterface $uriBasedSectionContext,
         private readonly IriConverterInterface $iriConverter,
+        private readonly array $serializationGroups,
     ) {
     }
 
@@ -52,6 +55,8 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
     {
         Assert::isInstanceOf($object, ProductVariantInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
+        Assert::isInstanceOf($this->uriBasedSectionContext->getSection(), ShopApiSection::class);
+        Assert::true($this->supportsSerializationGroups($context, $this->serializationGroups));
 
         $context[self::ALREADY_CALLED] = true;
         $data = $this->normalizer->normalize($object, $format, $context);
@@ -97,16 +102,14 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
             return false;
         }
 
-        return $data instanceof ProductVariantInterface && $this->isNotAdminApiSection();
+        return $data instanceof ProductVariantInterface &&
+            $this->uriBasedSectionContext->getSection() instanceof ShopApiSection &&
+            $this->supportsSerializationGroups($context, $this->serializationGroups)
+        ;
     }
 
     public function getSupportedTypes(?string $format): array
     {
         return [ProductVariantInterface::class => false];
-    }
-
-    private function isNotAdminApiSection(): bool
-    {
-        return !$this->uriBasedSectionContext->getSection() instanceof AdminApiSection;
     }
 }

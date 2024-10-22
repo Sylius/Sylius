@@ -48,6 +48,10 @@
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument type="collection">
+                <argument>sylius:shop:product:index</argument>
+                <argument>sylius:shop:product:show</argument>
+            </argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -88,6 +92,10 @@
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="collection">
+                <argument>sylius:shop:product_variant:index</argument>
+                <argument>sylius:shop:product_variant:show</argument>
+            </argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -97,11 +105,17 @@
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack" />
+            <argument type="collection">
+                <argument>sylius:shop:shipping_method:index</argument>
+            </argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
         <service id="sylius_api.normalizer.generated_promotion_coupons" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\GeneratedPromotionCouponsNormalizer">
             <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument type="collection">
+                <argument>sylius:admin:promotion_coupon:index</argument>
+            </argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 use ApiPlatform\Metadata\HttpOperation;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\ApiBundle\Serializer\SerializationGroupsSupportTrait;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -33,15 +34,17 @@ use Webmozart\Assert\Assert;
 final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
+    use SerializationGroupsSupportTrait;
 
     private const ALREADY_CALLED = 'sylius_shipping_method_normalizer_already_called';
 
     public function __construct(
-        private SectionProviderInterface $sectionProvider,
-        private OrderRepositoryInterface $orderRepository,
-        private ShipmentRepositoryInterface $shipmentRepository,
-        private ServiceRegistryInterface $shippingCalculators,
-        private RequestStack $requestStack,
+        private readonly SectionProviderInterface $sectionProvider,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly ShipmentRepositoryInterface $shipmentRepository,
+        private readonly ServiceRegistryInterface $shippingCalculators,
+        private readonly RequestStack $requestStack,
+        private readonly array $serializationGroups,
     ) {
     }
 
@@ -50,6 +53,7 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
         Assert::isInstanceOf($object, ShippingMethodInterface::class);
         Assert::keyNotExists($context, self::ALREADY_CALLED);
         Assert::isInstanceOf($this->sectionProvider->getSection(), ShopApiSection::class);
+        Assert::true($this->supportsSerializationGroups($context, $this->serializationGroups));
 
         $context[self::ALREADY_CALLED] = true;
 
@@ -92,6 +96,7 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
         return
             $data instanceof ShippingMethodInterface &&
             $this->sectionProvider->getSection() instanceof ShopApiSection &&
+            $this->supportsSerializationGroups($context, $this->serializationGroups) &&
             $operation instanceof HttpOperation &&
             isset($operation->getUriVariables()['tokenValue'], $operation->getUriVariables()['shipmentId'])
         ;
