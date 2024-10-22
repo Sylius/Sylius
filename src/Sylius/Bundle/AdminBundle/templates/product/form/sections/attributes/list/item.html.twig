@@ -15,7 +15,7 @@
                     {{ sylius_test_html_attribute('attribute-tab', product_attribute_name) }}
                 >
                     <div class="d-flex justify-content-between align-items-center">
-                        {% hook 'name' with { product_attribute_name, product_attribute_code } %}
+                        {% hook 'item' with { product_attribute_name, product_attribute_code } %}
                     </div>
                 </div>
             {% endfor %}

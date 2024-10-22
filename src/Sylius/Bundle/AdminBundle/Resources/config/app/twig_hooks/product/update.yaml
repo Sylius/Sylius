@@ -242,19 +242,19 @@ sylius_twig_hooks:
                 priority: 0
 
         'sylius_admin.product.update.content.form.sections.attributes.list':
-            name:
-                template: '@SyliusAdmin/product/form/sections/attributes/list/name.html.twig'
+            item:
+                template: '@SyliusAdmin/product/form/sections/attributes/list/item.html.twig'
                 priority: 100
             translations:
                 template: '@SyliusAdmin/product/form/sections/attributes/list/translations.html.twig'
                 priority: 0
 
-        'sylius_admin.product.update.content.form.sections.attributes.list.name':
+        'sylius_admin.product.update.content.form.sections.attributes.list.item':
             label:
-                template: '@SyliusAdmin/product/form/sections/attributes/list/name/label.html.twig'
+                template: '@SyliusAdmin/product/form/sections/attributes/list/item/label.html.twig'
                 priority: 100
             remove_button:
-                template: '@SyliusAdmin/product/form/sections/attributes/list/name/remove_button.html.twig'
+                template: '@SyliusAdmin/product/form/sections/attributes/list/item/remove_button.html.twig'
                 priority: 0
 
         'sylius_admin.product.update.content.form.sections.attributes.list.translations':
