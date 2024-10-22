@@ -6,8 +6,8 @@ code & documentation hosted on the main ``Sylius/Sylius`` `repository`_).
 
 Sylius follows the `Semantic Versioning`_ strategy:
 
-* A new Sylius patch version (e.g. 1.0.1, 1.0.2, etc.) comes out usually *once a month*, depending on the number of bug fixes developed
-* A new Sylius minor version (e.g. 1.1, 1.2, etc.) is released depending on various factors (see below), usually *once a few months*
+* A new Sylius patch version (e.g. 1.13.1, 1.13.2, etc.) comes out usually *once a month*, depending on the number of bug fixes developed
+* A new Sylius minor version (e.g. 1.14, 2.1, etc.) is released depending on various factors (see below), usually *once a few months*
 
 New Sylius minor releases will drop unsupported PHP versions.
 
@@ -56,13 +56,15 @@ This maintenance is divided into:
 Planned releases
 ----------------
 
-+---------+----------------------+------------------------+--------------------+
-| Version | Development starts   | Stabilization starts   | Release date       |
-+=========+======================+========================+====================+
-| 2.0     | Sep 15, 2023         | Q3 2024                | Q4 2024            |
-+---------+----------------------+------------------------+--------------------+
-| 1.14    | Apr 26, 2024         | Q3 2024                | Q4 2024            |
-+---------+----------------------+------------------------+--------------------+
++----------+--------------------+----------------------+---------------+----------------------------+---------------------+
+| Version  | Development starts | Stabilization starts | Release date  | Planned end of maintenance | Planned end of life |
++==========+====================+======================+===============+============================+=====================+
+| 1.14 LTS | Apr 26, 2024       | Q3 2024              | November 2024 | December 2025              | December 2026       |
++----------+--------------------+----------------------+---------------+----------------------------+---------------------+
+| 2.0      | Sep 15, 2023       | Q3 2024              | November 2024 | August 2025                | February 2026       |
++----------+--------------------+----------------------+---------------+----------------------------+---------------------+
+| 2.1      | November, 2024     | Q1/Q2 2025           | Q2/Q3 2025    |                            |                     |
++----------+--------------------+----------------------+---------------+----------------------------+---------------------+
 
 Supported versions
 ------------------
