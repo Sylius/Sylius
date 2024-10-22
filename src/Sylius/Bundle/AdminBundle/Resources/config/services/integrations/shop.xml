@@ -24,7 +24,7 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\Security\UserImpersonatorInterface" alias="sylius_admin.security.shop_user_impersonator" />
 
-        <service id="sylius_admin.controller.impersonate_user" class="Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController">
+        <service id="sylius_admin.controller.impersonate_user" class="Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController" public="true">
             <argument type="service" id="sylius_admin.security.shop_user_impersonator" />
             <argument type="service" id="security.authorization_checker" />
             <argument type="service" id="sylius.shop_user_provider.email_or_name_based" />
