@@ -20,7 +20,7 @@
         <defaults public="true" />
 
         <service id="sylius.listener.shipment_ship" class="Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener">
-            <argument type="service" id="sylius_admin.mailer.email_manager.shipment" />
+            <argument type="service" id="sylius_admin.mailer.shipment_email_manager" />
             <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
         </service>
         <service id="sylius_admin.listener.shipment_ship" alias="sylius.listener.shipment_ship" />

@@ -53,7 +53,7 @@
         <service id="sylius_shop.listener.order_customer_ip" alias="sylius.listener.order_customer_ip" />
 
         <service id="sylius.listener.order_complete" class="Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener">
-            <argument type="service" id="sylius_shop.mailer.email_manager.order" />
+            <argument type="service" id="sylius_shop.mailer.order_email_manager" />
             <tag name="kernel.event_listener" event="sylius.order.post_complete" method="sendConfirmationEmail" />
         </service>
         <service id="sylius_shop.listener.order_complete" alias="sylius.listener.order_complete" />

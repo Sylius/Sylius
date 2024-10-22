@@ -33,7 +33,7 @@
 
         <!-- PayPal -->
         <service id="sylius.payum_action.paypal_express_checkout.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction">
-            <argument type="service" id="sylius.generator.invoice_number" />
+            <argument type="service" id="sylius.generator.invoice_number.id_based" />
             <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout.convert_payment" />
             <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>

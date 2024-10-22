@@ -40,14 +40,14 @@
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_item_availability" />
         </service>
         <service id="sylius_api.validator.order_item_availability" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator" />
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
+            <argument type="service" id="sylius.checker.shipping_method.eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />
         </service>
         <service id="sylius_api.validator.order_shipping_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator" />
@@ -70,7 +70,7 @@
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCartValidator">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_adding_eligible_product_variant_to_cart" />
         </service>
         <service id="sylius_api.validator.adding_eligible_product_variant_to_cart" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCartValidator" />
@@ -78,7 +78,7 @@
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCartValidator">
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_changed_item_quantity_in_cart" />
         </service>
         <service id="sylius_api.validator.changed_item_quantity_in_cart" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCartValidator" />

@@ -34,7 +34,7 @@
         </service>
         <service id="sylius.validator.registered_user" alias="sylius.validator.unique.registered_user" />
         <service id="sylius.validator.cart_item_availability" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailabilityValidator">
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_cart_item_availability" />
         </service>
         <service id="sylius.validator.has_all_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefinedValidator">
@@ -60,7 +60,7 @@
         </service>
 
         <service id="sylius.validator.shipping_method_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator">
-            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
+            <argument type="service" id="sylius.checker.shipping_method.eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_order_shipping_method_eligibility_validator" />
         </service>
         <service id="sylius.validator.order_shipping_method_eligibility" alias="sylius.validator.shipping_method_integrity" />
