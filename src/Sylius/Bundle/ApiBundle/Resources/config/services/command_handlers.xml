@@ -69,7 +69,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
+            <argument type="service" id="sylius.checker.shipping_method.eligibility" />
             <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
@@ -156,33 +156,33 @@
         <service id="sylius_api.command_handler.account.send_account_registration_email" class="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface" />
+            <argument type="service" id="sylius.mailer.account_registration_email_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
         <service id="sylius_api.command_handler.account.send_shop_user_verification_email" class="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendShopUserVerificationEmailHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" />
+            <argument type="service" id="sylius.mailer.account_verification_email_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
         <service id="sylius_api.command_handler.checkout.send_order_confirmation" class="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" />
+            <argument type="service" id="sylius.mailer.order_email_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
         <service id="sylius_api.command_handler.account.send_reset_password_email" class="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" />
+            <argument type="service" id="sylius.mailer.reset_password_email_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
         <service id="sylius_api.command_handler.checkout.send_shipment_confirmation_email" class="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler">
             <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />
+            <argument type="service" id="sylius.mailer.shipment_email_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
@@ -195,7 +195,7 @@
 
         <service id="sylius_api.command_handler.send_contract_request" class="Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler">
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" />
+            <argument type="service" id="sylius.mailer.contact_email_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 

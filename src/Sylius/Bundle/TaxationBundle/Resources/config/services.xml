@@ -44,13 +44,13 @@
 
         <service id="sylius.resolver.tax_rate" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
             <argument type="service" id="sylius.repository.tax_rate" />
-            <argument type="service" id="sylius.eligibility_checker.tax_rate_date" on-invalid="null" />
+            <argument type="service" id="sylius.checker.tax_rate_date_eligibility" on-invalid="null" />
         </service>
         <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.resolver.tax_rate" />
 
-        <service id="sylius.eligibility_checker.tax_rate_date" class="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker">
+        <service id="sylius.checker.tax_rate_date_eligibility" class="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker">
             <argument type="service" id="clock" />
         </service>
-        <service id="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface" alias="sylius.eligibility_checker.tax_rate_date" />
+        <service id="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface" alias="sylius.checker.tax_rate_date_eligibility" />
     </services>
 </container>

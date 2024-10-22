@@ -31,7 +31,7 @@
 
         <service id="sylius.processor.promotion" class="Sylius\Component\Promotion\Processor\PromotionProcessor">
             <argument type="service" id="sylius.provider.active_promotions" />
-            <argument type="service" id="sylius.eligibility_checker.promotion" />
+            <argument type="service" id="sylius.checker.promotion.eligibility" />
             <argument type="service" id="sylius.action.applicator.promotion" />
         </service>
         <service id="Sylius\Component\Promotion\Processor\PromotionProcessorInterface" alias="sylius.processor.promotion" />

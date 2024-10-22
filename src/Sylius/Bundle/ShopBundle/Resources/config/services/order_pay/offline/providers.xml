@@ -17,8 +17,8 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius_shop.order_pay.http_response.provider.offline.capture" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline\StatusHttpResponseProvider">
-            <argument type="service" id="sylius_shop.order_pay.provider.final_url" />
+        <service id="sylius_shop.provider.order_pay.http_response.offline.capture" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline\StatusHttpResponseProvider">
+            <argument type="service" id="sylius_shop.provider.order_pay.final_url" />
             <tag name="sylius.provider.http_response.offline" action="status" />
         </service>
     </services>

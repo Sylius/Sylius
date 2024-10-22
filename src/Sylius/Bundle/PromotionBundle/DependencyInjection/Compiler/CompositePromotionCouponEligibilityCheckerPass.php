@@ -21,11 +21,11 @@ final class CompositePromotionCouponEligibilityCheckerPass implements CompilerPa
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('sylius.eligibility_checker.promotion_coupon')) {
+        if (!$container->has('sylius.checker.promotion_coupon_eligibility')) {
             return;
         }
 
-        $container->getDefinition('sylius.eligibility_checker.promotion_coupon')->setArguments([
+        $container->getDefinition('sylius.checker.promotion_coupon_eligibility')->setArguments([
             array_map(
                 fn ($id) => new Reference($id),
                 array_keys($container->findTaggedServiceIds('sylius.promotion_coupon_eligibility_checker')),

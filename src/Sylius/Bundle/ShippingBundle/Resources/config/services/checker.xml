@@ -17,23 +17,23 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius.eligibility_checker.shipping_method.category_requirement"
+        <service id="sylius.checker.shipping_method.category_requirement_eligibility"
                  class="Sylius\Component\Shipping\Checker\Eligibility\CategoryRequirementEligibilityChecker">
             <tag name="sylius.shipping_method_eligibility_checker"/>
         </service>
 
-        <service id="sylius.eligibility_checker.shipping_method.rules"
+        <service id="sylius.checker.shipping_method.rules_eligibility"
                  class="Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodRulesEligibilityChecker">
             <argument type="service" id="sylius.registry.shipping_method_rule_checker"/>
             <tag name="sylius.shipping_method_eligibility_checker"/>
         </service>
 
-        <service id="sylius.eligibility_checker.shipping_method"
+        <service id="sylius.checker.shipping_method.eligibility"
                  class="Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker">
             <argument type="collection"/>
         </service>
-        <service id="sylius.eligibility_checker.shipping_method.composite" alias="sylius.eligibility_checker.shipping_method"/>
+        <service id="sylius.checker.shipping_method.eligibility.composite" alias="sylius.checker.shipping_method.eligibility"/>
         <service id="Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface"
-                 alias="sylius.eligibility_checker.shipping_method"/>
+                 alias="sylius.checker.shipping_method.eligibility"/>
     </services>
 </container>

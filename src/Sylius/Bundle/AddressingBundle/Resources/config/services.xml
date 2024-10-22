@@ -69,7 +69,7 @@
             <tag name="validator.constraint_validator" alias="sylius_unique_province_collection_validator" />
         </service>
 
-        <service id="sylius_addressing.validator.zone_member_group" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroupValidator">
+        <service id="sylius.validator.zone_member_group" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroupValidator">
             <argument>%sylius.addressing.zone_member.validation_groups%</argument>
             <tag name="validator.constraint_validator" alias="sylius_zone_member_group" />
         </service>

@@ -39,8 +39,8 @@
         </service>
         <service id="Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface" alias="sylius.distributor.minimum_price" />
 
-        <service id="sylius.generator.invoice_number" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
-        <service id="Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface" alias="sylius.generator.invoice_number" />
+        <service id="sylius.generator.invoice_number.id_based" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
+        <service id="Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface" alias="sylius.generator.invoice_number.id_based" />
 
         <service id="sylius.uploader.image" class="Sylius\Component\Core\Uploader\ImageUploader" public="true">
             <argument type="service" id="sylius.adapter.filesystem.default" />
@@ -73,7 +73,7 @@
         <service id="sylius.resolver.shipping_methods.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.matcher.zone" />
-            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
+            <argument type="service" id="sylius.checker.shipping_method.eligibility" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
 
@@ -89,7 +89,7 @@
 
         <service id="sylius.resolver.shipping_method.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.eligibility_checker.shipping_method" />
+            <argument type="service" id="sylius.checker.shipping_method.eligibility" />
             <argument type="service" id="sylius.matcher.zone" />
         </service>
 

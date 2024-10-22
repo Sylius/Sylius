@@ -55,12 +55,12 @@
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface" alias="sylius.announcer.catalog_promotion.removal"/>
 
         <service
-            id="sylius.command_dispatcher.catalog_promotion.apply_on_variants"
+            id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher"
         >
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_core.catalog_promotions.batch_size%</argument>
         </service>
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface" alias="sylius.command_dispatcher.catalog_promotion.apply_on_variants"/>
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface" alias="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants"/>
     </services>
 </container>
