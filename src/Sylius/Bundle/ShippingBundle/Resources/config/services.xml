@@ -68,7 +68,7 @@
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType"
                  label="sylius.form.shipping_calculator.flat_rate_configuration.label"/>
         </service>
-        <service id="sylius.calculator.shipping.flat_rate" alias="sylius.shipping_calculator" />
+        <service id="sylius.calculator.shipping.flat_rate" alias="sylius.shipping_calculator.flat_rate" />
 
         <service id="sylius.shipping_calculator.per_unit_rate"
                  class="Sylius\Component\Shipping\Calculator\PerUnitRateCalculator">
@@ -76,7 +76,7 @@
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType"
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label"/>
         </service>
-        <service id="sylius.calculator.shipping.per_unit_rate" alias="sylius.shipping_calculator" />
+        <service id="sylius.calculator.shipping.per_unit_rate" alias="sylius.shipping_calculator.per_unit_rate" />
 
         <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
 
