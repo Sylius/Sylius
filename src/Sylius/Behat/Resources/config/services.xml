@@ -56,9 +56,16 @@
             <argument type="service" id="session.factory" on-invalid="null" />
         </service>
 
-        <service id="sylius.behat.api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
+        <service id="sylius.behat.api_admin_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
+            <argument type="string">api_admin</argument>
+        </service>
+
+        <service id="sylius.behat.api_shop_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
+            <argument type="string">api_shop</argument>
         </service>
 
         <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
@@ -79,7 +86,7 @@
         </service>
 
         <service id="sylius.behat.api.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
-            <argument type="service" id="sylius.behat.api_security" />
+            <argument type="service" id="sylius.behat.api_admin_security" />
         </service>
 
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
