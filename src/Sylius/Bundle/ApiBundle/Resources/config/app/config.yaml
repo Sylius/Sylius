@@ -31,6 +31,12 @@ sylius_api:
         - "%sylius.model.promotion.class%"
 
 api_platform:
+    serializer:
+        hydra_prefix: true
+    use_symfony_listeners: true
+    formats:
+        jsonld: ['application/ld+json']
+        json: ['application/json']
     patch_formats:
         json: ['application/merge-patch+json']
     path_segment_name_generator: api_platform.path_segment_name_generator.dash
@@ -43,7 +49,7 @@ api_platform:
     exception_to_status:
         # Default API Platform exception to status code mapping
         ApiPlatform\Exception\FilterValidationException: 400
-        ApiPlatform\Exception\InvalidArgumentException: 400
+        ApiPlatform\Metadata\Exception\InvalidArgumentException: 400
         ApiPlatform\Validator\Exception\ValidationException: 422
         Doctrine\ORM\OptimisticLockException: 409
         Symfony\Component\Serializer\Exception\ExceptionInterface: 400

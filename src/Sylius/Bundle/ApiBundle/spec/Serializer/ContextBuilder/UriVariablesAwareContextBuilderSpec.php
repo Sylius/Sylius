@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Link;
-use ApiPlatform\Serializer\SerializerContextBuilderInterface;
+use ApiPlatform\State\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware;
 use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;

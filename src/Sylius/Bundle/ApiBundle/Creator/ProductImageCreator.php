@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Creator;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Sylius\Bundle\ApiBundle\Exception\NoFileUploadedException;
 use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
 use Sylius\Component\Core\Model\ImageInterface;

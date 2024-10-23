@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\ApiPlatform\Routing;
 
-use ApiPlatform\Api\IriConverterInterface;
-use ApiPlatform\Api\UrlGeneratorInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\UrlGeneratorInterface;
 use ApiPlatform\Metadata\Util\ClassInfoTrait;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;
