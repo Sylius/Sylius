@@ -657,8 +657,6 @@
 
 1. The class `Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddUserFormSubscriber` has been deprecated and will be removed in Sylius 2.0.
 
-1. The class `Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter` has been deprecated and will be removed in Sylius 2.0.
-
 1. The class `Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber` has been deprecated and will be removed in Sylius 2.0.
    It will be replaced with the `ResourceDeleteListener`.
 
@@ -770,6 +768,9 @@
     - `Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer`
     - `Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer`
     - `Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener`
+    - `Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter`
+    - `Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter`
+    - `Sylius\Bundle\ApiBundle\Filter\ShippingMethodFilter`
     - `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier`
     - `Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler`
     - `Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer`
