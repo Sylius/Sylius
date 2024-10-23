@@ -9,7 +9,7 @@
         {% if admin_user.avatar is not null and admin_user.avatar.path is not empty %}
             <div
                 class="avatar avatar-xl"
-                style="background: url('{{ admin_user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar') }}');"
+                style="background-image: url('{{ admin_user.avatar.path|imagine_filter('sylius_admin_avatar') }}');"
                 {{ sylius_test_html_attribute('avatar-image', admin_user.avatar.path) }}
             ></div>
         {% else %}

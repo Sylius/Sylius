@@ -1,6 +1,6 @@
 {% macro image(product, config = {}) %}
     {% set config = {
-        class: 'avatar',
+        class: 'img-fluid',
         type: 'thumbnail',
         filter: 'sylius_admin_product_thumbnail'
     }|merge(config) %}
