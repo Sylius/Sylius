@@ -185,6 +185,26 @@ final class ImageNormalizerSpec extends ObjectBehavior
         ;
     }
 
+    function it_does_not_resolve_image_path_if_path_is_not_serialized(
+        CacheManager $cacheManager,
+        RequestStack $requestStack,
+        NormalizerInterface $normalizer,
+        Request $request,
+        ParameterBag $queryBag,
+        ImageInterface $image,
+    ): void {
+        $normalizer
+            ->normalize($image, null, ['sylius_image_normalizer_already_called' => true])
+            ->shouldBeCalled()
+            ->willReturn(['id' => 1])
+        ;
+
+        $this->normalize($image, null, [])->shouldReturn(['id' => 1]);
+
+        $cacheManager->getBrowserPath(Argument::any(), Argument::any())->shouldNotHaveBeenCalled();
+        $requestStack->getCurrentRequest()->shouldNotHaveBeenCalled();
+    }
+
     function it_applies_given_image_filter(
         CacheManager $cacheManager,
         RequestStack $requestStack,
