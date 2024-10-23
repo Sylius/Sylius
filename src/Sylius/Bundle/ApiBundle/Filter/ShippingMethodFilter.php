@@ -15,6 +15,14 @@ namespace Sylius\Bundle\ApiBundle\Filter;
 
 use ApiPlatform\Core\Api\FilterInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ShippingMethodFilter::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ShippingMethodFilter implements FilterInterface
 {
     public function getDescription(string $resourceClass): array
