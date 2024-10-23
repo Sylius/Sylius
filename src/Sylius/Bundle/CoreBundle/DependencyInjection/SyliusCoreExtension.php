@@ -100,7 +100,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 )),
             },
         );
-        $container->setAlias("sylius.adapter.filesystem.default", FilesystemAdapterInterface::class);
+        $container->setAlias('sylius.adapter.filesystem.default', FilesystemAdapterInterface::class);
 
         $this->registerAutoconfiguration($container);
     }
