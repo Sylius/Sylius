@@ -579,7 +579,7 @@
     | `Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface`                                                      | `sylius.calculator.delay_stamp`                                                          |
     | `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface`                                 | `sylius.announcer.catalog_promotion`                                                     |
     | `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface`                          | `sylius.announcer.catalog_promotion.removal`                                             |
-    | `Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface` | `sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants`                          |
+    | `Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface` | `sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants`                  |
     | `Sylius\Component\Core\Checker\CLIContextCheckerInterface`                                                               | `sylius.checker.cli_context`                                                             |
     | `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface`                                   | `sylius.provider.product_variant_map`                                                    |
     | `Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface`                                         | `sylius.checker.promotion.product_in_promotion_rule`                                     |
