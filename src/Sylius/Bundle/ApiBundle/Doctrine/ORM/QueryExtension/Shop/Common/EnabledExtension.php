@@ -11,20 +11,20 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductVariant;
+namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Common;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Resource\Model\ToggleableInterface;
 
 final readonly class EnabledExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
-    {
+    public function __construct(private SectionProviderInterface $sectionProvider) {
     }
 
     /**
@@ -60,12 +60,11 @@ final readonly class EnabledExtension implements QueryCollectionExtensionInterfa
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
     ): void {
-        if (!is_a($resourceClass, ProductVariantInterface::class, true)) {
+        if (!is_a($resourceClass, ToggleableInterface::class, true)) {
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 

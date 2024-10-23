@@ -76,7 +76,6 @@ final class EnabledWithinProductAssociationExtensionSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
 
-        $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
         $queryNameGenerator->generateJoinAlias('association')->shouldBeCalled()->willReturn('association');
         $queryNameGenerator->generateJoinAlias('associatedProduct')->shouldBeCalled()->willReturn('associatedProduct');
 
@@ -93,9 +92,6 @@ final class EnabledWithinProductAssociationExtensionSpec extends ObjectBehavior
         $queryBuilder->leftJoin('association.associatedProducts', 'associatedProduct', 'WITH', Argument::type(Andx::class))->shouldBeCalled()->willReturn($queryBuilder);
 
         $queryBuilder->andWhere('o.associations IS EMPTY OR associatedProduct.id IS NOT NULL')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
-
-        $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, new Get(name: Request::METHOD_GET));
     }

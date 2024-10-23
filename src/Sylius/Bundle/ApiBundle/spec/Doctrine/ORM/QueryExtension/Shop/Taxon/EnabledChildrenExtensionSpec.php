@@ -16,50 +16,56 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\User\Model\UserInterface;
 
-final class EnabledExtensionSpec extends ObjectBehavior
+final class EnabledChildrenExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext)
+    function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($sectionProvider);
     }
 
-    function it_does_not_apply_extension_if_resource_class_is_not_taxon_interface(
+    public function it_does_not_apply_conditions_to_item_for_unsupported_resource(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-    ) {
-        $this->applyToItem($queryBuilder, $queryNameGenerator, ProductVariantInterface::class, [], null, []);
+    ): void {
+        $this->applyToItem($queryBuilder, $queryNameGenerator, \stdClass::class, []);
+
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
-    function it_does_not_apply_extension_if_user_has_api_access_role(
+    function it_does_not_apply_conditions_to_item_for_admin_api_section(
+        SectionProviderInterface $sectionProvider,
+        AdminApiSection $adminApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        UserContextInterface $userContext,
-        UserInterface $user,
-    ) {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
+    ): void {
+        $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator, TaxonInterface::class, [], null, []);
+        $this->applyToItem($queryBuilder, $queryNameGenerator, AddressInterface::class, []);
+
+        $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
+        $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
     function it_applies_extension_to_item_query(
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        UserContextInterface $userContext,
-    ) {
-        $userContext->getUser()->willReturn(null);
+    ): void {
+        $sectionProvider->getSection()->willReturn($shopApiSection);
         $queryBuilder->getRootAliases()->willReturn(['rootAlias']);
         $queryNameGenerator->generateParameterName('enabled')->willReturn('enabled');
         $queryNameGenerator->generateJoinAlias('child')->willReturn('childAlias');
 
         $queryBuilder->addSelect('childAlias')->shouldBeCalled();
         $queryBuilder->leftJoin('rootAlias.children', 'childAlias', 'WITH', 'childAlias.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->andWhere('rootAlias.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, TaxonInterface::class, [], null, []);

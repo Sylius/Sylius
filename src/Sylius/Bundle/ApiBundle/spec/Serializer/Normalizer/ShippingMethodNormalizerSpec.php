@@ -48,6 +48,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
             $shipmentRepository,
             $shippingCalculators,
             $requestStack,
+            ['sylius:shipping_method:index'],
         );
 
         $this->setNormalizer($normalizer);
@@ -61,6 +62,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization($shippingMethod, null, [
                 'root_operation' => new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]),
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldReturn(true)
         ;
@@ -69,6 +71,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization(new \stdClass(), null, [
                 'root_operation' => new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]),
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldReturn(false)
         ;
@@ -77,6 +80,16 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization($shippingMethod, null, [
                 'root_operation' => new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]),
+                'groups' => ['sylius:shipping_method:index'],
+            ])
+            ->shouldReturn(false)
+        ;
+
+        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+        $this
+            ->supportsNormalization($shippingMethod, null, [
+                'root_operation' => new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]),
+                'groups' => ['sylius:shipping_method:show'],
             ])
             ->shouldReturn(false)
         ;
@@ -88,6 +101,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization($shippingMethod, null, [
                 'root_operation' => new GetCollection(uriVariables: ['tokenValue' => []]),
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldReturn(false)
         ;
@@ -96,6 +110,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization($shippingMethod, null, [
                 'root_operation' => new GetCollection(uriVariables: ['shipmentId' => []]),
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldReturn(false)
         ;
@@ -147,6 +162,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->willReturn([])
         ;
@@ -161,6 +177,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
             ->normalize($shippingMethod, null, [
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldReturn(['price' => 1000])
         ;
@@ -181,6 +198,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldNotBeCalled()
         ;
@@ -190,6 +208,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
             ->during('normalize', [new \stdClass(), null, [
                 'root_operation' => new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]),
                 'sylius_api_channel' => $channel,
+                'groups' => ['sylius:shipping_method:index'],
             ]])
         ;
     }
@@ -210,6 +229,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldNotBeCalled()
         ;
@@ -220,6 +240,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ]])
         ;
     }
@@ -241,6 +262,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldNotBeCalled()
         ;
@@ -250,6 +272,39 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
             ->during('normalize', [$shippingMethod, null, [
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
+                'groups' => ['sylius:shipping_method:index'],
+            ]])
+        ;
+    }
+
+    public function it_throws_an_exception_if_serialization_group_is_not_supported(
+        SectionProviderInterface $sectionProvider,
+        RequestStack $requestStack,
+        NormalizerInterface $normalizer,
+        ShippingMethodInterface $shippingMethod,
+        ChannelInterface $channel,
+    ): void {
+        $operation = new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]);
+
+        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+
+        $requestStack->getCurrentRequest()->shouldNotBeCalled();
+        $normalizer
+            ->normalize($shippingMethod, null, [
+                'root_operation' => $operation,
+                'sylius_api_channel' => $channel,
+                'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:shop'],
+            ])
+            ->shouldNotBeCalled()
+        ;
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('normalize', [$shippingMethod, null, [
+                'root_operation' => $operation,
+                'sylius_api_channel' => $channel,
+                'groups' => ['sylius:shipping_method:shop'],
             ]])
         ;
     }
@@ -276,6 +331,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldNotBeCalled()
         ;
@@ -285,6 +341,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
             ->during('normalize', [$shippingMethod, null, [
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
+                'groups' => ['sylius:shipping_method:index'],
             ]])
         ;
     }
@@ -315,6 +372,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->shouldNotBeCalled()
         ;
@@ -324,6 +382,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
             ->during('normalize', [$shippingMethod, null, [
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
+                'groups' => ['sylius:shipping_method:index'],
             ]])
         ;
     }
@@ -356,6 +415,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
                 'sylius_shipping_method_normalizer_already_called' => true,
+                'groups' => ['sylius:shipping_method:index'],
             ])
             ->willReturn([])
         ;
@@ -368,6 +428,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
             ->during('normalize', [$shippingMethod, null, [
                 'root_operation' => $operation,
                 'sylius_api_channel' => $channel,
+                'groups' => ['sylius:shipping_method:index'],
             ]])
         ;
     }

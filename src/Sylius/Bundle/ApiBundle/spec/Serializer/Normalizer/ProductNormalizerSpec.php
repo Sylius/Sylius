@@ -33,7 +33,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         NormalizerInterface $normalizer,
     ): void {
-        $this->beConstructedWith($defaultProductVariantResolver, $iriConverter, $sectionProvider);
+        $this->beConstructedWith($defaultProductVariantResolver, $iriConverter, $sectionProvider, ['sylius:product:index']);
 
         $this->setNormalizer($normalizer);
     }
@@ -43,19 +43,25 @@ final class ProductNormalizerSpec extends ObjectBehavior
         ProductInterface $product,
         OrderInterface $order,
     ): void {
-        $this->supportsNormalization($order)->shouldReturn(false);
+        $this->supportsNormalization($order, null, ['groups' => ['sylius:product:index']])->shouldReturn(false);
 
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
-        $this->supportsNormalization($product)->shouldReturn(true);
+        $this->supportsNormalization($product, null, ['groups' => ['sylius:product:index']])->shouldReturn(true);
+
+        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+        $this->supportsNormalization($product, null, ['groups' => ['sylius:product:show']])->shouldReturn(false);
 
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
-        $this->supportsNormalization($product)->shouldReturn(false);
+        $this->supportsNormalization($product, null, ['groups' => ['sylius:product:index']])->shouldReturn(false);
     }
 
     function it_does_not_support_if_the_normalizer_has_been_already_called(ProductInterface $product): void
     {
         $this
-            ->supportsNormalization($product, null, ['sylius_product_normalizer_already_called' => true])
+            ->supportsNormalization($product, null, [
+                'sylius_product_normalizer_already_called' => true,
+                'groups' => ['sylius:product:index'],
+            ])
             ->shouldReturn(false)
         ;
     }
@@ -70,12 +76,15 @@ final class ProductNormalizerSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
 
-        $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($product, null, [
+            'sylius_product_normalizer_already_called' => true,
+            'groups' => ['sylius:product:index'],
+        ])->willReturn([]);
         $product->getEnabledVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $defaultProductVariantResolver->getVariant($product)->willReturn($variant);
         $iriConverter->getIriFromResource($variant)->willReturn('/api/v2/shop/product-variants/CODE');
 
-        $this->normalize($product)->shouldReturn([
+        $this->normalize($product, null, ['groups' => ['sylius:product:index']])->shouldReturn([
             'variants' => ['/api/v2/shop/product-variants/CODE'],
             'defaultVariant' => '/api/v2/shop/product-variants/CODE',
         ]);
@@ -91,13 +100,16 @@ final class ProductNormalizerSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
 
-        $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($product, null, [
+            'sylius_product_normalizer_already_called' => true,
+            'groups' => ['sylius:product:index'],
+        ])->willReturn([]);
         $iriConverter->getIriFromResource($variant)->willReturn('/api/v2/shop/product-variants/CODE');
         $product->getEnabledVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
 
         $defaultProductVariantResolver->getVariant($product)->willReturn(null);
 
-        $this->normalize($product)->shouldReturn([
+        $this->normalize($product, null, ['groups' => ['sylius:product:index']])->shouldReturn([
             'variants' => ['/api/v2/shop/product-variants/CODE'],
             'defaultVariant' => null,
         ]);
@@ -107,11 +119,37 @@ final class ProductNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         ProductInterface $product,
     ): void {
-        $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->shouldNotBeCalled();
+        $normalizer->normalize($product, null, [
+            'sylius_product_normalizer_already_called' => true,
+            'groups' => ['sylius:product:index'],
+        ])->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('normalize', [$product, null, ['sylius_product_normalizer_already_called' => true]])
+            ->during('normalize', [$product, null, [
+                'sylius_product_normalizer_already_called' => true,
+                'groups' => ['sylius:product:index'],
+            ]])
+        ;
+    }
+
+    public function it_throws_an_exception_if_serializer_group_is_not_supported(
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
+        NormalizerInterface $normalizer,
+        ProductInterface $product,
+    ): void {
+        $sectionProvider->getSection()->willReturn($shopApiSection);
+
+        $normalizer->normalize($product, null, [
+            'groups' => ['sylius:product:show'],
+        ])->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('normalize', [$product, null, [
+                'groups' => ['sylius:product:show'],
+            ]])
         ;
     }
 }

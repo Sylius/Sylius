@@ -27,7 +27,7 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         NormalizerInterface $normalizer,
     ): void {
-        $this->beConstructedWith($sectionProvider);
+        $this->beConstructedWith($sectionProvider, ['sylius:promotion_coupon:index']);
         $this->setNormalizer($normalizer);
     }
 
@@ -37,24 +37,30 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
         $this
-            ->supportsNormalization(new ArrayCollection([$promotionCoupon]))
+            ->supportsNormalization(new ArrayCollection([$promotionCoupon]), null, ['groups' => ['sylius:promotion_coupon:index']])
             ->shouldReturn(true)
         ;
 
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
         $this
-            ->supportsNormalization(new \stdClass())
+            ->supportsNormalization(new \stdClass(), null, ['groups' => ['sylius:promotion_coupon:index']])
+            ->shouldReturn(false)
+        ;
+
+        $sectionProvider->getSection()->willReturn(new AdminApiSection());
+        $this
+            ->supportsNormalization(new ArrayCollection([$promotionCoupon]), null, ['groups' => ['sylius:promotion_coupon:shop']])
             ->shouldReturn(false)
         ;
 
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
         $this
-            ->supportsNormalization(new ArrayCollection([$promotionCoupon]))
+            ->supportsNormalization(new ArrayCollection([$promotionCoupon]), null, ['groups' => ['sylius:promotion_coupon:index']])
             ->shouldReturn(false)
         ;
 
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
-        $this->supportsNormalization($promotionCoupon)->shouldReturn(false);
+        $this->supportsNormalization($promotionCoupon, null, ['groups' => ['sylius:promotion_coupon:index']])->shouldReturn(false);
     }
 
     public function it_does_not_support_if_the_normalizer_has_been_already_called(
@@ -65,6 +71,7 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization(new ArrayCollection([$promotionCoupon]), null, [
                 'sylius_generated_promotion_coupons_normalizer_already_called' => true,
+                'groups' => ['sylius:promotion_coupon:index'],
             ])
             ->shouldReturn(false)
         ;
@@ -78,12 +85,13 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
         $normalizer
             ->normalize(new ArrayCollection([new \stdClass()]), null, [
                 'sylius_generated_promotion_coupons_normalizer_already_called' => true,
+                'groups' => ['sylius:promotion_coupon:index'],
             ])
             ->willReturn([])
             ->shouldBeCalled()
         ;
 
-        $this->normalize(new ArrayCollection([new \stdClass()]));
+        $this->normalize(new ArrayCollection([new \stdClass()]), null, ['groups' => ['sylius:promotion_coupon:index']]);
     }
 
     public function it_throws_an_exception_if_the_given_resource_is_not_an_instance_of_array_collection(
@@ -95,13 +103,14 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
         $normalizer
             ->normalize($promotionCoupon, null, [
                 'sylius_generated_promotion_coupons_normalizer_already_called' => true,
+                'groups' => ['sylius:promotion_coupon:index'],
             ])
             ->shouldNotBeCalled()
         ;
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('normalize', [$promotionCoupon])
+            ->during('normalize', [$promotionCoupon, null, ['groups' => ['sylius:promotion_coupon:index']]])
         ;
     }
 
@@ -114,6 +123,7 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
         $normalizer
             ->normalize(new ArrayCollection([$promotionCoupon]), null, [
                 'sylius_generated_promotion_coupons_normalizer_already_called' => true,
+                'groups' => ['sylius:promotion_coupon:index'],
             ])
             ->shouldNotBeCalled()
         ;
@@ -122,6 +132,7 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('normalize', [new ArrayCollection([$promotionCoupon]), null, [
                 'sylius_generated_promotion_coupons_normalizer_already_called' => true,
+                'groups' => ['sylius:promotion_coupon:index'],
             ]])
         ;
     }
@@ -136,13 +147,35 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
         $normalizer
             ->normalize(new ArrayCollection([$promotionCoupon]), null, [
                 'sylius_generated_promotion_coupons_normalizer_already_called' => true,
+                'groups' => ['sylius:promotion_coupon:index'],
             ])
             ->shouldNotBeCalled()
         ;
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('normalize', [new ArrayCollection([$promotionCoupon])])
+            ->during('normalize', [new ArrayCollection([$promotionCoupon]), null, ['groups' => ['sylius:promotion_coupon:index']]])
+        ;
+    }
+
+    public function it_throws_an_exception_if_serializer_group_is_not_supported(
+        SectionProviderInterface $sectionProvider,
+        NormalizerInterface $normalizer,
+        PromotionCouponInterface $promotionCoupon,
+    ): void {
+        $sectionProvider->getSection()->willReturn(new AdminApiSection());
+
+        $normalizer
+            ->normalize(new ArrayCollection([$promotionCoupon]), null, [
+                'sylius_generated_promotion_coupons_normalizer_already_called' => true,
+                'groups' => ['sylius:promotion_coupon:show'],
+            ])
+            ->shouldNotBeCalled()
+        ;
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('normalize', [new ArrayCollection([$promotionCoupon]), null, ['groups' => ['sylius:promotion_coupon:show']]])
         ;
     }
 }

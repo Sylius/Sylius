@@ -18,10 +18,18 @@ use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\Promotion\PromotionCoupon\PostResultExtension;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 final class PostResultExtensionSpec extends ObjectBehavior
 {
+    function let(SectionProviderInterface $sectionProvider): void
+    {
+        $this->beConstructedWith($sectionProvider);
+    }
+
     function it_is_query_result_item_extension(): void
     {
         $this->shouldImplement(PostResultExtension::class);
@@ -44,13 +52,25 @@ final class PostResultExtensionSpec extends ObjectBehavior
         $this->supportsResult(\stdClass::class, null, [])->shouldReturn(false);
     }
 
+    function it_does_not_support_if_section_is_not_admin_api_section(
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
+    ): void {
+        $sectionProvider->getSection()->willReturn($shopApiSection);
+
+        $this->supportsResult(\stdClass::class, new Post(), [])->shouldReturn(false);
+    }
+
     function it_does_not_support_if_resource_class_is_not_promotion_coupon_interface(): void
     {
         $this->supportsResult(\stdClass::class, new Post(), [])->shouldReturn(false);
     }
 
-    function it_supports_result_if_operation_is_post_and_resource_class_is_promotion_coupon_interface(): void
-    {
+    function it_supports_result_if_operation_is_post_and_resource_class_is_promotion_coupon_interface(
+        SectionProviderInterface $sectionProvider,
+        AdminApiSection $adminApiSection,
+    ): void {
+        $sectionProvider->getSection()->willReturn($adminApiSection);
         $this->supportsResult(PromotionCouponInterface::class, new Post(), [])->shouldReturn(true);
     }
 
