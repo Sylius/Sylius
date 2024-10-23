@@ -44,7 +44,7 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
         $adminApiUriBasedSectionProviderDefinition = new Definition(SectionProviderInterface::class);
         $adminApiUriBasedSectionProviderDefinition->addTag('sylius.uri_based_section_resolver', ['priority' => 5]);
 
-        $this->setDefinition('sylius.section_resolver.admin_api_uri_based_section_resolver', $adminApiUriBasedSectionProviderDefinition);
+        $this->setDefinition('sylius.section_resolver.admin_api_uri_based', $adminApiUriBasedSectionProviderDefinition);
 
         $this->compile();
 
@@ -53,7 +53,7 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
             1,
             [
                 new Reference('sylius_admin.section_resolver.admin_uri_based'),
-                new Reference('sylius.section_resolver.admin_api_uri_based_section_resolver'),
+                new Reference('sylius.section_resolver.admin_api_uri_based'),
                 new Reference('sylius_shop.section_resolver.shop_uri_based'),
             ],
         );
