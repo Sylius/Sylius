@@ -17,14 +17,10 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Resource\Model\ArchivableInterface;
 
 final readonly class NonArchivedExtension implements QueryCollectionExtensionInterface
 {
-    /** @param array<int, string> $nonArchivedClasses */
-    public function __construct(private array $nonArchivedClasses)
-    {
-    }
-
     /** @param array<array-key, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
@@ -33,7 +29,7 @@ final readonly class NonArchivedExtension implements QueryCollectionExtensionInt
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if (!in_array($resourceClass, $this->nonArchivedClasses, true)) {
+        if (!is_a($resourceClass, ArchivableInterface::class, true)) {
             return;
         }
 

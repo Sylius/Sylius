@@ -174,17 +174,6 @@ All the `setter` methods have been removed from the commands above and also ther
         }
     ```
 
-* There has been introduced a new parameter:
-
-    ```yaml
-    sylius_api:
-        non_archived_classes:
-            - "%sylius.model.shipping_method.class%"
-            - "%sylius.model.promotion.class%"
-    ```
-
-    That avoids duplication of logic and is used in one `Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\NonArchivedExtension` rather than dedicated extensions for each entity.
-
 * The signature of method `applyToCollection` of the following classes has been changed:
     * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension`
     * `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension`

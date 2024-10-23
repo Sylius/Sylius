@@ -18,16 +18,12 @@ use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
+use Sylius\Resource\Model\ArchivableInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class NonArchivedExtensionSpec extends ObjectBehavior
 {
-    function let(): void
-    {
-        $this->beConstructedWith(['promotionClass', 'shippingMethodClass']);
-    }
-
-    function it_does_nothing_if_current_resource_is_not_an_instance_of_non_archived_classes(
+    function it_does_nothing_if_current_resource_is_not_instance_of_archivable_interface(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
@@ -37,7 +33,7 @@ final class NonArchivedExtensionSpec extends ObjectBehavior
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
-            'taxonClass',
+            \stdClass::class,
             new Get(name: Request::METHOD_GET),
         );
     }
@@ -52,13 +48,13 @@ final class NonArchivedExtensionSpec extends ObjectBehavior
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
-            'promotionClass',
+            ArchivableInterface::class,
             new Get(name: Request::METHOD_GET),
             ['filters' => ['exists' => ['archivedAt' => 'true']]],
         );
     }
 
-    function it_filters_archived_promotions(
+    function it_applies_conditions_to_collection(
         QueryBuilder $queryBuilder,
         Expr $expr,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -72,26 +68,7 @@ final class NonArchivedExtensionSpec extends ObjectBehavior
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
-            'promotionClass',
-            new Get(name: Request::METHOD_GET),
-        );
-    }
-
-    function it_filters_archived_shipping_methods(
-        QueryBuilder $queryBuilder,
-        Expr $expr,
-        QueryNameGeneratorInterface $queryNameGenerator,
-    ): void {
-        $queryBuilder->getRootAliases()->willReturn(['o']);
-
-        $expr->isNull('o.archivedAt')->willReturn('o.archivedAt IS NULL');
-        $queryBuilder->expr()->willReturn($expr);
-        $queryBuilder->andWhere('o.archivedAt IS NULL')->shouldBeCalled();
-
-        $this->applyToCollection(
-            $queryBuilder,
-            $queryNameGenerator,
-            'shippingMethodClass',
+            ArchivableInterface::class,
             new Get(name: Request::METHOD_GET),
         );
     }

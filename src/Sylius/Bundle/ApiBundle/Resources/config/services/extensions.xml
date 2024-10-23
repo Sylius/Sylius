@@ -21,7 +21,6 @@
             id="sylius_api.doctrine.orm.query_extension.common.non_archived"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\NonArchivedExtension"
         >
-            <argument>%sylius_api.non_archived_classes%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 

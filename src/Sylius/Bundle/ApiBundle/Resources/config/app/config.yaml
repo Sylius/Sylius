@@ -26,9 +26,6 @@ sylius_api:
                     sylius_api_shop_product_get_collection: ~
     order_states_to_filter_out:
         - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
-    non_archived_classes:
-        - "%sylius.model.shipping_method.class%"
-        - "%sylius.model.promotion.class%"
 
 api_platform:
     serializer:

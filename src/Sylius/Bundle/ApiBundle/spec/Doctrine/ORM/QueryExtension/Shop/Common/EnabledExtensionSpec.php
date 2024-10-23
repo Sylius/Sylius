@@ -22,7 +22,6 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Resource\Model\ToggleableInterface;
 
 final class EnabledExtensionSpec extends ObjectBehavior
@@ -56,7 +55,7 @@ final class EnabledExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
-    function it_filters_enabled_variant(
+    function it_applies_conditions_to_item(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
@@ -105,7 +104,7 @@ final class EnabledExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
-    function it_filters_variants(
+    function it_applies_conditions_to_collection(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
