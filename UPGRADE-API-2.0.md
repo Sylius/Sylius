@@ -219,3 +219,9 @@ All the `setter` methods have been removed from the commands above and also ther
   | `sylius.security.new_api_shop_regex`         | `sylius.security.api_shop_regex`         |
   | `sylius.security.new_api_user_account_route` | `sylius.security.api_shop_account_route` |
   | `sylius.security.new_api_user_account_regex` | `sylius.security.api_shop_account_regex` |
+
+1. The following configuration parameters have been removed:
+
+    - `sylius_api.legacy_error_handling`
+    - `sylius_api.serialization_groups.skip_adding_read_group`
+    - `sylius_api.serialization_groups.skip_adding_index_and_show_groups`
