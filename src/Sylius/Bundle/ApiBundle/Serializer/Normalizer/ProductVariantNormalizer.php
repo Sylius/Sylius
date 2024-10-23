@@ -102,7 +102,8 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
             return false;
         }
 
-        return $data instanceof ProductVariantInterface &&
+        return
+            $data instanceof ProductVariantInterface &&
             $this->uriBasedSectionContext->getSection() instanceof ShopApiSection &&
             $this->supportsSerializationGroups($context, $this->serializationGroups)
         ;

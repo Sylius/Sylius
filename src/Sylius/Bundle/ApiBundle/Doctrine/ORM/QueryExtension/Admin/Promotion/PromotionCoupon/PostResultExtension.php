@@ -29,7 +29,6 @@ final readonly class PostResultExtension implements QueryResultItemExtensionInte
     {
     }
 
-
     /**
      * @param array<array-key, mixed> $identifiers
      * @param array<array-key, mixed> $context
@@ -47,9 +46,11 @@ final readonly class PostResultExtension implements QueryResultItemExtensionInte
     /** @param array<array-key, mixed> $context */
     public function supportsResult(string $resourceClass, ?Operation $operation = null, array $context = []): bool
     {
-        return $operation instanceof Post
+        return
+            $operation instanceof Post
             && $this->sectionProvider->getSection() instanceof AdminApiSection
-            && is_a($resourceClass, PromotionCouponInterface::class, true);
+            && is_a($resourceClass, PromotionCouponInterface::class, true)
+        ;
     }
 
     /** @param array<array-key, mixed> $context */
