@@ -31,9 +31,9 @@
                 <filters>
                     <filter>sylius_api.search_filter.shop.product</filter>
                     <filter>sylius_api.order_filter.shop.product</filter>
-                    <filter>sylius_api.filter.product_price_order</filter>
-                    <filter>sylius_api.order_filter.translation_order_name_and_locale</filter>
-                    <filter>sylius_api.filter.taxon</filter>
+                    <filter>sylius_api.price_order_filter.shop.product</filter>
+                    <filter>sylius_api.name_with_locale_order_filter.shop.translatable</filter>
+                    <filter>sylius_api.taxon_search_filter.shop.product</filter>
                 </filters>
                 <order>
                     <values>

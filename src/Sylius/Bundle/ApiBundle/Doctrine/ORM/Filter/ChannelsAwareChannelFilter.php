@@ -11,30 +11,27 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
+namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter;
 
 use ApiPlatform\Api\IriConverterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
-final class ProductVariantCatalogPromotionFilter extends AbstractFilter
+final class ChannelsAwareChannelFilter extends AbstractFilter
 {
     public function __construct(
-        private IriConverterInterface $iriConverter,
+        private readonly IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
-        ?RequestStack $requestStack = null,
         ?LoggerInterface $logger = null,
         ?array $properties = null,
         ?NameConverterInterface $nameConverter = null,
     ) {
-        parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
+        parent::__construct($managerRegistry, $logger, $properties, $nameConverter);
     }
 
     protected function filterProperty(
@@ -46,37 +43,26 @@ final class ProductVariantCatalogPromotionFilter extends AbstractFilter
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if ('catalogPromotion' !== $property) {
+        if ('channel' !== $property) {
             return;
         }
 
-        $catalogPromotion = $this->iriConverter->getResourceFromIri($value);
-
+        $channel = $this->iriConverter->getResourceFromIri($value);
         $parameterName = $queryNameGenerator->generateParameterName($property);
-        $channelPricingJoinAlias = $queryNameGenerator->generateJoinAlias('channelPricing');
-        $appliedPromotionJoinAlias = $queryNameGenerator->generateJoinAlias('appliedPromotion');
         $rootAlias = $queryBuilder->getRootAliases()[0];
-
         $queryBuilder
-            ->leftJoin(sprintf('%s.channelPricings', $rootAlias), $channelPricingJoinAlias)
-            ->innerJoin(
-                sprintf('%s.appliedPromotions', $channelPricingJoinAlias),
-                $appliedPromotionJoinAlias,
-                Join::WITH,
-                sprintf('%s = :%s', $appliedPromotionJoinAlias, $parameterName),
-            )
-            ->setParameter($parameterName, $catalogPromotion)
+            ->andWhere(sprintf(':%s MEMBER OF %s.channels', $parameterName, $rootAlias))
+            ->setParameter($parameterName, $channel)
         ;
     }
 
     public function getDescription(string $resourceClass): array
     {
         return [
-            'catalogPromotion' => [
+            'channel' => [
                 'type' => 'string',
                 'required' => false,
-                'property' => null,
-                'description' => 'Get a collection of product variants with applied catalog promotion',
+                'property' => 'channels',
                 'schema' => [
                     'type' => 'string',
                 ],

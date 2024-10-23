@@ -39,7 +39,7 @@ final class TranslationOrderLocaleExtension implements QueryCollectionExtensionI
         if (!is_a($resourceClass, TranslatableInterface::class, true)) {
             return;
         }
-        /* @see \Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter */
+        /* @see \Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter */
         if (!isset($context['filters']['order']['translation.name'])) {
             return;
         }

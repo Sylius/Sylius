@@ -35,7 +35,7 @@
                 <filters>
                     <filter>sylius_api.order_filter.admin.product_variant</filter>
                     <filter>sylius_api.search_filter.admin.product_variant</filter>
-                    <filter>sylius_api.search_filter.admin.product_variant_catalog_promotion</filter>
+                    <filter>sylius_api.catalog_promotion_search_filter.admin.product_variant</filter>
                 </filters>
                 <order>
                     <values>
