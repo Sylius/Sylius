@@ -36,12 +36,6 @@
             <tag name="serializer.normalizer" />
         </service>
 
-        <service id="sylius_api.normalizer.hydra_error" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\HydraErrorNormalizer" decorates="api_platform.hydra.normalizer.error">
-            <argument type="service" id=".inner" />
-            <argument type="service" id="request_stack" />
-            <argument>%sylius.security.api_route%</argument>
-        </service>
-
         <service id="sylius_api.normalizer.product" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductNormalizer">
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="api_platform.symfony.iri_converter" />

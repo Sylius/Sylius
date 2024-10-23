@@ -30,7 +30,6 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius_api.enabled', $config['enabled']);
-        $container->setParameter('sylius_api.legacy_error_handling', $config['legacy_error_handling']);
         $container->setParameter('sylius_api.default_image_filter', $config['default_image_filter']);
         $container->setParameter(
             'sylius_api.filter_eager_loading_extension.restricted_resources',
