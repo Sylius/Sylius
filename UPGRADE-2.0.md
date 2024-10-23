@@ -1181,6 +1181,9 @@ If your app never changed the hasher name configuration, you don't need to confi
     * `Sylius\Bundle\ApiBundle\DataProvider\ShipmentItemDataProvider`
     * `Sylius\Bundle\ApiBundle\DataProvider\ShippingMethodsCollectionDataProvider`
     * `Sylius\Bundle\ApiBundle\DataProvider\VerifyCustomerAccountItemDataProvider`
+    * `Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter`
+    * `Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter`
+    * `Sylius\Bundle\ApiBundle\Filter\ShippingMethodFilter`
     * `Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler`
     * `Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer`
     * `Sylius\Bundle\ApiBundle\SerializerContextBuilder\ReadOperationContextBuilder`

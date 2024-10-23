@@ -9,7 +9,7 @@ Related PRs: #17290
 
 ## Context and Problem Statement
 
-In previous versions, Sylius had filters grouped by field type rather than by resource and section. This led to filters being applied inconsistently, making it hard to customize them per resource. The filters were also located in the `Filter/Doctrine/` directory, which didn't align with how we organize other Doctrine-related features, creating confusion.
+In previous versions, Sylius had API filters grouped by field type rather than by resource and section. This led to filters being applied inconsistently, making it hard to customize them per resource. The filters were also located in the `Filter/Doctrine/` directory, which didn't align with how we organize other Doctrine-related features, creating confusion.
 To improve maintainability, clarity, and ease of customization, a refactor is required to group filters per resource and section (admin and shop) and move the custom ones into the `Doctrine/ORM/Filter/` directory, as other Doctrine-related features are organized.
 
 ## Decision Drivers
@@ -54,16 +54,14 @@ New structure:
 ```
 /Doctrine/ORM/Filter
     CustomFilter.php
-    CustomFilter.php
-    CustomFilter.php
 ```
 
-The following filter ID format will be used:
+The following format will be used for filter IDs: `sylius_api.[filter_type].[context].[resource]`.
 
+Examples:
 ```
 sylius_api.search_filter.admin.[resource]
 sylius_api.order_filter.shop.[resource]
 sylius_api.exists_filter.admin.[resource]
 sylius_api.custom_filter.shop.[resource]
 ```
-
