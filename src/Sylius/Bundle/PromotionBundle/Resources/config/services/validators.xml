@@ -20,7 +20,7 @@
         <defaults public="true" />
 
         <service id="sylius.validator.promotion_subject_coupon" class="Sylius\Bundle\PromotionBundle\Validator\PromotionSubjectCouponValidator">
-            <argument type="service" id="sylius.eligibility_checker.promotion" />
+            <argument type="service" id="sylius.checker.promotion_eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_promotion_subject_validator" />
         </service>
 

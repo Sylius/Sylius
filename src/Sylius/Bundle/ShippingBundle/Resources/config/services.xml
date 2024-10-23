@@ -44,7 +44,7 @@
         <service id="sylius.shipping_methods_resolver.default"
                  class="Sylius\Component\Shipping\Resolver\ShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method"/>
-            <argument type="service" id="sylius.eligibility_checker.shipping_method"/>
+            <argument type="service" id="sylius.checker.shipping_method_eligibility"/>
             <tag name="sylius.shipping_method_resolver" type="default" label="Default"/>
         </service>
         <service id="sylius.resolver.shipping_methods.default" alias="sylius.shipping_methods_resolver.default"/>

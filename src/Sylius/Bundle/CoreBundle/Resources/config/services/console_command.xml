@@ -35,7 +35,7 @@
             <argument type="service" id="sylius.remover.channel_pricing_log_entries" />
             <tag name="console.command"/>
         </service>
-        <service id="sylius.console.command.clear_price_history" alias="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand" />
+        <service id="sylius.console.command.price_history.clear" alias="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand" />
 
         <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand">
             <tag name="console.command" />

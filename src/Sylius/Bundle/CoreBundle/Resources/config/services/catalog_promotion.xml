@@ -64,6 +64,6 @@
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_core.catalog_promotions.batch_size%</argument>
         </service>
-        <service id="sylius.command_dispatcher.catalog_promotion.apply_on_variants" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface"/>
+        <service id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface"/>
     </services>
 </container>
