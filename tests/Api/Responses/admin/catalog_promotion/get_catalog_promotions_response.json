@@ -6,31 +6,150 @@
         {
             "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
             "@type": "CatalogPromotion",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Mugs discount",
             "code": "mugs_discount",
             "startDate": null,
             "endDate": null,
-            "state": @string@,
+            "state": "@string@",
             "priority": 0,
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "scopes": [],
             "actions": [],
-            "enabled": @boolean@,
+            "enabled": "@boolean@",
             "exclusive": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount\/translations\/en_US",
                     "@type": "CatalogPromotionTranslation",
-                    "id": @integer@,
                     "label": "Mugs discount",
-                    "description": @string@
+                    "description": "@string@"
                 }
             }
         }
     ],
     "hydra:totalItems": 1,
-    "hydra:search": @array@
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "property": "name",
+                "required": false,
+                "variable": "name"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "code",
+                "required": false,
+                "variable": "code"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "state",
+                "required": false,
+                "variable": "state"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "state",
+                "required": false,
+                "variable": "state[]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "enabled",
+                "required": false,
+                "variable": "enabled"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "startDate",
+                "required": false,
+                "variable": "startDate[before]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "startDate",
+                "required": false,
+                "variable": "startDate[strictly_before]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "startDate",
+                "required": false,
+                "variable": "startDate[after]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "startDate",
+                "required": false,
+                "variable": "startDate[strictly_after]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "endDate",
+                "required": false,
+                "variable": "endDate[before]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "endDate",
+                "required": false,
+                "variable": "endDate[strictly_before]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "endDate",
+                "required": false,
+                "variable": "endDate[after]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "endDate",
+                "required": false,
+                "variable": "endDate[strictly_after]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "channels",
+                "required": false,
+                "variable": "channel"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "code",
+                "required": false,
+                "variable": "order[code]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "name",
+                "required": false,
+                "variable": "order[name]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "startDate",
+                "required": false,
+                "variable": "order[startDate]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "endDate",
+                "required": false,
+                "variable": "order[endDate]"
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "property": "priority",
+                "required": false,
+                "variable": "order[priority]"
+            }
+        ],
+        "hydra:template": "/api/v2/admin/catalog-promotions{?name,code,state,state[],enabled,startDate[before],startDate[strictly_before],startDate[after],startDate[strictly_after],endDate[before],endDate[strictly_before],endDate[after],endDate[strictly_after],channel,order[code],order[name],order[startDate],order[endDate],order[priority]}",
+        "hydra:variableRepresentation": "BasicRepresentation"
+    }
 }

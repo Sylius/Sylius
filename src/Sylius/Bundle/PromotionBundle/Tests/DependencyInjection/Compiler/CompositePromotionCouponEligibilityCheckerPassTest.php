@@ -26,7 +26,7 @@ final class CompositePromotionCouponEligibilityCheckerPassTest extends AbstractC
      */
     public function it_collects_tagged_promotion_coupon_eligibility_checkers(): void
     {
-        $this->setDefinition('sylius.promotion_coupon_eligibility_checker', new Definition());
+        $this->setDefinition('sylius.checker.promotion_coupon_eligibility', new Definition());
         $this->setDefinition(
             'sylius.promotion_coupon_eligibility_checker.tagged',
             (new Definition())->addTag('sylius.promotion_coupon_eligibility_checker'),
@@ -35,7 +35,7 @@ final class CompositePromotionCouponEligibilityCheckerPassTest extends AbstractC
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.promotion_coupon_eligibility_checker',
+            'sylius.checker.promotion_coupon_eligibility',
             0,
             [new Reference('sylius.promotion_coupon_eligibility_checker.tagged')],
         );

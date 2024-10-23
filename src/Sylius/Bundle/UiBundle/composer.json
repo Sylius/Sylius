@@ -28,32 +28,31 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "doctrine/collections": "^1.6",
-        "knplabs/knp-menu": "^3.1",
-        "knplabs/knp-menu-bundle": "^3.0",
-        "sonata-project/block-bundle": "^4.2 || ^5.0",
-        "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius/grid-bundle": "^1.11",
-        "symfony/config": "^5.4.21 || ^6.4",
-        "symfony/framework-bundle": "^5.4.21 || ^6.4",
-        "symfony/security-core": "^5.4.21 || ^6.4",
-        "symfony/security-bundle": "^5.4.21 || ^6.4",
-        "symfony/templating": "^5.4.21 || ^6.4",
-        "symfony/webpack-encore-bundle": "^1.15",
-        "laminas/laminas-stdlib": "^3.3.1"
-    },
-    "conflict": {
-        "twig/twig": "^1.0 || 3.9.0"
+        "php": "^8.2",
+        "doctrine/collections": "^2.2",
+        "knplabs/knp-menu": "^3.5",
+        "knplabs/knp-menu-bundle": "^3.4",
+        "laminas/laminas-stdlib": "^3.19",
+        "sylius/grid-bundle": "^1.13",
+        "sylius/twig-extra": "^0.4",
+        "symfony/config": "^6.4 || ^7.1",
+        "symfony/expression-language": "^6.4 || ^7.1",
+        "symfony/framework-bundle": "^6.4.1 || ^7.1",
+        "symfony/security-core": "^6.4 || ^7.1",
+        "symfony/security-bundle": "^6.4 || ^7.1",
+        "symfony/ux-icons": "^2.20",
+        "symfony/ux-live-component": "^2.20",
+        "symfony/ux-twig-component": "^2.20",
+        "symfony/webpack-encore-bundle": "^2.2"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "phpspec/phpspec": "^7.2",
+        "matthiasnoback/symfony-config-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/form": "^5.4.21 || ^6.4",
-        "twig/twig": "^2.12 || ^3.3"
+        "symfony/dependency-injection": "^6.4.1 || ^7.1",
+        "symfony/form": "^6.4.1 || ^7.1",
+        "twig/twig": "^3.14"
     },
     "config": {
         "allow-plugins": {
@@ -62,7 +61,11 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "allow-contrib": false,
+            "require": "^7.1"
         }
     },
     "autoload": {
@@ -76,13 +79,13 @@
             "url": "../../*/*"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
         "test": [
             "@composer validate --strict",
             "bin/phpunit --colors=always",
             "bin/phpspec run --ansi --no-interaction"
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

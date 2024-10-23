@@ -1,0 +1,37 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
+
+{% set order = hookable_metadata.context.resource %}
+
+{% set order_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set unit_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
+
+{% set order_promotion_adjustments = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(order_promotion_adjustment)) %}
+{% set unit_promotion_adjustments = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(unit_promotion_adjustment)) %}
+{% set promotion_adjustments = order_promotion_adjustments|merge(unit_promotion_adjustments) %}
+{% set total_adjustments = promotion_adjustments|reduce((carry, v) => carry + v) %}
+
+<tr>
+    <td>
+        <strong>{{ 'sylius.ui.promotion_total'|trans }}:</strong>
+    </td>
+    <td class="text-end" {{ sylius_test_html_attribute('promotion-total') }}>
+        {% if total_adjustments == 0 %}
+            <p>{{ 'sylius.ui.no_promotion'|trans }}</p>
+        {% else %}
+            {{ money.format(total_adjustments, order.currencyCode) }}
+        {% endif %}
+    </td>
+</tr>
+
+{% for label, amount in promotion_adjustments  %}
+    <tr class="text-muted" {{ sylius_test_html_attribute('promotion', label) }}>
+        <td>
+            <div class="ps-2">
+                &bull; {{ label }}:
+            </div>
+        </td>
+        <td class="text-end" {{ sylius_test_html_attribute('discount') }}>
+            {{ money.format(amount, order.currencyCode) }}
+        </td>
+    </tr>
+{% endfor %}

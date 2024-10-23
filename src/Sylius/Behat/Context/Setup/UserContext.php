@@ -23,7 +23,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class UserContext implements Context
+final readonly class UserContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
@@ -40,8 +40,9 @@ final class UserContext implements Context
      * @Given there was account of :email with password :password
      * @Given there is a user :email
      */
-    public function thereIsUserIdentifiedBy($email, $password = 'sylius')
+    public function thereIsUserIdentifiedBy(string $email, string $password = 'sylius'): void
     {
+        /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
@@ -68,7 +69,7 @@ final class UserContext implements Context
      * @Given the account of :email was deleted
      * @Given my account :email was deleted
      */
-    public function accountWasDeleted($email)
+    public function accountWasDeleted(string $email): void
     {
         /** @var ShopUserInterface $user */
         $user = $this->userRepository->findOneByEmail($email);
@@ -81,7 +82,7 @@ final class UserContext implements Context
     /**
      * @Given its account was deleted
      */
-    public function hisAccountWasDeleted()
+    public function hisAccountWasDeleted(): void
     {
         $user = $this->sharedStorage->get('user');
 
@@ -93,7 +94,7 @@ final class UserContext implements Context
      * @Given /^(this user) is not verified$/
      * @Given /^(I) have not verified my account (?:yet)$/
      */
-    public function accountIsNotVerified(UserInterface $user)
+    public function accountIsNotVerified(UserInterface $user): void
     {
         $user->setVerifiedAt(null);
 
@@ -103,7 +104,7 @@ final class UserContext implements Context
     /**
      * @Given /^(?:(I) have|(this user) has) already received a verification email$/
      */
-    public function iHaveReceivedVerificationEmail(UserInterface $user)
+    public function iHaveReceivedVerificationEmail(UserInterface $user): void
     {
         $this->prepareUserVerification($user);
     }
@@ -111,7 +112,7 @@ final class UserContext implements Context
     /**
      * @Given a verification email has already been sent to :email
      */
-    public function aVerificationEmailHasBeenSentTo($email)
+    public function aVerificationEmailHasBeenSentTo(string $email): void
     {
         $user = $this->userRepository->findOneByEmail($email);
 
@@ -121,7 +122,7 @@ final class UserContext implements Context
     /**
      * @Given /^(I) have already verified my account$/
      */
-    public function iHaveAlreadyVerifiedMyAccount(UserInterface $user)
+    public function iHaveAlreadyVerifiedMyAccount(UserInterface $user): void
     {
         $user->setVerifiedAt(new \DateTime());
 
@@ -136,7 +137,7 @@ final class UserContext implements Context
         $this->prepareUserPasswordResetToken($user);
     }
 
-    private function prepareUserVerification(UserInterface $user)
+    private function prepareUserVerification(UserInterface $user): void
     {
         $token = 'marryhadalittlelamb';
         $this->sharedStorage->set('verification_token', $token);
@@ -181,9 +182,12 @@ final class UserContext implements Context
      */
     public function iveChangedMyPasswordFromTo(UserInterface $user, string $currentPassword, string $newPassword): void
     {
-        $changeShopUserPassword = new ChangeShopUserPassword($newPassword, $newPassword, $currentPassword);
-
-        $changeShopUserPassword->setShopUserId($user->getId());
+        $changeShopUserPassword = new ChangeShopUserPassword(
+            newPassword: $newPassword,
+            confirmNewPassword: $newPassword,
+            currentPassword: $currentPassword,
+            shopUserId: $user->getId(),
+        );
 
         $this->messageBus->dispatch($changeShopUserPassword);
     }

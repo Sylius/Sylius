@@ -1,0 +1,45 @@
+{{ form_label(hookable_metadata.context.form.provinces) }}
+{{ form_errors(hookable_metadata.context.form.provinces) }}
+
+<div {{ sylius_test_html_attribute('provinces') }}>
+    {% for province_form in hookable_metadata.context.form.provinces %}
+        <div class="card mb-2" {{ sylius_test_html_attribute('province') }}>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            {{ form_label(province_form.code, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                            <div class="col">
+                                {{ form_widget(province_form.code, sylius_test_form_attribute('province-code')) }}
+                                {{ form_errors(province_form.code) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            {{ form_label(province_form.name, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                            <div class="col">
+                                {{ form_widget(province_form.name, sylius_test_form_attribute('province-name')) }}
+                                {{ form_errors(province_form.name) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            {{ form_label(province_form.abbreviation, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                            <div class="col">
+                                {{ form_widget(province_form.abbreviation, sylius_test_form_attribute('province-abbreviation')) }}
+                                {{ form_errors(province_form.abbreviation) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto" {{ sylius_test_html_attribute('delete-province') }}>
+                        {{ form_row(province_form.vars.button_delete, {attr: {class: 'btn btn-outline-danger'}}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{{ form_widget(hookable_metadata.context.form.provinces.vars.button_add, sylius_test_form_attribute('add-province')) }}

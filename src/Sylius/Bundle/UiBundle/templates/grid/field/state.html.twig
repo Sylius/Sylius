@@ -1,0 +1,7 @@
+{% set value = 'sylius.ui.' ~ data %}
+
+{% if options.vars.labels is defined %}
+    {% include [(options.vars.labels ~ '/' ~ data ~ '.html.twig'), '@SyliusUi/label/_default.html.twig'] with {'value': value} %}
+{% else %}
+    {% include '@SyliusUi/label/_default.html.twig' with {'value': value} %}
+{% endif %}

@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -41,6 +42,7 @@ final class ProductContext implements Context
         private IriConverterInterface $iriConverter,
         private ChannelContextSetterInterface $channelContextSetter,
         private RequestFactoryInterface $requestFactory,
+        private ObjectManager $objectManager,
         private string $apiUrlPrefix,
     ) {
     }
@@ -52,6 +54,7 @@ final class ProductContext implements Context
      */
     public function iViewProduct(ProductInterface $product): void
     {
+        $this->objectManager->clear(); // it's needed to clear the entity manager to receive the product images in correct order, as the images are using fallback order when added programmatically
         $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         /** @var ProductVariantInterface $productVariant */
@@ -63,11 +66,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I try to reach unexistent product
+     * @When I try to reach nonexistent product
      */
-    public function iTryToReachUnexistentProduct(): void
+    public function iTryToReachNonexistentProduct(): void
     {
-        $this->client->show(Resources::PRODUCTS, 'unexistent');
+        $this->client->show(Resources::PRODUCTS, 'nonexistent');
     }
 
     /**
@@ -471,6 +474,28 @@ final class ProductContext implements Context
     public function iShouldSeeProductName(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
+    }
+
+    /**
+     * @Then the main image should be of type :type
+     * @Then I should be able to see a main image of type :type
+     * @Then the first thumbnail image should be of type :type
+     */
+    public function theImageShouldBeOfType(string $type): void
+    {
+        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
+
+        Assert::same($images[0]['type'], $type);
+    }
+
+    /**
+     * @Then the second thumbnail image should be of type :type
+     */
+    public function theSecondThumbnailImageShouldBeOfType(string $type): void
+    {
+        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
+
+        Assert::same($images[1]['type'], $type);
     }
 
     /**

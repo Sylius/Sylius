@@ -19,11 +19,10 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventHandler\OrderCompletedHandler">
+        <service id="sylius_api.event_handler.order_completed" class="Sylius\Bundle\ApiBundle\EventHandler\OrderCompletedHandler">
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
-        <service id="sylius_api.event_handler.order_completed" alias="Sylius\Bundle\ApiBundle\EventHandler\OrderCompletedHandler" />
     </services>
 </container>

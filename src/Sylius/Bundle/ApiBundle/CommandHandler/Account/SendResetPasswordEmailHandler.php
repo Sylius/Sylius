@@ -19,9 +19,10 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class SendResetPasswordEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class SendResetPasswordEmailHandler
 {
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
@@ -37,8 +38,8 @@ final class SendResetPasswordEmailHandler implements MessageHandlerInterface
     public function __invoke(SendResetPasswordEmail $command): void
     {
         $user = $this->userRepository->findOneByEmail($command->email);
-        $channel = $this->channelRepository->findOneByCode($command->channelCode());
+        $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
-        $this->resetPasswordEmailManager->sendResetPasswordEmail($user, $channel, $command->localeCode());
+        $this->resetPasswordEmailManager->sendResetPasswordEmail($user, $channel, $command->localeCode);
     }
 }

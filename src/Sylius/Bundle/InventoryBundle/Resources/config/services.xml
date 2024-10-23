@@ -13,23 +13,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.availability_checker.default" class="Sylius\Component\Inventory\Checker\AvailabilityChecker" />
-        <service id="sylius.checker.inventory.availability" alias="sylius.availability_checker.default" />
+        <service id="sylius.checker.inventory.availability" class="Sylius\Component\Inventory\Checker\AvailabilityChecker" />
+        <service id="Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface" alias="sylius.checker.inventory.availability" />
 
         <service id="sylius.validator.in_stock" class="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator">
             <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_in_stock" />
         </service>
 
-        <service id="sylius.templating.helper.inventory" class="Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper">
-            <argument type="service" id="sylius.checker.inventory.availability" />
-            <tag name="templating.helper" alias="sylius_inventory" />
-            <deprecated package="sylius/inventory-bundle" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.twig.extension.inventory" class="Sylius\Bundle\InventoryBundle\Twig\InventoryExtension" public="false">
+        <service id="sylius.twig.extension.inventory" class="Sylius\Bundle\InventoryBundle\Twig\InventoryExtension">
             <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="twig.extension" />
         </service>

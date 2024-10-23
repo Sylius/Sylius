@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_admin.twig.component.catalog_promotion.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.catalog_promotion.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType</argument>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:catalog_promotion:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.channel.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.channel.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ChannelType</argument>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:channel:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.country.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.country.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\CountryType</argument>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:country:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.customer_group.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.customer_group" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.customer_group.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\CustomerGroupType</argument>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:customer_group:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.payment_method.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.payment_method.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType</argument>
+
+            <tag name="sylius.twig_component" key="sylius_admin:payment_method:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.generate_product_variants_form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.product.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType</argument>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:product:generate_product_variants_form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.promotion.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.promotion.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\PromotionType</argument>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:promotion:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.shipping_method.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.shipping_method.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType</argument>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:shipping_method:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.render_entity_with_template"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityWithTemplateComponent"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+
+            <tag name="sylius.twig_component" key="sylius_admin:render_entity_with_template" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.shared.navbar.notifications"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent"
+        >
+            <tag name="sylius.twig_component" key="sylius_admin:navbar:notifications" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.shared.navbar.shop_preview"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\ShopPreviewComponent"
+        >
+            <argument type="service" id="sylius.repository.channel" />
+
+            <tag name="sylius.twig_component" key="sylius_admin:navbar:shop_preview" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.shared.navbar.user_dropdown"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent"
+        >
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius_admin.provider.logged_in_admin_user" />
+
+            <tag name="sylius.twig_component" key="sylius_admin:navbar:user_dropdown" />
+        </service>
+    </services>
+</container>

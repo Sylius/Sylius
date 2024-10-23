@@ -17,33 +17,27 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.shop.locale_switcher" class="Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher" public="false">
-            <argument type="service" id="sylius_shop.storage.locale" />
+        <service id="sylius_shop.locale_switcher" class="Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher">
+            <argument type="service" id="sylius_shop.locale_storage" />
             <argument type="service" id="sylius.context.channel" />
         </service>
-        <service id="sylius_shop.locale_switcher" alias="sylius.shop.locale_switcher" />
 
-        <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\LocaleStorage">
+        <service id="sylius_shop.storage.locale" class="Sylius\Component\Core\Locale\LocaleStorage">
             <argument type="service" id="sylius.storage.session" />
         </service>
-        <service id="sylius_shop.storage.locale" alias="sylius.storage.locale" />
-        <service id="Sylius\Component\Core\Locale\LocaleStorageInterface" alias="sylius.storage.locale" />
+        <service id="Sylius\Component\Core\Locale\LocaleStorageInterface" alias="sylius_shop.storage.locale" />
 
-        <service id="sylius.context.locale.storage_based" class="Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext">
+        <service id="sylius_shop.context.locale.storage_based" class="Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius_shop.storage.locale" />
             <argument type="service" id="sylius.provider.locale" />
             <tag name="sylius.context.locale" priority="-64" />
         </service>
-        <service id="sylius_shop.context.locale.storage_based" alias="sylius.context.locale.storage_based" />
 
-        <service id="sylius.shop.locale_stripping_router" class="Sylius\Bundle\ShopBundle\Router\LocaleStrippingRouter"
+        <service id="sylius_shop.router.locale_stripping" class="Sylius\Bundle\ShopBundle\Router\LocaleStrippingRouter"
                  decorates="router" decoration-priority="1024">
-            <argument type="service" id="sylius.shop.locale_stripping_router.inner" />
+            <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.locale" />
         </service>
-        <service id="sylius_shop.router.locale_stripping" alias="sylius.shop.locale_stripping_router" />
     </services>
 </container>

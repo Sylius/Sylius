@@ -38,4 +38,6 @@ interface HomePageInterface extends SymfonyPageInterface
     public function switchLocale(string $localeCode): void;
 
     public function getLatestProductsNames(): array;
+
+    public function getLatestDealsNames(): array;
 }

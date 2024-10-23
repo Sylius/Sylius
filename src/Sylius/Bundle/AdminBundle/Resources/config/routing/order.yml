@@ -2,9 +2,11 @@ sylius_admin_order:
     resource: |
         alias: sylius.order
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         only: ['index']
         grid: sylius_admin_order
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
         permission: true
         vars:
             all:
@@ -25,7 +27,7 @@ sylius_admin_order_show:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/show.html.twig"
+            template: "@SyliusAdmin/shared/crud/show.html.twig"
 
 sylius_admin_order_history:
     path: /orders/{id}/history
@@ -39,7 +41,7 @@ sylius_admin_order_history:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/history.html.twig"
+            template: "@SyliusAdmin/order/history.html.twig"
 
 sylius_admin_order_update:
     path: /orders/{id}/edit
@@ -53,8 +55,9 @@ sylius_admin_order_update:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/update.html.twig"
+            template: "@SyliusAdmin/shared/crud/update.html.twig"
             form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
                 options:
                     validation_groups:
                         - sylius_shipping_address_update
@@ -118,7 +121,7 @@ sylius_admin_order_payment_refund:
             flash: sylius.payment.refunded
 
 sylius_admin_order_shipment_ship:
-    path: /orders/{id}/ship
+    path: /orders/{orderId}/shipment/{id}/ship
     methods: [PUT]
     defaults:
         _controller: sylius.controller.shipment::updateAction
@@ -138,7 +141,7 @@ sylius_admin_order_shipment_ship:
                     id: $orderId
             section: admin
             permission: true
-            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+            form: Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType
             vars:
                 route:
                     parameters:

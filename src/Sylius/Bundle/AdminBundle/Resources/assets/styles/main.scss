@@ -1,0 +1,33 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@import "variables";
+
+@import "@tabler/core/src/scss/tabler.scss";
+@import "@tabler/core/src/scss/tabler-flags.scss";
+
+@import "body";
+@import "alert";
+@import "avatar";
+@import "collapse";
+@import "datatable";
+@import "filters";
+@import "flags";
+@import "flashes";
+@import "form";
+@import "infinite-tree";
+@import "layout";
+@import "loader";
+@import "modal";
+@import "navbar";
+@import "rating";
+@import "sidebar";
+@import "thumbnails";
+@import "tom-select";
+@import "utils";

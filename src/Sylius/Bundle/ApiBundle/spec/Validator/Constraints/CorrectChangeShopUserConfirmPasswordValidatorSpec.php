@@ -33,7 +33,12 @@ final class CorrectChangeShopUserConfirmPasswordValidatorSpec extends ObjectBeha
         $constraint = new CorrectChangeShopUserConfirmPassword();
         $this->initialize($executionContext);
 
-        $value = new ChangeShopUserPassword('password', 'password', 'current');
+        $value = new ChangeShopUserPassword(
+            newPassword: 'password',
+            confirmNewPassword: 'password',
+            currentPassword: 'current',
+            shopUserId: 1,
+        );
 
         $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
 
@@ -48,7 +53,12 @@ final class CorrectChangeShopUserConfirmPasswordValidatorSpec extends ObjectBeha
         $constraint->message = 'message';
         $this->initialize($executionContext);
 
-        $value = new ChangeShopUserPassword('password', 'notaPassword', 'current');
+        $value = new ChangeShopUserPassword(
+            newPassword: 'password',
+            confirmNewPassword: 'notaPassword',
+            currentPassword: 'current',
+            shopUserId: 1,
+        );
 
         $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('newPassword')->willReturn($constraintViolationBuilder);

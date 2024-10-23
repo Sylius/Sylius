@@ -1,0 +1,104 @@
+winzou_state_machine:
+    sylius_order:
+        class: "%sylius.model.order.class%"
+        property_path: state
+        graph: sylius_order
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            new: ~
+            cancelled: ~
+            fulfilled: ~
+        transitions:
+            create:
+                from: [cart]
+                to: new
+            cancel:
+                from: [new]
+                to: cancelled
+            fulfill:
+                from: [new]
+                to: fulfilled
+        callbacks:
+            before:
+                sylius_assign_number:
+                    on: ["create"]
+                    do: ["@sylius.number_assigner.order_number", "assignNumber"]
+                    args: ["object"]
+                    priority: -200
+                sylius_assign_token:
+                    on: ["create"]
+                    do: ["@sylius.assigner.order_token.unique_id_based", "assignTokenValueIfNotSet"]
+                    args: ["object"]
+                    priority: -100
+            after:
+                sylius_request_shipping:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_shipping'", "'sylius_order_shipping'"]
+                    priority: -800
+                sylius_request_payment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_payment'", "'sylius_order_payment'"]
+                    priority: -700
+                sylius_create_payment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
+                    priority: -600
+                sylius_create_shipment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'create'", "'sylius_shipment'"]
+                    priority: -500
+                sylius_hold_inventory:
+                    on: ["create"]
+                    do: ["@sylius.operator.inventory.order_inventory", "hold"]
+                    args: ["object"]
+                    priority: -400
+                sylius_increment_promotions_usages:
+                    on: ["create"]
+                    do: ["@sylius.modifier.promotion.order_usage", "increment"]
+                    args: ["object"]
+                    priority: -300
+                sylius_save_addresses_on_customer:
+                    on: ["create"]
+                    do: ["@sylius.saver.customer.order_addresses", "saveAddresses"]
+                    args: ["object"]
+                    priority: -200
+                sylius_set_order_immutable_names:
+                    on: ["create"]
+                    do: ["@sylius.setter.order.item_names", "__invoke"]
+                    args: ["object"]
+                    priority: -100
+                sylius_cancel_payment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'cancel'", "'sylius_payment'"]
+                    priority: -600
+                sylius_cancel_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'cancel'", "'sylius_shipment'"]
+                    priority: -500
+                sylius_cancel_order_payment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'cancel'", "'sylius_order_payment'"]
+                    priority: -400
+                sylius_cancel_order_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
+                    priority: -300
+                sylius_cancel_order:
+                    on: ["cancel"]
+                    do: ["@sylius.operator.inventory.order_inventory", "cancel"]
+                    args: ["object"]
+                    priority: -200
+                sylius_decrement_promotions_usages:
+                    on: ["cancel"]
+                    do: ["@sylius.modifier.promotion.order_usage", "decrement"]
+                    args: ["object"]
+                    priority: -100

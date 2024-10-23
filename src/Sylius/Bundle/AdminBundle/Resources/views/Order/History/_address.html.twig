@@ -1,8 +1,0 @@
-<div class="column">
-    <h4 class="ui top attached styled header">
-        {{ ('sylius.ui.'~type~'_address')|trans }}
-    </h4>
-    <div class="ui attached segment" id="{{ type }}-address-changes">
-        {{ render(url('sylius_admin_partial_address_log_entry_index', {'id': address.id})) }}
-    </div>
-</div>

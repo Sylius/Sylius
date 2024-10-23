@@ -20,24 +20,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsField;
 
-    public function checkIfScopeConfigurationFormIsVisible(): bool
-    {
-        return $this->hasElement('products');
-    }
-
-    public function checkIfActionConfigurationFormIsVisible(): bool
-    {
-        return $this->hasElement('amount');
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'amount' => '[name^="sylius_catalog_promotion[actions][0][configuration]"][name$="[amount]"]',
-            'code' => '#sylius_catalog_promotion_code',
-            'endDate' => '#sylius_catalog_promotion_endDate',
-            'name' => '#sylius_catalog_promotion_name',
-            'products' => '[name="sylius_catalog_promotion[scopes][0][configuration][products]"]',
+            'code' => '#sylius_admin_catalog_promotion_code',
+            'name' => '#sylius_admin_catalog_promotion_name',
         ]);
     }
 }

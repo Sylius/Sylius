@@ -1,0 +1,67 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.common.index':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+                priority: 0
+
+        'sylius_admin.common.index.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 300
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                priority: 200
+            grid:
+                template: '@SyliusAdmin/shared/crud/index/content/grid.html.twig'
+                priority: 100
+            footer:
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
+
+        'sylius_admin.common.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/index/content/header/breadcrumbs.html.twig'
+                priority: 100
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'sylius_admin.common.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions.html.twig'
+                priority: 0
+        
+        'sylius_admin.common.index.content.grid':
+            filters:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/filters.html.twig'
+                priority: 200
+            data_table:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/data_table.html.twig'
+                priority: 100
+            no_data_block:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/no_results.html.twig'
+                priority: 0
+
+        'sylius_admin.common.index.content.grid.no_results':
+            image:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/no_results/image.html.twig'
+                priority: 300
+            title:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/no_results/title.html.twig'
+                priority: 200
+            subtitle:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/no_results/subtitle.html.twig'
+                priority: 100
+            action:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/no_results/action.html.twig'
+                priority: 0

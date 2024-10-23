@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -34,6 +34,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     }
 
     /**
+     * @Given I am browsing variants affected by catalog promotion :catalogPromotion
      * @When I browse variants affected by catalog promotion :catalogPromotion
      */
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -51,6 +52,24 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     {
         $this->client->index(Resources::PRODUCT_VARIANTS);
         $this->client->addFilter('product', $this->iriConverter->getIriFromResource($product));
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->client->addFilter('code', $phrase);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter by name containing :phrase
+     */
+    public function iFilterByNameContaining(string $phrase): void
+    {
+        $this->client->addFilter('translations.name', $phrase);
         $this->client->filter();
     }
 

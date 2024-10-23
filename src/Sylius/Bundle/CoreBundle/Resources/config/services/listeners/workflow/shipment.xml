@@ -17,24 +17,20 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="false" />
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\ResolveOrderShipmentStateListener">
+        <service id="sylius.listener.workflow.shipment.resolve_order_shipment_state" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\ResolveOrderShipmentStateListener">
             <argument type="service" id="sylius.state_resolver.order_shipping" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_shipment.completed.ship"
                  priority="100"
             />
         </service>
-        <service id="sylius.listener.workflow.shipment.resolve_order_shipment_state" alias="Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\ResolveOrderShipmentStateListener" />
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\AssignShippingDateListener">
+        <service id="sylius.listener.workflow.shipment.assign_shipping_date" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\AssignShippingDateListener">
             <argument type="service" id="sylius.assigner.shipping_date" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_shipment.transition.ship"
                  priority="100"
             />
         </service>
-        <service id="sylius.listener.workflow.shipment.assign_shipping_date" alias="Sylius\Bundle\CoreBundle\EventListener\Workflow\Shipment\AssignShippingDateListener" />
     </services>
 </container>

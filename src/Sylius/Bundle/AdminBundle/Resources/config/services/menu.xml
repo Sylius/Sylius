@@ -17,58 +17,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.admin.menu_builder.customer.show" class="Sylius\Bundle\AdminBundle\Menu\CustomerShowMenuBuilder">
+        <service id="sylius_admin.menu_builder.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.customer.show" />
-            <deprecated package="sylius/admin-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
-        </service>
-
-        <service id="sylius.admin.menu_builder.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.main" />
+            <argument type="service" id="router" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_admin.main" />
-        </service>
-        <service id="sylius_admin.menu_builder.main" alias="sylius.admin.menu_builder.main" />
-
-        <service id="sylius.admin.menu_builder.promotion.update" class="Sylius\Bundle\AdminBundle\Menu\PromotionUpdateMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.promotion.update" />
-            <deprecated package="sylius/admin-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
-        </service>
-
-        <service id="sylius.admin.menu_builder.order.show" class="Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="sylius_abstraction.state_machine" />
-            <argument type="service" id="security.csrf.token_manager" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.order.show" />
-            <deprecated package="sylius/admin-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
-        </service>
-
-        <service id="sylius.admin.menu_builder.product_form" class="Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product_form" />
-            <deprecated package="sylius/admin-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
-        </service>
-
-        <service id="sylius.admin.menu_builder.product.update" class="Sylius\Bundle\AdminBundle\Menu\ProductUpdateMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product.update" />
-            <deprecated package="sylius/admin-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
-        </service>
-
-        <service id="sylius.admin.menu_builder.product_variant_form" class="Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product_variant_form" />
-            <deprecated package="sylius/admin-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0."</deprecated>
         </service>
     </services>
 </container>

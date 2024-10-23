@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource;
 
 final class FooSyliusResourceTest extends ApiTestCase
@@ -26,9 +26,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         $this->setUpTest();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_a_collection_as_a_logged_in_administrator(): void
     {
         static::createClient()->request(
@@ -54,9 +52,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_a_collection_as_a_visitor(): void
     {
         static::createClient()->request('GET', 'api/v2/foo-sylius-resources');
@@ -78,9 +74,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_creates_a_new_entity_as_a_visitor(): void
     {
         static::createClient()->request(
@@ -99,9 +93,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_an_item_as_a_logged_in_administrator(): void
     {
         $fooSyliusResourceIri = $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource1']);

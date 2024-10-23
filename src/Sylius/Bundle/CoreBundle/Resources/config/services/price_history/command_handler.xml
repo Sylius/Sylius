@@ -17,14 +17,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\CommandHandler\ApplyLowestPriceOnChannelPricingsHandler">
+            <service id="sylius.command_handler.price_history.apply_lowest_price_on_channel_pricings" class="Sylius\Bundle\CoreBundle\PriceHistory\CommandHandler\ApplyLowestPriceOnChannelPricingsHandler">
             <argument type="service" id="sylius.processor.price_history.product_lowest_price_before_discount" />
             <argument type="service" id="sylius.repository.channel_pricing" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
-        <service id="sylius.command_handler.price_history.apply_lowest_price_on_channel_pricings"
-                 alias="Sylius\Bundle\CoreBundle\PriceHistory\CommandHandler\ApplyLowestPriceOnChannelPricingsHandler" />
     </services>
 </container>

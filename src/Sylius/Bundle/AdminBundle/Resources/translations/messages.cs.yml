@@ -56,8 +56,6 @@ sylius:
             product_not_active_in_channel: Produkt ještě není v tomto kanálu aktivován.
         gateway:
             no_sca_support_notice: Zvolená platební brána nepodporuje SCA.
-            pay_pal_express_checkout_deprecation_notice: >
-                PayPal Express Checkout je zastaralý. Použijte prosím novou integraci <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
         sales_summary: Přehled prodejů
         statistics:
             day: Den

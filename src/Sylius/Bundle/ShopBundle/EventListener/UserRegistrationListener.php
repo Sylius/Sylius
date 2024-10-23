@@ -14,25 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-final class UserRegistrationListener
+final readonly class UserRegistrationListener
 {
     public function __construct(
         private ObjectManager $userManager,
         private GeneratorInterface $tokenGenerator,
         private EventDispatcherInterface $eventDispatcher,
         private ChannelContextInterface $channelContext,
-        private UserLoginInterface $userLogin,
+        private Security $security,
         private string $firewallContextName,
     ) {
     }
@@ -74,6 +74,6 @@ final class UserRegistrationListener
         $this->userManager->persist($user);
         $this->userManager->flush();
 
-        $this->userLogin->login($user, $this->firewallContextName);
+        $this->security->login($user, 'form_login', $this->firewallContextName);
     }
 }

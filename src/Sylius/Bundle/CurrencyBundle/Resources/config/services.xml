@@ -21,26 +21,17 @@
     </imports>
 
     <services>
-        <defaults public="true" />
+        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" decoration-priority="256" />
 
-        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" decoration-priority="256" public="false" />
-
-        <service id="sylius.currency_converter" class="Sylius\Component\Currency\Converter\CurrencyConverter">
+        <service id="sylius.converter.currency" class="Sylius\Component\Currency\Converter\CurrencyConverter">
             <argument type="service" id="sylius.repository.exchange_rate" />
         </service>
-        <service id="Sylius\Component\Currency\Converter\CurrencyConverterInterface" alias="sylius.currency_converter" />
-        <service id="sylius.converter.currency" alias="sylius.currency_converter" />
+        <service id="Sylius\Component\Currency\Converter\CurrencyConverterInterface" alias="sylius.converter.currency" />
 
-        <service id="sylius.currency_name_converter" class="Sylius\Component\Currency\Converter\CurrencyNameConverter" />
-        <service id="Sylius\Component\Currency\Converter\CurrencyNameConverterInterface" alias="sylius.currency_name_converter" />
-        <service id="sylius.converter.currency_name" alias="sylius.currency_name_converter" />
+        <service id="sylius.converter.currency_name" class="Sylius\Component\Currency\Converter\CurrencyNameConverter" />
+        <service id="Sylius\Component\Currency\Converter\CurrencyNameConverterInterface" alias="sylius.converter.currency_name" />
 
-        <service id="sylius.templating.helper.currency" class="Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper" lazy="true">
-            <tag name="templating.helper" alias="sylius_currency" />
-            <deprecated package="sylius/currency-bundle" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension" public="false">
+        <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension">
             <tag name="twig.extension" />
         </service>
 

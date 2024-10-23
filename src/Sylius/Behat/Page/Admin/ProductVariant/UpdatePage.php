@@ -104,17 +104,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function isShowInShopButtonDisabled(): bool
     {
-        return $this->getElement('show_product_single_button')->hasClass('disabled');
+        return $this->getElement('view_in_store')->hasClass('disabled');
     }
 
-    public function showProductInChannel(string $channel): void
+    public function showProductInChannel(ChannelInterface $channel): void
     {
-        $this->getElement('show_product_dropdown')->clickLink($channel);
+        $this->getElement('view_in_store_in_channel', ['%channel_code%' => $channel->getCode()])->click();
     }
 
     public function showProductInSingleChannel(): void
     {
-        $this->getElement('show_product_single_button')->click();
+        $this->getElement('view_in_store')->click();
     }
 
     public function isSelectedOptionValueOnPage(string $optionName, string $valueName): bool
@@ -130,19 +130,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_product_variant_code',
-            'minimum_price' => '#sylius_product_variant_channelPricings_%channelCode%_minimumPrice',
-            'name' => '#sylius_product_variant_translations_%language%_name',
-            'on_hand' => '#sylius_product_variant_onHand',
-            'option_values' => '#sylius_product_variant_optionValues_%optionName%',
-            'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
-            'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
+            'code' => '#sylius_admin_product_variant_code',
+            'enabled' => '#sylius_admin_product_variant_enabled',
+            'minimum_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_minimumPrice',
+            'name' => '#sylius_admin_product_variant_translations_%language%_name',
+            'on_hand' => '#sylius_admin_product_variant_onHand',
+            'option_values' => '#sylius_admin_product_variant_optionValues_%optionName%',
+            'original_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_originalPrice',
+            'price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_price',
             'pricing_configuration' => '#sylius_calculator_container',
-            'shipping_required' => '#sylius_product_variant_shippingRequired',
-            'show_product_dropdown' => '.scrolling.menu',
+            'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
             'show_product_single_button' => 'a:contains("Show product in shop page")',
-            'tracked' => '#sylius_product_variant_tracked',
-            'enabled' => '#sylius_product_variant_enabled',
+            'tracked' => '#sylius_admin_product_variant_tracked',
+            'view_in_store' => '[data-test-view-in-store]',
+            'view_in_store_in_channel' => '[data-test-view-in-store] [data-test-channel-code="%channel_code%"]',
         ]);
     }
 

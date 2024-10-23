@@ -17,6 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsException;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsValuesException;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -33,16 +35,27 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $this->beConstructedWith($productVariantFactory, $variantsParityChecker);
     }
 
-    function it_implements_product_variant_generator_interfave(): void
+    function it_implements_product_variant_generator_interface(): void
     {
         $this->shouldImplement(ProductVariantGeneratorInterface::class);
     }
 
-    function it_cannot_generate_variants_for_an_object_without_options(ProductInterface $variable): void
+    function it_throws_an_exception_if_product_has_no_options(ProductInterface $product): void
     {
-        $variable->hasOptions()->willReturn(false);
+        $product->hasOptions()->willReturn(false);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->duringGenerate($variable);
+        $this->shouldThrow(ProductWithoutOptionsException::class)->during('generate', [$product]);
+    }
+
+    function it_throws_an_exception_if_product_has_no_options_values(
+        ProductInterface $product,
+        ProductOptionInterface $colorOption,
+    ): void {
+        $product->hasOptions()->willReturn(true);
+        $product->getOptions()->willReturn(new ArrayCollection([$colorOption->getWrappedObject()]));
+        $colorOption->getValues()->willReturn(new ArrayCollection([]));
+
+        $this->shouldThrow(ProductWithoutOptionsValuesException::class)->during('generate', [$product]);
     }
 
     function it_generates_variants_for_every_value_of_an_objects_single_option(

@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.checker.order_shipping_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker">
             <argument type="service" id="sylius.resolver.shipping_methods" />
         </service>
@@ -29,18 +27,17 @@
         </service>
         <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
 
-        <service id="Sylius\Component\Core\Checker\CLIContextCheckerInterface" class="Sylius\Component\Core\Checker\CLIContextChecker">
+        <service id="sylius.checker.cli_context" class="Sylius\Component\Core\Checker\CLIContextChecker">
             <argument type="service" id="request_stack" />
         </service>
-        <service id="sylius.checker.cli_context" alias="Sylius\Component\Core\Checker\CLIContextCheckerInterface" />
+        <service id="Sylius\Component\Core\Checker\CLIContextCheckerInterface" alias="sylius.checker.cli_context" />
 
         <service
-            id="sylius.promotion_coupon_channels_eligibility_checker"
+            id="sylius.checker.promotion_coupon.channel_eligibility"
             class="Sylius\Component\Core\Checker\Eligibility\PromotionCouponChannelEligibilityChecker"
             public="false"
         >
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-        <service id="sylius.checker.promotion_coupon.channel_eligibility" alias="sylius.promotion_coupon_channels_eligibility_checker" />
     </services>
 </container>

@@ -25,174 +25,81 @@
     </parameters>
 
     <services>
-        <!--    TODO: Remove after bumping to Api Platform 3.0    -->
-        <service id="api_platform.action.post_item" alias="api_platform.action.placeholder" public="true">
-            <deprecated package="sylius/api-bundle" version="1.14">The "%alias_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
+        <service id="sylius_api.extractor.property_info.empty_property_list" class="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
-        <service id="sylius_api.extractor.property_info.empty_property_list" alias="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor" />
 
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
-            <tag name="sylius.api.command_data_transformer" priority="1000" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">
-            <tag name="sylius.api.command_data_transformer" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">
-            <argument type="service" id="sylius_api.context.user.token_based" />
-            <tag name="sylius.api.command_data_transformer" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\ChannelCodeAwareInputCommandDataTransformer">
-            <argument type="service" id="sylius.context.channel" />
-            <tag name="sylius.api.command_data_transformer" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer">
-            <argument type="service" id="sylius_api.context.user.token_based" />
-            <tag name="sylius.api.command_data_transformer" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailAwareCommandDataTransformer">
-            <argument type="service" id="sylius_api.context.user.token_based" />
-            <tag name="sylius.api.command_data_transformer" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer">
-            <argument type="service" id="sylius.context.locale.composite" />
-            <tag name="sylius.api.command_data_transformer" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">
-            <argument type="service" id="request_stack" />
-            <tag name="sylius.api.command_data_transformer" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
+        <service id="sylius_api.changer.payment_method" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
-        <service id="sylius_api.changer.payment_method" alias="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" alias="sylius_api.changer.payment_method" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction">
-            <argument type="service" id="sylius.repository.order" />
-            <tag name="controller.service_arguments" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />
-            <argument type="service" id="sylius.context.channel" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
-            <argument>%sylius.security.api_admin_route%</argument>
-            <tag name="sylius.uri_based_section_resolver" priority="30" />
-        </service>
-        <service id="sylius_api.section_resolver.admin_api_uri_based" alias="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver" />
-
-        <service id="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">
-            <argument>%sylius.security.api_shop_route%</argument>
-            <argument>orders</argument>
-            <tag name="sylius.uri_based_section_resolver" priority="40" />
-        </service>
-        <service id="sylius_api.section_resolver.shop_api_uri_based" alias="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver" />
-
-        <service id="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
+        <service id="sylius_api.listener.api_cart_blamer" class="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <argument type="service" id="sylius.command_bus" />
             <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent" method="onLoginSuccess" />
         </service>
-        <service id="sylius_api.listener.api_cart_blamer" alias="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener" />
 
-        <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
+        <service id="sylius_api.listener.authentication_success" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
-        <service id="sylius_api.listener.authentication_success" alias="sylius.listener.api_authentication_success_listener" />
 
-        <service id="sylius.listener.api_postgresql_driver_exception_listener" class="Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener">
-            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
+        <service id="sylius_api.converter.iri_to_identifier" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
             <argument type="service" id="api_platform.router" />
-            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
+            <argument type="service" id="api_platform.uri_variables.converter" />
         </service>
-        <service id="sylius_api.converter.iri_to_identifier" alias="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" alias="sylius_api.converter.iri_to_identifier" />
 
-        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger">
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
+        <service id="sylius_api.mapper.address" class="Sylius\Bundle\ApiBundle\Mapper\AddressMapper" public="true"/>
+        <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" alias="sylius_api.mapper.address" />
 
-        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Merger\LegacyResourceMetadataMerger">
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service
-            id="api_platform.metadata.resource.metadata_factory.yaml"
-            class="Sylius\Bundle\ApiBundle\ApiPlatform\Factory\MergingExtractorResourceMetadataFactory"
-            decorates="api_platform.metadata.resource.metadata_factory"
-            decoration-priority="40"
-        >
-            <argument type="service" id="api_platform.metadata.extractor.yaml" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory.yaml.inner" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" class="Sylius\Bundle\ApiBundle\Mapper\AddressMapper" public="true"/>
-        <service id="sylius_api.mapper.address" alias="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />
-
-        <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" class="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">
+        <service id="sylius_api.checker.applied_coupon_eligibility" class="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">
             <argument type="service" id="sylius.checker.promotion_eligibility" />
             <argument type="service" id="sylius.checker.promotion_coupon_eligibility" />
         </service>
-        <service id="sylius_api.checker.applied_coupon_eligibility" alias="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" alias="sylius_api.checker.applied_coupon_eligibility" />
 
-        <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
+        <service id="sylius_api.modifier.order_address" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius_api.mapper.address" />
             <argument type="service" id="sylius.resolver.customer" />
         </service>
-        <service id="sylius_api.modifier.order_address" alias="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" alias="sylius_api.modifier.order_address" />
 
-        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">
+        <service id="sylius_api.assigner.order_promotion_code" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.order_processing.order_processor" />
         </service>
-        <service id="sylius_api.assigner.order_promotion_code" alias="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" alias="sylius_api.assigner.order_promotion_code" />
 
-        <service id="sylius.listener.admin_api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
+        <service id="sylius_api.listener.admin_authentication_success" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
-        <service id="sylius_api.listener.admin_authentication_success" alias="sylius.listener.admin_api_authentication_success_listener" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">
-            <argument type="service" id="validator" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
+        <service
+            id="sylius_api.api_platform.routing.iri_converter"
+            class="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter"
+            decorates="api_platform.symfony.iri_converter"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="sylius_api.provider.path_prefix" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
+            <argument type="service" id="api_platform.router" />
+        </service>
+
+        <service
+            id="sylius_api.api_platform.routing.api_loader"
+            class="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\ApiLoader"
+            decorates="api_platform.route_loader"
+        >
+            <argument type="service" id=".inner" />
+            <argument>%sylius_api.operations_to_remove%</argument>
         </service>
     </services>
 </container>

@@ -17,9 +17,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.requirements" class="Sylius\Bundle\CoreBundle\Installer\Requirement\SyliusRequirements">
+        <service id="sylius.requirements.installer.sylius" class="Sylius\Bundle\CoreBundle\Installer\Requirement\SyliusRequirements">
             <argument type="collection">
                 <argument type="service">
                     <service class="Sylius\Bundle\CoreBundle\Installer\Requirement\SettingsRequirements">
@@ -40,6 +38,5 @@
                 </argument>
             </argument>
         </service>
-        <service id="sylius.requirements.installer.sylius" alias="sylius.requirements" />
     </services>
 </container>

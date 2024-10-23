@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
@@ -23,5 +24,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface ProductTaxonRepositoryInterface extends RepositoryInterface
 {
+    public function createListQueryBuilderForTaxon(string $locale, int|string $taxonId): QueryBuilder;
+
     public function findOneByProductCodeAndTaxonCode(string $productCode, string $taxonCode): ?ProductTaxonInterface;
 }

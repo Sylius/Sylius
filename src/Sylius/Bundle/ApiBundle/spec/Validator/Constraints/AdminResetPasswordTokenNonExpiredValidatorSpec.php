@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpired;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
@@ -48,7 +48,7 @@ final class AdminResetPasswordTokenNonExpiredValidatorSpec extends ObjectBehavio
     public function it_throws_exception_when_constraint_is_not_admin_reset_password_token_non_expired(
         Constraint $constraint,
     ): void {
-        $value = new ResetPassword('token');
+        $value = new ResetPassword('token', 'newPassword');
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -60,7 +60,7 @@ final class AdminResetPasswordTokenNonExpiredValidatorSpec extends ObjectBehavio
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
     ): void {
-        $value = new ResetPassword('token');
+        $value = new ResetPassword('token', 'newPassword');
         $constraint = new AdminResetPasswordTokenNonExpired();
 
         $this->initialize($executionContext);
@@ -77,7 +77,7 @@ final class AdminResetPasswordTokenNonExpiredValidatorSpec extends ObjectBehavio
         AdminUserInterface $adminUser,
         ExecutionContextInterface $executionContext,
     ): void {
-        $value = new ResetPassword('token');
+        $value = new ResetPassword('token', 'newPassword');
         $constraint = new AdminResetPasswordTokenNonExpired();
 
         $this->initialize($executionContext);
@@ -97,7 +97,7 @@ final class AdminResetPasswordTokenNonExpiredValidatorSpec extends ObjectBehavio
         AdminUserInterface $adminUser,
         ExecutionContextInterface $executionContext,
     ): void {
-        $value = new ResetPassword('token');
+        $value = new ResetPassword('token', 'newPassword');
         $constraint = new AdminResetPasswordTokenNonExpired();
 
         $this->initialize($executionContext);

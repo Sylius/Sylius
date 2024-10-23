@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -117,7 +117,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSelectGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->addRequestData('group', $this->iriConverter->getIriFromItem($customerGroup));
+        $this->client->addRequestData('group', $this->iriConverter->getIriFromResource($customerGroup));
     }
 
     /**
@@ -204,12 +204,79 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I search by :phrase email
+     */
+    public function iSearchByEmail(string $phrase): void
+    {
+        $this->client->addFilter('email', $phrase);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I search by :phrase first name
+     */
+    public function iSearchByFirstName(string $phrase): void
+    {
+        $this->client->addFilter('firstName', $phrase);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I search by :phrase last name
+     */
+    public function iSearchByLastName(string $phrase): void
+    {
+        $this->client->addFilter('lastName', $phrase);
+        $this->client->filter();
+    }
+
+    /**
      * @When I sort the orders :sortType by channel
      */
     public function iSortThemBy(string $sortType = 'ascending'): void
     {
         $this->client->sort([
             'channel.code' => self::SORT_TYPES[$sortType],
+        ]);
+    }
+
+    /**
+     * @When I sort customers by :sortType registration date
+     */
+    public function iSortCustomersByRegistrationDate(string $sortType): void
+    {
+        $this->client->sort([
+            'createdAt' => self::SORT_TYPES[$sortType],
+        ]);
+    }
+
+    /**
+     * @When I sort customers by :sortType email
+     */
+    public function iSortCustomersByEmail(string $sortType): void
+    {
+        $this->client->sort([
+            'email' => self::SORT_TYPES[$sortType],
+        ]);
+    }
+
+    /**
+     * @When I sort customers by :sortType first name
+     */
+    public function iSortCustomersByFirstName(string $sortType): void
+    {
+        $this->client->sort([
+            'firstName' => self::SORT_TYPES[$sortType],
+        ]);
+    }
+
+    /**
+     * @When I sort customers by :sortType last name
+     */
+    public function iSortCustomersByLastName(string $sortType): void
+    {
+        $this->client->sort([
+            'lastName' => self::SORT_TYPES[$sortType],
         ]);
     }
 
@@ -320,7 +387,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then I should see :count customers in the list
+     * @Then I should see :count customers on the list
      * @Then I should see a single customer on the list
      */
     public function iShouldSeeZonesInTheList(int $count = 1): void
@@ -330,6 +397,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then I should see the customer :email in the list
+     * @Then I should see the customer :email on the list
      */
     public function iShouldSeeTheCustomerInTheList(string $email): void
     {
@@ -579,7 +647,7 @@ final class ManagingCustomersContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'group'),
-            $this->iriConverter->getIriFromItem($customerGroup),
+            $this->iriConverter->getIriFromResource($customerGroup),
         );
     }
 
@@ -631,5 +699,17 @@ final class ManagingCustomersContext implements Context
         $this->client->delete(sprintf('customer/%s', $customer->getId()), 'user');
 
         Assert::same($this->client->getLastResponse()->getStatusCode(), 404);
+    }
+
+    /**
+     * @Then /^the (first|last) customer should be "([^"]+)"$/
+     */
+    public function theFirstLastCustomerShouldBe(string $nth, string $email): void
+    {
+        $customers = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        $customer = 'first' === $nth ? reset($customers) : end($customers);
+
+        Assert::same($customer['email'], $email);
     }
 }

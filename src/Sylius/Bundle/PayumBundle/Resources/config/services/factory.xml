@@ -6,14 +6,13 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
+        <service id="sylius_payum.factory.get_status" class="Sylius\Bundle\PayumBundle\Factory\GetStatusFactory" />
+        <service id="Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface" alias="sylius_payum.factory.get_status" />
 
-        <service id="sylius.factory.payum_get_status_action" class="Sylius\Bundle\PayumBundle\Factory\GetStatusFactory" />
-        <service id="sylius_payum.factory.get_status" alias="sylius.factory.payum_get_status_action" />
-        <service id="Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface" alias="sylius.factory.payum_get_status_action" />
+        <service id="sylius_payum.factory.resolve_next_route" class="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactory" />
+        <service id="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface" alias="sylius_payum.factory.resolve_next_route" />
 
-        <service id="sylius.factory.payum_resolve_next_route" class="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactory" />
-        <service id="sylius_payum.factory.resolve_next_route" alias="sylius.factory.payum_resolve_next_route" />
-        <service id="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface" alias="sylius.factory.payum_resolve_next_route" />
+        <service id="sylius_payum.factory.capture" class="Sylius\Bundle\PayumBundle\Factory\CaptureFactory" />
+        <service id="sylius_payum.factory.authorize" class="Sylius\Bundle\PayumBundle\Factory\AuthorizeFactory" />
     </services>
 </container>

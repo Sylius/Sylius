@@ -1,0 +1,7 @@
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% set resources = hookable_metadata.context.resources %}
+
+{% if resources.data|length == 0 %}
+    {{ messages.info('sylius.ui.no_results_to_display') }}
+{% endif %}

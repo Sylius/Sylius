@@ -17,17 +17,15 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service
-            id="Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface"
+            id="sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings"
             class="Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\BatchedApplyLowestPriceOnChannelPricingsCommandDispatcher"
         >
             <argument type="service" id="sylius.repository.channel_pricing" />
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_core.price_history.batch_size%</argument>
         </service>
-        <service id="sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings"
-                 alias="Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface" />
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface"
+                 alias="sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings" />
     </services>
 </container>

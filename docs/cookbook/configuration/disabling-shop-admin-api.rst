@@ -82,9 +82,6 @@ The part that has to be removed from this file is shown below:
     #            anonymous: true
 
     access_control:
-    #    - { path: "%sylius.security.shop_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-    #    - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
-
     #    - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     #    - { path: "%sylius.security.shop_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -165,9 +162,6 @@ The part that has to be removed from this file is shown below:
 
     access_control:
     # Delete or leave this part commented
-    #    - { path: "%sylius.security.admin_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-    #    - { path: "%sylius.security.admin_regex%/_partial", role: ROLE_NO_ACCESS }
-
     #    - { path: "%sylius.security.admin_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     #    - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
@@ -231,15 +225,6 @@ The part that has to be removed from this file is shown below:
     #    - { path: "%sylius.security.api_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     #    - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
-
-**5.** Remove fos_rest config from ``config/packages/fos_rest.yaml``.
-
-.. code-block:: yaml
-
-    fos_rest:
-        format_listener:
-            rules:
-            #    - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true } # remove or leave this line commented
 
 **Done!** There is no API in Sylius now, just admin and shop.
 

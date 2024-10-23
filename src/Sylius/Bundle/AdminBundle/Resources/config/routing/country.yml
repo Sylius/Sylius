@@ -2,16 +2,16 @@ sylius_admin_country:
     resource: |
         alias: sylius.country
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show', 'delete']
         redirect: update
         grid: sylius_admin_country
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CountryType
         permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_shipping_destinations
-                templates:
-                    form: "@SyliusAdmin/Country/_form.html.twig"
             index:
                 icon: flag
     type: sylius.resource

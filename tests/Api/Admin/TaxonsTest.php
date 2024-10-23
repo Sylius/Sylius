@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -198,7 +198,7 @@ final class TaxonsTest extends JsonApiTestCase
                 'parent' => '/api/v2/admin/taxons/BRAND',
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/taxon-translations/%s', $taxon->getTranslation('en_US')->getId()),
+                        '@id' => sprintf('/api/v2/admin/taxon/%s/translations/en_US', $taxon->getCode()),
                         'name' => 'Watches',
                         'slug' => 'watches',
                     ],

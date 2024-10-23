@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Creator;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Sylius\Bundle\ApiBundle\Exception\NoFileUploadedException;
 use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -40,13 +40,13 @@ final class ProductImageCreator implements ImageCreatorInterface
     }
 
     /** @param array<mixed> $context */
-    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface
+    public function create(string $ownerIdentifier, ?\SplFileInfo $file, ?string $type = null, array $context = []): ImageInterface
     {
         if (null === $file) {
             throw new NoFileUploadedException();
         }
 
-        $owner = $this->productRepository->findOneBy(['code' => $ownerCode]);
+        $owner = $this->productRepository->findOneBy(['code' => $ownerIdentifier]);
         if (null === $owner) {
             throw new ProductNotFoundException();
         }

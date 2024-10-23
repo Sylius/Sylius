@@ -45,7 +45,7 @@ final class TaxonDeletionEventSubscriberSpec extends ObjectBehavior
         $this->protectFromRemovingMenuTaxon(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $taxon->getWrappedObject(),
         ));
     }
@@ -59,7 +59,7 @@ final class TaxonDeletionEventSubscriberSpec extends ObjectBehavior
         $this->protectFromRemovingMenuTaxon(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             new \stdClass(),
         ));
     }
@@ -80,7 +80,7 @@ final class TaxonDeletionEventSubscriberSpec extends ObjectBehavior
             ->during('protectFromRemovingMenuTaxon', [new ViewEvent(
                 $kernel->getWrappedObject(),
                 $request->getWrappedObject(),
-                HttpKernelInterface::MASTER_REQUEST,
+                HttpKernelInterface::MAIN_REQUEST,
                 $taxon->getWrappedObject(),
             )])
         ;

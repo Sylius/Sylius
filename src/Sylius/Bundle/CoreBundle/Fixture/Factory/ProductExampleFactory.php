@@ -28,6 +28,8 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsException;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsValuesException;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -61,7 +63,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param RepositoryInterface<ProductOptionInterface> $productOptionRepository
      * @param RepositoryInterface<ChannelInterface> $channelRepository
      * @param RepositoryInterface<LocaleInterface> $localeRepository
-     * @param RepositoryInterface<TaxCategoryInterface>|null $taxCategoryRepository
+     * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
      */
     public function __construct(
         private FactoryInterface $productFactory,
@@ -78,27 +80,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         private RepositoryInterface $productOptionRepository,
         private RepositoryInterface $channelRepository,
         private RepositoryInterface $localeRepository,
-        private ?RepositoryInterface $taxCategoryRepository = null,
-        private ?FileLocatorInterface $fileLocator = null,
+        private RepositoryInterface $taxCategoryRepository,
+        private FileLocatorInterface $fileLocator,
     ) {
-        if ($this->taxCategoryRepository === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.6',
-                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
-
-        if ($this->fileLocator === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                'Not passing a $fileLocator to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -188,9 +172,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('tax_category', ['string', 'null', TaxCategoryInterface::class])
         ;
 
-        if ($this->taxCategoryRepository !== null) {
-            $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
-        }
+        $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
     }
 
     private function createTranslations(ProductInterface $product, array $options): void
@@ -225,7 +207,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         try {
             $this->variantGenerator->generate($product);
-        } catch (\InvalidArgumentException) {
+        } catch (ProductWithoutOptionsException|ProductWithoutOptionsValuesException) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 
@@ -266,21 +248,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     private function createImages(ProductInterface $product, array $options): void
     {
         foreach ($options['images'] as $image) {
-            if (!array_key_exists('path', $image)) {
-                trigger_deprecation(
-                    'sylius/core-bundle',
-                    '1.3',
-                    'It is deprecated to pass indexed array as an image definition. Please use associative array with "path" and "type" keys instead.',
-                );
+            $imagePath = $image['path'];
+            $imageType = $image['type'] ?? null;
 
-                $imagePath = array_shift($image);
-                $imageType = array_pop($image);
-            } else {
-                $imagePath = $image['path'];
-                $imageType = $image['type'] ?? null;
-            }
-
-            $imagePath = $this->fileLocator === null ? $imagePath : $this->fileLocator->locate($imagePath);
+            $imagePath = $this->fileLocator->locate($imagePath);
             $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
             /** @var ImageInterface $productImage */

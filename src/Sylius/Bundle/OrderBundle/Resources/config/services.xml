@@ -18,73 +18,64 @@
 >
     <imports>
         <import resource="services/form.xml"/>
-        <import resource="services/templating.xml"/>
         <import resource="services/twig.xml"/>
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand">
+        <service id="sylius.console.command.remove_expired_carts" class="Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand" public="true">
             <argument type="service" id="sylius.remover.expired_carts" />
             <argument>%sylius_order.cart_expiration_period%</argument>
 
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\OrderBundle\Command\RemoveExpiredCartsCommand" alias="Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand" />
-        <service id="sylius.console.command.remove_expired_carts" alias="Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand" />
 
         <service id="sylius.context.cart.new" class="Sylius\Component\Order\Context\CartContext">
             <argument type="service" id="sylius.factory.order" />
             <tag name="sylius.context.cart" priority="-999" />
         </service>
-        <service id="sylius.context.cart.composite" class="Sylius\Component\Order\Context\CompositeCartContext" public="false" />
+        <service id="sylius.context.cart.composite" class="Sylius\Component\Order\Context\CompositeCartContext" />
 
-        <service id="sylius.order_processing.order_processor.composite" class="Sylius\Component\Order\Processor\CompositeOrderProcessor" public="false" />
+        <service id="sylius.order_processing.order_processor.composite" class="Sylius\Component\Order\Processor\CompositeOrderProcessor" />
 
-        <service id="sylius.order_modifier" class="Sylius\Component\Order\Modifier\OrderModifier">
+        <service id="sylius.modifier.order" class="Sylius\Component\Order\Modifier\OrderModifier">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <argument type="service" id="sylius.modifier.order_item_quantity" />
         </service>
-        <service id="Sylius\Component\Order\Modifier\OrderModifierInterface" alias="sylius.order_modifier" />
-        <service id="sylius.modifier.order" alias="sylius.order_modifier" />
+        <service id="Sylius\Component\Order\Modifier\OrderModifierInterface" alias="sylius.modifier.order" />
 
-        <service id="sylius.order_item_quantity_modifier" class="Sylius\Component\Order\Modifier\OrderItemQuantityModifier">
+        <service id="sylius.modifier.order_item_quantity" class="Sylius\Component\Order\Modifier\OrderItemQuantityModifier">
             <argument type="service" id="sylius.factory.order_item_unit" />
         </service>
-        <service id="Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface" alias="sylius.order_item_quantity_modifier" />
-        <service id="sylius.modifier.order_item_quantity" alias="sylius.order_item_quantity_modifier" />
+        <service id="Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface" alias="sylius.modifier.order_item_quantity" />
 
-        <service id="sylius.sequential_order_number_generator" class="Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator">
+        <service id="sylius.number_generator.sequential_order" class="Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator">
             <argument type="service" id="sylius.repository.order_sequence" />
             <argument type="service" id="sylius.factory.order_sequence" />
         </service>
-        <service id="sylius.number_generator.sequential_order" alias="sylius.sequential_order_number_generator" />
+        <service id="Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface" alias="sylius.number_generator.sequential_order" />
 
-        <service id="sylius.order_number_assigner" class="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner">
+        <service id="sylius.number_assigner.order_number" class="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner" public="true">
             <argument type="service" id="sylius.number_generator.sequential_order" />
         </service>
-        <service id="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface" alias="sylius.order_number_assigner" />
-        <service id="sylius.number_assigner.order_number" alias="sylius.order_number_assigner" />
+        <service id="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface" alias="sylius.number_assigner.order_number" public="true" />
 
-        <service id="sylius.adjustments_aggregator" class="Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator" />
-        <service id="Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface" alias="sylius.adjustments_aggregator" />
-        <service id="sylius.aggregator.adjustments_by_label" alias="sylius.adjustments_aggregator" />
+        <service id="sylius.aggregator.adjustments_by_label" class="Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator" />
+        <service id="Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface" alias="sylius.aggregator.adjustments_by_label" />
 
         <service id="sylius.custom_factory.adjustment" class="Sylius\Component\Order\Factory\AdjustmentFactory" decorates="sylius.factory.adjustment" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.adjustment.inner" />
         </service>
         <service id="Sylius\Component\Order\Factory\AdjustmentFactoryInterface" alias="sylius.factory.adjustment" />
 
-        <service id="sylius.expired_carts_remover" class="Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover">
+        <service id="sylius.remover.expired_carts" class="Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="event_dispatcher" />
             <argument>%sylius_order.cart_expiration_period%</argument>
         </service>
-        <service id="Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface" alias="sylius.expired_carts_remover" />
-        <service id="sylius.remover.expired_carts" alias="sylius.expired_carts_remover" />
+        <service id="Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface" alias="sylius.remover.expired_carts" />
 
         <service id="sylius.factory.add_to_cart_command" class="Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory" />
+        <service id="Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface" alias="sylius.factory.add_to_cart_command" />
     </services>
 </container>

@@ -20,22 +20,20 @@
         <parameter key="sylius.tax_calculation_strategy.interface">Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface</parameter>
     </parameters>
     <services>
-        <defaults public="true" />
-
         <service id="sylius.registry.tax_calculation_strategy" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.tax_calculation_strategy.interface%</argument>
             <argument>Tax calculation strategy</argument>
         </service>
 
-        <service id="sylius.taxation.order_shipment_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator">
+        <service id="sylius.applicator.taxation.order_shipment" class="Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.resolver.tax_rate" />
             <tag name="sylius.taxation.items.applicator" />
             <tag name="sylius.taxation.item_units.applicator" />
         </service>
-        <service id="sylius.applicator.taxation.order_shipment" alias="sylius.taxation.order_shipment_taxes_applicator" />
-        <service id="sylius.taxation.order_items_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator">
+
+        <service id="sylius.applicator.taxation.order_items" class="Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.distributor.integer" />
@@ -43,28 +41,25 @@
             <argument type="service" id="sylius.distributor.proportional_integer" />
             <tag name="sylius.taxation.items.applicator" />
         </service>
-        <service id="sylius.applicator.taxation.order_items" alias="sylius.taxation.order_items_taxes_applicator" />
-        <service id="sylius.taxation.order_item_units_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator">
+
+        <service id="sylius.applicator.taxation.order_item_units" class="Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.resolver.tax_rate" />
             <argument type="service" id="sylius.distributor.proportional_integer" />
             <tag name="sylius.taxation.item_units.applicator" />
         </service>
-        <service id="sylius.applicator.taxation.order_item_units" alias="sylius.taxation.order_item_units_taxes_applicator" />
 
-        <service id="sylius.taxation.order_items_based_strategy" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
+        <service id="sylius.strategy.taxation.tax_calculation.order_items_based" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
             <argument>order_items_based</argument>
             <argument type="tagged_iterator" tag="sylius.taxation.items.applicator" />
             <tag name="sylius.taxation.calculation_strategy" type="order_items_based" label="Order items based" />
         </service>
-        <service id="sylius.strategy.taxation.tax_calculation.order_items_based" alias="sylius.taxation.order_items_based_strategy" />
 
-        <service id="sylius.taxation.order_item_units_based_strategy" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
+        <service id="sylius.strategy.taxation.tax_calculation.order_item_units_based" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
             <argument>order_item_units_based</argument>
             <argument type="tagged_iterator" tag="sylius.taxation.item_units.applicator" />
             <tag name="sylius.taxation.calculation_strategy" type="order_item_units_based" label="Order item units based" />
         </service>
-        <service id="sylius.strategy.taxation.tax_calculation.order_item_units_based" alias="sylius.taxation.order_item_units_based_strategy" />
     </services>
 </container>

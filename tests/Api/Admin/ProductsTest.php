@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -28,7 +28,7 @@ final class ProductsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -52,7 +52,7 @@ final class ProductsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_products(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -71,7 +71,7 @@ final class ProductsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_products_with_image_filter(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -232,7 +232,7 @@ final class ProductsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product.yaml',
             'product/product_attribute.yaml',
         ]);
@@ -277,7 +277,11 @@ final class ProductsTest extends JsonApiTestCase
                 ],
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
+                        '@id' => sprintf(
+                            '/api/v2/admin/products/%s/translations/%s',
+                            $product->getCode(),
+                            $product->getTranslation('en_US')->getLocale(),
+                        ),
                         'slug' => 'caps/cap',
                         'name' => 'Cap',
                         'description' => 'This is a cap',
@@ -286,7 +290,11 @@ final class ProductsTest extends JsonApiTestCase
                         'metaDescription' => 'Cap description',
                     ],
                     'pl_PL' => [
-                        '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('pl_PL')->getId()),
+                        '@id' => sprintf(
+                            '/api/v2/admin/products/%s/translations/%s',
+                            $product->getCode(),
+                            $product->getTranslation('pl_PL')->getLocale(),
+                        ),
                         'slug' => 'czapki/czapka',
                         'name' => 'Czapka',
                         'description' => 'To jest czapka',
@@ -310,7 +318,7 @@ final class ProductsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -325,7 +333,11 @@ final class ProductsTest extends JsonApiTestCase
             content: json_encode([
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
+                        '@id' => sprintf(
+                            '/api/v2/admin/products/%s/translations/%s',
+                            $product->getCode(),
+                            $product->getTranslation('en_US')->getLocale(),
+                        ),
                         'slug' => 'caps/cap',
                         'name' => 'Cap',
                     ],
@@ -348,7 +360,7 @@ final class ProductsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -370,7 +382,7 @@ final class ProductsTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'product/product.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);

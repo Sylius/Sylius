@@ -7,22 +7,22 @@ sylius_shop_order_thank_you:
     defaults:
         _controller: sylius.controller.order::thankYouAction
         _sylius:
-            template: "@SyliusShop/Order/thankYou.html.twig"
+            template: "@SyliusShop/order/thank_you.html.twig"
 
 sylius_shop_order_pay:
     path: /{tokenValue}/pay
     methods: [GET]
     defaults:
-        _controller: sylius.controller.payum::prepareCaptureAction
+        _controller: sylius_shop.controller.order_pay::payAction
         _sylius:
             redirect:
                 route: sylius_shop_order_after_pay
 
 sylius_shop_order_after_pay:
-    path: /after-pay
+    path: /after-pay/{hash?}
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.payum::afterCaptureAction
+        _controller: sylius_shop.controller.order_pay::afterPayAction
 
 sylius_shop_order_show:
     path: /{tokenValue}
@@ -30,7 +30,7 @@ sylius_shop_order_show:
     defaults:
         _controller: sylius.controller.order::updateAction
         _sylius:
-            template: "@SyliusShop/Order/show.html.twig"
+            template: "@SyliusShop/order/show.html.twig"
             repository:
                 method: findOneBy
                 arguments: [tokenValue: $tokenValue]

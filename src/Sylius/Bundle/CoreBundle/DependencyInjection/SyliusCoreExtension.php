@@ -24,11 +24,9 @@ use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
-use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -46,7 +44,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         'sylius_locale',
         'sylius_order',
         'sylius_payment',
-        'sylius_payum',
         'sylius_product',
         'sylius_promotion',
         'sylius_review',
@@ -82,25 +79,17 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             $loader->load('test_services.xml');
         }
 
-        if ($config['process_shipments_before_recalculating_prices']) {
-            $this->switchOrderProcessorsPriorities(
-                $container->getDefinition('sylius.order_processing.order_shipment_processor'),
-                $container->getDefinition('sylius.order_processing.order_prices_recalculator'),
-            );
-        }
-
         $container->setAlias(
-            FilesystemAdapterInterface::class,
+            'sylius.adapter.filesystem.default',
             match ($config['filesystem']['adapter']) {
-                'default', 'flysystem' => FlysystemFilesystemAdapter::class,
-                'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
+                'default', 'flysystem' => 'sylius.adapter.filesystem.flysystem',
                 default => throw new \InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
                     $config['filesystem']['adapter'],
                 )),
             },
         );
-        $container->setAlias('sylius.adapter.filesystem.default', FilesystemAdapterInterface::class);
+        $container->setAlias(FilesystemAdapterInterface::class, 'sylius.adapter.filesystem.default');
 
         $this->registerAutoconfiguration($container);
     }
@@ -110,11 +99,9 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $config = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
 
-        $this->prependSyliusThemeBundle($container, $config['driver']);
+        $this->prependDefaultDriver($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
-        $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
-        $this->prependSyliusOrderBundle($container, $config);
     }
 
     protected function getMigrationsNamespace(): string
@@ -132,6 +119,15 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         return [];
     }
 
+    private function prependDefaultDriver(ContainerBuilder $container, string $driver): void
+    {
+        foreach ($container->getExtensions() as $name => $extension) {
+            if (in_array($name, self::$bundles, true)) {
+                $container->prependExtensionConfig($name, ['driver' => $driver]);
+            }
+        }
+    }
+
     private function prependHwiOauth(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('hwi_oauth')) {
@@ -141,77 +137,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services/integrations/hwi_oauth.xml');
-    }
-
-    private function prependSyliusThemeBundle(ContainerBuilder $container, string $driver): void
-    {
-        if (!$container->hasExtension('sylius_theme')) {
-            return;
-        }
-
-        foreach ($container->getExtensions() as $name => $extension) {
-            if (in_array($name, self::$bundles, true)) {
-                $container->prependExtensionConfig($name, ['driver' => $driver]);
-            }
-        }
-
-        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
-    }
-
-    private function prependJmsSerializerIfAdminApiBundleIsNotPresent(ContainerBuilder $container): void
-    {
-        if (!$container->hasExtension('jms_serializer')) {
-            return;
-        }
-
-        if ($container->hasExtension('sylius_admin_api')) {
-            return;
-        }
-
-        $container->prependExtensionConfig('jms_serializer', [
-            'metadata' => [
-                'directories' => [
-                    'sylius-core' => [
-                        'namespace_prefix' => 'Sylius\Component\Core',
-                        'path' => '@SyliusCoreBundle/Resources/config/serializer',
-                    ],
-                ],
-            ],
-            'property_naming' => [
-                'id' => 'jms_serializer.identical_property_naming_strategy',
-            ],
-        ]);
-    }
-
-    private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
-    {
-        if (!$container->hasExtension('sylius_order')) {
-            return;
-        }
-
-        $container->prependExtensionConfig('sylius_order', [
-            'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
-        ]);
-    }
-
-    private function switchOrderProcessorsPriorities(
-        Definition $firstServiceDefinition,
-        Definition $secondServiceDefinition,
-    ): void {
-        $firstServicePriority = $firstServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
-        $secondServicePriority = $secondServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
-
-        $firstServiceDefinition->clearTag('sylius.order_processor');
-        $secondServiceDefinition->clearTag('sylius.order_processor');
-
-        $firstServiceDefinition->addTag(
-            'sylius.order_processor',
-            ['priority' => $secondServicePriority],
-        );
-        $secondServiceDefinition->addTag(
-            'sylius.order_processor',
-            ['priority' => $firstServicePriority],
-        );
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void

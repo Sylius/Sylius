@@ -16,22 +16,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
+    <parameters>
+        <parameter key="sylius.api_path_prefixes" type="collection">
+            <parameter type="constant">Sylius\Bundle\ApiBundle\Provider\PathPrefixes::ADMIN_PREFIX</parameter>
+            <parameter type="constant">Sylius\Bundle\ApiBundle\Provider\PathPrefixes::SHOP_PREFIX</parameter>
+        </parameter>
+    </parameters>
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
-            <argument type="service" id="sylius_api.context.user.token_based" />
+        <service id="sylius_api.provider.path_prefix" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
             <argument>%sylius.security.api_route%</argument>
+            <argument>%sylius.api_path_prefixes%</argument>
         </service>
-        <service id="sylius_api.provider.path_prefix" alias="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" alias="sylius_api.provider.path_prefix" />
 
-        <service id="sylius.api.provider.liip_image_filters" class="Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider">
+        <service id="sylius_api.provider.liip_image_filters" class="Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider">
             <argument>%liip_imagine.filter_sets%</argument>
         </service>
-        <service id="sylius_api.provider.liip_image_filters" alias="sylius.api.provider.liip_image_filters" />
-        <service id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" alias="sylius.api.provider.liip_image_filters" />
+        <service id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" alias="sylius_api.provider.liip_image_filters" />
 
-        <service id="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProvider" />
-        <service id="sylius_api.provider.adjustment_order" alias="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" />
+        <service id="sylius_api.provider.adjustment_order" class="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProvider" />
+        <service id="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" alias="sylius_api.provider.adjustment_order" />
     </services>
 </container>

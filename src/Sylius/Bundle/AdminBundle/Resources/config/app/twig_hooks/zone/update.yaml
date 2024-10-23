@@ -1,0 +1,47 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.zone.update.content':
+            form:
+                component: 'sylius_admin:zone:form'
+                props:
+                    resource: '@=_context.resource'
+                    type: '@=_context.resource.getType()'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/zone/form.html.twig'
+                configuration:
+                    method: 'PUT'
+                priority: 0
+
+        'sylius_admin.zone.update.content.form':
+            sections:
+                template: '@SyliusAdmin/zone/form/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.zone.update.content.form.sections':
+            general:
+                template: '@SyliusAdmin/zone/form/sections/general.html.twig'
+                priority: 100
+            members:
+                template: '@SyliusAdmin/zone/form/sections/members.html.twig'
+                priority: 0
+
+        'sylius_admin.zone.update.content.form.sections.members':
+            member:
+                template: '@SyliusAdmin/zone/form/sections/members/member.html.twig'
+                priority: 0
+
+        'sylius_admin.zone.update.content.form.sections.general':
+            default:
+                enabled: false
+            code:
+                template: '@SyliusAdmin/zone/form/sections/general/code.html.twig'
+                priority: 300
+            type:
+                template: '@SyliusAdmin/zone/form/sections/general/type.html.twig'
+                priority: 200
+            name:
+                template: '@SyliusAdmin/zone/form/sections/general/name.html.twig'
+                priority: 100
+            scope:
+                template: '@SyliusAdmin/zone/form/sections/general/scope.html.twig'
+                priority: 0

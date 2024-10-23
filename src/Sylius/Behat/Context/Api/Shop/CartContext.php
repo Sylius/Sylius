@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -76,10 +76,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I (?:add|added) (this product) to the (cart)$/
-     * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
-     * @When /^I add (product "[^"]+") to the (cart)$/
-     * @When /^the (?:visitor|customer) adds ("[^"]+" product) to the (cart)$/
+     * @When /^I (?:add|added)(?:| the) (this product) to the (cart)$/
+     * @When /^I (?:add|added)(?:| the) ("[^"]+" product) to the (cart)$/
+     * @When /^I add(?:| the) (product "[^"]+") to the (cart)$/
+     * @When /^the (?:visitor|customer) adds(?:| the) ("[^"]+" product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
@@ -188,7 +188,7 @@ final class CartContext implements Context
 
     /**
      * @Given /^I change (product "[^"]+") quantity to (\d+)$/
-     * @Given I change :productName quantity to :quantity
+     * @Given I change :product quantity to :quantity
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
@@ -239,23 +239,26 @@ final class CartContext implements Context
      */
     public function iPickUpMyCartUsingWrongLocale(): void
     {
-        $this->pickupCart('en');
-    }
-
-    /**
-     * @When I update my cart
-     */
-    public function iUpdateMyCart(): void
-    {
-        // Intentionally left blank
+        $this->pickupCart('not_valid');
     }
 
     /**
      * @When /^I check details of my (cart)$/
+     * @When /^I check the details of my (cart)$/
      */
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
+    }
+
+    /**
+     * @When I update my cart
+     * @Then I should still be on product :product page
+     * @Then I should be on :product product detailed page
+     */
+    public function intentionallyLeftBlank(): void
+    {
+        // Intentionally left blank
     }
 
     /**
@@ -284,11 +287,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should still be on product :product page
+     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
+     * @Then I should be notified that the quantity of the product :product must be between 1 and 9999
      */
-    public function iShouldStillBeOnProductPage(ProductInterface $product): void
+    public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween(ProductInterface $product): void
     {
-        // Intentionally left blank
+        Assert::true($this->responseChecker->hasViolationWithMessage(
+            $this->shopClient->getLastResponse(),
+            'Quantity must be between 1 and 9999.',
+        ));
     }
 
     /**
@@ -598,7 +605,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantityByCustomer($this->shopClient->getLastResponse(), $productName, $quantity);
+        $this->checkProductQuantityByCustomer($this->getCartResponse(), $productName, $quantity);
     }
 
     /**
@@ -611,6 +618,18 @@ final class CartContext implements Context
         Assert::same($response->getStatusCode(), 404);
 
         Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
+    }
+
+    /**
+     * @Then I should be informed that I cannot change the cart items after the checkout is completed
+     */
+    public function iShouldBeInformedThatICannotChangeTheCartItemsAfterTheCheckoutIsCompleted(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->shopClient->getLastResponse()),
+            'Cannot change cart items after the checkout is completed."',
+        );
+        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 422);
     }
 
     /**
@@ -821,6 +840,10 @@ final class CartContext implements Context
         $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
+        $this->sharedStorage->set(
+            'created_as_guest',
+            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'customer') === null,
+        );
 
         return $tokenValue;
     }
@@ -1007,7 +1030,7 @@ final class CartContext implements Context
 
     private function compareItemPrice(string $productName, int $productPrice, string $priceType = 'total'): void
     {
-        $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'items');
+        $items = $this->responseChecker->getValue($this->getCartResponse(), 'items');
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
@@ -1022,7 +1045,7 @@ final class CartContext implements Context
 
     private function getExpectedPriceOfProductTimesQuantity(ProductInterface $product): int
     {
-        $cartResponse = $this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
+        $cartResponse = $this->getCartResponse();
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
         foreach ($items as $item) {
@@ -1036,5 +1059,10 @@ final class CartContext implements Context
         }
 
         throw new \InvalidArgumentException(sprintf('Price for product %s had not been found', $product->getName()));
+    }
+
+    private function getCartResponse(): Response
+    {
+        return $this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
     }
 }

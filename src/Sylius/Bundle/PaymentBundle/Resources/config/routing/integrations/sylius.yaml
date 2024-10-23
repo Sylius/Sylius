@@ -1,0 +1,9 @@
+sylius_payment_method_notify:
+    path: /payment-methods/{code}
+    defaults:
+        _controller: sylius.controller.payment_method_notify
+
+sylius_payment_request_notify:
+    path: /payment-requests/{hash}
+    defaults:
+        _controller: sylius.controller.payment_request_notify

@@ -20,27 +20,27 @@
         }
     },
     "require": {
-        "php": "^8.1",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/http-kernel": "^5.4.21 || ^6.4",
-        "symfony/workflow": "^5.4.21 || ^6.4",
-        "winzou/state-machine": "^0.4",
-        "winzou/state-machine-bundle": "^0.6"
+        "php": "^8.2",
+        "symfony/dependency-injection": "^6.4.1 || ^7.1",
+        "symfony/http-kernel": "^6.4.1 || ^7.1",
+        "symfony/workflow": "^6.4 || ^7.1"
     },
     "suggest": {
-        "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)"
+        "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)",
+        "winzou/state-machine": "If you want to use Winzou State Machine (^0.4)",
+        "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-config-test": "^5.1",
         "phpunit/phpunit": "^9.5",
-        "webmozart/assert": "^1.9"
+        "webmozart/assert": "^1.11"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^5.4.21"
+            "require": "^7.1"
         }
     }
 }

@@ -1,0 +1,8 @@
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+
+{% set resource = hookable_metadata.context.resource %}
+
+{{ button.default({
+    url: path('sylius_admin_product_taxon_index', {'taxonId': resource.id}),
+    text: 'sylius.ui.manage_product_positions'|trans,
+}) }}

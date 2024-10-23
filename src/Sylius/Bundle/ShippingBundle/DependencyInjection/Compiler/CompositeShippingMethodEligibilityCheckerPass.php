@@ -21,11 +21,11 @@ final class CompositeShippingMethodEligibilityCheckerPass implements CompilerPas
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('sylius.shipping_method_eligibility_checker')) {
+        if (!$container->has('sylius.checker.shipping_method_eligibility')) {
             return;
         }
 
-        $container->getDefinition('sylius.shipping_method_eligibility_checker')->setArguments([
+        $container->getDefinition('sylius.checker.shipping_method_eligibility')->setArguments([
             array_map(
                 static fn ($id): Reference => new Reference($id),
                 array_keys($container->findTaggedServiceIds('sylius.shipping_method_eligibility_checker')),

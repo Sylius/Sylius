@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\Shop\Page;
 use Webmozart\Assert\Assert;
 
-class CreatePage extends SymfonyPage implements CreatePageInterface
+class CreatePage extends Page implements CreatePageInterface
 {
     public function getRouteName(): string
     {
@@ -25,26 +25,31 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
     public function titleReview(?string $title): void
     {
+        $this->waitForElementUpdate('title');
         $this->getElement('title')->setValue($title);
     }
 
     public function setComment(?string $comment): void
     {
+        $this->waitForElementUpdate('comment');
         $this->getElement('comment')->setValue($comment);
     }
 
     public function setAuthor(string $author): void
     {
+        $this->waitForElementUpdate('author');
         $this->getElement('author')->setValue($author);
     }
 
     public function rateReview(int $rate): void
     {
-        $this->getElement('rating_option')->selectOption($rate);
+        $this->waitForElementUpdate('rating');
+        $this->getElement('rating_option', ['%value%' => $rate])->getParent()->click();
     }
 
     public function submitReview(): void
     {
+        $this->waitForElementUpdate('add');
         $this->getElement('add')->press();
     }
 
@@ -75,8 +80,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             'author' => '[data-test-author-email]',
             'comment' => '[data-test-comment]',
             'rating' => '[data-test-rating]',
-            'rating_error' => '[data-test-rating] [data-test-validation-error]',
-            'rating_option' => '[data-test-rating] [data-test-option]',
+            'rating_option' => '[data-test-rating-option="%value%"]',
             'title' => '[data-test-title]',
         ]);
     }
