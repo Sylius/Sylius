@@ -22,7 +22,7 @@
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessor"
         >
             <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.command_dispatcher.catalog_promotion.apply_on_variants" />
+            <argument type="service" id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" alias="sylius.processor.catalog_promotion.all_product_variant" />
 
@@ -45,7 +45,7 @@
             id="sylius.processor.catalog_promotion.product"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessor"
         >
-            <argument type="service" id="sylius.command_dispatcher.catalog_promotion.apply_on_variants" />
+            <argument type="service" id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessorInterface" alias="sylius.processor.catalog_promotion.product" />
 
@@ -53,7 +53,7 @@
             id="sylius.processor.catalog_promotion.product_variant"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessor"
         >
-            <argument type="service" id="sylius.command_dispatcher.catalog_promotion.apply_on_variants" />
+            <argument type="service" id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessorInterface" alias="sylius.processor.catalog_promotion.product_variant" />
 

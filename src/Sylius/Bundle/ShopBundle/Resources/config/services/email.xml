@@ -17,11 +17,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius_shop.mailer.email_manager.contact" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
+        <service id="sylius_shop.mailer.contact_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
 
-        <service id="sylius_shop.mailer.email_manager.order" class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager">
+        <service id="sylius_shop.mailer.order_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
     </services>

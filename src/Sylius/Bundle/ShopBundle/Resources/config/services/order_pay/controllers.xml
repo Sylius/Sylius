@@ -18,8 +18,8 @@
 >
     <services>
         <service public="true" id="sylius_shop.controller.order_pay" parent="sylius.controller.order_pay">
-            <argument type="tagged" tag="sylius_shop.order_pay.provider.pay_response" />
-            <argument type="tagged" tag="sylius_shop.order_pay.provider.after_pay_response" />
+            <argument type="tagged" tag="sylius_shop.provider.order_pay.pay_response" />
+            <argument type="tagged" tag="sylius_shop.provider.order_pay.after_pay_response" />
         </service>
     </services>
 </container>

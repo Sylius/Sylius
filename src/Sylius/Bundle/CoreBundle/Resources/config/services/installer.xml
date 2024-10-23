@@ -28,10 +28,10 @@
             <argument type="service" id="sylius.requirements.installer.sylius" />
         </service>
 
-        <service id="sylius.commands_provider.installer.database_setup" class="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider">
+        <service id="sylius.provider.installer.database_setup_commands" class="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface" alias="sylius.commands_provider.installer.database_setup" />
+        <service id="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface" alias="sylius.provider.installer.database_setup_commands" />
 
         <service id="sylius.setup.installer.currency" class="Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup">
             <argument type="service" id="sylius.repository.currency" />

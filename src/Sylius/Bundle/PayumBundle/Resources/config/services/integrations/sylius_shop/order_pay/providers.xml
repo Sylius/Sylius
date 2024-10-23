@@ -19,16 +19,16 @@
     <services>
         <!-- Pay -->
 
-        <service id="sylius_shop.order_pay.provider.pay_response.payum" parent="sylius_payum.provider.order_pay.pay_response">
-            <argument type="service" id="sylius_shop.order_pay.resolver.payment_to_pay" />
-            <tag name="sylius_shop.order_pay.provider.pay_response" priority="-200" />
+        <service id="sylius_shop.provider.order_pay.pay_response.payum" parent="sylius_payum.provider.order_pay.pay_response">
+            <argument type="service" id="sylius_shop.resolver.order_pay.payment_to_pay" />
+            <tag name="sylius_shop.provider.order_pay.pay_response" priority="-200" />
         </service>
 
         <!-- After pay -->
 
-        <service id="sylius_shop.order_pay.provider.after_pay_response.payum" parent="sylius_payum.provider.order_pay.after_pay_response">
-            <argument type="service" id="sylius_shop.order_pay.handler.payment_state_flash" />
-            <tag name="sylius_shop.order_pay.provider.after_pay_response" priority="-200" />
+        <service id="sylius_shop.provider.order_pay.after_pay_response.payum" parent="sylius_payum.provider.order_pay.after_pay_response">
+            <argument type="service" id="sylius_shop.handler.order_pay.payment_state_flash" />
+            <tag name="sylius_shop.provider.order_pay.after_pay_response" priority="-200" />
         </service>
     </services>
 </container>

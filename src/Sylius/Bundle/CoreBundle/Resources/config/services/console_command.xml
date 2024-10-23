@@ -31,7 +31,7 @@
             <tag name="console.command" />
         </service>
 
-        <service id="sylius.console.command.clear_price_history" class="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand">
+        <service id="sylius.console.command.price_history.clear" class="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand">
             <argument type="service" id="sylius.remover.channel_pricing_log_entries" />
             <tag name="console.command"/>
         </service>
@@ -50,7 +50,7 @@
         <service id="sylius.console.command.install_database" class="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.checker.installer.command_directory" />
-            <argument type="service" id="sylius.commands_provider.installer.database_setup" />
+            <argument type="service" id="sylius.provider.installer.database_setup_commands" />
             <tag name="console.command" />
         </service>
 
