@@ -660,6 +660,22 @@
 1. The class `Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber` has been deprecated and will be removed in Sylius 2.0.
    It will be replaced with the `ResourceDeleteListener`.
 
+1. The following exceptions have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser`
+    - `Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\ProductVariantCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved`
+    - `Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved`
+
+    All of these exceptions will be replaced with the `Sylius\Component\Core\Exception\ResourceDeleteException` exception.
+
 1. Extending `\InvalidArgumentException` by `Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException` 
    and `Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException` is deprecated, instead they will extend 
    `\RuntimeException` in Sylius 2.0.
