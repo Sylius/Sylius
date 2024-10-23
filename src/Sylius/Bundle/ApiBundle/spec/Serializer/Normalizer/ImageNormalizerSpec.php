@@ -170,8 +170,6 @@ final class ImageNormalizerSpec extends ObjectBehavior
         CacheManager $cacheManager,
         RequestStack $requestStack,
         NormalizerInterface $normalizer,
-        Request $request,
-        ParameterBag $queryBag,
         ImageInterface $image,
     ): void {
         $normalizer
