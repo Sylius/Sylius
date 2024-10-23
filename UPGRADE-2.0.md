@@ -171,7 +171,6 @@
 | `Sylius\Bundle\ApiBundle\Serializer\Denormalizer\AddressDenormalizer`                                               | `sylius_api.denormalizer.address`                                                                   |
 | `Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandArgumentsDenormalizer`                                      | `sylius_api.denormalizer.command_arguments`                                                         |
 | `Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandDenormalizer`                                               | `sylius_api.denormalizer.command`                                                                   |
-| `Sylius\Bundle\ApiBundle\Serializer\Normalizer\HydraErrorNormalizer`                                                | `sylius_api.normalizer.hydra_error`                                                                 |
 | `Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductNormalizer`                                                   | `sylius_api.normalizer.product`                                                                     |
 | `Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductAttributeValueDenormalizer`                                 | `sylius_api.denormalizer.product_attribute_value`                                                   |
 | `Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductDenormalizer`                                               | `sylius_api.denormalizer.product`                                                                   |
