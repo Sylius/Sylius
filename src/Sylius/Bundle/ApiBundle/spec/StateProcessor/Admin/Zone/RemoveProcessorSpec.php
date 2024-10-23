@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Zone;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
@@ -62,19 +61,6 @@ final class RemoveProcessorSpec extends ObjectBehavior
             ->shouldThrow(ZoneCannotBeRemoved::class)
             ->during('process', [$zone, $operation, [], []])
         ;
-    }
-
-    public function it_throws_an_exception_when_foreign_key_constraint_violation_occurs(
-        ProcessorInterface $removeProcessor,
-        ZoneDeletionCheckerInterface $zoneDeletionChecker,
-        Operation $operation,
-        ZoneInterface $zone,
-    ): void {
-        $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
-        $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($zone, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
-
-        $this->shouldThrow(ZoneCannotBeRemoved::class)->during('process', [$zone, $operation]);
     }
 
     function it_uses_decorated_data_persister_to_remove_channel(

@@ -254,7 +254,6 @@ Example configuration for `order_fixed_discount` action type:
                 name="sylius_api_admin_promotion_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotions/{code}"
-                processor="sylius_api.state_processor.admin.promotion.remove"
             />
         </operations>
     </resource>

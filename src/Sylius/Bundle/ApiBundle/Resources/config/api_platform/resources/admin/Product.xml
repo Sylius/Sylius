@@ -158,7 +158,6 @@
                 name="sylius_api_admin_product_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/products/{code}"
-                processor="sylius_api.state_processor.admin.product.remove"
             />
         </operations>
     </resource>
