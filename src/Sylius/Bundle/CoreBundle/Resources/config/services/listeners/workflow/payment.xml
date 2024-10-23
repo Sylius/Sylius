@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="false" />
-
         <service id="sylius.listener.workflow.payment.process_order" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ProcessOrderListener">
             <argument type="service" id="sylius.order_processing.order_payment_processor.after_checkout" />
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.fail" priority="100" />

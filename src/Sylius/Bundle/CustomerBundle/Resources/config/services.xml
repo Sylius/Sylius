@@ -26,8 +26,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.type.customer" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerType">
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.form.type.customer.validation_groups%</argument>

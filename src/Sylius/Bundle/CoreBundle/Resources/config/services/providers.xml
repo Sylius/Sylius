@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.provider.channel_based_default_zone" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
 
         <service id="sylius.provider.channel_based_product_translation" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider">

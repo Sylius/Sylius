@@ -21,14 +21,12 @@
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.custom_factory.promotion_coupon" class="Sylius\Component\Promotion\Factory\PromotionCouponFactory" decorates="sylius.factory.promotion_coupon" decoration-priority="256" public="false">
+        <service id="sylius.custom_factory.promotion_coupon" class="Sylius\Component\Promotion\Factory\PromotionCouponFactory" decorates="sylius.factory.promotion_coupon" decoration-priority="256">
             <argument type="service" id="sylius.custom_factory.promotion_coupon.inner" />
         </service>
         <service id="Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface" alias="sylius.factory.promotion_coupon" />
 
-        <service id="sylius.factory.promotion_coupon_generator_instruction" class="Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactory" public="false" />
+        <service id="sylius.factory.promotion_coupon_generator_instruction" class="Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactory" />
         <service id="Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactoryInterface" alias="sylius.factory.promotion_coupon_generator_instruction" />
 
         <service id="sylius.processor.promotion" class="Sylius\Component\Promotion\Processor\PromotionProcessor">
@@ -62,13 +60,13 @@
         </service>
         <service id="Sylius\Component\Promotion\Provider\ActivePromotionsProvider" alias="sylius.provider.active_promotions" />
 
-        <service id="sylius.generator.promotion_coupon" class="Sylius\Component\Promotion\Generator\PromotionCouponGenerator">
+        <service id="sylius.generator.promotion_coupon" class="Sylius\Component\Promotion\Generator\PromotionCouponGenerator" public="true">
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.manager.promotion_coupon" />
             <argument type="service" id="sylius.generator.percentage_generation_policy" />
         </service>
-        <service id="Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface" alias="sylius.generator.promotion_coupon" />
+        <service id="Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface" alias="sylius.generator.promotion_coupon" public="true" />
 
         <service id="sylius.generator.percentage_generation_policy" class="Sylius\Component\Promotion\Generator\PercentageGenerationPolicy">
             <argument type="service" id="sylius.repository.promotion_coupon" />
@@ -77,10 +75,11 @@
         <service
             id="sylius.provider.eligible_catalog_promotions"
             class="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider"
+            public="true"
         >
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
-        <service id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" alias="sylius.provider.eligible_catalog_promotions" />
+        <service id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" alias="sylius.provider.eligible_catalog_promotions" public="true" />
     </services>
 </container>

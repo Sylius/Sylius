@@ -20,8 +20,6 @@
         <parameter key="sylius_installer_currency">USD</parameter>
     </parameters>
     <services>
-        <defaults public="true" />
-
         <service id="sylius.checker.installer.command_directory" class="Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker">
             <argument type="service" id="filesystem" />
         </service>

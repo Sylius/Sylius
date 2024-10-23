@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.command_handler.catalog_promotion.apply_variants" class="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\ApplyCatalogPromotionsOnVariantsHandler">
             <argument type="service" id="sylius.provider.eligible_catalog_promotions" />
             <argument type="service" id="sylius.applicator.catalog_promotion"/>

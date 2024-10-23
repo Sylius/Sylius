@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius_payum.processor.payment_request.after_token_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessor">
             <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.repository.payment_request" />

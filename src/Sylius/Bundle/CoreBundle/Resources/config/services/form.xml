@@ -66,8 +66,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.extension.type.address" class="Sylius\Bundle\CoreBundle\Form\Extension\AddressTypeExtension">
             <tag name="form.type_extension" priority="100" />
         </service>

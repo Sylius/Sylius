@@ -26,8 +26,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.type.tax_category" class="Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType">
             <argument>%sylius.model.tax_category.class%</argument>
             <argument>%sylius.form.type.tax_category.validation_groups%</argument>

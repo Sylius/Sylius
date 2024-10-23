@@ -29,26 +29,24 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.console.command.demote_user" class="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand">
+        <service id="sylius.console.command.demote_user" class="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand" public="true">
             <argument type="service" id="doctrine" />
             <argument>%sylius.user.users%</argument>
             <tag name="console.command" />
         </service>
 
-        <service id="sylius.console.command.promote_user" class="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand">
+        <service id="sylius.console.command.promote_user" class="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand" public="true">
             <argument type="service" id="doctrine" />
             <argument>%sylius.user.users%</argument>
             <tag name="console.command" />
         </service>
 
-        <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" public="false" />
+        <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" />
 
-        <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" public="false" />
+        <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" />
 
         <!-- Controllers -->
-        <service id="sylius.controller.user_security" class="Sylius\Bundle\UserBundle\Controller\SecurityController">
+        <service id="sylius.controller.user_security" class="Sylius\Bundle\UserBundle\Controller\SecurityController" public="true">
             <argument type="service" id="security.authentication_utils" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="twig" />
@@ -65,7 +63,7 @@
         <service id="Sylius\Component\User\Security\PasswordUpdaterInterface" alias="sylius.security.password_updater" />
 
         <!-- Listeners -->
-        <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener">
+        <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener" public="true">
             <argument type="service" id="sylius.security.password_updater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />

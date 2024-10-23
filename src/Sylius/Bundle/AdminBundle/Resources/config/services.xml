@@ -28,16 +28,14 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius_admin.console.command.create_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
+        <service id="sylius_admin.console.command.create_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand" public="true">
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_locale.locale%</argument>
             <argument type="service" id="sylius_admin.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
-        <service id="sylius_admin.console.command.change_admin_user_password" class="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
+        <service id="sylius_admin.console.command.change_admin_user_password" class="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand" public="true">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.security.password_updater" />
             <argument type="service" id="sylius_admin.console.command_factory.question" />
@@ -66,7 +64,7 @@
             <tag name="sylius.uri_based_section_resolver" priority="20" />
         </service>
 
-        <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
+        <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" />
 
         <service id="sylius.attribute_type.select" class="Sylius\Component\Attribute\AttributeType\SelectAttributeType">
             <tag name="sylius.attribute.type" attribute-type="select" label="Select"

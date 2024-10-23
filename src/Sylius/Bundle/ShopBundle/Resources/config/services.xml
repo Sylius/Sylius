@@ -23,8 +23,6 @@
     </imports>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius_shop.section_resolver.shop_uri_based" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver">
             <argument>account</argument>
             <tag name="sylius.uri_based_section_resolver" priority="-10" />
