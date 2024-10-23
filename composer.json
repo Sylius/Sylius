@@ -136,7 +136,7 @@
         "symfony/webpack-encore-bundle": "^2.2",
         "symfony/workflow": "^6.4 || ^7.1",
         "symfony/yaml": "^6.4 || ^7.1",
-        "symfonycasts/dynamic-forms": "v0.1.1",
+        "symfonycasts/dynamic-forms": "^0.1",
         "twig/extra-bundle": "^3.13",
         "twig/intl-extra": "^3.13",
         "twig/string-extra": "^3.13",

@@ -42,6 +42,7 @@
         "symfony/ux-autocomplete": "^2.20",
         "symfony/ux-live-component": "^2.20",
         "symfony/webpack-encore-bundle": "^2.2",
+        "symfonycasts/dynamic-forms": "^0.1",
         "twig/extra-bundle": "^3.13",
         "twig/twig": "^3.14"
     },
