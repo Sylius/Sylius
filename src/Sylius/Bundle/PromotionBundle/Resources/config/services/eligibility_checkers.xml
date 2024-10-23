@@ -75,8 +75,8 @@
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker">
             <argument type="collection" />
         </service>
-        <service id="sylius.checker.promotion.eligibility" alias="sylius.promotion_eligibility_checker" />
-        <service id="sylius.checker.promotion.eligibility.composite" alias="sylius.promotion_eligibility_checker" />
+        <service id="sylius.checker.promotion_eligibility" alias="sylius.promotion_eligibility_checker" />
+        <service id="sylius.checker.promotion_eligibility.composite" alias="sylius.promotion_eligibility_checker" />
         <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface" alias="sylius.promotion_eligibility_checker" />
 
         <service id="sylius.promotion_archival_eligibility_checker"

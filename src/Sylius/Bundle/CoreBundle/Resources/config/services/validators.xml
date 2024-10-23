@@ -60,7 +60,7 @@
         </service>
 
         <service id="sylius.validator.shipping_method_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator">
-            <argument type="service" id="sylius.checker.shipping_method.eligibility" />
+            <argument type="service" id="sylius.checker.shipping_method_eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_order_shipping_method_eligibility_validator" />
         </service>
         <service id="sylius.validator.order_shipping_method_eligibility" alias="sylius.validator.shipping_method_integrity" />
