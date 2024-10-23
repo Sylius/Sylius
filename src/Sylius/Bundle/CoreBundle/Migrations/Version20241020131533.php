@@ -48,6 +48,7 @@ final class Version20241020131533 extends AbstractPostgreSQLMigration
         );
 
         $this->addSql('ALTER TABLE sylius_product_image ALTER COLUMN position SET NOT NULL');
+        $this->addSql('ALTER TABLE sylius_product_image ALTER COLUMN position DROP DEFAULT');
 
         $this->addSql('DROP TABLE image_variants_count');
     }
