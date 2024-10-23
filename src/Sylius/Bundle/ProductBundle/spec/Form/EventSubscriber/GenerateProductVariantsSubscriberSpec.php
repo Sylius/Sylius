@@ -15,9 +15,9 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsValuesException;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Resource\Exception\VariantWithNoOptionsValuesException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -70,7 +70,7 @@ final class GenerateProductVariantsSubscriberSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
     ): void {
         $event->getData()->willReturn($product);
-        $generator->generate($product)->willThrow(new VariantWithNoOptionsValuesException());
+        $generator->generate($product)->willThrow(new ProductWithoutOptionsValuesException());
         $requestStack->getSession()->willReturn($session);
         $session->getBag('flashes')->willReturn($flashBag);
 

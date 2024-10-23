@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
+use Sylius\Component\Product\Exception\ProductWithoutOptionsException;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsValuesException;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Resource\Exception\VariantWithNoOptionsValuesException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -47,7 +48,7 @@ final readonly class GenerateProductVariantsSubscriber implements EventSubscribe
 
         try {
             $this->generator->generate($product);
-        } catch (VariantWithNoOptionsValuesException $exception) {
+        } catch (ProductWithoutOptionsException|ProductWithoutOptionsValuesException $exception) {
             $this->getFlashBag()->add('error', $exception->getMessage());
         }
     }
