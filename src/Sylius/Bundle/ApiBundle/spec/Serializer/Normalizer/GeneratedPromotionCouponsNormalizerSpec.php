@@ -158,7 +158,7 @@ final class GeneratedPromotionCouponsNormalizerSpec extends ObjectBehavior
         ;
     }
 
-    public function it_throws_an_exception_if_serializer_group_is_not_supported(
+    public function it_throws_an_exception_if_serialization_group_is_not_supported(
         SectionProviderInterface $sectionProvider,
         NormalizerInterface $normalizer,
         PromotionCouponInterface $promotionCoupon,
