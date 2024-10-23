@@ -47,7 +47,10 @@ class ImageNormalizer implements NormalizerInterface, NormalizerAwareInterface
 
         /** @var array<string, string> $data */
         $data = $this->normalizer->normalize($object, $format, $context);
-        $data['path'] = $this->resolvePath($data);
+
+        if (true === array_key_exists('path', $data)) {
+            $data['path'] = $this->resolvePath($data);
+        }
 
         return $data;
     }
