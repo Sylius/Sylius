@@ -58,7 +58,7 @@
         <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" alias="sylius_api.mapper.address" />
 
         <service id="sylius_api.checker.applied_coupon_eligibility" class="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">
-            <argument type="service" id="sylius.checker.promotion.eligibility" />
+            <argument type="service" id="sylius.checker.promotion_eligibility" />
             <argument type="service" id="sylius.checker.promotion_coupon_eligibility" />
         </service>
         <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" alias="sylius_api.checker.applied_coupon_eligibility" />

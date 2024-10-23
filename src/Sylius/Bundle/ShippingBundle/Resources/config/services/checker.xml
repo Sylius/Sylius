@@ -28,12 +28,12 @@
             <tag name="sylius.shipping_method_eligibility_checker"/>
         </service>
 
-        <service id="sylius.checker.shipping_method.eligibility"
+        <service id="sylius.checker.shipping_method_eligibility"
                  class="Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker">
             <argument type="collection"/>
         </service>
-        <service id="sylius.checker.shipping_method.eligibility.composite" alias="sylius.checker.shipping_method.eligibility"/>
+        <service id="sylius.checker.shipping_method_eligibility.composite" alias="sylius.checker.shipping_method_eligibility"/>
         <service id="Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface"
-                 alias="sylius.checker.shipping_method.eligibility"/>
+                 alias="sylius.checker.shipping_method_eligibility"/>
     </services>
 </container>

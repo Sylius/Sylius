@@ -62,12 +62,12 @@
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
 
-        <service id="sylius.checker.promotion.eligibility"
+        <service id="sylius.checker.promotion_eligibility"
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker">
             <argument type="collection" />
         </service>
-        <service id="sylius.checker.promotion.eligibility.composite" alias="sylius.checker.promotion.eligibility" />
-        <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface" alias="sylius.checker.promotion.eligibility" />
+        <service id="sylius.checker.promotion_eligibility.composite" alias="sylius.checker.promotion_eligibility" />
+        <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface" alias="sylius.checker.promotion_eligibility" />
 
         <service id="sylius.checker.promotion.archival_eligibility"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionArchivalEligibilityChecker"
