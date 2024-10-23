@@ -20,6 +20,16 @@ use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
 final class Version20160101092155 extends AbstractMigration
 {
+    /** @var string[] */
+    private static array $syliusTransportEnvKeys = [
+        'SYLIUS_MESSENGER_TRANSPORT_MAIN_DSN',
+        'SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN',
+        'SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN',
+        'SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN',
+        'SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_DSN',
+        'SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_FAILED_DSN',
+    ];
+
     public function getDescription(): string
     {
         return 'Regenerated Sylius migrations from 1.X';
@@ -222,6 +232,10 @@ final class Version20160101092155 extends AbstractMigration
         $this->addSql('ALTER TABLE sylius_taxon_translation ADD CONSTRAINT FK_1487DFCF2C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES sylius_taxon (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE sylius_user_oauth ADD CONSTRAINT FK_C3471B78A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_shop_user (id)');
         $this->addSql('ALTER TABLE sylius_zone_member ADD CONSTRAINT FK_E8B5ABF34B0E929B FOREIGN KEY (belongs_to) REFERENCES sylius_zone (id)');
+
+        if ($this->isDoctrineTransportConfigured() && !$schema->hasTable('messenger_messages')) {
+            $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', available_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', delivered_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        }
     }
 
     public function down(Schema $schema): void
@@ -414,6 +428,17 @@ final class Version20160101092155 extends AbstractMigration
         $this->addSql('DROP TABLE sylius_zone_member');
     }
 
+    private function isDoctrineTransportConfigured(): bool
+    {
+        foreach (self::$syliusTransportEnvKeys as $transportEnvKey) {
+            if (str_contains($_ENV[$transportEnvKey] ?? '', 'doctrine')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function cleanMigrationsTable(): void
     {
         $this->connection->executeStatement('DELETE FROM sylius_migrations WHERE version LIKE :version AND version NOT IN (:current) AND version < :new', [
@@ -429,5 +454,4 @@ final class Version20160101092155 extends AbstractMigration
             'new' => Types::STRING,
         ]);
     }
-
 }
