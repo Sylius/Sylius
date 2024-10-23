@@ -18,6 +18,11 @@
     "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
     "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
   },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "tom-select": "^2.2.2"
+  },
   "engines": {
     "node": "^20 || ^22"
   },
