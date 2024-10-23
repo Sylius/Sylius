@@ -36,6 +36,14 @@
 
 * The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
 
+## Service Container
+
+In Sylius 2.0, we have changed the visibility of services to `private` by default. This change enhances the performance and maintainability of the application and also follows Symfony's best practices for service encapsulation.
+
+**Exceptions:**
+- Services required by Symfony to be `public` (e.g., controllers, event listeners) remain public.
+- Services used in `ResourceController` must be `public` as they are accessed directly from the container.
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is no longer supported in ResourceBundle and GridBundle:
