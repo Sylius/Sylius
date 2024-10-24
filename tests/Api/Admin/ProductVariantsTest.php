@@ -229,7 +229,6 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'channelPricings[NON-EXISTING-CHANNEL].channelCode',
@@ -267,7 +266,6 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'channelPricings[].channelCode',
@@ -339,7 +337,6 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'product',
@@ -384,7 +381,6 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'translations[NON-EXISTING-LOCALE-CODE]',
@@ -494,7 +490,6 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'translations[NON-EXISTING-LOCALE-CODE]',
@@ -537,7 +532,6 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'translations[en_US].locale',
@@ -578,7 +572,6 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'channelPricings[WEB].channelCode',
