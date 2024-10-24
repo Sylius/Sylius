@@ -34,12 +34,14 @@ final class FooApiCommandTest extends ApiTestCase
             'api/v2/foo-api-command',
             ['json' => ['name' => 'FooCommandPost']],
         );
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+
+        $this->assertResponseHeaderSame('content-type', 'application/problem+json; charset=utf-8');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
         $this->assertJsonContains([
-            'code' => Response::HTTP_BAD_REQUEST,
-            'message' => 'Request does not have the following required fields specified: bar.',
+            'description' => 'Request does not have the following required fields specified: bar.',
+            'hydra:description' => 'Request does not have the following required fields specified: bar.',
+            'hydra:title' => 'An error occurred',
         ]);
     }
 
