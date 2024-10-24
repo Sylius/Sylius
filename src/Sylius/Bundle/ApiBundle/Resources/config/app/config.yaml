@@ -90,6 +90,9 @@ api_platform:
         normalization_context:
             skip_null_values: false
         pagination_client_items_per_page: true
+        extra_properties:
+            rfc_7807_compliant_errors: true
+            standard_put: false
 
 lexik_jwt_authentication:
     api_platform:
