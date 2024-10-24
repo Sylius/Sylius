@@ -23,14 +23,16 @@
         >
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.price_calculator" />
         </service>
-        <service id="Sylius\Component\CoreBundle\CatalogPromotion\Calculator\CatalogPromotionPriceCalculatorInterface" alias="sylius.calculator.catalog_promotion.price" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\CatalogPromotionPriceCalculatorInterface" alias="sylius.calculator.catalog_promotion.price" />
 
         <service id="sylius.calculator.catalog_promotion.fixed_discount_price" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator">
             <tag name="sylius.catalog_promotion.price_calculator" type="fixed_discount" />
         </service>
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\ActionBasedPriceCalculatorInterface $fixedDiscountPrice" alias="sylius.calculator.catalog_promotion.fixed_discount_price" />
 
         <service id="sylius.calculator.catalog_promotion.percentage_discount_price" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator">
             <tag name="sylius.catalog_promotion.price_calculator" type="percentage_discount" />
         </service>
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\ActionBasedPriceCalculatorInterface $percentageDiscountPriceCalculator" alias="sylius.calculator.catalog_promotion.percentage_discount_price" />
     </services>
 </container>
