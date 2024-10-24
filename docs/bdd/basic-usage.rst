@@ -51,7 +51,7 @@ At the beginning we have decided that it will be a frontend/user interface featu
 
 .. code-block:: yaml
 
-    # src/Sylius/Behat/Resources/config/suites/ui/addressing/managing_countries.yml
+    # src/Behat/Resources/config/suites/ui/addressing/managing_countries.yml
 
     default:
         suites:
@@ -86,7 +86,7 @@ We have mentioned with the generic steps we can easily switch our testing contex
 
 .. code-block:: yaml
 
-    # src/Sylius/Behat/Resources/config/suites/domain/addressing/managing_countries.yml
+    # src/Behat/Resources/config/suites/domain/addressing/managing_countries.yml
 
     default:
         suites:

@@ -98,9 +98,9 @@ RUN set -eux; \
 # prevent the reinstallation of vendors at every changes in the source code
 COPY package.json package-*.json ./
 
-COPY --from=base /srv/sylius/src/Sylius/Bundle/UiBundle/Resources/private       src/Sylius/Bundle/UiBundle/Resources/private/
-COPY --from=base /srv/sylius/src/Sylius/Bundle/AdminBundle                      src/Sylius/Bundle/AdminBundle/
-COPY --from=base /srv/sylius/src/Sylius/Bundle/ShopBundle                       src/Sylius/Bundle/ShopBundle/
+COPY --from=base /srv/sylius/src/Bundle/UiBundle/Resources/private       src/Bundle/UiBundle/Resources/private/
+COPY --from=base /srv/sylius/src/Bundle/AdminBundle                      src/Bundle/AdminBundle/
+COPY --from=base /srv/sylius/src/Bundle/ShopBundle                       src/Bundle/ShopBundle/
 COPY --from=base /srv/sylius/vendor/symfony/ux-autocomplete/assets              vendor/symfony/ux-autocomplete/assets/
 COPY --from=base /srv/sylius/vendor/symfony/ux-live-component/assets            vendor/symfony/ux-live-component/assets/
 

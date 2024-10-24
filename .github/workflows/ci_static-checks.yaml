@@ -81,7 +81,7 @@ jobs:
 
             -   name: Restrict API Platform version for ApiBundle
                 run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
-                working-directory: "src/Sylius/Bundle/ApiBundle"
+                working-directory: "src/Bundle/ApiBundle"
 
             -   name: Get Composer cache directory
                 id: composer-cache
@@ -131,7 +131,7 @@ jobs:
 
             -   name: Run ComposerRequireChecker
                 run: |
-                    (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
+                    (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
                     mv _composer.json composer.json
                     composer dump-autoload
                     composer-require-checker check --config-file=composer-require-checker.json --ignore-parse-errors

@@ -1,7 +1,7 @@
 How to add a new context?
 =========================
 
-To add a new context to Behat container it is needed to add a service in to one of a following files ``cli.xml``/``domain.xml``/``hook.xml``/``setup.xml``/``transform.xml``/``ui.xml`` in ``src/Sylius/Behat/Resources/config/services/contexts/`` folder:
+To add a new context to Behat container it is needed to add a service in to one of a following files ``cli.xml``/``domain.xml``/``hook.xml``/``setup.xml``/``transform.xml``/``ui.xml`` in ``src/Behat/Resources/config/services/contexts/`` folder:
 
 .. code-block:: xml
 

@@ -21,7 +21,7 @@ Catalog Promotions' validation should:
 ### Unified validation in custom validators
 
 This is the first approach to validation we had. The concept was, to have
-[custom validator for each action and scope](https://github.com/Sylius/Sylius/blob/b5458fa31aadaf699e39b0cc106d5efd25144823/src/Sylius/Bundle/CoreBundle/Validator/CatalogPromotionAction/FixedDiscountActionValidator.php).
+[custom validator for each action and scope](https://github.com/Sylius/Sylius/blob/b5458fa31aadaf699e39b0cc106d5efd25144823/src/Bundle/CoreBundle/Validator/CatalogPromotionAction/FixedDiscountActionValidator.php).
 The correct validation is chosen based on the key provided in `sylius.catalog_promotion.action_validator` tag. These custom
 validators should contain both business and syntactical validation (as the latter is not configured anywhere else).
 
@@ -49,16 +49,16 @@ separation gives us better control over how requests/forms are validated (e.g. s
 to be validated in Sylius, as they're already protected in used Symfony types). Output of this decisions results in following
 structure of validators:
 
-* `src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionAction` - base business validation of catalog promotion actions
+* `src/Bundle/PromotionBundle/Validator/CatalogPromotionAction` - base business validation of catalog promotion actions
 not related to the concepts from other bundles (currently empty, only interface)
-* `src/Sylius/Bundle/CoreBundle/Validator/CatalogPromotionAction` - business validation of catalog promotion actions related
+* `src/Bundle/CoreBundle/Validator/CatalogPromotionAction` - business validation of catalog promotion actions related
 to the concepts from other bundles (e.g. product variants)
-* `src/Sylius/Bundle/CoreBundle/Validator/CatalogPromotionScope` - business validation of catalog promotion scopes related
+* `src/Bundle/CoreBundle/Validator/CatalogPromotionScope` - business validation of catalog promotion scopes related
 to the concepts from other bundles (e.g. taxons)
-* `src/Sylius/Bundle/ApiBundle/Validator/CatalogPromotion` - syntactical validation of API requests; validators here usually
+* `src/Bundle/ApiBundle/Validator/CatalogPromotion` - syntactical validation of API requests; validators here usually
 decorate validators from the **CoreBundle**
 
-Syntactical validation of forms data shall be done on each specific form (e.g. those from `src/Sylius/Bundle/CoreBundle/Form/Type/CatalogPromotionScope`).
+Syntactical validation of forms data shall be done on each specific form (e.g. those from `src/Bundle/CoreBundle/Form/Type/CatalogPromotionScope`).
 
 ## References
 
