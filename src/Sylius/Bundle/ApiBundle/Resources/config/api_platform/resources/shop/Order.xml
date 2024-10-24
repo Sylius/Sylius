@@ -88,6 +88,7 @@
             </operation>
 
             <operation
+                name="sylius_api_shop_order_order_item_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/shop/orders/{tokenValue}/items"
                 itemUriTemplate="/shop/orders/{tokenValue}"
@@ -103,16 +104,6 @@
                         </value>
                     </values>
                 </validationContext>
-            </operation>
-
-            <operation
-                name="sylius_api_shop_order_order_item_post"
-                class="ApiPlatform\Metadata\Post"
-                uriTemplate="/shop/orders/{tokenValue}/items"
-                itemUriTemplate="/shop/orders/{tokenValue}"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart"
-            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -134,6 +125,7 @@
             </operation>
 
             <operation
+                name="sylius_api_shop_order_put"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/shop/orders/{tokenValue}"
                 messenger="input"
@@ -148,15 +140,6 @@
                         </value>
                     </values>
                 </validationContext>
-            </operation>
-
-            <operation
-                name="sylius_api_shop_order_put"
-                class="ApiPlatform\Metadata\Put"
-                uriTemplate="/shop/orders/{tokenValue}"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart"
-            >
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -178,27 +161,6 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Patch"
-                uriTemplate="/shop/orders/{tokenValue}/items/{orderItemId}"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart"
-            >
-                <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="orderItemId" fromClass="Sylius\Component\Core\Model\OrderItem" fromProperty="order"/>
-                </uriVariables>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-            </operation>
-
-            <operation
                 name="sylius_api_shop_order_order_item_patch"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/shop/orders/{tokenValue}/items/{orderItemId}"
@@ -209,6 +171,15 @@
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
                     <uriVariable parameterName="orderItemId" fromClass="%sylius.model.order_item.class%" fromProperty="order"/>
                 </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -230,27 +201,6 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Patch"
-                uriTemplate="/shop/orders/{tokenValue}/shipments/{shipmentId}"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod"
-            >
-                <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="shipmentId" fromClass="Sylius\Component\Core\Model\Shipment" fromProperty="order"/>
-                </uriVariables>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-            </operation>
-
-            <operation
                 name="sylius_api_shop_order_shipment_patch"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/shop/orders/{tokenValue}/shipments/{shipmentId}"
@@ -261,6 +211,15 @@
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
                     <uriVariable parameterName="shipmentId" fromClass="%sylius.model.shipment.class%" fromProperty="order"/>
                 </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -282,27 +241,6 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Patch"
-                uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod"
-            >
-                <uriVariables>
-                    <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order"/>
-                    <uriVariable parameterName="paymentId" fromClass="Sylius\Component\Core\Model\Payment" fromProperty="order"/>
-                </uriVariables>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-            </operation>
-
-            <operation
                 name="sylius_api_shop_order_payment_patch"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/shop/orders/{tokenValue}/payments/{paymentId}"
@@ -313,6 +251,15 @@
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
                     <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="order"/>
                 </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
