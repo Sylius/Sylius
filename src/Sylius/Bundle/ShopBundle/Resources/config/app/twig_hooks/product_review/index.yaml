@@ -1,11 +1,22 @@
 sylius_twig_hooks:
     hooks:
         'sylius.shop.product_review.index':
+            header:
+                template: '@SyliusShop/product_review/index/header.html.twig'
+                priority: 200
             sidebar:
                 template: "@SyliusShop/product_review/index/sidebar.html.twig"
                 priority: 100
             main:
                 template: "@SyliusShop/product_review/index/main.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.header':
+            breadcrumbs:
+                component: 'sylius_shop:common.product_slug'
+                props:
+                    slug: '@=_context.slug'
+                    template: '@SyliusShop/product_review/index/header/breadcrumbs.html.twig'
                 priority: 0
 
         'sylius.shop.product_review.index.sidebar':
