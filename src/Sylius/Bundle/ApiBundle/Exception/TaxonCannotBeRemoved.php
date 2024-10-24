@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated. Will be removed in Sylius 2.0.',
+    TaxonCannotBeRemoved::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class TaxonCannotBeRemoved extends \RuntimeException
 {
     public function __construct(
