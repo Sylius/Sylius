@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Exception;
 class ResourceDeleteException extends \RuntimeException
 {
     public function __construct(
-        private string $resourceName,
+        private ?string $resourceName = null,
         string $message = '',
         int $code = 0,
         ?\Throwable $previous = null,
@@ -28,7 +28,7 @@ class ResourceDeleteException extends \RuntimeException
         parent::__construct($message, $code, $previous);
     }
 
-    public function getResourceName(): string
+    public function getResourceName(): ?string
     {
         return $this->resourceName;
     }

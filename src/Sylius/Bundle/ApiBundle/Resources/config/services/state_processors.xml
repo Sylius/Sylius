@@ -53,11 +53,6 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius_api.state_processor.admin.product_option.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductOption\PersistProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
         <service id="sylius_api.state_processor.admin.zone.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Zone\RemoveProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
             <argument type="service" id="sylius.checker.zone_deletion" />

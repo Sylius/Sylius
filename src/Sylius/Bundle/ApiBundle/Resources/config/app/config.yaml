@@ -53,31 +53,19 @@ api_platform:
 
         # Sylius exception to status code mapping
         Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException: 422
-        Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
-        Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelPricingChannelCodeMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
         Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException: 422
         Sylius\Component\Payment\Exception\PaymentRequestNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException: 404
-        Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException: 404
-        Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProductOptionValueCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProductVariantCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException: 422
-        Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException: 422
-        Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException: 409
-        Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved: 422
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
+        Sylius\Component\Core\Exception\ResourceDeleteException: 422
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException: 422
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException: 422
         Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException: 422

@@ -18,9 +18,9 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 
 final class RemoveProcessorSpec extends ObjectBehavior
 {
@@ -58,7 +58,7 @@ final class RemoveProcessorSpec extends ObjectBehavior
         $removeProcessor->process(Argument::cetera())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(ZoneCannotBeRemoved::class)
+            ->shouldThrow(ResourceDeleteException::class)
             ->during('process', [$zone, $operation, [], []])
         ;
     }

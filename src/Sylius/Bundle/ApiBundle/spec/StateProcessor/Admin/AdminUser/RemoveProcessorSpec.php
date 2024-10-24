@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\State\ProcessorInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -59,7 +59,7 @@ final class RemoveProcessorSpec extends ObjectBehavior
         $loggedUser->getId()->willReturn(1);
         $adminUser->getId()->willReturn(1);
 
-        $this->shouldThrow(CannotRemoveCurrentlyLoggedInUser::class)->during('process', [$adminUser, new Delete(), [], []]);
+        $this->shouldThrow(ResourceDeleteException::class)->during('process', [$adminUser, new Delete(), [], []]);
     }
 
     function it_processes_delete_if_no_user_token_found(

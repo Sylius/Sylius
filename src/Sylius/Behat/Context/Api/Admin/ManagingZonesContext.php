@@ -426,7 +426,7 @@ final readonly class ManagingZonesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Cannot delete, the Zone is in use.',
+            'Cannot delete, the zone is in use.',
         );
     }
 

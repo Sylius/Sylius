@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -37,7 +37,7 @@ final readonly class RemoveProcessor implements ProcessorInterface
         Assert::isInstanceOf($operation, DeleteOperationInterface::class);
 
         if ($this->isTryingToRemoveLoggedInUser($data)) {
-            throw new CannotRemoveCurrentlyLoggedInUser();
+            throw new ResourceDeleteException(message: 'Cannot remove currently logged in user.');
         }
 
         $this->removeProcessor->process($data, $operation, $uriVariables, $context);

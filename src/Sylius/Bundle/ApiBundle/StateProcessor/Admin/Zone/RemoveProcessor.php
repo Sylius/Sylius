@@ -16,9 +16,9 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Zone;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Webmozart\Assert\Assert;
 
 /** @implements ProcessorInterface<ZoneInterface> */
@@ -36,7 +36,7 @@ final readonly class RemoveProcessor implements ProcessorInterface
         Assert::isInstanceOf($operation, DeleteOperationInterface::class);
 
         if (!$this->zoneDeletionChecker->isDeletable($data)) {
-            throw new ZoneCannotBeRemoved();
+            throw new ResourceDeleteException(message: 'Cannot delete, the zone is in use.');
         }
 
         $this->removeProcessor->process($data, $operation, $uriVariables, $context);

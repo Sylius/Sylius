@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface;
@@ -144,7 +144,7 @@ final class TaxonDeletionEventSubscriberSpec extends ObjectBehavior
         $taxonInPromotionRuleChecker->isInUse($taxon)->willReturn(true);
 
         $this
-            ->shouldThrow(TaxonCannotBeRemoved::class)
+            ->shouldThrow(ResourceDeleteException::class)
             ->during('protectFromRemovingTaxonInUseByPromotionRule', [$event])
         ;
     }

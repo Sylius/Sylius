@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
-use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -43,7 +43,7 @@ final readonly class ProductDeletionEventSubscriber implements EventSubscriberIn
         }
 
         if ($this->productInPromotionRuleChecker->isInUse($product)) {
-            throw new ProductCannotBeRemoved('Cannot delete a product that is in use by a promotion rule.');
+            throw new ResourceDeleteException(message: 'Cannot delete a product that is in use by a promotion rule.');
         }
     }
 }
