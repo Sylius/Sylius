@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Webmozart\Assert\Assert;
 
 final class GatewayConfigType extends AbstractResourceType
 {
@@ -33,20 +34,20 @@ final class GatewayConfigType extends AbstractResourceType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $factoryName = $options['data']->getFactoryName();
-
         $builder
             ->add('factoryName', TextType::class, [
                 'label' => 'sylius.form.gateway_config.type',
                 'disabled' => true,
-                'data' => $factoryName,
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($factoryName) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $gatewayConfig = $event->getData();
 
                 if (!$gatewayConfig instanceof GatewayConfigInterface) {
                     return;
                 }
+
+                $factoryName = $gatewayConfig->getFactoryName();
+                Assert::notNull($factoryName, 'A factory name is required.');
 
                 if (!$this->gatewayConfigurationTypeRegistry->has('gateway_config', $factoryName)) {
                     return;
