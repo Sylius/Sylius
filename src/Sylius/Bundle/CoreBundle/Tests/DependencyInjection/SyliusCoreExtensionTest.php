@@ -35,7 +35,6 @@ use Sylius\Bundle\CoreBundle\Tests\Stub\ProductVariantMapProviderStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\TaxCalculationStrategyStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\UriBasedSectionResolverStub;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
-use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
 use Symfony\Component\DependencyInjection\Definition;
 

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Api\UrlGeneratorInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -46,7 +46,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
             $availabilityChecker,
             $sectionProvider,
             $iriConverter,
-            ['sylius:product_variant:index']
+            ['sylius:product_variant:index'],
         );
     }
 

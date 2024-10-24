@@ -24,7 +24,8 @@ use Sylius\Resource\Model\ToggleableInterface;
 
 final readonly class EnabledExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    public function __construct(private SectionProviderInterface $sectionProvider) {
+    public function __construct(private SectionProviderInterface $sectionProvider)
+    {
     }
 
     /**
