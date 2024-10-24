@@ -1,13 +1,19 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "",
             "message": "The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.",
             "code": null
         }
-    ]
+    ],
+    "detail": "The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.",
+    "description": "The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

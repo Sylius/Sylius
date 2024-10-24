@@ -48,11 +48,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Requests ShopUser verification</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -81,11 +76,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Verifies ShopUser's account</value>
-                    </values>
-                </openapiContext>
             </operation>
         </operations>
     </resource>

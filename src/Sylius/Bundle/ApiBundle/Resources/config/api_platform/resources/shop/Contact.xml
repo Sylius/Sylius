@@ -45,11 +45,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Sends contact request.</value>
-                    </values>
-                </openapiContext>
             </operation>
         </operations>
     </resource>

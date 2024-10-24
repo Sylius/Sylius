@@ -72,11 +72,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Resends shipment confirmation email.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -106,11 +101,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Ships Shipment.</value>
-                    </values>
-                </openapiContext>
             </operation>
         </operations>
     </resource>

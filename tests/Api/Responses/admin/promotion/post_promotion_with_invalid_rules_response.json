@@ -1,8 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "@string@",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "rules[0].configuration[count]",
@@ -54,5 +56,9 @@
             "message": "Promotion rule type is invalid. Available rule types are customer_group, nth_order, shipping_country, has_taxon, total_of_items_from_taxon, contains_product, item_total, cart_quantity.",
             "code": null
         }
-    ]
+    ],
+    "detail": "@string@",
+    "description": "@string@",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

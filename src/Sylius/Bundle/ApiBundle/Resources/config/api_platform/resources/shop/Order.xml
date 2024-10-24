@@ -57,11 +57,6 @@
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
                     <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="order"/>
                 </uriVariables>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Retrieve payment method configuration.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -90,20 +85,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Pickups a new cart.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -114,6 +95,15 @@
                 messenger="input"
                 input="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart"
             >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -132,20 +122,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Adds an item to the cart.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -155,6 +131,15 @@
                 messenger="input"
                 input="Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart"
             >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -173,20 +158,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Addresses cart to given location, logged in Customer does not have to provide an email. Applies coupon to cart.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -200,6 +171,15 @@
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
                     <uriVariable parameterName="orderItemId" fromClass="%sylius.model.order_item.class%" fromProperty="order"/>
                 </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -218,20 +198,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Changes quantity of an item in the cart.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -245,6 +211,15 @@
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
                     <uriVariable parameterName="shipmentId" fromClass="%sylius.model.shipment.class%" fromProperty="order"/>
                 </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -263,20 +238,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Selects a shipping method for particular shipment.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -290,6 +251,15 @@
                     <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%"/>
                     <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="order"/>
                 </uriVariables>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -317,11 +287,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Selects a payment method for particular payment.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -359,11 +324,6 @@
                         </value>
                     </values>
                 </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Completes checkout process.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -404,11 +364,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Changes a payment method as logged shop user.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation
@@ -416,11 +371,6 @@
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/shop/orders/{tokenValue}"
             >
-                <openapiContext>
-                    <values>
-                        <value name="summary">Deletes cart.</value>
-                    </values>
-                </openapiContext>
             </operation>
 
             <operation

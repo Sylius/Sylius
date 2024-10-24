@@ -1,6 +1,12 @@
 {
     "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/422",
     "@type": "hydra:Error",
+    "title": "An error occurred",
+    "detail": "The locale of translation does not match the key. Key: \"en_US\", locale: \"locale\"",
+    "status": 422,
+    "type": "\/errors\/422",
+    "description": "The locale of translation does not match the key. Key: \"en_US\", locale: \"locale\"",
     "hydra:title": "An error occurred",
     "hydra:description": "The locale of translation does not match the key. Key: \"en_US\", locale: \"locale\""
 }
