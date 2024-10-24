@@ -39,7 +39,7 @@ final readonly class PersistProcessor implements ProcessorInterface
         Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
         if (!$this->countryProvincesDeletionChecker->isDeletable($data)) {
-            throw new ResourceDeleteException(message: 'Cannot delete, the Province is in use.');
+            throw new ResourceDeleteException(message: 'Cannot delete, the province is in use.');
         }
 
         return $this->persistProcessor->process($data, $operation, $uriVariables, $context);
