@@ -19,4 +19,7 @@ use Sylius\Component\Payment\Model\GatewayConfigInterface as BaseGatewayConfigIn
 
 interface GatewayConfigInterface extends BaseGatewayConfigInterface, PayumGatewayConfigInterface, CryptedInterface
 {
+    public function getUsePayum(): bool;
+
+    public function setUsePayum(bool $usePayum): void;
 }
