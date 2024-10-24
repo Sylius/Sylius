@@ -14,7 +14,8 @@
 {% endblock %}
 
 {% block item %}
-    <a class="d-inline-block py-1 link-reset" href="{{ item.uri }}">
+    <a class="d-flex align-items-center gap-2 py-1 link-reset" href="{{ item.uri }}">
+        {{ ux_icon(item.labelAttributes.icon, {'class': 'symfony-icon mr-2'}) }}
         {{ item.label|trans }}
     </a>
 {% endblock %}
