@@ -74,3 +74,6 @@ liip_imagine:
 sylius_twig_hooks:
     enable_autoprefixing: true
     hook_name_section_separator: '#'
+
+framework:
+    http_method_override: true
