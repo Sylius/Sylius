@@ -29,6 +29,8 @@
         <service id="sylius.checker.catalog_promotion_eligibility" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker">
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityCheckerInterface"
+                 alias="sylius.checker.catalog_promotion_eligibility" />
 
         <service id="sylius.checker.catalog_promotion.in_for_product_scope_variant" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker">
             <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
