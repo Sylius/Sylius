@@ -59,6 +59,7 @@
     "Payum\\Core\\Action\\ActionInterface",
     "Payum\\Core\\Action\\GatewayAwareAction",
     "Payum\\Core\\Bridge\\Spl\\ArrayObject",
+    "Payum\\Core\\Bridge\\Doctrine\\Storage\\DoctrineStorage",
     "Payum\\Core\\Exception\\RequestNotSupportedException",
     "Payum\\Core\\Extension\\Context",
     "Payum\\Core\\Extension\\ExtensionInterface",
