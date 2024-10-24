@@ -15,9 +15,8 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter;
 
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use ApiPlatform\Exception\ItemNotFoundException;
 use ApiPlatform\Metadata\Exception\InvalidArgumentException;
-use ApiPlatform\Metadata\IriConverterInterface;
+use ApiPlatform\Metadata\Exception\ItemNotFoundException;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;

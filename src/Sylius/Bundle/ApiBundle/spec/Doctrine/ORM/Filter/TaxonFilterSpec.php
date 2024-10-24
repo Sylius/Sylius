@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use ApiPlatform\Exception\ItemNotFoundException;
 use ApiPlatform\Metadata\Exception\InvalidArgumentException;
-use ApiPlatform\Metadata\IriConverterInterface;
+use ApiPlatform\Metadata\Exception\ItemNotFoundException;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\TaxonInterface;
