@@ -5,8 +5,6 @@ imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
     - { resource: 'twig_hooks/**/*.yaml' }
     - { resource: "@SyliusShopBundle/Resources/config/app/sylius/sylius_mailer.yml" }
-    - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
-    - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
 
 parameters:
     sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
