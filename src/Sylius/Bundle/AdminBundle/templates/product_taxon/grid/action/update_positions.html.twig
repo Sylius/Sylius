@@ -8,6 +8,6 @@
         data-action="save-positions#submit"
     {{ sylius_test_html_attribute('save-configuration-button') }}
 >
-    {{ ux_icon(icon: action.icon ?? 'tabler:check', {'class': 'icon dropdown-item-icon' }) }}
+    {{ ux_icon(action.icon ?? 'tabler:check', {'class': 'icon dropdown-item-icon' }) }}
     {{ 'sylius.ui.save_positions'|trans }}
 </button>
