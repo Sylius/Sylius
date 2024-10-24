@@ -29,10 +29,10 @@ final class ResourceRemoveProcessor implements ProcessorInterface
         try {
             $this->decoratedRemoveProcessor->process($data, $operation, $uriVariables, $context);
         } catch (ForeignKeyConstraintViolationException) {
-            $className = (new \ReflectionClass($data))->getShortName();
-            $className = strtolower(preg_replace('/(?<!^)([A-Z])/', ' $1', $className));
+            $shortName = (new \ReflectionClass($data))->getShortName();
+            $resourceName = strtolower(preg_replace('/(?<!^)([A-Z])/', ' $1', $shortName));
 
-            throw new ResourceDeleteException($className);
+            throw new ResourceDeleteException($resourceName);
         }
     }
 }

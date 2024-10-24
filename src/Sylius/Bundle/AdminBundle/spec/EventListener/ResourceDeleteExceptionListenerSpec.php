@@ -44,6 +44,24 @@ final class ResourceDeleteExceptionListenerSpec extends ObjectBehavior
         $this->onResourceDeleteException($event)->shouldReturn(null);
     }
 
+    function it_does_nothing_if_request_comes_from_api(
+        KernelInterface $kernel,
+        Request $request,
+        RequestStack $requestStack,
+        UrlGeneratorInterface $router,
+    ): void {
+        $request->attributes = new ParameterBag(['_api_operation' => 'sylius_api_admin_product_delete']);
+        $request->headers = new HeaderBag(['referer' => '/admin/product/index']);
+        $exception = new ResourceDeleteException('Product');
+        $event = new ExceptionEvent($kernel->getWrappedObject(), $request->getWrappedObject(), HttpKernelInterface::MAIN_REQUEST, $exception);
+
+        $requestStack->getSession()->shouldNotBeCalled();
+
+        $router->generate(Argument::cetera())->shouldNotBeCalled();
+
+        $this->onResourceDeleteException($event);
+    }
+
     function it_redirects_to_referer_if_present_and_adds_flash_message(
         KernelInterface $kernel,
         Request $request,

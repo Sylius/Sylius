@@ -28,7 +28,7 @@ final class ResourceRemoveProcessorSpec extends ObjectBehavior
         $this->beConstructedWith($decoratedRemoveProcessor);
     }
 
-    public function it_processes_data_without_exceptions(ProcessorInterface $decoratedRemoveProcessor, Operation $operation)
+    public function it_processes_data_without_exceptions(ProcessorInterface $decoratedRemoveProcessor, Operation $operation): void
     {
         $data = new Promotion();
         $decoratedRemoveProcessor->process($data, $operation, [], [])->shouldBeCalled();
@@ -36,7 +36,7 @@ final class ResourceRemoveProcessorSpec extends ObjectBehavior
         $this->process($data, $operation, [], []);
     }
 
-    public function it_throws_resource_delete_exception_on_foreign_key_violation(ProcessorInterface $decoratedRemoveProcessor, Operation $operation)
+    public function it_throws_a_resource_delete_exception_on_foreign_key_violation(ProcessorInterface $decoratedRemoveProcessor, Operation $operation): void
     {
         $data = new ShippingMethod();
         $decoratedRemoveProcessor->process($data, $operation, [], [])->willThrow(ForeignKeyConstraintViolationException::class);
