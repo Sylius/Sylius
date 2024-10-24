@@ -1,13 +1,19 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "email: This email is invalid.",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "email",
             "message": "This email is invalid.",
             "code": "@string@"
         }
-    ]
+    ],
+    "detail": "email: This email is invalid.",
+    "description": "email: This email is invalid.",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

@@ -272,7 +272,13 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
         $expectedContent = [
             '@context' => '/api/v2/contexts/Error',
+            '@id' => '/api/v2/errors/' . $code,
             '@type' => 'hydra:Error',
+            'title' => 'An error occurred',
+            'detail' => $message,
+            'status' => $code,
+            'type' => '/errors/' . $code,
+            'description' => $message,
             'hydra:description' => $message,
             'hydra:title' => 'An error occurred',
         ];

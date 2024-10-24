@@ -1,13 +1,19 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "translations[en_US].locale: A translation for the \"en_US\" locale code already exists.",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "translations[en_US].locale",
             "message": "A translation for the \"en_US\" locale code already exists.",
             "code": "@string@"
         }
-    ]
+    ],
+    "detail": "translations[en_US].locale: A translation for the \"en_US\" locale code already exists.",
+    "description": "translations[en_US].locale: A translation for the \"en_US\" locale code already exists.",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

@@ -1,13 +1,19 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "Configuration max entries value must be greater or equal to the min entries value.",
+    "status": 422,
     "violations":[
         {
             "propertyPath": "",
             "message": "Configuration max entries value must be greater or equal to the min entries value.",
             "code": null
         }
-    ]
+    ],
+    "detail": "Configuration max entries value must be greater or equal to the min entries value.",
+    "description": "Configuration max entries value must be greater or equal to the min entries value.",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

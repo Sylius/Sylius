@@ -1,8 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "@string@",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "actions[0].configuration[WEB][amount]",
@@ -39,5 +41,9 @@
             "message": "Promotion action type is invalid. Available action types are order_fixed_discount, unit_fixed_discount, order_percentage_discount, unit_percentage_discount, shipping_percentage_discount.",
             "code": null
         }
-    ]
+    ],
+    "detail": "@string@",
+    "description": "@string@",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

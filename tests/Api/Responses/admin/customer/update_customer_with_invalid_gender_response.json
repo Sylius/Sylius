@@ -1,13 +1,19 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "gender: The value you selected is not a valid choice.",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "gender",
             "message": "The value you selected is not a valid choice.",
             "code": "@string@"
         }
-    ]
+    ],
+    "detail": "gender: The value you selected is not a valid choice.",
+    "description": "gender: The value you selected is not a valid choice.",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

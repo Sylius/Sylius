@@ -1,13 +1,19 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description": "Configuration min entries value must be lower or equal to the number of added choices.",
+    "status": 422,
     "violations":[
         {
             "propertyPath": "",
             "message": "Configuration min entries value must be lower or equal to the number of added choices.",
             "code": null
         }
-    ]
+    ],
+    "detail": "Configuration min entries value must be lower or equal to the number of added choices.",
+    "description": "Configuration min entries value must be lower or equal to the number of added choices.",
+    "type": "\/validation_errors\/@string@",
+    "title": "An error occurred"
 }

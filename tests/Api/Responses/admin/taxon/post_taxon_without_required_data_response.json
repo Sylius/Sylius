@@ -1,8 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
     "hydra:description":"translations[en_US].name: Please enter taxon name.\ntranslations[en_US].slug: Please enter taxon slug.\ncode: Please enter taxon code.",
+    "status": 422,
     "violations":[
         {
             "propertyPath":"translations[en_US].name",
@@ -19,5 +21,9 @@
             "message":"Please enter taxon code.",
             "code": "@string@"
         }
-    ]
+    ],
+    "detail":"translations[en_US].name: Please enter taxon name.\ntranslations[en_US].slug: Please enter taxon slug.\ncode: Please enter taxon code.",
+    "description":"translations[en_US].name: Please enter taxon name.\ntranslations[en_US].slug: Please enter taxon slug.\ncode: Please enter taxon code.",
+    "type":"\/validation_errors\/@string@",
+    "title":"An error occurred"
 }
