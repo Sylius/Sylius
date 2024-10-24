@@ -26,7 +26,7 @@ php bin/console doctrine:migrations:migrate --no-interaction
 if [ "$LOAD_FIXTURES" = "1" ] && [ ! -f "$FIXTURES_INITIALIZED_FILE" ]; then
     # Replace localhost with BASE_DOMAIN in fixtures.yml
     if [ -z "$BASE_DOMAIN" ]; then
-        sed -i "s/localhost/$BASE_DOMAIN/g" vendor/sylius/sylius/src/Sylius/Bundle/CoreBundle/Resources/config/app/fixtures.yml
+        sed -i "s/localhost/$BASE_DOMAIN/g" vendor/sylius/sylius/src/Bundle/CoreBundle/Resources/config/app/fixtures.yml
     fi
 
     php bin/console sylius:fixtures:load --no-interaction

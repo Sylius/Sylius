@@ -26,6 +26,6 @@ Values from collection could be embedded as objects within a `ProductOption` res
 ### Decision and reasoning
 
 Product option values should always be provided with their IRIs. They can exist outside of the `ProductOption` resource 
-(e.g. be [related with](https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Product/Model/ProductVariant.php#L44) `ProductVariant`).
+(e.g. be [related with](https://github.com/Sylius/Sylius/blob/master/src/Component/Product/Model/ProductVariant.php#L44) `ProductVariant`).
 Moreover, values embedded together with their translations in the `ProductOption` that already has its translations would
 result in a massive and unmanageable response.

@@ -59,5 +59,5 @@ Testing
 
 To run tests:
 ```bash
-(cd src/Sylius/Abstraction/StateMachine && vendor/bin/phpunit)
+(cd src/Abstraction/StateMachine && vendor/bin/phpunit)
 ```

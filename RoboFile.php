@@ -49,7 +49,7 @@ class RoboFile extends Tasks
     {
         $symfonyVersion = getenv('SYMFONY_VERSION');
         $unstable = getenv('UNSTABLE');
-        $packagePath = sprintf('%s/src/Sylius/%s', self::ROOT_DIR, $package);
+        $packagePath = sprintf('%s/src/%s', self::ROOT_DIR, $package);
 
         if (false === $symfonyVersion) {
             throw new RuntimeException('SYMFONY_VERSION environment variable is not set.');

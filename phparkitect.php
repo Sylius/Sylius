@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 return static function (Config $config): void
 {
-    $specClassSet = ClassSet::fromDir(__DIR__ . '/src/Sylius/{Behat,Component/*,Bundle/*}/spec');
+    $specClassSet = ClassSet::fromDir(__DIR__ . '/src/{Behat,Component/*,Bundle/*}/spec');
 
     $config->add(
         $specClassSet,
@@ -32,7 +32,7 @@ return static function (Config $config): void
         ,
     );
 
-    $testsClassSet = ClassSet::fromDir(__DIR__ . '{/tests,/src/Sylius/Bundle/*/Tests}');
+    $testsClassSet = ClassSet::fromDir(__DIR__ . '{/tests,/src/Bundle/*/Tests}');
 
     $config->add(
         $testsClassSet,
@@ -43,7 +43,7 @@ return static function (Config $config): void
         ,
     );
 
-    $separationClassSet = ClassSet::fromDir(__DIR__ . '/src/Sylius/{Component,Bundle}');
+    $separationClassSet = ClassSet::fromDir(__DIR__ . '/src/{Component,Bundle}');
 
     $config->add(
         $separationClassSet,

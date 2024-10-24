@@ -15,9 +15,9 @@ Using events allow us to trigger any handler once operation is completed.
 
 * Sylius\ApiBundle\Event\OrderCompleted
 
-Once this event is triggered we handle it with ```src/Sylius/Bundle/ApiBundle/EventHandler/OrderCompletedHandler.php```
+Once this event is triggered we handle it with ```src/Bundle/ApiBundle/EventHandler/OrderCompletedHandler.php```
 
-Then command ```src/Sylius/Bundle/ApiBundle/Command/SendOrderConfirmation.php ``` is dispatched, which triggers command handler (```src/Sylius/Bundle/ApiBundle/CommandHandler/SendOrderConfirmationHandler.php```)
+Then command ```src/Bundle/ApiBundle/Command/SendOrderConfirmation.php ``` is dispatched, which triggers command handler (```src/Bundle/ApiBundle/CommandHandler/SendOrderConfirmationHandler.php```)
  
 SendOrderConfirmationHandler is sending email based on its destination (in this case OrderConfirmation)
 
@@ -41,7 +41,7 @@ $this->emailSender->send(
 
 ### Direct email call
 
-in ```src/Sylius/Bundle/ApiBundle/CommandHandler/Checkout/CompleteOrderHandler.php```
+in ```src/Bundle/ApiBundle/CommandHandler/Checkout/CompleteOrderHandler.php```
 we create direct call to email
 
 ```php
