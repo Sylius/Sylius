@@ -71,7 +71,7 @@ sylius_grid:
                 item:
                     list_payment_requests:
                         type: show
-                        icon: list_letters
+                        icon: "tabler:list-letters"
                         label: sylius.ui.list_payment_requests
                         options:
                             link:
@@ -81,7 +81,7 @@ sylius_grid:
                     complete:
                         type: apply_transition
                         label: sylius.ui.complete
-                        icon: payment
+                        icon: "tabler:credit-card-pay"
                         options:
                             link:
                                 route: sylius_admin_payment_complete

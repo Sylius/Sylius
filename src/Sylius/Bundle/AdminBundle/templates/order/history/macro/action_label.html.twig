@@ -1,16 +1,14 @@
 {%- macro label(log) -%}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
-
     {% if log.action == 'create' %}
         <div class="badge rounded-pill align-middle bg-success text-light d-flex w-fit-content">
-            {{ icon({icon: 'plus'}) }}
+            {{ ux_icon('tabler:plus') }}
             <div class="text-start ps-2">
                 {{ 'sylius.ui.created'|trans }}
             </div>
         </div>
     {% elseif log.action == 'update' %}
         <div class="badge rounded-pill align-middle bg-yellow text-dark d-flex w-fit-content">
-            {{ icon({icon: 'pencil'}) }}
+            {{ ux_icon('tabler:pencil') }}
             <div class="text-start ps-2">
                 {{ 'sylius.ui.updated'|trans }}
             </div>

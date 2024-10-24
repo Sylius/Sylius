@@ -35,26 +35,26 @@ sylius_grid:
                         label: sylius.ui.create
                         options:
                             class: primary
-                            icon: plus
+                            icon: "tabler:plus"
                             header:
-                                icon: cube
+                                icon: "tabler:cube"
                                 label: sylius.ui.type
                             links:
                                 country:
                                     label: sylius.ui.zone_consisting_of_countries
-                                    icon: plus
+                                    icon: "tabler:plus"
                                     route: sylius_admin_zone_create
                                     parameters:
                                         type: country
                                 province:
                                     label: sylius.ui.zone_consisting_of_provinces
-                                    icon: plus
+                                    icon: "tabler:plus"
                                     route: sylius_admin_zone_create
                                     parameters:
                                         type: province
                                 zone:
                                     label: sylius.ui.zone_consisting_of_other_zones
-                                    icon: plus
+                                    icon: "tabler:plus"
                                     route: sylius_admin_zone_create
                                     parameters:
                                         type: zone

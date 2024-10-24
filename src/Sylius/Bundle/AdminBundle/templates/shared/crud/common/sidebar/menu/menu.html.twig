@@ -1,7 +1,5 @@
 {% extends 'knp_menu.html.twig' %}
 
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
-
 {% block root %}
     <ul class="sidebar navbar-nav">
         {{ parent() }}
@@ -94,11 +92,11 @@
     {% set is_active = matcher.isCurrent(item) %}
 
     <a class="dropdown-item {{ is_active ? '' : 'text-muted' }} {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
-        {{ item.label|trans }}{% if target == '_blank' %}{{ icon({ icon: 'external_link', class: 'icon icon-tabler icon-sm ms-1 mb-2 opacity-75' }) }}{% endif %}
+        {{ item.label|trans }}{% if target == '_blank' %}{{ ux_icon('tabler:external-link', {'class': 'icon icon-sm ms-1 mb-2 opacity-75'}) }}{% endif %}
     </a>
 {% endblock %}
 
 {% block icon %}
     {% set icon_name = item.labelAttribute('icon') %}
-    {% if icon_name %}{{ icon({ icon: icon_name }) }}{% endif %}
+    {% if icon_name %}{{ ux_icon(icon_name) }}{% endif %}
 {% endblock %}

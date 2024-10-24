@@ -15,5 +15,5 @@ sylius_admin_channel:
                 templates:
                     form: "@SyliusAdmin/Channel/_form.html.twig"
             index:
-                icon: share alternate
+                icon: "tabler:share"
     type: sylius.resource

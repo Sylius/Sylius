@@ -15,5 +15,5 @@ sylius_admin_product_option:
                 templates:
                     form: "@SyliusAdmin/ProductOption/_form.html.twig"
             index:
-                icon: options
+                icon: "tabler:settings"
     type: sylius.resource

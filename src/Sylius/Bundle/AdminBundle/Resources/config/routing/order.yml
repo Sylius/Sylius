@@ -12,7 +12,7 @@ sylius_admin_order:
             all:
                 subheader: sylius.ui.process_your_orders
             index:
-                icon: cart
+                icon: "tabler:shopping-cart"
     type: sylius.resource
 
 sylius_admin_order_show:
@@ -135,7 +135,7 @@ sylius_admin_order_shipment_ship:
             state_machine:
                 graph: sylius_shipment
                 transition: ship
-            redirect: 
+            redirect:
                 route: sylius_admin_order_show
                 parameters:
                     id: $orderId

@@ -75,7 +75,7 @@ sylius_grid:
                     accept:
                         type: apply_transition
                         label: sylius.ui.accept
-                        icon: check
+                        icon: "tabler:check"
                         options:
                             link:
                                 route: sylius_admin_product_review_accept
@@ -88,7 +88,7 @@ sylius_grid:
                     reject:
                         type: apply_transition
                         label: sylius.ui.reject
-                        icon: x
+                        icon: "tabler:x"
                         options:
                             link:
                                 route: sylius_admin_product_review_reject

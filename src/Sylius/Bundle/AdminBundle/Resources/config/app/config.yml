@@ -3,6 +3,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: '@SyliusAdminBundle/Resources/config/app/twig_hooks/**/*.yaml' }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/*.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/packages/*.yml" }
 
 parameters:
     env(SYLIUS_ADMIN_ROUTING_PATH_NAME): admin

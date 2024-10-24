@@ -7,8 +7,7 @@
     {% block trigger %}
         <div data-bs-toggle="tooltip" data-bs-title="{{ label }}" {{ sylius_test_html_attribute('trigger-button', label) }}>
             {{ button.default({
-                icon: action.icon ?? 'archive',
-                icon_class: 'icon icon-tabler',
+                icon: action.icon ?? 'tabler:archive',
                 icon_only: true,
                 attr: ' data-bs-toggle=modal data-bs-target=#' ~ modal_id,
             }) }}

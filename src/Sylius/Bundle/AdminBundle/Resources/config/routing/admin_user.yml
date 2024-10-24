@@ -16,7 +16,7 @@ sylius_admin_admin_user:
                 templates:
                     form: "@SyliusAdmin/AdminUser/_form.html.twig"
             index:
-                icon: lock
+                icon: "tabler:lock"
     type: sylius.resource
 
 sylius_admin_admin_user_remove_avatar:

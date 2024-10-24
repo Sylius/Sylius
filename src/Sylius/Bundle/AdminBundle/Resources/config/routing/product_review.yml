@@ -15,7 +15,7 @@ sylius_admin_product_review:
                 templates:
                     form: "@SyliusAdmin/ProductReview/_form.html.twig"
             index:
-                icon: newspaper
+                icon: "tabler:news"
     type: sylius.resource
 
 sylius_admin_product_review_accept:

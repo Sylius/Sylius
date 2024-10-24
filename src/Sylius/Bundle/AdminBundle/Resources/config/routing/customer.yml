@@ -15,7 +15,7 @@ sylius_admin_customer:
                 templates:
                     form: "@SyliusAdmin/Customer/_form.html.twig"
             index:
-                icon: users
+                icon: "tabler:users"
     type: sylius.resource
 
 sylius_admin_customer_order_index:

@@ -16,5 +16,5 @@ sylius_admin_customer_group:
                 templates:
                     form: "@SyliusAdmin/CustomerGroup/_form.html.twig"
             index:
-                icon: archive
+                icon: "tabler:archive"
     type: sylius.resource
