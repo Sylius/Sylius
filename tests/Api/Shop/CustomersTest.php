@@ -46,6 +46,22 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_logs_in(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
+
+        $this->requestPost(
+            '/api/v2/shop/customers/token',
+            [
+                'email' => 'oliver@doe.com',
+                'password' => 'sylius',
+            ],
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/customer/log_in_customer_response');
+    }
+
+    /** @test */
     public function it_gets_customer_as_another_logged_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
@@ -72,21 +88,6 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
-    public function it_logs_in(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
-
-        $this->requestPost(
-            '/api/v2/shop/customers/token',
-            [
-                'email' => 'oliver@doe.com',
-                'password' => 'sylius',
-            ],
-        );
-
-        $this->assertResponse($this->client->getResponse(), 'shop/customer/log_in_customer_response');
-    }
 
     /** @test */
     public function it_registers_a_new_customer(): void
