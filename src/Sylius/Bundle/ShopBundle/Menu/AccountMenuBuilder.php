@@ -34,27 +34,27 @@ final class AccountMenuBuilder
         $menu
             ->addChild('dashboard', ['route' => 'sylius_shop_account_dashboard'])
             ->setLabel('sylius.menu.shop.account.dashboard')
-            ->setLabelAttribute('icon', 'home')
+            ->setLabelAttribute('icon', 'tabler:home')
         ;
         $menu
             ->addChild('personal_information', ['route' => 'sylius_shop_account_profile_update'])
             ->setLabel('sylius.menu.shop.account.personal_information')
-            ->setLabelAttribute('icon', 'user')
+            ->setLabelAttribute('icon', 'tabler:user')
         ;
         $menu
             ->addChild('change_password', ['route' => 'sylius_shop_account_change_password'])
             ->setLabel('sylius.menu.shop.account.change_password')
-            ->setLabelAttribute('icon', 'lock')
+            ->setLabelAttribute('icon', 'tabler:lock')
         ;
         $menu
             ->addChild('address_book', ['route' => 'sylius_shop_account_address_book_index'])
             ->setLabel('sylius.menu.shop.account.address_book')
-            ->setLabelAttribute('icon', 'book')
+            ->setLabelAttribute('icon', 'tabler:book')
         ;
         $menu
             ->addChild('order_history', ['route' => 'sylius_shop_account_order_index'])
             ->setLabel('sylius.menu.shop.account.order_history')
-            ->setLabelAttribute('icon', 'cart')
+            ->setLabelAttribute('icon', 'tabler:shopping-cart')
         ;
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
