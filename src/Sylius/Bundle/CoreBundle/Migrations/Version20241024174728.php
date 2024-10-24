@@ -25,7 +25,7 @@ final class Version20241024174728 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE sylius_gateway_config ADD use_payum TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE sylius_gateway_config ADD use_payum TINYINT(1) DEFAULT 1 NOT NULL');
     }
 
     public function down(Schema $schema): void
