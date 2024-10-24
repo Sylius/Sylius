@@ -46,6 +46,9 @@ sylius_twig_hooks:
         'sylius_admin.payment_method.update.content.form.sections.gateway_configuration':
             type:
                 template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/type.html.twig'
+                priority: 100
+            use_payum:
+                template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/use_payum.html.twig'
                 priority: 0
 
         'sylius_admin.payment_method.update.content.form.sections.translations':

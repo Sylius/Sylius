@@ -17,6 +17,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="sylius_payum.form.extension.type.payum_gateway_config" class="Sylius\Bundle\PayumBundle\Form\Extension\PayumGatewayConfigTypeExtension">
+            <argument type="service" id="payum" />
+            <argument type="service" id="sylius.command_provider.payment_request.default" />
+            <tag name="form.type_extension" priority="200" />
+        </service>
         <service id="sylius_payum.form.extension.type.crypted_gateway_config" class="Sylius\Bundle\PayumBundle\Form\Extension\CryptedGatewayConfigTypeExtension">
             <argument type="service" id="payum.dynamic_gateways.cypher" on-invalid="null" />
             <tag name="form.type_extension" priority="100" />

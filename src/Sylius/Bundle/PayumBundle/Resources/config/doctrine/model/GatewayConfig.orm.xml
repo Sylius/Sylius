@@ -16,5 +16,11 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
-    <mapped-superclass name="Sylius\Bundle\PayumBundle\Model\GatewayConfig" table="sylius_gateway_config" />
+    <mapped-superclass name="Sylius\Bundle\PayumBundle\Model\GatewayConfig" table="sylius_gateway_config">
+        <field type="boolean" name="usePayum" column="use_payum" >
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+    </mapped-superclass>
 </doctrine-mapping>

@@ -20,12 +20,23 @@ class GatewayConfig extends BaseGatewayConfig implements GatewayConfigInterface
 {
     /** @var array<string, mixed> */
     protected array $decryptedConfig;
+    protected bool $usePayum = true;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->decryptedConfig = [];
+    }
+
+    public function getUsePayum(): bool
+    {
+        return $this->usePayum;
+    }
+
+    public function setUsePayum(bool $usePayum): void
+    {
+        $this->usePayum = $usePayum;
     }
 
     public function getConfig(): array

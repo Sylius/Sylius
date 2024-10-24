@@ -32,5 +32,7 @@ sylius:
             instructions: Instructions
             name: Name
             position: Position
+        gateway_config:
+            type: Type
     gateway_factory:
         offline: Offline
