@@ -197,7 +197,6 @@
                 name="sylius_api_admin_promotion_promotion_coupon_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
-                processor="sylius_api.state_processor.admin.promotion.promotion_coupon.remove"
             >
                 <uriVariables>
                     <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"

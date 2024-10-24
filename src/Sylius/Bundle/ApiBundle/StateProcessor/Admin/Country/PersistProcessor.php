@@ -16,9 +16,9 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Webmozart\Assert\Assert;
 
 /** @implements ProcessorInterface<CountryInterface> */
@@ -39,7 +39,7 @@ final readonly class PersistProcessor implements ProcessorInterface
         Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
         if (!$this->countryProvincesDeletionChecker->isDeletable($data)) {
-            throw new ProvinceCannotBeRemoved();
+            throw new ResourceDeleteException(message: 'Cannot delete, the province is in use.');
         }
 
         return $this->persistProcessor->process($data, $operation, $uriVariables, $context);

@@ -256,7 +256,6 @@ Example configuration for a `select` type attribute:
                 name="sylius_api_admin_product_attribute_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/product-attributes/{code}"
-                processor="sylius_api.state_processor.admin.product_attribute.remove"
             />
         </operations>
     </resource>

@@ -389,7 +389,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Cannot delete, the Province is in use.',
+            'Cannot delete, the province is in use.',
         );
     }
 

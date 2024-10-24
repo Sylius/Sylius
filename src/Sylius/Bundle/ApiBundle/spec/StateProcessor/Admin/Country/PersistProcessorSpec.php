@@ -18,9 +18,9 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 
 final class PersistProcessorSpec extends ObjectBehavior
 {
@@ -76,7 +76,7 @@ final class PersistProcessorSpec extends ObjectBehavior
         $persistProcessor->process(Argument::cetera())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(ProvinceCannotBeRemoved::class)
+            ->shouldThrow(ResourceDeleteException::class)
             ->during('process', [$country, $operation, $uriVariables, $context])
         ;
     }

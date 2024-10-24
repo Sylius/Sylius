@@ -17,8 +17,8 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\State\ProcessorInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 final class RemoveProcessorSpec extends ObjectBehavior
@@ -56,7 +56,7 @@ final class RemoveProcessorSpec extends ObjectBehavior
         $removeProcessor->process(Argument::cetera())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(ChannelCannotBeRemoved::class)
+            ->shouldThrow(ResourceDeleteException::class)
             ->during('process', [$channel, new Delete(), $uriVariables, $context])
         ;
     }

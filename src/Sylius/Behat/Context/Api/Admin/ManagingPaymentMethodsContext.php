@@ -737,7 +737,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Cannot remove, the payment method is in use.',
+            'Cannot delete, the payment method is in use.',
         );
     }
 

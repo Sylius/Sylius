@@ -16,10 +16,9 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 /** @implements ProcessorInterface<ChannelInterface> */
@@ -37,7 +36,7 @@ final readonly class RemoveProcessor implements ProcessorInterface
         Assert::isInstanceOf($operation, DeleteOperationInterface::class);
 
         if (!$this->channelDeletionChecker->isDeletable($data)) {
-            throw new ChannelCannotBeRemoved('The channel cannot be deleted. At least one enabled channel is required.', Response::HTTP_UNPROCESSABLE_ENTITY);
+            throw new ResourceDeleteException(message: 'The channel cannot be deleted. At least one enabled channel is required.');
         }
 
         $this->removeProcessor->process($data, $operation, $uriVariables, $context);

@@ -250,7 +250,6 @@ Example configuration for `flat_rate` shipping charges calculator:
                 name="sylius_api_admin_shipping_method_delete"
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/shipping-methods/{code}"
-                processor="sylius_api.state_processor.admin.shipping_method.remove"
             />
         </operations>
     </resource>

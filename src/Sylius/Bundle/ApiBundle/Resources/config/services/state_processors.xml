@@ -46,53 +46,10 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius_api.state_processor.admin.payment_method.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\PaymentMethod\RemoveProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
         <service id="sylius_api.state_processor.admin.avatar_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius_api.creator.avatar_image" />
             <argument type="service" id="sylius.repository.avatar_image" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service id="sylius_api.state_processor.admin.product.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Product\RemoveProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service id="sylius_api.state_processor.admin.product_variant.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductVariant\RemoveProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service id="sylius_api.state_processor.admin.product_option.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductOption\PersistProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service id="sylius_api.state_processor.admin.product_attribute.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductAttribute\RemoveProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service
-            id="sylius_api.state_processor.admin.promotion.promotion_coupon.remove"
-            class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\PromotionCoupon\RemoveProcessor"
-        >
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service id="sylius_api.state_processor.admin.shipping_method.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ShippingMethod\RemoveProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service id="sylius_api.state_processor.admin.promotion.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\RemoveProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
             <tag name="api_platform.state_processor" />
         </service>
 
@@ -125,6 +82,15 @@
             id="sylius_api.state_processor.common.messenger.persist"
             class="Sylius\Bundle\ApiBundle\StateProcessor\Common\MessengerPersistProcessor"
             decorates="api_platform.state_processor.write"
+        >
+            <argument type="service" id=".inner" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service
+            id="sylius_api.state_processor.admin.common.remove"
+            class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Common\ResourceRemoveProcessor"
+            decorates="api_platform.doctrine.orm.state.remove_processor"
         >
             <argument type="service" id=".inner" />
             <tag name="api_platform.state_processor" />

@@ -37,12 +37,16 @@ final readonly class ResourceDeleteExceptionListener
             return;
         }
 
+        $eventRequest = $event->getRequest();
+        if ($eventRequest->attributes->has('_api_operation')) {
+            return;
+        }
+
         FlashBagProvider::getFlashBag($this->requestStack)->add('error', [
             'message' => 'sylius.resource.delete_error',
             'parameters' => ['%resource%' => $exception->getResourceName()],
         ]);
 
-        $eventRequest = $event->getRequest();
         $requestAttributes = $eventRequest->attributes;
         $originalRoute = $requestAttributes->get('_route', '');
 

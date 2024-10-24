@@ -15,8 +15,8 @@ namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
 use Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException;
-use Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -68,7 +68,7 @@ final readonly class TaxonDeletionEventSubscriber implements EventSubscriberInte
         }
 
         if ($this->taxonInPromotionRuleChecker->isInUse($taxon)) {
-            throw new TaxonCannotBeRemoved('Cannot delete a taxon that is in use by a promotion rule.');
+            throw new ResourceDeleteException(message: 'Cannot delete a taxon that is in use by a promotion rule.');
         }
     }
 }
