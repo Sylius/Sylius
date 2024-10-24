@@ -47,9 +47,9 @@ final readonly class PostResultExtension implements QueryResultItemExtensionInte
     public function supportsResult(string $resourceClass, ?Operation $operation = null, array $context = []): bool
     {
         return
-            $operation instanceof Post
-            && $this->sectionProvider->getSection() instanceof AdminApiSection
-            && is_a($resourceClass, PromotionCouponInterface::class, true)
+            $operation instanceof Post &&
+            $this->sectionProvider->getSection() instanceof AdminApiSection &&
+            is_a($resourceClass, PromotionCouponInterface::class, true)
         ;
     }
 
