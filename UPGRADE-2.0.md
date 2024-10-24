@@ -1139,6 +1139,8 @@ If your app never changed the hasher name configuration, you don't need to confi
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
 
+* Image sizes have been simplified and standardized for both the Admin and Shop Bundle.
+
 * Some Twig extension services have been moved from the UiBundle to the new Twig Extra package
 
 * The following classes have been removed:
