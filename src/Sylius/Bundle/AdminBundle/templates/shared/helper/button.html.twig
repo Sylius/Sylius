@@ -1,6 +1,4 @@
 {% macro default(params = {}) %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
-
     {% set params = {
         attr: null,
         class: null,
@@ -31,7 +29,7 @@
             {% if params.disabled %}aria-disabled="true"{% endif %}
             {% if params.dropdown %}data-bs-toggle="dropdown"{% endif %}
             {{ params.attr is iterable ? block('attributes') : (params.attr ? ' ' ~ params.attr) }}>
-            {{ params.icon ? icon({ icon: params.icon, class: params.icon_class }) }}
+            {{ params.icon ? ux_icon(params.icon, {'class': params.icon_class|default('') }) }}
             {{ not params.icon_only ? params.text }}
         </a>
     {% else %}
@@ -42,7 +40,7 @@
             {% if params.disabled %}disabled{% endif %}
             {% if params.dropdown %}data-bs-toggle="dropdown"{% endif %}
             {{ params.attr is iterable ? block('attributes') : (params.attr ? ' ' ~ params.attr) }}>
-            {{ params.icon ? icon({ icon: params.icon, class: params.icon_class }) }}
+            {{ params.icon ? ux_icon(params.icon, {'class': params.icon_class|default('') }) }}
             {{ not params.icon_only ? params.text }}
         </button>
     {% endif %}

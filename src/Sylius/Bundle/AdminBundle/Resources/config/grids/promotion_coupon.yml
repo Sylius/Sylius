@@ -46,7 +46,7 @@ sylius_grid:
                     generate:
                         type: default
                         label: sylius.ui.generate
-                        icon: arrows-split
+                        icon: "tabler:arrows-split"
                         options:
                             link:
                                 route: sylius_admin_promotion_coupon_generate

@@ -15,7 +15,7 @@ sylius_admin_payment_method:
                 templates:
                     form: "@SyliusAdmin/PaymentMethod/_form.html.twig"
             index:
-                icon: payment
+                icon: "tabler:credit-card-pay"
     type: sylius.resource
 
 sylius_admin_payment_method_create:

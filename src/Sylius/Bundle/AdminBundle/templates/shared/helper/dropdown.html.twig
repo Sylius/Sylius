@@ -26,8 +26,6 @@
 {% endmacro %}
 
 {% macro list(params, items) %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
-
     {% set content %}
         {% for item in items %}
             {% set item = {
@@ -43,7 +41,7 @@
             {% else %}
                 {% set extra_class = item.class ? ' ' ~ item.class %}
                 <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}" {{ sylius_test_html_attribute('user-dropdown-item', item.title|trans({}, null, 'en_US')) }}>
-                    {{ item.icon ? icon({ icon: item.icon, class: 'icon dropdown-item-icon icon-tabler' ~ extra_class }) }}
+                    {{ item.icon ? ux_icon(item.icon, {'class': 'icon dropdown-item-icon ' ~ extra_class }) }}
                     {{ item.title|trans }}
                 </a>
             {% endif %}

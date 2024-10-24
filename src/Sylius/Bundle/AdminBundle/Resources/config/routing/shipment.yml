@@ -10,7 +10,7 @@ sylius_admin_shipment:
             all:
                 subheader: sylius.ui.manage_shipments
             index:
-                icon: truck
+                icon: "tabler:truck"
     type: sylius.resource
 
 sylius_admin_shipment_ship:

@@ -13,7 +13,7 @@ sylius_admin_zone:
             all:
                 subheader: sylius.ui.manage_geographical_zones
             index:
-                icon: world
+                icon: "tabler:world"
     type: sylius.resource
 
 sylius_admin_zone_create:

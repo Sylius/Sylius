@@ -3,7 +3,7 @@
 {{ dropdown.list(
     {
         direction: 'down-end',
-        button: { text: 'sylius.ui.create'|trans, icon: 'plus' }
+        button: { text: 'sylius.ui.create'|trans, icon: 'tabler:plus' }
     },
     sylius_admin_get_payment_gateways()|map((gatewayName, gatewayServiceId) => {
         title: gatewayName|trans,

@@ -114,7 +114,7 @@ sylius_grid:
                         type: show
                     show_variants:
                         type: show
-                        icon: list_letters
+                        icon: "tabler:list-letters"
                         label: sylius.ui.list_variants
                         options:
                             link:

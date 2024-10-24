@@ -15,5 +15,5 @@ sylius_admin_product_association_type:
                 templates:
                     form: "@SyliusAdmin/ProductAssociationType/_form.html.twig"
             index:
-                icon: tasks
+                icon: "tabler:subtask"
     type: sylius.resource

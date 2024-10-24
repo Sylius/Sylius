@@ -10,7 +10,7 @@ sylius_admin_payment:
             all:
                 subheader: sylius.ui.manage_payments
             index:
-                icon: payment
+                icon: "tabler:credit-card-pay"
     type: sylius.resource
 
 sylius_admin_payment_complete:

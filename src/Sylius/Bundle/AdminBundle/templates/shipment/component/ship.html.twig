@@ -1,7 +1,6 @@
 {# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\Shipment\ShipFormComponent #}
 
 {% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 {% set path = path|default('sylius_admin_shipment_ship') %}
 {% set path_parameters = path_parameters|default({id: resource.id}) %}
@@ -13,7 +12,7 @@
         <div class="input-group flex-nowrap">
             {{ form_widget(form.tracking, sylius_test_form_attribute('shipment-tracking')|sylius_merge_recursive({'attr': {'placeholder': 'sylius.ui.tracking_code'|trans ~ '...', 'style': 'min-width: 130px;'}})) }}
             <button type="submit" class="btn" {{ sylius_test_html_attribute('shipment-ship-button') }}>
-                {{ icon({icon: 'truck'}) }}
+                {{ ux_icon('tabler:truck') }}
                 {{ 'sylius.ui.ship'|trans }}
             </button>
         </div>

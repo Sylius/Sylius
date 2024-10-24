@@ -1,7 +1,5 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
-
 {% set payment = hookable_metadata.context.payment %}
 
 <a title="details" href="{{ path('sylius_admin_payment_request_index', {'paymentId': payment.id}) }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.list_payment_requests'|trans }}" {{ sylius_test_html_attribute('list-payment-requests') }}>
-    {{ icon({ icon: 'list_letters', class: 'icon icon-tabler' }) }}
+    {{ ux_icon('tabler:list-letters') }}
 </a>

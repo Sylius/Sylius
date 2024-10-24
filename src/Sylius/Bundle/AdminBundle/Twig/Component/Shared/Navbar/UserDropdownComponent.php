@@ -48,12 +48,12 @@ class UserDropdownComponent
             [
                 'title' => 'sylius.ui.my_account',
                 'url' => $this->urlGenerator->generate('sylius_admin_admin_user_update', ['id' => $this->getUser()->getId()]),
-                'icon' => 'user',
+                'icon' => 'tabler:user',
             ],
             [
                 'title' => 'sylius.ui.logout',
                 'url' => $this->urlGenerator->generate('sylius_admin_logout'),
-                'icon' => 'logout',
+                'icon' => 'tabler:logout',
             ],
             [
                 'type' => 'divider',

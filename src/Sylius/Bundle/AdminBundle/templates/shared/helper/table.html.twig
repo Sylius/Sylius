@@ -23,7 +23,6 @@
 
 {% macro row(grid, definition, row) %}
     {% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <tr class="item" {{ sylius_test_html_attribute('row') }} {{ sylius_test_html_attribute('resource-id', row.id) }}>
         {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
@@ -49,7 +48,7 @@
                         {% endset %}
                         {% set more_button %}
                             <button class="btn btn-icon dropdown-static" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.more'|trans }}">
-                                {{ icon({ icon: 'dots', class: 'icon icon-tabler' }) }}
+                                {{ ux_icon('tabler:dots') }}
                             </button>
                         {% endset %}
                         {% if subactions|trim|length > 0 %}

@@ -15,7 +15,7 @@ sylius_admin_promotion:
                 templates:
                     form: "@SyliusAdmin/Promotion/_form.html.twig"
             index:
-                icon: in cart
+                icon: "tabler:shopping-cart-down"
             update:
                 templates:
                     form: "@SyliusAdmin/Promotion/_form.html.twig"

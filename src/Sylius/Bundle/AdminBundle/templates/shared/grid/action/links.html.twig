@@ -1,12 +1,10 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
-
 {% set visible = options.visible is defined ? options.visible : true %}
 
 {% if visible %}
     <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
             {% if options.icon is defined %}
-                {{ icon({ icon: options.icon, class: 'icon icon-tabler' }) }}
+                {{ ux_icon(options.icon) }}
             {% endif %}
             {{ action.label|trans }}
         </button>
@@ -23,7 +21,7 @@
                     <li>
                         <a class="dropdown-item" href="{{ path }}">
                             {% if link.icon is defined %}
-                                {{ icon({ icon: link.icon, class: 'icon icon-tabler dropdown-item-icon' }) }}
+                                {{ ux_icon(link.icon, {'class': 'icon dropdown-item-icon'}) }}
                             {% endif %}
                             {{ link.label|trans }}
                         </a>

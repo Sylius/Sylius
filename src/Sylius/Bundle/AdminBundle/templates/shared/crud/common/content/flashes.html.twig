@@ -1,7 +1,13 @@
 {% set session = _context.app.session|default(null) %}
 
 {% if session is not null and session.started %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+    {% set icons = {
+        'success': 'tabler:circle-check',
+        'error': 'tabler:exclamation-circle',
+        'info': 'tabler:info-circle',
+        'warning': 'tabler:alert-triangle',
+    } %}
+
     <div class="container-xl mt-3" {{ sylius_test_html_attribute('sylius-flashes-container') }}>
         {% for type in ['success', 'error', 'info', 'warning'] %}
             {% for flash in session.flashbag.get(type) %}
@@ -14,7 +20,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
                             <div>
-                                {{ icon({ icon: type == 'error' ? 'danger' : type }) }}
+                                {{ ux_icon(icons[type]) }}
                             </div>
                             <div class="mx-2">
                                 <h4 class="alert-title">
@@ -31,7 +37,7 @@
                             </div>
                         </div>
                         <span class="justify-self-end close" data-bs-dismiss="alert" aria-label="Close">
-                            {{ icon({icon: 'x'}) }}
+                            {{ ux_icon('tabler:x') }}
                         </span>
                     </div>
                 </div>

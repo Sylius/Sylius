@@ -15,7 +15,7 @@ sylius_admin_product_attribute:
                 templates:
                     form: "@SyliusAdmin/ProductAttribute/_form.html.twig"
             index:
-                icon: cubes
+                icon: "tabler:cube-spark"
     type: sylius.resource
 
 sylius_admin_product_attribute_create:

@@ -15,5 +15,5 @@ sylius_admin_tax_category:
                 templates:
                     form: "@SyliusAdmin/TaxCategory/_form.html.twig"
             index:
-                icon: tags
+                icon: "tabler:tags"
     type: sylius.resource

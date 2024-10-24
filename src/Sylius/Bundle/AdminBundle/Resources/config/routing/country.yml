@@ -13,5 +13,5 @@ sylius_admin_country:
             all:
                 subheader: sylius.ui.manage_shipping_destinations
             index:
-                icon: flag
+                icon: "tabler:flag"
     type: sylius.resource

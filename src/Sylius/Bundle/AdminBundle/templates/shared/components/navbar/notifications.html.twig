@@ -1,18 +1,17 @@
 {# Rendered by \Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent #}
 
 {% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 <div class="nav-item">
     {% set dropdown_trigger %}
         {% if notifications %}
             <a href="#" class="nav-link px-0">
-                {{ icon({ icon: 'bell' }) }}
+                {{ ux_icon('tabler:bell') }}
                 <span class="badge bg-red"></span>
             </a>
         {% else %}
             <div class="nav-link px-0 text-muted">
-                {{ icon({ icon: 'bell' }) }}
+                {{ ux_icon('tabler:bell') }}
             </div>
         {% endif %}
     {% endset %}

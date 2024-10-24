@@ -15,5 +15,5 @@ sylius_admin_shipping_category:
                 templates:
                     form: "@SyliusAdmin/ShippingCategory/_form.html.twig"
             index:
-                icon: list layout
+                icon: "tabler:layout-list"
     type: sylius.resource
