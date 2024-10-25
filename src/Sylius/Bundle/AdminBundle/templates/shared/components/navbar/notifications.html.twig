@@ -2,6 +2,10 @@
 
 {% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
 
+{% set notifications = [
+    {text: 'There is a new version of Sylius available. Contact your technician to upgrade.'},
+] %}
+
 <div class="nav-item">
     {% set dropdown_trigger %}
         {% if notifications %}
@@ -37,7 +41,7 @@
                                 </div>
                                 <div class="col-auto mb-auto">
                                     <div class="close" data-bs-dismiss="alert" aria-label="Close">
-                                        {{ icon({ icon: 'x', class: 'icon icon-sm' }) }}
+                                        {{ ux_icon('tabler:x', { class: 'icon icon-sm' }) }}
                                     </div>
                                 </div>
                             </div>
