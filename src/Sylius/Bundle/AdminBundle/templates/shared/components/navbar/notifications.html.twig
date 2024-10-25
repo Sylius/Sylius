@@ -25,7 +25,7 @@
             {% else %}
                 <div class="list-group list-group-flush list-group-hoverable">
                     {% for notification in notifications %}
-                        <div class="list-group-item">
+                        <div class="list-group-item alert mb-0" role="alert">
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <span class="status-dot status-dot-animated bg-red d-block"></span>
@@ -33,6 +33,11 @@
                                 <div class="col">
                                     <div class="d-block mt-n1">
                                         {{ notification.message|trans }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="close" data-bs-dismiss="alert" aria-label="Close">
+                                        {{ icon({ icon: 'x', class: 'icon icon-sm' }) }}
                                     </div>
                                 </div>
                             </div>
@@ -47,6 +52,7 @@
         class: 'dropdown-menu-card',
         customTrigger: dropdown_trigger,
         content: dropdown_content,
-        direction: 'down-end'
+        direction: 'down-end',
+        auto_close: 'outside'
     }) }}
 </div>
