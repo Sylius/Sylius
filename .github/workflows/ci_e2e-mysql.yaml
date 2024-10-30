@@ -19,7 +19,7 @@ permissions:
 
 jobs:
     get-matrix:
-        runs-on: ubuntu-latest
+        runs-on: sylius-runner
         name: "Get matrix"
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
@@ -43,7 +43,7 @@ jobs:
 
     behat-no-js:
         needs: get-matrix
-        runs-on: ubuntu-latest
+        runs-on: sylius-runner
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
         timeout-minutes: 45
         strategy:
@@ -132,7 +132,7 @@ jobs:
 
     behat-ui-js-chromedriver:
         needs: get-matrix
-        runs-on: ubuntu-latest
+        runs-on: sylius-runner
         name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
         timeout-minutes: 45
         strategy:
@@ -213,7 +213,7 @@ jobs:
 
     behat-ui-js-panther:
         needs: get-matrix
-        runs-on: ubuntu-latest
+        runs-on: sylius-runner
         name: "JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
         timeout-minutes: 45
         strategy:
