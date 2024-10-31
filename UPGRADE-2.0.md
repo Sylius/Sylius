@@ -38,12 +38,86 @@
 
 ## Dependencies
 
-* The following dependencies have been removed, install them in your application, if you still want to use Winzou State Machine:
+### Replaced:
+
+* The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
+
+### Removed:
+
+* Removed from main composer.json:
+
+    * `payum/paypal-express-checkout-nvp`
+    * `payum/stripe`
+    * `stripe/stripe-php`
+    * `sylius/theme-bundle`
+
+* Removed from bundles:
+
+    * `AdminBundle`:
+        * `twig/intl-extra`
+    * `ApiBundle`:
+        * `sylius/payum-bundle`
+    * `AttributeBundle`:
+        * `friendsofsymfony/rest-bundle`
+        * `jms/serializer-bundle`
+    * `ChannelBundle`:
+        * `friendsofsymfony/rest-bundle`
+        * `jms/serializer-bundle`
+    * `CoreBundle`:
+        * `sylius/payum-bundle`
+        * `sylius/theme-bundle`
+        * `sylius/ui-bundle`
+        * `symfony/templating`
+        * `jms/serializer-bundle`
+        * `sonata-project/block-bundle`
+        * `sylius-labs/polyfill-symfony-framework-bundle`
+    * `CurrencyBundle`:
+        * `friendsofsymfony/rest-bundle`
+        * `jms/serializer-bundle`
+        * `symfony/templating`
+    * `InventoryBundle`:
+        * `friendsofsymfony/rest-bundle`
+        * `jms/serializer-bundle`
+        * `symfony/templating`
+    * `LocaleBundle`:
+        * `friendsofsymfony/rest-bundle`
+        * `jms/serializer-bundle`
+        * `symfony/templating`
+    * `MoneyBundle`:
+        * `friendsofsymfony/rest-bundle`
+        * `jms/serializer-bundle`
+        * `symfony/templating`
+    * `OrderBundle`:
+        * `sylius-labs/polyfill-symfony-framework-bundle`
+        * `symfony/templating`
+    * `PayumBundle`:
+        * `sylius/core`
+    * `ProductBundle`
+        * `friendsofsymfony/rest-bundle`
+        * `jms/serializer-bundle`
+    * `PromotionBundle`
+        * `sylius/calendar`
+    * `ShippingBundle`
+        * `sylius/calendar`
+    * `ShopBundle`
+        * `twig/intl-extra`
+    * `TaxationBundle`
+        * `sylius/calendar`
+    * `UiBundle`
+        * `sonata-project/block-bundle`
+        * `sylius-labs/polyfill-symfony-event-dispatcher`
+        * `sylius-labs/polyfill-symfony-framework-bundle`
+        * `symfony/templating`
+    * `UserBundle`
+        * `sylius-labs/polyfill-symfony-event-dispatcher`
+        * `sylius-labs/polyfill-symfony-framework-bundle`
+
+### Optional
+
+* Removed from required and made suggested, install them in your application, if you still want to use Winzou State Machine:
 
     * `winzou/state-machine`
     * `winzou/state-machine-bundle`
-
-* The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
 
 ## Service Container
 
