@@ -5,6 +5,10 @@ parameters:
 sylius_api:
     enabled: true
 
+sylius_admin:
+    notifications:
+        hub_enabled: false
+
 sylius_state_machine_abstraction:
     graphs_to_adapters_mapping:
         sylius_catalog_promotion: '%test_sylius_state_machine_adapter%'
