@@ -34,7 +34,7 @@ final class Configuration implements ConfigurationInterface
                             ->defaultTrue()
                         ->end()
                         ->booleanNode('hub_enabled')
-                            ->defaultTrue()
+                            ->defaultFalse()
                         ->end()
                         ->integerNode('frequency')
                             ->defaultValue(60)
