@@ -5,16 +5,17 @@
         button: {},
         class: null,
         content: null,
-        customTrigger: null,
-        direction: 'down'
+        custom_trigger: null,
+        direction: 'down',
+        auto_close: 'true'
     }|merge(params) %}
 
     {% if params.direction == 'down' %}{% set drop = '' %}{% endif %}
     {% if params.direction == 'down-end' %}{% set drop = ' dropdown-menu-end' %}{% endif %}
 
     <div class="dropdown">
-        {% if params.customTrigger %}
-            <div data-bs-toggle="dropdown">{{ params.customTrigger }}</div>
+        {% if params.custom_trigger %}
+            <div data-bs-toggle="dropdown" data-bs-auto-close="{{ params.auto_close }}">{{ params.custom_trigger }}</div>
         {% else %}
             {{ button.default(params.button|merge({ dropdown: true })) }}
         {% endif %}
