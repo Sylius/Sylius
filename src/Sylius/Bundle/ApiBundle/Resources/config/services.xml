@@ -25,10 +25,6 @@
     </parameters>
 
     <services>
-<!--        <service id="sylius_api.extractor.property_info.empty_property_list" class="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">-->
-<!--            <tag name="property_info.list_extractor" priority="-2000" />-->
-<!--        </service>-->
-
         <service id="sylius_api.changer.payment_method" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
