@@ -848,6 +848,7 @@ and maintainability of the application and also follows Symfony's best practices
 * `Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter`
 * `Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter`
 * `Sylius\Bundle\ApiBundle\Filter\ShippingMethodFilter`
+* `Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor`
 * `Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler`
 * `Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer`
 * `Sylius\Bundle\ApiBundle\SerializerContextBuilder\ReadOperationContextBuilder`
@@ -1122,7 +1123,6 @@ and maintainability of the application and also follows Symfony's best practices
 | `Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator`                                        | `sylius_api.validator.unique_reviewer_email`                                                        |
 | `Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpiredValidator`                          | `sylius_api.validator.admin_reset_password_token_non_expired`                                       |
 | `sylius.validator.order_address_requirement`                                                                        | `sylius_api.validator.order_address_requirement`                                                    |
-| `Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor`                                         | `sylius_api.extractor.property_info.empty_property_list`                                            |
 | `Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver`                                           | `sylius_api.section_resolver.admin_api_uri_based`                                                   |
 | `Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver`                                            | `sylius_api.section_resolver.shop_api_uri_based`                                                    |
 | `Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener`                                                       | `sylius_api.listener.api_cart_blamer`                                                               |
