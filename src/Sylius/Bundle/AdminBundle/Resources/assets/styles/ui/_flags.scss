@@ -37,6 +37,16 @@ $countries: (
     }
 }
 
+.flag-sm {
+    height: 1rem;
+    vertical-align: -3px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: var(--tblr-border-width) var(--tblr-border-style) var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+}
+
 @include flag("na", "af");
 @include flag("gh", "ak");
 @include flag("et", "am");
@@ -109,7 +119,6 @@ $countries: (
 @include flag("ge", "os");
 @include flag("ae", "pa");
 @include flag("af", "ps");
-@include flag("ao", "pt");
 @include flag("bo", "qu");
 @include flag("ch", "rm");
 @include flag("bi", "rn");
@@ -149,7 +158,3 @@ $countries: (
 @include flag("cn", "za");
 @include flag("cn", "zh");
 @include flag("za", "zu");
-
-.flag-country-001 {
-    background-image: url("../../images/flags/un.svg");
-}

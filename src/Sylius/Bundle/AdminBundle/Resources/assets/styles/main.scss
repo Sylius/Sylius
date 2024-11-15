@@ -10,7 +10,6 @@
 @import "variables";
 
 @import "@tabler/core/src/scss/tabler.scss";
-@import "@tabler/core/src/scss/tabler-flags.scss";
 
 @import "body";
 @import "alert";
@@ -18,7 +17,6 @@
 @import "collapse";
 @import "datatable";
 @import "filters";
-@import "flags";
 @import "flashes";
 @import "form";
 @import "infinite-tree";
@@ -32,3 +30,4 @@
 @import "tom-select";
 @import "utils";
 @import "ui/icons";
+@import "ui/flags";
