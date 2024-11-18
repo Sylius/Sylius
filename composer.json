@@ -85,7 +85,7 @@
         "sylius/resource-bundle": "^1.12",
         "sylius/theme-bundle": "^2.4",
         "sylius/twig-extra": "^0.5",
-        "sylius/twig-hooks": "^0.5",
+        "sylius/twig-hooks": "dev-improvements as 0.5-dev",
         "symfony/asset": "^6.4 || ^7.1",
         "symfony/cache-contracts": "^3.5",
         "symfony/clock": "^6.4 || ^7.1",
@@ -338,5 +338,11 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Stack/src/TwigHooks"
+        }
+    ]
 }

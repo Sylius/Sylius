@@ -16,3 +16,19 @@ import './scripts/spotlight';
 
 const imagesContext = require.context('./images', true, /\.(jpg|jpeg|png|svg|gif)$/);
 imagesContext.keys().forEach(imagesContext);
+
+document.addEventListener('click', function (event) {
+  console.log('Widzi kliknięcie');
+  if (event.target.matches('[data-hook]::before') || event.target.matches('[data-hook]')) {
+    console.log('Udało się kliknąć');
+    // Pobierz tekst wyświetlany w tooltipie
+    const tooltipText = event.target.getAttribute('data-hook') + " | " + event.target.getAttribute('data-name');
+
+    // Skopiuj tekst do schowka
+    navigator.clipboard.writeText(tooltipText).then(() => {
+      console.log('Skopiowano: ' + tooltipText);
+    }).catch(err => {
+      console.error('Nie udało się skopiować tekstu: ', err);
+    });
+  }
+});
