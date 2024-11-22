@@ -1,3 +1,5 @@
+{% import "@SyliusAdmin/macro/flags.html.twig" as flags %}
+
 {% set product = hookable_metadata.context.resource %}
 
 <div class="card mb-3">
@@ -13,7 +15,7 @@
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#translation-{{ locale }}" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="translation-{{ locale }}">
-                        <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
+                        {{ flags.fromLocaleCode(locale, 'me-3') }}
                         {{ locale|sylius_locale_name }}
                     </button>
                 </h2>

@@ -1,2 +1,4 @@
-<span class="flag flag-sm flag-country-{{ data.code|split('_')|last|lower }}"></span>
+{% import "@SyliusAdmin/macro/flags.html.twig" as flags %}
+
+{{ flags.fromLocaleCode(data.code) }}
 <span class="ps-2 fw-medium">{{ data }}</span>

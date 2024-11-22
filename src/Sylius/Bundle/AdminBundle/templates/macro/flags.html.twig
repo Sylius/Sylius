@@ -1,0 +1,7 @@
+{% macro fromLocaleCode(locale_code, class = 'me-2') %}
+    {% set country_code = locale_code|sylius_locale_country|lower %}
+
+    {% if country_code %}
+        <span class="flag flag-sm flag-country-{{ country_code }} {{ class }}"></span>
+    {% endif %}
+{% endmacro %}

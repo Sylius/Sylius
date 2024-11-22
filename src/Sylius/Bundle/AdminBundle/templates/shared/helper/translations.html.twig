@@ -63,6 +63,8 @@
 {% endmacro %}
 
 {% macro accordion_header(locale, accordion_id, is_first = false) %}
+    {% import "@SyliusAdmin/macro/flags.html.twig" as flags %}
+
     <h2 class="accordion-header">
         <button
             class="accordion-button {% if is_first == false %}collapsed{% endif %}"
@@ -73,7 +75,7 @@
             aria-controls="translation-{{ accordion_id }}-{{ locale }}"
             {{ sylius_test_html_attribute( accordion_id ~ '-accordion', locale) }}
         >
-            <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
+            {{ flags.fromLocaleCode(locale, 'me-3') }}
             {{ locale|sylius_locale_name }}
         </button>
     </h2>
