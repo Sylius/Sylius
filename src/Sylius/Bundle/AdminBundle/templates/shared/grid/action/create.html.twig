@@ -6,6 +6,6 @@
 {% endif %}
 
 <a href="{{ path }}" class="btn">
-    {{ ux_icon(action.icon ?? 'tabler:plus', {'class': 'icon dropdown-item-icon'}) }}
+    {{ ux_icon(action.icon|default('tabler:plus'), {'class': 'icon dropdown-item-icon'}) }}
     {{ message|trans }}
 </a>
