@@ -36,7 +36,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.20 || ^3.3",
         "egulias/email-validator": "^4.0",
         "sylius/customer": "^2.0",
         "sylius/resource-bundle": "^1.12",

@@ -32,12 +32,9 @@
         "symfony/cache-contracts": "^3.5",
         "symfony/framework-bundle": "^6.4.1 || ^7.1"
     },
-    "conflict": {
-        "doctrine/orm": ">= 3.0"
-    },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.20 || ^3.3",
         "friendsofphp/proxy-manager-lts": "^1.0",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.5",

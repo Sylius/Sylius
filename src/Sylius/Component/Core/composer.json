@@ -60,7 +60,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.20 || ^3.3",
         "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^9.5",
         "symfony/property-access": "^6.4 || ^7.1"
