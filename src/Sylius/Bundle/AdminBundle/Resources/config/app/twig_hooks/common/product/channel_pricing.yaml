@@ -1,0 +1,58 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.common.product.channel_pricing':
+            header:
+                template: '@SyliusAdmin/shared/product/channel_pricing/header.html.twig'
+                priority: 200
+            info:
+                template: '@SyliusAdmin/shared/product/channel_pricing/info.html.twig'
+                priority: 100
+            accordion:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion.html.twig'
+                priority: 0
+
+        'sylius_admin.common.product.channel_pricing.info':
+            price_details:
+                template: '@SyliusAdmin/shared/product/channel_pricing/info/price_details.html.twig'
+                priority: 200
+            original_price_details:
+                template: '@SyliusAdmin/shared/product/channel_pricing/info/original_price_details.html.twig'
+                priority: 100
+            minimum_price_details:
+                template: '@SyliusAdmin/shared/product/channel_pricing/info/minimum_price_details.html.twig'
+                priority: 0
+
+        'sylius_admin.common.product.channel_pricing.accordion':
+            alerts:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/alerts.html.twig'
+                priority: 100
+            fields:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/fields.html.twig'
+                priority: 0
+
+        'sylius_admin.common.product.channel_pricing.accordion.alerts':
+            first_error:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/alerts/first_error.html.twig'
+                priority: 100
+            product_not_active_in_channel:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/alerts/product_not_active_in_channel.html.twig'
+                priority: 0
+
+        'sylius_admin.common.product.channel_pricing.accordion.alerts.first_error':
+            icon:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/alerts/first_error/icon.html.twig'
+                priority: 100
+            message:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/alerts/first_error/message.html.twig'
+                priority: 0
+
+        'sylius_admin.common.product.channel_pricing.accordion.fields':
+            price:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/fields/price.html.twig'
+                priority: 200
+            original_price:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/fields/original_price.html.twig'
+                priority: 100
+            minimum_price:
+                template: '@SyliusAdmin/shared/product/channel_pricing/accordion/fields/minimum_price.html.twig'
+                priority: 0

@@ -168,17 +168,6 @@ sylius_twig_hooks:
                 template: '@SyliusAdmin/product/form/sections/translations/short_description.html.twig'
                 priority: 0
 
-        'sylius_admin.product.update.content.form.sections.channel_pricing':
-            price:
-                template: '@SyliusAdmin/product/form/sections/channel_pricing/price.html.twig'
-                priority: 200
-            original_price:
-                template: '@SyliusAdmin/product/form/sections/channel_pricing/original_price.html.twig'
-                priority: 100
-            minimum_price:
-                template: '@SyliusAdmin/product/form/sections/channel_pricing/minimum_price.html.twig'
-                priority: 0
-
         'sylius_admin.product.update.content.form.sections.taxes':
             taxes:
                 template: '@SyliusAdmin/product/form/sections/taxes/taxes.html.twig'

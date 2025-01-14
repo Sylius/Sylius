@@ -3,6 +3,8 @@ sylius_twig_hooks:
         'sylius_admin.product.create#javascripts':
             scripts:
                 template: '@SyliusAdmin/product/scripts.html.twig'
+                priority: 0
+
         'sylius_admin.product.create.content':
             form:
                 component: 'sylius_admin:product:form'
@@ -132,17 +134,6 @@ sylius_twig_hooks:
                 priority: 100
             short_description:
                 template: '@SyliusAdmin/product/form/sections/translations/short_description.html.twig'
-                priority: 0
-
-        'sylius_admin.product.create.content.form.sections.channel_pricing':
-            price:
-                template: '@SyliusAdmin/product/form/sections/channel_pricing/price.html.twig'
-                priority: 200
-            original_price:
-                template: '@SyliusAdmin/product/form/sections/channel_pricing/original_price.html.twig'
-                priority: 100
-            minimum_price:
-                template: '@SyliusAdmin/product/form/sections/channel_pricing/minimum_price.html.twig'
                 priority: 0
 
         'sylius_admin.product.create.content.form.sections.taxes':

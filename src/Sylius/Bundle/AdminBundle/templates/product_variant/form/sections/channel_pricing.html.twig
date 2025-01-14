@@ -1,5 +1,8 @@
+{% set prefixes = ['sylius_admin.common.product'] %}
+{% set variant_form = hookable_metadata.context.form %}
+
 <div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
     <div class="card mb-3">
-        {% hook 'channel_pricing' %}
+        {% hook 'channel_pricing' with { _prefixes: prefixes, form: variant_form } %}
     </div>
 </div>

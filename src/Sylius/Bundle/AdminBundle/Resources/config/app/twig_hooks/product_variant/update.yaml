@@ -141,63 +141,6 @@ sylius_twig_hooks:
                 template: '@SyliusAdmin/product_variant/form/sections/general/body/properties/weight.html.twig'
                 priority: 0
 
-        'sylius_admin.product_variant.update.content.form.sections.channel_pricing':
-            header:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/header.html.twig'
-                priority: 200
-            info:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info.html.twig'
-                priority: 100
-            accordion:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion.html.twig'
-                priority: 0
-
-        'sylius_admin.product_variant.update.content.form.sections.channel_pricing.info':
-            price_details:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/price_details.html.twig'
-                priority: 200
-            original_price_details:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/original_price_details.html.twig'
-                priority: 100
-            minimum_price_details:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/minimum_price_details.html.twig'
-                priority: 0
-
-        'sylius_admin.product_variant.update.content.form.sections.channel_pricing.accordion':
-            alerts:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/alerts.html.twig'
-                priority: 100
-            fields:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/fields.html.twig'
-                priority: 0
-
-        'sylius_admin.product_variant.update.content.form.sections.channel_pricing.accordion.alerts':
-            first_error:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/alerts/first_error.html.twig'
-                priority: 100
-            product_not_active_in_channel:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/alerts/product_not_active_in_channel.html.twig'
-                priority: 0
-
-        'sylius_admin.product_variant.update.content.form.sections.channel_pricing.accordion.alerts.first_error':
-            icon:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/alerts/first_error/icon.html.twig'
-                priority: 100
-            message:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/alerts/first_error/message.html.twig'
-                priority: 0
-
-        'sylius_admin.product_variant.update.content.form.sections.channel_pricing.accordion.fields':
-            price:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/fields/price.html.twig'
-                priority: 200
-            original_price:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/fields/original_price.html.twig'
-                priority: 100
-            minimum_price:
-                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion/fields/minimum_price.html.twig'
-                priority: 0
-
         'sylius_admin.product_variant.update.content.form.sections.inventory':
             header:
                 template: '@SyliusAdmin/product_variant/form/sections/inventory/header.html.twig'
