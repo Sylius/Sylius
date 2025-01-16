@@ -22,14 +22,12 @@ final class ChannelPricingsFormElement extends BaseFormElement implements Channe
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {
         $this->changeTab();
-        $this->changeChannelTab($channel->getCode());
         $this->getElement('price', ['%channel_code%' => $channel->getCode()])->setValue($price);
     }
 
     public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
     {
         $this->changeTab();
-        $this->changeChannelTab($channel->getCode());
         $this->getElement('original_price', ['%channel_code%' => $channel->getCode()])->setValue($originalPrice);
     }
 
