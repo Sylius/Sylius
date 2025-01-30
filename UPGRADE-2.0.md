@@ -19,6 +19,54 @@
    selection experience. This approach reduces maintenance complexity and eliminates the risk of incorrect 
    or misleading flag assignments.
 
+2. These hooks have been moved to a shared section:
+   - `sylius_admin.product.create.content.form.sections.channel_pricing`
+   - `sylius_admin.product.update.content.form.sections.channel_pricing`
+   - `sylius_admin.product_variant.create.content.form.sections.channel_pricing`
+   - `sylius_admin.product_variant.update.content.form.sections.channel_pricing`
+   - `sylius_admin.product_variant.create.content.form.sections.channel_pricing.info`
+   - `sylius_admin.product_variant.update.content.form.sections.channel_pricing.info`
+   
+   All templates used in these hooks have been marked as deprecated. If you want to use old ones, you can bring back old hooks in `product` and `product_variant` .yaml files
+
+   ````
+   'sylius_admin.product.create.content.form.sections.channel_pricing':
+      price:
+          template: '@SyliusAdmin/product/form/sections/channel_pricing/price.html.twig'
+          priority: 200
+      original_price:
+          template: '@SyliusAdmin/product/form/sections/channel_pricing/original_price.html.twig'
+          priority: 100
+      minimum_price:
+          template: '@SyliusAdmin/product/form/sections/channel_pricing/minimum_price.html.twig'
+          priority: 0
+   ````
+   
+   ````
+   'sylius_admin.product_variant.create.content.form.sections.channel_pricing':
+       header:
+           template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/header.html.twig'
+           priority: 200
+       info:
+           template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info.html.twig'
+           priority: 100
+       accordion:
+           template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion.html.twig'
+           priority: 0
+
+   'sylius_admin.product_variant.create.content.form.sections.channel_pricing.info':
+       price_details:
+           template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/price_details.html.twig'
+           priority: 200
+       original_price_details:
+           template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/original_price_details.html.twig'
+           priority: 100
+       minimum_price_details:
+           template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/minimum_price_details.html.twig'
+           priority: 0
+   ````
+   Note that hooks above are just for create pages - insert `update` instead of `create` for update pages.
+
 # UPGRADE FROM `1.14` TO `2.0`
 
 ## To start off
