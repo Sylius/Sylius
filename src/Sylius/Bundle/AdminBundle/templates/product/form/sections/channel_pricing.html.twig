@@ -2,7 +2,7 @@
 
 {% if product.isSimple %}
     {% set variant_form = hookable_metadata.context.form.variant %}
-    {% set prefixes = ['sylius_admin.product.create.content.form.sections', 'sylius_admin.common.product'] %}
+    {% set prefixes = ['sylius_admin.product.create.content.form.sections', 'sylius_admin.common'] %}
 
     <div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-channel-pricing" role="tabpanel" tabindex="0">
         <div class="card mb-3">

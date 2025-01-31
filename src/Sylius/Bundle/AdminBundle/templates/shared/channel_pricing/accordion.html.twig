@@ -3,7 +3,7 @@
 {% set product_variant = hookable_metadata.context.form.vars.data %}
 {% set body %}
     {% verbatim %}
-        {% hook 'accordion' with { _prefixes: ['sylius_admin.common.product.channel_pricing'], product_variant, channel_code } %}
+        {% hook 'accordion' with { _prefixes: ['sylius_admin.common.channel_pricing'], product_variant, channel_code } %}
     {% endverbatim %}
 {% endset %}
 
