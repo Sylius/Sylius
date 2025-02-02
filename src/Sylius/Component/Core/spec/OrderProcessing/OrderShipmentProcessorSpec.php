@@ -53,6 +53,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $defaultShippingMethod,
         OrderItemInterface $orderItem,
+        ProductVariantInterface $productVariant1,
+        ProductVariantInterface $productVariant2,
     ): void {
         $order->canBeProcessed()->willReturn(true);
 
@@ -61,6 +63,15 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $shipmentFactory->createNew()->willReturn($shipment);
 
         $order->isShippingRequired()->willReturn(true);
+
+        $productVariant1->isShippingRequired()->willReturn(true);
+        $productVariant2->isShippingRequired()->willReturn(true);
+
+        $itemUnit1->getShippable()->willReturn($productVariant1);
+        $itemUnit1->getShipment()->willReturn(null);
+
+        $itemUnit2->getShipment()->willReturn(null);
+        $itemUnit2->getShippable()->willReturn($productVariant2);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
@@ -87,6 +98,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         OrderItemUnitInterface $itemUnit2,
         ShipmentInterface $shipment,
         OrderItemInterface $orderItem,
+        ProductVariantInterface $productVariant1,
+        ProductVariantInterface $productVariant2,
     ): void {
         $order->canBeProcessed()->willReturn(true);
 
@@ -95,6 +108,15 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $shipmentFactory->createNew()->willReturn($shipment);
 
         $order->isShippingRequired()->willReturn(true);
+
+        $productVariant1->isShippingRequired()->willReturn(true);
+        $productVariant2->isShippingRequired()->willReturn(true);
+
+        $itemUnit1->getShippable()->willReturn($productVariant1);
+        $itemUnit1->getShipment()->willReturn(null);
+
+        $itemUnit2->getShipment()->willReturn(null);
+        $itemUnit2->getShippable()->willReturn($productVariant2);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
@@ -168,14 +190,20 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $order->isShippingRequired()->willReturn(true);
 
+        $productVariant->isShippingRequired()->willReturn(true);
+
+        $itemUnit->getShippable()->willReturn($productVariant);
+        $itemUnit->getShipment()->willReturn($shipment);
+
+        $itemUnitWithoutShipment->getShippable()->willReturn($productVariant);
+        $itemUnitWithoutShipment->getShipment()->willReturn(null);
+
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);
         $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject(), $itemUnitWithoutShipment->getWrappedObject()]));
         $order->getShipments()->willReturn($shipments);
-
-        $itemUnit->getShipment()->willReturn($shipment);
 
         $shipment->getUnits()->willReturn(new ArrayCollection([]));
         $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
@@ -191,6 +219,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         Collection $shipments,
         OrderItemUnitInterface $itemUnit,
         OrderItemUnitInterface $itemUnitWithoutShipment,
+        ProductVariantInterface $productVariant,
         ShippingMethodInterface $shippingMethod,
     ): void {
         $order->canBeProcessed()->willReturn(true);
@@ -202,12 +231,18 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $order->isShippingRequired()->willReturn(true);
 
+        $productVariant->isShippingRequired()->willReturn(true);
+
+        $itemUnit->getShippable()->willReturn($productVariant);
+        $itemUnit->getShipment()->willReturn($shipment);
+
+        $itemUnitWithoutShipment->getShippable()->willReturn($productVariant);
+        $itemUnitWithoutShipment->getShipment()->willReturn(null);
+
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);
         $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject(), $itemUnitWithoutShipment->getWrappedObject()]));
         $order->getShipments()->willReturn($shipments);
-
-        $itemUnit->getShipment()->willReturn($shipment);
 
         $shipment->getUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject()]));
         $shipment->removeUnit($itemUnit)->shouldBeCalled();
@@ -245,14 +280,20 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $order->isShippingRequired()->willReturn(true);
 
+        $productVariant->isShippingRequired()->willReturn(true);
+
+        $itemUnit->getShippable()->willReturn($productVariant);
+        $itemUnit->getShipment()->willReturn($shipment);
+
+        $itemUnitWithoutShipment->getShippable()->willReturn($productVariant);
+        $itemUnitWithoutShipment->getShipment()->willReturn(null);
+
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);
         $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject(), $itemUnitWithoutShipment->getWrappedObject()]));
         $order->getShipments()->willReturn($shipments);
-
-        $itemUnit->getShipment()->willReturn($shipment);
 
         $shipment->getUnits()->willReturn(new ArrayCollection([]));
         $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
@@ -270,6 +311,49 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $order->isShippingRequired()->shouldNotBeCalled();
         $order->hasShipments()->shouldNotBeCalled();
         $order->getShipments()->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_does_not_add_item_units_that_do_not_require_shipping(
+        FactoryInterface $shipmentFactory,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        OrderItemUnitInterface $shippableUnit,
+        OrderItemUnitInterface $nonShippableUnit,
+        ProductVariantInterface $shippableVariant,
+        ProductVariantInterface $nonShippableVariant,
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
+        ShippingMethodInterface $shippingMethod,
+    ): void {
+        $order->canBeProcessed()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
+        $order->isEmpty()->willReturn(false);
+        $order->hasShipments()->willReturn(false);
+        $order->getItemUnits()->willReturn(new ArrayCollection([
+            $shippableUnit->getWrappedObject(),
+            $nonShippableUnit->getWrappedObject(),
+        ]));
+
+        $shipmentFactory->createNew()->willReturn($shipment);
+        $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($shippingMethod);
+
+        $shippableUnit->getShippable()->willReturn($shippableVariant);
+        $shippableVariant->isShippingRequired()->willReturn(true);
+        $shippableUnit->getShipment()->willReturn(null);
+
+        $nonShippableUnit->getShippable()->willReturn($nonShippableVariant);
+        $nonShippableVariant->isShippingRequired()->willReturn(false);
+        $nonShippableUnit->getShipment()->willReturn(null);
+
+        $shipment->setOrder($order)->shouldBeCalled();
+        $shipment->setMethod($shippingMethod)->shouldBeCalled();
+
+        $shipment->getUnits()->willReturn(new ArrayCollection([]));
+        $shipment->addUnit($shippableUnit)->shouldBeCalled();
+        $shipment->addUnit($nonShippableUnit)->shouldNotBeCalled();
+
+        $order->addShipment($shipment)->shouldBeCalled();
 
         $this->process($order);
     }
