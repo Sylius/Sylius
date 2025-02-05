@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Resolver;
@@ -35,7 +44,10 @@ final class PathPrefixBasedOperationResolver implements OperationResolverInterfa
             return $operation;
         }
 
-        $namePrefixes = array_merge($this->defaultNamePrefixes, $this->additionalNamePrefixes);
+        $namePrefixes = array_unique(array_merge(
+            $this->defaultNamePrefixes,
+            is_array($this->additionalNamePrefixes) ? $this->additionalNamePrefixes : iterator_to_array($this->additionalNamePrefixes),
+        ));
 
         $resourceMetadataCollection = $this->resourceMetadataCollectionFactory->create($resourceClass);
         foreach ($resourceMetadataCollection as $resourceMetadata) {
