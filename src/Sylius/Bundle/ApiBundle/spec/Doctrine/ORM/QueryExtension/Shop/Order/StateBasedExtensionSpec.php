@@ -66,7 +66,7 @@ final class StateBasedExtensionSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         Expr $expr,
-        Expr\Func $exprNeq,
+        Expr\Comparison $exprNeq,
     ): void {
         $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
@@ -124,7 +124,7 @@ final class StateBasedExtensionSpec extends ObjectBehavior
         ShopApiSection $section,
         Operation $operation,
         Expr $expr,
-        Expr\Func $exprEq,
+        Expr\Comparison $exprEq,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
         $operation->getName()->willReturn('sylius_api_shop_order_get_custom');

@@ -15,14 +15,14 @@ namespace spec\Sylius\Bundle\OrderBundle\NumberGenerator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 {
-    function let(EntityRepository $sequenceRepository, FactoryInterface $sequenceFactory): void
+    function let(RepositoryInterface $sequenceRepository, FactoryInterface $sequenceFactory): void
     {
         $this->beConstructedWith($sequenceRepository, $sequenceFactory);
     }
@@ -33,7 +33,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
     }
 
     function it_generates_an_order_number(
-        EntityRepository $sequenceRepository,
+        RepositoryInterface $sequenceRepository,
         OrderSequenceInterface $sequence,
         OrderInterface $order,
     ): void {
@@ -46,7 +46,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
     }
 
     function it_generates_an_order_number_when_sequence_is_null(
-        EntityRepository $sequenceRepository,
+        RepositoryInterface $sequenceRepository,
         FactoryInterface $sequenceFactory,
         OrderSequenceInterface $sequence,
         OrderInterface $order,

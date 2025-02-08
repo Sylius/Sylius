@@ -82,6 +82,7 @@ final class TaxonBasedExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         Expr $expr,
+        Expr\Func $exprIn,
         Expr\Comparison $comparison,
         Andx $andx,
     ): void {
@@ -98,8 +99,8 @@ final class TaxonBasedExtensionSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
-        $expr->andX(Argument::type(Expr\Comparison::class), Argument::type(Expr\Comparison::class))->willReturn($andx);
-        $expr->in('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($comparison);
+        $expr->andX(Argument::type(Expr\Func::class), Argument::type(Expr\Comparison::class))->willReturn($andx);
+        $expr->in('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($exprIn);
         $expr->eq('taxon.enabled', 'true')->shouldBeCalled()->willReturn($comparison);
         $queryBuilder->expr()->willReturn($expr->getWrappedObject());
         $queryBuilder

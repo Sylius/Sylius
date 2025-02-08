@@ -19,6 +19,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -93,7 +94,7 @@ final class CollectionProviderSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
         QueryBuilder $queryBuilder,
-        AbstractQuery $query,
+        Query $query,
         QueryResultCollectionExtensionInterface $extension,
     ) {
         $operation = new GetCollection(class: ProductAttributeValueInterface::class);

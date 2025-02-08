@@ -68,7 +68,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         ShopApiSection $section,
         ShopUserInterface $user,
         Expr $expr,
-        Expr\Func $exprEq,
+        Expr\Comparison $exprComparison,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
         $userContext->getUser()->willReturn($user);
@@ -78,8 +78,8 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         $queryNameGenerator->generateParameterName('user')->willReturn('user');
 
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('user.id', ':user')->willReturn($exprEq);
-        $queryBuilder->innerJoin('o.user', 'user', 'WITH', $exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $expr->eq('user.id', ':user')->willReturn($exprComparison);
+        $queryBuilder->innerJoin('o.user', 'user', 'WITH', $exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('user', $user)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, CustomerInterface::class, new Get());
@@ -119,7 +119,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         Expr $expr,
-        Expr\Func $exprEq,
+        Expr\Comparison $exprComparison,
     ): void {
         $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
@@ -130,8 +130,8 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         $queryNameGenerator->generateParameterName('user')->willReturn('user');
 
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('user.id', ':user')->willReturn($exprEq);
-        $queryBuilder->innerJoin('o.user', 'user', 'WITH', $exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $expr->eq('user.id', ':user')->willReturn($exprComparison);
+        $queryBuilder->innerJoin('o.user', 'user', 'WITH', $exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('user', $user)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, CustomerInterface::class, [], new Get());

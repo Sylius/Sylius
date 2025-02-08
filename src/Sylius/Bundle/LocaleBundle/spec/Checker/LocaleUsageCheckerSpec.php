@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\LocaleBundle\Checker;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Persisters\Entity\EntityPersister;
+use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
@@ -41,15 +44,23 @@ final class LocaleUsageCheckerSpec extends ObjectBehavior
     }
 
     function it_returns_true_when_at_least_one_usage_of_locale_found(
-        EntityRepository $localeRepository,
         RegistryInterface $registry,
         EntityManagerInterface $entityManager,
         LocaleInterface $locale,
         MetadataInterface $firstResourceMetadata,
         MetadataInterface $secondResourceMetadata,
+        UnitOfWork $unitOfWork,
+        EntityPersister $entityPersister,
     ): void {
-        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn($locale);
-        $localeRepository->count(['locale' => 'en_US'])->willReturn(1);
+        $localeRepository = new EntityRepository($entityManager->getWrappedObject(), new ClassMetadata(LocaleInterface::class));
+
+        $this->beConstructedWith($localeRepository, $registry, $entityManager);
+
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $unitOfWork->getEntityPersister(LocaleInterface::class)->willReturn($entityPersister);
+
+        $entityPersister->load(['code' => 'en_US'], null, null, [], null, 1, null)->willReturn($locale);
+        $entityPersister->count(['locale' => 'en_US'])->willReturn(1);
 
         $registry->getAll()->willReturn([$firstResourceMetadata, $secondResourceMetadata]);
 
@@ -68,15 +79,23 @@ final class LocaleUsageCheckerSpec extends ObjectBehavior
     }
 
     function it_returns_false_when_no_usage_of_locale_found(
-        EntityRepository $localeRepository,
         RegistryInterface $registry,
         EntityManagerInterface $entityManager,
         LocaleInterface $locale,
         MetadataInterface $firstResourceMetadata,
         MetadataInterface $secondResourceMetadata,
+        UnitOfWork $unitOfWork,
+        EntityPersister $entityPersister,
     ): void {
-        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn($locale);
-        $localeRepository->count(['locale' => 'en_US'])->willReturn(0);
+        $localeRepository = new EntityRepository($entityManager->getWrappedObject(), new ClassMetadata(LocaleInterface::class));
+
+        $this->beConstructedWith($localeRepository, $registry, $entityManager);
+
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $unitOfWork->getEntityPersister(LocaleInterface::class)->willReturn($entityPersister);
+
+        $entityPersister->load(['code' => 'en_US'], null, null, [], null, 1, null)->willReturn($locale);
+        $entityPersister->count(['locale' => 'en_US'])->willReturn(0);
 
         $registry->getAll()->willReturn([$firstResourceMetadata, $secondResourceMetadata]);
 

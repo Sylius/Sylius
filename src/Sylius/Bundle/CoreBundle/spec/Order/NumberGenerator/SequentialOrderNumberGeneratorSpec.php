@@ -17,15 +17,15 @@ use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderSequenceInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 {
     function let(
-        EntityRepository $sequenceRepository,
+        RepositoryInterface $sequenceRepository,
         FactoryInterface $sequenceFactory,
         EntityManagerInterface $sequenceManager,
     ): void {
@@ -38,7 +38,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
     }
 
     function it_generates_an_order_number(
-        EntityRepository $sequenceRepository,
+        RepositoryInterface $sequenceRepository,
         EntityManagerInterface $sequenceManager,
         OrderSequenceInterface $sequence,
         OrderInterface $order,
@@ -55,7 +55,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
     }
 
     function it_generates_an_order_number_when_sequence_is_null(
-        EntityRepository $sequenceRepository,
+        RepositoryInterface $sequenceRepository,
         FactoryInterface $sequenceFactory,
         EntityManagerInterface $sequenceManager,
         OrderSequenceInterface $sequence,

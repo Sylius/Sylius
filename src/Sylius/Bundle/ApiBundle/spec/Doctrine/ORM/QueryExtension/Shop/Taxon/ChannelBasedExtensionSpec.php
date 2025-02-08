@@ -92,7 +92,7 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
         $queryNameGenerator->generateParameterName('parentCode')->shouldBeCalled()->willReturn('parentCode');
         $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
 
-        $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn('o');
+        $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn(['o']);
         $queryBuilder->addSelect('child')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->innerJoin('o.parent', 'parent')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->leftJoin('o.children', 'child', 'WITH', 'child.enabled = true')->shouldBeCalled()->willReturn($queryBuilder);

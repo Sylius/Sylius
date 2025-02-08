@@ -147,6 +147,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
 
         $queryBuilder->innerJoin('o.customer', 'customer')->willReturn($queryBuilder);
         $queryBuilder->andWhere($exprComparison)->willReturn($queryBuilder);
+        $queryBuilder->setParameter(':customer', $customer)->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, AddressInterface::class);
 
@@ -175,6 +176,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
 
         $queryBuilder->innerJoin('o.customer', 'customer')->willReturn($queryBuilder);
         $queryBuilder->andWhere($exprComparison)->willReturn($queryBuilder);
+        $queryBuilder->setParameter(':customer', $customer)->willReturn($queryBuilder);
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, AddressInterface::class, []);
 

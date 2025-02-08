@@ -14,16 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Remover;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
 {
+    /**
+     * @param RepositoryInterface<ReviewInterface> $reviewRepository
+     */
     public function __construct(
-        private EntityRepository $reviewRepository,
+        private RepositoryInterface $reviewRepository,
         private ObjectManager $reviewManager,
         private ReviewableRatingUpdaterInterface $averageRatingUpdater,
     ) {
@@ -33,6 +36,7 @@ final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
     {
         $reviewSubjectsToRecalculate = [];
 
+        /** @var ReviewInterface $review */
         foreach ($this->reviewRepository->findBy(['author' => $author]) as $review) {
             $reviewSubjectsToRecalculate = $this->removeReviewsAndExtractSubject($review, $reviewSubjectsToRecalculate);
         }

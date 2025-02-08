@@ -101,7 +101,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         Expr $expr,
-        Expr\Func $exprFunc,
+        Expr\Comparison $exprEq,
     ): void {
         $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
@@ -113,8 +113,8 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
 
         $queryBuilder->leftJoin('o.order', 'order')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('order.customer', ':customer')->willReturn($exprFunc);
-        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $expr->eq('order.customer', ':customer')->willReturn($exprEq);
+        $queryBuilder->andWhere($exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->addOrderBy('o.id', 'ASC')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
@@ -184,7 +184,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         Expr $expr,
-        Expr\Func $exprFunc,
+        Expr\Comparison $exprEq,
     ): void {
         $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
@@ -196,8 +196,8 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
 
         $queryBuilder->leftJoin('o.order', 'order')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('order.customer', ':customer')->willReturn($exprFunc);
-        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $expr->eq('order.customer', ':customer')->willReturn($exprEq);
+        $queryBuilder->andWhere($exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->addOrderBy('o.id', 'ASC')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 

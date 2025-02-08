@@ -64,7 +64,7 @@ final class EnabledChildrenExtensionSpec extends ObjectBehavior
         $queryNameGenerator->generateParameterName('enabled')->willReturn('enabled');
         $queryNameGenerator->generateJoinAlias('child')->willReturn('childAlias');
 
-        $queryBuilder->addSelect('childAlias')->shouldBeCalled();
+        $queryBuilder->addSelect('childAlias')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->leftJoin('rootAlias.children', 'childAlias', 'WITH', 'childAlias.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
