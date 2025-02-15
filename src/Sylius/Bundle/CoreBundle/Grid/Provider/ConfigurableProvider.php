@@ -56,7 +56,7 @@ final class ConfigurableProvider implements GridProviderInterface
         $provider = $this->providers->get($type);
 
         if (null === $provider) {
-            throw new \RuntimeException(sprintf('Provider with type "%s" was not found but it should.', $type));
+            throw new \RuntimeException(sprintf('Grid provider (type "%s") not found.', $type));
         }
 
         Assert::isInstanceOf($provider, GridProviderInterface::class);
