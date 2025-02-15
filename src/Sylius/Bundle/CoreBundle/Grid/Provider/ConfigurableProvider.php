@@ -29,26 +29,12 @@ final class ConfigurableProvider implements GridProviderInterface
 
     public function get(string $code): Grid
     {
-        /** @var string|null $type */
-        $type = $this->configuration['grids'][$code]['type'] ?? null;
+        /** @var string $defaultType */
+        $defaultType = $this->configuration['default_type'];
 
-        if (null === $type) {
-            return $this->getDefaultProvider()->get($code);
-        }
+        $type = $this->configuration['grids'][$code]['type'] ?? $defaultType;
 
         return $this->getProvider($type)->get($code);
-    }
-
-    private function getDefaultProvider(): GridProviderInterface
-    {
-        /** @var string|null $defaultType */
-        $defaultType = $this->configuration['default_type'] ?? null;
-
-        if (null === $defaultType) {
-            throw new \RuntimeException('No default type for grids was found but it should.');
-        }
-
-        return $this->getProvider($defaultType);
     }
 
     private function getProvider(string $type): GridProviderInterface

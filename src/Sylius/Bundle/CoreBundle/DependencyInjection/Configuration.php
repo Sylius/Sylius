@@ -153,7 +153,7 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('grid')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('default_type')->defaultValue('array')->end()
+                        ->scalarNode('default_type')->cannotBeEmpty()->end()
                         ->arrayNode('grids')
                             ->useAttributeAsKey('grid_code')
                             ->arrayPrototype()

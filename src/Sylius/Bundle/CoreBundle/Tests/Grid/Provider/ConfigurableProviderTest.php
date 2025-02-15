@@ -96,7 +96,7 @@ final class ConfigurableProviderTest extends TestCase
         ]);
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Provider with type "unknown" was not found but it should.');
+        $this->expectExceptionMessage('Grid provider (type "unknown") not found.');
 
          $configurableProvider->get('app_book');
     }
@@ -114,7 +114,7 @@ final class ConfigurableProviderTest extends TestCase
         ]);
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Provider with type "unknown" was not found but it should.');
+        $this->expectExceptionMessage('Grid provider (type "unknown") not found.');
 
         $configurableProvider->get('app_book');
     }
