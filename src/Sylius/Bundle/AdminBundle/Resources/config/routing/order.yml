@@ -1,147 +1,147 @@
-sylius_admin_order:
-    resource: |
-        alias: sylius.order
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        only: ['index']
-        grid: sylius_admin_order
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
-        permission: true
-    type: sylius.resource
+#sylius_admin_order:
+#    resource: |
+#        alias: sylius.order
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        only: ['index']
+#        grid: sylius_admin_order
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
+#        permission: true
+#    type: sylius.resource
 
-sylius_admin_order_show:
-    path: /orders/{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order::showAction
-        _sylius:
-            section: admin
-            repository:
-              method: findOrderById
-              arguments:
-                - '$id'
-            permission: true
-            template: "@SyliusAdmin/shared/crud/show.html.twig"
+#sylius_admin_order_show:
+#    path: /orders/{id}
+#    methods: [GET]
+#    defaults:
+#        _controller: sylius.controller.order::showAction
+#        _sylius:
+#            section: admin
+#            repository:
+#              method: findOrderById
+#              arguments:
+#                - '$id'
+#            permission: true
+#            template: "@SyliusAdmin/shared/crud/show.html.twig"
 
-sylius_admin_order_history:
-    path: /orders/{id}/history
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order::showAction
-        _sylius:
-            section: admin
-            repository:
-              method: findOrderById
-              arguments:
-                - '$id'
-            permission: true
-            template: "@SyliusAdmin/order/history.html.twig"
+#sylius_admin_order_history:
+#    path: /orders/{id}/history
+#    methods: [GET]
+#    defaults:
+#        _controller: sylius.controller.order::showAction
+#        _sylius:
+#            section: admin
+#            repository:
+#              method: findOrderById
+#              arguments:
+#                - '$id'
+#            permission: true
+#            template: "@SyliusAdmin/order/history.html.twig"
 
-sylius_admin_order_update:
-    path: /orders/{id}/edit
-    methods: [GET, PUT]
-    defaults:
-        _controller: sylius.controller.order::updateAction
-        _sylius:
-            section: admin
-            repository:
-              method: findOrderById
-              arguments:
-                - '$id'
-            permission: true
-            template: "@SyliusAdmin/shared/crud/update.html.twig"
-            form:
-                type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
-                options:
-                    validation_groups:
-                        - sylius_shipping_address_update
+#sylius_admin_order_update:
+#    path: /orders/{id}/edit
+#    methods: [GET, PUT]
+#    defaults:
+#        _controller: sylius.controller.order::updateAction
+#        _sylius:
+#            section: admin
+#            repository:
+#              method: findOrderById
+#              arguments:
+#                - '$id'
+#            permission: true
+#            template: "@SyliusAdmin/shared/crud/update.html.twig"
+#            form:
+#                type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
+#                options:
+#                    validation_groups:
+#                        - sylius_shipping_address_update
 
-sylius_admin_order_cancel:
-    path: /orders/{id}/cancel
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.order::applyStateMachineTransitionAction
-        _sylius:
-            repository:
-              method: findOrderById
-              arguments:
-                - '$id'
-            permission: true
-            state_machine:
-                graph: sylius_order
-                transition: cancel
-            redirect: sylius_admin_order_show
+#sylius_admin_order_cancel:
+#    path: /orders/{id}/cancel
+#    methods: [PUT]
+#    defaults:
+#        _controller: sylius.controller.order::applyStateMachineTransitionAction
+#        _sylius:
+#            repository:
+#              method: findOrderById
+#              arguments:
+#                - '$id'
+#            permission: true
+#            state_machine:
+#                graph: sylius_order
+#                transition: cancel
+#            redirect: 'sylius_admin_order_show'
 
-sylius_admin_order_payment_complete:
-    path: /orders/{orderId}/payments/{id}/complete
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.payment::applyStateMachineTransitionAction
-        _sylius:
-            event: complete
-            permission: true
-            repository:
-                method: findOneByOrderId
-                arguments:
-                    id: $id
-                    orderId: $orderId
-            state_machine:
-                graph: sylius_payment
-                transition: complete
-            redirect:
-                route: sylius_admin_order_show
-                parameters:
-                    id: $orderId
+#sylius_admin_order_payment_complete:
+#    path: /orders/{orderId}/payments/{id}/complete
+#    methods: [PUT]
+#    defaults:
+#        _controller: sylius.controller.payment::applyStateMachineTransitionAction
+#        _sylius:
+#            event: complete
+#            permission: true
+#            repository:
+#                method: findOneByOrderId
+#                arguments:
+#                    id: $id
+#                    orderId: $orderId
+#            state_machine:
+#                graph: sylius_payment
+#                transition: complete
+#            redirect:
+#                route: sylius_admin_order_show
+#                parameters:
+#                    id: $orderId
+#
+#sylius_admin_order_payment_refund:
+#    path: /orders/{orderId}/payments/{id}/refund
+#    methods: [PUT]
+#    defaults:
+#        _controller: sylius.controller.payment::applyStateMachineTransitionAction
+#        _sylius:
+#            permission: true
+#            repository:
+#                method: findOneByOrderId
+#                arguments:
+#                    id: $id
+#                    orderId: $orderId
+#            state_machine:
+#                graph: sylius_payment
+#                transition: refund
+#            redirect:
+#                route: sylius_admin_order_show
+#                parameters:
+#                    id: $orderId
+#            flash: sylius.payment.refunded
 
-sylius_admin_order_payment_refund:
-    path: /orders/{orderId}/payments/{id}/refund
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.payment::applyStateMachineTransitionAction
-        _sylius:
-            permission: true
-            repository:
-                method: findOneByOrderId
-                arguments:
-                    id: $id
-                    orderId: $orderId
-            state_machine:
-                graph: sylius_payment
-                transition: refund
-            redirect:
-                route: sylius_admin_order_show
-                parameters:
-                    id: $orderId
-            flash: sylius.payment.refunded
-
-sylius_admin_order_shipment_ship:
-    path: /orders/{orderId}/shipment/{id}/ship
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.shipment::updateAction
-        _sylius:
-            event: ship
-            repository:
-                method: findOneByOrderId
-                arguments:
-                    id: $id
-                    orderId: $orderId
-            state_machine:
-                graph: sylius_shipment
-                transition: ship
-            redirect:
-                route: sylius_admin_order_show
-                parameters:
-                    id: $orderId
-            section: admin
-            permission: true
-            form: Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType
-            vars:
-                route:
-                    parameters:
-                        orderId: $orderId
-                        id: $id
+#sylius_admin_order_shipment_ship:
+#    path: /orders/{orderId}/shipment/{id}/ship
+#    methods: [PUT]
+#    defaults:
+#        _controller: sylius.controller.shipment::updateAction
+#        _sylius:
+#            event: ship
+#            repository:
+#                method: findOneByOrderId
+#                arguments:
+#                    id: $id
+#                    orderId: $orderId
+#            state_machine:
+#                graph: sylius_shipment
+#                transition: ship
+#            redirect:
+#                route: sylius_admin_order_show
+#                parameters:
+#                    id: $orderId
+#            section: admin
+#            permission: true
+#            form: Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType
+#            vars:
+#                route:
+#                    parameters:
+#                        orderId: $orderId
+#                        id: $id
 
 sylius_admin_order_resend_confirmation_email:
     path: /orders/{id}/resend-confirmation-email

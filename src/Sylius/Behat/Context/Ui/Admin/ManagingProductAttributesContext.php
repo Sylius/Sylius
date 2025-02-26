@@ -19,6 +19,8 @@ use Sylius\Behat\Element\Admin\ProductAttribute\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
@@ -30,6 +32,7 @@ final readonly class ManagingProductAttributesContext implements Context
         private UpdatePageInterface $updatePage,
         private FormElementInterface $formElement,
         private FilterElementInterface $filterElement,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -308,7 +311,12 @@ final readonly class ManagingProductAttributesContext implements Context
     public function iDeleteThisProductAttribute(ProductAttributeInterface $productAttribute): void
     {
         $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['code' => $productAttribute->getCode(), 'name' => $productAttribute->getName()]);
+
+        try {
+            $this->indexPage->deleteResourceOnPage(['code' => $productAttribute->getCode(), 'name' => $productAttribute->getName()]);
+        } catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**

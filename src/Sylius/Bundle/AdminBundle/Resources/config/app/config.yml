@@ -49,6 +49,11 @@ sylius_grid:
             ux_autocomplete: '@SyliusAdmin/shared/grid/filter/autocomplete.html.twig'
             ux_translatable_autocomplete: '@SyliusAdmin/shared/grid/filter/autocomplete.html.twig'
 
+sylius_resource:
+    mapping:
+        imports:
+            - "%kernel.project_dir%/src/Sylius/Bundle/AdminBundle/Resources/config/app/sylius/resources"
+
 sylius_ui:
     twig_ux:
         live_component_tags:

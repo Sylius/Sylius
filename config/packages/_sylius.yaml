@@ -15,3 +15,10 @@ sylius_api:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_core:
+    routing:
+        bc_layer:
+            enabled: false
+            routes:
+                admin_product: true

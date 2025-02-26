@@ -1,18 +1,19 @@
-sylius_admin_product:
-    resource: |
-        alias: sylius.product
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        redirect: update
-        grid: sylius_admin_product
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
-        permission: true
-    type: sylius.resource
+#sylius_admin_product:
+#    resource: |
+#        alias: sylius.product
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        redirect: update
+#        grid: sylius_admin_product
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
+#        permission: true
+#    type: sylius.resource
 
 sylius_admin_product_create_simple:
     path: /products/new/simple
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled() || context.isSyliusRoutingBcLayerEnabled('admin_product')"
     defaults:
         _controller: sylius.controller.product::createAction
         _sylius:
@@ -28,24 +29,24 @@ sylius_admin_product_create_simple:
                 route:
                     name: sylius_admin_product_create_simple
 
-sylius_admin_product_variant_generate:
-    path: products/{productId}/variants/generate
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.product::updateAction
-        _sylius:
-            template: "@SyliusAdmin/product/generate_variants.html.twig"
-            section: admin
-            permission: true
-            redirect:
-                route: sylius_admin_product_variant_index
-                parameters: { productId: $productId }
-            form:
-                type: Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType
-            repository:
-                method: find
-                arguments: [$productId]
-            flash: sylius.product_variant.generate
+#sylius_admin_product_variant_generate:
+#    path: products/{productId}/variants/generate
+#    methods: [GET, POST]
+#    defaults:
+#        _controller: sylius.controller.product::updateAction
+#        _sylius:
+#            template: "@SyliusAdmin/product/generate_variants.html.twig"
+#            section: admin
+#            permission: true
+#            redirect:
+#                route: sylius_admin_product_variant_index
+#                parameters: { productId: $productId }
+#            form:
+#                type: Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType
+#            repository:
+#                method: find
+#                arguments: [$productId]
+#            flash: sylius.product_variant.generate
 
 
 sylius_admin_channel_pricing_log_entry_index:

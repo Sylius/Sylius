@@ -1,12 +1,12 @@
-sylius_admin_country:
-    resource: |
-        alias: sylius.country
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show', 'delete']
-        redirect: update
-        grid: sylius_admin_country
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\CountryType
-        permission: true
-    type: sylius.resource
+#sylius_admin_country:
+#    resource: |
+#        alias: sylius.country
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['show', 'delete']
+#        redirect: update
+#        grid: sylius_admin_country
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\CountryType
+#        permission: true
+#    type: sylius.resource

@@ -1,35 +1,35 @@
-sylius_admin_zone:
-    resource: |
-        alias: sylius.zone
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show', 'create']
-        redirect: update
-        grid: sylius_admin_zone
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
-        permission: true
-    type: sylius.resource
+#sylius_admin_zone:
+#    resource: |
+#        alias: sylius.zone
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['show', 'create']
+#        redirect: update
+#        grid: sylius_admin_zone
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
+#        permission: true
+#    type: sylius.resource
 
-sylius_admin_zone_create:
-    path: /zones/{type}/new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.zone::createAction
-        _sylius:
-            section: admin
-            factory:
-                method: createTyped
-                arguments:
-                    type: $type
-            form:
-                type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
-            template: "@SyliusAdmin/shared/crud/create.html.twig"
-            redirect: sylius_admin_zone_update
-            permission: true
-            vars:
-                route:
-                    parameters:
-                        type: $type
-    requirements:
-        type: country|province|zone
+#sylius_admin_zone_create:
+#    path: /zones/{type}/new
+#    methods: [GET, POST]
+#    defaults:
+#        _controller: sylius.controller.zone::createAction
+#        _sylius:
+#            section: admin
+#            factory:
+#                method: createTyped
+#                arguments:
+#                    type: $type
+#            form:
+#                type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
+#            template: "@SyliusAdmin/shared/crud/create.html.twig"
+#            redirect: sylius_admin_zone_update
+#            permission: true
+#            vars:
+#                route:
+#                    parameters:
+#                        type: $type
+#    requirements:
+#        type: country|province|zone

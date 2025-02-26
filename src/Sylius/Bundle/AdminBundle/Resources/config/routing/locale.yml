@@ -1,22 +1,22 @@
-sylius_admin_locale:
-    resource: |
-        alias: sylius.locale
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        only: ['index', 'create']
-        redirect: index
-        grid: sylius_admin_locale
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\LocaleType
-        permission: true
-    type: sylius.resource
-
-sylius_admin_locale_delete:
-    path: /locales/{id}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.locale::deleteAction
-        _sylius:
-            section: admin
-            redirect: sylius_admin_locale_index
-            permission: true
+#sylius_admin_locale:
+#    resource: |
+#        alias: sylius.locale
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        only: ['index', 'create']
+#        redirect: index
+#        grid: sylius_admin_locale
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\LocaleType
+#        permission: true
+#    type: sylius.resource
+#
+#sylius_admin_locale_delete:
+#    path: /locales/{id}
+#    methods: [DELETE]
+#    defaults:
+#        _controller: sylius.controller.locale::deleteAction
+#        _sylius:
+#            section: admin
+#            redirect: sylius_admin_locale_index
+#            permission: true

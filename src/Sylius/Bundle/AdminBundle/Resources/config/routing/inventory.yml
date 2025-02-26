@@ -1,10 +1,10 @@
-sylius_admin_inventory_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_variant::indexAction
-        _sylius:
-            template: "@SyliusAdmin/inventory/index.html.twig"
-            grid: sylius_admin_inventory
-            section: admin
-            permission: true
+#sylius_admin_inventory_index:
+#    path: /
+#    methods: [GET]
+#    defaults:
+#        _controller: sylius.controller.product_variant::indexAction
+#        _sylius:
+#            template: "@SyliusAdmin/inventory/index.html.twig"
+#            grid: sylius_admin_inventory
+#            section: admin
+#            permission: true

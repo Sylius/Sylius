@@ -21,6 +21,8 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
@@ -34,6 +36,7 @@ final class ManagingPromotionCouponsContext implements Context
         private readonly UpdatePageInterface $updatePage,
         private readonly FormElementInterface $formElement,
         private readonly NotificationCheckerInterface $notificationChecker,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -223,7 +226,12 @@ final class ManagingPromotionCouponsContext implements Context
     public function iDeleteCouponRelatedToThisPromotion(PromotionCouponInterface $coupon, PromotionInterface $promotion): void
     {
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
-        $this->indexPage->deleteResourceOnPage(['code' => $coupon->getCode()]);
+
+        try {
+            $this->indexPage->deleteResourceOnPage(['code' => $coupon->getCode()]);
+        } catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**
@@ -488,10 +496,10 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedOfFailure(): void
     {
-        $this->notificationChecker->checkNotification(
-            'Error Cannot delete, the Promotion coupon is in use.',
-            NotificationType::error(),
-        );
+        /** @var ResourceDeleteException $exception */
+        $exception = $this->sharedStorage->get('last_exception');
+
+        Assert::eq($exception->getMessage(), 'Cannot delete, the promotion coupon is in use.');
     }
 
     /**

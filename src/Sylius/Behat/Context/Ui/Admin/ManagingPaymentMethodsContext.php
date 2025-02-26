@@ -21,6 +21,8 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
@@ -38,6 +40,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private array $gatewayFactories,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -101,7 +104,12 @@ final readonly class ManagingPaymentMethodsContext implements Context
     public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
+
+        try {
+            $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
+        } catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**

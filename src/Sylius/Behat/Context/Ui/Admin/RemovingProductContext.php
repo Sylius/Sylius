@@ -18,6 +18,7 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -39,7 +40,12 @@ final class RemovingProductContext implements Context
         $this->sharedStorage->set('product', $product);
 
         $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
+
+        try {
+            $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
+        } catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**

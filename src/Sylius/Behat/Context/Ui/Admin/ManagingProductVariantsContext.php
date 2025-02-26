@@ -24,6 +24,7 @@ use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -265,7 +266,11 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->indexPage->open(['productId' => $productVariant->getProduct()->getId()]);
 
-        $this->indexPage->deleteResourceOnPage(['code' => $productVariant->getCode()]);
+        try {
+            $this->indexPage->deleteResourceOnPage(['code' => $productVariant->getCode()]);
+        } catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**
@@ -484,10 +489,10 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldBeNotifiedOfFailure()
     {
-        $this->notificationChecker->checkNotification(
-            'Cannot delete, the Product variant is in use.',
-            NotificationType::failure(),
-        );
+        /** @var ResourceDeleteException $exception */
+        $exception = $this->sharedStorage->get('last_exception');
+
+        Assert::eq($exception->getMessage(), 'Cannot delete, the product variant is in use.');
     }
 
     /**

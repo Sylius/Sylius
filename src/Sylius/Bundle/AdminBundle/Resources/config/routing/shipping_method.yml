@@ -1,26 +1,26 @@
-sylius_admin_shipping_method:
-    resource: |
-        alias: sylius.shipping_method
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show']
-        redirect: update
-        grid: sylius_admin_shipping_method
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType
-        permission: true
-    type: sylius.resource
+#sylius_admin_shipping_method:
+#    resource: |
+#        alias: sylius.shipping_method
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['show']
+#        redirect: update
+#        grid: sylius_admin_shipping_method
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType
+#        permission: true
+#    type: sylius.resource
 
-sylius_admin_shipping_method_archive:
-    path: /shipping-methods/{id}/archive
-    methods: [PATCH]
-    defaults:
-        _controller: sylius.controller.shipping_method::updateAction
-        _sylius:
-            section: admin
-            permission: true
-            form:
-                type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
-            redirect:
-                route: sylius_admin_shipping_method_index
-                parameters: {}
+#sylius_admin_shipping_method_archive:
+#    path: /shipping-methods/{id}/archive
+#    methods: [PATCH]
+#    defaults:
+#        _controller: sylius.controller.shipping_method::updateAction
+#        _sylius:
+#            section: admin
+#            permission: true
+#            form:
+#                type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
+#            redirect:
+#                route: sylius_admin_shipping_method_index
+#                parameters: {}

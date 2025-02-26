@@ -1,36 +1,36 @@
-sylius_admin_payment_method:
-    resource: |
-        alias: sylius.payment_method
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show']
-        redirect: update
-        grid: sylius_admin_payment_method
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType
-        permission: true
-    type: sylius.resource
+#sylius_admin_payment_method:
+#    resource: |
+#        alias: sylius.payment_method
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['show']
+#        redirect: update
+#        grid: sylius_admin_payment_method
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType
+#        permission: true
+#    type: sylius.resource
 
-sylius_admin_payment_method_create:
-    path: /payment-methods/new/{factory}
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.payment_method::createAction
-        _sylius:
-            section: admin
-            factory:
-                method: createWithGateway
-                arguments:
-                    gatewayFactory: $factory
-            form:
-                type: Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType
-            template: "@SyliusAdmin/shared/crud/create.html.twig"
-            redirect: sylius_admin_payment_method_update
-            permission: true
-            vars:
-                subheader: sylius.ui.manage_payment_methods_available_to_your_customers
-                templates:
-                    form: "@SyliusAdmin/PaymentMethod/_form.html.twig"
-                route:
-                    parameters:
-                        factory: $factory
+#sylius_admin_payment_method_create:
+#    path: /payment-methods/new/{factory}
+#    methods: [GET, POST]
+#    defaults:
+#        _controller: sylius.controller.payment_method::createAction
+#        _sylius:
+#            section: admin
+#            factory:
+#                method: createWithGateway
+#                arguments:
+#                    gatewayFactory: $factory
+#            form:
+#                type: Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType
+#            template: "@SyliusAdmin/shared/crud/create.html.twig"
+#            redirect: sylius_admin_payment_method_update
+#            permission: true
+#            vars:
+#                subheader: sylius.ui.manage_payment_methods_available_to_your_customers
+#                templates:
+#                    form: "@SyliusAdmin/PaymentMethod/_form.html.twig"
+#                route:
+#                    parameters:
+#                        factory: $factory

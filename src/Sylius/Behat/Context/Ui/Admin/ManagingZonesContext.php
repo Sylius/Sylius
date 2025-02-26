@@ -21,7 +21,9 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
@@ -32,6 +34,7 @@ final class ManagingZonesContext implements Context
         private UpdatePageInterface $updatePage,
         private FormElementInterface $formElement,
         private NotificationCheckerInterface $notificationChecker,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -66,7 +69,13 @@ final class ManagingZonesContext implements Context
     public function iDeleteZoneNamed(ZoneInterface $zone): void
     {
         $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['name' => $zone->getName(), 'code' => $zone->getCode()]);
+
+        try {
+            $this->indexPage->deleteResourceOnPage(['name' => $zone->getName(), 'code' => $zone->getCode()]);
+        }
+        catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**
@@ -309,6 +318,15 @@ final class ManagingZonesContext implements Context
      */
     public function iShouldBeNotifiedThatTheZoneIsInUseAndCannotBeDeleted(): void
     {
+        if ($this->sharedStorage->has('last_exception')) {
+            /** @var ResourceDeleteException $exception */
+            $exception = $this->sharedStorage->get('last_exception');
+
+            Assert::eq($exception->getMessage(), 'Cannot delete, the zone is in use.');
+
+            return;
+        }
+
         $this->notificationChecker->checkNotification('Error Cannot delete, the Zone is in use.', NotificationType::failure());
     }
 

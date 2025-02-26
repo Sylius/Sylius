@@ -1,12 +1,12 @@
-sylius_admin_channel:
-    resource: |
-        alias: sylius.channel
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show']
-        redirect: update
-        grid: sylius_admin_channel
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\ChannelType
-        permission: true
-    type: sylius.resource
+#sylius_admin_channel:
+#    resource: |
+#        alias: sylius.channel
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['show']
+#        redirect: update
+#        grid: sylius_admin_channel
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\ChannelType
+#        permission: true
+#    type: sylius.resource

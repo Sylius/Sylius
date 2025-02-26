@@ -1,26 +1,26 @@
-sylius_admin_customer:
-    resource: |
-        alias: sylius.customer
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['delete']
-        redirect: update
-        grid: sylius_admin_customer
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\CustomerType
-        permission: true
-    type: sylius.resource
+#sylius_admin_customer:
+#    resource: |
+#        alias: sylius.customer
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['delete']
+#        redirect: update
+#        grid: sylius_admin_customer
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\CustomerType
+#        permission: true
+#    type: sylius.resource
 
-sylius_admin_customer_order_index:
-    path: /customers/{id}/orders
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order::indexAction
-        _sylius:
-            section: admin
-            permission: true
-            template: "@SyliusAdmin/shared/crud/index.html.twig"
-            grid: sylius_admin_customer_order
+#sylius_admin_customer_order_index:
+#    path: /customers/{id}/orders
+#    methods: [GET]
+#    defaults:
+#        _controller: sylius.controller.order::indexAction
+#        _sylius:
+#            section: admin
+#            permission: true
+#            template: "@SyliusAdmin/shared/crud/index.html.twig"
+#            grid: sylius_admin_customer_order
 
 # This route is deprecated since Sylius 2.0 and will be removed in 3.0.
 sylius_admin_customer_orders_statistics:

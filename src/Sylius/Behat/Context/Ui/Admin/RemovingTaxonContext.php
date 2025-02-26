@@ -18,6 +18,8 @@ use Sylius\Behat\Element\Admin\Taxon\TreeElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,6 +29,7 @@ final readonly class RemovingTaxonContext implements Context
         private CreatePageInterface $createPage,
         private TreeElementInterface $treeElement,
         private NotificationCheckerInterface $notificationChecker,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -38,7 +41,12 @@ final readonly class RemovingTaxonContext implements Context
     public function iRemoveTaxonNamed(TaxonInterface $taxon): void
     {
         $this->createPage->open();
-        $this->treeElement->deleteTaxon($taxon->getName());
+
+        try {
+            $this->treeElement->deleteTaxon($taxon->getName());
+        } catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**

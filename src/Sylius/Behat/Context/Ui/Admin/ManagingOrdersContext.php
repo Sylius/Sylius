@@ -568,7 +568,8 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then I should be notified that the order's payment has been successfully completed
      */
-    public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyCompleted(): void
+    public function
+    iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyCompleted(): void
     {
         $this->notificationChecker->checkNotification(
             'Payment has been successfully updated.',

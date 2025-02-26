@@ -1,97 +1,97 @@
-sylius_admin_product_variant_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_variant::indexAction
-        _sylius:
-            template: "@SyliusAdmin/shared/crud/index.html.twig"
-            grid: sylius_admin_product_variant
-            section: admin
-            permission: true
-            vars:
-                product: "expr:service('sylius.repository.product').find($productId)"
-                route:
-                    parameters:
-                        productId: $productId
+#sylius_admin_product_variant_index:
+#    path: /
+#    methods: [GET]
+#    defaults:
+#        _controller: sylius.controller.product_variant::indexAction
+#        _sylius:
+#            template: "@SyliusAdmin/shared/crud/index.html.twig"
+#            grid: sylius_admin_product_variant
+#            section: admin
+#            permission: true
+#            vars:
+#                product: "expr:service('sylius.repository.product').find($productId)"
+#                route:
+#                    parameters:
+#                        productId: $productId
 
-sylius_admin_product_variant_create:
-    path: /new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.product_variant::createAction
-        _sylius:
-            factory:
-                method: createForProduct
-                arguments:
-                    - expr:notFoundOnNull(service('sylius.repository.product').find($productId))
-            template: "@SyliusAdmin/shared/crud/create.html.twig"
-            grid: sylius_admin_product_variant
-            form:
-                type: Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType
-            section: admin
-            redirect:
-                route: sylius_admin_product_variant_index
-                parameters: { productId: $productId }
-            permission: true
-            vars:
-                route:
-                    parameters:
-                        productId: $productId
+#sylius_admin_product_variant_create:
+#    path: /new
+#    methods: [GET, POST]
+#    defaults:
+#        _controller: sylius.controller.product_variant::createAction
+#        _sylius:
+#            factory:
+#                method: createForProduct
+#                arguments:
+#                    - expr:notFoundOnNull(service('sylius.repository.product').find($productId))
+#            template: "@SyliusAdmin/shared/crud/create.html.twig"
+#            grid: sylius_admin_product_variant
+#            form:
+#                type: Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType
+#            section: admin
+#            redirect:
+#                route: sylius_admin_product_variant_index
+#                parameters: { productId: $productId }
+#            permission: true
+#            vars:
+#                route:
+#                    parameters:
+#                        productId: $productId
 
-sylius_admin_product_variant_update:
-    path: /{id}/edit
-    methods: [GET, PUT]
-    defaults:
-        _controller: sylius.controller.product_variant::updateAction
-        _sylius:
-            template: "@SyliusAdmin/shared/crud/update.html.twig"
-            grid: sylius_admin_product_variant
-            form:
-                type: Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType
-            section: admin
-            redirect:
-                route: sylius_admin_product_variant_index
-                parameters: { productId: $productId }
-            permission: true
-            repository:
-                method: findOneByIdAndProductId
-                arguments:
-                    id: $id
-                    productId: $productId
-            vars:
-                route:
-                    parameters:
-                        id: $id
-                        productId: $productId
+#sylius_admin_product_variant_update:
+#    path: /{id}/edit
+#    methods: [GET, PUT]
+#    defaults:
+#        _controller: sylius.controller.product_variant::updateAction
+#        _sylius:
+#            template: "@SyliusAdmin/shared/crud/update.html.twig"
+#            grid: sylius_admin_product_variant
+#            form:
+#                type: Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType
+#            section: admin
+#            redirect:
+#                route: sylius_admin_product_variant_index
+#                parameters: { productId: $productId }
+#            permission: true
+#            repository:
+#                method: findOneByIdAndProductId
+#                arguments:
+#                    id: $id
+#                    productId: $productId
+#            vars:
+#                route:
+#                    parameters:
+#                        id: $id
+#                        productId: $productId
 
-sylius_admin_product_variant_bulk_delete:
-    path: /bulk-delete
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.product_variant::bulkDeleteAction
-        _sylius:
-            section: admin
-            redirect:
-                route: sylius_admin_product_variant_index
-                parameters: { productId: $productId }
-            permission: true
-            repository:
-                method: findById
-                arguments: [$ids]
+#sylius_admin_product_variant_bulk_delete:
+#    path: /bulk-delete
+#    methods: [DELETE]
+#    defaults:
+#        _controller: sylius.controller.product_variant::bulkDeleteAction
+#        _sylius:
+#            section: admin
+#            redirect:
+#                route: sylius_admin_product_variant_index
+#                parameters: { productId: $productId }
+#            permission: true
+#            repository:
+#                method: findById
+#                arguments: [$ids]
 
-sylius_admin_product_variant_delete:
-    path: /{id}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.product_variant::deleteAction
-        _sylius:
-            section: admin
-            redirect:
-                route: sylius_admin_product_variant_index
-                parameters: { productId: $productId }
-            permission: true
-            repository:
-                method: findOneByIdAndProductId
-                arguments:
-                    id: $id
-                    productId: $productId
+#sylius_admin_product_variant_delete:
+#    path: /{id}
+#    methods: [DELETE]
+#    defaults:
+#        _controller: sylius.controller.product_variant::deleteAction
+#        _sylius:
+#            section: admin
+#            redirect:
+#                route: sylius_admin_product_variant_index
+#                parameters: { productId: $productId }
+#            permission: true
+#            repository:
+#                method: findOneByIdAndProductId
+#                arguments:
+#                    id: $id
+#                    productId: $productId

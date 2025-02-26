@@ -1,11 +1,11 @@
-sylius_admin_shop_user_delete:
-    path: /{id}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.shop_user::deleteAction
-        _sylius:
-            section: admin
-            redirect:
-                route: sylius_admin_customer_show
-                parameters: { id: $customerId }
-            permission: true
+#sylius_admin_shop_user_delete:
+#    path: /{id}
+#    methods: [DELETE]
+#    defaults:
+#        _controller: sylius.controller.shop_user::deleteAction
+#        _sylius:
+#            section: admin
+#            redirect:
+#                route: sylius_admin_customer_show
+#                parameters: { id: $customerId }
+#            permission: true

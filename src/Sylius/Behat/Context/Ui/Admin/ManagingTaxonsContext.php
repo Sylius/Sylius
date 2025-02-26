@@ -26,6 +26,7 @@ use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -439,10 +440,10 @@ final readonly class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatICannotDeleteAMenuTaxonOfAnyChannel(): void
     {
-        $this->notificationChecker->checkNotification(
-            'You cannot delete a menu taxon of any channel.',
-            NotificationType::failure(),
-        );
+        /** @var ResourceDeleteException $exception */
+        $exception = $this->sharedStorage->get('last_exception');
+
+        Assert::eq($exception->getMessage(), 'You cannot delete a menu taxon of any channel.');
     }
 
     /**
@@ -450,10 +451,10 @@ final readonly class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatICannotDeleteATaxonInUse(): void
     {
-        $this->notificationChecker->checkNotification(
-            'Cannot delete, the Taxon is in use.',
-            NotificationType::failure(),
-        );
+        /** @var ResourceDeleteException $exception */
+        $exception = $this->sharedStorage->get('last_exception');
+
+        Assert::eq($exception->getMessage(), 'Cannot delete, the taxon is in use.');
     }
 
     /**

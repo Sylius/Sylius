@@ -1,26 +1,27 @@
-sylius_admin_promotion:
-    resource: |
-        alias: sylius.promotion
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show']
-        redirect: update
-        grid: sylius_admin_promotion
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\PromotionType
-        permission: true
-    type: sylius.resource
+#sylius_admin_promotion:
+#    resource: |
+#        alias: sylius.promotion
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['show']
+#        redirect: update
+#        grid: sylius_admin_promotion
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\PromotionType
+#        permission: true
+#    type: sylius.resourcep
 
-sylius_admin_promotion_archive:
-    path: /promotions/{id}/archive
-    methods: [PATCH]
-    defaults:
-        _controller: sylius.controller.promotion::updateAction
-        _sylius:
-            section: admin
-            permission: true
-            form:
-                type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
-            redirect:
-                route: sylius_admin_promotion_index
-                parameters: {}
+#sylius_admin_promotion_archive:
+#    path: /promotions/{id}/archive
+#    methods: [PATCH]
+#    defaults:
+#        _controller: sylius.controller.promotion::updateAction
+#        _sylius:
+#            section: admin
+#            permission: true
+#            form:
+#                type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
+#            redirect:
+#                route: sylius_admin_promotion_index
+#                parameters: {}
+#    

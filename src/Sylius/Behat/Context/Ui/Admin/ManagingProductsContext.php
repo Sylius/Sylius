@@ -38,6 +38,7 @@ use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -499,10 +500,10 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedOfFailure(): void
     {
-        $this->notificationChecker->checkNotification(
-            'Cannot delete, the Product is in use.',
-            NotificationType::error(),
-        );
+        /** @var ResourceDeleteException $exception */
+        $exception = $this->sharedStorage->get('last_exception');
+
+        Assert::eq($exception->getMessage(), 'Cannot delete, the product is in use.');
     }
 
     /**

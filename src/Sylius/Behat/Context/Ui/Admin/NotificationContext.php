@@ -16,12 +16,15 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\NotificationsElementInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Webmozart\Assert\Assert;
 
 final readonly class NotificationContext implements Context
 {
     public function __construct(
         private NotificationsElementInterface $notificationsElement,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -75,6 +78,15 @@ final readonly class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItIsInUse(): void
     {
+        if ($this->sharedStorage->has('last_exception')) {
+            /** @var ResourceDeleteException $exception */
+            $exception = $this->sharedStorage->get('last_exception');
+
+            Assert::contains($exception->getMessage(), 'Cannot delete');
+
+            return;
+        }
+
         Assert::true($this->notificationsElement->hasNotification((string) NotificationType::error(), 'Cannot delete'));
     }
 }

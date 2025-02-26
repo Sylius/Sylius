@@ -1,24 +1,24 @@
-sylius_admin_payment:
-    resource: |
-        alias: sylius.payment
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        only: ['index']
-        grid: sylius_admin_payment
-        permission: true
-    type: sylius.resource
+#sylius_admin_payment:
+#    resource: |
+#        alias: sylius.payment
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        only: ['index']
+#        grid: sylius_admin_payment
+#        permission: true
+#    type: sylius.resource
 
-sylius_admin_payment_complete:
-    path: /payments/{id}/complete
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.payment::applyStateMachineTransitionAction
-        _sylius:
-            event: complete
-            section: admin
-            permission: true
-            state_machine:
-                graph: sylius_payment
-                transition: complete
-            redirect: sylius_admin_payment_index
-            flash: sylius.payment.completed
+#sylius_admin_payment_complete:
+#    path: /payments/{id}/complete
+#    methods: [PUT]
+#    defaults:
+#        _controller: sylius.controller.payment::applyStateMachineTransitionAction
+#        _sylius:
+#            event: complete
+#            section: admin
+#            permission: true
+#            state_machine:
+#                graph: sylius_payment
+#                transition: complete
+#            redirect: sylius_admin_payment_index
+#            flash: sylius.payment.completed

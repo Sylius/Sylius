@@ -1,12 +1,12 @@
-sylius_admin_currency:
-    resource: |
-        alias: sylius.currency
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        only: ['index', 'create']
-        redirect: index
-        grid: sylius_admin_currency
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\CurrencyType
-        permission: true
-    type: sylius.resource
+#sylius_admin_currency:
+#    resource: |
+#        alias: sylius.currency
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        only: ['index', 'create']
+#        redirect: index
+#        grid: sylius_admin_currency
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\CurrencyType
+#        permission: true
+#    type: sylius.resource

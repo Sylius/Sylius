@@ -25,6 +25,7 @@ use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
@@ -562,7 +563,12 @@ final class ManagingPromotionsContext implements Context
         $this->sharedStorage->set('promotion', $promotion);
 
         $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['name' => $promotion->getName()]);
+
+        try  {
+            $this->indexPage->deleteResourceOnPage(['name' => $promotion->getName()]);
+        } catch (ResourceDeleteException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
     }
 
     /**
@@ -580,10 +586,10 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedOfFailure()
     {
-        $this->notificationChecker->checkNotification(
-            'Cannot delete, the Promotion is in use.',
-            NotificationType::failure(),
-        );
+        /** @var ResourceDeleteException $exception */
+        $exception = $this->sharedStorage->get('last_exception');
+
+        Assert::eq($exception->getMessage(), 'Cannot delete, the promotion is in use.');
     }
 
     /**

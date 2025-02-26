@@ -1,34 +1,34 @@
-sylius_admin_product_attribute:
-    resource: |
-        alias: sylius.product_attribute
-        section: admin
-        templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show', 'create']
-        redirect: update
-        grid: sylius_admin_product_attribute
-        form:
-            type: Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType
-        permission: true
-    type: sylius.resource
+#sylius_admin_product_attribute:
+#    resource: |
+#        alias: sylius.product_attribute
+#        section: admin
+#        templates: "@SyliusAdmin\\shared\\crud"
+#        except: ['show', 'create']
+#        redirect: update
+#        grid: sylius_admin_product_attribute
+#        form:
+#            type: Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType
+#        permission: true
+#    type: sylius.resource
 
-sylius_admin_product_attribute_create:
-    path: /product-attributes/{type}/new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.product_attribute::createAction
-        _sylius:
-            section: admin
-            factory:
-                method: createTyped
-                arguments:
-                    type: $type
-            form:
-                type: Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType
-            template: "@SyliusAdmin/shared/crud/create.html.twig"
-            redirect: sylius_admin_product_attribute_update
-            permission: true
-            vars:
-                subheader: sylius.ui.manage_attributes_of_your_products
-                route:
-                    parameters:
-                        type: $type
+#sylius_admin_product_attribute_create:
+#    path: /product-attributes/{type}/new
+#    methods: [GET, POST]
+#    defaults:
+#        _controller: sylius.controller.product_attribute::createAction
+#        _sylius:
+#            section: admin
+#            factory:
+#                method: createTyped
+#                arguments:
+#                    type: $type
+#            form:
+#                type: Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType
+#            template: "@SyliusAdmin/shared/crud/create.html.twig"
+#            redirect: sylius_admin_product_attribute_update
+#            permission: true
+#            vars:
+#                subheader: sylius.ui.manage_attributes_of_your_products
+#                route:
+#                    parameters:
+#                        type: $type
