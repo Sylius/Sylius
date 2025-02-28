@@ -74,7 +74,7 @@ By default, Sylius API restricts order modifications to the "cart" state. If you
 If you don’t need certain endpoints (e.g., for shipping if you only sell digital products), you can disable them.
 
 ```yaml
-# config/sylius_api.yaml
+# config/packages/sylius_api.yaml
 
 sylius_api:
     operations_to_remove:
