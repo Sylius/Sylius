@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ShopBundle\Tests\Security;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ShopFirewallTest extends WebTestCase
+final class ShopFirewallTest extends WebTestCase
 {
     private string $shopRegexp;
 

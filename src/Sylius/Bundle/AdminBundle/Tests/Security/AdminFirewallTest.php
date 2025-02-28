@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Tests\Security;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class AdminFirewallTest extends WebTestCase
+final class AdminFirewallTest extends WebTestCase
 {
     private string $adminRegexp;
 
