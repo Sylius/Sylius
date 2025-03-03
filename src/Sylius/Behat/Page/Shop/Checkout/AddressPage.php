@@ -71,15 +71,8 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function checkInvalidCredentialsValidation(): bool
     {
-        /** @var NodeElement $validationElement */
         $validationElement = $this->getDocument()->waitFor(3, function (): NodeElement {
-            try {
-                $validationElement = $this->getElement('login_validation_error');
-            } catch (ElementNotFoundException) {
-                return null;
-            }
-
-            return $validationElement;
+            return $this->getElement('login_validation_error');
         });
 
         return $validationElement->getText() === 'Invalid credentials.';
