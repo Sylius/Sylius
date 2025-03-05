@@ -149,7 +149,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isProductInTheList(string $productName): bool
     {
-        return null !== $this->getRowWithItem($productName);
+        return $this->hasElement('item', ['%name%' => $productName]);
     }
 
     public function getItemsTotal(): string
