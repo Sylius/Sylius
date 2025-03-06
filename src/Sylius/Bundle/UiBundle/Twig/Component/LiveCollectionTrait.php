@@ -39,7 +39,7 @@ trait LiveCollectionTrait
             $data = [];
         }
 
-        $index = [] !== $data ? max(array_keys($data)) + 1 : 0;
+        $index = $this->provideNewCollectionItemIndex($data);
         $propertyAccessor->setValue(
             $this->formValues,
             sprintf('%s[%s]', $propertyPath, $index),
@@ -61,7 +61,7 @@ trait LiveCollectionTrait
         $propertyAccessor->setValue($this->formValues, $propertyPath, $data);
     }
 
-    private function fieldNameToPropertyPath(string $collectionFieldName, string $rootFormName): string
+    protected function fieldNameToPropertyPath(string $collectionFieldName, string $rootFormName): string
     {
         $propertyPath = $collectionFieldName;
 
@@ -74,5 +74,25 @@ trait LiveCollectionTrait
         }
 
         return $propertyPath;
+    }
+
+    /** @param array<int|string, mixed> $data */
+    protected function provideNewCollectionItemIndex(array $data): int
+    {
+        if ([] === $data) {
+            return 0;
+        }
+
+        $keys = array_keys($data);
+        $numericKeys = array_filter($keys, 'is_numeric');
+        if ([] === $numericKeys) {
+            return 0;
+        }
+
+        if (count($keys) === count($numericKeys)) {
+            return max($keys) + 1;
+        }
+
+        return max($numericKeys) + 1;
     }
 }
