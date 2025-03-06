@@ -366,6 +366,7 @@ final readonly class ManagingProductAttributesContext implements Context
 
     /**
      * @Then /^(this product attribute) should have value "([^"]*)"/
+     * @Then /^the ("[^"]+" product attribute) should(?:| also) have value "([^"]+)"/
      */
     public function theSelectAttributeShouldHaveValue(ProductAttributeInterface $productAttribute, string $value): void
     {

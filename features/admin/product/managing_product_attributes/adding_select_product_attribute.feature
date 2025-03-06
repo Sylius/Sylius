@@ -29,6 +29,8 @@ Feature: Adding a new select product attribute
         And I add it
         Then I should be notified that it has been successfully created
         And the select attribute "Mug material" should appear in the store
+        And the "Mug material" product attribute should have value "Banana Skin"
+        And the "Mug material" product attribute should also have value "Plastic"
 
     @no-api @ui
     Scenario: Seeing disabled type field while adding a select product attribute
