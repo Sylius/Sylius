@@ -15,10 +15,13 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Order;
 
 use Sylius\Component\Addressing\Model\AddressLogEntry;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class AddressHistoryComponent
 {
+    use HookableComponentTrait;
+
     public ?string $addressId = null;
 
     public ?string $header = null;

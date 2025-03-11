@@ -16,13 +16,16 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-readonly class BreadcrumbComponent
+class BreadcrumbComponent
 {
+    use HookableComponentTrait;
+
     /**
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
      */

@@ -9,7 +9,7 @@
             </div>
             <div class="offcanvas-body justify-content-lg-center w-full py-0">
                 <div class="navbar-nav my-2 flex-column flex-lg-row gap-lg-4" {{ sylius_test_html_attribute('menu') }}>
-                    {% hook 'sylius_shop.base.header.navbar.menu' with { taxons } %}
+                    {% hook 'menu' with { taxons } %}
                 </div>
             </div>
         </nav>

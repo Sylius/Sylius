@@ -17,12 +17,15 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-readonly class CurrencySwitcherComponent
+class CurrencySwitcherComponent
 {
+    use HookableComponentTrait;
+
     public function __construct(
         protected ChannelContextInterface $channelContext,
         protected CurrencyContextInterface $currencyContext,

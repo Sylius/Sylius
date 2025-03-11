@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\Autocomplete\Checksum\ChecksumCalculator;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
@@ -22,6 +23,11 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class ProductAttributeAutocompleteComponent
 {
+    use ComponentToolsTrait;
+    use DefaultActionTrait;
+    use HookableLiveComponentTrait;
+    use TemplatePropTrait;
+
     /** @var array<string> */
     #[LiveProp(writable: true, hydrateWith: 'hydrateSelectedAttributeCodes', dehydrateWith: 'dehydrateSelectedAttributeCodes', updateFromParent: true)]
     #[ExposeInTemplate(name: 'selected_attribute_codes')]
@@ -30,10 +36,6 @@ class ProductAttributeAutocompleteComponent
     /** @var array<string> */
     #[LiveProp(updateFromParent: true)]
     public array $excludedAttributeCodes = [];
-
-    use ComponentToolsTrait;
-    use DefaultActionTrait;
-    use TemplatePropTrait;
 
     public function __construct(
         protected readonly ChecksumCalculator $checksumCalculator,

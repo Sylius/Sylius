@@ -15,10 +15,13 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class ShopPreviewComponent
 {
+    use HookableComponentTrait;
+
     /** @param ChannelRepositoryInterface<ChannelInterface> $channelRepository */
     public function __construct(protected readonly ChannelRepositoryInterface $channelRepository)
     {

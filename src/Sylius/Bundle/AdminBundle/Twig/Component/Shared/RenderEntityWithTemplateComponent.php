@@ -14,10 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class RenderEntityWithTemplateComponent
 {
+    use HookableComponentTrait;
+
     public function __construct(
         protected EntityManagerInterface $entityManager,
     ) {

@@ -18,12 +18,15 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
-readonly class TaxonMenuComponent
+class TaxonMenuComponent
 {
+    use HookableComponentTrait;
+
     /**
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
      */
