@@ -68,9 +68,11 @@ final class ResourceDeleteHandlerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ResourceInterface $resource,
     ): void {
+        /** @deprecated This fallback should be removed in Sylius 3.0 */
         if (interface_exists(ORMException::class)) {
             $ormException = new class() extends \RuntimeException implements ORMException {};
         } else {
+
             $ormException = new class() extends ORMException {};
         }
 
