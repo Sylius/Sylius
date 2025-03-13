@@ -22,6 +22,7 @@ final class AsAttributeType
         private string $type,
         private string $label,
         private string $formType,
+        private ?string $configurationFormType = null,
         private int $priority = 0,
     ) {
     }
@@ -39,6 +40,11 @@ final class AsAttributeType
     public function getFormType(): string
     {
         return $this->formType;
+    }
+
+    public function getConfigurationFormType(): ?string
+    {
+        return $this->configurationFormType;
     }
 
     public function getPriority(): int
