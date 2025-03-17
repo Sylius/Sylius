@@ -47,6 +47,9 @@
         "symfony/webpack-encore-bundle": "^2.2",
         "theofidry/alice-data-fixtures": "^1.7"
     },
+    "conflict": {
+        "api-platform/jsonld": "4.1.1"
+    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true
