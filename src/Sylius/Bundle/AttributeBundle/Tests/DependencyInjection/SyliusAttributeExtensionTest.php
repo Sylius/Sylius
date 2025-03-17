@@ -42,6 +42,42 @@ final class SyliusAttributeExtensionTest extends AbstractExtensionTestCase
                 'label' => 'Test',
                 'form_type' => 'SomeFormType',
                 'priority' => 15,
+                'configuration_form_type' => null,
+            ],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_attribute_type_with_attribute_configuration(): void
+    {
+        $this->container->setDefinition(
+            'acme.attribute_type_with_attribute_configuration',
+            (new Definition())
+                ->setClass(AttributeTypeStub::class)
+                ->setAutoconfigured(false)
+                ->setTags(['sylius.attribute.type' => [
+                    [
+                        'attribute_type' => 'test',
+                        'label' => 'Test',
+                        'form_type' => 'SomeFormType',
+                        'priority' => 15,
+                        'configuration_form_type' => 'SomeConfigurationFormType',
+                    ]
+                ]])
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.attribute_type_with_attribute_configuration',
+            AsAttributeType::SERVICE_TAG,
+            [
+                'attribute_type' => 'test',
+                'label' => 'Test',
+                'form_type' => 'SomeFormType',
+                'priority' => 15,
+                'configuration_form_type' => 'SomeConfigurationFormType',
             ],
         );
     }
