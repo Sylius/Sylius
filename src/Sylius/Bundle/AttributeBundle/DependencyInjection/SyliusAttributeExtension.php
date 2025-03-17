@@ -58,8 +58,8 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
                     'attribute_type' => $attribute->getType(),
                     'label' => $attribute->getLabel(),
                     'form_type' => $attribute->getFormType(),
-                    'configuration_form_type' => $attribute->getConfigurationFormType(),
                     'priority' => $attribute->getPriority(),
+                    'configuration_form_type' => $attribute->getConfigurationFormType(),
                 ]);
             },
         );

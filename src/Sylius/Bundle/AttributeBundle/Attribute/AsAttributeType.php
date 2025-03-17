@@ -22,8 +22,8 @@ final class AsAttributeType
         private string $type,
         private string $label,
         private string $formType,
-        private ?string $configurationFormType = null,
         private int $priority = 0,
+        private ?string $configurationFormType = null,
     ) {
     }
 
