@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.product_variant.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/product_variant/index/content/header/breadcrumbs.html.twig'
+                priority: 0

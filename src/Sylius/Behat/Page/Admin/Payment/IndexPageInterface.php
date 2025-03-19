@@ -27,5 +27,7 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     public function showOrderPageForNthPayment(int $position): void;
 
+    public function showPaymentRequestOfNthPayment(int $position): void;
+
     public function chooseChannelFilter(string $channelName): void;
 }

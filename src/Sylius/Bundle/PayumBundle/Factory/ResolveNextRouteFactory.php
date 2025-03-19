@@ -18,7 +18,7 @@ use Sylius\Bundle\PayumBundle\Request\ResolveNextRouteInterface;
 
 final class ResolveNextRouteFactory implements ResolveNextRouteFactoryInterface
 {
-    public function createNewWithModel($model): ResolveNextRouteInterface
+    public function createNewWithModel(mixed $model): ResolveNextRouteInterface
     {
         return new ResolveNextRoute($model);
     }

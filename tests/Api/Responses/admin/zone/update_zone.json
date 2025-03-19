@@ -1,0 +1,24 @@
+{
+    "@context": "\/api\/v2\/contexts\/Zone",
+    "@id": "\/api\/v2\/admin\/zones\/EU",
+    "@type": "Zone",
+    "id": "@integer@",
+    "code": "EU",
+    "name": "EuropeanUnion",
+    "type": "country",
+    "scope": "all",
+    "members": [
+        {
+            "@type": "ZoneMember",
+            "code": "NL"
+        },
+        {
+            "@type": "ZoneMember",
+            "code": "DE"
+        },
+        {
+            "@type": "ZoneMember",
+            "code": "PL"
+        }
+    ]
+}

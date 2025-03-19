@@ -1,0 +1,75 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.customer.create.content':
+            form:
+                component: 'sylius_admin:customer:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+        
+        'sylius_admin.customer.create.content.form':
+            sections:
+                template: '@SyliusAdmin/customer/form/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.create.content.form.sections':
+            general:
+                enabled: false
+
+        'sylius_admin.customer.create.content.form.sections#left':
+            general:
+                template: '@SyliusAdmin/customer/form/sections/general.html.twig'
+                priority: 100
+            account_credentials:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.create.content.form.sections#right':
+            extra_information:
+                template: '@SyliusAdmin/customer/form/sections/extra_information.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.create.content.form.sections.general':
+            default:
+                enabled: false
+            first_name:
+                template: '@SyliusAdmin/customer/form/sections/general/first_name.html.twig'
+                priority: 300
+            last_name:
+                template: '@SyliusAdmin/customer/form/sections/general/last_name.html.twig'
+                priority: 200
+            email:
+                template: '@SyliusAdmin/customer/form/sections/general/email.html.twig'
+                priority: 100
+            group:
+                template: '@SyliusAdmin/customer/form/sections/general/group.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.create.content.form.sections.extra_information':
+            gender:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/gender.html.twig'
+                priority: 300
+            birthday:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/birthday.html.twig'
+                priority: 200
+            phone_number:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/phone_number.html.twig'
+                priority: 100
+            subscribe_to_the_newsletter:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/subscribe_to_the_newsletter.html.twig'
+                priority: 0
+                
+        'sylius_admin.customer.create.content.form.sections.account_credentials':
+            password:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials/password.html.twig'
+                priority: 200
+            enabled:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials/enabled.html.twig'
+                priority: 100
+            verified:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials/verified.html.twig'
+                priority: 0

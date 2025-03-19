@@ -1,0 +1,5 @@
+{% set item = hookable_metadata.context.item %}
+
+<td {{ sylius_test_html_attribute('cart-item-product' ) }}>
+    {{ component('sylius_shop:order_item:product_info', { item: item }) }}
+</td>

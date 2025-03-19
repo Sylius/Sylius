@@ -17,67 +17,55 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
+        <service id="sylius.provider.channel_based_default_zone" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
 
-        <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
-        <service id="sylius.provider.channel_based_default_zone" alias="sylius.provider.channel_based_default_zone_provider" />
-
-        <service id="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider">
+        <service id="sylius.provider.channel_based_product_translation" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider">
             <argument type="service" id="sylius.context.locale" />
         </service>
-        <service id="sylius.provider.channel_based_product_translation" alias="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface" />
+        <service id="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface" alias="sylius.provider.channel_based_product_translation" />
 
-        <service id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\CustomerProvider" >
+        <service id="sylius.provider.customer" class="Sylius\Bundle\CoreBundle\Provider\CustomerProvider" >
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.canonicalizer" />
         </service>
-        <service id="sylius.provider.customer" alias="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
+        <service id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" alias="sylius.provider.customer" />
 
-        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-        </service>
-        <service id="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" alias="sylius.provider.product_variants_prices" />
-
-        <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
+        <service id="sylius.provider.translation_locale.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
             <argument type="service" id="sylius.provider.locale_collection" />
             <argument type="string">%locale%</argument>
         </service>
-        <service id="sylius.provider.translation_locale.admin" alias="sylius.translation_locale_provider.admin" />
 
-        <service id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" class="Sylius\Component\Core\Statistics\Provider\StatisticsProvider" >
+        <service id="sylius.provider.statistics" class="Sylius\Component\Core\Statistics\Provider\StatisticsProvider" >
             <argument type="service" id="sylius.provider.statistics.sales" />
             <argument type="service" id="sylius.provider.statistics.business_activity_summary"/>
         </service>
-        <service id="sylius.provider.statistics" alias="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
+        <service id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" alias="sylius.provider.statistics" />
 
-        <service id="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface" class="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProvider">
+        <service id="sylius.provider.statistics.business_activity_summary" class="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.customer" />
         </service>
-        <service id="sylius.provider.statistics.business_activity_summary" alias="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface" />
+        <service id="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface" alias="sylius.provider.statistics.business_activity_summary" />
 
-        <service id="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface" class="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProvider">
+        <service id="sylius.provider.statistics.sales" class="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProvider">
             <argument type="service" id="sylius.registry.statistics.orders_totals_providers" />
             <argument>%sylius_core.orders_statistics.intervals_map%</argument>
         </service>
-        <service id="sylius.provider.statistics.sales" alias="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface" />
+        <service id="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface" alias="sylius.provider.statistics.sales" />
 
-        <service id="sylius.orders_totals_provider.day" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\DayBasedOrdersTotalProvider">
+        <service id="sylius.provider.statistics.orders_totals.day" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\DayBasedOrdersTotalProvider">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.statistics.orders_totals_provider" type="day" />
         </service>
-        <service id="sylius.provider.statistics.orders_totals.day" alias="sylius.orders_totals_provider.day" />
 
-        <service id="sylius.orders_totals_provider.month" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\MonthBasedOrdersTotalProvider">
+        <service id="sylius.provider.statistics.orders_totals.month" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\MonthBasedOrdersTotalProvider">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.statistics.orders_totals_provider" type="month" />
         </service>
-        <service id="sylius.provider.statistics.orders_totals.month" alias="sylius.orders_totals_provider.month" />
 
-        <service id="sylius.orders_totals_provider.year" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\YearBasedOrdersTotalProvider">
+        <service id="sylius.provider.statistics.orders_totals.year" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\YearBasedOrdersTotalProvider">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.statistics.orders_totals_provider" type="year" />
         </service>
-        <service id="sylius.provider.statistics.orders_totals.year" alias="sylius.orders_totals_provider.year" />
     </services>
 </container>

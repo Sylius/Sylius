@@ -1,0 +1,19 @@
+{% set locale_code = hookable_metadata.context.locale_code|default(null) %}
+{% set product_attribute_value = hookable_metadata.context.product_attribute_value %}
+{% set product_attribute_code = hookable_metadata.context.product_attribute_code %}
+
+{% if locale_code is not null %}
+    <button
+        type="button"
+        class="btn btn-icon"
+        data-bs-toggle="tooltip"
+        data-bs-title="{{ 'sylius.ui.apply_to_all'|trans }}"
+        data-action="live#action"
+        data-live-action-param="applyToAll"
+        data-live-attribute-code-param="{{ product_attribute_code }}"
+        data-live-locale-code-param="{{ product_attribute_value.vars.data.localeCode }}"
+        {{ sylius_test_html_attribute('apply-to-all') }}
+    >
+        {{ ux_icon('tabler:copy-plus') }}
+    </button>
+{% endif %}

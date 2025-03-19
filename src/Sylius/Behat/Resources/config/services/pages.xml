@@ -34,9 +34,5 @@
         </service>
 
         <service id="sylius.behat.page.error" class="%sylius.behat.page.error.class%" parent="sylius.behat.page" public="false" />
-
-        <service id="sylius.behat.page.external.paypal_checkout_express" class="Sylius\Behat\Page\External\PaypalExpressCheckoutPage" parent="sylius.behat.page" public="false" >
-            <argument type="service" id="sylius.repository.payment_security_token" />
-        </service>
     </services>
 </container>

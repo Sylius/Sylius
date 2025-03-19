@@ -19,54 +19,51 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductVariantEventSubscriber">
+        <service id="sylius_api.event_subscriber.product_variant" class="Sylius\Bundle\ApiBundle\EventSubscriber\ProductVariantEventSubscriber">
             <argument type="service" id="sylius.event_bus" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.product_variant" alias="Sylius\Bundle\ApiBundle\EventSubscriber\ProductVariantEventSubscriber" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\CatalogPromotionEventSubscriber">
+        <service id="sylius_api.event_subscriber.catalog_promotion" class="Sylius\Bundle\ApiBundle\EventSubscriber\CatalogPromotionEventSubscriber">
             <argument type="service" id="sylius.announcer.catalog_promotion" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.catalog_promotion" alias="Sylius\Bundle\ApiBundle\EventSubscriber\CatalogPromotionEventSubscriber" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber">
+        <service id="sylius_api.event_subscriber.kernel_request" class="Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber">
             <argument>%sylius_api.enabled%</argument>
             <argument>%sylius.security.api_route%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.kernel_request" alias="Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductDeletionEventSubscriber">
+        <service id="sylius_api.event_subscriber.payment_request" class="Sylius\Bundle\ApiBundle\EventSubscriber\PaymentRequestEventSubscriber">
+            <argument type="service" id="sylius.announcer.payment_request" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="sylius_api.event_subscriber.product_deletion" class="Sylius\Bundle\ApiBundle\EventSubscriber\ProductDeletionEventSubscriber">
             <argument type="service" id="sylius.checker.promotion.product_in_promotion_rule" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.product_deletion" alias="Sylius\Bundle\ApiBundle\EventSubscriber\ProductDeletionEventSubscriber" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductSlugEventSubscriber">
+        <service id="sylius_api.event_subscriber.product_slug" class="Sylius\Bundle\ApiBundle\EventSubscriber\ProductSlugEventSubscriber">
             <argument type="service" id="sylius.generator.slug" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.product_slug" alias="Sylius\Bundle\ApiBundle\EventSubscriber\ProductSlugEventSubscriber" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber">
+        <service id="sylius_api.event_subscriber.taxon_deletion" class="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.checker.promotion.taxon_in_promotion_rule" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.taxon_deletion" alias="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonSlugEventSubscriber">
+        <service id="sylius_api.event_subscriber.taxon_slug" class="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonSlugEventSubscriber">
             <argument type="service" id="sylius.generator.taxon_slug" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.taxon_slug" alias="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonSlugEventSubscriber" />
 
-        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\AttributeEventSubscriber">
+        <service id="sylius_api.event_subscriber.attribute" class="Sylius\Bundle\ApiBundle\EventSubscriber\AttributeEventSubscriber">
             <argument type="service" id="sylius.registry.attribute_type" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_api.event_subscriber.attribute" alias="Sylius\Bundle\ApiBundle\EventSubscriber\AttributeEventSubscriber" />
     </services>
 </container>

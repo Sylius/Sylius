@@ -1,0 +1,6 @@
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('update')), options.link.parameters|default({'id': data.id}))) %}
+{% set message = action.label|default('sylius.ui.edit') %}
+
+<a href="{{ path }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}">
+    {{ ux_icon(action.icon|default('tabler:pencil')) }}
+</a>

@@ -14,29 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Twig\Environment;
 
-final class LocaleSwitchController
+final readonly class LocaleSwitchController
 {
     public function __construct(
-        private Environment $templatingEngine,
-        private LocaleContextInterface $localeContext,
         private LocaleProviderInterface $localeProvider,
         private LocaleSwitcherInterface $localeSwitcher,
     ) {
-    }
-
-    public function renderAction(): Response
-    {
-        return new Response($this->templatingEngine->render('@SyliusShop/Menu/_localeSwitch.html.twig', [
-            'active' => $this->localeContext->getLocaleCode(),
-            'locales' => $this->localeProvider->getAvailableLocalesCodes(),
-        ]));
     }
 
     public function switchAction(Request $request, ?string $code = null): Response

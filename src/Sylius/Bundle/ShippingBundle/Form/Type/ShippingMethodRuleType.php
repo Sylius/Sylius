@@ -24,9 +24,6 @@ final class ShippingMethodRuleType extends AbstractConfigurableShippingMethodEle
         $builder
             ->add('type', ShippingMethodRuleChoiceType::class, [
                 'label' => 'sylius.form.shipping_method_rule.type',
-                'attr' => [
-                    'data-form-collection' => 'update',
-                ],
             ])
         ;
     }

@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -24,6 +25,8 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,

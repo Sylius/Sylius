@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Converter;
 
+use ApiPlatform\Metadata\Operation;
+
 interface IriToIdentifierConverterInterface
 {
-    public function getIdentifier(?string $iri): ?string;
+    public function getIdentifier(?string $iri, ?Operation $operation = null): ?string;
 
     public function isIdentifier($fieldValue): bool;
 }

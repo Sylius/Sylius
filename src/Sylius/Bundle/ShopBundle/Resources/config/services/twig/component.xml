@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Sylius package.
+  ~
+  ~ (c) Sylius Sp. z o.o.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_shop.twig.component.locale_switcher"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\LocaleSwitcherComponent"
+        >
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.provider.locale" />
+
+            <tag name="sylius.twig_component" key="sylius_shop:common:locale_switcher" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.currency_switcher"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\CurrencySwitcherComponent"
+        >
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.currency" />
+
+            <tag name="sylius.twig_component" key="sylius_shop:common:currency_switcher" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.taxon_menu"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\TaxonMenuComponent"
+        >
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+
+            <tag name="sylius.twig_component" key="sylius_shop:common:taxon_menu" />
+        </service>
+
+        <service
+                id="sylius_shop.twig.component.product.by_slug"
+                class="Sylius\Bundle\ShopBundle\Twig\Component\Product\BySlugComponent"
+        >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+
+            <tag name="sylius.twig_component" key="sylius_shop:product.by_slug" />
+        </service>
+    </services>
+</container>

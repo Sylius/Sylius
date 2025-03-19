@@ -34,6 +34,13 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="type">
+            <constraint name="Choice">
+                <option name="callback">getTypes</option>
+                <option name="message">sylius.zone.type.invalid</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="scope">
             <constraint name="NotBlank">
                 <option name="message">sylius.zone.scope.not_blank</option>

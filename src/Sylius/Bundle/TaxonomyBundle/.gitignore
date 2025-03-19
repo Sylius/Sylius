@@ -3,3 +3,6 @@
 
 /composer.phar
 /composer.lock
+
+.phpunit.result.cache
+/Tests/Functional/app/db.sql

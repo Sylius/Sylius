@@ -6,12 +6,12 @@
     "lastName": null,
     "localeCode": "en",
     "avatar": null,
-    "id": @integer@,
+    "id": "@integer@",
     "username": "wilhelm",
     "lastLogin": null,
     "verifiedAt": null,
     "email": "api_wilhelm@admin.com",
-    "createdAt": @date@,
-    "updatedAt": @date@,
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
     "enabled": true
 }

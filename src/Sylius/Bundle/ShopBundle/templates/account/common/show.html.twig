@@ -1,0 +1,8 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set prefixes = prefixes|default([])|merge(['sylius_shop.account.common']) %}
+{% set attrs = attrs|default([]) %}
+
+{% block content %}
+    {% hook 'show' with { _prefixes: prefixes, ...attrs } %}
+{% endblock %}

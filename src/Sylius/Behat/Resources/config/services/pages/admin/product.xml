@@ -27,22 +27,27 @@
 
         <service id="sylius.behat.page.admin.product.create_configurable" class="%sylius.behat.page.admin.product.create_configurable.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_create</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
         <service id="sylius.behat.page.admin.product.create_simple" class="%sylius.behat.page.admin.product.create_simple.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_create</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
         <service id="sylius.behat.page.admin.product.index" class="%sylius.behat.page.admin.product.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_product_index</argument>
             <argument type="service" id="sylius.behat.checker.image_existence" />
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
         <service id="sylius.behat.page.admin.product.index_per_taxon" class="%sylius.behat.page.admin.product.index_per_taxon.class%" parent="sylius.behat.page.admin.crud.index" public="false">
-            <argument type="string">sylius_admin_product_per_taxon_index</argument>
+            <argument type="string">sylius_admin_product_taxon_index</argument>
         </service>
         <service id="sylius.behat.page.admin.product.update_configurable" class="%sylius.behat.page.admin.product.update_configurable.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_update</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
         <service id="sylius.behat.page.admin.product.update_simple" class="%sylius.behat.page.admin.product.update_simple.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_update</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
         <service id="sylius.behat.page.admin.product.show_page" class="%sylius.behat.page.admin.product.show.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>

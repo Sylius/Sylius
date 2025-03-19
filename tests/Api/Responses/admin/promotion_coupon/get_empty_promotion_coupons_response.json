@@ -1,0 +1,68 @@
+{
+    "@context": "\/api\/v2\/contexts\/PromotionCoupon",
+    "@id": "\/api\/v2\/admin\/promotions\/NON_EXISTING_PROMOTION_CODE\/coupons",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 0,
+    "hydra:member": [],
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/promotions\/NON_EXISTING_PROMOTION_CODE\/coupons{?order[code],order[expiresAt],order[usageLimit],order[perCustomerUsageLimit],order[used],code,code[],promotion.code,promotion.code[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[expiresAt]",
+                "property": "expiresAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[usageLimit]",
+                "property": "usageLimit",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[perCustomerUsageLimit]",
+                "property": "perCustomerUsageLimit",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[used]",
+                "property": "used",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code[]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "promotion.code",
+                "property": "promotion.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "promotion.code[]",
+                "property": "promotion.code",
+                "required": false
+            }
+        ]
+    }
+}

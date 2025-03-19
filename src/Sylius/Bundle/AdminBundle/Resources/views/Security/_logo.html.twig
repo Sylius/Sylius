@@ -1,5 +1,0 @@
-{% if use_webpack %}
-    {% include '@SyliusUi/Security/_logo.html.twig' with {'paths': {'logo': asset('build/admin/images/logo.png', 'admin')}} %}
-{% else %}
-    {% include '@SyliusUi/Security/_logo.html.twig' with {'paths': {'logo': 'assets/admin/img/logo.png'}} %}
-{% endif %}

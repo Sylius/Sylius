@@ -17,15 +17,13 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service
-            id="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface"
+            id="sylius.processor.price_history.product_lowest_price_before_discount"
             class="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessor"
         >
             <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
             <argument type="service" id="sylius.repository.channel" />
         </service>
-        <service id="sylius.processor.price_history.product_lowest_price_before_discount" alias="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface" alias="sylius.processor.price_history.product_lowest_price_before_discount" />
     </services>
 </container>

@@ -1,0 +1,14 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent #}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+<div {{ attributes }}>
+    {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+    <input type="hidden" name="_method" value="PUT" />
+
+    {% hook 'form' with { form, order: resource, email_exists: emailExists } %}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+</div>

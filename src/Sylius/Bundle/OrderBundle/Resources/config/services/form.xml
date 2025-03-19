@@ -32,8 +32,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.data_mapper.order_item_quantity" class="Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper">
             <argument type="service" id="sylius.modifier.order_item_quantity" />
             <argument type="service">

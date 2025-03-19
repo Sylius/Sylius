@@ -6,6 +6,6 @@
     "code": "special",
     "name": "Special",
     "description": "For peculiar places",
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

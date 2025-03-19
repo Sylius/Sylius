@@ -1,0 +1,29 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.common.component.navbar':
+            menu:
+                template: '@SyliusAdmin/shared/crud/common/navbar/menu.html.twig'
+                priority: 100
+            items:
+                template: '@SyliusAdmin/shared/crud/common/navbar/items.html.twig'
+                priority: 0
+
+        'sylius_admin.common.component.navbar.items':
+            shop_preview:
+                component: 'sylius_admin:navbar:shop_preview'
+                props:
+                    template: '@SyliusAdmin/shared/crud/common/navbar/menu/shop_preview.html.twig'
+                priority: 200
+            notifications:
+                component: 'sylius_admin:navbar:notifications'
+                props:
+                    template: '@SyliusAdmin/shared/components/navbar/notifications.html.twig'
+                priority: 100
+            user_dropdown:
+                template: '@SyliusAdmin/shared/crud/common/navbar/items/user.html.twig'
+                priority: 0
+
+        'sylius_admin.common.component.navbar.menu':
+            search:
+                template: '@SyliusAdmin/shared/crud/common/navbar/menu/search.html.twig'
+                priority: 0

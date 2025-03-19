@@ -1,0 +1,52 @@
+{# Rendered by \Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent #}
+
+{% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
+
+<div class="nav-item">
+    {% set dropdown_trigger %}
+        {% if notifications %}
+            <a href="#" class="nav-link px-0 text-body">
+                {{ ux_icon('tabler:bell') }}
+                <span class="badge bg-red" style="transform: translate(-3px, -9px)"></span>
+            </a>
+        {% else %}
+            <div class="nav-link px-0 text-body">
+                {{ ux_icon('tabler:bell') }}
+            </div>
+        {% endif %}
+    {% endset %}
+
+    {% set dropdown_content %}
+        <div class="card" style="min-width: 15rem; max-width: 25rem">
+            {% if notifications is empty %}
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'sylius.ui.no_new_notifications'|trans }}</h3>
+                </div>
+            {% else %}
+                <div class="list-group list-group-flush list-group-hoverable">
+                    {% for notification in notifications %}
+                        <div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <span class="status-dot status-dot-animated bg-red d-block"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="d-block mt-n1">
+                                        {{ notification.message|trans }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endset %}
+
+    {{ dropdown.default({
+        class: 'dropdown-menu-card',
+        custom_trigger: dropdown_trigger,
+        content: dropdown_content,
+        direction: 'down-end'
+    }) }}
+</div>

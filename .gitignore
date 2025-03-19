@@ -1,40 +1,51 @@
-/public/assets
-/public/css
-/public/js
-/public/media
-/public/build
-!/public/media/image/.gitkeep
-
-/app/config/parameters.yml
-
-/bin/symfony_requirements
-
-/docs/.doctrees
-
+###> project files ###
+/behat.yml
 /composer.lock
+/docker-compose.override.yml
+/phpspec.yml
+/public/media
+!/public/media/image/.gitkeep
+###< project files ###
 
+###> build ###
 /etc/build/*
 !/etc/build/.gitignore
+###< build ###
 
-docker-compose.override.yml
-
-/behat.yml
-/phpspec.yml
-
+###> drivers ###
 /drivers/
+###< drivers ###
 
-# Symfony CLI https://symfony.com/doc/current/setup/symfony_server.html#different-php-settings-per-project
+###> configuration ###
 /.php-version
 /php.ini
+###< configuration ###
+
+###> dependencies ###
+/node_modules/
+/public/bundles/
+/vendor/
+/var/
+###< dependencies ###
+
+###> sylius/sylius ###
+/config/encryption/dev.key
+###< sylius/sylius ###
 
 ###> symfony/framework-bundle ###
-/.env.*.local
-/.env.local
-/.env.local.php
-/public/bundles
-/var/
-/vendor/
+.env.*.local
+.env.local
+.env.local.php
 ###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/public/build/
+npm-debug.log
+pnpm-lock.yaml
+yarn-error.log
+yarn.lock
+package-lock.json
+###< symfony/webpack-encore-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
@@ -54,11 +65,3 @@ docker-compose.override.yml
 /config/jwt/*.pem
 !/config/jwt/*-test.pem
 ###< lexik/jwt-authentication-bundle ###
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-yarn.lock
-###< symfony/webpack-encore-bundle ###

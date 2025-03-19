@@ -22,7 +22,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingExchangeRatesContext implements Context
+final readonly class ManagingExchangeRatesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -275,6 +275,17 @@ final class ManagingExchangeRatesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The ratio must be greater than 0.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the ratio must be less than :value
+     */
+    public function iShouldBeNotifiedThatRatioMustBeLessThan(string $value): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('The ratio must be less than %s.', $value),
         );
     }
 

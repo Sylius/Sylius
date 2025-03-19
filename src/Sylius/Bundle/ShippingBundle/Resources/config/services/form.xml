@@ -38,8 +38,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form_registry.shipping_calculator" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
         <service id="sylius.form.type.shipping_method" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType">
@@ -71,11 +69,10 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.shipping_method_rule.collection" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleCollectionType">
+        <service id="sylius.form.type.shipping_method_rule_collection" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleCollectionType">
             <argument type="service" id="sylius.registry.shipping_method_rule_checker" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.shipping_method_rule_collection" alias="sylius.form.type.shipping_method_rule.collection" />
 
         <service id="sylius.form.type.shipping_method_rule_choice" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleChoiceType">
             <argument>%sylius.shipping_method_rules%</argument>

@@ -1,0 +1,5 @@
+{% set item = hookable_metadata.context.item %}
+
+<tr>
+    {% hook 'item' with { item } %}
+</tr>

@@ -14,25 +14,22 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         OrderRepositoryInterface $orderRepository,
         OrderEmailManagerInterface $orderEmailManager,
     ): void {
         $this->beConstructedWith($orderRepository, $orderEmailManager);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
     }
 
     function it_sends_order_confirmation_message(

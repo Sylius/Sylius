@@ -31,16 +31,17 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
     /**
      * @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
      * @param RepositoryInterface<ProductAssociationTypeInterface> $productAssociationTypeRepository
      */
     public function __construct(
-        private FactoryInterface $productAssociationFactory,
-        private ProductRepositoryInterface $productRepository,
-        private RepositoryInterface $productAssociationTypeRepository,
+        private readonly FactoryInterface $productAssociationFactory,
+        private readonly ProductRepositoryInterface $productRepository,
+        private readonly RepositoryInterface $productAssociationTypeRepository,
     ) {
     }
 
-    public function transform($value)
+    public function transform(mixed $value): mixed
     {
         $this->setProductAssociations($value);
 
@@ -60,7 +61,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $values;
     }
 
-    public function reverseTransform($value): ?Collection
+    public function reverseTransform(mixed $value): ?Collection
     {
         if (null === $value || '' === $value || !is_array($value)) {
             return null;

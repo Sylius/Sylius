@@ -1,0 +1,7 @@
+{% set order = hookable_metadata.context.order %}
+
+<table class="table mb-3" {{ sylius_test_html_attribute('checkout-subtotal') }}>
+    {% for item in order.items %}
+        {% hook 'items' with { item } %}
+    {% endfor %}
+</table>

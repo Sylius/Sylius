@@ -1,0 +1,35 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+:root {
+    font-feature-settings: "cv03", "cv04", "cv11";
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: "InterVariable", "Arial", sans-serif;
+        font-optical-sizing: auto;
+    }
+}
+
+@font-face {
+    font-family: InterVariable;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../fonts/InterVariable.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: InterVariable;
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url("../fonts/InterVariable-Italic.woff2") format("woff2");
+}

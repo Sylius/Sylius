@@ -17,19 +17,19 @@ use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Factory\ChannelPricingLogEntryFactoryInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
+use Symfony\Component\Clock\ClockInterface;
 
 final class PriceChangeLoggerSpec extends ObjectBehavior
 {
     function let(
         ChannelPricingLogEntryFactoryInterface $logEntryFactory,
         ObjectManager $logEntryManager,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
     ): void {
-        $this->beConstructedWith($logEntryFactory, $logEntryManager, $dateTimeProvider);
+        $this->beConstructedWith($logEntryFactory, $logEntryManager, $clock);
     }
 
     function it_implements_price_change_logger_interface(): void
@@ -40,12 +40,12 @@ final class PriceChangeLoggerSpec extends ObjectBehavior
     function it_throws_exception_when_there_is_no_price(
         ChannelPricingLogEntryFactoryInterface $logEntryFactory,
         ObjectManager $logEntryManager,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         ChannelPricingInterface $channelPricing,
     ): void {
         $channelPricing->getPrice()->willReturn(null);
 
-        $dateTimeProvider->now()->shouldNotBeCalled();
+        $clock->now()->shouldNotBeCalled();
         $logEntryFactory->create(Argument::cetera())->shouldNotBeCalled();
         $logEntryManager->persist(Argument::any())->shouldNotBeCalled();
 
@@ -55,7 +55,7 @@ final class PriceChangeLoggerSpec extends ObjectBehavior
     function it_logs_price_change(
         ChannelPricingLogEntryFactoryInterface $logEntryFactory,
         ObjectManager $logEntryManager,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         ChannelPricingInterface $channelPricing,
         ChannelPricingLogEntryInterface $logEntry,
     ): void {
@@ -66,7 +66,7 @@ final class PriceChangeLoggerSpec extends ObjectBehavior
         $channelPricing->getPrice()->willReturn($price);
         $channelPricing->getOriginalPrice()->willReturn($originalPrice);
 
-        $dateTimeProvider->now()->willReturn($date);
+        $clock->now()->willReturn($date);
 
         $logEntryFactory
             ->create($channelPricing, $date, $price, $originalPrice)

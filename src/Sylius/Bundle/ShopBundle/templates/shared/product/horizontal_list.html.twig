@@ -1,0 +1,5 @@
+<div class="products-grid">
+    {% for product in products %}
+        <div>{{ component('sylius_shop:product:card', { product: product, template: '@SyliusShop/product/common/card.html.twig' }) }}</div>
+    {% endfor %}
+</div>

@@ -1,0 +1,54 @@
+{% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+{%- block live_collection_widget -%}
+    {{ block('form_widget') }}
+{%- endblock live_collection_widget -%}
+
+{%- block sylius_promotion_rule_row -%}
+    <div id="{{ id }}" {{ block('attributes') }} {{ sylius_test_html_attribute('entry-row') }}>
+        {{- form_errors(form) -}}
+        {{- form_row(form.type) -}}
+        <div class="alert text-body">
+            <div class="d-flex mb-3">
+                <div class="me-auto"><strong>{{ (sylius_admin_get_promotion_rule_label(form.type.vars.data))|trans }}</strong></div>
+                {{- form_row(button_delete, sylius_test_form_attribute('delete')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
+            </div>
+            <div>
+                {{- form_row(form.configuration, {'label': false}) -}}
+            </div>
+        </div>
+    </div>
+{%- endblock sylius_promotion_rule_row -%}
+
+{%- block sylius_promotion_action_row -%}
+    <div id="{{ id }}" {{ block('attributes') }} {{ sylius_test_html_attribute('entry-row') }}>
+        {{- form_errors(form) -}}
+        {{- form_row(form.type) -}}
+        <div class="alert text-body">
+            <div class="d-flex mb-3">
+                <div class="me-auto"><strong>{{ (sylius_admin_get_promotion_action_label(form.type.vars.data))|trans }}</strong></div>
+                {{- form_row(button_delete, sylius_test_form_attribute('delete')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
+            </div>
+            <div>
+                {{- form_row(form.configuration, {'label': false}) -}}
+            </div>
+        </div>
+    </div>
+{%- endblock sylius_promotion_action_row -%}
+
+{% block add_button_row %}
+    {% if types is not empty %}
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ label|trans }}</button>
+            <ul class="dropdown-menu">
+                {% for type, label in types %}
+                    <li>
+                        <button class="dropdown-item" type="button" {{ block('button_attributes') }} data-live-type-param="{{ type }}" {{ sylius_test_html_attribute('add-' ~ type) }}>
+                            {{ (label)|trans }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

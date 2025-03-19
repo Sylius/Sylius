@@ -1,0 +1,88 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.order.update.content':
+            form:
+                component: 'sylius_admin:order:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/order/form.html.twig'
+                configuration:
+                    method: 'PUT'
+                priority: 0
+
+        'sylius_admin.order.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
+                priority: 0
+
+        'sylius_admin.order.update.content.form':
+            billing_address:
+                template: '@SyliusAdmin/order/form/billing_address.html.twig'
+                priority: 100
+            shipping_address:
+                template: '@SyliusAdmin/order/form/shipping_address.html.twig'
+                priority: 0
+            sections:
+                enabled: false
+
+        'sylius_admin.order.update.content.form.billing_address':
+            company:
+                template: '@SyliusAdmin/order/form/common/company.html.twig'
+                priority: 800
+            first_name:
+                template: '@SyliusAdmin/order/form/common/first_name.html.twig'
+                priority: 700
+            last_name:
+                template: '@SyliusAdmin/order/form/common/last_name.html.twig'
+                priority: 600
+            country:
+                template: '@SyliusAdmin/order/form/common/country.html.twig'
+                priority: 500
+            phone_number:
+                template: '@SyliusAdmin/order/form/common/phone_number.html.twig'
+                priority: 400
+            street_address:
+                template: '@SyliusAdmin/order/form/common/street_address.html.twig'
+                priority: 300
+            city:
+                template: '@SyliusAdmin/order/form/common/city.html.twig'
+                priority: 200
+            postcode:
+                template: '@SyliusAdmin/order/form/common/postcode.html.twig'
+                priority: 100
+            province:
+                template: '@SyliusAdmin/order/form/common/province.html.twig'
+                priority: 0
+
+        'sylius_admin.order.update.content.form.shipping_address':
+            company:
+                template: '@SyliusAdmin/order/form/common/company.html.twig'
+                priority: 700
+            first_name:
+                template: '@SyliusAdmin/order/form/common/first_name.html.twig'
+                priority: 600
+            last_name:
+                template: '@SyliusAdmin/order/form/common/last_name.html.twig'
+                priority: 500
+            country:
+                template: '@SyliusAdmin/order/form/common/country.html.twig'
+                priority: 400
+            phone_number:
+                template: '@SyliusAdmin/order/form/common/phone_number.html.twig'
+                priority: 300
+            street_address:
+                template: '@SyliusAdmin/order/form/common/street_address.html.twig'
+                priority: 200
+            city:
+                template: '@SyliusAdmin/order/form/common/city.html.twig'
+                priority: 200
+            postcode:
+                template: '@SyliusAdmin/order/form/common/postcode.html.twig'
+                priority: 100
+            province:
+                template: '@SyliusAdmin/order/form/common/province.html.twig'
+                priority: 0

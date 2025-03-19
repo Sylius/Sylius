@@ -65,6 +65,8 @@ sylius:
             min_length: Association type name must be at least 1 character long.|Association name must be at least {{ limit }} characters long.
             max_length: Association type name must not be longer than 1 character.|Association name must not be longer than {{ limit }} characters.
         code:
+            min_length: Association type code must be at least 1 character long.|Association type code must be at least {{ limit }} characters long.
+            max_length: Association type code must not be longer than 1 character.|Association type code must not be longer than {{ limit }} characters.
             not_blank: Please enter association type code.
             regex: Association type code can only be comprised of letters, numbers, dashes and underscores.
             unique: The association type with given code already exists.

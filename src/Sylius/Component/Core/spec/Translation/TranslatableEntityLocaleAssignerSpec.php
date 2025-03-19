@@ -23,9 +23,12 @@ use Sylius\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 
 final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext, TranslationLocaleProviderInterface $translationLocaleProvider): void
-    {
-        $this->beConstructedWith($localeContext, $translationLocaleProvider);
+    function let(
+        LocaleContextInterface $localeContext,
+        TranslationLocaleProviderInterface $translationLocaleProvider,
+        CLIContextCheckerInterface $commandBasedContextChecker,
+    ): void {
+        $this->beConstructedWith($localeContext, $translationLocaleProvider, $commandBasedContextChecker);
     }
 
     function it_implements_traslatable_entity_locale_assigner_interface(): void
@@ -37,29 +40,14 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity,
-    ): void {
-        $localeContext->getLocaleCode()->willReturn('de_DE');
-        $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
-
-        $translatableEntity->setCurrentLocale('de_DE')->shouldBeCalled();
-        $translatableEntity->setFallbackLocale('en_US')->shouldBeCalled();
-
-        $this->assignLocale($translatableEntity);
-    }
-
-    function it_assigns_locale_if_command_based_context_checker_is_not_provided(
-        LocaleContextInterface $localeContext,
-        TranslationLocaleProviderInterface $translationLocaleProvider,
-        TranslatableInterface $translatableEntity,
         CLIContextCheckerInterface $commandBasedContextChecker,
     ): void {
         $localeContext->getLocaleCode()->willReturn('de_DE');
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
+        $commandBasedContextChecker->isExecutedFromCLI()->willReturn(false);
 
         $translatableEntity->setCurrentLocale('de_DE')->shouldBeCalled();
         $translatableEntity->setFallbackLocale('en_US')->shouldBeCalled();
-
-        $commandBasedContextChecker->isExecutedFromCLI()->shouldNotBeCalled();
 
         $this->assignLocale($translatableEntity);
     }
@@ -70,8 +58,6 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         TranslatableInterface $translatableEntity,
         CLIContextCheckerInterface $commandBasedContextChecker,
     ): void {
-        $this->beConstructedWith($localeContext, $translationLocaleProvider, $commandBasedContextChecker);
-
         $commandBasedContextChecker->isExecutedFromCLI()->willReturn(true);
 
         $localeContext->getLocaleCode()->shouldNotBeCalled();
@@ -106,9 +92,11 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity,
+        CLIContextCheckerInterface $commandBasedContextChecker,
     ): void {
         $localeContext->getLocaleCode()->willThrow(new LocaleNotFoundException());
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
+        $commandBasedContextChecker->isExecutedFromCLI()->willReturn(false);
 
         $translatableEntity->setCurrentLocale('en_US')->shouldBeCalled();
         $translatableEntity->setFallbackLocale('en_US')->shouldBeCalled();

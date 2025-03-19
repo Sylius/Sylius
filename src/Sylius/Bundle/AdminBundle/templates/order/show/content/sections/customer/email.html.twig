@@ -1,0 +1,8 @@
+{% set customer = hookable_metadata.context.resource.customer %}
+
+<div>
+    <strong>{{ 'sylius.ui.email'|trans }}:</strong>
+</div>
+<div class="mb-3" {{ sylius_test_html_attribute('email') }}>
+    <a href="mailto:{{ customer.email }}">{{ customer.email }}</a>
+</div>

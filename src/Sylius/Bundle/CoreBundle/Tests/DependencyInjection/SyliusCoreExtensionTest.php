@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
 use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;
@@ -35,43 +34,12 @@ use Sylius\Bundle\CoreBundle\Tests\Stub\OrdersTotalsProviderStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\ProductVariantMapProviderStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\TaxCalculationStrategyStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\UriBasedSectionResolverStub;
-use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
-use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
-use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 {
-    /** @test */
-    public function it_brings_back_previous_order_processing_priorities(): void
-    {
-        $this->container->setParameter('kernel.environment', 'dev');
-
-        $this->load(['process_shipments_before_recalculating_prices' => true]);
-
-        $this->assertThat(
-            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
-            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40]),
-        );
-
-        $this->assertThat(
-            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
-            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50])),
-        );
-
-        $this->assertThat(
-            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
-            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50]),
-        );
-
-        $this->assertThat(
-            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
-            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40])),
-        );
-    }
-
     /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_env(): void
     {
@@ -88,34 +56,6 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_dev_env(): void
     {
         $this->testPrependingDoctrineMigrations('dev');
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider provideAutoconfigureWithAttributesData
-     */
-    public function it_prepends_sylius_order_bundle_configuration_with_proper_values(bool $value, bool $orderBundleValue): void
-    {
-        $this->container->setParameter('kernel.environment', 'dev');
-        $this->container->registerExtension(new SyliusOrderExtension());
-        $this->container->loadFromExtension('sylius_core', [
-            'autoconfigure_with_attributes' => $value,
-        ]);
-        $this->container->loadFromExtension('sylius_order', [
-            'autoconfigure_with_attributes' => $orderBundleValue,
-        ]);
-
-        $this->load();
-
-        $syliusOrderConfig = $this->container->getExtensionConfig('sylius_order');
-        $this->assertEquals($value, $syliusOrderConfig[0]['autoconfigure_with_attributes']);
-    }
-
-    public static function provideAutoconfigureWithAttributesData(): iterable
-    {
-        yield [true, false];
-        yield [false, true];
     }
 
     /** @test */
@@ -195,7 +135,8 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
         $this->load();
 
-        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, FlysystemFilesystemAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.adapter.filesystem.default', 'sylius.adapter.filesystem.flysystem');
+        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, 'sylius.adapter.filesystem.default');
     }
 
     /** @test */
@@ -205,17 +146,8 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
         $this->load(['filesystem' => ['adapter' => 'flysystem']]);
 
-        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, FlysystemFilesystemAdapter::class);
-    }
-
-    /** @test */
-    public function it_aliases_gaufrette_filesystem_adapter_properly(): void
-    {
-        $this->container->setParameter('kernel.environment', 'dev');
-
-        $this->load(['filesystem' => ['adapter' => 'gaufrette']]);
-
-        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, GaufretteFilesystemAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.adapter.filesystem.default', 'sylius.adapter.filesystem.flysystem');
+        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, 'sylius.adapter.filesystem.default');
     }
 
     /** @test */
@@ -440,6 +372,16 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
                 'period_format' => 'YYYY-MM',
             ],
         ]);
+    }
+
+    /** @test */
+    public function it_loads_checkout_payment_allowed_states_configuration_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['checkout' => ['payment' => ['allowed_states' => ['new', 'test']]]]);
+
+        $this->assertContainerBuilderHasParameter('sylius_core.checkout.payment.allowed_states', ['new', 'test']);
     }
 
     protected function getContainerExtensions(): array

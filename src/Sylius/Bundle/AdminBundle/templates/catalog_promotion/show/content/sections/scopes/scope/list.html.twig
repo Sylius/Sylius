@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{  hookable_metadata.configuration.label|trans }}</div>
+    <div class="col-12 col-md-8">
+        <ul class="ui bulleted list" {{ sylius_test_html_attribute(hookable_metadata.configuration.items_key) }}>
+            {% for item in hookable_metadata.context.scope.configuration[hookable_metadata.configuration.items_key] %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

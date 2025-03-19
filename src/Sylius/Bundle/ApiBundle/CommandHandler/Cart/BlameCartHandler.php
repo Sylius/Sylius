@@ -19,10 +19,15 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class BlameCartHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class BlameCartHandler
 {
+    /**
+     * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
         private OrderRepositoryInterface $orderRepository,

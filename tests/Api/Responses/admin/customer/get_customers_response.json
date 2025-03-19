@@ -13,16 +13,16 @@
                 "enabled": true,
                 "verified": false
             },
-            "id": @integer@,
+            "id": "@integer@",
             "email": "oliver@doe.com",
             "firstName": "oliver",
             "lastName": "Doe",
-            "birthday": @date@,
+            "birthday": "@date@",
             "gender": "u",
             "group": "\/api\/v2\/admin\/customer-groups\/premium",
             "phoneNumber": null,
             "subscribedToNewsletter": false,
-            "createdAt": @date@,
+            "createdAt": "@date@",
             "fullName": "oliver Doe"
         },
         {
@@ -35,16 +35,16 @@
                 "enabled": false,
                 "verified": false
             },
-            "id": @integer@,
+            "id": "@integer@",
             "email": "dave@doe.com",
             "firstName": "dave",
             "lastName": "Doe",
-            "birthday": @date@,
+            "birthday": "@date@",
             "gender": "u",
             "group": "\/api\/v2\/admin\/customer-groups\/premium",
             "phoneNumber": null,
             "subscribedToNewsletter": false,
-            "createdAt": @date@,
+            "createdAt": "@date@",
             "fullName": "dave Doe"
         },
         {
@@ -57,25 +57,43 @@
                 "enabled": true,
                 "verified": true
             },
-            "id": @integer@,
+            "id": "@integer@",
             "email": "tony@doe.com",
             "firstName": "tony",
             "lastName": "Doe",
-            "birthday": @date@,
+            "birthday": "@date@",
             "gender": "u",
             "group": null,
             "phoneNumber": null,
             "subscribedToNewsletter": false,
-            "createdAt": @date@,
+            "createdAt": "@date@",
             "fullName": "tony Doe"
         }
     ],
     "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/customers{?group.name,group.name[]}",
+        "hydra:template": "\/api\/v2\/admin\/customers{?email,firstName,lastName,group.name,group.name[],order[createdAt],order[email],order[firstName],order[lastName]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "email",
+                "property": "email",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "firstName",
+                "property": "firstName",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "lastName",
+                "property": "lastName",
+                "required": false
+            },
             {
                 "@type": "IriTemplateMapping",
                 "variable": "group.name",
@@ -86,6 +104,30 @@
                 "@type": "IriTemplateMapping",
                 "variable": "group.name[]",
                 "property": "group.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[email]",
+                "property": "email",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[firstName]",
+                "property": "firstName",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[lastName]",
+                "property": "lastName",
                 "required": false
             }
         ]

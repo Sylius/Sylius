@@ -1,0 +1,5 @@
+{% set taxon = hookable_metadata.context.taxon %}
+
+<a class="nav-link" href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
+    {{ taxon.name }}
+</a>

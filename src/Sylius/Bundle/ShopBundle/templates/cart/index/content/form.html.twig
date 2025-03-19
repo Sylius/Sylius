@@ -1,0 +1,20 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent #}
+
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+<div {{ attributes }} >
+    {% if resource.empty %}
+        {{ messages.info('sylius.ui.your_cart_is_empty') }}
+    {% else %}
+        {{ form_start(form, {'action': path('sylius_shop_cart_checkout'), 'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+        <input type="hidden" name="_method" value="PATCH"/>
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
+
+        {% hook 'form' with { form }  %}
+
+        {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+    {% endif %}
+</div>

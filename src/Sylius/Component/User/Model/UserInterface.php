@@ -17,19 +17,14 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableInterface;
 use Sylius\Resource\Model\ToggleableInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\Encoder\EncoderAwareInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 interface UserInterface extends
-    AdvancedUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
-    \Serializable,
     TimestampableInterface,
     ToggleableInterface,
-    EncoderAwareInterface,
-    PasswordHasherAwareInterface
+    SymfonyUserInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 
@@ -44,6 +39,8 @@ interface UserInterface extends
 
     public function setEmailCanonical(?string $emailCanonical): void;
 
+    public function getUsername(): ?string;
+
     public function setUsername(?string $username): void;
 
     /**
@@ -52,8 +49,6 @@ interface UserInterface extends
     public function getUsernameCanonical(): ?string;
 
     public function setUsernameCanonical(?string $usernameCanonical): void;
-
-    public function setLocked(bool $locked): void;
 
     public function getEmailVerificationToken(): ?string;
 
@@ -74,14 +69,6 @@ interface UserInterface extends
     public function getVerifiedAt(): ?\DateTimeInterface;
 
     public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void;
-
-    public function getExpiresAt(): ?\DateTimeInterface;
-
-    public function setExpiresAt(?\DateTimeInterface $date): void;
-
-    public function getCredentialsExpireAt(): ?\DateTimeInterface;
-
-    public function setCredentialsExpireAt(?\DateTimeInterface $date): void;
 
     public function getLastLogin(): ?\DateTimeInterface;
 
@@ -110,9 +97,8 @@ interface UserInterface extends
 
     public function addOAuthAccount(UserOAuthInterface $oauth): void;
 
-    public function setEncoderName(?string $encoderName): void;
-
     public function __serialize(): array;
 
+    /** @param array<array-key, mixed> $data */
     public function __unserialize(array $data): void;
 }

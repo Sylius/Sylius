@@ -1,0 +1,71 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.order.history':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+                priority: 0
+
+        'sylius_admin.order.history.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 200
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                priority: 100
+            sections:
+                template: '@SyliusAdmin/order/history/content/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.order.history.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
+                    action: 'sylius.ui.history'
+                priority: 100
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'sylius_admin.order.history.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/order/history/content/header/title_block/title.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/order/history/content/header/title_block/actions.html.twig'
+                priority: 0
+
+        'sylius_admin.order.history.content.header.title_block.actions':
+            back:
+                template: '@SyliusAdmin/order/history/content/header/title_block/actions/back.html.twig'
+                priority: 0
+
+        'sylius_admin.order.history.content.sections':
+            addresses:
+                template: '@SyliusAdmin/order/history/content/sections/addresses.html.twig'
+                priority: 0
+
+        'sylius_admin.order.history.content.sections.addresses':
+            billing_address:
+                component: sylius_admin:order:address_history
+                props:
+                    addressId: '@=_context.resource.getBillingAddress().getId()'
+                    header: 'sylius.ui.billing_address'
+                    sort: 'desc'
+                    template: '@SyliusAdmin/order/history/content/sections/addresses/address.html.twig'
+                priority: 100
+            shipping_address:
+                component: sylius_admin:order:address_history
+                props:
+                    addressId: '@=_context.resource.getShippingAddress().getId()'
+                    header: 'sylius.ui.shipping_address'
+                    sort: 'desc'
+                    template: '@SyliusAdmin/order/history/content/sections/addresses/address.html.twig'
+                    priority: 0

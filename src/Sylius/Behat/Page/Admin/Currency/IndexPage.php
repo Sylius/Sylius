@@ -31,7 +31,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * @throws \InvalidArgumentException
      */
-    private function checkCurrencyStatus(CurrencyInterface $currency, string $status): bool
+    protected function checkCurrencyStatus(CurrencyInterface $currency, string $status): bool
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

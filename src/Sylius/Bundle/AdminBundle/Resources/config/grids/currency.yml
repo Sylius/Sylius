@@ -9,9 +9,13 @@ sylius_grid:
                 code: asc
             fields:
                 code:
-                    type: string
+                    type: twig
                     label: sylius.ui.code
                     sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 name:
                     type: string
                     label: sylius.ui.name
@@ -23,6 +27,3 @@ sylius_grid:
                 main:
                     create:
                         type: create
-                item:
-                    update:
-                        type: update

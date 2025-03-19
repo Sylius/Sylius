@@ -1,0 +1,39 @@
+.icon {
+  height: 28px;
+  width: 28px;
+
+  &-xs {
+    height: 16px;
+    width: 16px;
+  }
+
+  &-sm {
+    height: 20px;
+    width: 20px;
+  }
+
+  &-md {
+    height: 24px;
+    width: 24px;
+  }
+
+  &-lg {
+    height: 32px;
+    width: 32px;
+  }
+
+  &-xl {
+    height: 40px;
+    width: 40px;
+  }
+
+  & > * {
+    stroke-width: 1.1;
+  }
+
+  &-xs, &-sm, &-md {
+    & > * {
+      stroke-width: 2;
+    }
+  }
+}

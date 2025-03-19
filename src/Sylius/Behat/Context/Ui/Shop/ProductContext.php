@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\LowestPriceInformationElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
@@ -27,7 +28,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductContext implements Context
+final readonly class ProductContext implements Context
 {
     public function __construct(
         private ShowPageInterface $showPage,
@@ -41,23 +42,30 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should be able to access product :product
+     * @When I open page :url
      */
-    public function iShouldBeAbleToAccessProduct(ProductInterface $product): void
+    public function iOpenPage(string $url): void
     {
-        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
-
-        Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
+        $this->showPage->visit($url);
     }
 
     /**
-     * @Then I should not be able to access product :product
+     * @When I try to reach nonexistent product
      */
-    public function iShouldNotBeAbleToAccessProduct(ProductInterface $product): void
+    public function iTryToReachNonexistentProductPage(?string $localeCode = 'en_US'): void
     {
-        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+        $this->showPage->tryToOpen([
+            'slug' => 'nonexistent_product',
+            '_locale' => $localeCode,
+        ]);
+    }
 
-        Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    /**
+     * @When /^I try to browse products from (taxon "([^"]+)")$/
+     */
+    public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
+    {
+        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug()]);
     }
 
     /**
@@ -67,7 +75,7 @@ final class ProductContext implements Context
      * @When I view product :product in the :localeCode locale
      * @When customer view product :product
      */
-    public function iOpenProductPage(ProductInterface $product, $localeCode = 'en_US'): void
+    public function iOpenProductPage(ProductInterface $product, string $localeCode = 'en_US'): void
     {
         $this->showPage->open(['slug' => $product->getTranslation($localeCode)->getSlug(), '_locale' => $localeCode]);
     }
@@ -75,7 +83,7 @@ final class ProductContext implements Context
     /**
      * @When /^I try to check (this product)'s details in the ("([^"]+)" locale)$/
      */
-    public function iTryToOpenProductPage(ProductInterface $product, $localeCode = 'en_US'): void
+    public function iTryToOpenProductPage(ProductInterface $product, string $localeCode = 'en_US'): void
     {
         $this->showPage->tryToOpen([
             'slug' => $product->getTranslation($localeCode)->getSlug(),
@@ -113,20 +121,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I try to reach unexistent product
-     */
-    public function iTryToReachUnexistentProductPage($localeCode = 'en_US'): void
-    {
-        $this->showPage->tryToOpen([
-            'slug' => 'unexisten_product',
-            '_locale' => $localeCode,
-        ]);
-    }
-
-    /**
      * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
      */
-    public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, $localeCode = 'en_US'): void
+    public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, string $localeCode = 'en_US'): void
     {
         Assert::false(
             $this->showPage->isOpen([
@@ -139,7 +136,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see the product name :name
      */
-    public function iShouldSeeProductName($name): void
+    public function iShouldSeeProductName(string $name): void
     {
         Assert::same($this->showPage->getName(), $name);
     }
@@ -150,14 +147,6 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductDescription(string $description): void
     {
         Assert::same($this->showPage->getDescription(), $description);
-    }
-
-    /**
-     * @When I open page :url
-     */
-    public function iOpenPage($url): void
-    {
-        $this->showPage->visit($url);
     }
 
     /**
@@ -189,7 +178,7 @@ final class ProductContext implements Context
     /**
      * @When I search for products with name :name
      */
-    public function iSearchForProductsWithName($name): void
+    public function iSearchForProductsWithName(string $name): void
     {
         $this->indexPage->search($name);
     }
@@ -247,7 +236,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see the product :productName
      */
-    public function iShouldSeeProduct($productName): void
+    public function iShouldSeeProduct(string $productName): void
     {
         Assert::true($this->indexPage->isProductOnList($productName));
     }
@@ -255,7 +244,7 @@ final class ProductContext implements Context
     /**
      * @Then I should not see the product :productName
      */
-    public function iShouldNotSeeProduct($productName): void
+    public function iShouldNotSeeProduct(string $productName): void
     {
         Assert::false($this->indexPage->isProductOnList($productName));
     }
@@ -292,7 +281,7 @@ final class ProductContext implements Context
      * @Then I should see that the combination is :price
      * @Then customer should see the product price :price
      */
-    public function iShouldSeeTheProductPrice($price): void
+    public function iShouldSeeTheProductPrice(string $price): void
     {
         Assert::same($this->showPage->getPrice(), $price);
     }
@@ -303,36 +292,36 @@ final class ProductContext implements Context
      * @Then I should see the product original price :price
      * @Then /^customer should see the product original price ("[^"]+")$/
      */
-    public function iShouldSeeTheProductOriginalPrice($price): void
+    public function iShouldSeeTheProductOriginalPrice(string $price): void
     {
         Assert::true($this->showPage->isOriginalPriceVisible());
         Assert::same($this->showPage->getOriginalPrice(), $price);
     }
 
     /**
-     * @Then I should see :productName product discounted from :originalPrice to :price by :promotionLabel on the list
-     * @Then I should see :productName product discounted from :originalPrice to :price
+     * @Then I should see :product product discounted from :originalPrice to :price by :promotionLabel on the list
+     * @Then I should see :product product discounted from :originalPrice to :price
      */
     public function iShouldSeeProductDiscountedOnTheList(
-        string $productName,
+        ProductInterface $product,
         string $originalPrice,
         string $price,
         ?string $promotionLabel = null,
     ): void {
-        Assert::same($this->indexPage->getProductPrice($productName), $price);
-        Assert::same($this->indexPage->getProductOriginalPrice($productName), $originalPrice);
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $price);
+        Assert::same($this->indexPage->getProductOriginalPrice($product->getCode()), $originalPrice);
 
         if ($promotionLabel !== null) {
-            Assert::same($this->indexPage->getProductPromotionLabel($productName), $promotionLabel);
+            Assert::same($this->indexPage->getProductPromotionLabel($product->getName()), $promotionLabel);
         }
     }
 
     /**
-     * @Then I should see :productName product not discounted on the list
+     * @Then I should see :product product not discounted on the list
      */
-    public function iShouldSeeProductNotDiscountedOnTheList(string $productName): void
+    public function iShouldSeeProductNotDiscountedOnTheList(ProductInterface $product): void
     {
-        $originalPrice = $this->indexPage->getProductOriginalPrice($productName);
+        $originalPrice = $this->indexPage->getProductOriginalPrice($product->getCode());
 
         Assert::null($originalPrice);
     }
@@ -558,17 +547,17 @@ final class ProductContext implements Context
     /**
      * @Then its current variant should be named :name
      */
-    public function itsCurrentVariantShouldBeNamed($name): void
+    public function itsCurrentVariantShouldBeNamed(string $name): void
     {
         Assert::same($this->showPage->getCurrentVariantName(), $name);
     }
 
     /**
-     * @Then I should see the product :productName with price :productPrice
+     * @Then I should see the product :product with price :productPrice
      */
-    public function iShouldSeeTheProductWithPrice($productName, $productPrice): void
+    public function iShouldSeeTheProductWithPrice(ProductInterface $product, string $productPrice): void
     {
-        Assert::same($this->indexPage->getProductPrice($productName), $productPrice);
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $productPrice);
     }
 
     /**
@@ -576,7 +565,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
-        Assert::true($this->showPage->hasProductOutOfStockValidationMessage($product));
+        Assert::same($this->showPage->getValidationMessage('quantity'), sprintf('%s does not have sufficient stock.', $product->getName()));
     }
 
     /**
@@ -584,21 +573,59 @@ final class ProductContext implements Context
      */
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
-        Assert::false($this->showPage->hasProductOutOfStockValidationMessage($product));
+        try {
+            $validationMessage = $this->showPage->getValidationMessage('quantity');
+        } catch (ElementNotFoundException $exception) {
+            $validationMessage = '';
+        }
+
+        Assert::notContains($validationMessage, sprintf('%s does not have sufficient stock.', $product->getName()));
     }
 
     /**
-     * @Then I should see a main image
+     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
      */
-    public function iShouldSeeAMainImage(): void
+    public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween1And9999(ProductInterface $product): void
     {
-        Assert::true($this->showPage->isMainImageDisplayed());
+        Assert::same($this->showPage->getValidationMessage('quantity'), 'Quantity must be between 1 and 9999.');
+    }
+
+    /**
+     * @Then I should be able to see a main image of type :type
+     */
+    public function iShouldSeeAMainImageOfType(string $type): void
+    {
+        Assert::true($this->showPage->isMainImageOfTypeDisplayed($type));
+    }
+
+    /**
+     * @Then the main image should be of type :type
+     */
+    public function theMainImageShouldBeOfType(string $type): void
+    {
+        Assert::true($this->showPage->isMainImageOfType($type));
+    }
+
+    /**
+     * @Then the first thumbnail image should be of type :type
+     */
+    public function theFirstThumbnailImageShouldBeOfType(string $type): void
+    {
+        Assert::true($this->showPage->getFirstThumbnailsImageType() === $type);
+    }
+
+    /**
+     * @Then the second thumbnail image should be of type :type
+     */
+    public function theSecondThumbnailImageShouldBeOfType(string $type): void
+    {
+        Assert::true($this->showPage->getSecondThumbnailsImageType() === $type);
     }
 
     /**
      * @Then I should see :numberOfProducts products in the list
      */
-    public function iShouldSeeProductsInTheList($numberOfProducts): void
+    public function iShouldSeeProductsInTheList(string $numberOfProducts): void
     {
         Assert::same($this->indexPage->countProductsItems(), (int) $numberOfProducts);
     }
@@ -606,7 +633,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see a product with name :name
      */
-    public function iShouldSeeProductWithName($name): void
+    public function iShouldSeeProductWithName(string $name): void
     {
         Assert::true($this->indexPage->isProductOnPageWithName($name));
     }
@@ -614,18 +641,18 @@ final class ProductContext implements Context
     /**
      * @Then the first product on the list should have name :name
      */
-    public function theFirstProductOnTheListShouldHaveName($name): void
+    public function theFirstProductOnTheListShouldHaveName(string $name): void
     {
         Assert::same($this->indexPage->getFirstProductNameFromList(), $name);
     }
 
     /**
-     * @Then the first product on the list should have name :name and price :price
+     * @Then the first product on the list should have name :product and price :price
      */
-    public function theFirstProductOnTheListShouldHaveNameAndPrice($name, $price): void
+    public function theFirstProductOnTheListShouldHaveNameAndPrice(ProductInterface $product, string $price): void
     {
-        Assert::same($this->indexPage->getFirstProductNameFromList(), $name);
-        Assert::same($this->indexPage->getProductPrice($name), $price);
+        Assert::same($this->indexPage->getFirstProductNameFromList(), $product->getName());
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $price);
     }
 
     /**
@@ -637,18 +664,18 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then the last product on the list should have name :name and price :price
+     * @Then the last product on the list should have name :product and price :price
      */
-    public function theLastProductOnTheListShouldHaveNameAndPrice($name, $price): void
+    public function theLastProductOnTheListShouldHaveNameAndPrice(ProductInterface $product, string $price): void
     {
-        Assert::same($this->indexPage->getLastProductNameFromList(), $name);
-        Assert::same($this->indexPage->getProductPrice($name), $price);
+        Assert::same($this->indexPage->getLastProductNameFromList(), $product->getName());
+        Assert::same($this->indexPage->getProductPrice($product->getCode()), $price);
     }
 
     /**
      * @Then I should see :count product reviews
      */
-    public function iShouldSeeProductReviews($count): void
+    public function iShouldSeeProductReviews(string $count): void
     {
         Assert::same($this->showPage->countReviews(), (int) $count);
     }
@@ -709,7 +736,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see :rating as its average rating
      */
-    public function iShouldSeeAsItsAverageRating($rating): void
+    public function iShouldSeeAsItsAverageRating(string $rating): void
     {
         Assert::same($this->showPage->getAverageRating(), (float) $rating);
     }
@@ -764,7 +791,7 @@ final class ProductContext implements Context
     /**
      * @Then /^average rating of (product "[^"]+") should be (\d+)$/
      */
-    public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating): void
+    public function thisProductAverageRatingShouldBe(ProductInterface $product, string $averageRating): void
     {
         $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
         $this->iShouldSeeAsItsAverageRating($averageRating);
@@ -773,7 +800,7 @@ final class ProductContext implements Context
     /**
      * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
      */
-    public function theyShouldHaveOrderLikeAnd(...$productNames): void
+    public function theyShouldHaveOrderLikeAnd(string ...$productNames): void
     {
         Assert::true($this->indexPage->hasProductsInOrder($productNames));
     }
@@ -813,7 +840,7 @@ final class ProductContext implements Context
     /**
      * @Then /^I should not be able to select the "([^"]*)" ([^\s]+) option value$/
      */
-    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValue, string $optionName)
+    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValue, string $optionName): void
     {
         Assert::false(in_array($optionValue, $this->showPage->getOptionValues($optionName), true));
     }
@@ -828,14 +855,6 @@ final class ProductContext implements Context
     ) {
         Assert::true(in_array($optionValue1, $this->showPage->getOptionValues($optionName), true));
         Assert::true(in_array($optionValue2, $this->showPage->getOptionValues($optionName), true));
-    }
-
-    /**
-     * @When /^I try to browse products from (taxon "([^"]+)")$/
-     */
-    public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
-    {
-        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug()]);
     }
 
     /**
@@ -920,12 +939,29 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param string $productName
-     * @param string $productAssociationName
-     *
+     * @Then I should be able to access product :product
+     */
+    public function iShouldBeAbleToAccessProduct(ProductInterface $product): void
+    {
+        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+
+        Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    }
+
+    /**
+     * @Then I should not be able to access product :product
+     */
+    public function iShouldNotBeAbleToAccessProduct(ProductInterface $product): void
+    {
+        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+
+        Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    }
+
+    /**
      * @throws \InvalidArgumentException
      */
-    private function assertProductIsInAssociation($productName, $productAssociationName): void
+    private function assertProductIsInAssociation(string $productName, string $productAssociationName): void
     {
         Assert::true(
             $this->showPage->hasProductInAssociation($productName, $productAssociationName),
@@ -937,7 +973,7 @@ final class ProductContext implements Context
         );
     }
 
-    private function assertProductIsNotInAssociation($productName, $productAssociationName): void
+    private function assertProductIsNotInAssociation(string $productName, string $productAssociationName): void
     {
         Assert::false(
             $this->showPage->hasProductInAssociation($productName, $productAssociationName),

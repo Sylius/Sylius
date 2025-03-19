@@ -31,7 +31,7 @@
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Regex">
-                <option name="message">sylius.association.code.regex</option>
+                <option name="message">sylius.association_type.code.regex</option>
                 <option name="pattern">/^[\w-]*$/</option>
                 <option name="groups">sylius</option>
             </constraint>

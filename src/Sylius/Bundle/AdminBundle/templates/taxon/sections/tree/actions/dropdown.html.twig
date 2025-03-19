@@ -1,0 +1,8 @@
+<div class="btn-group" data-modal-delete-taxon-target>
+    <button class="btn btn-icon btn-sm" type="button" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' {{ sylius_test_html_attribute('actions') }}>
+        {{ ux_icon('tabler:dots') }}
+    </button>
+    <ul class="dropdown-menu">
+        {% hook 'dropdown' %}
+    </ul>
+</div>

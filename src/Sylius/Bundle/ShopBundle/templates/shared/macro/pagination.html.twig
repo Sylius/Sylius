@@ -1,0 +1,19 @@
+{% macro simple(paginator, options) %}
+    {% if paginator.haveToPaginate() %}
+        {{ pagerfanta(paginator, 'twig', options|default({'template': '@SyliusShop/shared/macro/pagination/pagerfanta.html.twig'})) }}
+    {% endif %}
+{% endmacro %}
+
+{% macro number_of_results_selector(paginator, pagination_limits) %}
+    <div class="dropdown">
+        <button type="button" class="btn btn-sm btn-outline-gray dropdown-toggle" data-bs-toggle="dropdown">
+            {{ 'sylius.ui.show'|trans }} {{ paginator.maxPerPage }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-end ">
+            {% for limit in pagination_limits|filter(limit => limit != paginator.maxPerPage) %}
+                {% set path = path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')|merge(app.request.query)|merge({'limit': limit})) %}
+                <a class="dropdown-item" href="{{ path }}">{{ limit }}</a>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

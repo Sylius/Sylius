@@ -1,0 +1,10 @@
+{% import '@SyliusShop/shared/macro/navigation_buttons.html.twig' as navigation %}
+
+{% set order = hookable_metadata.context.order %}
+{% set enabled = order.shipments|length %}
+
+{% for shipment in hookable_metadata.context.form.shipments %}
+    {% set enabled = enabled and shipment.method|length %}
+{% endfor %}
+
+{{ navigation.default('sylius.ui.change_address'|trans, path('sylius_shop_checkout_address'), enabled) }}

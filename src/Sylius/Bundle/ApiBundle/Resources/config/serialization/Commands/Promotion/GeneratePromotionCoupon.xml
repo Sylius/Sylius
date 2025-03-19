@@ -17,31 +17,30 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon">
         <attribute name="promotionCode">
-            <group>admin:promotion_coupon:generate</group>
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
+
         <attribute name="prefix">
-            <group>admin:promotion_coupon:generate</group>
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
+
         <attribute name="codeLength">
-            <group>admin:promotion_coupon:generate</group>
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
+
         <attribute name="suffix">
-            <group>admin:promotion_coupon:generate</group>
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
+
         <attribute name="amount">
-            <group>admin:promotion_coupon:generate</group>
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
+
         <attribute name="expiresAt">
-            <group>admin:promotion_coupon:generate</group>
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
+
         <attribute name="usageLimit">
-            <group>admin:promotion_coupon:generate</group>
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
     </class>

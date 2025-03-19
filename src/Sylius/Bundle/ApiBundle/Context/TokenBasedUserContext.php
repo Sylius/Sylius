@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Context;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class TokenBasedUserContext implements UserContextInterface
+final readonly class TokenBasedUserContext implements UserContextInterface
 {
     public function __construct(private TokenStorageInterface $tokenStorage)
     {

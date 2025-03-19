@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -39,7 +40,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 {
     protected AssociationHydrator $associationHydrator;
 
-    public function __construct(EntityManager $entityManager, ClassMetadata $class)
+    public function __construct(EntityManagerInterface $entityManager, ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
 
@@ -56,29 +57,14 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function createSearchListQueryBuilder(): QueryBuilder
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.13',
-            'This method is deprecated and it will be removed in Sylius 2.0. Please use `createCriteriaAwareSearchListQueryBuilder` instead.',
-        );
-
-        return $this->createListQueryBuilder()
-            ->leftJoin('o.items', 'item')
-            ->leftJoin('item.variant', 'variant')
-            ->leftJoin('variant.product', 'product')
-        ;
-    }
-
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder
     {
         if ($criteria === null) {
             return $this->createListQueryBuilder();
         }
 
-        $hasProductCriteria = '' !== $criteria['product'];
-        $hasVariantCriteria = '' !== $criteria['variant'];
+        $hasProductCriteria = '' !== ($criteria['product'] ?? '');
+        $hasVariantCriteria = '' !== ($criteria['variant'] ?? '');
 
         $queryBuilder = $this->createListQueryBuilder();
 
@@ -96,20 +82,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         }
 
         return $queryBuilder;
-    }
-
-    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.13',
-            'This method is deprecated and it will be removed in Sylius 2.0. Please use `createByCustomerIdCriteriaAwareQueryBuilder` instead.',
-        );
-
-        return $this->createListQueryBuilder()
-            ->andWhere('o.customer = :customerId')
-            ->setParameter('customerId', $customerId)
-        ;
     }
 
     public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder
@@ -148,7 +120,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function findByCustomer(CustomerInterface $customer): array
     {
-        return $this->createByCustomerIdQueryBuilder($customer->getId())
+        return $this->createByCustomerIdCriteriaAwareQueryBuilder(null, (string) $customer->getId())
             ->getQuery()
             ->getResult()
         ;
@@ -537,6 +509,19 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('tokenValue', $tokenValue)
             ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /** @throws NonUniqueResultException */
+    public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.checkoutState = :checkoutState')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
+            ->setParameter('tokenValue', $tokenValue)
             ->getQuery()
             ->getOneOrNullResult()
         ;

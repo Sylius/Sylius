@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius_api.taxon_search_filter.shop.product" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TaxonFilter">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.search_filter.shop.product" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="translations.name">partial</argument>
+                <argument key="productTaxons.taxon.code">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.order_filter.shop.product" parent="api_platform.doctrine.orm.order_filter">
+            <argument type="collection">
+                <argument key="code" />
+                <argument key="createdAt" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.search_filter.shop.product_variant" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="product">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.order_filter.shop.product_review" parent="api_platform.doctrine.orm.order_filter">
+            <argument type="collection">
+                <argument key="createdAt" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.search_filter.shop.product_review" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="reviewSubject">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.name_with_locale_order_filter.shop.translatable" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter">
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.option_value_search_filter.shop.product_variant" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductVariantOptionValueFilter">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.price_order_filter.shop.product" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductPriceOrderFilter">
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+    </services>
+</container>

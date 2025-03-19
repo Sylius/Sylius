@@ -1,4 +1,12 @@
 {
-    "code": 400,
-    "message": "Request does not have the following required fields specified: paymentMethod."
+    "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/400",
+    "@type": "hydra:Error",
+    "title": "An error occurred",
+    "detail": "Request does not have the following required fields specified: paymentMethod.",
+    "status": 400,
+    "type": "\/errors\/400",
+    "description": "Request does not have the following required fields specified: paymentMethod.",
+    "hydra:description": "Request does not have the following required fields specified: paymentMethod.",
+    "hydra:title": "An error occurred"
 }

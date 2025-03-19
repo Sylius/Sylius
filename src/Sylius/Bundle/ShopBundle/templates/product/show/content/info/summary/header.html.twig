@@ -1,0 +1,5 @@
+{% set product = hookable_metadata.context.product %}
+
+<div class="mb-4">
+    <h1 class="h2 text-break" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ product.name }}</h1>
+</div>

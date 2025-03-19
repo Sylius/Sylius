@@ -1,37 +1,42 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
+    "channel": "\/api\/v2\/shop\/channels\/WEB",
+    "customer": null,
+    "shippingAddress": null,
+    "billingAddress": null,
     "payments": [
         {
-            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/payments\/@integer@",
             "@type": "Payment",
-            "id": @integer@,
+            "id": "@integer@",
             "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY"
         }
     ],
     "shipments": [
         {
-            "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/shipments\/@integer@",
             "@type": "Shipment",
-            "id": @integer@,
+            "id": "@integer@",
             "method": "\/api\/v2\/shop\/shipping-methods\/UPS"
         }
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
+    "state": "cart",
     "checkoutState": "cart",
     "paymentState": "cart",
     "shippingState": "cart",
-    "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "tokenValue": "token",
+    "number": null,
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 4,
             "unitPrice": 2000,
             "originalUnitPrice": 2000,

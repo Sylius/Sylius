@@ -1,0 +1,24 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCartFormComponent #}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+<div class="position-relative" {{ attributes }}>
+    {% if product.enabledVariants.empty() or product.simple and not sylius_inventory_is_available(product.enabledVariants.first) %}
+        <div {{ sylius_test_html_attribute('product-out-of-stock') }}>{{ 'sylius.ui.out_of_stock'|trans }}</div>
+    {% else %}
+        <div data-loading>
+            <div class="sylius-shop-loader">
+                <img src="{{ asset('build/shop/images/loader.gif', 'shop') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
+            </div>
+        </div>
+        <div class="my-4" {{ sylius_test_html_attribute('product-selecting-variant') }}>
+            {{ form_start(form, {'attr': {'data-action': 'live#action:prevent live#$render', 'data-live-action-param': 'addToCart'}}) }}
+            {{ form_errors(form) }}
+
+            {% hook 'add_to_cart' with { product, form } %}
+
+            {{ form_row(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    {% endif %}
+</div>

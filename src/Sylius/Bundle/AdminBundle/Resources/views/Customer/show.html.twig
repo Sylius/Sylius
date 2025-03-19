@@ -1,7 +1,0 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
-
-{% block title %}{{ 'sylius.ui.customer'|trans ~' '~ customer.email }} {{ parent() }}{% endblock %}
-
-{% block content %}
-    {{ sylius_template_event('sylius.admin.customer.show.content', _context) }}
-{% endblock %}

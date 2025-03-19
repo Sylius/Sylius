@@ -15,7 +15,8 @@ namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
+use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -37,7 +38,6 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         RequestEvent $event,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $query,
         FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
@@ -48,7 +48,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
 
-        $query->all()->willReturn(['filter' => 'foo']);
+        $query = new InputBag(['filter' => 'foo']);
         $request->query = $query;
 
         $filterStorage->all()->willReturn([]);
@@ -76,7 +76,6 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         RequestEvent $event,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $query,
         FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
@@ -87,7 +86,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
 
-        $query->all()->willReturn(['filter' => 'foo']);
+        $query = new InputBag(['filter' => 'foo']);
         $request->query = $query;
 
         $filterStorage->all()->willReturn([]);
@@ -103,7 +102,6 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         RequestEvent $event,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $query,
         FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
@@ -114,7 +112,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
 
-        $query->all()->willReturn(['filter' => 'foo']);
+        $query = new InputBag(['filter' => 'foo']);
         $request->query = $query;
 
         $filterStorage->all()->willReturn([]);
@@ -130,7 +128,6 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         RequestEvent $event,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $query,
         FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
@@ -141,7 +138,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $attributes->get('_controller')->willReturn(null);
         $request->attributes = $attributes;
 
-        $query->all()->willReturn(['filter' => 'foo']);
+        $query = new InputBag(['filter' => 'foo']);
         $request->query = $query;
 
         $filterStorage->all()->willReturn([]);
@@ -157,7 +154,6 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         RequestEvent $event,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $query,
         FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
@@ -168,7 +164,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
 
-        $query->all()->willReturn(['filter' => 'foo']);
+        $query = new InputBag(['filter' => 'foo']);
         $request->query = $query;
 
         $filterStorage->all()->willReturn([]);
@@ -184,7 +180,6 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         RequestEvent $event,
         Request $request,
         ParameterBag $attributes,
-        ParameterBag $query,
         FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
@@ -195,7 +190,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
 
-        $query->all()->willReturn(['filter' => 'foo']);
+        $query = new InputBag(['filter' => 'foo']);
         $request->query = $query;
 
         $filterStorage->all()->willReturn([]);

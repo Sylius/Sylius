@@ -26,7 +26,7 @@ use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 

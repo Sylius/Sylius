@@ -17,17 +17,25 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Webmozart\Assert\Assert;
 
-final class CurrencyContext implements Context
+final readonly class CurrencyContext implements Context
 {
     public function __construct(private HomePageInterface $homePage)
     {
     }
 
     /**
+     * @When I browse currencies
+     */
+    public function iBrowseCurrencies(): void
+    {
+        $this->homePage->open();
+    }
+
+    /**
      * @Given I changed my currency to :currencyCode
      * @When I switch to the :currencyCode currency
      */
-    public function iSwitchTheCurrencyToTheCurrency($currencyCode)
+    public function iSwitchTheCurrencyToTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
         $this->homePage->switchCurrency($currencyCode);
@@ -36,7 +44,7 @@ final class CurrencyContext implements Context
     /**
      * @Then I should (still) shop using the :currencyCode currency
      */
-    public function iShouldShopUsingTheCurrency($currencyCode)
+    public function iShouldShopUsingTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
 
@@ -46,7 +54,7 @@ final class CurrencyContext implements Context
     /**
      * @Then I should be able to shop using the :currencyCode currency
      */
-    public function iShouldBeAbleToShopUsingTheCurrency($currencyCode)
+    public function iShouldBeAbleToShopUsingTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
 
@@ -56,7 +64,7 @@ final class CurrencyContext implements Context
     /**
      * @Then I should not be able to shop using the :currencyCode currency
      */
-    public function iShouldNotBeAbleToShopUsingTheCurrency($currencyCode)
+    public function iShouldNotBeAbleToShopUsingTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
 
@@ -64,6 +72,22 @@ final class CurrencyContext implements Context
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
                 $currencyCode,
+                implode('", "', $this->homePage->getAvailableCurrencies()),
+            ));
+        }
+    }
+
+    /**
+     * @Then I should see :firstCurrency and :secondCurrency in the list
+     */
+    public function iShouldSeeCurrenciesInTheList(string ...$currenciesCodes): void
+    {
+        $this->homePage->open();
+
+        if (in_array($currenciesCodes, $this->homePage->getAvailableCurrencies(), true)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Expected "%s" not to be in "%s"',
+                $currenciesCodes,
                 implode('", "', $this->homePage->getAvailableCurrencies()),
             ));
         }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Sylius package.
+  ~
+  ~ (c) Sylius Sp. z o.o.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_shop.twig.component.product_review.list"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\ProductReview\ListComponent"
+        >
+            <argument type="service" id="sylius.repository.product_review" />
+
+            <tag name="sylius.twig_component" key="sylius_shop:product_review:list" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.product_review.count"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\ProductReview\CountComponent"
+        >
+            <argument type="service" id="sylius.repository.product_review" />
+
+            <tag name="sylius.twig_component" key="sylius_shop:product_review.count" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.product_review.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.product_review" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.product_review.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType</argument>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:product_review:form" />
+        </service>
+    </services>
+</container>

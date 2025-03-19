@@ -1,7 +1,0 @@
-{% for name, attributeType in types %}
-    {% set createRouteName = metadata.applicationName~'_admin_'~metadata.name~'_create' %}
-    <a href="{{ path(createRouteName, { 'type': name }) }}" id="{{ name }}" class="item">
-        {% set label = 'sylius.form.attribute_type.' ~ attributeType.type %}
-        {{ label|trans }}
-    </a>
-{% endfor %}

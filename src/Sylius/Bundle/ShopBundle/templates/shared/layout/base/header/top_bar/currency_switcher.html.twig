@@ -1,0 +1,22 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Common\CurrencySwitcherComponent #}
+
+{% if available_currencies|length > 1 %}
+    <div class="col-auto">
+        <div class="dropdown" {{ sylius_test_html_attribute('currency-selector') }}>
+            <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('active-currency') }}>
+                {{ active_currency }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                {% for code in available_currencies %}
+                    {% if code is not same as(active_currency) %}
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ path('sylius_shop_switch_currency', {'code': code}) }}" {{ sylius_test_html_attribute('available-currency') }}>
+                                {{ code }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

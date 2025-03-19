@@ -1,0 +1,100 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius.shop.product_review.index':
+            content:
+                template: "@SyliusShop/product_review/index/content.html.twig"
+                priority: 0
+        
+        'sylius.shop.product_review.index.content':
+            header:
+                template: '@SyliusShop/product_review/index/content/header.html.twig'
+                priority: 200
+            sidebar:
+                template: "@SyliusShop/product_review/index/content/sidebar.html.twig"
+                priority: 100
+            main:
+                template: "@SyliusShop/product_review/index/content/main.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.header':
+            breadcrumbs:
+                component: 'sylius_shop:product.by_slug'
+                props:
+                    slug: '@=_context.slug'
+                    template: '@SyliusShop/product_review/index/content/header/breadcrumbs.html.twig'
+                priority: 0
+
+        'sylius.shop.product_review.index.content.sidebar':
+            product_card:
+                component: 'sylius_shop:product:card'
+                props:
+                    product: '@=_context.product'
+                    slug: '@=_context.slug'
+                    template: '@SyliusShop/product/common/card.html.twig'
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main':
+            header:
+                template: "@SyliusShop/product_review/index/content/main/header.html.twig"
+                priority: 100
+            list:
+                template: "@SyliusShop/product_review/index/content/main/list.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.header':
+            details:
+                template: "@SyliusShop/product_review/index/content/main/header/details.html.twig"
+                priority: 100
+            buttons:
+                template: "@SyliusShop/product_review/index/content/main/header/buttons.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.header.details':
+            title:
+                template: "@SyliusShop/product_review/index/content/main/header/details/title.html.twig"
+                priority: 100
+            reviews_count:
+                template: "@SyliusShop/product_review/index/content/main/header/details/reviews_count.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.header.buttons':
+            add_review:
+                template: "@SyliusShop/product_review/index/content/main/header/buttons/add_review.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.list':
+            review:
+                template: "@SyliusShop/product_review/index/content/main/list/review.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.list.review':
+            header:
+                template: "@SyliusShop/product_review/index/content/main/list/review/header.html.twig"
+                priority: 200
+            content:
+                template: "@SyliusShop/product_review/index/content/main/list/review/content.html.twig"
+                priority: 100
+            footer:
+                template: "@SyliusShop/product_review/index/content/main/list/review/footer.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.list.review.header':
+            title:
+                template: "@SyliusShop/product_review/index/content/main/list/review/header/title.html.twig"
+                priority: 100
+            rating:
+                template: "@SyliusShop/product_review/index/content/main/list/review/header/rating.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.list.review.content':
+            comment:
+                template: "@SyliusShop/product_review/index/content/main/list/review/content/comment.html.twig"
+                priority: 0
+
+        'sylius.shop.product_review.index.content.main.list.review.footer':
+            author:
+                template: "@SyliusShop/product_review/index/content/main/list/review/footer/author.html.twig"
+                priority: 100
+            date:
+                template: "@SyliusShop/product_review/index/content/main/list/review/footer/date.html.twig"
+                priority: 0

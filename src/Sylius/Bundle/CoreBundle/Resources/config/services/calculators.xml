@@ -17,9 +17,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
-        <service id="sylius.calculator.delay_stamp" alias="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface"/>
+        <service id="sylius.calculator.delay_stamp" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
+        <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" alias="sylius.calculator.delay_stamp"/>
     </services>
 </container>

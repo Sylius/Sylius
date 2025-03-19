@@ -1,0 +1,12 @@
+{% extends '@SyliusShop/checkout/common/layout.html.twig' %}
+
+{% set active_step = 'select_shipping' %}
+{% set prefixes = ['sylius_shop.checkout'] %}
+
+{% block title %}
+    {{ 'sylius.ui.shipping'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% hook 'select_shipping' with { _prefixes: prefixes, active_step, form, order } %}
+{% endblock %}

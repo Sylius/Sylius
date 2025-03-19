@@ -1,0 +1,18 @@
+{% set form = hookable_metadata.context.form %}
+
+{% if form.customer is defined %}
+    <div {{ stimulus_controller('api-login', {url: path('sylius_shop_json_login_check')} ) }}>
+        <div class="d-none">
+            <div class="alert alert-danger" data-api-login-target="errorPrototype"></div>
+        </div>
+        {{ form_row(form.customer.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({attr: {'data-api-login-target': 'email'}})) }}
+        {% if hookable_metadata.context.email_exists %}
+            <div class="input-group mb-2">
+                <input type="password" class="form-control" placeholder="{{ 'sylius.ui.password'|trans }}" data-api-login-target="password" {{ sylius_test_html_attribute('password-input') }}>
+                <button class="btn btn-primary" type="button" data-action="api-login#login" {{ sylius_test_html_attribute('login-button') }}>{{ 'sylius.ui.sign_in'|trans }}</button>
+            </div>
+            <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}" data-api-login-target="csrfToken">
+            <div data-api-login-target="error" {{ sylius_test_html_attribute('login-validation-error') }}></div>
+        {% endif %}
+    </div>
+{% endif %}

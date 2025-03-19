@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -25,7 +26,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PaymentMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class PaymentMethodExampleFactory extends AbstractExampleFactory
 {
     public const DEFAULT_LOCALE = 'en_US';
 
@@ -51,8 +52,11 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodFactory->createWithGateway($options['gatewayFactory']);
-        $paymentMethod->getGatewayConfig()->setGatewayName($options['gatewayName']);
-        $paymentMethod->getGatewayConfig()->setConfig($options['gatewayConfig']);
+        /** @var GatewayConfigInterface $gatewayConfig */
+        $gatewayConfig = $paymentMethod->getGatewayConfig();
+        $gatewayConfig->setGatewayName($options['gatewayName']);
+        $gatewayConfig->setConfig($options['gatewayConfig']);
+        $gatewayConfig->setUsePayum($options['usePayum']);
 
         $paymentMethod->setCode($options['code']);
         $paymentMethod->setEnabled($options['enabled']);
@@ -89,6 +93,8 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
             ->setDefault('gatewayName', 'Offline')
             ->setDefault('gatewayFactory', 'offline')
             ->setDefault('gatewayConfig', [])
+            ->setDefault('usePayum', true)
+            ->setAllowedTypes('usePayum', 'bool')
             ->setDefault('enabled', fn (Options $options): bool => $this->faker->boolean(90))
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')

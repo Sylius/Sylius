@@ -6,6 +6,6 @@
     "code": "ultra",
     "name": "Ultra",
     "description": null,
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

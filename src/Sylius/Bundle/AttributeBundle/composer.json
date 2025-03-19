@@ -26,28 +26,27 @@
         }
     ],
     "require": {
-        "friendsofsymfony/rest-bundle": "^3.0",
-        "jms/serializer-bundle": "^4.2",
-        "php": "^8.1",
-        "ramsey/uuid": "^4.0",
-        "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/attribute": "^1.13",
-        "sylius/resource-bundle": "^1.11",
-        "symfony/framework-bundle": "^5.4.21 || ^6.4"
+        "php": "^8.2",
+        "ramsey/uuid": "^4.7",
+        "stof/doctrine-extensions-bundle": "^1.12",
+        "sylius/attribute": "^2.0",
+        "sylius/resource-bundle": "^1.12",
+        "symfony/framework-bundle": "^6.4.1 || ^7.1"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
-        "doctrine/orm": "^2.13",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "phpspec/phpspec": "^7.2",
-        "phpspec/prophecy-phpunit": "^2.0",
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/orm": "^2.18",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "phpspec/phpspec": "^7.5",
+        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "^5.4.21 || ^6.4",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/form": "^5.4.21 || ^6.4"
+        "symfony/browser-kit": "^6.4 || ^7.1",
+        "symfony/dependency-injection": "^6.4.1 || ^7.1",
+        "symfony/form": "^6.4.1 || ^7.1"
     },
     "conflict": {
-        "stof/doctrine-extensions-bundle": "1.8.0"
+        "doctrine/orm": ">= 3.0",
+        "phpstan/phpdoc-parser": ">= 2.0"
     },
     "config": {
         "allow-plugins": {
@@ -56,7 +55,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.1"
         }
     },
     "autoload": {

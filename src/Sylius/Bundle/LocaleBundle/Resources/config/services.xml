@@ -23,8 +23,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.form.type.locale" class="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType">
             <argument>%sylius.model.locale.class%</argument>
             <argument>%sylius.form.type.locale.validation_groups%</argument>
@@ -40,41 +38,36 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext">
+        <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext" public="true">
             <argument>%sylius_locale.locale%</argument>
         </service>
         <service id="Sylius\Component\Locale\Context\LocaleContextInterface" alias="sylius.context.locale" />
 
         <service id="sylius.context.locale.composite" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale" decoration-priority="256" public="false" />
 
-        <service id="Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext">
+        <service id="sylius.context.locale.request_header_based" class="Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.provider.locale" />
             <tag name="sylius.context.locale" priority="32" />
         </service>
-        <service id="sylius.context.locale.request_header_based" alias="Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext" />
 
-        <service id="sylius.locale_collection_provider" class="Sylius\Component\Locale\Provider\LocaleCollectionProvider">
+        <service id="sylius.provider.locale_collection" class="Sylius\Component\Locale\Provider\LocaleCollectionProvider">
             <argument type="service" id="sylius.repository.locale" />
         </service>
-        <service id="sylius.provider.locale_collection" alias="sylius.locale_collection_provider" />
 
-        <service id="sylius.locale_collection_provider.cached" class="Sylius\Component\Locale\Provider\CachedLocaleCollectionProvider" decorates="sylius.provider.locale_collection">
+        <service id="sylius.provider.locale_collection.cached" class="Sylius\Component\Locale\Provider\CachedLocaleCollectionProvider" decorates="sylius.provider.locale_collection">
             <argument type="service" id=".inner" />
             <argument type="service" id="cache.app" />
         </service>
-        <service id="sylius.provider.locale_collection.cached" alias="sylius.locale_collection_provider.cached" />
 
-        <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
+        <service id="sylius.provider.locale" class="Sylius\Component\Locale\Provider\LocaleProvider">
             <argument type="service" id="sylius.provider.locale_collection" />
             <argument>%sylius_locale.locale%</argument>
         </service>
-        <service id="Sylius\Component\Locale\Provider\LocaleProviderInterface" alias="sylius.locale_provider" />
-        <service id="sylius.provider.locale" alias="sylius.locale_provider" />
+        <service id="Sylius\Component\Locale\Provider\LocaleProviderInterface" alias="sylius.provider.locale" />
 
-        <service id="sylius.locale_converter" class="Sylius\Component\Locale\Converter\LocaleConverter" />
-        <service id="Sylius\Component\Locale\Converter\LocaleConverterInterface" alias="sylius.locale_converter" />
-        <service id="sylius.converter.locale" alias="sylius.locale_converter" />
+        <service id="sylius.converter.locale" class="Sylius\Component\Locale\Converter\LocaleConverter" />
+        <service id="Sylius\Component\Locale\Converter\LocaleConverterInterface" alias="sylius.converter.locale" />
 
         <service id="sylius.listener.request_locale_setter" class="Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter">
             <argument type="service" id="sylius.context.locale" />
@@ -82,32 +75,24 @@
             <tag name="kernel.event_listener" event="kernel.request" priority="4" />
         </service>
 
-        <service id="sylius.templating.helper.locale" class="Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">
-            <argument type="service" id="sylius.converter.locale" />
-            <argument type="service" id="sylius.context.locale" />
-            <tag name="templating.helper" alias="sylius_locale" />
-            <deprecated package="sylius/locale-bundle" version="1.14">The "%service_id%" is deprecated since Sylius 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.twig.extension.locale" class="Sylius\Bundle\LocaleBundle\Twig\LocaleExtension" public="false">
+        <service id="sylius.twig.extension.locale" class="Sylius\Bundle\LocaleBundle\Twig\LocaleExtension">
             <argument type="service" id="sylius.converter.locale" />
             <argument type="service" id="sylius.context.locale" />
             <tag name="twig.extension" />
         </service>
 
-        <service id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" class="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageChecker">
+        <service id="sylius.checker.locale_usage" class="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageChecker">
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.resource_registry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
-        <service id="sylius.checker.locale_usage" alias="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+        <service id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" alias="sylius.checker.locale_usage" />
 
-        <service id="Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener">
+        <service id="sylius.doctrine.listener.locale_modification" class="Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener">
             <argument type="service" id="cache.app" />
             <tag name="doctrine.orm.entity_listener" event="postPersist" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
             <tag name="doctrine.orm.entity_listener" event="postUpdate" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
             <tag name="doctrine.orm.entity_listener" event="postRemove" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
         </service>
-        <service id="sylius.doctrine.listener.locale_modification" alias="Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener" />
     </services>
 </container>

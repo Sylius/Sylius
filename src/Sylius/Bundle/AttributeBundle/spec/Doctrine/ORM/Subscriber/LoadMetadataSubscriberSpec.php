@@ -16,8 +16,8 @@ namespace spec\Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
@@ -60,21 +60,21 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(
         LoadClassMetadataEventArgs $eventArgs,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         EntityManager $entityManager,
         ClassMetadataFactory $classMetadataFactory,
-        ClassMetadataInfo $classMetadataInfo,
+        ClassMetadata $classMetadata,
     ): void {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $eventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
-        $classMetadataInfo->fieldMappings = [
+        $classMetadata->fieldMappings = [
             'id' => [
                 'columnName' => 'id',
             ],
         ];
-        $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
-        $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
+        $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadata);
+        $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadata);
 
         $metadata->getName()->willReturn('Some\App\Product\Entity\AttributeValue');
         $metadata->hasAssociation('subject')->willReturn(false);
@@ -110,7 +110,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_does_not_map_relations_for_attribute_value_model_if_the_relations_already_exist(
         LoadClassMetadataEventArgs $eventArgs,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         EntityManager $entityManager,
         ClassMetadataFactory $classMetadataFactory,
     ): void {
@@ -129,7 +129,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
         LoadClassMetadataEventArgs $eventArgs,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         EntityManager $entityManager,
         ClassMetadataFactory $classMetadataFactory,
     ): void {
@@ -146,7 +146,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_does_not_add_values_one_to_many_mapping_if_the_class_is_not_a_configured_attribute_model(
         LoadClassMetadataEventArgs $eventArgs,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         EntityManager $entityManager,
         ClassMetadataFactory $classMetadataFactory,
     ): void {

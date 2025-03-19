@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Product\IndexPage;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class VerticalMenuElement extends Element implements VerticalMenuElementInterface
+class VerticalMenuElement extends Element implements VerticalMenuElementInterface
 {
     public function getMenuItems(): array
     {

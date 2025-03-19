@@ -23,9 +23,9 @@ final class StatisticsTest extends JsonApiTestCase
 
     protected function setUp(): void
     {
-        $this->setUpOrderPlacer();
-
         parent::setUp();
+
+        $this->setUpOrderPlacer();
     }
 
     /**
@@ -37,7 +37,7 @@ final class StatisticsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'statistics.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
@@ -123,7 +123,7 @@ final class StatisticsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_get_statistics_data_for_non_admin_user(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/statistics');
 
@@ -133,7 +133,7 @@ final class StatisticsTest extends JsonApiTestCase
     /** @test */
     public function it_returns_a_not_found_status_code_if_channel_does_not_exist(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -150,6 +150,13 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
+    public function getIntervals(): iterable
+    {
+        yield ['day'];
+        yield ['month'];
+        yield ['year'];
+    }
+
     /**
      * @test
      *
@@ -157,7 +164,7 @@ final class StatisticsTest extends JsonApiTestCase
      */
     public function it_returns_a_validation_error_if_period_is_invalid(array $parameters): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -188,7 +195,7 @@ final class StatisticsTest extends JsonApiTestCase
         array $queryParameters,
         array $expectedViolations,
     ): void {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -200,21 +207,14 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseViolations($this->client->getResponse(), $expectedViolations);
     }
 
-    public function getIntervals(): iterable
-    {
-        yield ['day'];
-        yield ['month'];
-        yield ['year'];
-    }
-
     public function missingQueryParameters(): iterable
     {
         yield 'missing channelCode' => [
-             'parameters' => [
+            'parameters' => [
                 'startDate' => '2023-01-01T00:00:00',
                 'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
-             ],
+            ],
             'expectedViolations' => [
                 [
                     'propertyPath' => '[channelCode]',

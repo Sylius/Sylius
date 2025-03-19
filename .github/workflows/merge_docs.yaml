@@ -1,0 +1,47 @@
+name: Merge GitBook Documentation
+
+on:
+    schedule:
+        -
+            cron: "0 3 * * *"
+    workflow_dispatch: ~
+
+permissions:
+    contents: write
+    pull-requests: write
+
+jobs:
+    merge_docs:
+        runs-on: ubuntu-latest
+        if: github.repository == 'Sylius/Sylius'
+        name: "Merge GitBook Documentation"
+        timeout-minutes: 5
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        docs_branch: "2.0-docs"
+                        target_branch: "2.0"
+
+        steps:
+            -
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ matrix.target_branch }}
+
+            -
+                name: Reset docs branch
+                run: |
+                    git fetch origin ${{ matrix.docs_branch }}:${{ matrix.docs_branch }}
+                    git reset --hard ${{ matrix.docs_branch }}
+
+            -
+                name: Create pull request
+                uses: peter-evans/create-pull-request@v7
+                with:
+                    token: ${{ secrets.SYLIUS_BOT_PAT }}
+                    title: '[DOCUMENTATION] Synchronize ${{ matrix.docs_branch }} -> ${{ matrix.target_branch }}'
+                    branch: "docs/${{ matrix.docs_branch }}_${{ matrix.target_branch }}"
+                    delete-branch: true
+                    base: ${{ matrix.target_branch }}

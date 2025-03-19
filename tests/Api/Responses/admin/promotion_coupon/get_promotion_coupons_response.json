@@ -1,10 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/PromotionCoupon",
-    "@id": "\/api\/v2\/admin\/promotion-coupons",
+    "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/coupons",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ1",
+            "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/coupons\/XYZ1",
             "@type": "PromotionCoupon",
             "perCustomerUsageLimit": 1,
             "reusableFromCancelledOrders": true,
@@ -13,11 +13,11 @@
             "used": 1,
             "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
             "expiresAt": null,
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ2",
+            "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/coupons\/XYZ2",
             "@type": "PromotionCoupon",
             "perCustomerUsageLimit": null,
             "reusableFromCancelledOrders": false,
@@ -25,15 +25,15 @@
             "usageLimit": null,
             "used": 0,
             "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
-            "expiresAt": @date@,
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "expiresAt": "@date@",
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         }
     ],
     "hydra:totalItems": 2,
         "hydra:search": {
             "@type": "hydra:IriTemplate",
-            "hydra:template": "\/api\/v2\/admin\/promotion-coupons{?order[code],order[expiresAt],order[usageLimit],order[perCustomerUsageLimit],order[used],promotion}",
+            "hydra:template": "\/api\/v2\/admin\/promotions/dollar_off/coupons{?order[code],order[expiresAt],order[usageLimit],order[perCustomerUsageLimit],order[used],code,code[],promotion.code,promotion.code[]}",
             "hydra:variableRepresentation": "BasicRepresentation",
             "hydra:mapping": [
                 {
@@ -68,8 +68,26 @@
             },
             {
                 "@type": "IriTemplateMapping",
-                "variable": "promotion",
-                "property": null,
+                "variable": "code",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code[]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "promotion.code",
+                "property": "promotion.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "promotion.code[]",
+                "property": "promotion.code",
                 "required": false
             }
         ]

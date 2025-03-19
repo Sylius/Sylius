@@ -27,6 +27,6 @@ abstract class DriverHelper
 
     public static function isNotJavascript(DriverInterface $driver): bool
     {
-        return !$driver instanceof Selenium2Driver && !$driver instanceof ChromeDriver;
+        return !$driver instanceof Selenium2Driver && !$driver instanceof ChromeDriver && !$driver instanceof PantherDriver;
     }
 }

@@ -1,0 +1,14 @@
+{% extends '@SyliusShop/checkout/common/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.complete'|trans }} | {{ parent() }}{% endblock %}
+{% block content_title %}{{ 'sylius.ui.summary_of_your_order'|trans }}{% endblock %}
+
+{% set active_step = 'complete' %}
+{% set prefixes = ['sylius_shop.checkout'] %}
+
+{% block content %}
+    {% hook 'complete' with { _prefixes: prefixes, order, form, active_step } %}
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}

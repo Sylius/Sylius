@@ -19,68 +19,38 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction">
+        <service id="sylius_api.controller.delete_order_item" class="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction">
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.order_item" />
         </service>
-        <service id="sylius_api.controller.delete_order_item" alias="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction">
+        <service id="sylius_api.controller.get_customer_statistics" class="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction">
             <argument type="service" id="sylius.query_bus" />
             <tag name="controller.service_arguments" />
         </service>
-        <service id="sylius_api.controller.get_customer_statistics" alias="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction">
+        <service id="sylius_api.controller.get_product_by_slug" class="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="request_stack" />
         </service>
-        <service id="sylius_api.controller.get_product_by_slug" alias="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction">
+        <service id="sylius_api.controller.remove_catalog_promotion" class="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction">
             <argument type="service" id="sylius.processor.catalog_promotion.removal" />
         </service>
-        <service id="sylius_api.controller.remove_catalog_promotion" alias="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction">
-            <argument type="service" id="sylius.factory.avatar_image" />
-            <argument type="service" id="sylius.repository.avatar_image" />
-            <argument type="service" id="sylius.uploader.image" />
-            <argument type="service" id="api_platform.symfony.iri_converter" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction">
-            <argument type="service" id="sylius_api.creator.product_image" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction">
-            <argument type="service" id="sylius_api.creator.taxon_image" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction">
-            <argument type="service" id="sylius.query_bus" />
-            <tag name="controller.service_arguments" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction">
+        <service id="sylius_api.controller.remove_customer_shop_user" class="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction">
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.shop_user" />
         </service>
-        <service id="sylius_api.controller.remove_customer_shop_user" alias="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction">
+        <service id="sylius_api.controller.get_statistics" class="Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction">
             <argument type="service" id="sylius.query_bus" />
             <argument type="service" id="serializer" />
             <argument type="service" id="validator" />
             <argument>%sylius_core.orders_statistics.intervals_map%</argument>
         </service>
-        <service id="sylius_api.controller.get_statistics" alias="Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction" />
     </services>
 </container>

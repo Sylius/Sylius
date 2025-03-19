@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\Token\JWTPostAuthenticationToken;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -23,6 +23,7 @@ final class ApiSecurityService implements SecurityServiceInterface
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private JWTTokenManagerInterface $jwtTokenManager,
+        private string $firewallName,
     ) {
     }
 
@@ -40,10 +41,12 @@ final class ApiSecurityService implements SecurityServiceInterface
 
     public function getCurrentToken(): TokenInterface
     {
-        $token = new JWTUserToken();
-        $token->setRawToken($this->sharedStorage->get('token'));
+        /** @var UserInterface $user */
+        $user = $this->sharedStorage->get('user');
+        /** @var string $token */
+        $token = $this->sharedStorage->get('token');
 
-        return $token;
+        return new JWTPostAuthenticationToken($user, $this->firewallName, $user->getRoles(), $token);
     }
 
     public function restoreToken(TokenInterface $token): void

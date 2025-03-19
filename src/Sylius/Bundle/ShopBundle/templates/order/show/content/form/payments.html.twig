@@ -1,0 +1,3 @@
+{% set prefixes = hookable_metadata.prefixes|merge(['sylius_shop.shared.form']) %}
+
+{% hook 'select_payment' with { _prefixes: prefixes } %}

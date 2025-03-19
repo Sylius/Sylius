@@ -1,0 +1,13 @@
+{% set customer = hookable_metadata.context.resource %}
+{% set user = customer.user %}
+
+{% if user != null %}
+    <form action="{{ path('sylius_admin_shop_user_delete', {'id': user.id, 'customerId': customer.id}) }}" method="POST">
+        <input type="hidden" name="_method" value="DELETE" />
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(user.id) }}" />
+        <button type="submit" class="dropdown-item" {{ sylius_test_html_attribute('customer-actions-delete') }}>
+            {{ ux_icon('tabler:trash-x', {'class': 'icon dropdown-item-icon'}) }}
+            {{ 'sylius.ui.delete'|trans }}
+        </button>
+    </form>
+{% endif %}

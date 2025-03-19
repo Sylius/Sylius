@@ -22,13 +22,6 @@
             <option name="groups">sylius</option>
         </constraint>
 
-        <property name="promotion">
-            <constraint name="NotBlank">
-                <option name="message">sylius.promotion_coupon.promotion.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon.code.not_blank</option>

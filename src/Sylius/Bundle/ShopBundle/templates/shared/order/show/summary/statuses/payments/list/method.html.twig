@@ -1,0 +1,5 @@
+{% set method = hookable_metadata.context.payment.method %}
+
+<div class="me-auto" {{ sylius_test_html_attribute('payment-method', method.code) }}>
+    {{ method.name }}
+</div>

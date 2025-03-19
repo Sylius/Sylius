@@ -1,0 +1,13 @@
+{% set product = hookable_metadata.context.product %}
+{% set variant = hookable_metadata.context.variant %}
+
+<td class="text-end">
+    <a
+        href="{{ path('sylius_admin_product_variant_update', { id: variant.id, productId: product.id }) }}"
+        class="btn"
+        {{ sylius_test_html_attribute('edit-variant', variant.code) }}
+    >
+        {{ ux_icon('tabler:pencil') }}
+        {{ 'sylius.ui.edit'|trans }}
+    </a>
+</td>

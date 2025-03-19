@@ -1,6 +1,11 @@
 # This file is a part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+sylius_shop_account_live_component:
+    path: '/_components/{_live_component}/{_live_action}'
+    defaults:
+        _live_action: 'get'
+
 sylius_shop_account_order:
     resource: "@SyliusShopBundle/Resources/config/routing/account/order.yml"
     prefix: /orders
@@ -23,7 +28,7 @@ sylius_shop_account_dashboard:
     defaults:
         _controller: sylius.controller.customer::showAction
         _sylius:
-            template: "@SyliusShop/Account/dashboard.html.twig"
+            template: "@SyliusShop/account/dashboard.html.twig"
             repository:
                 method: find
                 arguments:
@@ -35,8 +40,8 @@ sylius_shop_account_profile_update:
     defaults:
         _controller: sylius.controller.customer::updateAction
         _sylius:
-            template: "@SyliusShop/Account/profileUpdate.html.twig"
-            form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType
+            template: "@SyliusShop/account/profile_update.html.twig"
+            form: Sylius\Bundle\ShopBundle\Form\Type\CustomerProfileType
             repository:
                 method: find
                 arguments:
@@ -51,5 +56,6 @@ sylius_shop_account_change_password:
     defaults:
         _controller: sylius.controller.shop_user::changePasswordAction
         _sylius:
-            template: "@SyliusShop/Account/changePassword.html.twig"
+            form: Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType
+            template: "@SyliusShop/account/change_password.html.twig"
             redirect: sylius_shop_account_dashboard

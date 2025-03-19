@@ -16,9 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
@@ -71,25 +69,13 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         protected PaymentMethodRepositoryInterface $paymentMethodRepository,
         protected ShippingMethodRepositoryInterface $shippingMethodRepository,
         protected FactoryInterface $addressFactory,
-        protected StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
+        protected StateMachineInterface $stateMachine,
         protected OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         protected OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
     ) {
         $this->optionsResolver = new OptionsResolver();
         $this->faker = Factory::create();
         $this->configureOptions($this->optionsResolver);
-
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the twelfth argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    StateMachineFactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public function create(array $options = []): OrderInterface
@@ -281,7 +267,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     protected function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
-        $this->getStateMachine()->apply($order, OrderCheckoutTransitions::GRAPH, $transition);
+        $this->stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, $transition);
     }
 
     protected function generateInvalidSkipMessage(string $type, string $channelCode): string
@@ -311,32 +297,19 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     protected function completePayments(OrderInterface $order): void
     {
-        $stateMachine = $this->getStateMachine();
-
         foreach ($order->getPayments() as $payment) {
-            if ($stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)) {
-                $stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
+            if ($this->stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)) {
+                $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
             }
         }
     }
 
     protected function completeShipments(OrderInterface $order): void
     {
-        $stateMachine = $this->getStateMachine();
-
         foreach ($order->getShipments() as $shipment) {
-            if ($stateMachine->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP)) {
-                $stateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP);
+            if ($this->stateMachine->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP)) {
+                $this->stateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP);
             }
         }
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }

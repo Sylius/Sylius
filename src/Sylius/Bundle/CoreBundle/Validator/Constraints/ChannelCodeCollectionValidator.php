@@ -26,6 +26,9 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class ChannelCodeCollectionValidator extends ConstraintValidator
 {
+    /** @var array<string, string> */
+    private array $channelsCache = [];
+
     /** @param ChannelRepositoryInterface<ChannelInterface> $channelRepository */
     public function __construct(
         private ChannelRepositoryInterface $channelRepository,
@@ -44,7 +47,7 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
         }
 
         if ($constraint->validateAgainstAllChannels) {
-            $this->validateInChannelCollection($value, $this->channelRepository->findAll(), $constraint);
+            $this->validateInChannelCollection($value, array_keys($this->getAllChannelsCodes()), $constraint);
 
             return;
         }
@@ -62,21 +65,34 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
             ));
         }
 
-        $this->validateInChannelCollection($value, $object->getChannels()->toArray(), $constraint);
+        $channelCodes = $this->getApplicableChannels($object, $value);
+
+        $this->validateInChannelCollection($value, $channelCodes, $constraint);
     }
 
     /**
      * @param array<array-key, array<array-key, mixed>> $value
-     * @param array<BaseChannelInterface> $channels
+     * @param string[] $channels
      */
     private function validateInChannelCollection(
         array $value,
         array $channels,
         ChannelCodeCollection $constraint,
     ): void {
+        $existingChannels = $this->getAllChannelsCodes();
+
         $fields = [];
         foreach ($channels as $channel) {
-            $fields[$channel->getCode()] = $constraint->constraints;
+            if (!isset($existingChannels[$channel])) {
+                $this->context->buildViolation($constraint->invalidChannelMessage)
+                    ->setParameter('{{ channel_code }}', $channel)
+                    ->addViolation()
+                ;
+
+                continue;
+            }
+
+            $fields[$channel] = $constraint->constraints;
         }
         if ([] === $fields) {
             return;
@@ -94,5 +110,36 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
 
         $validator = $this->context->getValidator()->inContext($this->context);
         $validator->validate($value, $collection, $constraint->groups);
+    }
+
+    /** @return array<string, mixed> */
+    private function getAllChannelsCodes(): array
+    {
+        if ([] !== $this->channelsCache) {
+            return $this->channelsCache;
+        }
+
+        /** @var array{code: string} $channelsData */
+        $channelsData = $this->channelRepository->findAllWithBasicData();
+
+        $this->channelsCache = array_flip(array_column($channelsData, 'code'));
+
+        return $this->channelsCache;
+    }
+
+    /**
+     * @param array<string, mixed> $value
+     *
+     * @return array<string, mixed>
+     */
+    private function getApplicableChannels(ChannelsAwareInterface $channelsAware, array $value): array
+    {
+        $channelCodes = $channelsAware
+            ->getChannels()
+            ->map(fn (BaseChannelInterface $channel) => (string) $channel->getCode())
+            ->toArray()
+        ;
+
+        return array_unique(array_merge($channelCodes, array_keys($value)));
     }
 }

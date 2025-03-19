@@ -30,10 +30,10 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
 
     public function getEmailValidationMessage(): string
     {
-        $errorLabel = $this->getElement('email')->getParent()->find('css', '[data-test-validation-error]');
+        $errorLabel = $this->getElement('email')->getParent()->find('css', '.invalid-feedback');
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
         return $errorLabel->getText();

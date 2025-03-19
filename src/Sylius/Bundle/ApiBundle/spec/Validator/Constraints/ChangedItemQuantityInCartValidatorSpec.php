@@ -50,7 +50,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new AddingEligibleProductVariantToCart()])
+            ->during('validate', [new CompleteOrder('TOKEN'), new AddingEligibleProductVariantToCart()])
         ;
     }
 
@@ -59,7 +59,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new ChangeItemQuantityInCart(2),
+                new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
                 new class() extends Constraint {
                 },
             ])
@@ -77,7 +77,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(OrderItemNotFoundException::class)
             ->during('validate', [
-                ChangeItemQuantityInCart::createFromData('token', '11', 2),
+                new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
                 new ChangedItemQuantityInCart(),
             ])
         ;
@@ -100,7 +100,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -130,7 +130,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -162,7 +162,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -197,7 +197,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -242,7 +242,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
         );
     }
@@ -295,7 +295,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('token', '11', 2),
+            new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
         );
     }

@@ -25,6 +25,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 {
@@ -80,6 +81,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_requested_cart_item_is_not_available(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
         AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
@@ -94,7 +96,10 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 
         $availabilityChecker->isStockSufficient($productVariant, 10)->willReturn(false);
 
-        $executionContext->addViolation('Insufficient stock', ['%itemName%' => 'Mug'])->shouldBeCalled();
+        $executionContext->buildViolation('Insufficient stock')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->setParameter('%itemName%', 'Mug')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('cartItem.quantity')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $cartItemAvailabilityConstraint = new CartItemAvailability();
         $cartItemAvailabilityConstraint->message = 'Insufficient stock';
@@ -105,6 +110,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_total_quantity_of_cart_items_exceed_available_quantity(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
         AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
@@ -123,7 +129,10 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 
         $availabilityChecker->isStockSufficient($productVariant, 20)->willReturn(false);
 
-        $executionContext->addViolation('Insufficient stock', ['%itemName%' => 'Mug'])->shouldBeCalled();
+        $executionContext->buildViolation('Insufficient stock')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->setParameter('%itemName%', 'Mug')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('cartItem.quantity')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $cartItemAvailabilityConstraint = new CartItemAvailability();
         $cartItemAvailabilityConstraint->message = 'Insufficient stock';

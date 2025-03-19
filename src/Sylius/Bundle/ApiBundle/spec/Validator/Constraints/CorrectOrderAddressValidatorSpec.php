@@ -40,7 +40,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new CorrectOrderAddress()])
+            ->during('validate', [new CompleteOrder('TOKEN'), new CorrectOrderAddress()])
         ;
     }
 
@@ -51,7 +51,12 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
+                new UpdateCart(
+                    orderTokenValue: 'TOKEN',
+                    email: 'john@doe.com',
+                    billingAddress: $billingAddress->getWrappedObject(),
+                    shippingAddress: $shippingAddress->getWrappedObject(),
+                ),
                 new class() extends Constraint {
                 },
             ])
@@ -72,7 +77,11 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject()),
+            new UpdateCart(
+                orderTokenValue: 'TOKEN',
+                email: 'john@doe.com',
+                billingAddress: $billingAddress->getWrappedObject(),
+            ),
             new CorrectOrderAddress(),
         );
     }
@@ -91,7 +100,11 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject()),
+            new UpdateCart(
+                orderTokenValue: 'TOKEN',
+                email: 'john@doe.com',
+                billingAddress: $billingAddress->getWrappedObject(),
+            ),
             new CorrectOrderAddress(),
         );
     }
@@ -117,7 +130,12 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
+            new UpdateCart(
+                orderTokenValue: 'TOKEN',
+                email: 'john@doe.com',
+                billingAddress: $billingAddress->getWrappedObject(),
+                shippingAddress: $shippingAddress->getWrappedObject(),
+            ),
             new CorrectOrderAddress(),
         );
     }
@@ -147,7 +165,12 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
+            new UpdateCart(
+                orderTokenValue: 'TOKEN',
+                email: 'john@doe.com',
+                billingAddress: $billingAddress->getWrappedObject(),
+                shippingAddress: $shippingAddress->getWrappedObject(),
+            ),
             new CorrectOrderAddress(),
         );
     }

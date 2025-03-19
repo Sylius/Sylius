@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius.checker.gateway_config_encryption" class="Sylius\Bundle\PaymentBundle\Checker\GatewayConfigEncryptionChecker">
+            <argument on-invalid="null">%sylius.encryption.disabled_for_factories%</argument>
+        </service>
+        <service id="Sylius\Bundle\PaymentBundle\Checker\GatewayConfigEncryptionCheckerInterface" alias="sylius.checker.gateway_config_encryption" />
+
+        <service id="sylius.encrypter" class="Sylius\Component\Payment\Encryption\Encrypter">
+            <argument>%env(resolve:SYLIUS_PAYMENT_ENCRYPTION_KEY_PATH)%</argument>
+        </service>
+        <service id="Sylius\Component\Payment\Encryption\EncrypterInterface" alias="sylius.encrypter" />
+
+        <service id="sylius.encrypter.payment_request" class="Sylius\Component\Payment\Encryption\PaymentRequestEncrypter">
+            <argument type="service" id="sylius.encrypter" />
+        </service>
+
+        <service id="sylius.encrypter.gateway_config" class="Sylius\Component\Payment\Encryption\GatewayConfigEncrypter">
+            <argument type="service" id="sylius.encrypter" />
+        </service>
+
+        <service id="sylius.listener.gateway_config_encryption" class="Sylius\Bundle\PaymentBundle\Listener\GatewayConfigEncryptionListener">
+            <argument type="service" id="sylius.encrypter.gateway_config" />
+            <argument>%sylius.model.gateway_config.class%</argument>
+            <argument type="service" id="sylius.checker.gateway_config_encryption" />
+            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="postFlush" />
+            <tag name="doctrine.event_listener" event="postLoad" />
+        </service>
+
+        <service id="sylius.listener.payment_request_encryption" class="Sylius\Bundle\PaymentBundle\Listener\EntityEncryptionListener">
+            <argument type="service" id="sylius.encrypter.payment_request" />
+            <argument>%sylius.model.payment_request.class%</argument>
+            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="postFlush" />
+            <tag name="doctrine.event_listener" event="postLoad" />
+        </service>
+    </services>
+</container>

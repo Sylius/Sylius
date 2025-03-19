@@ -1,0 +1,75 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.customer.show.content':
+            sections:
+                template: '@SyliusAdmin/customer/show/content/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.show.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field: email
+                priority: 0
+
+        'sylius_admin.customer.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/customer/show/content/header/title_block/title.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.show.content.header.title_block.actions':
+            impersonate:
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/impersonate.html.twig'
+                priority: 300
+            show_orders:
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/show_orders.html.twig'
+                priority: 200
+            edit:
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/edit.html.twig'
+                priority: 100
+            delete:
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/delete.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.show.content.sections':
+            order_statistics:
+                component: 'sylius_admin:customer:order_statistics'
+                props:
+                    customerId: '@=_context.resource.getId()'
+                    template: '@SyliusAdmin/customer/show/component/order_statistics.html.twig'
+                priority: 100
+            general:
+                template: '@SyliusAdmin/customer/show/content/sections/general.html.twig'
+                priority: 0
+
+        'sylius_admin.customer.show.content.sections.general':
+            first_name:
+                template: '@SyliusAdmin/customer/show/content/sections/general/first_name.html.twig'
+                priority: 800
+            last_name:
+                template: '@SyliusAdmin/customer/show/content/sections/general/last_name.html.twig'
+                priority: 700
+            customer_since:
+                template: '@SyliusAdmin/customer/show/content/sections/general/customer_since.html.twig'
+                priority: 600
+            group_membership:
+                template: '@SyliusAdmin/customer/show/content/sections/general/group_membership.html.twig'
+                priority: 500
+            subscribed_to_newsletter:
+                template: '@SyliusAdmin/customer/show/content/sections/general/subscribed_to_newsletter.html.twig'
+                priority: 400
+            email_verified:
+                template: '@SyliusAdmin/customer/show/content/sections/general/email_verified.html.twig'
+                priority: 300
+            email:
+                template: '@SyliusAdmin/customer/show/content/sections/general/email.html.twig'
+                priority: 200
+            phone:
+                template: '@SyliusAdmin/customer/show/content/sections/general/phone.html.twig'
+                priority: 100
+            default_address:
+                template: '@SyliusAdmin/customer/show/content/sections/general/default_address.html.twig'
+                priority: 0

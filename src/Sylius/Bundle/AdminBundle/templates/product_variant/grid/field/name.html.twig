@@ -1,0 +1,27 @@
+{% set current_locale = sylius.localeCode %}
+{% set translation = data.getTranslation(current_locale) %}
+{% set translation = translation.locale == current_locale ? translation : null %}
+
+{% if data.optionValues is empty %}
+    {% if translation is not null and translation.name is not null %}
+        <span class="ui small header">
+            {{ translation.name }}
+        </span>
+    {% else %}
+        <span class="text-danger" {{ sylius_test_html_attribute('missing-translation') }} >
+            {{ ux_icon('tabler:exclamation-circle') }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
+        </span>
+    {% endif %}
+{% else %}
+    <div class="fw-medium">
+        {% set product = data.product %}
+        {{ translation is not null and translation.name is not null ? translation.name : product.name }}
+    </div>
+    <div class="small text-muted">
+        {% for option_value in data.optionValues %}
+            <div>
+                {{ option_value.value }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

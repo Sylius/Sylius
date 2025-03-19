@@ -1,0 +1,78 @@
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: 'WEB'
+        name: 'Web Channel'
+        hostname: 'localhost'
+        contactEmail: 'web@sylius.com'
+        description: 'Lorem ipsum'
+        baseCurrency: '@currency_usd'
+        defaultLocale: '@locale_en'
+        locales: ['@locale_en', '@locale_pl']
+        color: 'black'
+        enabled: true
+        taxCalculationStrategy: 'order_items_based'
+        menuTaxon: '@category_taxon'
+        channelPriceHistoryConfig: '@web_price_history_config'
+        shopBillingData: '@channel_web_billing_data'
+
+Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
+    web_price_history_config:
+        lowestPriceForDiscountedProductsVisible: false
+        __calls:
+            - addTaxonExcludedFromShowingLowestPrice: ["@mug_taxon"]
+            - addTaxonExcludedFromShowingLowestPrice: ["@hat_taxon"]
+
+Sylius\Component\Core\Model\ShopBillingData:
+    channel_web_billing_data:
+        company: 'Web Channel Company'
+        taxId: 'Web Channel Tax ID'
+        country_code: 'EN'
+        street: 'Web Channel Street'
+        city: 'Web Channel City'
+        postcode: 'Web Channel Postcode'
+
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en:
+        code: 'en_US'
+    locale_pl:
+        code: 'pl_PL'
+
+Sylius\Component\Core\Model\Taxon:
+    category_taxon:
+        code: "CATEGORY"
+        currentLocale: "en_US"
+        translations: ["@en_category_translation"]
+        children: ["@mug_taxon", "@hat_taxon"]
+    mug_taxon:
+        code: "MUG"
+        currentLocale: "en_US"
+        translations: ["@en_mug_taxon_translation"]
+        parent: "@category_taxon"
+        position: 0
+    hat_taxon:
+        code: "HAT"
+        currentLocale: "en_US"
+        translations: ["@en_hat_translation"]
+        parent: "@category_taxon"
+        position: 1
+
+Sylius\Component\Taxonomy\Model\TaxonTranslation:
+    en_category_translation:
+        slug: "categories"
+        locale: "en_US"
+        name: "Categories"
+        translatable: "@category_taxon"
+    en_mug_taxon_translation:
+        slug: "categories/mugs"
+        locale: "en_US"
+        name: "Mugs"
+        translatable: "@mug_taxon"
+    en_hat_translation:
+        slug: "categories/hats"
+        locale: "en_US"
+        name: "Hats"
+        translatable: "@hat_taxon"

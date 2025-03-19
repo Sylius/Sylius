@@ -62,16 +62,12 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_its_not_a_master_request(
+    function it_does_nothing_if_its_not_a_main_request(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         RequestEvent $event,
     ): void {
-        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
-            $event->isMainRequest()->willReturn(false);
-        } else {
-            $event->isMasterRequest()->willReturn(false);
-        }
+        $event->isMainRequest()->willReturn(false);
 
         $event->getRequest()->shouldNotBeCalled();
         $firewallMap->getFirewallConfig(Argument::any())->shouldNotBeCalled();
@@ -89,11 +85,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         Request $request,
         RequestEvent $event,
     ): void {
-        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
-            $event->isMainRequest()->willReturn(true);
-        } else {
-            $event->isMasterRequest()->willReturn(true);
-        }
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(null);
 
@@ -111,11 +103,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         Request $request,
         RequestEvent $event,
     ): void {
-        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
-            $event->isMainRequest()->willReturn(true);
-        } else {
-            $event->isMasterRequest()->willReturn(true);
-        }
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
             new FirewallConfig('lalaland', 'mock'),
@@ -135,11 +123,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         Request $request,
         RequestEvent $event,
     ): void {
-        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
-            $event->isMainRequest()->willReturn(true);
-        } else {
-            $event->isMasterRequest()->willReturn(true);
-        }
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
             new FirewallConfig('shop', 'mock'),
@@ -161,11 +145,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         Request $request,
         RequestEvent $event,
     ): void {
-        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
-            $event->isMainRequest()->willReturn(true);
-        } else {
-            $event->isMasterRequest()->willReturn(true);
-        }
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
             new FirewallConfig('shop', 'mock'),
@@ -190,11 +170,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         RequestEvent $event,
         Router $router,
     ): void {
-        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
-            $event->isMainRequest()->willReturn(true);
-        } else {
-            $event->isMasterRequest()->willReturn(true);
-        }
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
             new FirewallConfig('shop', 'mock'),
@@ -216,11 +192,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         Request $request,
         RequestEvent $event,
     ): void {
-        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
-            $event->isMainRequest()->willReturn(true);
-        } else {
-            $event->isMasterRequest()->willReturn(true);
-        }
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
 
         $request->getLocale()->willReturn('en');

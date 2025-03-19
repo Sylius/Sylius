@@ -1,0 +1,5 @@
+<div class="page-header" {% if hookable_configuration.sticky_header|default(true) %}data-sticky-header{% endif %}>
+    <div class="container-xl">
+        {% hook 'header' %}
+    </div>
+</div>

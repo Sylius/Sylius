@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Generator;
 
+use Sylius\Component\Product\Exception\ProductWithoutOptionsException;
+use Sylius\Component\Product\Exception\ProductWithoutOptionsValuesException;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Resource\Exception\VariantWithNoOptionsValuesException;
 
 interface ProductVariantGeneratorInterface
 {
     /**
-     * @throws VariantWithNoOptionsValuesException
-     * @throws \InvalidArgumentException
+     * @throws ProductWithoutOptionsException
+     * @throws ProductWithoutOptionsValuesException
      */
     public function generate(ProductInterface $product): void;
 }

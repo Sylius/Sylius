@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/ExchangeRate",
     "@id": "\/api\/v2\/shop\/exchange-rates\/@integer@",
     "@type": "ExchangeRate",
-    "id": @integer@,
+    "id": "@integer@",
     "ratio": 0.15,
     "sourceCurrency": "\/api\/v2\/shop\/currencies\/CNY",
     "targetCurrency": "\/api\/v2\/shop\/currencies\/USD"

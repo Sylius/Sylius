@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
-use ApiPlatform\Core\OpenApi\Model\Parameter;
+use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ProductReviewDocumentationModifier implements DocumentationModifierInterface
 {
-    public function __construct(
-        private string $apiRoute,
-    ) {
+    public function __construct(private string $apiRoute)
+    {
     }
 
     public function modify(OpenApi $docs): OpenApi

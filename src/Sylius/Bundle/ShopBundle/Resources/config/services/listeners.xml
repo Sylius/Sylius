@@ -19,15 +19,14 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.listener.shop_cart_blamer" class="Sylius\Bundle\ShopBundle\EventListener\ShopCartBlamerListener">
+        <service id="sylius_shop.listener.shop_cart_blamer" class="Sylius\Bundle\ShopBundle\EventListener\ShopCartBlamerListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="onImplicitLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
         </service>
-        <service id="sylius_shop.listener.shop_cart_blamer" alias="sylius.listener.shop_cart_blamer" />
 
-        <service id="sylius.listener.email_updater" class="Sylius\Bundle\ShopBundle\EventListener\CustomerEmailUpdaterListener">
+        <service id="sylius_shop.listener.customer_email_updater" class="Sylius\Bundle\ShopBundle\EventListener\CustomerEmailUpdaterListener">
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="event_dispatcher" />
@@ -37,75 +36,75 @@
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="eraseVerification" />
             <tag name="kernel.event_listener" event="sylius.customer.post_update" method="sendVerificationEmail" />
         </service>
-        <service id="sylius_shop.listener.customer_email_updater" alias="sylius.listener.email_updater" />
 
-        <service id="sylius.listener.shop_customer_account_sub_section_cache_control_subscriber" class="Sylius\Bundle\ShopBundle\EventListener\ShopCustomerAccountSubSectionCacheControlSubscriber">
+        <service id="sylius_shop.event_subscriber.shop_customer_account_sub_section_cache_control" class="Sylius\Bundle\ShopBundle\EventListener\ShopCustomerAccountSubSectionCacheControlSubscriber">
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="kernel.event_subscriber" event="kernel.response" />
         </service>
-        <service id="sylius_shop.event_subscriber.shop_customer_account_sub_section_cache_control" alias="sylius.listener.shop_customer_account_sub_section_cache_control_subscriber" />
 
-        <service id="sylius.listener.order_customer_ip" class="Sylius\Bundle\ShopBundle\EventListener\OrderCustomerIpListener">
+        <service id="sylius_shop.listener.order_customer_ip" class="Sylius\Bundle\ShopBundle\EventListener\OrderCustomerIpListener">
             <argument type="service" id="sylius.assigner.customer_id" />
             <argument type="service" id="request_stack" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignCustomerIpToOrder" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="500"/>
         </service>
-        <service id="sylius_shop.listener.order_customer_ip" alias="sylius.listener.order_customer_ip" />
 
-        <service id="sylius.listener.order_complete" class="Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener">
+        <service id="sylius_shop.listener.order_complete" class="Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener">
             <argument type="service" id="sylius_shop.mailer.order_email_manager" />
             <tag name="kernel.event_listener" event="sylius.order.post_complete" method="sendConfirmationEmail" />
         </service>
-        <service id="sylius_shop.listener.order_complete" alias="sylius.listener.order_complete" />
 
-        <service id="sylius.listener.user_registration" class="Sylius\Bundle\ShopBundle\EventListener\UserRegistrationListener">
+        <service id="sylius_shop.listener.user_registration" class="Sylius\Bundle\ShopBundle\EventListener\UserRegistrationListener">
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.security.user_login" />
+            <argument type="service" id="security.helper" />
             <argument>%sylius_shop.firewall_context_name%</argument>
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="handleUserVerification" />
         </service>
-        <service id="sylius_shop.listener.user_registration" alias="sylius.listener.user_registration" />
 
-        <service id="sylius.listener.order_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityChecker">
+        <service id="sylius_shop.listener.order_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityChecker">
             <argument type="service" id="router" />
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.checker.order.promotions_integrity" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
-        <service id="sylius_shop.listener.order_integrity_checker" alias="sylius.listener.order_integrity_checker" />
-        <service id="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityCheckerInterface" alias="sylius.listener.order_integrity_checker" />
+        <service id="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityCheckerInterface" alias="sylius_shop.listener.order_integrity_checker" />
 
-        <service id="sylius.order_locale_assigner" class="Sylius\Bundle\ShopBundle\EventListener\OrderLocaleAssigner">
+        <service id="sylius_shop.listener.order_locale_assigner" class="Sylius\Bundle\ShopBundle\EventListener\OrderLocaleAssigner">
             <argument type="service" id="sylius.context.locale" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignLocale" />
         </service>
-        <service id="sylius_shop.listener.order_locale_assigner" alias="sylius.order_locale_assigner" />
 
-        <service id="sylius.listener.session_cart" class="Sylius\Bundle\ShopBundle\EventListener\SessionCartSubscriber">
+        <service id="sylius_shop.event_subscriber.session_cart" class="Sylius\Bundle\ShopBundle\EventListener\SessionCartSubscriber">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius_shop.storage.cart_session" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius_shop.event_subscriber.session_cart" alias="sylius.listener.session_cart" />
 
-        <service id="sylius.listener.user_cart_recalculation" class="Sylius\Bundle\ShopBundle\EventListener\UserCartRecalculationListener">
+        <service id="sylius_shop.listener.user_cart_recalculation" class="Sylius\Bundle\ShopBundle\EventListener\UserCartRecalculationListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.order_processing.order_processor" />
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
         </service>
-        <service id="sylius_shop.listener.user_cart_recalculation" alias="sylius.listener.user_cart_recalculation" />
 
-        <service id="sylius.listener.user_impersonated" class="Sylius\Bundle\ShopBundle\EventListener\UserImpersonatedListener">
+        <service id="sylius_shop.listener.user_impersonated" class="Sylius\Bundle\ShopBundle\EventListener\UserImpersonatedListener">
             <argument type="service" id="sylius_shop.storage.cart_session" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.repository.order" />
             <tag name="kernel.event_listener" event="sylius.user.security.impersonate" method="onUserImpersonated" />
         </service>
-        <service id="sylius_shop.listener.user_impersonated" alias="sylius.listener.user_impersonated" />
+
+        <service id="sylius_shop.listener.cart_item_add" class="Sylius\Bundle\ShopBundle\EventListener\CartItemAddListener">
+            <argument type="service" id="sylius.modifier.order"/>
+            <tag name="kernel.event_listener" event="sylius.cart_item_add" method="addToOrder" />
+        </service>
+
+        <service id="sylius_shop.listener.cart_item_remove" class="Sylius\Bundle\ShopBundle\EventListener\CartItemRemoveListener">
+            <argument type="service" id="sylius.modifier.order"/>
+            <tag name="kernel.event_listener" event="sylius.cart_item_remove" method="removeFromOrder" />
+        </service>
     </services>
 </container>

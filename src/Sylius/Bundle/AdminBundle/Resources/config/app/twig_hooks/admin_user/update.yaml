@@ -1,0 +1,59 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.admin_user.update.content':
+            form:
+                component: 'sylius_admin:admin_user:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+            
+        'sylius_admin.admin_user.update.content.form':
+            sections:
+                template: '@SyliusAdmin/admin_user/form/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.admin_user.update.content.form.sections':
+            general:
+                enabled: false
+
+        'sylius_admin.admin_user.update.content.form.sections#left':
+            account:
+                template: '@SyliusAdmin/admin_user/form/sections/account.html.twig'
+                priority: 0
+
+        'sylius_admin.admin_user.update.content.form.sections#right':
+            personal_information:
+                template: '@SyliusAdmin/admin_user/form/sections/personal_information.html.twig'
+                priority: 0
+
+        'sylius_admin.admin_user.update.content.form.sections.account':
+            username:
+                template: '@SyliusAdmin/admin_user/form/sections/account/username.html.twig'
+                priority: 300
+            email:
+                template: '@SyliusAdmin/admin_user/form/sections/account/email.html.twig'
+                priority: 200
+            password:
+                template: '@SyliusAdmin/admin_user/form/sections/account/password.html.twig'
+                priority: 100
+            enabled:
+                template: '@SyliusAdmin/admin_user/form/sections/account/enabled.html.twig'
+                priority: 0
+
+        'sylius_admin.admin_user.update.content.form.sections.personal_information':
+            first_name:
+                template: '@SyliusAdmin/admin_user/form/sections/personal_information/first_name.html.twig'
+                priority: 300
+            last_name:
+                template: '@SyliusAdmin/admin_user/form/sections/personal_information/last_name.html.twig'
+                priority: 200
+            locale:
+                template: '@SyliusAdmin/admin_user/form/sections/personal_information/locale.html.twig'
+                priority: 100
+            avatar:
+                template: '@SyliusAdmin/admin_user/form/sections/personal_information/avatar.html.twig'
+                priority: 0

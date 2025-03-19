@@ -72,6 +72,16 @@ final class CountriesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'IE',
                 'enabled' => true,
+                'provinces' => [
+                    [
+                        'code' => 'IE-CON',
+                        'name' => 'Connacht',
+                    ],
+                    [
+                        'code' => 'IE-LEI',
+                        'name' => 'Leinster',
+                    ],
+                ],
             ], \JSON_THROW_ON_ERROR),
         );
 

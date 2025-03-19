@@ -1,0 +1,12 @@
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+<div {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+    {{ form_row(form._token) }}
+    <input type="hidden" name="_method" value="PUT" />
+
+    {% hook 'form' with { form } %}
+
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

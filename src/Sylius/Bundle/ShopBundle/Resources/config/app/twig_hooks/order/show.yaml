@@ -1,0 +1,22 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.order.show':
+            content:
+                template: '@SyliusShop/order/show/content.html.twig'
+                priority: 0        
+        
+        'sylius_shop.order.show.content':
+            header:
+                template: '@SyliusShop/order/show/content/header.html.twig'
+                priority: 100
+            form:
+                template: '@SyliusShop/order/show/content/form.html.twig'
+                priority: 0
+
+        'sylius_shop.order.show.content.form':
+            payments:
+                template: '@SyliusShop/order/show/content/form/payments.html.twig'
+                priority: 100
+            pay_button:
+                template: '@SyliusShop/order/show/content/form/pay_button.html.twig'
+                priority: 0

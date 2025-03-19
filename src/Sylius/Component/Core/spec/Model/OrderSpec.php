@@ -69,12 +69,6 @@ final class OrderSpec extends ObjectBehavior
         $this->isCreatedByGuest()->shouldReturn(true);
     }
 
-    function it_allows_to_mutate_create_by_guest_field(): void
-    {
-        $this->setCreatedByGuest(false);
-        $this->isCreatedByGuest()->shouldReturn(false);
-    }
-
     function its_customer_can_be_nullable(): void
     {
         $this->setCustomer(null);

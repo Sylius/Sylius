@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.custom_factory.order" class="Sylius\Bundle\CoreBundle\Factory\OrderFactory" decorates="sylius.factory.order">
             <argument type="service" id="sylius.custom_factory.order.inner" />
         </service>

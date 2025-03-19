@@ -1,0 +1,15 @@
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    <div class="row">
+        {% if hookable_metadata.configuration.method is defined %}
+            <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
+        {% endif %}
+        {{ form_errors(form, sylius_test_form_attribute('form-validation-errors')) }}
+        {{ form_widget(form._token) }}
+
+        {% hook 'form' with { form, resource } %}
+    </div>
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+</div>

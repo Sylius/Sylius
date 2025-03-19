@@ -1,0 +1,7 @@
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+<div class="sylius-filters__money">
+    {{ form_row(form.greaterThan, {attr: {'placeholder': form.greaterThan.vars.label}, 'label': 'sylius.ui.money_filter', 'label_translation_parameters': {'%label%': filter.label|trans, '%altLabel%': form.greaterThan.vars.label|trans}}) }}
+    {{ form_row(form.lessThan, {attr: { 'placeholder': form.lessThan.vars.label }}) }}
+    {{ form_row(form.currency) }}
+</div>

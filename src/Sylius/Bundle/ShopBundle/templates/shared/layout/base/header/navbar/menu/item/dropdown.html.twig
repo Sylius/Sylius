@@ -1,0 +1,9 @@
+{% set taxon = hookable_metadata.context.taxon %}
+
+<div class="dropdown-menu">
+    {% for child_taxon in taxon.enabledChildren %}
+        <a class="nav-link" href="{{ path('sylius_shop_product_index', {'slug': child_taxon.slug, '_locale': child_taxon.translation.locale}) }}" {{ sylius_test_html_attribute('menu-item', child_taxon.name) }}>
+            {{ child_taxon.name }}
+        </a>
+    {% endfor %}
+</div>

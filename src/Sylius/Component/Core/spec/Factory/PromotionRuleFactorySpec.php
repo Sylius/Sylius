@@ -15,12 +15,12 @@ namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
@@ -96,8 +96,8 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ContainsProductRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['product_code' => 1])->shouldBeCalled();
+        $rule->setConfiguration(['product_code' => '1'])->shouldBeCalled();
 
-        $this->createContainsProduct(1)->shouldReturn($rule);
+        $this->createContainsProduct('1')->shouldReturn($rule);
     }
 }

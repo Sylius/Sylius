@@ -1,0 +1,14 @@
+{% set product = hookable_metadata.context.resource %}
+
+{% if product.options is not empty %}
+    <li>
+        <a
+            class="dropdown-item"
+            href="{{ path('sylius_admin_product_variant_generate', {'productId': product.id}) }}"
+            {{ sylius_test_html_attribute('generate') }}
+        >
+            {{ ux_icon('tabler:arrows-split', {'class': 'icon dropdown-item-icon'}) }}
+            {{ 'sylius.ui.generate'|trans }}
+        </a>
+    </li>
+{% endif %}

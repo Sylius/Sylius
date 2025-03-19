@@ -15,11 +15,12 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\AST\Node;
-use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
+use Doctrine\ORM\Query\TokenType;
 
 final class Week extends FunctionNode
 {
@@ -28,12 +29,12 @@ final class Week extends FunctionNode
 
     public function parse(Parser $parser): void
     {
-        $parser->match(Lexer::T_IDENTIFIER);
-        $parser->match(Lexer::T_OPEN_PARENTHESIS);
+        $parser->match(TokenType::T_IDENTIFIER);
+        $parser->match(TokenType::T_OPEN_PARENTHESIS);
 
         $this->date = $parser->ArithmeticPrimary();
 
-        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
+        $parser->match(TokenType::T_CLOSE_PARENTHESIS);
     }
 
     public function getSql(SqlWalker $sqlWalker): string
@@ -46,6 +47,10 @@ final class Week extends FunctionNode
 
         if (is_a($platform, PostgreSQLPlatform::class, true)) {
             return sprintf('EXTRACT(WEEK FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
+        }
+
+        if (is_a($platform, SqlitePlatform::class, true)) {
+            return sprintf('CAST(STRFTIME("%%W", %s) AS NUMBER)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
         throw new \RuntimeException(sprintf('Platform "%s" is not supported!', get_class($platform)));

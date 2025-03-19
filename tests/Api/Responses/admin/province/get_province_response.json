@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Province",
-    "@id": "\/api\/v2\/admin\/provinces\/US-WY",
+    "@id": "\/api\/v2\/admin\/countries\/US\/provinces\/US-WY",
     "@type": "Province",
     "code": "US-WY",
     "name": "Wyoming",

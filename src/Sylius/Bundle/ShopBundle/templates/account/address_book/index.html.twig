@@ -1,0 +1,6 @@
+{% extends '@SyliusShop/account/common/index.html.twig' %}
+
+{% set prefixes = ['sylius_shop.account.address_book'] %}
+{% set attrs = { addresses, default_address: sylius.customer.defaultAddress|default(null) } %}
+
+{% block title %}{{ 'sylius.ui.address_book'|trans }} | {{ parent() }}{% endblock %}

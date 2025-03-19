@@ -1,0 +1,18 @@
+{% macro default(back_text, back_link, can_submit = true) %}
+    {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+    <div class="d-flex justify-content-between flex-column flex-sm-row gap-2">
+        {{ buttons.default(back_link, back_text, null, 'tabler:chevron-left', 'btn-light btn-icon') }}
+        <button type="submit" class="btn btn-primary btn-icon{% if not can_submit %} disabled{% endif %}"{% if not can_submit %} disabled{% endif %} {{ sylius_test_html_attribute('next-step') }}>
+            {{ 'sylius.ui.next'|trans }} {{ ux_icon('tabler:chevron-right', {'class': 'icon icon-sm'}) }}
+        </button>
+    </div>
+{% endmacro %}
+
+{% macro complete(confirm_text) %}
+    {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+    <div class="text-center">
+        {{ buttons.submit(confirm_text, 'confirmation-button', null, 'btn-primary') }}
+    </div>
+{% endmacro %}

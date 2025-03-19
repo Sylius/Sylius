@@ -1,0 +1,12 @@
+{% set configuration = hookable_metadata.context.configuration %}
+{% set update_route_name = configuration.vars.update.route.name|default(configuration.getRouteName('update')) %}
+
+{% if sylius_route_exists(update_route_name) %}
+    {% set resource_id = hookable_metadata.context.resource.id %}
+    {% set resource_name = hookable_metadata.context.metadata.name %}
+
+    <a class="btn" href="{{ path(update_route_name, {'id': resource_id}) }}" {{ sylius_test_html_attribute('edit-' ~ resource_name) }}>
+        {{ ux_icon('tabler:pencil') }}
+        {{ 'sylius.ui.edit'|trans }}
+    </a>
+{% endif %}

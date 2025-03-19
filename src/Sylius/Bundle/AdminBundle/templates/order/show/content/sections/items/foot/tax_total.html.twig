@@ -1,0 +1,5 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
+
+{% set order = hookable_metadata.context.resource %}
+
+<td class="text-end h3 mb-0">{{ money.format(order.taxTotal, order.currencyCode) }}</td>

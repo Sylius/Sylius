@@ -1,0 +1,6 @@
+<div id="{{ accordion_item_id }}" class="accordion-collapse collapse {{ expanded|default(false) ? 'show' : '' }}">
+    <div class="accordion-body" {{ test_html_attribute is defined ? sylius_test_html_attribute(test_html_attribute) : '' }}>
+        {% block accordion_item_content %}
+        {% endblock %}
+    </div>
+</div>

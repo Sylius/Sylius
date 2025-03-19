@@ -22,6 +22,11 @@ use Symfony\Component\Form\FormEvents;
 
 final class ChangePaymentMethodType extends AbstractType
 {
+    /** @param array<string> $allowedPaymentStates */
+    public function __construct(private readonly array $allowedPaymentStates = [PaymentInterface::STATE_NEW, PaymentInterface::STATE_CART])
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
@@ -29,7 +34,7 @@ final class ChangePaymentMethodType extends AbstractType
             $form = $event->getForm();
 
             foreach ($payments as $key => $payment) {
-                if (!in_array($payment->getState(), [PaymentInterface::STATE_NEW, PaymentInterface::STATE_CART], true)) {
+                if (!in_array($payment->getState(), $this->allowedPaymentStates, true)) {
                     $form->remove((string) $key);
                 }
             }

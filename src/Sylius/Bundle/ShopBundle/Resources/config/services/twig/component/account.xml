@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Sylius package.
+  ~
+  ~ (c) Sylius Sp. z o.o.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_shop.twig.component.account.register.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType</argument>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:account:register:form" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.account.profile_update.form"
+            class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerProfileType</argument>
+
+            <tag
+                name="sylius.live_component.shop_account"
+                key="sylius_shop:account:profile_update:form"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.account.change_password_form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Account\ChangePasswordFormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType</argument>
+
+            <tag
+                name="sylius.live_component.shop_account"
+                key="sylius_shop:account:change_password_form"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.account.address.default_form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Account\Address\DefaultFormComponent"
+        >
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\CustomerDefaultAddressType</argument>
+
+            <tag
+                name="sylius.live_component.shop_account"
+                key="sylius_shop:account:address:default_form"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.account.address.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Account\Address\FormComponent"
+        >
+            <argument type="service" id="sylius.repository.address" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.address.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\AddressType</argument>
+
+            <tag
+                name="sylius.live_component.shop_account"
+                key="sylius_shop:account:address:form"
+            />
+        </service>
+    </services>
+</container>

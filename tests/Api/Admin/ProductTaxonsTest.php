@@ -27,7 +27,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_a_product_taxon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product_taxon.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductTaxonInterface $productTaxon */
@@ -49,7 +49,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_product_taxons(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product_taxon.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/product-taxons', server: $header);
@@ -64,7 +64,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_product_taxon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product_taxon.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductInterface $product */
@@ -93,7 +93,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_updates_a_product_taxon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product_taxon.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductTaxonInterface $productTaxon */
@@ -118,7 +118,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_update_product_and_taxon_on_product_taxon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product_taxon.yaml']);
 
         /** @var ProductTaxonInterface $productTaxon */
         $productTaxon = $fixtures['product_cap_taxon_caps'];
@@ -147,7 +147,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_deletes_a_product_taxon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product_taxon.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductTaxonInterface $productTaxon */

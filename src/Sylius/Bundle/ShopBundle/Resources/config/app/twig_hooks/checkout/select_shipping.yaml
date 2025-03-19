@@ -1,0 +1,64 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.checkout.select_shipping':
+            content:
+                template: '@SyliusShop/checkout/common/content.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content':
+            steps:
+                template: '@SyliusShop/checkout/common/steps.html.twig'
+                priority: 100
+            form:
+                component: 'sylius_shop:checkout:shipping:form'
+                props:
+                    order: '@=_context.order'
+                    template: '@SyliusShop/checkout/select_shipping/content/form.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content.form':
+            shipments:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments.html.twig'
+                priority: 100
+            navigation:
+                template: '@SyliusShop/checkout/select_shipping/content/form/navigation.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content.form.shipments':
+            shipment:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content.form.shipments.shipment':
+            header:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/header.html.twig'
+                priority: 100
+            choice:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/choice.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content.form.shipments.shipment#unavailable':
+            unavailable:
+                template: '@SyliusShop/checkout/select_shipping/unavailable.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content.form.shipments.shipment.choice':
+            details:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/choice/details.html.twig'
+                priority: 100
+            fee:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/choice/fee.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content.form.shipments.shipment.choice#unavailable':
+            unavailable:
+                template: '@SyliusShop/checkout/select_shipping/unavailable.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_shipping.content.form.shipments.shipment.choice.details':
+            name:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/choice/details/name.html.twig'
+                priority: 100
+            description:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/choice/details/description.html.twig'
+                priority: 0

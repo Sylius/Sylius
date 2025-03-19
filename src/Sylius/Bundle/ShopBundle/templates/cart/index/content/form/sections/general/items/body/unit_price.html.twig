@@ -1,0 +1,15 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set item = hookable_metadata.context.item %}
+{% set original_price_to_display = sylius_order_item_original_price_to_display(item) %}
+
+<td class="text-black-50 text-end">
+    {% if original_price_to_display is not null %}
+        <span {{ sylius_test_html_attribute('cart-item-unit-regular-price') }}>
+            <del>{{ money.convertAndFormat(original_price_to_display) }}</del>
+        </span>
+    {% endif %}
+    <span {{ sylius_test_html_attribute('cart-item-unit-price') }}>
+        {{ money.convertAndFormat(item.discountedUnitPrice) }}
+    </span>
+</td>

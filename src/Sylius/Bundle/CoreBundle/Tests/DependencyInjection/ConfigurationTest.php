@@ -137,54 +137,6 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
-    public function it_allows_to_configure_a_default_state_machine_adapter(): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [
-                [
-                    'state_machine' => [
-                        'default_adapter' => 'symfony_workflow',
-                    ],
-                ],
-            ],
-            [
-                'state_machine' => [
-                    'default_adapter' => 'symfony_workflow',
-                    'graphs_to_adapters_mapping' => [],
-                ],
-            ],
-            'state_machine',
-        );
-    }
-
-    /** @test */
-    public function it_allows_to_configure_the_state_machines_adapters_mapping(): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [
-                [
-                    'state_machine' => [
-                        'graphs_to_adapters_mapping' => [
-                            'order' => 'symfony_workflow',
-                            'payment' => 'winzou_state_machine',
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'state_machine' => [
-                    'default_adapter' => 'winzou_state_machine',
-                    'graphs_to_adapters_mapping' => [
-                        'order' => 'symfony_workflow',
-                        'payment' => 'winzou_state_machine',
-                    ],
-                ],
-            ],
-            'state_machine',
-        );
-    }
-
-    /** @test */
     public function it_has_a_set_default_order_token_length(): void
     {
         $this->assertProcessedConfigurationEquals(
@@ -243,26 +195,6 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_autoconfigure_with_attributes_by_default(): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [[]],
-            ['autoconfigure_with_attributes' => false],
-            'autoconfigure_with_attributes',
-        );
-    }
-
-    /** @test */
-    public function it_allows_to_enable_autoconfiguring_with_attributes(): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [['autoconfigure_with_attributes' => true]],
-            ['autoconfigure_with_attributes' => true],
-            'autoconfigure_with_attributes',
-        );
-    }
-
-    /** @test */
     public function it_sets_default_allowed_images_mime_types(): void
     {
         $this->assertProcessedConfigurationEquals(
@@ -279,6 +211,26 @@ final class ConfigurationTest extends TestCase
             [['allowed_images_mime_types' => ['image/svg+xml', 'image/bmp']]],
             ['allowed_images_mime_types' => ['image/svg+xml', 'image/bmp']],
             'allowed_images_mime_types',
+        );
+    }
+
+    /** @test */
+    public function it_sets_default_checkout_payment_allowed_states(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['checkout' => ['payment' => ['allowed_states' => ['new', 'cart']]]],
+            'checkout',
+        );
+    }
+
+    /** @test */
+    public function it_allows_setting_custom_checkout_payment_allowed_states(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['checkout' => ['payment' => ['allowed_states' => ['new', 'cart', 'pending']]]]],
+            ['checkout' => ['payment' => ['allowed_states' => ['new', 'cart', 'pending']]]],
+            'checkout',
         );
     }
 

@@ -17,14 +17,16 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="false" />
+        <service id="sylius_api.context.user.token_based" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
+            <argument type="service" id="security.token_storage" />
+        </service>
+        <service id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" alias="sylius_api.context.user.token_based" />
 
-        <service id="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext">
+        <service id="sylius_api.context.cart.token_value_based" class="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.order" />
             <argument>%sylius.security.api_route%</argument>
             <tag name="sylius.context.cart" priority="-333" />
         </service>
-        <service id="sylius_api.context.cart.token_value_based" alias="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext" />
     </services>
 </container>

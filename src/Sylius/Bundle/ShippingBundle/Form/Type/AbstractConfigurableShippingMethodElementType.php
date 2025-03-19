@@ -53,7 +53,7 @@ abstract class AbstractConfigurableShippingMethodElementType extends AbstractRes
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $data = $event->getData();
 
-                if (!isset($data['type'])) {
+                if (!isset($data['type']) || $data['type'] === '') {
                     return;
                 }
 

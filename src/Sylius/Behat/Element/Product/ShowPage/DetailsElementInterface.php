@@ -17,7 +17,7 @@ interface DetailsElementInterface
 {
     public function getProductCode(): string;
 
-    public function hasChannel(string $channelName): bool;
+    public function hasChannel(string $channelCode): bool;
 
     public function countChannels(): int;
 

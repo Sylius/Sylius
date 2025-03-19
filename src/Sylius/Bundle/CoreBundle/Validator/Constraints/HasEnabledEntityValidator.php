@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -26,18 +25,8 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 {
     public function __construct(
         private ManagerRegistry $registry,
-        private ?PropertyAccessorInterface $accessor = null,
+        private PropertyAccessorInterface $accessor,
     ) {
-        if (null === $this->accessor) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                'Not passing a PropertyAccessorInterface as the second constructor argument for %s is deprecated and will be required in Sylius 2.0.',
-                self::class,
-            );
-
-            $this->accessor = PropertyAccess::createPropertyAccessor();
-        }
     }
 
     public function validate(mixed $value, Constraint $constraint): void

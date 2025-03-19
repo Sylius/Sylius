@@ -1,0 +1,5 @@
+{% set prefixes = hookable_metadata.prefixes|merge(['sylius_shop.shared.form']) %}
+{% set form = hookable_metadata.context.form %}
+{% set field = hookable_metadata.configuration.field %}
+
+{% hook 'address' with { _prefixes: prefixes, 'form': attribute(form, field) } only %}

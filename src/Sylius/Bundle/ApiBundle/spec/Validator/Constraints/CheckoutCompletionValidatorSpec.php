@@ -15,10 +15,9 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\Transition;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletion;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -31,9 +30,9 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory);
+        $this->beConstructedWith($orderRepository, $stateMachine);
     }
 
     function it_is_a_constraint_validator(): void
@@ -52,124 +51,63 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_checkout_completion(
         Constraint $constraint,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$orderTokenValueAware, $constraint])
+            ->during('validate', [new CompleteOrder('token'), $constraint])
         ;
     }
 
     function it_throws_an_exception_if_order_with_given_token_value_does_not_exist(
         OrderRepositoryInterface $orderRepository,
         Constraint $constraint,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
     ): void {
-        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
+        $completeOrder = new CompleteOrder('xxx');
         $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$orderTokenValueAware, $constraint])
+            ->during('validate', [$completeOrder, $constraint])
         ;
     }
 
     function it_does_nothing_if_order_can_be_completed(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
-        WinzouStateMachineStub $stateMachine,
     ): void {
         $this->initialize($executionContext);
 
-        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
+        $completeOrder = new CompleteOrder('xxx');
         $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn($order);
 
-        $stateMachineFactory->get($order, 'sylius_order_checkout')->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(true);
-        $stateMachine->getState()->shouldNotBeCalled();
-        $stateMachine->getPossibleTransitions()->shouldNotBeCalled();
+        $stateMachine->can($order, 'sylius_order_checkout', OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(true);
 
         $executionContext
             ->addViolation(Argument::cetera())
             ->shouldNotBeCalled()
         ;
 
-        $this->validate($orderTokenValueAware, new CheckoutCompletion());
+        $this->validate($completeOrder, new CheckoutCompletion());
     }
 
     function it_adds_violation_if_order_cannot_be_completed(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
-        ExecutionContextInterface $executionContext,
-        OrderInterface $order,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
-        WinzouStateMachineStub $stateMachine,
-    ): void {
-        $stateMachine->can('some_possible_transition')->willReturn(true);
-        $stateMachine->can('another_possible_transition')->willReturn(true);
-        $stateMachine->can('yet_another_possible_transition')->willReturn(false);
-        $this->setPropertyValue($stateMachine, 'config', [
-            'transitions' => [
-                'some_possible_transition' => [
-                    'from' => [],
-                    'to' => '',
-                ],
-                'another_possible_transition' => [
-                    'from' => [],
-                    'to' => '',
-                ],
-                'yet_another_possible_transition' => [
-                    'from' => [],
-                    'to' => '',
-                ],
-            ],
-        ]);
-        $this->initialize($executionContext);
-
-        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
-        $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn($order);
-
-        $stateMachineFactory->get($order, 'sylius_order_checkout')->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
-
-        $order->getCheckoutState()->willReturn('some_state_that_does_not_allow_to_complete_order');
-
-        $executionContext
-            ->addViolation(
-                'sylius.order.invalid_state_transition',
-                [
-                    '%currentState%' => 'some_state_that_does_not_allow_to_complete_order',
-                    '%possibleTransitions%' => 'some_possible_transition, another_possible_transition',
-                ],
-            )
-            ->shouldBeCalled()
-        ;
-
-        $this->validate($orderTokenValueAware, new CheckoutCompletion());
-    }
-
-    function it_uses_the_new_state_machine_abstraction_if_passed(
-        OrderRepositoryInterface $orderRepository,
         StateMachineInterface $stateMachine,
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
-        OrderTokenValueAwareInterface $orderTokenValueAware,
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachine);
-
         $this->initialize($executionContext);
 
-        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
+        $completeOrder = new CompleteOrder('xxx');
         $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn($order);
 
         $stateMachine->can($order, 'sylius_order_checkout', OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
-        $stateMachine
-            ->getEnabledTransitions($order, 'sylius_order_checkout')
-            ->willReturn([new Transition('some_possible_transition', null, null), new Transition('another_possible_transition', null, null)])
-        ;
+        $stateMachine->getEnabledTransitions($order, 'sylius_order_checkout')->willReturn([
+            new Transition('some_possible_transition', [], []),
+            new Transition('another_possible_transition', [], []),
+        ]);
 
         $order->getCheckoutState()->willReturn('some_state_that_does_not_allow_to_complete_order');
 
@@ -184,14 +122,6 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->validate($orderTokenValueAware, new CheckoutCompletion());
-    }
-
-    private function setPropertyValue(object $object, string $property, mixed $value): void
-    {
-        $reflection = new \ReflectionClass(WinzouStateMachineStub::class);
-        $reflectionProperty = $reflection->getProperty($property);
-        $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($object, $value);
+        $this->validate($completeOrder, new CheckoutCompletion());
     }
 }

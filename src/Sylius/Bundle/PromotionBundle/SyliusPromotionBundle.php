@@ -25,6 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusPromotionBundle extends AbstractResourceBundle
 {
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [

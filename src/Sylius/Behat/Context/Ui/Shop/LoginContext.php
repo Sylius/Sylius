@@ -24,6 +24,9 @@ use Sylius\Behat\Page\Shop\Account\WellKnownPasswordChangePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
@@ -39,6 +42,8 @@ final class LoginContext implements Context
         private RegisterElementInterface $registerElement,
         private NotificationCheckerInterface $notificationChecker,
         private CurrentPageResolverInterface $currentPageResolver,
+        private SharedStorageInterface $sharedStorage,
+        private CustomerRepositoryInterface $customerRepository,
     ) {
     }
 
@@ -48,6 +53,18 @@ final class LoginContext implements Context
     public function iWantToLogIn(): void
     {
         $this->loginPage->open();
+    }
+
+    /**
+     * @When I log in with the email :email
+     */
+    public function iLogInWithTheEmail(string $email): void
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword('sylius');
+        $this->loginPage->logIn();
+        $this->sharedStorage->set('user', $email);
     }
 
     /**
@@ -287,5 +304,20 @@ final class LoginContext implements Context
     public function iShouldNotBeAbleToChangeMyPasswordWithThisToken(): void
     {
         Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
+    }
+
+    /**
+     * @Then I should see who I am
+     */
+    public function iShouldSeeWhoIAm(): void
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerRepository->findOneBy(['email' => $this->sharedStorage->get('user')]);
+
+        Assert::contains(
+            $this->homePage->getFullName(),
+            $customer->getFirstName(),
+            'User should see their name on the page after logging in, but they do not.',
+        );
     }
 }

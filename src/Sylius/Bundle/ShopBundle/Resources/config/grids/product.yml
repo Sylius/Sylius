@@ -24,10 +24,10 @@ sylius_grid:
                     type: datetime
                     sortable: ~
                 position:
-                    type: string 
+                    type: string
                     sortable: productTaxon.position
                 name:
-                    type: string 
+                    type: string
                     sortable: translation.name
                 price:
                     type: int

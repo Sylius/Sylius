@@ -18,9 +18,9 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    public function getCustomerAccountStatus(CustomerInterface $customer): string;
+    public function isCustomerEnabled(CustomerInterface $customer): bool;
 
     public function isCustomerVerified(CustomerInterface $customer): bool;
 
-    public function specifyFilterGroup(string $groupName): void;
+    public function setFilterGroup(string $groupName): void;
 }

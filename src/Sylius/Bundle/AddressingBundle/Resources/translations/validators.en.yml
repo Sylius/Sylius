@@ -51,6 +51,8 @@ sylius:
             not_blank: Please enter zone code.
             regex: Zone code can only be comprised of letters, numbers, dashes and underscores.
             unique: Zone code must be unique.
+        type:
+            invalid: "Type {{ value }} is invalid. Allowed types are: {{ choices }}."
         members:
             min_count: Please add at least {{ limit }} zone member.
         name:

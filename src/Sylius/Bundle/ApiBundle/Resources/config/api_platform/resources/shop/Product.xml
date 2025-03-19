@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.product.class%">
+        <operations>
+            <operation name="sylius_api_shop_product_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/products">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.shop.product</filter>
+                    <filter>sylius_api.order_filter.shop.product</filter>
+                    <filter>sylius_api.price_order_filter.shop.product</filter>
+                    <filter>sylius_api.name_with_locale_order_filter.shop.translatable</filter>
+                    <filter>sylius_api.taxon_search_filter.shop.product</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="code">ASC</value>
+                    </values>
+                </order>
+            </operation>
+
+            <operation name="sylius_api_shop_product_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/products/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_shop_product_get_by_slug"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/products-by-slug/{slug}"
+                controller="sylius_api.controller.get_product_by_slug"
+                read="false"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
-use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScopeGroup;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Symfony\Component\Validator\Constraint;
@@ -45,18 +44,10 @@ final class CatalogPromotionScopeGroupValidator extends ConstraintValidator
         $validator = $this->context->getValidator()->inContext($this->context);
 
         $groups = $this->validationGroups[$type] ?? null;
-        if (null !== $groups) {
-            $validator->validate(value: $value, groups: $groups);
-
-            if ($this->context->getViolations()->count() > 0) {
-                return;
-            }
+        if (null === $groups) {
+            return;
         }
 
-        $validator->validate(
-            $value,
-            new CatalogPromotionScope(groups: $constraint->groups),
-            $groups ?? $constraint->groups,
-        );
+        $validator->validate(value: $value, groups: $groups);
     }
 }

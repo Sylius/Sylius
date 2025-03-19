@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionActionGroup;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
@@ -110,69 +108,6 @@ final class CatalogPromotionActionGroupValidatorSpec extends ObjectBehavior
 
         $context->getViolations()->willReturn($violationList);
         $violationList->count()->willReturn(1);
-
-        $contextualValidator
-            ->validate($action, new CatalogPromotionAction(null, $constraint->groups), ['test_group'])
-            ->shouldNotBeCalled()
-        ;
-
-        $this->validate($action, $constraint);
-    }
-
-    function it_falls_back_to_previous_abstraction_when_no_violation_has_been_added(
-        ExecutionContextInterface $context,
-        ValidatorInterface $validator,
-        ContextualValidatorInterface $contextualValidator,
-        ConstraintViolationListInterface $violationList,
-        CatalogPromotionActionInterface $action,
-    ): void {
-        $constraint = new CatalogPromotionActionGroup();
-
-        $action->getType()->willReturn('test');
-
-        $context->getValidator()->willReturn($validator);
-        $validator->inContext($context)->willReturn($contextualValidator);
-
-        $contextualValidator
-            ->validate($action, null, ['test_group'])
-            ->willReturn($contextualValidator)
-            ->shouldBeCalled()
-        ;
-
-        $context->getViolations()->willReturn($violationList);
-        $violationList->count()->willReturn(0);
-
-        $contextualValidator
-            ->validate($action, new CatalogPromotionAction(null, $constraint->groups), ['test_group'])
-            ->shouldBeCalled()
-            ->willReturn($contextualValidator)
-        ;
-
-        $this->validate($action, $constraint);
-    }
-
-    function it_falls_back_to_previous_abstraction_when_no_validation_group_for_the_action_type_has_been_passed(
-        ExecutionContextInterface $context,
-        ValidatorInterface $validator,
-        ContextualValidatorInterface $contextualValidator,
-        CatalogPromotionActionInterface $action,
-    ): void {
-        $constraint = new CatalogPromotionActionGroup();
-
-        $action->getType()->willReturn('not_existing_type');
-
-        $context->getValidator()->willReturn($validator);
-        $validator->inContext($context)->willReturn($contextualValidator);
-
-        $contextualValidator->validate($action, null, Argument::any())->shouldNotBeCalled();
-
-        $context->getViolations()->shouldNotBeCalled();
-
-        $contextualValidator
-            ->validate($action, new CatalogPromotionAction(null, $constraint->groups), $constraint->groups)
-            ->shouldBeCalled()
-            ->willReturn($contextualValidator)
-        ;
 
         $this->validate($action, $constraint);
     }

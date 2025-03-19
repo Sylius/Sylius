@@ -1,0 +1,9 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set prefixes = ['sylius_shop.order'] %}
+
+{% block title %}{{ 'sylius.ui.summary_of_your_order'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    {% hook 'show' with { _prefixes: prefixes, order, form } %}
+{% endblock %}

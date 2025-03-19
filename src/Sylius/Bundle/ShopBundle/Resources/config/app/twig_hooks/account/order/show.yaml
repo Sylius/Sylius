@@ -1,0 +1,39 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.order.show.content':
+            breadcrumbs:
+                template: '@SyliusShop/account/order/show/content/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/content/menu.html.twig'
+                priority: 100
+            main:
+                template: '@SyliusShop/account/common/content/main.html.twig'
+                priority: 0
+
+        'sylius_shop.account.order.show.content.main':
+            summary:
+                template: "@SyliusShop/account/order/show/content/main/summary.html.twig"
+                priority: 0
+
+        'sylius_shop.account.order.show.content.main.header':
+            title:
+                template: "@SyliusShop/account/order/show/content/main/header/title.html.twig"
+                priority: 200
+            buttons:
+                template: "@SyliusShop/account/order/show/content/main/header/buttons.html.twig"
+                priority: 100
+            details:
+                template: "@SyliusShop/account/order/show/content/main/header/details.html.twig"
+                priority: 0
+
+        'sylius_shop.account.order.show.content.main.header.details':
+            state:
+                template: "@SyliusShop/account/order/show/content/main/header/details/state.html.twig"
+                priority: 200
+            completed_at:
+                template: "@SyliusShop/account/order/show/content/main/header/details/completed_at.html.twig"
+                priority: 100
+            currency:
+                template: "@SyliusShop/account/order/show/content/main/header/details/currency.html.twig"
+                priority: 0

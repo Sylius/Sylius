@@ -1,0 +1,7 @@
+{% set order = hookable_metadata.context.order %}
+
+{% if order.currencyCode is not same as(sylius.currencyCode) %}
+    <tr>
+        {% hook 'total_in_base_currency' %}
+    </tr>
+{% endif %}

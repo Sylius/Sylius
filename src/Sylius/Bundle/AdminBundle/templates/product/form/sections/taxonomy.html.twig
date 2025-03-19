@@ -1,0 +1,10 @@
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-taxonomy" role="tabpanel" tabindex="0">
+    <div class="card mb-3 pb-2">
+        <div class="card-header">
+            <h2 id="product-taxonomy" class="card-title">{{ 'sylius.ui.taxonomy'|trans }}</h2>
+        </div>
+        <div class="card-body">
+            {% hook 'taxonomy' %}
+        </div>
+    </div>
+</div>

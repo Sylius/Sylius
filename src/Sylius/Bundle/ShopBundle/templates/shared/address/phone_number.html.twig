@@ -1,0 +1,5 @@
+{% set address = hookable_metadata.context.address %}
+
+{% if address.phoneNumber is not null %}
+    <span>{{ address.phoneNumber }}</span>
+{% endif %}

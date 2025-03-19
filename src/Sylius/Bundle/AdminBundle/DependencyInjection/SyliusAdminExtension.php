@@ -26,13 +26,17 @@ final class SyliusAdminExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius.admin.notification.enabled', $config['notifications']['enabled']);
+        $container->setParameter('sylius.admin.notification.hub_enabled', $config['notifications']['hub_enabled']);
         $container->setParameter('sylius.admin.notification.frequency', $config['notifications']['frequency']);
         $container->setParameter('sylius.admin.shop_enabled', false);
+        $container->setParameter('sylius.admin.twig.payment_method.excluded_gateways', $config['twig']['payment_method']['excluded_gateways']);
 
-        $bundles = $container->getParameter('kernel.bundles');
-        if (array_key_exists('SyliusShopBundle', $bundles)) {
-            $loader->load('services/integrations/shop.xml');
-            $container->setParameter('sylius.admin.shop_enabled', true);
+        if ($container->hasParameter('kernel.bundles')) {
+            $bundles = $container->getParameter('kernel.bundles');
+            if (array_key_exists('SyliusShopBundle', $bundles)) {
+                $loader->load('services/integrations/shop.xml');
+                $container->setParameter('sylius.admin.shop_enabled', true);
+            }
         }
 
         $loader->load('services.xml');

@@ -19,22 +19,13 @@ use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 
 final class DefaultProductVariantResolver implements ProductVariantResolverInterface
 {
-    public function __construct(private ?ProductVariantRepositoryInterface $productVariantRepository = null)
+    public function __construct(private readonly ProductVariantRepositoryInterface $productVariantRepository)
     {
-        if (null === $productVariantRepository) {
-            trigger_deprecation(
-                'sylius/product',
-                '1.12',
-                'Not passing a service that implements "%s" as a 1st argument of "%s" constructor is deprecated and will be prohibited in 2.0.',
-                ProductVariantRepositoryInterface::class,
-                self::class,
-            );
-        }
     }
 
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface
     {
-        if ($this->productVariantRepository && $subject->getId()) {
+        if (null !== $subject->getId()) {
             /** @var ProductVariantInterface[] $productVariants */
             $productVariants = $this->productVariantRepository->findBy(
                 [

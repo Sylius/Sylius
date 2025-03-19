@@ -33,9 +33,7 @@ final class ConfirmResetPasswordValidatorSpec extends ObjectBehavior
         $constraint = new ConfirmResetPassword();
         $this->initialize($executionContext);
 
-        $value = new ResetPassword('token');
-        $value->newPassword = 'password';
-        $value->confirmNewPassword = 'password';
+        $value = new ResetPassword('token', 'password', 'password');
 
         $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
 
@@ -50,9 +48,7 @@ final class ConfirmResetPasswordValidatorSpec extends ObjectBehavior
         $constraint->message = 'message';
         $this->initialize($executionContext);
 
-        $value = new ResetPassword('token');
-        $value->newPassword = 'password';
-        $value->confirmNewPassword = 'notaPassword';
+        $value = new ResetPassword('token', 'password', 'differentPassword');
 
         $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('newPassword')->willReturn($constraintViolationBuilder);

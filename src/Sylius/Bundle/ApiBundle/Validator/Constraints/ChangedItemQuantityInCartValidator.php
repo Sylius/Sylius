@@ -29,11 +29,12 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 {
     /**
      * @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      */
     public function __construct(
-        private OrderItemRepositoryInterface $orderItemRepository,
-        private OrderRepositoryInterface $orderRepository,
-        private AvailabilityCheckerInterface $availabilityChecker,
+        private readonly OrderItemRepositoryInterface $orderItemRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly AvailabilityCheckerInterface $availabilityChecker,
     ) {
     }
 
@@ -97,7 +98,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         }
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
+        $cart = $this->orderRepository->findCartByTokenValue($value->orderTokenValue);
         Assert::notNull($cart);
         $channel = $cart->getChannel();
         Assert::notNull($channel);

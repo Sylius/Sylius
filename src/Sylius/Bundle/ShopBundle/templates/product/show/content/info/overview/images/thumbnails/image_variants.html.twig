@@ -1,0 +1,16 @@
+{% set product = hookable_metadata.context.product %}
+{% set image = hookable_metadata.context.image %}
+
+{% if product.isConfigurable() and product.enabledVariants|length > 0 %}
+    <div>
+        {% if product.getVariantSelectionMethod() == 'match' %}
+            {% for variant in image.productVariants %}
+                <div data-variant-options="{% for option in variant.optionValues %}{{ option.code }} {% endfor %}"></div>
+            {% endfor %}
+        {% else %}
+            {% for variant in image.productVariants %}
+                <div data-variant-code="{{ variant.code }}"></div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}

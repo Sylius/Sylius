@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Address",
     "@id": "\/api\/v2\/admin\/addresses\/@integer@",
     "@type": "Address",
-    "id": @integer@,
+    "id": "@integer@",
     "firstName": "John",
     "lastName": "Doe",
     "phoneNumber": "123456789",

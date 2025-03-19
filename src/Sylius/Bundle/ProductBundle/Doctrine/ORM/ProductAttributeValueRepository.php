@@ -70,6 +70,7 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
 
         return $queryBuilder
             ->innerJoin('o.subject', 'product')
+            ->innerJoin('o.attribute', 'attribute')
             ->andWhere('product.code = :code')
             ->andWhere(
                 $queryBuilder->expr()->orX(
@@ -80,9 +81,10 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
             ->andWhere(
                 $queryBuilder->expr()->orX(
                     'o.localeCode = :locale',
-                    $queryBuilder->expr()->notIn('IDENTITY(o.attribute)', $subQuery->getDQL()),
+                    $queryBuilder->expr()->notIn('attribute.id', $subQuery->getDQL()),
                 ),
             )
+            ->orderBy('attribute.position', 'ASC')
             ->setParameter('code', $productCode)
             ->setParameter('locale', $localeCode)
         ;

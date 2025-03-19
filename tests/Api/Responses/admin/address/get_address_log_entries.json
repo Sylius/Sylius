@@ -1,9 +1,11 @@
 {
-    "@context": "\/api\/v2\/contexts\/Address",
-    "@id": "\/api\/v2\/shop\/addresses",
+    "@context": "\/api\/v2\/contexts\/AddressLogEntry",
+    "@id": "\/api\/v2\/admin\/addresses\/@integer@\/log-entries",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
     "hydra:member": [
         {
+            "@id": "\/api\/v2\/admin\/address-log-entries\/@integer@",
             "@type": "AddressLogEntry",
             "action": "create",
             "version": 1,
@@ -19,8 +21,7 @@
                 "provinceCode": null,
                 "provinceName": null
             },
-            "loggedAt": @date@
+            "loggedAt": "@date@"
         }
-    ],
-    "hydra:totalItems": 1
+    ]
 }

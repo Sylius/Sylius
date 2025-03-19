@@ -44,43 +44,32 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType">
+        <service id="sylius.form.type.catalog_promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType">
             <argument>%sylius.model.catalog_promotion.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
             <argument>Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType</argument>
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.catalog_promotion" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType" />
 
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
+        <service id="sylius.form.type.catalog_promotion_scope" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
             <argument>%sylius.model.catalog_promotion_scope.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
-            <argument type="collection"/>
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.catalog_promotion_scope" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" />
 
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType">
-            <tag name="form.type" />
-            <deprecated package="sylius/promotion-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType">
+        <service id="sylius.form.type.catalog_promotion_action" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType">
             <argument>%sylius.model.catalog_promotion_action.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.catalog_promotion_action" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" />
 
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType">
+        <service id="sylius.form.type.catalog_promotion_translation" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType">
             <argument>%sylius.model.catalog_promotion_translation.class%</argument>
             <argument>%sylius.form.type.catalog_promotion_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.catalog_promotion_translation" alias="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType" />
 
         <service id="sylius.form.type.promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType">
             <argument>%sylius.model.promotion.class%</argument>
@@ -89,12 +78,11 @@
             <tag name="form.type" />
         </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType">
+        <service id="sylius.form.type.promotion_translation" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType">
             <argument>%sylius.model.promotion_translation.class%</argument>
             <argument>%sylius.form.type.promotion_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.promotion_translation" alias="Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType" />
 
         <service id="sylius.form.type.promotion_action" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType">
             <argument>%sylius.model.promotion_action.class%</argument>
@@ -116,17 +104,16 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.promotion_action.collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionCollectionType">
+        <service id="sylius.form.type.promotion_action_collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionCollectionType">
             <argument type="service" id="sylius.registry.promotion_action" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.promotion_action_collection" alias="sylius.form.type.promotion_action.collection" />
 
-        <service id="sylius.form.type.promotion_rule.collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleCollectionType">
+
+        <service id="sylius.form.type.promotion_rule_collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleCollectionType">
             <argument type="service" id="sylius.registry.promotion.rule_checker" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.promotion_rule_collection" alias="sylius.form.type.promotion_rule.collection" />
 
         <service id="sylius.form.type.promotion_action_choice" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionChoiceType">
             <argument>%sylius.promotion_actions%</argument>
@@ -152,6 +139,5 @@
             <argument>%sylius.form.type.promotion_coupon_generator_instruction.validation_groups%</argument>
             <tag name="form.type" />
         </service>
-
     </services>
 </container>

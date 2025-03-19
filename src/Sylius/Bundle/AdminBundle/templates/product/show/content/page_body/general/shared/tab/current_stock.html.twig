@@ -1,0 +1,3 @@
+{% set variant = hookable_metadata.context.variant %}
+
+<td class="text-center" {{ sylius_test_html_attribute('current-stock') }}>{{ variant.onHand }}</td>

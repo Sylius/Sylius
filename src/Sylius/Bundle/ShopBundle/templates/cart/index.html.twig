@@ -1,0 +1,9 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set prefixes = ['sylius_shop.cart'] %}
+
+{% block title %}{{ 'sylius.ui.your_shopping_cart'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    {% hook 'index' with { _prefixes: prefixes, cart, form } %}
+{% endblock %}

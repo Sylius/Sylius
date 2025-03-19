@@ -19,75 +19,70 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand">
+        <service id="sylius.console.command.cancel_unpaid_orders" class="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand">
+            <argument type="service" id="sylius.updater.unpaid_orders_state" />
+            <argument type="service" id="sylius.manager.order" />
+            <argument>%sylius_order.order_expiration_period%</argument>
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand" />
-        <service id="sylius.console.command.cancel_unpaid_orders" alias="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand">
+        <service id="sylius.console.command.check_requirements" class="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand">
+            <argument type="service" id="sylius.checker.installer.sylius_requirements" />
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\CheckRequirementsCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand" />
-        <service id="sylius.console.command.check_requirements" alias="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand">
+        <service id="sylius.console.command.price_history.clear" class="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand">
             <argument type="service" id="sylius.remover.channel_pricing_log_entries" />
             <tag name="console.command"/>
         </service>
-        <service id="sylius.console.command.price_history.clear" alias="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand">
+        <service id="sylius.console.command.install_assets" class="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.checker.installer.command_directory" />
+            <argument>%sylius_core.public_dir%</argument>
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand" />
-        <service id="sylius.console.command.install_assets" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallCommand">
+        <service id="sylius.console.command.install" class="Sylius\Bundle\CoreBundle\Console\Command\InstallCommand">
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\InstallCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallCommand" />
-        <service id="sylius.console.command.install" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand">
+        <service id="sylius.console.command.install_database" class="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.checker.installer.command_directory" />
+            <argument type="service" id="sylius.provider.installer.database_setup_commands" />
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand" />
-        <service id="sylius.console.command.install_database" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand">
+        <service id="sylius.console.command.install_sample_data" class="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.checker.installer.command_directory" />
+            <argument>%sylius_core.public_dir%</argument>
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand" />
-        <service id="sylius.console.command.install_sample_data" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand">
+        <service id="sylius.console.command.setup" class="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.checker.installer.command_directory" />
+            <argument type="service" id="sylius.setup.installer.currency" />
+            <argument type="service" id="sylius.setup.installer.locale" />
+            <argument type="service" id="sylius.setup.installer.channel" />
+            <argument type="service" id="sylius.factory.admin_user" />
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="validator" />
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\SetupCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand" />
-        <service id="sylius.console.command.setup" alias="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand">
-            <tag name="console.command" />
-            <deprecated package="sylius/core-bundle" version="1.14">The "%service_id%" service is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\ShowAvailablePluginsCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand" />
-
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand">
+        <service id="sylius.console.command.inform_about_gus" class="Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand">
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand" />
-        <service id="sylius.console.command.inform_about_gus" alias="Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand">
+        <service id="sylius.console.command.jwt_configuration" class="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand">
             <tag name="console.command" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand" />
-        <service id="sylius.console.command.jwt_configuration" alias="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand" />
 
-        <service id="Sylius\Bundle\CoreBundle\Console\Command\ShowPlusInfoCommand">
+        <service id="sylius.console.command.show_plus_info" class="Sylius\Bundle\CoreBundle\Console\Command\ShowPlusInfoCommand">
             <tag name="console.command" />
         </service>
-        <service id="sylius.console.command.show_plus_info" alias="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand" />
     </services>
 </container>

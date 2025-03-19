@@ -1,0 +1,34 @@
+{% from '@SyliusAdmin/order/history/macro/action_label.html.twig' import label %}
+
+{% set header = (header|default('sylius.ui.address'))|trans %}
+
+<div class="mb-5" {{ sylius_test_html_attribute('address-type', header) }}>
+    <div class="mb-6 border-bottom">
+        <div class="h2">{{ header }}</div>
+    </div>
+    {%- for log in address_logs -%}
+        <div class="row" {{ sylius_test_html_attribute('address-log') }}>
+            <div class="col-12 col-sm-4 col-md-2 text-sm-end mb-3 pe-xl-5">
+                {{ label(log) }}
+                <div class="d-inline d-sm-block text-secondary pe-sm-3 pt-3">
+                    <span class="text-nowrap">{{ log.loggedAt|date('Y-m-d') }}</span>
+                    <span class="text-nowrap">{{ log.loggedAt|date('H:i:s') }}</span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-8 col-md-9">
+                <div class="alert alert-{{ log.action == 'create' ? 'success' : (log.action == 'update' ? 'yellow') }}">
+                    <div class="table-responsive text-secondary">
+                        <table class="table table-sm table-vcenter">
+                            {%- for field, data in log.data|filter(data => not data is empty) -%}
+                                <tr>
+                                    <td class="col-4 border-0"><strong>{{ ('sylius.ui.' ~ field|u.snake)|trans }}</strong></td>
+                                    <td class="col-8 border-0 text-body w-full"><span>{{ data }}</span></td>
+                                </tr>
+                            {%- endfor -%}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%- endfor -%}
+</div>

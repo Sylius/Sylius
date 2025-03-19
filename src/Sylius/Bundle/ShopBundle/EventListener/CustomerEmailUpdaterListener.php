@@ -25,30 +25,19 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
-final class CustomerEmailUpdaterListener
+final readonly class CustomerEmailUpdaterListener
 {
     public function __construct(
         private GeneratorInterface $tokenGenerator,
         private ChannelContextInterface $channelContext,
         private EventDispatcherInterface $eventDispatcher,
-        private RequestStack|SessionInterface $requestStackOrSession,
+        private RequestStack $requestStack,
         private SectionProviderInterface $uriBasedSectionContext,
         private TokenStorageInterface $tokenStorage,
     ) {
-        if ($requestStackOrSession instanceof SessionInterface) {
-            trigger_deprecation(
-                'sylius/shop-bundle',
-                '1.12',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
-                SessionInterface::class,
-                self::class,
-                RequestStack::class,
-            );
-        }
     }
 
     public function eraseVerification(GenericEvent $event): void
@@ -109,7 +98,7 @@ final class CustomerEmailUpdaterListener
         if (!$user->isEnabled() && !$user->isVerified() && null !== $user->getEmailVerificationToken()) {
             $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
 
-            $flashBag = FlashBagProvider::getFlashBag($this->requestStackOrSession);
+            $flashBag = FlashBagProvider::getFlashBag($this->requestStack);
             $flashBag->add('success', 'sylius.user.verify_email_request');
         }
     }

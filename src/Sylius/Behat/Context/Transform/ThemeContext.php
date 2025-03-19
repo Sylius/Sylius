@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
-final class ThemeContext implements Context
+final readonly class ThemeContext implements Context
 {
     public function __construct(private ThemeRepositoryInterface $themeRepository)
     {
@@ -27,7 +28,7 @@ final class ThemeContext implements Context
      * @Transform /^theme "([^"]+)"$/
      * @Transform :theme
      */
-    public function getThemeByThemeName($themeName)
+    public function getThemeByThemeName(string $themeName): ThemeInterface
     {
         return $this->themeRepository->findOneByName($themeName);
     }

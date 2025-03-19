@@ -1,0 +1,8 @@
+{% set order = hookable_metadata.context.resource %}
+
+<div class="d-grid gap-2 mb-3">
+    <a href="{{ path('sylius_admin_order_update', { id: order.id }) }}" class="btn">
+        {{ ux_icon('tabler:pencil') }}
+        {{ 'sylius.ui.edit_addresses'|trans }}
+    </a>
+</div>

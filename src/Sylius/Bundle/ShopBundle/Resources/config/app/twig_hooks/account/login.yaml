@@ -1,0 +1,52 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.login':
+            content:
+                template: '@SyliusShop/account/login/content.html.twig'
+                priority: 0
+
+        'sylius_shop.account.login.content':
+            login_container:
+                template: '@SyliusShop/account/login/content/login_container.html.twig'
+                priority: 100
+            register_container:
+                template: '@SyliusShop/account/login/content/register_container.html.twig'
+                priority: 0
+
+        'sylius_shop.account.login.content.login_container':
+            header:
+                template: '@SyliusShop/account/login/content/login_container/header.html.twig'
+                priority: 200
+            form:
+                template: '@SyliusShop/account/login/content/login_container/form.html.twig'
+                priority: 100 
+            forgot_password:
+                template: "@SyliusShop/account/login/content/login_container/forgot_password.html.twig"
+                priority: 0                
+
+        'sylius_shop.account.login.content.login_container.form':                
+            errors:
+                template: "@SyliusShop/account/login/content/login_container/form/errors.html.twig"
+                priority: 200
+            form_fields:
+                template: "@SyliusShop/account/login/content/login_container/form/form_fields.html.twig"
+                priority: 100
+            submit:
+                template: "@SyliusShop/account/login/content/login_container/form/submit.html.twig"
+                priority: 0
+
+        'sylius_shop.account.login.content.login_container.form.form_fields':
+            username:
+                template: "@SyliusShop/account/login/content/login_container/form/form_fields/username.html.twig"
+                priority: 200
+            password:
+                template: "@SyliusShop/account/login/content/login_container/form/form_fields/password.html.twig"
+                priority: 100
+            remember_me:
+                template: "@SyliusShop/account/login/content/login_container/form/form_fields/remember_me.html.twig"
+                priority: 0
+
+        'sylius_shop.account.login.content.register_container':
+            register_here:
+                template: "@SyliusShop/account/common/register_box.html.twig"
+                priority: 0

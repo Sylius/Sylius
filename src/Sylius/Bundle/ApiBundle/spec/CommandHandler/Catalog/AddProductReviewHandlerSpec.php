@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
@@ -26,6 +27,8 @@ use Sylius\Resource\Factory\FactoryInterface;
 
 final class AddProductReviewHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         FactoryInterface $productReviewFactory,
         RepositoryInterface $productReviewRepository,
@@ -66,11 +69,11 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
         $product->addReview($review->getWrappedObject())->shouldBeCalled();
 
         $this(new AddProductReview(
-            'Good stuff',
-            5,
-            'Really good stuff',
-            'winter_cap',
-            'mark@example.com',
+            title: 'Good stuff',
+            rating: 5,
+            comment: 'Really good stuff',
+            productCode: 'winter_cap',
+            email: 'mark@example.com',
         ));
     }
 
@@ -84,10 +87,10 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [
                 new AddProductReview(
-                    'Good stuff',
-                    5,
-                    'Really good stuff',
-                    'winter_cap',
+                    title: 'Good stuff',
+                    rating: 5,
+                    comment: 'Really good stuff',
+                    productCode: 'winter_cap',
                 ),
             ])
         ;
@@ -101,10 +104,10 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
             ->shouldThrow(ProductNotFoundException::class)
             ->during('__invoke', [
                 new AddProductReview(
-                    'Good stuff',
-                    5,
-                    'Really good stuff',
-                    'winter_cap',
+                    title: 'Good stuff',
+                    rating: 5,
+                    comment: 'Really good stuff',
+                    productCode: 'winter_cap',
                 ),
             ])
         ;

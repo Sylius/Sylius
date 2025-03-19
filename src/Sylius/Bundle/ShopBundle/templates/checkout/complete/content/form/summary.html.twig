@@ -1,0 +1,3 @@
+{% set prefixes = hookable_metadata.prefixes|merge(['sylius_shop.shared.order.show']) %}
+
+{% hook 'summary' with { _prefixes: prefixes } %}

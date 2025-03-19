@@ -6,12 +6,12 @@
     "lastName": "Api",
     "localeCode": "ga_IE",
     "avatar": null,
-    "id": @integer@,
+    "id": "@integer@",
     "username": "johnApi",
     "lastLogin": null,
     "verifiedAt": null,
     "email": "j.api@test.com",
-    "createdAt": @date@,
-    "updatedAt": @date@,
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
     "enabled": false
 }

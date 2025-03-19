@@ -1,0 +1,8 @@
+{% set product = hookable_metadata.context.resource %}
+
+<td class="text-end">
+    <a href="{{ path('sylius_admin_product_update', { id: product.id }) }}" class="btn" {{ sylius_test_html_attribute('edit-product-button') }}>
+        {{ ux_icon('tabler:pencil') }}
+        {{ 'sylius.ui.edit'|trans }}
+    </a>
+</td>

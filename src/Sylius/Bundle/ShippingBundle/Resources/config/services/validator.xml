@@ -17,23 +17,25 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="Sylius\Bundle\ShippingBundle\Validator\ShippingMethodCalculatorExistsValidator" public="true" >
+        <service id="sylius.validator.shipping_method_calculator_exists"
+                 class="Sylius\Bundle\ShippingBundle\Validator\ShippingMethodCalculatorExistsValidator"
+        >
             <argument>%sylius.shipping_calculators%</argument>
             <tag name="validator.constraint_validator" alias="sylius_shipping_method_calculator_exists" />
         </service>
-        <service id="sylius.validator.shipping_method_calculator_exists" alias="Sylius\Bundle\ShippingBundle\Validator\ShippingMethodCalculatorExistsValidator" />
 
-        <service id="Sylius\Bundle\ShippingBundle\Validator\ShippingMethodRuleValidator" public="true">
+        <service id="sylius.validator.shipping_method_rule"
+                 class="Sylius\Bundle\ShippingBundle\Validator\ShippingMethodRuleValidator"
+        >
             <argument>%sylius.shipping_method_rules%</argument>
             <argument>%sylius.shipping.shipping_method_rule.validation_groups%</argument>
             <tag name="validator.constraint_validator" alias="sylius_shipping_method_rule" />
         </service>
-        <service id="sylius.validator.shipping_method_rule" alias="Sylius\Bundle\ShippingBundle\Validator\ShippingMethodRuleValidator" />
 
-        <service id="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator" public="true">
+        <service id="sylius.validator.groups_generator.shipping_method_configuration"
+                 class="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator"
+        >
             <argument>%sylius.shipping.shipping_method_calculator.validation_groups%</argument>
         </service>
-        <service id="sylius.validator.groups_generator.shipping_method_configuration"
-                 alias="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator" />
     </services>
 </container>

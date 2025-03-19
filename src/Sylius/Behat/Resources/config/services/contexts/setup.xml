@@ -31,6 +31,10 @@
             <argument type="service" id="sylius.factory.avatar_image" />
         </service>
 
+        <service id="sylius.behat.context.setup.calendar" class="Sylius\Behat\Context\Setup\CalendarContext">
+            <argument>%sylius.behat.clock.date_file%</argument>
+        </service>
+
         <service id="sylius.behat.context.setup.cart" class="Sylius\Behat\Context\Setup\CartContext">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.command_bus" />
@@ -46,6 +50,13 @@
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.factory.address" />
             <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <service id="sylius.behat.context.setup.checkout.address" class="Sylius\Behat\Context\Setup\Checkout\AddressContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sylius.converter.country_name" />
         </service>
 
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
@@ -121,7 +132,7 @@
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="sylius.modifier.order_item_quantity" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="sylius.behat.clock" />
             <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface" />
         </service>
 
@@ -133,14 +144,11 @@
             <argument type="service" id="sylius.manager.payment_method" />
             <argument type="collection">
                 <argument key="offline">Offline</argument>
-                <argument key="paypal_express_checkout">Paypal Express Checkout</argument>
-                <argument key="stripe_checkout">Stripe Checkout</argument>
             </argument>
-
         </service>
 
         <service id="Sylius\Behat\Context\Setup\PriceHistoryContext">
-            <argument type="service" id="Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext" />
+            <argument type="service" id="sylius.behat.context.setup.calendar" />
             <argument type="service" id="sylius.manager.channel_pricing" />
             <argument type="service" id="sylius.resolver.product_variant" />
         </service>
@@ -226,7 +234,7 @@
 
         <service id="sylius.behat.context.setup.admin_api_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.api_security" />
+            <argument type="service" id="sylius.behat.api_admin_security" />
             <argument type="service" id="sylius.fixture.example_factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
         </service>
@@ -240,7 +248,7 @@
 
         <service id="sylius.behat.context.setup.shop_api_security" class="Sylius\Behat\Context\Setup\ShopSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.api_security" />
+            <argument type="service" id="sylius.behat.api_shop_security" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.repository.shop_user" />
         </service>
@@ -313,6 +321,13 @@
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <service id="sylius.behat.context.setup.payment_request" class="Sylius\Behat\Context\Setup\PaymentRequestContext">
+            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius.factory.payment_request" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
     </services>
 </container>

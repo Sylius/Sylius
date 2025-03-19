@@ -46,7 +46,7 @@ final class GenerateCouponsCommandTest extends KernelTestCase
         $kernel->getContainer()->set('sylius.repository.promotion', $this->promotionRepository);
 
         $this->couponGenerator = $this->createMock(PromotionCouponGeneratorInterface::class);
-        $kernel->getContainer()->set('sylius.promotion_coupon_generator', $this->couponGenerator);
+        $kernel->getContainer()->set('sylius.generator.promotion_coupon', $this->couponGenerator);
 
         $this->command = $application->find('sylius:promotion:generate-coupons');
         $this->commandTester = new CommandTester($this->command);
@@ -114,9 +114,10 @@ final class GenerateCouponsCommandTest extends KernelTestCase
             ->willReturn($promotion)
         ;
 
-        $expectedInstructions = new PromotionCouponGeneratorInstruction();
-        $expectedInstructions->setAmount(10);
-        $expectedInstructions->setCodeLength(10);
+        $expectedInstructions = new PromotionCouponGeneratorInstruction(
+            amount: 10,
+            codeLength: 10,
+        );
 
         $this->couponGenerator
             ->method('generate')
@@ -153,9 +154,10 @@ final class GenerateCouponsCommandTest extends KernelTestCase
             ->willReturn($promotion)
         ;
 
-        $expectedInstructions = new PromotionCouponGeneratorInstruction();
-        $expectedInstructions->setAmount(5);
-        $expectedInstructions->setCodeLength(10);
+        $expectedInstructions = new PromotionCouponGeneratorInstruction(
+            amount: 5,
+            codeLength: 10,
+        );
 
         $this->couponGenerator
             ->expects($this->once())
@@ -192,9 +194,10 @@ final class GenerateCouponsCommandTest extends KernelTestCase
             ->willReturn($promotion)
         ;
 
-        $expectedInstructions = new PromotionCouponGeneratorInstruction();
-        $expectedInstructions->setAmount(10);
-        $expectedInstructions->setCodeLength(7);
+        $expectedInstructions = new PromotionCouponGeneratorInstruction(
+            amount: 10,
+            codeLength: 7,
+        );
 
         $this->couponGenerator
             ->expects($this->once())

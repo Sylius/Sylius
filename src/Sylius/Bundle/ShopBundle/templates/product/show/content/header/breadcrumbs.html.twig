@@ -1,0 +1,6 @@
+{% from '@SyliusShop/product/common/macro/breadcrumbs.html.twig' import product_breadcrumbs as product_breadcrumbs %}
+
+{% set product = hookable_metadata.context.product %}
+
+{{ product_breadcrumbs(product) }}
+

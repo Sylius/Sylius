@@ -55,7 +55,7 @@ final class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         $flashes
             ->add('error', [
                 'message' => 'sylius.resource.delete_error',
-                'parameters' => ['%resource%' => 'zone'],
+                'parameters' => ['%resource%' => 'Zone'],
             ])
             ->shouldBeCalled()
         ;
@@ -115,7 +115,7 @@ final class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         $flashes
             ->add('error', [
                 'message' => 'sylius.resource.delete_error',
-                'parameters' => ['%resource%' => 'province'],
+                'parameters' => ['%resource%' => 'Province'],
             ])
             ->shouldBeCalled()
         ;

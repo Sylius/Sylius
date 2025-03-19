@@ -17,15 +17,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.doctrine.odm.mongodb.unitOfWork" class="Doctrine\ODM\MongoDB\UnitOfWork" public="false">
+        <service id="sylius.doctrine.odm.mongodb.unit_of_work" class="Doctrine\ODM\MongoDB\UnitOfWork">
             <factory service="doctrine.odm.mongodb.document_manager" method="getUnitOfWork" />
         </service>
-        <service id="sylius.doctrine.odm.mongodb.unit_of_work" alias="sylius.doctrine.odm.mongodb.unitOfWork" />
 
         <service id="sylius.manager.taxon" alias="doctrine.odm.mongodb.document_manager" />
-        <service id="sylius.doctrine.odm.mongodb.metadata.taxon" class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata" public="false">
+        <service id="sylius.doctrine.odm.mongodb.metadata.taxon" class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata">
             <argument>%sylius.model.taxon.class%</argument>
             <factory service="sylius.manager.taxon" method="getClassMetadata" />
         </service>

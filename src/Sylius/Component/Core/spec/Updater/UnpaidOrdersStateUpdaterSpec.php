@@ -17,26 +17,24 @@ use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
-use SM\Factory\Factory;
-use SM\SMException;
-use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
-        Factory $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         LoggerInterface $logger,
         ObjectManager $objectManager,
     ): void {
         $this->beConstructedWith(
             $orderRepository,
-            $stateMachineFactory,
+            $stateMachine,
             '10 months',
             $logger,
             $objectManager,
@@ -50,53 +48,13 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
     }
 
     function it_cancels_unpaid_orders(
-        Factory $stateMachineFactory,
-        ObjectManager $objectManager,
-        OrderInterface $firstOrder,
-        OrderInterface $secondOrder,
-        OrderInterface $thirdOrder,
         OrderRepositoryInterface $orderRepository,
-        WinzouStateMachineInterface $firstOrderStateMachine,
-        WinzouStateMachineInterface $secondOrderStateMachine,
-        WinzouStateMachineInterface $thirdOrderStateMachine,
-    ): void {
-        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), 100)->willReturn(
-            [$firstOrder, $secondOrder],
-            [$thirdOrder],
-            [],
-        );
-
-        $objectManager->flush()->shouldBeCalledTimes(2);
-        $objectManager->clear()->shouldBeCalledTimes(2);
-
-        $stateMachineFactory->get($firstOrder, 'sylius_order')->willReturn($firstOrderStateMachine);
-        $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
-        $stateMachineFactory->get($thirdOrder, 'sylius_order')->willReturn($thirdOrderStateMachine);
-
-        $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
-        $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
-        $thirdOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
-
-        $this->cancel();
-    }
-
-    function it_uses_the_new_state_machine_abstraction_if_passed(
         StateMachineInterface $stateMachine,
         ObjectManager $objectManager,
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
         OrderInterface $thirdOrder,
-        OrderRepositoryInterface $orderRepository,
     ): void {
-        $this->beConstructedWith(
-            $orderRepository,
-            $stateMachine,
-            '10 months',
-            null,
-            $objectManager,
-            100,
-        );
-
         $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), 100)->willReturn(
             [$firstOrder, $secondOrder],
             [$thirdOrder],
@@ -106,21 +64,19 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         $objectManager->flush()->shouldBeCalledTimes(2);
         $objectManager->clear()->shouldBeCalledTimes(2);
 
-        $stateMachine->apply($firstOrder, 'sylius_order', OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
-        $stateMachine->apply($secondOrder, 'sylius_order', OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
-        $stateMachine->apply($thirdOrder, 'sylius_order', OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+        $stateMachine->apply($firstOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+        $stateMachine->apply($secondOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+        $stateMachine->apply($thirdOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $this->cancel();
     }
 
     function it_wont_stop_cancelling_unpaid_orders_on_exception_for_a_single_order_and_logs_error(
-        Factory $stateMachineFactory,
+        OrderRepositoryInterface $orderRepository,
+        StateMachineInterface $stateMachine,
         ObjectManager $objectManager,
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
-        OrderRepositoryInterface $orderRepository,
-        WinzouStateMachineInterface $firstOrderStateMachine,
-        WinzouStateMachineInterface $secondOrderStateMachine,
         LoggerInterface $logger,
     ): void {
         $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), 100)->willReturn(
@@ -133,75 +89,19 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
 
         $firstOrder->getId()->shouldBeCalled()->willReturn(13);
 
-        $stateMachineFactory->get($firstOrder, 'sylius_order')->willReturn($firstOrderStateMachine);
-        $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
-
-        $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled()
-            ->willThrow(new SMException())
+        $stateMachine
+            ->apply($firstOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled()
+            ->willThrow(StateMachineExecutionException::class)
         ;
-        $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+        $stateMachine
+            ->apply($secondOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)
+            ->shouldBeCalled()
+        ;
 
         $logger->error(
             Argument::containingString('An error occurred while cancelling unpaid order #13'),
             Argument::any(),
         )->shouldBeCalled();
-
-        $this->cancel();
-    }
-
-    function it_wont_stop_cancelling_unpaid_orders_on_exception_for_a_single_order_and_skips_logging_if_logger_is_not_set(
-        Factory $stateMachineFactory,
-        ObjectManager $objectManager,
-        OrderInterface $firstOrder,
-        OrderInterface $secondOrder,
-        OrderRepositoryInterface $orderRepository,
-        WinzouStateMachineInterface $firstOrderStateMachine,
-        WinzouStateMachineInterface $secondOrderStateMachine,
-    ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months', null, $objectManager);
-
-        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), 100)->willReturn(
-            [$firstOrder, $secondOrder],
-            [],
-        );
-
-        $firstOrder->getId()->shouldNotBeCalled();
-
-        $stateMachineFactory->get($firstOrder, 'sylius_order')->willReturn($firstOrderStateMachine);
-        $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
-
-        $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled()
-            ->willThrow(new SMException())
-        ;
-        $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
-
-        $this->cancel();
-    }
-
-    function it_wont_batch_processing_unpaid_orders_if_object_manager_is_not_set(
-        Factory $stateMachineFactory,
-        ObjectManager $objectManager,
-        OrderInterface $firstOrder,
-        OrderInterface $secondOrder,
-        OrderRepositoryInterface $orderRepository,
-        WinzouStateMachineInterface $firstOrderStateMachine,
-        WinzouStateMachineInterface $secondOrderStateMachine,
-    ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months', null, null, 100);
-
-        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), null)->willReturn(
-            [$firstOrder, $secondOrder],
-            [],
-        );
-
-        $objectManager->flush()->shouldNotBeCalled();
-        $objectManager->clear()->shouldNotBeCalled();
-
-        $stateMachineFactory->get($firstOrder, 'sylius_order')->willReturn($firstOrderStateMachine);
-        $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
-
-        $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
-        $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $this->cancel();
     }

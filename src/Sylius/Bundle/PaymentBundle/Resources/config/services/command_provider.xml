@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius.command_provider.gateway_factory" class="Sylius\Bundle\PaymentBundle\CommandProvider\GatewayFactoryCommandProvider">
+            <argument type="service" id="sylius.checker.payment_request_duplication" />
+            <argument type="service" id="sylius.provider.payment_request.gateway_factory_name" />
+            <argument type="tagged_locator" tag="sylius.payment_request.command_provider" index-by="gateway_factory" />
+        </service>
+        <service id="sylius.command_provider.payment_request.default" alias="sylius.command_provider.gateway_factory" />
+
+        <service id="sylius.command_provider.payment_request.offline" class="Sylius\Bundle\PaymentBundle\CommandProvider\ActionsCommandProvider">
+            <argument type="tagged_locator" tag="sylius.command_provider.payment_request.offline" index-by="action" />
+            <tag name="sylius.payment_request.command_provider" gateway-factory="offline" />
+        </service>
+
+        <service id="sylius.command_provider.payment_request.offline.capture" class="Sylius\Bundle\PaymentBundle\CommandProvider\Offline\CapturePaymentRequestCommandProvider">
+            <tag name="sylius.command_provider.payment_request.offline" action="capture" />
+        </service>
+
+        <service id="sylius.command_provider.payment_request.offline.status" class="Sylius\Bundle\PaymentBundle\CommandProvider\Offline\StatusPaymentRequestCommandProvider">
+            <tag name="sylius.command_provider.payment_request.offline" action="status" />
+        </service>
+    </services>
+</container>

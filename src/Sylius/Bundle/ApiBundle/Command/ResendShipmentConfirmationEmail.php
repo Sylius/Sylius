@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-use Sylius\Bundle\CoreBundle\Message\ResendShipmentConfirmationEmail as BaseResendShipmentConfirmationEmail;
+use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
+use Sylius\Bundle\CoreBundle\Command\ResendShipmentConfirmationEmail as BaseResendShipmentConfirmationEmail;
 
-class ResendShipmentConfirmationEmail extends BaseResendShipmentConfirmationEmail implements ShipmentIdAwareInterface
+#[ShipmentIdAware]
+class ResendShipmentConfirmationEmail extends BaseResendShipmentConfirmationEmail
 {
 }

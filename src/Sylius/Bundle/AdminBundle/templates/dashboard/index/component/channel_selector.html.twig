@@ -1,0 +1,25 @@
+{# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\ChannelSelectorComponent #}
+
+{% if channels|length > 1 %}
+    <div class="col-12 col-md-auto ms-auto d-print-none" {{ attributes }}>
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('choose-channel-button') }}>
+                {{ channel_name }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" {{ sylius_test_html_attribute('choose-channel-list') }}>
+                {% for channel in channels %}
+                    <li>
+                        <a
+                            class="dropdown-item"
+                            data-action="live#action"
+                            data-live-action-param="changeChannel"
+                            data-live-channel-code-param="{{ channel.code }}"
+                        >
+                            {{ channel.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

@@ -81,6 +81,14 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
+     * @When I want to view the payment requests of the first payment
+     */
+    public function iWantToViewThePaymentRequestsOfTheFirstPayment(): void
+    {
+        $this->indexPage->showPaymentRequestOfNthPayment(1);
+    }
+
+    /**
      * @Then I should see :count payments in the list
      * @Then I should see a single payment in the list
      */
@@ -154,5 +162,18 @@ final class ManagingPaymentsContext implements Context
     public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber, int $position): void
     {
         Assert::true($this->indexPage->isPaymentWithOrderNumberInPosition($orderNumber, $position));
+    }
+
+    /**
+     * @When /^I sort payments by date in (ascending|descending) order$/
+     */
+    public function iSortPaymentsByRegistrationDate(string $order): void
+    {
+        $this->sortBy($order, 'createdAt');
+    }
+
+    private function sortBy(string $order, string $field): void
+    {
+        $this->indexPage->sortBy($field, str_starts_with($order, 'de') ? 'desc' : 'asc');
     }
 }

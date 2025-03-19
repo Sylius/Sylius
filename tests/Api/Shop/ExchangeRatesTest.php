@@ -22,7 +22,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_exchange_rates(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'exchange_rate.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'exchange_rate.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/exchange-rates', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
@@ -33,7 +33,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_exchange_rate_with_source_currency_the_same_as_the_channel_base_currency(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'exchange_rate.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'exchange_rate.yaml']);
 
         /** @var ExchangeRateInterface $exchangeRate */
         $exchangeRate = $fixtures['exchange_rate_USDPLN'];
@@ -51,7 +51,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_exchange_rate_with_target_currency_the_same_as_the_channel_base_currency(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'exchange_rate.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'exchange_rate.yaml']);
 
         /** @var ExchangeRateInterface $exchangeRate */
         $exchangeRate = $fixtures['exchange_rate_CNYUSD'];
@@ -69,7 +69,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
     /** @test */
     public function it_cannot_get_an_exchange_rate_that_is_not_related_to_the_channel_base_currency()
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'exchange_rate.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'exchange_rate.yaml']);
 
         /** @var ExchangeRateInterface $exchangeRate */
         $exchangeRate = $fixtures['exchange_rate_GBPBTN'];

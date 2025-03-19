@@ -1,0 +1,7 @@
+{% set product = hookable_metadata.context.product %}
+
+{% for association in product.associations %}
+    {{ component('sylius_shop:product:association', { productAssociation: association, template: '@SyliusShop/product/show/content/product_listing/association.html.twig' }) }}
+{% else %}
+    {{ component('sylius_shop:product:list', { limit: 4, template: '@SyliusShop/product/common/list.html.twig' }) }}
+{% endfor %}

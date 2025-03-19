@@ -51,7 +51,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new ChooseShippingMethod('SHIPPING_METHOD_CODE'), new class() extends Constraint {
+            ->during('validate', [new ChooseShippingMethod('SHIPPING_METHOD_CODE', 123, 'ORDER_TOKEN'), new class() extends Constraint {
             }])
         ;
     }
@@ -60,7 +60,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new ChosenShippingMethodEligibility()])
+            ->during('validate', [new CompleteOrder('TOKEN'), new ChosenShippingMethodEligibility()])
         ;
     }
 
@@ -75,9 +75,11 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $shippingAddress,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            shippingMethodCode: 'SHIPPING_METHOD_CODE',
+            shipmentId: 123,
+        );
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
         $shippingMethod->getName()->willReturn('DHL');
@@ -108,9 +110,11 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $shippingAddress,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            shippingMethodCode: 'SHIPPING_METHOD_CODE',
+            shipmentId: 123,
+        );
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 
@@ -135,9 +139,11 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ExecutionContextInterface $executionContext,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            shippingMethodCode: 'SHIPPING_METHOD_CODE',
+            shipmentId: 123,
+        );
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn(null);
 
@@ -164,9 +170,11 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $shippingAddress,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            shippingMethodCode: 'SHIPPING_METHOD_CODE',
+            shipmentId: 123,
+        );
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 
@@ -192,9 +200,11 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ShippingMethodInterface $shippingMethod,
     ): void {
-        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
-        $command->setOrderTokenValue('ORDER_TOKEN');
-        $command->setSubresourceId('123');
+        $command = new ChooseShippingMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            shippingMethodCode: 'SHIPPING_METHOD_CODE',
+            shipmentId: 123,
+        );
 
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 

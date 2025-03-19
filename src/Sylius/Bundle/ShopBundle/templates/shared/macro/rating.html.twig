@@ -1,0 +1,10 @@
+{% macro show(rating = 3) %}
+    <div class="sylius-rating hoverless">
+        {% for i in 1..5 %}
+            <label>
+                <input type="radio" {% if loop.index == rating %}checked{% endif %} disabled>
+                {{ ux_icon('tabler:star-filled', { class: 'icon icon-sm' }) }}
+            </label>
+        {% endfor %}
+    </div>
+{% endmacro %}

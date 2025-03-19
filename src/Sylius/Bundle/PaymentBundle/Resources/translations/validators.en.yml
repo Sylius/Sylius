@@ -16,6 +16,12 @@ sylius:
             min_length: The credit card's CVV code must be at most than {{ limit }} digits long.
         expiry_year:
             not_blank: Please select the expiration year.
+    gateway_config:
+        invalid_gateway_factory: Invalid gateway factory. Available factories are {{ available_factories }}.
+        gateway_name:
+            not_blank: Please enter gateway name.
+        factory_name:
+            not_blank: Please enter gateway factory name.
     payment:
         currency_code:
             not_valid: The currency code you entered is invalid.

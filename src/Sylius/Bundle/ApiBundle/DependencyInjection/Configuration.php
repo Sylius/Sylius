@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class Configuration implements ConfigurationInterface
+final readonly class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
@@ -31,36 +31,15 @@ final class Configuration implements ConfigurationInterface
                 ->booleanNode('enabled')
                     ->defaultFalse()
                 ->end()
-                ->booleanNode('legacy_error_handling')
-                    ->setDeprecated('sylius/api-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
-                    ->defaultFalse()
-                ->end()
-            ->end()
-            ->children()
                 ->arrayNode('order_states_to_filter_out')
                     ->scalarPrototype()->end()
                 ->end()
-            ->end()
-            ->children()
-                ->arrayNode('serialization_groups')
-                    ->setDeprecated('sylius/api-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->booleanNode('skip_adding_read_group')
-                            ->defaultFalse()
-                        ->end()
-                        ->booleanNode('skip_adding_index_and_show_groups')
-                            ->defaultFalse()
-                        ->end()
-                    ->end()
+                ->arrayNode('operations_to_remove')
+                    ->scalarPrototype()->end()
                 ->end()
-            ->end()
-            ->children()
                 ->variableNode('default_image_filter')
                     ->defaultValue('sylius_original')
                 ->end()
-            ->end()
-            ->children()
                 ->arrayNode('filter_eager_loading_extension')
                     ->addDefaultsIfNotSet()
                     ->children()

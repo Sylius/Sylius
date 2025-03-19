@@ -16,9 +16,9 @@ sylius_shop_checkout_address:
         _sylius:
             event: address
             flash: false
-            template: "@SyliusShop/Checkout/address.html.twig"
+            template: "@SyliusShop/checkout/address.html.twig"
             form:
-                type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
+                type: Sylius\Bundle\ShopBundle\Form\Type\Checkout\AddressType
                 options:
                     customer: expr:service('sylius.context.customer').getCustomer()
             repository:
@@ -37,8 +37,8 @@ sylius_shop_checkout_select_shipping:
         _sylius:
             event: select_shipping
             flash: false
-            template: "@SyliusShop/Checkout/selectShipping.html.twig"
-            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType
+            template: "@SyliusShop/checkout/select_shipping.html.twig"
+            form: Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectShippingType
             repository:
                 method: findCartForSelectingShipping
                 arguments:
@@ -55,8 +55,8 @@ sylius_shop_checkout_select_payment:
         _sylius:
             event: payment
             flash: false
-            template: "@SyliusShop/Checkout/selectPayment.html.twig"
-            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
+            template: "@SyliusShop/checkout/select_payment.html.twig"
+            form: Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType
             repository:
                 method: findCartForSelectingPayment
                 arguments:
@@ -73,7 +73,7 @@ sylius_shop_checkout_complete:
         _sylius:
             event: complete
             flash: false
-            template: "@SyliusShop/Checkout/complete.html.twig"
+            template: "@SyliusShop/checkout/complete.html.twig"
             repository:
                 method: findCartForSummary
                 arguments:

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://symfony.com/schema/dic/services"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius_abstraction.state_machine.adapter.winzou_state_machine" class="Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter">
+            <argument type="service" id="sm.factory" />
+            <tag name="sylius.state_machine" key="winzou_state_machine" />
+        </service>
+        <service id="Sylius\Abstraction\StateMachine\StateMachineInterface $winzouStateMachine" alias="sylius_abstraction.state_machine.adapter.winzou_state_machine" />
+    </services>
+</container>

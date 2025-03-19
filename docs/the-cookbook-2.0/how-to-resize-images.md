@@ -1,0 +1,2 @@
+# How to resize images?
+

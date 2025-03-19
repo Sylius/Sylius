@@ -1,13 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
-jms_serializer:
-    metadata:
-        directories:
-            sylius-product:
-                namespace_prefix: "Sylius\\Component\\Product"
-                path: "@SyliusProductBundle/Resources/config/serializer"
-
 doctrine:
     orm:
         dql:

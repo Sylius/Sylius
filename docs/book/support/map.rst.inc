@@ -1,1 +1,0 @@
-* :doc:`/book/support/index`

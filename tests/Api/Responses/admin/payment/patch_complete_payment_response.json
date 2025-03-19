@@ -4,7 +4,11 @@
     "@type": "Payment",
     "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
     "id": @integer@,
-    "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
+    "method": {
+        "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
+        "@type": "PaymentMethod",
+        "name": "Cash on delivery"
+    },
     "currencyCode": "USD",
     "amount": 6500,
     "state": "completed",

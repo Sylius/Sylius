@@ -1,0 +1,9 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+<div {{ attributes }}>
+    {{ form_start(form, {'action': path('sylius_shop_account_address_book_set_as_default', {'id': hookable_metadata.context.address.id})}) }}
+    <input type="hidden" name="_method" value="PATCH" />
+    <input type="hidden" name={{ form.defaultAddress.vars['full_name'] }} value={{ hookable_metadata.context.address.id }} />
+    {{ buttons.submit('sylius.ui.set_as_default'|trans, 'set-as-default-button', null, 'btn-sm btn-icon btn-outline-gray w-full') }}
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Resolver\TaxationAddressResolverInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -35,8 +36,9 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
+        TaxationAddressResolverInterface $taxationAddressResolver,
     ): void {
-        $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry);
+        $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry, $taxationAddressResolver);
     }
 
     function it_is_an_order_processor(): void
@@ -47,6 +49,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     function it_processes_taxes_using_a_supported_tax_calculation_strategy(
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
+        TaxationAddressResolverInterface $taxationAddressResolver,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ShipmentInterface $shipment,
@@ -59,13 +62,13 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
-        $order->getBillingAddress()->willReturn($address);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
         $strategyRegistry->all()->willReturn([$strategyOne, $strategyTwo]);
+        $taxationAddressResolver->getTaxationAddressFromOrder($order)->willReturn($address);
         $zoneMatcher->match($address, Scope::TAX)->willReturn($zone);
 
         $strategyOne->supports($order, $zone)->willReturn(false);
@@ -77,9 +80,42 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
+    function it_processes_taxes_for_the_default_tax_zone(
+        ZoneProviderInterface $defaultTaxZoneProvider,
+        ZoneMatcherInterface $zoneMatcher,
+        PrioritizedServiceRegistryInterface $strategyRegistry,
+        TaxationAddressResolverInterface $taxationAddressResolver,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ShipmentInterface $shipment,
+        AddressInterface $address,
+        ZoneInterface $zone,
+        TaxCalculationStrategyInterface $strategyOne,
+    ): void {
+        $order->canBeProcessed()->willReturn(true);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+        $order->isEmpty()->willReturn(false);
+
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+        $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+        $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+
+        $strategyRegistry->all()->willReturn([$strategyOne]);
+        $taxationAddressResolver->getTaxationAddressFromOrder($order)->willReturn(null);
+        $zoneMatcher->match($address, Scope::TAX)->shouldNotBeCalled();
+        $defaultTaxZoneProvider->getZone($order)->willReturn($zone);
+
+        $strategyOne->supports($order, $zone)->willReturn(true);
+        $strategyOne->applyTaxes($order, $zone)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
     function it_throws_an_exception_if_there_are_no_supported_tax_calculation_strategies(
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
+        TaxationAddressResolverInterface $taxationAddressResolver,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         AddressInterface $address,
@@ -90,11 +126,11 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->isEmpty()->willReturn(false);
-        $order->getBillingAddress()->willReturn($address);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
+        $taxationAddressResolver->getTaxationAddressFromOrder($order)->willReturn($address);
         $zoneMatcher->match($address, Scope::TAX)->willReturn($zone);
 
         $strategyRegistry->all()->willReturn([$strategy]);
@@ -122,6 +158,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
+        TaxationAddressResolverInterface $taxationAddressResolver,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         AddressInterface $address,
@@ -134,8 +171,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
-        $order->getBillingAddress()->willReturn($address);
-
+        $taxationAddressResolver->getTaxationAddressFromOrder($order)->willReturn($address);
         $zoneMatcher->match($address, Scope::TAX)->willReturn(null);
 
         $defaultTaxZoneProvider->getZone($order)->willReturn(null);
@@ -148,6 +184,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     function it_does_nothing_if_the_order_cannot_be_processed(
         ZoneProviderInterface $defaultTaxZoneProvider,
         PrioritizedServiceRegistryInterface $strategyRegistry,
+        TaxationAddressResolverInterface $taxationAddressResolver,
         OrderInterface $order,
     ): void {
         $order->canBeProcessed()->willReturn(false);
@@ -157,6 +194,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->isEmpty()->shouldNotBeCalled();
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldNotBeCalled();
 
+        $taxationAddressResolver->getTaxationAddressFromOrder($order)->shouldNotBeCalled();
         $defaultTaxZoneProvider->getZone($order)->shouldNotBeCalled();
         $strategyRegistry->all()->shouldNotBeCalled();
 

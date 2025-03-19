@@ -1,0 +1,5 @@
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+
+{% set form = hookable_metadata.context.form %}
+
+{{ button.primary(sylius_test_form_attribute('generate-button')|merge({ text: 'sylius.ui.generate'|trans, type: 'submit', form: form.vars.id, disabled: form.variants is empty })) }}

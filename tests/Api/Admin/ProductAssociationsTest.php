@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Api\Admin;
+namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -19,8 +19,34 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAssociationsTest extends JsonApiTestCase
 {
+    protected function setUp(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+        $this->setUpDefaultPostHeaders();
+        $this->setUpDefaultPutHeaders();
+
+        parent::setUp();
+    }
+
     /** @test */
-    public function it_gets_product_association(): void
+    public function it_gets_product_associations(): void
+    {
+        $this->loadFixturesFromFiles([
+            'product/product_with_many_locales.yaml',
+            'authentication/api_administrator.yaml',
+        ]);
+
+        $this->requestGet('/api/v2/admin/product-associations');
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_association/get_product_association_collection_response',
+        );
+    }
+
+    /** @test */
+    public function it_gets_a_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -29,20 +55,12 @@ final class ProductAssociationsTest extends JsonApiTestCase
 
         /** @var ProductAssociationInterface $association */
         $association = $fixtures['product_association'];
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/product-associations/%s', $association->getId()),
-            server: $this
-                ->headerBuilder()
-                ->withJsonLdAccept()
-                ->withAdminUserAuthorization('api@example.com')
-                ->build(),
-        );
+
+        $this->requestGet(sprintf('/api/v2/admin/product-associations/%s', $association->getId()));
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/product_association/get_product_association_response',
-            Response::HTTP_OK,
         );
     }
 
@@ -54,70 +72,29 @@ final class ProductAssociationsTest extends JsonApiTestCase
             'product/product_with_many_locales.yaml',
         ]);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/product-associations/nope',
-            server: $this
-                ->headerBuilder()
-                ->withJsonLdAccept()
-                ->withAdminUserAuthorization('api@example.com')
-                ->build(),
-        );
+        $this->requestGet('/api/v2/admin/product-associations/wrong_id');
 
         $response = $this->client->getResponse();
-
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
     /** @test */
-    public function it_returns_product_association_collection(): void
+    public function it_creates_a_product_association(): void
     {
         $this->loadFixturesFromFiles([
-            'product/product_with_many_locales.yaml',
             'authentication/api_administrator.yaml',
-        ]);
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/product-associations',
-            server: $this
-                ->headerBuilder()
-                ->withJsonLdAccept()
-                ->withAdminUserAuthorization('api@example.com')
-                ->build(),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/product_association/get_product_association_collection_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_creates_product_association(): void
-    {
-        $this->loadFixturesFromFiles([
             'product/products_with_associations.yaml',
-            'authentication/api_administrator.yaml',
         ]);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/product-associations',
-            server: $this
-                ->headerBuilder()
-                ->withJsonLdContentType()
-                ->withJsonLdAccept()
-                ->withAdminUserAuthorization('api@example.com')
-                ->build(),
-            content: json_encode([
+        $this->requestPost(
+            '/api/v2/admin/product-associations',
+            [
                 'type' => '/api/v2/admin/product-association-types/similar_products',
                 'owner' => '/api/v2/admin/products/CUP',
                 'associatedProducts' => [
                     '/api/v2/admin/products/MUG',
                 ],
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponse(
@@ -128,93 +105,14 @@ final class ProductAssociationsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_product_association(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'product/products_with_associations.yaml',
-            'authentication/api_administrator.yaml',
-        ]);
-
-        /** @var ProductAssociationInterface $association */
-        $association = $fixtures['product_association'];
-        $this->client->request(
-            method: 'PUT',
-            uri: sprintf('/api/v2/admin/product-associations/%s', $association->getId()),
-            server: $this
-                ->headerBuilder()
-                ->withJsonLdContentType()
-                ->withJsonLdAccept()
-                ->withAdminUserAuthorization('api@example.com')
-                ->build(),
-            content: json_encode([
-                'associatedProducts' => [
-                    '/api/v2/admin/products/TANKARD',
-                ],
-            ], \JSON_THROW_ON_ERROR),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/product_association/put_product_association_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_deletes_product_association(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'product/products_with_associations.yaml',
-            'authentication/api_administrator.yaml',
-        ]);
-
-        $header = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
-        /** @var ProductAssociationInterface $association */
-        $association = $fixtures['product_association'];
-        $associationId = $association->getId();
-
-        $this->client->request(
-            method: 'DELETE',
-            uri: sprintf('/api/v2/admin/product-associations/%s', $associationId),
-            server: $header,
-        );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
-
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/product-associations/%s', $associationId),
-            server: $header,
-        );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
-    }
-
-    /** @test */
     public function it_does_not_create_product_association_without_required_data(): void
     {
         $this->loadFixturesFromFiles([
-            'product/products_with_associations.yaml',
             'authentication/api_administrator.yaml',
+            'product/products_with_associations.yaml',
         ]);
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/product-associations',
-            server: $this
-                ->headerBuilder()
-                ->withJsonLdContentType()
-                ->withJsonLdAccept()
-                ->withAdminUserAuthorization('api@example.com')
-                ->build(),
-            content: '{}',
-        );
+        $this->requestPost('/api/v2/admin/product-associations', []);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -227,26 +125,19 @@ final class ProductAssociationsTest extends JsonApiTestCase
     public function it_does_not_create_duplicated_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'product/products_with_associations.yaml',
             'authentication/api_administrator.yaml',
+            'product/products_with_associations.yaml',
         ]);
 
         /** @var ProductAssociationInterface $association */
         $association = $fixtures['product_association'];
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/product-associations',
-            server: $this
-                ->headerBuilder()
-                ->withJsonLdContentType()
-                ->withJsonLdAccept()
-                ->withAdminUserAuthorization('api@example.com')
-                ->build(),
-            content: json_encode([
+        $this->requestPost(
+            '/api/v2/admin/product-associations',
+            [
                 'type' => sprintf('/api/v2/admin/product-association-types/%s', $association->getType()->getCode()),
                 'owner' => sprintf('/api/v2/admin/products/%s', $association->getOwner()->getCode()),
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
         $this->assertResponse(
@@ -254,5 +145,52 @@ final class ProductAssociationsTest extends JsonApiTestCase
             'admin/product_association/post_duplicated_association_product_response',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
+    }
+
+    /** @test */
+    public function it_updates_a_product_association(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'product/products_with_associations.yaml',
+        ]);
+
+        /** @var ProductAssociationInterface $association */
+        $association = $fixtures['product_association'];
+
+        $this->requestPut(
+            sprintf('/api/v2/admin/product-associations/%s', $association->getId()),
+            [
+                'associatedProducts' => [
+                    '/api/v2/admin/products/TANKARD',
+                ],
+            ],
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_association/put_product_association_response',
+        );
+    }
+
+    /** @test */
+    public function it_deletes_a_product_association(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'product/products_with_associations.yaml',
+        ]);
+
+        /** @var ProductAssociationInterface $association */
+        $association = $fixtures['product_association'];
+        $associationId = $association->getId();
+
+        $this->requestDelete(sprintf('/api/v2/admin/product-associations/%s', $associationId));
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+
+        $this->requestGet(sprintf('/api/v2/admin/product-associations/%s', $associationId));
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 }

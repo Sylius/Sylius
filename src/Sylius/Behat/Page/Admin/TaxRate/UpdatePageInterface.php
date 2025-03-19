@@ -15,9 +15,11 @@ namespace Sylius\Behat\Page\Admin\TaxRate;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-interface UpdatePageInterface extends BaseUpdatePageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface, FormAwareInterface
 {
     public function isCodeDisabled(): bool;
+
+    public function isIncludedInPrice(): bool;
 
     public function removeZone(): void;
 }

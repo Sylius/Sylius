@@ -5,9 +5,9 @@
     "productTaxons": [],
     "mainTaxon": null,
     "reviews": [],
-    "averageRating": @integer@,
+    "averageRating": "@integer@",
     "images": [],
-    "id": @integer@,
+    "id": "@integer@",
     "code": "MUG",
     "variants": [
       "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
@@ -16,8 +16,8 @@
     "options": [
       "\/api\/v2\/shop\/product-options\/COLOR"
     ],
-    "createdAt": @date@,
-    "updatedAt": @date@,
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
     "description": "das ist becher",
     "shortDescription": "Kurzbeschreibung der Becher",
     "slug": "Becher",

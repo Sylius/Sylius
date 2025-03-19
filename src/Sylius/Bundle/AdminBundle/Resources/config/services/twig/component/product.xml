@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="sylius_admin.twig.component.product.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\FormComponent"
+        >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.product.class%</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductType</argument>
+            <argument type="service" id="sylius.generator.slug" />
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <argument type="service" id="sylius.factory.product" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:product:form" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.product_attribute_autocomplete"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\ProductAttributeAutocompleteComponent"
+        >
+            <argument type="service" id="ux.autocomplete.checksum_calculator" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag name="sylius.live_component.admin" key="sylius_admin:product:product_attribute_autocomplete" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.form.product_taxons"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\Form\ProductTaxonsComponent"
+        >
+            <argument type="service" id="sylius_admin.doctrine.query.taxon.all_taxons" />
+
+            <tag name="sylius.twig_component" key="sylius_admin:product:form:product_taxons" />
+        </service>
+    </services>
+</container>

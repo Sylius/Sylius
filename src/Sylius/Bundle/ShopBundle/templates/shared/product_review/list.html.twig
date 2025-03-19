@@ -1,0 +1,12 @@
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+{% set prefixes = hookable_metadata.prefixes|merge(['sylius.shop.product_review.index.content.main']) %}
+
+{% if product_reviews|length > 0 %}
+    <div class="mb-5">
+        {% for review in product_reviews %}
+            {% hook 'list' with { _prefixes: prefixes, review } %}
+        {% endfor %}
+    </div>
+{% else %}
+    {{ messages.info('sylius.ui.there_are_no_reviews') }}
+{% endif %}

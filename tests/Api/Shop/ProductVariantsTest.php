@@ -77,7 +77,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     public function it_returns_product_variant_with_applied_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'catalog_promotion/catalog_promotion.yaml',
             'catalog_promotion/product_variant.yaml',
         ]);

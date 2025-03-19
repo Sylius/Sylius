@@ -43,11 +43,9 @@ final class HasAllPricesDefinedValidator extends ConstraintValidator
             $channelPricing = $value->getChannelPricingForChannel($channel);
             if (null === $channelPricing || null === $channelPricing->getPrice()) {
                 $this->context->buildViolation($constraint->message)
-                    ->atPath('channelPricings')
+                    ->atPath(sprintf('channelPricings[%s].price', $channel->getCode()))
                     ->addViolation()
                 ;
-
-                return;
             }
         }
     }

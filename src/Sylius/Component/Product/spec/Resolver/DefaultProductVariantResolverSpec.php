@@ -22,16 +22,22 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
 {
+    function let(ProductVariantRepositoryInterface $productVariantRepository): void
+    {
+        $this->beConstructedWith($productVariantRepository);
+    }
+
     function it_implements_variant_resolver_interface(): void
     {
         $this->shouldImplement(ProductVariantResolverInterface::class);
     }
 
-    function it_returns_first_variant_if_product_variant_repository_is_not_initialized(
+    function it_returns_first_variant_if_product_has_no_id(
         ProductInterface $product,
         ProductVariantInterface $variant,
         Collection $variants,
     ): void {
+        $product->getId()->willReturn(null);
         $product->getEnabledVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(false);
         $variants->first()->willReturn($variant);
@@ -39,8 +45,11 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_defined_and_product_variant_repository_is_not_initialized(Collection $variants, ProductInterface $product): void
-    {
+    function it_returns_null_if_first_variant_is_not_defined_and_product_has_no_id(
+        ProductInterface $product,
+        Collection $variants,
+    ): void {
+        $product->getId()->willReturn(null);
         $product->getEnabledVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);
 
@@ -48,9 +57,9 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
     }
 
     function it_returns_first_variant_if_product_variant_repository_is_initialized(
+        ProductVariantRepositoryInterface $productVariantRepository,
         ProductInterface $product,
         ProductVariantInterface $variant,
-        ProductVariantRepositoryInterface $productVariantRepository,
     ): void {
         $this->beConstructedWith($productVariantRepository);
 
@@ -70,9 +79,9 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_defined_and_product_variant_repository_is_initialized(
-        ProductInterface $product,
+    function it_returns_null_if_first_variant_is_not_defined(
         ProductVariantRepositoryInterface $productVariantRepository,
+        ProductInterface $product,
     ): void {
         $this->beConstructedWith($productVariantRepository);
 

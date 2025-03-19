@@ -108,14 +108,16 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $response->getStatusCode() === Response::HTTP_OK;
     }
 
-    /** @param string|int $value */
-    public function hasValue(Response $response, string $key, $value): bool
+    public function hasValue(Response $response, string $key, bool|int|string|null $value, bool $isCaseSensitive = true): bool
     {
-        return $this->getResponseContentValue($response, $key) === $value;
+        if ($isCaseSensitive) {
+            return $this->getResponseContentValue($response, $key) === $value;
+        }
+
+        return strcasecmp((string) $this->getResponseContentValue($response, $key), (string) $value) === 0;
     }
 
-    /** @param string|int $value */
-    public function hasValueInCollection(Response $response, string $key, $value): bool
+    public function hasValueInCollection(Response $response, string $key, bool|int|string $value): bool
     {
         return in_array($value, $this->getResponseContentValue($response, $key), true);
     }
@@ -176,6 +178,15 @@ final class ResponseChecker implements ResponseCheckerInterface
         return true;
     }
 
+    public function hasValueInSubresourceObject(Response $response, string $subResource, string $key, bool|int|string $expectedValue): bool
+    {
+        $resource = $this->getResponseContentValue($response, $subResource);
+
+        $this->assertIsArray($resource);
+
+        return $resource[$key] === $expectedValue;
+    }
+
     /** @param string|array $value */
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, $value): bool
     {
@@ -194,6 +205,17 @@ final class ResponseChecker implements ResponseCheckerInterface
 
         foreach ($this->getCollection($response) as $resource) {
             if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasItemWithTranslationInCollection(array $items, string $locale, string $key, string $translation): bool
+    {
+        foreach ($items as $item) {
+            if (isset($item['translations'][$locale]) && $item['translations'][$locale][$key] === $translation) {
                 return true;
             }
         }

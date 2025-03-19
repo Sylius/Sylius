@@ -8,22 +8,30 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilder
             fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
                 name:
-                    type: string
+                    type: twig
                     label: sylius.ui.name
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 createdAt:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.creation_date
                     options:
-                        format: d-m-Y H:i
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 updatedAt:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.updating_date
                     options:
-                        format: d-m-Y H:i
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
             filters:
                 search:
                     type: string

@@ -14,12 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand;
-use Sylius\Bundle\CoreBundle\Command\SetupCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand;
+use Sylius\Bundle\CoreBundle\Console\Command\SetupCommand;
+use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
 final class InstallerContext implements Context
@@ -39,8 +47,18 @@ final class InstallerContext implements Context
         'confirmation' => 'pswd',
     ];
 
-    public function __construct(private KernelInterface $kernel)
-    {
+    public function __construct(
+        private readonly KernelInterface $kernel,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly CommandDirectoryChecker $commandDirectoryChecker,
+        private readonly CurrencySetupInterface $currencySetup,
+        private readonly LocaleSetupInterface $localeSetup,
+        private readonly ChannelSetupInterface $channelSetup,
+        private readonly FactoryInterface $adminUserFactory,
+        private readonly UserRepositoryInterface $adminUserRepository,
+        private readonly ValidatorInterface $validator,
+        private readonly string $publicDir,
+    ) {
     }
 
     /**
@@ -49,7 +67,16 @@ final class InstallerContext implements Context
     public function iRunSyliusCommandLineInstaller(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new SetupCommand());
+        $this->application->add(new SetupCommand(
+            $this->entityManager,
+            $this->commandDirectoryChecker,
+            $this->currencySetup,
+            $this->localeSetup,
+            $this->channelSetup,
+            $this->adminUserFactory,
+            $this->adminUserRepository,
+            $this->validator,
+        ));
 
         $this->command = $this->application->find('sylius:install:setup');
         $this->tester = new CommandTester($this->command);
@@ -63,7 +90,11 @@ final class InstallerContext implements Context
     public function iRunSyliusInstallSampleDataCommand(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new InstallSampleDataCommand());
+        $this->application->add(new InstallSampleDataCommand(
+            $this->entityManager,
+            $this->commandDirectoryChecker,
+            $this->publicDir,
+        ));
         $this->command = $this->application->find('sylius:install:sample-data');
         $this->tester = new CommandTester($this->command);
     }

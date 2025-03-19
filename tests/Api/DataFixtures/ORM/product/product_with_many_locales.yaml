@@ -28,17 +28,11 @@ Sylius\Component\Core\Model\Product:
         code: 'MUG'
         channels: ['@channel_web']
         currentLocale: 'en_US'
-        translations:
-            en_US: '@product_translation_mug_en_US'
-            pl_PL: '@product_translation_mug_pl_PL'
-            de_DE: '@product_translation_mug_de_DE'
         options: ['@product_option_color']
     product_cup:
         code: 'CUP'
         channels: [ '@channel_web' ]
         currentLocale: 'en_US'
-        translations:
-            en_US: '@product_translation_cup_en_US'
 
 Sylius\Component\Core\Model\ProductTranslation:
     product_translation_mug_en_US:
@@ -75,9 +69,6 @@ Sylius\Component\Core\Model\ProductVariant:
         code: 'MUG_BLUE'
         product: '@product_mug'
         currentLocale: 'en_US'
-        translations:
-            en_US: '@product_variant_mug_blue_translation_en_EN'
-            pl_PL: '@product_variant_mug_blue_translation_pl_PL'
         optionValues: ['@product_option_value_color_blue']
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_blue_web'
@@ -86,9 +77,6 @@ Sylius\Component\Core\Model\ProductVariant:
         code: 'MUG_RED'
         product: '@product_mug'
         currentLocale: 'en_US'
-        translations: 
-            en_US: '@product_variant_mug_red_translation_en_EN'
-            pl_PL: '@product_variant_mug_red_translation_pl_PL'
         optionValues: ['@product_option_value_color_red']
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_red_web'
@@ -124,8 +112,6 @@ Sylius\Component\Product\Model\ProductOption:
     product_option_color:
         code: 'COLOR'
         currentLocale: 'en_US'
-        translations:
-            - '@product_option_translation_en_EN'
         
 Sylius\Component\Product\Model\ProductOptionTranslation:
     product_option_translation_en_EN:
@@ -139,15 +125,11 @@ Sylius\Component\Product\Model\ProductOptionValue:
         currentLocale: 'en_US'
         fallbackLocale: 'en_US'
         option: '@product_option_color'
-        translations:
-            - '@product_option_value_translation_blue'
     product_option_value_color_red:
         code: 'COLOR_RED'
         currentLocale: 'en_US'
         fallbackLocale: 'en_US'
         option: '@product_option_color'
-        translations:
-            - '@product_option_value_translation_red'
 
 Sylius\Component\Product\Model\ProductOptionValueTranslation:
     product_option_value_translation_blue:
@@ -168,8 +150,6 @@ Sylius\Component\Product\Model\ProductAssociation:
 Sylius\Component\Product\Model\ProductAssociationType:
     product_association_type:
         code: 'similar_products'
-        translations:
-            en_US: '@product_association_type_translation'
 
 Sylius\Component\Product\Model\ProductAssociationTypeTranslation:
     product_association_type_translation:

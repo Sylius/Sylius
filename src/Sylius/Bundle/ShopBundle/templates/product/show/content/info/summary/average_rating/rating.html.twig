@@ -1,0 +1,5 @@
+{% import '@SyliusShop/shared/macro/rating.html.twig' as rating %}
+
+<div class="col-md-auto" {{ sylius_test_html_attribute('average-rating', hookable_metadata.context.product.averageRating|round(2)) }}>
+    {{ rating.show(hookable_metadata.context.product.averageRating|round) }}
+</div>

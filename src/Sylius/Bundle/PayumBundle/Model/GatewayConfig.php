@@ -13,15 +13,77 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
-use Payum\Core\Model\GatewayConfig as BaseGatewayConfig;
+use Payum\Core\Security\CypherInterface;
+use Sylius\Component\Payment\Model\GatewayConfig as BaseGatewayConfig;
 
 class GatewayConfig extends BaseGatewayConfig implements GatewayConfigInterface
 {
-    /** @var int */
-    protected $id;
+    /** @var array<string, mixed> */
+    protected array $decryptedConfig = [];
 
-    public function getId(): int
+    protected bool $usePayum = true;
+
+    public function __construct()
     {
-        return $this->id;
+        parent::__construct();
+    }
+
+    public function getUsePayum(): bool
+    {
+        return $this->usePayum;
+    }
+
+    public function setUsePayum(bool $usePayum): void
+    {
+        $this->usePayum = $usePayum;
+    }
+
+    public function getConfig(): array
+    {
+        if (isset($this->config['encrypted'])) {
+            return $this->decryptedConfig;
+        }
+
+        return $this->config;
+    }
+
+    public function setConfig(array $config): void
+    {
+        $this->config = $config;
+        $this->decryptedConfig = $config;
+    }
+
+    /** This method is based on Payum\Core\Model\GatewayConfig::decrypt */
+    public function decrypt(CypherInterface $cypher): void
+    {
+        if (empty($this->config['encrypted'])) {
+            return;
+        }
+
+        foreach ($this->config as $name => $value) {
+            if ('encrypted' == $name || is_bool($value)) {
+                $this->decryptedConfig[$name] = $value;
+
+                continue;
+            }
+
+            $this->decryptedConfig[$name] = $cypher->decrypt($value);
+        }
+    }
+
+    /** This method is based on Payum\Core\Model\GatewayConfig::encrypt */
+    public function encrypt(CypherInterface $cypher): void
+    {
+        $this->decryptedConfig['encrypted'] = true;
+
+        foreach ($this->decryptedConfig as $name => $value) {
+            if ('encrypted' == $name || is_bool($value)) {
+                $this->config[$name] = $value;
+
+                continue;
+            }
+
+            $this->config[$name] = $cypher->encrypt($value);
+        }
     }
 }

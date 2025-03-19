@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Sylius\Bundle\CoreBundle\Message\ResendShipmentConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Command\ResendShipmentConfirmationEmail;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
@@ -38,7 +38,7 @@ final class ResendShipmentConfirmationEmailWithValidShipmentStateValidator exten
         }
 
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->findOneBy(['id' => $value->getShipmentId()]);
+        $shipment = $this->shipmentRepository->findOneBy(['id' => $value->shipmentId]);
         if (null === $shipment) {
             return;
         }

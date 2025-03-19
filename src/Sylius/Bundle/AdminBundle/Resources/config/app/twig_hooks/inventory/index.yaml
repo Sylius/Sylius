@@ -1,0 +1,15 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.inventory.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/index/content/header/breadcrumbs.html.twig'
+                configuration:
+                    title: 'sylius.ui.inventory'
+                priority: 0
+
+        'sylius_admin.inventory.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'sylius.ui.inventory'
+                priority: 0

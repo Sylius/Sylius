@@ -29,6 +29,12 @@ jobs:
                     -
                         base_branch: "1.14"
                         target_branch: "2.0"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "2.0-docs"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "sylius-stack"
 
         steps:
             -

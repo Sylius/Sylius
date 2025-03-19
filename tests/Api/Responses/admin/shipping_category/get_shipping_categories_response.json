@@ -10,8 +10,8 @@
             "code": "default",
             "name": "Default",
             "description": null,
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         },
         {
             "@id": "\/api\/v2\/admin\/shipping-categories\/special",
@@ -20,8 +20,8 @@
             "code": "special",
             "name": "Special",
             "description": "For special care",
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         }
     ],
     "hydra:totalItems": 2

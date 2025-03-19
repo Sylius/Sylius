@@ -24,5 +24,6 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 interface ProductVariantFactoryInterface extends FactoryInterface
 {
+    /** @return T */
     public function createForProduct(ProductInterface $product): ProductVariantInterface;
 }

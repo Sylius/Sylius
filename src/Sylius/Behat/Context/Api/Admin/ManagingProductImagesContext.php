@@ -18,22 +18,21 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverter;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductImagesContext implements Context
+final readonly class ManagingProductImagesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private \ArrayAccess $minkParameters,
-        private SectionAwareIriConverter $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -75,7 +74,7 @@ final class ManagingProductImagesContext implements Context
         $productImage = $product->getImagesByType($type)->first();
         Assert::notFalse($productImage);
 
-        $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
+        $this->removeProductImage($product->getCode(), (string) $productImage->getId());
     }
 
     /**
@@ -89,7 +88,7 @@ final class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
+        $this->removeProductImage($product->getCode(), (string) $productImage->getId());
     }
 
     /**
@@ -103,9 +102,14 @@ final class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
-        $this->client->updateRequestData(['type' => $type]);
-        $this->client->update();
+        $builder = RequestBuilder::createPut(
+            sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
+        );
+        $builder->withContent(['type' => $type]);
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 
     /**
@@ -119,9 +123,14 @@ final class ManagingProductImagesContext implements Context
         $productImage = $product->getImages()->first();
         Assert::notFalse($productImage);
 
-        $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
-        $this->client->updateRequestData(['productVariants' => [$this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
-        $this->client->update();
+        $builder = RequestBuilder::createPut(
+            sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
+        );
+        $builder->withContent(['productVariants' => [$this->iriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
+
+        $this->client->request($builder->build());
     }
 
     /**
@@ -153,7 +162,7 @@ final class ManagingProductImagesContext implements Context
 
         Assert::notEmpty($images);
         Assert::inArray(
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($productVariant, 'admin'),
             $images[0]['productVariants'],
         );
     }
@@ -237,9 +246,8 @@ final class ManagingProductImagesContext implements Context
         ?string $type = null,
         array $variants = [],
     ): void {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createPost(
             sprintf('/api/v2/admin/products/%s/images', $product->getCode()),
-            Request::METHOD_POST,
         );
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
@@ -253,10 +261,21 @@ final class ManagingProductImagesContext implements Context
         if (0 !== count($variants)) {
             $variantsIris = [];
             foreach ($variants as $variant) {
-                $variantsIris[] = $this->sectionAwareIriConverter->getIriFromResourceInSection($variant, 'admin');
+                $variantsIris[] = $this->iriConverter->getIriFromResourceInSection($variant, 'admin');
             }
             $builder->withParameter('productVariants', $variantsIris);
         }
+
+        $this->client->request($builder->build());
+    }
+
+    private function removeProductImage(string $productCode, string $productImageId): void
+    {
+        $builder = RequestBuilder::createDelete(
+            sprintf('/api/v2/admin/products/%s/images/%s', $productCode, $productImageId),
+        );
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());
     }

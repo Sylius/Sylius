@@ -1,0 +1,8 @@
+<div class="dropdown">
+    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ 'sylius.ui.manage_variants'|trans }}
+    </button>
+    <ul class="dropdown-menu" {{ sylius_test_html_attribute('manage-variants') }}>
+        {% hook 'manage_variants' %}
+    </ul>
+</div>

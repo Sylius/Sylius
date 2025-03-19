@@ -1,0 +1,12 @@
+{% extends '@SyliusUi/layout/centered.html.twig' %}
+
+{% form_theme form '@SyliusUi/form/theme.html.twig' %}
+
+{% block content %}
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            {{ form_start(form, {'action': action|default('/'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+            {{ form_end(form, {'render_rest': true}) }}
+        </div>
+    </div>
+{% endblock %}

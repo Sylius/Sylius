@@ -15,46 +15,43 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken;
 use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(
         UserRepositoryInterface $userRepository,
         MessageBusInterface $messageBus,
         GeneratorInterface $generator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
     ): void {
-        $this->beConstructedWith($userRepository, $messageBus, $generator, $dateTimeProvider);
-    }
-
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
+        $this->beConstructedWith($userRepository, $messageBus, $generator, $clock);
     }
 
     function it_handles_request_for_password_reset_token(
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
         GeneratorInterface $generator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         MessageBusInterface $messageBus,
     ): void {
         $userRepository->findOneByEmail('test@email.com')->willReturn($shopUser);
-        $dateTimeProvider->now()->willReturn(new \DateTime());
+        $clock->now()->willReturn(new \DateTimeImmutable());
 
         $generator->generate()->willReturn('TOKEN');
         $shopUser->setPasswordResetToken('TOKEN')->shouldBeCalled();
-        $shopUser->setPasswordRequestedAt(Argument::type(\DateTime::class));
+        $shopUser->setPasswordRequestedAt(Argument::type(\DateTimeImmutable::class));
 
         $sendResetPasswordEmail = new SendResetPasswordEmail('test@email.com', 'WEB', 'en_US');
 
@@ -63,9 +60,11 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalled();
 
-        $requestResetPasswordToken = new RequestResetPasswordToken('test@email.com');
-        $requestResetPasswordToken->setChannelCode('WEB');
-        $requestResetPasswordToken->setLocaleCode('en_US');
+        $requestResetPasswordToken = new RequestResetPasswordToken(
+            channelCode: 'WEB',
+            localeCode: 'en_US',
+            email: 'test@email.com',
+        );
 
         $this($requestResetPasswordToken);
     }
@@ -78,9 +77,11 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
 
         $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
 
-        $requestResetPasswordToken = new RequestResetPasswordToken('test@email.com');
-        $requestResetPasswordToken->setChannelCode('WEB');
-        $requestResetPasswordToken->setLocaleCode('en_US');
+        $requestResetPasswordToken = new RequestResetPasswordToken(
+            channelCode: 'WEB',
+            localeCode: 'en_US',
+            email: 'test@email.com',
+        );
 
         $this($requestResetPasswordToken);
     }

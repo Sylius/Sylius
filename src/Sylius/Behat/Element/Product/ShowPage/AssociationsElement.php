@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class AssociationsElement extends Element implements AssociationsElementInterface
+class AssociationsElement extends Element implements AssociationsElementInterface
 {
     public function hasAssociation(string $associationName): bool
     {
@@ -40,11 +40,11 @@ final class AssociationsElement extends Element implements AssociationsElementIn
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'associations' => '#associations',
+            'associations' => '[data-test-associations]',
         ]);
     }
 
-    private function getAssociatedProducts(NodeElement $associations, string $name): array
+    protected function getAssociatedProducts(NodeElement $associations, string $name): array
     {
         return $associations->findAll(
             'css',

@@ -19,35 +19,35 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.listener.shipment_ship" class="Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener">
+        <service id="sylius_admin.listener.shipment_ship" class="Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener">
             <argument type="service" id="sylius_admin.mailer.shipment_email_manager" />
             <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
         </service>
-        <service id="sylius_admin.listener.shipment_ship" alias="sylius.listener.shipment_ship" />
 
-        <service id="sylius.listener.locale" class="Sylius\Bundle\AdminBundle\EventListener\LocaleListener">
+        <service id="sylius_admin.listener.locale" class="Sylius\Bundle\AdminBundle\EventListener\LocaleListener">
             <argument type="service" id="sylius.checker.locale_usage" />
 
             <tag name="kernel.event_listener" event="sylius.locale.pre_delete" method="preDelete" />
         </service>
-        <service id="sylius_admin.listener.locale" alias="sylius.listener.locale" />
 
-        <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
+        <service id="sylius_admin.listener.resource_delete_exception" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteExceptionListener">
             <argument type="service" id="router" />
             <argument type="service" id="request_stack" />
-            <tag name="kernel.event_subscriber" event="kernel.exception" />
+            <tag name="kernel.event_listener" event="kernel.exception" method="onResourceDeleteException" />
         </service>
 
-        <service id="sylius.event_subscriber.admin_cache_control_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminSectionCacheControlSubscriber">
+        <service id="sylius_admin.listener.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteListener">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onResourceDelete" />
+        </service>
+
+        <service id="sylius_admin.event_subscriber.admin_section_cache_control" class="Sylius\Bundle\AdminBundle\EventListener\AdminSectionCacheControlSubscriber">
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="kernel.event_subscriber" event="kernel.response" />
         </service>
-        <service id="sylius_admin.event_subscriber.admin_section_cache_control" alias="sylius.event_subscriber.admin_cache_control_subscriber" />
 
-        <service id="sylius.event_subscriber.admin_filter_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber">
-            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
+        <service id="sylius_admin.event_subscriber.admin_filter" class="Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber">
+            <argument type="service" id="sylius.grid.filter_storage" />
             <tag name="kernel.event_subscriber" event="kernel.request" />
         </service>
-        <service id="sylius_admin.event_subscriber.admin_filter" alias="sylius.event_subscriber.admin_filter_subscriber" />
     </services>
 </container>

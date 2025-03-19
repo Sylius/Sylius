@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+
+{% set configuration = hookable_metadata.context.resources.requestConfiguration %}
+
+{{ breadcrumbs([
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.payments'|trans, url: path('sylius_admin_payment_index'), active: false },
+    { name: configuration.request.get('paymentId'), active: true },
+    { name: 'sylius.ui.payment_requests'|trans, active: true },
+]) }}

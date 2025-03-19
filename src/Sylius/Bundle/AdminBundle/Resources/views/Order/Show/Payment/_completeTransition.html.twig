@@ -1,9 +1,0 @@
-{% if sylius_sm_can(payment, 'sylius_payment', 'complete') %}
-    <div class="ui segment">
-        <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id}) }}" method="post" novalidate>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
-            <input type="hidden" name="_method" value="PUT">
-            <button type="submit" class="ui icon labeled tiny blue fluid loadable button"><i class="check icon"></i> {{ 'sylius.ui.complete'|trans }}</button>
-        </form>
-    </div>
-{% endif %}

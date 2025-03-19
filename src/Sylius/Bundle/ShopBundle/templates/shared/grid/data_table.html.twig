@@ -1,0 +1,49 @@
+{% import '@SyliusShop/shared/macro/grid/table.html.twig' as table %}
+{% import '@SyliusShop/shared/macro/pagination.html.twig' as pagination %}
+
+{% set resources = hookable_metadata.context.resources %}
+{% set data = resources.data %}
+{% set definition = resources.definition %}
+
+{% if data|length > 0 %}
+    <div class="card">
+        <div class="card-body border-bottom py-3">
+            <div class="d-flex border-bottom pb-3">
+                {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+                    <div class="sylius-grid-nav__bulk">
+                        {% for action in definition.getEnabledActions('bulk') %}
+                            {{ sylius_grid_render_bulk_action(grid, action, null) }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
+                    <div class="ms-auto">
+                        {{ pagination.number_of_results_selector(data, definition.limits) }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap datatable" {{ sylius_test_html_attribute('grid-table') }}>
+                    <thead>
+                        <tr>
+                            {{ table.headers(resources, definition, app.request.attributes) }}
+                        </tr>
+                    </thead>
+                    <tbody {{ sylius_test_html_attribute('grid-table-body') }}>
+                        {% for row in data %}
+                            {{ table.row(resources, definition, row) }}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <div class="ms-auto">
+                    {{ pagination.simple(data) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

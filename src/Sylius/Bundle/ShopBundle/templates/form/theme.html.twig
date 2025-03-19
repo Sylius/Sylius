@@ -1,0 +1,75 @@
+{% extends 'bootstrap_5_layout.html.twig' %}
+
+{% block form_row -%}
+    {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' field mb-3'}) %}
+    {% if required %}
+        {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' required'}) %}
+    {% endif %}
+    {% if (not compound or force_error|default(false)) and not valid %}
+        {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' error'}) %}
+    {% endif %}
+    <div {% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {% if form is rootform %}
+            <div class="alert alert-danger" role="alert" {{ sylius_test_html_attribute('form-errors') }}>
+                <div class="d-flex">
+                    {%- for error in errors -%}
+                        <div class="invalid-feedback d-block" {{ sylius_test_html_attribute('validation-error') }}>
+                            {{ error.message }}
+                        </div>
+                    {%- endfor -%}
+                </div>
+            </div>
+        {% else %}
+            {%- for error in errors -%}
+                <div class="invalid-feedback d-block" {{ sylius_test_html_attribute('validation-error') }}>
+                    {{ error.message }}
+                </div>
+            {%- endfor -%}
+        {% endif %}
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block checkbox_row -%}
+    {% set classList = '' %}
+
+    {% if required %}
+        {% set classList = classList ~ 'required ' %}
+    {% endif %}
+    {% if (not compound or force_error|default(false)) and not valid %}
+        {% set classList = classList ~ 'error' %}
+    {% endif %}
+
+    <div {% if classList|length > 0 %}class="{{ classList }}"{% endif %}>
+        {{- form_widget(form) -}}
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock checkbox_row %}
+
+{% block radio_row -%}
+    <div {% if (not compound or force_error|default(false)) and not valid %}class="error"{% endif %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock radio_row %}
+
+{% block _sylius_shop_product_review_rating_widget %}
+    <div class="sylius-rating" {{ sylius_test_html_attribute('rating') }}>
+        {% for entry in form.children %}
+            <label>
+                <input type="radio" value="{{ entry.vars.value }}" id="{{ entry.vars.id }}" name="{{ entry.vars.full_name }}" {{ sylius_test_html_attribute('rating-option', entry.vars.value) }} {{ entry.vars.checked ? 'checked' }}>
+                {{ ux_icon('tabler:star-filled') }}
+            </label>
+        {% endfor %}
+    </div>
+{% endblock %}

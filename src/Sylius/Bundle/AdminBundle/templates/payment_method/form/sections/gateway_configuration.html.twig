@@ -1,0 +1,14 @@
+{% set gateway_type = hookable_metadata.context.form.vars.data.gatewayConfig.factoryName %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'sylius.ui.gateway_configuration'|trans }}</div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            {% hook 'gateway_configuration' %}
+            {% hook 'gateway_configuration' ~ '.' ~ gateway_type %}
+        </div>
+    </div>
+</div>

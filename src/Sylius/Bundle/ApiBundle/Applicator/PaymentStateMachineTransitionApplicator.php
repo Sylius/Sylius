@@ -13,28 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
-final class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
+final readonly class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
 {
-    public function __construct(private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachine)
     {
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            trigger_deprecation(
-                'sylius/api-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    StateMachineFactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public function complete(PaymentInterface $data): PaymentInterface
@@ -44,23 +31,23 @@ final class PaymentStateMachineTransitionApplicator implements PaymentStateMachi
         return $data;
     }
 
-    private function applyTransition(PaymentInterface $payment, string $transition): void
+    public function refund(PaymentInterface $data): PaymentInterface
     {
-        $stateMachine = $this->getStateMachine();
+        $this->applyTransition($data, PaymentTransitions::TRANSITION_REFUND);
 
-        if (false === $stateMachine->can($payment, PaymentTransitions::GRAPH, $transition)) {
-            throw new StateMachineTransitionFailedException('Cannot complete the payment.');
-        }
-
-        $stateMachine->apply($payment, PaymentTransitions::GRAPH, $transition);
+        return $data;
     }
 
-    private function getStateMachine(): StateMachineInterface
+    private function applyTransition(PaymentInterface $payment, string $transition): void
     {
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        if (false === $this->stateMachine->can($payment, PaymentTransitions::GRAPH, $transition)) {
+            throw new StateMachineTransitionFailedException(sprintf(
+                'Transition "%s" cannot be applied on "%s" payment.',
+                $transition,
+                $payment->getState(),
+            ));
         }
 
-        return $this->stateMachineFactory;
+        $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, $transition);
     }
 }

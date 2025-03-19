@@ -1,13 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
-jms_serializer:
-    metadata:
-        directories:
-            sylius-promotion:
-                namespace_prefix: "Sylius\\Component\\Promotion"
-                path: "@SyliusPromotionBundle/Resources/config/serializer"
-
 sylius_promotion:
     promotion_rule:
         validation_groups:

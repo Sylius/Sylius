@@ -16,6 +16,7 @@ default:
 
                 - sylius.behat.context.ui.admin.managing_tax_categories
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.admin.search_filter
 
             filters:
                 tags: "@managing_tax_categories&&@ui"

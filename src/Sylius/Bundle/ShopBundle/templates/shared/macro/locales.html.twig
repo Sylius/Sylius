@@ -1,0 +1,9 @@
+{% macro locale(code) %}
+    {% set country_code = code|sylius_locale_country|default(code) %}
+    {% if country_code == '001' %}
+        {% set split_code = code|split('_') %}
+        {{ split_code[0]|upper }} {{ 'sylius.ui.world'|trans }}
+    {% else %}
+        {{ country_code|upper }}
+    {% endif %}
+{% endmacro %}

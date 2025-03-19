@@ -75,6 +75,14 @@ final class PaymentMethodFixtureTest extends TestCase
     /**
      * @test
      */
+    public function payment_method_use_payum_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['usePayum' => true]]]], 'custom.*.usePayum');
+    }
+
+    /**
+     * @test
+     */
     public function payment_method_channels_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['channels' => ['CHN-1', 'CHN-2']]]]], 'custom.*.channels');

@@ -23,24 +23,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use ChecksCodeImmutability;
     use Toggles;
 
-    public function setPaypalGatewayUsername(string $username): void
-    {
-        $this->getDocument()->fillField('Username', $username);
-    }
-
-    public function setPaypalGatewayPassword(string $password): void
-    {
-        $this->getDocument()->fillField('Password', $password);
-    }
-
-    public function setPaypalGatewaySignature(string $signature): void
-    {
-        $this->getDocument()->fillField('Signature', $signature);
-    }
-
     public function nameIt(string $name, string $languageCode): void
     {
-        $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
+        $this->getDocument()->fillField(sprintf('sylius_admin_payment_method_translations_%s_name', $languageCode), $name);
+    }
+
+    public function enableSandboxMode(): void
+    {
+        $this->getElement('sandbox')->check();
     }
 
     public function isPaymentMethodEnabled(): bool
@@ -48,14 +38,27 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return (bool) $this->getToggleableElement()->getValue();
     }
 
+    public function isPaymentMethodInSandboxMode(): bool
+    {
+        return $this->getElement('sandbox')->hasAttribute('checked');
+    }
+
     public function isFactoryNameFieldDisabled(): bool
     {
         return 'disabled' === $this->getElement('factory_name')->getAttribute('disabled');
     }
 
+    public function isUsePayumFieldDisabled(): bool
+    {
+        return 'disabled' === $this->getElement('use_payum')->getAttribute('disabled');
+    }
+
     public function isAvailableInChannel(string $channelName): bool
     {
-        return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
+        return $this
+            ->getElement('channel', ['%channel_name%' => $channelName])
+            ->hasAttribute('checked')
+        ;
     }
 
     public function getPaymentMethodInstructions(string $language): string
@@ -73,15 +76,25 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('enabled');
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'channel' => '.checkbox:contains("%channel%") input',
-            'code' => '#sylius_payment_method_code',
-            'enabled' => '#sylius_payment_method_enabled',
-            'factory_name' => '#sylius_payment_method_gatewayConfig_factoryName',
-            'instructions' => '#sylius_payment_method_translations_%language%_instructions',
-            'name' => '#sylius_payment_method_translations_en_US_name',
+            'channel' => '[data-test-channel-name="%channel_name%"]',
+            'code' => '[data-test-code]',
+            'enabled' => '[data-test-enabled]',
+            'factory_name' => '[data-test-factory-name]',
+            'instructions' => '#sylius_admin_payment_method_translations_%language%_instructions',
+            'name' => '#sylius_admin_payment_method_translations_en_US_name',
+            'password' => '[data-test-password]',
+            'publishable_key' => '[data-test-publishable-key]',
+            'sandbox' => '[data-test-sandbox]',
+            'secret_key' => '[data-test-secret-key]',
+            'signature' => '[data-test-signature]',
+            'use_payum' => '[data-test-use-payum]',
+            'username' => '[data-test-username]',
         ]);
     }
 }

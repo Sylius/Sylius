@@ -1,0 +1,27 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.common.update':
+            content:
+                template: '@SyliusShop/account/common/content.html.twig'
+                priority: 0
+
+        'sylius_shop.account.common.update.content':
+            breadcrumbs:
+                template: '@SyliusShop/account/common/content/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/content/menu.html.twig'
+                priority: 100
+            main:
+                template: '@SyliusShop/account/common/content/main.html.twig'
+                priority: 0
+
+        'sylius_shop.account.common.update.content.menu':
+            account:
+                template: '@SyliusShop/account/common/content/menu/account.html.twig'
+                priority: 0
+
+        'sylius_shop.account.common.update.content.main':
+            header:
+                template: '@SyliusShop/account/common/content/main/header.html.twig'
+                priority: 0

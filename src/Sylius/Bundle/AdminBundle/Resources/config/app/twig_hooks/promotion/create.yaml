@@ -1,0 +1,88 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.promotion.create.content':
+            form:
+                component: 'sylius_admin:promotion:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/promotion/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'sylius_admin.promotion.create.content.form':
+            sections:
+                template: '@SyliusAdmin/promotion/form/sections.html.twig'
+                priority: 0
+        
+        'sylius_admin.promotion.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/promotion/form/sections/general.html.twig'
+                priority: 300
+            configuration:
+                template: '@SyliusAdmin/promotion/form/sections/configuration.html.twig'
+                priority: 200
+            translations:
+                template: '@SyliusAdmin/promotion/form/sections/translations.html.twig'
+                priority: 100
+            rules_and_actions:
+                template: '@SyliusAdmin/promotion/form/sections/rules_and_actions.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion.create.content.form.sections.translations':
+            label:
+                template: '@SyliusAdmin/promotion/form/sections/translations/label.html.twig'
+                priority: 0
+        
+        'sylius_admin.promotion.create.content.form.sections.general':
+            default:
+                enabled: false
+            code:
+                template: '@SyliusAdmin/promotion/form/sections/general/code.html.twig'
+                priority: 300
+            name:
+                template: '@SyliusAdmin/promotion/form/sections/general/name.html.twig'
+                priority: 200
+            description:
+                template: '@SyliusAdmin/promotion/form/sections/general/description.html.twig'
+                priority: 100
+            channels:
+                template: '@SyliusAdmin/promotion/form/sections/general/channels.html.twig'
+                priority: 0
+        
+        'sylius_admin.promotion.create.content.form.sections.configuration#left':
+            usage_limit:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/usage_limit.html.twig'
+                priority: 300
+            priority:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/priority.html.twig'
+                priority: 200
+            starts_at:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/starts_at.html.twig'
+                priority: 100
+            ends_at:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/ends_at.html.twig'
+                priority: 0
+        
+        'sylius_admin.promotion.create.content.form.sections.configuration#right':
+            header:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/header.html.twig'
+                priority: 300
+            coupon_based:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/coupon_based.html.twig'
+                priority: 200
+            exclusive:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/exclusive.html.twig'
+                priority: 100
+            applies_to_discounted:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/applies_to_discounted.html.twig'
+                priority: 0
+        
+        'sylius_admin.promotion.create.content.form.sections.rules_and_actions':
+            rules:
+                template: '@SyliusAdmin/promotion/form/sections/rules_and_actions/rules.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/promotion/form/sections/rules_and_actions/actions.html.twig'
+                priority: 0

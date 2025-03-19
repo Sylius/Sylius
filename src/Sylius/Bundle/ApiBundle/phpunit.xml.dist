@@ -15,6 +15,22 @@
         <server name="KERNEL_CLASS" value="Sylius\Bundle\ApiBundle\Application\Kernel" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
         <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/db.sql" />
+
+        <!-- ###+ doctrine/doctrine-bundle ### -->
+        <!-- Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
+        <!-- IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml -->
+        <!--  -->
+        <!-- DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db" -->
+        <!-- DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4" -->
+        <!-- DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4" -->
+        <env name="DATABASE_URL" value="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&amp;charset=utf8"/>
+        <!-- ###- doctrine/doctrine-bundle ### -->
+
+        <!-- ###+ lexik/jwt-authentication-bundle ### -->
+        <env name="JWT_SECRET_KEY" value="%kernel.project_dir%/config/jwt/private.pem"/>
+        <env name="JWT_PUBLIC_KEY" value="%kernel.project_dir%/config/jwt/public.pem"/>
+        <env name="JWT_PASSPHRASE" value="031737d91f6562433150a60376e141f3f7a581b321951d098c14b52d3fc13b56"/>
+        <!-- ###- lexik/jwt-authentication-bundle ### -->
     </php>
 
     <testsuites>

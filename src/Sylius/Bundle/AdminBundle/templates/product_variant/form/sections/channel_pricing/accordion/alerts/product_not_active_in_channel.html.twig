@@ -1,0 +1,8 @@
+{% set product_variant = hookable_metadata.context.product_variant %}
+{% set channel_code = hookable_metadata.context.channel_code %}
+
+{% if channel_code not in product_variant.product.channels|map(channel => channel.code) %}
+    <div class="alert alert-info">
+        {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
+    </div>
+{% endif %}

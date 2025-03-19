@@ -35,6 +35,7 @@ default:
 
                 - sylius.behat.context.api.email
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.checkout.order_details
                 - sylius.behat.context.api.shop.customer
                 - sylius.behat.context.api.shop.login
                 - sylius.behat.context.api.shop.order

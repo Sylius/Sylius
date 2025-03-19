@@ -1,0 +1,10 @@
+{% set order = hookable_metadata.context.resource %}
+
+<div>
+    <div>
+        <strong>{{ 'sylius.ui.ip_address'|trans }}:</strong>
+    </div>
+    <div class="mb-3" {{ sylius_test_html_attribute('ip-address') }}>
+        {{ order.customerIp|default('-') }}
+    </div>
+</div>

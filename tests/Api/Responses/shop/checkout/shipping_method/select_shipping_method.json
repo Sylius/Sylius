@@ -1,14 +1,23 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@id": "\/api\/v2\/shop\/orders\/token",
     "@type": "Order",
     "channel": "\/api\/v2\/shop\/channels\/WEB",
+    "customer": {
+        "@id": "\/api\/v2\/shop\/customers\/@integer@",
+        "@type": "Customer",
+        "email": "sylius@example.com"
+    },
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"
@@ -18,24 +27,28 @@
         "@type": "Address",
         "firstName": "John",
         "lastName": "Doe",
+        "phoneNumber": null,
+        "company": null,
         "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
         "street": "Avenue",
         "city": "New York",
         "postcode": "90000"
     },
     "payments": [
         {
-            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/payments\/@integer@",
             "@type": "Payment",
-            "id": @integer@,
+            "id": "@integer@",
             "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY"
         }
     ],
     "shipments": [
         {
-            "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/shipments\/@integer@",
             "@type": "Shipment",
-            "id": @integer@,
+            "id": "@integer@",
             "method": "\/api\/v2\/shop\/shipping-methods\/DHL"
         }
     ],
@@ -44,15 +57,15 @@
     "checkoutState": "shipping_selected",
     "paymentState": "cart",
     "shippingState": "cart",
-    "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "tokenValue": "token",
+    "number": null,
     "items": [
         {
-            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@",
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 3,
             "unitPrice": 2000,
             "originalUnitPrice": 2000,

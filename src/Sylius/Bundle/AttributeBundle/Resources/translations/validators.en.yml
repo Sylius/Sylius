@@ -5,6 +5,8 @@ sylius:
             min_length: Attribute name must be at least 1 character long.|Attribute name must be at least {{ limit }} characters long.
             max_length: Attribute name must not be longer than 1 character.|Attribute name must not be longer than {{ limit }} characters.
         code:
+            min_length: Attribute code must be at least 1 character long.|Attribute code must be at least {{ limit }} characters long.
+            max_length: Attribute code must not be longer than 1 character.|Attribute code must not be longer than {{ limit }} characters.
             not_blank: Please enter attribute code.
             regex: Attribute code can only be comprised of letters, numbers, dashes and underscores.
             unique: This code is already in use.
@@ -18,7 +20,7 @@ sylius:
             min_length: Attribute presentation must be at least 1 character long.|Attribute presentation must be at least {{ limit }} characters long.
             max_length: Attribute presentation must not be longer than 1 character.|Attribute presentation must not be longer than {{ limit }} characters.
         type:
-            unregistered: The attribute type "%type%" is not registered.
+            unregistered: 'The attribute type "%type%" is not registered. Available attribute types: %available_types%.'
     attribute_value:
         attribute:
             not_blank: Please select attribute.

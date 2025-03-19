@@ -33,53 +33,6 @@ Sylius\Component\Locale\Model\Locale:
     locale_pl_pl:
         code: pl_PL
 
-Sylius\Component\Core\Model\Taxon:
-    category_taxon:
-        code: "CATEGORY"
-        currentLocale: "en_US"
-        translations: ["@en_us_category_translation"]
-        images: ["@category_taxon_thumbnail"]
-        children: ["@mug_taxon", "@hat_taxon", "@t_shirt_taxon"]
-    mug_taxon:
-        code: "MUG"
-        currentLocale: "en_US"
-        translations: ["@en_us_mug_taxon_translation", "@de_de_mug_taxon_translation"]
-        parent: "@category_taxon"
-        position: 0
-    hat_taxon:
-        code: "HAT"
-        currentLocale: "en_US"
-        translations: ["@en_us_hat_translation", "@de_de_hat_translation"]
-        parent: "@category_taxon"
-        position: 1
-    t_shirt_taxon:
-        code: "T_SHIRTS"
-        currentLocale: "en_US"
-        translations: ["@en_us_t_shirt_taxon_translation", "@de_de_t_shirt_taxon_translation"]
-        images: ["@t_shirt_taxon_thumbnail"]
-        children: ["@men_t_shirt_taxon", "@women_t_shirt_taxon"]
-        parent: "@category_taxon"
-        position: 2
-    men_t_shirt_taxon:
-        code: "MEN_T_SHIRTS"
-        currentLocale: "en_US"
-        translations: ["@en_us_men_t_shirt_translation", "@de_de_men_t_shirt_translation"]
-        parent: "@t_shirt_taxon"
-    women_t_shirt_taxon:
-        code: "WOMEN_T_SHIRTS"
-        currentLocale: "en_US"
-        translations: ["@en_us_women_t_shirt_translation", "@de_de_women_t_shirt_translation"]
-        parent: "@t_shirt_taxon"
-        enabled: false
-    brand_taxon:
-        code: "BRAND"
-        currentLocale: "en_US"
-        translations: ["@en_us_brand_translation", "@de_de_brand_translation"]
-    yet_another_taxon:
-        code: "de?lol=xd#boom"
-        currentLocale: "en_US"
-        translations: ["@en_us_yet_another_taxon_translation"]
-
 Sylius\Component\Taxonomy\Model\TaxonTranslation:
     en_us_category_translation:
         slug: "categories"
@@ -163,6 +116,53 @@ Sylius\Component\Taxonomy\Model\TaxonTranslation:
         name: "Marken"
         description: "Einige Beschreibung Lorem ipsum dolor sit amet."
         translatable: "@brand_taxon"
+
+Sylius\Component\Core\Model\Taxon:
+    category_taxon:
+        code: "CATEGORY"
+        currentLocale: "en_US"
+        translations: ["@en_us_category_translation"]
+        images: ["@category_taxon_thumbnail"]
+        children: ["@mug_taxon", "@hat_taxon", "@t_shirt_taxon"]
+    mug_taxon:
+        code: "MUG"
+        currentLocale: "en_US"
+        translations: ["@en_us_mug_taxon_translation", "@de_de_mug_taxon_translation"]
+        parent: "@category_taxon"
+        position: 0
+    hat_taxon:
+        code: "HAT"
+        currentLocale: "en_US"
+        translations: ["@en_us_hat_translation", "@de_de_hat_translation"]
+        parent: "@category_taxon"
+        position: 1
+    t_shirt_taxon:
+        code: "T_SHIRTS"
+        currentLocale: "en_US"
+        translations: ["@en_us_t_shirt_taxon_translation", "@de_de_t_shirt_taxon_translation"]
+        images: ["@t_shirt_taxon_thumbnail"]
+        children: ["@men_t_shirt_taxon", "@women_t_shirt_taxon"]
+        parent: "@category_taxon"
+        position: 2
+    men_t_shirt_taxon:
+        code: "MEN_T_SHIRTS"
+        currentLocale: "en_US"
+        translations: ["@en_us_men_t_shirt_translation", "@de_de_men_t_shirt_translation"]
+        parent: "@t_shirt_taxon"
+    women_t_shirt_taxon:
+        code: "WOMEN_T_SHIRTS"
+        currentLocale: "en_US"
+        translations: ["@en_us_women_t_shirt_translation", "@de_de_women_t_shirt_translation"]
+        parent: "@t_shirt_taxon"
+        enabled: false
+    brand_taxon:
+        code: "BRAND"
+        currentLocale: "en_US"
+        translations: ["@en_us_brand_translation", "@de_de_brand_translation"]
+    yet_another_taxon:
+        code: "de?lol=xd#boom"
+        currentLocale: "en_US"
+        translations: ["@en_us_yet_another_taxon_translation"]
 
 Sylius\Component\Core\Model\TaxonImage:
     category_taxon_thumbnail:

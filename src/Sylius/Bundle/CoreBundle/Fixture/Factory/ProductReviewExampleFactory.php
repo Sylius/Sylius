@@ -15,10 +15,9 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Faker\Factory;
 use Faker\Generator;
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
@@ -36,24 +35,12 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         private ReviewFactoryInterface $productReviewFactory,
         private ProductRepositoryInterface $productRepository,
         private CustomerRepositoryInterface $customerRepository,
-        private FactoryInterface|StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
-
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the fourth argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    FactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public function create(array $options = []): ReviewInterface
@@ -108,21 +95,10 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
 
     private function applyReviewTransition(ReviewInterface $productReview, string $targetState): void
     {
-        $stateMachine = $this->getStateMachine();
-
-        $transition = $stateMachine->getTransitionToState($productReview, 'sylius_product_review', $targetState);
+        $transition = $this->stateMachine->getTransitionToState($productReview, ProductReviewTransitions::GRAPH, $targetState);
 
         if (null !== $transition) {
-            $stateMachine->apply($productReview, 'sylius_product_review', $transition);
+            $this->stateMachine->apply($productReview, ProductReviewTransitions::GRAPH, $transition);
         }
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }

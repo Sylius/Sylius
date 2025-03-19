@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service abstract="true" id="sylius.provider.order_pay.payment_request_pay_url" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\UrlProvider">
+            <argument type="service" id="sylius.processor.order_pay.route_parameters" />
+        </service>
+
+        <service abstract="true" id="sylius.provider.order_pay.after_pay_url" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\UrlProvider">
+            <argument type="service" id="sylius.processor.order_pay.route_parameters" />
+        </service>
+
+        <service abstract="true" id="sylius.provider.order_pay.final_url" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProvider">
+            <argument type="service" id="sylius.processor.order_pay.route_parameters" />
+        </service>
+
+        <!-- Pay -->
+
+        <service abstract="true" id="sylius.provider.order_pay.pay_response.payment_request" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider">
+            <argument type="service" id="sylius.factory.payment_request" />
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius.provider.payment_request.default_action" />
+            <argument type="service" id="sylius.provider.payment_request.default_payload" />
+            <argument type="service" id="sylius.checker.finalized_payment_request" />
+        </service>
+
+        <service abstract="true" id="sylius.provider.order_pay.pay_response.no_payment" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider" />
+
+        <!-- After pay -->
+
+        <service abstract="true" id="sylius.provider.order_pay.after_pay_response.payment_request" class="Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider">
+            <argument type="service" id="sylius.factory.payment_request" />
+            <argument type="service" id="sylius.processor.payment_request.http_response" />
+            <argument type="service" id="sylius.repository.payment_request" />
+        </service>
+    </services>
+</container>

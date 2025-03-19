@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class ThemeContext implements Context
+final readonly class ThemeContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
@@ -34,7 +34,7 @@ final class ThemeContext implements Context
     /**
      * @Given the store has :themeName theme
      */
-    public function storeHasTheme($themeName)
+    public function storeHasTheme(string $themeName): void
     {
         $this->testThemeConfigurationManager->add([
             'name' => $themeName,
@@ -46,7 +46,7 @@ final class ThemeContext implements Context
     /**
      * @Given channel :channel uses :theme theme
      */
-    public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme)
+    public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme): void
     {
         $channel->setThemeName($theme->getName());
 
@@ -60,7 +60,7 @@ final class ThemeContext implements Context
     /**
      * @Given channel :channel does not use any theme
      */
-    public function channelDoesNotUseAnyTheme(ChannelInterface $channel)
+    public function channelDoesNotUseAnyTheme(ChannelInterface $channel): void
     {
         $channel->setThemeName(null);
 
@@ -72,9 +72,9 @@ final class ThemeContext implements Context
     /**
      * @Given /^(this theme) changes homepage template contents to "([^"]+)"$/
      */
-    public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents)
+    public function themeChangesHomepageTemplateContents(ThemeInterface $theme, string $contents): void
     {
-        $this->changeTemplateContents('/templates/bundles/SyliusShopBundle/Homepage/index.html.twig', $theme, $contents);
+        $this->changeTemplateContents('/templates/bundles/SyliusShopBundle/homepage/index.html.twig', $theme, $contents);
     }
 
     /**

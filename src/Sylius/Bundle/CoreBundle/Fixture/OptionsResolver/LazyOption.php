@@ -208,7 +208,11 @@ final class LazyOption
         return $object;
     }
 
-    /** @param array<string, mixed> $criteria */
+    /**
+     * @param array<string, mixed> $criteria
+     *
+     * @return array<object>
+     */
     private static function findRandom(EntityRepository $repository, array $criteria, int $limit): array
     {
         $queryBuilder = $repository->createQueryBuilder('o');

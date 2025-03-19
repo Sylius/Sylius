@@ -1,0 +1,23 @@
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+{% props modal_id = null, type = null%}
+
+<div {{ attributes }} {{ sylius_test_html_attribute('modal', type) }}>
+    {% block trigger %}{% endblock %}
+
+    <div class="modal fade" id="{{ modal_id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            {% block content %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        {% block header %}
+                            <h1 class="modal-title py-5">{{ 'sylius.ui.are_your_sure_you_want_to_perform_this_action'|trans }}</h1>
+                        {% endblock %}
+                    </div>
+                    <div class="modal-footer">
+                        {% block footer %}{% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>

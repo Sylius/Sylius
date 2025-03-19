@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ProductBundle\Attribute\AsProductVariantResolver;
-use Sylius\Bundle\ProductBundle\Controller\ProductAttributeController;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeRepository;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeValueRepository;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -79,7 +80,8 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                         'classes' => [
                             'model' => ProductAttribute::class,
                             'interface' => ProductAttributeInterface::class,
-                            'controller' => ProductAttributeController::class,
+                            'controller' => ResourceController::class,
+                            'repository' => ProductAttributeRepository::class,
                             'form' => ProductAttributeType::class,
                         ],
                         'translation' => [

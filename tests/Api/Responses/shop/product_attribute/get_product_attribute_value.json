@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/ProductAttributeValue",
     "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
     "@type": "ProductAttributeValue",
-    "id": @integer@,
+    "id": "@integer@",
     "attribute": "\/api\/v2\/shop\/product-attributes\/dishwasher_safe",
     "localeCode": "pl_PL",
     "value": false,

@@ -4,106 +4,86 @@
 parameters:
     env(SYLIUS_API_AUTHORIZATION_HEADER): Authorization
     sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
-    sylius.api.doctrine_extension.order_shop_user_item.filter_cart.allowed_non_get_operations:
-        - "shop_select_payment_method"
-        - "shop_account_change_payment_method"
-    sylius.api.doctrine_extension.order_visitor_item.filter_cart.allowed_non_get_operations:
-        - "shop_select_payment_method"
-    sylius.api.paths_to_hide:
-        - "%sylius.security.api_route%/admin/catalog-promotion-actions/{id}"
-        - "%sylius.security.api_route%/admin/catalog-promotion-scopes/{id}"
-        - "%sylius.security.api_route%/admin/channel-pricings/{id}"
-        - "%sylius.security.api_route%/admin/promotion-actions/{id}"
-        - "%sylius.security.api_route%/admin/promotion-rules/{id}"
-        - "%sylius.security.api_route%/admin/shipping-method-rules/{id}"
-        - "%sylius.security.api_route%/admin/shop-users/{id}"
-        - "%sylius.security.api_route%/shop/adjustments/{id}"
-
-    sylius.security.api_route: "%sylius.security.new_api_route%"
-    sylius.security.api_regex: "%sylius.security.new_api_regex%"
-    sylius.security.api_admin_route: "%sylius.security.new_api_admin_route%"
-    sylius.security.api_admin_regex: "%sylius.security.new_api_admin_regex%"
-    sylius.security.api_shop_route: "%sylius.security.new_api_shop_route%"
-    sylius.security.api_shop_regex: "%sylius.security.new_api_shop_regex%"
-    sylius.security.api_shop_account_route: "%sylius.security.new_api_user_account_route%"
-    sylius.security.api_shop_account_regex: "%sylius.security.new_api_user_account_regex%"
-    
-    # Below parameters are deprecated since Sylius 1.14 and will be removed in 2.0.    
-    sylius.security.new_api_route: "/api/v2"
-    sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
-    sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
-    sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
-    sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
-    sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
-    sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
-    sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
+    sylius.api.doctrine.orm.query.extension.shop.order.filter_cart.allowed_operations:
+        - "sylius_api_shop_order_get"
+        - "sylius_api_shop_order_payment_get_configuration"
+        - "sylius_api_shop_order_payment_patch"
+        - "sylius_api_shop_order_payment_patch_account"
+    sylius.security.api_route: "/api/v2"
+    sylius.security.api_regex: "^%sylius.security.api_route%"
+    sylius.security.api_admin_route: "%sylius.security.api_route%/admin"
+    sylius.security.api_admin_regex: "^%sylius.security.api_admin_route%"
+    sylius.security.api_shop_route: "%sylius.security.api_route%/shop"
+    sylius.security.api_shop_regex: "^%sylius.security.api_shop_route%"
+    sylius.security.api_shop_account_route: "%sylius.security.api_shop_route%/account"
+    sylius.security.api_shop_account_regex: "^%sylius.security.api_shop_account_route%"
 
 sylius_api:
     filter_eager_loading_extension:
         restricted_resources:
             '%sylius.model.product.class%':
                 operations:
-                    shop_get: ~
+                    sylius_api_shop_product_get_collection: ~
     order_states_to_filter_out:
         - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
 
 api_platform:
+    serializer:
+        hydra_prefix: true
+    use_symfony_listeners: true
+    formats:
+        jsonld: ['application/ld+json']
+        json: ['application/json']
     patch_formats:
         json: ['application/merge-patch+json']
     path_segment_name_generator: api_platform.path_segment_name_generator.dash
     swagger:
         versions: [3]
         api_keys:
-            apiKey:
+            JWT:
                 name: "%sylius.api.authorization_header%"
                 type: header
     exception_to_status:
         # Default API Platform exception to status code mapping
         ApiPlatform\Exception\FilterValidationException: 400
-        ApiPlatform\Exception\InvalidArgumentException: 400
+        ApiPlatform\Metadata\Exception\InvalidArgumentException: 400
         ApiPlatform\Validator\Exception\ValidationException: 422
         Doctrine\ORM\OptimisticLockException: 409
         Symfony\Component\Serializer\Exception\ExceptionInterface: 400
 
         # Sylius exception to status code mapping
         Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException: 422
-        Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
-        Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelPricingChannelCodeMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
         Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException: 422
-        Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
-        Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
-        Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProductVariantCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
+        Sylius\Component\Payment\Exception\PaymentRequestNotFoundException: 404
+        Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException: 404
+        Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException: 422
-        Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException: 422
-        Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException: 409
-        Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved: 422
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
+        Sylius\Component\Core\Exception\ResourceDeleteException: 422
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException: 422
         Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException: 422
+        Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException: 422
         Sylius\Component\Promotion\Exception\FailedGenerationException: 422
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
         Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException: 409
         Sylius\Bundle\ApiBundle\Serializer\Exception\InvalidAmountTypeException: 400
-    collection:
-        pagination:
-            client_items_per_page: true
+    defaults:
+        normalization_context:
+            skip_null_values: false
+        pagination_client_items_per_page: true
+        extra_properties:
+            rfc_7807_compliant_errors: true
+            standard_put: false
 
 lexik_jwt_authentication:
-    token_extractors:
-        authorization_header:
-            enabled: true
-            prefix: Bearer
-            name: "%sylius.api.authorization_header%"
+    api_platform:
+        check_path: "%sylius.security.api_route%/administrators/token"
+        username_path: email
+        password_path: password

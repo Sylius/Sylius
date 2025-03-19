@@ -1,0 +1,78 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentRequest",
+    "@id": "\/api\/v2\/admin\/payments\/@integer@\/payment-requests",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 3,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/payment-requests\/@string@",
+            "@type": "PaymentRequest",
+            "hash": "@string@",
+            "state": "completed",
+            "action": "status",
+            "payment": "\/api\/v2\/admin\/payments\/@integer@",
+            "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/payment-requests\/@string@",
+            "@type": "PaymentRequest",
+            "hash": "@string@",
+            "state": "completed",
+            "action": "authorize",
+            "payment": "\/api\/v2\/admin\/payments\/@integer@",
+            "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/payment-requests\/@string@",
+            "@type": "PaymentRequest",
+            "hash": "@string@",
+            "state": "processing",
+            "action": "capture",
+            "payment": "\/api\/v2\/admin\/payments\/@integer@",
+            "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+        }
+    ],
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/payments\/@integer@\/payment-requests{?action,action[],method.code,method.code[],state,state[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "action",
+                "property": "action",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "action[]",
+                "property": "action",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "method.code",
+                "property": "method.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "method.code[]",
+                "property": "method.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "state",
+                "property": "state",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "state[]",
+                "property": "state",
+                "required": false
+            }
+        ]
+    }
+}

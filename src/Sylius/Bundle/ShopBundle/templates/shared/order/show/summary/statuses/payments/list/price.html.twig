@@ -1,0 +1,7 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set payment = hookable_metadata.context.payment %}
+
+<div class="fw-medium" {{ sylius_test_html_attribute('payment-price') }}>
+    {{ money.format(payment.amount, payment.currencyCode) }}
+</div>

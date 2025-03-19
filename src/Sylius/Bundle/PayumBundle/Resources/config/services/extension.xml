@@ -8,10 +8,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum_extension.update_payment_state" class="Sylius\Bundle\PayumBundle\Extension\UpdatePaymentStateExtension">
+        <service id="sylius_payum.extension.update_payment_state" class="Sylius\Bundle\PayumBundle\Extension\UpdatePaymentStateExtension">
             <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="payum.extension" all="true" prepend="true" />
         </service>
-        <service id="sylius_payum.extension.update_payment_state" alias="sylius.payum_extension.update_payment_state" />
     </services>
 </container>

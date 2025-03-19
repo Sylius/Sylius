@@ -1,7 +1,0 @@
-# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
-sylius_admin_get_payment_gateways:
-    path: /payment-gateways
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.payment_method::getPaymentGatewaysAction
-        template: "@SyliusAdmin/PaymentMethod/Gateways/paymentGateways.html.twig"

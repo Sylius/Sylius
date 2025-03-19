@@ -1,0 +1,7 @@
+{% macro default(data) %}
+    {% if true == data %}
+        <div class="text-center" {{ sylius_test_html_attribute('status-enabled') }}>{{ ux_icon('tabler:check', {'class': 'icon text-green'}) }}</div>
+    {% else %}
+        <div class="text-center" {{ sylius_test_html_attribute('status-disabled') }}>{{ ux_icon('tabler:x', {'class': 'icon icon-sm text-secondary'}) }}</div>
+    {% endif %}
+{% endmacro %}

@@ -31,10 +31,6 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <many-to-one field="gatewayConfig" target-entity="Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface">
-            <cascade><cascade-all/></cascade>
-            <join-column name="gateway_config_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

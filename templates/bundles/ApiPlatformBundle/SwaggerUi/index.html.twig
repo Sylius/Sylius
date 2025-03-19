@@ -73,10 +73,8 @@
             {% set active_ui = app.request.get('ui', 'swagger_ui') %}
             {% if swaggerUiEnabled and active_ui != 'swagger_ui' %}<a href="{{ path('api_doc') }}">Swagger UI</a>{% endif %}
             {% if reDocEnabled and active_ui != 're_doc' %}<a href="{{ path('api_doc', {'ui': 're_doc'}) }}">ReDoc</a>{% endif %}
-            {# FIXME: Typo in graphql => graphQl in SwaggerUiAction #}
-            {% if not graphqlEnabled %}<a href="javascript:alert('GraphQL support is not enabled, see https://api-platform.com/docs/core/graphql/')">GraphiQL</a>{% endif %}
-            {% if graphiQlEnabled %}<a href="{{ path('api_graphql_graphiql') }}">GraphiQL</a>{% endif %}
-            {% if graphQlPlaygroundEnabled %}<a href="{{ path('api_graphql_graphql_playground') }}">GraphQL Playground</a>{% endif %}
+            {% if not graphQlEnabled or graphiQlEnabled %}<a {% if graphiQlEnabled %}href="{{ path('api_graphql_graphiql') }}"{% endif %} class="graphiql-link">GraphiQL</a>{% endif %}
+            {% if graphQlPlaygroundEnabled %}<a href="{{ path('api_graphql_graphql_playground') }}">GraphQL Playground (deprecated)</a>{% endif %}
         </div>
     </div>
 </div>

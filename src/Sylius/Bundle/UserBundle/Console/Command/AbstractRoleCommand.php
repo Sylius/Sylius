@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\Console\Command;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,8 +25,17 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Webmozart\Assert\Assert;
 
-abstract class AbstractRoleCommand extends ContainerAwareCommand
+abstract class AbstractRoleCommand extends Command
 {
+    /** @param array<string, mixed> $usersConfig */
+    public function __construct(
+        private ManagerRegistry $managerRegistry,
+        private array $usersConfig,
+        ?string $name = null,
+    ) {
+        parent::__construct($name);
+    }
+
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
         // User types configured in the Bundle
@@ -82,7 +92,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $email = $input->getArgument('email');
         $securityRoles = $input->getArgument('roles');
@@ -98,7 +108,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         $this->executeRoleCommand($input, $output, $user, $securityRoles);
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**
@@ -120,7 +130,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->getContainer()->get('doctrine')->getManagerForClass($class);
+        return $this->managerRegistry->getManagerForClass($class);
     }
 
     protected function getUserRepository(string $userType): UserRepositoryInterface
@@ -136,10 +146,8 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /** @return  array<string> */
     protected function getAvailableUserTypes(): array
     {
-        $config = $this->getContainer()->getParameter('sylius.user.users');
-
         // Keep only users types which implement \Sylius\Component\User\Model\UserInterface
-        $userTypes = array_filter($config, fn (array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
+        $userTypes = array_filter($this->usersConfig, fn (array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
 
         return array_keys($userTypes);
     }
@@ -149,16 +157,13 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
      */
     protected function getUserModelClass(string $userType): string
     {
-        $config = (array) $this->getContainer()->getParameter('sylius.user.users');
-        if (empty($config[$userType]['user']['classes']['model'])) {
+        if (empty($this->usersConfig[$userType]['user']['classes']['model'])) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }
 
-        return $config[$userType]['user']['classes']['model'];
+        return $this->usersConfig[$userType]['user']['classes']['model'];
     }
 
     /** @param array<array-key, string> $securityRoles */
     abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void;
 }
-
-class_alias(AbstractRoleCommand::class, \Sylius\Bundle\UserBundle\Command\AbstractRoleCommand::class);

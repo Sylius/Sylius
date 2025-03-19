@@ -1,0 +1,13 @@
+<button class="btn primary"
+    {{ stimulus_controller('save-positions', {
+        url: path('sylius_admin_ajax_product_taxons_update_position', {taxonId: app.request.get('taxonId')}),
+        csrfToken: csrf_token('update-product-taxon-position'),
+        inputSelector: '.sylius-product-taxon-position',
+        dataKey: 'productTaxons',
+    }) }}
+        data-action="save-positions#submit"
+    {{ sylius_test_html_attribute('save-configuration-button') }}
+>
+    {{ ux_icon(action.icon|default('tabler:check'), {'class': 'icon dropdown-item-icon' }) }}
+    {{ 'sylius.ui.save_positions'|trans }}
+</button>

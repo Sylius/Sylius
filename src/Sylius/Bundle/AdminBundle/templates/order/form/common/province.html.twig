@@ -1,0 +1,9 @@
+<div class="col-12 col-md-6">
+    {% if hookable_metadata.context.form.provinceName is defined %}
+        {{ form_row(hookable_metadata.context.form.provinceName) }}
+    {% endif %}
+
+    {% if hookable_metadata.context.form.provinceCode is defined %}
+        {{ form_row(hookable_metadata.context.form.provinceCode) }}
+    {% endif %}
+</div>

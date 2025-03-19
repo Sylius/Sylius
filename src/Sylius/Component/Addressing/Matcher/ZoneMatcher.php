@@ -18,40 +18,18 @@ use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Webmozart\Assert\Assert;
 
 final class ZoneMatcher implements ZoneMatcherInterface
 {
-    private const PRIORITIES = [
-        ZoneInterface::TYPE_PROVINCE,
-        ZoneInterface::TYPE_COUNTRY,
-        ZoneInterface::TYPE_ZONE,
-    ];
-
     /**
-     * @param RepositoryInterface<ZoneInterface>|ZoneRepositoryInterface<ZoneInterface> $zoneRepository
+     * @param ZoneRepositoryInterface<ZoneInterface> $zoneRepository
      */
-    public function __construct(private RepositoryInterface|ZoneRepositoryInterface $zoneRepository)
+    public function __construct(private ZoneRepositoryInterface $zoneRepository)
     {
-        if (!$this->zoneRepository instanceof ZoneRepositoryInterface) {
-            trigger_deprecation(
-                'sylius/addressing',
-                '1.13',
-                'Passing an instance of "%s" as argument 1 to "%s()" is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
-                RepositoryInterface::class,
-                self::class,
-                ZoneRepositoryInterface::class,
-            );
-        }
     }
 
     public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface
     {
-        if (!$this->zoneRepository instanceof ZoneRepositoryInterface) {
-            return $this->legacyMatch($scope, $address);
-        }
-
         $zoneByProvince = $this->zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_PROVINCE, $scope);
         if (null !== $zoneByProvince) {
             return $zoneByProvince;
@@ -72,10 +50,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
 
     public function matchAll(AddressInterface $address, ?string $scope = null): array
     {
-        if (!$this->zoneRepository instanceof ZoneRepositoryInterface) {
-            return $this->legacyMatchAll($scope, $address);
-        }
-
         $zones = $this->zoneRepository->findByAddress($address);
         $zonesWithParents = $this->getZonesWithParentZones($zones);
 
@@ -96,7 +70,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
      */
     private function getZonesWithParentZones(array $zones): array
     {
-        Assert::isInstanceOf($this->zoneRepository, ZoneRepositoryInterface::class);
         $parentZones = $this->zoneRepository->findByMembers($zones);
 
         if ([] === $parentZones) {
@@ -131,53 +104,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
             default:
                 throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
         }
-    }
-
-    private function legacyMatch(?string $scope, AddressInterface $address): mixed
-    {
-        $zones = [];
-
-        foreach ($this->getZones($scope) as $zone) {
-            if ($this->addressBelongsToZone($address, $zone)) {
-                $zones[$zone->getType()] = $zone;
-            }
-        }
-
-        foreach (self::PRIORITIES as $priority) {
-            if (isset($zones[$priority])) {
-                return $zones[$priority];
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @return array<ZoneInterface>
-     */
-    private function legacyMatchAll(?string $scope, AddressInterface $address): array
-    {
-        $zones = [];
-
-        foreach ($this->getZones($scope) as $zone) {
-            if ($this->addressBelongsToZone($address, $zone)) {
-                $zones[] = $zone;
-            }
-        }
-
-        return $zones;
-    }
-
-    /**
-     * @return array<ZoneInterface>
-     */
-    private function getZones(?string $scope = null): array
-    {
-        if (null === $scope) {
-            return $this->zoneRepository->findAll();
-        }
-
-        return $this->zoneRepository->findBy(['scope' => [$scope, Scope::ALL]]);
     }
 
     private function getZoneByCode(string $code): ?ZoneInterface

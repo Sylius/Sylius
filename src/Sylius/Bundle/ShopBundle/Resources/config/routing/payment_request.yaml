@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_shop_payment_request_pay:
+    path: /pay/{hash}
+    defaults:
+        _controller: sylius_shop.controller.payment_request_pay

@@ -1,0 +1,49 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAssociationType",
+    "@id": "\/api\/v2\/admin\/product-association-types",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-association-types\/similar_products",
+            "@type": "ProductAssociationType",
+            "id": "@integer@",
+            "code": "similar_products",
+            "name": "Similar products",
+            "createdAt": "@string@",
+            "updatedAt": "@string@",
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-association-types\/similar_products\/translations\/en_US",
+                    "@type": "ProductAssociationTypeTranslation",
+                    "name": "Similar products"
+                }
+            }
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-association-types{?order[code],translations.name,code}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            }
+        ]
+    }
+}

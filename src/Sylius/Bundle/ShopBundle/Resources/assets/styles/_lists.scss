@@ -1,0 +1,19 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.list-nav {
+    li {
+        a {
+            @extend .link-reset;
+            display: inline-block;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+    }
+}

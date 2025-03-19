@@ -19,23 +19,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAssociationTypesTest extends JsonApiTestCase
 {
+    protected function setUp(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        parent::setUp();
+    }
+
     /** @test */
-    public function it_gets_product_association_type(): void
+    public function it_gets_a_product_association_type(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
+
         /** @var ProductAssociationTypeInterface $associationType */
         $associationType = $fixtures['product_association_type'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-association-types/%s', $associationType->getCode()),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+        $this->requestGet(sprintf('/api/v2/shop/product-association-types/%s', $associationType->getCode()));
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product_association/get_product_association_type_response',
-            Response::HTTP_OK,
         );
     }
 
@@ -44,14 +47,9 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-association-types/%s', 'wrong input'),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+        $this->requestGet(sprintf('/api/v2/shop/product-association-types/%s', 'wrong_code'));
 
         $response = $this->client->getResponse();
-
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 }

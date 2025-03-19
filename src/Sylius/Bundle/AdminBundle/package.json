@@ -1,0 +1,43 @@
+{
+  "name": "@sylius-ui/admin",
+  "version": "2.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusAdminBundle.git"
+  },
+  "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
+  "dependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/preset-env": "^7.25.8",
+    "@hotwired/stimulus": "^3.0.0",
+    "@popperjs/core": "^2.11.8",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/webpack-encore": "^5.0.1",
+    "@tabler/core": "~1.0.0",
+    "apexcharts": "^3.41.0",
+    "bootstrap": "^5.3.3",
+    "infinite-tree": "^1.17.1",
+    "sass": "~1.64.2",
+    "sass-loader": "^16.0.1",
+    "slugify": "^1.6",
+    "spotlight.js": "^0.7.8",
+    "stimulus-use": "^0.52",
+    "tom-select": "^2.2.2",
+    "webpack": "^5.72",
+    "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": "^20 || ^22"
+  },
+  "engineStrict": true,
+  "files": [
+    "./package.json",
+    "./README.md",
+    "./LICENSE",
+    "./index.js",
+    "./Resources/assets/"
+  ]
+}

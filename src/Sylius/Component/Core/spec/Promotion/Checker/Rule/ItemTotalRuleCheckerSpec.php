@@ -21,11 +21,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerInterface $itemTotalRuleChecker): void
-    {
-        $this->beConstructedWith($itemTotalRuleChecker);
-    }
-
     function it_is_be_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);

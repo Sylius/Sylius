@@ -28,7 +28,7 @@ ecs.php                         export-ignore
 gulpfile.babel.js               export-ignore
 Makefile                        export-ignore
 monorepo-builder.php            export-ignore
-package.json                    export-ignore
+/package.json                   export-ignore
 phparkitect.php                 export-ignore
 phpspec.yml.dist                export-ignore
 phpstan.neon.dist               export-ignore

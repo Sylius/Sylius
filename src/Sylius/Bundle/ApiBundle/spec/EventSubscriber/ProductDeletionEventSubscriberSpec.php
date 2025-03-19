@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
+use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,6 +85,6 @@ final class ProductDeletionEventSubscriberSpec extends ObjectBehavior
 
         $productInPromotionRuleChecker->isInUse($product)->willReturn(true);
 
-        $this->shouldThrow(ProductCannotBeRemoved::class)->during('protectFromRemovingProductInUseByPromotionRule', [$event]);
+        $this->shouldThrow(ResourceDeleteException::class)->during('protectFromRemovingProductInUseByPromotionRule', [$event]);
     }
 }

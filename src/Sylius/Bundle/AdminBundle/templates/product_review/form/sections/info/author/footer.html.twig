@@ -1,0 +1,8 @@
+{% set author = hookable_metadata.context.resource.author %}
+
+<div class="card-footer">
+    <div class="py-1">{{ ux_icon('tabler:mail') }} <a href="mailto:{{ author.email }}">{{ author.email }}</a></div>
+    {% if author.phoneNumber is not empty %}
+        <div class="py-1">{{ ux_icon('tabler:phone') }} {{ author.phoneNumber }}</div>
+    {% endif %}
+</div>

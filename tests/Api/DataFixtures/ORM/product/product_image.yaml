@@ -3,7 +3,7 @@ Sylius\Component\Core\Model\Product:
         code: 'MUG'
         fallbackLocale: 'en_US'
         currentLocale: 'en'
-        images: ['@product_mug_thumbnail']
+        images: ['@product_mug_thumbnail', '@product_mug_main']
     product_cap:
         code: 'CAP'
         fallbackLocale: 'en_US'
@@ -32,6 +32,10 @@ Sylius\Component\Core\Model\ProductImage:
         type: 'thumbnail'
         path: 'uo/thumbnail.jpg'
         productVariants: ['@product_variant_mug_blue']
+    product_mug_main:
+        type: 'main'
+        path: 'uo/main.jpg'
+        productVariants: ['@product_variant_mug_red']
     product_cap_banner:
         type: 'banner'
         path: 'uo/banner.jpg'

@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Adjustment",
     "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
     "@type": "Adjustment",
-    "id": @integer@,
+    "id": "@integer@",
     "order": "\/api\/v2\/admin\/orders\/token",
     "orderItem": null,
     "orderItemUnit": null,

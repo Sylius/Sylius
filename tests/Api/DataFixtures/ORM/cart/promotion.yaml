@@ -10,8 +10,6 @@ Sylius\Component\Core\Model\Promotion:
         usageLimit: 1
         used: 0
         couponBased: false
-        translations:
-            - '@promotion_50_off_en'
         actions:
             - '@action_percentage_discount_50'
         rules:

@@ -20,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ShopSecurityContext implements Context
+final readonly class ShopSecurityContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
@@ -32,6 +32,7 @@ final class ShopSecurityContext implements Context
 
     /**
      * @Given I am logged in as :email
+     * @Given the customer logged in as :email
      * @When I log in as :email
      */
     public function iAmLoggedInAs(string $email): void

@@ -11,35 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Tests\Api\Shop;
+namespace Api\Shop;
 
-use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 final class ProductOptionValuesTest extends JsonApiTestCase
 {
     /** @test */
-    public function it_gets_product_option_value(): void
+    public function it_returns_product_option_value(): void
     {
-        $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'product/product_option.yaml',
-        ]);
+        $this->setUpDefaultGetHeaders();
 
-        /** @var ProductOptionValueInterface $productOptionValue */
-        $productOptionValue = $fixtures['product_option_value_color_red'];
+        $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-option-values/%s', $productOptionValue->getCode()),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+        $this->requestGet('/api/v2/shop/product-options/COLOR/values/COLOR_RED');
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/product_option/get_product_option_value',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('shop/product_option_value/get_product_option_value');
     }
 }

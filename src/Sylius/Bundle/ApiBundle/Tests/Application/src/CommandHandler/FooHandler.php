@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Application\CommandHandler;
 
 use Sylius\Bundle\ApiBundle\Application\Command\FooCommand;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class FooHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class FooHandler
 {
     public function __invoke(FooCommand $command): void
     {

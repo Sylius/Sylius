@@ -38,7 +38,7 @@ final class KernelRequestEventSubscriberSpec extends ObjectBehavior
         $this->validateApi(new RequestEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
         ));
     }
 
@@ -61,7 +61,7 @@ final class KernelRequestEventSubscriberSpec extends ObjectBehavior
                     new RequestEvent(
                         $kernel->getWrappedObject(),
                         $request->getWrappedObject(),
-                        HttpKernelInterface::MASTER_REQUEST,
+                        HttpKernelInterface::MAIN_REQUEST,
                     ),
                 ],
             )
@@ -82,7 +82,7 @@ final class KernelRequestEventSubscriberSpec extends ObjectBehavior
         $this->validateApi(new RequestEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
         ));
     }
 }

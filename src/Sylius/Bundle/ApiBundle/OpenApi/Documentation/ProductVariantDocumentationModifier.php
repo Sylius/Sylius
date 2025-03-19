@@ -22,29 +22,51 @@ final class ProductVariantDocumentationModifier implements DocumentationModifier
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        if (!isset($schemas['ProductVariant.jsonld-shop.product_variant.read'])) {
-            return $docs;
+        $schemasToBeUpdated = [
+            'ProductVariant-sylius.shop.product_variant.index',
+            'ProductVariant-sylius.shop.product_variant.show',
+            'ProductVariant.jsonld-sylius.shop.product_variant.index',
+            'ProductVariant.jsonld-sylius.shop.product_variant.show',
+        ];
+
+        foreach ($schemasToBeUpdated as $schemaToBeUpdated) {
+            if (!isset($schemas[$schemaToBeUpdated])) {
+                continue;
+            }
+
+            $schemas[$schemaToBeUpdated]['properties']['inStock'] = [
+                'type' => 'boolean',
+                'readOnly' => true,
+            ];
+
+            $schemas[$schemaToBeUpdated]['properties']['price'] = [
+                'type' => 'integer',
+                'readOnly' => true,
+                'default' => 0,
+            ];
+
+            $schemas[$schemaToBeUpdated]['properties']['originalPrice'] = [
+                'type' => 'integer',
+                'readOnly' => true,
+                'default' => 0,
+            ];
+
+            $schemas[$schemaToBeUpdated]['properties']['lowestPriceBeforeDiscount'] = [
+                'type' => 'integer',
+                'readOnly' => true,
+                'default' => null,
+            ];
+
+            $schemas[$schemaToBeUpdated]['properties']['appliedPromotions'] = [
+                'type' => 'array',
+                'readOnly' => true,
+                'items' => [
+                    'type' => 'string',
+                    'format' => 'iri-reference',
+                ],
+            ];
         }
 
-        $schemas['ProductVariant.jsonld-shop.product_variant.read']['properties']['price'] = [
-            'type' => 'integer',
-            'readOnly' => true,
-            'default' => 0,
-        ];
-
-        $schemas['ProductVariant.jsonld-shop.product_variant.read']['properties']['inStock'] = [
-            'type' => 'boolean',
-            'readOnly' => true,
-        ];
-
-        $schemas['ProductVariant.jsonld-shop.product_variant.read']['properties']['originalPrice'] = [
-            'type' => 'integer',
-            'readOnly' => true,
-            'default' => 0,
-        ];
-
-        return $docs->withComponents(
-            $components->withSchemas($schemas),
-        );
+        return $docs->withComponents($components->withSchemas($schemas));
     }
 }

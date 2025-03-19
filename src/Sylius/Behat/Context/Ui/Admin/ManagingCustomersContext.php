@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Customer\FormElementInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Customer\IndexPageInterface as CustomerIndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
-use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -35,6 +38,7 @@ final class ManagingCustomersContext implements Context
         private ShowPageInterface $showPage,
         private IndexPageInterface $ordersIndexPage,
         private CurrentPageResolverInterface $currentPageResolver,
+        private FormElementInterface $formElement,
     ) {
     }
 
@@ -50,9 +54,9 @@ final class ManagingCustomersContext implements Context
     /**
      * @When /^I specify (?:their|his) first name as "([^"]*)"$/
      */
-    public function iSpecifyItsFirstNameAs($name)
+    public function iSpecifyItsFirstNameAs($name): void
     {
-        $this->createPage->specifyFirstName($name);
+        $this->formElement->specifyFirstName($name);
     }
 
     /**
@@ -60,7 +64,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSpecifyItsLastNameAs($name)
     {
-        $this->createPage->specifyLastName($name);
+        $this->formElement->specifyLastName($name);
     }
 
     /**
@@ -69,7 +73,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSpecifyItsEmailAs($email = null)
     {
-        $this->createPage->specifyEmail($email ?? '');
+        $this->formElement->specifyEmail($email ?? '');
     }
 
     /**
@@ -78,7 +82,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iChangeTheirEmailTo($email = null): void
     {
-        $this->updatePage->changeEmail($email ?? '');
+        $this->formElement->specifyEmail($email ?? '');
     }
 
     /**
@@ -97,7 +101,7 @@ final class ManagingCustomersContext implements Context
     public function iFilterByGroup(string ...$groupsNames): void
     {
         foreach ($groupsNames as $groupName) {
-            $this->indexPage->specifyFilterGroup($groupName);
+            $this->indexPage->setFilterGroup($groupName);
         }
 
         $this->indexPage->filter();
@@ -119,7 +123,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSelectGender($gender)
     {
-        $this->createPage->chooseGender($gender);
+        $this->formElement->chooseGender($gender);
     }
 
     /**
@@ -127,7 +131,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSelectGroup($group)
     {
-        $this->createPage->chooseGroup($group);
+        $this->formElement->chooseGroup($group);
     }
 
     /**
@@ -135,7 +139,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSpecifyItsBirthdayAs($birthday)
     {
-        $this->createPage->specifyBirthday($birthday);
+        $this->formElement->specifyBirthday($birthday);
     }
 
     /**
@@ -151,7 +155,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iTryToVerifyIt(): void
     {
-        $this->updatePage->verifyUser();
+        $this->formElement->verifyUser();
     }
 
     /**
@@ -180,7 +184,7 @@ final class ManagingCustomersContext implements Context
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
-        Assert::same($this->updatePage->getFullName(), $name);
+        Assert::same($this->formElement->getFullName(), $name);
     }
 
     /**
@@ -192,7 +196,23 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) customers in the list$/
+     * @When /^I sort customers by (ascending|descending) registration date$/
+     */
+    public function iSortCustomersByRegistrationDate(string $order): void
+    {
+        $this->sortBy($order, 'createdAt');
+    }
+
+    /**
+     * @When /^I sort customers by (ascending|descending) (email|first name|last name)$/
+     */
+    public function iSortCustomersByField(string $order, string $field): void
+    {
+        $this->sortBy($order, StringInflector::nameToCamelCase($field));
+    }
+
+    /**
+     * @Then /^I should see (\d+) customers (?:in|on) the list$/
      * @Then /^I should see a single customer on the list$/
      */
     public function iShouldSeeCustomersInTheList($amountOfCustomers = 1)
@@ -202,6 +222,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then I should see the customer :email in the list
+     * @Then I should see the customer :email on the list
      */
     public function iShouldSeeTheCustomerInTheList($email)
     {
@@ -209,12 +230,25 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Then /^the (first|last) customer should be "([^"]+)"$/
+     */
+    public function theFirstLastCustomerShouldBe(string $placement, string $email): void
+    {
+        $index = 'first' === $placement ? 0 : $this->indexPage->countItems() - 1;
+
+        Assert::same(
+            $this->indexPage->getColumnFields('email')[$index],
+            $email,
+        );
+    }
+
+    /**
      * @Then /^I should be notified that ([^"]+) is required$/
      */
-    public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
+    public function iShouldBeNotifiedThatFirstNameIsRequired(string $elementName): void
     {
         Assert::same(
-            $this->createPage->getValidationMessage($elementName),
+            $this->formElement->getValidationMessage(StringInflector::nameToLowercaseCode($elementName)),
             sprintf('Please enter your %s.', $elementName),
         );
     }
@@ -225,7 +259,7 @@ final class ManagingCustomersContext implements Context
     public function iShouldBeNotifiedThatTheElementShouldBe($elementName, $validationMessage)
     {
         Assert::same(
-            $this->updatePage->getValidationMessage($elementName),
+            $this->formElement->getValidationMessage(StringInflector::nameToLowercaseCode($elementName)),
             sprintf('%s must be %s.', ucfirst($elementName), $validationMessage),
         );
     }
@@ -245,7 +279,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iRemoveItsFirstName()
     {
-        $this->updatePage->changeFirstName('');
+        $this->formElement->specifyFirstName('');
     }
 
     /**
@@ -256,7 +290,7 @@ final class ManagingCustomersContext implements Context
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
-        Assert::eq($this->updatePage->getFirstName(), '');
+        Assert::eq($this->formElement->getFirstName(), '');
     }
 
     /**
@@ -264,7 +298,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iRemoveItsLastName()
     {
-        $this->updatePage->changeLastName('');
+        $this->formElement->specifyLastName('');
     }
 
     /**
@@ -275,7 +309,7 @@ final class ManagingCustomersContext implements Context
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
-        Assert::eq($this->updatePage->getLastName(), '');
+        Assert::eq($this->formElement->getLastName(), '');
     }
 
     /**
@@ -283,7 +317,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsNotValid()
     {
-        Assert::same($this->createPage->getValidationMessage('email'), 'This email is invalid.');
+        Assert::same($this->formElement->getValidationMessage('email'), 'This email is invalid.');
     }
 
     /**
@@ -291,7 +325,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatEmailMustBeUnique()
     {
-        Assert::same($this->createPage->getValidationMessage('email'), 'This email is already used.');
+        Assert::same($this->formElement->getValidationMessage('email'), 'This email is already used.');
     }
 
     /**
@@ -319,7 +353,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iEnableIt()
     {
-        $this->updatePage->enable();
+        $this->formElement->enable();
     }
 
     /**
@@ -327,27 +361,27 @@ final class ManagingCustomersContext implements Context
      */
     public function iDisableIt()
     {
-        $this->updatePage->disable();
+        $this->formElement->disable();
     }
 
     /**
      * @Then /^(this customer) should be enabled$/
      */
-    public function thisCustomerShouldBeEnabled(CustomerInterface $customer)
+    public function thisCustomerShouldBeEnabled(CustomerInterface $customer): void
     {
         $this->indexPage->open();
 
-        Assert::eq($this->indexPage->getCustomerAccountStatus($customer), 'Enabled');
+        Assert::true($this->indexPage->isCustomerEnabled($customer), true);
     }
 
     /**
      * @Then /^(this customer) should be disabled$/
      */
-    public function thisCustomerShouldBeDisabled(CustomerInterface $customer)
+    public function thisCustomerShouldBeDisabled(CustomerInterface $customer): void
     {
         $this->indexPage->open();
 
-        Assert::eq($this->indexPage->getCustomerAccountStatus($customer), 'Disabled');
+        Assert::eq($this->indexPage->isCustomerEnabled($customer), false);
     }
 
     /**
@@ -355,15 +389,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSpecifyItsPasswordAs($password)
     {
-        $this->createPage->specifyPassword($password);
-    }
-
-    /**
-     * @When I choose create account option
-     */
-    public function iChooseCreateAccountOption()
-    {
-        $this->createPage->selectCreateAccount();
+        $this->formElement->specifyPassword($password);
     }
 
     /**
@@ -436,14 +462,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(?:their|his) default address should be "([^"]+)"$/
-     */
-    public function hisShippingAddressShouldBe(string $defaultAddress): void
-    {
-        Assert::same($this->showPage->getDefaultAddress(), str_replace(',', '', $defaultAddress));
-    }
-
-    /**
      * @Then their default address should be :firstName :lastName, :street, :postcode :city, :country
      */
     public function theirSDefaultAddressShouldBe(
@@ -456,7 +474,7 @@ final class ManagingCustomersContext implements Context
     ): void {
         Assert::same(
             $this->showPage->getDefaultAddress(),
-            sprintf('%s %s %s %s %s %s', $firstName, $lastName, $street, $city, strtoupper($country), $postcode),
+            sprintf('%s %s, %s, %s %s, %s', $firstName, $lastName, $street, $postcode, $city, ucwords($country)),
         );
     }
 
@@ -465,7 +483,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer()
     {
-        Assert::true($this->showPage->hasAccount());
+        Assert::false($this->showPage->hasAccount());
     }
 
     /**
@@ -489,7 +507,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iMakeThemSubscribedToTheNewsletter()
     {
-        $this->updatePage->subscribeToTheNewsletter();
+        $this->formElement->subscribeToTheNewsletter();
     }
 
     /**
@@ -498,7 +516,7 @@ final class ManagingCustomersContext implements Context
     public function iChangeThePasswordOfUserTo(CustomerInterface $customer, $newPassword)
     {
         $this->updatePage->open(['id' => $customer->getId()]);
-        $this->updatePage->changePassword($newPassword);
+        $this->formElement->specifyPassword($newPassword);
         $this->updatePage->saveChanges();
     }
 
@@ -507,7 +525,7 @@ final class ManagingCustomersContext implements Context
      */
     public function thisCustomerShouldBeSubscribedToTheNewsletter()
     {
-        Assert::true($this->updatePage->isSubscribedToTheNewsletter());
+        Assert::true($this->formElement->isSubscribedToTheNewsletter());
     }
 
     /**
@@ -523,10 +541,13 @@ final class ManagingCustomersContext implements Context
      */
     public function thisCustomerShouldHaveAsTheirGroup($groupName)
     {
-        /** @var UpdatePageInterface|ShowPageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->updatePage, $this->showPage]);
 
-        Assert::same($currentPage->getGroupName(), $groupName);
+        if ($currentPage instanceof ShowPageInterface) {
+            Assert::same($currentPage->getGroupName(), $groupName);
+        } else {
+            Assert::same($this->formElement->getGroupName(), $groupName);
+        }
     }
 
     /**
@@ -570,43 +591,11 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then I should not be able to specify their password
-     */
-    public function iShouldNotBeAbleToSpecifyItPassword()
-    {
-        Assert::true($this->createPage->isUserFormHidden());
-    }
-
-    /**
      * @Then I should still be on the customer creation page
      */
     public function iShouldBeOnTheCustomerCreationPage()
     {
         $this->createPage->verify();
-    }
-
-    /**
-     * @Then I should be able to select create account option
-     */
-    public function iShouldBeAbleToSelectCreateAccountOption()
-    {
-        Assert::false($this->createPage->hasCheckedCreateOption());
-    }
-
-    /**
-     * @Then I should be able to specify their password
-     */
-    public function iShouldBeAbleToSpecifyItPassword()
-    {
-        Assert::true($this->createPage->hasPasswordField());
-    }
-
-    /**
-     * @Then I should not be able to select create account option
-     */
-    public function iShouldNotBeAbleToSelectCreateAccountOption()
-    {
-        Assert::true($this->createPage->hasCheckedCreateOption());
     }
 
     /**
@@ -618,20 +607,12 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then I should not see create account option
-     */
-    public function iShouldNotSeeCreateAccountOption()
-    {
-        Assert::false($this->createPage->hasCreateOption());
-    }
-
-    /**
      * @Then /^I should be notified that the password must be at least (\d+) characters long$/
      */
     public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong($amountOfCharacters)
     {
         Assert::same(
-            $this->createPage->getValidationMessage('password'),
+            $this->formElement->getValidationMessage('password'),
             sprintf('Password must be at least %d characters long.', $amountOfCharacters),
         );
     }
@@ -645,26 +626,31 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should see that they have placed (\d+) orders? in the "([^"]+)" channel$/
+     * @Then /^I should see that they have placed (\d+) orders? in the ("[^"]+" channel)$/
      */
-    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, $channelName)
+    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, ChannelInterface $channel)
     {
-        Assert::same($this->showPage->getOrdersCountInChannel($channelName), (int) $ordersCount);
+        Assert::same($this->showPage->getOrdersCountInChannel($channel->getCode()), (int) $ordersCount);
     }
 
     /**
-     * @Then /^I should see that the overall total value of all their orders in the "([^"]+)" channel is "([^"]+)"$/
+     * @Then /^I should see that the overall total value of all their orders in the ("[^"]+" channel) is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs(ChannelInterface $channel, $ordersValue)
     {
-        Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
+        Assert::same($this->showPage->getOrdersTotalInChannel($channel->getCode()), $ordersValue);
     }
 
     /**
-     * @Then /^I should see that the average total value of their order in the "([^"]+)" channel is "([^"]+)"$/
+     * @Then /^I should see that the average total value of their order in the ("[^"]+" channel) is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs(ChannelInterface $channel, $ordersValue)
     {
-        Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
+        Assert::same($this->showPage->getAverageTotalInChannel($channel->getCode()), $ordersValue);
+    }
+
+    private function sortBy(string $order, string $field): void
+    {
+        $this->indexPage->sortBy($field, str_starts_with($order, 'de') ? 'desc' : 'asc');
     }
 }

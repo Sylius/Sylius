@@ -1,0 +1,22 @@
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
+
+{% set variant = hookable_metadata.context.variant %}
+{% set product = hookable_metadata.context.product %}
+
+<td>
+    <div class="thumbnail-box">
+        <div class="thumbnail-box-image">
+            {{ image(product) }}
+        </div>
+        <div class="thumbnail-box-content">
+            <div class="mb-1">
+                <strong {{ sylius_test_html_attribute('product-variant-name') }}>{{ variant.name }}</strong>
+            </div>
+            {% if product.isSimple() %}
+                <code {{ sylius_test_html_attribute('product-code') }}>{{ product.code }}</code>
+            {% else %}
+                <code {{ sylius_test_html_attribute('product-variant-code') }}>{{ variant.code }}</code>
+            {% endif %}
+        </div>
+    </div>
+</td>

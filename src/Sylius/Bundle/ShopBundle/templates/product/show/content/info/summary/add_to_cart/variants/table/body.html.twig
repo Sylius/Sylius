@@ -1,0 +1,7 @@
+<tbody>
+    {% for key, variant in hookable_metadata.context.product.enabledVariants %}
+        <tr {{ sylius_test_html_attribute('product-variants-row') }}>
+            {% hook 'body' with { variant, key } %}
+        </tr>
+    {% endfor %}
+</tbody>

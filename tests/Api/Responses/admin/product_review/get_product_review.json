@@ -2,13 +2,13 @@
     "@context": "\/api\/v2\/contexts\/ProductReview",
     "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
     "@type": "ProductReview",
-    "id": @integer@,
+    "id": "@integer@",
     "title": "Greatest product!",
     "rating": 3,
     "comment": "I have never bought anything better.",
     "author": "\/api\/v2\/admin\/customers\/@integer@",
     "status": "accepted",
     "reviewSubject": "\/api\/v2\/admin\/products\/MUG",
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

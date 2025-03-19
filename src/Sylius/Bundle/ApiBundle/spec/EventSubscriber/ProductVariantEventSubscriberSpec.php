@@ -47,7 +47,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $variant->getWrappedObject(),
         ));
     }
@@ -68,7 +68,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $variant->getWrappedObject(),
         ));
     }
@@ -84,7 +84,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             new \stdClass(),
         ));
     }

@@ -34,6 +34,8 @@ interface ShipmentRepositoryInterface extends RepositoryInterface
 
     public function findOneByCustomer($id, CustomerInterface $customer): ?ShipmentInterface;
 
+    public function findOneByCustomerAndOrderToken(mixed $id, CustomerInterface $customer, string $token): ?ShipmentInterface;
+
     /**
      * @return array|ShipmentInterface[]
      */

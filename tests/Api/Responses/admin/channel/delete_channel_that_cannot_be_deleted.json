@@ -1,6 +1,12 @@
 {
     "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/422",
     "@type": "hydra:Error",
     "hydra:title": "An error occurred",
-    "hydra:description": "The channel cannot be deleted. At least one enabled channel is required."
+    "hydra:description": "The channel cannot be deleted. At least one enabled channel is required.",
+    "title": "An error occurred",
+    "detail": "The channel cannot be deleted. At least one enabled channel is required.",
+    "status": 422,
+    "type": "\/errors\/422",
+    "description": "The channel cannot be deleted. At least one enabled channel is required."
 }

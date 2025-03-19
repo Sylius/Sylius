@@ -3,7 +3,7 @@
     "@id": "\/api\/v2\/admin\/tax-rates\/regular_tax",
     "@type": "TaxRate",
     "zone": "\/api\/v2\/admin\/zones\/EU",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "regular_tax",
     "category": "\/api\/v2\/admin\/tax-categories\/TC2",
     "name": "Regular Tax 20%",
@@ -12,6 +12,6 @@
     "calculator": "default",
     "startDate": null,
     "endDate": null,
-    "createdAt": @datetime@,
-    "updatedAt": @datetime@
+    "createdAt": "@datetime@",
+    "updatedAt": "@datetime@"
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Sylius package.
+  ~
+  ~ (c) Sylius Sp. z o.o.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_shop.twig.component.cart.form"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="form.factory" />
+            <argument>%sylius.model.order.class%</argument>
+            <argument>Sylius\Bundle\ShopBundle\Form\Type\CartType</argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:cart:form" />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.cart.summary"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\SummaryComponent"
+        >
+            <argument type="service" id="sylius.repository.order" />
+
+            <tag
+                name="sylius.live_component.shop"
+                key="sylius_shop:cart:summary"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.cart.widget"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\WidgetComponent"
+        >
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.order" />
+
+            <tag
+                name="sylius.live_component.shop"
+                key="sylius_shop:cart:widget"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.cart.widget.offcanvas"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\WidgetComponent"
+        >
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.order" />
+
+            <tag
+                name="sylius.live_component.shop"
+                key="sylius_shop:cart:widget:offcanvas"
+            />
+        </service>
+    </services>
+</container>

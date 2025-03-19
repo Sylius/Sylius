@@ -17,16 +17,14 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service
-            id="Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface"
+            id="sylius.logger.price_history.price_change"
             class="Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLogger"
         >
             <argument type="service" id="sylius.factory.channel_pricing_log_entry" />
             <argument type="service" id="sylius.manager.channel_pricing_log_entry" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
-        <service id="sylius.logger.price_history.price_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface" />
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface" alias="sylius.logger.price_history.price_change" />
     </services>
 </container>

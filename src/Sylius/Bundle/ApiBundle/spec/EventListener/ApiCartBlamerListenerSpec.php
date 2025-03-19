@@ -69,7 +69,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                     $token->getWrappedObject(),
                     $request->getWrappedObject(),
                     null,
-                    'new_api_shop_user',
+                    'api_shop',
                 ),
             ])
         ;
@@ -112,7 +112,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user',
+                'api_shop',
             ),
         );
     }
@@ -141,7 +141,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user',
+                'api_shop',
             ),
         );
     }
@@ -169,7 +169,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user',
+                'api_shop',
             ),
         );
     }
@@ -195,7 +195,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user',
+                'api_shop',
             ),
         );
     }
@@ -221,7 +221,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user',
+                'api_shop',
             ),
         );
     }
@@ -247,7 +247,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user',
+                'api_shop',
             ),
         );
     }

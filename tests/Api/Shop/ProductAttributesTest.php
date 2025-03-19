@@ -21,7 +21,7 @@ final class ProductAttributesTest extends JsonApiTestCase
     /** @test */
     public function it_returns_product_attribute_with_translations_in_default_locale(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -39,7 +39,7 @@ final class ProductAttributesTest extends JsonApiTestCase
     /** @test */
     public function it_returns_product_attribute_with_translations_in_locale_from_header(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
             method: 'GET',

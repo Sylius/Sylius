@@ -1,0 +1,10 @@
+<div class="card mb-3">
+    <div class="card-header">
+        {{ 'sylius.ui.shipping_address'|trans }}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% hook 'shipping_address' with { form: hookable_metadata.context.form.shippingAddress } %}
+        </div>
+    </div>
+</div>

@@ -9,53 +9,35 @@
         <defaults public="true" />
 
         <!-- Generic -->
-        <service id="sylius.payum_action.authorize_payment" class="Sylius\Bundle\PayumBundle\Action\AuthorizePaymentAction">
-            <argument type="service" id="sylius.payment_description_provider" />
+        <service id="sylius_payum.action.authorize_payment" class="Sylius\Bundle\PayumBundle\Action\AuthorizePaymentAction">
+            <argument type="service" id="sylius_payum.provider.payment_description" />
             <tag name="payum.action" all="true" alias="sylius.authorize_payment" />
         </service>
-        <service id="sylius_payum.action.authorize_payment" alias="sylius.payum_action.authorize_payment" />
 
-        <service id="sylius.payum_action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
-            <argument type="service" id="sylius.payment_description_provider" />
+        <service id="sylius_payum.action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
+            <argument type="service" id="sylius_payum.provider.payment_description" />
             <tag name="payum.action" all="true" alias="sylius.capture_payment" />
         </service>
-        <service id="sylius_payum.action.capture_payment" alias="sylius.payum_action.capture_payment" />
 
-        <service id="sylius.payum_action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
+        <service id="sylius_payum.action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
             <tag name="payum.action" all="true" />
         </service>
-        <service id="sylius_payum.action.execute_same_request_with_payment_details" alias="sylius.payum_action.execute_same_request_with_payment_details" />
 
-        <service id="sylius.payum_action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction">
+        <service id="sylius_payum.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction">
             <tag name="payum.action" all="true" alias="sylius.resolve_next_route" />
-        </service>
-        <service id="sylius_payum.action.resolve_next_route" alias="sylius.payum_action.resolve_next_route" />
-
-        <!-- PayPal -->
-        <service id="sylius.payum_action.paypal_express_checkout.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction">
-            <argument type="service" id="sylius.generator.invoice_number.id_based" />
-            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout.convert_payment" />
-            <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
         <!-- Offline -->
-        <service id="sylius.payum_action.offline.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction">
+        <service id="sylius_payum.action.offline.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction">
             <tag name="payum.action" factory="offline" alias="sylius.offline.convert_payment" />
         </service>
-        <service id="sylius_payum.action.offline.convert_payment" alias="sylius.payum_action.offline.convert_payment" />
 
-        <service id="sylius.payum_action.offline.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">
+        <service id="sylius_payum.action.offline.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">
             <tag name="payum.action" factory="offline" alias="sylius.offline.status"/>
         </service>
-        <service id="sylius_payum.action.offline.status" alias="sylius.payum_action.offline.status" />
 
-        <service id="sylus.payum_action.offline.status" alias="sylius.payum_action.offline.status">
-            <deprecated package="sylius/payum-bundle" version="2.0">"%alias_id%" service is deprecated since Sylius 1.8 and will be removed in 2.0. Use "sylius.payum_action.offline.status" instead.</deprecated>
-        </service>
-
-        <service id="sylius.payum_action.offline.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
+        <service id="sylius_payum.action.offline.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
             <tag name="payum.action" factory="offline" alias="sylius.offline.resolve_next_route" />
         </service>
-        <service id="sylius_payum.action.offline.resolve_next_route" alias="sylius.payum_action.offline.resolve_next_route" />
     </services>
 </container>

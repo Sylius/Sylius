@@ -1,0 +1,16 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
+
+{% set channel_pricing = hookable_metadata.context.channel_pricing %}
+{% set variant = hookable_metadata.context.variant %}
+
+{% if hookable_metadata.context.channel is defined and  hookable_metadata.context.currency_code is defined%}
+    <td class="text-end" {{ sylius_test_html_attribute('lowest-price-before-the-discount', '%s.%s'|format(variant.code, hookable_metadata.context.channel.code)) }}>
+        {% if channel_pricing.lowestPriceBeforeDiscount != null %}
+            {{ money.format(channel_pricing.lowestPriceBeforeDiscount, hookable_metadata.context.currency_code) }}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+{% else %}
+    <td></td>
+{% endif %}

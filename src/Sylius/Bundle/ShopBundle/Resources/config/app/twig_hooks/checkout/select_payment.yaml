@@ -1,0 +1,25 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.checkout.select_payment':
+            content:
+                template: '@SyliusShop/checkout/common/content.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_payment.content':
+            steps:
+                template: '@SyliusShop/checkout/common/steps.html.twig'
+                priority: 100
+            form:
+                component: 'sylius_shop:checkout:payment:form'
+                props:
+                    resource: '@=_context.order'
+                    template: '@SyliusShop/checkout/select_payment/content/form.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.select_payment.content.form':
+            payments:
+                template: '@SyliusShop/checkout/select_payment/content/form/payments.html.twig'
+                priority: 100
+            navigation:
+                template: '@SyliusShop/checkout/select_payment/content/form/navigation.html.twig'
+                priority: 0

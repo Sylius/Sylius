@@ -1,0 +1,20 @@
+{% set product = hookable_metadata.context.resource %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.options'|trans }}
+        </div>
+    </div>
+    <div class="card-body" {{ sylius_test_html_attribute('options') }}>
+        {% if product.options is empty %}
+            {{ 'sylius.ui.there_are_no_options_for_this_product'|trans }}
+        {% else %}
+            {% for option in product.options %}
+                <ul>
+                    <li>{{ option.name }}</li>
+                </ul>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

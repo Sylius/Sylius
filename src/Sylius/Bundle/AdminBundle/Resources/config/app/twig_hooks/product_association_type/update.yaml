@@ -1,0 +1,32 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.product_association_type.update.content':
+            form:
+                component: 'sylius_admin:product_association_type:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'sylius_admin.product_association_type.update.content.form':
+            general:
+                template: '@SyliusAdmin/product_association_type/form/general.html.twig'
+                priority: 100
+            translations:
+                template: '@SyliusAdmin/product_association_type/form/translations.html.twig'
+                priority: 0
+            sections:
+                enabled: false
+
+        'sylius_admin.product_association_type.update.content.form.general':
+            code:
+                template: '@SyliusAdmin/product_association_type/form/general/code.html.twig'
+                priority: 0
+
+        'sylius_admin.product_association_type.update.content.form.translations':
+            name:
+                template: '@SyliusAdmin/product_association_type/form/translations/name.html.twig'
+                priority: 0

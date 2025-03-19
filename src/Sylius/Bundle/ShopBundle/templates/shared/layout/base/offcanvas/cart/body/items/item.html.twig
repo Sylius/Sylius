@@ -1,0 +1,9 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set item = hookable_metadata.context.item %}
+
+<tr>
+    <td>{{ component('sylius_shop:order_item:product_info', { item: item }) }}</td>
+    <td>{{ item.quantity }}</td>
+    <td class="text-end">{{ money.convertAndFormat(item.unitPrice) }}</td>
+</tr>

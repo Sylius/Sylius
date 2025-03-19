@@ -22,8 +22,8 @@ final class RequestFactory implements RequestFactoryInterface
     private const UPLOAD_FILE_CONTENT_TYPE = 'multipart/form-data';
 
     public function __construct(
-        private ContentTypeGuideInterface $contentTypeGuide,
-        private string $apiUrlPrefix,
+        private readonly ContentTypeGuideInterface $contentTypeGuide,
+        private readonly string $apiUrlPrefix,
     ) {
     }
 
@@ -34,9 +34,8 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $token = null,
         array $queryParameters = [],
     ): RequestInterface {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createGet(
             sprintf('%s/%s/%s%s', $this->apiUrlPrefix, $section, $resource, $this->getQueryString($queryParameters)),
-            HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
@@ -54,7 +53,7 @@ final class RequestFactory implements RequestFactoryInterface
         string $subResource,
         array $queryParameters = [],
     ): RequestInterface {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createGet(
             sprintf(
                 '%s/%s/%s/%s/%s%s',
                 $this->apiUrlPrefix,
@@ -64,7 +63,6 @@ final class RequestFactory implements RequestFactoryInterface
                 $subResource,
                 $this->getQueryString($queryParameters),
             ),
-            HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
@@ -78,9 +76,8 @@ final class RequestFactory implements RequestFactoryInterface
         string $authorizationHeader,
         ?string $token = null,
     ): RequestInterface {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createGet(
             sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
-            HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
@@ -97,9 +94,8 @@ final class RequestFactory implements RequestFactoryInterface
         string $authorizationHeader,
         ?string $token = null,
     ): RequestInterface {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createPost(
             sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
-            HttpRequest::METHOD_POST,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
         $builder->withHeader('CONTENT_TYPE', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -113,17 +109,14 @@ final class RequestFactory implements RequestFactoryInterface
 
     public function update(
         string $section,
-        string $resource,
-        string $id,
+        string $uri,
         string $authorizationHeader,
         ?string $token = null,
     ): RequestInterface {
-        $builder = RequestBuilder::create(
-            sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
-            HttpRequest::METHOD_PUT,
-        );
-        $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
-        $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide(HttpRequest::METHOD_PUT));
+        $builder = RequestBuilder::createPut(sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $uri))
+            ->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE)
+            ->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide(HttpRequest::METHOD_PUT))
+        ;
 
         if ($token) {
             $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
@@ -139,9 +132,8 @@ final class RequestFactory implements RequestFactoryInterface
         string $authorizationHeader,
         ?string $token = null,
     ): RequestInterface {
-        $builder = RequestBuilder::create(
+        $builder = RequestBuilder::createDelete(
             sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
-            HttpRequest::METHOD_DELETE,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
@@ -209,6 +201,16 @@ final class RequestFactory implements RequestFactoryInterface
         }
 
         return $builder->build();
+    }
+
+    public function default(string $section, string $url, string $method, array $queryParameters = [], array $additionalHeaders = [], ?string $token = null): RequestInterface
+    {
+        return $this->custom(
+            sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $url) . $this->getQueryString($queryParameters),
+            $method,
+            $additionalHeaders,
+            $token,
+        );
     }
 
     private function getQueryString(array $queryParameters): string

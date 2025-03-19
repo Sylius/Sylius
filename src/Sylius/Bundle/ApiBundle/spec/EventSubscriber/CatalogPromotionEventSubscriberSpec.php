@@ -41,7 +41,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $catalogPromotion->getWrappedObject(),
         ));
     }
@@ -59,7 +59,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $catalogPromotion->getWrappedObject(),
         ));
     }
@@ -74,7 +74,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             new \stdClass(),
         ));
     }
@@ -92,7 +92,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $catalogPromotion->getWrappedObject(),
         ));
     }

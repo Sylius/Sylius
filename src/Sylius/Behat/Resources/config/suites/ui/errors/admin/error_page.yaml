@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        ui_admin_error_page:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
+
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.currency
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.product
+
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.calendar
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.product
+
+                - sylius.behat.context.ui.admin.product_showpage
+                - sylius.behat.context.ui.admin.error_page
+
+            filters:
+                tags: "@admin_error_page&&@ui"

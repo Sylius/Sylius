@@ -13,18 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
-use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    public function getCouponCodes(): iterable
+    public function filterByCode(string $code): void
     {
-        $codeCells = $this->getDocument()->findAll('css', '.sylius-grid-wrapper tbody tr td:nth-child(2)');
+        $this->getElement('code_filter')->setValue($code);
+    }
 
-        /** @var NodeElement $codeCell */
-        foreach ($codeCells as $codeCell) {
-            yield $codeCell->getText();
-        }
+    public function getUsedNumber(string $promotionCouponCode): int
+    {
+        $used = $this->getCellForResource('used', ['code' => $promotionCouponCode]);
+
+        return (int) $used->find('css', '[data-test-used]')->getText();
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code_filter' => '#criteria_code_value',
+        ]);
     }
 }

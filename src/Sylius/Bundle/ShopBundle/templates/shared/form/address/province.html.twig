@@ -1,0 +1,9 @@
+{% set form = hookable_metadata.context.form %}
+
+<div>
+    {% if form.provinceCode is defined %}
+        {{ form_row(form.provinceCode, sylius_test_form_attribute('province-code')|sylius_merge_recursive( {'attr': {'class': ''}})) }}
+    {% elseif form.provinceName is defined %}
+        {{ form_row(form.provinceName, sylius_test_form_attribute('province-name')) }}
+    {% endif %}
+</div>

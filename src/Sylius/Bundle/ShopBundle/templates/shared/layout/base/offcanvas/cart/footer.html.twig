@@ -1,0 +1,16 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set cart = hookable_metadata.context.cart %}
+
+<div class="p-3 pb-5">
+    <div class="offcanvas-footer">
+        <div class="d-flex justify-content-between py-4">
+            <div class="h5">{{ 'sylius.ui.subtotal'|trans }}:</div>
+            <div class="h5 text-end">{{ money.convertAndFormat(cart.itemsTotal) }}</div>
+        </div>
+        <div class="d-grid gap-2 pb-3">
+            <a href="{{ path('sylius_shop_cart_summary') }}" class="btn btn-light" type="button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
+            <a href="{{ path('sylius_shop_checkout_start') }}" class="btn btn-primary" type="button">{{ 'sylius.ui.checkout'|trans }}</a>
+        </div>
+    </div>
+</div>

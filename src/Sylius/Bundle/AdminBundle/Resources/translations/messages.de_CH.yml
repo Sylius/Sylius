@@ -64,8 +64,6 @@ sylius:
         minimum_price_details: Mindestpreis - die Schwelle, unter die der aktuelle Preis weder durch Katalog- noch Warenkorb-Werbeaktionen verringert werden kann. Verwenden Sie dieses Feld, um Rentabilität Ihre Verkäufe zu sichern.
         gateway:
             no_sca_support_notice: Das gewählte Zahlungs-Gateway unterstützt kein SCA.
-            pay_pal_express_checkout_deprecation_notice: >
-                PayPal Express Checkout ist veraltet. Bitte verwenden Sie die neue <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Handelsplattform</a> Integration.
         sales_summary: Verkaufszusammenfassung
         statistics:
             day: Tag

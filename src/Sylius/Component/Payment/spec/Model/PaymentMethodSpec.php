@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 final class PaymentMethodSpec extends ObjectBehavior
@@ -115,5 +116,11 @@ final class PaymentMethodSpec extends ObjectBehavior
     function it_has_no_last_update_date_by_default(): void
     {
         $this->getUpdatedAt()->shouldReturn(null);
+    }
+
+    function its_gateway_config_is_mutable(GatewayConfigInterface $gatewayConfig): void
+    {
+        $this->setGatewayConfig($gatewayConfig);
+        $this->getGatewayConfig()->shouldReturn($gatewayConfig);
     }
 }

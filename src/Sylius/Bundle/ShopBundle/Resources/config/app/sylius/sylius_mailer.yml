@@ -5,23 +5,19 @@ sylius_mailer:
     emails:
         contact_request:
             subject: sylius.emails.contact_request.subject
-            template: "@SyliusShop/Email/contactRequest.html.twig"
+            template: "@SyliusShop/email/contact_request.html.twig"
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject
-            template: "@SyliusShop/Email/orderConfirmation.html.twig"
+            template: "@SyliusShop/email/order_confirmation.html.twig"
         user_registration:
             subject: sylius.emails.user_registration.subject
-            template: "@SyliusShop/Email/userRegistration.html.twig"
+            template: "@SyliusShop/email/user_registration.html.twig"
         password_reset:
             subject: sylius.emails.user.password_reset.subject
-            template: "@SyliusShop/Email/passwordReset.html.twig"
+            template: "@SyliusShop/email/password_reset.html.twig"
         reset_password_token:
             subject: sylius.emails.user.password_reset.subject
-            template: "@SyliusShop/Email/passwordReset.html.twig"
-        # This email is deprecated since Sylius 1.14 and will be removed in 2.0.
-        reset_password_pin:
-            subject: sylius.emails.user.password_reset.subject
-            template: "@SyliusShop/Email/passwordReset.html.twig"
+            template: "@SyliusShop/email/password_reset.html.twig"
         verification_token:
             subject: sylius.emails.user.verification_token.subject
-            template: "@SyliusShop/Email/verification.html.twig"
+            template: "@SyliusShop/email/verification.html.twig"

@@ -17,5 +17,5 @@ interface TaxonomyElementInterface
 {
     public function getProductMainTaxon(): string;
 
-    public function hasProductTaxon(string $taxonName): bool;
+    public function getProductTaxons(): string;
 }

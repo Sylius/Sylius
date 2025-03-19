@@ -1,0 +1,7 @@
+{% if data is not null %}
+    <div class="fw-medium">{{ data }}</div>
+{% else %}
+    <span class="text-danger" {{ sylius_test_html_attribute('missing-translation-paragraph') }}>
+        {{ ux_icon('tabler:exclamation-circle') }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
+    </span>
+{% endif %}

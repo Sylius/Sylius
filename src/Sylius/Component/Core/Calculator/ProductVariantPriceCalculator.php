@@ -23,16 +23,8 @@ use Webmozart\Assert\Assert;
 final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
     public function __construct(
-        private ?ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker = null,
+        private ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker,
     ) {
-        if ($this->productVariantLowestPriceDisplayChecker === null) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                'Not passing a $productVariantLowestPriceDisplayChecker to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     public function calculate(ProductVariantInterface $productVariant, array $context): int
@@ -84,10 +76,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
             throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $channel);
         }
 
-        if (
-            $this->productVariantLowestPriceDisplayChecker === null ||
-            !$this->productVariantLowestPriceDisplayChecker->isLowestPriceDisplayable($productVariant, $context)
-        ) {
+        if (!$this->productVariantLowestPriceDisplayChecker->isLowestPriceDisplayable($productVariant, $context)) {
             return null;
         }
 

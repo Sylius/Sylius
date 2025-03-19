@@ -1,0 +1,17 @@
+<div class="card mb-3" data-fullscreen-container="orders">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.items'|trans }}
+        </div>
+        <div class="card-actions btn-actions">
+            <button type="button" class="btn-action" data-fullscreen-btn="orders" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.full_screen'|trans }}">
+                {{ ux_icon('tabler:maximize') }}
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-vcenter card-table" {{ sylius_test_html_attribute('table-items') }}>
+            {% hook 'items' %}
+        </table>
+    </div>
+</div>

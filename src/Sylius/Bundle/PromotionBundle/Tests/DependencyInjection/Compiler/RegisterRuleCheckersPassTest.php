@@ -26,7 +26,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
      */
     public function it_registers_collected_rule_checkers_in_the_registry(): void
     {
-        $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
+        $this->setDefinition('sylius.registry.promotion.rule_checker', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
         $this->setDefinition(
             'checker',
@@ -38,12 +38,12 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.registry_promotion_rule_checker',
+            'sylius.registry.promotion.rule_checker',
             'register',
             ['custom', new Reference('checker')],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.registry_promotion_rule_checker',
+            'sylius.registry.promotion.rule_checker',
             'register',
             ['another_custom', new Reference('checker')],
         );
@@ -54,7 +54,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
      */
     public function it_creates_parameter_which_maps_rule_type_to_label(): void
     {
-        $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
+        $this->setDefinition('sylius.registry.promotion.rule_checker', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
         $this->setDefinition(
             'checker',
@@ -76,7 +76,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
      */
     public function it_registers_collected_rule_checkers_form_types_in_the_registry(): void
     {
-        $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
+        $this->setDefinition('sylius.registry.promotion.rule_checker', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
         $this->setDefinition(
             'checker',

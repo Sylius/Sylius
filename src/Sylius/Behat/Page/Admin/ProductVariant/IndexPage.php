@@ -55,15 +55,26 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     public function countItemsWithNoName(): int
     {
-        return count($this->getElement('table')->findAll('css', '[data-test-missing-translation-paragraph]'));
+        return count($this->getElement('table')->findAll('css', '[data-test-missing-translation]'));
+    }
+
+    public function hasGenerateVariantsButton(): bool
+    {
+        return $this->hasElement('generate_variants_button');
+    }
+
+    public function goToVariantGeneration(): void
+    {
+        $this->getElement('generate_variants_button')->click();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'on_hand_quantity' => '.onHand[data-product-variant-id="%id%"]',
-            'on_hold_quantity' => '.onHold[data-product-variant-id="%id%"]',
-            'save_configuration_button' => '.sylius-save-position',
+            'generate_variants_button' => '[data-test-generate]',
+            'on_hand_quantity' => '[data-test-on-hand][data-product-variant-id="%id%"]',
+            'on_hold_quantity' => '[data-test-on-hold][data-product-variant-id="%id%"]',
+            'save_configuration_button' => '[data-test-save-configuration-button]',
         ]);
     }
 }

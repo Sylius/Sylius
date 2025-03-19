@@ -1,6 +1,12 @@
 {
     "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/400",
     "@type": "hydra:Error",
     "hydra:title": "An error occurred",
-    "hydra:description": "Amount must be a numeric value."
+    "hydra:description": "Amount must be a numeric value.",
+    "status": 400,
+    "type": "\/errors\/400",
+    "title": "An error occurred",
+    "detail": "Amount must be a numeric value.",
+    "description": "Amount must be a numeric value."
 }

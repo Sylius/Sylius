@@ -1,0 +1,5 @@
+{% set form = hookable_metadata.context.form.countryCode %}
+
+<div class="mb-3">
+    {{ form_row(form, sylius_test_form_attribute(hookable_medatada.context.type|default(null) ~ 'country')) }}
+</div>

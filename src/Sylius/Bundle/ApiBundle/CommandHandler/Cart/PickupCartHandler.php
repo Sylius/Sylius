@@ -24,10 +24,11 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final class PickupCartHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class PickupCartHandler
 {
     public function __construct(
         private OrderFactoryInterface $cartFactory,
@@ -42,13 +43,13 @@ final class PickupCartHandler implements MessageHandlerInterface
 
     public function __invoke(PickupCart $pickupCart): OrderInterface
     {
-        $channel = $this->channelRepository->findOneByCode($pickupCart->getChannelCode());
+        $channel = $this->channelRepository->findOneByCode($pickupCart->channelCode);
         Assert::isInstanceOf($channel, ChannelInterface::class);
 
         $customer = null;
-        if ($pickupCart->getEmail() !== null) {
+        if ($pickupCart->email !== null) {
             /** @var CustomerInterface|null $customer */
-            $customer = $this->customerRepository->findOneBy(['email' => $pickupCart->getEmail()]);
+            $customer = $this->customerRepository->findOneBy(['email' => $pickupCart->email]);
         }
 
         if (null === $customer) {
@@ -74,7 +75,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         $cart = $this->cartFactory->createNewCart(
             $channel,
             $customer,
-            $this->getLocaleCode($pickupCart->getLocaleCode(), $channel),
+            $this->getLocaleCode($pickupCart->localeCode, $channel),
             $pickupCart->tokenValue ?? $this->generateTokenValue(),
         );
 

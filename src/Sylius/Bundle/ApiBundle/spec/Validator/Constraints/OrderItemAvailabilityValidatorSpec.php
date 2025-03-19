@@ -48,7 +48,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new CompleteOrder(),
+                new CompleteOrder('TOKEN'),
                 new class() extends Constraint {
                 },
             ])
@@ -64,8 +64,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         Collection $orderItems,
     ): void {
-        $command = new CompleteOrder();
-        $command->setOrderTokenValue('cartToken');
+        $command = new CompleteOrder(orderTokenValue: 'cartToken');
 
         $orderRepository->findOneBy(['tokenValue' => 'cartToken'])->willReturn($order);
 
@@ -96,8 +95,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         Collection $orderItems,
     ): void {
-        $command = new CompleteOrder();
-        $command->setOrderTokenValue('cartToken');
+        $command = new CompleteOrder(orderTokenValue: 'cartToken');
 
         $orderRepository->findOneBy(['tokenValue' => 'cartToken'])->willReturn($order);
 

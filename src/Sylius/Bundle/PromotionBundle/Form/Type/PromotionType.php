@@ -52,6 +52,7 @@ final class PromotionType extends AbstractResourceType
             ])
             ->add('appliesToDiscounted', CheckboxType::class, [
                 'label' => 'sylius.form.promotion.applies_to_discounted',
+                'help' => 'sylius.form.promotion.applies_to_discounted_details',
             ])
             ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion.usage_limit',

@@ -111,6 +111,7 @@ final class CustomerContext implements Context
 
     /**
      * @Given there is a customer :name with an email :email
+     * @Given there is also a customer :name with an email :email
      */
     public function theStoreHasCustomerAccountWithEmailAndName(string $name, string $email): void
     {

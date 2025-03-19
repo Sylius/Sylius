@@ -1,0 +1,34 @@
+{% set product_taxons_form = form.productTaxons %}
+
+<div {{ sylius_test_html_attribute('product-taxons') }}>
+    {{ form_label(product_taxons_form) }}
+    <div {{ stimulus_controller('product-taxon-tree', {treeData: this.tree, autoOpen: hookableMetadata.configuration.auto_open}) }}>
+        {{ form_widget(product_taxons_form, {attr: {'data-product-taxon-tree-target': 'productTaxons'}}) }}
+
+        <div class="pb-5">
+            <div class="input-group input-group-flat mb-4">
+                <input class="form-control" placeholder="{{ 'sylius.ui.filter'|trans }}" type="text"
+                       data-product-taxon-tree-target="filter"
+                       data-action="input->product-taxon-tree#filter"
+                    {{ sylius_test_html_attribute('product-taxons-filter') }}
+                />
+                <span class="input-group-text">
+                        <a class="input-group-link link-reset" type="button" data-action="product-taxon-tree#clearFilter" >{{ 'sylius.ui.clear'|trans }}</a>
+                    </span>
+            </div>
+            <div class="d-flex flex-column gap-1">
+                <div class="d-flex gap-3 align-items-center">
+                    <a class="d-flex align-items-center gap-1 text-nowrap link-reset fs-5" type="button" data-action="product-taxon-tree#checkAll" {{ sylius_test_html_attribute('product-taxons-check-all') }}>
+                        {{ ux_icon('tabler:copy-check', {'class': 'icon m-0'}) }}
+                        {{ 'sylius.ui.check_all'|trans }}
+                    </a>
+                    <a class="d-flex align-items-center gap-1 text-nowrap link-reset fs-5" type="button" data-action="product-taxon-tree#uncheckAll" {{ sylius_test_html_attribute('product-taxons-uncheck-all') }}>
+                        {{ ux_icon('tabler:copy-x', {'class': 'icon m-0'}) }}
+                        {{ 'sylius.ui.uncheck_all'|trans }}
+                    </a>
+                </div>
+                <div data-product-taxon-tree-target="tree"></div>
+            </div>
+        </div>
+    </div>
+</div>

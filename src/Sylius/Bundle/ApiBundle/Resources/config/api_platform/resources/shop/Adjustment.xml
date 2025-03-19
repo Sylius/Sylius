@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+        xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.adjustment.class%">
+        <operations>
+            <operation
+                name="sylius_api_shop_adjustment_get"
+                class="ApiPlatform\Metadata\NotExposed"
+                uriTemplate="/shop/adjustments/{id}"
+            />
+        </operations>
+    </resource>
+
+    <resource
+        class="%sylius.model.adjustment.class%"
+        uriTemplate="/shop/orders/{tokenValue}/adjustments"
+        security="is_granted('SYLIUS_ORDER_ADJUSTMENT', object)"
+    >
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="adjustments" />
+        </uriVariables>
+        <operations>
+            <operation
+                name="sylius_api_shop_order_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.shop.order.adjustment.collection"
+            >
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource
+        class="%sylius.model.adjustment.class%"
+        uriTemplate="/shop/orders/{tokenValue}/items/{id}/adjustments"
+        security="is_granted('SYLIUS_ORDER_ADJUSTMENT', object)"
+    >
+        <uriVariables>
+            <uriVariable parameterName="id" fromClass="%sylius.model.order_item.class%" fromProperty="adjustments" />
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="items" />
+        </uriVariables>
+        <operations>
+            <operation
+                name="sylius_api_shop_order_order_item_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.shop.order.order_item.adjustment.collection"
+            >
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

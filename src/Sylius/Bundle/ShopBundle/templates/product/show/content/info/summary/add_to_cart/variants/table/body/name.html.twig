@@ -1,0 +1,15 @@
+{% set variant = hookable_metadata.context.variant %}
+{% set product = hookable_metadata.context.product %}
+
+<td>
+    {{ variant.name|default(variant.descriptor) }}
+    {% if product.hasOptions() %}
+        <div>
+            {% for option_value in variant.optionValues %}
+                <div>
+                    {{ option_value.value }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</td>

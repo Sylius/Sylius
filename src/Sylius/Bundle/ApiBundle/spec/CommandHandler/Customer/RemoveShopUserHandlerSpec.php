@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Customer;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Customer\RemoveShopUser;
 use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -21,6 +22,8 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class RemoveShopUserHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     function let(UserRepositoryInterface $userRepository): void
     {
         $this->beConstructedWith($userRepository);

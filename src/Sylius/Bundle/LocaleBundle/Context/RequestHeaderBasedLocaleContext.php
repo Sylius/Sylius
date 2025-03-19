@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
 {
-    private const NO_CODE_VALID_STUB = 'NO_CODE_VALID_STUB';
+    private const NO_CODE_VALID_STUB = 'no_Code';
 
     /** @var array<array-key, string> */
     private array $availableLocalesCodes = [];

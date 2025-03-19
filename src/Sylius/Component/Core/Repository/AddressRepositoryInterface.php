@@ -13,16 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Repository;
 
+use Sylius\Component\Addressing\Model\AddressInterface as BaseAddressInterface;
+use Sylius\Component\Addressing\Repository\AddressRepositoryInterface as BaseAddressRepositoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
- * @template T of AddressInterface
- *
- * @extends RepositoryInterface<T>
+ * @extends BaseAddressRepositoryInterface<BaseAddressInterface>
  */
-interface AddressRepositoryInterface extends RepositoryInterface
+interface AddressRepositoryInterface extends BaseAddressRepositoryInterface
 {
     /**
      * @return array|AddressInterface[]

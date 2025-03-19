@@ -26,19 +26,34 @@ use Webmozart\Assert\Assert;
 
 final class AddingEligibleProductVariantToCartValidator extends ConstraintValidator
 {
+    /**
+     * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
-        private ProductVariantRepositoryInterface $productVariantRepository,
-        private OrderRepositoryInterface $orderRepository,
-        private AvailabilityCheckerInterface $availabilityChecker,
+        private readonly ProductVariantRepositoryInterface $productVariantRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly AvailabilityCheckerInterface $availabilityChecker,
     ) {
     }
 
+    /**
+     * @param AddItemToCart $value
+     * @param AddingEligibleProductVariantToCart $constraint
+     */
     public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, AddItemToCart::class);
 
         /** @var AddingEligibleProductVariantToCart $constraint */
         Assert::isInstanceOf($constraint, AddingEligibleProductVariantToCart::class);
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($value->orderTokenValue);
+
+        if ($cart === null) {
+            return;
+        }
 
         /** @var ProductVariantInterface|null $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);
@@ -71,10 +86,6 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
 
             return;
         }
-
-        /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
-        Assert::notNull($cart);
 
         if (!$this->availabilityChecker->isStockSufficient(
             $productVariant,

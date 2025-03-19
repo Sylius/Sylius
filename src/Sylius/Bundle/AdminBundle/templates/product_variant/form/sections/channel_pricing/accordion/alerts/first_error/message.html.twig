@@ -1,0 +1,6 @@
+{% set channel_pricing_form = hookable_metadata.context.channel_pricing_form %}
+{% set first_error = channel_pricing_form.vars.errors.form.parent.errors|first %}
+
+<div>
+    {{ first_error.messageTemplate|trans({}, 'validators') }}
+</div>

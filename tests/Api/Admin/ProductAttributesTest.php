@@ -23,7 +23,6 @@ use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextareaAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +30,13 @@ use Symfony\Component\HttpFoundation\Response;
 final class ProductAttributesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpAdminContext();
+    }
 
     /** @test */
     public function it_gets_product_attributes(): void
@@ -122,6 +128,32 @@ final class ProductAttributesTest extends JsonApiTestCase
             'admin/product_attribute/post_text_product_attribute_response',
             Response::HTTP_CREATED,
         );
+    }
+
+    /** @test */
+    public function it_creates_another_product_attribute_on_specified_position(): void
+    {
+        $this->setUpDefaultPostHeaders();
+
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_attribute.yaml']);
+
+        $this->requestPost('api/v2/admin/product-attributes', [
+            'code' => 'material',
+            'position' => 3,
+            'configuration' => [
+                'min' => 5,
+                'max' => 255,
+            ],
+            'type' => TextAttributeType::TYPE,
+            'translatable' => true,
+            'translations' => [
+                'en_US' => [
+                    'name' => 'Material',
+                ],
+            ],
+        ]);
+
+        $this->assertResponseCreated('admin/product_attribute/post_product_attribute_on_specified_position');
     }
 
     /** @test */
@@ -624,10 +656,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'position' => 0,
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf(
-                            '/api/v2/admin/product-attribute-translations/%s',
-                            $productAttribute->getTranslation('en_US')->getId(),
-                        ),
+                        '@id' => '/api/v2/admin/product-attributes/extra_info/translations/en_US',
                         'name' => 'Additional information',
                     ],
                     'pl_PL' => [
@@ -701,24 +730,5 @@ final class ProductAttributesTest extends JsonApiTestCase
             'admin/product_attribute/put_product_attribute_with_duplicate_locale_translation',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
-    }
-
-    /** @test */
-    public function it_gets_a_product_attribute_translation(): void
-    {
-        $this->setUpAdminContext();
-        $this->setUpDefaultGetHeaders();
-
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'product/product_attribute.yaml',
-        ]);
-
-        /** @var ProductAttributeTranslationInterface $productAttributeTranslation */
-        $productAttributeTranslation = $fixtures['product_attribute_translation_checkbox'];
-
-        $this->requestGet(uri: '/api/v2/admin/product-attribute-translations/' . $productAttributeTranslation->getId());
-
-        $this->assertResponseSuccessful('admin/product_attribute/get_product_attribute_translation_response');
     }
 }

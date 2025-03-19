@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.taxon_image.class%">
+        <operations>
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/taxons/{code}/images"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="%sylius.model.taxon.class%" fromProperty="images"/>
+                </uriVariables>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/taxons/{code}/images/{id}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="%sylius.model.taxon.class%" fromProperty="images"/>
+                    <uriVariable parameterName="id" fromClass="%sylius.model.taxon_image.class%"/>
+                </uriVariables>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/taxons/{code}/images/{id}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="%sylius.model.taxon.class%" fromProperty="images"/>
+                    <uriVariable parameterName="id" fromClass="%sylius.model.taxon_image.class%"/>
+                </uriVariables>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/taxons/{code}/images/{id}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="%sylius.model.taxon.class%" fromProperty="images"/>
+                    <uriVariable parameterName="id" fromClass="%sylius.model.taxon_image.class%"/>
+                </uriVariables>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.taxon.class%">
+        <operations>
+            <operation
+                name="sylius_api_admin_taxon_taxon_image_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/taxons/{code}/images"
+                processor="sylius_api.state_processor.admin.taxon_image.persist"
+                deserialize="false"
+            >
+                <inputFormats>
+                    <format name="multipart">multipart/form-data</format>
+                </inputFormats>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:taxon_image:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

@@ -1,0 +1,11 @@
+{% set view_options = {
+    accepted: { color: 'bg-success-lt' },
+    new: { color: '' },
+    rejected: { color: 'bg-warning-lt' },
+} %}
+
+{% set label = 'sylius.ui.' ~ data %}
+
+<span class="badge {{ view_options[data]['color'] }}">
+    {{ label|trans }}
+</span>

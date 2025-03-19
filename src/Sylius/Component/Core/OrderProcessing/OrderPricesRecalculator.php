@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
@@ -22,18 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    public function __construct(private ProductVariantPriceCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator)
     {
-        if ($this->productVariantPriceCalculator instanceof ProductVariantPriceCalculatorInterface) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.11',
-                'Passing a "%s" to "%s" constructor is deprecated and will be prohibited in 2.0. Use "%s" instead.',
-                ProductVariantPriceCalculatorInterface::class,
-                self::class,
-                ProductVariantPricesCalculatorInterface::class,
-            );
-        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -52,17 +41,15 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
                 continue;
             }
 
-            $item->setUnitPrice($this->productVariantPriceCalculator->calculate(
+            $item->setUnitPrice($this->productVariantPricesCalculator->calculate(
                 $item->getVariant(),
                 ['channel' => $channel],
             ));
 
-            if ($this->productVariantPriceCalculator instanceof ProductVariantPricesCalculatorInterface) {
-                $item->setOriginalUnitPrice($this->productVariantPriceCalculator->calculateOriginal(
-                    $item->getVariant(),
-                    ['channel' => $channel],
-                ));
-            }
+            $item->setOriginalUnitPrice($this->productVariantPricesCalculator->calculateOriginal(
+                $item->getVariant(),
+                ['channel' => $channel],
+            ));
         }
     }
 }

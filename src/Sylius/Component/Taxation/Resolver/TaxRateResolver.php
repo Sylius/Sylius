@@ -23,15 +23,8 @@ class TaxRateResolver implements TaxRateResolverInterface
     /** @param RepositoryInterface<TaxRateInterface> $taxRateRepository */
     public function __construct(
         protected RepositoryInterface $taxRateRepository,
-        protected ?TaxRateDateEligibilityCheckerInterface $taxRateDateChecker = null,
+        protected TaxRateDateEligibilityCheckerInterface $taxRateDateChecker,
     ) {
-        if ($this->taxRateDateChecker === null) {
-            trigger_deprecation(
-                'sylius/taxation',
-                '1.12',
-                'Not passing a $taxRateDateChecker through constructor is deprecated and it will be prohibited in Sylius 2.0',
-            );
-        }
     }
 
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface
@@ -42,17 +35,8 @@ class TaxRateResolver implements TaxRateResolverInterface
 
         $criteria = array_merge(['category' => $category], $criteria);
 
-        if ($this->taxRateDateChecker) {
-            $taxRates = $this->taxRateRepository->findBy($criteria);
+        $taxRates = $this->taxRateRepository->findBy($criteria);
 
-            return $this->provideEligibleTaxRate($taxRates);
-        }
-
-        return $this->taxRateRepository->findOneBy($criteria);
-    }
-
-    private function provideEligibleTaxRate(array $taxRates): ?TaxRateInterface
-    {
         foreach ($taxRates as $taxRate) {
             if ($this->taxRateDateChecker->isEligible($taxRate)) {
                 return $taxRate;

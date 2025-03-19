@@ -1,0 +1,25 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+a {
+    text-underline-offset: 0.25em;
+
+    &.link-reset {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            color: $link-hover-color;
+        }
+    }
+}
+
+.fs-7 {
+    font-size: $small-font-size;
+}

@@ -1,0 +1,8 @@
+{% set variant = hookable_metadata.context.variant %}
+
+<td>
+    <div class="btn-collapse collapsed" data-bs-toggle="collapse" href="#product-variant-details-{{ variant.code }}">
+        <div class="btn btn-icon icon-chevron-right">{{ ux_icon('tabler:chevron-right') }}</div>
+        <div class="btn btn-icon icon-chevron-down">{{ ux_icon('tabler:chevron-down') }}</div>
+    </div>
+</td>

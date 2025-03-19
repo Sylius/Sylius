@@ -60,7 +60,14 @@ final class AdminUserSpec extends ObjectBehavior
     function its_image_is_mutable(ImageInterface $image): void
     {
         $this->setImage($image);
+        $image->setOwner($this)->shouldBeCalled();
         $this->getImage()->shouldReturn($image);
+    }
+
+    function its_image_can_be_set_as_null(): void
+    {
+        $this->setImage(null);
+        $this->getImage()->shouldReturn(null);
     }
 
     function its_avatar_is_an_image(ImageInterface $image): void

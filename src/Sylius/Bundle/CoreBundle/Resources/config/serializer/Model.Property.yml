@@ -1,7 +1,0 @@
-Sylius\Component\Core\Model\Property:
-    exclusion_policy: ALL
-    xml_root_name: property
-    properties:
-        name:
-            expose: true
-            type: string

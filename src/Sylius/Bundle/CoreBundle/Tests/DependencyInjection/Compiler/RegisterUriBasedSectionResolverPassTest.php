@@ -29,32 +29,32 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
     public function it_adds_method_call_to_uri_based_section_resolver_in_order(): void
     {
         $uriBasedSectionResolver = new Definition(UriBasedSectionProvider::class);
-        $this->setDefinition('sylius.section_resolver.uri_based_section_resolver', $uriBasedSectionResolver);
+        $this->setDefinition('sylius.section_resolver.uri_based', $uriBasedSectionResolver);
 
         $shopUriBasedSectionProviderDefinition = new Definition(SectionProviderInterface::class);
         $shopUriBasedSectionProviderDefinition->addTag('sylius.uri_based_section_resolver');
 
-        $this->setDefinition('sylius.section_resolver.shop_uri_based_section_resolver', $shopUriBasedSectionProviderDefinition);
+        $this->setDefinition('sylius_shop.section_resolver.shop_uri_based', $shopUriBasedSectionProviderDefinition);
 
         $adminUriBasedSectionProviderDefinition = new Definition(SectionProviderInterface::class);
         $adminUriBasedSectionProviderDefinition->addTag('sylius.uri_based_section_resolver', ['priority' => 10]);
 
-        $this->setDefinition('sylius.section_resolver.admin_uri_based_section_resolver', $adminUriBasedSectionProviderDefinition);
+        $this->setDefinition('sylius_admin.section_resolver.admin_uri_based', $adminUriBasedSectionProviderDefinition);
 
         $adminApiUriBasedSectionProviderDefinition = new Definition(SectionProviderInterface::class);
         $adminApiUriBasedSectionProviderDefinition->addTag('sylius.uri_based_section_resolver', ['priority' => 5]);
 
-        $this->setDefinition('sylius.section_resolver.admin_api_uri_based_section_resolver', $adminApiUriBasedSectionProviderDefinition);
+        $this->setDefinition('sylius.section_resolver.admin_api_uri_based', $adminApiUriBasedSectionProviderDefinition);
 
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.section_resolver.uri_based_section_resolver',
+            'sylius.section_resolver.uri_based',
             1,
             [
-                new Reference('sylius.section_resolver.admin_uri_based_section_resolver'),
-                new Reference('sylius.section_resolver.admin_api_uri_based_section_resolver'),
-                new Reference('sylius.section_resolver.shop_uri_based_section_resolver'),
+                new Reference('sylius_admin.section_resolver.admin_uri_based'),
+                new Reference('sylius.section_resolver.admin_api_uri_based'),
+                new Reference('sylius_shop.section_resolver.shop_uri_based'),
             ],
         );
     }
@@ -65,12 +65,12 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
     public function it_does_not_add_method_call_if_there_are_no_tagged_processors(): void
     {
         $uriBasedSectionResolver = new Definition(UriBasedSectionProvider::class);
-        $this->setDefinition('sylius.section_resolver.uri_based_section_resolver', $uriBasedSectionResolver);
+        $this->setDefinition('sylius.section_resolver.uri_based', $uriBasedSectionResolver);
 
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.section_resolver.uri_based_section_resolver',
+            'sylius.section_resolver.uri_based',
             1,
             [],
         );

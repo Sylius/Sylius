@@ -7,7 +7,7 @@
             "@id": "\/api\/v2\/admin\/shipments\/@integer@",
             "@type": "Shipment",
             "order": "\/api\/v2\/admin\/orders\/@string@",
-            "id": @integer@,
+            "id": "@integer@",
             "state": "ready",
             "method": "\/api\/v2\/admin\/shipping-methods\/UPS",
             "units": {
@@ -15,14 +15,16 @@
                 "16": "\/api\/v2\/admin\/order-item-units\/@integer@",
                 "17": "\/api\/v2\/admin\/order-item-units\/@integer@"
             },
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "tracking": null,
+            "shippedAt": null,
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         },
         {
             "@id": "\/api\/v2\/admin\/shipments\/@integer@",
             "@type": "Shipment",
             "order": "\/api\/v2\/admin\/orders\/@string@",
-            "id": @integer@,
+            "id": "@integer@",
             "state": "ready",
             "method": "\/api\/v2\/admin\/shipping-methods\/UPS",
             "units": {
@@ -30,8 +32,10 @@
                 "16": "\/api\/v2\/admin\/order-item-units\/@integer@",
                 "17": "\/api\/v2\/admin\/order-item-units\/@integer@"
             },
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "tracking": null,
+            "shippedAt": null,
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         }
     ],
     "hydra:totalItems": 2,

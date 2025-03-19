@@ -15,7 +15,9 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
 class BlameCart
 {
-    public function __construct(public string $shopUserEmail, public string $orderTokenValue)
-    {
+    public function __construct(
+        public readonly string $shopUserEmail,
+        public readonly string $orderTokenValue,
+    ) {
     }
 }

@@ -62,7 +62,8 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_throws_unexpected_type_exception_if_data_is_not_customer_type(
+    function it_does_nothing_if_data_is_not_customer_type(
+        RepositoryInterface $customerRepository,
         FormEvent $event,
         FormInterface $form,
         ShopUserInterface $user,
@@ -70,8 +71,9 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($user);
         $event->getData()->willReturn(['email' => 'sylius@example.com']);
+        $customerRepository->findOneBy(['email' => 'sylius@example.com'])->shouldNotBeCalled();
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('preSubmit', [$event]);
+        $this->preSubmit($event);
     }
 
     function it_does_not_set_user_if_customer_with_given_email_has_set_user(

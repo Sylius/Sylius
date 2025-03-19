@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -27,10 +28,11 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class PickupCartHandlerSpec extends ObjectBehavior
 {
+    use MessageHandlerAttributeTrait;
+
     private const TOKEN_LENGTH = 20;
 
     function let(
@@ -52,11 +54,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_message_handler(): void
-    {
-        $this->shouldImplement(MessageHandlerInterface::class);
-    }
-
     function it_picks_up_a_new_cart_for_logged_in_shop_user(
         OrderFactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
@@ -69,9 +66,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         LocaleInterface $locale,
     ): void {
-        $pickupCart = new PickupCart();
-        $pickupCart->setChannelCode('code');
-        $pickupCart->setEmail('sample@email.com');
+        $pickupCart = new PickupCart(channelCode: 'code', localeCode: 'en_US', email: 'sample@email.com');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getDefaultLocale()->willReturn($locale);
@@ -103,9 +98,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         LocaleInterface $locale,
     ): void {
-        $pickupCart = new PickupCart();
-        $pickupCart->setChannelCode('code');
-        $pickupCart->setEmail('sample@email.com');
+        $pickupCart = new PickupCart(channelCode: 'code', localeCode: 'en_US', email: 'sample@email.com');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getDefaultLocale()->willReturn($locale);
@@ -134,9 +127,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
     ): void {
-        $pickupCart = new PickupCart();
-        $pickupCart->setChannelCode('code');
-        $pickupCart->setEmail('sample@email.com');
+        $pickupCart = new PickupCart(channelCode: 'code', localeCode: 'en_US', email: 'sample@email.com');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
 
@@ -160,9 +151,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         RandomnessGeneratorInterface $generator,
     ): void {
-        $pickupCart = new PickupCart();
-        $pickupCart->setChannelCode('code');
-        $pickupCart->setEmail('sample@email.com');
+        $pickupCart = new PickupCart(channelCode: 'code', localeCode: 'en_US', email: 'sample@email.com');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
 
@@ -186,8 +175,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         LocaleInterface $locale,
     ): void {
-        $pickupCart = new PickupCart();
-        $pickupCart->setChannelCode('code');
+        $pickupCart = new PickupCart(channelCode: 'code', localeCode: 'en_US');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getDefaultLocale()->willReturn($locale);
@@ -215,9 +203,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         LocaleInterface $locale,
     ): void {
-        $pickupCart = new PickupCart();
-        $pickupCart->setChannelCode('code');
-        $pickupCart->localeCode = 'en_US';
+        $pickupCart = new PickupCart(channelCode: 'code', localeCode: 'en_US');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getDefaultLocale()->willReturn($locale);
@@ -244,9 +230,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         LocaleInterface $locale,
     ): void {
-        $pickupCart = new PickupCart();
-        $pickupCart->setChannelCode('code');
-        $pickupCart->localeCode = 'ru_RU';
+        $pickupCart = new PickupCart(channelCode: 'code', localeCode: 'ru_RU');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getDefaultLocale()->willReturn($locale);

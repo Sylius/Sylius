@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius_shop.twig.error_template_finder" class="Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument type="service" id="twig" />
+            <tag name="sylius.twig.error_template_finder" />
+        </service>
+
+        <service id="sylius_shop.twig.extension.order_item_original_price_to_display" class="Sylius\Bundle\ShopBundle\Twig\OrderItemOriginalPriceToDisplayExtension">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_shop.twig.extension.order_payments" class="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension">
+            <argument type="service" id="sylius.resolver.payment_methods" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

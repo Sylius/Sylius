@@ -63,7 +63,7 @@ class Country implements CountryInterface, \Stringable
 
     public function getName(?string $locale = null): ?string
     {
-        return Countries::getName($this->code, $locale);
+        return $this->code !== null ? Countries::getName($this->code, $locale) : null;
     }
 
     public function getProvinces(): Collection

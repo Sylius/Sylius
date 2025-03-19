@@ -23,9 +23,10 @@ use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class AddProductReviewHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class AddProductReviewHandler
 {
     /**
      * @param FactoryInterface<ProductReviewInterface> $productReviewFactory
@@ -49,7 +50,7 @@ final class AddProductReviewHandler implements MessageHandlerInterface
         }
 
         /** @var string|null $email */
-        $email = $addProductReview->getEmail();
+        $email = $addProductReview->email;
 
         if ($email === null) {
             throw new \InvalidArgumentException('Visitor should provide an email');

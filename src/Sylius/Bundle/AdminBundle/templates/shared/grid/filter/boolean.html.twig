@@ -1,0 +1,3 @@
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+{{ form_row(form, sylius_test_form_attribute('criterion-enabled')|sylius_merge_recursive({'label': filter.label})) }}

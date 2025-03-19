@@ -15,60 +15,74 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ZonesTest extends JsonApiTestCase
 {
-    use AdminUserLoginTrait;
+    protected function setUp(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+
+        parent::setUp();
+    }
+
+    /** @test */
+    public function it_gets_zones(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'zones.yaml',
+        ]);
+
+        $this->requestGet('/api/v2/admin/zones');
+
+        $this->assertResponse($this->client->getResponse(), 'admin/zone/get_zones');
+    }
 
     /** @test */
     public function it_gets_a_zone(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'zones.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'zones.yaml',
+        ]);
 
         /** @var ZoneInterface $zone */
         $zone = $fixtures['zone_eu'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/zones/%s', $zone->getCode()),
-            server: $header,
-        );
+        $this->requestGet(sprintf('/api/v2/admin/zones/%s', $zone->getCode()));
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/zone/get_zone_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponse($this->client->getResponse(), 'admin/zone/get_zone');
     }
 
     /** @test */
     public function it_creates_a_zone(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'zones.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'zones.yaml',
+        ]);
 
         $this->client->request(
             method: 'POST',
             uri: '/api/v2/admin/zones',
-            server: $header,
+            server: $this->buildHeaders(),
             content: json_encode([
                 'code' => 'US',
                 'name' => 'UnitedStates',
-                'type' => 'province',
+                'type' => 'country',
                 'members' => [
-                    ['code' => 'AL'],
-                    ['code' => 'CA'],
-                    ['code' => 'NY'],
+                    ['code' => 'NL'],
+                    ['code' => 'BE'],
+                    ['code' => 'PL'],
                 ],
             ]),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/zone/create_zone_response',
+            'admin/zone/create_zone',
             Response::HTTP_CREATED,
         );
     }
@@ -76,8 +90,10 @@ final class ZonesTest extends JsonApiTestCase
     /** @test */
     public function it_updates_zone(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'zones.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'zones.yaml',
+        ]);
 
         /** @var ZoneInterface $zone */
         $zone = $fixtures['zone_eu'];
@@ -85,15 +101,20 @@ final class ZonesTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: sprintf('/api/v2/admin/zones/%s', $zone->getCode()),
-            server: $header,
+            server: $this->buildHeaders(),
             content: json_encode([
                 'name' => 'EuropeanUnion',
+                'members' => [
+                    ['code' => 'NL'],
+                    ['code' => 'DE'],
+                    ['code' => 'PL'],
+                ],
             ]),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/zone/update_zone_response',
+            'admin/zone/update_zone',
             Response::HTTP_OK,
         );
     }
@@ -101,59 +122,27 @@ final class ZonesTest extends JsonApiTestCase
     /** @test */
     public function it_deletes_a_zone(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'zones.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'zones.yaml',
+        ]);
 
         /** @var ZoneInterface $zone */
         $zone = $fixtures['zone_eu'];
 
-        $this->client->request(
-            method: 'DELETE',
-            uri: sprintf('/api/v2/admin/zones/%s', $zone->getCode()),
-            server: $header,
-        );
+        $this->requestDelete(sprintf('/api/v2/admin/zones/%s', $zone->getCode()));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
-    public function it_gets_zones(): void
+    /** @return array<string, string> */
+    private function buildHeaders(): array
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'zones.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/zones',
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/zone/get_zones_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_gets_zone_members(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'zones.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        /** @var ZoneInterface $zone */
-        $zone = $fixtures['zone_eu'];
-
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/zones/%s/members', $zone->getCode()),
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/zone/get_zone_members_response',
-            Response::HTTP_OK,
-        );
+        return $this
+            ->headerBuilder()
+            ->withJsonLdContentType()
+            ->withJsonLdAccept()
+            ->withAdminUserAuthorization('api@example.com')
+            ->build();
     }
 }

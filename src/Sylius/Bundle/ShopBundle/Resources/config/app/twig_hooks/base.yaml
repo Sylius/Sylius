@@ -1,0 +1,204 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.base#body_classes':
+            defaults:
+                template: '@SyliusShop/shared/layout/base/body_classes/defaults.html.twig'
+                priority: 0
+                
+        'sylius_shop.base#metatags':
+            metatags:
+                template: '@SyliusShop/shared/layout/base/metatags.html.twig'
+                priority: 0
+        
+        'sylius_shop.base#stylesheets':
+            styles:
+                template: '@SyliusShop/shared/layout/base/styles.html.twig'
+                priority: 0
+
+        'sylius_shop.base#javascripts':
+            scripts:
+                template: '@SyliusShop/shared/layout/base/scripts.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header':
+            top_bar:
+                template: '@SyliusShop/shared/layout/base/header/top_bar.html.twig'
+                priority: 300
+            content:
+                template: '@SyliusShop/shared/layout/base/header/content.html.twig'
+                priority: 200
+            navbar:
+                template: '@SyliusShop/shared/layout/base/header/navbar.html.twig'
+                priority: 100
+            flashes:
+                template: '@SyliusShop/shared/layout/base/header/flashes.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.top_bar':
+            info_message:
+                template: '@SyliusShop/shared/layout/base/header/top_bar/info_message.html.twig'
+                priority: 200
+            currency_switcher:
+                component: 'sylius_shop:common:currency_switcher'
+                props:
+                    template: '@SyliusShop/shared/layout/base/header/top_bar/currency_switcher.html.twig'
+                priority: 100
+            locale_switcher:
+                component: 'sylius_shop:common:locale_switcher'
+                props:
+                    template: '@SyliusShop/shared/layout/base/header/top_bar/locale_switcher.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content':
+            logo:
+                template: "@SyliusShop/shared/layout/base/header/content/logo.html.twig"
+                priority: 300
+            security:
+                template: "@SyliusShop/shared/layout/base/header/content/security.html.twig"
+                priority: 200
+            cart:
+                component: 'sylius_shop:cart:widget'
+                props:
+                    template: '@SyliusShop/shared/components/header/cart.html.twig'
+                priority: 100
+            taxon_hamburger:
+                template: "@SyliusShop/shared/layout/base/header/content/taxon_hamburger.html.twig"
+                priority: 0
+
+        'sylius_shop.base.header.content.security':
+            logged_in_user:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user.html.twig'
+                priority: 100
+            visitor:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content.security.logged_in_user':
+            mobile:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile.html.twig'
+                priority: 100
+            desktop:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content.security.logged_in_user.mobile':
+            menu:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile/menu.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content.security.logged_in_user.mobile.menu':
+            my_account:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile/menu/my_account.html.twig'
+                priority: 100
+            logout:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/mobile/menu/logout.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content.security.logged_in_user.desktop':
+            welcome_message:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop/welcome_message.html.twig'
+                priority: 200
+            my_account:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop/my_account.html.twig'
+                priority: 100
+            logout:
+                template: '@SyliusShop/shared/layout/base/header/content/security/logged_in_user/desktop/logout.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content.security.visitor':
+            mobile:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/mobile.html.twig'
+                priority: 100
+            desktop:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content.security.visitor.desktop':
+            user_icon:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop/user_icon.html.twig'
+                priority: 200
+            login:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop/login.html.twig'
+                priority: 100
+            register:
+                template: '@SyliusShop/shared/layout/base/header/content/security/visitor/desktop/register.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.content.logo':
+            content:
+                template: "@SyliusShop/shared/logo.html.twig"
+                priority: 0
+
+        'sylius_shop.base.header.navbar':
+            menu:
+                component: "sylius_shop:common:taxon_menu"
+                props:
+                    template: '@SyliusShop/shared/layout/base/header/navbar/menu.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.navbar.menu':
+            item:
+                template: '@SyliusShop/shared/layout/base/header/navbar/menu/item.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.navbar.menu.item#dropdown':
+            toggle:
+                template: '@SyliusShop/shared/layout/base/header/navbar/menu/item/toggle.html.twig'
+                priority: 100
+            dropdown:
+                template: '@SyliusShop/shared/layout/base/header/navbar/menu/item/dropdown.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.navbar.menu.item#link':
+            link:
+                template: '@SyliusShop/shared/layout/base/header/navbar/menu/item/link.html.twig'
+                priority: 0
+
+        'sylius_shop.base.header.flashes':
+            content:
+                template: "@SyliusShop/shared/flashes.html.twig"
+                priority: 0
+
+        'sylius_shop.base.footer':
+            content:
+                template: '@SyliusShop/shared/layout/base/footer/content.html.twig'
+                priority: 0
+
+        'sylius_shop.base.footer.content':
+            menu:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu.html.twig'
+                priority: 200
+            payment_methods:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods.html.twig'
+                priority: 100
+            copy:
+                template: '@SyliusShop/shared/layout/base/footer/content/copy.html.twig'
+                priority: 0
+
+        'sylius_shop.base.offcanvas':
+            cart:
+                component: 'sylius_shop:cart:widget:offcanvas'
+                props:
+                    template: '@SyliusShop/shared/layout/base/offcanvas/cart.html.twig'
+                priority: 0
+
+        'sylius_shop.base.offcanvas.cart':
+            header:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/header.html.twig'
+                priority: 200
+            body:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/body.html.twig'
+                priority: 100
+            footer:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/footer.html.twig'
+                priority: 0
+
+        'sylius_shop.base.offcanvas.cart.body':
+            items:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/body/items.html.twig'
+                priority: 0
+
+        'sylius_shop.base.offcanvas.cart.body.items':
+            item:
+                template: '@SyliusShop/shared/layout/base/offcanvas/cart/body/items/item.html.twig'
+                priority: 0

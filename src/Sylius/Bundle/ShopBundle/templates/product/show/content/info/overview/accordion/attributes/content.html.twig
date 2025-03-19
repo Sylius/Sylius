@@ -1,0 +1,26 @@
+{% set product = hookable_metadata.context.product %}
+{% set configuration = hookable_metadata.context.configuration %}
+
+{% embed '@SyliusShop/shared/accordion/accordion_item_content.html.twig' with { accordion_item_id: 'attributes' } %}
+    {% block accordion_item_content %}
+        <table class="table table-lg table-list" {{ sylius_test_html_attribute('product-attributes') }}>
+            <tbody>
+            {% for attribute_value in product.getAttributesByLocale(configuration.request.locale, configuration.request.defaultLocale, sylius_base_locale)|sylius_sort_by('attribute.position') %}
+                <tr>
+                    <th scope="row" {{ sylius_test_html_attribute('product-attribute-name', attribute_value.name) }}>{{ attribute_value.name }}</th>
+                    <td {{ sylius_test_html_attribute('product-attribute-value', attribute_value.name) }}>
+                        {% include [
+                            '@SyliusAttribute/Types/'~attribute_value.type~'.html.twig',
+                            '@SyliusAttribute/Types/default.html.twig'
+                        ] with {
+                            'attribute': attribute_value,
+                            'locale': configuration.request.locale,
+                            'fallbackLocale': configuration.request.defaultLocale
+                        } %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+{% endembed %}

@@ -20,8 +20,9 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class LocaleContext implements Context
+final readonly class LocaleContext implements Context
 {
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(
         private LocaleConverterInterface $localeNameConverter,
         private RepositoryInterface $localeRepository,
@@ -43,11 +44,9 @@ final class LocaleContext implements Context
     /**
      * @Transform :localeNameInItsLocale
      */
-    public function castToItsLocale(string $localeName): string
+    public function castToItsLocaleCode(string $localeName): string
     {
-        $localeCode = $this->localeNameConverter->convertNameToCode($localeName);
-
-        return $this->localeNameConverter->convertCodeToName($localeCode, $localeCode);
+        return $this->localeNameConverter->convertNameToCode($localeName);
     }
 
     /**
@@ -56,21 +55,10 @@ final class LocaleContext implements Context
     public function castToCurrentLocale(string $localeName): string
     {
         if ($this->sharedStorage->has('current_locale_code')) {
-            return $this->localeNameConverter->convertCodeToName(
-                $this->localeNameConverter->convertNameToCode($localeName),
-                $this->sharedStorage->get('current_locale_code'),
-            );
+            return $this->localeNameConverter->convertNameToCode($localeName);
         }
 
         return $localeName;
-    }
-
-    /**
-     * @Transform :localeName
-     */
-    public function castToLocaleName(string $localeCode): string
-    {
-        return $this->localeNameConverter->convertCodeToName($localeCode);
     }
 
     /**

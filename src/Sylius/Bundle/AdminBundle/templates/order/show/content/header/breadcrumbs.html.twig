@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+
+{% set order = hookable_metadata.context.resource %}
+
+{{ breadcrumbs([
+    { name: 'sylius.ui.dashboard'|trans, url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.orders'|trans, url: path('sylius_admin_order_index'), active: false },
+    { name: '#' ~ order.number, active: true },
+    { name: 'sylius.ui.show'|trans, active: false }
+]) }}

@@ -13,20 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class ShipmentsTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
-    use ShopUserLoginTrait;
 
     protected function setUp(): void
     {
+        $this->setUpShopUserContext();
+        $this->setUpDefaultGetHeaders();
         $this->setUpOrderPlacer();
+
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         parent::setUp();
     }
@@ -34,22 +41,30 @@ final class ShipmentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_shipment(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_oliver'];
-        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+        $order = $this->placeOrder();
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/shipments/%s', $order->getShipments()->first()->getId()));
 
-        $tokenValue = 'nAWw2jewpA';
+        $this->assertResponseSuccessful('shop/shipment/get_shipment_response');
+    }
 
-        $order = $this->placeOrder($tokenValue, $customer->getEmailCanonical());
+    /** @test */
+    public function it_does_not_get_another_user_shipment(): void
+    {
+        $order = $this->placeOrder(email: 'another_user@example.com');
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/shipments/' . $order->getShipments()->first()->getId(),
-            server: $header,
-        );
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/shipments/%s', $order->getShipments()->first()->getId()));
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/shipment/get_shipment_response', Response::HTTP_OK);
+        $this->assertResponseNotFound();
+    }
+
+    /** @test */
+    public function it_does_not_get_the_shop_user_shipment_when_not_authenticated(): void
+    {
+        $order = $this->placeOrder();
+        $this->disableShopUserContext();
+
+        $this->requestGet(sprintf('/api/v2/shop/orders/token/shipments/%s', $order->getShipments()->first()->getId()));
+
+        $this->assertResponseNotFound();
     }
 }

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Mapper;
 
 use Sylius\Component\Core\Model\AddressInterface;
 
-final class AddressMapper implements AddressMapperInterface
+final readonly class AddressMapper implements AddressMapperInterface
 {
     public function mapExisting(AddressInterface $currentAddress, AddressInterface $targetAddress): AddressInterface
     {

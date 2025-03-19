@@ -111,7 +111,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
         $context->buildViolation('Simple product code has to be unique', Argument::cetera())->willReturn($constraintViolationBuilder);
 
         $constraintViolationBuilder->atPath('code')->shouldBeCalled()->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled()->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $productVariantRepository->findOneBy(['code' => 'AWESOME_PRODUCT'])->willReturn($existingProductVariant);
         $existingProductVariant->getProduct()->willReturn($existingProduct);

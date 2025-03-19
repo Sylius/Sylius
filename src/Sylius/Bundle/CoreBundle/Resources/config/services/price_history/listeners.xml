@@ -17,34 +17,28 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\CreateLogEntryOnPriceChangeObserver">
+        <service id="sylius.entity_observer.price_history.create_log_entry_on_price_change" class="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\CreateLogEntryOnPriceChangeObserver">
             <argument type="service" id="sylius.logger.price_history.price_change" />
             <tag name="sylius.entity_observer" />
         </service>
-        <service id="sylius.entity_observer.price_history.create_log_entry_on_price_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\CreateLogEntryOnPriceChangeObserver" />
 
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelChangeObserver">
+        <service id="sylius.entity_observer.price_history.process_lowest_prices_on_channel_change" class="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelChangeObserver">
             <argument type="service" id="sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings" />
             <tag name="sylius.entity_observer" />
         </service>
-        <service id="sylius.entity_observer.price_history.process_lowest_prices_on_channel_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelChangeObserver" />
 
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver">
+        <service id="sylius.entity_observer.price_history.process_lowest_prices_on_channel_price_history_config_change" class="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings" />
             <tag name="sylius.entity_observer" />
         </service>
-        <service id="sylius.entity_observer.price_history.process_lowest_prices_on_channel_price_history_config_change" alias="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver" />
 
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener">
+        <service id="sylius.listener.price_history.on_flush_entity_observer" class="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener">
             <argument type="tagged_iterator" tag="sylius.entity_observer" />
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
-        <service id="sylius.listener.price_history.on_flush_entity_observer" alias="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener" />
 
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\ChannelPricingLogEntryEventListener">
+        <service id="sylius.listener.price_history.channel_pricing_log_entry" class="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\ChannelPricingLogEntryEventListener">
             <argument type="service" id="sylius.processor.price_history.product_lowest_price_before_discount"/>
             <tag name="doctrine.event_listener"
                  event="postPersist"
@@ -52,6 +46,5 @@
                  connection="default"
             />
         </service>
-        <service id="sylius.listener.price_history.channel_pricing_log_entry" alias="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\ChannelPricingLogEntryEventListener" />
     </services>
 </container>

@@ -28,7 +28,7 @@ trait SetUpTestsTrait
     /** @var array */
     private $objects;
 
-    public function setFixturesFiles(array $fixturesFiles): void
+    public function setFixturesFiles(array $fixturesFiles = []): void
     {
         $this->fixturesFiles = array_merge(
             $fixturesFiles,

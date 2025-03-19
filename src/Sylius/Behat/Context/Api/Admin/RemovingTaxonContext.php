@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -26,7 +25,6 @@ final class RemovingTaxonContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -36,11 +34,10 @@ final class RemovingTaxonContext implements Context
     public function iDeleteTaxon(TaxonInterface $taxon): void
     {
         $this->client->delete(Resources::TAXONS, $taxon->getCode());
-        $this->sharedStorage->set('taxon', $taxon);
     }
 
     /**
-     * @Then /^(this taxon) should still exist$/
+     * @Then the :taxon taxon should still exist
      */
     public function theTaxonShouldStillExist(TaxonInterface $taxon): void
     {

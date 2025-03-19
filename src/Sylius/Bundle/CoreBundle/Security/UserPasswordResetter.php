@@ -18,7 +18,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
-final class UserPasswordResetter implements UserPasswordResetterInterface
+final readonly class UserPasswordResetter implements UserPasswordResetterInterface
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,

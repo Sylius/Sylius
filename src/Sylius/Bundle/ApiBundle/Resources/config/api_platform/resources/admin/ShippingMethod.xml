@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.shipping_method.class%">
+        <operations>
+            <operation
+                name="sylius_api_admin_shipping_method_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/shipping-methods"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.exists_filter.admin.shipping_method</filter>
+                    <filter>sylius_api.order_filter.admin.shipping_method</filter>
+                    <filter>sylius_api.name_with_locale_order_filter.admin.translatable</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipping_method_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/shipping-methods/{code}"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipping_method_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/shipping-methods"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">sylius_api.validator.groups_generator.shipping_method_configuration</value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipping_method_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/shipping-methods/{code}"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">sylius_api.validator.groups_generator.shipping_method_configuration</value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipping_method_patch_archive"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/shipping-methods/{code}/archive"
+                input="false"
+                controller="sylius_api.applicator.archiving_shipping_method::archive"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipping_method_patch_restore"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/shipping-methods/{code}/restore"
+                input="false"
+                controller="sylius_api.applicator.archiving_shipping_method::restore"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipping_method_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/shipping-methods/{code}"
+            />
+        </operations>
+    </resource>
+</resources>

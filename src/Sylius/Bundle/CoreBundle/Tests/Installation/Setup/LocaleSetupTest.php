@@ -133,38 +133,6 @@ final class LocaleSetupTest extends KernelTestCase
     }
 
     /** @test */
-    public function it_shows_message_at_output_when_the_filesystem_argument_is_null(): void
-    {
-        $this->localeSetup = new LocaleSetup(
-            $this->localeRepository->reveal(),
-            $this->localeFactory->reveal(),
-            'en_US',
-            null,
-            $this->localeParameterFilePath,
-        );
-
-        $questionHelper = $this->prophesize(QuestionHelper::class);
-        $questionHelper->ask(Argument::cetera())->willReturn('fr_FR');
-        $locale = $this->prophesize(LocaleInterface::class);
-
-        $this->localeRepository->findOneBy(['code' => 'fr_FR'])->willReturn(null);
-        $this->localeFactory->createNew()->willReturn($locale->reveal());
-        $locale->setCode('fr_FR')->shouldBeCalled();
-        $this->localeRepository->add($locale->reveal())->shouldBeCalled();
-
-        $output = $this->prophesize(OutputInterface::class);
-        $output->writeln('Adding <info>French</info> Language.')->shouldBeCalled();
-        $output->writeln('Adding <info>fr_FR</info> locale.')->shouldBeCalled();
-        $output->writeln('<info>You may also need to add this locale into config/parameters.yaml configuration.</info>')->shouldBeCalled();
-
-        $this->localeSetup->setup(
-            $this->prophesize(InputInterface::class)->reveal(),
-            $output->reveal(),
-            $questionHelper->reveal(),
-        );
-    }
-
-    /** @test */
     public function it_does_not_update_locale_if_file_is_not_writable(): void
     {
         $this->localeSetup = new LocaleSetup(

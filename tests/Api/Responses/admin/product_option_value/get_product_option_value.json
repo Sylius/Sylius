@@ -1,0 +1,15 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductOptionValue",
+    "@id": "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_BLUE",
+    "@type": "ProductOptionValue",
+    "code": "COLOR_BLUE",
+    "option": "\/api\/v2\/admin\/product-options\/COLOR",
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE\/translations\/en_US",
+            "@type": "ProductOptionValueTranslation",
+            "value": "Blue"
+        }
+    },
+    "value": "Blue"
+}

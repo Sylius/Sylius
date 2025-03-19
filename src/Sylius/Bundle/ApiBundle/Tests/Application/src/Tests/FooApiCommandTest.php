@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 final class FooApiCommandTest extends ApiTestCase
@@ -22,7 +22,7 @@ final class FooApiCommandTest extends ApiTestCase
 
     public function setUp(): void
     {
-        $this->setFixturesFiles([]);
+        $this->setFixturesFiles();
         $this->setUpTest();
     }
 
@@ -34,12 +34,14 @@ final class FooApiCommandTest extends ApiTestCase
             'api/v2/foo-api-command',
             ['json' => ['name' => 'FooCommandPost']],
         );
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+
+        $this->assertResponseHeaderSame('content-type', 'application/problem+json; charset=utf-8');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
         $this->assertJsonContains([
-            'code' => Response::HTTP_BAD_REQUEST,
-            'message' => 'Request does not have the following required fields specified: bar.',
+            'description' => 'Request does not have the following required fields specified: bar.',
+            'hydra:description' => 'Request does not have the following required fields specified: bar.',
+            'hydra:title' => 'An error occurred',
         ]);
     }
 

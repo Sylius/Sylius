@@ -60,8 +60,11 @@ final class AddressType extends AbstractResourceType
             ->add('postcode', TextType::class, [
                 'label' => 'sylius.form.address.postcode',
             ])
-            ->addEventSubscriber($this->buildAddressFormSubscriber)
         ;
+
+        if ($options['add_build_address_form_subscriber']) {
+            $builder->addEventSubscriber($this->buildAddressFormSubscriber);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -78,6 +81,7 @@ final class AddressType extends AbstractResourceType
                     return $this->validationGroups;
                 },
                 'shippable' => false,
+                'add_build_address_form_subscriber' => true,
             ])
             ->setAllowedTypes('shippable', 'bool')
         ;

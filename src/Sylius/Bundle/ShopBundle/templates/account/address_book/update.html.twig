@@ -1,0 +1,6 @@
+{% extends '@SyliusShop/account/common/update.html.twig' %}
+
+{% set prefixes = ['sylius_shop.account.address_book'] %}
+{% set attrs = {form, address} %}
+
+{% block title %}{{ 'sylius.ui.edit_my_address'|trans }} | {{ parent() }}{% endblock %}

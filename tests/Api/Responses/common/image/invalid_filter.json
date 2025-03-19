@@ -1,6 +1,12 @@
 {
     "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/400",
     "@type": "hydra:Error",
+    "title": "An error occurred",
+    "detail": "Filter \"invalid\" is not configured.",
+    "status": 400,
+    "type": "\/errors\/400",
+    "description": "Filter \"invalid\" is not configured.",
     "hydra:title": "An error occurred",
     "hydra:description": "Filter \"invalid\" is not configured."
 }

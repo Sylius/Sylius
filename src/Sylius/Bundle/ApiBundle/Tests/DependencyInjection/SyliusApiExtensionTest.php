@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Sylius\Bundle\ApiBundle\Attribute\AsCommandDataTransformer;
 use Sylius\Bundle\ApiBundle\Attribute\AsDocumentationModifier;
 use Sylius\Bundle\ApiBundle\Attribute\AsPaymentConfigurationProvider;
 use Sylius\Bundle\ApiBundle\DependencyInjection\SyliusApiExtension;
-use Sylius\Bundle\ApiBundle\Tests\Stub\CommandDataTransformerStub;
 use Sylius\Bundle\ApiBundle\Tests\Stub\DocumentationModifierStub;
 use Sylius\Bundle\ApiBundle\Tests\Stub\PaymentConfigurationProviderStub;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -34,7 +32,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         $this->setParameter('api_platform.swagger.api_keys', []);
         $this->load();
 
-        $this->assertContainerBuilderHasService('Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier');
+        $this->assertContainerBuilderHasService('sylius_api.open_api.documentation_modifier.accept_language_header');
     }
 
     /** @test */
@@ -44,7 +42,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
 
         $this->load();
 
-        $this->assertContainerBuilderNotHasService('Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier');
+        $this->assertContainerBuilderNotHasService('sylius_api.open_api.documentation_modifier.accept_language_header');
     }
 
     /** @test */
@@ -107,24 +105,23 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
-    public function it_loads_skip_read_and_skip_index_and_show_serialization_groups_parameters_properly(): void
+    public function it_loads_operations_to_remove_properly(): void
     {
         $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
 
         $this->load([
-            'serialization_groups' => [
-                'skip_adding_read_group' => true,
-                'skip_adding_index_and_show_groups' => false,
+            'operations_to_remove' => [
+                'sylius_api_shop_country_get',
+                'sylius_api_shop_country_get_collection',
             ],
         ]);
 
         $this->assertContainerBuilderHasParameter(
-            'sylius_api.serialization_groups.skip_adding_read_group',
-            true,
-        );
-        $this->assertContainerBuilderHasParameter(
-            'sylius_api.serialization_groups.skip_adding_index_and_show_groups',
-            false,
+            'sylius_api.operations_to_remove',
+            [
+                'sylius_api_shop_country_get',
+                'sylius_api_shop_country_get_collection',
+            ],
         );
     }
 
@@ -148,29 +145,8 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         $apiPlatformConfig = $this->container->getExtensionConfig('api_platform')[0];
 
         $this->assertSame($apiPlatformConfig['mapping']['paths'], [
-            __DIR__ . '../../Resources/config/api_resources',
+            __DIR__ . '../../Resources/config/api_platform',
         ]);
-    }
-
-    /** @test */
-    public function it_autoconfigures_command_data_transformer_with_attribute(): void
-    {
-        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
-        $this->container->setDefinition(
-            'acme.command_data_transformer_with_attribute',
-            (new Definition())
-                ->setClass(CommandDataTransformerStub::class)
-                ->setAutoconfigured(true),
-        );
-
-        $this->load();
-        $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'acme.command_data_transformer_with_attribute',
-            AsCommandDataTransformer::SERVICE_TAG,
-            ['priority' => 15],
-        );
     }
 
     /** @test */

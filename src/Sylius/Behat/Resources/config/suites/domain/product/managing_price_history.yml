@@ -15,7 +15,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
+                - sylius.behat.context.setup.calendar
 
                 - Sylius\Behat\Context\Domain\ManagingPriceHistoryContext
             filters:

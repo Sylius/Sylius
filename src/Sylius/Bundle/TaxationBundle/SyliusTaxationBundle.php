@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusTaxationBundle extends AbstractResourceBundle
 {
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [

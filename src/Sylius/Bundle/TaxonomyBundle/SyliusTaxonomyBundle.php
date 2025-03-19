@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 final class SyliusTaxonomyBundle extends AbstractResourceBundle
 {
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [

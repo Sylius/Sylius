@@ -21,11 +21,11 @@ final class CompositePromotionEligibilityCheckerPass implements CompilerPassInte
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('sylius.promotion_eligibility_checker')) {
+        if (!$container->has('sylius.checker.promotion_eligibility')) {
             return;
         }
 
-        $container->getDefinition('sylius.promotion_eligibility_checker')->setArguments([
+        $container->getDefinition('sylius.checker.promotion_eligibility')->setArguments([
             array_map(
                 fn ($id) => new Reference($id),
                 array_keys($container->findTaggedServiceIds('sylius.promotion_eligibility_checker')),

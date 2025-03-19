@@ -33,7 +33,7 @@ final class ProvincesTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/provinces/%s', $province->getCode()),
+            uri: sprintf('/api/v2/admin/countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
             server: $header,
         );
 
@@ -55,7 +55,7 @@ final class ProvincesTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'PUT',
-            uri: '/api/v2/admin/provinces/' . $province->getCode(),
+            uri: sprintf('/api/v2/admin/countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
             server: $header,
             content: json_encode([
                 'abbreviation' => 'Minn.',

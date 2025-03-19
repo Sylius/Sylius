@@ -17,7 +17,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibility;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -43,34 +42,20 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_constraint_does_not_extend_order_token_value_aware_interface(): void
+    function it_throws_an_exception_if_value_is_not_instance_of_complete_order(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {
-            }])
+            ->during('validate', ['', new OrderShippingMethodEligibility()])
         ;
     }
 
-    function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void
-    {
-        $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
-            private ?string $orderTokenValue = null;
-
-            public function getOrderTokenValue(): ?string
-            {
-                return 'xxx';
-            }
-
-            public function setOrderTokenValue(?string $orderTokenValue): void
-            {
-                $this->orderTokenValue = $orderTokenValue;
-            }
-        };
-
+    function it_throws_an_exception_if_constraint_is_not_instance_of_order_shipping_method_eligibility(
+        Constraint $constraint,
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', $constraint])
+            ->during('validate', [new CompleteOrder('token'), $constraint])
         ;
     }
 
@@ -78,8 +63,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
@@ -92,7 +76,6 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     function it_adds_a_violation_for_every_not_available_shipping_method_attached_to_the_order(
         OrderRepositoryInterface $orderRepository,
         ExecutionContextInterface $context,
-        OrderTokenValueAwareInterface $value,
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipmentOne,
@@ -104,7 +87,6 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($context);
 
-        $value->getOrderTokenValue()->willReturn('ORDERTOKENVALUE');
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKENVALUE'])->willReturn($order);
 
         $order->getShipments()->willReturn(new ArrayCollection([$shipmentOne->getWrappedObject(), $shipmentTwo->getWrappedObject()]));
@@ -128,14 +110,13 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $context->addViolation('sylius.order.shipping_method_not_available', ['%shippingMethodName%' => 'Shipping method one'])->shouldBeCalled();
         $context->addViolation('sylius.order.shipping_method_not_available', ['%shippingMethodName%' => 'Shipping method two'])->shouldBeCalled();
 
-        $this->validate($value, new OrderShippingMethodEligibility());
+        $this->validate(new CompleteOrder('ORDERTOKENVALUE'), new OrderShippingMethodEligibility());
     }
 
     function it_does_not_add_violation_if_all_shipping_methods_are_available(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         ExecutionContextInterface $context,
-        OrderTokenValueAwareInterface $value,
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipmentOne,
@@ -147,7 +128,6 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($context);
 
-        $value->getOrderTokenValue()->willReturn('ORDERTOKENVALUE');
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKENVALUE'])->willReturn($order);
 
         $order->getShipments()->willReturn(new ArrayCollection([$shipmentOne->getWrappedObject(), $shipmentTwo->getWrappedObject()]));
@@ -174,7 +154,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $eligibilityChecker->isEligible($shipmentOne, $shippingMethodOne)->willReturn(true);
         $eligibilityChecker->isEligible($shipmentTwo, $shippingMethodTwo)->willReturn(true);
 
-        $this->validate($value, new OrderShippingMethodEligibility());
+        $this->validate(new CompleteOrder('ORDERTOKENVALUE'), new OrderShippingMethodEligibility());
     }
 
     function it_adds_violation_if_shipment_does_not_match_with_shipping_method(
@@ -191,8 +171,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
@@ -234,8 +213,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
+        $value = new CompleteOrder(orderTokenValue: 'token');
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 

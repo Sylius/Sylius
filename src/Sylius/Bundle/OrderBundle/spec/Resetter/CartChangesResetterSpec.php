@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\OrderBundle\ChangesResetter;
+namespace spec\Sylius\Bundle\OrderBundle\Resetter;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

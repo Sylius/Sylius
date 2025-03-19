@@ -1,0 +1,87 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.address_book.index.content':
+            breadcrumbs:
+                template: '@SyliusShop/account/address_book/index/content/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/content/menu.html.twig'
+                priority: 100
+            main:
+                template: '@SyliusShop/account/common/content/main.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main':
+            buttons:
+                template: '@SyliusShop/account/address_book/index/content/main/buttons.html.twig'
+                priority: 100
+            addresses:
+                template: '@SyliusShop/account/address_book/index/content/main/addresses.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.header':
+            title:
+                template: '@SyliusShop/account/address_book/index/content/main/header/title.html.twig'
+                priority: 100
+            subtitle:
+                template: '@SyliusShop/account/address_book/index/content/main/header/subtitle.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.buttons':
+            add_address:
+                template: '@SyliusShop/account/address_book/index/content/main/buttons/add_address.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.addresses':
+            default:
+                template: '@SyliusShop/account/address_book/index/content/main/addresses/default.html.twig'
+                priority: 100
+            list:
+                template: '@SyliusShop/account/address_book/index/content/main/addresses/list.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.addresses.default':
+            badge:
+                template: '@SyliusShop/account/address_book/index/content/main/addresses/default/badge.html.twig'
+                priority: 200
+            content:
+                template: '@SyliusShop/account/address_book/common/main/address/content.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusShop/account/address_book/common/main/address/actions.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.addresses.default.actions':
+            edit:
+                template: '@SyliusShop/account/address_book/common/main/address/actions/edit.html.twig'
+                priority: 100
+            delete:
+                template: '@SyliusShop/account/address_book/common/main/address/actions/delete.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.addresses.list':
+            address:
+                template: '@SyliusShop/account/address_book/index/content/main/addresses/list/address.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.addresses.list.address':
+            content:
+                template: '@SyliusShop/account/address_book/common/main/address/content.html.twig'
+                priority: 100
+            actions:
+                template: '@SyliusShop/account/address_book/common/main/address/actions.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.index.content.main.addresses.list.address.actions':
+            edit:
+                template: '@SyliusShop/account/address_book/common/main/address/actions/edit.html.twig'
+                priority: 200
+            delete:
+                template: '@SyliusShop/account/address_book/common/main/address/actions/delete.html.twig'
+                priority: 100
+            set_default:
+                component: 'sylius_shop:account:address:default_form'
+                props:
+                    resource: '@=_context.customer'
+                    template: '@SyliusShop/account/address_book/set_as_default.html.twig'
+                priority: 0

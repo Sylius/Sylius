@@ -23,6 +23,7 @@ default:
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.payment_request
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.zone
@@ -30,6 +31,7 @@ default:
                 - sylius.behat.context.ui.email
 
                 - sylius.behat.context.ui.admin.managing_payments
+                - sylius.behat.context.ui.admin.managing_payment_requests
                 - sylius.behat.context.ui.shop.cart
             filters:
                 tags: "@managing_payments&&@ui"

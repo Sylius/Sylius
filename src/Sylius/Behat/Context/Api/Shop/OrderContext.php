@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -34,7 +34,7 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class OrderContext implements Context
+final readonly class OrderContext implements Context
 {
     public function __construct(
         private ApiClientInterface $shopClient,
@@ -49,27 +49,8 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^I am changing (this order)'s payment method$/
-     */
-    public function iWantToChangeThisOrdersPaymentMethod(OrderInterface $order): void
-    {
-        $request = $this->requestFactory->custom(
-            sprintf(
-                '%s/shop/account/orders/%s/payments/%s',
-                $this->apiUrlPrefix,
-                $order->getTokenValue(),
-                (string) $order->getPayments()->first()->getId(),
-            ),
-            HttpRequest::METHOD_PATCH,
-            [],
-            $this->shopClient->getToken(),
-        );
-
-        $this->sharedStorage->set('payment_method_patch_request', $request);
-    }
-
-    /**
      * @When I change my payment method to :paymentMethod
+     * @When I try to change my payment method to :paymentMethod
      */
     public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
     {
@@ -93,23 +74,13 @@ final class OrderContext implements Context
     }
 
     /**
-     * @When I try to change my payment method to :paymentMethod
-     */
-    public function iTryToChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
-    {
-        $request = $this->sharedStorage->get('payment_method_patch_request');
-
-        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResource($paymentMethod)]);
-
-        $this->shopClient->executeCustomRequest($request);
-    }
-
-    /**
      * @When I view the summary of my order :order
      */
     public function iViewTheSummaryOfMyOrder(OrderInterface $order): void
     {
         $this->shopClient->show(Resources::ORDERS, $order->getTokenValue());
+
+        $this->sharedStorage->set('cart_token', $order->getTokenValue());
     }
 
     /**
@@ -195,22 +166,6 @@ final class OrderContext implements Context
         }
 
         throw new \InvalidArgumentException('There is no product with given name.');
-    }
-
-    /**
-     * @Then /^the (shipment) status should be "([^"]+)"$/
-     * @Then /^I should see its (payment) status as "([^"]+)"$/
-     */
-    public function theShipmentStatusShouldBe(
-        string $elementType,
-        string $elementStatus,
-        int $position = 0,
-    ): void {
-        $resources = $this->responseChecker->getValue($this->shopClient->getLastResponse(), $elementType . 's');
-
-        $resource = $this->iriConverter->getResourceFromIri($resources[$position]['@id']);
-
-        Assert::same(ucfirst($resource->getState()), $elementStatus);
     }
 
     /**

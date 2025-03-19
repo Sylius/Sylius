@@ -6,10 +6,11 @@ imports:
     - api/account/customer.yml
     - api/account/customer_registration.yml
     - api/account/email_verification.yml
-    - api/account/login.yml
-    - api/addressing/managing_countries.yml
+    - api/account/login.yaml
+    - api/addressing/managing_countries.yaml
     - api/addressing/managing_zones.yml
     - api/admin/dashboard.yaml
+    - api/admin/locale.yaml
     - api/admin/login.yml
     - api/admin/security.yml
     - api/cart/accessing_cart.yml
@@ -28,7 +29,7 @@ imports:
     - api/inventory/checkout_inventory.yaml
     - api/inventory/managing_inventory.yaml
     - api/locale/locales.yaml
-    - api/locale/managing_locales.yml
+    - api/locale/managing_locales.yaml
     - api/order/managing_orders.yml
     - api/order/modifying_placed_order_address.yaml
     - api/order/order_history.yaml
@@ -40,7 +41,6 @@ imports:
     - api/product/managing_product_options.yml
     - api/product/managing_product_reviews.yml
     - api/product/managing_product_variants.yml
-    - api/product/managing_product_variants_ajax.yml
     - api/product/managing_products.yml
     - api/product/viewing_price_history.yml
     - api/product/viewing_price_history_after_catalog_promotions.yml
@@ -57,6 +57,7 @@ imports:
     - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
     - api/shipping/applying_shipping_method_rules.yml
+    - api/shipping/applying_shipping_fee.yml
     - api/shipping/viewing_shipping_methods.yml
     - api/shipping/managing_shipments.yml
     - api/shipping/managing_shipping_categories.yml
@@ -65,7 +66,6 @@ imports:
     - api/taxation/managing_tax_categories.yml
     - api/taxation/managing_tax_rates.yml
     - api/taxon/managing_taxons.yml
-    - api/taxon/managing_taxons_ajax.yml
     - api/user/managing_administrators.yml
     - api/user/managing_customer_groups.yml
     - api/user/managing_customers.yml

@@ -23,14 +23,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.controller.product_slug" class="Sylius\Bundle\ProductBundle\Controller\ProductSlugController">
-            <argument type="service" id="sylius.generator.slug" />
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <deprecated package="sylius/product-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
         <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.product_variant.inner" />
         </service>
@@ -54,25 +46,23 @@
         <service id="sylius.generator.slug" class="Sylius\Component\Product\Generator\SlugGenerator" />
         <service id="Sylius\Component\Product\Generator\SlugGeneratorInterface" alias="sylius.generator.slug" />
 
-        <service id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" class="Sylius\Component\Product\Resolver\CompositeProductVariantResolver">
+        <service id="sylius.resolver.product_variant" class="Sylius\Component\Product\Resolver\CompositeProductVariantResolver">
             <argument type="tagged_iterator" tag="sylius.product_variant_resolver" />
         </service>
-        <service id="sylius.resolver.product_variant" alias="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+        <service id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" alias="sylius.resolver.product_variant" />
         <service id="sylius.resolver.product_variant.composite" alias="sylius.resolver.product_variant" />
 
-        <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
+        <service id="sylius.resolver.product_variant.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.product_variant_resolver" priority="-999" />
         </service>
-        <service id="sylius.resolver.product_variant.default" alias="sylius.product_variant_resolver.default" />
 
         <service id="sylius.listener.select_product_attribute_choice_remove" class="Sylius\Bundle\ProductBundle\EventListener\SelectProductAttributeChoiceRemoveListener">
             <argument>%sylius.model.product_attribute_value.class%</argument>
             <tag name="doctrine.event_listener" event="postUpdate" lazy="true" />
         </service>
 
-        <service id="sylius.available_product_option_values_resolver" class="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolver" />
-        <service id="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface" alias="sylius.available_product_option_values_resolver" />
-        <service id="sylius.resolver.available_product_option_values" alias="sylius.available_product_option_values_resolver" />
+        <service id="sylius.resolver.available_product_option_values" class="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolver" />
+        <service id="Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface" alias="sylius.resolver.available_product_option_values" />
     </services>
 </container>

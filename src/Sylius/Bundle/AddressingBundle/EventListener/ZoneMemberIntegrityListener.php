@@ -42,7 +42,7 @@ final class ZoneMemberIntegrityListener
             $flashes = $this->getSession()->getBag('flashes');
             $flashes->add('error', [
                 'message' => 'sylius.resource.delete_error',
-                'parameters' => ['%resource%' => 'zone'],
+                'parameters' => ['%resource%' => 'Zone'],
             ]);
 
             $event->stopPropagation();
@@ -60,7 +60,7 @@ final class ZoneMemberIntegrityListener
             $flashes = $this->getSession()->getBag('flashes');
             $flashes->add('error', [
                 'message' => 'sylius.resource.delete_error',
-                'parameters' => ['%resource%' => 'province'],
+                'parameters' => ['%resource%' => 'Province'],
             ]);
 
             $event->stopPropagation();

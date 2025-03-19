@@ -11,10 +11,12 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
-        <defaults public="true" />
-
         <service id="sylius.context.channel.fake_channel.persister" class="Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelPersister">
             <argument type="service" id="sylius.context.channel.fake_channel.code_provider" />
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" priority="-8192" />

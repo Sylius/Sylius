@@ -1,0 +1,28 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
+
+{% set order = hookable_metadata.context.resource %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'sylius.ui.summary'|trans }}</div>
+    </div>
+    <div class="py-3">
+        {% block content %}
+            <table class="table table-sm table-hover table-borderless card-table">
+                {% block table %}
+                    <tbody>
+                        {% hook 'summary' %}
+                    </tbody>
+                {% endblock %}
+            </table>
+        {% endblock %}
+    </div>
+    <div class="card-footer">
+        {% block footer %}
+            <div class="d-flex justify-content-between">
+                <div class="h3 mb-0">{{ 'sylius.ui.order_total'|trans }}:</div>
+                <div class="h3 mb-0" {{ sylius_test_html_attribute('order-total') }}>{{ money.format(order.total, order.currencyCode) }}</div>
+            </div>
+        {% endblock %}
+    </div>
+</div>

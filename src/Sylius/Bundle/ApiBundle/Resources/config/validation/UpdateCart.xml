@@ -25,6 +25,9 @@
         <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmpty">
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\UpdateCartEmailNotAllowed">
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="billingAddress">
             <constraint name="Valid" />
         </property>

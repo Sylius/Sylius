@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_admin_locale:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.admin
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.locale
+
+                - sylius.behat.context.api.admin.login
+                - sylius.behat.context.api.admin.managing_administrators
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
+
+            filters:
+                tags: "@admin_locale&&@api"
+            javascript: false

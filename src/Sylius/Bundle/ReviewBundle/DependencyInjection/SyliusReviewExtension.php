@@ -58,7 +58,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
     {
         foreach ($reviewSubjects as $reviewSubject) {
             $reviewChangeListener = new Definition(ReviewChangeListener::class, [
-                new Reference(sprintf('sylius.%s_review.average_rating_updater', $reviewSubject)),
+                new Reference(sprintf('sylius.updater.%s_review.average_rating', $reviewSubject)),
             ]);
 
             $reviewChangeListener
@@ -77,19 +77,13 @@ final class SyliusReviewExtension extends AbstractResourceExtension
                 ])
             ;
 
-            $averageRatingUpdaterOldId = sprintf('sylius.%s_review.average_rating_updater', $reviewSubject);
             $container->addDefinitions([
-                $averageRatingUpdaterOldId => (new Definition(AverageRatingUpdater::class, [
+                sprintf('sylius.updater.%s_review.average_rating', $reviewSubject) => (new Definition(AverageRatingUpdater::class, [
                     new Reference('sylius.calculator.average_rating'),
                     new Reference(sprintf('sylius.manager.%s_review', $reviewSubject)),
                 ]))->setPublic(true),
                 sprintf('sylius.listener.%s_review_change', $reviewSubject) => $reviewChangeListener,
             ]);
-
-            $container->setAlias(
-                sprintf('sylius.updater.%s_review.average_rating', $reviewSubject),
-                $averageRatingUpdaterOldId,
-            );
         }
     }
 }
