@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+    - name: ➕ Sylius Plus
+      url: https://sylius.com/plus/
+      about: Are you looking for additional features in Sylius? Check out Sylius Plus - the edition with advanced, time-saving features tailored for complex implementations
+    - name: ⚠️ Security Issue
+      url: https://docs.sylius.com/the-book/contributing/contributing-code/security-issues
+      about: If you think that you have found a security issue in Sylius, please do not use the issue tracker and do not post it publicly. Instead, all security issues must be sent to `security@sylius.com`.
+    - name: 🙋🏼 Support Question
+      url: https://sylius.com/support/
+      about: GitHub issues are just for reporting Sylius bugs and suggesting new features. If you have questions about using Sylius or third-party bundles, feel free to check out our support options in `https://sylius.com/support`
+    - name: 🇺🇸 Translations
+      url: https://translate.sylius.com/
+      about: See `https://translate.sylius.com/` to add or fix Sylius translations.

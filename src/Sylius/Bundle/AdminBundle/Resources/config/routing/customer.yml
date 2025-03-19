@@ -22,6 +22,7 @@ sylius_admin_customer_order_index:
             template: "@SyliusAdmin/shared/crud/index.html.twig"
             grid: sylius_admin_customer_order
 
+# This route is deprecated since Sylius 2.0 and will be removed in 3.0.
 sylius_admin_customer_orders_statistics:
     path: /orders-statistics
     methods: [GET]
