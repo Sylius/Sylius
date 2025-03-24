@@ -105,11 +105,17 @@ final class EmailContext implements Context
         string $recipient,
         string $localeCode = 'en_US',
     ): void {
+        try {
+            $orderNumber = $this->sharedStorage->get('order_number');
+        } catch (\InvalidArgumentException) {
+            $orderNumber = $order->getNumber();
+        }
+
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s %s',
                 $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
-                $order->getNumber(),
+                $orderNumber,
                 $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode),
             ),
             $recipient,

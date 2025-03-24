@@ -165,15 +165,6 @@ final readonly class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void

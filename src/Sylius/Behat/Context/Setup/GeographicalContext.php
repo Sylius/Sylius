@@ -52,10 +52,10 @@ final readonly class GeographicalContext implements Context
     }
 
     /**
-     * @Given /^the store operates in "([^"]+)"$/
-     * @Given /^the store operates in the "([^"]+)"$/
-     * @Given /^the store operates in "([^"]*)" and "([^"]+)"$/
-     * @Given /^the store(?:| also) has country "([^"]+)"$/
+     * @Given /^(?:the|this) store operates in "([^"]+)"$/
+     * @Given /^(?:the|this) store operates in the "([^"]+)"$/
+     * @Given /^(?:the|this) store operates in "([^"]*)" and "([^"]+)"$/
+     * @Given /^(?:the|this) store(?:| also) has country "([^"]+)"$/
      */
     public function theStoreOperatesInThe(string ...$countriesNames): void
     {

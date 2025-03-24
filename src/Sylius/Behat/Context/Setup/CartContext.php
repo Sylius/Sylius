@@ -30,6 +30,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 final readonly class CartContext implements Context
 {
@@ -55,8 +56,9 @@ final readonly class CartContext implements Context
 
     /**
      * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
+     * @Given /^I added(?:| again) (\d+) (products "[^"]+") to the (cart)$/
      */
-    public function iHaveAddedProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
+    public function iAddedProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue, $quantity);
     }
@@ -81,7 +83,7 @@ final readonly class CartContext implements Context
      */
     public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
-        if ($tokenValue === null) {
+        if ($tokenValue === null || !$this->doesCartWithTokenExist($tokenValue)) {
             $tokenValue = $this->pickupCart();
         }
 
@@ -137,9 +139,9 @@ final readonly class CartContext implements Context
         $this->commandBus->dispatch($updateCart);
     }
 
-    private function pickupCart(): string
+    private function pickupCart(?string $tokenValue = 'cart'): string
     {
-        $tokenValue = $this->generator->generateUriSafeString(10);
+        $tokenValue = $tokenValue ?? $this->generator->generateUriSafeString(10);
 
         /** @var ChannelInterface $channel */
         $channel = $this->sharedStorage->get('channel');
@@ -161,9 +163,13 @@ final readonly class CartContext implements Context
             tokenValue: $tokenValue,
         );
 
-        $this->commandBus->dispatch($pickupCart);
+        $message = $this->commandBus->dispatch($pickupCart);
 
         $this->sharedStorage->set('cart_token', $tokenValue);
+        $this->sharedStorage->set(
+            'order',
+            $message->last(HandledStamp::class)->getResult()
+        );
 
         return $tokenValue;
     }
@@ -191,7 +197,7 @@ final readonly class CartContext implements Context
     private function addProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
     {
         if ($tokenValue === null || !$this->doesCartWithTokenExist($tokenValue)) {
-            $tokenValue = $this->pickupCart();
+            $tokenValue = $this->pickupCart($tokenValue);
         }
 
         $this->commandBus->dispatch(new AddItemToCart(

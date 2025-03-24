@@ -9,7 +9,7 @@ Feature: Subscribing to the newsletter
         And there is a customer "Francis Underwood" with an email "francis@underwood.com"
         And I am logged in as "francis@underwood.com"
 
-    @api @ui
+    @api @ui @mink:chromedriver
     Scenario: Subscribing to the newsletter
         When I want to modify my profile
         And I subscribe to the newsletter

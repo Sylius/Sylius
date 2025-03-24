@@ -94,15 +94,6 @@ final readonly class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @Given I am browsing tax categories
      * @When I browse tax categories
      */

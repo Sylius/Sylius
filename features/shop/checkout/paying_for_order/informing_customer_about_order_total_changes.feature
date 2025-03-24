@@ -11,10 +11,10 @@ Feature: Informing customer about any order total changes during checkout proces
         And it belongs to "Clothes" tax category
         And the store ships everywhere for Free
         And the store allows paying Offline
+        And I am a logged in customer
 
     @api @ui @javascript
     Scenario: Informing customer about order total change due to product price change
-        Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
         And I proceeded through checkout process
         And this product price has been changed to "$25.00"
@@ -23,7 +23,6 @@ Feature: Informing customer about any order total changes during checkout proces
 
     @api @ui @javascript
     Scenario: Being able to confirm order after information appears
-        Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
         And I proceeded through checkout process
         And this product price has been changed to "$25.00"
@@ -32,7 +31,6 @@ Feature: Informing customer about any order total changes during checkout proces
 
     @api @ui @javascript
     Scenario: Informing customer about order total change due to tax change
-        Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
         And I proceeded through checkout process
         And the "NA VAT" tax rate has changed to 10%
@@ -42,9 +40,10 @@ Feature: Informing customer about any order total changes during checkout proces
     @api @ui @javascript
     Scenario: Informing customer about order total change due to shipping method fee change
         Given the store has "UPS" shipping method with "$20.00" fee
-        And I added product "PHP T-Shirt" to the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
+        When I added product "PHP T-Shirt" to the cart
+        And I have addressed the cart to "United States"
         And I have proceeded order with "UPS" shipping method and "Offline" payment
         And the shipping fee for "UPS" shipping method has been changed to "$30.00"
+        When I want to continue checkout
         When I confirm my order
         Then my order should not be placed due to changed order total

@@ -27,6 +27,7 @@ default:
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
+                - sylius.behat.context.ui.save
                 - Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext
                 - Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsPricesContext
                 - sylius.behat.context.ui.shop.product

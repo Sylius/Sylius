@@ -18,7 +18,7 @@ Feature: Preventing cart from being modified after checkout
     Scenario: Preventing from changing billing address after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I addressed the cart
-        And I proceeded with "Free" shipping method and "Cash on Delivery" payment
+        And I have proceeded with "Free" shipping method and "Cash on Delivery" payment method
         And I confirmed my order
         When I try to change the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         Then I should be informed that cart is no longer available
@@ -27,7 +27,7 @@ Feature: Preventing cart from being modified after checkout
     Scenario: Preventing from changing shipping method after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I addressed the cart
-        And I proceeded with "Free" shipping method and "Cash on Delivery" payment
+        And I have proceeded with "Free" shipping method and "Cash on Delivery" payment method
         And I confirmed my order
         When I try to change shipping method to "UPS"
         Then I should be informed that cart is no longer available
@@ -36,7 +36,7 @@ Feature: Preventing cart from being modified after checkout
     Scenario: Preventing from adding product after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I addressed the cart
-        And I proceeded with "Free" shipping method and "Cash on Delivery" payment
+        And I have proceeded with "Free" shipping method and "Cash on Delivery" payment method
         And I confirmed my order
         When I try to add product "AK-47" to the cart
         Then I should be informed that I cannot change the cart items after the checkout is completed
@@ -46,7 +46,7 @@ Feature: Preventing cart from being modified after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I added product "AK-47" to the cart
         And I addressed the cart
-        And I proceeded with "Free" shipping method and "Cash on Delivery" payment
+        And I have proceeded with "Free" shipping method and "Cash on Delivery" payment method
         And I confirmed my order
         When I try to remove product "AK-47" from the cart
         Then I should be informed that cart items are no longer available
@@ -56,7 +56,7 @@ Feature: Preventing cart from being modified after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I added product "AK-47" to the cart
         And I addressed the cart
-        And I proceeded with "Free" shipping method and "Cash on Delivery" payment
+        And I have proceeded with "Free" shipping method and "Cash on Delivery" payment method
         And I confirmed my order
         When I try to change product "Sig Sauer P226" quantity to 2 in my cart
         Then I should be informed that cart items are no longer available

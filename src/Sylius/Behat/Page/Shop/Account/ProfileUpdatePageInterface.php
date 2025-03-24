@@ -28,8 +28,6 @@ interface ProfileUpdatePageInterface extends PageInterface
 
     public function specifyEmail(?string $email): void;
 
-    public function saveChanges(): void;
-
     /**
      * @throws ElementNotFoundException
      */

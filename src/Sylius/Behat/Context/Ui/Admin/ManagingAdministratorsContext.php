@@ -149,14 +149,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I delete administrator with email :email
      */
     public function iDeleteAdministratorWithEmail($email)

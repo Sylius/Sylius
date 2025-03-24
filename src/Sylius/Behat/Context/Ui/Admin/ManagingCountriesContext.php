@@ -105,15 +105,6 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @Then /^the (country "([^"]+)") should appear in the store$/
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)

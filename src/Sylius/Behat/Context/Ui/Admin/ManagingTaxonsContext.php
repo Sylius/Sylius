@@ -163,16 +163,6 @@ final readonly class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     * @When I save my changes to the images
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I attach the :path image with :type type
      * @When I attach the :path image with :type type to this taxon
      * @When I attach the :path image

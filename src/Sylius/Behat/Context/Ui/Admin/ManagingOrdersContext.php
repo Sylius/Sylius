@@ -806,15 +806,6 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When /^I specify their (?:|new )shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifyTheirShippingAddressAsFor(AddressInterface $address): void

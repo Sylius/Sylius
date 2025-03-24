@@ -16,7 +16,7 @@ Feature: Receiving percentage discount on shipping
     Scenario: Receiving percentage discount on shipping
         Given the promotion gives "20%" discount on shipping to every order
         When I add product "PHP T-Shirt" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I proceed with "DHL" shipping method
         Then my cart total should be "$108.00"
         And my cart shipping total should be "$8.00"
 
@@ -24,7 +24,7 @@ Feature: Receiving percentage discount on shipping
     Scenario: Receiving free shipping
         Given the promotion gives free shipping to every order
         When I add product "PHP T-Shirt" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I proceed with "DHL" shipping method
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 

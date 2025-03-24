@@ -34,7 +34,7 @@ final class UserContext implements Context
     /**
      * @When I log out
      */
-    public function iLogOut()
+    public function iLogOut(): void
     {
         $this->homePage->logOut();
     }

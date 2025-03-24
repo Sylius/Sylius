@@ -60,12 +60,6 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
         $this->getElement('email')->setValue($email);
     }
 
-    public function saveChanges(): void
-    {
-        $this->getElement('save_changes_button')->press();
-        $this->waitForElementToBeReady();
-    }
-
     public function subscribeToTheNewsletter(): void
     {
         $this->getElement('subscribe_newsletter')->check();

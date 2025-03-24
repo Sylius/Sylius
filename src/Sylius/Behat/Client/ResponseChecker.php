@@ -20,6 +20,30 @@ use Webmozart\Assert\Assert;
 
 final class ResponseChecker implements ResponseCheckerInterface
 {
+    public function isResponseContentOfClass(Response $response, string $class): bool
+    {
+        $content = json_decode($response->getContent(), true);
+
+        Assert::isArray(
+            $content,
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent(
+                'Content could not be parsed to array.',
+                $response,
+            ),
+        );
+
+        Assert::keyExists(
+            $content,
+            '@type',
+            sprintf(
+                'Expected to get: "@type" key in response, got keys: [%s]',
+                implode(', ', array_keys($content)),
+            ),
+        );
+
+        return str_contains($class, $content['@type']);
+    }
+
     public function countCollectionItems(Response $response): int
     {
         return count($this->getCollection($response));
@@ -271,6 +295,37 @@ final class ResponseChecker implements ResponseCheckerInterface
         }
 
         return false;
+    }
+
+    public function isViolationWithMessageInResponse(Response $response, string $message, ?string $property = null): bool
+    {
+        $violations = $this->getResponseContent($response)['violations'] ?? null;
+
+        if ($violations === null) {
+            throw new \InvalidArgumentException('Response expected to have violations, but it does not.');
+        }
+
+        foreach ($violations as $violation) {
+            if ($violation['message'] === $message && $property === null) {
+                return true;
+            }
+
+            if ($violation['message'] === $message && $property !== null && $violation['propertyPath'] === $property) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function appendError(Response $response): ResponseCheckerInterface
+    {
+        $this->errors[] = $this->getError($response);
+
+        return $this;
     }
 
     private function getResponseContentValue(Response $response, string $key)

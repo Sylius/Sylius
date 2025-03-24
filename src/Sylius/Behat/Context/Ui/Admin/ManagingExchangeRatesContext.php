@@ -101,14 +101,6 @@ final readonly class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I delete the exchange rate between :sourceCurrencyName and :targetCurrencyName
      */
     public function iDeleteTheExchangeRateBetweenAnd(string $sourceCurrencyName, string $targetCurrencyName): void

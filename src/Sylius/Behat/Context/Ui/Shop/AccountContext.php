@@ -87,14 +87,14 @@ final readonly class AccountContext implements Context
         $this->profileUpdatePage->specifyEmail($email);
     }
 
-    /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->profileUpdatePage->saveChanges();
-    }
+//    /**
+//     * @When I save my profile
+//     * @When I try to save my changes
+//     */
+//    public function iSaveMyProfile(): void
+//    {
+//        $this->profileUpdatePage->saveChanges();
+//    }
 
     /**
      * @Then I should be notified that it has been successfully edited

@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ResponseCheckerInterface
 {
+    public function isResponseContentOfClass(Response $response, string $class): bool;
+
     public function countCollectionItems(Response $response): int;
 
     public function countTotalCollectionItems(Response $response): int;
@@ -90,4 +92,6 @@ interface ResponseCheckerInterface
     public function getResponseContent(Response $response): array;
 
     public function hasViolationWithMessage(Response $response, string $message, ?string $property = null): bool;
+
+    public function isViolationWithMessageInResponse(Response $response, string $message, ?string $property = null): bool;
 }

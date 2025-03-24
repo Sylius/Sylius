@@ -16,7 +16,7 @@ Feature: Reapplying promotion on cart change
         And the promotion gives "100%" discount on shipping to every order
         And I have product "PHP T-Shirt" in the cart
         And I addressed it
-        When I proceed with selecting "DHL" shipping method
+        When I proceed with "DHL" shipping method
         And I remove product "PHP T-Shirt" from the cart
         Then cart should be empty with no value
         And there should be no shipping fee

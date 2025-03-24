@@ -21,6 +21,7 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.managing_product_variants
+                - sylius.behat.context.ui.save
                 - Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext
 
             filters:

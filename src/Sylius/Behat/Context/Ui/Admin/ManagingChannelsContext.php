@@ -355,16 +355,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     * @When I save it
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @Then I should be notified that channel with this code already exists
      */
     public function iShouldBeNotifiedThatChannelWithThisCodeAlreadyExists(): void

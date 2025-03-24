@@ -88,11 +88,11 @@ Feature: Preventing not available shipping method selection
         Then I should not be able to select "Dragon Post" shipping method
 
     @api @no-ui
-    Scenario: Not being able to select nonexistent shipping method
+    Scenario: Not being able to select non-existing shipping method
         Given the store has "Raven Post" shipping method with "$10.00" fee
         And I have product "Targaryen T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
-        And I try to select "Inexistent" shipping method
-        Then I should be informed that shipping method with code "Inexistent" does not exist
+        And I try to select non-existing shipping method
+        Then I should be informed that shipping method with code "NON_EXISTING" does not exist

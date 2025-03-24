@@ -25,7 +25,7 @@ Feature: Apply correct shipping fee with product taxes on order
     Scenario: Proper shipping fee, tax and product tax
         Given I have product "PHP T-Shirt" in the cart
         And I addressed the cart
-        And I proceed with selecting "DHL" shipping method
+        And I proceed with "DHL" shipping method
         And I choose "Offline" payment method
         Then my cart total should be "$135.30"
         And my cart taxes should be "$25.30"

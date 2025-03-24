@@ -11,7 +11,7 @@ Feature: Addressing an order
 
     @api @ui @javascript
     Scenario: Address an order without different shipping address
-        Given I have product "PHP T-Shirt" in the cart
+        Given I add the product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -20,7 +20,7 @@ Feature: Addressing an order
 
     @api @ui @mink:chromedriver
     Scenario: Address an order with different shipping address
-        Given I have product "PHP T-Shirt" in the cart
+        Given I add the product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "eddard.stark@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
@@ -31,7 +31,7 @@ Feature: Addressing an order
     @api @ui @javascript
     Scenario: Address an order using existing email
         Given the store has customer "eddard.stark@example.com"
-        And I have product "PHP T-Shirt" in the cart
+        And I add the product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "eddard.stark@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

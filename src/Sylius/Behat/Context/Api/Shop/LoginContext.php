@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;

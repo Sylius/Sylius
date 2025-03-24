@@ -29,7 +29,7 @@ use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
-final class ChannelContext implements Context
+final readonly class ChannelContext implements Context
 {
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
@@ -58,12 +58,13 @@ final class ChannelContext implements Context
 
     /**
      * @Given /^the (channel "[^"]+") has ("([^"]+)" and "([^"]+)" taxons) excluded from showing the lowest price of discounted products$/
+     *
+     * @param TaxonInterface[] $taxons
      */
     public function theTaxonAndTaxonAreExcludedFromShowingTheLowestPriceOfDiscountedProductsOnThisChannel(
         ChannelInterface $channel,
         iterable $taxons,
     ): void {
-        /** @var TaxonInterface $taxon */
         foreach ($taxons as $taxon) {
             $channel->getChannelPriceHistoryConfig()->addTaxonExcludedFromShowingLowestPrice($taxon);
         }

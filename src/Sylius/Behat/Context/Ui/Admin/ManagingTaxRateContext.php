@@ -206,15 +206,6 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @Then /^(this tax rate) name should be "([^"]+)"$/
      * @Then /^(this tax rate) should still be named "([^"]+)"$/
      */
