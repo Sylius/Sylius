@@ -277,9 +277,6 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
 
-            -   name: Install Behat driver
-                run: vendor/bin/bdi detect drivers
-
             -   name: Run Behat (Panther)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
 

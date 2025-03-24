@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {

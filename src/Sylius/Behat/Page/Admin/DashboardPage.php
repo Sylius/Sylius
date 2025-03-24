@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Admin;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;

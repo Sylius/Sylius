@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage implements HomePageInterface
 {

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
 {

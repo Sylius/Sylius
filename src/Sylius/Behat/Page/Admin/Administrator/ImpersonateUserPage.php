@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Administrator;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 class ImpersonateUserPage extends SymfonyPage implements ImpersonateUserPageInterface
 {

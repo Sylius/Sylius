@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Order;
 
 use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
