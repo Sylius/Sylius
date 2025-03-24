@@ -29,12 +29,12 @@ Feature: Seeing orders' total in their currency
     @api @ui @javascript
     Scenario: List of orders from different channels
         Given I changed my current channel to "United States"
-        When I add product "Angel T-Shirt" to the cart
+        When I had product "Angel T-Shirt" in the cart
         And I specified the billing address as "Los Angeles", "Frost Alley", "90210", "United States" for "Lucifer Morningstar"
         And I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         And I changed my current channel to "Great Britain"
-        And I add product "Angel T-Shirt" to the cart
+        And I have product "Angel T-Shirt" in the cart
         And I specified the billing address as "Los Angeles", "Frost Alley", "90210", "United States" for "Lucifer Morningstar"
         And I proceed with "Free" shipping method and "Offline" payment
         When I confirm my order

@@ -182,6 +182,7 @@
 
         <service id="sylius.behat.context.transform.shop_user" class="Sylius\Behat\Context\Transform\ShopUserContext">
             <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
     </services>
 </container>

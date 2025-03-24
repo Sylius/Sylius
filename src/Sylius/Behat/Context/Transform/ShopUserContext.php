@@ -14,14 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ShopUserContext implements Context
+final readonly class ShopUserContext implements Context
 {
-    public function __construct(private UserRepositoryInterface $shopUserRepository)
-    {
+    public function __construct(
+        private UserRepositoryInterface $shopUserRepository,
+        private SharedStorageInterface $sharedStorage,
+    ) {
     }
 
     /**
@@ -34,5 +38,13 @@ final class ShopUserContext implements Context
         Assert::notNull($shopUser, sprintf('Shop User with email "%s" does not exist', $email));
 
         return $shopUser;
+    }
+
+    /**
+     * @Transform /^(I|my)$/
+     */
+    public function getLoggedInUser(): ShopUserInterface
+    {
+        return $this->sharedStorage->get('user');
     }
 }
