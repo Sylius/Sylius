@@ -1,0 +1,49 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+
+  input:not(input[type="number"], input[type="email"], input[name*="translations"]), textarea {
+    unicode-bidi: bidi-override;
+    text-align: right;
+  }
+
+  input[type="number"], input[type="email"], input[name*="translations"], textarea[name*="translations"] {
+    text-align: right;
+    direction: ltr;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .checkout-sidebar::before {
+      right: 0;
+    }
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding-left: var(--bs-breadcrumb-item-padding-x);
+    padding-right: 0;
+  }
+
+  .breadcrumb-item + .breadcrumb-item {
+    padding-right: var(--bs-breadcrumb-item-padding-x);
+    padding-left: 0;
+  }
+
+  .accordion-button::after {
+    margin-left: 0;
+  }
+
+  .start-0 {
+    left: unset!important;
+    right: 0 !important;
+  }
+}

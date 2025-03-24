@@ -5,7 +5,6 @@
         {{ 'sylius.ui.locale'|trans }}
     </div>
     <div class="col d-flex gap-2 align-items-center" {{ sylius_test_html_attribute('order-locale-name') }}>
-        {{ flag(sylius.localeCode|sylius_locale_country) }}
         {{ sylius.localeCode|sylius_locale_name }}
     </div>
 </div>
