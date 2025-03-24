@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
+use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
+
 class SharedStorage implements SharedStorageInterface
 {
     private array $clipboard = [];
@@ -22,7 +24,7 @@ class SharedStorage implements SharedStorageInterface
     public function get(string $key)
     {
         if (!isset($this->clipboard[$key])) {
-            throw new \InvalidArgumentException(sprintf('There is no current resource for "%s"!', $key));
+            throw new SharedStorageElementNotFoundException($key);
         }
 
         return $this->clipboard[$key];
