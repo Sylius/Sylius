@@ -1,0 +1,72 @@
+[dir="rtl"] {
+  .sylius-filters select {
+    background-position: calc(0% + 10px) calc(50% + 3px) !important;
+  }
+
+  @media (min-width: 1200px) {
+    [data-route="sylius_shop_product_show"] .ui.two.column.stackable.grid > .column:last-child {
+      padding-left: 0 !important;
+      padding-right: 40px !important;
+    }
+  }
+
+  @media (min-width: 1500px) {
+    [data-route="sylius_shop_product_show"] .ui.two.column.stackable.grid > .column:last-child {
+      padding-left: 0 !important;
+      padding-right: 60px !important;
+    }
+  }
+
+  .ui.divided.grid:not([class*="vertically divided"]) > .column:not(.row), .ui.divided.grid:not([class*="vertically divided"]) > .row > .column {
+    box-shadow: 1px 0 0 0 rgba(34, 36, 38, 0.15);
+  }
+
+  .ui.divided.grid:not([class*="vertically divided"]) > .column:first-child, .ui.divided.grid:not([class*="vertically divided"]) > .row > .column:first-child {
+    box-shadow: none;
+  }
+
+  .ui.steps .step:after {
+    right: unset;
+    left: 0;
+    transform: translateY(-50%) translateX(-50%) rotate(135deg);
+  }
+
+  .ui.steps .step > .icon {
+    margin: 0 0 0 1rem;
+  }
+
+  [data-route=sylius_shop_homepage] .ui.huge.header::after, .ui.horizontal.section.divider.header::after {
+    padding: 0 15px 0 0;
+  }
+
+  @media (min-width: 992px) {
+    [data-route="sylius_shop_homepage"] .homepage-banner .homepage-banner__content {
+      left: unset;
+      right: 70px;
+    }
+  }
+
+  @media (min-width: 1640px) {
+    [data-route="sylius_shop_homepage"] .homepage-banner .homepage-banner__content {
+      left: unset;
+      right: 0;
+    }
+  }
+
+  .ui.divided.horizontal.list > .item {
+    border-left: none;
+    border-right: 1px solid rgba(34, 36, 38, 0.15);
+  }
+
+  .ui.divided.horizontal.list > .item:not(:first-child) {
+    padding-right: 0.5em!important;
+  }
+
+  .ui.divided.horizontal.list > .item:not(:last-child) {
+    padding-left: 0.5em!important;
+  }
+
+  .address-card .buttons .ui.button, .address-card .buttons .ui.basic.button, .address-card .buttons .ui.labeled.button, .address-card .buttons .ui.labeled.icon.button, .address-card .buttons .buttons .ui.labeled.icon.button {
+    padding: 6px 0 6px 10px !important;
+  }
+}
