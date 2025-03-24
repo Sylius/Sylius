@@ -456,6 +456,7 @@ final class CheckoutContext implements Context
             'order_number',
             $this->responseChecker->getValue($response, 'number'),
         );
+        $this->sharedStorage->remove('cart_token');
     }
 
     /**

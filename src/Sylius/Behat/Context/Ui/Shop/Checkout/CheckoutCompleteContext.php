@@ -96,6 +96,8 @@ final readonly class CheckoutCompleteContext implements Context
         }
 
         $this->completePage->confirmOrder();
+
+        $this->sharedStorage->remove('cart_token');
     }
 
     /**

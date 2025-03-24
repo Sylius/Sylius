@@ -26,10 +26,10 @@ Feature: Seeing orders' total in their currency
         When I confirm my order
         Then the administrator should see the order with total "$20.00" in order list
 
-    @api @ui @javascript
+    @api @ui
     Scenario: List of orders from different channels
         Given I changed my current channel to "United States"
-        When I had product "Angel T-Shirt" in the cart
+        When I added product "Angel T-Shirt" to the cart
         And I specified the billing address as "Los Angeles", "Frost Alley", "90210", "United States" for "Lucifer Morningstar"
         And I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
