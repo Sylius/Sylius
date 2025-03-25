@@ -341,7 +341,7 @@ final class CartContext implements Context
      */
     public function myCartTotalShouldBe(string $tokenValue, int $total): void
     {
-        $response = $this->shopClient->getLastResponse();
+        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
         $responseTotal = $this->responseChecker->getValue(
             $response,
             'total',
