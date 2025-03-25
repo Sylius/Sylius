@@ -47,6 +47,7 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument>%sylius.security.api_route%</argument>
+            <argument type="service" id="sylius.repository.order"/>
         </service>
 
         <service id="sylius.behat.context.api.shop.customer" class="Sylius\Behat\Context\Api\Shop\CustomerContext">

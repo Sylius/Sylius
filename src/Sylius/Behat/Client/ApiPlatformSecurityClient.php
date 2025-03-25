@@ -91,7 +91,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
         if ($this->sharedStorage->has('cart_token')) {
             $this->sharedStorage->set('previous_cart_token', $this->sharedStorage->get('cart_token'));
-            $this->sharedStorage->set('cart_token', null);
+            $this->sharedStorage->remove('cart_token');
         }
     }
 }

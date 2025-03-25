@@ -80,6 +80,7 @@ final readonly class OrderContext implements Context
     {
         $this->shopClient->show(Resources::ORDERS, $order->getTokenValue());
 
+        $this->sharedStorage->set('order', $order);
         $this->sharedStorage->set('cart_token', $order->getTokenValue());
     }
 
