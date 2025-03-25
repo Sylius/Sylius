@@ -118,7 +118,6 @@ final class CartContext implements Context
     /**
      * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
      * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
-     * @When /^I have ("[^"]+" variant) of (product "[^"]+") in the (cart)$/
      */
     public function iAddVariantOfThisProductToTheCart(
         ProductVariantInterface $productVariant,
@@ -342,7 +341,7 @@ final class CartContext implements Context
      */
     public function myCartTotalShouldBe(string $tokenValue, int $total): void
     {
-        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
+        $response = $this->shopClient->getLastResponse();
         $responseTotal = $this->responseChecker->getValue(
             $response,
             'total',

@@ -1,7 +1,7 @@
 @applying_taxes
 Feature: Apply correct taxes for items with different tax rates
     In order to pay proper amount when buying goods from different tax categories
-    As a Visitor
+    As a Customer
     I want to have correct taxes applied to my order
 
     Background:
@@ -13,17 +13,20 @@ Feature: Apply correct taxes for items with different tax rates
         And it belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "$50.00"
         And it belongs to "Mugs" tax category
+        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Proper taxes for different taxed products
-        When I add product "PHP T-Shirt" to the cart
-        And I add product "Symfony Mug" to the cart
+        Given I added product "PHP T-Shirt" to the cart
+        And I added product "Symfony Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$175.50"
         And my cart taxes should be "$25.50"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Proper taxes for multiple products with different tax rate
-        When I add 3 products "PHP T-Shirt" to the cart
-        And I add 4 products "Symfony Mug" to the cart
+        Given I added 3 products "PHP T-Shirt" to the cart
+        And I added 4 products "Symfony Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$579.00"
         And my cart taxes should be "$79.00"

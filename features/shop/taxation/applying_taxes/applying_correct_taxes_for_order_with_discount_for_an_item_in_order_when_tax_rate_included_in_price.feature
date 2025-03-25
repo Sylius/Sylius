@@ -1,7 +1,7 @@
 @applying_taxes
 Feature: Apply correct taxes for an order with a discount for an item in it when tax rates are included in price
     In order to pay proper amount when buying goods
-    As a Visitor
+    As a Customer
     I want to have correct taxes applied to my order when it has a discount and tax rates are included in products prices
 
     Background:
@@ -19,29 +19,34 @@ Feature: Apply correct taxes for an order with a discount for an item in it when
         And the promotion gives "$10.00" off on a "Symfony Mug" product
         And there is a promotion "PHP promotion"
         And the promotion gives "$10.00" off on a "PHP Mug" product
+        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Properly rounded up tax for single product
-        When I add product "Symfony Mug" to the cart
+        Given I added product "Symfony Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$46.95"
         And my included in price taxes should be "$4.27"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Properly rounded down tax for single product
-        When I add product "PHP Mug" to the cart
+        Given I added product "PHP Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$46.90"
         And my included in price taxes should be "$4.26"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Properly rounded taxes for order with multiple products without discount
-        When I add 2 products "PHP T-Shirt" to the cart
-        And I add product "Symfony Mug" to the cart
+        Given I added 2 products "PHP T-Shirt" to the cart
+        And I added product "Symfony Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$66.95"
         And my included in price taxes should be "$8.01"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Properly rounded taxes for order with multiple products with discount
-        When I add 2 products "PHP T-Shirt" to the cart
-        And I add 2 products "Symfony Mug" to the cart
+        Given I added 2 products "PHP T-Shirt" to the cart
+        And I added 2 products "Symfony Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$113.90"
         And my included in price taxes should be "$12.28"

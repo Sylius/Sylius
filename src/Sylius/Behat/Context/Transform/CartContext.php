@@ -17,8 +17,8 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class CartContext implements Context
@@ -44,7 +44,7 @@ final readonly class CartContext implements Context
 
         return (
             $order->getTokenValue() === $token &&
-            $order->getCheckoutState() === BaseOrderInterface::STATE_CART
+            ($order->getCheckoutState() !== OrderCheckoutStates::STATE_COMPLETED)
         ) ? $token : null;
     }
 

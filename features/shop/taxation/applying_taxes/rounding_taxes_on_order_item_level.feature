@@ -1,7 +1,7 @@
 @applying_taxes
 Feature: Round taxes on order item level
     In order to avoid taxes amount inaccuracy
-    As a Visitor
+    As a Customer
     I want to have correct taxes applied to my order
 
     Background:
@@ -15,21 +15,25 @@ Feature: Round taxes on order item level
         And it belongs to "Mugs" tax category
         And the store has a product "PHP Mug" priced at "$45.94"
         And it belongs to "Mugs" tax category
+        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Properly rounded up tax for single product
-        When I add product "Symfony Mug" to the cart
+        Given I added product "Symfony Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$50.55"
         And my cart taxes should be "$4.60"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Properly rounded down tax for single product
-        When I add product "PHP Mug" to the cart
+        Given I added product "PHP Mug" to the cart
+        When I check details of my cart
         Then my cart total should be "$50.53"
         And my cart taxes should be "$4.59"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Properly rounded taxes for multiple products
-        When I add 10 products "PHP T-Shirt" to the cart
+        Given I added 10 products "PHP T-Shirt" to the cart
+        When I check details of my cart
         Then my cart total should be "$124.23"
         And my cart taxes should be "$23.23"
