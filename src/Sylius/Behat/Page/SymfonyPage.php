@@ -21,7 +21,7 @@ abstract class SymfonyPage extends BaseSymfonyPage implements SymfonyPageInterfa
 {
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
 
         return parent::getElement($name, $parameters);
     }

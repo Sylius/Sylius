@@ -59,7 +59,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeShippingMethod(): void

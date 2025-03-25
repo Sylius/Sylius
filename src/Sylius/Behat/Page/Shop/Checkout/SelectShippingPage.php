@@ -75,7 +75,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeAddress(): void

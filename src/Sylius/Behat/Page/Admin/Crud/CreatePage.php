@@ -40,7 +40,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             $this->waitForFormUpdate();
         }
         $this->getDocument()->pressButton('Create');
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function getValidationMessage(string $element, array $parameters = []): string
