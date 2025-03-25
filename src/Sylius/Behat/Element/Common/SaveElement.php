@@ -21,9 +21,10 @@ class SaveElement extends Element implements SaveElementInterface
 {
     public function saveChanges(): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->find('css', 'body')->click();
-        }
+        // TODO
+//        if (DriverHelper::isJavascript($this->getDriver())) {
+//            $this->getDocument()->find('css', 'body')->click();
+//        }
 
         try {
             $this->getElement('update_changes_button')->press();
