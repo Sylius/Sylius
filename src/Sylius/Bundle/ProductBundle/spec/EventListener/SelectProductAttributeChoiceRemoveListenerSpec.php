@@ -25,12 +25,10 @@ use Mockery\MockInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeValueRepository;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
 final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavior
 {
