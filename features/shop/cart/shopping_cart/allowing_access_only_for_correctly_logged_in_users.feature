@@ -105,7 +105,9 @@ Feature: Allowing access only for correctly logged in users
 
     @api @ui @mink:chromedriver
     Scenario: Accessing to increase quantity of an item in the cart by the customer
-        When the customer adds "Stark T-Shirt" product to the cart
+        Given the customer logged in
+        Given the customer added "Stark T-Shirt" product to the cart
+        When the customer checks details of their cart
         And the customer change product "Stark T-Shirt" quantity to 2 in his cart
         Then the customer should see product "Stark T-Shirt" with quantity 2 in his cart
 

@@ -50,6 +50,7 @@ final readonly class CartContext implements Context
      * @Given I am on the summary of my cart page
      * @When /^I see the summary of my (?:|previous )cart$/
      * @When I check details of my cart
+     * @When the customer checks details of their cart
      * @When I check items in my cart
      */
     public function iCheckDetailsOfMyCart(): void
@@ -117,10 +118,6 @@ final readonly class CartContext implements Context
      */
     public function iChangeQuantityTo(string $productName, string $quantity): void
     {
-        if (!$this->summaryPage->isOpen()) {
-            $this->summaryPage->open();
-        }
-
         $this->summaryPage->changeQuantity($productName, $quantity);
     }
 
