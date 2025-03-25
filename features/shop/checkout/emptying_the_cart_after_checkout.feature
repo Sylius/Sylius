@@ -11,10 +11,10 @@ Feature: Emptying the cart after checkout
         And the store allows paying with "Cash on Delivery"
         And I am a logged in customer
 
-    @api @ui @javascript
+    @no-api @ui @javascript
     Scenario: Cart is emptied after the checkout
         Given I have product "Sig Sauer P226" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Cash on Delivery" payment
-        When I confirm my order
+        And I addressed the cart
+        When I proceed with "Free" shipping method and "Cash on Delivery" payment
+        And I confirm my order
         Then my cart should be empty

@@ -350,7 +350,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given I have :variantName variant of product :product in the cart
      * @When I add :variantName variant of product :product to the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */

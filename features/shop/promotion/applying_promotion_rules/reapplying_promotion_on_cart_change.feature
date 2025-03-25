@@ -18,7 +18,7 @@ Feature: Reapplying promotion on cart change
         And I addressed it
         When I proceed with "DHL" shipping method
         And I remove product "PHP T-Shirt" from the cart
-        Then cart should be empty with no value
+        Then my cart should be empty
         And there should be no shipping fee
         And there should be no discount applied
 

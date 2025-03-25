@@ -23,6 +23,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -379,16 +380,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^my (cart) should be empty$/
-     * @Then /^(cart) should be empty with no value$/
+     * @Then my cart should be empty
      */
-    public function myCartShouldBeEmpty(string $tokenValue): void
+    public function myCartShouldBeEmpty(): void
     {
-        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
+        $tokenValue = $this->sharedStorage->get('cart_token');
 
-        Assert::true(
-            $this->responseChecker->isShowSuccessful($response),
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response),
+        Assert::isEmpty(
+            $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $tokenValue), 'items'),
+            'Cart is not empty.',
         );
     }
 
