@@ -26,6 +26,7 @@ default:
                 - sylius.behat.context.transform.taxon
                 - sylius.behat.context.transform.zone
 
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
@@ -39,7 +40,6 @@ default:
                 - sylius.behat.context.setup.product_option
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.product_taxon
-                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.shipping_category
                 - sylius.behat.context.setup.taxonomy

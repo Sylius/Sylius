@@ -20,8 +20,8 @@ default:
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
 
-                - sylius.behat.context.ui.admin.product_showpage
                 - sylius.behat.context.ui.admin.error_page
+                - sylius.behat.context.ui.admin.product_showpage
 
             filters:
                 tags: "@admin_error_page&&@ui"

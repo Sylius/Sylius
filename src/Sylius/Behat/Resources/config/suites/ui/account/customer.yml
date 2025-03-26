@@ -6,8 +6,8 @@ default:
         ui_customer_account:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.session
                 - sylius.behat.context.hook.mailer
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel
@@ -29,8 +29,8 @@ default:
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
-                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
 
@@ -42,9 +42,9 @@ default:
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.addressing
                 - sylius.behat.context.ui.shop.checkout.complete
+                - sylius.behat.context.ui.shop.checkout.order_details
                 - sylius.behat.context.ui.shop.checkout.payment
                 - sylius.behat.context.ui.shop.checkout.shipping
-                - sylius.behat.context.ui.shop.checkout.order_details
                 - sylius.behat.context.ui.shop.currency
                 - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.user

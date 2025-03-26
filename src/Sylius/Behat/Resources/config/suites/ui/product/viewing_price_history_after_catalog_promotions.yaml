@@ -21,8 +21,8 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.product_showpage
-                - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
                 - Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext
+                - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
 
             filters:
                 tags: "@viewing_price_history_after_catalog_promotions&&@ui"

@@ -19,8 +19,8 @@ default:
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
 
-                - sylius.behat.context.ui.shop.product
                 - sylius.behat.context.ui.shop.error_page
+                - sylius.behat.context.ui.shop.product
 
             filters:
                 tags: "@shop_error_page&&@ui"
