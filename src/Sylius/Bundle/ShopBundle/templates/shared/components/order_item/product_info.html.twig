@@ -2,7 +2,7 @@
 {% set product = variant.product %}
 
 <div class="d-flex align-items-center gap-4">
-    <div style="width: 6rem;">
+    <div class="flex-shrink-0 align-self-start align-self-md-auto" style="width: 6rem;">
         <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
             {{ component('sylius_shop:main_image', {
                 product: variant.hasImages ? variant : product,
