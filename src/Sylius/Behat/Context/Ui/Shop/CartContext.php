@@ -362,15 +362,16 @@ final readonly class CartContext implements Context
         $this->productShowPage->addToCartWithQuantity($quantity);
     }
 
-//    /**
-//     */
-//    public function iAddProductsToTheCart(string $quantity, ProductInterface $product): void
-//    {
-//        $this->productShowPage->open(['slug' => $product->getSlug()]);
-//        $this->productShowPage->addToCartWithQuantity($quantity);
-//
-//        $this->sharedStorage->set('product', $product);
-//    }
+    /**
+     * @When /^I add(?:| again) (\d+) (products "([^"]+)") to the cart$/
+     */
+    public function iAddProductsToTheCart(string $quantity, ProductInterface $product): void
+    {
+        $this->productShowPage->open(['slug' => $product->getSlug()]);
+        $this->productShowPage->addToCartWithQuantity($quantity);
+
+        $this->sharedStorage->set('product', $product);
+    }
 
     /**
      * @Then /^I should be(?: on| redirected to) my cart summary page$/
