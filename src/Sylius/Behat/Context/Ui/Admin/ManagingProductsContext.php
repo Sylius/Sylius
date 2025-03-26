@@ -594,18 +594,6 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     * @When I save my changes to the images
-     */
-    public function iSaveMyChanges(): void
-    {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->saveChanges();
-    }
-
-    /**
      * @When I cancel my changes
      */
     public function iCancelChanges(): void

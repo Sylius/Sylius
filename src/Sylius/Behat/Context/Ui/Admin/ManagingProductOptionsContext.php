@@ -79,15 +79,6 @@ final readonly class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I name it :name in :language
      */
     public function iNameItInLanguage($name, $language): void

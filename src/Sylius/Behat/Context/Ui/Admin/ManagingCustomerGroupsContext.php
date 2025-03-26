@@ -83,15 +83,6 @@ final readonly class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I check (also) the :customerGroupName customer group
      */
     public function iCheckTheCustomerGroup(string $customerGroupName): void

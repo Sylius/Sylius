@@ -206,14 +206,6 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I generate it
      * @When I generate these coupons
      * @When I try to generate it

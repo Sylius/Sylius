@@ -169,15 +169,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @Then /^(this customer) with name "([^"]*)" should appear in the store$/
      */
     public function theCustomerWithNameShouldAppearInTheRegistry(CustomerInterface $customer, $name)
