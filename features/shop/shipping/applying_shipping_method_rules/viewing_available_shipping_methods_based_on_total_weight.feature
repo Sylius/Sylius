@@ -38,7 +38,7 @@ Feature: Viewing available shipping methods based on total weight
     @api @ui @javascript
     Scenario: Seeing shipping methods that handle all goods
         Given I have product "T-Shirt for Tinkerbell" in the cart
-        And I add 11 of them to my cart
+        When I add 11 of them to my cart
         When I specified the billing address
         Then I should be on the checkout shipping step
         And I should see "DHL" shipping method
