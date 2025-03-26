@@ -440,6 +440,7 @@ final class CheckoutContext implements Context
             'order_number',
             $this->responseChecker->getValue($response, 'number'),
         );
+        $this->sharedStorage->set('order', $this->orderRepository->findOneByNumber($this->sharedStorage->get('order_number')));
     }
 
     /**
