@@ -1252,7 +1252,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I try to add (product "[^"]+") to the (cart)$/
      */
-    public function iTryToAddProductToCart(ProductInterface $product, string $tokenValue): void
+    public function iTryToAddProductToCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue);
     }
@@ -1297,7 +1297,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I try to remove (product "[^"]+") from the (cart)$/
      */
-    public function iTryToRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
+    public function iTryToRemoveProductFromTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->removeOrderItemFromCart($product->getId(), $tokenValue);
     }
@@ -1305,7 +1305,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I try to change quantity to (\d+) of (product "[^"]+") from the (cart)$/
      */
-    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, string $tokenValue): void
+    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
     }
