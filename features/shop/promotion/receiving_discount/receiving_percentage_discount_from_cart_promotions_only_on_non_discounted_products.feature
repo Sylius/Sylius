@@ -1,7 +1,7 @@
 @receiving_discount
 Feature: Receiving percentage discount from cart promotions only on non discounted products
     In order not to combine cart and catalog promotions
-    As a Store Owner
+    As a Customer
     I want to apply discount only on products that are non discounted
 
     Background:
@@ -10,6 +10,7 @@ Feature: Receiving percentage discount from cart promotions only on non discount
         And the store has a product "T-Shirt" priced at "$20.00"
         And the store has a product "Cap" priced at "$10.00"
         And there is a catalog promotion "Winter sale" that reduces price by "25%" and applies on "T-Shirt" product
+        And I am a logged in customer
 
     @api @ui @mink:chromedriver
     Scenario: Receiving product discount from cart promotions also on discounted products
