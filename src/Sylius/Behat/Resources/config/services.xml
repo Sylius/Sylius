@@ -15,7 +15,7 @@
     <imports>
         <import resource="services/api.xml" />
         <import resource="services/contexts.xml" />
-        <import resource="services/elements.xml" />
+        <import resource="services/elements/**/*.xml" />
         <import resource="services/pages.xml" />
     </imports>
 
