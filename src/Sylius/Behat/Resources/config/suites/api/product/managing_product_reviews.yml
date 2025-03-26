@@ -7,8 +7,8 @@ default:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
-                - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_review
                 - sylius.behat.context.transform.shared_storage

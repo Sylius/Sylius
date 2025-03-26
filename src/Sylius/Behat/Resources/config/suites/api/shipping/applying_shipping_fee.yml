@@ -5,8 +5,8 @@ default:
     suites:
         api_applying_shipping_fee:
             contexts:
-                - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.calendar
+                - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.cart
