@@ -25,6 +25,7 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.address_book
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout

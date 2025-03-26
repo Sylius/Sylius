@@ -21,6 +21,7 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.product_showpage
+                - sylius.behat.context.ui.save
                 - Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
 

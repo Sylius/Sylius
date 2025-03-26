@@ -32,6 +32,7 @@ default:
                 - sylius.behat.context.ui.admin.managing_products
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.browser
+                - sylius.behat.context.ui.save
 
             filters:
                 tags: "@admin_dashboard&&@ui"

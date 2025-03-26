@@ -33,6 +33,7 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy
 
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.addressing
