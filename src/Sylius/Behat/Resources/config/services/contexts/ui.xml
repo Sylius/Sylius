@@ -628,5 +628,9 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.shared_security" />
         </service>
+
+        <service id="sylius.behat.context.ui.save" class="Sylius\Behat\Context\Ui\SaveContext">
+            <argument type="service" id="sylius.behat.element.save" />
+        </service>
     </services>
 </container>
