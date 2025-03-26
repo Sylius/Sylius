@@ -82,6 +82,7 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
 
         $firstSubform = $this->getFirstImageSubform();
         $firstSubform->find('css', '[data-test-image-delete]')->click();
+        $this->waitForFormUpdate();
     }
 
     public function hasImageWithType(string $type): bool
