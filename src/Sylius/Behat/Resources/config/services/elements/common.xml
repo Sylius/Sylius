@@ -22,5 +22,7 @@
         </service>
 
         <service id="sylius.behat.element.browser" class="Sylius\Behat\Element\BrowserElement" parent="sylius.behat.element"/>
+
+        <service id="sylius.behat.element.save" class="Sylius\Behat\Element\SaveElement" parent="sylius.behat.element"/>
     </services>
 </container>
