@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Behat\Mink\Exception\DriverException;
-use Sylius\Behat\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\JQueryHelper;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface

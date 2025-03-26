@@ -17,8 +17,8 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 
