@@ -92,19 +92,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
-     * @When /^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
-     */
-    public function iAddMultipleProductsToTheCart(array $products): void
-    {
-        $tokenValue = $this->pickupCart();
-
-        foreach ($products as $product) {
-            $this->putProductToCart($product, $tokenValue);
-        }
-    }
-
-    /**
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
      * @When /^I add(?:| again) (\d+) (products "[^"]+") to the (cart)$/
      * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/

@@ -1,7 +1,7 @@
 @receiving_discount
 Feature: Applying promotion with an expiration date
     In order to pay proper amount after using the promotion
-    As a Visitor
+    As a Customer
     I want to have promotion's discounts applied to my cart only if the given promotion is valid
 
     Background:

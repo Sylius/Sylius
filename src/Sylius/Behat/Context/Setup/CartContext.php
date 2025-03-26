@@ -79,6 +79,17 @@ final readonly class CartContext implements Context
     }
 
     /**
+     * @Given /^I added (products "([^"]+)" and "([^"]+)") to the (cart)$/
+     * @Given /^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the (cart)$/
+     */
+    public function iAddedProductsToTheCart2(array $products, $tokenValue): void
+    {
+        foreach ($products as $product) {
+            $this->addProductToCart($product, $tokenValue);
+        }
+    }
+
+    /**
      * @Given /^I have ("[^"]+" variant of product "[^"]+") in the (cart)$/
      * @Given /^I have ("[^"]+" variant of this product) in the (cart)$/
      */

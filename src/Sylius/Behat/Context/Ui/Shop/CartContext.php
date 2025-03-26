@@ -320,19 +320,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
-     * @When /^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
-     *
-     * @param ProductInterface[] $products
-     */
-    public function iAddMultipleProductsToTheCart(array $products): void
-    {
-        foreach ($products as $product) {
-            $this->iAddProductToTheCart($product);
-        }
-    }
-
-    /**
      * @When /^an anonymous user in another browser adds (products "([^"]+)" and "([^"]+)") to the cart$/
      *
      * @param ProductInterface[] $products
