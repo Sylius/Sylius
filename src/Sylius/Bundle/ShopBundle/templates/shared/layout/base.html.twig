@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 
-<html lang="{{ app.request.locale|slice(0, 2) }}" {{ rtl.default(app.locale) }}>
+<html lang="{{ app.request.locale|slice(0, 2) }}" {{ rtl.default(sylius.localeCode) }}>
     <head>
         {% block metatags %}
             {% hook '#metatags' with { _prefixes: prefixes } %}
