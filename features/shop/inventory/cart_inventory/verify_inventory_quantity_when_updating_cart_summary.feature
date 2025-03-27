@@ -16,14 +16,14 @@ Feature: Verifying inventory quantity on cart summary
 
     @api @ui @javascript
     Scenario: Being unable to save a cart with product that is out of stock
-        Given I have added 3 products "Iron Maiden T-Shirt" to the cart
+        Given I added 3 products "Iron Maiden T-Shirt" to the cart
         When I change product "Iron Maiden T-Shirt" quantity to 6 in my cart
         Then I should be notified that this product has insufficient stock
 
     @no-api @ui @javascript
     Scenario: Preventing the cart recalculation when the form has errors
-        Given I have added 3 products "Iron Maiden T-Shirt" to the cart
-        And I have added 1 product "Black Dress" to the cart
+        Given I added 3 products "Iron Maiden T-Shirt" to the cart
+        And I added product "Black Dress" to the cart
         When I change product "Iron Maiden T-Shirt" quantity to 4 in my cart
         And I change product "Black Dress" quantity to 11 in my cart
         Then I should be notified that this product has insufficient stock
@@ -33,6 +33,6 @@ Feature: Verifying inventory quantity on cart summary
 
     @api @ui @javascript
     Scenario: Placing an order with products that have sufficient quantity
-        Given I have added 3 products "Iron Maiden T-Shirt" in the cart
+        Given I added 3 products "Iron Maiden T-Shirt" to the cart
         When I change product "Iron Maiden T-Shirt" quantity to 5 in my cart
         Then I should not be notified that this product cannot be updated
