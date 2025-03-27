@@ -27,7 +27,7 @@ Feature: Apply correct taxes for products with different tax rates for different
 
     @api @ui @javascript
     Scenario: Displaying correct tax after specifying billing address
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         When I proceed with selecting "Germany" as billing country
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
@@ -48,7 +48,7 @@ Feature: Apply correct taxes for products with different tax rates for different
 
     @api @ui @javascript
     Scenario: Displaying correct taxes for multiple products from different zones after specifying billing address
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I have 2 products "Symfony Mug" in the cart
         When I proceed with selecting "Germany" as billing country
         Then my cart total should be "$223.00"
