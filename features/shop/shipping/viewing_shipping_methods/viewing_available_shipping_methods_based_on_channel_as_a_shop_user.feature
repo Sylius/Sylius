@@ -1,7 +1,7 @@
 @viewing_shipping_methods
-Feature: Viewing available shipping methods based on channel as a Shop User
+Feature: Viewing available shipping methods based on channel
     In order to only see applicable shipping methods
-    As a Shop User
+    As a Customer
     I want to see the shipping methods that are available to my order based on the channel
 
     Background:
@@ -16,20 +16,20 @@ Feature: Viewing available shipping methods based on channel as a Shop User
         And the store has a product "T-Shirt" priced at "$20.00" available in channel "United Kingdom" and channel "United States"
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that are available in channel as an logged in customer
         Given I changed my current channel to "United States"
-        And I have product "T-Shirt" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        And I added product "T-Shirt" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "ultra fast" shipping method
         And I should not see "uber speedy" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that are available in another channel as an logged in customer
         Given I changed my current channel to "United Kingdom"
-        And I have product "T-Shirt" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        And I added product "T-Shirt" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "uber speedy" shipping method
         And I should not see "ultra fast" shipping method

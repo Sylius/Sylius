@@ -18,8 +18,8 @@ Feature: Viewing available shipping methods based on channel as a Visitor
     @api @ui @javascript
     Scenario: Seeing shipping methods that are available in channel
         Given I changed my current channel to "United States"
-        And I have product "T-Shirt" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        When I add product "T-Shirt" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
         Then I should be on the checkout shipping step
         And I should see "ultra fast" shipping method
         And I should not see "uber speedy" shipping method
@@ -27,8 +27,8 @@ Feature: Viewing available shipping methods based on channel as a Visitor
     @api @ui @javascript
     Scenario: Seeing shipping methods that are available in another channel
         Given I changed my current channel to "United Kingdom"
-        And I have product "T-Shirt" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        When I add product "T-Shirt" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
         Then I should be on the checkout shipping step
         And I should see "uber speedy" shipping method
         And I should not see "ultra fast" shipping method
