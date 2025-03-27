@@ -36,7 +36,7 @@ Feature: Preventing from claiming cart of a wrong user
 
     @no-api @ui @mink:chromedriver
     Scenario: Preventing anonymous user from claiming cart of logged in user
-        Given I have product "PHP T-Shirt" in the cart
+        Given I add the product "PHP T-Shirt" to the cart
         When I sign in with email "robb@stark.com" and password "KingInTheNorth"
         And I log out
         And an anonymous user in another browser adds products "PHP T-Shirt" and "Kotlin T-Shirt" to the cart
@@ -50,8 +50,8 @@ Feature: Preventing from claiming cart of a wrong user
     @no-api @ui @mink:chromedriver
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given on this channel account verification is not required
-        And I have product "PHP T-Shirt" in the cart
-        When I register with email "eddard@stark.com" and password "handOfTheKing"
+        When I add product "PHP T-Shirt" to the cart
+        And I register with email "eddard@stark.com" and password "handOfTheKing"
         And I log out
         And an anonymous user in another browser adds products "PHP T-Shirt" and "Kotlin T-Shirt" to the cart
         And they complete addressing step with email "robb@stark.com" and "United States" based billing address
@@ -65,8 +65,8 @@ Feature: Preventing from claiming cart of a wrong user
     Scenario: Preventing logged in user from claiming cart of anonymous user
         Given an anonymous user added product "Kotlin T-Shirt" to the cart
         And they have completed addressing step with email "robb@stark.com" and "United States" based billing address
-        When I log in as "robb@stark.com"
-        And I add product "Sylius T-Shirt" to the cart
+        And I am logged in as "robb@stark.com"
+        When I add product "Sylius T-Shirt" to the cart
         And I view my cart in the previous session
         Then there should be one item in my cart
         And my cart total should be "$150.00"

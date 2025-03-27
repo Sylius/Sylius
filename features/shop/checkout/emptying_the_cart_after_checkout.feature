@@ -13,8 +13,8 @@ Feature: Emptying the cart after checkout
 
     @no-api @ui @javascript
     Scenario: Cart is emptied after the checkout
-        Given I have product "Sig Sauer P226" in the cart
+        When I add product "Sig Sauer P226" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
-        When I confirm my order
+        And I confirm my order
         Then my cart should be empty

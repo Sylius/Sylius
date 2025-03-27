@@ -15,8 +15,8 @@ Feature: Buying product with promotion that makes the order Free
 
     @api @ui @javascript
     Scenario: Buying product with promotion that makes the order Free
-        Given I have product "T-Shirt banana" in the cart
+        When I add product "T-Shirt banana" to the cart
         And I am at the checkout addressing step
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceed with "DHL" shipping method
+        And I proceed with "DHL" shipping method
         Then my order total should be "$0.00"

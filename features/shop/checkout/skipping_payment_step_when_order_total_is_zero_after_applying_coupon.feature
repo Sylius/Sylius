@@ -16,10 +16,10 @@ Feature: Skipping payment selection when order total is zero after applying coup
 
     @no-api @ui @javascript
     Scenario: Seeing order summary after shipping selection when order total is zero
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "HOLIDAYPROMO"
         And I am at the checkout addressing step
-        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step

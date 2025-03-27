@@ -15,9 +15,9 @@ Feature: Ability to confirm an order with a promotion on shipping
 
     @api @ui @javascript
     Scenario: Successfully placing an order
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceed with "DHL" shipping method and "Offline" payment
+        And I proceed with "DHL" shipping method and "Offline" payment
         And I confirm my order
         Then I should see the thank you page

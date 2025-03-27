@@ -1,7 +1,7 @@
 @checkout
 Feature: Seeing purchaser identifier in checkout page
     In order to improve checkout experience
-    As a customer
+    As a Customer
     I want to see my name or email in checkout header
 
     Background:
@@ -13,8 +13,8 @@ Feature: Seeing purchaser identifier in checkout page
 
     @no-api @ui @javascript
     Scenario: Seeing email in checkout header as a guest
-        Given I have product "Gaming chair" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        When I add product "Gaming chair" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
         Then I should be making an order as "john@example.com"
 
     @no-api @ui @javascript

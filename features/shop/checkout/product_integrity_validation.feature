@@ -16,7 +16,7 @@ Feature: Order products integrity
 
     @api @ui @javascript
     Scenario: Preventing customer from completing checkout with no longer available products
-        Given I have product "PHP T-Shirt" added to the cart
+        When I add product "PHP T-Shirt" to the cart
         And I have proceeded through checkout process
         But the product "PHP T-Shirt" has been disabled
         When I try to confirm my order
