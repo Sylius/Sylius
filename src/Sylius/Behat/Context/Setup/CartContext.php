@@ -107,6 +107,7 @@ final readonly class CartContext implements Context
         ));
 
         $this->sharedStorage->set('product', $productVariant->getProduct());
+        $this->sharedStorage->set('variant', $productVariant);
     }
 
     /**
