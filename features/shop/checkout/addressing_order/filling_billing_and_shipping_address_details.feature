@@ -12,17 +12,17 @@ Feature: Addressing an order
 
     @api @ui @javascript
     Scenario: Address an order without different shipping address
-        Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
-        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I add product "PHP T-Shirt" to the cart
+        And I go to the checkout addressing step
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
     @api @ui @mink:chromedriver
     Scenario: Address an order with different shipping address
-        Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        When I add product "PHP T-Shirt" to the cart
+        And I go to the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step

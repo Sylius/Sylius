@@ -11,9 +11,9 @@ Feature: Changing address during checkout
 
     @no-api @ui @javascript
     Scenario: Going back to addressing step with and changing email
-        Given I have product "T-Shirt banana" in the cart
-        And I am at the checkout addressing step
-        When I specify the email as "jon.snow@example.com"
+        When I add product "T-Shirt banana" to the cart
+        And I go to the checkout addressing step
+        And I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I decide to change my address

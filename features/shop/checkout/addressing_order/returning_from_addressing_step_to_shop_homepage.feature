@@ -12,7 +12,7 @@ Feature: Returning from addressing step to shop homepage
 
     @no-api @ui @javascript
     Scenario: Returning to shop from addressing step
-        Given I have product "The Stick of Truth" in the cart
-        And I am at the checkout addressing step
-        When I go back to store
+        When I add product "The Stick of Truth" to the cart
+        And I go to the checkout addressing step
+        And I go back to store
         Then I should be redirected to the homepage

@@ -11,9 +11,9 @@ Feature: Returning to addressing step with a different shipping address
 
     @no-api @ui @mink:chromedriver
     Scenario: Going back to addressing step after submitting a different shipping address
-        Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
-        When I specify the email as "john.doe@example.com"
+        When I add product "Summer T-Shirt" to the cart
+        And I go to the checkout addressing step
+        And I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I specify the shipping address as "Brooklyn", "70 Joy Ridge St", "11225", "United States" for "Jane Doe"
         And I complete the addressing step
@@ -22,9 +22,9 @@ Feature: Returning to addressing step with a different shipping address
 
     @no-api @ui @javascript
     Scenario: Going back to addressing step after not submitting a different shipping address
-        Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
-        When I specify the email as "john.doe@example.com"
+        When I add product "Summer T-Shirt" to the cart
+        And I go to the checkout addressing step
+        And I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I complete the addressing step
         And I decide to change my address
@@ -32,9 +32,9 @@ Feature: Returning to addressing step with a different shipping address
 
     @no-api @ui @mink:chromedriver
     Scenario: Going back to addressing step after submitting a different shipping address
-        Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
-        When I specify the email as "john.doe@example.com"
+        When I add product "Summer T-Shirt" to the cart
+        And I go to the checkout addressing step
+        And I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I specify the shipping address as "Brooklyn", "70 Joy Ridge St", "11225", "United States" for "Jane Doe"
         And I complete the addressing step
@@ -43,9 +43,9 @@ Feature: Returning to addressing step with a different shipping address
 
     @no-api @ui @javascript
     Scenario: Going back to addressing step after not submitting a different shipping address
-        Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
-        When I specify the email as "john.doe@example.com"
+        When I add product "Summer T-Shirt" to the cart
+        And I go to the checkout addressing step
+        And I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I complete the addressing step
         And I decide to change my address

@@ -15,12 +15,12 @@ Feature: Having a default address preselected
     @no-api @ui @javascript
     Scenario: Having a default address preselected on checkout addressing step
         When I add product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        And I go to the checkout addressing step
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as billing address
 
     @no-api @ui @javascript
     Scenario: Not modifying a default address in address book after modifying it on addressing step
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When I am browsing my address book
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should still be marked as my default address

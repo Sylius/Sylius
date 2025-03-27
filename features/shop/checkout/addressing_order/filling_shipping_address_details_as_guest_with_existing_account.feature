@@ -12,9 +12,9 @@ Feature: Addressing an order and signing in
 
     @no-api @ui @javascript
     Scenario: Addressing an order and signing in
-        Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
-        When I specify the email as "francis@underwood.com"
+        When I add product "PHP T-Shirt" to the cart
+        And I go to the checkout addressing step
+        And I specify the email as "francis@underwood.com"
         And I specify the password as "whitehouse"
         And I sign in
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
