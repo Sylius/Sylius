@@ -13,10 +13,10 @@ Feature: Registering a new account after checkout
     @no-api @ui @javascript
     Scenario: Displaying thank you page after registration
         Given on this channel account verification is required
-        And I have product "PHP T-Shirt" in the cart
-        And I have completed addressing step with email "john@example.com" and "United States" based billing address
-        And I have proceeded order with "Free" shipping method and "Offline" payment
-        And I have confirmed order
+        When I add product "PHP T-Shirt" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I proceed with "Free" shipping method and "Offline" payment
+        And I confirm my order
         When I proceed to the registration
         And I specify a password as "sylius"
         And I confirm this password
@@ -26,10 +26,10 @@ Feature: Registering a new account after checkout
     @no-api @ui @javascript
     Scenario: Registering a new account after checkout when channel has enabled registration verification
         Given on this channel account verification is required
-        And I have product "PHP T-Shirt" in the cart
-        And I have completed addressing step with email "john@example.com" and "United States" based billing address
-        And I have proceeded order with "Free" shipping method and "Offline" payment
-        And I have confirmed order
+        When I add product "PHP T-Shirt" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I proceed with "Free" shipping method and "Offline" payment
+        And I confirm my order
         When I proceed to the registration
         And I specify a password as "sylius"
         And I confirm this password
@@ -40,10 +40,10 @@ Feature: Registering a new account after checkout
     @no-api @ui @javascript
     Scenario: Registering a new account after checkout when channel has disabled registration verification
         Given on this channel account verification is not required
-        And I have product "PHP T-Shirt" in the cart
-        And I have completed addressing step with email "john@example.com" and "United States" based billing address
-        And I have proceeded order with "Free" shipping method and "Offline" payment
-        And I have confirmed order
+        When I add product "PHP T-Shirt" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I proceed with "Free" shipping method and "Offline" payment
+        And I confirm my order
         When I proceed to the registration
         And I specify a password as "sylius"
         And I confirm this password
