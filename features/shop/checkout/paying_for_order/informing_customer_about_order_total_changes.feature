@@ -12,8 +12,17 @@ Feature: Informing customer about any order total changes during checkout proces
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Informing customer about order total change due to product price change
+        Given I am a logged in customer
+        And I added product "PHP T-Shirt" to the cart
+        And I proceeded through checkout process
+        And this product price has been changed to "$25.00"
+        And I confirm my order
+        Then my order should not be placed due to changed order total
+
+    @api @ui
+    Scenario: Being able to confirm order after information appears
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
         And I proceeded through checkout process
@@ -21,16 +30,7 @@ Feature: Informing customer about any order total changes during checkout proces
         When I confirm my order
         Then my order should not be placed due to changed order total
 
-    @api @ui @javascript
-    Scenario: Being able to confirm order after information appears
-        Given I am a logged in customer
-        And I added product "PHP T-Shirt" to the cart
-        And I proceeded through checkout process
-        And this product price has been changed to "$25.00"
-        And I have confirmed order
-        Then my order should not be placed due to changed order total
-
-    @api @ui @javascript
+    @api @ui
     Scenario: Informing customer about order total change due to tax change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
@@ -42,9 +42,9 @@ Feature: Informing customer about any order total changes during checkout proces
     @api @ui @javascript
     Scenario: Informing customer about order total change due to shipping method fee change
         Given the store has "UPS" shipping method with "$20.00" fee
-        And I added product "PHP T-Shirt" to the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
-        And I have proceeded order with "UPS" shipping method and "Offline" payment
+        When I add product "PHP T-Shirt" to the cart
+        And I complete addressing step with email "guest@example.com" and "United States" based billing address
+        And I proceed with "UPS" shipping method and "Offline" payment
         And the shipping fee for "UPS" shipping method has been changed to "$30.00"
-        When I confirm my order
+        And I confirm my order
         Then my order should not be placed due to changed order total
