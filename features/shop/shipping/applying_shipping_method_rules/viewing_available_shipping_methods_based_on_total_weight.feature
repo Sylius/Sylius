@@ -17,30 +17,30 @@ Feature: Viewing available shipping methods based on total weight
         And this shipping method is only available for orders with a total weight less or equal to 1.0
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle heavy goods
-        Given I have product "Jacket for the Lochness Monster" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added product "Jacket for the Lochness Monster" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should see "Heavy Duty Courier" shipping method
         And I should not see "Fairytale Delivery Service" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle light goods
-        Given I have product "T-Shirt for Tinkerbell" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added product "T-Shirt for Tinkerbell" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should see "Fairytale Delivery Service" shipping method
         And I should not see "Heavy Duty Courier" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle all goods
-        Given I have product "T-Shirt for Tinkerbell" in the cart
-        And I add 11 of them to my cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added product "T-Shirt for Tinkerbell" to the cart
+        And I added 11 of them to my cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should not see "Fairytale Delivery Service" shipping method
         And I should not see "Heavy Duty Courier" shipping method

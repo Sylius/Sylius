@@ -15,29 +15,29 @@ Feature: Viewing available shipping methods based on items total
         And the store has "DHL" shipping method with "$20.00" fee
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle expensive goods
-        Given I have product "Expensive Jacket" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added product "Expensive Jacket" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should see "Above $50" shipping method
         And I should not see "Below $29.99" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle cheap goods
-        Given I have product "Cheap Jacket" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added product "Cheap Jacket" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should see "Below $29.99" shipping method
         And I should not see "Above $50" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle all goods
-        Given I have 2 products "Cheap Jacket" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added 2 products "Cheap Jacket" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should not see "Above $50" shipping method
         And I should not see "Below $29.99" shipping method

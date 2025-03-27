@@ -21,6 +21,7 @@ default:
                 - sylius.behat.context.setup.address
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout.address
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.payment

@@ -14,12 +14,14 @@ Feature: Seeing estimated shipping costs based on items total
         And this shipping method is only available for orders under or equal to "$29.99"
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing valid estimated shipping cost for the cart with a value over minimum price configured on the shipping method
-        When I add product "Expensive Jacket" to the cart
+        Given I added product "Expensive Jacket" to the cart
+        When I check details of my cart
         Then my cart estimated shipping cost should be "$1.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing valid estimated shipping cost for the cart with a value under maximum price configured on the shipping method
-        When I add product "Cheap Jacket" to the cart
+        Given I added product "Cheap Jacket" to the cart
+        When I check details of my cart
         Then my cart estimated shipping cost should be "$10.00"
