@@ -17,24 +17,24 @@ Feature: Seeing orders' total in their currency
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: List of orders from only one channel
         Given I changed my current channel to "United States"
-        And I have product "Angel T-Shirt" in the cart
-        And I specified the billing address as "Los Angeles", "Frost Alley", "90210", "United States" for "Lucifer Morningstar"
+        And I added product "Angel T-Shirt" to the cart
+        And I addressed the cart
         And I proceed with "Free" shipping method and "Offline" payment
-        And I confirm my order
+        When I confirm my order
         Then the administrator should see the order with total "$20.00" in order list
 
-    @api @ui @javascript
+    @api @ui
     Scenario: List of orders from different channels
         Given I changed my current channel to "United States"
-        And I have product "Angel T-Shirt" in the cart
-        And I specified the billing address as "Los Angeles", "Frost Alley", "90210", "United States" for "Lucifer Morningstar"
-        And I proceed with "Free" shipping method and "Offline" payment
+        And I added product "Angel T-Shirt" to the cart
+        And I addressed the cart
+        When I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         And I changed my current channel to "Great Britain"
-        And I had product "Angel T-Shirt" in the cart
+        And I have product "Angel T-Shirt" in the cart
         And I specified the billing address as "Los Angeles", "Frost Alley", "90210", "United States" for "Lucifer Morningstar"
         And I proceed with "Free" shipping method and "Offline" payment
         When I confirm my order

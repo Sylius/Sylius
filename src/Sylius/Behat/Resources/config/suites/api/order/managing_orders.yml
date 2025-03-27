@@ -33,6 +33,7 @@ default:
                 - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout.address
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.geographical
@@ -50,6 +51,7 @@ default:
 
                 - sylius.behat.context.api.admin.managing_orders
                 - sylius.behat.context.api.email                
+                - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
 
             filters:
