@@ -16,18 +16,18 @@ Feature: Placing an order on a single channel store
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Placing an order in a channels base currency
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I addressed the cart
         When I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         Then the administrator should see that order placed by "customer@example.com" has "USD" currency
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui
     Scenario: Placing an order in a channels base currency displaying prices in other currency
         Given that channel also allows to shop using the "CAD" currency
-        And I had product "PHP T-Shirt" in the cart
+        And I added product "PHP T-Shirt" to the cart
         And I changed my currency to "CAD"
         And I addressed the cart
         When I proceed with "Free" shipping method and "Offline" payment

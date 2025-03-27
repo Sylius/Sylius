@@ -13,11 +13,11 @@ Feature: Leaving additional request notes on my order during checkout
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Adding note on the checkout summary step
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I addressed the cart
-        And I proceed with "Free" shipping method and "Offline" payment
-        When I provide additional note like "Code to the front gateway is #44*"
+        When I proceed with "Free" shipping method and "Offline" payment
+        And I provide additional note like "Code to the front gateway is #44*"
         And I confirm my order
         Then the administrator should know about this additional note for this order made by "customer@example.com"
