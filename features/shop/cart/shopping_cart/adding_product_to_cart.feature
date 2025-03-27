@@ -45,6 +45,7 @@ Feature: Adding a simple product to the cart
 
     @api @ui @javascript
     Scenario: Increasing quantity of an item in cart by adding the product again
-        Given I have product "T-Shirt banana" in the cart
+        Given I am a logged in customer
+        And I added product "T-Shirt banana" to the cart
         When I add this product to the cart
         Then I should see "T-Shirt banana" with quantity 2 in my cart

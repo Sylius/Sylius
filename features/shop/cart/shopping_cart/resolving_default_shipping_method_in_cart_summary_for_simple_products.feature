@@ -30,6 +30,6 @@ Feature: Viewing a cart summary with correct default shipping method based on va
 
     @api @ui @javascript
     Scenario: Viewing a cart summary with correct default shipping method based on product shipping category
-        Given I have product "T-Shirt banana" in the cart
-        When I see the summary of my cart
+        When I add product "T-Shirt banana" to the cart
+        And I see the summary of my cart
         Then my cart shipping total should be "$0.00"

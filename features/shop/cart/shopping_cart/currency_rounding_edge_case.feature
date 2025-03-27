@@ -12,8 +12,8 @@ Feature: Currency rounding edge case
 
     @no-api @ui @javascript
     Scenario: Changing the currency of my cart
-        Given I have product "The Pug Mug" in the cart
-        When I switch to the "EUR" currency
+        When I add product "The Pug Mug" to the cart
+        And I switch to the "EUR" currency
         Then the grand total value should be "€6.82"
         And the grand total value in base currency should be "$7.00"
 

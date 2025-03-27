@@ -16,8 +16,8 @@ Feature: Changing display currency of the cart
 
     @no-api @ui @javascript
     Scenario: Changing the currency of my cart
-        Given I have product "The Pug Mug" in the cart
-        When I switch to the "GBP" currency
+        When I add product "The Pug Mug" to the cart
+        And I switch to the "GBP" currency
         Then my cart total should be "£32.00"
         And total price of "The Pug Mug" item should be "£20.00"
         And my cart taxes should be "£2.00"

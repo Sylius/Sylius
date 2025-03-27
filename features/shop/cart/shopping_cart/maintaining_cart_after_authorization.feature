@@ -54,8 +54,8 @@ Feature: Maintaining cart after authorization
 
     @api @ui @javascript
     Scenario: Having cart maintained after registration
-        Given I have product "Stark T-Shirt" in the cart
-        When I register with email "eddard@stak.com" and password "handOfTheKing"
+        When I add product "Stark T-Shirt" to the cart
+        And I register with email "eddard@stak.com" and password "handOfTheKing"
         And I see the summary of my cart
         Then there should be one item in my cart
         And this item should have name "Stark T-Shirt"
