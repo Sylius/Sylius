@@ -74,6 +74,10 @@ final readonly class CheckoutContext implements Context
      */
     public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
     {
+        if (!$this->selectShippingPage->isOpen()) {
+            $this->selectShippingPage->open();
+        }
+
         $this->selectShippingPage->selectShippingMethod($shippingMethodName);
         $this->selectShippingPage->nextStep();
 

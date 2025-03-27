@@ -57,6 +57,7 @@ final readonly class CartContext implements Context
     /**
      * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
      * @Given /^I added(?:| again) (\d+) (products "[^"]+") to the (cart)$/
+     * @Given /^I added (\d+) of (them) to (?:the|my) (cart)$/
      */
     public function iAddedGivenQuantityOfProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
@@ -78,7 +79,7 @@ final readonly class CartContext implements Context
 
     /**
      * @Given /^I added (product "[^"]+") to the (cart)$/
-     * @Given /^I (?:have|had) (product "[^"]+") in the (cart)$/
+     * @Given /^I have (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
      * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
      * @Given /^the (?:customer|visitor) added ("[^"]+" product) to the (cart)$/
@@ -117,7 +118,7 @@ final readonly class CartContext implements Context
         ?string $tokenValue,
     ): void {
         if ($tokenValue === null) {
-            $tokenValue = $this->pickupCart();
+            $tokenValue = $this->pickupCart($tokenValue);
         }
 
         $this->commandBus->dispatch(new AddItemToCart(

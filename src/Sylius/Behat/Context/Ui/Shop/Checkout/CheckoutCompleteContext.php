@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Doctrine\ORM\EntityManagerInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
@@ -22,21 +23,26 @@ use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class CheckoutCompleteContext implements Context
 {
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private CompletePageInterface $completePage,
         private NotificationCheckerInterface $notificationChecker,
         private ThankYouPageInterface $thankYouPage,
+        private OrderRepositoryInterface $orderRepository,
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -89,6 +95,17 @@ final readonly class CheckoutCompleteContext implements Context
         }
 
         $this->completePage->confirmOrder();
+
+        $order = $this->orderRepository->findLatest(1)[0] ?? null;
+
+        if ($order === null) {
+            return;
+        }
+
+        $this->entityManager->refresh($order);
+
+        $this->sharedStorage->set('order', $order);
+        $this->sharedStorage->set('order_number', $order->getNumber());
     }
 
     /**

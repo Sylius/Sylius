@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -331,6 +332,12 @@ final class CheckoutContext implements Context
 
         $this->content['billingAddress']['firstName'] = $names[0];
         $this->content['billingAddress']['lastName'] = $names[1];
+    }
+
+    #[When('I want to complete the shipping step')]
+    public function iWantToCompleteTheShippingStep(): void
+    {
+        // Intentionally left blank, as this is a UI-specific action.
     }
 
     /**

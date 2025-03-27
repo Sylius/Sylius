@@ -76,7 +76,6 @@ final readonly class CartContext implements Context
     /**
      * @Then my cart should be empty
      * @Then my cart should be cleared
-     * @Then cart should be empty with no value
      */
     public function iShouldBeNotifiedThatMyCartIsEmpty(): void
     {
@@ -305,7 +304,6 @@ final readonly class CartContext implements Context
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given /^I have (product "[^"]+") added to the cart$/
      * @Given he added product :product to the cart
-     * @Given /^I had (product "[^"]+") in the cart$/
      * @Given /^the customer (?:added|adds) ("[^"]+" product) to the cart$/
      * @Given /^the visitor has (product "[^"]+") in the cart$/
      * @Given /^the customer has (product "[^"]+") in the cart$/
@@ -455,7 +453,6 @@ final readonly class CartContext implements Context
 
     /**
      * @Given I have :product with :productOption :productOptionValue in the cart
-     * @Given I have product :product with product option :productOption :productOptionValue in the cart
      * @When I add :product with :productOption :productOptionValue to the cart
      */
     public function iAddThisProductWithToTheCart(
