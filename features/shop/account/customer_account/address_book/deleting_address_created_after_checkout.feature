@@ -15,7 +15,7 @@ Feature: Removing an address from my book
 
     @api @ui @javascript
     Scenario: Deleting address created after placing an order
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         And my billing address is fulfilled automatically through default address
         When I specify the first and last name as "Mike Ross" for billing address

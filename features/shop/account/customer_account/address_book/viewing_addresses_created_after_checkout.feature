@@ -15,7 +15,7 @@ Feature: Viewing addresses created after checkout
 
     @api @ui @javascript
     Scenario: Viewing address created after placing an order
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         And my billing address is fulfilled automatically through default address
         When I specify the first and last name as "Mike Ross" for billing address
