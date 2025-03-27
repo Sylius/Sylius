@@ -56,10 +56,24 @@ final readonly class CartContext implements Context
 
     /**
      * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
+     * @Given /^I added(?:| again) (\d+) (products "[^"]+") to the (cart)$/
      */
-    public function iHaveAddedProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
+    public function iAddedGivenQuantityOfProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue, $quantity);
+    }
+
+    /**
+     * @Given /^I added (products "([^"]+)" and "([^"]+)") to the (cart)$/
+     * @Given /^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the (cart)$/
+     *
+     * @param ProductInterface[] $products
+     */
+    public function iAddedProductsAndToTheCart(array $products, ?string $tokenValue): void
+    {
+        foreach ($products as $product) {
+            $this->addProductToCart($product, $tokenValue);
+        }
     }
 
     /**

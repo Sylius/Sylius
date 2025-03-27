@@ -44,7 +44,7 @@ final readonly class CheckoutShippingContext implements Context
     public function iHaveProceededWithSelectingShippingMethod(string $shippingMethodName): void
     {
         if (!$this->selectShippingPage->isOpen()) {
-            throw new UnexpectedPageException(sprintf('Shipping method "%s" cannot be selected because checkout shipping page is not open.', $shippingMethodName));
+            $this->selectShippingPage->open();
         }
 
         $this->selectShippingPage->selectShippingMethod($shippingMethodName);

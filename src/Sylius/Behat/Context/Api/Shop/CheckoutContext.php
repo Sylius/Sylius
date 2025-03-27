@@ -1251,11 +1251,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I try to add (product "[^"]+") to the (cart)$/
+     * @When /^I try to add (product "[^"]+") to the cart$/
      */
-    public function iTryToAddProductToCart(ProductInterface $product, ?string $tokenValue): void
+    public function iTryToAddProductToCart(ProductInterface $product): void
     {
-        $this->putProductToCart($product, $tokenValue);
+        $this->putProductToCart($product, $this->sharedStorage->get('cart_token'));
     }
 
     /**
@@ -1296,11 +1296,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I try to remove (product "[^"]+") from the (cart)$/
+     * @When /^I try to remove (product "[^"]+") from the cart$/
      */
-    public function iTryToRemoveProductFromTheCart(ProductInterface $product, ?string $tokenValue): void
+    public function iTryToRemoveProductFromTheCart(ProductInterface $product): void
     {
-        $this->removeOrderItemFromCart($product->getId(), $tokenValue);
+        $this->removeOrderItemFromCart($product->getId(), $this->sharedStorage->get('cart_token'));
     }
 
     /**
@@ -1669,7 +1669,7 @@ final class CheckoutContext implements Context
         );
     }
 
-    private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
+    private function putProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
     {
         Assert::notNull($productVariant = $this->productVariantResolver->getVariant($product));
         Assert::isInstanceOf($productVariant, ProductVariantInterface::class);
@@ -1677,7 +1677,7 @@ final class CheckoutContext implements Context
         $this->putVariantToCart($productVariant, $tokenValue, $quantity);
     }
 
-    private function putVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
+    private function putVariantToCart(ProductVariantInterface $productVariant, ?string $tokenValue, int $quantity = 1): void
     {
         $request = $this->requestFactory->customItemAction(
             'shop',
@@ -1694,7 +1694,7 @@ final class CheckoutContext implements Context
         $this->sharedStorage->set('response', $this->client->executeCustomRequest($request));
     }
 
-    private function removeOrderItemFromCart(int $orderItemId, string $tokenValue): void
+    private function removeOrderItemFromCart(int $orderItemId, ?string $tokenValue): void
     {
         $request = $this->requestFactory->customItemAction(
             'shop',
