@@ -18,7 +18,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And this shipping method requires that no units match to "Over-sized" shipping category
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods when all of my products fit the shipping category
         Given I have product "Picasso T-Shirt" in the cart
         When I am at the checkout addressing step
@@ -27,7 +27,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         Then I should be on the checkout shipping step
         And I should see "Invisible Post" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing no shipping methods when all of my products are excluded from the shipping category
         Given I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
@@ -35,7 +35,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing no shipping methods when any of my products is excluded from the shipping category
         Given I have product "Picasso T-Shirt" in the cart
         And I have product "Star Trek Ship" in the cart
@@ -44,7 +44,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Seeing no shipping methods when any of my variants is excluded from the shipping category
         Given the "T-Shirt banana" product's "S" size belongs to "Over-sized" shipping category
         And I have product "T-Shirt banana" with product option "Size" S in the cart
@@ -54,7 +54,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Seeing shipping methods when all of my variants fit the shipping category
         Given I have product "T-Shirt banana" with product option "Size" S in the cart
         And I have product "T-Shirt banana" with product option "Size" M in the cart

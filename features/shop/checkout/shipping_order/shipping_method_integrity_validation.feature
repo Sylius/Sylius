@@ -1,7 +1,7 @@
 @checkout
 Feature: Order shipping method integrity
     In order to have valid shipping method on my order
-    As a Visitor
+    As a Customer
     I want to have valid order
 
     Background:
@@ -17,13 +17,14 @@ Feature: Order shipping method integrity
         And this product belongs to "Heavy stuff" shipping category
         And the store has a product "T-Shirt Breaking Bad" priced at "$12.54"
         And this product belongs to "Small stuff" shipping category
+        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Validate shipping method after administrator changes shipping method requirements
         Given I added product "Westworld host" to the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
-        And I have proceeded order with "DHL" shipping method and "Offline" payment
+        And I addressed the cart
+        When I have proceeded order with "DHL" shipping method and "Offline" payment
         And product "Westworld host" shipping category has been changed to "Small stuff"
-        When I want to complete checkout
+        And I want to complete checkout
         Then I should not be able to confirm order because products do not fit "DHL" requirements
         And I should not see the thank you page
