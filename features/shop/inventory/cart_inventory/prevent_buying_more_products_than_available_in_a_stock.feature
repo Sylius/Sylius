@@ -1,7 +1,7 @@
 @cart_inventory
 Feature: Prevent buying more products than available in a stock
     In order to buy only available items
-    As a Visitor
+    As a Customer
     I want to be prevented from adding items over the available amount
 
     Background:
@@ -9,6 +9,7 @@ Feature: Prevent buying more products than available in a stock
         And the store has a product "T-Shirt Mononoke" priced at "$12.54"
         And "T-Shirt Mononoke" product is tracked by the inventory
         And there are 5 units of product "T-Shirt Mononoke" available in the inventory
+        And I am a logged in customer
 
     @api @ui @javascript
     Scenario: Preventing from adding more items to the cart than it's available in stock

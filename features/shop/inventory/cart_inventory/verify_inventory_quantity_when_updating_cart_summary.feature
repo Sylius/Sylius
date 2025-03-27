@@ -12,6 +12,7 @@ Feature: Verifying inventory quantity on cart summary
         And the store has a product "Black Dress" priced at "€50.20"
         And this product is tracked by the inventory
         And there are 10 units of product "Black Dress" available in the inventory
+        And I am a logged in customer
 
     @api @ui @javascript
     Scenario: Being unable to save a cart with product that is out of stock
