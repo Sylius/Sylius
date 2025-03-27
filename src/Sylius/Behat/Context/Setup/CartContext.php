@@ -95,7 +95,7 @@ final readonly class CartContext implements Context
      */
     public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
-        if ($tokenValue === null) {
+        if ($tokenValue === null || !$this->doesCartWithTokenExist($tokenValue)) {
             $tokenValue = $this->pickupCart();
         }
 
