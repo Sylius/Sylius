@@ -21,8 +21,8 @@ Feature: Seeing order locale on order summary page
 
     @no-api @ui @javascript
     Scenario: Seeing order locale on the order summary page after change channel locale
-        Given I have product "Stark T-Shirt" in the cart
-        When I proceed through checkout process in the "French (France)" locale
+        When I add product "Stark T-Shirt" to the cart
+        And I proceed through checkout process in the "French (France)" locale
         Then I should be on the checkout summary step
         And my order's locale should be "French (France)"
 

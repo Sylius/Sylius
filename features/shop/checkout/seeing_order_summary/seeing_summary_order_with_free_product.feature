@@ -29,9 +29,9 @@ Feature: Seeing a summary of the order with free product
 
     @api @ui @javascript
     Scenario: Seeing order with both Free and paid products
-        Given I have product "Greyjoy Coat" in the cart
-        And I have product "Lannister Coat" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I add product "Greyjoy Coat" to the cart
+        And I add product "Lannister Coat" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "DHL" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order total should be "$104.50"

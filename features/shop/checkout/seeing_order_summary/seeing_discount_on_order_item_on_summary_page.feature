@@ -15,9 +15,9 @@ Feature: Seeing a order item discount
 
     @api @ui @javascript
     Scenario: Seeing a discounted price on order item
-        Given I have product "Lannister Coat" in the cart
+        When I add product "Lannister Coat" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceed with "Free" shipping method and "Offline" payment
+        And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And the "Lannister Coat" product should have unit price discounted by "$10.00"
         And my order total should be "$90.00"

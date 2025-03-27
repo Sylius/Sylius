@@ -15,10 +15,10 @@ Feature: Seeing shipping discount on order summary
 
     @api @ui @javascript
     Scenario: Seeing order shipping discount on the order summary page
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceed with "DHL" shipping method and "Offline" payment
+        And I proceed with "DHL" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And "Holiday promotion" should be applied to my order shipping
         And this promotion should give "-$5.00" discount on shipping
