@@ -207,7 +207,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I removed (product "[^"]+") from the (cart)$/
      * @When /^I remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void

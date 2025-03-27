@@ -14,23 +14,23 @@ Feature: Reapplying promotion on cart change
     Scenario: Not receiving discount on shipping after removing last item from cart
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
-        And I have product "PHP T-Shirt" in the cart
+        And I added product "PHP T-Shirt" to the cart
         And I addressed it
-        When I proceed with selecting "DHL" shipping method
+        When I proceed with "DHL" shipping method
         And I remove product "PHP T-Shirt" from the cart
-        Then cart should be empty with no value
+        Then my cart should be empty
         And there should be no shipping fee
         And there should be no discount applied
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving discount on shipping after shipping method change
         Given the store has "DHL" shipping method with "$10.00" fee
         And the store has "FedEx" shipping method with "$30.00" fee
         And the promotion gives "100%" discount on shipping to every order
-        And I have product "PHP T-Shirt" in the cart
+        And I added product "PHP T-Shirt" to the cart
         And I addressed it
-        And I chose "DHL" shipping method
-        When I decide to change order shipping method
+        When I chose "DHL" shipping method
+        And I decide to change order shipping method
         And I change shipping method to "FedEx"
         And I complete the shipping step
         Then my cart total should be "$100.00"
@@ -40,9 +40,9 @@ Feature: Reapplying promotion on cart change
     Scenario: Receiving discount after removing an item from the cart and then adding another one
         Given the store has a product "Symfony T-Shirt" priced at "$150.00"
         And the promotion gives "$10.00" discount to every order
-        And I had product "PHP T-Shirt" in the cart
-        But I removed product "PHP T-Shirt" from the cart
-        When I add product "Symfony T-Shirt" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        When I remove product "PHP T-Shirt" from the cart
+        And I add product "Symfony T-Shirt" to the cart
         Then my cart total should be "$140.00"
         And my discount should be "-$10.00"
 

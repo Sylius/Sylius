@@ -85,7 +85,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given I removed product :productName from the cart
      * @When I remove product :productName from the cart
      */
     public function iRemoveProductFromTheCart(string $productName): void
