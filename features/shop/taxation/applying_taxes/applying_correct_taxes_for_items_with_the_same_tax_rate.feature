@@ -1,7 +1,7 @@
 @applying_taxes
 Feature: Apply correct taxes for items with the same tax rate
     In order to pay proper amount when buying goods from the same tax category
-    As a Visitor
+    As a Customer
     I want to have correct taxes applied to my order
 
     Background:
@@ -12,38 +12,43 @@ Feature: Apply correct taxes for items with the same tax rate
         And it belongs to "Clothes" tax category
         And the store has a product "Symfony Hat" priced at "$30.00"
         And it belongs to "Clothes" tax category
+        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Proper taxes for taxed product
-        When I add product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
+        When I check details of my cart
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Proper taxes for multiple same products with the same tax rate
-        When I add 3 products "PHP T-Shirt" to the cart
+        Given I added 3 products "PHP T-Shirt" to the cart
+        When I check details of my cart
         Then my cart total should be "$369.00"
         And my cart taxes should be "$69.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Proper taxes for multiple different products with the same tax rate
-        When I add 3 products "PHP T-Shirt" to the cart
-        And I add 2 products "Symfony Hat" to the cart
+        Given I added 3 products "PHP T-Shirt" to the cart
+        And I added 2 products "Symfony Hat" to the cart
+        When I check details of my cart
         Then my cart total should be "$442.80"
         And my cart taxes should be "$82.80"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Proper taxes after removing one of the item
-        Given I have 3 products "PHP T-Shirt" in the cart
-        And I have 2 products "Symfony Hat" in the cart
-        When I remove product "PHP T-Shirt" from the cart
+        Given I added 3 products "PHP T-Shirt" to the cart
+        And I added 2 products "Symfony Hat" to the cart
+        When I check details of my cart
+        And I remove product "PHP T-Shirt" from the cart
         Then my cart total should be "$73.80"
         And my cart taxes should be "$13.80"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Proper taxes after changing item quantity
-        Given I have 3 products "PHP T-Shirt" in the cart
-        And I have 2 products "Symfony Hat" in the cart
+        Given I added 3 products "PHP T-Shirt" to the cart
+        And I added 2 products "Symfony Hat" to the cart
         When I change product "PHP T-Shirt" quantity to 1 in my cart
         Then my cart total should be "$196.80"
         And my cart taxes should be "$36.80"
