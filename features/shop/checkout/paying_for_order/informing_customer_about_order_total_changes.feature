@@ -39,7 +39,7 @@ Feature: Informing customer about any order total changes during checkout proces
         When I confirm my order
         Then my order should not be placed due to changed order total
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Informing customer about order total change due to shipping method fee change
         Given the store has "UPS" shipping method with "$20.00" fee
         When I add product "PHP T-Shirt" to the cart

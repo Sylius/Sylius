@@ -10,7 +10,7 @@ Feature: Paying offline during checkout
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Successfully placing an order
         Given I am a logged in customer
         And this payment method is not using Payum
@@ -20,7 +20,7 @@ Feature: Paying offline during checkout
         And I confirm my order
         Then I should see the thank you page
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Using Payum successfully placing an order
         Given I am a logged in customer
         And I have product "PHP T-Shirt" in the cart

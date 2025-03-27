@@ -11,7 +11,7 @@ Feature: Having good number of items in changing payment method page
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing correct quantity on payment retry page
         When I add 2 products "PHP T-Shirt" to the cart
         And I complete addressing step with email "john@example.com" and "United States" based billing address
