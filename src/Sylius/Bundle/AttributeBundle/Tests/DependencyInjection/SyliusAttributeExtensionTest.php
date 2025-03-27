@@ -62,8 +62,8 @@ final class SyliusAttributeExtensionTest extends AbstractExtensionTestCase
                         'form_type' => 'SomeFormType',
                         'priority' => 15,
                         'configuration_form_type' => 'SomeConfigurationFormType',
-                    ]
-                ]])
+                    ],
+                ]]),
         );
 
         $this->load();
