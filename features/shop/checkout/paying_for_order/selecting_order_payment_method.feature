@@ -24,10 +24,10 @@ Feature: Selecting an order payment method
 
     @api @ui @javascript
     Scenario: Using Payum selecting a payment method
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I select "Free" shipping method
         And I complete the shipping step
-        When I select "Bank transfer" payment method
+        And I select "Bank transfer" payment method
         And I complete the payment step
         Then I should be on the checkout complete step

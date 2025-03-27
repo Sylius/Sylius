@@ -12,17 +12,17 @@ Feature: Preventing payment step completion without a selected method
 
     @api @no-ui
     Scenario: Preventing payment step completion if there are no available methods
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I have addressed the cart to "United States"
         And I proceed with selecting "Free" shipping method
-        When I check the details of my cart
+        And I check the details of my cart
         Then I should see that no payment method is assigned
         And there should not be any payment methods available for selection
 
     @no-api @ui @javascript
     Scenario: Preventing payment step completion if there are no available methods
-        Given I have product "PHP T-Shirt" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I add product "PHP T-Shirt" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with selecting "Free" shipping method
         Then I should not be able to complete the payment step
         And there should be information about no payment methods available for my order

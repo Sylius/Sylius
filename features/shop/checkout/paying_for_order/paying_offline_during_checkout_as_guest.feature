@@ -23,8 +23,8 @@ Feature: Paying Offline during checkout as guest
 
     @api @ui @javascript
     Scenario: Using Payum successfully placing an order
-        Given I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        When I add product "PHP T-Shirt" to the cart
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
         And I choose "Offline" payment method
         And I confirm my order
@@ -40,8 +40,8 @@ Feature: Paying Offline during checkout as guest
 
     @no-api @ui @javascript
     Scenario: Using Payum successfully placing an order using custom locale
-        Given I have product "PHP T-Shirt" in the cart
-        When I proceed through checkout process in the "French (France)" locale with email "john@example.com"
+        When I add product "PHP T-Shirt" to the cart
+        And I proceed through checkout process in the "French (France)" locale with email "john@example.com"
         And I confirm my order
         Then I should see the thank you page in "French (France)"
 
