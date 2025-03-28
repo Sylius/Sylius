@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
-            author: المؤلف
-            comment: تعليق
-            header: إضافة تعليق
+            author: الكاتب
+            comment: التعليق
+            header: أضف تقييمًا
             rating: التقييم
             status:
-                approved: مصادق عليه
+                approved: مقبول
                 label: الحالة
                 new: جديد
                 rejected: مرفوض
-            submit: أرسل
-            title: عنوان
+            submit: إرسال
+            title: العنوان

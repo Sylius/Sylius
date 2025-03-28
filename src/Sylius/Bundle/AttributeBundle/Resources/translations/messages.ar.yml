@@ -4,36 +4,38 @@
 sylius:
     form:
         attribute:
-            add: اضافة
-            add_attributes: إضافة سمات
+            add: إضافة
+            add_attributes: إضافة السمات
             choices: الخيارات
-            code: رمز
+            code: الرمز
             name: الاسم
-            translations: التّرجمة
-            type: نوع
+            translatable: قابل للترجمة
+            translations: الترجمات
+            type: النوع
         attribute_type:
-            checkbox: خانة الاختيار
-            configuration: الضبط
+            checkbox: خانة اختيار
+            configuration: الإعدادات
             date: التاريخ
             datetime: التاريخ والوقت
+            float: عدد عشري
             integer: عدد صحيح
-            percent: النسبة المؤية
-            select: اختر
-            text: النصوص
-            textarea: حقل النص
-            title: نوع السمة
-            validation: المصادقة
+            percent: النسبة المئوية
+            select: اختيار
+            text: نص
+            textarea: حقل نصي
+            title: أنواع السمات
+            validation: التحقق من الصحة
         attribute_type_configuration:
             datetime:
-                format: الصيغة
+                format: التنسيق
             date:
-                format: الصيغة
+                format: التنسيق
             select:
-                multiple: متعددة
-                values: قيم
-                choose: حدد خيار
-                min: إدخالات دقيقة
-                max: إدخالات دقيقة
+                multiple: متعدد
+                values: القيم
+                choose: اختر خيارًا
+                min: الحد الأدنى من الإدخالات
+                max: الحد الأقصى من الإدخالات
             text:
-                min: الطول الأصغري
-                max: الطول الأقصى
+                min: الحد الأدنى للطول
+                max: الحد الأقصى للطول

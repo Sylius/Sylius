@@ -3,5 +3,8 @@
 
 sylius:
     order_item:
+        product_variant:
+            not_blank: لم يتم تحديد متغير المنتج.
         quantity:
-            min: كمية صنف أمر لا يمكن أن يكون أقل من 1.
+            min: لا يمكن أن تكون كمية عنصر الطلب أقل من 1.
+            not_blank: لم يتم تحديد الكمية.
