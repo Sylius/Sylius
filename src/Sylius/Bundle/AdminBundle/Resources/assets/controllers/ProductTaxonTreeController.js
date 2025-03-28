@@ -43,6 +43,8 @@ export default class extends Controller {
         const more = node.hasChildren();
         const nodeMargin = 20;
 
+        const rtl = document.querySelector('[dir="rtl"]');
+
         if (filtered === false)  {
             return '';
         }
@@ -54,7 +56,7 @@ export default class extends Controller {
 
         const toggler = `<span class="${treeOptions.togglerClass} ${togglerClass}" style="width: ${nodeMargin}px"></span>`;
         const checkbox = `<span class="infinite-tree-check" style="width: ${nodeMargin}px;"><input class="form-check-input" type="checkbox" data-action="product-taxon-tree#clickNode" ${indeterminate && !checked ? 'data-indeterminate' : ''} ${checked ? 'checked' : ''}></span>`;
-        const treeNode = `<div class="infinite-tree-node" style="margin-left: ${(depth * nodeMargin)}px">${toggler}${checkbox}<span class="infinite-tree-title">${name}</span></div>`;
+        const treeNode = `<div class="infinite-tree-node" style="${rtl ? 'margin-right' : 'margin-left'}: ${(depth * nodeMargin)}px">${toggler}${checkbox}<span class="infinite-tree-title">${name}</span></div>`;
 
         return `<div
           data-id="${id}"

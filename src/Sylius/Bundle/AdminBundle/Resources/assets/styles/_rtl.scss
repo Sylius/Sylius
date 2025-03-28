@@ -34,6 +34,7 @@
 
   .accordion-button::after {
     margin-left: 0;
+    margin-right: auto;
   }
 
   .start-0 {
@@ -90,5 +91,22 @@
 
   .pagination .page-link .icon {
     transform: rotate(180deg);
+  }
+
+  .navbar-vertical.navbar-expand-lg {
+    right: 0;
+    left: unset;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .navbar-expand-lg.navbar-vertical ~ .navbar, .navbar-expand-lg.navbar-vertical ~ .page-wrapper {
+      margin-left: 0;
+      margin-right: 15rem;
+    }
+  }
+
+  .dropdown-toggle:after {
+    margin-right: 0.4em;
+    margin-left: 0.1em;
   }
 }
