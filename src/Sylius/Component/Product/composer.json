@@ -31,7 +31,7 @@
         "php": "^8.2",
         "behat/transliterator": "^1.5",
         "sylius/attribute": "^2.0",
-        "sylius/resource": "^1.12",
+        "sylius/resource": "^1.12 || ^1.13@alpha",
         "symfony/polyfill-iconv": "^1.31",
         "webmozart/assert": "^1.11"
     },

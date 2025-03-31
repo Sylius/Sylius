@@ -16,6 +16,7 @@ namespace Sylius\Tests\Functional;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\Configuration;
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Doctrine\ORM\ORMSetup;
 use PHPUnit\Framework\TestCase;
 use Sylius\Tests\Functional\Doctrine\Mock\ConnectionMock;
@@ -32,7 +33,7 @@ abstract class AbstractOrmTestCase extends TestCase
         $config->setProxyNamespace('Sylius\Tests\Functional\Doctrine\Proxies');
         $config->setMetadataCache(new ArrayAdapter());
         $config->setQueryCache(new ArrayAdapter());
-        $config->setMetadataDriverImpl(ORMSetup::createDefaultAnnotationDriver());
+        $config->setMetadataDriverImpl(new AttributeDriver([]));
 
         return $config;
     }

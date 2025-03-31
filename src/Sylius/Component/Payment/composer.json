@@ -29,7 +29,7 @@
         "php": "^8.2",
         "paragonie/halite": "^5.0",
         "sylius/registry": "^1.6",
-        "sylius/resource": "^1.12",
+        "sylius/resource": "^1.12 || ^1.13@alpha",
         "symfony/uid": "^6.4 || ^7.1"
     },
     "require-dev": {
