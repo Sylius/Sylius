@@ -1,3 +1,8 @@
+# UPGRADE FROM `2.0.6` TO `2.0.7`
+
+1. The `AsTwigComponent` and `AsLiveComponent` attributes have been removed from components classes.
+   If you have extended any of these components and used these attributes, no action is required on your part
+
 # UPGRADE FROM `2.0.5` TO `2.0.6`
 
 ### Behat
