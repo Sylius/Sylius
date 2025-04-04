@@ -16,10 +16,8 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Common;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsTwigComponent]
 class LocaleSwitcherComponent
 {
     use HookableComponentTrait;

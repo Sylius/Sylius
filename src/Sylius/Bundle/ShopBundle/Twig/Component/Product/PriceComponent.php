@@ -22,11 +22,9 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
-#[AsTwigComponent]
 class PriceComponent
 {
     use HookableComponentTrait;

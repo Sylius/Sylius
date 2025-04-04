@@ -17,9 +17,7 @@ use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
-#[AsLiveComponent]
 class DefaultFormComponent
 {
     /** @use ResourceFormComponentTrait<CustomerInterface> */

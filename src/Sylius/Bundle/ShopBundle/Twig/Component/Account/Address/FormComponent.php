@@ -17,9 +17,7 @@ use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
-#[AsLiveComponent]
 class FormComponent
 {
     /** @use ResourceFormComponentTrait<AddressInterface> */

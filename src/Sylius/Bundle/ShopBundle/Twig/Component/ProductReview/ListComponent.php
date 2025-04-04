@@ -18,10 +18,8 @@ use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsTwigComponent]
 class ListComponent
 {
     use HookableComponentTrait;

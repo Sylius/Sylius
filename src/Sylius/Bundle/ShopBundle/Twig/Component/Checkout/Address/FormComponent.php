@@ -23,13 +23,11 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
 
-#[AsLiveComponent]
 class FormComponent
 {
     /** @use ResourceFormComponentTrait<OrderInterface> */
