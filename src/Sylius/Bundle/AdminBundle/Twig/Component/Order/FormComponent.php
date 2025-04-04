@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
-#[AsLiveComponent]
 class FormComponent
 {
     /** @use ResourceFormComponentTrait<OrderInterface> */

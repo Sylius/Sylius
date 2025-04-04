@@ -17,7 +17,6 @@ use Sylius\Bundle\AdminBundle\Doctrine\Query\Taxon\AllTaxonsInterface;
 use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent]
 class ProductTaxonsComponent
 {
     use HookableComponentTrait;

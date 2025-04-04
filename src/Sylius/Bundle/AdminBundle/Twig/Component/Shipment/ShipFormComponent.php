@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent]
 class ShipFormComponent
 {
     /** @use ResourceFormComponentTrait<ShipmentInterface> */

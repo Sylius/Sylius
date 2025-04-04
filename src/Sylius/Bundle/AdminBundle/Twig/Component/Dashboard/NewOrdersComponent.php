@@ -25,7 +25,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent]
 class NewOrdersComponent
 {
     use DefaultActionTrait;

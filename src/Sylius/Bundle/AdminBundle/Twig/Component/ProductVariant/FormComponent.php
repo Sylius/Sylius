@@ -25,7 +25,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 
-#[AsLiveComponent]
 class FormComponent
 {
     /** @use ResourceFormComponentTrait<ProductVariantInterface> */

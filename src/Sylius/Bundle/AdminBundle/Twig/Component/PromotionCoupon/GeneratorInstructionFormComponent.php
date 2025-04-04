@@ -21,7 +21,6 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent]
 class GeneratorInstructionFormComponent
 {
     use ComponentWithFormTrait;

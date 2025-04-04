@@ -24,7 +24,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent]
 class TreeComponent
 {
     use DefaultActionTrait;

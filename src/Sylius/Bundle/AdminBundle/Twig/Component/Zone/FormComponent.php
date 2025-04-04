@@ -21,7 +21,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 
-#[AsLiveComponent]
 class FormComponent
 {
     use LiveCollectionTrait;
