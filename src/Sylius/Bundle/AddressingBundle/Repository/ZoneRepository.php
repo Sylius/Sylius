@@ -29,14 +29,9 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     {
         $queryBuilder = $this->createByAddressQueryBuilder($address);
 
-        if (null !== $scope) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('o.scope', ':scope'))
-                ->setParameter('scope', $scope)
-            ;
-        }
-
         $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.scope', ':scope'))
+            ->setParameter('scope', $scope ?? Scope::ALL)
             ->andWhere($queryBuilder->expr()->eq('o.type', ':type'))
             ->setParameter('type', $type)
             ->setMaxResults(1)
