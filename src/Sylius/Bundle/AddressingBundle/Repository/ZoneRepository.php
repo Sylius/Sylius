@@ -27,7 +27,14 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
     public function findOneByAddressAndType(AddressInterface $address, string $type, ?string $scope = null): ?ZoneInterface
     {
-        $queryBuilder = $this->createByAddressQueryBuilder($address, [$scope]);
+        $queryBuilder = $this->createByAddressQueryBuilder($address);
+
+        if (null !== $scope) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('o.scope', ':scope'))
+                ->setParameter('scope', $scope)
+            ;
+        }
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.type', ':type'))
@@ -41,25 +48,24 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     /** @return ZoneInterface[] */
     public function findByAddress(AddressInterface $address, ?string $scope = null): array
     {
-        return $this->createByAddressQueryBuilder($address, [$scope, Scope::ALL])->getQuery()->getResult();
+        $queryBuilder = $this->createByAddressQueryBuilder($address);
+
+        if (null !== $scope) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->in('o.scope', ':scopes'))
+                ->setParameter('scopes', [$scope, Scope::ALL])
+            ;
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
-    /**
-     * @param array<string> $scope
-     */
-    public function createByAddressQueryBuilder(AddressInterface $address, ?array $scope = null): QueryBuilder
+    public function createByAddressQueryBuilder(AddressInterface $address): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->select('o', 'members')
             ->leftJoin('o.members', 'members')
         ;
-
-        if (null !== $scope) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->in('o.scope', ':scopes'))
-                ->setParameter('scopes', $scope)
-            ;
-        }
 
         $orConditions = [];
 
