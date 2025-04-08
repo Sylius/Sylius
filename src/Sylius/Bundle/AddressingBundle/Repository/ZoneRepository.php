@@ -27,7 +27,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
     public function findOneByAddressAndType(AddressInterface $address, string $type, ?string $scope = null): ?ZoneInterface
     {
-        $queryBuilder = $this->createByAddressQueryBuilder($address, $scope);
+        $queryBuilder = $this->createByAddressQueryBuilder($address, [$scope]);
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.type', ':type'))
@@ -41,10 +41,10 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     /** @return ZoneInterface[] */
     public function findByAddress(AddressInterface $address, ?string $scope = null): array
     {
-        return $this->createByAddressQueryBuilder($address, $scope)->getQuery()->getResult();
+        return $this->createByAddressQueryBuilder($address, [$scope, Scope::ALL])->getQuery()->getResult();
     }
 
-    public function createByAddressQueryBuilder(AddressInterface $address, ?string $scope = Scope::ALL): QueryBuilder
+    public function createByAddressQueryBuilder(AddressInterface $address, ?array $scope = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->select('o', 'members')
