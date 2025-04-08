@@ -44,7 +44,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
         return $this->createByAddressQueryBuilder($address, $scope)->getQuery()->getResult();
     }
 
-    public function createByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder
+    public function createByAddressQueryBuilder(AddressInterface $address, ?string $scope = Scope::ALL): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->select('o', 'members')
@@ -54,7 +54,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
         if (null !== $scope) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->in('o.scope', ':scopes'))
-                ->setParameter('scopes', array_unique([$scope, Scope::ALL]))
+                ->setParameter('scopes', $scope)
             ;
         }
 
