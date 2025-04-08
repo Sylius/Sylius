@@ -44,6 +44,9 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
         return $this->createByAddressQueryBuilder($address, [$scope, Scope::ALL])->getQuery()->getResult();
     }
 
+    /**
+     * @param array<string> $scope
+     */
     public function createByAddressQueryBuilder(AddressInterface $address, ?array $scope = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
