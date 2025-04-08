@@ -195,6 +195,17 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
 
+            - name: Warm up application
+              run: |
+                for i in {1..10}; do
+                  if curl -sSf http://127.0.0.1:8080/admin/ > /dev/null; then
+                    echo "App is ready!"
+                    break
+                  fi
+                  [ "$i" -eq 10 ] && echo "App is not responding, aborting..." && exit 1
+                  sleep 5
+                done
+
             -   name: Run Behat (Chromedriver)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun
 
@@ -276,6 +287,17 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
+
+            - name: Warm up application
+              run: |
+                  for i in {1..10}; do
+                    if curl -sSf http://127.0.0.1:8080/admin/ > /dev/null; then
+                      echo "App is ready!"
+                      break
+                    fi
+                    [ "$i" -eq 10 ] && echo "App is not responding, aborting..." && exit 1
+                    sleep 5
+                  done
 
             -   name: Run Behat (Panther)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
