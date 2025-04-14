@@ -25,22 +25,31 @@ use Sylius\Resource\Factory\FactoryInterface;
 final class ReviewFactoryTest extends TestCase
 {
     /**
-     * @var FactoryInterface|MockObject
+     * @var FactoryInterface<ReviewInterface>&MockObject
      */
-    private MockObject $factoryMock;
+    private FactoryInterface $factoryMock;
+    /**
+     * @var ReviewFactory<ReviewInterface>
+     */
     private ReviewFactory $reviewFactory;
 
-    public function testImplementFactoryInterface(): void
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->factoryMock = $this->createMock(FactoryInterface::class);
+        $this->reviewFactory = new ReviewFactory($this->factoryMock);
+    }
+    public function testItImplementsFactoryInterface(): void
     {
         self::assertInstanceOf(FactoryInterface::class, $this->reviewFactory);
     }
 
-    public function testImplementsReviewFactoryInterface(): void
+    public function testItImplementsReviewFactoryInterface(): void
     {
         self::assertInstanceOf(ReviewFactoryInterface::class, $this->reviewFactory);
     }
 
-    public function testCreatesANewReview(): void
+    public function testCreatingANewReview(): void
     {
         /** @var ReviewInterface|MockObject $reviewMock */
         $reviewMock = $this->createMock(ReviewInterface::class);
@@ -50,7 +59,7 @@ final class ReviewFactoryTest extends TestCase
         self::assertSame($reviewMock, $this->reviewFactory->createNew());
     }
 
-    public function testCreatesAReviewWithSubject(): void
+    public function testCreatingAReviewWithSubject(): void
     {
         /** @var ReviewableInterface|MockObject $subjectMock */
         $subjectMock = $this->createMock(ReviewableInterface::class);
@@ -67,7 +76,7 @@ final class ReviewFactoryTest extends TestCase
         self::assertSame($reviewMock, $result);
     }
 
-    public function testCreatesAReviewWithSubjectAndReviewer(): void
+    public function testCreatingAReviewWithSubjectAndReviewer(): void
     {
         /** @var ReviewableInterface|MockObject $subjectMock */
         $subjectMock = $this->createMock(ReviewableInterface::class);
@@ -87,11 +96,5 @@ final class ReviewFactoryTest extends TestCase
         $result = $this->reviewFactory->createForSubjectWithReviewer($subjectMock, $reviewerMock);
 
         self::assertSame($reviewMock, $result);
-    }
-
-    protected function setUp(): void
-    {
-        $this->factoryMock = $this->createMock(FactoryInterface::class);
-        $this->reviewFactory = new ReviewFactory($this->factoryMock);
     }
 }

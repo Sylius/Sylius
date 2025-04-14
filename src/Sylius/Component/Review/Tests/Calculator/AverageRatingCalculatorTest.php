@@ -26,7 +26,13 @@ final class AverageRatingCalculatorTest extends TestCase
     /** @var AverageRatingCalculator */
     private AverageRatingCalculator $averageRatingCalculator;
 
-    public function testImplementsReviewableRatingCalculatorInterface(): void
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->averageRatingCalculator = new AverageRatingCalculator();
+    }
+
+    public function testItImplementsReviewableRatingCalculatorInterface(): void
     {
         self::assertInstanceOf(
             ReviewableRatingCalculatorInterface::class,
@@ -34,7 +40,7 @@ final class AverageRatingCalculatorTest extends TestCase
         );
     }
 
-    public function testCalculatesAverageRating(): void
+    public function testCalculatingAverageRating(): void
     {
         /** @var ReviewableInterface|MockObject $reviewableMock */
         $reviewableMock = $this->createMock(ReviewableInterface::class);
@@ -56,7 +62,7 @@ final class AverageRatingCalculatorTest extends TestCase
         self::assertSame(4.5, $this->averageRatingCalculator->calculate($reviewableMock));
     }
 
-    public function testReturnsZeroIfGivenReviewableObjectHasNoReviews(): void
+    public function testReturningZeroIfGivenReviewableObjectHasNoReviews(): void
     {
         /** @var ReviewableInterface|MockObject $reviewableMock */
         $reviewableMock = $this->createMock(ReviewableInterface::class);
@@ -66,7 +72,7 @@ final class AverageRatingCalculatorTest extends TestCase
         self::assertSame(0.0, $this->averageRatingCalculator->calculate($reviewableMock));
     }
 
-    public function testReturnsZeroIfGivenReviewableObjectHasReviewsButNoneOfThemIsAccepted(): void
+    public function testReturningZeroIfGivenReviewableObjectHasReviewsButNoneOfThemIsAccepted(): void
     {
         /** @var ReviewableInterface|MockObject $reviewableMock */
         $reviewableMock = $this->createMock(ReviewableInterface::class);
@@ -79,10 +85,5 @@ final class AverageRatingCalculatorTest extends TestCase
         $reviewMock->expects($this->once())->method('getStatus')->willReturn(ReviewInterface::STATUS_NEW);
 
         self::assertSame(0.0, $this->averageRatingCalculator->calculate($reviewableMock));
-    }
-
-    protected function setUp(): void
-    {
-        $this->averageRatingCalculator = new AverageRatingCalculator();
     }
 }

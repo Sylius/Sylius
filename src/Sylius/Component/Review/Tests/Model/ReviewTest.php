@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Review\Model;
@@ -15,6 +24,11 @@ final class ReviewTest extends TestCase
 {
     private ReviewInterface $review;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->review = new Review();
+    }
     public function testItImplementsReviewInterface(): void
     {
         self::assertInstanceOf(ReviewInterface::class, $this->review);
@@ -69,10 +83,5 @@ final class ReviewTest extends TestCase
         $updatedAt = new DateTime();
         $this->review->setUpdatedAt($updatedAt);
         self::assertSame($updatedAt, $this->review->getUpdatedAt());
-    }
-
-    protected function setUp(): void
-    {
-        $this->review = new Review();
     }
 }
