@@ -16,6 +16,7 @@ namespace Tests\Sylius\Component\Review\Factory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Review\Factory\ReviewFactory;
+use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -36,7 +37,7 @@ final class ReviewFactoryTest extends TestCase
 
     public function testImplementsReviewFactoryInterface(): void
     {
-        self::assertInstanceOf(FactoryInterface::class, $this->reviewFactory);
+        self::assertInstanceOf(ReviewFactoryInterface::class, $this->reviewFactory);
     }
 
     public function testCreatesANewReview(): void
@@ -61,7 +62,9 @@ final class ReviewFactoryTest extends TestCase
 
         $reviewMock->expects($this->once())->method('setReviewSubject')->with($subjectMock);
 
-        self::assertSame($reviewMock, $this->reviewFactory->createForSubject($subjectMock));
+        $result = $this->reviewFactory->createForSubject($subjectMock);
+
+        self::assertSame($reviewMock, $result);
     }
 
     public function testCreatesAReviewWithSubjectAndReviewer(): void
