@@ -30,7 +30,7 @@ return static function (RectorConfig $config): void {
     $config->sets([
         LevelSetList::UP_TO_PHP_82,
         MigrationSetList::PHPSPEC_TO_PHPUNIT,
-        PHPUnitSetList::PHPUNIT_90,
+        PHPUnitSetList::PHPUNIT_100,
     ]);
     $config->rules([
         AddParamTypeDeclarationRector::class,
