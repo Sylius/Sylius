@@ -20,6 +20,7 @@ use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -29,6 +30,8 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
+    use SecurePasswordTrait;
+
     private ?string $verificationToken = '';
 
     public function __construct(
@@ -150,9 +153,9 @@ final class CustomerContext implements Context
     public function iChangePasswordTo(string $oldPassword, string $newPassword): void
     {
         $this->client->setRequestData([
-            'currentPassword' => $oldPassword,
-            'newPassword' => $newPassword,
-            'confirmNewPassword' => $newPassword,
+            'currentPassword' => $this->retrieveSecurePassword($oldPassword),
+            'newPassword' => $this->replaceWithSecurePassword($newPassword),
+            'confirmNewPassword' => $this->confirmSecurePassword($newPassword),
         ]);
     }
 
@@ -555,7 +558,7 @@ final class CustomerContext implements Context
             'firstName' => 'First',
             'lastName' => 'Last',
             'email' => $email,
-            'password' => $password,
+            'password' => $this->replaceWithSecurePassword($password),
         ]);
 
         $this->client->executeCustomRequest($request);

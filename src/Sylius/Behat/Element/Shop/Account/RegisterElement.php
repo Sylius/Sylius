@@ -14,11 +14,26 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 
 final class RegisterElement extends Element implements RegisterElementInterface
 {
+    use SecurePasswordTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters = [],
+        protected ?SharedStorageInterface $sharedStorage = null,
+    )
+    {
+        parent::__construct($session, $minkParameters);
+    }
+
     public function checkValidationMessageFor(string $element, string $message): bool
     {
         $errorLabel = $this
@@ -59,9 +74,9 @@ final class RegisterElement extends Element implements RegisterElementInterface
         $this->getElement('last_name')->setValue($lastName);
     }
 
-    public function specifyPassword(?string $password): void
+    public function specifyPassword(string $password): void
     {
-        $this->getElement('password')->setValue($password);
+        $this->getElement('password')->setValue($this->replaceWithSecurePassword($password));
     }
 
     public function specifyPhoneNumber(string $phoneNumber): void
@@ -69,9 +84,9 @@ final class RegisterElement extends Element implements RegisterElementInterface
         $this->getElement('phone_number')->setValue($phoneNumber);
     }
 
-    public function verifyPassword(?string $password): void
+    public function verifyPassword(string $password): void
     {
-        $this->getElement('password_verification')->setValue($password);
+        $this->getElement('password_verification')->setValue($this->confirmSecurePassword($password));
     }
 
     public function subscribeToTheNewsletter(): void

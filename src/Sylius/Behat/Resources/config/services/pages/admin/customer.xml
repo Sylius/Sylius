@@ -34,6 +34,7 @@
         </service>
         <service id="sylius.behat.page.admin.customer.update" class="%sylius.behat.page.admin.customer.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_customer_update</argument>
+            <argument type="service" id="sylius.behat.shared_storage"/>
         </service>
         <service id="sylius.behat.page.admin.customer.show" class="%sylius.behat.page.admin.customer.show.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>

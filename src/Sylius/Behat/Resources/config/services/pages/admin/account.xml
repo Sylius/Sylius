@@ -19,10 +19,14 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.page.admin.login" class="Sylius\Behat\Page\Admin\Account\LoginPage" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.admin.login" class="Sylius\Behat\Page\Admin\Account\LoginPage" parent="sylius.behat.symfony_page" public="false">
+            <argument type="service" id="sylius.behat.shared_storage"/>
+        </service>
 
         <service id="sylius.behat.page.admin.request_password_reset" class="Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage" parent="sylius.behat.symfony_page" public="false" />
 
-        <service id="sylius.behat.page.admin.reset_password" class="%sylius.behat.page.admin.reset_password%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.admin.reset_password" class="%sylius.behat.page.admin.reset_password%" parent="sylius.behat.symfony_page" public="false">
+            <argument type="service" id="sylius.behat.shared_storage"/>
+        </service>
     </services>
 </container>

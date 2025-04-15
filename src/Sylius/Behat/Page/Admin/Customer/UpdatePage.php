@@ -14,12 +14,27 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\Toggles;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
+    use SecurePasswordTrait;
     use Toggles;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        protected SharedStorageInterface $sharedStorage,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
 
     public function getFullName(): string
     {
@@ -56,7 +71,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function changePassword(string $password): void
     {
-        $this->getDocument()->fillField('Password', $password);
+        $this->getDocument()->fillField('Password', $this->replaceWithSecurePassword($password));
     }
 
     public function getPassword(): string

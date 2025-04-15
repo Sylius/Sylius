@@ -13,10 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Administrator;
 
+use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
+    use SecurePasswordTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        protected SharedStorageInterface $sharedStorage,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
+
     public function attachAvatar(string $path): void
     {
         $filesPath = $this->getParameter('files_path');
@@ -38,7 +54,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function changePassword(string $password): void
     {
-        $this->getElement('password')->setValue($password);
+        $this->getElement('password')->setValue($this->replaceWithSecurePassword($password));
     }
 
     public function changeLocale(string $localeCode): void
