@@ -39,7 +39,7 @@ Feature: Statistics
         And there should be total sales of "$2,000.00"
         And the average order value should be "$1,000.00"
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Seeing statistics for the next year
         Given it is "first day of January last year" now
         And 3 new customers have fulfilled 2 orders placed for total of "$2,000.00"

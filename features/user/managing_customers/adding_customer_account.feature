@@ -18,7 +18,7 @@ Feature: Adding a new customer account
         And the customer "l.skywalker@gmail.com" should appear in the store
         And the customer "l.skywalker@gmail.com" should have an account created
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Creating an account for existing customer
         Given the store has customer "Frodo Baggins" with email "f.baggins@example.com"
         When I want to edit this customer
