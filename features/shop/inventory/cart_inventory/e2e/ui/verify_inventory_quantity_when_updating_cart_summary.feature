@@ -14,7 +14,7 @@ Feature: Verifying inventory quantity on cart summary
         And there are 10 units of product "Black Dress" available in the inventory
         And I am a logged in customer
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @javascript
     Scenario: Preventing the cart recalculation when the form has errors
         Given I added 3 products "Iron Maiden T-Shirt" to the cart
         And I added product "Black Dress" to the cart

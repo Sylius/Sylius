@@ -8,7 +8,7 @@ Feature: Removing cart item from cart
         Given the store operates on a single channel in "United States"
         And the store has a product "T-Shirt banana" priced at "$12.54"
 
-    @api @ui @mink:chromedriver
+    @api @ui @javascript
     Scenario: Removing cart item
         Given I added product "T-Shirt banana" to the cart
         When I see the summary of my cart

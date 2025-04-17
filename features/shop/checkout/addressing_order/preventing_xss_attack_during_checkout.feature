@@ -9,7 +9,7 @@ Feature: Preventing a potential XSS attack during updating the address in the ch
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @javascript
     Scenario: Preventing a potential XSS attack during updating the address in the checkout
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step

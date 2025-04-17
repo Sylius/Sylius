@@ -14,7 +14,7 @@ Feature: Verifying inventory quantity on cart summary
         And there are 10 units of product "Black Dress" available in the inventory
         And I am a logged in customer
 
-    @api @ui @mink:chromedriver
+    @api @ui @javascript
     Scenario: Being unable to save a cart with product that is out of stock
         Given I added 3 products "Iron Maiden T-Shirt" to the cart
         When I change product "Iron Maiden T-Shirt" quantity to 6 in my cart

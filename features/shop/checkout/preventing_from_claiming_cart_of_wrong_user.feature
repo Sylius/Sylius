@@ -34,7 +34,7 @@ Feature: Preventing from claiming cart of a wrong user
         Then there should be one item in my cart
         And my cart total should be "$20.00"
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @javascript
     Scenario: Preventing anonymous user from claiming cart of logged in user
         When I add product "PHP T-Shirt" to the cart
         And I sign in with email "robb@stark.com" and password "KingInTheNorth"
@@ -47,7 +47,7 @@ Feature: Preventing from claiming cart of a wrong user
         Then there should be one item in my cart
         And my cart total should be "$20.00"
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @javascript
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given on this channel account verification is not required
         When I add product "PHP T-Shirt" to the cart

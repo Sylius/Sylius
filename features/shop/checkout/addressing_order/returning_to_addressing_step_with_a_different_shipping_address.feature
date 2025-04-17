@@ -9,7 +9,7 @@ Feature: Returning to addressing step with a different shipping address
         And the store has a product "Summer T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @javascript
     Scenario: Going back to addressing step after submitting a different shipping address
         Given I added product "Summer T-Shirt" to the cart
         And I am at the checkout addressing step
@@ -30,7 +30,7 @@ Feature: Returning to addressing step with a different shipping address
         And I decide to change my address
         Then different shipping address should not be checked
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @javascript
     Scenario: Going back to addressing step after submitting a different shipping address
         When I added product "Summer T-Shirt" to the cart
         And I am at the checkout addressing step

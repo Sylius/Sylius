@@ -103,7 +103,7 @@ Feature: Allowing access only for correctly logged in users
         When the customer confirm his order
         Then the customer should see the thank you page
 
-    @api @ui @mink:chromedriver
+    @api @ui @javascript
     Scenario: Accessing to increase quantity of an item in the cart by the customer
         Given the customer logged in
         Given the customer added product "Stark T-Shirt" to the cart
