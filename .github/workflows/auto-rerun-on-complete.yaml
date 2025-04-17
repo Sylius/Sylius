@@ -1,0 +1,23 @@
+name: Auto Retry JS Jobs
+
+on:
+    workflow_run:
+        workflows:
+            - End-to-End (MySQL)
+            - Continuous Integration 2.0 (Full)
+        types:
+            - completed
+
+permissions:
+    contents: read
+    actions: read
+
+jobs:
+    rerun-failed-js:
+        if: ${{ github.event.workflow_run.conclusion == 'failure' && github.event.workflow_run.run_attempt == 1 }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Rerun only failed jobs
+              run: gh run rerun --failed ${{ github.event.workflow_run.id }}
+              env:
+                  GH_TOKEN: ${{ secrets.SYLIUS_BOT_AUTO_RERUN }}
