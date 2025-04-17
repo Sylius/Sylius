@@ -53,11 +53,13 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function chooseDifferentShippingAddress(): void
     {
         $this->chooseDifferentAddress('shipping');
+        $this->waitForElementUpdate('form');
     }
 
     public function chooseDifferentBillingAddress(): void
     {
         $this->chooseDifferentAddress('billing');
+        $this->waitForElementUpdate('form');
     }
 
     public function isDifferentShippingAddressChecked(): bool
