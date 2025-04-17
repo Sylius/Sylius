@@ -52,7 +52,7 @@ Feature: Zone validation
         When I want to modify the zone named "European Union"
         Then I should not be able to edit its code
 
-    @api @ui @mink:chromedriver
+    @api @ui @javascript
     Scenario: Being unable to add itself to members during editing an existing zone
         Given the store has a zone "European Union" with code "EU"
         When I want to modify the zone named "European Union"
