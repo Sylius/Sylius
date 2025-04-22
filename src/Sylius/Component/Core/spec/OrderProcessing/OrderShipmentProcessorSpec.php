@@ -70,8 +70,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $itemUnit1->getShippable()->willReturn($productVariant1);
         $itemUnit1->getShipment()->willReturn(null);
 
-        $itemUnit2->getShipment()->willReturn(null);
         $itemUnit2->getShippable()->willReturn($productVariant2);
+        $itemUnit2->getShipment()->willReturn(null);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
@@ -115,8 +115,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $itemUnit1->getShippable()->willReturn($productVariant1);
         $itemUnit1->getShipment()->willReturn(null);
 
-        $itemUnit2->getShipment()->willReturn(null);
         $itemUnit2->getShippable()->willReturn($productVariant2);
+        $itemUnit2->getShipment()->willReturn(null);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
@@ -316,14 +316,14 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
     }
 
     function it_does_not_add_item_units_that_do_not_require_shipping(
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory,
         OrderInterface $order,
-        ShipmentInterface $shipment,
         OrderItemUnitInterface $shippableUnit,
         OrderItemUnitInterface $nonShippableUnit,
+        ShipmentInterface $shipment,
         ProductVariantInterface $shippableVariant,
         ProductVariantInterface $nonShippableVariant,
-        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         ShippingMethodInterface $shippingMethod,
     ): void {
         $order->canBeProcessed()->willReturn(true);
