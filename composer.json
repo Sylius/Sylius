@@ -208,7 +208,7 @@
         "jangregor/phpstan-prophecy": "^1.0",
         "lchrusciel/api-test-case": "^5.3",
         "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.1",
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.6",
         "nyholm/psr7": "^1.8",
