@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\AttributeType;
@@ -17,6 +26,7 @@ class DatetimeAttributeTypeTest extends TestCase
         parent::setUp();
         $this->type = new DatetimeAttributeType();
     }
+
     public function testCanBeInstantiated(): void
     {
         self::assertInstanceOf(DatetimeAttributeType::class, $this->type);

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\AttributeType;
@@ -18,15 +27,18 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 class PercentAttributeTypeTest extends TestCase
 {
     private PercentAttributeType $type;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->type = new PercentAttributeType();
     }
+
     public function testCanBeInstantiatednstantiated(): void
     {
         self::assertInstanceOf(PercentAttributeType::class, $this->type);
     }
+
     public function testStorageTypeShouldBeFloat(): void
     {
         self::assertSame('float', $this->type->getStorageType());
@@ -37,7 +49,6 @@ class PercentAttributeTypeTest extends TestCase
         self::assertSame('percent', $this->type->getType());
     }
 
-    /*
     public function testChecksIfAttributeValueIsValid(): void
     {
         $attribute = $this->createMock(AttributeInterface::class);
@@ -48,22 +59,14 @@ class PercentAttributeTypeTest extends TestCase
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator = $this->createMock(ValidatorInterface::class);
 
-        // AttributeValue will return Attribute
-        $attributeValue->expects(self::once())
-            ->method('getAttribute')
-            ->willReturn($attribute);
-
-        // AttributeValue value is null
         $attributeValue->expects(self::once())
             ->method('getValue')
             ->willReturn(null);
 
-        // Context should return the Validator
         $context->expects(self::once())
             ->method('getValidator')
             ->willReturn($validator);
 
-        // Validator called, returns violations list
         $validator->expects(self::once())
             ->method('validate')
             ->with(null, self::callback(function ($constraints) {
@@ -72,11 +75,11 @@ class PercentAttributeTypeTest extends TestCase
                         return true;
                     }
                 }
+
                 return false;
             }))
             ->willReturn($constraintViolationList);
 
-        // Violation iteration: valid() yields true (once), then false; current() yields violation
         $constraintViolationList->expects(self::once())
             ->method('rewind');
         $constraintViolationList->expects(self::exactly(2))
@@ -88,18 +91,15 @@ class PercentAttributeTypeTest extends TestCase
         $constraintViolationList->expects(self::once())
             ->method('next');
 
-        // Violation's message
         $constraintViolation->expects(self::once())
             ->method('getMessage')
             ->willReturn('error message');
 
-        // Context builds violation
         $context->expects(self::once())
             ->method('buildViolation')
             ->with('error message')
             ->willReturn($constraintViolationBuilder);
 
-        // The builder's atPath('value') and addViolation() are chained/called
         $constraintViolationBuilder->expects(self::once())
             ->method('atPath')
             ->with('value')
@@ -107,10 +107,6 @@ class PercentAttributeTypeTest extends TestCase
         $constraintViolationBuilder->expects(self::once())
             ->method('addViolation');
 
-        $type = new PercentAttributeType();
-
-        // Run validation (should not throw)
-        $type->validate($attributeValue, $context, ['required' => true]);
+        $this->type->validate($attributeValue, $context, ['required' => true]);
     }
-    */
 }

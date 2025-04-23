@@ -1,10 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\AttributeType;
 
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -14,7 +24,6 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
-use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 
 class SelectAttributeTypeTest extends TestCase
 {
@@ -25,6 +34,7 @@ class SelectAttributeTypeTest extends TestCase
         parent::setUp();
         $this->type = new SelectAttributeType();
     }
+
     public function testCanBeInstantiated(): void
     {
         self::assertInstanceOf(SelectAttributeType::class, $this->type);
@@ -45,7 +55,6 @@ class SelectAttributeTypeTest extends TestCase
         self::assertSame('select', $this->type->getType());
     }
 
-    /*
     public function testChecksIfAttributeValueIsValid(): void
     {
         $attribute = $this->createMock(AttributeInterface::class);
@@ -56,9 +65,6 @@ class SelectAttributeTypeTest extends TestCase
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator = $this->createMock(ValidatorInterface::class);
 
-        $attributeValue->expects(self::once())
-            ->method('getAttribute')
-            ->willReturn($attribute);
         $attributeValue->expects(self::once())
             ->method('getValue')
             ->willReturn(null);
@@ -75,6 +81,7 @@ class SelectAttributeTypeTest extends TestCase
                         return true;
                     }
                 }
+
                 return false;
             }))
             ->willReturn($constraintViolationList);
@@ -105,8 +112,6 @@ class SelectAttributeTypeTest extends TestCase
         $constraintViolationBuilder->expects(self::once())
             ->method('addViolation');
 
-        $type = new SelectAttributeType();
-        $type->validate($attributeValue, $context, ['required' => true]);
+        $this->type->validate($attributeValue, $context, ['required' => true]);
     }
-    */
 }

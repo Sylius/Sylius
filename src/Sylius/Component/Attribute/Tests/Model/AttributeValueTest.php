@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\Model;
@@ -74,11 +83,8 @@ class AttributeValueTest extends TestCase
         self::assertNull($this->attributeValue->getValue());
     }
 
-    /*
     public function testValueShouldBeMutableBasedOnAttributeStorageType(): void
     {
-        $attribute = $this->createMock(AttributeInterface::class);
-
         $storageTypeToExampleData = [
             'boolean' => false,
             'text' => 'Lorem ipsum',
@@ -90,6 +96,7 @@ class AttributeValueTest extends TestCase
         ];
 
         foreach ($storageTypeToExampleData as $storageType => $exampleData) {
+            $attribute = $this->createMock(AttributeInterface::class);
             $attribute
                 ->method('getStorageType')
                 ->willReturn($storageType);
@@ -99,7 +106,6 @@ class AttributeValueTest extends TestCase
             self::assertSame($exampleData, $this->attributeValue->getValue());
         }
     }
-    */
 
     public function testValueCanBeSetToNull(): void
     {

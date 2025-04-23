@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\Factory;
@@ -48,7 +57,6 @@ class AttributeFactoryTest extends TestCase
         self::assertSame($untypedAttribute, $attributeFactory->createNew());
     }
 
-    /*
     public function testCanCreatesTypedAttribute(): void
     {
         $factory = $this->createMock(FactoryInterface::class);
@@ -74,9 +82,6 @@ class AttributeFactoryTest extends TestCase
             ->method('setType')
             ->with('datetime');
         $typedAttribute->expects(self::once())
-            ->method('getType')
-            ->willReturn('datetime');
-        $typedAttribute->expects(self::once())
             ->method('setStorageType')
             ->with('datetime');
 
@@ -84,5 +89,4 @@ class AttributeFactoryTest extends TestCase
 
         self::assertSame($typedAttribute, $attributeFactory->createTyped('datetime'));
     }
-     */
 }

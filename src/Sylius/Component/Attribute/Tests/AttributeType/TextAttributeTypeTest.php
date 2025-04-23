@@ -1,10 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\AttributeType;
 
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -15,7 +25,6 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
-use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 
 class TextAttributeTypeTest extends TestCase
 {
@@ -26,6 +35,7 @@ class TextAttributeTypeTest extends TestCase
         parent::setUp();
         $this->type = new TextAttributeType();
     }
+
     public function testCanBeInstantiated(): void
     {
         self::assertInstanceOf(TextAttributeType::class, $this->type);
@@ -46,7 +56,6 @@ class TextAttributeTypeTest extends TestCase
         self::assertSame('text', $this->type->getType());
     }
 
-    /*
     public function testChecksIfAttributeValueIsValidAccordingToMinAndMaxConstraint(): void
     {
         $attribute = $this->createMock(AttributeInterface::class);
@@ -57,9 +66,6 @@ class TextAttributeTypeTest extends TestCase
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator = $this->createMock(ValidatorInterface::class);
 
-        $attributeValue->expects(self::once())
-            ->method('getAttribute')
-            ->willReturn($attribute);
         $attributeValue->expects(self::once())
             ->method('getValue')
             ->willReturn('X');
@@ -76,6 +82,7 @@ class TextAttributeTypeTest extends TestCase
                         return true;
                     }
                 }
+
                 return false;
             }))
             ->willReturn($constraintViolationList);
@@ -106,12 +113,9 @@ class TextAttributeTypeTest extends TestCase
         $constraintViolationBuilder->expects(self::once())
             ->method('addViolation');
 
-        $type = new TextAttributeType();
-        $type->validate($attributeValue, $context, ['min' => 2, 'max' => 255]);
+        $this->type->validate($attributeValue, $context, ['min' => 2, 'max' => 255]);
     }
-    */
 
-    /*
     public function testChecksIfAttributeValueIsValidAccordingToRequiredConstraint(): void
     {
         $attribute = $this->createMock(AttributeInterface::class);
@@ -122,9 +126,6 @@ class TextAttributeTypeTest extends TestCase
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator = $this->createMock(ValidatorInterface::class);
 
-        $attributeValue->expects(self::once())
-            ->method('getAttribute')
-            ->willReturn($attribute);
         $attributeValue->expects(self::once())
             ->method('getValue')
             ->willReturn(null);
@@ -141,6 +142,7 @@ class TextAttributeTypeTest extends TestCase
                         return true;
                     }
                 }
+
                 return false;
             }))
             ->willReturn($constraintViolationList);
@@ -171,8 +173,6 @@ class TextAttributeTypeTest extends TestCase
         $constraintViolationBuilder->expects(self::once())
             ->method('addViolation');
 
-        $type = new TextAttributeType();
-        $type->validate($attributeValue, $context, ['required' => true]);
+        $this->type->validate($attributeValue, $context, ['required' => true]);
     }
-    */
 }
