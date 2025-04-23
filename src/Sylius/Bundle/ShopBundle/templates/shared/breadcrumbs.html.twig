@@ -3,9 +3,9 @@
         {% for item in items %}
             <li class="breadcrumb-item fw-normal{{ item.active is defined and item.active ? ' active' }}">
                 {% if item.path is defined %}
-                    <a class="link-reset" href="{{ item.path }}">{{ item.label|raw }}</a>
+                    <a class="link-reset" href="{{ item.path }}">{{ item.label }}</a>
                 {% else %}
-                    <span class="text-body-tertiary text-break">{{ item.label|raw }}</span>
+                    <span class="text-body-tertiary text-break">{{ item.label }}</span>
                 {% endif %}
             </li>
         {% endfor %}
