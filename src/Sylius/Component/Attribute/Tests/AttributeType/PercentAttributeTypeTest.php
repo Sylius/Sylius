@@ -34,7 +34,7 @@ class PercentAttributeTypeTest extends TestCase
         $this->type = new PercentAttributeType();
     }
 
-    public function testCanBeInstantiatednstantiated(): void
+    public function testCanBeInstantiated(): void
     {
         self::assertInstanceOf(PercentAttributeType::class, $this->type);
     }
