@@ -32,7 +32,7 @@ class AttributeTranslationTest extends TestCase
         self::assertInstanceOf(AttributeTranslation::class, $this->translation);
     }
 
-    public function testShouldImplementsAttributeTranslationInterface(): void
+    public function testShouldImplementAttributeTranslationInterface(): void
     {
         self::assertInstanceOf(AttributeTranslationInterface::class, $this->translation);
     }

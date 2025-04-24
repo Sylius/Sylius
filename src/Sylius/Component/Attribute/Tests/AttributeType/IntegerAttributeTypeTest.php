@@ -39,7 +39,7 @@ class IntegerAttributeTypeTest extends TestCase
         self::assertInstanceOf(IntegerAttributeType::class, $this->type);
     }
 
-    public function testShouldImplementsAttributeTypeInterface(): void
+    public function testShouldImplementAttributeTypeInterface(): void
     {
         self::assertInstanceOf(AttributeTypeInterface::class, $this->type);
     }

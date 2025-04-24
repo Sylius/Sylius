@@ -40,9 +40,8 @@ class TextareaAttributeTypeTest extends TestCase
         self::assertInstanceOf(TextareaAttributeType::class, $this->type);
     }
 
-    public function testShouldImplementsAttributeTypeInterface(): void
+    public function testShouldImplementAttributeTypeInterface(): void
     {
-        $type = new TextareaAttributeType();
         self::assertInstanceOf(AttributeTypeInterface::class, $this->type);
     }
 

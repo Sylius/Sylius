@@ -32,7 +32,7 @@ class DatetimeAttributeTypeTest extends TestCase
         self::assertInstanceOf(DatetimeAttributeType::class, $this->type);
     }
 
-    public function testShouldImplementsAttributeTypeInterface(): void
+    public function testShouldImplementAttributeTypeInterface(): void
     {
         self::assertInstanceOf(AttributeTypeInterface::class, $this->type);
     }

@@ -33,7 +33,7 @@ class AttributeValueTest extends TestCase
         self::assertInstanceOf(AttributeValue::class, $this->attributeValue);
     }
 
-    public function testShouldImplementsAttributeValueInterface(): void
+    public function testShouldImplementAttributeValueInterface(): void
     {
         self::assertInstanceOf(AttributeValueInterface::class, $this->attributeValue);
     }
@@ -48,7 +48,7 @@ class AttributeValueTest extends TestCase
         self::assertNull($this->attributeValue->getSubject());
     }
 
-    public function testShouldAllowsAssigningItselfToASubject(): void
+    public function testShouldAllowAssigningItselfToASubject(): void
     {
         $subject = $this->createMock(AttributeSubjectInterface::class);
         $this->attributeValue->setSubject($subject);

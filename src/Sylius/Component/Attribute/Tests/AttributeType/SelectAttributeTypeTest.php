@@ -40,7 +40,7 @@ class SelectAttributeTypeTest extends TestCase
         self::assertInstanceOf(SelectAttributeType::class, $this->type);
     }
 
-    public function testShouldImplementsAttributeTypeInterface(): void
+    public function testShouldImplementAttributeTypeInterface(): void
     {
         self::assertInstanceOf(AttributeTypeInterface::class, $this->type);
     }

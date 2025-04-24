@@ -41,7 +41,7 @@ class TextAttributeTypeTest extends TestCase
         self::assertInstanceOf(TextAttributeType::class, $this->type);
     }
 
-    public function testShouldImplementsAttributeTypeInterface(): void
+    public function testShouldImplementAttributeTypeInterface(): void
     {
         self::assertInstanceOf(AttributeTypeInterface::class, $this->type);
     }

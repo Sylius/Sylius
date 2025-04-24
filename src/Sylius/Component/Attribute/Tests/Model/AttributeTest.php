@@ -36,7 +36,7 @@ class AttributeTest extends TestCase
         self::assertInstanceOf(Attribute::class, $this->attribute);
     }
 
-    public function testShouldImplementsAttributeInterface(): void
+    public function testShouldImplementAttributeInterface(): void
     {
         self::assertInstanceOf(AttributeInterface::class, $this->attribute);
     }
