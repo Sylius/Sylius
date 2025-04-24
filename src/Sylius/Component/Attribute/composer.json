@@ -32,7 +32,7 @@
         "symfony/validator": "^6.4 || ^7.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^9.5"
     },
     "config": {
         "allow-plugins": {
