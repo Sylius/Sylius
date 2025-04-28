@@ -1,18 +1,3 @@
-# UPGRADE TO `2.1`
-
-`GridProviders` are now configurable. In order to allow users to choose between PHP and YAML grid configuration for Sylius grids, you can now change the type of definition Sylius will use. There exists no merging between the configurations, so if you chose to use PHP for an already existing grid, you need to redefine the YAML definition as well.
-
-Example configuration:
-
-```yaml
-sylius_core:
-    grid:
-        default_type: array # from the config directory (yaml or php)
-        grids:
-            sylius_admin_product_variant:
-                type: 'service' # from src directory, these are services tagged as "sylius.grid"
-```
-
 # UPGRADE FROM `2.0.2` TO `2.0.3`
 
 1. New `left` and `right` sections have been added to the following Twig hooks to improve customization:
