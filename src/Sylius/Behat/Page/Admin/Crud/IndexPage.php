@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
@@ -27,8 +27,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private readonly TableAccessorInterface $tableAccessor,
-        private readonly string $routeName,
+        protected readonly TableAccessorInterface $tableAccessor,
+        protected readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }

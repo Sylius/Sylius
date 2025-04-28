@@ -21,6 +21,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ShippingCategoryInterface> */
 class ShippingCategoryExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
@@ -28,8 +29,9 @@ class ShippingCategoryExampleFactory extends AbstractExampleFactory implements E
     private OptionsResolver $optionsResolver;
 
     /** @param FactoryInterface<ShippingCategoryInterface> $shippingCategoryFactory */
-    public function __construct(private FactoryInterface $shippingCategoryFactory)
-    {
+    public function __construct(
+        private readonly FactoryInterface $shippingCategoryFactory,
+    ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -53,7 +55,7 @@ class ShippingCategoryExampleFactory extends AbstractExampleFactory implements E
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options): string {
+            ->setDefault('name', function (): string {
                 /** @var string $words */
                 $words = $this->faker->words(3, true);
 

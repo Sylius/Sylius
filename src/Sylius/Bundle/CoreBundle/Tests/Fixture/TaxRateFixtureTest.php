@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\TaxRateFixture;
@@ -23,67 +24,51 @@ final class TaxRateFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rates_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rates_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rate_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rate_amount_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['amount' => 4.76]]]], 'custom.*.amount');
         $this->assertPartialConfigurationIsInvalid([['custom' => [['amount' => 'string']]]], 'custom.*.amount');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rate_may_be_included_in_price_or_not(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['included_in_price' => false]]]], 'custom.*.included_in_price');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rate_zone_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['zone' => 'EUROPE']]]], 'custom.*.zone');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rate_category_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['category' => 'BOOKS']]]], 'custom.*.category');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function tax_rate_calculator_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['calculator' => 'custom']]]], 'custom.*.calculator');

@@ -28,7 +28,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }
@@ -57,7 +57,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         ]);
     }
 
-    private function specifyAutocompleteFilter(NodeElement $autocomplete, string $value): void
+    protected function specifyAutocompleteFilter(NodeElement $autocomplete, string $value): void
     {
         if (!$this->areFiltersVisible()) {
             $this->toggleFilters();

@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
@@ -29,22 +30,6 @@ final readonly class CheckoutPaymentContext implements Context
     }
 
     /**
-     * @When I try to open checkout payment page
-     */
-    public function iTryToOpenCheckoutPaymentPage(): void
-    {
-        $this->selectPaymentPage->tryToOpen();
-    }
-
-    /**
-     * @When I decide to change order shipping method
-     */
-    public function iDecideToChangeOrderShippingMethod(): void
-    {
-        $this->selectPaymentPage->changeShippingMethod();
-    }
-
-    /**
      * @Given I completed the payment step with :paymentMethodName payment method
      * @Given the visitor has proceeded :paymentMethodName payment
      * @Given the customer has proceeded :paymentMethodName payment
@@ -52,6 +37,8 @@ final readonly class CheckoutPaymentContext implements Context
      * @Given the customer proceed with :paymentMethodName payment
      * @When /^I choose "([^"]*)" payment method$/
      */
+    #[When('the visitor proceeds with :paymentMethod payment method')]
+    #[When('the customer proceeds with :paymentMethod payment method')]
     public function iChoosePaymentMethod(string $paymentMethodName): void
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
@@ -66,9 +53,9 @@ final readonly class CheckoutPaymentContext implements Context
         $this->selectPaymentPage->tryToOpen();
     }
 
-    /**
-     * @When I go back to payment step of the checkout
-     */
+    #[When('I am at the checkout payment step')]
+    #[When('I go back to payment step of the checkout')]
+    #[When('the customer is at the checkout payment step')]
     public function iAmAtTheCheckoutPaymentStep(): void
     {
         $this->selectPaymentPage->open();

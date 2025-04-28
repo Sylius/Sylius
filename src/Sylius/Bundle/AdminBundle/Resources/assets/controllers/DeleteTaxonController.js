@@ -18,7 +18,7 @@ export default class extends Controller {
             this.csrfTokenTarget.value = event.detail.csrfToken;
             this.modalElement = this.modalTarget;
 
-            this.modalElement.closest('.dropdown').appendChild(this.modalElement);
+            this.modalElement.closest('[data-modal-delete-taxon-target]').appendChild(this.modalElement);
             this.modal = new Modal(this.modalElement);
             this.modal.show();
 

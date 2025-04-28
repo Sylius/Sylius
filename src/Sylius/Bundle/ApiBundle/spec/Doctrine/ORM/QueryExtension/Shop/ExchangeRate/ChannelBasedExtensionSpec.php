@@ -140,6 +140,7 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
         $expr->orX($exprComparison, $exprComparison)->willReturn($exprOrx);
 
         $queryBuilder->andWhere($exprOrx)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter(':currency', $currency)->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection(
             $queryBuilder,
@@ -176,6 +177,7 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
         $expr->orX($exprComparison, $exprComparison)->willReturn($exprOrx);
 
         $queryBuilder->andWhere($exprOrx)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter(':currency', $currency)->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToItem(
             $queryBuilder,

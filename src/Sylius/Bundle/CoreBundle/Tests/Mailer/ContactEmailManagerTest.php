@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Mailer;
 
+use PHPUnit\Framework\Attributes\Test;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager;
@@ -25,7 +26,7 @@ final class ContactEmailManagerTest extends KernelTestCase
 {
     use ProphecyTrait;
 
-    /** @test */
+    #[Test]
     public function it_sends_contact_request(): void
     {
         $container = self::getContainer();

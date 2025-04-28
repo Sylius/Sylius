@@ -162,7 +162,7 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('grid_code')
                             ->arrayPrototype()
                                 ->children()
-                                    ->enumNode('type')->values(['service', 'array'])->end()
+                                    ->enumNode('type')->values(['service', 'array'])->isRequired()->end()
                                 ->end()
                             ->end()
                         ->end()

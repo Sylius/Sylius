@@ -1,7 +1,7 @@
 @applying_shipping_method_rules
 Feature: Seeing estimated shipping costs based on total weight
     In order to be aware of estimated shipping costs
-    As a Customer
+    As a Visitor
     I want to see estimated shipping costs that match the shipping method rule
 
     Background:
@@ -14,14 +14,15 @@ Feature: Seeing estimated shipping costs based on total weight
         And this shipping method is only available for orders with a total weight greater or equal to 100.0
         And the store has "Fairytale Delivery Service" shipping method with "$2.00" fee
         And this shipping method is only available for orders with a total weight less or equal to 1.0
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing valid estimated shipping cost for the cart with a total weight over minimum total weight configured on the shipping method
-        When I add product "Jacket for the Lochness Monster" to the cart
+        Given I added product "Jacket for the Lochness Monster" to the cart
+        When I check the details of my cart
         Then my cart estimated shipping cost should be "$200.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing valid estimated shipping cost for the cart with a total weight under maximum total weight configured on the shipping method
-        When I add product "T-Shirt for Tinkerbell" to the cart
+        Given I added product "T-Shirt for Tinkerbell" to the cart
+        When I check the details of my cart
         Then my cart estimated shipping cost should be "$2.00"

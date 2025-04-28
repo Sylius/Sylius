@@ -124,7 +124,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    private function getProvinceItems(): array
+    protected function getProvinceItems(): array
     {
         $items = $this->getElement('provinces')->findAll('css', '[data-test-province]');
         Assert::isArray($items);
@@ -132,7 +132,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $items;
     }
 
-    private function getProvinceElement(string $provinceName): NodeElement|null
+    protected function getProvinceElement(string $provinceName): NodeElement|null
     {
         return $this->getDocument()->find('xpath', sprintf('//*[@data-test-province and .//*[contains(@value, \'%s\')]]', $provinceName));
     }

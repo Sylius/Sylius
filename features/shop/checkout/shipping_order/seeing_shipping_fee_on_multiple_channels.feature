@@ -16,20 +16,22 @@ Feature: Seeing detailed shipping fee on multiple channels with different base c
         And the store has a product "PHP T-Shirt" priced at "$12.54" available in channel "Web-US" and channel "Web-GB"
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing the shipping fee per shipment on selecting method in a channel's base currency
         Given I changed my current channel to "Web-US"
-        And I have product "PHP T-Shirt" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I added product "PHP T-Shirt" to the cart
+        And I addressed the cart to "United States"
+        When I want to complete the shipping step
         Then I should be on the checkout shipping step
         And I should see shipping method "UPS" with fee "$15.00"
         And I should see shipping method "FedEx" with fee "$10.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing the shipping fee on selecting shipping method on a different channel in its base currency
         Given I changed my current channel to "Web-GB"
-        And I have added 2 products "PHP T-Shirt" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I added 2 products "PHP T-Shirt" to the cart
+        And I addressed the cart to "United States"
+        When I want to complete the shipping step
         Then I should be on the checkout shipping step
         And I should see shipping method "UPS" with fee "£12.00"
         And I should see shipping method "FedEx" with fee "£16.00"

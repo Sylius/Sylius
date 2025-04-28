@@ -126,7 +126,7 @@ trait FormTrait
         $this->getElement('tax_calculation_strategy')->selectOption($taxCalculationStrategy);
     }
 
-    private function getSelectedOptionText(string $element): string
+    protected function getSelectedOptionText(string $element): string
     {
         return $this
             ->getElement($element)

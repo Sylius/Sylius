@@ -30,19 +30,19 @@
         "sylius/payment": "^2.0",
         "sylius/resource-bundle": "^1.12",
         "sylius/state-machine-abstraction": "^2.0",
-        "symfony/doctrine-bridge": "^6.4 || ^7.1",
-        "symfony/framework-bundle": "^6.4.1 || ^7.1",
-        "symfony/messenger": "^6.4 || ^7.1"
+        "symfony/doctrine-bridge": "^6.4 || ^7.2",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2",
+        "symfony/messenger": "^6.4 || ^7.2"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/orm": "^2.18",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.5",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10.5",
         "sylius/locale-bundle": "^2.0",
-        "symfony/browser-kit": "^6.4 || ^7.1",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1"
+        "symfony/browser-kit": "^6.4 || ^7.2",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -54,7 +54,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^7.1"
+            "require": "^7.2"
         }
     },
     "autoload": {

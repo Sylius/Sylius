@@ -9,22 +9,23 @@ Feature: Paying offline during checkout
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
         And the store allows paying Offline
+        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Successfully placing an order
-        Given I am a logged in customer
-        And this payment method is not using Payum
-        And I have product "PHP T-Shirt" in the cart
-        And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceeded with "Free" shipping method and "Offline" payment method
+        Given this payment method is not using Payum
+        And I added product "PHP T-Shirt" to the cart
+        And I addressed the cart
+        And I chose "Free" shipping method and "Offline" payment method
+        When I check the details of my cart
         And I confirm my order
         Then I should see the thank you page
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Using Payum successfully placing an order
-        Given I am a logged in customer
-        And I have product "PHP T-Shirt" in the cart
-        And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceeded with "Free" shipping method and "Offline" payment method
+        Given I added product "PHP T-Shirt" to the cart
+        And I addressed the cart
+        And I chose "Free" shipping method and "Offline" payment method
+        When I check the details of my cart
         And I confirm my order
         Then I should see the thank you page

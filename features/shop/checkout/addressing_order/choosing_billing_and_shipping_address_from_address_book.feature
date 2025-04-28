@@ -17,28 +17,28 @@ Feature: Choosing an address from address book
 
     @api @ui @javascript
     Scenario: Choosing billing address from address book
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for billing address
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as billing address
 
     @api @ui @javascript
     Scenario: Choosing shipping address from address book
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for shipping address
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as shipping address
 
     @api @ui @javascript
     Scenario: Choosing billing address which contains a country with provinces from my address book
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I choose "Upper Barkly Street" street for billing address
         Then address "Fletcher Ren", "Upper Barkly Street", "3377", "Ararat", "Australia", "Victoria" should be filled as billing address
 
     @api @ui @javascript
     Scenario: Choosing billing address from address book and proceed to the next step
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for billing address
         And I complete the addressing step

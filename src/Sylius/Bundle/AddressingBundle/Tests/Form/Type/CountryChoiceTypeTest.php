@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\Test;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
@@ -74,7 +75,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_only_enabled_countries_by_default(): void
     {
         $this->countryRepository->findBy(['enabled' => true])->willReturn([
@@ -85,7 +86,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['France', 'Poland']);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_all_countries_when_option_enabled_is_false(): void
     {
         $this->countryRepository->findAll()->willReturn([
@@ -97,7 +98,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['Austria', 'France', 'Poland'], ['enabled' => false]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_enabled_countries_in_an_alphabetical_order(): void
     {
         $this->countryRepository->findBy(['enabled' => true])->willReturn([
@@ -108,7 +109,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['France', 'Poland']);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_all_countries_in_an_alphabetical_order(): void
     {
         $this->countryRepository->findAll()->willReturn([
@@ -120,7 +121,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['Austria', 'France', 'Poland'], ['enabled' => false]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_all_filtered_out_countries(): void
     {
         $this->countryRepository->findAll()->willReturn([
@@ -132,7 +133,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['Poland'], ['choice_filter' => static fn (?CountryInterface $country): bool => $country !== null && $country->getName() === 'Poland', 'enabled' => false]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_enabled_filtered_out_countries(): void
     {
         $this->countryRepository->findBy(['enabled' => true])->willReturn([

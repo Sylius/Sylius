@@ -17,8 +17,11 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Page\Shop\Page as ShopPage;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -26,6 +29,8 @@ use Webmozart\Assert\Assert;
 
 class AddressPage extends ShopPage implements AddressPageInterface
 {
+    use SecurePasswordTrait;
+
     public const TYPE_BILLING = 'billing';
 
     public const TYPE_SHIPPING = 'shipping';
@@ -34,7 +39,8 @@ class AddressPage extends ShopPage implements AddressPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private AddressFactoryInterface $addressFactory,
+        protected AddressFactoryInterface $addressFactory,
+        protected SharedStorageInterface $sharedStorage,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -71,15 +77,8 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function checkInvalidCredentialsValidation(): bool
     {
-        /** @var NodeElement $validationElement */
-        $validationElement = $this->getDocument()->waitFor(3, function (): ?NodeElement {
-            try {
-                $validationElement = $this->getElement('login_validation_error');
-            } catch (ElementNotFoundException) {
-                return null;
-            }
-
-            return $validationElement;
+        $validationElement = $this->getDocument()->waitFor(3, function (): NodeElement {
+            return $this->getElement('login_validation_error');
         });
 
         return $validationElement->getText() === 'Invalid credentials.';
@@ -87,8 +86,9 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $foundElement = $this->getFieldElement($element);
-        if (null === $foundElement) {
+        try {
+            $foundElement = $this->getFieldElement($element);
+        } catch(ElementNotFoundException) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
@@ -178,7 +178,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     {
         $this->waitForElementUpdate('form');
 
-        $this->getElement('login_password')->setValue($password);
+        $this->getElement('login_password')->setValue($this->retrieveSecurePassword($password));
     }
 
     public function getItemSubtotal(string $itemName): string
@@ -202,7 +202,12 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function nextStep(): void
     {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->blur();
+            DriverHelper::waitForPageToLoad($this->getSession());
+        }
         $this->getElement('next_step')->press();
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function backToStore(): void
@@ -317,7 +322,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     }
 
     /** @return string[] */
-    private function getOptionsFromSelect(NodeElement $element): array
+    protected function getOptionsFromSelect(NodeElement $element): array
     {
         return array_map(
             /** @return string[] */
@@ -326,7 +331,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
         );
     }
 
-    private function getPreFilledAddress(string $type): AddressInterface
+    protected function getPreFilledAddress(string $type): AddressInterface
     {
         $this->assertAddressType($type);
 
@@ -350,7 +355,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
         return $address;
     }
 
-    private function specifyAddress(AddressInterface $address, string $type): void
+    protected function specifyAddress(AddressInterface $address, string $type): void
     {
         $this->assertAddressType($type);
 
@@ -371,9 +376,9 @@ class AddressPage extends ShopPage implements AddressPageInterface
         }
     }
 
-    private function getFieldElement(string $element): ?NodeElement
+    protected function getFieldElement(string $element, array $parameters = []): NodeElement
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
@@ -381,19 +386,19 @@ class AddressPage extends ShopPage implements AddressPageInterface
         return $element;
     }
 
-    private function waitForLoginAction(): bool
+    protected function waitForLoginAction(): bool
     {
         return $this->getDocument()->waitFor(5, fn () => !$this->hasElement('login_password'));
     }
 
-    private function assertAddressType(string $type): void
+    protected function assertAddressType(string $type): void
     {
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
 
         Assert::oneOf($type, $availableTypes, sprintf('There are only two available types %s, %s. %s given', self::TYPE_BILLING, self::TYPE_SHIPPING, $type));
     }
 
-    private function chooseDifferentAddress(string $type): void
+    protected function chooseDifferentAddress(string $type): void
     {
         $elem = $this->getElement(sprintf('different_%s_address', $type));
         $elem->click();

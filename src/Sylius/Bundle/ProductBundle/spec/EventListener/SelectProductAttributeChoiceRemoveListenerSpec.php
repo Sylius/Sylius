@@ -13,17 +13,22 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ProductBundle\EventListener;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\UnitOfWork;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Mockery;
 use Mockery\MockInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeValueRepository;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
 final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavior
 {
@@ -35,14 +40,18 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     function it_removes_select_product_attribute_choices(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
-        ProductAttributeValueRepositoryInterface $productAttributeValueRepository,
         ProductAttributeInterface $productAttribute,
         ProductAttributeValueInterface $productAttributeValue,
+        QueryBuilder $queryBuilder,
+        Connection $connection,
+        Query $query,
     ): void {
         $event->getObject()->willReturn($productAttribute);
         $event->getObjectManager()->willReturn($entityManager);
 
         $productAttribute->getType()->willReturn(SelectAttributeType::TYPE);
+
+        $productAttributeValueRepository = new ProductAttributeValueRepository($entityManager->getWrappedObject(), new ClassMetadata('Sylius\Component\Product\Model\ProductAttributeValue'));
 
         /** @var UnitOfWork|MockInterface $unitOfWork */
         $unitOfWork = Mockery::mock(UnitOfWork::class);
@@ -59,15 +68,21 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         ]);
 
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $entityManager->getConnection()->willReturn($connection);
 
         $entityManager
             ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
             ->willReturn($productAttributeValueRepository)
         ;
-        $productAttributeValueRepository
-            ->findByJsonChoiceKey('1739bc61-9e42-4c80-8b9a-f97f0579cccb')
-            ->willReturn([$productAttributeValue])
-        ;
+
+        $entityManager->createQueryBuilder()->willReturn($queryBuilder);
+        $queryBuilder->select(Argument::cetera())->willReturn($queryBuilder);
+        $queryBuilder->from(Argument::cetera())->willReturn($queryBuilder);
+        $queryBuilder->andWhere(Argument::type('string'))->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->setParameter('key', '%"1739bc61-9e42-4c80-8b9a-f97f0579cccb"%')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->getQuery()->willReturn($query);
+
+        $query->getResult()->willReturn([$productAttributeValue]);
 
         $productAttributeValue->getValue()->willReturn([
             '8ec40814-adef-4194-af91-5559b5f19236',

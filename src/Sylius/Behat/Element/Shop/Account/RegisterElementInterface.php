@@ -25,11 +25,11 @@ interface RegisterElementInterface
 
     public function specifyLastName(?string $lastName): void;
 
-    public function specifyPassword(?string $password): void;
+    public function specifyPassword(string $password): void;
 
     public function specifyPhoneNumber(string $phoneNumber): void;
 
-    public function verifyPassword(?string $password): void;
+    public function verifyPassword(string $password): void;
 
     public function subscribeToTheNewsletter(): void;
 

@@ -1,0 +1,112 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+
+  input:not(input[type="number"], input[type="email"], input[name*="translations"]), textarea {
+    unicode-bidi: bidi-override;
+    text-align: right;
+  }
+
+  input[type="number"], input[type="email"], input[name*="translations"], textarea[name*="translations"] {
+    text-align: right;
+    direction: ltr;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding-left: var(--tblr-breadcrumb-item-padding-x);
+    padding-right: 0;
+  }
+
+  .breadcrumb-item + .breadcrumb-item {
+    padding-right: var(--tblr-breadcrumb-item-padding-x);
+    padding-left: 0;
+  }
+
+  .accordion-button::after {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .start-0 {
+    left: unset!important;
+    right: 0 !important;
+  }
+
+  .btn:not(.btn-icon) .icon {
+    margin: 0 calc(var(--tblr-btn-padding-x) / -4) 0 calc(var(--tblr-btn-padding-x) / 2);
+  }
+
+  .ps-2 {
+    padding-right: 0.5rem !important;
+  }
+
+  .ms-auto {
+    margin-left: unset!important;
+    margin-right: auto !important;
+  }
+
+  .nav-link-icon {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+
+  @media (min-width: 1200px) {
+    .navbar-vertical.navbar-expand-lg .navbar-collapse .dropdown-menu .dropdown-item {
+      padding-left: 0;
+      padding-right: calc(calc(calc(var(--tblr-page-padding) * 2) / 2) + 1.75rem);
+    }
+  }
+
+  .card-table tr td:first-child, .card-table tr th:first-child {
+    padding-left: 0;
+    padding-right: 1.25rem;
+  }
+
+  .card-table tr td:last-child, .card-table tr th:last-child {
+    padding-right: 0;
+    padding-left: 1.25rem;
+  }
+
+  .sylius-filters__date > *:not(:last-child)::after {
+    @include media-breakpoint-down(md) {
+      left: 0;
+      right: unset;
+    }
+
+    @include media-breakpoint-up(md) {
+      left: -12px;
+      right: unset;
+    }
+  }
+
+  .pagination .page-link .icon {
+    transform: rotate(180deg);
+  }
+
+  .navbar-vertical.navbar-expand-lg {
+    right: 0;
+    left: unset;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .navbar-expand-lg.navbar-vertical ~ .navbar, .navbar-expand-lg.navbar-vertical ~ .page-wrapper {
+      margin-left: 0;
+      margin-right: 15rem;
+    }
+  }
+
+  .dropdown-toggle:after {
+    margin-right: 0.4em;
+    margin-left: 0.1em;
+  }
+}

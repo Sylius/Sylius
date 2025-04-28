@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
@@ -41,13 +42,10 @@ final class RegistrationAfterCheckoutContext implements Context
     ) {
     }
 
-    /**
-     * @When I specify a password as :password
-     */
+    #[When('I specify a password as :password')]
     public function iSpecifyThePasswordAs(string $password): void
     {
         $this->registerElement->specifyPassword($password);
-        $this->sharedStorage->set('password', $password);
     }
 
     /**

@@ -12,7 +12,7 @@ Feature: Having new addresses saved in the address book after checkout
         And I am a logged in customer
         And I have product "Lannister Coat" in the cart
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Having the shipping address saved in my address book
         Given I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

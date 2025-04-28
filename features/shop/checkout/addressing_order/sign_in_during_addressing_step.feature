@@ -1,7 +1,7 @@
 @checkout
 Feature: Sign in to the store during checkout
     In order to sign during the addressing step
-    As a Guest
+    As a Visitor
     I want to be able to sign in
 
     Background:
@@ -11,14 +11,14 @@ Feature: Sign in to the store during checkout
 
     @no-api @ui @javascript
     Scenario: Displaying login form if the customer has an account
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "francis@underwood.com"
         Then I should be able to log in
 
     @no-api @ui @javascript
     Scenario: Successful sign in
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "francis@underwood.com"
         And I specify the password as "whitehouse"
@@ -27,7 +27,7 @@ Feature: Sign in to the store during checkout
 
     @no-api @ui @javascript
     Scenario: Failure sign in
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "francis@underwood.com"
         And I specify the password as "francis"
@@ -36,7 +36,7 @@ Feature: Sign in to the store during checkout
 
     @no-api @ui @mink:chromedriver
     Scenario: Successful sign in after omitting fill the email field
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the billing address for "Jon Snow" from "Ankh Morpork", "Frost Alley", "90210", "United States", "Texas"
         And I try to complete the addressing step

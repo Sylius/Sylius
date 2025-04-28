@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Twig\Component\Shared\Navbar;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -38,7 +39,7 @@ final class NotificationsComponentTest extends TestCase
         $this->notificationsComponent = new NotificationsComponent($this->notificationProvider->reveal(), true);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_notifications_from_provider(): void
     {
         $this->notificationProvider->getNotifications()->willReturn(['version' => ['message' => 'sylius.ui.notifications.new_version_of_sylius_available']]);

@@ -82,7 +82,9 @@
             id="sylius.behat.element.admin.customer.form"
             class="Sylius\Behat\Element\Admin\Customer\FormElement"
             parent="sylius.behat.element.admin.crud.form"
-        />
+        >
+            <argument type="service" id="sylius.behat.shared_storage"/>
+        </service>
 
         <service
             id="sylius.behat.element.admin.zone.form"

@@ -15,13 +15,29 @@ namespace Sylius\Behat\Element\Shop\Account;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\SharedStorageInterface;
 
-final class RegisterElement extends Element implements RegisterElementInterface
+class RegisterElement extends Element implements RegisterElementInterface
 {
+    use SecurePasswordTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters = [],
+        protected ?SharedStorageInterface $sharedStorage = null,
+    ) {
+        parent::__construct($session, $minkParameters);
+    }
+
     public function register(): void
     {
         $this->getElement('register_button')->click();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function specifyEmail(?string $email): void
@@ -47,9 +63,9 @@ final class RegisterElement extends Element implements RegisterElementInterface
         $this->waitForFormUpdate();
     }
 
-    public function specifyPassword(?string $password): void
+    public function specifyPassword(string $password): void
     {
-        $this->getElement('password')->setValue($password);
+        $this->getElement('password')->setValue($this->replaceWithSecurePassword($password));
         $this->waitForFormUpdate();
     }
 
@@ -59,9 +75,9 @@ final class RegisterElement extends Element implements RegisterElementInterface
         $this->waitForFormUpdate();
     }
 
-    public function verifyPassword(?string $password): void
+    public function verifyPassword(string $password): void
     {
-        $this->getElement('password_verification')->setValue($password);
+        $this->getElement('password_verification')->setValue($this->confirmSecurePassword($password));
         $this->waitForFormUpdate();
     }
 
@@ -114,7 +130,7 @@ final class RegisterElement extends Element implements RegisterElementInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters): NodeElement
+    protected function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\TaxonFixture;
@@ -23,50 +24,38 @@ final class TaxonFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxons_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxons_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxon_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxon_slug_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['slug' => 'custom']]]], 'custom.*.slug');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxon_children_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['children' => [['name' => 'foo']]]]]], 'custom.*.children');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxon_children_may_contain_nested_array(): void
     {
         $this->assertProcessedConfigurationEquals(
@@ -76,17 +65,13 @@ final class TaxonFixtureTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxon_translations_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['translations' => [['en_US' => ['name' => ['foo']]]]]]]], 'custom.*.translations');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function taxon_translations_may_contain_nested_array(): void
     {
         $this->assertProcessedConfigurationEquals(

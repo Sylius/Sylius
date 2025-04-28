@@ -12,7 +12,7 @@ Feature: Addressing an order and signing in
 
     @no-api @ui @javascript
     Scenario: Addressing an order and signing in
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "francis@underwood.com"
         And I specify the password as "whitehouse"

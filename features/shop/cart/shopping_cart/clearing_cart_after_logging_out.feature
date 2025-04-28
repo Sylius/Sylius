@@ -8,12 +8,13 @@ Feature: Clearing cart after logging out
         Given the store operates on a single channel in "United States"
         And the store has a product "Stark T-Shirt" priced at "$12.00"
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui
     Scenario: Clearing cart after logging out
         Given I am a logged in customer
-        And I have product "Stark T-Shirt" in the cart
-        When I log out
-        And I see the summary of my cart
+        And I added product "Stark T-Shirt" to the cart
+        When I check the details of my cart
+        And I log out
+        When I see the summary of my cart
         Then my cart should be empty
 
     @api @no-ui

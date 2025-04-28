@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\CatalogPromotion;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class CatalogPromotionWorkflowTest extends KernelTestCase
 {
-    /** @test */
+    #[Test]
     public function it_applies_available_transition_for_catalog_promotion_inactive_status(): void
     {
         $stateMachine = $this->getStateMachine();
@@ -30,7 +32,7 @@ final class CatalogPromotionWorkflowTest extends KernelTestCase
         $this->assertSame('processing', $catalogPromotion->getState());
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_available_transition_for_catalog_promotion_active_status(): void
     {
         $stateMachine = $this->getStateMachine();
@@ -42,11 +44,8 @@ final class CatalogPromotionWorkflowTest extends KernelTestCase
         $this->assertSame('processing', $catalogPromotion->getState());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsForProcessingState
-     */
+    #[DataProvider('availableTransitionsForProcessingState')]
+    #[Test]
     public function it_applies_all_available_transition_for_catalog_promotion_processing_status(
         string $transition,
         string $expectedStatus,
@@ -60,7 +59,7 @@ final class CatalogPromotionWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $catalogPromotion->getState());
     }
 
-    public function availableTransitionsForProcessingState(): iterable
+    public static function availableTransitionsForProcessingState(): iterable
     {
         yield ['activate', 'active'];
         yield ['deactivate', 'inactive'];

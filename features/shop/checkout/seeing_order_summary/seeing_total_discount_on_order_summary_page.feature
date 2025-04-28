@@ -1,7 +1,7 @@
 @checkout
 Feature: Seeing order promotion total on order summary page
     In order to see what kind of discounts I received
-    As a Customer
+    As a Visitor
     I want to be able to see promotion total on the order summary page
 
     Background:
@@ -13,13 +13,15 @@ Feature: Seeing order promotion total on order summary page
         And it gives "20%" discount to every order
         And there is a promotion "All year promotion"
         And it gives "$5.00" discount to every order
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing the total discount on order summary page
-        Given I have product "The Sorting Hat" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceed with "Free" shipping method and "Offline" payment
+        Given I added product "The Sorting Hat" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order promotion total should be "-$9.00"
         And "Holiday promotion" should be applied to my order

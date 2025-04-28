@@ -91,7 +91,7 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
         }
 
         /** @var HttpOperation|null $operation */
-        $operation = $context['root_operation'] ?? null;
+        $operation = $context['root_operation'] ?? $context['operation'] ?? null;
 
         return
             $data instanceof ShippingMethodInterface &&

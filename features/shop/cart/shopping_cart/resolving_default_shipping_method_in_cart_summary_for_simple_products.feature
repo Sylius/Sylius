@@ -1,7 +1,7 @@
 @shopping_cart
 Feature: Viewing a cart summary with correct default shipping method based on variant applied
     In order to see details about my order
-    As a Visitor
+    As a Customer
     I want to be able to see my cart summary with the correct shipping method based on variants
 
     Background:
@@ -21,15 +21,16 @@ Feature: Viewing a cart summary with correct default shipping method based on va
         And this shipping method requires that all units match to "Free" shipping category
         And the store has a product "T-Shirt banana" priced at "$9.99"
         And this product belongs to "Free" shipping category
+        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Viewing a cart summary with correct default shipping method based on product shipping category
         Given I added product "Star Trek Table Linen" to the cart
         When I see the summary of my cart
         Then my cart shipping total should be "$5.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Viewing a cart summary with correct default shipping method based on product shipping category
-        Given I have product "T-Shirt banana" in the cart
-        When I see the summary of my cart
+        Given I added product "T-Shirt banana" to the cart
+        And I see the summary of my cart
         Then my cart shipping total should be "$0.00"

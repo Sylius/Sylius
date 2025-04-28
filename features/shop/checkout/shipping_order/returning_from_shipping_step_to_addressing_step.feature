@@ -10,18 +10,20 @@ Feature: Returning from shipping step to addressing step
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @no-api @ui @javascript
-    Scenario: Going back to addressing step with button
-        Given I have product "Apollo 11 T-Shirt" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I decide to change my address
+    @no-api @ui
+    Scenario: Going back to addressing step with "Change Address" button
+        Given I added product "Apollo 11 T-Shirt" to the cart
+        And I addressed the cart
+        When I go to the shipping step
+        And I decide to change my address
         Then I should be redirected to the addressing step
         And I should be able to go to the shipping step again
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Going back to the addressing step with steps panel
-        Given I have product "Apollo 11 T-Shirt" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I go to the addressing step
+        Given I added product "Apollo 11 T-Shirt" to the cart
+        And I addressed the cart
+        When I go to the shipping step
+        And I navigate directly to the addressing step in the checkout steps panel
         Then I should be redirected to the addressing step
         And I should be able to go to the shipping step again

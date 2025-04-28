@@ -1,7 +1,7 @@
 @shopping_cart
 Feature: Changing display currency of the cart
     In order to know estimated price for foreign currencies
-    As a Visitor
+    As a Customer
     I want to see every cash amount rounded to my chosen currency
 
     Background:
@@ -13,11 +13,13 @@ Feature: Changing display currency of the cart
         And the store has "Pugs" tax rate of 10% for "Mugs" within the "US" zone
         And the store has a product "The Pug Mug" priced at "$10.00"
         And it belongs to "Mugs" tax category
+        And I am a logged in customer
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Changing the currency of my cart
-        Given I have product "The Pug Mug" in the cart
+        Given I added product "The Pug Mug" to the cart
         When I switch to the "GBP" currency
+        And I check the details of my cart
         Then my cart total should be "£32.00"
         And total price of "The Pug Mug" item should be "£20.00"
         And my cart taxes should be "£2.00"

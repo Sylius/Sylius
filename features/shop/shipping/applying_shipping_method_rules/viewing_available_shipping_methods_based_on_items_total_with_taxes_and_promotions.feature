@@ -1,7 +1,7 @@
 @applying_shipping_method_rules
 Feature: Viewing available shipping methods based on items total
     In order to only see applicable shipping methods
-    As a Customer
+    As a Visitor
     I want to see the shipping methods that are available to my order
 
     Background:
@@ -23,31 +23,30 @@ Feature: Viewing available shipping methods based on items total
         And it gives "50%" discount on shipping to every order
         And there is a promotion "Expensive promotion"
         And it gives "$5.00" off on a "Expensive Jacket" product
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle expensive goods
-        Given I have product "Expensive Jacket" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added product "Expensive Jacket" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should see "Above $50" shipping method
         And I should not see "Below $29.99" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle cheap goods
-        Given I have product "Cheap Jacket" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        Given I added product "Cheap Jacket" to the cart
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should see "Below $29.99" shipping method
         And I should not see "Above $50" shipping method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that handle all goods
         Given I have 2 products "Cheap Jacket" in the cart
-        When I specified the billing address
-        Then I should be on the checkout shipping step
+        And I addressed the cart
+        When I want to complete the shipping step
         And I should see "DHL" shipping method
         And I should not see "Above $50" shipping method
         And I should not see "Below $29.99" shipping method

@@ -166,14 +166,6 @@ class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I check (also) the :shippingCategoryName shipping category
      */
     public function iCheckTheShippingCategory(string $shippingCategoryName): void

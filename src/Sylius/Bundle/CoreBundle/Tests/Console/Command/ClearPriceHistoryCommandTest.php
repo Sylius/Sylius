@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\PriceHistory\Console\Command;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand;
@@ -35,11 +37,8 @@ final class ClearPriceHistoryCommandTest extends TestCase
         $this->commandTester = new CommandTester(new ClearPriceHistoryCommand($this->remover));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getInvalidDays
-     */
+    #[DataProvider('getInvalidDays')]
+    #[Test]
     public function it_does_not_clear_pricing_history_when_number_of_days_is_invalid(mixed $days): void
     {
         $this->remover->expects($this->never())->method('remove');
@@ -53,11 +52,8 @@ final class ClearPriceHistoryCommandTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getValidDays
-     */
+    #[DataProvider('getValidDays')]
+    #[Test]
     public function it_clears_pricing_history_when_non_interactive(int|string $days): void
     {
         $this->remover->expects($this->once())->method('remove');
@@ -67,7 +63,7 @@ final class ClearPriceHistoryCommandTest extends TestCase
         $this->commandTester->assertCommandIsSuccessful();
     }
 
-    /** @test */
+    #[Test]
     public function it_asks_for_confirmation_when_interactive(): void
     {
         $this->remover->expects($this->once())->method('remove');
@@ -82,7 +78,7 @@ final class ClearPriceHistoryCommandTest extends TestCase
         $this->assertSame(Command::SUCCESS, $this->commandTester->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_does_nothing_when_user_does_not_confirm(): void
     {
         $this->remover->expects($this->never())->method('remove');
@@ -97,7 +93,7 @@ final class ClearPriceHistoryCommandTest extends TestCase
         $this->assertSame(Command::INVALID, $this->commandTester->getStatusCode());
     }
 
-    public function getInvalidDays(): iterable
+    public static function getInvalidDays(): iterable
     {
         yield [0];
         yield ['0'];
@@ -112,7 +108,7 @@ final class ClearPriceHistoryCommandTest extends TestCase
         yield ['a'];
     }
 
-    public function getValidDays(): iterable
+    public static function getValidDays(): iterable
     {
         yield [1];
         yield ['1'];

@@ -14,16 +14,28 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Customer;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Behaviour\Toggles;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Service\SharedStorageInterface;
 
 class FormElement extends BaseFormElement implements FormElementInterface
 {
     use NamesIt;
+    use SecurePasswordTrait;
     use SpecifiesItsField;
     use Toggles;
+
+    public function __construct(
+        Session $session,
+        $minkParameters = [],
+        protected ?SharedStorageInterface $sharedStorage = null,
+    ) {
+        parent::__construct($session, $minkParameters);
+    }
 
     public function getFullName(): string
     {
@@ -90,7 +102,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function specifyPassword(string $password): void
     {
-        $this->getElement('password')->setValue($password);
+        $this->getElement('password')->setValue($this->replaceWithSecurePassword($password));
     }
 
     public function chooseGender(string $gender): void

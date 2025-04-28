@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Assigner;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -43,20 +44,32 @@ final class OrderPromotionCodeAssignerSpec extends ObjectBehavior
         $this->assign($cart, 'couponCode');
     }
 
-    function it_throws_exception_if_promotion_coupon_is_not_found(
+    function it_does_not_apply_coupon_if_promotion_coupon_code_is_empty(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         OrderProcessorInterface $orderProcessor,
         OrderInterface $cart,
     ): void {
-        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn(null);
+        $promotionCouponRepository->findOneBy(['code' => ''])->shouldBeCalled();
 
-        $cart->setPromotionCoupon(null)->shouldNotBeCalled();
+        $cart->setPromotionCoupon(Argument::any())->shouldNotBeCalled();
 
         $orderProcessor->process($cart)->shouldNotBeCalled();
 
-        $this->shouldThrow(\InvalidArgumentException::class)
-            ->during('assign', [$cart, 'couponCode'])
-        ;
+        $this->assign($cart, '');
+    }
+
+    function it_does_not_apply_coupon_if_promotion_coupon_code_is_invalid(
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderProcessorInterface $orderProcessor,
+        OrderInterface $cart,
+    ): void {
+        $promotionCouponRepository->findOneBy(['code' => 'invalidCode'])->willReturn(null);
+
+        $cart->setPromotionCoupon(Argument::any())->shouldNotBeCalled();
+
+        $orderProcessor->process($cart)->shouldNotBeCalled();
+
+        $this->assign($cart, 'invalidCode');
     }
 
     function it_removes_coupon_if_passed_promotion_coupon_code_is_null(
@@ -70,6 +83,6 @@ final class OrderPromotionCodeAssignerSpec extends ObjectBehavior
 
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this->assign($cart);
+        $this->assign($cart, null);
     }
 }

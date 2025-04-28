@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 
 final class ProductAttributeValuesTest extends JsonApiTestCase
@@ -24,7 +25,7 @@ final class ProductAttributeValuesTest extends JsonApiTestCase
         $this->setUpDefaultGetHeaders();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_attribute_value(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);

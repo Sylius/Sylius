@@ -18,12 +18,12 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 
-final class AttributesFormElement extends BaseFormElement implements AttributesFormElementInterface
+class AttributesFormElement extends BaseFormElement implements AttributesFormElementInterface
 {
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -143,7 +143,7 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         ]);
     }
 
-    private function selectAttributeToBeAdded(string $attributeName): void
+    protected function selectAttributeToBeAdded(string $attributeName): void
     {
         $this->autocompleteHelper->selectByName(
             $this->getDriver(),
@@ -152,7 +152,7 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         );
     }
 
-    private function clickTabIfItsNotActive(): void
+    protected function clickTabIfItsNotActive(): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
         if (!$attributesTab->hasClass('active')) {
@@ -160,7 +160,7 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         }
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
@@ -169,7 +169,7 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         $this->getElement('side_navigation_tab', ['%name%' => 'attributes'])->click();
     }
 
-    private function changeAttributeTab(string $attributeName): void
+    protected function changeAttributeTab(string $attributeName): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

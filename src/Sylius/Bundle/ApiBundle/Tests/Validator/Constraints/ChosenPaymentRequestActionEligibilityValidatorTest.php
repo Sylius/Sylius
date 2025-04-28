@@ -18,6 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentRequestActionEligibility;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentRequestActionEligibilityValidator;
+use Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\PaymentBundle\CommandProvider\ServiceProviderAwareCommandProviderInterface;
 use Sylius\Bundle\PaymentBundle\Provider\GatewayFactoryNameProviderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -143,8 +144,8 @@ final class ChosenPaymentRequestActionEligibilityValidatorTest extends TestCase
         $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
         /** @var GatewayConfigInterface|MockObject $gatewayConfigMock */
         $gatewayConfigMock = $this->createMock(GatewayConfigInterface::class);
-        /** @var \Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInterface|MockObject $commandProviderMock */
-        $commandProviderMock = $this->createMock(\Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInterface::class);
+        /** @var PaymentRequestCommandProviderInterface|MockObject $commandProviderMock */
+        $commandProviderMock = $this->createMock(PaymentRequestCommandProviderInterface::class);
         $command = new AddPaymentRequest(
             orderTokenValue: 'ORDER_TOKEN',
             paymentId: 123,
@@ -172,8 +173,8 @@ final class ChosenPaymentRequestActionEligibilityValidatorTest extends TestCase
         $gatewayConfigMock = $this->createMock(GatewayConfigInterface::class);
         /** @var ServiceProviderAwareCommandProviderInterface|MockObject $actionsCommandProviderMock */
         $actionsCommandProviderMock = $this->createMock(ServiceProviderAwareCommandProviderInterface::class);
-        /** @var \Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInterface|MockObject $commandProviderMock */
-        $commandProviderMock = $this->createMock(\Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInterface::class);
+        /** @var PaymentRequestCommandProviderInterface|MockObject $commandProviderMock */
+        $commandProviderMock = $this->createMock(PaymentRequestCommandProviderInterface::class);
         $command = new AddPaymentRequest(
             orderTokenValue: 'ORDER_TOKEN',
             paymentId: 123,

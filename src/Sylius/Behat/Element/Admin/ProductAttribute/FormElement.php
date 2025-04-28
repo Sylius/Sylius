@@ -109,7 +109,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
         ]);
     }
 
-    private function getLastChoiceElement(): NodeElement
+    protected function getLastChoiceElement(): NodeElement
     {
         $choices = $this->getDocument()->findAll('css', '[data-test-choice-key]');
 

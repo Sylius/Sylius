@@ -34,7 +34,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->specifyAddress($address, self::TYPE_SHIPPING);
     }
 
-    private function specifyAddress(AddressInterface $address, $addressType): void
+    protected function specifyAddress(AddressInterface $address, $addressType): void
     {
         $this->specifyElementValue($addressType . '_first_name', $address->getFirstName());
         $this->specifyElementValue($addressType . '_last_name', $address->getLastName());
@@ -88,7 +88,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @return array<string>
      */
-    private function getOptionTextsFor(NodeElement $element): array
+    protected function getOptionTextsFor(NodeElement $element): array
     {
         return array_map(fn ($option) => $option->getText(), $element->findAll('css', 'option'));
     }
@@ -119,7 +119,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function specifyElementValue(string $elementName, ?string $value): void
+    protected function specifyElementValue(string $elementName, ?string $value): void
     {
         $this->getElement($elementName)->setValue($value);
     }
@@ -127,7 +127,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function chooseCountry(?string $country, string $addressType): void
+    protected function chooseCountry(?string $country, string $addressType): void
     {
         $this->getElement($addressType . '_country')->selectOption($country ?? 'Select');
     }
@@ -135,7 +135,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?NodeElement
+    protected function getFieldElement(string $element): NodeElement
     {
         $element = $this->getElement($element);
         while (null !== $element && !$element->hasClass('field')) {

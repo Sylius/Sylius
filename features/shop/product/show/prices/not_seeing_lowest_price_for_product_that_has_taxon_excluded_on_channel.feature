@@ -1,7 +1,7 @@
 @viewing_products
 Feature: Not seeing the lowest price for a product that has a taxon excluded on the channel
     In order to show the product's lowest price only in applicable taxons
-    As a Guest
+    As a Visitor
     I don't want to see the product's lowest price in taxons that have been excluded on the channel
 
     Background:

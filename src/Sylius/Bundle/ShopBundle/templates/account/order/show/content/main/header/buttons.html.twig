@@ -1,9 +1,4 @@
-{% set order = hookable_metadata.context.order %}
+<div class="d-flex flex-wrap gap-3 justify-content-end mb-3">
+    {% hook 'buttons' %}
+</div>
 
-{% if order.paymentState == 'awaiting_payment' %}
-    {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
-
-    <div class="d-flex gap-3 justify-content-end mb-3">
-        {{ buttons.primary(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'tabler:credit-card', 'green') }}
-    </div>
-{% endif %}

@@ -28,7 +28,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
-        private AutocompleteHelperInterface $autocompleteHelper,
+        protected AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }
@@ -104,7 +104,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         ]);
     }
 
-    private function getField(string $orderNumber, string $fieldName): NodeElement
+    protected function getField(string $orderNumber, string $fieldName): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -114,7 +114,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
     }
 
-    private function getOrderLinkForRow(int $shipmentNumber): NodeElement
+    protected function getOrderLinkForRow(int $shipmentNumber): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

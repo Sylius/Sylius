@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Encryption;
 
+use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
+use PHPUnit\Framework\Attributes\Test;
 use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
@@ -52,7 +54,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         $encrypter = self::getContainer()->get('sylius.encrypter.gateway_config');
         self::getContainer()->set('sylius.listener.gateway_config_encryption', new GatewayConfigEncryptionListener(
             $encrypter,
-            'Sylius\Bundle\PayumBundle\Model\GatewayConfig',
+            GatewayConfig::class,
             $gatewayConfigEncryptionChecker,
         ));
 
@@ -61,7 +63,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_covers_encryption_and_decryption_when_saving_and_loading(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();
@@ -87,7 +89,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         self::assertNotSame(self::$gatewayConfigData, $gatewayConfigFromDatabase);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_encrypt_when_gateway_factory_is_disabled_for_encryption(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();
@@ -113,7 +115,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         self::assertSame(self::$gatewayConfigData, $gatewayConfigFromDatabase);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_encrypt_when_gateway_config_use_payum(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();
@@ -139,7 +141,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         self::assertSame(self::$gatewayConfigData, $gatewayConfigFromDatabase);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_encrypt_empty_config(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();
@@ -172,7 +174,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
             ['gatewayName' => $gatewayName],
         );
 
-        return json_decode($result->fetchOne(), true);
+        return json_decode((string) $result->fetchOne(), true);
     }
 
     private function loadFixtures(array $fixtureFiles): void

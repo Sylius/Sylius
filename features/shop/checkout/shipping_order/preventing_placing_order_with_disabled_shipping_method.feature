@@ -9,20 +9,21 @@ Feature: Preventing placing an order with a disabled shipping method
         And the store has a product "Ubi T-Shirt" priced at "$19.99"
         And the store has "Raven Post" shipping method with "$4.00" fee
         And the store allows paying "Offline"
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Being prevented from placing an order with a shipping method that's disabled after completing the shipping method choice step
         Given I added product "Ubi T-Shirt" to the cart
-        And I have proceeded through checkout process with "Raven Post" shipping method
+        And I addressed the cart
+        And I chose "Raven Post" shipping method and "Offline" payment method
         But this shipping method has been disabled
         When I try to confirm my order
         Then I should not be able to confirm order because the "Raven Post" shipping method is not available
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Being prevented from placing an order with a shipping method that's has been disabled for the customer's country after completing the shipping method choice step
         Given I added product "Ubi T-Shirt" to the cart
-        And I have proceeded through checkout process with "Raven Post" shipping method
+        And I addressed the cart
+        And I chose "Raven Post" shipping method and "Offline" payment method
         But this shipping method has been disabled for "US Web Store" channel
         When I try to confirm my order
         Then I should not be able to confirm order because the "Raven Post" shipping method is not available

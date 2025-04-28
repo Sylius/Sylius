@@ -29,7 +29,7 @@
             <argument type="service" id="behat.mink.default_session" />
             <argument type="service" id="behat.mink.parameters" />
         </service>
-        <service id="sylius.behat.symfony_page" class="FriendsOfBehat\PageObjectExtension\Page\SymfonyPage" parent="sylius.behat.page" abstract="true" public="false">
+        <service id="sylius.behat.symfony_page" class="Sylius\Behat\Page\SymfonyPage" parent="sylius.behat.page" abstract="true" public="false">
             <argument type="service" id="router" />
         </service>
 

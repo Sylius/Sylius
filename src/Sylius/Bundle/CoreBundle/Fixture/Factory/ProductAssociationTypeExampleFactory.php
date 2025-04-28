@@ -23,6 +23,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ProductAssociationTypeInterface> */
 class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
@@ -34,8 +35,8 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
      * @param RepositoryInterface<LocaleInterface> $localeRepository
      */
     public function __construct(
-        private FactoryInterface $productAssociationTypeFactory,
-        private RepositoryInterface $localeRepository,
+        private readonly FactoryInterface $productAssociationTypeFactory,
+        private readonly RepositoryInterface $localeRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -64,7 +65,7 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options): string {
+            ->setDefault('name', function (): string {
                 /** @var string $words */
                 $words = $this->faker->words(3, true);
 
@@ -74,6 +75,7 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
         ;
     }
 
+    /** @return iterable<string> */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

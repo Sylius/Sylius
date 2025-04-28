@@ -27,7 +27,8 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
-class AddressExampleFactory extends AbstractExampleFactory
+/** @implements ExampleFactoryInterface<AddressInterface> */
+class AddressExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
 
@@ -39,9 +40,9 @@ class AddressExampleFactory extends AbstractExampleFactory
      * @param RepositoryInterface<CustomerInterface> $customerRepository
      */
     public function __construct(
-        private FactoryInterface $addressFactory,
-        private RepositoryInterface $countryRepository,
-        private RepositoryInterface $customerRepository,
+        private readonly FactoryInterface $addressFactory,
+        private readonly RepositoryInterface $countryRepository,
+        private readonly RepositoryInterface $customerRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -59,7 +60,7 @@ class AddressExampleFactory extends AbstractExampleFactory
             ->setDefault('street', fn (Options $options): string => $this->faker->streetAddress)
             ->setDefault('city', fn (Options $options): string => $this->faker->city)
             ->setDefault('postcode', fn (Options $options): string => $this->faker->postcode)
-            ->setDefault('country_code', function (Options $options): string {
+            ->setDefault('country_code', function (): string {
                 /** @var CountryInterface[] $countries */
                 $countries = $this->countryRepository->findAll();
                 shuffle($countries);
@@ -129,6 +130,7 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Provided province code is not valid for "%s"', $country->getName()));
     }
 
+    /** @param array<string, mixed> $options */
     private function provideProvince(array $options, AddressInterface $address): void
     {
         /** @var CountryInterface $country */
@@ -160,6 +162,7 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Country has defined provinces, but %s is not one of them', $provinceName));
     }
 
+    /** @param array<string, mixed> $options */
     private function resolveCountryProvince(array $options, AddressInterface $address): void
     {
         if (null !== $options['province_code']) {

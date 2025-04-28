@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\CommandHandler;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Command\CreateAdminUser;
@@ -67,7 +68,7 @@ final class CreateAdminUserHandlerTest extends TestCase
         $this->adminUserRepository = $this->createMock(UserRepositoryInterface::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_admin_user_if_there_is_no_violations(): void
     {
         $constraintViolationList = new ConstraintViolationList([]);
@@ -81,7 +82,7 @@ final class CreateAdminUserHandlerTest extends TestCase
         $createAdminUserHandler($this->createAdminUserMessage());
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_if_violates_any_constraints(): void
     {
         $firstConstraintViolation = new ConstraintViolation('first_violation_error', '', [], '', '', '');

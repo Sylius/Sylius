@@ -60,7 +60,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ]);
     }
 
-    private function getProvinceItems(): array
+    protected function getProvinceItems(): array
     {
         $items = $this->getElement('provinces')->findAll('css', '[data-test-province]');
         Assert::isArray($items);

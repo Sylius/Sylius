@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
@@ -22,7 +23,7 @@ final class SendContactRequestTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_sends_contact_request(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml']);
@@ -44,7 +45,7 @@ final class SendContactRequestTest extends JsonApiTestCase
         self::assertEmailAddressContains(self::getMailerMessage(), 'To', 'web@sylius.com');
     }
 
-    /** @test */
+    #[Test]
     public function it_sends_contact_request_as_logged_in_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/shop_user.yaml']);

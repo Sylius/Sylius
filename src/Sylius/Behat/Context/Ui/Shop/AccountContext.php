@@ -88,15 +88,6 @@ final readonly class AccountContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->profileUpdatePage->saveChanges();
-    }
-
-    /**
      * @Then I should be notified that it has been successfully edited
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void

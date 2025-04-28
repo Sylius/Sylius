@@ -127,7 +127,7 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
         Currency $baseCurrency,
         Currency $currency,
         Expr $expr,
-        Expr\Comparison $exprComparison,
+        Expr\Func $exprFunc,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $baseCurrency->__toString()->willReturn('baseCode');
@@ -139,9 +139,10 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->expr()->willReturn($expr);
-        $expr->in('o.id', ':currencies')->willReturn($exprComparison);
+        $expr->in('o.id', ':currencies')->willReturn($exprFunc);
 
-        $queryBuilder->andWhere($exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter(':currencies', [$currency, $baseCurrency])->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection(
             $queryBuilder,
@@ -165,7 +166,7 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
         Currency $baseCurrency,
         Currency $currency,
         Expr $expr,
-        Expr\Comparison $exprComparison,
+        Expr\Func $exprFunc,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $baseCurrency->__toString()->willReturn('baseCode');
@@ -177,9 +178,10 @@ final class ChannelBasedExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->expr()->willReturn($expr);
-        $expr->in('o.id', ':currencies')->willReturn($exprComparison);
+        $expr->in('o.id', ':currencies')->willReturn($exprFunc);
 
-        $queryBuilder->andWhere($exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter(':currencies', [$currency, $baseCurrency])->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToItem(
             $queryBuilder,

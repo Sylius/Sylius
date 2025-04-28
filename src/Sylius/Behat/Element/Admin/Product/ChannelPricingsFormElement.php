@@ -17,7 +17,7 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class ChannelPricingsFormElement extends BaseFormElement implements ChannelPricingsFormElementInterface
+class ChannelPricingsFormElement extends BaseFormElement implements ChannelPricingsFormElementInterface
 {
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {
@@ -60,7 +60,7 @@ final class ChannelPricingsFormElement extends BaseFormElement implements Channe
         ]);
     }
 
-    private function changeChannelTab(string $channelCode): void
+    protected function changeChannelTab(string $channelCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
@@ -69,7 +69,7 @@ final class ChannelPricingsFormElement extends BaseFormElement implements Channe
         $this->getElement('channel_tab', ['%channel_code%' => $channelCode])->click();
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

@@ -17,6 +17,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Addressing\Model\Address;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -27,7 +28,7 @@ final class ZoneMatcherTest extends KernelTestCase
         $this->loadFixtures();
     }
 
-    /** @test */
+    #[Test]
     public function it_matches_all_zones_with_their_parents(): void
     {
         $address = new Address();
@@ -48,7 +49,7 @@ final class ZoneMatcherTest extends KernelTestCase
         $this->assertArrayHasKey('NATO', $matchedZones);
     }
 
-    /** @test */
+    #[Test]
     public function it_matches_all_zones_with_their_parents_with_restricting_by_scope(): void
     {
         $address = new Address();

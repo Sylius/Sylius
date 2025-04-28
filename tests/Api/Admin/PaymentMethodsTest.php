@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_payment_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -48,7 +49,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_payment_methods(): void
     {
         $this->loadFixturesFromFiles([
@@ -67,7 +68,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_payment_method(): void
     {
         $this->loadFixturesFromFiles([
@@ -108,7 +109,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_removes_a_payment_method(): void
     {
         $this->setUpAdminContext();
@@ -127,7 +128,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_a_payment_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -172,7 +173,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_a_payment_method_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

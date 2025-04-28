@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\ProductAssociationFixture;
@@ -23,42 +24,32 @@ final class ProductAssociationFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function product_assoiations_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function product_associations_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function product_association_type_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['type' => 'type']]]], 'custom.*.type');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function product_association_owner_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['owner' => 'product']]]], 'custom.*.owner');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function product_association_associated_products_are_optional(): void
     {
         $this->assertConfigurationIsValid(

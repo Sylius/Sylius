@@ -19,8 +19,10 @@ sylius_grid:
     templates:
         action:
             shop_delete: "@SyliusShop/grid/action/delete.html.twig"
-            shop_show: "@SyliusShop/grid/action/show.html.twig"
+            shop_list: "@SyliusShop/grid/action/list.html.twig"
             shop_pay: "@SyliusShop/account/order/grid/action/pay.html.twig"
+            shop_show: "@SyliusShop/grid/action/show.html.twig"
+            shop_update: "@SyliusShop/grid/action/update.html.twig"
         filter:
             shop_string: "@SyliusShop/grid/filter/string.html.twig"
 

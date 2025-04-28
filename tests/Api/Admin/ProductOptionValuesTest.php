@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -26,7 +27,7 @@ final class ProductOptionValuesTest extends JsonApiTestCase
         $this->setUpAdminContext();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_product_option_value(): void
     {
         $this->setUpDefaultGetHeaders();

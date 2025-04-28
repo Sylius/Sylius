@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class CurrenciesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_currency(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml']);
@@ -44,7 +45,7 @@ final class CurrenciesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_currencies(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml']);
@@ -59,7 +60,7 @@ final class CurrenciesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_creating_a_currency_with_invalid_code(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/api_administrator.yaml']);
@@ -83,7 +84,7 @@ final class CurrenciesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_currency(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);

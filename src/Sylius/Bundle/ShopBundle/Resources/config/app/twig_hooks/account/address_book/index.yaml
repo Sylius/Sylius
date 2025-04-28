@@ -82,6 +82,6 @@ sylius_twig_hooks:
             set_default:
                 component: 'sylius_shop:account:address:default_form'
                 props:
-                    customer: '@=_context.customer'
+                    resource: '@=_context.customer'
                     template: '@SyliusShop/account/address_book/set_as_default.html.twig'
                 priority: 0

@@ -44,18 +44,18 @@
         "sylius/resource-bundle": "^1.12",
         "sylius/review": "^2.0",
         "sylius/user-bundle": "^2.0",
-        "symfony/framework-bundle": "^6.4.1 || ^7.1"
+        "symfony/framework-bundle": "^6.4.1 || ^7.2"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
         "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
-        "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "^6.4 || ^7.1",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1",
-        "symfony/form": "^6.4.1 || ^7.1",
-        "symfony/security-bundle": "^6.4 || ^7.1",
-        "symfony/validator": "^6.4 || ^7.1"
+        "phpunit/phpunit": "^10.5",
+        "symfony/browser-kit": "^6.4 || ^7.2",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2",
+        "symfony/form": "^6.4.1 || ^7.2",
+        "symfony/security-bundle": "^6.4 || ^7.2",
+        "symfony/validator": "^6.4 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -67,7 +67,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^7.1"
+            "require": "^7.2"
         }
     },
     "autoload": {

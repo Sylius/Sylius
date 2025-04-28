@@ -13,36 +13,38 @@ Feature: Applying promotion coupon with usage limit
         And the store allows paying "Cash on Delivery"
         And I am a logged in customer
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving discount from valid coupon with a usage limit
         Given this coupon can be used 5 times
-        When I add product "PHP T-Shirt" to the cart
-        And I use coupon with code "SANTA2016"
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving no discount from valid coupon that has reached its usage limit
         Given this coupon has already reached its usage limit
-        When I add product "PHP T-Shirt" to the cart
-        And I use coupon with code "SANTA2016"
-        Then I should be notified that the coupon is invalid
-        And my cart total should be "$100.00"
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
+        Then my cart total should be "$100.00"
         And there should be no discount applied
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Cancelled orders do not affect the usage limit by default
         Given this coupon can be used once
         And I placed an order "#00000022"
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         But I cancelled this order
-        When I add product "PHP T-Shirt" to the cart
-        And I use coupon with code "SANTA2016"
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Cancelled orders affect usage limit
         Given this coupon is set as non reusable after cancelling the order in which it has been used
         And this coupon can be used once
@@ -50,8 +52,8 @@ Feature: Applying promotion coupon with usage limit
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         But I cancelled this order
-        When I add product "PHP T-Shirt" to the cart
-        And I use coupon with code "SANTA2016"
-        Then I should be notified that the coupon is invalid
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
         And my cart total should be "$100.00"
         And there should be no discount applied

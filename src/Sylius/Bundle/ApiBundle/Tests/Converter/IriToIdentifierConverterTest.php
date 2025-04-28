@@ -18,6 +18,8 @@ use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use ApiPlatform\Metadata\UriVariablesConverterInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -54,11 +56,8 @@ final class IriToIdentifierConverterTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider invalidIdentifierValues
-     */
+    #[DataProvider('invalidIdentifierValues')]
+    #[Test]
     public function it_treats_non_string_values_as_not_identifiers(mixed $invalidValue): void
     {
         $this->router->match(Argument::any())->shouldNotBeCalled();
@@ -66,7 +65,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->assertFalse($this->converter->isIdentifier($invalidValue));
     }
 
-    /** @test */
+    #[Test]
     public function it_treats_not_matched_strings_as_not_identifiers(): void
     {
         $this->router->match('test')->willThrow(new SymfonyRouteNotFoundException());
@@ -74,7 +73,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->assertFalse($this->converter->isIdentifier('test'));
     }
 
-    /** @test */
+    #[Test]
     public function it_treats_strings_matched_on_routes_with_no_resource_class_parameter_as_not_identifiers(): void
     {
         $this->router->match('test')->willReturn([]);
@@ -82,7 +81,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->assertFalse($this->converter->isIdentifier('test'));
     }
 
-    /** @test */
+    #[Test]
     public function it_treats_strings_matched_on_routes_with_resource_class_parameter_as_identifiers(): void
     {
         $this->router->match('test')->willReturn([
@@ -92,7 +91,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->assertTrue($this->converter->isIdentifier('test'));
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_invalid_argument_exception_if_no_route_matches(): void
     {
         $this->expectException(ApiRouteNotFoundException::class);
@@ -103,7 +102,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->converter->getIdentifier('/users/3');
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_invalid_argument_exception_if_parameter_api_resource_class_does_not_exist(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -116,7 +115,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->converter->getIdentifier('/users/3');
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_invalid_argument_exception_if_parameter_api_operation_name_does_not_exist(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -129,7 +128,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->converter->getIdentifier('/users/3');
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_invalid_argument_exception_if_converter_returns_more_than_one_identifier(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -158,7 +157,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->converter->getIdentifier('/users/3/nexts/5', $operation->reveal());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_identifier(): void
     {
         $operation = $this->prophesize(HttpOperation::class);
@@ -182,7 +181,7 @@ final class IriToIdentifierConverterTest extends TestCase
         $this->assertSame('3', $this->converter->getIdentifier('/users/3', $operation->reveal()));
     }
 
-    public function invalidIdentifierValues(): iterable
+    public static function invalidIdentifierValues(): iterable
     {
         yield [0];
         yield [0.1];

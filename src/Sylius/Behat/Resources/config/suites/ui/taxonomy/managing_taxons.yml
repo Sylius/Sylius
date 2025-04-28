@@ -5,6 +5,7 @@ default:
     suites:
         ui_managing_taxons:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -24,6 +25,7 @@ default:
                 - sylius.behat.context.ui.admin.managing_taxons
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.admin.removing_taxons
+                - sylius.behat.context.ui.save
 
             filters:
                 tags: "@managing_taxons&&@ui"

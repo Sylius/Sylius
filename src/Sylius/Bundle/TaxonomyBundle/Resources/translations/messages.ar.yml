@@ -5,9 +5,9 @@ sylius:
     form:
         taxon:
             description: الوصف
-            enabled: تفعيل
+            enabled: مفعل
             name: الاسم
-            parent: الجذر
-            slug: سبيكة
+            parent: الأصل
+            slug: الاسم المختصر
         taxonomy:
             name: الاسم

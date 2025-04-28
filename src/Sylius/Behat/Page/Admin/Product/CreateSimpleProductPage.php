@@ -36,7 +36,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $minkParameters,
         RouterInterface $router,
         string $routeName,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
@@ -65,7 +65,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
-    private function changeTab(string $tabName): void
+    protected function changeTab(string $tabName): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

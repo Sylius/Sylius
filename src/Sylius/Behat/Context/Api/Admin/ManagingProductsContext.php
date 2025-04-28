@@ -484,14 +484,6 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I save my changes to the images
-     */
-    public function iSaveMyChangesToTheImages(): void
-    {
-        // Intentionally left blank
-    }
-
-    /**
      * @When I filter
      */
     public function iFilter(): void

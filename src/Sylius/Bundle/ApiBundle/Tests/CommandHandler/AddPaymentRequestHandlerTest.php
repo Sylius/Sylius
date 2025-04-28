@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -67,7 +68,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_if_there_is_no_payment_for_given_id_and_order_token_value(): void
     {
         $this->expectException(PaymentNotFoundException::class);
@@ -77,7 +78,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_if_there_is_no_payment_method_for_given_code(): void
     {
         $this->expectException(PaymentMethodNotFoundException::class);
@@ -90,7 +91,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_payment_request(): void
     {
         $payment = $this->prophesize(PaymentInterface::class);

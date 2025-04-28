@@ -1,5 +1,94 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.6 (2025-03-31)
+
+#### Details
+
+- [#17709](https://github.com/Sylius/Sylius/issues/17709) Update bunnyshell/workflows to v2 ([@GSadee](https://github.com/GSadee))
+- [#17717](https://github.com/Sylius/Sylius/issues/17717) [Maintenance][Behat] Fix invalid check in order show page ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#17723](https://github.com/Sylius/Sylius/issues/17723) [UI] Refix invalid key setting on adding a collection item ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#17731](https://github.com/Sylius/Sylius/issues/17731) [Maintenance] Add HookableCompoenentTrait to components ([@Wojdylak](https://github.com/Wojdylak))
+- [#17730](https://github.com/Sylius/Sylius/issues/17730) [CI] Update actions/upload-artifact to v4 ([@mpysiak](https://github.com/mpysiak))
+- [#17729](https://github.com/Sylius/Sylius/issues/17729) [Shop] Replace html class ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17657](https://github.com/Sylius/Sylius/issues/17657) [Maintenance] Fix ORM deprecations ([@loic425](https://github.com/loic425))
+- [#17756](https://github.com/Sylius/Sylius/issues/17756) Login layout fix ([@bartek-sek](https://github.com/bartek-sek))
+- [#17764](https://github.com/Sylius/Sylius/issues/17764) [Behat] Add wait for page reload ([@Wojdylak](https://github.com/Wojdylak))
+- [#17763](https://github.com/Sylius/Sylius/issues/17763) Conflict API Platform ([@mpysiak](https://github.com/mpysiak))
+- [#17767](https://github.com/Sylius/Sylius/issues/17767) RTL for arabic languages 1.14 ([@bartek-sek](https://github.com/bartek-sek))
+- [#17771](https://github.com/Sylius/Sylius/issues/17771) [CI] Fix panther behats ([@mpysiak](https://github.com/mpysiak))
+- [#17770](https://github.com/Sylius/Sylius/issues/17770) [CS][DX] Refactor
+- [#17743](https://github.com/Sylius/Sylius/issues/17743) [CS][DX] Refactor
+- [#17776](https://github.com/Sylius/Sylius/issues/17776) [Bug] Fix missing twig variable ([@mpysiak](https://github.com/mpysiak))
+- [#17773](https://github.com/Sylius/Sylius/issues/17773) [Behat] Rename DriverHelper::waitForPageReload to DriverHelper::waitForPageToLoad ([@GSadee](https://github.com/GSadee))
+- [#17775](https://github.com/Sylius/Sylius/issues/17775) [Behat] Fix missing method usage ([@mpysiak](https://github.com/mpysiak))
+- [#17769](https://github.com/Sylius/Sylius/issues/17769) RTL for arabic languages ([@bartek-sek](https://github.com/bartek-sek))
+- [#17779](https://github.com/Sylius/Sylius/issues/17779) Revert "[Shop] Replace html class" ([@bartek-sek](https://github.com/bartek-sek))
+- [#17781](https://github.com/Sylius/Sylius/issues/17781) [Shop] Prevent product image shrink and adjust vertical alignment ([@bartek-sek](https://github.com/bartek-sek))
+- [#17732](https://github.com/Sylius/Sylius/issues/17732) change github  PR template ([@christopherhero](https://github.com/christopherhero))
+- [#17762](https://github.com/Sylius/Sylius/issues/17762) Missing configurationFormType to AsAttributeType ([@tidall87](https://github.com/tidall87))
+- [#17711](https://github.com/Sylius/Sylius/issues/17711) [Behat] Refactor Login Validation Check ([@Rafikooo](https://github.com/Rafikooo))
+- [#17790](https://github.com/Sylius/Sylius/issues/17790) [CS][DX] Refactor
+- [#17782](https://github.com/Sylius/Sylius/issues/17782) [Behat] Reorder Alphabetically UI & API Suite Configs ([@Rafikooo](https://github.com/Rafikooo))
+- [#17783](https://github.com/Sylius/Sylius/issues/17783) [Behat][UI] Introduce common `SaveContext` for more flexible suite configuration management ([@Rafikooo](https://github.com/Rafikooo))
+- [#17798](https://github.com/Sylius/Sylius/issues/17798) 1.14 rtl fixes ([@bartek-sek](https://github.com/bartek-sek))
+- [#17785](https://github.com/Sylius/Sylius/issues/17785) [Behat] Decouple cart setup from interaction – `Given I added` vs `When I add` ([@Rafikooo](https://github.com/Rafikooo))
+- [#17802](https://github.com/Sylius/Sylius/issues/17802) 2.0 rtl fixes ([@bartek-sek](https://github.com/bartek-sek))
+- [#17806](https://github.com/Sylius/Sylius/issues/17806) [CS][DX] Refactor
+- [#17808](https://github.com/Sylius/Sylius/issues/17808) [1.14] Arabic translations ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17792](https://github.com/Sylius/Sylius/issues/17792) Fix config key in upgrade document ([@revoltek-daniel](https://github.com/revoltek-daniel))
+- [#17804](https://github.com/Sylius/Sylius/issues/17804) [Shop] Unit price text wraping ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17811](https://github.com/Sylius/Sylius/issues/17811) Add Notify translation ([@GSadee](https://github.com/GSadee))
+- [#17753](https://github.com/Sylius/Sylius/issues/17753) [Core] Refine ExampleFactoryInterface with Templated Object Type ([@Rafikooo](https://github.com/Rafikooo))
+- [#17812](https://github.com/Sylius/Sylius/issues/17812) Revert "[Core] Refine ExampleFactoryInterface with Templated Object Type" ([@GSadee](https://github.com/GSadee))
+- [#17813](https://github.com/Sylius/Sylius/issues/17813) [2.0] Arabic translations ([@CoderMaggie](https://github.com/CoderMaggie))
+
+## v2.0.5 (2025-03-03)
+
+#### Details
+
+- [#17706](https://github.com/Sylius/Sylius/issues/17706) [API][Admin] Fix contract tests for API Platform 4.1 + limit tabler version ([@GSadee](https://github.com/GSadee))
+- [#17708](https://github.com/Sylius/Sylius/issues/17708) [Maintenance] Fix invalid default address component prop config ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#17700](https://github.com/Sylius/Sylius/issues/17700) [Behat] Remove `final` keyword from element classes ([@Rafikooo](https://github.com/Rafikooo))
+- [#17710](https://github.com/Sylius/Sylius/issues/17710) Fix autocomplete styles ([@bartek-sek](https://github.com/bartek-sek))
+
+## v2.0.4 (2025-02-26)
+
+#### Details
+
+- [#17626](https://github.com/Sylius/Sylius/issues/17626) Update release cycle after 1.12 EOL ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17620](https://github.com/Sylius/Sylius/issues/17620) Fullscreen order table view ([@kulczy](https://github.com/kulczy))
+- [#17630](https://github.com/Sylius/Sylius/issues/17630) [Maintenance] Add JS linter to CI ([@mpysiak](https://github.com/mpysiak))
+- [#17627](https://github.com/Sylius/Sylius/issues/17627) Change main font to variable ([@kulczy](https://github.com/kulczy))
+- [#17618](https://github.com/Sylius/Sylius/issues/17618) [Admin] Improve product grid layout and main taxon display ([@kulczy](https://github.com/kulczy))
+- [#17642](https://github.com/Sylius/Sylius/issues/17642) Fix show product RWD ([@kulczy](https://github.com/kulczy))
+- [#17647](https://github.com/Sylius/Sylius/issues/17647) Fix use of locale storage service in locale switcher ([@JordiDekker](https://github.com/JordiDekker))
+- [#17645](https://github.com/Sylius/Sylius/issues/17645) [Admin][TwigHook] Allow configuring primary Twig hook for CRUD templates ([@Wojdylak](https://github.com/Wojdylak))
+- [#17641](https://github.com/Sylius/Sylius/issues/17641) [Admin] Improve order history UI ([@kulczy](https://github.com/kulczy))
+- [#17655](https://github.com/Sylius/Sylius/issues/17655) update bunnyshell/workflows to v2 ([@mihaichitic](https://github.com/mihaichitic))
+- [#17656](https://github.com/Sylius/Sylius/issues/17656) [Shop] Move account menu to separate twig hook ([@Wojdylak](https://github.com/Wojdylak))
+- [#17653](https://github.com/Sylius/Sylius/issues/17653) [PaymentRequest] Change tagged locator index by to underscore ([@Prometee](https://github.com/Prometee))
+- [#17663](https://github.com/Sylius/Sylius/issues/17663) [CS][DX] Refactor
+- [#17659](https://github.com/Sylius/Sylius/issues/17659) [Shop][Grid] Display subitem actions within item actions div and add default "show more" button ([@Wojdylak](https://github.com/Wojdylak))
+- [#17660](https://github.com/Sylius/Sylius/issues/17660) [Shop][Grid] Add delete action ([@Wojdylak](https://github.com/Wojdylak))
+- [#17644](https://github.com/Sylius/Sylius/issues/17644) [DOCUMENTATION] Synchronize 2.0-docs -> 2.0 ([@SyliusBot](https://github.com/SyliusBot))
+- [#17609](https://github.com/Sylius/Sylius/issues/17609) [Sylius 2] Division by zero on admin cart promotion index ([@jbcr](https://github.com/jbcr))
+- [#17665](https://github.com/Sylius/Sylius/issues/17665) [Admin][AdminUserType] Fix disappearing password ([@Wojdylak](https://github.com/Wojdylak))
+- [#17661](https://github.com/Sylius/Sylius/issues/17661) [Shop][Grid] Add update action ([@Wojdylak](https://github.com/Wojdylak))
+- [#17662](https://github.com/Sylius/Sylius/issues/17662) [Shop][Grid] Add list action ([@Wojdylak](https://github.com/Wojdylak))
+- [#17672](https://github.com/Sylius/Sylius/issues/17672) [PaymentRequest] Fix payment method fixture by adding `usePayum` config field ([@Prometee](https://github.com/Prometee))
+- [#17623](https://github.com/Sylius/Sylius/issues/17623) [API] APIP allow overwritten configs to be applied ([@Prometee](https://github.com/Prometee))
+- [#17674](https://github.com/Sylius/Sylius/issues/17674) [APIP] collection factory duplicate operation replacer renaming ([@Prometee](https://github.com/Prometee))
+- [#17685](https://github.com/Sylius/Sylius/issues/17685) [UI] Fix invalid key setting on adding a collection item ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#17689](https://github.com/Sylius/Sylius/issues/17689) [Shop][UI][DX] Minor fixes ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#17690](https://github.com/Sylius/Sylius/issues/17690) [CI] Allow to fail randomly failing behats ([@mpysiak](https://github.com/mpysiak))
+- [#17687](https://github.com/Sylius/Sylius/issues/17687) Update payment docs ([@JanPalen](https://github.com/JanPalen))
+- [#17680](https://github.com/Sylius/Sylius/issues/17680) [Doc] Adapt how to disable localized urls from Sylius 1 to Sylius 2 ([@tidall87](https://github.com/tidall87))
+- [#17677](https://github.com/Sylius/Sylius/issues/17677) [APIP] Merge resource metadata instead of replacing it ([@Prometee](https://github.com/Prometee))
+- [#17676](https://github.com/Sylius/Sylius/issues/17676) [Docs] Fix links to new Sylius 2 documentation in README ([@stlgaits](https://github.com/stlgaits))
+- [#17666](https://github.com/Sylius/Sylius/issues/17666) [Admin] Fix taxon deletion ([@Wojdylak](https://github.com/Wojdylak))
+- [#17688](https://github.com/Sylius/Sylius/issues/17688) [Shop] Add ux autocomplete ([@Wojdylak](https://github.com/Wojdylak))
+- [#17693](https://github.com/Sylius/Sylius/issues/17693) [CS][DX] Refactor
+
 ## v2.0.3 (2025-01-13)
 
 #### Details

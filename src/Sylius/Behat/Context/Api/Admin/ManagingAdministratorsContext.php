@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -29,6 +30,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
+    use SecurePasswordTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -106,7 +109,7 @@ final class ManagingAdministratorsContext implements Context
     public function iSpecifyItsPasswordAs(?string $password = null): void
     {
         if ($password !== null) {
-            $this->client->addRequestData('plainPassword', $password);
+            $this->client->addRequestData('plainPassword', $this->replaceWithSecurePassword($password));
         }
     }
 

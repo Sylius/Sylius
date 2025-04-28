@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ShopBundle\DependencyInjection\SyliusShopExtension;
 use Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher;
 use Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher;
@@ -21,9 +22,7 @@ use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
 
 final class SyliusShopExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_loads_all_supported_controllers_by_default(): void
     {
         $this->load([]);
@@ -33,9 +32,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sylius_shop.controller.locale_switch');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_loads_all_supported_listeners_by_default(): void
     {
         $this->load([]);
@@ -47,9 +44,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sylius_shop.listener.order_locale_assigner');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_loads_menu_services_by_default(): void
     {
         $this->load([]);
@@ -57,9 +52,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sylius_shop.menu_builder.account');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_uses_url_based_locale_strategy_by_default(): void
     {
         $this->load([]);
@@ -71,9 +64,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('sylius_shop.context.locale.storage_based');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_uses_storage_based_locale_strategy_when_configured(): void
     {
         $this->load([
@@ -87,9 +78,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('sylius_shop.listener.non_channel_locale');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_loads_checkout_resolver_services_by_default(): void
     {
         $this->load([]);
@@ -98,9 +87,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sylius.router.checkout_state');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_load_checkout_resolver_services_if_it_is_disabled(): void
     {
         $this->load([
@@ -113,9 +100,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('sylius.router.checkout_state');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_configures_default_firewall_context_parameter_for_user_registration_listener(): void
     {
         $this->load([]);
@@ -123,9 +108,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius_shop.firewall_context_name', 'shop');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_configures_firewall_context_parameter_for_user_registration_listener_depending_on_custom_configuration(): void
     {
         $this->load(['firewall_context_name' => 'myshopfirewall']);
@@ -133,7 +116,7 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius_shop.firewall_context_name', 'myshopfirewall');
     }
 
-    /** @test */
+    #[Test]
     public function it_prepends_sylius_theme_configuration_with_channel_based_context(): void
     {
         $this->container->registerExtension(new SyliusThemeExtension());

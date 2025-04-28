@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider;
@@ -23,9 +24,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_adds_method_call_to_uri_based_section_resolver_in_order(): void
     {
         $uriBasedSectionResolver = new Definition(UriBasedSectionProvider::class);
@@ -59,9 +58,7 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_add_method_call_if_there_are_no_tagged_processors(): void
     {
         $uriBasedSectionResolver = new Definition(UriBasedSectionProvider::class);

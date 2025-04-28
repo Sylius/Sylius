@@ -1,7 +1,7 @@
 @shopping_cart
 Feature: Viewing a cart summary in many channels
     In order to see details about my order in selected channel
-    As a Visitor
+    As a Customer
     I want to see different carts in different channels
 
     Background:
@@ -9,6 +9,7 @@ Feature: Viewing a cart summary in many channels
         And there is product "Banana" available in this channel
         And the store operates on a channel named "Poland" in "PLN" currency
         And there is product "Onion" available in this channel
+        And I am a logged in customer
 
     @no-api @ui
     Scenario: Viewing information about empty cart after channel switching
@@ -18,7 +19,7 @@ Feature: Viewing a cart summary in many channels
         And I see the summary of my cart
         Then my cart should be empty
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Viewing item in cart after switching channels
         Given I changed my current channel to "Poland"
         And I added product "Onion" to the cart

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class TranslationsElement extends Element implements TranslationsElementInterface
+class TranslationsElement extends Element implements TranslationsElementInterface
 {
     public function getDescription(): string
     {

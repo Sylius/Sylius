@@ -4,35 +4,50 @@
 sylius:
     email:
         shipment_confirmation:
-            subject: 'تأكيد الشحن'
+            has_been_sent_using: 'تم الإرسال عبر'
+            subject: 'تأكيد الشحنة'
+            thank_you_for_transaction: 'شكرًا لك على إتمام المعاملة بنجاح.'
+            you_can_check_its_location_with_the_tracking_code: 'يمكنك تتبع موقعها باستخدام رمز التتبع %tracking_code%.'
+            your_order_with_number: 'طلبك بالرقم'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'عرض أقل سعر للمنتجات المخفضة قبل الخصم الحالي؟'
+                period_for_which_the_lowest_price_is_calculated: 'الفترة التي يتم احتساب أقل سعر خلالها'
+            reset_password:
+                password:
+                    label: كلمة المرور الجديدة
+                    confirmation: تأكيد كلمة المرور الجديدة
     menu:
         admin:
             main:
                 catalog:
-                    association_types: أنواع الرابطة
-                    attributes: سمات
-                    header: القائمة
-                    inventory: المخزن
+                    association_types: أنواع الارتباطات
+                    attributes: السمات
+                    header: الكتالوج
+                    inventory: المخزون
                     options: الخيارات
                     products: المنتجات
-                    taxons: تاكسونس
+                    taxons: التصنيفات
                 configuration:
-                    admin_users: مدير
+                    admin_users: المسؤولون
                     channels: القنوات
-                    countries: البلدان
+                    countries: الدول
                     currencies: العملات
-                    exchange_rates: سعر الصرف
-                    header: الضبط
-                    locales: محلي
+                    exchange_rates: أسعار الصرف
+                    header: الإعدادات
+                    locales: اللغات
                     payment_methods: طرق الدفع
                     shipping_categories: فئات الشحن
                     shipping_methods: طرق الشحن
-                    tax_categories: أقسام الضريبة
-                    tax_rates: معدلات الضريبة
+                    tax_categories: فئات الضرائب
+                    tax_rates: معدلات الضرائب
                     zones: المناطق
                 marketing:
+                    cart_promotions: عروض سلة التسوق
+                    catalog_promotions: عروض الكتالوج
                     header: التسويق
-                    product_reviews: مراجعة المنتجات
+                    product_reviews: تقييمات المنتجات
                     promotions: العروض الترويجية
                 customers:
                     customers: العملاء
@@ -40,10 +55,72 @@ sylius:
                     header: العملاء
                 sales:
                     header: المبيعات
-                    orders: طلبات الشراء
+                    orders: الطلبات
                 official_support:
                     header: الدعم الرسمي
                     browse_plugins: تصفح الإضافات
                     sylius_plus: Sylius Plus
-                    professional_services: الخدمات المحترفة
+                    professional_services: الخدمات الاحترافية
                     find_a_partner: البحث عن شريك
+                    sylius_certification: شهادة Sylius
+    ui:
+        account: الحساب
+        admin_user: المسؤول
+        add_new_entry: إضافة إدخال جديد
+        back_to_dashboard: العودة إلى لوحة التحكم
+        catalog_promotion:
+            dates_details: هذه العملية قد تستغرق وقتًا! يرجى توقع تأخير من 2 إلى 10 دقائق بدءًا من التواريخ المحددة. يعتمد التأخير على حجم الكتالوج.
+        channel:
+            account_verification_required_details: عند تعطيل هذا الخيار، سيكون من الممكن إنشاء الحسابات والوصول إليها دون التحقق من البريد الإلكتروني، مما قد يسمح بالوصول إلى بيانات الطلبات التي تم تقديمها كضيف.
+        channel_pricing_history: 'سجل تسعير القناة'
+        channel_pricings: تسعيرات القنوات
+        create_new:
+            customer_group: 'إنشاء مجموعة عملاء جديدة'
+        delete_avatar: 'حذف الصورة الرمزية'
+        full_screen: 'وضع ملء الشاشة'
+        global: 'عام'
+        ip_address: 'عنوان IP'
+        language: 'اللغة'
+        lowest_price_before_discount: 'أقل سعر قبل الخصم'
+        minimum_price_details: الحد الأدنى للسعر - هو الحد الأدنى للتسعير الذي لا يمكن تجاوزه بالتخفيض سواء من خلال عروض الكتالوج أو سلة التسوق. استخدمه لحماية ربحية مبيعاتك.
+        more: 'المزيد'
+        no_main_taxon: 'لا يوجد تصنيف رئيسي'
+        no_depth: 'لا يوجد عمق'
+        no_height: 'لا يوجد ارتفاع'
+        no_results: لا توجد نتائج
+        no_results_adjust_your_search: 'قم بتعديل بحثك وحاول مرة أخرى.'
+        no_weight: 'لا يوجد وزن'
+        no_width: 'لا يوجد عرض'
+        omnibus: أومنيبوس
+        order:
+            date: 'تاريخ الطلب'
+        original_price_details: السعر الأصلي - هو سعر متغير المنتج. يظهر مشطوبًا في الكتالوج. يُستخدم كأساس لحساب السعر الحالي. إذا لم يتم تحديد هذه القيمة، فستقوم عروض الكتالوج بنسخ السعر الحالي إلى السعر الأصلي.
+        original_product_price_details: السعر الأصلي - هو سعر المنتج. يظهر مشطوبًا في الكتالوج. يُستخدم كأساس لحساب السعر الحالي. إذا لم يتم تحديد هذه القيمة، فستقوم عروض الكتالوج بنسخ السعر الحالي إلى السعر الأصلي.
+        page_not_found: الصفحة غير موجودة
+        pagination:
+            number_of_results: 'عرض %from% إلى %to% من أصل %total% إدخال'
+        partially_refunded: 'تم استرداد جزء من المبلغ'
+        price_details: السعر - هو السعر الحالي لمتغير المنتج المعروض في الكتالوج. يمكن تعديله صراحة مثلًا من خلال عروض الكتالوج.
+        product_price_details: السعر - هو السعر الحالي للمنتج المعروض في الكتالوج. يمكن تعديله صراحة مثلًا من خلال عروض الكتالوج.
+        price_history: سجل الأسعار
+        product:
+            product_not_active_in_channel: المنتج غير مفعل بعد في هذه القناة.
+        product_variant: متغير المنتج
+        sales_summary: ملخص المبيعات
+        search_menu: 'بحث في القائمة'
+        shipment_for_order: شحنة الطلب
+        show_history_for_channel_pricing: 'عرض السجل لتسعير القناة'
+        start_typing_to_search: 'ابدأ بالكتابة للبحث'
+        statistics:
+            day: اليوم
+            lifetime: مدى الحياة
+            month: الشهر
+            week: الأسبوع
+            2weeks: أسبوعان
+            year: السنة
+        taxon: تصنيف
+        view_in_store: 'عرض في المتجر'
+        work_in_progress: العمل جارٍ
+        empty_date: فارغ
+        notifications:
+            new_version_of_sylius_available: 'يتوفر إصدار جديد من Sylius. يرجى التواصل مع الفني الخاص بك للترقية.'

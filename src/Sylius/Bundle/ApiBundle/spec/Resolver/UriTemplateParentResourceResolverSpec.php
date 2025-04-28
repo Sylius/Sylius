@@ -16,10 +16,13 @@ namespace spec\Sylius\Bundle\ApiBundle\Resolver;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Persisters\Entity\EntityPersister;
+use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Resolver\UriTemplateParentResourceResolverInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -80,7 +83,8 @@ final class UriTemplateParentResourceResolverSpec extends ObjectBehavior
     function it_throws_an_exception_if_parent_resource_is_not_found(
         EntityManagerInterface $entityManager,
         ResourceInterface $item,
-        RepositoryInterface $repository,
+        UnitOfWork $unitOfWork,
+        EntityPersister $entityPersister,
     ): void {
         $parentItem = new class() implements ResourceInterface {
             public function getId()
@@ -93,8 +97,13 @@ final class UriTemplateParentResourceResolverSpec extends ObjectBehavior
             'variable' => new Link(parameterName: 'variable', fromClass: get_class($parentItem)),
         ]);
 
-        $entityManager->getRepository(get_class($parentItem))->willReturn($repository);
-        $repository->findOneBy(['code' => 'value'])->willReturn(null);
+        $repository = new EntityRepository($entityManager->getWrappedObject(), new ClassMetadata($parentItem::class));
+
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $entityManager->getRepository($parentItem::class)->willReturn($repository);
+
+        $unitOfWork->getEntityPersister($parentItem::class)->willReturn($entityPersister);
+        $entityPersister->load(['code' => 'value'], null, null, [], null, 1, null)->willReturn(null);
 
         $this
             ->shouldThrow(NotFoundHttpException::class)
@@ -105,14 +114,20 @@ final class UriTemplateParentResourceResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         ResourceInterface $item,
         ResourceInterface $parentItem,
-        RepositoryInterface $repository,
+        UnitOfWork $unitOfWork,
+        EntityPersister $entityPersister,
     ): void {
-        $operation = new Post(uriVariables: [
-            'variable' => new Link(parameterName: 'variable', fromClass: get_class($parentItem)),
-        ]);
+        $repository = new EntityRepository($entityManager->getWrappedObject(), new ClassMetadata($parentItem::class));
 
-        $entityManager->getRepository(get_class($parentItem))->willReturn($repository);
-        $repository->findOneBy(['code' => 'value'])->willReturn($parentItem);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $entityManager->getRepository($parentItem::class)->willReturn($repository);
+
+        $unitOfWork->getEntityPersister($parentItem::class)->willReturn($entityPersister);
+        $entityPersister->load(['code' => 'value'], null, null, [], null, 1, null)->willReturn($parentItem);
+
+        $operation = new Post(uriVariables: [
+            'variable' => new Link(parameterName: 'variable', fromClass: $parentItem::class),
+        ]);
 
         $this->resolve($item, $operation, ['uri_variables' => ['variable' => 'value']])->shouldReturn($parentItem);
     }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop\Checkout;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
@@ -29,7 +30,7 @@ final class ShippingMethodTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_selects_shipping_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -62,7 +63,7 @@ final class ShippingMethodTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_select_shipping_method_to_non_existing_shipment(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -92,7 +93,7 @@ final class ShippingMethodTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_select_shipping_method_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
@@ -121,7 +122,7 @@ final class ShippingMethodTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_select_shipping_method_with_invalid_shipping_method(): void
     {
         $this->loadFixturesFromFiles([

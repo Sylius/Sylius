@@ -21,12 +21,12 @@ use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-final class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormElementInterface
+class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormElementInterface
 {
     public function __construct(
         Session $session,
         array|MinkParameters $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -138,7 +138,7 @@ final class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormE
         );
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

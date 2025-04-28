@@ -52,7 +52,7 @@ Feature: Making changes in existing addresses
         And it should contain country "Australia"
         And it should contain province "Queensland"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Changing province to for country with no provinces defined
         Given I am editing the address of "Lucifer Morningstar"
         When I specify "New York" as my province

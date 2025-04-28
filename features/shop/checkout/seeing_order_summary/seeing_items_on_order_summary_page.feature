@@ -13,12 +13,12 @@ Feature: Seeing order items on order summary page
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing order items and theirs quantity on the order summary page
-        When I add 4 products "Lannister Coat" to the cart
-        And I add 2 products "Targaryen Jacket" to the cart
-        And I add 3 products "Stark T-Shirt" to the cart
-        And I go to the checkout addressing step
+        Given I added 4 products "Lannister Coat" to the cart
+        And I added 2 products "Targaryen Jacket" to the cart
+        And I added 3 products "Stark T-Shirt" to the cart
+        And I am at the checkout addressing step
         And I define the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step

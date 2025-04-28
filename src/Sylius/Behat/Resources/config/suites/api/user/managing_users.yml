@@ -18,7 +18,6 @@ default:
 
                 - sylius.behat.context.api.admin.managing_customers
                 - sylius.behat.context.api.admin.response
-
                 - sylius.behat.context.api.shop.login
 
             filters:

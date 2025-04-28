@@ -1,7 +1,9 @@
+{% import "@SyliusUi/macro/rtl.html.twig" as rtl %}
+
 {% set generic_hook = 'sylius_admin.base' %}
 
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+<html lang="{{ app.request.locale }}" {{ rtl.default(sylius.localeCode) }}>
     <head>
         {% block metatags %}
             {% hook generic_hook ~ '#metatags' %}

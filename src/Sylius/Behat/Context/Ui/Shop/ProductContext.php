@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\LowestPriceInformationElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
@@ -89,6 +91,12 @@ final readonly class ProductContext implements Context
             'slug' => $product->getTranslation($localeCode)->getSlug(),
             '_locale' => $localeCode,
         ]);
+    }
+
+    #[When('I update the quantity of this product to :quantity')]
+    public function iUpdateTheQuantityOfThisProduct(int $quantity): void
+    {
+        $this->showPage->updateQuantity($quantity);
     }
 
     /**
@@ -582,12 +590,16 @@ final readonly class ProductContext implements Context
         Assert::notContains($validationMessage, sprintf('%s does not have sufficient stock.', $product->getName()));
     }
 
-    /**
-     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
-     */
-    public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween1And9999(ProductInterface $product): void
+    #[Then('I should be notified that the quantity of this product must be between 1 and 9999')]
+    public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween1And9999(): void
     {
         Assert::same($this->showPage->getValidationMessage('quantity'), 'Quantity must be between 1 and 9999.');
+    }
+
+    #[Then('I should not be able to add it')]
+    public function iShouldNotBeAbleToAddIt(): void
+    {
+        Assert::false($this->showPage->hasAddToCartButtonEnabled(), 'Add to cart button should be disabled.');
     }
 
     /**
@@ -603,7 +615,7 @@ final readonly class ProductContext implements Context
      */
     public function theMainImageShouldBeOfType(string $type): void
     {
-        Assert::true($this->showPage->isMainImageOfType($type));
+        Assert::true($this->showPage->isMainImageOfTypeDisplayed($type), sprintf('Main image should be of type "%s" but it is not.', $type));
     }
 
     /**

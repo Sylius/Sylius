@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Twig;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -23,9 +24,7 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 final class ChannelUrlExtensionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_generates_channel_url_with_channel_hostname(): void
     {
         $stack = new RequestStack();

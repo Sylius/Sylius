@@ -11,5 +11,5 @@ Feature: Maintaining a last picked up cart
     Scenario: Having access to a last picked up cart
         When I pick up my cart
         And I pick up my cart again
-        And I check details of my cart
+        And I check the details of my cart
         Then I should have empty cart

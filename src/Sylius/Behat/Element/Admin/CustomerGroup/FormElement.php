@@ -17,7 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 
-final class FormElement extends BaseFormElement implements FormElementInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
     use ChecksCodeImmutability;
 

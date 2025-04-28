@@ -11,18 +11,20 @@ Feature: Seeing detailed shipping fee on selecting shipping method page
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing the shipping fee per shipment on selecting shipping method
         Given the store has "UPS" shipping method with "$20.00" fee
-        And I have product "The Sorting Hat" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I added product "The Sorting Hat" to the cart
+        And I addressed the cart to "United States"
+        When I want to complete the shipping step
         Then I should be on the checkout shipping step
         And I should see shipping method "UPS" with fee "$20.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing the shipping fee per unit on selecting shipping method
         Given the store has "UPS" shipping method with "$5.00" fee per unit
-        And I have product "The Sorting Hat" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I added product "The Sorting Hat" to the cart
+        And I addressed the cart to "United States"
+        When I want to complete the shipping step
         Then I should be on the checkout shipping step
         And I should see shipping method "UPS" with fee "$5.00"

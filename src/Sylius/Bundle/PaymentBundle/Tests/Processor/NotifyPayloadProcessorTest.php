@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Tests\Processor;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
 use Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessor;
@@ -21,9 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotifyPayloadProcessorTest extends TestCase
 {
-    /**
-     * @dataProvider getNormalizedRequestAndPayloadWithExpectation
-     */
+    #[DataProvider('getNormalizedRequestAndPayloadWithExpectation')]
     public function test_process(array $normalizedRequest, mixed $payload, mixed $expectedPayload = null): void
     {
         $requestNormalizer = $this->createMock(SymfonyRequestNormalizerInterface::class);

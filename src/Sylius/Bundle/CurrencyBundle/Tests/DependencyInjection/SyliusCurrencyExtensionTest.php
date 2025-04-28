@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CurrencyBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CurrencyBundle\Attribute\AsCurrencyContext;
 use Sylius\Bundle\CurrencyBundle\DependencyInjection\SyliusCurrencyExtension;
 use Sylius\Bundle\CurrencyBundle\Tests\Stub\CurrencyContextStub;
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusCurrencyExtensionTest extends AbstractExtensionTestCase
 {
-    /** @test */
+    #[Test]
     public function it_autoconfigures_currency_context_with_attribute(): void
     {
         $this->container->setDefinition(

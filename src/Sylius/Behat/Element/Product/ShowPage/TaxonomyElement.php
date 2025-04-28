@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class TaxonomyElement extends Element implements TaxonomyElementInterface
+class TaxonomyElement extends Element implements TaxonomyElementInterface
 {
     public function getProductMainTaxon(): string
     {

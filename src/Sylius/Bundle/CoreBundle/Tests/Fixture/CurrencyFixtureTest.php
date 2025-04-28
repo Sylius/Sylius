@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture;
 use Sylius\Resource\Factory\FactoryInterface;
@@ -23,17 +24,13 @@ final class CurrencyFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function currencies_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'currencies');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function currencies_can_be_set(): void
     {
         $this->assertConfigurationIsValid([['currencies' => ['EUR', 'USD', 'PLN']]], 'currencies');

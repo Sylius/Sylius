@@ -5,48 +5,57 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: عد
+                count: العدد
                 equal: يساوي
-            type: نوع القاعدة
+            type: نوع القاعدة       
         shipment:
             state: الحالة
             states:
-                checkout: إتمام الشراء
-                pending: مُعلقّة
+                checkout: قيد الإعداد
+                pending: قيد الانتظار
                 ready: جاهز
-                shipped: شحن
-                returned: معاد
-                cancelled: ملغي
-            tracking_code: رمز التحقق
+                shipped: تم الشحن
+                returned: تم الإرجاع
+                cancelled: تم الإلغاء
+            tracking_code: رمز التتبع      
         shipping_calculator:
             flat_rate_configuration:
-                label: قيمة ثابتة للشحن
-                amount: القيمة
+                label: سعر ثابت لكل شحنة
+                amount: المبلغ
             per_unit_rate_configuration:
-                label: قيمة ثابتة للوحدة
-                amount: القيمة
+                label: سعر ثابت لكل وحدة
+                amount: المبلغ       
         shipping_category:
             description: الوصف
-            name: الاسم
+            name: الاسم        
         shipping_method:
             add_rule: إضافة قاعدة
-            calculator: الحاسبة
-            category: القسم
-            category_requirement: متطلبات القسم
-            channels: قنوات
-            configuration: الضبط
+            calculator: الآلة الحاسبة
+            category: الفئة
+            category_requirement: متطلبات الفئة
+            channels: القنوات
+            configuration: الإعدادات
             description: الوصف
-            enabled: تفعيل
-            match_all_category_requirement: جميع الوحدات يجب أن تطابق فئة الأسلوب
-            match_any_category_requirement: جميع الوحدات يجب أن تطابق فئة الأسلوب
-            match_none_category_requirement: جميع الوحدات يجب أن تطابق فئة الأسلوب
+            enabled: مفعّل
+            match_all_category_requirement: يجب أن تطابق جميع الوحدات فئة طريقة الشحن
+            match_any_category_requirement: يجب أن تطابق وحدة واحدة على الأقل فئة طريقة الشحن
+            match_none_category_requirement: لا يجب أن تطابق أي وحدة فئة طريقة الشحن
             name: الاسم
-            position: المهنة
-            rules: القوانين
-            tax_category: أقسام الضريبة
-            translations: التّرجمة
+            position: الترتيب
+            rules: القواعد
+            rules_help: استخدم القواعد لتحديد ما إذا كان يمكن تطبيق طريقة الشحن على الطلب.
+                إذا كانت القاعدة صحيحة، يمكن تطبيق طريقة الشحن. لاحظ أنه إذا أضفت عدة قواعد،
+                يجب أن تكون جميعها صحيحة.
+            select_calculator: اختر آلة حاسبة
+            tax_category: فئة الضريبة
+            translations: الترجمات
         shipping_method_rule:
-            type: نوع
-            total: الضرائب
+            items_total_greater_than_or_equal: إجمالي العناصر أكبر من أو يساوي
+            items_total_less_than_or_equal: إجمالي العناصر أقل من أو يساوي
+            type: النوع
+            total: الإجمالي
+            total_weight_greater_than_or_equal: الوزن الإجمالي أكبر من أو يساوي
+            total_weight_less_than_or_equal: الوزن الإجمالي أقل من أو يساوي
             weight: الوزن
-            amount: القيمة
+            amount: المبلغ
+            select: اختر نوع القاعدة

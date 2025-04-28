@@ -15,35 +15,54 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\Then;
+use Behat\Step\When;
+use Doctrine\ORM\EntityManagerInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class CheckoutCompleteContext implements Context
 {
+    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private CompletePageInterface $completePage,
         private NotificationCheckerInterface $notificationChecker,
         private ThankYouPageInterface $thankYouPage,
+        private OrderRepositoryInterface $orderRepository,
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
-    /**
-     * @When I try to open checkout complete page
-     * @When I want to complete checkout
-     */
+    #[When('I check summary of my order')]
+    public function iCheckSummaryOfMyOrder(): void
+    {
+        $this->completePage->open();
+    }
+
+    #[When('I try to complete checkout')]
+    public function iTryToCompleteCheckout(): void
+    {
+        $this->completePage->open();
+        $this->completePage->confirmOrder();
+    }
+
+    #[When('I try to open checkout complete page')]
     public function iTryToOpenCheckoutCompletePage(): void
     {
         $this->completePage->tryToOpen();
@@ -79,16 +98,27 @@ final readonly class CheckoutCompleteContext implements Context
      * @Given the visitor confirm his order
      * @Given the customer confirm his order
      * @Given the customer confirmed the order
-     * @When I confirm my order
      * @When I try to confirm my order
      */
+    #[When('I confirm my order')]
     public function iConfirmMyOrder(): void
     {
         if (!$this->completePage->isOpen()) {
-            $this->completePage->open();
+            $this->completePage->open($this->getLocaleHeader());
         }
 
         $this->completePage->confirmOrder();
+
+        $order = $this->orderRepository->findLatest(1)[0] ?? null;
+
+        if ($order === null) {
+            return;
+        }
+
+        $this->entityManager->refresh($order);
+
+        $this->sharedStorage->set('order', $order);
+        $this->sharedStorage->set('order_number', $order->getNumber());
     }
 
     /**
@@ -225,10 +255,8 @@ final readonly class CheckoutCompleteContext implements Context
         Assert::true($this->completePage->hasProductUnitPrice($product, $price));
     }
 
-    /**
-     * @Then /^I should be notified that (this product) does not have sufficient stock$/
-     * @Then I should be notified that product :product does not have sufficient stock
-     */
+    #[Then('/^I should be notified that (this product) does not have sufficient stock$/')]
+    #[Then('I should be notified that product :product does not have sufficient stock')]
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::true($this->completePage->hasProductOutOfStockValidationMessage($product));
@@ -274,13 +302,9 @@ final readonly class CheckoutCompleteContext implements Context
         Assert::false($this->completePage->hasPaymentMethod());
     }
 
-    /**
-     * @Then I should not be able to confirm order because products do not fit :shippingMethod requirements
-     */
+    #[Then('I should not be able to confirm order because products do not fit :shippingMethod requirements')]
     public function iShouldNotBeAbleToConfirmOrderBecauseDoNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod): void
     {
-        $this->completePage->confirmOrder();
-
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
@@ -379,9 +403,7 @@ final readonly class CheckoutCompleteContext implements Context
         throw new UnexpectedPageException('It should not be possible to complete checkout complete step.');
     }
 
-    /**
-     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
-     */
+    #[Then('I should not be able to confirm order because the :shippingMethodName shipping method is not available')]
     public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(string $shippingMethodName): void
     {
         Assert::same(
@@ -399,5 +421,17 @@ final readonly class CheckoutCompleteContext implements Context
     public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
     {
         Assert::same($this->completePage->getProductUnitPrice($product), $unitPrice);
+    }
+
+    /** @return string[] */
+    private function getLocaleHeader(): array
+    {
+        try {
+            $localeCode = $this->sharedStorage->get('locale_code');
+        } catch (SharedStorageElementNotFoundException) {
+            $localeCode = 'en_US';
+        }
+
+        return ['_locale' => $localeCode];
     }
 }

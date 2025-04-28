@@ -239,15 +239,6 @@ final readonly class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @Then /^I should be notified that (code) is required$/
      */
     public function iShouldBeNotifiedThatCodeIsRequired(string $field): void

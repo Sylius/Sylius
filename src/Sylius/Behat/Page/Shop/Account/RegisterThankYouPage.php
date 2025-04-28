@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
-final class RegisterThankYouPage extends SymfonyPage implements RegisterThankYouPageInterface
+class RegisterThankYouPage extends SymfonyPage implements RegisterThankYouPageInterface
 {
     public function getRouteName(): string
     {

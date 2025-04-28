@@ -12,7 +12,7 @@ Feature: Preventing not available payment method selection
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not being able to select disabled payment method
         Given the payment method "Offline" is disabled
         And I have product "PHP T-Shirt" in the cart
@@ -23,7 +23,7 @@ Feature: Preventing not available payment method selection
         And I complete the shipping step
         Then I should not be able to select "Offline" payment method
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not being able to select payment method not available for order channel
         Given the store has "Cash on delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
@@ -37,9 +37,9 @@ Feature: Preventing not available payment method selection
 
     @api @no-ui
     Scenario: Preventing customer from selecting nonexistent payment method
-        Given I have product "PHP T-Shirt" in the cart
+        When I add product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
-        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step

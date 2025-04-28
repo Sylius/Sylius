@@ -15,6 +15,7 @@ namespace DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\TagResettableCartContextsPass;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -24,7 +25,7 @@ use Symfony\Contracts\Service\ResetInterface;
 
 final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCase
 {
-    /** @test */
+    #[Test]
     public function it_tags_resetting_cart_contexts_with_kernel_reset(): void
     {
         $reset = $this->createMock(ResetInterface::class);
@@ -46,7 +47,7 @@ final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCa
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_tags_only_if_service_implements_resetting_cart_context(): void
     {
         $cartContext = $this->createMock(CartContextInterface::class);
@@ -66,7 +67,7 @@ final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCa
         self::assertThat($definition, self::logicalNot(new DefinitionHasTagConstraint('kernel.reset', ['method' => 'reset'])));
     }
 
-    /** @test */
+    #[Test]
     public function it_tags_only_if_service_is_tagged_as_cart_context(): void
     {
         $reset = $this->createMock(ResetInterface::class);
@@ -85,7 +86,7 @@ final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCa
         self::assertThat($definition, self::logicalNot(new DefinitionHasTagConstraint('kernel.reset', ['method' => 'reset'])));
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_from_tagging_cart_context_when_already_tagged_as_kernel_reset(): void
     {
         $reset = $this->createMock(ResetInterface::class);

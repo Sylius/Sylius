@@ -1,0 +1,97 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+
+  input:not(input[type="number"], input[type="email"], input[name*="translations"]), textarea {
+    unicode-bidi: bidi-override;
+    text-align: right;
+  }
+
+  input[type="number"], input[type="email"], input[name*="translations"], textarea[name*="translations"] {
+    text-align: right;
+    direction: ltr;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .checkout-sidebar::before {
+      right: 0;
+    }
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding-left: var(--bs-breadcrumb-item-padding-x);
+    padding-right: 0;
+  }
+
+  .breadcrumb-item + .breadcrumb-item {
+    padding-right: var(--bs-breadcrumb-item-padding-x);
+    padding-left: 0;
+  }
+
+  .accordion-button::after {
+    margin-left: 0;
+  }
+
+  .start-0 {
+    left: unset!important;
+    right: 0 !important;
+  }
+
+  @include media-breakpoint-up(xl) {
+    .pe-xxl-5 {
+      padding-right: unset!important;
+      padding-left: 3rem !important;
+    }
+  }
+
+  .ms-auto {
+    margin-left: 0!important;
+    margin-right: auto !important;
+  }
+
+  @include media-breakpoint-up(md) {
+    .pe-lg-6 {
+      padding-left: 5rem !important;
+      padding-right: 0!important;
+    }
+
+    .ps-lg-6 {
+      padding-left: 0!important;
+      padding-right: 5rem !important;
+    }
+
+    .offset-xl-1 {
+      margin-left: 0!important;
+      margin-right: 8.33333333%;
+    }
+  }
+
+  .form-check {
+    padding-left: 0;
+    padding-right: 1.5em;
+
+    .form-check-input {
+      float: right;
+      margin-left: 0;
+      margin-right: -1.5em;
+    }
+  }
+
+  .text-end {
+    text-align: left !important;
+  }
+
+  .icon {
+    transform: scaleX(-1);
+  }
+}

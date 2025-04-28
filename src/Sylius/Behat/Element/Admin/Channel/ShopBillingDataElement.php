@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Channel;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class ShopBillingDataElement extends Element implements ShopBillingDataElementInterface
+class ShopBillingDataElement extends Element implements ShopBillingDataElementInterface
 {
     public function specifyCompany(string $company): void
     {

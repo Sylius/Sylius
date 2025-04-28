@@ -30,7 +30,7 @@
         "lexik/jwt-authentication-bundle": "^3.1",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
-        "symfony/messenger": "^6.4 || ^7.1"
+        "symfony/messenger": "^6.4 || ^7.2"
     },
     "require-dev": {
         "ext-sqlite3": "*",
@@ -40,12 +40,15 @@
         "phparkitect/phparkitect": "^0.3",
         "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
-        "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "^6.4 || ^7.1",
-        "symfony/debug-bundle": "^6.4 || ^7.1",
-        "symfony/dotenv": "^6.4 || ^7.1",
+        "phpunit/phpunit": "^10.5",
+        "symfony/browser-kit": "^6.4 || ^7.2",
+        "symfony/debug-bundle": "^6.4 || ^7.2",
+        "symfony/dotenv": "^6.4 || ^7.2",
         "symfony/webpack-encore-bundle": "^2.2",
         "theofidry/alice-data-fixtures": "^1.7"
+    },
+    "conflict": {
+        "api-platform/jsonld": "^4.1.1"
     },
     "config": {
         "allow-plugins": {
@@ -57,7 +60,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^7.1"
+            "require": "^7.2"
         }
     },
     "autoload": {

@@ -37,7 +37,7 @@
         "sylius/payum-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
         "sylius/twig-hooks": "^0.6",
-        "symfony/framework-bundle": "^6.4.1 || ^7.1",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2",
         "symfony/stimulus-bundle": "^2.20",
         "symfony/ux-autocomplete": "^2.20",
         "symfony/ux-live-component": "^2.20",
@@ -51,9 +51,9 @@
         "php-http/message-factory": "^1.1",
         "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1",
-        "symfony/dotenv": "^6.4 || ^7.1"
+        "phpunit/phpunit": "^10.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2",
+        "symfony/dotenv": "^6.4 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -65,7 +65,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^7.1"
+            "require": "^7.2"
         }
     },
     "autoload": {

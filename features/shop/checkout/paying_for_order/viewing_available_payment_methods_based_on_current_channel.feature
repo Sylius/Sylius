@@ -19,44 +19,44 @@ Feature: Viewing available payment methods based on current channel
         And this product is also priced at "$25.00" in "Poland" channel
         And the store ships everywhere for free for all channels
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing payment methods that are available in channel as a logged in customer
         Given I am a logged in customer
         And I am in the "United States" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that are available in another channel as an logged in customer
         Given I am a logged in customer
         And I am in the "Poland" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of Poland" and "Offline" payment methods
         But I should not see "Bank of Universe" and "Bank of America" payment methods
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing payment methods that are available in channel as a guest
         Given I am in the "United States" channel
-        And I have product "PHP T-Shirt" in the cart
+        And I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping methods that are available in another channel as a guest
         Given I am in the "Poland" channel
-        And I have product "PHP T-Shirt" in the cart
+        And I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of Poland" and "Offline" payment methods
         But I should not see "Bank of Universe" and "Bank of America" payment methods

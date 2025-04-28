@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Mailer;
 
+use PHPUnit\Framework\Attributes\Test;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
@@ -32,7 +33,7 @@ final class OrderEmailManagerTest extends KernelTestCase
 
     private const ORDER_NUMBER = '#000001';
 
-    /** @test */
+    #[Test]
     public function it_sends_order_confirmation_email(): void
     {
         $container = self::getContainer();

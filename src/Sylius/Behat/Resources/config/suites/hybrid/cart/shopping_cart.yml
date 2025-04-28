@@ -6,6 +6,7 @@ default:
         hybrid_shopping_cart:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.guest_cart
 
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel

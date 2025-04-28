@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\Customer\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
@@ -166,15 +167,6 @@ final class ManagingCustomersContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isCustomerVerified($customer));
-    }
-
-    /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
     }
 
     /**
@@ -384,10 +376,8 @@ final class ManagingCustomersContext implements Context
         Assert::eq($this->indexPage->isCustomerEnabled($customer), false);
     }
 
-    /**
-     * @When I specify their password as :password
-     */
-    public function iSpecifyItsPasswordAs($password)
+    #[When('I specify their password as :password')]
+    public function iSpecifyItsPasswordAs($password): void
     {
         $this->formElement->specifyPassword($password);
     }

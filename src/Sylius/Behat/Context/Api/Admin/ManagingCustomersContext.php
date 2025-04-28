@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -27,6 +28,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomersContext implements Context
 {
+    use SecurePasswordTrait;
+
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
     public function __construct(
@@ -142,7 +145,7 @@ final class ManagingCustomersContext implements Context
     public function iSpecifyItsPasswordAs(string $password): void
     {
         $this->client->addRequestData('user', [
-            'plainPassword' => $password,
+            'plainPassword' => $this->replaceWithSecurePassword($password),
         ]);
     }
 

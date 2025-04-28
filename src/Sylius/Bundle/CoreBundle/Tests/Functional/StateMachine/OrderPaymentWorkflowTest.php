@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\Order;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class OrderPaymentWorkflowTest extends KernelTestCase
 {
-    /** @test */
+    #[Test]
     public function it_applies_available_transition_for_order_payment_cart_status(): void
     {
         $stateMachine = $this->getStateMachine();
@@ -30,11 +32,8 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         $this->assertSame('awaiting_payment', $order->getPaymentState());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsForAwaitingPaymentState
-     */
+    #[DataProvider('availableTransitionsForAwaitingPaymentState')]
+    #[Test]
     public function it_applies_all_available_transitions_for_order_payment_awaiting_payment_state(
         string $transition,
         string $expectedStatus,
@@ -47,11 +46,8 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $order->getPaymentState());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsForPartiallyAuthorizedState
-     */
+    #[DataProvider('availableTransitionsForPartiallyAuthorizedState')]
+    #[Test]
     public function it_applies_all_available_transitions_for_order_payment_partially_authorized_state(
         string $transition,
         string $expectedStatus,
@@ -64,11 +60,8 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $order->getPaymentState());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsForAuthorizedState
-     */
+    #[DataProvider('availableTransitionsForAuthorizedState')]
+    #[Test]
     public function it_applies_all_available_transitions_for_order_payment_authorized_state(
         string $transition,
         string $expectedStatus,
@@ -81,11 +74,8 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $order->getPaymentState());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsForPartiallyPaidState
-     */
+    #[DataProvider('availableTransitionsForPartiallyPaidState')]
+    #[Test]
     public function it_applies_all_available_transitions_for_order_payment_partially_paid_state(
         string $transition,
         string $expectedStatus,
@@ -98,11 +88,8 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $order->getPaymentState());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsForPaidState
-     */
+    #[DataProvider('availableTransitionsForPaidState')]
+    #[Test]
     public function it_applies_all_available_transitions_for_order_payment_paid_state(
         string $transition,
         string $expectedStatus,
@@ -115,11 +102,8 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $order->getPaymentState());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsForPartiallyRefundedState
-     */
+    #[DataProvider('availableTransitionsForPartiallyRefundedState')]
+    #[Test]
     public function it_applies_all_available_transitions_for_order_partially_refunded_state(
         string $transition,
         string $expectedStatus,
@@ -132,7 +116,7 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $order->getPaymentState());
     }
 
-    public function availableTransitionsForAwaitingPaymentState(): iterable
+    public static function availableTransitionsForAwaitingPaymentState(): iterable
     {
         yield ['partially_authorize', 'partially_authorized'];
         yield ['authorize', 'authorized'];
@@ -141,7 +125,7 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         yield ['pay', 'paid'];
     }
 
-    public function availableTransitionsForPartiallyAuthorizedState(): iterable
+    public static function availableTransitionsForPartiallyAuthorizedState(): iterable
     {
         yield ['partially_authorize', 'partially_authorized'];
         yield ['authorize', 'authorized'];
@@ -149,13 +133,13 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         yield ['cancel', 'cancelled'];
     }
 
-    public function availableTransitionsForAuthorizedState(): iterable
+    public static function availableTransitionsForAuthorizedState(): iterable
     {
         yield ['cancel', 'cancelled'];
         yield ['pay', 'paid'];
     }
 
-    public function availableTransitionsForPartiallyPaidState(): iterable
+    public static function availableTransitionsForPartiallyPaidState(): iterable
     {
         yield ['partially_pay', 'partially_paid'];
         yield ['pay', 'paid'];
@@ -163,13 +147,13 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
         yield ['refund', 'refunded'];
     }
 
-    public function availableTransitionsForPaidState(): iterable
+    public static function availableTransitionsForPaidState(): iterable
     {
         yield ['partially_refund', 'partially_refunded'];
         yield ['refund', 'refunded'];
     }
 
-    public function availableTransitionsForPartiallyRefundedState(): iterable
+    public static function availableTransitionsForPartiallyRefundedState(): iterable
     {
         yield ['partially_refund', 'partially_refunded'];
         yield ['refund', 'refunded'];

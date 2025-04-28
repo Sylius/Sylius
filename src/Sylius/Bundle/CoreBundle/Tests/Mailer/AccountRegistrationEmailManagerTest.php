@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Mailer;
 
+use PHPUnit\Framework\Attributes\Test;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
@@ -25,7 +26,7 @@ final class AccountRegistrationEmailManagerTest extends KernelTestCase
 {
     use ProphecyTrait;
 
-    /** @test */
+    #[Test]
     public function it_sends_account_registration_email(): void
     {
         $container = self::getContainer();

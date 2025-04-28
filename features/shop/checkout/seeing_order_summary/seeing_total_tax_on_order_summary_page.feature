@@ -1,7 +1,7 @@
 @checkout
 Feature: Seeing tax total on order summary page
     In order to be certain about tax total
-    As a Customer
+    As a Visitor
     I want to be able to see tax total on the order summary page
 
     Background:
@@ -11,12 +11,14 @@ Feature: Seeing tax total on order summary page
         And it belongs to "Clothes" tax category
         And the store ships everywhere for Free
         And the store allows paying Offline
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing the total tax on order summary page
-        Given I have product "The Sorting Hat" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        Given I added product "The Sorting Hat" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my tax total should be "$23.00"

@@ -30,7 +30,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private readonly SummaryPageInterface $summaryPage,
+        protected readonly SummaryPageInterface $summaryPage,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -52,8 +52,19 @@ class ShowPage extends ShopPage implements ShowPageInterface
         $this->getElement('quantity')->setValue($quantity);
         $this->waitForElementUpdate('add_to_cart_component');
 
-        $this->getElement('add_to_cart_button')->click();
+        $buttonElement = $this->getElement('add_to_cart_button');
+        if ($buttonElement->hasAttribute('disabled')) {
+            return;
+        }
+
+        $buttonElement->click();
         $this->waitForElementToBeReady();
+    }
+
+    public function updateQuantity(int $quantity): void
+    {
+        $this->getElement('quantity')->setValue((string) $quantity);
+        $this->waitForElementUpdate('add_to_cart_component');
     }
 
     public function addToCartWithVariant(string $variant): void
@@ -194,6 +205,11 @@ class ShowPage extends ShopPage implements ShowPageInterface
         return $this->getElement('add_to_cart_button') !== null && false === $this->getElement('add_to_cart_button')->hasAttribute('disabled');
     }
 
+    public function hasAddToCartButtonEnabled(): bool
+    {
+        return $this->getElement('add_to_cart_button')->hasAttribute('disabled') === false;
+    }
+
     public function hasAssociation(string $productAssociationName): bool
     {
         try {
@@ -245,10 +261,14 @@ class ShowPage extends ShopPage implements ShowPageInterface
 
         $imageUrl = $this->getElement('main_image', ['%type%' => $type])->getAttribute('src');
         $this->getDriver()->visit($imageUrl);
-        $pageText = $this->getDocument()->getText();
+
+        if (stripos($this->getDocument()->getText(), '404 Not Found')) {
+            throw new UnexpectedPageException(sprintf('Image not found at "%s"', $imageUrl));
+        }
+
         $this->getDriver()->back();
 
-        return false === stripos($pageText, '404 Not Found');
+        return true;
     }
 
     public function getFirstThumbnailsImageType(): string
@@ -382,10 +402,10 @@ class ShowPage extends ShopPage implements ShowPageInterface
         ]);
     }
 
-    private function waitForElementToBeReady(): void
+    protected function waitForElementToBeReady(): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->waitFor(1, fn (): bool => $this->summaryPage->isOpen());
+            $this->getDocument()->waitFor(2, fn (): bool => $this->summaryPage->isOpen());
         }
     }
 
@@ -399,7 +419,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters): NodeElement
+    protected function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

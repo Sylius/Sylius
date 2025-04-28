@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
@@ -57,6 +58,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function deleteAddress(string $fullName): void
     {
         $this->getElement('delete_button', ['%full_name%' => $fullName])->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function setAsDefault(string $fullName): void

@@ -12,41 +12,47 @@ Feature: Receiving discount based on total of items from specific taxon
         And the store has a product "PHP Mug" priced at "$20.00"
         And it belongs to "Mugs"
         And there is a promotion "T-Shirts promotion"
+        And I am a logged in customer
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving discount on order while buying product from promoted taxon which fits price criteria
         Given the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
-        When I add product "PHP T-Shirt" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving no discount on order while buying product from different than promoted taxon
         Given the promotion gives "$10.00" off if order contains products classified as "T-Shirts" with a minimum value of "$15.00"
-        When I add product "PHP Mug" to the cart
+        And I added product "PHP Mug" to the cart
+        When I check the details of my cart
         Then my cart total should be "$20.00"
         And there should be no discount applied
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving no discount on order while buying product from promoted taxon which not fits price criteria
         Given the promotion gives "$20.00" off if order contains products classified as "Mugs" with a minimum value of "$50.00"
-        When I add product "PHP Mug" to the cart
+        And I added product "PHP Mug" to the cart
+        When I check the details of my cart
         Then my cart total should be "$20.00"
         And there should be no discount applied
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving discount on order while buying multiple products from promoted taxon which fit price criteria
         Given the promotion gives "$20.00" off if order contains products classified as "Mugs" with a minimum value of "$50.00"
-        When I add 3 products "PHP Mug" to the cart
+        And I added 3 products "PHP Mug" to the cart
+        When I check the details of my cart
         Then my cart total should be "$40.00"
         And my discount should be "-$20.00"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving discount on order while buying products from both of promoted taxons which fits price criteria
         Given the promotion gives "$10.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
         And there is a promotion "Mugs promotion"
         And the promotion gives "$5.00" off if order contains products classified as "Mugs" with a minimum value of "$30.00"
-        When I add product "PHP T-Shirt" to the cart
-        And I add 2 products "PHP Mug" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        And I added 2 products "PHP Mug" to the cart
+        When I check the details of my cart
         Then my cart total should be "$125.00"
         And my discount should be "-$15.00"

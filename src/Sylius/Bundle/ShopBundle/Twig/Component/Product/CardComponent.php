@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
@@ -30,6 +31,8 @@ use Symfony\UX\TwigComponent\Attribute\PostMount;
 #[AsTwigComponent]
 class CardComponent
 {
+    use HookableComponentTrait;
+
     #[ExposeInTemplate(name: 'product')]
     public ?ProductInterface $product = null;
 

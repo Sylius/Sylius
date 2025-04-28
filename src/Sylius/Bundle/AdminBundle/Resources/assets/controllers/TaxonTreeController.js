@@ -42,11 +42,15 @@ export default class extends Controller {
         const { depth, open, path, total } = state;
         const more = node.hasChildren();
         const nodeMargin = 20;
+        const rtl = document.querySelector('[dir="rtl"]');
 
         let itemPrototyp = this.itemPrototypTarget.firstElementChild.cloneNode(true);
         let togglerPrototyp = itemPrototyp.querySelector('[data-infinite-tree-toggler]');
 
-        itemPrototyp.style.marginLeft = `${(depth * nodeMargin)}px`;
+        rtl ?
+            itemPrototyp.style.marginRight = `${(depth * nodeMargin)}px` :
+            itemPrototyp.style.marginLeft = `${(depth * nodeMargin)}px`;
+
         itemPrototyp.setAttribute('data-id', id);
         itemPrototyp.setAttribute('data-expanded', more && open);
         itemPrototyp.setAttribute('data-depth', depth);

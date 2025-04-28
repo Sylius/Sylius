@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Tests\ApiPlatform\Routing;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -42,13 +43,13 @@ final class ApiLoaderTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_implements_the_loader_interface(): void
     {
         $this->assertInstanceOf(LoaderInterface::class, $this->apiLoader);
     }
 
-    /** @test */
+    #[Test]
     public function it_removes_routes_from_route_collection_loaded_by_base_api_loader(): void
     {
         $routeCollection = $this->prophesize(RouteCollection::class);
@@ -65,7 +66,7 @@ final class ApiLoaderTest extends TestCase
         $this->assertSame($routeCollection->reveal(), $this->apiLoader->load('.', 'api_platform'));
     }
 
-    /** @test */
+    #[Test]
     public function it_uses_base_api_loader_for_supports_method(): void
     {
         $this->baseApiLoader->supports('.', 'api_platform')->willReturn(true);
@@ -73,7 +74,7 @@ final class ApiLoaderTest extends TestCase
         $this->assertTrue($this->apiLoader->supports('.', 'api_platform'));
     }
 
-    /** @test */
+    #[Test]
     public function it_uses_base_api_loader_to_get_resolver(): void
     {
         $loaderResolver = $this->prophesize(LoaderResolverInterface::class);
@@ -83,7 +84,7 @@ final class ApiLoaderTest extends TestCase
         $this->assertSame($loaderResolver->reveal(), $this->apiLoader->getResolver());
     }
 
-    /** @test */
+    #[Test]
     public function it_uses_base_api_loader_to_set_resolver(): void
     {
         $loaderResolver = $this->prophesize(LoaderResolverInterface::class);

@@ -14,16 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Sylius\Behat\Service\Factory\AddressFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
-use Sylius\Component\Core\Factory\AddressFactoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final readonly class AddressContext implements Context
 {
-    /** @param AddressFactoryInterface<AddressInterface> $addressFactory */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private MessageBusInterface $commandBus,
@@ -32,52 +33,120 @@ final readonly class AddressContext implements Context
     ) {
     }
 
-    /**
-     * @Given I addressed the cart
-     * @Given I addressed it
-     * @Given I have addressed the cart to :countryName
-     */
-    public function iAddressedTheCart(?string $countryName = null): void
+    #[Given('I addressed the cart')]
+    #[Given('the customer addressed the cart')]
+    public function iAddressedTheCart(): void
     {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
-        $countryCode = $countryName !== null ? $this->countryNameConverter->convertToCode($countryName) : null;
-
-        $countryCode ?
-            $address = $this->addressFactory->createDefaultWithCountryCode($countryCode) :
-            $address = $this->addressFactory->createDefault();
-
-        $command = new UpdateCart(orderTokenValue: $cartToken, email: null, billingAddress: $address);
-        $this->commandBus->dispatch($command);
+        $this->addressCart();
     }
 
-    /**
-     * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
+    #[Given('I addressed the cart with :provinceName province')]
+    public function iAddressedTheCartWithProvince(string $provinceName): void
+    {
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithProvinceName($provinceName),
+        );
+    }
+
+    #[Given('/^I addressed the cart with "([^"]+)" as the billing address$/')]
+    public function iAddressedTheCartWithBillingAddress(
+        string $billingFullName,
+    ): void {
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $billingFullName)),
+        );
+    }
+
+    #[Given('/^I addressed the cart with "([^"]+)" as the shipping address$/')]
+    public function iAddressedTheCartWithShippingAddress(
+        string $shippingFullName,
+    ): void {
+        $this->addressCart(
+            shippingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $shippingFullName)),
+        );
+    }
+
+    #[Given('/^I addressed the cart with "([^"]+)" as the billing address and "([^"]+)" as the shipping address$/')]
+    public function iAddressedTheCartWithBillingAndShippingAddress(
+        string $billingFullName,
+        string $shippingFullName,
+    ): void {
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $billingFullName)),
+            shippingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $shippingFullName)),
+        );
+    }
+
+    #[Given('/^I addressed the cart with email "([^"]+)"$/')]
+    #[Given('/^the (?:customer|visitor) addressed the cart with email "([^"]+)"$/')]
+    public function iAddressedTheCartWithEmail(string $email): void
+    {
+        $this->addressCart(email: $email);
+    }
+
+    #[Given('I addressed the cart to :countryName')]
+    public function iAddressedTheCartToCountry(string $countryName): void
+    {
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithCountryCode(
+                $this->countryNameConverter->convertToCode($countryName),
+            ),
+        );
+    }
+
+    #[Given('/^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
     public function iHaveSpecifiedDefaultBillingAddressForName(): void
     {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
-        $command = new UpdateCart(
-            orderTokenValue: $cartToken,
-            email: null,
-            billingAddress: $this->getDefaultAddress(),
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithCountryCode('US'),
         );
-        $this->commandBus->dispatch($command);
     }
 
-    private function getDefaultAddress(): AddressInterface
-    {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
+    public function addressCart(
+        ?string $cartToken = null,
+        ?string $email = null,
+        ?AddressInterface $billingAddress = null,
+        ?AddressInterface $shippingAddress = null,
+    ): void {
+        if ($email === null && $this->sharedStorage->has('user')) {
+            $email = $this->sharedStorage->get('user')->getEmail();
+        }
 
-        $address->setCity('New York');
-        $address->setStreet('Wall Street');
-        $address->setPostcode('00-001');
-        $address->setCountryCode('US');
-        $address->setFirstName('Richy');
-        $address->setLastName('Rich');
+        $billingAddress = $billingAddress ?? $shippingAddress ?? $this->addressFactory->createDefault();
+        $shippingAddress = $shippingAddress ?? $billingAddress ?? $this->addressFactory->createDefault();
 
-        return $address;
+        $this->commandBus->dispatch(new UpdateCart(
+            orderTokenValue: $cartToken ?? $this->sharedStorage->get('cart_token'),
+            email: $email,
+            billingAddress: $billingAddress,
+            shippingAddress: $shippingAddress,
+        ));
+
+        $this->storeAddresses($billingAddress, $shippingAddress);
+    }
+
+    private function storeAddresses(
+        ?AddressInterface $billingAddress = null,
+        ?AddressInterface $shippingAddress = null,
+    ): void {
+        if ($billingAddress === null && $shippingAddress !== null) {
+            $billingAddress = clone $shippingAddress;
+        }
+
+        if ($shippingAddress === null && $billingAddress !== null) {
+            $shippingAddress = clone $billingAddress;
+        }
+
+        $billingKey = sprintf(
+            'billing_address_%s',
+            StringInflector::nameToLowercaseCode($billingAddress->getFirstName() . ' ' . $billingAddress->getLastName()),
+        );
+        $this->sharedStorage->set($billingKey, $billingAddress);
+
+        $shippingKey = sprintf(
+            'shipping_address_%s',
+            StringInflector::nameToLowercaseCode($shippingAddress->getFirstName() . ' ' . $shippingAddress->getLastName()),
+        );
+        $this->sharedStorage->set($shippingKey, $shippingAddress);
     }
 }

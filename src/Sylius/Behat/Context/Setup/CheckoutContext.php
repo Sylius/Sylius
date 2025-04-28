@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Sylius\Behat\Context\Setup\Checkout\PaymentContext;
+use Sylius\Behat\Context\Setup\Checkout\ShippingContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
@@ -45,7 +48,18 @@ final readonly class CheckoutContext implements Context
         private MessageBusInterface $commandBus,
         private FactoryInterface $addressFactory,
         private SharedStorageInterface $sharedStorage,
+        private ShippingContext $checkoutShippingContext,
+        private PaymentContext $checkoutPaymentContext,
     ) {
+    }
+
+    #[Given('I chose :shippingMethod shipping method and :paymentMethod payment method')]
+    public function iProceedOrderWithShippingMethodAndPayment(
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod,
+    ): void {
+        $this->checkoutShippingContext->chooseShippingMethod($shippingMethod);
+        $this->checkoutPaymentContext->choosePaymentMethod($paymentMethod);
     }
 
     /**
@@ -54,6 +68,7 @@ final readonly class CheckoutContext implements Context
     public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
+        $this->sharedStorage->set('locale_code', $localeCode);
 
         /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
@@ -90,22 +105,6 @@ final readonly class CheckoutContext implements Context
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
-    }
-
-    /**
-     * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment method
-     */
-    public function iHaveProceededWithSelectingPaymentMethod(
-        ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod,
-    ): void {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
-        /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
-        Assert::notNull($cart);
-
-        $this->completeCheckout($cart, $shippingMethod, $paymentMethod);
     }
 
     private function getDefaultAddress(): AddressInterface

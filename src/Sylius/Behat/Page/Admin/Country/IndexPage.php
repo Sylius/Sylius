@@ -28,7 +28,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $this->checkCountryStatus($country, 'enabled');
     }
 
-    private function checkCountryStatus(CountryInterface $country, string $status): bool
+    protected function checkCountryStatus(CountryInterface $country, string $status): bool
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

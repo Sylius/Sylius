@@ -16,10 +16,10 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use PhpSpec\ObjectBehavior;
 use spec\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
-use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
+use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
@@ -27,7 +27,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     use MessageHandlerAttributeTrait;
 
     function let(
-        OrderItemRepository $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         OrderModifierInterface $orderModifier,
         ProductVariantResolverInterface $variantResolver,
     ): void {
@@ -39,7 +39,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     }
 
     function it_removes_order_item_from_cart(
-        OrderItemRepository $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderInterface $cart,
         OrderItemInterface $cartItem,
@@ -59,7 +59,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_order_item_was_not_found(
-        OrderItemRepository $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         OrderItemInterface $cartItem,
     ): void {
         $orderItemRepository->findOneByIdAndCartTokenValue(
@@ -79,7 +79,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_cart_token_value_was_not_properly(
-        OrderItemRepository $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderItemInterface $cartItem,
         OrderInterface $cart,

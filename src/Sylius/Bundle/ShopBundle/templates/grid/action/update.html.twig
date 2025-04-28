@@ -1,0 +1,6 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('update')), options.link.parameters|default({'id': data.id}))) %}
+{% set label = action.label|default('sylius.ui.edit') %}
+
+{{ buttons.default(path, label, 'update', null, 'btn-sm btn-outline-gray') }}

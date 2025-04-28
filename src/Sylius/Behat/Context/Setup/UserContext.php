@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -25,6 +26,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final readonly class UserContext implements Context
 {
+    use SecurePasswordTrait;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private UserRepositoryInterface $userRepository,
@@ -43,7 +46,7 @@ final readonly class UserContext implements Context
     public function thereIsUserIdentifiedBy(string $email, string $password = 'sylius'): void
     {
         /** @var ShopUserInterface $user */
-        $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
+        $user = $this->userFactory->create(['email' => $email, 'password' => $this->replaceWithSecurePassword($password), 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
 
@@ -57,7 +60,7 @@ final readonly class UserContext implements Context
     public function theCustomerCreatedAccountWithPassword(string $email, string $password = 'sylius'): void
     {
         /** @var ShopUserInterface $user */
-        $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
+        $user = $this->userFactory->create(['email' => $email, 'password' => $this->replaceWithSecurePassword($password), 'enabled' => true]);
 
         $user->setCustomer($this->sharedStorage->get('customer'));
         $this->sharedStorage->set('user', $user);
@@ -182,9 +185,11 @@ final readonly class UserContext implements Context
      */
     public function iveChangedMyPasswordFromTo(UserInterface $user, string $currentPassword, string $newPassword): void
     {
+        $currentPassword = $this->retrieveSecurePassword($currentPassword);
+
         $changeShopUserPassword = new ChangeShopUserPassword(
-            newPassword: $newPassword,
-            confirmNewPassword: $newPassword,
+            newPassword: $this->replaceWithSecurePassword($newPassword),
+            confirmNewPassword: $this->confirmSecurePassword($newPassword),
             currentPassword: $currentPassword,
             shopUserId: $user->getId(),
         );

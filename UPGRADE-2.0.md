@@ -1,3 +1,25 @@
+# UPGRADE FROM `2.0.5` TO `2.0.6`
+
+### Behat
+
+1. The context classes have been refactored. All `UI` occurrences of the following step definitions have been removed:
+
+- `@When I save my changes`
+- `@When I try to save my changes`
+
+These have been replaced by the new common context class: `Sylius\Behat\Context\Ui\SaveContext`
+identified by the id `sylius.behat.context.ui.save`.
+
+If you use any of the removed methods, please update your suite configuration to include the new context class:
+```
+your_behat_profile:
+    suites:
+        your_suite_name:
+            contexts:
+                - ...
++               - sylius.behat.context.ui.save
+```
+
 # UPGRADE FROM `2.0.2` TO `2.0.3`
 
 1. New `left` and `right` sections have been added to the following Twig hooks to improve customization:

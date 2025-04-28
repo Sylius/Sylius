@@ -35,11 +35,11 @@
         "laminas/laminas-stdlib": "^3.19",
         "sylius/grid-bundle": "^1.13",
         "sylius/twig-extra": "^0.6",
-        "symfony/config": "^6.4 || ^7.1",
-        "symfony/expression-language": "^6.4 || ^7.1",
-        "symfony/framework-bundle": "^6.4.1 || ^7.1",
-        "symfony/security-core": "^6.4 || ^7.1",
-        "symfony/security-bundle": "^6.4 || ^7.1",
+        "symfony/config": "^6.4 || ^7.2",
+        "symfony/expression-language": "^6.4 || ^7.2",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2",
+        "symfony/security-core": "^6.4 || ^7.2",
+        "symfony/security-bundle": "^6.4 || ^7.2",
         "symfony/ux-icons": "^2.20",
         "symfony/ux-live-component": "^2.20",
         "symfony/ux-twig-component": "^2.20",
@@ -49,9 +49,9 @@
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.5",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1",
-        "symfony/form": "^6.4.1 || ^7.1",
+        "phpunit/phpunit": "^10.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2",
+        "symfony/form": "^6.4.1 || ^7.2",
         "twig/twig": "^3.14"
     },
     "config": {
@@ -65,7 +65,7 @@
         },
         "symfony": {
             "allow-contrib": false,
-            "require": "^7.1"
+            "require": "^7.2"
         }
     },
     "autoload": {

@@ -16,8 +16,9 @@ namespace Sylius\Behat\Page\Admin\Order;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -27,7 +28,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private readonly TableAccessorInterface $tableAccessor,
+        protected readonly TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -149,7 +150,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isProductInTheList(string $productName): bool
     {
-        return null !== $this->getRowWithItem($productName);
+        return $this->hasElement('item', ['%name%' => $productName]);
     }
 
     public function getItemsTotal(): string
@@ -340,6 +341,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getOrderCurrency(): string
     {
+        DriverHelper::waitForPageToLoad($this->getSession());
+
         return $this->getElement('currency')->getText();
     }
 
@@ -439,7 +442,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ;
     }
 
-    protected function getRowWithItem(string $itemName): ?NodeElement
+    protected function getRowWithItem(string $itemName): NodeElement
     {
         return $this->getElement('item', ['%name%' => $itemName]);
     }

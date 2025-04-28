@@ -48,9 +48,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /** @throws ElementNotFoundException */
-    private function getFieldElement(string $element): ?NodeElement
+    protected function getFieldElement(string $element, array $parameters = []): NodeElement
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }

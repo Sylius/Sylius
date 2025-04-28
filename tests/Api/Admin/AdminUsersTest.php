@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -23,7 +24,7 @@ final class AdminUsersTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_allows_admin_users_to_log_in(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -43,7 +44,7 @@ final class AdminUsersTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/admin_user/log_in_admin_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_administrators(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
@@ -58,7 +59,7 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
@@ -76,7 +77,7 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_administrator(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -104,7 +105,7 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
@@ -135,7 +136,7 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
@@ -153,7 +154,7 @@ final class AdminUsersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_sends_administrator_password_reset_email(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -171,7 +172,7 @@ final class AdminUsersTest extends JsonApiTestCase
         $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
     }
 
-    /** @test */
+    #[Test]
     public function it_resets_administrator_password(): void
     {
         $loadedData = $this->loadFixturesFromFile('authentication/api_administrator.yaml');

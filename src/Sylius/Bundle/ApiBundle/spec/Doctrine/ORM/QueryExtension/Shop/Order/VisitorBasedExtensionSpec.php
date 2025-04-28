@@ -82,7 +82,9 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
         Expr $expr,
-        Expr\Func $exprFunc,
+        Expr\Comparison $exprEq,
+        Expr\Andx $exprAndx,
+        Expr\Orx $exprOrx,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
         $userContext->getUser()->willReturn(null);
@@ -95,14 +97,14 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         $queryBuilder->leftJoin('o.customer', 'customer')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->leftJoin('customer.user', 'user')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->expr()->willReturn($expr);
-        $expr->isNull('user')->willReturn($exprFunc);
-        $expr->isNull('o.customer')->willReturn($exprFunc);
-        $expr->isNotNull('user')->willReturn($exprFunc);
-        $expr->eq('o.createdByGuest', ':createdByGuest')->willReturn($exprFunc);
-        $expr->andX($exprFunc, $exprFunc)->willReturn($exprFunc);
-        $expr->orX($exprFunc, $exprFunc, $exprFunc)->willReturn($exprFunc);
+        $expr->isNull('user')->willReturn('user IS NULL');
+        $expr->isNull('o.customer')->willReturn('o.customer IS NULL');
+        $expr->isNotNull('user')->willReturn('user IS NOT NULL');
+        $expr->eq('o.createdByGuest', ':createdByGuest')->willReturn($exprEq);
+        $expr->andX('user IS NOT NULL', $exprEq)->willReturn($exprAndx);
+        $expr->orX('user IS NULL', 'o.customer IS NULL', $exprAndx)->willReturn($exprOrx);
 
-        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere($exprOrx)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('createdByGuest', true)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());

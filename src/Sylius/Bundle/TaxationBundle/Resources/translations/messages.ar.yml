@@ -4,11 +4,13 @@
 sylius:
     form:
         tax_category:
-            name: الاسم
             description: الوصف
-        tax_rate:
-            category: القسم
             name: الاسم
-            amount: القيمة
-            included_in_price: مشمول السعر؟
-            calculator: الحاسبة
+        tax_rate:
+            amount: المبلغ
+            calculator: الآلة الحاسبة
+            category: الفئة
+            end_date: تاريخ الانتهاء
+            included_in_price: مشمول في السعر؟
+            name: الاسم
+            start_date: تاريخ البدء

@@ -293,15 +293,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I generate it
      * @When I try to generate it
      */

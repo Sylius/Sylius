@@ -10,103 +10,106 @@ Feature: Allowing access only for correctly logged in users
         And the store allows paying Offline
         And the store has "UPS" shipping method with "$20.00" fee
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to the cart by the visitor
-        When the visitor adds "Stark T-Shirt" product to the cart
-        Then the visitor can see "Stark T-Shirt" product in the cart
+        Given the visitor added product "Stark T-Shirt" to the cart
+        When the visitor checks the details of their cart
+        Then the visitor should see "Stark T-Shirt" product in the cart
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to add address to the cart by the visitor
-        Given the visitor has product "Stark T-Shirt" in the cart
-        When the visitor specify the email as "jon.snow@example.com"
-        And the visitor specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        Given the visitor added product "Stark T-Shirt" to the cart
+        When the visitor specify the billing address
+        And the visitor specify the email as "guest@example.com"
         And the visitor completes the addressing step
         Then the visitor should have checkout address step completed
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to add shipping method to the cart by the visitor
-        Given the visitor has product "Stark T-Shirt" in the cart
-        And the visitor has specified the email as "jon.snow@example.com"
-        And the visitor has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And the visitor has completed the addressing step
-        When the visitor proceed with "UPS" shipping method
+        Given the visitor added product "Stark T-Shirt" to the cart
+        When the visitor specify the email as "guest@example.com"
+        And the visitor specify the billing address
+        And the visitor completes the addressing step
+        And the visitor proceeds with "UPS" shipping method
         Then the visitor should have checkout shipping method step completed
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to add payment method to the cart by the visitor
-        Given the visitor has product "Stark T-Shirt" in the cart
-        And the visitor has specified the email as "jon.snow@example.com"
-        And the visitor has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And the visitor has completed the addressing step
-        And the visitor has proceeded "UPS" shipping method
-        When the visitor proceed with "Offline" payment
+        Given the visitor added product "Stark T-Shirt" to the cart
+        When the visitor specify the email as "guest@example.com"
+        And the visitor specify the billing address
+        And the visitor completes the addressing step
+        And the visitor proceeds with "UPS" shipping method
+        And the visitor proceeds with "Offline" payment method
         Then the visitor should have checkout payment step completed
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to complete the cart by the visitor
-        Given the visitor has product "Stark T-Shirt" in the cart
-        And the visitor has specified the email as "jon.snow@example.com"
-        And the visitor has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And the visitor has completed the addressing step
-        And the visitor has proceeded "UPS" shipping method
-        And the visitor has proceeded "Offline" payment
+        Given the visitor added product "Stark T-Shirt" to the cart
+        And the visitor addressed the cart with email "guest@example.com"
+        And the visitor chose "UPS" shipping method
+        And the visitor chose "Offline" payment method
         When the visitor confirm his order
         Then the visitor should see the thank you page
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to increase quantity of an item in the cart by the visitor
-        Given the visitor has product "Stark T-Shirt" in the cart
-        When the visitor change product "Stark T-Shirt" quantity to 2 in his cart
+        Given the visitor added product "Stark T-Shirt" to the cart
+        And the visitor changed this product quantity to 2 in their cart
+        When the visitor checks the details of their cart
         Then the visitor should see product "Stark T-Shirt" with quantity 2 in his cart
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to the cart by the logged in customer
         Given the customer logged in
-        When the customer adds "Stark T-Shirt" product to the cart
-        Then the customer can see "Stark T-Shirt" product in the cart
+        And the customer added product "Stark T-Shirt" to the cart
+        When the customer checks the details of their cart
+        Then the customer should see "Stark T-Shirt" product in the cart
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to add address to the cart by the customer
         Given the customer logged in
-        And the customer has product "Stark T-Shirt" in the cart
-        When the customer specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And the customer completes the addressing step
+        And the customer added product "Stark T-Shirt" to the cart
+        When the customer specify the billing address
+        And the visitor completes the addressing step
         Then the customer should have checkout address step completed
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to add shipping method to the cart by the customer
         Given the customer logged in
-        And the customer has product "Stark T-Shirt" in the cart
-        And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And the customer has completed the addressing step
-        When the customer proceed with "UPS" shipping method
+        And the customer added product "Stark T-Shirt" to the cart
+        And the customer addressed the cart
+        When the customer proceeds with "UPS" shipping method
         Then the customer should have checkout shipping method step completed
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to add payment method to the cart by the customer
         Given the customer logged in
         And the customer has product "Stark T-Shirt" in the cart
-        And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And the customer has completed the addressing step
-        And the customer has proceeded "UPS" shipping method
-        When the customer proceed with "Offline" payment
+        And the customer addressed the cart
+        And the customer chose "UPS" shipping method
+        When the customer is at the checkout payment step
+        And the customer proceeds with "Offline" payment method
         Then the customer should have checkout payment step completed
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to complete the cart by the customer
         Given the customer logged in
         And the customer has product "Stark T-Shirt" in the cart
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
-        And the customer has proceeded "UPS" shipping method
-        And the customer has proceeded "Offline" payment
+        And the customer proceeds with "UPS" shipping method
+        And the customer proceeds with "Offline" payment method
         When the customer confirm his order
         Then the customer should see the thank you page
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Accessing to increase quantity of an item in the cart by the customer
-        Given the customer has product "Stark T-Shirt" in the cart
-        When the customer change product "Stark T-Shirt" quantity to 2 in his cart
+        Given the customer logged in
+        Given the customer added product "Stark T-Shirt" to the cart
+        When the customer checks the details of their cart
+        When I check the details of my cart
+        And the customer change product "Stark T-Shirt" quantity to 2 in his cart
         Then the customer should see product "Stark T-Shirt" with quantity 2 in his cart
 
     @api @no-ui
@@ -142,6 +145,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
         And the customer logged out
+        When the visitor proceeds with "UPS" shipping method
         Then the visitor has no access to proceed with "UPS" shipping method in the customer cart
 
     @api @no-ui
@@ -150,8 +154,9 @@ Feature: Allowing access only for correctly logged in users
         And the customer has product "Stark T-Shirt" in the cart
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
-        And the customer has proceeded "UPS" shipping method
+        And the customer proceeds with "UPS" shipping method
         And the customer logged out
+        When the customer tries to check the details of their cart
         Then the visitor has no access to proceed with "Offline" payment in the customer cart
 
     @api @no-ui
@@ -160,9 +165,10 @@ Feature: Allowing access only for correctly logged in users
         And the customer has product "Stark T-Shirt" in the cart
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
-        And the customer has proceeded "UPS" shipping method
-        And the customer has proceeded "Offline" payment
+        And the customer proceeds with "UPS" shipping method
+        And the customer proceeds with "Offline" payment method
         And the customer logged out
+        When the customer tries to check the details of their cart
         Then the visitor has no access to confirm the customer order
 
     @api @no-ui
@@ -170,4 +176,5 @@ Feature: Allowing access only for correctly logged in users
         Given the customer logged in
         And the customer has product "Stark T-Shirt" in the cart
         And the customer logged out
+        When the customer tries to check the details of their cart
         Then the visitor has no access to change product "Stark T-Shirt" quantity to 2 in the customer cart

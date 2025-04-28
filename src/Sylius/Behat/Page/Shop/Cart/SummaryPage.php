@@ -251,7 +251,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
         ]);
     }
 
-    private function waitForComponentsUpdate(): void
+    protected function waitForComponentsUpdate(): void
     {
         $this->waitForElementUpdate('form');
 

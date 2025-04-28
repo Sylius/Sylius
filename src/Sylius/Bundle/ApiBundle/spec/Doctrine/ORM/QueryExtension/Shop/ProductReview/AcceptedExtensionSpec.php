@@ -70,7 +70,7 @@ final class AcceptedExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->andWhere('o.status = :status')->willReturn($queryBuilder);
-        $queryBuilder->setParameter('status', ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
+        $queryBuilder->setParameter('status', ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductReview::class);
     }

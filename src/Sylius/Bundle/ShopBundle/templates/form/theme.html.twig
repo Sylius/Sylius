@@ -18,11 +18,23 @@
 
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
-        {%- for error in errors -%}
-            <div data-test-validation-error class="invalid-feedback d-block {% if form.parent is not empty %}pointing {% else %}mb-3 {% endif %}" {{ sylius_test_html_attribute('validation-error') }}>
-                {{ error.message }}
+        {% if form is rootform %}
+            <div class="alert alert-danger" role="alert" {{ sylius_test_html_attribute('form-errors') }}>
+                <div class="d-flex">
+                    {%- for error in errors -%}
+                        <div class="invalid-feedback d-block" {{ sylius_test_html_attribute('validation-error') }}>
+                            {{ error.message }}
+                        </div>
+                    {%- endfor -%}
+                </div>
             </div>
-        {%- endfor -%}
+        {% else %}
+            {%- for error in errors -%}
+                <div class="invalid-feedback d-block" {{ sylius_test_html_attribute('validation-error') }}>
+                    {{ error.message }}
+                </div>
+            {%- endfor -%}
+        {% endif %}
     {%- endif -%}
 {%- endblock form_errors -%}
 

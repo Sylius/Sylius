@@ -100,7 +100,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         Expr $expr,
-        Expr\Func $exprEq,
+        Expr\Comparison $exprComparison,
     ): void {
         $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
@@ -110,8 +110,8 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         $queryNameGenerator->generateParameterName('customer')->willReturn('customer');
 
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('o.customer', ':customer')->willReturn($exprEq);
-        $queryBuilder->andWhere($exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $expr->eq('o.customer', ':customer')->willReturn($exprComparison);
+        $queryBuilder->andWhere($exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
@@ -180,7 +180,7 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         Expr $expr,
-        Expr\Func $exprEq,
+        Expr\Comparison $exprComparison,
     ): void {
         $user->getCustomer()->willReturn($customer);
         $sectionProvider->getSection()->willReturn($section);
@@ -190,8 +190,8 @@ final class ShopUserBasedExtensionSpec extends ObjectBehavior
         $queryNameGenerator->generateParameterName('customer')->willReturn('customer');
 
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('o.customer', ':customer')->willReturn($exprEq);
-        $queryBuilder->andWhere($exprEq)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $expr->eq('o.customer', ':customer')->willReturn($exprComparison);
+        $queryBuilder->andWhere($exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, OrderInterface::class, [], new Get());

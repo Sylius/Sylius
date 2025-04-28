@@ -36,7 +36,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $minkParameters,
         RouterInterface $router,
         string $routeName,
-        private AutocompleteHelperInterface $autocompleteHelper,
+        protected AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }

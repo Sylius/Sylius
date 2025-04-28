@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\Test;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
@@ -80,9 +81,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_all_scopes_by_default(): void
     {
         $this->zoneRepository->findBy([])->willReturn([
@@ -94,9 +93,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['All', 'Tax', 'Shipping']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_all_scopes_when_zone_scope_set_to_all(): void
     {
         $this->zoneRepository->findBy([])->willReturn([
@@ -108,9 +105,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['All', 'Tax', 'Shipping'], ['zone_scope' => AddressingScope::ALL]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_tax_scopes_when_zone_scope_set_to_tax(): void
     {
         $this->zoneRepository->findBy(['scope' => ['tax', AddressingScope::ALL]])->willReturn([
@@ -121,9 +116,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['All', 'Tax'], ['zone_scope' => 'tax']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_shipping_scopes_when_zone_scope_set_to_shipping(): void
     {
         $this->zoneRepository->findBy(['scope' => ['shipping', AddressingScope::ALL]])->willReturn([

@@ -28,7 +28,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
-        private AutocompleteHelperInterface $autocompleteHelper,
+        protected AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }
@@ -64,7 +64,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->waitForFormUpdate();
     }
 
-    private function changeState(string $state, array $parameters): void
+    protected function changeState(string $state, array $parameters): void
     {
         $action = $this->getActionsForResource($parameters)->find('css', sprintf('[data-test-action="%s"]', $state));
         Assert::notNull($action, sprintf('There is no "%s" action available for this resource', $state));

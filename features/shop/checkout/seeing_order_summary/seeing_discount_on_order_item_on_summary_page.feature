@@ -13,9 +13,9 @@ Feature: Seeing a order item discount
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing a discounted price on order item
-        Given I have product "Lannister Coat" in the cart
+        Given I added product "Lannister Coat" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step

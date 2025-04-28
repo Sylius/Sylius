@@ -1,6 +1,6 @@
 @applying_shipping_fee
 Feature: Apply correct shipping fee with product taxes on order
-    In order to pay proper amount for shipping and product taxes
+    In order to pay the proper amount for shipping and product taxes
     As a Customer
     I want to have correct shipping fees and all taxes applied to my order
 
@@ -21,21 +21,22 @@ Feature: Apply correct shipping fee with product taxes on order
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui @javascript
-    Scenario: Proper shipping fee, tax and product tax
-        Given I have product "PHP T-Shirt" in the cart
-        And I addressed the cart
-        And I proceed with selecting "DHL" shipping method
-        And I choose "Offline" payment method
+    @api @ui
+    Scenario: Correct calculation for a US order using DHL shipping
+        Given I added product "PHP T-Shirt" to the cart
+        And I addressed the cart to "United States"
+        And I chose "DHL" shipping method
+        When I check the details of my cart
         Then my cart total should be "$135.30"
         And my cart taxes should be "$25.30"
         And my cart shipping total should be "$12.30"
 
-    @api @ui @javascript
-    Scenario: Proper shipping fee, tax and products' taxes after addressing
+    @api @ui
+    Scenario: Correct calculation for an international order using FedEx shipping after selecting Germany as billing country
         Given I have 3 products "PHP T-Shirt" in the cart
-        When I proceed with selecting "Germany" as billing country
-        And I proceed with "FedEx" shipping method
+        When I addressed the cart to "Germany"
+        And I chose "FedEx" shipping method
+        When I check the details of my cart
         Then my cart total should be "$352.00"
         And my cart taxes should be "$32.00"
         And my cart shipping total should be "$22.00"

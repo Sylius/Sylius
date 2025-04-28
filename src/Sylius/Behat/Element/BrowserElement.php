@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class BrowserElement extends Element implements BrowserElementInterface
+class BrowserElement extends Element implements BrowserElementInterface
 {
     public function goBack(): void
     {

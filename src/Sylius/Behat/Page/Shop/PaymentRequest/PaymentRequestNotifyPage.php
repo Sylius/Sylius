@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\PaymentRequest;
 
 use Behat\Mink\Driver\BrowserKitDriver;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 
 class PaymentRequestNotifyPage extends SymfonyPage implements PaymentRequestNotifyPageInterface

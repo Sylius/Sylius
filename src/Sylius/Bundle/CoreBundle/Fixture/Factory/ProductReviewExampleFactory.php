@@ -17,6 +17,9 @@ use Faker\Factory;
 use Faker\Generator;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductReviewInterface;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -25,17 +28,23 @@ use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ProductReviewInterface> */
 class ProductReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param ReviewFactoryInterface<ReviewInterface> $productReviewFactory
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
-        private ReviewFactoryInterface $productReviewFactory,
-        private ProductRepositoryInterface $productRepository,
-        private CustomerRepositoryInterface $customerRepository,
-        private StateMachineInterface $stateMachine,
+        private readonly ReviewFactoryInterface $productReviewFactory,
+        private readonly ProductRepositoryInterface $productRepository,
+        private readonly CustomerRepositoryInterface $customerRepository,
+        private readonly StateMachineInterface $stateMachine,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -47,7 +56,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var ReviewInterface $productReview */
         $productReview = $this->productReviewFactory->createForSubjectWithReviewer(
             $options['product'],
             $options['author'],
@@ -65,19 +73,9 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('title', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('title', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('rating', fn (Options $options): int => $this->faker->numberBetween(1, 5))
-            ->setDefault('comment', function (Options $options): string {
-                /** @var string $sentences */
-                $sentences = $this->faker->sentences(3, true);
-
-                return $sentences;
-            })
+            ->setDefault('comment', fn (Options $options): string => $this->faker->sentences(3, true))
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setNormalizer('author', LazyOption::getOneBy($this->customerRepository, 'email'))
             ->setDefault('product', LazyOption::randomOne($this->productRepository))

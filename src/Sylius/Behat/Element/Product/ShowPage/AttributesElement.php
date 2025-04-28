@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class AttributesElement extends Element implements AttributesElementInterface
+class AttributesElement extends Element implements AttributesElementInterface
 {
     public function hasAttributeInLocale(string $attribute, string $localeCode, string $value): bool
     {

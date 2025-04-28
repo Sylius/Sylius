@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\SetCatalogPromotionScopeTypesPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTestCase
 {
-    /** @test */
+    #[Test]
     public function it_sets_scope_types_parameter(): void
     {
         $this->setDefinition(
@@ -43,7 +44,7 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_if_there_is_no_type_attribute_defined(): void
     {
         $this->expectException(\InvalidArgumentException::class);

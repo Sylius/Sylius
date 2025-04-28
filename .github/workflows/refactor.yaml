@@ -25,13 +25,13 @@ jobs:
             matrix:
                 include:
                     -
-                        branch: "1.13"
-                        php: "8.1"
-                    -
                         branch: "1.14"
                         php: "8.1"
                     -
                         branch: "2.0"
+                        php: "8.2"
+                    -
+                        branch: "2.1"
                         php: "8.2"
 
         steps:
@@ -63,7 +63,7 @@ jobs:
                     title: '[CS][DX] Refactor'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [refactor.yaml](/Sylius/Sylius/blob/1.12/.github/workflows/refactor.yaml).
+                        For more details see [refactor.yaml](/Sylius/Sylius/blob/2.1/.github/workflows/refactor.yaml).
                     labels: |
                         DX
                         Enhancement

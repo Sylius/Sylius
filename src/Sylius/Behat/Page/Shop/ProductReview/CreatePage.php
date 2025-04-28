@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
 use Sylius\Behat\Page\Shop\Page;
+use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends Page implements CreatePageInterface
@@ -51,6 +52,8 @@ class CreatePage extends Page implements CreatePageInterface
     {
         $this->waitForElementUpdate('add');
         $this->getElement('add')->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function getRateValidationMessage(): string
@@ -85,7 +88,7 @@ class CreatePage extends Page implements CreatePageInterface
         ]);
     }
 
-    private function getValidationMessageFor(string $element): string
+    protected function getValidationMessageFor(string $element): string
     {
         $errorElement = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
         Assert::notNull($errorElement);

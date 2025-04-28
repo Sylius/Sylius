@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<AdminUserInterface> */
 class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
@@ -35,11 +36,11 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
      * @param FactoryInterface<ImageInterface> $avatarImageFactory
      */
     public function __construct(
-        private FactoryInterface $userFactory,
-        private string $localeCode,
-        private FileLocatorInterface $fileLocator,
-        private ImageUploaderInterface $imageUploader,
-        private FactoryInterface $avatarImageFactory,
+        private readonly FactoryInterface $userFactory,
+        private readonly string $localeCode,
+        private readonly FileLocatorInterface $fileLocator,
+        private readonly ImageUploaderInterface $imageUploader,
+        private readonly FactoryInterface $avatarImageFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -95,6 +96,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
+    /** @param array<string, mixed> $options */
     private function createAvatar(AdminUserInterface $adminUser, array $options): void
     {
         $imagePath = $this->fileLocator->locate($options['avatar']);

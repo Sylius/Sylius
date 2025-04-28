@@ -5,6 +5,7 @@ default:
     suites:
         ui_viewing_product_reviews:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 

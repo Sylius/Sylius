@@ -4,11 +4,11 @@
 sylius:
     form:
         user:
-            email: البريد الإلكتروني
-            enabled: تمكين
+            email: بريد إلكتروني
+            enabled: مفعل
             password:
                 label: كلمة المرور
-                confirmation: تأكد
+                confirmation: تأكيد
             remember_me: تذكرني
             shipping_address: عنوان الشحن
             username: اسم المستخدم
@@ -18,7 +18,7 @@ sylius:
         user_change_password:
             confirmation: تأكيد
             current: كلمة المرور الحالية
-            new: كلمة سرّ جديدة
+            new: كلمة المرور الجديدة
         user_reset_password:
             confirmation: تأكيد
-            new: كلمة سرّ جديدة
+            new: كلمة المرور الجديدة

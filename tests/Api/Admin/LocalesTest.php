@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class LocalesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_denies_access_to_a_locales_list_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -32,7 +33,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_locale(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);
@@ -48,7 +49,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/locale/get_locale_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_locales(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);
@@ -61,7 +62,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/locale/get_locales_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_locale(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -83,7 +84,7 @@ final class LocalesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_creating_a_locale_with_invalid_code(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/api_administrator.yaml']);
@@ -105,7 +106,7 @@ final class LocalesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_unused_locale(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);

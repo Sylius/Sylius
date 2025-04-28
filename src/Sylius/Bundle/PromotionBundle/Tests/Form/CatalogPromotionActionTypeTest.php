@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Tests\Form;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType;
 use Sylius\Component\Promotion\Model\CatalogPromotionAction;
 use Symfony\Component\Form\AbstractType;
@@ -26,9 +27,7 @@ use Symfony\Component\Form\Test\FormIntegrationTestCase;
 
 final class CatalogPromotionActionTypeTest extends FormIntegrationTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_allows_to_submit_form_with_wrong_values_without_throwing_an_exception_with_data_collector_enabled(): void
     {
         $this->expectNotToPerformAssertions();

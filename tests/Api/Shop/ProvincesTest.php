@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 
@@ -25,7 +26,7 @@ final class ProvincesTest extends JsonApiTestCase
         $this->setUpDefaultGetHeaders();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_province(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['country.yaml']);

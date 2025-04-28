@@ -16,9 +16,9 @@ namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class FilterElement extends Element implements FilterElementInterface
+class FilterElement extends Element implements FilterElementInterface
 {
-    private const BOOLEAN_FILTER_TRUE = 'Yes';
+    protected const BOOLEAN_FILTER_TRUE = 'Yes';
 
     public function chooseChannel(ChannelInterface $channel): void
     {

@@ -14,14 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
-final class ShippingCategoryContext implements Context
+final readonly class ShippingCategoryContext implements Context
 {
+    /**
+     * @param FactoryInterface<ShippingCategoryInterface> $shippingCategoryFactory
+     * @param RepositoryInterface<ShippingCategoryInterface> $shippingCategoryRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private FactoryInterface $shippingCategoryFactory,
@@ -29,12 +34,12 @@ final class ShippingCategoryContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has :firstShippingCategoryName shipping category
-     * @Given the store has :firstShippingCategoryName and :secondShippingCategoryName shipping category
-     */
-    public function theStoreHasAndShippingCategory($firstShippingCategoryName, $secondShippingCategoryName = null)
-    {
+    #[Given('the store has :firstShippingCategoryName shipping category')]
+    #[Given('the store has :firstShippingCategoryName and :secondShippingCategoryName shipping category')]
+    public function theStoreHasAndShippingCategory(
+        string $firstShippingCategoryName,
+        ?string $secondShippingCategoryName = null,
+    ): void {
         $this->createShippingCategory($firstShippingCategoryName);
         (null === $secondShippingCategoryName) ?: $this->createShippingCategory($secondShippingCategoryName);
     }

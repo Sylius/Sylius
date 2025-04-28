@@ -14,10 +14,10 @@ Feature: Adding a product with selected variant with discounted catalog price to
         And the product "Keyboard" has a "Pink Keyboard" variant priced at "$40.00"
         And there is a catalog promotion "Winter sale" that reduces price by "25%" and applies on "PHP T-Shirt" variant
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Adding multiple product variants with discounted price by catalog promotion catalog to the cart
-        When I add "PHP T-Shirt" variant of product "T-Shirt" to the cart
-        And I add "RGB Keyboard" variant of product "Keyboard" to the cart
-        And I check details of my cart
+        When I added "PHP T-Shirt" variant of product "T-Shirt" to the cart
+        And I added "RGB Keyboard" variant of product "Keyboard" to the cart
+        When I check the details of my cart
         Then I should see "T-Shirt" with unit price "$15.00" in my cart
         And I should see "Keyboard" with unit price "$40.00" in my cart

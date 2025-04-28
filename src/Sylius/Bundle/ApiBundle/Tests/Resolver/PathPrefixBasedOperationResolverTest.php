@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\Resolver;
 
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixes;
 use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;
 use Sylius\Bundle\ApiBundle\Resolver\PathPrefixBasedOperationResolver;
@@ -32,7 +33,7 @@ final class PathPrefixBasedOperationResolverTest extends KernelTestCase
         $this->operationResolver = new PathPrefixBasedOperationResolver($this->resourceMetadataCollectionFactory);
     }
 
-    /** @test */
+    #[Test]
     public function it_provides_shop_operation_if_request_prefix_is_shop(): void
     {
         $operation = $this->operationResolver->resolve(Country::class, PathPrefixes::SHOP_PREFIX, null);
@@ -40,7 +41,7 @@ final class PathPrefixBasedOperationResolverTest extends KernelTestCase
         $this->assertSame('/shop/countries/{code}', $operation->getUriTemplate());
     }
 
-    /** @test */
+    #[Test]
     public function it_provides_admin_operation_if_request_prefix_is_admin(): void
     {
         $operation = $this->operationResolver->resolve(Country::class, PathPrefixes::ADMIN_PREFIX, null);

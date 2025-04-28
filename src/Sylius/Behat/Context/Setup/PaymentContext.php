@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -43,13 +44,11 @@ final readonly class PaymentContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store (also )allows paying (with ):paymentMethodName
-     * @Given the store (also )allows paying with :paymentMethodName at position :position
-     */
+    #[Given('the store (also )allows paying (with ):paymentMethodName')]
+    #[Given('the store (also )allows paying (with ):paymentMethodName at position :position')]
     public function storeAllowsPaying(string $paymentMethodName, ?int $position = null): void
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_' . StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
+        $this->createPaymentMethod($paymentMethodName, StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
     }
 
     /**
@@ -102,9 +101,7 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given /^(this payment method) is not using Payum$/
-     */
+    #[Given('/^(this payment method) is not using Payum$/')]
     public function thisPaymentMethodIsNotUsingPayum(PaymentMethodInterface $paymentMethod): void
     {
         /** @var GatewayConfigInterface $gatewayConfig */

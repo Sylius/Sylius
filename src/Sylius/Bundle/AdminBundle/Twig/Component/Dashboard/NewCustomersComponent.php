@@ -15,10 +15,13 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Dashboard;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class NewCustomersComponent
 {
+    use HookableComponentTrait;
+
     public const DEFAULT_LIMIT = 5;
 
     public int $limit = self::DEFAULT_LIMIT;

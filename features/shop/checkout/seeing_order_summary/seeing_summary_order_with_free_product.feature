@@ -1,7 +1,7 @@
 @checkout
 Feature: Seeing a summary of the order with free product
     In order to be able to buy free products
-    As a Customer
+    As a Visitor
     I want to be able to proceed to the summary page with order containing a free product
 
     Background:
@@ -15,11 +15,12 @@ Feature: Seeing a summary of the order with free product
         And the store allows paying "Offline"
         And there is a promotion "All year promotion"
         And it gives "$5.00" discount to every order
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing Free order
-        When I add "Greyjoy Coat" product to the cart
+        Given I added product "Greyjoy Coat" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
         And I define the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "DHL" shipping method
         Then I should be on the checkout summary step
@@ -27,11 +28,14 @@ Feature: Seeing a summary of the order with free product
         And there should be no discount applied
         And there should be no taxes charged
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing order with both Free and paid products
-        Given I have product "Greyjoy Coat" in the cart
-        And I have product "Lannister Coat" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        Given I added product "Greyjoy Coat" to the cart
+        And I added product "Lannister Coat" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with "DHL" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order total should be "$104.50"

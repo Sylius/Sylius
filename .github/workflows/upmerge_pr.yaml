@@ -56,7 +56,7 @@ jobs:
                     title: '[UPMERGE] ${{ matrix.base_branch }} -> ${{ matrix.target_branch }}'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
+                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/2.1/.github/workflows/upmerge_pr.yaml).
                         
                         **Remember!** The upmerge should always be merged with using `Merge pull request` button.
                         

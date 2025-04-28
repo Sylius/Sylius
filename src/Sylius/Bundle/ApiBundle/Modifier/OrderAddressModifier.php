@@ -39,13 +39,13 @@ final readonly class OrderAddressModifier implements OrderAddressModifierInterfa
         );
 
         $channel = $order->getChannel();
-        Assert::notNull($channel);
+        Assert::notNull($channel, 'Channel is required, but not provided.');
 
         if ($channel->isShippingAddressInCheckoutRequired()) {
-            Assert::notNull($shippingAddress);
+            Assert::notNull($shippingAddress, 'Shipping address is required, but not provided.');
             $billingAddress = $billingAddress ?? clone $shippingAddress;
         } else {
-            Assert::notNull($billingAddress);
+            Assert::notNull($billingAddress, 'Billing address is required, but not provided.');
             $shippingAddress = $shippingAddress ?? clone $billingAddress;
         }
 

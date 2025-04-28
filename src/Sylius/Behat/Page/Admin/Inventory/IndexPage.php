@@ -27,7 +27,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
-        private AutocompleteHelperInterface $autocompleteHelper,
+        protected AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }

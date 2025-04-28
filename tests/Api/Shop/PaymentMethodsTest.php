@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -21,7 +22,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class PaymentMethodsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_payment_methods_available_for_given_payment_and_order(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'payment_method.yaml']);
@@ -58,7 +59,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/payment_method/get_payment_methods_for_cart_and_payment_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_all_enabled_payment_methods(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'payment_method.yaml']);
@@ -73,7 +74,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/payment_method/get_payment_methods_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_payment_method_by_code(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'payment_method.yaml']);
@@ -88,7 +89,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/payment_method/get_payment_method_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_nothing_if_desired_payment_method_is_disabled(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'payment_method.yaml']);

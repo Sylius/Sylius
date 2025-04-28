@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Channel;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class LowestPriceFlagElement extends Element implements LowestPriceFlagElementInterface
+class LowestPriceFlagElement extends Element implements LowestPriceFlagElementInterface
 {
     public function enable(): void
     {

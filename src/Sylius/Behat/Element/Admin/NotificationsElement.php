@@ -17,7 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Sylius\Behat\Service\DriverHelper;
 
-final class NotificationsElement extends Element implements NotificationsElementInterface
+class NotificationsElement extends Element implements NotificationsElementInterface
 {
     public function hasNotification(string $type, string $message): bool
     {

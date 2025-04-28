@@ -11,7 +11,7 @@ Feature: Recalculating product average rating
         And this product has a review titled "Not bad" and rated 3 with a comment "Not bad car" added by customer "specter@teamharvey.com"
         And I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Product's average rating is correctly recalculated after review's rate change
         When I want to modify the "Awesome" product review
         And I choose 5 as its rating

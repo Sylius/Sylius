@@ -5,6 +5,7 @@ default:
     suites:
         ui_viewing_product_in_admin_panel:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -40,6 +41,7 @@ default:
 
                 - sylius.behat.context.ui.admin.managing_product_attributes
                 - sylius.behat.context.ui.admin.product_showpage
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.browsing_product
 
             filters:

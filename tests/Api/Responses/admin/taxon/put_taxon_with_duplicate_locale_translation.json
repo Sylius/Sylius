@@ -1,7 +1,7 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
     "@id": "\/api\/v2\/validation_errors\/@string@",
-    "@type": "ConstraintViolationList",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "translations[en_US].locale: A translation for the \"en_US\" locale code already exists.",
     "status": 422,

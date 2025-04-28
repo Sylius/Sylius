@@ -5,12 +5,13 @@ default:
     suites:
         ui_payment_request_notify:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.address
-                - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method

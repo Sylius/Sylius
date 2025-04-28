@@ -273,6 +273,27 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
+    public function isViolationWithMessageInResponse(Response $response, string $message, ?string $property = null): bool
+    {
+        $violations = $this->getResponseContent($response)['violations'] ?? null;
+
+        if ($violations === null) {
+            throw new \InvalidArgumentException('Response expected to have violations, but it does not.');
+        }
+
+        foreach ($violations as $violation) {
+            if ($violation['message'] === $message && $property === null) {
+                return true;
+            }
+
+            if ($violation['message'] === $message && $property !== null && $violation['propertyPath'] === $property) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function getResponseContentValue(Response $response, string $key)
     {
         $content = json_decode($response->getContent(), true);

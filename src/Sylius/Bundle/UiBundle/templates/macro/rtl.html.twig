@@ -1,0 +1,9 @@
+{% macro default(locale) %}
+    {% set items = ['ar', 'he', 'fa', 'ur', 'ps', 'ku'] %}
+
+    {% for item in items %}
+        {% if locale starts with item %}
+            dir="rtl"
+        {% endif %}
+    {% endfor %}
+{% endmacro %}

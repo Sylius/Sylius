@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
@@ -22,8 +23,13 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
-final class GeographicalContext implements Context
+final readonly class GeographicalContext implements Context
 {
+    /**
+     * @param FactoryInterface<CountryInterface> $countryFactory
+     * @param FactoryInterface<ProvinceInterface> $provinceFactory
+     * @param RepositoryInterface<CountryInterface> $countryRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private FactoryInterface $countryFactory,
@@ -34,12 +40,10 @@ final class GeographicalContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^the store ships to "([^"]+)"$/
-     * @Given /^the store ships to "([^"]+)" and "([^"]+)"$/
-     * @Given /^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
-     */
-    public function storeShipsTo(...$countriesNames)
+    #[Given('/^the store ships to "([^"]+)"$/')]
+    #[Given('/^the store ships to "([^"]+)" and "([^"]+)"$/')]
+    #[Given('/^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/')]
+    public function storeShipsTo(string ...$countriesNames): void
     {
         foreach ($countriesNames as $countryName) {
             $this->countryRepository->add($this->createCountryNamed(trim($countryName)));
@@ -51,7 +55,7 @@ final class GeographicalContext implements Context
      * @Given /^the store operates in "([^"]*)" and "([^"]*)"$/
      * @Given /^the store(?:| also) has country "([^"]*)"$/
      */
-    public function theStoreOperatesIn(...$countriesNames)
+    public function theStoreOperatesIn(string ...$countriesNames): void
     {
         foreach ($countriesNames as $countryName) {
             $country = $this->createCountryNamed(trim($countryName));
@@ -64,7 +68,7 @@ final class GeographicalContext implements Context
     /**
      * @Given /^the store has disabled country "([^"]*)"$/
      */
-    public function theStoreHasDisabledCountry($countryName)
+    public function theStoreHasDisabledCountry(string $countryName): void
     {
         $country = $this->createCountryNamed(trim($countryName));
         $country->disable();
@@ -77,9 +81,8 @@ final class GeographicalContext implements Context
      * @Given /^(this country)(?:| also) has the "([^"]+)" province with "([^"]+)" code$/
      * @Given /^(?:|the )(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
      */
-    public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
+    public function theCountryHasProvinceWithCode(CountryInterface $country, string $name, string $code): void
     {
-        /** @var ProvinceInterface $province */
         $province = $this->provinceFactory->createNew();
 
         $province->setName($name);
@@ -90,14 +93,8 @@ final class GeographicalContext implements Context
         $this->countryManager->flush();
     }
 
-    /**
-     * @param string $name
-     *
-     * @return CountryInterface
-     */
-    private function createCountryNamed($name)
+    private function createCountryNamed(string $name): CountryInterface
     {
-        /** @var CountryInterface $country */
         $country = $this->countryFactory->createNew();
         $country->setCode($this->countryNameConverter->convertToCode($name));
 

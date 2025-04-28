@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\tests\Security\Checker;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -31,7 +32,7 @@ final class EnabledUserCheckerTest extends TestCase
         $this->userChecker = new EnabledUserChecker();
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_a_disabled_exception_if_account_is_disabled(): void
     {
         $this->expectException(DisabledException::class);
@@ -43,7 +44,7 @@ final class EnabledUserCheckerTest extends TestCase
         $this->userChecker->checkPostAuth($user);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_nothing_if_user_is_enabled(): void
     {
         /** @var UserInterface|ObjectProphecy $user */

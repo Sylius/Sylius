@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Installer\Setup;
 
+use PHPUnit\Framework\Attributes\Test;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup;
@@ -59,7 +60,7 @@ final class LocaleSetupTest extends KernelTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_locale_with_a_given_one_if_it_is_different_than_default_one(): void
     {
         $questionHelper = $this->prophesize(QuestionHelper::class);
@@ -83,7 +84,7 @@ final class LocaleSetupTest extends KernelTestCase
         unlink($this->localeParameterFilePath);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_locale_with_existing_locale(): void
     {
         $questionHelper = $this->prophesize(QuestionHelper::class);
@@ -106,7 +107,7 @@ final class LocaleSetupTest extends KernelTestCase
         unlink($this->localeParameterFilePath);
     }
 
-    /** @test */
+    #[Test]
     public function it_shows_message_at_output_when_the_file_does_not_exists_or_path_is_null(): void
     {
         unlink($this->localeParameterFilePath);
@@ -132,7 +133,7 @@ final class LocaleSetupTest extends KernelTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_locale_if_file_is_not_writable(): void
     {
         $this->localeSetup = new LocaleSetup(

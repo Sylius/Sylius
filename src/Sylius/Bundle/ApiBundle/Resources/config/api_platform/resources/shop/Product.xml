@@ -61,6 +61,9 @@
                 controller="sylius_api.controller.get_product_by_slug"
                 read="false"
             >
+                <uriVariables>
+                    <uriVariable parameterName="slug" fromClass="%sylius.model.product.class%" />
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">

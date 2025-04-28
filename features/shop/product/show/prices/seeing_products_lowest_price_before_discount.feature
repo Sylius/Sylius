@@ -1,7 +1,7 @@
 @viewing_products
 Feature: Seeing the product's lowest price before the discount
     In order to know whether the current discount is attractive
-    As a Guest
+    As a Visitor
     I want to see a product's lowest price before the discount
 
     Background:

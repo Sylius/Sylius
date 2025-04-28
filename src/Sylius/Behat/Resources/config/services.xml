@@ -15,12 +15,13 @@
     <imports>
         <import resource="services/api.xml" />
         <import resource="services/contexts.xml" />
-        <import resource="services/elements.xml" />
+        <import resource="services/elements/**/*.xml" />
         <import resource="services/pages.xml" />
     </imports>
 
     <parameters>
         <parameter key="sylius.behat.clock.date_file">%kernel.project_dir%/var/date.txt</parameter>
+        <parameter key="sylius.behat.guest_cart_token_file">%kernel.project_dir%/var/guest_cart_token.txt</parameter>
         <parameter key="sylius.behat.notification_accessor.admin.locator" type="string">[data-test-sylius-flash-message]</parameter>
         <parameter key="sylius.behat.notification_accessor.shop.locator" type="string">[data-test-sylius-flash-message]</parameter>
         <parameter key="sylius.behat.notification_checker.admin.class_map" type="collection">
@@ -187,5 +188,10 @@
             <tag name="messenger.message_handler" bus="sylius.payment_request.command_bus" />
         </service>
 
+        <service id="sylius.behat.context.guest_cart" class="Sylius\Behat\Service\Context\GuestCartContext">
+            <argument type="service" id="sylius.repository.order" />
+            <argument>%sylius.behat.guest_cart_token_file%</argument>
+            <tag name="sylius.context.cart" priority="-900" />
+        </service>
     </services>
 </container>

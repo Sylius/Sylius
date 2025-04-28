@@ -5,12 +5,13 @@ default:
     suites:
         ui_managing_exchange_rates:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
-                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.currency
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.currency
@@ -18,6 +19,7 @@ default:
 
                 - sylius.behat.context.ui.admin.managing_exchange_rates
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.save
 
             filters:
                 tags: "@managing_exchange_rates&&@ui"

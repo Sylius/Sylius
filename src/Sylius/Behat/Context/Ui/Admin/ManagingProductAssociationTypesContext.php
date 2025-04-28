@@ -104,15 +104,6 @@ final readonly class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I delete the :productAssociationType product association type
      */
     public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void

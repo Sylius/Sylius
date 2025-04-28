@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -34,7 +35,7 @@ final class OrdersTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_only_logged_in_user_orders_excluding_guest_and_other_users_orders(): void
     {
         $this->loadFixturesFromFiles([
@@ -64,7 +65,7 @@ final class OrdersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_get_orders_for_guest(): void
     {
         $this->loadFixturesFromFile('channel/channel.yaml');
@@ -73,7 +74,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_order_created_by_a_user_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -97,7 +98,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order/get_order_by_user');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_return_an_order_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -121,7 +122,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_return_an_order_created_by_a_user_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -145,7 +146,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_order_created_by_a_guest_authenticated_as_a_guest(): void
     {
         $this->loadFixturesFromFiles([
@@ -167,7 +168,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order/get_order_by_guest');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_return_an_order_created_by_a_guest_authenticated_as_a_user(): void
     {
         $this->loadFixturesFromFiles([
@@ -189,7 +190,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_changes_payment_method_of_order_created_by_a_guest_authenticated_as_a_guest(): void
     {
         $this->setUpDefaultPatchHeaders();
@@ -218,7 +219,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/order/change_payment_method_as_guest');
     }
 
-    /** @test */
+    #[Test]
     public function it_changes_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
         $this->setUpDefaultPatchHeaders();
@@ -248,7 +249,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/order/change_payment_method_as_user');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_change_payment_method_of_order_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -277,7 +278,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_change_payment_method_of_order_created_by_a_user_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -306,7 +307,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_change_payment_method_of_order_created_by_a_guest_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -335,7 +336,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -367,7 +368,7 @@ final class OrdersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_payment_method_of_order_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -396,7 +397,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_payment_method_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -425,7 +426,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_update_payment_method_for_cancelled_order(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -467,7 +468,7 @@ final class OrdersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_payment_configuration_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
         $this->setCompositePaymentConfigurationProvider();
@@ -493,7 +494,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order/get_configuration');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_return_a_payment_configuration_of_order_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -518,7 +519,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_return_a_payment_configuration_of_order_created_by_a_user_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -543,7 +544,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_payment_configuration_of_order_created_by_a_guest_authenticated_as_a_guest(): void
     {
         $this->setCompositePaymentConfigurationProvider();
@@ -567,7 +568,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order/get_configuration');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_return_a_payment_configuration_of_order_created_by_a_guest_authenticated_as_a_user(): void
     {
         $this->loadFixturesFromFiles([
@@ -590,7 +591,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_get_payment_configuration_for_invalid_payment(): void
     {
         $this->loadFixturesFromFiles([
@@ -610,7 +611,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_delete_completed_order(): void
     {
         $this->loadFixturesFromFiles([
@@ -633,7 +634,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_order_adjustments(): void
     {
         $this->loadFixturesFromFiles([
@@ -657,7 +658,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/order/get_order_adjustments', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_order_adjustments_with_type_filter(): void
     {
         $this->loadFixturesFromFiles([
@@ -682,7 +683,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/order/get_order_adjustments_with_type_filter', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_visitors_from_getting_the_adjustments_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([

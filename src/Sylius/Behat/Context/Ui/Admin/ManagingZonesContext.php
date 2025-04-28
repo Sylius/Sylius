@@ -142,14 +142,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I check (also) the :zoneName zone
      */
     public function iCheckTheZone(string $zoneName): void

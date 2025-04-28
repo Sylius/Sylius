@@ -1,6 +1,7 @@
 # UPGRADE FROM `2.0` TO `2.1`
 
 1. The `sylius_admin_customer_orders_statistics` route has been deprecated.
+1. The minimum version of Symfony 7 packages has been bumped from Symfony `^7.1` to `^7.2`
 
 ## Grid providers are now configurable
 `GridProviders` are now configurable, allowing users to choose between PHP and YAML for Sylius grid configurations. You can now change the definition format Sylius will use. Note that configurations in different formats cannot be merged, so if you switch to PHP for an existing grid, you will need to recreate the vendor's YAML definition.

@@ -1,9 +1,11 @@
+{% import "@SyliusUi/macro/rtl.html.twig" as rtl %}
+
 {% set generic_hook = 'sylius_shop.base' %}
 {% set prefixes = prefixes|default([])|merge([generic_hook]) %}
 
 <!DOCTYPE html>
 
-<html lang="{{ app.request.locale|slice(0, 2) }}">
+<html lang="{{ app.request.locale|slice(0, 2) }}" {{ rtl.default(sylius.localeCode) }}>
     <head>
         {% block metatags %}
             {% hook '#metatags' with { _prefixes: prefixes } %}

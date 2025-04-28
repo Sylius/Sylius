@@ -1,7 +1,7 @@
 @paying_for_order
 Feature: Paying Offline during checkout as guest
     In order to pay with cash or by external means
-    As a Guest
+    As a Visitor
     I want to be able to complete checkout process without paying
 
     Background:
@@ -11,36 +11,36 @@ Feature: Paying Offline during checkout as guest
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Successfully placing an order
         Given this payment method is not using Payum
-        And I have product "PHP T-Shirt" in the cart
+        And I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
         And I choose "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Using Payum successfully placing an order
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
         And I choose "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Successfully placing an order using custom locale
         Given this payment method is not using Payum
-        And I have product "PHP T-Shirt" in the cart
+        And I added product "PHP T-Shirt" to the cart
         When I proceed through checkout process in the "French (France)" locale with email "john@example.com"
         And I confirm my order
         Then I should see the thank you page in "French (France)"
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Using Payum successfully placing an order using custom locale
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         When I proceed through checkout process in the "French (France)" locale with email "john@example.com"
         And I confirm my order
         Then I should see the thank you page in "French (France)"
@@ -48,16 +48,16 @@ Feature: Paying Offline during checkout as guest
     @api @no-ui
     Scenario: Successfully placing an order using custom locale
         Given this payment method is not using Payum
-        And I pick up cart in the "French (France)" locale
+        When I pick up cart in the "French (France)" locale
         And I add product "PHP T-Shirt" to the cart
-        When I proceed through checkout process
+        And I proceed through checkout process
         And I confirm my order
         Then my order's locale should be "French (France)"
 
     @api @no-ui
     Scenario: Using Payum successfully placing an order using custom locale
         Given I pick up cart in the "French (France)" locale
-        And I add product "PHP T-Shirt" to the cart
-        When I proceed through checkout process
+        When I add product "PHP T-Shirt" to the cart
+        And I proceed through checkout process
         And I confirm my order
         Then my order's locale should be "French (France)"

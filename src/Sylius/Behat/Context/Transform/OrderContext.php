@@ -14,24 +14,28 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class OrderContext implements Context
+final readonly class OrderContext implements Context
 {
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
         private CustomerRepositoryInterface $customerRepository,
         private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
-    /**
-     * @Transform :order
-     * @Transform /^"([^"]+)" order$/
-     * @Transform /^order "([^"]+)"$/
-     */
+    #[Transform(':order')]
+    #[Transform('/^"([^"]+)" order$/')]
+    #[Transform('/^order "([^"]+)"$/')]
     public function getOrderByNumber(string $orderNumber): OrderInterface
     {
         $orderNumber = $this->getOrderNumber($orderNumber);
@@ -42,9 +46,8 @@ final class OrderContext implements Context
         return $order;
     }
 
-    /**
-     * @Transform /^latest order$/
-     */
+    #[Transform('/^latest order$/')]
+    #[Transform('/^last order$/')]
     public function getLatestOrder(): OrderInterface
     {
         $orders = $this->orderRepository->findLatest(1);
@@ -54,11 +57,9 @@ final class OrderContext implements Context
         return $orders[0];
     }
 
-    /**
-     * @Transform /^this order made by "([^"]+)"$/
-     * @Transform /^order placed by "([^"]+)"$/
-     * @Transform /^the order of "([^"]+)"$/
-     */
+    #[Transform('/^this order made by "([^"]+)"$/')]
+    #[Transform('/^order placed by "([^"]+)"$/')]
+    #[Transform('/^the order of "([^"]+)"$/')]
     public function getOrderByCustomer(string $email): OrderInterface
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
@@ -70,13 +71,11 @@ final class OrderContext implements Context
         return end($orders);
     }
 
-    /**
-     * @Transform :orderNumber
-     * @Transform /^an order "([^"]+)"$/
-     * @Transform /^another order "([^"]+)"$/
-     * @Transform /^the order "([^"]+)"$/
-     * @Transform /^the "([^"]+)" order$/
-     */
+    #[Transform(':orderNumber')]
+    #[Transform('/^an order "([^"]+)"$/')]
+    #[Transform('/^another order "([^"]+)"$/')]
+    #[Transform('/^the order "([^"]+)"$/')]
+    #[Transform('/^the "([^"]+)" order$/')]
     public function getOrderNumber(string $orderNumber): string
     {
         return str_replace('#', '', $orderNumber);

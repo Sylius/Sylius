@@ -10,32 +10,32 @@ sylius:
             first_name: الاسم الأول
             last_name: اسم العائلة
             phone_number: رقم الهاتف
-            postcode: الرقم البريدي
+            postcode: الرمز البريدي
             street: عنوان الشارع
-            province: مقاطعة
+            province: المقاطعة
             zone: المنطقة
         country:
-            add_province: اضافة جهة/مقاطعة
+            add_province: إضافة مقاطعة
             name: الاسم
             provinces: المقاطعات
             select: اختر
-            enabled: تفعيل
+            enabled: مفعّل
         province:
             name: الاسم
-            abbreviation: مختصرات
+            abbreviation: الاختصار
             select: اختر
         zone:
             add_member: إضافة عضو
             members: الأعضاء
             name: الاسم
-            type: نوع
+            type: النوع
             types:
                 country: الدولة
-                province: مقاطعة
+                province: المقاطعة
                 zone: المنطقة
-            scope: نطاق
+            scope: النطاق
             scopes:
-                all: الجميع
+                all: الكل
             select: اختر
             select_scope: اختر النطاق
         zone_member:

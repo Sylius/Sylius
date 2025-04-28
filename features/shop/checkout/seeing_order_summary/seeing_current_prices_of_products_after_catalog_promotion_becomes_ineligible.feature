@@ -13,11 +13,11 @@ Feature: Seeing current prices of products after catalog promotion becomes ineli
         And there is a catalog promotion "Winter sale" available in "United States" channel that reduces price by "25%" and applies on "PHP T-Shirt" variant
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Processing order with valid prices after catalog promotion becomes ineligibly
         Given I have "PHP T-Shirt" variant of this product in the cart
-        When the "Winter sale" catalog promotion is no longer available
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed through checkout process
+        And the "Winter sale" catalog promotion is no longer available
+        And I addressed the cart
+        When I proceed through checkout process
         Then I should be on the checkout summary step
         And I should see product "T-Shirt" with unit price "$20.00"

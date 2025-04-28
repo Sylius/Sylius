@@ -41,6 +41,10 @@
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.address" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.shipping" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.payment" />
+            <argument>%sylius.behat.guest_cart_token_file%</argument>
         </service>
 
         <service id="sylius.behat.context.setup.checkout" class="Sylius\Behat\Context\Setup\CheckoutContext">
@@ -50,13 +54,25 @@
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.factory.address" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.shipping"/>
+            <argument type="service" id="sylius.behat.context.setup.checkout.payment"/>
         </service>
 
         <service id="sylius.behat.context.setup.checkout.address" class="Sylius\Behat\Context\Setup\Checkout\AddressContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sylius.behat.factory.address" />
             <argument type="service" id="sylius.converter.country_name" />
+        </service>
+
+        <service id="sylius.behat.context.setup.checkout.shipping" class="Sylius\Behat\Context\Setup\Checkout\ShippingContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.command_bus" />
+        </service>
+
+        <service id="sylius.behat.context.setup.checkout.payment" class="Sylius\Behat\Context\Setup\Checkout\PaymentContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.command_bus" />
         </service>
 
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
@@ -223,6 +239,7 @@
             <argument type="service" id="sylius.generator.promotion_coupon" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.fixture.example_factory.promotion" />
+            <argument type="service" id="sylius.command_bus"/>
         </service>
 
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
@@ -244,6 +261,7 @@
             <argument type="service" id="sylius.behat.shop_security" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.shop_api_security" class="Sylius\Behat\Context\Setup\ShopSecurityContext">
@@ -251,6 +269,7 @@
             <argument type="service" id="sylius.behat.api_shop_security" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.shipping" class="Sylius\Behat\Context\Setup\ShippingContext">

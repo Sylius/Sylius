@@ -1,7 +1,7 @@
 @checkout
 Feature: Seeing shipping discount on order summary
     In order to be sure that the shipping discount was applied to my order
-    As a Customer
+    As a Visitor
     I want to be able to see shipping promotion on the order summary
 
     Background:
@@ -11,14 +11,15 @@ Feature: Seeing shipping discount on order summary
         And there is a promotion "Holiday promotion"
         And the promotion gives "10%" discount on shipping to every order
         And the store allows paying Offline
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing order shipping discount on the order summary page
-        Given I have product "PHP T-Shirt" in the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceed with "DHL" shipping method and "Offline" payment
+        When I specify the email as "jon.snow@example.com"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        And I proceed with "DHL" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And "Holiday promotion" should be applied to my order shipping
         And this promotion should give "-$5.00" discount on shipping

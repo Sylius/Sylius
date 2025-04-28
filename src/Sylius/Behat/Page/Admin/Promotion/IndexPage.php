@@ -68,7 +68,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         ]);
     }
 
-    private function getPromotionFieldsWithHeader(PromotionInterface $promotion, string $header): NodeElement
+    protected function getPromotionFieldsWithHeader(PromotionInterface $promotion, string $header): NodeElement
     {
         return $this->getCellForResource($header, ['code' => $promotion->getCode()]);
     }

@@ -21,9 +21,9 @@
     },
     "require": {
         "php": "^8.2",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1",
-        "symfony/http-kernel": "^6.4.1 || ^7.1",
-        "symfony/workflow": "^6.4 || ^7.1"
+        "symfony/dependency-injection": "^6.4.1 || ^7.2",
+        "symfony/http-kernel": "^6.4.1 || ^7.2",
+        "symfony/workflow": "^6.4 || ^7.2"
     },
     "suggest": {
         "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)",
@@ -32,7 +32,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^5.1",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10.5",
         "webmozart/assert": "^1.11"
     },
     "extra": {
@@ -40,7 +40,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^7.1"
+            "require": "^7.2"
         }
     }
 }

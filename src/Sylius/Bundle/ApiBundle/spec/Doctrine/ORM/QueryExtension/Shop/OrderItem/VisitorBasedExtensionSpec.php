@@ -83,7 +83,9 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
         Expr $expr,
-        Expr\Func $exprFunc,
+        Expr\Comparison $exprEq,
+        Expr\Andx $exprAndx,
+        Expr\Orx $exprOrx,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
         $userContext->getUser()->willReturn(null);
@@ -98,14 +100,14 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         $queryBuilder->leftJoin('order.customer', 'customer')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->leftJoin('customer.user', 'user')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->expr()->willReturn($expr);
-        $expr->isNull('user')->willReturn($exprFunc);
-        $expr->isNull('order.customer')->willReturn($exprFunc);
-        $expr->isNotNull('user')->willReturn($exprFunc);
-        $expr->eq('order.createdByGuest', ':createdByGuest')->willReturn($exprFunc);
-        $expr->andX($exprFunc, $exprFunc)->willReturn($exprFunc);
-        $expr->orX($exprFunc, $exprFunc, $exprFunc)->willReturn($exprFunc);
+        $expr->isNull('user')->willReturn('user IS NULL');
+        $expr->isNull('order.customer')->willReturn('order.customer IS NULL');
+        $expr->isNotNull('user')->willReturn('user IS NOT NULL');
+        $expr->eq('order.createdByGuest', ':createdByGuest')->willReturn($exprEq);
+        $expr->andX('user IS NOT NULL', $exprEq)->willReturn($exprAndx);
+        $expr->orX('user IS NULL', 'order.customer IS NULL', $exprAndx)->willReturn($exprOrx);
 
-        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere($exprOrx)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('createdByGuest', true)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->addOrderBy('o.id', 'ASC')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
@@ -159,7 +161,9 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         ShopApiSection $section,
         Expr $expr,
-        Expr\Func $exprFunc,
+        Expr\Comparison $exprEq,
+        Expr\Andx $exprAndx,
+        Expr\Orx $exprOrx,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
         $userContext->getUser()->willReturn(null);
@@ -174,14 +178,14 @@ final class VisitorBasedExtensionSpec extends ObjectBehavior
         $queryBuilder->leftJoin('order.customer', 'customer')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->leftJoin('customer.user', 'user')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->expr()->willReturn($expr);
-        $expr->isNull('user')->willReturn($exprFunc);
-        $expr->isNull('order.customer')->willReturn($exprFunc);
-        $expr->isNotNull('user')->willReturn($exprFunc);
-        $expr->eq('order.createdByGuest', ':createdByGuest')->willReturn($exprFunc);
-        $expr->andX($exprFunc, $exprFunc)->willReturn($exprFunc);
-        $expr->orX($exprFunc, $exprFunc, $exprFunc)->willReturn($exprFunc);
+        $expr->isNull('user')->willReturn('user IS NULL');
+        $expr->isNull('order.customer')->willReturn('order.customer IS NULL');
+        $expr->isNotNull('user')->willReturn('user IS NOT NULL');
+        $expr->eq('order.createdByGuest', ':createdByGuest')->willReturn($exprEq);
+        $expr->andX('user IS NOT NULL', $exprEq)->willReturn($exprAndx);
+        $expr->orX('user IS NULL', 'order.customer IS NULL', $exprAndx)->willReturn($exprOrx);
 
-        $queryBuilder->andWhere($exprFunc)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere($exprOrx)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->setParameter('createdByGuest', true)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->addOrderBy('o.id', 'ASC')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 

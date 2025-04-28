@@ -5,6 +5,7 @@ default:
     suites:
         ui_managing_promotions:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -21,22 +22,23 @@ default:
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
-                - sylius.behat.context.setup.customer_group
                 - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.customer_group
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.promotion
-                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.admin.managing_promotions
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.admin.removing_taxons
+                - sylius.behat.context.ui.save
                 - Sylius\Behat\Context\Ui\Admin\RemovingProductContext
 
             filters:

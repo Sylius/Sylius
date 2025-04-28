@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Administrator;
 
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+
 trait FormAwareTrait
 {
+    use SecurePasswordTrait;
+
     public function setFirstName(string $firstName): void
     {
         $this->getElement('field_first_name')->setValue($firstName);
@@ -57,7 +61,7 @@ trait FormAwareTrait
 
     public function setPassword(string $password): void
     {
-        $this->getElement('field_password')->setValue($password);
+        $this->getElement('field_password')->setValue($this->replaceWithSecurePassword($password));
     }
 
     public function getPassword(): string

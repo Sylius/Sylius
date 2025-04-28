@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Webmozart\Assert\Assert;
 
@@ -33,8 +34,8 @@ final readonly class CurrencyContext implements Context
 
     /**
      * @Given I changed my currency to :currencyCode
-     * @When I switch to the :currencyCode currency
      */
+    #[When('I switch to the :currencyCode currency')]
     public function iSwitchTheCurrencyToTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();

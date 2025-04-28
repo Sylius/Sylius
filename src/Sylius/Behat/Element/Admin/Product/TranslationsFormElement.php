@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Admin\Product;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 
-final class TranslationsFormElement extends BaseFormElement implements TranslationsFormElementInterface
+class TranslationsFormElement extends BaseFormElement implements TranslationsFormElementInterface
 {
     public function nameItIn(string $name, string $localeCode): void
     {
@@ -87,7 +87,7 @@ final class TranslationsFormElement extends BaseFormElement implements Translati
         );
     }
 
-    private function expandTranslationAccordion(string $localeCode): void
+    protected function expandTranslationAccordion(string $localeCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
@@ -102,7 +102,7 @@ final class TranslationsFormElement extends BaseFormElement implements Translati
         $translationAccordion->click();
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

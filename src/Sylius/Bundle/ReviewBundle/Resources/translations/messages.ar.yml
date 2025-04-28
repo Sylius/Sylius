@@ -5,13 +5,13 @@ sylius:
     form:
         review:
             author: المؤلف
-            comment: تعليق
-            header: إضافة تعليق
+            comment: التعليق
+            header: أضف مراجعة
             rating: التقييم
             status:
-                approved: مصادق عليه
+                approved: معتمد
                 label: الحالة
                 new: جديد
                 rejected: مرفوض
-            submit: أرسل
-            title: عنوان
+            submit: إرسال
+            title: العنوان

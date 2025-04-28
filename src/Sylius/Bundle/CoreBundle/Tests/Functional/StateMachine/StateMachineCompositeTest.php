@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Application\Model\BlogPost;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class StateMachineCompositeTest extends KernelTestCase
 {
-    /** @test */
+    #[Test]
     public function it_calls_a_method_on_a_default_state_machine_adapter_when_mapping_is_not_configured_for_a_given_graph(): void
     {
         $stateMachine = $this->getStateMachine();

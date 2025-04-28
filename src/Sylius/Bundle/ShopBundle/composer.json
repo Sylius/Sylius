@@ -32,8 +32,11 @@
         "sylius/twig-hooks": "^0.6",
         "sylius/ui-bundle": "^2.0",
         "sylius/theme-bundle": "^2.4",
-        "symfony/framework-bundle": "^6.4.1 || ^7.1",
-        "symfony/security-bundle": "^6.4 || ^7.1",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2",
+        "symfony/security-bundle": "^6.4 || ^7.2",
+        "symfony/stimulus-bundle": "^2.20",
+        "symfony/ux-autocomplete": "^2.20",
+        "symfony/ux-live-component": "^2.20",
         "symfony/webpack-encore-bundle": "^2.2",
         "symfonycasts/dynamic-forms": "^0.1",
         "twig/twig": "^3.14"
@@ -43,8 +46,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "mockery/mockery": "^1.6",
         "phpspec/phpspec": "^7.5",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1"
+        "phpunit/phpunit": "^10.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -56,7 +59,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^7.1"
+            "require": "^7.2"
         }
     },
     "autoload": {

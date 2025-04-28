@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,7 @@ final class ZonesTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_zones(): void
     {
         $this->loadFixturesFromFiles([
@@ -40,7 +41,7 @@ final class ZonesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/zone/get_zones');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_zone(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -56,7 +57,7 @@ final class ZonesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/zone/get_zone');
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_zone(): void
     {
         $this->loadFixturesFromFiles([
@@ -87,7 +88,7 @@ final class ZonesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_zone(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -119,7 +120,7 @@ final class ZonesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_a_zone(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -21,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TaxonImagesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_a_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFile('taxon_image.yaml');
@@ -45,7 +46,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_taxon_image_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFile('taxon_image.yaml');
@@ -70,7 +71,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_getting_a_taxon_image_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFile('taxon_image.yaml');

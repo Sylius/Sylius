@@ -3,4 +3,4 @@
 
 sylius:
     product_variant:
-        generate: 'تم بنجاح إنشاء المتغيرات المنتج.'
+        generate: "تم إنشاء متغيرات المنتج بنجاح."

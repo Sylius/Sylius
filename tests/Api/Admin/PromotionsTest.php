@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
@@ -45,7 +46,7 @@ final class PromotionsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_promotions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -55,7 +56,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion/get_promotions_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -68,7 +69,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion/get_promotion_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_promotion(): void
     {
         $this->loadFixturesFromFiles([
@@ -220,7 +221,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseCreated('admin/promotion/post_promotion_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_promotion_without_required_data(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -233,7 +234,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_without_required_data_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_promotion_with_taken_code(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -249,7 +250,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_taken_code_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_promotion_with_end_date_earlier_than_start_date(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -267,7 +268,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_dates_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_promotion_with_invalid_rules(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
@@ -338,7 +339,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_rules_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_promotion_with_invalid_actions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
@@ -394,7 +395,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_actions_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -445,7 +446,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion/put_promotion_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_promotion_to_last_priority_when_priority_is_minus_one(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -463,7 +464,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion/put_promotion_to_last_priority_when_priority_is_minus_one_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_a_promotion_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -483,7 +484,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseUnprocessableEntity('admin/promotion/put_promotion_with_duplicate_locale_translation');
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_a_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -496,7 +497,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_delete_the_promotion_in_use(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -514,7 +515,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    /** @test */
+    #[Test]
     public function it_archives_a_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -533,7 +534,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion/archive_promotion');
     }
 
-    /** @test */
+    #[Test]
     public function it_restores_a_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

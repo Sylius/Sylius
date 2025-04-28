@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,11 +30,9 @@ final class StatisticsTest extends JsonApiTestCase
         $this->setUpOrderPlacer();
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getIntervals
-     */
+    
+    #[DataProvider('getIntervals')]
+    #[Test]
     public function it_gets_fulfilled_orders_in_specific_year_statistics(string $interval): void
     {
         $this->loadFixturesFromFiles([
@@ -120,7 +120,7 @@ final class StatisticsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_get_statistics_data_for_non_admin_user(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
@@ -130,7 +130,7 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_a_not_found_status_code_if_channel_does_not_exist(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
@@ -150,18 +150,16 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    public function getIntervals(): iterable
+    public static function getIntervals(): iterable
     {
         yield ['day'];
         yield ['month'];
         yield ['year'];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider invalidPeriods
-     */
+    
+    #[DataProvider('invalidPeriods')]
+    #[Test]
     public function it_returns_a_validation_error_if_period_is_invalid(array $parameters): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
@@ -184,13 +182,11 @@ final class StatisticsTest extends JsonApiTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider missingQueryParameters
-     * @dataProvider emptyQueryParameters
-     * @dataProvider invalidQueryParameters
-     */
+    
+    #[DataProvider('missingQueryParameters')]
+    #[DataProvider('emptyQueryParameters')]
+    #[DataProvider('invalidQueryParameters')]
+    #[Test]
     public function it_returns_a_validation_error_if_any_of_required_parameters_is_missing_empty_or_invalid(
         array $queryParameters,
         array $expectedViolations,
@@ -207,7 +203,7 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseViolations($this->client->getResponse(), $expectedViolations);
     }
 
-    public function missingQueryParameters(): iterable
+    public static function missingQueryParameters(): iterable
     {
         yield 'missing channelCode' => [
             'parameters' => [
@@ -288,7 +284,7 @@ final class StatisticsTest extends JsonApiTestCase
         ];
     }
 
-    public function emptyQueryParameters(): iterable
+    public static function emptyQueryParameters(): iterable
     {
         yield 'empty channelCode' => [
             'parameters' => [
@@ -355,7 +351,7 @@ final class StatisticsTest extends JsonApiTestCase
         ];
     }
 
-    public function invalidQueryParameters(): iterable
+    public static function invalidQueryParameters(): iterable
     {
         yield 'invalid channelCode as float value' => [
             'parameters' => [
@@ -438,7 +434,7 @@ final class StatisticsTest extends JsonApiTestCase
         ];
     }
 
-    public function invalidPeriods(): iterable
+    public static function invalidPeriods(): iterable
     {
         yield 'startDate is after endDate' => [
             'parameters' => [

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -214,9 +215,7 @@ final readonly class OrderContext implements Context
         $this->sharedStorage->set('cart', $cart);
     }
 
-    /**
-     * @Given /^(I) placed (an order "[^"]+")$/
-     */
+    #[Given('/^(I) placed (an order "[^"]+")$/')]
     public function iPlacedAnOrder(ShopUserInterface $user, string $orderNumber): void
     {
         /** @var CustomerInterface $customer */
@@ -335,27 +334,6 @@ final readonly class OrderContext implements Context
 
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
         $this->completeCheckout($order);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^the customer chose ("[^"]+" shipping method)$/
-     */
-    public function theCustomerChoseShippingMethod(ShippingMethodInterface $shippingMethod): void
-    {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        foreach ($order->getShipments() as $shipment) {
-            $shipment->setMethod($shippingMethod);
-        }
-
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
-        if (!$order->getPayments()->isEmpty()) {
-            $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
-        }
 
         $this->objectManager->flush();
     }
@@ -482,9 +460,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(I) have already placed (\d+) orders choosing ("[^"]+" product), ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
-     */
+    #[Given('/^(I) have already placed (\d+) orders choosing ("[^"]+" product), ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/')]
     public function iHaveAlreadyPlacedOrderNthTimes(
         ShopUserInterface $user,
         int $numberOfOrders,

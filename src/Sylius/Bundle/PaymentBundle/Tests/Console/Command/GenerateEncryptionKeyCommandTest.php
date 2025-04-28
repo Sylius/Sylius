@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Tests\Console\Command;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\PaymentBundle\Console\Command\GenerateEncryptionKeyCommand;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
@@ -35,7 +36,7 @@ final class GenerateEncryptionKeyCommandTest extends KernelTestCase
         $this->commandTester = new CommandTester($command);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_and_saves_the_encryption_key_in_path(): void
     {
         $this->commandTester->execute([]);
@@ -49,7 +50,7 @@ final class GenerateEncryptionKeyCommandTest extends KernelTestCase
         $this->assertStringContainsString(self::ENCRYPTION_KEY_PATH, $this->normalizeString($output));
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_overwrite_existing_key_when_it_is_not_requested(): void
     {
         $this->commandTester->setInputs(['Do you want to overwrite it?' => 'n']);
@@ -68,7 +69,7 @@ final class GenerateEncryptionKeyCommandTest extends KernelTestCase
         $this->assertStringContainsString('[INFO] Key generation has been canceled', $output);
     }
 
-    /** @test */
+    #[Test]
     public function it_overwrites_existing_key_when_requested(): void
     {
         $this->commandTester->setInputs(['Do you want to overwrite it?' => 'y']);
@@ -88,7 +89,7 @@ final class GenerateEncryptionKeyCommandTest extends KernelTestCase
         $this->assertStringContainsString(self::ENCRYPTION_KEY_PATH, $this->normalizeString($output));
     }
 
-    /** @test */
+    #[Test]
     public function it_automatically_overwrites_existing_key_when_overwrite_option_is_passed(): void
     {
         $this->commandTester->execute(['--overwrite' => true]);

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\Order;
@@ -38,11 +40,8 @@ final class ShipmentWorkflowTest extends KernelTestCase
         $this->shipment->setOrder($this->order);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitionsFromReadyState
-     */
+    #[DataProvider('availableTransitionsFromReadyState')]
+    #[Test]
     public function it_applies_all_available_transitions_for_create_state(string $transition, string $expectedStatus): void
     {
         $stateMachine = $this->getStateMachine();
@@ -53,7 +52,7 @@ final class ShipmentWorkflowTest extends KernelTestCase
         $this->assertSame($expectedStatus, $this->shipment->getState());
     }
 
-    public function availableTransitionsFromReadyState(): iterable
+    public static function availableTransitionsFromReadyState(): iterable
     {
         yield ['cancel', 'cancelled'];
         yield ['ship', 'shipped'];

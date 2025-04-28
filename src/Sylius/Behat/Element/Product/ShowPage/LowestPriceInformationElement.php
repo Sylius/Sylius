@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class LowestPriceInformationElement extends Element implements LowestPriceInformationElementInterface
+class LowestPriceInformationElement extends Element implements LowestPriceInformationElementInterface
 {
     public function isThereInformationAboutProductLowestPriceWithPrice(string $lowestPriceBeforeDiscount): bool
     {

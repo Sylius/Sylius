@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Tests\Checker;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\Checker\GatewayConfigEncryptionChecker;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 
 final class GatewayConfigEncryptionCheckerTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_cannot_encrypt_if_factory_name_is_in_disabled_factories(): void
     {
         $gatewayConfig = $this->createMock(GatewayConfigInterface::class);
@@ -29,7 +30,7 @@ final class GatewayConfigEncryptionCheckerTest extends TestCase
         $this->assertFalse($checker->isEncryptionEnabled($gatewayConfig));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_encrypt_if_factory_name_is_not_in_disabled_factories(): void
     {
         $gatewayConfig = $this->createMock(GatewayConfigInterface::class);

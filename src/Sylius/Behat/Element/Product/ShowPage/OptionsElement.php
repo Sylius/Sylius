@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class OptionsElement extends Element implements OptionsElementInterface
+class OptionsElement extends Element implements OptionsElementInterface
 {
     public function isOptionDefined(string $optionName): bool
     {

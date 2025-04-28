@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture\OptionsResolver;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -27,9 +28,7 @@ final class LazyOptionTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_object_from_provided_repository(): void
     {
         /** @var RepositoryInterface|ObjectProphecy $repository */
@@ -44,9 +43,7 @@ final class LazyOptionTest extends TestCase
         self::assertSame($resource->reveal(), $closure($options->reveal(), 'OBJECT_CODE'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_finds_an_object_from_provided_repository_or_returns_null(): void
     {
         /** @var RepositoryInterface|ObjectProphecy $repository */
@@ -63,9 +60,7 @@ final class LazyOptionTest extends TestCase
         self::assertNull($closure($options->reveal(), 'NOT_EXISTING_OBJECT_CODE'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_previous_value_if_it_is_an_object_null_or_empty_array(): void
     {
         /** @var RepositoryInterface|ObjectProphecy $repository */
@@ -88,9 +83,7 @@ final class LazyOptionTest extends TestCase
         self::assertNull($findOneByClosure($options->reveal(), null));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_an_exception_if_object_cannot_be_found(): void
     {
         $this->expectException(ResourceNotFoundException::class);

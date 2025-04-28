@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -24,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ChangeAdminPasswordContext implements Context
 {
+    use SecurePasswordTrait;
+
     private const ADMIN_USER_CHANGE_PASSWORD = 'sylius:admin-user:change-password';
 
     private Application $application;
@@ -38,6 +42,7 @@ final class ChangeAdminPasswordContext implements Context
         KernelInterface $kernel,
         private readonly UserRepositoryInterface $adminUserRepository,
         private readonly UserPasswordHasherInterface $userPasswordHasher,
+        private readonly SharedStorageInterface $sharedStorage,
     ) {
         $this->application = new Application($kernel);
     }
@@ -65,7 +70,7 @@ final class ChangeAdminPasswordContext implements Context
      */
     public function iSpecifyMyNewPassword(string $password = ''): void
     {
-        $this->input['password'] = $password;
+        $this->input['password'] = $this->replaceWithSecurePassword($password);
     }
 
     /**
@@ -92,7 +97,7 @@ final class ChangeAdminPasswordContext implements Context
     {
         /** @var AdminUserInterface|null $adminUser */
         $adminUser = $this->adminUserRepository->findOneByEmail($email);
-        $adminUser->setPlainPassword($password);
+        $adminUser->setPlainPassword($this->retrieveSecurePassword($password));
 
         Assert::same(
             $adminUser->getPassword(),

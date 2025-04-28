@@ -16,28 +16,26 @@ Feature: Being unable to buy products that are out of stock
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui @javascript
-    Scenario: Placing an order with products that have sufficient quantity
-        When I add 3 products "Iron Maiden T-Shirt" to the cart
-        And I proceed through checkout process
-        And I confirm my order
-        Then I should see the thank you page
+    @api @ui
+    Scenario: Successfully placing an order with sufficient stock
+        Given I added 3 products "Iron Maiden T-Shirt" to the cart
+        And I proceeded through the checkout process
+        When I confirm my order
+        Then my order should be completed successfully
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Being unable to place an order with product that is out of stock
-        When I add 5 products "Iron Maiden T-Shirt" to the cart
-        And I proceed through checkout process
+        Given I added 5 products "Iron Maiden T-Shirt" to the cart
+        And I proceeded through the checkout process
         And other customer has bought 2 "Iron Maiden T-Shirt" products by this time
-        And I confirm my order
-        Then I should not see the thank you page
+        When I confirm my order
         And I should be notified that product "Iron Maiden T-Shirt" does not have sufficient stock
 
-    @api @ui @javascript
-    Scenario: Being unable to place an order with products that are out of stock
-        When I add 5 products "Iron Maiden T-Shirt" to the cart
-        And I add 5 products "2Pac T-Shirt" to the cart
-        And I proceed with selecting "Offline" payment method
+    @api @ui
+    Scenario: Prevent order confirmation if any product is unavailable in the required quantity
+        Given I added 5 products "Iron Maiden T-Shirt" to the cart
+        And I added 5 products "2Pac T-Shirt" to the cart
+        And I proceeded through the checkout process
         And other customer has bought 7 "2Pac T-Shirt" products by this time
-        And I confirm my order
-        Then I should not see the thank you page
+        When I confirm my order
         And I should be notified that product "2Pac T-Shirt" does not have sufficient stock

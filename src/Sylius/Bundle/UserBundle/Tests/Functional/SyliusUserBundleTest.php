@@ -14,15 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Tests\Functional;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class SyliusUserBundleTest extends KernelTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function its_services_are_initializable()
     {
         static::bootKernel();

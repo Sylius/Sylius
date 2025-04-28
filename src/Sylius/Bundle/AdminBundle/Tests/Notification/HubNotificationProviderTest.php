@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Tests\Notification;
 
 use GuzzleHttp\Exception\ConnectException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -76,15 +77,13 @@ final class HubNotificationProviderTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_an_empty_array_if_client_exception_occurs(): void
     {
         $request = $this->prophesize(RequestInterface::class);
         $stream = $this->prophesize(StreamInterface::class);
 
-        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(function ($args) {
-            return $args[1]();
-        });
+        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(fn ($args) => $args[1]());
 
         $this->requestStack->getCurrentRequest()->willReturn(new Request());
         $this->clock->now()->willReturn(new \DateTimeImmutable());
@@ -99,16 +98,14 @@ final class HubNotificationProviderTest extends TestCase
         $this->assertEmpty($this->hubNotificationsProvider->getNotifications());
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_an_empty_array_if_the_current_version_is_the_same_as_latest(): void
     {
         $request = $this->prophesize(RequestInterface::class);
         $stream = $this->prophesize(StreamInterface::class);
         $externalResponse = $this->prophesize(ResponseInterface::class);
 
-        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(function ($args) {
-            return $args[1]();
-        });
+        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(fn ($args) => $args[1]());
 
         $this->requestStack->getCurrentRequest()->willReturn(new Request());
         $this->clock->now()->willReturn(new \DateTimeImmutable());
@@ -127,16 +124,14 @@ final class HubNotificationProviderTest extends TestCase
         $this->assertEmpty($this->hubNotificationsProvider->getNotifications());
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_a_notification_if_the_current_version_is_different_than_latest(): void
     {
         $request = $this->prophesize(RequestInterface::class);
         $stream = $this->prophesize(StreamInterface::class);
         $externalResponse = $this->prophesize(ResponseInterface::class);
 
-        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(function ($args) {
-            return $args[1]();
-        });
+        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(fn ($args) => $args[1]());
 
         $this->requestStack->getCurrentRequest()->willReturn(new Request());
         $this->clock->now()->willReturn(new \DateTimeImmutable());

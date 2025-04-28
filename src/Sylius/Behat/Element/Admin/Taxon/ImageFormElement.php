@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Admin\Taxon;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 
-final class ImageFormElement extends BaseFormElement implements ImageFormElementInterface
+class ImageFormElement extends BaseFormElement implements ImageFormElementInterface
 {
     public function attachImage(string $path, ?string $type = null): void
     {
@@ -84,6 +84,7 @@ final class ImageFormElement extends BaseFormElement implements ImageFormElement
         return array_merge(parent::getDefinedElements(), [
             'add_image' => '[data-test-images] [data-test-add-image]',
             'delete_image' => '[data-test-images] [data-test-image][data-test-type="%type%"] [data-test-delete-image]',
+            'form' => '[data-live-name-value="sylius_admin:taxon:form"]',
             'first_image' => '[data-test-images] [data-test-image]:first-child',
             'image_with_type' => '[data-test-images] [data-test-image][data-test-type="%type%"]',
             'images' => '[data-test-images]',

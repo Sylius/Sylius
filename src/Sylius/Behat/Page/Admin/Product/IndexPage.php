@@ -28,8 +28,8 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
-        private ImageExistenceCheckerInterface $imageExistenceChecker,
-        private AutocompleteHelperInterface $autocompleteHelper,
+        protected ImageExistenceCheckerInterface $imageExistenceChecker,
+        protected AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }

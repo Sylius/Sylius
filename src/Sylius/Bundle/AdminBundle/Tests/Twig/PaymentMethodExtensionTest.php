@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Twig;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension;
 
 final class PaymentMethodExtensionTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_payment_gateways(): void
     {
         $gatewayFactories = ['offline' => 'Offline', 'stripe' => 'Stripe'];

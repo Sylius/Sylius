@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
@@ -25,9 +26,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_adds_method_call_to_composite_order_processor_if_exist(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
@@ -50,9 +49,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_adds_method_call_to_composite_order_processor_with_custom_priority(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
@@ -75,9 +72,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_add_method_call_if_there_are_no_tagged_processors(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);

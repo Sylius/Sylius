@@ -21,14 +21,17 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<PromotionRuleInterface> */
 class PromotionRuleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
-    public function __construct(private PromotionRuleFactoryInterface $promotionRuleFactory)
-    {
+    /** @param PromotionRuleFactoryInterface<PromotionRuleInterface> $promotionRuleFactory */
+    public function __construct(
+        private readonly PromotionRuleFactoryInterface $promotionRuleFactory,
+    ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

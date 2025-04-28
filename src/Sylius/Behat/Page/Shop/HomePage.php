@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage implements HomePageInterface
 {
@@ -113,7 +113,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
         ]);
     }
 
-    private function getProductsNames(string $elementName): array
+    protected function getProductsNames(string $elementName): array
     {
         return array_map(
             fn (NodeElement $element) => $element->getText(),

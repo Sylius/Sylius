@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\Then;
+use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
@@ -30,21 +32,28 @@ final readonly class CheckoutShippingContext implements Context
     ) {
     }
 
+    #[When('I navigate directly to the addressing step in the checkout steps panel')]
+    public function iNavigateDirectlyToTheAddressingStepInTheCheckoutStepsPanel(): void
+    {
+        $this->selectShippingPage->changeAddressByStepLabel();
+    }
+
     /**
      * @Given the visitor has proceeded :shippingMethodName shipping method
-     * @Given the customer has proceeded :shippingMethodName shipping method
+     * @Given the customer has proceeded with :shippingMethodName shipping method
      * @Given the visitor proceed with :shippingMethodName shipping method
      * @Given the customer proceed with :shippingMethodName shipping method
-     * @Given I chose :shippingMethodName shipping method
      * @Given I completed the shipping step with :shippingMethodName shipping method
      * @Given I have proceeded with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
+    #[When('the visitor proceeds with :shippingMethod shipping method')]
+    #[When('the customer proceeds with :shippingMethod shipping method')]
     public function iHaveProceededWithSelectingShippingMethod(string $shippingMethodName): void
     {
         if (!$this->selectShippingPage->isOpen()) {
-            throw new UnexpectedPageException(sprintf('Shipping method "%s" cannot be selected because checkout shipping page is not open.', $shippingMethodName));
+            $this->selectShippingPage->open();
         }
 
         $this->selectShippingPage->selectShippingMethod($shippingMethodName);
@@ -62,50 +71,32 @@ final readonly class CheckoutShippingContext implements Context
     }
 
     /**
-     * @When I try to open checkout shipping page
-     */
-    public function iTryToOpenCheckoutShippingPage(): void
-    {
-        $this->selectShippingPage->tryToOpen();
-    }
-
-    /**
      * @When I complete the shipping step
-     * @When I complete the shipping step with first shipping method
+     * @When I complete the shipping step with the first shipping method
      */
     public function iCompleteTheShippingStep(): void
     {
         $this->selectShippingPage->nextStep();
     }
 
-    /**
-     * @When I decide to change my address
-     */
-    public function iDecideToChangeMyAddress()
+    #[When('I decide to change my address')]
+    public function iDecideToChangeMyAddress(): void
     {
         $this->selectShippingPage->changeAddress();
     }
 
-    /**
-     * @When I want to complete the shipping step
-     */
+    #[When('I decide to change shipping method')]
+    #[When('I go back to the shipping step')]
+    #[When('I go to the shipping step')]
+    #[When('I want to complete the shipping step')]
+    #[When('the customer wants to complete the shipping step')]
     public function iWantToCompleteTheShippingStep(): void
     {
         $this->selectShippingPage->open();
     }
 
-    /**
-     * @When I go back to shipping step of the checkout
-     */
-    public function iGoBackToShippingStepOfTheCheckout(): void
-    {
-        $this->selectShippingPage->open();
-    }
-
-    /**
-     * @Then I should not be able to select :shippingMethodName shipping method
-     */
-    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethodName)
+    #[Then('I should not be able to select :shippingMethodName shipping method')]
+    public function iShouldNotBeAbleToSelectShippingMethod(string $shippingMethodName): void
     {
         Assert::false(in_array($shippingMethodName, $this->selectShippingPage->getShippingMethods(), true));
     }
@@ -139,10 +130,8 @@ final readonly class CheckoutShippingContext implements Context
         $this->selectShippingPage->verify();
     }
 
-    /**
-     * @Then I should be informed that my order cannot be shipped to this address
-     * @Then there should be information about no available shipping methods
-     */
+    #[Then('I should be informed that my order cannot be shipped to this address')]
+    #[Then('there should be information about no available shipping methods')]
     public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress(): void
     {
         Assert::true($this->selectShippingPage->hasNoAvailableShippingMethodsMessage());
@@ -212,7 +201,8 @@ final readonly class CheckoutShippingContext implements Context
      * @Then the customer should have checkout shipping method step completed
      * @Then the visitor should have checkout shipping method step completed
      */
-    public function theCustomerShouldHaveCheckoutShippingMethodStepCompleted()
+    #[Then('the checkout shipping method step should be completed')]
+    public function theCustomerShouldHaveCheckoutShippingMethodStepCompleted(): void
     {
         Assert::false(
             $this->selectShippingPage->isOpen(),
@@ -220,9 +210,7 @@ final readonly class CheckoutShippingContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to proceed checkout shipping step
-     */
+    #[Then('I should not be able to proceed checkout shipping step')]
     public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
     {
         $this->selectShippingPage->tryToOpen();

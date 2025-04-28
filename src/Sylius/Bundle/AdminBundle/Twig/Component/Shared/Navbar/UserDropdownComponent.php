@@ -15,11 +15,14 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
 use Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class UserDropdownComponent
 {
+    use HookableComponentTrait;
+
     public function __construct(
         protected readonly UrlGeneratorInterface $urlGenerator,
         protected readonly LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,

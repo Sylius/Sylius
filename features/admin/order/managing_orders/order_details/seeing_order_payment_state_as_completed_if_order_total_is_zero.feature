@@ -10,24 +10,25 @@ Feature: Seeing payment state as paid after checkout steps if order total is zer
         And the store ships everywhere for Free
         And there is a promotion "Holiday promotion"
         And the promotion gives "$10.00" discount to every order with quantity at least 1
-        And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
-        And the customer bought a single "Angel T-Shirt"
-        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And the customer logged in
+        And the customer added product "Angel T-Shirt" to the cart
+        And the customer addressed the cart
         And the customer chose "Free" shipping method
+        And the customer confirmed the order
         And I am logged in as an administrator
 
     @api @ui
     Scenario: Seeing payment state as paid on orders list
         When I browse orders
-        Then the order "#00000666" should have order payment state "Paid"
+        Then the last order should have order payment state "Paid"
 
     @api @no-ui
     Scenario: Seeing payment state as paid on order's summary
-        When I view the summary of the order "#00000666"
+        When I view the summary of the last order
         Then I should be informed that there are no payments
 
     @no-api @ui
     Scenario: Seeing payment state as paid on order's summary
-        When I view the summary of the order "#00000666"
+        When I view the summary of the last order
         Then I should be informed that there are no payments
         And I should not be able to refund this payment

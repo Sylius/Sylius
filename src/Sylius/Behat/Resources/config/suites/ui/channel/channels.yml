@@ -5,6 +5,7 @@ default:
     suites:
         ui_channels:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 

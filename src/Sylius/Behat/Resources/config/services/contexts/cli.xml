@@ -37,6 +37,7 @@
             <argument type="service" id="kernel" />
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="security.user_password_hasher" />
+            <argument type="service" id="sylius.behat.shared_storage"/>
         </service>
     </services>
 </container>

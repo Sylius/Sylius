@@ -1,7 +1,7 @@
 @checkout
 Feature: Buying product with promotion that makes the order Free
     In order to buy a product that is Free
-    As a Customer
+    As a Visitor
     I should be able to purchase a full discounted order
 
     Background:
@@ -11,12 +11,13 @@ Feature: Buying product with promotion that makes the order Free
         And there is a promotion "Holiday promotion"
         And the promotion gives "100%" discount on shipping to every order
         And the promotion gives "100%" discount to every order
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Buying product with promotion that makes the order Free
-        Given I have product "T-Shirt banana" in the cart
+        Given I added product "T-Shirt banana" to the cart
         And I am at the checkout addressing step
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I proceed with "DHL" shipping method
+        When I specify the email as "jon.snow@example.com"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        And I proceed with "DHL" shipping method
         Then my order total should be "$0.00"

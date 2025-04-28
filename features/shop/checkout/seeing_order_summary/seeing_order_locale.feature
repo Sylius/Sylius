@@ -12,16 +12,16 @@ Feature: Seeing order locale on order summary page
         And the store allows paying Offline
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing order locale on the order summary page
-        When I add "Stark T-Shirt" product to the cart
-        And I proceed through checkout process
+        Given I added product "Stark T-Shirt" to the cart
+        When I proceed through checkout process
         Then I should be on the checkout summary step
         And my order's locale should be "English (United States)"
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Seeing order locale on the order summary page after change channel locale
-        Given I have product "Stark T-Shirt" in the cart
+        Given I added product "Stark T-Shirt" to the cart
         When I proceed through checkout process in the "French (France)" locale
         Then I should be on the checkout summary step
         And my order's locale should be "French (France)"

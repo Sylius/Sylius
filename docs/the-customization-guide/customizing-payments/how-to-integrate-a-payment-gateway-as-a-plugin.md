@@ -104,6 +104,16 @@ sylius_twig_hooks:
 
 <figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption><p>Payment Gateway Config form</p></figcaption></figure>
 
+**NOTE:**
+
+To create a new payment configuration, you need a valid encryption key. If you don’t have one, generate it by running:
+
+```bash
+bin/console sylius:payment:generate-key
+```
+
+Sylius encrypts configuration data like API keys and payment credentials to protect sensitive information, prevent unauthorized access, and comply with security regulations.
+
 ## Step 2: Command Provider & Handler
 
 With Sylius 2.0, a new "Payment Request" system is available. This system allows you to handle payment actions such as capture, status updates, and more through Symfony’s Messenger component. This is especially beneficial for headless implementations.

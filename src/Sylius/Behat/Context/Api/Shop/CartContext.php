@@ -15,14 +15,18 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -40,6 +44,7 @@ final class CartContext implements Context
         private IriConverterInterface $iriConverter,
         private RequestFactoryInterface $requestFactory,
         private string $apiUrlPrefix,
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
@@ -50,11 +55,11 @@ final class CartContext implements Context
     {
         $this->shopClient->delete(Resources::ORDERS, $tokenValue);
 
-        $this->sharedStorage->set('cart_token', null);
+        $this->sharedStorage->remove('cart_token');
     }
 
     /**
-     * @When /^I see the summary of my ((?:|previous )cart)$/
+     * @When /^I see the summary of my (cart)$/
      * @When /^the visitor try to see the summary of ((?:visitor|customer)'s cart)$/
      * @When /^the (?:visitor|customer) see the summary of ((?:|their )cart)$/
      */
@@ -67,6 +72,12 @@ final class CartContext implements Context
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
     }
 
+    #[When('/^I see the summary of my (previous cart)$/')]
+    public function iSeeTheSummaryOfMyPreviousCart(OrderInterface $cart): void
+    {
+        $this->shopClient->show(Resources::ORDERS, $cart->getTokenValue());
+    }
+
     /**
      * @When /^the administrator try to see the summary of ((?:visitor|customer)'s cart)$/
      */
@@ -76,8 +87,8 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I (?:add|added)(?:| the) (this product) to the (cart)$/
-     * @When /^I (?:add|added)(?:| the) ("[^"]+" product) to the (cart)$/
+     * @When /^I add(?:| the) (this product) to the (cart)$/
+     * @When /^I add(?:| the) ("[^"]+" product) to the (cart)$/
      * @When /^I add(?:| the) (product "[^"]+") to the (cart)$/
      * @When /^the (?:visitor|customer) adds(?:| the) ("[^"]+" product) to the (cart)$/
      */
@@ -116,7 +127,6 @@ final class CartContext implements Context
     /**
      * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
      * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
-     * @When /^I have ("[^"]+" variant) of (product "[^"]+") in the (cart)$/
      */
     public function iAddVariantOfThisProductToTheCart(
         ProductVariantInterface $productVariant,
@@ -204,10 +214,7 @@ final class CartContext implements Context
         $this->changeQuantityOfOrderItem((string) $itemResponse['id'], $quantity, $tokenValue);
     }
 
-    /**
-     * @Given /^I removed (product "[^"]+") from the (cart)$/
-     * @When /^I remove (product "[^"]+") from the (cart)$/
-     */
+    #[When('/^I remove (product "[^"]+") from the (cart)$/')]
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
         $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
@@ -242,11 +249,11 @@ final class CartContext implements Context
         $this->pickupCart('not_valid');
     }
 
-    /**
-     * @When /^I check details of my (cart)$/
-     * @When /^I check the details of my (cart)$/
-     */
-    public function iCheckDetailsOfMyCart(string $tokenValue): void
+    #[When('/^I check the details of my (cart)$/')]
+    #[When('/^the visitor checks the details of their (cart)$/')]
+    #[When('/^the customer checks the details of their (cart)$/')]
+    #[When('/^the customer tries to check the details of their (cart)$/')]
+    public function iCheckTheDetailsOfMyCart(string $tokenValue): void
     {
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
     }
@@ -286,10 +293,8 @@ final class CartContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
-     * @Then I should be notified that the quantity of the product :product must be between 1 and 9999
-     */
+    #[Then('/^I should be notified that the quantity of (this product) must be between 1 and 9999$/')]
+    #[Then('I should be notified that the quantity of the product :product must be between 1 and 9999')]
     public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween(ProductInterface $product): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(
@@ -315,9 +320,13 @@ final class CartContext implements Context
     /**
      * @Then /^I should not have access to the summary of my (previous cart)$/
      */
-    public function iShouldNotHaveAccessToTheSummaryOfMyCart(string $tokenValue): void
+    public function iShouldNotHaveAccessToTheSummaryOfMyCart(OrderInterface $order): void
     {
-        Assert::same($this->shopClient->show(Resources::ORDERS, $tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
+        Assert::same(
+            $this->shopClient->show(Resources::ORDERS, $order->getTokenValue())->getStatusCode(),
+            Response::HTTP_NOT_FOUND,
+            'The access to the summary of the previous cart should be forbidden.',
+        );
     }
 
     /**
@@ -333,11 +342,9 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^my (cart)'s total should be ("[^"]+")$/
-     * @Then /^my (cart) total should be ("[^"]+")$/
-     * @Then /^the (cart) total should be ("[^"]+")$/
-     */
+    #[Then('/^my (cart)\'s total should be ("[^"]+")$/')]
+    #[Then('/^my (cart) total should be ("[^"]+")$/')]
+    #[Then('/^the (cart) total should be ("[^"]+")$/')]
     public function myCartTotalShouldBe(string $tokenValue, int $total): void
     {
         $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
@@ -378,16 +385,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^my (cart) should be empty$/
-     * @Then /^(cart) should be empty with no value$/
+     * @Then my cart should be empty
      */
-    public function myCartShouldBeEmpty(string $tokenValue): void
+    public function myCartShouldBeEmpty(): void
     {
-        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
+        $tokenValue = $this->sharedStorage->get('cart_token');
 
-        Assert::true(
-            $this->responseChecker->isShowSuccessful($response),
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response),
+        Assert::isEmpty(
+            $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $tokenValue), 'items'),
+            'Cart is not empty.',
         );
     }
 
@@ -560,10 +566,9 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^(its|theirs) price should be decreased by ("[^"]+")$/
-     * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
-     */
+    #[Then('/^(its) price should be decreased by ("[^"]+")$/')]
+    #[Then('/^(product "[^"]+") price should be decreased by ("[^"]+")$/')]
+    #[Then('/^the subtotal price of (product "[^"]+") should be decreased by ("[^"]+")$/')]
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
     {
         $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
@@ -591,9 +596,7 @@ final class CartContext implements Context
         $this->compareItemPrice($product->getName(), $pricing - $amount, 'subtotal');
     }
 
-    /**
-     * @Then product :product price should not be decreased
-     */
+    #[Then('product :product price should not be decreased')]
     public function productPriceShouldNotBeDecreased(ProductInterface $product): void
     {
         $this->compareItemPrice($product->getName(), $this->getExpectedPriceOfProductTimesQuantity($product));
@@ -605,7 +608,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantityByCustomer($this->getCartResponse(), $productName, $quantity);
+        $this->checkProductQuantityByCustomer($this->shopClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -641,9 +644,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^the (?:visitor|customer) can see ("[^"]+" product) in the (cart)$/
+     * @Then /^the (?:visitor|customer) should see ("[^"]+" product) in the (cart)$/
      */
-    public function theVisitorCanSeeProductInTheCart(
+    public function theVisitorShouldSeeProductInTheCart(
         ProductInterface $product,
         string $tokenValue,
         int $quantity = 1,
@@ -712,13 +715,11 @@ final class CartContext implements Context
         Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
     }
 
-    /**
-     * @Then /^my cart shipping total should be ("[^"]+")$/
-     * @Then I should not see shipping total for my cart
-     * @Then /^my cart estimated shipping cost should be ("[^"]+")$/
-     * @Then there should be no shipping fee
-     * @Then my cart shipping should be for Free
-     */
+    #[Then('/^my cart shipping total should be ("[^"]+")$/')]
+    #[Then('I should not see shipping total for my cart')]
+    #[Then('/^my cart estimated shipping cost should be ("[^"]+")$/')]
+    #[Then('there should be no shipping fee')]
+    #[Then('my cart shipping should be for free')]
     public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -729,9 +730,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then I should be redirected to my cart summary page
-     */
+    #[Then('I should be redirected to my cart summary page')]
     public function iShouldBeRedirectedToMyCartSummaryPage(): void
     {
         // Intentionally left blank to fulfill context expectation
@@ -844,12 +843,20 @@ final class CartContext implements Context
             'created_as_guest',
             $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'customer') === null,
         );
+        $this->sharedStorage->set('order', $this->orderRepository->findOneBy(['tokenValue' => $tokenValue]));
 
         return $tokenValue;
     }
 
     private function putProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
     {
+        // Hotfix for a bug that allowed a guest to add a product to the cart belonging to a logged-in user
+        $hasToken = $this->sharedStorage->has('token');
+        $createdAsGuest = $this->sharedStorage->has('created_as_guest') ? $this->sharedStorage->get('created_as_guest') : null;
+        if (!$hasToken && $createdAsGuest === false) {
+            $tokenValue = null;
+        }
+
         $tokenValue ??= $this->pickupCart();
 
         $request = $this->requestFactory->customItemAction(

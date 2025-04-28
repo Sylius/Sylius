@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Product\Form;
 
 use Sylius\Bundle\AdminBundle\Doctrine\Query\Taxon\AllTaxonsInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent]
 class ProductTaxonsComponent
 {
+    use HookableComponentTrait;
+
     public function __construct(protected readonly AllTaxonsInterface $allTaxons)
     {
     }

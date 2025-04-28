@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class ShippingElement extends Element implements ShippingElementInterface
+class ShippingElement extends Element implements ShippingElementInterface
 {
     public function getProductShippingCategory(): string
     {

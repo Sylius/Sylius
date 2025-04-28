@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\OptionsResolver\Options;
@@ -25,8 +26,13 @@ abstract class AbstractResourceFixture implements FixtureInterface
 {
     private OptionsResolver $optionsResolver;
 
-    public function __construct(private ObjectManager $objectManager, private ExampleFactoryInterface $exampleFactory)
-    {
+    /**
+     * @param ExampleFactoryInterface<ResourceInterface> $exampleFactory
+     */
+    public function __construct(
+        private readonly ObjectManager $objectManager,
+        private readonly ExampleFactoryInterface $exampleFactory,
+    ) {
         $this->optionsResolver =
             (new OptionsResolver())
                 ->setDefault('random', 0)
@@ -79,10 +85,8 @@ abstract class AbstractResourceFixture implements FixtureInterface
             ->variableNode('prototype')->end()
         ;
 
-        /** @var ArrayNodeDefinition $resourcesNode */
         $resourcesNode = $optionsNode->children()->arrayNode('custom');
 
-        /** @var ArrayNodeDefinition $resourceNode */
         $resourceNode = $resourcesNode->requiresAtLeastOneElement()->arrayPrototype();
         $this->configureResourceNode($resourceNode);
 

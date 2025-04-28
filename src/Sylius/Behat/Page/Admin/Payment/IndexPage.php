@@ -73,7 +73,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         ]);
     }
 
-    private function getOrderLinkForRow(int $paymentNumber): NodeElement
+    protected function getOrderLinkForRow(int $paymentNumber): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -83,7 +83,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $row->find('css', 'td:nth-child(2)');
     }
 
-    private function getField(string $orderNumber, string $fieldName): NodeElement
+    protected function getField(string $orderNumber, string $fieldName): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

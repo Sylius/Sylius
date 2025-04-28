@@ -15,8 +15,8 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -110,14 +110,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /** @return NodeElement[] */
-    private function getAppliedCatalogPromotions(string $variantName, string $channelName): array
+    protected function getAppliedCatalogPromotions(string $variantName, string $channelName): array
     {
         $pricingElement = $this->getPricingRow($variantName, $channelName);
 
         return $pricingElement->findAll('css', '.applied-promotion');
     }
 
-    private function getPricingRow(string $variantName, string $channelName): NodeElement
+    protected function getPricingRow(string $variantName, string $channelName): NodeElement
     {
         /** @var NodeElement|null $pricingRow */
         $pricingRow = $this->getDocument()->find(

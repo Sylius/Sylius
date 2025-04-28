@@ -1,7 +1,7 @@
 @viewing_products
 Feature: Seeing the correct product's lowest price according to the period set on the channel
     In order to know whether the current discount is attractive
-    As a Guest
+    As a Visitor
     I want to see a product's lowest price within the channel's set period
 
     Background:

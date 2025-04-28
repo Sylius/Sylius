@@ -13,13 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
     public function goToTheChangePaymentMethodPage(): void
     {
         $this->getElement('payment_method_page')->click();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function goToOrderDetailsInAccount(): void

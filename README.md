@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://sylius.com/github-readme/link/" target="_blank">
-        <img src="https://sylius.com/assets/github-readme.png?20" />
+        <img src="https://sylius.com/assets/github-readme.png?25" />
     </a>
 </h1>
 
@@ -18,9 +18,9 @@ Enjoy being an eCommerce Developer again!
 ⚙️ Installation
 --------------
 
-[Install Sylius](https://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](https://docs.sylius.com/en/latest/book/installation/requirements.html)).
+[Install Sylius](https://docs.sylius.com/getting-started-with-sylius/installation) with Composer (see [requirements details](https://docs.sylius.com/the-book/installation/system-requirements)).
 
-Follow the [Getting started with Sylius tutorial](https://docs.sylius.com/en/latest/getting-started-with-sylius/index.html)!
+Follow the [Getting started with Sylius tutorial](https://docs.sylius.com/getting-started-with-sylius/index)!
 
 📖 Documentation
 ----------------
@@ -46,7 +46,7 @@ or get professional **SLA-backed support and Project Success Assistance** with S
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
-Would like to help us and build the most developer-friendly eCommerce framework? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/book/index.html#contributing)!
+Would like to help us and build the most developer-friendly eCommerce framework? Start from reading our [Contributing Guide](https://docs.sylius.com/the-book/contributing)!
 
 👮 Security issues
 ------------------

@@ -22,15 +22,20 @@ use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterfac
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ProductAssociationInterface> */
 class ProductAssociationExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     private OptionsResolver $optionsResolver;
 
-    /** @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory */
+    /**
+     * @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory
+     * @param ProductAssociationTypeRepositoryInterface<ProductAssociationTypeInterface> $productAssociationTypeRepository
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     */
     public function __construct(
-        private FactoryInterface $productAssociationFactory,
-        private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
-        private ProductRepositoryInterface $productRepository,
+        private readonly FactoryInterface $productAssociationFactory,
+        private readonly ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
+        private readonly ProductRepositoryInterface $productRepository,
     ) {
         $this->optionsResolver = new OptionsResolver();
 

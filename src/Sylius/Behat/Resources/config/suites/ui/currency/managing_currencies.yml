@@ -5,15 +5,16 @@ default:
     suites:
         ui_managing_currencies:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.currency
-                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.shared_storage
 
-                - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
 
                 - sylius.behat.context.ui.admin.managing_currencies

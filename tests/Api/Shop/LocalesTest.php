@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 
 final class LocalesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_locales(): void
     {
         $this->loadFixturesFromFiles(['channel/channel_without_locales.yaml', 'locale.yaml']);
@@ -27,7 +28,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/locale/get_locales_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_only_locales_from_current_channel(): void
     {
         $this->loadFixturesFromFiles(['locale.yaml', 'channel/channel.yaml']);
@@ -37,7 +38,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/locale/get_locales_from_channel_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_locale(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml']);

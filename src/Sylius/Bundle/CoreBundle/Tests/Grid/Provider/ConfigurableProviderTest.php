@@ -22,21 +22,20 @@ use Sylius\Component\Grid\Provider\GridProviderInterface;
 
 final class ConfigurableProviderTest extends TestCase
 {
-    /** @var GridProviderInterface|MockObject */
+    /** @var GridProviderInterface&MockObject */
     private $fooProvider;
 
-    /** @var GridProviderInterface|MockObject */
+    /** @var GridProviderInterface&MockObject */
     private $barProvider;
 
-    /** @var Grid|MockObject */
-    private $gridDefinition;
+    private Grid $gridDefinition;
 
     protected function setUp(): void
     {
         $this->fooProvider = $this->createMock(GridProviderInterface::class);
         $this->barProvider = $this->createMock(GridProviderInterface::class);
 
-        $this->gridDefinition = $this->createMock(Grid::class);
+        $this->gridDefinition = new Grid('app_book', '', []);
     }
 
     /** @test */
@@ -98,7 +97,7 @@ final class ConfigurableProviderTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Grid provider (type "unknown") not found.');
 
-         $configurableProvider->get('app_book');
+        $configurableProvider->get('app_book');
     }
 
     /** @test */

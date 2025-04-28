@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class MediaElement extends Element implements MediaElementInterface
+class MediaElement extends Element implements MediaElementInterface
 {
     public function isImageDisplayed(): bool
     {

@@ -15,7 +15,9 @@
 
 {% block item %}
     <a class="d-flex align-items-center gap-2 py-1 link-reset" href="{{ item.uri }}">
-        {{ ux_icon(item.labelAttributes.icon, {'class': 'icon mr-2'}) }}
+        {%- if item.labelAttributes.icon is defined %}
+            {{ ux_icon(item.labelAttributes.icon, {'class': 'icon mr-2'}) }}
+        {%- endif %}
         {{ item.label|trans }}
     </a>
 {% endblock %}

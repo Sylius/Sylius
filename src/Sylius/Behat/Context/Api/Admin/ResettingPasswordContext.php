@@ -14,10 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,12 +28,15 @@ use Webmozart\Assert\Assert;
 
 final class ResettingPasswordContext implements Context
 {
+    use SecurePasswordTrait;
+
     private ?RequestInterface $request = null;
 
     public function __construct(
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
         private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
     ) {
     }
@@ -78,7 +84,7 @@ final class ResettingPasswordContext implements Context
      */
     public function iSpecifyMyNewPassword(string $password = ''): void
     {
-        $this->request->updateContent(['newPassword' => $password]);
+        $this->request->updateContent(['newPassword' => $this->replaceWithSecurePassword($password)]);
     }
 
     /**
@@ -87,7 +93,7 @@ final class ResettingPasswordContext implements Context
      */
     public function iConfirmMyNewPassword(string $password = ''): void
     {
-        $this->request->updateContent(['confirmNewPassword' => $password]);
+        $this->request->updateContent(['confirmNewPassword' => $this->confirmSecurePassword($password)]);
     }
 
     /**

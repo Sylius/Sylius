@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\EventListener;
 
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class AdminSectionCacheControlSubscriberTest extends WebTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_proper_cache_headers_for_admin_endpoints(): void
     {
         $client = static::createClient();

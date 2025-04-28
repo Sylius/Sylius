@@ -1,7 +1,7 @@
 @checkout
 Feature: Emptying the cart after checkout
     In order to start a new order after purchase
-    As a Customer
+    As a Visitor
     I want my cart to be cleared after I place an order
 
     Background:
@@ -9,12 +9,14 @@ Feature: Emptying the cart after checkout
         And the store has a product "Sig Sauer P226" priced at "$499.99"
         And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @no-api @ui
     Scenario: Cart is emptied after the checkout
-        Given I have product "Sig Sauer P226" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        Given I added product "Sig Sauer P226" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
-        When I confirm my order
+        And I confirm my order
         Then my cart should be empty

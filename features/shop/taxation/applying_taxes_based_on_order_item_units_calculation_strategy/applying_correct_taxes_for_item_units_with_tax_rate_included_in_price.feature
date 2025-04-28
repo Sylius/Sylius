@@ -14,38 +14,43 @@ Feature: Applying correct taxes for item units with tax rate included in price
         And the store has a product "Symfony T-Shirt" priced at "$19.70"
         And it belongs to "Clothes" tax category
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Applying correct taxes for a single item unit with tax rate included in price
-        When I add product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$19.70"
         And my included in price taxes should be "$3.28"
         And there should be one item in my cart
         And total price of "PHP T-Shirt" item should be "$19.70"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Applying correct taxes for a single item with multiple units with tax rate included in price and default calculator
-        When I add 2 products "PHP T-Shirt" to the cart
+        Given I added 2 products "PHP T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$39.40"
         And my included in price taxes should be "$6.56"
         And total price of "PHP T-Shirt" item should be "$39.40"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Applying correct taxes for a single item with multiple units with tax rate included in price and decimal calculator
         Given the "VAT" tax rate has decimal calculator configured
-        When I add 2 products "PHP T-Shirt" to the cart
+        And I added 2 products "PHP T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$39.40"
         And my included in price taxes should be "$6.57"
         And total price of "PHP T-Shirt" item should be "$39.40"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Applying correct taxes for multiple items with tax rate included in price and default calculator
-        When I add products "PHP T-Shirt" and "Symfony T-Shirt" to the cart
+        Given I added products "PHP T-Shirt" and "Symfony T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$39.40"
         And my included in price taxes should be "$6.56"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Applying correct taxes for multiple items with tax rate included in price and decimal calculator
         Given the "VAT" tax rate has decimal calculator configured
-        When I add products "PHP T-Shirt" and "Symfony T-Shirt" to the cart
+        And I added products "PHP T-Shirt" and "Symfony T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$39.40"
         And my included in price taxes should be "$6.56"

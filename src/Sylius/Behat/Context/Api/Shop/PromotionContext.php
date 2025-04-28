@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -29,10 +30,8 @@ final class PromotionContext implements Context
     ) {
     }
 
-    /**
-     * @When I use coupon with code :couponCode
-     * @When I remove coupon from my cart
-     */
+    #[When('I use coupon with code :couponCode')]
+    #[When('I remove coupon from my cart')]
     public function iUseCouponWithCode(?string $couponCode = null): void
     {
         $this->useCouponCode($couponCode);

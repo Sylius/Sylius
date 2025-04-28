@@ -1,7 +1,7 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
     "@id": "\/api\/v2\/validation_errors\/@string@",
-    "@type": "ConstraintViolationList",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.",
     "status": 422,

@@ -1,0 +1,7 @@
+{% set order = hookable_metadata.context.order %}
+
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+{% if order.paymentState == constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_AWAITING_PAYMENT') %}
+    {{ buttons.primary(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'tabler:credit-card', 'green') }}
+{% endif %}

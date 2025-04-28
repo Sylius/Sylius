@@ -1,7 +1,7 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
     "@id": "\/api\/v2\/validation_errors\/@string@",
-    "@type": "ConstraintViolationList",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "type: The attribute type \"foobar\" is not registered. Available attribute types: text, textarea, checkbox, integer, float, percent, datetime, date, select.",
     "status": 422,

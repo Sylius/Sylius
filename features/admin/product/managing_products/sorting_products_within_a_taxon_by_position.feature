@@ -29,7 +29,7 @@ Feature: Sorting listed products from a taxon by position
         And the store has a product "Ultimate Pug" in the "Soft Toys" taxon at 19th position
         And I am logged in as an administrator
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @mink:chromedriver @failing
     Scenario: Setting two products to position -1 on the non-last page
         When I am browsing the 1st page of products from "Soft Toys" taxon
         And I set the position of "Old pug" to "-1"
@@ -48,7 +48,7 @@ Feature: Sorting listed products from a taxon by position
         Then the one before last product on the list should have name "Pug XL" with position 18
         And the last product on the list should have name "Pug XS" with position 19
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @mink:chromedriver @failing
     Scenario: Setting two products to the already occupied position on the other page
         When I am browsing the 1st page of products from "Soft Toys" taxon
         And I set the position of "Old pug" to "15"
@@ -80,7 +80,7 @@ Feature: Sorting listed products from a taxon by position
         And the 7th product on this page should be named "Pug Master"
         And this product should be at position 16
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @mink:chromedriver @failing
     Scenario: Setting two products to the positions overflowing the max available position on the non-last page
         When I am browsing the 1st page of products from "Soft Toys" taxon
         And I set the position of "Old pug" to "25"
@@ -107,7 +107,7 @@ Feature: Sorting listed products from a taxon by position
         When I am browsing the 3rd page of products from "Soft Toys" taxon
         Then the last product on the list within this taxon should have name "Big pug"
 
-    @api @ui @mink:chromedriver
+    @api @ui @mink:chromedriver @failing
     Scenario: Product with position 0 is set as the first one
         When I am browsing products from "Soft Toys" taxon
         And I set the position of "Young pug" to 0

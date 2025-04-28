@@ -110,7 +110,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
         ]);
     }
 
-    private function waitForElement(
+    protected function waitForElement(
         int $timeout,
         string $elementName,
         array $parameters = [],

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutPaymentContext;
@@ -68,12 +70,14 @@ final readonly class CheckoutContext implements Context
 
     /**
      * @Given I have proceeded order with :shippingMethodName shipping method and :paymentMethodName payment
-     * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment
-     * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment method
      * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
      */
     public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
     {
+        if (!$this->selectShippingPage->isOpen()) {
+            $this->selectShippingPage->open();
+        }
+
         $this->selectShippingPage->selectShippingMethod($shippingMethodName);
         $this->selectShippingPage->nextStep();
 
@@ -82,10 +86,7 @@ final readonly class CheckoutContext implements Context
     }
 
     /**
-     * @Given I have proceeded through checkout process in the :localeCode locale with email :email
-     * @Given I have proceeded through checkout process
      * @When I proceed through checkout process
-     * @When I proceeded through checkout process
      * @When I proceed through checkout process in the :localeCode locale
      * @When I proceed through checkout process in the :localeCode locale with email :email
      */
@@ -97,7 +98,6 @@ final readonly class CheckoutContext implements Context
     }
 
     /**
-     * @Given I have proceeded through checkout process with :shippingMethod shipping method
      * @When I proceed through checkout with :shippingMethod shipping method
      */
     public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
@@ -120,9 +120,7 @@ final readonly class CheckoutContext implements Context
         $this->shippingContext->iHaveProceededWithSelectingShippingMethod($shippingMethodName);
     }
 
-    /**
-     * @When I go to the addressing step
-     */
+    #[When('I go to the addressing step')]
     public function iGoToTheAddressingStep(): void
     {
         if ($this->selectShippingPage->isOpen()) {
@@ -144,26 +142,6 @@ final readonly class CheckoutContext implements Context
         }
 
         throw new UnexpectedPageException('It is impossible to go to addressing step from current page.');
-    }
-
-    /**
-     * @When I go to the shipping step
-     */
-    public function iGoToTheShippingStep(): void
-    {
-        if ($this->selectPaymentPage->isOpen()) {
-            $this->selectPaymentPage->changeShippingMethodByStepLabel();
-
-            return;
-        }
-
-        if ($this->completePage->isOpen()) {
-            $this->completePage->changeShippingMethod();
-
-            return;
-        }
-
-        throw new UnexpectedPageException('It is impossible to go to shipping step from current page.');
     }
 
     /**

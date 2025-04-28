@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShippingBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
 {
-    /** @test */
+    #[Test]
     public function it_registers_calculators_in_the_registry(): void
     {
         $this->setDefinition('sylius.registry.shipping_calculator', new Definition());
@@ -47,7 +48,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_registers_calculators_in_the_form_type_registry(): void
     {
         $this->setDefinition('sylius.registry.shipping_calculator', new Definition());
@@ -68,7 +69,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_parameter_which_maps_calculators(): void
     {
         $this->setDefinition('sylius.registry.shipping_calculator', new Definition());

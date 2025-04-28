@@ -38,6 +38,7 @@ final class CheckoutOrderDetailsContext implements Context
     public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order): void
     {
         $this->sharedStorage->set('cart_token', $order->getTokenValue());
+        $this->sharedStorage->set('order', $order);
         $this->client->show(Resources::ORDERS, $order->getTokenValue());
     }
 

@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ResponseCheckerInterface
 {
+    public function isViolationWithMessageInResponse(Response $response, string $message, ?string $property = null): bool;
+
     public function countCollectionItems(Response $response): int;
 
     public function countTotalCollectionItems(Response $response): int;

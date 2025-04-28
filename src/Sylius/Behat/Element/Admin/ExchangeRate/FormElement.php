@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\ExchangeRate;
 
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 
-final class FormElement extends BaseFormElement implements FormElementInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
     public function isFieldDisabled(string $fieldName): bool
     {

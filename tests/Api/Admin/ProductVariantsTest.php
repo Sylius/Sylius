@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -31,7 +32,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_denies_access_to_a_product_variants_list_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles([
@@ -47,7 +48,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_all_product_variants(): void
     {
         $this->loadFixturesFromFiles([
@@ -69,7 +70,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/product_variant/get_product_variants_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_all_product_variants_when_invalid_product_filter_provided(): void
     {
         $this->loadFixturesFromFiles([
@@ -88,7 +89,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/product_variant/get_filtered_product_variants');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -113,7 +114,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/product_variant/get_product_variant_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_product_variant_with_all_optional_data(): void
     {
         $this->loadFixturesFromFiles([
@@ -167,7 +168,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_product_variant_enabled_by_default_with_translation_in_default_locale(): void
     {
         $this->loadFixturesFromFiles([
@@ -201,7 +202,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_with_invalid_channel_code(): void
     {
         $this->loadFixturesFromFiles([
@@ -239,7 +240,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_with_empty_channel_code(): void
     {
         $this->loadFixturesFromFiles([
@@ -277,7 +278,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_when_channel_code_differs_from_key(): void
     {
         $this->loadFixturesFromFiles([
@@ -312,7 +313,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_without_product(): void
     {
         $this->loadFixturesFromFiles([
@@ -349,7 +350,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_with_invalid_locale_code(): void
     {
         $this->loadFixturesFromFiles([
@@ -398,7 +399,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_the_existing_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -465,7 +466,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_update_product_variant_with_invalid_locale_code(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -508,7 +509,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_a_product_variant_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -547,7 +548,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_product_variant_with_duplicate_channel_code_channel_pricings(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -588,7 +589,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_the_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -612,7 +613,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_delete_the_product_variant_in_use(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

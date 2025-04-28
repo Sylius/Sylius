@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Console\Command;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand;
@@ -51,7 +52,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_execute_in_non_interactive_mode(): void
     {
         $this->command->execute([], ['interactive' => false]);
@@ -59,7 +60,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
         self::assertSame(Command::FAILURE, $this->command->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_change_password_when_admin_user_is_not_found(): void
     {
         $this
@@ -85,7 +86,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
         self::assertSame(Command::INVALID, $this->command->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_changes_password_for_existing_admin_user(): void
     {
         $adminUser = $this->createMock(AdminUser::class);

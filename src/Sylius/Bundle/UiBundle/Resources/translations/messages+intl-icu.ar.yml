@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {, 1 عنصر} other {, # عناصر}}'
+        lowest_price_days_before_discount_was: '{days, plural, 
+            one {أقل سعر من # يوم قبل الخصم الحالي كان {price}} 
+            other {أقل سعر من # أيام قبل الخصم الحالي كان {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {هذا العميل لم يضع أي طلب} one {هذا العميل وضع طلبًا واحدًا} other {بشكل عام، هذا العميل وضع # طلبات عبر جميع القنوات}}'

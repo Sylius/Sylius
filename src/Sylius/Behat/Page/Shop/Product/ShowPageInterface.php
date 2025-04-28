@@ -29,6 +29,9 @@ interface ShowPageInterface extends ShopPageInterface
      */
     public function addToCartWithQuantity(string $quantity): void;
 
+    /** @throws ElementNotFoundException */
+    public function updateQuantity(int $quantity): void;
+
     /**
      * @throws ElementNotFoundException
      */
@@ -68,6 +71,8 @@ interface ShowPageInterface extends ShopPageInterface
     public function isOriginalPriceVisible(): bool;
 
     public function hasAddToCartButton(): bool;
+
+    public function hasAddToCartButtonEnabled(): bool;
 
     public function hasAssociation(string $productAssociationName): bool;
 

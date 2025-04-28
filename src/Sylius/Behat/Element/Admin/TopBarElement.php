@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class TopBarElement extends Element implements TopBarElementInterface
+class TopBarElement extends Element implements TopBarElementInterface
 {
     public function hasAvatarInMainBar(string $avatarPath): bool
     {
@@ -27,7 +27,7 @@ final class TopBarElement extends Element implements TopBarElementInterface
         return $this->getAvatarImagePath() === '';
     }
 
-    private function getAvatarImagePath(): string
+    protected function getAvatarImagePath(): string
     {
         $userAvatar = $this->getElement('user_avatar');
 

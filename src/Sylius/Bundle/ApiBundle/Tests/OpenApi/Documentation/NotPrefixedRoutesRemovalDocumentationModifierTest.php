@@ -17,6 +17,7 @@ use ApiPlatform\OpenApi\Model\Info;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\OpenApi;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\OpenApi\Documentation\DocumentationModifierInterface;
 use Sylius\Bundle\ApiBundle\OpenApi\Documentation\NotPrefixedRoutesRemovalDocumentationModifier;
@@ -30,13 +31,13 @@ final class NotPrefixedRoutesRemovalDocumentationModifierTest extends TestCase
         $this->notApiRoutesRemovalDocumentationModifier = new NotPrefixedRoutesRemovalDocumentationModifier(['/api/v2', '/custom-api']);
     }
 
-    /** @test */
+    #[Test]
     public function it_implements_the_documentation_modifier_interface(): void
     {
         $this->assertInstanceOf(DocumentationModifierInterface::class, $this->notApiRoutesRemovalDocumentationModifier);
     }
 
-    /** @test */
+    #[Test]
     public function it_removes_operations_without_api_route_prefix(): void
     {
         $paths = new Paths();

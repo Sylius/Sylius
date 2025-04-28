@@ -17,8 +17,8 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -28,7 +28,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private readonly string $routeName,
+        protected readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -36,10 +36,11 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     public function create(): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->find('css', 'body')->click();
+            $this->blur();
             $this->waitForFormUpdate();
         }
         $this->getDocument()->pressButton('Create');
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function getValidationMessage(string $element, array $parameters = []): string
@@ -113,7 +114,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
+    protected function getFieldElement(string $element, array $parameters = []): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

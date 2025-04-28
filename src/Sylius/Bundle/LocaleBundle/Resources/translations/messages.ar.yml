@@ -5,3 +5,4 @@ sylius:
     form:
         locale:
             name: الاسم
+            select: اختر اللغة...

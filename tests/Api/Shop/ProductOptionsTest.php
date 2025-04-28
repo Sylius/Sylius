@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 
 final class ProductOptionsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_product_option(): void
     {
         $this->setUpDefaultGetHeaders();

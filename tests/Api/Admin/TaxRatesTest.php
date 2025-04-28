@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class TaxRatesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_tax_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -44,7 +45,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_tax_rates(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -63,7 +64,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_new_tax_rate(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -91,7 +92,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_new_tax_rate_with_default_amount(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -118,7 +119,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_existing_tax_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -148,7 +149,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_an_error_when_trying_to_update_with_a_malformed_amount(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class DetailsElement extends Element implements DetailsElementInterface
+class DetailsElement extends Element implements DetailsElementInterface
 {
     public function getProductCode(): string
     {

@@ -66,7 +66,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return null !== $this->getRowFor($shippingMethod)->find('css', '[data-test-status-enabled]');
     }
 
-    private function getRowFor(ResourceInterface $shippingMethod): NodeElement
+    protected function getRowFor(ResourceInterface $shippingMethod): NodeElement
     {
         return $this->getElement('row', ['%resourceId%' => $shippingMethod->getId()]);
     }

@@ -17,7 +17,6 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
-use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -82,8 +81,9 @@ final class TaxonBasedExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         Expr $expr,
-        Expr\Comparison $comparison,
-        Andx $andx,
+        Expr\Func $exprIn,
+        Expr\Comparison $exprEq,
+        Expr\Andx $exprAndx,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
 
@@ -98,12 +98,12 @@ final class TaxonBasedExtensionSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
-        $expr->andX(Argument::type(Expr\Comparison::class), Argument::type(Expr\Comparison::class))->willReturn($andx);
-        $expr->in('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($comparison);
-        $expr->eq('taxon.enabled', 'true')->shouldBeCalled()->willReturn($comparison);
+        $expr->andX(Argument::type(Expr\Func::class), Argument::type(Expr\Comparison::class))->willReturn($exprAndx);
+        $expr->in('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($exprIn);
+        $expr->eq('taxon.enabled', 'true')->shouldBeCalled()->willReturn($exprEq);
         $queryBuilder->expr()->willReturn($expr->getWrappedObject());
         $queryBuilder
-            ->leftJoin('productTaxons.taxon', 'taxon', 'WITH', Argument::type(Andx::class))
+            ->leftJoin('productTaxons.taxon', 'taxon', 'WITH', Argument::type(Expr\Andx::class))
             ->willReturn($queryBuilder)
         ;
         $queryBuilder->orderBy('productTaxons.position', 'ASC')->shouldBeCalled()->willReturn($queryBuilder);

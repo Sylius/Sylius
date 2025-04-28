@@ -554,15 +554,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When /^I delete a ("([^"]+)" promotion)$/
      * @When /^I try to delete a ("([^"]+)" promotion)$/
      */

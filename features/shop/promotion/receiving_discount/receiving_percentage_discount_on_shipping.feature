@@ -12,62 +12,71 @@ Feature: Receiving percentage discount on shipping
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving percentage discount on shipping
         Given the promotion gives "20%" discount on shipping to every order
-        When I add product "PHP T-Shirt" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I added product "PHP T-Shirt" to the cart
+        And I addressed the cart
+        And I chose "DHL" shipping method
+        When I check the details of my cart
         Then my cart total should be "$108.00"
         And my cart shipping total should be "$8.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving free shipping
         Given the promotion gives free shipping to every order
-        When I add product "PHP T-Shirt" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I added product "PHP T-Shirt" to the cart
+        And I addressed the cart
+        And I chose "DHL" shipping method
+        When I check the details of my cart
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
-        When I add product "PHP Mug" to the cart
-        And I change product "PHP Mug" quantity to 4 in my cart
+        And I added product "PHP Mug" to the cart
+        And I changed product "PHP Mug" quantity to 4 in my cart
+        When I check the details of my cart
         Then my cart total should be "$80.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
-        When I add product "PHP Mug" to the cart
-        And I change product "PHP Mug" quantity to 4 in my cart
-        And I change product "PHP Mug" quantity to 2 in my cart
+        And I added product "PHP Mug" to the cart
+        And I changed product "PHP Mug" quantity to 4 in my cart
+        And I changed product "PHP Mug" quantity to 2 in my cart
+        When I check the details of my cart
         Then my cart total should be "$50.00"
         And my cart shipping total should be "$10.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not receiving negative discount on shipping
         Given the promotion gives free shipping to every order over "$70.00"
         And there is a promotion "Shipping promotion"
         And this promotion gives free shipping to every order over "$50.00"
-        When I add 4 products "PHP Mug" to the cart
+        And I added 4 products "PHP Mug" to the cart
+        When I check the details of my cart
         Then my cart total should be "$80.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Still receiving free shipping after removing the product from the cart
         Given the promotion gives free shipping to every order over "$70.00"
-        When I add product "PHP Mug" to the cart
-        And I add product "PHP T-Shirt" to the cart
-        And I remove product "PHP Mug" from the cart
+        And I added product "PHP Mug" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        And I removed product "PHP Mug" from the cart
+        When I check the details of my cart
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not receiving free shipping after removing the product from the cart
         Given the promotion gives free shipping to every order over "$70.00"
-        When I add product "PHP Mug" to the cart
-        And I add product "PHP T-Shirt" to the cart
-        And I remove product "PHP T-Shirt" from the cart
+        And I added product "PHP Mug" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        And I removed product "PHP T-Shirt" from the cart
+        When I check the details of my cart
         Then my cart total should be "$30.00"
         And my cart shipping total should be "$10.00"

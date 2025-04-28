@@ -20,12 +20,12 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
 
-final class FormElement extends BaseFormElement implements FormElementInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -244,12 +244,12 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         ]);
     }
 
-    private function getLastAction(): NodeElement
+    protected function getLastAction(): NodeElement
     {
         return $this->getElement('last_action');
     }
 
-    private function getChannelConfigurationOfLastAction(string $channelCode): NodeElement
+    protected function getChannelConfigurationOfLastAction(string $channelCode): NodeElement
     {
         $lastAction = $this->getLastAction();
 
@@ -260,12 +260,12 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         ;
     }
 
-    private function getLastRule(): NodeElement
+    protected function getLastRule(): NodeElement
     {
         return $this->getElement('last_rule');
     }
 
-    private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
+    protected function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
     {
         $lastRule = $this->getLastRule();
 

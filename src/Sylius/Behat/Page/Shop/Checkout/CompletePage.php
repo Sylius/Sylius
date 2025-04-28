@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -30,7 +30,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor,
+        protected TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -182,6 +182,8 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     public function confirmOrder(): void
     {
         $this->getElement('confirm_button')->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeAddress(): void
@@ -278,7 +280,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ]);
     }
 
-    private function isAddressValid(string $displayedAddress, AddressInterface $address): bool
+    protected function isAddressValid(string $displayedAddress, AddressInterface $address): bool
     {
         return
             $this->hasAddressPart($displayedAddress, $address->getCompany(), true) &&
@@ -293,7 +295,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ;
     }
 
-    private function hasAddressPart(string $address, ?string $addressPart, bool $optional = false): bool
+    protected function hasAddressPart(string $address, ?string $addressPart, bool $optional = false): bool
     {
         if ($optional && null === $addressPart) {
             return true;
@@ -302,24 +304,24 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return str_contains($address, $addressPart);
     }
 
-    private function getCountryName(string $countryCode): string
+    protected function getCountryName(string $countryCode): string
     {
         return strtoupper(Countries::getName($countryCode, 'en'));
     }
 
-    private function getPriceFromString(string $price): int
+    protected function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    private function getTotalFromString(string $total): int
+    protected function getTotalFromString(string $total): int
     {
         $total = str_replace('Total:', '', $total);
 
         return $this->getPriceFromString($total);
     }
 
-    private function getBaseTotalFromString(string $total): int
+    protected function getBaseTotalFromString(string $total): int
     {
         $total = str_replace('Total in base currency:', '', $total);
 

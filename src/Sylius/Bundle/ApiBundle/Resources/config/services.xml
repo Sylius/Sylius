@@ -101,5 +101,20 @@
             <argument type="service" id=".inner" />
             <argument>%sylius_api.operations_to_remove%</argument>
         </service>
+
+        <!--
+            https://api-platform.com/docs/core/bootstrap/
+            The metadata for an API resource is loaded from XML, YAML, and PHP files
+            by ExtractorResourceMetadataCollectionFactory (decoration priority 800).
+            This decorator should run immediately after to merge only non-null metadata.
+        -->
+        <service id="sylius_api.api_platform.metadata.resource.metadata_collection_factory.duplicate_operation_replacer"
+                 class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\DuplicateOperationReplacerResourceMetadataCollectionFactory"
+                 decorates="api_platform.metadata.resource.metadata_collection_factory"
+                 decoration-priority="799"
+                 public="false"
+        >
+            <argument type="service" id=".inner" />
+        </service>
     </services>
 </container>

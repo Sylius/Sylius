@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -37,11 +39,8 @@ final class PaymentRequestWorkflowTest extends KernelTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider availableTransitions
-     */
+    #[DataProvider('availableTransitions')]
+    #[Test]
     public function it_applies_all_available_transitions(
         string $fromState,
         string $transition,
@@ -55,7 +54,7 @@ final class PaymentRequestWorkflowTest extends KernelTestCase
         $this->assertSame($toState, $this->paymentRequest->getState());
     }
 
-    public function availableTransitions(): iterable
+    public static function availableTransitions(): iterable
     {
         yield [PaymentRequestInterface::STATE_NEW, PaymentRequestTransitions::TRANSITION_PROCESS, PaymentRequestInterface::STATE_PROCESSING];
         yield [PaymentRequestInterface::STATE_NEW, PaymentRequestTransitions::TRANSITION_COMPLETE, PaymentRequestInterface::STATE_COMPLETED];

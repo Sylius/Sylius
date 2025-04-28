@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
@@ -35,7 +36,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_catalog_promotions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
@@ -45,7 +46,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/catalog_promotion/get_catalog_promotions_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
@@ -55,7 +56,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/catalog_promotion/get_catalog_promotion_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_catalog_promotion(): void
     {
         $this->loadFixturesFromFiles([
@@ -111,7 +112,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_catalog_promotion_without_required_data(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -121,7 +122,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $this->assertResponseUnprocessableEntity('admin/catalog_promotion/post_catalog_promotion_without_required_data_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_catalog_promotion_with_taken_code(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
@@ -139,7 +140,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_catalog_promotion_with_end_date_earlier_than_start_date(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
@@ -159,7 +160,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_catalog_promotion_with_invalid_scopes(): void
     {
         $this->loadFixturesFromFiles([
@@ -344,7 +345,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_catalog_promotion_with_invalid_actions(): void
     {
         $this->loadFixturesFromFiles([
@@ -508,7 +509,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
@@ -556,7 +557,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/catalog_promotion/put_catalog_promotion_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_a_catalog_promotion_with_duplicate_locale_translation(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
@@ -578,7 +579,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();

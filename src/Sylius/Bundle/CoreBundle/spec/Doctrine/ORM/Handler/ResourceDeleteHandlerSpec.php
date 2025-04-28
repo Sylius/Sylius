@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\ORMException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -67,8 +67,17 @@ final class ResourceDeleteHandlerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ResourceInterface $resource,
     ): void {
+        /** @deprecated This fallback should be removed in Sylius 3.0 */
+        if (interface_exists(ORMException::class)) {
+            $ormException = new class() extends \RuntimeException implements ORMException {
+            };
+        } else {
+            $ormException = new class() extends ORMException {
+            };
+        }
+
         $entityManager->beginTransaction()->shouldBeCalled();
-        $decoratedHandler->handle($resource, $repository)->willThrow(ORMException::class);
+        $decoratedHandler->handle($resource, $repository)->willThrow($ormException);
         $entityManager->commit()->shouldNotBeCalled();
         $entityManager->rollback()->shouldBeCalled();
 

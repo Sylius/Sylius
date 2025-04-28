@@ -4,5 +4,5 @@
 sylius:
     review:
         accept: 'تم قبول المراجعة بنجاح.'
-        reject: 'تم رفض المراجعة.'
-        wait_for_the_acceptation: 'في انتظار الموافقة على المراجعة.'
+        reject: 'تم رفض المراجعة بنجاح.'
+        wait_for_the_acceptation: 'مراجعتك في انتظار القبول.'

@@ -356,14 +356,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I remove its last scope
      */
     public function iRemoveItsLastScope(): void

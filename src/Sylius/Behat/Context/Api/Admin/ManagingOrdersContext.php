@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -63,6 +65,12 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->responseChecker->getValue($response, '@id'), $this->iriConverter->getIriFromResourceInSection($order, 'admin'));
 
         $this->sharedStorage->set('order', $order);
+    }
+
+    #[When('/^I view the summary of the (last order)$/')]
+    public function iViewTheSummaryOfTheLastOrder(OrderInterface $order): void
+    {
+        $this->client->show(Resources::ORDERS, $order->getTokenValue());
     }
 
     /**
@@ -464,6 +472,18 @@ final readonly class ManagingOrdersContext implements Context
                 str_replace(' ', '_', strtolower($paymentState)),
             ),
             sprintf('Order %s does not have %s payment state', $order->getTokenValue(), $paymentState),
+        );
+    }
+
+    #[Then('the last order should have order payment state :orderPaymentState')]
+    public function theLastOrderShouldHavePaymentState(string $orderPaymentState): void
+    {
+        $order = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        Assert::same(
+            $order['paymentState'],
+            strtolower($orderPaymentState),
+            sprintf('Order "%s" does not have "%s" payment state', $order['tokenValue'], $orderPaymentState),
         );
     }
 
@@ -982,9 +1002,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->getTotalAsInt($tax), $totalTax);
     }
 
-    /**
-     * @Then I should be informed that there are no payments
-     */
+    #[Then('I should be informed that there are no payments')]
     public function iShouldSeeInformationAboutNoPayments(): void
     {
         Assert::same(

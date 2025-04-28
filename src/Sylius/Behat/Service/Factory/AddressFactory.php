@@ -31,6 +31,7 @@ final class AddressFactory extends BaseAddressFactory implements AddressFactoryI
         $address->setStreet('Wall Street');
         $address->setPostcode('00-001');
         $address->setCountryCode('US');
+        $address->setProvinceName('Arkansas');
         $address->setFirstName('Richy');
         $address->setLastName('Rich');
 
@@ -47,6 +48,23 @@ final class AddressFactory extends BaseAddressFactory implements AddressFactoryI
         $address->setCountryCode($countryCode);
         $address->setFirstName('Richy');
         $address->setLastName('Rich');
+
+        return $address;
+    }
+
+    public function createDefaultWithProvinceName(string $provinceName): AddressInterface
+    {
+        $address = $this->createDefault();
+        $address->setProvinceName($provinceName);
+
+        return $address;
+    }
+
+    public function createDefaultWithFirstAndLastName(string $firstName, string $lastName): AddressInterface
+    {
+        $address = $this->createDefault();
+        $address->setFirstName($firstName);
+        $address->setLastName($lastName);
 
         return $address;
     }

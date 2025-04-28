@@ -18,12 +18,15 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductAssociationRepositoryInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
 class AssociationComponent
 {
+    use HookableComponentTrait;
+
     #[ExposeInTemplate('product_association')]
     public ProductAssociationInterface $productAssociation;
 

@@ -63,7 +63,7 @@ final class NonArchivedExtensionSpec extends ObjectBehavior
 
         $expr->isNull('o.archivedAt')->willReturn('o.archivedAt IS NULL');
         $queryBuilder->expr()->willReturn($expr);
-        $queryBuilder->andWhere('o.archivedAt IS NULL')->shouldBeCalled();
+        $queryBuilder->andWhere('o.archivedAt IS NULL')->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection(
             $queryBuilder,

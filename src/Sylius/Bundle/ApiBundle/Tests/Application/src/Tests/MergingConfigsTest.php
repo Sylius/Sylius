@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 final class MergingConfigsTest extends ApiTestCase
 {
@@ -26,7 +27,7 @@ final class MergingConfigsTest extends ApiTestCase
         $this->setUpTest();
     }
 
-    /** @test */
+    #[Test]
     public function it_allows_to_add_a_new_operation_with_xml(): void
     {
         static::createClient()->request('GET', '/api/v2/shop/channels-new-path-xml');
@@ -35,7 +36,7 @@ final class MergingConfigsTest extends ApiTestCase
         self::assertJsonContains(['@type' => 'hydra:Collection']);
     }
 
-    /** @test */
+    #[Test]
     public function it_allows_to_add_a_new_operation_with_yaml(): void
     {
         static::createClient()->request('GET', '/api/v2/shop/currencies-new-path-yaml');
@@ -44,8 +45,8 @@ final class MergingConfigsTest extends ApiTestCase
         self::assertJsonContains(['@type' => 'hydra:Collection']);
     }
 
-    /** @test */
-    public function it_allows_to_overwrite_an_existing_endpoint_with_xml(): void
+    #[Test]
+    public function it_allows_to_overwrite_the_path_of_an_existing_endpoint_with_xml(): void
     {
         static::createClient()->request('GET', '/api/v2/shop/channels/WEB');
 
@@ -56,14 +57,35 @@ final class MergingConfigsTest extends ApiTestCase
         self::assertResponseIsSuccessful();
     }
 
-    /** @test */
-    public function it_allows_to_overwrite_an_existing_endpoint_with_yaml(): void
+    #[Test]
+    public function it_allows_to_overwrite_the_path_of_an_existing_endpoint_with_yaml(): void
     {
         static::createClient()->request('GET', '/api/v2/shop/currencies/USD');
 
         self::assertResponseStatusCodeSame(404);
 
         static::createClient()->request('GET', '/api/v2/shop/currencies/new-yaml/USD');
+
+        self::assertResponseIsSuccessful();
+    }
+
+    #[Test]
+    public function it_allows_to_overwrite_the_input_class_of_an_existing_endpoint_with_yaml(): void
+    {
+        static::createClient()->request('POST', '/api/v2/shop/bar', [
+            'json' => [
+                'foo' => 'test',
+                'bar' => 'test',
+            ],
+        ]);
+
+        self::assertResponseStatusCodeSame(400);
+
+        static::createClient()->request('POST', '/api/v2/shop/bar', [
+            'json' => [
+                'baz' => 'test',
+            ],
+        ]);
 
         self::assertResponseIsSuccessful();
     }

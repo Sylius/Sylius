@@ -20,12 +20,12 @@ use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
-final class AssociationsFormElement extends BaseFormElement implements AssociationsFormElementInterface
+class AssociationsFormElement extends BaseFormElement implements AssociationsFormElementInterface
 {
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -76,7 +76,7 @@ final class AssociationsFormElement extends BaseFormElement implements Associati
         );
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

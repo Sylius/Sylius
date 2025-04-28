@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface as OrderDetailsPage;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
@@ -64,7 +65,8 @@ final class CheckoutThankYouContext implements Context
      * @Then the visitor should see the thank you page
      * @Then the customer should see the thank you page
      */
-    public function iShouldSeeTheThankYouPage()
+    #[Then('my order should be completed successfully')]
+    public function iShouldSeeTheThankYouPage(): void
     {
         Assert::true($this->thankYouPage->hasThankYouMessage());
     }
@@ -77,10 +79,8 @@ final class CheckoutThankYouContext implements Context
         Assert::false($this->thankYouPage->isOpen(['_locale' => $localeCode]));
     }
 
-    /**
-     * @Then I should not see the thank you page
-     */
-    public function iShouldNotSeeTheThankYouPage()
+    #[Then('I should not see the thank you page')]
+    public function iShouldNotSeeTheThankYouPage(): void
     {
         Assert::false($this->thankYouPage->isOpen());
     }

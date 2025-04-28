@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Console\Command;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Command\CreateAdminUser;
@@ -63,7 +64,7 @@ final class CreateAdminUserCommandTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_admin_user_if_accepted_in_the_summary(): void
     {
         $this
@@ -97,7 +98,7 @@ final class CreateAdminUserCommandTest extends TestCase
         self::assertStringContainsString('Admin user has been successfully created.', $this->command->getDisplay());
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_an_admin_user_if_declined_in_the_summary(): void
     {
         $this->command->setInputs([
@@ -132,7 +133,7 @@ final class CreateAdminUserCommandTest extends TestCase
         self::assertStringContainsString('Admin user creation has been aborted.', $this->command->getDisplay());
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_an_admin_user_if_dispatched_command_returns_failure(): void
     {
         $adminUserData = $this->getDefaultAdminUserDataSetup();
@@ -170,7 +171,7 @@ final class CreateAdminUserCommandTest extends TestCase
         self::assertSame(Command::FAILURE, $this->command->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_an_admin_user_if_command_is_not_interactive(): void
     {
         self::assertSame(Command::FAILURE, $this->command->execute([], ['interactive' => false]));

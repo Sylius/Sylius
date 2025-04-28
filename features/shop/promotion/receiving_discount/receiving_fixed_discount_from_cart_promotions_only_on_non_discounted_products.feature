@@ -1,8 +1,8 @@
 @receiving_discount
 Feature: Receiving fixed discount from cart promotions only on non discounted products
-    In order not to combine cart and catalog promotions
-    As a Store Owner
-    I want to apply discount only on products that are non discounted
+    In order to avoid combining cart promotions with catalog promotions,
+    As a Customer
+    I want to receive a fixed discount on my order only for those products that are not already discounted by a catalog promotion
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -10,23 +10,26 @@ Feature: Receiving fixed discount from cart promotions only on non discounted pr
         And the store has a product "T-Shirt" priced at "$20.00"
         And the store has a product "Cap" priced at "$10.00"
         And there is a catalog promotion "Winter sale" that reduces price by "25%" and applies on "T-Shirt" product
+        And I am a logged in customer
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving product discount from cart promotions also on discounted products
         Given there is a promotion "Christmas sale" that applies to discounted products
         And this promotion gives "$10.00" off on every product priced between "$10.00" and "$50.00"
-        When the customer adds "T-Shirt" product to the cart
-        And the customer adds "Mug" product to the cart
+        And I added product "T-Shirt" to the cart
+        And I added product "Mug" to the cart
+        When I check the details of my cart
         Then the product "T-Shirt" should have discounted unit price "$5.00" in the cart
         And the product "Mug" should have discounted unit price "$30.00" in the cart
         And my cart total should be "$35.00"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving product discount from cart promotions only on non discounted products
         Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "$10.00" off on every product priced between "$10.00" and "$50.00"
-        When the customer adds "T-Shirt" product to the cart
-        And the customer adds "Mug" product to the cart
+        When I added product "T-Shirt" to the cart
+        And I added product "Mug" to the cart
+        When I check the details of my cart
         Then the product "T-Shirt" should have discounted unit price "$15.00" in the cart
         And the product "Mug" should have discounted unit price "$30.00" in the cart
         And the cart total should be "$45.00"
@@ -35,9 +38,10 @@ Feature: Receiving fixed discount from cart promotions only on non discounted pr
     Scenario: Receiving order discount from cart promotions distributed only on non discounted products
         Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "$10.00" discount to every order
-        When the customer adds "T-Shirt" product to the cart
-        And the customer adds "Mug" product to the cart
-        And the customer adds "Cap" product to the cart
+        When I added product "T-Shirt" to the cart
+        And I added product "Mug" to the cart
+        And I added product "Cap" to the cart
+        When I check the details of my cart
         Then the product "T-Shirt" should have discounted unit price "$15.00" in the cart
         And the product "Mug" should have total price "$32.00" in the cart
         And the product "Cap" should have total price "$8.00" in the cart

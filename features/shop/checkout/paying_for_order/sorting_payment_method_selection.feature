@@ -1,7 +1,7 @@
 @checkout
 Feature: Sorting payment method selection
     In order to see the most suitable payment methods first
-    As a Customer
+    As a Visitor
     I want to have them already sorted
 
     Background:
@@ -11,12 +11,12 @@ Feature: Sorting payment method selection
         And the store allows paying with "Bank transfer" at position 0
         And the store allows paying with "Cash on Delivery" at position 2
         And the store allows paying with "Offline" at position 1
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing payment methods sorted
-        Given I have product "Targaryen T-Shirt" in the cart
-        When I am at the checkout addressing step
+        Given I added product "Targaryen T-Shirt" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Aardvark Stagecoach" shipping method

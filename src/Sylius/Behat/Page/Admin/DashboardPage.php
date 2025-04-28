@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Admin;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -155,7 +155,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         ]);
     }
 
-    private function waitForStatisticsUpdate(): void
+    protected function waitForStatisticsUpdate(): void
     {
         sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
         $liveElement = $this->getElement('statistics_component');

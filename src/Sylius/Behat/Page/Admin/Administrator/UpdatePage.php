@@ -44,7 +44,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    private function getAvatarImagePath(): string
+    protected function getAvatarImagePath(): string
     {
         $avatarImage = $this->getElement('avatar_image');
         $imagePath = $avatarImage->getAttribute('data-test-avatar-image');

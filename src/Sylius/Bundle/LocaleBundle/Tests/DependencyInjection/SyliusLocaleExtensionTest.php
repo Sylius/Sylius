@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\LocaleBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\LocaleBundle\Attribute\AsLocaleContext;
 use Sylius\Bundle\LocaleBundle\DependencyInjection\SyliusLocaleExtension;
 use Sylius\Bundle\LocaleBundle\Tests\Stub\LocaleContextStub;
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusLocaleExtensionTest extends AbstractExtensionTestCase
 {
-    /** @test */
+    #[Test]
     public function it_autoconfigures_locale_context_with_attribute(): void
     {
         $this->container->setDefinition(

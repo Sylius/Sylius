@@ -95,15 +95,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->updatePage->saveChanges();
-    }
-
-    /**
      * @When I delete the :paymentMethod payment method
      * @When I try to delete the :paymentMethod payment method
      */

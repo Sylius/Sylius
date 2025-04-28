@@ -16,12 +16,15 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\ProductReview;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent]
 class CountComponent
 {
+    use HookableComponentTrait;
+
     public ProductInterface $product;
 
     /**

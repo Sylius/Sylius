@@ -17,13 +17,13 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class PricingElement extends Element implements PricingElementInterface
+class PricingElement extends Element implements PricingElementInterface
 {
     public function getPriceForChannel(string $channelCode): string
     {
-        $channelPriceRow = $this->getChannelPriceRow($channelCode);
-
-        if (null === $channelPriceRow) {
+        try {
+            $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        } catch (ElementNotFoundException) {
             return '';
         }
 
@@ -34,7 +34,11 @@ final class PricingElement extends Element implements PricingElementInterface
 
     public function getOriginalPriceForChannel(string $channelCode): string
     {
-        $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        try {
+            $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        } catch (ElementNotFoundException) {
+            return '';
+        }
 
         $priceForChannel = $channelPriceRow->find('css', '[data-test-original-price]');
 
@@ -91,20 +95,21 @@ final class PricingElement extends Element implements PricingElementInterface
         ]);
     }
 
-    private function getAppliedPromotionsForChannel(string $channelCode): array
+    /** @return NodeElement[] */
+    protected function getAppliedPromotionsForChannel(string $channelCode): array
     {
-        /** @var NodeElement $channelPriceRow */
-        $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        try {
+            $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        } catch (ElementNotFoundException) {
+            return [];
+        }
 
         return $channelPriceRow->findAll('css', '[data-test-applied-promotion]');
     }
 
-    private function getChannelPriceRow(string $channelCode): ?NodeElement
+    /** @throws ElementNotFoundException */
+    protected function getChannelPriceRow(string $channelCode): NodeElement
     {
-        try {
-            return $this->getElement('price_row', ['%channel_code%' => $channelCode]);
-        } catch (ElementNotFoundException) {
-            return null;
-        }
+        return $this->getElement('price_row', ['%channel_code%' => $channelCode]);
     }
 }

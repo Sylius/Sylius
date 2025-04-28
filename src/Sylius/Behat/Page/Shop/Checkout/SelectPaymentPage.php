@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
 
 class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterface
@@ -27,6 +27,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function selectPaymentMethod(string $paymentMethod): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
+            DriverHelper::waitForPageToLoad($this->getSession());
             $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
 
             return;
@@ -59,6 +60,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeShippingMethod(): void
