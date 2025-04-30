@@ -35,7 +35,7 @@ final class ConfigurableProviderTest extends TestCase
         $this->fooProvider = $this->createMock(GridProviderInterface::class);
         $this->barProvider = $this->createMock(GridProviderInterface::class);
 
-        $this->gridDefinition = new Grid('app_book', '', []);
+        $this->gridDefinition = Grid::fromCodeAndDriverConfiguration('app_book', '', []);
     }
 
     /** @test */
