@@ -37,7 +37,7 @@ return static function (Config $config): void
     $config->add(
         $testsClassSet,
         Rule::allClasses()
-            ->that(new HaveNameMatching('*Test$'))
+            ->that(new HaveNameMatching('*Test'))
             ->should(new IsFinal())
             ->because('Tests should not be extendable')
         ,
