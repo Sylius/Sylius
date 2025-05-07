@@ -217,7 +217,7 @@
         "mockery/mockery": "^1.4",
         "payum/paypal-express-checkout-nvp": "^1.7.3",
         "payum/stripe": "^1.7.3",
-        "phparkitect/phparkitect": "^0.2.9",
+        "phparkitect/phparkitect": "^0.2.9 || ^0.5",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^1.6",
