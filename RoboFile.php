@@ -48,11 +48,22 @@ class RoboFile extends Tasks
     private function processPackagePipeline(string $package): ?Result
     {
         $symfonyVersion = getenv('SYMFONY_VERSION');
+        $doctrineORMVersion = getenv('DOCTRINE_ORM_VERSION');
         $unstable = getenv('UNSTABLE');
         $packagePath = sprintf('%s/src/Sylius/%s', self::ROOT_DIR, $package);
+        $composerJsonPath = sprintf('%s/composer.json', $packagePath);
+        $requiresDoctrineORM = false;
 
         if (false === $symfonyVersion) {
             throw new RuntimeException('SYMFONY_VERSION environment variable is not set.');
+        }
+
+        if (false === $doctrineORMVersion) {
+            throw new RuntimeException('DOCTRINE_ORM_VERSION environment variable is not set.');
+        }
+
+        if (!file_exists($composerJsonPath)) {
+            throw new RuntimeException('composer.json file does not exist.');
         }
 
         $task = $this->taskExecStack()
@@ -64,6 +75,24 @@ class RoboFile extends Tasks
         if (self::YES === $unstable) {
             $task->exec('composer config minimum-stability dev');
             $task->exec('composer config prefer-stable true');
+        }
+
+        $composerData = json_decode(file_get_contents($composerJsonPath), true);
+        $requires = $composerData['require'] ?? [];
+        $requireDev = $composerData['require-dev'] ?? [];
+
+        $existsOnRequire = array_key_exists('doctrine/orm', $requires);
+        $existsOnRequireDev = array_key_exists('doctrine/orm', $requireDev);
+
+        $requiresDoctrineORM = $existsOnRequire || $existsOnRequireDev;
+
+        if ('' !== $doctrineORMVersion && $requiresDoctrineORM) {
+            $task
+                ->exec(sprintf(
+                    'composer require %s doctrine/orm "%s" --no-update --no-scripts --no-interaction',
+                    $existsOnRequireDev ? '--dev' : '',
+                    $doctrineORMVersion,
+                ));
         }
 
         $task
