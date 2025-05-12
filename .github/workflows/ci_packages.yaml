@@ -44,7 +44,7 @@ jobs:
     test:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}${{ matrix.orm != '' && format(', ORM {0}', matrix.orm) || '' }}"
         timeout-minutes: 25
 
         strategy:
@@ -54,6 +54,7 @@ jobs:
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
+            DOCTRINE_ORM_VERSION: "${{ matrix.orm }}"
             UNSTABLE: "no"
 
         steps:
@@ -98,4 +99,4 @@ jobs:
                     chmod +x robo.phar && sudo mv robo.phar /tmp/robo
                     
             -   name: "Run pipeline"
-                run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 /tmp/robo ci:packages
+                run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 $HOME/.composer/vendor/bin/robo ci:packages
