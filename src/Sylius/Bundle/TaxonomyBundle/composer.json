@@ -30,13 +30,13 @@
     "require": {
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.12",
-        "sylius/resource-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.12 || ^1.13@alpha",
         "sylius/taxonomy": "^2.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.2"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.18 || ^3.3",
         "phpunit/phpunit": "^10.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
