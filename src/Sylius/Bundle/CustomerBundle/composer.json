@@ -36,10 +36,10 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.18 || ^3.3",
         "egulias/email-validator": "^4.0",
         "sylius/customer": "^2.0",
-        "sylius/resource-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.12 || ^1.13@alpha",
         "symfony/framework-bundle": "^6.4.1 || ^7.2",
         "webmozart/assert": "^1.11"
     },
