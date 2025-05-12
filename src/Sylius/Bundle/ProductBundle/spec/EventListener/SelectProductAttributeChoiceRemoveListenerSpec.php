@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ProductBundle\EventListener;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query;
@@ -66,6 +67,8 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
                 ]],
             ],
         ]);
+
+        $connection->getDatabasePlatform()->willReturn(new MySqlPlatform());
 
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
         $entityManager->getConnection()->willReturn($connection);
