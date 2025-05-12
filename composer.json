@@ -212,7 +212,7 @@
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.6",
         "nyholm/psr7": "^1.8",
-        "phparkitect/phparkitect": "^0.3",
+        "phparkitect/phparkitect": "^0.6",
         "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpstan/extension-installer": "^1.4",
