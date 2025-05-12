@@ -99,4 +99,4 @@ jobs:
                     chmod +x robo.phar && sudo mv robo.phar /tmp/robo
                     
             -   name: "Run pipeline"
-                run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 $HOME/.composer/vendor/bin/robo ci:packages
+                run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 /tmp/robo ci:packages

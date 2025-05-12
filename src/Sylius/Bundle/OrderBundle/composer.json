@@ -31,16 +31,13 @@
         "stof/doctrine-extensions-bundle": "^1.12",
         "sylius/money-bundle": "^2.0",
         "sylius/order": "^2.0",
-        "sylius/resource-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.12 || ^1.13@alpha",
         "symfony/framework-bundle": "^6.4.1 || ^7.2",
         "symfony/service-contracts": "^3.5"
     },
-    "conflict": {
-        "doctrine/orm": ">= 3.0"
-    },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.18 || ^3.3",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^10.5",
