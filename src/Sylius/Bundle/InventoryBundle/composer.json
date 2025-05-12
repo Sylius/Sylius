@@ -28,17 +28,16 @@
     "require": {
         "php": "^8.2",
         "sylius/inventory": "^2.0",
-        "sylius/resource-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.12 || ^1.13@alpha",
         "symfony/framework-bundle": "^6.4.1 || ^7.2",
         "symfony/validator": "^6.4 || ^7.2"
     },
     "conflict": {
-        "doctrine/orm": ">= 3.0",
         "phpstan/phpdoc-parser": ">= 2.0"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.18 || ^3.3",
         "phpunit/phpunit": "^10.5",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
