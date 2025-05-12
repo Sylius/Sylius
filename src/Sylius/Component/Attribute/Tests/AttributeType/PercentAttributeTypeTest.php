@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Attribute\AttributeType;
 
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\PercentAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -37,6 +38,11 @@ class PercentAttributeTypeTest extends TestCase
     public function testCanBeInstantiated(): void
     {
         self::assertInstanceOf(PercentAttributeType::class, $this->type);
+    }
+
+    public function testShouldImplementAttributeTypeInterface(): void
+    {
+        self::assertInstanceOf(AttributeTypeInterface::class, $this->type);
     }
 
     public function testStorageTypeShouldBeFloat(): void
