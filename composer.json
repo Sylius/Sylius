@@ -242,7 +242,8 @@
         "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "conflict": {
-        "api-platform/jsonld": "^4.1.1"
+        "api-platform/jsonld": "^4.1.1",
+        "behat/gherkin": "^4.13.0"
     },
     "config": {
         "preferred-install": {
