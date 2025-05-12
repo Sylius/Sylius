@@ -78,10 +78,10 @@ class RoboFile extends Tasks
         }
 
         $composerData = json_decode(file_get_contents($composerJsonPath), true);
-        $requires = $composerData['require'] ?? [];
+        $require = $composerData['require'] ?? [];
         $requireDev = $composerData['require-dev'] ?? [];
 
-        $existsOnRequire = array_key_exists('doctrine/orm', $requires);
+        $existsOnRequire = array_key_exists('doctrine/orm', $require);
         $existsOnRequireDev = array_key_exists('doctrine/orm', $requireDev);
 
         $requiresDoctrineORM = $existsOnRequire || $existsOnRequireDev;
