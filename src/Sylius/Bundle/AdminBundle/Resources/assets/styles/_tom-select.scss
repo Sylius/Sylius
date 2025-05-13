@@ -40,3 +40,11 @@
     top: 14px !important;
     font-size: 24px;
 }
+
+.ts-wrapper.is-invalid .ts-control {
+    border-color: var(--bs-form-invalid-color) !important;
+}
+
+.ts-wrapper.is-invalid .ts-control {
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-form-invalid-color), .25) !important;
+}
