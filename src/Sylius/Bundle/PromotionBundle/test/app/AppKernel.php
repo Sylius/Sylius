@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new Sylius\Bundle\PromotionBundle\SyliusPromotionBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new AppBundle\AppBundle(),
         ];
     }
 
