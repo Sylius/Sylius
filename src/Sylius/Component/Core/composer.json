@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/common": "^3.0.3",
+        "doctrine/common": "^3.2",
         "guzzlehttp/guzzle": "^7.9",
         "knplabs/gaufrette": "^0.11",
         "laminas/laminas-stdlib": "^3.19",
