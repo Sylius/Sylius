@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Application\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\Taxon as BaseTaxon;
 
+#[ORM\Entity]
+#[ORM\Table(name: 'sylius_taxon')]
 class Taxon extends BaseTaxon
 {
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $type = null;
 
     public function __construct()
@@ -31,7 +35,7 @@ class Taxon extends BaseTaxon
         $this->type = $type;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
