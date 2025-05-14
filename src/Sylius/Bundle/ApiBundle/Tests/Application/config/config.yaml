@@ -29,6 +29,7 @@ sylius_api:
         - 'sylius_api_shop_currency_get_collection'
 
 framework:
+    annotations: false
     secret: "ch4mb3r0f5ecr3ts"
     default_locale: "%locale%"
     session:
@@ -71,8 +72,8 @@ doctrine:
                 mappings:
                     test:
                         mapping: true
-                        type: xml
-                        dir: '%kernel.project_dir%/config/doctrine'
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Entity'
                         alias: ~
                         prefix: Sylius\Bundle\ApiBundle\Application\Entity
                         is_bundle: false

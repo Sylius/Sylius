@@ -34,7 +34,7 @@
         "knplabs/knp-gaufrette-bundle": "^0.9",
         "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.13",
-        "sylius-labs/association-hydrator": "^1.2",
+        "sylius-labs/association-hydrator": "^1.2 || dev-orm-3",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.2",
         "sylius/addressing-bundle": "^2.0",
         "sylius/attribute-bundle": "^2.0",
@@ -73,6 +73,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/orm": "^2.18 || ^3.3",
         "hwi/oauth-bundle": "^2.2",
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
