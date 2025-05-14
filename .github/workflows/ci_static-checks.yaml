@@ -113,7 +113,7 @@ jobs:
                 run: bin/console lint:yaml src --parse-tags
 
             -   name: Validate Package versions
-                run: vendor/bin/monorepo-builder validate || true
+                run: vendor/bin/monorepo-builder validate
 
             -   name: Run PHPArkitect
                 run: vendor/bin/phparkitect check

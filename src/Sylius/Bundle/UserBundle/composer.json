@@ -41,7 +41,7 @@
         "doctrine/orm": "^2.18 || ^3.3",
         "egulias/email-validator": "^4.0",
         "sylius/mailer-bundle": "^2.1",
-        "sylius/resource-bundle": "^1.12 | ^1.13@alpha",
+        "sylius/resource-bundle": "^1.12 || ^1.13@alpha",
         "sylius/user": "^2.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.2",
         "symfony/password-hasher": "^6.4 || ^7.2",
