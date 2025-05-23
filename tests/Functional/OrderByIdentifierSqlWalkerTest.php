@@ -49,7 +49,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         self::assertStringEndsWith(
             'ORDER BY m0_.email DESC, m0_.id ASC',
             $this->generateSql(
-                'select u.id, LENGTH(u.email) AS HIDDEN email_length from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc',
+                'select u.id, (CASE WHEN u.id = 1 THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc',
             ),
         );
     }
@@ -74,7 +74,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         self::assertStringEndsWith(
             'ORDER BY c0_.description DESC, c0_.email ASC, c0_.organization_name ASC',
             $this->generateSql(
-                'select u, LENGTH(u.email) AS HIDDEN email_length from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc',
+                'select (CASE WHEN u.email = \'admin@example.com\' THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc',
             ),
         );
     }
@@ -110,6 +110,6 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
             ->setHint(Query::HINT_CUSTOM_TREE_WALKERS, $treeWalkers)
             ->useQueryCache(false)
             ->getSQL()
-        ;
+            ;
     }
 }
