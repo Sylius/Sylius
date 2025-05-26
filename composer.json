@@ -73,7 +73,7 @@
         "psr/log": "^3.0",
         "ramsey/uuid": "^4.7",
         "stof/doctrine-extensions-bundle": "^1.12",
-        "sylius-labs/association-hydrator": "^1.2 || dev-orm-3",
+        "sylius-labs/association-hydrator": "^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.2",
         "sylius/fixtures-bundle": "^1.9",
         "sylius/grid": "^1.13",
