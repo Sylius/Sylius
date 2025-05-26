@@ -32,6 +32,7 @@ class DriverConnectionMock implements Connection
 
     public function quote($input, $type = ParameterType::STRING)
     {
+        return (string) $input;
     }
 
     public function exec($statement): int

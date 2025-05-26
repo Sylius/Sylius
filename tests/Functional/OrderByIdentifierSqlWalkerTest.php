@@ -110,6 +110,6 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
             ->setHint(Query::HINT_CUSTOM_TREE_WALKERS, $treeWalkers)
             ->useQueryCache(false)
             ->getSQL()
-        ;
+            ;
     }
 }
