@@ -5,10 +5,10 @@
 <div class="nav-item">
     {% set dropdown_trigger %}
         {% if notifications %}
-            <a href="#" class="nav-link px-0 text-body">
+            <button class="nav-link nav-button justify-content-center px-0 text-body">
                 {{ ux_icon('tabler:bell') }}
                 <span class="badge bg-red" style="transform: translate(-3px, -9px)"></span>
-            </a>
+            </button>
         {% else %}
             <div class="nav-link px-0 text-body">
                 {{ ux_icon('tabler:bell') }}

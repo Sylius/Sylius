@@ -36,11 +36,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, OrderInterface> $this->orders */
         $this->orders = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, AddressInterface> $this->addresses */
         $this->addresses = new ArrayCollection();
     }
 

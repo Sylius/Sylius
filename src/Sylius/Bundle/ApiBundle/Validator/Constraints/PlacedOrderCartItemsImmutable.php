@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class PlacedOrderCartItemsImmutable extends Constraint
 {
     public string $message = 'sylius.order.cart_items_immutable';

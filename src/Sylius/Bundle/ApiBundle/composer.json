@@ -25,8 +25,8 @@
     "require": {
         "php": "^8.2",
         "doctrine/dbal": "^3.9",
-        "api-platform/doctrine-orm": "^4.0.3",
-        "api-platform/symfony": "^4.0.3",
+        "api-platform/doctrine-orm": "^4.1.7",
+        "api-platform/symfony": "^4.1.7",
         "lexik/jwt-authentication-bundle": "^3.1",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
@@ -37,7 +37,7 @@
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "nelmio/alice": "^3.13",
-        "phparkitect/phparkitect": "^0.3",
+        "phparkitect/phparkitect": "^0.6",
         "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^10.5",
@@ -46,9 +46,6 @@
         "symfony/dotenv": "^6.4 || ^7.2",
         "symfony/webpack-encore-bundle": "^2.2",
         "theofidry/alice-data-fixtures": "^1.7"
-    },
-    "conflict": {
-        "api-platform/jsonld": "^4.1.1"
     },
     "config": {
         "allow-plugins": {

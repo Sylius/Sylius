@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Statistics\ValueObject;
 
 class BusinessActivitySummary
 {
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function __construct(
         private int $totalSales,
         private int $paidOrdersCount,

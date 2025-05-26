@@ -30,7 +30,7 @@ final class StatisticsTest extends JsonApiTestCase
         $this->setUpOrderPlacer();
     }
 
-    
+
     #[DataProvider('getIntervals')]
     #[Test]
     public function it_gets_fulfilled_orders_in_specific_year_statistics(string $interval): void
@@ -157,7 +157,6 @@ final class StatisticsTest extends JsonApiTestCase
         yield ['year'];
     }
 
-    
     #[DataProvider('invalidPeriods')]
     #[Test]
     public function it_returns_a_validation_error_if_period_is_invalid(array $parameters): void
@@ -182,7 +181,7 @@ final class StatisticsTest extends JsonApiTestCase
         );
     }
 
-    
+
     #[DataProvider('missingQueryParameters')]
     #[DataProvider('emptyQueryParameters')]
     #[DataProvider('invalidQueryParameters')]

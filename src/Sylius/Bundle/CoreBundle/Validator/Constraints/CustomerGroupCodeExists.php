@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class CustomerGroupCodeExists extends Constraint
 {
     public string $message = 'sylius.customer_group.code.not_exist';

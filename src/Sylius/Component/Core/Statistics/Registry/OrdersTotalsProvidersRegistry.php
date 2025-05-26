@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Statistics\Registry;
 use Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProviderInterface;
 use Webmozart\Assert\Assert;
 
-final class OrdersTotalsProvidersRegistry implements OrdersTotalsProviderRegistryInterface
+final class OrdersTotalsProvidersRegistry implements OrdersTotalsProviderRegistryInterface, StatisticsProviderRegistryInterface
 {
     /** @var array<string, OrdersTotalsProviderInterface> */
     private array $ordersTotalProviders;

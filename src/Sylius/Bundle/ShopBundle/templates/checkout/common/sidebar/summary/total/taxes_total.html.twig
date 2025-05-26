@@ -12,14 +12,16 @@
         {% endif %}
     </td>
     <td class="pb-4 text-end">
-        {% if not tax_included and not tax_excluded %}
-            <div>{{ money.convertAndFormat(0) }}</div>
-        {% endif %}
-        {% if tax_excluded %}
-            <div>{{ money.convertAndFormat(tax_excluded) }}</div>
-        {% endif %}
-        {% if tax_included %}
-            <div>{{ money.convertAndFormat(tax_included) }}</div>
-        {% endif %}
+        <div id="sylius-shop-checkout-summary-taxes-total">
+            {%- if not tax_included and not tax_excluded -%}
+                {{ money.convertAndFormat(0) }}
+            {%- endif -%}
+            {%- if tax_excluded -%}
+                {{ money.convertAndFormat(tax_excluded) }}
+            {%- endif -%}
+            {%- if tax_included -%}
+                {{ money.convertAndFormat(tax_included) }}
+            {%- endif -%}
+        </div>
     </td>
 </tr>

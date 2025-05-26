@@ -62,7 +62,6 @@ final readonly class CircularDependencyBreakingErrorListener implements EventSub
     public function onKernelException(ExceptionEvent $event): void
     {
         try {
-            /** @phpstan-ignore-next-line */
             $this->decoratedListener->onKernelException($event);
         } catch (\Throwable $throwable) {
             $this->breakCircularDependency($throwable);

@@ -49,7 +49,6 @@
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "php-http/message-factory": "^1.1",
-        "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^10.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
@@ -71,8 +70,8 @@
     "autoload": {
         "psr-4": {
             "Sylius\\Bundle\\AdminBundle\\": "",
-            "Sylius\\Bundle\\AdminBundle\\Tests\\": "Tests/",
-            "Sylius\\Bundle\\AdminBundle\\Application\\": "test/src/"
+            "Sylius\\Bundle\\AdminBundle\\Application\\": "test/src/",
+            "Tests\\Sylius\\Bundle\\AdminBundle\\": "tests/"
         }
     },
     "repositories": [

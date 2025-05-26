@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class CatalogPromotionScopeGroupValidator extends ConstraintValidator
 {
-    /** @param array<string, array<string, string>> $validationGroups */
+    /** @param array<string, string[]> $validationGroups */
     public function __construct(private array $validationGroups)
     {
     }

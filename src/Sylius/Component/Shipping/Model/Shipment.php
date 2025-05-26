@@ -41,7 +41,6 @@ class Shipment implements ShipmentInterface, \Stringable
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, ShipmentUnitInterface> $this->units */
         $this->units = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class PromotionSubjectCoupon extends Constraint
 {
     public string $message = 'sylius.promotion_coupon.is_invalid';

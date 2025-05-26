@@ -310,6 +310,28 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    public function countGroupedPaidForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        array $groupBy,
+    ): array {
+        $queryBuilder = $this->createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder($channel, $startDate, $endDate);
+        $queryBuilder->select('COUNT(o) AS paid_orders_count');
+
+        foreach ($groupBy as $name => $select) {
+            $queryBuilder
+                ->addSelect($select)
+                ->addGroupBy($name)
+            ;
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
+
     public function countFulfilledByChannel(ChannelInterface $channel): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -541,5 +563,18 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('channel', $channel)
             ->setParameter('startDate', $startDate)
             ->setParameter('endDate', $endDate);
+    }
+
+    public function countNewByChannel(ChannelInterface $channel): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.channel = :channel')
+            ->setParameter('state', OrderInterface::STATE_NEW)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 }

@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Channel
-        psr4_prefix: Sylius\Component\Channel
-        src_path: .

@@ -40,7 +40,6 @@
         "doctrine/orm": "^2.18",
         "friendsofphp/proxy-manager-lts": "^1.0",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^10.5",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
@@ -67,7 +66,7 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\LocaleBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\LocaleBundle\\Tests\\": "Tests/"
+            "Tests\\Sylius\\Bundle\\LocaleBundle\\": "Tests/"
         },
         "classmap": [
             "test/app/AppKernel.php"

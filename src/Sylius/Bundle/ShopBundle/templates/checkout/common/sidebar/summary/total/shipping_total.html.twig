@@ -9,7 +9,7 @@
             {% if order.getAdjustmentsTotal('shipping') > order.shippingTotal %}
                 <del>{{ money.convertAndFormat(order.getAdjustmentsTotal('shipping')) }}</del>
             {% endif %}
-            <span>{{ money.convertAndFormat(order.shippingTotal) }}</span>
+            <span id="sylius-shop-checkout-summary-shipping-total">{{ money.convertAndFormat(order.shippingTotal) }}</span>
         </td>
     </tr>
 {% endif %}

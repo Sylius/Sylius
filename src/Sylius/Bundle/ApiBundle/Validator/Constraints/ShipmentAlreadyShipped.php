@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ShipmentAlreadyShipped extends Constraint
 {
     public string $message = 'sylius.shipment.shipped';

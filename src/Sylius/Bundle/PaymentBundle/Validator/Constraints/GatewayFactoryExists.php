@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PaymentBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class GatewayFactoryExists extends Constraint
 {
     public string $invalidGatewayFactory = 'sylius.gateway_config.invalid_gateway_factory';

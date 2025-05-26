@@ -123,8 +123,6 @@ interface OrderInterface extends
     public function isCreatedByGuest(): bool;
 
     /**
-     * @phpstan-ignore-next-line
-     *
      * @return Collection<array-key, OrderItemInterface>
      */
     public function getItems(): Collection;

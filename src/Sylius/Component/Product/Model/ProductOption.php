@@ -42,8 +42,6 @@ class ProductOption implements ProductOptionInterface, \Stringable
     public function __construct()
     {
         $this->initializeTranslationsCollection();
-
-        /** @var ArrayCollection<array-key, ProductOptionValueInterface> $this->values */
         $this->values = new ArrayCollection();
 
         $this->createdAt = new \DateTime();

@@ -1,6 +1,6 @@
 {# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent #}
 
-<div {{ attributes.defaults(stimulus_controller('taxon-tree', {treeData: this.tree, autoOpen: true})) }}>
+<div {{ attributes.defaults(stimulus_controller('taxon-tree', {autoOpen: true})) }} data-taxon-tree-tree-data-value="{{ this.tree|json_encode }}">
     <div class="card mb-5">
         <div data-loading>
             <div class="sylius-loader">

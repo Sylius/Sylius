@@ -232,14 +232,14 @@ As a rule of thumb in Sylius, each hookable is configured as a multiple of 100. 
 
 Let's say we'd like to customize our offer view and we'd like to add an information about estimated shipping time:
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 There're two way's of finding out the hook name you'd like to hook-in.
 
 1. Profiler\
    By Clicking the hooks option you'll be taken to the specific profiler page
 
-![](<../.gitbook/assets/image (4).png>)\
+![](<../.gitbook/assets/image (4) (1).png>)\
 
 
 Here, you have whole Call Graph regarding opened view, where you can search for specific element.

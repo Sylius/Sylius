@@ -20,7 +20,7 @@
     <testsuites>
         <testsuite name="SyliusAddressingBundle Test Suite">
             <directory>./test/</directory>
-            <directory>./Tests/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

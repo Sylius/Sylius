@@ -24,6 +24,9 @@ sylius_twig_hooks:
             account:
                 template: '@SyliusAdmin/admin_user/form/sections/account.html.twig'
                 priority: 0
+            roles:
+                template: '@SyliusAdmin/admin_user/form/sections/roles.html.twig'
+                priority: -100
 
         'sylius_admin.admin_user.create.content.form.sections#right':
             personal_information:

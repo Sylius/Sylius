@@ -11,18 +11,33 @@
     &.navbar-nav {
         gap: 0.5rem;
     }
+}
 
-    &.navbar-brand-image {
-        height: 4rem;
-    }
+.navbar input {
+    min-height: 44px;
+}
+
+.navbar-brand-image {
+    height: 3rem;
 }
 
 .navbar-collapse a.nav-link,
 .navbar-collapse a.dropdown-item {
     transition: all .1s;
+    min-height: 44px;
 
     &:hover {
         color: var(--tblr-primary) !important;
         background: transparent;
     }
+}
+.nav-button {
+    min-height: 44px;
+    min-width: 44px;
+}
+.navbar-collapse .nav-link:focus-visible {
+    outline: solid 2px rgb(153, 200, 255);
+}
+.navbar-plus-badge{
+    width: 50px;
 }

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class TranslationForExistingLocales extends Constraint
 {
     public string $message = 'sylius.translation.locale_code.invalid';

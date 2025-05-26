@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ChosenPaymentMethodEligibility extends Constraint
 {
     public string $notAvailable = 'sylius.payment_method.not_available';

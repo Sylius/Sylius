@@ -161,6 +161,7 @@ app_admin_supplier:
         alias: app.supplier
         section: admin
         templates: "@SyliusAdmin\\shared\\crud"
+        except: ['show']
         redirect: update
         grid: app_admin_supplier
         vars:
@@ -176,7 +177,20 @@ app_admin_supplier:
 
 Add links to access the new `Supplier` entity management in the admin menu. See how to add items to the admin menu here.
 
-**10. Check the Admin Panel**
+**10. Add translations**
+
+Add two entries to cover both the singular and plural translations of a new resource:
+
+```yaml
+# translations/messages.en.yaml
+app:
+    ui:
+        suppliers: 'Suppliers'
+        supplier: 'Supplier'
+
+```
+
+**11. Check the Admin Panel**
 
 Navigate to `https://localhost:8000/admin/suppliers/` to view and manage the `Supplier` entity in the Sylius admin panel.
 

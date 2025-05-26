@@ -31,7 +31,7 @@
         "symfony/intl": "^6.4 || ^7.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^10.5"
     },
     "config": {
         "allow-plugins": {
@@ -53,7 +53,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Currency\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Currency\\": "tests/"
         }
     },
     "repositories": [

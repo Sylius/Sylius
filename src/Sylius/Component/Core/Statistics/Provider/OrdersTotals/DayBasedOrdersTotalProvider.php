@@ -24,6 +24,7 @@ final class DayBasedOrdersTotalProvider implements OrdersTotalsProviderInterface
     {
     }
 
+    /** @return array<array-key, array{period: \DateTimeInterface, total: int}> */
     public function provideForPeriodInChannel(\DatePeriod $period, ChannelInterface $channel): array
     {
         /** @param array<array-key, array{total: string|int, year: int, month: int, day: int}> $totals */

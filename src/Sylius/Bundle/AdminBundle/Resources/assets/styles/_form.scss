@@ -55,6 +55,10 @@ textarea.form-control {
     }
 }
 
+.form-control, .form-select {
+    min-height: 44px;
+}
+
 .form-control:focus {
     box-shadow: none;
 }

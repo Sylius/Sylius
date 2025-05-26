@@ -41,4 +41,6 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
     public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface;
+
+    public function countNew(): int;
 }

@@ -1,5 +1,52 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.7 (2025-05-07)
+
+#### Details
+
+- [#17818](https://github.com/Sylius/Sylius/issues/17818) [Behat] Decouple cart setup from interaction – `Given I added` vs `When I add` - Promotion & Some other scenarios ([@Rafikooo](https://github.com/Rafikooo))
+- [#17819](https://github.com/Sylius/Sylius/issues/17819) [Behat] Add GuestCartContext ([@Wojdylak](https://github.com/Wojdylak))
+- [#17822](https://github.com/Sylius/Sylius/issues/17822) [Behat][Taxation] Refactor shop scenarios to reduce js tags ([@GSadee](https://github.com/GSadee))
+- [#17823](https://github.com/Sylius/Sylius/issues/17823) [Behat] Change to guest adding to the cart ([@Wojdylak](https://github.com/Wojdylak))
+- [#17824](https://github.com/Sylius/Sylius/issues/17824) [CS][DX] Refactor
+- [#17838](https://github.com/Sylius/Sylius/issues/17838) [Documentation] Update Contributing Translations page ([@GSadee](https://github.com/GSadee))
+- [#17839](https://github.com/Sylius/Sylius/issues/17839) [Behat] Fix adding to cart scenarios ([@Rafikooo](https://github.com/Rafikooo))
+- [#17831](https://github.com/Sylius/Sylius/issues/17831) [Shop] Handle missing icon errors ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17816](https://github.com/Sylius/Sylius/issues/17816) [Behat] Reuse common setup contexts in API and UI ([@Rafikooo](https://github.com/Rafikooo))
+- [#17853](https://github.com/Sylius/Sylius/issues/17853) [CS][DX] Refactor
+- [#17856](https://github.com/Sylius/Sylius/issues/17856) [API] Fix Missing root_operation in context when 'application/json' is accepted ([@nicolalazzaro](https://github.com/nicolalazzaro))
+- [#17860](https://github.com/Sylius/Sylius/issues/17860) [CS][DX] Refactor
+- [#17848](https://github.com/Sylius/Sylius/issues/17848) Update validators.de.yml ([@hersche](https://github.com/hersche))
+- [#17679](https://github.com/Sylius/Sylius/issues/17679) [Docs] add missing requirement for sodium extension ([@stlgaits](https://github.com/stlgaits))
+- [#17879](https://github.com/Sylius/Sylius/issues/17879) [Behat] Change driver for statistics and account tests ([@Rafikooo](https://github.com/Rafikooo))
+- [#17869](https://github.com/Sylius/Sylius/issues/17869) [CI] Fix Panther builds by introducing secure password setup in Behat tests ([@Rafikooo](https://github.com/Rafikooo))
+- [#17803](https://github.com/Sylius/Sylius/issues/17803) [Behat] Reuse common setup contexts in API and UI tests, and convert unnecessary JS scenarios to non-JS ([@Rafikooo](https://github.com/Rafikooo))
+- [#17883](https://github.com/Sylius/Sylius/issues/17883) [CS][DX] Refactor
+- [#17882](https://github.com/Sylius/Sylius/issues/17882) [Channel] Fix missing channel tab in web profiler ([@SVillette](https://github.com/SVillette))
+- [#17740](https://github.com/Sylius/Sylius/issues/17740) [UI][Swagger] Fix uri variables by adding slug ([@nicolalazzaro](https://github.com/nicolalazzaro))
+- [#17877](https://github.com/Sylius/Sylius/issues/17877) [Behat] Introduce Bad Gateway Context ([@Rafikooo](https://github.com/Rafikooo))
+- [#17890](https://github.com/Sylius/Sylius/issues/17890) [CS][DX] Refactor
+- [#17752](https://github.com/Sylius/Sylius/issues/17752) [2.0][Admin][FIX] Use a unique id for each tab group ([@nicolalazzaro](https://github.com/nicolalazzaro))
+- [#17858](https://github.com/Sylius/Sylius/issues/17858) [API] Fix prevent overwriting modifications for shared paths with multiple methods ([@nicolalazzaro](https://github.com/nicolalazzaro))
+- [#17897](https://github.com/Sylius/Sylius/issues/17897) [CS][DX] Refactor
+- [#17873](https://github.com/Sylius/Sylius/issues/17873) [Admin] Fix cart promotions usage column ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17912](https://github.com/Sylius/Sylius/issues/17912) [UiBundle] Allow ResourceLivePropTrait::hydrateResource to have null $value ([@HugoDiag](https://github.com/HugoDiag))
+- [#17910](https://github.com/Sylius/Sylius/issues/17910) Add `#[Attribute]` annotation to validator constraints ([@Rafikooo](https://github.com/Rafikooo))
+- [#17925](https://github.com/Sylius/Sylius/issues/17925) [CI] Fix failing behat tests ([@mpysiak](https://github.com/mpysiak))
+- [#17927](https://github.com/Sylius/Sylius/issues/17927) [CI] Fix failing behat tests ([@mpysiak](https://github.com/mpysiak))
+- [#17918](https://github.com/Sylius/Sylius/issues/17918) [Shop] Add twig hooks to product card template ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17926](https://github.com/Sylius/Sylius/issues/17926) Fix action templates for url option ([@loic425](https://github.com/loic425))
+- [#17919](https://github.com/Sylius/Sylius/issues/17919) Fix dev firewall order ([@SVillette](https://github.com/SVillette))
+- [#17829](https://github.com/Sylius/Sylius/issues/17829) [Admin] Plus features clickbaits ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17827](https://github.com/Sylius/Sylius/issues/17827) [Admin] Plus features clickbaits ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17937](https://github.com/Sylius/Sylius/issues/17937) [Admin] Plus UTM link ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17938](https://github.com/Sylius/Sylius/issues/17938) [Admin] Plus UTM link ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17868](https://github.com/Sylius/Sylius/issues/17868) [Admin] Add taxon buttons x-axis padding ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17728](https://github.com/Sylius/Sylius/issues/17728) [APIP] Formatting values ([@christopherhero](https://github.com/christopherhero))
+- [#17940](https://github.com/Sylius/Sylius/issues/17940) Change emitUp to emit ([@mpysiak](https://github.com/mpysiak))
+- [#17942](https://github.com/Sylius/Sylius/issues/17942) [CS][DX] Refactor
+- [#17946](https://github.com/Sylius/Sylius/issues/17946) [Composer] Add conflict to behat/gherkin ([@GSadee](https://github.com/GSadee))
+
 ## v2.0.6 (2025-03-31)
 
 #### Details

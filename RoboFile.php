@@ -63,7 +63,7 @@ class RoboFile extends Tasks
 
         if (self::YES === $unstable) {
             $task->exec('composer config minimum-stability dev');
-            $task->exec('composer config prefer-stable false');
+            $task->exec('composer config prefer-stable true');
         }
 
         $task

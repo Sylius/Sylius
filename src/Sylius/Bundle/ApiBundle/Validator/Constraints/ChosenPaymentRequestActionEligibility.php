@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental  */
+#[\Attribute]
 final class ChosenPaymentRequestActionEligibility extends Constraint
 {
     public string $notAvailable = 'sylius.payment_request.action_not_available';

@@ -22,7 +22,7 @@ Let’s explore how you can leverage these features to make a simple yet importa
 
 The default Sylius templates are clean and elegant, but you might want to make your store unique by customizing it with your brand’s logo. Here’s how you can replace the default Sylius logo:
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Step 1: Add Your Custom Logo
 
@@ -110,7 +110,7 @@ templates/bundles/SyliusShopBundle/shared/logo.html.twig
 
 After following either method, your custom logo should now be displayed on your store.
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Next Steps: Introducing Custom Business Logic
 

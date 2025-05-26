@@ -53,17 +53,9 @@ class Product implements ProductInterface, \Stringable
         $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
-
-        /** @var ArrayCollection<array-key, AttributeValueInterface> $this->attributes */
         $this->attributes = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ProductAssociationInterface> $this->associations */
         $this->associations = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ProductVariantInterface> $this->variants */
         $this->variants = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ProductOptionInterface> $this->options */
         $this->options = new ArrayCollection();
     }
 

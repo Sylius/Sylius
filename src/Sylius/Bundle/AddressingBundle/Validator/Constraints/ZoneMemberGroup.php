@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ZoneMemberGroup extends Constraint
 {
     public function validatedBy(): string

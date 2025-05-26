@@ -93,6 +93,8 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
             return false;
         }
 
+        $fieldValue = filter_var($fieldValue, \FILTER_SANITIZE_URL);
+
         try {
             $parameters = $this->router->match($fieldValue);
         } catch (RoutingExceptionInterface) {

@@ -114,5 +114,19 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
         array $groupBy,
     ): array;
 
+    /**
+     * @param array<string, string> $groupBy
+     *
+     * @return array<array{paid_orders_count: int, year: int, month: int, day: int}>
+     */
+    public function countGroupedPaidForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        array $groupBy,
+    ): array;
+
     public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface;
+
+    public function countNewByChannel(ChannelInterface $channel): int;
 }

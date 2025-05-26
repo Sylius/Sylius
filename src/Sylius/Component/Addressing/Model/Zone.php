@@ -38,7 +38,6 @@ class Zone implements ZoneInterface, \Stringable
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, ZoneMemberInterface> $this->members */
         $this->members = new ArrayCollection();
     }
 

@@ -36,7 +36,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^10.5"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"
@@ -61,7 +61,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Product\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Product\\": "tests/"
         }
     },
     "repositories": [

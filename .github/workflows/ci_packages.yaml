@@ -94,7 +94,7 @@ jobs:
 
             -   name: Install Robo
                 run: |
-                    wget https://robo.li/robo.phar
+                    wget https://github.com/consolidation/Robo/releases/latest/download/robo.phar
                     chmod +x robo.phar && sudo mv robo.phar /tmp/robo
                     
             -   name: "Run pipeline"

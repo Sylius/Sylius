@@ -40,5 +40,3 @@ suites:
     TaxonomyBundle: { namespace: Sylius\Bundle\TaxonomyBundle, psr4_prefix: Sylius\Bundle\TaxonomyBundle, spec_path: src/Sylius/Bundle/TaxonomyBundle, src_path: src/Sylius/Bundle/TaxonomyBundle }
     UiBundle: { namespace: Sylius\Bundle\UiBundle, psr4_prefix: Sylius\Bundle\UiBundle, spec_path: src/Sylius/Bundle/UiBundle, src_path: src/Sylius/Bundle/UiBundle }
     UserBundle: { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }
-
-    Behat: { namespace: Sylius\Behat, psr4_prefix: Sylius\Behat, spec_path: src/Sylius/Behat, src_path: src/Sylius/Behat }

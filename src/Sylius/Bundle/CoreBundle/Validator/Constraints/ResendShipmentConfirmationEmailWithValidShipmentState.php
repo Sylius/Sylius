@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ResendShipmentConfirmationEmailWithValidShipmentState extends Constraint
 {
     public string $message = 'sylius.resend_shipment_confirmation_email.invalid_shipment_state';

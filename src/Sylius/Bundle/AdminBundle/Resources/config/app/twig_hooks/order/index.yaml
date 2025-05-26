@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.order.index.content.header.title_block.actions':
+            cancel:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                priority: 0

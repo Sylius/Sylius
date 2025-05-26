@@ -24,9 +24,11 @@ class MediaElement extends Element implements MediaElementInterface
             return false;
         }
         $imageUrl = $imageElement->getAttribute('src');
+        $originalUrl = $this->getDriver()->getCurrentUrl();
+
         $this->getDriver()->visit($imageUrl);
         $pageText = $this->getDocument()->getText();
-        $this->getDriver()->back();
+        $this->getDriver()->visit($originalUrl);
 
         return false === stripos($pageText, '404 Not Found');
     }

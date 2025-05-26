@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/phpunit-10.xsd"
          colors="true"
 >
     <php>
@@ -9,7 +9,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="SyliusAttributeBundle Test Suite">
+        <testsuite name="sylius_attribute_bundle_test_suite">
             <directory>./test/</directory>
             <directory>./Tests/</directory>
         </testsuite>

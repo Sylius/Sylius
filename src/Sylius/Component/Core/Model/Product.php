@@ -48,17 +48,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, ProductTaxonInterface> $this->productTaxons */
         $this->productTaxons = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ReviewInterface> $this->reviews */
         $this->reviews = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 

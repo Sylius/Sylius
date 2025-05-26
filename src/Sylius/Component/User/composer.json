@@ -37,11 +37,10 @@
         "doctrine/collections": "^2.2",
         "sylius/resource": "^1.12",
         "symfony/polyfill-mbstring": "^1.31",
-        "symfony/security-core": "^6.4 || ^7.2"
+        "symfony/security-core": "^6.4 || ^7.2",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5",
-        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^10.5"
     },
     "suggest": {
@@ -67,7 +66,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\User\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\User\\": "tests/"
         }
     },
     "repositories": [

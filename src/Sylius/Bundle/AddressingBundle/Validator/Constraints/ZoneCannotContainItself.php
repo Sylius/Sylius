@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ZoneCannotContainItself extends Constraint
 {
     public string $message = 'sylius.zone_member.cannot_be_the_same_as_zone';

@@ -78,7 +78,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             return $this->createUserByOAuthUserResponse($response);
         }
 
-        /** @phpstan-ignore-next-line */
         throw new UserNotFoundException('Email is null or not provided');
     }
 

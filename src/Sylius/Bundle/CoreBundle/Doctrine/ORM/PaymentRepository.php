@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
@@ -86,6 +87,20 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
             ->setParameter('token', $token)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function countNewByChannel(ChannelInterface $channel): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->innerJoin('o.order', 'orders')
+            ->andWhere('o.state = :state')
+            ->andWhere('orders.channel = :channel')
+            ->setParameter('state', PaymentInterface::STATE_NEW)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 }

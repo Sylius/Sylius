@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class CorrectOrderAddress extends Constraint
 {
     public string $countryCodeNotExistMessage = 'sylius.country.not_exist';

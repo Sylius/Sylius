@@ -1,0 +1,17 @@
+<a
+    href="{{ path('sylius_admin_shipment_index', { criteria: { 'state': constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_READY'), 'channel': channel.id } }) }}"
+    class="d-flex align-items-center justify-content-between list-group-item list-group-item-action border-bottom"
+    {{ attributes }}
+    {{ sylius_test_html_attribute('shipments-to-ship') }}
+>
+    <div><strong>{{ 'sylius.ui.shipments'|trans }}</strong> {{ 'sylius.ui.to_ship'|trans }}</div>
+    <div class="d-flex align-items-center gap-4">
+        <span
+            class="badge rounded-pill bg-dark-lt text-default-fg py-2 px-3 fs-4 fw-bold my-1"
+            {{ sylius_test_html_attribute('shipments-to-ship-count') }}
+        >
+            {{ count }}
+        </span>
+        {{ ux_icon('tabler:chevron-right') }}
+    </div>
+</a>

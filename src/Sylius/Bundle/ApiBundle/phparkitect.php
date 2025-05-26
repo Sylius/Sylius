@@ -43,7 +43,7 @@ return static function (Config $config): void {
 
     $rules[] = Rule::allClasses()
         ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\ApiBundle\CommandHandler'))
-        ->should(new NotDependsOnTheseNamespaces('Symfony\Component\HttpKernel'))
+        ->should(new NotDependsOnTheseNamespaces(['Symfony\Component\HttpKernel']))
         ->because('Handlers should be decoupled from any infrastructure layer')
     ;
 

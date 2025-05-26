@@ -1,0 +1,31 @@
+<div class="card mb-3 plus-blur" onclick="window.open('https://sylius.com/plus/?utm_source=product&utm_medium=placeholder&utm_campaign=rbac-placeholder', '_blank')" style="cursor: pointer;">
+
+    <img src="{{ asset('build/admin/images/sylius-plus-sidebar.svg', 'admin') }}" alt="Plus Feature" class="overlay-image" />
+
+    <div class="blur-content">
+        <div class="card-header">
+            <div class="card-title">
+                {{ 'sylius.ui.roles'|trans }}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="mb-3 field">
+                <label for="sylius_admin_admin_user_rolesResources" class="form-label">Roles</label>
+                <select multiple="multiple" class="form-select" id="sylius_admin_admin_user_rolesResources">
+                    <option>{{ 'sylius.ui.role_super_admin'|trans }}</option>
+                    <option>{{ 'sylius.ui.role_product_manager'|trans }}</option>
+                    <option>{{ 'sylius.ui.role_fulfillment_worker'|trans }}</option>
+                    <option>{{ 'sylius.ui.role_channel_admin'|trans }}</option>
+                </select>
+            </div>
+            <div class="mb-3 field">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="sylius_admin_admin_user_enablePermissionChecker" value="1" checked>
+                    <label class="form-check-label" for="sylius_admin_admin_user_enablePermissionChecker">
+                        {{ 'sylius.ui.enabled_permission_checker'|trans }}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

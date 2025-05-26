@@ -95,7 +95,7 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.3
+                uses: SyliusLabs/BuildTestAppAction@v2.4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
@@ -110,7 +110,7 @@ jobs:
                     chrome_version: stable
 
             -   name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
+                run: vendor/bin/phpunit --testsuite all --colors=always
 
             -   name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun

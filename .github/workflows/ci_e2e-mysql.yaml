@@ -92,7 +92,7 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.3
+                uses: SyliusLabs/BuildTestAppAction@v2.4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
@@ -103,13 +103,12 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
-                    chrome_version: stable
 
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
             -   name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
+                run: vendor/bin/phpunit --testsuite all --colors=always
 
             -   name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
@@ -182,7 +181,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.3
+                uses: SyliusLabs/BuildTestAppAction@v2.4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
@@ -270,7 +269,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.3
+                uses: SyliusLabs/BuildTestAppAction@v2.4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
@@ -282,6 +281,7 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
+                    chrome_version: stable
 
             -   name: Run Behat (Panther)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun

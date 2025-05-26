@@ -28,10 +28,11 @@
         "php": "^8.2",
         "doctrine/collections": "^2.2",
         "sylius/registry": "^1.6",
-        "sylius/resource": "^1.12"
+        "sylius/resource": "^1.12",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^10.5"
     },
     "config": {
         "allow-plugins": {
@@ -53,7 +54,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Promotion\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Promotion\\": "tests/"
         }
     },
     "repositories": [

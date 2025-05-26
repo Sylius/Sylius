@@ -52,4 +52,4 @@ Authors
 -------
 
 The component was originally created by [Paweł Jędrzejewski](https://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/Channel/contributors).
+See the list of [contributors](https://github.com/Sylius/Channel/contributors)..

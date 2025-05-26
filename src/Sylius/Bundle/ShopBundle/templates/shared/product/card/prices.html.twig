@@ -1,0 +1,7 @@
+{% set product = hookable_metadata.context.product %}
+
+<div>
+    {% if not product.enabledVariants.empty() %}
+        {% hook 'prices' %}
+    {% endif %}
+</div>

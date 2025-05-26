@@ -29,10 +29,11 @@
         "php": "^8.2",
         "laminas/laminas-stdlib": "^3.19",
         "sylius/resource": "^1.12",
-        "symfony/intl": "^6.4 || ^7.2"
+        "symfony/intl": "^6.4 || ^7.2",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^10.5"
     },
     "config": {
         "allow-plugins": {
@@ -54,7 +55,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Locale\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Locale\\": "tests/"
         }
     },
     "repositories": [

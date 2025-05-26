@@ -12,6 +12,10 @@ security:
     password_hashers:
         Sylius\Component\User\Model\UserInterface: argon2i
     firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
         admin:
             switch_user: true
             context: admin
@@ -104,10 +108,6 @@ security:
 
         image_resolver:
             pattern: ^/media/cache/resolve
-            security: false
-
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
     access_control:

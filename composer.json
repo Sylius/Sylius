@@ -1,7 +1,7 @@
 {
     "name": "sylius/sylius",
     "type": "library",
-    "version": "v2.0.7-dev",
+    "version": "v2.0.8-dev",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -31,8 +31,8 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-sodium": "*",
-        "api-platform/doctrine-orm": "^4.0.3",
-        "api-platform/symfony": "^4.0.3",
+        "api-platform/doctrine-orm": "^4.1.7",
+        "api-platform/symfony": "^4.1.7",
         "babdev/pagerfanta-bundle": "^4.4",
         "behat/transliterator": "^1.5",
         "doctrine/collections": "^2.2",
@@ -84,7 +84,7 @@
         "sylius/resource": "^1.12",
         "sylius/resource-bundle": "^1.12",
         "sylius/theme-bundle": "^2.4",
-        "sylius/twig-extra": "^0.6",
+        "sylius/twig-extra": "^0.8",
         "sylius/twig-hooks": "^0.6",
         "symfony/asset": "^6.4 || ^7.2",
         "symfony/cache-contracts": "^3.5",
@@ -189,7 +189,7 @@
         "sylius/user-bundle": "self.version"
     },
     "require-dev": {
-        "behat/behat": "^3.14",
+        "behat/behat": "^3.22",
         "behat/mink-selenium2-driver": "^1.7",
         "consolidation/robo": "^4.0 || ^5.0",
         "dbrekelmans/bdi": "^1.3",
@@ -205,23 +205,25 @@
         "friends-of-behat/symfony-extension": "^2.6",
         "friends-of-behat/variadic-extension": "^1.6",
         "hwi/oauth-bundle": "^2.2",
-        "jangregor/phpstan-prophecy": "^1.0",
+        "jangregor/phpstan-prophecy": "^2.0",
         "lchrusciel/api-test-case": "^5.3",
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.6",
         "nyholm/psr7": "^1.8",
-        "phparkitect/phparkitect": "^0.3",
+        "phparkitect/phparkitect": "^0.6",
         "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
-        "phpstan/phpstan": "^1.12",
-        "phpstan/phpstan-doctrine": "^1.5",
-        "phpstan/phpstan-symfony": "^1.4",
-        "phpstan/phpstan-webmozart-assert": "^1.2",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "phpstan/phpstan-webmozart-assert": "^2.0",
         "phpunit/phpunit": "^10.5",
         "psr/event-dispatcher": "^1.0",
-        "rector/rector": "^1.2.6",
+        "rector/custom-phpspec-to-phpunit": "^0.6",
+        "rector/rector": "^2.0",
         "robertfausk/behat-panther-extension": "^1.1",
         "sylius-labs/coding-standard": "^4.4",
         "sylius-labs/suite-tags-extension": "~0.2",
@@ -241,9 +243,6 @@
         "winzou/state-machine": "If you want to use Winzou State Machine (^0.4)",
         "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
-    "conflict": {
-        "api-platform/jsonld": "^4.1.1"
-    },
     "config": {
         "preferred-install": {
             "*": "dist"
@@ -253,7 +252,8 @@
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "php-http/discovery": false,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "phpstan/extension-installer": true
         }
     },
     "extra": {
@@ -284,7 +284,7 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Tests\\": "tests/",
-            "spec\\Sylius\\Behat\\": "src/Sylius/Behat/spec/",
+            "Tests\\Sylius\\Behat\\": "src/Sylius/Behat/tests/",
             "spec\\Sylius\\Component\\Addressing\\": "src/Sylius/Component/Addressing/spec/",
             "spec\\Sylius\\Component\\Attribute\\": "src/Sylius/Component/Attribute/spec/",
             "spec\\Sylius\\Component\\Channel\\": "src/Sylius/Component/Channel/spec/",

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class InStock extends Constraint
 {
     public string $message = 'sylius.cart_item.not_available';

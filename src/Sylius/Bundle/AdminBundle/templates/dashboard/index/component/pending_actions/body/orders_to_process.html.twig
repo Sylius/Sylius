@@ -1,0 +1,17 @@
+<a
+    href="{{ path('sylius_admin_order_index', { criteria: { 'state': constant('Sylius\\Component\\Order\\Model\\OrderInterface::STATE_NEW'), 'channel': channel.id } }) }}"
+    class="d-flex align-items-center justify-content-between list-group-item list-group-item-action border-bottom"
+    {{ attributes }}
+    {{ sylius_test_html_attribute('orders-to-process')}}
+>
+    <div><strong>{{ 'sylius.ui.orders'|trans }}</strong> {{ 'sylius.ui.to_process'|trans }}</div>
+    <div class="d-flex align-items-center gap-4">
+        <span
+            class="badge rounded-pill bg-dark-lt text-default-fg py-2 px-3 fs-4 fw-bold my-1"
+            {{ sylius_test_html_attribute('orders-to-process-count') }}
+        >
+            {{ count }}
+        </span>
+        {{ ux_icon('tabler:chevron-right') }}
+    </div>
+</a>

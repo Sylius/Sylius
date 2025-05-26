@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -178,5 +179,35 @@ final class DashboardContext implements Context
     public function iShouldNotSeeTheAdministrationDashboard(): void
     {
         Assert::false($this->dashboardPage->isOpen());
+    }
+
+    #[Then('I should see :count order(s) to process in the pending actions')]
+    public function iShouldSeeOrdersToProcessInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfOrdersToProcess(), $count);
+    }
+
+    #[Then('I should see :count shipment(s) to ship in the pending actions')]
+    public function iShouldSeeShipmentsToShipInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfShipmentsToShip(), $count);
+    }
+
+    #[Then('I should see :count pending payment(s) in the pending actions')]
+    public function iShouldSeePendingPaymentsInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfPendingPayments(), $count);
+    }
+
+    #[Then('I should see :count product review(s) to approve in the pending actions')]
+    public function iShouldSeeProductReviewsToApproveInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfProductReviewsToApprove(), $count);
+    }
+
+    #[Then('I should see :count product variant(s) out of stock in the pending actions')]
+    public function iShouldSeeProductVariantsOutOfStockInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfProductVariantsOutOfStock(), $count);
     }
 }

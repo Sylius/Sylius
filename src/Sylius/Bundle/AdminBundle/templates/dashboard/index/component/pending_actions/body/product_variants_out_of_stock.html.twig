@@ -1,0 +1,17 @@
+<a
+    href="{{ path('sylius_admin_inventory_index') }}"
+    class="d-flex align-items-center justify-content-between list-group-item list-group-item-action border-bottom"
+    {{ attributes }}
+    {{ sylius_test_html_attribute('product-variants-out-of-stock') }}
+>
+    <div><strong>{{ 'sylius.ui.product_variants'|trans }}</strong> {{ 'sylius.ui.out_of_stock'|trans|lower }}</div>
+    <div class="d-flex align-items-center gap-4">
+        <span
+            class="badge rounded-pill bg-dark-lt text-default-fg py-2 px-3 fs-4 fw-bold my-1"
+            {{ sylius_test_html_attribute('product-variants-out-of-stock-count') }}
+        >
+            {{ count }}
+        </span>
+        {{ ux_icon('tabler:chevron-right') }}
+    </div>
+</a>

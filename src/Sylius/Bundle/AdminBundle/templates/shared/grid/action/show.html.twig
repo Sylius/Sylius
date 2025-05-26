@@ -1,6 +1,13 @@
-{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
-{% set message = action.label|default('sylius.ui.show') %}
+{% if options.link.url is defined %}
+    {% set path = options.link.url %}
+{% else %}
+    {% set default_route = options.link.route|default(grid.requestConfiguration is defined ? grid.requestConfiguration.getRouteName('show') : null) %}
+    {% set path = options.link.url|default(default_route ? path(default_route, options.link.parameters|default({'id': data.id})): null) %}
+{% endif %}
 
-<a title="details" href="{{ path }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}" {{ sylius_test_html_attribute('show-action', message|trans ) }}>
+{% set message = action.label|default('sylius.ui.show') %}
+{% set disabled = path is empty %}
+
+<a title="details" href="{{ path }}" class="btn btn-icon {% if disabled %}disabled{% endif %}" data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}" {{ sylius_test_html_attribute('show-action', message|trans ) }}>
     {{ ux_icon(action.icon|default('tabler:eye')) }}
 </a>

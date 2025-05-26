@@ -67,9 +67,11 @@ class ImageFormElement extends BaseFormElement implements ImageFormElementInterf
         }
 
         $imageUrl = $image->getAttribute('data-test-image-url');
+        $originalUrl = $this->getDriver()->getCurrentUrl();
+
         $this->getDriver()->visit($imageUrl);
         $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
+        $this->getDriver()->visit($originalUrl);
 
         return in_array($statusCode, [200, 304], true);
     }

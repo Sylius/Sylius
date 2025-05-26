@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ShopUserVerificationTokenEligibility extends Constraint
 {
     public string $message = 'sylius.account.invalid_verification_token';

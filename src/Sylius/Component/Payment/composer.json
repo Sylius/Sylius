@@ -30,10 +30,11 @@
         "paragonie/halite": "^5.0",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.12",
-        "symfony/uid": "^6.4 || ^7.2"
+        "symfony/uid": "^6.4 || ^7.2",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^10.5"
     },
     "config": {
         "allow-plugins": {
@@ -55,7 +56,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Payment\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Payment\\": "tests/"
         }
     },
     "repositories": [

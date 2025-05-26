@@ -11,6 +11,7 @@
     <testsuites>
         <testsuite name="SyliusCurrencyBundle Test Suite">
             <directory>./test/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -1,3 +1,5 @@
+{% deprecated 'The "resend_confirmation.html.twig" template is deprecated. Please use list/resend_confirmation.html.twig' %}
+
 {% set order = hookable_metadata.context.resource %}
 
 {% if order.state in sylius_order_states_that_allows_to_resend_order_confirmation_email %}

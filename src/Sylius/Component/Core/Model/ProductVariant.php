@@ -65,11 +65,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, ChannelPricingInterface> $this->channelPricings */
         $this->channelPricings = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ProductImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 

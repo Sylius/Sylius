@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class UniqueProvinceCollection extends Constraint
 {
     public string $message = 'sylius.country.unique_provinces';

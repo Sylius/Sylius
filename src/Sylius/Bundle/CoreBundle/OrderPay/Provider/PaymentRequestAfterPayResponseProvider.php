@@ -68,7 +68,9 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
 
     public function supports(RequestConfiguration $requestConfiguration): bool
     {
-        return null !== $this->getPaymentRequestHash($requestConfiguration);
+        $hash = $this->getPaymentRequestHash($requestConfiguration);
+
+        return null !== $hash && '' !== $hash;
     }
 
     private function getPaymentRequestHash(RequestConfiguration $requestConfiguration): mixed

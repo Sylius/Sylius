@@ -38,7 +38,6 @@ class TaxCategory implements TaxCategoryInterface, \Stringable
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, TaxRateInterface> $this->rates */
         $this->rates = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

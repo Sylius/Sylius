@@ -4,7 +4,7 @@ sylius_twig_hooks:
             content:
                 template: "@SyliusShop/product_review/index/content.html.twig"
                 priority: 0
-        
+
         'sylius.shop.product_review.index.content':
             header:
                 template: '@SyliusShop/product_review/index/content/header.html.twig'

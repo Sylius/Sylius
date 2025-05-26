@@ -42,7 +42,7 @@
         "sylius/resource": "^1.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^10.5"
     },
     "config": {
         "allow-plugins": {
@@ -64,7 +64,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Review\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Review\\": "tests/"
         }
     },
     "repositories": [

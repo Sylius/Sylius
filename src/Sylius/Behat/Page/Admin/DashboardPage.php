@@ -126,6 +126,41 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         $form->find('css', 'button')->click();
     }
 
+    public function getNumberOfOrdersToProcess(): int
+    {
+        $this->waitForElement('orders_to_process');
+
+        return (int) $this->getElement('orders_to_process_count')->getText();
+    }
+
+    public function getNumberOfPendingPayments(): int
+    {
+        $this->waitForElement('pending_payments');
+
+        return (int) $this->getElement('pending_payments_count')->getText();
+    }
+
+    public function getNumberOfProductReviewsToApprove(): int
+    {
+        $this->waitForElement('product_reviews_to_approve');
+
+        return (int) $this->getElement('product_reviews_to_approve_count')->getText();
+    }
+
+    public function getNumberOfProductVariantsOutOfStock(): int
+    {
+        $this->waitForElement('product_variants_out_of_stock');
+
+        return (int) $this->getElement('product_variants_out_of_stock_count')->getText();
+    }
+
+    public function getNumberOfShipmentsToShip(): int
+    {
+        $this->waitForElement('shipments_to_ship');
+
+        return (int) $this->getElement('shipments_to_ship_count')->getText();
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_admin_dashboard';
@@ -146,9 +181,19 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'new_customers' => '[data-test-new-customers]',
             'next_period' => '[data-test-next-period]',
             'order_list' => '[data-test-new-orders]',
+            'orders_to_process' => '[data-test-orders-to-process]',
+            'orders_to_process_count' => '[data-test-orders-to-process-count]',
             'paid_orders' => '[data-test-paid-orders]',
+            'pending_payments' => '[data-test-pending-payments]',
+            'pending_payments_count' => '[data-test-pending-payments-count]',
+            'product_reviews_to_approve' => '[data-test-product-reviews-to-approve]',
+            'product_reviews_to_approve_count' => '[data-test-product-reviews-to-approve-count]',
+            'product_variants_out_of_stock' => '[data-test-product-variants-out-of-stock]',
+            'product_variants_out_of_stock_count' => '[data-test-product-variants-out-of-stock-count]',
             'previous_period' => '[data-test-previous-period]',
             'product_navbar_search' => '[data-test-navbar-product-search]',
+            'shipments_to_ship' => '[data-test-shipments-to-ship]',
+            'shipments_to_ship_count' => '[data-test-shipments-to-ship-count]',
             'statistics_component' => '[data-test-statistics-component]',
             'total_sales' => '[data-test-total-sales]',
             'year_split_by_months_statistics_button' => '[data-test-year-split-into-months]',
@@ -159,6 +204,12 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     {
         sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
         $liveElement = $this->getElement('statistics_component');
+        $liveElement->waitFor(2500, fn () => !$liveElement->hasAttribute('busy'));
+    }
+
+    private function waitForElement(string $element): void
+    {
+        $liveElement = $this->getElement($element);
         $liveElement->waitFor(2500, fn () => !$liveElement->hasAttribute('busy'));
     }
 }

@@ -2,6 +2,7 @@
 
 <div class="col-12 col-md-auto ms-auto d-print-none">
     <div class="btn-list">
+        {% hook 'actions' %}
         {% if resources.definition.actionGroups.main is defined %}
             {% for action in resources.definition.getEnabledActions('main') %}
                 {{ sylius_grid_render_action(resources, action, null) }}

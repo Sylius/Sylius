@@ -89,8 +89,13 @@
         {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
     {%- endif %}
 
-    <a class="dropdown-item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
-        {{ item.label|trans }}{% if target == '_blank' %}{{ ux_icon('tabler:external-link', {'class': 'icon icon-sm ms-1 mb-2 opacity-75'}) }}{% endif %}
+    <a class="dropdown-item justify-content-lg-between gap-2 {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
+        {{ item.label|trans }}
+        {% if item.extra('plus_logo') is not empty %}
+            <img src="{{ asset('build/admin/images/sylius-plus-sidebar.svg', 'admin') }}" alt="Sylius Plus" class="navbar-plus-badge" />
+        {% elseif target == '_blank' %}
+            {{ ux_icon('tabler:external-link', {'class': 'icon icon-sm ms-1 mb-2 opacity-75'}) }}
+        {% endif %}
     </a>
 {% endblock %}
 

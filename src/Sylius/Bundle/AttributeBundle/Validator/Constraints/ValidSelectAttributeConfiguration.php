@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ValidSelectAttributeConfiguration extends Constraint
 {
     public string $messageMultiple = 'sylius.attribute.configuration.multiple';

@@ -40,10 +40,10 @@ class StatisticsComponent
     public string $channelCode;
 
     #[LiveProp]
-    public string $startDate = 'first day of january this year';
+    public string $startDate = 'first day of next month last year';
 
     #[LiveProp]
-    public string $endDate = 'first day of january next year';
+    public string $endDate = 'first day of next month this year';
 
     #[LiveProp]
     public string $period = 'year';
@@ -86,6 +86,7 @@ class StatisticsComponent
                 },
                 array_column($saleList, 'total'),
             ),
+            'paid_orders_count' => array_column($saleList, 'paidOrdersCount'),
         ];
 
         return [
@@ -146,16 +147,16 @@ class StatisticsComponent
     {
         [$startDate, $endDate] = match ($this->period) {
             'year' => [
-                (new \DateTime('first day of January this year'))->format('Y-m-d'),
-                (new \DateTime('first day of January next year'))->format('Y-m-d'),
+                (new \DateTime('first day of next month last year'))->format('Y-m-d'),
+                (new \DateTime('first day of next month this year'))->format('Y-m-d'),
             ],
             'month' => [
-                (new \DateTime('first day of this month'))->format('Y-m-d'),
-                (new \DateTime('first day of next month'))->format('Y-m-d'),
+                (new \DateTime('+1 day -1 month'))->format('Y-m-d'),
+                (new \DateTime('+1 day'))->format('Y-m-d'),
             ],
             '2 weeks' => [
-                (new \DateTime('monday previous week'))->format('Y-m-d'),
-                (new \DateTime('monday next week'))->format('Y-m-d'),
+                (new \DateTime('+1 day -2 weeks'))->format('Y-m-d'),
+                (new \DateTime('+1 day'))->format('Y-m-d'),
             ],
             default => throw new \InvalidArgumentException(sprintf('Period "%s" is not supported.', $this->period)),
         };

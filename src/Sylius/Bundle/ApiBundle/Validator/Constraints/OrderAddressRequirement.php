@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class OrderAddressRequirement extends Constraint
 {
     public string $message = 'sylius.order.address_requirement';
