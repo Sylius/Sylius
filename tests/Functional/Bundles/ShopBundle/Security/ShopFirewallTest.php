@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Tests\Security;
+namespace Sylius\Tests\Functional\Bundles\ShopBundle\Security;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class ShopFirewallTest extends WebTestCase
+final class ShopFirewallTest extends KernelTestCase
 {
     private string $shopRegexp;
 
