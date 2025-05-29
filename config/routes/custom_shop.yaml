@@ -1,0 +1,9 @@
+app_shop_account_order_item_reorder:
+    path: /account/orders/{orderNumber}/items/{itemId}/reorder
+    methods: [GET] # Можно использовать POST для безопасности, но GET проще для кнопки-ссылки
+    defaults:
+        _controller: app.controller.action.shop.reorder_item
+        _sylius:
+            permission: true # Доступно только для авторизованных пользователей
+            template: "@SyliusShop/Account/Order/show.html.twig" # Можно перенаправить на корзину или обратно к заказу
+            redirect: sylius_shop_cart_summary # Перенаправление после действия

@@ -1,1 +1,46 @@
+services:
+    # Default configuration for services in *this* file
+    _defaults:
+        # Automatically injects dependencies in your services
+        autowire: true
 
+        # Automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+
+        # Allows optimizing the container by removing unused services; this also means
+        # fetching services directly from the container via $container->get() won't work
+        public: false
+
+    _instanceof:
+        Sylius\Bundle\ResourceBundle\Controller\ResourceController:
+            autowire: false
+        Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType:
+            autowire: false
+
+    # Makes classes in src/ available to be used as services;
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Kernel.php}'
+
+    # Controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+
+    App\Controller\Action\Shop\ReorderItemAction:
+            tags: ['controller.service_arguments']
+            public: true # Контроллеры должны быть public
+
+    app.controller.action.shop.reorder_item: # Это имя мы использовали в маршруте
+        class: App\Controller\Action\Shop\ReorderItemAction
+        public: true
+        # Аргументы будут автоматически внедрены благодаря autowire
+
+    App\Service\OrderItemReordererInterface:
+        class: App\Service\OrderItemReorderer
+        arguments:
+            $orderItemFactory: '@sylius.factory.order_item' # Указываем конкретную фабрику
+            # Остальные зависимости будут автосвязаны

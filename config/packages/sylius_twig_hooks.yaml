@@ -1,0 +1,13 @@
+sylius_twig_hooks:
+    hooks:
+#        #переопределяем шаблон строки таблицы для списка товаров
+
+        'sylius_shop.shared.order.show.summary.table.body':
+            add_btn_hook:
+               template: 'shop/account/order/to_cart_btn.html.twig'
+               priority: 0
+
+        'sylius_shop.account.order.show.summary.table.header':
+            add_th_tag:
+               template: 'shop/account/order/th.html.twig'
+               priority: 0

@@ -1,0 +1,16 @@
+sylius:
+    ui:
+        reorder: "Reorder"
+        item_added_to_cart: "Item has been added to your cart"
+        product_not_available: "Product is not available"
+        product_out_of_stock: "Product is out of stock"
+        repeat_order: "Repeat order"
+        to_cart: "Add to cart"
+        item_successfully_added_to_cart: 'Item has been successfully added to your cart.'
+        something_went_wrong_adding_item_to_cart: 'Something went wrong while adding item to your cart.'
+    product_variant:
+        not_available: 'This product is currently unavailable.'
+        out_of_stock: 'This product is out of stock.'
+        out_of_stock_for_quantity: 'Not enough stock to add the desired quantity of this product.'
+
+

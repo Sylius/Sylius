@@ -1,0 +1,15 @@
+sylius:
+    ui:
+        reorder: "Повторный заказ"
+        item_added_to_cart: "Товар добавлен в корзину"
+        product_not_available: "Товар недоступен"
+        product_out_of_stock: "Товар отсутствует на складе"
+        repeat_order: "Повторить заказ"
+        to_cart: "В корзину"
+        item_successfully_added_to_cart: "Товар добавлен в корзину"
+        something_went_wrong_adding_item_to_cart: "Что-то пошло не так при добавлении в корзину"
+
+    product_variant:
+        not_available: 'Этот продукт в настоящее время недоступен.'
+        out_of_stock: 'Этот продукт отсутствует на складе.'
+        out_of_stock_for_quantity: 'Недостаточно запасов для добавления желаемого количества этого продукта.'

@@ -1,0 +1,5 @@
+ <td>
+     <form action="{{ path('app_shop_account_order_item_reorder', {'orderNumber':  hookable_metadata.context.order.number, 'itemId': hookable_metadata.context.item.id}) }}" method="get">
+        <button class="btn btn-sm btn-outline-gray">{{ 'sylius.ui.to_cart' | trans }}</button>
+    </form>
+</td>
