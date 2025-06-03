@@ -202,7 +202,7 @@
         "friends-of-behat/mink-debug-extension": "^2.1",
         "friends-of-behat/mink-extension": "^2.7",
         "friends-of-behat/page-object-extension": "^0.3",
-        "friends-of-behat/symfony-extension": "^2.6",
+        "friends-of-behat/symfony-extension": "dev-fix/lazy-object-with-sf-7.3",
         "friends-of-behat/variadic-extension": "^1.6",
         "hwi/oauth-bundle": "^2.2",
         "jangregor/phpstan-prophecy": "^2.0",
@@ -298,5 +298,11 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SymfonyExtension"
+        }
+    ]
 }
