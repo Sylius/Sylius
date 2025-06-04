@@ -41,7 +41,8 @@ final class ShopUserVoterTest extends TestCase
             $this->shopUserVoter->vote(
                 $tokenMock,
                 null,
-                ['WRONG_ATTRIBUTE'])
+                ['WRONG_ATTRIBUTE'],
+            ),
         );
     }
 
@@ -57,8 +58,8 @@ final class ShopUserVoterTest extends TestCase
             $this->shopUserVoter->vote(
                 $tokenMock,
                 null,
-                [ShopUserVoter::SYLIUS_SHOP_USER]
-            )
+                [ShopUserVoter::SYLIUS_SHOP_USER],
+            ),
         );
     }
 
@@ -76,8 +77,8 @@ final class ShopUserVoterTest extends TestCase
             $this->shopUserVoter->vote(
                 $tokenMock,
                 null,
-                [ShopUserVoter::SYLIUS_SHOP_USER]
-            )
+                [ShopUserVoter::SYLIUS_SHOP_USER],
+            ),
         );
     }
 
@@ -97,8 +98,8 @@ final class ShopUserVoterTest extends TestCase
             $this->shopUserVoter->vote(
                 $tokenMock,
                 null,
-                [ShopUserVoter::SYLIUS_SHOP_USER]
-            )
+                [ShopUserVoter::SYLIUS_SHOP_USER],
+            ),
         );
     }
 
@@ -120,8 +121,8 @@ final class ShopUserVoterTest extends TestCase
             $this->shopUserVoter->vote(
                 $tokenMock,
                 null,
-                [ShopUserVoter::SYLIUS_SHOP_USER]
-            )
+                [ShopUserVoter::SYLIUS_SHOP_USER],
+            ),
         );
     }
 }

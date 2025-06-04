@@ -44,7 +44,8 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizerTest extends 
         self::assertFalse(
             $this->productVariantChannelPricingsChannelCodeKeyDenormalizer->supportsDenormalization(
                 'string',
-                ProductVariantInterface::class)
+                ProductVariantInterface::class,
+            ),
         );
     }
 
@@ -53,7 +54,8 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizerTest extends 
         self::assertFalse(
             $this->productVariantChannelPricingsChannelCodeKeyDenormalizer->supportsDenormalization(
                 [],
-                'string')
+                'string',
+            ),
         );
     }
 
@@ -128,7 +130,7 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizerTest extends 
 
         $this->productVariantChannelPricingsChannelCodeKeyDenormalizer->denormalize(
             ['channelPricings' => ['WEB' => ['channelCode' => 'MOBILE']]],
-            ProductVariantInterface::class
+            ProductVariantInterface::class,
         );
     }
 }

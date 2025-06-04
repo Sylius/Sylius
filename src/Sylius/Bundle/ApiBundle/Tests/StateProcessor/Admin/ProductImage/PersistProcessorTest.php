@@ -179,7 +179,6 @@ final class PersistProcessorTest extends TestCase
     {
         $deleteOperation = new Delete();
         /** @var ProductImageInterface|MockObject $productImageMock */
-
         $productImageMock = $this->createMock(ProductImageInterface::class);
 
         self::expectException(\InvalidArgumentException::class);

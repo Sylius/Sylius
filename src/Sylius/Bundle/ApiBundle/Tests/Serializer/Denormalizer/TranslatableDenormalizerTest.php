@@ -47,8 +47,8 @@ final class TranslatableDenormalizerTest extends TestCase
                 null,
                 [
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'PUT',
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
@@ -59,8 +59,8 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
@@ -70,8 +70,8 @@ final class TranslatableDenormalizerTest extends TestCase
                 null,
                 [
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
-            )
+                ],
+            ),
         );
     }
 
@@ -82,7 +82,8 @@ final class TranslatableDenormalizerTest extends TestCase
         $this->localeProvider->expects(self::once())->method('getDefaultLocaleCode')->willReturn('en');
 
         $this->denormalizer->expects(
-            self::once())
+            self::once(),
+        )
             ->method('denormalize')
             ->with(
                 $data,
@@ -91,7 +92,7 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
+                ],
             )
             ->willReturn($data);
 
@@ -102,9 +103,9 @@ final class TranslatableDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 null,
                 [
-                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'
-                ]
-            )
+                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+                ],
+            ),
         );
     }
 
@@ -123,7 +124,7 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
+                ],
             )
             ->willReturn($updatedData);
 
@@ -134,9 +135,9 @@ final class TranslatableDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 null,
                 [
-                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'
-                ]
-            )
+                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+                ],
+            ),
         );
     }
 
@@ -157,7 +158,7 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
+                ],
             )
             ->willReturn($updatedData);
 
@@ -166,8 +167,9 @@ final class TranslatableDenormalizerTest extends TestCase
             $this->translatableDenormalizer->denormalize(
                 $originalData,
                 TranslatableInterface::class,
-                null, [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST']
-            )
+                null,
+                [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'],
+            ),
         );
     }
 
@@ -188,7 +190,7 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
+                ],
             )
             ->willReturn($updatedData);
 
@@ -197,7 +199,9 @@ final class TranslatableDenormalizerTest extends TestCase
             $this->translatableDenormalizer->denormalize(
                 $originalData,
                 TranslatableInterface::class,
-                null, [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'])
+                null,
+                [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'],
+            ),
         );
     }
 
@@ -218,7 +222,7 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
+                ],
             )
             ->willReturn($updatedData);
 
@@ -229,9 +233,9 @@ final class TranslatableDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 null,
                 [
-                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'
-                ]
-            )
+                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+                ],
+            ),
         );
     }
 
@@ -252,7 +256,7 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
+                ],
             )
             ->willReturn($updatedData);
 
@@ -263,9 +267,9 @@ final class TranslatableDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 null,
                 [
-                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'
-                ]
-            )
+                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+                ],
+            ),
         );
     }
 
@@ -286,7 +290,7 @@ final class TranslatableDenormalizerTest extends TestCase
                 [
                     'sylius_translatable_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                     ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
-                ]
+                ],
             )
             ->willReturn($updatedData);
 
@@ -297,9 +301,9 @@ final class TranslatableDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 null,
                 [
-                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'
-                ]
-            )
+                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+                ],
+            ),
         );
     }
 }

@@ -86,9 +86,11 @@ final class ZoneDenormalizerTest extends TestCase
 
         self::assertTrue(
             $this->zoneDenormalizer->supportsDenormalization(
-                    [], ZoneInterface::class,
-                    null,
-                    [AbstractNormalizer::OBJECT_TO_POPULATE => $zoneMock])
+                [],
+                ZoneInterface::class,
+                null,
+                [AbstractNormalizer::OBJECT_TO_POPULATE => $zoneMock],
+            ),
         );
 
         self::assertFalse($this->zoneDenormalizer->supportsDenormalization([], ZoneInterface::class));
@@ -98,7 +100,8 @@ final class ZoneDenormalizerTest extends TestCase
                 [],
                 ZoneInterface::class,
                 null,
-                [AbstractNormalizer::OBJECT_TO_POPULATE => null])
+                [AbstractNormalizer::OBJECT_TO_POPULATE => null],
+            ),
         );
 
         self::assertFalse(
@@ -106,7 +109,8 @@ final class ZoneDenormalizerTest extends TestCase
                 [],
                 ZoneInterface::class,
                 null,
-                [AbstractNormalizer::OBJECT_TO_POPULATE => []])
+                [AbstractNormalizer::OBJECT_TO_POPULATE => []],
+            ),
         );
 
         self::assertFalse(
@@ -114,7 +118,8 @@ final class ZoneDenormalizerTest extends TestCase
                 [],
                 ZoneInterface::class,
                 null,
-                [AbstractNormalizer::OBJECT_TO_POPULATE => $productMock])
+                [AbstractNormalizer::OBJECT_TO_POPULATE => $productMock],
+            ),
         );
     }
 
@@ -204,7 +209,7 @@ final class ZoneDenormalizerTest extends TestCase
             [],
             ZoneInterface::class,
             null,
-            [AbstractNormalizer::OBJECT_TO_POPULATE => $objectToPopulateMock]
+            [AbstractNormalizer::OBJECT_TO_POPULATE => $objectToPopulateMock],
         );
     }
 

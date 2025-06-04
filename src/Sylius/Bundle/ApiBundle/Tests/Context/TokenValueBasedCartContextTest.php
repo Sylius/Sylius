@@ -42,7 +42,7 @@ final class TokenValueBasedCartContextTest extends TestCase
         $this->tokenValueBasedCartContext = new TokenValueBasedCartContext(
             $this->requestStack,
             $this->orderRepository,
-            '/api/v2'
+            '/api/v2',
         );
         $this->request = $this->createMock(Request::class);
     }

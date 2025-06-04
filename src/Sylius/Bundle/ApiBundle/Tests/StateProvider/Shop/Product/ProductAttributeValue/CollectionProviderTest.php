@@ -63,7 +63,7 @@ final class CollectionProviderTest extends TestCase
             $this->attributeValueRepository,
             $this->localeContext,
             $this->localeProvider,
-            $defaultLocaleCode
+            $defaultLocaleCode,
         );
     }
 
@@ -106,7 +106,7 @@ final class CollectionProviderTest extends TestCase
 
         self::assertInstanceOf(
             \ArrayIterator::class,
-            $this->collectionProvider->provide($operation, ['code' => 'PRODUCT_CODE'], [])
+            $this->collectionProvider->provide($operation, ['code' => 'PRODUCT_CODE'], []),
         );
     }
 
@@ -147,7 +147,7 @@ final class CollectionProviderTest extends TestCase
 
         self::assertSame(
             [$productAttributeValue],
-            $this->collectionProvider->provide($operation, ['code' => 'PRODUCT_CODE'], [])
+            $this->collectionProvider->provide($operation, ['code' => 'PRODUCT_CODE'], []),
         );
     }
 

@@ -43,7 +43,7 @@ final class LoggedInCustomerEmailAwareContextBuilderTest extends TestCase
             $this->decoratedContextBuilder,
             LoggedInCustomerEmailAware::class,
             'email',
-            $this->userContext
+            $this->userContext,
         );
     }
 
@@ -66,7 +66,7 @@ final class LoggedInCustomerEmailAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             ['input' => ['class' => SendContactRequest::class]],
-            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 
@@ -88,7 +88,7 @@ final class LoggedInCustomerEmailAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             ['input' => ['class' => SendContactRequest::class]],
-            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 
@@ -108,7 +108,7 @@ final class LoggedInCustomerEmailAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             ['input' => ['class' => SendContactRequest::class]],
-            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 
@@ -158,7 +158,7 @@ final class LoggedInCustomerEmailAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             ['input' => ['class' => \stdClass::class]],
-            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->loggedInCustomerEmailAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 }

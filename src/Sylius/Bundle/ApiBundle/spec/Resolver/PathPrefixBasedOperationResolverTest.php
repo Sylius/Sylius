@@ -24,9 +24,9 @@ use Sylius\Component\Addressing\Model\Country;
 
 final class PathPrefixBasedOperationResolverTest extends TestCase
 {
-    private ResourceMetadataCollectionFactoryInterface&MockObject $resourceMetadataCollectionFactory;
+    private MockObject&ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory;
 
-    private PathPrefixProviderInterface&MockObject $pathPrefixProvider;
+    private MockObject&PathPrefixProviderInterface $pathPrefixProvider;
 
     private PathPrefixBasedOperationResolver $pathPrefixBasedOperationResolver;
 

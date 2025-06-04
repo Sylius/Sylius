@@ -41,7 +41,11 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
         parent::setUp();
         $this->decoratedContextBuilder = $this->createMock(SerializerContextBuilderInterface::class);
         $this->uriVariablesAwareContextBuilder = new UriVariablesAwareContextBuilder(
-            $this->decoratedContextBuilder, ShipmentIdAware::class, 'shipmentId', ShipmentInterface::class);
+            $this->decoratedContextBuilder,
+            ShipmentIdAware::class,
+            'shipmentId',
+            ShipmentInterface::class,
+        );
     }
 
     public function testDoesNothingIfThereIsNoInputClass(): void
@@ -69,7 +73,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             ['input' => ['class' => \stdClass::class]],
-            $this->uriVariablesAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->uriVariablesAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 
@@ -92,8 +96,8 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
             $this->uriVariablesAwareContextBuilder->createFromRequest(
                 $requestMock,
                 true,
-                ['operation' => $operationMock]
-            )
+                ['operation' => $operationMock],
+            ),
         );
     }
 
@@ -118,8 +122,8 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
             $this->uriVariablesAwareContextBuilder->createFromRequest(
                 $requestMock,
                 true,
-                ['operation' => $operationMock]
-            )
+                ['operation' => $operationMock],
+            ),
         );
     }
 
@@ -161,7 +165,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
             $this->decoratedContextBuilder,
             OrderTokenValueAware::class,
             'orderTokenValue',
-            OrderInterface::class
+            OrderInterface::class,
         );
 
         $this->decoratedContextBuilder->expects(self::once())
@@ -195,7 +199,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
             $this->decoratedContextBuilder,
             OrderItemIdAware::class,
             'orderItemId',
-            OrderItemInterface::class
+            OrderItemInterface::class,
         );
 
         $this->decoratedContextBuilder->expects(self::once())

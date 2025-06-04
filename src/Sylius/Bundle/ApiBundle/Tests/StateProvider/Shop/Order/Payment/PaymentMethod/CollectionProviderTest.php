@@ -50,9 +50,9 @@ final class CollectionProviderTest extends TestCase
         $this->paymentMethodsResolver = $this->createMock(PaymentMethodsResolverInterface::class);
         $this->collectionProvider = new CollectionProvider(
             $this->paymentRepository,
-                $this->orderRepository,
+            $this->orderRepository,
             $this->sectionProvider,
-            $this->paymentMethodsResolver
+            $this->paymentMethodsResolver,
         );
     }
 
@@ -111,8 +111,8 @@ final class CollectionProviderTest extends TestCase
             $this->collectionProvider->provide(
                 $operation,
                 ['tokenValue' => 'TOKEN', 'paymentId' => 1],
-                ['sylius_api_channel' => $channelMock]
-            )
+                ['sylius_api_channel' => $channelMock],
+            ),
         );
     }
 
@@ -142,7 +142,9 @@ final class CollectionProviderTest extends TestCase
             [],
             $this->collectionProvider->provide(
                 $operation,
-                ['tokenValue' => 'TOKEN', 'paymentId' => 1], ['sylius_api_channel' => $channelMock])
+                ['tokenValue' => 'TOKEN', 'paymentId' => 1],
+                ['sylius_api_channel' => $channelMock],
+            ),
         );
     }
 

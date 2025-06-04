@@ -40,7 +40,7 @@ final class OrderAdjustmentsVoterTest extends TestCase
     public function testOnlySupportsSyliusOrderAdjustmentAttribute(): void
     {
         self::assertTrue(
-            $this->orderAdjustmentsVoter->supportsAttribute(OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT)
+            $this->orderAdjustmentsVoter->supportsAttribute(OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT),
         );
 
         self::assertFalse($this->orderAdjustmentsVoter->supportsAttribute('OTHER_ATTRIBUTE'));
@@ -55,8 +55,8 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 new ArrayCollection(),
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
-            )
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
+            ),
         );
     }
 
@@ -69,8 +69,8 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 [],
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
-            )
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
+            ),
         );
     }
 
@@ -97,7 +97,7 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 $collection,
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
             ),
         );
     }
@@ -126,7 +126,7 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 $collection,
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
             ),
         );
     }
@@ -153,7 +153,7 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 $collection,
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
             ),
         );
     }
@@ -178,8 +178,8 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 $collection,
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
-            )
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
+            ),
         );
     }
 
@@ -210,8 +210,8 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 $collection,
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
-            )
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
+            ),
         );
     }
 
@@ -244,8 +244,8 @@ final class OrderAdjustmentsVoterTest extends TestCase
             $this->orderAdjustmentsVoter->vote(
                 $tokenMock,
                 $collection,
-                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT]
-            )
+                [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT],
+            ),
         );
     }
 }

@@ -150,7 +150,7 @@ final class ItemProviderTest extends TestCase
 
         self::assertSame(
             $paymentMock,
-            $this->itemProvider->provide($operation, ['paymentId' => $paymentId, 'tokenValue' => 'token'], [])
+            $this->itemProvider->provide($operation, ['paymentId' => $paymentId, 'tokenValue' => 'token'], []),
         );
     }
 
@@ -177,7 +177,7 @@ final class ItemProviderTest extends TestCase
             ->willReturn(null);
 
         $this->assertNull(
-            $this->itemProvider->provide($operation, ['paymentId' => $paymentId, 'tokenValue' => 'token'], [])
+            $this->itemProvider->provide($operation, ['paymentId' => $paymentId, 'tokenValue' => 'token'], []),
         );
     }
 }

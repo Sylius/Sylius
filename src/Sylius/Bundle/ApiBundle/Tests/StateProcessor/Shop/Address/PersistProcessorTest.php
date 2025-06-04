@@ -124,7 +124,7 @@ final class PersistProcessorTest extends TestCase
         $this->userContext->expects(self::once())->method('getUser')->willReturn(null);
 
         $addressMock->expects(self::never())->method('setCustomer');
-        
+
         $this->processor->expects(self::once())->method('process')->with($addressMock, $operation, [], []);
 
         $this->persistProcessor->process($addressMock, $operation);

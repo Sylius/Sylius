@@ -67,10 +67,10 @@ final class ProductOptionValueNormalizerTest extends TestCase
 
         self::assertFalse(
             $this->productOptionValueNormalizer->supportsNormalization(
-            $productOptionValueMock,
-            null,
-                ['sylius_product_option_value_normalizer_already_called' => true]
-            )
+                $productOptionValueMock,
+                null,
+                ['sylius_product_option_value_normalizer_already_called' => true],
+            ),
         );
     }
 
@@ -84,7 +84,7 @@ final class ProductOptionValueNormalizerTest extends TestCase
             ->with(
                 $productOptionValueMock,
                 null,
-                ['sylius_product_option_value_normalizer_already_called' => true]
+                ['sylius_product_option_value_normalizer_already_called' => true],
             )
             ->willReturn([]);
 
@@ -112,7 +112,7 @@ final class ProductOptionValueNormalizerTest extends TestCase
         $this->productOptionValueNormalizer->normalize(
             $productOptionValueMock,
             null,
-            ['sylius_product_option_value_normalizer_already_called' => true]
+            ['sylius_product_option_value_normalizer_already_called' => true],
         );
     }
 }

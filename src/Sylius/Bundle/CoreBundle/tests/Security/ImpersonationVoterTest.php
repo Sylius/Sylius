@@ -28,7 +28,7 @@ final class ImpersonationVoterTest extends TestCase
 {
     private const FIREWALL_NAME = 'test';
 
-    private RequestStack&MockObject $requestStack;
+    private MockObject&RequestStack $requestStack;
 
     private FirewallMap&MockObject $firewallMap;
 

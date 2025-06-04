@@ -51,8 +51,8 @@ final class CommandDenormalizerTest extends TestCase
             $this->commandDenormalizer->supportsDenormalization(
                 null,
                 '',
-                context: ['input' => ['class' => 'Class']]
-            )
+                context: ['input' => ['class' => 'Class']],
+            ),
         );
     }
 
@@ -67,7 +67,7 @@ final class CommandDenormalizerTest extends TestCase
             '',
             400,
             null,
-            ['firstName', 'lastName']
+            ['firstName', 'lastName'],
         );
 
         $context = ['input' => ['class' => RegisterShopUser::class]];
@@ -100,7 +100,7 @@ final class CommandDenormalizerTest extends TestCase
             '',
             1,
             ['string'],
-            'firstName'
+            'firstName',
         );
 
         $exception = new UnexpectedValueException('', 400, $previousException);

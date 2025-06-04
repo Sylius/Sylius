@@ -41,7 +41,7 @@ final class ChannelPriceHistoryConfigDenormalizerTest extends TestCase
         $this->configFactory = $this->createMock(FactoryInterface::class);
         $this->channelPriceHistoryConfigDenormalizer = new ChannelPriceHistoryConfigDenormalizer(
             $this->iriConverter,
-            $this->configFactory
+            $this->configFactory,
         );
     }
 
@@ -51,15 +51,15 @@ final class ChannelPriceHistoryConfigDenormalizerTest extends TestCase
             $this->channelPriceHistoryConfigDenormalizer->supportsDenormalization(
                 [],
                 'string',
-                context: [self::ALREADY_CALLED => true]
-            )
+                context: [self::ALREADY_CALLED => true],
+            ),
         );
     }
 
     public function testDoesNotSupportDenormalizationWhenDataIsNotAnArray(): void
     {
         self::assertFalse(
-            $this->channelPriceHistoryConfigDenormalizer->supportsDenormalization('string', 'string')
+            $this->channelPriceHistoryConfigDenormalizer->supportsDenormalization('string', 'string'),
         );
     }
 

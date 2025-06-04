@@ -48,7 +48,7 @@ final class ImageNormalizerTest extends TestCase
         $this->imageNormalizer = new ImageNormalizer(
             $this->cacheManager,
             $this->requestStack,
-            self::DEFAULT_FILTER
+            self::DEFAULT_FILTER,
         );
         $this->imageNormalizer->setNormalizer($this->normalizer);
     }

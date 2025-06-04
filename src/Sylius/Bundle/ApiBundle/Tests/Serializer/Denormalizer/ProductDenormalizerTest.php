@@ -74,8 +74,8 @@ final class ProductDenormalizerTest extends TestCase
                 null,
                 [
                     AbstractNormalizer::OBJECT_TO_POPULATE => $productMock,
-                    self::ALREADY_CALLED => true
-                ]
+                    self::ALREADY_CALLED => true,
+                ],
             )
             ->willReturn($productMock)
         ;
@@ -102,11 +102,12 @@ final class ProductDenormalizerTest extends TestCase
             ->method('denormalize')
             ->with(
                 ['options' => ['/options/color']],
-                ProductInterface::class, null,
+                ProductInterface::class,
+                null,
                 [
                     AbstractNormalizer::OBJECT_TO_POPULATE => $productMock,
                     self::ALREADY_CALLED => true,
-                ]
+                ],
             )
             ->willReturn($productMock);
 
@@ -133,7 +134,7 @@ final class ProductDenormalizerTest extends TestCase
                 ['options' => ['/options/color']],
                 ProductInterface::class,
                 null,
-                [self::ALREADY_CALLED => true]
+                [self::ALREADY_CALLED => true],
             )
             ->willReturn($productMock);
 
@@ -159,7 +160,7 @@ final class ProductDenormalizerTest extends TestCase
             ['options' => ['/options/color']],
             ProductInterface::class,
             null,
-            [AbstractNormalizer::OBJECT_TO_POPULATE => $productVariantMock]
+            [AbstractNormalizer::OBJECT_TO_POPULATE => $productVariantMock],
         );
     }
 }

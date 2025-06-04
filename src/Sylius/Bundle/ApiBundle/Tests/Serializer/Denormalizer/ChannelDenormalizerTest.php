@@ -46,14 +46,15 @@ final class ChannelDenormalizerTest extends TestCase
             $this->channelDenormalizer->supportsDenormalization(
                 [],
                 ChannelInterface::class,
-                context: [self::ALREADY_CALLED => true])
+                context: [self::ALREADY_CALLED => true],
+            ),
         );
     }
 
     public function testDoesNotSupportDenormalizationWhenDataIsNotAnArray(): void
     {
         self::assertFalse(
-            $this->channelDenormalizer->supportsDenormalization('string', ChannelInterface::class)
+            $this->channelDenormalizer->supportsDenormalization('string', ChannelInterface::class),
         );
     }
 

@@ -40,7 +40,7 @@ final class LocaleCodeAwareContextBuilderTest extends TestCase
             $this->decoratedContextBuilder,
             LocaleCodeAware::class,
             'localeCode',
-            $this->localeContext
+            $this->localeContext,
         );
     }
 
@@ -93,7 +93,7 @@ final class LocaleCodeAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             ['input' => ['class' => \stdClass::class]],
-            $this->localeCodeAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->localeCodeAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 }

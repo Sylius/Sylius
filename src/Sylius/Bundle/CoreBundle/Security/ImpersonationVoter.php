@@ -46,7 +46,8 @@ class ImpersonationVoter implements CacheableVoterInterface
                     return $this->isImpersonated($firewall)
                         ? VoterInterface::ACCESS_GRANTED
                         : VoterInterface::ACCESS_DENIED;
-                } catch (SessionNotFoundException) {}
+                } catch (SessionNotFoundException) {
+                }
             }
 
             break;
@@ -72,7 +73,7 @@ class ImpersonationVoter implements CacheableVoterInterface
     {
         return (bool) $this->requestStack->getSession()->get(
             $this->getImpersonateKeyName($firewall),
-            false
+            false,
         );
     }
 

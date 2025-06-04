@@ -47,7 +47,7 @@ final class CollectionProviderTest extends TestCase
         $this->collectionProvider = new CollectionProvider(
             $this->sectionProvider,
             $this->shipmentRepository,
-            $this->shippingMethodsResolver
+            $this->shippingMethodsResolver,
         );
     }
 

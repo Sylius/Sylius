@@ -51,7 +51,7 @@ final class ProductNormalizerTest extends TestCase
             $this->defaultProductVariantResolver,
             $this->iriConverter,
             $this->sectionProvider,
-            ['sylius:product:index']
+            ['sylius:product:index'],
         );
         $this->productNormalizer->setNormalizer($this->normalizer);
     }
@@ -161,10 +161,13 @@ final class ProductNormalizerTest extends TestCase
 
         $this->normalizer->expects(self::once())
             ->method('normalize')
-            ->with($productMock, null, [
+            ->with(
+                $productMock,
+                null,
+                [
                 'sylius_product_normalizer_already_called' => true,
                 'groups' => ['sylius:product:index'],
-            ]
+            ],
             )->willReturn([]);
 
         $this->iriConverter->expects(self::once())

@@ -41,15 +41,15 @@ final class CustomerDenormalizerTest extends TestCase
             $this->customerDenormalizer->supportsDenormalization(
                 [],
                 CustomerInterface::class,
-                context: [self::ALREADY_CALLED => true]
-            )
+                context: [self::ALREADY_CALLED => true],
+            ),
         );
     }
 
     public function testDoesNotSupportDenormalizationWhenDataIsNotAnArray(): void
     {
         self::assertFalse(
-            $this->customerDenormalizer->supportsDenormalization('string', CustomerInterface::class)
+            $this->customerDenormalizer->supportsDenormalization('string', CustomerInterface::class),
         );
     }
 
@@ -94,8 +94,8 @@ final class CustomerDenormalizerTest extends TestCase
             $customerMock,
             $this->customerDenormalizer->denormalize(
                 ['user' => ['verified' => false]],
-                CustomerInterface::class
-            )
+                CustomerInterface::class,
+            ),
         );
 
         $this->clock->expects(self::never())->method('now');
@@ -118,13 +118,14 @@ final class CustomerDenormalizerTest extends TestCase
             ->method('denormalize')
             ->with(
                 ['user' => ['verified' => '2021-01-01T00:00:00+00:00']],
-                CustomerInterface::class, null,
-                [self::ALREADY_CALLED => true]
+                CustomerInterface::class,
+                null,
+                [self::ALREADY_CALLED => true],
             )->willReturn($customerMock);
 
         self::assertSame(
             $customerMock,
-            $this->customerDenormalizer->denormalize(['user' => ['verified' => true]], CustomerInterface::class)
+            $this->customerDenormalizer->denormalize(['user' => ['verified' => true]], CustomerInterface::class),
         );
     }
 }

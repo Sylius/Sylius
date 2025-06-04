@@ -41,7 +41,7 @@ final class LoggedInShopUserIdAwareContextBuilderTest extends TestCase
             $this->decoratedContextBuilder,
             ShopUserIdAware::class,
             'shopUserId',
-            $this->userContext
+            $this->userContext,
         );
     }
 
@@ -85,7 +85,7 @@ final class LoggedInShopUserIdAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             [],
-            $this->loggedInShopUserIdAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->loggedInShopUserIdAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 
@@ -103,7 +103,7 @@ final class LoggedInShopUserIdAwareContextBuilderTest extends TestCase
 
         self::assertSame(
             ['input' => ['class' => \stdClass::class]],
-            $this->loggedInShopUserIdAwareContextBuilder->createFromRequest($requestMock, true, [])
+            $this->loggedInShopUserIdAwareContextBuilder->createFromRequest($requestMock, true, []),
         );
     }
 

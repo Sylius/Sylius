@@ -44,6 +44,7 @@ final class UserImpersonatorSubscriber implements EventSubscriberInterface
             $request->getSession()->remove(
                 sprintf('_security_impersonate_sylius_%s', $config->getName()),
             );
-        } catch (SessionNotFoundException) {}
+        } catch (SessionNotFoundException) {
+        }
     }
 }

@@ -43,8 +43,8 @@ final class ProductAttributeValueDenormalizerTest extends TestCase
             $this->productAttributeValueDenormalizer->supportsDenormalization(
                 [],
                 ProductAttributeValueInterface::class,
-                context: [self::ALREADY_CALLED => true]
-            )
+                context: [self::ALREADY_CALLED => true],
+            ),
         );
     }
 
@@ -53,7 +53,8 @@ final class ProductAttributeValueDenormalizerTest extends TestCase
         self::assertFalse(
             $this->productAttributeValueDenormalizer->supportsDenormalization(
                 'string',
-                ProductAttributeValueInterface::class)
+                ProductAttributeValueInterface::class,
+            ),
         );
     }
 
@@ -88,7 +89,7 @@ final class ProductAttributeValueDenormalizerTest extends TestCase
 
         $this->productAttributeValueDenormalizer->denormalize(
             ['attribute' => '/attributes/material', 'value' => 4],
-            ProductAttributeValueInterface::class
+            ProductAttributeValueInterface::class,
         );
     }
 
@@ -117,7 +118,7 @@ final class ProductAttributeValueDenormalizerTest extends TestCase
                 ['attribute' => '/attributes/material', 'value' => 'ceramic'],
                 ProductAttributeValueInterface::class,
                 null,
-                [self::ALREADY_CALLED => true]
+                [self::ALREADY_CALLED => true],
             )
             ->willReturn($productAttributeValueMock);
 

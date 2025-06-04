@@ -104,8 +104,8 @@ final class ChannelCodeAwareContextBuilderTest extends TestCase
             $this->channelCodeAwareContextBuilder->createFromRequest(
                 $requestMock,
                 true,
-                []
-            )
+                [],
+            ),
         );
     }
 }

@@ -38,8 +38,8 @@ final class TranslatableLocaleKeyDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 context: [
                     'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
-                ]
-            )
+                ],
+            ),
         );
     }
 
@@ -48,7 +48,8 @@ final class TranslatableLocaleKeyDenormalizerTest extends TestCase
         self::assertFalse(
             $this->translatableLocaleKeyDenormalizer->supportsDenormalization(
                 'string',
-                TranslatableInterface::class)
+                TranslatableInterface::class,
+            ),
         );
     }
 
@@ -73,7 +74,7 @@ final class TranslatableLocaleKeyDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 null,
                 [
-                    'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true
+                    'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                 ],
             );
 
@@ -108,7 +109,7 @@ final class TranslatableLocaleKeyDenormalizerTest extends TestCase
                 TranslatableInterface::class,
                 null,
                 [
-                    'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true
+                    'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Resource\Model\TranslatableInterface' => true,
                 ],
             );
 
@@ -126,7 +127,7 @@ final class TranslatableLocaleKeyDenormalizerTest extends TestCase
 
         $this->translatableLocaleKeyDenormalizer->denormalize(
             ['translations' => ['de_DE' => ['locale' => 'en_US']]],
-            TranslatableInterface::class
+            TranslatableInterface::class,
         );
     }
 }

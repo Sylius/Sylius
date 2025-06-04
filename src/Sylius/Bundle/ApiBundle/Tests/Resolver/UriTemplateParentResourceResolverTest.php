@@ -100,7 +100,7 @@ final class UriTemplateParentResourceResolverTest extends TestCase
             $itemMock,
             $operation,
             ['uri_variables' => ['variable' => 'value']],
-            []
+            [],
         );
     }
 

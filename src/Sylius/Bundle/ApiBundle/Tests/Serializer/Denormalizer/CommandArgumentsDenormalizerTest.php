@@ -37,7 +37,7 @@ final class CommandArgumentsDenormalizerTest extends TestCase
         $this->iriToIdentifierConverter = $this->createMock(IriToIdentifierConverterInterface::class);
         $this->commandArgumentsDenormalizer = new CommandArgumentsDenormalizer(
             $this->commandDenormalizer,
-            $this->iriToIdentifierConverter
+            $this->iriToIdentifierConverter,
         );
     }
 
