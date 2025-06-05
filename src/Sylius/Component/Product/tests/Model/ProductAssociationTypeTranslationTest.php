@@ -30,7 +30,7 @@ final class ProductAssociationTypeTranslationTest extends TestCase
     {
         self::assertInstanceOf(
             ProductAssociationTypeTranslationInterface::class,
-            $this->productAssociationTypeTranslation
+            $this->productAssociationTypeTranslation,
         );
     }
 

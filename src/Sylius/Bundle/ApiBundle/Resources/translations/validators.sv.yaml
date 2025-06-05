@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'Lösenordsåterställningslänken har gått ut.'
+    account:
+        invalid_verification_token: 'Det finns ingen butiksanvändare med e-postverifieringstoken %verificationToken%.'
+        is_verified: 'Kontot med e-postadressen %email% är redan verifierat.'
+    address:
+        without_country: 'En adress utan land kan inte existera.'
+    code:
+        not_blank: 'Vänligen ange en kod.'
+        invalid: 'Koden får endast innehålla bokstäver, siffror, bindestreck ("-") och understreck ("_").'
+    contact_request:
+        email_is_invalid: 'Den angivna e-postadressen är ogiltig.'
+    country:
+        not_exist: 'Landet med koden %countryCode% finns inte.'
+    date_interval:
+        empty: 'Datumintervallet får inte vara tomt.'
+        invalid: 'Datumintervallet är inte ett giltigt ISO 8601-intervall.'
+    date_time:
+        invalid: 'Datum och tid är inte i ett giltigt ISO 8601-format (ÅÅÅÅ-MM-DD\THH:MM:SS).'
+    order:
+        not_empty: 'En tom beställning kan inte behandlas.'
+    payment:
+        not_found: 'Betalningen finns inte.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Du kan inte ändra betalningsmetod för en annullerad beställning.'
+        not_available: 'Betalningsmetoden %name% är inte tillgänglig för denna beställning. Vänligen välj en annan.'
+        not_exist: 'Betalningsmetoden med kod %code% finns inte.'
+    payment_request:
+        action_not_available: 'Betalningsförfrågan (metodkod: %code%, betalnings-ID: %id%) har ingen hanterare. Vänligen välj en annan betalningsmetod.'
+        not_available: 'Betalningsförfrågan stöder inte denna åtgärd.'
+    product:
+        not_exist: 'Produkten %productName% finns inte.'
+    product_variant:
+        not_exist: 'Produktvarianten med kod %productVariantCode% finns inte.'
+        not_longer_available: 'Produktvarianten med namnet %productVariantName% finns inte längre.'
+        not_sufficient: 'Produktvarianten med kod %productVariantCode% har inte tillräckligt med lager.'
+        product_variant_with_name_not_sufficient: 'Produktvarianten med namnet %productVariantName% har inte tillräckligt med lager.'
+        option_values:
+            single_value: 'Produktvarianten kan endast ha ett värde konfigurerat per alternativ.'
+    reset_password:
+        invalid_token: 'Lösenordsåterställningstoken %token% är ogiltig.'
+        token_expired: 'Lösenordsåterställningstoken har gått ut.'
+    shipment:
+        not_found: 'Leveransen finns inte.'
+        shipped: 'Du kan inte skicka en leverans som redan har skickats.'
+    shipping_method:
+        not_found: 'Fraktmetoden med kod %code% finns inte.'
+        not_available: 'Fraktmetoden %name% är inte tillgänglig för denna beställning. Vänligen välj en annan.'
+        shipping_address_not_found: 'Beställningen måste ha en leveransadress först.'
+    statistics:
+        end_date:
+            invalid: 'Startdatumet måste vara tidigare än slutdatumet.'

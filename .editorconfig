@@ -69,10 +69,6 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-[phpspec.yml{,.dist}]
-indent_style = space
-indent_size = 4
-
 [phpstan.neon]
 indent_style = space
 indent_size = 4

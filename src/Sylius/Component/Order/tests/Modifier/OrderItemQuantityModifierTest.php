@@ -27,9 +27,9 @@ final class OrderItemQuantityModifierTest extends TestCase
     private OrderItemQuantityModifier $orderItemQuantityModifier;
 
     /** @var OrderItemUnitFactoryInterface<OrderItemUnitInterface>&MockObject */
-    private OrderItemUnitFactoryInterface&MockObject $orderItemUnitFactory;
+    private MockObject&OrderItemUnitFactoryInterface $orderItemUnitFactory;
 
-    private OrderItemInterface&MockObject $orderItem;
+    private MockObject&OrderItemInterface $orderItem;
 
     protected function setUp(): void
     {

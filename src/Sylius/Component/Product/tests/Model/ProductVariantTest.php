@@ -25,7 +25,7 @@ final class ProductVariantTest extends TestCase
 {
     private ProductVariant $productVariant;
 
-    private ProductOptionValueInterface&MockObject $optionValue;
+    private MockObject&ProductOptionValueInterface $optionValue;
 
     protected function setUp(): void
     {

@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    attribute:
+        name:
+            not_blank: Bitte geben Sie den Attributnamen ein.
+            min_length: Der Attributname muss mindestens 1 Zeichen lang sein.|Der Attributname muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Attributname darf nicht länger als 1 Zeichen sein.|Der Attributname darf nicht länger als {{ limit }} Zeichen sein.
+        code:
+            not_blank: Bitte geben Sie den Attribut-Code ein.
+            regex: Der Attribut-Code darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.
+            unique: Dieser Code ist bereits vergeben.
+        configuration:
+            max_entries: Der Höchstwert muss größer oder gleich dem Mindestwert sein.
+            max_length: Die maximale Länge muss größer oder gleich der minimalen Länge sein.
+            min_entries: Der Mindestwert muss kleiner oder gleich dem Höchstwert sein.
+            multiple: Die Option „Mehrfachauswahl“ muss aktiviert sein, wenn Mindest- oder Höchstwerte gesetzt sind.
+        presentation:
+            not_blank: Bitte geben Sie eine Anzeige für das Attribut an.
+            min_length: Die Anzeige muss mindestens 1 Zeichen lang sein.|Die Anzeige muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Die Anzeige darf nicht länger als 1 Zeichen sein.|Die Anzeige darf nicht länger als {{ limit }} Zeichen sein.
+    attribute_value:
+        attribute:
+            not_blank: Bitte wählen Sie ein Attribut aus.
+        value:
+            not_blank: Bitte geben Sie einen Wert für das Attribut ein.

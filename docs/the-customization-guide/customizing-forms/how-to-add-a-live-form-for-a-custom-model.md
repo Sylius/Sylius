@@ -100,7 +100,7 @@ sylius_resource:
 
 From now on, when you focus on a required field, dynamic validation will be triggered once the field loses focus, without the need to explicitly submit the form:
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Live collection
 
@@ -161,7 +161,7 @@ class SupplierType extends AbstractType
 
 The `Supplier` configuration needs to be updated accordingly:
 
-```
+```yaml
 # config/packages/sylius_resource.yaml
 
 sylius_resource:
@@ -172,6 +172,24 @@ sylius_resource:
                 model: App\Entity\Supplier
                 repository: App\Repository\SupplierRepository
                 form: App\Form\Type\SupplierType
+```
+
+The component also needs to be updated to use the new `SupplierType` form type:
+
+```yaml
+# config/services.yaml
+
+services:
+    app_admin.twig.component.supplier.form:
+        class: Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent
+        arguments:
+            - '@app.repository.supplier'
+            - '@form.factory'
+            - '%app.model.supplier.class%'
+            - 'App\Form\Type\SupplierType'
+        tags:
+            - { name: 'sylius.live_component.admin', key: 'app_admin:twig:component:supplier:form' }
+
 ```
 
 ### Organization of form fields
@@ -252,7 +270,7 @@ is necessary to disable the internal form rendering, giving us full control over
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Live autocomplete
 
@@ -344,4 +362,4 @@ sylius_twig_hooks:
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>

@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        request_reset_password:
+            success: 'Si l''e-mail que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe.'
+        password_reset:
+            success: 'Votre mot de passe a été modifié avec succès !'
+            token_expired: 'Le jeton de réinitialisation de mot de passe a expiré.'
+    email:
+        order_confirmation_resent: 'La confirmation de commande a été renvoyée avec succès au client.'
+        shipment_confirmation_resent: 'La confirmation d''expédition a été renvoyée avec succès au client.'
+    product_variant:
+        cannot_generate_variants: 'Impossible de générer des variantes pour un produit sans options.'
+    locale:
+        delete:
+            is_used: 'Impossible de supprimer la langue, car elle est utilisée par au moins une traduction.'
+            success: 'La langue a été supprimée avec succès.'

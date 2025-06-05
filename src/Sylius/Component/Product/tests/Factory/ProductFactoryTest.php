@@ -25,22 +25,16 @@ use Sylius\Resource\Factory\FactoryInterface;
 
 final class ProductFactoryTest extends TestCase
 {
-    /**
-     * @var FactoryInterface<Product>&MockObject
-     */
+    /** @var FactoryInterface<Product>&MockObject */
     private MockObject $factory;
 
-    /**
-     * @var FactoryInterface<ProductVariant>&MockObject
-     */
+    /** @var FactoryInterface<ProductVariant>&MockObject */
     private MockObject $variantFactory;
 
-    /**
-     * @var ProductFactory<ProductInterface>
-     */
+    /** @var ProductFactory<ProductInterface> */
     private ProductFactory $productFactory;
 
-    private ProductInterface&MockObject $product;
+    private MockObject&ProductInterface $product;
 
     protected function setUp(): void
     {

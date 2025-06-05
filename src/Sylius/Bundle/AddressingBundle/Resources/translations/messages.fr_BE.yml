@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        address:
+            city: Ville
+            company: Société
+            country: Pays
+            first_name: Prénom
+            last_name: Nom
+            phone_number: Numéro de téléphone
+            postcode: Code postal
+            street: Rue
+            province: Province
+            zone: Zone
+        country:
+            add_province: Ajouter une province
+            name: Nom
+            provinces: Provinces
+            select: Sélectionner
+            enabled: Activé
+        province:
+            name: Nom
+            abbreviation: Abbréviation
+            select: Sélectionner
+        zone:
+            add_member: Ajouter un membre
+            members: Membres
+            name: Nom
+            type: Type
+            types:
+                country: Pays
+                province: Province
+                zone: Zone
+            scope: Portée
+            scopes:
+                all: Tout
+            select: Sélectionner
+            select_scope: Sélectionner la portée
+        zone_member:
+            select: Sélectionner

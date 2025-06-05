@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'De wachtwoord reset token is verlopen.'
+    account:
+        invalid_verification_token: 'Er is geen winkelgebruiker met het e-mail verificatietoken %verificationToken%.'
+        is_verified: 'Account met e-mail %email% is momenteel geverifieerd.'
+    address:
+        without_country: 'Het adres zonder land kan niet bestaan.'
+    code:
+        not_blank: 'Voer een code in.'
+        invalid: 'De code mag alleen letters, cijfers, streepjes ("-" symbool) en onderstrepingstekens ("_" symbool) bevatten.'
+    contact_request:
+        email_is_invalid: 'Het opgegeven e-mailadres is ongeldig.'
+    country:
+        not_exist: 'Het land %countryCode% bestaat niet.'
+    date_interval:
+        empty: 'Het datuminterval kan niet leeg zijn.'
+        invalid: 'Het datuminterval is geen geldig ISO 8601 interval.'
+    date_time:
+        invalid: 'De datum en tijd is geen geldige ISO 8601 datum en tijd in Y-m-d\TH:i:s formaat.'
+    order:
+        not_empty: 'Een lege bestelling kan niet worden verwerkt.'
+    payment:
+        not_found: 'De betaling bestaat niet.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Je kunt de betaalmethode niet wijzigen voor een geannuleerde bestelling.'
+        not_available: 'De betaalmethode %name% is niet beschikbaar voor deze bestelling. Kies alstublieft een andere.'
+        not_exist: 'De betaalmethode met code %code% bestaat niet.'
+    payment_request:
+        action_not_available: 'De betalingsaanvraag (methodecode: %code% en betalings-ID: %id%) heeft geen handler. Kies alstublieft een andere betaalmethode.'
+        not_available: 'De betalingsaanvraag ondersteunt deze actie niet.'
+    product:
+        not_exist: 'Het product %productName% bestaat niet.'
+    product_variant:
+        not_exist: 'De productvariant %productVariantCode% bestaat niet.'
+        not_longer_available: 'De productvariant met naam %productVariantName% bestaat niet meer.'
+        not_sufficient: 'De productvariant met code %productVariantCode% heeft onvoldoende voorraad.'
+        product_variant_with_name_not_sufficient: 'De productvariant met naam %productVariantName% heeft onvoldoende voorraad.'
+        option_values:
+            single_value: 'De productvariant kan slechts één waarde hebben voor een enkele optie.'
+    reset_password:
+        invalid_token: 'Wachtwoord reset token %token% is ongeldig.'
+        token_expired: 'Wachtwoord reset token is verlopen.'
+    shipment:
+        not_found: 'De zending bestaat niet.'
+        shipped: 'Je kunt geen zending verzenden die eerder al verzonden is.'
+    shipping_method:
+        not_found: 'De verzendmethode met code %code% bestaat niet.'
+        not_available: 'De verzendmethode %name% is niet beschikbaar voor deze bestelling. Kies alstublieft een andere verzendmethode.'
+        shipping_address_not_found: 'De bestelling moet eerst worden geadresseerd.'
+    statistics:
+        end_date:
+            invalid: 'De startdatum moet eerder zijn dan de einddatum.'

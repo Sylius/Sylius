@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'El token de restablecimiento de contraseña ha expirado.'
+    account:
+        invalid_verification_token: 'No existe un usuario de tienda con el token de verificación de correo electrónico %verificationToken%.'
+        is_verified: 'La cuenta con el correo electrónico %email% está actualmente verificada.'
+    address:
+        without_country: 'La dirección sin país no puede existir.'
+    code:
+        not_blank: 'Por favor, ingrese un código.'
+        invalid: 'El código solo debe contener letras, números, guiones ("-" símbolo) y guiones bajos ("_" símbolo).'
+    contact_request:
+        email_is_invalid: 'El correo electrónico proporcionado no es válido.'
+    country:
+        not_exist: 'El país %countryCode% no existe.'
+    date_interval:
+        empty: 'El intervalo de fechas no puede estar vacío.'
+        invalid: 'El intervalo de fechas no es un intervalo válido ISO 8601.'
+    date_time:
+        invalid: 'La fecha y hora no es válida, debe tener el formato ISO 8601 en Y-m-d\TH:i:s.'
+    order:
+        not_empty: 'Un pedido vacío no puede ser procesado.'
+    payment:
+        not_found: 'El pago no existe.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'No se puede cambiar el método de pago para un pedido cancelado.'
+        not_available: 'El método de pago %name% no está disponible para este pedido. Por favor, elija otro.'
+        not_exist: 'El método de pago con el código %code% no existe.'
+    payment_request:
+        action_not_available: 'La solicitud de pago (código de método: %code% y pago id: %id%) no tiene un manejador. Por favor, elija otro método de pago.'
+        not_available: 'La solicitud de pago no soporta esta acción.'
+    product:
+        not_exist: 'El producto %productName% no existe.'
+    product_variant:
+        not_exist: 'La variante del producto %productVariantCode% no existe.'
+        not_longer_available: 'La variante del producto con el nombre %productVariantName% no existe.'
+        not_sufficient: 'La variante del producto con el código %productVariantCode% no tiene suficiente stock.'
+        product_variant_with_name_not_sufficient: 'La variante del producto con el nombre %productVariantName% no tiene suficiente stock.'
+        option_values:
+            single_value: 'La variante del producto solo puede tener un valor configurado para una única opción.'
+    reset_password:
+        invalid_token: 'El token de restablecimiento de contraseña %token% no es válido.'
+        token_expired: 'El token de restablecimiento de contraseña ha expirado.'
+    shipment:
+        not_found: 'El envío no existe.'
+        shipped: 'No se puede enviar un envío que ya haya sido enviado anteriormente.'
+    shipping_method:
+        not_found: 'El método de envío con el código %code% no existe.'
+        not_available: 'El método de envío %name% no está disponible para este pedido. Por favor, vuelva a seleccionar su método de envío.'
+        shipping_address_not_found: 'El pedido debe ser dirigido primero.'
+    statistics:
+        end_date:
+            invalid: 'La fecha de inicio debe ser anterior a la fecha de finalización.'

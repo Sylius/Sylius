@@ -44,6 +44,7 @@ sylius:
             position: Emplacement
             rules: Règles
             rules_help: Utilisez les règles pour décider si ce mode de livraison peut être appliqué à une commande donnée. Si une règle est vraie, ce mode de livraison peut être appliqué. Notez que si vous ajoutez plusieurs règles, toutes les règles doivent être vraies.
+            select_calculator: Sélectionnez un calculateur
             tax_category: Catégorie de taxe
             translations: Traductions
         shipping_method_rule:
@@ -55,3 +56,4 @@ sylius:
             total_weight_less_than_or_equal: Poids total inférieur ou égal à
             weight: Poids
             amount: Montant
+            select: Sélectionnez un type de règle

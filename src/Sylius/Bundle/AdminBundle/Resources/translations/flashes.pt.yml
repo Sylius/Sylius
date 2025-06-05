@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        request_reset_password:
+            success: 'Se o e-mail que especificou existir no nosso sistema, enviámos instruções para redefinir a sua palavra-passe.'
+        password_reset:
+            success: 'A sua palavra-passe foi alterada com sucesso!'
+            token_expired: 'O token de redefinição de palavra-passe expirou.'
+    email:
+        order_confirmation_resent: 'A confirmação da encomenda foi reenviada com sucesso para o cliente.'
+        shipment_confirmation_resent: 'A confirmação do envio foi reenviada com sucesso para o cliente.'
+    product_variant:
+        cannot_generate_variants: 'Não é possível gerar variantes para um produto sem valores de opções.'
+    locale:
+        delete:
+            is_used: 'Não é possível eliminar o idioma, pois está a ser utilizado por pelo menos uma tradução.'
+            success: 'O idioma foi eliminado com sucesso.'

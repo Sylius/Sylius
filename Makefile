@@ -1,9 +1,6 @@
 phpunit:
 	vendor/bin/phpunit
 
-phpspec:
-	vendor/bin/phpspec run --ansi --no-interaction -f dot
-
 phpstan:
 	vendor/bin/phpstan analyse
 
@@ -32,11 +29,11 @@ behat: behat-cli behat-non-js behat-js
 
 init: install backend frontend
 
-ci: init phpstan phpunit phpspec behat
+ci: init phpstan phpunit behat
 
 integration: init phpunit behat-cli behat-non-js
 
-static: install phpspec phpstan
+static: install phpstan
 
 # Example execution: make profile url=http://app
 profile:

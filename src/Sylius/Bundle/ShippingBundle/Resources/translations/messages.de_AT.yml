@@ -1,0 +1,55 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        rule:
+            unit_count_configuration:
+                count: Anzahl
+                equal: Ist gleich
+            type: Regeltyp
+        shipment:
+            state: Bundesland
+            states:
+                checkout: Zur Kasse
+                pending: Ausstehend
+                ready: Bereit
+                shipped: Versandt
+                returned: Zurückgesandt
+                cancelled: Abgebrochen
+            tracking_code: Tracking-Code
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Pauschale pro Sendung
+                amount: Betrag
+            per_unit_rate_configuration:
+                label: Pauschale pro Artikel
+                amount: Betrag
+        shipping_category:
+            description: Beschreibung
+            name: Name
+        shipping_method:
+            add_rule: Regel hinzufügen
+            calculator: Rechner
+            category: Kategorie
+            category_requirement: Kategorievoraussetzungen
+            channels: Ausgabekanäle
+            configuration: Einstellung
+            description: Beschreibung
+            enabled: Aktiviert
+            match_all_category_requirement: Alle Einheiten müssen mit der Versandkategorie übereinstimmen
+            match_any_category_requirement: Mindestens eine Einheit muss mit der Versandkategorie übereinstimmen
+            match_none_category_requirement: Keine der Einheiten müssen mit der Versandkategorie übereinstimmen
+            name: Name
+            position: Position
+            rules: Regeln
+            rules_help: Verwenden Sie Regeln, um zu entscheiden, ob diese Versandart auf eine bestimmte Bestellung angewendet werden kann. Wenn eine Regel zutrifft ist, kann diese Versandart angewendet werden. Beachten Sie, dass, wenn Sie mehrere Regeln hinzufügen, alle Regeln wahr sein müssen.
+            tax_category: Steuerkategorie
+            translations: Übersetzungen
+        shipping_method_rule:
+            type: Typ
+            total: Gesamt
+            total_weight_greater_than_or_equal: Gesamtgewicht größer oder gleich
+            total_weight_less_than_or_equal: Gesamtgewicht kleiner oder gleich
+            weight: Gewicht
+            amount: Betrag

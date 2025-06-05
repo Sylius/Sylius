@@ -49,9 +49,9 @@ use Webmozart\Assert\Assert;
 /** @implements ExampleFactoryInterface<ProductInterface> */
 class ProductExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<ProductInterface> $productFactory
@@ -68,22 +68,22 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
      */
     public function __construct(
-        private readonly FactoryInterface $productFactory,
-        private readonly FactoryInterface $productVariantFactory,
-        private readonly FactoryInterface $channelPricingFactory,
-        private readonly ProductVariantGeneratorInterface $variantGenerator,
-        private readonly FactoryInterface $productAttributeValueFactory,
-        private readonly FactoryInterface $productImageFactory,
-        private readonly FactoryInterface $productTaxonFactory,
-        private readonly ImageUploaderInterface $imageUploader,
-        private readonly SlugGeneratorInterface $slugGenerator,
-        private readonly RepositoryInterface $taxonRepository,
-        private readonly RepositoryInterface $productAttributeRepository,
-        private readonly RepositoryInterface $productOptionRepository,
-        private readonly RepositoryInterface $channelRepository,
-        private readonly RepositoryInterface $localeRepository,
-        private readonly RepositoryInterface $taxCategoryRepository,
-        private readonly FileLocatorInterface $fileLocator,
+        protected readonly FactoryInterface $productFactory,
+        protected readonly FactoryInterface $productVariantFactory,
+        protected readonly FactoryInterface $channelPricingFactory,
+        protected readonly ProductVariantGeneratorInterface $variantGenerator,
+        protected readonly FactoryInterface $productAttributeValueFactory,
+        protected readonly FactoryInterface $productImageFactory,
+        protected readonly FactoryInterface $productTaxonFactory,
+        protected readonly ImageUploaderInterface $imageUploader,
+        protected readonly SlugGeneratorInterface $slugGenerator,
+        protected readonly RepositoryInterface $taxonRepository,
+        protected readonly RepositoryInterface $productAttributeRepository,
+        protected readonly RepositoryInterface $productOptionRepository,
+        protected readonly RepositoryInterface $channelRepository,
+        protected readonly RepositoryInterface $localeRepository,
+        protected readonly RepositoryInterface $taxCategoryRepository,
+        protected readonly FileLocatorInterface $fileLocator,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

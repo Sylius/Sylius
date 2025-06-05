@@ -27,9 +27,7 @@ final class PaymentMethodsResolverTest extends TestCase
 
     private PaymentMethodsResolver $paymentMethodsResolver;
 
-    /**
-     * @var PaymentInterface&MockObject
-     */
+    /** @var PaymentInterface&MockObject */
     private MockObject $payment;
 
     protected function setUp(): void
@@ -57,7 +55,7 @@ final class PaymentMethodsResolverTest extends TestCase
 
         $this->assertSame(
             [$method1Mock, $method2Mock],
-            $this->paymentMethodsResolver->getSupportedMethods($this->payment)
+            $this->paymentMethodsResolver->getSupportedMethods($this->payment),
         );
     }
 

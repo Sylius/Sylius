@@ -19,12 +19,16 @@
                             aria-expanded="{{ item.open == true ? 'true' : 'false' }}"
                             aria-controls="{{ item_id }}">
 
-                        <span class="d-flex gap-2">
+                    <span class="d-flex gap-2">
                             {% if item.icon %}
                                 <span class="d-flex align-items-center">{{ ux_icon(item.icon) }}</span>
                             {% endif %}
-                            {{ item.title|default('Title') }}
-                        </span>
+                        {{ item.title|default('Title') }}
+                    </span>
+
+                    <span class="accordion-button-toggle">
+                        {{ ux_icon('tabler:chevron-down') }}
+                    </span>
                     </button>
                 </h2>
                 <div id="{{ item_id }}"

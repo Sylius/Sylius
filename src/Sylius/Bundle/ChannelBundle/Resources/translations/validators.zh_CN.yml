@@ -4,8 +4,14 @@
 sylius:
     channel:
         code:
-            not_blank: 请输入频道编码。
-            regex: 销售渠道代码仅可以由字母、 数字、 破折号和下划线组成。
-            unique: 频道编码必须唯一。
+            max_length: '代码不能超过 {{ limit }} 个字符。'
+            not_blank: '请输入频道代码。'
+            regex: '频道代码只能由字母、数字、破折号和下划线组成。'
+            unique: '频道代码必须唯一。'
         name:
-            not_blank: 请输入频道名称。
+            not_blank: '请输入频道名称。'
+            max_length: '频道名称不能超过 {{ limit }} 个字符。'
+        color:
+            max_length: '颜色不能超过 {{ limit }} 个字符。'
+        hostname:
+            max_length: '主机名不能超过 {{ limit }} 个字符。'

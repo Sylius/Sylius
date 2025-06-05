@@ -57,7 +57,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    
+
     #[DataProvider('getGermanLocales')]
     #[Test]
     public function it_returns_product_with_translations_in_locale_from_header(string $germanLocale): void
@@ -150,12 +150,47 @@ final class ProductsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_with_default_locale_translation',
+            'shop/product/get_product_with_associations',
             Response::HTTP_OK,
         );
     }
 
-    
+    #[Test]
+    public function it_returns_associated_products_collection_by_association_type(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products?association[typeCode]=another_similar_products',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_associated_products_by_type_collection',
+            Response::HTTP_OK,
+        );
+    }
+
+    #[Test]
+    public function it_returns_associated_products_collection_by_association_owner(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products?association[ownerCode]=MUG',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_associated_products_by_owner_collection',
+            Response::HTTP_OK,
+        );
+    }
+
     #[DataProvider('getPolishLocales')]
     #[Test]
     public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(

@@ -11,18 +11,19 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
+namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PhpSpec\ObjectBehavior;
+use ReflectionClass;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
 /** @mixin ObjectBehavior */
 trait MessageHandlerAttributeTrait
 {
-    public function it_is_a_message_handler(): void
+    public function testAMessageHandler(): void
     {
-        $messageHandlerAttributes = (new \ReflectionClass($this->getWrappedObject()::class))
+        $messageHandlerAttributes = (new ReflectionClass($this->getWrappedObject()::class))
             ->getAttributes(AsMessageHandler::class);
 
         Assert::count($messageHandlerAttributes, 1);

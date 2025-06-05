@@ -34,8 +34,8 @@ sylius:
                 zone: Zona
             scope: Âmbito
             scopes:
-                all: Tudo
+                all: Todos
             select: Seleccionar
-            select_scope: Selecione o âmbito
+            select_scope: Selecionar o âmbito
         zone_member:
             select: Seleccionar

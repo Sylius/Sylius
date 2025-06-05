@@ -27,7 +27,7 @@ final class CartContextTest extends TestCase
 
     private CartContext $cartContext;
 
-    private OrderInterface&MockObject $cart;
+    private MockObject&OrderInterface $cart;
 
     protected function setUp(): void
     {

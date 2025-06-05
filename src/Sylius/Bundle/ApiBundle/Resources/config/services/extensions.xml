@@ -59,6 +59,15 @@
         </service>
 
         <service
+            id="sylius_api.doctrine.orm.query_extension.shop.product.enabled_variants"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\EnabledVariantsExtension"
+        >
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
+        <service
             id="sylius_api.doctrine.orm.query_extension.shop.product.taxon_based"
             class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\TaxonBasedExtension"
         >

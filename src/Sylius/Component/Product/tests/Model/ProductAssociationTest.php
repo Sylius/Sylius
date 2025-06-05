@@ -24,7 +24,7 @@ final class ProductAssociationTest extends TestCase
 {
     private ProductAssociation $productAssociation;
 
-    private ProductInterface&MockObject $product;
+    private MockObject&ProductInterface $product;
 
     protected function setUp(): void
     {

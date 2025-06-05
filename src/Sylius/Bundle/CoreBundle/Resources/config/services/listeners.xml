@@ -136,5 +136,10 @@
             <argument type="service" id="doctrine.migrations.dependency_factory"/>
             <tag name="doctrine.event_listener" event="onMigrationsVersionSkipped" method="onMigrationsVersionSkipped" lazy="true" />
         </service>
+
+        <service id="sylius.listener.user_impersonator" class="Sylius\Bundle\CoreBundle\EventListener\UserImpersonatorSubscriber">
+            <argument type="service" id="security.firewall.map" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>

@@ -19,7 +19,7 @@ Sylius\Component\Locale\Model\Locale:
     locale_en:
         code: 'en_US'
     locale_pl:
-        code: 'pl_PL' 
+        code: 'pl_PL'
     locale_de:
         code: 'de_DE'
 
@@ -41,21 +41,21 @@ Sylius\Component\Core\Model\ProductTranslation:
         name: 'Mug'
         description: 'This is a mug'
         shortDescription: 'Short mug description'
-        translatable: '@product_mug'    
+        translatable: '@product_mug'
     product_translation_mug_pl_PL:
         slug: 'kubek'
         locale: 'pl_PL'
         name: 'Kubek'
         description: 'To jest kubek'
         shortDescription: 'Krótki opis kubka'
-        translatable: '@product_mug'    
+        translatable: '@product_mug'
     product_translation_mug_de_DE:
         slug: 'Becher'
         locale: 'de_DE'
         name: 'Becher'
         description: 'das ist becher'
         shortDescription: 'Kurzbeschreibung der Becher'
-        translatable: '@product_mug'   
+        translatable: '@product_mug'
     product_translation_cup_en_US:
         slug: 'Cup'
         locale: 'en_US'
@@ -90,6 +90,10 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
         locale: 'pl_PL'
         name: 'Kubek niebieski'
         translatable: '@product_variant_mug_blue'
+    product_variant_mug_blue_translation_de_DE:
+        locale: 'de_DE'
+        name: 'Blauer Brecher'
+        translatable: '@product_variant_mug_blue'
     product_variant_mug_red_translation_en_EN:
         locale: 'en_US'
         name: 'Red Mug'
@@ -97,6 +101,10 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
     product_variant_mug_red_translation_pl_PL:
         locale: 'pl_PL'
         name: 'Kubek czerwony'
+        translatable: '@product_variant_mug_red'
+    product_variant_mug_red_translation_de_DE:
+        locale: 'de_DE'
+        name: 'Roter Brecher'
         translatable: '@product_variant_mug_red'
 
 Sylius\Component\Core\Model\ChannelPricing:
@@ -112,7 +120,7 @@ Sylius\Component\Product\Model\ProductOption:
     product_option_color:
         code: 'COLOR'
         currentLocale: 'en_US'
-        
+
 Sylius\Component\Product\Model\ProductOptionTranslation:
     product_option_translation_en_EN:
         locale: 'en_US'

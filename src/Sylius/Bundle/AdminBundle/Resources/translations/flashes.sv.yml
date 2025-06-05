@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        request_reset_password:
+            success: 'Om e-postadressen du angav finns i vårt system har vi skickat instruktioner för hur du återställer ditt lösenord.'
+        password_reset:
+            success: 'Ditt lösenord har ändrats!'
+            token_expired: 'Länken för att återställa lösenordet har gått ut.'
+    email:
+        order_confirmation_resent: 'Orderbekräftelsen har skickats till kunden igen.'
+        shipment_confirmation_resent: 'Leveransbekräftelsen har skickats till kunden igen.'
+    product_variant:
+        cannot_generate_variants: 'Kan inte skapa varianter för en produkt utan alternativvärden.'
+    locale:
+        delete:
+            is_used: 'Kan inte ta bort språket eftersom det används av minst en översättning.'
+            success: 'Språket har tagits bort.'

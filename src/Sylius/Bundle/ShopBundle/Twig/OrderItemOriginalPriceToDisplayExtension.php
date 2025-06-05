@@ -28,15 +28,19 @@ final class OrderItemOriginalPriceToDisplayExtension extends AbstractExtension
 
     public function getOriginalPriceToDisplay(OrderItem $item): ?int
     {
+        $unitPrice = $item->getUnitPrice();
+        $originalUnitPrice = $item->getOriginalUnitPrice();
+        $discountedUnitPrice = $item->getDiscountedUnitPrice();
+
         if (
-            $item->getOriginalUnitPrice() !== null &&
-            ($item->getOriginalUnitPrice() > $item->getUnitPrice() || $item->getOriginalUnitPrice() > $item->getDiscountedUnitPrice())
+            $originalUnitPrice !== null &&
+            ($originalUnitPrice > $unitPrice || $originalUnitPrice > $discountedUnitPrice)
         ) {
-            return $item->getOriginalUnitPrice();
+            return $originalUnitPrice;
         }
 
-        if ($item->getOriginalUnitPrice() === null && $item->getUnitPrice() > $item->getDiscountedUnitPrice()) {
-            return $item->getUnitPrice();
+        if ($originalUnitPrice === null && $unitPrice > $discountedUnitPrice) {
+            return $unitPrice;
         }
 
         return null;

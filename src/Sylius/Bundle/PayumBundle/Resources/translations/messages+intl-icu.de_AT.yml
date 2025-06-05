@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    payum_action:
+        payment:
+            description: '{items, plural, one {Die Zahlung enthält # Artikel für eine Gesamtsumme von {total}} other {Die Zahlung enthält # Artikel für eine Gesamtsumme von {total}}}'

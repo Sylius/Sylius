@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'Le jeton de réinitialisation de mot de passe a expiré.'
+    account:
+        invalid_verification_token: 'Aucun utilisateur de la boutique ne possède le jeton de vérification d''e-mail %verificationToken%.'
+        is_verified: 'Le compte avec l''email %email% est actuellement vérifié.'
+    address:
+        without_country: 'Une adresse sans pays ne peut pas exister.'
+    code:
+        not_blank: 'Veuillez entrer un code.'
+        invalid: 'Le code ne doit contenir que des lettres, des chiffres, des tirets ("-" symbol) et des underscores ("_" symbol).'
+    contact_request:
+        email_is_invalid: 'L''email fourni est invalide.'
+    country:
+        not_exist: 'Le pays %countryCode% n''existe pas.'
+    date_interval:
+        empty: 'L''intervalle de dates ne peut pas être vide.'
+        invalid: 'L''intervalle de dates n''est pas un intervalle ISO 8601 valide.'
+    date_time:
+        invalid: 'La date et l''heure ne sont pas au format ISO 8601 valide en Y-m-d\TH:i:s.'
+    order:
+        not_empty: 'Impossible de traiter une commande vide.'
+    payment:
+        not_found: 'Le paiement n''existe pas.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Vous ne pouvez pas changer la méthode de paiement pour une commande annulée.'
+        not_available: 'Le mode de paiement %name% n''est pas disponible pour cette commande. Veuillez en choisir une autre.'
+        not_exist: 'Le mode de paiement avec le code %code% n''existe pas.'
+    payment_request:
+        action_not_available: 'La demande de paiement (code du moyen de paiement : %code%, identifiant  : %id%) ne dispose d''aucun gestionnaire (_handler_). Veuillez choisir un autre mode de paiement.'
+        not_available: 'La demande de paiement ne prend pas en charge cette action.'
+    product:
+        not_exist: 'Le produit %productName% n''existe pas.'
+    product_variant:
+        not_exist: 'La variante de produit %productVariantCode% n''existe pas.'
+        not_longer_available: 'La variante de produit avec le nom %productVariantName% n''existe plus.'
+        not_sufficient: 'La variante de produit avec le code %productVariantCode% n''a pas de stock suffisant.'
+        product_variant_with_name_not_sufficient: 'La variante de produit avec le nom %productVariantName% n''a pas de stock suffisant.'
+        option_values:
+            single_value: 'La variante de produit ne peut avoir qu''une seule valeur configurée pour une option.'
+    reset_password:
+        invalid_token: 'Le jeton de réinitialisation de mot de passe %token% est invalide.'
+        token_expired: 'Le jeton de réinitialisation de mot de passe a expiré.'
+    shipment:
+        not_found: 'L''expédition n''existe pas.'
+        shipped: 'Expédition déjà traitée. Impossible de réexpédier.'
+    shipping_method:
+        not_found: 'Le mode de livraison avec le code %code% n''existe pas'
+        not_available: 'Le mode de livraison %name% n''est pas disponible pour cette commande. Veuillez en sélectionner une autre.'
+        shipping_address_not_found: 'L''adresse de livraison doit être renseignée avant de poursuivre la commande.'
+    statistics:
+        end_date:
+            invalid: 'La date de début doit être antérieure à la date de fin.'

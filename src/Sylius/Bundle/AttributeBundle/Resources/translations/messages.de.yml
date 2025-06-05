@@ -14,14 +14,14 @@ sylius:
             type: Typ
         attribute_type:
             checkbox: Kontrollkästchen
-            configuration: Einstellung
+            configuration: Konfiguration
             date: Datum
-            datetime: Datum / Zeit
-            integer: Integer
+            datetime: Datum/Zeit
+            integer: Ganzzahl
             percent: Prozent
             select: Auswahl
             text: Text
-            textarea: Textfeld
+            textarea: Textbereich
             title: Attributtypen
             validation: Validierung
         attribute_type_configuration:
@@ -30,11 +30,11 @@ sylius:
             date:
                 format: Format
             select:
-                multiple: Mehrere
+                multiple: Mehrfachauswahl
                 values: Werte
-                choose: Wählen Sie eine Option
-                min: Min-Einträge
-                max: Max-Einträge
+                choose: Bitte wählen Sie eine Option
+                min: Mindestanzahl Einträge
+                max: Maximalanzahl Einträge
             text:
                 min: Mindestlänge
                 max: Maximale Länge

@@ -54,10 +54,16 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
+    "promotionCoupon": {
+        "@id": "\/api\/v2\/shop\/promotion-coupons\/XYZ2",
+        "@type": "PromotionCoupon",
+        "code": "XYZ2"
+    },
     "checkoutState": "addressed",
     "paymentState": "cart",
     "shippingState": "cart",
     "tokenValue": "token",
+    "checkoutCompletedAt": null,
     "number": null,
     "items": [
         {
@@ -69,20 +75,20 @@
             "quantity": 3,
             "unitPrice": 2000,
             "originalUnitPrice": 2000,
-            "total": 6000,
-            "discountedUnitPrice": 2000,
-            "subtotal": 6000
+            "total": 5700,
+            "discountedUnitPrice": 1900,
+            "subtotal": 5700
         }
     ],
-    "itemsTotal": 6000,
-    "total": 6500,
+    "itemsTotal": 5700,
+    "total": 6200,
     "state": "cart",
-    "itemsSubtotal": 6000,
+    "itemsSubtotal": 5700,
     "taxTotal": 0,
     "shippingTaxTotal": 500,
     "taxExcludedTotal": 0,
     "taxIncludedTotal": 0,
     "shippingTotal": 500,
-    "orderPromotionTotal": 0,
+    "orderPromotionTotal": -300,
     "shippingPromotionTotal": 0
 }

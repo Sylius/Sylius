@@ -4,24 +4,34 @@
 sylius:
     shipping_category:
         name:
-            max_length: '分类名需要在 {{ limit }} 个字符以内。'
-            min_length: '分类名至少要 {{ limit }} 个字符。'
-            not_blank: '请输入配送类别名称。'
+            max_length: '类别名称不得超过 {{ limit }} 个字符。'
+            min_length: '类别名称至少需要 {{ limit }} 个字符。'
+            not_blank: '请输入运输类别名称。'
         code:
-            not_blank: '请输入配送类别编码'
-            regex: '货运分类代码仅可以由字母、 数字、 破折号和下划线组成。'
-            unique: '给定代码配送编码已存在。'
+            max_length: '代码不得超过 {{ limit }} 个字符。'
+            not_blank: '请输入运输类别代码。'
+            regex: '运输类别代码只能包含字母、数字、连字符和下划线。'
+            unique: '具有该代码的运输类别已存在。'
+
     shipping_method:
+        calculator:
+            min: '运输费用不能低于0。'
+            not_blank: '请选择运输方式计算器。'
+            invalid: '无效的计算器。可用计算器有 {{ available_calculators }}。'
         name:
-            max_length: '配送方式名称需要在 {{ limit }} 个字符以内。'
-            min_length: '配送方式名称至少要 {{ limit }} 个字符。'
-            not_blank: '请填写配送方式名称。'
+            max_length: '运输方式名称不得超过 {{ limit }} 个字符。'
+            min_length: '运输方式名称至少需要 {{ limit }} 个字符。'
+            not_blank: '请输入运输方式名称。'
         code:
-            not_blank: '请填写配送方式名称。'
-            regex: '货运方式代码仅可以由字母、 数字、 破折号和下划线组成。'
-            unique: '给定发货方式的代码已存在。'
+            max_length: '代码不得超过 {{ limit }} 个字符。'
+            not_blank: '请输入运输方式代码。'
+            regex: '运输方式代码只能包含字母、数字、连字符和下划线。'
+            unique: '具有该代码的运输方式已存在。'
         zone:
-            not_blank: '请选择配送区域。'
+            not_blank: '请选择运输方式区域。'
+        rule:
+            invalid_type: '无效的规则类型。可用规则类型有 {{ available_rule_types }}。'
+
     shipment:
         shipping_method:
-            not_blank: '请选择配送方式。'
+            not_blank: '请选择运输方式。'

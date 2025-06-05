@@ -122,7 +122,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_orders_for_customer');
     }
 
-    
+
     #[DataProvider('provideOrderFilterDates')]
     #[Test]
     public function it_gets_orders_by_period(
@@ -198,7 +198,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $tokenValue = 'token';
 
-        $this->placeOrder($tokenValue);
+        $this->placeOrder($tokenValue, checkoutCompletedAt: new \DateTimeImmutable());
 
         $this->requestGet(uri: '/api/v2/admin/orders/' . $tokenValue);
 

@@ -4,21 +4,72 @@
 sylius:
     product:
         sku:
-            not_blank: Angi produktkode (SKU).
-            unique: Produktets strekkode (SKU) må være unikt.
+            not_blank: 'Vennligst oppgi produktets SKU.'
+            unique: 'Produktets SKU må være unik.'
+        slug:
+            not_blank: 'Vennligst oppgi produktets slug.'
+            unique: 'Produktets slug må være unik.'
+            max_length: 'Produktets slug kan ikke være lengre enn 1 tegn.|Produktets slug kan ikke være lengre enn {{ limit }} tegn.'
+        code:
+            max_length: 'Koden kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi produktkode.'
+            regex: 'Produktkode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Produktkode må være unik.'
         name:
-            not_blank: Vennligst skriv inn produktnavnet.
-            min_length: Produktnavn må være minst ett tegn. |Produktnavn må være minst {{ limit }} tegn.
-            max_length: Navn må ikke være lengre enn ett tegn. |Navn må ikke være lengre enn {{ limit }} tegn.
+            not_blank: 'Vennligst oppgi produktnavn.'
+            min_length: 'Produktnavn må være minst 1 tegn langt.|Produktnavn må være minst {{ limit }} tegn langt.'
+            max_length: 'Produktnavn kan ikke være lengre enn 1 tegn.|Produktnavn kan ikke være lengre enn {{ limit }} tegn.'
+        meta_keywords:
+            max_length: 'Meta nøkkelord kan ikke være lengre enn 1 tegn.|Meta nøkkelord kan ikke være lengre enn {{ limit }} tegn.'
+        meta_description:
+            max_length: 'Meta beskrivelse kan ikke være lengre enn 1 tegn.|Meta beskrivelse kan ikke være lengre enn {{ limit }} tegn.'
     product_variant:
-        combination: Variant med dette valget finnes allerede.
+        combination: 'Variant med dette valgsettet finnes allerede.'
+        code:
+            max_length: 'Koden kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi kode.'
+            regex: 'Produktvariantkode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Produktvariantkode må være unik.'
+            within_product_unique: 'Denne koden må være unik innenfor dette produktet.'
+        option_values:
+            not_configured: 'Produktvarianten må ha konfigurerte verdier for alle valgte alternativer på produktet.'
+    simple_product:
+        code:
+            unique: 'Enkel produktkode må være unik blant alle produkter og produktvarianter.'
     option:
+        code:
+            max_length: 'Koden kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi valgkode.'
+            regex: 'Valgkode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Valg med denne koden finnes allerede.'
         name:
-            not_blank: Skriv inn navnet på alternativet.
-            min_length: Navnet må være minst ett tegn. |Navnet må være minst {{ limit }} tegn.
-            max_length: Navnet kan ikke være lengre enn ett tegn. |Navnet kan ikke være lengre enn {{ limit }} tegn.
+            not_blank: 'Vennligst oppgi valgnavn.'
+            min_length: 'Valgnavn må være minst 1 tegn langt.|Valgnavn må være minst {{ limit }} tegn langt.'
+            max_length: 'Valgnavn kan ikke være lengre enn 1 tegn.|Valgnavn kan ikke være lengre enn {{ limit }} tegn.'
         values:
-            min_count: Legg til minst {{ limit }} alternativets verdi. |Legg til minst {{ limit }} alternativets verdi.
+            min_count: 'Vennligst legg til minst {{ limit }} valgmulighet.|Vennligst legg til minst {{ limit }} valgmuligheter.'
     option_value:
+        code:
+            max_length: 'Koden kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi kode for valgverdi.'
+            regex: 'Valgverdikode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Valgverdi med denne koden finnes allerede.'
         value:
-            not_blank: Angi verdi for alternativet.
+            not_blank: 'Vennligst oppgi valgverdi.'
+    association:
+        unique: 'En assosiasjon med denne eieren og typen finnes allerede.'
+        type:
+            not_blank: 'Vennligst oppgi assosiasjonstype.'
+        owner:
+            not_blank: 'Vennligst oppgi assosiasjonseier.'
+    association_type:
+        name:
+            not_blank: 'Vennligst oppgi navn på assosiasjonstype.'
+            min_length: 'Assosiasjonstypenavn må være minst 1 tegn langt.|Assosiasjonstypenavn må være minst {{ limit }} tegn langt.'
+            max_length: 'Assosiasjonstypenavn kan ikke være lengre enn 1 tegn.|Assosiasjonstypenavn kan ikke være lengre enn {{ limit }} tegn.'
+        code:
+            min_length: 'Assosiasjonstypekode må være minst 1 tegn langt.|Assosiasjonstypekode må være minst {{ limit }} tegn langt.'
+            max_length: 'Assosiasjonstypekode kan ikke være lengre enn 1 tegn.|Assosiasjonstypekode kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi assosiasjonstypekode.'
+            regex: 'Assosiasjonstypekode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Assosiasjonstype med denne koden finnes allerede.'

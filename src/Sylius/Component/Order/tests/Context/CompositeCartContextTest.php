@@ -24,7 +24,7 @@ final class CompositeCartContextTest extends TestCase
 {
     private CompositeCartContext $context;
 
-    private OrderInterface&MockObject $cart;
+    private MockObject&OrderInterface $cart;
 
     private CartContextInterface&MockObject $cartContext1;
 

@@ -12,8 +12,8 @@ sylius:
             unique: Esse código já está em uso.
         presentation:
             not_blank: Por favor introduza a apresentação do atributo.
-            min_length: A apresentação do atributo deve ter pelo menos 1 caracter.|A apresentação dd atributo deve ter pelo menos {{ limit }} caracteres.
-            max_length: A apresentação de atributo não deve ter mais que 1 caracter.|A apresentação do atributo não deve ter mais que {{ limit }} caracteres.
+            min_length: A apresentação do atributo deve ter pelo menos 1 caracter.|A apresentação do atributo deve ter pelo menos {{ limit }} caracteres.
+            max_length: A apresentação do atributo não deve ter mais que 1 caracter.|A apresentação do atributo não deve ter mais que {{ limit }} caracteres.
     attribute_value:
         attribute:
             not_blank: Por favor, selecione o atributo.

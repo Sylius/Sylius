@@ -1,0 +1,11 @@
+{% set log = hookable_metadata.context.log %}
+
+<div class="col-12 col-sm-8 col-md-9">
+    <div class="alert alert-{{ log.action == 'create' ? 'success' : (log.action == 'update' ? 'yellow') }}">
+        <div class="table-responsive text-secondary">
+            <table class="table table-sm table-vcenter">
+                {% hook 'data' %}
+            </table>
+        </div>
+    </div>
+</div>

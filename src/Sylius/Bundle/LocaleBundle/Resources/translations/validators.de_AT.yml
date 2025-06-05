@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    locale:
+        code:
+            not_blank: Bitte einen Gebietsschemacode auswählen.
+            regex: Das Kürzel des Gebietsschemas darf nur Buchstaben, Ziffern, Bindestriche und Unterstriche enthalten.
+            unique: Der Gebietsschemacode muss eindeutig sein.

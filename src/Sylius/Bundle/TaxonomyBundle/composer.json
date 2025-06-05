@@ -36,7 +36,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.18 || ^3.3",
         "phpunit/phpunit": "^10.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
@@ -58,15 +58,15 @@
             "Sylius\\Bundle\\TaxonomyBundle\\": ""
         },
         "exclude-from-classmap": [
-            "/Tests/"
+            "/tests/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\TaxonomyBundle\\Tests\\": "tests/"
+            "Tests\\Sylius\\Bundle\\TaxonomyBundle\\": "tests/"
         },
         "files": [
-            "Tests/Functional/app/AppKernel.php"
+            "tests/Functional/app/AppKernel.php"
         ]
     },
     "repositories": [

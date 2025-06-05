@@ -69,6 +69,15 @@
             <group>sylius:shop:cart:show</group>
         </attribute>
 
+        <attribute name="checkoutCompletedAt">
+            <group>sylius:admin:order:index</group>
+            <group>sylius:admin:order:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>sylius:shop:order:account:show</group>
+            <group>sylius:shop:order:index</group>
+            <group>sylius:shop:order:show</group>
+        </attribute>
+
         <attribute name="state">
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>
@@ -211,6 +220,12 @@
 
         <attribute name="customerIp">
             <group>sylius:admin:order:show</group>
+        </attribute>
+
+        <attribute name="promotionCoupon">
+            <group>sylius:shop:order:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
     </class>
 </serializer>

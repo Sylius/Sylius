@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        credit_card:
+            cardholder_name: Name des Karteninhabers
+            expiry_month: Ablaufmonat
+            expiry_year: Ablaufjahr
+            number: Kartennummer
+            security_code: Sicherheitscode (CVV)
+            type: Kartentyp
+        payment:
+            amount: Zahlungsbetrag
+            method: Zahlungsart
+            state:
+                header: Zahlungsstatus
+                checkout: Zur Kassa
+                completed: Abgeschlossen
+                authorized: Autorisiert
+                failed: Fehlgeschlagen
+                new: Neu
+                pending: Ausstehend
+                processing: In Bearbeitung
+                unknown: Unbekannt
+                void: Ungültig
+                cancelled: Abgebrochen
+                refunded: Rückerstattet
+        payment_method:
+            description: Beschreibung
+            enabled: Aktiviert?
+            instructions: Anleitungen
+            name: Name
+            position: Position

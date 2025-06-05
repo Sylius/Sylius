@@ -31,36 +31,36 @@ sylius:
         not_shippable: Diese Adresse ist keine gültige Versandadresse.
     country:
         code:
-            not_blank: Bitte geben Sie den ISO Code des Landes an.
-            regex: Ländercode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: ISO-Ländercode muss eindeutig sein.
+            not_blank: Bitte geben Sie den ISO-Code des Landes an.
+            regex: Der Ländercode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Der ISO-Ländercode muss eindeutig sein.
     province:
         code:
             min_length: Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein.
             not_blank: Bitte geben Sie den Code des Bundeslandes ein.
-            regex: Der Code des Bundeslands sollte das Format XX-XX haben (z.B. DE-BY).
-            unique: Bundesland-Code muss eindeutig sein.
+            regex: Der Code des Bundeslandes sollte das Format XX-XX haben (z. B. DE-BY).
+            unique: Der Bundesland-Code muss eindeutig sein.
         name:
             max_length: Der Name des Bundeslandes darf nicht länger als {{ limit }} Zeichen sein|Der Name des Bundeslandes darf nicht länger als {{ limit }} Zeichen sein.
             min_length: Der Name des Bundeslandes muss mindestens {{ limit }} Zeichen lang sein|Der Name des Bundeslandes muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie Ihr Bundesland an.
-            unique: Bundesland-Name muss eindeutig sein.
+            unique: Der Bundesland-Name muss eindeutig sein.
     zone:
         scope:
-            not_blank: Bitte den Bereich angeben.
+            not_blank: Bitte geben Sie den Bereich an.
         code:
-            not_blank: Bitte geben Sie Ihre Vorwahl ein.
-            regex: Kürzel des Gebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            not_blank: Bitte geben Sie Ihre Vorwahl an.
+            regex: Das Kürzel des Gebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Die Vorwahl muss eindeutig sein.
         members:
             min_count: Bitte geben Sie mindestens {{ limit }} Versandgebiete an.
         name:
-            max_length: Der Zonenname darf nicht länger als {{ limit }} Zeichen sein|Der Zonenname darf nicht länger als {{ limit }} Zeichen sein.
-            min_length: Der Zonenname muss mindestens {{ limit }} Zeichen lang sein|Der Zonenname muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Name des Versandgebietes darf nicht länger als {{ limit }} Zeichen sein|Der Name des Versandgebietes darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Name des Versandgebietes muss mindestens {{ limit }} Zeichen lang sein|Der Name des Versandgebietes muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie den Namen des Versandgebietes an.
     zone_member:
-        cannot_be_the_same_as_zone: Bereichsmitglied und Beriech müssen unterschiedlich sein.
+        cannot_be_the_same_as_zone: Das Bereichsmitglied und der Bereich müssen unterschiedlich sein.
         code:
             not_blank: Bitte wählen Sie ein Versandgebiet aus.
-            regex: Kürzel des Versandgebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-        unique: Der gewählte Bereich ist bereits in diesem Versandgebiet.
+            regex: Das Kürzel des Versandgebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+        unique: Der gewählte Bereich ist bereits in diesem Versandgebiet enthalten.

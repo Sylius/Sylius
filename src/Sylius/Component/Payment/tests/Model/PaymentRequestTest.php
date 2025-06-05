@@ -112,11 +112,11 @@ final class PaymentRequestTest extends TestCase
     {
         $this->paymentRequest->setResponseData([
             'foo' => 'bar',
-            'bar' => 'foo'
+            'bar' => 'foo',
         ]);
         $this->assertSame(
             ['foo' => 'bar', 'bar' => 'foo'],
-            $this->paymentRequest->getResponseData()
+            $this->paymentRequest->getResponseData(),
         );
     }
 

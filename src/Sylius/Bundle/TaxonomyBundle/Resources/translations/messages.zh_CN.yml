@@ -8,6 +8,6 @@ sylius:
             enabled: 已启用
             name: 名称
             parent: 上一级
-            slug: Slug
+            slug: 标识符
         taxonomy:
             name: 名称

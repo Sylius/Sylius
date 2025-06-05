@@ -28,9 +28,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @implements ExampleFactoryInterface<TaxonInterface> */
 class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<TaxonInterface> $taxonFactory
@@ -38,10 +38,10 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
      * @param RepositoryInterface<LocaleInterface> $localeRepository
      */
     public function __construct(
-        private readonly FactoryInterface $taxonFactory,
-        private readonly TaxonRepositoryInterface $taxonRepository,
-        private readonly RepositoryInterface $localeRepository,
-        private readonly TaxonSlugGeneratorInterface $taxonSlugGenerator,
+        protected readonly FactoryInterface $taxonFactory,
+        protected readonly TaxonRepositoryInterface $taxonRepository,
+        protected readonly RepositoryInterface $localeRepository,
+        protected readonly TaxonSlugGeneratorInterface $taxonSlugGenerator,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

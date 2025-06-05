@@ -1,0 +1,10 @@
+{% set channel_pricing_form = hookable_metadata.context.channel_pricing_form %}
+{% set is_channel_pricing_invalid = channel_pricing_form.vars.errors.form.parent.errors is not empty %}
+
+{% if is_channel_pricing_invalid %}
+    <div class="alert alert-danger" role="alert">
+        <div class="d-flex">
+            {% hook 'first_error' %}
+        </div>
+    </div>
+{% endif %}

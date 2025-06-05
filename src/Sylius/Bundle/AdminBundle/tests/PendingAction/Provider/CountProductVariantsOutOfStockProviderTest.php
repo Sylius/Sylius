@@ -20,7 +20,7 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class CountProductVariantsOutOfStockProviderTest extends TestCase
 {
-    private ProductVariantRepositoryInterface&MockObject $productVariantRepository;
+    private MockObject&ProductVariantRepositoryInterface $productVariantRepository;
 
     private CountProductVariantsOutOfStockProvider $countProductVariantsOutOfStockProvider;
 

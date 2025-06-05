@@ -4,5 +4,5 @@
 sylius:
     form:
         currency:
-            code: ゾーン名
-            enabled: 有効
+            code: 'ゾーン名'
+            enabled: '有効'

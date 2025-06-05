@@ -25,9 +25,7 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 final class DefaultProductVariantResolverTest extends TestCase
 {
-    /**
-     * @var ProductVariantRepositoryInterface<ProductVariant>&MockObject
-     */
+    /** @var ProductVariantRepositoryInterface<ProductVariant>&MockObject */
     private MockObject $productVariantRepository;
 
     private DefaultProductVariantResolver $defaultProductVariantResolver;

@@ -3,4 +3,6 @@
 
 sylius:
     promotion_coupon:
-        generate: 'Kampanjekuponger ble generert uten feil.'
+        generate: 'Kampanjekuponger har blitt generert.'
+    catalog_promotion:
+        remove: 'Fjerning av katalogkampanje er forespurt. Denne prosessen kan ta litt tid avhengig av antall berørte produkter.'

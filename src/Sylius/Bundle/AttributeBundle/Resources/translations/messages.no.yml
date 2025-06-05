@@ -4,36 +4,40 @@
 sylius:
     form:
         attribute:
-            add: Legg til
-            add_attributes: Legg til produktegenskaper
-            choices: Valg
-            code: Kode
-            name: Navn
-            translations: Oversettelser
-            type: Type
+            add: 'Legg til'
+            add_attributes: 'Legg til attributter'
+            choices: 'Valg'
+            code: 'Kode'
+            name: 'Navn'
+            translatable: 'Kan oversettes'
+            translations: 'Oversettelser'
+            type: 'Type'
         attribute_type:
-            checkbox: Avkrysningsboks
-            configuration: Konfigurasjon
-            date: Dato
-            datetime: Dato og tid
-            integer: Heltall
-            percent: Prosent
-            select: Velg
-            text: Tekst
-            textarea: Tekstboks
-            title: Egenskapstyper
-            validation: Validering
+            checkbox: 'Avkrysningsboks'
+            configuration: 'Konfigurasjon'
+            date: 'Dato'
+            datetime: 'Dato og klokkeslett'
+            float: 'Flyttall'
+            integer: 'Heltall'
+            percent: 'Prosent'
+            select: 'Velg'
+            text: 'Tekst'
+            textarea: 'Tekstområde'
+            title: 'Attributttyper'
+            validation: 'Validering'
         attribute_type_configuration:
             datetime:
-                format: Format
+                format: 'Format'
             date:
-                format: Format
+                format: 'Format'
             select:
-                multiple: Flere
-                values: Verdier
-                choose: Velg et alternativ
-                min: Min oppføringer
-                max: Maks oppføringer
+                multiple: 'Flere valg'
+                values: 'Verdier'
+                choose: 'Velg et alternativ'
+                min: 'Minimum antall'
+                max: 'Maksimum antall'
             text:
-                min: Minimumslengde
-                max: Maks lengde
+                min: 'Minimum lengde'
+                max: 'Maksimum lengde'
+
+

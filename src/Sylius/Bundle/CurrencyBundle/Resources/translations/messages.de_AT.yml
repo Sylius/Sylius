@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        currency:
+            base: Basiswährung
+            code: Währungsname
+            enabled: Eingeschaltet
+            exchange_rate: Umrechnungskurs
+        exchange_rate:
+            source_currency: Ausgangswährung
+            target_currency: Zielwährung
+            ratio: Umrechnungsverhältnis

@@ -1,54 +1,82 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
-
 sylius:
     form:
         catalog_promotion:
-            description: Beskrivelse
-            name: Navn
-            priority: Prioritet
+            action:
+                fixed_discount: 'Fast rabatt'
+                percentage_discount: 'Prosent rabatt'
+            description: 'Beskrivelse'
+            enabled: 'Aktivert'
+            end_date: 'Sluttdato'
+            label: 'Merkelapp'
+            name: 'Navn'
+            priority: 'Prioritet'
+            start_date: 'Startdato'
+            translations: 'Oversettelser'
         promotion:
-            actions: Handlinger
-            add_action: Legg til handling
-            add_rule: Legg til regel
-            coupon_based: Kupongbasert
-            description: Beskrivelse
-            ends_at: Slutter på
-            exclusive: Eksklusiv
-            name: Navn
-            priority: Prioritet
-            rules: Regler
-            starts_at: Starter på
-            usage_limit: Bruksgrense
+            actions: 'Handlinger'
+            add_action: 'Legg til handling'
+            add_rule: 'Legg til regel'
+            applies_to_discounted: 'Gjelder allerede rabatterte ordrelinjer'
+            applies_to_discounted_details: 'Med dette valget vil handlekampanjen bli brukt på ordrelinjer som allerede er rabattert av katalogkampanje(r).'
+            coupon_based: 'Kupongbasert'
+            description: 'Beskrivelse'
+            ends_at: 'Slutter ved'
+            exclusive: 'Eksklusiv'
+            label: 'Merkelapp'
+            name: 'Navn'
+            priority: 'Prioritet'
+            rules: 'Regler'
+            starts_at: 'Starter ved'
+            usage_limit: 'Bruksgrense'
         promotion_action:
+            item_fixed_discount: 'Fast rabatt på vare'
+            item_percentage_discount: 'Prosent rabatt på vare'
+            order_fixed_discount: 'Fast rabatt på ordre'
+            order_percentage_discount: 'Prosent rabatt på ordre'
+            shipping_percentage_discount: 'Prosent rabatt på frakt'
+            filters: 'Filtre'
             fixed_discount_configuration:
-                amount: Antall
+                amount: 'Beløp'
             percentage_discount_configuration:
-                percentage: Prosent
-            type: Type
+                percentage: 'Prosent'
+            type: 'Type'
         promotion_coupon:
-            expires_at: Utløper
-            usage_limit: Bruksgrense
+            expires_at: 'Utløper ved'
+            usage_limit: 'Bruksgrense'
         promotion_coupon_generator_instruction:
-            amount: Antall
-            code_length: Kodelengde
-            expires_at: Utløper
-            usage_limit: Bruksgrense
+            amount: 'Antall'
+            code_length: 'Kode lengde'
+            expires_at: 'Utløper ved'
+            prefix: 'Prefiks'
+            suffix: 'Suffiks'
+            usage_limit: 'Bruksgrense'
+        promotion_filter:
+            price_range: 'Prisklassefilter'
         promotion_rule:
-            customer_group: Kundegruppe
+            cart_quantity: 'Handlekurv mengde'
+            contains_product: 'Inneholder produkt'
+            customer_group: 'Kundegruppe'
+            has_at_least_one_from_taxons: 'Har minst ett fra taksonomier'
+            item_total: 'Varesum'
+            nth_order: 'N-te ordre'
+            shipping_country: 'Fraktland'
+            taxonomy: 'Taksonomi'
+            total_price_of_items_from_taxon: 'Totalt pris på varer fra taksonomi'
             cart_quantity_configuration:
-                count: Antall
-                equal: Lik
+                count: 'Antall'
+                equal: 'Lik'
             contains_product_configuration:
-                exclude: Eksluder
-                variants: Produkter
+                exclude: 'Ekskluder'
+                variants: 'Produkter'
             item_total_configuration:
-                amount: Antall
+                amount: 'Beløp'
             nth_order_configuration:
-                nth: Nth
+                nth: 'N-te'
             shipping_country_configuration:
-                country: Land
+                country: 'Land'
             taxonomy_configuration:
-                exclude: Eksluder
-                taxons: Taksonomier
-            type: Type
+                exclude: 'Ekskluder'
+                taxons: 'Taksonomier'
+            type: 'Type'

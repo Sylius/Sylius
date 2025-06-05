@@ -4,4 +4,4 @@
 sylius:
     order_item:
         quantity:
-            min: Hoeveelheid van een item kan niet niet lager dan 1 zijn.
+            min: Hoeveelheid van een item kan niet lager dan 1 zijn.

@@ -17,13 +17,14 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * Locale context implementation based on Symfony Request's language negotiation (RFC 4647 based).
  *
  * @see Request::getPreferredLanguage()
  */
-final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
+final class RequestHeaderBasedLocaleContext implements LocaleContextInterface, ResetInterface
 {
     private const NO_CODE_VALID_STUB = 'no_Code';
 
@@ -61,5 +62,10 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
         }
 
         return $bestLocaleCode;
+    }
+
+    public function reset(): void
+    {
+        $this->availableLocalesCodes = [];
     }
 }

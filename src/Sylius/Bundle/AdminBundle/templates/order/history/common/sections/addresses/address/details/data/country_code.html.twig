@@ -1,0 +1,8 @@
+{% set log = hookable_metadata.context.log %}
+
+{% if log.data.countryCode|default(false) %}
+    <tr>
+        <td class="col-4 border-0"><strong>{{ 'sylius.ui.country_code' |trans }}</strong></td>
+        <td class="col-8 border-0 text-body w-full"><span>{{ log.data.countryCode }}</span></td>
+    </tr>
+{% endif %}

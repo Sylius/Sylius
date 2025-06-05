@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        taxon:
+            description: Description
+            enabled: Enabled
+            name: Name
+            parent: Parent
+            slug: Slug
+        taxonomy:
+            name: Name

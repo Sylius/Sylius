@@ -1,0 +1,4 @@
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: '由于产品 "%productVariantCode%" 库存不足，付款无法完成。'

@@ -9,8 +9,6 @@
 
 import './styles/main.scss';
 
-import './app';
-
 import './scripts/bulk-delete';
 import './scripts/check-all';
 import './scripts/fullscreen';

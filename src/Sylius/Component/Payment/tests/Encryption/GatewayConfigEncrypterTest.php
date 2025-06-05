@@ -26,9 +26,7 @@ final class GatewayConfigEncrypterTest extends TestCase
 
     private GatewayConfigEncrypter $gatewayConfigEncrypter;
 
-    /**
-     * @var GatewayConfigInterface&MockObject
-     */
+    /** @var GatewayConfigInterface&MockObject */
     private MockObject $gatewayConfig;
 
     protected function setUp(): void

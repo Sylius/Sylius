@@ -63,7 +63,7 @@ final class AdjustmentFactoryTest extends TestCase
             'Tax description',
             1000,
             false,
-            ['taxRateAmount' => 0.1]
+            ['taxRateAmount' => 0.1],
         );
 
         $this->assertSame($this->adjustment, $result);

@@ -4,19 +4,28 @@
 sylius:
     attribute:
         name:
-            not_blank: Skriv inn navnet på attributtet.
-            min_length: Attributtnavn må være minst ett tegn. |Attributtnavn må være minst {{ limit }} tegn.
-            max_length: Attributtnavn må ikke være lengre enn ett tegn. |Attributtnavnet kan ikke være lengre enn {{ limit }} tegn.
+            not_blank: 'Vennligst skriv inn attributtnavn.'
+            min_length: 'Attributtnavnet må være minst 1 tegn langt.|Attributtnavnet må være minst {{ limit }} tegn langt.'
+            max_length: 'Attributtnavnet kan ikke være lengre enn 1 tegn.|Attributtnavnet kan ikke være lengre enn {{ limit }} tegn.'
         code:
-            not_blank: Skriv inn attributt kode.
-            regex: Atributt kode kan kun bestå av bokstaver, tall, bindestrek og understrek.
-            unique: Koden er allerede i bruk.
+            min_length: 'Attributtkoden må være minst 1 tegn lang.|Attributtkoden må være minst {{ limit }} tegn lang.'
+            max_length: 'Attributtkoden kan ikke være lengre enn 1 tegn.|Attributtkoden kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst skriv inn attributtkode.'
+            regex: 'Attributtkoden kan bare inneholde bokstaver, tall, bindestreker og understreker.'
+            unique: 'Denne koden er allerede i bruk.'
+        configuration:
+            max_entries: 'Maksimalt antall oppføringer i konfigurasjonen må være større enn eller lik minimum antall oppføringer.'
+            max_length: 'Maksimal lengde i konfigurasjonen må være større enn eller lik minimum lengde.'
+            min_entries: 'Minimum antall oppføringer i konfigurasjonen må være mindre enn eller lik antall valgte valg.'
+            multiple: 'Konfigurasjonen må ha "multiple" satt til true dersom minimum eller maksimum antall oppføringer er spesifisert.'
         presentation:
-            not_blank: Angi attributtpresentasjon.
-            min_length: Attributtet presentasjon må være minst ett tegn. |Attributtet presentasjon må være minst {{ limit }} tegn.
-            max_length: Attributtet presentasjon må ikke være lengre enn ett tegn. |Attributtet presentasjon må ikke være lengre enn {{ limit }} tegn.
+            not_blank: 'Vennligst skriv inn presentasjon for attributtet.'
+            min_length: 'Attributtpresentasjonen må være minst 1 tegn lang.|Attributtpresentasjonen må være minst {{ limit }} tegn lang.'
+            max_length: 'Attributtpresentasjonen kan ikke være lengre enn 1 tegn.|Attributtpresentasjonen kan ikke være lengre enn {{ limit }} tegn.'
+        type:
+            unregistered: 'Attributttypen "%type%" er ikke registrert. Tilgjengelige attributttyper: %available_types%.'
     attribute_value:
         attribute:
-            not_blank: Velg attributt.
+            not_blank: 'Vennligst velg attributt.'
         value:
-            not_blank: Angi attributtverdi.
+            not_blank: 'Vennligst skriv inn attributtverdi.'

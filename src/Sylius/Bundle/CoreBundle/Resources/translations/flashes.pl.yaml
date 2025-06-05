@@ -1,0 +1,4 @@
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: 'Płatność nie może zostać zrealizowana z powodu niewystarczającego stanu magazynowego wariantu produktu "%productVariantCode%".'

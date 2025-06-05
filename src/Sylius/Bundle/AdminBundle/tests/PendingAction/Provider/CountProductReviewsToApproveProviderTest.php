@@ -20,7 +20,7 @@ use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 
 final class CountProductReviewsToApproveProviderTest extends TestCase
 {
-    private ProductReviewRepositoryInterface&MockObject $productReviewRepository;
+    private MockObject&ProductReviewRepositoryInterface $productReviewRepository;
 
     private CountProductReviewsToApproveProvider $countProductReviewsToApproveProvider;
 

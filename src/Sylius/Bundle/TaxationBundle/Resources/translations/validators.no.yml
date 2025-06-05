@@ -4,13 +4,32 @@
 sylius:
     tax_category:
         name:
-            not_blank: Angi skattekategorinavn.
+            not_blank: 'Vennligst oppgi navn på skattekategori.'
+            min_length: 'Skattekategoriens navn må være minst 1 tegn langt.|Skattekategoriens navn må være minst {{ limit }} tegn langt.'
+            max_length: 'Skattekategoriens navn må ikke være lengre enn 1 tegn.|Skattekategoriens navn må ikke være lengre enn {{ limit }} tegn.'
+        code:
+            max_length: 'Koden må ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi skattekategoriens kode.'
+            regex: 'Skattekategoriens kode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Skattekategori med denne koden finnes allerede.'
     tax_rate:
         category:
-            not_blank: Velg skattekategori.
+            not_blank: 'Vennligst velg skattekategori.'
         name:
-            not_blank: Skriv inn skattenivånavn (mva).
+            not_blank: 'Vennligst oppgi navn på skattesats.'
+            min_length: 'Navnet på skattesatsen må være minst 1 tegn langt.|Navnet på skattesatsen må være minst {{ limit }} tegn langt.'
+            max_length: 'Navnet på skattesatsen må ikke være lengre enn 1 tegn.|Navnet på skattesatsen må ikke være lengre enn {{ limit }} tegn.'
         amount:
-            not_blank: Angi avgiftsbeløpsrate.
+            invalid: 'Skattesatsens beløp er ugyldig.'
+            not_blank: 'Vennligst oppgi beløp for skattesatsen.'
         calculator:
-            not_blank: Velg skattekalkulator.
+            not_blank: 'Vennligst velg skattekalkulator.'
+        zone:
+            not_blank: 'Vennligst velg skattesone.'
+        code:
+            max_length: 'Koden må ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi kode for skattesatsen.'
+            regex: 'Skattesatsens kode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Skattesats med denne koden finnes allerede.'
+        date:
+            greater_than_start_date: 'Skattesatsen skal ikke slutte før den starter.'

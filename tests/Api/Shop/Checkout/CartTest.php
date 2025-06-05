@@ -325,7 +325,7 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
-    public function it_updates_email_and_addresses_as_as_a_guest(): void
+    public function it_updates_cart_as_a_guest(): void
     {
         $this->setUpDefaultPutHeaders();
 
@@ -335,6 +335,7 @@ final class CartTest extends JsonApiTestCase
             'country.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
+            'promotion/promotion.yaml',
         ]);
 
         $tokenValue = $this->pickUpCart();
@@ -364,6 +365,7 @@ final class CartTest extends JsonApiTestCase
                     'street' => 'Updated: Top secret',
                     'postcode' => '121212',
                 ],
+                'couponCode' => 'XYZ2',
             ],
         );
 
@@ -371,7 +373,7 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
-    public function it_updates_addresses_as_a_shop_user(): void
+    public function it_updates_cart_as_a_shop_user(): void
     {
         $this->setUpDefaultPutHeaders();
         $this->setUpShopUserContext();
@@ -380,8 +382,9 @@ final class CartTest extends JsonApiTestCase
             'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
-            'shipping_method.yaml',
             'payment_method.yaml',
+            'shipping_method.yaml',
+            'promotion/promotion.yaml',
             'authentication/shop_user.yaml',
         ]);
 
@@ -411,6 +414,7 @@ final class CartTest extends JsonApiTestCase
                     'street' => 'Updated: Top secret',
                     'postcode' => '121212',
                 ],
+                'couponCode' => 'XYZ2',
             ],
         );
 

@@ -26,6 +26,8 @@ final class UserImpersonator implements UserImpersonatorInterface
 {
     private string $sessionTokenParameter;
 
+    private string $sessionImpersonatorParameter;
+
     private string $firewallContextName;
 
     public function __construct(
@@ -34,6 +36,7 @@ final class UserImpersonator implements UserImpersonatorInterface
         private readonly EventDispatcherInterface $eventDispatcher,
     ) {
         $this->sessionTokenParameter = sprintf('_security_%s', $firewallContextName);
+        $this->sessionImpersonatorParameter = sprintf('_security_impersonate_sylius_%s', $firewallContextName);
         $this->firewallContextName = $firewallContextName;
     }
 
@@ -47,6 +50,7 @@ final class UserImpersonator implements UserImpersonatorInterface
 
         $session = $this->requestStack->getSession();
         $session->set($this->sessionTokenParameter, serialize($token));
+        $session->set($this->sessionImpersonatorParameter, true);
         $session->save();
 
         Assert::isInstanceOf($user, SyliusUserInterface::class);

@@ -4,19 +4,21 @@
 sylius:
     form:
         user:
-            email: E-post
-            enabled: Aktivert
+            email: 'E-post'
+            enabled: 'Aktivert'
             password:
-                label: Passord
-            remember_me: Husk meg
-            shipping_address: Leveringsadresse
-            username: Brukernavn
+                label: 'Passord'
+                confirmation: 'Bekreftelse'
+            remember_me: 'Husk meg'
+            shipping_address: 'Leveringsadresse'
+            username: 'Brukernavn'
+            verified: 'Verifisert'
         user_filter:
-            query: Søk
+            query: 'Søk'
         user_change_password:
-            confirmation: Bekreft
-            current: Gjeldende passord
-            new: Nytt Passord
+            confirmation: 'Bekreftelse'
+            current: 'Nåværende passord'
+            new: 'Nytt passord'
         user_reset_password:
-            confirmation: Bekreft
-            new: Nytt Passord
+            confirmation: 'Bekreftelse'
+            new: 'Nytt passord'

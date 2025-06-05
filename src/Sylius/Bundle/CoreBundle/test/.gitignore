@@ -16,7 +16,6 @@
 !/etc/build/.gitignore
 
 /behat.yml
-/phpspec.yml
 
 # Symfony CLI https://symfony.com/doc/current/setup/symfony_server.html#different-php-settings-per-project
 /.php-version

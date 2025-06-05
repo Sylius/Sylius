@@ -21,7 +21,7 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 
 final class CountPendingPaymentsProviderTest extends TestCase
 {
-    private PaymentRepositoryInterface&MockObject $paymentRepository;
+    private MockObject&PaymentRepositoryInterface $paymentRepository;
 
     private CountPendingPaymentsProvider $countPendingPaymentsProvider;
 

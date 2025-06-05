@@ -8,19 +8,19 @@ sylius:
         code:
             not_blank: Voer een belastingcategorie code in.
             regex: Belastingcategorie kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: De belastingscategorie met gegeven code al bestaat.
+            unique: De belastingscategorie met gegeven code bestaat al.
     tax_rate:
         category:
             not_blank: Selecteer een belastingcategorie.
         name:
-            not_blank: Voer een belastingdruk naam in.
+            not_blank: Voer een belastingtarief naam in.
         amount:
-            not_blank: Voer een belastingdruk hoeveelheid in.
+            not_blank: Voer een belastingtarief bedrag in.
         calculator:
             not_blank: Selecteer een belasting calculator.
         zone:
             not_blank: Selecteer de zone van de belasting.
         code:
-            not_blank: Voer een zone voor het belastingtarief in.
+            not_blank: Voer een code voor het belastingtarief in.
             regex: Belastingtarief code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Het belastingtarief met gegeven code al bestaat.
+            unique: Het belastingtarief met gegeven code bestaat al.

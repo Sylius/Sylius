@@ -4,20 +4,20 @@
 sylius:
     currency:
         code:
-            exact_length: 币种代码必须正好 3 个字符长。
-            not_blank: 请选择币种代码。
-            regex: 货币代码仅可以由字母、 数字、 破折号和下划线组成。
-            unique: 币种代码必须是唯一的。
+            not_blank: '请选择货币代码。'
+            unique: '货币代码必须唯一。'
+            currency: '该值不是有效的货币代码。'
         exchange_rate:
-            not_blank: 请输入汇率。
+            not_blank: '请输入汇率。'
     exchange_rate:
         ratio:
-            greater_than: 比率必须大于0
-            invalid: 比率必须是一个数字。
-            not_blank: 请输入汇率。
+            greater_than: '比率必须大于 {{ compared_value }}。'
+            less_than: '比率必须小于 {{ compared_value }}。'
+            invalid: '比率必须是数字。'
+            not_blank: '请输入汇率比率。'
         source_currency:
-            not_blank: 请输入来自哪一种货币的汇率。
+            not_blank: '请输入汇率应从哪种货币换算。'
         target_currency:
-            not_blank: 请输入需要设置汇率的货币。
-        unique_currency_pair: 货币组合必须是唯一的。
-        different_source_target_currency: 源和目标货币必须不同。
+            not_blank: '请输入汇率应设置到哪种货币。'
+        unique_currency_pair: '货币对必须唯一。'
+        different_source_target_currency: '源货币和目标货币必须不同。'

@@ -290,5 +290,11 @@
 
         <service id="sylius.positioner" class="Sylius\Component\Core\Positioner\Positioner" public="true" />
         <service id="Sylius\Component\Core\Positioner\PositionerInterface" alias="sylius.positioner" public="true" />
+
+        <service id="sylius.security.voter.impersonation" class="Sylius\Bundle\CoreBundle\Security\ImpersonationVoter">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="security.firewall.map" />
+            <tag name="security.voter" />
+        </service>
     </services>
 </container>

@@ -1,6 +1,5 @@
 # Table of contents
 
-* [📓 Sylius 1.x Documentation](https://old-docs.sylius.com/en/1.13/)
 * [📖 Sylius 2.0 Documentation](README.md)
   * [Organization](sylius-2.0-documentation/organization/README.md)
     * [Release Cycle](sylius-2.0-documentation/organization/release-cycle.md)
@@ -10,7 +9,6 @@
 
 ## Getting Started with Sylius
 
-* [Index](getting-started-with-sylius/index.md)
 * [Installation](getting-started-with-sylius/installation.md)
 * [Basic Configuration](getting-started-with-sylius/basic-configuration.md)
 * [Shipping & Payment](getting-started-with-sylius/shipping-and-payment.md)
@@ -114,6 +112,7 @@
   * [How to add a live form for a custom model?](the-customization-guide/customizing-forms/how-to-add-a-live-form-for-a-custom-model.md)
 * [Customizing Repositories](the-customization-guide/customizing-repositories.md)
 * [Customizing Factories](the-customization-guide/customizing-factories.md)
+* [Customizing Styles](the-customization-guide/customizing-styles.md)
 * [Customizing Controllers](the-customization-guide/customizing-controllers.md)
 * [Customizing Validation](the-customization-guide/customizing-validation.md)
 * [Customizing Menus](the-customization-guide/customizing-menus.md)
@@ -134,9 +133,15 @@
   * [How to change a redirect after the add to cart action?](the-customization-guide/customizing-checkout/how-to-change-a-redirect-after-the-add-to-cart-action.md)
 * [Tips & Tricks](the-customization-guide/tips-and-tricks.md)
 
-## THE COOKBOOK v1.x
+## 🧑‍🍳 The Cookbook
 
-* [The Cookbook v1.x](https://old-docs.sylius.com/en/1.13/cookbook/index.html)
+***
+
+* [How to resize images?](how-to-resize-images.md)
+* [How to add one image to an entity?](how-to-add-one-image-to-an-entity.md)
+* [How to add multiple images to an entity?](how-to-add-multiple-images-to-an-entity.md)
+* [How to add a custom cart promotion action?](the-cookbook-2.0/how-to-add-a-custom-cart-promotion-action.md)
+* [How to add a custom cart promotion rule?](how-to-add-a-custom-cart-promotion-rule.md)
 
 ## The Cookbook 2.0
 
@@ -163,17 +168,12 @@
 * [How to send a custom e-mail?](the-cookbook-2.0/how-to-send-a-custom-e-mail.md)
 * [How to customize email templates per channel?](the-cookbook-2.0/how-to-customize-email-templates-per-channel.md)
 * [How to disable the order confirmation email?](the-cookbook-2.0/how-to-disable-the-order-confirmation-email.md)
-* [How to add a custom cart promotion rule?](the-cookbook-2.0/how-to-add-a-custom-cart-promotion-rule.md)
-* [How to add a custom cart promotion action?](the-cookbook-2.0/how-to-add-a-custom-cart-promotion-action.md)
 * [How to add a custom catalog promotion scope?](the-cookbook-2.0/how-to-add-a-custom-catalog-promotion-scope.md)
 * [How to add a custom catalog promotion action?](the-cookbook-2.0/how-to-add-a-custom-catalog-promotion-action.md)
 * [How to customize catalog promotion labels?](the-cookbook-2.0/how-to-customize-catalog-promotion-labels.md)
 * [How to improve the performance of the catalog promotions?](the-cookbook-2.0/how-to-improve-the-performance-of-the-catalog-promotions.md)
 * [How to create a custom inventory sources filter?](the-cookbook-2.0/how-to-create-a-custom-inventory-sources-filter.md)
 * [How to add a custom shipping method rule?](the-cookbook-2.0/how-to-add-a-custom-shipping-method-rule.md)
-* [How to resize images?](the-cookbook-2.0/how-to-resize-images.md)
-* [How to add one image to an entity?](the-cookbook-2.0/how-to-add-one-image-to-an-entity.md)
-* [How to add multiple images to an entity?](the-cookbook-2.0/how-to-add-multiple-images-to-an-entity.md)
 * [How to automatically store images on AWS-S3?](the-cookbook-2.0/how-to-automatically-store-images-on-aws-s3.md)
 * [Introduction to Sylius Cloud by Platform.sh](the-cookbook-2.0/introduction-to-sylius-cloud-by-platform.sh.md)
 * [Advanced Sylius Cloud by Platform.sh configuration](the-cookbook-2.0/advanced-sylius-cloud-by-platform.sh-configuration.md)
@@ -194,7 +194,6 @@
 
 ## Tests
 
-* [Index](tests/index.md)
 * [Behaviour Driven Development](tests/behaviour-driven-development/README.md)
   * [How to add a new context?](tests/behaviour-driven-development/how-to-add-a-new-context.md)
   * [How to add a new page object?](tests/behaviour-driven-development/how-to-add-a-new-page-object.md)
@@ -206,3 +205,7 @@
 * [Index](the-performance-guide/index.md)
 * [Database indexes](the-performance-guide/database-indexes.md)
 * [Query optimization](the-performance-guide/query-optimization.md)
+
+## Sylius 1.X Documentation
+
+* [📓 Sylius 1.x Documentation](https://old-docs.sylius.com/en/1.13/)

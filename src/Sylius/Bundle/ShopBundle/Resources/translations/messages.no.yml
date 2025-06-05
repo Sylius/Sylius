@@ -2,12 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: "'Har du ikke en konto?'"
+        register_here: "'Registrer deg her'"
+    email:
+        order_confirmation:
+            has_been_successfully_placed: "'har blitt fullført.'"
+            subject: "'Ordrebekreftelse'"
+            view_order_or_change_payment_method: "'Se ordre eller endre betalingsmetode'"
+            thank_you: "'Takk for at du handler i butikken vår!'"
+            your_order_number: "'Ditt ordrenummer'"
+        password_reset:
+            hello: "'Hei'"
+            reset_your_password: "'Tilbakestill passordet ditt'"
+            subject: "'Tilbakestilling av passord'"
+            to_reset_your_password: "'For å tilbakestille passordet ditt – klikk på lenken under'"
+            to_reset_your_password_token: "'For å tilbakestille passordet ditt – bruk tokenet under'"
+            token: "'Ditt tilbakestillingstoken for passord er'"
+        user_registration:
+            start_shopping: "'Start å handle'"
+            subject: "'Brukerregistrering'"
+            welcome_to_our_store: "'Velkommen til butikken vår!'"
+            you_have_just_been_registered: "'Du er nå registrert. Takk skal du ha'"
+        verification_token:
+            hello: "'Hei'"
+            subject: "'E-postadresse verifisering'"
+            to_verify_your_email_address: "'For å verifisere e-postadressen din – klikk på lenken under'"
+            verify_your_email_address: "'Verifiser e-postadressen din'"
+    footer:
+        banner:
+            free_shipping_title: "'Gratis frakt og retur'"
+            free_shipping_content: "'Gratis frakt på alle bestillinger'"
+            guarantee_title: "'Pengene tilbake-garanti'"
+            guarantee_content: "'30 dagers pengene tilbake-garanti'"
+            multiple_payments_title: "'Flere betalingsmetoder'"
+            multiple_payments_content: "'Vi aksepterer kredittkort og PayPal'"
+    homepage:
+        about_us: "'Om oss'"
+        about_us_content: "'Velkommen til butikken vår, din nummer én nettbutikk som gir deg de aller beste produktene. Du kan velge blant de beste klærne og skoene i vårt tilbud. (<i>Du kan endre dette innholdet ved å overstyre \"sylius.homepage.about_us_content\"-nøkkelen i din oversettelsesfil</i>)'"
+        banner_content: "'Gjør deg klar! Vinteren kommer'"
+        banner_button: "'Se den nye kolleksjonen'"
+        carousel_header: "'Utvalgte produkter'"
+        latest_deals: "'Siste tilbud'"
+        new_collection: "'Ny kolleksjon'"
+        newsletter: "'Nyhetsbrev'"
+        newsletter_description: "'Abonner på nyhetsbrevet vårt for å se nye tilbud som venter på deg! (<i>Du kan endre dette innholdet ved å overstyre \"sylius.homepage.newsletter_description\"-nøkkelen i din oversettelsesfil</i>)'"
+        subscribe: "'Abonner'"
+    lightbox:
+        image_album_label: "'Bilde %1 av %2'"
     menu:
         shop:
             account:
-                address_book: 'Adressebok'
-                change_password: 'Endre passord'
-                dashboard: 'Kontrollpanel'
-                header: 'Din konto'
-                order_history: 'Ordrehistorikk'
-                personal_information: 'Personlig informasjon'
+                address_book: "'Adressebok'"
+                change_password: "'Endre passord'"
+                dashboard: "'Dashbord'"
+                header: "'Din konto'"
+                order_history: "'Ordrehistorikk'"
+                personal_information: "'Personlig informasjon'"
+    top_bar: "'Meld deg på nyhetsbrevet vårt og få -20% rabatt'"

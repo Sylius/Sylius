@@ -27,25 +27,25 @@ use Sylius\Resource\Model\ToggleableInterface;
 
 final class ProductTest extends TestCase
 {
-    private ProductAttributeValueInterface&MockObject $productAttribute;
+    private MockObject&ProductAttributeValueInterface $productAttribute;
 
     private Product $product;
 
     private AttributeInterface&MockObject $attribute;
 
-    private ProductAttributeValueInterface&MockObject $attributeValueEN;
+    private MockObject&ProductAttributeValueInterface $attributeValueEN;
 
-    private ProductAttributeValueInterface&MockObject $attributeValuePL;
+    private MockObject&ProductAttributeValueInterface $attributeValuePL;
 
-    private ProductAttributeValueInterface&MockObject $attributeValueFR;
+    private MockObject&ProductAttributeValueInterface $attributeValueFR;
 
-    private ProductVariantInterface&MockObject $firstVariant;
+    private MockObject&ProductVariantInterface $firstVariant;
 
-    private ProductVariantInterface&MockObject $secondVariant;
+    private MockObject&ProductVariantInterface $secondVariant;
 
-    private ProductOptionInterface&MockObject $option;
+    private MockObject&ProductOptionInterface $option;
 
-    private ProductAssociationInterface&MockObject $association;
+    private MockObject&ProductAssociationInterface $association;
 
     protected function setUp(): void
     {
@@ -141,7 +141,7 @@ final class ProductTest extends TestCase
                 $expectedArgs = [$this->product, null];
 
                 TestCase::assertSame($expectedArgs[$callIndex], $arg);
-                $callIndex++;
+                ++$callIndex;
             })
         ;
 
@@ -412,7 +412,7 @@ final class ProductTest extends TestCase
                 $expectedArgs = [$this->product, null];
 
                 TestCase::assertSame($expectedArgs[$callIndex], $arg);
-                $callIndex++;
+                ++$callIndex;
             })
         ;
 

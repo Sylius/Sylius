@@ -5,7 +5,7 @@ sylius:
     form:
         currency:
             base: Moeda base
-            code: Nome
+            code: Código
             enabled: Ativado
             exchange_rate: Taxa de câmbio
         exchange_rate:

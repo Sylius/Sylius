@@ -24,7 +24,7 @@ final class PendingActionCountComponentTest extends TestCase
 {
     private ChannelRepositoryInterface&MockObject $channelRepository;
 
-    private PendingActionCountProviderInterface&MockObject $pendingActionCountProvider;
+    private MockObject&PendingActionCountProviderInterface $pendingActionCountProvider;
 
     private PendingActionCountComponent $pendingActionCountComponent;
 

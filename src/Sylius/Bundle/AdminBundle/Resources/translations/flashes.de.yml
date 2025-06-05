@@ -3,7 +3,7 @@
 
 sylius:
     email:
-        order_confirmation_resent: 'Auftragsbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
-        shipment_confirmation_resent: 'Versandbestätigung wurde erfolgreich erneut an den Kunden versandt.'
+        order_confirmation_resent: 'Die Auftragsbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
+        shipment_confirmation_resent: 'Die Versandbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
     product_variant:
-        cannot_generate_variants: 'Varianten für ein Produkt ohne Optionen können nicht generiert werden.'
+        cannot_generate_variants: 'Varianten können für ein Produkt ohne Optionen nicht generiert werden.'

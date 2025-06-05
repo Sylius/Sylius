@@ -12,7 +12,7 @@ sylius:
             invalid_channel: Die angegebene Konfiguration enthält Fehler. Mindestens einer der angegebenen Codes für Ausgabekanäle existiert nicht.
             not_valid: Die angegebene Konfiguration enthält Fehler. Bitte geben Sie einen fixen Rabattbetrag größer 0 an.
     catalog_promotion_scope:
-        invalid_type: Geltungsbereich der Katalog Aktion is ungültig. Bitte geben Sie einen gültigen Typ an.
+        invalid_type: Geltungsbereich der Katalog Aktion ist ungültig. Bitte geben Sie einen gültigen Typ an.
         for_products:
             invalid_products: Die angegebene Konfiguration enthält Fehler. Bitte fügen Sie nur existierende Produkte hinzu.
             not_empty: Die angegebene Konfiguration enthält Fehler. Bitte fügen Sie mindestens ein Produkt hinzu.
@@ -77,7 +77,7 @@ sylius:
         onHand:
             min: Menge muss größer sein als {{ limit }}.
             not_blank: Bitte verfügbare Menge eingeben.
-            reserved: Verfügbarkeit muß größer sein als die Reservierungen
+            reserved: Verfügbarkeit muss größer sein als die Reservierungen.
         original_price:
             min: Ursprünglicher Preis darf nicht negativ sein.
         weight:

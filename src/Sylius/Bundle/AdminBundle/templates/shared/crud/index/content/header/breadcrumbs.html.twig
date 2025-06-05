@@ -10,6 +10,6 @@
 {% endif %}
 
 {{ breadcrumbs([
-    { 'name': 'Dashboard', 'url': path('sylius_admin_dashboard'), 'active': false },
-    { 'name': title, 'active': true },
+    { name: 'sylius.ui.dashboard', 'url': path('sylius_admin_dashboard'), 'active': false },
+    { name: title, 'active': true },
 ]) }}

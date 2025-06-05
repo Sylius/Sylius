@@ -73,10 +73,10 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/orm": "^2.18 || ^3.3",
         "hwi/oauth-bundle": "^2.2",
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^10.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
@@ -104,9 +104,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\CoreBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\CoreBundle\\Tests\\": "Tests/",
-            "Sylius\\Bundle\\CoreBundle\\Application\\": "test/src/"
+            "Sylius\\Bundle\\CoreBundle\\Application\\": "test/src/",
+            "Tests\\Sylius\\Bundle\\CoreBundle\\": "tests/"
         }
     },
     "repositories": [

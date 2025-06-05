@@ -145,5 +145,9 @@
             <group>sylius:shop:product:index</group>
             <group>sylius:shop:product:show</group>
         </attribute>
+        <attribute name="defaultVariantData">
+            <group>sylius:shop:product:index</group>
+            <group>sylius:shop:product:show</group>
+        </attribute>
     </class>
 </serializer>

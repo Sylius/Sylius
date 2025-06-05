@@ -4,6 +4,7 @@
 sylius:
     locale:
         code:
-            not_blank: Velg koden for nasjonale innstillinger.
-            regex: Koden for nasjonale instillinger kan kun bestå av bokstaver, tall, bindestrek og understrek.
-            unique: Koden for nasjonale innstillinger må være unik.
+            max_length: 'Koden må ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst velg en lokalitetskode.'
+            locale: 'Denne verdien er ikke en gyldig lokalitetskode.'
+            unique: 'Lokalitetskoden må være unik.'

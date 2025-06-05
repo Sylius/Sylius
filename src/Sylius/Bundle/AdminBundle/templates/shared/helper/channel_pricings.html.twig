@@ -18,6 +18,10 @@
                         {{ sylius_test_html_attribute('product-channel-pricings-accordion', channel_code) }}
                     >
                         {{ channel_pricing_form.vars.label }}
+
+                        <span class="accordion-button-toggle">
+                            {{ ux_icon('tabler:chevron-down') }}
+                        </span>
                     </button>
                 </h2>
                 <div id="channel-pricing-{{ channel_code }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#product-channel-pricings">

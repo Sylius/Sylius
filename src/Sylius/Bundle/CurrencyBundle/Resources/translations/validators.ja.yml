@@ -1,0 +1,20 @@
+sylius:
+    currency:
+        code:
+            not_blank: '通貨コードを選択してください。'
+            unique: '通貨コードは一意でなければなりません。'
+            currency: 'この値は有効な通貨コードではありません。'
+        exchange_rate:
+            not_blank: '為替レートを入力してください。'
+    exchange_rate:
+        ratio:
+            greater_than: 'レートは {{ compared_value }} より大きい必要があります。'
+            less_than: 'レートは {{ compared_value }} より小さい必要があります。'
+            invalid: 'レートは数値でなければなりません。'
+            not_blank: '為替レートを入力してください。'
+        source_currency:
+            not_blank: '為替レートの基準となる通貨を入力してください。'
+        target_currency:
+            not_blank: '為替レートを設定する対象の通貨を入力してください。'
+        unique_currency_pair: '通貨ペアは一意でなければなりません。'
+        different_source_target_currency: '基準通貨と対象通貨は異なる必要があります。'

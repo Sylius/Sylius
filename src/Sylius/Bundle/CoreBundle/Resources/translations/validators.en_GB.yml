@@ -1,0 +1,213 @@
+sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: This email is not valid.
+                max: Email must be at most {{ limit }} characters long.
+                min: Email must be at least {{ limit }} characters long.
+                not_blank: Please enter an email.
+        reset_password:
+            mismatch: The entered passwords do not match.
+            password:
+                min: Password must be at least {{ limit }} characters long.
+                max: Password must be at most {{ limit }} characters long.
+                not_blank: Please enter the password.
+    avatar_image:
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: Configuration for one of the required channels is not provided.
+            not_valid: Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.
+    catalog_promotion_scope:
+        invalid_type: Catalog promotion scope type is invalid. Please choose a valid type.
+        for_products:
+            invalid_products: Provided configuration contains errors. Please add only existing products.
+            not_empty: Provided configuration contains errors. Please add at least 1 product.
+            unique: Provided configuration contains errors. Please add only unique products.
+        for_variants:
+            invalid_variants: Provided configuration contains errors. Please add only existing variants.
+            not_empty: Please add at least 1 variant.
+            unique: Provided configuration contains errors. Please add only unique variants.
+        for_taxons:
+            invalid_taxons: Provided configuration contains errors. Please add only existing taxons.
+            not_empty: Provided configuration contains errors. Please add at least 1 taxon.
+            unique: Provided configuration contains errors. Please add only unique taxons.
+    channel:
+        base_currency:
+            not_blank: Please enter channel base currency.
+        default_locale:
+            enabled: Default locale has to be enabled.
+            not_blank: Please enter channel default locale.
+        contact_email:
+            invalid: This email is invalid.
+            max: Email must not be longer than {{ limit }} characters.
+            min: Email must be at least {{ limit }} characters long.
+        contact_phone_number:
+            max_length: Contact phone number must not be longer than {{ limit }} characters.
+        theme_name:
+            max_length: Theme name must not be longer than {{ limit }} characters.
+        tax_calculation_strategy:
+            not_blank: Please enter tax calculation strategy.
+            max_length: Tax calculation strategy must not be longer than {{ limit }} characters.
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Value must be greater than {{ compared_value }}'
+            less_than: 'Value must be less than {{ compared_value }}'
+    channel_pricing:
+        channel_code:
+            not_blank: Please set channel code.
+            unique: This channel already has a price for this product variant.
+        price:
+            min: Price cannot be lower than 0.
+            not_blank: Please enter the price.
+    channel_code_collection:
+        invalid_channel: Channel with code {{ channel_code }} does not exist.
+    checkout:
+        addressing:
+            csrf_error: Please resubmit complete form.
+        shipping_method:
+            not_blank: Please select shipping method.
+        email:
+            not_changeable: Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can't be changed.
+    contact:
+        email:
+            invalid: This email is invalid.
+            not_blank: Please enter your email.
+        message:
+            not_blank: Please enter your message.
+    country:
+        code:
+            not_exist: Country with code {{ code }} does not exist.
+    currency:
+        enabled:
+            cannot_disable_base: The base currency cannot be disabled.
+    customer:
+        currency_code:
+            not_valid: The currency code you entered is invalid.
+    customer_group:
+        code:
+            not_exist: Customer group with code {{ code }} does not exist.
+    cart_item:
+        not_available: '%itemName% does not have sufficient stock.'
+        insufficient_stock: 'Insufficient stock'
+        quantity:
+            not_in_range: Quantity must be between {{ min }} and {{ max }}.
+        variant:
+            not_available: '%variantName% is not available.'
+    max_integer: 'Value must be less than {{ compared_value }}.'
+    order:
+        address_requirement: 'Please provide a %addressName%.'
+        currency_code:
+            not_valid: The currency code you entered is invalid.
+        invalid_state_transition: 'Cannot complete as order is in a wrong state. Current: %currentState%. Possible transitions: %possibleTransitions%.'
+        payment_method_eligibility: 'This payment method %paymentMethodName% has been disabled. Please reselect your payment method.'
+        product_eligibility: 'This product %productName% has been disabled.'
+        shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
+        shipping_method_not_available: 'The "%shippingMethodName%" shipping method is not available. Please reselect your shipping method.'
+        cart_items_immutable: 'Cannot change cart items after the checkout is completed."'
+    resend_order_confirmation_email:
+        invalid_order_state: 'Cannot resend order confirmation email for order with state %state%.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Cannot resend shipment confirmation email for shipment in state %state%.'
+    locale:
+        enabled:
+            cannot_disable_base: The base locale cannot be disabled.
+    product:
+        variants:
+            all_prices_defined: You have to define product variants' prices for newly assigned channels first.
+        code:
+            not_exist: Product with code {{ code }} does not exist.
+    product_attribute:
+        invalid: Position must be an integer.
+    image:
+        file:
+            allowed_mime_types: The file is not a valid image. Allowed types are %types%.
+    product_image:
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+        product_variant:
+            not_belong_to_owner: 'The product variant with code "%productVariantCode%" does not belong to the product with code "%ownerCode%", which is the owner of the image.'
+    product_taxon:
+        unique: Product taxons cannot be duplicated.
+        product:
+            not_blank: Please select a product.
+        taxon:
+            not_blank: Please select a taxon.
+    product_variant:
+        code:
+            not_exist: Product variant with code {{ code }} does not exist.
+        onHand:
+            min: On hand must be greater than {{ limit }}.
+            not_blank: Please enter on hand.
+            reserved: On hand must be greater than the number of on hold units
+        original_price:
+            min: Original price must not be negative.
+        weight:
+            min: Weight cannot be negative.
+            invalid: Weight must be a number.
+        width:
+            min: Width cannot be negative.
+            invalid: Width must be a number.
+        height:
+            min: Height cannot be negative.
+            invalid: Height must be a number.
+        depth:
+            min: Depth cannot be negative.
+            invalid: Depth must be a number.
+        channel_pricing:
+            price:
+                not_defined: 'You must define price.'
+            existing_code: Channel with code {{ channelCode }} does not exist.
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: Coupon usage limit per customer must be at least {{ limit }}.
+    product_translation:
+        short_description:
+            max: Short description must not be longer then {{ limit }} characters.
+    province:
+        code:
+            not_exist: Province with code {{ code }} does not exist.
+    review:
+        author:
+            not_blank: Please enter your email.
+        product:
+            not_blank: Please enter a product.
+        rating:
+            range: Review rating must be an integer in the range 1-5.
+            not_in_range: Review rating must be between {{ min }} and {{ max }}.
+    taxon:
+        code:
+            not_exist: Taxon with code {{ code }} does not exist.
+    taxon_image:
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    translation:
+        locale:
+            not_blank: 'Please enter the locale.'
+            invalid: 'This value is not a valid locale.'
+            unique: 'A translation for the {{ value }} locale code already exists.'
+        locale_code:
+            invalid: 'Please choose one of the available locales: %locales%'
+    user:
+        email:
+            unique: This email is already used.
+            min: Email must have at least {{ limit }} characters.
+            max: Email must have at most {{ limit }} characters.
+            invalid: This email is invalid.
+        username:
+            unique: This username is already used.
+            not_blank: Please enter your name.
+            max: Username must not be longer than {{ limit }} characters.
+        first_name:
+            max: First name must not be longer than {{ limit }} characters.
+        last_name:
+            max: Last name must not be longer than {{ limit }} characters.
+        locale_code:
+            not_blank: Please choose a locale.
+    zone:
+        code:
+            not_exist: Zone with code {{ code }} does not exist.

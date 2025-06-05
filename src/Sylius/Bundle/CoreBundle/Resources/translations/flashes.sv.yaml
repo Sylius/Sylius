@@ -1,0 +1,4 @@
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: 'Betalningen kan inte slutföras på grund av otillräckligt lager för produkten "%productVariantCode%".'

@@ -55,16 +55,18 @@ Each minor Sylius version is maintained for a fixed time after its release. This
 
 | Version | Development starts | Stabilization starts | Release date |
 | ------- | ------------------ | -------------------- | ------------ |
-| 2.1     | November, 2024     | Q1/Q2 2025           | Q2/Q3 2025   |
+| 2.1     | November 2024      | Q1/Q2 2025           | June 2025    |
+| 2.2     | June 2025          | Q3 2025              | Q4 2025      |
 
 ### Supported versions
 
-<table><thead><tr><th width="89">Version</th><th>Release date</th><th>End of maintenance</th><th>End of support</th><th>Status</th></tr></thead><tbody><tr><td>2.0</td><td>Nov 12, 2024</td><td>August 2025</td><td>February 2026</td><td>Fully supported</td></tr><tr><td><strong>1.14 (LTS)</strong></td><td><strong>Nov 12, 2024</strong></td><td><strong>December 2025</strong></td><td><strong>December 2026</strong></td><td><strong>Fully supported</strong></td></tr><tr><td>1.13</td><td>Apr 23, 2024</td><td>January 2025</td><td>April 2025</td><td>Fully supported</td></tr></tbody></table>
+<table><thead><tr><th width="89">Version</th><th>Release date</th><th>End of maintenance</th><th>End of support</th><th>Status</th></tr></thead><tbody><tr><td>2.0</td><td>Nov 12, 2024</td><td>August 2025</td><td>February 2026</td><td>Fully supported</td></tr><tr><td><strong>1.14 (LTS)</strong></td><td><strong>Nov 12, 2024</strong></td><td><strong>December 2025</strong></td><td><strong>December 2026</strong></td><td><strong>Fully supported</strong></td></tr></tbody></table>
 
 ### Unsupported versions
 
 | Version | Release date | End of maintenance | End of support |
 | ------- | ------------ | ------------------ | -------------- |
+| 1.13    | Apr 23, 2024 | Jan 31, 2025       | Apr 30, 2025   |
 | 1.12    | Oct 31, 2022 | Jun 30, 2024       | Dec 31, 2024   |
 | 1.11    | Feb 14, 2022 | Jan 31, 2023       | Oct 31, 2023   |
 | 1.10    | Jun 29, 2021 | May 14, 2022       | Jan 14, 2023   |

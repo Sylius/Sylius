@@ -29,9 +29,9 @@ final class AvailableProductOptionValuesResolverTest extends TestCase
 
     private const PRODUCT_OPTION_CODE = 'PRODUCT_OPTION_CODE';
 
-    private ProductInterface&MockObject $product;
+    private MockObject&ProductInterface $product;
 
-    private ProductOptionInterface&MockObject $productOption;
+    private MockObject&ProductOptionInterface $productOption;
 
     private AvailableProductOptionValuesResolver $availableProductOptionValuesResolver;
 
@@ -79,11 +79,11 @@ final class AvailableProductOptionValuesResolverTest extends TestCase
             new ArrayCollection([
                 $productOptionValue1,
                 $productOptionValue2,
-            ])
+            ]),
         );
 
         $this->product->method('getEnabledVariants')->willReturn(
-            new ArrayCollection([$productVariant])
+            new ArrayCollection([$productVariant]),
         );
 
         $productVariant->method('hasOptionValue')->willReturnMap([

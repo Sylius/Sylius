@@ -2,219 +2,286 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        admin_password_reset:
+            hello: '你好'
+            subject: '管理员密码重置'
+            reset_your_password: '重置您的密码'
+            to_reset_your_password: '要重置您的密码 - 点击下面的链接'
+            to_reset_your_password_token: '要重置您的密码 - 请使用以下令牌'
+            token: '您的密码重置令牌是'
+        contact_request:
+            content: '内容'
+            message_from: '来自的信息'
+            subject: '联系请求'
+        order_confirmation:
+            has_been_successfully_placed: '已成功下单。'
+            subject: '订单确认'
+            view_order_or_change_payment_method: '查看订单或更改支付方式'
+            thank_you: '感谢您在我们的商店购物！'
+            your_order_number: '您的订单号是'
+        password_reset:
+            hello: '你好'
+            reset_your_password: '重置您的密码'
+            subject: '密码重置'
+            to_reset_your_password: '要重置您的密码 - 点击下面的链接'
+            to_reset_your_password_token: '要重置您的密码 - 请使用以下令牌'
+            token: '您的密码重置令牌是'
+        shipment_confirmation:
+            has_been_sent_using: '已通过以下方式发送'
+            subject: '发货确认'
+            thank_you_for_transaction: '感谢您的交易。'
+            you_can_check_its_location_with_the_tracking_code: '您可以通过跟踪码 %tracking_code% 查询包裹的位置。'
+            your_order_with_number: '您的订单编号为'
+        user_registration:
+            start_shopping: '开始购物'
+            subject: '用户注册'
+            welcome_to_our_store: '欢迎来到我们的商店！'
+            you_have_just_been_registered: '您已成功注册。谢谢！'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: '你好'
+            message: '使用以下令牌验证您的帐户：'
+            subject: '电子邮件地址验证'
+            to_verify_your_email_address: '要验证您的电子邮件地址 - 点击下面的链接'
+            verify_your_email_address: '验证您的电子邮件地址'
+        user:
+            account_verification:
+                greeting: '你好'
+                message: '使用以下令牌验证您的帐户：'
+                statement: '验证您的电子邮件地址'
+                strategy: '要验证您的电子邮件地址 - 点击下面的链接'
+                subject: '电子邮件地址验证'
     form:
         block:
-            body: 正文
-            id: ID
-            title: 标题
+            body: '正文'
+            id: '编号'
+            title: '标题'
         cart:
-            coupon: 优惠券
+            coupon: '优惠券'
         catalog_promotion:
-            channels: 门店
+            channels: '渠道'
+            scope:
+                for_products: '针对产品'
+                for_taxons: '针对分类'
+                for_variants: '针对变体'
         checkout:
             addressing:
-                different_billing_address: 使用不同地址的帐单吗？
-            payment_method: 付款方式
-            shipping_method: 配送方式
+                different_billing_address: '使用不同的账单地址？'
+                different_shipping_address: '使用不同的收货地址？'
+            payment_method: '支付方式'
+            shipping_method: '配送方式'
+        currency:
+            select: '选择货币'
         promotion:
-            channels: 门店
+            channels: '渠道'
         promotion_action:
             add_product_configuration:
-                product: 产品
+                product: '产品'
         promotion_coupon:
-            per_customer_usage_limit: 每个客户使用次数
+            per_customer_usage_limit: '每位客户的使用限制'
+            reusable_from_cancelled_orders: '可在已取消的订单中重复使用'
         group:
-            name: 名称
-            roles: 角色
+            name: '名称'
+            roles: '角色'
         channel:
             billing_data:
-                city: 城市
-                company: 公司
-                country: test
-                postcode: 邮编
-                street: 街道
-            contact_email: 联系邮件
-            countries: 国家
-            currencies: 货币
-            currency_base: 基础货币
-            account_verification_required: 账号验证是否必须
-            hostname: 主机名
-            locale_default: 默认区域
-            locales: 区域设置
-            payment_methods: 支付方式
-            shipping_methods: 发货方式
-            skipping_shipping_step_allowed: 如果仅有一种配送方式可用，跳过配送步骤吗？
-            skipping_payment_step_allowed: 如果仅有一种支付方式可用，跳过选择支付步骤吗？
-            tax_calculation_strategy: 税收策略
-            tax_zone_default: 默认税区
-            taxonomies: 分类
-            theme: 主题
+                city: '城市'
+                company: '公司'
+                country: '国家'
+                postcode: '邮政编码'
+                street: '街道'
+                tax_id: '税号'
+            contact_email: '联系邮箱'
+            contact_phone_number: '联系电话'
+            countries: '国家/地区'
+            currencies: '货币'
+            currency_base: '基础货币'
+            account_verification_required: '是否需要账户验证？'
+            hostname: '主机名'
+            locale_default: '默认语言环境'
+            locales: '语言环境'
+            menu_taxon: '菜单分类'
+            payment_methods: '支付方式'
+            shipping_address_in_checkout_required: '结账时需要填写收货地址'
+            shipping_methods: '配送方式'
+            shop_billing_data: '商店账单数据'
+            skipping_shipping_step_allowed: '如果只有一种配送方式，是否跳过此步骤？'
+            skipping_payment_step_allowed: '如果只有一种支付方式，是否跳过此步骤？'
+            tax_calculation_strategy: '税务计算策略'
+            tax_zone_default: '默认税区'
+            taxonomies: '分类法'
+            theme: '主题'
         image:
-            type: 类型
-            file: 图像
+            type: '类型'
+            file: '图片'
         locale:
-            code: 代码
-            enabled: 已启用
+            code: '代码'
+            enabled: '已启用'
         order_filter:
-            created_at_from: 在之后创建
-            created_at_to: 在之前创建
-            number: 数量
-            total_from: 从
-            total_to: 到
-            payment_state: 付款状态
-            channel: 全部频道
+            created_at_from: '创建时间从'
+            created_at_to: '创建时间至'
+            number: '订单号'
+            total_from: '总金额从'
+            total_to: '总金额至'
+            payment_state: '支付状态'
+            channel: '所有渠道'
         page:
-            body: 正文
-            id: ID
-            title: 标题
+            body: '正文'
+            id: '编号'
+            title: '标题'
         product:
-            images: 图像
-            restricted_zone: 限制的区
-            short_description: 简短说明：
-            variant_selection_method: 变量选择方法
-            main_taxon: 主分类
-            channels: 门店
-            enabled: 已启用
+            images: '图片'
+            restricted_zone: '受限区域'
+            short_description: '简短描述'
+            variant_selection_method: '变体选择方式'
+            main_taxon: '主分类'
+            channels: '渠道'
+            enabled: '已启用'
         product_filter:
-            name: 名称
-            code: 代码
+            name: '名称'
+            code: '代码'
         product_variant:
-            tax_category: 税类别
-            shipping_category: 送货类别
+            tax_category: '税收类别'
+            shipping_category: '配送类别'
         shipment_filter:
-            created_at_from: 从
-            created_at_to: 到
-            number: 订单编号
-            shipping_address: 发货到名称
-            channel: 全部频道
+            created_at_from: '创建时间从'
+            created_at_to: '创建时间至'
+            number: '订单号'
+            shipping_address: '收货人名称'
+            channel: '所有渠道'
         payment_filter:
-            created_at_from: 从
-            created_at_to: 到
-            number: 订单编号
-            billing_address: 帐单收件人姓名
-            channel: 全部频道
+            created_at_from: '创建时间从'
+            created_at_to: '创建时间至'
+            number: '订单号'
+            billing_address: '账单人名称'
+            channel: '所有渠道'
         shipping_method:
-            zone: 区域
+            zone: '区域'
         taxon:
-            code: 代码
-            file: 选择图像
-            images: 图像
+            code: '代码'
+            file: '选择图片'
+            images: '图片'
         taxonomy:
-            file: 选择图像
+            file: '选择图片'
         user:
-            billing_address: 账单地址
-            enabled: 已启用
-            first_name: 名
-            groups: 团体
-            roles: 角色
-            last_name: 姓
-            password: 密码
-            shipping_address: 送货地址
+            billing_address: '账单地址'
+            different_shipping_address: '使用不同的收货地址？'
+            enabled: '已启用'
+            first_name: '名字'
+            groups: '用户组'
+            roles: '角色'
+            last_name: '姓氏'
+            password: '密码'
+            shipping_address: '收货地址'
         user_filter:
-            query: 搜索
+            query: '搜索'
         variant:
-            depth: 深度
-            height: 高度
-            on_hand: 当前货架
-            price: 价格
-            sku: SKU
-            shipping_required: 是否需要配送?
-            weight: 重量
-            width: 宽度
+            depth: '深度'
+            height: '高度'
+            on_hand: '当前库存'
+            price: '价格'
+            sku: 'SKU'
+            shipping_required: '是否需要配送？'
+            weight: '重量'
+            width: '宽度'
+            tracked_help: '如果启用此选项，Sylius 将跟踪库存，并在库存为 0 时停止销售该产品。'
         attribute:
             product_attribute_value:
-                attribute: 属性：
-                value: 值
+                attribute: '属性'
+                value: '值'
         guest:
-            email: 电子邮件
+            email: '电子邮箱'
         product_association:
-            product: 相关的产品
-            type: 关联类型
+            product: '相关产品'
+            type: '关联类型'
         product_association_type:
-            name: 名称
+            name: '名称'
         promotion_filter:
-            products: 商品
-            taxons: 分类
+            products: '产品筛选'
+            taxons: '分类筛选'
         promotion_rule:
             customer_group:
-                group: 客户组
+                group: '客户组'
             has_taxon:
-                taxons: 分类
+                taxons: '分类'
             product:
-                products: 商品
+                products: '产品'
             total_of_items_from_taxon:
-                taxon: 分类
-                amount: 折扣金额
+                taxon: '分类'
+                amount: '金额'
         payment_method:
-            channels: 门店
+            channels: '渠道'
         product_attribute:
-            position: 位置
+            position: '位置'
         zone:
             scopes:
-                shipping: 运费
-                tax: 税收
+                shipping: '配送'
+                tax: '税收'
+
     installer:
         extensions:
-            header: 扩展组件
+            header: '扩展'
             accelerator:
-                header: 加速器
-                help: 启用 Zend OpCache (强烈推荐)。
-            apc: APC
-            ctype: Ctype
-            gd: GD
-            help: 安装和启用 %extension%扩展。
-            iconv: Iconv
-            exif: Exif
-            fileinfo: Fileinfo
-            icu: ICU
-            intl: Intl
-            json_encode: JSON
-            mbstring: 多字节字符串
-            off: false
-            on: true
-            pcre: PCRE
-            pdo: PDO
-            php_xml: PHP XML
-            session_start: 'Session:'
-            simplexml_import_dom: SimpleXML
-            token_get_all: Tokenizer
+                header: '加速器'
+                help: '启用 Zend OpCache（强烈推荐）。'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: '安装并启用 %extension% 扩展。'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: '多字节字符串'
+            off: '关闭'
+            on: '开启'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'Session'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
         filesystem:
-            header: 文件系统
+            header: '文件系统'
             cache:
-                header: 缓存
-                help: "设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
-            exists: 存在
+                header: '缓存'
+                help: '设置权限命令：sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: '已存在'
             logs:
-                header: 日志
-                help: "设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
-            not_exists: 不存在
-            not_writable: 不可写
+                header: '日志'
+                help: '设置权限命令：sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: '不存在'
+            not_writable: '不可写'
             parameters:
-                header: parameters.yml
-                help: "设置权限运行： sudo chmod a+w %path%"
-            vendors: 供应商
-            writable: 可写
+                header: 'parameters.yml'
+                help: '设置权限命令：sudo chmod a+w %path%'
+            vendors: '依赖库'
+            writable: '可写'
         settings:
-            header: PHP 版本和设置
-            any: 任何
-            detect_unicode: detect_unicode
-            magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: 非弃用
-            off: false
-            on: true
-            register_globals: 注册的全局变量
+            header: 'PHP 版本和设置'
+            any: '任意'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: '在 php.ini 中设置 detect_unicode = Off'
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: '非弃用'
+            off: '关闭'
+            on: '开启'
+            register_globals: 'register_globals'
             session:
-                auto_start: session.auto_start
-            short_open_tag: 短的开放标签
-            timezone: 时区
+                auto_start: 'session.auto_start'
+                auto_start_help: '在 php.ini 中设置 session.auto_start = Off'
+            short_open_tag: 'short_open_tag'
+            timezone: '时区'
+            timezone_help: '在 php.ini 中设置 date.timezone（例如：date.timezone = "Europe/Amsterdam"）'
             timezone_deprecated:
-                header: 过时的时区
-                help: 时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。
-            version: PHP 版本
-            version_recommended: 推荐的 PHP 版本
-    payum_gateway:
-        cash_on_delivery: 货到付款
-        offline: 现金支付
-        paypal_express_checkout: Paypal快捷支付
+                header: '已弃用的时区'
+                help: '时区 %timezone% 已弃用。请修复您的 php.ini 文件（已弃用时区列表：http://php.net/manual/en/timezones.others.php）。'
+            version: 'PHP 版本'
+            version_recommended: '推荐的 PHP 版本'
+            version_help: 'Sylius 推荐使用 %recommended% PHP 版本，您当前的版本是 %current%。请升级。'
+
     shipping_method_resolver:
-        by_zones_and_channel: 按区域和渠道
+        by_zones_and_channel: '按区域和渠道'

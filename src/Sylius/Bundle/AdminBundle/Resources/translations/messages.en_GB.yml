@@ -1,0 +1,123 @@
+sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'has been sent using'
+            subject: 'Shipment confirmation'
+            thank_you_for_transaction: 'Thank you for a successful transaction.'
+            you_can_check_its_location_with_the_tracking_code: 'You can check its location with the %tracking_code% tracking code.'
+            your_order_with_number: 'Your order with number'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Show the lowest price of discounted products prior to the current discount?'
+                period_for_which_the_lowest_price_is_calculated: 'Period for which the lowest price is calculated'
+            reset_password:
+                password:
+                    label: New password
+                    confirmation: Confirm new password
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: Association types
+                    attributes: Attributes
+                    header: Catalogue
+                    inventory: Stock
+                    options: Options
+                    products: Products
+                    taxons: Taxa
+                configuration:
+                    admin_users: Administrators
+                    channels: Channels
+                    countries: Countries
+                    currencies: Currencies
+                    exchange_rates: Exchange rates
+                    header: Configuration
+                    locales: Locales
+                    payment_methods: Payment methods
+                    shipping_categories: Delivery categories
+                    shipping_methods: Delivery methods
+                    tax_categories: Tax categories
+                    tax_rates: Tax rates
+                    zones: Zones
+                marketing:
+                    cart_promotions: Basket promotions
+                    catalog_promotions: Catalogue promotions
+                    header: Marketing
+                    product_reviews: Product reviews
+                    promotions: Promotions
+                customers:
+                    customers: Customers
+                    groups: Groups
+                    header: Customer
+                sales:
+                    header: Sales
+                    orders: Orders
+                official_support:
+                    header: Official support
+                    browse_plugins: Browse plugins
+                    sylius_plus: Sylius Plus
+                    professional_services: Professional services
+                    find_a_partner: Find a partner
+                    sylius_certification: Sylius certification
+    ui:
+        account: Account
+        admin_user: Administrator
+        add_new_entry: Add a new entry
+        back_to_dashboard: Back to dashboard
+        catalog_promotion:
+            dates_details: This operation is time-consuming! Please consider a 2–10 minute delay starting from the specified dates. The delay depends on the size of the catalogue.
+        channel:
+            account_verification_required_details: By disabling this option, it will be possible to create accounts and access them without email verification and thus potentially access order data placed as a guest.
+        channel_pricing_history: 'Channel pricing history'
+        channel_pricings: Channel pricing
+        create_new:
+            customer_group: 'Create a new customer group'
+        delete_avatar: 'Delete avatar'
+        full_screen: 'Full screen'
+        global: 'Global'
+        ip_address: 'IP address'
+        language: 'Language'
+        lowest_price_before_discount: 'Lowest price before discount'
+        minimum_price_details: Minimum price – this is the pricing threshold below which the current price cannot be discounted by either catalogue or basket promotions. Use this to protect the profitability of your sales.
+        more: 'More'
+        no_main_taxon: 'no main taxon'
+        no_depth: 'No depth'
+        no_height: 'No height'
+        no_results: No results found
+        no_results_adjust_your_search: 'Adjust your search and try again.'
+        no_weight: 'No weight'
+        no_width: 'No width'
+        omnibus: Omnibus
+        order:
+            date: 'Order date'
+        original_price_details: Original price – this is the price of the product variant. It is displayed as crossed-out in the catalogue. It is used as the base for current price calculations. If this value is not defined, Catalogue Promotion logic will copy the value from Price to Original Price.
+        original_product_price_details: Original price – this is the price of the product. It is displayed as crossed-out in the catalogue. It is used as the base for current price calculations. If this value is not defined, Catalogue Promotion logic will copy the value from Price to Original Price.
+        page_not_found: Page not found
+        pagination:
+            number_of_results: 'Showing %from% to %to% of %total% entries'
+        partially_refunded: 'Partially refunded'
+        price_details: Price – this is the current price of the product variant displayed in the catalogue. It can be modified explicitly by e.g. catalogue promotions.
+        product_price_details: Price – this is the current price of the product displayed in the catalogue. It can be modified explicitly by e.g. catalogue promotions.
+        price_history: Price history
+        product:
+            product_not_active_in_channel: The product is not yet activated in this channel.
+        product_variant: Product variant
+        sales_summary: Sales summary
+        search_menu: 'Search menu'
+        shipment_for_order: Shipment for order
+        show_history_for_channel_pricing: 'Show history for channel pricing'
+        start_typing_to_search: 'Start typing to search'
+        statistics:
+            day: Day
+            lifetime: Lifetime
+            month: Month
+            week: Week
+            2weeks: 2 Weeks
+            year: Year
+        taxon: Taxon
+        view_in_store: 'View in store'
+        work_in_progress: Work in progress
+        empty_date: empty
+        notifications:
+            new_version_of_sylius_available: 'There is a new version of Sylius available. Contact your technician to upgrade.'

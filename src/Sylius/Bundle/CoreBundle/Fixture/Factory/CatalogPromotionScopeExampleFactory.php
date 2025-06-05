@@ -21,10 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @implements ExampleFactoryInterface<CatalogPromotionScopeInterface> */
 final class CatalogPromotionScopeExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /** @param FactoryInterface<CatalogPromotionScopeInterface> $catalogPromotionScopeFactory */
-    public function __construct(private readonly FactoryInterface $catalogPromotionScopeFactory)
+    public function __construct(protected readonly FactoryInterface $catalogPromotionScopeFactory)
     {
         $this->optionsResolver = new OptionsResolver();
 

@@ -1,5 +1,52 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.9 (2025-06-04)
+
+#### Details
+
+- [#18127](https://github.com/Sylius/Sylius/pull/18127) Fix en translations in Product and Taxonomy bundles ([@GSadee](https://github.com/GSadee))
+
+## v2.0.8 (2025-06-04)
+
+#### Details
+
+- [#17952](https://github.com/Sylius/Sylius/pull/17952) Add instruction doc for disabling Mollie on Sylius Standard ([@TheMilek](https://github.com/TheMilek))
+- [#17960](https://github.com/Sylius/Sylius/pull/17960) [Admin] Missing role icon in menu ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17969](https://github.com/Sylius/Sylius/pull/17969) [CI] Fix downloading robo.phar for packages build ([@GSadee](https://github.com/GSadee))
+- [#17958](https://github.com/Sylius/Sylius/pull/17958) [DOC] use correct twig extension ([@revoltek-daniel](https://github.com/revoltek-daniel))
+- [#18027](https://github.com/Sylius/Sylius/pull/18027) [Shop] Add twig hook per factory name in select payment ([@Wojdylak](https://github.com/Wojdylak))
+- [#18031](https://github.com/Sylius/Sylius/pull/18031) [Shop][Checkout] Add id to the summary elements ([@Wojdylak](https://github.com/Wojdylak))
+- [#18044](https://github.com/Sylius/Sylius/pull/18044) [Admin][Taxon] Pass the tree data to stimulus controller without HTML escaping ([@Wojdylak](https://github.com/Wojdylak))
+- [#18050](https://github.com/Sylius/Sylius/pull/18050) Make fixture factory constructor arguments protected ([@TheMilek](https://github.com/TheMilek))
+- [#17965](https://github.com/Sylius/Sylius/pull/17965) [2.0] Polish translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#17974](https://github.com/Sylius/Sylius/pull/17974) [2.0] German translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#17967](https://github.com/Sylius/Sylius/pull/17967) [2.0] Spanish translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#17966](https://github.com/Sylius/Sylius/pull/17966) [2.0] Dutch translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18040](https://github.com/Sylius/Sylius/pull/18040) [2.0] French belgian translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18041](https://github.com/Sylius/Sylius/pull/18041) [2.0] British english translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#17964](https://github.com/Sylius/Sylius/pull/17964) [2.0] French translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18042](https://github.com/Sylius/Sylius/pull/18042) [2.0] German austrian translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18058](https://github.com/Sylius/Sylius/pull/18058) [2.0] French Canadian translations ([@GSadee](https://github.com/GSadee))
+- [#18067](https://github.com/Sylius/Sylius/pull/18067) [2.0] Mandarin Chinese translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18066](https://github.com/Sylius/Sylius/pull/18066) [2.0] Swedish translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18071](https://github.com/Sylius/Sylius/pull/18071) [2.0] Japanese translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18065](https://github.com/Sylius/Sylius/pull/18065) [2.0] Portuguese translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18086](https://github.com/Sylius/Sylius/pull/18086) [Shop][Checkout] Add hooks with active step name to header and sidebar hooks ([@Wojdylak](https://github.com/Wojdylak))
+- [#18080](https://github.com/Sylius/Sylius/pull/18080) [API][Shop] Fix hardcoded variants squashing on product ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#18089](https://github.com/Sylius/Sylius/pull/18089) [CI] Update matrix for 2.0 branch ([@GSadee](https://github.com/GSadee))
+- [#18090](https://github.com/Sylius/Sylius/pull/18090) [Core] Fix options in Type constraint for ChannelPriceHistoryConfig + fix supports check of PaymentRequestAfterPayResponseProvider ([@GSadee](https://github.com/GSadee))
+- [#18018](https://github.com/Sylius/Sylius/pull/18018) Update content.html.twig ([@jaroslavtyc](https://github.com/jaroslavtyc))
+- [#18094](https://github.com/Sylius/Sylius/pull/18094) [CS][DX] Refactor
+- [#18035](https://github.com/Sylius/Sylius/pull/18035) Replace hardcoded text with respective translation key in Breadcrumb bar ([@shochdoerfer](https://github.com/shochdoerfer))
+- [#17999](https://github.com/Sylius/Sylius/pull/17999) [Locale] Fix locale context in single process runtime ([@mszula](https://github.com/mszula))
+- [#18054](https://github.com/Sylius/Sylius/pull/18054) Fix #17865 issue ([@macintoshplus](https://github.com/macintoshplus))
+- [#18109](https://github.com/Sylius/Sylius/pull/18109) [2.0] French translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18096](https://github.com/Sylius/Sylius/pull/18096) [2.0] Mandarin Chinese translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18095](https://github.com/Sylius/Sylius/pull/18095) [2.0] Norwegian translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18043](https://github.com/Sylius/Sylius/pull/18043) [2.0] German swiss translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18119](https://github.com/Sylius/Sylius/pull/18119) [DOCUMENTATION] Synchronize 2.0-docs -> 2.0 ([@SyliusBot](https://github.com/SyliusBot))
+
+
 ## v2.0.7 (2025-05-07)
 
 #### Details

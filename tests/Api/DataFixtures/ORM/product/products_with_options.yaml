@@ -1,0 +1,138 @@
+Sylius\Component\Core\Model\Product:
+    product_mug:
+        code: 'MUG'
+        enabled: true
+        options:
+            - '@product_option_color'
+            - '@product_option_size'
+        mainTaxon: '@taxon_mugs'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+    product_cap:
+        code: 'CAP'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+        options: ['@product_option_color']
+    product_socks:
+        code: 'SOCKS'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+        options:
+            - '@product_option_color'
+            - '@product_option_size'
+
+Sylius\Component\Core\Model\ProductTranslation:
+    product_translation_mug_en_US:
+        locale: 'en_US'
+        translatable: '@product_mug'
+        slug: 'mug'
+        name: 'Mug'
+        description: 'This is a mug'
+        shortDescription: 'Short mug description'
+        metaKeywords: 'mug'
+        metaDescription: 'Mug description'
+    product_translation_cap_en_US:
+        locale: 'en_US'
+        translatable: '@product_cap'
+        slug: 'cap'
+        name: 'Cap'
+    product_translation_socks_en_US:
+        locale: 'en_US'
+        translatable: '@product_socks'
+        slug: 'socks'
+        name: 'Socks'
+
+Sylius\Component\Core\Model\ProductVariant:
+    product_variant_mug_blue:
+        code: 'MUG_BLUE'
+        product: '@product_mug'
+        currentLocale: 'en_US'
+        optionValues: ['@product_option_value_color_blue']
+    product_variant_mug_red:
+        code: 'MUG_RED'
+        product: '@product_mug'
+        currentLocale: 'en_US'
+        optionValues: ['@product_option_value_color_red']
+    product_variant_cap_red:
+        code: 'CAP_RED'
+        product: '@product_cap'
+        currentLocale: 'en_US'
+        optionValues: ['@product_option_value_color_red']
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+    product_variant_translation_mug_blue:
+        locale: 'en_US'
+        name: 'Blue Mug'
+        translatable: '@product_variant_mug_blue'
+    product_variant_translation_mug_red:
+        locale: 'en_US'
+        name: 'Red Mug'
+        translatable: '@product_variant_mug_red'
+
+Sylius\Component\Product\Model\ProductOption:
+    product_option_color:
+        code: 'COLOR'
+    product_option_size:
+        code: 'SIZE'
+
+Sylius\Component\Product\Model\ProductOptionTranslation:
+    product_option_translation_color:
+        locale: 'en_US'
+        name: 'Color'
+        translatable: '@product_option_color'
+    product_option_translation_size:
+        locale: 'en_US'
+        name: 'Size'
+        translatable: '@product_option_size'
+
+Sylius\Component\Product\Model\ProductOptionValue:
+    product_option_value_color_blue:
+        code: 'COLOR_BLUE'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_color'
+    product_option_value_color_red:
+        code: 'COLOR_RED'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_color'
+    product_option_value_size_small:
+        code: 'SIZE_SMALL'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_size'
+    product_option_value_size_large:
+        code: 'SIZE_LARGE'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_size'
+
+Sylius\Component\Product\Model\ProductOptionValueTranslation:
+    product_option_value_translation_blue:
+        locale: 'en_US'
+        value: 'Blue'
+        translatable: '@product_option_value_color_blue'
+    product_option_value_translation_red:
+        locale: 'en_US'
+        value: 'Red'
+        translatable: '@product_option_value_color_red'
+    product_option_value_translation_small:
+        locale: 'en_US'
+        value: 'Small'
+        translatable: '@product_option_value_size_small'
+    product_option_value_translation_large:
+        locale: 'en_US'
+        value: 'Large'
+        translatable: '@product_option_value_size_large'
+
+Sylius\Component\Core\Model\Taxon:
+    taxon_mugs:
+        code: 'MUGS'
+    taxon_caps:
+        code: 'CAPS'
+
+Sylius\Component\Core\Model\ProductTaxon:
+    product_taxon:
+        product: '@product_mug'
+        taxon: '@taxon_mugs'
+        position: 0

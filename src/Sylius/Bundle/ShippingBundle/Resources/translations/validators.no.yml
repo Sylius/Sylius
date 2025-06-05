@@ -4,14 +4,34 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Kategorinavnet kan ikke være lengre enn {{ limit }} tegn.'
-            min_length: 'Kategorinavnet må være minst {{ limit }} tegn.'
-            not_blank: 'Angi fraktkategorinavn.'
+            max_length: "'Kategorinavn kan ikke være lengre enn {{ limit }} tegn.'"
+            min_length: "'Kategorinavn må være minst {{ limit }} tegn langt.'"
+            not_blank: "'Vennligst oppgi navn på fraktkategori.'"
+        code:
+            max_length: "'Koden kan ikke være lengre enn {{ limit }} tegn.'"
+            not_blank: "'Vennligst oppgi kode for fraktkategori.'"
+            regex: "'Fraktkategori-kode kan kun bestå av bokstaver, tall, bindestreker og understreker.'"
+            unique: "'Fraktkategori med denne koden finnes allerede.'"
+
     shipping_method:
+        calculator:
+            min: "'Fraktkostnad kan ikke være lavere enn 0.'"
+            not_blank: "'Vennligst velg fraktmetodekalkulator.'"
+            invalid: "'Ugyldig kalkulator. Tilgjengelige kalkulatorer er {{ available_calculators }}.'"
         name:
-            max_length: 'Fraktmetodenavn kan ikke være lengre enn {{ limit }} tegn.'
-            min_length: 'Fraktmetodenavn må være minst {{ limit }} tegn.'
-            not_blank: 'Vennligst skriv inn fraktmetodenavn.'
+            max_length: "'Navn på fraktmetode kan ikke være lengre enn {{ limit }} tegn.'"
+            min_length: "'Navn på fraktmetode må være minst {{ limit }} tegn langt.'"
+            not_blank: "'Vennligst oppgi navn på fraktmetode.'"
+        code:
+            max_length: "'Koden kan ikke være lengre enn {{ limit }} tegn.'"
+            not_blank: "'Vennligst oppgi kode for fraktmetode.'"
+            regex: "'Fraktmetode-kode kan kun bestå av bokstaver, tall, bindestreker og understreker.'"
+            unique: "'Fraktmetode med denne koden finnes allerede.'"
+        zone:
+            not_blank: "'Vennligst velg sone for fraktmetode.'"
+        rule:
+            invalid_type: "'Ugyldig regeltype. Tilgjengelige regeltyper er {{ available_rule_types }}.'"
+
     shipment:
         shipping_method:
-            not_blank: 'Vennligst velg fraktmetode.'
+            not_blank: "'Vennligst velg fraktmetode.'"

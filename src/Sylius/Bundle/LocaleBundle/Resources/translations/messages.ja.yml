@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: ゾーン名
+            name: 'ゾーン名'

@@ -9,9 +9,9 @@ sylius:
                     association_types: 関連タイプ
                     attributes: 属性
                     header: カタログ
-                    inventory: sylius.breadcrumb.inventory.index
-                    options: sylius.breadcrumb.option.index
-                    products: sylius.breadcrumb.product.index
+                    inventory: 在庫
+                    options: オプション
+                    products: 商品
                     taxons: タクソン(分類群)
                 configuration:
                     admin_users: 管理者
@@ -30,14 +30,14 @@ sylius:
                 marketing:
                     header: マーケティング
                     product_reviews: 商品レビュー
-                    promotions: sylius.breadcrumb.promotion.index
+                    promotions: プロモーション
                 customers:
-                    customers: sylius.breadcrumb.customers
+                    customers: 顧客
                     groups: グループ
                     header: 顧客
                 sales:
-                    header: sylius.breadcrumb.sales
-                    orders: sylius.breadcrumb.order.index
+                    header: 販売
+                    orders: 注文
                 official_support:
                     header: 公式サポート
                     browse_plugins: プラグインを参照

@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'The password reset token has expired.'
+    account:
+        invalid_verification_token: 'There is no shop user with the %verificationToken% email verification token.'
+        is_verified: 'The account with email %email% is currently verified.'
+    address:
+        without_country: 'An address without a country cannot exist.'
+    code:
+        not_blank: 'Please enter a code.'
+        invalid: 'The code should contain only letters, numbers, dashes ("-" symbol), and underscores ("_" symbol).'
+    contact_request:
+        email_is_invalid: 'The provided email address is invalid.'
+    country:
+        not_exist: 'The country with code %countryCode% does not exist.'
+    date_interval:
+        empty: 'The date interval cannot be empty.'
+        invalid: 'The date interval is not a valid ISO 8601 interval.'
+    date_time:
+        invalid: 'The date and time are not a valid ISO 8601 datetime in Y-m-d\TH:i:s format.'
+    order:
+        not_empty: 'An empty order cannot be processed.'
+    payment:
+        not_found: 'The payment does not exist.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'You cannot change the payment method for a cancelled order.'
+        not_available: 'The payment method %name% is not available for this order. Please choose another one.'
+        not_exist: 'The payment method with code %code% does not exist.'
+    payment_request:
+        action_not_available: 'The payment request (method code: %code% and payment ID: %id%) has no handler. Please choose another payment method.'
+        not_available: 'This payment request does not support this action.'
+    product:
+        not_exist: 'The product %productName% does not exist.'
+    product_variant:
+        not_exist: 'The product variant with code %productVariantCode% does not exist.'
+        not_longer_available: 'The product variant named %productVariantName% is no longer available.'
+        not_sufficient: 'The product variant with code %productVariantCode% does not have sufficient stock.'
+        product_variant_with_name_not_sufficient: 'The product variant named %productVariantName% does not have sufficient stock.'
+        option_values:
+            single_value: 'A product variant may have only one value configured for each option.'
+    reset_password:
+        invalid_token: 'The password reset token %token% is invalid.'
+        token_expired: 'The password reset token has expired.'
+    shipment:
+        not_found: 'The despatch does not exist.'
+        shipped: 'You cannot despatch a shipment that has already been despatched.'
+    shipping_method:
+        not_found: 'The delivery method with code %code% does not exist.'
+        not_available: 'The delivery method %name% is not available for this order. Please choose another delivery method.'
+        shipping_address_not_found: 'The order must be addressed first.'
+    statistics:
+        end_date:
+            invalid: 'The start date must be earlier than the end date.'

@@ -1,0 +1,21 @@
+sylius:
+    form:
+        user:
+            email: Email
+            enabled: Enabled
+            password:
+                label: Password
+                confirmation: Verification
+            remember_me: Remember me
+            shipping_address: Shipping address
+            username: Username
+            verified: Verified
+        user_filter:
+            query: Search
+        user_change_password:
+            confirmation: Confirmation
+            current: Current password
+            new: New password
+        user_reset_password:
+            confirmation: Confirmation
+            new: New password

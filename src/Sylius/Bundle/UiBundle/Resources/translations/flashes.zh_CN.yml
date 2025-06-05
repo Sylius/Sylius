@@ -3,24 +3,30 @@
 
 sylius:
     channel:
-        delete_error: '不能删除销售渠道，至少需要一个启用的销售渠道.'
+        delete_error: '无法删除频道。至少需要一个启用的频道。'
     checkout:
-        complete_error: '完成订单时产生一个未知问题. 请重新下单.'
+        complete_error: '完成订单时发生意外问题。请重试下单。'
     contact:
         request_success: '您的联系请求已成功提交。'
-        request_error: '发送联系请求时发生问题。请稍后再试。'
+        request_error: '发送联系请求时发生问题。请稍后重试。'
     customer:
-        add_address: '已成功添加地址。'
-        impersonate: '成功地模拟客户 %name%。'
-        set_address_as_default: '地址已被设为默认。'
+        add_address: '地址已成功添加。'
+        impersonate: '成功模拟客户 %name%。'
+        set_address_as_default: '地址已设置为默认。'
     order:
-        apply_state_machine_transition_error: '在更新订单时发生了未知的错误，请尝试再次更新订单。'
-        promotion_integrity: '您不再有资格参加此%promotionName%促销活动'
-        total_integrity: '订单总额已被更改，请检查订单信息并再次确认。'
-        update_error: '在更新订单时发生了未知的错误，请尝试再次更新订单。'
+        apply_state_machine_transition_error: '更新订单时发生意外问题。请重试更新订单。'
+        promotion_integrity: '您不再符合此促销活动 %promotionName% 的资格。'
+        total_integrity: '您的订单总额已更改，请检查订单信息并再次确认。'
+        update_error: '更新订单时发生意外问题。请重试更新订单。'
     payment:
-        apply_state_machine_transition_error: '在更新支付方式时发生了未知的错误，请尝试再次更新支付方式。'
+        apply_state_machine_transition_error: '更新支付时发生意外问题。请重试更新支付。'
     product:
-        out_of_stock: '该产品在库存中仅有 %quantity% 个。'
+        in_use_by_promotion_rule: '无法删除被促销规则使用的产品。'
+        out_of_stock: '该产品库存仅剩 %quantity% 件。'
     product_variant:
-        update_error: '在更新产品规格时发生了未知的错误，请尝试再次更新产品规格。'
+        update_error: '更新产品变体时发生意外问题。请重试更新产品变体。'
+    promotion:
+        update_rules: '代码为 %codes% 的促销规则已被更新。'
+    taxon:
+        in_use_by_promotion_rule: '无法删除被促销规则使用的分类。'
+        menu_taxon_delete: '无法删除任何频道的菜单分类。'

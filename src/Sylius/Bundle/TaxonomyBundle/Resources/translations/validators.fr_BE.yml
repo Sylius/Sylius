@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    taxon:
+        code:
+            not_blank: Veuillez entrer le code de taxon.
+            regex: Le code du taxon ne peut être constitué que de lettres, nombres, tirets et traits de soulignement.
+            unique: Ce code de taxon existe déjà.
+        name:
+            max_length: La taxon ne peux dépasser les 255 caractères.
+            not_blank: Veuillez saisir un nom pour la taxon.
+        slug:
+            not_blank: Veuillez entrer le slug du taxon.
+            unique: Le slug du taxon doit être unique.
+    taxonomy:
+        name:
+            max_length: La taxonomie ne peux dépasser les 255 caractères.
+            not_blank: Veuillez saisir un nom pour la taxonomie.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

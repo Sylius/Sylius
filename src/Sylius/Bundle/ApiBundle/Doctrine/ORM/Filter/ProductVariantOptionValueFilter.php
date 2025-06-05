@@ -33,7 +33,16 @@ final class ProductVariantOptionValueFilter extends AbstractFilter
         ?array $properties = null,
         ?NameConverterInterface $nameConverter = null,
     ) {
-        parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
+        if (null !== $requestStack) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.1',
+                'Passing a "%s" as the third constructor argument is deprecated and will be prohibited in 3.0.',
+                RequestStack::class,
+            );
+        }
+
+        parent::__construct($managerRegistry, $logger, $properties, $nameConverter);
     }
 
     protected function filterProperty(

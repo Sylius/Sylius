@@ -27,11 +27,11 @@ final class OrderTest extends TestCase
 {
     private Order $order;
 
-    private OrderItemInterface&MockObject $item1;
+    private MockObject&OrderItemInterface $item1;
 
-    private OrderItemInterface&MockObject $item2;
+    private MockObject&OrderItemInterface $item2;
 
-    private OrderItemInterface&MockObject $item3;
+    private MockObject&OrderItemInterface $item3;
 
     private AdjustmentInterface&MockObject $adjustment1;
 
@@ -135,7 +135,8 @@ final class OrderTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 
@@ -208,7 +209,8 @@ final class OrderTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 
@@ -269,7 +271,8 @@ final class OrderTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 
@@ -452,7 +455,8 @@ final class OrderTest extends TestCase
                 } elseif ($callIndexItem2 === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndexItem2++;
+                ++$callIndexItem2;
+
                 return true;
             }));
 
@@ -470,7 +474,8 @@ final class OrderTest extends TestCase
                 } elseif ($callIndexAdj1 === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndexAdj1++;
+                ++$callIndexAdj1;
+
                 return true;
             }));
 

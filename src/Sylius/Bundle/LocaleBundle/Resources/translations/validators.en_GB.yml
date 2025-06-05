@@ -1,0 +1,7 @@
+sylius:
+    locale:
+        code:
+            max_length: The code must not be longer than {{ limit }} characters.
+            not_blank: Please choose locale code.
+            locale: This value is not a valid locale code.
+            unique: Locale code must be unique.

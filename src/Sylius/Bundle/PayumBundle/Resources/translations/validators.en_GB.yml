@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Please enter your PayPal API password.
+            signature:
+                not_blank: Please enter your PayPal signature.
+            username:
+                not_blank: Please enter your PayPal API username.
+        stripe:
+            secret_key:
+                not_blank: Please enter the Stripe secret key.
+            publishable_key:
+                not_blank: Please enter the Stripe publishable key.

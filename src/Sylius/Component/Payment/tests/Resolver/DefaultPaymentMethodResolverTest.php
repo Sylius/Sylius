@@ -28,9 +28,7 @@ final class DefaultPaymentMethodResolverTest extends TestCase
 
     private DefaultPaymentMethodResolver $defaultPaymentMethodResolver;
 
-    /**
-     * @var PaymentInterface&MockObject
-     */
+    /** @var PaymentInterface&MockObject */
     private MockObject $payment;
 
     protected function setUp(): void
@@ -58,7 +56,7 @@ final class DefaultPaymentMethodResolverTest extends TestCase
 
         $this->assertSame(
             $firstPaymentMethodMock,
-            $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($this->payment)
+            $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($this->payment),
         );
     }
 

@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        code:
+            not_blank: Bitte gib den Code des Kanals ein.
+            regex: Kanalkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Der Code des Kanals muss eindeutig sein.
+        name:
+            not_blank: Bitte gib den Namen des Kanals ein.

@@ -21,7 +21,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class CountOrdersToProcessProviderTest extends TestCase
 {
-    private OrderRepositoryInterface&MockObject $orderRepository;
+    private MockObject&OrderRepositoryInterface $orderRepository;
 
     private CountOrdersToProcessProvider $countOrdersToProcessProvider;
 

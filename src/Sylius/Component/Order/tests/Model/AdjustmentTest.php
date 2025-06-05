@@ -26,11 +26,11 @@ final class AdjustmentTest extends TestCase
 {
     private Adjustment $adjustment;
 
-    private OrderInterface&MockObject $order;
+    private MockObject&OrderInterface $order;
 
-    private OrderItemInterface&MockObject $orderItem;
+    private MockObject&OrderItemInterface $orderItem;
 
-    private OrderItemUnitInterface&MockObject $orderItemUnit;
+    private MockObject&OrderItemUnitInterface $orderItemUnit;
 
     protected function setUp(): void
     {

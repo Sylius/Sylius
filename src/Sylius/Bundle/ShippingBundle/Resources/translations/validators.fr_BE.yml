@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    shipping_category:
+        name:
+            max_length: 'Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.'
+            min_length: 'Le nom de la catégorie doit contenir au moins {{ limit }} caractères.'
+            not_blank: 'Veuillez entrer le nom de la catégorie de livraison.'
+        code:
+            not_blank: 'Veuillez entrer le code de la catégorie de livraison.'
+            regex: 'Le code de la méthode de livraison peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.'
+            unique: 'Ce code de catégorie de livraison existe déjà.'
+    shipping_method:
+        calculator:
+            min: 'Les frais de port ne peuvent pas être inférieurs à 0.'
+            not_blank: 'Veuillez sélectionner une méthode de calcul pour la livraison.'
+            invalid: 'Calculateur invalide. Les calculateurs disponibles sont {{ available_calculators }}.'
+        name:
+            max_length: 'Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.'
+            min_length: 'Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.'
+            not_blank: 'Veuillez entrer le nom de la méthode de livraison.'
+        code:
+            not_blank: 'Veuillez entrer le code du mode de livraison.'
+            regex: 'Le code de la méthode de livraison peut uniquement être constitué de lettres, chiffres et tirets.'
+            unique: 'Ce code de mode de livraison existe déjà.'
+        zone:
+            not_blank: 'S''il vous plaît sélectionnez zone de méthode de livraison.'
+        rule:
+            invalid_type: 'Le type de règle n''est pas valide. Les types de règles disponibles sont {{ available_rule_types }}.'
+    shipment:
+        shipping_method:
+            not_blank: 'Veuillez sélectionner un mode de livraison.'
+    translation:
+        locale:
+            not_blank: 'Vous devez entrer une valeur.'
+            invalid: 'Ce paramètre régional n''est pas valide.'
+            unique: 'Une traduction pour la locale {{ value }} existe déjà.'

@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    customer:
+        first_name:
+            max: Der Vorname darf nicht länger als {{ limit }} Zeichen sein.
+            min: Der Vorname muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihren Vornamen ein.
+        last_name:
+            max: Der Nachname darf nicht länger als {{ limit }} Zeichen sein.
+            min: Der Nachname muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihren Nachnamen ein.
+        gender:
+            not_blank: Bitte wählen Sie Ihr Geschlecht aus.
+        email:
+            already_used: Diese E‑Mail-Adresse wird bereits verwendet. Bitte melden Sie sich an oder nutzen Sie „Passwort vergessen“.
+            max: Die E‑Mail-Adresse darf nicht länger als {{ limit }} Zeichen sein.
+            not_blank: Bitte geben Sie Ihre E‑Mail-Adresse ein.
+            invalid: Diese E‑Mail-Adresse ist ungültig.
+            unique: Diese E‑Mail-Adresse wird bereits verwendet.
+            registered: Diese E‑Mail-Adresse ist schon registriert. Bitte loggen Sie sich ein oder nutzen Sie „Passwort vergessen“.
+    customer_group:
+        code:
+            regex: Das Kürzel der Kundengruppe darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.
+            unique: Der Code der Kundengruppe muss eindeutig sein.
+            not_blank: Bitte geben Sie einen Code für die Kundengruppe ein.
+        name:
+            max: Der Name der Kundengruppe darf nicht länger als {{ limit }} Zeichen sein.
+            min: Der Name der Kundengruppe muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie einen Namen für die Kundengruppe ein.

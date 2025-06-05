@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @implements ExampleFactoryInterface<ProductAssociationInterface> */
 class ProductAssociationExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory
@@ -33,9 +33,9 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
      * @param ProductRepositoryInterface<ProductInterface> $productRepository
      */
     public function __construct(
-        private readonly FactoryInterface $productAssociationFactory,
-        private readonly ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
-        private readonly ProductRepositoryInterface $productRepository,
+        protected readonly FactoryInterface $productAssociationFactory,
+        protected readonly ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
+        protected readonly ProductRepositoryInterface $productRepository,
     ) {
         $this->optionsResolver = new OptionsResolver();
 

@@ -1,0 +1,21 @@
+sylius:
+    form:
+        customer:
+            first_name: First name
+            group: Group
+            last_name: Last name
+            email: Email
+            phone_number: Phone number
+            gender: Gender
+            birthday: Birthday
+            billing_address: Billing address
+            different_shipping_address: Use different address for shipping?
+            only_customer_registration: Create account?
+            subscribed_to_newsletter: Subscribe to the newsletter
+        customer_group:
+            name: Name
+            roles: Roles
+    gender:
+        unknown: Unknown
+        male: Male
+        female: Female

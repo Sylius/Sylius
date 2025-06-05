@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'パスワードリセットのトークンの有効期限が切れています。'
+    account:
+        invalid_verification_token: '%verificationToken% のメール認証トークンを持つショップユーザーは存在しません。'
+        is_verified: 'メールアドレス %email% のアカウントはすでに確認済みです。'
+    address:
+        without_country: '国が指定されていない住所は存在できません。'
+    code:
+        not_blank: 'コードを入力してください。'
+        invalid: 'コードは英数字、ハイフン（"-"）、アンダースコア（"_"）のみを使用できます。'
+    contact_request:
+        email_is_invalid: '入力されたメールアドレスは無効です。'
+    country:
+        not_exist: '国コード %countryCode% の国は存在しません。'
+    date_interval:
+        empty: '日付の範囲を空にすることはできません。'
+        invalid: '日付の範囲は有効な ISO 8601 のインターバルではありません。'
+    date_time:
+        invalid: '日付と時刻は ISO 8601 の形式（Y-m-d\TH:i:s）である必要があります。'
+    order:
+        not_empty: '空の注文は処理できません。'
+    payment:
+        not_found: '指定された支払いは存在しません。'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'キャンセルされた注文の支払い方法は変更できません。'
+        not_available: '支払い方法 %name% はこの注文では利用できません。別の方法を選択してください。'
+        not_exist: 'コード %code% の支払い方法は存在しません。'
+    payment_request:
+        action_not_available: '支払いリクエスト（メソッドコード：%code%、支払いID：%id%）にはハンドラーがありません。別の支払い方法を選択してください。'
+        not_available: 'この支払いリクエストはこの操作をサポートしていません。'
+    product:
+        not_exist: '商品 %productName% は存在しません。'
+    product_variant:
+        not_exist: '商品バリエーション %productVariantCode% は存在しません。'
+        not_longer_available: '名前が %productVariantName% の商品バリエーションは存在しません。'
+        not_sufficient: 'コード %productVariantCode% の商品バリエーションは在庫が不足しています。'
+        product_variant_with_name_not_sufficient: '名前が %productVariantName% の商品バリエーションは在庫が不足しています。'
+        option_values:
+            single_value: '商品バリエーションには、各オプションにつき1つの値しか設定できません。'
+    reset_password:
+        invalid_token: 'パスワードリセットトークン %token% は無効です。'
+        token_expired: 'パスワードリセットトークンの有効期限が切れています。'
+    shipment:
+        not_found: '配送は存在しません。'
+        shipped: 'すでに出荷済みの配送は再度出荷できません。'
+    shipping_method:
+        not_found: 'コード %code% の配送方法は存在しません。'
+        not_available: '配送方法 %name% はこの注文では利用できません。別の方法を再選択してください。'
+        shipping_address_not_found: '注文にはまず配送先住所が必要です。'
+    statistics:
+        end_date:
+            invalid: '開始日は終了日より前でなければなりません。'

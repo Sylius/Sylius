@@ -31,9 +31,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @implements ExampleFactoryInterface<CatalogPromotionInterface> */
 class CatalogPromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<CatalogPromotionInterface> $catalogPromotionFactory
@@ -43,11 +43,11 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
      * @param ExampleFactoryInterface<CatalogPromotionScopeInterface> $catalogPromotionScopeExampleFactory
      */
     public function __construct(
-        private readonly FactoryInterface $catalogPromotionFactory,
-        private readonly RepositoryInterface $localeRepository,
-        private readonly ChannelRepositoryInterface $channelRepository,
-        private readonly ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
-        private readonly ExampleFactoryInterface $catalogPromotionActionExampleFactory,
+        protected readonly FactoryInterface $catalogPromotionFactory,
+        protected readonly RepositoryInterface $localeRepository,
+        protected readonly ChannelRepositoryInterface $channelRepository,
+        protected readonly ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
+        protected readonly ExampleFactoryInterface $catalogPromotionActionExampleFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

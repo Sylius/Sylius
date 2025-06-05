@@ -21,11 +21,13 @@
             <group>sylius:admin:product_option:show</group>
             <group>sylius:admin:product_option:create</group>
             <group>sylius:shop:product_option:show</group>
+            <group>sylius:shop:product_option:index</group>
         </attribute>
         <attribute name="name">
             <group>sylius:admin:product_option:index</group>
             <group>sylius:admin:product_option:show</group>
             <group>sylius:shop:product_option:show</group>
+            <group>sylius:shop:product_option:index</group>
         </attribute>
         <attribute name="createdAt">
             <group>sylius:admin:product_option:index</group>

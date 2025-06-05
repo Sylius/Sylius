@@ -1,0 +1,13 @@
+sylius:
+    form:
+        tax_category:
+            description: Description
+            name: Name
+        tax_rate:
+            amount: Amount
+            calculator: Calculator
+            category: Category
+            end_date: End date
+            included_in_price: Included in price?
+            name: Name
+            start_date: Start date

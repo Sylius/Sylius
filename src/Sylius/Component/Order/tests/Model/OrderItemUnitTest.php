@@ -22,7 +22,7 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 final class OrderItemUnitTest extends TestCase
 {
-    private OrderItemInterface&MockObject $orderItem;
+    private MockObject&OrderItemInterface $orderItem;
 
     private OrderItemUnit $orderItemUnit;
 
@@ -99,7 +99,8 @@ final class OrderItemUnitTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 
@@ -145,7 +146,8 @@ final class OrderItemUnitTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 
@@ -186,7 +188,8 @@ final class OrderItemUnitTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 

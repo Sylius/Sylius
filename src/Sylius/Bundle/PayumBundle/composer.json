@@ -41,7 +41,6 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/phpspec": "^7.5",
         "phpunit/phpunit": "^10.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
@@ -65,8 +64,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\PayumBundle\\Tests\\": "Tests/"
+            "Tests\\Sylius\\Bundle\\PayumBundle\\": "tests/"
         }
     },
     "repositories": [

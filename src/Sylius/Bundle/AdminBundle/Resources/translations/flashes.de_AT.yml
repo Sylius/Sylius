@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        order_confirmation_resent: 'Die Bestellbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
+        shipment_confirmation_resent: 'Die Versandbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
+    product_variant:
+        cannot_generate_variants: 'Varianten können für ein Produkt ohne Optionen nicht erstellt werden.'

@@ -27,20 +27,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @implements ExampleFactoryInterface<AdminUserInterface> */
 class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<AdminUserInterface> $userFactory
      * @param FactoryInterface<ImageInterface> $avatarImageFactory
      */
     public function __construct(
-        private readonly FactoryInterface $userFactory,
-        private readonly string $localeCode,
-        private readonly FileLocatorInterface $fileLocator,
-        private readonly ImageUploaderInterface $imageUploader,
-        private readonly FactoryInterface $avatarImageFactory,
+        protected readonly FactoryInterface $userFactory,
+        protected readonly string $localeCode,
+        protected readonly FileLocatorInterface $fileLocator,
+        protected readonly ImageUploaderInterface $imageUploader,
+        protected readonly FactoryInterface $avatarImageFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

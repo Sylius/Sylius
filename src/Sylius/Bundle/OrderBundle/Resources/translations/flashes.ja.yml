@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    cart:
+        add_item: '商品がカートに追加されました。'
+        cannot_modify: 'このカートにはすでに注文が送信されているため、変更できません。'
+        not_recalculated: 'カート内に無効な値が含まれているため、再計算されませんでした。'
+        remove_item: '商品がカートから削除されました。'
+        save: 'カートが正常に更新されました。'

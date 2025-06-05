@@ -38,7 +38,6 @@
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "nelmio/alice": "^3.13",
         "phparkitect/phparkitect": "^0.6",
-        "phpspec/phpspec": "^7.5",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^10.5",
         "symfony/browser-kit": "^6.4 || ^7.2",
@@ -66,14 +65,13 @@
         },
         "exclude-from-classmap": [
             "spec/",
-            "Tests/"
+            "tests/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Sylius\\Bundle\\ApiBundle\\": "spec/",
-            "Sylius\\Bundle\\ApiBundle\\Application\\": "Tests/Application/src/",
-            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
+            "Sylius\\Bundle\\ApiBundle\\Application\\": "tests/Application/src/",
+            "Tests\\Sylius\\Bundle\\ApiBundle\\": "tests/"
         }
     },
     "repositories": [

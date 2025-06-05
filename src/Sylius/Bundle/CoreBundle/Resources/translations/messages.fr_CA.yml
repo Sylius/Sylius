@@ -1,0 +1,287 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        admin_password_reset:
+            hello: 'Bonjour'
+            subject: 'Réinitialisation du mot de passe de l’administrateur'
+            reset_your_password: 'Réinitialisez votre mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton pour réinitialiser votre mot de passe est'
+        contact_request:
+            content: 'Message'
+            message_from: 'Message de'
+            subject: 'Demande de contact'
+        order_confirmation:
+            has_been_successfully_placed: 'a été passée avec succès.'
+            subject: 'Confirmation de commande'
+            view_order_or_change_payment_method: 'Voir la commande ou changer le mode de paiement'
+            thank_you: 'Merci d’avoir acheté dans notre boutique !'
+            your_order_number: 'Votre numéro de commande'
+        password_reset:
+            hello: 'Bonjour'
+            reset_your_password: 'Réinitialisez votre mot de passe'
+            subject: 'Réinitialisation du mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton pour réinitialiser votre mot de passe est'
+        shipment_confirmation:
+            has_been_sent_using: 'a été envoyé en utilisant'
+            subject: 'Confirmation d’expédition'
+            thank_you_for_transaction: 'Merci pour votre transaction réussie.'
+            you_can_check_its_location_with_the_tracking_code: 'Vous pouvez suivre sa progression avec le code de suivi %tracking_code%.'
+            your_order_with_number: 'Votre commande numéro'
+        user_registration:
+            start_shopping: 'Commencer à magasiner'
+            subject: 'Inscription de l’utilisateur'
+            welcome_to_our_store: 'Bienvenue dans notre boutique !'
+            you_have_just_been_registered: 'Vous venez d’être inscrit(e). Merci'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead
+        verification_token:
+            hello: 'Bonjour'
+            message: 'Vérifiez votre compte avec le jeton : '
+            subject: 'Vérification de l’adresse courriel'
+            to_verify_your_email_address: 'Pour vérifier votre adresse courriel - cliquez sur le lien ci-dessous'
+            verify_your_email_address: 'Vérifiez votre adresse courriel'
+        user:
+            account_verification:
+                greeting: 'Bonjour'
+                message: 'Vérifiez votre compte avec le jeton : '
+                statement: 'Vérifiez votre adresse courriel'
+                strategy: 'Pour vérifier votre adresse courriel - cliquez sur le lien ci-dessous'
+                subject: 'Vérification de l’adresse courriel'
+    form:
+        block:
+            body: Corps
+            id: ID
+            title: Titre
+        cart:
+            coupon: Code promo
+        catalog_promotion:
+            channels: Canaux
+            scope:
+                for_products: Pour les produits
+                for_taxons: Pour les taxons
+                for_variants: Pour les variantes
+        checkout:
+            addressing:
+                different_billing_address: Utiliser une adresse différente pour la facturation ?
+                different_shipping_address: Utiliser une adresse différente pour la livraison ?
+            payment_method: Méthode de paiement
+            shipping_method: Méthode de livraison
+        promotion:
+            channels: Canaux
+        promotion_action:
+            add_product_configuration:
+                product: Produit
+        promotion_coupon:
+            per_customer_usage_limit: Limite d’utilisation par client
+            reusable_from_cancelled_orders: Réutilisable après commandes annulées
+        group:
+            name: Nom
+            roles: Rôles
+        channel:
+            billing_data:
+                city: Ville
+                company: Compagnie
+                country: Pays
+                postcode: Code postal
+                street: Rue
+                tax_id: N° de TPS/TVQ
+            contact_email: Courriel de contact
+            contact_phone_number: Numéro de téléphone de contact
+            countries: Pays
+            currencies: Devises
+            currency_base: Devise de base
+            account_verification_required: Vérification de compte requise ?
+            hostname: Nom d’hôte
+            locale_default: Paramètre régional par défaut
+            locales: Paramètres régionaux
+            menu_taxon: Taxon de menu
+            payment_methods: Méthodes de paiement
+            shipping_address_in_checkout_required: Adresse de livraison requise au paiement
+            shipping_methods: Méthodes de livraison
+            shop_billing_data: Infos de facturation de la boutique
+            skipping_shipping_step_allowed: Ignorer l’étape de livraison si une seule méthode est disponible ?
+            skipping_payment_step_allowed: Ignorer l’étape de paiement si une seule méthode est disponible ?
+            tax_calculation_strategy: Stratégie de calcul des taxes
+            tax_zone_default: Zone de taxes par défaut
+            taxonomies: Taxonomies
+            theme: Thème
+        image:
+            type: Type
+            file: Image
+        locale:
+            code: Code
+            enabled: Activé
+        order_filter:
+            created_at_from: Créé après le
+            created_at_to: Créé avant le
+            number: Numéro
+            total_from: De
+            total_to: À
+            payment_state: État du paiement
+            channel: Tous les canaux
+        page:
+            body: Corps
+            id: ID
+            title: Titre
+        product:
+            images: Images
+            restricted_zone: Zone restreinte
+            short_description: Description courte
+            variant_selection_method: Méthode de sélection de variante
+            main_taxon: Taxon principal
+            channels: Canaux
+            enabled: Activé
+        product_filter:
+            name: Nom
+            code: Code
+        product_variant:
+            tax_category: Catégorie de taxe
+            shipping_category: Catégorie de livraison
+        shipment_filter:
+            created_at_from: De
+            created_at_to: À
+            number: Numéro de commande
+            shipping_address: Adresse de livraison
+            channel: Tous les canaux
+        payment_filter:
+            created_at_from: De
+            created_at_to: À
+            number: Numéro de commande
+            billing_address: Adresse de facturation
+            channel: Tous les canaux
+        shipping_method:
+            zone: Zone
+        taxon:
+            code: Code
+            file: Choisir une image
+            images: Images
+        taxonomy:
+            file: Choisir une image
+        user:
+            billing_address: Adresse de facturation
+            different_shipping_address: Utiliser une adresse différente pour la livraison ?
+            enabled: Activé
+            first_name: Prénom
+            groups: Groupes
+            roles: Rôles
+            last_name: Nom
+            password: Mot de passe
+            shipping_address: Adresse de livraison
+        user_filter:
+            query: Rechercher
+        variant:
+            depth: Profondeur
+            height: Hauteur
+            on_hand: Quantité en stock
+            price: Prix
+            sku: SKU
+            shipping_required: Livraison requise ?
+            weight: Poids
+            width: Largeur
+            tracked_help: Si activé, Sylius suivra le stock et arrêtera la vente à zéro inventaire.
+        attribute:
+            product_attribute_value:
+                attribute: Attribut
+                value: Valeur
+        guest:
+            email: Courriel
+        product_association:
+            product: Produits associés
+            type: Type d’association
+        product_association_type:
+            name: Nom
+        promotion_filter:
+            products: Filtre de produits
+            taxons: Filtre de taxons
+        promotion_rule:
+            customer_group:
+                group: Groupe de clients
+            has_taxon:
+                taxons: Taxons
+            product:
+                products: Produits
+            total_of_items_from_taxon:
+                taxon: Taxon
+                amount: Montant
+        payment_method:
+            channels: Canaux
+        product_attribute:
+            position: Position
+        zone:
+            scopes:
+                shipping: Livraison
+                tax: Taxes
+    installer:
+        extensions:
+            header: Extensions
+            accelerator:
+                header: Accélérateur
+                help: Activez Zend OpCache (hautement recommandé).
+            apc: APC
+            ctype: CType
+            gd: GD
+            help: Installez et activez l’extension %extension%.
+            iconv: Iconv
+            exif: EXIF
+            fileinfo: Informations sur les fichiers
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Chaînes multioctets
+            off: désactivé
+            on: activé
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Analyseur de code PHP
+        filesystem:
+            header: Système de fichiers
+            cache:
+                header: Cache
+                help: "Pour définir les permissions : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: Existe
+            logs:
+                header: journaux
+                help: "Pour définir les permissions : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: N’existe pas
+            not_writable: non inscriptible
+            parameters:
+                header: parameters.yml
+                help: "Pour définir les permissions : sudo chmod a+w %path%"
+            vendors: vendors
+            writable: inscriptible
+        settings:
+            header: Paramètres et version de PHP
+            any: N’importe quel
+            detect_unicode: detect_unicode
+            detect_unicode_help: Définissez 'detect_unicode = Off' dans votre fichier php.ini
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: Non obsolète
+            off: désactivé
+            on: activé
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+                auto_start_help: Définissez 'session.auto_start = Off' dans votre fichier php.ini
+            short_open_tag: short_open_tag
+            timezone: fuseau horaire
+            timezone_help: Définissez 'date.timezone' dans votre php.ini (ex date.timezone = "America/Montreal")
+            timezone_deprecated:
+                header: Fuseau horaire obsolète
+                help: Le fuseau horaire %timezone% est déconseillé. Modifiez votre php.ini (liste http://php.net/manual/fr/timezones.others.php)
+            version: Version de PHP
+            version_recommended: Version PHP recommandée
+            version_help: Sylius recommande la version %recommended% de PHP. La vôtre est %current%. Veuillez mettre à jour.
+    payum_gateway:
+        cash_on_delivery: Paiement à la livraison
+        offline: Hors ligne
+        paypal_express_checkout: Paiement via PayPal Express
+    shipping_method_resolver:
+        by_zones_and_channel: Par zones et canal

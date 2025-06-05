@@ -1,0 +1,7 @@
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {, 1 item} other {, # items}}'
+        lowest_price_days_before_discount_was: '{days, plural, 
+            one {The lowest price from # day prior to the current discount was {price}} 
+            other {The lowest price from # days prior to the current discount was {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {This customer has not placed any order} one {This customer has placed one order} other {Overall, this customer has placed # orders across all channels}}'

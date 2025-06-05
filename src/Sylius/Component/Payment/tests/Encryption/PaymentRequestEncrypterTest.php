@@ -22,16 +22,12 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class PaymentRequestEncrypterTest extends TestCase
 {
-    /**
-     * @var EncrypterInterface&MockObject
-     */
+    /** @var EncrypterInterface&MockObject */
     private MockObject $encrypter;
 
     private PaymentRequestEncrypter $paymentRequestEncrypter;
 
-    /**
-     * @var PaymentRequestInterface&MockObject
-     */
+    /** @var PaymentRequestInterface&MockObject */
     private MockObject $paymentRequest;
 
     protected function setUp(): void

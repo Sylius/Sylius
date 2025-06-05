@@ -1,9 +1,10 @@
 {% if hookable_metadata.context.locale_code is defined %}
     {% set locale_code = hookable_metadata.context.locale_code %}
     {% set attributes = hookable_metadata.context.attributes %}
+    {% set loop = hookable_metadata.context.loop %}
 
-    <div id="translation-{{ locale_code }}" class="accordion-collapse collapse" data-bs-parent="#attribute-translations">
-        <div class="accordion-body bg-gray-400">
+    <div id="translation-{{ locale_code }}-attributes" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#attribute-translations">
+        <div class="accordion-body bg-gray-100">
             <div class="card mb-3 mx-md-5">
                 <div class="card-header">
                     <div class="card-title">{{ 'sylius.ui.content'|trans }}</div>

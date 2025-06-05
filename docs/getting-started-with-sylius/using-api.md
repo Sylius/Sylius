@@ -14,7 +14,7 @@ layout:
 
 # Using API
 
-Since Sylius 1.8, we have offered a new API based on ApiPlatform. Below are examples of how to use the API for basic shop operations. **Public API documentation is available** [**here**](https://master-ce.demo.sylius.com/api/v2/docs)**.**
+Log inSince Sylius 1.8, we have offered a new API based on ApiPlatform. Below are examples of how to use the API for basic shop operations. **Public API documentation is available** [**here**](https://v2.demo.sylius.com/api/v2/docs)**.**
 
 ## Register a customer
 
@@ -22,29 +22,29 @@ To register a new customer, send a single `POST` request:
 
 ```bash
 curl -X 'POST' \
-    'https://master-ce.demo.sylius.com/api/v2/shop/customers' \
-    -H 'accept: */*' \
-    -H 'Content-Type: application/ld+json' \
-    -d '{
+  'https://v2.demo.sylius.com/api/v2/shop/customers' \
+  -H 'accept: application/ld+json' \
+  -H 'Content-Type: application/ld+json' \
+  -d '{
         "firstName": "shop",
         "lastName": "user",
         "email": "shop.user@example.com",
         "password": "pa$$word",
         "subscribedToNewsletter": true
-    }'
+}'
 ```
 
 If the response status is **204**, the customer was registered successfully.
 
-<figure><img src="../.gitbook/assets/api_platform_shop_customer_post.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2025-06-02 at 21.07.12.png" alt=""><figcaption></figcaption></figure>
 
-### Login to the shop
+### Log in to the shop
 
 After registering a customer, you can log in to obtain an authentication token, which is required to access more shop endpoints.
 
 ```bash
 curl -X 'POST' \
-    'https://master-ce.demo.sylius.com/api/v2/shop/customers/token' \
+    'https://v2.demo.sylius.com/api/v2/shop/customers/token' \
     -H 'accept: application/json' \
     -H 'Content-Type: application/json' \
     -d '{
@@ -79,7 +79,7 @@ curl -X 'METHOD' \
 
 Once the customer is authorized, you can start interacting with products, carts, and orders via the API. Below are the typical operations:
 
-### Adding product to cart
+### Adding a product to the cart
 
 **Create a Cart:**
 
@@ -87,7 +87,7 @@ You can create a cart for a logged-in customer by sending a `POST` request:
 
 ```bash
 curl -X 'POST' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders' \
   -H 'accept: application/ld+json' \
   -H 'Content-Type: application/ld+json' \
   -H 'Authorization: Bearer token' \
@@ -112,7 +112,7 @@ First, retrieve a product variant by sending a `GET` request:
 
 ```bash
 curl -X 'GET' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/product-variants?page=1&itemsPerPage=30' \
+  'https://v2.demo.sylius.com/api/v2/shop/product-variants?page=1&itemsPerPage=30' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token'
 ```
@@ -148,7 +148,7 @@ Use the `@id` of the desired variant, and add it to the cart:
 
 ```bash
 curl -X 'PATCH' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/items' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/items' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token' \
   -H 'Content-Type: application/merge-patch+json' \
@@ -188,7 +188,7 @@ To change the quantity of a product already added to the cart, use the following
 
 ```bash
 curl -X 'PATCH' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders/OPzFiAWefi/items/59782' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders/OPzFiAWefi/items/59782' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token' \
   -H 'Content-Type: application/merge-patch+json' \
@@ -213,7 +213,7 @@ Add the customer's billing and shipping address by sending a `PATCH` request:
 
 ```bash
 curl -X 'PATCH' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/address' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/address' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token' \
   -H 'Content-Type: application/merge-patch+json' \
@@ -244,7 +244,7 @@ First, get the available shipping and payment methods:
 
 ```bash
 curl -X 'GET' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token'
 ```
@@ -274,7 +274,7 @@ Use the methods' `@id` in the next steps.
 
 ```bash
 curl -X 'PATCH' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/shipments/17768' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/shipments/17768' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token' \
   -H 'Content-Type: application/merge-patch+json' \
@@ -289,7 +289,7 @@ curl -X 'PATCH' \
 
 ```bash
 curl -X 'PATCH' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders/{cartToken}/payments/{paymentId}' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders/{cartToken}/payments/{paymentId}' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token' \
   -H 'Content-Type: application/merge-patch+json' \
@@ -304,7 +304,7 @@ Finally, complete the order by sending the following request:
 
 ```bash
 curl -X 'PATCH' \
-  'https://master-ce.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/complete' \
+  'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/complete' \
   -H 'accept: application/ld+json' \
   -H 'Authorization: Bearer token' \
   -H 'Content-Type: application/merge-patch+json' \
@@ -331,4 +331,4 @@ The response status **200** confirms the order completion, with the `checkoutSta
 
 #### Final Output
 
-The full checkout process has now been completed using Sylius API. With this API, you can create a fully functional shop frontend based on Sylius' backend logic.
+The full checkout process has now been completed using the Sylius API. With this API, you can create a fully functional shop frontend based on Sylius' backend logic.

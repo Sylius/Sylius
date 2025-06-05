@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
-            author: Forfatter
-            comment: Kommentar
-            header: Skriv en anmeldelse
-            rating: Rangering
+            author: 'Forfatter'
+            comment: 'Kommentar'
+            header: 'Legg til en anmeldelse'
+            rating: 'Vurdering'
             status:
-                approved: Godkjent
-                label: Status
-                new: Ny
-                rejected: Avvist
-            submit: Send inn
-            title: Tittel
+                approved: 'Godkjent'
+                label: 'Status'
+                new: 'Ny'
+                rejected: 'Avvist'
+            submit: 'Send inn'
+            title: 'Tittel'

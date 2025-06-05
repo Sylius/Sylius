@@ -3,4 +3,4 @@
 
 sylius:
     product_variant:
-        generate: '单品已经成功生成.'
+        generate: '产品变体已成功生成。'

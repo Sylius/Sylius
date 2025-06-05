@@ -9,7 +9,7 @@ sylius:
             not_registered: En användare med denna e-post finns inte. Vänligen registrera dig först.
         plainPassword:
             not_blank: Var god ange ditt lösenord.
-            mismatch: De angivna lösenorden matchar inte
+            mismatch: De angivna lösenorden matchar inte.
             wrong_current: Angivet lösenord skiljer sig från det nuvarande lösenordet.
         password:
             min: Lösenordet måste vara minst {{ limit }} tecken långt.

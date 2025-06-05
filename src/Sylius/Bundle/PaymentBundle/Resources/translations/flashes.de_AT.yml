@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    payment:
+        authorized: 'Die Zahlung wurde erfolgreich autorisiert.'
+        cancelled: 'Die Zahlung wurde storniert.'
+        completed: 'Die Zahlung wurde erfolgreich abgeschlossen.'
+        failed: 'Die Zahlung ist fehlgeschlagen.'
+        processing: 'Die Zahlung wird derzeit verarbeitet.'
+        refunded: 'Die Zahlung wurde erfolgreich rückerstattet.'
+        unknown: 'Es ist ein unbekanntes Problem bei der Zahlung aufgetreten.'

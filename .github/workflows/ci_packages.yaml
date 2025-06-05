@@ -44,7 +44,7 @@ jobs:
     test:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}${{ matrix.orm != '' && format(', ORM {0}', matrix.orm) || '' }}"
         timeout-minutes: 25
 
         strategy:
@@ -54,6 +54,7 @@ jobs:
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
+            DOCTRINE_ORM_VERSION: "${{ matrix.orm }}"
             UNSTABLE: "no"
 
         steps:

@@ -28,7 +28,7 @@ final class OrderItemTest extends TestCase
 {
     private OrderItem $orderItem;
 
-    private OrderInterface&MockObject $order;
+    private MockObject&OrderInterface $order;
 
     private AdjustmentInterface&MockObject $itemAdjustment;
 
@@ -38,9 +38,9 @@ final class OrderItemTest extends TestCase
 
     private AdjustmentInterface&MockObject $unitAdjustment3;
 
-    private OrderItemUnitInterface&MockObject $unit1;
+    private MockObject&OrderItemUnitInterface $unit1;
 
-    private OrderItemUnitInterface&MockObject $unit2;
+    private MockObject&OrderItemUnitInterface $unit2;
 
     private AdjustmentInterface&MockObject $taxAdjustment1;
 
@@ -198,6 +198,7 @@ final class OrderItemTest extends TestCase
 
         $this->assertCount(3, $adjustments);
     }
+
     public function testAddsAndRemovesUnits(): void
     {
         $this->unit1->expects($this->once())->method('getOrderItem')->willReturn($this->orderItem);
@@ -274,7 +275,8 @@ final class OrderItemTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 
@@ -354,7 +356,8 @@ final class OrderItemTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 
@@ -380,7 +383,8 @@ final class OrderItemTest extends TestCase
                 } elseif ($callIndex === 1) {
                     $this->assertNull($arg);
                 }
-                $callIndex++;
+                ++$callIndex;
+
                 return true;
             }));
 

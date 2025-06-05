@@ -1,0 +1,7 @@
+sylius:
+    locale:
+        code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
+            not_blank: Var god välj en språkkod.
+            locale: Värdet är inte en giltig språkkod.
+            unique: Språkkoden måste vara unik.

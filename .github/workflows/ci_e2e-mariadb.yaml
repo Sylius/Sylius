@@ -106,7 +106,7 @@ jobs:
                     legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: "20.x"
+                    node_version: "24.x"
                     chrome_version: stable
 
             -   name: Run PHPUnit

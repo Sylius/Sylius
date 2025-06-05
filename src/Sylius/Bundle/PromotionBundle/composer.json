@@ -37,15 +37,12 @@
         "symfony/framework-bundle": "^6.4.1 || ^7.2"
     },
     "conflict": {
-        "doctrine/orm": ">= 3.0",
         "phpstan/phpdoc-parser": ">= 2.0"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2.18 || ^3.3",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/phpspec": "^7.5",
-        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^10.5",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
@@ -72,8 +69,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Sylius\\Bundle\\PromotionBundle\\": "Tests/",
-            "AppBundle\\": "test/src/AppBundle/"
+            "Tests\\Sylius\\Bundle\\PromotionBundle\\": "tests/",
+            "App\\": "test/src/"
         },
         "classmap": [
             "test/app/AppKernel.php"

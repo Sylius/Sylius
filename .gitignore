@@ -2,7 +2,6 @@
 /behat.yml
 /composer.lock
 /docker-compose.override.yml
-/phpspec.yml
 /public/media
 !/public/media/image/.gitkeep
 ###< project files ###

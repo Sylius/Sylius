@@ -1,5 +1,3 @@
-/spec export-ignore
-/Tests export-ignore
-/phpspec.yml.dist export-ignore
+/tests export-ignore
 /.gitattributes export-ignore
 /.gitignore export-ignore

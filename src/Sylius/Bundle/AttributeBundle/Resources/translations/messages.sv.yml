@@ -4,7 +4,7 @@
 sylius:
     form:
         attribute:
-            add: Lägg tilll
+            add: Lägg till
             add_attributes: Lägg till attribut
             choices: Val
             code: Kod
@@ -29,11 +29,11 @@ sylius:
             date:
                 format: Format
             select:
-                multiple: Multipla
+                multiple: Flera val möjliga
                 values: Värden
                 choose: Välj ett alternativ
-                min: Min poster
-                max: Max poster
+                min: Min antal poster
+                max: Max antal poster
             text:
-                min: Minimal längd
-                max: Maximal längd
+                min: Minsta längd
+                max: Största längd

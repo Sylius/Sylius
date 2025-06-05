@@ -26,7 +26,16 @@
             "name": "Cap",
             "description": null,
             "slug": "cap",
-            "defaultVariant": "\/api\/v2\/shop\/product-variants\/CAP_RED"
+            "defaultVariant": "\/api\/v2\/shop\/product-variants\/CAP_RED",
+            "defaultVariantData": {
+                "@id": "\/api\/v2\/shop\/product-variants\/CAP_RED",
+                "@type": "ProductVariant",
+                "name": null,
+                "inStock": true,
+                "price": 2000,
+                "originalPrice": 2000,
+                "lowestPriceBeforeDiscount": null
+            }
         },
         {
             "@id": "\/api\/v2\/shop\/products\/MUG",
@@ -69,7 +78,16 @@
             "name": "Mug",
             "description": "@string@",
             "slug": "mug",
-            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "defaultVariantData": {
+                "@id": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+                "@type": "ProductVariant",
+                "name": "Blue Mug",
+                "inStock": true,
+                "price": 2000,
+                "originalPrice": 3000,
+                "lowestPriceBeforeDiscount": null
+            }
         },
         {
             "@id": "\/api\/v2\/shop\/products\/SOCKS",
@@ -92,13 +110,14 @@
             "description": null,
             "slug": "socks",
             "associations": [],
-            "defaultVariant": null
+            "defaultVariant": null,
+            "defaultVariantData": null
         }
     ],
     "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon}",
+        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon,association[typeCode],association[ownerCode]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -153,6 +172,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "taxon",
                 "property": null,
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[typeCode]",
+                "property": "association",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[ownerCode]",
+                "property": "association",
                 "required": false
             }
         ]

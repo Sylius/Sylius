@@ -31,9 +31,7 @@ final class CompositeMethodsResolverTest extends TestCase
 
     private MockObject $secondMethodsResolver;
 
-    /**
-     * @var PaymentInterface&MockObject
-     */
+    /** @var PaymentInterface&MockObject */
     private MockObject $payment;
 
     protected function setUp(): void
@@ -76,7 +74,7 @@ final class CompositeMethodsResolverTest extends TestCase
 
         $this->assertSame(
             [$paymentMethodMock],
-            $this->compositeMethodsResolver->getSupportedMethods($this->payment)
+            $this->compositeMethodsResolver->getSupportedMethods($this->payment),
         );
     }
 
@@ -99,7 +97,7 @@ final class CompositeMethodsResolverTest extends TestCase
 
         $this->assertSame(
             [],
-            $this->compositeMethodsResolver->getSupportedMethods($this->payment)
+            $this->compositeMethodsResolver->getSupportedMethods($this->payment),
         );
     }
 

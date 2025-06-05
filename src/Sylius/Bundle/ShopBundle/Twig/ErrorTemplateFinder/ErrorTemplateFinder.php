@@ -32,12 +32,13 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
 
         if ($section instanceof ShopSection) {
             $template = sprintf('@SyliusShop/errors/error%s.html.twig', $statusCode);
-            if ($this->twig->getLoader()->exists($template)) {
+            $loader = $this->twig->getLoader();
+            if ($loader->exists($template)) {
                 return $template;
             }
 
             $template = '@SyliusShop/errors/error.html.twig';
-            if ($this->twig->getLoader()->exists($template)) {
+            if ($loader->exists($template)) {
                 return $template;
             }
         }

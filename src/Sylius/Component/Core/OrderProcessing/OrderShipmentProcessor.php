@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -86,7 +87,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         Assert::isInstanceOf($order, OrderInterface::class);
 
         foreach ($order->getItemUnits() as $itemUnit) {
-            if (null === $itemUnit->getShipment()) {
+            /** @var ProductVariantInterface $shippable */
+            $shippable = $itemUnit->getShippable();
+
+            if (null === $itemUnit->getShipment() && $shippable->isShippingRequired()) {
                 $shipment->addUnit($itemUnit);
             }
         }

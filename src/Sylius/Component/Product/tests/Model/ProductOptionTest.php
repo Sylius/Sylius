@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Model;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Model\ProductOption;
 use Sylius\Component\Product\Model\ProductOptionValue;
@@ -23,7 +23,7 @@ final class ProductOptionTest extends TestCase
 {
     private ProductOption $productOption;
 
-    private ProductOptionValue&MockObject $productOptionValue;
+    private MockObject&ProductOptionValue $productOptionValue;
 
     protected function setUp(): void
     {

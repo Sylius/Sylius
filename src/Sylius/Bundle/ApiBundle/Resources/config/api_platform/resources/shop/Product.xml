@@ -34,6 +34,7 @@
                     <filter>sylius_api.price_order_filter.shop.product</filter>
                     <filter>sylius_api.name_with_locale_order_filter.shop.translatable</filter>
                     <filter>sylius_api.taxon_search_filter.shop.product</filter>
+                    <filter>sylius_api.search_filter.shop.products_by_association</filter>
                 </filters>
                 <order>
                     <values>

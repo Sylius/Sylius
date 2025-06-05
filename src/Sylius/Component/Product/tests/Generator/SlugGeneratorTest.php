@@ -35,11 +35,11 @@ final class SlugGeneratorTest extends TestCase
     {
         $this->assertSame(
             'cyclades',
-            $this->slugGenerator->generate('Cyclades')
+            $this->slugGenerator->generate('Cyclades'),
         );
         $this->assertSame(
             'small-world',
-            $this->slugGenerator->generate('Small World')
+            $this->slugGenerator->generate('Small World'),
         );
     }
 
@@ -47,15 +47,15 @@ final class SlugGeneratorTest extends TestCase
     {
         $this->assertSame(
             'ticket-to-ride-europe',
-            $this->slugGenerator->generate('"Ticket to Ride: Europe"')
+            $this->slugGenerator->generate('"Ticket to Ride: Europe"'),
         );
         $this->assertSame(
             'tzolk-in-the-mayan-calendar',
-            $this->slugGenerator->generate('Tzolk\'in: The Mayan Calendar')
+            $this->slugGenerator->generate('Tzolk\'in: The Mayan Calendar'),
         );
         $this->assertSame(
             'game-of-thrones-the-board-game',
-            $this->slugGenerator->generate('Game of Thrones: The Board Game')
+            $this->slugGenerator->generate('Game of Thrones: The Board Game'),
         );
     }
 
@@ -63,7 +63,7 @@ final class SlugGeneratorTest extends TestCase
     {
         $this->assertSame(
             'wsiasc-do-pociagu-europa',
-            $this->slugGenerator->generate('Wsiąść do Pociągu: Europa')
+            $this->slugGenerator->generate('Wsiąść do Pociągu: Europa'),
         );
     }
 }

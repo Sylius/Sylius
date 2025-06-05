@@ -63,17 +63,18 @@
 {% endmacro %}
 
 {% macro accordion_header(locale, accordion_id, is_first = false) %}
-    <h2 class="accordion-header">
-        <button
-            class="accordion-button {% if is_first == false %}collapsed{% endif %}"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#translation-{{ accordion_id }}-{{ locale }}"
-            aria-expanded="{% if is_first %}true{% else %}false{% endif %}"
-            aria-controls="translation-{{ accordion_id }}-{{ locale }}"
-            {{ sylius_test_html_attribute( accordion_id ~ '-accordion', locale) }}
-        >
-            {{ locale|sylius_locale_name }}
-        </button>
-    </h2>
+    <button
+        class="accordion-button {% if is_first == false %}collapsed{% endif %}"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#translation-{{ accordion_id }}-{{ locale }}"
+        aria-expanded="{% if is_first %}true{% else %}false{% endif %}"
+        aria-controls="translation-{{ accordion_id }}-{{ locale }}"
+        {{ sylius_test_html_attribute( accordion_id ~ '-accordion', locale) }}
+    >
+        {{ locale|sylius_locale_name }}
+        <div class="accordion-button-toggle">
+            {{ ux_icon('tabler:chevron-down') }}
+        </div>
+    </button>
 {% endmacro %}

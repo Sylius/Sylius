@@ -16,9 +16,9 @@ sylius:
             only_customer_registration: Créer un compte ?
             subscribed_to_newsletter: S'abonner à la newsletter
         customer_group:
-            name: Nom
+            name: Nom du groupe
             roles: Rôles
     gender:
         unknown: Inconnu
-        male: Masculin
-        female: Féminin
+        male: Homme
+        female: Femme

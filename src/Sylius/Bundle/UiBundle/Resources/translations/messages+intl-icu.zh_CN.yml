@@ -1,0 +1,7 @@
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {，1 件商品} other {，# 件商品}}'
+        lowest_price_days_before_discount_was: '{days, plural, 
+            one {当前折扣前 # 天的最低价格是 {price}} 
+            other {当前折扣前 # 天的最低价格是 {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {该客户尚未下任何订单} one {该客户已下过一笔订单} other {该客户在所有渠道共下过 # 笔订单}}'

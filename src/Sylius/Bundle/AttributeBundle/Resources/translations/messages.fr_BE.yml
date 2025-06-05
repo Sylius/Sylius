@@ -1,0 +1,41 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        attribute:
+            add: Ajouter
+            add_attributes: Ajouter des attributs
+            choices: Choix
+            code: Code
+            name: Nom
+            translatable: Traduisible
+            translations: Traductions
+            type: Type
+        attribute_type:
+            checkbox: Case à cocher
+            configuration: Configuration
+            date: Date
+            datetime: Date et heure
+            float: Décimal
+            integer: Entier
+            percent: Pourcentage
+            select: Sélectionner
+            text: Texte
+            textarea: Zone de texte
+            title: Type de l'attribut
+            validation: Validation
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            select:
+                multiple: Multiple
+                values: Valeurs
+                choose: Sélectionnez une option
+                min: Nombre minimum d'entrées
+                max: Nombre maximum d'entrées
+            text:
+                min: Longueur minimum
+                max: Longueur maximum

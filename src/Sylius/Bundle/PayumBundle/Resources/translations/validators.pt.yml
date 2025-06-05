@@ -5,6 +5,6 @@ sylius:
     gateway_config:
         paypal:
             password:
-                not_blank: Por favor, insira a palavra-passe do Paypal.
+                not_blank: Por favor, insira a palavra-passe do PayPal.
             signature:
-                not_blank: Por favor, insira a assinatura do Paypal.
+                not_blank: Por favor, insira a assinatura do PayPal.

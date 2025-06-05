@@ -3,9 +3,10 @@
 
 sylius:
     payment:
-        cancelled: 'Betalingen er avbrutt.'
+        authorized: 'Betalingen er autorisert.'
+        cancelled: 'Betalingen er kansellert.'
         completed: 'Betalingen er fullført.'
-        failed: 'Betalingen mislyktes.'
+        failed: 'Betalingen feilet.'
         processing: 'Betalingen behandles.'
-        refunded: 'Betalingen har blitt refundert.'
-        unknown: 'Det oppstod et ukjent problem med betaling.'
+        refunded: 'Betalingen er refundert.'
+        unknown: 'Det oppstod et ukjent problem med betalingen.'

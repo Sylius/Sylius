@@ -4,10 +4,10 @@
 sylius:
     form:
         taxon:
-            description: Beskrivelse
-            enabled: Aktivert
-            name: Navn
-            parent: Forelder
-            slug: Slug
+            description: 'Beskrivelse'
+            enabled: 'Aktivert'
+            name: 'Navn'
+            parent: 'Forelder'
+            slug: 'Slug'
         taxonomy:
-            name: Navn
+            name: 'Navn'

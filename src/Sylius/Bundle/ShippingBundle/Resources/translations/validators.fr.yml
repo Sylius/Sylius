@@ -4,35 +4,34 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.'
-            min_length: 'Le nom de la catégorie doit contenir au moins {{ limit }} caractères.'
-            not_blank: 'Veuillez entrer le nom de la catégorie de livraison.'
+            max_length: "Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.' :contentReference[oaicite:21]{index=21}"
+            min_length: "Le nom de la catégorie doit contenir au moins {{ limit }} caractères.' :contentReference[oaicite:22]{index=22}"
+            not_blank: "Veuillez entrer le nom de la catégorie de livraison.' :contentReference[oaicite:23]{index=23}"
         code:
-            not_blank: 'Veuillez entrer le code de la catégorie de livraison.'
-            regex: 'Le code de la méthode de livraison peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.'
-            unique: 'Ce code de catégorie de livraison existe déjà.'
+            max_length: "Le code de la catégorie de livraison ne doit pas dépasser {{ limit }} caractères.' :contentReference[oaicite:24]{index=24}"
+            not_blank: "Veuillez entrer le code de la catégorie de livraison.' :contentReference[oaicite:25]{index=25}"
+            regex: "Le code de la méthode de livraison peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.' :contentReference[oaicite:26]{index=26}"
+            unique: "Ce code de catégorie de livraison existe déjà.' :contentReference[oaicite:27]{index=27}"
+
     shipping_method:
         calculator:
-            min: 'Les frais de port ne peuvent pas être inférieurs à 0.'
-            not_blank: 'Veuillez sélectionner une méthode de calcul pour la livraison.'
-            invalid: 'Calculateur invalide. Les calculateurs disponibles sont {{ available_calculators }}.'
+            min: "Les frais de port ne peuvent pas être inférieurs à 0.' :contentReference[oaicite:28]{index=28}"
+            not_blank: "Veuillez sélectionner une méthode de calcul pour la livraison.' :contentReference[oaicite:29]{index=29}"
+            invalid: "Calculateur invalide. Les calculateurs disponibles sont {{ available_calculators }}.' :contentReference[oaicite:30]{index=30}"
         name:
-            max_length: 'Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.'
-            min_length: 'Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.'
-            not_blank: 'Veuillez entrer le nom de la méthode de livraison.'
+            max_length: "Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.' :contentReference[oaicite:31]{index=31}"
+            min_length: "Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.' :contentReference[oaicite:32]{index=32}"
+            not_blank: "Veuillez entrer le nom de la méthode de livraison.' :contentReference[oaicite:33]{index=33}"
         code:
-            not_blank: 'Veuillez entrer le code du mode de livraison.'
-            regex: 'Le code de la méthode de livraison peut uniquement être constitué de lettres, chiffres et tirets.'
-            unique: 'Ce code de mode de livraison existe déjà.'
+            max_length: "Le code du mode de livraison ne doit pas dépasser {{ limit }} caractères.' :contentReference[oaicite:34]{index=34}"
+            not_blank: "Veuillez entrer le code du mode de livraison.' :contentReference[oaicite:35]{index=35}"
+            regex: "Le code de la méthode de livraison peut uniquement être constitué de lettres, chiffres et tirets.' :contentReference[oaicite:36]{index=36}"
+            unique: "Ce code de mode de livraison existe déjà.' :contentReference[oaicite:37]{index=37}"
         zone:
-            not_blank: 'S''il vous plaît sélectionnez zone de méthode de livraison.'
+            not_blank: "S''il vous plaît sélectionnez zone de méthode de livraison.' :contentReference[oaicite:38]{index=38}"
         rule:
-            invalid_type: 'Le type de règle n''est pas valide. Les types de règles disponibles sont {{ available_rule_types }}.'
+            invalid_type: "Le type de règle n''est pas valide. Les types de règles disponibles sont {{ available_rule_types }}.' :contentReference[oaicite:39]{index=39}"
+
     shipment:
         shipping_method:
-            not_blank: 'Veuillez sélectionner un mode de livraison.'
-    translation:
-        locale:
-            not_blank: 'Vous devez entrer une valeur.'
-            invalid: 'Ce paramètre régional n''est pas valide.'
-            unique: 'Une traduction pour la locale {{ value }} existe déjà.'
+            not_blank: "Veuillez sélectionner un mode de livraison.' :contentReference[oaicite:40]{index=40}"

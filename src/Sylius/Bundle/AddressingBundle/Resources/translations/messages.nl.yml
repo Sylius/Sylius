@@ -4,7 +4,7 @@
 sylius:
     form:
         address:
-            city: Plaats
+            city: Stad
             company: Bedrijf
             country: Land
             first_name: Voornaam
@@ -16,7 +16,7 @@ sylius:
             zone: Zone
         country:
             add_province: Provincie toevoegen
-            name: Promoties beheren
+            name: Beheer promoties
             provinces: Provincies
             select: Selecteer
             enabled: Ingeschakeld

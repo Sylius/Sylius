@@ -5,42 +5,55 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Antall
-                equal: Lik
+                count: 'Antall'
+                equal: 'Lik'
+            type: 'Regeltype'
         shipment:
-            state: Tilstand
+            state: 'Status'
             states:
-                checkout: Sjekk ut
-                pending: Venter
-                ready: Klar
-                shipped: Sendt
-                returned: Returnert
-                cancelled: Avbrutt
-            tracking_code: Sporingskode
+                checkout: 'Til utsjekk'
+                pending: 'Venter'
+                ready: 'Klar'
+                shipped: 'Sendt'
+                returned: 'Returnert'
+                cancelled: 'Avbrutt'
+            tracking_code: 'Sporingskode'
         shipping_calculator:
             flat_rate_configuration:
-                amount: Antall
+                label: 'Fast pris per forsendelse'
+                amount: 'Beløp'
             per_unit_rate_configuration:
-                amount: Antall
+                label: 'Fast pris per enhet'
+                amount: 'Beløp'
         shipping_category:
-            description: Beskrivelse
-            name: Navn
+            description: 'Beskrivelse'
+            name: 'Navn'
         shipping_method:
-            add_rule: Legg til regel
-            calculator: Kalkulator
-            category: Kategori
-            category_requirement: Kategorikrav
-            channels: Kanaler
-            configuration: Konfigurasjon
-            description: Beskrivelse
-            enabled: Aktivert
-            name: Navn
-            position: Plassering
-            rules: Regler
-            tax_category: Skattekategori
-            translations: Oversettelser
+            add_rule: 'Legg til regel'
+            calculator: 'Kalkulator'
+            category: 'Kategori'
+            category_requirement: 'Kategorikrav'
+            channels: 'Kanaler'
+            configuration: 'Konfigurasjon'
+            description: 'Beskrivelse'
+            enabled: 'Aktivert'
+            match_all_category_requirement: 'Alle enheter må matche metodens kategori'
+            match_any_category_requirement: 'Minst 1 enhet må matche metodens kategori'
+            match_none_category_requirement: 'Ingen enheter må matche metodens kategori'
+            name: 'Navn'
+            position: 'Posisjon'
+            rules: 'Regler'
+            rules_help: 'Bruk regler for å avgjøre om denne fraktmetoden kan brukes på en gitt ordre. Hvis en regel er sann, kan denne fraktmetoden brukes. Merk at hvis du legger til flere regler, må alle reglene være sanne.'
+            select_calculator: 'Velg en kalkulator'
+            tax_category: 'Skattekategori'
+            translations: 'Oversettelser'
         shipping_method_rule:
-            type: Type
-            total: Totalt
-            weight: Vekt
-            amount: Antall
+            items_total_greater_than_or_equal: 'Totalt antall varer større enn eller lik'
+            items_total_less_than_or_equal: 'Totalt antall varer mindre enn eller lik'
+            type: 'Type'
+            total: 'Totalt'
+            total_weight_greater_than_or_equal: 'Total vekt større enn eller lik'
+            total_weight_less_than_or_equal: 'Total vekt mindre enn eller lik'
+            weight: 'Vekt'
+            amount: 'Beløp'
+            select: 'Velg en regeltype'

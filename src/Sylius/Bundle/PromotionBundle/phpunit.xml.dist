@@ -9,9 +9,9 @@
     </php>
 
     <testsuites>
-        <testsuite name="sylius_promotion_bundle_test_suite">
+        <testsuite name="syllius-promotion-bundle">
             <directory>./test/</directory>
-            <directory>./Tests/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

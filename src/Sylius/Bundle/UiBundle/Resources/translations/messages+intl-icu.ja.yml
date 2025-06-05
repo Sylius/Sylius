@@ -1,0 +1,7 @@
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {、1件の商品} other {、#件の商品}}'
+        lowest_price_days_before_discount_was: '{days, plural, 
+            one {現在の割引の1日前の最安値は {price} でした} 
+            other {現在の割引の#日前の最安値は {price} でした}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {この顧客はまだ注文していません} one {この顧客は1件の注文を行いました} other {この顧客は全チャネルで合計#件の注文を行いました}}'

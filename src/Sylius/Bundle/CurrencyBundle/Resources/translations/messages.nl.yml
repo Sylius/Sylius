@@ -10,5 +10,5 @@ sylius:
             exchange_rate: Wisselkoers
         exchange_rate:
             source_currency: Bronvaluta
-            target_currency: Doel valuta
+            target_currency: Doelvaluta
             ratio: Verhouding

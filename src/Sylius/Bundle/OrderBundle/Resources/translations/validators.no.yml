@@ -3,5 +3,8 @@
 
 sylius:
     order_item:
+        product_variant:
+            not_blank: 'Produktvarianten er ikke oppgitt.'
         quantity:
-            min: Antallet kan ikke være lavere enn 1.
+            min: 'Antall av en ordrepost kan ikke være mindre enn 1.'
+            not_blank: 'Antallet er ikke oppgitt.'

@@ -1,0 +1,5 @@
+<div class="mb-5" {{ sylius_test_html_attribute('address-type', header|trans) }}>
+    {%- for log in address_logs -%}
+        {% hook 'shipping_address' with { log } %}
+    {%- endfor -%}
+</div>

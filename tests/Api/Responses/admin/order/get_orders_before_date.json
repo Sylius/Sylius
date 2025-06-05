@@ -58,6 +58,7 @@
             "shippingState": "ready",
             "tokenValue": "firstOrderToken",
             "id": "@integer@",
+            "checkoutCompletedAt": "@datetime@",
             "number": "@string@",
             "notes": null,
             "items": [

@@ -5,7 +5,7 @@ sylius:
     channel:
         code:
             not_blank: Bitte gib den Code des Kanals ein.
-            regex: Kanalkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: Der Code des Kanals muss einzigartig sein.
+            regex: Der Kanalkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Der Code des Kanals muss eindeutig sein.
         name:
             not_blank: Bitte gib den Namen des Kanals ein.

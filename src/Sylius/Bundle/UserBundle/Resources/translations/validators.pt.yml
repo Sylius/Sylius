@@ -9,7 +9,7 @@ sylius:
             not_registered: Utilizador com este e-mail não existe. Por favor, registe-se primeiro.
         plainPassword:
             not_blank: Por favor, Insira a sua palavra-passe.
-            mismatch: As palavras-passe inseridas não correspondem
+            mismatch: As palavras-passe inseridas não correspondem.
             wrong_current: A palavra-passe fornecida é diferente da atual.
         password:
             min: A palavra-passe deve ter, pelo menos, {{ limit }} caracteres.

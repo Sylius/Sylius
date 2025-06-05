@@ -1,0 +1,32 @@
+sylius:
+    tax_category:
+        name:
+            not_blank: Var god ange namn för momskategori.
+            min_length: Namnet på momskategorin måste vara minst 1 tecken långt.|Namnet på momskategorin måste vara minst {{ limit }} tecken långt.
+            max_length: Namnet på momskategorin får inte vara längre än 1 tecken.|Namnet på momskategorin får inte vara längre än {{ limit }} tecken.
+        code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
+            not_blank: Var god ange kod för momskategori.
+            regex: Momskategorikoden får bara innehålla bokstäver, siffror, bindestreck och understreck.
+            unique: Momskategorin med angiven kod finns redan.
+    tax_rate:
+        category:
+            not_blank: Var god välj momskategori.
+        name:
+            not_blank: Var god ange namn för momssats.
+            min_length: Namnet på momssatsen måste vara minst 1 tecken långt.|Namnet på momssatsen måste vara minst {{ limit }} tecken långt.
+            max_length: Namnet på momssatsen får inte vara längre än 1 tecken.|Namnet på momssatsen får inte vara längre än {{ limit }} tecken.
+        amount:
+            invalid: Momssatsens belopp är ogiltigt.
+            not_blank: Var god ange belopp för momssats.
+        calculator:
+            not_blank: Var god välj momskalkylator.
+        zone:
+            not_blank: Var god välj momszon.
+        code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
+            not_blank: Var god ange kod för momssats.
+            regex: Momssatskoden får bara innehålla bokstäver, siffror, bindestreck och understreck.
+            unique: Momssatsen med angiven kod finns redan.
+        date:
+            greater_than_start_date: Momssatsen får inte sluta innan den startar.

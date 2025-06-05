@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    currency:
+        code:
+            exact_length: Der Währungscode muss genau drei Zeichen lang sein.
+            not_blank: Bitte einen Währungscode auswählen.
+            regex: Das Währungskürzel darf nur Buchstaben, Ziffern, Bindestriche oder Unterstriche enthalten.
+            unique: Der Währungscode muss eindeutig sein.
+        exchange_rate:
+            not_blank: Bitte den Umrechnungskurs eingeben.
+    exchange_rate:
+        ratio:
+            greater_than: Das Umrechnungsverhältnis muss größer als 0 sein.
+            invalid: Das Verhältnis muss eine gültige Zahl sein.
+            not_blank: Bitte das Umrechnungsverhältnis angeben.
+        source_currency:
+            not_blank: Bitte die Ausgangswährung für den Umrechnungskurs angeben.
+        target_currency:
+            not_blank: Bitte die Zielwährung für den Umrechnungskurs angeben.
+        unique_currency_pair: Das Währungspaar darf nicht doppelt vorhanden sein.
+        different_source_target_currency: Ausgangs- und Zielwährung müssen verschieden sein.

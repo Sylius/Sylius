@@ -31,9 +31,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @implements ExampleFactoryInterface<ProductReviewInterface> */
 class ProductReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param ReviewFactoryInterface<ReviewInterface> $productReviewFactory
@@ -41,10 +41,10 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
      * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
      */
     public function __construct(
-        private readonly ReviewFactoryInterface $productReviewFactory,
-        private readonly ProductRepositoryInterface $productRepository,
-        private readonly CustomerRepositoryInterface $customerRepository,
-        private readonly StateMachineInterface $stateMachine,
+        protected readonly ReviewFactoryInterface $productReviewFactory,
+        protected readonly ProductRepositoryInterface $productRepository,
+        protected readonly CustomerRepositoryInterface $customerRepository,
+        protected readonly StateMachineInterface $stateMachine,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

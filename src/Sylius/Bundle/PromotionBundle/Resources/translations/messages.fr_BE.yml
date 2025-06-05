@@ -1,0 +1,83 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        catalog_promotion:
+            action:
+                fixed_discount: Remise fixe
+                percentage_discount: Pourcentage de remise
+            description: Description
+            enabled: Activée
+            end_date: Date de fin
+            label: Libellé
+            name: Nom
+            priority: Priorité
+            start_date: Date de début
+            translations: Traductions
+        promotion:
+            actions: Actions
+            add_action: Ajouter une action
+            add_rule: Ajouter une règle
+            applies_to_discounted: S'applique aux articles déjà remisés
+            applies_to_discounted_details: Avec cette option, la promotion du panier sera appliquée aux articles déjà remisés par la ou les promotion(s) du catalogue.
+            coupon_based: Comprend des coupons
+            description: Description
+            ends_at: Se termine le
+            exclusive: Exclusif
+            label: Libellé
+            name: Nom
+            priority: Priorité
+            rules: Règles
+            starts_at: Commence le
+            usage_limit: Limite d'utilisation
+        promotion_action:
+            item_fixed_discount: Remise fixe produit
+            item_percentage_discount: Rabais en pourcentage produit
+            order_fixed_discount: Remise sur la commande
+            order_percentage_discount: Rabais en pourcentage commande
+            shipping_percentage_discount: Rabais en pourcentage expédition
+            filters: Filtres
+            fixed_discount_configuration:
+                amount: Montant
+            percentage_discount_configuration:
+                percentage: Pourcentage
+            type: Type
+        promotion_coupon:
+            expires_at: Expire le
+            usage_limit: Limite d'utilisation
+        promotion_coupon_generator_instruction:
+            amount: Montant
+            code_length: Longueur du code
+            expires_at: Expire le
+            prefix: Préfixe
+            suffix: Suffixe
+            usage_limit: Limite d'utilisation
+        promotion_filter:
+            price_range: Filtre de gamme de prix
+        promotion_rule:
+            cart_quantity: Quantité dans le panier
+            contains_product: Contient le produit
+            customer_group: Groupe de clients
+            has_at_least_one_from_taxons: A au moins un des taxons
+            item_total: Total produit
+            nth_order: N-ième commande
+            shipping_country: Pays de livraison
+            taxonomy: Taxonomie
+            total_price_of_items_from_taxon: Prix total des Articles du taxon
+            cart_quantity_configuration:
+                count: Nombre
+                equal: Égal
+            contains_product_configuration:
+                exclude: Exclure
+                variants: Produits
+            item_total_configuration:
+                amount: Montant
+            nth_order_configuration:
+                nth: Nième
+            shipping_country_configuration:
+                country: Pays
+            taxonomy_configuration:
+                exclude: Exclure
+                taxons: Taxons
+            type: Type

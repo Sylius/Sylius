@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        request_reset_password:
+            success: '如果您提供的电子邮件地址存在于我们的系统中，我们已经向其发送了重置密码的说明。'
+        password_reset:
+            success: '您的密码已成功更改！'
+            token_expired: '重置密码的令牌已过期。'
+    email:
+        order_confirmation_resent: '订单确认已成功重新发送给客户。'
+        shipment_confirmation_resent: '发货确认已成功重新发送给客户。'
+    product_variant:
+        cannot_generate_variants: '无法为没有选项值的产品生成变体。'
+    locale:
+        delete:
+            is_used: '无法删除该语言环境，因为至少有一个翻译正在使用它。'
+            success: '语言环境已成功删除。'

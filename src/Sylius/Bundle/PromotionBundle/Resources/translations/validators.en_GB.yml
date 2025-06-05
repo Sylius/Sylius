@@ -1,0 +1,78 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    catalog_promotion:
+        code:
+            max_length: The code must not be longer than {{ limit }} characters.
+            unique: The catalogue promotion with given code already exists.
+            regex: Catalogue promotion code can only be comprised of letters, numbers, dashes and underscores.
+            not_blank: Please enter catalogue promotion code.
+        date:
+            greater_than_start_date: End date cannot be set before start date.
+        name:
+            max_length: Catalogue promotion name must not be longer than {{ limit }} characters.
+            min_length: Catalogue promotion name must be at least {{ limit }} characters long.
+            not_blank: Please enter catalogue promotion name.
+        state:
+            processing: The catalogue promotion cannot be edited as it is currently being processed.
+    catalog_promotion_action:
+        type:
+            not_blank: Please choose an action type.
+            invalid: Catalogue promotion action type is invalid. Available types are {{ available_action_types }}.
+        invalid_type: Catalogue promotion action type is invalid. Please choose a valid type.
+        percentage_discount:
+            not_in_range: The percentage discount amount must be between 0% and 100%.
+            not_number_or_empty: The percentage discount amount must be a number and cannot be empty.
+            not_valid: The percentage discount amount must be configured.
+    catalog_promotion_scope:
+        type:
+            not_blank: Please choose a scope type.
+            invalid: Catalogue promotion scope type is invalid. Available types are {{ available_scope_types }}.
+    promotion:
+        code:
+            max_length: The code must not be longer than {{ limit }} characters.
+            unique: The promotion with given code already exists.
+            regex: Promotion code can only be comprised of letters, numbers, dashes and underscores.
+            not_blank: Please enter promotion code.
+        description:
+            max_length: Promotion description must not be longer than 1 character.|Promotion description must not be longer than {{ limit }} characters.
+            min_length: Promotion description must be at least 1 character long.|Promotion description must be at least {{ limit }} characters long.
+            not_blank: Please enter promotion description.
+        end_date_cannot_be_set_prior_start_date: End date cannot be set prior start date.
+        is_invalid: Promotion is invalid.
+        name:
+            max_length: Promotion name must not be longer than 1 character.|Promotion name must not be longer than {{ limit }} characters.
+            min_length: Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.
+            not_blank: Please enter promotion name.
+    promotion_action:
+        invalid_type: Promotion action type is invalid. Available action types are {{ available_action_types }}.
+        percentage_discount_configuration:
+            not_in_range: The percentage discount must be between 0% and 100%.
+    promotion_rule:
+        invalid_type: Promotion rule type is invalid. Available rule types are {{ available_rule_types }}.
+    promotion_coupon:
+        code:
+            max_length: The code must not be longer than {{ limit }} characters.
+            min_length: Coupon code must be at least 1 character long.|Coupon code must be at least {{ limit }} characters long.
+            not_blank: Please enter coupon code.
+            regex: Coupon code can only be comprised of letters, numbers, dashes and underscores.
+            unique: This coupon already exists.
+        is_invalid: Coupon code is invalid.
+        promotion:
+            not_blank: Please provide a promotion for this coupon.
+            not_coupon_based: Only coupon based promotions can have coupons.
+        usage_limit:
+            min: Coupon usage limit must be at least {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Amount of coupons to generate must be at least {{ limit }}.
+            not_blank: Please enter amount of coupons to generate.
+        code_length:
+            min: Coupon code must be at least {{ limit }} characters long.
+            max: Coupon code must not be longer than {{ limit }} characters.
+            not_blank: Please enter coupon code length.
+            not_in_range: Coupon code length must be between {{ min }} and {{ max }}.
+        possible_generation_amount: Invalid coupons code length or coupons amount. It is not possible to generate %expectedAmount% unique coupons with code length %codeLength%. The possible amount to generate is %possibleAmount%.
+        usage_limit:
+            min: Usage limit of generated coupons must be at least {{ limit }}.

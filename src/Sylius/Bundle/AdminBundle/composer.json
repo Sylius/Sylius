@@ -11,7 +11,8 @@
         "ui",
         "admin interface",
         "admin",
-        "backend"
+        "backend",
+        "symfony-ux"
     ],
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -36,7 +37,7 @@
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
-        "sylius/twig-hooks": "^0.6",
+        "sylius/twig-hooks": "^0.8",
         "symfony/framework-bundle": "^6.4.1 || ^7.2",
         "symfony/stimulus-bundle": "^2.20",
         "symfony/ux-autocomplete": "^2.20",
@@ -47,6 +48,7 @@
         "twig/twig": "^3.14"
     },
     "require-dev": {
+        "doctrine/orm": "^2.18 || ^3.3",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "php-http/message-factory": "^1.1",
         "phpspec/prophecy-phpunit": "^2.2",

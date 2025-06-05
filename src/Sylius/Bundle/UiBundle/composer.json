@@ -86,8 +86,7 @@
     "scripts": {
         "test": [
             "@composer validate --strict",
-            "bin/phpunit --colors=always",
-            "bin/phpspec run --ansi --no-interaction"
+            "bin/phpunit --colors=always"
         ]
     },
     "minimum-stability": "dev",

@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    gateway_config:
+        invalid_gateway_factory: Usine de passerelle invalide. Les usines disponibles sont {{ available_factories }}.
+        gateway_name:
+            not_blank: Veuillez entrer le nom de la passerelle.
+        factory_name:
+            not_blank: Veuillez entrer le nom de l'usine de passerelle.
+        paypal:
+            password:
+                not_blank: Veuillez entrer votre mot de passe PayPal.
+            signature:
+                not_blank: Veuillez entrer la signature PayPal.
+            username:
+                not_blank: Veuillez entrer votre nom d'utilisateur PayPal.
+            sandbox:
+                not_null: Veuillez définir le statut de votre sandbox PayPal.
+        stripe:
+            secret_key:
+                not_blank: Veuillez entrer votre clé secrète Stripe.
+            publishable_key:
+                not_blank: Veuillez entrer votre clé publique Stripe.

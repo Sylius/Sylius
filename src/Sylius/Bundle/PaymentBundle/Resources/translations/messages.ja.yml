@@ -4,12 +4,12 @@
 sylius:
     form:
         payment:
-            method: お支払い方法
+            method: 'お支払い方法'
             state:
-                header: 入金状況
-                checkout: 注文に進む
-                new: sylius.breadcrumb.new
-                pending: 未発送
+                header: '入金状況'
+                checkout: '注文に進む'
+                new: '新規'
+                pending: '保留中'
         payment_method:
-            description: 説明
-            name: ゾーン名
+            description: '説明'
+            name: 'ゾーン名'

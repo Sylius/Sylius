@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: '重置密码的令牌已过期。'
+    account:
+        invalid_verification_token: '没有使用 %verificationToken% 电子邮件验证令牌的商店用户。'
+        is_verified: '电子邮件为 %email% 的账户已验证。'
+    address:
+        without_country: '地址必须包含国家信息。'
+    code:
+        not_blank: '请输入一个代码。'
+        invalid: '代码只能包含字母、数字、破折号（"-" 符号）和下划线（"_" 符号）。'
+    contact_request:
+        email_is_invalid: '提供的电子邮件地址无效。'
+    country:
+        not_exist: '国家 %countryCode% 不存在。'
+    date_interval:
+        empty: '日期区间不能为空。'
+        invalid: '日期区间不是有效的 ISO 8601 区间格式。'
+    date_time:
+        invalid: '日期时间不是有效的 ISO 8601 格式，格式应为 Y-m-d\TH:i:s。'
+    order:
+        not_empty: '无法处理空订单。'
+    payment:
+        not_found: '该付款不存在。'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: '您不能为已取消的订单更改付款方式。'
+        not_available: '订单无法使用付款方式 %name%。请选择其他付款方式。'
+        not_exist: '付款方式代码为 %code% 的付款方式不存在。'
+    payment_request:
+        action_not_available: '付款请求（方式代码：%code%，付款 ID：%id%）没有处理程序。请选择其他付款方式。'
+        not_available: '付款请求不支持此操作。'
+    product:
+        not_exist: '产品 %productName% 不存在。'
+    product_variant:
+        not_exist: '产品变体 %productVariantCode% 不存在。'
+        not_longer_available: '名称为 %productVariantName% 的产品变体不存在。'
+        not_sufficient: '代码为 %productVariantCode% 的产品变体库存不足。'
+        product_variant_with_name_not_sufficient: '名称为 %productVariantName% 的产品变体库存不足。'
+        option_values:
+            single_value: '产品变体在每个选项中只能配置一个值。'
+    reset_password:
+        invalid_token: '密码重置令牌 %token% 无效。'
+        token_expired: '密码重置令牌已过期。'
+    shipment:
+        not_found: '该发货不存在。'
+        shipped: '您无法再次发货已发出的货物。'
+    shipping_method:
+        not_found: '代码为 %code% 的配送方式不存在。'
+        not_available: '订单无法使用配送方式 %name%。请重新选择配送方式。'
+        shipping_address_not_found: '订单必须先填写收货地址。'
+    statistics:
+        end_date:
+            invalid: '开始日期必须早于结束日期。'

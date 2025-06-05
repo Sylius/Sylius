@@ -1,0 +1,66 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    address:
+        city:
+            max_length: Der Stadtname darf nicht länger als {{ limit }} Zeichen sein|Der Stadtname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Stadtname muss mindestens {{ limit }} Zeichen lang sein|Der Stadtname muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihre Stadt ein.
+        country:
+            not_blank: Bitte wählen Sie Ihr Land aus.
+            disabled: Das gewählte Land ist deaktiviert. Bitte wählen Sie ein anderes.
+        first_name:
+            max_length: Der Vorname darf nicht länger als {{ limit }} Zeichen sein|Der Vorname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Vorname muss mindestens {{ limit }} Zeichen lang sein|Der Vorname muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihren Vornamen ein.
+        last_name:
+            max_length: Der Nachname darf nicht länger als {{ limit }} Zeichen sein|Der Nachname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Nachname muss mindestens {{ limit }} Zeichen lang sein|Der Nachname muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihren Nachnamen ein.
+        postcode:
+            max_length: Die Postleitzahl darf nicht länger als {{ limit }} Zeichen sein|Die Postleitzahl darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Die Postleitzahl muss mindestens {{ limit }} Zeichen lang sein|Die Postleitzahl muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihre Postleitzahl ein.
+        province:
+            valid: Bitte wählen Sie ein gültiges Bundesland aus.
+        street:
+            max_length: Der Straßenname darf nicht länger als {{ limit }} Zeichen sein|Der Straßenname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Straßenname muss mindestens {{ limit }} Zeichen lang sein|Der Straßenname muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihre Straße ein.
+        not_shippable: Diese Adresse ist keine gültige Lieferadresse.
+    country:
+        code:
+            not_blank: Bitte geben Sie den ISO-Ländercode ein.
+            regex: Der Ländercode darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.
+            unique: Der ISO-Ländercode muss eindeutig sein.
+    province:
+        code:
+            min_length: Der Code des Bundeslandes muss mindestens 5 Zeichen lang sein|Der Code des Bundeslandes muss mindestens 5 Zeichen lang sein.
+            not_blank: Bitte geben Sie den Code des Bundeslandes ein.
+            regex: Der Code des Bundeslandes sollte dem Format XX-XX entsprechen (z. B. AT-W).
+            unique: Der Bundesland-Code muss eindeutig sein.
+        name:
+            max_length: Der Bundeslandname darf nicht länger als {{ limit }} Zeichen sein|Der Bundeslandname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Bundeslandname muss mindestens {{ limit }} Zeichen lang sein|Der Bundeslandname muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihr Bundesland ein.
+            unique: Der Bundeslandname muss eindeutig sein.
+    zone:
+        scope:
+            not_blank: Bitte geben Sie den Geltungsbereich an.
+        code:
+            not_blank: Bitte geben Sie das Gebietskürzel ein.
+            regex: Das Gebietskürzel darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.
+            unique: Das Gebietskürzel muss eindeutig sein.
+        members:
+            min_count: Bitte geben Sie mindestens {{ limit }} Versandzonen an.
+        name:
+            max_length: Der Name der Zone darf nicht länger als {{ limit }} Zeichen sein|Der Name der Zone darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Name der Zone muss mindestens {{ limit }} Zeichen lang sein|Der Name der Zone muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie den Namen der Versandzone ein.
+    zone_member:
+        cannot_be_the_same_as_zone: Zonenmitglied und Zone dürfen nicht identisch sein.
+        code:
+            not_blank: Bitte wählen Sie eine Versandzone aus.
+            regex: Das Kürzel der Versandzone darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.
+        unique: Die ausgewählte Zone ist bereits Teil dieses Versandgebietes.

@@ -14,9 +14,10 @@
     "@babel/preset-env": "^7.25.8",
     "@hotwired/stimulus": "^3.0.0",
     "@popperjs/core": "^2.11.8",
+    "@sylius/admin-bundle": "file:Resources/assets/",
     "@symfony/stimulus-bridge": "^3.2.0",
     "@symfony/webpack-encore": "^5.0.1",
-    "@tabler/core": "~1.0.0",
+    "@tabler/core": "^1.3.0",
     "apexcharts": "^3.41.0",
     "bootstrap": "^5.3.3",
     "infinite-tree": "^1.17.1",
@@ -30,7 +31,7 @@
     "webpack-cli": "^5.1.4"
   },
   "engines": {
-    "node": "^20 || ^22"
+    "node": ">=20"
   },
   "engineStrict": true,
   "files": [

@@ -83,11 +83,24 @@
 {% endmacro %}
 
 {% macro cancel(params = {}) %}
+    {% set default_attr =
+        stimulus_controller('@sylius/admin-bundle/back-button')
+        |merge(stimulus_action('@sylius/admin-bundle/back-button', 'goBack', 'click'))
+        |merge({
+            'data-sylius--admin-bundle--back-button-current-url-value': app.request.uri,
+            'data-sylius--admin-bundle--back-button-fallback-url-value': params.fallback_url
+        })
+    %}
+
     {% set params = {
         class: null,
         text: 'sylius.ui.cancel'|trans,
-        url: app.request.headers.get('referer'),
-    }|merge(params)%}
+        type: 'button',
+        attr: {}
+    }
+        |merge(params)
+        |merge({attr: (params.attr is defined ? params.attr : {})|merge(default_attr)})
+    %}
 
     {{ _self.default(params) }}
 {% endmacro %}

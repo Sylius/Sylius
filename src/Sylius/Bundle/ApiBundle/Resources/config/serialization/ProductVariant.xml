@@ -53,6 +53,8 @@
         <attribute name="name">
             <group>sylius:shop:product_variant:index</group>
             <group>sylius:shop:product_variant:show</group>
+            <group>sylius:shop:product:index:default_variant</group>
+            <group>sylius:shop:product:show:default_variant</group>
         </attribute>
         <attribute name="enabled">
             <group>sylius:admin:product_variant:index</group>

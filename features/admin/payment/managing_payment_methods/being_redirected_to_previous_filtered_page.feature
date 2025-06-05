@@ -11,11 +11,11 @@ Feature: Being redirected to previous filtered page
         And this payment method has been disabled
         And I am logged in as an administrator
 
-    @no-api @ui
-    Scenario: Being redirected to previous filtered page after cancelling creating a new payment method
+    @no-api @ui @mink:chromedriver
+    Scenario: Being redirected to previous filtered page after cancelling editing an existing payment method
         When I browse payment methods
         And I choose enabled filter
         And I filter
-        And I want to create a new offline payment method
+        And I want to modify the "Offline" payment method
         And I cancel my changes
         Then I should be redirected to the previous page of only enabled payment methods

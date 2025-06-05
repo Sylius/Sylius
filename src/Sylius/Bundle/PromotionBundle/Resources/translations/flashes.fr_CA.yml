@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    promotion_coupon:
+        generate: 'Les coupons de promotion ont été générés avec succès.'
+    catalog_promotion:
+        remove: 'La suppression de la promotion du catalogue a été demandée. Ce processus peut prendre un certain temps en fonction du nombre de produits concernés.'

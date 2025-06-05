@@ -24,12 +24,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @implements ExampleFactoryInterface<CustomerGroupInterface> */
 class CustomerGroupExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /** @param FactoryInterface<CustomerGroupInterface> $customerGroupFactory */
-    public function __construct(private readonly FactoryInterface $customerGroupFactory)
+    public function __construct(protected readonly FactoryInterface $customerGroupFactory)
     {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

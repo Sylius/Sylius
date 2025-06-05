@@ -8,7 +8,6 @@
  */
 
 import { Controller } from '@hotwired/stimulus';
-import { Modal } from 'bootstrap';
 
 export default class extends Controller {
     static targets = ['modal', 'parent', 'csrfToken'];
@@ -19,7 +18,7 @@ export default class extends Controller {
             this.modalElement = this.modalTarget;
 
             this.modalElement.closest('[data-modal-delete-taxon-target]').appendChild(this.modalElement);
-            this.modal = new Modal(this.modalElement);
+            this.modal = new window.bootstrap.Modal(this.modalElement);
             this.modal.show();
 
             this.modalElement.addEventListener(

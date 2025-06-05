@@ -54,10 +54,12 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
+    "promotionCoupon": null,
     "checkoutState": "completed",
     "paymentState": "awaiting_payment",
     "shippingState": "ready",
     "tokenValue": "token",
+    "checkoutCompletedAt": "@datetime@",
     "number": "000000001",
     "items": [
         {

@@ -38,9 +38,9 @@ final class SecurityControllerTest extends TestCase
 
     private AuthorizationCheckerInterface&MockObject $authorizationChecker;
 
-    private RouterInterface&MockObject $router;
+    private MockObject&RouterInterface $router;
 
-    private Request&MockObject $request;
+    private MockObject&Request $request;
 
     private SecurityController $securityController;
 

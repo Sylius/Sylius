@@ -2,21 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: "还没有账户？"
+        register_here: '点击这里注册'
     email:
         order_confirmation:
+            has_been_successfully_placed: '订单已成功提交。'
             subject: '订单确认'
-            view_order_or_change_payment_method: '查看订单或更改付款方式'
+            view_order_or_change_payment_method: '查看订单或更改支付方式'
+            thank_you: '感谢您在我们的商店购物！'
+            your_order_number: '您的订单号'
         password_reset:
             hello: '您好'
-            subject: '重置密码'
+            reset_your_password: '重置您的密码'
+            subject: '密码重置'
+            to_reset_your_password: '点击下面的链接重置您的密码'
+            to_reset_your_password_token: '使用下面的令牌重置您的密码'
+            token: '您的密码重置令牌是'
+        user_registration:
+            start_shopping: '开始购物'
+            subject: '用户注册'
+            welcome_to_our_store: '欢迎来到我们的商店！'
+            you_have_just_been_registered: '您已成功注册。谢谢！'
         verification_token:
             hello: '您好'
+            subject: '邮箱地址验证'
+            to_verify_your_email_address: '点击下面的链接验证您的邮箱地址'
+            verify_your_email_address: '验证您的邮箱地址'
+    footer:
+        banner:
+            free_shipping_title: '免费送货与退货'
+            free_shipping_content: '所有订单均享受免费送货'
+            guarantee_title: '退款保证'
+            guarantee_content: '30天退款保证'
+            multiple_payments_title: '多种支付方式'
+            multiple_payments_content: '我们接受信用卡和PayPal支付'
+    homepage:
+        about_us: '关于我们'
+        about_us_content: '欢迎来到我们的商店，您的一站式在线购物平台，提供最优质的产品。您可以从我们的服装和鞋类精选中挑选心仪的商品。(<i>您可以通过覆盖 "sylius.homepage.about_us_content" 键来自定义此内容</i>)'
+        banner_content: '准备好！冬季即将来临'
+        banner_button: '查看新系列'
+        carousel_header: '精选产品'
+        latest_deals: '最新优惠'
+        new_collection: '新系列'
+        newsletter: '订阅资讯'
+        newsletter_description: '订阅我们的资讯，获取等待您的最新优惠！(<i>您可以通过覆盖 "sylius.homepage.newsletter_description" 键来自定义此内容</i>)'
+        subscribe: '订阅'
+    lightbox:
+        image_album_label: '图片 %1 / %2'
     menu:
         shop:
             account:
-                address_book: '地址管理'
+                address_book: '地址簿'
                 change_password: '更改密码'
-                dashboard: '统计'
-                header: '个人中心'
-                order_history: '我的订单'
+                dashboard: '仪表盘'
+                header: '您的账户'
+                order_history: '订单历史'
                 personal_information: '个人信息'
+    top_bar: '注册订阅我们的资讯，立享 20% 折扣'

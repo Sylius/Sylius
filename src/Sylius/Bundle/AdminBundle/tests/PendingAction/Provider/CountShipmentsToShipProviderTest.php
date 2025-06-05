@@ -21,7 +21,7 @@ use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 
 final class CountShipmentsToShipProviderTest extends TestCase
 {
-    private ShipmentRepositoryInterface&MockObject $shipmentRepository;
+    private MockObject&ShipmentRepositoryInterface $shipmentRepository;
 
     private CountShipmentsToShipProvider $countShipmentsToShipProvider;
 

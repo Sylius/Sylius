@@ -4,17 +4,9 @@
 sylius:
     form:
         gateway_config:
-            type: Type
-        gateway_configuration:
-            paypal:
-                password: Mot de passe
-                signature: Signature
-                username: Identifiant
-                sandbox: Mode bac à sable
-            stripe:
-                publishable_key: Clé publique
-                secret_key: Clé secrète
+            use_payum: Utiliser Payum
+    payum_gateway:
+        cash_on_delivery: Paiement à la livraison
+        offline: Hors ligne (Payum)
     payum_gateway_factory:
         offline: Hors-ligne
-        paypal_express_checkout: Paiement via PayPal Express
-        stripe_checkout: Paiement par Stripe (sans support de la SCA)

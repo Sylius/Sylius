@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PaymentBundle\Tests;
+namespace Tests\Sylius\Bundle\PaymentBundle;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\Test;

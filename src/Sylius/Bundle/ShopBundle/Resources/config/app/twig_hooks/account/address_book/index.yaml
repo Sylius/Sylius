@@ -15,6 +15,7 @@ sylius_twig_hooks:
             buttons:
                 template: '@SyliusShop/account/address_book/index/content/main/buttons.html.twig'
                 priority: 100
+                enabled: false
             addresses:
                 template: '@SyliusShop/account/address_book/index/content/main/addresses.html.twig'
                 priority: 0
@@ -26,10 +27,19 @@ sylius_twig_hooks:
             subtitle:
                 template: '@SyliusShop/account/address_book/index/content/main/header/subtitle.html.twig'
                 priority: 0
+            buttons:
+                template: '@SyliusShop/account/address_book/index/content/main/header/buttons.html.twig'
+                priority: -100
 
         'sylius_shop.account.address_book.index.content.main.buttons':
             add_address:
                 template: '@SyliusShop/account/address_book/index/content/main/buttons/add_address.html.twig'
+                priority: 0
+                enabled: false
+        
+        'sylius_shop.account.address_book.index.content.main.header.buttons':
+            add_address:
+                template: '@SyliusShop/account/address_book/index/content/main/header/buttons/add_address.html.twig'
                 priority: 0
 
         'sylius_shop.account.address_book.index.content.main.addresses':

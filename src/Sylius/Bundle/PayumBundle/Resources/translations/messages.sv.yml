@@ -9,7 +9,7 @@ sylius:
             paypal:
                 password: Lösenord
                 signature: Signatur
-                username: Användarnanm
+                username: Användarnamn
                 sandbox: Sandlåda
     payum_gateway_factory:
         offline: Offline

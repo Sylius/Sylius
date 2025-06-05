@@ -11,9 +11,9 @@ sylius:
             unique: Productcode moet uniek zijn.
             max_length: Product slug mag niet langer zijn dan 1 teken.|Product slug mag niet langer zijn dan {{ limit }} tekens.
         code:
-            not_blank: Voer een product code in.
-            regex: Product code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Product code moet uniek zijn.
+            not_blank: Voer een productcode in.
+            regex: Productcode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+            unique: Productcode moet uniek zijn.
         name:
             not_blank: Voer een productnaam in.
             min_length: Productnaam moet minstens 1 teken lang zijn.|Productnaam moet minstens {{ limit }} tekens lang zijn.
@@ -22,36 +22,36 @@ sylius:
         combination: Er bestaat al een variant met deze set opties.
         code:
             not_blank: Gelieve een code in te vullen.
-            regex: Product variant code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Product variant code moet uniek zijn.
+            regex: Productvariantcode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+            unique: Productvariantcode moet uniek zijn.
             within_product_unique: Deze code moet uniek zijn binnen dit product.
     simple_product:
         code:
-            unique: Eenvoudige product code moet uniek zijn binnen alle producten en product varianten.
+            unique: Eenvoudige productcode moet uniek zijn binnen alle producten en productvarianten.
     option:
         code:
             not_blank: Voer een optiecode in.
-            regex: Optie code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+            regex: Optiecode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: Er bestaat al een optie met deze code.
         name:
-            not_blank: Voer een optie naam in.
-            min_length: Optie naam moet minstens 1 teken lang zijn.|Optie naam moet minstens {{ limit }} tekens lbevatten.
-            max_length: Optie naam mag niet langer zijn dan 1 teken.|Optie naam mag niet langer zijn dan {{ limit }} tekens.
+            not_blank: Voer een optienaam in.
+            min_length: Optienaam moet minstens 1 teken lang zijn.|Optienaam moet minstens {{ limit }} tekens bevatten.
+            max_length: Optienaam mag niet langer zijn dan 1 teken.|Optienaam mag niet langer zijn dan {{ limit }} tekens.
         values:
-            min_count: Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waardes toe.
+            min_count: Voeg minstens {{ limit }} optiewaarde toe.|Voeg minstens {{ limit }} optiewaardes toe.
     option_value:
         code:
             not_blank: Voer een optiecode in.
-            regex: Optie waarde code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: De optiewaarde met gegeven code bestaat al.
+            regex: Optiewaarde code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+            unique: De optiewaarde met de gegeven code bestaat al.
         value:
-            not_blank: Voer een optie waarde in.
+            not_blank: Voer een optiewaarde in.
     association_type:
         name:
-            not_blank: Voer a.u.b. een naam in voor de associatie type.
-            min_length: De naam van het gerelateerde type moet minimaal 1 teken bevatten. | De gerelateerde type naam moet ten minste {{ limit }} tekens bevatten.
+            not_blank: Voer a.u.b. een naam in voor het associatietype.
+            min_length: De naam van het gerelateerde type moet minimaal 1 teken bevatten.|De naam van het gerelateerde type moet ten minste {{ limit }} tekens bevatten.
             max_length: De naam van de associatie mag niet langer zijn dan 1 teken.|De naam van de associatie mag niet langer zijn dan {{ limit }} tekens.
         code:
-            not_blank: Voer a.u.b. een een code in voor het associatietype.
-            regex: Associatie type code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+            not_blank: Voer a.u.b. een code in voor het associatietype.
+            regex: Associatietypecode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: De associatie met de gegeven code bestaat al.

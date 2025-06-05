@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    order_item:
+        product_variant:
+            not_blank: A variante do produto não foi fornecida.
+        quantity:
+            min: A quantidade de um item da encomenda não pode ser inferior a 1.
+            not_blank: A quantidade não foi fornecida.

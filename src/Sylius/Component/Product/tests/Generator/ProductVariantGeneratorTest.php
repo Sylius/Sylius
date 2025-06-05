@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Generator;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
 use Sylius\Component\Product\Exception\ProductWithoutOptionsException;
@@ -30,28 +30,26 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 
 final class ProductVariantGeneratorTest extends TestCase
 {
-    /**
-     * @var ProductVariantFactoryInterface<ProductVariant>&MockObject
-     */
+    /** @var ProductVariantFactoryInterface<ProductVariant>&MockObject */
     private MockObject $productVariantFactory;
 
-    private ProductVariantsParityCheckerInterface&MockObject $variantsParityChecker;
+    private MockObject&ProductVariantsParityCheckerInterface $variantsParityChecker;
 
     private ProductVariantGenerator $productVariantGenerator;
 
-    private ProductInterface&MockObject $product;
+    private MockObject&ProductInterface $product;
 
-    private ProductOptionInterface&MockObject $colorOption;
+    private MockObject&ProductOptionInterface $colorOption;
 
-    private ProductInterface&MockObject $productVariable;
+    private MockObject&ProductInterface $productVariable;
 
-    private ProductOptionValueInterface&MockObject $blackColor;
+    private MockObject&ProductOptionValueInterface $blackColor;
 
-    private ProductOptionValueInterface&MockObject $redColor;
+    private MockObject&ProductOptionValueInterface $redColor;
 
-    private ProductOptionValueInterface&MockObject $whiteColor;
+    private MockObject&ProductOptionValueInterface $whiteColor;
 
-    private ProductVariantInterface&MockObject $permutationVariant;
+    private MockObject&ProductVariantInterface $permutationVariant;
 
     protected function setUp(): void
     {
@@ -59,7 +57,7 @@ final class ProductVariantGeneratorTest extends TestCase
         $this->variantsParityChecker = $this->createMock(ProductVariantsParityCheckerInterface::class);
         $this->productVariantGenerator = new ProductVariantGenerator(
             $this->productVariantFactory,
-            $this->variantsParityChecker
+            $this->variantsParityChecker,
         );
         $this->product = $this->createMock(ProductInterface::class);
         $this->colorOption = $this->createMock(ProductOptionInterface::class);
@@ -104,7 +102,6 @@ final class ProductVariantGeneratorTest extends TestCase
 
     public function testGeneratesVariantsForEveryValueOfAnObjectsSingleOption(): void
     {
-
         $this->productVariable->expects($this->once())->method('hasOptions')->willReturn(true);
         $this->productVariable
             ->expects($this->once())

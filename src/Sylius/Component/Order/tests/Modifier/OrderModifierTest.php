@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Order\Modifier;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -25,19 +25,19 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderModifierTest extends TestCase
 {
-    private OrderProcessorInterface&MockObject $orderProcessor;
+    private MockObject&OrderProcessorInterface $orderProcessor;
 
-    private OrderItemQuantityModifierInterface&MockObject $orderItemQuantityModifier;
+    private MockObject&OrderItemQuantityModifierInterface $orderItemQuantityModifier;
 
     private OrderModifier $orderModifier;
 
-    private OrderInterface&MockObject $order;
+    private MockObject&OrderInterface $order;
 
-    private OrderItemInterface&MockObject $orderItem;
+    private MockObject&OrderItemInterface $orderItem;
 
-    private OrderItemInterface&MockObject $existingItem;
+    private MockObject&OrderItemInterface $existingItem;
 
-    private OrderItemInterface&MockObject $newItem;
+    private MockObject&OrderItemInterface $newItem;
 
     protected function setUp(): void
     {

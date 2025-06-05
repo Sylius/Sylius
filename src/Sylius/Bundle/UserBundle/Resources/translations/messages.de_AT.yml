@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        user:
+            email: E-Mail
+            enabled: Aktiviert
+            password:
+                label: Passwort
+                confirmation: Bestätigung
+            remember_me: Angemeldet bleiben
+            shipping_address: Lieferadresse
+            username: Benutzername
+            verified: Überprüft
+        user_filter:
+            query: Suchen
+        user_change_password:
+            confirmation: Bestätigung
+            current: Aktuelles Passwort
+            new: Neues Passwort
+        user_reset_password:
+            confirmation: Bestätigung
+            new: Neues Passwort

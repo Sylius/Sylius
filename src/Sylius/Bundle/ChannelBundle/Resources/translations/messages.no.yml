@@ -4,8 +4,9 @@
 sylius:
     form:
         channel:
-            color: Farge
-            description: Beskrivelse
-            enabled: Aktivert
-            name: Navn
-            url: Nettadresse
+            color: 'Farge'
+            description: 'Beskrivelse'
+            enabled: 'Aktivert'
+            name: 'Navn'
+            url: 'URL'
+

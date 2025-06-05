@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    order_item:
+        quantity:
+            min: Die Stückzahl eines Produkts im Warenkorb darf nicht weniger als 1 sein.

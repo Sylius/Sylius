@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        currency:
+            base: Devise de référence
+            code: Nom
+            enabled: Activée
+            exchange_rate: Taux de change
+        exchange_rate:
+            source_currency: Devise d'origine
+            target_currency: Devise cible
+            ratio: Ratio

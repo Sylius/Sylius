@@ -38,6 +38,10 @@ Sylius\Component\Core\Model\Product:
         channels: [ '@channel_web' ]
         currentLocale: 'en_US'
         enabled: false
+    product_hat_2:
+        code: 'HAT2'
+        channels: [ '@channel_web' ]
+        currentLocale: 'en_US'
 
 Sylius\Component\Core\Model\ProductTranslation:
     product_translation_mug_en_US:
@@ -68,6 +72,13 @@ Sylius\Component\Core\Model\ProductTranslation:
         description: 'Short hat description'
         shortDescription: 'Hat'
         translatable: '@product_hat'
+    product_translation_hat_2_en_US:
+        slug: 'Hat-2'
+        locale: 'en_US'
+        name: 'Hat 2'
+        description: 'Short hat description'
+        shortDescription: 'Hat 2'
+        translatable: '@product_hat_2'
 
 Sylius\Component\Core\Model\ProductVariant:
     product_variant_mug_blue:
@@ -146,7 +157,7 @@ Sylius\Component\Product\Model\ProductAssociation:
     another_product_association:
         type: '@another_product_association_type'
         owner: '@product_mug'
-        associatedProducts: ['@product_hat']
+        associatedProducts: ['@product_hat', '@product_hat_2']
 
 Sylius\Component\Product\Model\ProductAssociationType:
     product_association_type:

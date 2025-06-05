@@ -5,5 +5,5 @@ sylius:
     form:
         review:
             status:
-                new: sylius.breadcrumb.new
-            title: タイトル
+                new: '新規'
+            title: 'タイトル'

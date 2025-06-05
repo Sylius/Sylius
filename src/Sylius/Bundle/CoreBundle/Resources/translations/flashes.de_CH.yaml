@@ -1,0 +1,4 @@
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: 'Die Zahlung kann aufgrund unzureichenden Lagerbestands des Produkts "%productVariantCode%" nicht abgeschlossen werden.'

@@ -1,0 +1,62 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    account:
+        dont_have_an_account: "Don't have an account?"
+        register_here: 'Register here'
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'has been successfully placed.'
+            subject: 'Order confirmation'
+            view_order_or_change_payment_method: 'View order or change payment method'
+            thank_you: 'Thank you for shopping at our store!'
+            your_order_number: 'Your order no.'
+        password_reset:
+            hello: 'Hello'
+            reset_your_password: 'Reset your password'
+            subject: 'Password reset'
+            to_reset_your_password: 'To reset your password - click the link below'
+            to_reset_your_password_token: 'To reset your password - use the token below'
+            token: 'Your password reset token is'
+        user_registration:
+            start_shopping: 'Start shopping'
+            subject: 'User registration'
+            welcome_to_our_store: 'Welcome to our store!'
+            you_have_just_been_registered: 'You have just been registered. Thank you'
+        verification_token:
+            hello: 'Hello'
+            subject: 'Email address verification'
+            to_verify_your_email_address: 'To verify your email address - click the link below'
+            verify_your_email_address: 'Verify your email address'
+    footer:
+        banner:
+            free_shipping_title: 'Free Shipping & Return'
+            free_shipping_content: 'Free shipping on all orders'
+            guarantee_title: 'Money Guarantee'
+            guarantee_content: '30 days money back guarantee'
+            multiple_payments_title: 'Multiple Payment methods'
+            multiple_payments_content: 'We accept credit cards and PayPal'
+    homepage:
+        about_us: 'About Us'
+        about_us_content: 'Welcome to our store, your number one online shop that gives you the very best products. You can choose from the very best clothes and shoes from our offer. (<i>You can modify this content by overriding "sylius.homepage.about_us_content" key in your translation file</i>)'
+        banner_content: 'Brace yourself! Winter is coming'
+        banner_button: 'Check out the new collection'
+        carousel_header: 'Featured products'
+        latest_deals: 'Latest deals'
+        new_collection: 'New collection'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Subscribe to our newsletter to see new offers that are waiting for you! (<i>You can modify this content by overriding "sylius.homepage.newsletter_description" key in your translation file</i>)'
+        subscribe: 'Subscribe'
+    lightbox:
+        image_album_label: 'Image %1 of %2'
+    menu:
+        shop:
+            account:
+                address_book: 'Address book'
+                change_password: 'Change password'
+                dashboard: 'Dashboard'
+                header: 'Your account'
+                order_history: 'Order history'
+                personal_information: 'Personal information'
+    top_bar: 'Sign up to our newsletter and grab -20% off'

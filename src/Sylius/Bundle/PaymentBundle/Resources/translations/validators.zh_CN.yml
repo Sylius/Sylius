@@ -4,42 +4,49 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: 持卡人的姓名必须至少 {{ limit }} 个字符长。
-            not_blank: 请输入持卡人姓名。
+            min_length: '持卡人姓名必须至少包含 {{ limit }} 个字符。'
+            not_blank: '请输入持卡人姓名。'
         expiry_month:
-            max_range: 信用卡的到期月份必须介于 {{ min }} 和 {{ max }} 之间。
-            min_range: 信用卡的到期月份必须介于 {{ min }} 和 {{ max }} 之间。
-            not_blank: 请选择到期月份。
+            max_range: '信用卡的到期月份必须在 {{ min }} 到 {{ max }} 之间。'
+            min_range: '信用卡的到期月份必须在 {{ min }} 到 {{ max }} 之间。'
+            not_blank: '请选择到期月份。'
         number:
-            not_blank: 请输入卡号。
-            luhn: 您输入的信用卡号码是无效的。
+            not_blank: '请输入卡号。'
+            luhn: '您输入的信用卡号无效。'
         security_code:
-            not_blank: 请输入安全代码。
-            max_length: 该 信用卡验证值码必须至少 {{ limit }} 数字长。
-            min_length: 该信用卡验证值码必须是最多 {{ limit }} 数字长。
+            not_blank: '请输入安全码。'
+            max_length: '信用卡的 CVV 码必须至少包含 {{ limit }} 位数字。'
+            min_length: '信用卡的 CVV 码最多包含 {{ limit }} 位数字。'
         expiry_year:
-            not_blank: 请选择到期年份。
+            not_blank: '请选择到期年份。'
+    gateway_config:
+        invalid_gateway_factory: '无效的网关工厂。可用工厂有 {{ available_factories }}。'
+        gateway_name:
+            not_blank: '请输入网关名称。'
+        factory_name:
+            not_blank: '请输入网关工厂名称。'
     payment:
         currency_code:
-            not_valid: 您输入的姓名无效
+            not_valid: '您输入的货币代码无效。'
         method:
-            not_blank: '请选择一种支付方式。'
+            not_blank: '请选择支付方式。'
     payment_method:
         gateway:
-            not_blank: 请选择支付方法网关。
+            not_blank: '请选择支付方式网关。'
         name:
-            max_length: 付款方法名称必须是 {{ limit }} 字符或更少。
-            min_length: 付款方法名称必须至少 {{ limit }} 个字符长。
-            not_blank: 请输入付款方法名称。
+            max_length: '支付方式名称必须为 {{ limit }} 个字符或更少。'
+            min_length: '支付方式名称必须至少包含 {{ limit }} 个字符。'
+            not_blank: '请输入支付方式名称。'
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: 费用不能低于 {{ compared_value }}。
-                not_blank: 请输入费用金额。
+                greater_than_or_equal: '费用不得低于 {{ compared_value }}。'
+                not_blank: '请输入费用金额。'
             percent:
-                max_range: 百分比的费用不能大于 {{ limit }}。
-                min_range: 百分比的费用不能低于 {{ limit }}。
-                not_blank: 请输入费用百分比。
+                max_range: '费用百分比不得超过 {{ limit }}。'
+                min_range: '费用百分比不得低于 {{ limit }}。'
+                not_blank: '请输入费用百分比。'
         code:
-            not_blank: '请输入付款方法代码。'
-            regex: '付款方法代码仅可以由字母、 数字、 破折号和下划线组成。'
-            unique: '给定代码的付款方法已存在。'
+            max_length: '代码不得超过 {{ limit }} 个字符。'
+            not_blank: '请输入支付方式代码。'
+            regex: '支付方式代码只能由字母、数字、连字符和下划线组成。'
+            unique: '具有给定代码的支付方式已存在。'

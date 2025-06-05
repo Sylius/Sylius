@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        request_reset_password:
+            success: '指定されたメールアドレスがシステムに存在する場合は、パスワードをリセットする手順を記載したメールを送信しました。'
+        password_reset:
+            success: 'パスワードが正常に変更されました！'
+            token_expired: 'パスワードリセットトークンの有効期限が切れています。'
+    email:
+        order_confirmation_resent: '注文確認メールを顧客に再送信しました。'
+        shipment_confirmation_resent: '発送確認メールを顧客に再送信しました。'
+    product_variant:
+        cannot_generate_variants: 'オプション値が設定されていない商品にはバリエーションを生成できません。'
+    locale:
+        delete:
+            is_used: 'このロケールは少なくとも1つの翻訳で使用されているため、削除できません。'
+            success: 'ロケールが正常に削除されました。'

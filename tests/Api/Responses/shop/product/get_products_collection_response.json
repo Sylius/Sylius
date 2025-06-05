@@ -27,13 +27,22 @@
             "description": "@string@",
             "slug": "mug",
             "associations": [],
-            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "defaultVariantData": {
+                "@id": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+                "@type": "ProductVariant",
+                "name": "Blue Mug",
+                "inStock": true,
+                "price": 2000,
+                "originalPrice": 3000,
+                "lowestPriceBeforeDiscount": null
+            }
         }
     ],
     "hydra:totalItems": 1,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon}",
+        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon,association[typeCode],association[ownerCode]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -88,6 +97,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "taxon",
                 "property": null,
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[typeCode]",
+                "property": "association",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[ownerCode]",
+                "property": "association",
                 "required": false
             }
         ]

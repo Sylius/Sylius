@@ -3,4 +3,4 @@
 
 sylius:
     customer:
-        register: 'Takk for din registrering, sjekk e-posten til å bekrefte din konto.'
+        register: 'Takk for at du registrerte deg, sjekk e-posten din for å bekrefte kontoen din.'

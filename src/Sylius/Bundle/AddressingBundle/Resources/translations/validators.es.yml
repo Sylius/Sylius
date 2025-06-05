@@ -24,10 +24,10 @@ sylius:
         code:
             not_blank: Por favor, introduzca el código ISO del país.
             regex: El código de país solo puede contener letras, números, guiones y guiones bajos.
-            unique: Código ISO del país debe ser único.
+            unique: El código ISO del país debe ser único.
     province:
         code:
-            min_length: El código de provincia debe tener al menos 5 caracteres| El código de provincia debe tener al menos 5 caracteres.
+            min_length: El código de provincia debe tener al menos 5 caracteres|El código de provincia debe tener al menos 5 caracteres.
             not_blank: Por favor, introduzca el código de provincia.
             regex: 'El código de provincia debe tener el siguiente formato: XX-XX (por ejemplo, US-FL).'
             unique: El código de provincia debe ser único.

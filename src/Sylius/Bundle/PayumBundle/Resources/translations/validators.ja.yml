@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: 'PayPalのAPIパスワードを入力してください。'
+            signature:
+                not_blank: 'PayPalの署名を入力してください。'
+            username:
+                not_blank: 'PayPalのAPIユーザー名を入力してください。'
+        stripe:
+            secret_key:
+                not_blank: 'Stripeのシークレットキーを入力してください。'
+            publishable_key:
+                not_blank: 'Stripeの公開キーを入力してください。'

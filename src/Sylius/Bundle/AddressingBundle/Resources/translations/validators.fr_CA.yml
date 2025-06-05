@@ -1,0 +1,67 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    address:
+        city:
+            max_length: Le nom de la ville ne doit pas dépasser {{ limit }} caractères|Le nom de la ville ne doit pas dépasser {{ limit }} caractères.
+            min_length: Le nom de la ville doit contenir au moins {{ limit }} caractères|Le nom de la ville doit contenir au moins {{ limit }} caractères.
+            not_blank: Veuillez entrer une ville.
+        country:
+            not_blank: Veuillez sélectionner un pays.
+            disabled: Le pays sélectionné est désactivé. Veuillez en choisir un autre.
+        first_name:
+            max_length: Le prénom ne doit pas dépasser {{ limit }} caractères|Le prénom ne doit pas dépasser {{ limit }} caractères.
+            min_length: Le prénom doit contenir au moins {{ limit }} caractères|Le prénom doit contenir au moins {{ limit }} caractères.
+            not_blank: Veuillez entrer votre prénom.
+        last_name:
+            max_length: Le nom de famille ne doit pas dépasser {{ limit }} caractères|Le nom de famille ne doit pas dépasser {{ limit }} caractères.
+            min_length: Le nom de famille doit contenir au moins {{ limit }} caractères|Le nom de famille doit contenir au moins {{ limit }} caractères.
+            not_blank: Veuillez entrer votre nom de famille.
+        postcode:
+            max_length: Le code postal ne doit pas dépasser {{ limit }} caractères|Le code postal ne doit pas dépasser {{ limit }} caractères.
+            min_length: Le code postal doit contenir au moins {{ limit }} caractères|Le code postal doit contenir au moins {{ limit }} caractères.
+            not_blank: Veuillez entrer un code postal.
+        province:
+            valid: Veuillez sélectionner la province appropriée.
+        street:
+            max_length: Le nom de la rue ne doit pas dépasser {{ limit }} caractères|Le nom de la rue ne doit pas dépasser {{ limit }} caractères.
+            min_length: Le nom de la rue doit contenir au moins {{ limit }} caractères|Le nom de la rue doit contenir au moins {{ limit }} caractères.
+            not_blank: Veuillez entrer une adresse.
+        not_shippable: Cette adresse n’est pas une destination valide pour la livraison.
+    country:
+        code:
+            not_blank: Veuillez entrer le code ISO du pays.
+            unique: Le code ISO du pays doit être unique.
+            invalid: Code de pays invalide.
+        unique_provinces: Toutes les provinces de ce pays doivent avoir des codes et des noms uniques.
+    province:
+        code:
+            min_length: Le code de la province doit contenir au moins 5 caractères.
+            not_blank: Veuillez entrer le code de la province.
+            regex: Le code de la province doit avoir le format suivant XX-XX (ex. CA-QC).
+            unique: Le code de la province doit être unique.
+        name:
+            max_length: Le nom de la province ne doit pas dépasser {{ limit }} caractères|Le nom de la province ne doit pas dépasser {{ limit }} caractères.
+            min_length: Le nom de la province doit contenir au moins {{ limit }} caractères|Le nom de la province doit contenir au moins {{ limit }} caractères.
+            not_blank: Veuillez fournir le nom de la province.
+            unique: Le nom de la province doit être unique.
+    zone:
+        scope:
+            not_blank: Veuillez entrer la portée.
+        code:
+            not_blank: Veuillez entrer le code de la zone.
+            regex: Le code de la zone ne peut contenir que des lettres, des chiffres, des tirets et des traits de soulignement.
+            unique: Le code de la zone doit être unique.
+        members:
+            min_count: Veuillez ajouter au moins {{limit}} zone(s) membre(s).
+        name:
+            max_length: Le nom de la zone ne doit pas dépasser {{ limit }} caractères|Le nom de la zone ne doit pas dépasser {{ limit }} caractères.
+            min_length: Le nom de la zone doit contenir au moins {{ limit }} caractères|Le nom de la zone doit contenir au moins {{ limit }} caractères.
+            not_blank: Veuillez entrer le nom de la zone.
+    zone_member:
+        cannot_be_the_same_as_zone: Le membre de la zone ne peut pas être la même zone.
+        code:
+            not_blank: Veuillez sélectionner un membre de la zone.
+            regex: Le code du membre de la zone ne peut contenir que des lettres, des chiffres, des tirets et des traits de soulignement.
+        unique: Le membre sélectionné fait déjà partie de cette zone.
