@@ -51,7 +51,7 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
                     ->setSortable(true)
             )
             ->addField(
-                DateTimeField::create('checkoutCompletedAt', 'm/d/Y')
+                DateTimeField::create('checkoutCompletedAt', 'Y-m-d')
                     ->setLabel('sylius.ui.date')
                     ->setSortable(true)
             )
