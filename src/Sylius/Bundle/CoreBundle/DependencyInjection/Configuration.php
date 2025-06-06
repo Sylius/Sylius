@@ -162,7 +162,7 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('grid_code')
                             ->arrayPrototype()
                                 ->children()
-                                    ->enumNode('type')->values(['service', 'array'])->isRequired()->end()
+                                    ->booleanNode('use_legacy_yaml_config')->defaultTrue()->end()
                                 ->end()
                             ->end()
                         ->end()
