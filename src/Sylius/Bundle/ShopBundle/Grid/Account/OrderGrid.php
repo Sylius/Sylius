@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ShopBundle\Grid\Account;
 
 use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
-use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
 use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -47,7 +46,7 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
             ])
             ->orderBy('checkoutCompletedAt', 'desc')
             ->addField(
-                TwigField::create('number', '@SyliusShop/Account/Order/Grid/Field/number.html.twig')
+                TwigField::create('number', '@SyliusShop/account/order/grid/field/number.html.twig')
                     ->setLabel('sylius.ui.number')
                     ->setSortable(true)
             )
@@ -57,22 +56,22 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
                     ->setSortable(true)
             )
             ->addField(
-                TwigField::create('shippingAddress', '@SyliusShop/Account/Order/Grid/Field/address.html.twig')
+                TwigField::create('shippingAddress', '@SyliusShop/account/order/grid/field/address.html.twig')
                     ->setLabel('sylius.ui.ship_to')
             )
             ->addField(
-                TwigField::create('total', '@SyliusShop/Account/Order/Grid/Field/total.html.twig')
+                TwigField::create('total', '@SyliusShop/account/order/grid/field/total.html.twig')
                     ->setLabel('sylius.ui.total')
                     ->setPath('.')
                     ->setSortable(true, 'total')
             )
             ->addField(
-                TwigField::create('state', '@SyliusUi/Grid/Field/label.html.twig')
+                TwigField::create('state', '@SyliusUi/grid/field/label.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->setSortable(true)
                     ->addOptions([
                         'vars' => [
-                            'labels' => '@SyliusShop/Account/Order/Label/State',
+                            'labels' => '@SyliusShop/account/order/label/state',
                         ],
                     ])
             )
