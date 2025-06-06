@@ -19,6 +19,12 @@ use Sylius\Component\Grid\Provider\ChainProvider;
 use Sylius\Component\Grid\Provider\ArrayGridProvider;
 use Sylius\Component\Grid\Exception\UndefinedGridException;
 
+/**
+* From 3.0 forward Sylius does not support the chain provider and only use Service grids. This is a BC layer for
+* allowing users to migrate on a per grid basis to the new configuration.
+*
+* @deprecated will be removed in 3.0
+*/
 final class OverrideGridProvider implements GridProviderInterface
 {
     /** @param array<string, mixed> $configuration */
