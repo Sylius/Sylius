@@ -178,6 +178,12 @@
         </service>
         <service id="Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" alias="sylius.calculator.product_variant_price" />
 
+        <service
+            id="sylius.calculator.product_variant_catalog_price"
+            class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator"
+            parent="sylius.calculator.product_variant_price"
+        />
+
         <service id="sylius.section_resolver.uri_based" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
             <argument type="service" id="request_stack" />
             <argument type="collection" />

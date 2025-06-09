@@ -55,7 +55,7 @@
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.calculator.product_variant_catalog_price" />
 
             <tag
                 name="sylius.twig_component"
@@ -81,7 +81,7 @@
             id="sylius_shop.twig.component.product.price"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Product\PriceComponent"
         >
-            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.calculator.product_variant_catalog_price" />
             <argument type="service" id="sylius.formatter.money" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />

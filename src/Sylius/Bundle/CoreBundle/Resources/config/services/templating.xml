@@ -23,7 +23,7 @@
         </service>
 
         <service id="sylius.twig.extension.price" class="Sylius\Bundle\CoreBundle\Twig\PriceExtension" public="false">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.calculator.product_variant_catalog_price" />
             <tag name="twig.extension" />
         </service>
 
