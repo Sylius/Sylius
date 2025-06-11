@@ -69,6 +69,7 @@ default:
                                 - --disable-application-cache
                                 - --enable-do-not-track
                                 - --disable-password-manager-leak-detection
+                                - --user-data-dir=./var/chrome/sessions
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension: ~
