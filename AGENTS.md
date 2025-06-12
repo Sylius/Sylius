@@ -84,3 +84,12 @@ Welcome, 🤖 AI assistant! Please follow these guidelines when contributing to 
 ## JavaScript
 
 ## CSS
+
+- Use SCSS (`.scss`) syntax – plain CSS files are not allowed
+- Use Bootstrap 5 utility classes where possible
+- Keep component styles modular – 1 component = 1 partial
+- Use variables from Sylius theme
+- Place all theme variables in `_variables.scss`
+- Avoid `!important` unless absolutely necessary
+- Prefer `rem` over `px` for spacing, font size, etc.
+- Use `mixins/` for reusable logic (e.g., `@include icon-size(24px)`)
