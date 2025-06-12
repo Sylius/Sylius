@@ -83,11 +83,22 @@
 {% endmacro %}
 
 {% macro cancel(params = {}) %}
+    {% set defaultAttr = {
+        'data-controller': 'back-button',
+        'data-action': 'click->back-button#goBack',
+        'data-back-button-current-url-value': app.request.uri,
+        'data-back-button-fallback-url-value': params.fallback_url,
+    } %}
+
     {% set params = {
         class: null,
         text: 'sylius.ui.cancel'|trans,
-        url: app.request.headers.get('referer'),
-    }|merge(params)%}
+        type: 'button',
+        attr: {},
+    }
+        |merge(params)
+        |merge({attr: (params.attr is defined ? params.attr : {})|merge(defaultAttr)})
+    %}
 
     {{ _self.default(params) }}
 {% endmacro %}

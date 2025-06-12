@@ -45,7 +45,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
 
     public function cancelChanges(): void
     {
-        $this->getDocument()->find('css', '[data-test-cancel-changes-button]')->click();
+        $this->getElement('back_button')->click();
     }
 
     public function getValidationMessage(string $element): string
@@ -89,10 +89,10 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
 
     protected function getDefinedElements(): array
     {
-        return array_merge(
-            parent::getDefinedElements(),
-            ['form' => 'form'],
-        );
+        return array_merge(parent::getDefinedElements(), [
+            'back_button' => '[data-test-cancel-changes-button]',
+            'form' => 'form',
+        ]);
     }
 
     protected function waitForFormUpdate(): void

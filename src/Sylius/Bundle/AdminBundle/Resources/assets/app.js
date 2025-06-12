@@ -19,6 +19,7 @@ import ProductTaxonTree from './controllers/ProductTaxonTreeController';
 import SavePositionsController from './controllers/SavePositionsController';
 import CompoundFormErrorsController from './controllers/CompoundFormErrorsController';
 import TabsErrorsController from './controllers/TabsErrorsController';
+import BackButtonController from './controllers/BackButtonController';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -37,5 +38,6 @@ app.register('product-taxon-tree', ProductTaxonTree);
 app.register('save-positions', SavePositionsController);
 app.register('compound-form-errors', CompoundFormErrorsController);
 app.register('tabs-errors', TabsErrorsController);
+app.register('back-button', BackButtonController);
 
 app.debug = process.env.NODE_ENV !== 'production';
