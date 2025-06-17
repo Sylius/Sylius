@@ -73,7 +73,14 @@ class OrderItemUnit implements OrderItemUnitInterface
 
         $this->adjustments->add($adjustment);
         $this->addToAdjustmentsTotal($adjustment);
-        $this->orderItem->recalculateUnitsTotal();
+        // @patch
+        if (method_exists($this->orderItem, 'increaseUnitsTotal')) {
+            if (!$adjustment->isNeutral()) {
+                $this->orderItem->increaseUnitsTotal($adjustment->getAmount());
+            }
+        } else {
+            $this->orderItem->recalculateUnitsTotal();
+        }
         $adjustment->setAdjustable($this);
         $this->recalculateAdjustmentsTotal();
     }

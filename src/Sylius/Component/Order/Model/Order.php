@@ -315,6 +315,15 @@ class Order implements OrderInterface
     }
 
     /**
+    * @internal
+    */
+    public function increaseItemsTotal(int $amount): void
+    {
+        $this->itemsTotal += $amount;
+        $this->recalculateTotal();
+    }
+
+    /**
      * Items total + Adjustments total.
      */
     protected function recalculateTotal(): void

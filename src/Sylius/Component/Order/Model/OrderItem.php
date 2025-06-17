@@ -292,6 +292,23 @@ class OrderItem implements OrderItemInterface
     }
 
     /**
+     * @internal
+     */
+    public function increaseUnitsTotal(int $amount): void
+    {
+        $this->unitsTotal += $amount;
+        $this->total += $amount;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
+
+        if (method_exists($this->order, 'increaseItemsTotal')) {
+            $this->order->increaseItemsTotal($amount);
+        }
+    }
+
+    /**
      * Recalculates total after units total or adjustments total change.
      */
     protected function recalculateTotal(): void
