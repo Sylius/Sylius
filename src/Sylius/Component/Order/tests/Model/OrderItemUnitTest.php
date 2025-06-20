@@ -15,9 +15,8 @@ namespace Tests\Sylius\Component\Order\Model;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Order\Model\Adjustment;
-use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\Order;
 use Sylius\Component\Order\Model\OrderItem;
-use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 
 final class OrderItemUnitTest extends TestCase
@@ -37,10 +36,15 @@ final class OrderItemUnitTest extends TestCase
         $adjustment->setNeutral(false);
         $adjustment->setAmount(400);
 
-        $oiu = new OrderItemUnit(new OrderItem());
+        $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
+        $oiu = new OrderItemUnit($oi);
         $oiu->addAdjustment($adjustment);
 
         $this->assertSame(400, $oiu->getTotal());
+        $this->assertSame(400, $oi->getTotal());
+        $this->assertSame(400, $o->getTotal());
     }
 
     public function testReturns0AsTotalEvenWhenAdjustmentsDecreasesItBelow0(): void
@@ -49,16 +53,24 @@ final class OrderItemUnitTest extends TestCase
         $adjustment->setNeutral(false);
         $adjustment->setAmount(-1400);
 
-        $oiu = new OrderItemUnit(new OrderItem());
+        $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
+        $oiu = new OrderItemUnit($oi);
         $oiu->addAdjustment($adjustment);
 
         $this->assertSame(0, $oiu->getTotal());
+        $this->assertSame(0, $oi->getTotal());
+        $this->assertSame(0, $o->getTotal());
     }
 
     public function testAddsAndRemovesAdjustments(): void
     {
         $adjustment = new Adjustment();
-        $oiu = new OrderItemUnit(new OrderItem());
+
+        $oi = new OrderItem();
+        $oi->setOrder(new Order());
+        $oiu = new OrderItemUnit($oi);
 
         $oiu->addAdjustment($adjustment);
         $this->assertTrue($oiu->hasAdjustment($adjustment));
@@ -70,7 +82,10 @@ final class OrderItemUnitTest extends TestCase
     public function testDoesNotRemoveAdjustmentWhenItIsLocked(): void
     {
         $adjustment = new Adjustment();
-        $oiu = new OrderItemUnit(new OrderItem());
+
+        $oi = new OrderItem();
+        $oi->setOrder(new Order());
+        $oiu = new OrderItemUnit($oi);
         $oiu->addAdjustment($adjustment);
 
         $adjustment->lock();
@@ -92,16 +107,22 @@ final class OrderItemUnitTest extends TestCase
         $adjustment3->setAmount(250);
 
         $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
         $oi->setUnitPrice(1000);
         $oiu = new OrderItemUnit($oi);
 
         $oiu->addAdjustment($adjustment1);
         $oiu->addAdjustment($adjustment2);
         $this->assertSame(1000 + 100 + 50, $oiu->getTotal());
+        $this->assertSame(1000 + 100 + 50, $oi->getTotal());
+        $this->assertSame(1000 + 100 + 50, $o->getTotal());
 
         $oiu->addAdjustment($adjustment3);
         $oiu->removeAdjustment($adjustment1);
         $this->assertSame(1000 + 50 + 250, $oiu->getTotal());
+        $this->assertSame(1000 + 50 + 250, $oi->getTotal());
+        $this->assertSame(1000 + 50 + 250, $o->getTotal());
     }
 
     public function testHasCorrectTotalAfterNeutralAdjustmentAddAndRemove(): void
@@ -109,14 +130,20 @@ final class OrderItemUnitTest extends TestCase
         $adjustment = new Adjustment();
         $adjustment->setNeutral(true);
         $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
         $oi->setUnitPrice(1000);
         $oiu = new OrderItemUnit($oi);
 
         $oiu->addAdjustment($adjustment);
         $this->assertSame(1000, $oiu->getTotal());
+        $this->assertSame(1000, $oi->getTotal());
+        $this->assertSame(1000, $o->getTotal());
 
         $oiu->removeAdjustment($adjustment);
         $this->assertSame(1000, $oiu->getTotal());
+        $this->assertSame(1000, $oi->getTotal());
+        $this->assertSame(1000, $o->getTotal());
     }
 
     public function testHasProperTotalAfterOrderItemUnitPriceChange(): void
@@ -124,13 +151,19 @@ final class OrderItemUnitTest extends TestCase
         $adjustment = new Adjustment();
         $adjustment->setAmount(50);
         $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
         $oi->setUnitPrice(1000);
         $oiu = new OrderItemUnit($oi);
 
         $oiu->addAdjustment($adjustment);
         $this->assertSame(1050, $oiu->getTotal());
+        $this->assertSame(1050, $oi->getTotal());
+        $this->assertSame(1050, $o->getTotal());
 
         $oi->setUnitPrice(500);
         $this->assertSame(550, $oiu->getTotal());
+        $this->assertSame(550, $oi->getTotal());
+        $this->assertSame(550, $o->getTotal());
     }
 }
