@@ -16,7 +16,7 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class OrderItem implements OrderItemInterface
+class OrderItem implements OrderItemInterface, IncreaseTotalInterface
 {
     /** @var mixed */
     protected $id;
@@ -294,7 +294,7 @@ class OrderItem implements OrderItemInterface
     /**
      * @internal
      */
-    public function increaseUnitsTotal(int $amount): void
+    public function increaseTotal(int $amount): void
     {
         $this->unitsTotal += $amount;
         $this->total += $amount;
@@ -303,8 +303,8 @@ class OrderItem implements OrderItemInterface
             $this->total = 0;
         }
 
-        if (method_exists($this->order, 'increaseItemsTotal')) {
-            $this->order->increaseItemsTotal($amount);
+        if ($this->order instanceof IncreaseTotalInterface) {
+            $this->order->increaseTotal($amount);
         }
     }
 
