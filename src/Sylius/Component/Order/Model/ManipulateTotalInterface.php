@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Order\Model;
 
 /* @internal **/
-interface IncreaseTotalInterface
+interface ManipulateTotalInterface
 {
     public function increaseTotal(int $amount): void;
+
+    public function decreaseTotal(int $amount): void;
 }

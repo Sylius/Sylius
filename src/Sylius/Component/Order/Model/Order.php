@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Resource\Model\TimestampableTrait;
 
-class Order implements OrderInterface, IncreaseTotalInterface
+class Order implements OrderInterface, ManipulateTotalInterface
 {
     use TimestampableTrait;
 
@@ -320,6 +320,15 @@ class Order implements OrderInterface, IncreaseTotalInterface
     public function increaseTotal(int $amount): void
     {
         $this->itemsTotal += $amount;
+        $this->recalculateTotal();
+    }
+
+    /**
+     * @internal
+     */
+    public function decreaseTotal(int $amount): void
+    {
+        $this->itemsTotal -= $amount;
         $this->recalculateTotal();
     }
 
