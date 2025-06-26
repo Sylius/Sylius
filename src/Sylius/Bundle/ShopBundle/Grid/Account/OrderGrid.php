@@ -45,6 +45,7 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
                 $this->channelContext->getChannel()->getId(),
             ])
             ->orderBy('checkoutCompletedAt', 'desc')
+            ->setLimits([10, 25, 50])
             ->addField(
                 TwigField::create('number', '@SyliusShop/account/order/grid/field/number.html.twig')
                     ->setLabel('sylius.ui.number')
