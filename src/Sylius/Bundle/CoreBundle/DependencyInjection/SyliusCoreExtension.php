@@ -74,6 +74,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.max_int_value', $config['max_int_value']);
         $container->setParameter('sylius_core.allowed_images_mime_types', $config['allowed_images_mime_types']);
         $container->setParameter('sylius_core.checkout.payment.allowed_states', $config['checkout']['payment']['allowed_states']);
+        $container->setParameter('sylius_core.routing.bc_layer', $config['routing']['bc_layer']);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
