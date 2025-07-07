@@ -31,6 +31,7 @@ use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
 use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolver;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
+use Sylius\Bundle\CoreBundle\Routing\RequestContext;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider;
 use Sylius\Bundle\CoreBundle\Security\ImpersonationVoter;
@@ -464,6 +465,14 @@ return static function (ContainerConfigurator $container) {
 
     $services->set('sylius.positioner', Positioner::class)->public();
     $services->alias(PositionerInterface::class, 'sylius.positioner')->public();
+
+    $services->set('sylius.routing.request_context', RequestContext::class)
+        ->decorate('router.request_context')
+        ->args([
+            service('.inner'),
+            param('sylius_core.routing.bc_layer'),
+        ])
+    ;
 
     $services
         ->set('sylius.security.voter.impersonation', ImpersonationVoter::class)
