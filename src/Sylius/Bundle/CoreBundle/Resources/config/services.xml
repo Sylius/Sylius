@@ -291,6 +291,15 @@
         <service id="sylius.positioner" class="Sylius\Component\Core\Positioner\Positioner" public="true" />
         <service id="Sylius\Component\Core\Positioner\PositionerInterface" alias="sylius.positioner" public="true" />
 
+        <service
+            id="sylius.routing.request_context"
+            class="Sylius\Bundle\CoreBundle\Routing\RequestContext"
+            decorates="router.request_context"
+        >
+            <argument type="service" id=".inner" />
+            <argument>%sylius_core.routing.bc_layer%</argument>
+        </service>
+
         <service id="sylius.security.voter.impersonation" class="Sylius\Bundle\CoreBundle\Security\ImpersonationVoter">
             <argument type="service" id="request_stack" />
             <argument type="service" id="security.firewall.map" />
