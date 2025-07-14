@@ -59,6 +59,10 @@ textarea.form-control {
     min-height: 44px;
 }
 
+.form-control[type="file"]::-webkit-file-upload-button {
+    min-height: 44px;
+}
+
 .form-control:focus {
     box-shadow: none;
 }
