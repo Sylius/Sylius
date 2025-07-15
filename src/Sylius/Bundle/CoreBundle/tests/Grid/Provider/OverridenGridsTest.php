@@ -26,12 +26,7 @@ final class OverridenGridsTest extends KernelTestCase
 {
     public function testPhpGridsHavingTheSameConfigurationAsYAMLGrids(): void
     {
-        // TODO: Enable this when https://github.com/Sylius/Sylius/pull/17675 is merged
-        // $gridConfiguration = self::getContainer()->getParameter('sylius_core.grids_configuration')['grids'] ?? [];
-        $gridConfiguration = [
-            'sylius_shop_account_order' => null,
-            'sylius_shop_product' => null,
-        ];
+        $gridConfiguration = self::getContainer()->getParameter('sylius_core.grids_configuration')['grids'] ?? [];
 
         $container = self::getContainer();
         $container->set(CustomerContextInterface::class, $this->createMock(CustomerContextInterface::class));
@@ -46,8 +41,6 @@ final class OverridenGridsTest extends KernelTestCase
 
             $this->assertEquals($yamlVersion, $serviceVersion);
         }
-
     }
-
 }
 
