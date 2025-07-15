@@ -35,7 +35,7 @@ final class OverrideGridProvider implements GridProviderInterface
 
     public function get(string $code): Grid
     {
-        $useYamlGrid = $this->configuration['use_legacy_yaml_config'] ?? $this->configuration['grids'][$code]['use_legacy_yaml_config'] ?? true;
+        $useYamlGrid = $this->configuration['use_legacy_config'] ?? $this->configuration['grids'][$code]['use_legacy_config'] ?? true;
         if ($useYamlGrid) {
             try {
                 return $this->arrayGridProvider->get($code);

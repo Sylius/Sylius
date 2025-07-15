@@ -52,7 +52,7 @@ final class OverrideGridProviderTest extends TestCase
         $configurableProvider = new OverrideGridProvider(
             [
                 'grids' => [
-                    'app_book' => ['use_legacy_yaml_config' => false],
+                    'app_book' => ['use_legacy_config' => false],
                 ],
             ],
             $this->chainProvider,
@@ -78,7 +78,7 @@ final class OverrideGridProviderTest extends TestCase
         ;
 
         $configurableProvider = new OverrideGridProvider(
-            ['use_legacy_yaml_config' => false],
+            ['use_legacy_config' => false],
             $this->chainProvider,
             $this->arrayProvider,
         );
