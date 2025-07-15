@@ -89,5 +89,14 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.statistics.orders_count_provider" type="year" />
         </service>
+
+        <service id="sylius.provider.override_grid_provider"
+            class="Sylius\Bundle\CoreBundle\Grid\Provider\OverrideGridProvider"
+            decorates="sylius.grid.chain_provider"
+        >
+            <argument>%sylius_core.grids_configuration%</argument>
+            <argument type="service" id="sylius.provider.override_grid_provider.inner"/>
+            <argument type="service" id="sylius.grid.array_grid_provider"/>
+        </service>
     </services>
 </container>
