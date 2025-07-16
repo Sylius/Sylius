@@ -67,8 +67,8 @@ final class CurrentPageResolverTest extends TestCase
 
         $this->session->expects($this->once())->method('getCurrentUrl')->willReturn('https://sylius.com/resource/show');
         $this->urlMatcher->expects($this->once())->method('match')->with('/resource/show')->willReturn(['_route' => 'sylius_resource_show']);
-        $createPage->expects($this->once())->method('getRouteName')->willReturn('sylius_resource_create');
-        $updatePage->expects($this->once())->method('getRouteName')->willReturn('sylius_resource_update');
+        $createPage->expects($this->exactly(2))->method('getRouteName')->willReturn('sylius_resource_create');
+        $updatePage->expects($this->exactly(2))->method('getRouteName')->willReturn('sylius_resource_update');
         $this->expectException(LogicException::class);
 
         $this->currentPageResolver->getCurrentPageWithForm([$createPage, $updatePage]);
