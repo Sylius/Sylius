@@ -39,6 +39,5 @@ final class RequestContext extends BaseRequestContext
     public function isSyliusRoutingBcLayerEnabled(string $key): bool
     {
         return $this->bcLayerConfig['routes'][$key]['enabled'] ?? $this->bcLayerConfig['enabled'] ?? true;
-
     }
 }
