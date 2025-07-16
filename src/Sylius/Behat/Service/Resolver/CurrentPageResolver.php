@@ -36,7 +36,10 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
         Assert::allIsInstanceOf($pages, SymfonyPageInterface::class);
 
         foreach ($pages as $page) {
-            if ($routeParameters['_route'] === $page->getRouteName()) {
+            if (
+                $routeParameters['_route'] === $page->getRouteName()
+                || $routeParameters['_route'] === '_' . $page->getRouteName()
+            )  {
                 return $page;
             }
         }
