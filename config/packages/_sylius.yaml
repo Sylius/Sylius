@@ -9,9 +9,23 @@ imports:
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
 
+sylius_core:
+    routing:
+        bc_layer:
+            enabled: true
+            routes:
+                admin_product:
+                    enabled: false
+
 sylius_api:
     enabled: true
 
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_resource:
+    routing_path_bc_layer: false
+    mapping:
+        imports:
+            - "%kernel.project_dir%/src/Sylius/Bundle/AdminBundle/Resources/config/app/sylius/resources/product.php"
