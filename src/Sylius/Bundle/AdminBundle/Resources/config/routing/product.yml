@@ -8,6 +8,7 @@ sylius_admin_product:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')"
     type: sylius.resource
 
 sylius_admin_product_create_simple:
