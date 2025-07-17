@@ -11,6 +11,7 @@
 
 declare(strict_types=1);
 
+use Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType;
 use Sylius\Bundle\AdminBundle\Form\Type\ProductType;
 use Sylius\Resource\Metadata\BulkDelete;
 use Sylius\Resource\Metadata\Create;
@@ -30,10 +31,37 @@ return (new ResourceMetadata())
     ->withRouteCondition("not context.isSyliusRoutingBcLayerEnabled('admin_product')")
     ->withOperations(new Operations([
         new Create(routeName: '_sylius_admin_product_create', redirectToRoute: 'sylius_admin_product_update'),
+        new Create(
+            path: 'products/new/simple',
+            routeName: '_sylius_admin_product_create_simple',
+            template: '@SyliusAdmin/shared/crud/create.html.twig',
+            shortName: 'create_simple',
+            factoryMethod: 'createWithVariant',
+            notificationMessage: 'sylius.resource.create',
+            redirectToRoute: 'sylius_admin_product_update',
+            vars: [
+                'route' => [
+                    'name' => 'sylius_admin_product_create_simple',
+                ],
+            ],
+        ),
         new Update(routeName: '_sylius_admin_product_update', redirectToRoute: 'sylius_admin_product_update'),
+        new Update(
+            methods: ['GET', 'POST'],
+            path: 'products/{productId}/variants/generate',
+            routeName: '_sylius_admin_product_variant_generate',
+            template: '@SyliusAdmin/product/generate_variants.html.twig',
+            shortName: 'generate_variants',
+            repositoryMethod: 'find',
+            repositoryArguments: ["request.attributes.get('productId')"],
+            formType: ProductGenerateVariantsType::class,
+            notificationMessage: 'sylius.product_variant.generate',
+            redirectToRoute: 'sylius_admin_product_variant_index',
+            redirectArguments: ['productId' => "request.attributes.get('productId')"],
+        ),
         new Delete(routeName: '_sylius_admin_product_delete', redirectToRoute: 'sylius_admin_product_index'),
         new BulkDelete(routeName: '_sylius_admin_product_bulk_delete', redirectToRoute: 'sylius_admin_product_index'),
         new Index(routeName: '_sylius_admin_product_index', grid: 'sylius_admin_product'),
         new Show(routeName: '_sylius_admin_product_show'),
     ]))
-    ;
+;
