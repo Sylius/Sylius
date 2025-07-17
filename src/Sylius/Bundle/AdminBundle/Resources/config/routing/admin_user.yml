@@ -10,6 +10,7 @@ sylius_admin_admin_user:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\AdminUserType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_admin_user')"
     type: sylius.resource
 
 sylius_admin_admin_user_remove_avatar:

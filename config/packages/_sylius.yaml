@@ -16,6 +16,8 @@ sylius_core:
         bc_layer:
             enabled: true
             routes:
+                admin_admin_user:
+                    enabled: false
                 admin_catalog_promotion:
                     enabled: false                
                 admin_product:
