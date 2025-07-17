@@ -9,6 +9,7 @@ sylius_admin_catalog_promotion:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_catalog_promotion')"
     type: sylius.resource
 
 sylius_admin_catalog_promotion_product_variant_index:
