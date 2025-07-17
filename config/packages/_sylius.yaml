@@ -16,6 +16,8 @@ sylius_core:
         bc_layer:
             enabled: true
             routes:
+                admin_catalog_promotion:
+                    enabled: false                
                 admin_product:
                     enabled: false
 
@@ -30,4 +32,4 @@ sylius_resource:
     routing_path_bc_layer: false
     mapping:
         imports:
-            - "%kernel.project_dir%/src/Sylius/Bundle/AdminBundle/Resources/config/app/sylius/resources/product.php"
+            - "%kernel.project_dir%/src/Sylius/Bundle/AdminBundle/Resources/config/app/sylius/resources"
