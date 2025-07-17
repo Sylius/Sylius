@@ -28,6 +28,7 @@ sylius_admin_product_create_simple:
             vars:
                 route:
                     name: sylius_admin_product_create_simple
+            condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')"
 
 sylius_admin_product_variant_generate:
     path: products/{productId}/variants/generate
@@ -47,7 +48,7 @@ sylius_admin_product_variant_generate:
                 method: find
                 arguments: [$productId]
             flash: sylius.product_variant.generate
-
+            condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')" 
 
 sylius_admin_channel_pricing_log_entry_index:
     path: products/{productId}/variants/{variantId}/channel-pricing/{channelPricingId}/channel-pricing-log-entries
