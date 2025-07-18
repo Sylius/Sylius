@@ -22,6 +22,7 @@ sylius_core:
                 admin_country: false
                 admin_currency: false
                 admin_customer: false
+                admin_customer_group: false
                 admin_locale: false
                 admin_product: false
 
