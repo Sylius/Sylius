@@ -37,6 +37,7 @@ return (new ResourceMetadata())
             template: '@SyliusAdmin/shared/crud/create.html.twig',
             shortName: 'create_simple',
             factoryMethod: 'createWithVariant',
+            eventShortName: 'create',
             notificationMessage: 'sylius.resource.create',
             redirectToRoute: 'sylius_admin_product_update',
             vars: [
@@ -55,6 +56,7 @@ return (new ResourceMetadata())
             repositoryMethod: 'find',
             repositoryArguments: ["request.attributes.get('productId')"],
             formType: ProductGenerateVariantsType::class,
+            eventShortName: 'update',
             notificationMessage: 'sylius.product_variant.generate',
             redirectToRoute: 'sylius_admin_product_variant_index',
             redirectArguments: ['productId' => "request.attributes.get('productId')"],

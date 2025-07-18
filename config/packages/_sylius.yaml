@@ -19,9 +19,9 @@ sylius_core:
                 admin_admin_user:
                     enabled: false
                 admin_catalog_promotion:
-                    enabled: false                
-                admin_channel:            
-                    enabled: false        
+                    enabled: false
+                admin_channel:
+                    enabled: false
                 admin_country:
                     enabled: false
                 admin_product:
