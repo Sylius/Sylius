@@ -16,6 +16,8 @@ sylius_core:
             routes:
                 admin_catalog_promotion:
                     enabled: false                
+                admin_channel:
+                    enabled: false                
                 admin_product:
                     enabled: false
 
