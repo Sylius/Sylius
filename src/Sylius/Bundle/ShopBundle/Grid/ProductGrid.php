@@ -19,26 +19,11 @@ use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Webmozart\Assert\Assert;
 
 final class ProductGrid extends AbstractGrid
 {
-    /**
-     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
-     */
     public function __construct(
         private string $resourceClass,
-        private ChannelContextInterface $channelContext,
-        private LocaleContextInterface $localeContext,
-        private TaxonRepositoryInterface $taxonRepository,
-        private RequestStack $requestStack,
-        private bool $includeAllDescendants,
     ) {
     }
 
@@ -49,24 +34,13 @@ final class ProductGrid extends AbstractGrid
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
-        $request = $this->requestStack->getMainRequest();
-        Assert::notNull($request, 'No main request available.');
-
-        $localeCode = $this->localeContext->getLocaleCode();
-
-        // @see Sylius\Bundle\ResourceBundle\ExpressionLanguage\NotNullExpressionFunctionProvider
-        $taxon = $this->taxonRepository->findOneBySlug($request->attributes->get('slug'), $localeCode);
-        if ($taxon === null) {
-            throw new NotFoundHttpException('Requested page is invalid');
-        }
-
         $gridBuilder
             ->setRepositoryMethod('createShopListQueryBuilder', [
-                $this->channelContext->getChannel(),
-                $taxon,
-                $localeCode,
-                $request->query->all('sorting'),
-                $this->includeAllDescendants,
+               'channel' => "expr:service('sylius.context.channel').getChannel()",
+               'taxon' => "expr:notFoundOnNull(service('sylius.repository.taxon').findOneBySlug(\$slug, service('sylius.context.locale').getLocaleCode()))",
+               'locale' => "expr:service('sylius.context.locale').getLocaleCode()",
+               'sorting' => "expr:service('request_stack').getCurrentRequest().get('sorting', [])",
+               'includeAllDescendants' => "expr:parameter('sylius_shop.product_grid.include_all_descendants')",
             ])
             ->setDriverOption('class', $this->resourceClass)
             ->orderBy('position', 'asc')

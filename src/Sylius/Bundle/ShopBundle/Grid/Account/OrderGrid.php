@@ -19,15 +19,11 @@ use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 final class OrderGrid extends AbstractGrid
 {
     public function __construct(
         private string $resourceClass,
-        private CustomerContextInterface $customerContext,
-        private ChannelContextInterface $channelContext,
     ) {
     }
 
@@ -40,8 +36,8 @@ final class OrderGrid extends AbstractGrid
     {
         $gridBuilder
             ->setRepositoryMethod('createByCustomerAndChannelIdQueryBuilder', [
-                $this->customerContext->getCustomer()?->getId(),
-                $this->channelContext->getChannel()->getId(),
+                "expr:service('sylius.context.customer').getCustomer().getId()",
+                "expr:service('sylius.context.channel').getChannel().getId()"
             ])
             ->setDriverOption('class', $this->resourceClass)
             ->orderBy('checkoutCompletedAt', 'desc')
