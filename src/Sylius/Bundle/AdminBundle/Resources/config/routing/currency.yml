@@ -9,4 +9,5 @@ sylius_admin_currency:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\CurrencyType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_currency')"
     type: sylius.resource
