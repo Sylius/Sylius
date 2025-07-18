@@ -24,6 +24,7 @@ sylius_core:
                 admin_customer: false
                 admin_customer_group: false
                 admin_exchange_rate: false
+                admin_inventory: false
                 admin_locale: false
                 admin_order: false
                 admin_order_payment: false
