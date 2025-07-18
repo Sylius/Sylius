@@ -26,6 +26,8 @@ sylius_core:
                     enabled: false
                 admin_currency:
                     enabled: false
+                admin_customer:
+                    enabled: false
                 admin_product:
                     enabled: false
 
