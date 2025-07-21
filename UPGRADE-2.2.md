@@ -22,6 +22,15 @@
 1. Direct usage of `loader.svg` and `loader.gif` assets is deprecated.
    Use `@SyliusAdmin/shared/helper/loader.html.twig` or `@SyliusShop/shared/macro/loader.html.twig` instead.
 
+### Routing
+
+The routing path for the `sylius_admin_locale_delete` route has been updated:
+
+```diff
+- admin/locales/{id}
++ admin/locales/{id}/delete
+```
+
 ### Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
