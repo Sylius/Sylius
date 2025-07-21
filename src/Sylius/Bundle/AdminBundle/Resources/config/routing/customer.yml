@@ -9,6 +9,7 @@ sylius_admin_customer:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\CustomerType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_customer')"
     type: sylius.resource
 
 sylius_admin_customer_order_index:
