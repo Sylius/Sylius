@@ -21,6 +21,7 @@ sylius_core:
                 admin_currency: false
                 admin_customer: false
                 admin_locale: false
+                admin_order: false
                 admin_product: false
 
 sylius_api:
