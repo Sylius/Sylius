@@ -37,6 +37,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider;
 use Sylius\Bundle\CoreBundle\Security\ImpersonationVoter;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetter;
 use Sylius\Bundle\CoreBundle\ShippingMethod\Updater\ShippingMethodUpdater;
+use Sylius\Bundle\CoreBundle\StateMachine\State\ApplyStateMachineTransitionProcessor;
 use Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension;
 use Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension;
 use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
@@ -98,6 +99,7 @@ use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
+use Sylius\Resource\Doctrine\Common\State\PersistProcessor;
 
 return static function (ContainerConfigurator $container) {
     $container->import('services/*.php');
@@ -479,6 +481,14 @@ return static function (ContainerConfigurator $container) {
             service('.inner'),
             param('sylius_core.routing.bc_layer'),
         ])
+    ;
+
+    $services->set(ApplyStateMachineTransitionProcessor::class)
+        ->args([
+            service('sylius_abstraction.state_machine'),
+            service(PersistProcessor::class),
+        ])
+        ->tag('sylius.state_processor')
     ;
 
     $services
