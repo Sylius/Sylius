@@ -23,6 +23,7 @@ sylius_core:
                 admin_customer_group: false
                 admin_exchange_rate: false
                 admin_locale: false
+                admin_order: false
                 admin_product: false
 
 sylius_api:
