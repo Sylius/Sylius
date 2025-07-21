@@ -53,8 +53,18 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
 
 1. The `Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface::updateFromReview()` method has been deprecated and will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.
 
+## Routing
+
+The routing path for the `sylius_admin_locale_delete` route has been updated:
+
+```diff
+- admin/locales/{id}
++ admin/locales/{id}/delete
+```
+
 ## Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
    is always placed at the beginning of the returned locales array.  
    Other locales remain in the same order as returned by the repository.
+
