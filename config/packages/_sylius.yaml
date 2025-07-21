@@ -16,22 +16,14 @@ sylius_core:
         bc_layer:
             enabled: true
             routes:
-                admin_admin_user:
-                    enabled: false
-                admin_catalog_promotion:
-                    enabled: false
-                admin_channel:
-                    enabled: false
-                admin_country:
-                    enabled: false
-                admin_currency:
-                    enabled: false
-                admin_customer:
-                    enabled: false
-                admin_locale:
-                    enabled: false
-                admin_product:
-                    enabled: false
+                admin_admin_user: false
+                admin_catalog_promotion: false
+                admin_channel: false
+                admin_country: false
+                admin_currency: false
+                admin_customer: false
+                admin_locale: false
+                admin_product: false
 
 sylius_api:
     enabled: true
