@@ -121,6 +121,15 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
    It moves Bootstrap modal elements to `<body>` before they are displayed,
    preventing them from being rendered behind the Bootstrap backdrop when nested inside a CSS stacking context (e.g. the sticky `.page-header`).
 
+## Routing
+
+The routing path for the `sylius_admin_locale_delete` route has been updated:
+
+```diff
+- admin/locales/{id}
++ admin/locales/{id}/delete
+```
+
 ## Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
