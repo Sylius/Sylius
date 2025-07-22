@@ -81,6 +81,7 @@ sylius_admin_order_cancel:
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order_payment')"
     defaults:
         _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
@@ -102,6 +103,7 @@ sylius_admin_order_payment_complete:
 sylius_admin_order_payment_refund:
     path: /orders/{orderId}/payments/{id}/refund
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order_payment')"
     defaults:
         _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
