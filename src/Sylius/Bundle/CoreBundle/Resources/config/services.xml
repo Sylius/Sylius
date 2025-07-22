@@ -300,6 +300,12 @@
             <argument>%sylius_core.routing.bc_layer%</argument>
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\StateMachine\State\ApplyStateMachineTransitionProcessor">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <argument type="service" id="Sylius\Resource\Doctrine\Common\State\PersistProcessor" />
+            <tag name="sylius.state_processor" />
+        </service>
+
         <service id="sylius.security.voter.impersonation" class="Sylius\Bundle\CoreBundle\Security\ImpersonationVoter">
             <argument type="service" id="request_stack" />
             <argument type="service" id="security.firewall.map" />
