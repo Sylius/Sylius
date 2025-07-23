@@ -30,6 +30,7 @@ sylius_core:
                 admin_order_shipment: false
                 admin_payment: false
                 admin_payment_method: false
+                admin_payment_request: false
                 admin_product: false
 
 sylius_api:
