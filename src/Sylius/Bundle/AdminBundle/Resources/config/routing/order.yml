@@ -125,6 +125,7 @@ sylius_admin_order_payment_refund:
 sylius_admin_order_shipment_ship:
     path: /orders/{orderId}/shipment/{id}/ship
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order_shipment')"
     defaults:
         _controller: sylius.controller.shipment::updateAction
         _sylius:
