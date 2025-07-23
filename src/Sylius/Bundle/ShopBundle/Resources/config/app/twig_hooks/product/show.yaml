@@ -3,8 +3,8 @@ sylius_twig_hooks:
         'sylius_shop.product.show':
             content:
                 template: '@SyliusShop/product/show/content.html.twig'
-                priority: 0    
-        
+                priority: 0
+
         'sylius_shop.product.show.content':
             header:
                 template: '@SyliusShop/product/show/content/header.html.twig'
@@ -54,7 +54,7 @@ sylius_twig_hooks:
             short_description:
                 template: '@SyliusShop/product/show/content/info/summary/short_description.html.twig'
                 priority: 0
-                
+
         'sylius_shop.product.show.content.info.summary.average_rating':
             rating:
                 template: '@SyliusShop/product/show/content/info/summary/average_rating/rating.html.twig'
