@@ -33,6 +33,7 @@ sylius_core:
                 admin_payment_request: false
                 admin_product: false
                 admin_product_association_type: false
+                admin_product_attribute: false
 
 sylius_api:
     enabled: true
