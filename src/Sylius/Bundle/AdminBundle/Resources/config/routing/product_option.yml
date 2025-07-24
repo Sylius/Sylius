@@ -9,4 +9,5 @@ sylius_admin_product_option:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ProductOptionType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_option')"
     type: sylius.resource
