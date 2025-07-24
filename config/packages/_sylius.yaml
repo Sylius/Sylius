@@ -33,6 +33,7 @@ sylius_core:
                 admin_product_association_type: false
                 admin_product_attribute: false
                 admin_product_option: false
+                admin_product_review: false
 
 sylius_api:
     enabled: true
