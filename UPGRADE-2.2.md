@@ -45,6 +45,13 @@ The routing path for the `sylius_admin_product_review_reject` route has been upd
 + admin/product-reviews/{id}/reject
 ```
 
+The routing path for the `sylius_admin_product_variant_delete` route has been updated:
+
+```diff
+- admin/products/{productId}/variants/{id}
++ admin/products/{productId}/variants/{id}/delete
+```
+
 ### Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
