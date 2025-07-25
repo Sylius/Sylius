@@ -36,6 +36,7 @@ sylius_core:
                 admin_product_option: false
                 admin_product_review: false
                 admin_product_taxon: false
+                admin_product_variant: false
 
 sylius_api:
     enabled: true
