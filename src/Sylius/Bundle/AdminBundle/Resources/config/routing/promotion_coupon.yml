@@ -1,6 +1,7 @@
 sylius_admin_promotion_coupon_index:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')"
     defaults:
         _controller: sylius.controller.promotion_coupon::indexAction
         _sylius:
@@ -14,6 +15,7 @@ sylius_admin_promotion_coupon_index:
 sylius_admin_promotion_coupon_create:
     path: /new
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')"
     defaults:
         _controller: sylius.controller.promotion_coupon::createAction
         _sylius:
@@ -38,6 +40,7 @@ sylius_admin_promotion_coupon_create:
 sylius_admin_promotion_coupon_update:
     path: /{id}/edit
     methods: [GET, PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')"
     defaults:
         _controller: sylius.controller.promotion_coupon::updateAction
         _sylius:
@@ -76,8 +79,9 @@ sylius_admin_promotion_coupon_generate:
                         promotionId: $promotionId
 
 sylius_admin_promotion_coupon_bulk_delete:
-    path: /bulk-delete
+    path: /bulk_delete
     methods: [DELETE]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')"
     defaults:
         _controller: sylius.controller.promotion_coupon::bulkDeleteAction
         _sylius:
@@ -92,8 +96,9 @@ sylius_admin_promotion_coupon_bulk_delete:
                 arguments: [$ids]
 
 sylius_admin_promotion_coupon_delete:
-    path: /{id}
+    path: /{id}/delete
     methods: [DELETE]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')"
     defaults:
         _controller: sylius.controller.promotion_coupon::deleteAction
         _sylius:
