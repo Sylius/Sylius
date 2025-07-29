@@ -6,6 +6,7 @@ sylius_admin_shipment:
         only: ['index', 'show']
         grid: sylius_admin_shipment
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_shipment')"
     type: sylius.resource
     
 sylius_admin_shipment_show:
@@ -21,6 +22,7 @@ sylius_admin_shipment_show:
 sylius_admin_shipment_ship:
     path: /shipments/{id}/ship
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_shipment')"
     defaults:
         _controller: sylius.controller.shipment::updateAction
         _sylius:

@@ -40,6 +40,7 @@ sylius_core:
                 admin_product_taxon: false
                 admin_product_variant: false
                 admin_promotion_coupon: false
+                admin_shipment: false
 
 sylius_api:
     enabled: true
