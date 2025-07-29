@@ -230,6 +230,9 @@
         "symfony/web-profiler-bundle": "^6.4 || ^7.4",
         "symplify/monorepo-builder": "^11.0"
     },
+    "conflict": {
+        "symfony/ux-live-component": "^2.28"
+    },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
         "ext-intl": "For better performance than using Symfony Polyfill Component",
