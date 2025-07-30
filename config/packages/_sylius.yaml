@@ -40,6 +40,7 @@ sylius_core:
                 admin_promotion: false
                 admin_promotion_coupon: false
                 admin_shipment: false
+                admin_shipping_category: false
 
 sylius_api:
     enabled: true
