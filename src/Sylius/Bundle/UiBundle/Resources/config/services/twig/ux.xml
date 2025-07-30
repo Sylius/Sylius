@@ -20,5 +20,13 @@
             <argument type="service" id="twig.loader.native_filesystem" />
             <argument>%sylius_ui.twig_ux.anonymous_component_template_prefixes%</argument>
         </service>
+
+        <service
+            id="sylius.util.ux.url_factory"
+            class="Sylius\Bundle\UiBundle\Util\Ux\UrlFactory"
+            decorates="ux.live_component.url_factory"
+        >
+            <argument type="service" id="router" />
+        </service>
     </services>
 </container>
