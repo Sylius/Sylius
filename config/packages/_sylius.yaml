@@ -45,6 +45,7 @@ sylius_core:
                 admin_shop_user: false
                 admin_tax_category: false
                 admin_tax_rate: false
+                admin_zone: false
 
 sylius_api:
     enabled: true
