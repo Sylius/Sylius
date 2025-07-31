@@ -9,11 +9,13 @@ sylius_admin_zone:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_zone')"
     type: sylius.resource
 
 sylius_admin_zone_create:
     path: /zones/{type}/new
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_zone')"
     defaults:
         _controller: sylius.controller.zone::createAction
         _sylius:
