@@ -44,3 +44,10 @@ The routing path for the `sylius_admin_promotion_coupon_bulk_delete` route has b
 - /admin/promotions/{promotionId}/coupons/bulk-delete
 + /admin/promotions/{promotionId}/coupons/bulk_delete
 ```
+
+The routing path for the `sylius_admin_shop_user_delete` route has been updated:
+
+```diff
+- /admin/shop-user/{id}
++ /admin/shop-users/{id}/delete
+```
