@@ -9,4 +9,5 @@ sylius_admin_tax_rate:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\TaxRateType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_tax_rate')"
     type: sylius.resource
