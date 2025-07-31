@@ -43,6 +43,7 @@ sylius_core:
                 admin_shipping_category: false
                 admin_shipping_method: false
                 admin_shop_user: false
+                admin_tax_category: false
 
 sylius_api:
     enabled: true
