@@ -4,6 +4,7 @@
 sylius_shop_product_review_index:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_product_review')"
     defaults:
         _controller: sylius.controller.product_review::indexAction
         _sylius:
@@ -18,6 +19,7 @@ sylius_shop_product_review_index:
 sylius_shop_product_review_create:
     path: /new
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_product_review')"
     defaults:
         _controller: sylius.controller.product_review::createAction
         _sylius:

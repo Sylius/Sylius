@@ -130,6 +130,8 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
 
     protected function getContainerExtensions(): array
     {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusShopBundle' => ['path' => __DIR__ . '../..']]);
+
         return [
             new SyliusShopExtension(),
         ];
