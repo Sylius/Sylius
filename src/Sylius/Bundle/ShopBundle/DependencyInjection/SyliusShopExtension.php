@@ -57,6 +57,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
 
     public function prepend(ContainerBuilder $container): void
     {
+        $this->prependResourceMapping($container);
         $this->prependSyliusThemeBundle($container);
     }
 
@@ -138,5 +139,15 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['final_route_parameters']);
         $container->setParameter('sylius_shop.order_pay.retry_route', $config['retry_route']);
         $container->setParameter('sylius_shop.order_pay.retry_route_parameters', $config['retry_route_parameters']);
+    }
+
+    private function prependResourceMapping(ContainerBuilder $container): void
+    {
+        /** @var array<string, array<string, string>> $metadata */
+        $metadata = $container->getParameter('kernel.bundles_metadata');
+
+        $path = $metadata['SyliusShopBundle']['path'] . '/Resources/config/app/sylius/resources';
+
+        $container->prependExtensionConfig('sylius_resource', ['mapping' => ['imports' => [$path]]]);
     }
 }

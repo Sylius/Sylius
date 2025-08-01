@@ -26,6 +26,7 @@ final class RegisterReviewFactoryPass implements CompilerPassInterface
             $factory = $container->findDefinition('sylius.factory.' . $subject . '_review');
 
             $reviewFactoryDefinition = new Definition(ReviewFactory::class, [$factory]);
+            $reviewFactoryDefinition->addTag('sylius.resource_factory');
             $reviewFactoryDefinition->setPublic(true);
 
             $container->setDefinition(sprintf('sylius.factory.%s_review', $subject), $reviewFactoryDefinition);
