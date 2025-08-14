@@ -160,8 +160,7 @@
 
 ## The Performance Guide
 
-* [Database indexes](the-performance-guide/database-indexes.md)
-* [Query optimization](the-performance-guide/query-optimization.md)
+* [Performance Optimization Concept](the-performance-guide/performance-optimization-concept.md)
 
 ## Sylius 1.X Documentation
 
