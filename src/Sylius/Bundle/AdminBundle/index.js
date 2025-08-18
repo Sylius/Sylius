@@ -25,6 +25,7 @@ class SyliusAdmin {
                 // eslint-disable-next-line no-param-reassign
                 options.additionalData = `$rootDir: '${rootDir}';`;
             })
+            .enableIntegrityHashes(Encore.isProduction())
             .enableStimulusBridge(path.resolve(__dirname, 'Resources/assets/controllers.json'));
 
         const adminConfig = Encore.getWebpackConfig();
