@@ -26,6 +26,10 @@ class SyliusAdmin {
                 options.additionalData = `$rootDir: '${rootDir}';`;
             })
             .enableIntegrityHashes(Encore.isProduction())
+            .configureFilenames({
+                js: 'js/[name].[contenthash:8].js',
+                css: 'css/[name].[contenthash:8].css',
+            })
             .enableStimulusBridge(path.resolve(__dirname, 'Resources/assets/controllers.json'));
 
         const adminConfig = Encore.getWebpackConfig();
