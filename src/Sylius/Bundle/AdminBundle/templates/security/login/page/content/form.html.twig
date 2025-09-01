@@ -4,5 +4,7 @@
 
 {{ form_start(form, {'action': path('sylius_admin_login_check'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
     {% hook 'form' with { form } %}
-    <input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">
+    {% if sylius sylius_csrf_protection_enabled() %}
+        <input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">
+    {% endif %}
 {{ form_end(form, {'render_rest': false}) }}
