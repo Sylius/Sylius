@@ -33,6 +33,10 @@ final class Symfony6PrivateServicesPass implements CompilerPassInterface
 
     private function makeServicePublic(string $serviceId, ContainerBuilder $container): void
     {
+        if (!$container->hasDefinition($serviceId)) {
+            return;
+        }
+
         $service = $container->getDefinition($serviceId);
         $service->setPublic(true);
         $container->setDefinition($serviceId, $service);
