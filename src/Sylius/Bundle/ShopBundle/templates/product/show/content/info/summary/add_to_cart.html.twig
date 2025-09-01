@@ -17,7 +17,6 @@
 
             {% hook 'add_to_cart' with { product, form } %}
 
-            {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
         </div>
     {% endif %}
