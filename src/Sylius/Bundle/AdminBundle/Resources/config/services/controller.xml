@@ -43,13 +43,13 @@
         <service id="sylius_admin.controller.remove_avatar" class="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction">
             <argument type='service' id="sylius.repository.avatar_image" />
             <argument type="service" id="router" />
-            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="security.csrf.token_manager" on-invalid="null" />
         </service>
 
         <service id="sylius_admin.controller.resend_order_confirmation_email" class="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction">
             <argument type='service' id="sylius.repository.order" />
             <argument type="service" id="sylius.command_dispatcher.resend_order_confirmation_email" />
-            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="security.csrf.token_manager" on-invalid="null" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
         </service>
@@ -57,7 +57,7 @@
         <service id="sylius_admin.controller.resend_shipment_confirmation_email" class="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction">
             <argument type='service' id="sylius.repository.shipment" />
             <argument type="service" id="sylius.command_dispatcher.resend_shipment_confirmation_email" />
-            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="security.csrf.token_manager" on-invalid="null" />
             <argument type="service" id="request_stack" />
         </service>
 

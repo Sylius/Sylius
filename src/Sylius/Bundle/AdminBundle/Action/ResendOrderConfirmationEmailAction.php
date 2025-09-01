@@ -32,7 +32,7 @@ final readonly class ResendOrderConfirmationEmailAction
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private ResendOrderConfirmationEmailDispatcherInterface $resendOrderConfirmationEmailDispatcher,
-        private CsrfTokenManagerInterface $csrfTokenManager,
+        private ?CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack $requestStack,
         private RouterInterface $router,
     ) {
@@ -42,7 +42,7 @@ final readonly class ResendOrderConfirmationEmailAction
     {
         $orderId = $request->attributes->get('id', '');
 
-        if (!$this->csrfTokenManager->isTokenValid(
+        if ($this->csrfTokenManager && !$this->csrfTokenManager->isTokenValid(
             new CsrfToken($orderId, (string) $request->query->get('_csrf_token', '')),
         )) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
