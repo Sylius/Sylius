@@ -71,3 +71,51 @@ Each minor Sylius version is maintained for a fixed time after its release. This
 All Sylius releases have to comply with our [Backward Compatibility Promise](backwards-compatibility-promise.md).
 
 Whenever keeping backward compatibility is not possible, the feature, the enhancement, or the bug fix will be scheduled for the next major version.
+
+***
+
+### Pre-release Testing, Dependency Verification, and Security Assurance
+
+Before every new release of Sylius (both patch, minor, and major versions), we execute a rigorous, automated validation pipeline to ensure that the software meets our standards for stability, compatibility, and security.
+
+#### **Comprehensive Build Matrix**
+
+Each release triggers a test matrix in our Continuous Integration (CI) environment that covers:
+
+* All maintained Sylius packages (monorepo and split packages).
+* All supported combinations of PHP and Symfony versions.
+* Multiple permutations of optional or edge dependencies (e.g., different versions of Doctrine, API Platform, or Payum).
+* Both production and development Composer flags (e.g., `prefer-stable`, `prefer-lowest`).
+
+This ensures that the codebase is compatible across environments and that integrations between components (Admin, Shop, API, Core, Resource, Grid, etc.) function as expected.
+
+#### **Security Advisory Checks**
+
+We enforce security checks using [FriendsOfPHP/security-advisories](https://github.com/FriendsOfPHP/security-advisories?utm_source=chatgpt.com) – a widely trusted community-maintained database of known PHP vulnerabilities (CVE reports). This step verifies:
+
+* That none of the currently installed Composer dependencies are affected by a published CVE.
+* That the minimum and maximum version constraints defined in `composer.json` files only allow secure versions to be installed.
+
+If a vulnerability is detected in a direct or transitive dependency, we block the release. Our process then includes:
+
+1. Waiting for an upstream fix, and updating the dependency constraint to exclude vulnerable versions (via `conflict` or `>=` constraints).
+2. Proactive contribution, where possible, to the affected project to accelerate the resolution.
+3. Patch-based mitigation, in rare cases, where we apply a temporary workaround internally or isolate the vulnerable component.
+
+#### **Continuous Verification**
+
+Our pipelines also run scheduled builds on `main` and supported version branches to continuously monitor the security status and compatibility of the codebase, even outside of formal release cycles.
+
+We monitor the release feeds of Symfony, PHP, and key dependencies to anticipate breaking changes or critical security releases early. This allows us to proactively plan compatibility updates, rather than reactively patching post-release.
+
+#### **Release Lock and Governance**
+
+Every release candidate must pass the full suite of:
+
+* Unit and functional tests
+* Behat integration scenarios (covering the Admin, Shop, API)
+* Security validations
+* Package publish dry runs (to test split package readiness)
+* Upgrade and BC compliance checks
+
+Only after these checks pass is a release approved and tagged publicly. This gatekeeping mechanism ensures that all published Sylius releases conform to enterprise-grade software lifecycle standards and can safely be used.
