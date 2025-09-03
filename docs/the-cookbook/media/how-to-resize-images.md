@@ -1,6 +1,6 @@
 # How to resize images?
 
-twSylius uses [LiipImagineBundle](https://symfony.com/doc/current/bundles/LiipImagineBundle/index.html) to handle image manipulation, including resizing and generating thumbnails.
+Sylius uses [LiipImagineBundle](https://symfony.com/doc/current/bundles/LiipImagineBundle/index.html) to handle image manipulation, including resizing and generating thumbnails.
 
 {% hint style="success" %}
 For a full list of supported filters and configuration options, see the [LiipImagineBundle filter documentation](https://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html).
