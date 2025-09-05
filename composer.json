@@ -38,7 +38,7 @@
         "behat/transliterator": "^1.5",
         "doctrine/collections": "^2.2",
         "doctrine/common": "^3.2",
-        "doctrine/dbal": "^3.9",
+        "doctrine/dbal": "^4.3",
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/event-manager": "^2.0",
