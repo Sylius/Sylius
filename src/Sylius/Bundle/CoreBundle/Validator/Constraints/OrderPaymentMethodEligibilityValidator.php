@@ -13,13 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Bundle\CoreBundle\Resolver\OrderPaymentMethodEligibilityResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 {
+    public function __construct(private readonly OrderPaymentMethodEligibilityResolverInterface $checker)
+    {
+    }
+
     /**
      * @throws \InvalidArgumentException
      */
@@ -34,10 +40,11 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
         $payments = $value->getPayments();
 
         foreach ($payments as $payment) {
-            if (!$payment->getMethod()->isEnabled()) {
+            $paymentMethod = $payment->getMethod();
+            if ($paymentMethod instanceof PaymentMethodInterface && !$this->checker->isPaymentMethodAvailable($paymentMethod)) {
                 $this->context->addViolation(
                     $constraint->message,
-                    ['%paymentMethodName%' => $payment->getMethod()->getName()],
+                    ['%paymentMethodName%' => $paymentMethod->getName()],
                 );
             }
         }
