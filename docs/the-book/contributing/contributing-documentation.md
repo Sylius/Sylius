@@ -6,7 +6,7 @@ We welcome all contributions to improve the Sylius documentation! Whether you're
 
 1. A [**GitBook**](https://www.gitbook.com/) **account** (sign in with GitHub, Google, or email)
 2. A **specific invite link** for the docs section you want to contribute to (see below)
-3. Gitbook basics - check the [documentation](https://gitbook.com/docs/).
+3. GitBook basics - check the [documentation](https://gitbook.com/docs/).
 
 ### Access by Documentation Section
 
