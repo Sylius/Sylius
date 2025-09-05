@@ -11,19 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Resolver;
+namespace Sylius\Component\Payment\Checker;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-class OrderPaymentMethodEligibilityResolver implements OrderPaymentMethodEligibilityResolverInterface
+class OrderPaymentMethodEligibilityChecker implements OrderPaymentMethodEligibilityCheckerInterface
 {
     public function __construct(private readonly ChannelContextInterface $channelContext)
     {
     }
 
-    public function isPaymentMethodAvailable(?PaymentMethodInterface $paymentMethod): bool
+    public function isEligible(?PaymentMethodInterface $paymentMethod): bool
     {
         try {
             $channel = $this->channelContext->getChannel();

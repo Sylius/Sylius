@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Resolver;
+namespace Sylius\Component\Payment\Checker;
 
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-interface OrderPaymentMethodEligibilityResolverInterface
+interface OrderPaymentMethodEligibilityCheckerInterface
 {
-    public function isPaymentMethodAvailable(?PaymentMethodInterface $paymentMethod): bool;
+    public function isEligible(?PaymentMethodInterface $paymentMethod): bool;
 }
