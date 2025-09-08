@@ -62,7 +62,7 @@ class FormComponent
 
         if (null === $this->eventDispatcher) {
             trigger_deprecation(
-                'sylius/sylius',
+                'sylius/shop-bundle',
                 '2.2',
                 'Not passing an $eventDispatcher to the constructor of %s is deprecated and will be required in Sylius 3.0.',
                 self::class,
