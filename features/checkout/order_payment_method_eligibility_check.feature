@@ -1,5 +1,5 @@
 @checkout
-Feature: Preventing placing an order with a disabled shipping method when in checkout complete step
+Feature: Preventing placing an order with a disabled payment method when in checkout complete step
     In order to have my order shipped without issues
     As a Customer
     I want to be prevented from placing an order with a disabled shipping method
@@ -12,7 +12,7 @@ Feature: Preventing placing an order with a disabled shipping method when in che
         And I am a logged in customer
 
     @ui @api
-    Scenario: Being prevented from placing an order with a shipping method that's has been disabled for the customer's country after completing the shipping method choice step
+    Scenario: Being prevented from placing an order with a payment method that's has been disabled for the customer's country after completing the shipping method choice step
         Given I added product "Ubi T-Shirt" to the cart
         And I have proceeded through checkout process with "Free" shipping method
         And I have proceeded selecting "Bank Transfer" payment method
