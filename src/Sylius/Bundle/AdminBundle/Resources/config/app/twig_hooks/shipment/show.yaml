@@ -1,0 +1,45 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.shipment.show.content':
+            page_body:
+                template: '@SyliusAdmin/shipment/show/content/page_body.html.twig'
+                priority: 0
+
+        'sylius_admin.shipment.show.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shipment/show/content/header/breadcrumbs.html.twig'
+                priority: 0
+
+        'sylius_admin.shipment.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shipment/show/content/header/title_block/title.html.twig'
+                priority: 0
+
+        'sylius_admin.shipment.show.content.page_body':
+            items:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items.html.twig'
+                priority: 0
+
+        'sylius_admin.shipment.show.content.page_body.items':
+            head:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/head.html.twig'
+                priority: 0
+            body:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/body.html.twig'
+                priority: 0
+
+        'sylius_admin.shipment.show.content.page_body.items.head':
+            product:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/head/product.html.twig'
+                priority: 100
+            variant:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/head/variant.html.twig'
+                priority: 0
+
+        'sylius_admin.shipment.show.content.page_body.items.body':
+            product:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/body/product.html.twig'
+                priority: 100
+            variant:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/body/variant.html.twig'
+                priority: 0

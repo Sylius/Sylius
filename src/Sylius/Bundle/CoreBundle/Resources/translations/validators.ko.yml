@@ -1,0 +1,216 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: '유효한 이메일이 아닙니다.'
+                max: '이메일은 최대 {{ limit }}자까지 입력할 수 있습니다.'
+                min: '이메일은 최소 {{ limit }}자 이상이어야 합니다.'
+                not_blank: '이메일을 입력하세요.'
+        reset_password:
+            mismatch: '입력한 비밀번호가 일치하지 않습니다.'
+            password:
+                min: '비밀번호는 최소 {{ limit }}자 이상이어야 합니다.'
+                max: '비밀번호는 최대 {{ limit }}자까지 입력할 수 있습니다.'
+                not_blank: '비밀번호를 입력하세요.'
+    avatar_image:
+        file:
+            max_size: '이미지 크기가 너무 큽니다 - {{ size }}{{ suffix }}. 최대 허용 크기는 {{ limit }}{{ suffix }}입니다.'
+            upload_ini_size: '이미지 크기가 너무 큽니다. 최대 허용 크기는 {{ limit }}{{ suffix }}입니다.'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: '필수 채널 중 하나에 대한 구성이 제공되지 않았습니다.'
+            not_valid: '제공된 구성에 오류가 있습니다. 0보다 큰 숫자의 고정 할인 금액을 입력하세요.'
+    catalog_promotion_scope:
+        invalid_type: '카탈로그 프로모션 범위 유형이 잘못되었습니다. 올바른 유형을 선택하세요.'
+        for_products:
+            invalid_products: '구성에 오류가 있습니다. 존재하는 상품만 추가하세요.'
+            not_empty: '구성에 오류가 있습니다. 최소 1개의 상품을 추가하세요.'
+            unique: '구성에 오류가 있습니다. 중복되지 않은 상품만 추가하세요.'
+        for_variants:
+            invalid_variants: '구성에 오류가 있습니다. 존재하는 바리아ント만 추가하세요.'
+            not_empty: '최소 1개의 바리아ント를 추가하세요.'
+            unique: '구성에 오류가 있습니다. 중복되지 않은 바리아ント만 추가하세요.'
+        for_taxons:
+            invalid_taxons: '구성에 오류가 있습니다. 존재하는 택슨만 추가하세요.'
+            not_empty: '구성에 오류가 있습니다. 최소 1개의 택슨을 추가하세요.'
+            unique: '구성에 오류가 있습니다. 중복되지 않은 택슨만 추가하세요.'
+    channel:
+        base_currency:
+            not_blank: '채널 기본 통화를 입력하세요.'
+        default_locale:
+            enabled: '기본 로케일은 활성화되어 있어야 합니다.'
+            not_blank: '채널 기본 로케일을 입력하세요.'
+        contact_email:
+            invalid: '유효하지 않은 이메일입니다.'
+            max: '이메일은 {{ limit }}자를 넘을 수 없습니다.'
+            min: '이메일은 최소 {{ limit }}자 이상이어야 합니다.'
+        contact_phone_number:
+            max_length: '연락처 전화번호는 {{ limit }}자를 넘을 수 없습니다.'
+        theme_name:
+            max_length: '테마 이름은 {{ limit }}자를 넘을 수 없습니다.'
+        tax_calculation_strategy:
+            not_blank: '세금 계산 전략을 입력하세요.'
+            max_length: '세금 계산 전략은 {{ limit }}자를 넘을 수 없습니다.'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: '값은 {{ compared_value }}보다 커야 합니다.'
+            less_than: '값은 {{ compared_value }}보다 작아야 합니다.'
+    channel_pricing:
+        channel_code:
+            not_blank: '채널 코드를 설정하세요.'
+            unique: '이 채널은 이미 이 상품 바리아ント에 대한 가격이 존재합니다.'
+        price:
+            min: '가격은 0보다 작을 수 없습니다.'
+            not_blank: '가격을 입력하세요.'
+    channel_code_collection:
+        invalid_channel: '코드 {{ channel_code }}를 가진 채널이 존재하지 않습니다.'
+    checkout:
+        addressing:
+            csrf_error: '양식을 다시 제출하세요.'
+        shipping_method:
+            not_blank: '배송 방법을 선택하세요.'
+        email:
+            not_changeable: '이메일은 게스트 고객에게만 변경할 수 있습니다. 로그인 후 카트가 할당되면 이메일을 변경할 수 없습니다.'
+    contact:
+        email:
+            invalid: '유효하지 않은 이메일입니다.'
+            not_blank: '이메일을 입력하세요.'
+        message:
+            not_blank: '메시지를 입력하세요.'
+    country:
+        code:
+            not_exist: '코드 {{ code }}의 국가는 존재하지 않습니다.'
+    currency:
+        enabled:
+            cannot_disable_base: '기본 통화는 비활성화할 수 없습니다.'
+    customer:
+        currency_code:
+            not_valid: '입력한 통화 코드가 유효하지 않습니다.'
+    customer_group:
+        code:
+            not_exist: '코드 {{ code }}의 고객 그룹이 존재하지 않습니다.'
+    cart_item:
+        not_available: '"%itemName%" 상품의 재고가 부족합니다.'
+        insufficient_stock: '재고 부족'
+        quantity:
+            not_in_range: '수량은 {{ min }}에서 {{ max }} 사이여야 합니다.'
+        variant:
+            not_available: '"%variantName%" 바리아ント를 이용할 수 없습니다.'
+    max_integer: '값은 {{ compared_value }}보다 작아야 합니다.'
+    order:
+        address_requirement: '%addressName%을(를) 입력하세요.'
+        currency_code:
+            not_valid: '입력한 통화 코드가 유효하지 않습니다.'
+        invalid_state_transition: '주문의 상태가 올바르지 않아 완료할 수 없습니다. 현재 상태: %currentState%. 가능한 전환: %possibleTransitions%.'
+        payment_method_eligibility: '결제 방법 %paymentMethodName% 이(가) 비활성화되었습니다. 다른 결제 방법을 선택하세요.'
+        product_eligibility: '상품 %productName% 이(가) 비활성화되었습니다.'
+        shipping_method_eligibility: '%shippingMethodName% 배송 방법의 요구 사항을 충족하지 않습니다. 배송 방법을 다시 선택하세요.'
+        shipping_method_not_available: '"%shippingMethodName%" 배송 방법을 이용할 수 없습니다. 다른 배송 방법을 선택하세요.'
+        cart_items_immutable: '결제 완료 후에는 카트 아이템을 변경할 수 없습니다.'
+    resend_order_confirmation_email:
+        invalid_order_state: '상태가 %state% 인 주문에 대해 주문 확인 이메일을 재전송할 수 없습니다.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: '상태가 %state% 인 배송에 대해 배송 확인 이메일을 재전송할 수 없습니다.'
+    locale:
+        enabled:
+            cannot_disable_base: '기본 로케일은 비활성화할 수 없습니다.'
+    product:
+        variants:
+            all_prices_defined: '새로 추가된 채널에 대해 먼저 상품 바리아ント 가격을 정의해야 합니다.'
+        code:
+            not_exist: '코드 {{ code }}의 상품이 존재하지 않습니다.'
+    product_attribute:
+        invalid: '위치는 정수여야 합니다.'
+    image:
+        file:
+            allowed_mime_types: '파일이 유효한 이미지가 아닙니다. 허용되는 형식: %types%.'
+    product_image:
+        file:
+            max_size: '이미지 크기가 너무 큽니다 - {{ size }}{{ suffix }}. 최대 허용 크기는 {{ limit }}{{ suffix }}입니다.'
+            upload_ini_size: '이미지 크기가 너무 큽니다. 최대 허용 크기는 {{ limit }}{{ suffix }}입니다.'
+        product_variant:
+            not_belong_to_owner: '코드 "%productVariantCode%" 의 상품 바리아ント는 코드 "%ownerCode%" 상품에 속하지 않습니다.'
+    product_taxon:
+        unique: '상품 택슨은 중복될 수 없습니다.'
+        product:
+            not_blank: '상품을 선택하세요.'
+        taxon:
+            not_blank: '택슨을 선택하세요.'
+    product_variant:
+        code:
+            not_exist: '코드 {{ code }}의 상품 바리아ント가 존재하지 않습니다.'
+        onHand:
+            min: '재고는 {{ limit }}보다 커야 합니다.'
+            not_blank: '재고 수량을 입력하세요.'
+            reserved: '재고 수량은 보류 중 수량보다 커야 합니다.'
+        original_price:
+            min: '원래 가격은 음수일 수 없습니다.'
+        weight:
+            min: '무게는 음수일 수 없습니다.'
+            invalid: '무게는 숫자여야 합니다.'
+        width:
+            min: '폭은 음수일 수 없습니다.'
+            invalid: '폭은 숫자여야 합니다.'
+        height:
+            min: '높이는 음수일 수 없습니다.'
+            invalid: '높이는 숫자여야 합니다.'
+        depth:
+            min: '깊이는 음수일 수 없습니다.'
+            invalid: '깊이는 숫자여야 합니다.'
+        channel_pricing:
+            price:
+                not_defined: '가격을 정의해야 합니다.'
+            existing_code: '코드 {{ channelCode }}의 채널이 존재하지 않습니다.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: '고객당 쿠폰 사용 제한은 최소 {{ limit }} 이상이어야 합니다.'
+    product_translation:
+        short_description:
+            max: '짧은 설명은 {{ limit }}자를 넘을 수 없습니다.'
+    province:
+        code:
+            not_exist: '코드 {{ code }}의 주/도가 존재하지 않습니다.'
+    review:
+        author:
+            not_blank: '이메일을 입력하세요.'
+        product:
+            not_blank: '상품을 입력하세요.'
+        rating:
+            range: '평점은 1~5 사이의 정수여야 합니다.'
+            not_in_range: '평점은 {{ min }}에서 {{ max }} 사이여야 합니다.'
+    taxon:
+        code:
+            not_exist: '코드 {{ code }}의 택슨이 존재하지 않습니다.'
+    taxon_image:
+        file:
+            max_size: '이미지 크기가 너무 큽니다 - {{ size }}{{ suffix }}. 최대 허용 크기는 {{ limit }}{{ suffix }}입니다.'
+            upload_ini_size: '이미지 크기가 너무 큽니다. 최대 허용 크기는 {{ limit }}{{ suffix }}입니다.'
+    translation:
+        locale:
+            not_blank: '로케일을 입력하세요.'
+            invalid: '유효한 로케일이 아닙니다.'
+            unique: '{{ value }} 로케일 코드의 번역이 이미 존재합니다.'
+        locale_code:
+            invalid: '가능한 로케일 중 하나를 선택하세요: %locales%'
+    user:
+        email:
+            unique: '이미 사용 중인 이메일입니다.'
+            min: '이메일은 최소 {{ limit }}자 이상이어야 합니다.'
+            max: '이메일은 최대 {{ limit }}자까지 입력할 수 있습니다.'
+            invalid: '유효하지 않은 이메일입니다.'
+        username:
+            unique: '이미 사용 중인 사용자 이름입니다.'
+            not_blank: '사용자 이름을 입력하세요.'
+            max: '사용자 이름은 {{ limit }}자를 넘을 수 없습니다.'
+        first_name:
+            max: '이름은 {{ limit }}자를 넘을 수 없습니다.'
+        last_name:
+            max: '성은 {{ limit }}자를 넘을 수 없습니다.'
+        locale_code:
+            not_blank: '로케일을 선택하세요.'
+    zone:
+        code:
+            not_exist: '코드 {{ code }}의 존이 존재하지 않습니다.'

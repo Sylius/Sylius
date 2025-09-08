@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
@@ -58,13 +60,35 @@ final class DashboardContext implements Context
         string $period,
         string $interval,
     ): void {
-        $this->dashboardPage->open(['channel' => $channel->getCode()]);
+        if (!$this->dashboardPage->isOpen(['channel' => $channel->getCode()])) {
+            $this->dashboardPage->open(['channel' => $channel->getCode()]);
+        }
 
         match ($interval) {
             'month' => $this->dashboardPage->chooseYearSplitByMonthsInterval(),
             'day' => $this->dashboardPage->chooseMonthSplitByDaysInterval(),
             default => throw new \InvalidArgumentException(sprintf('Interval "%s" is not supported.', $interval)),
         };
+
+        match ($period) {
+            'previous' => $this->dashboardPage->choosePreviousPeriod(),
+            'next' => $this->dashboardPage->chooseNextPeriod(),
+            default => null,
+        };
+    }
+
+    /**
+     * @When /^I view statistics for ("[^"]+" channel) and (previous|next) year$/
+     *
+     * @throws UnexpectedPageException
+     */
+    public function iViewStatisticsForPreviousPeriod(
+        ChannelInterface $channel,
+        string $period,
+    ): void {
+        if (!$this->dashboardPage->isOpen(['channel' => $channel->getCode()])) {
+            $this->dashboardPage->open(['channel' => $channel->getCode()]);
+        }
 
         match ($period) {
             'previous' => $this->dashboardPage->choosePreviousPeriod(),
@@ -82,6 +106,14 @@ final class DashboardContext implements Context
     }
 
     /**
+     * @When I search for product :product via the navbar
+     */
+    public function iSearchForProductViaTheNavbar(ProductInterface $product): void
+    {
+        $this->dashboardPage->searchForProductViaNavbar($product);
+    }
+
+    /**
      * @When I log out
      */
     public function iLogOut(): void
@@ -90,12 +122,11 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @Then I should see :number new orders
      * @Then I should see :number paid orders
      */
-    public function iShouldSeeNewOrders(int $number): void
+    public function iShouldSeePaidOrders(int $number): void
     {
-        Assert::same($this->dashboardPage->getNumberOfNewOrders(), $number);
+        Assert::same($this->dashboardPage->getNumberOfPaidOrders(), $number);
     }
 
     /**
@@ -148,5 +179,35 @@ final class DashboardContext implements Context
     public function iShouldNotSeeTheAdministrationDashboard(): void
     {
         Assert::false($this->dashboardPage->isOpen());
+    }
+
+    #[Then('I should see :count order(s) to process in the pending actions')]
+    public function iShouldSeeOrdersToProcessInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfOrdersToProcess(), $count);
+    }
+
+    #[Then('I should see :count shipment(s) to ship in the pending actions')]
+    public function iShouldSeeShipmentsToShipInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfShipmentsToShip(), $count);
+    }
+
+    #[Then('I should see :count pending payment(s) in the pending actions')]
+    public function iShouldSeePendingPaymentsInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfPendingPayments(), $count);
+    }
+
+    #[Then('I should see :count product review(s) to approve in the pending actions')]
+    public function iShouldSeeProductReviewsToApproveInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfProductReviewsToApprove(), $count);
+    }
+
+    #[Then('I should see :count product variant(s) out of stock in the pending actions')]
+    public function iShouldSeeProductVariantsOutOfStockInThePendingActions(int $count): void
+    {
+        Assert::same($this->dashboardPage->getNumberOfProductVariantsOutOfStock(), $count);
     }
 }

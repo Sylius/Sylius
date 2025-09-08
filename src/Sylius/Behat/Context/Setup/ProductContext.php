@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Event\ProductUpdated;
@@ -46,8 +47,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductContext implements Context
+final readonly class ProductContext implements Context
 {
+    /**
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param ProductFactoryInterface<ProductInterface> $productFactory
+     * @param FactoryInterface<ProductTranslationInterface> $productTranslationFactory
+     * @param FactoryInterface<ProductVariantInterface> $productVariantFactory
+     * @param FactoryInterface<ProductVariantTranslationInterface> $productVariantTranslationFactory
+     * @param FactoryInterface<ChannelPricingInterface> $channelPricingFactory
+     * @param FactoryInterface<ProductOptionInterface> $productOptionFactory
+     * @param FactoryInterface<ProductOptionValueInterface> $productOptionValueFactory
+     * @param FactoryInterface<ProductImageInterface> $productImageFactory
+     * @param FactoryInterface<ProductTaxonInterface> $productTaxonFactory
+     * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ProductRepositoryInterface $productRepository,
@@ -72,14 +86,12 @@ final class ProductContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has a product :productName
-     * @Given the store has a :productName product
-     * @Given I added a product :productName
-     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
-     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
-     */
-    public function storeHasAProductPricedAt($productName, int $price = 100, ?ChannelInterface $channel = null): void
+    #[Given('/^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/')]
+    #[Given('the store has a product :productName')]
+    #[Given('the store has a :productName product')]
+    #[Given('I added a product :productName')]
+    #[Given('/^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/')]
+    public function storeHasAProductPricedAt(string $productName, int $price = 100, ?ChannelInterface $channel = null): void
     {
         $product = $this->createProduct($productName, $price, $channel);
 
@@ -589,7 +601,7 @@ final class ProductContext implements Context
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
     {
-        $product = $this->createProduct($productName, 0, $channel);
+        $product = $this->createProduct(productName: $productName, channel: $channel);
 
         $this->saveProduct($product);
     }
@@ -662,9 +674,7 @@ final class ProductContext implements Context
         $this->addOptionToProduct($product, $optionName, []);
     }
 
-    /**
-     * @Given /^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/
-     */
+    #[Given('/^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/')]
     public function thereIsQuantityOfProductAvailableInTheInventory(int $quantity, ProductInterface $product): void
     {
         $this->updateOnHand($product, $quantity);
@@ -686,10 +696,8 @@ final class ProductContext implements Context
         $this->updateOnHand($product, 0, true);
     }
 
-    /**
-     * @When other customer has bought :quantity :product products by this time
-     */
-    public function otherCustomerHasBoughtProductsByThisTime($quantity, ProductInterface $product)
+    #[Given('other customer has bought :quantity :product products by this time')]
+    public function otherCustomerHasBoughtProductsByThisTime(int $quantity, ProductInterface $product): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -698,11 +706,9 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) is tracked by the inventory$/
-     * @Given /^(?:|the )("[^"]+" product) is(?:| also) tracked by the inventory$/
-     */
-    public function thisProductIsTrackedByTheInventory(ProductInterface $product)
+    #[Given('/^(this product) is tracked by the inventory$/')]
+    #[Given('/^(?:|the )("[^"]+" product) is(?:| also) tracked by the inventory$/')]
+    public function thisProductIsTrackedByTheInventory(ProductInterface $product): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -764,7 +770,7 @@ final class ProductContext implements Context
             }
 
             $this->productVariantGenerator->generate($product);
-        } catch (\InvalidArgumentException) {
+        } catch (\Exception) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 
@@ -863,15 +869,24 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) has an image "([^"]+)" with "([^"]+)" type for ("[^"]+" variant)$/
+     * @Given /^(this product) has an image "([^"]+)" with "([^"]+)" type at position (\d+)$/
+     */
+    public function thisProductHasAnImageWithTypeAtPosition(ProductInterface $product, string $imagePath, string $imageType, int $position): void
+    {
+        $this->createProductImage($product, $imagePath, $imageType, null, $position);
+    }
+
+    /**
+     * @Given /^(this product) has an image "([^"]+)" with "([^"]+)" type at position (\d+) for ("[^"]+" variant)$/
      */
     public function thisProductHasAnImageWithTypeForVariant(
         ProductInterface $product,
         string $imagePath,
         string $imageType,
+        int $position,
         ProductVariantInterface $variant,
     ): void {
-        $this->createProductImage($product, $imagePath, $imageType, $variant);
+        $this->createProductImage($product, $imagePath, $imageType, $variant, $position);
     }
 
     /**
@@ -1195,7 +1210,7 @@ final class ProductContext implements Context
             }
 
             $this->productVariantGenerator->generate($product);
-        } catch (\InvalidArgumentException) {
+        } catch (\Exception) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 
@@ -1585,6 +1600,7 @@ final class ProductContext implements Context
         string $imagePath,
         string $imageType,
         ?ProductVariantInterface $variant = null,
+        ?int $position = 0,
     ): void {
         $filesPath = $this->getParameter('files_path');
 
@@ -1592,6 +1608,7 @@ final class ProductContext implements Context
         $productImage = $this->productImageFactory->createNew();
         $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $productImage->setType($imageType);
+        $productImage->setPosition($position);
 
         if (null !== $variant) {
             $productImage->addProductVariant($variant);

@@ -56,7 +56,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         ]);
     }
 
-    private function hasValueInCustomerSection(string $value): bool
+    protected function hasValueInCustomerSection(string $value): bool
     {
         $customerText = $this->getElement('customer')->getText();
 

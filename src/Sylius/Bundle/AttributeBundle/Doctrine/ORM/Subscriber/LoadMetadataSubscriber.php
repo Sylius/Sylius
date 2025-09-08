@@ -15,8 +15,8 @@ namespace Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
@@ -47,14 +47,14 @@ final class LoadMetadataSubscriber implements EventSubscriber
     private function mapSubjectOnAttributeValue(
         string $subject,
         string $subjectClass,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         ClassMetadataFactory $metadataFactory,
     ): void {
         if ($metadata->hasAssociation('subject')) {
             return;
         }
 
-        /** @var ClassMetadataInfo $targetEntityMetadata */
+        /** @var ClassMetadata $targetEntityMetadata */
         $targetEntityMetadata = $metadataFactory->getMetadataFor($subjectClass);
         $subjectMapping = [
             'fieldName' => 'subject',
@@ -73,14 +73,14 @@ final class LoadMetadataSubscriber implements EventSubscriber
 
     private function mapAttributeOnAttributeValue(
         string $attributeClass,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         ClassMetadataFactory $metadataFactory,
     ): void {
         if ($metadata->hasAssociation('attribute')) {
             return;
         }
 
-        /** @var ClassMetadataInfo $attributeMetadata */
+        /** @var ClassMetadata $attributeMetadata */
         $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);
         $attributeMapping = [
             'fieldName' => 'attribute',

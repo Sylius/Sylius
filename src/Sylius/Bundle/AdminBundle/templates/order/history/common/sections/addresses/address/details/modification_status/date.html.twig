@@ -1,0 +1,6 @@
+{% set log = hookable_metadata.context.log %}
+
+<div class="d-inline d-sm-block text-secondary pe-sm-3 pt-3">
+    <span class="text-nowrap">{{ log.loggedAt|date('Y-m-d') }}</span>
+    <span class="text-nowrap">{{ log.loggedAt|date('H:i:s') }}</span>
+</div>

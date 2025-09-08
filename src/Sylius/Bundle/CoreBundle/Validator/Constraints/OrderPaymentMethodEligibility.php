@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class OrderPaymentMethodEligibility extends Constraint
 {
     public string $message = 'sylius.order.payment_method_eligibility';

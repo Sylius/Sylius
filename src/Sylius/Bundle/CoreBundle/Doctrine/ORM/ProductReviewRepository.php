@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -58,6 +59,19 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
         ;
     }
 
+    public function countAcceptedByProduct(ProductInterface $product): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.reviewSubject = :product')
+            ->andWhere('o.status = :status')
+            ->setParameter('product', $product)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -80,6 +94,17 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function countNew(): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.status = :status')
+            ->setParameter('status', ReviewInterface::STATUS_NEW)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 }

@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Var god ange ditt PayPal API-lösenord.
+            signature:
+                not_blank: Var god ange din PayPal-signatur.
+            username:
+                not_blank: Var god ange ditt PayPal API-användarnamn.
+        stripe:
+            secret_key:
+                not_blank: Var god ange din Stripe hemliga nyckel.
+            publishable_key:
+                not_blank: Var god ange din Stripe publika nyckel.

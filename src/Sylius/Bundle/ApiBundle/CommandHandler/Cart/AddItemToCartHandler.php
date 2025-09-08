@@ -22,11 +22,15 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class AddItemToCartHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class AddItemToCartHandler
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
+     */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private ProductVariantRepositoryInterface $productVariantRepository,
@@ -41,12 +45,16 @@ final class AddItemToCartHandler implements MessageHandlerInterface
         /** @var ProductVariantInterface|null $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $addItemToCart->productVariantCode]);
 
-        Assert::notNull($productVariant);
+        if ($productVariant === null) {
+            throw new \InvalidArgumentException('Product variant with given code has not been found.');
+        }
 
-        /** @var OrderInterface $cart */
+        /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValue($addItemToCart->orderTokenValue);
 
-        Assert::notNull($cart);
+        if ($cart === null) {
+            throw new \InvalidArgumentException('Cart with given token has not been found.');
+        }
 
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->cartItemFactory->createNew();

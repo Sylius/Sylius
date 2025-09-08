@@ -4,63 +4,68 @@
 sylius:
     address:
         city:
-            max_length: Plaats mag niet langer dan {{ limit }} tekens zijn|Plaats mag niet langer dan {{ limit }} tekens zijn.
-            min_length: Stad moet minstens {{ limit }} tekens lang zijn|Stad moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een stad in.
+            max_length: 'Stad mag niet langer zijn dan {{ limit }} teken.|Stad mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Stad moet minstens {{ limit }} tekens lang zijn.|Stad moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer stad in.'
         country:
-            not_blank: Selecteer een land.
-            disabled: Het gekozen land is uitgeschakeld. Gelieve een ander land te kiezen.
+            not_blank: 'Selecteer een land.'
+            disabled: 'Gekozen land is uitgeschakeld. Kies een ander land.'
         first_name:
-            max_length: Voornaam mag niet langer dan {{ limit }} tekens zijn|Voornaam mag niet langer dan {{ limit }} tekens zijn.
-            min_length: Voornaam moet minstens {{ limit }} tekens lang zijn|Voornaam moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een voornaam in.
+            max_length: 'Voornaam mag niet langer zijn dan {{ limit }} teken.|Voornaam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Voornaam moet minstens {{ limit }} tekens lang zijn.|Voornaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer voornaam in.'
         last_name:
-            max_length: Achternaam mag niet langer dan {{ limit }} tekens zijn|Achternaam mag niet langer dan {{ limit }} tekens zijn.
-            min_length: Achternaam moet minstens {{ limit }} tekens lang zijn|Achternaam moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een achternaam in.
+            max_length: 'Achternaam mag niet langer zijn dan {{ limit }} teken.|Achternaam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Achternaam moet minstens {{ limit }} tekens lang zijn.|Achternaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer achternaam in.'
         postcode:
-            max_length: De postcode mag niet langer zijn dan {{ limit }} karakters|De postcode mag niet langer zijn dan {{ limit }} karakters.
-            min_length: Postcode moet ten minste {{ limit }} tekens lang zijn|Postcode moet ten minste {{ limit }} tekens lang zijn
-            not_blank: Voer een postcode in.
+            max_length: 'Postcode mag niet langer zijn dan {{ limit }} teken.|Postcode mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Postcode moet minstens {{ limit }} teken lang zijn.|Postcode moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer postcode in.'
         province:
-            valid: Selecteer een provincie.
+            valid: 'Selecteer de juiste provincie.'
         street:
-            max_length: Straat mag niet langer dan {{ limit }} tekens zijn|Straat mag niet langer dan {{ limit }} tekens zijn
-            min_length: Straat moet ten minste {{ limit }} tekens lang zijn|Straat moet ten minste {{ limit }} tekens lang zijn
-            not_blank: Voer een straat in.
-        not_shippable: Dit adres is geen geldige bestemming.
+            max_length: 'Straat mag niet langer zijn dan {{ limit }} teken.|Straat mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Straat moet minstens {{ limit }} tekens lang zijn.|Straat moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer straat in.'
+        not_shippable: 'Dit adres is geen geldig afleveradres.'
     country:
         code:
-            not_blank: Voer een ISO landcode in.
-            regex: Land code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: De land ISO code moet uniek zijn.
+            not_blank: 'Voer land ISO-code in.'
+            unique: 'Land ISO-code moet uniek zijn.'
+            country: 'Land ISO-code is ongeldig.'
+        unique_provinces: 'Alle provincies binnen dit land moeten unieke codes en namen hebben.'
     province:
         code:
-            min_length: Provinciecode moet minstens 5 karakters bevatten.
-            not_blank: Gelieve een provinciecode in te geven.
-            regex: 'Provinciecode zou het volgende formaat moeten hebben: XX-XX (bv. US-FL).'
-            unique: Provinciecode moet uniek zijn.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer provinciecode in.'
+            regex: 'Provinciecode moet het volgende formaat hebben: XX-XX (bijv. US-FL).'
+            unique: 'Provinciecode moet uniek zijn.'
         name:
-            max_length: Provincie mag niet langer dan {{ limit }} tekens zijn|Provincie mag niet langer dan {{ limit }} tekens zijn.
-            min_length: Provincie moet ten minste {{ limit }} tekens lang zijn|Provincie moet ten minste {{ limit }} tekens lang zijn
-            not_blank: Voer een provincie naam in.
-            unique: De provincienaam moet uniek zijn.
+            max_length: 'Provincienaam mag niet langer zijn dan {{ limit }} teken.|Provincienaam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Provincienaam moet minstens {{ limit }} tekens lang zijn.|Provincienaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer provincienaam in.'
+            unique: 'Provincienaam moet uniek zijn.'
     zone:
         scope:
-            not_blank: Gelieve de scope in te vullen.
+            not_blank: 'Voer bereik in.'
         code:
-            not_blank: Gelieve een code in te geven voor deze zone.
-            regex: Zone code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: De zone code moet uniek zijn.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer zonecode in.'
+            regex: 'Zonecode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Zonecode moet uniek zijn.'
+        type:
+            invalid: '"Type {{ value }} is ongeldig. Toegestane types zijn: {{ choices }}."'
         members:
-            min_count: Voeg minstens {{ limit }} zone leden toe.
+            min_count: 'Voeg minstens {{ limit }} zoneleden toe.'
         name:
-            max_length: Zone mag niet langer dan {{ limit }} tekens zijn|Zone mag niet langer dan {{ limit }} tekens zijn.
-            min_length: Zone moet ten minste {{ limit }} tekens lang zijn|Zone moet ten minste {{ limit }} tekens lang zijn
-            not_blank: Voer een zone naam in.
+            max_length: 'Zonenaam mag niet langer zijn dan {{ limit }} teken.|Zonenaam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Zonenaam moet minstens {{ limit }} tekens lang zijn.|Zonenaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer zonenaam in.'
     zone_member:
-        cannot_be_the_same_as_zone: Zonelid kan niet hetzelfde zijn als een zone.
+        cannot_be_the_same_as_zone: 'Zonelid mag niet hetzelfde zijn als de zone.'
         code:
-            not_blank: Kies een lid voor deze zone.
-            regex: De code van een lid van een zone kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-        unique: Het gekozen zonelid zit reeds in deze zone.
+            max_length: 'De zone-lidcode mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Kies een zone-lid.'
+            regex: 'Zone-lidcode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+        unique: 'Gekozen zone-lid is al in deze zone.'

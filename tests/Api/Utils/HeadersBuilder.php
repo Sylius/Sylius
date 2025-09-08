@@ -57,6 +57,13 @@ class HeadersBuilder
         return $this;
     }
 
+    public function withMultipartFormDataContentType(): self
+    {
+        $this->headers['CONTENT_TYPE'] = 'multipart/form-data';
+
+        return $this;
+    }
+
     public function withJsonAccept(): self
     {
         $this->headers['HTTP_ACCEPT'] = 'application/json';

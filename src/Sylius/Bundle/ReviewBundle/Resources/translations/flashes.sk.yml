@@ -3,6 +3,6 @@
 
 sylius:
     review:
-        accept: 'Recenzia bola schválená.'
-        reject: 'Recenzia bola zamietnutá.'
-        wait_for_the_acceptation: 'Vaša recenzia čaká na scvhálenie.'
+        accept: 'Recenzia bola úspešne prijatá.'
+        reject: 'Recenzia bola úspešne odmietnutá.'
+        wait_for_the_acceptation: 'Vaša recenzia čaká na schválenie.'

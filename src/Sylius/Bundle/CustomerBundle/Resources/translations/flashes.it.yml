@@ -3,4 +3,4 @@
 
 sylius:
     customer:
-        register: 'Grazie per esserti registrato, controlla la tua e-mail per verificare l''account.'
+        register: 'Grazie per esserti registrato, controlla la tua email per verificare il tuo account.'

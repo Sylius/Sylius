@@ -2,98 +2,215 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: 'Dit e-mailadres is ongeldig.'
+                max: 'E-mail mag niet langer zijn dan {{ limit }} tekens.'
+                min: 'E-mail moet minstens {{ limit }} tekens lang zijn.'
+                not_blank: 'Voer een e-mail in.'
+        reset_password:
+            mismatch: 'De ingevoerde wachtwoorden komen niet overeen.'
+            password:
+                min: 'Wachtwoord moet minstens {{ limit }} tekens lang zijn.'
+                max: 'Wachtwoord mag niet langer zijn dan {{ limit }} tekens.'
+                not_blank: 'Voer het wachtwoord in.'
     avatar_image:
         file:
-            max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
-            upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
+            max_size: 'De afbeelding is te groot - {{ size }}{{ suffix }}. Maximale toegestane grootte is {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'De afbeelding is te groot. Maximale toegestane grootte is {{ limit }}{{ suffix }}.'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: 'Configuratie voor een van de vereiste kanalen is niet opgegeven.'
+            not_valid: 'De opgegeven configuratie bevat fouten. Voeg het vaste kortingsbedrag toe, dat een getal groter dan 0 moet zijn.'
+    catalog_promotion_scope:
+        invalid_type: 'Catalogus promotie scope type is ongeldig. Kies een geldig type.'
+        for_products:
+            invalid_products: 'De opgegeven configuratie bevat fouten. Voeg alleen bestaande producten toe.'
+            not_empty: 'De opgegeven configuratie bevat fouten. Voeg minstens 1 product toe.'
+            unique: 'De opgegeven configuratie bevat fouten. Voeg alleen unieke producten toe.'
+        for_variants:
+            invalid_variants: 'De opgegeven configuratie bevat fouten. Voeg alleen bestaande varianten toe.'
+            not_empty: 'Voeg minstens 1 variant toe.'
+            unique: 'De opgegeven configuratie bevat fouten. Voeg alleen unieke varianten toe.'
+        for_taxons:
+            invalid_taxons: 'De opgegeven configuratie bevat fouten. Voeg alleen bestaande taxons toe.'
+            not_empty: 'De opgegeven configuratie bevat fouten. Voeg minstens 1 taxon toe.'
+            unique: 'De opgegeven configuratie bevat fouten. Voeg alleen unieke taxons toe.'
     channel:
         base_currency:
-            not_blank: Geef de basisvaluta van de kanaal.
+            not_blank: 'Voer de basisvaluta van het kanaal in.'
         default_locale:
-            enabled: Standaard lokalisatie moet ingeschakeld zijn.
-            not_blank: Voer a.u.b. een standaard taal in.
+            enabled: 'Standaard taal moet ingeschakeld zijn.'
+            not_blank: 'Voer de standaardtaal van het kanaal in.'
         contact_email:
-            invalid: Deze e-mail is ongeldig.
-            max: E-mail mag niet meer dan {{ limit }} karakters zijn.
-            min: E-mail moet ten minste {{ limit }} karakters lang zijn.
+            invalid: 'Dit e-mailadres is ongeldig.'
+            max: 'E-mail mag niet langer zijn dan {{ limit }} tekens.'
+            min: 'E-mail moet minstens {{ limit }} tekens lang zijn.'
+        contact_phone_number:
+            max_length: 'Contacttelefoonnummer mag niet langer zijn dan {{ limit }} tekens.'
+        theme_name:
+            max_length: 'Themanaam mag niet langer zijn dan {{ limit }} tekens.'
+        tax_calculation_strategy:
+            not_blank: 'Voer belastingberekeningsstrategie in.'
+            max_length: 'Belastingberekeningsstrategie mag niet langer zijn dan {{ limit }} tekens.'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Waarde moet groter zijn dan {{ compared_value }}'
+            less_than: 'Waarde moet kleiner zijn dan {{ compared_value }}'
     channel_pricing:
+        channel_code:
+            not_blank: 'Stel kanaalcode in.'
+            unique: 'Dit kanaal heeft al een prijs voor deze productvariant.'
         price:
-            min: Prijs kan niet lager zijn dan 0.
-            not_blank: Voer de prijs in.
+            min: 'Prijs mag niet lager zijn dan 0.'
+            not_blank: 'Voer de prijs in.'
+    channel_code_collection:
+        invalid_channel: 'Kanaal met code {{ channel_code }} bestaat niet.'
     checkout:
+        addressing:
+            csrf_error: 'Dien het volledige formulier opnieuw in.'
         shipping_method:
-            not_blank: Gelieve een verzendmethode te kiezen.
+            not_blank: 'Selecteer verzendmethode.'
+        email:
+            not_changeable: 'E-mail kan alleen worden gewijzigd voor gastklanten. Zodra de klant inlogt en het winkelwagentje is toegewezen, kan de e-mail niet meer worden gewijzigd.'
     contact:
         email:
-            invalid: Deze e-mail is ongeldig.
-            not_blank: Vul uw e-mailadres in.
+            invalid: 'Dit e-mailadres is ongeldig.'
+            not_blank: 'Voer je e-mail in.'
         message:
-            not_blank: Voer uw bericht in.
+            not_blank: 'Voer je bericht in.'
+    country:
+        code:
+            not_exist: 'Land met code {{ code }} bestaat niet.'
     currency:
         enabled:
-            cannot_disable_base: De basisvaluta kan niet worden uitgeschakeld.
+            cannot_disable_base: 'De basisvaluta kan niet worden uitgeschakeld.'
     customer:
         currency_code:
-            not_valid: De valutacode die je hebt ingevoerd is ongeldig.
+            not_valid: 'De ingevoerde valutacode is ongeldig.'
+    customer_group:
+        code:
+            not_exist: 'Klantgroep met code {{ code }} bestaat niet.'
     cart_item:
-        not_available: '%itemName% beschikt niet over voldoende voorraad.'
+        not_available: '%itemName% heeft niet genoeg voorraad.'
+        insufficient_stock: 'Onvoldoende voorraad'
+        quantity:
+            not_in_range: 'Hoeveelheid moet tussen {{ min }} en {{ max }} liggen.'
+        variant:
+            not_available: '%variantName% is niet beschikbaar.'
+    max_integer: 'Waarde moet kleiner zijn dan {{ compared_value }}.'
     order:
+        address_requirement: 'Voer een %addressName% in.'
         currency_code:
-            not_valid: De valutacode die je hebt ingevoerd is ongeldig.
-        payment_method_eligibility: 'De betaalmethode %paymentMethodName% is uitgeschakeld. Kies alstublieft een andere betaalmethode.'
-        product_eligibility: 'Het product %productName% is uitgeschakeld.'
-        shipping_method_eligibility: 'Product past niet binnen de vereisten voor de verzendmethode %shippingMethodName%. Kies alstublieft een andere verzendmethode.'
+            not_valid: 'De ingevoerde valutacode is ongeldig.'
+        invalid_state_transition: 'Kan niet worden voltooid omdat de bestelling zich in een verkeerde staat bevindt. Heden: %currentState%. Mogelijke overgangen: %possibleTransitions%.'
+        payment_method_eligibility: 'Deze betaalmethode %paymentMethodName% is uitgeschakeld. Kies opnieuw je betaalmethode.'
+        product_eligibility: 'Dit product %productName% is uitgeschakeld.'
+        shipping_method_eligibility: 'Product voldoet niet aan de eisen voor de %shippingMethodName% verzendmethode. Kies opnieuw je verzendmethode.'
+        shipping_method_not_available: 'De "%shippingMethodName%" verzendmethode is niet beschikbaar. Kies opnieuw je verzendmethode.'
+        cart_items_immutable: 'Kan winkelwagentje-items niet wijzigen nadat het afrekenproces is voltooid.'
+    resend_order_confirmation_email:
+        invalid_order_state: 'Kan bestellingsbevestigingsmail niet opnieuw verzenden voor bestelling met status %state%.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Kan verzendbevestigingsmail niet opnieuw verzenden voor verzending in status %state%.'
     locale:
         enabled:
-            cannot_disable_base: De basis landinstelling worden niet uitgeschakeld.
+            cannot_disable_base: 'De basislocale kan niet worden uitgeschakeld.'
     product:
         variants:
-            all_prices_defined: U dient eerst de prijzen te bepalen van de productvarianten voor nieuw toegewezen kanalen.
+            all_prices_defined: 'Je moet eerst de prijzen van productvarianten voor nieuw toegewezen kanalen definiëren.'
+        code:
+            not_exist: 'Product met code {{ code }} bestaat niet.'
     product_attribute:
-        invalid: Positie moet een geheel getal zijn.
+        invalid: 'Positie moet een geheel getal zijn.'
+    image:
+        file:
+            allowed_mime_types: 'Het bestand is geen geldige afbeelding. Toegestane types zijn %types%.'
     product_image:
         file:
-            max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
-            upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
+            max_size: 'De afbeelding is te groot - {{ size }}{{ suffix }}. Maximale toegestane grootte is {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'De afbeelding is te groot. Maximale toegestane grootte is {{ limit }}{{ suffix }}.'
+        product_variant:
+            not_belong_to_owner: 'De productvariant met code "%productVariantCode%" behoort niet tot het product met code "%ownerCode%", het eigenaar van de afbeelding.'
+    product_taxon:
+        unique: 'Product taxons kunnen niet worden gedupliceerd.'
+        product:
+            not_blank: 'Selecteer een product.'
+        taxon:
+            not_blank: 'Selecteer een taxon.'
     product_variant:
+        code:
+            not_exist: 'Productvariant met code {{ code }} bestaat niet.'
         onHand:
-            min: Verkoopbare voorraad moet groter zijn dan {{ limit }}.
-            not_blank: Vul de verkoopbare voorraad in.
-            reserved: Aantal in voorraad dient groter zijn dan aantal gereserveerd
+            min: 'Op voorraad moet groter zijn dan {{ limit }}.'
+            not_blank: 'Voer op voorraad in.'
+            reserved: 'Op voorraad moet groter zijn dan het aantal gereserveerde eenheden.'
         original_price:
-            min: De originele prijs mag niet negatief zijn.
+            min: 'De originele prijs mag niet negatief zijn.'
         weight:
-            min: Gewicht kan niet negatief zijn.
-            invalid: Gewicht moet een getal zijn.
+            min: 'Gewicht mag niet negatief zijn.'
+            invalid: 'Gewicht moet een getal zijn.'
         width:
-            min: Breedte kan niet negatief zijn.
-            invalid: Breedte moet een getal zijn.
+            min: 'Breedte mag niet negatief zijn.'
+            invalid: 'Breedte moet een getal zijn.'
         height:
-            min: Hoogte kan niet negatief zijn.
-            invalid: Gewicht moet een getal zijn.
+            min: 'Hoogte mag niet negatief zijn.'
+            invalid: 'Hoogte moet een getal zijn.'
         depth:
-            min: Diepte kan niet negatief zijn.
-            invalid: Diepte moet een getal zijn.
+            min: 'Diepte mag niet negatief zijn.'
+            invalid: 'Diepte moet een getal zijn.'
         channel_pricing:
-            all_defined: 'U dient de prijs voor elk kanaal te definiëren.'
+            price:
+                not_defined: 'Je moet de prijs definiëren.'
+            existing_code: 'Kanaal met code {{ channelCode }} bestaat niet.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: 'Het coupongebruikslimiet per klant moet minstens {{ limit }} zijn.'
     product_translation:
         short_description:
-            max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.
+            max: 'Korte beschrijving mag niet langer zijn dan {{ limit }} tekens.'
+    province:
+        code:
+            not_exist: 'Provincie met code {{ code }} bestaat niet.'
     review:
         author:
-            not_blank: Vul uw e-mailadres in.
+            not_blank: 'Voer je e-mail in.'
+        product:
+            not_blank: 'Voer een product in.'
+        rating:
+            range: 'Beoordelingscijfer moet een geheel getal zijn in de reeks van 1-5.'
+            not_in_range: 'Beoordelingscijfer moet tussen {{ min }} en {{ max }} liggen.'
+    taxon:
+        code:
+            not_exist: 'Taxon met code {{ code }} bestaat niet.'
     taxon_image:
         file:
-            max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
-            upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
+            max_size: 'De afbeelding is te groot - {{ size }}{{ suffix }}. Maximale toegestane grootte is {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'De afbeelding is te groot. Maximale toegestane grootte is {{ limit }}{{ suffix }}.'
+    translation:
+        locale:
+            not_blank: 'Voer de taal in.'
+            invalid: 'Deze waarde is geen geldige taal.'
+            unique: 'Er bestaat al een vertaling voor de {{ value }} taalcode.'
+        locale_code:
+            invalid: 'Kies een van de beschikbare talen: %locales%'
     user:
         email:
-            unique: Dit e-mailadres is al in gebruik.
-            min: E-mail moet ten minste {{ limit }} tekens.
-            max: E moet bij de meeste {{ limit }} tekens bestaan.
-            invalid: Deze e-mail is ongeldig.
+            unique: 'Dit e-mailadres wordt al gebruikt.'
+            min: 'E-mail moet minstens {{ limit }} tekens lang zijn.'
+            max: 'E-mail mag niet langer zijn dan {{ limit }} tekens.'
+            invalid: 'Dit e-mailadres is ongeldig.'
         username:
-            unique: Deze gebruikersnaam is al in gebruik.
-            not_blank: Voer je naam in.
+            unique: 'Deze gebruikersnaam wordt al gebruikt.'
+            not_blank: 'Voer je naam in.'
+            max: 'Gebruikersnaam mag niet langer zijn dan {{ limit }} tekens.'
+        first_name:
+            max: 'Voornaam mag niet langer zijn dan {{ limit }} tekens.'
+        last_name:
+            max: 'Achternaam mag niet langer zijn dan {{ limit }} tekens.'
         locale_code:
-            not_blank: Kies een landinstelling.
+            not_blank: 'Kies een taal.'
+    zone:
+        code:
+            not_exist: 'Zone met code {{ code }} bestaat niet.'

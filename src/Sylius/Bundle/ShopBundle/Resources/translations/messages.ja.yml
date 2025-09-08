@@ -2,14 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'アカウントをお持ちではありませんか？'
+        register_here: 'こちらで登録'
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'が正常に確定しました。'
+            subject: '注文確認'
+            view_order_or_change_payment_method: '注文を表示または支払い方法を変更'
+            thank_you: '当ストアでお買い物いただきありがとうございます！'
+            your_order_number: 'ご注文番号'
+        password_reset:
+            hello: 'こんにちは'
+            reset_your_password: 'パスワードをリセットする'
+            subject: 'パスワードリセット'
+            to_reset_your_password: 'パスワードをリセットするには、以下のリンクをクリックしてください'
+            to_reset_your_password_token: 'パスワードをリセットするには、以下のトークンを使用してください'
+            token: 'あなたのパスワードリセットトークンは'
+        user_registration:
+            start_shopping: '買い物を始める'
+            subject: 'ユーザー登録'
+            welcome_to_our_store: '当ストアへようこそ！'
+            you_have_just_been_registered: '登録が完了しました。ありがとうございます'
+        verification_token:
+            hello: 'こんにちは'
+            subject: 'メールアドレス確認'
+            to_verify_your_email_address: 'メールアドレスを確認するには、以下のリンクをクリックしてください'
+            verify_your_email_address: 'メールアドレスを確認する'
+    footer:
+        banner:
+            free_shipping_title: '送料無料 & 返品無料'
+            free_shipping_content: 'すべてのご注文が送料無料'
+            guarantee_title: '返金保証'
+            guarantee_content: '30日間返金保証'
+            multiple_payments_title: '多様な支払い方法'
+            multiple_payments_content: 'クレジットカードとPayPalに対応'
+    homepage:
+        about_us: '私たちについて'
+        about_us_content: '当ストアは最高の商品をお届けするオンラインショップです。私たちの品揃えから最高の衣類や靴をお選びいただけます。（<i>この内容は翻訳ファイルの "sylius.homepage.about_us_content" キーを上書きして変更できます</i>）'
+        banner_content: '備えよう！冬がやって来ます'
+        banner_button: '新コレクションをチェック'
+        carousel_header: '注目商品'
+        latest_deals: '最新のお得情報'
+        new_collection: '新コレクション'
+        newsletter: 'ニュースレター'
+        newsletter_description: 'ニュースレターに登録して、お得な最新情報を受け取りましょう！（<i>この内容は翻訳ファイルの "sylius.homepage.newsletter_description" キーを上書きして変更できます</i>）'
+        subscribe: '購読する'
     lightbox:
-        image_album_label: '画像 %1/%2'
+        image_album_label: '画像 %1 / %2'
     menu:
         shop:
             account:
                 address_book: 'アドレス帳'
-                change_password: 'パスワードの変更'
+                change_password: 'パスワード変更'
                 dashboard: 'ダッシュボード'
                 header: 'あなたのアカウント'
                 order_history: '注文履歴'
                 personal_information: '個人情報'
+    top_bar: 'ニュースレター登録で20%オフをゲット'

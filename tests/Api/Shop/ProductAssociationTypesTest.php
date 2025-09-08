@@ -13,45 +13,59 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAssociationTypesTest extends JsonApiTestCase
 {
-    /** @test */
-    public function it_gets_product_association_type(): void
+    protected function setUp(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        parent::setUp();
+    }
+
+    #[Test]
+    public function it_gets_product_association_types(): void
+    {
+        $this->loadFixturesFromFiles([
+            'product/product_with_many_locales.yaml',
+        ]);
+
+        $this->requestGet('/api/v2/shop/product-association-types');
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product_association/get_product_association_types',
+        );
+    }
+
+    #[Test]
+    public function it_gets_a_product_association_type(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
+
         /** @var ProductAssociationTypeInterface $associationType */
         $associationType = $fixtures['product_association_type'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-association-types/%s', $associationType->getCode()),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+        $this->requestGet(sprintf('/api/v2/shop/product-association-types/%s', $associationType->getCode()));
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product_association/get_product_association_type_response',
-            Response::HTTP_OK,
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_nothing_if_association_type_not_found(): void
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-association-types/%s', 'wrong input'),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+        $this->requestGet(sprintf('/api/v2/shop/product-association-types/%s', 'wrong_code'));
 
         $response = $this->client->getResponse();
-
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 }

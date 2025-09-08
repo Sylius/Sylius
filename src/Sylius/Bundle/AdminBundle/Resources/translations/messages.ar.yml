@@ -4,19 +4,19 @@
 sylius:
     email:
         shipment_confirmation:
-            has_been_sent_using: 'تم الإرسال باستخدام'
+            has_been_sent_using: 'تم الإرسال عبر'
             subject: 'تأكيد الشحنة'
             thank_you_for_transaction: 'شكرًا لك على إتمام المعاملة بنجاح.'
-            you_can_check_its_location_with_the_tracking_code: 'يمكنك تتبع الشحنة باستخدام رمز التتبع %tracking_code%.'
+            you_can_check_its_location_with_the_tracking_code: 'يمكنك تتبع موقعها باستخدام رمز التتبع %tracking_code%.'
             your_order_with_number: 'طلبك بالرقم'
     form:
         admin:
             channel:
-                lowest_price_for_discounted_products_visible: 'هل تريد عرض أقل سعر للمنتجات المخفضة قبل الخصم الحالي؟'
-                period_for_which_the_lowest_price_is_calculated: 'الفترة التي يُحسب فيها أقل سعر'
+                lowest_price_for_discounted_products_visible: 'عرض أقل سعر للمنتجات المخفضة قبل الخصم الحالي؟'
+                period_for_which_the_lowest_price_is_calculated: 'الفترة التي يتم احتساب أقل سعر خلالها'
             reset_password:
                 password:
-                    label: كلمة مرور جديدة
+                    label: كلمة المرور الجديدة
                     confirmation: تأكيد كلمة المرور الجديدة
     menu:
         admin:
@@ -30,7 +30,7 @@ sylius:
                     products: المنتجات
                     taxons: التصنيفات
                 configuration:
-                    admin_users: المدراء
+                    admin_users: المسؤولون
                     channels: القنوات
                     countries: الدول
                     currencies: العملات
@@ -44,11 +44,11 @@ sylius:
                     tax_rates: معدلات الضرائب
                     zones: المناطق
                 marketing:
-                    cart_promotions: عروض السلة
+                    cart_promotions: عروض سلة التسوق
                     catalog_promotions: عروض الكتالوج
                     header: التسويق
-                    product_reviews: مراجعات المنتجات
-                    promotions: العروض
+                    product_reviews: تقييمات المنتجات
+                    promotions: العروض الترويجية
                 customers:
                     customers: العملاء
                     groups: المجموعات
@@ -59,38 +59,68 @@ sylius:
                 official_support:
                     header: الدعم الرسمي
                     browse_plugins: تصفح الإضافات
-                    sylius_plus: سايليوس بلس
-                    professional_services: خدمات احترافية
-                    find_a_partner: اعثر على شريك
-                    sylius_certification: شهادة سايليوس
+                    sylius_plus: Sylius Plus
+                    professional_services: الخدمات الاحترافية
+                    find_a_partner: البحث عن شريك
+                    sylius_certification: شهادة Sylius
     ui:
+        account: الحساب
+        admin_user: المسؤول
+        add_new_entry: إضافة إدخال جديد
+        back_to_dashboard: العودة إلى لوحة التحكم
         catalog_promotion:
-            dates_details: هذه العملية قد تستغرق وقتًا! يُرجى توقع تأخير من 2 إلى 10 دقائق بدءًا من التواريخ المحددة، حسب حجم الكتالوج.
+            dates_details: هذه العملية قد تستغرق وقتًا! يرجى توقع تأخير من 2 إلى 10 دقائق بدءًا من التواريخ المحددة. يعتمد التأخير على حجم الكتالوج.
         channel:
-            account_verification_required_details: بإلغاء تفعيل هذا الخيار، يمكن إنشاء حسابات والوصول إليها دون التحقق من البريد الإلكتروني، مما يتيح الوصول المحتمل إلى بيانات الطلبات كضيف.
-        channel_pricing_history: 'سجل تسعير القنوات'
+            account_verification_required_details: عند تعطيل هذا الخيار، سيكون من الممكن إنشاء الحسابات والوصول إليها دون التحقق من البريد الإلكتروني، مما قد يسمح بالوصول إلى بيانات الطلبات التي تم تقديمها كضيف.
+        channel_pricing_history: 'سجل تسعير القناة'
         channel_pricings: تسعيرات القنوات
-        gateway:
-            no_sca_support_notice: بوابة الدفع المختارة لا تدعم المصادقة القوية (SCA).
-            pay_pal_express_checkout_deprecation_notice: >
-                تم إيقاف دعم PayPal Express Checkout. يُرجى استخدام التكامل الجديد مع
-                <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">منصة PayPal Commerce</a>.
+        create_new:
+            customer_group: 'إنشاء مجموعة عملاء جديدة'
+        delete_avatar: 'حذف الصورة الرمزية'
+        full_screen: 'وضع ملء الشاشة'
+        global: 'عام'
+        ip_address: 'عنوان IP'
+        language: 'اللغة'
         lowest_price_before_discount: 'أقل سعر قبل الخصم'
-        minimum_price_details: الحد الأدنى للسعر - هو الحد الذي لا يمكن تجاوزه عند تطبيق الخصومات سواء من الكتالوج أو السلة، لضمان الربحية.
-        original_price_details: السعر الأصلي - هو سعر متغير المنتج ويُعرض كمشطوب في الكتالوج. يستخدم كأساس لحساب السعر الحالي. إذا لم يتم تحديده، ستقوم عروض الكتالوج بنسخ القيمة من السعر الحالي.
-        original_product_price_details: السعر الأصلي - هو سعر المنتج ويُعرض كمشطوب في الكتالوج. يستخدم كأساس لحساب السعر الحالي. إذا لم يتم تحديده، ستقوم عروض الكتالوج بنسخ القيمة من السعر الحالي.
-        price_details: السعر - هو السعر الحالي لمتغير المنتج كما يُعرض في الكتالوج، ويمكن تعديله مباشرة مثلًا من خلال عروض الكتالوج.
-        product_price_details: السعر - هو السعر الحالي للمنتج كما يُعرض في الكتالوج، ويمكن تعديله مباشرة مثلًا من خلال عروض الكتالوج.
+        minimum_price_details: الحد الأدنى للسعر - هو الحد الأدنى للتسعير الذي لا يمكن تجاوزه بالتخفيض سواء من خلال عروض الكتالوج أو سلة التسوق. استخدمه لحماية ربحية مبيعاتك.
+        more: 'المزيد'
+        no_main_taxon: 'لا يوجد تصنيف رئيسي'
+        no_depth: 'لا يوجد عمق'
+        no_height: 'لا يوجد ارتفاع'
+        no_results: لا توجد نتائج
+        no_results_adjust_your_search: 'قم بتعديل بحثك وحاول مرة أخرى.'
+        no_weight: 'لا يوجد وزن'
+        no_width: 'لا يوجد عرض'
+        omnibus: أومنيبوس
+        order:
+            date: 'تاريخ الطلب'
+        original_price_details: السعر الأصلي - هو سعر متغير المنتج. يظهر مشطوبًا في الكتالوج. يُستخدم كأساس لحساب السعر الحالي. إذا لم يتم تحديد هذه القيمة، فستقوم عروض الكتالوج بنسخ السعر الحالي إلى السعر الأصلي.
+        original_product_price_details: السعر الأصلي - هو سعر المنتج. يظهر مشطوبًا في الكتالوج. يُستخدم كأساس لحساب السعر الحالي. إذا لم يتم تحديد هذه القيمة، فستقوم عروض الكتالوج بنسخ السعر الحالي إلى السعر الأصلي.
+        page_not_found: الصفحة غير موجودة
+        pagination:
+            number_of_results: 'عرض %from% إلى %to% من أصل %total% إدخال'
+        partially_refunded: 'تم استرداد جزء من المبلغ'
+        price_details: السعر - هو السعر الحالي لمتغير المنتج المعروض في الكتالوج. يمكن تعديله صراحة مثلًا من خلال عروض الكتالوج.
+        product_price_details: السعر - هو السعر الحالي للمنتج المعروض في الكتالوج. يمكن تعديله صراحة مثلًا من خلال عروض الكتالوج.
         price_history: سجل الأسعار
         product:
             product_not_active_in_channel: المنتج غير مفعل بعد في هذه القناة.
+        product_variant: متغير المنتج
         sales_summary: ملخص المبيعات
-        shipment_for_order: شحنة للطلب
-        show_history_for_channel_pricing: 'عرض سجل تسعير القنوات'
+        search_menu: 'بحث في القائمة'
+        shipment_for_order: شحنة الطلب
+        show_history_for_channel_pricing: 'عرض السجل لتسعير القناة'
+        start_typing_to_search: 'ابدأ بالكتابة للبحث'
         statistics:
-            day: يوم
+            day: اليوم
             lifetime: مدى الحياة
-            month: شهر
-            week: أسبوع
+            month: الشهر
+            week: الأسبوع
             2weeks: أسبوعان
-            year: سنة
+            year: السنة
+        taxon: تصنيف
+        view_in_store: 'عرض في المتجر'
+        work_in_progress: العمل جارٍ
+        empty_date: فارغ
+        notifications:
+            new_version_of_sylius_available: 'يتوفر إصدار جديد من Sylius. يرجى التواصل مع الفني الخاص بك للترقية.'

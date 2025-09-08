@@ -4,32 +4,72 @@
 sylius:
     product:
         sku:
-            not_blank: Introduza o SKU do produto.
-            unique: O SKU do produto deve ser único.
+            not_blank: 'Por favor, informe o SKU do produto.'
+            unique: 'O SKU do produto deve ser único.'
+        slug:
+            not_blank: 'Por favor, informe o slug do produto.'
+            unique: 'O slug do produto deve ser único.'
+            max_length: 'O slug do produto não pode ter mais de 1 caractere.|O slug do produto não pode ter mais de {{ limit }} caracteres.'
         code:
-            not_blank: Por favor, insira o código do produto.
-            unique: O código do produto deve ser único.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código do produto.'
+            regex: 'O código do produto pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'O código do produto deve ser único.'
         name:
-            not_blank: Introduza o nome do produto.
-            min_length: O nome do produto deve ter pelo menos 1 caracter.|O nome do produto deve ter pelo menos {{ limit }} caracteres.
-            max_length: O nome do produto não deve ter mais que 1 caracter.|O nome do produto não deve ter mais que {{ limit }} caracteres.
+            not_blank: 'Por favor, informe o nome do produto.'
+            min_length: 'O nome do produto deve ter pelo menos 1 caractere.|O nome do produto deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O nome do produto não pode ter mais de 1 caractere.|O nome do produto não pode ter mais de {{ limit }} caracteres.'
+        meta_keywords:
+            max_length: 'As palavras-chave meta do produto não podem ter mais de 1 caractere.|As palavras-chave meta do produto não podem ter mais de {{ limit }} caracteres.'
+        meta_description:
+            max_length: 'A meta descrição do produto não pode ter mais de 1 caractere.|A meta descrição do produto não pode ter mais de {{ limit }} caracteres.'
     product_variant:
-        combination: Variante com esta opção definida já existe.
+        combination: 'Já existe uma variante com esse conjunto de opções.'
         code:
-            not_blank: Por favor, insira o código.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código.'
+            regex: 'O código da variante pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'O código da variante deve ser único.'
+            within_product_unique: 'Este código deve ser único dentro deste produto.'
+        option_values:
+            not_configured: 'A variante deve ter valores configurados para todas as opções selecionadas no produto.'
+    simple_product:
+        code:
+            unique: 'O código do produto simples deve ser único entre todos os produtos e variantes.'
     option:
         code:
-            not_blank: Introduza o código de opção.
-            unique: Já existe uma opção com o código introduzido.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código da opção.'
+            regex: 'O código da opção pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe uma opção com esse código.'
         name:
-            not_blank: Introduza o nome da opção.
-            min_length: O nome da opção deve ter pelo menos 1 caracter.|O nome da opção deve ter pelo menos {{ limit }} caracteres.
-            max_length: O nome da opção não deve ter mais que 1 caracter.|O nome da opção não deve ter mais que {{ limit }} caracteres.
+            not_blank: 'Por favor, informe o nome da opção.'
+            min_length: 'O nome da opção deve ter pelo menos 1 caractere.|O nome da opção deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O nome da opção não pode ter mais de 1 caractere.|O nome da opção não pode ter mais de {{ limit }} caracteres.'
         values:
-            min_count: Por favor, adicione pelo menos o valor de opção {{ limit }}. | Por favor, adicione pelo menos {{ limit }} valores de opção.
+            min_count: 'Adicione pelo menos {{ limit }} valor de opção.|Adicione pelo menos {{ limit }} valores de opção.'
     option_value:
         code:
-            not_blank: Por favor digite o código de valor de opção.
-            unique: O valor da opção com determinado código já existe.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código do valor da opção.'
+            regex: 'O código do valor da opção pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe um valor de opção com esse código.'
         value:
-            not_blank: Por favore insira uma opção válida.
+            not_blank: 'Por favor, informe o valor da opção.'
+    association:
+        unique: 'Já existe uma associação com esse proprietário e tipo.'
+        type:
+            not_blank: 'Por favor, informe o tipo de associação.'
+        owner:
+            not_blank: 'Por favor, informe o proprietário da associação.'
+    association_type:
+        name:
+            not_blank: 'Por favor, informe o nome do tipo de associação.'
+            min_length: 'O nome do tipo de associação deve ter pelo menos 1 caractere.|O nome do tipo de associação deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O nome do tipo de associação não pode ter mais de 1 caractere.|O nome do tipo de associação não pode ter mais de {{ limit }} caracteres.'
+        code:
+            min_length: 'O código do tipo de associação deve ter pelo menos 1 caractere.|O código do tipo de associação deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O código do tipo de associação não pode ter mais de 1 caractere.|O código do tipo de associação não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código do tipo de associação.'
+            regex: 'O código do tipo de associação pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe um tipo de associação com esse código.'

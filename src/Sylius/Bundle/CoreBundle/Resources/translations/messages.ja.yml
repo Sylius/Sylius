@@ -2,115 +2,286 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        admin_password_reset:
+            hello: 'こんにちは'
+            subject: '管理者パスワードのリセット'
+            reset_your_password: 'パスワードをリセットしてください'
+            to_reset_your_password: 'パスワードをリセットするには、下記のリンクをクリックしてください'
+            to_reset_your_password_token: 'パスワードをリセットするには、以下のトークンを使用してください'
+            token: 'あなたのパスワードリセットトークンは'
+        contact_request:
+            content: '内容'
+            message_from: 'メッセージ送信者'
+            subject: 'お問い合わせ'
+        order_confirmation:
+            has_been_successfully_placed: 'が正常に確定しました。'
+            subject: 'ご注文確認'
+            view_order_or_change_payment_method: '注文を確認、または支払方法を変更する'
+            thank_you: '当ストアでのお買い上げ、誠にありがとうございます！'
+            your_order_number: 'ご注文番号'
+        password_reset:
+            hello: 'こんにちは'
+            reset_your_password: 'パスワードをリセットしてください'
+            subject: 'パスワードリセット'
+            to_reset_your_password: 'パスワードをリセットするには、下記のリンクをクリックしてください'
+            to_reset_your_password_token: 'パスワードをリセットするには、以下のトークンを使用してください'
+            token: 'あなたのパスワードリセットトークンは'
+        shipment_confirmation:
+            has_been_sent_using: 'で発送されました'
+            subject: '発送確認'
+            thank_you_for_transaction: 'お取引いただきありがとうございます。'
+            you_can_check_its_location_with_the_tracking_code: '追跡コード %tracking_code% で配送状況を確認できます。'
+            your_order_with_number: 'ご注文番号'
+        user_registration:
+            start_shopping: 'ショッピングを始める'
+            subject: 'ユーザー登録'
+            welcome_to_our_store: '当ストアへようこそ！'
+            you_have_just_been_registered: 'ご登録ありがとうございます。'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: 'こんにちは'
+            message: '次のトークンでアカウントを認証してください: '
+            subject: 'メールアドレスの認証'
+            to_verify_your_email_address: 'メールアドレスを認証するには、下記のリンクをクリックしてください'
+            verify_your_email_address: 'メールアドレスを認証する'
+        user:
+            account_verification:
+                greeting: 'こんにちは'
+                message: '次のトークンでアカウントを認証してください: '
+                statement: 'メールアドレスを認証してください'
+                strategy: 'メールアドレスを認証するには、下記のリンクをクリックしてください'
+                subject: 'メールアドレスの認証'
     form:
         block:
-            id: ID
-            title: タイトル
+            body: '本文'
+            id: 'ID'
+            title: 'タイトル'
         cart:
-            coupon: クーポン
+            coupon: 'クーポン'
         catalog_promotion:
-            channels: 経路
+            channels: 'チャンネル'
+            scope:
+                for_products: '商品対象'
+                for_taxons: '分類対象'
+                for_variants: 'バリアント対象'
         checkout:
             addressing:
-                different_billing_address: 請求先として別の住所を指定する
-            payment_method: お支払い方法
-            shipping_method: 発送方法
+                different_billing_address: '請求先住所を別に指定しますか？'
+                different_shipping_address: '配送先住所を別に指定しますか？'
+            payment_method: '支払方法'
+            shipping_method: '配送方法'
+        currency:
+            select: '通貨を選択'
         promotion:
-            channels: 経路
+            channels: 'チャンネル'
         promotion_action:
             add_product_configuration:
-                product: 商品情報
+                product: '商品'
+        promotion_coupon:
+            per_customer_usage_limit: '顧客ごとの利用制限'
+            reusable_from_cancelled_orders: 'キャンセル注文から再利用可能'
         group:
-            name: ゾーン名
+            name: '名前'
+            roles: 'ロール'
         channel:
             billing_data:
-                city: 市町村
-                company: 会社名
-                country: 国
-                postcode: 郵便番号
-                street: それ以降の住所
-            countries: 国の管理
-            currencies: 通貨
-            hostname: ホスト名
-            locales: 地域
-            payment_methods: sylius.breadcrumb.payment_method.index
-            shipping_methods: sylius.breadcrumb.shipping_method.index
-            tax_zone_default: デフォルトの課税地域
-            taxonomies: sylius.breadcrumb.taxonomy.index
-            theme: テーマ
+                city: '市区町村'
+                company: '会社'
+                country: '国'
+                postcode: '郵便番号'
+                street: '住所'
+                tax_id: '税番号'
+            contact_email: '連絡用メール'
+            contact_phone_number: '連絡用電話番号'
+            countries: '国'
+            currencies: '通貨'
+            currency_base: '基準通貨'
+            account_verification_required: 'アカウント認証が必要ですか？'
+            hostname: 'ホスト名'
+            locale_default: 'デフォルトロケール'
+            locales: 'ロケール'
+            menu_taxon: 'メニュー分類'
+            payment_methods: '支払方法'
+            shipping_address_in_checkout_required: 'チェックアウトで住所必須'
+            shipping_methods: '配送方法'
+            shop_billing_data: '店舗請求情報'
+            skipping_shipping_step_allowed: '配送方法が1つのみの場合、配送ステップをスキップしますか？'
+            skipping_payment_step_allowed: '支払方法が1つのみの場合、支払ステップをスキップしますか？'
+            tax_calculation_strategy: '税計算方式'
+            tax_zone_default: 'デフォルト税ゾーン'
+            taxonomies: 'タクソノミー'
+            theme: 'テーマ'
         image:
-            type: タイプ
-            file: 画像
+            type: 'タイプ'
+            file: '画像'
         locale:
-            code: コード
-            enabled: 有効
+            code: 'コード'
+            enabled: '有効'
         order_filter:
-            number: 注文番号
-            total_from: 合計金額(下限)
-            total_to: 合計金額(上限)
-            payment_state: 入金状況
+            created_at_from: '作成日(以降)'
+            created_at_to: '作成日(以前)'
+            number: '番号'
+            total_from: '最小合計'
+            total_to: '最大合計'
+            payment_state: '支払状態'
+            channel: 'すべてのチャンネル'
         page:
-            id: ID
-            title: タイトル
+            body: '本文'
+            id: 'ID'
+            title: 'タイトル'
         product:
-            images: 商品画像
-            short_description: 商品概要
-            variant_selection_method: バリエーション選択方法
-            channels: 経路
-            enabled: 有効
+            images: '画像'
+            restricted_zone: '制限ゾーン'
+            short_description: '短い説明'
+            variant_selection_method: 'バリアント選択方法'
+            main_taxon: '主要分類'
+            channels: 'チャンネル'
+            enabled: '有効'
         product_filter:
-            name: 商品名
-            code: コード
+            name: '名前'
+            code: 'コード'
         product_variant:
-            tax_category: 税区分
+            tax_category: '税カテゴリ'
+            shipping_category: '配送カテゴリ'
         shipment_filter:
-            created_at_from: 合計金額(下限)
-            created_at_to: 合計金額(上限)
-            number: 注文番号
+            created_at_from: '開始日'
+            created_at_to: '終了日'
+            number: '注文番号'
+            shipping_address: '配送先名'
+            channel: 'すべてのチャンネル'
         payment_filter:
-            created_at_from: 合計金額(下限)
-            created_at_to: 合計金額(上限)
-            number: 注文番号
+            created_at_from: '開始日'
+            created_at_to: '終了日'
+            number: '注文番号'
+            billing_address: '請求先名'
+            channel: 'すべてのチャンネル'
         shipping_method:
-            zone: 対象地域
+            zone: 'ゾーン'
         taxon:
-            code: コード
-            file: 画像を選択
-            images: 商品画像
+            code: 'コード'
+            file: '画像を選択'
+            images: '画像'
         taxonomy:
-            file: 画像を選択
+            file: '画像を選択'
         user:
-            billing_address: ご請求先住所
-            enabled: 有効
-            first_name: 名
-            groups: グループ
-            last_name: 姓
-            password: パスワード
-            shipping_address: 配送先住所
+            billing_address: '請求先住所'
+            different_shipping_address: '配送先を別にしますか？'
+            enabled: '有効'
+            first_name: '名'
+            groups: 'グループ'
+            roles: 'ロール'
+            last_name: '姓'
+            password: 'パスワード'
+            shipping_address: '配送先住所'
         user_filter:
-            query: 検索
+            query: '検索'
         variant:
-            height: 高さ
-            on_hand: 現在の在庫数
-            price: 価格
-            width: 幅
+            depth: '奥行き'
+            height: '高さ'
+            on_hand: '現在庫'
+            price: '価格'
+            sku: 'SKU'
+            shipping_required: '配送が必要ですか？'
+            weight: '重量'
+            width: '幅'
+            tracked_help: '有効にすると在庫を追跡し、在庫が0になると販売を停止します。'
+        attribute:
+            product_attribute_value:
+                attribute: '属性'
+                value: '値'
         guest:
-            email: メールアドレス
+            email: 'メール'
+        product_association:
+            product: '関連商品'
+            type: '関連タイプ'
         product_association_type:
-            name: ゾーン名
+            name: '名前'
+        promotion_filter:
+            products: '商品フィルター'
+            taxons: '分類フィルター'
         promotion_rule:
+            customer_group:
+                group: '顧客グループ'
             has_taxon:
-                taxons: タクソン(分類群)
+                taxons: '分類'
             product:
-                products: sylius.breadcrumb.product.index
+                products: '商品'
             total_of_items_from_taxon:
-                amount: 税率
+                taxon: '分類'
+                amount: '金額'
         payment_method:
-            channels: 経路
+            channels: 'チャンネル'
+        product_attribute:
+            position: '位置'
+        zone:
+            scopes:
+                shipping: '配送'
+                tax: '税'
+
     installer:
         extensions:
-            off: false
-            on: true
+            header: '拡張機能'
+            accelerator:
+                header: 'アクセラレータ'
+                help: 'Zend OpCache を有効にしてください (強く推奨)。'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: '%extension% 拡張をインストールし有効にしてください。'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: 'マルチバイト文字列'
+            off: 'オフ'
+            on: 'オン'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'セッション'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
+        filesystem:
+            header: 'ファイルシステム'
+            cache:
+                header: 'キャッシュ'
+                help: "権限を設定するには: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: '存在'
+            logs:
+                header: 'ログ'
+                help: "権限を設定するには: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: '存在しない'
+            not_writable: '書き込み不可'
+            parameters:
+                header: 'parameters.yml'
+                help: "権限を設定するには: sudo chmod a+w %path%"
+            vendors: 'ベンダー'
+            writable: '書き込み可'
         settings:
-            off: false
-            on: true
+            header: 'PHP バージョンと設定'
+            any: '任意'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: "php.ini で 'detect_unicode = Off' に設定してください"
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: '非推奨でない'
+            off: 'オフ'
+            on: 'オン'
+            register_globals: 'register_globals'
+            session:
+                auto_start: 'session.auto_start'
+                auto_start_help: "php.ini で 'session.auto_start = Off' に設定してください"
+            short_open_tag: 'short_open_tag'
+            timezone: 'タイムゾーン'
+            timezone_help: "php.ini で 'date.timezone' を設定してください (例: \"Europe/Amsterdam\")"
+            timezone_deprecated:
+                header: '非推奨タイムゾーン'
+                help: 'タイムゾーン %timezone% は非推奨です。php.ini を修正してください (一覧: http://php.net/manual/en/timezones.others.php)。'
+            version: 'PHP バージョン'
+            version_recommended: '推奨 PHP バージョン'
+            version_help: 'Sylius は PHP %recommended% を推奨します。現在のバージョンは %current% です。アップグレードをご検討ください。'
+
+    shipping_method_resolver:
+        by_zones_and_channel: 'ゾーンとチャンネルによる'

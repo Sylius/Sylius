@@ -5,6 +5,7 @@ default:
     suites:
         ui_viewing_products:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -26,6 +27,7 @@ default:
 
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
@@ -33,22 +35,21 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_association
                 - sylius.behat.context.setup.product_attribute
+                - sylius.behat.context.setup.product_option
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.product_taxon
-                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.shipping_category
-                - sylius.behat.context.setup.taxonomy
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxation
-                - sylius.behat.context.setup.product_option
+                - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.ui.channel
+                - sylius.behat.context.ui.shop.browsing_product
                 - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.shop.product
                 - sylius.behat.context.ui.shop.product_attribute
-                - sylius.behat.context.ui.shop.browsing_product
 
             filters:
                 tags: "@viewing_products&&@ui"

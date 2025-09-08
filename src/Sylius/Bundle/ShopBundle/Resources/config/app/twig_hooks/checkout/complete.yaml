@@ -1,0 +1,55 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.checkout.complete':
+            content:
+                template: '@SyliusShop/checkout/complete/content.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.complete.content':
+            steps:
+                template: '@SyliusShop/checkout/common/steps.html.twig'
+                priority: 300
+            header:
+                template: '@SyliusShop/checkout/complete/content/header.html.twig'
+                priority: 200
+            flashes:
+                template: '@SyliusShop/shared/flashes.html.twig'
+                priority: 100
+            form:
+                template: '@SyliusShop/checkout/complete/content/form.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.complete.content.header':
+            currency:
+                template: '@SyliusShop/checkout/complete/content/header/currency.html.twig'
+                priority: 100
+            locale:
+                template: '@SyliusShop/checkout/complete/content/header/locale.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.complete.content.form':
+            summary:
+                template: '@SyliusShop/checkout/complete/content/form/summary.html.twig'
+                priority: 200
+            extra_notes:
+                template: '@SyliusShop/checkout/complete/content/form/extra_notes.html.twig'
+                priority: 100
+            navigation:
+                template: '@SyliusShop/checkout/complete/content/form/navigation.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.complete.content.form.summary.statuses.payments':
+            state:
+                enabled: false
+
+        'sylius_shop.checkout.complete.content.form.summary.statuses.payments.list':
+            state_label:
+                enabled: false
+
+        'sylius_shop.checkout.complete.content.form.summary.statuses.shipments':
+            state:
+                enabled: false
+
+        'sylius_shop.checkout.complete.content.form.summary.statuses.shipments.list':
+            state_label:
+                enabled: false

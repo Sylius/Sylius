@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
-use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionActionGroup;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
@@ -22,7 +21,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class CatalogPromotionActionGroupValidator extends ConstraintValidator
 {
-    /** @param array<string, array<string, string>> $validationGroups */
+    /** @param array<string, string[]> $validationGroups */
     public function __construct(private array $validationGroups)
     {
     }
@@ -45,18 +44,10 @@ final class CatalogPromotionActionGroupValidator extends ConstraintValidator
         $validator = $this->context->getValidator()->inContext($this->context);
 
         $groups = $this->validationGroups[$type] ?? null;
-        if (null !== $groups) {
-            $validator->validate(value: $value, groups: $groups);
-
-            if ($this->context->getViolations()->count() > 0) {
-                return;
-            }
+        if (null === $groups) {
+            return;
         }
 
-        $validator->validate(
-            $value,
-            new CatalogPromotionAction(groups: $constraint->groups),
-            $groups ?? $constraint->groups,
-        );
+        $validator->validate(value: $value, groups: $groups);
     }
 }

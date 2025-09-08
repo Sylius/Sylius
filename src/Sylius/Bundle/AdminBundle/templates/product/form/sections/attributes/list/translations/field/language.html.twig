@@ -1,0 +1,5 @@
+{% set locale = hookable_metadata.context.locale_code|default(null) %}
+
+{% if locale is not null %}
+    <span>{{ locale|sylius_locale_name }}</span>
+{% endif %}

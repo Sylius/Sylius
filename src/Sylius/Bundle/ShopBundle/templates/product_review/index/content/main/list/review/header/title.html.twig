@@ -1,0 +1,3 @@
+{% set review = hookable_metadata.context.review %}
+
+<div class="h6 mb-1" {{ sylius_test_html_attribute('title', review.title) }}>{{ review.title }}</div>

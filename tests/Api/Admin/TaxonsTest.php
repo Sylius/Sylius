@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use PHPUnit\Framework\Attributes\Test;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -23,7 +24,7 @@ final class TaxonsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -45,7 +46,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_taxon_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -68,7 +69,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_taxons(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -83,7 +84,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_taxons_with_an_image_filter(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -103,7 +104,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_taxon(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -132,7 +133,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_taxon_without_required_data(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -152,7 +153,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_taxon_with_taken_code(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -181,7 +182,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_the_existing_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -198,7 +199,7 @@ final class TaxonsTest extends JsonApiTestCase
                 'parent' => '/api/v2/admin/taxons/BRAND',
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/taxon-translations/%s', $taxon->getTranslation('en_US')->getId()),
+                        '@id' => sprintf('/api/v2/admin/taxon/%s/translations/en_US', $taxon->getCode()),
                         'name' => 'Watches',
                         'slug' => 'watches',
                     ],
@@ -214,7 +215,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_a_taxon_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -243,7 +244,7 @@ final class TaxonsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_a_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -260,7 +261,7 @@ final class TaxonsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_tries_to_delete_a_menu_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);

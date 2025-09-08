@@ -1,0 +1,87 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@import 'infinite-tree/dist/infinite-tree.css';
+
+.infinite-tree-scroll {
+    max-height: 800px;
+}
+
+.infinite-tree-content {
+    .infinite-tree-title {
+        cursor: default;
+        color: $body-color;
+    }
+
+    .infinite-tree-item {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+            background: #F7F8FB;
+            border: none;
+        }
+
+        .infinite-tree-node {
+            display: flex;
+
+            .infinite-tree-toggler {
+                flex-shrink: 0;
+                height: 20px;
+
+                &.infinite-tree-open,
+                &.infinite-tree-closed {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                &.infinite-tree-open::before,
+                &.infinite-tree-closed::before {
+                    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"/></svg>');
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    margin-top: 2px;
+                    opacity: 0.5;
+                }
+
+                &.infinite-tree-closed::before {
+                    transform: rotate(-90deg);
+                }
+
+                &.infinite-tree-leaf::before {
+                    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.5"/></svg>');
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    margin-top: 2px;
+                    opacity: 0.2;
+                    transform: scale(0.5);
+                }
+            }
+
+            .infinite-tree-check {
+                flex-shrink: 0;
+                transform: scale(0.75);
+
+                input:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .form-check-input[type=checkbox]:indeterminate {
+        background-color: #c7c7c7;
+        border-color: #afafaf;
+    }
+}

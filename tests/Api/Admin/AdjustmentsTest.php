@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,12 +29,12 @@ final class AdjustmentsTest extends JsonApiTestCase
         $this->setUpOrderPlacer();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_adjustment_by_id(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

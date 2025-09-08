@@ -9,7 +9,7 @@ sylius:
             priority: Priorytet
         promotion:
             actions: Akcje
-            add_action: Dodaj akcje
+            add_action: Dodaj akcję
             add_rule: Dodaj regułę
             coupon_based: Z wykorzystaniem kuponów
             description: Opis

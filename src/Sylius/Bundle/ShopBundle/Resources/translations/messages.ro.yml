@@ -2,43 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Nu aveți un cont?'
+        register_here: 'Înscrieți-vă aici'
     email:
         order_confirmation:
-            has_been_successfully_placed: 'a fost plasata cu succes.'
+            has_been_successfully_placed: 'a fost plasată cu succes.'
             subject: 'Confirmare comandă'
-            view_order_or_change_payment_method: 'Vezi comanda sau modifică metoda de plată'
-            thank_you: 'Iti multumim ca ai cumparat la magazinul nostru!'
-            your_order_number: 'Comanda dvs. nr.'
+            view_order_or_change_payment_method: 'Vizualizați comanda sau schimbați metoda de plată'
+            thank_you: 'Vă mulțumim pentru că ați cumpărat în magazinul nostru!'
+            your_order_number: 'Numărul comenzii dvs.'
         password_reset:
-            hello: 'Salut'
-            reset_your_password: 'Resetați-vă parola'
+            hello: 'Bună'
+            reset_your_password: 'Resetați parola'
             subject: 'Resetare parolă'
-            to_reset_your_password: 'Pentru a reseta parola - faceţi clic pe link-ul de mai jos'
+            to_reset_your_password: 'Pentru a reseta parola - faceți clic pe linkul de mai jos'
+            to_reset_your_password_token: 'Pentru a reseta parola - folosiți tokenul de mai jos'
+            token: 'Tokenul dvs. de resetare a parolei este'
         user_registration:
             start_shopping: 'Începeți cumpărăturile'
             subject: 'Înregistrare utilizator'
-            welcome_to_our_store: 'Bine ați venit la magazinul nostru!'
-            you_have_just_been_registered: 'Tocmai aţi fost înregistrat. Vă mulţumim'
+            welcome_to_our_store: 'Bine ați venit în magazinul nostru!'
+            you_have_just_been_registered: 'V-ați înregistrat cu succes. Vă mulțumim'
         verification_token:
-            hello: 'Salut'
-            subject: 'Verificare adresă e-mail'
-            to_verify_your_email_address: 'Pentru a vă verifica adresa de e-mail - faceți clic pe link-ul de mai jos'
-            verify_your_email_address: 'Verificați adresa dvs. de e-mail'
+            hello: 'Bună'
+            subject: 'Verificare adresă de email'
+            to_verify_your_email_address: 'Pentru a vă verifica adresa de email - faceți clic pe linkul de mai jos'
+            verify_your_email_address: 'Verificați adresa de email'
+    footer:
+        banner:
+            free_shipping_title: 'Livrare și retur gratuite'
+            free_shipping_content: 'Livrare gratuită pentru toate comenzile'
+            guarantee_title: 'Garanție de returnare a banilor'
+            guarantee_content: 'Garanție de returnare a banilor în 30 de zile'
+            multiple_payments_title: 'Metode de plată multiple'
+            multiple_payments_content: 'Acceptăm carduri de credit și PayPal'
     homepage:
         about_us: 'Despre noi'
-        about_us_content: 'Bine ai venit la magazinul nostru, magazinul tău numărul unu online, care îți oferă cele mai bune produse. Poți alege din cele mai bune haine și pantofi din oferta noastră. (<i>Puteți modifica acest conținut suprascriind "sylius.homepage.about_us_content" în fișierul dvs. de traducere</i>)'
-        banner_content: 'Pregătește-te! Iarna vine'
-        newsletter: 'Buletin Informativ'
-        newsletter_description: 'Abonează-te la newsletter-ul nostru pentru a vedea ofertele noi care te așteaptă! (<i>Poți modifica acest conținut suprascriind "sylius. cheia omepage.newsletter_description" în fișierul de traducere</i>)'
-        subscribe: 'Abonează-te'
+        about_us_content: 'Bine ați venit în magazinul nostru, magazinul dvs. online numărul unu care vă oferă cele mai bune produse. Puteți alege dintre cele mai bune haine și încălțăminte din oferta noastră. (<i>Puteți modifica acest conținut suprascriind cheia "sylius.homepage.about_us_content" în fișierul dvs. de traduceri</i>)'
+        banner_content: 'Pregătiți-vă! Vine iarna'
+        banner_button: 'Descoperiți noua colecție'
+        carousel_header: 'Produse recomandate'
+        latest_deals: 'Cele mai noi oferte'
+        new_collection: 'Colecție nouă'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Abonați-vă la newsletter-ul nostru pentru a vedea noile oferte care vă așteaptă! (<i>Puteți modifica acest conținut suprascriind cheia "sylius.homepage.newsletter_description" în fișierul dvs. de traduceri</i>)'
+        subscribe: 'Abonați-vă'
     lightbox:
         image_album_label: 'Imaginea %1 din %2'
     menu:
         shop:
             account:
-                address_book: 'Lista de adrese'
-                change_password: 'Schimbă parola'
-                dashboard: 'Panou de administrare'
-                header: 'Contul tău'
+                address_book: 'Carte de adrese'
+                change_password: 'Schimbați parola'
+                dashboard: 'Tablou de bord'
+                header: 'Contul dvs.'
                 order_history: 'Istoric comenzi'
-                personal_information: 'Informaţii personale'
+                personal_information: 'Informații personale'
+    top_bar: 'Abonați-vă la newsletter-ul nostru și obțineți 20% reducere'

@@ -1,0 +1,37 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductOption",
+    "@id": "\/api\/v2\/shop\/product-options",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 2,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/product-options\/COLOR",
+            "@type": "ProductOption",
+            "code": "COLOR",
+            "name": "Color"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-options\/SIZE",
+            "@type": "ProductOption",
+            "code": "SIZE",
+            "name": "Size"
+        }
+    ],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/product-options?productCode=MUG",
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/product-options{?productCode}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productCode",
+                "property": "productCode",
+                "required": false
+            }
+        ]
+    }
+}

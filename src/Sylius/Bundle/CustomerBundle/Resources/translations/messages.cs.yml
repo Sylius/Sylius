@@ -4,21 +4,21 @@
 sylius:
     form:
         customer:
-            first_name: Jméno
-            group: Skupina
-            last_name: Příjmení
-            email: Email
-            phone_number: Telefonní číslo
-            gender: Pohlaví
-            birthday: Narozeniny
-            billing_address: Fakturační adresa
-            different_shipping_address: Použít jinou dodací adresu?
-            only_customer_registration: Vytvořit účet?
-            subscribed_to_newsletter: Přihlášeni k odběru novinek
+            first_name: 'Jméno'
+            group: 'Skupina'
+            last_name: 'Příjmení'
+            email: 'E-mail'
+            phone_number: 'Telefonní číslo'
+            gender: 'Pohlaví'
+            birthday: 'Datum narození'
+            billing_address: 'Fakturační adresa'
+            different_shipping_address: 'Použít jinou adresu pro doručení?'
+            only_customer_registration: 'Vytvořit účet?'
+            subscribed_to_newsletter: 'Přihlásit k odběru novinek'
         customer_group:
-            name: Jméno
-            roles: Role
+            name: 'Název'
+            roles: 'Role'
     gender:
-        unknown: Neznámý
-        male: Muž
-        female: Žena
+        unknown: 'Neznámé'
+        male: 'Muž'
+        female: 'Žena'

@@ -70,7 +70,7 @@ final class ChannelCollector extends DataCollector
 
     public function getName(): string
     {
-        return 'sylius.channel_collector';
+        return 'sylius.collector.channel';
     }
 
     private function pluckChannel(ChannelInterface $channel): array

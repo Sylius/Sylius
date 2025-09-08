@@ -5,48 +5,55 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Antal
-                equal: Lika med
-            type: Regeltyp
+                count: 'Antal'
+                equal: 'Lika med'
+            type: 'Regeltyp'
         shipment:
-            state: Status
+            state: 'Status'
             states:
-                checkout: Kassa
-                pending: Väntande
-                ready: Redo
-                shipped: Skickad
-                returned: Returnerad
-                cancelled: Avbruten
-            tracking_code: Spårningskod
+                checkout: 'Kassa'
+                pending: 'Väntande'
+                ready: 'Klar'
+                shipped: 'Skickad'
+                returned: 'Returnerad'
+                cancelled: 'Avbruten'
+            tracking_code: 'Spårningskod'
         shipping_calculator:
             flat_rate_configuration:
-                label: Schablonbelopp per sändning
-                amount: Belopp
+                label: 'Fast pris per försändelse'
+                amount: 'Belopp'
             per_unit_rate_configuration:
-                label: Schablonbelopp per enhet
-                amount: Antal
+                label: 'Fast pris per enhet'
+                amount: 'Belopp'
         shipping_category:
-            description: Beskrivning
-            name: Namn
+            description: 'Beskrivning'
+            name: 'Namn'
         shipping_method:
-            add_rule: Lägg till regel
-            calculator: Kalkylator
-            category: Kategori
-            category_requirement: Kategorikrav
-            channels: Kanaler
-            configuration: Konfiguration
-            description: Beskrivning
-            enabled: Aktiverad
-            match_all_category_requirement: Alla enheter måste matcha metodkategorin
-            match_any_category_requirement: Åtminstone 1 enhet måste matcha metodkategorin
-            match_none_category_requirement: Inga av enheterna måste matcha metodkategorin
-            name: Namn
-            position: Position
-            rules: Regler
-            tax_category: Momskategori
-            translations: Översättningar
+            add_rule: 'Lägg till regel'
+            calculator: 'Kalkylator'
+            category: 'Kategori'
+            category_requirement: 'Kategori­krav'
+            channels: 'Kanaler'
+            configuration: 'Konfiguration'
+            description: 'Beskrivning'
+            enabled: 'Aktiverad'
+            match_all_category_requirement: 'Alla enheter måste matcha metodens kategori'
+            match_any_category_requirement: 'Minst 1 enhet måste matcha metodens kategori'
+            match_none_category_requirement: 'Ingen av enheterna måste matcha metodens kategori'
+            name: 'Namn'
+            position: 'Position'
+            rules: 'Regler'
+            rules_help: 'Använd regler för att avgöra om denna fraktmetod kan tillämpas på en given order. Om en regel är sann kan denna fraktmetod tillämpas. Observera att om du lägger till flera regler måste alla regler vara sanna.'
+            select_calculator: 'Välj en kalkylator'
+            tax_category: 'Skattekategori'
+            translations: 'Översättningar'
         shipping_method_rule:
-            type: Typ
-            total: Summa
-            weight: Vikt
-            amount: Belopp
+            items_total_greater_than_or_equal: 'Varusumma större än eller lika med'
+            items_total_less_than_or_equal: 'Varusumma mindre än eller lika med'
+            type: 'Typ'
+            total: 'Totalt'
+            total_weight_greater_than_or_equal: 'Totalvikt större än eller lika med'
+            total_weight_less_than_or_equal: 'Totalvikt mindre än eller lika med'
+            weight: 'Vikt'
+            amount: 'Belopp'
+            select: 'Välj en regeltyp'

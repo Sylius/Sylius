@@ -4,8 +4,14 @@
 sylius:
     channel:
         code:
-            not_blank: Veuillez entrer le code du canal.
-            regex: Le code du canal peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
-            unique: Le code du canal doit être unique.
+            max_length: 'Le code ne doit pas dépasser {{ limit }} caractères.'
+            not_blank: 'Veuillez entrer le code du canal.'
+            regex: 'Le code du canal peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.'
+            unique: 'Le code du canal doit être unique.'
         name:
-            not_blank: Veuillez saisir le nom du canal.
+            not_blank: 'Veuillez saisir le nom du canal.'
+            max_length: 'Le nom du canal ne doit pas dépasser {{ limit }} caractères.'
+        color:
+            max_length: 'La couleur ne doit pas dépasser {{ limit }} caractères.'
+        hostname:
+            max_length: 'Le nom d''hôte ne doit pas dépasser {{ limit }} caractères.'

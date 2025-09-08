@@ -1,0 +1,107 @@
+{
+    "@context": "\/api\/v2\/contexts\/Product",
+    "@id": "\/api\/v2\/shop\/products",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/products\/HAT2",
+            "@type": "Product",
+            "productTaxons": [],
+            "mainTaxon": null,
+            "reviews": [],
+            "averageRating": "@integer@",
+            "images": [],
+            "id": "@integer@",
+            "code": "HAT2",
+            "variants": [],
+            "options": [],
+            "associations": [],
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
+            "shortDescription": "@string@",
+            "name": "Hat 2",
+            "description": "@string@",
+            "slug": "Hat-2",
+            "defaultVariant": null,
+            "defaultVariantData": null
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/products?association%5BtypeCode%5D=another_similar_products",
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon,association[typeCode],association[ownerCode]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code",
+                "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code[]",
+                "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[price]",
+                "property": "price",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[translation.name]",
+                "property": "translation",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "localeCode for order[translation.name]",
+                "property": "localeCode",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "taxon",
+                "property": null,
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[typeCode]",
+                "property": "association",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[ownerCode]",
+                "property": "association",
+                "required": false
+            }
+        ]
+    }
+}

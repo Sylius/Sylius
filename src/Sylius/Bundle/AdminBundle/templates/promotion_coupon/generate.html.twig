@@ -1,0 +1,14 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% set prefixes = [
+    'sylius_admin.promotion_coupon.generate',
+    'sylius_admin.common'
+] %}
+
+{% block title %}
+    {{ 'sylius.ui.generate_coupons'|trans }} {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% hook prefixes with { resource: promotion, metadata, configuration, form } %}
+{% endblock %}

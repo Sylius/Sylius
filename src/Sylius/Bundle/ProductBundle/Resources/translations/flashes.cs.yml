@@ -3,4 +3,4 @@
 
 sylius:
     product_variant:
-        generate: 'Varianty produktu byly úspěšně vygenerovány.'
+        generate: 'Produktové varianty byly úspěšně vygenerovány.'

@@ -38,6 +38,7 @@ class PaymentMethodFixture extends AbstractResourceFixture
                         ->ifNull()->thenUnset()
                     ->end()
                 ->end()
+                ->booleanNode('usePayum')->defaultTrue()->end()
                 ->booleanNode('enabled')->end()
         ;
     }

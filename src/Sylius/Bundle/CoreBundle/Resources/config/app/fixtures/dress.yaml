@@ -70,7 +70,7 @@ sylius_fixtures:
                     name: product
                     options:
                         custom:
-                            -   name: 'Beige strappy summer dress'
+                            -   name: 'Sunshine Strappy Delight'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -85,9 +85,9 @@ sylius_fixtures:
                                     - 'dress_size'
                                     - 'dress_height'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.webp', type: 'main' }
 
-                            -   name: 'Off shoulder boho dress'
+                            -   name: 'Boho Beach Breeze'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -102,9 +102,9 @@ sylius_fixtures:
                                     - 'dress_size'
                                     - 'dress_height'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.webp', type: 'main' }
 
-                            -   name: 'Ruffle wrap festival dress'
+                            -   name: 'Festival Ruffle Wrap'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -120,4 +120,242 @@ sylius_fixtures:
                                     - 'dress_size'
                                     - 'dress_height'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_03.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_03.webp', type: 'main' }
+                                        
+                            -   name: 'Floral Garden Party'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Modern Wear'
+                                    dress_collection: 'Sylius Summer 2020'
+                                    dress_material: '100% cotton'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_04.webp', type: 'main' }
+
+                            -   name: 'Evening Star Gown'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Celsius Small'
+                                    dress_collection: 'Sylius Winter 2020'
+                                    dress_material: '100% silk'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_05.webp', type: 'main' }
+
+                            -   name: 'Denim Daydream'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'You are breathtaking'
+                                    dress_collection: 'Sylius Spring 2021'
+                                    dress_material: '100% denim'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_06.webp', type: 'main' }
+
+                            -   name: 'Classic Summer Elegance'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Modern Wear'
+                                    dress_collection: 'Sylius Fall 2021'
+                                    dress_material: '100% polyester'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_07.webp', type: 'main' }
+
+                            -   name: 'Tropical Sunset Maxi'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Island Vibes'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% rayon'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_08.webp', type: 'main' }
+
+                            -   name: 'Seaside Stroll Midi'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Coastal Chic'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% linen'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_09.webp', type: 'main' }
+
+                            -   name: 'Beach Bonfire Beauty'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Sunset Glow'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% cotton'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_10.webp', type: 'main' }
+
+                            -   name: 'Summer Picnic Charm'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Picnic Perfect'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% cotton'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_11.webp', type: 'main' }
+
+                            -   name: 'Sun-Kissed Sundress'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Golden Hour'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% viscose'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_12.webp', type: 'main' }
+
+                            -   name: 'Palm Tree Paradise'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Tropical Trends'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% cotton'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_13.webp', type: 'main' }
+
+                            -   name: 'Lemonade Stand Sweetheart'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Summer Squeeze'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% cotton'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_14.webp', type: 'main' }
+
+                            -   name: 'Ocean Breeze Beauty'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Seafoam Style'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% polyester'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_15.webp', type: 'main' }
+
+                            -   name: 'Sunflower Fields Forever'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Blooming Beauty'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% cotton'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_16.webp', type: 'main' }
+
+                            -   name: 'Coral Reef Chic'
+                                tax_category: 'clothing'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'dresses'
+                                taxons:
+                                    - 'dresses'
+                                product_attributes:
+                                    dress_brand: 'Underwater Elegance'
+                                    dress_collection: 'Sylius Summer 2022'
+                                    dress_material: '100% silk'
+                                product_options:
+                                    - 'dress_size'
+                                    - 'dress_height'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_17.webp', type: 'main' }

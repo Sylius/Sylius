@@ -22,7 +22,6 @@ sylius:
     catalog_promotion_action:
         fixed_discount:
             channel_not_configured: La configuration pour l'un des canaux requis n'est pas fournie.
-            invalid_channel: La configuration fournie contient des erreurs. Au moins un des codes de canal fournis n'existe pas.
             not_valid: La configuration fournie contient des erreurs. Veuillez ajouter le montant de remise fixe qui est un nombre supérieur à 0.
     catalog_promotion_scope:
         invalid_type: Le type de champ d'application pour la promotion catalogue est invalide. Veuillez choisir un type valide.
@@ -48,24 +47,33 @@ sylius:
             invalid: Cet e-mail n'est pas valide.
             max: L'e-mail ne doit pas contenir plus de {{ limit }} caractères.
             min: L'e-mail doit contenir au moins {{ limit }} caractères.
+        contact_phone_number:
+            max_length: Le numéro de téléphone ne doit pas dépasser {{ limit }} caractères.
+        theme_name:
+            max_length: Le nom du thème ne doit pas dépasser {{ limit }} caractères.
+        tax_calculation_strategy:
+            not_blank: Veuillez saisir la stratégie de calcul de la TVA.
+            max_length: La stratégie de calcul de la TVA ne doit pas dépasser {{ limit }} caractères.
     channel_price_history_config:
         lowest_price_for_discounted_products_checking_period:
-            greater_than: 'La valeur doit être supérieure à {{ compared_value }}'
-            less_than: 'La valeur doit être inférieure à {{ compared_value }}'
+            greater_than: La valeur doit être supérieure à {{ compared_value }}
+            less_than: La valeur doit être inférieure à {{ compared_value }}
     channel_pricing:
         channel_code:
             not_blank: Veuillez définir le code du canal.
-            unique: Ce canal a déjà un prix pour cette variante de produit.
+            unique: Ce canal possède déjà un prix pour cette variante de produit.
         price:
             min: Le prix ne peut pas être inférieur à 0.
             not_blank: Veuillez saisir un prix.
+    channel_code_collection:
+        invalid_channel: Le canal avec le code {{ channel_code }} n'existe pas.
     checkout:
         addressing:
             csrf_error: Veuillez soumettre à nouveau le formulaire complet.
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
         email:
-            not_changeable: L'e-mail ne peut pas être modifié pour le client connecté.
+            not_changeable: L'e-mail ne peut être modifié que pour les clients invités.
     contact:
         email:
             invalid: Cet e-mail n'est pas valide.
@@ -86,35 +94,45 @@ sylius:
             not_exist: Le groupe de clients avec le code {{ code }} n'existe pas.
     cart_item:
         not_available: '%itemName% est en rupture de stock.'
-        insufficient_stock: 'Stock insuffisant'
+        insufficient_stock: Stock insuffisant
+        quantity:
+            not_in_range: La quantité doit être comprise entre {{ min }} et {{ max }}.
+        variant:
+            not_available: '%variantName% n''est pas disponible.'
+    max_integer: La valeur doit être inférieure à {{ compared_value }}.
     order:
+        address_requirement: Veuillez fournir une adresse de type %addressName%.
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
-        invalid_state_transition: 'Impossible de terminer car la commande est dans un mauvais état. Actuellement : %currentState%. Transitions possibles : %possibleTransitions%.'
-        payment_method_eligibility: 'Cette méthode de paiement %paymentMethodName% a été désactivée. Veuillez sélectionner une nouvelle fois votre mode de paiement.'
-        product_eligibility: 'Le produit %productName% a été désactivé.'
-        shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
-        shipping_method_not_available: 'Le mode d''expédition "%shippingMethodName%" n''est pas disponible. Veuillez sélectionner à nouveau votre mode de livraison.'
+        invalid_state_transition: "Impossible de terminer car la commande est dans un mauvais état. Actuellement : %currentState%. Transitions possibles : %possibleTransitions%."
+        payment_method_eligibility: Cette méthode de paiement %paymentMethodName% a été désactivée. Veuillez sélectionner une nouvelle fois votre mode de paiement.
+        product_eligibility: Le produit %productName% a été désactivé.
+        shipping_method_eligibility: Ce produit n'est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.
+        shipping_method_not_available: Le mode d'expédition "%shippingMethodName%" n'est pas disponible. Veuillez sélectionner à nouveau votre mode de livraison.
+        cart_items_immutable: Impossible de modifier les articles du panier après la finalisation de la commande.
     resend_order_confirmation_email:
-        invalid_order_state: 'Impossible de renvoyer l''e-mail de confirmation de commande pour la commande avec le statut %state%.'
+        invalid_order_state: Impossible de renvoyer l'e-mail de confirmation pour la commande avec le statut %state%.
     resend_shipment_confirmation_email:
-        invalid_shipment_state: 'Impossible de renvoyer l''e-mail de confirmation d''expédition pour l''expédition dans l''état %state%.'
+        invalid_shipment_state: Impossible de renvoyer l'e-mail de confirmation d'expédition pour l'expédition dans l'état %state%.
     locale:
         enabled:
-            cannot_disable_base: La base locale ne peut pas être désactivée.
+            cannot_disable_base: La locale de base ne peut pas être désactivée.
     product:
         variants:
             all_prices_defined: Vous devez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
         code:
             not_exist: Le produit avec le code {{ code }} n'existe pas.
     product_attribute:
-        invalid: La position doit être un entier positif.
+        invalid: La position doit être un entier.
+    image:
+        file:
+            allowed_mime_types: "Le fichier n'est pas une image valide. Types autorisés : %types%."
     product_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
         product_variant:
-            not_belong_to_owner: 'La variante de produit avec le code "%productVariantCode%" n''appartient pas au produit avec le code "%ownerCode%", qui est le propriétaire de l''image.'
+            not_belong_to_owner: La variante de produit avec le code "%productVariantCode%" n’appartient pas au produit avec le code "%ownerCode%" qui possède l’image.
     product_taxon:
         unique: Les taxons de produits ne peuvent pas être dupliqués.
         product:
@@ -125,11 +143,11 @@ sylius:
         code:
             not_exist: La variante de produit avec le code {{ code }} n'existe pas.
         onHand:
-            min: Le stock disponible doit être plus grand que {{ limit }}.
+            min: Le stock disponible doit être supérieur à {{ limit }}.
             not_blank: Veuillez saisir le stock disponible.
-            reserved: Le nombre de produits en stock doit être supérieur au nombre de produits en instance
+            reserved: Le stock disponible doit être supérieur au nombre d'unités réservées.
         original_price:
-            min: Le prix initial ne peux pas être négatif.
+            min: Le prix initial ne peut pas être négatif.
         weight:
             min: Le poids ne peut pas être négatif.
             invalid: Le poids doit être un nombre.
@@ -143,7 +161,8 @@ sylius:
             min: La profondeur ne peut pas être négative.
             invalid: La profondeur doit être un nombre.
         channel_pricing:
-            all_defined: 'Vous devez définir le prix pour chaque canal activé.'
+            price:
+                not_defined: Vous devez définir le prix.
             existing_code: Le canal avec le code {{ channelCode }} n'existe pas.
     promotion_coupon:
         per_customer_usage_limit:
@@ -151,14 +170,17 @@ sylius:
     product_translation:
         short_description:
             max: La description courte ne doit pas dépasser {{ limit }} caractères.
+    province:
+        code:
+            not_exist: La province avec le code {{ code }} n'existe pas.
     review:
         author:
             not_blank: Veuillez saisir votre adresse email.
         product:
             not_blank: Veuillez saisir un produit.
         rating:
-            range: La note de l'avis doit être un entier entre 1 et 5.
-            not_in_range: L'évaluation doit être comprise entre {{ min }} et {{ max }}.
+            range: La note doit être un entier entre 1 et 5.
+            not_in_range: La note doit être comprise entre {{ min }} et {{ max }}.
     taxon:
         code:
             not_exist: La taxonomie avec le code {{ code }} n'existe pas.
@@ -167,8 +189,12 @@ sylius:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
     translation:
+        locale:
+            not_blank: Veuillez saisir la locale.
+            invalid: Cette valeur n'est pas une locale valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.
         locale_code:
-            invalid: 'Veuillez choisir l''une des langues disponibles : %locales%'
+            invalid: "Veuillez choisir l'une des locales disponibles: %locales%"
     user:
         email:
             unique: Cet e-mail est déjà utilisé.
@@ -178,5 +204,13 @@ sylius:
         username:
             unique: Ce nom d'utilisateur est déjà utilisé.
             not_blank: Veuillez entrer un nom d'utilisateur.
+            max: Le nom d'utilisateur ne doit pas dépasser {{ limit }} caractères.
+        first_name:
+            max: Le prénom ne doit pas dépasser {{ limit }} caractères.
+        last_name:
+            max: Le nom ne doit pas dépasser {{ limit }} caractères.
         locale_code:
-            not_blank: S’il vous plaît choisissez une langue.
+            not_blank: Veuillez choisir une locale.
+    zone:
+        code:
+            not_exist: La zone avec le code {{ code }} n'existe pas.

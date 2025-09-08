@@ -1,0 +1,286 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        admin_password_reset:
+            hello: 'Hallo'
+            subject: 'Administrator-Passwort zurücksetzen'
+            reset_your_password: 'Setzen Sie Ihr Passwort zurück'
+            to_reset_your_password: 'Um Ihr Passwort zurückzusetzen, klicken Sie auf den unten stehenden Link'
+            to_reset_your_password_token: 'Um Ihr Passwort zurückzusetzen, verwenden Sie das unten stehende Token'
+            token: 'Ihr Passwort-Zurücksetzungstoken lautet'
+        contact_request:
+            content: 'Inhalt'
+            message_from: 'Nachricht von'
+            subject: 'Kontaktanfrage'
+        order_confirmation:
+            has_been_successfully_placed: 'wurde erfolgreich platziert.'
+            subject: 'Bestellbestätigung'
+            view_order_or_change_payment_method: 'Bestellung ansehen oder Zahlungsmethode ändern'
+            thank_you: 'Vielen Dank für Ihren Einkauf in unserem Shop!'
+            your_order_number: 'Ihre Bestellnummer'
+        password_reset:
+            hello: 'Hallo'
+            reset_your_password: 'Setzen Sie Ihr Passwort zurück'
+            subject: 'Passwort zurücksetzen'
+            to_reset_your_password: 'Um Ihr Passwort zurückzusetzen, klicken Sie auf den unten stehenden Link'
+            to_reset_your_password_token: 'Um Ihr Passwort zurückzusetzen, verwenden Sie das unten stehende Token'
+            token: 'Ihr Passwort-Zurücksetzungstoken lautet'
+        shipment_confirmation:
+            has_been_sent_using: 'wurde gesendet mit'
+            subject: 'Versandbestätigung'
+            thank_you_for_transaction: 'Vielen Dank für eine erfolgreiche Transaktion.'
+            you_can_check_its_location_with_the_tracking_code: 'Sie können den Standort mit dem %tracking_code% Tracking-Code überprüfen.'
+            your_order_with_number: 'Ihre Bestellung mit der Nummer'
+        user_registration:
+            start_shopping: 'Jetzt einkaufen'
+            subject: 'Benutzerregistrierung'
+            welcome_to_our_store: 'Willkommen in unserem Shop!'
+            you_have_just_been_registered: 'Sie wurden gerade registriert. Vielen Dank'
+        verification_token:
+            hello: 'Hallo'
+            message: 'Bestätigen Sie Ihr Konto mit dem Token: '
+            subject: 'E-Mail-Adresse Bestätigung'
+            to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu bestätigen, klicken Sie auf den unten stehenden Link'
+            verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
+        user:
+            account_verification:
+                greeting: 'Hallo'
+                message: 'Bestätigen Sie Ihr Konto mit dem Token: '
+                statement: 'Bestätigen Sie Ihre E-Mail-Adresse'
+                strategy: 'Um Ihre E-Mail-Adresse zu bestätigen, klicken Sie auf den unten stehenden Link'
+                subject: 'E-Mail-Adresse Bestätigung'
+    form:
+        block:
+            body: 'Körper'
+            id: 'ID'
+            title: 'Titel'
+        cart:
+            coupon: 'Rabattcoupon'
+        catalog_promotion:
+            channels: 'Kanäle'
+            scope:
+                for_products: 'Für Produkte'
+                for_taxons: 'Für Taxons'
+                for_variants: 'Für Varianten'
+        checkout:
+            addressing:
+                different_billing_address: 'Andere Adresse für die Rechnungsstellung verwenden?'
+                different_shipping_address: 'Andere Adresse für den Versand verwenden?'
+            payment_method: 'Zahlungsmethode'
+            shipping_method: 'Versandmethode'
+        currency:
+            select: 'Währung auswählen'
+        promotion:
+            channels: 'Kanäle'
+        promotion_action:
+            add_product_configuration:
+                product: 'Produkt'
+        promotion_coupon:
+            per_customer_usage_limit: 'Pro-Kunde-Nutzungsbeschränkung'
+            reusable_from_cancelled_orders: 'Wiederverwendbar aus stornierten Bestellungen'
+        group:
+            name: 'Name'
+            roles: 'Rollen'
+        channel:
+            billing_data:
+                city: 'Stadt'
+                company: 'Firma'
+                country: 'Land'
+                postcode: 'Postleitzahl'
+                street: 'Straße'
+                tax_id: 'Steuernummer'
+            contact_email: 'Kontakt E-Mail'
+            contact_phone_number: 'Kontakt Telefonnummer'
+            countries: 'Länder'
+            currencies: 'Währungen'
+            currency_base: 'Basiswährung'
+            account_verification_required: 'Ist eine Kontoverifizierung erforderlich?'
+            hostname: 'Hostname'
+            locale_default: 'Standardlokalisierung'
+            locales: 'Lokalisierungen'
+            menu_taxon: 'Menü Taxon'
+            payment_methods: 'Zahlungsmethoden'
+            shipping_address_in_checkout_required: 'Adresse erforderlich im Checkout'
+            shipping_methods: 'Versandmethoden'
+            shop_billing_data: 'Shop Rechnungsdaten'
+            skipping_shipping_step_allowed: 'Versandstep überspringen, wenn nur eine Versandmethode verfügbar ist?'
+            skipping_payment_step_allowed: 'Zahlungsschritt überspringen, wenn nur eine Zahlungsmethode verfügbar ist?'
+            tax_calculation_strategy: 'Steuerberechnungsstrategie'
+            tax_zone_default: 'Standardsteuerzone'
+            taxonomies: 'Taxonomien'
+            theme: 'Thema'
+        image:
+            type: 'Typ'
+            file: 'Bild'
+        locale:
+            code: 'Code'
+            enabled: 'Aktiviert'
+        order_filter:
+            created_at_from: 'Erstellt nach'
+            created_at_to: 'Erstellt vor'
+            number: 'Nummer'
+            total_from: 'Von'
+            total_to: 'Bis'
+            payment_state: 'Zahlungsstatus'
+            channel: 'Alle Kanäle'
+        page:
+            body: 'Körper'
+            id: 'ID'
+            title: 'Titel'
+        product:
+            images: 'Bilder'
+            restricted_zone: 'Eingeschränkte Zone'
+            short_description: 'Kurze Beschreibung'
+            variant_selection_method: 'Varianten-Auswahlmethode'
+            main_taxon: 'Haupt Taxon'
+            channels: 'Kanäle'
+            enabled: 'Aktiviert'
+        product_filter:
+            name: 'Name'
+            code: 'Code'
+        product_variant:
+            tax_category: 'Steuerkategorie'
+            shipping_category: 'Versandkategorie'
+        shipment_filter:
+            created_at_from: 'Von'
+            created_at_to: 'Bis'
+            number: 'Bestellnummer'
+            shipping_address: 'Versandadresse'
+            channel: 'Alle Kanäle'
+        payment_filter:
+            created_at_from: 'Von'
+            created_at_to: 'Bis'
+            number: 'Bestellnummer'
+            billing_address: 'Rechnungsadresse'
+            channel: 'Alle Kanäle'
+        shipping_method:
+            zone: 'Zone'
+        taxon:
+            code: 'Code'
+            file: 'Bild auswählen'
+            images: 'Bilder'
+        taxonomy:
+            file: 'Bild auswählen'
+        user:
+            billing_address: 'Rechnungsadresse'
+            different_shipping_address: 'Andere Adresse für den Versand verwenden?'
+            enabled: 'Aktiviert'
+            first_name: 'Vorname'
+            groups: 'Gruppen'
+            roles: 'Rollen'
+            last_name: 'Nachname'
+            password: 'Passwort'
+            shipping_address: 'Versandadresse'
+        user_filter:
+            query: 'Suche'
+        variant:
+            depth: 'Tiefe'
+            height: 'Höhe'
+            on_hand: 'Aktueller Bestand'
+            price: 'Preis'
+            sku: 'SKU'
+            shipping_required: 'Wird Versand benötigt?'
+            weight: 'Gewicht'
+            width: 'Breite'
+            tracked_help: 'Wenn diese Option aktiviert ist, verfolgt Sylius den Lagerbestand und stoppt den Verkauf des Produkts, sobald der Bestand 0 erreicht.'
+        attribute:
+            product_attribute_value:
+                attribute: 'Attribut'
+                value: 'Wert'
+        guest:
+            email: 'E-Mail'
+        product_association:
+            product: 'Assoziiertes Produkt'
+            type: 'Assoziationstyp'
+        product_association_type:
+            name: 'Name'
+        promotion_filter:
+            products: 'Produktfilter'
+            taxons: 'Taxons-Filter'
+        promotion_rule:
+            customer_group:
+                group: 'Kundengruppe'
+            has_taxon:
+                taxons: 'Taxons'
+            product:
+                products: 'Produkte'
+            total_of_items_from_taxon:
+                taxon: 'Taxon'
+                amount: 'Betrag'
+        payment_method:
+            channels: 'Kanäle'
+        product_attribute:
+            position: 'Position'
+        zone:
+            scopes:
+                shipping: 'Versand'
+                tax: 'Steuer'
+
+    installer:
+        extensions:
+            header: 'Erweiterungen'
+            accelerator:
+                header: 'Beschleuniger'
+                help: 'Aktivieren Sie Zend OpCache (sehr empfohlen).'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: 'Installieren und aktivieren Sie die %extension% Erweiterung.'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: 'Multibyte String'
+            off: 'aus'
+            on: 'ein'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'Session'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
+        filesystem:
+            header: 'Dateisystem'
+            cache:
+                header: 'Cache'
+                help: "Um Berechtigungen festzulegen, führen Sie aus: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: 'existiert'
+            logs:
+                header: 'Protokolle'
+                help: "Um Berechtigungen festzulegen, führen Sie aus: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: 'existiert nicht'
+            not_writable: 'nicht beschreibbar'
+            parameters:
+                header: 'parameters.yml'
+                help: "Um Berechtigungen festzulegen, führen Sie aus: sudo chmod a+w %path%"
+            vendors: 'Vendors'
+            writable: 'beschreibbar'
+        settings:
+            header: 'PHP-Version und Einstellungen'
+            any: 'irgendwelche'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: 'Setzen Sie "detect_unicode = Off" in Ihrer php.ini-Datei'
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: 'nicht veraltet'
+            off: 'aus'
+            on: 'ein'
+            register_globals: 'register_globals'
+            session:
+                auto_start: 'session.auto_start'
+                auto_start_help: 'Setzen Sie "session.auto_start = Off" in Ihrer php.ini-Datei'
+            short_open_tag: 'short_open_tag'
+            timezone: 'Zeitzone'
+            timezone_help: 'Setzen Sie "date.timezone" in Ihrer php.ini-Datei (z.B. date.timezone = "Europe/Amsterdam")'
+            timezone_deprecated:
+                header: 'Veraltete Zeitzone'
+                help: 'Die Zeitzone %timezone% ist veraltet. Korrigieren Sie Ihre php.ini-Datei (Liste veralteter Zeitzonen http://php.net/manual/en/timezones.others.php).'
+            version: 'PHP-Version'
+            version_recommended: 'Empfohlene PHP-Version'
+            version_help: 'Sylius empfiehlt die PHP-Version %recommended%, Ihre aktuelle Version ist %current%. Bitte führen Sie ein Upgrade durch.'
+
+    shipping_method_resolver:
+        by_zones_and_channel: 'Nach Zonen und Kanal'

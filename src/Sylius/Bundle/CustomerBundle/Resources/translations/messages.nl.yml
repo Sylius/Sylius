@@ -4,21 +4,21 @@
 sylius:
     form:
         customer:
-            first_name: Voornaam
-            group: Groep
-            last_name: Achternaam
-            email: E-mail
-            phone_number: Telefoonnummer
-            gender: Geslacht
-            birthday: Verjaardag
-            billing_address: Factuuradres
-            different_shipping_address: Gebruik een ander adres voor verzending?
-            only_customer_registration: Account aanmaken?
-            subscribed_to_newsletter: Abonneer op de nieuwsbrief
+            first_name: 'Voornaam'
+            group: 'Groep'
+            last_name: 'Achternaam'
+            email: 'E-mail'
+            phone_number: 'Telefoonnummer'
+            gender: 'Geslacht'
+            birthday: 'Geboortedatum'
+            billing_address: 'Factuuradres'
+            different_shipping_address: 'Gebruik een ander adres voor de verzending?'
+            only_customer_registration: 'Account aanmaken?'
+            subscribed_to_newsletter: 'Inschrijven voor de nieuwsbrief'
         customer_group:
-            name: Naam
-            roles: Rollen
+            name: 'Naam'
+            roles: 'Rollen'
     gender:
-        unknown: Onbekend
-        male: Man
-        female: Vrouw
+        unknown: 'Onbekend'
+        male: 'Man'
+        female: 'Vrouw'

@@ -14,19 +14,21 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Console\Command;
 
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'sylius:user:demote',
+    description: 'Demotes a user by removing a role.',
+)]
 class DemoteUserCommand extends AbstractRoleCommand
 {
-    protected static $defaultName = 'sylius:user:demote';
-
     protected function configure(): void
     {
         $this
-            ->setDescription('Demotes a user by removing a role.')
             ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
                 new InputArgument('roles', InputArgument::IS_ARRAY, 'Security roles'),
@@ -68,5 +70,3 @@ EOT
         }
     }
 }
-
-class_alias(DemoteUserCommand::class, \Sylius\Bundle\UserBundle\Command\DemoteUserCommand::class);

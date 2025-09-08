@@ -1,7 +1,0 @@
-# This route is deprecated since Sylius 1.14.0 and will be removed in 2.0.0.
-sylius_admin_render_attribute_forms:
-    path: /attribute-forms
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_attribute::renderAttributeValueFormsAction
-        template: "@SyliusAdmin/Product/Attribute/attributeValues.html.twig"

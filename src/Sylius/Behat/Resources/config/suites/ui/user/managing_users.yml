@@ -5,6 +5,7 @@ default:
     suites:
         ui_managing_users:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -18,6 +19,7 @@ default:
                 - sylius.behat.context.ui.admin.managing_customers
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.customer
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.login
                 - sylius.behat.context.ui.user
 

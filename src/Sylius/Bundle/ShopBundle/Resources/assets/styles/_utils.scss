@@ -1,0 +1,41 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+$utilities: (
+    "min-viewport-height": (
+        property: min-height,
+        responsive: true,
+        class: min-vh,
+        values: (100: 100vh)
+    ),
+    "width": (
+        property: width,
+        class: w,
+        values: (
+            1: 1%,
+            25: 25%,
+            50: 50%,
+            75: 75%,
+            100: 100%,
+            auto: auto
+        )
+    ),
+);
+
+$positions: 40px, 50px, 80px;
+
+@each $position in $positions {
+    .border-#{$position}-dashed {
+        border-#{$position}-style: dashed !important;
+    }
+}
+
+.w-full {
+    width: 100%;
+}

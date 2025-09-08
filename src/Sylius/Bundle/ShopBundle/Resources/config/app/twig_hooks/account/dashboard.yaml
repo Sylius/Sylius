@@ -1,0 +1,49 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.dashboard.index.content.main':
+            section:
+                template: '@SyliusShop/account/dashboard/index/content/main/section.html.twig'
+                priority: 0
+
+        'sylius_shop.account.dashboard.index.content.main.header':
+            title:
+                template: '@SyliusShop/account/dashboard/index/content/main/header/title.html.twig'
+                priority: 100
+            subtitle:
+                template: '@SyliusShop/account/dashboard/index/content/main/header/subtitle.html.twig'
+                priority: 0
+
+        'sylius_shop.account.dashboard.index.content.main.section':
+            user_info:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/user_info.html.twig'
+                priority: 100
+            buttons:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/buttons.html.twig'
+                priority: 0
+
+        'sylius_shop.account.dashboard.index.content.main.section.user_info':
+            account_status:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/user_info/status.html.twig'
+                priority: 100
+            user_details:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/user_info/details.html.twig'
+                priority: 0
+
+        'sylius_shop.account.dashboard.index.content.main.section.user_info.details':
+            full_name:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/user_info/details/full_name.html.twig'
+                priority: 100
+            email:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/user_info/details/email.html.twig'
+                priority: 0
+
+        'sylius_shop.account.dashboard.index.content.main.section.buttons':
+            edit:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/buttons/edit.html.twig'
+                priority: 200
+            change_password:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/buttons/change_password.html.twig'
+                priority: 100
+            verify:
+                template: '@SyliusShop/account/dashboard/index/content/main/section/buttons/verify.html.twig'
+                priority: 0

@@ -1,0 +1,72 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxon-tree\/ACCESSORIES\/branch",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 6,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/CATEGORY",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "CATEGORY",
+            "parent": null,
+            "level": 0,
+            "name": "Categories",
+            "slug": "categories"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "ACCESSORIES",
+            "parent": "\/api\/v2\/shop\/taxons\/CATEGORY",
+            "level": 1,
+            "name": "Accessories",
+            "slug": "categories\/accessories"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/LUXURY_ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "LUXURY_ACCESSORIES",
+            "parent": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "level": 2,
+            "name": "Luxury Accessories",
+            "slug": "categories\/accessories\/luxury"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/CASUAL_ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "CASUAL_ACCESSORIES",
+            "parent": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "level": 2,
+            "name": "Casual Accessories",
+            "slug": "categories\/accessories\/casual"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/TECHNOLOGY_ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "TECHNOLOGY_ACCESSORIES",
+            "parent": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "level": 2,
+            "name": "Technology Accessories",
+            "slug": "categories\/accessories\/technology"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/PLUGS",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "PLUGS",
+            "parent": "\/api\/v2\/shop\/taxons\/TECHNOLOGY_ACCESSORIES",
+            "level": 3,
+            "name": "Plugs",
+            "slug": "categories\/accessories\/technology\/plugs"
+        }
+    ],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/taxon-tree\/ACCESSORIES\/branch?includeRoot=true",
+        "@type": "hydra:PartialCollectionView"
+    }
+}

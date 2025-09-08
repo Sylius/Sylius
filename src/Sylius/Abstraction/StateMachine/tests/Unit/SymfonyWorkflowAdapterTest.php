@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Abstraction\StateMachine\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
@@ -149,9 +150,7 @@ final class SymfonyWorkflowAdapterTest extends TestCase
         $this->createTestSubject()->getEnabledTransitions($subject, $graphName);
     }
 
-    /**
-     * @dataProvider itReturnsTransitionsToForGivenTransitionProvider
-     */
+    #[DataProvider('itReturnsTransitionsToForGivenTransitionProvider')]
     public function testItReturnsTransitionsToForGivenTransition(?string $expectedToStateTransition, string $requestedTransition): void
     {
         $subject = new \stdClass();
@@ -200,9 +199,7 @@ final class SymfonyWorkflowAdapterTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider itReturnsTransitionsFromForGivenTransitionProvider
-     */
+    #[DataProvider('itReturnsTransitionsFromForGivenTransitionProvider')]
     public function testItReturnsTransitionsFromForGivenTransition(?string $expectedFromStateTransition, string $requestedTransition): void
     {
         $subject = new \stdClass();

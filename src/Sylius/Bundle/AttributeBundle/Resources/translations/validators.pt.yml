@@ -4,18 +4,29 @@
 sylius:
     attribute:
         name:
-            not_blank: Por favor introduza o nome do atributo.
-            min_length: O nome do atributo deve ter pelo menos 1 caráter.|O nome do atributo deve ter pelo menos {{ limit }} carateres.
-            max_length: O nome do atributo não deve ter mais de 1 caracter.|O nome do atributo não deve ter mais de {{ limit }} caracteres.
+            not_blank: 'Por favor, informe o nome do atributo.'
+            min_length: 'O nome do atributo deve ter pelo menos 1 caractere.|O nome do atributo deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O nome do atributo não pode ter mais de 1 caractere.|O nome do atributo não pode ter mais de {{ limit }} caracteres.'
         code:
-            not_blank: Por favor, insira o código de atributo.
-            unique: Esse código já está em uso.
+            min_length: 'O código do atributo deve ter pelo menos 1 caractere.|O código do atributo deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O código do atributo não pode ter mais de 1 caractere.|O código do atributo não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código do atributo.'
+            regex: 'O código do atributo pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Este código já está em uso.'
+        configuration:
+            max_entries: 'O valor máximo de entradas na configuração deve ser maior ou igual ao valor mínimo de entradas.'
+            max_length: 'O comprimento máximo na configuração deve ser maior ou igual ao comprimento mínimo.'
+            min_entries: 'O valor mínimo de entradas na configuração deve ser menor ou igual ao número de opções adicionadas.'
+            multiple: 'A opção múltipla deve ser verdadeira se valores mínimo ou máximo de entradas forem especificados.'
         presentation:
-            not_blank: Por favor introduza a apresentação do atributo.
-            min_length: A apresentação do atributo deve ter pelo menos 1 caracter.|A apresentação dd atributo deve ter pelo menos {{ limit }} caracteres.
-            max_length: A apresentação de atributo não deve ter mais que 1 caracter.|A apresentação do atributo não deve ter mais que {{ limit }} caracteres.
+            not_blank: 'Por favor, informe a apresentação do atributo.'
+            min_length: 'A apresentação do atributo deve ter pelo menos 1 caractere.|A apresentação do atributo deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'A apresentação do atributo não pode ter mais de 1 caractere.|A apresentação do atributo não pode ter mais de {{ limit }} caracteres.'
+        type:
+            unregistered: 'O tipo de atributo "%type%" não está registrado. Tipos de atributos disponíveis: %available_types%.'
     attribute_value:
         attribute:
-            not_blank: Por favor, selecione o atributo.
+            not_blank: 'Por favor, selecione um atributo.'
         value:
-            not_blank: Por favor introduza o valor do atributo.
+            not_blank: 'Por favor, informe o valor do atributo.'
+

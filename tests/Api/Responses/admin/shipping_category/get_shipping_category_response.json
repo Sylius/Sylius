@@ -6,6 +6,6 @@
     "code": "special",
     "name": "Special",
     "description": "For special care",
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

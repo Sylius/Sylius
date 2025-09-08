@@ -4,5 +4,5 @@
 sylius:
     form:
         locale:
-            name: Jméno
-            select: Vybrat národní prostředí
+            name: 'Název'
+            select: 'Vyberte jazykovou verzi...'

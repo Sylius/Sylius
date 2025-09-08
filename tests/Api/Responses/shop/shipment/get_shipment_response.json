@@ -1,9 +1,9 @@
 {
     "@context": "\/api\/v2\/contexts\/Shipment",
-    "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+    "@id": "\/api\/v2\/shop\/orders\/token\/shipments\/@integer@",
     "@type": "Shipment",
-    "order": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
-    "id": @integer@,
+    "order": "\/api\/v2\/shop\/orders\/token",
+    "id": "@integer@",
     "state": "ready",
     "method": "\/api\/v2\/shop\/shipping-methods\/UPS",
     "units": {
@@ -11,6 +11,8 @@
         "16": "\/api\/v2\/shop\/order-item-units\/@integer@",
         "17": "\/api\/v2\/shop\/order-item-units\/@integer@"
     },
-    "createdAt": @datetime@,
-    "updatedAt": @datetime@
+    "tracking": null,
+    "shippedAt": null,
+    "createdAt": "@datetime@",
+    "updatedAt": "@datetime@"
 }

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Channel;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class LowestPriceFlagElement extends Element implements LowestPriceFlagElementInterface
+class LowestPriceFlagElement extends Element implements LowestPriceFlagElementInterface
 {
     public function enable(): void
     {
@@ -35,7 +35,7 @@ final class LowestPriceFlagElement extends Element implements LowestPriceFlagEle
     protected function getDefinedElements(): array
     {
         return [
-            'lowest_price_for_discounted_products_visible' => '#sylius_channel_channelPriceHistoryConfig_lowestPriceForDiscountedProductsVisible',
+            'lowest_price_for_discounted_products_visible' => '[data-test-lowest-price-for-discounted-products-visible]',
         ];
     }
 }

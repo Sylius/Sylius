@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    locale:
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte wählen Sie einen Lokalisierungscode aus.'
+            locale: 'Dieser Wert ist kein gültiger Lokalisierungscode.'
+            unique: 'Der Lokalisierungscode muss eindeutig sein.'

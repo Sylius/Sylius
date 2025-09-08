@@ -14,18 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Bundle\UserBundle\EventListener\UpdateUserEncoderListener;
 use Sylius\Bundle\UserBundle\EventListener\UserDeleteListener;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
-use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameProvider;
 use Sylius\Bundle\UserBundle\Reloader\UserReloader;
 use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
-use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
@@ -33,7 +30,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\Security\Http\SecurityEvents;
 
 final class SyliusUserExtension extends AbstractResourceExtension
 {
@@ -50,7 +46,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
         $this->createParameters($config['resources'], $container);
         $this->createServices($config['resources'], $container);
-        $this->loadEncodersAwareServices($config['encoder'], $config['resources'], $container);
     }
 
     private function resolveResources(array $resources, ContainerBuilder $container): array
@@ -89,20 +84,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
         }
     }
 
-    private function loadEncodersAwareServices(?string $globalEncoder, array $resources, ContainerBuilder $container): void
-    {
-        foreach ($resources as $userType => $config) {
-            $encoder = $config['user']['encoder'] ?? $globalEncoder;
-
-            if (null === $encoder || false === $encoder) {
-                continue;
-            }
-
-            $this->overwriteResourceFactoryWithEncoderAwareFactory($container, $userType, $encoder);
-            $this->registerUpdateUserEncoderListener($container, $userType, $encoder, $config);
-        }
-    }
-
     private function createTokenGenerators(string $userType, array $config, ContainerBuilder $container): void
     {
         $this->createUniquenessCheckers($userType, $config, $container);
@@ -118,22 +99,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
                 ],
             ),
         )->setPublic(true);
-
-        $container
-            ->setDefinition(
-                sprintf('sylius.%s_user.pin_generator.password_reset', $userType),
-                $this->createTokenGeneratorDefinition(
-                    UniquePinGenerator::class,
-                    [
-                        new Reference('sylius.random_generator'),
-                        new Reference(sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType)),
-                        $config['resetting']['pin']['length'],
-                    ],
-                ),
-            )
-            ->setPublic(true)
-            ->setDeprecated('sylius/user-bundle', '1.14', 'The "%service_id%" is deprecated and will be removed in Sylius 2.0.')
-        ;
 
         $container
             ->setDefinition(
@@ -169,15 +134,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition(
             sprintf('sylius.%s_user.token_uniqueness_checker.password_reset', $userType),
             $resetPasswordTokenUniquenessCheckerDefinition,
-        );
-
-        $resetPasswordPinUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
-        $resetPasswordPinUniquenessCheckerDefinition->addArgument(new Reference($repositoryServiceId));
-        $resetPasswordPinUniquenessCheckerDefinition->addArgument($config['resetting']['pin']['field_name']);
-        $resetPasswordPinUniquenessCheckerDefinition->setDeprecated('sylius/user-bundle', '1.14', 'The "%service_id%" is deprecated and will be removed in Sylius 2.0.');
-        $container->setDefinition(
-            sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType),
-            $resetPasswordPinUniquenessCheckerDefinition,
         );
 
         $emailVerificationTokenUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
@@ -262,40 +218,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition($providerEmailOrNameBasedServiceId, $emailOrNameBasedProviderDefinition);
     }
 
-    private function overwriteResourceFactoryWithEncoderAwareFactory(ContainerBuilder $container, string $userType, string $encoder): void
-    {
-        $factoryServiceId = sprintf('sylius.factory.%s_user', $userType);
-
-        $factoryDefinition = new Definition(
-            UserWithEncoderFactory::class,
-            [
-                $container->getDefinition($factoryServiceId),
-                $encoder,
-            ],
-        );
-        $factoryDefinition->setPublic(true);
-
-        $container->setDefinition($factoryServiceId, $factoryDefinition);
-    }
-
-    private function registerUpdateUserEncoderListener(ContainerBuilder $container, string $userType, string $encoder, array $resourceConfig): void
-    {
-        $updateUserEncoderListenerDefinition = new Definition(UpdateUserEncoderListener::class, [
-            new Reference(sprintf('sylius.manager.%s_user', $userType)),
-            $encoder,
-            $resourceConfig['user']['classes']['model'],
-            $resourceConfig['user']['classes']['interface'],
-            '_password',
-        ]);
-        $updateUserEncoderListenerDefinition->addTag('kernel.event_listener', ['event' => SecurityEvents::INTERACTIVE_LOGIN]);
-
-        $container->setDefinition(
-            sprintf('sylius.%s_user.listener.update_user_encoder', $userType),
-            $updateUserEncoderListenerDefinition,
-        );
-    }
-
-    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container)
+    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container): void
     {
         $container->setParameter(sprintf('sylius.%s_user.token.password_reset.ttl', $userType), $config['resetting']['token']['ttl']);
     }

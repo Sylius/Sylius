@@ -2,6 +2,9 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Vous n''avez pas de compte ?'
+        register_here: 'Inscrivez-vous ici'
     email:
         order_confirmation:
             has_been_successfully_placed: 'a été passée avec succès.'
@@ -25,7 +28,7 @@ sylius:
             hello: 'Bonjour'
             subject: 'Vérification de l''adresse e-mail'
             to_verify_your_email_address: 'Pour confirmer votre adresse e-mail, cliquez sur le lien ci-dessous'
-            verify_your_email_address: 'Vérifiez votre adresse email'
+            verify_your_email_address: 'Vérifiez votre adresse e-mail'
     footer:
         banner:
             free_shipping_title: 'Livraison et retour gratuits'
@@ -40,6 +43,8 @@ sylius:
         banner_content: 'Préparez-vous ! L''hiver arrive'
         banner_button: 'Jetez un coup d''œil à la nouvelle collection'
         carousel_header: 'Les produits stars'
+        latest_deals: 'Dernières offres'
+        new_collection: 'Nouvelle collection'
         newsletter: 'Newsletter'
         newsletter_description: 'Abonnez-vous à notre newsletter pour recevoir les nouvelles offres qui n''attendent que vous ! (<i>Vous pouvez modifier ce contenu en surchargeant la clé "sylius.homepage.newsletter_description" dans votre fichier de traduction</i>)'
         subscribe: 'S''abonner'
@@ -54,4 +59,4 @@ sylius:
                 header: 'Votre compte'
                 order_history: 'Historique des commandes'
                 personal_information: 'Informations personnelles'
-    top_bar: 'Inscrivez-vous à notre newsletter et bénéficiez de -20% de réduction'
+    top_bar: 'Inscrivez-vous à notre newsletter et bénéficiez de -20 % de réduction'

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
@@ -24,29 +23,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Webmozart\Assert\Assert;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
     /** @var AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>|null */
     private ?AbstractSchemaManager $schemaManager = null;
 
-    public function __construct(private EntityManagerInterface|Registry $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        if ($this->entityManager instanceof Registry) {
-            trigger_deprecation(
-                'sylius/sylius',
-                '1.13',
-                'Passing a $registry to the "%s" constructor is deprecated and will be prohibited in Sylius 2.0. Pass an instance of "%s" instead.',
-                self::class,
-                EntityManagerInterface::class,
-            );
-
-            $objectManager = $this->entityManager->getManager();
-            Assert::isInstanceOf($objectManager, EntityManagerInterface::class);
-
-            $this->entityManager = $objectManager;
-        }
     }
 
     /**
@@ -55,6 +39,21 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $outputStyle = new SymfonyStyle($input, $output);
+
+        if ($this->isSQLite()) {
+            $outputStyle->writeln('Sylius dont support officially SQLite, do you want to continue?');
+            $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
+
+            $question = new ConfirmationQuestion('Do you want to drop all of them? (y/N) ', false);
+            if ($questionHelper->ask($input, $output, $question)) {
+                return [
+                    'doctrine:schema:drop' => ['--force' => true],
+                    'doctrine:schema:update' => ['--force' => true],
+                ];
+            }
+
+            return [];
+        }
 
         if ($this->isSchemaHasAnyTable()) {
             $outputStyle->writeln(sprintf('The database <info>%s</info> exists and it contains some tables.', $this->getDatabaseName()));
@@ -121,5 +120,16 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         }
 
         return $this->schemaManager;
+    }
+
+    private function isSQLite(): bool
+    {
+        $platform = $this->entityManager->getConnection()->getDatabasePlatform();
+
+        if (class_exists(\Doctrine\DBAL\Platforms\SqlitePlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\SqlitePlatform::class)) {
+            return true;
+        }
+
+        return false;
     }
 }

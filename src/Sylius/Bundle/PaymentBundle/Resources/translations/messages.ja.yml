@@ -3,13 +3,36 @@
 
 sylius:
     form:
+        credit_card:
+            cardholder_name: 'カード名義人'
+            expiry_month: '有効期限（月）'
+            expiry_year: '有効期限（年）'
+            number: 'カード番号'
+            security_code: 'セキュリティコード（CVV）'
+            type: 'カード種別'
         payment:
-            method: お支払い方法
+            amount: '支払金額'
+            method: '支払方法'
             state:
-                header: 入金状況
-                checkout: 注文に進む
-                new: sylius.breadcrumb.new
-                pending: 未発送
+                header: '支払い状態'
+                checkout: 'チェックアウト'
+                completed: '完了'
+                authorized: '承認済み'
+                failed: '失敗'
+                new: '新規'
+                pending: '保留'
+                processing: '処理中'
+                unknown: '不明'
+                void: '無効'
+                cancelled: 'キャンセル済み'
+                refunded: '返金済み'
         payment_method:
-            description: 説明
-            name: ゾーン名
+            description: '説明'
+            enabled: '有効'
+            instructions: '手順'
+            name: '名称'
+            position: '位置'
+        gateway_config:
+            type: '種類'
+    gateway_factory:
+        offline: 'オフライン'

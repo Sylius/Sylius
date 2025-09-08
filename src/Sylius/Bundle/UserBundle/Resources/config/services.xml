@@ -29,71 +29,41 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand">
+        <service id="sylius.console.command.demote_user" class="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand" public="true">
+            <argument type="service" id="doctrine" />
+            <argument>%sylius.user.users%</argument>
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\UserBundle\Command\DemoteUserCommand" alias="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand" />
-        <service id="sylius.console.command.demote_user" alias="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand" />
-
-        <service id="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand">
+        <service id="sylius.console.command.promote_user" class="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand" public="true">
+            <argument type="service" id="doctrine" />
+            <argument>%sylius.user.users%</argument>
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\UserBundle\Command\PromoteUserCommand" alias="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand" />
-        <service id="sylius.console.command.promote_user" alias="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand" />
+        <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" />
 
-        <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" public="false" />
-
-        <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" public="false" />
+        <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" />
 
         <!-- Controllers -->
-        <service id="sylius.controller.user_security" class="Sylius\Bundle\UserBundle\Controller\SecurityController">
+        <service id="sylius.controller.user_security" class="Sylius\Bundle\UserBundle\Controller\SecurityController" public="true">
             <argument type="service" id="security.authentication_utils" />
             <argument type="service" id="form.factory" />
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+            <argument type="service" id="twig" />
         </service>
 
         <!-- Utils -->
         <service id="sylius.canonicalizer" class="Sylius\Component\User\Canonicalizer\Canonicalizer" />
         <service id="Sylius\Component\User\Canonicalizer\CanonicalizerInterface" alias="sylius.canonicalizer" />
 
-        <service id="sylius.security.password_encoder" class="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder">
-            <argument type="service" id="security.encoder_factory" />
-        </service>
-
-        <service id="Sylius\Component\User\Security\UserPasswordEncoderInterface" alias="sylius.security.password_hasher" />
-
-        <service id="sylius.security.password_hasher" class="Sylius\Bundle\UserBundle\Security\UserPasswordHasher">
-            <argument type="service" id="security.password_hasher_factory" />
-            <deprecated package="sylius/user-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-        <service id="Sylius\Component\User\Security\UserPasswordHasherInterface" alias="sylius.security.password_hasher">
-            <deprecated package="sylius/user-bundle" version="1.14">The service %alias_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-
         <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
-            <argument type="service" id="sylius.security.password_hasher" />
+            <argument type="service" id="security.user_password_hasher" />
         </service>
 
         <service id="Sylius\Component\User\Security\PasswordUpdaterInterface" alias="sylius.security.password_updater" />
 
-        <service id="sylius.security.user_login" class="Sylius\Bundle\UserBundle\Security\UserLogin">
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="security.user_checker" />
-            <argument type="service" id="event_dispatcher" />
-            <deprecated package="sylius/user-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-        <service id="Sylius\Bundle\UserBundle\Security\UserLoginInterface" alias="sylius.security.user_login">
-            <deprecated package="sylius/user-bundle" version="1.14">The service %alias_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-
         <!-- Listeners -->
-        <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener">
+        <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener" public="true">
             <argument type="service" id="sylius.security.password_updater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
@@ -101,13 +71,11 @@
             <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
 
-        <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\UserBundle\EventListener\MailerListener">
+        <service id="sylius.listener.user_mailer" class="Sylius\Bundle\UserBundle\EventListener\MailerListener">
             <argument type="service" id="sylius.email_sender" />
-            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
             <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
         </service>
-        <service id="sylius.listener.user_mailer" alias="sylius.listener.user_mailer_listener" />
 
         <!-- Forms -->
         <service id="sylius.form.type.user_login" class="Sylius\Bundle\UserBundle\Form\Type\UserLoginType">
@@ -130,6 +98,13 @@
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</argument>
             <argument>%sylius.form.type.user_change_password.validation_groups%</argument>
             <tag name="form.type" />
+        </service>
+
+        <service id="sylius.user_checker.enabled" class="Sylius\Component\User\Security\Checker\EnabledUserChecker">
+            <tag name="security.user_checker.admin" priority="100" />
+            <tag name="security.user_checker.shop" priority="100" />
+            <tag name="security.user_checker.api_admin" priority="100" />
+            <tag name="security.user_checker.api_shop" priority="100" />
         </service>
     </services>
 </container>

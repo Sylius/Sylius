@@ -5,48 +5,55 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Počet
-                equal: Sa rovná
-            type: Typ pravidla
+                count: 'Počet'
+                equal: 'Rovné'
+            type: 'Typ pravidla'
         shipment:
-            state: Stav
+            state: 'Stav'
             states:
-                checkout: Košík
-                pending: Čakajúca
-                ready: Pripravená
-                shipped: Odoslané
-                returned: Vrátená
-                cancelled: Zrušená
-            tracking_code: Sledovací kód
+                checkout: 'Pokladňa'
+                pending: 'Čaká'
+                ready: 'Pripravené'
+                shipped: 'Odoslané'
+                returned: 'Vrátené'
+                cancelled: 'Zrušené'
+            tracking_code: 'Sledovací kód'
         shipping_calculator:
             flat_rate_configuration:
-                label: Paušálna sadzba za zásielku
-                amount: Suma
+                label: 'Pevná sadzba na zásielku'
+                amount: 'Suma'
             per_unit_rate_configuration:
-                label: Paušálna suma za položku
-                amount: Suma
+                label: 'Pevná sadzba na jednotku'
+                amount: 'Suma'
         shipping_category:
-            description: Popis
-            name: Názov
+            description: 'Popis'
+            name: 'Názov'
         shipping_method:
-            add_rule: Pridať pravidlo
-            calculator: Spôsob vypočtu
-            category: Kategória
-            category_requirement: Podmienka pre kategóriu doručenia
-            channels: Kanály
-            configuration: Konfigurácia
-            description: Popis
-            enabled: Zapnuté
-            match_all_category_requirement: Všetky jednotky musia byť z rovnakej kategórie
-            match_any_category_requirement: Aspoň jedna jednotka musí byť z danej kategórie
-            match_none_category_requirement: Žiadna jednotka nesmie byť zo zvolenej kategórie
-            name: Názov
-            position: Pozícia
-            rules: Pravidlá
-            tax_category: Daňová kategória
-            translations: Preklady
+            add_rule: 'Pridať pravidlo'
+            calculator: 'Kalkulačka'
+            category: 'Kategória'
+            category_requirement: 'Požiadavka na kategóriu'
+            channels: 'Kanály'
+            configuration: 'Konfigurácia'
+            description: 'Popis'
+            enabled: 'Povolené'
+            match_all_category_requirement: 'Všetky položky musia spĺňať kategóriu metódy'
+            match_any_category_requirement: 'Aspoň jedna položka musí spĺňať kategóriu metódy'
+            match_none_category_requirement: 'Žiadna položka nemusí spĺňať kategóriu metódy'
+            name: 'Názov'
+            position: 'Pozícia'
+            rules: 'Pravidlá'
+            rules_help: 'Použite pravidlá na rozhodnutie, či sa táto metóda dopravy môže použiť pre danú objednávku. Ak je pravidlo pravdivé, táto metóda dopravy sa môže použiť. Upozorňujeme, že ak pridáte viacero pravidiel, všetky pravidlá musia byť pravdivé.'
+            select_calculator: 'Vybrať kalkulačku'
+            tax_category: 'Daňová kategória'
+            translations: 'Preklady'
         shipping_method_rule:
-            type: Typ
-            total: Spolu
-            weight: Hmotnosť
-            amount: Suma
+            items_total_greater_than_or_equal: 'Celková suma položiek väčšia alebo rovná'
+            items_total_less_than_or_equal: 'Celková suma položiek menšia alebo rovná'
+            type: 'Typ'
+            total: 'Celková suma'
+            total_weight_greater_than_or_equal: 'Celková hmotnosť väčšia alebo rovná'
+            total_weight_less_than_or_equal: 'Celková hmotnosť menšia alebo rovná'
+            weight: 'Hmotnosť'
+            amount: 'Suma'
+            select: 'Vyberte typ pravidla'

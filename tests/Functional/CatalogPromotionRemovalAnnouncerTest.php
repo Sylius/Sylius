@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
+use PHPUnit\Framework\Attributes\Test;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface;
@@ -21,7 +22,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class CatalogPromotionRemovalAnnouncerTest extends AbstractWebTestCase
 {
-    /** @test */
+    #[Test]
     public function it_puts_catalog_promotion_into_processing_state(): void
     {
         $this->createClient();
@@ -29,13 +30,13 @@ final class CatalogPromotionRemovalAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer */
-        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface');
+        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('sylius.announcer.catalog_promotion.removal');
         $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval($catalogPromotion);
 
         $this->assertSame('processing', $catalogPromotion->getState());
     }
 
-    /** @test */
+    #[Test]
     public function it_removes_active_catalog_promotion_when_processing_has_been_finished(): void
     {
         $this->createClient();
@@ -43,7 +44,7 @@ final class CatalogPromotionRemovalAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer */
-        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface');
+        $catalogPromotionRemovalAnnouncer = self::$kernel->getContainer()->get('sylius.announcer.catalog_promotion.removal');
         $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval($catalogPromotion);
 
         $this->assertNull(self::$kernel->getContainer()->get('sylius.repository.catalog_promotion')->findOneBy(['code' => $catalogPromotion->getCode()]));

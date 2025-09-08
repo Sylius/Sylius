@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
+use PHPUnit\Framework\Assert;
 use Sylius\Tests\Api\Utils\HeadersBuilder;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -22,19 +22,34 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
-    use AdminUserLoginTrait;
-
     public const CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
     public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
+    public const FILE_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'multipart/form-data', 'HTTP_ACCEPT' => 'application/ld+json'];
+
     private bool $isAdminContext = false;
+
+    private bool $isShopUserContext = false;
+
+    private ?string $adminUserEmail = null;
+
+    private ?string $shopUserEmail = null;
 
     /** @var array <string, string> */
     private array $defaultGetHeaders = [];
 
     /** @var array <string, string> */
+    private array $defaultPostHeaders = [];
+
+    /** @var array <string, string> */
+    private array $defaultPutHeaders = [];
+
+    /** @var array <string, string> */
     private array $defaultPatchHeaders = [];
+
+    /** @var array <string, string> */
+    private array $defaultDeleteHeaders = [];
 
     /**
      * @param array<array-key, mixed> $data
@@ -47,9 +62,26 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->expectedResponsesPath = __DIR__ . '/Responses';
     }
 
-    protected function setUpAdminContext(): void
+    protected function setUpAdminContext(?string $email = null): void
     {
         $this->isAdminContext = true;
+        $this->adminUserEmail = $email;
+    }
+
+    protected function setUpShopUserContext(?string $email = null): void
+    {
+        $this->isShopUserContext = true;
+        $this->shopUserEmail = $email;
+    }
+
+    protected function disableAdminContext(): void
+    {
+        $this->isAdminContext = false;
+    }
+
+    protected function disableShopUserContext(): void
+    {
+        $this->isShopUserContext = false;
     }
 
     protected function setUpDefaultGetHeaders(): void
@@ -60,11 +92,35 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         ];
     }
 
+    protected function setUpDefaultPostHeaders(): void
+    {
+        $this->defaultPostHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/ld+json',
+        ];
+    }
+
+    protected function setUpDefaultPutHeaders(): void
+    {
+        $this->defaultPutHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/ld+json',
+        ];
+    }
+
     protected function setUpDefaultPatchHeaders(): void
     {
         $this->defaultPatchHeaders = [
             'HTTP_ACCEPT' => 'application/ld+json',
             'CONTENT_TYPE' => 'application/merge-patch+json',
+        ];
+    }
+
+    protected function setUpDefaultDeleteHeaders(): void
+    {
+        $this->defaultDeleteHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/ld+json',
         ];
     }
 
@@ -108,14 +164,49 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     /**
      * @param array<string, array<string>|string> $queryParameters
      * @param array<string, string> $headers
+     * @param array<string, mixed> $body
      */
-    protected function requestPatch(string $uri, array $queryParameters = [], array $headers = []): Crawler
+    protected function requestPost(
+        string $uri,
+        ?array $body = null,
+        array $queryParameters = [],
+        array $parameters = [],
+        array $headers = [],
+        array $files = [],
+    ): Crawler {
+        if (!empty($this->defaultPostHeaders)) {
+            $headers = array_merge($this->defaultPostHeaders, $headers);
+        }
+
+        return $this->request('POST', $uri, $queryParameters, $headers, $body, $parameters, $files);
+    }
+
+    /**
+     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, string> $headers
+     * @param array<string, mixed> $body
+     */
+    protected function requestPut(string $uri, ?array $body = null, array $queryParameters = [], array $headers = []): Crawler
+    {
+        if (!empty($this->defaultPutHeaders)) {
+            $headers = array_merge($this->defaultPutHeaders, $headers);
+        }
+
+        return $this->request('PUT', $uri, $queryParameters, $headers, $body);
+    }
+
+    /**
+     * @param array<string, mixed> $body
+     * @param array<string, string> $headers
+     * @param array<string, array<string>|string> $queryParameters
+     */
+    protected function requestPatch(string $uri, ?array $body = null, array $queryParameters = [], array $headers = []): Crawler
     {
         if (!empty($this->defaultPatchHeaders)) {
             $headers = array_merge($this->defaultPatchHeaders, $headers);
         }
 
-        return $this->request('PATCH', $uri, $queryParameters, $headers);
+        return $this->request('PATCH', $uri, $queryParameters, $headers, $body);
     }
 
     /**
@@ -124,8 +215,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      */
     protected function requestDelete(string $uri, array $queryParameters = [], array $headers = []): Crawler
     {
-        if (!empty($this->defaultGetHeaders)) {
-            $headers = array_merge($this->defaultGetHeaders, $headers);
+        if (!empty($this->defaultDeleteHeaders)) {
+            $headers = array_merge($this->defaultDeleteHeaders, $headers);
         }
 
         return $this->request('DELETE', $uri, $queryParameters, $headers);
@@ -142,6 +233,16 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /** @throws \Exception */
+    protected function assertResponseCreated(string $filename): void
+    {
+        $this->assertResponse(
+            $this->client->getResponse(),
+            $filename,
+            Response::HTTP_CREATED,
+        );
+    }
+
+    /** @throws \Exception */
     protected function assertResponseUnprocessableEntity(string $filename): void
     {
         $this->assertResponse(
@@ -149,6 +250,41 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $filename,
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseNotFound(string $message = 'Not Found'): void
+    {
+        $this->assertResponseErrorMessage($message, Response::HTTP_NOT_FOUND);
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseForbidden(): void
+    {
+        $this->assertResponseErrorMessage('Access Denied.', Response::HTTP_FORBIDDEN);
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseErrorMessage(string $message, int $code = Response::HTTP_UNPROCESSABLE_ENTITY): void
+    {
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        Assert::assertIsArray($content, 'Response content supposed to be an array');
+
+        $expectedContent = [
+            '@context' => '/api/v2/contexts/Error',
+            '@id' => '/api/v2/errors/' . $code,
+            '@type' => 'hydra:Error',
+            'title' => 'An error occurred',
+            'detail' => $message,
+            'status' => $code,
+            'type' => '/errors/' . $code,
+            'description' => $message,
+            'hydra:description' => $message,
+            'hydra:title' => 'An error occurred',
+        ];
+
+        Assert::assertSame($expectedContent, $content);
+        $this->assertResponseCode($this->client->getResponse(), $code);
     }
 
     /**
@@ -201,10 +337,23 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      * @param array<string, array<string>|string> $queryParameters
      * @param array<string, string> $headers
      */
-    protected function request(string $method, string $uri, array $queryParameters = [], array $headers = []): Crawler
-    {
+    protected function request(
+        string $method,
+        string $uri,
+        array $queryParameters = [],
+        array $headers = [],
+        ?array $body = null,
+        array $parameters = [],
+        array $files = [],
+    ): Crawler {
         if ($this->isAdminContext) {
-            $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
+            $email = $this->adminUserEmail ?? 'api@example.com';
+            $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization($email)->build(), $headers);
+        }
+
+        if ($this->isShopUserContext) {
+            $email = $this->shopUserEmail ?? 'shop@example.com';
+            $headers = array_merge($this->headerBuilder()->withShopUserAuthorization($email)->build(), $headers);
         }
 
         $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
@@ -214,7 +363,10 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         return $this->client->request(
             method: $method,
             uri: $uri,
+            parameters: $parameters,
+            files: $files,
             server: $headers,
+            content: is_array($body) ? json_encode($body, \JSON_THROW_ON_ERROR) : null,
         );
     }
 }

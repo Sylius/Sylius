@@ -28,7 +28,7 @@ sylius:
                     locales: Ustawienia regionalne
                     payment_methods: Metody płatności
                     shipping_categories: Kategorie wysyłki
-                    shipping_methods: Sposób wysyłki
+                    shipping_methods: Sposoby wysyłki
                     tax_categories: Kategorie podatkowe
                     tax_rates: Stawki podatkowe
                     zones: Strefy

@@ -45,7 +45,7 @@ jobs:
     static-checks:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, API Platform ${{ matrix.api-platform }}"
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -77,11 +77,6 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
-                    composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
-
-            -   name: Restrict API Platform version for ApiBundle
-                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
-                working-directory: "src/Sylius/Bundle/ApiBundle"
 
             -   name: Get Composer cache directory
                 id: composer-cache
@@ -92,7 +87,7 @@ jobs:
                 with:
                     path: |
                         ${{ steps.composer-cache.outputs.dir }}
-                    key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}
+                    key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}
 
             -   name: "Require ext-random"
                 if: matrix.php == '8.2'
@@ -115,7 +110,7 @@ jobs:
                 run: bin/console lint:container
 
             -   name: Validate Yaml files
-                run: bin/console lint:yaml src
+                run: bin/console lint:yaml src --parse-tags
 
             -   name: Validate Package versions
                 run: vendor/bin/monorepo-builder validate
@@ -127,6 +122,7 @@ jobs:
                 run: vendor/bin/phpstan analyse
 
             -   name: Run PHPSpec
+                if: ${{ inputs.branch == '1.14' || inputs.branch == '2.0' }}
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
             -   name: Run ComposerRequireChecker

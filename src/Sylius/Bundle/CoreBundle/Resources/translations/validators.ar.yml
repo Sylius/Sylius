@@ -5,199 +5,212 @@ sylius:
     admin:
         password_reset_request:
             email:
-                invalid: 'البريد الإلكتروني غير صالح.'
-                max: 'يجب أن يكون البريد الإلكتروني بحد أقصى {{ limit }} حرفًا.'
-                min: 'يجب أن يكون البريد الإلكتروني على الأقل {{ limit }} حرفًا.'
-                not_blank: 'يرجى إدخال البريد الإلكتروني.'
+                invalid: هذا البريد الإلكتروني غير صالح.
+                max: يجب ألا يتجاوز البريد الإلكتروني {{ limit }} حرفًا.
+                min: يجب أن يحتوي البريد الإلكتروني على {{ limit }} حرفًا على الأقل.
+                not_blank: يرجى إدخال البريد الإلكتروني.
         reset_password:
-            mismatch: 'كلمات المرور المدخلة لا تتطابق.'
+            mismatch: كلمتا المرور غير متطابقتين.
             password:
-                min: 'يجب أن تكون كلمة المرور على الأقل {{ limit }} حرفًا.'
-                max: 'يجب أن تكون كلمة المرور بحد أقصى {{ limit }} حرفًا.'
-                not_blank: 'يرجى إدخال كلمة المرور.'
+                min: يجب أن تحتوي كلمة المرور على {{ limit }} حرفًا على الأقل.
+                max: يجب ألا تتجاوز كلمة المرور {{ limit }} حرفًا.
+                not_blank: يرجى إدخال كلمة المرور.
     avatar_image:
         file:
-            max_size: 'الصورة كبيرة جدًا - {{ size }}{{ suffix }}. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.'
-            upload_ini_size: 'الصورة كبيرة جدًا. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.'
+            max_size: الصورة كبيرة جدًا - {{ size }}{{ suffix }}. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.
+            upload_ini_size: الصورة كبيرة جدًا. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.
     catalog_promotion_action:
         fixed_discount:
-            channel_not_configured: 'لم يتم توفير التكوين لأحد القنوات المطلوبة.'
-            invalid_channel: 'التكوين المقدم يحتوي على أخطاء. على الأقل أحد الرموز المقدمة للقنوات غير موجود.'
-            not_valid: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة مبلغ الخصم الثابت الذي هو رقم أكبر من 0.'
+            channel_not_configured: لم يتم توفير الإعدادات لإحدى القنوات المطلوبة.
+            not_valid: تحتوي الإعدادات المقدمة على أخطاء. يرجى إدخال قيمة خصم ثابتة أكبر من 0.
     catalog_promotion_scope:
-        invalid_type: 'نوع نطاق الترويج للكتالوج غير صالح. يرجى اختيار نوع صالح.'
+        invalid_type: نوع نطاق الترويج غير صالح. يرجى اختيار نوع صالح.
         for_products:
-            invalid_products: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة منتجات موجودة فقط.'
-            not_empty: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة منتج واحد على الأقل.'
-            unique: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة منتجات فريدة فقط.'
+            invalid_products: تحتوي الإعدادات على أخطاء. يرجى إضافة منتجات موجودة فقط.
+            not_empty: تحتوي الإعدادات على أخطاء. يرجى إضافة منتج واحد على الأقل.
+            unique: تحتوي الإعدادات على أخطاء. يرجى إضافة منتجات فريدة فقط.
         for_variants:
-            invalid_variants: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة متغيرات موجودة فقط.'
-            not_empty: 'يرجى إضافة متغير واحد على الأقل.'
-            unique: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة متغيرات فريدة فقط.'
+            invalid_variants: تحتوي الإعدادات على أخطاء. يرجى إضافة متغيرات موجودة فقط.
+            not_empty: يرجى إضافة متغير واحد على الأقل.
+            unique: تحتوي الإعدادات على أخطاء. يرجى إضافة متغيرات فريدة فقط.
         for_taxons:
-            invalid_taxons: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة فئات ضريبية موجودة فقط.'
-            not_empty: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة فئة ضريبية واحدة على الأقل.'
-            unique: 'التكوين المقدم يحتوي على أخطاء. يرجى إضافة فئات ضريبية فريدة فقط.'
+            invalid_taxons: تحتوي الإعدادات على أخطاء. يرجى إضافة تصنيفات موجودة فقط.
+            not_empty: تحتوي الإعدادات على أخطاء. يرجى إضافة تصنيف واحد على الأقل.
+            unique: تحتوي الإعدادات على أخطاء. يرجى إضافة تصنيفات فريدة فقط.
     channel:
         base_currency:
-            not_blank: 'يرجى إدخال العملة الأساسية للقناة.'
+            not_blank: يرجى إدخال العملة الأساسية للقناة.
         default_locale:
-            enabled: 'يجب تمكين اللغة الافتراضية.'
-            not_blank: 'يرجى إدخال اللغة الافتراضية للقناة.'
+            enabled: يجب أن تكون اللغة الافتراضية مفعّلة.
+            not_blank: يرجى إدخال اللغة الافتراضية للقناة.
         contact_email:
-            invalid: 'البريد الإلكتروني غير صالح.'
-            max: 'يجب أن يكون البريد الإلكتروني بحد أقصى {{ limit }} حرفًا.'
-            min: 'يجب أن يكون البريد الإلكتروني على الأقل {{ limit }} حرفًا.'
+            invalid: هذا البريد الإلكتروني غير صالح.
+            max: يجب ألا يتجاوز البريد الإلكتروني {{ limit }} حرفًا.
+            min: يجب أن يحتوي البريد الإلكتروني على {{ limit }} حرفًا على الأقل.
         contact_phone_number:
-            max_length: 'يجب أن لا يتجاوز رقم الهاتف للتواصل {{ limit }} حرفًا.'
+            max_length: يجب ألا يتجاوز رقم الهاتف {{ limit }} حرفًا.
         theme_name:
-            max_length: 'يجب أن لا يتجاوز اسم القالب {{ limit }} حرفًا.'
+            max_length: يجب ألا يتجاوز اسم السمة {{ limit }} حرفًا.
         tax_calculation_strategy:
-            not_blank: 'يرجى إدخال استراتيجية حساب الضرائب.'
-            max_length: 'يجب أن لا يتجاوز استراتيجية حساب الضرائب {{ limit }} حرفًا.'
+            not_blank: يرجى إدخال استراتيجية حساب الضرائب.
+            max_length: يجب ألا تتجاوز استراتيجية حساب الضرائب {{ limit }} حرفًا.
     channel_price_history_config:
         lowest_price_for_discounted_products_checking_period:
-            greater_than: 'القيمة يجب أن تكون أكبر من {{ compared_value }}'
-            less_than: 'القيمة يجب أن تكون أقل من {{ compared_value }}'
+            greater_than: 'يجب أن تكون القيمة أكبر من {{ compared_value }}.'
+            less_than: 'يجب أن تكون القيمة أقل من {{ compared_value }}.'
     channel_pricing:
         channel_code:
-            not_blank: 'يرجى تعيين رمز القناة.'
-            unique: 'تحتوي هذه القناة بالفعل على سعر لهذا المتغير المنتج.'
+            not_blank: يرجى تعيين رمز القناة.
+            unique: هذه القناة تحتوي بالفعل على سعر لهذا المتغير.
         price:
-            min: 'لا يمكن أن يكون السعر أقل من 0.'
-            not_blank: 'يرجى إدخال السعر.'
+            min: لا يمكن أن يكون السعر أقل من 0.
+            not_blank: يرجى إدخال السعر.
+    channel_code_collection:
+        invalid_channel: القناة برمز {{ channel_code }} غير موجودة.
     checkout:
         addressing:
-            csrf_error: 'يرجى إعادة تقديم النموذج بالكامل.'
+            csrf_error: يرجى إعادة إرسال النموذج الكامل.
         shipping_method:
-            not_blank: 'يرجى اختيار طريقة الشحن.'
+            not_blank: يرجى اختيار طريقة الشحن.
         email:
-            not_changeable: 'لا يمكن تغيير البريد الإلكتروني للعميل المسجل.'
+            not_changeable: يمكن تغيير البريد الإلكتروني فقط للعملاء الضيوف. بمجرد تسجيل الدخول وربط السلة، لا يمكن تغييره.
     contact:
         email:
-            invalid: 'البريد الإلكتروني غير صالح.'
-            not_blank: 'يرجى إدخال بريدك الإلكتروني.'
+            invalid: هذا البريد الإلكتروني غير صالح.
+            not_blank: يرجى إدخال بريدك الإلكتروني.
         message:
-            not_blank: 'يرجى إدخال رسالتك.'
+            not_blank: يرجى إدخال رسالتك.
     country:
         code:
-            not_exist: 'الدولة بالرمز {{ code }} غير موجودة.'
+            not_exist: الدولة برمز {{ code }} غير موجودة.
     currency:
         enabled:
-            cannot_disable_base: 'لا يمكن تعطيل العملة الأساسية.'
+            cannot_disable_base: لا يمكن تعطيل العملة الأساسية.
     customer:
         currency_code:
-            not_valid: 'رمز العملة الذي أدخلته غير صالح.'
+            not_valid: رمز العملة الذي أدخلته غير صالح.
     customer_group:
         code:
-            not_exist: 'مجموعة العملاء بالرمز {{ code }} غير موجودة.'
+            not_exist: مجموعة العملاء برمز {{ code }} غير موجودة.
     cart_item:
-        not_available: '%itemName% ليس لديها مخزون كافٍ.'
-        insufficient_stock: 'المخزون غير كافٍ'
-    max_integer: 'القيمة يجب أن تكون أقل من {{ compared_value }}.'
+        not_available: '%itemName% غير متوفر بالكمية المطلوبة.'
+        insufficient_stock: الكمية غير كافية
+        quantity:
+            not_in_range: يجب أن تكون الكمية بين {{ min }} و{{ max }}.
+        variant:
+            not_available: '%variantName% غير متاح.'
+    max_integer: يجب أن تكون القيمة أقل من {{ compared_value }}.
     order:
-        address_requirement: 'يرجى توفير %addressName%.'
+        address_requirement: يرجى توفير %addressName%.
         currency_code:
-            not_valid: 'رمز العملة الذي أدخلته غير صالح.'
-        invalid_state_transition: 'لا يمكن إتمام الطلب لأنه في حالة خاطئة. الحالة الحالية: %currentState%. التحولات الممكنة: %possibleTransitions%.'
-        payment_method_eligibility: 'تم تعطيل طريقة الدفع هذه %paymentMethodName%. يرجى إعادة اختيار طريقة الدفع الخاصة بك.'
-        product_eligibility: 'تم تعطيل المنتج هذا %productName%.'
-        shipping_method_eligibility: 'المنتج لا يتناسب مع متطلبات طريقة الشحن %shippingMethodName%. يرجى إعادة اختيار طريقة الشحن.'
-        shipping_method_not_available: 'طريقة الشحن "%shippingMethodName%" غير متوفرة. يرجى إعادة اختيار طريقة الشحن.'
+            not_valid: رمز العملة الذي أدخلته غير صالح.
+        invalid_state_transition: 'لا يمكن الإتمام لأن الطلب في حالة غير صحيحة. الحالة الحالية: %currentState%. التحولات المحتملة: %possibleTransitions%.'
+        payment_method_eligibility: تم تعطيل طريقة الدفع %paymentMethodName%. يرجى إعادة اختيار طريقة الدفع.
+        product_eligibility: تم تعطيل المنتج %productName%.
+        shipping_method_eligibility: لا يتوافق المنتج مع شروط طريقة الشحن %shippingMethodName%. يرجى إعادة اختيار طريقة الشحن.
+        shipping_method_not_available: طريقة الشحن "%shippingMethodName%" غير متاحة. يرجى إعادة اختيار طريقة الشحن.
+        cart_items_immutable: لا يمكن تعديل عناصر السلة بعد إتمام عملية الدفع.
     resend_order_confirmation_email:
-        invalid_order_state: 'لا يمكن إعادة إرسال تأكيد الطلب للبريد الإلكتروني في الحالة %state%.'
+        invalid_order_state: لا يمكن إعادة إرسال تأكيد الطلب للطلب بالحالة %state%.
     resend_shipment_confirmation_email:
-        invalid_shipment_state: 'لا يمكن إعادة إرسال تأكيد الشحن للبريد الإلكتروني في الحالة %state%.'
+        invalid_shipment_state: لا يمكن إعادة إرسال تأكيد الشحنة للشحنة بالحالة %state%.
     locale:
         enabled:
-            cannot_disable_base: 'لا يمكن تعطيل اللغة الأساسية.'
+            cannot_disable_base: لا يمكن تعطيل اللغة الأساسية.
     product:
         variants:
-            all_prices_defined: 'يجب عليك تحديد أسعار المتغيرات للمنتجات التي تم تعيينها للقنوات الجديدة أولاً.'
+            all_prices_defined: يجب تعيين أسعار متغيرات المنتج أولًا للقنوات المضافة حديثًا.
         code:
-            not_exist: 'المنتج بالرمز {{ code }} غير موجود.'
+            not_exist: المنتج برمز {{ code }} غير موجود.
     product_attribute:
-        invalid: 'الموضع يجب أن يكون عددًا صحيحًا.'
+        invalid: يجب أن يكون الترتيب عددًا صحيحًا.
     image:
         file:
-            allowed_mime_types: 'الملف ليس صورة صالحة. الأنواع المسموحة هي %types%.'
+            allowed_mime_types: 'الملف ليس صورة صالحة. الأنواع المسموحة: %types%.'
     product_image:
         file:
-            max_size: 'الصورة كبيرة جدًا - {{ size }}{{ suffix }}. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.'
-            upload_ini_size: 'الصورة كبيرة جدًا. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.'
+            max_size: الصورة كبيرة جدًا - {{ size }}{{ suffix }}. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.
+            upload_ini_size: الصورة كبيرة جدًا. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.
         product_variant:
-            not_belong_to_owner: 'متغير المنتج بالرمز "%productVariantCode%" لا ينتمي إلى المنتج بالرمز "%ownerCode%"، الذي هو مالك الصورة.'
+            not_belong_to_owner: متغير المنتج برمز "%productVariantCode%" لا يتبع المنتج برمز "%ownerCode%"، وهو مالك الصورة.
     product_taxon:
-        unique: 'لا يمكن تكرار فئات المنتجات.'
+        unique: لا يمكن تكرار تصنيفات المنتج.
         product:
-            not_blank: 'يرجى اختيار منتج.'
+            not_blank: يرجى اختيار منتج.
         taxon:
-            not_blank: 'يرجى اختيار فئة ضريبية.'
+            not_blank: يرجى اختيار تصنيف.
     product_variant:
         code:
-            not_exist: 'متغير المنتج بالرمز {{ code }} غير موجود.'
+            not_exist: متغير المنتج برمز {{ code }} غير موجود.
         onHand:
-            min: 'يجب أن يكون المخزون أكبر من {{ limit }}.'
-            not_blank: 'يرجى إدخال المخزون المتاح.'
-            reserved: 'يجب أن يكون المخزون المتاح أكبر من عدد الوحدات المحجوزة'
+            min: يجب أن تكون الكمية المتوفرة أكبر من {{ limit }}.
+            not_blank: يرجى إدخال الكمية المتوفرة.
+            reserved: يجب أن تكون الكمية المتوفرة أكبر من عدد الوحدات المحجوزة.
         original_price:
-            min: 'يجب أن لا يكون السعر الأصلي سالبًا.'
+            min: لا يمكن أن يكون السعر الأصلي سلبيًا.
         weight:
-            min: 'لا يمكن أن يكون الوزن سالبًا.'
-            invalid: 'يجب أن يكون الوزن رقمًا.'
+            min: لا يمكن أن يكون الوزن سلبيًا.
+            invalid: يجب أن يكون الوزن رقمًا.
         width:
-            min: 'لا يمكن أن يكون العرض سالبًا.'
-            invalid: 'يجب أن يكون العرض رقمًا.'
+            min: لا يمكن أن يكون العرض سلبيًا.
+            invalid: يجب أن يكون العرض رقمًا.
         height:
-            min: 'لا يمكن أن يكون الارتفاع سالبًا.'
-            invalid: 'يجب أن يكون الارتفاع رقمًا.'
+            min: لا يمكن أن يكون الارتفاع سلبيًا.
+            invalid: يجب أن يكون الارتفاع رقمًا.
         depth:
-            min: 'لا يمكن أن يكون العمق سالبًا.'
-            invalid: 'يجب أن يكون العمق رقمًا.'
+            min: لا يمكن أن يكون العمق سلبيًا.
+            invalid: يجب أن يكون العمق رقمًا.
         channel_pricing:
-            all_defined: 'يجب عليك تحديد السعر لكل قناة مفعلة.'
-            existing_code: 'القناة بالرمز {{ channelCode }} غير موجودة.'
+            price:
+                not_defined: يجب تحديد السعر.
+            existing_code: القناة برمز {{ channelCode }} غير موجودة.
     promotion_coupon:
         per_customer_usage_limit:
-            min: 'حد استخدام القسيمة لكل عميل يجب أن يكون على الأقل {{ limit }}.'
+            min: يجب أن يكون حد الاستخدام لكل عميل على الأقل {{ limit }}.
     product_translation:
         short_description:
-            max: 'يجب أن لا يتجاوز الوصف القصير {{ limit }} حرفًا.'
+            max: يجب ألا يتجاوز الوصف المختصر {{ limit }} حرفًا.
+    province:
+        code:
+            not_exist: المقاطعة برمز {{ code }} غير موجودة.
     review:
         author:
-            not_blank: 'يرجى إدخال بريدك الإلكتروني.'
+            not_blank: يرجى إدخال بريدك الإلكتروني.
         product:
-            not_blank: 'يرجى إدخال منتج.'
+            not_blank: يرجى إدخال المنتج.
         rating:
-            range: 'تصنيف المراجعة يجب أن يكون عددًا صحيحًا في النطاق من 1 إلى 5.'
-            not_in_range: 'تصنيف المراجعة يجب أن يكون بين {{ min }} و {{ max }}.'
+            range: يجب أن تكون التقييمات أرقامًا صحيحة بين 1 و5.
+            not_in_range: يجب أن يكون التقييم بين {{ min }} و{{ max }}.
     taxon:
         code:
-            not_exist: 'الفئة الضريبية بالرمز {{ code }} غير موجودة.'
+            not_exist: التصنيف برمز {{ code }} غير موجود.
     taxon_image:
         file:
-            max_size: 'الصورة كبيرة جدًا - {{ size }}{{ suffix }}. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.'
-            upload_ini_size: 'الصورة كبيرة جدًا. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.'
+            max_size: الصورة كبيرة جدًا - {{ size }}{{ suffix }}. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.
+            upload_ini_size: الصورة كبيرة جدًا. الحد الأقصى المسموح به هو {{ limit }}{{ suffix }}.
     translation:
         locale:
-            not_blank: 'يرجى إدخال اللغة.'
-            invalid: 'هذه القيمة ليست لغة صالحة.'
-            unique: 'هناك ترجمة لرمز اللغة {{ value }} موجودة بالفعل.'
+            not_blank: يرجى إدخال اللغة.
+            invalid: هذه القيمة ليست لغة صالحة.
+            unique: توجد ترجمة بالفعل لرمز اللغة {{ value }}.
         locale_code:
-            invalid: 'يرجى اختيار إحدى اللغات المتاحة: %locales%'
+            invalid: 'يرجى اختيار واحدة من اللغات المتاحة: %locales%'
     user:
         email:
-            unique: 'هذا البريد الإلكتروني مستخدم بالفعل.'
-            min: 'يجب أن يحتوي البريد الإلكتروني على الأقل {{ limit }} حرفًا.'
-            max: 'يجب أن يحتوي البريد الإلكتروني على الأقل {{ limit }} حرفًا.'
-            invalid: 'هذا البريد الإلكتروني غير صالح.'
+            unique: هذا البريد الإلكتروني مستخدم بالفعل.
+            min: يجب أن يحتوي البريد الإلكتروني على {{ limit }} حرفًا على الأقل.
+            max: يجب ألا يتجاوز البريد الإلكتروني {{ limit }} حرفًا.
+            invalid: هذا البريد الإلكتروني غير صالح.
         username:
-            unique: 'اسم المستخدم هذا مستخدم بالفعل.'
-            not_blank: 'يرجى إدخال اسمك.'
-            max: 'يجب ألا يتجاوز اسم المستخدم {{ limit }} حرفًا.'
+            unique: اسم المستخدم هذا مستخدم بالفعل.
+            not_blank: يرجى إدخال اسم المستخدم.
+            max: يجب ألا يتجاوز اسم المستخدم {{ limit }} حرفًا.
         first_name:
-            max: 'يجب ألا يتجاوز الاسم الأول {{ limit }} حرفًا.'
+            max: يجب ألا يتجاوز الاسم الأول {{ limit }} حرفًا.
         last_name:
-            max: 'يجب ألا يتجاوز الاسم الأخير {{ limit }} حرفًا.'
+            max: يجب ألا يتجاوز اسم العائلة {{ limit }} حرفًا.
         locale_code:
-            not_blank: 'يرجى اختيار اللغة.'
+            not_blank: يرجى اختيار لغة.
+    zone:
+        code:
+            not_exist: المنطقة برمز {{ code }} غير موجودة.

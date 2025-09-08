@@ -5,7 +5,9 @@ default:
     suites:
         ui_receiving_discount:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.guest_cart
                 - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.channel
@@ -15,22 +17,29 @@ default:
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.promotion
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout.address
+                - sylius.behat.context.setup.checkout.shipping
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.promotion
-                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.channel
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout
+                - sylius.behat.context.ui.shop.checkout.addressing
+                - sylius.behat.context.ui.shop.checkout.shipping
                 - sylius.behat.context.ui.shop.currency
 
             filters:

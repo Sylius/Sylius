@@ -17,9 +17,5 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    public function checkIfScopeConfigurationFormIsVisible(): bool;
-
-    public function checkIfActionConfigurationFormIsVisible(): bool;
-
     public function specifyCode(string $code): void;
 }

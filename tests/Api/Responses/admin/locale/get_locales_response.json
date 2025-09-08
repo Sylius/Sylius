@@ -25,5 +25,18 @@
             "name": "Irish (Ireland)"
         }
     ],
-    "hydra:totalItems": 3
+    "hydra:totalItems": 3,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/locales{?code}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            }
+        ]
+    }
 }

@@ -15,20 +15,24 @@ namespace Sylius\Behat\Element\Shop;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class CartWidgetElement extends Element implements CartWidgetElementInterface
+class CartWidgetElement extends Element implements CartWidgetElementInterface
 {
     public function getCartTotalQuantity(): int
     {
-        $cartTotal = $this->getElement('cart_button')->getText();
-        preg_match('/.+,\s(\d+)\s(items|item)/', $cartTotal, $parts);
+        if (!$this->hasElement('cart_quantity')) {
+            return 0;
+        }
 
-        return (int) ($parts[1] ?? 0);
+        $element = $this->getElement('cart_quantity');
+        $attributeValue = $element->getAttribute('data-test-cart-quantity');
+
+        return is_numeric($attributeValue) ? (int) $attributeValue : 0;
     }
 
     protected function getDefinedElements(): array
     {
         return [
-            'cart_button' => '[data-test-cart-button]',
+            'cart_quantity' => '[data-test-cart-quantity]',
         ];
     }
 }

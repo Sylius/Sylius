@@ -46,7 +46,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getSubtotal(): string;
 
-    public function getOrderShipmentStatus(): string;
+    public function getOrderShipmentState(): string;
 
     public function getShipmentStatus(): string;
 
@@ -54,7 +54,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getPaymentPrice(): string;
 
-    public function getPaymentStatus(): string;
+    public function getPaymentState(): string;
 
     public function getOrderPaymentStatus(): string;
 

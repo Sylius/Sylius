@@ -1,6 +1,12 @@
 {
     "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/404",
     "@type": "hydra:Error",
     "hydra:title": "An error occurred",
-    "hydra:description": "Promotion with the \"invalid\" code not found."
+    "hydra:description": "Promotion with the \"non_existing_promotion_code\" code not found.",
+    "title": "An error occurred",
+    "detail": "Promotion with the \"non_existing_promotion_code\" code not found.",
+    "status": 404,
+    "type": "\/errors\/404",
+    "description": "Promotion with the \"non_existing_promotion_code\" code not found."
 }

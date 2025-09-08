@@ -4,6 +4,7 @@
 sylius:
     catalog_promotion:
         code:
+            max_length: Le code ne doit pas dépasser {{ limit }} caractères.
             unique: La promotion catalogue avec le code spécifié existe déjà.
             regex: Le code de promotion catalogue ne peut être constitué que de lettres, chiffres, tirets et traits de soulignement.
             not_blank: Veuillez entrer un code de promotion catalogue.
@@ -30,6 +31,7 @@ sylius:
             invalid: Le type de périmètre de promotion catalogue n'est pas valide. Les types disponibles sont {{ available_scope_types }}.
     promotion:
         code:
+            max_length: Le code de promotion ne doit pas dépasser {{ limit }} caractères.
             unique: Ce code de promotion existe déjà.
             regex: Le code de promotion peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.
             not_blank: Veuillez entrer le code de promotion.
@@ -74,8 +76,3 @@ sylius:
         possible_generation_amount: Longueur de code ou nombre de bons de réduction invalide. Il n'est pas possible de générer %expectedAmount% coupons uniques avec la longueur de code %codeLength%. Le nombre possible à générer est de %possibleAmount%.
         usage_limit:
             min: La limite d'utilisation du code promo généré doit être au moins de {{ limit }}.
-    translation:
-        locale:
-            not_blank: Vous devez entrer une valeur.
-            invalid: Ce paramètre régional n'est pas valide.
-            unique: Une traduction pour la locale {{ value }} existe déjà.

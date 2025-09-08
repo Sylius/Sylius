@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class PromotionActionType extends Constraint
 {
     public string $invalidType = 'sylius.promotion_action.invalid_type';

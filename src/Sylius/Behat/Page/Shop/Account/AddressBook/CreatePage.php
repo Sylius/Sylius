@@ -63,7 +63,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'add_button' => '[data-test-add-address]',
+            'add_button' => '[data-test-button="add-address"]',
             'city' => '[data-test-city]',
             'country' => '[data-test-country]',
             'first_name' => '[data-test-first-name]',

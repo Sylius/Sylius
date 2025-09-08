@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    review:
+        accept: 'レビューが正常に承認されました。'
+        reject: 'レビューは正常に却下されました。'
+        wait_for_the_acceptation: 'あなたのレビューは承認待ちです。'

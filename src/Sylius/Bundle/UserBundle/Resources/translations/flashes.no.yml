@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        expire_password_reset_token: 'Passordtilbakestillingslenken har utløpt.'
+        change_password: 'Passordet ditt har blitt endret!'
+        reset_password: 'Passordet ditt har blitt tilbakestilt!'
+        reset_password_request: 'Hvis e-posten du oppga finnes i vårt system, har vi sendt instruksjoner om hvordan du tilbakestiller passordet.'
+        verify_email: 'E-posten din har blitt verifisert.'
+        verify_email_by_invalid_token: 'Verifiseringstokenet er ugyldig.'
+        verify_email_request: 'En e-post med verifiseringslenken har blitt sendt til din e-postadresse.'
+        verify_no_user: 'Ingen bruker er innlogget.'
+        verify_verified_email: 'E-posten din er allerede verifisert.'

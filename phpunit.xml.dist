@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
          bootstrap="config/bootstrap.php"
-         convertDeprecationsToExceptions="true"
 >
     <testsuites>
-        <testsuite name="Sylius Test Suite">
+        <testsuite name="all">
             <directory>tests</directory>
+            <directory>src/Sylius/Behat/tests</directory>
+        </testsuite>
+
+        <testsuite name="sylius">
+            <directory>tests</directory>
+        </testsuite>
+
+        <testsuite name="sylius-behat">
+            <directory>src/Sylius/Behat/tests</directory>
         </testsuite>
     </testsuites>
 

@@ -1,0 +1,14 @@
+{% import '@SyliusShop/shared/macro/navigation_buttons.html.twig' as navigation %}
+
+{% set order = hookable_metadata.context.order %}
+{% set enabled = order.payments|length %}
+
+{% for payment in hookable_metadata.context.form.payments %}
+    {% set enabled = enabled and payment.method|length %}
+{% endfor %}
+
+{% if sylius_is_shipping_required(order) %}
+    {{ navigation.default('sylius.ui.change_shipping_method'|trans, path('sylius_shop_checkout_select_shipping'), enabled) }}
+{% else %}
+    {{ navigation.default('sylius.ui.change_address'|trans, path('sylius_shop_checkout_address'), enabled) }}
+{% endif %}

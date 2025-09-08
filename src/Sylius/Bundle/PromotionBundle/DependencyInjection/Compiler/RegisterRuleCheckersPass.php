@@ -21,11 +21,11 @@ final class RegisterRuleCheckersPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('sylius.registry_promotion_rule_checker') || !$container->has('sylius.form_registry.promotion_rule_checker')) {
+        if (!$container->has('sylius.registry.promotion.rule_checker') || !$container->has('sylius.form_registry.promotion_rule_checker')) {
             return;
         }
 
-        $promotionRuleCheckerRegistry = $container->getDefinition('sylius.registry_promotion_rule_checker');
+        $promotionRuleCheckerRegistry = $container->getDefinition('sylius.registry.promotion.rule_checker');
         $promotionRuleCheckerFormTypeRegistry = $container->getDefinition('sylius.form_registry.promotion_rule_checker');
 
         $promotionRuleCheckerTypeToLabelMap = [];

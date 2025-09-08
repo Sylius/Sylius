@@ -3,26 +3,30 @@
 
 sylius:
     channel:
-        delete_error: 'Kanál nemůže být odstraněn, je zapotřebí alespoň jeden povolený kanál.'
+        delete_error: 'Kanál nelze smazat. Je vyžadován alespoň jeden povolený kanál.'
     checkout:
-        complete_error: 'Došlo k neočekávaným potížím s dokončením objednávky. Prosím zkuste objednávku znovu odeslat.'
+        complete_error: 'Došlo k nečekané chybě při dokončování objednávky. Prosím, zkuste objednávku zadat znovu.'
     contact:
-        request_success: 'Úspěšně byla předložena žádost o kontakt.'
-        request_error: 'Nastala chyba při odesílání požadavku o kontakt. Zkuste to prosím později.'
+        request_success: 'Vaše žádost o kontakt byla úspěšně odeslána.'
+        request_error: 'Při odesílání žádosti o kontakt došlo k problému. Zkuste to prosím znovu později.'
     customer:
         add_address: 'Adresa byla úspěšně přidána.'
-        impersonate: 'Zákazník %name% impersonován.'
+        impersonate: 'Úspěšně jste se vydávali za zákazníka %name%.'
         set_address_as_default: 'Adresa byla nastavena jako výchozí.'
     order:
-        apply_state_machine_transition_error: 'Došlo k neočekávaným potížím s aktualizací objednávky. Prosím zkuste objednávku znovu aktualizovat.'
-        promotion_integrity: 'Bohužel už nemůžete využít akci %promotionName%.'
-        total_integrity: 'Vaše objednávka byla změněna, prosím zkontrolujte ji ještě jednou.'
-        update_error: 'Došlo k neočekávaným potížím s aktualizací objednávky. Prosím zkuste objednávku znovu aktualizovat.'
+        apply_state_machine_transition_error: 'Došlo k nečekané chybě při aktualizaci objednávky. Prosím, zkuste objednávku aktualizovat znovu.'
+        promotion_integrity: 'Už nejste způsobilí pro tuto propagaci %promotionName%.'
+        total_integrity: 'Celková cena vaší objednávky byla změněna, zkontrolujte informace o objednávce a znovu je potvrďte.'
+        update_error: 'Došlo k nečekané chybě při aktualizaci objednávky. Prosím, zkuste objednávku aktualizovat znovu.'
     payment:
-        apply_state_machine_transition_error: 'Došlo k neočekávaným potížím s aktualizací platby. Prosím zkuste platbu znovu aktualizovat.'
+        apply_state_machine_transition_error: 'Došlo k nečekané chybě při aktualizaci platby. Prosím, zkuste platbu aktualizovat znovu.'
     product:
-        out_of_stock: 'K dispozici je pouze %quantity% tohoto produktu na skladě.'
+        in_use_by_promotion_rule: 'Nelze smazat produkt, který je používán v pravidle propagace.'
+        out_of_stock: 'V tomto produktu je na skladě pouze %quantity%.'
     product_variant:
-        update_error: 'Došlo k neočekávaným potížím s aktualizací varianty produktu. Prosím zkuste vaiantu znovu aktualizovat.'
+        update_error: 'Došlo k nečekané chybě při aktualizaci produktové varianty. Prosím, zkuste produktovou variantu aktualizovat znovu.'
+    promotion:
+        update_rules: 'Některá pravidla propagací s kódy %codes% byla aktualizována.'
     taxon:
-        menu_taxon_delete: 'Nemůžete odstranit taxon v menu žádného kanálu.'
+        in_use_by_promotion_rule: 'Nelze smazat taxon, který je používán v pravidle propagace.'
+        menu_taxon_delete: 'Nemůžete smazat menu taxon jakéhokoli kanálu.'

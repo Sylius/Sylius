@@ -17,7 +17,7 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface HistoryPageInterface extends SymfonyPageInterface
 {
-    public function countShippingAddressChanges(): int;
-
     public function countBillingAddressChanges(): int;
+
+    public function countShippingAddressChanges(): int;
 }

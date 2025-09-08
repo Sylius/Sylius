@@ -1,0 +1,41 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        attribute:
+            add: 'Hinzufügen'
+            add_attributes: 'Attribute hinzufügen'
+            choices: 'Auswahlen'
+            code: 'Code'
+            name: 'Name'
+            translatable: 'Übersetzbar'
+            translations: 'Übersetzungen'
+            type: 'Typ'
+        attribute_type:
+            checkbox: 'Kontrollkästchen'
+            configuration: 'Konfiguration'
+            date: 'Datum'
+            datetime: 'Datum/Uhrzeit'
+            float: 'Gleitkomma'
+            integer: 'Ganzzahl'
+            percent: 'Prozent'
+            select: 'Auswählen'
+            text: 'Text'
+            textarea: 'Textfeld'
+            title: 'Attributtypen'
+            validation: 'Validierung'
+        attribute_type_configuration:
+            datetime:
+                format: 'Format'
+            date:
+                format: 'Format'
+            select:
+                multiple: 'Mehrere'
+                values: 'Werte'
+                choose: 'Option wählen'
+                min: 'Min Einträge'
+                max: 'Max Einträge'
+            text:
+                min: 'Min Länge'
+                max: 'Max Länge'

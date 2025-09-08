@@ -21,14 +21,20 @@ jobs:
             matrix:
                 include:
                     -
-                        base_branch: "1.12"
-                        target_branch: "1.13"
-                    -
                         base_branch: "1.13"
                         target_branch: "1.14"
                     -
                         base_branch: "1.14"
                         target_branch: "2.0"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "2.1"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "2.0-docs"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "sylius-stack"
 
         steps:
             -
@@ -50,7 +56,7 @@ jobs:
                     title: '[UPMERGE] ${{ matrix.base_branch }} -> ${{ matrix.target_branch }}'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
+                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/2.1/.github/workflows/upmerge_pr.yaml).
                         
                         **Remember!** The upmerge should always be merged with using `Merge pull request` button.
                         

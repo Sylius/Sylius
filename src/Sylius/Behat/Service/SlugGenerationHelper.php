@@ -27,42 +27,10 @@ abstract class SlugGenerationHelper
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
-    public static function enableSlugModification(Session $session, NodeElement $element): void
-    {
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
-
-        static::isElementReadonly($session, $element);
-
-        $element->click();
-
-        static::isElementNotReadonly($session, $element);
-
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
-    }
-
-    public static function isSlugReadonly(Session $session, NodeElement $element): bool
-    {
-        if (DriverHelper::isNotJavascript($session->getDriver())) {
-            return $element->hasAttribute('readonly');
-        }
-
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
-
-        return static::isElementReadonly($session, $element);
-    }
-
     private static function isElementReadonly(Session $session, NodeElement $element): bool
     {
         return $session->wait(1000, sprintf(
             'undefined != $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
-            str_replace('"', '\"', $element->getXpath()),
-        ));
-    }
-
-    private static function isElementNotReadonly(Session $session, NodeElement $element): bool
-    {
-        return $session->wait(1000, sprintf(
-            'undefined == $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
             str_replace('"', '\"', $element->getXpath()),
         ));
     }

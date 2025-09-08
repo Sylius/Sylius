@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop\Checkout;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,49 +29,67 @@ final class CartTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_creates_empty_cart(): void
+    #[Test]
+    public function it_creates_an_empty_cart_as_a_guest(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->setUpDefaultPostHeaders();
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/shop/orders',
-            server: array_merge([], self::CONTENT_TYPE_HEADER),
-            content: '{}',
-        );
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/create_cart',
-            Response::HTTP_CREATED,
-        );
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
+
+        $this->assertResponseCreated('shop/checkout/cart/create_cart_as_guest');
     }
 
-    /** @test */
-    public function it_creates_empty_cart_with_provided_locale(): void
+    #[Test]
+    public function it_creates_an_empty_cart_as_a_shop_user(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->setUpDefaultPostHeaders();
+        $this->setUpShopUserContext();
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/shop/orders',
-            server: array_merge(['HTTP_ACCEPT_LANGUAGE' => 'pl_PL'], self::CONTENT_TYPE_HEADER),
-            content: '{}',
-        );
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/create_cart_with_locale',
-            Response::HTTP_CREATED,
-        );
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
+
+        $this->assertResponseCreated('shop/checkout/cart/create_cart_as_shop_user');
     }
 
-    /** @test */
-    public function it_gets_empty_cart(): void
+    #[Test]
+    public function it_creates_an_empty_cart_as_a_guest_with_provided_locale(): void
+    {
+        $this->setUpDefaultPostHeaders();
+
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
+
+        $this->requestPost(uri: '/api/v2/shop/orders', body: [], headers: ['HTTP_ACCEPT_LANGUAGE' => 'pl_PL']);
+
+        $this->assertResponseCreated('shop/checkout/cart/create_cart_with_locale');
+    }
+
+    #[Test]
+    public function it_gets_existing_cart_if_customer_has_cart(): void
+    {
+        $this->setUpDefaultPostHeaders();
+        $this->setUpShopUserContext();
+
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'cart/existing_cart.yaml',
+        ]);
+
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
+
+        $this->assertResponseCreated('shop/checkout/cart/get_existing_cart_if_customer_has_cart');
+    }
+
+    #[Test]
+    public function it_gets_an_empty_cart_as_guest(): void
     {
         $this->setUpDefaultGetHeaders();
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
         $tokenValue = $this->pickUpCart();
 
@@ -79,12 +98,13 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/cart/get_empty_cart');
     }
 
-    /** @test */
-    public function it_gets_a_cart(): void
+    #[Test]
+    public function it_gets_a_cart_as_a_guest(): void
     {
         $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -99,11 +119,13 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/cart/get_cart');
     }
 
-    /** @test */
-    public function it_adds_item_to_order(): void
+    #[Test]
+    public function it_adds_item_to_order_as_guest(): void
     {
+        $this->setUpDefaultPostHeaders();
+
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -112,28 +134,22 @@ final class CartTest extends JsonApiTestCase
 
         $tokenValue = $this->pickUpCart();
 
-        $this->client->request(
-            method: 'POST',
+        $this->requestPost(
             uri: sprintf('/api/v2/shop/orders/%s/items', $tokenValue),
-            server: self::CONTENT_TYPE_HEADER,
-            content: json_encode([
+            body: [
                 'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
                 'quantity' => 4,
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/add_item',
-            Response::HTTP_CREATED,
-        );
+        $this->assertResponseCreated('shop/checkout/cart/add_item');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_add_item_to_order_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -156,12 +172,13 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_removes_item_from_the_cart(): void
     {
         $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -179,12 +196,13 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_remove_item_from_the_cart_if_invalid_id_item(): void
     {
-        $this->setUpDefaultGetHeaders();
+        $this->setUpDefaultDeleteHeaders();
+
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -196,15 +214,16 @@ final class CartTest extends JsonApiTestCase
 
         $this->requestDelete(sprintf('/api/v2/shop/orders/%s/items/STRING-INSTEAD-OF-ID', $tokenValue));
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_remove_item_from_the_cart_if_invalid_order_token(): void
     {
-        $this->setUpDefaultGetHeaders();
+        $this->setUpDefaultDeleteHeaders();
+
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -219,11 +238,11 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_item_quantity_in_cart(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -251,11 +270,11 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_update_item_quantity_in_cart_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -282,11 +301,11 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_update_item_quantity_if_invalid_id_item(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
@@ -302,29 +321,30 @@ final class CartTest extends JsonApiTestCase
             content: json_encode(['quantity' => 5]),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
-    public function it_updates_cart(): void
+    #[Test]
+    public function it_updates_cart_as_a_guest(): void
     {
+        $this->setUpDefaultPutHeaders();
+
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
+            'promotion/promotion.yaml',
         ]);
 
         $tokenValue = $this->pickUpCart();
         $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
 
-        $this->client->request(
-            method: 'PUT',
+        $this->requestPut(
             uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
-            server: self::CONTENT_TYPE_HEADER,
-            content: json_encode([
-                'email' => 'oliver@doe.com',
+            body: [
+                'email' => 'changed@email.com',
                 'billingAddress' => [
                     'firstName' => 'Updated: Jane',
                     'lastName' => 'Updated: Doe',
@@ -345,19 +365,99 @@ final class CartTest extends JsonApiTestCase
                     'street' => 'Updated: Top secret',
                     'postcode' => '121212',
                 ],
-            ], \JSON_THROW_ON_ERROR),
+                'couponCode' => 'XYZ2',
+            ],
         );
 
-        $this->assertResponse(
+        $this->assertResponseSuccessful('shop/checkout/cart/update_cart_as_guest');
+    }
+
+    #[Test]
+    public function it_updates_cart_as_a_shop_user(): void
+    {
+        $this->setUpDefaultPutHeaders();
+        $this->setUpShopUserContext();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'payment_method.yaml',
+            'shipping_method.yaml',
+            'promotion/promotion.yaml',
+            'authentication/shop_user.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: [
+                'billingAddress' => [
+                    'firstName' => 'Updated: Jane',
+                    'lastName' => 'Updated: Doe',
+                    'phoneNumber' => '123456789',
+                    'countryCode' => 'US',
+                    'provinceCode' => 'US-MI',
+                    'city' => 'Updated: Nebraska',
+                    'street' => 'Updated: Top secret',
+                    'postcode' => '10001',
+                ],
+                'shippingAddress' => [
+                    'firstName' => 'Updated: Jane',
+                    'lastName' => 'Updated: Doe',
+                    'phoneNumber' => '123456789',
+                    'countryCode' => 'US',
+                    'provinceCode' => 'US-MI',
+                    'city' => 'Updated: Nebraska',
+                    'street' => 'Updated: Top secret',
+                    'postcode' => '121212',
+                ],
+                'couponCode' => 'XYZ2',
+            ],
+        );
+
+        $this->assertResponseSuccessful('shop/checkout/cart/update_cart_as_shop_user');
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_change_email_as_a_shop_user(): void
+    {
+        $this->setUpDefaultPutHeaders();
+        $this->setUpShopUserContext();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'authentication/shop_user.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: [
+                'email' => 'changed@email.com',
+            ],
+        );
+
+        $this->assertResponseViolations(
             $this->client->getResponse(),
-            'shop/checkout/cart/update_cart',
+            [
+                ['propertyPath' => '', 'message' => 'Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can\'t be changed.'],
+            ],
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_update_without_items(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
 
         $tokenValue = $this->pickUpCart();
 
@@ -378,11 +478,11 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_update_without_required_billing_address(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
         ]);
@@ -417,11 +517,11 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_update_without_required_shipping_address(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
         ]);
@@ -456,11 +556,11 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_update_with_invalid_data(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
         ]);
@@ -503,12 +603,13 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_cart(): void
     {
         $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

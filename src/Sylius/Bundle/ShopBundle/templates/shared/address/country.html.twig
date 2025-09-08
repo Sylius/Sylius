@@ -1,0 +1,5 @@
+{% set country_code = hookable_metadata.context.address.countryCode %}
+
+<span>
+    {{ country_code|sylius_country_name|upper }}
+</span>

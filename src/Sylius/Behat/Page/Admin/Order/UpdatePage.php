@@ -34,7 +34,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->specifyAddress($address, self::TYPE_SHIPPING);
     }
 
-    private function specifyAddress(AddressInterface $address, $addressType): void
+    protected function specifyAddress(AddressInterface $address, $addressType): void
     {
         $this->specifyElementValue($addressType . '_first_name', $address->getFirstName());
         $this->specifyElementValue($addressType . '_last_name', $address->getLastName());
@@ -52,39 +52,74 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
         return $message === $validationMessage->getText();
     }
 
+    public function changeBillingCountry(string $countryCode): void
+    {
+        $this->getElement('billing_country')->selectOption($countryCode);
+        $this->waitForFormUpdate();
+    }
+
+    public function changeShippingCountry(string $countryCode): void
+    {
+        $this->getElement('shipping_country')->selectOption($countryCode);
+        $this->waitForFormUpdate();
+    }
+
+    public function getAvailableProvincesForBillingAddress(): array
+    {
+        return $this->getOptionTextsFor($this->getElement('billing_province_code'));
+    }
+
+    public function getAvailableProvincesForShippingAddress(): array
+    {
+        return $this->getOptionTextsFor($this->getElement('shipping_province_code'));
+    }
+
+    /**
+     * @return array<string>
+     */
+    protected function getOptionTextsFor(NodeElement $element): array
+    {
+        return array_map(fn ($option) => $option->getText(), $element->findAll('css', 'option'));
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_city' => '#sylius_order_billingAddress_city',
-            'billing_country' => '#sylius_order_billingAddress_countryCode',
-            'billing_first_name' => '#sylius_order_billingAddress_firstName',
-            'billing_last_name' => '#sylius_order_billingAddress_lastName',
-            'billing_postcode' => '#sylius_order_billingAddress_postcode',
-            'billing_street' => '#sylius_order_billingAddress_street',
-            'shipping_city' => '#sylius_order_shippingAddress_city',
-            'shipping_country' => '#sylius_order_shippingAddress_countryCode',
-            'shipping_first_name' => '#sylius_order_shippingAddress_firstName',
-            'shipping_last_name' => '#sylius_order_shippingAddress_lastName',
-            'shipping_postcode' => '#sylius_order_shippingAddress_postcode',
-            'shipping_street' => '#sylius_order_shippingAddress_street',
+            'billing_city' => '#sylius_admin_order_billingAddress_city',
+            'billing_country' => '#sylius_admin_order_billingAddress_countryCode',
+            'billing_first_name' => '#sylius_admin_order_billingAddress_firstName',
+            'billing_last_name' => '#sylius_admin_order_billingAddress_lastName',
+            'billing_postcode' => '#sylius_admin_order_billingAddress_postcode',
+            'billing_province_name' => '#sylius_admin_order_billingAddress_provinceName',
+            'billing_province_code' => '#sylius_admin_order_billingAddress_provinceCode',
+            'billing_street' => '#sylius_admin_order_billingAddress_street',
+            'live_form' => '[data-live-name-value="sylius_admin:order:form"]',
+            'shipping_city' => '#sylius_admin_order_shippingAddress_city',
+            'shipping_country' => '#sylius_admin_order_shippingAddress_countryCode',
+            'shipping_first_name' => '#sylius_admin_order_shippingAddress_firstName',
+            'shipping_last_name' => '#sylius_admin_order_shippingAddress_lastName',
+            'shipping_postcode' => '#sylius_admin_order_shippingAddress_postcode',
+            'shipping_province_name' => '#sylius_admin_order_shippingAddress_provinceName',
+            'shipping_province_code' => '#sylius_admin_order_shippingAddress_provinceCode',
+            'shipping_street' => '#sylius_admin_order_shippingAddress_street',
         ]);
     }
 
     /**
      * @throws ElementNotFoundException
      */
-    private function specifyElementValue(string $elementName, ?string $value): void
+    protected function specifyElementValue(string $elementName, ?string $value): void
     {
         $this->getElement($elementName)->setValue($value);
     }
@@ -92,7 +127,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function chooseCountry(?string $country, string $addressType): void
+    protected function chooseCountry(?string $country, string $addressType): void
     {
         $this->getElement($addressType . '_country')->selectOption($country ?? 'Select');
     }
@@ -100,7 +135,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?NodeElement
+    protected function getFieldElement(string $element): NodeElement
     {
         $element = $this->getElement($element);
         while (null !== $element && !$element->hasClass('field')) {
@@ -108,5 +143,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return $element;
+    }
+
+    protected function waitForFormUpdate(): void
+    {
+        $this->getElement('live_form')->waitFor('5', fn (NodeElement $element) => !$element->hasAttribute('busy'));
     }
 }

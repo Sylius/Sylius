@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class CatalogPromotionScopeType extends Constraint
 {
     public string $invalidType = 'sylius.catalog_promotion_scope.type.invalid';

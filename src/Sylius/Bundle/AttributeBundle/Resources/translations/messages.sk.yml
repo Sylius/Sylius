@@ -4,36 +4,38 @@
 sylius:
     form:
         attribute:
-            add: Pridať
-            add_attributes: Pridať vlastnosť
-            choices: Voľby
-            code: Kód
-            name: Názov
-            translations: Preklady
-            type: Typ
+            add: 'Pridať'
+            add_attributes: 'Pridať atribúty'
+            choices: 'Možnosti'
+            code: 'Kód'
+            name: 'Názov'
+            translatable: 'Preložiteľné'
+            translations: 'Preklady'
+            type: 'Typ'
         attribute_type:
-            checkbox: Checkbox
-            configuration: Konfigurácia
-            date: Dátum
-            datetime: Dátum a čas
-            integer: Číslo
-            percent: Percento
-            select: Vyberte
-            text: Text
-            textarea: Textové pole
-            title: Typy vlastností
-            validation: Validácia
+            checkbox: 'Zaškrtávacie políčko'
+            configuration: 'Konfigurácia'
+            date: 'Dátum'
+            datetime: 'Dátum a čas'
+            float: 'Desatinné'
+            integer: 'Celé číslo'
+            percent: 'Percento'
+            select: 'Výber'
+            text: 'Text'
+            textarea: 'Textové pole'
+            title: 'Typy atribútov'
+            validation: 'Overenie'
         attribute_type_configuration:
             datetime:
-                format: Formát
+                format: 'Formát'
             date:
-                format: Formát
+                format: 'Formát'
             select:
-                multiple: Viacero
-                values: Hodnoty
-                choose: Vyberte možnosť
-                min: Min položky
-                max: Max položky
+                multiple: 'Viacnásobný výber'
+                values: 'Hodnoty'
+                choose: 'Vyberte možnosť'
+                min: 'Minimálny počet položiek'
+                max: 'Maximálny počet položiek'
             text:
-                min: Min. dĺžka
-                max: Max dĺžka
+                min: 'Minimálna dĺžka'
+                max: 'Maximálna dĺžka'

@@ -1,0 +1,18 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\ProductReview\FormComponent #}
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+<div {{ attributes }} class="mb-4 position-relative">
+    <div data-loading>
+        <div class="sylius-shop-loader">
+            <img src="{{ asset('build/shop/images/loader.gif', 'shop') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
+        </div>
+    </div>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {% hook 'form' with { form } %}
+
+    {{ form_errors(form) }}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

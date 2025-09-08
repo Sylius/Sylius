@@ -3,5 +3,74 @@
 
 sylius:
     product:
+        sku:
+            not_blank: 'Ange produktens SKU.'
+            unique: 'Produktens SKU måste vara unik.'
+        slug:
+            not_blank: 'Ange produktens slug.'
+            unique: 'Produktens slug måste vara unik.'
+            max_length: 'Produktens slug får inte vara längre än 1 tecken.|Produktens slug får inte vara längre än {{ limit }} tecken.'
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange produktkod.'
+            regex: 'Produktkod får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Produktkoden måste vara unik.'
         name:
-            not_blank: Ange produktnamn.
+            not_blank: 'Ange produktnamn.'
+            min_length: 'Produktnamnet måste vara minst 1 tecken långt.|Produktnamnet måste vara minst {{ limit }} tecken långt.'
+            max_length: 'Produktnamnet får inte vara längre än 1 tecken.|Produktnamnet får inte vara längre än {{ limit }} tecken.'
+        meta_keywords:
+            max_length: 'Produktens metanyckelord får inte vara längre än 1 tecken.|Produktens metanyckelord får inte vara längre än {{ limit }} tecken.'
+        meta_description:
+            max_length: 'Produktens metabeskrivning får inte vara längre än 1 tecken.|Produktens metabeskrivning får inte vara längre än {{ limit }} tecken.'
+    product_variant:
+        combination: 'En variant med denna uppsättning alternativ finns redan.'
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange koden.'
+            regex: 'Produktvariantkod får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Produktvariantkoden måste vara unik.'
+            within_product_unique: 'Denna kod måste vara unik inom denna produkt.'
+        option_values:
+            not_configured: 'Produktvarianten måste ha konfigurerade värden för alla valda alternativ.'
+    simple_product:
+        code:
+            unique: 'Koden för enkelprodukt måste vara unik bland alla produkter och produktvarianter.'
+    option:
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange alternativkod.'
+            regex: 'Alternativkod får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Det finns redan ett alternativ med den angivna koden.'
+        name:
+            not_blank: 'Ange alternativnamn.'
+            min_length: 'Alternativnamnet måste vara minst 1 tecken långt.|Alternativnamnet måste vara minst {{ limit }} tecken långt.'
+            max_length: 'Alternativnamnet får inte vara längre än 1 tecken.|Alternativnamnet får inte vara längre än {{ limit }} tecken.'
+        values:
+            min_count: 'Lägg till minst {{ limit }} alternativvärde.|Lägg till minst {{ limit }} alternativvärden.'
+    option_value:
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange kod för alternativvärdet.'
+            regex: 'Alternativvärdeskod får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Det finns redan ett alternativvärde med den angivna koden.'
+        value:
+            not_blank: 'Ange alternativvärde.'
+    association:
+        unique: 'En association med denna ägare och typ finns redan.'
+        type:
+            not_blank: 'Ange associationstyp.'
+        owner:
+            not_blank: 'Ange associationsägare.'
+    association_type:
+        name:
+            not_blank: 'Ange namn på associationstyp.'
+            min_length: 'Namn på associationstyp måste vara minst 1 tecken långt.|Namnet på associationstypen måste vara minst {{ limit }} tecken långt.'
+            max_length: 'Namn på associationstyp får inte vara längre än 1 tecken.|Namnet på associationstypen får inte vara längre än {{ limit }} tecken.'
+        code:
+            min_length: 'Kod för associationstyp måste vara minst 1 tecken lång.|Koden för associationstyp måste vara minst {{ limit }} tecken lång.'
+            max_length: 'Kod för associationstyp får inte vara längre än 1 tecken.|Koden för associationstyp får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange kod för associationstyp.'
+            regex: 'Koden för associationstyp får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'En associationstyp med angiven kod finns redan.'
+

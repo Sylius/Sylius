@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -23,11 +24,19 @@ final class ProductVariantsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    protected function setUp(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+
+        parent::setUp();
+    }
+
+    #[Test]
     public function it_denies_access_to_a_product_variants_list_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -39,12 +48,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_all_product_variants(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -61,12 +70,31 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/product_variant/get_product_variants_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
+    public function it_gets_all_product_variants_when_invalid_product_filter_provided(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+
+        $this->requestGet(
+            uri: '/api/v2/admin/product-variants',
+            queryParameters: ['product' => 'INVALID-IRI'],
+        );
+
+        $this->assertResponseSuccessful('admin/product_variant/get_filtered_product_variants');
+    }
+
+    #[Test]
     public function it_gets_a_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -86,12 +114,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/product_variant/get_product_variant_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_product_variant_with_all_optional_data(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -105,7 +133,7 @@ final class ProductVariantsTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'MUG_RED',
                 'product' => '/api/v2/admin/products/MUG_SW',
-                'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
+                'optionValues' => ['/api/v2/admin/product-options/COLOR/values/COLOR_RED'],
                 'channelPricings' => [
                     'WEB' => [
                         'price' => 4000,
@@ -140,12 +168,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_product_variant_enabled_by_default_with_translation_in_default_locale(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -174,12 +202,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_with_invalid_channel_code(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -212,12 +240,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_with_empty_channel_code(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -250,12 +278,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_when_channel_code_differs_from_key(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -285,12 +313,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_without_product(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -322,12 +350,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_create_product_variant_with_invalid_locale_code(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -371,12 +399,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_the_existing_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -393,10 +421,10 @@ final class ProductVariantsTest extends JsonApiTestCase
             uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
             server: $header,
             content: json_encode([
-                'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
+                'optionValues' => ['/api/v2/admin/product-options/COLOR/values/COLOR_RED'],
                 'channelPricings' => [
                     'WEB' => [
-                        '@id' => sprintf('/api/v2/admin/channel-pricings/%s', $productVariant->getChannelPricingForChannel($channel)->getId()),
+                        '@id' => sprintf('/api/v2/admin/product-variants/%s/channel-pricings/%s', $productVariant->getCode(), $channel->getCode()),
                         'price' => 3000,
                         'originalPrice' => 4000,
                         'minimumPrice' => 500,
@@ -409,7 +437,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                 ],
                 'translations' => [
                     'en_US' => [
-                        '@id' => sprintf('/api/v2/admin/product-variant-translations/%s', $productVariant->getTranslation('en_US')->getId()),
+                        '@id' => sprintf('/api/v2/admin/product-variants/%s/translations/en_US', $productVariant->getCode()),
                         'name' => 'Red mug',
                     ],
                     'de_DE' => [
@@ -438,12 +466,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_update_product_variant_with_invalid_locale_code(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -481,47 +509,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
-    public function it_does_not_allow_to_update_product_variant_without_translation_in_default_locale(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'tax_category.yaml',
-            'shipping_category.yaml',
-            'product/product_variant.yaml',
-        ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $fixtures['product_variant'];
-
-        $this->client->request(
-            method: 'PUT',
-            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
-            server: $header,
-            content: json_encode([
-                'translations' => [
-                    'de_DE' => [
-                        'name' => 'Tasse',
-                    ],
-                ],
-            ], \JSON_THROW_ON_ERROR),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/product_variant/put_product_variant_without_translation_in_default_locale_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
-    }
-
-    /** @test */
+    #[Test]
     public function it_does_not_update_a_product_variant_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -555,12 +548,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_product_variant_with_duplicate_channel_code_channel_pricings(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -596,12 +589,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_the_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
@@ -620,12 +613,12 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_delete_the_product_variant_in_use(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',

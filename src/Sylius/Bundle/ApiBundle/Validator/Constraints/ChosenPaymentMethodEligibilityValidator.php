@@ -25,10 +25,14 @@ use Webmozart\Assert\Assert;
 
 final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 {
+    /**
+     * @param PaymentRepositoryInterface<PaymentInterface> $paymentRepository
+     * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     */
     public function __construct(
-        private PaymentRepositoryInterface $paymentRepository,
-        private PaymentMethodRepositoryInterface $paymentMethodRepository,
-        private PaymentMethodsResolverInterface $paymentMethodsResolver,
+        private readonly PaymentRepositoryInterface $paymentRepository,
+        private readonly PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private readonly PaymentMethodsResolverInterface $paymentMethodsResolver,
     ) {
     }
 
@@ -40,10 +44,10 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
         Assert::isInstanceOf($constraint, ChosenPaymentMethodEligibility::class);
 
         /** @var PaymentMethodInterface|null $paymentMethod */
-        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->getPaymentMethodCode()]);
+        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->paymentMethodCode]);
 
         if ($paymentMethod === null) {
-            $this->context->addViolation($constraint->notExist, ['%code%' => $value->getPaymentMethodCode()]);
+            $this->context->addViolation($constraint->notExist, ['%code%' => $value->paymentMethodCode]);
 
             return;
         }

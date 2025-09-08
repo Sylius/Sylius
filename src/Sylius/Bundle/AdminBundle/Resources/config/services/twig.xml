@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <imports>
+        <import resource="twig/**/*.xml" />
+    </imports>
+
+    <services>
+        <service id="sylius_admin.twig.extension.string_loader" class="Twig\Extension\StringLoaderExtension">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.attribute" class="Sylius\Bundle\AdminBundle\Twig\AttributeExtension">
+            <argument type="service" id="sylius.registry.attribute_type" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.shop" class="Sylius\Bundle\AdminBundle\Twig\ShopExtension">
+            <argument>%sylius.admin.shop_enabled%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.channels_currencies" class="Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="sylius_admin.twig.extension.order_unit_taxes" class="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="sylius_admin.twig.extension.channel_name" class="Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.payment_method" class="Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension">
+            <argument>%sylius.gateway_factories%</argument>
+            <argument>%sylius.admin.twig.payment_method.excluded_gateways%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_admin.twig.extension.promotion_labels" class="Sylius\Bundle\AdminBundle\Twig\PromotionLabelsExtension">
+            <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

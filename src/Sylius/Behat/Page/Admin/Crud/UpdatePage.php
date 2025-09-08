@@ -29,20 +29,23 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private string $routeName,
+        protected readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
 
     public function saveChanges(): void
     {
-        $this->getDocument()->pressButton('sylius_save_changes_button');
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->blur();
+        }
+        $this->getDocument()->find('css', '[data-test-update-changes-button]')->click();
         DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function cancelChanges(): void
     {
-        $this->getDocument()->find('css', '[data-test-cancel-changes-button]')->click();
+        $this->getElement('back_button')->click();
     }
 
     public function getValidationMessage(string $element): string
@@ -52,14 +55,17 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
         return $validationMessage->getText();
     }
 
+    /**
+     * @param array<string, string> $parameters
+     */
     public function hasResourceValues(array $parameters): bool
     {
         foreach ($parameters as $element => $value) {
@@ -79,6 +85,23 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     public function getMessageInvalidForm(): string
     {
         return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'back_button' => '[data-test-cancel-changes-button]',
+            'form' => 'form',
+        ]);
+    }
+
+    protected function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 
     protected function verifyStatusCode(): void
@@ -102,7 +125,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?NodeElement
+    protected function getFieldElement(string $element): NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element));
         while (null !== $element && !$element->hasClass('field')) {

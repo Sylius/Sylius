@@ -35,18 +35,10 @@ final class LocaleSetup implements LocaleSetupInterface
         private RepositoryInterface $localeRepository,
         private FactoryInterface $localeFactory,
         private string $locale,
-        private ?Filesystem $filesystem = null,
-        private ?string $localeParameterFilePath = 'config/parameters.yaml',
+        private Filesystem $filesystem,
+        private string $localeParameterFilePath = 'config/parameters.yaml',
     ) {
         $this->locale = trim($locale);
-
-        if (null === $this->filesystem) {
-            trigger_deprecation('sylius/sylius', '1.13', 'Not passing %s to %s constructor is deprecated. It will be required in Sylius 2.0.', Filesystem::class, self::class);
-        }
-
-        if (null === $this->localeParameterFilePath) {
-            trigger_deprecation('sylius/sylius', '1.13', 'Not passing $localeParameterFilePath to %s constructor is deprecated. It will be required in Sylius 2.0.', self::class);
-        }
     }
 
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
@@ -119,8 +111,6 @@ final class LocaleSetup implements LocaleSetupInterface
     private function updateLocaleParameter(string $code, OutputInterface $output): void
     {
         if (
-            $this->localeParameterFilePath === null ||
-            $this->filesystem === null ||
             !$this->filesystem->exists($this->localeParameterFilePath) ||
             !is_writable($this->localeParameterFilePath)
         ) {

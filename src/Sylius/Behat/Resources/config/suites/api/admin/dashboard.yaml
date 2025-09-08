@@ -5,15 +5,15 @@ default:
     suites:
         api_dashboard:
             contexts:
+                - sylius.behat.context.hook.calendar
                 - sylius.behat.context.hook.doctrine_orm
-                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.transform.admin
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.user
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.geographical
@@ -29,11 +29,11 @@ default:
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.product
-
                 - sylius.behat.context.transform.shared_storage
 
-                - Sylius\Behat\Context\Api\Admin\DashboardContext
+                - sylius.behat.context.api.admin.dashboard_context
                 - sylius.behat.context.api.admin.login
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@admin_dashboard&&@api"

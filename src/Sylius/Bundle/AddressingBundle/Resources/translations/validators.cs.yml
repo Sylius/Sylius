@@ -4,63 +4,68 @@
 sylius:
     address:
         city:
-            max_length: Název města nesmí být delší než {{ limit }} znaků|Název města nesmí být delší než {{ limit }} znaků.
-            min_length: Název města musí mít nejméně {{ limit }} znaky|Název města musí mít alespoň {{ limit }} znaky.
-            not_blank: Zadejte město.
+            max_length: 'Město nesmí být delší než {{ limit }} znak.|Město nesmí být delší než {{ limit }} znaky.'
+            min_length: 'Město musí mít alespoň {{ limit }} znaků.|Město musí mít alespoň {{ limit }} znaky.'
+            not_blank: 'Prosím zadejte město.'
         country:
-            not_blank: Zvolte zemi.
-            disabled: Vybrané země je zakázán. Prosím zvolte jinou.
+            not_blank: 'Prosím vyberte zemi.'
+            disabled: 'Vybraná země je zakázaná. Prosím vyberte jinou.'
         first_name:
-            max_length: Křestní jméno nesmí být delší než {{ limit }} znaků|Křestní jméno nesmí být delší než {{ limit }} znaků.
-            min_length: Křestní jméno musí mít alespoň {{ limit }} znaků|Křestní jméno musí mít alespoň {{ limit }} znaků.
-            not_blank: Zadejte křestní jméno.
+            max_length: 'Jméno nesmí být delší než {{ limit }} znak.|Jméno nesmí být delší než {{ limit }} znaky.'
+            min_length: 'Jméno musí mít alespoň {{ limit }} znaků.|Jméno musí mít alespoň {{ limit }} znaky.'
+            not_blank: 'Prosím zadejte jméno.'
         last_name:
-            max_length: Příjmení nesmí být delší než {{ limit }} znaků|Příjmení nesmí být delší než {{ limit }} znaků.
-            min_length: Příjmení musí mít alespoň {{ limit }} znaků|Příjmení musí mít alespoň {{ limit }} znaků.
-            not_blank: Zadejte příjmení.
+            max_length: 'Příjmení nesmí být delší než {{ limit }} znak.|Příjmení nesmí být delší než {{ limit }} znaky.'
+            min_length: 'Příjmení musí mít alespoň {{ limit }} znaků.|Příjmení musí mít alespoň {{ limit }} znaky.'
+            not_blank: 'Prosím zadejte příjmení.'
         postcode:
-            max_length: Psč nesmí být delší než {{ limit }} znaků|Psč nesmí být delší než {{ limit }} znaků.
-            min_length: Psč musí mít alespoň {{ limit }} znaky|Psč musí mít alespoň {{ limit }} znaky.
-            not_blank: Zadejte PSČ.
+            max_length: 'PSČ nesmí být delší než {{ limit }} znak.|PSČ nesmí být delší než {{ limit }} znaky.'
+            min_length: 'PSČ musí mít alespoň {{ limit }} znak.|PSČ musí mít alespoň {{ limit }} znaky.'
+            not_blank: 'Prosím zadejte PSČ.'
         province:
-            valid: Vyberte správný název státu.
+            valid: 'Prosím vyberte správný kraj.'
         street:
-            max_length: Ulice nesmí být delší než {{ limit }} znaků|Ulice nesmí být delší než {{ limit }} znaků.
-            min_length: Ulice musí mít alespoň {{ limit }} znaků|Ulice musí mít alespoň {{ limit }} znaků.
-            not_blank: Zadejte ulici.
-        not_shippable: Tato adresa není platnou dodací destinací.
+            max_length: 'Ulice nesmí být delší než {{ limit }} znak.|Ulice nesmí být delší než {{ limit }} znaky.'
+            min_length: 'Ulice musí mít alespoň {{ limit }} znaků.|Ulice musí mít alespoň {{ limit }} znaky.'
+            not_blank: 'Prosím zadejte ulici.'
+        not_shippable: 'Tato adresa není platnou destinací pro doručení.'
     country:
         code:
-            not_blank: Zadejte prosím ISO kód země.
-            regex: Kód země může tvořit pouze písmena, číslice, pomlčky a podtržítka.
-            unique: ISO kód země musí být unikátní.
+            not_blank: 'Prosím zadejte ISO kód země.'
+            unique: 'ISO kód země musí být jedinečný.'
+            country: 'ISO kód země je neplatný.'
+        unique_provinces: 'Všechny kraje v této zemi musí mít jedinečné kódy a názvy.'
     province:
         code:
-            min_length: Kód provincie musí mít nejméně 5 znaků|Kód provincie musí mít nejméně 5 znaků.
-            not_blank: Zadejte prosím kód provincie.
-            regex: Kód provincie by měl mít následující formát XX-XX (např. US-FL).
-            unique: Provincie kód musí být jedinečný.
+            max_length: 'Kód kraje nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód kraje.'
+            regex: 'Kód kraje by měl mít následující formát XX-XX (např. US-FL).'
+            unique: 'Kód kraje musí být jedinečný.'
         name:
-            max_length: Název provincie nesmí být delší než {{ limit }} znaků|Název provincie nesmí být delší než {{ limit }} znaků.
-            min_length: Název provincie musí mít alespoň {{ limit }} znaků|Název provincie musí být alespoň {{ limit }} znaků.
-            not_blank: Zadejte prosím název státu.
-            unique: Název provincie musí být jedinečný.
+            max_length: 'Název kraje nesmí být delší než {{ limit }} znak.|Název kraje nesmí být delší než {{ limit }} znaky.'
+            min_length: 'Název kraje musí mít alespoň {{ limit }} znaků.|Název kraje musí mít alespoň {{ limit }} znaky.'
+            not_blank: 'Prosím zadejte název kraje.'
+            unique: 'Název kraje musí být jedinečný.'
     zone:
         scope:
-            not_blank: Zadejte rozsah.
+            not_blank: 'Prosím zadejte rozsah.'
         code:
-            not_blank: Zadejte prosím kód zóny.
-            regex: Kód země může tvořit pouze písmena, číslice, pomlčky a podtržítka.
-            unique: Kód zóny musí být jedinečný.
+            max_length: 'Kód zóny nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód zóny.'
+            regex: 'Kód zóny může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Kód zóny musí být jedinečný.'
+        type:
+            invalid: '"Typ {{ value }} je neplatný. Povolené typy jsou: {{ choices }}."'
         members:
-            min_count: Prosím přidejte alespoň {{ limit }} člena oblasti.
+            min_count: 'Prosím přidejte alespoň {{ limit }} člena zóny.'
         name:
-            max_length: Název zóny nesmí být delší než {{ limit }} znaků|Název zóny nesmí být delší než {{ limit }} znaků.
-            min_length: Název zóny musí mít alespoň {{ limit }} znaků|Název zóny musí mít alespoň {{ limit }} znaků.
-            not_blank: Prosím zadejte název oblasti.
+            max_length: 'Název zóny nesmí být delší než {{ limit }} znak.|Název zóny nesmí být delší než {{ limit }} znaky.'
+            min_length: 'Název zóny musí mít alespoň {{ limit }} znaků.|Název zóny musí mít alespoň {{ limit }} znaky.'
+            not_blank: 'Prosím zadejte název zóny.'
     zone_member:
-        cannot_be_the_same_as_zone: Člen zóny nemůže být stejný jako zóna.
+        cannot_be_the_same_as_zone: 'Člen zóny nemůže být stejný jako zóna.'
         code:
-            not_blank: Prosím zvolte člena zóny.
-            regex: Kód země může tvořit pouze písmena, číslice, pomlčky a podtržítka.
-        unique: Zvolený člen zóny je již v této zóně.
+            max_length: 'Kód člena zóny nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím vyberte člena zóny.'
+            regex: 'Kód člena zóny může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+        unique: 'Vybraný člen zóny je již v této zóně.'

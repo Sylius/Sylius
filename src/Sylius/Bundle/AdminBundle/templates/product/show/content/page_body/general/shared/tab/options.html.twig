@@ -1,0 +1,9 @@
+{% set variant = hookable_metadata.context.variant %}
+
+<td>
+    <div>
+        {% for option in variant.optionValues %}
+            <span class="text-muted">{{ option.name }}:</span> {{ option.value }}
+        {% endfor %}
+    </div>
+</td>

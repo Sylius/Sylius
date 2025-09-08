@@ -25,4 +25,9 @@ abstract class SymfonyPage extends BaseSymfonyPage implements SymfonyPageInterfa
 
         return parent::getElement($name, $parameters);
     }
+
+    protected function blur(): void
+    {
+        $this->getDocument()->find('css', 'body')->click();
+    }
 }

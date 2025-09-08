@@ -2,42 +2,77 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    catalog_promotion:
+        code:
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            unique: 'Katalogová propagace s daným kódem již existuje.'
+            regex: 'Kód katalogové propagace může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            not_blank: 'Prosím zadejte kód katalogové propagace.'
+        date:
+            greater_than_start_date: 'Datum ukončení nemůže být nastaveno před datem zahájení.'
+        name:
+            max_length: 'Název katalogové propagace nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Název katalogové propagace musí mít alespoň {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte název katalogové propagace.'
+        state:
+            processing: 'Katalogovou propagaci nelze upravovat, protože je aktuálně zpracovávána.'
+    catalog_promotion_action:
+        type:
+            not_blank: 'Prosím vyberte typ akce.'
+            invalid: 'Typ akce katalogové propagace je neplatný. Dostupné typy jsou {{ available_action_types }}.'
+        invalid_type: 'Typ akce katalogové propagace je neplatný. Prosím vyberte platný typ.'
+        percentage_discount:
+            not_in_range: 'Výše procentuální slevy musí být mezi 0% a 100%.'
+            not_number_or_empty: 'Výše procentuální slevy musí být číslo a nemůže být prázdné.'
+            not_valid: 'Výše procentuální slevy musí být nakonfigurována.'
+    catalog_promotion_scope:
+        type:
+            not_blank: 'Prosím vyberte typ rozsahu.'
+            invalid: 'Typ rozsahu katalogové propagace je neplatný. Dostupné typy jsou {{ available_scope_types }}.'
     promotion:
         code:
-            unique: Akce s tímto kódem již existuje.
-            regex: Kód akce může být složen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
-            not_blank: Zadejte prosím kód akce.
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            unique: 'Propagace s daným kódem již existuje.'
+            regex: 'Kód propagace může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            not_blank: 'Prosím zadejte kód propagace.'
         description:
-            max_length: Popis propagace nesmí být delší než 1 znak. |Popis propagace nesmí být delší než {{ limit }} znaků.
-            min_length: Popis propagace musí mít nejméně 1 znak. |Popis propagace musí být alespoň {{ limit }} znaků dlouhý.
-            not_blank: Zadejte popis propagace.
-        end_date_cannot_be_set_prior_start_date: Datu konce akce nemůže být před datem začátku akce.
-        is_invalid: Akce je neplatná.
+            max_length: 'Popis propagace nesmí být delší než 1 znak.|Popis propagace nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Popis propagace musí mít alespoň 1 znak.|Popis propagace musí mít alespoň {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte popis propagace.'
+        end_date_cannot_be_set_prior_start_date: 'Datum ukončení nemůže být nastaveno před datem zahájení.'
+        is_invalid: 'Propagace je neplatná.'
         name:
-            max_length: Název akce nesmí být delší než 1 znak. |Název akce nesmí být delší než {{ limit }} znaků.
-            min_length: Název akce musí mít nejméně 1 znak. |Název akce musí mít alespoň {{ limit }} znaků.
-            not_blank: Vyplňte prosím název akce.
+            max_length: 'Název propagace nesmí být delší než 1 znak.|Název propagace nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Název propagace musí mít alespoň 1 znak.|Název propagace musí mít alespoň {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte název propagace.'
     promotion_action:
+        invalid_type: 'Typ akce propagace je neplatný. Dostupné typy akcí jsou {{ available_action_types }}.'
         percentage_discount_configuration:
-            not_in_range: Procentuální sleva musí být mezi 0% a 100%.
+            not_in_range: 'Procentuální sleva musí být mezi 0% a 100%.'
+    promotion_rule:
+        invalid_type: 'Typ pravidla propagace je neplatný. Dostupné typy pravidel jsou {{ available_rule_types }}.'
     promotion_coupon:
         code:
-            max_length: Kód kupónu nesmí být delší než 1 znak. |Kód kupónu nesmí být delší než {{ limit }} znaků.
-            min_length: Kód kupónu musí mít alespoň 1 znak. |Kód kupónu musí mít alespoň {{ limit }} znaků.
-            not_blank: Zadejte kód kupónu.
-            regex: Kód kupónu může být složen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
-            unique: Tento kupón již existuje.
-        is_invalid: Kód kupónu je neplatný.
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Kód kupónu musí mít alespoň 1 znak.|Kód kupónu musí mít alespoň {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód kupónu.'
+            regex: 'Kód kupónu může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Tento kupón již existuje.'
+        is_invalid: 'Kód kupónu je neplatný.'
+        promotion:
+            not_blank: 'Prosím poskytněte propagaci pro tento kupón.'
+            not_coupon_based: 'Pouze propagace založené na kupónech mohou mít kupóny.'
         usage_limit:
-            min: Limit využití kupónu musí být alespoň {{ limit }}.
+            min: 'Limit použití kupónu musí být alespoň {{ limit }}.'
     promotion_coupon_generator_instruction:
         amount:
-            min: Počet kupónů k vygenerování musí být alespoň {{ limit }}.
-            not_blank: Prosím zadejte počet kupónů, které se mají vygenerovat.
+            min: 'Počet generovaných kupónů musí být alespoň {{ limit }}.'
+            not_blank: 'Prosím zadejte počet generovaných kupónů.'
         code_length:
-            min: Kód kupónu musí mít minimálně {{ limit }} znaků.
-            max: Kód kupónu nesmí být delší než {{ limit }} znaků.
-            not_blank: Zadejte kód kupónu.
-        possible_generation_amount: Neplatná délka kódu kupónu nebo počet kupónů. Nelze vygenerovat %expectedAmount% unikátních kuponů s délkou kódu %codeLength%. Možný počet pro vygenerování je %possibleAmount%.
+            min: 'Kód kupónu musí mít alespoň {{ limit }} znaků.'
+            max: 'Kód kupónu nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte délku kódu kupónu.'
+            not_in_range: 'Délka kódu kupónu musí být mezi {{ min }} a {{ max }}.'
+        possible_generation_amount: 'Neplatná délka kódu kupónu nebo počet kupónů. Není možné vygenerovat %expectedAmount% unikátních kupónů s délkou kódu %codeLength%. Možný počet k vygenerování je %possibleAmount%.'
         usage_limit:
-            min: Limit využití generovaných kupónů musí být alespoň {{ limit }}.
+            min: 'Limit použití generovaných kupónů musí být alespoň {{ limit }}.'

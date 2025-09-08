@@ -1,0 +1,12 @@
+{% set form = hookable_metadata.context.form %}
+{% set prefixes = hookable_metadata.prefixes|merge(['sylius_shop.shared.form']) %}
+
+<div class="mb-4" >
+    {{ component('sylius_shop:checkout:address:address_book', {type: 'billingAddress'}) }}
+
+    <div class="h4 mb-4">
+        {{ 'sylius.ui.billing_address'|trans }}
+    </div>
+
+    {% hook 'address' with { _prefixes: prefixes, 'form': form.billingAddress, 'type': 'billing' } %}
+</div>

@@ -8,7 +8,7 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Passwort
-                signature: Signature
+                signature: Unterschrift
                 username: Benutzername
                 sandbox: Sandbox
             stripe:

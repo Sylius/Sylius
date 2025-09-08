@@ -2,31 +2,19 @@
 # (c) Sylius Sp. z o.o.
 
 imports:
-    - { resource: "@SyliusAddressingBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusAttributeBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusChannelBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusCurrencyBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusCustomerBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusInventoryBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusLocaleBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusOrderBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusPayumBundle/Resources/config/app/config.yaml" }
     - { resource: "@SyliusProductBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPromotionBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShippingBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusTaxationBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusTaxonomyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusUserBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 
     - { resource: "@SyliusCoreBundle/Resources/config/app/parameters.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
-    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/winzou_state_machine.php" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/workflow.yaml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/messenger.yaml" }
-    - { resource: "@SyliusCoreBundle/Resources/config/app/nyholm_psr7.yaml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/doctrine_migrations.yaml" }
 
 parameters:
@@ -81,43 +69,34 @@ knp_gaufrette:
             adapter: "%sylius.uploader.filesystem%"
 
 liip_imagine:
+    cache: sylius_image
+    data_loader: sylius_image
     loaders:
-        default:
+        sylius_image:
             filesystem:
                 data_root: "%sylius_core.images_dir%"
     resolvers:
-        default:
+        sylius_image:
             web_path:
                 web_root: "%sylius_core.public_dir%"
                 cache_prefix: "media/cache"
     filter_sets:
         sylius_original: ~
         sylius_small:
+            format: webp
+            quality: 80
             filters:
                 thumbnail: { size: [120, 90], mode: outbound }
         sylius_medium:
+            format: webp
+            quality: 80
             filters:
                 thumbnail: { size: [240, 180], mode: outbound }
         sylius_large:
+            format: webp
+            quality: 80
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
-
-payum:
-    storages:
-        "%sylius.model.order.class%": { doctrine: orm }
-        "%sylius.model.payment.class%": { doctrine: orm }
-
-    security:
-        token_storage:
-            Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken: { doctrine: orm }
-
-    dynamic_gateways:
-        config_storage:
-            Sylius\Bundle\PayumBundle\Model\GatewayConfig: { doctrine: orm }
-
-    gateways:
-        offline:
-            factory: offline
 
 stof_doctrine_extensions:
     default_locale: "%locale%"
@@ -137,25 +116,3 @@ twig:
         sylius_base_locale: "%locale%"
         sylius_meta:
             version: !php/const Sylius\Bundle\CoreBundle\SyliusCoreBundle::VERSION
-
-sonata_block:
-    blocks:
-        sonata.block.service.template:
-            settings:
-                address: ~
-                addresses: ~
-                cart: ~
-                channel: ~
-                customer: ~
-                form: ~
-                order: ~
-                order_item: ~
-                orders: ~
-                product: ~
-                product_review: ~
-                product_reviews: ~
-                products: ~
-                resource: ~
-                resources: ~
-                statistics: ~
-                taxon: ~

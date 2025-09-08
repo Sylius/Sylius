@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Shop;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class MenuElement extends Element implements MenuElementInterface
+class MenuElement extends Element implements MenuElementInterface
 {
     public function getMenuItems(): array
     {

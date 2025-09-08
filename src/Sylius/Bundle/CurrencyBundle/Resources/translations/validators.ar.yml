@@ -4,19 +4,20 @@
 sylius:
     currency:
         code:
-            not_blank: من فضلك اختر رمز العملة.
+            not_blank: يرجى اختيار رمز العملة.
             unique: يجب أن يكون رمز العملة فريدًا.
-            currency: هذه القيمة ليست رمز عملة صالح.
+            currency: هذه القيمة ليست رمز عملة صالحًا.
         exchange_rate:
-            not_blank: من فضلك أدخل سعر الصرف.
+            not_blank: يرجى إدخال سعر الصرف.
     exchange_rate:
         ratio:
-            greater_than: يجب أن تكون النسبة أكبر من 0.
+            greater_than: يجب أن تكون النسبة أكبر من {{ compared_value }}.
+            less_than: يجب أن تكون النسبة أقل من {{ compared_value }}.
             invalid: يجب أن تكون النسبة رقمًا.
-            not_blank: من فضلك أدخل نسبة سعر الصرف.
+            not_blank: يرجى إدخال نسبة سعر الصرف.
         source_currency:
-            not_blank: من فضلك أدخل العملة التي يجب أن يتم اشتقاق سعر الصرف منها.
+            not_blank: يرجى إدخال العملة المصدر التي يُشتق منها سعر الصرف.
         target_currency:
-            not_blank: من فضلك أدخل العملة التي يجب أن يتم تحديد سعر الصرف لها.
-        unique_currency_pair: يجب أن يكون زوج العملة فريدًا.
-        different_source_target_currency: يجب أن تكون العملة المصدر والعملات المستهدفة مختلفة.
+            not_blank: يرجى إدخال العملة الهدف التي يُحدد لها سعر الصرف.
+        unique_currency_pair: يجب أن يكون زوج العملات فريدًا.
+        different_source_target_currency: يجب أن تكون العملة المصدر مختلفة عن العملة الهدف.

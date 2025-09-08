@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        user:
+            email: 'ईमेल'
+            enabled: 'सक्रिय'
+            password:
+                label: 'पासवर्ड'
+                confirmation: 'सत्यापन'
+            remember_me: 'मुझे याद रखें'
+            shipping_address: 'शिपिंग पता'
+            username: 'उपयोगकर्ता नाम'
+            verified: 'सत्यापित'
+        user_filter:
+            query: 'खोजें'
+        user_change_password:
+            confirmation: 'सत्यापन'
+            current: 'वर्तमान पासवर्ड'
+            new: 'नया पासवर्ड'
+        user_reset_password:
+            confirmation: 'सत्यापन'
+            new: 'नया पासवर्ड'

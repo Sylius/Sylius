@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Filter;
 
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class PriceRangeFilter implements FilterInterface
 {
-    public function __construct(private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator)
     {
     }
 
@@ -43,7 +43,7 @@ final class PriceRangeFilter implements FilterInterface
 
     private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration): bool
     {
-        $price = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $configuration['channel']]);
+        $price = $this->productVariantPricesCalculator->calculate($variant, ['channel' => $configuration['channel']]);
 
         $priceRange = $configuration['filters']['price_range_filter'];
         if (isset($priceRange['min'], $priceRange['max'])) {

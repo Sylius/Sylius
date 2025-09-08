@@ -123,7 +123,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         return $this->findRootNodes();
     }
 
-    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array
+    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null, ?array $excludes = null): array
     {
         $subqueryBuilder = $this->createQueryBuilder('sq')
             ->innerJoin('sq.translations', 'translation', 'WITH', 'translation.name LIKE :name')
@@ -133,6 +133,13 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
 
         $queryBuilder = $this->createQueryBuilder('o');
+
+        if (null !== $excludes) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->notIn('o.code', ':excludes'))
+                ->setParameter('excludes', $excludes)
+            ;
+        }
 
         /** @var TaxonInterface[] $results */
         $results = $queryBuilder

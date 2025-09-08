@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ExistingChannelCode extends Constraint
 {
     public string $message = 'sylius.product_variant.channel_pricing.existing_code';

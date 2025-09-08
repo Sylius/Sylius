@@ -15,6 +15,16 @@ framework:
     test: ~
     mailer:
         dsn: 'null://null'
+    assets:
+        packages:
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            app.admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/admin/manifest.json'
+            app.shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/shop/manifest.json'
     workflows: ~
 
 security:
@@ -32,3 +42,11 @@ doctrine:
         driver: "%database_driver%"
         path: "%database_path%"
         charset: UTF8
+
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build/default'
+    builds:
+        admin: '%kernel.project_dir%/public/build/admin'
+        shop: '%kernel.project_dir%/public/build/shop'
+        app.admin: '%kernel.project_dir%/public/build/app/admin'
+        app.shop: '%kernel.project_dir%/public/build/app/shop'

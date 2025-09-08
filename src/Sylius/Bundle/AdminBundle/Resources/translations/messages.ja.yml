@@ -2,45 +2,130 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'は以下の方法で発送されました'
+            subject: '発送確認'
+            thank_you_for_transaction: 'お取引いただきありがとうございます。'
+            you_can_check_its_location_with_the_tracking_code: '追跡コード %tracking_code% で配送状況を確認できます。'
+            your_order_with_number: 'ご注文番号'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: '現在の割引前の最安値を表示しますか？'
+                period_for_which_the_lowest_price_is_calculated: '最安値を算出する期間'
+            reset_password:
+                password:
+                    label: '新しいパスワード'
+                    confirmation: '新しいパスワードの確認'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: 関連タイプ
-                    attributes: 属性
-                    header: カタログ
-                    inventory: sylius.breadcrumb.inventory.index
-                    options: sylius.breadcrumb.option.index
-                    products: sylius.breadcrumb.product.index
-                    taxons: タクソン(分類群)
+                    association_types: '関連タイプ'
+                    attributes: '属性'
+                    header: 'カタログ'
+                    inventory: '在庫'
+                    options: 'オプション'
+                    products: '商品'
+                    taxons: 'タクソン'
                 configuration:
-                    admin_users: 管理者
-                    channels: 経路
-                    countries: 国の設定
-                    currencies: 通貨
-                    exchange_rates: 為替レート
-                    header: 条件設定
-                    locales: 地域
-                    payment_methods: 支払い方法の管理
-                    shipping_categories: 配送カテゴリ
-                    shipping_methods: 配送方法管理
-                    tax_categories: 税カテゴリー
-                    tax_rates: 税管理
-                    zones: ゾーン管理
+                    admin_users: '管理者'
+                    channels: 'チャネル'
+                    countries: '国'
+                    currencies: '通貨'
+                    exchange_rates: '為替レート'
+                    header: '設定'
+                    locales: 'ロケール'
+                    payment_methods: '支払方法'
+                    shipping_categories: '配送カテゴリ'
+                    shipping_methods: '配送方法'
+                    tax_categories: '税カテゴリ'
+                    tax_rates: '税率'
+                    zones: 'ゾーン'
                 marketing:
-                    header: マーケティング
-                    product_reviews: 商品レビュー
-                    promotions: sylius.breadcrumb.promotion.index
+                    cart_promotions: 'カートプロモーション'
+                    catalog_promotions: 'カタログプロモーション'
+                    header: 'マーケティング'
+                    product_reviews: '商品レビュー'
+                    promotions: 'プロモーション'
                 customers:
-                    customers: sylius.breadcrumb.customers
-                    groups: グループ
-                    header: 顧客
+                    customers: '顧客'
+                    groups: 'グループ'
+                    header: '顧客'
                 sales:
-                    header: sylius.breadcrumb.sales
-                    orders: sylius.breadcrumb.order.index
+                    header: '販売'
+                    orders: '注文'
                 official_support:
-                    header: 公式サポート
-                    browse_plugins: プラグインを参照
-                    sylius_plus: Sylius Plus
-                    professional_services: プロフェッショナルサービス
-                    find_a_partner: パートナーを探す
+                    header: '公式サポート'
+                    browse_plugins: 'プラグインを探す'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'プロフェッショナルサービス'
+                    find_a_partner: 'パートナーを探す'
+                    sylius_certification: 'Sylius 認定'
+    ui:
+        account: 'アカウント'
+        admin_user: '管理者'
+        add_new_entry: '新しいエントリーを追加'
+        back_to_dashboard: 'ダッシュボードへ戻る'
+        catalog_promotion:
+            dates_details: 'この操作には時間がかかります！指定した日時から2〜10分の遅延を想定してください。遅延時間はカタログのサイズによって異なります。'
+        channel:
+            account_verification_required_details: 'このオプションを無効にすると、メール認証なしでアカウントを作成・利用でき、ゲスト注文のデータにアクセスされる可能性があります。'
+        channel_pricing_history: 'チャネル価格履歴'
+        channel_pricings: 'チャネル価格'
+        create_new:
+            customer_group: '新しい顧客グループを作成'
+        delete_avatar: 'アバターを削除'
+        full_screen: '全画面'
+        global: 'グローバル'
+        ip_address: 'IPアドレス'
+        language: '言語'
+        lowest_price_before_discount: '割引前の最安値'
+        minimum_price_details: '最低価格 – 現在価格がカタログまたはカートプロモーションによって割引できない価格の下限です。利益保護にご活用ください。'
+        more: 'もっと見る'
+        no_main_taxon: 'メインタクソンなし'
+        no_depth: '深さなし'
+        no_height: '高さなし'
+        no_results: '結果がありません'
+        no_results_adjust_your_search: '検索条件を調整してもう一度お試しください。'
+        no_weight: '重量なし'
+        no_width: '幅なし'
+        omnibus: 'オムニバス'
+        order:
+            date: '注文日'
+        original_price_details: '元価格 – カタログに取り消し線で表示される商品バリアントの価格です。現在価格計算の基準として使用されます。この値が未設定の場合、カタログプロモーションが価格を元価格へコピーします。'
+        original_product_price_details: '元価格 – カタログに取り消し線で表示される商品の価格です。現在価格計算の基準として使用されます。この値が未設定の場合、カタログプロモーションが価格を元価格へコピーします。'
+        overdue: '期限超過'
+        page_not_found: 'ページが見つかりません'
+        pagination:
+            number_of_results: '%total% 件中 %from% 〜 %to% 件を表示'
+        partially_refunded: '一部返金済み'
+        pending_actions: '保留中のアクション'
+        price_details: '価格 – カタログに表示される商品バリアントの現在価格です。カタログプロモーションなどによって変更できます。'
+        product_price_details: '価格 – カタログに表示される商品の現在価格です。カタログプロモーションなどによって変更できます。'
+        price_history: '価格履歴'
+        product:
+            product_not_active_in_channel: 'このチャネルでは商品がまだ有効化されていません。'
+        product_variant: '商品バリアント'
+        sales_summary: '売上サマリー'
+        search_menu: 'メニュー検索'
+        shipment_for_order: '注文の配送'
+        show_history_for_channel_pricing: 'チャネル価格の履歴を表示'
+        start_typing_to_search: '入力して検索開始'
+        statistics:
+            day: '日'
+            lifetime: '期間'
+            month: '月'
+            week: '週'
+            2weeks: '2週間'
+            year: '年'
+        taxon: 'タクソン'
+        to_approve: '承認待ち'
+        to_process: '処理待ち'
+        to_ship: '発送待ち'
+        view_in_store: 'ストアで表示'
+        work_in_progress: '作業中'
+        empty_date: '空'
+        notifications:
+            new_version_of_sylius_available: 'Sylius の新しいバージョンが利用可能です。技術担当者にアップグレードをご依頼ください。'

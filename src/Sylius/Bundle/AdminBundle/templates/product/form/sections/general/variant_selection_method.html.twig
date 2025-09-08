@@ -1,0 +1,6 @@
+{% set form = hookable_metadata.context.form %}
+{% set product = hookable_metadata.context.product %}
+
+<div class="mb-3 {% if product.isSimple %}d-none{% endif %}">
+    {{ form_row(form.variantSelectionMethod) }}
+</div>

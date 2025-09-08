@@ -1,15 +1,3 @@
-sylius_admin_ajax_taxon:
-    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/taxon.yml"
-    prefix: /taxons
-
-sylius_admin_ajax_product:
-    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product.yml"
-    prefix: /products
-
-sylius_admin_ajax_product_attribute:
-    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_attribute.yml"
-    prefix: /product-attributes
-
 sylius_admin_ajax_product_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_taxon.yml"
     prefix: /product-taxons
@@ -18,23 +6,6 @@ sylius_admin_ajax_product_variant:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_variant.yml"
     prefix: /product-variants
 
-sylius_admin_ajax_customer_group:
-    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/customer_group.yml"
-    prefix: /customer-groups
-
-sylius_admin_ajax_product_option:
-    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_option.yml"
-    prefix: /product-options
-
-sylius_admin_ajax_render_province_form:
-    path: /render-province-form
-    defaults:
-        _controller: sylius.controller.province::choiceOrTextFieldFormAction
-        _sylius:
-            template: "@SyliusAdmin/Common/Form/_province.html.twig"
-
-sylius_admin_ajax_get_version:
-    path: /get-version
-    defaults:
-        _controller: sylius.controller.admin.notification::getVersionAction
-        _format: json
+sylius_admin_entity_autocomplete:
+    controller: ux.autocomplete.entity_autocomplete_controller
+    path: '/autocomplete/{alias}'

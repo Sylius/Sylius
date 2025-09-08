@@ -2,220 +2,286 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        admin_password_reset:
+            hello: 'Ciao'
+            subject: 'Reset password amministratore'
+            reset_your_password: 'Reimposta la tua password'
+            to_reset_your_password: 'Per reimpostare la tua password - clicca sul link qui sotto'
+            to_reset_your_password_token: 'Per reimpostare la tua password - usa il token qui sotto'
+            token: 'Il tuo token per il reset della password è'
+        contact_request:
+            content: 'Contenuto'
+            message_from: 'Messaggio da'
+            subject: 'Richiesta di contatto'
+        order_confirmation:
+            has_been_successfully_placed: 'è stato effettuato con successo.'
+            subject: 'Conferma dell''ordine'
+            view_order_or_change_payment_method: 'Visualizza ordine o cambia metodo di pagamento'
+            thank_you: 'Grazie per aver acquistato nel nostro negozio!'
+            your_order_number: 'Il numero del tuo ordine'
+        password_reset:
+            hello: 'Ciao'
+            reset_your_password: 'Reimposta la tua password'
+            subject: 'Reset della password'
+            to_reset_your_password: 'Per reimpostare la tua password - clicca sul link qui sotto'
+            to_reset_your_password_token: 'Per reimpostare la tua password - usa il token qui sotto'
+            token: 'Il tuo token per il reset della password è'
+        shipment_confirmation:
+            has_been_sent_using: 'è stato inviato utilizzando'
+            subject: 'Conferma di spedizione'
+            thank_you_for_transaction: 'Grazie per la transazione riuscita.'
+            you_can_check_its_location_with_the_tracking_code: 'Puoi verificarne la posizione con il codice di tracciamento %tracking_code%.'
+            your_order_with_number: 'Il tuo ordine con il numero'
+        user_registration:
+            start_shopping: 'Inizia a fare shopping'
+            subject: 'Registrazione utente'
+            welcome_to_our_store: 'Benvenuto nel nostro negozio!'
+            you_have_just_been_registered: 'Sei appena stato registrato. Grazie'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: 'Ciao'
+            message: 'Verifica il tuo account con il token: '
+            subject: 'Verifica indirizzo email'
+            to_verify_your_email_address: 'Per verificare il tuo indirizzo email - clicca sul link qui sotto'
+            verify_your_email_address: 'Verifica il tuo indirizzo email'
+        user:
+            account_verification:
+                greeting: 'Ciao'
+                message: 'Verifica il tuo account con il token: '
+                statement: 'Verifica il tuo indirizzo email'
+                strategy: 'Per verificare il tuo indirizzo email - clicca sul link qui sotto'
+                subject: 'Verifica indirizzo email'
     form:
         block:
-            body: Body
-            id: ID
-            title: Titolo
+            body: 'Corpo'
+            id: 'ID'
+            title: 'Titolo'
         cart:
-            coupon: Codice sconto
+            coupon: 'Coupon'
         catalog_promotion:
-            channels: Canali
+            channels: 'Canali'
+            scope:
+                for_products: 'Per i prodotti'
+                for_taxons: 'Per i taxon'
+                for_variants: 'Per le varianti'
         checkout:
             addressing:
-                different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
-            payment_method: Metodo di pagamento
-            shipping_method: Metodo di spedizione
+                different_billing_address: 'Usare un indirizzo diverso per la fatturazione?'
+                different_shipping_address: 'Usare un indirizzo diverso per la spedizione?'
+            payment_method: 'Metodo di pagamento'
+            shipping_method: 'Metodo di spedizione'
+        currency:
+            select: 'Seleziona valuta'
         promotion:
-            channels: Canali
+            channels: 'Canali'
         promotion_action:
             add_product_configuration:
-                product: Prdotto
+                product: 'Prodotto'
         promotion_coupon:
-            per_customer_usage_limit: Limite di utilizzo per cliente
+            per_customer_usage_limit: 'Limite di utilizzo per cliente'
+            reusable_from_cancelled_orders: 'Riutilizzabile da ordini cancellati'
         group:
-            name: "Nome\n"
-            roles: Ruoli
+            name: 'Nome'
+            roles: 'Ruoli'
         channel:
             billing_data:
-                city: Città
-                company: Azienda
-                country: Nazione
-                postcode: CAP
-                street: Indirizzo
-            contact_email: Email di contatto
-            countries: Stati
-            currencies: Valute
-            currency_base: Valuta base
-            account_verification_required: È richiesta la verifica dell'account?
-            hostname: Hostname (Nome server)
-            locale_default: Localizzazione predefinita
-            locales: Localizzazioni
-            payment_methods: Metodi di pagamento
-            shipping_methods: Metodi di spedizione
-            skipping_shipping_step_allowed: Saltare lo step spedizione nel caso sia disponibile un solo metodo di spedizione?
-            skipping_payment_step_allowed: Saltare lo step pagamento nel caso sia disponibile un solo metodo di pagamento?
-            tax_calculation_strategy: Metodo di calcolo delle tasse
-            tax_zone_default: Aliquota predefinita
-            taxonomies: Tassonomie
-            theme: Tema
+                city: 'Città'
+                company: 'Azienda'
+                country: 'Paese'
+                postcode: 'CAP'
+                street: 'Indirizzo'
+                tax_id: 'ID Fiscale'
+            contact_email: 'Email di contatto'
+            contact_phone_number: 'Numero di telefono di contatto'
+            countries: 'Paesi'
+            currencies: 'Valute'
+            currency_base: 'Valuta base'
+            account_verification_required: 'Verifica dell''account richiesta?'
+            hostname: 'Nome host'
+            locale_default: 'Lingua predefinita'
+            locales: 'Lingue'
+            menu_taxon: 'Taxon del menu'
+            payment_methods: 'Metodi di pagamento'
+            shipping_address_in_checkout_required: 'Indirizzo richiesto nel checkout'
+            shipping_methods: 'Metodi di spedizione'
+            shop_billing_data: 'Dati di fatturazione negozio'
+            skipping_shipping_step_allowed: 'Consentire il salto del passaggio di spedizione se è disponibile un solo metodo di spedizione?'
+            skipping_payment_step_allowed: 'Consentire il salto del passaggio di pagamento se è disponibile un solo metodo di pagamento?'
+            tax_calculation_strategy: 'Strategia di calcolo delle imposte'
+            tax_zone_default: 'Zona fiscale predefinita'
+            taxonomies: 'Tassonomie'
+            theme: 'Tema'
         image:
-            type: Tipo
-            file: Immagine
+            type: 'Tipo'
+            file: 'Immagine'
         locale:
-            code: Codice
-            enabled: Abilitato
+            code: 'Codice'
+            enabled: 'Abilitato'
         order_filter:
-            created_at_from: Creato dopo
-            created_at_to: Creato prima
-            number: Numero
-            total_from: Da
-            total_to: A
-            payment_state: Stato pagamento
-            channel: Tutti i canali
+            created_at_from: 'Creato dopo'
+            created_at_to: 'Creato prima'
+            number: 'Numero'
+            total_from: 'Da'
+            total_to: 'A'
+            payment_state: 'Stato pagamento'
+            channel: 'Tutti i canali'
         page:
-            body: Body
-            id: ID
-            title: Titolo
+            body: 'Corpo'
+            id: 'ID'
+            title: 'Titolo'
         product:
-            images: Immagini
-            restricted_zone: Zona soggetta a restrizioni
-            short_description: Descrizione breve
-            variant_selection_method: Metodo di selezione delle varianti
-            main_taxon: Gruppo prodotto principale
-            channels: Canali
-            enabled: Abilitato
+            images: 'Immagini'
+            restricted_zone: 'Zona limitata'
+            short_description: 'Descrizione breve'
+            variant_selection_method: 'Metodo di selezione variante'
+            main_taxon: 'Taxon principale'
+            channels: 'Canali'
+            enabled: 'Abilitato'
         product_filter:
-            name: "Nome\n"
-            code: Codice
+            name: 'Nome'
+            code: 'Codice'
         product_variant:
-            tax_category: Categoria fiscale
-            shipping_category: Categoria di spedizione
+            tax_category: 'Categoria fiscale'
+            shipping_category: 'Categoria di spedizione'
         shipment_filter:
-            created_at_from: Da
-            created_at_to: A
-            number: Numero d'ordine
-            shipping_address: Spedisci a
-            channel: Tutti i canali
+            created_at_from: 'Da'
+            created_at_to: 'A'
+            number: 'Numero ordine'
+            shipping_address: 'Nome destinatario'
+            channel: 'Tutti i canali'
         payment_filter:
-            created_at_from: Da
-            created_at_to: A
-            number: Numero d'ordine
-            billing_address: Fattura a nome di
-            channel: Tutti i canali
+            created_at_from: 'Da'
+            created_at_to: 'A'
+            number: 'Numero ordine'
+            billing_address: 'Nome fatturazione'
+            channel: 'Tutti i canali'
         shipping_method:
-            zone: Zona
+            zone: 'Zona'
         taxon:
-            code: Codice
-            file: Seleziona un'immagine
-            images: Immagini
+            code: 'Codice'
+            file: 'Seleziona immagine'
+            images: 'Immagini'
         taxonomy:
-            file: Seleziona un'immagine
+            file: 'Seleziona immagine'
         user:
-            billing_address: Indirizzo di fatturazione
-            enabled: Abilitato
-            first_name: Nome
-            groups: Gruppi
-            roles: Ruoli
-            last_name: Cognome
-            password: Password
-            shipping_address: Indirizzo di spedizione
+            billing_address: 'Indirizzo di fatturazione'
+            different_shipping_address: 'Usare un indirizzo diverso per la spedizione?'
+            enabled: 'Abilitato'
+            first_name: 'Nome'
+            groups: 'Gruppi'
+            roles: 'Ruoli'
+            last_name: 'Cognome'
+            password: 'Password'
+            shipping_address: 'Indirizzo di spedizione'
         user_filter:
-            query: Ricerca
+            query: 'Cerca'
         variant:
-            depth: Profondità
-            height: Altezza
-            on_hand: Disponibilità attuale
-            price: Prezzo
-            sku: SKU
-            shipping_required: La spedizione è richiesta?
-            weight: Peso
-            width: Larghezza
+            depth: 'Profondità'
+            height: 'Altezza'
+            on_hand: 'Scorta disponibile'
+            price: 'Prezzo'
+            sku: 'SKU'
+            shipping_required: 'Spedizione richiesta?'
+            weight: 'Peso'
+            width: 'Larghezza'
+            tracked_help: 'Se questa opzione è attivata, Sylius terrà traccia delle scorte e smetterà di vendere il prodotto una volta che le scorte raggiungono 0.'
         attribute:
             product_attribute_value:
-                attribute: Attributo
-                value: Valore
+                attribute: 'Attributo'
+                value: 'Valore'
         guest:
-            email: Email
+            email: 'Email'
         product_association:
-            product: Prodotto associato
-            type: Tipi di associazione
+            product: 'Prodotto associato'
+            type: 'Tipo di associazione'
         product_association_type:
-            name: "Nome\n"
+            name: 'Nome'
         promotion_filter:
-            products: Filtro prodotti
-            taxons: Filtro Taxons
+            products: 'Filtro prodotti'
+            taxons: 'Filtro taxon'
         promotion_rule:
             customer_group:
-                group: Gruppo clienti
+                group: 'Gruppo cliente'
             has_taxon:
-                taxons: Taxons
+                taxons: 'Taxon'
             product:
-                products: Prodotti
+                products: 'Prodotti'
             total_of_items_from_taxon:
-                taxon: Tipologia
-                amount: Importo
+                taxon: 'Taxon'
+                amount: 'Importo'
         payment_method:
-            channels: Canali
+            channels: 'Canali'
         product_attribute:
-            position: Posizione
+            position: 'Posizione'
         zone:
             scopes:
-                shipping: Spese di spedizione
-                tax: Tasse
+                shipping: 'Spedizione'
+                tax: 'Tassa'
+
     installer:
         extensions:
-            header: estensioni
+            header: 'Estensioni'
             accelerator:
-                header: Accelerator
-                help: Attivare Zend OpCache (altamente consigliato).
-            apc: APC
-            ctype: CType
-            gd: GD
-            help: Installa e attiva l'estensione %extension%.
-            iconv: Iconv
-            exif: Exif
-            fileinfo: FileInfo
-            icu: ICU
-            intl: Intl
-            json_encode: JSON
-            mbstring: Stringa multibyte
-            off: false
-            on: true
-            pcre: PCRE
-            pdo: PDO
-            php_xml: PHP-XML
-            session_start: Sessione
-            simplexml_import_dom: SimpleXML
-            token_get_all: Tokenizer
+                header: 'Acceleratore'
+                help: 'Abilita Zend OpCache (altamente raccomandato).'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: 'Installa e abilita l''estensione %extension%.'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: 'Multibyte String'
+            off: 'spento'
+            on: 'acceso'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'Session'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
         filesystem:
-            header: file system
+            header: 'Sistema di file'
             cache:
-                header: cache
-                help: "Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
-            exists: esiste
+                header: 'Cache'
+                help: "Per impostare i permessi, esegui: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: 'esiste'
             logs:
-                header: logs
-                help: "Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
-            not_exists: non esiste
-            not_writable: non scrivibile
+                header: 'Log'
+                help: "Per impostare i permessi, esegui: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: 'non esiste'
+            not_writable: 'non scrivibile'
             parameters:
-                header: parameters.yml
-                help: "Per impostare le autorizzazioni eseguire: sudo chmod a+w %path%"
-            vendors: fornitori
-            writable: scrivibile
+                header: 'parameters.yml'
+                help: "Per impostare i permessi, esegui: sudo chmod a+w %path%"
+            vendors: 'vendors'
+            writable: 'scrivibile'
         settings:
-            header: Impostazioni e versione PHP
-            any: qualsiasi
-            detect_unicode: detect_unicode
-            magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: non deprecato
-            off: false
-            on: true
-            register_globals: register_globals
+            header: 'Versione PHP e impostazioni'
+            any: 'qualsiasi'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: 'Imposta "detect_unicode = Off" nel tuo file php.ini'
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: 'non deprecato'
+            off: 'spento'
+            on: 'acceso'
+            register_globals: 'register_globals'
             session:
-                auto_start: session.auto_start
-            short_open_tag: short_open_tag
-            timezone: timezone
+                auto_start: 'session.auto_start'
+                auto_start_help: 'Imposta "session.auto_start  = Off" nel tuo file php.ini'
+            short_open_tag: 'short_open_tag'
+            timezone: 'timezone'
+            timezone_help: 'Imposta "date.timezone" nel tuo php.ini (es. date.timezone = "Europe/Amsterdam")'
             timezone_deprecated:
-                header: Timezone deprecato
-                help: Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).
-            version: Versione PHP
-            version_recommended: Versione PHP raccomandata
-            version_help: Sylius raccomanda %recommended% versione PHP, la tua versione attuale è %current%. Si prega di aggiornare.
-    payum_gateway:
-        cash_on_delivery: Contanti alla consegna
-        offline: Offline
-        paypal_express_checkout: PayPal Express Checkout
+                header: 'Time zone deprecato'
+                help: 'Il fuso orario %timezone% è deprecato. Modifica il tuo php.ini (elenco dei fusi orari deprecati http://php.net/manual/en/timezones.others.php).'
+            version: 'Versione PHP'
+            version_recommended: 'Versione PHP consigliata'
+            version_help: 'Sylius consiglia la versione PHP %recommended%, la tua versione attuale è %current%. Si prega di aggiornare.'
+
     shipping_method_resolver:
-        by_zones_and_channel: A seconda della zona e modalità
+        by_zones_and_channel: 'Per zone e canale'

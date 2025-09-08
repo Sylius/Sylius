@@ -2,5 +2,18 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        request_reset_password:
+            success: 'Ak zadaný e-mail existuje v našom systéme, poslali sme pokyny na resetovanie hesla.'
+        password_reset:
+            success: 'Vaše heslo bolo úspešne zmenené!'
+            token_expired: 'Platnosť tokenu na resetovanie hesla vypršala.'
+    email:
+        order_confirmation_resent: 'Potvrdenie objednávky bolo zákazníkovi úspešne odoslané znova.'
+        shipment_confirmation_resent: 'Potvrdenie o odoslaní zásielky bolo zákazníkovi úspešne odoslané znova.'
     product_variant:
-        cannot_generate_variants: 'Varianty sa nedajú vygenerovať pre produkt bez produktových volieb.'
+        cannot_generate_variants: 'Pre produkt bez hodnôt voliteľných možností nie je možné generovať varianty.'
+    locale:
+        delete:
+            is_used: 'Tento jazykový balík sa nedá zmazať, je použitý aspoň jedným prekladom.'
+            success: 'Jazykový balík bol úspešne zmazaný.'

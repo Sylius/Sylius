@@ -37,8 +37,6 @@ class ProductAssociation implements ProductAssociationInterface
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
-
-        /** @var ArrayCollection<array-key, ProductInterface> $this->associatedProducts */
         $this->associatedProducts = new ArrayCollection();
     }
 

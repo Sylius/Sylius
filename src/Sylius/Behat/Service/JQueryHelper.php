@@ -20,12 +20,13 @@ abstract class JQueryHelper
 {
     public static function waitForAsynchronousActionsToFinish(Session $session): void
     {
-        $session->wait(1000, 'typeof jQuery !== "undefined" && 0 === jQuery.active');
+        $session->wait(1000, "!document.querySelector('[data-live-loading=true]')");
     }
 
     public static function waitForFormToStopLoading(DocumentElement $document, int $timeout = 10): void
     {
-        $form = $document->find('css', 'form');
-        $document->waitFor($timeout, fn () => !$form->hasClass('loading'));
+        if (DriverHelper::isJavascript($document->getSession()->getDriver())) {
+            $document->getSession()->wait(500, "document.readyState === 'complete' && !document.querySelector('[data-live-loading=true]')");
+        }
     }
 }

@@ -1,19 +1,17 @@
 # This file is a part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
-sylius_shop_ajax:
-    resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
-    prefix: /ajax
-
-sylius_shop_partial:
-    resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
-    prefix: /_partial
-
 sylius_shop_homepage:
     path: /
     methods: [GET]
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     defaults:
-        _controller: sylius.controller.shop.homepage::indexAction
+        template: "@SyliusShop/homepage/index.html.twig"
+
+sylius_shop_live_component:
+    path: '/_components/{_live_component}/{_live_action}'
+    defaults:
+        _live_action: 'get'
 
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
@@ -44,6 +42,10 @@ sylius_shop_order:
     resource: "@SyliusShopBundle/Resources/config/routing/order.yml"
     prefix: /order
 
+sylius_shop_payment_request:
+    resource: "@SyliusShopBundle/Resources/config/routing/payment_request.yaml"
+    prefix: /payment-request
+
 sylius_shop_account:
     resource: "@SyliusShopBundle/Resources/config/routing/account.yml"
     prefix: /account
@@ -52,10 +54,10 @@ sylius_shop_switch_currency:
     path: /switch-currency/{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.currency_switch::switchAction
+        _controller: sylius_shop.controller.currency_switch::switchAction
 
 sylius_shop_switch_locale:
     path: /switch-locale/{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.locale_switch::switchAction
+        _controller: sylius_shop.controller.locale_switch::switchAction

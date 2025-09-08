@@ -1,8 +1,8 @@
 Sylius\Component\Core\Model\Address:
-    address:
+    address_{tony, oliver}:
         firstName: "John"
         lastName: "Doe"
-        customer: '@customer_tony'
+        customer: "@customer_<current()>"
         company: "CocaCola"
         street: "Green Avenue"
         countryCode: "US"
@@ -11,7 +11,7 @@ Sylius\Component\Core\Model\Address:
         phoneNumber: "123456789"
 
 Sylius\Component\Core\Model\ShopUser:
-    shop_user_{tony}:
+    shop_user_{tony, oliver}:
         plainPassword: "sylius"
         roles: [ROLE_USER]
         enabled: true
@@ -20,7 +20,7 @@ Sylius\Component\Core\Model\ShopUser:
         usernameCanonical: "<current()>\\@example.com"
 
 Sylius\Component\Core\Model\Customer:
-    customer_{tony}:
+    customer_{tony, oliver}:
         firstName: "<current()>"
         lastName: "Jones"
         email: "<current()>\\@example.com"

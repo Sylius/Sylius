@@ -1,0 +1,12 @@
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }} >
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    <div class="row">
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
+
+        {% hook 'form' with { form } %}
+    </div>
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(true)}) }}
+</div>

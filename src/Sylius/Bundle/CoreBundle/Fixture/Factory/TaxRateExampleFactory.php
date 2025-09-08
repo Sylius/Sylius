@@ -25,11 +25,12 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<TaxRateInterface> */
 class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<TaxRateInterface> $taxRateFactory
@@ -37,9 +38,9 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
      */
     public function __construct(
-        private FactoryInterface $taxRateFactory,
-        private RepositoryInterface $zoneRepository,
-        private RepositoryInterface $taxCategoryRepository,
+        protected readonly FactoryInterface $taxRateFactory,
+        protected readonly RepositoryInterface $zoneRepository,
+        protected readonly RepositoryInterface $taxCategoryRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -69,12 +70,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $resolver
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('name', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('amount', fn (Options $options): float => $this->faker->randomFloat(2, 0, 0.4))
             ->setAllowedTypes('amount', 'float')
             ->setDefault('included_in_price', fn (Options $options): bool => $this->faker->boolean())

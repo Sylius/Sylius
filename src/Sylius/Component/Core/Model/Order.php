@@ -80,14 +80,8 @@ class Order extends BaseOrder implements OrderInterface
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, PaymentInterface> $this->payments */
         $this->payments = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ShipmentInterface> $this->shipments */
         $this->shipments = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, BasePromotionInterface> $this->promotions */
         $this->promotions = new ArrayCollection();
     }
 
@@ -98,7 +92,7 @@ class Order extends BaseOrder implements OrderInterface
 
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
-        Assert::nullOrisInstanceOf($customer, CustomerInterface::class);
+        Assert::nullOrIsInstanceOf($customer, CustomerInterface::class);
 
         $this->customer = $customer;
     }
@@ -506,27 +500,5 @@ class Order extends BaseOrder implements OrderInterface
     public function isCreatedByGuest(): bool
     {
         return $this->createdByGuest;
-    }
-
-    public function getCreatedByGuest(): bool
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.12',
-            'This method is deprecated and it will be removed in Sylius 2.0. Please use `isCreatedByGuest` instead.',
-        );
-
-        return $this->isCreatedByGuest();
-    }
-
-    public function setCreatedByGuest(bool $createdByGuest): void
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.12',
-            'This method is deprecated and it will be removed in Sylius 2.0. This flag should be changed only through `setCustomerWithAuthorization` method.',
-        );
-
-        $this->createdByGuest = $createdByGuest;
     }
 }

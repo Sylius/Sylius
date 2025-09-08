@@ -20,12 +20,13 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<CatalogPromotionActionInterface> */
 final class CatalogPromotionActionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /** @param FactoryInterface<CatalogPromotionActionInterface> $catalogPromotionActionFactory */
-    public function __construct(private FactoryInterface $catalogPromotionActionFactory)
+    public function __construct(protected readonly FactoryInterface $catalogPromotionActionFactory)
     {
         $this->optionsResolver = new OptionsResolver();
 
@@ -58,7 +59,7 @@ final class CatalogPromotionActionExampleFactory extends AbstractExampleFactory 
 
                 foreach ($configuration as $channelCode => $channelConfiguration) {
                     if (isset($channelConfiguration['amount'])) {
-                        $configuration[$channelCode]['amount'] = (int) ($configuration[$channelCode]['amount'] * 100);
+                        $configuration[$channelCode]['amount'] = (int) ($channelConfiguration['amount'] * 100);
                     }
                 }
 

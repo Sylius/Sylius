@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ShopUserNotVerified extends Constraint
 {
     public string $message = 'sylius.account.is_verified';

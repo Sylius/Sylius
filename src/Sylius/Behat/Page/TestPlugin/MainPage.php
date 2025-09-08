@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\TestPlugin;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-final class MainPage extends SymfonyPage implements MainPageInterface
+class MainPage extends SymfonyPage implements MainPageInterface
 {
     public function getContent(): string
     {

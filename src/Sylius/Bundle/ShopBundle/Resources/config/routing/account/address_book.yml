@@ -8,7 +8,7 @@ sylius_shop_account_address_book_index:
         _controller: sylius.controller.address::indexAction
         _sylius:
             section: shop_account
-            template: "@SyliusShop/Account/AddressBook/index.html.twig"
+            template: "@SyliusShop/account/address_book/index.html.twig"
             paginate: false
             repository:
                 method: findByCustomer
@@ -21,8 +21,10 @@ sylius_shop_account_address_book_create:
     defaults:
         _controller: sylius.controller.address::createAction
         _sylius:
+            form:
+                type: Sylius\Bundle\ShopBundle\Form\Type\AddressType
             section: shop_account
-            template: "@SyliusShop/Account/AddressBook/create.html.twig"
+            template: "@SyliusShop/account/address_book/create.html.twig"
             factory:
                 method: createForCustomer
                 arguments:
@@ -38,8 +40,10 @@ sylius_shop_account_address_book_update:
     defaults:
         _controller: sylius.controller.address::updateAction
         _sylius:
+            form:
+                type: Sylius\Bundle\ShopBundle\Form\Type\AddressType
             section: shop_account
-            template: "@SyliusShop/Account/AddressBook/update.html.twig"
+            template: "@SyliusShop/account/address_book/update.html.twig"
             repository:
                 method: findOneByCustomer
                 arguments:
@@ -70,9 +74,8 @@ sylius_shop_account_address_book_set_as_default:
         _controller: sylius.controller.customer::updateAction
         _sylius:
             section: shop_account
-            template: "@SyliusShop/Account/AddressBook/_defaultAddressForm.html.twig"
             form:
-                type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerDefaultAddressType
+                type: Sylius\Bundle\ShopBundle\Form\Type\CustomerDefaultAddressType
                 options:
                     customer: "expr:service('sylius.context.customer').getCustomer()"
             repository:

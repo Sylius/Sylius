@@ -20,7 +20,7 @@ interface IndexPageInterface extends SymfonyPageInterface
 {
     public function countOrders(): int;
 
-    public function changePaymentMethod(OrderInterface $order);
+    public function changePaymentMethod(OrderInterface $order): void;
 
     public function hasFlashMessage(string $message): bool;
 

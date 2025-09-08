@@ -1,0 +1,13 @@
+{% if hookable_metadata.context.locale_code is defined %}
+    {% set locale_code = hookable_metadata.context.locale_code %}
+    {% set loop = hookable_metadata.context.loop %}
+
+<button class="accordion-button{% if not loop.first %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#translation-{{ locale_code }}-attributes" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="translation-{{ locale_code }}">
+    <span>
+        {{ locale_code|sylius_locale_name }}
+    </span>
+    <span class="accordion-button-toggle">
+        {{ ux_icon('tabler:chevron-down') }}
+    </span>
+</button>
+{% endif %}

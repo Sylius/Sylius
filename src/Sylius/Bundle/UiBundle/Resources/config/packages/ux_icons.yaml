@@ -1,0 +1,4 @@
+ux_icons:
+    default_icon_attributes:
+        'class': 'icon'
+    ignore_not_found: true

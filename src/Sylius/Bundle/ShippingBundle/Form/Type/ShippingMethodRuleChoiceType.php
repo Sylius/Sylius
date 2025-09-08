@@ -27,6 +27,7 @@ final class ShippingMethodRuleChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => array_flip($this->rules),
+            'placeholder' => 'sylius.form.shipping_method_rule.select',
         ]);
     }
 

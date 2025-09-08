@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
-use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
+use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -33,7 +33,7 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$this->isMainRequest($event)) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
@@ -56,16 +56,6 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
         if ($this->filterStorage->all() !== $eventRequest->query->all()) {
             $this->filterStorage->set($eventRequest->query->all());
         }
-    }
-
-    private function isMainRequest(RequestEvent $event): bool
-    {
-        if (\method_exists($event, 'isMainRequest')) {
-            return $event->isMainRequest();
-        }
-
-        /** @phpstan-ignore-next-line */
-        return $event->isMasterRequest();
     }
 
     private function isIndexResourceRoute(string $route): bool

@@ -1,0 +1,41 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductImage",
+    "@id": "\/api\/v2\/shop\/products\/MUG\/images",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 2,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/products\/MUG\/images\/@integer@",
+            "@type": "ProductImage",
+            "id": "@integer@",
+            "type": "thumbnail",
+            "path": "https:\/\/localhost\/media\/cache\/resolve\/sylius_original\/uo\/thumbnail.jpg"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/products\/MUG\/images\/@integer@",
+            "@type": "ProductImage",
+            "id": "@integer@",
+            "type": "main",
+            "path": "https:\/\/localhost\/media\/cache\/resolve\/sylius_original\/uo\/main.jpg"
+        }
+    ],
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/products\/MUG\/images{?type,type[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "type",
+                "property": "type",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "type[]",
+                "property": "type",
+                "required": false
+            }
+        ]
+    }
+}

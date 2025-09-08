@@ -48,12 +48,22 @@ class RoboFile extends Tasks
     private function processPackagePipeline(string $package): ?Result
     {
         $symfonyVersion = getenv('SYMFONY_VERSION');
-        $useSwiftmailer = getenv('USE_SWIFTMAILER');
+        $doctrineORMVersion = getenv('DOCTRINE_ORM_VERSION');
         $unstable = getenv('UNSTABLE');
         $packagePath = sprintf('%s/src/Sylius/%s', self::ROOT_DIR, $package);
+        $composerJsonPath = sprintf('%s/composer.json', $packagePath);
+        $requiresDoctrineORM = false;
 
         if (false === $symfonyVersion) {
             throw new RuntimeException('SYMFONY_VERSION environment variable is not set.');
+        }
+
+        if (false === $doctrineORMVersion) {
+            throw new RuntimeException('DOCTRINE_ORM_VERSION environment variable is not set.');
+        }
+
+        if (!file_exists($composerJsonPath)) {
+            throw new RuntimeException('composer.json file does not exist.');
         }
 
         $task = $this->taskExecStack()
@@ -62,16 +72,27 @@ class RoboFile extends Tasks
             ->exec(sprintf('composer config extra.symfony.require "%s"', $symfonyVersion))
         ;
 
-        if (self::YES === $useSwiftmailer) {
-            $task
-                ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "sylius/mailer-bundle:^1.8"')
-                ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "symfony/swiftmailer-bundle:^3.4"')
-            ;
-        }
-
         if (self::YES === $unstable) {
             $task->exec('composer config minimum-stability dev');
-            $task->exec('composer config prefer-stable false');
+            $task->exec('composer config prefer-stable true');
+        }
+
+        $composerData = json_decode(file_get_contents($composerJsonPath), true);
+        $require = $composerData['require'] ?? [];
+        $requireDev = $composerData['require-dev'] ?? [];
+
+        $existsOnRequire = array_key_exists('doctrine/orm', $require);
+        $existsOnRequireDev = array_key_exists('doctrine/orm', $requireDev);
+
+        $requiresDoctrineORM = $existsOnRequire || $existsOnRequireDev;
+
+        if ('' !== $doctrineORMVersion && $requiresDoctrineORM) {
+            $task
+                ->exec(sprintf(
+                    'composer require %s doctrine/orm "%s" --no-update --no-scripts --no-interaction',
+                    $existsOnRequireDev ? '--dev' : '',
+                    $doctrineORMVersion,
+                ));
         }
 
         $task
@@ -80,20 +101,12 @@ class RoboFile extends Tasks
         ;
 
         if (in_array($package, ['Bundle/AdminBundle', 'Bundle/ApiBundle', 'Bundle/CoreBundle'])) {
-            $this->createTestAssets(sprintf('%s/Tests/Application', $packagePath));
+            $this->createTestAssets(sprintf('%s/tests/Application', $packagePath));
             $this->createTestAssets(sprintf('%s/test', $packagePath)); // Remove after all test apps have been moved
         }
 
         if ('Bundle/ApiBundle' === $package) {
-            $task->exec('Tests/Application/bin/console doctrine:schema:update --force');
-        }
-
-        if (false === str_starts_with($symfonyVersion, '^5.4') && 'Bundle/UserBundle' === $package) {
-            $task->exec('rm spec/Security/UserPasswordEncoderSpec.php');
-        }
-
-        if (file_exists(sprintf('%s/phpspec.yml', $packagePath)) || file_exists(sprintf('%s/phpspec.yml.dist', $packagePath)) || file_exists(sprintf('%s/phpspec.yaml', $packagePath))) {
-            $task->exec('vendor/bin/phpspec run --ansi --no-interaction -f dot');
+            $task->exec('tests/Application/bin/console doctrine:schema:update --force');
         }
 
         if (file_exists(sprintf('%s/phpunit.xml', $packagePath)) || file_exists(sprintf('%s/phpunit.xml.dist', $packagePath))) {
