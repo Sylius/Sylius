@@ -12,11 +12,11 @@ Feature: Preventing placing an order with a disabled payment method when in chec
         And I am a logged in customer
 
     @ui @api
-    Scenario: Being prevented from placing an order with a payment method that's has been disabled for the customer's country after completing the shipping method choice step
+    Scenario: Being prevented from placing an order with a payment method that's has been disabled for Channel after completing the shipping method choice step - UI
         Given I added product "Ubi T-Shirt" to the cart
         And I have proceeded through checkout process with "Free" shipping method
         And I have proceeded selecting "Bank Transfer" payment method
-        But this payment method has been disabled
+        But the store has disabled "Bank Transfer" payment method in Channel "US Web Store"
         When I try to confirm my order
         Then I should be informed that this payment method has been disabled
         And I should not see the thank you page
