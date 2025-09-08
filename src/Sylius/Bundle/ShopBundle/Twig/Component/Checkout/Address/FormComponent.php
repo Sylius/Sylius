@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address;
 
+use ArrayObject;
+use Sylius\Bundle\ShopBundle\Event\CheckoutAddressUpdatedEvent;
+use Sylius\Bundle\ShopBundle\ShopEvents;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -21,6 +24,7 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -52,8 +56,18 @@ class FormComponent
         protected readonly CustomerContextInterface $customerContext,
         protected readonly UserRepositoryInterface $shopUserRepository,
         protected readonly AddressRepositoryInterface $addressRepository,
+        protected readonly ?EventDispatcherInterface $eventDispatcher = null,
     ) {
         $this->initialize($repository, $formFactory, $resourceClass, $formClass);
+
+        if (null === $this->eventDispatcher) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '2.2',
+                'Not passing an $eventDispatcher to the constructor of %s is deprecated and will be required in Sylius 3.0.',
+                self::class,
+            );
+        }
     }
 
     #[PreReRender(priority: -100)]
@@ -86,7 +100,14 @@ class FormComponent
         $newAddress['city'] = $address->getCity();
         $newAddress['postcode'] = $address->getPostcode();
 
-        $this->formValues[$field] = $newAddress;
+        $formData = new ArrayObject($newAddress);
+
+        $this->eventDispatcher?->dispatch(
+            new CheckoutAddressUpdatedEvent($formData, $address),
+            ShopEvents::CHECKOUT_ADDRESS_UPDATED,
+        );
+
+        $this->formValues[$field] = (array) $formData;
     }
 
     protected function instantiateForm(): FormInterface
