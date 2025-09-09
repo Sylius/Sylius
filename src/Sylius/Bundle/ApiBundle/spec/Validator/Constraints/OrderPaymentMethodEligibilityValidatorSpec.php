@@ -85,7 +85,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_adds_violation_if_payment_is_not_available_anymore(
+    function it_adds_violation_if_payment_is_not_available_globally(
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
         PaymentInterface $payment,
@@ -111,6 +111,82 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $paymentMethod->isEnabled()->willReturn(false);
         $paymentMethod->hasChannel($channel)->willReturn(true);
+
+        $executionContext
+            ->addViolation(
+                'sylius.order.payment_method_eligibility',
+                ['%paymentMethodName%' => 'bank transfer'],
+            )
+            ->shouldBeCalled()
+        ;
+
+        $this->validate($value, $constraint);
+    }
+
+    function it_adds_violation_if_payment_is_not_available_in_channel(
+        OrderRepositoryInterface $orderRepository,
+        OrderInterface $order,
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod,
+        ExecutionContextInterface $executionContext,
+        ChannelInterface $channel,
+    ): void {
+        $this->initialize($executionContext);
+
+        $constraint = new OrderPaymentMethodEligibility();
+
+        $value = new CompleteOrder();
+        $value->setOrderTokenValue('token');
+
+        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
+
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
+        $order->getchannel()->willReturn($channel);
+
+        $payment->getMethod()->willReturn($paymentMethod);
+
+        $paymentMethod->getName()->willReturn('bank transfer');
+
+        $paymentMethod->isEnabled()->willReturn(true);
+        $paymentMethod->hasChannel($channel)->willReturn(false);
+
+        $executionContext
+            ->addViolation(
+                'sylius.order.payment_method_eligibility',
+                ['%paymentMethodName%' => 'bank transfer'],
+            )
+            ->shouldBeCalled()
+        ;
+
+        $this->validate($value, $constraint);
+    }
+
+    function it_adds_violation_if_payment_is_not_available_in_channel_and_globally(
+        OrderRepositoryInterface $orderRepository,
+        OrderInterface $order,
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod,
+        ExecutionContextInterface $executionContext,
+        ChannelInterface $channel,
+    ): void {
+        $this->initialize($executionContext);
+
+        $constraint = new OrderPaymentMethodEligibility();
+
+        $value = new CompleteOrder();
+        $value->setOrderTokenValue('token');
+
+        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
+
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
+        $order->getchannel()->willReturn($channel);
+
+        $payment->getMethod()->willReturn($paymentMethod);
+
+        $paymentMethod->getName()->willReturn('bank transfer');
+
+        $paymentMethod->isEnabled()->willReturn(false);
+        $paymentMethod->hasChannel($channel)->willReturn(false);
 
         $executionContext
             ->addViolation(
