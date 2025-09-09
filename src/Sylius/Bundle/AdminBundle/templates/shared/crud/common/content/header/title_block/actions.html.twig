@@ -4,7 +4,7 @@
     <div class="btn-list">
         {% hook 'actions' %}
         {% if resources.definition.actionGroups.main is defined %}
-            {% for action in resources.definition.getEnabledActions('main') %}
+            {% for action in resources.definition.getEnabledActions('main')|sylius_sort_by('position') %}
                 {{ sylius_grid_render_action(resources, action, null) }}
             {% endfor %}
         {% endif %}

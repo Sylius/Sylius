@@ -65,16 +65,19 @@ class UserDropdownComponent
                 'title' => 'sylius.ui.documentation',
                 'url' => 'https://docs.sylius.com',
                 'class' => 'small text-muted',
+                'attributes' => [ 'target' => '_blank', 'rel' => 'noopener' ],
             ],
             [
                 'title' => 'sylius.ui.join_slack',
                 'url' => 'https://sylius.com/slack',
                 'class' => 'small text-muted',
+                'attributes' => [ 'target' => '_blank', 'rel' => 'noopener' ],
             ],
             [
                 'title' => 'sylius.ui.report_an_issue',
                 'url' => 'https://github.com/Sylius/Sylius/issues',
                 'class' => 'small text-muted',
+                'attributes' => [ 'target' => '_blank', 'rel' => 'noopener' ],
             ],
         ];
     }

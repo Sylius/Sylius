@@ -2,7 +2,7 @@
 
 {% if channels|length == 1 %}
     {% set channel = channels|first %}
-    <a class="" href="{{ sylius_channel_url(homepage_path, channel) }}">
+    <a class="" href="{{ sylius_channel_url(homepage_path, channel) }}" target="_blank" rel="noopener">
         <span data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.view_your_store'|trans }}" data-bs-placement="right">
             {{ ux_icon('tabler:arrow-up-right') }}
         </span>
@@ -16,7 +16,7 @@
         </div>
         <ul class="dropdown-menu dropdown-menu-sm-end">
             {% for channel in channels %}
-                <li><a class="dropdown-item" href="{{ sylius_channel_url(homepage_path, channel) }}">{{ channel.name }}</a></li>
+                <li><a class="dropdown-item" href="{{ sylius_channel_url(homepage_path, channel) }}" target="_blank" rel="noopener">{{ channel.name }}</a></li>
             {% endfor %}
         </ul>
     </div>
