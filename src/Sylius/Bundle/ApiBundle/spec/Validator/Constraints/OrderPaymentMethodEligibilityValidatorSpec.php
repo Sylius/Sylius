@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -90,6 +91,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
         ExecutionContextInterface $executionContext,
+        ChannelInterface $channel,
     ): void {
         $this->initialize($executionContext);
 
@@ -101,12 +103,14 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
         $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
+        $order->getchannel()->willReturn($channel);
 
         $payment->getMethod()->willReturn($paymentMethod);
 
         $paymentMethod->getName()->willReturn('bank transfer');
 
         $paymentMethod->isEnabled()->willReturn(false);
+        $paymentMethod->hasChannel($channel)->willReturn(true);
 
         $executionContext
             ->addViolation(
@@ -125,22 +129,27 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
         ExecutionContextInterface $executionContext,
+        ChannelInterface $channel,
     ): void {
         $this->initialize($executionContext);
 
         $constraint = new OrderPaymentMethodEligibility();
 
         $value = new CompleteOrder();
+
         $value->setOrderTokenValue('token');
+
 
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
         $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
+        $order->getchannel()->willReturn($channel);
 
         $payment->getMethod()->willReturn($paymentMethod);
 
         $paymentMethod->getName()->willReturn('bank transfer');
         $paymentMethod->isEnabled()->willReturn(true);
+        $paymentMethod->hasChannel($channel)->willReturn(true);
 
         $executionContext
             ->addViolation(
