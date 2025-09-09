@@ -185,9 +185,9 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store has disabled :paymentMethodName payment method in Channel :channelName
+     * @Given the store has disabled :paymentMethodName payment method in Channel :channel
      */
-    public function theStoreHasDisabledPaymentMethodInChannel($paymentMethodName, $channelName)
+    public function theStoreHasDisabledPaymentMethodInChannel($paymentMethodName, ChannelInterface $channel)
     {
         $paymentMethods = $this->paymentMethodRepository->findByName($paymentMethodName, 'en_US');
 
@@ -197,11 +197,6 @@ final class PaymentContext implements Context
 
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentMethods[0];
-
-        $channel = $this->sharedStorage->get('channel');
-        if ($channel->getName() !== $channelName) {
-            throw new \InvalidArgumentException(sprintf('Expected channel "%s" but got "%s".', $channelName, $channel->getName()));
-        }
 
         $paymentMethod->removeChannel($channel);
 
