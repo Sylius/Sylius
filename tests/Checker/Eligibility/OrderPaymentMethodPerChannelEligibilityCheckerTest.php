@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Payment\Checker\OrderPaymentMethodPerChannelEligibilityChecker;
 
-class OrderPaymentMethodPerChannelEligibilityCheckerTest extends TestCase
+final class OrderPaymentMethodPerChannelEligibilityCheckerTest extends TestCase
 {
     /** @var ChannelContextInterface&MockObject */
     private ChannelContextInterface $channelContext;
