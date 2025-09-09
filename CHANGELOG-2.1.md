@@ -1,5 +1,45 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.5 (2025-09-09)
+
+#### Details
+
+- [#18293](https://github.com/Sylius/Sylius/pull/18293) Revert "[Fixtures] Make factory example constructor arguments protected" ([@GSadee](https://github.com/GSadee))
+- [#18286](https://github.com/Sylius/Sylius/pull/18286) [Shop] Image/File Uploud Buttons Size Fix ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#18263](https://github.com/Sylius/Sylius/pull/18263) fix ([@maximehuran](https://github.com/maximehuran))
+- [#18290](https://github.com/Sylius/Sylius/pull/18290) [CS][DX] Refactor
+- [#18296](https://github.com/Sylius/Sylius/pull/18296) [Admin][Product] Fix not blank product code constraint message ([@SVillette](https://github.com/SVillette))
+- [#18287](https://github.com/Sylius/Sylius/pull/18287) [CS][DX] Refactor
+- [#18288](https://github.com/Sylius/Sylius/pull/18288) [CS][DX] Refactor
+- [#18291](https://github.com/Sylius/Sylius/pull/18291) [DOCUMENTATION] Synchronize 2.0-docs -> 2.0 ([@SyliusBot](https://github.com/SyliusBot))
+- [#18302](https://github.com/Sylius/Sylius/pull/18302) [Composer][1.14] More specific confflict with serializer ([@Jibbarth](https://github.com/Jibbarth))
+- [#18309](https://github.com/Sylius/Sylius/pull/18309) Add conflict to symfony-ux ^2.29 ([@TheMilek](https://github.com/TheMilek))
+- [#18182](https://github.com/Sylius/Sylius/pull/18182) [2.0] Dutch translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18303](https://github.com/Sylius/Sylius/pull/18303) [Promotion] Corrects order of amounts to apply correct promotion amount ([@k-kubacki](https://github.com/k-kubacki))
+- [#16791](https://github.com/Sylius/Sylius/pull/16791) [Behat] Display API Errors Along With The Step Where The Error Occurred ([@Rafikooo](https://github.com/Rafikooo))
+- [#18272](https://github.com/Sylius/Sylius/pull/18272) Fix headless channel theme issue by relocating twig hooks config and template to ShopBundle ([@k-kubacki](https://github.com/k-kubacki))
+- [#18315](https://github.com/Sylius/Sylius/pull/18315) [CS][DX] Refactor
+- [#18317](https://github.com/Sylius/Sylius/pull/18317) Adding the isEnabled filter to the countries list in checkout while addressing ([@TheMilek](https://github.com/TheMilek))
+- [#18318](https://github.com/Sylius/Sylius/pull/18318) Select product attribute render error fix ([@k-kubacki](https://github.com/k-kubacki))
+- [#18323](https://github.com/Sylius/Sylius/pull/18323) Add nameToProductCode method to StringInflector ([@k-kubacki](https://github.com/k-kubacki))
+- [#18327](https://github.com/Sylius/Sylius/pull/18327) refs #18326 Add CSS Class in side barre search ([@macintoshplus](https://github.com/macintoshplus))
+- [#18329](https://github.com/Sylius/Sylius/pull/18329) [CS][DX] Refactor
+- [#18320](https://github.com/Sylius/Sylius/pull/18320) [CS][DX] Refactor
+- [#18321](https://github.com/Sylius/Sylius/pull/18321) Use form-select css class for address_book dropdownlist ([@hteumeuleu](https://github.com/hteumeuleu))
+- [#18322](https://github.com/Sylius/Sylius/pull/18322) Fix asset path for SyliusUiBundle placeholder images ([@k-kubacki](https://github.com/k-kubacki))
+- [#18330](https://github.com/Sylius/Sylius/pull/18330) [CS][DX] Refactor
+- [#18339](https://github.com/Sylius/Sylius/pull/18339) Fixed placing order with not possible zone ([@pbalcerzak](https://github.com/pbalcerzak))
+- [#18343](https://github.com/Sylius/Sylius/pull/18343) [Fix][Admin] Fix order summary to show product name and options from time of purchase ([@tomkalon](https://github.com/tomkalon))
+- [#18345](https://github.com/Sylius/Sylius/pull/18345) Fix argument of ZoneEligibilityChecker to use the new service id ([@GSadee](https://github.com/GSadee))
+- [#18342](https://github.com/Sylius/Sylius/pull/18342) FEAT: [AdminBundle] Open shop preview and nessecary  user dropdown links in new tab ([@crydotsnake](https://github.com/crydotsnake))
+- [#18350](https://github.com/Sylius/Sylius/pull/18350) [CS][DX] Refactor
+- [#18351](https://github.com/Sylius/Sylius/pull/18351) [CS][DX] Refactor
+- [#18316](https://github.com/Sylius/Sylius/pull/18316) sort main and bulk actions by position ([@Florian-Merle](https://github.com/Florian-Merle))
+- [#18331](https://github.com/Sylius/Sylius/pull/18331) [CONFLICT][UX] Fix composer conflict for symfony/ux-live-component and mark flaky test as failing ([@tomkalon](https://github.com/tomkalon))
+- [#18352](https://github.com/Sylius/Sylius/pull/18352) [API] Add variantName serialization groups to OrderItem configuration ([@tomkalon](https://github.com/tomkalon))
+- [#17705](https://github.com/Sylius/Sylius/pull/17705) Fix deleting a value from an existing select product attribute while it's in use ([@coldic3](https://github.com/coldic3))
+- [#18359](https://github.com/Sylius/Sylius/pull/18359) [DOCS] Document new API changes for version 2.1.5 ([@tomkalon](https://github.com/tomkalon))
+
 ## v2.1.4 (2025-07-31)
 
 #### Details
