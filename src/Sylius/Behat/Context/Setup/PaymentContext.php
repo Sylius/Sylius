@@ -185,24 +185,15 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store has disabled :paymentMethodName payment method in Channel :channel
+     * @Given the store has disabled :paymentMethod payment method in Channel :channel
      */
-    public function theStoreHasDisabledPaymentMethodInChannel($paymentMethodName, ChannelInterface $channel)
+    public function theStoreHasDisabledPaymentMethodInChannel($paymentMethod, ChannelInterface $channel)
     {
-        $paymentMethods = $this->paymentMethodRepository->findByName($paymentMethodName, 'en_US');
-
-        if (empty($paymentMethods)) {
-            throw new \InvalidArgumentException(sprintf('Payment method "%s" does not exist.', $paymentMethodName));
-        }
 
         /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $paymentMethods[0];
-
         $paymentMethod->removeChannel($channel);
 
         $this->paymentMethodManager->flush();
-
-        $this->sharedStorage->set('disabled_payment_method', $paymentMethod);
     }
 
     /**

@@ -1,8 +1,8 @@
 @checkout
-Feature: Preventing placing an order with a disabled payment method when in checkout complete step
+Feature: Preventing placing an order with a payment method not available in channel
     In order to have my order shipped without issues
-    As a Customer
-    I want to be prevented from placing an order with a disabled shipping method
+    As a Visitor
+    I want to be prevented from placing an order with a payment method not available in my channel
 
     Background:
         Given the store operates on a single channel in the "United States" named "US Web Store"
@@ -12,7 +12,7 @@ Feature: Preventing placing an order with a disabled payment method when in chec
         And I am a logged in customer
 
     @ui @api
-    Scenario: Being prevented from placing an order with a payment method that's has been disabled for Channel after completing the shipping method choice step
+    Scenario: Being prevented from placing an order with a payment method that is not available in my channel
         Given I added product "Ubi T-Shirt" to the cart
         And I have proceeded through checkout process with "Free" shipping method
         And I have proceeded selecting "Bank Transfer" payment method
@@ -22,7 +22,7 @@ Feature: Preventing placing an order with a disabled payment method when in chec
         And I should not see the thank you page
 
     @ui @api
-    Scenario: Being prevented from placing an order with a payment method that's has been disabled globally after completing the shipping method choice step
+    Scenario: Being prevented from placing an order with a payment method that is disabled
         Given I added product "Ubi T-Shirt" to the cart
         And I have proceeded through checkout process with "Free" shipping method
         And I have proceeded selecting "Bank Transfer" payment method
@@ -32,7 +32,7 @@ Feature: Preventing placing an order with a disabled payment method when in chec
         And I should not see the thank you page
 
     @ui @api
-    Scenario: Being prevented from placing an order with a payment method that's has been disabled globally and for Channel after completing the shipping method choice step
+    Scenario: Being prevented from placing an order with a payment method that is disabled and not available in my channel
         Given I added product "Ubi T-Shirt" to the cart
         And I have proceeded through checkout process with "Free" shipping method
         And I have proceeded selecting "Bank Transfer" payment method
@@ -43,7 +43,7 @@ Feature: Preventing placing an order with a disabled payment method when in chec
         And I should not see the thank you page
 
     @ui @api
-    Scenario: Being able placing an order with a payment method that's has been not disabled globally and/or for Channel after completing the shipping method choice step
+    Scenario: Being able to place an order with enabled payment method in my channel
         Given I added product "Ubi T-Shirt" to the cart
         And I have proceeded through checkout process with "Free" shipping method
         And I have proceeded selecting "Bank Transfer" payment method
