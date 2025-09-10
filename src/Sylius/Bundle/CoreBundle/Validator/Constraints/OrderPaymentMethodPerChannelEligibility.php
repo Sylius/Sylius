@@ -21,7 +21,6 @@ final class OrderPaymentMethodPerChannelEligibility extends Constraint
 
     public function validatedBy(): string
     {
-        // Must match the alias from services (validators.xml)
         return 'sylius_order_payment_method_per_channel_eligibility_validator';
     }
 
