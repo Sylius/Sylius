@@ -42,7 +42,7 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 
         foreach ($payments as $payment) {
             $paymentMethod = $payment->getMethod();
-            if ($paymentMethod instanceof PaymentMethodInterface && !$this->checker->isEligible($paymentMethod) ) {
+            if ($paymentMethod instanceof PaymentMethodInterface && !$this->checker->isEligible($paymentMethod)) {
                 $this->context->addViolation(
                     $constraint->message,
                     ['%paymentMethodName%' => $paymentMethod->getName()],

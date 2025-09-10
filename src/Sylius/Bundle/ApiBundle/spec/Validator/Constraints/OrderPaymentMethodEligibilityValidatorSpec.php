@@ -215,7 +215,6 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $value->setOrderTokenValue('token');
 
-
         $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
 
         $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));

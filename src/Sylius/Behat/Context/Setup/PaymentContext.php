@@ -189,7 +189,6 @@ final class PaymentContext implements Context
      */
     public function theStoreHasDisabledPaymentMethodInChannel($paymentMethod, ChannelInterface $channel)
     {
-
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod->removeChannel($channel);
 
