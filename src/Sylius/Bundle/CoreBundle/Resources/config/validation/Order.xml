@@ -28,9 +28,8 @@
                 <value>sylius_checkout_complete</value>
             </option>
         </constraint>
-        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodPerChannelEligibility">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEnabledInChannelEligibility">
             <option name="groups">
-                <value>sylius</value>
                 <value>sylius_checkout_complete</value>
             </option>
         </constraint>

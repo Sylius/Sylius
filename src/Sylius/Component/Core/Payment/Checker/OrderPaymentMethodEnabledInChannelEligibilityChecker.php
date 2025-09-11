@@ -17,7 +17,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-class OrderPaymentMethodPerChannelEligibilityChecker implements OrderPaymentMethodPerChannelEligibilityCheckerInterface
+class OrderPaymentMethodEnabledInChannelEligibilityChecker implements OrderPaymentMethodEnabledInChannelEligibilityCheckerInterface
 {
     public function __construct(private readonly ChannelContextInterface $channelContext)
     {

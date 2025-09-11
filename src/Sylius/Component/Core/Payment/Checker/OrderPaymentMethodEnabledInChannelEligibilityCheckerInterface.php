@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Payment\Checker;
 
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-interface OrderPaymentMethodPerChannelEligibilityCheckerInterface
+interface OrderPaymentMethodEnabledInChannelEligibilityCheckerInterface
 {
     public function isEligible(?PaymentMethodInterface $paymentMethod): bool;
 }

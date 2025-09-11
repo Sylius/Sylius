@@ -41,7 +41,7 @@
         >
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-        <service id="sylius.checker.order_payment_method_per_channel_eligibility" class="Sylius\Component\Core\Payment\Checker\OrderPaymentMethodPerChannelEligibilityChecker">
+        <service id="sylius.checker.order_payment_method_enabled_in_channel_eligibility" class="Sylius\Component\Core\Payment\Checker\OrderPaymentMethodEnabledInChannelEligibilityChecker">
             <argument type="service" id="sylius.context.channel" />
         </service>
         <service id="sylius.checker.promotion_coupon.channel_eligibility" alias="sylius.promotion_coupon_channels_eligibility_checker" />

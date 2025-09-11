@@ -15,13 +15,13 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class OrderPaymentMethodPerChannelEligibility extends Constraint
+final class OrderPaymentMethodEnabledInChannelEligibility extends Constraint
 {
     public string $message = 'sylius.order.payment_method_eligibility';
 
     public function validatedBy(): string
     {
-        return 'sylius_order_payment_method_per_channel_eligibility_validator';
+        return 'sylius_order_payment_method_enabled_in_channel_eligibility_validator';
     }
 
     public function getTargets(): string

@@ -19,20 +19,20 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Payment\Checker\OrderPaymentMethodPerChannelEligibilityChecker;
+use Sylius\Component\Core\Payment\Checker\OrderPaymentMethodEnabledInChannelEligibilityChecker;
 
-final class OrderPaymentMethodPerChannelEligibilityCheckerTest extends TestCase
+final class OrderPaymentMethodEnabledInChannelEligibilityCheckerTest extends TestCase
 {
     /** @var ChannelContextInterface&MockObject */
     private ChannelContextInterface $channelContext;
 
-    private OrderPaymentMethodPerChannelEligibilityChecker $checker;
+    private OrderPaymentMethodEnabledInChannelEligibilityChecker $checker;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->channelContext = $this->createMock(ChannelContextInterface::class);
-        $this->checker = new OrderPaymentMethodPerChannelEligibilityChecker($this->channelContext);
+        $this->checker = new OrderPaymentMethodEnabledInChannelEligibilityChecker($this->channelContext);
     }
 
     public function test_it_returns_false_when_channel_is_not_found(): void

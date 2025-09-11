@@ -15,15 +15,15 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Payment\Checker\OrderPaymentMethodPerChannelEligibilityCheckerInterface;
+use Sylius\Component\Core\Payment\Checker\OrderPaymentMethodEnabledInChannelEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class OrderPaymentMethodPerChannelEligibilityValidator extends ConstraintValidator
+final class OrderPaymentMethodEnabledInChannelEligibilityValidator extends ConstraintValidator
 {
     public function __construct(
-        private readonly OrderPaymentMethodPerChannelEligibilityCheckerInterface $perChannelChecker,
+        private readonly OrderPaymentMethodEnabledInChannelEligibilityCheckerInterface $perChannelChecker,
     ) {
     }
 
@@ -35,8 +35,8 @@ final class OrderPaymentMethodPerChannelEligibilityValidator extends ConstraintV
         /** @var OrderInterface $value */
         Assert::isInstanceOf($value, OrderInterface::class);
 
-        /** @var OrderPaymentMethodPerChannelEligibility $constraint */
-        Assert::isInstanceOf($constraint, OrderPaymentMethodPerChannelEligibility::class);
+        /** @var OrderPaymentMethodEnabledInChannelEligibility $constraint */
+        Assert::isInstanceOf($constraint, OrderPaymentMethodEnabledInChannelEligibility::class);
 
         $payments = $value->getPayments();
 
