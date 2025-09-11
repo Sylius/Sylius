@@ -4,6 +4,12 @@ By default, Sylius uses localised URLs, meaning that they contain the `/locale` 
 
 If you prefer to use URLs without the locale prefix, you can disable this feature by following these steps.
 
+### ⚠️ Compatibility Note
+
+{% hint style="danger" %}
+This guide applies **only to Sylius 2.1.3 and later**. If your application uses an earlier version (e.g., 2.0.x), you must first upgrade to at least Sylius 2.1.3.
+{% endhint %}
+
 ***
 
 ## 1. Update the Routing Configuration
