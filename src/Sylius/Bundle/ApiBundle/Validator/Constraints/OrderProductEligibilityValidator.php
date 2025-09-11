@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -46,6 +47,12 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
         /** @var OrderItemInterface[] $orderItems */
         $orderItems = $order->getItems();
 
+        /** @var ChannelInterface|null $channel */
+        $channel = $order->getChannel();
+        if (null === $channel) {
+            return;
+        }
+
         foreach ($orderItems as $orderItem) {
             if (!$orderItem->getVariant()->isEnabled()) {
                 $this->context->addViolation(
@@ -53,6 +60,11 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
                     ['%productName%' => $orderItem->getVariant()->getName()],
                 );
             } elseif (!$orderItem->getProduct()->isEnabled()) {
+                $this->context->addViolation(
+                    $constraint->message,
+                    ['%productName%' => $orderItem->getProduct()->getName()],
+                );
+            } elseif (!$orderItem->getProduct()->hasChannel($channel)) {
                 $this->context->addViolation(
                     $constraint->message,
                     ['%productName%' => $orderItem->getProduct()->getName()],
