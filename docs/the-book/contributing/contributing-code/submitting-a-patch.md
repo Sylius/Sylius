@@ -43,17 +43,17 @@ New to Git? Check out the free [_ProGit_](http://git-scm.com/book) book for guid
 ## Step 2: Develop Your Patch
 
 1. **Choose the Base Branch**
-   * **1.14** for bug fixes or minor changes.
-   * **2.0** for new features.
+   * **1.14/2.1** for bug fixes or minor changes.
+   * **2.2** for new features.
 2.  **Create a Topic Branch**
 
     *   Start your work on a dedicated branch, based on the chosen branch:
 
         ```bash
-        git switch upstream/2.0 -c feature_branch
+        git switch upstream/2.2 -c feature_branch
         ```
 
-    **Tip**: Use descriptive names for branches (e.g., `issue_123` for a fix related to issue #123).
+    **Tip**: Use descriptive names for branches (e.g., `issue-123` for a fix related to issue #123).
 3. **Develop Your Patch**
    * Follow **BDD** and **coding standards** (check for trailing spaces with `git diff --check`).
    * Keep commits **atomic** and **logically organized**.
@@ -70,7 +70,7 @@ New to Git? Check out the free [_ProGit_](http://git-scm.com/book) book for guid
 
        ```bash
        git checkout feature_branch
-       git rebase upstream/2.0  # or upstream/1.14 for bug fixes
+       git rebase upstream/2.2  # or upstream/2.1 for bug fixes
        ```
    *   Resolve any conflicts and continue the rebase:
 
@@ -113,14 +113,14 @@ After submitting, you may receive feedback. Here’s how to make adjustments:
    *   Rebase instead of merging, and push again:
 
        ```bash
-       git rebase -f upstream/2.0
+       git rebase -f upstream/2.2
        git push --force-with-lease origin feature_branch
        ```
 2. **Squash Commits**
    *   To squash commits, rebase interactively:
 
        ```bash
-       git rebase -i upstream/2.0
+       git rebase -i upstream/2.2
        ```
    *   Replace `pick` with `squash` or `s` for all but the first commit, then save and push:
 
