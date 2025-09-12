@@ -31,6 +31,7 @@
         <div class="ui toggle checkbox">
             {{- form_widget(form) -}}
             {{- form_label(form) -}}
+            {{- form_help(form) -}}
             {{- form_errors(form) -}}
         </div>
     </div>
@@ -74,6 +75,7 @@
                 </div>
             {% endfor -%}
         </div>
+        {{- form_help(form) -}}
     </div>
 {%- endblock choice_widget_expanded -%}
 
