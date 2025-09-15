@@ -232,7 +232,7 @@
         "symfony/flex": "^2.4",
         "symfony/runtime": "^6.4 || ^7.2",
         "symfony/web-profiler-bundle": "^6.4 || ^7.2",
-        "symplify/monorepo-builder": "^11.0"
+        "symplify/monorepo-builder": "^12.2"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
