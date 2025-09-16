@@ -67,3 +67,13 @@ Feature: Editing a zone
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this zone name should be "EU"
+
+    @api @ui
+    Scenario: Setting zone to the lowest priority
+        Given the store has a zone "European Union" with code "EU" and priority 0
+        And it has the "France" country member
+        When I want to modify the zone named "European Union"
+        And I set its priority to "-1"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And the "European Union" zone should have priority 3
