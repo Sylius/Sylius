@@ -128,5 +128,43 @@
       "php": ["8.2", "8.3", "8.4"],
       "symfony": ["^6.4", "~7.2.0", "~7.3.0"]
     }
+  },
+  "full85": {
+    "static-checks": {
+      "php": ["8.5"],
+      "symfony": ["^6.4", "~7.2.0", "~7.3.0"]
+    },
+    "e2e-mariadb": {
+      "php": ["8.5"],
+      "symfony": ["^6.4", "~7.2.0", "~7.3.0"],
+      "mariadb": ["11.4.7"],
+      "state_machine_adapter": ["symfony_workflow"],
+      "include": [
+        {
+          "php": "8.5",
+          "symfony": "~7.3.0",
+          "mariadb": "11.4.7",
+          "state_machine_adapter": "winzou_state_machine"
+        }
+      ]
+    },
+    "e2e-mysql": {
+      "php": ["8.5"],
+      "symfony": ["^6.4", "~7.2.0", "~7.3.0"],
+      "mysql": ["8.0", "8.4"],
+      "twig": ["^3.3"]
+    },
+    "e2e-pgsql": {
+      "php": ["8.5"],
+      "symfony": ["^6.4", "~7.2.0", "~7.3.0"],
+      "postgres": ["15.13", "16.9", "17.5"]
+    },
+    "frontend": {
+      "node": ["22.x", "24.x"]
+    },
+    "packages": {
+      "php": ["8.5"],
+      "symfony": ["^6.4", "~7.2.0", "~7.3.0"]
+    }
   }
 }
