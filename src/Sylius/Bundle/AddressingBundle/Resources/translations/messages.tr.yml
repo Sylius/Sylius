@@ -38,5 +38,6 @@ sylius:
                 all: Tümü
             select: Seçiniz
             select_scope: Ölçek seçiniz
+            priority: Öncelik
         zone_member:
             select: Seçiniz

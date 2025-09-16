@@ -38,5 +38,6 @@ sylius:
                 all: Semua
             select: Pilih
             select_scope: Pilih skop
+            priority: Keutamaan
         zone_member:
             select: Pilih

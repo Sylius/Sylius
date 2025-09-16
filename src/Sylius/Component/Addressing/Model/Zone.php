@@ -37,7 +37,7 @@ class Zone implements ZoneInterface, \Stringable
     protected $members;
 
     /** @var int */
-    protected $position = 0;
+    protected $priority = 0;
 
     public function __construct()
     {
@@ -130,13 +130,13 @@ class Zone implements ZoneInterface, \Stringable
         return $this->members->contains($member);
     }
 
-    public function getPosition(): int
+    public function getPriority(): int
     {
-        return $this->position;
+        return $this->priority;
     }
 
-    public function setPosition(int $position): void
+    public function setPriority(int $priority): void
     {
-        $this->position = $position;
+        $this->priority = $priority;
     }
 }

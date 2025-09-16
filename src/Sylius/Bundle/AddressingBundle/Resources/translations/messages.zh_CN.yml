@@ -37,5 +37,6 @@ sylius:
             scopes:
                 all: '所有'
             select: '选择'
+            priority: '优先级'
         zone_member:
             select: '选择'

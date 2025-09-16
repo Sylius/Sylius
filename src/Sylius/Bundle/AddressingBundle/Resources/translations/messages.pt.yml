@@ -37,6 +37,7 @@ sylius:
             scopes:
                 all: 'Todos'
             select: 'Selecionar'
+            priority: 'Prioridade'
         zone_member:
             select: 'Selecionar'
 

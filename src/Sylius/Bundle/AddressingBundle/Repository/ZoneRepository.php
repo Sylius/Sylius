@@ -33,7 +33,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
             ->andWhere($queryBuilder->expr()->eq('o.type', ':type'))
             ->setParameter('type', $type)
             ->setMaxResults(1)
-            ->addOrderBy('o.position', 'DESC')
+            ->addOrderBy('o.priority', 'DESC')
         ;
 
         return $queryBuilder->getQuery()->getOneOrNullResult();

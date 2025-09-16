@@ -96,7 +96,7 @@ class GeographicalFixture extends AbstractFixture
                 ->arrayNode('zones')->scalarPrototype()->end()->end()
                 ->arrayNode('provinces')->scalarPrototype()->end()->end()
                 ->scalarNode('scope')->end()
-                ->integerNode('position')->defaultValue(0)->end()
+                ->integerNode('priority')->defaultValue(0)->end()
         ;
 
         $zoneNode
@@ -154,7 +154,7 @@ class GeographicalFixture extends AbstractFixture
                 $zone->setCode($zoneCode);
                 $zone->setName($zoneName);
                 $zone->setType($zoneType);
-                $zone->setPosition($zoneOptions['position']);
+                $zone->setPriority($zoneOptions['priority']);
 
                 if (isset($zoneOptions['scope'])) {
                     $zone->setScope($zoneOptions['scope']);

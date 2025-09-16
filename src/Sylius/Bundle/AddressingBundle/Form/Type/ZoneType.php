@@ -47,8 +47,8 @@ final class ZoneType extends AbstractResourceType
             ->add('type', ZoneTypeChoiceType::class, [
                 'disabled' => true,
             ])
-            ->add('position', IntegerType::class, [
-                'label' => 'sylius.form.zone.position',
+            ->add('priority', IntegerType::class, [
+                'label' => 'sylius.form.zone.priority',
                 'required' => true,
             ])
         ;

@@ -24,7 +24,7 @@
         <field name="type" column="type" type="string" length="8" />
         <field name="scope" column="scope" type="string" nullable="true"/>
 
-        <field name="position" type="integer">
+        <field name="priority" type="integer">
             <gedmo:sortable-position />
         </field>
 

@@ -55,7 +55,7 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 
     public function hasMember(ZoneMemberInterface $member): bool;
 
-    public function getPosition(): int;
+    public function getPriority(): int;
 
-    public function setPosition(int $priority): void;
+    public function setPriority(int $priority): void;
 }
