@@ -31,7 +31,6 @@ final class ForProductsScopeConfigurationType extends AbstractType
             'multiple' => true,
             'required' => false,
             'choice_name' => 'name',
-            'choice_value' => 'code',
             'resource' => 'sylius.product',
         ]);
 
