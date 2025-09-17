@@ -33,7 +33,6 @@ final class ProductAttributeAutocompleteType extends AbstractType
         $resolver->setDefaults([
             'class' => $this->productAttributeClass,
             'choice_name' => 'name',
-            'choice_value' => 'code',
         ]);
     }
 

@@ -44,7 +44,6 @@ final class ChannelPriceHistoryConfigType extends AbstractType implements DataMa
                 'required' => false,
                 'multiple' => true,
                 'expanded' => false,
-                'choice_value' => 'code',
             ])
         ;
 

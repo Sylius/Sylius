@@ -31,7 +31,6 @@ final class ForVariantsScopeConfigurationType extends AbstractType
             'multiple' => true,
             'required' => false,
             'choice_name' => 'descriptor',
-            'choice_value' => 'code',
             'resource' => 'sylius.product_variant',
         ]);
 

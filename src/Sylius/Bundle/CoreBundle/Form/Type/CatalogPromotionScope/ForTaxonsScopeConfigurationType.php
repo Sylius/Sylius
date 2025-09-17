@@ -30,7 +30,6 @@ final class ForTaxonsScopeConfigurationType extends AbstractType
             'label' => 'sylius.ui.taxons',
             'multiple' => true,
             'required' => false,
-            'choice_value' => 'code',
             'resource' => 'sylius.taxon',
         ]);
 
