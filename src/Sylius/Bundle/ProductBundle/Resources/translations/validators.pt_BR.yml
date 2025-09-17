@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Por favor, insira o Slug do produto.
             unique: Slug do produto deve ser único.
+            invalid_characters: O slug contém caracteres inválidos.
         code:
             not_blank: Por favor, insira o código do produto.
             regex: O código do produto só pode conter letras, números, hifens e sublinhados.

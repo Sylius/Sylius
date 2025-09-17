@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Venligst angiv produkt slug.
             unique: Produktets slug skal være unik.
+            invalid_characters: Slug indeholder ugyldige tegn.
         code:
             not_blank: Venligst angiv varenummer.
             regex: Varenummeret kan kun bestå af bogstaver, tal, bindestreger og understregninger.

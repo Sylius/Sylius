@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: 请输入产品标识。
             unique: 产品名必须是唯一的。
+            invalid_characters: 标识包含无效字符。
         code:
             not_blank: 请输入产品代码。
             regex: 产品代码仅可以由字母、 数字、 破折号和下划线组成。

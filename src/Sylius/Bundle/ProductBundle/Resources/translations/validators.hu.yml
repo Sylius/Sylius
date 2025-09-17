@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Kérem adja meg a termék url kompatibilis megnevezését.
             unique: A termék url kompatibilis megnevezésének egyedinek kell lennie.
+            invalid_characters: A termék url kompatibilis megnevezése érvénytelen karaktereket tartalmaz.
         code:
             not_blank: Kérjük, adja meg a termék kódját.
             regex: A termék kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
