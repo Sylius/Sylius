@@ -40,7 +40,7 @@ Active contributors who meet these criteria are invited to join the program for 
 
 ### Current Key Contributors
 
-Below is the list of current Key Contributors (as of January 2025) who have demonstrated exceptional dedication and contributions to the Sylius project:
+Below is the list of current Key Contributors (as of April 2025) who have demonstrated exceptional dedication and contributions to the Sylius project:
 
 * Loïc Frémont (@[loic425](https://github.com/loic425)),&#x20;
 * Francis Hilaire (@[Prometee](https://github.com/Prometee)),&#x20;
@@ -48,7 +48,9 @@ Below is the list of current Key Contributors (as of January 2025) who have demo
 * Gracjan Józefczyk (@[GracjanJozefczyk](https://github.com/GracjanJozefczyk)),&#x20;
 * Valentin Silvestre (@[vasilvestre](https://github.com/vasilvestre)),&#x20;
 * Krzysztof Odważny (@[christopherhero](https://github.com/christopherhero)),
-* Stephane Decock (@[Roshyo](https://github.com/Roshyo)).
+* Estelle Gaits (@[stlgaits](https://github.com/stlgaits))
+* Florian Merle (@[Florian-Merle](https://github.com/Florian-Merle))
+* Max Pesch (@[mamazu](https://github.com/mamazu))
 
 This list is updated quarterly to reflect the latest Key Contributors.
 
