@@ -1,0 +1,72 @@
+.sylius-filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
+
+    &__field {
+        flex-grow: 1;
+        min-width: 360px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .sylius-filters__group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+        > .field {
+            flex-grow: 1;
+        }
+
+        > input {
+            flex-grow: 1;
+            width: auto !important;
+        }
+
+        > .disabled.field {
+            flex-grow: 0;
+
+            input {
+                width: 40px !important;
+                background: #eeeeee;
+                text-align: center;
+            }
+        }
+    }
+
+    .field {
+        margin-bottom: 22px !important;
+        label { font-weight: 700 !important; }
+    }
+}
+
+.sylius-filters {
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23444444'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat !important;
+        background-size: 8px 12px !important;
+        background-position: calc(100% - 10px) calc(50% + 3px) !important;
+    }
+
+    .sylius-filters__group {
+        input, select {
+            border-radius: 0 !important;
+            border-right-width: 0 !important;
+        }
+
+        .field:last-child input:last-child,
+        .field:last-child select:last-child {
+            border-right-width: 1px !important;
+            border-radius: 0 .28571429rem .28571429rem 0 !important;
+        }
+
+        .field:first-child input:first-of-type,
+        .field:first-child select:first-of-type {
+            border-radius: .28571429rem 0 0 .28571429rem !important;
+        }
+    }
+}
