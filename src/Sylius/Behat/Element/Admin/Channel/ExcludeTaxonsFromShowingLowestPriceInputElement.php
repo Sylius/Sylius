@@ -36,7 +36,7 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement im
         $this->autocompleteHelper->selectByValue(
             $this->getDriver(),
             $excludeTaxonElement->getXpath(),
-            $taxon->getCode(),
+            (string) $taxon->getId(),
         );
         $this->waitForFormUpdate();
     }
@@ -48,7 +48,7 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement im
         $this->autocompleteHelper->removeByValue(
             $this->getDriver(),
             $excludeTaxonElement->getXpath(),
-            $taxon->getCode(),
+            (string) $taxon->getId(),
         );
         $this->waitForFormUpdate();
     }
