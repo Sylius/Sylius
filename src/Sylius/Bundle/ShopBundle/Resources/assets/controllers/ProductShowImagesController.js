@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+/* global Spotlight */
+
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
@@ -14,8 +16,8 @@ export default class extends Controller {
         const mainImage = document.getElementById('main-image');
         const thumbnails = mainImage.closest('.spotlight-group').querySelectorAll('.spotlight');
         mainImage.addEventListener('click', (e) => {
-          e.preventDefault();
-          Spotlight.show(thumbnails, 0);
+            e.preventDefault();
+            Spotlight.show(thumbnails, 0);
         });
     }
 }
