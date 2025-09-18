@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'Kai kurie produktai neprieinami ir buvo pašalinti iš krepšelio.'

@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'Néhány termék nem elérhető és eltávolításra került a kosárból.'

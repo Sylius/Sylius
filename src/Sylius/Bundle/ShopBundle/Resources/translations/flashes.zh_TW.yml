@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: '某些產品不可用，已從購物車中移除。'

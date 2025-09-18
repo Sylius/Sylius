@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'Beberapa produk tidak tersedia dan telah dihapus dari keranjang.'

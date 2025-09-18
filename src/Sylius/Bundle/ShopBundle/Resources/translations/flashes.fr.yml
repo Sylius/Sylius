@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'Certains produits ne sont pas disponibles et ont été supprimés du panier.'

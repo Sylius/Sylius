@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'Noen produkter er ikke tilgjengelige og ble fjernet fra handlekurven.'

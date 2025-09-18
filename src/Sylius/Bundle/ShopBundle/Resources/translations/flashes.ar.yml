@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'بعض المنتجات غير متوفرة وتم إزالتها من السلة.'

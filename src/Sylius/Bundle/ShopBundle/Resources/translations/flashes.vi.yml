@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'Một số sản phẩm không có sẵn và đã được xóa khỏi giỏ hàng.'

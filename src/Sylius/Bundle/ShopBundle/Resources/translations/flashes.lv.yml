@@ -1,0 +1,4 @@
+sylius:
+    cart:
+        product:
+            not_available: 'Daži produkti nav pieejami un tika noņemti no groza.'
