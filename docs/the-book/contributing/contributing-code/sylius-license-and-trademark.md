@@ -2,13 +2,13 @@
 
 Sylius is released under the MIT license.
 
-According to [Wikipedia](https://en.wikipedia.org/wiki/MIT\_License):
+According to [Wikipedia](https://en.wikipedia.org/wiki/MIT_License):
 
 > “It is a permissive license, meaning that it permits reuse within proprietary software on the condition that the license is distributed with that software. The license is also GPL-compatible, meaning that the GPL permits combination and redistribution with software that uses the MIT License.”
 
 ## The License
 
-Copyright (c) 2011-2024 Sylius Sp. z o.o.
+Copyright (c) 2011-present Sylius Sp. z o.o.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
