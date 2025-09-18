@@ -51,7 +51,7 @@ framework:
 
 #### Add a New Transition
 
-Now let’s create a transition from an existing state to the new `custom_state`:
+Create a transition from an existing state to the new `custom_state`:
 
 ```yaml
 framework:
@@ -65,7 +65,7 @@ framework:
 
 You can now create custom logic triggered by this transition if needed.
 
-### Result:
+#### Result:
 
 The workflow before:
 
@@ -187,6 +187,141 @@ protected function build(ContainerBuilder $container): void
 Result:
 
 <figure><img src="../.gitbook/assets/graph (1).svg" alt=""><figcaption></figcaption></figure>
+
+### Extending the existing Transitions
+
+By default, Symfony's Workflow component does not merge configuration arrays for transitions, meaning you cannot simply add more `from` states to an existing transition using the regular `workflow` configuration in your `config/packages` files.&#x20;
+
+To work around this limitation and programmatically extend an existing transition, such as adding new `from` places to it, you can implement a custom **Compiler Pass**.&#x20;
+
+Here is an example of how you can dynamically add new `from` states to the existing transitions in the `sylius_payment` state machine.
+
+#### Create a compiler pass:
+
+```php
+<?php
+
+namespace App\DependencyInjection\Compiler;
+
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\Workflow\Transition;
+
+final class ExtendPaymentWorkflowTransitionPass implements CompilerPassInterface
+{
+    private const REQUIRED_TRANSITIONS = [
+        ['name' => 'process', 'from' => 'authorized', 'to' => 'processing'],
+        ['name' => 'fail', 'from' => 'completed', 'to' => 'failed'],
+    ];
+
+    public function process(ContainerBuilder $container): void
+    {
+        if (!$container->hasDefinition('state_machine.sylius_payment.definition')) {
+            return;
+        }
+
+        $definition = $container->getDefinition('state_machine.sylius_payment.definition');
+        $transitions = $definition->getArgument(1);
+
+        $existingTransitions = $this->extractExistingTransitions($transitions);
+        $updatedTransitions = $this->addMissingTransitions($transitions, $existingTransitions);
+
+        $definition->setArgument(1, $updatedTransitions);
+    }
+
+    /**
+     * @param array<Definition> $transitions
+     *
+     * @return array<string>
+     */
+    private function extractExistingTransitions(array $transitions): array
+    {
+        $existingTransitions = [];
+
+        foreach ($transitions as $transition) {
+            if (!$transition instanceof Definition) {
+                continue;
+            }
+
+            $arguments = $transition->getArguments();
+            if (count($arguments) < 3) {
+                continue;
+            }
+
+            [$name, $froms, $tos] = $arguments;
+            foreach ($froms as $from) {
+                foreach ($tos as $to) {
+                    $existingTransitions[] = $this->createTransitionKey($name, $from, $to);
+                }
+            }
+        }
+
+        return $existingTransitions;
+    }
+
+    /**
+     * @param array<Definition> $transitions
+     * @param array<string> $existingTransitions
+     *
+     * @return array<Definition>
+     */
+    private function addMissingTransitions(array $transitions, array $existingTransitions): array
+    {
+        foreach (self::REQUIRED_TRANSITIONS as $requiredTransition) {
+            $transitionKey = $this->createTransitionKey(
+                $requiredTransition['name'],
+                $requiredTransition['from'],
+                $requiredTransition['to']
+            );
+
+            if (!in_array($transitionKey, $existingTransitions, true)) {
+                $transitions[] = $this->createTransitionDefinition($requiredTransition);
+            }
+        }
+
+        return $transitions;
+    }
+
+    private function createTransitionKey(string $name, string $from, string $to): string
+    {
+        return sprintf('%s:%s:%s', $name, $from, $to);
+    }
+
+    /** @param array{name: string, from: string, to: string} $transitionConfig */
+    private function createTransitionDefinition(array $transitionConfig): Definition
+    {
+        $transition = new Definition(Transition::class);
+        $transition->setArguments([
+            $transitionConfig['name'],
+            [$transitionConfig['from']],
+            [$transitionConfig['to']],
+        ]);
+
+        return $transition;
+    }
+}
+
+```
+
+#### Register it in your `Kernel.php`:
+
+```php
+protected function build(ContainerBuilder $container): void
+{
+    $container->addCompilerPass(new \App\DependencyInjection\Compiler\ExtendPaymentWorkflowTransitionPass());
+}
+```
+
+#### Result:
+
+Before:
+
+<figure><img src="../.gitbook/assets/payment.svg" alt=""><figcaption></figcaption></figure>
+
+After:
+
+<figure><img src="../.gitbook/assets/payment2.svg" alt=""><figcaption></figcaption></figure>
 
 ### Adding Workflow Callbacks
 
