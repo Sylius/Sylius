@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.5",
         "ext-dom": "*",
         "ext-exif": "*",
         "ext-fileinfo": "*",
@@ -258,7 +258,7 @@
             "phpstan/extension-installer": true
         },
         "platform": {
-            "php": "8.5"
+            "php": "8.3"
         }
     },
     "extra": {
