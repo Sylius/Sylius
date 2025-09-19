@@ -24,9 +24,6 @@ jobs:
             branch: ${{ matrix.branch }}
             type: full85
     e2e-mariadb:
-        strategy:
-            matrix:
-                branch: ["2.2"]
         name: "[${{ matrix.branch }}] End-to-end tests (MariaDB)"
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-mariadb.yaml
@@ -34,9 +31,6 @@ jobs:
             branch: ${{ matrix.branch }}
             type: full85
     e2e-mysql:
-        strategy:
-            matrix:
-                branch: ["2.2"]
         name: "[${{ matrix.branch }}] End-to-end tests (MySQL)"
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-mysql.yaml
@@ -44,9 +38,6 @@ jobs:
             branch: ${{ matrix.branch }}
             type: full85
     e2e-pgsql:
-        strategy:
-            matrix:
-                branch: ["2.2"]
         name: "[${{ matrix.branch }}] End-to-end tests (PostgreSQL)"
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-pgsql.yaml
@@ -61,9 +52,6 @@ jobs:
             branch: ${{ matrix.branch }}
             type: full85
     packages:
-        strategy:
-            matrix:
-                branch: ["2.2"]
         name: "[${{ matrix.branch }}] Packages"
         needs: static-checks
         uses: ./.github/workflows/ci_packages.yaml
