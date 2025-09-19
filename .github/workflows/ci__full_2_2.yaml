@@ -5,7 +5,9 @@ on:
         -
             cron: "0 3 * * *" # Run every day at 3am
     workflow_dispatch: ~
-    pull_request: ~
+    pull_request:
+        branches:
+            - '2.2'
 
 concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-2_2-full
