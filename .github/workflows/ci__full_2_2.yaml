@@ -22,7 +22,7 @@ jobs:
         uses: ./.github/workflows/ci_static-checks-2_2.yaml
         with:
             branch: ${{ matrix.branch }}
-            type: full
+            type: full85
     e2e-mariadb:
         strategy:
             matrix:
@@ -32,7 +32,7 @@ jobs:
         uses: ./.github/workflows/ci_e2e-mariadb.yaml
         with:
             branch: ${{ matrix.branch }}
-            type: full
+            type: full85
     e2e-mysql:
         strategy:
             matrix:
@@ -42,7 +42,7 @@ jobs:
         uses: ./.github/workflows/ci_e2e-mysql.yaml
         with:
             branch: ${{ matrix.branch }}
-            type: full
+            type: full85
     e2e-pgsql:
         strategy:
             matrix:
@@ -52,14 +52,14 @@ jobs:
         uses: ./.github/workflows/ci_e2e-pgsql.yaml
         with:
             branch: ${{ matrix.branch }}
-            type: full
+            type: full85
     frontend:
         name: Frontend
         needs: static-checks
         uses: ./.github/workflows/ci_frontend.yaml
         with:
             branch: ${{ matrix.branch }}
-            type: full
+            type: full85
     packages:
         strategy:
             matrix:
@@ -69,7 +69,7 @@ jobs:
         uses: ./.github/workflows/ci_packages.yaml
         with:
             branch: ${{ matrix.branch }}
-            type: full
+            type: full85
     notify-about-build-status:
         if: ${{ always() }}
         name: "Notify about build status"
