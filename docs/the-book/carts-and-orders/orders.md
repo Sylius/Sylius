@@ -204,18 +204,3 @@ $this->container->get('sylius.manager.order')->flush();
 ```
 
 If this is the only payment assigned to the order, the `paymentState` of the order will now be `paid`.
-
-## <mark style="color:blue;">\[Plugin] Creating an Order via Admin Panel</mark>
-
-To create orders from the Admin panel, you can use the [Sylius/AdminOrderCreationPlugin](https://github.com/Sylius/AdminOrderCreationPlugin). This plugin allows administrators to:
-
-* Create orders for customers.
-* Choose products, set custom prices, and select payment and shipping methods.
-* Reorder previously placed orders.
-
-## <mark style="color:blue;">\[Plugin] Customer Order Operations: Reorder & Cancellation</mark>
-
-Using Sylius plugins, your customers can:
-
-* **Cancel unpaid orders** in the "My Account" section with the [Customer Order Cancellation Plugin](https://github.com/Sylius/CustomerOrderCancellationPlugin).
-* **Reorder previously placed orders** with the [Customer Reorder Plugin](https://github.com/Sylius/CustomerReorderPlugin).
