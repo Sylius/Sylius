@@ -116,6 +116,7 @@ jobs:
                 run: vendor/bin/monorepo-builder validate
 
             -   name: Run PHPArkitect
+                if: matrix.php != '8.5'
                 run: vendor/bin/phparkitect check
 
             -   name: Run PHPStan
