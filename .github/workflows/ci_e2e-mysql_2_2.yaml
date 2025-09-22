@@ -260,6 +260,9 @@ jobs:
 
             - name: Build frontend
               run: yarn build
+            
+            - name: Test installer
+              run: bin/console sylius:install --no-interaction -vvv
 
             - name: Setup Chrome
               uses: browser-actions/setup-chrome@v1
@@ -374,6 +377,9 @@ jobs:
 
             - name: Build frontend
               run: yarn build
+            
+            - name: Test installer
+              run: bin/console sylius:install --no-interaction -vvv
 
             - name: Setup Chrome
               uses: browser-actions/setup-chrome@v1
