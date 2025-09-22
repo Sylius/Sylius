@@ -261,6 +261,23 @@ jobs:
             - name: Build frontend
               run: yarn build
             
+            - name: Setup Chrome
+              uses: browser-actions/setup-chrome@v1
+              with:
+                chrome-version: stable
+            
+            - name: Start Chrome
+              run: |
+                  google-chrome \
+                      --headless \
+                      --no-sandbox \
+                      --disable-gpu \
+                      --remote-debugging-address=0.0.0.0 \
+                      --remote-debugging-port=9222 \
+                      --disable-dev-shm-usage \
+                      --window-size=1920,1080 \
+                      > /dev/null 2>&1 &
+            
             - name: Fix permissions for Symfony logs directory
               run: |
                   LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
@@ -383,6 +400,19 @@ jobs:
 
             - name: Build frontend
               run: yarn build
+            
+            - name: Start Chrome (Panther)
+              run: |
+                  google-chrome \
+                      --headless \
+                      --no-sandbox \
+                      --disable-gpu \
+                      --remote-debugging-port=9222 \
+                      --disable-dev-shm-usage \
+                      --disable-site-isolation-trials \
+                      --disable-features=IsolateOrigins,site-per-process \
+                      --window-size=1920,1080 \
+                      > /dev/null 2>&1 &
             
             - name: Fix permissions for Symfony logs directory
               run: |
