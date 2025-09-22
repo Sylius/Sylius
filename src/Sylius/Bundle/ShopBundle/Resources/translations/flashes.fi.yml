@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Jotkut tuotteet eivät ole saatavilla ja ne poistettiin ostoskorista.'
+            not_available: 'Jotkut tuotteet (%count%) eivät ole saatavilla ja ne poistettiin ostoskorista: %items%.'

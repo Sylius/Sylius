@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: '一部の商品が利用できないため、カートから削除されました。'
+            not_available: '一部の商品（%count%）が利用できないため、カートから削除されました：%items%。'

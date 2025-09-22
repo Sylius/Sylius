@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Vissa produkter är inte tillgängliga och har tagits bort från kundvagnen.'
+            not_available: 'Vissa produkter (%count%) är inte tillgängliga och har tagits bort från kundvagnen: %items%.'

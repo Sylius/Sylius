@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Sumar vörur eru ekki tiltækar og hafa verið fjarlægðar úr körfunni.'
+            not_available: 'Sumar vörur (%count%) eru ekki tiltækar og hafa verið fjarlægðar úr körfunni: %items%.'

@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Disa produkte nuk janë të disponueshme dhe janë hequr nga shporta.'
+            not_available: 'Disa produkte (%count%) nuk janë të disponueshme dhe janë hequr nga shporta: %items%.'

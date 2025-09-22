@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: '某些产品不可用，已从购物车中移除。'
+            not_available: '某些产品（%count%）不可用，已从购物车中移除：%items%。'

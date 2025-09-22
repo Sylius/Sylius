@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Sommige producten zijn niet beschikbaar en zijn uit de winkelwagen verwijderd.'
+            not_available: 'Sommige producten (%count%) zijn niet beschikbaar en zijn uit de winkelwagen verwijderd: %items%.'

@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Některé produkty nejsou dostupné a byly odstraněny z košíku.'
+            not_available: 'Některé produkty (%count%) nejsou dostupné a byly odstraněny z košíku: %items%.'

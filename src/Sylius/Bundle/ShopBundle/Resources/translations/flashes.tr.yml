@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Bazı ürünler mevcut değil ve sepetten kaldırıldı.'
+            not_available: 'Bazı ürünler (%count%) mevcut değil ve sepetten kaldırıldı: %items%.'

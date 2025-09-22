@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Alguns productes no estan disponibles i han estat eliminats del carret.'
+            not_available: 'Alguns productes (%count%) no estan disponibles i han estat eliminats del carret: %items%.'

@@ -1,4 +1,4 @@
 sylius:
     cart:
         product:
-            not_available: 'Néhány termék nem elérhető és eltávolításra került a kosárból.'
+            not_available: 'Néhány termék (%count%) nem elérhető és eltávolításra került a kosárból: %items%.'

@@ -37,6 +37,20 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.order_processing.remove_unavailable_cart_items_processor" class="Sylius\Component\Core\OrderProcessing\RemoveUnavailableCartItemsProcessor">
+            <argument type="service" id="sylius.order_processing.product_variant_channel_eligibility_checker" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="sylius.order_processor" priority="70"/>
+        </service>
+
+        <service id="sylius.order_processing.product_variant_channel_eligibility_checker" class="Sylius\Component\Core\OrderProcessing\Checker\ProductVariantChannelEligibilityChecker" />
+
+        <service id="sylius.order_processing.cart_items_removed_flash_subscriber" class="Sylius\Component\Core\OrderProcessing\Subscriber\CartItemsRemovedFlashSubscriber">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
         <service id="sylius.order_processing.order_adjustments_clearer" class="Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer">
             <argument>%sylius.order_processing.adjustment_clearing_types%</argument>
             <tag name="sylius.order_processor" priority="60"/>
