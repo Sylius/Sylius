@@ -94,6 +94,13 @@ jobs:
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
 
+
+            -   name: Setup MySQL
+                uses: mirromutth/mysql-action@v1.1
+                with:
+                    mysql version: "${{ inputs.database_version }}"
+                    mysql root password: "root"
+
             # === Build application (inline zamiast action) ===
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
