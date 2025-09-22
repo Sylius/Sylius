@@ -98,7 +98,7 @@ jobs:
             -   name: Setup MySQL
                 uses: mirromutth/mysql-action@v1.1
                 with:
-                    mysql version: "${{ inputs.database_version }}"
+                    mysql version: "${{ matrix.mysql }}"
                     mysql root password: "root"
 
             # === Build application (inline zamiast action) ===
