@@ -401,19 +401,6 @@ jobs:
             - name: Build frontend
               run: yarn build
             
-            - name: Start Chrome (Panther)
-              run: |
-                  google-chrome \
-                      --headless \
-                      --no-sandbox \
-                      --disable-gpu \
-                      --remote-debugging-port=9222 \
-                      --disable-dev-shm-usage \
-                      --disable-site-isolation-trials \
-                      --disable-features=IsolateOrigins,site-per-process \
-                      --window-size=1920,1080 \
-                      > /dev/null 2>&1 &
-            
             - name: Fix permissions for Symfony logs directory
               run: |
                   LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
@@ -423,10 +410,39 @@ jobs:
             - name: Test installer
               run: bin/console sylius:install --no-interaction -vvv
 
-            - name: Setup Chrome
-              uses: browser-actions/setup-chrome@v1
+            - name: Remove default Google Chrome installation
+              run: |
+                which google-chrome && google-chrome --version || echo "Google Chrome successfully removed"
+                sudo dpkg --remove google-chrome-stable
+                sudo apt-get purge -y google-chrome-stable
+                sudo rm -f /usr/bin/google-chrome /usr/bin/chromedriver
+                which google-chrome && google-chrome --version || echo "Google Chrome successfully removed"
+                which chromedriver || echo "Google Chromedriver successfully removed"
+              shell: bash
+
+            - uses: browser-actions/setup-chrome@latest
               with:
-                chrome-version: stable
+                chrome-version: "stable"
+                install-chromedriver: 'true'
+
+            - name: Run Chrome Headless
+              run: |
+                export DISPLAY=:99
+                chrome --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --remote-debugging-port=9222 --disable-extensions --no-sandbox --enable-features=Metal --headless --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
+              shell: bash
+              working-directory: "${{ env.test_dir }}"
+
+            - name: Run webserver
+              run: symfony server:start --port=8080 --dir=${{ env.test_dir }}/public --daemon
+              shell: bash
+    
+            - name: Configure Encore for non-JS end-to-end tests
+              run: |
+                mkdir -p public/build/admin public/build/shop 
+                echo "{}" > public/build/admin/manifest.json
+                echo "{}" > public/build/shop/manifest.json
+              shell: bash
+              working-directory: "${{ env.test_dir }}"            
 
             -   name: Run Behat (Panther)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
