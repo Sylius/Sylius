@@ -228,7 +228,6 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
-            # === Build application inline ===
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
@@ -253,11 +252,6 @@ jobs:
               uses: browser-actions/setup-chrome@v1
               with:
                 chrome-version: stable
-
-            - name: Create database
-              run: |
-                mysql -uroot -proot -e "CREATE DATABASE sylius CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-            # === end Build application ===
 
             -   name: Run Behat (Chromedriver)
                 run: |
@@ -335,7 +329,6 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
-            # === Build application inline (Panther) ===
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
@@ -360,11 +353,6 @@ jobs:
               uses: browser-actions/setup-chrome@v1
               with:
                 chrome-version: stable
-
-            - name: Create database
-              run: |
-                mysql -uroot -proot -e "CREATE DATABASE sylius CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-            # === end Build application ===
 
             -   name: Run Behat (Panther)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
