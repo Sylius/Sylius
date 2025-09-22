@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\OrderProcessing\Subscriber;
 
-use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Event\CartItemsRemovedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CartItemsRemovedFlashSubscriber implements EventSubscriberInterface
@@ -36,10 +36,7 @@ class CartItemsRemovedFlashSubscriber implements EventSubscriberInterface
 
     public function onCartItemsRemoved(CartItemsRemovedEvent $event): void
     {
-        $request = $this->requestStack->getCurrentRequest();
-        if (null === $request) {
-            return;
-        }
+        $session = $this->requestStack->getSession();
 
         $message = $this->translator->trans(
             'sylius.cart.product.not_available',
@@ -50,7 +47,11 @@ class CartItemsRemovedFlashSubscriber implements EventSubscriberInterface
             'flashes',
         );
 
-        $flashBag = FlashBagProvider::getFlashBag($this->requestStack);
+        $flashBag = $session->getBag('flashes');
+        if (!$flashBag instanceof FlashBagInterface) {
+            return;
+        }
+
         $flashBag->add('warning', $message);
     }
 }
