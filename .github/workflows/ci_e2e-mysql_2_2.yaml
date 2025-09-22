@@ -49,6 +49,19 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+        services:
+            mysql:
+                image: mysql:${{ matrix.mysql }}
+                env:
+                  MYSQL_ROOT_PASSWORD: root
+                  MYSQL_DATABASE: sylius
+                ports:
+                  - 3306:3306
+                options: >-
+                  --health-cmd="mysqladmin ping -h localhost -uroot -proot"
+                  --health-interval=10s
+                  --health-timeout=5s
+                  --health-retries=5
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
