@@ -142,11 +142,6 @@ jobs:
               run: yarn build
               shell: bash
 
-            - name: Create database
-              run: |
-                mysql -uroot -proot -e "CREATE DATABASE sylius CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-              shell: bash
-
             -   name: Fix permissions for Symfony logs directory
                 run: |
                     LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
