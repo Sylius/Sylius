@@ -1,9 +1,6 @@
 name: Continuous Integration 2.2 (Full)
 
 on:
-    schedule:
-        -
-            cron: "0 3 * * *" # Run every day at 3am
     workflow_dispatch: ~
     pull_request:
         branches:

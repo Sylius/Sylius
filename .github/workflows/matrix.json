@@ -166,15 +166,7 @@
       "php": [ "8.5" ],
       "symfony": [ "~7.3.0"],
       "mariadb": ["11.4.7"],
-      "state_machine_adapter": ["symfony_workflow"],
-      "include": [
-        {
-          "php": "8.3",
-          "symfony": "~7.3.0",
-          "mariadb": "11.4.7",
-          "state_machine_adapter": "winzou_state_machine"
-        }
-      ]
+      "state_machine_adapter": ["symfony_workflow"]
     },
     "e2e-mysql": {
       "php": [ "8.5" ],
