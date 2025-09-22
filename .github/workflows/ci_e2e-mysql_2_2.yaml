@@ -107,14 +107,6 @@ jobs:
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
 
-
-            -   name: Setup MySQL
-                uses: mirromutth/mysql-action@v1.1
-                with:
-                    mysql version: "${{ matrix.mysql }}"
-                    mysql root password: "root"
-
-            # === Build application (inline zamiast action) ===
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
@@ -154,7 +146,6 @@ jobs:
               run: |
                 mysql -uroot -proot -e "CREATE DATABASE sylius CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
               shell: bash
-            # === end Build application ===
 
             -   name: Fix permissions for Symfony logs directory
                 run: |
