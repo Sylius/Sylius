@@ -428,7 +428,7 @@ jobs:
             - name: Run Chrome Headless
               run: |
                 google-chrome \
-                      --headless \
+                      --headless=new \
                       --no-sandbox \
                       --disable-gpu \
                       --remote-debugging-port=9222 \
