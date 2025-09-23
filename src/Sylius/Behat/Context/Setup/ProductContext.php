@@ -188,7 +188,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product) is(?:| also) unavailable in ("[^"]+" channel)$/
      * @Given /^(this product) is disabled in ("[^"]+" channel)$/
-     * @Given product :product is disabled in channel :channel
+     * @Given product :product has been disabled in channel :channel
      */
     public function thisProductIsAlsoUnavailableInChannel(ProductInterface $product, ChannelInterface $channel): void
     {
@@ -888,7 +888,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) has been disabled$/
-     * @Given the product :product has been disabled
+     * @Given product :product has been disabled
      */
     public function thisProductHasBeenDisabled(ProductInterface $product): void
     {

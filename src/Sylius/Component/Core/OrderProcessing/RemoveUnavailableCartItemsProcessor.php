@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Event\CartItemsRemovedEvent;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
@@ -28,6 +29,7 @@ final class RemoveUnavailableCartItemsProcessor implements OrderProcessorInterfa
     public function __construct(
         private readonly ProductVariantChannelEligibilityCheckerInterface $eligibilityChecker,
         private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -67,6 +69,8 @@ final class RemoveUnavailableCartItemsProcessor implements OrderProcessorInterfa
 
         foreach ($itemsToRemove as $item) {
             $order->removeItem($item);
+            $this->entityManager->persist($order);
+            $this->entityManager->flush();
         }
 
         if ($itemsToRemove !== []) {

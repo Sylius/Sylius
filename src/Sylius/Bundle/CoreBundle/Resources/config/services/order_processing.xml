@@ -40,6 +40,7 @@
         <service id="sylius.order_processing.remove_unavailable_cart_items_processor" class="Sylius\Component\Core\OrderProcessing\RemoveUnavailableCartItemsProcessor">
             <argument type="service" id="sylius.order_processing.product_variant_channel_eligibility_checker" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="sylius.order_processor" priority="70"/>
         </service>
 

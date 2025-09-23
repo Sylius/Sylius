@@ -54,6 +54,7 @@
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />
+            <tag name="kernel.event_listener" event="sylius.cart_summary" method="recalculateOrder" />
         </service>
 
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
