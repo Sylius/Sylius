@@ -49,19 +49,6 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
-        services:
-            mysql:
-                image: mysql:${{ matrix.mysql }}
-                env:
-                  MYSQL_ROOT_PASSWORD: root
-                  MYSQL_DATABASE: sylius
-                ports:
-                  - 3306:3306
-                options: >-
-                  --health-cmd="mysqladmin ping -h localhost -uroot -proot"
-                  --health-interval=10s
-                  --health-timeout=5s
-                  --health-retries=5
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
@@ -107,40 +94,17 @@ jobs:
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                php-version: ${{ matrix.php }}
-                coverage: none
-                extensions: mbstring, intl, gd, pdo_mysql
-                tools: symfony
-                ini-values: memory_limit=-1, date.timezone=UTC
-
-            - name: Get Composer cache directory
-              id: composer-cache
-              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-              shell: bash
-
-            - name: Restore dependencies
-              uses: actions/cache@v4
-              with:
-                path: ${{ steps.composer-cache.outputs.dir }}
-                key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-
-            - name: Install PHP dependencies
-              run: composer install --no-progress --no-interaction --prefer-dist --ignore-platform-reqs
-              shell: bash
-
-            - name: Install JS dependencies
-              run: |
-                corepack enable
-                yarn install --frozen-lockfile
-              shell: bash
-
-            - name: Build frontend
-              run: yarn build
-              shell: bash
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@composer-install-ignore-platform-reqs
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
 
             -   name: Fix permissions for Symfony logs directory
                 run: |
@@ -184,19 +148,6 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
-        services:
-            mysql:
-                image: mysql:${{ matrix.mysql }}
-                env:
-                  MYSQL_ROOT_PASSWORD: root
-                  MYSQL_DATABASE: sylius
-                ports:
-                  - 3306:3306
-                options: >-
-                  --health-cmd="mysqladmin ping -h localhost -uroot -proot"
-                  --health-interval=10s
-                  --health-timeout=5s
-                  --health-retries=5
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
@@ -241,56 +192,18 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                php-version: ${{ matrix.php }}
-                coverage: none
-                extensions: mbstring, intl, gd, pdo_mysql
-                tools: symfony
-                ini-values: memory_limit=-1, date.timezone=UTC
-
-            - name: Install PHP dependencies
-              run: composer install --no-progress --no-interaction --prefer-dist --ignore-platform-reqs
-
-            - name: Install JS dependencies
-              run: |
-                corepack enable
-                yarn install --frozen-lockfile
-
-            - name: Build frontend
-              run: yarn build
-            
-            - name: Setup Chrome
-              uses: browser-actions/setup-chrome@v1
-              with:
-                chrome-version: stable
-            
-            - name: Start Chrome
-              run: |
-                  google-chrome \
-                      --headless \
-                      --no-sandbox \
-                      --disable-gpu \
-                      --remote-debugging-address=0.0.0.0 \
-                      --remote-debugging-port=9222 \
-                      --disable-dev-shm-usage \
-                      --window-size=1920,1080 \
-                      > /dev/null 2>&1 &
-            
-            - name: Fix permissions for Symfony logs directory
-              run: |
-                  LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
-                  mkdir -p "$LOGS_DIR"
-                  chmod -R 777 "$LOGS_DIR"
-            
-            - name: Test installer
-              run: bin/console sylius:install --no-interaction -vvv
-
-            - name: Setup Chrome
-              uses: browser-actions/setup-chrome@v1
-              with:
-                chrome-version: stable
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@composer-install-ignore-platform-reqs
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    e2e_js: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
 
             -   name: Run Behat (Chromedriver)
                 run: |
@@ -324,19 +237,6 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
-        services:
-            mysql:
-                image: mysql:${{ matrix.mysql }}
-                env:
-                  MYSQL_ROOT_PASSWORD: root
-                  MYSQL_DATABASE: sylius
-                ports:
-                  - 3306:3306
-                options: >-
-                  --health-cmd="mysqladmin ping -h localhost -uroot -proot"
-                  --health-interval=10s
-                  --health-timeout=5s
-                  --health-retries=5
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
@@ -381,68 +281,35 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                php-version: ${{ matrix.php }}
-                coverage: none
-                extensions: mbstring, intl, gd, pdo_mysql
-                tools: symfony
-                ini-values: memory_limit=-1, date.timezone=UTC
+            -   name: Build application for Full 1.14 build
+                if: "${{ inputs.branch == '1.14' }}"
+                uses: SyliusLabs/BuildTestAppAction@composer-install-ignore-platform-reqs
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    e2e_js: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
+                    chrome_version: stable
 
-            - name: Install PHP dependencies
-              run: composer install --no-progress --no-interaction --prefer-dist --ignore-platform-reqs
-
-            - name: Install JS dependencies
-              run: |
-                corepack enable
-                yarn install --frozen-lockfile
-
-            - name: Build frontend
-              run: yarn build
-            
-            - name: Fix permissions for Symfony logs directory
-              run: |
-                  LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
-                  mkdir -p "$LOGS_DIR"
-                  chmod -R 777 "$LOGS_DIR"
-            
-            - name: Test installer
-              run: bin/console sylius:install --no-interaction -vvv
-
-            - name: Remove default Google Chrome installation
-              run: |
-                which google-chrome && google-chrome --version || echo "Google Chrome successfully removed"
-                sudo dpkg --remove google-chrome-stable
-                sudo apt-get purge -y google-chrome-stable
-                sudo rm -f /usr/bin/google-chrome /usr/bin/chromedriver
-                which google-chrome && google-chrome --version || echo "Google Chrome successfully removed"
-                which chromedriver || echo "Google Chromedriver successfully removed"
-              shell: bash
-
-            - uses: browser-actions/setup-chrome@latest
-              with:
-                chrome-version: "stable"
-                install-chromedriver: 'true'
-
-            -   name: Run Chrome Headless
-                run: |
-                    export DISPLAY=:99
-                    chrome --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --remote-debugging-port=9222 --disable-extensions --no-sandbox --enable-features=Metal --headless --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
-                shell: bash
-                working-directory: "${{ env.test_dir }}"
-
-            -   name: Run webserver
-                run: symfony server:start --port=8080 --dir=${{ env.test_dir }}/public --daemon
-                shell: bash
-    
-            - name: Configure Encore for non-JS end-to-end tests
-              run: |
-                mkdir -p public/build/admin public/build/shop 
-                echo "{}" > public/build/admin/manifest.json
-                echo "{}" > public/build/shop/manifest.json
-              shell: bash
-              working-directory: "${{ env.test_dir }}"            
+            -   name: Build application
+                if: "${{ inputs.branch != '1.14' }}"
+                uses: SyliusLabs/BuildTestAppAction@composer-install-ignore-platform-reqs
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    e2e_js: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
+                    chrome_version: stable
 
             -   name: Run Behat (Panther)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
