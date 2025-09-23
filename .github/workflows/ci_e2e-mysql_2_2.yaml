@@ -427,8 +427,18 @@ jobs:
 
             - name: Run Chrome Headless
               run: |
-                export DISPLAY=:99
-                chrome --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --remote-debugging-port=9222 --disable-extensions --no-sandbox --enable-features=Metal --headless --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
+                google-chrome \
+                      --headless \
+                      --no-sandbox \
+                      --disable-gpu \
+                      --remote-debugging-port=9222 \
+                      --disable-dev-shm-usage \
+                      --disable-site-isolation-trials \
+                      --disable-features=IsolateOrigins,site-per-process \
+                      --disable-web-security \
+                      --user-data-dir=/tmp/chrome-user-data \
+                      --window-size=1920,1080 \
+                      > /dev/null 2>&1 &
               shell: bash
               working-directory: "${{ env.test_dir }}"
     
