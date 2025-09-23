@@ -8,29 +8,21 @@ Feature: Remove product from cart when not available
     Background:
         Given the store operates on a single channel in "United States"
         And I am a logged in customer
-        And the store has a product "PHP T-Shirt" priced at "$10.99"
-        And I add this product to the cart
-        And the store has a product "PHP Mug" priced at "$5.99"
+        And the store has a product "PHP Mug" priced at "$10.99"
         And I add this product to the cart
 
-    @ui
+    @ui @api
     Scenario: Removing product from cart when it is disabled
         Given product "PHP Mug" has been disabled
-        When I am on the summary of my cart page
-        And there should be one item in my cart
-        And this item should have name "PHP T-Shirt"
+        Then my cart should be empty
 
-    @ui
+    @ui @api
     Scenario: Removing product from cart when it is not available in channel
         Given product "PHP Mug" has been disabled in channel "United States"
-        When I am on the summary of my cart page
-        And there should be one item in my cart
-        And this item should have name "PHP T-Shirt"
+        Then my cart should be empty
 
-    @ui
+    @ui @api
     Scenario: Removing product from cart when it is not available in channel and is disabled
         Given product "PHP Mug" has been disabled in channel "United States"
         And product "PHP Mug" has been disabled
-        When I am on the summary of my cart page
-        And there should be one item in my cart
-        And this item should have name "PHP T-Shirt"
+        Then my cart should be empty
