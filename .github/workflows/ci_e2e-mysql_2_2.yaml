@@ -431,10 +431,6 @@ jobs:
                 chrome --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --remote-debugging-port=9222 --disable-extensions --no-sandbox --enable-features=Metal --headless --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
               shell: bash
               working-directory: "${{ env.test_dir }}"
-
-            - name: Run webserver
-              run: symfony server:start --port=8080 --dir=${{ env.test_dir }}/public --daemon
-              shell: bash
     
             - name: Configure Encore for non-JS end-to-end tests
               run: |
