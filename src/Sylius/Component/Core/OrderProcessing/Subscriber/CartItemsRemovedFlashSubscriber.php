@@ -36,6 +36,11 @@ class CartItemsRemovedFlashSubscriber implements EventSubscriberInterface
 
     public function onCartItemsRemoved(CartItemsRemovedEvent $event): void
     {
+        $request = $this->requestStack->getCurrentRequest();
+        if (null === $request || !$request->hasSession() || !$request->getSession()->isStarted()) {
+            return;
+        }
+
         $session = $this->requestStack->getSession();
 
         $message = $this->translator->trans(
