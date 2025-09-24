@@ -41,7 +41,7 @@ class CartItemsRemovedFlashSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $session = $this->requestStack->getSession();
+        $session = $request->getSession();
 
         $message = $this->translator->trans(
             'sylius.cart.product.not_available',

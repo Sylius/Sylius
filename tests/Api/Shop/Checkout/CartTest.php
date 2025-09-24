@@ -452,6 +452,7 @@ final class CartTest extends JsonApiTestCase
             $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'Please provide a shipping address.'],
+                ['propertyPath' => '', 'message' => 'An empty order cannot be processed.'],
             ],
         );
     }
@@ -499,6 +500,7 @@ final class CartTest extends JsonApiTestCase
                 ['propertyPath' => 'shippingAddress.street', 'message' => 'Please enter street.'],
                 ['propertyPath' => 'shippingAddress.city', 'message' => 'Please enter city.'],
                 ['propertyPath' => 'shippingAddress.postcode', 'message' => 'Please enter postcode.'],
+                ['propertyPath' => '', 'message' => 'An empty order cannot be processed.'],
             ],
         );
     }

@@ -1,7 +1,7 @@
 Sylius\Component\Core\Model\Product:
     mug:
         code: "MUG"
-        channels: ["@channel"]
+        channels: ["@channel", "@expensive_channel"]
         currentLocale: "en_US"
         translations:
             en_US: "@mug_translation"

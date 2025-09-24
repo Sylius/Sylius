@@ -70,8 +70,8 @@ final class RemoveUnavailableCartItemsProcessor implements OrderProcessorInterfa
         foreach ($itemsToRemove as $item) {
             $order->removeItem($item);
             $this->entityManager->persist($order);
-            $this->entityManager->flush();
         }
+        $this->entityManager->flush();
 
         if ($itemsToRemove !== []) {
             $this->eventDispatcher->dispatch(new CartItemsRemovedEvent(
