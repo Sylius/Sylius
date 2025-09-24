@@ -25,6 +25,7 @@ sylius:
     order:
         currency_code:
             not_valid: Valiutos kodas yra neteisingas.
+        product_channel_assignment: Produktas "%productName%" nėra prieinamas pasirinktam kanalui.
     product_variant:
         onHand:
             min: Atsargos turi būti didesnės nei {{ limit }}.

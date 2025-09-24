@@ -40,6 +40,7 @@ sylius:
             not_valid: Въведеният от вас валутен код е невалиден.
         payment_method_eligibility: 'Този метод на плащане %paymentMethodName% не е активен. Моля изберете друг метод на плащане.'
         product_eligibility: 'Този продукт %productName% не е активен.'
+        product_channel_assignment: 'Продуктът "%productName%" не е наличен в избрания канал.'
         shipping_method_eligibility: 'Продукт не покрива изисквания за метод на доставка %shippingMethodName%. Моля изберете друг метод на доставка.'
     locale:
         enabled:

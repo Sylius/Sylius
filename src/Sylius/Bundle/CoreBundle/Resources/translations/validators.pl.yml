@@ -40,6 +40,7 @@ sylius:
             not_valid: Wprowadzony kod waluty jest nieprawidłowy.
         payment_method_eligibility: 'Metoda płatności o nazwie %paymentMethodName% została wyłączona. Wybierz ponownie metodę płatności.'
         product_eligibility: 'Produkt o nazwie %productName% został dezaktywowany.'
+        product_channel_assignment: 'Produkt "%productName%" nie jest dostępny w wybranym kanale sprzedaży.'
         shipping_method_eligibility: 'Wybrany produkt nie może być użyty z metodą wysyłki o nazwie %shippingMethodName%. Wybierz ponownie metodę wysyłki.'
     locale:
         enabled:

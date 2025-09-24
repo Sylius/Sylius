@@ -26,6 +26,7 @@ sylius:
         currency_code:
             not_valid: קוד המטבע אינו תקני.
         shipping_method_eligibility: 'המוצר אינו מתאים למשלוח באמצעות %shippingMethodName%. אנא בחרו שיטת משלוח אחרת.'
+        product_channel_assignment: 'המוצר "%productName%" אינו זמין בערוץ הנבחר.'
     product_variant:
         weight:
             min: משקל אינו יכול להיות שלילי.

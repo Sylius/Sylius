@@ -107,6 +107,7 @@ sylius:
         invalid_state_transition: 'Der Vorgang kann nicht abgeschlossen werden, da die Bestellung in einem falschen Zustand ist. Aktueller Zustand: %currentState%. Mögliche Übergänge: %possibleTransitions%.'
         payment_method_eligibility: 'Diese Zahlungsmethode %paymentMethodName% wurde deaktiviert. Bitte wählen Sie eine andere Zahlungsmethode.'
         product_eligibility: 'Dieses Produkt %productName% wurde deaktiviert.'
+        product_channel_assignment: 'Das Produkt "%productName%" ist im ausgewählten Kanal nicht verfügbar.'
         shipping_method_eligibility: 'Das Produkt erfüllt nicht die Anforderungen der Versandmethode %shippingMethodName%. Bitte wählen Sie eine andere Versandmethode.'
         shipping_method_not_available: 'Die Versandmethode "%shippingMethodName%" ist nicht verfügbar. Bitte wählen Sie eine andere Versandmethode.'
         cart_items_immutable: 'Warenkorbelemente können nach Abschluss des Checkouts nicht mehr geändert werden.'

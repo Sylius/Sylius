@@ -107,6 +107,7 @@ sylius:
         invalid_state_transition: 'لا يمكن الإتمام لأن الطلب في حالة غير صحيحة. الحالة الحالية: %currentState%. التحولات المحتملة: %possibleTransitions%.'
         payment_method_eligibility: تم تعطيل طريقة الدفع %paymentMethodName%. يرجى إعادة اختيار طريقة الدفع.
         product_eligibility: تم تعطيل المنتج %productName%.
+        product_channel_assignment: المنتج "%productName%" غير متوفر في القناة المحددة.
         shipping_method_eligibility: لا يتوافق المنتج مع شروط طريقة الشحن %shippingMethodName%. يرجى إعادة اختيار طريقة الشحن.
         shipping_method_not_available: طريقة الشحن "%shippingMethodName%" غير متاحة. يرجى إعادة اختيار طريقة الشحن.
         cart_items_immutable: لا يمكن تعديل عناصر السلة بعد إتمام عملية الدفع.

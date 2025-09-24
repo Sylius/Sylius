@@ -107,6 +107,7 @@ sylius:
         invalid_state_transition: 'ऑर्डर गलत स्थिति में है, पूरा नहीं किया जा सकता। वर्तमान: %currentState%. संभावित परिवर्तन: %possibleTransitions%.'
         payment_method_eligibility: 'भुगतान विधि %paymentMethodName% अक्षम कर दी गई है। कृपया दूसरी भुगतान विधि चुनें।'
         product_eligibility: 'उत्पाद %productName% अक्षम कर दिया गया है।'
+        product_channel_assignment: 'उत्पाद "%productName%" चयनित चैनल में उपलब्ध नहीं है।'
         shipping_method_eligibility: 'उत्पाद %shippingMethodName% शिपिंग विधि की आवश्यकताओं को पूरा नहीं करता। कृपया शिपिंग विधि पुनः चुनें।'
         shipping_method_not_available: '"%shippingMethodName%" शिपिंग विधि उपलब्ध नहीं है। कृपया शिपिंग विधि पुनः चुनें।'
         cart_items_immutable: 'चेकआउट पूरा होने के बाद कार्ट आइटम बदले नहीं जा सकते।'

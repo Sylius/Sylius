@@ -107,6 +107,7 @@ sylius:
         invalid_state_transition: "Impossible de terminer car la commande est dans un mauvais état. Actuellement : %currentState%. Transitions possibles : %possibleTransitions%."
         payment_method_eligibility: Cette méthode de paiement %paymentMethodName% a été désactivée. Veuillez sélectionner une nouvelle fois votre mode de paiement.
         product_eligibility: Le produit %productName% a été désactivé.
+        product_channel_assignment: Le produit "%productName%" n'est pas disponible dans le canal sélectionné.
         shipping_method_eligibility: Ce produit n'est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.
         shipping_method_not_available: Le mode d'expédition "%shippingMethodName%" n'est pas disponible. Veuillez sélectionner à nouveau votre mode de livraison.
         cart_items_immutable: Impossible de modifier les articles du panier après la finalisation de la commande.

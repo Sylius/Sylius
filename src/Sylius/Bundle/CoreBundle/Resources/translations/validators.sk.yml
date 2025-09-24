@@ -107,6 +107,7 @@ sylius:
         invalid_state_transition: 'Nie je možné dokončiť, pretože objednávka je v nesprávnom stave. Aktuálny: %currentState%. Možné prechody: %possibleTransitions%.'
         payment_method_eligibility: 'Tento spôsob platby %paymentMethodName% bol deaktivovaný. Prosím, vyberte iný spôsob platby.'
         product_eligibility: 'Tento produkt %productName% bol deaktivovaný.'
+        product_channel_assignment: 'Produkt "%productName%" nie je dostupný v zvolenom kanáli.'
         shipping_method_eligibility: 'Produkt nespĺňa požiadavky pre spôsob dopravy %shippingMethodName%. Prosím, vyberte iný spôsob dopravy.'
         shipping_method_not_available: 'Spôsob dopravy "%shippingMethodName%" nie je k dispozícii. Prosím, vyberte iný spôsob dopravy.'
         cart_items_immutable: 'Po dokončení pokladne nie je možné zmeniť položky v košíku.'

@@ -107,6 +107,7 @@ sylius:
         invalid_state_transition: '주문의 상태가 올바르지 않아 완료할 수 없습니다. 현재 상태: %currentState%. 가능한 전환: %possibleTransitions%.'
         payment_method_eligibility: '결제 방법 %paymentMethodName% 이(가) 비활성화되었습니다. 다른 결제 방법을 선택하세요.'
         product_eligibility: '상품 %productName% 이(가) 비활성화되었습니다.'
+        product_channel_assignment: '상품 "%productName%" 은(는) 선택한 채널에서 이용할 수 없습니다.'
         shipping_method_eligibility: '%shippingMethodName% 배송 방법의 요구 사항을 충족하지 않습니다. 배송 방법을 다시 선택하세요.'
         shipping_method_not_available: '"%shippingMethodName%" 배송 방법을 이용할 수 없습니다. 다른 배송 방법을 선택하세요.'
         cart_items_immutable: '결제 완료 후에는 카트 아이템을 변경할 수 없습니다.'

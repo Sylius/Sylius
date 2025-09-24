@@ -107,6 +107,7 @@ sylius:
         invalid_state_transition: '注文の状態が正しくないため実行できません。現在: %currentState%。可能な遷移: %possibleTransitions%。'
         payment_method_eligibility: '支払方法 %paymentMethodName% は無効化されています。別の方法を選択してください。'
         product_eligibility: '商品 %productName% は無効化されています。'
+        product_channel_assignment: '商品 "%productName%" は選択したチャンネルで利用できません。'
         shipping_method_eligibility: '%shippingMethodName% 配送方法の条件を満たしていません。配送方法を再選択してください。'
         shipping_method_not_available: '"%shippingMethodName%" 配送方法は利用できません。配送方法を再選択してください。'
         cart_items_immutable: 'チェックアウト完了後はカート商品を変更できません。'

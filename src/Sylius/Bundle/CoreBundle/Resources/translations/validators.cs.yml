@@ -108,6 +108,7 @@ sylius:
         payment_method_eligibility: 'Tato platební metoda %paymentMethodName% byla zakázána. Prosím vyberte jinou platební metodu.'
         product_eligibility: 'Tento produkt %productName% byl zakázán.'
         shipping_method_eligibility: 'Produkt nesplňuje požadavky pro dopravní metodu %shippingMethodName%. Prosím vyberte jinou dopravní metodu.'
+        product_channel_assignment: 'Produkt "%productName%" není dostupný v zvoleném kanálu.'
         shipping_method_not_available: 'Dopravní metoda "%shippingMethodName%" není k dispozici. Prosím vyberte jinou dopravní metodu.'
         cart_items_immutable: 'Po dokončení objednávky nelze změnit položky v košíku.'
     resend_order_confirmation_email:
