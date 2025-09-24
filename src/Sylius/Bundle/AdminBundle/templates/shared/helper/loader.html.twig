@@ -1,0 +1,15 @@
+{%- macro render(class='', spinnerClass='', color='#22b99a', size='1.5rem', thickness='2px', speed=750, label=null) -%}
+    {%- set _label = label is not null ? label : 'sylius.ui.loading'|trans -%}
+
+    <div data-loading>
+        <div class="sylius-loader{{ class ? ' ' ~ class }}"
+             role="status" aria-live="polite" aria-busy="true">
+            <span
+                class="spinner-border{{ spinnerClass ? ' ' ~ spinnerClass }}"
+                style="--tblr-spinner-width: {{ size }}; --tblr-spinner-height: {{ size }}; --tblr-spinner-border-width: {{ thickness }}; --tblr-spinner-animation-speed: {{ speed }}ms; color: {{ color }};"
+                aria-hidden="true">
+            </span>
+            <span class="visually-hidden">{{ _label }}</span>
+        </div>
+    </div>
+{%- endmacro -%}
