@@ -78,7 +78,6 @@ final class TaxonFilterTest extends TestCase
         $this->taxonFilter->filterProperty('taxon', 'api/taxon', $queryBuilder, $queryNameGenerator, 'resourceClass');
     }
 
-
     public function test_it_does_not_add_order_by_if_different_order_parameter_specified(): void
     {
         $taxon = $this->createMock(TaxonInterface::class);
