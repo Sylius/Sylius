@@ -1,0 +1,138 @@
+name: End-to-End (MariaDB)
+
+on:
+    workflow_dispatch: ~
+    workflow_call:
+        inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
+            type:
+                description: "Type of the build"
+                required: true
+                type: string
+
+permissions:
+    contents: read
+
+jobs:
+    get-matrix:
+        runs-on: ubuntu-latest
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                uses: actions/checkout@v4
+                if: "${{ inputs.branch == '' }}"
+
+            -   name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.e2e-mariadb'
+
+    behat-no-js:
+        needs: get-matrix
+        runs-on: ubuntu-latest
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}"
+        timeout-minutes: 45
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+            TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
+
+        steps:
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.14" ]; then
+                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
+                    elif [ "$BRANCH" == "2.0" ]; then
+                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
+                    else
+                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
+                    fi
+
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: Require Winzou State Machine
+                if: "${{ matrix.state_machine_adapter == 'winzou_state_machine' }}"
+                run: |
+                    composer require winzou/state-machine:^0.4 --no-update   
+                    composer require winzou/state-machine-bundle:^0.6 --no-update   
+
+            -   name: Prepare manifest.json files
+                if: "${{ inputs.branch != '1.14' }}"
+                run: |
+                    mkdir -p public/build/admin
+                    mkdir -p public/build/shop
+                    mkdir -p public/build/app/admin
+                    mkdir -p public/build/app/shop
+                    echo "{}" > public/build/admin/manifest.json
+                    echo "{}" > public/build/shop/manifest.json
+                    echo "{}" > public/build/app/admin/manifest.json
+                    echo "{}" > public/build/app/shop/manifest.json
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v2.6
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    e2e: "yes"
+                    database: "mariadb"
+                    database_version: ${{ matrix.mariadb }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
+                    chrome_version: stable
+                    composer_ignore_platform_reqs: yes
+
+            -   name: Run PHPUnit
+                run: |
+                    vendor/bin/phpunit --testsuite all --colors=always
+                    vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
+
+            -   name: Run CLI Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
+
+            -   name: Run non-UI Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" --rerun
+
+            -   name: Run non-JS Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore
+                    overwrite: true

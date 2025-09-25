@@ -1,0 +1,102 @@
+name: Packages
+
+on:
+    workflow_dispatch: ~
+    workflow_call:
+        inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
+            type:
+                description: "Type of the build"
+                required: true
+                type: string
+
+permissions:
+    contents: read
+
+jobs:
+    get-matrix:
+        runs-on: ubuntu-latest
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.packages'
+
+    test:
+        needs: get-matrix
+        runs-on: ubuntu-latest
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}${{ matrix.orm != '' && format(', ORM {0}', matrix.orm) || '' }}"
+        timeout-minutes: 25
+
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+
+        env:
+            COMPOSER_ROOT_VERSION: "dev-main"
+            SYMFONY_VERSION: "${{ matrix.symfony }}"
+            DOCTRINE_ORM_VERSION: "${{ matrix.orm }}"
+            UNSTABLE: "no"
+
+        steps:
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    coverage: none
+
+            -   name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins --ignore-parse-errors "symfony/flex:^2.4"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: Cache Composer
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
+                    restore-keys: |
+                        "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
+
+            -   name: Install Robo
+                run: |
+                    wget https://github.com/consolidation/Robo/releases/latest/download/robo.phar
+                    chmod +x robo.phar && sudo mv robo.phar /tmp/robo
+                    
+            -   name: "Run pipeline"
+                run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 /tmp/robo ci:packages
