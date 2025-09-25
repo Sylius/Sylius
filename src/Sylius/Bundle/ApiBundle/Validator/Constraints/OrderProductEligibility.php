@@ -18,7 +18,10 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderProductEligibility extends Constraint
 {
+    /** @deprecated will be removed in Sylius 3.0, use $productEligibility instead */
     public string $message = 'sylius.order.product_eligibility';
+    public string $productEligibility = 'sylius.order.product_eligibility';
+    public string $productChannelAssignment = 'sylius.order.product_channel_assignment';
 
     public function validatedBy(): string
     {

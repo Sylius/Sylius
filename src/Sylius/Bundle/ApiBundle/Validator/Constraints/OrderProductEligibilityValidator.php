@@ -56,17 +56,17 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
         foreach ($orderItems as $orderItem) {
             if (!$orderItem->getVariant()->isEnabled()) {
                 $this->context->addViolation(
-                    $constraint->message,
+                    $constraint->productEligibility,
                     ['%productName%' => $orderItem->getVariant()->getName()],
                 );
             } elseif (!$orderItem->getProduct()->isEnabled()) {
                 $this->context->addViolation(
-                    $constraint->message,
+                    $constraint->productEligibility,
                     ['%productName%' => $orderItem->getProduct()->getName()],
                 );
             } elseif (!$orderItem->getProduct()->hasChannel($channel)) {
                 $this->context->addViolation(
-                    $constraint->message,
+                    $constraint->productChannelAssignment,
                     ['%productName%' => $orderItem->getProduct()->getName()],
                 );
             }
