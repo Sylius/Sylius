@@ -13,7 +13,7 @@ Feature: Adding a product with only original price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its slug to "games/Dice-brewing" in "English (United States)"
+        And I set its slug to "games-Dice-brewing" in "English (United States)"
         And I set its original price to "$100.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created

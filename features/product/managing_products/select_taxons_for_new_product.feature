@@ -16,7 +16,7 @@ Feature: Select taxon for a new product
         And I choose main taxon "Sad"
         And I name it "Gentleman Jack" in "English (United States)"
         And I specify its code as "WHISKEY_GENTLEMEN"
-        And I set its slug to "whiskey/gentleman-jack" in "English (United States)"
+        And I set its slug to "whiskey-gentleman-jack" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And main taxon of product "Gentleman Jack" should be "Sad"
