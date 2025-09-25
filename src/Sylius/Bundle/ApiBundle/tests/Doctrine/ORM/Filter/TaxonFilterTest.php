@@ -60,21 +60,24 @@ final class TaxonFilterTest extends TestCase
         $queryBuilder->method('addSelect')->willReturnSelf();
         $queryBuilder->method('innerJoin')->willReturnSelf();
         $queryBuilder->method('andWhere')->willReturnSelf();
-        $queryBuilder->method('addOrderBy')->willReturnSelf();
         $queryBuilder->method('setParameter')->willReturnSelf();
+
+        $queryBuilder
+            ->expects($this->once())
+            ->method('addOrderBy')
+            ->with(
+                $this->equalTo('productTaxon.position'),
+                $this->isNull(),
+            )
+            ->willReturnSelf();
 
         $taxon->method('getRoot')->willReturn($taxonRoot);
         $taxon->method('getLeft')->willReturn(3);
         $taxon->method('getRight')->willReturn(5);
 
-        $this->taxonFilter->filterProperty(
-            'taxon',
-            'api/taxon',
-            $queryBuilder,
-            $queryNameGenerator,
-            'resourceClass',
-        );
+        $this->taxonFilter->filterProperty('taxon', 'api/taxon', $queryBuilder, $queryNameGenerator, 'resourceClass');
     }
+
 
     public function test_it_does_not_add_order_by_if_different_order_parameter_specified(): void
     {

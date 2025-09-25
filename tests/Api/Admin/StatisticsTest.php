@@ -187,7 +187,7 @@ final class StatisticsTest extends JsonApiTestCase
     #[DataProvider('invalidQueryParameters')]
     #[Test]
     public function it_returns_a_validation_error_if_any_of_required_parameters_is_missing_empty_or_invalid(
-        array $queryParameters,
+        array $parameters,
         array $expectedViolations,
     ): void {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
@@ -195,7 +195,7 @@ final class StatisticsTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/statistics',
-            parameters: $queryParameters,
+            parameters: $parameters,
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 

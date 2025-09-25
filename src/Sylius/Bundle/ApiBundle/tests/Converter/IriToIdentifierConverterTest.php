@@ -240,7 +240,7 @@ final class IriToIdentifierConverterTest extends TestCase
         yield [new \stdClass()];
     }
 
-    private static function unicodeUrlValues(): array
+    public static function unicodeUrlValues(): array
     {
         return [
             ['/resource/zażółć'],
@@ -255,7 +255,7 @@ final class IriToIdentifierConverterTest extends TestCase
         ];
     }
 
-    private static function invalidUrlValues(): array
+    public static function invalidUrlValues(): array
     {
         return [
             ['/resource/line\nbreak'],

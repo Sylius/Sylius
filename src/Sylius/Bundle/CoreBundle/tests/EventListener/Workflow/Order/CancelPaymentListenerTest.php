@@ -75,9 +75,7 @@ final class CancelPaymentListenerTest extends TestCase
 
         $this->stateMachine
             ->method('can')
-            ->willReturnCallback(function ($payment) use ($payment1, $payment2) {
-                return in_array($payment, [$payment1, $payment2], true);
-            })
+            ->willReturnCallback(fn ($payment) => in_array($payment, [$payment1, $payment2], true))
         ;
 
         $this->stateMachine

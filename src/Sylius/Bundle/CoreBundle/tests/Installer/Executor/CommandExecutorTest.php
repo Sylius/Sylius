@@ -60,13 +60,11 @@ final class CommandExecutorTest extends TestCase
             ->expects($this->once())
             ->method('run')
             ->with(
-                $this->callback(function (ArrayInput $input) {
-                    return $input->getFirstArgument() === 'command' &&
-                        $input->getParameterOption('--no-debug') === true &&
-                        $input->getParameterOption('--env') === 'dev' &&
-                        $input->hasParameterOption('--verbose') &&
-                        !$input->hasParameterOption('--no-interaction');
-                }),
+                $this->callback(fn (ArrayInput $input) => $input->getFirstArgument() === 'command' &&
+                    $input->getParameterOption('--no-debug') === true &&
+                    $input->getParameterOption('--env') === 'dev' &&
+                    $input->hasParameterOption('--verbose') &&
+                    !$input->hasParameterOption('--no-interaction')),
                 $this->isInstanceOf(NullOutput::class),
             )
             ->willReturn(0)
@@ -95,13 +93,11 @@ final class CommandExecutorTest extends TestCase
             ->expects($this->once())
             ->method('run')
             ->with(
-                $this->callback(function (ArrayInput $input) {
-                    return $input->getFirstArgument() === 'command' &&
-                        $input->getParameterOption('--no-debug') === true &&
-                        $input->getParameterOption('--env') === 'dev' &&
-                        $input->hasParameterOption('--verbose') &&
-                        $input->hasParameterOption('--no-interaction');
-                }),
+                $this->callback(fn (ArrayInput $input) => $input->getFirstArgument() === 'command' &&
+                    $input->getParameterOption('--no-debug') === true &&
+                    $input->getParameterOption('--env') === 'dev' &&
+                    $input->hasParameterOption('--verbose') &&
+                    $input->hasParameterOption('--no-interaction')),
                 $this->isInstanceOf(NullOutput::class),
             )
             ->willReturn(0)

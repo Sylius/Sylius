@@ -75,9 +75,7 @@ final class CancelShipmentListenerTest extends TestCase
 
         $this->stateMachine
             ->method('can')
-            ->willReturnCallback(function ($shipment) use ($shipment1, $shipment2) {
-                return in_array($shipment, [$shipment1, $shipment2], true);
-            })
+            ->willReturnCallback(fn ($shipment) => in_array($shipment, [$shipment1, $shipment2], true))
         ;
 
         $this->stateMachine

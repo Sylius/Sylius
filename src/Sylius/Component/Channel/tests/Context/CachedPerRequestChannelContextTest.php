@@ -146,7 +146,7 @@ final class CachedPerRequestChannelContextTest extends TestCase
         $callable = new class($channel) {
             private int $counter = 0;
 
-            public function __construct(private ChannelInterface $channel)
+            public function __construct(private readonly ChannelInterface $channel)
             {
             }
 

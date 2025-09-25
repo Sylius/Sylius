@@ -46,9 +46,9 @@
         "symfony/webpack-encore-bundle": "^2.2"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpunit/phpunit": "^10.5",
+        "matthiasnoback/symfony-config-test": "^6.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
         "symfony/form": "^6.4.1 || ^7.2",
         "twig/twig": "^3.14"

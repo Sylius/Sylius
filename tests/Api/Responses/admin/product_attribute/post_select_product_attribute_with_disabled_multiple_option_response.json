@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "Configuration multiple must be true if min or max entries values are specified.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('Configuration multiple must be true if min or max entries values are specified.').optional()",
     "status": 422,
     "violations":[
         {
@@ -13,7 +15,5 @@
         }
     ],
     "detail": "Configuration multiple must be true if min or max entries values are specified.",
-    "description": "Configuration multiple must be true if min or max entries values are specified.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

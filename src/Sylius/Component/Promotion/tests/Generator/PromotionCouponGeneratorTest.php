@@ -101,12 +101,8 @@ final class PromotionCouponGeneratorTest extends TestCase
         $this->promotionCouponFactory->expects($this->once())->method('createNew')->willReturn($this->promotionCoupon);
         $this->promotionCouponRepository->expects($this->once())->method('findOneBy')->willReturn(null);
         $this->promotionCoupon->expects($this->once())->method('setPromotion')->with($this->promotion);
-        $this->promotionCoupon->expects($this->once())->method('setCode')->willReturnCallback(function (string $couponCode): bool {
-            return
-                str_starts_with($couponCode, 'PREFIX_') &&
-                strpos($couponCode, '_SUFFIX') === strlen($couponCode) - strlen('_SUFFIX')
-            ;
-        });
+        $this->promotionCoupon->expects($this->once())->method('setCode')->willReturnCallback(fn (string $couponCode): bool => str_starts_with($couponCode, 'PREFIX_') &&
+        strpos($couponCode, '_SUFFIX') === strlen($couponCode) - strlen('_SUFFIX'));
         $this->promotionCoupon->expects($this->once())->method('setUsageLimit')->with(null);
         $this->promotionCoupon->expects($this->once())->method('setExpiresAt')->with(null);
         $this->objectManager->expects($this->once())->method('persist')->with($this->promotionCoupon);

@@ -53,9 +53,7 @@ final class CachedLocaleCollectionProviderTest extends TestCase
         $anotherLocale->method('getCode')->willReturn('en_GB');
         $this->cache->expects($this->once())->method('get')
             ->with('sylius_locales', $this->isType('callable'))
-            ->willReturnCallback(function (string $key, callable $callback) {
-                return $callback();
-            });
+            ->willReturnCallback(fn (string $key, callable $callback) => $callback());
         $this->decorated->expects($this->once())->method('getAll')
             ->willReturn(['en_US' => $someLocale, 'en_GB' => $anotherLocale]);
         self::assertSame(['en_US' => $someLocale, 'en_GB' => $anotherLocale], $this->cachedLocaleCollectionProvider->getAll());

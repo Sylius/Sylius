@@ -2,11 +2,11 @@
     "@context": "\/api\/v2\/contexts\/Error",
     "@id": "\/api\/v2\/errors\/400",
     "@type": "hydra:Error",
-    "title": "An error occurred",
     "detail": "Request does not have the following required fields specified: shippingMethod.",
     "status": 400,
     "type": "\/errors\/400",
-    "description": "Request does not have the following required fields specified: shippingMethod.",
     "hydra:description": "Request does not have the following required fields specified: shippingMethod.",
-    "hydra:title": "An error occurred"
+    "hydra:title": "An error occurred",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('Request does not have the following required fields specified: shippingMethod.').optional()"
 }
