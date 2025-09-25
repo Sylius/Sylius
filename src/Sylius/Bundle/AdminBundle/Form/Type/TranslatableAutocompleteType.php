@@ -112,7 +112,7 @@ final class TranslatableAutocompleteType extends AbstractType
     private static function getComparisons(Expr $expr, array $fields): iterable
     {
         foreach ($fields as $field) {
-            yield $expr->like($field, ':query');
+            yield $expr->like($field, 'LOWER(:query)');
         }
     }
 }
