@@ -89,14 +89,14 @@ class RoboFile extends Tasks
         if ('' !== $doctrineORMVersion && $requiresDoctrineORM) {
             $task
                 ->exec(sprintf(
-                    'composer require %s doctrine/orm "%s" --no-update --no-scripts --no-interaction',
+                    'composer require %s doctrine/orm "%s" --no-update --no-scripts --no-interaction --ignore-platform-reqs',
                     $existsOnRequireDev ? '--dev' : '',
                     $doctrineORMVersion,
                 ));
         }
 
         $task
-            ->exec('composer update --no-scripts --no-interaction')
+            ->exec('composer update --no-scripts --no-interaction --ignore-platform-reqs')
             ->exec('composer validate --ansi --strict')
         ;
 
