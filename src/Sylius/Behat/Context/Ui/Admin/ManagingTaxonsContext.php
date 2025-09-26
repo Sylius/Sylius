@@ -30,20 +30,22 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final readonly class ManagingTaxonsContext implements Context
+final class ManagingTaxonsContext implements Context
 {
+    private array $autocompleteSearchResults = [];
+
     public function __construct(
-        private SharedStorageInterface $sharedStorage,
-        private CreatePageInterface $createPage,
-        private BaseCreatePageInterface $createForParentPage,
-        private UpdatePageInterface $updatePage,
-        private FormElementInterface $formElement,
-        private ImageFormElementInterface $imageFormElement,
-        private TreeElementInterface $treeElement,
-        private NotificationCheckerInterface $notificationChecker,
-        private JavaScriptTestHelper $testHelper,
-        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
-        private TaxonomyFormElementInterface $productTaxonomyFormElement,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly CreatePageInterface $createPage,
+        private readonly BaseCreatePageInterface $createForParentPage,
+        private readonly UpdatePageInterface $updatePage,
+        private readonly FormElementInterface $formElement,
+        private readonly ImageFormElementInterface $imageFormElement,
+        private readonly TreeElementInterface $treeElement,
+        private readonly NotificationCheckerInterface $notificationChecker,
+        private readonly JavaScriptTestHelper $testHelper,
+        private readonly UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private readonly TaxonomyFormElementInterface $productTaxonomyFormElement,
     ) {
     }
 
@@ -486,5 +488,25 @@ final readonly class ManagingTaxonsContext implements Context
     public function itShouldBeDisabled(): void
     {
         Assert::false($this->formElement->isEnabled());
+    }
+
+    /**
+     * @When I search for :searchTerm in the parent taxon autocomplete
+     */
+    public function iSearchForInTheParentTaxonAutocomplete(string $searchTerm): void
+    {
+        $this->testHelper->waitUntilPageLoads();
+        $this->autocompleteSearchResults = $this->formElement->searchParentTaxonAutocomplete($searchTerm);
+    }
+
+    /**
+     * @Then I should see :taxonName in the autocomplete results
+     */
+    public function iShouldSeeInTheAutocompleteResults(string $taxonName): void
+    {
+        Assert::true(
+            in_array($taxonName, $this->autocompleteSearchResults, true),
+            sprintf('Expected to see "%s" in autocomplete results, but found: %s', $taxonName, implode(', ', $this->autocompleteSearchResults))
+        );
     }
 }

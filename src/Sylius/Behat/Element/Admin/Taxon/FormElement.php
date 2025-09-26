@@ -107,6 +107,17 @@ class FormElement extends BaseFormElement implements FormElementInterface
         return $this->getElement('enabled')->isChecked();
     }
 
+    public function searchParentTaxonAutocomplete(string $searchTerm): array
+    {
+        $searchResults = $this->autocompleteHelper->search(
+            $this->getDriver(),
+            $this->getElement('parent')->getXpath(),
+            $searchTerm
+        );
+
+        return is_array($searchResults) ? array_values($searchResults) : [];
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

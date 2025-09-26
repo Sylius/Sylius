@@ -45,4 +45,6 @@ interface FormElementInterface extends BaseFormElementInterface
     public function disable(): void;
 
     public function isEnabled(): bool;
+
+    public function searchParentTaxonAutocomplete(string $searchTerm): array;
 }
