@@ -40,8 +40,8 @@
         "php-http/message-factory": "^1.1"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpunit/phpunit": "^10.5",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {

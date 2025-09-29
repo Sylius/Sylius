@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description":"translations[en_US].name: Please enter taxon name.\ntranslations[en_US].slug: Please enter taxon slug.\ncode: Please enter taxon code.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('translations[en_US].name: Please enter taxon name.\ntranslations[en_US].slug: Please enter taxon slug.\ncode: Please enter taxon code.').optional()",
     "status": 422,
     "violations":[
         {
@@ -23,7 +25,5 @@
         }
     ],
     "detail":"translations[en_US].name: Please enter taxon name.\ntranslations[en_US].slug: Please enter taxon slug.\ncode: Please enter taxon code.",
-    "description":"translations[en_US].name: Please enter taxon name.\ntranslations[en_US].slug: Please enter taxon slug.\ncode: Please enter taxon code.",
-    "type":"\/validation_errors\/@string@",
-    "title":"An error occurred"
+    "type":"\/validation_errors\/@string@"
 }

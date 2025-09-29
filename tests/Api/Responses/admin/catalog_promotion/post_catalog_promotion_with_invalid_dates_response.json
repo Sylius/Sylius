@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "endDate: End date cannot be set before start date.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('endDate: End date cannot be set before start date.').optional()",
     "status": 422,
     "violations": [
         {
@@ -13,7 +15,5 @@
         }
     ],
     "detail": "endDate: End date cannot be set before start date.",
-    "description": "endDate: End date cannot be set before start date.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

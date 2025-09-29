@@ -11,6 +11,12 @@
 
 declare(strict_types=1);
 
+use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -19,12 +25,12 @@ class AppKernel extends Kernel
     public function registerBundles(): iterable
     {
         return [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
+            new FrameworkBundle(),
+            new BabDevPagerfantaBundle(),
+            new DoctrineBundle(),
+            new SyliusTaxonomyBundle(),
+            new SyliusResourceBundle(),
+            new TwigBundle(),
         ];
     }
 

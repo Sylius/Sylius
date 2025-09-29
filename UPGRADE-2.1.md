@@ -1,3 +1,10 @@
+# UPGRADE FROM `2.1.5` TO `2.1.6`
+
+### API Platform
+
+1. API Platform 4.2: the title and description fields are no longer present (use hydra:title / hydra:description and violations instead).
+   PHPUnit and Behat tests have been updated to account for these changes.
+
 # UPGRADE FROM `2.1.2` TO `2.1.3`
 
 ### Deprecations

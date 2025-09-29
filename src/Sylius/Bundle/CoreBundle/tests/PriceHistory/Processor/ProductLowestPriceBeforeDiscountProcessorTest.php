@@ -131,10 +131,8 @@ final class ProductLowestPriceBeforeDiscountProcessorTest extends TestCase
         $this->logEntryRepository
             ->expects($this->once())
             ->method('findLowestPriceInPeriod')
-            ->with(1234, $channelPricing, $this->callback(function ($value) use ($expectedStartDate) {
-                return $value instanceof \DateTimeInterface &&
-                    $value->format('Y-m-d') === $expectedStartDate->format('Y-m-d');
-            }))
+            ->with(1234, $channelPricing, $this->callback(fn ($value) => $value instanceof \DateTimeInterface &&
+                $value->format('Y-m-d') === $expectedStartDate->format('Y-m-d')))
             ->willReturn(6900)
         ;
 

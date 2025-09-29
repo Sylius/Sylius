@@ -108,9 +108,9 @@ final class ShopUserBasedExtensionTest extends TestCase
         $queryBuilder->method('expr')->willReturn($expr);
         $expr->method('eq')->with('o.customer', ':customer')->willReturn($comparison);
 
-        $queryBuilder->method('innerJoin')->with('o.customer', 'customer')->willReturn($queryBuilder);
-        $queryBuilder->method('andWhere')->with($comparison)->willReturn($queryBuilder);
-        $queryBuilder->method('setParameter')->with(':customer', $customer)->willReturn($queryBuilder);
+        $queryBuilder->expects($this->exactly(2))->method('innerJoin')->with('o.customer', 'customer')->willReturn($queryBuilder);
+        $queryBuilder->expects($this->exactly(2))->method('andWhere')->with($comparison)->willReturn($queryBuilder);
+        $queryBuilder->expects($this->exactly(2))->method('setParameter')->with($this->anything(), $customer)->willReturn($queryBuilder);
 
         $this->extension->applyToCollection($queryBuilder, $queryNameGenerator, AddressInterface::class);
         $this->extension->applyToItem($queryBuilder, $queryNameGenerator, AddressInterface::class, []);

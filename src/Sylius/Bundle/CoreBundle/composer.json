@@ -75,10 +75,10 @@
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/orm": "^2.18 || ^3.3",
         "hwi/oauth-bundle": "^2.2",
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "matthiasnoback/symfony-config-test": "^6.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpspec/prophecy-phpunit": "^2.2",
-        "phpunit/phpunit": "^10.5",
+        "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
         "symfony/dotenv": "^6.4 || ^7.2",
         "nyholm/psr7": "^1.8"

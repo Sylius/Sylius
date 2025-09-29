@@ -34,7 +34,7 @@
         "symfony/http-foundation": "^6.4 || ^7.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.5"
+        "phpunit/phpunit": "^11.5"
     },
     "config": {
         "allow-plugins": {

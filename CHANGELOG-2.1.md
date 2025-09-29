@@ -1,5 +1,22 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.6 (2025-09-25)
+
+#### Details
+
+- [#18362](https://github.com/Sylius/Sylius/pull/18362) [CS][DX] Refactor
+- [#18111](https://github.com/Sylius/Sylius/pull/18111) [Composer] Bump PHPUnit to ^11.5 + run Rector rule ([@GSadee](https://github.com/GSadee))
+- [#18370](https://github.com/Sylius/Sylius/pull/18370) [CS][DX] Refactor
+- [#18364](https://github.com/Sylius/Sylius/pull/18364) [BUGFIX] Correct pricing currency resolution in product variant view ([@tomkalon](https://github.com/tomkalon))
+- [#18386](https://github.com/Sylius/Sylius/pull/18386) [CI] Bump Symfony from 7.2 to 7.3 across all workflow matrices ([@Rafikooo](https://github.com/Rafikooo))
+- [#18387](https://github.com/Sylius/Sylius/pull/18387) [Refactor] Remove unused Connection mock from test ([@Rafikooo](https://github.com/Rafikooo))
+- [#18361](https://github.com/Sylius/Sylius/pull/18361) [DEPRECATIONS] Mark `CartActions` interface and `OrderItemController` as deprecated ([@tomkalon](https://github.com/tomkalon))
+- [#18378](https://github.com/Sylius/Sylius/pull/18378) [AdminBundle] Hide Impersonate button when user shop account is locked ([@crydotsnake](https://github.com/crydotsnake))
+- [#18375](https://github.com/Sylius/Sylius/pull/18375) [CI] Test both API Platform `~4.1.0` and `~4.2.0` ([@tomkalon](https://github.com/tomkalon))
+- [#18388](https://github.com/Sylius/Sylius/pull/18388) [CS][DX] Refactor
+- [#18389](https://github.com/Sylius/Sylius/pull/18389) [CI] Remove unnecessary upmerges between branches ([@GSadee](https://github.com/GSadee))
+- [#18392](https://github.com/Sylius/Sylius/pull/18392) [CS][DX] Refactor
+
 ## v2.1.5 (2025-09-09)
 
 #### Details
