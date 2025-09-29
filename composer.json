@@ -86,7 +86,7 @@
         "sylius/resource-bundle": "^1.12",
         "sylius/theme-bundle": "^2.4",
         "sylius/twig-extra": "^0.8",
-        "sylius/twig-hooks": "^0.8",
+        "sylius/twig-hooks": "^0.9",
         "symfony/asset": "^6.4 || ^7.2",
         "symfony/cache-contracts": "^3.5",
         "symfony/clock": "^6.4 || ^7.2",
