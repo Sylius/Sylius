@@ -224,7 +224,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
-        $variantCodes = array_map(fn (ProductVariantInterface $variant) => $variant->getCode(), $variants);
+        $variantCodes = array_map(fn (ProductVariantInterface $variant) => $variant->getId(), $variants);
 
         $this->formElement->addScope(InForVariantsScopeVariantChecker::TYPE);
         $this->formElement->selectScopeOption($variantCodes);
@@ -235,7 +235,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
     {
-        $taxonsCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), $taxons);
+        $taxonsCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getId(), $taxons);
 
         $this->formElement->addScope(InForTaxonsScopeVariantChecker::TYPE);
         $this->formElement->selectScopeOption($taxonsCodes);
@@ -247,7 +247,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
     {
         $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
-        $this->formElement->selectScopeOption([$product->getCode()]);
+        $this->formElement->selectScopeOption([$product->getId()]);
     }
 
     /**
@@ -255,7 +255,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddVariantToItsScope(ProductVariantInterface $productVariant): void
     {
-        $this->formElement->selectScopeOption([$productVariant->getCode()]);
+        $this->formElement->selectScopeOption([$productVariant->getId()]);
     }
 
     /**
@@ -263,7 +263,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iRemoveVariantFromItsScope(ProductVariantInterface $productVariant): void
     {
-        $this->formElement->removeScopeOption([$productVariant->getCode()]);
+        $this->formElement->removeScopeOption([(string) $productVariant->getId()]);
     }
 
     /**
@@ -757,7 +757,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
-            Assert::inArray($productVariant->getCode(), $selectedVariants);
+            Assert::inArray((string) $productVariant->getId(), $selectedVariants);
         }
 
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
@@ -775,7 +775,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $selectedTaxons = $this->formElement->getLastScopeCodes();
 
         foreach ($taxons as $taxon) {
-            Assert::inArray($taxon->getCode(), $selectedTaxons);
+            Assert::inArray((string) $taxon->getId(), $selectedTaxons);
         }
     }
 
@@ -786,7 +786,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $selectedTaxons = $this->formElement->getLastScopeCodes();
 
-        Assert::inArray($taxon->getCode(), $selectedTaxons);
+        Assert::inArray((string) $taxon->getId(), $selectedTaxons);
     }
 
     /**
@@ -807,7 +807,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function thisCatalogPromotionShouldBeAppliedOnProduct(ProductInterface $product): void
     {
         $selectedProducts = $this->formElement->getLastScopeCodes();
-        Assert::inArray($product->getCode(), $selectedProducts);
+        Assert::inArray((string) $product->getId(), $selectedProducts);
     }
 
     /**
@@ -819,7 +819,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
-            Assert::inArray($productVariant->getCode(), $selectedVariants);
+            Assert::inArray((string) $productVariant->getId(), $selectedVariants);
         }
     }
 
@@ -831,7 +831,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
-            Assert::false(in_array($productVariant->getCode(), $selectedVariants));
+            Assert::false(in_array((string) $productVariant->getId(), $selectedVariants));
         }
     }
 
@@ -1191,7 +1191,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->setExclusiveness($exclusive);
         $this->formElement->checkChannel($channel);
         $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
-        $this->formElement->selectScopeOption([$product->getCode()]);
+        $this->formElement->selectScopeOption([(string) $product->getId()]);
         $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
         $this->formElement->fillActionOption('Amount', $discount);
         $this->createPage->create();

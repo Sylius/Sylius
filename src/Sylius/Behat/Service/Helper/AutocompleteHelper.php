@@ -50,7 +50,7 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
             <<<SCRIPT
             (function () {
                 let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                return element.tomselect.loading === 0;
+                return element.parentElement.querySelectorAll('[data-selectable]').length;
             })();
             SCRIPT,
         );

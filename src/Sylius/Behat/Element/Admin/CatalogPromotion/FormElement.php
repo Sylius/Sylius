@@ -105,7 +105,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
             $this->autocompleteHelper->selectByValue(
                 $this->getDriver(),
                 $lastScope->find('css', 'select')->getXpath(),
-                $value,
+                (string) $value,
             );
         }
 

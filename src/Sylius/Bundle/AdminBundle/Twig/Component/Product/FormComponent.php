@@ -123,11 +123,11 @@ class FormComponent
     public function addAttributes(): void
     {
         foreach ($this->attributesToBeAdded as $attributeCode) {
-            $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $attributeCode]);
+            $productAttribute = $this->productAttributeRepository->find($attributeCode);
 
             if (!$productAttribute->isTranslatable()) {
                 $this->formValues['attributes'][] = [
-                    'attribute' => $attributeCode,
+                    'attribute' => $productAttribute->getCode(),
                     'localeCode' => null,
                     'value' => '',
                 ];
@@ -137,7 +137,7 @@ class FormComponent
 
             foreach ($this->formValues['translations'] as $localesCode => $translation) {
                 $this->formValues['attributes'][] = [
-                    'attribute' => $attributeCode,
+                    'attribute' => $productAttribute->getCode(),
                     'localeCode' => $localesCode,
                     'value' => '',
                 ];
