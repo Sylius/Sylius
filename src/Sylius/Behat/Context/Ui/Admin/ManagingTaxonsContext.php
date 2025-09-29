@@ -23,6 +23,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -495,7 +496,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iSearchForInTheParentTaxonAutocomplete(string $searchTerm): void
     {
-        $this->testHelper->waitUntilPageLoads();
+        DriverHelper::waitForPageToLoad($this->formElement->getSession());
         $this->autocompleteSearchResults = $this->formElement->searchParentTaxonAutocomplete($searchTerm);
     }
 
