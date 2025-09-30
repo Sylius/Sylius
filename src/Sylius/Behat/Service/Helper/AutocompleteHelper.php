@@ -45,15 +45,27 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
             })();
         SCRIPT);
 
-        $driver->wait(
-            2000,
-            <<<SCRIPT
+        if (is_numeric($searchString)) {
+            $driver->wait(
+                2000,
+                <<<SCRIPT
             (function () {
                 let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                 return element.parentElement.querySelectorAll('[data-selectable]').length;
             })();
             SCRIPT,
-        );
+            );
+        } else {
+            $driver->wait(
+                2000,
+                <<<SCRIPT
+            (function () {
+                let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                return element.parentElement.querySelectorAll('[data-selectable]').length === 0;
+            })();
+            SCRIPT,
+            );
+        }
 
         return $driver->evaluateScript(<<<SCRIPT
             (function () {
@@ -132,6 +144,19 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
                 element.tomselect.refreshOptions();
             })();
         SCRIPT);
+
+        $driver->wait(
+            1000,
+            <<<SCRIPT
+            (function () {
+                const el = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                if (!el || !el.tomselect) return false;
+
+                const isSelected = el.tomselect.items.includes('{$value}');
+                return isSelected && el.tomselect.loading;
+            })();
+            SCRIPT,
+        );
     }
 
     private function removeItemByValue(DriverInterface $driver, string $selector, int|string $value): void
