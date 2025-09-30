@@ -53,7 +53,7 @@ Our `ShopBundle` is basically a standard B2C interface for everything that happe
 When we created our API based on the API Platform framework, we did everything to make the API as easy as possible to use by developers. The most important features of our API:
 
 * All operations are grouped by _shop_ and _admin_ context (two prefixes);
-* Developers can enable or disable the entire API by changing a single parameter (check [this](../api/) chapter);
+* Developers can enable or disable the entire API by changing a single parameter (check [this](broken-reference) chapter);
 * We create all endpoints implementing the REST principles, and we are using HTTP verbs (POST, GET, PUT, PATCH, DELETE);
 * Returned responses contain minimal information (the developer should extend serialization if needed for more data);
 * The entire business logic is separated from the API - if necessary, we dispatch a command instead of mixing API logic with business logic.

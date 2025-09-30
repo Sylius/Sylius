@@ -24,7 +24,6 @@
 ## The Book
 
 * [Introduction to Sylius](the-book/introduction-to-sylius.md)
-* [Understanding Environments](the-book/understanding-environments.md)
 * [Sylius CE Installation](the-book/sylius-ce-installation/README.md)
   * [➕ Sylius Plus Installation](the-book/sylius-ce-installation/sylius-plus-installation.md)
   * [Upgrading Sylius CE](the-book/sylius-ce-installation/upgrading-sylius-ce.md)
@@ -78,8 +77,6 @@
   * [Checkout](the-book/carts-and-orders/checkout.md)
   * [Returns](the-book/carts-and-orders/returns.md)
   * [Refunds](the-book/carts-and-orders/refunds.md)
-* [API](the-book/api/README.md)
-  * [#todo](the-book/api/todo.md)
 * [🎨 Frontend & Themes](the-book/frontend-and-themes.md)
 * [🤖 AI Conversational Commerce](the-book/ai-conversational-commerce.md)
 * [➕ Sylius Plus](the-book/sylius-plus/README.md)
@@ -96,6 +93,15 @@
   * [Contributing Translations](the-book/contributing/contributing-translations.md)
   * [Key Contributors](the-book/contributing/key-contributors.md)
 * [👨‍🎓 Sylius Course](https://academy.sylius.com/course/sylius-practical-mastery-course/)
+
+## Plugins Development Guide
+
+* [Official Sylius Plugins](plugins-development-guide/official-sylius-plugins.md)
+* [How to Create a Plugin for Sylius?](plugins-development-guide/how-to-create-a-plugin-for-sylius.md)
+* [Test Application](plugins-development-guide/test-application/README.md)
+  * [Migrating existing plugins to Test Application](plugins-development-guide/test-application/migrating-existing-plugins-to-test-application.md)
+  * [Creating and testing plugins using Test Application](plugins-development-guide/test-application/creating-and-testing-plugins-using-test-application.md)
+  * [Setting up the Sylius Test Application](plugins-development-guide/test-application/setting-up-the-sylius-test-application.md)
 
 ## 🛠️ The Customization Guide
 
@@ -125,7 +131,6 @@
   * [How to integrate a Payment Gateway as a Plugin?](the-customization-guide/customizing-payments/how-to-integrate-a-payment-gateway-as-a-plugin.md)
   * [How to configure PayPal Express Checkout?](the-customization-guide/customizing-payments/how-to-configure-paypal-express-checkout.md)
 * [Customizing Checkout](the-customization-guide/how-to-disable-guest-checkout.md)
-* [Tips & Tricks](the-customization-guide/tips-and-tricks.md)
 
 ## 🧑‍🍳 THE COOKBOOK
 
@@ -165,3 +170,8 @@
 ## Sylius 1.X Documentation
 
 * [📓 Sylius 1.x Documentation](https://old-docs.sylius.com/en/1.13/)
+
+## Experimental
+
+* [Store Wizard](experimental/store-wizard.md)
+* [Demo Creator](experimental/demo-creator.md)

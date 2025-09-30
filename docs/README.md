@@ -9,11 +9,11 @@ coverY: 101.20220266334302
 
 👋 Welcome to Sylius
 
-Sylius is a headless, open-source eCommerce framework built on Symfony. It helps you build custom, scalable commerce solutions — fast. Its modular architecture is designed for flexibility and developer productivity, enabling deep customization for any business need.
+Sylius is a headless, open-source eCommerce framework built on Symfony. It helps you build custom, scalable commerce solutions... fast. Its modular architecture is designed for flexibility and developer productivity, enabling deep customization for any business need.
 
 Core features include customer and product management, flexible checkout and tax systems, promotional tools, and seamless integration with third-party services.
 
-Whether you're new to Symfony or an experienced developer, Sylius grows with you—from your first product to advanced commerce workflows.
+Whether you're new to Symfony or an experienced developer, Sylius grows with you, from your first product to advanced commerce workflows.
 
 ## 🧭 Choose Your Starting Point
 
