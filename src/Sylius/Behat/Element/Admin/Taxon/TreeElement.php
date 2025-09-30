@@ -32,7 +32,7 @@ class TreeElement extends SyliusElement implements TreeElementInterface
 
     public function countTaxons(): int
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
 
         return count($this->getElement('tree_taxons')->findAll('css', '[data-test-tree-taxon]'));
     }

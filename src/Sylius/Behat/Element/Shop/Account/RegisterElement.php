@@ -35,9 +35,13 @@ class RegisterElement extends SyliusElement implements RegisterElementInterface
 
     public function register(): void
     {
-        $this->getElement('register_button')->click();
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            DriverHelper::guardedClick($this->getSession(), $this->getElement('register_button'));
+        } else {
+            $this->getElement('register_button')->click();
+        }
 
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function specifyEmail(?string $email): void

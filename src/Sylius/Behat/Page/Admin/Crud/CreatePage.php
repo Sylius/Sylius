@@ -40,7 +40,7 @@ class CreatePage extends SyliusPage implements CreatePageInterface
             $this->waitForFormUpdate();
         }
         $this->getDocument()->pressButton('Create');
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function getValidationMessage(string $element, array $parameters = []): string

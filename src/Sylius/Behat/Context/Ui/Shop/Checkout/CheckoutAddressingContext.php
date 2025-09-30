@@ -19,6 +19,7 @@ use Behat\Step\Then;
 use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\Factory\AddressFactoryInterface;
 use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
@@ -36,6 +37,7 @@ final readonly class CheckoutAddressingContext implements Context
         private AddressFactoryInterface $addressFactory,
         private AddressComparatorInterface $addressComparator,
         private SelectShippingPageInterface $selectShippingPage,
+        private SelectPaymentPageInterface $selectPaymentPage,
         private JavaScriptTestHelperInterface $testHelper,
     ) {
     }
@@ -66,6 +68,33 @@ final readonly class CheckoutAddressingContext implements Context
      */
     public function iAmAtTheCheckoutAddressingStep(): void
     {
+        // Ensure Mink session is started without asserting current URL.
+        $this->addressPage->tryToOpen();
+
+        // If after navigation we're already on Addressing, verify and return.
+        if ($this->addressPage->isOpen()) {
+            $this->addressPage->verify();
+
+            return;
+        }
+
+        // If we were redirected to Shipping, use the UI step to go back to Addressing.
+        if ($this->selectShippingPage->isOpen()) {
+            $this->selectShippingPage->changeAddressByStepLabel();
+            $this->addressPage->verify();
+
+            return;
+        }
+
+        // Or if we were redirected to Payment, also go back via the UI.
+        if ($this->selectPaymentPage->isOpen()) {
+            $this->selectPaymentPage->changeAddressByStepLabel();
+            $this->addressPage->verify();
+
+            return;
+        }
+
+        // As a last resort, explicitly open the Addressing page (should rarely be needed).
         $this->addressPage->open();
     }
 

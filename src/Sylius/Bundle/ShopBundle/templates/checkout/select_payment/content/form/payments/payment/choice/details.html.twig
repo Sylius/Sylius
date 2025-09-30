@@ -1,5 +1,5 @@
 <div class="card bg-body-tertiary border-0 mb-3" {{ sylius_test_html_attribute('payment-item') }}>
-    <label class="card-body">
+    <label class="card-body d-flex flex-column gap-2" {{ sylius_test_html_attribute('payment-method-checkbox') }}>
         {% hook 'details' %}
     </label>
 </div>

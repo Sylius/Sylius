@@ -181,9 +181,19 @@ class CompletePage extends SyliusPage implements CompletePageInterface
 
     public function confirmOrder(): void
     {
-        $this->getElement('confirm_button')->press();
+        $session = $this->getSession();
 
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($session);
+
+        $button = $this->getElement('confirm_button');
+
+        if (DriverHelper::isJavascript($session->getDriver())) {
+            DriverHelper::guardedClick($session, $button);
+        } else {
+            $button->press();
+        }
+
+        DriverHelper::waitForDomSettled($session);
     }
 
     public function changeAddress(): void

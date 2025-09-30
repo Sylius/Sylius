@@ -33,7 +33,7 @@ class ShowPage extends SyliusPage implements ShowPageInterface
     {
         $this->getElement('pay_link')->click();
 
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function getNotifications(): array
@@ -51,7 +51,7 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function choosePaymentMethod(string $paymentMethodName): void
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
 
         $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
         $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
@@ -71,7 +71,7 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function getChosenPaymentMethod(): string
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
 
         $paymentMethodItems = $this->getDocument()->findAll('css', '[data-test-payment-item]');
 

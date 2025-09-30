@@ -40,7 +40,7 @@ class UpdatePage extends SyliusPage implements UpdatePageInterface
             $this->blur();
         }
         $this->getDocument()->find('css', '[data-test-update-changes-button]')->click();
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function cancelChanges(): void

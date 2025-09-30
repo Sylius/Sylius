@@ -49,7 +49,7 @@ class LoginPage extends SyliusPage implements LoginPageInterface
     {
         $this->getElement('login_button')->click();
 
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function specifyPassword(string $password): void

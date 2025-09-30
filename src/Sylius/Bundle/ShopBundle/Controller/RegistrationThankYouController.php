@@ -15,6 +15,8 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
@@ -26,6 +28,7 @@ final class RegistrationThankYouController
         private Environment $twig,
         private ChannelContextInterface $channelContext,
         private RouterInterface $router,
+        private CartContextInterface $cartContext,
     ) {
     }
 
@@ -36,6 +39,16 @@ final class RegistrationThankYouController
 
         if ($channel->isAccountVerificationRequired()) {
             return new Response($this->twig->render('@SyliusShop/account/register_thank_you.html.twig'));
+        }
+
+        try {
+            $cart = $this->cartContext->getCart();
+
+            if (!$cart->getItems()->isEmpty()) {
+                return new RedirectResponse($this->router->generate('sylius_shop_cart_summary'));
+            }
+        } catch (CartNotFoundException) {
+            // No cart found, fall back to account dashboard
         }
 
         return new RedirectResponse($this->router->generate('sylius_shop_account_dashboard'));

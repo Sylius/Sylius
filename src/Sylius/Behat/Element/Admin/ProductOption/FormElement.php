@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Service\DriverHelper;
 
 class FormElement extends BaseFormElement implements FormElementInterface
 {
@@ -41,7 +42,9 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function addOptionValue(string $code, string $localeCode, string $value): void
     {
-        $this->getElement('add_option_value')->press();
+        $addOptionValueButton = $this->getElement('add_option_value');
+
+        DriverHelper::guardedClick($this->getSession(), $addOptionValueButton);
         $this->waitForFormUpdate();
 
         $lastValue = $this->getElement('last_option_value');

@@ -164,11 +164,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     {
         $this->waitForElementUpdate('form');
 
-        try {
-            $this->getElement('login_button')->press();
-        } catch (ElementNotFoundException) {
-            $this->getElement('login_button')->click();
-        }
+        $this->guardedClickElement($this->getElement('login_button'), true);
 
         $this->waitForLoginAction();
     }
@@ -203,10 +199,10 @@ class AddressPage extends ShopPage implements AddressPageInterface
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
             $this->blur();
-            DriverHelper::waitForPageToLoad($this->getSession());
+            DriverHelper::waitForDomSettled($this->getSession());
         }
-        $this->getElement('next_step')->press();
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $this->guardedClickElement($this->getElement('next_step'), true);
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function backToStore(): void
@@ -400,7 +396,24 @@ class AddressPage extends ShopPage implements AddressPageInterface
     protected function chooseDifferentAddress(string $type): void
     {
         $elem = $this->getElement(sprintf('different_%s_address', $type));
-        $elem->click();
+        $this->guardedClickElement($elem);
         $this->waitForElementUpdate('form');
+    }
+
+    private function guardedClickElement(NodeElement $element, bool $isButton = false): void
+    {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            DriverHelper::guardedClick($this->getSession(), $element);
+
+            return;
+        }
+
+        if ($isButton) {
+            $element->press();
+
+            return;
+        }
+
+        $element->click();
     }
 }

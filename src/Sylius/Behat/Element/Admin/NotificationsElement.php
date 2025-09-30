@@ -16,17 +16,33 @@ namespace Sylius\Behat\Element\Admin;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Element\SyliusElement;
 use Sylius\Behat\Service\DriverHelper;
+use WebDriver\Exception\StaleElementReference;
 
 class NotificationsElement extends SyliusElement implements NotificationsElementInterface
 {
     public function hasNotification(string $type, string $message): bool
     {
-        $flashesContainer = $this->getElement('flashes_container');
+        $document = $this->getDocument();
+        $flashesContainer = $document->waitFor(5, function () {
+            $container = $this->getDocument()->find('css', '[data-test-sylius-flashes-container]');
 
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $flashesContainer->waitFor(5, function () use ($flashesContainer) {
-                return $flashesContainer->isVisible();
-            });
+            if (!$container instanceof NodeElement) {
+                return false;
+            }
+
+            if (!DriverHelper::isJavascript($this->getDriver())) {
+                return $container;
+            }
+
+            try {
+                return $container->isVisible() ? $container : false;
+            } catch (StaleElementReference) {
+                return false;
+            }
+        });
+
+        if (!$flashesContainer instanceof NodeElement) {
+            return false;
         }
 
         /** @var array<NodeElement> $flashes */

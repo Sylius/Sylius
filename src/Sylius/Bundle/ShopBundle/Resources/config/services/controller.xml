@@ -43,6 +43,7 @@
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="router.default" />
+            <argument type="service" id="sylius.context.cart" />
 
             <tag name="controller.service_arguments" />
         </service>

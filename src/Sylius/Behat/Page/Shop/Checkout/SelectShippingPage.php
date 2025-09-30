@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\DriverHelper;
@@ -27,7 +28,7 @@ class SelectShippingPage extends SyliusPage implements SelectShippingPageInterfa
     public function selectShippingMethod(string $shippingMethod): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            DriverHelper::waitForPageToLoad($this->getSession());
+            DriverHelper::waitForDomSettled($this->getSession());
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
 
             return;
@@ -75,8 +76,25 @@ class SelectShippingPage extends SyliusPage implements SelectShippingPageInterfa
 
     public function nextStep(): void
     {
-        $this->getElement('next_step')->press();
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $session = $this->getSession();
+
+        $button = $this->getDocument()->waitFor(5, function () {
+            $element = $this->getDocument()->find('css', '[data-test-next-step]');
+            if ($element instanceof NodeElement) {
+                return $element;
+            }
+
+            $fallback = $this->getDocument()->find('css', 'form button[type="submit"]');
+
+            return $fallback instanceof NodeElement ? $fallback : false;
+        });
+
+        if (!$button instanceof NodeElement) {
+            throw new ElementNotFoundException($session, 'next step button', 'css', '[data-test-next-step]');
+        }
+
+        DriverHelper::guardedClick($session, $button);
+        DriverHelper::waitForDomSettled($session);
     }
 
     public function changeAddress(): void

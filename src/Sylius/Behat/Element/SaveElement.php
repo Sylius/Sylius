@@ -22,7 +22,7 @@ class SaveElement extends SyliusElement implements SaveElementInterface
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getDocument()->find('css', 'body')->click();
-            DriverHelper::waitForPageToLoad($this->getSession());
+            DriverHelper::waitForDomSettled($this->getSession());
         }
 
         try {
@@ -31,7 +31,7 @@ class SaveElement extends SyliusElement implements SaveElementInterface
             // Fallback for elements with different data-test attributes
             $this->getElement('save_changes_button')->press();
         }
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     protected function getDefinedElements(): array

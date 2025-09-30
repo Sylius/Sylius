@@ -21,7 +21,7 @@ abstract class SyliusPage extends BaseSymfonyPage implements SyliusPageInterface
 {
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
 
         return parent::getElement($name, $parameters);
     }

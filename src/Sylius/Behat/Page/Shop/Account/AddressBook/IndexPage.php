@@ -59,7 +59,7 @@ class IndexPage extends SyliusPage implements IndexPageInterface
     {
         $this->getElement('delete_button', ['%full_name%' => $fullName])->press();
 
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function setAsDefault(string $fullName): void

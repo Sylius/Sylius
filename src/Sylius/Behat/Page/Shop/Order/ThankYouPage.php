@@ -22,7 +22,7 @@ class ThankYouPage extends SyliusPage implements ThankYouPageInterface
     {
         $this->getElement('payment_method_page')->click();
 
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function goToOrderDetailsInAccount(): void

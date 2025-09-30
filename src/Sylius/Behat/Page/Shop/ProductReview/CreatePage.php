@@ -53,7 +53,7 @@ class CreatePage extends Page implements CreatePageInterface
         $this->waitForElementUpdate('add');
         $this->getElement('add')->press();
 
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
     }
 
     public function getRateValidationMessage(): string

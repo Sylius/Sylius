@@ -91,21 +91,48 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function getFormValidationErrors(): array
     {
-        $errors = $this->getElement('form')->findAll('css', '.alert-danger');
+        $form = $this->getDocument()->waitFor(5, function () {
+            $form = $this->getDocument()->find('css', 'form');
 
-        return array_map(fn (NodeElement $element) => $element->getText(), $errors);
+            if (!$form instanceof NodeElement) {
+                return false;
+            }
+
+            $hasErrors = $form->has('css', '.alert-danger') || $form->has('css', '[data-test-validation-error]');
+
+            return $hasErrors ? $form : false;
+        });
+
+        if (!$form instanceof NodeElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Form element', 'css', 'form');
+        }
+
+        $messages = [];
+
+        foreach ($form->findAll('css', '.alert-danger') as $alert) {
+            $messages[] = trim($alert->getText());
+        }
+
+        foreach ($form->findAll('css', '[data-test-validation-error]') as $inlineError) {
+            $messages[] = trim($inlineError->getText());
+        }
+
+        return array_values(array_filter($messages, static fn (string $message): bool => $message !== ''));
     }
 
     public function getValidationMessage(string $element): string
     {
         $province = $this->getElement('last_province');
 
-        $foundElement = $province->find('css', '.invalid-feedback');
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.invalid-feedback');
+        $foundElement = $province->waitFor(5, static function (NodeElement $province): ?NodeElement {
+            return $province->find('css', '.invalid-feedback');
+        });
+
+        if (!$foundElement instanceof NodeElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
-        return $foundElement->getText();
+        return trim($foundElement->getText());
     }
 
     protected function getToggleableElement(): NodeElement

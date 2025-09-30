@@ -87,7 +87,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function getTranslationFieldValue(string $element, string $localeCode): string
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
 
         return $this->getElement($element, ['%locale_code%' => $localeCode])->getValue();
     }
@@ -136,6 +136,24 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $translationAccordion = $this->getElement('translation_accordion', ['%locale_code%' => $localeCode]);
 
         if ($translationAccordion->getAttribute('aria-expanded') === 'true') {
+            return;
+        }
+
+        $session = $this->getSession();
+
+        if (DriverHelper::isJavascript($session->getDriver())) {
+            DriverHelper::guardedClick($session, $translationAccordion);
+            DriverHelper::waitForDomSettled($session);
+
+            $targetSelector = $translationAccordion->getAttribute('data-bs-target');
+            if (null !== $targetSelector) {
+                $this->getDocument()->waitFor(5, function () use ($targetSelector) {
+                    $content = $this->getDocument()->find('css', $targetSelector);
+
+                    return $content instanceof NodeElement && $content->hasClass('show');
+                });
+            }
+
             return;
         }
 

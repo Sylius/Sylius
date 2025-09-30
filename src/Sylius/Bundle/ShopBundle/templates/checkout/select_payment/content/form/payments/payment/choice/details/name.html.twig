@@ -1,5 +1,20 @@
 {% set form = hookable_metadata.context.form %}
+{% set method = hookable_metadata.context.method %}
+{% set widget_attributes = sylius_test_form_attribute('payment-method-select') %}
+{% set widget_input_attr = widget_attributes.attr|default({}) %}
+{% set widget_input_attr = widget_input_attr|merge({
+    'class': (widget_input_attr.class|default('') ~ ' form-check-input')|trim,
+}) %}
+{% set widget_attributes = widget_attributes|merge({
+    'attr': widget_input_attr,
+    'label_attr': {'class': 'visually-hidden'},
+}) %}
 
-<div {{ sylius_test_html_attribute('payment-method-checkbox') }}>
-    {{ form_widget(form, sylius_test_form_attribute('payment-method-select')) }}
+<div class="d-flex align-items-start gap-3">
+    <div class="form-check mb-0">
+        {{ form_widget(form, widget_attributes) }}
+    </div>
+    <div class="flex-grow-1">
+        <span class="fw-medium d-block">{{ method.name }}</span>
+    </div>
 </div>

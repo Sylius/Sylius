@@ -341,7 +341,7 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function getOrderCurrency(): string
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
+        DriverHelper::waitForDomSettled($this->getSession());
 
         return $this->getElement('currency')->getText();
     }
