@@ -18,9 +18,9 @@ Enjoy being an eCommerce Developer again!
 ⚙️ Installation
 --------------
 
-[Install Sylius](https://docs.sylius.com/getting-started-with-sylius/installation) with Composer (see [requirements details](https://docs.sylius.com/the-book/installation/system-requirements)).
+[Install Sylius](https://docs.sylius.com/getting-started-with-sylius/sylius-ce-installation-with-docker) with Composer (see [requirements details](https://docs.sylius.com/getting-started-with-sylius/before-you-begin#system-requirements)).
 
-Follow the [Getting started with Sylius tutorial](https://docs.sylius.com/getting-started-with-sylius/index)!
+Follow the [Getting started with Sylius tutorial](https://docs.sylius.com/getting-started-with-sylius/choosing-sylius-when-and-why)!
 
 📖 Documentation
 ----------------
