@@ -51,6 +51,7 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
 
         $this->validateValue($data);
         $data = $this->denormalizeValue($data);
+        $data = $this->ensureAttributeFirst($data);
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
@@ -67,6 +68,10 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
      */
     private function denormalizeValue(array $data): array
     {
+        if (!isset($data['attribute']) || !isset($data['value'])) {
+            return $data;
+        }
+
         /** @var ProductAttributeInterface $attribute */
         $attribute = $this->iriConverter->getResourceFromIri($data['attribute']);
 
@@ -77,9 +82,40 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
         return $data;
     }
 
+    /**
+     * Ensures 'attribute' key comes before 'value' in the array to prevent
+     * setValue() being called before setAttribute() during denormalization.
+     *
+     * @param array<array-key, mixed> $data
+     *
+     * @return array<array-key, mixed>
+     */
+    private function ensureAttributeFirst(array $data): array
+    {
+        if (!isset($data['attribute'])) {
+            return $data;
+        }
+
+        $result = [];
+
+        $result['attribute'] = $data['attribute'];
+
+        foreach ($data as $key => $value) {
+            if ($key !== 'attribute') {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
+    }
+
     /** @param array<array-key, mixed> $data */
     private function validateValue(array $data): void
     {
+        if (!isset($data['value']) || !isset($data['attribute'])) {
+            return;
+        }
+
         $value = $data['value'];
         if ($value === null) {
             return;

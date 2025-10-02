@@ -148,6 +148,64 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_creates_a_product_with_value_before_attribute(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'taxonomy.yaml',
+            'product/product_option.yaml',
+            'product/product_attribute.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/products',
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'variantSelectionMethod' => ProductInterface::VARIANT_SELECTION_MATCH,
+                'enabled' => true,
+                'options' => [
+                    '/api/v2/admin/product-options/COLOR',
+                ],
+                'mainTaxon' => '/api/v2/admin/taxons/MUG',
+                'channels' => [
+                    '/api/v2/admin/channels/WEB_GB',
+                ],
+                'attributes' => [[
+                    'value' => true,
+                    'attribute' => '/api/v2/admin/product-attributes/dishwasher_safe',
+                ]],
+                'translations' => [
+                    'en_US' => [
+                        'slug' => 'cup',
+                        'name' => 'Cup',
+                        'description' => 'This is a cup',
+                        'shortDescription' => 'Short cup description',
+                        'metaKeywords' => 'cup',
+                        'metaDescription' => 'Cup description',
+                    ],
+                    'pl_PL' => [
+                        'slug' => 'filiżanka',
+                        'name' => 'Filiżanka',
+                        'description' => 'To jest filiżanka',
+                        'shortDescription' => 'Krótki opis filiżanki',
+                        'metaKeywords' => 'filiżanka',
+                        'metaDescription' => 'Opis filiżanki',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/post_product_with_value_before_attribute_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    #[Test]
     public function it_does_not_create_a_product_without_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');

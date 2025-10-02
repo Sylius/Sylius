@@ -1,0 +1,58 @@
+{
+    "@context": "\/api\/v2\/contexts\/Product",
+    "@id": "\/api\/v2\/admin\/products\/CUP",
+    "@type": "Product",
+    "id": "@integer@",
+    "code": "CUP",
+    "variantSelectionMethod": "match",
+    "enabled": true,
+    "options": [
+        "\/api\/v2\/admin\/product-options\/COLOR"
+    ],
+    "variants": [],
+    "mainTaxon": "\/api\/v2\/admin\/taxons\/MUG",
+    "productTaxons": [],
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB_GB"
+    ],
+    "reviews": [],
+    "associations": [],
+    "attributes": [
+        {
+            "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": "@integer@",
+            "attribute": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe",
+            "value": true,
+            "localeCode": null
+        }
+    ],
+    "averageRating": 0,
+    "images": [],
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/products\/CUP\/translations\/en_US",
+            "@type": "ProductTranslation",
+            "id": "@integer@",
+            "name": "Cup",
+            "slug": "cup",
+            "description": "This is a cup",
+            "shortDescription": "Short cup description",
+            "metaKeywords": "cup",
+            "metaDescription": "Cup description"
+        },
+        "pl_PL": {
+            "@id": "\/api\/v2\/admin\/products\/CUP\/translations\/pl_PL",
+            "@type": "ProductTranslation",
+            "id": "@integer@",
+            "name": "Filiżanka",
+            "slug": "filiżanka",
+            "description": "To jest filiżanka",
+            "shortDescription": "Krótki opis filiżanki",
+            "metaKeywords": "filiżanka",
+            "metaDescription": "Opis filiżanki"
+        }
+    },
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
+}
