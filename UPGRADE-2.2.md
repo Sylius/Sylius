@@ -15,7 +15,7 @@
         protected readonly CustomerContextInterface $customerContext,
         protected readonly UserRepositoryInterface $shopUserRepository,
         protected readonly AddressRepositoryInterface $addressRepository,
-+       private readonly ?iterable $addressFormValuesModifiers = null,
++       protected readonly ?iterable $addressFormValuesModifiers = null,
     )
 ```
 ### Translations

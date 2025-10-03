@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address;
 use Sylius\Bundle\ShopBundle\Modifier\AddressFormValuesModifierInterface;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
@@ -54,7 +55,7 @@ class FormComponent
         protected readonly UserRepositoryInterface $shopUserRepository,
         protected readonly AddressRepositoryInterface $addressRepository,
         /** @var iterable<AddressFormValuesModifierInterface> */
-        private readonly ?iterable $addressFormValuesModifiers = null,
+        protected readonly ?iterable $addressFormValuesModifiers = null,
     ) {
         $this->initialize($repository, $formFactory, $resourceClass, $formClass);
         if (null === $this->addressFormValuesModifiers) {
@@ -62,6 +63,8 @@ class FormComponent
                 'sylius/shop-bundle',
                 '2.2',
                 'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
+                AddressFormValuesModifierInterface::class,
+                self::class,
             );
         }
     }
@@ -79,25 +82,17 @@ class FormComponent
     public function addressFieldUpdated(#[LiveArg] mixed $addressId, #[LiveArg] string $field): void
     {
         $address = $this->addressRepository->find($addressId);
+        if (null === $address) {
+            return;
+        }
 
         $newAddress = [];
-        $newAddress['firstName'] = $address->getFirstName();
-        $newAddress['lastName'] = $address->getLastName();
-        $newAddress['phoneNumber'] = $address->getPhoneNumber();
-        $newAddress['company'] = $address->getCompany();
-        $newAddress['countryCode'] = $address->getCountryCode();
-        if ($address->getProvinceCode() !== null) {
-            $newAddress['provinceCode'] = $address->getProvinceCode();
-        }
-        if ($address->getProvinceName() !== null) {
-            $newAddress['provinceName'] = $address->getProvinceName();
-        }
-        $newAddress['street'] = $address->getStreet();
-        $newAddress['city'] = $address->getCity();
-        $newAddress['postcode'] = $address->getPostcode();
-
-        foreach ($this->addressFormValuesModifiers as $modifier) {
-            $newAddress = $modifier->modify($newAddress, $address);
+        if (null === $this->addressFormValuesModifiers) {
+            $newAddress = $this->createAddressArrayFromEntity($address);
+        } else {
+            foreach ($this->addressFormValuesModifiers as $modifier) {
+                $newAddress = $modifier->modify($newAddress, $address);
+            }
         }
 
         $this->formValues[$field] = $newAddress;
@@ -110,5 +105,32 @@ class FormComponent
             $this->resource,
             ['customer' => $this->customerContext->getCustomer()],
         );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function createAddressArrayFromEntity(AddressInterface $address): array
+    {
+        $newAddress = [
+            'firstName' => $address->getFirstName(),
+            'lastName' => $address->getLastName(),
+            'phoneNumber' => $address->getPhoneNumber(),
+            'company' => $address->getCompany(),
+            'countryCode' => $address->getCountryCode(),
+            'street' => $address->getStreet(),
+            'city' => $address->getCity(),
+            'postcode' => $address->getPostcode(),
+        ];
+
+        if (null !== $address->getProvinceCode()) {
+            $newAddress['provinceCode'] = $address->getProvinceCode();
+        }
+
+        if (null !== $address->getProvinceName()) {
+            $newAddress['provinceName'] = $address->getProvinceName();
+        }
+
+        return $newAddress;
     }
 }

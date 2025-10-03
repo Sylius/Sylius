@@ -18,8 +18,9 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 interface AddressFormValuesModifierInterface
 {
     /**
-     * @param array<string, mixed> $newAddress
+     * @param array<string, mixed> $addressData
+     *
      * @return array<string, mixed>
      */
-    public function modify(array $newAddress, AddressInterface $address): array;
+    public function modify(array $addressData, AddressInterface $address): array;
 }
