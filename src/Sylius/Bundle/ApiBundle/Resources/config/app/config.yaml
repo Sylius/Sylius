@@ -30,7 +30,7 @@ sylius_api:
 api_platform:
     serializer:
         hydra_prefix: true
-    use_symfony_listeners: true
+    use_symfony_listeners: false
     formats:
         jsonld: ['application/ld+json']
         json: ['application/json']
