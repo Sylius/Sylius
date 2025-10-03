@@ -9,11 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Modifier;
 
-use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 
 interface AddressFormValuesModifierInterface
 {
+    /**
+     * @param array<string, mixed> $newAddress
+     * @return array<string, mixed>
+     */
     public function modify(array $newAddress, AddressInterface $address): array;
 }
