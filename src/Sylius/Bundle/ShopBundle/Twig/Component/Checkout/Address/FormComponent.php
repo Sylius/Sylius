@@ -52,6 +52,7 @@ class FormComponent
         protected readonly CustomerContextInterface $customerContext,
         protected readonly UserRepositoryInterface $shopUserRepository,
         protected readonly AddressRepositoryInterface $addressRepository,
+        private readonly iterable $addressFormValuesModifiers,
     ) {
         $this->initialize($repository, $formFactory, $resourceClass, $formClass);
     }
@@ -85,6 +86,10 @@ class FormComponent
         $newAddress['street'] = $address->getStreet();
         $newAddress['city'] = $address->getCity();
         $newAddress['postcode'] = $address->getPostcode();
+
+        foreach ($this->addressFormValuesModifiers as $modifier) {
+            $newAddress = $modifier->modify($newAddress, $address);
+        }
 
         $this->formValues[$field] = $newAddress;
     }
