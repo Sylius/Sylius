@@ -2,7 +2,7 @@
 
 ### Deprecations
 
-1. Not injecting a `tagged_iterator with the tag `sylius_shop.modifier.address_form_values` into the constructor of `Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent` is deprecated since Sylius 2.2 and will be required in Sylius 3.0.
+1. Not injecting a `tagged_iterator` with the tag `sylius_shop.modifier.address_form_values` into the constructor of `Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent` is deprecated since Sylius 2.2 and will be required in Sylius 3.0.
 
    This change enables extending the checkout address form with custom fields or logic by registering services tagged with `sylius_shop.modifier.address_form_values`, which implement the `AddressFormValuesModifierInterface`.
 
@@ -18,3 +18,8 @@
 +       private readonly ?iterable $addressFormValuesModifiers = null,
     )
 ```
+### Translations
+
+1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
+   is always placed at the beginning of the returned locales array.  
+   Other locales remain in the same order as returned by the repository.

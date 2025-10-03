@@ -34,6 +34,7 @@
         </parameter>
         <parameter key="sylius.form.type.checkout_complete.validation_groups" type="collection">
             <parameter>sylius</parameter>
+            <parameter>sylius_checkout_complete</parameter>
         </parameter>
     </parameters>
 
