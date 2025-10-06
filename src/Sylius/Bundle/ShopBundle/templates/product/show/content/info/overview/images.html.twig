@@ -9,7 +9,7 @@
     {% set path = original_path %}
 {% endif %}
 
-<div class="row spotlight-group mb-5">
+<div class="row spotlight-group mb-5" {{ stimulus_controller('product-show-images') }}>
     <div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>
     {% hook 'images' with { original_path, path } %}
 </div>
