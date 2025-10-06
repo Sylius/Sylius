@@ -79,9 +79,7 @@ final class ImageUploaderTest extends TestCase
         $this->image->method('getPath')->willReturnCallback(function () use (&$currentPath) {
             return $currentPath;
         });
-        $this->filesystem->method('has')->willReturnCallback(function ($path) {
-            return $path === 'foo.jpg';
-        });
+        $this->filesystem->method('has')->willReturnCallback(fn ($path) => $path === 'foo.jpg');
         $this->filesystem->expects($this->once())->method('delete')->with('foo.jpg');
         $this->imagePathGenerator->expects($this->once())
             ->method('generate')

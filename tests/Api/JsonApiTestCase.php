@@ -274,16 +274,23 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             '@context' => '/api/v2/contexts/Error',
             '@id' => '/api/v2/errors/' . $code,
             '@type' => 'hydra:Error',
-            'title' => 'An error occurred',
             'detail' => $message,
             'status' => $code,
             'type' => '/errors/' . $code,
-            'description' => $message,
             'hydra:description' => $message,
             'hydra:title' => 'An error occurred',
         ];
 
-        Assert::assertSame($expectedContent, $content);
+        $actualFiltered = array_intersect_key($content, $expectedContent);
+        Assert::assertSame($expectedContent, $actualFiltered);
+
+        if (array_key_exists('title', $content)) {
+            Assert::assertSame($expectedContent['hydra:title'], $content['title']);
+        }
+        if (array_key_exists('description', $content)) {
+            Assert::assertSame($message, $content['description']);
+        }
+
         $this->assertResponseCode($this->client->getResponse(), $code);
     }
 

@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.').optional()",
     "status": 422,
     "violations": [
         {
@@ -18,7 +20,5 @@
         }
     ],
     "detail": "code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.",
-    "description": "code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

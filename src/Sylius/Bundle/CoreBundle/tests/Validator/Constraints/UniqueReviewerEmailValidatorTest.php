@@ -24,6 +24,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
@@ -57,7 +58,7 @@ final class UniqueReviewerEmailValidatorTest extends TestCase
 
     public function testExtendsConstraintValidatorClass(): void
     {
-        $this->assertInstanceOf(\Symfony\Component\Validator\ConstraintValidator::class, $this->validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $this->validator);
     }
 
     public function testValidatesIfUserWithGivenEmailIsAlreadyRegistered(): void

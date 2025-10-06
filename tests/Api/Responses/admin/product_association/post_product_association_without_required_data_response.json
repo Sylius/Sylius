@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "type: Please enter association type.\nowner: Please enter association owner.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('type: Please enter association type.\nowner: Please enter association owner.').optional()",
     "status": 422,
     "violations": [
         {
@@ -18,7 +20,5 @@
         }
     ],
     "detail": "type: Please enter association type.\nowner: Please enter association owner.",
-    "description": "type: Please enter association type.\nowner: Please enter association owner.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

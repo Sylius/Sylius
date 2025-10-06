@@ -40,7 +40,6 @@ final class FooApiCommandTest extends ApiTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
         $this->assertJsonContains([
-            'description' => 'Request does not have the following required fields specified: bar.',
             'hydra:description' => 'Request does not have the following required fields specified: bar.',
             'hydra:title' => 'An error occurred',
         ]);

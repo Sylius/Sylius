@@ -11,6 +11,14 @@
 
 declare(strict_types=1);
 
+use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Sylius\Bundle\MailerBundle\SyliusMailerBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\UserBundle\SyliusUserBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -19,14 +27,14 @@ class AppKernel extends Kernel
     public function registerBundles(): iterable
     {
         return [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sylius\Bundle\UserBundle\SyliusUserBundle(),
-            new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
+            new FrameworkBundle(),
+            new SecurityBundle(),
+            new BabDevPagerfantaBundle(),
+            new DoctrineBundle(),
+            new SyliusUserBundle(),
+            new SyliusMailerBundle(),
+            new SyliusResourceBundle(),
+            new TwigBundle(),
         ];
     }
 

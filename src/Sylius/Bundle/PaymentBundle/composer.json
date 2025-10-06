@@ -37,8 +37,8 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/orm": "^2.18 || ^3.3",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpunit/phpunit": "^10.5",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
         "sylius/locale-bundle": "^2.0",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/dependency-injection": "^6.4.1 || ^7.2"

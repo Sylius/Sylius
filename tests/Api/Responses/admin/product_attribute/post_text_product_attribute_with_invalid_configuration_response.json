@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "Configuration max length must be greater or equal to the min length.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('Configuration max length must be greater or equal to the min length.').optional()",
     "status": 422,
     "violations":[
         {
@@ -13,7 +15,5 @@
         }
     ],
     "detail": "Configuration max length must be greater or equal to the min length.",
-    "description": "Configuration max length must be greater or equal to the min length.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

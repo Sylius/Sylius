@@ -96,6 +96,14 @@
             <group>sylius:shop:order:account:show</group>
             <group>sylius:shop:order_item:show</group>
         </attribute>
+        <attribute name="variantName">
+            <group>sylius:admin:order:index</group>
+            <group>sylius:admin:order:show</group>
+            <group>sylius:admin:order_item:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>sylius:shop:order:account:show</group>
+            <group>sylius:shop:order_item:show</group>
+        </attribute>
         <attribute name="subtotal">
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>

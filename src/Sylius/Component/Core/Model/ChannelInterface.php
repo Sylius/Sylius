@@ -97,7 +97,6 @@ interface ChannelInterface extends
 
     /**
      * @return Collection|CountryInterface[]
-     *
      * @return Collection<array-key, CountryInterface>
      */
     public function getEnabledCountries(): Collection;

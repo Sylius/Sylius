@@ -556,6 +556,19 @@ final readonly class ShippingContext implements Context
         $this->shippingMethodManager->flush();
     }
 
+    /**
+     * @Given /^(this shipping method) has changed zone to ("[^"]+" zone)$/
+     */
+    public function thisShippingMethodHasChangedZone(ShippingMethodInterface $shippingMethod, ZoneInterface $zone): void
+    {
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $shippingMethod->getCode()]);
+
+        $shippingMethod->setZone($zone);
+
+        $this->shippingMethodManager->flush();
+    }
+
     private function getConfigurationByChannels(array $channels, int $amount = 0): array
     {
         $configuration = [];

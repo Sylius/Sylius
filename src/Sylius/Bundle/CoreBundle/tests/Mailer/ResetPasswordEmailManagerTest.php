@@ -31,9 +31,11 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        $this->resetPasswordEmailManager = self::getContainer()->get(ResetPasswordEmailManagerInterface::class);
+        $container = self::getContainer();
+        
+        $this->resetPasswordEmailManager = $container->get(ResetPasswordEmailManagerInterface::class);
 
-        $this->translator = self::getContainer()->get('translator');
+        $this->translator = $container->get('translator');
 
         $this->adminUser = new AdminUser();
         $this->adminUser->setEmail(self::RECIPIENT_EMAIL);

@@ -44,7 +44,7 @@ jobs:
     behat-no-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -96,13 +96,32 @@ jobs:
                     echo "{}" > public/build/shop/manifest.json
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
+                    
+            -   name: Require Api Platform packages
+                if: ${{ matrix.api_platform != '' && matrix.api_platform != null }}
+                run: |
+                    REQ="${{ matrix.api_platform }}"
+                    composer require --no-update \
+                        api-platform/doctrine-common:${REQ} \
+                        api-platform/doctrine-orm:${REQ} \
+                        api-platform/documentation:${REQ} \
+                        api-platform/http-cache:${REQ} \
+                        api-platform/hydra:${REQ} \
+                        api-platform/json-schema:${REQ} \
+                        api-platform/jsonld:${REQ} \
+                        api-platform/metadata:${REQ} \
+                        api-platform/openapi:${REQ} \
+                        api-platform/serializer:${REQ} \
+                        api-platform/state:${REQ} \
+                        api-platform/symfony:${REQ} \
+                        api-platform/validator:${REQ}
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.4
                 with:
                     build_type: "sylius"
-                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
-                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"
                     e2e: "yes"
                     database: "mariadb"
                     database_version: ${{ matrix.mariadb }}
