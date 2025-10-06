@@ -45,7 +45,6 @@
         "friendsofsymfony/rest-bundle": "^3.0",
         "jms/serializer-bundle": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "php-http/message-factory": "^1.0",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
