@@ -33,6 +33,8 @@ final class LocaleSetupTest extends KernelTestCase
 
     private $filesystem;
 
+    private string $originalLocale;
+
     private $localeRepository;
 
     private $localeFactory;
@@ -44,6 +46,10 @@ final class LocaleSetupTest extends KernelTestCase
     protected function setUp(): void
     {
         self::bootKernel();
+
+        // Store original locale and set consistent locale for tests
+        $this->originalLocale = \Locale::getDefault();
+        \Locale::setDefault('en_US');
 
         $this->filesystem = new Filesystem();
         $this->localeRepository = $this->prophesize(RepositoryInterface::class);
@@ -58,6 +64,13 @@ final class LocaleSetupTest extends KernelTestCase
             $this->filesystem,
             $this->localeParameterFilePath,
         );
+    }
+
+    protected function tearDown(): void
+    {
+        \Locale::setDefault($this->originalLocale);
+
+        parent::tearDown();
     }
 
     #[Test]
