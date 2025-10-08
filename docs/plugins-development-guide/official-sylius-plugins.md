@@ -26,19 +26,19 @@ This documentation covers official Sylius plugins, actively maintained and suppo
 
 <p align="center"><a href="https://app.gitbook.com/o/fmYDcx6GlpT1jw8tUL38/s/O3xeW8sSbUssDHaTG06u/" class="button secondary" data-icon="hand-holding-dollar">Refund Plugin</a></p>
 
-<p align="center"><a href="https://github.com/Sylius/InvoicingPlugin" class="button secondary" data-icon="file-invoice-dollar">Invoicing Plugin</a></p>
+<p align="center"><a href="https://app.gitbook.com/o/fmYDcx6GlpT1jw8tUL38/s/3OFGeRdHBKQHtCzDU578/" class="button secondary" data-icon="file-invoice">Invoicing Plugin</a></p>
 
-<p align="center"><a href="https://github.com/Sylius/ProductBundlePlugin" class="button secondary" data-icon="cubes">Product Bundle Plugin</a></p>
+<p align="center"><a href="https://app.gitbook.com/o/fmYDcx6GlpT1jw8tUL38/s/P87HzQfSn73U7AM1Sxg4/" class="button secondary" data-icon="cubes">Product Bundle Plugin</a></p>
 {% endcolumn %}
 
 {% column width="50%" %}
 <p align="center"></p>
 
-<p align="center"><a href="https://app.gitbook.com/o/fmYDcx6GlpT1jw8tUL38/s/egoFKLYBvW2EubgSvUPZ/" class="button secondary">Adyen Plugin</a></p>
+<p align="center"><a href="https://app.gitbook.com/o/fmYDcx6GlpT1jw8tUL38/s/juNlTDxwlhH9UPuILj6G/" class="button secondary">Adyen Plugin</a></p>
 
 <p align="center"><a href="https://app.gitbook.com/o/fmYDcx6GlpT1jw8tUL38/s/xJtXcDT28vNVZl2eGDe7/" class="button secondary">Mollie Plugin</a></p>
 
-<p align="center"><a href="https://github.com/Sylius/PayPalPlugin" class="button secondary">PayPal Plugin</a></p>
+<p align="center"><a href="https://app.gitbook.com/o/fmYDcx6GlpT1jw8tUL38/s/1mprRQD8KcRRQXz7huOD/" class="button secondary">PayPal Plugin</a></p>
 {% endcolumn %}
 {% endcolumns %}
 
