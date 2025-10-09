@@ -34,22 +34,10 @@ default:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
-                        extra_capabilities:
-                            chromeOptions:
-                                args:
-                                    - --disable-blink-features=AutomationControlled
-                                    - --disable-features=IsolateOrigins,site-per-process
-                                    - --disable-site-isolation-trials
                 chrome_headless_second_session:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
-                        extra_capabilities:
-                            chromeOptions:
-                                args:
-                                    - --disable-blink-features=AutomationControlled
-                                    - --disable-features=IsolateOrigins,site-per-process
-                                    - --disable-site-isolation-trials
                 panther:
                     panther:
                         manager_options:
