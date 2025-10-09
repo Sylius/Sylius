@@ -96,6 +96,11 @@ class FormComponent
         $this->manager->remove($this->resource);
         $this->manager->flush();
 
+        $this->resource = $this->createResource();
+        $this->resetForm();
+        $this->isValidated = false;
+        $this->validatedFields = [];
+
         $this->shouldSaveCart = false;
         $this->submitForm();
         $this->emit(self::SYLIUS_SHOP_CART_CLEARED);
