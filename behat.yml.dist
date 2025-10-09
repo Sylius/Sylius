@@ -34,15 +34,27 @@ default:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
+                        extra_capabilities:
+                            chromeOptions:
+                                args:
+                                    - --disable-blink-features=AutomationControlled
+                                    - --disable-features=IsolateOrigins,site-per-process
+                                    - --disable-site-isolation-trials
                 chrome_headless_second_session:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
+                        extra_capabilities:
+                            chromeOptions:
+                                args:
+                                    - --disable-blink-features=AutomationControlled
+                                    - --disable-features=IsolateOrigins,site-per-process
+                                    - --disable-site-isolation-trials
                 panther:
                     panther:
                         manager_options:
-                            connection_timeout_in_ms: 5000
-                            request_timeout_in_ms: 120000
+                            connection_timeout_in_ms: 10000
+                            request_timeout_in_ms: 180000
                             chromedriver_arguments:
                                 - --log-path=etc/build/chromedriver.log
                                 - --verbose
@@ -58,7 +70,7 @@ default:
                                 - --disable-dev-shm-usage
                                 - --disable-gpu
                                 - --disable-infobars
-                                - --disable-features=TranslateUI
+                                - --disable-features=TranslateUI,IsolateOrigins,site-per-process
                                 - --disable-translate
                                 - --disable-popup-blocking
                                 - --disable-blink-features=AutomationControlled
@@ -67,6 +79,11 @@ default:
                                 - --disable-dev-tools
                                 - --disable-extensions
                                 - --disable-password-manager-leak-detection
+                                - --disable-site-isolation-trials
+                                - --disable-web-security
+                                - --disable-accelerated-2d-canvas
+                                - --disable-gpu-sandbox
+                                - --force-device-scale-factor=1
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension: ~

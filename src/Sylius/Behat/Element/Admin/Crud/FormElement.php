@@ -70,8 +70,9 @@ class FormElement extends Element implements FormElementInterface
     {
         $form = $this->getElement('form');
 
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
+        usleep(800000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(3000, fn () => !$form->hasAttribute('busy'));
+        usleep(300000); // additional wait after form update to ensure JavaScript has finished
     }
 
     /**

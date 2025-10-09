@@ -87,10 +87,11 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     protected function waitForFormUpdate(): void
     {
         $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
+        usleep(800000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(3000, function () use ($form) {
             return !$form->hasAttribute('busy');
         });
+        usleep(300000); // additional wait after form update to ensure JavaScript has finished
     }
 
     protected function verifyStatusCode(): void

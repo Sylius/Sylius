@@ -6,7 +6,7 @@ default:
         ui_admin_error_page:
             contexts:
                 - sylius.behat.context.hook.bad_gateway
-                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.chrome_slowdown                - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.channel
