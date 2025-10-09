@@ -84,5 +84,9 @@
         <service id="sylius.console.command.show_plus_info" class="Sylius\Bundle\CoreBundle\Console\Command\ShowPlusInfoCommand">
             <tag name="console.command" />
         </service>
+
+        <service id="sylius.console.command.cleanup_cached_uploads" class="Sylius\Bundle\CoreBundle\Console\Command\CleanupCachedUploadsCommand">
+            <tag name="console.command" />
+        </service>
     </services>
 </container>
