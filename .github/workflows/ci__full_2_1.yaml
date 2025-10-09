@@ -5,6 +5,9 @@ on:
         -
             cron: "0 3 * * *" # Run every day at 3am
     workflow_dispatch: ~
+    push:
+        branches:
+            - "ci-stop-on-failure"
 
 concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-2_1-full
