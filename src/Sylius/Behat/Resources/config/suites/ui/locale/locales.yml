@@ -6,7 +6,8 @@ default:
         ui_locales:
             contexts:
                 - sylius.behat.context.hook.bad_gateway
-                - sylius.behat.context.hook.chrome_slowdown                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.chrome_slowdown
+                - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.channel
