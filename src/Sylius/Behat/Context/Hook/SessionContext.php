@@ -66,8 +66,18 @@ final class SessionContext implements Context
             return;
         }
 
-        foreach ($this->mink->getSessionNames() as $sessionName) {
-            $session = $this->mink->getSession($sessionName);
+        // Reset default session if it exists and is started
+        if ($this->mink->hasSession($this->mink->getDefaultSessionName())) {
+            $session = $this->mink->getSession($this->mink->getDefaultSessionName());
+            if ($session->isStarted()) {
+                $session->reset();
+            }
+        }
+
+        // Reset javascript session (panther) if it exists and is started
+        $javascriptSessionName = 'panther';
+        if ($this->mink->hasSession($javascriptSessionName)) {
+            $session = $this->mink->getSession($javascriptSessionName);
             if ($session->isStarted()) {
                 $session->reset();
             }
