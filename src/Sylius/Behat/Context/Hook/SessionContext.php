@@ -60,26 +60,26 @@ final class SessionContext implements Context
     /**
      * @AfterScenario @ui
      */
-    public function resetBrowserSession(): void
+    public function stopBrowserSession(): void
     {
         if (null === $this->mink) {
             return;
         }
 
-        // Reset default session if it exists and is started
+        // Stop sessions without full reset to preserve flash messages
         if ($this->mink->hasSession($this->mink->getDefaultSessionName())) {
             $session = $this->mink->getSession($this->mink->getDefaultSessionName());
             if ($session->isStarted()) {
-                $session->reset();
+                $session->stop();
             }
         }
 
-        // Reset javascript session (panther) if it exists and is started
+        // Stop javascript session (panther) if it exists
         $javascriptSessionName = 'panther';
         if ($this->mink->hasSession($javascriptSessionName)) {
             $session = $this->mink->getSession($javascriptSessionName);
             if ($session->isStarted()) {
-                $session->reset();
+                $session->stop();
             }
         }
     }
