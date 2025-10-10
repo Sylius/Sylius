@@ -45,7 +45,5 @@
         </service>
 
         <service id="sylius.behat.context.hook.bad_gateway" class="Sylius\Behat\Context\Hook\BadGatewayContext"/>
-
-        <service id="sylius.behat.context.hook.chrome_slowdown" class="Sylius\Behat\Context\Hook\ChromeSlowdownContext"/>
     </services>
 </container>

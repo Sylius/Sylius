@@ -6,7 +6,6 @@ default:
         ui_modifying_placed_order_address:
             contexts:
                 - sylius.behat.context.hook.bad_gateway
-                - sylius.behat.context.hook.chrome_slowdown
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
