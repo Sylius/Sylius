@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Mink;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,6 +26,7 @@ final class SessionContext implements Context
     public function __construct(
         private RequestStack $requestStack,
         private ?SessionFactoryInterface $sessionFactory = null,
+        private ?Mink $mink = null,
     ) {
     }
 
@@ -52,6 +54,23 @@ final class SessionContext implements Context
             }
 
             $this->saveSessionOnNewRequest($session);
+        }
+    }
+
+    /**
+     * @AfterScenario @ui
+     */
+    public function resetBrowserSession(): void
+    {
+        if (null === $this->mink) {
+            return;
+        }
+
+        foreach ($this->mink->getSessionNames() as $sessionName) {
+            $session = $this->mink->getSession($sessionName);
+            if ($session->isStarted()) {
+                $session->reset();
+            }
         }
     }
 

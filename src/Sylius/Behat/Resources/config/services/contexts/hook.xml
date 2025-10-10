@@ -26,6 +26,7 @@
         <service id="sylius.behat.context.hook.session" class="Sylius\Behat\Context\Hook\SessionContext">
             <argument type="service" id="request_stack" />
             <argument type="service" id="session.factory" on-invalid="null" />
+            <argument type="service" id="behat.mink" on-invalid="null" />
         </service>
 
         <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">
