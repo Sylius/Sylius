@@ -44,24 +44,23 @@ abstract class DriverHelper
             return;
         }
 
-        // Optionally install MutationObserver for debugging Live Components
-        // Uncomment when debugging Symfony UX Live Component issues
-        // $session->evaluateScript(<<<'JS'
-        //     if (!window.__behat_observer_installed) {
-        //         window.__behat_observer_installed = true;
-        //         new MutationObserver((mutations) => {
-        //             mutations.forEach(m => {
-        //                 if (m.attributeName === 'busy' || m.attributeName?.includes('live')) {
-        //                     console.log('🔔 BEHAT DEBUG - MUTATION:', m.attributeName, '→', m.target.getAttribute(m.attributeName), m.target);
-        //                 }
-        //             });
-        //         }).observe(document.body, { attributes: true, subtree: true });
-        //         console.log('✅ Behat MutationObserver installed');
-        //     }
-        // JS);
-
-        // Quick check: document ready (max 2s instead of 5s)
+        // Quick check: document ready (max 1s)
         $session->wait(1000, "document.readyState === 'complete'");
+    }
+
+    /**
+     * Wait for Symfony UX Live Component to finish updating.
+     * Strategy: Fast when stable, retry when needed.
+     *
+     * - If no Live Components exist: returns immediately (0ms)
+     * - If busy NOW: wait up to 2s for it to finish
+     * - If not busy NOW: check once (100ms) if it appears, then wait if needed
+     */
+    public static function waitForLiveComponentUpdate(Session $session): void
+    {
+        if (!self::isJavascript($session->getDriver())) {
+            return;
+        }
 
         // Fast path: Check if there are ANY Live Components on page
         $hasLiveComponents = $session->evaluateScript(
@@ -69,21 +68,22 @@ abstract class DriverHelper
         );
 
         if (!$hasLiveComponents) {
-            // No Live Components - skip expensive checks
+            // No Live Components - return immediately
             return;
         }
 
-        // Only do expensive waits if Live Components exist
+        // Check if busy NOW (no wait)
         $hasBusyComponents = $session->evaluateScript('!!document.querySelector("[busy]")');
 
         if ($hasBusyComponents) {
-            // If busy components exist NOW, wait for them to finish (max 5s instead of 10s)
+            // If busy components exist NOW, wait for them to finish (max 2s)
             $session->wait(2000, '!document.querySelector("[busy]")');
         } else {
-            // Reduced wait from 500ms to 200ms for busy to appear
-            $session->wait(200, 'document.querySelector("[busy]")');
+            // Give busy attribute 100ms to appear (reduced from 200ms)
+            $session->wait(100, 'document.querySelector("[busy]")');
 
             if ($session->evaluateScript('!!document.querySelector("[busy]")')) {
+                // It appeared - now wait for it to finish
                 $session->wait(2000, '!document.querySelector("[busy]")');
             }
         }
