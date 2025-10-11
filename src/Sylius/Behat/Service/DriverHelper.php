@@ -49,12 +49,13 @@ abstract class DriverHelper
     }
 
     /**
-     * Wait for Symfony UX Live Component to finish updating.
-     * Strategy: Fast when stable, retry when needed.
+     * Wait for ALL Symfony UX Live Components to finish updating.
+     * Strategy: Fast when stable, waits for multiple components when needed.
      *
      * - If no Live Components exist: returns immediately (0ms)
-     * - If busy NOW: wait up to 2s for it to finish
-     * - If not busy NOW: check once (100ms) if it appears, then wait if needed
+     * - Waits up to 500ms for ANY busy attribute to appear
+     * - Then waits up to 3s for ALL busy attributes to disappear
+     * - Handles multiple Live Components updating simultaneously
      */
     public static function waitForLiveComponentUpdate(Session $session): void
     {
@@ -68,24 +69,38 @@ abstract class DriverHelper
         );
 
         if (!$hasLiveComponents) {
-            // No Live Components - return immediately
+            // No Live Components - return immediately (0ms)
             return;
         }
 
-        // Check if busy NOW (no wait)
-        $hasBusyComponents = $session->evaluateScript('!!document.querySelector("[busy]")');
+        // Wait up to 500ms for ANY busy attribute to appear
+        // This handles multiple LCs that may start at slightly different times
+        $session->wait(500, 'document.querySelector("[busy]")');
 
-        if ($hasBusyComponents) {
-            // If busy components exist NOW, wait for them to finish (max 2s)
-            $session->wait(2000, '!document.querySelector("[busy]")');
-        } else {
-            // Give busy attribute 100ms to appear (reduced from 200ms)
-            $session->wait(100, 'document.querySelector("[busy]")');
+        // Now wait for ALL busy attributes to disappear (max 3s)
+        // Important: Keep checking even if no busy now, as second LC may start updating
+        $maxWaitMs = 3000;
+        $checkIntervalMs = 100;
+        $totalWaitedMs = 0;
 
-            if ($session->evaluateScript('!!document.querySelector("[busy]")')) {
-                // It appeared - now wait for it to finish
-                $session->wait(2000, '!document.querySelector("[busy]")');
+        while ($totalWaitedMs < $maxWaitMs) {
+            $hasBusy = $session->evaluateScript('!!document.querySelector("[busy]")');
+
+            if (!$hasBusy) {
+                // No busy components - check one more time after 100ms to be sure
+                // (second LC might be about to start)
+                usleep(100000);
+                $hasBusy = $session->evaluateScript('!!document.querySelector("[busy]")');
+
+                if (!$hasBusy) {
+                    // Confirmed: all done
+                    return;
+                }
             }
+
+            // Still busy - wait and check again
+            usleep($checkIntervalMs * 1000);
+            $totalWaitedMs += $checkIntervalMs;
         }
     }
 }
