@@ -33,12 +33,4 @@ final class DoctrineORMContext implements Context
         $purger->purge();
         $this->entityManager->clear();
     }
-
-    /**
-     * @AfterScenario
-     */
-    public function clearEntityManager(): void
-    {
-        $this->entityManager->clear();
-    }
 }
