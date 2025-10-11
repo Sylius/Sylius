@@ -60,32 +60,32 @@ abstract class DriverHelper
         //     }
         // JS);
 
-        // Wait for document ready first
-        $session->wait(5000, "document.readyState === 'complete'");
+        // Quick check: document ready (max 2s instead of 5s)
+        $session->wait(2000, "document.readyState === 'complete'");
 
-        // CRITICAL FIX: Wait for Live Components to finish updating
-        // Problem: querySelector('[busy]') returns null BOTH when:
-        //   1. Component is not loading (good)
-        //   2. Component hasn't started loading yet (race condition!)
-        //
-        // Solution: Use a smarter check that waits for stability
+        // Fast path: Check if there are ANY Live Components on page
+        $hasLiveComponents = $session->evaluateScript(
+            '!!document.querySelector("[data-controller~=live]") || !!document.querySelector("[data-live-loading]")'
+        );
+
+        if (!$hasLiveComponents) {
+            // No Live Components - skip expensive checks
+            return;
+        }
+
+        // Only do expensive waits if Live Components exist
         $hasBusyComponents = $session->evaluateScript('!!document.querySelector("[busy]")');
 
         if ($hasBusyComponents) {
-            // If busy components exist NOW, wait for them to finish (max 10s)
-            $session->wait(10000, '!document.querySelector("[busy]")');
+            // If busy components exist NOW, wait for them to finish (max 5s instead of 10s)
+            $session->wait(5000, '!document.querySelector("[busy]")');
         } else {
-            // No busy components right now - wait a bit to see if any appear (max 500ms)
-            // This catches components that start loading slightly after action
-            $session->wait(500, 'document.querySelector("[busy]")');
+            // Reduced wait from 500ms to 200ms for busy to appear
+            $session->wait(200, 'document.querySelector("[busy]")');
 
-            // If busy appeared during that wait, now wait for it to finish
             if ($session->evaluateScript('!!document.querySelector("[busy]")')) {
-                $session->wait(10000, '!document.querySelector("[busy]")');
+                $session->wait(5000, '!document.querySelector("[busy]")');
             }
         }
-
-        // Also check for legacy data-live-loading
-        $session->wait(1000, '!document.querySelector("[data-live-loading=true]")');
     }
 }
