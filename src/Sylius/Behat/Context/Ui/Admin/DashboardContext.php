@@ -28,6 +28,32 @@ final class DashboardContext implements Context
     }
 
     /**
+     * Retry assertion until value matches or timeout.
+     * For Live Component updates where value may be stale even when element exists.
+     */
+    private function assertWithRetry(callable $getter, mixed $expected, int $maxAttempts = 3, int $waitMs = 500): void
+    {
+        $lastActual = null;
+
+        for ($attempt = 1; $attempt <= $maxAttempts; $attempt++) {
+            $lastActual = $getter();
+
+            if ($lastActual === $expected) {
+                Assert::same($lastActual, $expected); // Pass
+                return;
+            }
+
+            // Not matching yet - wait before retry (except on last attempt)
+            if ($attempt < $maxAttempts) {
+                usleep($waitMs * 1000);
+            }
+        }
+
+        // All attempts failed - throw assertion with last value
+        Assert::same($lastActual, $expected);
+    }
+
+    /**
      * @Given I am on the administration dashboard
      * @When I (try to )open administration dashboard
      * @When I (try to )view statistics
@@ -126,7 +152,10 @@ final class DashboardContext implements Context
      */
     public function iShouldSeePaidOrders(int $number): void
     {
-        Assert::same($this->dashboardPage->getNumberOfPaidOrders(), $number);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfPaidOrders(),
+            $number
+        );
     }
 
     /**
@@ -134,7 +163,10 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewCustomers(int $number): void
     {
-        Assert::same($this->dashboardPage->getNumberOfNewCustomers(), $number);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfNewCustomers(),
+            $number
+        );
     }
 
     /**
@@ -142,7 +174,10 @@ final class DashboardContext implements Context
      */
     public function thereShouldBeTotalSalesOf(string $total): void
     {
-        Assert::same($this->dashboardPage->getTotalSales(), $total);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getTotalSales(),
+            $total
+        );
     }
 
     /**
@@ -150,10 +185,9 @@ final class DashboardContext implements Context
      */
     public function myAverageOrderValueShouldBe(string $value): void
     {
-        Assert::same(
-            $this->dashboardPage->getAverageOrderValue(),
-            $value,
-            'Expected average order value to be equal to %2$s, but it is %s.',
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getAverageOrderValue(),
+            $value
         );
     }
 
@@ -162,7 +196,10 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewCustomersInTheList(int $number): void
     {
-        Assert::same($this->dashboardPage->getNumberOfNewCustomersInTheList(), $number);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfNewCustomersInTheList(),
+            $number
+        );
     }
 
     /**
@@ -170,7 +207,10 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewOrdersInTheList(int $number): void
     {
-        Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfNewOrdersInTheList(),
+            $number
+        );
     }
 
     /**
@@ -184,30 +224,45 @@ final class DashboardContext implements Context
     #[Then('I should see :count order(s) to process in the pending actions')]
     public function iShouldSeeOrdersToProcessInThePendingActions(int $count): void
     {
-        Assert::same($this->dashboardPage->getNumberOfOrdersToProcess(), $count);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfOrdersToProcess(),
+            $count
+        );
     }
 
     #[Then('I should see :count shipment(s) to ship in the pending actions')]
     public function iShouldSeeShipmentsToShipInThePendingActions(int $count): void
     {
-        Assert::same($this->dashboardPage->getNumberOfShipmentsToShip(), $count);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfShipmentsToShip(),
+            $count
+        );
     }
 
     #[Then('I should see :count pending payment(s) in the pending actions')]
     public function iShouldSeePendingPaymentsInThePendingActions(int $count): void
     {
-        Assert::same($this->dashboardPage->getNumberOfPendingPayments(), $count);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfPendingPayments(),
+            $count
+        );
     }
 
     #[Then('I should see :count product review(s) to approve in the pending actions')]
     public function iShouldSeeProductReviewsToApproveInThePendingActions(int $count): void
     {
-        Assert::same($this->dashboardPage->getNumberOfProductReviewsToApprove(), $count);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfProductReviewsToApprove(),
+            $count
+        );
     }
 
     #[Then('I should see :count product variant(s) out of stock in the pending actions')]
     public function iShouldSeeProductVariantsOutOfStockInThePendingActions(int $count): void
     {
-        Assert::same($this->dashboardPage->getNumberOfProductVariantsOutOfStock(), $count);
+        $this->assertWithRetry(
+            fn() => $this->dashboardPage->getNumberOfProductVariantsOutOfStock(),
+            $count
+        );
     }
 }
