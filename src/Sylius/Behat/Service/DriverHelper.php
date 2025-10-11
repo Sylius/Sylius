@@ -61,7 +61,7 @@ abstract class DriverHelper
         // JS);
 
         // Quick check: document ready (max 2s instead of 5s)
-        $session->wait(2000, "document.readyState === 'complete'");
+        $session->wait(1000, "document.readyState === 'complete'");
 
         // Fast path: Check if there are ANY Live Components on page
         $hasLiveComponents = $session->evaluateScript(
@@ -78,13 +78,13 @@ abstract class DriverHelper
 
         if ($hasBusyComponents) {
             // If busy components exist NOW, wait for them to finish (max 5s instead of 10s)
-            $session->wait(5000, '!document.querySelector("[busy]")');
+            $session->wait(2000, '!document.querySelector("[busy]")');
         } else {
             // Reduced wait from 500ms to 200ms for busy to appear
             $session->wait(200, 'document.querySelector("[busy]")');
 
             if ($session->evaluateScript('!!document.querySelector("[busy]")')) {
-                $session->wait(5000, '!document.querySelector("[busy]")');
+                $session->wait(2000, '!document.querySelector("[busy]")');
             }
         }
     }
