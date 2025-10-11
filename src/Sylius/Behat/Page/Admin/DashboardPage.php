@@ -87,7 +87,10 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /** @throws ElementNotFoundException */
     public function chooseChannel(string $channelName): void
     {
-        $this->clickElement('channel_choosing_button');
+        // Click 1: Open dropdown (don't wait for LC - it's just showing UI)
+        $this->getElement('channel_choosing_button')->click();
+
+        // Click 2: Select channel (THIS triggers Live Component updates - wait for them)
         $this->clickElement('channel_choosing_list', ['%channelName%' => $channelName]);
     }
 
