@@ -40,37 +40,37 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /** @throws ElementNotFoundException */
     public function getTotalSales(): string
     {
-        return $this->getWithRetry(fn() => $this->getElement('total_sales')->getText());
+        return $this->getElement('total_sales')->getText();
     }
 
     /** @throws ElementNotFoundException */
     public function getNumberOfPaidOrders(): int
     {
-        return $this->getWithRetry(fn() => (int) $this->getElement('paid_orders')->getText());
+        return (int) $this->getElement('paid_orders')->getText();
     }
 
     /** @throws ElementNotFoundException */
     public function getNumberOfNewOrdersInTheList(): int
     {
-        return $this->getWithRetry(fn() => $this->tableAccessor->countTableBodyRows($this->getElement('order_list')));
+        return $this->tableAccessor->countTableBodyRows($this->getElement('order_list'));
     }
 
     /** @throws ElementNotFoundException */
     public function getNumberOfNewCustomers(): int
     {
-        return $this->getWithRetry(fn() => (int) $this->getElement('new_customers')->getText());
+        return (int) $this->getElement('new_customers')->getText();
     }
 
     /** @throws ElementNotFoundException */
     public function getNumberOfNewCustomersInTheList(): int
     {
-        return $this->getWithRetry(fn() => $this->tableAccessor->countTableBodyRows($this->getElement('customer_list')));
+        return $this->tableAccessor->countTableBodyRows($this->getElement('customer_list'));
     }
 
     /** @throws ElementNotFoundException */
     public function getAverageOrderValue(): string
     {
-        return $this->getWithRetry(fn() => $this->getElement('average_order_value')->getText());
+        return $this->getElement('average_order_value')->getText();
     }
 
     public function getDashboardHeader(): string
@@ -124,27 +124,27 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
 
     public function getNumberOfOrdersToProcess(): int
     {
-        return $this->getWithRetry(fn() => (int) $this->getElement('orders_to_process_count')->getText());
+        return (int) $this->getElement('orders_to_process_count')->getText();
     }
 
     public function getNumberOfPendingPayments(): int
     {
-        return $this->getWithRetry(fn() => (int) $this->getElement('pending_payments_count')->getText());
+        return (int) $this->getElement('pending_payments_count')->getText();
     }
 
     public function getNumberOfProductReviewsToApprove(): int
     {
-        return $this->getWithRetry(fn() => (int) $this->getElement('product_reviews_to_approve_count')->getText());
+        return (int) $this->getElement('product_reviews_to_approve_count')->getText();
     }
 
     public function getNumberOfProductVariantsOutOfStock(): int
     {
-        return $this->getWithRetry(fn() => (int) $this->getElement('product_variants_out_of_stock_count')->getText());
+        return (int) $this->getElement('product_variants_out_of_stock')->getText();
     }
 
     public function getNumberOfShipmentsToShip(): int
     {
-        return $this->getWithRetry(fn() => (int) $this->getElement('shipments_to_ship_count')->getText());
+        return (int) $this->getElement('shipments_to_ship_count')->getText();
     }
 
     public function getRouteName(): string

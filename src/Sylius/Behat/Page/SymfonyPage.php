@@ -21,60 +21,34 @@ abstract class SymfonyPage extends BaseSymfonyPage implements SymfonyPageInterfa
 {
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
-        // Strategy: Fast path with lazy retry
-        // Try 1: Get element immediately (0ms wait) - works when page is stable
-        // Try 2-3: If fails, wait for Live Components and retry
+        // Strategy: Fast path with lazy retry - all in one place!
+        // Try 1: Get element immediately (0ms wait) - works when page is stable ✅
+        // Try 2: If fails, wait for Live Components and retry
+        // Try 3: If still fails, give extra 300ms and final attempt
 
+        $lastException = null;
+
+        // Attempt 1: Fast path (no wait)
         try {
             return parent::getElement($name, $parameters);
         } catch (\Exception $e) {
-            // First failure - wait for any Live Component updates
-            DriverHelper::waitForLiveComponentUpdate($this->getSession());
-
-            try {
-                return parent::getElement($name, $parameters);
-            } catch (\Exception $e2) {
-                // Second failure - give it one more short wait
-                if (DriverHelper::isJavascript($this->getDriver())) {
-                    usleep(300000); // 300ms additional wait
-                }
-
-                // Final attempt - let it throw if still fails
-                return parent::getElement($name, $parameters);
-            }
-        }
-    }
-
-    /**
-     * Get element text with retry for Live Component updates.
-     * Use this when reading values that may be updated by AJAX (statistics, counts, etc.)
-     *
-     * @param callable $callback Function that returns the value to read (e.g., fn() => $this->getElement('count')->getText())
-     * @param int $maxRetries Maximum number of retries (default 2)
-     */
-    protected function getWithRetry(callable $callback, int $maxRetries = 2): mixed
-    {
-        $lastException = null;
-
-        for ($attempt = 0; $attempt <= $maxRetries; $attempt++) {
-            try {
-                return $callback();
-            } catch (\Exception $e) {
-                $lastException = $e;
-
-                if ($attempt < $maxRetries) {
-                    // Wait for Live Component update before retry
-                    DriverHelper::waitForLiveComponentUpdate($this->getSession());
-
-                    if ($attempt === $maxRetries - 1 && DriverHelper::isJavascript($this->getDriver())) {
-                        // Last retry - extra wait
-                        usleep(300000);
-                    }
-                }
-            }
+            $lastException = $e;
         }
 
-        throw $lastException;
+        // Attempt 2: Wait for Live Component updates
+        DriverHelper::waitForLiveComponentUpdate($this->getSession());
+        try {
+            return parent::getElement($name, $parameters);
+        } catch (\Exception $e) {
+            $lastException = $e;
+        }
+
+        // Attempt 3: Extra wait + final attempt
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            usleep(300000); // 300ms additional wait
+        }
+
+        return parent::getElement($name, $parameters);
     }
 
     protected function blur(): void
