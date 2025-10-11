@@ -99,6 +99,27 @@ abstract class DriverHelper
                     subtree: true
                 });
 
+                // Listen for custom events dispatched
+                document.addEventListener('sylius:admin:channel_changed', (e) => {
+                    const timestamp = Date.now();
+                    const event = `[${timestamp}] EVENT DISPATCHED: sylius:admin:channel_changed`;
+                    window.__behat_lc_events.push(event);
+                    console.log('🔔 BEHAT EVENT:', event, e.detail);
+                });
+
+                // Intercept fetch to see AJAX requests
+                const originalFetch = window.fetch;
+                window.fetch = function(...args) {
+                    const url = args[0];
+                    if (url && url.includes('_components/')) {
+                        const timestamp = Date.now();
+                        const event = `[${timestamp}] AJAX REQUEST: ${url.split('/').pop()}`;
+                        window.__behat_lc_events.push(event);
+                        console.log('🔔 BEHAT AJAX:', event);
+                    }
+                    return originalFetch.apply(this, args);
+                };
+
                 console.log('✅ Behat Live Component observer installed');
             }
         JS);
