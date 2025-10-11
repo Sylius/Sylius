@@ -73,6 +73,36 @@ abstract class DriverHelper
             return;
         }
 
+        // Install MutationObserver to debug Live Component state changes
+        $session->evaluateScript(<<<'JS'
+            if (!window.__behat_lc_observer_installed) {
+                window.__behat_lc_observer_installed = true;
+                window.__behat_lc_events = [];
+
+                // Observer for 'busy' attribute changes
+                new MutationObserver((mutations) => {
+                    mutations.forEach(m => {
+                        if (m.attributeName === 'busy') {
+                            const target = m.target;
+                            const lcName = target.getAttribute('data-live-name-value') || 'unknown';
+                            const isBusy = target.hasAttribute('busy');
+                            const timestamp = Date.now();
+                            const event = `[${timestamp}] ${lcName}: busy=${isBusy}`;
+
+                            window.__behat_lc_events.push(event);
+                            console.log('🔔 BEHAT LC EVENT:', event);
+                        }
+                    });
+                }).observe(document.body, {
+                    attributes: true,
+                    attributeFilter: ['busy'],
+                    subtree: true
+                });
+
+                console.log('✅ Behat Live Component observer installed');
+            }
+        JS);
+
         // Strategy: Poll continuously for busy state changes
         // This catches multiple LCs that may start/finish at different times
         $maxWaitMs = 2000;  // Max 2s total
@@ -88,6 +118,7 @@ abstract class DriverHelper
                 $stableCount++;
                 if ($stableCount >= $requiredStableChecks) {
                     // Stable for 150ms with no busy - all LCs done
+                    self::dumpLiveComponentEvents($session);
                     return;
                 }
             } else {
@@ -97,6 +128,27 @@ abstract class DriverHelper
 
             usleep($checkIntervalMs * 1000);
             $totalWaitedMs += $checkIntervalMs;
+        }
+
+        // Timeout reached - dump events for debugging
+        self::dumpLiveComponentEvents($session);
+    }
+
+    /**
+     * Dump all captured Live Component events for debugging
+     */
+    private static function dumpLiveComponentEvents(Session $session): void
+    {
+        $events = $session->evaluateScript('window.__behat_lc_events || []');
+
+        if (!empty($events)) {
+            error_log("[BEHAT] 🔔 Live Component Events Timeline:");
+            foreach ($events as $event) {
+                error_log("[BEHAT]   " . $event);
+            }
+
+            // Clear events for next call
+            $session->evaluateScript('window.__behat_lc_events = []');
         }
     }
 }
