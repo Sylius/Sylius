@@ -91,10 +91,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         $this->getElement('channel_choosing_button')->click();
 
         // Wait for dropdown to be visible and item to be clickable
-        // getElement() has retry logic, but for dropdown we need explicit visibility wait
+        // Returns immediately when dropdown appears (max 2s timeout)
         if (\Sylius\Behat\Service\DriverHelper::isJavascript($this->getDriver())) {
-            // Wait for dropdown animation + item to be visible/clickable
-            $this->getSession()->wait(500, 'document.querySelector("[data-test-choose-channel-list] a") !== null');
+            $this->getSession()->wait(2000, 'document.querySelector("[data-test-choose-channel-list] a") !== null');
         }
 
         // Click 2: Select channel (THIS triggers Live Component updates - wait for them)
