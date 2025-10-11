@@ -73,32 +73,28 @@ abstract class DriverHelper
             return;
         }
 
-        // Wait up to 500ms for ANY busy attribute to appear
-        // This handles multiple LCs that may start at slightly different times
-        $session->wait(500, 'document.querySelector("[busy]")');
-
-        // Now wait for ALL busy attributes to disappear (max 3s)
-        // Important: Keep checking even if no busy now, as second LC may start updating
-        $maxWaitMs = 3000;
-        $checkIntervalMs = 100;
+        // Strategy: Poll continuously for busy state changes
+        // This catches multiple LCs that may start/finish at different times
+        $maxWaitMs = 2000;  // Max 2s total
+        $checkIntervalMs = 50;  // Check every 50ms for responsiveness
         $totalWaitedMs = 0;
+        $stableCount = 0;  // Count consecutive checks with no busy
+        $requiredStableChecks = 3;  // Need 3 consecutive "no busy" to be sure (150ms)
 
         while ($totalWaitedMs < $maxWaitMs) {
-            $hasBusy = $session->evaluateScript('!!document.querySelector("[busy]")');
+            $busyCount = $session->evaluateScript('document.querySelectorAll("[busy]").length');
 
-            if (!$hasBusy) {
-                // No busy components - check one more time after 100ms to be sure
-                // (second LC might be about to start)
-                usleep(100000);
-                $hasBusy = $session->evaluateScript('!!document.querySelector("[busy]")');
-
-                if (!$hasBusy) {
-                    // Confirmed: all done
+            if ($busyCount === 0) {
+                $stableCount++;
+                if ($stableCount >= $requiredStableChecks) {
+                    // Stable for 150ms with no busy - all LCs done
                     return;
                 }
+            } else {
+                // Reset stability counter if busy appears
+                $stableCount = 0;
             }
 
-            // Still busy - wait and check again
             usleep($checkIntervalMs * 1000);
             $totalWaitedMs += $checkIntervalMs;
         }
