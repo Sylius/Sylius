@@ -106,6 +106,7 @@ abstract class DriverHelper
         // Strategy: Poll continuously for busy state changes
         // This catches multiple LCs that may start/finish at different times
         $maxWaitMs = 2000;  // Max 2s total
+        $minWaitMs = 300;   // Minimum wait even if no busy appears (LC might be cached/instant)
         $checkIntervalMs = 50;  // Check every 50ms for responsiveness
         $totalWaitedMs = 0;
         $stableCount = 0;  // Count consecutive checks with no busy
@@ -116,7 +117,9 @@ abstract class DriverHelper
 
             if ($busyCount === 0) {
                 $stableCount++;
-                if ($stableCount >= $requiredStableChecks) {
+
+                // If stable AND we've waited minimum time, we're done
+                if ($stableCount >= $requiredStableChecks && $totalWaitedMs >= $minWaitMs) {
                     // Stable for 150ms with no busy - all LCs done
                     self::dumpLiveComponentEvents($session);
                     return;
