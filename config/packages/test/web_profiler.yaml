@@ -1,6 +1,6 @@
 web_profiler:
-    toolbar: true
+    toolbar: false
     intercept_redirects: false
 
 framework:
-    profiler: { collect: true }
+    profiler: { collect: false }
