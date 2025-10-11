@@ -71,7 +71,14 @@ final class CookieSetter implements CookieSetterInterface
         }
 
         if ($driver instanceof ChromeDriver) {
-            return true;
+            // FIX: Only visit base_url if no page is loaded yet
+            // This avoids unnecessary navigation to shop page before admin tests
+            $currentUrl = $session->getCurrentUrl();
+            if (empty($currentUrl) || $currentUrl === 'about:blank' || $currentUrl === 'data:,') {
+                return true;  // Need to visit a page first to set cookies
+            }
+            // Already on a page - can set cookies without visiting base_url
+            return false;
         }
 
         if (str_contains($session->getCurrentUrl(), $this->minkParameters['base_url'])) {

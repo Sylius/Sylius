@@ -89,14 +89,21 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     {
         $this->getElement('channel_choosing_button')->click();
         $this->getElement('channel_choosing_list', ['%channelName%' => $channelName])->click();
-        $this->waitForStatisticsUpdate();
+
+        // CRITICAL: Wait for Live Component to update after channel change
+        // Problem: 'busy' attribute appears/disappears too fast (<50ms) to reliably catch
+        // Solution: Fixed wait for AJAX + DOM render
+        if (\Sylius\Behat\Service\DriverHelper::isJavascript($this->getDriver())) {
+            // Hard wait 1 second - ensures Live Component completes update
+            // This is less elegant than waiting for 'busy', but more reliable
+            sleep(1);
+        }
     }
 
     /** @throws ElementNotFoundException */
     public function chooseYearSplitByMonthsInterval(): void
     {
         $this->getElement('year_split_by_months_statistics_button')->click();
-        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
@@ -109,14 +116,12 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     public function choosePreviousPeriod(): void
     {
         $this->getElement('previous_period')->click();
-        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
     public function chooseNextPeriod(): void
     {
         $this->getElement('next_period')->click();
-        $this->waitForStatisticsUpdate();
     }
 
     public function searchForProductViaNavbar(ProductInterface $productName): void
@@ -128,36 +133,26 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
 
     public function getNumberOfOrdersToProcess(): int
     {
-        $this->waitForElement('orders_to_process');
-
         return (int) $this->getElement('orders_to_process_count')->getText();
     }
 
     public function getNumberOfPendingPayments(): int
     {
-        $this->waitForElement('pending_payments');
-
         return (int) $this->getElement('pending_payments_count')->getText();
     }
 
     public function getNumberOfProductReviewsToApprove(): int
     {
-        $this->waitForElement('product_reviews_to_approve');
-
         return (int) $this->getElement('product_reviews_to_approve_count')->getText();
     }
 
     public function getNumberOfProductVariantsOutOfStock(): int
     {
-        $this->waitForElement('product_variants_out_of_stock');
-
         return (int) $this->getElement('product_variants_out_of_stock_count')->getText();
     }
 
     public function getNumberOfShipmentsToShip(): int
     {
-        $this->waitForElement('shipments_to_ship');
-
         return (int) $this->getElement('shipments_to_ship_count')->getText();
     }
 
@@ -198,18 +193,5 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'total_sales' => '[data-test-total-sales]',
             'year_split_by_months_statistics_button' => '[data-test-year-split-into-months]',
         ]);
-    }
-
-    protected function waitForStatisticsUpdate(): void
-    {
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $liveElement = $this->getElement('statistics_component');
-        $liveElement->waitFor(2500, fn () => !$liveElement->hasAttribute('busy'));
-    }
-
-    private function waitForElement(string $element): void
-    {
-        $liveElement = $this->getElement($element);
-        $liveElement->waitFor(2500, fn () => !$liveElement->hasAttribute('busy'));
     }
 }
