@@ -89,30 +89,45 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     {
         $this->getElement('channel_choosing_button')->click();
         $this->getElement('channel_choosing_list', ['%channelName%' => $channelName])->click();
+
+        // This click triggers Live Component AJAX - wait for it to complete
+        \Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     /** @throws ElementNotFoundException */
     public function chooseYearSplitByMonthsInterval(): void
     {
         $this->getElement('year_split_by_months_statistics_button')->click();
+
+        // This click triggers Live Component AJAX - wait for it to complete
+        \Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     /** @throws ElementNotFoundException */
     public function chooseMonthSplitByDaysInterval(): void
     {
         $this->getElement('month_split_by_days_statistics_button')->click();
+
+        // This click triggers Live Component AJAX - wait for it to complete
+        \Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     /** @throws ElementNotFoundException */
     public function choosePreviousPeriod(): void
     {
         $this->getElement('previous_period')->click();
+
+        // This click triggers Live Component AJAX - wait for it to complete
+        \Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     /** @throws ElementNotFoundException */
     public function chooseNextPeriod(): void
     {
         $this->getElement('next_period')->click();
+
+        // This click triggers Live Component AJAX - wait for it to complete
+        \Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     public function searchForProductViaNavbar(ProductInterface $productName): void

@@ -29,9 +29,9 @@ final class DashboardContext implements Context
 
     /**
      * Retry assertion until value matches or timeout.
-     * For Live Component updates where value may be stale even when element exists.
+     * Use after Live Component actions when value may need extra time to update in DOM.
      */
-    private function assertWithRetry(callable $getter, mixed $expected, int $maxAttempts = 3, int $waitMs = 500): void
+    private function assertWithRetry(callable $getter, mixed $expected, int $maxAttempts = 2, int $waitMs = 200): void
     {
         $lastActual = null;
 
@@ -43,7 +43,7 @@ final class DashboardContext implements Context
                 return;
             }
 
-            // Not matching yet - wait before retry (except on last attempt)
+            // Value doesn't match yet - short wait for DOM render
             if ($attempt < $maxAttempts) {
                 usleep($waitMs * 1000);
             }
