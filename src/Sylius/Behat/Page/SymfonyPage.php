@@ -51,6 +51,19 @@ abstract class SymfonyPage extends BaseSymfonyPage implements SymfonyPageInterfa
         return parent::getElement($name, $parameters);
     }
 
+    /**
+     * Click element and automatically wait for Live Component updates.
+     * Use this instead of getElement()->click() for better stability.
+     */
+    protected function clickElement(string $name, array $parameters = []): void
+    {
+        $this->getElement($name, $parameters)->click();
+
+        // After click, wait for any Live Component AJAX to complete
+        // This is 0ms overhead if no Live Components on page ✅
+        DriverHelper::waitForLiveComponentUpdate($this->getSession());
+    }
+
     protected function blur(): void
     {
         $this->getDocument()->find('css', 'body')->click();
