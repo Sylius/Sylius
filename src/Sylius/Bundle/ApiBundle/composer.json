@@ -38,7 +38,6 @@
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "nelmio/alice": "^3.13",
         "phparkitect/phparkitect": "^0.6",
-        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/debug-bundle": "^6.4 || ^7.2",
