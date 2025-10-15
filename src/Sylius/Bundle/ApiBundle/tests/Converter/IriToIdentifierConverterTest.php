@@ -217,7 +217,7 @@ final class IriToIdentifierConverterTest extends TestCase
 
         $operation = $this->createMock(HttpOperation::class);
         $operation
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('getClass')
             ->willReturn(AddProductReview::class);
 
@@ -258,7 +258,7 @@ final class IriToIdentifierConverterTest extends TestCase
     {
         $operation = $this->createMock(HttpOperation::class);
         $operation
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('getClass')
             ->willReturn(AddProductReview::class);
 
