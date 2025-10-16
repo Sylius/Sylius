@@ -1,3 +1,15 @@
+# UPGRADE FROM `2.1.6` TO `2.1.7`
+
+### Modified routes
+
+1. The routes for payment requests resource have been renamed to follow the shop API naming convention.
+
+| Old route                              | New route                                   |
+|----------------------------------------|---------------------------------------------|
+| `sylius_api_show_payment_request_get`  | `sylius_api_shop_show_payment_request_get`  |
+| `sylius_api_show_payment_request_post` | `sylius_api_shop_show_payment_request_post` |
+| `sylius_api_show_payment_request_put`  | `sylius_api_shop_show_payment_request_put`  |
+
 # UPGRADE FROM `2.1.4` TO `2.1.5`
 
 ## Modified responses
