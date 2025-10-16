@@ -9,8 +9,6 @@
 
 import './styles/main.scss';
 
-import './app';
-
 import './scripts/bootstrap';
 import './scripts/spotlight';
 

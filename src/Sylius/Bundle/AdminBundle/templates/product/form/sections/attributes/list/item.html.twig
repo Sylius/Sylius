@@ -7,7 +7,7 @@
                 {% set product_attribute_name = (product_attribute_value|first).vars.data.name %}
                 <div
                     class="py-2 cursor-pointer list-group-item list-group-item-action {% if loop.first %}active{% endif %}"
-                    data-tabs-errors-target="tab"
+                    {{ stimulus_target('@sylius/admin-bundle/tabs-errors', 'tab') }}
                     data-bs-toggle="tab"
                     data-bs-target="#{{ product_attribute_code }}"
                     aria-selected="{{ loop.first ? 'true' : 'false' }}"

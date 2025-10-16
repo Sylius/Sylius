@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -26,7 +27,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_payment_requests_for_payment(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -47,7 +48,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/payment_request/get_payment_requests_for_payment');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_payment_request(): void
     {
         $this->setUpDefaultGetHeaders();

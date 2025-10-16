@@ -76,7 +76,6 @@ final class ProductVariantLowestPriceDisplayChecker implements ProductVariantLow
         return 0 < count(array_uintersect(
             $firstArray,
             $secondArray,
-            /** @phpstan-ignore-next-line  */
             fn (TaxonInterface $firstTaxon, TaxonInterface $secondTaxon): int => $firstTaxon->getCode() <=> $secondTaxon->getCode(),
         ));
     }

@@ -30,7 +30,6 @@ final class CatalogPromotionRemovalProcessor implements CatalogPromotionRemovalP
 
     public function removeCatalogPromotion(string $catalogPromotionCode): void
     {
-        /** @var CatalogPromotionInterface|null $catalogPromotion */
         $catalogPromotion = $this->getCatalogPromotion($catalogPromotionCode);
 
         if ($catalogPromotion->getState() === CatalogPromotionStates::STATE_PROCESSING) {

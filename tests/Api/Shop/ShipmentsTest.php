@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 
@@ -38,7 +39,7 @@ final class ShipmentsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_shipment(): void
     {
         $order = $this->placeOrder();
@@ -47,7 +48,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/shipment/get_shipment_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_get_another_user_shipment(): void
     {
         $order = $this->placeOrder(email: 'another_user@example.com');
@@ -57,7 +58,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertResponseNotFound();
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_get_the_shop_user_shipment_when_not_authenticated(): void
     {
         $order = $this->placeOrder();

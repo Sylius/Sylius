@@ -10,6 +10,5 @@
 /test/var/cache
 /test/var/logs
 
-/phpspec.yml
 /phpunit.xml
 /.phpunit.result.cache

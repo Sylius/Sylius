@@ -45,4 +45,14 @@ interface DashboardPageInterface extends SymfonyPageInterface
     public function chooseNextPeriod(): void;
 
     public function searchForProductViaNavbar(ProductInterface $productName): void;
+
+    public function getNumberOfOrdersToProcess(): int;
+
+    public function getNumberOfPendingPayments(): int;
+
+    public function getNumberOfProductReviewsToApprove(): int;
+
+    public function getNumberOfProductVariantsOutOfStock(): int;
+
+    public function getNumberOfShipmentsToShip(): int;
 }

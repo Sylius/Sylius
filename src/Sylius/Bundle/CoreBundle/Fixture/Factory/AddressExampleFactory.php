@@ -27,7 +27,8 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
-class AddressExampleFactory extends AbstractExampleFactory
+/** @implements ExampleFactoryInterface<AddressInterface> */
+class AddressExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     protected Generator $faker;
 
@@ -129,6 +130,7 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Provided province code is not valid for "%s"', $country->getName()));
     }
 
+    /** @param array<string, mixed> $options */
     private function provideProvince(array $options, AddressInterface $address): void
     {
         /** @var CountryInterface $country */
@@ -160,6 +162,7 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Country has defined provinces, but %s is not one of them', $provinceName));
     }
 
+    /** @param array<string, mixed> $options */
     private function resolveCountryProvince(array $options, AddressInterface $address): void
     {
         if (null !== $options['province_code']) {

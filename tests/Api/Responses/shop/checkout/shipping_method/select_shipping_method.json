@@ -54,10 +54,12 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
+    "promotionCoupon": null,
     "checkoutState": "shipping_selected",
     "paymentState": "cart",
     "shippingState": "cart",
     "tokenValue": "token",
+    "checkoutCompletedAt": null,
     "number": null,
     "items": [
         {
@@ -65,6 +67,7 @@
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
+            "variantName": "Blue Mug",
             "id": "@integer@",
             "quantity": 3,
             "unitPrice": 2000,

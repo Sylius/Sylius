@@ -30,11 +30,14 @@ final class ZoneEligibilityChecker implements ShippingMethodEligibilityCheckerIn
 
     public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
-        Assert::isInstanceOf($shippingSubject, ShipmentInterface::class);
         Assert::isInstanceOf($shippingMethod, CoreShippingMethodInterface::class);
 
+        if (!$shippingSubject instanceof ShipmentInterface) {
+            return true;
+        }
+
         $shippingAddress = $shippingSubject->getOrder()?->getShippingAddress();
-        if (null === $shippingAddress) {
+        if ($shippingAddress === null) {
             return true;
         }
 

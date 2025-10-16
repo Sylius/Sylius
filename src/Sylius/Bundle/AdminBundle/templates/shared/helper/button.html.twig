@@ -35,7 +35,7 @@
     {% else %}
         <button type="{{ params.type }}"
                 {% if params.id %}id="{{ params.id }}"{% endif %}
-                {% if params.form %}form="{{ params.form }}"{% endif %}
+            {% if params.form %}form="{{ params.form }}"{% endif %}
                 class="{{ button_class }}"
             {% if params.disabled %}disabled{% endif %}
             {% if params.dropdown %}data-bs-toggle="dropdown"{% endif %}
@@ -83,12 +83,14 @@
 {% endmacro %}
 
 {% macro cancel(params = {}) %}
-    {% set defaultAttr = {
-        'data-controller': 'back-button',
-        'data-action': 'click->back-button#goBack',
-        'data-back-button-current-url-value': app.request.uri,
-        'data-back-button-fallback-url-value': params.fallback_url|default(params.url|default(app.request.uri))
-    } %}
+    {% set default_attr =
+        stimulus_controller('@sylius/admin-bundle/back-button')
+        |merge(stimulus_action('@sylius/admin-bundle/back-button', 'goBack', 'click'))
+        |merge({
+        'data-sylius--admin-bundle--back-button-current-url-value': app.request.uri,
+        'data-sylius--admin-bundle--back-button-fallback-url-value': params.fallback_url|default(params.url|default(app.request.uri))
+    })
+    %}
 
     {% set params = {
         class: null,
@@ -97,7 +99,7 @@
         attr: {}
     }
         |merge(params)
-        |merge({attr: (params.attr is defined ? params.attr : {})|merge(defaultAttr)})
+        |merge({attr: (params.attr is defined ? params.attr : {})|merge(default_attr)})
     %}
 
     {{ _self.default(params) }}

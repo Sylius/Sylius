@@ -36,4 +36,6 @@ interface ProductVariantRepositoryInterface extends BaseProductVariantRepository
     ): QueryBuilder;
 
     public function countByProductOptionValueId(mixed $id): int;
+
+    public function countTrackedOutOfStock(): int;
 }

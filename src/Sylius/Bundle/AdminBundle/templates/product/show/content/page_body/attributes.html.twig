@@ -17,13 +17,11 @@
                         {% if attribute.localeCode not in set_locale_codes %}
                             {% set locale_code = attribute.localeCode %}
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        {% if locale_code %}
-                                            {% hook 'attributes#head' with { locale_code, loop } %}
-                                        {% else %}
-                                            {% hook 'attributes#head' with { loop } %}
-                                        {% endif %}
-                                    </h2>
+                                    {% if locale_code %}
+                                        {% hook 'attributes#head' with { locale_code, loop } %}
+                                    {% else %}
+                                        {% hook 'attributes#head' with { loop } %}
+                                    {% endif %}
                                     {% if locale_code %}
                                         <div {{ sylius_test_html_attribute('translatable-attribute') }}>
                                             {% hook 'attributes#body' with { 'attributes': product.attributes, locale_code } %}

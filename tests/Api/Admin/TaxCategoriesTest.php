@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class TaxCategoriesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_tax_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_category.yaml']);
@@ -44,7 +45,7 @@ final class TaxCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_tax_categories(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_category.yaml']);
@@ -59,7 +60,7 @@ final class TaxCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_tax_category(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -82,7 +83,7 @@ final class TaxCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_existing_tax_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_category.yaml']);

@@ -172,11 +172,34 @@ sylius_twig_hooks:
             price:
                 template: '@SyliusAdmin/product/form/sections/channel_pricing/price.html.twig'
                 priority: 200
+                enabled: false
             original_price:
                 template: '@SyliusAdmin/product/form/sections/channel_pricing/original_price.html.twig'
                 priority: 100
+                enabled: false
             minimum_price:
                 template: '@SyliusAdmin/product/form/sections/channel_pricing/minimum_price.html.twig'
+                priority: 0
+                enabled: false
+            header:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/header.html.twig'
+                priority: 200
+            info:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/info.html.twig'
+                priority: 100
+            accordion:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/accordion.html.twig'
+                priority: 0
+
+        'sylius_admin.product.update.content.form.sections.channel_pricing.info':
+            price_details:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/info/price_details.html.twig'
+                priority: 200
+            original_price_details:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/info/original_price_details.html.twig'
+                priority: 100
+            minimum_price_details:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/info/minimum_price_details.html.twig'
                 priority: 0
 
         'sylius_admin.product.update.content.form.sections.taxes':

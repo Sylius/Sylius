@@ -22,7 +22,30 @@
             "name": "Cup",
             "description": "@string@",
             "slug": "Cup",
-            "defaultVariant": null
+            "defaultVariant": null,
+            "defaultVariantData": null
+        },
+        {
+            "@id": "\/api\/v2\/shop\/products\/HAT2",
+            "@type": "Product",
+            "productTaxons": [],
+            "mainTaxon": null,
+            "reviews": [],
+            "averageRating": "@integer@",
+            "images": [],
+            "id": "@integer@",
+            "code": "HAT2",
+            "variants": [],
+            "options": [],
+            "associations": [],
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
+            "shortDescription": "@string@",
+            "name": "Hat 2",
+            "description": "@string@",
+            "slug": "Hat-2",
+            "defaultVariant": null,
+            "defaultVariantData": null
         },
         {
             "@id": "\/api\/v2\/shop\/products\/MUG",
@@ -48,9 +71,19 @@
             "description": "@string@",
             "slug": "mug",
             "associations": [
+                "\/api\/v2\/shop\/product-associations\/@integer@",
                 "\/api\/v2\/shop\/product-associations\/@integer@"
             ],
-            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "defaultVariantData": {
+                "@id": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+                "@type": "ProductVariant",
+                "name": "Blue Mug",
+                "inStock": true,
+                "price": 2000,
+                "originalPrice": 3000,
+                "lowestPriceBeforeDiscount": null
+            }
         },
         {
             "@id": "\/api\/v2\/shop\/products\/TANKARD",
@@ -71,13 +104,14 @@
             "name": "Tankard",
             "description": "Tankard description",
             "slug": "Tankard",
-            "defaultVariant": null
+            "defaultVariant": null,
+            "defaultVariantData": null
         }
     ],
-    "hydra:totalItems": 3,
+    "hydra:totalItems": 4,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon}",
+        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon,association[typeCode],association[ownerCode]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -132,6 +166,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "taxon",
                 "property": null,
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[typeCode]",
+                "property": "association",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[ownerCode]",
+                "property": "association",
                 "required": false
             }
         ]

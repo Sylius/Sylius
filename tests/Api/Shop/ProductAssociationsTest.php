@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -42,7 +43,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_nothing_if_association_not_found(): void
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');

@@ -76,4 +76,17 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
             ->getSingleScalarResult()
         ;
     }
+
+    public function countTrackedOutOfStock(): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.tracked = :tracked')
+            ->andWhere('o.onHand = :onHand')
+            ->setParameter('tracked', true)
+            ->setParameter('onHand', 0)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

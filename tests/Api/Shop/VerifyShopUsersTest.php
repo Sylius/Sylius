@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
@@ -22,7 +23,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_resends_account_verification_token(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
@@ -42,7 +43,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
         self::assertEmailAddressContains(self::getMailerMessage(), 'To', 'oliver@doe.com');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_resend_token_for_not_logged_in_users(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
@@ -59,7 +60,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
         self::assertEmailCount(0);
     }
 
-    /** @test */
+    #[Test]
     public function it_verifies_customer_account(): void
     {
         $data = $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);

@@ -24,6 +24,7 @@ final class YearBasedOrdersTotalProvider implements OrdersTotalsProviderInterfac
     {
     }
 
+    /** @return array<array-key, array{period: \DateTimeInterface, total: int}> */
     public function provideForPeriodInChannel(\DatePeriod $period, ChannelInterface $channel): array
     {
         /** @var array<array{total: string|int, year: int}> $totals */

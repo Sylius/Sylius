@@ -37,7 +37,6 @@ class Country implements CountryInterface, \Stringable
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, ProvinceInterface> $this->provinces */
         $this->provinces = new ArrayCollection();
     }
 

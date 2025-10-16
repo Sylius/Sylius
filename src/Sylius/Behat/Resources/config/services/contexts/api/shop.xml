@@ -115,6 +115,7 @@
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%sylius.security.api_route%</argument>
+            <argument type="service" id="sylius.resolver.product_variant.default" />
         </service>
 
         <service id="sylius.behat.context.api.shop.product_attribute" class="Sylius\Behat\Context\Api\Shop\ProductAttributeContext">

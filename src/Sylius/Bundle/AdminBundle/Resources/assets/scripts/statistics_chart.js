@@ -19,20 +19,23 @@ function renderChart() {
     }
 
     const options = {
-        colors: ['#32be9f'],
+        colors: ['#32be9f', '#066fd1'],
         fill: {
             colors: ['#32be9f']
         },
         series: [{
             name: 'Sales',
             data: JSON.parse(statisticsChart.dataset.sales)
+        }, {
+            name: 'Paid orders count',
+            data: JSON.parse(statisticsChart.dataset.paidOrdersCount)
         }],
         chart: {
             toolbar: {
                 show: false
             },
             height: 350,
-            type: 'bar'
+            type: 'line'
         },
         plotOptions: {
             bar: {
@@ -40,18 +43,6 @@ function renderChart() {
                 dataLabels: {
                     position: 'top' // top, center, bottom
                 }
-            }
-        },
-        dataLabels: {
-            enabled: true,
-            formatter(val) {
-                const { currency } = statisticsChart.dataset;
-                return `${currency}${val}`;
-            },
-            offsetY: -20,
-            style: {
-                fontSize: '12px',
-                colors: ['#304758']
             }
         },
         xaxis: {
@@ -79,7 +70,7 @@ function renderChart() {
                 enabled: true
             }
         },
-        yaxis: {
+        yaxis: [{
             axisBorder: {
                 show: false
             },
@@ -87,14 +78,20 @@ function renderChart() {
                 show: false
             },
             labels: {
-                show: false,
                 formatter(val) {
                     const { currency } = statisticsChart.dataset;
                     return `${currency}${val}`;
                 }
             }
 
-        },
+        }, {
+            opposite: true,
+            labels: {
+                formatter(val) {
+                    return val;
+                }
+            }
+        }],
         title: {
             floating: true,
             offsetY: 330,

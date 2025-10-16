@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop\Checkout;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -30,7 +31,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_selects_payment_method_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
         $this->setUpDefaultPatchHeaders();
@@ -66,7 +67,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/payment_method/select_payment_method_by_user');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_select_payment_method_of_order_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -100,7 +101,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_select_payment_method_of_order_created_by_a_user_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -134,7 +135,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_selects_payment_method_of_order_created_by_a_guest_authenticated_as_a_guest(): void
     {
         $this->setUpDefaultPatchHeaders();
@@ -166,8 +167,8 @@ final class PaymentMethodTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/payment_method/select_payment_method_by_guest');
     }
 
-    /** @test */
-    public function it_does_not_select_payment_method_of_order_created_by_a_guest_authenticated_as_another_user(): void
+    #[Test]
+    public function it_does_not_select_payment_method_of_order_created_by_a_guest_authenticated_as_another_user(): never
     {
         $this->markTestSkipped('TODO: This test should be turn on after fixing this in previous version.');
         $fixtures = $this->loadFixturesFromFiles([
@@ -199,7 +200,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_select_payment_method_to_non_existing_payment(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -230,7 +231,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_select_payment_method_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
@@ -260,7 +261,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_select_payment_method_with_invalid_payment_method(): void
     {
         $this->loadFixturesFromFiles([

@@ -21,6 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<PromotionRuleInterface> */
 class PromotionRuleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     protected Generator $faker;

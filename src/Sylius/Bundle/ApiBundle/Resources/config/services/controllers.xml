@@ -52,5 +52,12 @@
             <argument type="service" id="validator" />
             <argument>%sylius_core.orders_statistics.intervals_map%</argument>
         </service>
+
+        <service id="sylius_api.controller.get_taxon_by_slug" class="Sylius\Bundle\ApiBundle\Controller\GetTaxonBySlugAction">
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="request_stack" />
+        </service>
     </services>
 </container>

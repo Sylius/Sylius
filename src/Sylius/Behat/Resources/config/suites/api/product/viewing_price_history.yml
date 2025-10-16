@@ -22,6 +22,7 @@ default:
                 - sylius.behat.context.api.admin.channel_pricing_log_entry
                 - sylius.behat.context.api.admin.managing_product_variants
                 - sylius.behat.context.api.admin.save
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@viewing_price_history&&@api"

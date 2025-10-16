@@ -7,9 +7,10 @@
  * file that was distributed with this source code.
  */
 
+import '@sylius/shop-bundle/entrypoint';
+
 import { startStimulusApp } from '@symfony/stimulus-bridge';
-import LiveController from '@symfony/ux-live-component';
-import ApiLoginController from './controllers/ApiLoginController';
+import ProductShowImagesController from './controllers/ProductShowImagesController';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -18,7 +19,6 @@ export const app = startStimulusApp(require.context(
     /\.[jt]sx?$/
 ));
 
-app.register('live', LiveController);
-app.register('api-login', ApiLoginController);
+app.register('product-show-images', ProductShowImagesController);
 
 app.debug = process.env.NODE_ENV !== 'production';

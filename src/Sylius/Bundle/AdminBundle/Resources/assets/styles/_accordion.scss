@@ -10,8 +10,27 @@
 .accordion {
     .accordion-item {
         .accordion-header {
+            line-height: 28px;
+
             &:hover {
                 background: $gray-100;
+            }
+
+            &:not(.collapsed) {
+                font-weight: var(--tblr-font-weight-bold);
+            }
+        }
+
+        .accordion-body {
+            color: var(--tblr-body-color);
+            padding: var(--tblr-accordion-body-padding-y) var(--tblr-accordion-body-padding-x);
+        }
+
+        .accordion-button {
+            font-size: .875rem;
+
+            &:not(.collapsed) {
+                font-weight: bold;
             }
         }
     }

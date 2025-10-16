@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 
@@ -29,7 +30,7 @@ final class OrderItemsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_order_item(): void
     {
         $this->loadFixturesFromFiles([
@@ -47,7 +48,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/order_item/get_order_item_response');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_adjustments_for_an_order_item(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -70,7 +71,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/order_item/get_order_item_adjustments');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_adjustments_for_an_order_item_with_type_filter(): void
     {
         $this->setUpDatabase();

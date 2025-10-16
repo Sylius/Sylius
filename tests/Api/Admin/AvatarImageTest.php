@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -23,7 +24,7 @@ final class AvatarImageTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_an_avatar_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
@@ -45,7 +46,7 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_avatar_image_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
@@ -68,7 +69,7 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_getting_an_avatar_image_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
@@ -91,7 +92,7 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_nothing_if_avatar_image_not_found(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
@@ -108,7 +109,7 @@ final class AvatarImageTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_avatar_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
@@ -132,7 +133,7 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_avatar_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);

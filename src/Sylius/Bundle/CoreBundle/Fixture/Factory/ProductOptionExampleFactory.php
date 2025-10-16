@@ -24,6 +24,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ProductOptionInterface> */
 class ProductOptionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     protected Generator $faker;
@@ -82,12 +83,7 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('values', null)
             ->setDefault('values', function (Options $options, ?array $values): array {
@@ -106,6 +102,7 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
+    /** @return iterable<string> */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

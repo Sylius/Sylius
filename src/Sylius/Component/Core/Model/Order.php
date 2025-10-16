@@ -80,14 +80,8 @@ class Order extends BaseOrder implements OrderInterface
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, PaymentInterface> $this->payments */
         $this->payments = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ShipmentInterface> $this->shipments */
         $this->shipments = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, BasePromotionInterface> $this->promotions */
         $this->promotions = new ArrayCollection();
     }
 

@@ -1,15 +1,11 @@
 includes:
     - phpstan-baseline.neon
-    - vendor/phpstan/phpstan-doctrine/extension.neon
-    - vendor/phpstan/phpstan-webmozart-assert/extension.neon
-    - vendor/jangregor/phpstan-prophecy/extension.neon
-    - vendor/phpstan/phpstan-symfony/extension.neon
-    - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
     level: 6
 
     reportUnmatchedIgnoredErrors: false
+    treatPhpDocTypesAsCertain: false
 
     paths:
         - 'src/'
@@ -20,9 +16,11 @@ parameters:
         - '**/Bundle/*/test/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
+        - '**/Bundle/*/tests/**.php'
         - '**/Bundle/*/Tests/**.php'
-        - '**/spec/**.php'
+        - '**/Component/*/tests/**.php'
         - 'src/Sylius/Behat/**.php'
+        - '**/spec/**.php'
 
         # Vendor files in subpackages
         - '**/Bundle/*/vendor/**.php'
@@ -35,15 +33,17 @@ parameters:
         # Temporary exclusion during upgrade to API Platform 3
         - 'src/Sylius/Bundle/ApiBundle/**.php'
 
-        # Random errors related to Template Events (we're going to replace them with Twig Events anyway)
-        - 'src/Sylius/Bundle/UiBundle/Console/Command/DebugTemplateEventCommand.php'
-
         # Optional Winzou State Machine
         - 'src/Sylius/Abstraction/StateMachine/src/WinzouStateMachineAdapter.php'
 
     ignoreErrors:
-        - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
-        - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
-        - '/Method Symfony\\Component\\HttpKernel\\CacheWarmer\\WarmableInterface\:\:warmUp\(\) invoked with 2 parameters\, 1 required\./' # Symfony compatibility
-        - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
+        - identifier: missingType.generics # This need to be fixed, too many classes are using generics without PHPDoc type
+        - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks        - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
         - '/Method Sylius\\Bundle\\(Admin|Shop)Bundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'
+        - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
+
+        # Symfony 6.4
+        - message: '/Method Symfony\\Component\\HttpKernel\\CacheWarmer\\WarmableInterface::warmUp\(\) invoked with 2 parameters, 1 required\./'
+          identifier: arguments.count
+          count: 1
+          path: src/Sylius/Bundle/ShopBundle/Router/LocaleStrippingRouter.php

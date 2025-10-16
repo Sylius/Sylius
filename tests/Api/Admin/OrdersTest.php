@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -33,7 +35,7 @@ final class OrdersTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_all_orders(): void
     {
         $this->loadFixturesFromFiles([
@@ -48,7 +50,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_all_orders');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_orders_filtered_by_channel(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -69,7 +71,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_channel');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_orders_filtered_by_different_currencies(): void
     {
         $this->loadFixturesFromFiles([
@@ -99,7 +101,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_pln_and_usd_currency_codes');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_orders_for_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -120,11 +122,9 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_orders_for_customer');
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider provideOrderFilterDates
-     */
+
+    #[DataProvider('provideOrderFilterDates')]
+    #[Test]
     public function it_gets_orders_by_period(
         string $tokenValue,
         array $checkoutsCompletedAt,
@@ -157,7 +157,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful($filename);
     }
 
-    private function provideOrderFilterDates(): iterable
+    public static function provideOrderFilterDates(): iterable
     {
         yield 'checkoutCompletedBefore' => [
             'tokenValue' => 'firstOrderToken',
@@ -184,7 +184,7 @@ final class OrdersTest extends JsonApiTestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_order(): void
     {
         $this->loadFixturesFromFiles([
@@ -198,14 +198,14 @@ final class OrdersTest extends JsonApiTestCase
 
         $tokenValue = 'token';
 
-        $this->placeOrder($tokenValue);
+        $this->placeOrder($tokenValue, checkoutCompletedAt: new \DateTimeImmutable());
 
         $this->requestGet(uri: '/api/v2/admin/orders/' . $tokenValue);
 
         $this->assertResponseSuccessful('admin/order/get_order');
     }
 
-    /** @test */
+    #[Test]
     public function it_resends_order_confirmation_email(): void
     {
         $this->loadFixturesFromFiles([
@@ -232,7 +232,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertEmailCount(2);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_resends_order_confirmation_email_for_order_with_invalid_state(): void
     {
         $this->loadFixturesFromFiles([
@@ -260,7 +260,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertEmailCount(1);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_payments_of_order(): void
     {
         $this->loadFixturesFromFiles([
@@ -281,7 +281,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_payments_of_order');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_shipments_of_order(): void
     {
         $this->loadFixturesFromFiles([
@@ -300,7 +300,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_shipments_of_order');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_adjustments_for_order(): void
     {
         $this->loadFixturesFromFiles([
@@ -320,7 +320,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_adjustments_for_order_with_type_filter(): void
     {
         $this->loadFixturesFromFiles([

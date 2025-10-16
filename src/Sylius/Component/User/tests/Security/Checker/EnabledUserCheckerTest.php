@@ -11,46 +11,41 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\User\tests\Security\Checker;
+namespace Tests\Sylius\Component\User\Security\Checker;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Checker\EnabledUserChecker;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 
 final class EnabledUserCheckerTest extends TestCase
 {
-    use ProphecyTrait;
+    /** @var UserInterface&MockObject */
+    private MockObject $userMock;
 
     private EnabledUserChecker $userChecker;
 
     protected function setUp(): void
     {
+        $this->userMock = $this->createMock(UserInterface::class);
         $this->userChecker = new EnabledUserChecker();
     }
 
-    /** @test */
-    public function it_throws_a_disabled_exception_if_account_is_disabled(): void
+    public function testShouldThrowDisabledExceptionIfAccountIsDisabled(): void
     {
         $this->expectException(DisabledException::class);
 
-        $user = $this->createMock(UserInterface::class);
-        $user->method('isEnabled')->willReturn(false);
+        $this->userMock->expects($this->once())->method('isEnabled')->willReturn(false);
 
-        $this->userChecker->checkPreAuth($user);
-        $this->userChecker->checkPostAuth($user);
+        $this->userChecker->checkPreAuth($this->userMock);
+        $this->userChecker->checkPostAuth($this->userMock);
     }
 
-    /** @test */
-    public function it_does_nothing_if_user_is_enabled(): void
+    public function testShouldDoNothingIfUserIsEnabled(): void
     {
-        /** @var UserInterface|ObjectProphecy $user */
-        $user = $this->prophesize(UserInterface::class);
+        $this->userMock->expects($this->once())->method('isEnabled')->willReturn(true);
 
-        $user->isEnabled()->shouldBeCalled()->willReturn(true);
-
-        $this->userChecker->checkPreAuth($user->reveal());
+        $this->userChecker->checkPreAuth($this->userMock);
     }
 }

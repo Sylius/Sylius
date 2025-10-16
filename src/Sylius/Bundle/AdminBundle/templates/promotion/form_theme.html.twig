@@ -8,12 +8,12 @@
     <div id="{{ id }}" {{ block('attributes') }} {{ sylius_test_html_attribute('entry-row') }}>
         {{- form_errors(form) -}}
         {{- form_row(form.type) -}}
-        <div class="alert text-body">
-            <div class="d-flex mb-3">
-                <div class="me-auto"><strong>{{ (sylius_admin_get_promotion_rule_label(form.type.vars.data))|trans }}</strong></div>
+        <div class="alert text-body flex-column gap-0">
+            <div class="d-flex align-items-center">
+                <div class="me-auto mb-3"><strong>{{ (sylius_admin_get_promotion_rule_label(form.type.vars.data))|trans }}</strong></div>
                 {{- form_row(button_delete, sylius_test_form_attribute('delete')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
             </div>
-            <div>
+            <div class="flex-grow-1">
                 {{- form_row(form.configuration, {'label': false}) -}}
             </div>
         </div>
@@ -24,12 +24,12 @@
     <div id="{{ id }}" {{ block('attributes') }} {{ sylius_test_html_attribute('entry-row') }}>
         {{- form_errors(form) -}}
         {{- form_row(form.type) -}}
-        <div class="alert text-body">
-            <div class="d-flex mb-3">
-                <div class="me-auto"><strong>{{ (sylius_admin_get_promotion_action_label(form.type.vars.data))|trans }}</strong></div>
+        <div class="alert text-body flex-column gap-0">
+            <div class="d-flex align-items-center">
+                <div class="me-auto mb-3"><strong>{{ (sylius_admin_get_promotion_action_label(form.type.vars.data))|trans }}</strong></div>
                 {{- form_row(button_delete, sylius_test_form_attribute('delete')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
             </div>
-            <div>
+            <div class="flex-grow-1">
                 {{- form_row(form.configuration, {'label': false}) -}}
             </div>
         </div>

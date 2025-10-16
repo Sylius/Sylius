@@ -12,34 +12,30 @@
         {% for type in ['success', 'error', 'info', 'warning'] %}
             {% for flash in session.flashbag.get(type) %}
                 <div
-                    class="mt-3 sylius alert alert-{{ type == 'error' ? 'danger' : type }}"
+                    class="mt-3 sylius alert alert-{{ type == 'error' ? 'danger' : type }} alert-dismissible"
                     role="alert"
                     {{ sylius_test_html_attribute('sylius-flash-message') }}
                     {{ sylius_test_html_attribute('sylius-flash-message-type', type) }}
                 >
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex">
-                            <div>
-                                {{ ux_icon(icons[type]) }}
-                            </div>
-                            <div class="mx-2">
-                                <h4 class="alert-title">
-                                    {% set header = 'sylius.ui.' ~ type %}
-                                    {{ header|trans }}
-                                </h4>
-                                <div class="text-secondary">
-                                    {% if flash is iterable %}
-                                        {{ flash.message|trans(flash.parameters, 'flashes') }}
-                                    {% else %}
-                                        {{ flash|trans({}, 'flashes') }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <span class="justify-self-end close" data-bs-dismiss="alert" aria-label="Close">
-                            {{ ux_icon('tabler:x') }}
-                        </span>
+                    <div class="alert-icon">
+                        {{ ux_icon(icons[type]) }}
                     </div>
+                    <div>
+                        <h4 class="alert-heading">
+                            {% set header = 'sylius.ui.' ~ type %}
+                            {{ header|trans }}
+                        </h4>
+                        <div class="alert-description">
+                            {% if flash is iterable %}
+                                {{ flash.message|trans(flash.parameters, 'flashes') }}
+                            {% else %}
+                                {{ flash|trans({}, 'flashes') }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <a class="btn-close" data-bs-dismiss="alert" aria-label="close">
+                        {{ ux_icon('tabler:x') }}
+                    </a>
                 </div>
             {% endfor %}
         {% endfor %}

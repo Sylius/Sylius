@@ -22,14 +22,34 @@ sylius_twig_hooks:
                 priority: 0
 
         'sylius_admin.order.show.content.header.title_block.actions':
+            back:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                priority: 100
+            list:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/list.html.twig'
+                priority: 0
             history:
                 template: '@SyliusAdmin/order/show/content/header/title_block/actions/history.html.twig'
                 priority: 200
+                enabled: false
             cancel:
                 template: '@SyliusAdmin/order/show/content/header/title_block/actions/cancel.html.twig'
                 priority: 100
+                enabled: false
             resend_confirmation_email:
                 template: '@SyliusAdmin/order/show/content/header/title_block/actions/resend_confirmation_email.html.twig'
+                priority: 0
+                enabled: false
+
+        'sylius_admin.order.show.content.header.title_block.actions.list':
+            history:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/list/history.html.twig'
+                priority: 200
+            cancel:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/list/cancel.html.twig'
+                priority: 100
+            resend_confirmation_email:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/list/resend_confirmation_email.html.twig'
                 priority: 0
 
         'sylius_admin.order.show.content.sections#left':

@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<AdminUserInterface> */
 class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     protected Generator $faker;
@@ -95,6 +96,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
+    /** @param array<string, mixed> $options */
     private function createAvatar(AdminUserInterface $adminUser, array $options): void
     {
         $imagePath = $this->fileLocator->locate($options['avatar']);

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -25,7 +26,7 @@ final class AddressesTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_denies_access_to_get_addresses_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
@@ -35,7 +36,7 @@ final class AddressesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_addresses(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -52,7 +53,7 @@ final class AddressesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_address(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -71,7 +72,7 @@ final class AddressesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_get_an_address_of_another_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -87,7 +88,7 @@ final class AddressesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_denies_access_to_create_an_address_for_not_authenticated_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
@@ -106,7 +107,7 @@ final class AddressesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_new_address_with_country_and_province_code(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
@@ -135,7 +136,7 @@ final class AddressesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_new_address_with_country_and_province_code_when_the_country_code_is_set_after_province_code_in_body(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
@@ -172,7 +173,7 @@ final class AddressesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_new_address_with_country_and_province_name(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
@@ -199,7 +200,7 @@ final class AddressesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_new_address_with_country_without_province_data(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
@@ -226,7 +227,7 @@ final class AddressesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_a_new_address_with_invalid_data(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
@@ -268,7 +269,7 @@ final class AddressesTest extends JsonApiTestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_address(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -302,7 +303,7 @@ final class AddressesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_an_address_of_another_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -325,7 +326,7 @@ final class AddressesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_address(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -344,7 +345,7 @@ final class AddressesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_delete_an_address_of_another_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);

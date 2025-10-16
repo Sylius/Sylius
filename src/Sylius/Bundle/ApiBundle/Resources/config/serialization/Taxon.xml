@@ -21,21 +21,29 @@
             <group>sylius:admin:taxon:show</group>
             <group>sylius:shop:taxon:index</group>
             <group>sylius:shop:taxon:show</group>
+            <group>sylius:shop:taxon_tree:branch</group>
+            <group>sylius:shop:taxon_tree:path</group>
         </attribute>
         <attribute name="code">
             <group>sylius:admin:taxon:index</group>
             <group>sylius:admin:taxon:show</group>
+            <group>sylius:admin:taxon:create</group>
             <group>sylius:shop:taxon:index</group>
             <group>sylius:shop:taxon:show</group>
-            <group>sylius:admin:taxon:create</group>
+            <group>sylius:shop:taxon_tree:branch</group>
+            <group>sylius:shop:taxon_tree:path</group>
         </attribute>
         <attribute name="name">
             <group>sylius:shop:taxon:index</group>
             <group>sylius:shop:taxon:show</group>
+            <group>sylius:shop:taxon_tree:branch</group>
+            <group>sylius:shop:taxon_tree:path</group>
         </attribute>
         <attribute name="slug">
             <group>sylius:shop:taxon:index</group>
             <group>sylius:shop:taxon:show</group>
+            <group>sylius:shop:taxon_tree:branch</group>
+            <group>sylius:shop:taxon_tree:path</group>
         </attribute>
         <attribute name="description">
             <group>sylius:shop:taxon:index</group>
@@ -52,6 +60,7 @@
             <group>sylius:admin:taxon:show</group>
             <group>sylius:admin:taxon:create</group>
             <group>sylius:admin:taxon:update</group>
+            <group>sylius:shop:taxon_tree:branch</group>
         </attribute>
         <attribute name="children">
             <group>sylius:admin:taxon:index</group>
@@ -69,6 +78,10 @@
             <group>sylius:admin:taxon:index</group>
             <group>sylius:admin:taxon:show</group>
             <group>sylius:admin:taxon:update</group>
+        </attribute>
+        <attribute name="level">
+            <group>sylius:shop:taxon_tree:branch</group>
+            <group>sylius:shop:taxon_tree:path</group>
         </attribute>
         <attribute name="images">
             <group>sylius:admin:taxon:index</group>

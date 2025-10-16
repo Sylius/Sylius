@@ -7,7 +7,10 @@
         </div>
         <div class="card-body">
             <div class="row align-items-center">
-                {{ form_row(hookable_metadata.context.form.actions, {label: false}) }}
+                {{ form_row(hookable_metadata.context.form.actions, {
+                    label: false,
+                    attr: {'class': 'flex-grow-1'}
+                }) }}
 
                 {% hook 'actions' %}
             </div>

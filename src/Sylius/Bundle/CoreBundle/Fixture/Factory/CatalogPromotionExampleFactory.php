@@ -19,6 +19,7 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
@@ -27,6 +28,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<CatalogPromotionInterface> */
 class CatalogPromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     protected Generator $faker;
@@ -36,6 +38,9 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
     /**
      * @param FactoryInterface<CatalogPromotionInterface> $catalogPromotionFactory
      * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
+     * @param ExampleFactoryInterface<CatalogPromotionActionInterface> $catalogPromotionActionExampleFactory
+     * @param ExampleFactoryInterface<CatalogPromotionScopeInterface> $catalogPromotionScopeExampleFactory
      */
     public function __construct(
         protected readonly FactoryInterface $catalogPromotionFactory,
@@ -136,6 +141,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         ;
     }
 
+    /** @return iterable<string> */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

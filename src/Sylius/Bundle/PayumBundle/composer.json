@@ -40,10 +40,9 @@
         "php-http/message-factory": "^1.1"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/phpspec": "^7.5",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1"
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -55,7 +54,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "~7.2.0"
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -65,8 +64,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\PayumBundle\\Tests\\": "Tests/"
+            "Tests\\Sylius\\Bundle\\PayumBundle\\": "tests/"
         }
     },
     "repositories": [

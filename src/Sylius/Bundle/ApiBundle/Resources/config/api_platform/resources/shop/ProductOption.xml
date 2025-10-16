@@ -19,6 +19,25 @@
     <resource class="%sylius.model.product_option.class%">
         <operations>
             <operation
+                name="sylius_api_shop_product_option_collection_get"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/product-options"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_option:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.product_code_search_filter.shop.product_option</filter>
+                </filters>
+            </operation>
+
+            <operation
                 name="sylius_api_shop_product_option_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/product-options/{code}"

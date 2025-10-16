@@ -30,6 +30,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ShippingMethodInterface> */
 class ShippingMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     protected Generator $faker;
@@ -97,12 +98,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     {
         $resolver
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('name', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('description', fn (Options $options): string => $this->faker->sentence())
             ->setDefault('enabled', fn (Options $options): bool => $this->faker->boolean(90))
             ->setAllowedTypes('enabled', 'bool')

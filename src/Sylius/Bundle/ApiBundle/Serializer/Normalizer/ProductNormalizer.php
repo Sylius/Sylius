@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Serializer\SerializationGroupsSupportTrait;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -36,7 +37,17 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
         private readonly IriConverterInterface $iriConverter,
         private readonly SectionProviderInterface $sectionProvider,
         private readonly array $serializationGroups,
+        private readonly ?AbstractObjectNormalizer $objectNormalizer = null,
+        private readonly array $defaultVariantSerializationGroups = [],
     ) {
+        if (null === $this->objectNormalizer) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.1',
+                'Not passing $objectNormalizer through constructor is deprecated and will be prohibited in Sylius 3.0.',
+                self::class,
+            );
+        }
     }
 
     public function normalize(mixed $object, ?string $format = null, array $context = []): array
@@ -50,9 +61,7 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
 
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        $defaultVariant = $this->defaultProductVariantResolver->getVariant($object);
-
-        $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromResource($defaultVariant);
+        $this->populateDefaultVariantData($data, $object, $format, $context);
 
         return $data;
     }
@@ -70,5 +79,30 @@ final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInt
     public function getSupportedTypes(?string $format): array
     {
         return [ProductInterface::class => false];
+    }
+
+    private function populateDefaultVariantData(array &$data, ProductInterface $product, ?string $format, array $context): void
+    {
+        $data['defaultVariant'] = null;
+        $data['defaultVariantData'] = null;
+
+        $defaultVariant = $this->defaultProductVariantResolver->getVariant($product);
+        if (null === $defaultVariant) {
+            return;
+        }
+
+        $data['defaultVariant'] = $this->iriConverter->getIriFromResource($defaultVariant);
+
+        if (null === $this->objectNormalizer) {
+            return;
+        }
+
+        $context['groups'] = array_merge($context['groups'] ?? [], $this->defaultVariantSerializationGroups);
+
+        if ([] === $this->objectNormalizer->normalize($defaultVariant, $format, $context)) {
+            return;
+        }
+
+        $data['defaultVariantData'] = $this->normalizer->normalize($defaultVariant, $format, $context);
     }
 }

@@ -5,4 +5,4 @@
 /composer.lock
 
 .phpunit.result.cache
-/Tests/Functional/app/db.sql
+/tests/Functional/app/db.sql

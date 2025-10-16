@@ -80,41 +80,5 @@
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
-
-        <service
-            id="sylius_api.api_platform.routing.iri_converter"
-            class="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter"
-            decorates="api_platform.symfony.iri_converter"
-            decoration-priority="64"
-        >
-            <argument type="service" id=".inner" />
-            <argument type="service" id="sylius_api.provider.path_prefix" />
-            <argument type="service" id="sylius_api.operation_resolver.path_prefix_based" />
-            <argument type="service" id="api_platform.router" />
-        </service>
-
-        <service
-            id="sylius_api.api_platform.routing.api_loader"
-            class="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\ApiLoader"
-            decorates="api_platform.route_loader"
-        >
-            <argument type="service" id=".inner" />
-            <argument>%sylius_api.operations_to_remove%</argument>
-        </service>
-
-        <!--
-            https://api-platform.com/docs/core/bootstrap/
-            The metadata for an API resource is loaded from XML, YAML, and PHP files
-            by ExtractorResourceMetadataCollectionFactory (decoration priority 800).
-            This decorator should run immediately after to merge only non-null metadata.
-        -->
-        <service id="sylius_api.api_platform.metadata.resource.metadata_collection_factory.duplicate_operation_replacer"
-                 class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\DuplicateOperationReplacerResourceMetadataCollectionFactory"
-                 decorates="api_platform.metadata.resource.metadata_collection_factory"
-                 decoration-priority="799"
-                 public="false"
-        >
-            <argument type="service" id=".inner" />
-        </service>
     </services>
 </container>

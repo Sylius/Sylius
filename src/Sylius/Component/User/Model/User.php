@@ -90,7 +90,6 @@ class User implements UserInterface, \Stringable
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, UserOAuthInterface> $this->oauthAccounts */
         $this->oauthAccounts = new ArrayCollection();
 
         $this->createdAt = new \DateTime();

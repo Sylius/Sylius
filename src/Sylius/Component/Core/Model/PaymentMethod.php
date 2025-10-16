@@ -27,8 +27,6 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, BaseChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
     }
 

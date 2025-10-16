@@ -41,6 +41,77 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation
+                name="sylius_api_shop_taxon_get_tree_branch"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/taxon-tree/{code}/branch"
+                provider="sylius_api.state_provider.shop.taxon_tree.branch"
+            >
+                <parameters>
+                    <parameter
+                        key="includeRoot"
+                        required="false"
+                        description="Should root taxon be included, default: no"
+                    />
+                </parameters>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:taxon_tree:branch</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+            <operation
+                name="sylius_api_shop_taxon_get_tree_path"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/taxon-tree/{code}/path"
+                provider="sylius_api.state_provider.shop.taxon_tree.path"
+            >
+                <parameters>
+                    <parameter
+                        key="includeRoot"
+                        required="false"
+                        description="Should root taxon be included, default: no"
+                    />
+                </parameters>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:taxon_tree:path</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_shop_taxon_get_by_slug"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/taxons-by-slug/{slug}"
+                controller="sylius_api.controller.get_taxon_by_slug"
+                read="false"
+            >
+                <requirements>
+                    <requirement property="slug">.+</requirement>
+                </requirements>
+                <uriVariables>
+                    <uriVariable parameterName="slug" fromClass="%sylius.model.taxon.class%" />
+                </uriVariables>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:taxon:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
         </operations>
     </resource>
 </resources>

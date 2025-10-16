@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -30,7 +31,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_shipping_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
@@ -47,7 +48,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_shipping_categories(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
@@ -61,7 +62,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_shipping_category(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -84,7 +85,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_existing_shipping_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
@@ -109,7 +110,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_a_shipping_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);

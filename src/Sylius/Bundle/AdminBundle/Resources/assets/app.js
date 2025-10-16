@@ -7,19 +7,9 @@
  * file that was distributed with this source code.
  */
 
+import '@sylius/admin-bundle/entrypoint';
+
 import {startStimulusApp} from '@symfony/stimulus-bridge';
-import LiveController from '@symfony/ux-live-component';
-import '@symfony/ux-live-component/dist/live.min.css';
-import SlugController from './controllers/SlugController';
-import TaxonSlugController from './controllers/TaxonSlugController';
-import TaxonTree from './controllers/TaxonTreeController';
-import DeleteTaxon from './controllers/DeleteTaxonController';
-import ProductAttributeAutocomplete from './controllers/ProductAttributeAutocomplete';
-import ProductTaxonTree from './controllers/ProductTaxonTreeController';
-import SavePositionsController from './controllers/SavePositionsController';
-import CompoundFormErrorsController from './controllers/CompoundFormErrorsController';
-import TabsErrorsController from './controllers/TabsErrorsController';
-import BackButtonController from './controllers/BackButtonController';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -27,17 +17,5 @@ export const app = startStimulusApp(require.context(
     true,
     /\.[jt]sx?$/
 ));
-
-app.register('live', LiveController);
-app.register('slug', SlugController);
-app.register('taxon-slug', TaxonSlugController);
-app.register('taxon-tree', TaxonTree);
-app.register('delete-taxon', DeleteTaxon);
-app.register('product-attribute-autocomplete', ProductAttributeAutocomplete);
-app.register('product-taxon-tree', ProductTaxonTree);
-app.register('save-positions', SavePositionsController);
-app.register('compound-form-errors', CompoundFormErrorsController);
-app.register('tabs-errors', TabsErrorsController);
-app.register('back-button', BackButtonController);
 
 app.debug = process.env.NODE_ENV !== 'production';

@@ -33,7 +33,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
     ) {
     }
 
-    public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface
+    public function provideOrderPayment(OrderInterface $order, string $targetState): PaymentInterface
     {
         /** @var PaymentInterface $payment */
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode(

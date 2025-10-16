@@ -44,6 +44,7 @@
             "shippingState": "ready",
             "tokenValue": "secondToken",
             "id": "@integer@",
+            "checkoutCompletedAt": "@datetime@",
             "number": null,
             "notes": null,
             "items": [],

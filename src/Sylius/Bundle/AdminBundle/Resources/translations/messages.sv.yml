@@ -96,10 +96,12 @@ sylius:
             date: Beställningsdatum
         original_price_details: Ursprungspris – visas överstruket i katalogen och används som bas för prisberäkningar.
         original_product_price_details: Ursprungspris – visas överstruket i katalogen och används som bas för prisberäkningar.
+        overdue: 'Försenad'
         page_not_found: Sidan hittades inte
         pagination:
             number_of_results: Visar %from%–%to% av %total% poster
         partially_refunded: Delvis återbetald
+        pending_actions: 'Väntande åtgärder'
         price_details: Pris – aktuellt pris som visas i katalogen och kan justeras via kampanjer.
         product_price_details: Pris – aktuellt pris som visas i katalogen och kan justeras via kampanjer.
         price_history: Prishistorik
@@ -119,6 +121,9 @@ sylius:
             2weeks: 2 veckor
             year: År
         taxon: Taxon
+        to_approve: 'att godkänna'
+        to_process: 'att behandla'
+        to_ship: 'att skicka'
         view_in_store: Visa i butiken
         work_in_progress: Pågår
         empty_date: tomt

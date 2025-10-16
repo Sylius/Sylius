@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -34,4 +35,6 @@ interface PaymentRepositoryInterface extends RepositoryInterface
     public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?PaymentInterface;
 
     public function findOneByCustomerAndOrderToken(mixed $id, CustomerInterface $customer, string $token): ?PaymentInterface;
+
+    public function countNewByChannel(ChannelInterface $channel): int;
 }

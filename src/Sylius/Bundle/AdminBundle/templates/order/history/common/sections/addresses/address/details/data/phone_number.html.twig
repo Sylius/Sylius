@@ -1,0 +1,8 @@
+{% set log = hookable_metadata.context.log %}
+
+{% if log.data.phoneNumber|default(false) %}
+    <tr>
+        <td class="col-4 border-0"><strong>{{ 'sylius.ui.phone_number' |trans }}</strong></td>
+        <td class="col-8 border-0 text-body w-full"><span>{{ log.data.phoneNumber }}</span></td>
+    </tr>
+{% endif %}

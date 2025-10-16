@@ -13,8 +13,8 @@ Feature: Statistics
         And I am logged in as an administrator
 
     @no-api @ui
-    Scenario: Seeing statistics for the current year and default channel when expectations are not specified
-        Given it is "last day of December last year" now
+    Scenario: Seeing statistics for last 12 months and default channel when expectations are not specified
+        Given it is "last day of January last year" now
         And 2 new customers have fulfilled 2 orders placed for total of "$1,000.00"
         And it is "first day of January this year" now
         And 3 new customers have fulfilled 4 orders placed for total of "$2,000.21"

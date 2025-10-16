@@ -25,7 +25,6 @@ class ProductImage extends Image implements ProductImageInterface
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, ProductVariantInterface> $this->productVariants */
         $this->productVariants = new ArrayCollection();
     }
 

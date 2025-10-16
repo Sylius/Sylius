@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_product_associations(): void
     {
         $this->loadFixturesFromFiles([
@@ -45,7 +46,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -64,7 +65,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_nothing_if_association_not_found(): void
     {
         $this->loadFixturesFromFiles([
@@ -78,7 +79,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_product_association(): void
     {
         $this->loadFixturesFromFiles([
@@ -104,7 +105,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_product_association_without_required_data(): void
     {
         $this->loadFixturesFromFiles([
@@ -121,7 +122,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_create_duplicated_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -147,7 +148,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_a_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -173,7 +174,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_a_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

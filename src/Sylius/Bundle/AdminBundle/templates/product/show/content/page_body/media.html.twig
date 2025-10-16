@@ -3,11 +3,14 @@
 <div class="bg-white mb-3">
 <div class="accordion" id="media" >
         <div class="accordion-item">
-            <h1 class="accordion-header">
-                <button class="accordion-button me-3" type="button" data-bs-toggle="collapse" data-bs-target="#media-body" aria-expanded="true" aria-controls="media" >
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#media-body" aria-expanded="false" aria-controls="media" >
                     {{ 'sylius.ui.media'|trans }}
+                    <span class="accordion-button-toggle">
+                    {{ ux_icon('tabler:chevron-down') }}
+                </span>
                 </button>
-            </h1>
+            </h2>
             <div id="media-body" class="accordion-collapse collapse" data-bs-parent="#media">
                 <div class="accordion-body">
                     {% if product.images|length >= 1 %}
@@ -33,7 +36,7 @@
                     {% else %}
                         {{ 'sylius.ui.there_are_no_images_for_this_product'|trans }}
                     {% endif %}
-            </div>
+                </div>
             </div>
         </div>
     </div>

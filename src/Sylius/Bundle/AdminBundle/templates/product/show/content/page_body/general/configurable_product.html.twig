@@ -15,7 +15,7 @@
                     <tr {{ sylius_test_html_attribute('variant', "%s"|format(variant.code)) }}>
                         {% hook 'configurable_product#tab' with { variant, product } %}
                     </tr>
-                    <tr class="bg-gray-400">
+                    <tr class="bg-gray-100">
                         <td colspan="9" class="p-0 border-0">
                             <div class="px-3 px-md-5 py-3 collapse" id="product-variant-details-{{ variant.code }}">
                                 {% hook 'configurable_product#details' with { variant } %}

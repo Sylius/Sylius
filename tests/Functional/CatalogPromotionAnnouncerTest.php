@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
+use PHPUnit\Framework\Attributes\Test;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncer;
@@ -21,7 +22,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
 {
-    /** @test */
+    #[Test]
     public function it_puts_catalog_promotion_into_processing_state(): void
     {
         $this->createClient(['test_case' => 'CatalogPromotionProcessingState']);
@@ -35,7 +36,7 @@ final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
         $this->assertSame('processing', $catalogPromotion->getState());
     }
 
-    /** @test */
+    #[Test]
     public function it_activates_catalog_promotion_when_processing_has_been_finished(): void
     {
         $this->createClient();

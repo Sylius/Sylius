@@ -54,6 +54,7 @@ default:
                 - sylius.behat.context.setup.zone
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.email
                 - sylius.behat.context.api.shop.address
                 - sylius.behat.context.api.shop.cart

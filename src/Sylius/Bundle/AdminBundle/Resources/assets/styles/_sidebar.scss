@@ -9,8 +9,6 @@
 
 .navbar-vertical .navbar-collapse .sidebar.navbar-nav {
     --tblr-nav-link-color: rgba(255, 255, 255, 0.8);
-    --tblr-icon-color: rgba(255, 255, 255, 0.4);
-
 
     .nav-item {
         .nav-link {
@@ -22,6 +20,10 @@
             &:active {
                transform: translateY(1px);
             }
+        }
+
+        .nav-link-icon {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .dropdown-menu-column {

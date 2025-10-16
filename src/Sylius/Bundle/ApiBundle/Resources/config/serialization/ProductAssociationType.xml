@@ -25,12 +25,14 @@
             <group>sylius:admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:create</group>
+            <group>sylius:shop:product_association_type:index</group>
             <group>sylius:shop:product_association_type:show</group>
         </attribute>
 
         <attribute name="name">
             <group>sylius:admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:show</group>
+            <group>sylius:shop:product_association_type:index</group>
             <group>sylius:shop:product_association_type:show</group>
         </attribute>
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_an_exchange_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -48,7 +49,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_exchange_rates(): void
     {
         $this->loadFixturesFromFiles([
@@ -71,7 +72,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_exchange_rate(): void
     {
         $this->loadFixturesFromFiles([
@@ -99,7 +100,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_existing_exchange_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -128,7 +129,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_exchange_rate(): void
     {
         $this->setUpAdminContext();

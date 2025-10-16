@@ -60,10 +60,12 @@ jobs:
                 env:
                     BRANCH: ${{ inputs.branch }}
                 run: |
-                    if [ "$BRANCH" == "1.12" ]; then
-                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    if [ "$BRANCH" == "1.14" ]; then
+                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
+                    elif [ "$BRANCH" == "2.0" ]; then
+                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
                     else
-                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
                     fi
 
             -   name: "Checkout (With Branch)"
@@ -81,6 +83,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Prepare manifest.json files
+                if: "${{ inputs.branch != '1.14' }}"
                 run: |
                     mkdir -p public/build/admin
                     mkdir -p public/build/shop
@@ -99,16 +102,23 @@ jobs:
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
                     database_version: ${{ matrix.mysql }}
-                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: "20.x"
+                    node_version: ${{ env.NODE_VERSION }}
+
+            -   name: Fix permissions for Symfony logs directory
+                run: |
+                    LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
+                    mkdir -p "$LOGS_DIR"
+                    chmod -R 777 "$LOGS_DIR"
 
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
             -   name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
+                run: |
+                    vendor/bin/phpunit --testsuite all --colors=always
+                    vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
 
             -   name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
@@ -149,10 +159,12 @@ jobs:
                 env:
                     BRANCH: ${{ inputs.branch }}
                 run: |
-                    if [ "$BRANCH" == "1.12" ]; then
-                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    if [ "$BRANCH" == "1.14" ]; then
+                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
+                    elif [ "$BRANCH" == "2.0" ]; then
+                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
                     else
-                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
                     fi
 
             -   name: "Checkout (With Branch)"
@@ -189,10 +201,9 @@ jobs:
                     e2e: "yes"
                     e2e_js: "yes"
                     database_version: ${{ matrix.mysql }}
-                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: "20.x"
+                    node_version: ${{ env.NODE_VERSION }}
 
             -   name: Run Behat (Chromedriver)
                 run: |
@@ -206,7 +217,7 @@ jobs:
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun
                 continue-on-error: true
-            
+
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
@@ -237,10 +248,12 @@ jobs:
                 env:
                     BRANCH: ${{ inputs.branch }}
                 run: |
-                    if [ "$BRANCH" == "1.12" ]; then
-                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    if [ "$BRANCH" == "1.14" ]; then
+                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
+                    elif [ "$BRANCH" == "2.0" ]; then
+                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
                     else
-                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
                     fi
 
             -   name: "Checkout (With Branch)"
@@ -268,7 +281,23 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
+            -   name: Build application for Full 1.14 build
+                if: "${{ inputs.branch == '1.14' }}"
+                uses: SyliusLabs/BuildTestAppAction@v2.3
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    e2e_js: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
+                    chrome_version: stable
+
             -   name: Build application
+                if: "${{ inputs.branch != '1.14' }}"
                 uses: SyliusLabs/BuildTestAppAction@v2.4
                 with:
                     build_type: "sylius"
@@ -277,10 +306,9 @@ jobs:
                     e2e: "yes"
                     e2e_js: "yes"
                     database_version: ${{ matrix.mysql }}
-                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: "20.x"
+                    node_version: ${{ env.NODE_VERSION }}
                     chrome_version: stable
 
             -   name: Run Behat (Panther)

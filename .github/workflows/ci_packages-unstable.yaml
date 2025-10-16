@@ -18,29 +18,18 @@ permissions:
     contents: read
 
 jobs:
-    get-matrix:
-        runs-on: ubuntu-latest
-        name: "Get matrix"
-        outputs:
-            matrix: ${{ steps.matrix.outputs.prop }}
-        steps:
-            -   uses: actions/checkout@v4
-            -   name: "Get matrix"
-                id: matrix
-                uses: notiz-dev/github-action-json-property@release
-                with:
-                    path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.packages'
-
     test_unstable:
-        needs: get-matrix
         runs-on: ubuntu-latest
         name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (Unstable Dependencies)"
         timeout-minutes: 25
 
         strategy:
             fail-fast: false
-            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+            matrix:
+                include:
+                    -
+                        php: "8.3"
+                        symfony: "^7.3@beta"
 
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
@@ -75,9 +64,11 @@ jobs:
                     restore-keys: |
                         "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
 
-            -   name: Install dependencies
-                run: composer update --no-interaction --no-scripts
+            -   name: Install Robo
+                run: |
+                    wget https://github.com/consolidation/Robo/releases/latest/download/robo.phar
+                    chmod +x robo.phar && sudo mv robo.phar /tmp/robo
 
             -   name: "Run pipeline"
                 continue-on-error: ${{ inputs.ignore-failure }}
-                run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 vendor/bin/robo ci:packages
+                run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 /tmp/robo ci:packages

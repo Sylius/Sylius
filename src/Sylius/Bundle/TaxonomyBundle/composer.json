@@ -32,14 +32,13 @@
         "stof/doctrine-extensions-bundle": "^1.12",
         "sylius/resource-bundle": "^1.12",
         "sylius/taxonomy": "^2.0",
-        "symfony/framework-bundle": "^6.4.1 || ^7.1"
+        "symfony/framework-bundle": "^6.4.1 || ^7.2"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18",
-        "phpspec/phpspec": "^7.5",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1"
+        "doctrine/orm": "^2.18 || ^3.3",
+        "phpunit/phpunit": "^11.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -51,7 +50,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "~7.2.0"
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -59,15 +58,15 @@
             "Sylius\\Bundle\\TaxonomyBundle\\": ""
         },
         "exclude-from-classmap": [
-            "/Tests/"
+            "/tests/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\TaxonomyBundle\\Tests\\": "tests/"
+            "Tests\\Sylius\\Bundle\\TaxonomyBundle\\": "tests/"
         },
         "files": [
-            "Tests/Functional/app/AppKernel.php"
+            "tests/Functional/app/AppKernel.php"
         ]
     },
     "repositories": [

@@ -30,6 +30,9 @@
             <group>sylius:admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:create</group>
+            <group>sylius:shop:cart:show</group>
+            <group>sylius:shop:order:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="usageLimit">

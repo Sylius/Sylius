@@ -8,6 +8,8 @@ sylius:
             min_length: Der Attributname muss mindestens 1 Zeichen lang sein.|Der Attributname muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Der Attributname darf nicht länger als 1 Zeichen sein.|Der Attributname darf nicht länger als {{ limit }} Zeichen sein.
         code:
+            min_length: Der Attribut-Code muss mindestens 1 Zeichen lang sein.|Der Attribut-Code muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Attribut-Code darf nicht länger als 1 Zeichen sein.|Der Attribut-Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie einen Attribut-Code ein.
             regex: Der Attribut-Code darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.
             unique: Dieser Code wird bereits verwendet.

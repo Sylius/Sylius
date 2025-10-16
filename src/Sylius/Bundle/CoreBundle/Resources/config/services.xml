@@ -278,10 +278,23 @@
 
         <service id="sylius.registry.statistics.orders_totals_providers" class="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistry">
             <argument type="tagged_iterator" index-by="type" tag="sylius.statistics.orders_totals_provider" />
+            <tag name="sylius.statistics.provider_registry" priority="100" />
         </service>
         <service id="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistryInterface" alias="sylius.registry.statistics.orders_totals_providers" />
 
+        <service id="sylius.registry.statistics.orders_count_provider" class="Sylius\Component\Core\Statistics\Registry\OrdersCountProviderRegistry">
+            <argument type="tagged_iterator" index-by="type" tag="sylius.statistics.orders_count_provider" />
+            <tag name="sylius.statistics.provider_registry" priority="0" />
+        </service>
+        <service id="Sylius\Component\Core\Statistics\Registry\OrdersCountProviderRegistryInterface" alias="sylius.registry.statistics.orders_count_provider" />
+
         <service id="sylius.positioner" class="Sylius\Component\Core\Positioner\Positioner" public="true" />
         <service id="Sylius\Component\Core\Positioner\PositionerInterface" alias="sylius.positioner" public="true" />
+
+        <service id="sylius.security.voter.impersonation" class="Sylius\Bundle\CoreBundle\Security\ImpersonationVoter">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="security.firewall.map" />
+            <tag name="security.voter" />
+        </service>
     </services>
 </container>

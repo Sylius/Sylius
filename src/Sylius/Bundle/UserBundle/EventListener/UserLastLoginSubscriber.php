@@ -72,10 +72,11 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
             throw new \UnexpectedValueException('In order to use this subscriber, your class has to implement UserInterface');
         }
 
-        if (null === $this->trackInterval || null === $user->getLastLogin()) {
+        $lastLoginDate = $user->getLastLogin();
+        if (null === $this->trackInterval || null === $lastLoginDate) {
             return true;
         }
 
-        return $user->getLastLogin() <= (new \DateTime())->sub($this->trackInterval);
+        return $lastLoginDate <= (new \DateTime())->sub($this->trackInterval);
     }
 }

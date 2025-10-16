@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop\Checkout;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 
@@ -27,7 +28,7 @@ final class CompletionTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_complete_order_in_cart_state(): void
     {
         $this->loadFixturesFromFiles([
@@ -53,7 +54,7 @@ final class CompletionTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_complete_order_in_addressed_state(): void
     {
         $this->loadFixturesFromFiles([
@@ -81,7 +82,7 @@ final class CompletionTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_complete_order_in_shipping_selected_state(): void
     {
         $this->loadFixturesFromFiles([
@@ -111,7 +112,7 @@ final class CompletionTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_allow_to_complete_order_in_shipping_skipped_state(): void
     {
         $this->loadFixturesFromFiles([
@@ -140,7 +141,7 @@ final class CompletionTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_completes_checkout_with_shippable_and_non_shippable_items_if_all_checkout_steps_have_been_completed(): void
     {
         $this->loadFixturesFromFiles([
@@ -170,7 +171,7 @@ final class CompletionTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_completes_checkout_with_non_shippable_items_without_shipping_method_assigned(): void
     {
         $this->loadFixturesFromFiles([
@@ -198,7 +199,7 @@ final class CompletionTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_completes_checkout_with_free_non_shippable_items_without_shipping_method_and_payment_method_assigned(): void
     {
         $this->loadFixturesFromFiles([

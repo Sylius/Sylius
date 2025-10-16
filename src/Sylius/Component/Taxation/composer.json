@@ -31,10 +31,10 @@
         "php": "^8.2",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.12",
-        "symfony/clock": "^6.4 || ^7.1"
+        "symfony/clock": "^6.4 || ^7.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.5"
+        "phpunit/phpunit": "^11.5"
     },
     "config": {
         "allow-plugins": {
@@ -46,7 +46,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "~7.2.0"
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -56,7 +56,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Taxation\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Taxation\\": "tests/"
         }
     },
     "repositories": [

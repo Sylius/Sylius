@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,22 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
+    public function it_gets_product_association_types(): void
+    {
+        $this->loadFixturesFromFiles([
+            'product/product_with_many_locales.yaml',
+        ]);
+
+        $this->requestGet('/api/v2/shop/product-association-types');
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product_association/get_product_association_types',
+        );
+    }
+
+    #[Test]
     public function it_gets_a_product_association_type(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -42,7 +58,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_nothing_if_association_type_not_found(): void
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');

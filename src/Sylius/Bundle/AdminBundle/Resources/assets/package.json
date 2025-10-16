@@ -1,0 +1,84 @@
+{
+  "name": "@sylius/admin-bundle",
+  "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
+  "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusAdminBundle.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
+  "symfony": {
+    "controllers": {
+      "slug": {
+        "main": "controllers/SlugController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "taxon-slug": {
+        "main": "controllers/TaxonSlugController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "taxon-tree": {
+        "main": "controllers/TaxonTreeController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "delete-taxon": {
+        "main": "controllers/DeleteTaxonController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "product-attribute-autocomplete": {
+        "main": "controllers/ProductAttributeAutocomplete.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "product-taxon-tree": {
+        "main": "controllers/ProductTaxonTreeController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "save-positions": {
+        "main": "controllers/SavePositionsController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "compound-form-errors": {
+        "main": "controllers/CompoundFormErrorsController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "tabs-errors": {
+        "main": "controllers/TabsErrorsController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "back-button": {
+        "main": "controllers/BackButtonController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      }
+    }
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  }
+}

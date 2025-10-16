@@ -25,11 +25,7 @@ jobs:
                 include:
                     -
                         php: "8.3"
-                        symfony: "~7.2.0-RC1"
-                        mysql: "8.4"
-                    -
-                        php: "8.4"
-                        symfony: "~7.1.0"
+                        symfony: "^7.3@beta"
                         mysql: "8.4"
 
         env:
@@ -44,7 +40,7 @@ jobs:
                 run: |
                     composer config minimum-stability dev
                     composer config prefer-stable true
-                    
+
             -   name: Prepare manifest.json files
                 run: |
                     mkdir -p public/build/admin
@@ -55,7 +51,7 @@ jobs:
                     echo "{}" > public/build/shop/manifest.json
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
-            
+
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.4
                 with:
@@ -66,11 +62,11 @@ jobs:
                     database_version: ${{ matrix.mysql }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: "20.x"
+                    node_version: "24.x"
 
             -   name: Run PHPUnit
                 continue-on-error: ${{ inputs.ignore-failure }}
-                run: vendor/bin/phpunit --colors=always
+                run: vendor/bin/phpunit --testsuite all --colors=always
 
             -   name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
@@ -86,6 +82,160 @@ jobs:
                 if: failure()
                 with:
                     name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}) [Unstable], MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore
+                    overwrite: true
+
+    behat-ui-js-chromedriver-unstable:
+        runs-on: ubuntu-latest
+        name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
+        timeout-minutes: 45
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        php: "8.3"
+                        symfony: "^7.3@beta"
+                        mysql: "8.4"
+
+        env:
+            APP_ENV: ${{ matrix.env || 'test_cached' }}
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: "Restore dependencies"
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+
+            -   name: Change minimum-stability to dev
+                run: |
+                    composer config minimum-stability dev
+                    composer config prefer-stable true
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v2.4
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    e2e_js: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: "24.x"
+
+            -   name: Run Behat (Chromedriver)
+                run: |
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun
+
+            -   name: Run Behat (Chromedriver) for randomly failing scenarios (@failing)
+                run: |
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun
+                continue-on-error: true
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: "Logs (JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore
+                    overwrite: true
+
+    behat-ui-js-panther-unstable:
+        runs-on: ubuntu-latest
+        name: "JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
+        timeout-minutes: 45
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        php: "8.3"
+                        symfony: "^7.3@beta"
+                        mysql: "8.4"
+
+        env:
+            APP_ENV: ${{ matrix.env || 'test_cached' }}
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: "Restore dependencies"
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+
+            -   name: Change minimum-stability to dev
+                run: |
+                    composer config minimum-stability dev
+                    composer config prefer-stable true
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v2.4
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    e2e_js: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    legacy_postgresql_setup: "no"
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: "24.x"
+                    chrome_version: stable
+
+            -   name: Run Behat (Panther)
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: "Logs (JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log

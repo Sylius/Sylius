@@ -87,5 +87,3 @@ sylius_shop_checkout_complete:
                     tokenValue: resource.tokenValue
             form:
                 type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
-                options:
-                    validation_groups: 'sylius_checkout_complete'

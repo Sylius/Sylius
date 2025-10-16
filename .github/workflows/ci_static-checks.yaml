@@ -122,6 +122,7 @@ jobs:
                 run: vendor/bin/phpstan analyse
 
             -   name: Run PHPSpec
+                if: ${{ inputs.branch == '1.14' || inputs.branch == '2.0' }}
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
             -   name: Run ComposerRequireChecker

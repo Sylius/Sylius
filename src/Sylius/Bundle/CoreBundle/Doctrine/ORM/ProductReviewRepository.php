@@ -96,4 +96,15 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->getOneOrNullResult()
         ;
     }
+
+    public function countNew(): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.status = :status')
+            ->setParameter('status', ReviewInterface::STATUS_NEW)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

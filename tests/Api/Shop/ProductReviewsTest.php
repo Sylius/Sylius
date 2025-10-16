@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -20,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductReviewsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_review.yaml');
@@ -40,7 +41,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_product_reviews(): void
     {
         $this->loadFixturesFromFile('product/product_review.yaml');
@@ -54,7 +55,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -86,7 +87,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_from_creating_a_product_review_with_non_existing_product(): void
     {
         $this->loadFixturesFromFiles([
@@ -109,7 +110,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_from_creating_a_product_review_without_email(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -144,7 +145,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_from_creating_a_product_review_if_required_fields_are_missing(): void
     {
         $this->loadFixturesFromFiles([

@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class ZoneMemberGroupValidator extends ConstraintValidator
 {
-    /** @param array<string, array<string, string>> $validationGroups */
+    /** @param array<string, array<array-key, string>> $validationGroups */
     public function __construct(private readonly array $validationGroups)
     {
     }

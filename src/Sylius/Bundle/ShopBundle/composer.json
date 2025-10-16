@@ -7,7 +7,8 @@
         "ecommerce",
         "store",
         "webshop",
-        "sylius"
+        "sylius",
+        "symfony-ux"
     ],
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -29,11 +30,11 @@
         "php": "^8.2",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
-        "sylius/twig-hooks": "^0.6",
+        "sylius/twig-hooks": "^0.8",
         "sylius/ui-bundle": "^2.0",
         "sylius/theme-bundle": "^2.4",
-        "symfony/framework-bundle": "^6.4.1 || ^7.1",
-        "symfony/security-bundle": "^6.4 || ^7.1",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2",
+        "symfony/security-bundle": "^6.4 || ^7.2",
         "symfony/stimulus-bundle": "^2.20",
         "symfony/ux-autocomplete": "^2.20",
         "symfony/ux-live-component": "^2.20",
@@ -42,12 +43,11 @@
         "twig/twig": "^3.14"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "matthiasnoback/symfony-config-test": "^6.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "mockery/mockery": "^1.6",
-        "phpspec/phpspec": "^7.5",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.1"
+        "phpunit/phpunit": "^11.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -59,12 +59,17 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "~7.2.0"
+            "require": "^7.2"
         }
     },
     "autoload": {
         "psr-4": {
             "Sylius\\Bundle\\ShopBundle\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Sylius\\Bundle\\ShopBundle\\": "tests/"
         }
     },
     "repositories": [
