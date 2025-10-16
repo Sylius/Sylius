@@ -214,7 +214,6 @@
         "mockery/mockery": "^1.6",
         "nyholm/psr7": "^1.8",
         "phparkitect/phparkitect": "^0.6",
-        "phpspec/prophecy-phpunit": "^2.2",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-doctrine": "^2.0",
