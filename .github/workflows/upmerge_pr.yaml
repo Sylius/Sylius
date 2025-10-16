@@ -40,7 +40,19 @@ jobs:
                     git reset --hard ${{ matrix.base_branch }}
 
             -
+                name: Check if there are differences
+                id: check_diff
+                run: |
+                    git fetch origin ${{ matrix.target_branch }}
+                    if git diff --quiet ${{ matrix.base_branch }} origin/${{ matrix.target_branch }}; then
+                        echo "has_diff=false" >> $GITHUB_OUTPUT
+                    else
+                        echo "has_diff=true" >> $GITHUB_OUTPUT
+                    fi
+
+            -
                 name: Create Pull Request
+                if: steps.check_diff.outputs.has_diff == 'true'
                 uses: peter-evans/create-pull-request@v4
                 with:
                     token: ${{ secrets.SYLIUS_BOT_PAT }}
