@@ -155,6 +155,7 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "24.x"
+                    opcache_enable: "no"
 
             -   name: Run Behat (Chromedriver)
                 run: |
@@ -241,6 +242,7 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "24.x"
                     chrome_version: stable
+                    opcache_enable: "no"
 
             -   name: Run Behat (Panther)
                 run: |

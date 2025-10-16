@@ -215,6 +215,7 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
+                    opcache_enable: "no"
 
             -   name: Run Behat (Chromedriver)
                 run: |
@@ -309,6 +310,7 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
                     chrome_version: stable
+                    opcache_enable: "no"
 
             -   name: Build application
                 if: "${{ inputs.branch != '1.14' }}"
@@ -324,6 +326,7 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
                     chrome_version: stable
+                    opcache_enable: "no"
 
             -   name: Run Behat (Panther)
                 run: |

@@ -82,6 +82,7 @@ jobs:
                     symfony_version: "~6.4.0"
                     node_version: ${{ matrix.node }}
                     chrome_version: stable
+                    opcache_enable: "no"
                     
             -   name: "Run javascript linter"
                 run: yarn lint
