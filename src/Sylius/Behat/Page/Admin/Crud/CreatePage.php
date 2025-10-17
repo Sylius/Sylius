@@ -18,11 +18,11 @@ use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 
-class CreatePage extends SymfonyPage implements CreatePageInterface
+class CreatePage extends SyliusPage implements CreatePageInterface
 {
     public function __construct(
         Session $session,

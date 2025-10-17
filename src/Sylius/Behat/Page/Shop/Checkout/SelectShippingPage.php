@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\DriverHelper;
 
-class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
+class SelectShippingPage extends SyliusPage implements SelectShippingPageInterface
 {
     public function getRouteName(): string
     {

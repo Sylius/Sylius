@@ -16,12 +16,12 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-class IndexPage extends SymfonyPage implements IndexPageInterface
+class IndexPage extends SyliusPage implements IndexPageInterface
 {
     public function __construct(
         Session $session,

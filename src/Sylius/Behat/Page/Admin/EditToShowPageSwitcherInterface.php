@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface EditToShowPageSwitcherInterface extends SymfonyPageInterface
+interface EditToShowPageSwitcherInterface extends SyliusPageInterface
 {
     public function switchToShowPage(): void;
 }

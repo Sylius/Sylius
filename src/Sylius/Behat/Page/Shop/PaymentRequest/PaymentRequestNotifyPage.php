@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\PaymentRequest;
 
 use Behat\Mink\Driver\BrowserKitDriver;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 
-class PaymentRequestNotifyPage extends SymfonyPage implements PaymentRequestNotifyPageInterface
+class PaymentRequestNotifyPage extends SyliusPage implements PaymentRequestNotifyPageInterface
 {
     public function getRouteName(): string
     {

@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SyliusPage implements ShowPageInterface
 {
     public function __construct(
         Session $session,
