@@ -19,8 +19,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 class GetStatus extends BaseGetStatus
 {
     /**
-     * @phpstan-ignore-next-line
-     *
      * @var string
      */
     protected $status;

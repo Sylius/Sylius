@@ -61,12 +61,6 @@ parameters:
 			path: src/Sylius/Bundle/AttributeBundle/Doctrine/ORM/Subscriber/LoadMetadataSubscriber.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between null and mixed will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/Sylius/Bundle/AttributeBundle/Form/Type/AttributeType/SelectAttributeType.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\AttributeBundle\\Form\\Type\\AttributeTypeChoiceType\:\:__construct\(\) has parameter \$attributeTypes with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -89,12 +83,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/ChannelBundle/Doctrine/ORM/ChannelRepository.php
-
-		-
-			message: '#^Trait Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait is used zero times and is not analysed\.$#'
-			identifier: trait.unused
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Application/SyliusPluginTrait.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\CatalogPromotion\\Announcer\\CatalogPromotionAnnouncer\:\:calculateStartDateStamp\(\) return type has no value type specified in iterable type array\.$#'
@@ -499,12 +487,6 @@ parameters:
 			path: src/Sylius/Bundle/CustomerBundle/Doctrine/ORM/CustomerGroupRepository.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\OrderBundle\\Controller\\OrderController\:\:addFlash\(\) overrides @final method Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController\:\:addFlash\(\)\.$#'
-			identifier: method.parentMethodFinalByPhpDoc
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Controller/OrderController.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\OrderBundle\\Remover\\ExpiredCartsRemover\:\:getBatch\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -521,12 +503,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/PaymentBundle/Form/Type/PaymentGatewayChoiceType.php
-
-		-
-			message: '#^PHPDoc type string of property Sylius\\Bundle\\PayumBundle\\Request\\GetStatus\:\:\$status is not covariant with PHPDoc type int of overridden property Payum\\Core\\Request\\BaseGetStatus\:\:\$status\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Sylius/Bundle/PayumBundle/Request/GetStatus.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\PayumBundle\\Request\\ResolveNextRoute\:\:getRouteParameters\(\) return type has no value type specified in iterable type array\.$#'
@@ -575,12 +551,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/ProductBundle/Doctrine/ORM/ProductRepository.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Persistence\\ObjectManager\:\:getRepository\(\)$#'
-			identifier: argument.templateType
-			count: 1
-			path: src/Sylius/Bundle/ProductBundle/EventListener/SelectProductAttributeChoiceRemoveListener.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\ProductBundle\\Form\\DataTransformer\\ProductVariantToProductOptionsTransformer\:\:transform\(\) return type has no value type specified in iterable type array\.$#'
@@ -809,18 +779,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/UiBundle/Twig/RedirectPathExtension.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Persistence\\ObjectManager\:\:getRepository\(\)$#'
-			identifier: argument.templateType
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Console/Command/AbstractRoleCommand.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\UserBundle\\Controller\\UserController\:\:getUser\(\) overrides @final method Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController\:\:getUser\(\)\.$#'
-			identifier: method.parentMethodFinalByPhpDoc
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Controller/UserController.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\UserBundle\\DependencyInjection\\SyliusUserExtension\:\:createLastLoginListeners\(\) has parameter \$config with no value type specified in iterable type array\.$#'
@@ -1087,12 +1045,6 @@ parameters:
 			path: src/Sylius/Component/Core/Checker/ProductVariantLowestPriceDisplayCheckerInterface.php
 
 		-
-			message: '#^Method Sylius\\Component\\Core\\Customer\\Statistics\\PerChannelCustomerStatistics\:\:__construct\(\) has InvalidArgumentException in PHPDoc @throws tag but it''s not thrown\.$#'
-			identifier: throws.unusedType
-			count: 1
-			path: src/Sylius/Component/Core/Customer/Statistics/PerChannelCustomerStatistics.php
-
-		-
 			message: '#^Method Sylius\\Component\\Core\\Distributor\\IntegerDistributor\:\:distribute\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1181,12 +1133,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Component/Core/Grid/Filter/ResourceAutocompleteFilter.php
-
-		-
-			message: '#^Dead catch \- Sylius\\Resource\\Exception\\StorageUnavailableException is never thrown in the try block\.$#'
-			identifier: catch.neverThrown
-			count: 1
-			path: src/Sylius/Component/Core/Locale/Context/StorageBasedLocaleContext.php
 
 		-
 			message: '#^Return type \(Doctrine\\Common\\Collections\\Collection\<\(int\|string\), Sylius\\Component\\Core\\Model\\OrderItemInterface\>\) of method Sylius\\Component\\Core\\Model\\OrderInterface\:\:getItems\(\) should be compatible with return type \(Doctrine\\Common\\Collections\\Collection\<\(int\|string\), Sylius\\Component\\Order\\Model\\OrderItemInterface\>\) of method Sylius\\Component\\Order\\Model\\OrderInterface\:\:getItems\(\)$#'

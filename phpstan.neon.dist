@@ -36,6 +36,11 @@ parameters:
         - '/(Interface|Class) [a-zA-Z\\]+Repository[a-zA-Z\\]* specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior for repositories
         - '/Method Sylius\\Bundle\\(Admin|Shop)Bundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
+        - '/Unable to resolve the template type T in call to method Doctrine\\Persistence\\ObjectManager\:\:getRepository\(\)/' # Doctrine's ObjectManager is not generic-aware
+        - '/Trait Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait is used zero times and is not analysed\./'
+        # Intentional overrides
+        - '/PHPDoc type string of property Sylius\\Bundle\\PayumBundle\\Request\\GetStatus\:\:\$status is not covariant with PHPDoc type int of overridden property Payum\\Core\\Request\\BaseGetStatus\:\:\$status\./'
+        - '/Method Sylius\\Bundle\\UserBundle\\Controller\\UserController\:\:getUser\(\) overrides @final method Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController\:\:getUser\(\)\./'
 
         # Symfony 6.4
         - message: '/Method Symfony\\Component\\HttpKernel\\CacheWarmer\\WarmableInterface::warmUp\(\) invoked with 2 parameters, 1 required\./'

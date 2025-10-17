@@ -122,15 +122,6 @@ class OrderController extends ResourceController
         );
     }
 
-    protected function addFlash(string $type, mixed $message): void
-    {
-        /** @var SessionInterface $session */
-        $session = $this->get('request_stack')->getSession();
-        /** @var FlashBagInterface $flashBag */
-        $flashBag = $session->getBag('flashes');
-        $flashBag->add($type, $message);
-    }
-
     protected function getCurrentCart(): OrderInterface
     {
         return $this->getContext()->getCart();
