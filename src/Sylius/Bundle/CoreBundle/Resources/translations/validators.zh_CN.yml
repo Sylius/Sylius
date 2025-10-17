@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: 您输入的币种代码是无效的。
         payment_method_eligibility: '付款方式 %paymentMethodName% 已被禁用。请重新选择您的付款方式。'
-        product_eligibility: '产品 %productName% 已被禁用。'
+        product_eligibility: '产品 %productName% 已不再提供。'
         shipping_method_eligibility: '此产品并不适合 %shippingMethodName% 运输方式。请重新选择您的运输方式。'
     locale:
         enabled:

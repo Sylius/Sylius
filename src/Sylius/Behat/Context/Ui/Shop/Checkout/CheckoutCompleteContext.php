@@ -318,7 +318,7 @@ final class CheckoutCompleteContext implements Context
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
-                'This product %s has been disabled.',
+                'The product %s is no longer available.',
                 $product->getName(),
             ),
         );
@@ -352,7 +352,7 @@ final class CheckoutCompleteContext implements Context
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
-                'This product %s has been disabled.',
+                'The product %s is no longer available.',
                 $productVariant->getName(),
             ),
         );

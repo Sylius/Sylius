@@ -41,7 +41,7 @@ sylius:
         currency_code:
             not_valid: Код валюти, що ви ввели, не є вірним.
         payment_method_eligibility: 'Цей спосіб оплати %paymentMethodName% відключений. Будь ласка, повторно виберіть спосіб оплати.'
-        product_eligibility: 'Цей продукт %productName% був відключений.'
+        product_eligibility: 'Продукт %productName% більше недоступний.'
         shipping_method_eligibility: 'Продукт не відповідає вимогам для %shippingMethodName% способу доставки. Будь ласка, повторно виберіть метод доставки.'
     locale:
         enabled:
