@@ -19,6 +19,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 abstract class OrderTotalRuleChecker implements RuleCheckerInterface
 {
+    /** @param array<string, mixed> $configuration */
     public function isEligible(ShippingSubjectInterface $subject, array $configuration): bool
     {
         if (!$subject instanceof ShipmentInterface) {

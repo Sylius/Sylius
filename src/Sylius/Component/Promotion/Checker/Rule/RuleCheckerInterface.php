@@ -17,5 +17,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 interface RuleCheckerInterface
 {
+    /** @param array<string, mixed> $configuration */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool;
 }

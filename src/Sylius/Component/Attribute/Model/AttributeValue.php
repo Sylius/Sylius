@@ -184,11 +184,13 @@ class AttributeValue implements AttributeValueInterface
         $this->date = $date;
     }
 
+    /** @return array<mixed>|null */
     protected function getJson(): ?array
     {
         return $this->json;
     }
 
+    /** @param array<mixed>|null $json */
     protected function setJson(?array $json): void
     {
         $this->json = $json;
