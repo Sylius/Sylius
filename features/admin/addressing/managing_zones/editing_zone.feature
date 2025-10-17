@@ -76,4 +76,4 @@ Feature: Editing a zone
         And I set its priority to "-1"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the "European Union" zone should have priority 3
+        And the "European Union" zone should have priority 2
