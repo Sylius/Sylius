@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -45,10 +45,10 @@ final class CurrentPageResolverTest extends TestCase
 
     public function testReturnsCurrentPageBasedOnMatchedRoute(): void
     {
-        /** @var SymfonyPageInterface&MockObject $createPage */
-        $createPage = $this->createMock(SymfonyPageInterface::class);
-        /** @var SymfonyPageInterface&MockObject $updatePage */
-        $updatePage = $this->createMock(SymfonyPageInterface::class);
+        /** @var SyliusPageInterface&MockObject $createPage */
+        $createPage = $this->createMock(SyliusPageInterface::class);
+        /** @var SyliusPageInterface&MockObject $updatePage */
+        $updatePage = $this->createMock(SyliusPageInterface::class);
 
         $this->session->expects($this->once())->method('getCurrentUrl')->willReturn('https://sylius.com/resource/new');
         $this->urlMatcher->expects($this->once())->method('match')->with('/resource/new')->willReturn(['_route' => 'sylius_resource_create']);
@@ -60,10 +60,10 @@ final class CurrentPageResolverTest extends TestCase
 
     public function testThrowsAnExceptionIfNeitherCreateNorUpdateKeyWordHasBeenFound(): void
     {
-        /** @var SymfonyPageInterface&MockObject $createPage */
-        $createPage = $this->createMock(SymfonyPageInterface::class);
-        /** @var SymfonyPageInterface&MockObject $updatePage */
-        $updatePage = $this->createMock(SymfonyPageInterface::class);
+        /** @var SyliusPageInterface&MockObject $createPage */
+        $createPage = $this->createMock(SyliusPageInterface::class);
+        /** @var SyliusPageInterface&MockObject $updatePage */
+        $updatePage = $this->createMock(SyliusPageInterface::class);
 
         $this->session->expects($this->once())->method('getCurrentUrl')->willReturn('https://sylius.com/resource/show');
         $this->urlMatcher->expects($this->once())->method('match')->with('/resource/show')->willReturn(['_route' => 'sylius_resource_show']);

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
@@ -23,6 +22,7 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\ShowPageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
@@ -1197,7 +1197,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->createPage->create();
     }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
+    protected function resolveCurrentPage(): SyliusPageInterface
     {
         return $this->createPage;
     }
