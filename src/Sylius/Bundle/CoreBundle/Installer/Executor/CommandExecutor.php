@@ -60,9 +60,7 @@ final class CommandExecutor
     {
         $defaultParameters = ['--no-debug' => true];
 
-        if ($this->input->hasOption('env')) {
-            $defaultParameters['--env'] = $this->input->hasOption('env') ? $this->input->getOption('env') : 'dev';
-        }
+        $defaultParameters['--env'] = $this->input->hasOption('env') ? $this->input->getOption('env') : 'dev';
 
         if ($this->input->hasOption('no-interaction') && true === $this->input->getOption('no-interaction')) {
             $defaultParameters['--no-interaction'] = true;

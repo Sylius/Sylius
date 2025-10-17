@@ -44,7 +44,6 @@ final class ImpersonateUserController
         }
 
         $user = $this->userProvider->loadUserByUsername($username);
-        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         Assert::isInstanceOf($user, UserInterface::class);
 
         $this->impersonator->impersonate($user);

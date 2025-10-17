@@ -20,9 +20,6 @@ class EmailProvider extends AbstractUserProvider
 {
     protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
-        $user = $this->userRepository->findOneByEmail($uniqueIdentifier);
-        Assert::nullOrIsInstanceOf($user, UserInterface::class);
-
-        return $user;
+        return $this->userRepository->findOneByEmail($uniqueIdentifier);
     }
 }

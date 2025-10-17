@@ -35,7 +35,6 @@ final readonly class UserDeleteListener
     public function deleteUser(GenericEvent $event): void
     {
         $user = $event->getSubject();
-
         Assert::isInstanceOf($user, UserInterface::class);
 
         if ($this->isTryingToDeleteLoggedInUser($user)) {
@@ -52,8 +51,6 @@ final readonly class UserDeleteListener
 
     private function isTryingToDeleteLoggedInUser(UserInterface $user): bool
     {
-        Assert::isInstanceOf($user, ResourceInterface::class);
-        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $token = $this->tokenStorage->getToken();
         if (!$token) {
             return false;
@@ -63,6 +60,7 @@ final readonly class UserDeleteListener
         if ($loggedUser === null) {
             return false;
         }
+
         Assert::isInstanceOf($loggedUser, ResourceInterface::class);
 
         return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
