@@ -15,9 +15,9 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class PricingElement extends Element implements PricingElementInterface
+class PricingElement extends SyliusElement implements PricingElementInterface
 {
     public function getPriceForChannel(string $channelCode): string
     {

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-class FilterElement extends Element implements FilterElementInterface
+class FilterElement extends SyliusElement implements FilterElementInterface
 {
     protected const BOOLEAN_FILTER_TRUE = 'Yes';
 

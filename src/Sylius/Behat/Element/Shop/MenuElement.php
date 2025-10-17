@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Shop;
 
 use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class MenuElement extends Element implements MenuElementInterface
+class MenuElement extends SyliusElement implements MenuElementInterface
 {
     public function getMenuItems(): array
     {

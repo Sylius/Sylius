@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class TaxonomyElement extends Element implements TaxonomyElementInterface
+class TaxonomyElement extends SyliusElement implements TaxonomyElementInterface
 {
     public function getProductMainTaxon(): string
     {
