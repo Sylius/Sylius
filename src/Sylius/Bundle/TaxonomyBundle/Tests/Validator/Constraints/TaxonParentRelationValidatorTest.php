@@ -27,13 +27,13 @@ final class TaxonParentRelationValidatorTest extends TestCase
 
     private ExecutionContextInterface|MockObject $context;
 
-    private TaxonInterface|MockObject $taxon;
+    private MockObject|TaxonInterface $taxon;
 
-    private TaxonInterface|MockObject $parent;
+    private MockObject|TaxonInterface $parent;
 
     private ConstraintViolationBuilderInterface|MockObject $builder;
 
-    private TaxonInterface|MockObject $grandParent;
+    private MockObject|TaxonInterface $grandParent;
 
     protected function setUp(): void
     {

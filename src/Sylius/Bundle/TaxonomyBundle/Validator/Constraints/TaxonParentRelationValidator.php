@@ -60,6 +60,7 @@ final class TaxonParentRelationValidator extends ConstraintValidator
                     ->buildViolation($constraint->message)
                     ->atPath('parent')
                     ->addViolation();
+
                 return;
             }
 
