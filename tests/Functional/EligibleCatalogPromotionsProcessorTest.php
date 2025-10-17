@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
-use PHPUnit\Framework\Attributes\Test;
-use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider;
+use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

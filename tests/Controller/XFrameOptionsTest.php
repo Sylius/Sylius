@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Controller;
 
-use PHPUnit\Framework\Attributes\Test;
 use ApiTestCase\JsonApiTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 final class XFrameOptionsTest extends JsonApiTestCase
 {

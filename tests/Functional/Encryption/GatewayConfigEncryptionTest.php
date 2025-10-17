@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Encryption;
 
-use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
-use PHPUnit\Framework\Attributes\Test;
 use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\PaymentBundle\Listener\GatewayConfigEncryptionListener;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;

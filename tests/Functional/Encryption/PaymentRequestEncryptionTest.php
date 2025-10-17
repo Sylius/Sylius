@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Encryption;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
@@ -49,7 +49,6 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
         ]);
     }
 
-    
     #[DataProvider('getPayload')]
     #[Test]
     public function it_covers_encryption_and_decryption_when_saving_and_loading_the_payload(mixed $payload): void
@@ -99,7 +98,6 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
         self::assertNull($payloadFromDatabase);
     }
 
-    
     #[DataProvider('getResponseData')]
     #[Test]
     public function it_covers_encryption_and_decryption_when_saving_and_loading_the_response_data(
