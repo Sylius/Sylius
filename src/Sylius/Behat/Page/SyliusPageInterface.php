@@ -15,6 +15,6 @@ namespace Sylius\Behat\Page;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface as BaseSymfonyPageInterface;
 
-interface SymfonyPageInterface extends BaseSymfonyPageInterface
+interface SyliusPageInterface extends BaseSymfonyPageInterface
 {
 }

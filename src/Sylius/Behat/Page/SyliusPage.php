@@ -17,7 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage as BaseSymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
 
-abstract class SymfonyPage extends BaseSymfonyPage implements SymfonyPageInterface
+abstract class SyliusPage extends BaseSymfonyPage implements SyliusPageInterface
 {
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
