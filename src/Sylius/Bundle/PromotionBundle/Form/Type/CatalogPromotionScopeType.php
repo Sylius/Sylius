@@ -39,7 +39,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
         }
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $defaultScopeType = current($this->scopeTypes);
         $defaultScopeConfigurationType = $this->scopeConfigurationTypes[$defaultScopeType];

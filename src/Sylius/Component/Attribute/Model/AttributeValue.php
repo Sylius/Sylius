@@ -83,7 +83,7 @@ class AttributeValue implements AttributeValueInterface
         $this->localeCode = $localeCode;
     }
 
-    public function getValue()
+    public function getValue(): mixed
     {
         if (null === $this->attribute) {
             return null;
@@ -194,10 +194,8 @@ class AttributeValue implements AttributeValueInterface
         $this->json = $json;
     }
 
-    /**
-     * @throws \BadMethodCallException
-     */
-    protected function assertAttributeIsSet()
+    /** @throws \BadMethodCallException */
+    protected function assertAttributeIsSet(): void
     {
         if (null === $this->attribute) {
             throw new \BadMethodCallException('The attribute is undefined, so you cannot access proxy methods.');

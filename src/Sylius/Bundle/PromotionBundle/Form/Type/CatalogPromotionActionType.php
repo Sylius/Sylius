@@ -39,7 +39,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
         }
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $defaultActionType = current($this->actionTypes);
         $defaultActionConfigurationType = $this->actionConfigurationTypes[$defaultActionType];

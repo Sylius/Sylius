@@ -50,5 +50,5 @@ interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, P
     /**
      * @param ShopUserInterface|UserInterface|null $user
      */
-    public function setUser(?UserInterface $user);
+    public function setUser(?UserInterface $user): void;
 }

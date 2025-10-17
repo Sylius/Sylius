@@ -25,7 +25,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
  */
 final class DefaultUsernameORMListener
 {
-    public function onFlush(OnFlushEventArgs $onFlushEventArgs)
+    public function onFlush(OnFlushEventArgs $onFlushEventArgs): void
     {
         $entityManager = $onFlushEventArgs->getObjectManager();
         $unitOfWork = $entityManager->getUnitOfWork();
@@ -63,7 +63,6 @@ final class DefaultUsernameORMListener
             $user->setUsername($customer->getEmail());
             $user->setUsernameCanonical($customer->getEmailCanonical());
 
-            /** @var ClassMetadata $userMetadata */
             $userMetadata = $entityManager->getClassMetadata($user::class);
             $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user);
         }

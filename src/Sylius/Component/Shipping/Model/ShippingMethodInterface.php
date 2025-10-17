@@ -50,7 +50,7 @@ interface ShippingMethodInterface extends
 
     public function getCategory(): ?ShippingCategoryInterface;
 
-    public function setCategory(?ShippingCategoryInterface $category);
+    public function setCategory(?ShippingCategoryInterface $category): void;
 
     /**
      * Get the one of matching requirements.

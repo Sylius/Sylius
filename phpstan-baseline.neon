@@ -391,12 +391,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/EventListener/DefaultUsernameORMListener.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\EventListener\\DefaultUsernameORMListener\:\:onFlush\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/EventListener/DefaultUsernameORMListener.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\EventListener\\DefaultUsernameORMListener\:\:processEntities\(\) has parameter \$entities with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -889,12 +883,6 @@ parameters:
 			path: src/Sylius/Bundle/PromotionBundle/Form/Type/CatalogPromotionActionType.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\PromotionBundle\\Form\\Type\\CatalogPromotionActionType\:\:buildForm\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Bundle/PromotionBundle/Form/Type/CatalogPromotionActionType.php
-
-		-
 			message: '#^PHPDoc tag @var for variable \$data has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -915,12 +903,6 @@ parameters:
 		-
 			message: '#^Method Sylius\\Bundle\\PromotionBundle\\Form\\Type\\CatalogPromotionScopeType\:\:__construct\(\) has parameter \$scopeConfigurationTypes with no value type specified in iterable type iterable\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/Sylius/Bundle/PromotionBundle/Form/Type/CatalogPromotionScopeType.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\PromotionBundle\\Form\\Type\\CatalogPromotionScopeType\:\:buildForm\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/Form/Type/CatalogPromotionScopeType.php
 
@@ -1183,18 +1165,6 @@ parameters:
 			path: src/Sylius/Bundle/UserBundle/EventListener/UserDeleteListener.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\UserBundle\\EventListener\\UserLastLoginSubscriber\:\:onImplicitLogin\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/EventListener/UserLastLoginSubscriber.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\UserBundle\\EventListener\\UserLastLoginSubscriber\:\:onSecurityInteractiveLogin\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/EventListener/UserLastLoginSubscriber.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\UserBundle\\Provider\\AbstractUserProvider\:\:loadUserByUsername\(\) has parameter \$username with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1345,20 +1315,8 @@ parameters:
 			path: src/Sylius/Component/Attribute/Model/AttributeInterface.php
 
 		-
-			message: '#^Method Sylius\\Component\\Attribute\\Model\\AttributeValue\:\:assertAttributeIsSet\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Component/Attribute/Model/AttributeValue.php
-
-		-
 			message: '#^Method Sylius\\Component\\Attribute\\Model\\AttributeValue\:\:getJson\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/Sylius/Component/Attribute/Model/AttributeValue.php
-
-		-
-			message: '#^Method Sylius\\Component\\Attribute\\Model\\AttributeValue\:\:getValue\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/Sylius/Component/Attribute/Model/AttributeValue.php
 
@@ -1373,12 +1331,6 @@ parameters:
 			identifier: missingType.parameter
 			count: 1
 			path: src/Sylius/Component/Attribute/Model/AttributeValue.php
-
-		-
-			message: '#^Method Sylius\\Component\\Attribute\\Model\\AttributeValueInterface\:\:getValue\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Component/Attribute/Model/AttributeValueInterface.php
 
 		-
 			message: '#^Method Sylius\\Component\\Attribute\\Model\\AttributeValueInterface\:\:setValue\(\) has parameter \$value with no type specified\.$#'
@@ -1565,18 +1517,6 @@ parameters:
 			identifier: catch.neverThrown
 			count: 1
 			path: src/Sylius/Component/Core/Locale/Context/StorageBasedLocaleContext.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Model\\AdminUserInterface\:\:setAvatar\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Component/Core/Model/AdminUserInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Model\\CustomerInterface\:\:setUser\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Component/Core/Model/CustomerInterface.php
 
 		-
 			message: '#^Return type \(Doctrine\\Common\\Collections\\Collection\<\(int\|string\), Sylius\\Component\\Core\\Model\\OrderItemInterface\>\) of method Sylius\\Component\\Core\\Model\\OrderInterface\:\:getItems\(\) should be compatible with return type \(Doctrine\\Common\\Collections\\Collection\<\(int\|string\), Sylius\\Component\\Order\\Model\\OrderItemInterface\>\) of method Sylius\\Component\\Order\\Model\\OrderInterface\:\:getItems\(\)$#'
@@ -2077,12 +2017,6 @@ parameters:
 			path: src/Sylius/Component/Core/Test/Tests/Taxation/Applicator/OrderItemsTaxesApplicatorTest.php
 
 		-
-			message: '#^Method Sylius\\Component\\Currency\\Model\\ExchangeRateInterface\:\:setRatio\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Component/Currency/Model/ExchangeRateInterface.php
-
-		-
 			message: '#^Method Sylius\\Component\\Customer\\Repository\\CustomerGroupRepositoryInterface\:\:findByPhrase\(\) return type has no value type specified in iterable type iterable\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -2521,12 +2455,6 @@ parameters:
 			path: src/Sylius/Component/Shipping/Model/ShippingMethodInterface.php
 
 		-
-			message: '#^Method Sylius\\Component\\Shipping\\Model\\ShippingMethodInterface\:\:setCategory\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Component/Shipping/Model/ShippingMethodInterface.php
-
-		-
 			message: '#^Method Sylius\\Component\\Shipping\\Model\\ShippingMethodInterface\:\:setConfiguration\(\) has parameter \$configuration with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -2573,9 +2501,3 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Component/Taxonomy/Repository/TaxonRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\User\\Model\\UserAwareInterface\:\:setUser\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/Sylius/Component/User/Model/UserAwareInterface.php
