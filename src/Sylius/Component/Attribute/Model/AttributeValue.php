@@ -94,7 +94,7 @@ class AttributeValue implements AttributeValueInterface
         return $this->$getter();
     }
 
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->assertAttributeIsSet();
 

@@ -37,7 +37,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
 
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface;
 
-    public function findCartById($id): ?OrderInterface;
+    public function findCartById(mixed $id): ?OrderInterface;
 
     /**
      * @return array|OrderInterface[]

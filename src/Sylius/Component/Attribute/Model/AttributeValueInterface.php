@@ -41,7 +41,7 @@ interface AttributeValueInterface extends ResourceInterface
 
     public function getValue(): mixed;
 
-    public function setValue($value): void;
+    public function setValue(mixed $value): void;
 
     public function getCode(): ?string;
 

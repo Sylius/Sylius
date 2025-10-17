@@ -7,12 +7,6 @@ parameters:
 			path: src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneType.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\AddressingBundle\\Twig\\CountryNameExtension\:\:translateCountryIsoCode\(\) has parameter \$country with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/AddressingBundle/Twig/CountryNameExtension.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\AdminBundle\\Controller\\RedirectHandler\:\:redirectToRoute\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -163,20 +157,8 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Checkout/CheckoutStateUrlGenerator.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Checkout\\CheckoutStateUrlGenerator\:\:generate\(\) has parameter \$name with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Checkout/CheckoutStateUrlGenerator.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Checkout\\CheckoutStateUrlGenerator\:\:generate\(\) has parameter \$parameters with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Checkout/CheckoutStateUrlGenerator.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Checkout\\CheckoutStateUrlGenerator\:\:generate\(\) has parameter \$referenceType with no type specified\.$#'
-			identifier: missingType.parameter
+			message: '#^Method Sylius\\Bundle\\CoreBundle\\Checkout\\CheckoutStateUrlGenerator\:\:generate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Checkout/CheckoutStateUrlGenerator.php
 
@@ -241,72 +223,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/SyliusCoreExtension.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderItemRepository\:\:findOneByIdAndCustomer\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderItemRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderItemUnitRepository\:\:findOneByCustomer\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderItemUnitRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:createByCustomerAndChannelIdQueryBuilder\(\) has parameter \$channelId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:createByCustomerAndChannelIdQueryBuilder\(\) has parameter \$customerId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:findCartByChannel\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:findCartForAddressing\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:findCartForSelectingPayment\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:findCartForSelectingShipping\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:findCartForSummary\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:findOneForPayment\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\OrderRepository\:\:findOrderById\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\PaymentMethodRepository\:\:findEnabledForChannel\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -325,46 +241,10 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ProductRepository.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ProductReviewRepository\:\:findLatestByProductId\(\) has parameter \$productId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ProductReviewRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ProductReviewRepository\:\:findOneByIdAndProductCode\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ProductReviewRepository.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ProductVariantRepository\:\:findByTaxon\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ProductVariantRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ShipmentRepository\:\:findOneByCustomer\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ShipmentRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ShipmentRepository\:\:findOneByOrderId\(\) has parameter \$orderId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ShipmentRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ShipmentRepository\:\:findOneByOrderId\(\) has parameter \$shipmentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ShipmentRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ShipmentRepository\:\:findOneByOrderTokenAndChannel\(\) has parameter \$shipmentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ShipmentRepository.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\ShippingMethodRepository\:\:findEnabledForZonesAndChannel\(\) has parameter \$zones with no value type specified in iterable type array\.$#'
@@ -451,12 +331,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Fixture/ProductAttributeFixture.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Form\\DataTransformer\\ProductTaxonToTaxonTransformer\:\:assertTransformationValueType\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Form/DataTransformer/ProductTaxonToTaxonTransformer.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\Form\\DataTransformer\\ProductVariantsToCodesTransformer\:\:reverseTransform\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -475,12 +349,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Form/DataTransformer/TaxonsToCodesTransformer.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Form\\EventSubscriber\\AddBaseCurrencySubscriber\:\:getDisabledOption\(\) has parameter \$resource with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Form/EventSubscriber/AddBaseCurrencySubscriber.php
-
-		-
 			message: '#^PHPDoc tag @var for variable \$traversableForms has no value type specified in iterable type Traversable\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -497,24 +365,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Form/Type/User/AdminUserType.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Installer\\Checker\\CommandDirectoryChecker\:\:ensureDirectoryExists\(\) has parameter \$directory with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Installer/Checker/CommandDirectoryChecker.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Installer\\Checker\\CommandDirectoryChecker\:\:ensureDirectoryIsWritable\(\) has parameter \$directory with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Installer/Checker/CommandDirectoryChecker.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Installer\\Checker\\SyliusRequirementsChecker\:\:checkRequirementsInCollection\(\) has parameter \$verbose with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Installer/Checker/SyliusRequirementsChecker.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\Installer\\Executor\\CommandExecutor\:\:getDefaultParameters\(\) return type has no value type specified in iterable type array\.$#'
@@ -563,12 +413,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Installer/Renderer/TableRenderer.php
-
-		-
-			message: '#^Offset 1 on array\{string, string\} on left side of \?\? always exists and is not nullable\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Installer/Setup/LocaleSetup.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\CoreBundle\\PriceHistory\\Command\\ApplyLowestPriceOnChannelPricings\:\:__construct\(\) has parameter \$channelPricingIds with no value type specified in iterable type array\.$#'
@@ -649,58 +493,16 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Validator/Constraints/HasEnabledEntityValidator.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\CoreBundle\\Validator\\Initializer\\CustomerInitializer\:\:initialize\(\) has parameter \$object with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Validator/Initializer/CustomerInitializer.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\CustomerBundle\\Doctrine\\ORM\\CustomerGroupRepository\:\:findByPhrase\(\) return type has no value type specified in iterable type iterable\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/CustomerBundle/Doctrine/ORM/CustomerGroupRepository.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\InventoryBundle\\Validator\\Constraints\\InStock\:\:getTargets\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Sylius/Bundle/InventoryBundle/Validator/Constraints/InStock.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\OrderBundle\\Controller\\OrderController\:\:addFlash\(\) overrides @final method Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController\:\:addFlash\(\)\.$#'
 			identifier: method.parentMethodFinalByPhpDoc
 			count: 1
 			path: src/Sylius/Bundle/OrderBundle/Controller/OrderController.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\OrderBundle\\Doctrine\\ORM\\OrderItemRepository\:\:findOneByIdAndCartId\(\) has parameter \$cartId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Doctrine/ORM/OrderItemRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\OrderBundle\\Doctrine\\ORM\\OrderItemRepository\:\:findOneByIdAndCartId\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Doctrine/ORM/OrderItemRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\OrderBundle\\Doctrine\\ORM\\OrderItemRepository\:\:findOneByIdAndCartTokenValue\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Doctrine/ORM/OrderItemRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\OrderBundle\\Doctrine\\ORM\\OrderItemRepository\:\:findOneByIdAndCartTokenValue\(\) has parameter \$tokenValue with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Doctrine/ORM/OrderItemRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\OrderBundle\\Doctrine\\ORM\\OrderRepository\:\:findCartById\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Doctrine/ORM/OrderRepository.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\OrderBundle\\Remover\\ExpiredCartsRemover\:\:getBatch\(\) return type has no value type specified in iterable type array\.$#'
@@ -775,24 +577,6 @@ parameters:
 			path: src/Sylius/Bundle/ProductBundle/Doctrine/ORM/ProductRepository.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\ProductBundle\\Doctrine\\ORM\\ProductVariantRepository\:\:createQueryBuilderByProductId\(\) has parameter \$productId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/ProductBundle/Doctrine/ORM/ProductVariantRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\ProductBundle\\Doctrine\\ORM\\ProductVariantRepository\:\:findOneByIdAndProductId\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/ProductBundle/Doctrine/ORM/ProductVariantRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\ProductBundle\\Doctrine\\ORM\\ProductVariantRepository\:\:findOneByIdAndProductId\(\) has parameter \$productId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/ProductBundle/Doctrine/ORM/ProductVariantRepository.php
-
-		-
 			message: '#^Unable to resolve the template type T in call to method Doctrine\\Persistence\\ObjectManager\:\:getRepository\(\)$#'
 			identifier: argument.templateType
 			count: 1
@@ -805,8 +589,8 @@ parameters:
 			path: src/Sylius/Bundle/ProductBundle/Form/DataTransformer/ProductVariantToProductOptionsTransformer.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\ProductBundle\\Form\\Type\\ProductOptionValueCollectionType\:\:assertOptionsAreValid\(\) has parameter \$options with no type specified\.$#'
-			identifier: missingType.parameter
+			message: '#^Method Sylius\\Bundle\\ProductBundle\\Form\\Type\\ProductOptionValueCollectionType\:\:assertOptionsAreValid\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductOptionValueCollectionType.php
 
@@ -827,18 +611,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/Doctrine/ORM/PromotionCouponRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\PromotionBundle\\Doctrine\\ORM\\PromotionCouponRepository\:\:createQueryBuilderByPromotionId\(\) has parameter \$promotionId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/PromotionBundle/Doctrine/ORM/PromotionCouponRepository.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\PromotionBundle\\Form\\Type\\AbstractConfigurablePromotionElementType\:\:getRegistryIdentifier\(\) has parameter \$data with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/PromotionBundle/Form/Type/AbstractConfigurablePromotionElementType.php
 
 		-
 			message: '#^Method Sylius\\Bundle\\PromotionBundle\\Form\\Type\\CatalogPromotionActionType\:\:__construct\(\) has parameter \$actionConfigurationTypes with no value type specified in iterable type iterable\.$#'
@@ -955,12 +727,6 @@ parameters:
 			path: src/Sylius/Bundle/ReviewBundle/Form/Type/ReviewType.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\ShippingBundle\\Form\\Type\\AbstractConfigurableShippingMethodElementType\:\:getRegistryIdentifier\(\) has parameter \$data with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/ShippingBundle/Form/Type/AbstractConfigurableShippingMethodElementType.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\ShippingBundle\\Form\\Type\\CalculatorChoiceType\:\:__construct\(\) has parameter \$calculators with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1051,12 +817,6 @@ parameters:
 			path: src/Sylius/Bundle/UserBundle/Console/Command/AbstractRoleCommand.php
 
 		-
-			message: '#^Method Sylius\\Bundle\\UserBundle\\Controller\\UserController\:\:getSyliusAttribute\(\) has parameter \$default with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Controller/UserController.php
-
-		-
 			message: '#^Method Sylius\\Bundle\\UserBundle\\Controller\\UserController\:\:getUser\(\) overrides @final method Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController\:\:getUser\(\)\.$#'
 			identifier: method.parentMethodFinalByPhpDoc
 			count: 1
@@ -1115,24 +875,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/DependencyInjection/SyliusUserExtension.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\UserBundle\\Provider\\AbstractUserProvider\:\:loadUserByUsername\(\) has parameter \$username with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Provider/AbstractUserProvider.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\UserBundle\\Provider\\AbstractUserProvider\:\:supportsClass\(\) has parameter \$class with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Provider/AbstractUserProvider.php
-
-		-
-			message: '#^Method Sylius\\Bundle\\UserBundle\\Provider\\UserProviderInterface\:\:loadUserByUsername\(\) has parameter \$username with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php
 
 		-
 			message: '#^Method Sylius\\Component\\Addressing\\Comparator\\AddressComparator\:\:normalizeAddress\(\) return type has no value type specified in iterable type array\.$#'
@@ -1265,18 +1007,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Component/Attribute/Model/AttributeValue.php
-
-		-
-			message: '#^Method Sylius\\Component\\Attribute\\Model\\AttributeValue\:\:setValue\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Attribute/Model/AttributeValue.php
-
-		-
-			message: '#^Method Sylius\\Component\\Attribute\\Model\\AttributeValueInterface\:\:setValue\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Attribute/Model/AttributeValueInterface.php
 
 		-
 			message: '#^Method Sylius\\Component\\Channel\\Repository\\ChannelRepositoryInterface\:\:findAllWithBasicData\(\) return type has no value type specified in iterable type iterable\.$#'
@@ -1777,72 +1507,6 @@ parameters:
 			path: src/Sylius/Component/Core/Provider/ProductVariantMap/ProductVariantsMapProviderInterface.php
 
 		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderItemRepositoryInterface\:\:findOneByIdAndCustomer\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderItemRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderItemUnitRepositoryInterface\:\:findOneByCustomer\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderItemUnitRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:createByCustomerAndChannelIdQueryBuilder\(\) has parameter \$channelId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:createByCustomerAndChannelIdQueryBuilder\(\) has parameter \$customerId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:findCartByChannel\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:findCartForAddressing\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:findCartForSelectingPayment\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:findCartForSelectingShipping\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:findCartForSummary\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:findOneForPayment\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface\:\:findOrderById\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
 			message: '#^Method Sylius\\Component\\Core\\Repository\\PaymentMethodRepositoryInterface\:\:findEnabledForChannel\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1861,46 +1525,10 @@ parameters:
 			path: src/Sylius/Component/Core/Repository/ProductRepositoryInterface.php
 
 		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\ProductReviewRepositoryInterface\:\:findLatestByProductId\(\) has parameter \$productId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/ProductReviewRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\ProductReviewRepositoryInterface\:\:findOneByIdAndProductCode\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/ProductReviewRepositoryInterface.php
-
-		-
 			message: '#^Method Sylius\\Component\\Core\\Repository\\ProductVariantRepositoryInterface\:\:findByTaxon\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Component/Core/Repository/ProductVariantRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\ShipmentRepositoryInterface\:\:findOneByCustomer\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/ShipmentRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\ShipmentRepositoryInterface\:\:findOneByOrderId\(\) has parameter \$orderId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/ShipmentRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\ShipmentRepositoryInterface\:\:findOneByOrderId\(\) has parameter \$shipmentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/ShipmentRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Core\\Repository\\ShipmentRepositoryInterface\:\:findOneByOrderTokenAndChannel\(\) has parameter \$shipmentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Core/Repository/ShipmentRepositoryInterface.php
 
 		-
 			message: '#^Method Sylius\\Component\\Core\\Repository\\ShippingMethodRepositoryInterface\:\:findEnabledForZonesAndChannel\(\) has parameter \$zones with no value type specified in iterable type array\.$#'
@@ -1943,18 +1571,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Component/Core/Test/Services/DefaultUnitedStatesChannelFactory.php
-
-		-
-			message: '#^PHPDoc tag @var with type Sylius\\Resource\\Factory\\FactoryInterface\<Sylius\\Component\\Order\\Model\\AdjustmentInterface\> is not subtype of native type Sylius\\Resource\\Factory\\Factory\.$#'
-			identifier: varTag.nativeType
-			count: 2
-			path: src/Sylius/Component/Core/Test/Tests/Taxation/Applicator/OrderItemUnitsTaxesApplicatorTest.php
-
-		-
-			message: '#^PHPDoc tag @var with type Sylius\\Resource\\Factory\\FactoryInterface\<Sylius\\Component\\Order\\Model\\AdjustmentInterface\> is not subtype of native type Sylius\\Resource\\Factory\\Factory\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Sylius/Component/Core/Test/Tests/Taxation/Applicator/OrderItemsTaxesApplicatorTest.php
 
 		-
 			message: '#^Method Sylius\\Component\\Customer\\Repository\\CustomerGroupRepositoryInterface\:\:findByPhrase\(\) return type has no value type specified in iterable type iterable\.$#'
@@ -2017,36 +1633,6 @@ parameters:
 			path: src/Sylius/Component/Order/Model/AdjustmentInterface.php
 
 		-
-			message: '#^Method Sylius\\Component\\Order\\Repository\\OrderItemRepositoryInterface\:\:findOneByIdAndCartId\(\) has parameter \$cartId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Order/Repository/OrderItemRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Order\\Repository\\OrderItemRepositoryInterface\:\:findOneByIdAndCartId\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Order/Repository/OrderItemRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Order\\Repository\\OrderItemRepositoryInterface\:\:findOneByIdAndCartTokenValue\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Order/Repository/OrderItemRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Order\\Repository\\OrderItemRepositoryInterface\:\:findOneByIdAndCartTokenValue\(\) has parameter \$tokenValue with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Order/Repository/OrderItemRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Order\\Repository\\OrderRepositoryInterface\:\:findCartById\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Order/Repository/OrderRepositoryInterface.php
-
-		-
 			message: '#^Method Sylius\\Component\\Payment\\Model\\Payment\:\:getDetails\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -2095,26 +1681,8 @@ parameters:
 			path: src/Sylius/Component/Product/Generator/CartesianSetBuilder.php
 
 		-
-			message: '#^Method Sylius\\Component\\Product\\Generator\\CartesianSetBuilder\:\:getResult\(\) has parameter \$k with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Product/Generator/CartesianSetBuilder.php
-
-		-
 			message: '#^Method Sylius\\Component\\Product\\Generator\\CartesianSetBuilder\:\:getResult\(\) has parameter \$keys with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/Sylius/Component/Product/Generator/CartesianSetBuilder.php
-
-		-
-			message: '#^Method Sylius\\Component\\Product\\Generator\\CartesianSetBuilder\:\:getResult\(\) has parameter \$valueA with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Product/Generator/CartesianSetBuilder.php
-
-		-
-			message: '#^Method Sylius\\Component\\Product\\Generator\\CartesianSetBuilder\:\:getResult\(\) has parameter \$valueB with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: src/Sylius/Component/Product/Generator/CartesianSetBuilder.php
 
@@ -2143,20 +1711,8 @@ parameters:
 			path: src/Sylius/Component/Product/Generator/ProductVariantGenerator.php
 
 		-
-			message: '#^Method Sylius\\Component\\Product\\Generator\\ProductVariantGenerator\:\:addOptionValue\(\) has parameter \$permutation with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Product/Generator/ProductVariantGenerator.php
-
-		-
 			message: '#^Method Sylius\\Component\\Product\\Generator\\ProductVariantGenerator\:\:createVariant\(\) has parameter \$optionMap with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/Sylius/Component/Product/Generator/ProductVariantGenerator.php
-
-		-
-			message: '#^Method Sylius\\Component\\Product\\Generator\\ProductVariantGenerator\:\:createVariant\(\) has parameter \$permutation with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: src/Sylius/Component/Product/Generator/ProductVariantGenerator.php
 
@@ -2165,24 +1721,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Sylius/Component/Product/Repository/ProductRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Product\\Repository\\ProductVariantRepositoryInterface\:\:createQueryBuilderByProductId\(\) has parameter \$productId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Product/Repository/ProductVariantRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Product\\Repository\\ProductVariantRepositoryInterface\:\:findOneByIdAndProductId\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Product/Repository/ProductVariantRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Product\\Repository\\ProductVariantRepositoryInterface\:\:findOneByIdAndProductId\(\) has parameter \$productId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Sylius/Component/Product/Repository/ProductVariantRepositoryInterface.php
 
 		-
 			message: '#^Method Sylius\\Component\\Promotion\\Action\\PromotionActionCommandInterface\:\:execute\(\) has parameter \$configuration with no value type specified in iterable type array\.$#'
@@ -2325,12 +1863,6 @@ parameters:
 		-
 			message: '#^Method Sylius\\Component\\Promotion\\Repository\\PromotionCouponRepositoryInterface\:\:createPaginatorForPromotion\(\) return type has no value type specified in iterable type iterable\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/Sylius/Component/Promotion/Repository/PromotionCouponRepositoryInterface.php
-
-		-
-			message: '#^Method Sylius\\Component\\Promotion\\Repository\\PromotionCouponRepositoryInterface\:\:createQueryBuilderByPromotionId\(\) has parameter \$promotionId with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: src/Sylius/Component/Promotion/Repository/PromotionCouponRepositoryInterface.php
 

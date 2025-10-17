@@ -69,10 +69,8 @@ final class ProductOptionValueCollectionType extends AbstractType
         return 'sylius_product_option_value_collection';
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
-    private function assertOptionsAreValid($options): void
+    /** @throws \InvalidArgumentException */
+    private function assertOptionsAreValid(array $options): void
     {
         Assert::true(
             isset($options['options']) && is_iterable($options['options']),

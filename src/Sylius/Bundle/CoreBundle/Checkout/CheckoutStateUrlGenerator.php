@@ -18,13 +18,15 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterface
+final readonly class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterface
 {
-    public function __construct(private RouterInterface $router, private array $routeCollection)
-    {
+    public function __construct(
+        private RouterInterface $router,
+        private array $routeCollection,
+    ) {
     }
 
-    public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH): string
+    public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
         return $this->router->generate($name, $parameters, $referenceType);
     }

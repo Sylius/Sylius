@@ -76,7 +76,7 @@ final class CartesianSetBuilder
         return $setTuples;
     }
 
-    private function getResult(bool $isRecursiveStep, $k, array $keys, $valueA, $valueB): array
+    private function getResult(bool $isRecursiveStep, mixed $k, array $keys, mixed $valueA, mixed $valueB): array
     {
         if ($isRecursiveStep) {
             return array_merge([$valueA], (array) $valueB);
