@@ -119,6 +119,8 @@ EOT
         $email = $this->getAdministratorEmail($input, $output);
         $user->setEmail($email);
         $user->setUsername($this->getAdministratorUsername($input, $output, $email));
+        $user->setFirstName($this->getAdministratorFirstName($input, $output));
+        $user->setLastName($this->getAdministratorLastName($input, $output));
         $user->setPlainPassword($this->getAdministratorPassword($input, $output));
 
         return $user;
@@ -178,6 +180,26 @@ EOT
         } while ($exists);
 
         return $username;
+    }
+
+    private function getAdministratorFirstName(InputInterface $input, OutputInterface $output): string
+    {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+        $question = new Question('First name (press enter to leave blank): ', '');
+        $firstName = $questionHelper->ask($input, $output, $question);
+
+        return $firstName;
+    }
+
+    private function getAdministratorLastName(InputInterface $input, OutputInterface $output): string
+    {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+        $question = new Question('Last name (press enter to leave blank): ', '');
+        $lastName = $questionHelper->ask($input, $output, $question);
+
+        return $lastName;
     }
 
     private function getAdministratorPassword(InputInterface $input, OutputInterface $output): string
