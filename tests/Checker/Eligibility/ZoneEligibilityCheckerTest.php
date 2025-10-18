@@ -29,13 +29,18 @@ final class ZoneEligibilityCheckerTest extends TestCase
 {
     private ZoneMatcherInterface $zoneMatcher;
 
+
     private ZoneEligibilityChecker $checker;
+
 
     private ShipmentInterface $shipment;
 
+
     private OrderInterface $order;
 
+
     private AddressInterface $address;
+
 
     private ShippingMethodInterface $shippingMethod;
 
@@ -43,7 +48,9 @@ final class ZoneEligibilityCheckerTest extends TestCase
 
     private ZoneInterface $zone1;
 
+
     private ZoneInterface $zone2;
+
 
     private ZoneInterface $shippingMethodZone;
 
@@ -66,6 +73,7 @@ final class ZoneEligibilityCheckerTest extends TestCase
     {
         $this->assertInstanceOf(
             ShippingMethodEligibilityCheckerInterface::class,
+            $this->checker,
             $this->checker,
         );
     }
