@@ -22,7 +22,7 @@
 #### Details
 
 - [#18293](https://github.com/Sylius/Sylius/pull/18293) Revert "[Fixtures] Make factory example constructor arguments protected" ([@GSadee](https://github.com/GSadee))
-- [#18286](https://github.com/Sylius/Sylius/pull/18286) [Shop] Image/File Uploud Buttons Size Fix ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#18286](https://github.com/Sylius/Sylius/pull/18286) [Shop] Image/File Upload Buttons Size Fix ([@PiotrTulacz](https://github.com/PiotrTulacz))
 - [#18263](https://github.com/Sylius/Sylius/pull/18263) fix ([@maximehuran](https://github.com/maximehuran))
 - [#18290](https://github.com/Sylius/Sylius/pull/18290) [CS][DX] Refactor
 - [#18296](https://github.com/Sylius/Sylius/pull/18296) [Admin][Product] Fix not blank product code constraint message ([@SVillette](https://github.com/SVillette))
