@@ -29,7 +29,7 @@
 - [#18287](https://github.com/Sylius/Sylius/pull/18287) [CS][DX] Refactor
 - [#18288](https://github.com/Sylius/Sylius/pull/18288) [CS][DX] Refactor
 - [#18291](https://github.com/Sylius/Sylius/pull/18291) [DOCUMENTATION] Synchronize 2.0-docs -> 2.0 ([@SyliusBot](https://github.com/SyliusBot))
-- [#18302](https://github.com/Sylius/Sylius/pull/18302) [Composer][1.14] More specific confflict with serializer ([@Jibbarth](https://github.com/Jibbarth))
+- [#18302](https://github.com/Sylius/Sylius/pull/18302) [Composer][1.14] More specific conflict with serializer ([@Jibbarth](https://github.com/Jibbarth))
 - [#18309](https://github.com/Sylius/Sylius/pull/18309) Add conflict to symfony-ux ^2.29 ([@TheMilek](https://github.com/TheMilek))
 - [#18182](https://github.com/Sylius/Sylius/pull/18182) [2.0] Dutch translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
 - [#18303](https://github.com/Sylius/Sylius/pull/18303) [Promotion] Corrects order of amounts to apply correct promotion amount ([@k-kubacki](https://github.com/k-kubacki))
