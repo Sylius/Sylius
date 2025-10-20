@@ -69,7 +69,11 @@ final class ProductOptionValueCollectionType extends AbstractType
         return 'sylius_product_option_value_collection';
     }
 
-    /** @throws \InvalidArgumentException */
+    /**
+     * @param array<string, mixed> $options
+     *
+     * @throws \InvalidArgumentException
+     */
     private function assertOptionsAreValid(array $options): void
     {
         Assert::true(

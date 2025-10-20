@@ -26,6 +26,7 @@ final class AccountMenuBuilder
     {
     }
 
+    /** @param array<string, mixed> $options */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');

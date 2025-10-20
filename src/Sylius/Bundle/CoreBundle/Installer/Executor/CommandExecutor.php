@@ -27,6 +27,8 @@ final class CommandExecutor
     }
 
     /**
+     * @param array<string, mixed> $parameters
+     *
      * @throws \Exception
      */
     public function runCommand(string $command, array $parameters = [], ?OutputInterface $output = null): self
@@ -56,6 +58,7 @@ final class CommandExecutor
         return $this;
     }
 
+    /** @return array<string, mixed> */
     private function getDefaultParameters(): array
     {
         $defaultParameters = ['--no-debug' => true];

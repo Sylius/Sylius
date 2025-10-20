@@ -36,6 +36,11 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         $loader->load(sprintf('integrations/%s.xml', $config['driver']));
     }
 
+    /**
+     * @param array<string, array<mixed>> $resources
+     *
+     * @return array<mixed>
+     */
     private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('sylius.review.subjects', $resources);
@@ -54,6 +59,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         return $resolvedResources;
     }
 
+    /** @param array<mixed> $reviewSubjects */
     private function createReviewListeners(array $reviewSubjects, ContainerBuilder $container): void
     {
         foreach ($reviewSubjects as $reviewSubject) {

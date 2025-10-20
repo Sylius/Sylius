@@ -34,6 +34,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 {
     use PrependDoctrineMigrationsTrait;
 
+    /** @var string[] */
     private static array $bundles = [
         'sylius_addressing',
         'sylius_attribute',
@@ -116,6 +117,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         return '@SyliusCoreBundle/Migrations';
     }
 
+    /** @return array<mixed> */
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
         return [];

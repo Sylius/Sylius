@@ -43,11 +43,13 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
         }
     }
 
+    /** @return array<mixed> */
     private function getBatch(\DateTimeInterface $fromDate): array
     {
         return $this->channelPricingLogEntriesRepository->findOlderThan($fromDate, $this->batchSize);
     }
 
+    /** @param array<mixed> $deletedChannelPricingLogEntries */
     private function processDeletion(array $deletedChannelPricingLogEntries): void
     {
         $this->eventDispatcher->dispatch(new GenericEvent($deletedChannelPricingLogEntries), OldChannelPricingLogEntriesEvents::PRE_REMOVE);

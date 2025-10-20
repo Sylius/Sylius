@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
+    /** @param array<string, mixed> $subjects */
     public function __construct(private array $subjects)
     {
     }

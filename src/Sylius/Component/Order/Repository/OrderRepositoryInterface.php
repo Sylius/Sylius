@@ -26,9 +26,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
 {
     public function countPlacedOrders(): int;
 
-    /**
-     * @return array|T[]
-     */
+    /** @return T[] */
     public function findLatest(int $count): array;
 
     public function findLatestCart(): ?OrderInterface;
@@ -39,13 +37,11 @@ interface OrderRepositoryInterface extends RepositoryInterface
 
     public function findCartById(mixed $id): ?OrderInterface;
 
-    /**
-     * @return array|OrderInterface[]
-     */
+    /** @return T[] */
     public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate, ?int $limit = null): array;
 
     public function createCartQueryBuilder(): QueryBuilder;
 
-    /** @return OrderInterface[] */
+    /** @return T[] */
     public function findAllExceptCarts(): array;
 }

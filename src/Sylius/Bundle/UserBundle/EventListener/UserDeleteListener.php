@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class UserDeleteListener
@@ -29,9 +28,7 @@ final readonly class UserDeleteListener
     {
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public function deleteUser(GenericEvent $event): void
     {
         $user = $event->getSubject();

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -34,6 +33,7 @@ final class DefaultUsernameORMListener
         $this->processEntities($unitOfWork->getScheduledEntityUpdates(), $entityManager, $unitOfWork);
     }
 
+    /** @param array<mixed> $entities */
     private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
         foreach ($entities as $entity) {
