@@ -131,7 +131,7 @@
 - [#18174](https://github.com/Sylius/Sylius/pull/18174) [ApiBundle] Migrate remaining phpspec to PHPUnit tests ([@GSadee](https://github.com/GSadee))
 - [#18157](https://github.com/Sylius/Sylius/pull/18157) [Shop] Shop WCAG raport ([@PiotrTulacz](https://github.com/PiotrTulacz))
 - [#18177](https://github.com/Sylius/Sylius/pull/18177) Product image replace ([@PiotrTulacz](https://github.com/PiotrTulacz))
-- [#18180](https://github.com/Sylius/Sylius/pull/18180) [Shop] Html lables translation ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#18180](https://github.com/Sylius/Sylius/pull/18180) [Shop] Html labels translation ([@PiotrTulacz](https://github.com/PiotrTulacz))
 - [#18181](https://github.com/Sylius/Sylius/pull/18181) Update translations for 2.1 keys ([@SyliusBot](https://github.com/SyliusBot))
 
 ## v2.1.1 (2025-06-04)
