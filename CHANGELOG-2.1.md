@@ -48,7 +48,7 @@
 - [#18339](https://github.com/Sylius/Sylius/pull/18339) Fixed placing order with not possible zone ([@pbalcerzak](https://github.com/pbalcerzak))
 - [#18343](https://github.com/Sylius/Sylius/pull/18343) [Fix][Admin] Fix order summary to show product name and options from time of purchase ([@tomkalon](https://github.com/tomkalon))
 - [#18345](https://github.com/Sylius/Sylius/pull/18345) Fix argument of ZoneEligibilityChecker to use the new service id ([@GSadee](https://github.com/GSadee))
-- [#18342](https://github.com/Sylius/Sylius/pull/18342) FEAT: [AdminBundle] Open shop preview and nessecary  user dropdown links in new tab ([@crydotsnake](https://github.com/crydotsnake))
+- [#18342](https://github.com/Sylius/Sylius/pull/18342) FEAT: [AdminBundle] Open shop preview and necessary user dropdown links in new tab ([@crydotsnake](https://github.com/crydotsnake))
 - [#18350](https://github.com/Sylius/Sylius/pull/18350) [CS][DX] Refactor
 - [#18351](https://github.com/Sylius/Sylius/pull/18351) [CS][DX] Refactor
 - [#18316](https://github.com/Sylius/Sylius/pull/18316) sort main and bulk actions by position ([@Florian-Merle](https://github.com/Florian-Merle))
