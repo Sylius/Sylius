@@ -54,6 +54,14 @@ final class TaxonomyContext implements Context
     }
 
     /**
+     * @Given the store classifies its products as :taxonName with :taxonCode code
+     */
+    public function storeClassifiesItsProductsAsWithCode(string $taxonName, string $taxonCode): void
+    {
+        $this->taxonRepository->add($this->createTaxonWithCode($taxonName, $taxonCode));
+    }
+
+    /**
      * @Given /^the store has taxonomy named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
      */
     public function theStoreHasTaxonomyNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
@@ -152,6 +160,17 @@ final class TaxonomyContext implements Context
         $taxon = $this->taxonFactory->createNew();
         $taxon->setName($name);
         $taxon->setCode(StringInflector::nameToLowercaseCode($name));
+        $taxon->setSlug($this->taxonSlugGenerator->generate($taxon));
+
+        return $taxon;
+    }
+
+    private function createTaxonWithCode(string $name, string $code): TaxonInterface
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonFactory->createNew();
+        $taxon->setName($name);
+        $taxon->setCode($code);
         $taxon->setSlug($this->taxonSlugGenerator->generate($taxon));
 
         return $taxon;
