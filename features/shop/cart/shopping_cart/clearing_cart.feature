@@ -16,7 +16,7 @@ Feature: Clearing cart
         And I clear my cart
         Then my cart should be cleared
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Clearing cart after adding an address in checkout
         Given I added product "T-Shirt banana" to the cart
         And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
