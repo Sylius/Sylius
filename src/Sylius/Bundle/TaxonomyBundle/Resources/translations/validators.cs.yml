@@ -14,6 +14,8 @@ sylius:
         slug:
             not_blank: 'Prosím zadejte slug taxonu.'
             unique: 'Slug taxonu musí být jedinečný.'
+        parent:
+            invalid_relation: 'Nadrazený taxon nesmí být ani samotný taxon, ani žádný z jeho potomků.'
     taxonomy:
         name:
             max_length: 'Název taxonomie nesmí být delší než 255 znaků.'

@@ -13,6 +13,8 @@ sylius:
         slug:
             not_blank: Bitte eine Kategorie SEO-URL angeben.
             unique: SEO-URL der Kategorie muss eindeutig sein.
+        parent:
+            invalid_relation: 'Der übergeordnete Taxon darf weder der Taxon selbst noch einer seiner Nachkommen sein.'
     taxonomy:
         name:
             max_length: Name darf nicht länger als 255 Zeichen sein.

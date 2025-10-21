@@ -24,7 +24,6 @@ class Model
         #[ORM\GeneratedValue]
         #[ORM\Column(type: 'integer')]
         public int $id,
-
         #[ORM\Column(type: 'string', length: 250)]
         public string $email,
     ) {

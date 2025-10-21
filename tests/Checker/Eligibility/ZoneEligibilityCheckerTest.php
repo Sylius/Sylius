@@ -15,25 +15,36 @@ namespace Sylius\Tests\Checker\Eligibility;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Shipping\Checker\Eligibility\ZoneEligibilityChecker;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ZoneEligibilityCheckerTest extends TestCase
 {
     private ZoneMatcherInterface $zoneMatcher;
+
     private ZoneEligibilityChecker $checker;
+
     private ShipmentInterface $shipment;
+
     private OrderInterface $order;
+
     private AddressInterface $address;
+
     private ShippingMethodInterface $shippingMethod;
+
+    private ShippingSubjectInterface $shippingSubject;
+
     private ZoneInterface $zone1;
+
     private ZoneInterface $zone2;
+
     private ZoneInterface $shippingMethodZone;
 
     protected function setUp(): void
@@ -48,13 +59,14 @@ final class ZoneEligibilityCheckerTest extends TestCase
         $this->zone1 = $this->createMock(ZoneInterface::class);
         $this->zone2 = $this->createMock(ZoneInterface::class);
         $this->shippingMethodZone = $this->createMock(ZoneInterface::class);
+        $this->shippingSubject = $this->createMock(ShippingSubjectInterface::class);
     }
 
     public function test_it_implements_interface(): void
     {
         $this->assertInstanceOf(
             ShippingMethodEligibilityCheckerInterface::class,
-            $this->checker
+            $this->checker,
         );
     }
 
@@ -102,5 +114,10 @@ final class ZoneEligibilityCheckerTest extends TestCase
         $this->shippingMethod->method('getZone')->willReturn($this->shippingMethodZone);
 
         $this->assertFalse($this->checker->isEligible($this->shipment, $this->shippingMethod));
+    }
+
+    public function test_it_returns_true_if_shipping_subject_is_not_a_shipment(): void
+    {
+        $this->assertTrue($this->checker->isEligible($this->shippingSubject, $this->shippingMethod));
     }
 }

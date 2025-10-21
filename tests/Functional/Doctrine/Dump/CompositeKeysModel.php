@@ -23,12 +23,10 @@ class CompositeKeysModel
         #[ORM\Id]
         #[ORM\Column(length: 250)]
         public string $email,
-
         #[ORM\Id]
-        #[ORM\Column(name: "organization_name", type: "string")]
+        #[ORM\Column(name: 'organization_name', type: 'string')]
         public string $organizationName,
-
-        #[ORM\Column(name: "description", type: 'string')]
+        #[ORM\Column(name: 'description', type: 'string')]
         public string $description,
     ) {
     }

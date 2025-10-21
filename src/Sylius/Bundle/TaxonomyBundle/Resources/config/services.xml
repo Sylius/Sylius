@@ -31,5 +31,9 @@
             <argument type="service" id="sylius.repository.nested_tree.taxon" />
         </service>
         <service id="Sylius\Component\Taxonomy\Provider\TaxonTreeProviderInterface" alias="sylius.provider.taxon_tree" />
+
+        <service id="sylius.validator.taxon_parent_relation" class="Sylius\Bundle\TaxonomyBundle\Validator\Constraints\TaxonParentRelationValidator">
+            <tag name="validator.constraint_validator" alias="sylius_taxon_parent_relation_validator" />
+        </service>
     </services>
 </container>

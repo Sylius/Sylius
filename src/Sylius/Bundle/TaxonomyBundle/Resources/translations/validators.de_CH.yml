@@ -14,6 +14,8 @@ sylius:
         slug:
             not_blank: 'Bitte geben Sie den Taxon-Slug ein.'
             unique: 'Der Taxon-Slug muss eindeutig sein.'
+        parent:
+            invalid_relation: 'Der übergeordnete Taxon darf weder der Taxon selbst noch einer seiner Nachkommen sein.'
     taxonomy:
         name:
             max_length: 'Der Name der Taxonomie darf höchstens 255 Zeichen lang sein.'
