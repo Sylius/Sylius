@@ -109,6 +109,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function searchParentTaxonAutocomplete(string $searchTerm): array
     {
+        DriverHelper::waitForPageToLoad($this->getSession());
+
         $searchResults = $this->autocompleteHelper->search(
             $this->getDriver(),
             $this->getElement('parent')->getXpath(),

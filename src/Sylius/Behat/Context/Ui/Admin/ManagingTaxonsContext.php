@@ -496,7 +496,6 @@ final class ManagingTaxonsContext implements Context
      */
     public function iSearchForInTheParentTaxonAutocomplete(string $searchTerm): void
     {
-        DriverHelper::waitForPageToLoad($this->formElement->getSession());
         $this->autocompleteSearchResults = $this->formElement->searchParentTaxonAutocomplete($searchTerm);
     }
 
