@@ -109,8 +109,16 @@ class Taxon implements TaxonInterface, \Stringable
     public function getAncestors(): Collection
     {
         $ancestors = [];
+        $visited = [];
 
         for ($ancestor = $this->getParent(); null !== $ancestor; $ancestor = $ancestor->getParent()) {
+            $ancestorId = spl_object_id($ancestor);
+
+            if (isset($visited[$ancestorId])) {
+                break;
+            }
+
+            $visited[$ancestorId] = true;
             $ancestors[] = $ancestor;
         }
 
@@ -180,12 +188,23 @@ class Taxon implements TaxonInterface, \Stringable
             return $this->getName();
         }
 
-        return sprintf(
-            '%s%s%s',
-            $this->getParent()->getFullname($pathDelimiter),
-            $pathDelimiter,
-            $this->getName(),
-        );
+        $parent = $this->getParent();
+        if ($parent === null || $parent === $this) {
+            return $this->getName();
+        }
+
+        $ancestors = $this->getAncestors();
+        if ($ancestors->isEmpty()) {
+            return $this->getName();
+        }
+
+        $parts = [];
+        foreach (array_reverse($ancestors->toArray()) as $ancestor) {
+            $parts[] = $ancestor->getName();
+        }
+        $parts[] = $this->getName();
+
+        return implode($pathDelimiter, $parts);
     }
 
     public function getSlug(): ?string
