@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Tests\Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SyliusPageInterface;
 use LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolver;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
