@@ -25,6 +25,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionExecutorListener extends AbstractListener implements AfterFixtureListenerInterface
 {
+    /** @param iterable<mixed> $defaultCriteria */
     public function __construct(
         private AllProductVariantsCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         private CatalogPromotionRepositoryInterface $catalogPromotionsRepository,

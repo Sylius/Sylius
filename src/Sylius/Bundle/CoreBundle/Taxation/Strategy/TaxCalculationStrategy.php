@@ -22,9 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
-    /** @var iterable|OrderTaxesApplicatorInterface[] */
+    /** @var iterable<OrderTaxesApplicatorInterface> */
     private iterable $applicators;
 
+    /** @param iterable<OrderTaxesApplicatorInterface> $applicators */
     public function __construct(private string $type, iterable $applicators)
     {
         Assert::allIsInstanceOf($applicators, OrderTaxesApplicatorInterface::class);
@@ -38,9 +39,7 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
         }
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public function supports(OrderInterface $order, ZoneInterface $zone): bool
     {
         $channel = $order->getChannel();

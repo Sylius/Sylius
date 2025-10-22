@@ -15,9 +15,9 @@ namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class HomePage extends SymfonyPage implements HomePageInterface
+class HomePage extends SyliusPage implements HomePageInterface
 {
     public function getRouteName(): string
     {

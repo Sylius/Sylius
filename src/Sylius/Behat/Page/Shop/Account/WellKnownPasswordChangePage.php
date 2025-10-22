@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class WellKnownPasswordChangePage extends SymfonyPage implements WellKnownPasswordChangePageInterface
+class WellKnownPasswordChangePage extends SyliusPage implements WellKnownPasswordChangePageInterface
 {
     public function getRouteName(): string
     {

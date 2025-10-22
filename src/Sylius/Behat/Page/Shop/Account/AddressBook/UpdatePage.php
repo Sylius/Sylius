@@ -15,10 +15,10 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Behat\Mink\Exception\DriverException;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\JQueryHelper;
 
-class UpdatePage extends SymfonyPage implements UpdatePageInterface
+class UpdatePage extends SyliusPage implements UpdatePageInterface
 {
     public function getRouteName(): string
     {

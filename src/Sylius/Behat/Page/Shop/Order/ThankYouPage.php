@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\DriverHelper;
 
-class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
+class ThankYouPage extends SyliusPage implements ThankYouPageInterface
 {
     public function goToTheChangePaymentMethodPage(): void
     {

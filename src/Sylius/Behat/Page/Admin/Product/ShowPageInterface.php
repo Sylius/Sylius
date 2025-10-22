@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\Admin\ShowToEditPageSwitcherInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-interface ShowPageInterface extends SymfonyPageInterface, ShowToEditPageSwitcherInterface
+interface ShowPageInterface extends SyliusPageInterface, ShowToEditPageSwitcherInterface
 {
     /** @return string[] */
     public function getAppliedCatalogPromotionsLinks(string $variantName, string $channelName): array;

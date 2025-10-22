@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class AttributesElement extends Element implements AttributesElementInterface
+class AttributesElement extends SyliusElement implements AttributesElementInterface
 {
     public function hasAttributeInLocale(string $attribute, string $localeCode, string $value): bool
     {

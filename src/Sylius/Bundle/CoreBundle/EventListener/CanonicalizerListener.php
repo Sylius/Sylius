@@ -30,7 +30,7 @@ final class CanonicalizerListener
 
         if ($item instanceof CustomerInterface) {
             $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
-        } elseif ($item instanceof UserInterface && method_exists($item, 'getUsername')) {
+        } elseif ($item instanceof UserInterface) {
             $item->setUsernameCanonical($this->canonicalizer->canonicalize($item->getUsername()));
             $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
         }

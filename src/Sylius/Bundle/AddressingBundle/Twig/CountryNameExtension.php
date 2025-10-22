@@ -28,7 +28,7 @@ class CountryNameExtension extends AbstractExtension
         ];
     }
 
-    public function translateCountryIsoCode($country, ?string $locale = null): string
+    public function translateCountryIsoCode(CountryInterface|string|null $country, ?string $locale = null): string
     {
         $countryCode = $country instanceof CountryInterface ? $country->getCode() : $country;
 

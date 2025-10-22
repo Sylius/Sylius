@@ -102,6 +102,7 @@ final class ContactController
         return $attributes[$attributeName] ?? $default;
     }
 
+    /** @return array<string, mixed> */
     private function getFormOptions(): array
     {
         $customer = $this->customerContext->getCustomer();

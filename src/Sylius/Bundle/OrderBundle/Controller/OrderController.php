@@ -24,8 +24,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderController extends ResourceController
@@ -120,15 +118,6 @@ class OrderController extends ResourceController
                 'cart' => $resource,
             ],
         );
-    }
-
-    protected function addFlash(string $type, mixed $message): void
-    {
-        /** @var SessionInterface $session */
-        $session = $this->get('request_stack')->getSession();
-        /** @var FlashBagInterface $flashBag */
-        $flashBag = $session->getBag('flashes');
-        $flashBag->add($type, $message);
     }
 
     protected function getCurrentCart(): OrderInterface

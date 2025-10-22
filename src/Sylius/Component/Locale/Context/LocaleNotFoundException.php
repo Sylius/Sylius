@@ -25,6 +25,7 @@ final class LocaleNotFoundException extends \RuntimeException
         return new self(sprintf('Locale "%s" cannot be found!', $localeCode));
     }
 
+    /** @param array<string> $availableLocalesCodes */
     public static function notAvailable(string $localeCode, array $availableLocalesCodes): self
     {
         return new self(sprintf(

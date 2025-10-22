@@ -73,6 +73,7 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(ContainsProductRuleChecker::TYPE, ['product_code' => $productCode]);
     }
 
+    /** @param array<string, mixed> $configuration */
     private function createPromotionRule(string $type, array $configuration): PromotionRuleInterface
     {
         /** @var PromotionRuleInterface $rule */

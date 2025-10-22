@@ -42,7 +42,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder
+    public function createListQueryBuilder(string $locale, mixed $taxonId = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')

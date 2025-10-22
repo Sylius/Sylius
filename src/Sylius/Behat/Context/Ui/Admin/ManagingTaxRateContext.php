@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\TaxRate\FilterElementInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
@@ -404,7 +404,7 @@ final class ManagingTaxRateContext implements Context
         );
     }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
+    protected function resolveCurrentPage(): SyliusPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }

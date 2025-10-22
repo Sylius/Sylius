@@ -18,9 +18,10 @@ use Webmozart\Assert\Assert;
 
 final class UriBasedSectionProvider implements SectionProviderInterface
 {
-    /** @var iterable|UriBasedSectionResolverInterface[] */
+    /** @var iterable<UriBasedSectionResolverInterface> */
     private iterable $resolvers;
 
+    /** @param iterable<UriBasedSectionResolverInterface> $resolvers */
     public function __construct(private RequestStack $requestStack, iterable $resolvers)
     {
         Assert::allIsInstanceOf($resolvers, UriBasedSectionResolverInterface::class);

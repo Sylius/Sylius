@@ -94,7 +94,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder
+    public function createByCustomerAndChannelIdQueryBuilder(mixed $customerId, mixed $channelId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.customer = :customerId')
@@ -106,7 +106,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findOrderById($id): ?OrderInterface
+    public function findOrderById(mixed $id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')
@@ -138,7 +138,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findOneForPayment($id): ?OrderInterface
+    public function findOneForPayment(mixed $id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->addSelect('payments')
@@ -199,7 +199,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface
+    public function findCartByChannel(mixed $id, ChannelInterface $channel): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')
@@ -413,7 +413,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $queryBuilder->getQuery()->getResult();
     }
 
-    public function findCartForSummary($id): ?OrderInterface
+    public function findCartForSummary(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -444,7 +444,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    public function findCartForAddressing($id): ?OrderInterface
+    public function findCartForAddressing(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -466,7 +466,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    public function findCartForSelectingShipping($id): ?OrderInterface
+    public function findCartForSelectingShipping(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -488,7 +488,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    public function findCartForSelectingPayment($id): ?OrderInterface
+    public function findCartForSelectingPayment(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')

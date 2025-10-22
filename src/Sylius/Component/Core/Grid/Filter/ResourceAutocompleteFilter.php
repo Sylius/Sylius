@@ -20,6 +20,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ResourceAutocompleteFilter implements FilterInterface
 {
+    /** @param array<string, mixed> $options */
     public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
     {
         if (empty($data)) {

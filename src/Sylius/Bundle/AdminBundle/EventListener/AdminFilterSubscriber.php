@@ -63,6 +63,7 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
         return str_ends_with($route, 'index');
     }
 
+    /** @param array<string, mixed> $syliusParameters */
     private function isAdminSection(array $syliusParameters): bool
     {
         return isset($syliusParameters['section']) && 'admin' === $syliusParameters['section'];

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class TranslationsElement extends Element implements TranslationsElementInterface
+class TranslationsElement extends SyliusElement implements TranslationsElementInterface
 {
     public function getDescription(): string
     {

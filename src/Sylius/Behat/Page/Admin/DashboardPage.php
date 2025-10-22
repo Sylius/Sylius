@@ -15,12 +15,12 @@ namespace Sylius\Behat\Page\Admin;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class DashboardPage extends SymfonyPage implements DashboardPageInterface
+class DashboardPage extends SyliusPage implements DashboardPageInterface
 {
     /**
      * @template TKey of array-key

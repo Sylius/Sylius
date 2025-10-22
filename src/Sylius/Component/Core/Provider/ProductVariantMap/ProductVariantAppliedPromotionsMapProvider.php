@@ -25,6 +25,7 @@ final class ProductVariantAppliedPromotionsMapProvider implements ProductVariant
         ];
     }
 
+    /** @param array<string, mixed> $context */
     public function supports(ProductVariantInterface $variant, array $context): bool
     {
         return

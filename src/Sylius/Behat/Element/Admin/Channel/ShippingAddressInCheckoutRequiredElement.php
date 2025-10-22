@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Channel;
 
 use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 use Webmozart\Assert\Assert;
 
-class ShippingAddressInCheckoutRequiredElement extends Element implements ShippingAddressInCheckoutRequiredElementInterface
+class ShippingAddressInCheckoutRequiredElement extends SyliusElement implements ShippingAddressInCheckoutRequiredElementInterface
 {
     protected const ADDRESS_TYPE_BILLING = 'billing';
 

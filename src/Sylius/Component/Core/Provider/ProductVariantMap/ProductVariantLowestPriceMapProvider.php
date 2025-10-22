@@ -23,11 +23,6 @@ final readonly class ProductVariantLowestPriceMapProvider implements ProductVari
     {
     }
 
-    /**
-     * @param array<string, mixed> $context
-     *
-     * @return array<string, mixed>
-     */
     public function provide(ProductVariantInterface $variant, array $context): array
     {
         return [

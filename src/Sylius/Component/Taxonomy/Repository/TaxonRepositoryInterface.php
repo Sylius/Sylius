@@ -24,31 +24,27 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface TaxonRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @return array|TaxonInterface[]
-     */
+    /** @return T[] */
     public function findChildren(string $parentCode, ?string $locale = null): array;
 
+    /** @return T[] */
     public function findChildrenByChannelMenuTaxon(?TaxonInterface $menuTaxon = null, ?string $locale = null): array;
 
-    /**
-     * @return array|TaxonInterface[]
-     */
+    /** @return T[] */
     public function findRootNodes(): array;
 
+    /** @return T[] */
     public function findHydratedRootNodes(): array;
 
     public function findOneBySlug(string $slug, string $locale): ?TaxonInterface;
 
-    /**
-     * @return array|TaxonInterface[]
-     */
+    /** @return T[] */
     public function findByName(string $name, string $locale): array;
 
     /**
      * @param array<string>|null $excludes
      *
-     * @return array|TaxonInterface[]
+     * @return T[]
      */
     public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null, ?array $excludes = null): array;
 

@@ -19,7 +19,7 @@ interface ExchangeRateInterface extends ResourceInterface
 {
     public function getRatio(): ?float;
 
-    public function setRatio(?float $ratio);
+    public function setRatio(?float $ratio): void;
 
     public function getSourceCurrency(): ?CurrencyInterface;
 

@@ -26,7 +26,7 @@ use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
  */
 class ProductVariantRepository extends EntityRepository implements ProductVariantRepositoryInterface
 {
-    public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder
+    public function createQueryBuilderByProductId(string $locale, mixed $productId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
@@ -122,7 +122,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface
+    public function findOneByIdAndProductId(mixed $id, mixed $productId): ?ProductVariantInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.product = :productId')

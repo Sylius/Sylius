@@ -115,6 +115,7 @@ final class ZoneType extends AbstractResourceType
         return $zoneMemberEntryTypes[$zoneMemberType];
     }
 
+    /** @return array<string, string|bool|array<string, string>> */
     private function getZoneMemberEntryOptions(string $zoneMemberType): array
     {
         $zoneMemberEntryOptions = [

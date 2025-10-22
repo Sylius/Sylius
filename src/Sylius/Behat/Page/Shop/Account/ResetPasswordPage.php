@@ -16,11 +16,11 @@ namespace Sylius\Behat\Page\Shop\Account;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
+class ResetPasswordPage extends SyliusPage implements ResetPasswordPageInterface
 {
     use SecurePasswordTrait;
 
