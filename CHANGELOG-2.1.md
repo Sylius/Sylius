@@ -1,5 +1,37 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.7 (2025-10-22)
+
+#### Details
+
+- [#18371](https://github.com/Sylius/Sylius/pull/18371) Update validation group in checkout complete ([@tomkalon](https://github.com/tomkalon))
+- [#18395](https://github.com/Sylius/Sylius/pull/18395) TASK: fix broken links in readme file ([@crydotsnake](https://github.com/crydotsnake))
+- [#18368](https://github.com/Sylius/Sylius/pull/18368) Fix Breadcrumbs in Customer Orders ([@rust-le](https://github.com/rust-le))
+- [#18380](https://github.com/Sylius/Sylius/pull/18380) Remove product images duplication ([@Glancu](https://github.com/Glancu))
+- [#18394](https://github.com/Sylius/Sylius/pull/18394) Remove product images duplication ([@Glancu](https://github.com/Glancu))
+- [#18413](https://github.com/Sylius/Sylius/pull/18413) [CI] Fix Packages Build ([@Rafikooo](https://github.com/Rafikooo))
+- [#18418](https://github.com/Sylius/Sylius/pull/18418) Revert "[AdminBundle] Hide Impersonate button when user shop account is locked" ([@Rafikooo](https://github.com/Rafikooo))
+- [#18399](https://github.com/Sylius/Sylius/pull/18399) Fix invalid property types for 'translations' ([@rust-le](https://github.com/rust-le))
+- [#18420](https://github.com/Sylius/Sylius/pull/18420) [CS][DX] Refactor
+- [#18419](https://github.com/Sylius/Sylius/pull/18419) Bugfix/invalid credentials message is not translated during ajax login ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18411](https://github.com/Sylius/Sylius/pull/18411) Bugfix/wrong assertion in class zone eligible checker ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18428](https://github.com/Sylius/Sylius/pull/18428) [Documentation] Remove /docs directory and synchronization with GitBook ([@GSadee](https://github.com/GSadee))
+- [#18431](https://github.com/Sylius/Sylius/pull/18431) [CI] Replace the full build for 2.0 with the build for 2.2 branch + reduce number of builds ([@GSadee](https://github.com/GSadee))
+- [#18406](https://github.com/Sylius/Sylius/pull/18406) Fix: Admin taxon update: Cannot set child as parent to node ([@Glancu](https://github.com/Glancu))
+- [#16919](https://github.com/Sylius/Sylius/pull/16919) [CI] Correct Branches Comparision in Upmerge Workflow ([@Rafikooo](https://github.com/Rafikooo))
+- [#18444](https://github.com/Sylius/Sylius/pull/18444) [CS][DX] Refactor
+- [#18443](https://github.com/Sylius/Sylius/pull/18443) [CS][DX] Refactor
+- [#18449](https://github.com/Sylius/Sylius/pull/18449) [Tests] Remove Tests/ case duplicate from upmerge ([@Rafikooo](https://github.com/Rafikooo))
+- [#18450](https://github.com/Sylius/Sylius/pull/18450) Apply ecs fixes ([@Rafikooo](https://github.com/Rafikooo))
+- [#18441](https://github.com/Sylius/Sylius/pull/18441) [CI] Bump BuildTestAppAction from v2.4 to 3.0.1 ([@Rafikooo](https://github.com/Rafikooo))
+- [#18458](https://github.com/Sylius/Sylius/pull/18458) [Maintenance] Phpstan cleanup ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#18461](https://github.com/Sylius/Sylius/pull/18461) [Changelog] Fix obvious typos in 2.1 changelog ([@alisolphp](https://github.com/alisolphp))
+- [#18448](https://github.com/Sylius/Sylius/pull/18448) [Behat] Fix flaky tests by correcting LiveComponent loading state detection ([@Rafikooo](https://github.com/Rafikooo))
+- [#18463](https://github.com/Sylius/Sylius/pull/18463) [CS][DX] Refactor
+- [#18427](https://github.com/Sylius/Sylius/pull/18427) [FIX] Fixing action clear cart after added address on shipping step ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18367](https://github.com/Sylius/Sylius/pull/18367) Extract loader to a reusable Twig helper ([@tomkalon](https://github.com/tomkalon))
+- [#18459](https://github.com/Sylius/Sylius/pull/18459) Update BuildTestAppAction to v3.0.1 ([@Rafikooo](https://github.com/Rafikooo))
+
 ## v2.1.6 (2025-09-25)
 
 #### Details
