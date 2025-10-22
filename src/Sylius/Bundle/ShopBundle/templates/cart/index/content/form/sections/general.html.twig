@@ -1,10 +1,8 @@
+{% import '@SyliusShop/shared/macro/loader.html.twig' as loader %}
+
 <div class="row">
     <div class="col-12 col-xl-8 mb-4 position-relative">
-        <div data-loading>
-            <div class="sylius-shop-loader">
-                <img src="{{ asset('build/shop/images/loader.gif', 'shop') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
-            </div>
-        </div>
+        {{ loader.render() }}
         {% hook 'general#left' %}
     </div>
     <div class="col-12 col-xl-4 ps-xl-5 mb-4">

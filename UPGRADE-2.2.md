@@ -18,8 +18,13 @@
 +       protected readonly ?iterable $addressFormValuesModifiers = null,
     )
 ```
+
+1. Direct usage of `loader.svg` and `loader.gif` assets is deprecated.
+   Use `@SyliusAdmin/shared/helper/loader.html.twig` or `@SyliusShop/shared/macro/loader.html.twig` instead.
+
 ### Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
    is always placed at the beginning of the returned locales array.  
    Other locales remain in the same order as returned by the repository.
+
