@@ -29,12 +29,23 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
     {
         $locales = $this->localeRepository->getAll();
 
-        return array_map(
-            function (LocaleInterface $locale) {
+        $localeCodes = array_map(
+            static function (LocaleInterface $locale): string {
                 return (string) $locale->getCode();
             },
             $locales,
         );
+
+        $key = array_search($this->defaultLocaleCode, $localeCodes, true);
+
+        if ($key === false || $key === 0) {
+            return $localeCodes;
+        }
+
+        unset($localeCodes[$key]);
+        array_unshift($localeCodes, $this->defaultLocaleCode);
+
+        return $localeCodes;
     }
 
     public function getDefaultLocaleCode(): string
