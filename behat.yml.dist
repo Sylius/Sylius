@@ -50,23 +50,22 @@ default:
                                 acceptSslCerts: true
                                 acceptInsecureCerts: true
                                 unexpectedAlertBehaviour: accept
-                        options:
-                            browser_arguments:
-                                - --window-size=1200,1000
-                                - --headless
-                                - --no-sandbox
-                                - --disable-dev-shm-usage
-                                - --disable-gpu
-                                - --disable-infobars
-                                - --disable-features=TranslateUI
-                                - --disable-translate
-                                - --disable-popup-blocking
-                                - --disable-blink-features=AutomationControlled
-                                - --disable-component-extensions-with-background-pages
-                                - --disable-background-networking
-                                - --disable-dev-tools
-                                - --disable-extensions
-                                - --disable-password-manager-leak-detection
+                                goog:chromeOptions:
+                                    args:
+                                        - --user-data-dir=/tmp/panther-chrome-data
+                                        - --window-size=1920,1200
+                                        - --no-sandbox
+                                        - --disable-dev-shm-usage
+                                        - --disable-gpu
+                                        - --disable-infobars
+                                        - --disable-features=TranslateUI
+                                        - --disable-translate
+                                        - --disable-popup-blocking
+                                        - --disable-blink-features=AutomationControlled
+                                        - --disable-component-extensions-with-background-pages
+                                        - --disable-background-networking
+                                        - --disable-dev-tools
+                                        - --disable-extensions
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension: ~
