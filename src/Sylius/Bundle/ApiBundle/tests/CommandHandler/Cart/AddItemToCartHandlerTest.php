@@ -25,7 +25,8 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
+use Sylius\Bundle\ApiBundle\Exception\UnprocessableCartException;
+use Sylius\Bundle\ApiBundle\Exception\ProductVariantUnprocessableException;
 
 final class AddItemToCartHandlerTest extends TestCase
 {
@@ -42,8 +43,6 @@ final class AddItemToCartHandlerTest extends TestCase
     private AddItemToCartHandler $handler;
 
     private MockObject&ProductVariantInterface $productVariant;
-
-    use MessageHandlerAttributeTrait;
 
     protected function setUp(): void
     {
@@ -94,7 +93,7 @@ final class AddItemToCartHandlerTest extends TestCase
             ->with(['code' => 'PRODUCT_VARIANT_CODE'])
             ->willReturn(null);
         $this->cartItemFactory->expects(self::never())->method('createNew');
-        self::expectException(\InvalidArgumentException::class);
+        self::expectException(ProductVariantUnprocessableException::class);
         $this->handler->__invoke(new AddItemToCart(
             orderTokenValue: 'TOKEN',
             productVariantCode: 'PRODUCT_VARIANT_CODE',
@@ -113,7 +112,7 @@ final class AddItemToCartHandlerTest extends TestCase
             ->with('TOKEN')
             ->willReturn(null);
         $this->cartItemFactory->expects(self::never())->method('createNew');
-        self::expectException(\InvalidArgumentException::class);
+        self::expectException(UnprocessableCartException::class);
         $this->handler->__invoke(new AddItemToCart(
             orderTokenValue: 'TOKEN',
             productVariantCode: 'PRODUCT_VARIANT_CODE',

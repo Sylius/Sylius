@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
+use Sylius\Bundle\ApiBundle\Exception\UnprocessableCartException;
+use Sylius\Bundle\ApiBundle\Exception\ProductVariantUnprocessableException;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -46,14 +48,14 @@ final readonly class AddItemToCartHandler
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $addItemToCart->productVariantCode]);
 
         if ($productVariant === null) {
-            throw new \InvalidArgumentException('Product variant with given code has not been found.');
+            throw new ProductVariantUnprocessableException();
         }
 
         /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValue($addItemToCart->orderTokenValue);
 
         if ($cart === null) {
-            throw new \InvalidArgumentException('Cart with given token has not been found.');
+            throw new UnprocessableCartException();
         }
 
         /** @var OrderItemInterface $cartItem */
