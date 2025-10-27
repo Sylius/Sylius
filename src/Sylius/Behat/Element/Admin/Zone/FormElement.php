@@ -77,7 +77,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->getElement('priority')->setValue($priority);
     }
 
-
     public function removeMember(string $member): void
     {
         $this->getElement('zone_member_delete', ['%name%' => $member])->click();
