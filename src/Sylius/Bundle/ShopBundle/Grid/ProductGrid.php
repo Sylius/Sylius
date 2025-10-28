@@ -67,9 +67,9 @@ final class ProductGrid extends AbstractGrid
             )
             ->addFilter(
                 Filter::create('search', 'shop_string')
-                        ->setLabel(false)
-                        ->addOption('fields', ['translation.name'])
-                        ->addFormOption('type', 'contains'),
+                    ->setLabel(false)
+                    ->addOption('fields', ['translation.name'])
+                    ->addFormOption('type', 'contains'),
             );
     }
 }

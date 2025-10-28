@@ -15,13 +15,11 @@
     <services>
         <service id="sylius.shop.grid.account.order" class="Sylius\Bundle\ShopBundle\Grid\Account\OrderGrid">
             <argument>%sylius.model.order.class%</argument>
-
             <tag name="sylius.grid" />
         </service>
 
         <service id="sylius.shop.grid.product" class="Sylius\Bundle\ShopBundle\Grid\ProductGrid">
             <argument>%sylius.model.product.class%</argument>
-
             <tag name="sylius.grid" />
         </service>
     </services>
