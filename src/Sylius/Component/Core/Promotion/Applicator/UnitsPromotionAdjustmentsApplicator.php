@@ -55,11 +55,17 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         ChannelInterface $channel,
     ): void {
         $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
+        sort($splitPromotionAmount, \SORT_NUMERIC);
+
+        $orderUnits = $item->getUnits()->toArray();
+        usort($orderUnits, function (OrderItemUnitInterface $a, OrderItemUnitInterface $b): int {
+            return $b->getAdjustmentsTotal() <=> $a->getAdjustmentsTotal();
+        });
 
         $variantMinimumPrice = $item->getVariant()->getChannelPricingForChannel($channel)->getMinimumPrice();
 
         $i = 0;
-        foreach ($item->getUnits() as $unit) {
+        foreach ($orderUnits as $unit) {
             $promotionAmount = $splitPromotionAmount[$i++];
             if (0 === $promotionAmount) {
                 continue;

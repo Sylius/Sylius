@@ -1,3 +1,20 @@
+# UPGRADE FROM `2.1.5` TO `2.1.6`
+
+### API Platform
+
+1. API Platform 4.2: the title and description fields are no longer present (use hydra:title / hydra:description and violations instead).
+   PHPUnit and Behat tests have been updated to account for these changes.
+
+# UPGRADE FROM `2.1.2` TO `2.1.3`
+
+### Deprecations
+
+1. Not passing the `Symfony\Component\Routing\Matcher\UrlMatcherInterface` instance as the last argument to the `Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher` constructor is deprecated and will be required in Sylius 3.0.
+
+### Service configuration changes
+
+1. The priority of the `sylius_shop.context.locale.storage_based` service's tag `sylius.context.locale` has been changed from `-64` to `64` to ensure proper execution order in the locale context chain.
+
 # UPGRADE FROM `2.0` TO `2.1`
 
 ### General

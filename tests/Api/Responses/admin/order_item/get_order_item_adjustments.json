@@ -20,11 +20,5 @@
             "locked": false
         }
     ],
-    "hydra:totalItems": 2,
-    "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/order-items\/@integer@\/adjustments{?}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": []
-    }
+    "hydra:totalItems": 2
 }

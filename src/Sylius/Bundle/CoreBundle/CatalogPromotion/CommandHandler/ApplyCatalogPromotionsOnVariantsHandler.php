@@ -17,12 +17,14 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplica
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ApplyCatalogPromotionsOnVariantsHandler
 {
+    /** @param EligibleCatalogPromotionsProviderInterface<CatalogPromotionInterface> $catalogPromotionsProvider */
     public function __construct(
         private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         private CatalogPromotionApplicatorInterface $catalogPromotionApplicator,

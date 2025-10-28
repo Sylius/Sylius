@@ -1,0 +1,30 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxon-tree\/ACCESSORIES\/path",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 2,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/CATEGORY",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "CATEGORY",
+            "level": 0,
+            "name": "Categories",
+            "slug": "categories"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "ACCESSORIES",
+            "level": 1,
+            "name": "Accessories",
+            "slug": "categories\/accessories"
+        }
+    ],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/taxon-tree\/ACCESSORIES\/path?includeRoot=true",
+        "@type": "hydra:PartialCollectionView"
+    }
+}

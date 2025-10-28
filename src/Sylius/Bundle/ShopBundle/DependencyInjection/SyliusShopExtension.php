@@ -60,6 +60,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         $this->prependSyliusThemeBundle($container);
     }
 
+    /** @param array<string, mixed> $config */
     private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container): void
     {
         if (!$config['enabled']) {
@@ -90,6 +91,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         $container->setDefinition('sylius.router.checkout_state', $checkoutStateUrlGeneratorDefinition);
     }
 
+    /** @param array<string, mixed> $config */
     private function registerCheckoutRedirectListener(array $config): Definition
     {
         $checkoutRedirectListener = new Definition(CheckoutRedirectListener::class, [
@@ -125,6 +127,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius_shop.theme.context.channel_based']);
     }
 
+    /** @param array<string, mixed> $config */
     private function configureOrderPay(array $config, ContainerBuilder $container): void
     {
         $container->setParameter('sylius_shop.order_pay.payment_request_pay_route', $config['payment_request_pay_route']);

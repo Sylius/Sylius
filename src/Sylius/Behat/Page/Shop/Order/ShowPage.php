@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Order;
 
 use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\DriverHelper;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SyliusPage implements ShowPageInterface
 {
     public function hasPayAction(): bool
     {

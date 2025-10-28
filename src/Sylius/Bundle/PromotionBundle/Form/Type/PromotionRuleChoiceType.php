@@ -19,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PromotionRuleChoiceType extends AbstractType
 {
+    /** @param array<mixed> $rules */
     public function __construct(private array $rules)
     {
     }

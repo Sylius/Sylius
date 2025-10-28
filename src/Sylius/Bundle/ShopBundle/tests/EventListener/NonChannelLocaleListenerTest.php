@@ -177,9 +177,7 @@ final class NonChannelLocaleListenerTest extends TestCase
         $event
             ->expects($this->once())
             ->method('setResponse')
-            ->with($this->callback(function ($response) {
-                return $response instanceof RedirectResponse && $response->getTargetUrl() === '/ga/';
-            }))
+            ->with($this->callback(fn ($response) => $response instanceof RedirectResponse && $response->getTargetUrl() === '/ga/'))
         ;
 
         $this->nonChannelLocaleListener->restrictRequestLocale($event);

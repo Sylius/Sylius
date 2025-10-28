@@ -1,5 +1,82 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.13 (2025-09-09)
+
+#### Details
+
+- [#18293](https://github.com/Sylius/Sylius/pull/18293) Revert "[Fixtures] Make factory example constructor arguments protected" ([@GSadee](https://github.com/GSadee))
+- [#18290](https://github.com/Sylius/Sylius/pull/18290) [CS][DX] Refactor
+- [#18296](https://github.com/Sylius/Sylius/pull/18296) [Admin][Product] Fix not blank product code constraint message ([@SVillette](https://github.com/SVillette))
+- [#18287](https://github.com/Sylius/Sylius/pull/18287) [CS][DX] Refactor
+- [#18302](https://github.com/Sylius/Sylius/pull/18302) [Composer][1.14] More specific confflict with serializer ([@Jibbarth](https://github.com/Jibbarth))
+- [#18309](https://github.com/Sylius/Sylius/pull/18309) Add conflict to symfony-ux ^2.29 ([@TheMilek](https://github.com/TheMilek))
+- [#18182](https://github.com/Sylius/Sylius/pull/18182) [2.0] Dutch translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18303](https://github.com/Sylius/Sylius/pull/18303) [Promotion] Corrects order of amounts to apply correct promotion amount ([@k-kubacki](https://github.com/k-kubacki))
+- [#18317](https://github.com/Sylius/Sylius/pull/18317) Adding the isEnabled filter to the countries list in checkout while addressing ([@TheMilek](https://github.com/TheMilek))
+- [#18318](https://github.com/Sylius/Sylius/pull/18318) Select product attribute render error fix ([@k-kubacki](https://github.com/k-kubacki))
+- [#18329](https://github.com/Sylius/Sylius/pull/18329) [CS][DX] Refactor
+- [#18320](https://github.com/Sylius/Sylius/pull/18320) [CS][DX] Refactor
+- [#18321](https://github.com/Sylius/Sylius/pull/18321) Use form-select css class for address_book dropdownlist ([@hteumeuleu](https://github.com/hteumeuleu))
+- [#18322](https://github.com/Sylius/Sylius/pull/18322) Fix asset path for SyliusUiBundle placeholder images ([@k-kubacki](https://github.com/k-kubacki))
+- [#18339](https://github.com/Sylius/Sylius/pull/18339) Fixed placing order with not possible zone ([@pbalcerzak](https://github.com/pbalcerzak))
+- [#18343](https://github.com/Sylius/Sylius/pull/18343) [Fix][Admin] Fix order summary to show product name and options from time of purchase ([@tomkalon](https://github.com/tomkalon))
+- [#18345](https://github.com/Sylius/Sylius/pull/18345) Fix argument of ZoneEligibilityChecker to use the new service id ([@GSadee](https://github.com/GSadee))
+- [#18350](https://github.com/Sylius/Sylius/pull/18350) [CS][DX] Refactor
+- [#18351](https://github.com/Sylius/Sylius/pull/18351) [CS][DX] Refactor
+- [#18331](https://github.com/Sylius/Sylius/pull/18331) [CONFLICT][UX] Fix composer conflict for symfony/ux-live-component and mark flaky test as failing ([@tomkalon](https://github.com/tomkalon))
+- [#17705](https://github.com/Sylius/Sylius/pull/17705) Fix deleting a value from an existing select product attribute while it's in use ([@coldic3](https://github.com/coldic3))
+
+## v2.0.12 (2025-07-31)
+
+#### Details
+
+- [#18237](https://github.com/Sylius/Sylius/pull/18237) [PaymentRequest] Keep the already set payload when available ([@Prometee](https://github.com/Prometee))
+- [#18238](https://github.com/Sylius/Sylius/pull/18238) [Shop] Allow contextual product cards ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#18266](https://github.com/Sylius/Sylius/pull/18266) [Fixtures] Make factory example constructor arguments protected
+- [#18274](https://github.com/Sylius/Sylius/pull/18274) [Composer] Temporarily add conflict with symfony/ux ([@GSadee](https://github.com/GSadee))
+- [#18270](https://github.com/Sylius/Sylius/pull/18270) Send Password Request Mail only on enabled Users ([@k-kubacki](https://github.com/k-kubacki))
+- [#18279](https://github.com/Sylius/Sylius/pull/18279) [Composer] Limit conflict with symfony/ux ([@GSadee](https://github.com/GSadee))
+
+## v2.0.11 (2025-07-10)
+
+#### Details
+
+- [#18199](https://github.com/Sylius/Sylius/pull/18199) [Core] Change where to andWhere method in ProductRepository ([@GSadee](https://github.com/GSadee))
+- [#18202](https://github.com/Sylius/Sylius/pull/18202) [Admin] Fix error message during creating admin user by CLI command ([@GSadee](https://github.com/GSadee))
+- [#18205](https://github.com/Sylius/Sylius/pull/18205) Adjust CONFLICTS files after upmerge from 1.14 ([@GSadee](https://github.com/GSadee))
+- [#18206](https://github.com/Sylius/Sylius/pull/18206) docs: fix broken link in resource-layer.md ([@dunglas](https://github.com/dunglas))
+- [#18185](https://github.com/Sylius/Sylius/pull/18185) Fix typo in documentation ([@guillaume-sainthillier](https://github.com/guillaume-sainthillier))
+- [#18209](https://github.com/Sylius/Sylius/pull/18209) Update AWS S3 documentation for image storage configuration ([@EvKoh](https://github.com/EvKoh))
+- [#18216](https://github.com/Sylius/Sylius/pull/18216) [ShopBundle] Fix missing void return ([@Prometee](https://github.com/Prometee))
+- [#18222](https://github.com/Sylius/Sylius/pull/18222) [Admin] Fix cancel button fallback url ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#18219](https://github.com/Sylius/Sylius/pull/18219) [Admin] Fix product list actions positions while multiple ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#18220](https://github.com/Sylius/Sylius/pull/18220) [Shop] Variant listening visual improvement ([@PiotrTulacz](https://github.com/PiotrTulacz))
+
+## v2.0.10 (2025-06-17)
+
+#### Details
+
+- [#18128](https://github.com/Sylius/Sylius/pull/18128) [2.0] Swedish translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18129](https://github.com/Sylius/Sylius/pull/18129) [2.0] Portuguese translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18130](https://github.com/Sylius/Sylius/pull/18130) [2.0] Japanese translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18132](https://github.com/Sylius/Sylius/pull/18132) [2.0] Hindi translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18131](https://github.com/Sylius/Sylius/pull/18131) [2.0] Korean translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18156](https://github.com/Sylius/Sylius/pull/18156) Add initial AGENTS.md ([@mpysiak](https://github.com/mpysiak))
+- [#18158](https://github.com/Sylius/Sylius/pull/18158) Make reference to global agents file for GitHub Copilot ([@Prometee](https://github.com/Prometee))
+- [#18160](https://github.com/Sylius/Sylius/pull/18160) [Admin] Fix back button ([@GSadee](https://github.com/GSadee))
+- [#18163](https://github.com/Sylius/Sylius/pull/18163) Update AGENTS.md ([@mpysiak](https://github.com/mpysiak))
+- [#18162](https://github.com/Sylius/Sylius/pull/18162) Agents.md 2.0 css part ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#18151](https://github.com/Sylius/Sylius/pull/18151) [2.0] Austrian German translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18150](https://github.com/Sylius/Sylius/pull/18150) [2.0] Swiss German translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18143](https://github.com/Sylius/Sylius/pull/18143) [2.0] Czech translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18146](https://github.com/Sylius/Sylius/pull/18146) [2.0] Slovakian translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18145](https://github.com/Sylius/Sylius/pull/18145) [2.0] Romanian translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18144](https://github.com/Sylius/Sylius/pull/18144) [2.0] Italian translations ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18164](https://github.com/Sylius/Sylius/pull/18164) [CS][DX] Refactor
+- [#18169](https://github.com/Sylius/Sylius/pull/18169) [Behat] Fix product setup invalid exception catch ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#18155](https://github.com/Sylius/Sylius/pull/18155) [ProductBundle] Fix ProductAttributeValue mapping to use ProductAttributeInterface ([@michalsemelka](https://github.com/michalsemelka))
+- [#18135](https://github.com/Sylius/Sylius/pull/18135) [Shop][Behat] Use test attribute on the order show page ([@Wojdylak](https://github.com/Wojdylak))
+
 ## v2.0.9 (2025-06-04)
 
 #### Details

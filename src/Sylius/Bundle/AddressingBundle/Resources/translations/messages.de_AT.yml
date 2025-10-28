@@ -4,39 +4,38 @@
 sylius:
     form:
         address:
-            city: Stadt
-            company: Firma
-            country: Land
-            first_name: Vorname
-            last_name: Nachname
-            phone_number: Telefonnummer
-            postcode: Postleitzahl
-            street: Straße und Hausnummer
-            province: Bundesland
-            zone: Versandzone
+            city: 'Stadt'
+            company: 'Firma'
+            country: 'Land'
+            first_name: 'Vorname'
+            last_name: 'Nachname'
+            phone_number: 'Telefonnummer'
+            postcode: 'Postleitzahl'
+            street: 'Straßenadresse'
+            province: 'Provinz'
+            zone: 'Zone'
         country:
-            add_province: Bundesland hinzufügen
-            name: Name
-            provinces: Bundesländer
-            select: Land auswählen
-            enabled: Aktiviert
+            add_province: 'Provinz hinzufügen'
+            name: 'Name'
+            provinces: 'Provinzen'
+            select: 'Auswählen'
+            enabled: 'Aktiviert'
         province:
-            name: Name
-            abbreviation: Abkürzung
-            select: Bundesland auswählen
+            name: 'Name'
+            abbreviation: 'Abkürzung'
+            select: 'Auswählen'
         zone:
-            add_member: Mitglied hinzufügen
-            members: Mitglieder
-            name: Zonenname
-            type: Zonentyp
+            add_member: 'Mitglied hinzufügen'
+            members: 'Mitglieder'
+            name: 'Name'
+            type: 'Typ'
             types:
-                country: Land
-                province: Bundesland
-                zone: Zone
-            scope: Geltungsbereich
+                country: 'Land'
+                province: 'Provinz'
+                zone: 'Zone'
+            scope: 'Bereich'
             scopes:
-                all: Alle
-            select: Zone auswählen
-            select_scope: Geltungsbereich auswählen
+                all: 'Alle'
+            select: 'Auswählen'
         zone_member:
-            select: Mitglied auswählen
+            select: 'Auswählen'

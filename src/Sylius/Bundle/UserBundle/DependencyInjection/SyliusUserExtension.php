@@ -48,6 +48,11 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $this->createServices($config['resources'], $container);
     }
 
+    /**
+     * @param array<string, array<mixed>> $resources
+     *
+     * @return array<string, array<mixed>>
+     */
     private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('sylius.user.users', $resources);
@@ -64,6 +69,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         return $resolvedResources;
     }
 
+    /** @param array<string, mixed> $resources */
     private function createServices(array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $userType => $config) {
@@ -77,6 +83,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         }
     }
 
+    /** @param array<string, mixed> $resources */
     private function createParameters(array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $userType => $config) {
@@ -84,6 +91,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         }
     }
 
+    /** @param array<string, mixed> $config */
     private function createTokenGenerators(string $userType, array $config, ContainerBuilder $container): void
     {
         $this->createUniquenessCheckers($userType, $config, $container);
@@ -116,6 +124,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         ;
     }
 
+    /** @param array<mixed> $arguments */
     private function createTokenGeneratorDefinition(string $generatorClass, array $arguments): Definition
     {
         $generatorDefinition = new Definition($generatorClass);
@@ -124,6 +133,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         return $generatorDefinition;
     }
 
+    /** @param array<string, mixed> $config */
     private function createUniquenessCheckers(string $userType, array $config, ContainerBuilder $container): void
     {
         $repositoryServiceId = sprintf('sylius.repository.%s_user', $userType);
@@ -162,6 +172,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition($reloaderListenerServiceId, $userReloaderListenerDefinition);
     }
 
+    /** @param array<string, mixed> $config */
     private function createLastLoginListeners(string $userType, string $userClass, array $config, ContainerBuilder $container): void
     {
         $managerServiceId = sprintf('sylius.manager.%s_user', $userType);
@@ -218,6 +229,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition($providerEmailOrNameBasedServiceId, $emailOrNameBasedProviderDefinition);
     }
 
+    /** @param array<string, mixed> $config */
     private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container): void
     {
         $container->setParameter(sprintf('sylius.%s_user.token.password_reset.ttl', $userType), $config['resetting']['token']['ttl']);

@@ -16,11 +16,11 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SyliusPage implements ShowPageInterface
 {
     use NavigationTrait;
 

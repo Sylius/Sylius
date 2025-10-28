@@ -50,11 +50,5 @@
     "hydra:view": {
         "@id": "\/api\/v2\/admin\/orders\/token\/adjustments?type=order_promotion",
         "@type": "hydra:PartialCollectionView"
-    },
-    "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/orders\/token\/adjustments{?}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": []
     }
 }

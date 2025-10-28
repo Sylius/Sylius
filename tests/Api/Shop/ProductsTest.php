@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +56,6 @@ final class ProductsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
-
 
     #[DataProvider('getGermanLocales')]
     #[Test]

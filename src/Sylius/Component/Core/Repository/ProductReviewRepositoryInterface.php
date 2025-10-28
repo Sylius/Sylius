@@ -29,7 +29,7 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
     /**
      * @return array|ReviewInterface[]
      */
-    public function findLatestByProductId($productId, int $count): array;
+    public function findLatestByProductId(mixed $productId, int $count): array;
 
     /**
      * @return array|ReviewInterface[]
@@ -40,7 +40,7 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
 
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
-    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface;
+    public function findOneByIdAndProductCode(mixed $id, string $productCode): ?ReviewInterface;
 
     public function countNew(): int;
 }

@@ -4,8 +4,14 @@
 sylius:
     channel:
         code:
-            not_blank: Bitte gib den Code des Kanals ein.
-            regex: Kanalkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: Der Code des Kanals muss eindeutig sein.
+            max_length: 'Der Code darf nicht länger als {{ limit }} Zeichen sein.'
+            not_blank: 'Bitte geben Sie den Kanalcode ein.'
+            regex: 'Der Kanalcode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Kanalcode muss eindeutig sein.'
         name:
-            not_blank: Bitte gib den Namen des Kanals ein.
+            not_blank: 'Bitte geben Sie den Kanalnamen ein.'
+            max_length: 'Der Kanalname darf nicht länger als {{ limit }} Zeichen sein.'
+        color:
+            max_length: 'Die Farbe darf nicht länger als {{ limit }} Zeichen sein.'
+        hostname:
+            max_length: 'Der Hostname darf nicht länger als {{ limit }} Zeichen sein.'

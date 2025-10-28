@@ -4,28 +4,31 @@
 sylius:
     customer:
         first_name:
-            max: Prenumele nu poate depăși {{ limit }} caractere.
-            min: Prenumele trebuie să conţină cel puțin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați prenumele.
+            max: 'Prenumele nu trebuie să depășească {{ limit }} caractere.'
+            min: 'Prenumele trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți prenumele.'
         last_name:
-            max: Numele de familie nu poate depăși {{ limit }} de caractere.
-            min: Numele de familie trebuie să conţină cel puţin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați numele.
+            max: 'Numele de familie nu trebuie să depășească {{ limit }} caractere.'
+            min: 'Numele de familie trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți numele de familie.'
         gender:
-            not_blank: Alege-ți genul.
+            not_blank: 'Vă rugăm să alegeți genul.'
         email:
-            already_used: Această adresă e deja folosită, autentifică-te sau resetează parola.
-            max: Adresa de email nu trebuie să aibă mai mult de {{ limit }} caractere.
-            not_blank: Vă rugăm să completați adresa de e-mail.
-            invalid: Această adresă de e-mail este invalidă.
-            unique: Acest e-mail este deja folosit.
-            registered: Acest e-mail este deja înregistrat, vă rugăm să vă autentificați sau să vă resetați parola.
+            already_used: 'Acest email este deja folosit, vă rugăm să vă conectați sau să utilizați funcția de recuperare a parolei.'
+            max: 'Email-ul nu trebuie să depășească {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți email-ul.'
+            invalid: 'Acest email este invalid.'
+            unique: 'Acest email este deja folosit.'
+            registered: 'Acest email este deja înregistrat, vă rugăm să vă conectați sau să utilizați funcția de recuperare a parolei.'
+        phone_number:
+            max: 'Numărul de telefon nu trebuie să depășească {{ limit }} caractere.'
     customer_group:
         code:
-            regex: Codul grupului de clienți poate conține doar litere, numere, - și _.
-            unique: Codul grupului de clienți trebuie să fie unic.
-            not_blank: Introdu codul grupului de clienți.
+            max_length: 'Codul grupului de clienți nu trebuie să depășească {{ limit }} caractere.'
+            regex: 'Codul grupului de clienți poate conține doar litere, cifre, cratime și underscore-uri.'
+            unique: 'Codul grupului de clienți trebuie să fie unic.'
+            not_blank: 'Vă rugăm să introduceți codul grupului de clienți.'
         name:
-            max: Numele grupului de clienți nu poate fi mai lung de {{ limit }} caractere.
-            min: Numele grupului de clienți poate avea maxim {{ limit }} caractere.
-            not_blank: Introdu numele grupului de clienți.
+            max: 'Numele grupului de clienți nu trebuie să depășească {{ limit }} caractere.'
+            min: 'Numele grupului de clienți trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți numele grupului de clienți.'

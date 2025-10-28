@@ -23,6 +23,7 @@
     <body data-route="{{ app.request.get('_route') }}">
         {% block body %}
             <div class="{% apply escape %}{% hook '#body_classes' with { _prefixes: prefixes } %}{% endapply %}">
+                <h1 class="visually-hidden text-black" aria-hidden="true">{{ sylius.channel.name }}</h1>
                 {% block header %}
                     {% hook 'header' with { _prefixes: prefixes } %}
                 {% endblock %}

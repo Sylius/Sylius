@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\Promotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
@@ -22,6 +21,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -959,7 +959,7 @@ final class ManagingPromotionsContext implements Context
         Assert::false($this->updatePage->hasResourceValues([$field => 1]));
     }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
+    protected function resolveCurrentPage(): SyliusPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }

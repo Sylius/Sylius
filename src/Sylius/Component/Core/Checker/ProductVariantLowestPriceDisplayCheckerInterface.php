@@ -17,5 +17,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface ProductVariantLowestPriceDisplayCheckerInterface
 {
+    /** @param array<string, mixed> $context */
     public function isLowestPriceDisplayable(ProductVariantInterface $productVariant, array $context): bool;
 }

@@ -41,6 +41,7 @@ final class RedirectHandler implements RedirectHandlerInterface
         );
     }
 
+    /** @param array<string, mixed> $parameters */
     public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response
     {
         return $this->decoratedRedirectHandler->redirectToRoute($configuration, $route, $parameters);

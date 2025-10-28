@@ -39,6 +39,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
+    /** @return T[] */
     public function findChildrenByChannelMenuTaxon(?TaxonInterface $menuTaxon = null, ?string $locale = null): array
     {
         $hydrationQuery = $this->createTranslationBasedQueryBuilder($locale)
@@ -110,6 +111,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
+    /** @return T[] */
     public function findHydratedRootNodes(): array
     {
         $this->createQueryBuilder('o')
@@ -141,7 +143,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ;
         }
 
-        /** @var TaxonInterface[] $results */
+        /** @var T[] $results */
         $results = $queryBuilder
             ->andWhere($queryBuilder->expr()->in('o', $subqueryBuilder->getDQL()))
             ->setParameter('name', '%' . $phrase . '%')

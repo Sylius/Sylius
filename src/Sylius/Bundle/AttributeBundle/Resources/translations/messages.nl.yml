@@ -4,36 +4,38 @@
 sylius:
     form:
         attribute:
-            add: Toevoegen
-            add_attributes: Attributen toevoegen
-            choices: Keuzes
-            code: Code
-            name: Naam
-            translations: Vertalingen
-            type: Type
+            add: 'Toevoegen'
+            add_attributes: 'Voeg attributen toe'
+            choices: 'Keuzes'
+            code: 'Code'
+            name: 'Naam'
+            translatable: 'Vertaalbaar'
+            translations: 'Vertalingen'
+            type: 'Type'
         attribute_type:
-            checkbox: Selectievak
-            configuration: Configuratie
-            date: Datum
-            datetime: Datum / tijd
-            integer: Geheel getal
-            percent: Percentage
-            select: Selecteer
-            text: Tekst
-            textarea: Tekstgebied
-            title: Attribuuttypes
-            validation: Validatie
+            checkbox: 'Checkbox'
+            configuration: 'Configuratie'
+            date: 'Datum'
+            datetime: 'Datum en tijd'
+            float: 'Komma'
+            integer: 'Geheel getal'
+            percent: 'Percentage'
+            select: 'Selecteer'
+            text: 'Tekst'
+            textarea: 'Textarea'
+            title: 'Attributetypes'
+            validation: 'Validatie'
         attribute_type_configuration:
             datetime:
-                format: Formaat
+                format: 'Formaat'
             date:
-                format: Formaat
+                format: 'Formaat'
             select:
-                multiple: Meerdere
-                values: Waarden
-                choose: Kies een optie
-                min: Min aantal
-                max: Max aantal
+                multiple: 'Meerdere'
+                values: 'Waarden'
+                choose: 'Kies een optie'
+                min: 'Min. invoeren'
+                max: 'Max. invoeren'
             text:
-                min: Minimale lengte
-                max: Maximale lengte
+                min: 'Min. lengte'
+                max: 'Max. lengte'

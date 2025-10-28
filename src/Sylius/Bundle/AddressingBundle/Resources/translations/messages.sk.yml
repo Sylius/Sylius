@@ -4,39 +4,38 @@
 sylius:
     form:
         address:
-            city: Mesto
-            company: Spoločnosť
-            country: Krajina
-            first_name: Meno
-            last_name: Priezvisko
-            phone_number: Telefónne číslo
-            postcode: PSČ
-            street: Ulica
-            province: Provincia
-            zone: Zóna
+            city: 'Mesto'
+            company: 'Spoločnosť'
+            country: 'Krajina'
+            first_name: 'Krstné meno'
+            last_name: 'Priezvisko'
+            phone_number: 'Telefónne číslo'
+            postcode: 'PSČ'
+            street: 'Ulica'
+            province: 'Kraj'
+            zone: 'Zóna'
         country:
-            add_province: Pridať provinciu
-            name: Názov
-            provinces: Provincie
-            select: Vyberte
-            enabled: Zapnuté
+            add_province: 'Pridať kraj'
+            name: 'Názov'
+            provinces: 'Kraje'
+            select: 'Vybrať'
+            enabled: 'Povolené'
         province:
-            name: Názov
-            abbreviation: Skratka
-            select: Vyberte
+            name: 'Názov'
+            abbreviation: 'Skratka'
+            select: 'Vybrať'
         zone:
-            add_member: Pridať člena
-            members: Používatelia
-            name: Názov
-            type: Typ
+            add_member: 'Pridať člena'
+            members: 'Členovia'
+            name: 'Názov'
+            type: 'Typ'
             types:
-                country: Krajina
-                province: Provincia
-                zone: Zóna
-            scope: Rozsah
+                country: 'Krajina'
+                province: 'Kraj'
+                zone: 'Zóna'
+            scope: 'Rozsah'
             scopes:
-                all: Všetky
-            select: Vyberte
-            select_scope: Vyberte rozsah
+                all: 'Všetko'
+            select: 'Vybrať'
         zone_member:
-            select: Vyberte
+            select: 'Vybrať'

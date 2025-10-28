@@ -2,14 +2,130 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: '다음을 통해 발송되었습니다'
+            subject: '배송 확인'
+            thank_you_for_transaction: '성공적인 거래에 감사드립니다.'
+            you_can_check_its_location_with_the_tracking_code: '%tracking_code% 추적 코드로 위치를 확인할 수 있습니다.'
+            your_order_with_number: '주문 번호'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: '현재 할인 전에 할인된 상품의 최저가를 표시하시겠습니까?'
+                period_for_which_the_lowest_price_is_calculated: '최저가를 계산할 기간'
+            reset_password:
+                password:
+                    label: '새 비밀번호'
+                    confirmation: '새 비밀번호 확인'
     menu:
         admin:
             main:
+                catalog:
+                    association_types: '연관 타입'
+                    attributes: '속성'
+                    header: '카탈로그'
+                    inventory: '재고'
+                    options: '옵션'
+                    products: '상품'
+                    taxons: '택슨'
+                configuration:
+                    admin_users: '관리자'
+                    channels: '채널'
+                    countries: '국가'
+                    currencies: '통화'
+                    exchange_rates: '환율'
+                    header: '설정'
+                    locales: '로케일'
+                    payment_methods: '결제 방법'
+                    shipping_categories: '배송 카테고리'
+                    shipping_methods: '배송 방법'
+                    tax_categories: '세금 카테고리'
+                    tax_rates: '세율'
+                    zones: '존'
+                marketing:
+                    cart_promotions: '장바구니 프로모션'
+                    catalog_promotions: '카탈로그 프로모션'
+                    header: '마케팅'
+                    product_reviews: '상품 리뷰'
+                    promotions: '프로모션'
                 customers:
-                    groups: 그룹
-            official_support:
-                header: 공식 지원
-                browse_plugins: 플러그인 탐색
-                sylius_plus: Sylius Plus
-                professional_services: 전문 서비스
-                find_a_partner: 파트너 찾기
+                    customers: '고객'
+                    groups: '그룹'
+                    header: '고객'
+                sales:
+                    header: '판매'
+                    orders: '주문'
+                official_support:
+                    header: '공식 지원'
+                    browse_plugins: '플러그인 탐색'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: '전문 서비스'
+                    find_a_partner: '파트너 찾기'
+                    sylius_certification: 'Sylius 인증'
+    ui:
+        account: '계정'
+        admin_user: '관리자'
+        add_new_entry: '새 항목 추가'
+        back_to_dashboard: '대시보드로 돌아가기'
+        catalog_promotion:
+            dates_details: '이 작업은 시간이 소요될 수 있습니다! 지정된 날짜부터 2~10분 정도의 지연을 고려하세요. 지연 시간은 카탈로그 크기에 따라 달라집니다.'
+        channel:
+            account_verification_required_details: '이 옵션을 비활성화하면 이메일 인증 없이 계정을 생성하고 접근할 수 있어, 게스트 주문 데이터에 접근할 가능성이 있습니다.'
+        channel_pricing_history: '채널 가격 기록'
+        channel_pricings: '채널 가격'
+        create_new:
+            customer_group: '새 고객 그룹 생성'
+        delete_avatar: '아바타 삭제'
+        full_screen: '전체 화면'
+        global: '글로벌'
+        ip_address: 'IP 주소'
+        language: '언어'
+        lowest_price_before_discount: '할인 전 최저가'
+        minimum_price_details: '최저가 – 이 가격은 현재 가격이 카탈로그 또는 장바구니 프로모션으로 할인될 수 없는 가격 하한선입니다. 판매 수익성을 보호하는 데 사용하세요.'
+        more: '더보기'
+        no_main_taxon: '메인 택슨 없음'
+        no_depth: '깊이 없음'
+        no_height: '높이 없음'
+        no_results: '검색 결과가 없습니다'
+        no_results_adjust_your_search: '검색 조건을 조정하고 다시 시도하세요.'
+        no_weight: '무게 없음'
+        no_width: '폭 없음'
+        omnibus: '옴니버스'
+        order:
+            date: '주문 날짜'
+        original_price_details: '원래 가격 – 상품 바리아ント의 가격입니다. 카탈로그에서는 취소선이 표시되며, 현재 가격 계산의 기준이 됩니다. 이 값이 정의되지 않은 경우, 카탈로그 프로모션 로직이 가격 값을 원래 가격으로 복사합니다.'
+        original_product_price_details: '원래 가격 – 상품의 가격입니다. 카탈로그에서는 취소선이 표시되며, 현재 가격 계산의 기준이 됩니다. 이 값이 정의되지 않은 경우, 카탈로그 프로모션 로직이 가격 값을 원래 가격으로 복사합니다.'
+        overdue: '기한 초과'
+        page_not_found: '페이지를 찾을 수 없습니다'
+        pagination:
+            number_of_results: '%from%–%to% / 총 %total%'
+        partially_refunded: '부분 환불됨'
+        pending_actions: '보류 중인 작업'
+        price_details: '가격 – 카탈로그에 표시되는 상품 바리아ント의 현재 가격입니다. 카탈로그 프로모션 등으로 명시적으로 수정할 수 있습니다.'
+        product_price_details: '가격 – 카탈로그에 표시되는 상품의 현재 가격입니다. 카탈로그 프로모션 등으로 명시적으로 수정할 수 있습니다.'
+        price_history: '가격 기록'
+        product:
+            product_not_active_in_channel: '이 채널에서 아직 상품이 활성화되지 않았습니다.'
+        product_variant: '상품 바리아ント'
+        sales_summary: '매출 요약'
+        search_menu: '메뉴 검색'
+        shipment_for_order: '주문 배송'
+        show_history_for_channel_pricing: '채널 가격 기록 보기'
+        start_typing_to_search: '검색하려면 입력을 시작하세요'
+        statistics:
+            day: '일'
+            lifetime: '전체 기간'
+            month: '월'
+            week: '주'
+            2weeks: '2주'
+            year: '연도'
+        taxon: '택슨'
+        to_approve: '승인 대기'
+        to_process: '처리 대기'
+        to_ship: '배송 대기'
+        view_in_store: '스토어에서 보기'
+        work_in_progress: '작업 진행 중'
+        empty_date: '없음'
+        notifications:
+            new_version_of_sylius_available: 'Sylius의 새 버전이 출시되었습니다. 기술 담당자에게 업그레이드를 요청하세요.'

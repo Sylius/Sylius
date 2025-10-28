@@ -15,9 +15,9 @@ namespace Sylius\Behat\Element\Admin\Crud;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class FormElement extends Element implements FormElementInterface
+class FormElement extends SyliusElement implements FormElementInterface
 {
     public function fillElement(string $value, string $element, array $parameters = []): void
     {

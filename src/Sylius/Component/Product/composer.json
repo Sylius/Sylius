@@ -36,7 +36,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.5"
+        "phpunit/phpunit": "^11.5"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"

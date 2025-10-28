@@ -19,10 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CalculatorChoiceType extends AbstractType
 {
-    /**
-     * @param array $calculators
-     */
-    public function __construct(private $calculators)
+    /** @param array<string, string> $calculators */
+    public function __construct(private readonly array $calculators)
     {
     }
 

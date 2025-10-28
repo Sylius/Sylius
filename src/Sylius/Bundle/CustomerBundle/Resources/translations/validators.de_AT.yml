@@ -4,28 +4,31 @@
 sylius:
     customer:
         first_name:
-            max: Der Vorname darf nicht länger als {{ limit }} Zeichen sein.
-            min: Der Vorname muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Bitte geben Sie Ihren Vornamen ein.
+            max: 'Der Vorname darf höchstens {{ limit }} Zeichen lang sein.'
+            min: 'Der Vorname muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie Ihren Vornamen ein.'
         last_name:
-            max: Der Nachname darf nicht länger als {{ limit }} Zeichen sein.
-            min: Der Nachname muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Bitte geben Sie Ihren Nachnamen ein.
+            max: 'Der Nachname darf höchstens {{ limit }} Zeichen lang sein.'
+            min: 'Der Nachname muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie Ihren Nachnamen ein.'
         gender:
-            not_blank: Bitte wählen Sie Ihr Geschlecht aus.
+            not_blank: 'Bitte wählen Sie Ihr Geschlecht aus.'
         email:
-            already_used: Diese E‑Mail-Adresse wird bereits verwendet. Bitte melden Sie sich an oder nutzen Sie „Passwort vergessen“.
-            max: Die E‑Mail-Adresse darf nicht länger als {{ limit }} Zeichen sein.
-            not_blank: Bitte geben Sie Ihre E‑Mail-Adresse ein.
-            invalid: Diese E‑Mail-Adresse ist ungültig.
-            unique: Diese E‑Mail-Adresse wird bereits verwendet.
-            registered: Diese E‑Mail-Adresse ist schon registriert. Bitte loggen Sie sich ein oder nutzen Sie „Passwort vergessen“.
+            already_used: 'Diese E-Mail-Adresse wird bereits verwendet, bitte melden Sie sich an oder verwenden Sie das vergessene Passwort.'
+            max: 'Die E-Mail-Adresse darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie Ihre E-Mail-Adresse ein.'
+            invalid: 'Diese E-Mail-Adresse ist ungültig.'
+            unique: 'Diese E-Mail-Adresse wird bereits verwendet.'
+            registered: 'Diese E-Mail-Adresse ist bereits registriert, bitte melden Sie sich an oder verwenden Sie das vergessene Passwort.'
+        phone_number:
+            max: 'Die Telefonnummer darf höchstens {{ limit }} Zeichen lang sein.'
     customer_group:
         code:
-            regex: Das Kürzel der Kundengruppe darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.
-            unique: Der Code der Kundengruppe muss eindeutig sein.
-            not_blank: Bitte geben Sie einen Code für die Kundengruppe ein.
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            regex: 'Der Code der Kundengruppe darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Code der Kundengruppe muss eindeutig sein.'
+            not_blank: 'Bitte geben Sie einen Kundengruppencode ein.'
         name:
-            max: Der Name der Kundengruppe darf nicht länger als {{ limit }} Zeichen sein.
-            min: Der Name der Kundengruppe muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Bitte geben Sie einen Namen für die Kundengruppe ein.
+            max: 'Der Name der Kundengruppe darf höchstens {{ limit }} Zeichen lang sein.'
+            min: 'Der Name der Kundengruppe muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie einen Namen für die Kundengruppe ein.'

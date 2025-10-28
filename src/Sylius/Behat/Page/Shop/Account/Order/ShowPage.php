@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SyliusPage implements ShowPageInterface
 {
     public function __construct(
         Session $session,
@@ -169,7 +169,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'payment_price' => '[data-test-payment-price]',
             'payment_state' => '[data-test-payment-state]',
             'product_name' => '[data-test-order-table] [data-test-product-name="%productName%"]',
-            'product_price' => '[data-test-order-table] td:nth-child(2)',
+            'product_price' => '[data-test-order-table] [data-test-product-unit-price]',
             'shipment_state' => '[data-test-shipment-state]',
             'shipping_address' => '[data-test-shipping-address]',
             'subtotal' => '[data-test-subtotal]',

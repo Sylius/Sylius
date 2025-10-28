@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface ThankYouPageInterface extends SymfonyPageInterface
+interface ThankYouPageInterface extends SyliusPageInterface
 {
     public function goToTheChangePaymentMethodPage(): void;
 

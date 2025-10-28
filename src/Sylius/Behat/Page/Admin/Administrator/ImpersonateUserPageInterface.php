@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Administrator;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface ImpersonateUserPageInterface extends SymfonyPageInterface
+interface ImpersonateUserPageInterface extends SyliusPageInterface
 {
 }

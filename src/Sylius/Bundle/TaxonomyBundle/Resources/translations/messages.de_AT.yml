@@ -4,10 +4,10 @@
 sylius:
     form:
         taxon:
-            description: Beschreibung
-            enabled: Aktiviert
-            name: Name
-            parent: Übergeordnet
-            slug: Produkt SEO-URL
+            description: 'Beschreibung'
+            enabled: 'Aktiviert'
+            name: 'Name'
+            parent: 'Übergeordnet'
+            slug: 'Slug'
         taxonomy:
-            name: Name
+            name: 'Name'

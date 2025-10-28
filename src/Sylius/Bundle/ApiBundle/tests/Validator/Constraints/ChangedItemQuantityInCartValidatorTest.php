@@ -43,13 +43,35 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
 
     private ChangedItemQuantityInCartValidator $changedItemQuantityInCartValidator;
 
+    private ExecutionContextInterface&MockObject $executionContext;
+
+    private MockObject&OrderItemInterface $orderItem;
+
+    private MockObject&ProductVariantInterface $productVariant;
+
+    private MockObject&ProductInterface $product;
+
+    private ChannelInterface&MockObject $channel;
+
+    private MockObject&OrderInterface $cart;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->orderItemRepository = $this->createMock(OrderItemRepositoryInterface::class);
         $this->orderRepository = $this->createMock(OrderRepositoryInterface::class);
         $this->availabilityChecker = $this->createMock(AvailabilityCheckerInterface::class);
-        $this->changedItemQuantityInCartValidator = new ChangedItemQuantityInCartValidator($this->orderItemRepository, $this->orderRepository, $this->availabilityChecker);
+        $this->changedItemQuantityInCartValidator = new ChangedItemQuantityInCartValidator(
+            $this->orderItemRepository,
+            $this->orderRepository,
+            $this->availabilityChecker,
+        );
+        $this->executionContext = $this->createMock(ExecutionContextInterface::class);
+        $this->orderItem = $this->createMock(OrderItemInterface::class);
+        $this->productVariant = $this->createMock(ProductVariantInterface::class);
+        $this->product = $this->createMock(ProductInterface::class);
+        $this->channel = $this->createMock(ChannelInterface::class);
+        $this->cart = $this->createMock(OrderInterface::class);
     }
 
     public function testAConstraintValidator(): void
@@ -60,42 +82,46 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
     public function testThrowsAnExceptionIfValueIsNotAnInstanceOfChangeItemQuantityInCart(): void
     {
         self::expectException(\InvalidArgumentException::class);
-        $this->changedItemQuantityInCartValidator->validate(new CompleteOrder('TOKEN'), new AddingEligibleProductVariantToCart());
+        $this->changedItemQuantityInCartValidator->validate(
+            new CompleteOrder('TOKEN'),
+            new AddingEligibleProductVariantToCart(),
+        );
     }
 
     public function testThrowsAnExceptionIfConstraintIsNotAnInstanceOfChangedItemQuantityInCart(): void
     {
         self::expectException(\InvalidArgumentException::class);
-
         $invalidConstraint = $this->createMock(Constraint::class);
-
         $command = new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2);
-
         $this->changedItemQuantityInCartValidator->validate($command, $invalidConstraint);
     }
 
     public function testThrowsAnExceptionIfOrderItemDoesNotExist(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        $this->changedItemQuantityInCartValidator->initialize($executionContextMock);
-        $this->orderItemRepository->expects(self::once())->method('findOneByIdAndCartTokenValue')->with('11', 'token')->willReturn(null);
+        $this->changedItemQuantityInCartValidator->initialize($this->executionContext);
+        $this->orderItemRepository->expects(self::once())
+            ->method('findOneByIdAndCartTokenValue')
+            ->with('11', 'token')
+            ->willReturn(null);
         self::expectException(OrderItemNotFoundException::class);
-        $this->changedItemQuantityInCartValidator->validate(new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2), new ChangedItemQuantityInCart());
+        $this->changedItemQuantityInCartValidator->validate(
+            new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
+            new ChangedItemQuantityInCart(),
+        );
     }
 
     public function testAddsViolationIfProductVariantDoesNotExist(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var OrderItemInterface|MockObject $orderItemMock */
-        $orderItemMock = $this->createMock(OrderItemInterface::class);
-        $this->changedItemQuantityInCartValidator->initialize($executionContextMock);
-        $this->orderItemRepository->expects(self::once())->method('findOneByIdAndCartTokenValue')->with('11', 'token')->willReturn($orderItemMock);
-        $orderItemMock->expects(self::once())->method('getVariant')->willReturn(null);
-        $orderItemMock->expects(self::once())->method('getVariantName')->willReturn('MacPro');
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'MacPro'])
-        ;
+        $this->changedItemQuantityInCartValidator->initialize($this->executionContext);
+        $this->orderItemRepository->expects(self::once())
+            ->method('findOneByIdAndCartTokenValue')
+            ->with('11', 'token')
+            ->willReturn($this->orderItem);
+        $this->orderItem->expects(self::once())->method('getVariant')->willReturn(null);
+        $this->orderItem->expects(self::once())->method('getVariantName')->willReturn('MacPro');
+        $this->executionContext->expects(self::once())
+            ->method('addViolation')
+            ->with('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'MacPro']);
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -104,24 +130,20 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
 
     public function testAddsViolationIfProductIsDisabled(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var OrderItemInterface|MockObject $orderItemMock */
-        $orderItemMock = $this->createMock(OrderItemInterface::class);
-        /** @var ProductVariantInterface|MockObject $productVariantMock */
-        $productVariantMock = $this->createMock(ProductVariantInterface::class);
-        /** @var ProductInterface|MockObject $productMock */
-        $productMock = $this->createMock(ProductInterface::class);
-        $this->changedItemQuantityInCartValidator->initialize($executionContextMock);
-        $this->orderItemRepository->expects(self::once())->method('findOneByIdAndCartTokenValue')->with('11', 'token')->willReturn($orderItemMock);
-        $orderItemMock->expects(self::once())->method('getVariant')->willReturn($productVariantMock);
-        $orderItemMock->method('getVariantName')->willReturn('Variant Name');
-        $productVariantMock->expects(self::once())->method('getProduct')->willReturn($productMock);
-        $productVariantMock->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
-        $productMock->expects(self::once())->method('isEnabled')->willReturn(false);
-        $productMock->expects(self::once())->method('getName')->willReturn('PRODUCT NAME');
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME'])
-        ;
+        $this->changedItemQuantityInCartValidator->initialize($this->executionContext);
+        $this->orderItemRepository->expects(self::once())
+            ->method('findOneByIdAndCartTokenValue')
+            ->with('11', 'token')
+            ->willReturn($this->orderItem);
+        $this->orderItem->expects(self::once())->method('getVariant')->willReturn($this->productVariant);
+        $this->orderItem->method('getVariantName')->willReturn('Variant Name');
+        $this->productVariant->expects(self::once())->method('getProduct')->willReturn($this->product);
+        $this->productVariant->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
+        $this->product->expects(self::once())->method('isEnabled')->willReturn(false);
+        $this->product->expects(self::once())->method('getName')->willReturn('PRODUCT NAME');
+        $this->executionContext->expects(self::once())
+            ->method('addViolation')
+            ->with('sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME']);
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -130,25 +152,21 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
 
     public function testAddsViolationIfProductVariantIsDisabled(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var OrderItemInterface|MockObject $orderItemMock */
-        $orderItemMock = $this->createMock(OrderItemInterface::class);
-        /** @var ProductVariantInterface|MockObject $productVariantMock */
-        $productVariantMock = $this->createMock(ProductVariantInterface::class);
-        /** @var ProductInterface|MockObject $productMock */
-        $productMock = $this->createMock(ProductInterface::class);
-        $this->changedItemQuantityInCartValidator->initialize($executionContextMock);
-        $this->orderItemRepository->expects(self::once())->method('findOneByIdAndCartTokenValue')->with('11', 'token')->willReturn($orderItemMock);
-        $orderItemMock->expects(self::once())->method('getVariant')->willReturn($productVariantMock);
-        $orderItemMock->expects(self::once())->method('getVariantName')->willReturn('Variant Name');
-        $productVariantMock->expects(self::once())->method('getProduct')->willReturn($productMock);
-        $productVariantMock->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
-        $productMock->expects(self::once())->method('isEnabled')->willReturn(true);
-        $productMock->method('getName')->willReturn('PRODUCT NAME');
-        $productVariantMock->expects(self::once())->method('isEnabled')->willReturn(false);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'Variant Name'])
-        ;
+        $this->changedItemQuantityInCartValidator->initialize($this->executionContext);
+        $this->orderItemRepository->expects(self::once())
+            ->method('findOneByIdAndCartTokenValue')
+            ->with('11', 'token')
+            ->willReturn($this->orderItem);
+        $this->orderItem->expects(self::once())->method('getVariant')->willReturn($this->productVariant);
+        $this->orderItem->expects(self::once())->method('getVariantName')->willReturn('Variant Name');
+        $this->productVariant->expects(self::once())->method('getProduct')->willReturn($this->product);
+        $this->productVariant->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
+        $this->product->expects(self::once())->method('isEnabled')->willReturn(true);
+        $this->product->method('getName')->willReturn('PRODUCT NAME');
+        $this->productVariant->expects(self::once())->method('isEnabled')->willReturn(false);
+        $this->executionContext->expects(self::once())
+            ->method('addViolation')
+            ->with('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'Variant Name']);
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -157,26 +175,25 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
 
     public function testAddsViolationIfProductVariantStockIsNotSufficient(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var OrderItemInterface|MockObject $orderItemMock */
-        $orderItemMock = $this->createMock(OrderItemInterface::class);
-        /** @var ProductVariantInterface|MockObject $productVariantMock */
-        $productVariantMock = $this->createMock(ProductVariantInterface::class);
-        /** @var ProductInterface|MockObject $productMock */
-        $productMock = $this->createMock(ProductInterface::class);
-        $this->changedItemQuantityInCartValidator->initialize($executionContextMock);
-        $this->orderItemRepository->expects(self::once())->method('findOneByIdAndCartTokenValue')->with('11', 'token')->willReturn($orderItemMock);
-        $orderItemMock->expects(self::once())->method('getVariant')->willReturn($productVariantMock);
-        $orderItemMock->method('getVariantName')->willReturn('Variant Name');
-        $productVariantMock->expects(self::once())->method('getProduct')->willReturn($productMock);
-        $productVariantMock->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
-        $productMock->expects(self::once())->method('isEnabled')->willReturn(true);
-        $productMock->method('getName')->willReturn('PRODUCT NAME');
-        $productVariantMock->expects(self::once())->method('isEnabled')->willReturn(true);
-        $this->availabilityChecker->expects(self::once())->method('isStockSufficient')->with($productVariantMock, 2)->willReturn(false);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'VARIANT_CODE'])
-        ;
+        $this->changedItemQuantityInCartValidator->initialize($this->executionContext);
+        $this->orderItemRepository->expects(self::once())
+            ->method('findOneByIdAndCartTokenValue')
+            ->with('11', 'token')
+            ->willReturn($this->orderItem);
+        $this->orderItem->expects(self::once())->method('getVariant')->willReturn($this->productVariant);
+        $this->orderItem->method('getVariantName')->willReturn('Variant Name');
+        $this->productVariant->expects(self::once())->method('getProduct')->willReturn($this->product);
+        $this->productVariant->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
+        $this->product->expects(self::once())->method('isEnabled')->willReturn(true);
+        $this->product->method('getName')->willReturn('PRODUCT NAME');
+        $this->productVariant->expects(self::once())->method('isEnabled')->willReturn(true);
+        $this->availabilityChecker->expects(self::once())
+            ->method('isStockSufficient')
+            ->with($this->productVariant, 2)
+            ->willReturn(false);
+        $this->executionContext->expects(self::once())
+            ->method('addViolation')
+            ->with('sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'VARIANT_CODE']);
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -185,75 +202,34 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
 
     public function testAddsViolationIfProductIsNotAvailableInChannel(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var OrderItemInterface|MockObject $orderItemMock */
-        $orderItemMock = $this->createMock(OrderItemInterface::class);
-        /** @var ProductVariantInterface|MockObject $productVariantMock */
-        $productVariantMock = $this->createMock(ProductVariantInterface::class);
-        /** @var ProductInterface|MockObject $productMock */
-        $productMock = $this->createMock(ProductInterface::class);
-        /** @var ChannelInterface|MockObject $channelMock */
-        $channelMock = $this->createMock(ChannelInterface::class);
-        /** @var OrderInterface|MockObject $cartMock */
-        $cartMock = $this->createMock(OrderInterface::class);
-
-        $this->changedItemQuantityInCartValidator->initialize($executionContextMock);
-
+        $this->changedItemQuantityInCartValidator->initialize($this->executionContext);
         $this->orderItemRepository->expects(self::once())
             ->method('findOneByIdAndCartTokenValue')
             ->with('11', 'token')
-            ->willReturn($orderItemMock);
-
-        $orderItemMock->expects(self::once())
-            ->method('getVariant')
-            ->willReturn($productVariantMock);
-        $orderItemMock
-            ->method('getVariantName')
-            ->willReturn('Variant Name');
-
-        $productVariantMock->expects(self::once())
-            ->method('getProduct')
-            ->willReturn($productMock);
-        $productVariantMock->expects(self::once())
-            ->method('getCode')
-            ->willReturn('VARIANT_CODE');
-        $productVariantMock->expects(self::once())
-            ->method('isEnabled')
-            ->willReturn(true);
-
-        $productMock->expects(self::once())
-            ->method('isEnabled')
-            ->willReturn(true);
-        $productMock->expects(self::once())
-            ->method('getName')
-            ->willReturn('PRODUCT NAME');
-
+            ->willReturn($this->orderItem);
+        $this->orderItem->expects(self::once())->method('getVariant')->willReturn($this->productVariant);
+        $this->orderItem->method('getVariantName')->willReturn('Variant Name');
+        $this->productVariant->expects(self::once())->method('getProduct')->willReturn($this->product);
+        $this->productVariant->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
+        $this->productVariant->expects(self::once())->method('isEnabled')->willReturn(true);
+        $this->product->expects(self::once())->method('isEnabled')->willReturn(true);
+        $this->product->expects(self::once())->method('getName')->willReturn('PRODUCT NAME');
         $this->availabilityChecker->expects(self::once())
             ->method('isStockSufficient')
-            ->with($productVariantMock, 2)
+            ->with($this->productVariant, 2)
             ->willReturn(true);
-
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValue')
             ->with('token')
-            ->willReturn($cartMock);
-        $cartMock->expects(self::once())
-            ->method('getChannel')
-            ->willReturn($channelMock);
-
-        $productMock->expects(self::once())
+            ->willReturn($this->cart);
+        $this->cart->expects(self::once())->method('getChannel')->willReturn($this->channel);
+        $this->product->expects(self::once())
             ->method('hasChannel')
-            ->with($channelMock)
+            ->with($this->channel)
             ->willReturn(false);
-
-        $executionContextMock->expects(self::once())
+        $this->executionContext->expects(self::once())
             ->method('addViolation')
-            ->with(
-                'sylius.product.not_exist',
-                ['%productName%' => 'PRODUCT NAME'],
-            );
-
+            ->with('sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME'], );
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(
                 orderTokenValue: 'token',
@@ -266,33 +242,33 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
 
     public function testDoesNothingIfProductAndVariantAreEnabledAndAvailableInChannel(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var OrderItemInterface|MockObject $orderItemMock */
-        $orderItemMock = $this->createMock(OrderItemInterface::class);
-        /** @var ProductVariantInterface|MockObject $productVariantMock */
-        $productVariantMock = $this->createMock(ProductVariantInterface::class);
-        /** @var ProductInterface|MockObject $productMock */
-        $productMock = $this->createMock(ProductInterface::class);
-        /** @var ChannelInterface|MockObject $channelMock */
-        $channelMock = $this->createMock(ChannelInterface::class);
-        /** @var OrderInterface|MockObject $cartMock */
-        $cartMock = $this->createMock(OrderInterface::class);
-        $this->changedItemQuantityInCartValidator->initialize($executionContextMock);
-        $this->orderItemRepository->method('findOneByIdAndCartTokenValue')->with('11', 'token')->willReturn($orderItemMock);
-        $orderItemMock->method('getVariant')->willReturn($productVariantMock);
-        $orderItemMock->method('getVariantName')->willReturn('Variant Name');
-        $productVariantMock->method('getProduct')->willReturn($productMock);
-        $productVariantMock->method('getCode')->willReturn('VARIANT_CODE');
-        $productMock->method('isEnabled')->willReturn(true);
-        $productMock->method('getName')->willReturnMap([['PRODUCT NAME'], ['PRODUCT NAME']]);
-        $this->availabilityChecker->method('isStockSufficient')->with($productVariantMock, 2)->willReturn(true);
-        $productMock->method('getName')->willReturn('PRODUCT NAME');
-        $this->orderRepository->method('findCartByTokenValue')->with('token')->willReturn($cartMock);
-        $cartMock->method('getChannel')->willReturn($channelMock);
-        $productMock->method('hasChannel')->with($channelMock)->willReturn(true);
-        $executionContextMock->expects(self::never())->method('addViolation')->with('sylius.product_variant.not_exist', ['%productVariantCode%' => 'productVariantCode'])
-        ;
-        $executionContextMock->expects(self::never())->method('addViolation')->willReturnMap([['sylius.product_variant.not_exist', ['%productVariantCode%' => 'productVariantCode']], ['sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME']], ['sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'productVariantCode']]]);
+        $this->changedItemQuantityInCartValidator->initialize($this->executionContext);
+        $this->orderItemRepository->method('findOneByIdAndCartTokenValue')
+            ->with('11', 'token')
+            ->willReturn($this->orderItem);
+        $this->orderItem->method('getVariant')->willReturn($this->productVariant);
+        $this->orderItem->method('getVariantName')->willReturn('Variant Name');
+        $this->productVariant->method('getProduct')->willReturn($this->product);
+        $this->productVariant->method('getCode')->willReturn('VARIANT_CODE');
+        $this->product->method('isEnabled')->willReturn(true);
+        $this->product->method('getName')->willReturnMap([['PRODUCT NAME'], ['PRODUCT NAME']]);
+        $this->availabilityChecker->method('isStockSufficient')
+            ->with($this->productVariant, 2)->willReturn(true);
+        $this->product->method('getName')->willReturn('PRODUCT NAME');
+        $this->orderRepository->method('findCartByTokenValue')
+            ->with('token')
+            ->willReturn($this->cart);
+        $this->cart->method('getChannel')->willReturn($this->channel);
+        $this->product->method('hasChannel')->with($this->channel)->willReturn(true);
+        $this->executionContext->expects(self::never())
+            ->method('addViolation')
+            ->with('sylius.product_variant.not_exist', ['%productVariantCode%' => 'productVariantCode']);
+        $this->executionContext->expects(self::never())
+            ->method('addViolation')
+            ->willReturnMap([
+                ['sylius.product_variant.not_exist', ['%productVariantCode%' => 'productVariantCode']],
+                ['sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME']],
+                ['sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'productVariantCode']],
+            ]);
     }
 }

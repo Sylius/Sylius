@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        customer:
+            first_name: 'पहला नाम'
+            group: 'समूह'
+            last_name: 'अंतिम नाम'
+            email: 'ई-मेल'
+            phone_number: 'फ़ोन नंबर'
+            gender: 'लिंग'
+            birthday: 'जन्मदिन'
+            billing_address: 'बिलिंग पता'
+            different_shipping_address: 'शिपिंग के लिए भिन्न पता उपयोग करें?'
+            only_customer_registration: 'खाता बनाएँ?'
+            subscribed_to_newsletter: 'न्यूज़लेटर की सदस्यता लें'
+        customer_group:
+            name: 'नाम'
+            roles: 'भूमिकाएँ'
+    gender:
+        unknown: 'अज्ञात'
+        male: 'पुरुष'
+        female: 'महिला'

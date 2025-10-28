@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -121,7 +121,6 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponseSuccessful('admin/order/get_orders_for_customer');
     }
-
 
     #[DataProvider('provideOrderFilterDates')]
     #[Test]

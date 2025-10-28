@@ -13,6 +13,8 @@ sylius:
         slug:
             not_blank: Molimo unesite slug kategorije.
             unique: Slug kategorije mora biti jedinstven.
+        parent:
+            invalid_relation: 'Nadređeni ne smije biti niti sam takson niti bilo koji od njegovih potomaka.'
     taxonomy:
         name:
             max_length: Naziv kategorije ne smije biti duži od 255 znakova.

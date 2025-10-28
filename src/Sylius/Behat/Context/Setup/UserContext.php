@@ -54,6 +54,20 @@ final readonly class UserContext implements Context
     }
 
     /**
+     * @Given there is a disabled user :email identified by :password
+     * @Given there was disabled account of :email with password :password
+     * @Given there is a disabled user :email
+     */
+    public function thereIsDisabledUserIdentifiedBy($email, $password = 'sylius')
+    {
+        $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => false]);
+
+        $this->sharedStorage->set('user', $user);
+
+        $this->userRepository->add($user);
+    }
+
+    /**
      * @Given I registered with previously used :email email and :password password
      * @Given I have already registered :email account
      */

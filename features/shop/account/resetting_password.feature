@@ -58,3 +58,12 @@ Feature: Resetting a password
         And I confirm my new password as "newp@ssw0rd"
         And I reset it
         Then I should not be able to change my password with this token
+
+    @ui @email
+    Scenario: Preventing password reset email for not enabled user
+        Given there is a disabled user "ghost@example.com" identified by "ghost"
+        When I want to reset password
+        And I specify customer email as "ghost@example.com"
+        And I reset it
+        Then I should be notified that email with reset instruction has been sent
+        But "ghost@example.com" should receive no emails

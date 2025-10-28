@@ -19,7 +19,7 @@ use Symfony\Component\Clock\ClockInterface;
 final class TaxRateDateEligibilityChecker implements TaxRateDateEligibilityCheckerInterface
 {
     public function __construct(
-        protected ClockInterface $clock,
+        private ClockInterface $clock,
     ) {
     }
 

@@ -20,6 +20,6 @@ final class DefaultPayloadProvider implements DefaultPayloadProviderInterface
 {
     public function getPayload(PaymentRequestInterface $paymentRequest): mixed
     {
-        return null;
+        return $paymentRequest->getPayload() ?: null;
     }
 }

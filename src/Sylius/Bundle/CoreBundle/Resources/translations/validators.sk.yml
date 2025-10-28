@@ -2,96 +2,215 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: 'Tento e-mail nie je platný.'
+                max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'
+                min: 'E-mail musí mať aspoň {{ limit }} znakov.'
+                not_blank: 'Zadajte e-mail.'
+        reset_password:
+            mismatch: 'Zadané heslá sa nezhodujú.'
+            password:
+                min: 'Heslo musí mať aspoň {{ limit }} znakov.'
+                max: 'Heslo nesmie byť dlhšie ako {{ limit }} znakov.'
+                not_blank: 'Zadajte heslo.'
     avatar_image:
         file:
-            max_size: Obrázok je príliš veľký - {{ size }}{{ suffix }}. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.
-            upload_ini_size: Obrázok je príliš veľký. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.
+            max_size: 'Obrázok je príliš veľký - {{ size }}{{ suffix }}. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Obrázok je príliš veľký. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: 'Konfigurácia pre jeden z požadovaných kanálov nie je poskytnutá.'
+            not_valid: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte pevné zľavové množstvo, ktoré je číslom väčším ako 0.'
+    catalog_promotion_scope:
+        invalid_type: 'Typ rozsahu propagácie katalógu je neplatný. Vyberte platný typ.'
+        for_products:
+            invalid_products: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte iba existujúce produkty.'
+            not_empty: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte aspoň 1 produkt.'
+            unique: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte iba jedinečné produkty.'
+        for_variants:
+            invalid_variants: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte iba existujúce varianty.'
+            not_empty: 'Pridajte aspoň 1 variant.'
+            unique: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte iba jedinečné varianty.'
+        for_taxons:
+            invalid_taxons: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte iba existujúce taxóny.'
+            not_empty: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte aspoň 1 taxón.'
+            unique: 'Poskytnutá konfigurácia obsahuje chyby. Pridajte iba jedinečné taxóny.'
     channel:
         base_currency:
-            not_blank: Prosím, zadajte predvolenú menu pre kanál.
+            not_blank: 'Zadajte základnú menu kanála.'
         default_locale:
-            not_blank: Zadajte predvolený jazyk pre kanál.
+            enabled: 'Predvolená lokalizácia musí byť povolená.'
+            not_blank: 'Zadajte predvolenú lokalizáciu kanála.'
         contact_email:
-            invalid: Tento e-mail je neplatný.
-            max: E-mail nesmie byť dlhší ako {{ limit }} znakov.
-            min: E-mail musí byť aspoň {{ limit }} znakov.
+            invalid: 'Tento e-mail je neplatný.'
+            max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'
+            min: 'E-mail musí mať aspoň {{ limit }} znakov.'
+        contact_phone_number:
+            max_length: 'Telefónne číslo nesmie byť dlhšie ako {{ limit }} znakov.'
+        theme_name:
+            max_length: 'Názov témy nesmie byť dlhší ako {{ limit }} znakov.'
+        tax_calculation_strategy:
+            not_blank: 'Zadajte stratégiu výpočtu dane.'
+            max_length: 'Stratégia výpočtu dane nesmie byť dlhšia ako {{ limit }} znakov.'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Hodnota musí byť väčšia ako {{ compared_value }}'
+            less_than: 'Hodnota musí byť menšia ako {{ compared_value }}'
     channel_pricing:
+        channel_code:
+            not_blank: 'Zadajte kód kanála.'
+            unique: 'Tento kanál už má cenu pre tento variant produktu.'
         price:
-            not_blank: Prosím, zadajte cenu.
+            min: 'Cena nemôže byť nižšia ako 0.'
+            not_blank: 'Zadajte cenu.'
+    channel_code_collection:
+        invalid_channel: 'Kanál s kódom {{ channel_code }} neexistuje.'
     checkout:
+        addressing:
+            csrf_error: 'Znova odošlite celý formulár.'
         shipping_method:
-            not_blank: Prosím zadajte spôsob dopravy.
+            not_blank: 'Vyberte spôsob dopravy.'
+        email:
+            not_changeable: 'E-mail je možné zmeniť iba pre hosťujúcich zákazníkov. Po prihlásení zákazníka a priradení košíka nie je možné e-mail zmeniť.'
     contact:
         email:
-            invalid: Tento e-mail je neplatný.
-            not_blank: Zadajte Váš e-mail.
+            invalid: 'Tento e-mail je neplatný.'
+            not_blank: 'Zadajte svoj e-mail.'
         message:
-            not_blank: Prosím, zadajte správu.
+            not_blank: 'Zadajte svoju správu.'
+    country:
+        code:
+            not_exist: 'Krajina s kódom {{ code }} neexistuje.'
     currency:
         enabled:
-            cannot_disable_base: Základná mena sa nedá vypnúť.
+            cannot_disable_base: 'Základnú menu nie je možné deaktivovať.'
     customer:
         currency_code:
-            not_valid: Zadaný kód meny nie je neplatný.
+            not_valid: 'Zadaný kód meny je neplatný.'
+    customer_group:
+        code:
+            not_exist: 'Skupina zákazníkov s kódom {{ code }} neexistuje.'
     cart_item:
-        not_available: '%itemName% nie je skladom.'
+        not_available: '%itemName% nemá dostatočné zásoby.'
+        insufficient_stock: 'Nedostatok zásob'
+        quantity:
+            not_in_range: 'Množstvo musí byť medzi {{ min }} a {{ max }}.'
+        variant:
+            not_available: '%variantName% nie je dostupný.'
+    max_integer: 'Hodnota musí byť menšia ako {{ compared_value }}.'
     order:
+        address_requirement: 'Poskytnite %addressName%.'
         currency_code:
-            not_valid: Zadaný kód meny nie je neplatný.
-        payment_method_eligibility: 'Táto platba metóda %paymentMethodName% bola vypnutá. Vyberte iný spôsob platby.'
-        product_eligibility: 'Tento produkt %productName% bola vypnutý.'
-        shipping_method_eligibility: 'Produkt nezodpovedá požiadavkám dopravy %shippingMethodName%. Prosím vyberte iný spôsob dopravy.'
+            not_valid: 'Zadaný kód meny je neplatný.'
+        invalid_state_transition: 'Nie je možné dokončiť, pretože objednávka je v nesprávnom stave. Aktuálny: %currentState%. Možné prechody: %possibleTransitions%.'
+        payment_method_eligibility: 'Tento spôsob platby %paymentMethodName% bol deaktivovaný. Prosím, vyberte iný spôsob platby.'
+        product_eligibility: 'Tento produkt %productName% bol deaktivovaný.'
+        shipping_method_eligibility: 'Produkt nespĺňa požiadavky pre spôsob dopravy %shippingMethodName%. Prosím, vyberte iný spôsob dopravy.'
+        shipping_method_not_available: 'Spôsob dopravy "%shippingMethodName%" nie je k dispozícii. Prosím, vyberte iný spôsob dopravy.'
+        cart_items_immutable: 'Po dokončení pokladne nie je možné zmeniť položky v košíku.'
+    resend_order_confirmation_email:
+        invalid_order_state: 'Nie je možné znova odoslať e-mail s potvrdením objednávky pre objednávku so stavom %state%.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Nie je možné znova odoslať e-mail s potvrdením odoslania pre zásielku so stavom %state%.'
     locale:
         enabled:
-            cannot_disable_base: Základná mena sa nedá vypnúť.
+            cannot_disable_base: 'Základnú lokalizáciu nie je možné deaktivovať.'
     product:
         variants:
-            all_prices_defined: Pre novo priradené kanály musíte najskôr definovať ceny variánt.
+            all_prices_defined: 'Najprv musíte definovať ceny variantov produktu pre novo priradené kanály.'
+        code:
+            not_exist: 'Produkt s kódom {{ code }} neexistuje.'
     product_attribute:
-        invalid: Pozícia musí byť celé číslo.
+        invalid: 'Pozícia musí byť celé číslo.'
+    image:
+        file:
+            allowed_mime_types: 'Súbor nie je platný obrázok. Povolené typy sú %types%.'
     product_image:
         file:
-            max_size: Obrázok je príliš veľký - {{ size }}{{ suffix }}. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.
-            upload_ini_size: Obrázok je príliš veľký. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.
+            max_size: 'Obrázok je príliš veľký - {{ size }}{{ suffix }}. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Obrázok je príliš veľký. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.'
+        product_variant:
+            not_belong_to_owner: 'Variant produktu s kódom "%productVariantCode%" nepatrí k produktu s kódom "%ownerCode%", ktorý je vlastníkom obrázka.'
+    product_taxon:
+        unique: 'Produkty taxóny sa nesmú duplikovať.'
+        product:
+            not_blank: 'Vyberte produkt.'
+        taxon:
+            not_blank: 'Vyberte taxón.'
     product_variant:
+        code:
+            not_exist: 'Variant produktu s kódom {{ code }} neexistuje.'
         onHand:
-            min: Počet položiek na sklade musí byť viac ako {{ limit }}.
-            not_blank: Prosím zadajte počet položiek na sklade.
-            reserved: Na strane musí byť vyšší ako počet na držať jednotky
+            min: 'Počet na sklade musí byť väčší ako {{ limit }}.'
+            not_blank: 'Zadajte počet na sklade.'
+            reserved: 'Počet na sklade musí byť väčší ako počet rezervovaných jednotiek'
         original_price:
-            min: Pôvodná cena nesmie byť záporná.
+            min: 'Pôvodná cena nesmie byť záporná.'
         weight:
-            min: Hmotnosť nemôže byť záporná.
-            invalid: Hmotnosť musí byť číslo.
+            min: 'Hmotnosť nemôže byť záporná.'
+            invalid: 'Hmotnosť musí byť číslo.'
         width:
-            min: Šírka nemôže byť záporná.
-            invalid: Šírka musí byť číslo.
+            min: 'Šírka nemôže byť záporná.'
+            invalid: 'Šírka musí byť číslo.'
         height:
-            min: Výška nemôže byť záporná.
-            invalid: Výška musí byť číslo.
+            min: 'Výška nemôže byť záporná.'
+            invalid: 'Výška musí byť číslo.'
         depth:
-            min: Hĺbka nemôže byť záporná.
-            invalid: Hĺbka musí byť číslo.
+            min: 'Hĺbka nemôže byť záporná.'
+            invalid: 'Hĺbka musí byť číslo.'
         channel_pricing:
-            all_defined: 'Musíte zadefinovať cenu pre každý kanál.'
+            price:
+                not_defined: 'Musíte definovať cenu.'
+            existing_code: 'Kanál s kódom {{ channelCode }} neexistuje.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: 'Limit použitia kupónu na zákazníka musí byť aspoň {{ limit }}.'
     product_translation:
         short_description:
-            max: Stručný popis nesmie byť dlhší ako {{ limit }} znakov.
+            max: 'Krátky popis nesmie byť dlhší ako {{ limit }} znakov.'
+    province:
+        code:
+            not_exist: 'Kraj s kódom {{ code }} neexistuje.'
     review:
         author:
-            not_blank: Zadajte Váš e-mail.
+            not_blank: 'Zadajte svoj e-mail.'
+        product:
+            not_blank: 'Zadajte produkt.'
+        rating:
+            range: 'Hodnotenie produktu musí byť celé číslo v rozsahu 1-5.'
+            not_in_range: 'Hodnotenie produktu musí byť medzi {{ min }} a {{ max }}.'
+    taxon:
+        code:
+            not_exist: 'Taxón s kódom {{ code }} neexistuje.'
     taxon_image:
         file:
-            max_size: Obrázok je príliš veľký - {{ size }}{{ suffix }}. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.
-            upload_ini_size: Obrázok je príliš veľký. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.
+            max_size: 'Obrázok je príliš veľký - {{ size }}{{ suffix }}. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Obrázok je príliš veľký. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.'
+    translation:
+        locale:
+            not_blank: 'Zadajte lokalizáciu.'
+            invalid: 'Táto hodnota nie je platná lokalizácia.'
+            unique: 'Pre kód lokalizácie {{ value }} už existuje preklad.'
+        locale_code:
+            invalid: 'Vyberte jednu z dostupných lokalizácií: %locales%'
     user:
         email:
-            unique: Tento e-mail sa už používa.
-            min: Email musí mať najmenej {{ limit }} znakov.
-            max: Email nesmie mať viac ako {{ limit }} znakov.
-            invalid: Tento e-mail je neplatný.
+            unique: 'Tento e-mail je už použitý.'
+            min: 'E-mail musí mať aspoň {{ limit }} znakov.'
+            max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'
+            invalid: 'Tento e-mail je neplatný.'
         username:
-            unique: Toto používateľské meno sa už používa.
-            not_blank: Zadajte svoje meno.
+            unique: 'Toto používateľské meno je už použité.'
+            not_blank: 'Zadajte svoje meno.'
+            max: 'Používateľské meno nesmie byť dlhšie ako {{ limit }} znakov.'
+        first_name:
+            max: 'Krstné meno nesmie byť dlhšie ako {{ limit }} znakov.'
+        last_name:
+            max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
         locale_code:
-            not_blank: Prosím, vyberte jazyk.
+            not_blank: 'Vyberte lokalizáciu.'
+    zone:
+        code:
+            not_exist: 'Zóna s kódom {{ code }} neexistuje.'

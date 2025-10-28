@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        delete_error: '채널을 삭제할 수 없습니다. 최소 하나의 활성 채널이 필요합니다.'
+    checkout:
+        complete_error: '주문 완료 중 예기치 않은 문제가 발생했습니다. 다시 시도해 주세요.'
+    contact:
+        request_success: '문의 요청이 성공적으로 제출되었습니다.'
+        request_error: '문의 요청을 보내는 중 문제가 발생했습니다. 나중에 다시 시도해 주세요.'
+    customer:
+        add_address: '주소가 성공적으로 추가되었습니다.'
+        impersonate: '고객 %name% 계정으로 성공적으로 가장했습니다.'
+        set_address_as_default: '주소가 기본 주소로 설정되었습니다.'
+    order:
+        apply_state_machine_transition_error: '주문 업데이트 중 예기치 않은 문제가 발생했습니다. 다시 시도해 주세요.'
+        promotion_integrity: '더 이상 프로모션 %promotionName%의 대상이 아닙니다.'
+        total_integrity: '주문 총액이 변경되었습니다. 주문 정보를 확인하고 다시 확정해 주세요.'
+        update_error: '주문 업데이트 중 예기치 않은 문제가 발생했습니다. 다시 시도해 주세요.'
+    payment:
+        apply_state_machine_transition_error: '결제 업데이트 중 예기치 않은 문제가 발생했습니다. 다시 시도해 주세요.'
+    product:
+        in_use_by_promotion_rule: '프로모션 규칙에 사용 중인 상품은 삭제할 수 없습니다.'
+        out_of_stock: '이 상품은 재고가 %quantity%개만 남아 있습니다.'
+    product_variant:
+        update_error: '상품 바리아ント 업데이트 중 예기치 않은 문제가 발생했습니다. 다시 시도해 주세요.'
+    promotion:
+        update_rules: '코드가 %codes%인 프로모션의 일부 규칙이 업데이트되었습니다.'
+    taxon:
+        in_use_by_promotion_rule: '프로모션 규칙에 사용 중인 택슨은 삭제할 수 없습니다.'
+        menu_taxon_delete: '어떤 채널의 메뉴 택슨도 삭제할 수 없습니다.'

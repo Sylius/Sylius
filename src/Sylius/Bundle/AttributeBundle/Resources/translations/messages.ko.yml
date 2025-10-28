@@ -4,7 +4,38 @@
 sylius:
     form:
         attribute:
-            name: 이름
-            type: 타입
+            add: '추가'
+            add_attributes: '속성 추가'
+            choices: '선택지'
+            code: '코드'
+            name: '이름'
+            translatable: '번역 가능'
+            translations: '번역'
+            type: '유형'
         attribute_type:
-            select: 선택하기
+            checkbox: '체크박스'
+            configuration: '구성'
+            date: '날짜'
+            datetime: '날짜/시간'
+            float: '소수'
+            integer: '정수'
+            percent: '백분율'
+            select: '선택'
+            text: '텍스트'
+            textarea: '텍스트 영역'
+            title: '속성 유형'
+            validation: '검증'
+        attribute_type_configuration:
+            datetime:
+                format: '형식'
+            date:
+                format: '형식'
+            select:
+                multiple: '다중 선택'
+                values: '값'
+                choose: '옵션 선택'
+                min: '최소 항목'
+                max: '최대 항목'
+            text:
+                min: '최소 길이'
+                max: '최대 길이'

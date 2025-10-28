@@ -53,12 +53,10 @@ final class ZoneMatcherTest extends TestCase
         $this->zoneRepositoryMock
             ->expects(self::exactly(2))
             ->method('findOneByAddressAndType')
-            ->willReturnCallback(function (AddressInterface $address, string $type, ?string $scope = null) use ($addressMock, $zoneMock) {
-                return match ([$address, $type, $scope]) {
-                    [$addressMock, ZoneInterface::TYPE_PROVINCE, null] => null,
-                    [$addressMock, ZoneInterface::TYPE_COUNTRY, null] => $zoneMock,
-                    default => throw new \UnhandledMatchError(),
-                };
+            ->willReturnCallback(fn (AddressInterface $address, string $type, ?string $scope = null) => match ([$address, $type, $scope]) {
+                [$addressMock, ZoneInterface::TYPE_PROVINCE, null] => null,
+                [$addressMock, ZoneInterface::TYPE_COUNTRY, null] => $zoneMock,
+                default => throw new \UnhandledMatchError(),
             });
         self::assertSame($zoneMock, $this->zoneMatcher->match($addressMock));
     }
@@ -72,13 +70,11 @@ final class ZoneMatcherTest extends TestCase
         $this->zoneRepositoryMock
             ->expects(self::exactly(3))
             ->method('findOneByAddressAndType')
-            ->willReturnCallback(function (AddressInterface $address, string $type, ?string $scope = null) use ($addressMock, $zoneMock) {
-                return match ([$address, $type, $scope]) {
-                    [$addressMock, ZoneInterface::TYPE_PROVINCE, null],
-                    [$addressMock, ZoneInterface::TYPE_COUNTRY, null] => null,
-                    [$addressMock, ZoneInterface::TYPE_ZONE, null] => $zoneMock,
-                    default => throw new \UnhandledMatchError(),
-                };
+            ->willReturnCallback(fn (AddressInterface $address, string $type, ?string $scope = null) => match ([$address, $type, $scope]) {
+                [$addressMock, ZoneInterface::TYPE_PROVINCE, null],
+                [$addressMock, ZoneInterface::TYPE_COUNTRY, null] => null,
+                [$addressMock, ZoneInterface::TYPE_ZONE, null] => $zoneMock,
+                default => throw new \UnhandledMatchError(),
             });
         self::assertSame($zoneMock, $this->zoneMatcher->match($addressMock));
     }
@@ -108,13 +104,11 @@ final class ZoneMatcherTest extends TestCase
         $this->zoneRepositoryMock
             ->expects(self::exactly(3))
             ->method('findByMembers')
-            ->willReturnCallback(function (array $members) use ($zoneOneMock, $zoneTwoMock, $zoneThreeMock) {
-                return match ($members) {
-                    [$zoneOneMock] => [$zoneTwoMock],
-                    [$zoneTwoMock] => [$zoneThreeMock],
-                    [$zoneThreeMock] => [],
-                    default => throw new \UnhandledMatchError(),
-                };
+            ->willReturnCallback(fn (array $members) => match ($members) {
+                [$zoneOneMock] => [$zoneTwoMock],
+                [$zoneTwoMock] => [$zoneThreeMock],
+                [$zoneThreeMock] => [],
+                default => throw new \UnhandledMatchError(),
             });
         $matchedZones = $this->zoneMatcher->matchAll($addressMock);
         self::assertCount(3, $matchedZones);
@@ -138,13 +132,11 @@ final class ZoneMatcherTest extends TestCase
         $this->zoneRepositoryMock
             ->expects(self::exactly(3))
             ->method('findByMembers')
-            ->willReturnCallback(function (array $members) use ($zoneOneMock, $zoneTwoMock, $zoneThreeMock) {
-                return match ($members) {
-                    [$zoneOneMock] => [$zoneTwoMock],
-                    [$zoneTwoMock] => [$zoneThreeMock],
-                    [$zoneThreeMock] => [],
-                    default => throw new \UnhandledMatchError(),
-                };
+            ->willReturnCallback(fn (array $members) => match ($members) {
+                [$zoneOneMock] => [$zoneTwoMock],
+                [$zoneTwoMock] => [$zoneThreeMock],
+                [$zoneThreeMock] => [],
+                default => throw new \UnhandledMatchError(),
             });
         $matchedZones = $this->zoneMatcher->matchAll($addressMock, 'shipping');
         self::assertCount(2, $matchedZones);

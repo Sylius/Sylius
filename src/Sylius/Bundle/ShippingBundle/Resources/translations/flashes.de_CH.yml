@@ -3,4 +3,4 @@
 
 sylius:
     shipment:
-        shipped: 'Der Versand wurde erfolgreich durchgeführt.'
+        shipped: 'Die Sendung wurde erfolgreich versendet.'

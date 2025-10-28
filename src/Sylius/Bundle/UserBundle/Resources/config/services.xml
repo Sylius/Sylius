@@ -43,7 +43,9 @@
 
         <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" />
 
-        <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" />
+        <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler">
+            <argument type="service" id="translator" />
+        </service>
 
         <!-- Controllers -->
         <service id="sylius.controller.user_security" class="Sylius\Bundle\UserBundle\Controller\SecurityController" public="true">

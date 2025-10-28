@@ -4,48 +4,68 @@
 sylius:
     address:
         city:
-            not_blank: Inserisci la città.
+            max_length: 'La città non deve essere più lunga di {{ limit }} caratteri.|La città non deve essere più lunga di {{ limit }} caratteri.'
+            min_length: 'La città deve essere lunga almeno {{ limit }} caratteri.|La città deve essere lunga almeno {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci la città.'
         country:
-            not_blank: Inserisci la nazione.
-            disabled: Paese scelto è disabilitato. Si prega di scegliere uno diverso.
+            not_blank: 'Per favore seleziona il paese.'
+            disabled: 'Il paese scelto è disabilitato. Per favore scegli un altro.'
         first_name:
-            not_blank: Inserisci il nome.
+            max_length: 'Il nome non deve essere più lungo di {{ limit }} carattere.|Il nome non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il nome deve essere lungo almeno {{ limit }} caratteri.|Il nome deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il nome.'
         last_name:
-            not_blank: Inserisci il cognome.
+            max_length: 'Il cognome non deve essere più lungo di {{ limit }} carattere.|Il cognome non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il cognome deve essere lungo almeno {{ limit }} caratteri.|Il cognome deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il cognome.'
         postcode:
-            not_blank: Inserisci il CAP.
+            max_length: 'Il CAP non deve essere più lungo di {{ limit }} carattere.|Il CAP non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il CAP deve essere lungo almeno {{ limit }} carattere.|Il CAP deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il CAP.'
         province:
-            valid: Seleziona la provincia.
+            valid: 'Per favore seleziona la provincia corretta.'
         street:
-            not_blank: Inserisci l'indirizzo.
-        not_shippable: Questo indirizzo non è una destinazione di spedizione valida.
+            max_length: 'L''indirizzo non deve essere più lungo di {{ limit }} carattere.|L''indirizzo non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'L''indirizzo deve essere lungo almeno {{ limit }} caratteri.|L''indirizzo deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci l''indirizzo.'
+        not_shippable: 'Questo indirizzo non è una destinazione di spedizione valida.'
     country:
         code:
-            not_blank: Inserisci il codice ISO del paese.
-            regex: Il codice del paese può essere composto solo da lettere, numeri, trattini e underscore.
-            unique: Codice ISO del paese deve essere unico.
+            not_blank: 'Per favore inserisci il codice ISO del paese.'
+            unique: 'Il codice ISO del paese deve essere unico.'
+            country: 'Il codice ISO del paese è invalido.'
+        unique_provinces: 'Tutte le province all''interno di questo paese devono avere codici e nomi unici.'
     province:
         code:
-            min_length: Il nome della provincia deve essere almeno di due caratteri|Il nome della provincia deve essere almeno di due caratteri.
-            not_blank: Inserisci il codice di provincia.
-            regex: Il codice provincia dovrebbe avere il seguente formato XX-XX (ad es. U.S.-FL).
-            unique: Il codice di provincia deve essere unico.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice della provincia.'
+            regex: 'Il codice della provincia deve avere il formato XX-XX (es. US-FL).'
+            unique: 'Il codice della provincia deve essere unico.'
         name:
-            not_blank: Inserisci il nome della provincia.
-            unique: Il nome della provincia deve essere unico.
+            max_length: 'Il nome della provincia non deve essere più lungo di {{ limit }} carattere.|Il nome della provincia non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il nome della provincia deve essere lungo almeno {{ limit }} caratteri.|Il nome della provincia deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il nome della provincia.'
+            unique: 'Il nome della provincia deve essere unico.'
     zone:
         scope:
-            not_blank: Si prega di inserire il campo di applicazione.
+            not_blank: 'Per favore inserisci l''ambito.'
         code:
-            not_blank: Inserisci il codice della zona.
-            regex: Il codice di zona può essere composto solo da lettere, numeri, trattini e underscore.
-            unique: Il codice di zona deve essere unico.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice della zona.'
+            regex: 'Il codice della zona può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'Il codice della zona deve essere unico.'
+        type:
+            invalid: '"Il tipo {{ value }} non è valido. I tipi consentiti sono: {{ choices }}."'
         members:
-            min_count: Inserisci almeno {{ limit }} membri nella zona.
+            min_count: 'Per favore aggiungi almeno {{ limit }} membro alla zona.'
         name:
-            not_blank: Inserisci il nome della zona.
+            max_length: 'Il nome della zona non deve essere più lungo di {{ limit }} carattere.|Il nome della zona non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il nome della zona deve essere lungo almeno {{ limit }} caratteri.|Il nome della zona deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il nome della zona.'
     zone_member:
+        cannot_be_the_same_as_zone: 'Il membro della zona non può essere lo stesso della zona.'
         code:
-            not_blank: Si prega di scegliere un membro di zona.
-            regex: Il codice del membro di zona può essere composto solo da lettere, numeri, trattini e underscore.
-        unique: Il membro di zona di scelto è già in questa zona.
+            max_length: 'Il codice del membro della zona non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore scegli un membro della zona.'
+            regex: 'Il codice del membro della zona può contenere solo lettere, numeri, trattini e underscore.'
+        unique: 'Il membro della zona scelto è già presente in questa zona.'

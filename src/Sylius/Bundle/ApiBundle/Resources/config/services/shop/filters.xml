@@ -41,6 +41,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius_api.search_filter.shop.image" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="type">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius_api.search_filter.shop.product_association_type.owner_based" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\OwnerBasedProductAssociationTypesFilter">
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <argument>%sylius.model.product_association.class%</argument>

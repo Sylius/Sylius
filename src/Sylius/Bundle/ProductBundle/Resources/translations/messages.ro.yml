@@ -4,28 +4,28 @@
 sylius:
     form:
         product:
-            name: Nume produs
-            description: Descriere
-            attributes: Atribute
-            options: Opţiuni
-            meta_keywords: Meta cuvinte cheie
-            meta_description: Meta descriere
-            slug: Slug
-            taxons: Taxoni
+            name: 'Nume'
+            description: 'Descriere'
+            attributes: 'Atribute'
+            options: 'Opțiuni'
+            meta_keywords: 'Meta cuvinte cheie'
+            meta_description: 'Meta descriere'
+            slug: 'Slug'
+            taxons: 'Taxoni'
         product_variant:
-            name: Nume produs
+            name: 'Nume'
         association_type:
-            name: Nume produs
-            translations: Traduceri
+            name: 'Nume'
+            translations: 'Traduceri'
         association:
-            type: Tipul de asociere
-            product: Produs asociat
+            type: 'Tip asociere'
+            product: 'Produs asociat'
         variant:
-            name: Nume produs
+            name: 'Nume'
         option:
-            name: Nume produs
-            position: Poziţie
-            values: Valori posibile
+            name: 'Nume'
+            position: 'Poziție'
+            values: 'Valori posibile'
         option_value:
-            add_value: Adaugă valoare
-            value: Valoare
+            add_value: 'Adaugă valoare'
+            value: 'Valoare'

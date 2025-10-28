@@ -31,8 +31,8 @@
         "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "phpunit/phpunit": "^10.5",
+        "matthiasnoback/symfony-config-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
         "webmozart/assert": "^1.11"
     },
     "extra": {

@@ -35,7 +35,7 @@
     {% else %}
         <button type="{{ params.type }}"
                 {% if params.id %}id="{{ params.id }}"{% endif %}
-                {% if params.form %}form="{{ params.form }}"{% endif %}
+            {% if params.form %}form="{{ params.form }}"{% endif %}
                 class="{{ button_class }}"
             {% if params.disabled %}disabled{% endif %}
             {% if params.dropdown %}data-bs-toggle="dropdown"{% endif %}
@@ -87,9 +87,9 @@
         stimulus_controller('@sylius/admin-bundle/back-button')
         |merge(stimulus_action('@sylius/admin-bundle/back-button', 'goBack', 'click'))
         |merge({
-            'data-sylius--admin-bundle--back-button-current-url-value': app.request.uri,
-            'data-sylius--admin-bundle--back-button-fallback-url-value': params.fallback_url
-        })
+        'data-sylius--admin-bundle--back-button-current-url-value': app.request.uri,
+        'data-sylius--admin-bundle--back-button-fallback-url-value': params.fallback_url|default(params.url|default(app.request.uri))
+    })
     %}
 
     {% set params = {

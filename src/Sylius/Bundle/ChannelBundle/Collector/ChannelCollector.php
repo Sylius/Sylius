@@ -30,14 +30,13 @@ final class ChannelCollector extends DataCollector
     ) {
     }
 
+    /** @return array<string, string|null>|null */
     public function getChannel(): ?array
     {
         return $this->data['channel'];
     }
 
-    /**
-     * @return iterable|ChannelInterface[]
-     */
+    /** @return iterable<ChannelInterface> */
     public function getChannels(): iterable
     {
         return $this->data['channels'];
@@ -73,6 +72,7 @@ final class ChannelCollector extends DataCollector
         return 'sylius.collector.channel';
     }
 
+    /** @return array<string, string|null> */
     private function pluckChannel(ChannelInterface $channel): array
     {
         return [

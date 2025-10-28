@@ -15,6 +15,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.currency
 

@@ -1,0 +1,52 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxon-tree\/PLUGS\/branch",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 4,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/CATEGORY",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "CATEGORY",
+            "parent": null,
+            "level": 0,
+            "name": "Categories",
+            "slug": "categories"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "ACCESSORIES",
+            "parent": "\/api\/v2\/shop\/taxons\/CATEGORY",
+            "level": 1,
+            "name": "Accessories",
+            "slug": "categories\/accessories"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/TECHNOLOGY_ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "TECHNOLOGY_ACCESSORIES",
+            "parent": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "level": 2,
+            "name": "Technology Accessories",
+            "slug": "categories\/accessories\/technology"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/PLUGS",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "PLUGS",
+            "parent": "\/api\/v2\/shop\/taxons\/TECHNOLOGY_ACCESSORIES",
+            "level": 3,
+            "name": "Plugs",
+            "slug": "categories\/accessories\/technology\/plugs"
+        }
+    ],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/taxon-tree\/PLUGS\/branch?includeRoot=true",
+        "@type": "hydra:PartialCollectionView"
+    }
+}

@@ -1,12 +1,10 @@
+{% import '@SyliusAdmin/shared/helper/loader.html.twig' as loader %}
+
 {% set statistics_data = hookable_metadata.context.statistics_data %}
 {% set period = hookable_metadata.context.period %}
 
 <div class="card mb-3">
-    <div data-loading>
-        <div class="sylius-loader">
-            <img src="{{ asset('build/admin/images/loader.svg', 'admin') }}" alt="Loading"/>
-        </div>
-    </div>
+    {{ loader.render() }}
     <div class="card-body">
         <div class="d-flex justify-content-end gap-5 mb-3">
             <div class="btn-group" role="group">

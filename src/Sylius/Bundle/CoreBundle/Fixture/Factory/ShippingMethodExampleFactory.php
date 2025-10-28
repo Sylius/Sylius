@@ -98,12 +98,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     {
         $resolver
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('name', function (): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('description', fn (Options $options): string => $this->faker->sentence())
             ->setDefault('enabled', fn (Options $options): bool => $this->faker->boolean(90))
             ->setAllowedTypes('enabled', 'bool')
@@ -137,9 +132,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
     }
 
+    /** @return iterable<string> */
     private function getLocales(): iterable
     {
-        /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();
         foreach ($locales as $locale) {
             yield $locale->getCode();

@@ -1,0 +1,45 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxonImage",
+    "@id": "\/api\/v2\/shop\/taxons\/CATEGORY\/images",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 2,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/CATEGORY\/images\/@integer@",
+            "@type": "TaxonImage",
+            "id": "@integer@",
+            "type": "thumbnail",
+            "path": "http:\/\/localhost\/media\/cache\/resolve\/sylius_small\/uo\/thumbnail.jpg"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/CATEGORY\/images\/@integer@",
+            "@type": "TaxonImage",
+            "id": "@integer@",
+            "type": "banner",
+            "path": "http:\/\/localhost\/media\/cache\/resolve\/sylius_small\/uo\/banner.jpg"
+        }
+    ],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/taxons\/CATEGORY\/images?imageFilter=sylius_small",
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/taxons\/CATEGORY\/images{?type,type[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "type",
+                "property": "type",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "type[]",
+                "property": "type",
+                "required": false
+            }
+        ]
+    }
+}

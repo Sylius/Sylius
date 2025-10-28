@@ -144,7 +144,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
 
     private function createZone(): ZoneInterface
     {
-        /** @var ZoneInterface $zone */
         $zone = $this->zoneFactory->createWithMembers([self::DEFAULT_ZONE_CODE]);
         $zone->setCode(self::DEFAULT_ZONE_CODE);
         $zone->setName(self::DEFAULT_ZONE_NAME);

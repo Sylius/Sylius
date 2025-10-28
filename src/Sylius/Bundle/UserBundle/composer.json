@@ -50,8 +50,8 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
         "hwi/oauth-bundle": "^2.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpunit/phpunit": "^10.5",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
         "symfony/mailer": "^6.4 || ^7.2",
         "symfony/security-bundle": "^6.4 || ^7.2"

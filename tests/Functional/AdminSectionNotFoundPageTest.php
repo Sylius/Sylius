@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
+use ApiTestCase\JsonApiTestCase;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use ApiTestCase\JsonApiTestCase;
 
 final class AdminSectionNotFoundPageTest extends JsonApiTestCase
 {
@@ -31,7 +31,6 @@ final class AdminSectionNotFoundPageTest extends JsonApiTestCase
         $this->client->followRedirects();
     }
 
-    
     #[DataProvider('getSyliusResourcesUrlPart')]
     #[Test]
     public function it_shows_admin_not_found_page_for_a_logged_in_admin_when_accessing_nonexistent_resource_edit_page(

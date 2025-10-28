@@ -34,6 +34,7 @@ class DoctrineStorage extends BaseDoctrineStorage
         return $resource->getUsePayum() ? $resource : null;
     }
 
+    /** @param array<mixed> $criteria */
     public function findBy(array $criteria): array
     {
         /** @var object[]|GatewayConfigInterface[] $resources */

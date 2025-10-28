@@ -13,6 +13,8 @@ sylius:
         slug:
             not_blank: Por favor, digite o slug da Categoria.
             unique: Slug da Categoria deve ser único.
+        parent:
+            invalid_relation: 'O pai não pode ser o próprio táxon nem qualquer um dos seus descendentes.'
     taxonomy:
         name:
             max_length: Nome da Categoria não deve ser maior que 255 caracteres.

@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class IndexPage extends SymfonyPage implements IndexPageInterface
+class IndexPage extends SyliusPage implements IndexPageInterface
 {
     public function getRouteName(): string
     {

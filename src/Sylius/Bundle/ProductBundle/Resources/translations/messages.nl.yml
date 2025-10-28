@@ -4,28 +4,28 @@
 sylius:
     form:
         product:
-            name: Naam
-            description: Omschrijving
-            attributes: Attributen
-            options: Opties
-            meta_keywords: Meta sleutelwoorden
-            meta_description: Meta omschrijving
-            slug: Slug
-            taxons: Taxa
+            name: 'Naam'
+            description: 'Beschrijving'
+            attributes: 'Attributen'
+            options: 'Opties'
+            meta_keywords: 'Meta keywords'
+            meta_description: 'Meta beschrijving'
+            slug: 'Slug'
+            taxons: 'Taxons'
         product_variant:
-            name: Naam
+            name: 'Naam'
         association_type:
-            name: Naam
-            translations: Vertalingen
+            name: 'Naam'
+            translations: 'Vertalingen'
         association:
-            type: Relatietype
-            product: Gerelateerd product
+            type: 'Associatietype'
+            product: 'Geassocieerd product'
         variant:
-            name: Naam
+            name: 'Naam'
         option:
-            name: Naam
-            position: Positie
-            values: Mogelijke waarden
+            name: 'Naam'
+            position: 'Positie'
+            values: 'Mogelijke waarden'
         option_value:
-            add_value: Waarde toevoegen
-            value: Waarde
+            add_value: 'Voeg waarde toe'
+            value: 'Waarde'

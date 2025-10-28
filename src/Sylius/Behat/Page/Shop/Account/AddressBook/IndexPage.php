@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
-class IndexPage extends SymfonyPage implements IndexPageInterface
+class IndexPage extends SyliusPage implements IndexPageInterface
 {
     public function getRouteName(): string
     {

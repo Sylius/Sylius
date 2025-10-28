@@ -4,46 +4,128 @@
 sylius:
     email:
         shipment_confirmation:
-            subject: 'Potvrdenie odoslania zásielky'
+            has_been_sent_using: 'bol odoslaný pomocou'
+            subject: 'Potvrdenie o odoslaní zásielky'
+            thank_you_for_transaction: 'Ďakujeme za úspešnú transakciu.'
+            you_can_check_its_location_with_the_tracking_code: 'Môžete skontrolovať jeho polohu pomocou sledovacieho kódu %tracking_code%.'
+            your_order_with_number: 'Vaša objednávka č.'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Zobraziť najnižšiu cenu zľavnených produktov pred aktuálnou zľavou?'
+                period_for_which_the_lowest_price_is_calculated: 'Obdobie, za ktoré sa počíta najnižšia cena'
+            reset_password:
+                password:
+                    label: 'Nové heslo'
+                    confirmation: 'Potvrdiť nové heslo'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Typy priradenia
-                    attributes: Vlastnosti
-                    header: Katalóg
-                    inventory: Skladové zásoby
-                    options: Voľby
-                    products: Produkty
-                    taxons: Kategórie
+                    association_types: 'Typy asociácií'
+                    attributes: 'Atribúty'
+                    header: 'Katalóg'
+                    inventory: 'Sklad'
+                    options: 'Možnosti'
+                    products: 'Produkty'
+                    taxons: 'Taxóny'
                 configuration:
-                    admin_users: Administrátory
-                    channels: Kanály
-                    countries: Krajiny
-                    currencies: Meny
-                    exchange_rates: Výmenné kurzy
-                    header: Konfigurácia
-                    locales: Jazyky
-                    payment_methods: Spôsoby platby
-                    shipping_categories: Kategórie doručenia
-                    shipping_methods: Spôsoby doručenia
-                    tax_categories: Daňové kategórie
-                    tax_rates: Daňové sadzby
-                    zones: Zóny
+                    admin_users: 'Administrátori'
+                    channels: 'Kanály'
+                    countries: 'Kraje'
+                    currencies: 'Meny'
+                    exchange_rates: 'Menové kurzy'
+                    header: 'Nastavenia'
+                    locales: 'Jazyky'
+                    payment_methods: 'Spôsoby platby'
+                    shipping_categories: 'Kategórie dopravy'
+                    shipping_methods: 'Spôsoby dopravy'
+                    tax_categories: 'Daňové kategórie'
+                    tax_rates: 'Daňové sadzby'
+                    zones: 'Zóny'
                 marketing:
-                    header: Marketing
-                    product_reviews: Produktové recenzie
-                    promotions: Akcie
+                    cart_promotions: 'Promo akcie košíka'
+                    catalog_promotions: 'Promo akcie katalógu'
+                    header: 'Marketing'
+                    product_reviews: 'Recenzie produktov'
+                    promotions: 'Promo akcie'
                 customers:
-                    customers: Zákazníci
-                    groups: Zákaznícke skupiny
-                    header: Zákazník
+                    customers: 'Zákazníci'
+                    groups: 'Skupiny'
+                    header: 'Zákazníci'
                 sales:
-                    header: Predaj
-                    orders: Objednávky
+                    header: 'Predaje'
+                    orders: 'Objednávky'
                 official_support:
-                    header: Oficiálna podpora
-                    sylius_plus: Sylius Plus
-                    browse_plugins: Prehliadať pluginy
-                    professional_services: Profesionálne služby
-                    find_a_partner: Nájdite partnera
+                    header: 'Oficiálna podpora'
+                    browse_plugins: 'Prehliadať pluginy'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Profesionálne služby'
+                    find_a_partner: 'Nájsť partnera'
+                    sylius_certification: 'Sylius certifikácia'
+    ui:
+        account: 'Účet'
+        admin_user: 'Administrátor'
+        add_new_entry: 'Pridať nový záznam'
+        back_to_dashboard: 'Späť na panel'
+        catalog_promotion:
+            dates_details: 'Táto operácia je časovo náročná! Zvážte 2-10 minútové oneskorenie od zadaných dátumov. Oneskorenie závisí od veľkosti katalógu.'
+        channel:
+            account_verification_required_details: 'Ak túto možnosť zakážete, bude možné vytvárať účty a pristupovať k nim bez overenia e-mailu a potenciálne tak pristupovať k objednávkam vytvoreným ako hosť.'
+        channel_pricing_history: 'História cien kanála'
+        channel_pricings: 'Cenové ponuky kanálov'
+        create_new:
+            customer_group: 'Vytvoriť novú skupinu zákazníkov'
+        delete_avatar: 'Zmazať avatar'
+        full_screen: 'Celá obrazovka'
+        global: 'Globálne'
+        ip_address: 'IP adresa'
+        language: 'Jazyk'
+        lowest_price_before_discount: 'Najnižšia cena pred zľavou'
+        minimum_price_details: 'Minimálna cena – je to cenový prah, pod ktorý aktuálna cena nemôže byť znížená nijakou promo akciou. Použite to na ochranu ziskovosti predaja.'
+        more: 'Viac'
+        no_main_taxon: 'žiadny hlavný taxón'
+        no_depth: 'Žiadna hĺbka'
+        no_height: 'Žiadna výška'
+        no_results: 'Nenašli sa žiadne výsledky'
+        no_results_adjust_your_search: 'Upravte vyhľadávanie a skúste to znova.'
+        no_weight: 'Žiadna hmotnosť'
+        no_width: 'Žiadna šírka'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Dátum objednávky'
+        original_price_details: 'Pôvodná cena – je to cena variantu produktu, ktorá sa zobrazuje prečiarknutá v katalógu. Používa sa ako základ pre výpočet aktuálnej ceny. Ak táto hodnota nie je definovaná, logika promo akcií skopíruje hodnotu z poľa Cena do Pôvodnej ceny.'
+        original_product_price_details: 'Pôvodná cena – je to cena produktu, ktorá sa zobrazuje prečiarknutá v katalógu. Používa sa ako základ pre výpočet aktuálnej ceny. Ak táto hodnota nie je definovaná, logika promo akcií skopíruje hodnotu z poľa Cena do Pôvodnej ceny.'
+        overdue: 'Po termíne'
+        page_not_found: 'Stránka nenájdená'
+        pagination:
+            number_of_results: 'Zobrazené položky od %from% do %to% z %total%'
+        partially_refunded: 'Čiastočne refundované'
+        pending_actions: 'Čakajúce akcie'
+        price_details: 'Cena – je to aktuálna cena variantu produktu zobrazená v katalógu. Môže byť upravená promo akciami.'
+        product_price_details: 'Cena – je to aktuálna cena produktu zobrazená v katalógu. Môže byť upravená promo akciami.'
+        price_history: 'História cien'
+        product:
+            product_not_active_in_channel: 'Produkt ešte nie je aktivovaný v tomto kanáli.'
+        product_variant: 'Variant produktu'
+        sales_summary: 'Prehľad predaja'
+        search_menu: 'Ponuka vyhľadávania'
+        shipment_for_order: 'Odoslanie pre objednávku'
+        show_history_for_channel_pricing: 'Zobraziť históriu cenotvorby kanála'
+        start_typing_to_search: 'Začnite písať pre vyhľadávanie'
+        statistics:
+            day: 'Deň'
+            lifetime: 'Životnosť'
+            month: 'Mesiac'
+            week: 'Týždeň'
+            2weeks: '2 týždne'
+            year: 'Rok'
+        taxon: 'Taxón'
+        to_approve: 'na schválenie'
+        to_process: 'na spracovanie'
+        to_ship: 'na odoslanie'
+        view_in_store: 'Zobraziť v obchode'
+        work_in_progress: 'Práca prebieha'
+        empty_date: 'prázdne'
+        notifications:
+            new_version_of_sylius_available: 'Je k dispozícii nová verzia Syliusu. Kontaktujte svojho technika pre aktualizáciu.'

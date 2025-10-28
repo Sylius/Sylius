@@ -57,7 +57,7 @@ final class ShopApiUriBasedSectionResolverTest extends TestCase
         $this->resolver->getSection($path);
     }
 
-    public function nonMatchingPathsProvider(): array
+    public static function nonMatchingPathsProvider(): array
     {
         return [
             ['/shop'],

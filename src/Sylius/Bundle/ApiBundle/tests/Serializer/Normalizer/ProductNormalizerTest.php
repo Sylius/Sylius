@@ -32,13 +32,13 @@ final class ProductNormalizerTest extends TestCase
 {
     private MockObject&ProductVariantResolverInterface $defaultProductVariantResolver;
 
-    private MockObject&IriConverterInterface $iriConverter;
+    private IriConverterInterface&MockObject $iriConverter;
 
     private MockObject&SectionProviderInterface $sectionProvider;
 
     private MockObject&NormalizerInterface $normalizer;
 
-    private MockObject&AbstractObjectNormalizer $objectNormalizer;
+    private AbstractObjectNormalizer&MockObject $objectNormalizer;
 
     private ProductNormalizer $productNormalizer;
 
@@ -271,7 +271,7 @@ final class ProductNormalizerTest extends TestCase
                 'defaultVariant' => null,
                 'defaultVariantData' => null,
             ],
-            $this->productNormalizer->normalize($productMock, null, ['groups' => ['sylius:product:index']])
+            $this->productNormalizer->normalize($productMock, null, ['groups' => ['sylius:product:index']]),
         );
     }
 

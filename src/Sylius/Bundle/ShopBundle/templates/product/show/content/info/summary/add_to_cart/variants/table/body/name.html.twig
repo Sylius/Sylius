@@ -2,13 +2,13 @@
 {% set product = hookable_metadata.context.product %}
 
 <td>
-    {{ variant.name|default(variant.descriptor) }}
+    <div class="fw-semibold">{{ variant.name|default(variant.descriptor) }}</div>
     {% if product.hasOptions() %}
         <div>
             {% for option_value in variant.optionValues %}
-                <div>
+                <span class="badge text-bg-light text-muted">
                     {{ option_value.value }}
-                </div>
+                </span>
             {% endfor %}
         </div>
     {% endif %}

@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        expired_password_reset_token: 'पासवर्ड रीसेट टोकन की अवधि समाप्त हो गई है।'
+    account:
+        invalid_verification_token: 'ईमेल सत्यापन टोकन %verificationToken% वाला कोई शॉप उपयोगकर्ता मौजूद नहीं है।'
+        is_verified: 'ईमेल %email% वाला खाता पहले से सत्यापित है।'
+    address:
+        without_country: 'देश के बिना पता मौजूद नहीं हो सकता।'
+    code:
+        not_blank: 'कृपया कोड दर्ज करें।'
+        invalid: 'कोड में केवल अक्षर, संख्या, डैश ("-") और अंडरस्कोर ("_") होने चाहिए।'
+    contact_request:
+        email_is_invalid: 'दिया गया ई-मेल अमान्य है।'
+    country:
+        not_exist: 'देश %countryCode% मौजूद नहीं है।'
+    date_interval:
+        empty: 'तारीख अंतराल खाली नहीं हो सकता।'
+        invalid: 'तारीख अंतराल मान्य ISO 8601 अंतराल नहीं है।'
+    date_time:
+        invalid: 'दिनांक-समय मान्य ISO 8601 Y-m-d\TH:i:s फ़ॉर्मेट में नहीं है।'
+    order:
+        not_empty: 'खाली ऑर्डर संसाधित नहीं किया जा सकता।'
+    payment:
+        not_found: 'भुगतान मौजूद नहीं है।'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'रद्द किए गए ऑर्डर के लिए भुगतान विधि नहीं बदल सकते।'
+        not_available: 'भुगतान विधि %name% इस ऑर्डर के लिए उपलब्ध नहीं है। कृपया अन्य चुनें।'
+        not_exist: 'कोड %code% वाली भुगतान विधि मौजूद नहीं है।'
+    payment_request:
+        action_not_available: 'भुगतान अनुरोध (विधि कोड: %code% और भुगतान आईडी: %id%) का कोई हैंडलर नहीं है। कृपया अन्य भुगतान विधि चुनें।'
+        not_available: 'भुगतान अनुरोध इस क्रिया का समर्थन नहीं करता।'
+    product:
+        not_exist: 'उत्पाद %productName% मौजूद नहीं है।'
+    product_variant:
+        not_exist: 'उत्पाद वेरिएंट %productVariantCode% मौजूद नहीं है।'
+        not_longer_available: 'नाम %productVariantName% वाला उत्पाद वेरिएंट मौजूद नहीं है।'
+        not_sufficient: 'कोड %productVariantCode% वाले उत्पाद वेरिएंट का स्टॉक पर्याप्त नहीं है।'
+        product_variant_with_name_not_sufficient: 'नाम %productVariantName% वाला उत्पाद वेरिएंट पर्याप्त स्टॉक में नहीं है।'
+        option_values:
+            single_value: 'एक ही विकल्प के लिए उत्पाद वेरिएंट में केवल एक मान हो सकता है।'
+    reset_password:
+        invalid_token: 'पासवर्ड रीसेट टोकन %token% अमान्य है।'
+        token_expired: 'पासवर्ड रीसेट टोकन की अवधि समाप्त हो गई है।'
+    shipment:
+        not_found: 'शिपमेंट मौजूद नहीं है।'
+        shipped: 'पहले से भेजे गए शिपमेंट को दोबारा नहीं भेज सकते।'
+    shipping_method:
+        not_found: 'कोड %code% वाली शिपिंग विधि मौजूद नहीं है।'
+        not_available: 'शिपिंग विधि %name% इस ऑर्डर के लिए उपलब्ध नहीं है। कृपया अपनी शिपिंग विधि पुनः चुनें।'
+        shipping_address_not_found: 'पहले ऑर्डर का पता निर्धारित किया जाना चाहिए।'
+    statistics:
+        end_date:
+            invalid: 'समाप्ति तिथि से पहले प्रारंभ तिथि होना आवश्यक है।'

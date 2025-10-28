@@ -4,5 +4,21 @@
 sylius:
     currency:
         code:
-            exact_length: Valutakoden måste vara exakt 3 tecken lång.
-            not_blank: Var god välj en valutakod.
+            not_blank: 'Välj valutakod.'
+            unique: 'Valutakoden måste vara unik.'
+            currency: 'Detta värde är inte en giltig valutakod.'
+        exchange_rate:
+            not_blank: 'Ange växelkurs.'
+    exchange_rate:
+        ratio:
+            greater_than: 'Förhållandet måste vara större än {{ compared_value }}.'
+            less_than: 'Förhållandet måste vara mindre än {{ compared_value }}.'
+            invalid: 'Förhållandet måste vara ett tal.'
+            not_blank: 'Ange växelkursförhållande.'
+        source_currency:
+            not_blank: 'Ange från vilken valuta växelkursen ska hämtas.'
+        target_currency:
+            not_blank: 'Ange till vilken valuta växelkursen ska ställas in.'
+        unique_currency_pair: 'Valutaparet måste vara unikt.'
+        different_source_target_currency: 'Käll- och målvalutan måste skilja sig åt.'
+

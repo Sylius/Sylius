@@ -74,11 +74,10 @@ final class CreateAdminUserCommand extends Command
         try {
             $this->handle(new CreateAdminUser(...array_values($adminUserData)));
         } catch (HandlerFailedException $exception) {
-            $this->io->error(
-                $exception
-                ->getWrappedExceptions(CreateAdminUserFailedException::class)[0]
-                ->getMessage(),
-            );
+            $exceptions = $exception->getWrappedExceptions(CreateAdminUserFailedException::class);
+            if ($wrappedException = reset($exceptions)) {
+                $this->io->error($wrappedException->getMessage());
+            }
 
             return Command::FAILURE;
         }

@@ -92,4 +92,14 @@ interface ResponseCheckerInterface
     public function getResponseContent(Response $response): array;
 
     public function hasViolationWithMessage(Response $response, string $message, ?string $property = null): bool;
+
+    public function cleanErrors(): void;
+
+    /** @return array{
+     *     step: string,
+     *     type: string,
+     *     error: string[]
+     * }
+     */
+    public function getDebugErrors(): array;
 }

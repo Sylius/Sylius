@@ -22,7 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
     name: 'sylius:user:demote',
-    description: 'Demotes a user by removing a role.',
+    description: 'Demotes a user by removing roles.',
 )]
 class DemoteUserCommand extends AbstractRoleCommand
 {

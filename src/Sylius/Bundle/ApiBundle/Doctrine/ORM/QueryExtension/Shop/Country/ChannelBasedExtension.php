@@ -52,11 +52,11 @@ final readonly class ChannelBasedExtension implements QueryCollectionExtensionIn
 
         $countriesParameterName = $queryNameGenerator->generateParameterName('countries');
 
-        if ($channel->getCountries()->count() > 0) {
+        if ($channel->getEnabledCountries()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
                 ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $countriesParameterName))
-                ->setParameter($countriesParameterName, $channel->getCountries())
+                ->setParameter($countriesParameterName, $channel->getEnabledCountries())
             ;
         }
     }

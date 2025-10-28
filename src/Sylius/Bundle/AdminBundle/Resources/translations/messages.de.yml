@@ -72,3 +72,13 @@ sylius:
             week: Woche
             2weeks: 2 Wochen
             year: Jahr
+        full_screen: 'Vollbild'
+        global: 'Global'
+        original_product_price_details: 'Originalpreis – dies ist der Preis des Produkts. Er wird im Katalog durchgestrichen angezeigt und dient als Basis für die Berechnung des aktuellen Preises. Wenn dieser Wert nicht definiert ist, kopiert die Katalog-Aktionslogik den Wert aus Preis in Originalpreis.'
+        overdue: 'Überfällig'
+        pending_actions: 'Ausstehende Aktionen'
+        product_price_details: 'Preis – dies ist der aktuelle Preis des Produkts im Katalog. Er kann z.B. durch Katalogaktionen verändert werden.'
+        taxon: Taxon
+        to_approve: 'zu genehmigen'
+        to_process: 'zu bearbeiten'
+        to_ship: 'zu versenden'

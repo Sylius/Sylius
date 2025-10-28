@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Sylius\Behat\Service\DriverHelper;
 
-class SaveElement extends Element implements SaveElementInterface
+class SaveElement extends SyliusElement implements SaveElementInterface
 {
     public function saveChanges(): void
     {

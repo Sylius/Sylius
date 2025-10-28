@@ -59,6 +59,12 @@ textarea.form-control {
     min-height: 44px;
 }
 
+input[type="file"].form-control {
+    &::file-selector-button {
+        min-height: 44px;
+    }
+}
+
 .form-control:focus {
     box-shadow: none;
 }

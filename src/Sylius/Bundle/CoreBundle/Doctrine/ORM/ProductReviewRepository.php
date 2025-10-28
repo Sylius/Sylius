@@ -27,7 +27,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
  */
 class ProductReviewRepository extends EntityRepository implements ProductReviewRepositoryInterface
 {
-    public function findLatestByProductId($productId, int $count): array
+    public function findLatestByProductId(mixed $productId, int $count): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.reviewSubject = :productId')
@@ -84,7 +84,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
         ;
     }
 
-    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface
+    public function findOneByIdAndProductCode(mixed $id, string $productCode): ?ReviewInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')

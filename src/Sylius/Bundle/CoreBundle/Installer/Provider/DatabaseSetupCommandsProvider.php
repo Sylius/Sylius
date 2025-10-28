@@ -33,9 +33,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     {
     }
 
-    /**
-     * @return array<string, array>
-     */
     public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $outputStyle = new SymfonyStyle($input, $output);

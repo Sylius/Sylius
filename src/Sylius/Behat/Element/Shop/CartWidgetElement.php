@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Shop;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class CartWidgetElement extends Element implements CartWidgetElementInterface
+class CartWidgetElement extends SyliusElement implements CartWidgetElementInterface
 {
     public function getCartTotalQuantity(): int
     {

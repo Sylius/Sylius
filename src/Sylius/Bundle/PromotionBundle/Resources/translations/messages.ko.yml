@@ -4,12 +4,80 @@
 sylius:
     form:
         catalog_promotion:
-            name: 이름
+            action:
+                fixed_discount: '고정 할인'
+                percentage_discount: '백분율 할인'
+            description: '설명'
+            enabled: '사용'
+            end_date: '종료일'
+            label: '라벨'
+            name: '이름'
+            priority: '우선순위'
+            start_date: '시작일'
+            translations: '번역'
         promotion:
-            name: 이름
+            actions: '동작'
+            add_action: '동작 추가'
+            add_rule: '규칙 추가'
+            applies_to_discounted: '이미 할인된 주문 아이템에 적용'
+            applies_to_discounted_details: '이 옵션을 사용하면 카트 프로모션이 카탈로그 프로모션으로 이미 할인된 주문 아이템에도 적용됩니다.'
+            coupon_based: '쿠폰 기반'
+            description: '설명'
+            ends_at: '종료 시각'
+            exclusive: '독점'
+            label: '라벨'
+            name: '이름'
+            priority: '우선순위'
+            rules: '규칙'
+            starts_at: '시작 시각'
+            usage_limit: '사용 한도'
         promotion_action:
-            type: 타입
+            item_fixed_discount: '아이템 고정 할인'
+            item_percentage_discount: '아이템 백분율 할인'
+            order_fixed_discount: '주문 고정 할인'
+            order_percentage_discount: '주문 백분율 할인'
+            shipping_percentage_discount: '배송 백분율 할인'
+            filters: '필터'
+            fixed_discount_configuration:
+                amount: '금액'
+            percentage_discount_configuration:
+                percentage: '백분율'
+            type: '유형'
+        promotion_coupon:
+            expires_at: '만료 일자'
+            usage_limit: '사용 한도'
+        promotion_coupon_generator_instruction:
+            amount: '수량'
+            code_length: '코드 길이'
+            expires_at: '만료 일자'
+            prefix: '접두사'
+            suffix: '접미사'
+            usage_limit: '사용 한도'
+        promotion_filter:
+            price_range: '가격 범위 필터'
         promotion_rule:
+            cart_quantity: '장바구니 수량'
+            contains_product: '상품 포함'
+            customer_group: '고객 그룹'
+            has_at_least_one_from_taxons: '택슨 중 하나 이상 포함'
+            item_total: '아이템 합계'
+            nth_order: 'N번째 주문'
+            shipping_country: '배송 국가'
+            taxonomy: '택소노미'
+            total_price_of_items_from_taxon: '택슨 아이템 총액'
+            cart_quantity_configuration:
+                count: '개수'
+                equal: '같음'
+            contains_product_configuration:
+                exclude: '제외'
+                variants: '상품'
+            item_total_configuration:
+                amount: '금액'
+            nth_order_configuration:
+                nth: 'N번째'
             shipping_country_configuration:
-                country: 국가
-            type: 타입
+                country: '국가'
+            taxonomy_configuration:
+                exclude: '제외'
+                taxons: '택슨'
+            type: '유형'

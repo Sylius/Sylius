@@ -3,6 +3,6 @@
 
 sylius:
     review:
-        accept: 'Recenzia a fost acceptată.'
-        reject: 'Recenzia a fost respinsă.'
-        wait_for_the_acceptation: 'Recenzia ta așteaptă aprobare.'
+        accept: 'Recenzia a fost acceptată cu succes.'
+        reject: 'Recenzia a fost respinsă cu succes.'
+        wait_for_the_acceptation: 'Recenzia dvs. așteaptă acceptarea.'

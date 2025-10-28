@@ -94,4 +94,10 @@ interface ChannelInterface extends
     public function setChannelPriceHistoryConfig(ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig): void;
 
     public function getChannelPriceHistoryConfig(): ?ChannelPriceHistoryConfigInterface;
+
+    /**
+     * @return Collection|CountryInterface[]
+     * @return Collection<array-key, CountryInterface>
+     */
+    public function getEnabledCountries(): Collection;
 }

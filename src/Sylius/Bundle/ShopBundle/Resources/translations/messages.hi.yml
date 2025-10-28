@@ -1,0 +1,62 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    account:
+        dont_have_an_account: 'क्या आपके पास खाता नहीं है?'
+        register_here: 'यहाँ पंजीकरण करें'
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'सफलतापूर्वक रखा गया।'
+            subject: 'ऑर्डर पुष्टि'
+            view_order_or_change_payment_method: 'ऑर्डर देखें या भुगतान विधि बदलें'
+            thank_you: 'हमारी दुकान से खरीदारी करने के लिए धन्यवाद!'
+            your_order_number: 'आपका ऑर्डर संख्या'
+        password_reset:
+            hello: 'नमस्ते'
+            reset_your_password: 'अपना पासवर्ड रीसेट करें'
+            subject: 'पासवर्ड रीसेट'
+            to_reset_your_password: 'अपना पासवर्ड रीसेट करने के लिए - नीचे दिए गए लिंक पर क्लिक करें'
+            to_reset_your_password_token: 'अपना पासवर्ड रीसेट करने के लिए - नीचे दिया गया टोकन उपयोग करें'
+            token: 'आपका पासवर्ड रीसेट टोकन है'
+        user_registration:
+            start_shopping: 'खरीदारी शुरू करें'
+            subject: 'उपयोगकर्ता पंजीकरण'
+            welcome_to_our_store: 'हमारी दुकान में आपका स्वागत है!'
+            you_have_just_been_registered: 'आपका अभी पंजीकरण हुआ है। धन्यवाद'
+        verification_token:
+            hello: 'नमस्ते'
+            subject: 'ईमेल पता सत्यापन'
+            to_verify_your_email_address: 'अपना ईमेल पता सत्यापित करने के लिए - नीचे दिए गए लिंक पर क्लिक करें'
+            verify_your_email_address: 'अपना ईमेल पता सत्यापित करें'
+    footer:
+        banner:
+            free_shipping_title: 'मुफ्त शिपिंग और वापसी'
+            free_shipping_content: 'सभी ऑर्डरों पर मुफ्त शिपिंग'
+            guarantee_title: 'पैसे की गारंटी'
+            guarantee_content: '30 दिनों की मनी बैक गारंटी'
+            multiple_payments_title: 'विभिन्न भुगतान विधियाँ'
+            multiple_payments_content: 'हम क्रेडिट कार्ड और पेपाल स्वीकार करते हैं'
+    homepage:
+        about_us: 'हमारे बारे में'
+        about_us_content: 'हमारी दुकान में आपका स्वागत है, आपका नंबर एक ऑनलाइन शॉप जो आपको सर्वश्रेष्ठ उत्पाद प्रदान करता है। आप हमारी पेशकश से सर्वश्रेष्ठ कपड़ों और जूतों में से चुन सकते हैं। (<i>आप इस सामग्री को अपने अनुवाद फ़ाइल में "sylius.homepage.about_us_content" कुंजी को ओवरराइड करके संशोधित कर सकते हैं</i>)'
+        banner_content: 'तैयार हो जाएं! सर्दियाँ आ रही हैं'
+        banner_button: 'नई कलेक्शन देखें'
+        carousel_header: 'विशेष उत्पाद'
+        latest_deals: 'नवीनतम डील्स'
+        new_collection: 'नई कलेक्शन'
+        newsletter: 'न्यूज़लेटर'
+        newsletter_description: 'हमारा न्यूज़लेटर सब्सक्राइब करें और आपके लिए प्रतीक्षित नए ऑफ़र देखें! (<i>आप इस सामग्री को अपने अनुवाद फ़ाइल में "sylius.homepage.newsletter_description" कुंजी को ओवरराइड करके संशोधित कर सकते हैं</i>)'
+        subscribe: 'सदस्यता लें'
+    lightbox:
+        image_album_label: 'छवि %1 में से %2'
+    menu:
+        shop:
+            account:
+                address_book: 'पता पुस्तिका'
+                change_password: 'पासवर्ड बदलें'
+                dashboard: 'डैशबोर्ड'
+                header: 'आपका खाता'
+                order_history: 'ऑर्डर इतिहास'
+                personal_information: 'व्यक्तिगत जानकारी'
+    top_bar: 'हमारे न्यूज़लेटर के लिए साइन अप करें और -20% की छूट पाएं'

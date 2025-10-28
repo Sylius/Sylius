@@ -4,4 +4,5 @@
 sylius:
     ui:
         item.choice: '{count, plural, =0 {} one {, 1 articol} other {, # articole}}'
-        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Acest client nu a plasat nicio comandă} one {Acest client a efectuat o singura comanda} other {Per ansamblu, acest client a plasat # comenzi pe toate canalele}}'
+        lowest_price_days_before_discount_was: '{days, plural, one {Cel mai mic preț cu # zi înainte de reducerea curentă a fost {price}} other {Cel mai mic preț cu # zile înainte de reducerea curentă a fost {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Acest client nu a plasat nicio comandă} one {Acest client a plasat o comandă} other {În total, acest client a plasat # comenzi în toate canalele}}'

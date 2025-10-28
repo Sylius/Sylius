@@ -25,6 +25,7 @@ default:
 
                 - sylius.behat.context.api.admin.managing_payment_requests
                 - sylius.behat.context.api.admin.managing_payments
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@managing_payments&&@api"

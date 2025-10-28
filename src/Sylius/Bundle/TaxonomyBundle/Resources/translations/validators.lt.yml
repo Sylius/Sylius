@@ -9,6 +9,8 @@ sylius:
         name:
             max_length: Taksono pavadinimas neturi būti ilgesnis nei 255 simboliai.
             not_blank: Įveskite taksono pavadinimą.
+        parent:
+            invalid_relation: 'Tėvinis taksonas negali būti nei pats taksonas, nei kuris nors jo palikuonis.'
     taxonomy:
         name:
             max_length: Taksonomijos pavadinimas neturi būti ilgesnis kaip 255 simboliai.

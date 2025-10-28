@@ -4,42 +4,49 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: Meno držiteľa karty musí obsahovať minimálne {{ limit }} znakov.
-            not_blank: Prosím zadajte meno držiteľa karty.
+            min_length: 'Meno držiteľa karty musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Zadajte meno držiteľa karty.'
         expiry_month:
-            max_range: Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.
-            min_range: Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.
-            not_blank: Prosím vyberte mesiac expirácie.
+            max_range: 'Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.'
+            min_range: 'Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.'
+            not_blank: 'Vyberte mesiac expirácie.'
         number:
-            not_blank: Prosím zadajte číslo karty.
-            luhn: Zadané číslo kreditnej karty je chybné.
+            not_blank: 'Zadajte číslo karty.'
+            luhn: 'Číslo karty, ktoré ste zadali, je neplatné.'
         security_code:
-            not_blank: Prosím zadajte bezpečnostný kód.
-            max_length: CVV kód na karte musí obsahovať aspoň {{ limit }} čisiel.
-            min_length: CVV kód na karte nesmie obsahovať viac ako {{ limit }} číslic.
+            not_blank: 'Zadajte bezpečnostný kód.'
+            max_length: 'CVV kód musí mať aspoň {{ limit }} číslic.'
+            min_length: 'CVV kód musí mať najviac {{ limit }} číslic.'
         expiry_year:
-            not_blank: Prosím vyberte rok expirácie.
+            not_blank: 'Vyberte rok expirácie.'
+    gateway_config:
+        invalid_gateway_factory: 'Neplatný modul platobnej brány. Dostupné moduly sú {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Zadajte názov brány.'
+        factory_name:
+            not_blank: 'Zadajte názov modulu brány.'
     payment:
         currency_code:
-            not_valid: Zadaný kód meny nie je neplatný.
+            not_valid: 'Zadaný kód meny je neplatný.'
         method:
-            not_blank: 'Vyberte prosím spôsob platby.'
+            not_blank: 'Vyberte spôsob platby.'
     payment_method:
         gateway:
-            not_blank: Prosím zvolťe spôsob platby.
+            not_blank: 'Vyberte bránu platobnej metódy.'
         name:
-            max_length: Názov spôsobu platby musí obsahovať {{ limit }} znakov alebo menej.
-            min_length: Názov spôsobu platby musí obsahovať aspoň {{ limit }} znakov.
-            not_blank: Zadajte názov pre spôsob platby.
+            max_length: 'Názov platobnej metódy musí mať najviac {{ limit }} znakov.'
+            min_length: 'Názov platobnej metódy musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Zadajte názov platobnej metódy.'
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: Poplatok nemôže byť nižšii ako {{ compared_value }}.
-                not_blank: Zadajte poplatok.
+                greater_than_or_equal: 'Poplatok nesmie byť nižší ako {{ compared_value }}.'
+                not_blank: 'Zadajte sumu poplatku.'
             percent:
-                max_range: Percentualný poplatok nesmie byť vyšší ako {{ limit }}.
-                min_range: Percentualný poplatok nemôže byť nižšii ako {{ limit }}.
-                not_blank: Zadajte poplatok percentom.
+                max_range: 'Percentuálny poplatok nesmie byť väčší ako {{ limit }}.'
+                min_range: 'Percentuálny poplatok nesmie byť nižší ako {{ limit }}.'
+                not_blank: 'Zadajte percentuálny poplatok.'
         code:
-            not_blank: 'Zadajte kód pre spôsob platby.'
-            regex: 'Kód spôsobu platby môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.'
-            unique: 'Spôsob platby s daným kódom už existuje.'
+            max_length: 'Kód nesmie byť dlhší ako {{ limit }} znakov.'
+            not_blank: 'Zadajte kód platobnej metódy.'
+            regex: 'Kód platobnej metódy môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Platobná metóda s týmto kódom už existuje.'

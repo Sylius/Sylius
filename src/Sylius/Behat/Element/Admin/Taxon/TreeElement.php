@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Taxon;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element as BaseElement;
+use Sylius\Behat\Element\SyliusElement;
 use Sylius\Behat\Service\DriverHelper;
 
-class TreeElement extends BaseElement implements TreeElementInterface
+class TreeElement extends SyliusElement implements TreeElementInterface
 {
     public function getTaxonsNames(): array
     {

@@ -16,6 +16,8 @@ namespace Sylius\Component\Core\Distributor;
 interface IntegerDistributorInterface
 {
     /**
+     * @return int[]
+     *
      * @throws \InvalidArgumentException
      */
     public function distribute(float $amount, int $numberOfTargets): array;

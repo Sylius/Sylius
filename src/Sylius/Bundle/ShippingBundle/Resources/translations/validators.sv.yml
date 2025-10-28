@@ -2,6 +2,36 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    shipping_category:
+        name:
+            max_length: 'Fraktkategorins namn får inte vara längre än {{ limit }} tecken.'
+            min_length: 'Fraktkategorins namn måste vara minst {{ limit }} tecken långt.'
+            not_blank: 'Ange namn på fraktkategori.'
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange kod för fraktkategori.'
+            regex: 'Kod för fraktkategori får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Det finns redan en fraktkategori med angiven kod.'
+
+    shipping_method:
+        calculator:
+            min: 'Fraktavgiften kan inte vara lägre än 0.'
+            not_blank: 'Välj kalkylator för fraktmetod.'
+            invalid: 'Ogiltig kalkylator. Tillgängliga kalkylatorer är {{ available_calculators }}.'
+        name:
+            max_length: 'Fraktmetodens namn får inte vara längre än {{ limit }} tecken.'
+            min_length: 'Fraktmetodens namn måste vara minst {{ limit }} tecken långt.'
+            not_blank: 'Ange namn på fraktmetod.'
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange kod för fraktmetod.'
+            regex: 'Kod för fraktmetod får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Det finns redan en fraktmetod med angiven kod.'
+        zone:
+            not_blank: 'Välj zon för fraktmetod.'
+        rule:
+            invalid_type: 'Ogiltig regeltyp. Tillgängliga regeltyper är {{ available_rule_types }}.'
+
     shipment:
         shipping_method:
-            not_blank: 'Var god välj leveranssätt.'
+            not_blank: 'Välj fraktmetod.'

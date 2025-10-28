@@ -3,5 +3,8 @@
 
 sylius:
     order_item:
+        product_variant:
+            not_blank: 'Die Produktvariante wurde nicht angegeben.'
         quantity:
-            min: Die Stückzahl eines Produkts im Warenkorb darf nicht weniger als 1 sein.
+            min: 'Die Menge eines Bestellartikels darf nicht kleiner als 1 sein.'
+            not_blank: 'Die Menge wurde nicht angegeben.'

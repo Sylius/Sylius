@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin\Helper;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
@@ -53,7 +53,7 @@ trait ValidationTrait
     }
 
     /**
-     * @return SymfonyPageInterface&SpecifiesItsField
+     * @return SyliusPageInterface&SpecifiesItsField
      */
-    abstract protected function resolveCurrentPage(): SymfonyPageInterface;
+    abstract protected function resolveCurrentPage(): SyliusPageInterface;
 }

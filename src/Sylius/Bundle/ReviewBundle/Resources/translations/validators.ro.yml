@@ -4,12 +4,12 @@
 sylius:
     review:
         author:
-            already_exists: Acest e-mail este deja înregistrat, vă rugăm să vă autentificați sau să vă resetați parola.
+            already_exists: 'Acest email este deja înregistrat, vă rugăm să vă conectați sau să folosiți funcția de recuperare a parolei.'
         comment:
-            not_blank: Comentariul din recenzie n-ar trebui să fie gol.
+            not_blank: 'Comentariul recenziei nu trebuie să fie gol.'
         rating:
-            not_blank: Verifică rating-ul din recenzie.
+            not_blank: 'Trebuie să selectați evaluarea recenziei.'
         title:
-            not_blank: Titlul recenziei nu poate fi gol.
-            min_length: Titlul recenziei trebuie să aibă minim 2 caractere.
-            max_length: Titlul recenziei nu poate avea mai mult de 255 de caractere.
+            not_blank: 'Titlul recenziei nu trebuie să fie gol.'
+            min_length: 'Titlul recenziei trebuie să aibă cel puțin 2 caractere.'
+            max_length: 'Titlul recenziei trebuie să aibă cel mult 255 caractere.'

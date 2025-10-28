@@ -59,6 +59,7 @@ final class RedirectPathExtension extends AbstractExtension
         return $this->router->generate($route, $this->filterStorage->all());
     }
 
+    /** @param array<string, mixed> $routeInfo */
     private function hasAdditionalParameters(array $routeInfo): bool
     {
         return count($routeInfo) > self::NUMBER_OF_ROUTE_PROPERTIES;

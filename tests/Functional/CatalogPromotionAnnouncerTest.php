@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
-use PHPUnit\Framework\Attributes\Test;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncer;
 use Sylius\Component\Core\Model\CatalogPromotion;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;

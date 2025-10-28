@@ -4,21 +4,21 @@
 sylius:
     form:
         user:
-            email: Email
-            enabled: Abilitato
+            email: 'Email'
+            enabled: 'Abilitato'
             password:
-                label: Password
-                confirmation: Verifica
-            remember_me: Ricordami
-            shipping_address: Indirizzo di spedizione
-            username: Nome utente
-            verified: Verificato
+                label: 'Password'
+                confirmation: 'Verifica'
+            remember_me: 'Ricordami'
+            shipping_address: 'Indirizzo di spedizione'
+            username: 'Username'
+            verified: 'Verificato'
         user_filter:
-            query: Ricerca
+            query: 'Cerca'
         user_change_password:
-            confirmation: Conferma
-            current: Password corrente
-            new: Nuova password
+            confirmation: 'Conferma'
+            current: 'Password attuale'
+            new: 'Nuova password'
         user_reset_password:
-            confirmation: Conferma
-            new: Nuova password
+            confirmation: 'Conferma'
+            new: 'Nuova password'

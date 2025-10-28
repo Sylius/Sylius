@@ -276,7 +276,10 @@ final class UnitsPromotionAdjustmentsApplicatorTest extends TestCase
             ->willReturn($this->coltItemChannelPricing);
         $this->coltItemChannelPricing->expects($this->once())->method('getMinimumPrice')->willReturn(0);
         $this->firstColtUnit->expects($this->once())->method('getTotal')->willReturn(1000);
+        $this->firstColtUnit->expects($this->atLeastOnce())->method('getAdjustmentsTotal')->willReturn(0);
+        $this->secondColtUnit->expects($this->atLeastOnce())->method('getAdjustmentsTotal')->willReturn(10);
         $this->thirdColtUnit->expects($this->once())->method('getTotal')->willReturn(1000);
+        $this->thirdColtUnit->expects($this->atLeastOnce())->method('getAdjustmentsTotal')->willReturn(10);
         $this->order->expects($this->once())->method('getItems')->willReturn(new ArrayCollection([$this->coltItem]));
         $this->coltItem->expects($this->once())->method('getQuantity')->willReturn(3);
         $this->distributor->expects($this->once())->method('distribute')->with(1, 3)->willReturn([1, 0, 1]);
@@ -309,6 +312,8 @@ final class UnitsPromotionAdjustmentsApplicatorTest extends TestCase
             ->willReturn($this->coltItemChannelPricing);
         $this->coltItemChannelPricing->expects($this->once())->method('getMinimumPrice')->willReturn(0);
         $this->firstColtUnit->expects($this->once())->method('getTotal')->willReturn(1000);
+        $this->firstColtUnit->expects($this->once())->method('getAdjustmentsTotal')->willReturn(0);
+        $this->secondColtUnit->expects($this->once())->method('getAdjustmentsTotal')->willReturn(10);
         $this->order->expects($this->once())->method('getItems')->willReturn(new ArrayCollection([$this->coltItem]));
         $this->coltItem->expects($this->once())->method('getQuantity')->willReturn(2);
         $this->distributor->expects($this->once())->method('distribute')->with(1, 2)->willReturn([1, 0]);

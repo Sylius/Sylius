@@ -15,11 +15,11 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -468,7 +468,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         Assert::true($this->indexPage->isEnabledFilterApplied());
     }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
+    protected function resolveCurrentPage(): SyliusPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }

@@ -26,8 +26,8 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
     private ?\DateInterval $trackInterval;
 
     public function __construct(
-        private ObjectManager $userManager,
-        private string $userClass,
+        private readonly ObjectManager $userManager,
+        private readonly string $userClass,
         ?string $trackInterval,
     ) {
         $this->trackInterval = null === $trackInterval ? null : new \DateInterval($trackInterval);
@@ -41,12 +41,12 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $this->updateUserLastLogin($event->getAuthenticationToken()->getUser());
     }
 
-    public function onImplicitLogin(UserEvent $event)
+    public function onImplicitLogin(UserEvent $event): void
     {
         $this->updateUserLastLogin($event->getUser());
     }

@@ -1,2 +1,0 @@
-# Official Sylius Plugins
-

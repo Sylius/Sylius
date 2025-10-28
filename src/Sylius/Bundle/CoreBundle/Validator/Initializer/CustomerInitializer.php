@@ -23,7 +23,7 @@ final class CustomerInitializer implements ObjectInitializerInterface
     {
     }
 
-    public function initialize($object): void
+    public function initialize(mixed $object): void
     {
         if ($object instanceof CustomerInterface) {
             $emailCanonical = $this->canonicalizer->canonicalize($object->getEmail());

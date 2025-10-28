@@ -4,25 +4,69 @@
 sylius:
     address:
         city:
-            not_blank: 都市を入力してください。
+            max_length: '市名は{{ limit }}文字以内で入力してください。|市名は{{ limit }}文字以内で入力してください。'
+            min_length: '市名は{{ limit }}文字以上で入力してください。|市名は{{ limit }}文字以上で入力してください。'
+            not_blank: '市区町村を入力してください。'
         country:
-            not_blank: 国を選択してください。
+            not_blank: '国を選択してください。'
+            disabled: '選択した国は無効です。別の国を選択してください。'
         first_name:
-            not_blank: 名を入力してください。
+            max_length: '名は{{ limit }}文字以内で入力してください。|名は{{ limit }}文字以内で入力してください。'
+            min_length: '名は{{ limit }}文字以上で入力してください。|名は{{ limit }}文字以上で入力してください。'
+            not_blank: '名を入力してください。'
         last_name:
-            not_blank: 姓を入力してください。
+            max_length: '姓は{{ limit }}文字以内で入力してください。|姓は{{ limit }}文字以内で入力してください。'
+            min_length: '姓は{{ limit }}文字以上で入力してください。|姓は{{ limit }}文字以上で入力してください。'
+            not_blank: '姓を入力してください。'
         postcode:
-            not_blank: 郵便番号を入力してください。
+            max_length: '郵便番号は{{ limit }}文字以内で入力してください。|郵便番号は{{ limit }}文字以内で入力してください。'
+            min_length: '郵便番号は{{ limit }}文字以上で入力してください。|郵便番号は{{ limit }}文字以上で入力してください。'
+            not_blank: '郵便番号を入力してください。'
         province:
-            valid: 地域を選択してください
+            valid: '正しい都道府県を選択してください。'
         street:
-            not_blank: 住所を入力してください。
+            max_length: '住所は{{ limit }}文字以内で入力してください。|住所は{{ limit }}文字以内で入力してください。'
+            min_length: '住所は{{ limit }}文字以上で入力してください。|住所は{{ limit }}文字以上で入力してください。'
+            not_blank: '住所を入力してください。'
+        not_shippable: 'この住所は配送先として無効です。'
     country:
         code:
-            not_blank: 国の ISO コードを入力してください。
-    zone:
+            not_blank: '国のISOコードを入力してください。'
+            unique: '国のISOコードは一意でなければなりません。'
+            country: '国のISOコードが無効です。'
+        unique_provinces: 'この国のすべての州/県はコードと名前が一意でなければなりません。'
+    province:
         code:
-            not_blank: ゾーンコードを入力してください。
-            unique: ゾーンコードはユニークである必要があります。
+            max_length: 'コードは{{ limit }}文字以内で入力してください。'
+            not_blank: '州/県コードを入力してください。'
+            regex: '州/県コードは XX-XX（例: US-FL）の形式で入力してください。'
+            unique: '州/県コードは一意でなければなりません。'
         name:
-            not_blank: ゾーン名を入力してください。
+            max_length: '州/県名は{{ limit }}文字以内で入力してください。|州/県名は{{ limit }}文字以内で入力してください。'
+            min_length: '州/県名は{{ limit }}文字以上で入力してください。|州/県名は{{ limit }}文字以上で入力してください。'
+            not_blank: '州/県名を入力してください。'
+            unique: '州/県名は一意でなければなりません。'
+    zone:
+        scope:
+            not_blank: 'スコープを入力してください。'
+        code:
+            max_length: 'コードは{{ limit }}文字以内で入力してください。'
+            not_blank: 'ゾーンコードを入力してください。'
+            regex: 'ゾーンコードは英数字・ハイフン・アンダースコアのみ使用できます。'
+            unique: 'ゾーンコードは一意でなければなりません。'
+        type:
+            invalid: 'タイプ {{ value }} は無効です。利用可能なタイプ: {{ choices }}。'
+        members:
+            min_count: '{{ limit }}個以上のゾーンメンバーを追加してください。'
+        name:
+            max_length: 'ゾーン名は{{ limit }}文字以内で入力してください。|ゾーン名は{{ limit }}文字以内で入力してください。'
+            min_length: 'ゾーン名は{{ limit }}文字以上で入力してください。|ゾーン名は{{ limit }}文字以上で入力してください。'
+            not_blank: 'ゾーン名を入力してください。'
+    zone_member:
+        cannot_be_the_same_as_zone: 'ゾーンメンバーはゾーン自体と同じにはできません。'
+        code:
+            max_length: 'ゾーンメンバーコードは{{ limit }}文字以内で入力してください。'
+            not_blank: 'ゾーンメンバーを選択してください。'
+            regex: 'ゾーンメンバーコードは英数字・ハイフン・アンダースコアのみ使用できます。'
+        unique: '選択したゾーンメンバーは既にこのゾーンに含まれています。'
+
