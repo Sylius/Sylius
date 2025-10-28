@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: The promotion with given code already exists.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('code: The promotion with given code already exists.').optional()",
     "status": 422,
     "violations": [
         {
@@ -13,7 +15,5 @@
         }
     ],
     "detail": "code: The promotion with given code already exists.",
-    "description": "code: The promotion with given code already exists.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

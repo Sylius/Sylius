@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
@@ -58,8 +58,6 @@ final class PaymentRequestsTest extends JsonApiTestCase
     }
 
     /**
-     *
-     *
      * @param string[] $fixturesPaths
      *
      * @throws \JsonException
@@ -196,8 +194,6 @@ final class PaymentRequestsTest extends JsonApiTestCase
     }
 
     /**
-     *
-     *
      * @param array<string> $fixturesPaths
      *
      * @throws \JsonException

@@ -4,11 +4,11 @@
 sylius:
     form:
         currency:
-            base: Basiswährung
-            code: Währungsname
-            enabled: Eingeschaltet
-            exchange_rate: Umrechnungskurs
+            base: 'Basiswährung'
+            code: 'Name'
+            enabled: 'Aktiviert'
+            exchange_rate: 'Wechselkurs'
         exchange_rate:
-            source_currency: Ausgangswährung
-            target_currency: Zielwährung
-            ratio: Umrechnungsverhältnis
+            source_currency: 'Quellwährung'
+            target_currency: 'Zielwährung'
+            ratio: 'Verhältnis'

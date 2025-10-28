@@ -21,6 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver implements EntityObserverInterface
 {
+    /** @var array<string, mixed> */
     private array $configsCurrentlyProcessed = [];
 
     public function __construct(

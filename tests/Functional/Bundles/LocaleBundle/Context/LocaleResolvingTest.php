@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Bundles\LocaleBundle\Context;
 
-use PHPUnit\Framework\Attributes\Test;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 

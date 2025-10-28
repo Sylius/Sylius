@@ -6,7 +6,7 @@ Feature: Editing a select product attribute
 
     Background:
         Given the store is available in "English (United States)"
-        And the store has a select product attribute "T-Shirt material" with value "Banana skin"
+        And the store has a select product attribute "T-Shirt material" with values "Banana skin" and "Cotton"
         And I am logged in as an administrator
 
     @api @ui
@@ -35,6 +35,16 @@ Feature: Editing a select product attribute
 
     @api @ui @mink:chromedriver
     Scenario: Deleting a value from an existing select product attribute
+        When I want to edit this product attribute
+        And I delete value "Banana skin"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this product attribute should not have value "Banana skin"
+
+    @api @ui @mink:chromedriver
+    Scenario: Deleting a value from an existing select product attribute while it's in use
+        Given the store has a product "PHP T-Shirt"
+        And this product has a select attribute "T-Shirt material" with value "Banana skin"
         When I want to edit this product attribute
         And I delete value "Banana skin"
         And I save my changes

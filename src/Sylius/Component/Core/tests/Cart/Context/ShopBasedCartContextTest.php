@@ -108,9 +108,7 @@ final class ShopBasedCartContextTest extends TestCase
         $this->cart->expects($this->once())->method('setCustomer')->with($this->customer);
         $this->cart->expects($this->once())
             ->method('setBillingAddress')
-            ->with($this->callback(static function (AddressInterface $address): bool {
-                return $address->getCustomer() === null;
-            }));
+            ->with($this->callback(static fn (AddressInterface $address): bool => $address->getCustomer() === null));
 
         $this->assertSame($this->cart, $this->shopBasedCartContext->getCart());
     }

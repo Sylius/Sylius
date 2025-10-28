@@ -21,7 +21,7 @@
             <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
-        <many-to-one field="attribute" target-entity="Sylius\Component\Attribute\Model\AttributeInterface">
+        <many-to-one field="attribute" target-entity="Sylius\Component\Product\Model\ProductAttributeInterface">
             <join-column name="attribute_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
     </mapped-superclass>

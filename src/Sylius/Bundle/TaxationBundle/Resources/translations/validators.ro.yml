@@ -4,23 +4,32 @@
 sylius:
     tax_category:
         name:
-            not_blank: Vă rugăm să completați numele categoriei de taxe.
+            not_blank: 'Vă rugăm să introduceți numele categoriei de taxă.'
+            min_length: 'Numele categoriei de taxă trebuie să aibă cel puțin 1 caracter.|Numele categoriei de taxă trebuie să aibă cel puțin {{ limit }} caractere.'
+            max_length: 'Numele categoriei de taxă nu poate avea mai mult de 1 caracter.|Numele categoriei de taxă nu poate avea mai mult de {{ limit }} caractere.'
         code:
-            not_blank: Introdu un cod de categorie de taxe.
-            regex: Codul categoriei de taxe poate să conțină doar litere, numere, - și _.
-            unique: Codul categoriei de taxe trebuie să fie unic.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți codul categoriei de taxă.'
+            regex: 'Codul categoriei de taxă poate conține doar litere, cifre, cratime și underscore-uri.'
+            unique: 'Categoria de taxă cu codul dat există deja.'
     tax_rate:
         category:
-            not_blank: Vă rugăm să alegeți categoria de taxe.
+            not_blank: 'Vă rugăm să selectați categoria de taxă.'
         name:
-            not_blank: Vă rugăm să completați numele taxei.
+            not_blank: 'Vă rugăm să introduceți numele cotei de taxă.'
+            min_length: 'Numele cotei de taxă trebuie să aibă cel puțin 1 caracter.|Numele cotei de taxă trebuie să aibă cel puțin {{ limit }} caractere.'
+            max_length: 'Numele cotei de taxă nu poate avea mai mult de 1 caracter.|Numele cotei de taxă nu poate avea mai mult de {{ limit }} caractere.'
         amount:
-            not_blank: Vă rugăm să completați valoarea taxei.
+            invalid: 'Valoarea cotei de taxă este invalidă.'
+            not_blank: 'Vă rugăm să introduceți valoarea cotei de taxă.'
         calculator:
-            not_blank: Vă rugăm să alegeți calculatorul de taxe.
+            not_blank: 'Vă rugăm să selectați calculatorul de taxă.'
         zone:
-            not_blank: Vă rugăm să selectaţi zona de taxe.
+            not_blank: 'Vă rugăm să selectați zona de taxă.'
         code:
-            not_blank: Vă rugăm să introduceţi codul taxei.
-            regex: Codul taxei poate să conțină doar litere, numere, - și _.
-            unique: Codul taxei trebuie să fie unic.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți codul cotei de taxă.'
+            regex: 'Codul cotei de taxă poate conține doar litere, cifre, cratime și underscore-uri.'
+            unique: 'Cota de taxă cu codul dat există deja.'
+        date:
+            greater_than_start_date: 'Cota de taxă nu trebuie să se termine înainte de a începe.'

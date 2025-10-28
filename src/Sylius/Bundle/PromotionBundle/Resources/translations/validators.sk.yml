@@ -2,37 +2,77 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    catalog_promotion:
+        code:
+            max_length: 'Kód nesmie byť dlhší ako {{ limit }} znakov.'
+            unique: 'Katalógová propagácia s daným kódom už existuje.'
+            regex: 'Kód katalógovej propagácie môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            not_blank: 'Prosím, zadajte kód katalógovej propagácie.'
+        date:
+            greater_than_start_date: 'Dátum ukončenia nemôže byť pred dátumom začiatku.'
+        name:
+            max_length: 'Názov katalógovej propagácie nesmie byť dlhší než {{ limit }} znakov.'
+            min_length: 'Názov katalógovej propagácie musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte názov katalógovej propagácie.'
+        state:
+            processing: 'Katalógová propagácia sa nedá upraviť, pretože sa práve spracováva.'
+    catalog_promotion_action:
+        type:
+            not_blank: 'Prosím, vyberte typ akcie.'
+            invalid: 'Typ akcie katalógovej propagácie je neplatný. Dostupné typy sú {{ available_action_types }}.'
+        invalid_type: 'Typ akcie katalógovej propagácie je neplatný. Prosím, vyberte platný typ.'
+        percentage_discount:
+            not_in_range: 'Výška percentuálnej zľavy musí byť medzi 0 % a 100 %.'
+            not_number_or_empty: 'Výška percentuálnej zľavy musí byť číslo a nemôže byť prázdna.'
+            not_valid: 'Výška percentuálnej zľavy musí byť nakonfigurovaná.'
+    catalog_promotion_scope:
+        type:
+            not_blank: 'Prosím, vyberte typ rozsahu.'
+            invalid: 'Typ rozsahu katalógovej propagácie je neplatný. Dostupné typy sú {{ available_scope_types }}.'
     promotion:
         code:
-            unique: Zľava zo zadaným kódom už existuje.
-            regex: Kód akcie môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            not_blank: Prosím zadajte kód pre zľavu.
+            max_length: 'Kód nesmie byť dlhší než {{ limit }} znakov.'
+            unique: 'Promo akcia s daným kódom už existuje.'
+            regex: 'Kód promo akcie môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            not_blank: 'Prosím, zadajte kód promo akcie.'
         description:
-            max_length: Popis akcie nesmie byť dlhší ako 1 znak.|Popis akcie nesmie byť dlhší ako {{ limit }} znakov.
-            min_length: Popis akcie musí obsahovať aspoň 1 znak.|Popis akcie musí obsahovať aspoň {{ limit }} znakov.
-            not_blank: Zadajte popis akcie.
-        end_date_cannot_be_set_prior_start_date: Dátum ukončenia nemožno nastaviť skôr ako datúm začiatoku.
+            max_length: 'Popis promo akcie nesmie byť dlhší než 1 znak.|Popis promo akcie nesmie byť dlhší než {{ limit }} znakov.'
+            min_length: 'Popis promo akcie musí mať aspoň 1 znak.|Popis promo akcie musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte popis promo akcie.'
+        end_date_cannot_be_set_prior_start_date: 'Dátum ukončenia nemôže byť pred dátumom začiatku.'
+        is_invalid: 'Promo akcia je neplatná.'
         name:
-            max_length: Názov akcie nesmie byť dlhší ako 1 znak.|Názov akcie nesmie byť dlhší ako {{ limit }} znakov.
-            min_length: Názov akcie musí obsahovať aspoň 1 znak.|Názov akcie musí obsahovať aspoň {{ limit }} znakov.
-            not_blank: Zadajte názov akcie.
+            max_length: 'Názov promo akcie nesmie byť dlhší než 1 znak.|Názov promo akcie nesmie byť dlhší než {{ limit }} znakov.'
+            min_length: 'Názov promo akcie musí mať aspoň 1 znak.|Názov promo akcie musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte názov promo akcie.'
+    promotion_action:
+        invalid_type: 'Typ akcie promo akcie je neplatný. Dostupné typy sú {{ available_action_types }}.'
+        percentage_discount_configuration:
+            not_in_range: 'Percentuálna zľava musí byť medzi 0 % a 100 %.'
+    promotion_rule:
+        invalid_type: 'Typ pravidla promo akcie je neplatný. Dostupné typy sú {{ available_rule_types }}.'
     promotion_coupon:
         code:
-            max_length: Kód kupónu nesmie byť dlhší ako 1 znak.|Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.
-            min_length: Kód kupónu musí obsahovať aspoň 1 znak.|Kód kupónu musí obsahovať aspoň {{ limit }} znakov.
-            not_blank: Zadajte kód kupónu.
-            regex: Kód kupónu môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Tento kupón už existuje.
-        is_invalid: Kód kupónu je neplatný.
+            max_length: 'Kód nesmie byť dlhší než {{ limit }} znakov.'
+            min_length: 'Kód kupónu musí byť aspoň 1 znak.|Kód kupónu musí byť aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte kód kupónu.'
+            regex: 'Kód kupónu môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Tento kupón už existuje.'
+        is_invalid: 'Kód kupónu je neplatný.'
+        promotion:
+            not_blank: 'Prosím, zadajte promo akciu pre tento kupón.'
+            not_coupon_based: 'Len promo akcie založené na kupóne môžu mať kupóny.'
         usage_limit:
-            min: Limit pre použitie kupónu musí byť najmenej {{ limit }}.
+            min: 'Limit použitia kupónu musí byť aspoň {{ limit }}.'
     promotion_coupon_generator_instruction:
         amount:
-            min: Počet kupónov na vygenerovanie musí byť minimálne {{ limit }}.
-            not_blank: Prosím, zadajte počet kupónov na vygenerovanie.
+            min: 'Počet kupónov na vygenerovanie musí byť aspoň {{ limit }}.'
+            not_blank: 'Prosím, zadajte počet kupónov na vygenerovanie.'
         code_length:
-            min: Kód kupónu musí obsahovať aspoň {{ limit }} znakov.
-            max: Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.
-            not_blank: Prosím, zadajte dĺžku kódu kupónu.
+            min: 'Dĺžka kódu kupónu musí byť aspoň {{ limit }} znakov.'
+            max: 'Dĺžka kódu kupónu nesmie byť dlhšia než {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte dĺžku kódu kupónu.'
+            not_in_range: 'Dĺžka kódu kupónu musí byť medzi {{ min }} a {{ max }}.'
+        possible_generation_amount: 'Neplatná dĺžka kódu kupónu alebo počet kupónov. Nie je možné vygenerovať %expectedAmount% jedinečných kupónov s dĺžkou kódu %codeLength%. Možný počet kupónov na vygenerovanie je %possibleAmount%.'
         usage_limit:
-            min: Limit využitia vygenerovaných kupónov musí byť najmenej {{ limit }}.
+            min: 'Limit použitia vygenerovaných kupónov musí byť aspoň {{ limit }}.'

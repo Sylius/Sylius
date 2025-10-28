@@ -19,8 +19,8 @@ class ResolveNextRoute extends Generic implements ResolveNextRouteInterface
 {
     private ?string $routeName = null;
 
-    /** @var array */
-    private $routeParameters = [];
+    /** @var array<string, mixed> */
+    private array $routeParameters = [];
 
     public function getRouteName(): ?string
     {

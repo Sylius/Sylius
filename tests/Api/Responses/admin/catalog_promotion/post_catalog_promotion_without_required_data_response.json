@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: Please enter catalog promotion code.\nname: Please enter catalog promotion name.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('code: Please enter catalog promotion code.\nname: Please enter catalog promotion name.').optional()",
     "status": 422,
     "violations": [
         {
@@ -18,7 +20,5 @@
         }
     ],
     "detail": "code: Please enter catalog promotion code.\nname: Please enter catalog promotion name.",
-    "description": "code: Please enter catalog promotion code.\nname: Please enter catalog promotion name.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

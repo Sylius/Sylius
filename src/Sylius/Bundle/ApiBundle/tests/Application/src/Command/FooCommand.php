@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Application\Command;
 
-final class FooCommand
+final readonly class FooCommand
 {
     public function __construct(private string $bar)
     {

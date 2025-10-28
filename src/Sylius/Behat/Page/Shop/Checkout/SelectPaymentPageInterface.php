@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface SelectPaymentPageInterface extends SymfonyPageInterface
+interface SelectPaymentPageInterface extends SyliusPageInterface
 {
     public function selectPaymentMethod(string $paymentMethod): void;
 

@@ -4,13 +4,28 @@
 sylius:
     form:
         product:
-            name: 이름
+            name: '이름'
+            description: '설명'
+            attributes: '속성'
+            options: '옵션'
+            meta_keywords: '메타 키워드'
+            meta_description: '메타 설명'
+            slug: '슬러그'
+            taxons: '택슨'
         product_variant:
-            name: 이름
+            name: '이름'
         association_type:
-            name: 이름
+            name: '이름'
+            translations: '번역'
+        association:
+            type: '연관 유형'
+            product: '연관 상품'
         variant:
-            name: 이름
+            name: '이름'
         option:
-            name: 이름
-            values: 예상값
+            name: '이름'
+            position: '위치'
+            values: '가능한 값'
+        option_value:
+            add_value: '값 추가'
+            value: '값'

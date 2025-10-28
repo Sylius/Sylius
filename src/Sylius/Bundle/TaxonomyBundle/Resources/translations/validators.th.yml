@@ -13,6 +13,8 @@ sylius:
         slug:
             not_blank: กรุณาใส่ Slug
             unique: Slug ต้องไม่ซ้ำกัน
+        parent:
+            invalid_relation: 'พ่อแม่ต้องไม่เป็นแท็กซอนเดียวกันหรือเป็นลูกหลานของมัน'
     taxonomy:
         name:
             max_length: ชื่อหมวดหมู่ต้องมีความยาวไม่เกิน 255 ตัวอักษร

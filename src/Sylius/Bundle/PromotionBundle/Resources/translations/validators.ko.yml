@@ -1,0 +1,78 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    catalog_promotion:
+        code:
+            max_length: '코드는 {{ limit }}자를 초과할 수 없습니다.'
+            unique: '해당 코드의 카탈로그 프로모션이 이미 존재합니다.'
+            regex: '카탈로그 프로모션 코드는 문자, 숫자, 하이픈(-), 밑줄(_)만 사용할 수 있습니다.'
+            not_blank: '카탈로그 프로모션 코드를 입력하세요.'
+        date:
+            greater_than_start_date: '종료일은 시작일보다 빠를 수 없습니다.'
+        name:
+            max_length: '카탈로그 프로모션 이름은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '카탈로그 프로모션 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '카탈로그 프로모션 이름을 입력하세요.'
+        state:
+            processing: '카탈로그 프로모션이 현재 처리 중이므로 수정할 수 없습니다.'
+    catalog_promotion_action:
+        type:
+            not_blank: '동작 유형을 선택하세요.'
+            invalid: '카탈로그 프로모션 동작 유형이 잘못되었습니다. 사용 가능한 유형: {{ available_action_types }}.'
+        invalid_type: '카탈로그 프로모션 동작 유형이 잘못되었습니다. 올바른 유형을 선택하세요.'
+        percentage_discount:
+            not_in_range: '백분율 할인 금액은 0% 이상 100% 이하여야 합니다.'
+            not_number_or_empty: '백분율 할인 금액은 숫자여야 하며 비워둘 수 없습니다.'
+            not_valid: '백분율 할인 금액이 설정되어야 합니다.'
+    catalog_promotion_scope:
+        type:
+            not_blank: '범위 유형을 선택하세요.'
+            invalid: '카탈로그 프로모션 범위 유형이 잘못되었습니다. 사용 가능한 유형: {{ available_scope_types }}.'
+    promotion:
+        code:
+            max_length: '코드는 {{ limit }}자를 초과할 수 없습니다.'
+            unique: '해당 코드의 프로모션이 이미 존재합니다.'
+            regex: '프로모션 코드는 문자, 숫자, 하이픈(-), 밑줄(_)만 사용할 수 있습니다.'
+            not_blank: '프로모션 코드를 입력하세요.'
+        description:
+            max_length: '프로모션 설명은 1자를 초과할 수 없습니다.|프로모션 설명은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '프로모션 설명은 최소 1자 이상이어야 합니다.|프로모션 설명은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '프로모션 설명을 입력하세요.'
+        end_date_cannot_be_set_prior_start_date: '종료일은 시작일보다 이전으로 설정할 수 없습니다.'
+        is_invalid: '프로모션이 유효하지 않습니다.'
+        name:
+            max_length: '프로모션 이름은 1자를 초과할 수 없습니다.|프로모션 이름은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '프로모션 이름은 최소 1자 이상이어야 합니다.|프로모션 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '프로모션 이름을 입력하세요.'
+    promotion_action:
+        invalid_type: '프로모션 동작 유형이 잘못되었습니다. 사용 가능한 유형: {{ available_action_types }}.'
+        percentage_discount_configuration:
+            not_in_range: '백분율 할인은 0% 이상 100% 이하여야 합니다.'
+    promotion_rule:
+        invalid_type: '프로모션 규칙 유형이 잘못되었습니다. 사용 가능한 유형: {{ available_rule_types }}.'
+    promotion_coupon:
+        code:
+            max_length: '코드는 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '쿠폰 코드는 최소 1자 이상이어야 합니다.|쿠폰 코드는 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '쿠폰 코드를 입력하세요.'
+            regex: '쿠폰 코드는 문자, 숫자, 하이픈(-), 밑줄(_)만 사용할 수 있습니다.'
+            unique: '해당 쿠폰이 이미 존재합니다.'
+        is_invalid: '쿠폰 코드가 유효하지 않습니다.'
+        promotion:
+            not_blank: '이 쿠폰에 적용할 프로모션을 지정하세요.'
+            not_coupon_based: '쿠폰 기반 프로모션만 쿠폰을 가질 수 있습니다.'
+        usage_limit:
+            min: '쿠폰 사용 한도는 최소 {{ limit }} 이상이어야 합니다.'
+    promotion_coupon_generator_instruction:
+        amount:
+            min: '생성할 쿠폰 수는 최소 {{ limit }} 이상이어야 합니다.'
+            not_blank: '생성할 쿠폰 수를 입력하세요.'
+        code_length:
+            min: '쿠폰 코드는 최소 {{ limit }}자 이상이어야 합니다.'
+            max: '쿠폰 코드는 {{ limit }}자를 초과할 수 없습니다.'
+            not_blank: '쿠폰 코드 길이를 입력하세요.'
+            not_in_range: '쿠폰 코드 길이는 {{ min }}에서 {{ max }} 사이여야 합니다.'
+        possible_generation_amount: '쿠폰 코드 길이 또는 수량이 잘못되었습니다. 코드 길이 %codeLength% 로는 %expectedAmount%개의 고유 쿠폰을 생성할 수 없습니다. 생성 가능한 최대 수량은 %possibleAmount%개입니다.'
+        usage_limit:
+            min: '생성된 쿠폰의 사용 한도는 최소 {{ limit }} 이상이어야 합니다.'

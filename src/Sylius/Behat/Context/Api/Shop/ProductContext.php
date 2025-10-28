@@ -703,7 +703,7 @@ final class ProductContext implements Context
     public function iShouldSeeAsItsLowestPriceBeforeTheDiscount(int $lowestPriceBeforeDiscount): void
     {
         $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-        $variant =  $product['defaultVariantData'];
+        $variant = $product['defaultVariantData'];
 
         Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
         Assert::same($variant['lowestPriceBeforeDiscount'], $lowestPriceBeforeDiscount);

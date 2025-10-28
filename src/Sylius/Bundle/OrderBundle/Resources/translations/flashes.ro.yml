@@ -3,7 +3,8 @@
 
 sylius:
     cart:
-        add_item: 'Produsul a fost adăugat în coș'
-        cannot_modify: 'Comanda a fost plasată.'
-        remove_item: 'Produsul a fost scos din coș'
+        add_item: 'Articolul a fost adăugat în coș'
+        cannot_modify: 'O comandă a fost deja plasată pentru coșul pe care încercați să-l modificați.'
+        not_recalculated: 'Din cauza valorilor invalide din coșul dvs., acesta nu a fost recalculat.'
+        remove_item: 'Articolul a fost eliminat din coș'
         save: 'Coșul a fost actualizat cu succes'

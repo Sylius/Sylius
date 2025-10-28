@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\PriceHistory\Command;
 
 final class ApplyLowestPriceOnChannelPricings
 {
+    /** @param array<int> $channelPricingIds */
     public function __construct(public array $channelPricingIds)
     {
     }

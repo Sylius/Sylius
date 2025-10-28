@@ -73,7 +73,7 @@ jobs:
                 uses: actions/checkout@v4
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.4
+                uses: SyliusLabs/BuildTestAppAction@v3.0.1
                 with:
                     build_type: "sylius"
                     e2e_js: "yes"

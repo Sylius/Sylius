@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxon-tree\/ACCESSORIES\/path",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/ACCESSORIES",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "ACCESSORIES",
+            "level": 1,
+            "name": "Accessories",
+            "slug": "categories\/accessories"
+        }
+    ]
+}

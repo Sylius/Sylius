@@ -1,2 +1,0 @@
-# 🏗️ Plugin Development Guide
-

@@ -18,7 +18,9 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 interface AdjustmentsAggregatorInterface
 {
     /**
-     * @param iterable|AdjustmentInterface[] $adjustments
+     * @param iterable<AdjustmentInterface> $adjustments
+     *
+     * @return array<string, int>
      *
      * @throws \InvalidArgumentException
      */

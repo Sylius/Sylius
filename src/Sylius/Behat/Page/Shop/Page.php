@@ -15,9 +15,9 @@ namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-abstract class Page extends SymfonyPage implements PageInterface
+abstract class Page extends SyliusPage implements PageInterface
 {
     public function fillElement(string $value, string $element, array $parameters = []): void
     {

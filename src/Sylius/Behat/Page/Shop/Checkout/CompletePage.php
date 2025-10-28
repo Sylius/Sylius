@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Routing\RouterInterface;
 
-class CompletePage extends SymfonyPage implements CompletePageInterface
+class CompletePage extends SyliusPage implements CompletePageInterface
 {
     public function __construct(
         Session $session,

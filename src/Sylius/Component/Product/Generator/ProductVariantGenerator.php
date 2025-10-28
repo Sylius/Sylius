@@ -62,7 +62,8 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
         }
     }
 
-    private function createVariant(ProductInterface $product, array $optionMap, $permutation): ProductVariantInterface
+    /** @param array<mixed> $optionMap */
+    private function createVariant(ProductInterface $product, array $optionMap, mixed $permutation): ProductVariantInterface
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createForProduct($product);
@@ -71,7 +72,8 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
         return $variant;
     }
 
-    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation): void
+    /** @param array<mixed> $optionMap */
+    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, mixed $permutation): void
     {
         if (!is_array($permutation)) {
             $variant->addOptionValue($optionMap[$permutation]);

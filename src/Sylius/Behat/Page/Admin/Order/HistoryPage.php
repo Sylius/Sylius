@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class HistoryPage extends SymfonyPage implements HistoryPageInterface
+class HistoryPage extends SyliusPage implements HistoryPageInterface
 {
     public function getRouteName(): string
     {

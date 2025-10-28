@@ -53,6 +53,7 @@ final class TextAttributeType implements AttributeTypeInterface
         }
     }
 
+    /** @param array<string, bool|int|string|null> $validationConfiguration */
     private function getValidationErrors(
         ExecutionContextInterface $context,
         ?string $value,

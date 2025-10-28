@@ -3,4 +3,4 @@
 
 sylius:
     customer:
-        register: 'Ďakujeme za registráciu, skontrolujte si e-mail pre overenie vašeho účtu.'
+        register: 'Ďakujeme za registráciu, skontrolujte svoj e-mail na overenie účtu.'

@@ -47,6 +47,6 @@ final class ShopUserLogoutHandlerTest extends TestCase
         $this->channelContext->expects($this->once())->method('getChannel')->willReturn($channel);
         $this->cartStorage->expects($this->once())->method('removeForChannel')->with($channel);
 
-        $this->shopUserLogoutHandler->onLogout($logoutEvent);
+        $this->shopUserLogoutHandler->onLogout();
     }
 }

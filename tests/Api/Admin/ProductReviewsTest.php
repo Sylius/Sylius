@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ProductReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -133,7 +133,6 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    
     #[DataProvider('invalidRatingRangeDataProvider')]
     #[Test]
     public function it_does_not_allow_to_update_a_product_review_with_invalid_rating(int $rating): void

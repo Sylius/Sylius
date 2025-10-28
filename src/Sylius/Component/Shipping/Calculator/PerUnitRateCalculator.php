@@ -17,6 +17,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class PerUnitRateCalculator implements CalculatorInterface
 {
+    /** @param array<string, mixed> $configuration */
     public function calculate(ShipmentInterface $subject, array $configuration): int
     {
         return (int) ($configuration['amount'] * $subject->getShippingUnitCount());

@@ -4,6 +4,7 @@
 sylius:
     locale:
         code:
-            not_blank: Prosím zvoľte kód jazyka.
-            regex: Kód jazyka môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Kód jazyka musí byť jedinečný.
+            max_length: 'Kód nesmie byť dlhší ako {{ limit }} znakov.'
+            not_blank: 'Vyberte kód lokalizácie.'
+            locale: 'Táto hodnota nie je platný kód lokalizácie.'
+            unique: 'Kód lokalizácie musí byť jedinečný.'

@@ -23,7 +23,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
 final class ImpersonateUserController
@@ -44,7 +43,6 @@ final class ImpersonateUserController
         }
 
         $user = $this->userProvider->loadUserByUsername($username);
-        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         Assert::isInstanceOf($user, UserInterface::class);
 
         $this->impersonator->impersonate($user);

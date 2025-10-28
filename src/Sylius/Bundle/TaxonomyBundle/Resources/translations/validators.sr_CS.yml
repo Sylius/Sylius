@@ -5,3 +5,5 @@ sylius:
     taxon:
         code:
             not_blank: Unesite taxon kod.
+        parent:
+            invalid_relation: 'Родитељ не може бити ни сам таксон ни било који од његових потомака.'

@@ -20,6 +20,7 @@ use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterface
 {
@@ -54,6 +55,7 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
         $this->dispatchCatalogPromotionEndedEvent($catalogPromotion);
     }
 
+    /** @return DelayStamp[] */
     private function calculateStartDateStamp(CatalogPromotionInterface $catalogPromotion): array
     {
         if ($catalogPromotion->getStartDate() !== null) {

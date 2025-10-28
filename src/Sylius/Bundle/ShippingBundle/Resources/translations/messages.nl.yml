@@ -5,48 +5,55 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Aantal
-                equal: Gelijk aan
-            type: Regeltype
+                count: 'Aantal'
+                equal: 'Gelijk aan'
+            type: 'Regeltype'
         shipment:
-            state: Status
+            state: 'Status'
             states:
-                checkout: Afrekenen
-                pending: In behandeling
-                ready: Klaar
-                shipped: Verzonden
-                returned: Geretourneerd
-                cancelled: Geannuleerd
-            tracking_code: Tracking Code
+                checkout: 'Afrekenen'
+                pending: 'In afwachting'
+                ready: 'Klaar'
+                shipped: 'Verzonden'
+                returned: 'Retourneren'
+                cancelled: 'Geannuleerd'
+            tracking_code: 'Trackingcode'
         shipping_calculator:
             flat_rate_configuration:
-                label: Vast tarief per zending
-                amount: Bedrag
+                label: 'Vast tarief per zending'
+                amount: 'Bedrag'
             per_unit_rate_configuration:
-                label: Forfaitair bedrag per eenheid
-                amount: Bedrag
+                label: 'Vast tarief per eenheid'
+                amount: 'Bedrag'
         shipping_category:
-            description: Omschrijving
-            name: Naam
+            description: 'Beschrijving'
+            name: 'Naam'
         shipping_method:
-            add_rule: Regel toevoegen
-            calculator: Calculator
-            category: Categorie
-            category_requirement: Categorie vereisten
-            channels: Kanalen
-            configuration: Configuratie
-            description: Omschrijving
-            enabled: Ingeschakeld
-            match_all_category_requirement: Alle eenheden moeten overeenkomen met de methodecategorie
-            match_any_category_requirement: Minstens 1 eenheid moet overeenkomen met de methodecategorie
-            match_none_category_requirement: Geen van de eenheden hoeven overeen te komen met de methodecategorie
-            name: Naam
-            position: Positie
-            rules: Regels
-            tax_category: Belastingcategorie
-            translations: Vertalingen
+            add_rule: 'Voeg regel toe'
+            calculator: 'Rekenmachine'
+            category: 'Categorie'
+            category_requirement: 'Categorie vereiste'
+            channels: 'Kanalen'
+            configuration: 'Configuratie'
+            description: 'Beschrijving'
+            enabled: 'Ingeschakeld'
+            match_all_category_requirement: 'Alle eenheden moeten de methodecategorie overeenkomen'
+            match_any_category_requirement: 'Minstens 1 eenheid moet de methodecategorie overeenkomen'
+            match_none_category_requirement: 'Geen van de eenheden mag de methodecategorie overeenkomen'
+            name: 'Naam'
+            position: 'Positie'
+            rules: 'Regels'
+            rules_help: 'Gebruik regels om te bepalen of deze verzendmethode van toepassing kan zijn op een bepaalde bestelling. Als een regel waar is, kan deze verzendmethode worden toegepast. Let op: als je meerdere regels toevoegt, moeten alle regels waar zijn.'
+            select_calculator: 'Selecteer een rekenmachine'
+            tax_category: 'Belastingcategorie'
+            translations: 'Vertalingen'
         shipping_method_rule:
-            type: Type
-            total: Totaal
-            weight: Gewicht
-            amount: Bedrag
+            items_total_greater_than_or_equal: 'Totaal van items groter dan of gelijk aan'
+            items_total_less_than_or_equal: 'Totaal van items kleiner dan of gelijk aan'
+            type: 'Type'
+            total: 'Totaal'
+            total_weight_greater_than_or_equal: 'Totale gewicht groter dan of gelijk aan'
+            total_weight_less_than_or_equal: 'Totale gewicht kleiner dan of gelijk aan'
+            weight: 'Gewicht'
+            amount: 'Bedrag'
+            select: 'Selecteer een regeltype'

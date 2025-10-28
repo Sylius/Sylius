@@ -37,7 +37,7 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/orm": "^2.18 || ^3.3",
-        "phpunit/phpunit": "^10.5",
+        "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {

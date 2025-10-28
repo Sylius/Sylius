@@ -94,9 +94,7 @@ final class PaymentRequestCancellerTest extends TestCase
 
         $this->objectManager->expects(self::once())
             ->method('persist')
-            ->with(self::callback(function ($object) use ($paymentRequest1) {
-                return $object === $paymentRequest1;
-            }));
+            ->with(self::callback(fn ($object) => $object === $paymentRequest1));
 
         $this->objectManager->expects(self::once())
             ->method('flush');

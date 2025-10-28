@@ -41,6 +41,7 @@ final class PriceRangeFilter implements FilterInterface
         return $filteredItems;
     }
 
+    /** @param array<string, mixed> $configuration */
     private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration): bool
     {
         $price = $this->productVariantPricesCalculator->calculate($variant, ['channel' => $configuration['channel']]);
@@ -56,6 +57,7 @@ final class PriceRangeFilter implements FilterInterface
         ;
     }
 
+    /** @param array<string, mixed> $configuration */
     private function isConfigured(array $configuration): bool
     {
         return

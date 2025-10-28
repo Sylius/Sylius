@@ -3,9 +3,10 @@
 
 sylius:
     payment:
+        authorized: 'Il pagamento è stato autorizzato.'
         cancelled: 'Il pagamento è stato annullato.'
         completed: 'Il pagamento è stato completato.'
-        failed: 'Pagamento non riuscito.'
+        failed: 'Il pagamento è fallito.'
         processing: 'Il pagamento è in fase di elaborazione.'
         refunded: 'Il pagamento è stato rimborsato con successo.'
-        unknown: 'C''era un problema sconosciuto con il pagamento.'
+        unknown: 'Si è verificato un problema sconosciuto con il pagamento.'

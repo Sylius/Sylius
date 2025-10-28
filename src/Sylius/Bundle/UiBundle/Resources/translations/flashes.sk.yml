@@ -3,24 +3,30 @@
 
 sylius:
     channel:
-        delete_error: 'Kanál nemôže byť odstránený. Musí byť aktívny aspoň jeden kanál.'
+        delete_error: 'Kanál nemožno zmazať. Je vyžadovaný aspoň jeden povolený kanál.'
     checkout:
-        complete_error: 'Vyskytol sa neočakávany problém pri vybavovaní objednávky. Prosím, skúste zadať objednávku znova.'
+        complete_error: 'Pri dokončovaní objednávky sa vyskytol neočakávaný problém. Prosím, skúste objednávku odoslať znova.'
     contact:
-        request_success: 'Žiadosť o kontaktovanie bola úspešne uložená.'
-        request_error: 'Vyskytol sa problém pri odosielaní žiadosti o kontaktovanie. Prosím, skúste znova neskôr.'
+        request_success: 'Váš kontaktný dopyt bol úspešne odoslaný.'
+        request_error: 'Pri odosielaní kontaktného dopytu sa vyskytol problém. Prosím, skúste to neskôr.'
     customer:
         add_address: 'Adresa bola úspešne pridaná.'
-        impersonate: 'Úspešne zosobnený užívateľ %name%.'
+        impersonate: 'Podarilo sa prevziať identitu zákazníka %name%.'
         set_address_as_default: 'Adresa bola nastavená ako predvolená.'
     order:
-        apply_state_machine_transition_error: 'Tam bol neočakávaný problém s aktualizáciou objednávku. Prosím, skúste znova aktualizovať objednávky.'
-        promotion_integrity: 'Akciu %promotionName% už nemôžete využiť.'
-        total_integrity: 'Celková suma objednávky bola zmenená, skontrolujte objednávku a potrvďte ju znova.'
-        update_error: 'Tam bol neočakávaný problém s aktualizáciou objednávku. Prosím, skúste znova aktualizovať objednávky.'
+        apply_state_machine_transition_error: 'Pri aktualizácii objednávky sa vyskytol neočakávaný problém. Prosím, skúste objednávku znova aktualizovať.'
+        promotion_integrity: 'Už nemáte nárok na túto propagáciu %promotionName%.'
+        total_integrity: 'Celková suma vašej objednávky sa zmenila, skontrolujte informácie o objednávke a potvrďte ich znova.'
+        update_error: 'Pri aktualizácii objednávky sa vyskytol neočakávaný problém. Prosím, skúste objednávku znova aktualizovať.'
     payment:
-        apply_state_machine_transition_error: 'Tam bol neočakávaný problém s aktualizáciou platbu. Skúste aktualizovať platbu znova.'
+        apply_state_machine_transition_error: 'Pri aktualizácii platby sa vyskytol neočakávaný problém. Prosím, skúste platbu znova aktualizovať.'
     product:
-        out_of_stock: 'Na sklade je už iba %quantity% produktov.'
+        in_use_by_promotion_rule: 'Produkt, ktorý sa používa v pravidle propagácie, nemožno zmazať.'
+        out_of_stock: 'Na sklade sa nachádza len %quantity% tohto produktu.'
     product_variant:
-        update_error: 'Tam bol neočakávaný problém s aktualizáciou produkt variant. Prosím, skúste znova aktualizovať produkt variant.'
+        update_error: 'Pri aktualizácii variantu produktu sa vyskytol neočakávaný problém. Prosím, skúste variant produktu znova aktualizovať.'
+    promotion:
+        update_rules: 'Niektoré pravidlá propagácií s kódmi %codes% boli aktualizované.'
+    taxon:
+        in_use_by_promotion_rule: 'Taxón, ktorý sa používa v pravidle propagácie, nemožno zmazať.'
+        menu_taxon_delete: 'Menu taxón žiadneho kanála nemožno zmazať.'

@@ -20,8 +20,16 @@
     </button>
 {% endmacro %}
 
-{% macro transparent(url, message, id, icon, class) %}
-    <a href="{{ url }}" class="link-reset{% if class is not empty %} {{ class }}{% endif %}"{% if id is not null %} id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }}>
+{% macro transparent(url, message, id, icon, class, attributes = {}) %}
+    <a
+        href="{{ url }}"
+        class="link-reset{% if class is not empty %} {{ class }}{% endif %}"
+        {% if id is not null %} id="{{ id }}"{% endif %}
+        {{ sylius_test_html_attribute('button', id|default(message)) }}
+        {% for name, value in attributes %}
+            {{ name }}="{{ value }}"
+        {% endfor %}
+    >
         {% if icon is not empty %}
             {{ ux_icon(icon, { class: 'icon icon-sm' }) }}
         {% endif %}

@@ -70,12 +70,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $resolver
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('name', function (): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('amount', fn (Options $options): float => $this->faker->randomFloat(2, 0, 0.4))
             ->setAllowedTypes('amount', 'float')
             ->setDefault('included_in_price', fn (Options $options): bool => $this->faker->boolean())

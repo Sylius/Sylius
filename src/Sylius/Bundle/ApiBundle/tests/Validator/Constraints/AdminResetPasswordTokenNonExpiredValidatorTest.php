@@ -28,13 +28,22 @@ final class AdminResetPasswordTokenNonExpiredValidatorTest extends TestCase
 {
     private MockObject&UserRepositoryInterface $userRepository;
 
+    private AdminUserInterface&MockObject $adminUser;
+
+    private ExecutionContextInterface&MockObject $executionContext;
+
     private AdminResetPasswordTokenNonExpiredValidator $adminResetPasswordTokenNonExpiredValidator;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->userRepository = $this->createMock(UserRepositoryInterface::class);
-        $this->adminResetPasswordTokenNonExpiredValidator = new AdminResetPasswordTokenNonExpiredValidator($this->userRepository, 'P5D');
+        $this->adminUser = $this->createMock(AdminUserInterface::class);
+        $this->executionContext = $this->createMock(ExecutionContextInterface::class);
+        $this->adminResetPasswordTokenNonExpiredValidator = new AdminResetPasswordTokenNonExpiredValidator(
+            $this->userRepository,
+            'P5D',
+        );
     }
 
     public function testAConstraintValidator(): void
@@ -51,83 +60,53 @@ final class AdminResetPasswordTokenNonExpiredValidatorTest extends TestCase
 
     public function testThrowsExceptionWhenConstraintIsNotAdminResetPasswordTokenNonExpired(): void
     {
-        /** @var Constraint|MockObject $constraintMock */
-        $constraintMock = $this->createMock(Constraint::class);
+        $constraint = $this->createMock(Constraint::class);
         $value = new ResetPassword('token', 'newPassword');
         self::expectException(\InvalidArgumentException::class);
-        $this->adminResetPasswordTokenNonExpiredValidator->validate($value, $constraintMock);
+        $this->adminResetPasswordTokenNonExpiredValidator->validate($value, $constraint);
     }
 
     public function testDoesNothingWhenAUserForGivenTokenDoesNotExist(): void
     {
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
         $value = new ResetPassword('token', 'newPassword');
         $constraint = new AdminResetPasswordTokenNonExpired();
-        $this->adminResetPasswordTokenNonExpiredValidator->initialize($executionContextMock);
-        $this->userRepository->expects(self::once())->method('findOneBy')->with(['passwordResetToken' => 'token'])->willReturn(null);
-        $executionContextMock->expects(self::never())->method('addViolation');
+        $this->adminResetPasswordTokenNonExpiredValidator->initialize($this->executionContext);
+        $this->userRepository
+            ->expects(self::once())
+            ->method('findOneBy')
+            ->with(['passwordResetToken' => 'token'])
+            ->willReturn(null);
+        $this->executionContext->expects(self::never())->method('addViolation');
         $this->adminResetPasswordTokenNonExpiredValidator->validate($value, $constraint);
     }
 
     public function testDoesNothingWhenUserPasswordResetTokenIsNonExpired(): void
     {
-        /** @var AdminUserInterface|MockObject $adminUserMock */
-        $adminUserMock = $this->createMock(AdminUserInterface::class);
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-
         $value = new ResetPassword('token', 'newPassword');
         $constraint = new AdminResetPasswordTokenNonExpired();
-
-        $this->adminResetPasswordTokenNonExpiredValidator->initialize($executionContextMock);
-
-        $adminUserMock
-            ->expects(self::once())
-            ->method('isPasswordRequestNonExpired')
-            ->willReturn(true);
-
+        $this->adminResetPasswordTokenNonExpiredValidator->initialize($this->executionContext);
+        $this->adminUser->expects(self::once())->method('isPasswordRequestNonExpired')->willReturn(true);
         $this->userRepository
             ->expects(self::once())
             ->method('findOneBy')
             ->with(['passwordResetToken' => 'token'])
-            ->willReturn($adminUserMock);
-
-        $executionContextMock
-            ->expects(self::never())
-            ->method('addViolation');
-
+            ->willReturn($this->adminUser);
+        $this->executionContext->expects(self::never())->method('addViolation');
         $this->adminResetPasswordTokenNonExpiredValidator->validate($value, $constraint);
     }
 
     public function testAddsAViolationWhenUserPasswordResetTokenIsExpired(): void
     {
-        /** @var AdminUserInterface|MockObject $adminUserMock */
-        $adminUserMock = $this->createMock(AdminUserInterface::class);
-        /** @var ExecutionContextInterface|MockObject $executionContextMock */
-        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-
         $value = new ResetPassword('token', 'newPassword');
         $constraint = new AdminResetPasswordTokenNonExpired();
-
-        $this->adminResetPasswordTokenNonExpiredValidator->initialize($executionContextMock);
-
-        $adminUserMock
-            ->expects(self::once())
-            ->method('isPasswordRequestNonExpired')
-            ->willReturn(false);
-
+        $this->adminResetPasswordTokenNonExpiredValidator->initialize($this->executionContext);
+        $this->adminUser->expects(self::once())->method('isPasswordRequestNonExpired')->willReturn(false);
         $this->userRepository
             ->expects(self::once())
             ->method('findOneBy')
             ->with(['passwordResetToken' => 'token'])
-            ->willReturn($adminUserMock);
-
-        $executionContextMock
-            ->expects(self::once())
-            ->method('addViolation')
-            ->with($constraint->message);
-
+            ->willReturn($this->adminUser);
+        $this->executionContext->expects(self::once())->method('addViolation')->with($constraint->message);
         $this->adminResetPasswordTokenNonExpiredValidator->validate($value, $constraint);
     }
 }

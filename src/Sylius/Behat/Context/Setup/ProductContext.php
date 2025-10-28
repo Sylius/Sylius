@@ -770,7 +770,7 @@ final readonly class ProductContext implements Context
             }
 
             $this->productVariantGenerator->generate($product);
-        } catch (\InvalidArgumentException) {
+        } catch (\Exception) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 
@@ -1210,7 +1210,7 @@ final readonly class ProductContext implements Context
             }
 
             $this->productVariantGenerator->generate($product);
-        } catch (\InvalidArgumentException) {
+        } catch (\Exception) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 

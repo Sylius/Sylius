@@ -1,11 +1,9 @@
 {# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Cart\SummaryComponent #}
 
+{% import '@SyliusShop/shared/macro/loader.html.twig' as loader %}
+
 <div class="position-relative" {{ attributes }}>
-    <div data-loading>
-        <div class="sylius-shop-loader">
-            <img src="{{ asset('build/shop/images/loader.gif', 'shop') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
-        </div>
-    </div>
+    {{ loader.render() }}
     <div class="p-4 bg-light mb-4 rounded-3">
         <h3 class="mb-4">{{ 'sylius.ui.summary'|trans }}</h3>
         {% hook 'summary' with {cart} %}

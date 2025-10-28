@@ -122,9 +122,6 @@ sylius_twig_hooks:
                 priority: 0
 
         'sylius_admin.channel.update.content.form.sections.look_and_feel':
-            theme:
-                template: '@SyliusAdmin/channel/form/sections/look_and_feel/theme.html.twig'
-                priority: 300
             menu_taxon:
                 template: '@SyliusAdmin/channel/form/sections/look_and_feel/menu_taxon.html.twig'
                 priority: 200

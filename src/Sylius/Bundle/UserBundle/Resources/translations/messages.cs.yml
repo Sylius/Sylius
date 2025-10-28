@@ -4,21 +4,21 @@
 sylius:
     form:
         user:
-            email: Email
-            enabled: Povoleno
+            email: 'E-mail'
+            enabled: 'Povoleno'
             password:
-                label: Heslo
-                confirmation: Ověření
-            remember_me: Pamatuj si mě
-            shipping_address: Doručovací adresa
-            username: Uživatelské jméno
-            verified: Ověřeno
+                label: 'Heslo'
+                confirmation: 'Ověření'
+            remember_me: 'Zapamatovat si mě'
+            shipping_address: 'Doručovací adresa'
+            username: 'Uživatelské jméno'
+            verified: 'Ověřeno'
         user_filter:
-            query: Hledat
+            query: 'Hledat'
         user_change_password:
-            confirmation: Potvrzení
-            current: Současné heslo
-            new: Nové heslo
+            confirmation: 'Potvrzení'
+            current: 'Aktuální heslo'
+            new: 'Nové heslo'
         user_reset_password:
-            confirmation: Potvrzení
-            new: Nové heslo
+            confirmation: 'Potvrzení'
+            new: 'Nové heslo'

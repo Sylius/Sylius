@@ -1,49 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
 sylius:
     credit_card:
         cardholder_name:
             min_length: 'カード名義人の名前は{{ limit }}文字以上で入力してください。'
             not_blank: 'カード名義人の名前を入力してください。'
         expiry_month:
-            max_range: 'クレジットカードの有効期限（月）は{{ min }}から{{ max }}の間でなければなりません。'
-            min_range: 'クレジットカードの有効期限（月）は{{ min }}から{{ max }}の間でなければなりません。'
-            not_blank: '有効期限の月を選択してください。'
+            max_range: 'クレジットカードの有効期限（月）は{{ min }}〜{{ max }}の間でなければなりません。'
+            min_range: 'クレジットカードの有効期限（月）は{{ min }}〜{{ max }}の間でなければなりません。'
+            not_blank: '有効期限（月）を選択してください。'
         number:
             not_blank: 'カード番号を入力してください。'
             luhn: '入力されたクレジットカード番号は無効です。'
         security_code:
             not_blank: 'セキュリティコードを入力してください。'
-            max_length: 'CVVコードは{{ limit }}桁以内で入力してください。'
-            min_length: 'CVVコードは少なくとも{{ limit }}桁でなければなりません。'
+            max_length: 'クレジットカードのCVVコードは{{ limit }}桁以上でなければなりません。'
+            min_length: 'クレジットカードのCVVコードは{{ limit }}桁以下でなければなりません。'
         expiry_year:
-            not_blank: '有効期限の年を選択してください。'
+            not_blank: '有効期限（年）を選択してください。'
     gateway_config:
-        invalid_gateway_factory: '無効なゲートウェイファクトリです。使用可能なファクトリ: {{ available_factories }}。'
+        invalid_gateway_factory: 'ゲートウェイファクトリーが無効です。利用可能なファクトリーは{{ available_factories }}です。'
         gateway_name:
             not_blank: 'ゲートウェイ名を入力してください。'
         factory_name:
-            not_blank: 'ゲートウェイファクトリ名を入力してください。'
+            not_blank: 'ゲートウェイファクトリー名を入力してください。'
     payment:
         currency_code:
-            not_valid: '入力された通貨コードは無効です。'
+            not_valid: '入力した通貨コードは無効です。'
         method:
-            not_blank: 'お支払い方法を選択してください。'
+            not_blank: '支払方法を選択してください。'
     payment_method:
         gateway:
-            not_blank: '支払い方法のゲートウェイを選択してください。'
+            not_blank: '決済ゲートウェイを選択してください。'
         name:
-            max_length: '支払い方法の名前は{{ limit }}文字以内で入力してください。'
-            min_length: '支払い方法の名前は{{ limit }}文字以上で入力してください。'
-            not_blank: '支払い方法の名前を入力してください。'
+            max_length: '支払方法名は{{ limit }}文字以内でなければなりません。'
+            min_length: '支払方法名は{{ limit }}文字以上で入力してください。'
+            not_blank: '支払方法名を入力してください。'
         fee_calculator_configuration:
             amount:
                 greater_than_or_equal: '手数料は{{ compared_value }}以上でなければなりません。'
-                not_blank: '手数料の金額を入力してください。'
+                not_blank: '手数料額を入力してください。'
             percent:
-                max_range: '手数料のパーセンテージは{{ limit }}を超えることはできません。'
-                min_range: '手数料のパーセンテージは{{ limit }}未満ではいけません。'
-                not_blank: '手数料のパーセンテージを入力してください。'
+                max_range: '手数料率は{{ limit }}を超えることはできません。'
+                min_range: '手数料率は{{ limit }}未満にすることはできません。'
+                not_blank: '手数料率を入力してください。'
         code:
-            max_length: 'コードは{{ limit }}文字以内で入力してください。'
-            not_blank: '支払い方法のコードを入力してください。'
-            regex: '支払い方法のコードは英字、数字、ダッシュ、アンダースコアのみ使用できます。'
-            unique: '指定されたコードの支払い方法はすでに存在します。'
+            max_length: 'コードは{{ limit }}文字以内でなければなりません。'
+            not_blank: '支払方法コードを入力してください。'
+            regex: '支払方法コードは英数字・ハイフン・アンダースコアのみ使用できます。'
+            unique: '指定されたコードの支払方法は既に存在します。'

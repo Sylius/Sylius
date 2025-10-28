@@ -6,61 +6,126 @@ sylius:
         shipment_confirmation:
             has_been_sent_using: 'a fost trimis folosind'
             subject: 'Confirmare livrare'
-            thank_you_for_transaction: 'Tranzacție reușită. Vă mulțumim'
-            you_can_check_its_location_with_the_tracking_code: 'Poți verifica locația acestuia cu codul %tracking_code% de urmărire.'
-            your_order_with_number: 'Comanda ta cu numarul'
+            thank_you_for_transaction: 'Vă mulțumim pentru o tranzacție reușită.'
+            you_can_check_its_location_with_the_tracking_code: 'Puteți verifica locația cu codul de urmărire %tracking_code%.'
+            your_order_with_number: 'Comanda dumneavoastră cu numărul'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Afișați cel mai mic preț al produselor reduse înainte de reducerea actuală?'
+                period_for_which_the_lowest_price_is_calculated: 'Perioada pentru care se calculează cel mai mic preț'
+            reset_password:
+                password:
+                    label: 'Parolă nouă'
+                    confirmation: 'Confirmare parolă nouă'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Tipuri de asociere
-                    attributes: Atribute
-                    header: Catalog
-                    inventory: Inventar
-                    options: Opţiuni
-                    products: Produse
-                    taxons: Taxoni
+                    association_types: 'Tipuri de asocieri'
+                    attributes: 'Atribute'
+                    header: 'Catalog'
+                    inventory: 'Inventar'
+                    options: 'Opțiuni'
+                    products: 'Produse'
+                    taxons: 'Taxoni'
                 configuration:
-                    admin_users: Administratori
-                    channels: Canale
-                    countries: Țări
-                    currencies: Monede
-                    exchange_rates: Cursul de schimb
-                    header: Configurare
-                    locales: Setări regionale
-                    payment_methods: Metode de plată
-                    shipping_categories: Categorii de livrare
-                    shipping_methods: Metode de livrare
-                    tax_categories: Categorii de taxe
-                    tax_rates: Taxe
-                    zones: Zone
+                    admin_users: 'Administratori'
+                    channels: 'Canale'
+                    countries: 'Țări'
+                    currencies: 'Monede'
+                    exchange_rates: 'Rate de schimb'
+                    header: 'Configurare'
+                    locales: 'Localizări'
+                    payment_methods: 'Metode de plată'
+                    shipping_categories: 'Categorii de livrare'
+                    shipping_methods: 'Metode de livrare'
+                    tax_categories: 'Categorii de taxe'
+                    tax_rates: 'Rate de taxe'
+                    zones: 'Zone'
                 marketing:
-                    header: Marketing
-                    product_reviews: Recenziile produsului
-                    promotions: Promoţii
+                    cart_promotions: 'Promovări coș'
+                    catalog_promotions: 'Promovări de catalog'
+                    header: 'Marketing'
+                    product_reviews: 'Recenzii produse'
+                    promotions: 'Promoții'
                 customers:
-                    customers: Clienți
-                    groups: Grupuri
-                    header: Client
+                    customers: 'Clienți'
+                    groups: 'Grupuri'
+                    header: 'Clienți'
                 sales:
-                    header: Vânzări
-                    orders: Comenzi
+                    header: 'Vânzări'
+                    orders: 'Comenzi'
                 official_support:
-                    header: Sprijin oficial
-                    browse_plugins: Răsfoiește plugin-uri
-                    sylius_plus: Sylius Plus
-                    professional_services: Servicii profesionale
-                    find_a_partner: Găsește un partener
+                    header: 'Suport oficial'
+                    browse_plugins: 'Răsfoiți pluginuri'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Servicii profesionale'
+                    find_a_partner: 'Găsiți un partener'
+                    sylius_certification: 'Certificare Sylius'
     ui:
+        account: 'Cont'
+        admin_user: 'Administrator'
+        add_new_entry: 'Adăugați o nouă înregistrare'
+        back_to_dashboard: 'Înapoi la tabloul de bord'
+        catalog_promotion:
+            dates_details: 'Această operațiune durează mult! Vă rugăm să luați în considerare o întârziere de 2-10 minute începând din datele specificate. Întârzierea depinde de dimensiunea catalogului.'
+        channel:
+            account_verification_required_details: 'Dezactivând această opțiune, va fi posibilă crearea conturilor și accesarea acestora fără verificare prin e-mail și, astfel, accesul potențial la datele comenzilor plasate ca oaspete.'
+        channel_pricing_history: 'Istoric prețuri pe canal'
+        channel_pricings: 'Prețuri pe canale'
+        create_new:
+            customer_group: 'Creați un grup de clienți nou'
+        delete_avatar: 'Șterge avatarul'
+        full_screen: 'Ecran complet'
+        global: 'Global'
+        ip_address: 'Adresă IP'
+        language: 'Limbă'
+        lowest_price_before_discount: 'Cel mai mic preț înainte de reducere'
+        minimum_price_details: 'Preț minim - acesta este pragul de preț sub care prețul curent nu poate fi redus nici de promoțiile din catalog, nici de cele din coș. Folosiți acest lucru pentru a proteja profitabilitatea vânzărilor dumneavoastră.'
+        more: 'Mai multe'
+        no_main_taxon: 'fără taxon principal'
+        no_depth: 'Fără adâncime'
+        no_height: 'Fără înălțime'
+        no_results: 'Nu s-au găsit rezultate.'
+        no_results_adjust_your_search: 'Ajustați căutarea și încercați din nou.'
+        no_weight: 'Fără greutate'
+        no_width: 'Fără lățime'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Data comenzii'
+        original_price_details: 'Preț original - acesta este prețul variantei de produs. Este afișat tăiat în catalog. Este folosit ca bază pentru calculul prețului curent. Dacă această valoare nu este definită, logica Promoției din Catalog va copia valoarea din Preț în Preț Original.'
+        original_product_price_details: 'Preț original - acesta este prețul produsului. Este afișat tăiat în catalog. Este folosit ca bază pentru calculul prețului curent. Dacă această valoare nu este definită, logica Promoției din Catalog va copia valoarea din Preț în Preț Original.'
+        overdue: 'Întârziat'
+        page_not_found: 'Pagină negăsită'
+        pagination:
+            number_of_results: 'Se afișează de la %from% la %to% din %total% intrări'
+        partially_refunded: 'Parțial rambursat'
+        pending_actions: 'Acțiuni în așteptare'
+        price_details: 'Preț - acesta este prețul curent al variantei de produs afișat în catalog. Poate fi modificat explicit, de exemplu, de promoțiile din catalog.'
+        product_price_details: 'Preț - acesta este prețul curent al produsului afișat în catalog. Poate fi modificat explicit, de exemplu, de promoțiile din catalog.'
+        price_history: 'Istoric prețuri'
         product:
-            product_not_active_in_channel: Produsul nu este încă activat în acest canal.
-        gateway:
-            no_sca_support_notice: Gateway-ul de plată ales nu oferă suport pentru SCA.
-        sales_summary: Sumar vânzări
+            product_not_active_in_channel: 'Produsul nu este încă activat în acest canal.'
+        product_variant: 'Variantă de produs'
+        sales_summary: 'Sumar vânzări'
+        search_menu: 'Meniu căutare'
+        shipment_for_order: 'Livrare pentru comandă'
+        show_history_for_channel_pricing: 'Afișați istoricul prețurilor pe canal'
+        start_typing_to_search: 'Începeți să tastați pentru a căuta'
         statistics:
-            day: Ziua
-            lifetime: Durată de viață
-            month: Luna
-            week: Saptamana
-            2weeks: 2 săptămâni
-            year: An
+            day: 'Zi'
+            lifetime: 'Toată perioada'
+            month: 'Lună'
+            week: 'Săptămână'
+            2weeks: '2 săptămâni'
+            year: 'An'
+        taxon: 'Taxon'
+        to_approve: 'de aprobat'
+        to_process: 'de procesat'
+        to_ship: 'de expediat'
+        view_in_store: 'Vizualizare în magazin'
+        work_in_progress: 'În curs de desfășurare'
+        empty_date: 'gol'
+        notifications:
+            new_version_of_sylius_available: 'O nouă versiune de Sylius este disponibilă. Contactați tehnicianul dumneavoastră pentru a face upgrade.'

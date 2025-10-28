@@ -39,5 +39,11 @@
         >
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
+
+        <service id="sylius.checker.shipping_method.zone_eligibility"
+                 class="Sylius\Component\Core\Shipping\Checker\Eligibility\ZoneEligibilityChecker">
+            <argument type="service" id="sylius.matcher.zone"/>
+            <tag name="sylius.shipping_method_eligibility_checker"/>
+        </service>
     </services>
 </container>

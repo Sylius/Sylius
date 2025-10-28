@@ -2,6 +2,52 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    credit_card:
+        cardholder_name:
+            min_length: 'Kortinnehavarens namn måste vara minst {{ limit }} tecken långt.'
+            not_blank: 'Ange kortinnehavarens namn.'
+        expiry_month:
+            max_range: 'Kreditkortets utgångsmånad måste vara mellan {{ min }} och {{ max }}.'
+            min_range: 'Kreditkortets utgångsmånad måste vara mellan {{ min }} och {{ max }}.'
+            not_blank: 'Välj utgångsmånad.'
+        number:
+            not_blank: 'Ange kortnummer.'
+            luhn: 'Kreditkortsnumret du angav är ogiltigt.'
+        security_code:
+            not_blank: 'Ange säkerhetskod.'
+            max_length: 'Kreditkortets CVV-kod måste vara minst {{ limit }} siffror lång.'
+            min_length: 'Kreditkortets CVV-kod måste vara högst {{ limit }} siffror lång.'
+        expiry_year:
+            not_blank: 'Välj utgångsår.'
+    gateway_config:
+        invalid_gateway_factory: 'Ogiltig gateway-fabrik. Tillgängliga fabriker är {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Ange gateway-namn.'
+        factory_name:
+            not_blank: 'Ange gateway-fabrikens namn.'
     payment:
         currency_code:
-            not_valid: Valutakoden du angav är ogiltig.
+            not_valid: 'Valutakoden du angav är ogiltig.'
+        method:
+            not_blank: 'Välj en betalningsmetod.'
+    payment_method:
+        gateway:
+            not_blank: 'Välj gateway för betalningsmetod.'
+        name:
+            max_length: 'Betalningsmetodens namn får vara högst {{ limit }} tecken långt.'
+            min_length: 'Betalningsmetodens namn måste vara minst {{ limit }} tecken långt.'
+            not_blank: 'Ange betalningsmetodens namn.'
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: 'Avgiften kan inte vara lägre än {{ compared_value }}.'
+                not_blank: 'Ange avgiftsbelopp.'
+            percent:
+                max_range: 'Procentavgiften kan inte vara större än {{ limit }}.'
+                min_range: 'Procentavgiften kan inte vara mindre än {{ limit }}.'
+                not_blank: 'Ange procentavgiften.'
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange kod för betalningsmetod.'
+            regex: 'Koden för betalningsmetod får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Betalningsmetod med angiven kod finns redan.'
+

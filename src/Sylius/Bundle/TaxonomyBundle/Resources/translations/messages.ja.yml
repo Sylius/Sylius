@@ -6,6 +6,8 @@ sylius:
         taxon:
             description: '説明'
             enabled: '有効'
-            name: 'ゾーン名'
+            name: '名前'
+            parent: '親'
+            slug: 'スラッグ'
         taxonomy:
-            name: 'ゾーン名'
+            name: '名前'

@@ -4,6 +4,7 @@
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
     - { resource: 'twig_hooks/**/*.yaml' }
+    - { resource: "@SyliusShopBundle/Resources/config/app/integration/twig_hooks.php" }
     - { resource: "@SyliusShopBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }

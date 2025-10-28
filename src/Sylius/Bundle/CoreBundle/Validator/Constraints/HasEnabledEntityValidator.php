@@ -68,6 +68,8 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     /**
      * If no entity matched the query criteria or a single entity matched, which is the same as the entity being
      * validated, the entity is the last enabled entity available.
+     *
+     * @param array<object> $result
      */
     private function isLastEnabledEntity(array|\Iterator $result, object $entity): bool
     {
@@ -98,9 +100,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
         return $objectManager;
     }
 
-    /**
-     * @throws ConstraintDefinitionException
-     */
+    /** @throws ConstraintDefinitionException */
     private function validateObjectManager(?ObjectManager $objectManager, string $exceptionMessage): void
     {
         if (null === $objectManager) {
@@ -108,9 +108,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @throws ConstraintDefinitionException
-     */
+    /** @throws ConstraintDefinitionException */
     private function ensureEntityHasProvidedEnabledField(
         ObjectManager $objectManager,
         object $entity,

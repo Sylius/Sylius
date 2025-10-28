@@ -58,14 +58,12 @@ final class InForTaxonsScopeVariantCheckerTest extends TestCase
 
         $this->taxonRepository
             ->method('findOneBy')
-            ->willReturnCallback(function (array $criteria) use ($firstTaxon, $secondTaxon, $thirdTaxon, $fourthTaxon) {
-                return match ($criteria['code']) {
-                    'FIRST_TAXON' => $firstTaxon,
-                    'SECOND_TAXON' => $secondTaxon,
-                    'THIRD_TAXON' => $thirdTaxon,
-                    'FOURTH_TAXON' => $fourthTaxon,
-                    default => null,
-                };
+            ->willReturnCallback(fn (array $criteria) => match ($criteria['code']) {
+                'FIRST_TAXON' => $firstTaxon,
+                'SECOND_TAXON' => $secondTaxon,
+                'THIRD_TAXON' => $thirdTaxon,
+                'FOURTH_TAXON' => $fourthTaxon,
+                default => null,
             });
 
         $this->taxonTreeRepository->method('children')->willReturn([]);

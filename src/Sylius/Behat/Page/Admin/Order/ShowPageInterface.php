@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-interface ShowPageInterface extends SymfonyPageInterface
+interface ShowPageInterface extends SyliusPageInterface
 {
     public function hasCustomer(string $customerEmail): bool;
 

@@ -3,4 +3,8 @@
 
 sylius:
     cart:
-        add_item: 'O item foi adicionado ao carrinho'
+        add_item: 'Item adicionado ao carrinho'
+        cannot_modify: 'Um pedido já foi enviado para o carrinho que você tentou modificar.'
+        not_recalculated: 'Devido a valores inválidos no seu carrinho, ele não foi recalculado.'
+        remove_item: 'Item removido do carrinho'
+        save: 'O carrinho foi atualizado com sucesso'

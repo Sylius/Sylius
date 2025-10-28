@@ -36,7 +36,7 @@ abstract class AbstractOrmTestCase extends TestCase
             ORMSetup::createAttributeMetadataConfiguration(
                 [],
                 true,
-            )->getMetadataDriverImpl()
+            )->getMetadataDriverImpl(),
         );
 
         return $config;

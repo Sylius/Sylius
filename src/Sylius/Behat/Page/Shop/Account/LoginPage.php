@@ -15,13 +15,13 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class LoginPage extends SymfonyPage implements LoginPageInterface
+class LoginPage extends SyliusPage implements LoginPageInterface
 {
     use SecurePasswordTrait;
 

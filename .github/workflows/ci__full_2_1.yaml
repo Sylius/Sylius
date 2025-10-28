@@ -3,7 +3,7 @@ name: Continuous Integration 2.1 (Full)
 on:
     schedule:
         -
-            cron: "0 3 * * *" # Run every day at 3am
+            cron: "0 2 * * *" # Run every day at 2am
     workflow_dispatch: ~
 
 concurrency:

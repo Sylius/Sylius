@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        expired_password_reset_token: 'Token pro resetování hesla vypršel.'
+    account:
+        invalid_verification_token: 'Uživatel obchodu s e-mailem %verificationToken% nemá tento ověřovací token.'
+        is_verified: 'Účet s e-mailem %email% je aktuálně ověřen.'
+    address:
+        without_country: 'Adresa bez země nemůže existovat.'
+    code:
+        not_blank: 'Prosím zadejte kód.'
+        invalid: 'Kód by měl obsahovat pouze písmena, číslice, pomlčky ("-" symbol) a podtržítka ("_" symbol).'
+    contact_request:
+        email_is_invalid: 'Zadaný e-mail je neplatný.'
+    country:
+        not_exist: 'Země %countryCode% neexistuje.'
+    date_interval:
+        empty: 'Interval dat nemůže být prázdný.'
+        invalid: 'Interval dat není platný ISO 8601 interval.'
+    date_time:
+        invalid: 'Datum a čas není platný ISO 8601 formát v Y-m-d\TH:i:s formátu.'
+    order:
+        not_empty: 'Prázdnou objednávku nelze zpracovat.'
+    payment:
+        not_found: 'Platba neexistuje.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Nelze změnit platební metodu pro zrušenou objednávku.'
+        not_available: 'Platební metoda %name% není pro tuto objednávku k dispozici. Prosím vyberte jinou.'
+        not_exist: 'Platební metoda s kódem %code% neexistuje.'
+    payment_request:
+        action_not_available: 'Platba žádost (kód metody: %code% a ID platby: %id%) nemá žádného zpracovatele. Prosím vyberte jinou platební metodu.'
+        not_available: 'Platba žádost nepodporuje tuto akci.'
+    product:
+        not_exist: 'Produkt %productName% neexistuje.'
+    product_variant:
+        not_exist: 'Produktová varianta %productVariantCode% neexistuje.'
+        not_longer_available: 'Produktová varianta s názvem %productVariantName% neexistuje.'
+        not_sufficient: 'Produktová varianta s kódem %productVariantCode% nemá dostatečný sklad.'
+        product_variant_with_name_not_sufficient: 'Produktová varianta s názvem %productVariantName% nemá dostatečný sklad.'
+        option_values:
+            single_value: 'Produktová varianta může mít pouze jednu hodnotu nakonfigurovanou pro jednu možnost.'
+    reset_password:
+        invalid_token: 'Token pro resetování hesla %token% je neplatný.'
+        token_expired: 'Token pro resetování hesla vypršel.'
+    shipment:
+        not_found: 'Odeslání neexistuje.'
+        shipped: 'Nelze odeslat odeslání, které bylo již odesláno.'
+    shipping_method:
+        not_found: 'Dopravní metoda s kódem %code% neexistuje.'
+        not_available: 'Dopravní metoda %name% není pro tuto objednávku k dispozici. Prosím vyberte jinou dopravní metodu.'
+        shipping_address_not_found: 'Objednávka musí být nejprve adresována.'
+    statistics:
+        end_date:
+            invalid: 'Počáteční datum musí být dříve než konečné datum.'

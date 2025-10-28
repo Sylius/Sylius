@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ResolveOrderPaymentStateListener
 {
-    public function __construct(protected StateResolverInterface $orderPaymentStateResolver)
+    public function __construct(private StateResolverInterface $orderPaymentStateResolver)
     {
     }
 

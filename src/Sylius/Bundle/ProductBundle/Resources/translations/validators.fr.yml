@@ -12,7 +12,7 @@ sylius:
             max_length: Le slug du produit ne doit pas dépasser 1 caractère.|Le slug du produit ne doit pas dépasser {{ limit }} caractères.
         code:
             max_length: Le code du produit ne doit pas dépasser {{ limit }} caractères.
-            not_blank: Veillez introduire le code du produit.
+            not_blank: Veuillez introduire le code du produit.
             regex: Le code du produit peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code du produit doit être unique.
         name:

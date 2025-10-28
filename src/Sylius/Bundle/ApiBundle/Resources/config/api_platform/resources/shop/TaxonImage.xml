@@ -19,6 +19,28 @@
     <resource class="%sylius.model.taxon_image.class%">
         <operations>
             <operation
+                name="sylius_api_shop_taxon_taxon_image_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/taxons/{code}/images"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="%sylius.model.taxon.class%" fromProperty="images"/>
+                </uriVariables>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:taxon_image:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.shop.image</filter>
+                </filters>
+            </operation>
+
+            <operation
                 name="sylius_api_shop_taxon_taxon_image_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/taxons/{code}/images/{id}"

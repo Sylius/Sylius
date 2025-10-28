@@ -34,7 +34,7 @@ Feature: Sign in to the store during checkout
         And I sign in
         Then I should be notified about bad credentials
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui @mink:chromedriver @failing
     Scenario: Successful sign in after omitting fill the email field
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step

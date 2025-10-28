@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "type: The attribute type \"foobar\" is not registered. Available attribute types: text, textarea, checkbox, integer, float, percent, datetime, date, select.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('type: The attribute type \"foobar\" is not registered. Available attribute types: text, textarea, checkbox, integer, float, percent, datetime, date, select.').optional()",
     "status": 422,
     "violations": [
         {
@@ -13,7 +15,5 @@
         }
     ],
     "detail": "type: The attribute type \"foobar\" is not registered. Available attribute types: text, textarea, checkbox, integer, float, percent, datetime, date, select.",
-    "description": "type: The attribute type \"foobar\" is not registered. Available attribute types: text, textarea, checkbox, integer, float, percent, datetime, date, select.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

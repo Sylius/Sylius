@@ -4,3 +4,29 @@
 sylius:
     channel:
         delete_error: 'O canal não pode ser excluído. É necessário pelo menos um canal ativo.'
+    checkout:
+        complete_error: 'Ocorreu um problema inesperado ao concluir o pedido. Por favor, tente fazer seu pedido novamente.'
+    contact:
+        request_success: 'Sua solicitação de contato foi enviada com sucesso.'
+        request_error: 'Ocorreu um problema ao enviar a solicitação de contato. Por favor, tente novamente mais tarde.'
+    customer:
+        add_address: 'Endereço adicionado com sucesso.'
+        impersonate: 'Cliente %name% assumido com sucesso.'
+        set_address_as_default: 'Endereço definido como padrão.'
+    order:
+        apply_state_machine_transition_error: 'Ocorreu um problema inesperado ao atualizar o pedido. Por favor, tente atualizar novamente.'
+        promotion_integrity: 'Você não é mais elegível para esta promoção %promotionName%.'
+        total_integrity: 'O total do seu pedido foi alterado, verifique as informações e confirme novamente.'
+        update_error: 'Ocorreu um problema inesperado ao atualizar o pedido. Por favor, tente atualizar novamente.'
+    payment:
+        apply_state_machine_transition_error: 'Ocorreu um problema inesperado ao atualizar o pagamento. Por favor, tente atualizar novamente.'
+    product:
+        in_use_by_promotion_rule: 'Não é possível excluir um produto que está em uso por uma regra de promoção.'
+        out_of_stock: 'Há apenas %quantity% deste produto em estoque.'
+    product_variant:
+        update_error: 'Ocorreu um problema inesperado ao atualizar a variante do produto. Por favor, tente atualizar novamente.'
+    promotion:
+        update_rules: 'Algumas regras das promoções com códigos %codes% foram atualizadas.'
+    taxon:
+        in_use_by_promotion_rule: 'Não é possível excluir um táxon que está em uso por uma regra de promoção.'
+        menu_taxon_delete: 'Você não pode excluir o táxon de menu de qualquer canal.'

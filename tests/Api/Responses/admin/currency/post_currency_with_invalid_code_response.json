@@ -4,6 +4,8 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: This value is not a valid currency code.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('code: This value is not a valid currency code.').optional()",
     "status": 422,
     "violations": [
         {
@@ -13,7 +15,5 @@
         }
     ],
     "detail": "code: This value is not a valid currency code.",
-    "description": "code: This value is not a valid currency code.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

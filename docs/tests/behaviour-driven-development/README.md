@@ -1,2 +1,0 @@
-# Behaviour Driven Development
-

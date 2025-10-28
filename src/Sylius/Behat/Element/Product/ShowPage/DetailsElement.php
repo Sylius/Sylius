@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class DetailsElement extends Element implements DetailsElementInterface
+class DetailsElement extends SyliusElement implements DetailsElementInterface
 {
     public function getProductCode(): string
     {

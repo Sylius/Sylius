@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
-use PHPUnit\Framework\Attributes\Test;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 
 final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
@@ -110,6 +110,6 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
             ->setHint(Query::HINT_CUSTOM_TREE_WALKERS, $treeWalkers)
             ->useQueryCache(false)
             ->getSQL()
-            ;
+        ;
     }
 }

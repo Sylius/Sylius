@@ -13,6 +13,9 @@ framework:
         handler_id: ~
         storage_factory_id: session.storage.factory.mock_file
     test: ~
+    # Temporary solution until Symfony 7.3.5 release
+    profiler:
+        collect: true
     mailer:
         dsn: 'null://null'
     assets:

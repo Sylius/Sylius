@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Webmozart\Assert\Assert;
 
@@ -29,11 +29,11 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
     /**
      * @throws \LogicException
      */
-    public function getCurrentPageWithForm(array $pages): SymfonyPageInterface
+    public function getCurrentPageWithForm(array $pages): SyliusPageInterface
     {
         $routeParameters = $this->urlMatcher->match(parse_url($this->session->getCurrentUrl(), \PHP_URL_PATH));
 
-        Assert::allIsInstanceOf($pages, SymfonyPageInterface::class);
+        Assert::allIsInstanceOf($pages, SyliusPageInterface::class);
 
         foreach ($pages as $page) {
             if ($routeParameters['_route'] === $page->getRouteName()) {

@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email:
+            not_blank: 'कृपया अपना ईमेल दर्ज करें।'
+            invalid: 'यह ईमेल अमान्य है।'
+            not_registered: 'इस ईमेल वाला उपयोगकर्ता मौजूद नहीं है। कृपया पहले पंजीकरण करें।'
+        plainPassword:
+            not_blank: 'कृपया अपना पासवर्ड दर्ज करें।'
+            mismatch: 'दर्ज किए गए पासवर्ड मेल नहीं खाते।'
+            wrong_current: 'प्रदान किया गया पासवर्ड वर्तमान पासवर्ड से भिन्न है।'
+        password:
+            min: 'पासवर्ड कम से कम {{ limit }} अक्षरों का होना चाहिए।'
+            max: 'पासवर्ड {{ limit }} अक्षरों से लंबा नहीं होना चाहिए।'

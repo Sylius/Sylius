@@ -4,6 +4,7 @@
 sylius:
     locale:
         code:
-            not_blank: Bitte einen Gebietsschemacode auswählen.
-            regex: Das Kürzel des Gebietsschemas darf nur Buchstaben, Ziffern, Bindestriche und Unterstriche enthalten.
-            unique: Der Gebietsschemacode muss eindeutig sein.
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte wählen Sie einen Lokalisierungscode aus.'
+            locale: 'Dieser Wert ist kein gültiger Lokalisierungscode.'
+            unique: 'Der Lokalisierungscode muss eindeutig sein.'

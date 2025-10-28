@@ -28,6 +28,7 @@ interface ProductVariantRepositoryInterface extends BaseProductVariantRepository
 {
     public function createInventoryListQueryBuilder(string $locale): QueryBuilder;
 
+    /** @return T[] */
     public function findByTaxon(TaxonInterface $taxon): array;
 
     public function createCatalogPromotionListQueryBuilder(

@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        taxon:
+            description: 'विवरण'
+            enabled: 'सक्रिय'
+            name: 'नाम'
+            parent: 'मूल'
+            slug: 'स्लग'
+        taxonomy:
+            name: 'नाम'

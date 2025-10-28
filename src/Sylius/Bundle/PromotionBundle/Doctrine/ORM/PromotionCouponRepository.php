@@ -25,7 +25,7 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
  */
 class PromotionCouponRepository extends EntityRepository implements PromotionCouponRepositoryInterface
 {
-    public function createQueryBuilderByPromotionId($promotionId): QueryBuilder
+    public function createQueryBuilderByPromotionId(mixed $promotionId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.promotion = :promotionId')

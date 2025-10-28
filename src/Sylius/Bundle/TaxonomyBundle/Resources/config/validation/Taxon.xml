@@ -13,6 +13,11 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Taxonomy\Model\Taxon">
+        <constraint name="Sylius\Bundle\TaxonomyBundle\Validator\Constraints\TaxonParentRelation">
+            <option name="groups">
+                <value>sylius</value>
+            </option>
+        </constraint>
         <property name="translations">
             <constraint name="Valid" />
         </property>

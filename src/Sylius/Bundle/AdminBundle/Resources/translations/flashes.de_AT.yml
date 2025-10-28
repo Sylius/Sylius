@@ -2,8 +2,18 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        request_reset_password:
+            success: 'Wenn die angegebene E-Mail-Adresse in unserem System existiert, haben wir eine Anleitung zum Zurücksetzen des Passworts an diese Adresse gesendet.'
+        password_reset:
+            success: 'Ihr Passwort wurde erfolgreich geändert!'
+            token_expired: 'Das Passwort-Zurücksetzungstoken ist abgelaufen.'
     email:
-        order_confirmation_resent: 'Die Bestellbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
-        shipment_confirmation_resent: 'Die Versandbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
+        order_confirmation_resent: 'Die Bestellbestätigung wurde erfolgreich an den Kunden erneut gesendet.'
+        shipment_confirmation_resent: 'Die Versandbestätigung wurde erfolgreich an den Kunden erneut gesendet.'
     product_variant:
-        cannot_generate_variants: 'Varianten können für ein Produkt ohne Optionen nicht erstellt werden.'
+        cannot_generate_variants: 'Es können keine Varianten für ein Produkt ohne Optionenwerte generiert werden.'
+    locale:
+        delete:
+            is_used: 'Das Locale kann nicht gelöscht werden, da es von mindestens einer Übersetzung verwendet wird.'
+            success: 'Das Locale wurde erfolgreich gelöscht.'

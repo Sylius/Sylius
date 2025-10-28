@@ -19,6 +19,7 @@ interface ConfigurableShippingMethodElementInterface extends ResourceInterface
 {
     public function getType(): ?string;
 
+    /** @return array<string, mixed> */
     public function getConfiguration(): array;
 
     public function getShippingMethod(): ?ShippingMethodInterface;

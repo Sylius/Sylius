@@ -10,7 +10,7 @@
         <div class="card-body border-bottom py-3">
             <div class="d-flex">
                 {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-                    <div class="sylius-grid-nav__bulk">
+                    <div class="sylius-grid-nav__bulk grid">
                         {% for action in definition.getEnabledActions('bulk') %}
                             {{ sylius_grid_render_bulk_action(resources, action, null) }}
                         {% endfor %}

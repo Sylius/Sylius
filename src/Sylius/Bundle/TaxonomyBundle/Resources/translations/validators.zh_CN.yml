@@ -14,6 +14,8 @@ sylius:
         slug:
             not_blank: '请输入分类别名。'
             unique: '分类别名必须唯一。'
+        parent:
+            invalid_relation: '父分类不能是该分类本身或其任何子分类。'
     taxonomy:
         name:
             max_length: '分类法名称长度不得超过 255 个字符。'

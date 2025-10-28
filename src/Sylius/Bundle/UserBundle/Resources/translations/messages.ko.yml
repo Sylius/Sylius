@@ -4,18 +4,21 @@
 sylius:
     form:
         user:
-            email: 이메일
-            enabled: 활성
+            email: '이메일'
+            enabled: '활성화'
             password:
-                label: 비밀번호
-                confirmation: 인증
-            remember_me: 아이디/암호 저장
+                label: '비밀번호'
+                confirmation: '비밀번호 확인'
+            remember_me: '로그인 상태 유지'
+            shipping_address: '배송 주소'
+            username: '사용자 이름'
+            verified: '인증됨'
         user_filter:
-            query: 검색
+            query: '검색'
         user_change_password:
-            confirmation: 확인
-            current: 현재 비밀번호
-            new: 새로운 비밀번호
+            confirmation: '확인'
+            current: '현재 비밀번호'
+            new: '새 비밀번호'
         user_reset_password:
-            confirmation: 확인
-            new: 새로운 비밀번호
+            confirmation: '확인'
+            new: '새 비밀번호'

@@ -10,6 +10,7 @@
 import '@sylius/shop-bundle/entrypoint';
 
 import { startStimulusApp } from '@symfony/stimulus-bridge';
+import ProductShowImagesController from './controllers/ProductShowImagesController';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -17,5 +18,7 @@ export const app = startStimulusApp(require.context(
     true,
     /\.[jt]sx?$/
 ));
+
+app.register('product-show-images', ProductShowImagesController);
 
 app.debug = process.env.NODE_ENV !== 'production';

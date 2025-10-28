@@ -1,93 +1,213 @@
-# This file is part of the Sylius package.
-# (c) Sylius Sp. z o.o.
-
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: 'Denna e-postadress är ogiltig.'
+                max: 'E-postadressen får vara högst {{ limit }} tecken lång.'
+                min: 'E-postadressen måste vara minst {{ limit }} tecken lång.'
+                not_blank: 'Ange en e-postadress.'
+        reset_password:
+            mismatch: 'De angivna lösenorden matchar inte.'
+            password:
+                min: 'Lösenordet måste vara minst {{ limit }} tecken långt.'
+                max: 'Lösenordet får vara högst {{ limit }} tecken långt.'
+                not_blank: 'Ange lösenordet.'
     avatar_image:
         file:
-            max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
-            upload_ini_size: Bilden är för stor. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
+            max_size: 'Bilden är för stor – {{ size }}{{ suffix }}. Maximal tillåten storlek är {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Bilden är för stor. Maximal tillåten storlek är {{ limit }}{{ suffix }}.'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: 'Konfigurationen för en av de obligatoriska kanalerna saknas.'
+            not_valid: 'Den angivna konfigurationen innehåller fel. Ange ett fast rabattbelopp som är ett tal större än 0.'
+    catalog_promotion_scope:
+        invalid_type: 'Typen av katalogkampanjens räckvidd är ogiltig. Välj en giltig typ.'
+        for_products:
+            invalid_products: 'Den angivna konfigurationen innehåller fel. Lägg endast till befintliga produkter.'
+            not_empty: 'Den angivna konfigurationen innehåller fel. Lägg till minst 1 produkt.'
+            unique: 'Den angivna konfigurationen innehåller fel. Lägg endast till unika produkter.'
+        for_variants:
+            invalid_variants: 'Den angivna konfigurationen innehåller fel. Lägg endast till befintliga varianter.'
+            not_empty: 'Lägg till minst 1 variant.'
+            unique: 'Den angivna konfigurationen innehåller fel. Lägg endast till unika varianter.'
+        for_taxons:
+            invalid_taxons: 'Den angivna konfigurationen innehåller fel. Lägg endast till befintliga taxon.'
+            not_empty: 'Den angivna konfigurationen innehåller fel. Lägg till minst 1 taxon.'
+            unique: 'Den angivna konfigurationen innehåller fel. Lägg endast till unika taxon.'
     channel:
         base_currency:
-            not_blank: Var god ange en basvaluta för kanalen.
+            not_blank: 'Ange kanalens basvaluta.'
         default_locale:
-            not_blank: Var god ange ett standardspråk för kanalen.
+            enabled: 'Standardspråket måste vara aktiverat.'
+            not_blank: 'Ange kanalens standardspråk.'
         contact_email:
-            invalid: E-postadressen är ogiltig.
-            max: E-posten får inte vara längre än {{ limit }} tecken.
-            min: E-posten måste vara minst {{ limit }} tecken långt.
+            invalid: 'Denna e-postadress är ogiltig.'
+            max: 'E-postadressen får inte vara längre än {{ limit }} tecken.'
+            min: 'E-postadressen måste vara minst {{ limit }} tecken lång.'
+        contact_phone_number:
+            max_length: 'Kontakttelefonnummer får inte vara längre än {{ limit }} tecken.'
+        theme_name:
+            max_length: 'Temats namn får inte vara längre än {{ limit }} tecken.'
+        tax_calculation_strategy:
+            not_blank: 'Ange strategi för skatteberäkning.'
+            max_length: 'Strategin för skatteberäkning får inte vara längre än {{ limit }} tecken.'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Värdet måste vara större än {{ compared_value }}'
+            less_than: 'Värdet måste vara mindre än {{ compared_value }}'
     channel_pricing:
+        channel_code:
+            not_blank: 'Ange kanalkod.'
+            unique: 'Denna kanal har redan ett pris för denna produktvariant.'
         price:
-            not_blank: Var god ange priset.
+            min: 'Priset kan inte vara lägre än 0.'
+            not_blank: 'Ange priset.'
+    channel_code_collection:
+        invalid_channel: 'Kanal med kod {{ channel_code }} finns inte.'
     checkout:
+        addressing:
+            csrf_error: 'Skicka in det kompletta formuläret igen.'
         shipping_method:
-            not_blank: Var god välj leveranssätt.
+            not_blank: 'Välj fraktmetod.'
+        email:
+            not_changeable: 'E-post kan endast ändras för gästkunder. När kunden har loggat in och varukorgen har tilldelats kan e-postadressen inte ändras.'
     contact:
         email:
-            invalid: E-postadressen är ogiltig.
-            not_blank: Skriv din e-postadress.
+            invalid: 'Denna e-postadress är ogiltig.'
+            not_blank: 'Ange din e-postadress.'
         message:
-            not_blank: Vänligen ange ditt meddelande.
+            not_blank: 'Ange ditt meddelande.'
+    country:
+        code:
+            not_exist: 'Land med kod {{ code }} finns inte.'
     currency:
         enabled:
-            cannot_disable_base: Basvalutan kan inte avaktiveras.
+            cannot_disable_base: 'Basvalutan kan inte inaktiveras.'
     customer:
         currency_code:
-            not_valid: Valutakoden du angav är ogiltig.
+            not_valid: 'Valutakoden du angav är ogiltig.'
+    customer_group:
+        code:
+            not_exist: 'Kundgrupp med kod {{ code }} finns inte.'
     cart_item:
         not_available: '%itemName% har inte tillräckligt lager.'
+        insufficient_stock: 'Otillräckligt lager'
+        quantity:
+            not_in_range: 'Antal måste vara mellan {{ min }} och {{ max }}.'
+        variant:
+            not_available: '%variantName% är inte tillgänglig.'
+    max_integer: 'Värdet måste vara mindre än {{ compared_value }}.'
     order:
+        address_requirement: 'Ange en %addressName%.'
         currency_code:
-            not_valid: Valutakoden du angav är ogiltig.
-        payment_method_eligibility: 'Den här betalningsmetoden %paymentMethodName% har inaktiverats. Vänligen välj en ny betalningsmetod.'
-        product_eligibility: 'Denna produkt %productName% har inaktiverats.'
-        shipping_method_eligibility: 'Produkten passar inte kraven för %shippingMethodName% leveransmetoden. Vänligen välj en ny leveransmetod.'
+            not_valid: 'Valutakoden du angav är ogiltig.'
+        invalid_state_transition: 'Kan inte slutföra eftersom ordern är i fel tillstånd. Nuvarande: %currentState%. Möjliga övergångar: %possibleTransitions%.'
+        payment_method_eligibility: 'Betalningsmetoden %paymentMethodName% har inaktiverats. Välj en ny betalningsmetod.'
+        product_eligibility: 'Produkten %productName% har inaktiverats.'
+        shipping_method_eligibility: 'Produkten uppfyller inte kraven för fraktmetoden %shippingMethodName%. Välj en ny fraktmetod.'
+        shipping_method_not_available: 'Fraktmetoden "%shippingMethodName%" är inte tillgänglig. Välj en ny fraktmetod.'
+        cart_items_immutable: 'Det går inte att ändra varukorgsartiklar efter att kassan har slutförts.'
+    resend_order_confirmation_email:
+        invalid_order_state: 'Det går inte att skicka om orderbekräftelsen för en order med status %state%.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Det går inte att skicka om leveransbekräftelsen för en leverans i status %state%.'
     locale:
         enabled:
-            cannot_disable_base: Basspråket kan inte avaktiveras.
+            cannot_disable_base: 'Grundspråket kan inte inaktiveras.'
     product:
         variants:
-            all_prices_defined: Du måste definiera produktvarianternas priser för den nyligen tilldelade kanalen först.
+            all_prices_defined: 'Du måste först ange produktvarianternas priser för de nyss tilldelade kanalerna.'
+        code:
+            not_exist: 'Produkt med kod {{ code }} finns inte.'
     product_attribute:
-        invalid: Positionen måste vara ett heltal.
+        invalid: 'Position måste vara ett heltal.'
+    image:
+        file:
+            allowed_mime_types: 'Filen är inte en giltig bild. Tillåtna typer är %types%.'
     product_image:
         file:
-            max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
-            upload_ini_size: Bilden är för stor. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
+            max_size: 'Bilden är för stor – {{ size }}{{ suffix }}. Maximal tillåten storlek är {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Bilden är för stor. Maximal tillåten storlek är {{ limit }}{{ suffix }}.'
+        product_variant:
+            not_belong_to_owner: 'Produktvarianten med kod "%productVariantCode%" tillhör inte produkten med kod "%ownerCode%", som äger bilden.'
+    product_taxon:
+        unique: 'Produkttaxon kan inte dupliceras.'
+        product:
+            not_blank: 'Välj en produkt.'
+        taxon:
+            not_blank: 'Välj ett taxon.'
     product_variant:
+        code:
+            not_exist: 'Produktvariant med kod {{ code }} finns inte.'
+        onHand:
+            min: 'Lagersaldo måste vara större än {{ limit }}.'
+            not_blank: 'Ange lagersaldo.'
+            reserved: 'Lagersaldo måste vara större än antalet reserverade enheter'
         original_price:
-            min: Ursprungliga priset får inte vara negativt.
+            min: 'Ordinarie pris får inte vara negativt.'
         weight:
-            min: Vikt kan inte vara negativ.
-            invalid: Vikt måste vara ett tal.
+            min: 'Vikten kan inte vara negativ.'
+            invalid: 'Vikten måste vara ett tal.'
         width:
-            min: Bredd kan inte vara negativ.
-            invalid: Bredd måste vara ett tal.
+            min: 'Bredden kan inte vara negativ.'
+            invalid: 'Bredden måste vara ett tal.'
         height:
-            min: Höjd kan inte vara negativ.
-            invalid: Höjd måste vara ett tal.
+            min: 'Höjden kan inte vara negativ.'
+            invalid: 'Höjden måste vara ett tal.'
         depth:
-            min: Djup kan inte vara negativt.
-            invalid: Djup måste vara ett tal.
+            min: 'Djupet kan inte vara negativt.'
+            invalid: 'Djupet måste vara ett tal.'
         channel_pricing:
-            all_defined: 'Du måste ange ett pris för varje kanal.'
+            price:
+                not_defined: 'Du måste ange pris.'
+            existing_code: 'Kanal med kod {{ channelCode }} finns inte.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: 'Kupongens användningsgräns per kund måste vara minst {{ limit }}.'
     product_translation:
         short_description:
-            max: En kort beskrivning kan inte vara längre än {{ limit }} tecken.
+            max: 'Kort beskrivning får inte vara längre än {{ limit }} tecken.'
+    province:
+        code:
+            not_exist: 'Provins med kod {{ code }} finns inte.'
     review:
         author:
-            not_blank: Skriv din e-postadress.
+            not_blank: 'Ange din e-postadress.'
+        product:
+            not_blank: 'Ange en produkt.'
+        rating:
+            range: 'Recensionsbetyget måste vara ett heltal i intervallet 1-5.'
+            not_in_range: 'Recensionsbetyget måste vara mellan {{ min }} och {{ max }}.'
+    taxon:
+        code:
+            not_exist: 'Taxon med kod {{ code }} finns inte.'
     taxon_image:
         file:
-            max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
-            upload_ini_size: Bilden är för stor. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
+            max_size: 'Bilden är för stor – {{ size }}{{ suffix }}. Maximal tillåten storlek är {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Bilden är för stor. Maximal tillåten storlek är {{ limit }}{{ suffix }}.'
+    translation:
+        locale:
+            not_blank: 'Ange locale.'
+            invalid: 'Värdet är inte ett giltigt locale.'
+            unique: 'En översättning för locale-koden {{ value }} finns redan.'
+        locale_code:
+            invalid: 'Välj ett av de tillgängliga språken: %locales%'
     user:
         email:
-            unique: Den här e-posten används redan.
-            min: E-posten måste ha minst {{ limit }} tecken.
-            max: E-posten måste ha som mest {{ limit }} tecken.
-            invalid: E-postadressen är ogiltig.
+            unique: 'Denna e-postadress används redan.'
+            min: 'E-postadressen måste ha minst {{ limit }} tecken.'
+            max: 'E-postadressen får ha högst {{ limit }} tecken.'
+            invalid: 'Denna e-postadress är ogiltig.'
         username:
-            unique: Detta användarnamn används redan.
-            not_blank: Vänligen uppge ett namn.
+            unique: 'Detta användarnamn används redan.'
+            not_blank: 'Ange ditt namn.'
+            max: 'Användarnamnet får inte vara längre än {{ limit }} tecken.'
+        first_name:
+            max: 'Förnamn får inte vara längre än {{ limit }} tecken.'
+        last_name:
+            max: 'Efternamn får inte vara längre än {{ limit }} tecken.'
         locale_code:
-            not_blank: Vänligen ange ett språk.
+            not_blank: 'Välj ett språk.'
+    zone:
+        code:
+            not_exist: 'Zon med kod {{ code }} finns inte.'

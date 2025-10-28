@@ -4,63 +4,68 @@
 sylius:
     address:
         city:
-            max_length: Oraşul nu poate depăși {{ limit }} caractere|Oraşul nu poate depăși {{ limit }} caractere.
-            min_length: Oraşul trebuie să conţină cel puţin {{ limit }} caractere. Oraşul trebuie să aibă cel puţin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați orașul.
+            max_length: 'Orașul nu poate avea mai mult de {{ limit }} caracter.|Orașul nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Orașul trebuie să aibă cel puțin {{ limit }} caracter.|Orașul trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți orașul.'
         country:
-            not_blank: Vă rugăm să alegeți țara.
-            disabled: Țara aleasă este dezactivată. Vă rugăm să alegeţi una diferită.
+            not_blank: 'Vă rugăm să selectați țara.'
+            disabled: 'Țara aleasă este dezactivată. Vă rugăm să alegeți una diferită.'
         first_name:
-            max_length: Prenumele nu poate depăși {{ limit }} caractere|Prenumele nu poate depăși  {{ limit }} caractere.
-            min_length: Prenumele trebuie să conțină cel puţin {{ limit }} caractere|Prenumele trebuie să conțină cel puţin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați prenumele.
+            max_length: 'Prenumele nu poate avea mai mult de {{ limit }} caracter.|Prenumele nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Prenumele trebuie să aibă cel puțin {{ limit }} caracter.|Prenumele trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți prenumele.'
         last_name:
-            max_length: Numele de familie nu trebuie să fie mai lung de {{ limit }} caractere|Numele de familie nu trebuie să fie mai lung de {{ limit }} caractere.
-            min_length: Numele de familie trebuie să conțină cel puțin {{ limit }} caractere|Numele de familie trebuie să conțină cel puțin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați numele.
+            max_length: 'Numele de familie nu poate avea mai mult de {{ limit }} caracter.|Numele de familie nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Numele de familie trebuie să aibă cel puțin {{ limit }} caracter.|Numele de familie trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți numele de familie.'
         postcode:
-            max_length: Codul poştal nu trebuie să fie mai lung de {{ limit }} caractere|Codul poştal nu trebuie să fie mai lung de {{ limit }} caractere.
-            min_length: Codul poștal trebuie să conțină cel puțin {{ limit }} caractere|Codul poștal trebuie să fie de cel puțin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați codul poştal.
+            max_length: 'Codul poștal nu poate avea mai mult de {{ limit }} caracter.|Codul poștal nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Codul poștal trebuie să aibă cel puțin {{ limit }} caracter.|Codul poștal trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți codul poștal.'
         province:
-            valid: Vă rugăm să alegeți un judeţ corespunzător.
+            valid: 'Vă rugăm să selectați o provincie validă.'
         street:
-            max_length: Numele străzii nu trebuie să fie mai lung de {{ limit }} caractere|Numele străzii nu trebuie să fie mai lung de {{ limit }} caractere.
-            min_length: Numele străzii trebuie să conțină cel puțin {{ limit }} caractere|Numele străzii trebuie să fie de cel puțin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați adresa.
-        not_shippable: Această adresă nu este o destinaţie de livrare validă.
+            max_length: 'Strada nu poate avea mai mult de {{ limit }} caracter.|Strada nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Strada trebuie să aibă cel puțin {{ limit }} caracter.|Strada trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți strada.'
+        not_shippable: 'Această adresă nu este o destinație de livrare validă.'
     country:
         code:
-            not_blank: Vă rugăm să completați codul ISO a ţării.
-            regex: Codul țării poate conține doar litere, numere, - și _.
-            unique: Codul ISO al țării trebuie să fie unic.
+            not_blank: 'Vă rugăm să introduceți codul ISO al țării.'
+            unique: 'Codul ISO al țării trebuie să fie unic.'
+            country: 'Codul ISO al țării este invalid.'
+        unique_provinces: 'Toate provinciile din această țară trebuie să aibă coduri și denumiri unice.'
     province:
         code:
-            min_length: Codul provinciei trebuie să conţină cel puţin 5 caractere|Codul provinciei trebuie să conţină cel puţin 5 caractere.
-            not_blank: Vă rugăm să introduceţi codul provinciei.
-            regex: Codul provinciei ar trebui să aibă următorul format XX-XX (ex. RO-BV).
-            unique: Codul provinciei trebuie să fie unic.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți codul provinciei.'
+            regex: 'Codul provinciei trebuie să aibă următorul format XX-XX (ex: US-FL).'
+            unique: 'Codul provinciei trebuie să fie unic.'
         name:
-            max_length: Numele locatiei nu trebuie să fie mai lung de {{ limit }} caractere|Numele locatiei nu trebuie să fie mai lung de {{ limit }} caractere.
-            min_length: Numele locatiei trebuie să fie de cel puţin {{ limit }} caractere|Numele locatiei trebuie să fie de cel puţin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați numele județului.
-            unique: Numele provinciei trebuie să fie unic.
+            max_length: 'Denumirea provinciei nu poate avea mai mult de {{ limit }} caracter.|Denumirea provinciei nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Denumirea provinciei trebuie să aibă cel puțin {{ limit }} caracter.|Denumirea provinciei trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți denumirea provinciei.'
+            unique: 'Denumirea provinciei trebuie să fie unică.'
     zone:
         scope:
-            not_blank: Alege scopul.
+            not_blank: 'Vă rugăm să introduceți domeniul de aplicare.'
         code:
-            not_blank: Vă rugăm să introduceţi codul de zonă.
-            regex: Codul zonei poate conține doar litere, numere, - și _.
-            unique: Codul de zonă trebuie să fie unic.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți codul zonei.'
+            regex: 'Codul zonei poate conține doar litere, cifre, cratime și underscore-uri.'
+            unique: 'Codul zonei trebuie să fie unic.'
+        type:
+            invalid: 'Tipul {{ value }} este invalid. Tipurile permise sunt: {{ choices }}.'
         members:
-            min_count: Vă rugăm să adăugaţi cel puţin {{ limit }} membri de zonă.
+            min_count: 'Vă rugăm să adăugați cel puțin {{ limit }} membru de zonă.'
         name:
-            max_length: Numele zonei nu trebuie să fie mai lung de {{ limit }} caractere|Numele zonei nu trebuie să fie mai lung de {{ limit }} caractere.
-            min_length: Numele zonei trebuie să conțină cel puțin {{ limit }} caractere. Numele zonei trebuie să fie de cel puțin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați numele zonei.
+            max_length: 'Numele zonei nu poate avea mai mult de {{ limit }} caracter.|Numele zonei nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Numele zonei trebuie să aibă cel puțin {{ limit }} caracter.|Numele zonei trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți numele zonei.'
     zone_member:
-        cannot_be_the_same_as_zone: Membrul zonei nu poate fi la fel ca o zonă.
+        cannot_be_the_same_as_zone: 'Membrul de zonă nu poate fi aceeași zonă.'
         code:
-            not_blank: Vă rugăm să alegeţi membru al zonei.
-            regex: Codul membrului din zonă poate conține doar litere, numere, - și _.
-        unique: Membrul ales din zonă există deja în această zonă.
+            max_length: 'Codul membrului de zonă nu poate avea mai mult de {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să alegeți un membru de zonă.'
+            regex: 'Codul membrului de zonă poate conține doar litere, cifre, cratime și underscore-uri.'
+        unique: 'Membrul de zonă ales este deja în această zonă.'

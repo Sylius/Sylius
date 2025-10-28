@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {, 1개 항목} other {, #개 항목}}'
+        lowest_price_days_before_discount_was: '{days, plural, one {현재 할인 적용 #일 전의 최저가는 {price}였습니다} other {현재 할인 적용 #일 전의 최저가는 {price}였습니다}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {이 고객은 아직 주문 내역이 없습니다} one {이 고객은 한 건의 주문을 했습니다} other {전 채널에서 총 #건의 주문을 했습니다}}'

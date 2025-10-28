@@ -119,24 +119,20 @@ final class SessionManagerTest extends TestCase
         $this->sharedStorage
             ->expects($this->exactly(2))
             ->method('has')
-            ->willReturnCallback(function (string $key): bool {
-                return match ($key) {
-                    'behat_previous_session_name' => true,
-                    'behat_previous_session_token_previous_session' => true,
-                    default => throw new \UnhandledMatchError(),
-                };
+            ->willReturnCallback(fn (string $key): bool => match ($key) {
+                'behat_previous_session_name' => true,
+                'behat_previous_session_token_previous_session' => true,
+                default => throw new \UnhandledMatchError(),
             })
         ;
 
         $this->sharedStorage
             ->expects($this->exactly(2))
             ->method('get')
-            ->willReturnCallback(function (string $key) use ($token): mixed {
-                return match ($key) {
-                    'behat_previous_session_name' => 'previous_session',
-                    'behat_previous_session_token_previous_session' => $token,
-                    default => throw new \UnhandledMatchError(),
-                };
+            ->willReturnCallback(fn (string $key): mixed => match ($key) {
+                'behat_previous_session_name' => 'previous_session',
+                'behat_previous_session_token_previous_session' => $token,
+                default => throw new \UnhandledMatchError(),
             })
         ;
 

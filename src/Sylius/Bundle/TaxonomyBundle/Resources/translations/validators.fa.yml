@@ -13,6 +13,8 @@ sylius:
         slug:
             not_blank: لطفا علامت دسته را وارد کنید.
             unique: علامت دسته باید یکتا باشد.
+        parent:
+            invalid_relation: 'رده والد نباید خود رده یا یکی از زیررده‌های آن باشد.'
     taxonomy:
         name:
             max_length: رده نباید بیش از 255 حرف باشد.

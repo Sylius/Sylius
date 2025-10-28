@@ -121,6 +121,10 @@ jobs:
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse
 
+            -   name: Run PHPSpec
+                if: ${{ inputs.branch == '1.14' || inputs.branch == '2.0' }}
+                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+
             -   name: Run ComposerRequireChecker
                 run: |
                     (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json

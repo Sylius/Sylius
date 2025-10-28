@@ -10,6 +10,7 @@
             ] with {
                 'attribute': attribute_value,
                 'locale': hookable_metadata.context.locale_code,
+                'fallbackLocale': hookable_metadata.context.sylius_base_locale,
             } %}
         </p>
     {% endfor %}

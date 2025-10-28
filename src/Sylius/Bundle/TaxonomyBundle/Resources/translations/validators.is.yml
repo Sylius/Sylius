@@ -13,6 +13,8 @@ sylius:
         slug:
             not_blank: Vinsamlega sláðu inn vefslóðarheiti vöruflokks.
             unique: Vefslóðarheiti vöruflokks verður að vera einstakt.
+        parent:
+            invalid_relation: 'Foreldri má hvorki vera taxon sjálft né nokkur af afkomendum þess.'
     taxonomy:
         name:
             max_length: Nafn flokkunarkerfis má ekki vera lengra en 255 stafir.

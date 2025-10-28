@@ -1,0 +1,216 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: 'यह ई-मेल मान्य नहीं है।'
+                max: 'ई-मेल अधिकतम {{ limit }} वर्ण लंबा हो सकता है।'
+                min: 'ई-मेल कम से कम {{ limit }} वर्ण लंबा होना चाहिए।'
+                not_blank: 'कृपया एक ई-मेल दर्ज करें।'
+        reset_password:
+            mismatch: 'दर्ज किए गए पासवर्ड मेल नहीं खाते।'
+            password:
+                min: 'पासवर्ड कम से कम {{ limit }} वर्ण लंबा होना चाहिए।'
+                max: 'पासवर्ड अधिकतम {{ limit }} वर्ण लंबा हो सकता है।'
+                not_blank: 'कृपया पासवर्ड दर्ज करें।'
+    avatar_image:
+        file:
+            max_size: 'छवि बहुत बड़ी है – {{ size }}{{ suffix }}। अधिकतम अनुमत आकार {{ limit }}{{ suffix }} है।'
+            upload_ini_size: 'छवि बहुत बड़ी है। अधिकतम अनुमत आकार {{ limit }}{{ suffix }} है।'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: 'आवश्यक चैनलों में से एक का कॉन्फ़िगरेशन प्रदान नहीं किया गया।'
+            not_valid: 'प्रदत्त कॉन्फ़िगरेशन में त्रुटियाँ हैं। कृपया 0 से अधिक निश्चित छूट राशि दर्ज करें।'
+    catalog_promotion_scope:
+        invalid_type: 'कैटलॉग प्रमोशन स्कोप प्रकार अमान्य है। कृपया सही प्रकार चुनें।'
+        for_products:
+            invalid_products: 'प्रदत्त कॉन्फ़िगरेशन में त्रुटियाँ हैं। केवल मौजूदा उत्पाद जोड़ें।'
+            not_empty: 'कम से कम 1 उत्पाद जोड़ें।'
+            unique: 'केवल अद्वितीय उत्पाद जोड़ें।'
+        for_variants:
+            invalid_variants: 'प्रदत्त कॉन्फ़िगरेशन में त्रुटियाँ हैं। केवल मौजूदा वेरिएंट जोड़ें।'
+            not_empty: 'कम से कम 1 वेरिएंट जोड़ें।'
+            unique: 'केवल अद्वितीय वेरिएंट जोड़ें।'
+        for_taxons:
+            invalid_taxons: 'प्रदत्त कॉन्फ़िगरेशन में त्रुटियाँ हैं। केवल मौजूदा टैक्सन जोड़ें।'
+            not_empty: 'कम से कम 1 टैक्सन जोड़ें।'
+            unique: 'केवल अद्वितीय टैक्सन जोड़ें।'
+    channel:
+        base_currency:
+            not_blank: 'कृपया चैनल की आधार मुद्रा दर्ज करें।'
+        default_locale:
+            enabled: 'डिफ़ॉल्ट लोकेल सक्रिय होना चाहिए।'
+            not_blank: 'कृपया चैनल का डिफ़ॉल्ट लोकेल दर्ज करें।'
+        contact_email:
+            invalid: 'यह ई-मेल अमान्य है।'
+            max: 'ई-मेल {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+            min: 'ई-मेल कम से कम {{ limit }} वर्ण लंबा होना चाहिए।'
+        contact_phone_number:
+            max_length: 'फ़ोन नंबर {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+        theme_name:
+            max_length: 'थीम नाम {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+        tax_calculation_strategy:
+            not_blank: 'कृपया कर गणना रणनीति दर्ज करें।'
+            max_length: 'कर गणना रणनीति {{ limit }} वर्णों से अधिक लंबी नहीं हो सकती।'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'मान {{ compared_value }} से अधिक होना चाहिए'
+            less_than: 'मान {{ compared_value }} से कम होना चाहिए'
+    channel_pricing:
+        channel_code:
+            not_blank: 'कृपया चैनल कोड सेट करें।'
+            unique: 'इस चैनल के लिए इस उत्पाद वेरिएंट की कीमत पहले से मौजूद है।'
+        price:
+            min: 'कीमत 0 से कम नहीं हो सकती।'
+            not_blank: 'कृपया कीमत दर्ज करें।'
+    channel_code_collection:
+        invalid_channel: '{{ channel_code }} कोड वाला चैनल मौजूद नहीं है।'
+    checkout:
+        addressing:
+            csrf_error: 'कृपया पूरा फ़ॉर्म पुनः सबमिट करें।'
+        shipping_method:
+            not_blank: 'कृपया शिपिंग विधि चुनें।'
+        email:
+            not_changeable: 'ई-मेल केवल अतिथि ग्राहकों के लिए बदला जा सकता है। एक बार ग्राहक लॉगिन कर ले और कार्ट असाइन हो जाए तो ई-मेल बदला नहीं जा सकता।'
+    contact:
+        email:
+            invalid: 'यह ई-मेल अमान्य है।'
+            not_blank: 'कृपया अपना ई-मेल दर्ज करें।'
+        message:
+            not_blank: 'कृपया अपना संदेश दर्ज करें।'
+    country:
+        code:
+            not_exist: '{{ code }} कोड वाला देश मौजूद नहीं है।'
+    currency:
+        enabled:
+            cannot_disable_base: 'आधार मुद्रा को निष्क्रिय नहीं किया जा सकता।'
+    customer:
+        currency_code:
+            not_valid: 'आप द्वारा दर्ज किया गया मुद्रा कोड अमान्य है।'
+    customer_group:
+        code:
+            not_exist: '{{ code }} कोड वाला ग्राहक समूह मौजूद नहीं है।'
+    cart_item:
+        not_available: '%itemName% का स्टॉक पर्याप्त नहीं है।'
+        insufficient_stock: 'पर्याप्त स्टॉक नहीं'
+        quantity:
+            not_in_range: 'मात्रा {{ min }} और {{ max }} के बीच होनी चाहिए।'
+        variant:
+            not_available: '%variantName% उपलब्ध नहीं है।'
+    max_integer: 'मान {{ compared_value }} से कम होना चाहिए।'
+    order:
+        address_requirement: 'कृपया %addressName% प्रदान करें।'
+        currency_code:
+            not_valid: 'आप द्वारा दर्ज किया गया मुद्रा कोड अमान्य है।'
+        invalid_state_transition: 'ऑर्डर गलत स्थिति में है, पूरा नहीं किया जा सकता। वर्तमान: %currentState%. संभावित परिवर्तन: %possibleTransitions%.'
+        payment_method_eligibility: 'भुगतान विधि %paymentMethodName% अक्षम कर दी गई है। कृपया दूसरी भुगतान विधि चुनें।'
+        product_eligibility: 'उत्पाद %productName% अक्षम कर दिया गया है।'
+        shipping_method_eligibility: 'उत्पाद %shippingMethodName% शिपिंग विधि की आवश्यकताओं को पूरा नहीं करता। कृपया शिपिंग विधि पुनः चुनें।'
+        shipping_method_not_available: '"%shippingMethodName%" शिपिंग विधि उपलब्ध नहीं है। कृपया शिपिंग विधि पुनः चुनें।'
+        cart_items_immutable: 'चेकआउट पूरा होने के बाद कार्ट आइटम बदले नहीं जा सकते।'
+    resend_order_confirmation_email:
+        invalid_order_state: '%state% स्थिति वाले ऑर्डर के लिए पुष्टि ई-मेल पुनः नहीं भेजी जा सकती।'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: '%state% स्थिति वाले शिपमेंट के लिए पुष्टि ई-मेल पुनः नहीं भेजी जा सकती।'
+    locale:
+        enabled:
+            cannot_disable_base: 'आधार लोकेल को निष्क्रिय नहीं किया जा सकता।'
+    product:
+        variants:
+            all_prices_defined: 'नए असाइन किए गए चैनलों के लिए पहले वेरिएंट की कीमतें निर्धारित करनी होंगी।'
+        code:
+            not_exist: '{{ code }} कोड वाला उत्पाद मौजूद नहीं है।'
+    product_attribute:
+        invalid: 'स्थिति पूर्णांक होनी चाहिए।'
+    image:
+        file:
+            allowed_mime_types: 'फ़ाइल मान्य छवि नहीं है। अनुमत प्रकार हैं: %types%।'
+    product_image:
+        file:
+            max_size: 'छवि बहुत बड़ी है – {{ size }}{{ suffix }}। अधिकतम अनुमत आकार {{ limit }}{{ suffix }} है।'
+            upload_ini_size: 'छवि बहुत बड़ी है। अधिकतम अनुमत आकार {{ limit }}{{ suffix }} है।'
+        product_variant:
+            not_belong_to_owner: '"%productVariantCode%" कोड वाला उत्पाद वेरिएंट "%ownerCode%" कोड वाले उत्पाद का नहीं है, जो इस छवि का स्वामी है।'
+    product_taxon:
+        unique: 'उत्पाद टैक्सन दोहराए नहीं जा सकते।'
+        product:
+            not_blank: 'कृपया एक उत्पाद चुनें।'
+        taxon:
+            not_blank: 'कृपया एक टैक्सन चुनें।'
+    product_variant:
+        code:
+            not_exist: '{{ code }} कोड वाला उत्पाद वेरिएंट मौजूद नहीं है।'
+        onHand:
+            min: 'स्टॉक {{ limit }} से अधिक होना चाहिए।'
+            not_blank: 'कृपया स्टॉक दर्ज करें।'
+            reserved: 'स्टॉक ऑन-होल्ड इकाइयों की संख्या से अधिक होना चाहिए।'
+        original_price:
+            min: 'मूल कीमत नकारात्मक नहीं हो सकती।'
+        weight:
+            min: 'वज़न नकारात्मक नहीं हो सकता।'
+            invalid: 'वज़न संख्या होना चाहिए।'
+        width:
+            min: 'चौड़ाई नकारात्मक नहीं हो सकती।'
+            invalid: 'चौड़ाई संख्या होना चाहिए।'
+        height:
+            min: 'ऊँचाई नकारात्मक नहीं हो सकती।'
+            invalid: 'ऊँचाई संख्या होना चाहिए।'
+        depth:
+            min: 'गहराई नकारात्मक नहीं हो सकती।'
+            invalid: 'गहराई संख्या होना चाहिए।'
+        channel_pricing:
+            price:
+                not_defined: 'आपको कीमत निर्धारित करनी होगी।'
+            existing_code: '{{ channelCode }} कोड वाला चैनल मौजूद नहीं है।'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: 'प्रति ग्राहक कूपन उपयोग सीमा कम से कम {{ limit }} होनी चाहिए।'
+    product_translation:
+        short_description:
+            max: 'संक्षिप्त विवरण {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+    province:
+        code:
+            not_exist: '{{ code }} कोड वाला प्रांत मौजूद नहीं है।'
+    review:
+        author:
+            not_blank: 'कृपया अपना ई-मेल दर्ज करें।'
+        product:
+            not_blank: 'कृपया एक उत्पाद दर्ज करें।'
+        rating:
+            range: 'रेटिंग 1-5 के पूर्णांक में होनी चाहिए।'
+            not_in_range: 'रेटिंग {{ min }} और {{ max }} के बीच होनी चाहिए।'
+    taxon:
+        code:
+            not_exist: '{{ code }} कोड वाला टैक्सन मौजूद नहीं है।'
+    taxon_image:
+        file:
+            max_size: 'छवि बहुत बड़ी है – {{ size }}{{ suffix }}। अधिकतम अनुमत आकार {{ limit }}{{ suffix }} है।'
+            upload_ini_size: 'छवि बहुत बड़ी है। अधिकतम अनुमत आकार {{ limit }}{{ suffix }} है।'
+    translation:
+        locale:
+            not_blank: 'कृपया लोकेल दर्ज करें।'
+            invalid: 'यह मान्य लोकेल नहीं है।'
+            unique: '{{ value }} लोकेल कोड के लिए अनुवाद पहले से मौजूद है।'
+        locale_code:
+            invalid: 'कृपया उपलब्ध लोकेल में से एक चुनें: %locales%'
+    user:
+        email:
+            unique: 'यह ई-मेल पहले से उपयोग में है।'
+            min: 'ई-मेल कम से कम {{ limit }} वर्ण लंबा होना चाहिए।'
+            max: 'ई-मेल अधिकतम {{ limit }} वर्ण लंबा हो सकता है।'
+            invalid: 'यह ई-मेल अमान्य है।'
+        username:
+            unique: 'यह उपयोगकर्ता नाम पहले से उपयोग में है।'
+            not_blank: 'कृपया अपना नाम दर्ज करें।'
+            max: 'उपयोगकर्ता नाम {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+        first_name:
+            max: 'पहला नाम {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+        last_name:
+            max: 'अंतिम नाम {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+        locale_code:
+            not_blank: 'कृपया एक लोकेल चुनें।'
+    zone:
+        code:
+            not_exist: '{{ code }} कोड वाला ज़ोन मौजूद नहीं है।'

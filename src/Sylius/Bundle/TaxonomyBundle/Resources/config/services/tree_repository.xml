@@ -31,5 +31,15 @@
                 </service>
             </argument>
         </service>
+
+        <service id="sylius.repository.nested_tree.taxon" class="Gedmo\Tree\Entity\Repository\NestedTreeRepository">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata" />
+                    <argument>%sylius.model.taxon.class%</argument>
+                </service>
+            </argument>
+        </service>
     </services>
 </container>

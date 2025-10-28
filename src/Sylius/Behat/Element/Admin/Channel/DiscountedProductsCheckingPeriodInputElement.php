@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Channel;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class DiscountedProductsCheckingPeriodInputElement extends Element implements DiscountedProductsCheckingPeriodInputElementInterface
+class DiscountedProductsCheckingPeriodInputElement extends SyliusElement implements DiscountedProductsCheckingPeriodInputElementInterface
 {
     public function specifyPeriod(int $period): void
     {

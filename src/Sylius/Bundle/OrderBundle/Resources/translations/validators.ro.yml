@@ -3,5 +3,8 @@
 
 sylius:
     order_item:
+        product_variant:
+            not_blank: 'Varianta de produs nu a fost furnizată.'
         quantity:
-            min: Nu poți comanda mai puțin de 1 produs.
+            min: 'Cantitatea unui articol din comandă nu poate fi mai mică decât 1.'
+            not_blank: 'Cantitatea nu a fost furnizată.'

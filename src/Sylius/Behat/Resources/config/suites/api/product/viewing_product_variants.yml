@@ -18,6 +18,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product
                 - sylius.behat.context.api.shop.product_variant

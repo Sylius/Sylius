@@ -9,6 +9,7 @@ sylius:
             choices: Val
             code: Kod
             name: Namn
+            translatable: Översättningsbar
             translations: Översättningar
             type: Typ
         attribute_type:
@@ -16,6 +17,7 @@ sylius:
             configuration: Konfiguration
             date: Datum
             datetime: Datum och tid
+            float: Flyttal
             integer: Heltal
             percent: Procent
             select: Välj

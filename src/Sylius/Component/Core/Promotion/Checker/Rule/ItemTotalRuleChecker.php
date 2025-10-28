@@ -23,6 +23,8 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
     public const TYPE = 'item_total';
 
     /**
+     * @param array<string, mixed> $configuration
+     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

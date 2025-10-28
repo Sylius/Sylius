@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Product\IndexPage;
 
 use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class VerticalMenuElement extends Element implements VerticalMenuElementInterface
+class VerticalMenuElement extends SyliusElement implements VerticalMenuElementInterface
 {
     public function getMenuItems(): array
     {

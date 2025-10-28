@@ -4,12 +4,12 @@
 sylius:
     review:
         author:
-            already_exists: Tento e-mail je už registrovaný, prosím prihláste sa alebo použite reset hesla.
+            already_exists: 'Tento e-mail je už zaregistrovaný, prihláste sa alebo použite zabudnuté heslo.'
         comment:
-            not_blank: Recenzia nemôže byť prázdna.
+            not_blank: 'Komentár recenzie nesmie byť prázdny.'
         rating:
-            not_blank: Musíte vyplniť hodnotenie recenzie.
+            not_blank: 'Musíte zvoliť hodnotenie recenzie.'
         title:
-            not_blank: Názov recenzie nemôže byť prázdny.
-            min_length: Titulok recenzie musí mať aspoň 2 znaky.
-            max_length: Titulok recenzie môže mať najviac 255 znakov.
+            not_blank: 'Nadpis recenzie nesmie byť prázdny.'
+            min_length: 'Nadpis recenzie musí mať aspoň 2 znaky.'
+            max_length: 'Nadpis recenzie nesmie mať viac ako 255 znakov.'

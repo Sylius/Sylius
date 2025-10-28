@@ -3,4 +3,4 @@
 
 sylius:
     customer:
-        register: 'Vă mulțumim pentru înregistrare, verificați-vă adresa de email pentru linkul de validare cont.'
+        register: 'Vă mulțumim pentru înregistrare, verificați emailul pentru a vă verifica contul.'
