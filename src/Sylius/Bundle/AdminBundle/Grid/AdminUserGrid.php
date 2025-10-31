@@ -65,7 +65,7 @@ final class AdminUserGrid extends AbstractGrid
                     ->setSortable(true)
             )
             ->addField(
-                DateTimeField::create('createdAt')
+                TwigField::create('createdAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.registration_date')
                     ->setSortable(true)
                     ->withOptions([
