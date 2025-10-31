@@ -2,10 +2,10 @@
   "symbol-whitelist" : [
     "null", "true", "false",
     "static", "self", "parent",
-    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
+    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never", "Datetime",
     "random_bytes", "random_int",
     "trigger_deprecation",
-    "service", "tagged_iterator", "inline_service", "tagged_locator",
+    "inline_service", "service", "tagged_iterator", "tagged_locator",
     "ApiPlatform\\Doctrine\\Common\\Filter\\OrderFilterInterface",
     "ApiPlatform\\Hydra\\Serializer\\CollectionFiltersNormalizer",
     "ApiPlatform\\JsonLd\\Serializer\\HydraPrefixTrait",
