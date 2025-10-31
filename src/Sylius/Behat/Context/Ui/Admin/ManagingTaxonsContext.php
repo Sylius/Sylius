@@ -150,6 +150,7 @@ final readonly class ManagingTaxonsContext implements Context
     public function iChangeItsParentTaxonTo(TaxonInterface $taxon): void
     {
         $this->formElement->removeCurrentParent();
+        // Wait is handled by waitForFormUpdate() in removeCurrentParent()
         $this->formElement->chooseParent($taxon);
     }
 
@@ -486,5 +487,60 @@ final readonly class ManagingTaxonsContext implements Context
     public function itShouldBeDisabled(): void
     {
         Assert::false($this->formElement->isEnabled());
+    }
+
+    /**
+     * @When I try to search for :taxonName in the parent taxon autocomplete
+     */
+    public function iTryToSearchForInTheParentTaxonAutocomplete(string $taxonName): void
+    {
+        $this->sharedStorage->set('autocomplete_search_results', $this->formElement->searchInParentAutocomplete($taxonName));
+    }
+
+    /**
+     * @Then I should see :taxonName in the parent taxon autocomplete results
+     */
+    public function iShouldSeeInTheParentTaxonAutocompleteResults(string $taxonName): void
+    {
+        /** @var array<string, string> $results */
+        $results = $this->sharedStorage->get('autocomplete_search_results');
+
+        $found = false;
+        foreach ($results as $value => $name) {
+            if (str_contains($name, $taxonName)) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::true($found, sprintf('Expected to find "%s" in autocomplete results, but it was not found.', $taxonName));
+    }
+
+    /**
+     * @Then I should not see :taxonName in the parent taxon autocomplete results
+     */
+    public function iShouldNotSeeInTheParentTaxonAutocompleteResults(string $taxonName): void
+    {
+        /** @var array<string, string> $results */
+        $results = $this->sharedStorage->get('autocomplete_search_results');
+
+        $found = false;
+        foreach ($results as $value => $name) {
+            if (str_contains($name, $taxonName)) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::false($found, sprintf('Expected not to find "%s" in autocomplete results, but it was found.', $taxonName));
+    }
+
+    /**
+     * @Then I should be able to search for other taxons in the parent autocomplete
+     */
+    public function iShouldBeAbleToSearchForOtherTaxonsInTheParentAutocomplete(): void
+    {
+        $results = $this->formElement->searchInParentAutocomplete('');
+        Assert::notEmpty($results, 'Expected to find some taxons in the autocomplete, but none were found.');
     }
 }

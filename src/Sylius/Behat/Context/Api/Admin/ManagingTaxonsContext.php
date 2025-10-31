@@ -121,6 +121,7 @@ final readonly class ManagingTaxonsContext implements Context
     /**
      * @When I set its parent taxon to :parentTaxon
      * @When I change its parent taxon to :parentTaxon
+     * @When I try to change its parent taxon to :parentTaxon
      */
     public function iSetItsParentTaxonTo(TaxonInterface $parentTaxon): void
     {
@@ -246,6 +247,7 @@ final readonly class ManagingTaxonsContext implements Context
 
     /**
      * @Then /^(this taxon) should (belongs to "[^"]+")$/
+     * @Then /^(this taxon) should still (belongs to "[^"]+")$/
      */
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon, TaxonInterface $parentTaxon): void
     {
@@ -340,6 +342,17 @@ final readonly class ManagingTaxonsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'code: Taxon with given code already exists.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the parent relation is invalid
+     */
+    public function iShouldBeNotifiedThatTheParentRelationIsInvalid(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'parent:',
         );
     }
 
