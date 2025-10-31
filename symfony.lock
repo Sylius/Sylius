@@ -415,6 +415,9 @@
             "ref": "c276fa48d4713de91eb410289b3b1834acb7e403"
         }
     },
+    "planetpay-payment-plugin/sylius-plugin": {
+        "version": "dev-main"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },

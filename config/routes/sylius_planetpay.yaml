@@ -1,0 +1,4 @@
+# config/routes/sylius_planetpay.yaml
+
+sylius_planetpay:
+resource: "@PlanetPaySyliusPaymentPlugin/config/routes.yaml"
