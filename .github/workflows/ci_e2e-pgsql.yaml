@@ -113,10 +113,10 @@ jobs:
                     psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_ui;"
 
                     # Copy database structure and data
-                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_phpunit
-                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_cli
-                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_api
-                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_ui
+                    pg_dump -h 127.0.0.1 -U postgres sylius | psql -h 127.0.0.1 -U postgres sylius_phpunit
+                    pg_dump -h 127.0.0.1 -U postgres sylius | psql -h 127.0.0.1 -U postgres sylius_cli
+                    pg_dump -h 127.0.0.1 -U postgres sylius | psql -h 127.0.0.1 -U postgres sylius_api
+                    pg_dump -h 127.0.0.1 -U postgres sylius | psql -h 127.0.0.1 -U postgres sylius_ui
 
             -   name: Run all non-JS tests in parallel
                 run: |
