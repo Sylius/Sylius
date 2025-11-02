@@ -118,67 +118,73 @@ jobs:
             -   name: Setup parallel test databases
                 run: |
                     # Create separate databases for each test suite
-                    mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS sylius_phpunit1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-                    mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS sylius_phpunit2 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+                    mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS sylius_phpunit CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
                     mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS sylius_cli CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
                     mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS sylius_api CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
                     mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS sylius_ui CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
                     # Copy database structure and data
-                    mysqldump -h 127.0.0.1 -u root -proot sylius | mysql -h 127.0.0.1 -u root -proot sylius_phpunit1
-                    mysqldump -h 127.0.0.1 -u root -proot sylius | mysql -h 127.0.0.1 -u root -proot sylius_phpunit2
+                    mysqldump -h 127.0.0.1 -u root -proot sylius | mysql -h 127.0.0.1 -u root -proot sylius_phpunit
                     mysqldump -h 127.0.0.1 -u root -proot sylius | mysql -h 127.0.0.1 -u root -proot sylius_cli
                     mysqldump -h 127.0.0.1 -u root -proot sylius | mysql -h 127.0.0.1 -u root -proot sylius_api
                     mysqldump -h 127.0.0.1 -u root -proot sylius | mysql -h 127.0.0.1 -u root -proot sylius_ui
 
             -   name: Run all non-JS tests in parallel
                 run: |
+                    set -o pipefail
+
                     # Run all test suites in parallel with separate databases and prefixed output
 
-                    # PHPUnit test suite "all"
-                    DATABASE_URL="mysql://root:root@127.0.0.1/sylius_phpunit1?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
-                    vendor/bin/phpunit --testsuite all --colors=always 2>&1 | sed 's/^/[UNIT1] /' &
-                    PID_PHPUNIT1=$!
-
-                    # PHPUnit "Sylius Test Suite"
-                    DATABASE_URL="mysql://root:root@127.0.0.1/sylius_phpunit2?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
-                    vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always 2>&1 | sed 's/^/[UNIT2] /' &
-                    PID_PHPUNIT2=$!
+                    # PHPUnit all tests
+                    (
+                        DATABASE_URL="mysql://root:root@127.0.0.1/sylius_phpunit?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        vendor/bin/phpunit --testsuite all --colors=always 2>&1 | sed 's/^/[UNIT] /'
+                        echo $? > /tmp/exit_phpunit
+                    ) &
+                    PID_PHPUNIT=$!
 
                     # CLI Behat
-                    DATABASE_URL="mysql://root:root@127.0.0.1/sylius_cli?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /' &
+                    (
+                        DATABASE_URL="mysql://root:root@127.0.0.1/sylius_cli?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /'
+                        echo $? > /tmp/exit_cli
+                    ) &
                     PID_CLI=$!
 
                     # API/Domain Behat
-                    DATABASE_URL="mysql://root:root@127.0.0.1/sylius_api?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /' &
+                    (
+                        DATABASE_URL="mysql://root:root@127.0.0.1/sylius_api?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /'
+                        echo $? > /tmp/exit_api
+                    ) &
                     PID_API=$!
 
                     # UI (non-JS) Behat
-                    DATABASE_URL="mysql://root:root@127.0.0.1/sylius_ui?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /' &
+                    (
+                        DATABASE_URL="mysql://root:root@127.0.0.1/sylius_ui?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
+                        echo $? > /tmp/exit_ui
+                    ) &
                     PID_UI=$!
 
-                    # Wait for all processes and capture exit codes
-                    wait $PID_PHPUNIT1 || EXIT_PHPUNIT1=$?
-                    wait $PID_PHPUNIT2 || EXIT_PHPUNIT2=$?
-                    wait $PID_CLI || EXIT_CLI=$?
-                    wait $PID_API || EXIT_API=$?
-                    wait $PID_UI || EXIT_UI=$?
+                    # Wait for all processes to complete
+                    wait $PID_PHPUNIT
+                    wait $PID_CLI
+                    wait $PID_API
+                    wait $PID_UI
+
+                    # Read exit codes from files
+                    EXIT_PHPUNIT=$(cat /tmp/exit_phpunit 2>/dev/null || echo 1)
+                    EXIT_CLI=$(cat /tmp/exit_cli 2>/dev/null || echo 1)
+                    EXIT_API=$(cat /tmp/exit_api 2>/dev/null || echo 1)
+                    EXIT_UI=$(cat /tmp/exit_ui 2>/dev/null || echo 1)
 
                     # Handle failures and reruns
                     FINAL_EXIT=0
 
-                    if [ "${EXIT_PHPUNIT1:-0}" -ne 0 ]; then
+                    if [ "${EXIT_PHPUNIT:-0}" -ne 0 ]; then
                         echo ""
-                        echo "::error::[UNIT1] PHPUnit 'all' test suite failed (exit code: ${EXIT_PHPUNIT1})"
-                        FINAL_EXIT=1
-                    fi
-
-                    if [ "${EXIT_PHPUNIT2:-0}" -ne 0 ]; then
-                        echo ""
-                        echo "::error::[UNIT2] PHPUnit 'Sylius Test Suite' failed (exit code: ${EXIT_PHPUNIT2})"
+                        echo "::error::[UNIT] PHPUnit tests failed (exit code: ${EXIT_PHPUNIT})"
                         FINAL_EXIT=1
                     fi
 

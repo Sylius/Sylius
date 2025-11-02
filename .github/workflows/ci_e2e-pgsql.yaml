@@ -104,19 +104,101 @@ jobs:
                     node_version: ${{ env.NODE_VERSION }}
                     chrome_version: stable
 
-            -   name: Run PHPUnit
+            -   name: Setup parallel test databases
                 run: |
-                    vendor/bin/phpunit --testsuite all --colors=always
-                    vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
+                    # Create separate databases for each test suite
+                    psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_phpunit;"
+                    psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_cli;"
+                    psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_api;"
+                    psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_ui;"
 
-            -   name: Run CLI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
+                    # Copy database structure and data
+                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_phpunit
+                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_cli
+                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_api
+                    pg_dump -h 127.0.0.1 -U postgres sylius_test | psql -h 127.0.0.1 -U postgres sylius_ui
 
-            -   name: Run non-UI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain" --rerun
+            -   name: Run all non-JS tests in parallel
+                run: |
+                    set -o pipefail
 
-            -   name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@hybrid,@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@hybrid,@ui" --rerun
+                    # Run all test suites in parallel with separate databases and prefixed output
+
+                    # PHPUnit all tests
+                    (
+                        DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_phpunit?serverVersion=${{ matrix.postgres }}" \
+                        vendor/bin/phpunit --testsuite all --colors=always 2>&1 | sed 's/^/[UNIT] /'
+                        echo $? > /tmp/exit_phpunit
+                    ) &
+                    PID_PHPUNIT=$!
+
+                    # CLI Behat
+                    (
+                        DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_cli?serverVersion=${{ matrix.postgres }}" \
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /'
+                        echo $? > /tmp/exit_cli
+                    ) &
+                    PID_CLI=$!
+
+                    # API/Domain Behat (excluding no-postgres tests)
+                    (
+                        DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_api?serverVersion=${{ matrix.postgres }}" \
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /'
+                        echo $? > /tmp/exit_api
+                    ) &
+                    PID_API=$!
+
+                    # UI (non-JS) Behat (excluding no-postgres tests)
+                    (
+                        DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_ui?serverVersion=${{ matrix.postgres }}" \
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
+                        echo $? > /tmp/exit_ui
+                    ) &
+                    PID_UI=$!
+
+                    # Wait for all processes to complete
+                    wait $PID_PHPUNIT
+                    wait $PID_CLI
+                    wait $PID_API
+                    wait $PID_UI
+
+                    # Read exit codes from files
+                    EXIT_PHPUNIT=$(cat /tmp/exit_phpunit 2>/dev/null || echo 1)
+                    EXIT_CLI=$(cat /tmp/exit_cli 2>/dev/null || echo 1)
+                    EXIT_API=$(cat /tmp/exit_api 2>/dev/null || echo 1)
+                    EXIT_UI=$(cat /tmp/exit_ui 2>/dev/null || echo 1)
+
+                    # Handle failures and reruns
+                    FINAL_EXIT=0
+
+                    if [ "${EXIT_PHPUNIT:-0}" -ne 0 ]; then
+                        echo ""
+                        echo "::error::[UNIT] PHPUnit tests failed (exit code: ${EXIT_PHPUNIT})"
+                        FINAL_EXIT=1
+                    fi
+
+                    if [ "${EXIT_CLI:-0}" -ne 0 ]; then
+                        echo ""
+                        echo "::error::[CLI] Tests failed, retrying..."
+                        DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_cli?serverVersion=${{ matrix.postgres }}" \
+                        vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun 2>&1 | sed 's/^/[CLI-RETRY] /' || FINAL_EXIT=1
+                    fi
+
+                    if [ "${EXIT_API:-0}" -ne 0 ]; then
+                        echo ""
+                        echo "::error::[API] Tests failed, retrying..."
+                        DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_api?serverVersion=${{ matrix.postgres }}" \
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain" --rerun 2>&1 | sed 's/^/[API-RETRY] /' || FINAL_EXIT=1
+                    fi
+
+                    if [ "${EXIT_UI:-0}" -ne 0 ]; then
+                        echo ""
+                        echo "::error::[UI] Tests failed, retrying..."
+                        DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_ui?serverVersion=${{ matrix.postgres }}" \
+                        vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@hybrid,@ui" --rerun 2>&1 | sed 's/^/[UI-RETRY ] /' || FINAL_EXIT=1
+                    fi
+
+                    exit $FINAL_EXIT
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
