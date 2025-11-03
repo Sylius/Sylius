@@ -45,27 +45,15 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
             })();
         SCRIPT);
 
-        if (is_numeric($searchString)) {
-            $driver->wait(
-                2000,
-                <<<SCRIPT
-            (function () {
-                let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                return element.parentElement.querySelectorAll('[data-selectable]').length;
-            })();
-            SCRIPT,
-            );
-        } else {
-            $driver->wait(
-                2000,
-                <<<SCRIPT
-            (function () {
-                let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                return element.parentElement.querySelectorAll('[data-selectable]').length === 0;
-            })();
-            SCRIPT,
-            );
-        }
+        $driver->wait(
+            2000,
+            <<<SCRIPT
+        (function () {
+            let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            return element.parentElement.querySelectorAll('[data-selectable]').length;
+        })();
+        SCRIPT,
+        );
 
         return $driver->evaluateScript(<<<SCRIPT
             (function () {
