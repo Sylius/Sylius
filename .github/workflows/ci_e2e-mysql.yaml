@@ -115,73 +115,56 @@ jobs:
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
-            -   name: Run non-JS tests (reduced parallelism)
+            -   name: Run PHPUnit tests
+                id: phpunit
                 run: |
-                    set -o pipefail
-
-                    # Run tests with limited parallelism (2 at a time) to avoid resource issues
-
-                    # PHPUnit all tests
                     echo "::group::PHPUnit Tests"
                     vendor/bin/phpunit --testsuite all --colors=always
-                    EXIT_PHPUNIT=$?
                     echo "::endgroup::"
 
-                    # Run Behat tests in parallel (max 2 at a time)
+            -   name: Run Behat tests in parallel
+                uses: qoomon/actions--parallel-steps@v1
+                id: parallel-behat
+                with:
+                    continue-on-error: true
+                    steps: |
+                        - id: cli
+                          name: CLI Behat Tests
+                          run: |
+                            echo "[CLI] Starting CLI tests..."
+                            vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli"
 
-                    # CLI and API in parallel
-                    (
-                        echo "[CLI] Starting CLI tests..."
-                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /'
-                        echo $? > /tmp/exit_cli
-                    ) &
-                    PID_CLI=$!
+                        - id: api
+                          name: API/Domain Behat Tests
+                          run: |
+                            echo "[API] Starting API/Domain tests..."
+                            vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain"
 
-                    (
-                        echo "[API] Starting API tests..."
-                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /'
-                        echo $? > /tmp/exit_api
-                    ) &
-                    PID_API=$!
+                        - id: ui
+                          name: UI Behat Tests
+                          needs: [cli, api]
+                          run: |
+                            echo "[UI] Starting UI tests..."
+                            vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui"
 
-                    # Wait for first batch
-                    wait $PID_CLI
-                    wait $PID_API
-
-                    # UI tests separately
-                    echo "[UI] Starting UI tests..."
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
-                    EXIT_UI=$?
-
-                    # Read exit codes
-                    EXIT_CLI=$(cat /tmp/exit_cli 2>/dev/null || echo 1)
-                    EXIT_API=$(cat /tmp/exit_api 2>/dev/null || echo 1)
-
-                    # Handle failures and reruns
+            -   name: Rerun failed tests
+                if: failure() && (steps.parallel-behat.outputs.cli--outcome == 'failure' || steps.parallel-behat.outputs.api--outcome == 'failure' || steps.parallel-behat.outputs.ui--outcome == 'failure')
+                run: |
                     FINAL_EXIT=0
 
-                    if [ "${EXIT_PHPUNIT:-0}" -ne 0 ]; then
-                        echo ""
-                        echo "::error::[UNIT] PHPUnit tests failed (exit code: ${EXIT_PHPUNIT})"
-                        FINAL_EXIT=1
-                    fi
-
-                    if [ "${EXIT_CLI:-0}" -ne 0 ]; then
-                        echo ""
+                    if [ "${{ steps.parallel-behat.outputs.cli--outcome }}" == "failure" ]; then
                         echo "::error::[CLI] Tests failed, retrying..."
-                        vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun 2>&1 | sed 's/^/[CLI-RETRY] /' || FINAL_EXIT=1
+                        vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun || FINAL_EXIT=1
                     fi
 
-                    if [ "${EXIT_API:-0}" -ne 0 ]; then
-                        echo ""
+                    if [ "${{ steps.parallel-behat.outputs.api--outcome }}" == "failure" ]; then
                         echo "::error::[API] Tests failed, retrying..."
-                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" --rerun 2>&1 | sed 's/^/[API-RETRY] /' || FINAL_EXIT=1
+                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" --rerun || FINAL_EXIT=1
                     fi
 
-                    if [ "${EXIT_UI:-0}" -ne 0 ]; then
-                        echo ""
+                    if [ "${{ steps.parallel-behat.outputs.ui--outcome }}" == "failure" ]; then
                         echo "::error::[UI] Tests failed, retrying..."
-                        vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun 2>&1 | sed 's/^/[UI-RETRY ] /' || FINAL_EXIT=1
+                        vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || FINAL_EXIT=1
                     fi
 
                     exit $FINAL_EXIT
