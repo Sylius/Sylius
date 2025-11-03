@@ -119,13 +119,18 @@ jobs:
 
                     # PHPUnit all tests
                     (
-                        export TEST_TOKEN="phpunit_$RANDOM"
+                        sleep 0.1  # Small delay to avoid simultaneous DB operations
+                        export TEST_TOKEN="phpunit"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
 
-                        # Create isolated database
-                        psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};"
+                        # Create isolated database with retry
+                        for i in 1 2 3; do
+                            psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};" && break
+                            sleep 1
+                        done
                         psql -h 127.0.0.1 -U postgres sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/phpunit --testsuite all --colors=always 2>&1 | sed 's/^/[UNIT] /'
@@ -141,14 +146,19 @@ jobs:
 
                     # CLI Behat
                     (
-                        export TEST_TOKEN="cli_$RANDOM"
+                        sleep 0.3  # Small delay to avoid simultaneous DB operations
+                        export TEST_TOKEN="cli"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
 
-                        # Create isolated database
-                        psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};"
+                        # Create isolated database with retry
+                        for i in 1 2 3; do
+                            psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};" && break
+                            sleep 1
+                        done
                         psql -h 127.0.0.1 -U postgres sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /'
@@ -164,14 +174,19 @@ jobs:
 
                     # API/Domain Behat (excluding no-postgres tests)
                     (
-                        export TEST_TOKEN="api_$RANDOM"
+                        sleep 0.5  # Small delay to avoid simultaneous DB operations
+                        export TEST_TOKEN="api"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
 
-                        # Create isolated database
-                        psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};"
+                        # Create isolated database with retry
+                        for i in 1 2 3; do
+                            psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};" && break
+                            sleep 1
+                        done
                         psql -h 127.0.0.1 -U postgres sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /'
@@ -187,14 +202,19 @@ jobs:
 
                     # UI (non-JS) Behat (excluding no-postgres tests)
                     (
-                        export TEST_TOKEN="ui_$RANDOM"
+                        sleep 0.7  # Small delay to avoid simultaneous DB operations
+                        export TEST_TOKEN="ui"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
 
-                        # Create isolated database
-                        psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};"
+                        # Create isolated database with retry
+                        for i in 1 2 3; do
+                            psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};" && break
+                            sleep 1
+                        done
                         psql -h 127.0.0.1 -U postgres sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
@@ -232,55 +252,40 @@ jobs:
                     if [ "${EXIT_CLI:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[CLI] Tests failed, retrying..."
-                        export TEST_TOKEN="cli_retry_$RANDOM"
+                        export TEST_TOKEN="cli"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
 
-                        psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};"
-                        psql -h 127.0.0.1 -U postgres sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
-
+                        # Rerun uses same database
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun 2>&1 | sed 's/^/[CLI-RETRY] /' || FINAL_EXIT=1
-
-                        psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} /tmp/behat_${TEST_TOKEN} 2>/dev/null || true
                     fi
 
                     if [ "${EXIT_API:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[API] Tests failed, retrying..."
-                        export TEST_TOKEN="api_retry_$RANDOM"
+                        export TEST_TOKEN="api"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
 
-                        psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};"
-                        psql -h 127.0.0.1 -U postgres sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
-
+                        # Rerun uses same database
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain" --rerun 2>&1 | sed 's/^/[API-RETRY] /' || FINAL_EXIT=1
-
-                        psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} /tmp/behat_${TEST_TOKEN} 2>/dev/null || true
                     fi
 
                     if [ "${EXIT_UI:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[UI] Tests failed, retrying..."
-                        export TEST_TOKEN="ui_retry_$RANDOM"
+                        export TEST_TOKEN="ui"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
 
-                        psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_${TEST_TOKEN};"
-                        psql -h 127.0.0.1 -U postgres sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
-
+                        # Rerun uses same database
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@hybrid,@ui" --rerun 2>&1 | sed 's/^/[UI-RETRY ] /' || FINAL_EXIT=1
-
-                        psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} /tmp/behat_${TEST_TOKEN} 2>/dev/null || true
                     fi
 
                     exit $FINAL_EXIT
