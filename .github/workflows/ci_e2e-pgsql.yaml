@@ -119,7 +119,7 @@ jobs:
 
                     # PHPUnit all tests
                     (
-                        export TEST_TOKEN="phpunit_$$"
+                        export TEST_TOKEN="phpunit_$RANDOM"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
@@ -141,7 +141,7 @@ jobs:
 
                     # CLI Behat
                     (
-                        export TEST_TOKEN="cli_$$"
+                        export TEST_TOKEN="cli_$RANDOM"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
@@ -164,7 +164,7 @@ jobs:
 
                     # API/Domain Behat (excluding no-postgres tests)
                     (
-                        export TEST_TOKEN="api_$$"
+                        export TEST_TOKEN="api_$RANDOM"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
@@ -187,7 +187,7 @@ jobs:
 
                     # UI (non-JS) Behat (excluding no-postgres tests)
                     (
-                        export TEST_TOKEN="ui_$$"
+                        export TEST_TOKEN="ui_$RANDOM"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
@@ -232,7 +232,7 @@ jobs:
                     if [ "${EXIT_CLI:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[CLI] Tests failed, retrying..."
-                        export TEST_TOKEN="cli_retry_$$"
+                        export TEST_TOKEN="cli_retry_$RANDOM"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
@@ -250,7 +250,7 @@ jobs:
                     if [ "${EXIT_API:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[API] Tests failed, retrying..."
-                        export TEST_TOKEN="api_retry_$$"
+                        export TEST_TOKEN="api_retry_$RANDOM"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
@@ -268,7 +268,7 @@ jobs:
                     if [ "${EXIT_UI:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[UI] Tests failed, retrying..."
-                        export TEST_TOKEN="ui_retry_$$"
+                        export TEST_TOKEN="ui_retry_$RANDOM"
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
