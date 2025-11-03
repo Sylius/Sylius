@@ -151,7 +151,7 @@ jobs:
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
+                        # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Create isolated database with retry
                         for i in 1 2 3; do
@@ -166,7 +166,7 @@ jobs:
 
                         # Cleanup
                         psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} /tmp/behat_${TEST_TOKEN} 2>/dev/null || true
+                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
 
                         echo $EXIT_CODE > /tmp/exit_cli
                     ) &
@@ -179,7 +179,7 @@ jobs:
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
+                        # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Create isolated database with retry
                         for i in 1 2 3; do
@@ -194,7 +194,7 @@ jobs:
 
                         # Cleanup
                         psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} /tmp/behat_${TEST_TOKEN} 2>/dev/null || true
+                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
 
                         echo $EXIT_CODE > /tmp/exit_api
                     ) &
@@ -207,7 +207,7 @@ jobs:
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
+                        # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Create isolated database with retry
                         for i in 1 2 3; do
@@ -222,7 +222,7 @@ jobs:
 
                         # Cleanup
                         psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} /tmp/behat_${TEST_TOKEN} 2>/dev/null || true
+                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
 
                         echo $EXIT_CODE > /tmp/exit_ui
                     ) &
@@ -256,7 +256,7 @@ jobs:
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
+                        # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Rerun uses same database
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun 2>&1 | sed 's/^/[CLI-RETRY] /' || FINAL_EXIT=1
@@ -269,7 +269,7 @@ jobs:
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
+                        # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Rerun uses same database
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain" --rerun 2>&1 | sed 's/^/[API-RETRY] /' || FINAL_EXIT=1
@@ -282,7 +282,7 @@ jobs:
                         export DATABASE_URL="postgresql://postgres:postgres@127.0.0.1/sylius_${TEST_TOKEN}?serverVersion=${{ matrix.postgres }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        export BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\Gherkin\\\\ServiceContainer\\\\Extension\":{\"cache\":\"/tmp/behat_${TEST_TOKEN}\"}}}"
+                        # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Rerun uses same database
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@hybrid,@ui" --rerun 2>&1 | sed 's/^/[UI-RETRY ] /' || FINAL_EXIT=1
