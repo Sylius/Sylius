@@ -104,6 +104,9 @@ jobs:
                     node_version: ${{ env.NODE_VERSION }}
                     chrome_version: stable
 
+            -   name: Test installer
+                run: bin/console sylius:install --no-interaction -vvv
+
             -   name: Setup parallel test databases
                 run: |
                     # Create separate databases for each test suite
