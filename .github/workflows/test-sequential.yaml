@@ -1,0 +1,57 @@
+name: Test Sequential vs Parallel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-approach:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        ports:
+          - 3306:3306
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test reduced parallelism (2 at a time)
+        run: |
+          # Create test databases
+          mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE test1;"
+          mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE test2;"
+
+          # Run only 2 processes in parallel instead of 4
+          (
+            echo "[TEST1] Starting..." && sleep 5 && echo "[TEST1] Done"
+          ) 2>&1 | sed 's/^/[TEST1] /' &
+          PID1=$!
+
+          (
+            echo "[TEST2] Starting..." && sleep 3 && echo "[TEST2] Done"
+          ) 2>&1 | sed 's/^/[TEST2] /' &
+          PID2=$!
+
+          wait $PID1 $PID2
+          echo "First batch completed"
+
+          # Then run next 2
+          (
+            echo "[TEST3] Starting..." && sleep 4 && echo "[TEST3] Done"
+          ) 2>&1 | sed 's/^/[TEST3] /' &
+          PID3=$!
+
+          (
+            echo "[TEST4] Starting..." && sleep 2 && echo "[TEST4] Done"
+          ) 2>&1 | sed 's/^/[TEST4] /' &
+          PID4=$!
+
+          wait $PID3 $PID4
+          echo "Second batch completed"
