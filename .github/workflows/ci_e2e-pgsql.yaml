@@ -109,6 +109,8 @@ jobs:
 
             -   name: Setup parallel test databases
                 run: |
+                    export PGPASSWORD=postgres
+
                     # Create separate databases for each test suite
                     psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_phpunit;"
                     psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sylius_cli;"
