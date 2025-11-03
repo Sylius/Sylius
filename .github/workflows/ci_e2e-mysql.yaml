@@ -146,6 +146,7 @@ jobs:
                     # CLI Behat
                     (
                         DATABASE_URL="mysql://root:root@127.0.0.1/sylius_cli?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        BEHAT_PARAMS='{"extensions":{"Behat\\Gherkin\\ServiceContainer\\Extension":{"cache":"/tmp/behat_cli_cache"}}}' \
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /'
                         echo $? > /tmp/exit_cli
                     ) &
@@ -154,6 +155,7 @@ jobs:
                     # API/Domain Behat
                     (
                         DATABASE_URL="mysql://root:root@127.0.0.1/sylius_api?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        BEHAT_PARAMS='{"extensions":{"Behat\\Gherkin\\ServiceContainer\\Extension":{"cache":"/tmp/behat_api_cache"}}}' \
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /'
                         echo $? > /tmp/exit_api
                     ) &
@@ -162,6 +164,7 @@ jobs:
                     # UI (non-JS) Behat
                     (
                         DATABASE_URL="mysql://root:root@127.0.0.1/sylius_ui?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        BEHAT_PARAMS='{"extensions":{"Behat\\Gherkin\\ServiceContainer\\Extension":{"cache":"/tmp/behat_ui_cache"}}}' \
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
                         echo $? > /tmp/exit_ui
                     ) &
@@ -192,6 +195,7 @@ jobs:
                         echo ""
                         echo "::error::[CLI] Tests failed, retrying..."
                         DATABASE_URL="mysql://root:root@127.0.0.1/sylius_cli?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        BEHAT_PARAMS='{"extensions":{"Behat\\Gherkin\\ServiceContainer\\Extension":{"cache":"/tmp/behat_cli_cache"}}}' \
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun 2>&1 | sed 's/^/[CLI-RETRY] /' || FINAL_EXIT=1
                     fi
 
@@ -199,6 +203,7 @@ jobs:
                         echo ""
                         echo "::error::[API] Tests failed, retrying..."
                         DATABASE_URL="mysql://root:root@127.0.0.1/sylius_api?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        BEHAT_PARAMS='{"extensions":{"Behat\\Gherkin\\ServiceContainer\\Extension":{"cache":"/tmp/behat_api_cache"}}}' \
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" --rerun 2>&1 | sed 's/^/[API-RETRY] /' || FINAL_EXIT=1
                     fi
 
@@ -206,6 +211,7 @@ jobs:
                         echo ""
                         echo "::error::[UI] Tests failed, retrying..."
                         DATABASE_URL="mysql://root:root@127.0.0.1/sylius_ui?charset=utf8mb4&serverVersion=${{ matrix.mysql }}" \
+                        BEHAT_PARAMS='{"extensions":{"Behat\\Gherkin\\ServiceContainer\\Extension":{"cache":"/tmp/behat_ui_cache"}}}' \
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun 2>&1 | sed 's/^/[UI-RETRY ] /' || FINAL_EXIT=1
                     fi
 
